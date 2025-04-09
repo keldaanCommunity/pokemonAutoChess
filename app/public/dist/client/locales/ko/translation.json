@@ -1663,7 +1663,7 @@
     "INFERNAL_PARADE": "되돌아오는 화염 바퀴를 발사해 [50,LK]% 확률로 3초 동안 BURN 를 부여하고 적중당한 모든 적에게 [30,SP] SPECIAL 를 두 번 입힌다.",
     "RETALIATE": "대상에게 ATK의 [100,SP]%만큼 특수 공격을 가하고, 쓰러진 아군 포켓몬 한 마리당 추가 공격을 1회 가합니다.",
     "SLASH": "[30,60,90]%의 CRIT_CHANCE 를 가지고 [10,20,40,SP] SPECIAL을 입힌다.",
-    "OUTRAGE": "포켓몬은 2초 동안 CONFUSION 에 빠지고 대상과 인접한 적에게 [100,150,200,SP]% ATK 만큼 SPECIAL을 입힌다.",
+    "OUTRAGE": "포켓몬은 2초 동안 CONFUSION 에 빠지고 대상과 인접한 적에게 [150,200,250,SP]% ATK 만큼 SPECIAL을 입힌다.",
     "LUNGE": "공격력이 가장 높은 상대에게 점프하여 [50,SP]의 SPECIAL 를 입히고 ATK 을 [5,SP]만큼 감소시킨다.",
     "KNOCK_OFF": "대상에 [90,SP] SPECIAL 을 가한다. 대상이 들고 있는 도구를 제거하며, 도구 하나당 [30,SP] 의 SPECIAL 의 추가피해를 가한다.",
     "FISHIOUS_REND": "[80,SP]의 SPECIAL을 준다. 만약, 공격자가 타겟보다  SPEED가 높을 경우 데미지가 두 배로 증가한다.",

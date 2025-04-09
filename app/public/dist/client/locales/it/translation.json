@@ -1545,7 +1545,7 @@
 		"INFERNAL_PARADE": "Lancia un Ruotafuoco, infliggendo 2 volte [30, SP] SPECIAL con il [50,LK]% di possibilità di causare BURN a tutti i Pokèmon colpiti nella sua traiettoria.",
 		"RETALIATE": "Infliggi [100,SP]% dell'ATK come SPECIAL + 1 attacco aggiuntivo per ogni Pokémon alleato KO.",
 		"SLASH": "Infliggi [10,20,40,SP] SPECIAL col il [30,60,90]% di CRIT_CHANCE aumentato.",
-		"OUTRAGE": "L'utilizzatore è sotto CONFUSION per 2 secondi, ed infligge [100,150,200,SP]% di ATK come SPECIAL al bersaglio ed ai Pokèmon nemici adiacenti.",
+		"OUTRAGE": "L'utilizzatore è sotto CONFUSION per 2 secondi, ed infligge [150,200,250,SP]% di ATK come SPECIAL al bersaglio ed ai Pokèmon nemici adiacenti.",
 		"LUNGE": "Balza sul Pokèmon nemico con l'ATK più alto, infliggendogli [50,SP] SPECIAL e gli riduce l'ATK di [5,SP].",
 		"KNOCK_OFF": "Infliggi [90,SP] SPECIAL. Se il bersaglio ha equipaggiato oggetti, gli vengono rimossi e gli vengono inflitti [30,SP] SPECIAL per ogni oggetto rimosso.",
 		"FISHIOUS_REND": "Infliggi [80,SP] SPECIAL. Il danno raddopia se l'attacante ha più SPEED del bersaglio.",

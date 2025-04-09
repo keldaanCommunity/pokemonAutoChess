@@ -1685,7 +1685,7 @@
     "INFERNAL_PARADE": "对最远的敌方宝可梦发射一个会飞回的火焰轮，对所有击中的敌方宝可梦造成[30, SP]点SPECIAL两次，并有[50,LK]%的概率使他们陷入BURN 3秒。",
     "RETALIATE": "对目标造成SPECIAL，数值相当于[100,SP]%的ATK。每有一只倒下的我方宝可梦，额外攻击一次。",
     "SLASH": "对目标造成[10,20,40,SP]点SPECIAL。该招式可以暴击，且CRIT_CHANCE额外提升基础值的[30,60,90]%。",
-    "OUTRAGE": "使用者陷入CONFUSION 2秒，并对目标和相邻敌方宝可梦造成SPECIAL，数值相当于自身ATK的[100,150,200,SP]%。",
+    "OUTRAGE": "使用者陷入CONFUSION 2秒，并对目标和相邻敌方宝可梦造成SPECIAL，数值相当于自身ATK的[150,200,250,SP]%。",
     "LUNGE": "跳向ATK最高的敌方宝可梦，对其造成[50,SP]点SPECIAL并降低其[5,SP]点ATK。",
     "KNOCK_OFF": "对目标造成[90,SP]点SPECIAL。若其有携带道具，将所有道具移除，且每个道具使此招式伤害增加[30,SP]。",
     "FISHIOUS_REND": "对目标造成[80,SP]点SPECIAL。若使用者的SPEED高于目标，造成的伤害翻倍。",
