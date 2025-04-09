@@ -804,7 +804,7 @@ export class OnSellPokemonCommand extends Command<
     ) {
       return // can't sell a pokemon currently fighting
     }
-    
+
     if (
       pokemon &&
       canSell(pokemon.name, this.state.specialGameRule) === false

@@ -66,7 +66,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   BERRIES: [],
   BERRY_JUICE: [
     new OnSpawnEffect((entity) => {
-      entity.addShield(50, entity, 0, false)
+      entity.addShield(80, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
     })
   ],
@@ -117,20 +117,20 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   FRUIT_JUICE: [
     new OnSpawnEffect((entity) => {
-      entity.addSpeed(30, entity, 0, false)
+      entity.addSpeed(50, entity, 0, false)
     })
   ],
   HONEY: [],
   LARGE_LEEK: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
-      entity.addCritPower(30, entity, 0, false)
+      entity.addCritPower(100, entity, 0, false)
     })
   ],
   LEEK: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
-      entity.addCritChance(30, entity, 0, false)
+      entity.addCritChance(50, entity, 0, false)
     })
   ],
   LEFTOVERS: [],
@@ -159,7 +159,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   RAGE_CANDY_BAR: [
     new OnSpawnEffect((entity) => {
-      entity.addAttack(5, entity, 0, false)
+      entity.addAttack(10, entity, 0, false)
     })
   ],
   ROCK_SALT: [
@@ -217,12 +217,12 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SWEET_HERB: [
     new OnSpawnEffect((entity) => {
-      entity.addAbilityPower(50, entity, 0, false)
+      entity.addAbilityPower(80, entity, 0, false)
     })
   ],
   TEA: [
     new OnSpawnEffect((entity) => {
-      entity.addPP(50, entity, 0, false)
+      entity.addPP(80, entity, 0, false)
     })
   ],
   WHIPPED_DREAM: [
@@ -254,7 +254,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   CLOVER_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addLuck(5, entity, 0, false, true)
+      entity.addLuck(10, entity, 0, false, true)
     })
   ],
   FLOWER_SWEET: [
