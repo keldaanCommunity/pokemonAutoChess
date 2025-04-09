@@ -23,6 +23,7 @@
 - Buff Outrage (Axew, Druddigon): damage 100/150/200% Attack → 150/200/250% Attack
 - Nerf Tapu Koko: Range 3 → 2
 - Buff Tapu Lele: PP 100 → 80, Psychic Surge AP buff 10 → 20
+- Reduce Kecleon and Arceus chances of appearance: 1/100 → 1/150
 
 # Changes to Synergies
 
