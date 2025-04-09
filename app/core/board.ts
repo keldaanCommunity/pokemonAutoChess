@@ -1,6 +1,6 @@
 import { IPokemonEntity, Transfer } from "../types"
 import { BoardEffect, Effect } from "../types/enum/Effect"
-import { Orientation, OrientationKnockback } from "../types/enum/Game"
+import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
@@ -323,14 +323,24 @@ export default class Board {
     return cells
   }
 
-  getTeleportationCell(x: number, y: number) {
+  getTeleportationCell(x: number, y: number, boardSide?: Team) {
     const candidates = new Array<Cell>()
-    ;[
+    const blueCorners = [
       { x: 0, y: 0 },
-      { x: 0, y: this.rows - 1 },
-      { x: this.columns - 1, y: this.rows - 1 },
       { x: this.columns - 1, y: 0 }
-    ].forEach((coord) => {
+    ]
+    const redCorners = [
+      { x: 0, y: this.rows - 1 },
+      { x: this.columns - 1, y: this.rows - 1 }
+    ]
+
+    const corners =
+      boardSide === Team.BLUE_TEAM
+        ? blueCorners
+        : boardSide === Team.RED_TEAM
+          ? redCorners
+          : [...blueCorners, ...redCorners]
+    corners.forEach((coord) => {
       const cells = this.getCellsBetween(x, y, coord.x, coord.y)
       cells.forEach((cell) => {
         if (cell.value === undefined) {

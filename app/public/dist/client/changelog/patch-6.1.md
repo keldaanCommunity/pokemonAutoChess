@@ -17,12 +17,25 @@
 - Alcremie now consumes its flavor when evolving
 - Starly line is now Common regional in Flying/Normal regions
 - New ability for Torterra line: Bulldoze
+- Change Fillet Away: sacrify 50% of current ~~HP~~ **max HP** and now flee away with a 400ms protect status ; PP 80 → 100
 
 # Changes to Synergies
 
 - Stealth Rock and Stone axe board effect now also damage Flying Pokémon
 
 # Changes to Items
+
+- Many Gourmet dishes have been buffed:
+    - Rage candy bar 5 → 10 attack
+    - Tea 50 → 80 starting PP
+    - Poffin 50 → 100 shield
+    - Berry juice: 50 → 80 shield
+    - Fruit Juice 30 → 50 speed
+    - Sweet Herb 50 → 80 AP
+    - Leek: 30% crit chance → 50% crit chance
+    - Large Leek: 30% crit power → 100% crit power
+    - Guzzlord: when holding Chef's Hat, gain 4 → 5 permanent AP for every KO
+    - Clover Sweet: 5% luck → 10% luck
 
 # Gameplay
 

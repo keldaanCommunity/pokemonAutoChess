@@ -17806,7 +17806,7 @@ export class Veluza extends Pokemon {
   speed = 45
   def = 5
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.FILLET_AWAY
   attackSprite = AttackSprite.WATER_MELEE
