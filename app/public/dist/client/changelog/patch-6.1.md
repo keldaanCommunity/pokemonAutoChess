@@ -21,6 +21,8 @@
 - Nerf Nuzzle (Pichu line): damage 30/60/120 → 25/50/100
 - Buff Blastoise: Attack 19 → 20, HP 190 → 200
 - Buff Outrage (Axew, Druddigon): damage 100/150/200% Attack → 150/200/250% Attack
+- Nerf Tapu Koko: Range 3 → 2
+- Buff Tapu Lele: PP 100 → 80, Psychic Surge AP buff 10 → 20
 
 # Changes to Synergies
 

@@ -1509,7 +1509,7 @@
     "TWISTING_NETHER": "对目标周围半径2格内的所有敌方宝可梦造成[80,SP]点SPECIAL，并将他们随机传送至战场的任意地点。",
     "WONDER_GUARD": "对所有相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入PARALYSIS 3秒。",
     "ELECTRIC_SURGE": "提升所有我方ELECTRIC宝可梦[10,SP]点SPEED。",
-    "PSYCHIC_SURGE": "除使用者自身外，提升所有我方PSYCHIC宝可梦[10,SP]%的AP。",
+    "PSYCHIC_SURGE": "除使用者自身外，提升所有我方PSYCHIC宝可梦[20,SP]的AP。",
     "MIND_BLOWN": "对目标造成SPECIAL，数值相当于其[50,SP]%的当前HP。",
     "PAYDAY": "对目标造成[30,60,90,SP]点SPECIAL。若目标因此倒下，玩家获得[1,2,3] GOLD。",
     "PICKUP": "对目标造成[30,60,120,SP]点SPECIAL，并偷取其一件道具。若没有可以偷取的道具，改为偷取对方玩家[1,2,3] GOLD。",
