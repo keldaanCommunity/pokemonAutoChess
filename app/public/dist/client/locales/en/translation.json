@@ -3671,7 +3671,8 @@
     "MAROWAK": "Marowak makes the next PVE fight more difficult",
     "WOBBUFFET": "Wobbuffet let you recycle an unused item component or crafted item",
     "SPINDA": "Spinda changes the direction of rotation of the carousel randomly",
-    "REGIROCK": "Regirock grants all players 15 additional HP"
+    "REGIROCK": "Regirock grants all players 15 additional HP",
+    "MUNCHLAX": "Munchlax sells PICNIC_SET for {{cost}} GOLD"
   },
   "loading_hints": {
     "tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

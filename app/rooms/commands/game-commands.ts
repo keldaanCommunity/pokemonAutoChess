@@ -652,6 +652,22 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
+    if(
+      item === Item.PICNIC_SET
+    ){
+      if(pokemon.meal == ""){
+        values(player.board).forEach((pkm) => {
+          if(pkm.meal === "" && pkm.canHoldItems && pokemon && distanceC(pkm.positionX, pkm.positionY, pokemon.positionX, pokemon.positionY) <= 1){
+            pkm.meal = Item.SANDWICH
+            pkm.action = PokemonActionState.EAT
+          }
+        })
+        removeInArray(player.items, item)
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (item === Item.EVIOLITE && !pokemon.hasEvolution) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
