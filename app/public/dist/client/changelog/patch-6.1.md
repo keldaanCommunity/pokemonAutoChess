@@ -18,6 +18,7 @@
 - Starly line is now Common regional in Flying/Normal regions
 - New ability for Torterra line: Bulldoze
 - Change Fillet Away: sacrify 50% of current ~~HP~~ **max HP** and now flee away with a 400ms protect status ; PP 80 → 100
+- Nerf Nuzzle (Pichu line): damage 30/60/120 → 25/50/100
 
 # Changes to Synergies
 

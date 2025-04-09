@@ -1201,7 +1201,7 @@
 		"HYPER_VOICE": "Gây [30,60,150,SP] SPECIAL cho tất cả Pokémon đối thủ trong hàng của mục tiêu và khiến chúng CONFUSION trong [1,2,3] giây",
 		"SHADOW_CLONE": "Tạo ra một bản thể với [50, SP] % max HP. Bản sao đó sẽ đánh cắp một vật phẩm ngẫu nhiên từ mục tiêu hiện tại của bạn.",
 		"VOLT_SWITCH": "Tốc biến đến hậu tuyến của địch, gây [25,50,100,SP] SPECIAL tới Pokémon đối thủ trúng phải",
-		"NUZZLE": "Tốc biến đến đối thủ ở xa nhất, gây [30,60,120,SP] SPECIAL và gây hiệu ứng PARALYSIS trong 3 giây",
+		"NUZZLE": "Tốc biến đến đối thủ ở xa nhất, gây [25,50,100,SP] SPECIAL và gây hiệu ứng PARALYSIS trong 3 giây",
 		"LIQUIDATION": "Gây [20,40,80,SP] SPECIAL và giảm [4,8,16,SP] phòng thủ của mục tiêu",
 		"BURN": "BURN tất cả Pokémon đối thủ trong [5,10,20] giây",
 		"POISON": "Áp hiệu ứng POISONED tới [1,2,3] Pokémon đối thủ gần nhất trong [3,6,9,SP=0.5] giây",
