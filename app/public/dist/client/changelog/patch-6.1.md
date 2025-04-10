@@ -18,6 +18,13 @@
 - Starly line is now Common regional in Flying/Normal regions
 - New ability for Torterra line: Bulldoze
 - Change Fillet Away: sacrify 50% of current ~~HP~~ **max HP** and now flee away with a 400ms protect status ; PP 80 → 100
+- Nerf Nuzzle (Pichu line): damage 30/60/120 → 25/50/100
+- Buff Blastoise: Attack 19 → 20, HP 190 → 200
+- Buff Outrage (Axew, Druddigon): damage 100/150/200% Attack → 150/200/250% Attack
+- Nerf Tapu Koko: Range 3 → 2
+- Buff Tapu Lele: PP 100 → 80, Psychic Surge AP buff 10 → 20
+- Reduce Kecleon and Arceus chances of appearance: 1/100 → 1/150
+- Buff Drampa passive: Gains 3 → 5 AP each time a Pokemon is affected by its ability.
 
 # Changes to Synergies
 

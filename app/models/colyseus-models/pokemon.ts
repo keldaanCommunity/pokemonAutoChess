@@ -4340,8 +4340,8 @@ export class Blastoise extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 190
-  atk = 19
+  hp = 200
+  atk = 20
   speed = 50
   def = 4
   speDef = 4
@@ -8311,7 +8311,7 @@ export class TapuKoko extends Pokemon {
   def = 6
   speDef = 6
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.ELECTRIC_SURGE
   passive = Passive.ELECTRIC_TERRAIN
   attackSprite = AttackSprite.ELECTRIC_RANGE
@@ -8326,7 +8326,7 @@ export class TapuLele extends Pokemon {
   speed = 55
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.PSYCHIC_SURGE
   passive = Passive.PSYCHIC_TERRAIN

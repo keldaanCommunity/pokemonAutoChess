@@ -155,8 +155,8 @@ export const BoosterPriceByRarity: { [key in Rarity]: number } = {
 }
 
 export const DITTO_RATE = 0.005
-export const KECLEON_RATE = 1 / 100
-export const ARCEUS_RATE = 1 / 100
+export const KECLEON_RATE = 1 / 150
+export const ARCEUS_RATE = 1 / 150
 
 export const AttackTypeColor: { [key in AttackType] } = {
   [AttackType.PHYSICAL]: "#FF6E55",
