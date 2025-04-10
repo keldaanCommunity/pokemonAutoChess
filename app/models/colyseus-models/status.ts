@@ -359,7 +359,7 @@ export default class Status extends Schema implements IStatus {
           burnDamage = 0
         }
 
-        if(pkm.items.has(Item.DUTCH_OVEN)){
+        if (pkm.items.has(Item.COOKING_POT)) {
           pkm.addSpeed(10, pkm, 0, false)
         }
 

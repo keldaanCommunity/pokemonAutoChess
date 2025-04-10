@@ -102,7 +102,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.SPE_DEF]: 10
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 30 },
-  [Item.DUTCH_OVEN]: { [Stat.DEF]: 10 },
+  [Item.COOKING_POT]: { [Stat.DEF]: 10 },
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,
