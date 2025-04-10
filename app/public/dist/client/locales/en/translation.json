@@ -3656,7 +3656,7 @@
     "DO_IT_ALL_YOURSELF": "Start with a copy of your avatar. Lower rarity avatars get additional max HP and starting gold.",
     "FIRST_PARTNER": "Choose your starter Pokémon. You get a copy of this unit every stage up to stage 10.",
     "SLAMINGO": "All items are dropped when a Pokémon is put on the bench. Starts with 4 random components.",
-    "BLOOD_MONEY": "Every KO gives 1 GOLD. No extra income from interests.",
+    "BLOOD_MONEY": "Every KO gives 1 GOLD (excluding clones and spawns). No extra income from interests.",
     "TOWN_FESTIVAL": "You always get an encounter in town and all the carousel items are free.",
     "HIGH_ROLLER": "Shops have a chance to contain Hatch at stages 0-10, Unique at stages 10-20 and Legendary after stage 20.",
     "REGIONAL_SPECIALITIES": "Your current region types count towards your synergies. After changing region, your team tastes a local dish."

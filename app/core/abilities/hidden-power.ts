@@ -58,7 +58,7 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
         y,
         unown.team
       )
-      unown.simulation.addPokemon(abra, coord.x, coord.y, unown.team, false)
+      unown.simulation.addPokemon(abra, coord.x, coord.y, unown.team, true)
     })
   }
 }
@@ -229,7 +229,7 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
         coord.x,
         coord.y,
         unown.team,
-        false
+        true
       )
       sharpedo.addItem(Item.RAZOR_CLAW)
     }
@@ -254,7 +254,7 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
       coord.x,
       coord.y,
       unown.team,
-      false
+      true
     )
     hitmonlee.addItem(Item.RED_ORB)
     hitmonlee.pp = hitmonlee.maxPP - 1
@@ -380,7 +380,7 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
         coord.x,
         coord.y,
         unown.team,
-        false
+        true
       )
     }
   }
@@ -468,7 +468,7 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
       coord.x,
       coord.y,
       unown.team,
-      false
+      true
     )
     uxie.addItem(Item.AQUA_EGG)
     uxie.pp = uxie.maxPP - 1
@@ -584,7 +584,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
         coord.x,
         coord.y,
         unown.team,
-        false
+        true
       )
       meditite.addItem(Item.SOUL_DEW)
     }
@@ -668,13 +668,7 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
         y,
         pokemon.team
       )
-      pokemon.simulation.addPokemon(
-        unown,
-        coord.x,
-        coord.y,
-        pokemon.team,
-        false
-      )
+      pokemon.simulation.addPokemon(unown, coord.x, coord.y, pokemon.team, true)
     })
   }
 }

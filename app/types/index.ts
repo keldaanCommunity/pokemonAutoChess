@@ -625,7 +625,7 @@ export interface IPokemonEntity {
   healDone: number
   shiny: boolean
   emotion: Emotion
-  isClone: boolean
+  isSpawn: boolean
   commands: ISimulationCommand[]
   effectsSet: Set<EffectClass>
   flyingProtection: number

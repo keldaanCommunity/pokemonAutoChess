@@ -227,10 +227,10 @@ export default class Simulation extends Schema implements ISimulation {
     x: number,
     y: number,
     team: Team,
-    isClone = false
+    isSpawn = false
   ) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
-    pokemonEntity.isClone = isClone
+    pokemonEntity.isSpawn = isSpawn
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
     if (pokemon.meal) {

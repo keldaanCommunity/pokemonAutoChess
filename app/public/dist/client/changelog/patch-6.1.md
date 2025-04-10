@@ -65,4 +65,5 @@
 - Regional pokemons sold in a region other than their original region are not added back to the pool
 - Inactivity timeout in lobby room increased to 30 minutes
 - All board actions are no longer possible after player is eliminated
+- Blood money scribble no longer gives 1 gold for eliminating a clone or a spawn
 

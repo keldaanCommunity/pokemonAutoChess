@@ -1884,7 +1884,8 @@ export class ShadowCloneStrategy extends AbilityStrategy {
         p,
         spawnPosition.x,
         spawnPosition.y,
-        pokemon.team
+        pokemon.team,
+        true
       )
       clone.hp = min(1)(
         Math.ceil(
@@ -1895,7 +1896,6 @@ export class ShadowCloneStrategy extends AbilityStrategy {
         )
       )
       clone.life = clone.hp
-      clone.isClone = true
       if (itemStolen) clone.addItem(itemStolen)
     }
   }
@@ -5802,7 +5802,7 @@ export class FellStingerStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    if (victim.death && !pokemon.isClone) {
+    if (victim.death && !pokemon.isSpawn) {
       pokemon.addAttack(1, pokemon, 0, false, true)
       pokemon.addMaxHP(10, pokemon, 0, false, true)
     }

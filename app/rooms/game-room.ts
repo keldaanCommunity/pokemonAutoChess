@@ -1149,7 +1149,7 @@ export default class GameRoom extends Room<GameState> {
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
       opponentTeam.forEach((pokemon) => {
-        if (!pokemon.isClone && pokemon.passive !== Passive.INANIMATE) {
+        if (!pokemon.isSpawn && pokemon.passive !== Passive.INANIMATE) {
           damage += 1
         }
       })

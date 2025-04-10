@@ -72,6 +72,7 @@ import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
 import { DelayedCommand, SimulationCommand } from "./simulation-command"
+import { t } from "i18next"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -133,7 +134,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   grassHealCooldown = 2000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
-  isClone = false
+  isSpawn = false
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
@@ -1627,7 +1628,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           PokemonFactory.createPokemonFromName(Pkm.COMFEY, target.player),
           nearestAvailableCoordinate.x,
           nearestAvailableCoordinate.y,
-          target.team
+          target.team,
+          false
         )
       }
     }
@@ -1642,7 +1644,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       this.player &&
-      this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY
+      this.simulation.room.state.specialGameRule ===
+        SpecialGameRule.BLOOD_MONEY &&
+      !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)
       this.count.moneyCount += 1
