@@ -10,7 +10,8 @@ export const TownEncounters = {
   [Pkm.MAROWAK]: Pkm.MAROWAK,
   [Pkm.WOBBUFFET]: Pkm.WOBBUFFET,
   [Pkm.SPINDA]: Pkm.SPINDA,
-  [Pkm.REGIROCK]: Pkm.REGIROCK
+  [Pkm.REGIROCK]: Pkm.REGIROCK,
+  [Pkm.MUNCHLAX]: Pkm.MUNCHLAX
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
@@ -22,7 +23,8 @@ export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
     [Pkm.CHANSEY]: 10,
     [Pkm.ELECTIVIRE]: 10,
     [Pkm.XATU]: 10,
-    [Pkm.DUSKULL]: 10
+    [Pkm.DUSKULL]: 10,
+    [Pkm.MUNCHLAX]: 10
   }
 
 export const TownEncountersByStage: {
@@ -38,7 +40,7 @@ export const TownEncountersByStage: {
   },
   12: {
     [Pkm.DUSKULL]: 1 / 10,
-    [Pkm.KANGASKHAN]: 1 / 10,
+    [Pkm.KANGASKHAN]: 1 / 20,
     [Pkm.WOBBUFFET]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
@@ -60,7 +62,8 @@ export const TownEncountersByStage: {
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
-    [Pkm.REGIROCK]: 1 / 20
+    [Pkm.REGIROCK]: 1 / 20,
+    [Pkm.MUNCHLAX]: 1 / 20
   },
   27: {
     [Pkm.KECLEON]: 1 / 20,
@@ -68,7 +71,8 @@ export const TownEncountersByStage: {
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
-    [Pkm.REGIROCK]: 1 / 20
+    [Pkm.REGIROCK]: 1 / 20,
+    [Pkm.MUNCHLAX]: 1 / 20
   },
   34: {
     [Pkm.KECLEON]: 1 / 20,
@@ -76,6 +80,7 @@ export const TownEncountersByStage: {
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
-    [Pkm.REGIROCK]: 1 / 20
+    [Pkm.REGIROCK]: 1 / 20,
+    [Pkm.MUNCHLAX]: 1 / 20
   }
 }

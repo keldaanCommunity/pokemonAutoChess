@@ -652,6 +652,22 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
+    if(
+      item === Item.PICNIC_SET
+    ){
+      if(pokemon.meal == ""){
+        values(player.board).forEach((pkm) => {
+          if(pkm.meal === "" && pkm.canHoldItems && pokemon && distanceC(pkm.positionX, pkm.positionY, pokemon.positionX, pokemon.positionY) <= 1){
+            pkm.meal = Item.SANDWICH
+            pkm.action = PokemonActionState.EAT
+          }
+        })
+        removeInArray(player.items, item)
+      }
+      client.send(Transfer.DRAG_DROP_FAILED, message)
+      return
+    }
+
     if (item === Item.EVIOLITE && !pokemon.hasEvolution) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -1400,8 +1416,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
         for (const chef of chefs) {
           let dish = DishByPkm[chef.name]
-          if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
-            dish = Item.BERRIES
+          if(chef.items.has(Item.DUTCH_OVEN)) {
+            dish = Item.HEARTY_STEW
+          } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+            dish = Item.SANDWICH
           }
 
           if (chef.passive === Passive.GLUTTON) {

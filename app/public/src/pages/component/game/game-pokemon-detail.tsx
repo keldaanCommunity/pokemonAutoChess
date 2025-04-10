@@ -14,6 +14,8 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
+import { Item } from "../../../../../types/enum/Item"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
@@ -50,6 +52,15 @@ export function GamePokemonDetail(props: {
       pokemon.speDef
     ]
   )
+
+  let dish = DishByPkm[pokemon.name]
+  if (!dish && pokemon.types.has(Synergy.GOURMET)) {
+    if (pokemon.items.has(Item.DUTCH_OVEN)) {
+      dish = Item.HEARTY_STEW
+    } else {
+      dish = Item.SANDWICH
+    }
+  }
 
   return (
     <div className="game-pokemon-detail in-shop">
@@ -104,19 +115,19 @@ export function GamePokemonDetail(props: {
         ))}
       </div>
 
-      {DishByPkm[pokemon.name] && (
+      {dish && (
         <div className="game-pokemon-detail-dish">
           <div className="game-pokemon-detail-dish-name">
-            <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${DishByPkm[pokemon.name]}`)}
+            <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
           </div>
           <img
-            src={`assets/item/${DishByPkm[pokemon.name]}.png`}
+            src={`assets/item/${dish}.png`}
             className="game-pokemon-detail-dish-icon"
-            alt={DishByPkm[pokemon.name]}
-            title={t(`item.${DishByPkm[pokemon.name]}`)}
+            alt={dish}
+            title={t(`item.${dish}`)}
           />
           <p>
-            {addIconsToDescription(t(`item_description.${DishByPkm[pokemon.name]}`))}
+            {addIconsToDescription(t(`item_description.${dish}`))}
           </p>
         </div>
       )}

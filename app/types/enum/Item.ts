@@ -95,6 +95,7 @@ export enum Item {
   ROTOM_PHONE = "ROTOM_PHONE",
   SILK_SCARF = "SILK_SCARF",
   TINY_MUSHROOM = "TINY_MUSHROOM",
+  DUTCH_OVEN = "DUTCH_OVEN",
   METEORITE = "METEORITE",
   TRASH = "TRASH",
   DYNAMAX_BAND = "DYNAMAX_BAND",
@@ -143,6 +144,9 @@ export enum Item {
   HM_WHIRLPOOL = "HM_WHIRLPOOL",
   HM_WATERFALL = "HM_WATERFALL",
   CHEF_HAT = "CHEF_HAT",
+  PICNIC_SET = "PICNIC_SET",
+  SANDWICH = "SANDWICH",
+  HEARTY_STEW = "HEARTY_STEW",
   RAGE_CANDY_BAR = "RAGE_CANDY_BAR",
   TEA = "TEA",
   CURRY = "CURRY",
@@ -209,6 +213,7 @@ export const SpecialItems: Item[] = [
   Item.SUPER_ROD,
   Item.TRASH,
   Item.CHEF_HAT,
+  Item.PICNIC_SET,
   Item.VANILLA_FLAVOR,
   Item.RUBY_FLAVOR,
   Item.MATCHA_FLAVOR,
@@ -330,7 +335,8 @@ export const ArtificialItems: Item[] = [
   Item.POKERUS_VIAL,
   Item.ROTOM_PHONE,
   Item.SILK_SCARF,
-  Item.TINY_MUSHROOM
+  Item.TINY_MUSHROOM,
+  Item.DUTCH_OVEN
 ]
 
 export const ShinyItems: Item[] = [
@@ -413,7 +419,8 @@ export const SynergyItems = [
   Item.ROTOM_PHONE,
   Item.SHINY_STONE,
   Item.SILK_SCARF,
-  Item.TINY_MUSHROOM
+  Item.TINY_MUSHROOM,
+  Item.DUTCH_OVEN
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -440,7 +447,8 @@ export const SynergyGivenByItem: Record<
   [Item.ROTOM_PHONE]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.SILK_SCARF]: Synergy.NORMAL,
-  [Item.TINY_MUSHROOM]: Synergy.BUG
+  [Item.TINY_MUSHROOM]: Synergy.BUG,
+  [Item.DUTCH_OVEN]: Synergy.GOURMET
 }
 
 export const NonSpecialItemComponents: Item[] = [
@@ -549,7 +557,9 @@ export const Dishes = [
   Item.FLOWER_SWEET,
   Item.STAR_SWEET,
   Item.RIBBON_SWEET,
-  Item.SWEETS
+  Item.SWEETS,
+  Item.SANDWICH,
+  Item.HEARTY_STEW
 ] as const
 
 export type Dish = (typeof Dishes)[number]

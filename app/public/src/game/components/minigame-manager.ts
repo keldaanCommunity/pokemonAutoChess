@@ -456,6 +456,15 @@ export default class MinigameManager {
       animation: PokemonActionState.EAT
     })
 
+    const munchlax = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.MUNCHLAX ? cx : 34 * 48,
+      y: encounter === TownEncounters.MUNCHLAX ? cy : 17 * 48,
+      name: Pkm.MUNCHLAX,
+      orientation: Orientation.DOWNLEFT,
+      animation: encounter === TownEncounters.MUNCHLAX ? PokemonActionState.EAT : PokemonActionState.SLEEP
+    })
+
     const podiumPokemons = podium.map((p, rank) => {
       const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
       const champion = new PokemonSpecial({
@@ -487,6 +496,7 @@ export default class MinigameManager {
       wobbuffet,
       wynaut,
       spinda,
+      munchlax,
       ...podiumPokemons
     )
 
