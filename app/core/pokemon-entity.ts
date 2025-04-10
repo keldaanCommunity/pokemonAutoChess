@@ -237,7 +237,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(Effect.MERCILESS) &&
           attacker.id !== this.id &&
-          this.life <= 0.15 * this.hp))
+          this.life <= 0.1 * this.hp))
     )
   }
 

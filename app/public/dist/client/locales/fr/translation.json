@@ -1987,7 +1987,7 @@
     "PURSUIT": "Après avoir mis KO une cible, gagne 3 ATK, 10 AP et 20% de ses HP max",
     "BRUTAL_SWING": "Après avoir mis KO une cible, gagne 6 ATK, 20 AP et 40% de ses HP max",
     "POWER_TRIP": "Après avoir mis KO une cible, gagne 10 ATK, 30 AP et 60% de ses HP max",
-    "MERCILESS": "Vos MONSTER peuvent cibler les alliés à moins de 15% de leurs HP max",
+    "MERCILESS": "Vos MONSTER ciblent toujours l'unité à la santé la plus faible et peuvent cibler les alliés à moins de 10% de leurs HP max",
     "MEDITATE": "Soigne d'un montant équivalent à 15 % des dégâts infligés",
     "FOCUS_ENERGY": "Soigne d'un montant équivalent à 30 % des dégâts infligés",
     "CALM_MIND": "Soigne d'un montant équivalent à 60 % des dégâts infligés",

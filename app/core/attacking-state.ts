@@ -30,7 +30,20 @@ export default class AttackingState extends PokemonState {
         y: pokemon.targetY
       }
 
-      if (pokemon.status.confusion) {
+      if (pokemon.effects.has(Effect.MERCILESS)) {
+        const candidates = this.getTargetsAtRange(pokemon, board)
+        let minLife = Infinity
+        for (const candidate of candidates) {
+          if (candidate.life + candidate.shield < minLife) {
+            minLife = candidate.life + candidate.shield
+            target = candidate
+            targetCoordinate = {
+              x: candidate.positionX,
+              y: candidate.positionY
+            }
+          }
+        }
+      } else if (pokemon.status.confusion) {
         targetCoordinate = this.getTargetCoordinateWhenConfused(pokemon, board)
       } else if (
         !(

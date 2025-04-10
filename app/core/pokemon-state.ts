@@ -80,8 +80,8 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(Effect.CHARGE)) {
-        additionalSpecialDamagePart += 1 * pokemon.count.ult *
-          (1 + pokemon.ap/100)
+        additionalSpecialDamagePart +=
+          1 * pokemon.count.ult * (1 + pokemon.ap / 100)
       }
 
       let isAttackSuccessful = true
@@ -879,15 +879,8 @@ export default abstract class PokemonState {
 
   onExit(pokemon: PokemonEntity) {}
 
-  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
-  because it used Chebyshev distance instead of Manhattan distance
-  more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
-  getNearestTargetAtRangeCoordinates(
-    pokemon: PokemonEntity,
-    board: Board
-  ): { x: number; y: number } | undefined {
-    let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = []
+  getTargetsAtRange(pokemon: PokemonEntity, board: Board): PokemonEntity[] {
+    const targets: PokemonEntity[] = []
     for (
       let x = min(0)(pokemon.positionX - pokemon.range);
       x <= max(board.columns - 1)(pokemon.positionX + pokemon.range);
@@ -900,19 +893,35 @@ export default abstract class PokemonState {
       ) {
         const value = board.getValue(x, y)
         if (value && value.isTargettableBy(pokemon)) {
-          const candidateDistance = distanceC(
-            pokemon.positionX,
-            pokemon.positionY,
-            x,
-            y
-          )
-          if (candidateDistance < distance) {
-            distance = candidateDistance
-            candidatesCoordinates = [{ x, y }]
-          } else if (candidateDistance == distance) {
-            candidatesCoordinates.push({ x, y })
-          }
+          targets.push(value)
         }
+      }
+    }
+    return targets
+  }
+
+  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
+  because it used Chebyshev distance instead of Manhattan distance
+  more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
+  getNearestTargetAtRangeCoordinates(
+    pokemon: PokemonEntity,
+    board: Board
+  ): { x: number; y: number } | undefined {
+    const targets = this.getTargetsAtRange(pokemon, board)
+    let distance = 999
+    let candidatesCoordinates: { x: number; y: number }[] = []
+    for (const target of targets) {
+      const candidateDistance = distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        target.positionX,
+        target.positionY
+      )
+      if (candidateDistance < distance) {
+        distance = candidateDistance
+        candidatesCoordinates = [{ x: target.positionX, y: target.positionY }]
+      } else if (candidateDistance == distance) {
+        candidatesCoordinates.push({ x: target.positionX, y: target.positionY })
       }
     }
     if (candidatesCoordinates.length > 0) {
