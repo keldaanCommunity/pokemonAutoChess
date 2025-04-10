@@ -2171,7 +2171,7 @@
     "ROTOM_PHONE": "手机洛托姆",
     "SILK_SCARF": "丝绸围巾",
     "TINY_MUSHROOM": "小蘑菇",
-    "COOKING_POT": "荷兰锅",
+    "COOKING_POT": "烹饪锅",
     "METEORITE": "陨石",
     "TRASH": "废料",
     "DYNAMAX_BAND": "极巨腕带",
@@ -2266,7 +2266,9 @@
     "VANILLA_FLAVOR": "香草调味料",
     "EGG_FOR_SELL": "宝可梦的蛋",
     "GIMMIGHOUL_COIN": "索财灵的硬币",
-    "EXCHANGE_TICKET": "交换券"
+    "EXCHANGE_TICKET": "交换券",
+    "AUSPICIOUS_ARMOR": "庆祝之铠",
+    "MALICIOUS_ARMOR": "咒术之铠"
   },
   "item_description": {
     "FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2456,7 +2458,9 @@
     "RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)",
     "EGG_FOR_SELL": "一枚吉利蛋育蛋铺出售的宝可梦的蛋",
     "GIMMIGHOUL_COIN": "每轮额外获得1 GOLD的收入，且利息收入上限+1。",
-    "EXCHANGE_TICKET": "将备战区内的一个道具组件或一件合成道具交换为随机同类道具。一次性使用。"
+    "EXCHANGE_TICKET": "将备战区内的一个道具组件或一件合成道具交换为随机同类道具。一次性使用。",
+    "AUSPICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着祝贺的感情。",
+    "MALICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着诅咒的感情。"
   },
   "passive_description": {
     "NONE": "无被动能力",
@@ -2601,7 +2605,8 @@
     "RUBY_SWIRL_CREAM": "释放招式时，RUBY_SWIRL_FLAVOR为最近的我方宝可梦提升[8,SP]点ATK。",
     "CARAMEL_SWIRL_CREAM": "释放招式时，CARAMEL_SWIRL_FLAVOR为最近的我方宝可梦提升[80,SP]%的CRIT_POWER。",
     "RAINBOW_SWIRL_CREAM": "释放招式时，RAINBOW_SWIRL_FLAVOR为最近的我方宝可梦提升[60,SP]点AP。",
-    "DURALUDON": "铝钢龙似乎需要一件ARTIFICIAL道具……"
+    "DURALUDON": "铝钢龙似乎需要一件ARTIFICIAL道具……",
+    "CHARCADET": "碳小侍似乎需要一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR……"
   },
   "stat": {
     "ATK": "攻击",
