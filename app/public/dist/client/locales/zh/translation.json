@@ -2421,7 +2421,7 @@
     "BERRY_JUICE": "仅在下一轮战斗中，战斗开始时以及每次食用树果时获得80点SHIELD。",
     "TART_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标2点DEF。一轮结束后，会变为SWEET_APPLE。",
     "SWEET_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标2点SPE_DEF。一轮结束后，会变为SIRUPY_APPLE。",
-    "SIRUPY_APPLE": "仅在下一轮战斗中，食用者的每次攻击有[30,LK]%的概率使目标陷入PARALYSIS 1秒。一轮结束后，会变为LEFTOVERS",
+    "SIRUPY_APPLE": "仅在下一轮战斗中，食用者的每次攻击有[30,LK]%的概率使目标陷入PARALYSIS 1秒。一轮结束后，会变为LEFTOVERS。",
     "SWEET_HERB": "仅在下一轮战斗中，提升80点AP。",
     "MOOMOO_MILK": "永久提升10点最大HP。",
     "BERRIES": "随机获得一枚树果。",
