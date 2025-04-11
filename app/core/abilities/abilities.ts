@@ -12490,6 +12490,39 @@ export class ArmorCannonStrategy extends AbilityStrategy {
   }
 }
 
+export class SuctionHealStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const cells = board.getCellsInFront(pokemon, target)
+
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        const attack = cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        broadcastAbility(pokemon, {
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: cell.value.positionX,
+          targetY: cell.value.positionY
+        })
+        pokemon.handleHeal(attack.takenDamage * 0.5, pokemon, 1, crit)
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12936,5 +12969,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SCALE_SHOT]: new ScaleShotStrategy(),
   [Ability.BULLDOZE]: new BulldozeStrategy(),
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
-  [Ability.ARMOR_CANNON]: new ArmorCannonStrategy()
+  [Ability.ARMOR_CANNON]: new ArmorCannonStrategy(),
+  [Ability.SUCTION_HEAL]: new SuctionHealStrategy()
 }

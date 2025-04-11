@@ -940,7 +940,10 @@ export enum Pkm {
   ROARING_MOON = "ROARING_MOON",
   CHARCADET = "CHARCADET",
   ARMAROUGE = "ARMAROUGE",
-  CERULEDGE = "CERULEDGE"
+  CERULEDGE = "CERULEDGE",
+  TYNAMO = "TYNAMO",
+  EELEKTRIK = "EELEKTRIK",
+  EELEKTROSS = "EELEKTROSS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1655,9 +1658,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.KLINK]: "0599",
   //[Pkm.KLANG]: "0600",
   //[Pkm.KLINKLANG]: "0601",
-  //[Pkm.TYNAMO]: "0602",
-  //[Pkm.EELEKTRIK]: "0603",
-  //[Pkm.EELEKTROSS]: "0604",
+  [Pkm.TYNAMO]: "0602",
+  [Pkm.EELEKTRIK]: "0603",
+  [Pkm.EELEKTROSS]: "0604",
   [Pkm.ELGYEM]: "0605",
   [Pkm.BEHEEYEM]: "0606",
   [Pkm.LITWICK]: "0607",
@@ -3052,7 +3055,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ROARING_MOON]: Pkm.ROARING_MOON,
   [Pkm.CHARCADET]: Pkm.CHARCADET,
   [Pkm.ARMAROUGE]: Pkm.CHARCADET,
-  [Pkm.CERULEDGE]: Pkm.CHARCADET
+  [Pkm.CERULEDGE]: Pkm.CHARCADET,
+  [Pkm.TYNAMO]: Pkm.TYNAMO,
+  [Pkm.EELEKTRIK]: Pkm.TYNAMO,
+  [Pkm.EELEKTROSS]: Pkm.TYNAMO
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7954,6 +7960,26 @@ export const AnimationConfig: {
   },
   [Pkm.CERULEDGE]: {
     attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.TYNAMO]: {
+    attack: AnimationType.Rotate,
+    ability: AnimationType.Rotate,
+    emote: AnimationType.Rotate,
+    eat: AnimationType.Rotate,
+    hurt: AnimationType.Rotate,
+    hop: AnimationType.Rotate,
+    sleep: AnimationType.Idle,
+    shinyUnavailable: true
+  },
+  [Pkm.EELEKTRIK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
+  },
+  [Pkm.EELEKTROSS]: {
+    attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   }
