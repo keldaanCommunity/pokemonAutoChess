@@ -2012,7 +2012,7 @@
     "PURSUIT": "[30,LK]% chance to FLINCH. When knocking out a target, gain 3 ATK, 10 AP and 20% of its max HP.",
     "BRUTAL_SWING": "When knocking out a target, gain 6 ATK, 20 AP and 40% of its max HP",
     "POWER_TRIP": "When knocking out a target, gain 10 ATK, 30 AP and 60% of its max HP",
-    "MERCILESS": "MONSTER can target allies with less than 15% of their max HP",
+    "MERCILESS": "MONSTER always target the lowest health unit and can target allies with less than 10% of their max HP",
     "MEDITATE": "Heal for 25% HP of the damage. Get a random TM.",
     "FOCUS_ENERGY": "Heal for 40% HP of the damage. Get a random TM.",
     "CALM_MIND": "Heal for 60% HP of the damage. Get a random HM.",

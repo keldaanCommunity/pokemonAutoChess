@@ -1974,7 +1974,7 @@
     "PURSUIT": "[30,LK]% 확률로 FLINCH. 상대를 기절시킬시 3 ATK, 10 AP, 최대 HP 20%를 얻습니다.",
     "BRUTAL_SWING": "상대를 기절시킬시 6 ATK, 20 AP, 최대 HP 40%를 얻습니다.",
     "POWER_TRIP": "상대를 기절시킬시 10 ATK, 30 AP, 최대 HP 60%를 얻습니다.",
-    "MERCILESS": "MONSTER 포켓몬들이 체력이 15% 미만으로 남은 아군 역시 공격하여 기절시킬 수 있습니다.",
+    "MERCILESS": "MONSTER 포켓몬들이 체력이 10% 미만으로 남은 아군 역시 공격하여 기절시킬 수 있습니다.",
     "MEDITATE": "대미지의 15%만큼 회복",
     "FOCUS_ENERGY": "대미지의 30%만큼 회복",
     "CALM_MIND": "대미지의 60%만큼 회복",
