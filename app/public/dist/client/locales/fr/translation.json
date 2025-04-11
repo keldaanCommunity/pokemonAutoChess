@@ -1495,7 +1495,7 @@
     "RAZOR_WIND": "Inflige [20,40,80,SP] SPECIAL à la cible. Peut infliger un coup critique par défaut.",
     "TWISTING_NETHER": "Inflige [80,SP] SPECIAL aux ennemis adjacents à la cible dans un rayon de 2 cases, et les téléporte à un endroit aléatoire sur le plateau",
     "WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL et rend tous les ennemis adjacents PARALYSIS pendant 3 secondes",
-    "ELECTRIC_SURGE": "Augmente la SPEED de tous les pokémons ELECTRIC de [10,SP]",
+    "ELECTRIC_SURGE": "Augmente la SPEED de tous les autres pokémons alliés ELECTRIC de [10,SP]",
     "PSYCHIC_SURGE": "Augmente la AP de tous les pokémons PSYCHIC de [20,SP], excepté le lanceur",
     "MIND_BLOWN": "Inflige [50,SP] % des HP actuels de la cible en tant que SPECIAL",
     "PAYDAY": "Inflige [30,60,90,SP] SPECIAL. Si la cible est KO, le joueur reçoit [1,2,3] pièces",
