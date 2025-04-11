@@ -17962,6 +17962,68 @@ export class Ceruledge extends Pokemon {
   }
 }
 
+export class Tynamo extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.AQUATIC,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.EELEKTRIK
+  hp = 50
+  atk = 6
+  speed = 41
+  def = 4
+  speDef = 4
+  maxPP = 90
+  range = 1
+  skill = Ability.SUCTION_HEAL
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
+}
+
+export class Eelektrik extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.AQUATIC,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.EELEKTROSS
+  hp = 150
+  atk = 12
+  speed = 41
+  def = 8
+  speDef = 8
+  maxPP = 90
+  range = 1
+  skill = Ability.SUCTION_HEAL
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
+}
+
+export class Eelektross extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.AQUATIC,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  hp = 250
+  atk = 24
+  speed = 41
+  def = 12
+  speDef = 12
+  maxPP = 90
+  range = 1
+  skill = Ability.SUCTION_HEAL
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -18908,7 +18970,10 @@ export const PokemonClasses: Record<
   [Pkm.ROARING_MOON]: RoaringMoon,
   [Pkm.CHARCADET]: Charcadet,
   [Pkm.ARMAROUGE]: Armarouge,
-  [Pkm.CERULEDGE]: Ceruledge
+  [Pkm.CERULEDGE]: Ceruledge,
+  [Pkm.TYNAMO]: Tynamo,
+  [Pkm.EELEKTRIK]: Eelektrik,
+  [Pkm.EELEKTROSS]: Eelektross
 }
 
 // declare all the classes in colyseus schema TypeRegistry

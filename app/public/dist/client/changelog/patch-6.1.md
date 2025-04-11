@@ -11,6 +11,9 @@
 - Charcadet
 - Armarouge
 - Ceruledge
+- Tynamo
+- Eelektrik
+- Eelektross
 
 # Changes to Pokemon & Abilities
 

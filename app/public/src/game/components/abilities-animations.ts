@@ -1458,6 +1458,24 @@ export function displayAbility(
       break
     }
 
+    case Ability.SUCTION_HEAL: {
+      const specialProjectile = addAbilitySprite(
+        skill,
+        coordinatesTarget
+      ).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinates[0],
+        y: coordinates[1],
+        ease: "linear",
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.PAYDAY:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       addAbilitySprite(Ability.FACADE, coordinatesTarget, true).setScale(1)
