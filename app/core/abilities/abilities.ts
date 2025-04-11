@@ -911,8 +911,12 @@ export class TimeTravelStrategy extends AbilityStrategy {
       }
     })
 
-    if (pokemon.player && !pokemon.isGhostOpponent) {
-      pokemon.player.life = max(100)(pokemon.player.life + 1)
+    if (
+      pokemon.player &&
+      !pokemon.isGhostOpponent &&
+      pokemon.player.life < 100
+    ) {
+      pokemon.player.life += 1
     }
   }
 }
@@ -12004,9 +12008,9 @@ export class DecorateStrategy extends AbilityStrategy {
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
         nearestAlly.handleHeal(40, pokemon, 1, crit)
         nearestAlly.addDefense(15, pokemon, 0, crit)
-      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
+      } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
         nearestAlly.addAttack(8, pokemon, 1, crit)
-      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
+      } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
         nearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
         nearestAlly.addAbilityPower(60, pokemon, 1, crit)
