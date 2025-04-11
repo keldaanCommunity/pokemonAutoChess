@@ -12499,7 +12499,7 @@ export class SuctionHealStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     const cells = board.getCellsInFront(pokemon, target)
 
     cells.forEach((cell) => {

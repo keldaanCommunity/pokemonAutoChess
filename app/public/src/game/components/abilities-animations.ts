@@ -1462,7 +1462,7 @@ export function displayAbility(
       const specialProjectile = addAbilitySprite(
         skill,
         coordinatesTarget
-      ).setScale(2)
+      ).setScale(3)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinates[0],
