@@ -5117,7 +5117,7 @@ export const AnimationConfig: {
   },
   [Pkm.ETERNATUS]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   },
   [Pkm.PONYTA]: {
@@ -7964,13 +7964,9 @@ export const AnimationConfig: {
     emote: AnimationType.Charge
   },
   [Pkm.TYNAMO]: {
-    attack: AnimationType.Rotate,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Rotate,
-    eat: AnimationType.Rotate,
-    hurt: AnimationType.Rotate,
-    hop: AnimationType.Rotate,
-    sleep: AnimationType.Idle,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
     shinyUnavailable: true
   },
   [Pkm.EELEKTRIK]: {

@@ -618,7 +618,8 @@ export class ElectricSurgeStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
-        pokemon.team == ally.team &&
+        ally.id !== pokemon.id &&
+        pokemon.team === ally.team &&
         ally.types.has(Synergy.ELECTRIC)
       ) {
         ally.addSpeed(buff, pokemon, 1, crit)
@@ -640,8 +641,8 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
-        ally !== pokemon &&
-        pokemon.team == ally.team &&
+        ally.id !== pokemon.id &&
+        pokemon.team === ally.team &&
         ally.types.has(Synergy.PSYCHIC)
       ) {
         ally.addAbilityPower(buff, pokemon, 1, crit)
@@ -665,7 +666,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
       if (
         ally &&
         ally.id !== pokemon.id &&
-        pokemon.team == ally.team &&
+        pokemon.team === ally.team &&
         ally.types.has(Synergy.FAIRY)
       ) {
         ally.addPP(ppGain, pokemon, 1, crit)
@@ -686,7 +687,12 @@ export class GrassySurgeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 4
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (ally && pokemon.team == ally.team && ally.types.has(Synergy.GRASS)) {
+      if (
+        ally &&
+        ally.id !== pokemon.id &&
+        pokemon.team === ally.team &&
+        ally.types.has(Synergy.GRASS)
+      ) {
         ally.addAttack(buff, pokemon, 1, crit)
       }
     })
@@ -911,8 +917,12 @@ export class TimeTravelStrategy extends AbilityStrategy {
       }
     })
 
-    if (pokemon.player && !pokemon.isGhostOpponent) {
-      pokemon.player.life = max(100)(pokemon.player.life + 1)
+    if (
+      pokemon.player &&
+      !pokemon.isGhostOpponent &&
+      pokemon.player.life < 100
+    ) {
+      pokemon.player.life += 1
     }
   }
 }
@@ -2291,31 +2301,7 @@ export class NightmareStrategy extends AbilityStrategy {
   }
 }
 
-export class BurnStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-    let duration = 5000
-    if (pokemon.stars === 2) {
-      duration = 10000
-    }
-    if (pokemon.stars === 3) {
-      duration = 20000
-    }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        value.status.triggerBurn(duration, value, pokemon)
-      }
-    })
-  }
-}
-
-export class PoisonStrategy extends AbilityStrategy {
+export class ToxicStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2435,7 +2421,7 @@ export class ObstructStrategy extends AbilityStrategy {
   }
 }
 
-export class SleepStrategy extends AbilityStrategy {
+export class SingStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2859,7 +2845,7 @@ export class ThunderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const enemies = board.cells.filter(
       (cell) => cell && cell.team !== pokemon.team
     ) as PokemonEntity[]
@@ -3948,7 +3934,7 @@ export class SteamEruptionStrategy extends AbilityStrategy {
   }
 }
 
-export class RootStrategy extends AbilityStrategy {
+export class IngrainStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5016,7 +5002,7 @@ export class MachPunchStrategy extends AbilityStrategy {
   }
 }
 
-export class UppercutStrategy extends AbilityStrategy {
+export class MegaPunchStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5691,7 +5677,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
 
     const targetsHit = new Set<string>()
     const propagate = (currentTarget: PokemonEntity) => {
@@ -5707,17 +5693,24 @@ export class MagmaStormStrategy extends AbilityStrategy {
 
       pokemon.simulation.room.clock.setTimeout(() => {
         const board = pokemon.simulation.board
-        const nextEnemy = board
+        const nextEnemies = board
           .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
-          .find(
+          .filter(
             (cell) =>
               cell.value &&
               cell.value.team === currentTarget.team &&
               !targetsHit.has(cell.value.id)
           )
-        if (nextEnemy && nextEnemy.value && !pokemon.simulation.finished) {
-          propagate(nextEnemy.value)
-        }
+        nextEnemies.forEach((enemy) => {
+          if (
+            enemy &&
+            enemy.value &&
+            enemy.value.life > 0 &&
+            !pokemon.simulation.finished
+          ) {
+            propagate(enemy.value)
+          }
+        })
       }, 500)
     }
 
@@ -7256,7 +7249,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
   }
 }
 
-export class EmptyLightStrategy extends AbilityStrategy {
+export class AcidSprayStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7388,7 +7381,7 @@ export class AirSlashStrategy extends AbilityStrategy {
   }
 }
 
-export class EggsplosionStrategy extends AbilityStrategy {
+export class EggBombStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -12004,9 +11997,9 @@ export class DecorateStrategy extends AbilityStrategy {
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
         nearestAlly.handleHeal(40, pokemon, 1, crit)
         nearestAlly.addDefense(15, pokemon, 0, crit)
-      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
+      } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
         nearestAlly.addAttack(8, pokemon, 1, crit)
-      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
+      } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
         nearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
         nearestAlly.addAbilityPower(60, pokemon, 1, crit)
@@ -12580,7 +12573,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRAGON_TAIL]: new DragonTailStrategy(),
   [Ability.DRAGON_BREATH]: new DragonBreathStrategy(),
   [Ability.ICICLE_CRASH]: new IcicleCrashStrategy(),
-  [Ability.ROOT]: new RootStrategy(),
+  [Ability.INGRAIN]: new IngrainStrategy(),
   [Ability.TORMENT]: new TormentStrategy(),
   [Ability.STOMP]: new StompStrategy(),
   [Ability.HORN_DRILL]: new HornDrillStrategy(),
@@ -12598,13 +12591,12 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STUN_SPORE]: new StunSporeStrategy(),
   [Ability.METEOR_MASH]: new MeteorMashStrategy(),
   [Ability.HURRICANE]: new HurricaneStrategy(),
-  [Ability.BURN]: new BurnStrategy(),
-  [Ability.SLEEP]: new SleepStrategy(),
+  [Ability.SING]: new SingStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
   [Ability.OBSTRUCT]: new ObstructStrategy(),
-  [Ability.POISON]: new PoisonStrategy(),
+  [Ability.TOXIC]: new ToxicStrategy(),
   [Ability.ORIGIN_PULSE]: new OriginPulseStrategy(),
   [Ability.SEED_FLARE]: new SeedFlareStrategy(),
   [Ability.HEAL_BLOCK]: new HealBlockStrategy(),
@@ -12646,7 +12638,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
   [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
   [Ability.DIVE]: new DiveStrategy(),
-  [Ability.SPIKE_ARMOR]: new SpikeArmorStrategy(),
+  [Ability.SPIKY_SHIELD]: new SpikeArmorStrategy(),
   [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
   [Ability.FAKE_TEARS]: new FakeTearsStrategy(),
   [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
@@ -12664,7 +12656,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy(),
   [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
   [Ability.MACH_PUNCH]: new MachPunchStrategy(),
-  [Ability.UPPERCUT]: new UppercutStrategy(),
+  [Ability.MEGA_PUNCH]: new MegaPunchStrategy(),
   [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.FORECAST]: new ForecastStrategy(),
@@ -12781,12 +12773,12 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SCREECH]: new ScreechStrategy(),
   [Ability.SAND_TOMB]: new SandTombStrategy(),
   [Ability.WHIRLWIND]: new WhirlwindStrategy(),
-  [Ability.EMPTY_LIGHT]: new EmptyLightStrategy(),
+  [Ability.ACID_SPRAY]: new AcidSprayStrategy(),
   [Ability.UNBOUND]: new UnboundStrategy(),
   [Ability.HYPERSPACE_FURY]: new HyperspaceFuryStrategy(),
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
-  [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
+  [Ability.EGG_BOMB]: new EggBombStrategy(),
   [Ability.BODY_SLAM]: new BodySlamStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.VINE_WHIP]: new VineWhipStrategy(),

@@ -788,7 +788,7 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
 
-    case Ability.ROOT:
+    case Ability.INGRAIN:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
@@ -1264,7 +1264,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.EMPTY_LIGHT: {
+    case Ability.ACID_SPRAY: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
@@ -1427,7 +1427,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.EGGSPLOSION: {
+    case Ability.EGG_BOMB: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(3)
       scene.tweens.add({
         targets: specialProjectile,
@@ -2483,7 +2483,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.SPIKE_ARMOR:
+    case Ability.SPIKY_SHIELD:
       OrientationArray.forEach((orientation) => {
         const [dx, dy] = OrientationVector[orientation]
         const finalCoordinates = transformAttackCoordinate(
@@ -2512,7 +2512,7 @@ export function displayAbility(
       break
 
     case Ability.MACH_PUNCH:
-    case Ability.UPPERCUT: {
+    case Ability.MEGA_PUNCH: {
       const specialProjectile = addAbilitySprite(
         "FIGHTING/FIST",
         coordinatesTarget

@@ -469,21 +469,21 @@ export default class WeatherManager {
     if (stageLevel === 0) {
       // dawn light
       red = 255
-      green = 210
-      blue = 150
+      green = 160
+      blue = 50
       alpha = 0.15
     } else if (stageLevel === 20) {
       // sunset light
       red = 150
       green = 0
       blue = 50
-      alpha = 0.35
+      alpha = 0.15
     } else if (stageLevel > 20) {
-      // progressive night light
+      // night light
       red = 0
       green = 20
-      blue = 120
-      alpha = max(0.7)(0.15 + ((stageLevel - 20) * 0.55) / 20)
+      blue = 255
+      alpha = 0.15
     }
 
     this.colorFilter = this.scene.add.existing(
