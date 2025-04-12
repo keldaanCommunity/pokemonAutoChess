@@ -5677,7 +5677,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, state, board, target, crit)
+    super.process(pokemon, state, board, target, crit, true)
 
     const targetsHit = new Set<string>()
     const propagate = (currentTarget: PokemonEntity) => {
@@ -5693,17 +5693,24 @@ export class MagmaStormStrategy extends AbilityStrategy {
 
       pokemon.simulation.room.clock.setTimeout(() => {
         const board = pokemon.simulation.board
-        const nextEnemy = board
+        const nextEnemies = board
           .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
-          .find(
+          .filter(
             (cell) =>
               cell.value &&
               cell.value.team === currentTarget.team &&
               !targetsHit.has(cell.value.id)
           )
-        if (nextEnemy && nextEnemy.value && !pokemon.simulation.finished) {
-          propagate(nextEnemy.value)
-        }
+        nextEnemies.forEach((enemy) => {
+          if (
+            enemy &&
+            enemy.value &&
+            enemy.value.life > 0 &&
+            !pokemon.simulation.finished
+          ) {
+            propagate(enemy.value)
+          }
+        })
       }, 500)
     }
 

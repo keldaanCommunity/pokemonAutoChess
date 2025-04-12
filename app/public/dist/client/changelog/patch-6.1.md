@@ -30,6 +30,7 @@
 - Reduce Kecleon and Arceus chances of appearance: 1/100 → 1/150
 - Buff Drampa passive: Gains 3 → 5 AP each time a Pokemon is affected by its ability.
 - Stealth Rock and Stone axe board effect now also damage Flying Pokémon
+- Magma Storm (Heatran) now propagates to several allies at a time
 
 # Changes to Synergies
 
