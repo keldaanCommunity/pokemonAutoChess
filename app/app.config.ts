@@ -1,6 +1,8 @@
 import path from "path"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
+import { uWebSocketsTransport } from "@colyseus/uwebsockets-transport"
+import uWebSockets from "uWebSockets.js"
 import {
   Presence,
   RedisDriver,
@@ -88,6 +90,13 @@ if (process.env.NODE_APP_INSTANCE) {
 
 export default config({
   options: gameOptions,
+
+  initializeTransport: function () {
+    return new uWebSocketsTransport({
+      compression: uWebSockets.SHARED_COMPRESSOR
+    })
+  },
+
   initializeGameServer: (gameServer) => {
     /**
      * Define your room handlers:
