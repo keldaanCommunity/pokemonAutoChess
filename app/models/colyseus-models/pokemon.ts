@@ -786,7 +786,7 @@ export class Onix extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.SPIKY_SHIELD
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -803,7 +803,7 @@ export class Steelix extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.SPIKY_SHIELD
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -820,7 +820,7 @@ export class MegaSteelix extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  //skill = Ability.SPIKE_ARMOR
+  //skill = Ability.SPIKY_SHIELD
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -3072,7 +3072,7 @@ export class Vanillite extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.SLEEP
+  skill = Ability.SING
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -3092,7 +3092,7 @@ export class Vanillish extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.SLEEP
+  skill = Ability.SING
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -3111,7 +3111,7 @@ export class Vanilluxe extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.SLEEP
+  skill = Ability.SING
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -3305,7 +3305,7 @@ export class Igglybuff extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.SLEEP
+  skill = Ability.SING
   attackSprite = AttackSprite.SOUND_RANGE
 }
 
@@ -3321,7 +3321,7 @@ export class Jigglypuff extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 2
-  skill = Ability.SLEEP
+  skill = Ability.SING
   attackSprite = AttackSprite.SOUND_RANGE
 }
 
@@ -3336,7 +3336,7 @@ export class Wigglytuff extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 2
-  skill = Ability.SLEEP
+  skill = Ability.SING
   attackSprite = AttackSprite.SOUND_RANGE
 }
 
@@ -4364,7 +4364,7 @@ export class Bellsprout extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.ROOT
+  skill = Ability.INGRAIN
   passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -4382,7 +4382,7 @@ export class Weepinbell extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.ROOT
+  skill = Ability.INGRAIN
   passive = Passive.HATCH
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -4398,7 +4398,7 @@ export class Victreebel extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.ROOT
+  skill = Ability.INGRAIN
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -9268,7 +9268,7 @@ export class Salandit extends Pokemon {
   speDef = 4
   maxPP = 60
   range = 2
-  skill = Ability.POISON
+  skill = Ability.TOXIC
   additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
@@ -9284,7 +9284,7 @@ export class Salazzle extends Pokemon {
   speDef = 8
   maxPP = 60
   range = 2
-  skill = Ability.POISON
+  skill = Ability.TOXIC
   additional = true
   attackSprite = AttackSprite.FIRE_RANGE
 }
@@ -9817,7 +9817,7 @@ export class Tentacool extends Pokemon {
   speDef = 8
   maxPP = 85
   range = 1
-  skill = Ability.POISON
+  skill = Ability.TOXIC
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
@@ -9837,7 +9837,7 @@ export class Tentacruel extends Pokemon {
   speDef = 14
   maxPP = 85
   range = 1
-  skill = Ability.POISON
+  skill = Ability.TOXIC
   additional = true
   attackSprite = AttackSprite.WATER_MELEE
 }
@@ -11829,7 +11829,7 @@ export class Hitmonchan extends Pokemon {
   speDef = 14
   maxPP = 100
   range = 1
-  skill = Ability.UPPERCUT
+  skill = Ability.MEGA_PUNCH
   attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
@@ -12050,7 +12050,7 @@ export class Silcoon extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.SPIKY_SHIELD
   attackSprite = AttackSprite.BUG_MELEE
 }
 
@@ -12081,7 +12081,7 @@ export class Cascoon extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.SPIKY_SHIELD
   attackSprite = AttackSprite.BUG_MELEE
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
@@ -12168,7 +12168,7 @@ export class Maractus extends Pokemon {
   speDef = 8
   maxPP = 90
   range = 1
-  skill = Ability.SPIKE_ARMOR
+  skill = Ability.SPIKY_SHIELD
   attackSprite = AttackSprite.GRASS_MELEE
 }
 
@@ -12528,7 +12528,7 @@ export class Exeggcute extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 3
-  skill = Ability.EGGSPLOSION
+  skill = Ability.EGG_BOMB
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -12544,7 +12544,7 @@ export class Exeggutor extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.EGGSPLOSION
+  skill = Ability.EGG_BOMB
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
 }
@@ -12564,7 +12564,7 @@ export class AlolanExeggutor extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.EGGSPLOSION
+  skill = Ability.EGG_BOMB
   regional = true
   additional = true
   attackSprite = AttackSprite.GRASS_MELEE
@@ -13459,7 +13459,7 @@ export class Nihilego extends Pokemon {
   speDef = 10
   maxPP = 80
   range = 3
-  skill = Ability.EMPTY_LIGHT
+  skill = Ability.ACID_SPRAY
   passive = Passive.BEAST_BOOST_AP
   attackSprite = AttackSprite.POISON_RANGE
 }

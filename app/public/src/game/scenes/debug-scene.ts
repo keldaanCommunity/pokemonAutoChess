@@ -306,7 +306,7 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.BLINDED) {
         this.pokemon.addBlinded()
       }
-      if (status == Status.SPIKE_ARMOR) {
+      if (status == Status.SPIKY_SHIELD) {
         this.pokemon.addSpikeArmor()
       }
       if (status == Status.MAGIC_BOUNCE) {
