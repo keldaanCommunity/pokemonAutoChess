@@ -2301,31 +2301,7 @@ export class NightmareStrategy extends AbilityStrategy {
   }
 }
 
-export class BurnStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    state: PokemonState,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, state, board, target, crit)
-    let duration = 5000
-    if (pokemon.stars === 2) {
-      duration = 10000
-    }
-    if (pokemon.stars === 3) {
-      duration = 20000
-    }
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        value.status.triggerBurn(duration, value, pokemon)
-      }
-    })
-  }
-}
-
-export class PoisonStrategy extends AbilityStrategy {
+export class ToxicStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -2445,7 +2421,7 @@ export class ObstructStrategy extends AbilityStrategy {
   }
 }
 
-export class SleepStrategy extends AbilityStrategy {
+export class SingStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -3958,7 +3934,7 @@ export class SteamEruptionStrategy extends AbilityStrategy {
   }
 }
 
-export class RootStrategy extends AbilityStrategy {
+export class IngrainStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -5026,7 +5002,7 @@ export class MachPunchStrategy extends AbilityStrategy {
   }
 }
 
-export class UppercutStrategy extends AbilityStrategy {
+export class MegaPunchStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7266,7 +7242,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
   }
 }
 
-export class EmptyLightStrategy extends AbilityStrategy {
+export class AcidSprayStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -7398,7 +7374,7 @@ export class AirSlashStrategy extends AbilityStrategy {
   }
 }
 
-export class EggsplosionStrategy extends AbilityStrategy {
+export class EggBombStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -12590,7 +12566,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRAGON_TAIL]: new DragonTailStrategy(),
   [Ability.DRAGON_BREATH]: new DragonBreathStrategy(),
   [Ability.ICICLE_CRASH]: new IcicleCrashStrategy(),
-  [Ability.ROOT]: new RootStrategy(),
+  [Ability.INGRAIN]: new IngrainStrategy(),
   [Ability.TORMENT]: new TormentStrategy(),
   [Ability.STOMP]: new StompStrategy(),
   [Ability.HORN_DRILL]: new HornDrillStrategy(),
@@ -12608,13 +12584,12 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STUN_SPORE]: new StunSporeStrategy(),
   [Ability.METEOR_MASH]: new MeteorMashStrategy(),
   [Ability.HURRICANE]: new HurricaneStrategy(),
-  [Ability.BURN]: new BurnStrategy(),
-  [Ability.SLEEP]: new SleepStrategy(),
+  [Ability.SING]: new SingStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.PROTECT]: new ProtectStrategy(),
   [Ability.OBSTRUCT]: new ObstructStrategy(),
-  [Ability.POISON]: new PoisonStrategy(),
+  [Ability.TOXIC]: new ToxicStrategy(),
   [Ability.ORIGIN_PULSE]: new OriginPulseStrategy(),
   [Ability.SEED_FLARE]: new SeedFlareStrategy(),
   [Ability.HEAL_BLOCK]: new HealBlockStrategy(),
@@ -12656,7 +12631,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
   [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
   [Ability.DIVE]: new DiveStrategy(),
-  [Ability.SPIKE_ARMOR]: new SpikeArmorStrategy(),
+  [Ability.SPIKY_SHIELD]: new SpikeArmorStrategy(),
   [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
   [Ability.FAKE_TEARS]: new FakeTearsStrategy(),
   [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
@@ -12674,7 +12649,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.WATER_SHURIKEN]: new WaterShurikenStrategy(),
   [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
   [Ability.MACH_PUNCH]: new MachPunchStrategy(),
-  [Ability.UPPERCUT]: new UppercutStrategy(),
+  [Ability.MEGA_PUNCH]: new MegaPunchStrategy(),
   [Ability.TRIPLE_KICK]: new TripleKickStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.FORECAST]: new ForecastStrategy(),
@@ -12791,12 +12766,12 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SCREECH]: new ScreechStrategy(),
   [Ability.SAND_TOMB]: new SandTombStrategy(),
   [Ability.WHIRLWIND]: new WhirlwindStrategy(),
-  [Ability.EMPTY_LIGHT]: new EmptyLightStrategy(),
+  [Ability.ACID_SPRAY]: new AcidSprayStrategy(),
   [Ability.UNBOUND]: new UnboundStrategy(),
   [Ability.HYPERSPACE_FURY]: new HyperspaceFuryStrategy(),
   [Ability.SNIPE_SHOT]: new SnipeShotStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
-  [Ability.EGGSPLOSION]: new EggsplosionStrategy(),
+  [Ability.EGG_BOMB]: new EggBombStrategy(),
   [Ability.BODY_SLAM]: new BodySlamStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.VINE_WHIP]: new VineWhipStrategy(),

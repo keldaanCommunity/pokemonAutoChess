@@ -1095,9 +1095,9 @@ export default class PokemonSprite extends DraggableObject {
   addSpikeArmor() {
     if (!this.spikeArmor) {
       this.spikeArmor = this.scene.add
-        .sprite(0, -5, "abilities", `${Ability.SPIKE_ARMOR}/000.png`)
+        .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)
         .setScale(2)
-      this.spikeArmor.anims.play(Ability.SPIKE_ARMOR)
+      this.spikeArmor.anims.play(Ability.SPIKY_SHIELD)
       this.add(this.spikeArmor)
     }
   }
@@ -1112,7 +1112,7 @@ export default class PokemonSprite extends DraggableObject {
   addMagicBounce() {
     if (!this.magicBounce) {
       this.magicBounce = this.scene.add
-        .sprite(0, -5, "abilities", `${Ability.SPIKE_ARMOR}/000.png`)
+        .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)
         .setScale(2)
         .setTint(0xffa0ff)
       this.magicBounce.anims.play(Ability.MAGIC_BOUNCE)
