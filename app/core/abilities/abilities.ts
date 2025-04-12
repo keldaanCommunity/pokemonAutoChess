@@ -618,7 +618,8 @@ export class ElectricSurgeStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
-        pokemon.team == ally.team &&
+        ally.id !== pokemon.id &&
+        pokemon.team === ally.team &&
         ally.types.has(Synergy.ELECTRIC)
       ) {
         ally.addSpeed(buff, pokemon, 1, crit)
@@ -640,8 +641,8 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
-        ally !== pokemon &&
-        pokemon.team == ally.team &&
+        ally.id !== pokemon.id &&
+        pokemon.team === ally.team &&
         ally.types.has(Synergy.PSYCHIC)
       ) {
         ally.addAbilityPower(buff, pokemon, 1, crit)
@@ -665,7 +666,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
       if (
         ally &&
         ally.id !== pokemon.id &&
-        pokemon.team == ally.team &&
+        pokemon.team === ally.team &&
         ally.types.has(Synergy.FAIRY)
       ) {
         ally.addPP(ppGain, pokemon, 1, crit)
@@ -686,7 +687,12 @@ export class GrassySurgeStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const buff = 4
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (ally && pokemon.team == ally.team && ally.types.has(Synergy.GRASS)) {
+      if (
+        ally &&
+        ally.id !== pokemon.id &&
+        pokemon.team === ally.team &&
+        ally.types.has(Synergy.GRASS)
+      ) {
         ally.addAttack(buff, pokemon, 1, crit)
       }
     })
