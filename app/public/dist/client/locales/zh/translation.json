@@ -1447,7 +1447,7 @@
     "HEAT_WAVE": "对所有敌方宝可梦造成[10,20,30,SP]点SPECIAL，并有[20,LK]%的概率使他们陷入BURN 3秒。解除所有宝可梦的FREEZE。",
     "FLAMETHROWER": "对一个方向上3格半径以内的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入BURN 4秒。",
     "THUNDER_SHOCK": "造成[30,60,120,SP]点SPECIAL。",
-    "THUNDER": "雷击至多3个随机敌方宝可梦，对他们造成[30,60,120,SP]点SPECIAL，并有[30,LK]%的概率使它们陷入PARALYSIS 3秒。",
+    "THUNDER": "雷击至多3个随机敌方宝可梦，对他们造成[25,50,100,SP]点SPECIAL，并有[30,LK]%的概率使它们陷入PARALYSIS 3秒。",
     "HYDRO_PUMP": "对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
     "DRACO_METEOR": "对所有敌方宝可梦造成[50,SP]点SPECIAL。",
     "BLAZE_KICK": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入BURN 2秒。若已经处于BURN，则造成的伤害增加30%。",

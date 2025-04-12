@@ -2845,7 +2845,7 @@ export class ThunderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const enemies = board.cells.filter(
       (cell) => cell && cell.team !== pokemon.team
     ) as PokemonEntity[]
