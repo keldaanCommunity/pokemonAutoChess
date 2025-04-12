@@ -11,6 +11,7 @@ import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { min } from "../../utils/number"
 import { OnAbilityCastEffect } from "../effect"
+import { DelayedCommand } from "../simulation-command"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -54,6 +55,15 @@ export class AbilityStrategy {
 
     if (pokemon.items.has(Item.LEPPA_BERRY)) {
       pokemon.eatBerry(Item.LEPPA_BERRY)
+    }
+
+    if (pokemon.items.has(Item.MAX_ELIXIR) && pokemon.count.ult === 1) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addPP(pokemon.maxPP, pokemon, 0, false)
+          pokemon.removeItem(Item.MAX_ELIXIR, false)
+        }, 1000)
+      )
     }
 
     if (pokemon.items.has(Item.COMFEY)) {

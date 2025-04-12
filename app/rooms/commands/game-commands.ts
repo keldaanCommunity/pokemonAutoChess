@@ -331,7 +331,12 @@ export class OnDragDropPokemonCommand extends Command<
           } else if (
             pokemon.canBePlaced &&
             (!target || target.canBeBenched) &&
-            !(dropFromBench && dropToEmptyPlace && isBoardFull)
+            !(
+              dropFromBench &&
+              dropToEmptyPlace &&
+              isBoardFull &&
+              pokemon.doesCountForTeamSize
+            )
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
             this.room.swap(player, pokemon, x, y)
@@ -386,7 +391,11 @@ export class OnSwitchBenchAndBoardCommand extends Command<
           this.room.state.specialGameRule
         )
       const destination = getFirstAvailablePositionOnBoard(player.board)
-      if (pokemon.canBePlaced && destination && !isBoardFull) {
+      if (
+        pokemon.canBePlaced &&
+        destination &&
+        !(isBoardFull && pokemon.doesCountForTeamSize)
+      ) {
         const [dx, dy] = destination
 
         this.room.swap(player, pokemon, dx, dy)
