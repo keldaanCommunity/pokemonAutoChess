@@ -64,6 +64,8 @@
 
 # Bugfix
 
+- Fossil Pokémon no longer regain their fossil resurrection effect after being revived with Sacred Ash
+
 # Misc
 
 - Regions types changed to add some for Gourmet

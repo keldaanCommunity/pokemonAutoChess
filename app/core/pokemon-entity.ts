@@ -1816,7 +1816,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               this,
               this.team
             )
-          this.simulation.addPokemon(mon, coord.x, coord.y, this.team, true)
+          const spawnedEntity = this.simulation.addPokemon(
+            mon,
+            coord.x,
+            coord.y,
+            this.team,
+            true
+          )
+          spawnedEntity.shield = 0 // remove existing shield
+          spawnedEntity.flyingProtection = 0 // prevent flying effects twice
+          SynergyEffects[Synergy.FOSSIL].forEach((e) =>
+            spawnedEntity.effects.delete(e)
+          )
         })
       }
     }
