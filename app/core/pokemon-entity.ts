@@ -2043,14 +2043,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  transferAbility(name: Ability | string) {
+  transferAbility(
+    name: Ability | string,
+    positionX = this.positionX,
+    positionY = this.positionY,
+    targetX = this.targetX,
+    targetY = this.targetY
+  ) {
     this.simulation.room.broadcast(Transfer.ABILITY, {
       id: this.simulation.id,
       skill: name,
-      positionX: this.positionX,
-      positionY: this.positionY,
-      targetX: this.targetX,
-      targetY: this.targetY,
+      positionX: positionX,
+      positionY: positionY,
+      targetX: targetX,
+      targetY: targetY,
       orientation: this.orientation
     })
   }

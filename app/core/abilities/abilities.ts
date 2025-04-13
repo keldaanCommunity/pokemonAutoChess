@@ -5682,7 +5682,13 @@ export class MagmaStormStrategy extends AbilityStrategy {
     const targetsHit = new Set<string>()
     const propagate = (currentTarget: PokemonEntity) => {
       targetsHit.add(currentTarget.id)
-      currentTarget.transferAbility(Ability.MAGMA_STORM)
+      pokemon.transferAbility(
+        Ability.MAGMA_STORM,
+        pokemon.positionX,
+        pokemon.positionY,
+        currentTarget.positionX,
+        currentTarget.positionY
+      )
       currentTarget.handleSpecialDamage(
         80,
         board,
@@ -5711,7 +5717,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
             propagate(enemy.value)
           }
         })
-      }, 500)
+      }, 250)
     }
 
     propagate(target)
