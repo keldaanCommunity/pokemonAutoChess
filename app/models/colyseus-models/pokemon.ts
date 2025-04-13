@@ -153,7 +153,10 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get doesCountForTeamSize(): boolean {
-    return this.passive !== Passive.INANIMATE
+    return (
+      this.passive !== Passive.INANIMATE &&
+      this.items.has(Item.GOLD_BOW) === false
+    )
   }
 
   get luck(): number {

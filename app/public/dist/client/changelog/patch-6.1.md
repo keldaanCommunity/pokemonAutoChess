@@ -51,7 +51,9 @@
     - Guzzlord: when holding Chef's Hat, gain 4 → 5 permanent AP for every KO
     - Clover Sweet: 5% luck → 10% luck
 - New artificial item: Cooking Pot: Gives Gourmet synergy. When burned, the Cooking Pot is heated little by little which gives 10 Speed per second.
+- New artificial item: Max elixir: Restores 100% of max PP 1 second after the first ability cast.
 - New special item: Picnic Set: Immediately consummed when given. Give a Sandwich to the holder and all adjacent allies. Sandwich gives stat boosts for the next fight based on the types of the Pokémon eating it.
+- New shiny item: Gold bow: the holder does not count for team size limit
 
 # Gameplay
 

@@ -111,6 +111,8 @@ export enum Item {
   SACRED_ASH = "SACRED_ASH",
   COMET_SHARD = "COMET_SHARD",
   REPEAT_BALL = "REPEAT_BALL",
+  GOLD_BOW = "GOLD_BOW",
+  MAX_ELIXIR = "MAX_ELIXIR",
   DAMP_ROCK = "DAMP_ROCK",
   ICY_ROCK = "ICY_ROCK",
   HEAT_ROCK = "HEAT_ROCK",
@@ -320,23 +322,24 @@ export const Berries: Item[] = [
 ]
 
 export const ArtificialItems: Item[] = [
-  Item.EXP_SHARE,
-  Item.ELECTIRIZER,
-  Item.MAGMARIZER,
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.HARD_STONE,
   Item.METAL_COAT,
   Item.SWIFT_WING,
   Item.MACHO_BRACE,
-  Item.INCENSE,
   Item.METRONOME,
   Item.BIG_NUGGET,
-  Item.POKERUS_VIAL,
   Item.ROTOM_PHONE,
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
-  Item.COOKING_POT
+  Item.COOKING_POT,
+  Item.INCENSE,
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
+  Item.POKERUS_VIAL,
+  Item.MAX_ELIXIR,
+  Item.EXP_SHARE
 ]
 
 export const ShinyItems: Item[] = [
@@ -349,7 +352,8 @@ export const ShinyItems: Item[] = [
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
   Item.COMET_SHARD,
-  Item.REPEAT_BALL
+  Item.REPEAT_BALL,
+  Item.GOLD_BOW
 ]
 
 export const WeatherRocks: Item[] = [
