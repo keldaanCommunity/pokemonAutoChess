@@ -128,47 +128,6 @@ export default function WikiItems() {
         </ul>
       </article>
 
-      <article className="berries">
-        <h2>
-          <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
-        </h2>
-        <p>{addIconsToDescription(t("berries_description"))}</p>
-        <ul>
-          {Berries.map((i) => (
-            <li
-              key={i}
-              data-tooltip-id="item-detail"
-              onMouseOver={() => setItemHovered(i)}
-            >
-              <img src={"assets/item/" + i + ".png"} className="item"></img>
-              <br />
-              <img
-                src={"assets/environment/berry_trees/" + i + "_6.png"}
-                className="tree"
-              ></img>
-            </li>
-          ))}
-        </ul>
-      </article>
-
-      <article className="dishes">
-        <h2>
-          <SynergyIcon type={Synergy.GOURMET} /> {t("dishes")}
-        </h2>
-        <p>{addIconsToDescription(t("dishes_description"))}</p>
-        <ul>
-          {Dishes.map((i) => (
-            <li
-              key={i}
-              data-tooltip-id="item-detail"
-              onMouseOver={() => setItemHovered(i)}
-            >
-              <img src={"assets/item/" + i + ".png"} className="item"></img>
-            </li>
-          ))}
-        </ul>
-      </article>
-
       <article className="artificial">
         <h2>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}
@@ -227,6 +186,47 @@ export default function WikiItems() {
               onMouseOver={() => setItemHovered(i)}
             >
               <img src={"assets/item/HM.png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <article className="berries">
+        <h2>
+          <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
+        </h2>
+        <p>{addIconsToDescription(t("berries_description"))}</p>
+        <ul>
+          {Berries.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="item-detail"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+              <br />
+              <img
+                src={"assets/environment/berry_trees/" + i + "_6.png"}
+                className="tree"
+              ></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <article className="dishes">
+        <h2>
+          <SynergyIcon type={Synergy.GOURMET} /> {t("dishes")}
+        </h2>
+        <p>{addIconsToDescription(t("dishes_description"))}</p>
+        <ul>
+          {Dishes.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="item-detail"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
             </li>
           ))}
         </ul>

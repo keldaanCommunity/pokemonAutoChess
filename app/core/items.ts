@@ -103,6 +103,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 30 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },
+  [Item.MAX_ELIXIR]: { [Stat.AP]: -25 },
   [Item.EVIOLITE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,
