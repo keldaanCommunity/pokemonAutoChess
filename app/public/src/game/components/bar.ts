@@ -1,4 +1,5 @@
 import { GameObjects } from "phaser"
+import { DEPTH } from "../depths"
 
 export default class Bar extends GameObjects.DOMElement {
   max: number
@@ -39,6 +40,7 @@ export default class Bar extends GameObjects.DOMElement {
     this.dom.appendChild(this.progress)
     this.wrap.appendChild(this.dom)
     this.setElement(this.wrap)
+    this.setDepth(DEPTH.POKEMON_HP_BAR)
   }
 
   setAmount(value: number) {

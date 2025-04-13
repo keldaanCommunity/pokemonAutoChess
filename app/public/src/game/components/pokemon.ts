@@ -678,7 +678,6 @@ export default class PokemonSprite extends DraggableObject {
       )
       this.lifebar.setAmount(pokemon.life)
       this.lifebar.setShieldAmount(pokemon.shield)
-      this.lifebar.setDepth(DEPTH.POKEMON_HP_BAR)
       this.add(this.lifebar)
     }
   }
@@ -693,7 +692,6 @@ export default class PokemonSprite extends DraggableObject {
         pokemon.maxPP
       )
       this.powerbar.setAmount(pokemon.pp)
-      this.powerbar.setDepth(DEPTH.POKEMON_HP_BAR)
       this.add(this.powerbar)
     }
   }

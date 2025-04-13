@@ -10,12 +10,13 @@ import GameRefresh from "./game-refresh"
 import GameStore from "./game-store"
 import { GameTeamInfo } from "./game-team-info"
 import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
+import { DEPTH } from "../../../game/depths"
 import "./game-shop.css"
 
 export default function GameShop() {
   return (
     <>
-      <div className="game-shop my-container">
+      <div className="game-shop my-container" style={{ zIndex: DEPTH.HUD_OVER_PHASER_DOM_CONTAINER }}>
         <div id="game-shop-info">
           <GameLifeInfo />
           <GameMoneyInfo />
