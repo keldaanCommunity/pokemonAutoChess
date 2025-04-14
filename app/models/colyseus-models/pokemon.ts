@@ -49,6 +49,7 @@ import {
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
+  SynergyFlavors,
   SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
@@ -4914,6 +4915,10 @@ export class Pidgey extends Pokemon {
   range = 2
   skill = Ability.HURRICANE
   attackSprite = AttackSprite.FLYING_RANGE
+  regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 0
+  }
 }
 
 export class Pidgeotto extends Pokemon {
@@ -4930,6 +4935,10 @@ export class Pidgeotto extends Pokemon {
   range = 2
   skill = Ability.HURRICANE
   attackSprite = AttackSprite.FLYING_RANGE
+  regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 0
+  }
 }
 
 export class Pidgeot extends Pokemon {
@@ -4945,6 +4954,10 @@ export class Pidgeot extends Pokemon {
   range = 2
   skill = Ability.HURRICANE
   attackSprite = AttackSprite.FLYING_RANGE
+  regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 0
+  }
 }
 
 export class Hoppip extends Pokemon {
@@ -10382,6 +10395,9 @@ export class Starly extends Pokemon {
   skill = Ability.BRAVE_BIRD
   attackSprite = AttackSprite.FLYING_MELEE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 1
+  }
 }
 
 export class Staravia extends Pokemon {
@@ -10399,6 +10415,9 @@ export class Staravia extends Pokemon {
   skill = Ability.BRAVE_BIRD
   attackSprite = AttackSprite.FLYING_MELEE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 1
+  }
 }
 
 export class Staraptor extends Pokemon {
@@ -10415,6 +10434,9 @@ export class Staraptor extends Pokemon {
   skill = Ability.BRAVE_BIRD
   attackSprite = AttackSprite.FLYING_MELEE
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 1
+  }
 }
 
 export class Scorbunny extends Pokemon {
@@ -18027,6 +18049,65 @@ export class Eelektross extends Pokemon {
   regional = true
 }
 
+export class Pidove extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.TRANQUILL
+  hp = 50
+  atk = 5
+  speed = 64
+  def = 2
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.ROOST
+  attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 2
+  }
+}
+
+export class Tranquill extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.UNFEZANT
+  hp = 100
+  atk = 8
+  speed = 64
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ROOST
+  attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 2
+  }
+}
+
+export class Unfezant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 170
+  atk = 16
+  speed = 64
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ROOST
+  attackSprite = AttackSprite.FLYING_MELEE
+  regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    return Object.keys(DungeonPMDO).indexOf(map) % 3 === 2
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -18976,7 +19057,10 @@ export const PokemonClasses: Record<
   [Pkm.CERULEDGE]: Ceruledge,
   [Pkm.TYNAMO]: Tynamo,
   [Pkm.EELEKTRIK]: Eelektrik,
-  [Pkm.EELEKTROSS]: Eelektross
+  [Pkm.EELEKTROSS]: Eelektross,
+  [Pkm.PIDOVE]: Pidove,
+  [Pkm.TRANQUILL]: Tranquill,
+  [Pkm.UNFEZANT]: Unfezant
 }
 
 // declare all the classes in colyseus schema TypeRegistry
