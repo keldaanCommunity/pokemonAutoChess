@@ -259,7 +259,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return (
       (positionX === lightX && positionY === lightY) ||
       this.items.has(Item.SHINY_STONE) ||
-      (this.passive === Passive.CONVERSION && this.types.has(Synergy.LIGHT))
+      (this.passive === Passive.CONVERSION &&
+        this.types.has(Synergy.LIGHT) &&
+        !this.items.has(Item.LIGHT_BALL))
     )
   }
 
