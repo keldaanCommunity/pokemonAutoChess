@@ -464,7 +464,8 @@
     "BULLDOZE": "Bulldoze",
     "BITTER_BLADE": "Bitter Blade",
     "ARMOR_CANNON": "Armor Cannon",
-    "SUCTION_HEAL": "Suction Heal"
+    "SUCTION_HEAL": "Suction Heal",
+    "ROOST": "Roost"
   },
   "pkm": {
     "DEFAULT": "MissingNo.",
@@ -1409,7 +1410,10 @@
     "CERULEDGE": "Ceruledge",
     "TYNAMO": "Tynamo",
     "EELEKTRIK": "Eelektrik",
-    "EELEKTROSS": "Eelektross"
+    "EELEKTROSS": "Eelektross",
+    "PIDOVE": "Pidove",
+    "TRANQUILL": "Tranquill",
+    "UNFEZANT": "Unfezant"
   },
   "ability_description": {
     "SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1854,7 +1858,8 @@
     "BULLDOZE": "The user stomps down on the ground dealing [25,45,85,SP] SPECIAL to adjacent enemies. Pokemon hit are knocked back and lose [10] SPEED.",
     "ARMOR_CANNON": "The user shoots out a blazing projectile, dealing [70,SP] SPECIAL to the target before bouncing to the [2,SP] closest enemies, dealing [35,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [10,SP] SPECIAL each.",
     "BITTER_BLADE": "The user focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every adjacent enemy. User heals [10,SP]% of it's HP for each enemy hit.",
-    "SUCTION_HEAL": "Drains the energy from it's targets, dealing [15,30,60,SP] SPECIAL in a 2-tile cone in front of the user and heals HP for [50,SP] % of the damage dealt."
+    "SUCTION_HEAL": "Drains the energy from it's targets, dealing [15,30,60,SP] SPECIAL in a 2-tile cone in front of the user and heals HP for [50,SP] % of the damage dealt.",
+    "ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP."
   },
   "effect": {
     "INGRAIN": "Ingrain",

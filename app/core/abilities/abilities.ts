@@ -12145,6 +12145,30 @@ export class FilletAwayStrategy extends AbilityStrategy {
   }
 }
 
+export class RoostStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    // move to backline
+    const corner = board.getTeleportationCell(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team
+    )
+    if (corner) {
+      pokemon.moveTo(corner.x, corner.y, board)
+    }
+    pokemon.status.triggerSleep(2000, pokemon)
+    pokemon.handleHeal(heal, pokemon, 1, crit)
+  }
+}
+
 export class ElectroShotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -12968,5 +12992,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BULLDOZE]: new BulldozeStrategy(),
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
   [Ability.ARMOR_CANNON]: new ArmorCannonStrategy(),
-  [Ability.SUCTION_HEAL]: new SuctionHealStrategy()
+  [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
+  [Ability.ROOST]: new RoostStrategy()
 }

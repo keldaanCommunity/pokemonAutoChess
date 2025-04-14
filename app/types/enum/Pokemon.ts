@@ -586,6 +586,7 @@ export enum Pkm {
   PIDGEOT = "PIDGEOT",
   PIDGEOTTO = "PIDGEOTTO",
   PIDGEY = "PIDGEY",
+  PIDOVE = "PIDOVE",
   PIGNITE = "PIGNITE",
   PIKACHU = "PIKACHU",
   //PIKIPEK = "PIKIPEK",
@@ -801,6 +802,7 @@ export enum Pkm {
   TOXEL = "TOXEL",
   TOXICROAK = "TOXICROAK",
   TOXTRICITY = "TOXTRICITY",
+  TRANQUILL = "TRANQUILL",
   TRAPINCH = "TRAPINCH",
   TREECKO = "TREECKO",
   TREVENANT = "TREVENANT",
@@ -819,6 +821,7 @@ export enum Pkm {
   TYRUNT = "TYRUNT",
   ULTRA_NECROZMA = "ULTRA_NECROZMA",
   UMBREON = "UMBREON",
+  UNFEZANT = "UNFEZANT",
   UNOWN_A = "UNOWN_A",
   UNOWN_B = "UNOWN_B",
   UNOWN_C = "UNOWN_C",
@@ -1569,9 +1572,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.SIMIPOUR]: "0516",
   [Pkm.MUNNA]: "0517",
   [Pkm.MUSHARNA]: "0518",
-  //[Pkm.PIDOVE]: "0519",
-  //[Pkm.TRANQUILL]: "0520",
-  //[Pkm.UNFEZANT]: "0521",
+  [Pkm.PIDOVE]: "0519",
+  [Pkm.TRANQUILL]: "0520",
+  [Pkm.UNFEZANT]: "0521",
   //[Pkm.BLITZLE]: "0522",
   //[Pkm.ZEBSTRIKA]: "0523",
   //[Pkm.ROGGENROLA]: "0524",
@@ -3058,7 +3061,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CERULEDGE]: Pkm.CHARCADET,
   [Pkm.TYNAMO]: Pkm.TYNAMO,
   [Pkm.EELEKTRIK]: Pkm.TYNAMO,
-  [Pkm.EELEKTROSS]: Pkm.TYNAMO
+  [Pkm.EELEKTROSS]: Pkm.TYNAMO,
+  [Pkm.PIDOVE]: Pkm.PIDOVE,
+  [Pkm.TRANQUILL]: Pkm.PIDOVE,
+  [Pkm.UNFEZANT]: Pkm.PIDOVE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -7978,5 +7984,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.PIDOVE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.TRANQUILL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.UNFEZANT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
   }
 }

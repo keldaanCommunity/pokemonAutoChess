@@ -14,11 +14,15 @@
 - Tynamo
 - Eelektrik
 - Eelektross
+- Pidove
+- Tranquill
+- Unfezant
 
 # Changes to Pokemon & Abilities
 
 - Alcremie now consumes its flavor when evolving
-- Starly line is now Common regional in Flying/Normal regions
+- Starly line is now Common regional
+- Pidget line is now regional. It will be replaced by Starly line or Pidove line depending on the region.
 - Torterra line gains the Monster type ; New ability: Bulldoze
 - Change Fillet Away: sacrify 50% of current ~~HP~~ **max HP** and now flee away with a 400ms protect status ; PP 80 → 100
 - Nerf Nuzzle (Pichu line): damage 30/60/120 → 25/50/100
