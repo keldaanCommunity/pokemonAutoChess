@@ -269,7 +269,10 @@ export default class PokemonSprite extends DraggableObject {
       }
     }
 
-    this.draggable = playerId === scene.uid && !inBattle
+    this.draggable =
+      playerId === scene.uid &&
+      !inBattle &&
+      (scene as GameScene).spectate === false
     if (isEntity(pokemon)) {
       this.pp = pokemon.pp
       this.team = pokemon.team

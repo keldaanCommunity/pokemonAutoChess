@@ -1,9 +1,7 @@
 import { GameObjects } from "phaser"
 import { Transfer } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
-import { Pkm, Unowns } from "../../../../types/enum/Pokemon"
-import { pickRandomIn } from "../../../../utils/random"
-import { getGameContainer } from "../../pages/game"
+import { Pkm } from "../../../../types/enum/Pokemon"
 import GameScene from "../scenes/game-scene"
 import { addWanderingPokemon } from "./pokemon"
 import { DEPTH } from "../depths"
@@ -19,7 +17,7 @@ export default class UnownManager {
 
   addWanderingUnown(pkm: Pkm, id: string) {
     addWanderingPokemon(this.scene, id, pkm, (unown, id, pointer, tween) => {
-      getGameContainer().room.send(Transfer.UNOWN_WANDERING, { id })
+      this.scene.room?.send(Transfer.UNOWN_WANDERING, { id })
       this.displayShardGain([pointer.x, pointer.y], unown.index)
       unown.destroy()
       tween.destroy()

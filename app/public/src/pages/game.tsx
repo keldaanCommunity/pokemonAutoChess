@@ -86,10 +86,6 @@ import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 
 let gameContainer: GameContainer
 
-export function getGameContainer(): GameContainer {
-  return gameContainer
-}
-
 export function getGameScene(): GameScene | undefined {
   return gameContainer?.game?.scene?.getScene<GameScene>("gameScene") as
     | GameScene
@@ -181,7 +177,6 @@ export default function Game() {
       // if spectating game we switch directly without notifying the server to not show spectators avatars
       if (room?.state?.players) {
         const spectatedPlayer = room?.state?.players.get(id)
-        const gameContainer = getGameContainer()
         if (spectatedPlayer) {
           gameContainer.setPlayer(spectatedPlayer)
 
@@ -283,6 +278,17 @@ export default function Game() {
     }
   }, [client, dispatch, room])
 
+  const spectateTillTheEnd = () => {
+    setFinalRankVisibility(FinalRankVisibility.CLOSED)
+    gameContainer.spectate = true
+    if (gameContainer.gameScene) {
+      gameContainer.gameScene.spectate = true
+      // rerender to make items and units not dragable anymore
+      gameContainer.gameScene?.board?.renderBoard()
+      gameContainer.gameScene?.itemsContainer?.render(gameContainer.player!.items)
+    }
+  }
+
   useEffect(() => {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead
     window.history.pushState(null, "", window.location.href)
@@ -374,8 +380,7 @@ export default function Game() {
           gameScene.load.once("complete", () => {
             if (!PortalCarouselStages.includes(room.state.stageLevel)) {
               // map loaded after the end of the portal carousel stage, we swap it now. better later than never
-              const gc = getGameContainer()
-              gc && gc.player && gameScene.setMap(gc.player.map)
+              gameContainer && gameContainer.player && gameScene.setMap(gameContainer.player.map)
             }
           })
           gameScene.load.start()
@@ -646,6 +651,7 @@ export default function Game() {
             && finalRankVisibility === FinalRankVisibility.HIDDEN
           ) {
             setFinalRankVisibility(FinalRankVisibility.VISIBLE)
+            getGameScene()?.input.keyboard?.removeAllListeners()
           }
         })
         $player.listen("experienceManager", (experienceManager) => {
@@ -696,7 +702,6 @@ export default function Game() {
         $player.listen("spectatedPlayerId", (spectatedPlayerId) => {
           if (room?.state?.players) {
             const spectatedPlayer = room?.state?.players.get(spectatedPlayerId)
-            const gameContainer = getGameContainer()
             if (spectatedPlayer && player.id === uid) {
               gameContainer.setPlayer(spectatedPlayer)
 
@@ -792,7 +797,7 @@ export default function Game() {
           <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
           <GameFinalRank
             rank={finalRank}
-            hide={() => setFinalRankVisibility(FinalRankVisibility.CLOSED)}
+            hide={spectateTillTheEnd}
             leave={leave}
             visible={finalRankVisibility === FinalRankVisibility.VISIBLE}
           />

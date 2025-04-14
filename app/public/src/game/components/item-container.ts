@@ -16,6 +16,7 @@ import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
 import ItemsContainer from "./items-container"
 import { DEPTH } from "../depths"
+import type GameScene from "../scenes/game-scene"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail | undefined
@@ -70,7 +71,10 @@ export default class ItemContainer extends DraggableObject {
     this.add(this.sprite)
     this.setInteractive()
     this.updateDropZone(true)
-    this.draggable = this.pokemonId === null && playerId === currentPlayerUid
+    this.draggable =
+      this.pokemonId === null &&
+      playerId === currentPlayerUid &&
+      (scene as GameScene).spectate === false
   }
 
   get cellIndex() {

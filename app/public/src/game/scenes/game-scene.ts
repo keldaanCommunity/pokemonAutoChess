@@ -25,7 +25,6 @@ import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
-import { getGameContainer } from "../../pages/game"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
 import { transformCoordinate } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -599,7 +598,7 @@ export default class GameScene extends Scene {
           }
           // RETURN TO ORIGINAL SPOT
           else {
-            const player = getGameContainer().player
+            const player = this.room?.state.players.get(this.uid!)
             if (player) this.itemsContainer?.render(player.items)
           }
           this.itemDragged = null
