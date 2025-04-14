@@ -874,7 +874,8 @@ export default class GameRoom extends Room<GameState> {
           avatar: dbrecord.avatar,
           playerId: dbrecord.id,
           elo: elo,
-          synergies: synergiesMap
+          synergies: synergiesMap,
+          gameMode: this.state.gameMode
         })
       }
 
