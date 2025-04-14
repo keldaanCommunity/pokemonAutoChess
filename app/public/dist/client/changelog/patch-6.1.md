@@ -76,6 +76,7 @@
 # Misc
 
 - Elo decay rules have to be reinforced to prevent elo sitting: **Elo decay now happens if not playing at least 3 games over the last 15 days. Starting from Ultra Ball rank, these games must be Ranked games to count.**. This change will apply from May 5th.
+- Ranked games minimum and maximum ranks have been extended by 1 rank to allow more players to join and reduce the time it takes to form a ranked lobby
 - Regions types changed to add some for Gourmet
 - New title: Chef: Max synergy with Gourmet type in a game
 - Do it all yourself scribble pendalties balance adjusted for Hatch & Special avatars
