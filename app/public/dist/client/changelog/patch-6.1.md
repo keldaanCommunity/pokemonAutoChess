@@ -45,6 +45,7 @@
 
 - Buff Monster 8 (Merciless): Monsters always target the lowest health unit and can target allies with less than 10% of their max HP
 - Buff Baby 5 (Breeder): Eggs hatch 2 stages faster
+- Partially revert Dark 5.9 nerf: crit power +30/40/50% → +30/60/100%
 
 # Changes to Items
 
