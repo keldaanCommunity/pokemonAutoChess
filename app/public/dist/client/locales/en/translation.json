@@ -1442,7 +1442,7 @@
     "HYPER_VOICE": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon in the same row as the target and has [30,LK@]% chance to inflict CONFUSION for [1,2,3] seconds.",
     "SHADOW_CLONE": "Summon a clone with [50,SP]% of the user's max HP. The clone steals one random item from your current target.",
     "VOLT_SWITCH": "Dash to the farthest enemy reachable and deal [30,60,120,SP] SPECIAL to all enemy Pokémon in the path.",
-    "NUZZLE": "Dash to the farthest opponent, deal [25,50,100,SP] SPECIAL and inflict it with PARALYSIS for 3 seconds.",
+    "NUZZLE": "Dash to the farthest opponent, deal [20,40,80,SP] SPECIAL and inflict it with PARALYSIS for 3 seconds.",
     "LIQUIDATION": "Deal [20,40,80,SP] SPECIAL and lower the target's DEF by [4,8,16,SP].",
     "TOXIC": "POISONNED the [1,2,3] closest enemy Pokémon for [3,6,9,SP=0.5] seconds.",
     "SING": "Put the [1,2,3] farthest back enemy Pokémon to SLEEP for [2,SP] seconds.",

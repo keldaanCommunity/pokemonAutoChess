@@ -25,7 +25,7 @@
 - Pidget line is now regional. It will be replaced by Starly line or Pidove line depending on the region.
 - Torterra line gains the Monster type ; New ability: Bulldoze
 - Change Fillet Away: sacrify 50% of current ~~HP~~ **max HP** and now flee away with a 400ms protect status ; PP 80 → 100
-- Nerf Nuzzle (Pichu line): damage 30/60/120 → 25/50/100
+- Nerf Nuzzle (Pichu line): damage 30/60/120 → 20/40/80
 - Buff Blastoise: Attack 19 → 20, HP 190 → 200
 - Buff Outrage (Axew, Druddigon): damage 100/150/200% Attack → 150/200/250% Attack
 - Nerf Tapu Koko: Range 3 → 2 ; Electric Surge now excludes Tapu Koko from its effect
