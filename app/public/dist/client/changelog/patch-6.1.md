@@ -38,6 +38,7 @@
 - Magma Storm (Heatran) now propagates to several allies at a time. Reduced propagation time: 500ms → 250ms
 - Nerf Thunder (Zapdos): damage 30/60/120 → 25/50/100
 - Nerf Grubbin line: HP: 80/140/190 → 75/130/180 ; Attack: 6/14/27 → 5/13/24 ; PP 80 → 100
+- Change Bounce (Mantyke, Spoink): number of bounces no longer scale with AP; Damage: 10 → 10/20/40 ; bounce duration: 400ms → 500ms
 
 # Changes to Synergies
 
