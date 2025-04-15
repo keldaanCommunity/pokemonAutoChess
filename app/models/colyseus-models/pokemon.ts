@@ -11745,7 +11745,7 @@ export class Chingling extends Pokemon {
   hp = 150
   atk = 10
   speed = 46
-  def = 4
+  def = 7
   speDef = 8
   maxPP = 80
   range = 3
@@ -11761,7 +11761,7 @@ export class Chimecho extends Pokemon {
   hp = 200
   atk = 15
   speed = 46
-  def = 6
+  def = 10
   speDef = 12
   maxPP = 80
   range = 3
