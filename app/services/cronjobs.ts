@@ -11,8 +11,12 @@ import { Title } from "../types"
 import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
-  CRON_HISTORY_CLEANUP_DELAY
+  CRON_HISTORY_CLEANUP_DELAY,
+  EloRank,
+  EloRankThreshold
 } from "../types/Config"
+import { GameMode } from "../types/enum/Game"
+import { min } from "../utils/number"
 
 export function initCronJobs() {
   logger.debug("init cron jobs")
@@ -101,30 +105,29 @@ async function eloDecay() {
     for (let i = 0; i < users.length; i++) {
       const u = users[i]
       const stats = await DetailledStatistic.find(
-        { playerId: u.uid },
+        {
+          playerId: u.uid,
+          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] &&
+          Date.now() > new Date("2025-05-05").getTime()
+            ? { gameMode: GameMode.RANKED } // TEMP: activate ranked mode decay after 15 days to let time to collect the new game mode info. Can be safely removed after that date
+            : {})
+        },
         ["time"],
         {
-          limit: 1,
+          limit: 3,
           sort: { time: -1 }
         }
       )
-      const decay = Math.max(CRON_ELO_DECAY_MINIMUM_ELO, u.elo - 10)
-      if (stats && stats.length > 0) {
-        const time = stats[0].time
-        if (time) {
-          const lastGame = new Date(time)
-          const now = new Date(Date.now())
-          if (now.getTime() - lastGame.getTime() > CRON_ELO_DECAY_DELAY) {
-            logger.info(
-              `User ${u.displayName} (${u.elo}) will decay to ${decay}`
-            )
-            u.elo = decay
-            await u.save()
-          }
-        }
-      } else {
-        logger.info(`User ${u.displayName} (${u.elo}) will decay to ${decay}`)
-        u.elo = decay
+
+      const shouldDecay =
+        stats.length < 3 || Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
+
+      if (shouldDecay) {
+        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(u.elo - 10)
+        logger.info(
+          `User ${u.displayName} (${u.elo}) will decay to ${eloAfterDecay}`
+        )
+        u.elo = eloAfterDecay
         await u.save()
       }
     }

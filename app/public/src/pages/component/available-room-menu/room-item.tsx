@@ -88,7 +88,7 @@ export default function RoomItem(props: {
         <img
           alt={t("smeargle_scribble")}
           title={t("smeargle_scribble_hint")}
-          className="scribble icon"
+          className="scribble gamemode icon"
           src="/assets/ui/scribble.png"
         />
       )}
@@ -97,7 +97,7 @@ export default function RoomItem(props: {
           <img
             alt={t("no_elo")}
             title={t("no_elo")}
-            className="noelo icon"
+            className="noelo gamemode icon"
             src="/assets/ui/noelo.png"
           />
         )}
@@ -105,7 +105,7 @@ export default function RoomItem(props: {
         <img
           alt={t("quick_play")}
           title={t("quick_play_hint")}
-          className="quickplay icon"
+          className="quickplay gamemode icon"
           src="/assets/ui/quickplay.png"
         />
       )}
