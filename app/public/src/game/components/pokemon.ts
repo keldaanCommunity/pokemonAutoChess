@@ -392,6 +392,7 @@ export default class PokemonSprite extends DraggableObject {
       this.stars,
       getPokemonData(this.name as Pkm).stages,
       this.evolution,
+      this.itemsContainer.items,
       this.inBattle
     )
     this.detail

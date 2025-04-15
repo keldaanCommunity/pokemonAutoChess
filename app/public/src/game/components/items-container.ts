@@ -9,6 +9,7 @@ import { DEPTH } from "../depths"
 export default class ItemsContainer extends GameObjects.Container {
   pokemonId: string | null
   playerId: string
+  items: Item[] = []
 
   constructor(
     scene: Phaser.Scene,
@@ -34,7 +35,9 @@ export default class ItemsContainer extends GameObjects.Container {
     const ITEMS_PER_COLUMN = 6
     const items = values(inventory)
 
+    this.items = []
     items.forEach((item, i) => {
+      this.items.push(item)
       const x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
       const y = (i % ITEMS_PER_COLUMN) * itemSize
       this.add(

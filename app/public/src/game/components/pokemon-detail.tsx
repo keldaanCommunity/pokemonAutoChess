@@ -13,6 +13,7 @@ import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { DishByPkm } from "../../../../core/dishes"
+import { Item } from "../../../../types/enum/Item"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
@@ -58,6 +59,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     stars: number,
     stages: number,
     evolution: Pkm,
+    items: Item[],
     inBattle: boolean
   ) {
     super(scene, x, y)
@@ -203,21 +205,30 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
-    if (name in DishByPkm) {
+    let dish = DishByPkm[this.name]
+    if (!dish && types.has(Synergy.GOURMET)) {
+      if (items.includes(Item.COOKING_POT)) {
+        dish = Item.HEARTY_STEW
+      } else {
+        dish = Item.SANDWICH
+      }
+    }
+
+    if (dish) {
       const pokemonDish = document.createElement("div")
       pokemonDish.className = "game-pokemon-detail-dish"
       ReactDOM.createRoot(pokemonDish).render(<>
         <div className="game-pokemon-detail-dish-name">
-          <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${DishByPkm[name]}`)}
+          <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
         </div>
         <img
-          src={`assets/item/${DishByPkm[name]}.png`}
+          src={`assets/item/${dish}.png`}
           className="game-pokemon-detail-dish-icon"
-          alt={DishByPkm[name]}
-          title={t(`item.${DishByPkm[name]}`)}
+          alt={dish}
+          title={t(`item.${dish}`)}
         />
         <p>
-          {addIconsToDescription(t(`item_description.${DishByPkm[name]}`))}
+          {addIconsToDescription(t(`item_description.${dish}`))}
         </p>
       </>)
       wrap.appendChild(pokemonDish)
