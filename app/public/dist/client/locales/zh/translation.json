@@ -1793,7 +1793,7 @@
     "GLAIVE_RUSH": "有勇无谋的舍身突击，突进至敌方后排，对与使用者处于同一纵列上的所有敌方宝可梦造成[50,100,200,SP]点SPECIAL，然后自身陷入ARMOR_BREAK 6秒。",
     "FOUL_PLAY": "对目标造成SPECIAL，数值相当于[2,4,6,SP,ND=1]乘以目标的ATK。",
     "DOUBLE_IRON_BASH": "以胸口的螺帽为中心旋转，并连续两次挥动手臂打击目标，每次造成PHYSICAL，数值相当于[150,SP]%的ATK。目标陷入FLINCH 3秒。",
-    "STONE_EDGE": "使用者陷入SILENCE [5,8]秒，并提升2点RANGE和[20,SP]点CRIT_CHANCE，且每次攻击额外造成PHYSICAL，数值相当于使用者[50,SP]%的DEF。",
+    "STONE_EDGE": "使用者陷入SILENCE [5,8]秒，并提升2点RANGE和[20,SP]点CRIT_CHANCE，且每次攻击额外造成PHYSICAL，数值相当于使用者[100,SP]%的DEF。",
     "ROAR": "吹飞目标。若其撞上墙壁，受到[20,40,80,SP]点SPECIAL；若撞上其他宝可梦，双方一起受到此伤害。",
     "INFESTATION": "对目标造成SPECIAL，数值相当于[10,SP]乘以场上的我方BUG宝可梦数量。每场战斗限一次，从我方备战区将最强的BUG宝可梦加入战场。",
     "IVY_CUDGEL": "对目标造成[100,SP]点SPECIAL。",

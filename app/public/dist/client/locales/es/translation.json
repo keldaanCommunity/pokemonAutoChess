@@ -1694,7 +1694,7 @@
     "GLAIVE_RUSH": "El usuario embiste de forma temeraria con todo el cuerpo hacía la retaguardia enemiga, infligiendo [50,100,200,SP] SPECIAL a todos los enemigos en la columna. El usuario entonces recibe ARMOR_BREAK por 6 segundos.",
     "FOUL_PLAY": "Inflige [2,4,6,SP,ND=1] x el ATK del objetivo como SPECIAL al objetivo.",
     "DOUBLE_IRON_BASH": "Usando la tuerca del pecho como eje, gira sobre si mismo y golpea con los brazos dos veces seguidas por un [150,SP]% de su ATK. Esto causa que el objetivo FLINCH por 3 segundos.",
-    "STONE_EDGE": "Por [5,8] segundos, inflige al usuario con SILENCE, obtiene 2 RANGE, [20,SP] CRIT_CHANCE y aplica [50,SP]% de su DEF como PHYSICAL en sus ataques.",
+    "STONE_EDGE": "Por [5,8] segundos, inflige al usuario con SILENCE, obtiene 2 RANGE, [20,SP] CRIT_CHANCE y aplica [100,SP]% de su DEF como PHYSICAL en sus ataques.",
     "ROAR": "Aleja al objetivo. Si este golpea una pared, le inflige [20,40,80,SP] SPECIAL. Si chocan con otro Pokémon, a ambos se les realiza SPECIAL.",
     "INFESTATION": "Inflige [10,SP] SPECIAL al objetivo por cada pokémon BUG aliado en el campo y mueve al pokémon BUG más poderoso en la banca del jugador aliado al campo.",
     "IVY_CUDGEL": "Inflige [100,SP] SPECIAL al objetivo.",
