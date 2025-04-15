@@ -403,8 +403,9 @@ export const PROJECTILE_SPEED = 4
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 23, // adjusted for treasure town theme
-  1: 30,
-  3: 40,
+  1: 20,
+  2: 20,
+  3: 20,
   5: 40,
   8: 40,
   9: 40,
