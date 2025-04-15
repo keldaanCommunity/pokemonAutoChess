@@ -3559,12 +3559,12 @@ export class FickleBeamStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)
 
     let numberOfBeam = 0
-    for (let i = 0; i < highestSpeedEnemies.length; i++) {
+    for (let i = 0; i < 4; i++) {
       chance(0.6, pokemon) && numberOfBeam++
     }
 
     for (let i = 0; i < numberOfBeam; i++) {
-      const enemy = highestSpeedEnemies[i]
+      const enemy = highestSpeedEnemies[i % highestSpeedEnemies.length]
       if (enemy) {
         enemy.handleSpecialDamage(
           damage,
