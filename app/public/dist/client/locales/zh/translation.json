@@ -2570,7 +2570,7 @@
     "ALIEN_DNA": "$t(pkm.DEOXYS)会因为METEORITE而改变形态。",
     "BERRY_EATER": "每当此宝可梦攻击目标时，偷取目标所有树果并食用之。",
     "TOXIC_BOOST": "此宝可梦受到的中毒伤害降低50%，且处于POISONNED时提升10点ATK。",
-    "GUZZLORD": "恶食大王太重又太贪吃了，无法像其他DARK宝可梦一样跳远，也不会在携带CHEF_HAT时为其他宝可梦制作料理。若携带CHEF_HAT，则击倒宝可梦时永久提升4点AP。",
+    "GUZZLORD": "恶食大王太重又太贪吃了，无法像其他DARK宝可梦一样跳远，也不会在携带CHEF_HAT时为其他宝可梦制作料理。若携带CHEF_HAT，则击倒宝可梦时永久提升5点AP 10 HP。",
     "ENVIRONMENTAL_ADAPTATION": "此宝可梦根据其所处地区更换其共鸣。",
     "MOTHIM": "绅士蛾也根据本地结草儿的形态获得额外的共鸣。",
     "PSYDUCK": "受到攻击时有[10,LK]%的概率陷入CONFUSION。此宝可梦每次陷入CONFUSION时，提升100点AP。",

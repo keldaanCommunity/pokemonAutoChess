@@ -2570,7 +2570,7 @@
     "ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
     "BERRY_EATER": "When the Pokémon attacks a target, he steals all its berries and eats them",
     "TOXIC_BOOST": "The Pokémon takes 50% less poison damage and gains 10 ATK as long as it is POISONNED",
-    "GUZZLORD": "Guzzlord is too heavy to jump and too gluttonous to cook for others. When holding CHEF_HAT, gain 4 permanent AP for every KO.",
+    "GUZZLORD": "Guzzlord is too heavy to jump and too gluttonous to cook for others. When holding CHEF_HAT, gain 10 permanent max HP and 5 permanent AP for every KO.",
     "ENVIRONMENTAL_ADAPTATION": "This Pokémon adapted its synergies to its region",
     "MOTHIM": "Mothim gets the synergies of your regional Burmy form",
     "PSYDUCK": "Has [10,LK]% chance to get CONFUSION when taking a hit. Every time it gets CONFUSION, gain 100 AP",

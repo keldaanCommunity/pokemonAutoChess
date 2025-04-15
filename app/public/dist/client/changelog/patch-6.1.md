@@ -53,7 +53,7 @@
     - Sweet Herb 50 → 80 AP
     - Leek: 30% crit chance → 50% crit chance
     - Large Leek: 30% crit power → 100% crit power
-    - Guzzlord: when holding Chef's Hat, gain 4 → 5 permanent AP for every KO
+    - Guzzlord: when holding Chef's Hat, gain 4 → 5 permanent AP and 10 permanent max HP for every KO
     - Clover Sweet: 5% luck → 10% luck
 - New artificial item: Cooking Pot: Gives Gourmet synergy. When burned, the Cooking Pot is heated little by little which gives 10 Speed per second.
 - New artificial item: Max elixir: Restores 100% of max PP 1 second after the first ability cast.
