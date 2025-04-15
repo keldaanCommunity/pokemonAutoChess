@@ -20,6 +20,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Pool size for regular Common: 29 → 27
 - Alcremie now consumes its flavor when evolving
 - Starly line is now Common regional
 - Pidget line is now regional. It will be replaced by Starly line or Pidove line depending on the region.

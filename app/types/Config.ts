@@ -182,7 +182,7 @@ export const EvolutionTime = {
 }
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
-  [Rarity.COMMON]: [1, 18, 29],
+  [Rarity.COMMON]: [1, 18, 27],
   [Rarity.UNCOMMON]: [1, 13, 22],
   [Rarity.RARE]: [1, 9, 18],
   [Rarity.EPIC]: [1, 7, 14],
