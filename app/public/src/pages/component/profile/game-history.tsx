@@ -13,6 +13,7 @@ import { formatDate } from "../../utils/date"
 import Team from "../after/team"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
+import { GameMode } from "../../../../../types/enum/Game"
 import "./game-history.css"
 
 export default function GameHistory(props: { uid: string, onUpdate?: (history: IGameRecord[]) => void }) {
@@ -73,6 +74,30 @@ export default function GameHistory(props: { uid: string, onUpdate?: (history: I
           gameHistory.map((r) => (
             <div key={r.time} className="my-box game-history">
               <span className="top">
+                {r.gameMode === GameMode.QUICKPLAY && (
+                  <img
+                    alt={t("quick_play")}
+                    title={t("quick_play")}
+                    className="quickplay gamemode icon"
+                    src="/assets/ui/quickplay.png"
+                  />
+                )}
+                {r.gameMode === GameMode.RANKED && (
+                  <img
+                    alt={t("ranked_match")}
+                    title={t("ranked_match")}
+                    className="ranked gamemode icon"
+                    src="/assets/ui/ranked.png"
+                  />
+                )}
+                {r.gameMode === GameMode.SCRIBBLE && (
+                  <img
+                    alt={t("smeargle_scribble")}
+                    title={t("smeargle_scribble")}
+                    className="scribble gamemode icon"
+                    src="/assets/ui/scribble.png"
+                  />
+                )}
                 {t("top")} {r.rank}
               </span>
               <EloBadge elo={r.elo} />

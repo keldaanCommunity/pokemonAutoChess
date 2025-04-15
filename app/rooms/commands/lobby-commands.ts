@@ -43,6 +43,7 @@ import {
   BoosterRarityProbability,
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
+  EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
   getEmotionCost
 } from "../../types/Config"
@@ -1048,34 +1049,41 @@ export class JoinOrOpenRoomCommand extends Command<
           case EloRank.LEVEL_BALL:
           case EloRank.NET_BALL:
             minRank = EloRank.LEVEL_BALL
-            maxRank = EloRank.NET_BALL
+            maxRank = EloRank.SAFARI_BALL
             break
           case EloRank.SAFARI_BALL:
           case EloRank.LOVE_BALL:
           case EloRank.PREMIER_BALL:
-            minRank = EloRank.SAFARI_BALL
-            maxRank = EloRank.PREMIER_BALL
+            minRank = EloRank.NET_BALL
+            maxRank = EloRank.QUICK_BALL
             break
           case EloRank.QUICK_BALL:
           case EloRank.POKE_BALL:
           case EloRank.SUPER_BALL:
-            minRank = EloRank.QUICK_BALL
-            maxRank = EloRank.SUPER_BALL
+            minRank = EloRank.PREMIER_BALL
+            maxRank = EloRank.ULTRA_BALL
             break
           case EloRank.ULTRA_BALL:
           case EloRank.MASTER_BALL:
           case EloRank.BEAST_BALL:
-            minRank = EloRank.ULTRA_BALL
+            minRank = EloRank.SUPER_BALL
             maxRank = EloRank.BEAST_BALL
             break
         }
-        const existingRanked = this.room.rooms?.find(
-          (room) =>
+        const existingRanked = this.room.rooms?.find((room) => {
+          const { minRank, maxRank, gameMode } = room.metadata ?? {}
+          const minElo = minRank ? EloRankThreshold[minRank] : 0
+          const maxRankThreshold = maxRank
+            ? EloRankThreshold[maxRank]
+            : Infinity
+          return (
             room.name === "preparation" &&
-            room.metadata?.gameMode === GameMode.RANKED &&
-            room.metadata?.minRank === minRank &&
+            gameMode === GameMode.RANKED &&
+            user.elo >= minElo &&
+            (user.elo <= maxRankThreshold || userRank === maxRank) &&
             room.clients < MAX_PLAYERS_PER_GAME
-        )
+          )
+        })
         if (existingRanked) {
           client.send(Transfer.REQUEST_ROOM, existingRanked.roomId)
         } else {

@@ -278,7 +278,7 @@ export default config({
 
       const stats = await DetailledStatistic.find(
         { playerId: playerUid },
-        ["pokemons", "time", "rank", "elo"],
+        ["pokemons", "time", "rank", "elo", "gameMode"],
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
       if (stats) {
@@ -288,7 +288,8 @@ export default config({
               record.time,
               record.rank,
               record.elo,
-              record.pokemons
+              record.pokemons,
+              record.gameMode
             )
         )
 
