@@ -404,12 +404,16 @@ export default class GameScene extends Scene {
         this.room?.state.phase === GamePhaseState.TOWN &&
         !this.spectate
       ) {
-        const vector = this.minigameManager.getVector(pointer.x, pointer.y)
+        // compute actual x/y coordinates after taking into account camera scroll and zoom
+        const camera = this.cameras.main
+        const x = camera.worldView.left + pointer.x / camera.zoom
+        const y = camera.worldView.top + pointer.y / camera.zoom
+        const vector = this.minigameManager.getVector(x, y)
         this.room?.send(Transfer.VECTOR, vector)
 
         const clickAnimation = this.add.sprite(
-          pointer.x,
-          pointer.y,
+          x,
+          y,
           "attacks",
           `WATER/cell/000.png`
         )
@@ -417,8 +421,8 @@ export default class GameScene extends Scene {
         clickAnimation.anims.play("WATER/cell")
         this.tweens.add({
           targets: clickAnimation,
-          x: pointer.x,
-          y: pointer.y,
+          x,
+          y,
           ease: "linear",
           yoyo: true,
           duration: 200,
