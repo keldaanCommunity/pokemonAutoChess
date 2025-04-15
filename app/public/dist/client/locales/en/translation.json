@@ -2068,7 +2068,7 @@
     "LINK_CABLE": "Gain +6% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "GOOGLE_SPECS": "Gain +12% base ATK, AP and max HP as SHIELD per held item. Get another artificial item.",
     "HATCHER": "Each BABY has [10,LK]% chance to find an Egg.",
-    "BREEDER": "Get at least one Egg after each defeat against a player",
+    "BREEDER": "Get at least one Egg after each defeat against a player. Eggs hatch 2 stages faster.",
     "GOLDEN_EGGS": "Each BABY has [5,LK]% chance to find a Golden Egg (max 1 on bench). Golden eggs can be sold for 10 GOLD or give a shiny item when hatched.",
     "GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",
     "PSYCHIC_TERRAIN": "Increase damage dealt by 20% (Psychic only)",

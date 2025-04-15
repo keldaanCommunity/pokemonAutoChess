@@ -40,7 +40,8 @@
 
 # Changes to Synergies
 
-- Monster 8 (Merciless): Monsters always target the lowest health unit and can target allies with less than 10% of their max HP
+- Buff Monster 8 (Merciless): Monsters always target the lowest health unit and can target allies with less than 10% of their max HP
+- Buff Baby 5 (Breeder): Eggs hatch 2 stages faster
 
 # Changes to Items
 
