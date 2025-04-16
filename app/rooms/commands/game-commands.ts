@@ -30,6 +30,7 @@ import {
   AdditionalPicksStages,
   BOARD_SIDE_HEIGHT,
   BOARD_WIDTH,
+  EvolutionTime,
   FIGHTING_PHASE_DURATION,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
@@ -1915,9 +1916,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     for (let i = 0; i < nbEggsFound; i++) {
       if (getFreeSpaceOnBench(player.board) === 0) continue
+      const hatchTime =
+        player.effects.has(Effect.BREEDER) ||
+        player.effects.has(Effect.GOLDEN_EGGS)
+          ? EvolutionTime.EGG_HATCH - 2
+          : EvolutionTime.EGG_HATCH
       const isGoldenEgg =
         goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
-      giveRandomEgg(player, isGoldenEgg)
+      giveRandomEgg(player, isGoldenEgg, hatchTime)
       if (player.effects.has(Effect.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
       }
