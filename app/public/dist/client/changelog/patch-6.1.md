@@ -80,6 +80,7 @@
 
 - Fossil Pokémon no longer regain their fossil resurrection effect after being revived with Sacred Ash
 - Fix Porygon getting the spotlight effect when holding Light ball outside of the spotlight
+- Permanent stats debuffs are now carried over evolution
 
 # Misc
 

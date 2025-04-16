@@ -326,12 +326,10 @@ export function carryOverPermanentStats(
   const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
   const baseData = new PokemonClasses[pokemonsBeforeEvolution[0].name]()
   for (const stat of permanentBuffStats) {
-    const statStacked = sum(
+    const sumOfPermaStatsModifier = sum(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
     )
-    if (statStacked > 0) {
-      pokemonEvolved[stat] += statStacked
-    }
+    pokemonEvolved[stat] += sumOfPermaStatsModifier // can be negative or positive
   }
 
   // carry over TM
