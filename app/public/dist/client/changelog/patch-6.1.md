@@ -20,12 +20,13 @@
 
 # Changes to Pokemon & Abilities
 
+- Pool size for regular Common: 29 → 27
 - Alcremie now consumes its flavor when evolving
 - Starly line is now Common regional
 - Pidget line is now regional. It will be replaced by Starly line or Pidove line depending on the region.
 - Torterra line gains the Monster type ; New ability: Bulldoze
 - Change Fillet Away: sacrify 50% of current ~~HP~~ **max HP** and now flee away with a 400ms protect status ; PP 80 → 100
-- Nerf Nuzzle (Pichu line): damage 30/60/120 → 25/50/100
+- Nerf Nuzzle (Pichu line): damage 30/60/120 → 20/40/80
 - Buff Blastoise: Attack 19 → 20, HP 190 → 200
 - Buff Outrage (Axew, Druddigon): damage 100/150/200% Attack → 150/200/250% Attack
 - Nerf Tapu Koko: Range 3 → 2 ; Electric Surge now excludes Tapu Koko from its effect
@@ -36,10 +37,16 @@
 - Stealth Rock and Stone axe board effect now also damage Flying Pokémon
 - Magma Storm (Heatran) now propagates to several allies at a time. Reduced propagation time: 500ms → 250ms
 - Nerf Thunder (Zapdos): damage 30/60/120 → 25/50/100
+- Nerf Grubbin line: HP: 80/140/190 → 75/130/180 ; Attack: 6/14/27 → 5/13/24 ; PP 80 → 100
+- Change Bounce (Mantyke, Spoink): number of bounces no longer scale with AP; Damage: 10 → 10/20/40 ; bounce duration: 400ms → 500ms
+- Buff Chingling line: Def 4/6 → 7/10
+- Buff Stone Edge (Binacle): 50 → 100% of its Defense gained as physical damage on attack
 
 # Changes to Synergies
 
-- Monster 8 (Merciless): Monsters always target the lowest health unit and can target allies with less than 10% of their max HP
+- Buff Monster 8 (Merciless): Monsters always target the lowest health unit and can target allies with less than 10% of their max HP
+- Buff Baby 5 (Breeder): Eggs hatch 2 stages faster
+- Partially revert Dark 5.9 nerf: crit power +30/40/50% → +30/60/100%
 
 # Changes to Items
 
@@ -52,7 +59,7 @@
     - Sweet Herb 50 → 80 AP
     - Leek: 30% crit chance → 50% crit chance
     - Large Leek: 30% crit power → 100% crit power
-    - Guzzlord: when holding Chef's Hat, gain 4 → 5 permanent AP for every KO
+    - Guzzlord: when holding Chef's Hat, gain 4 → 5 permanent AP and 10 permanent max HP for every KO
     - Clover Sweet: 5% luck → 10% luck
 - New artificial item: Cooking Pot: Gives Gourmet synergy. When burned, the Cooking Pot is heated little by little which gives 10 Speed per second.
 - New artificial item: Max elixir: Restores 100% of max PP 1 second after the first ability cast.

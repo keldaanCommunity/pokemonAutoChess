@@ -1994,7 +1994,7 @@ export class NuzzleStrategy extends AbilityStrategy {
     target = destination?.target ?? target
     super.process(pokemon, state, board, target, crit)
 
-    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const duration = 3000
 
     if (destination) {
@@ -9505,11 +9505,7 @@ export class BounceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const nbBounces = Math.round(
-      [1, 2, 3][pokemon.stars - 1] *
-        (1 + pokemon.ap / 100) *
-        (crit ? pokemon.critPower : 1)
-    )
+    const nbBounces = [1, 2, 3][pokemon.stars - 1] ?? 3
     for (let i = 0; i < nbBounces; i++) {
       pokemon.commands.push(
         new DelayedCommand(() => {
@@ -9524,7 +9520,7 @@ export class BounceStrategy extends AbilityStrategy {
             )
             adjacentCells.forEach((cell) => {
               if (cell.value && cell.value.team !== pokemon.team) {
-                const damage = 10
+                const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
                 cell.value.handleSpecialDamage(
                   damage,
                   board,
@@ -9535,7 +9531,7 @@ export class BounceStrategy extends AbilityStrategy {
               }
             })
           }
-        }, i * 400)
+        }, i * 500)
       )
     }
   }

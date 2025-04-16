@@ -1641,6 +1641,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.passive === Passive.GUZZLORD && this.items.has(Item.CHEF_HAT)) {
       this.addAbilityPower(5, this, 0, false, true)
+      this.addMaxHP(10, this, 0, false, true)
     }
 
     if (
