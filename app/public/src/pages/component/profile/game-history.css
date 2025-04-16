@@ -54,7 +54,7 @@
 
 .game-history .date {
   grid-area: date;
-  color: gray;
+  color: #ccc;
   font-size: 0.8em;
   margin: 0;
 }
