@@ -132,6 +132,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         if (effect instanceof SoulDewEffect) {
           pokemon.addAbilityPower(-10 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
+          pokemon.count.soulDewCount = 0
           break
         }
       }
