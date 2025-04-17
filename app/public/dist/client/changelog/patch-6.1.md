@@ -85,13 +85,14 @@
 # Misc
 
 - Elo decay rules have to be reinforced to prevent elo sitting: **Elo decay now happens if not playing at least 3 games over the last 15 days. Starting from Ultra Ball rank, these games must be Ranked games to count.**. This change will apply from May 5th.
-- Stage 1, 2 and 3 preparation phase duration reduced to 20 seconds
 - Ranked games minimum and maximum ranks have been extended by 1 rank to allow more players to join and reduce the time it takes to form a ranked lobby
+- Inactivity timeout in lobby room increased to 30 minutes
+- In games with an odd number of players, elo losses for the player in the middle rank are now reduced by 50%. That is: 4th in a 7 players lobby, 3rd in a 5 players lobby, 2nd in a 3 players lobby. Elo gains are not reduced. 
+- Stage 1, 2 and 3 preparation phase duration reduced to 20 seconds
 - Regions types changed to add some for Gourmet
 - New title: Chef: Max synergy with Gourmet type in a game
-- Do it all yourself scribble pendalties balance adjusted for Hatch & Special avatars
+- Do it all yourself scribble penalties balance adjusted for Hatch & Special avatars
 - Regional pokemons sold in a region other than their original region are not added back to the pool
-- Inactivity timeout in lobby room increased to 30 minutes
 - All board actions are no longer possible after player is eliminated
 - Blood money scribble no longer gives 1 gold for eliminating a clone or a spawn
 
