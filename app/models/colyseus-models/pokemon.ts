@@ -7091,10 +7091,10 @@ export class RoaringMoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.DARK, Synergy.FOSSIL])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 280
+  hp = 200
   atk = 25
   speed = 61
-  def = 9
+  def = 6
   speDef = 9
   maxPP = 140
   range = 3
