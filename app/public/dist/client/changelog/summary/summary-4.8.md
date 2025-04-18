@@ -36,4 +36,6 @@ Wild pokemons can initially be only found during PvE stages, but they will attra
 
 After 35 seconds of fight, units get the status Enraged, increasing a lot their damage and reducing their defense. This should prevent too many ties between two defensive compositions.
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1210882481172127794) !

@@ -21,4 +21,6 @@ Field has also been reworked to heal flat HP instead of percentage of max HP.
 
 ## New Abilities
 
+---
+
 Checkout the new abilities for Litwick, Turtwig, Tauros, Diglett and Hitmonchan !

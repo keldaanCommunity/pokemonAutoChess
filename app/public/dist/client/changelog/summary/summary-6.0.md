@@ -39,4 +39,6 @@ Attack speed, move speed and ability cooldown have all been merged into a single
 
 Also, defense and special defense numbers have all been doubled, with the damage reduction formula adjusted so that it doesn't have any impact but allow finer tweaks to the def/spedef numbers of each Pokemon and effect in the game.
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752) !

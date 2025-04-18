@@ -27,4 +27,6 @@
 
 Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1132756077662961666)

@@ -23,4 +23,6 @@ Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don
 - Many Psychic abilities have been reworked
 - New abilities for all mons that only had a passive effect
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)

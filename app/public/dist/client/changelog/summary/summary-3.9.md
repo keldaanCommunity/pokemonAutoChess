@@ -26,4 +26,6 @@ Welcome also the other newcomers !
 You can now see your player avatar on the side of the board
 You can also communicates with others through emotes
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)
