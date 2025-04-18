@@ -27,17 +27,30 @@ export function computeElo(
   })
   //logger.debug("elo gains", eloGains)
 
-  let meanGain = min(0)(Math.floor(average(...eloGains)))
+  let newElo = min(0)(Math.floor(average(...eloGains)))
   //logger.debug("mean gain", meanGain)
-  if (rank <= Math.floor(players.length / 2) && meanGain < previousElo) {
-    meanGain = previousElo // ensure to not lose ELO if you're on the upper part of the ranking
+  if (rank <= Math.floor(players.length / 2) && newElo < previousElo) {
+    newElo = previousElo // ensure to not lose ELO if you're on the upper part of the ranking
   }
   if (rank === 1 && gameMode === GameMode.RANKED) {
-    meanGain = min(previousElo + 1)(meanGain) // ensure you get minimum +1 if finishing first
+    newElo = min(previousElo + 1)(newElo) // ensure you get minimum +1 if finishing first
+  }
+
+  if (
+    players.length % 2 === 1 &&
+    rank === Math.floor(players.length / 2) + 1 &&
+    newElo < previousElo
+  ) {
+    /*
+    In games with an odd number of players, elo losses for the player in the middle rank are now reduced by 50%. 
+    Elo gains are not reduced. That is: 4th in a 7 players lobby, 3rd in a 5 players lobby, 2nd in a 3 players lobby.
+    */
+    const loss = previousElo - newElo
+    newElo = previousElo - Math.ceil(loss / 2)
   }
 
   // logger.info(
   //   `${player.name} (was ${previousElo}) will be ${meanGain} (${rank})`
   // )
-  return meanGain
+  return newElo
 }
