@@ -306,7 +306,7 @@ export class Egg extends Pokemon {
   skill = Ability.DEFAULT
   passive = Passive.EGG
   attackSprite = AttackSprite.NORMAL_MELEE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EGG_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   canHoldItems = false
 }
 
@@ -1107,7 +1107,7 @@ export class Tympole extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PALPITOAD
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 80
   atk = 7
   speed = 49
@@ -1129,7 +1129,7 @@ export class Palpitoad extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.SEISMITOAD
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 130
   atk = 16
   speed = 49
@@ -2423,7 +2423,7 @@ export class AlolanMarowak extends Pokemon {
 export class Axew extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON])
   rarity = Rarity.HATCH
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   stars = 1
   evolution = Pkm.FRAXURE
   hp = 80
@@ -2441,7 +2441,7 @@ export class Axew extends Pokemon {
 export class Fraxure extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON])
   rarity = Rarity.HATCH
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   stars = 2
   evolution = Pkm.HAXORUS
   hp = 130
@@ -4360,7 +4360,7 @@ export class Bellsprout extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.WEEPINBELL
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 70
   atk = 6
   speed = 47
@@ -4378,7 +4378,7 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VICTREEBEL
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 160
   atk = 12
   speed = 47
@@ -10283,7 +10283,7 @@ export class Dreepy extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.DRAKLOAK
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 90
   atk = 5
   speed = 71
@@ -10301,7 +10301,7 @@ export class Drakloak extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.DRAGAPULT
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 140
   atk = 12
   speed = 71
@@ -10334,7 +10334,7 @@ export class Snivy extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.SERVINE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 90
   atk = 4
   speed = 61
@@ -10352,7 +10352,7 @@ export class Servine extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.SERPERIOR
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 160
   atk = 11
   speed = 61
@@ -10444,7 +10444,7 @@ export class Scorbunny extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.RABOOT
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 75
   atk = 5
   speed = 63
@@ -10462,7 +10462,7 @@ export class Raboot extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.CINDERACE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 130
   atk = 10
   speed = 63
@@ -10557,7 +10557,7 @@ export class Popplio extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.BRIONNE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 65
   atk = 5
   speed = 44
@@ -10575,7 +10575,7 @@ export class Brionne extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.PRIMARINA
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 130
   atk = 10
   speed = 44
@@ -10608,7 +10608,7 @@ export class Gothita extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.GOTHORITA
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 70
   atk = 5
   speed = 46
@@ -10626,7 +10626,7 @@ export class Gothorita extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.GOTHITELLE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 120
   atk = 12
   speed = 46
@@ -11391,7 +11391,7 @@ export class Rowlet extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.DARTIX
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 70
   atk = 5
   speed = 47
@@ -11409,7 +11409,7 @@ export class Dartix extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.DECIDUEYE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 130
   atk = 9
   speed = 47
@@ -11690,7 +11690,7 @@ export class Froakie extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.FROGADIER
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 80
   atk = 6
   speed = 64
@@ -11708,7 +11708,7 @@ export class Frogadier extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.GRENINJA
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 140
   atk = 12
   speed = 64
@@ -11994,7 +11994,7 @@ export class Tepig extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.PIGNITE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 70
   atk = 7
   speed = 46
@@ -12012,7 +12012,7 @@ export class Pignite extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.EMBOAR
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 140
   atk = 12
   speed = 46
@@ -15496,7 +15496,7 @@ export class Grubbin extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.CHARJABUG
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 75
   atk = 5
   speed = 39
@@ -15514,7 +15514,7 @@ export class Charjabug extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.VIKAVOLT
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 130
   atk = 13
   speed = 39
@@ -16184,7 +16184,7 @@ export class Sandile extends Pokemon {
   rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.KROKOROK
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 80
   atk = 6
   speed = 54
@@ -16206,7 +16206,7 @@ export class Krokorok extends Pokemon {
   rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.KROOKODILE
-  evolutionRule = new HatchEvolutionRule(EvolutionTime.EVOLVE_HATCH)
+  evolutionRule = new HatchEvolutionRule()
   hp = 150
   atk = 12
   speed = 54

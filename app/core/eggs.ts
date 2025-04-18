@@ -13,7 +13,7 @@ export function createRandomEgg(player: Player, shiny: boolean): Egg {
   const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
     (p) => getPokemonData(p).stars === 1
   )
-  const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, { shiny })
+  const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, { shiny }) as Egg
   egg.action = PokemonActionState.SLEEP
 
   if (player) {
@@ -31,18 +31,14 @@ export function createRandomEgg(player: Player, shiny: boolean): Egg {
   return egg as Egg
 }
 
-export function giveRandomEgg(
-  player: Player,
-  shiny = false,
-  hatchTimer = EvolutionTime.EGG_HATCH
-) {
+export function giveRandomEgg(player: Player, shiny = false): Egg | undefined {
   const egg = createRandomEgg(player, shiny)
 
   const x = getFirstAvailablePositionInBench(player.board)
   if (x !== undefined) {
     egg.positionX = x
     egg.positionY = 0
-    egg.evolutionRule.evolutionTimer = hatchTimer
     player.board.set(egg.id, egg)
+    return egg
   }
 }

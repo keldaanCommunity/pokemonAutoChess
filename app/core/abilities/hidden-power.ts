@@ -15,6 +15,8 @@ import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { giveRandomEgg } from "../eggs"
+import { EvolutionTime } from "../../types/Config"
+import { Effect } from "../../types/enum/Effect"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -131,7 +133,10 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, state, board, target, crit)
     if (!unown.isGhostOpponent && unown.player) {
-      giveRandomEgg(unown.player, false, 1)
+      const egg = giveRandomEgg(unown.player, false)
+      if (!egg) return
+      egg.evolutionRule.evolutionTimer =
+        egg.evolutionRule.getHatchTime(egg, unown.player) - 1
     }
   }
 }

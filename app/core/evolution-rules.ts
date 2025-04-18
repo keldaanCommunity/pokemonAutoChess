@@ -4,6 +4,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { IPlayer } from "../types"
 import { EvolutionTime } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
+import { Effect } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { Item, ItemComponents, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -243,42 +244,51 @@ export class ItemEvolutionRule extends EvolutionRule {
 
 export class HatchEvolutionRule extends EvolutionRule {
   evolutionTimer: number
-  constructor(
-    roundsRequired = EvolutionTime.EVOLVE_HATCH,
-    divergentEvolution?: DivergentEvolution
-  ) {
+  constructor(divergentEvolution?: DivergentEvolution) {
     super(divergentEvolution)
-    this.evolutionTimer = roundsRequired
+    this.evolutionTimer = 0
+  }
+
+  getHatchTime(pokemon: Pokemon, player: Player): number {
+    if (pokemon.name === Pkm.EGG) {
+      return player.effects.has(Effect.BREEDER) ||
+        player.effects.has(Effect.GOLDEN_EGGS)
+        ? EvolutionTime.EGG_HATCH - 1
+        : EvolutionTime.EGG_HATCH
+    }
+    return EvolutionTime.EVOLVE_HATCH
   }
 
   updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
-    this.evolutionTimer -= 1
+    this.evolutionTimer += 1
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
-      // setTimeout(() => {
-      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
-      if (pokemon.name === Pkm.EGG && pokemon.shiny) {
-        player.items.push(pickRandomIn(ShinyItems))
-      }
-      // }, 2000)
+      setTimeout(() => {
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+        if (pokemon.name === Pkm.EGG && pokemon.shiny) {
+          player.items.push(pickRandomIn(ShinyItems))
+        }
+      }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
-      pokemon.action =
-        [
-          PokemonActionState.HOP,
-          PokemonActionState.EMOTE,
-          PokemonActionState.IDLE
-        ][this.evolutionTimer] ?? PokemonActionState.IDLE
+      const hatchTime = this.getHatchTime(pokemon, player)
+      if (this.evolutionTimer >= hatchTime) {
+        pokemon.action = PokemonActionState.HOP
+      } else if (this.evolutionTimer >= hatchTime - 1) {
+        pokemon.action = PokemonActionState.EMOTE
+      } else {
+        pokemon.action = PokemonActionState.IDLE
+      }
     }
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
-    return this.evolutionTimer === 0
+    return this.evolutionTimer >= this.getHatchTime(pokemon, player)
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    this.evolutionTimer = EvolutionTime.EVOLVE_HATCH // prevent trying to evolve twice in a row
+    this.evolutionTimer = 0 // prevent trying to evolve twice in a row
     const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
