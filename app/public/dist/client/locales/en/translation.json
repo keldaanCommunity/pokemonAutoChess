@@ -2758,7 +2758,7 @@
     "HUMAN": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs and HMs.",
     "AQUATIC": "AQUATIC Pokémon reduce the duration of status afflictions for all your team. After 8 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies.",
     "BUG": "At the start of combat, your strongest BUG Pokémon are cloned.",
-    "FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE or SLEEP.",
+    "FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",
     "FLORA": "When the first FLORA Pokémon is KO'd, a flower blossoms. The new Pokémon receives one random item from each FLORA ally KO'd.",
     "ROCK": "ROCK Pokémon gain DEF, better resist to critical damage, and can adapt to weather.",
     "GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [20,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",

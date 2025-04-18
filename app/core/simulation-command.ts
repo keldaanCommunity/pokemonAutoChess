@@ -70,6 +70,15 @@ export class AttackCommand extends SimulationCommand {
       }
       if (isTripleAttack) {
         this.pokemon.count.tripleAttackCount++
+
+        if (this.pokemon.name === Pkm.MORPEKO) {
+          this.target.status.triggerParalysis(2000, this.target, this.pokemon)
+        }
+
+        if (this.pokemon.name === Pkm.MORPEKO_HANGRY) {
+          this.target.status.triggerWound(4000, this.target, this.pokemon)
+        }
+
         this.pokemon.state.attack(this.pokemon, this.board, this.target)
         this.pokemon.state.attack(this.pokemon, this.board, this.target)
         if (isPowerSurge) {
@@ -104,14 +113,6 @@ export class AttackCommand extends SimulationCommand {
                 }
               }
             })
-        }
-
-        if (this.pokemon.name === Pkm.MORPEKO) {
-          this.target.status.triggerParalysis(2000, this.target, this.pokemon)
-        }
-
-        if (this.pokemon.name === Pkm.MORPEKO_HANGRY) {
-          this.target.status.triggerWound(4000, this.target, this.pokemon)
         }
       }
     }
