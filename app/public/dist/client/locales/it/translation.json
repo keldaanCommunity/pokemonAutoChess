@@ -1297,7 +1297,7 @@
 		"DISARMING_VOICE": "Infligge CHARM per [1,SP] i Pokèmon nemici dentro un raggio di 2 celle.",
 		"HIGH_JUMP_KICK": "Infligge [15,30,60 SP] SPECIAL e ruba fino a 40 PP dal bersaglio.",
 		"GRASS_WHISTLE": "Infligge SLEEP [1,2,4] Pokèmon nemici per 2 secondi.",
-		"TRI_ATTACK": "Infligge [75,130,200,SP] danni speciali. Può infliggere gli status BURN, FREEZE o PARALYSIS il bersaglio",
+		"TRI_ATTACK": "Infligge [60,120,250,SP] danni speciali. Può infliggere gli status BURN, FREEZE o PARALYSIS il bersaglio",
 		"ECHO": "Infligge [3,6,9,SP] SPECIAL alla squadra Pokèmon nemica, aumentando il danno di [3,6,9,SP] ogni volta che il Pokèmon usa la sua abilità.",
 		"PETAL_DANCE": "Infligge [20,30,50,SP] SPECIAL ai [3,4,5] nemici più vicini",
 		"HYPER_VOICE": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokémon nemici nella fila del bersaglio e infliggili [30,LK@]% CONFUSION per [1,2,3] secondi",

@@ -1196,7 +1196,7 @@
 		"FAIRY_WIND": "術者を除く味方全員に[5,10,20,SP=0.5]のPPを与える",
 		"HIGH_JUMP_KICK": "[15,30,60,SP]のSPECIALを与え、対象から最大40 PPを奪う",
 		"GRASS_WHISTLE": "[1,2,4]の敵を2秒間睡眠状態にする",
-		"TRI_ATTACK": "[75,130,200,SP]の特殊ダメージを与える。ターゲットを BURN、FREEZE、PARALYSIS のいずれかにすることができます",
+		"TRI_ATTACK": "[60,120,250,SP]の特殊ダメージを与える。ターゲットを BURN、FREEZE、PARALYSIS のいずれかにすることができます",
 		"ECHO": "敵チームに[3,6,9,SP]のSPECIALを与え、ポケモンが能力を使うたびに[3,6,9,SP]ずつ増加します",
 		"PETAL_DANCE": "最も近い敵[3,4,5]に[20,30,50,SP] SPECIALを与える",
 		"HYPER_VOICE": "ターゲットの列にいるすべての敵ポケモンに [25,50,100,SP] SPECIAL を与え、[1,2,3] 秒間 [30,LK@]% CONFUSION にする",

@@ -1721,7 +1721,7 @@ export class TriAttackStrategy extends AbilityStrategy {
         target.status.triggerParalysis(7000, target, pokemon)
         break
     }
-    const damage = [75, 130, 200][pokemon.stars - 1] ?? 200
+    const damage = [60, 120, 250][pokemon.stars - 1] ?? 250
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
