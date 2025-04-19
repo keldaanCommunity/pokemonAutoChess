@@ -1850,7 +1850,16 @@
 		"RAZOR_LEAF": "Lance des feuilles acérées en ligne derrière la cible. Tous les ennemis touchés subissent [20,40,80,SP] SPECIAL. Coup critique possible par défaut.",
 		"MUD_SHOT": "Lance de la boue sur la cible, lui infligeant [25,50,75,SP] SPECIAL et réduisant sa SPEED de [10,20,30,SP].",
 		"MALIGNANT_CHAIN": "Lance une chaîne empoisonnée pour piéger sa cible, lui infligeant LOCKED et 3 cumuls de POISONNED pendant [3,SP] secondes.",
-		"FILLET_AWAY": "Sacrifie 50 % de ses HP max actuels pour s'enfuir, gagnant [10,SP] ATK, [20,SP] SPEED et PROTECT pendant un court instant."
+		"FILLET_AWAY": "Sacrifie 50 % de ses HP max actuels pour s'enfuir, gagnant [10,SP] ATK, [20,SP] SPEED et PROTECT pendant un court instant.",
+		"ELECTRO_SHOT": "Accumule de l'électricité pendant 2 secondes, puis gagne 40 AP et tire un tir à haute tension en ligne droite, infligeant [80,90,100,SP]. Le tir sera déclenché immédiatement sous STORM.",
+		"FLOWER_TRICK": "Lance un bouquet de fleurs piégé sur la cible. Ce bouquet explose au bout de 3 secondes, infligeant [15,40,85,SP] SPECIAL à la cible et aux ennemis adjacents. Chaque coup critique reçu par la cible pendant cette durée ajoute [5,SP] SPECIAL à l'explosion.",
+		"SOLAR_BLADE": "Concentre la lumière dans sa lame pendant 2 secondes (ou instantanément si l'utilisateur est dans le spot LIGHT), puis tranche jusqu'à 3 Pokémon dans un cône devant l'utilisateur, infligeant [30,60,120,SP] TRUE.",
+		"SCALE_SHOT": "Projette ses écailles, infligeant [40 SP] de PHYSICAL aux ennemis adjacents, appliquant ARMOR_BREAK à lui-même et aux ennemis touchés pendant 2 secondes. Au bout de 2 secondes, les écailles sont projetées vers l'ennemi le plus éloigné, infligeant [30 SP] de PHYSICAL à tous les ennemis sur son passage.",
+		"BULLDOZE": "Piétine le sol et inflige [25,45,85,SP] de SPECIAL aux ennemis adjacents. Les Pokémon touchés sont repoussés et perdent 10 de SPEED.",
+		"ARMOR_CANNON": "Tire un projectile ardent, infligeant [70,SP] de SPECIAL à la cible avant de rebondir sur les [2,SP] ennemis les plus proches, infligeant [35,SP] de SPECIAL à chacun. Les projectiles reviennent ensuite sur la cible initiale, infligeant [10,SP] de SPECIAL supplémentaires chacun.",
+		"BITTER_BLADE": "Concentre son amertume dans une attaque tranchante, infligeant [70,SP] de SPECIAL à chaque ennemi adjacent. Se soigne à hauteur de [10,SP]% de ses HP max pour chaque ennemi touché.",
+		"SUCTION_HEAL": "Draine l'énergie de ses cibles, infligeant [15,30,60,SP] SPECIAL dans un cône de 2 tuiles devant le lanceur et se soignant à hauteur de [50,SP]% des dégâts infligés.",
+		"ROOST": "S'envole et atterrit dans la ligne arrière, puis SLEEP pendant 2 secondes et se soigne de [20,40,80,SP] HP."
 	},
 	"effect": {
 		"INGRAIN": "Enraciné",
