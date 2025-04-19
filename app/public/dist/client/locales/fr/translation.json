@@ -456,7 +456,16 @@
 		"RAZOR_LEAF": "Tranch'Herbe",
 		"MUD_SHOT": "Tir de Boue",
 		"MALIGNANT_CHAIN": "Chaîne Malsaine",
-		"FILLET_AWAY": "Décharnement"
+		"FILLET_AWAY": "Décharnement",
+		"ELECTRO_SHOT": "Fulgurayon",
+		"FLOWER_TRICK": "Magie Florale",
+		"SOLAR_BLADE": "Lame Solaire",
+		"SCALE_SHOT": "Rafale Écailles",
+		"BULLDOZE": "Piétisol",
+		"BITTER_BLADE": "Lame en Peine",
+		"ARMOR_CANNON": "Canon Blindé",
+		"SUCTION_HEAL": "Succion Guérisseuse",
+		"ROOST": "Atterrissage"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1387,7 +1396,24 @@
 		"ALCREMIE_CARAMEL_SWIRL": "Charmilly (Caramel)",
 		"ALCREMIE_RAINBOW_SWIRL": "Charmilly (Tricolore)",
 		"PECHARUNT": "Pêchaminus",
-		"VELUZA": "Délestin"
+		"VELUZA": "Délestin",
+		"DURALUDON": "Duralugon",
+		"ARCHALUDON": "Pondralugon",
+		"SPRIGATITO": "Poussacha",
+		"FLORAGATO": "Matourgeon",
+		"MEOWSCARADA": "Miascarade",
+		"FOMANTIS": "Mimantis",
+		"LURANTIS": "Floramantis",
+		"ROARING_MOON": "Rugit-Lune",
+		"CHARCADET": "Charbambin",
+		"ARMAROUGE": "Carmadura",
+		"CERULEDGE": "Malvalame",
+		"TYNAMO": "Anchwatt",
+		"EELEKTRIK": "Lampéroie",
+		"EELEKTROSS": "Ohmassacre",
+		"PIDOVE": "Poichigeon",
+		"TRANQUILL": "Colombeau",
+		"UNFEZANT": "Déflaisan"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés",
