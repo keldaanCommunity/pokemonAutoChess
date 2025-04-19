@@ -82,6 +82,7 @@
 - Fix Porygon getting the spotlight effect when holding Light ball outside of the spotlight
 - Permanent stats debuffs are now carried over evolution
 - Abilities triggering Paralysis or Locked now trigger the status **before** applying the damage so that flying Pokémon cannot fly away from it
+- Dragon Bug Pokémon clones no longer count in the Dragon total stars bonus, however the clone still receives the bonus
 
 # Misc
 
