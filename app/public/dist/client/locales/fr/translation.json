@@ -2179,9 +2179,11 @@
 		"INCENSE": "Encens",
 		"EXP_SHARE": "Multi Exp",
 		"POKERUS_VIAL": "Fiole Pokérus",
+		"MAX_ELIXIR": "Élixir Max",
 		"ROTOM_PHONE": "Motismart",
 		"SILK_SCARF": "Mouchoir Soie",
 		"TINY_MUSHROOM": "Petit Champi",
+		"COOKING_POT": "Cocotte",
 		"METEORITE": "Météorite",
 		"TRASH": "Déchet",
 		"DYNAMAX_BAND": "Poignet Dynamax",
@@ -2197,6 +2199,7 @@
 		"SACRED_ASH": "Cendre Sacrée",
 		"COMET_SHARD": "Morceau de Comète",
 		"REPEAT_BALL": "Bis Ball",
+		"GOLD_BOW": "Ruban Doré",
 		"DAMP_ROCK": "Roche Humide",
 		"ICY_ROCK": "Roche Glace",
 		"HEAT_ROCK": "Roche Chaude",
@@ -2230,6 +2233,9 @@
 		"HM_WATERFALL": "CS07 - Cascade",
 		"HM_WHIRLPOOL": "CS08 - Syphon",
 		"CHEF_HAT": "Toque de Chef",
+		"PICNIC_SET": "Pique-nique",
+		"SANDWICH": "Sandwich",
+		"HEARTY_STEW": "Ragoût copieux",
 		"RAGE_CANDY_BAR": "Bonbon Rage",
 		"TEA": "Thé",
 		"CURRY": "Curry",
@@ -2273,7 +2279,9 @@
 		"VANILLA_FLAVOR": "Saveur Vanille",
 		"EGG_FOR_SELL": "Œuf Pokémon",
 		"GIMMIGHOUL_COIN": "Pièce de Mordudor",
-		"EXCHANGE_TICKET": "Ticket d'échange"
+		"EXCHANGE_TICKET": "Ticket d'échange",
+		"AUSPICIOUS_ARMOR": "Armure de la Fortune",
+		"MALICIOUS_ARMOR": "Armure de la Rancune"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -2367,6 +2375,8 @@
 		"ROTOM_PHONE": "Donne la synergie GHOST. Invoque Motismart près du porteur",
 		"SILK_SCARF": "Donne la synergie NORMAL et augmente le SHIELD reçu de 50% toutes sources confondues.",
 		"TINY_MUSHROOM": "Donne la synergie BUG mais réduit les HP max du porteur de 50% lorsqu'il est clôné",
+		"COOKING_POT": "Donne la synergie GOURMET. Quand le porteur subit BURN, la marmite chauffe progressivement, ce qui lui confère 10 de SPEED par seconde.",
+		"MAX_ELIXIR": "Restaure 100% des PP max 1 seconde après le premier lancement de capacité.",
 		"METEORITE": "Une météorite qui semble interagir avec Deoxys. Elle émet une faible lueur et est légèrement chaude au toucher.",
 		"TRASH": "Les restes d'un objet artificiel devenu inutilisable",
 		"OLD_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémons WATER communs et peu communs ainsi que des Magikarp.",
@@ -2382,6 +2392,7 @@
 		"SACRED_ASH": "Octroie RESURECTION. Après résurrection, jusqu'à 3 alliés KO sont ressuscités également, mais sans leurs objets.",
 		"COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 300% de son ATK en SPECIAL à la cible et aux ennemis adjacents, et gagnant PROTECT pendant 3 secondes.",
 		"REPEAT_BALL": "Toutes les 2 relances du magasin, gagne +1 SPEED et 2 SHIELD. De plus, chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
+		"GOLD_BOW": "Le porteur ne compte pas dans la limite de taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
 		"ICY_ROCK": "Compte pour 3 pour SNOW. Sous la SNOW, votre équipe est FREEZE 20% moins longtemps et a 5% de chance en plus de FREEZE les adversaires avec leurs attaques.",
 		"HEAT_ROCK": "Compte pour 3 pour SUN. Sous le SUN, votre équipe subit 20% moins de dégâts de BURN et a 5% de chance en plus de BURN les adversaires avec leurs attaques.",
@@ -2416,6 +2427,9 @@
 		"HM_WATERFALL": "$t(item_description.TM)\n$t(ability.WATERFALL): $t(ability_description.WATERFALL)",
 		"HM_ROCK_SMASH": "$t(item_description.TM)\n$t(ability.ROCK_SMASH): $t(ability_description.ROCK_SMASH)",
 		"CHEF_HAT": "Le Chef cuisinera son plat signature entre les combats. L'objet est lâché lorsque son porteur est mis sur le banc.",
+		"PICNIC_SET": "Immédiatement consommé. Offre un SANDWICH au porteur et à tous les alliés adjacents. Au prochain combat, ce SANDWICH procure divers bonus de statistiques en fonction des types du Pokémon qui le mange.",
+		"SANDWICH": "Donne divers bonus de statistiques pour le prochain combat en fonction des types du Pokémon qui le mange.",
+		"HEARTY_STEW": "Au début du prochain combat, augmente les HP max de 30%",
 		"RAGE_CANDY_BAR": "Gagne 10 ATK au début du prochain combat.",
 		"TEA": "Gagne 80 PP au début du prochain combat.",
 		"CURRY": "Commence le prochain combat avec RAGE pendant 5 secondes.",
@@ -2459,7 +2473,9 @@
 		"RAINBOW_SWIRL_FLAVOR": "Préparé avec des alliés PSYCHIC AMORPHOUS BABY LIGHT. Appliquez-la  sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Un œuf Pokémon vendu à la Garderie Leveinard",
 		"GIMMIGHOUL_COIN": "Obtenez 1 GOLD supplémentaire à chaque tour et augmente les intérêts maximum de 1.",
-		"EXCHANGE_TICKET": "Échange un composant d'objet ou un objet fabriqué de votre banc contre un autre aléatoire. Usage unique."
+		"EXCHANGE_TICKET": "Échange un composant d'objet ou un objet fabriqué de votre banc contre un autre aléatoire. Usage unique.",
+		"AUSPICIOUS_ARMOR": "Une armure mystérieuse pouvant faire évoluer un certain Pokémon. Des vœux de bonne fortune y sont enfermés.",
+		"MALICIOUS_ARMOR": "Une armure mystérieuse pouvant faire évoluer un certain Pokémon. Une grande rancune y est enfermée."
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -2603,7 +2619,9 @@
 		"SALTED_CREAM": "Au lancement de la capacité, la SALTED_FLAVOR soigne [40,SP] HP et ajoute [15,SP] DEF à l'allié le plus proche",
 		"RUBY_SWIRL_CREAM": "Au lancement de la capacité, la RUBY_SWIRL_FLAVOR ajoute [8,SP] ATK à l'allié le plus proche",
 		"CARAMEL_SWIRL_CREAM": "Au lancement de la capacité, la CARAMEL_SWIRL_FLAVOR ajoute [80,SP] % de CRIT_POWER à l'allié le plus proche",
-		"RAINBOW_SWIRL_CREAM": "Au lancement de la capacité, la RAINBOW_SWIRL_FLAVOR ajoute [60,SP] AP à l'allié le plus proche"
+		"RAINBOW_SWIRL_CREAM": "Au lancement de la capacité, la RAINBOW_SWIRL_FLAVOR ajoute [60,SP] AP à l'allié le plus proche",
+		"DURALUDON": "Duralugon cherche un objet ARTIFICIAL",
+		"CHARCADET": "Charbambin cherche une AUSPICIOUS_ARMOR ou une MALICIOUS_ARMOR"
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -2818,6 +2836,7 @@
 		"ALCHEMIST": "Alchimiste",
 		"BERSERKER": "Berserker",
 		"BLOB": "Blob",
+		"CHEF": "Chef",
 		"DENTIST": "Dentiste",
 		"FISHERMAN": "Pêcheur",
 		"SIREN": "Sirène",
@@ -2871,6 +2890,7 @@
 		"ALCHEMIST": "Atteignez le niveau maximum de la synergie Artificiel pendant une partie",
 		"BERSERKER": "Atteignez le niveau maximum de la synergie Sauvage pendant une partie",
 		"BLOB": "Atteignez le niveau maximum de la synergie Amorphe pendant une partie",
+		"CHEF": "Atteindre le niveau de synergie maximal pour Gourmet",
 		"HARLEQUIN": "Avoir 5 synergies différentes à la fois",
 		"TACTICIAN": "Plus de 10 synergies actives en même temps",
 		"STRATEGIST": "Plus de 15 synergies actives en même temps",
@@ -3278,6 +3298,7 @@
 	"popular_items": "Objets populaires",
 	"components": "Composants",
 	"craftable_items": "Fabriquables",
+	"food": "Nourriture",
 	"berries": "Baies",
 	"dishes": "Plats",
 	"signature_dish": "Plat Signature",
@@ -3390,6 +3411,7 @@
 	"search_player": "Chercher par nom de joueur...",
 	"team_builder": "Planificateur",
 	"titles_unlocked": "titres débloqués",
+	"avatars_unlocked": "{{nbUnlocked}} / {{nbTotal}} avatars déverrouillés",
 	"overlaps": "Chevauchements",
 	"game-reconnect-modal-title": "Reconnexion au jeu",
 	"game-reconnect-modal-body": "Vous avez quitté une partie en cours. Voulez-vous vous reconnecter à votre partie précédente ?",
@@ -3600,6 +3622,8 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
+	"room_is_private": "Cette salle est privée. Saisissez le mot de passe.",
+	"wrong_password": "Mot de passe incorrect !",
 	"game_full": "Ce groupe est complet",
 	"game_already_started": "La partie a déjà commencé",
 	"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
@@ -3659,7 +3683,8 @@
 		"MAROWAK": "Ossatueur rend le prochain combat PvE plus difficile",
 		"WOBBUFFET": "Qulbutoke vous propose de recycler un composant ou objet fabriqué",
 		"SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire",
-		"REGIROCK": "Regirock offre 15 HP supplémentaires à tous les joueurs"
+		"REGIROCK": "Regirock offre 15 HP supplémentaires à tous les joueurs",
+		"MUNCHLAX": "Munchlax vend un PICNIC_SET pour {{cost}} GOLD"
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -3703,6 +3728,7 @@
 		"USER_RANK_TOO_LOW": "Votre rang de joueur est trop bas pour entrer dans ce salon",
 		"USER_NOT_AUTHENTICATED": "Veuillez vous réauthentifier",
 		"USER_TIMEOUT": "Vous avez récemment quitté une partie avant sa fin, vous devez donc attendre 5 minutes avant d'en rejoindre une autre.",
+		"USER_IN_ANOTHER_GAME": "Vous jouez déjà dans une autre partie, retournez au lobby et reconnectez-vous à celle-ci.",
 		"ROOM_FULL": "Ce salon est plein",
 		"ROOM_EMPTY": "Ce salon a été supprimé faute de manque de joueurs",
 		"ROOM_DELETED": "Ce salon a été supprimé",
