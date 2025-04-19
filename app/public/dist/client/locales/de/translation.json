@@ -465,10 +465,7 @@
 		"BITTER_BLADE": "Reueschwert",
 		"ARMOR_CANNON": "Rüstungskanone",
 		"SUCTION_HEAL": "Saugheilung",
-		"ROOST": "Ruheort",
-		"BURN": "Verbrennung",
-		"POISON": "Vergiftung",
-		"SLEEP": "Schlaf"
+		"ROOST": "Ruheort"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",

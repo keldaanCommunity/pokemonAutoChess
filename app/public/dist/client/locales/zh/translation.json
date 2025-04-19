@@ -3733,6 +3733,5 @@
 		"ROOM_EMPTY": "这个房间缺少玩家，已被自动移除。",
 		"ROOM_DELETED": "这个房间已被删除。",
 		"UNKNOWN_ERROR": "发生错误。异常代码：{{error}}"
-	},
-	"game_surrender-modal-title": "投降"
+	}
 }
