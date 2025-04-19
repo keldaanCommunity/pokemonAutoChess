@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   joinPreparation,
   logIn,
+  setConnectionStatus,
   setErrorAlertMessage,
   setProfile,
   toggleReady
@@ -44,9 +45,11 @@ import {
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import PreparationMenu from "./component/preparation/preparation-menu"
+import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { SOUNDS, playSound } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import "./preparation.css"
 
 export default function Preparation() {
@@ -87,6 +90,7 @@ export default function Preparation() {
                       `Expected to join a preparation room but joined ${r.name} instead`
                     )
                   }
+                  dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
                 } catch (error) {
                   logger.error(error)
                   localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
@@ -233,6 +237,7 @@ export default function Preparation() {
         logger.info(`left preparation room with code ${code}`, { shouldGoToLobby, shouldReconnect })
 
         if (shouldReconnect) {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
           logger.log("Connection closed unexpectedly or timed out. Attempting reconnect.")
           // Restart the expiry timer of the reconnection token for reconnect
           localStore.set(
@@ -314,6 +319,7 @@ export default function Preparation() {
           <Chat source="preparation" canWrite={user ? !user.anonymous : false} />
         </div>
       </main>
+      <ConnectionStatusNotification />
     </div>
   )
 }

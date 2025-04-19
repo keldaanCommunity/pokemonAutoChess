@@ -46,9 +46,11 @@ import {
   setProfile,
   joinLobby,
   setErrorAlertMessage,
-  setPendingGameId
+  setPendingGameId,
+  setConnectionStatus
 } from "../stores/NetworkStore"
 import { resetPreparation } from "../stores/PreparationStore"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
@@ -93,6 +95,7 @@ export async function joinLobbyRoom(
           }
 
           // store reconnection token for 5 minutes ; server may kick the inactive users before that
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
           localStore.set(
             LocalStoreKeys.RECONNECTION_LOBBY,
             { reconnectionToken: room.reconnectionToken, roomId: room.roomId },

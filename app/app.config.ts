@@ -88,6 +88,10 @@ if (process.env.NODE_APP_INSTANCE) {
   }
 }
 
+if (process.env.MODE === "dev") {
+  gameOptions.devMode = true
+}
+
 export default config({
   options: gameOptions,
 

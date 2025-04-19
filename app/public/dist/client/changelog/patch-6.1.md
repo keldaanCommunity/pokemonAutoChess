@@ -75,6 +75,7 @@
 - Antialias setting now only applies on board and not on portraits, and is now enabled by default
 - Added Zoom in/out and Drag-to-Pan with mouse wheel ingame
 - Game mode is now displayed in player game history
+- Added a connection status indicator on the top left corner in case of connection issues
 
 # Bugfix
 

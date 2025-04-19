@@ -14,6 +14,7 @@ import {
   Transfer
 } from "../../../types"
 import { EloRank } from "../../../types/Config"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
@@ -32,6 +33,7 @@ export interface INetwork {
   displayName: string
   profile: IUserMetadata | undefined
   pendingGameId: string | null
+  connectionStatus: ConnectionStatus
   error: string | null
 }
 
@@ -50,7 +52,8 @@ const initalState: INetwork = {
   displayName: "",
   profile: undefined,
   pendingGameId: null,
-  error: null
+  error: null,
+  connectionStatus: ConnectionStatus.PENDING
 }
 
 export const networkSlice = createSlice({
@@ -302,6 +305,9 @@ export const networkSlice = createSlice({
     setErrorAlertMessage: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
     },
+    setConnectionStatus: (state, action: PayloadAction<ConnectionStatus>) => {
+      state.connectionStatus = action.payload
+    },
     setPendingGameId: (state, action: PayloadAction<string | null>) => {
       state.pendingGameId = action.payload
     }
@@ -356,6 +362,7 @@ export const {
   setTitle,
   kick,
   createTournament,
+  setConnectionStatus,
   setErrorAlertMessage,
   deleteAccount,
   setPendingGameId
