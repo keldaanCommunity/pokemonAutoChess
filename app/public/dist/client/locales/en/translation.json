@@ -3733,5 +3733,9 @@
     "ROOM_EMPTY": "This room has been removed due to lack of players",
     "ROOM_DELETED": "This room has been deleted",
     "UNKNOWN_ERROR": "An unexpected error occurred: {{error}}"
+  },
+  "connection_status": {
+    "CONNECTION_LOST": "Connection lost. Attempting to reconnect...",
+    "CONNECTION_FAILED": "Connection failed. Try to refresh page."
   }
 }
