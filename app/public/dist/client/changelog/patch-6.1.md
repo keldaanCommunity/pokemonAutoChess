@@ -42,6 +42,7 @@
 - Change Bounce (Mantyke, Spoink): number of bounces no longer scale with AP; Damage: 10 → 10/20/40 ; bounce duration: 400ms → 500ms
 - Buff Chingling line: Def 4/6 → 7/10
 - Buff Stone Edge (Binacle): 50 → 100% of its Defense gained as physical damage on attack
+- Buff Solgaleo and Lunala Speed: 37 → 56
 
 # Changes to Synergies
 
