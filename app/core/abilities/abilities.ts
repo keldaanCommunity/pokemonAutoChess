@@ -5242,7 +5242,7 @@ export class ShellTrapStrategy extends AbilityStrategy {
     if (pokemon.shield > 0) {
       const damage = 50 + pokemon.shield
       board
-        .getAdjacentCells(target.positionX, target.positionY, true)
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {
           if (cell.value && pokemon.team != cell.value.team) {
             cell.value.handleSpecialDamage(
