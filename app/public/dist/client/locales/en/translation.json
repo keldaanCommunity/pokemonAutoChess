@@ -465,7 +465,10 @@
 		"BITTER_BLADE": "Bitter Blade",
 		"ARMOR_CANNON": "Armor Cannon",
 		"SUCTION_HEAL": "Suction Heal",
-		"ROOST": "Roost"
+		"ROOST": "Roost",
+		"BURN": "Burn",
+		"POISON": "Poison",
+		"SLEEP": "Sleep"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
