@@ -12238,7 +12238,7 @@ export class FlowerTrickStrategy extends AbilityStrategy {
               positionY: cell.value.positionY
             })
             cell.value.handleSpecialDamage(
-              damage + 5 * numberOfCrits,
+              damage + 15 * numberOfCrits,
               board,
               AttackType.SPECIAL,
               pokemon,

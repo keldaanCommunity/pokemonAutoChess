@@ -1852,7 +1852,7 @@
 		"MALIGNANT_CHAIN": "Lance une chaîne empoisonnée pour piéger sa cible, lui infligeant LOCKED et 3 cumuls de POISONNED pendant [3,SP] secondes.",
 		"FILLET_AWAY": "Sacrifie 50 % de ses HP max actuels pour s'enfuir, gagnant [10,SP] ATK, [20,SP] SPEED et PROTECT pendant un court instant.",
 		"ELECTRO_SHOT": "Accumule de l'électricité pendant 2 secondes, puis gagne 40 AP et tire un tir à haute tension en ligne droite, infligeant [80,90,100,SP]. Le tir sera déclenché immédiatement sous STORM.",
-		"FLOWER_TRICK": "Lance un bouquet de fleurs piégé sur la cible. Ce bouquet explose au bout de 3 secondes, infligeant [15,40,85,SP] SPECIAL à la cible et aux ennemis adjacents. Chaque coup critique reçu par la cible pendant cette durée ajoute [5,SP] SPECIAL à l'explosion.",
+		"FLOWER_TRICK": "Lance un bouquet de fleurs piégé sur la cible. Ce bouquet explose au bout de 3 secondes, infligeant [15,40,85,SP] SPECIAL à la cible et aux ennemis adjacents. Chaque coup critique reçu par la cible pendant cette durée ajoute [15,SP] SPECIAL à l'explosion.",
 		"SOLAR_BLADE": "Concentre la lumière dans sa lame pendant 2 secondes (ou instantanément si l'utilisateur est dans le spot LIGHT), puis tranche jusqu'à 3 Pokémon dans un cône devant l'utilisateur, infligeant [30,60,120,SP] TRUE.",
 		"SCALE_SHOT": "Projette ses écailles, infligeant [40 SP] de PHYSICAL aux ennemis adjacents, appliquant ARMOR_BREAK à lui-même et aux ennemis touchés pendant 2 secondes. Au bout de 2 secondes, les écailles sont projetées vers l'ennemi le plus éloigné, infligeant [30 SP] de PHYSICAL à tous les ennemis sur son passage.",
 		"BULLDOZE": "Piétine le sol et inflige [25,45,85,SP] de SPECIAL aux ennemis adjacents. Les Pokémon touchés sont repoussés et perdent 10 de SPEED.",
