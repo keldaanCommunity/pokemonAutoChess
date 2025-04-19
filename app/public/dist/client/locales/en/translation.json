@@ -1689,7 +1689,7 @@
     "AIR_SLASH": "Deal [25,50,100,SP] SPECIAL to the target and inflict them with FLINCH for 7 seconds.",
     "EGG_BOMB": "Launch an explosive egg at the target, dealing [30,60,120,SP] SPECIAL to all adjacent enemy Pokémon and inflicting them with ARMOR_BREAK for 4 seconds. For each enemy Pokémon KO'd, there is a [25,LK]% chance of an egg appearing on the allied player's bench.",
     "FLORAL_HEALING": "Heal HP equal to max PP of Comfey's holder or Comfey itself if not held.",
-    "VINE_WHIP": "Deal [100,SP] SPECIAL to the target and cause them and all adjacent enemy Pokémon to FLINCH for 3 seconds.",
+    "VINE_WHIP": "Deal [100,SP] SPECIAL to the target and cause them and all adjacent enemy Pokémon to PARALYSIS for 3 seconds.",
     "BODY_SLAM": "Deal [30,SP]% of the user's max HP as SPECIAL to the target.",
     "BARB_BARRAGE": "Dive into the middle of the enemy team, dealing [15,30,60,SP] SPECIAL to all adjacent enemy Pokémon and inflict them with POISONNED for 3 seconds.",
     "MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE adjacent enemy Pokémon for [2,3,4] seconds.",

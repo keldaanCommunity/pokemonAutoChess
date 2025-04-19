@@ -41,6 +41,7 @@
 - Change Bounce (Mantyke, Spoink): number of bounces no longer scale with AP; Damage: 10 → 10/20/40 ; bounce duration: 400ms → 500ms
 - Buff Chingling line: Def 4/6 → 7/10
 - Buff Stone Edge (Binacle): 50 → 100% of its Defense gained as physical damage on attack
+- Change Vine Whip (Carnivine): trigger Paralysis instead of Flinch
 
 # Changes to Synergies
 

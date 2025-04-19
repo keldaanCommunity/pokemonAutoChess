@@ -7458,12 +7458,12 @@ export class VineWhipStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     board
       .getAdjacentCells(target.positionX, target.positionY)
-      .map((v) => v.value)
-      .filter((v) => v?.team === target.team)
+      .map((cell) => cell.value)
+      .filter((entity) => entity?.team === target.team)
       .concat(target)
-      .forEach((v) => {
-        if (v) {
-          v.status.triggerFlinch(3000, v, pokemon)
+      .forEach((enemy) => {
+        if (enemy) {
+          enemy.status.triggerParalysis(3000, enemy, pokemon)
         }
       })
     target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
