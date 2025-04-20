@@ -10,11 +10,10 @@ module.exports = {
     watch: false,
     time: true,
     wait_ready: true,
-    max_memory_restart: "1300M",
     env_production: {
       NODE_ENV: "production"
     },
-    interpreter: "node@22.13.1",
+    interpreter: "node@22.14.0",
   }],
   deploy: {
     production: {
