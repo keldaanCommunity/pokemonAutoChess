@@ -1654,7 +1654,7 @@
 		"AIR_SLASH": "[25,50,100,SP] SPECIAL을 입히고 7초 동안 FLINCH를 부여한다.",
 		"EGG_BOMB": "대상에게 폭발하는 알을 발사하여 [30,60,120,SP] SPECIAL을 입히고 인접한 모든 적에게 4초 동안 ARMOR_BREAK을 부여한다. 대상이 기절할 경우 [25,LK]% 확률로 벤치에 알이 놓인다.",
 		"FLORAL_HEALING": "자신이 붙어있는 포케몬을 최대 PP만큼 HP를 회복한다. 다만, 붙어있지 않은 경우 자신의 HP를 회복한다.",
-		"VINE_WHIP": "[100, SP]의 SPECIAL를 입히며 주변 적군과 자신을  3초 동안 FLINCH 가 되게 한다.",
+		"VINE_WHIP": "[100, SP]의 SPECIAL를 입히며 주변 적군과 자신을  3초 동안 PARALYSIS 가 되게 한다.",
 		"BODY_SLAM": "자신의 최대 HP의 [30,SP]% 만큼 SPECIAL을 준다.",
 		"BARB_BARRAGE": "적 팀 중앙으로 돌진하여 모든 인접한 적에게 [15,30,60,SP] SPECIAL 과 3초 동안 POISONNED 효과를 부여한다.",
 		"MAGIC_POWDER": "자신에게 [10,20,40,SP]의 SHIELD 를 부여하고 적에게 [2,3,4]초 동안 SILENCE 를 부여한다.",

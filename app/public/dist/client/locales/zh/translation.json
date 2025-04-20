@@ -1689,7 +1689,7 @@
 		"AIR_SLASH": "对目标造成[25,50,100,SP]点SPECIAL，并使其陷入FLINCH 7秒。",
 		"EGG_BOMB": "朝目标投掷一枚爆炸的蛋，对所有相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL并使他们陷入ARMOR_BREAK 4秒。每有一个目标因此倒下，有[25,LK]%的概率将一枚蛋加入我方备战区。",
 		"FLORAL_HEALING": "为花疗环环的携带者（若未被携带，改为为花疗环环自己）恢复HP，数值相当于目标的最大PP。",
-		"VINE_WHIP": "对目标造成[100,SP]点SPECIAL，并使其和所有相邻敌方宝可梦陷入FLINCH 3秒。",
+		"VINE_WHIP": "对目标造成[100,SP]点SPECIAL，并使其和所有相邻敌方宝可梦陷入PARALYSIS 3秒。",
 		"BODY_SLAM": "对目标造成SPECIAL，数值相当于使用者[30,SP]%的最大HP。",
 		"BARB_BARRAGE": "潜水至敌方阵型中间，随后对所有相邻敌方宝可梦造成[15,30,60,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
 		"MAGIC_POWDER": "获得[10,20,40,SP]点SHIELD，并使相邻敌方宝可梦陷入SILENCE [2,3,4]秒。",

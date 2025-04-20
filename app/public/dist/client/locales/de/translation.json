@@ -1689,7 +1689,7 @@
 		"AIR_SLASH": "Verursacht [25,50,100,SP] SPECIAL und fügt 7 Sekunden lang FLINCH zu",
 		"EGG_BOMB": "Schleudert ein explosives Ei auf sein Ziel, das [30,60,120,SP] SPECIAL verursacht und 4 Sekunden lang ARMOR_BREAK auf alle benachbarten Gegner anwendet. Wenn das Ziel KO ist, hast du eine [25,LK]%ige Chance, ein Ei auf deiner Bank zu bekommen.",
 		"FLORAL_HEALING": "Heilt so viele HP wie die maximalen PP des Comfey-Trägers oder Comfey selbst, wenn es nicht gehalten wird",
-		"VINE_WHIP": "Verursacht [100,SP] SPECIAL, wodurch er und alle benachbarten Feinde 3 Sekunden lang FLINCH werden",
+		"VINE_WHIP": "Verursacht [100,SP] SPECIAL, wodurch er und alle benachbarten Feinde 3 Sekunden lang PARALYSIS werden",
 		"BODY_SLAM": "Verursacht [30,SP]% der maximalen HP des Anwenders als SPECIAL",
 		"BARB_BARRAGE": "Stürzt sich in die Mitte des gegnerischen Teams und fügt allen angrenzenden Einheiten 3 Sekunden lang [15,30,60,SP] SPECIAL und POISONNED zu",
 		"MAGIC_POWDER": "Erlangt [10,20,40,SP] SHIELD und SILENCE benachbarter Feinde für [2,3,4] Sekunden",
