@@ -23,7 +23,6 @@
   ],
   "main": "public/dist/server/app/index.js",
   "scripts": {
-    "reset": "rimraf -rf node_modules/",
     "dev-client": "node esbuild.js --dev",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
