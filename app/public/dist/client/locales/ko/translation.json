@@ -2536,7 +2536,7 @@
 		"GLIMMORA": "최대 HP의 50% 이하일 때, 전방의 2x3 칸에 독압정을 뿌려 20 피해를 입힌다. 독압정은 POISON 타입이 아닌 포켓몬에게 POISONNED 을 가한다.",
 		"PILLAR": "기둥을 세워 적들의 경로를 방해한다. 시전자의 STAR 에 따라 HP, DEF, SPE_DEF 이 증가한다.",
 		"INANIMATE": "무생물 물체는 복사되거나 판매될 수 없다. 이동하거나 공격할 수 없으며 상태이상에 면역이다.",
-		"BERSERK": "특성 발동 시마다 3 AP 을 획득한다.",
+		"BERSERK": "특성 발동 시마다 5 AP 을 획득한다.",
 		"APPLIN": "과사삭벌레는 SWEET_APPLE 또는 TART_APPLE 또는 SIRUPY_APPLE 를 찾고 있다.",
 		"DIPPLIN": "과미르는 SIRUPY_APPLE 를 찾고 있다.",
 		"WELL_BAKED": "BURN 면역. BURN 시 20 DEF 획득",
