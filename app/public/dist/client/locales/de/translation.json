@@ -2605,7 +2605,7 @@
 		"GLIMMORA": "Unter 50% max HP, werden giftige Stacheln in einem 2x3 Rechteck vor dem Nutzer geworfen, welche 20 SPECIAL verursachen. Giftige Stacheln verursachen POISONNED an Pokémon, außer sie sind vom Typ POISON.",
 		"PILLAR": "Baut eine bewegliche Säule, welche den Pfad der Gegner blockiert. HP, DEF und SPE_DEF erhöhen sich basierend auf STAR der Unit.",
 		"INANIMATE": "Unbewegliche Objekte können nicht kopiert, auf die Bank geschoben oder verkauft werden. Sie können sich nicht bewegen oder attackieren und sind immun gegenüber Statuseffekten.",
-		"BERSERK": "Erhalte 3 AP jedes Mal, wenn ein Pokémon by dieser Fähigkeit betroffen ist.",
+		"BERSERK": "Erhalte 5 AP jedes Mal, wenn ein Pokémon by dieser Fähigkeit betroffen ist.",
 		"APPLIN": "Knapfel sucht nach einem SWEET_APPLE, TART_APPLE oder SIRUPY_APPLE.",
 		"DIPPLIN": "Sirapfel sucht nach einem SIRPUY_APPLE.",
 		"WELL_BAKED": "Dieses Pokémon leidet nicht durch BURN. Stattdessen erhält es 20 DEF, wenn es von BURN betroffen ist.",
