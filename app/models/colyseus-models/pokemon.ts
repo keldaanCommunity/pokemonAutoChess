@@ -14696,7 +14696,7 @@ export class Solgaleo extends Pokemon {
   stars = 3
   hp = 300
   atk = 27
-  speed = 37
+  speed = 56
   def = 12
   speDef = 8
   maxPP = 110
@@ -14719,7 +14719,7 @@ export class Lunala extends Pokemon {
   stars = 3
   hp = 300
   atk = 27
-  speed = 37
+  speed = 56
   def = 6
   speDef = 6
   maxPP = 100

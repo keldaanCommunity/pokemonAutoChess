@@ -620,7 +620,10 @@ export default class Simulation extends Schema implements ISimulation {
     for (const team of [this.blueTeam, this.redTeam]) {
       const dragonLevel = values(team).reduce(
         (acc, pokemon) =>
-          acc + (pokemon.types.has(Synergy.DRAGON) ? pokemon.stars : 0),
+          acc +
+          (pokemon.types.has(Synergy.DRAGON) && !pokemon.isSpawn
+            ? pokemon.stars
+            : 0),
         0
       )
       team.forEach((pokemon) => {
