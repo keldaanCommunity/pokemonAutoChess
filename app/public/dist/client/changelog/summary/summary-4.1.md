@@ -21,4 +21,6 @@
 - When the number of alive players is odd, one player now fight a copy of an opponent. This copy (the "ghost") does not take round damage if losing.
 - Players can no longer push another player during minigame phase if he is in its bubble
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1132756077662961666)

@@ -2,9 +2,9 @@
 
 # Patch 6.1: Holidays
 
-After arriving in Treasure Town, the pokémons decided to treat themselves to a well-deserved vacation.
+After Treasure Town, Pokémons decided to treat themselves to a well-deserved vacation.
 
-# Newcomers in 6.0
+# Newcomers
 
 ![Duraludon](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0884/Normal.png)
 ![Archaludon](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/1018/Normal.png)
@@ -24,26 +24,24 @@ After arriving in Treasure Town, the pokémons decided to treat themselves to a 
 ![Tranquill](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0520/Normal.png)
 ![Unfezant](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0521/Normal.png)
 
-## Here comes Munchlax 
+## Don't forget the sandwiches
 
-Munchlax has arrrived in treasure town and will now appears from time to time in the village !
+Munchlax has arrrived in Treasure Town and will prepare a picnic for your next trip.
 
-## More items !
+![Picnic Set](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/PICNIC_SET.png)
+**Picnic Set**: Immediately consummed when given. Give a Sandwich to the holder and all adjacent allies.
+
+## New shiny and artificial items
 
 ![Cooking Pot](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/COOKING_POT.png)
-
 **Cooking Pot**: Gives Gourmet synergy. When burned, the Cooking Pot is heated little by little which gives 10 Speed per second.
 
 ![Max Elixir](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/MAX_ELIXIR.png)
-
 **Max Elixir**: Restores 100% of max PP 1 second after the first ability cast.
 
-![Picnic Set](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/PICNIC_SET.png)
-
-**Picnic Set**: Immediately consummed when given. Give a Sandwich to the holder and all adjacent allies.
-
 ![Gold Bow](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/GOLD_BOW.png)
-
 **Gold Bow**: The holder does not count for team size limit
+
+---
 
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752) !

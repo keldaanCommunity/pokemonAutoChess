@@ -72,6 +72,13 @@
   animation: spin 2.5s infinite linear;
   /* Background colors don’t work with `background-origin`, so use a gradient. */
   background: conic-gradient(
+      from var(--bg-angle) in hsl longer hue,
+      hsl(0deg 100% 60%),
+      hsl(360deg 100% 60%)
+    )
+    border-box;
+
+  /*background: conic-gradient(
       from var(--bg-angle) in oklch longer hue,
       oklch(0.85 0.37 0) 0 0
     )

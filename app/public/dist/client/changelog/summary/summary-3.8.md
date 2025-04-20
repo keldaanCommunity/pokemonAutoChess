@@ -34,4 +34,6 @@ Focus band is now replaced by the Gracidea Flower, which will evolve Shaymin int
 Poison has been reworked, and will now reduce healing effects.
 Sound is now a support synergy that will wake up allies asleep and give them bonus stats.
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)

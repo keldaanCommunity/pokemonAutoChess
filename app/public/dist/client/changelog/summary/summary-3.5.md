@@ -22,4 +22,6 @@ Welcome to Litwick, Lampent and Chandelure !
 
 Buff Fire Gem: Attacks do double damage on Shields and deal 10% of target max HP as additional damage
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)

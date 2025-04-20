@@ -35,4 +35,6 @@ Human synergy is reworked and now gives you TMs and HMs that can be used to teac
 
 The rank system has been reworked and now has 12 different levels. Elo and XP are now distributed immediately on player elimination, and there are more penalties to leaving a game before it ends.
 
+---
+
 Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1325576312739336254) !

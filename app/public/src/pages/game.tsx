@@ -63,7 +63,7 @@ import {
   setSpecialGameRule,
   setPodium
 } from "../stores/GameStore"
-import { joinGame, logIn, setErrorAlertMessage, setProfile } from "../stores/NetworkStore"
+import { joinGame, logIn, setConnectionStatus, setErrorAlertMessage, setProfile } from "../stores/NetworkStore"
 import { getAvatarString } from "../../../utils/avatar"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameFinalRank from "./component/game/game-final-rank"
@@ -77,12 +77,14 @@ import GameStageInfo from "./component/game/game-stage-info"
 import GameSynergies from "./component/game/game-synergies"
 import GameToasts from "./component/game/game-toasts"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 import { Passive } from "../../../types/enum/Passive"
 import { Item } from "../../../types/enum/Item"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 
 let gameContainer: GameContainer
 
@@ -97,6 +99,7 @@ export default function Game() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const client: Client = useAppSelector((state) => state.network.client)
+  const connectionStatus = useAppSelector(state => state.network.connectionStatus)
   const room: Room<GameState> | undefined = useAppSelector(
     (state) => state.network.game
   )
@@ -149,6 +152,7 @@ export default function Game() {
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
           })
           .catch((error) => {
             if (attempts < MAX_ATTEMPS_RECONNECT) {
@@ -161,6 +165,7 @@ export default function Game() {
               }
               //TODO: handle more known error codes with informative messages
               setConnectError(connectError)
+              dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
               logger.error("reconnect error", error)
             }
           })
@@ -520,6 +525,15 @@ export default function Game() {
           const scene = getGameScene()
           if (scene?.music) scene.music.destroy()
           navigate("/lobby")
+        } else if (code >= 1001 && code <= 1015) {
+          // Between 1001 and 1015 - Abnormal socket shutdown
+          if (connectionStatus === ConnectionStatus.CONNECTED) {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+            // attempting to auto reconnect
+            connectToGame()
+          } else {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
+          }
         }
       })
 
@@ -813,6 +827,7 @@ export default function Game() {
       ) : (
         <GameLoadingScreen connectError={connectError} />
       )}
+      <ConnectionStatusNotification />
     </main>
   )
 }

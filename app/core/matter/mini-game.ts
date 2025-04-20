@@ -445,7 +445,7 @@ export class MiniGame {
 
     if (encounter === TownEncounters.KECLEON) {
       itemsSet = SynergyStones
-      maxCopiesPerItem = 4
+      maxCopiesPerItem = 2
     }
 
     if (encounter === TownEncounters.KANGASKHAN) {
@@ -482,7 +482,7 @@ export class MiniGame {
       maxCopiesPerItem = 99
     }
 
-    if(encounter === TownEncounters.MUNCHLAX) {
+    if (encounter === TownEncounters.MUNCHLAX) {
       itemsSet = [Item.PICNIC_SET]
       nbItemsToPick = this.alivePlayers.length
       maxCopiesPerItem = 99

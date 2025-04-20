@@ -38,10 +38,12 @@
 - Magma Storm (Heatran) now propagates to several enemies at a time. Reduced propagation time: 500ms → 250ms
 - Nerf Thunder (Zapdos): damage 30/60/120 → 25/50/100
 - Nerf Grubbin line: HP: 80/140/190 → 75/130/180 ; Attack: 6/14/27 → 5/13/24 ; PP 80 → 100
+- Adjusted Tri-Attack (Porygon line): damage 75/130/200 → 60/120/250
 - Change Bounce (Mantyke, Spoink): number of bounces no longer scale with AP; Damage: 10 → 10/20/40 ; bounce duration: 400ms → 500ms
 - Buff Chingling line: Def 4/6 → 7/10
 - Buff Stone Edge (Binacle): 50 → 100% of its Defense gained as physical damage on attack
-- Change Vine Whip (Carnivine): trigger Paralysis instead of Flinch
+- Buff Solgaleo and Lunala Speed: 37 → 56
+- Fix Shell Trap (Turtonator): damage around the user instead of around the target
 
 # Changes to Synergies
 
@@ -76,12 +78,15 @@
 - Antialias setting now only applies on board and not on portraits, and is now enabled by default
 - Added Zoom in/out and Drag-to-Pan with mouse wheel ingame
 - Game mode is now displayed in player game history
+- Added a connection status indicator on the top left corner in case of connection issues
 
 # Bugfix
 
 - Fossil Pokémon no longer regain their fossil resurrection effect after being revived with Sacred Ash
 - Fix Porygon getting the spotlight effect when holding Light ball outside of the spotlight
 - Permanent stats debuffs are now carried over evolution
+- Abilities triggering Paralysis or Locked now trigger the status **before** applying the damage so that flying Pokémon cannot fly away from it
+- Dragon Bug Pokémon clones no longer count in the Dragon total stars bonus, however the clone still receives the bonus
 
 # Misc
 

@@ -47,7 +47,9 @@ export const CDN_URL =
 export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
 
 export type PkmCustom = { shiny?: boolean; emotion?: Emotion }
-export type PkmWithCustom = { name: Pkm } & PkmCustom
+export interface PkmWithCustom extends PkmCustom {
+  name: Pkm
+}
 
 export enum Role {
   ADMIN = "ADMIN",

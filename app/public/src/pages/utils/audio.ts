@@ -68,7 +68,9 @@ export function playSound(key: Soundkey, volume = 1) {
   }
 }
 
-type SceneWithMusic = Phaser.Scene & { music?: Phaser.Sound.WebAudioSound }
+interface SceneWithMusic extends Phaser.Scene {
+  music?: Phaser.Sound.WebAudioSound
+}
 
 export function playMusic(scene: SceneWithMusic, name: string) {
   if (scene == null || scene.music?.key === "music_" + name) return
