@@ -208,6 +208,8 @@ export const SpecialItems: Item[] = [
   Item.CORNERSTONE_MASK,
   Item.HEARTHFLAME_MASK,
   Item.ZYGARDE_CUBE,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
   Item.BERRY_JUICE,
   Item.FIRE_SHARD,
   Item.OLD_ROD,
