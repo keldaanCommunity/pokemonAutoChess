@@ -1536,7 +1536,7 @@
 		"AIR_SLASH": "Infliggi [25,50,100,SP] SPECIAL e causa FLINCH per 7 secondi.",
 		"EGG_BOMB": "Lancia un uovo esplosivo, infliggendo [30,60,120,SP] SPECIAL e causa ARMOR_BREAK per 4 secondi a tutti i nemici adiacenti al bersaglio. Se il bersaglio va KO, hai il [25,LK]% di possibilità di ottenere un uovo nella tua panchina.",
 		"FLORAL_HEALING": "Cura un valore di HP uguale ai PP massimi di chi ha Comfey equipaggiato o di Comfey stesso se non è equipaggiato ad un Pokèmon.",
-		"VINE_WHIP": "Infliggi [100,SP] SPECIAL e causa FLINCH al bersaglio ed a i nemici adiacenti per 3 secondi.",
+		"VINE_WHIP": "Infliggi [100,SP] SPECIAL e causa PARALYSIS al bersaglio ed a i nemici adiacenti per 3 secondi.",
 		"BODY_SLAM": "Infliggi [30,SP]% dei HP massimi come SPECIAL.",
 		"BARB_BARRAGE": "Tuffati nel mezzo della squadra nemica, infliggendo [15,30,60,SP] SPECIAL e causa POISONNED a tutte le unità adiacenti per 3 secondi.",
 		"MAGIC_POWDER": "Ottieni [10,20,40,SP] SHIELD e causa SILENCE ai nemici adiacenti per [2,3,4] secondi.",
