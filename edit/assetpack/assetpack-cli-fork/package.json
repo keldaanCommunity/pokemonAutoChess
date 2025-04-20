@@ -1,0 +1,49 @@
+{
+  "name": "@assetpack/cli",
+  "version": "0.8.0",
+  "description": "A simple CLI to run AssetPack",
+  "keywords": [
+    "assetpack",
+    "pixijs",
+    "pixi",
+    "cli",
+    "command",
+    "line",
+    "interface"
+  ],
+  "homepage": "https://github.com/pixijs/assetpack/tree/master/packages/cli/#readme",
+  "bugs": "https://github.com/pixijs/assetpack/issues",
+  "repository": {
+    "url": "pixijs/assetpack",
+    "directory": "packages/cli"
+  },
+  "license": "MIT",
+  "author": "Zyie",
+  "type": "module",
+  "bin": {
+    "assetpack": "bin/index.js"
+  },
+  "files": [
+    "dist/*",
+    "bin/*"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^10.0.0",
+    "find-up": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@assetpack/core": ">=0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "38e872a82f45ce46edeefa5b13ee6d5973d8daa6"
+}
