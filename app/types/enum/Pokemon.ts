@@ -7993,7 +7993,8 @@ export const AnimationConfig: {
   [Pkm.TRANQUILL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hover,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.UNFEZANT]: {
     attack: AnimationType.Attack,
