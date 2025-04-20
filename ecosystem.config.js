@@ -23,7 +23,7 @@ module.exports = {
       "ref": "origin/prod",
       "repo": "https://github.com/keldaanCommunity/pokemonAutoChess.git",
       "path": "/home/deploy",
-      "post-deploy": "source ~/.nvm/nvm.sh && npm ci && nvm use 20.12.0 && npm run assetpack && npm run build"
+      "post-deploy": "source ~/.nvm/nvm.sh && nvm use 20.12.0 && npm install && npm run assetpack && npm run build"
     }
   }
 }
