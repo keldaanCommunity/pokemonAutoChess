@@ -2605,7 +2605,7 @@
 		"GLIMMORA": "Once below 50% max HP, throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 SPECIAL. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
 		"PILLAR": "Builds a movable pillar that blocks the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
 		"INANIMATE": "Inanimate objects cannot be copied, benched or sold. They cannot move or attack, and are immune to status effects.",
-		"BERSERK": "Gains 3 AP each time a Pokemon is affected by its ability.",
+		"BERSERK": "Gains 5 AP each time a Pokemon is affected by its ability.",
 		"APPLIN": "Applin is looking for a SWEET_APPLE, a TART_APPLE or a SIRUPY_APPLE.",
 		"DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE.",
 		"WELL_BAKED": "The Pokémon doesn't suffer from BURN. Instead, it gains 20 DEF when it is affected by BURN.",
