@@ -3,7 +3,7 @@ import { compressJpg, compressPng } from "@assetpack/plugin-compress"
 //import { audio } from "@assetpack/plugin-ffmpeg"
 import { json } from "@assetpack/plugin-json"
 import fs from "fs-extra"
-import { texturePacker } from "./plugin-texturepacker-fork/dist/es/index.js"
+import { texturePacker } from "./plugin-texture-packer-fork/dist/es/index.js"
 
 const pkg = fs.readJSONSync("../../package.json")
 
