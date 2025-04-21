@@ -2947,7 +2947,7 @@
 		"WINDY": "+10 SPEED （若为FLYING，改为+20）",
 		"RAIN": "每秒恢复3点PP\n-30% BURN或POISONNED伤害",
 		"NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP持续时间",
-		"STORM": "闪电随机轰击场地，对击中的非ELECTRIC宝可梦造成100点SPECIAL（ELECTRIC免疫此伤害）\n+30% PARALYSIS持续时间",
+		"STORM": "闪电随机轰击场地，对击中的宝可梦造成100点SPECIAL（ELECTRIC免疫此伤害）\n+30% PARALYSIS持续时间",
 		"MISTY": "+20% SPECIAL\n+30% CHARM持续时间",
 		"SNOW": "-20 SPEED\n+30% FREEZE持续时间",
 		"SANDSTORM": "每秒对所有宝可梦造成5点SPECIAL（GROUND免疫此伤害）\n+30% CONFUSION持续时间",
