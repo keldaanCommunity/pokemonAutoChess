@@ -205,7 +205,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     }
     wrap.appendChild(statsElm)
 
-    let dish = DishByPkm[this.name]
+    let dish = DishByPkm[name]
     if (!dish && types.has(Synergy.GOURMET)) {
       if (items.includes(Item.COOKING_POT)) {
         dish = Item.HEARTY_STEW
