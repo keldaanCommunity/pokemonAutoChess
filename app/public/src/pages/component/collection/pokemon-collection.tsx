@@ -77,7 +77,7 @@ export default function PokemonCollection() {
           isDark
         />
       </header>
-      <div>
+      <div style={{ maxWidth: "100%" }}>
         <Tabs>
           <TabList className="pokemon-collection-tabs">
             <Tab key="title-all">{t("all")}</Tab>
