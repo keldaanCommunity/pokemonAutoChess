@@ -209,7 +209,7 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     if (!dish && types.has(Synergy.GOURMET)) {
       if (items.includes(Item.COOKING_POT)) {
         dish = Item.HEARTY_STEW
-      } else {
+      } else if (name !== Pkm.GUZZLORD) {
         dish = Item.SANDWICH
       }
     }
