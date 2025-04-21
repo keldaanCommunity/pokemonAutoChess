@@ -3683,7 +3683,7 @@
 		"WOBBUFFET": "Woingenau lässt sich eine ungenutzte Komponente oder ein hergestelltes Item recyceln.",
 		"SPINDA": "Spinda wechselt zufällig die Richtung der Rotation des Karusells.",
 		"REGIROCK": "Regirock gibt allen Spielern 15 zusätzliche HP",
-		"MUNCHLAX": "Mampfaxo verkauft PICNIC_SET für {{cost}} GOLD"
+		"MUNCHLAX": "Mampfaxo gibt allen Spielern PICNIC_SET"
 	},
 	"loading_hints": {
 		"tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",

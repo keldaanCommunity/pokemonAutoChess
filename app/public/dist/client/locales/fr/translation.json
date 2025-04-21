@@ -3684,7 +3684,7 @@
 		"WOBBUFFET": "Qulbutoke vous propose de recycler un composant ou objet fabriqué",
 		"SPINDA": "Spinda change le sens de rotation du carousel de façon aléatoire",
 		"REGIROCK": "Regirock offre 15 HP supplémentaires à tous les joueurs",
-		"MUNCHLAX": "Munchlax vend un PICNIC_SET pour {{cost}} GOLD"
+		"MUNCHLAX": "Munchlax a amené un PICNIC_SET pour tout le monde"
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",

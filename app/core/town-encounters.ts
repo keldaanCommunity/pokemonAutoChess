@@ -23,8 +23,7 @@ export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
     [Pkm.CHANSEY]: 10,
     [Pkm.ELECTIVIRE]: 10,
     [Pkm.XATU]: 10,
-    [Pkm.DUSKULL]: 10,
-    [Pkm.MUNCHLAX]: 10
+    [Pkm.DUSKULL]: 10
   }
 
 export const TownEncountersByStage: {
