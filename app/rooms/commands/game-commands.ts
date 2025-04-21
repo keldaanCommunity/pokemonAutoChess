@@ -305,7 +305,11 @@ export class OnDragDropPokemonCommand extends Command<
           const target = this.room.getPokemonByPosition(player, x, y)
 
           if (dropOnBench) {
-            if (pokemon.canBeBenched && (!target || target.canBePlaced)) {
+            if (
+              pokemon.canBeBenched &&
+              (!target || target.canBePlaced) &&
+              !(isBoardFull && pokemon?.doesCountForTeamSize === false)
+            ) {
               // From board to bench (bench to bench is already handled)
               this.room.swap(player, pokemon, x, y)
               pokemon.items.forEach((item) => {
@@ -337,6 +341,11 @@ export class OnDragDropPokemonCommand extends Command<
               dropToEmptyPlace &&
               isBoardFull &&
               pokemon.doesCountForTeamSize
+            ) &&
+            !(
+              dropFromBench &&
+              isBoardFull &&
+              target?.doesCountForTeamSize === false
             )
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
