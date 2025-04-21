@@ -3684,7 +3684,7 @@
 		"WOBBUFFET": "果然翁会回收未使用的道具组件或合成道具。",
 		"SPINDA": "晃晃斑会随机改变道具轮盘的旋转方向。",
 		"REGIROCK": "雷吉洛克会为所有玩家提升15点HP。",
-		"MUNCHLAX": "小卡比兽会以每套{{cost}} GOLD的价格出售PICNIC_SET。"
+		"MUNCHLAX": "小卡比兽给大家带来了PICNIC_SET。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
