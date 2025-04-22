@@ -673,6 +673,7 @@ export class OnDragDropItemCommand extends Command<
 
     if (item === Item.PICNIC_SET) {
       if (pokemon.meal == "") {
+        let nbSandwiches = 0
         values(player.board).forEach((pkm) => {
           if (
             pkm.meal === "" &&
@@ -687,9 +688,13 @@ export class OnDragDropItemCommand extends Command<
           ) {
             pkm.meal = Item.SANDWICH
             pkm.action = PokemonActionState.EAT
+            nbSandwiches++
           }
         })
         removeInArray(player.items, item)
+        if (nbSandwiches >= 9) {
+          player.titles.add(Title.PICNICKER)
+        }
       }
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return

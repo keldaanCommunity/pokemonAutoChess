@@ -2847,6 +2847,7 @@
 		"OUTSIDER": "Outsider",
 		"WILD": "Wild",
 		"GLUTTON": "Glutton",
+		"PICNICKER": "Picnicker",
 		"STARGAZER": "Stargazer",
 		"BLOODY": "Bloody",
 		"ETERNAL": "Eternal",
@@ -2924,6 +2925,7 @@
 		"VANQUISHER": "Win a Ranked match",
 		"OUTSIDER": "Win a Ranked match with 8 players while having the lowest Elo of all",
 		"GLUTTON": "Get a Snorlax with more than 750 base HP",
+		"PICNICKER": "Make a picnic with 9 Pokémon",
 		"STARGAZER": "Get Solgaleo or Lunala",
 		"BLOODY": "Get Bloodmoon Ursaluna",
 		"ETERNAL": "Meet Arceus at stage 40"
