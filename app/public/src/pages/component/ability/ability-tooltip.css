@@ -71,8 +71,12 @@ h2 .description-icon > img {
 }
 
 .status-label {
-  color: rgb(210, 190, 150);
+  color: #f5a9a9;
   font-weight: 500;
+}
+
+.status-label.positive {
+  color: #a9f5ad;
 }
 
 .item-label {

@@ -2,15 +2,13 @@ import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
-import { Ability } from "../../types/enum/Ability"
 import { Effect } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
-import { max, min } from "../../utils/number"
-import { chance } from "../../utils/random"
+import { max } from "../../utils/number"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
 
 export default class Status extends Schema implements IStatus {
@@ -102,7 +100,6 @@ export default class Status extends Schema implements IStatus {
     this.curseCooldown = 0
     this.curse = false
     this.lockedCooldown = 0
-    this.enrageCooldown = 0
     this.blindCooldown = 0
   }
 
