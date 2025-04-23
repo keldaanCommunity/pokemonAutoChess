@@ -620,7 +620,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       return
     }
-    if (this.items.add(item)) {
+
+    this.items.add(item)
+    if (this.items.has(item)) {
       this.simulation.applyItemEffect(this, item)
     }
     if (permanent && !this.isGhostOpponent) {
