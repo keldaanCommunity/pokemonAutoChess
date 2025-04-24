@@ -201,6 +201,8 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   beforeSimulationStart(params: {
+    simulationId: string
+    isGhostBattle: boolean
     weather: Weather
     player: Player
     teamEffects: Set<Effect>
@@ -6269,10 +6271,13 @@ export class Castform extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6296,10 +6301,13 @@ export class CastformSun extends Pokemon {
   attackSprite = AttackSprite.DRAGON_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6323,10 +6331,13 @@ export class CastformRain extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6350,10 +6361,13 @@ export class CastformHail extends Pokemon {
   attackSprite = AttackSprite.ICE_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
