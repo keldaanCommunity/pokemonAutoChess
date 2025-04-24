@@ -4029,12 +4029,12 @@ export const AnimationConfig: {
   },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.STEELIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.MEGA_STEELIX]: {
@@ -6118,18 +6118,18 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.TEPIG]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.PIGNITE]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.EMBOAR]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.WYNAUT]: {

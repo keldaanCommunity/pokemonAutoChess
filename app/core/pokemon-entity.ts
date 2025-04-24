@@ -1097,7 +1097,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) === 1 &&
       !this.items.has(Item.PROTECTIVE_PADS)
     ) {
-      const damage = Math.round(target.def * 0.5 * (1 + target.ap / 100))
+      const damage = Math.round(target.def * (1 + target.ap / 100))
       const crit =
         target.effects.has(Effect.ABILITY_CRIT) &&
         chance(target.critChance, this)
