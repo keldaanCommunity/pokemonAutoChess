@@ -1,5 +1,8 @@
 # New Pokemons:
 
+ - Zacian
+ - Zacian (Crowned)
+ 
 # Changes to Pokemon & Abilities
 
 - Change Charmander line def & special def: 4/4/4 → 3/4/5

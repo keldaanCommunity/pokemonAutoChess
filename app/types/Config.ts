@@ -353,7 +353,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.COBALION,
   Pkm.KELDEO,
   Pkm.PECHARUNT,
-  Pkm.ROARING_MOON
+  Pkm.ROARING_MOON,
+  Pkm.ZACIAN
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6

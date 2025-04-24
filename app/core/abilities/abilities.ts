@@ -12539,6 +12539,45 @@ export class SuctionHealStrategy extends AbilityStrategy {
   }
 }
 
+export class BehemothBladeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 100 + pokemon.atk
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit
+    )
+
+    const orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      undefined
+    )
+
+    const destination = board.getKnockBackPlace(
+      target.positionX,
+      target.positionY,
+      orientation
+    )
+
+    if (destination) {
+      pokemon.moveTo(destination.x, destination.y, board)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12986,5 +13025,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
   [Ability.ARMOR_CANNON]: new ArmorCannonStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
-  [Ability.ROOST]: new RoostStrategy()
+  [Ability.ROOST]: new RoostStrategy(),
+  [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy()
 }
