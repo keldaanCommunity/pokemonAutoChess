@@ -3100,18 +3100,42 @@ export class IronTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    let defenseBuff = 2
-    if (pokemon.stars === 2) {
-      damage = 40
-      defenseBuff = 4
+    const damage = pokemon.def
+    const cellsHit = board.getCellsInFront(pokemon, target, 1)
+
+    for (const cell of cellsHit) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        const orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          cell.value.positionX,
+          cell.value.positionY,
+          pokemon,
+          undefined
+        )
+        const destination = board.getKnockBackPlace(
+          cell.value.positionX,
+          cell.value.positionY,
+          orientation
+        )
+
+        // console.log(
+        //   `pokemon on ${pokemon.positionX} ${pokemon.positionY} will move the target ${cell.value.positionX}, ${cell.value.positionY} will be moved to ${destination?.x}, ${destination?.y} orientation ${orientation}`
+        // )
+
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board)
+          cell.value.cooldown = 500
+        }
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
     }
-    if (pokemon.stars === 3) {
-      damage = 80
-      defenseBuff = 8
-    }
-    pokemon.addDefense(defenseBuff, pokemon, 0, false)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 

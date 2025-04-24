@@ -794,7 +794,7 @@ export class Onix extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.SPIKY_SHIELD
+  skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -811,7 +811,7 @@ export class Steelix extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.SPIKY_SHIELD
+  skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -828,7 +828,7 @@ export class MegaSteelix extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  //skill = Ability.SPIKY_SHIELD
+  //skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }

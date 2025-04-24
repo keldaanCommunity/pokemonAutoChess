@@ -1471,7 +1471,6 @@
 		"SOAK": "对目标造成[20,40,80,SP]点SPECIAL，并为所有我方宝可梦恢复10点PP。",
 		"ORIGIN_PULSE": "一道海浪横向穿过战场，对击中的所有敌方宝可梦造成[100,SP]点SPECIAL。",
 		"SEED_FLARE": "释放冲击波，对5格半径内所有敌方宝可梦造成[30,SP]点SPECIAL，并降低其3点SPE_DEF。",
-		"IRON_TAIL": "对目标造成[20,40,80,SP]点SPECIAL，并提升使用者[2,4,8]点DEF。",
 		"BLAST_BURN": "对所有相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL。",
 		"CHARGE": "本场战斗的剩余时间内，攻击额外造成[100,SP]%的SPECIAL（可以叠加）。",
 		"DISCHARGE": "对所有相邻敌方宝可梦造成[25,50,75,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",

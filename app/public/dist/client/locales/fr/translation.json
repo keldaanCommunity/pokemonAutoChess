@@ -1471,7 +1471,7 @@
 		"SOAK": "Inflige [20,40,80,SP] SPECIAL à la cible et donne 10 PP aux pokémons alliés",
 		"ORIGIN_PULSE": "Une vague se déplace horizontalement sur le champ de bataille en faisant [100,SP] SPECIAL",
 		"SEED_FLARE": "Le corps de Shaymin émet une onde de choc, infligeant [30,SP] SPECIAL à tous les ennemis dans un rayon de 5 cases et diminuant leur SPE_DEF de 3",
-		"IRON_TAIL": "Attaque à cible unique qui inflige [20,40,80,SP] SPECIAL et améliore la DEF de [2,4,8] points",
+		"IRON_TAIL": "Balance sa queue massive, frappant les 3 ennemis en face, les projetant en arrière et infligeant [100,SP]% de la DEF du lanceur en SPECIAL",
 		"BLAST_BURN": "Inflige [30,60,120,SP] SPECIAL dans une zone autour du lanceur",
 		"CHARGE": "Jusqu'à la fin du combat, les attaques infligent [100,SP]% de SPECIAL additionnels (cumulable).",
 		"DISCHARGE": "Décharge électrique infligeant [25,50,75,SP] SPECIAL aux ennemis proches ainsi que PARALYSIS pendant 5 secondes",

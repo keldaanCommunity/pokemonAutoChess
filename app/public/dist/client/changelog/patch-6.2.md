@@ -13,6 +13,7 @@
 - Buff Litwick line def & special def: 2/2/2 → 2/3/4
 - Buff Fennekin line: special defense 2/2/2 → 2/4/6, PP 90 → 80
 - Buff Spiky Shield (Maractus, Silcoon): damage 50 → 100% of defense
+- New ability for Onix line: Iron Tail: Swings its massive tail, hitting 3 enemy pokemon in front, knocking them back and dealing 100% of user's defense as special damage.
 
 # Changes to Synergies
 

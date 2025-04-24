@@ -1471,7 +1471,6 @@
 		"SOAK": "Verursacht [20,40,80,SP] SPECIAL und stellt befreundeten Pokémon 10 PP wieder her",
 		"ORIGIN_PULSE": "Eine Welle bewegt sich horizontal über das Schlachtfeld und bewirkt [100,SP] SPECIAL",
 		"SEED_FLARE": "Shaymins Körper sendet eine Schockwelle aus, die allen Feinden [30,SP] SPECIAL zufügt und ihre SPE_DEF um 3 verringert",
-		"IRON_TAIL": "Mono-Zielschadensangriff, der [20,40,80,SP] SPECIAL verursacht. Stärkung der DEF um [2,4,8] Punkte",
 		"BLAST_BURN": "Flächenangriff, der [30,60,120,SP] SPECIAL verursacht",
 		"CHARGE": "Bis zum Ende des Kampfes fügen Attacken [100,SP]% zusätzlichen SPECIAL (stapelbar).",
 		"DISCHARGE": "Schocken Sie Gegner in der Nähe mit [25,50,75,SP] SPECIAL und paralysieren Sie sie für 5 Sekunden",

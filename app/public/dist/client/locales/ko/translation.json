@@ -1437,7 +1437,6 @@
 		"SOAK": "대상에 [20,40,80,SP] SPECIAL 을 가하며 아군포켓몬의 PP 10 회복시킨다.",
 		"ORIGIN_PULSE": "전장을 수평으로 가로지르는 파도를 소환하며 피격된 적포켓몬들에게 [100,SP] SPECIAL 를 가한다.",
 		"SEED_FLARE": "쉐이미의 몸에서 충격파를 발산하며, 반경 5칸 내에 있는 모든 적포켓몬들에게 [30,SP] SPECIAL 을 가하며 SPE_DEF 을 3만큼 낮춘다.",
-		"IRON_TAIL": "대상에 [20,40,80,SP] SPECIAL 을 가하며, 시전자의 DEF 을 [2,4,8] 만큼 올린다.",
 		"BLAST_BURN": "사용자의 주변에 있는 영역에 [30,60,120,SP] SPECIAL 을 가한다.",
 		"CHARGE": "전투 종료 시까지 기본공격이 [100,SP]% 추가 SPECIAL 를 입힌다. (중첩가능)",
 		"DISCHARGE": "근처의 적포켓몬들에 [25,50,75,SP] SPECIAL 을 가하며 5초간 PARALYSIS 상태로 만든다.",

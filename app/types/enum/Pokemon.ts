@@ -4029,12 +4029,12 @@ export const AnimationConfig: {
   },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.STEELIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.MEGA_STEELIX]: {
