@@ -640,7 +640,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (Dishes.includes(item)) {
-      if (pokemon.meal === "") {
+      if (pokemon.meal === "" && pokemon.canEat) {
         pokemon.meal = item
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
@@ -656,7 +656,7 @@ export class OnDragDropItemCommand extends Command<
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
           ...message,
-          text: "belly_full",
+          text: pokemon.canEat ? "belly_full" : "not_hungry",
           pokemonId: pokemon.id
         })
         return
@@ -677,7 +677,7 @@ export class OnDragDropItemCommand extends Command<
         values(player.board).forEach((pkm) => {
           if (
             pkm.meal === "" &&
-            pkm.canHoldItems &&
+            pkm.canEat &&
             pokemon &&
             distanceC(
               pkm.positionX,
@@ -1476,6 +1476,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   const candidates = values(player.board).filter(
                     (p) =>
                       p.meal === "" &&
+                      p.canEat &&
                       !isOnBench(p) &&
                       distanceC(
                         chef.positionX,
