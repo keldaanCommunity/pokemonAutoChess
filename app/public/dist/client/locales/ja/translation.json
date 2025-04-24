@@ -1279,7 +1279,7 @@
 		"APPLE_ACID": "前方の対象に[15,30,60,SP]のSPECIALを与え、DEFとSPE_DEFを[5,SP]ポイント下げる。",
 		"PSYCHIC": "[40,80,160,SP] SPECIAL を与え、ターゲットと隣接する敵に 15 PP を燃焼します",
 		"DIVE": "水中に潜って[15,30,60] SHIELDを獲得し、敵チームの中央に再出現し、隣接するすべてのユニットに[10,20,40,SP] SPECIALとFREEZEを1秒間与える",
-		"SPIKY_SHIELD": "[3,5,10]秒間、このポケモンを近接攻撃したターゲットは傷を受け、現在のDEFの[50,SP]%に等しいSPECIALを受ける。",
+		"SPIKY_SHIELD": "[3,5,10]秒間、このポケモンを近接攻撃したターゲットは傷を受け、現在のDEFの[100,SP]%に等しいSPECIALを受ける。",
 		"FUTURE_SIGHT": "敵5体に[15,30,60,SP]SPECIALを与える",
 		"FAKE_TEARS": "敵チーム全体に[5,10,15,SP] SPECIALを与え、3秒間ARMOR_BREAKをトリガーします",
 		"SPARKLING_ARIA": "ターゲットと隣接する敵に[15,30,60,SP]SPECIALを与える。隣接する味方が火傷している場合、火傷は回復します。",

@@ -1279,7 +1279,7 @@
 		"PSYCHIC": "Gây [50,100,200,SP] SPECIAL và đối cháy 15 PP của mục tiêu và đối thủ ở gần",
 		"PSYBEAM": "Gây [25,50,100,SP] sát thương phép lên toàn bộ Pokémon đối thủ sau mục tiêu với [50,LK]% khả năng khiến chúng bị CONFUSION trong 4 giây",
 		"DIVE": "Lặn xuống dưới và nhận [15,30,60] SHIELD, sau đó xuất hiện giữa đội hình địch, gây [15,30,50,SP] SPECIAL và FREEZE toàn bộ Pokémon ở gần trong 1 giây",
-		"SPIKY_SHIELD": "Trong [3,5,10] giây, mục tiêu tấn công cận chiến Pokémon này nhận WOUND và SPECIAL một lượng tương đương với [50,SP]% of DEF hiện có",
+		"SPIKY_SHIELD": "Trong [3,5,10] giây, mục tiêu tấn công cận chiến Pokémon này nhận WOUND và SPECIAL một lượng tương đương với [100,SP]% of DEF hiện có",
 		"FUTURE_SIGHT": "Gây [15,30,60,SP] SPECIAL lên 5 đối thủ",
 		"FAKE_TEARS": "Gây [5,10,15,SP] SPECIAL lên toàn bộ team địch và làm ARMOR_BREAK trong 3 giây",
 		"SPARKLING_ARIA": "Gây [15,30,60,SP] SPECIAL lên mục tiêu và kẻ thù gần đó",
