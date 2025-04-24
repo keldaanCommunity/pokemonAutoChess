@@ -409,9 +409,6 @@ export default class Player extends Schema implements IPlayer {
                 ) {
                   this.transformPokemon(pokemon, Pkm.TYPE_NULL)
                 }
-                if (pokemon.name === Pkm.ARCHALUDON) {
-                  this.transformPokemon(pokemon, Pkm.DURALUDON)
-                }
                 if (!isOnBench(pokemon)) {
                   needsRecomputingSynergiesAgain = true
                 }
