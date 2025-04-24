@@ -95,7 +95,7 @@
     "react-i18next": "^15.0.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-redux": "^9.1.0",
-    "react-router-dom": "^6.25.1",
+    "react-router-dom": "^7.5.2",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.3",
     "react-tooltip": "5.21.5"
