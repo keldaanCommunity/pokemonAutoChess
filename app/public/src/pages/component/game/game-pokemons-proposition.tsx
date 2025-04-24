@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AdditionalPicksStages } from "../../../../../types/Config"
 import { ShinyItems } from "../../../../../types/enum/Item"
@@ -11,6 +11,8 @@ import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
+import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
+import { localStore, LocalStoreKeys } from "../../utils/store"
 import "./game-pokemon-propositions.css"
 
 export default function GamePokemonsPropositions() {
@@ -31,6 +33,18 @@ export default function GamePokemonsPropositions() {
     board.getBenchSize() >=
     (pokemonsProposition.some((p) => p in PkmDuo) ? 7 : 8)
   const life = useAppSelector((state) => state.game.players.find((p) => p.id === state.network.uid)?.life ?? 0)
+  const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(localStore.get(LocalStoreKeys.TEAM_PLANNER))
+  useEffect(() => {
+    const updateTeamPlanner = (e: StorageEvent) => {
+      if (e.key === LocalStoreKeys.TEAM_PLANNER) {
+        setTeamPlanner(localStore.get(LocalStoreKeys.TEAM_PLANNER))
+      }
+    }
+    window.addEventListener("storage", updateTeamPlanner)
+    return () => {
+      window.removeEventListener("storage", updateTeamPlanner)
+    }
+  }, [])
 
   const [visible, setVisible] = useState(true)
   if (pokemonsProposition.length > 0 && life > 0) {
@@ -63,6 +77,7 @@ export default function GamePokemonsPropositions() {
                       origin="proposition"
                       index={index}
                       duo={proposition as PkmDuo}
+                      inPlanner={teamPlanner?.some(p => p.name === proposition[0] || p.name === proposition[1]) ?? false}
                     />
                   ) : (
                     <GamePokemonPortrait
@@ -70,6 +85,7 @@ export default function GamePokemonsPropositions() {
                       origin="proposition"
                       index={index}
                       pokemon={proposition as Pkm}
+                      inPlanner={teamPlanner?.some(p => p.name === proposition) ?? false}
                     />
                   )}
                   {item && ShinyItems.includes(item) === false && (
