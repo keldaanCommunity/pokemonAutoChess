@@ -12602,6 +12602,40 @@ export class BehemothBladeStrategy extends AbilityStrategy {
   }
 }
 
+export class HeatCrashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.
+    let damage = [40, 60, 80][pokemon.stars - 1] ?? 80
+    const attackDifference = pokemon.atk - target.atk
+    damage += attackDifference * 2
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const knockbackCell = board.getKnockBackPlace(
+      target.positionX,
+      target.positionY,
+      pokemon.orientation
+    )
+    if (knockbackCell) {
+      target.moveTo(knockbackCell.x, knockbackCell.y, board)
+      target.cooldown = 500
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13050,5 +13084,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ARMOR_CANNON]: new ArmorCannonStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.ROOST]: new RoostStrategy(),
-  [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy()
+  [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
+  [Ability.HEAT_CRASH]: new HeatCrashStrategy()
 }

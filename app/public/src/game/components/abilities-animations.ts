@@ -1148,6 +1148,31 @@ export function displayAbility(
       break
     }
 
+    case Ability.HEAT_CRASH: {
+      const angle = Math.atan2(
+        coordinatesTarget[1] - coordinates[1],
+        coordinatesTarget[0] - coordinates[0]
+      )
+      const specialProjectile = addAbilitySprite(
+        Ability.SUNSTEEL_STRIKE,
+        coordinates
+      )
+        .setScale(0.5)
+        .setRotation(angle - Math.PI / 2)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: "linear",
+        duration: 300,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case "COMET_CRASH": {
       const startCoords = transformAttackCoordinate(targetX, 9, false)
       const specialProjectile = addAbilitySprite(
@@ -1568,7 +1593,7 @@ export function displayAbility(
       break
 
     case Ability.STEAM_ERUPTION:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      addAbilitySprite(skill, coordinates, true).setScale(2).setDepth(1)
       break
 
     case Ability.SEARING_SHOT:

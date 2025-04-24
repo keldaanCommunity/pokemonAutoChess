@@ -12006,7 +12006,7 @@ export class Tepig extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   passive = Passive.HATCH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -12024,7 +12024,7 @@ export class Pignite extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   passive = Passive.HATCH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -12040,7 +12040,7 @@ export class Emboar extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
