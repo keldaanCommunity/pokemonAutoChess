@@ -12311,16 +12311,20 @@ export class ScaleShotStrategy extends AbilityStrategy {
     pokemon.status.triggerArmorReduction(2000, pokemon)
     const scalePositions = new Array<{ x: number; y: number; delay: number }>()
 
-    const adjacentCells = board.getAdjacentCells(
-      pokemon.positionX,
-      pokemon.positionY,
-      false
-    )
+    const adjacentCells = [
+      [pokemon.positionX, pokemon.positionY - 1],
+      [pokemon.positionX, pokemon.positionY + 1],
+      [pokemon.positionX - 1, pokemon.positionY],
+      [pokemon.positionX + 1, pokemon.positionY],
+      [pokemon.positionX - 1, pokemon.positionY - 1],
+      [pokemon.positionX + 1, pokemon.positionY - 1],
+      [pokemon.positionX - 1, pokemon.positionY + 1],
+      [pokemon.positionX + 1, pokemon.positionY + 1]
+    ]
 
     let inc = 0
     for (const cell of adjacentCells) {
-      const x = cell.x
-      const y = cell.y
+      const [x, y] = cell
       const delay = 2000 + inc
       scalePositions.push({
         x,
@@ -12336,9 +12340,10 @@ export class ScaleShotStrategy extends AbilityStrategy {
         targetY: y,
         delay: delay
       })
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerArmorReduction(2000, cell.value)
-        cell.value.handleSpecialDamage(
+      const entityOnCell = board.getValue(x, y)
+      if (entityOnCell && entityOnCell.team !== pokemon.team) {
+        entityOnCell.status.triggerArmorReduction(2000, entityOnCell)
+        entityOnCell.handleSpecialDamage(
           40,
           board,
           AttackType.PHYSICAL,
