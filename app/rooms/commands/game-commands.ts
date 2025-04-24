@@ -1761,8 +1761,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const matchups = selectMatchups(this.state)
 
       matchups.forEach((matchup) => {
-        const { bluePlayer, redPlayer } = matchup
-        const weather = getWeather(bluePlayer, redPlayer, redPlayer.board)
+        const { bluePlayer, redPlayer, ghost } = matchup
+        const weather = getWeather(
+          bluePlayer,
+          redPlayer,
+          redPlayer.board,
+          ghost
+        )
         const simulationId = nanoid()
 
         bluePlayer.simulationId = simulationId
