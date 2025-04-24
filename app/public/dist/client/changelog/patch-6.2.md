@@ -4,6 +4,8 @@
 
 # Changes to Synergies
 
+- Wild Pokemon can now be found in initial shop at stage 0
+
 # Changes to Items
 
 # Gameplay
