@@ -249,7 +249,7 @@ export default config({
     })
 
     app.get("/titles", async (req, res) => {
-      res.send(await TitleStatistic.find())
+      res.send(await TitleStatistic.find().exec())
     })
 
     app.get("/meta/items", async (req, res) => {

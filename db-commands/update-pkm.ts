@@ -10,7 +10,7 @@ async function main() {
   try {
     logger.info("connect to db ...")
     const db = await connect(process.env.MONGO_URI!)
-    const bots = await BotV2.find()
+    const bots = await BotV2.find().exec()
     for (let i = 0; i < bots.length; i++) {
       let modified = false
       const bot = bots[i]
