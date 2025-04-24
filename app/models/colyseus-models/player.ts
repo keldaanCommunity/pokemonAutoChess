@@ -1,5 +1,8 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import { carryOverPermanentStats } from "../../core/evolution-rules"
+import {
+  carryOverPermanentStats,
+  ConditionBasedEvolutionRule
+} from "../../core/evolution-rules"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { getUnitPowerScore } from "../../core/bot-logic"
 import type GameState from "../../rooms/states/game-state"
@@ -230,6 +233,11 @@ export default class Player extends Schema implements IPlayer {
     }
     this.money += value
     if (countTotalEarned && value > 0) this.totalMoneyEarned += value
+    this.board.forEach((pokemon) => {
+      if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
+        pokemon.evolutionRule.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
+      }
+    })
   }
 
   addBattleResult(
