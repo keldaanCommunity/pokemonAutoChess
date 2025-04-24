@@ -249,7 +249,7 @@ export default config({
     })
 
     app.get("/titles", async (req, res) => {
-      res.send(await TitleStatistic.find().exec())
+      res.send(await TitleStatistic.find().sort({ name: 1 }).exec()) // Ensure a consistent order by sorting on a unique field
     })
 
     app.get("/meta/items", async (req, res) => {
