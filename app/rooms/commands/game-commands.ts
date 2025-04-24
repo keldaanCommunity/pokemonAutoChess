@@ -920,7 +920,7 @@ export class OnSpectateCommand extends Command<
 > {
   execute({ id, spectatedPlayerId }) {
     const player = this.state.players.get(id)
-    if (!player || !player.alive) return
+    if (!player) return
     player.spectatedPlayerId = spectatedPlayerId
   }
 }
