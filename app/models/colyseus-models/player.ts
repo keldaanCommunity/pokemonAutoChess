@@ -545,7 +545,9 @@ export default class Player extends Schema implements IPlayer {
         this.updateSynergies()
         if (regionalSpeciality) {
           this.board.forEach((pokemon) => {
-            pokemon.meal = regionalSpeciality
+            if (pokemon.canEat) {
+              pokemon.meal = regionalSpeciality
+            }
           })
         }
       }

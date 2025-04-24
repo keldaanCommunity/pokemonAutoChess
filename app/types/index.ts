@@ -434,6 +434,7 @@ export interface IPokemon {
   canBePlaced: boolean
   canBeCloned: boolean
   canHoldItems: boolean
+  canEat: boolean
   deathCount: number
   readonly hasEvolution: boolean
 }

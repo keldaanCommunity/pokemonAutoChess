@@ -149,6 +149,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get canEat(): boolean {
+    return this.passive !== Passive.INANIMATE
+  }
+
   get hasEvolution(): boolean {
     return this.evolution !== Pkm.DEFAULT || this.evolutions.length > 0
   }

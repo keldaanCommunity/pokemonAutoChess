@@ -3385,6 +3385,7 @@
 	"berry_unripe": "PAS MÛR !",
 	"full": "PLUS DE PLACE",
 	"belly_full": "REPU!",
+	"not_hungry": "PAS FAIM",
 	"drop_here_to_sell": "Déposez ici pour vendre",
 	"for_price_gold": "pour {{price}} pièces d'or",
 	"buy_xp": "Acheter XP {{cost}}",

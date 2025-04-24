@@ -15,8 +15,6 @@ import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { giveRandomEgg } from "../eggs"
-import { EvolutionTime } from "../../types/Config"
-import { Effect } from "../../types/enum/Effect"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -353,7 +351,9 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     super.process(pokemon, state, board, target, crit)
     if (pokemon.player) {
       pokemon.player.board.forEach((p: IPokemon) => {
-        p.meal = pickRandomIn(Dishes as unknown as Item[])
+        if (p.canEat) {
+          p.meal = pickRandomIn(Dishes as unknown as Item[])
+        }
       })
     }
   }
