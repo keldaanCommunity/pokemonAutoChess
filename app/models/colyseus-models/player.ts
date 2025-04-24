@@ -389,13 +389,6 @@ export default class Player extends Schema implements IPlayer {
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
             pokemon.items.delete(item)
-            if (
-              pokemon.name === Pkm.ARCHALUDON &&
-              values(pokemon.items).some((i) => ArtificialItems.includes(i)) ===
-                false
-            ) {
-              this.transformPokemon(pokemon, Pkm.DURALUDON)
-            }
 
             if (item in SynergyGivenByItem) {
               const type = SynergyGivenByItem[item]
