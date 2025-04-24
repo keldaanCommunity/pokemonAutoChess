@@ -176,6 +176,10 @@ export class Pokemon extends Schema implements IPokemon {
     // called after manually changing position of the pokemon on board
   }
 
+  onItemGiven(item: Item, player: Player) {
+    // called after giving an item to the mon
+  }
+
   onAcquired(player: Player) {
     // called after buying or picking the mon
   }
@@ -12946,6 +12950,12 @@ export class Necrozma extends Pokemon {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
     }
   }
+
+  onItemGiven(item: Item, player: Player) {
+    if (item === Item.SHINY_STONE) {
+      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
+    }
+  }
 }
 
 export class UltraNecrozma extends Pokemon {
@@ -13028,6 +13038,12 @@ export class Cherrim extends Pokemon {
       (x === player.lightX && y === player.lightY && hasLight) ||
       this.items.has(Item.SHINY_STONE)
     ) {
+      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
+    }
+  }
+
+  onItemGiven(item: Item, player: Player) {
+    if (item === Item.SHINY_STONE) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
   }

@@ -785,15 +785,6 @@ export class OnDragDropItemCommand extends Command<
       pokemon = pokemonEvolved
     }
 
-    if (item === Item.SHINY_STONE) {
-      if (
-        pokemon.passive === Passive.PRISM ||
-        pokemon.passive === Passive.BLOSSOM
-      ) {
-        pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, player)
-      }
-    }
-
     if (isBasicItem && existingBasicItemToCombine) {
       const recipe = Object.entries(ItemRecipe).find(
         ([_result, recipe]) =>
@@ -825,9 +816,11 @@ export class OnDragDropItemCommand extends Command<
         player.items.push(itemCombined)
       } else {
         pokemon.items.add(itemCombined)
+        pokemon.onItemGiven(itemCombined, player)
       }
     } else {
       pokemon.items.add(item)
+      pokemon.onItemGiven(item, player)
       removeInArray(player.items, item)
     }
 
