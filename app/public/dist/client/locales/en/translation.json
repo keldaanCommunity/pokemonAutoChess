@@ -465,7 +465,8 @@
 		"BITTER_BLADE": "Bitter Blade",
 		"ARMOR_CANNON": "Armor Cannon",
 		"SUCTION_HEAL": "Suction Heal",
-		"ROOST": "Roost"
+		"ROOST": "Roost",
+		"BEHEMOTH_BLADE": "Behemoth Blade"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1413,7 +1414,9 @@
 		"EELEKTROSS": "Eelektross",
 		"PIDOVE": "Pidove",
 		"TRANQUILL": "Tranquill",
-		"UNFEZANT": "Unfezant"
+		"UNFEZANT": "Unfezant",
+		"ZACIAN": "Zacian",
+		"ZACIAN_CROWNED": "Zacian (Crowned)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1859,7 +1862,8 @@
 		"ARMOR_CANNON": "Shoots out a blazing projectile, dealing [70,SP] SPECIAL to the target before bouncing to the [2,SP] closest enemies, dealing [35,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [10,SP] SPECIAL each.",
 		"BITTER_BLADE": "Focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every adjacent enemy. User heals [10,SP]% of its max HP for each enemy hit.",
 		"SUCTION_HEAL": "Drains the energy from its targets, dealing [15,30,60,SP] SPECIAL in a 2-tile cone in front of the user and heals HP for [50,SP]% of the damage dealt.",
-		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP."
+		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP.",
+		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerfull slash, dealing [100,SP] + 1x ATK as PHYSICAL"
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2281,7 +2285,8 @@
 		"GIMMIGHOUL_COIN": "Gimmighoul Coin",
 		"EXCHANGE_TICKET": "Exchange Ticket",
 		"AUSPICIOUS_ARMOR": "Auspicious Armor",
-		"MALICIOUS_ARMOR": "Malicious Armor"
+		"MALICIOUS_ARMOR": "Malicious Armor",
+		"RUSTED_SWORD": "Rusted Sword"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2475,7 +2480,8 @@
 		"GIMMIGHOUL_COIN": "Get 1 additional GOLD income each round, and increase max interest cap by 10 GOLD.",
 		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
 		"AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",
-		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it."
+		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
+		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% ATK. Transfers to the ally with the weakest ATK when the holder faints."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -2621,7 +2627,8 @@
 		"CARAMEL_SWIRL_CREAM": "Upon casting, the CARAMEL_SWIRL_FLAVOR adds [80,SP] % CRIT_POWER to the nearest ally",
 		"RAINBOW_SWIRL_CREAM": "Upon casting, the RAINBOW_SWIRL_FLAVOR adds [60,SP] AP to the nearest ally",
 		"DURALUDON": "Duraludon is looking for an ARTIFICIAL item",
-		"CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR"
+		"CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR",
+		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD"
 	},
 	"stat": {
 		"ATK": "Attack",

@@ -18108,6 +18108,39 @@ export class Unfezant extends Pokemon {
   }
 }
 
+export class Zacian extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.WILD])
+  rarity = Rarity.LEGENDARY
+  evolution = Pkm.ZACIAN_CROWNED
+  evolutionRule = new ItemEvolutionRule([Item.RUSTED_SWORD])
+  stars = 3
+  hp = 260
+  atk = 22
+  speed = 69
+  def = 11
+  speDef = 11
+  maxPP = 100
+  range = 1
+  skill = Ability.BEHEMOTH_BLADE
+  passive = Passive.ZACIAN
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
+
+export class ZacianCrowned extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.WILD, Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  hp = 260
+  atk = 22
+  speed = 69
+  def = 12
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.BEHEMOTH_BLADE
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19060,7 +19093,9 @@ export const PokemonClasses: Record<
   [Pkm.EELEKTROSS]: Eelektross,
   [Pkm.PIDOVE]: Pidove,
   [Pkm.TRANQUILL]: Tranquill,
-  [Pkm.UNFEZANT]: Unfezant
+  [Pkm.UNFEZANT]: Unfezant,
+  [Pkm.ZACIAN]: Zacian,
+  [Pkm.ZACIAN_CROWNED]: ZacianCrowned
 }
 
 // declare all the classes in colyseus schema TypeRegistry

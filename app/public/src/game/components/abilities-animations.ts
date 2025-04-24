@@ -1506,6 +1506,20 @@ export function displayAbility(
         )
       break
 
+    case Ability.BEHEMOTH_BLADE:
+      addAbilitySprite(Ability.VOLT_SWITCH, coordinates, true)
+        .setScale(2)
+        .setOrigin(0.5, 0)
+        .setTint(0x87ceeb)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+            Math.PI / 2
+        )
+      break
+
     case Ability.MUDDY_WATER:
       addAbilitySprite(skill, coordinatesTarget, true)
         .setScale(2)

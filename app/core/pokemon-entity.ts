@@ -1726,6 +1726,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
       })
     }
+
+    if (this.items.has(Item.RUSTED_SWORD)) {
+      this.items.delete(Item.RUSTED_SWORD)
+      const alliesSortByLowestAtk = (
+        board.cells.filter(
+          (p) =>
+            p && p.team === this.team && p.id !== this.id && p.items.size < 3
+        ) as PokemonEntity[]
+      ).sort((a, b) => a.atk - b.atk)
+
+      const target = alliesSortByLowestAtk[0]
+      if (target) {
+        target.addItem(Item.RUSTED_SWORD)
+      }
+    }
   }
 
   flyAway(board: Board) {
