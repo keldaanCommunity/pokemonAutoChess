@@ -3100,18 +3100,42 @@ export class IronTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    let defenseBuff = 2
-    if (pokemon.stars === 2) {
-      damage = 40
-      defenseBuff = 4
+    const damage = pokemon.def
+    const cellsHit = board.getCellsInFront(pokemon, target, 1)
+
+    for (const cell of cellsHit) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        const orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          cell.value.positionX,
+          cell.value.positionY,
+          pokemon,
+          undefined
+        )
+        const destination = board.getKnockBackPlace(
+          cell.value.positionX,
+          cell.value.positionY,
+          orientation
+        )
+
+        // console.log(
+        //   `pokemon on ${pokemon.positionX} ${pokemon.positionY} will move the target ${cell.value.positionX}, ${cell.value.positionY} will be moved to ${destination?.x}, ${destination?.y} orientation ${orientation}`
+        // )
+
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board)
+          cell.value.cooldown = 500
+        }
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
     }
-    if (pokemon.stars === 3) {
-      damage = 80
-      defenseBuff = 8
-    }
-    pokemon.addDefense(defenseBuff, pokemon, 0, false)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -12583,6 +12607,40 @@ export class BehemothBladeStrategy extends AbilityStrategy {
   }
 }
 
+export class HeatCrashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.
+    let damage = [40, 60, 80][pokemon.stars - 1] ?? 80
+    const attackDifference = pokemon.atk - target.atk
+    damage += attackDifference * 2
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const knockbackCell = board.getKnockBackPlace(
+      target.positionX,
+      target.positionY,
+      pokemon.orientation
+    )
+    if (knockbackCell) {
+      target.moveTo(knockbackCell.x, knockbackCell.y, board)
+      target.cooldown = 500
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13031,5 +13089,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ARMOR_CANNON]: new ArmorCannonStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.ROOST]: new RoostStrategy(),
-  [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy()
+  [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
+  [Ability.HEAT_CRASH]: new HeatCrashStrategy()
 }

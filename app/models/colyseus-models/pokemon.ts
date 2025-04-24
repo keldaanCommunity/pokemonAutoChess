@@ -149,6 +149,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get canEat(): boolean {
+    return this.passive !== Passive.INANIMATE
+  }
+
   get hasEvolution(): boolean {
     return this.evolution !== Pkm.DEFAULT || this.evolutions.length > 0
   }
@@ -197,6 +201,8 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   beforeSimulationStart(params: {
+    simulationId: string
+    isGhostBattle: boolean
     weather: Weather
     player: Player
     teamEffects: Set<Effect>
@@ -794,7 +800,7 @@ export class Onix extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.SPIKY_SHIELD
+  skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -811,7 +817,7 @@ export class Steelix extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.SPIKY_SHIELD
+  skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -828,7 +834,7 @@ export class MegaSteelix extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  //skill = Ability.SPIKY_SHIELD
+  //skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -6265,10 +6271,13 @@ export class Castform extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6292,10 +6301,13 @@ export class CastformSun extends Pokemon {
   attackSprite = AttackSprite.DRAGON_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6319,10 +6331,13 @@ export class CastformRain extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6346,10 +6361,13 @@ export class CastformHail extends Pokemon {
   attackSprite = AttackSprite.ICE_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -12006,7 +12024,7 @@ export class Tepig extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   passive = Passive.HATCH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -12024,7 +12042,7 @@ export class Pignite extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   passive = Passive.HATCH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -12040,7 +12058,7 @@ export class Emboar extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 

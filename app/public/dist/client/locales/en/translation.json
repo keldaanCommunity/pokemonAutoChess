@@ -466,7 +466,8 @@
 		"ARMOR_CANNON": "Armor Cannon",
 		"SUCTION_HEAL": "Suction Heal",
 		"ROOST": "Roost",
-		"BEHEMOTH_BLADE": "Behemoth Blade"
+		"BEHEMOTH_BLADE": "Behemoth Blade",
+		"HEAT_CRASH": "Heat Crash"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1474,7 +1475,7 @@
 		"SOAK": "Deal [20,40,80,SP] SPECIAL to the target and restore 10 PP to all allied Pokémon.",
 		"ORIGIN_PULSE": "A wave travels horizontally across the battlefield, dealing [100,SP] SPECIAL to all enemy Pokémon in its path.",
 		"SEED_FLARE": "Emit a shockwave, deal [30,SP] SPECIAL to all enemy Pokémon in a 5 tile radius and decrease their SPE_DEF by 3",
-		"IRON_TAIL": "Deal [20,40,80,SP] SPECIAL to the target and increase the user's DEF by [2,4,8].",
+		"IRON_TAIL": "Swings its massive tail, hitting 3 enemy Pokémon in front, knocking them back and dealing [100,SP]% of user's DEF as SPECIAL",
 		"BLAST_BURN": "Deal [30,60,120,SP] SPECIAL to all adjacent enemy Pokémon.",
 		"CHARGE": "Until the end of the fight, attacks deal [100,SP]% additional SPECIAL (stackable).",
 		"DISCHARGE": "Deal [25,50,75,SP] SPECIAL to all adjacent enemy Pokémon and inflict them with PARALYSIS for 5 seconds.",
@@ -1549,7 +1550,7 @@
 		"PSYCHIC": "Deal [40,80,160,SP] SPECIAL to the target and adjacent enemy Pokémon and burn 15 PP.",
 		"PSYBEAM": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target with a [50,LK]% chance to inflict them with CONFUSION for 4 seconds.",
 		"DIVE": "Dive underwater and gain [15,30,60] SHIELD, then reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL and FREEZE all adjacent enemy Pokémon for 1 second.",
-		"SPIKY_SHIELD": "For [3,5,10] seconds, targets that melee attack the user receive WOUND for 2 seconds and take SPECIAL equal to [50,SP]% of the user's DEF. When casting again before the end of the effect, throw spikes in all directions, dealing 30 SPECIAL to all enemies hit.",
+		"SPIKY_SHIELD": "For [3,5,10] seconds, targets that melee attack the user receive WOUND for 2 seconds and take SPECIAL equal to [100,SP]% of the user's DEF. When casting again before the end of the effect, throw spikes in all directions, dealing 30 SPECIAL to all enemies hit.",
 		"FUTURE_SIGHT": "Deal [15,30,60,SP] SPECIAL to 5 enemy Pokémon after 2 seconds.",
 		"FAKE_TEARS": "Deal [5,10,15,SP] SPECIAL to all enemy Pokémon and inflict them with ARMOR_BREAK for 3 seconds.",
 		"SPARKLING_ARIA": "Deal [15,30,60,SP] SPECIAL to the target and adjacent enemy Pokémon. Cure BURN from all adjacent allied Pokémon.",
@@ -1863,7 +1864,8 @@
 		"BITTER_BLADE": "Focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every adjacent enemy. User heals [10,SP]% of its max HP for each enemy hit.",
 		"SUCTION_HEAL": "Drains the energy from its targets, dealing [15,30,60,SP] SPECIAL in a 2-tile cone in front of the user and heals HP for [50,SP]% of the damage dealt.",
 		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP.",
-		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerfull slash, dealing [100,SP] + 1x ATK as PHYSICAL"
+		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerfull slash, dealing [100,SP] + 1x ATK as PHYSICAL",
+		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -3394,6 +3396,7 @@
 	"berry_unripe": "NOT YET !",
 	"full": "FULL",
 	"belly_full": "BELLY FULL!",
+	"not_hungry": "NOT HUNGRY",
 	"drop_here_to_sell": "Drop here to sell",
 	"for_price_gold": "for {{price}} gold",
 	"buy_xp": "Buy XP {{cost}}",
