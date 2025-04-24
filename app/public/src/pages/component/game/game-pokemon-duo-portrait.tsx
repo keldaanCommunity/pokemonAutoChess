@@ -16,6 +16,7 @@ export default function GamePokemonDuoPortrait(props: {
   origin: string
   duo: PkmDuo
   click?: React.MouseEventHandler<HTMLDivElement>
+  inPlanner?: boolean
 }) {
   const duo = PkmDuos[props.duo].map((p) => getPokemonData(p))
   const rarityColor = RarityColor[duo[0].rarity]
@@ -24,7 +25,7 @@ export default function GamePokemonDuoPortrait(props: {
 
   return (
     <div
-      className={`my-container game-pokemon-portrait game-pokemon-portrait-duo`}
+      className={cc(`my-container game-pokemon-portrait game-pokemon-portrait-duo`, { planned: props.inPlanner ?? false })}
       style={{
         backgroundColor: rarityColor,
         borderColor: rarityColor
@@ -60,6 +61,13 @@ export default function GamePokemonDuoPortrait(props: {
           </Tooltip>
         </React.Fragment>
       ))}
+      {props.inPlanner && (
+        <img
+          src="/assets/ui/planned.png"
+          alt=""
+          className="game-pokemon-portrait-planned-icon"
+        />
+      )}
       <ul className="game-pokemon-portrait-types">
         {Array.from(duo[0].types.values()).map((type) => {
           return (

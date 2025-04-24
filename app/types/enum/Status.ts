@@ -27,3 +27,16 @@ export enum Status {
   LOCKED = "LOCKED",
   BLINDED = "BLINDED"
 }
+
+export const PositiveStatuses = [
+  Status.POKERUS,
+  Status.RESURECTION,
+  Status.RUNE_PROTECT,
+  Status.ELECTRIC_FIELD,
+  Status.PSYCHIC_FIELD,
+  Status.GRASS_FIELD,
+  Status.FAIRY_FIELD,
+  Status.SPIKY_SHIELD,
+  Status.MAGIC_BOUNCE,
+  Status.RAGE
+]

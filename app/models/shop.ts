@@ -452,7 +452,8 @@ export default class Shop {
     }
 
     const isPVE = state.stageLevel in PVEStages
-    const wildChance = player.wildChance + (isPVE ? 0.05 : 0)
+    const wildChance =
+      player.wildChance + (isPVE || state.stageLevel === 0 ? 0.05 : 0)
 
     const finals = new Set(
       values(player.board)

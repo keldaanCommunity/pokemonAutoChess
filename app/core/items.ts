@@ -123,6 +123,14 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
 }
 
 export const ItemEffects: { [i in Item]?: Effect[] } = {
+  [Item.RUSTED_SWORD]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.addAttack(pokemon.baseAtk * 0.5, pokemon, 0, false)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.addAttack(-pokemon.baseAtk * 0.5, pokemon, 0, false)
+    })
+  ],
   [Item.SOUL_DEW]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effectsSet.add(new SoulDewEffect())

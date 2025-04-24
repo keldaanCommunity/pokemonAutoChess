@@ -15,12 +15,12 @@ let metaItems = new Array<IItemsStatistic>()
 let metaPokemons = new Array<IPokemonsStatisticV2>()
 
 export async function fetchMetaItems() {
-  metaItems = await ItemsStatistics.find()
+  metaItems = await ItemsStatistics.find().exec()
   return metaItems
 }
 
 export async function fetchMetaPokemons() {
-  metaPokemons = await PokemonsStatistics.find()
+  metaPokemons = await PokemonsStatistics.find().exec()
   return metaPokemons
 }
 

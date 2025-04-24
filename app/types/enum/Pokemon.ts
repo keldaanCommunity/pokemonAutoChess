@@ -946,7 +946,9 @@ export enum Pkm {
   CERULEDGE = "CERULEDGE",
   TYNAMO = "TYNAMO",
   EELEKTRIK = "EELEKTRIK",
-  EELEKTROSS = "EELEKTROSS"
+  EELEKTROSS = "EELEKTROSS",
+  ZACIAN = "ZACIAN",
+  ZACIAN_CROWNED = "ZACIAN_CROWNED"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1975,8 +1977,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DREEPY]: "0885",
   [Pkm.DRAKLOAK]: "0886",
   [Pkm.DRAGAPULT]: "0887",
-  //[Pkm.ZACIAN]: "0888",
-  //[Pkm.ZACIAN_CROWNED]: "0888-0001",
+  [Pkm.ZACIAN]: "0888",
+  [Pkm.ZACIAN_CROWNED]: "0888-0001",
   //[Pkm.ZAMAZENTA]: "0889",
   //[Pkm.ZAMAZENTA_CROWNED]: "0889-0001",
   [Pkm.ETERNATUS]: "0890",
@@ -3064,7 +3066,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EELEKTROSS]: Pkm.TYNAMO,
   [Pkm.PIDOVE]: Pkm.PIDOVE,
   [Pkm.TRANQUILL]: Pkm.PIDOVE,
-  [Pkm.UNFEZANT]: Pkm.PIDOVE
+  [Pkm.UNFEZANT]: Pkm.PIDOVE,
+  [Pkm.ZACIAN]: Pkm.ZACIAN,
+  [Pkm.ZACIAN_CROWNED]: Pkm.ZACIAN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -4025,12 +4029,12 @@ export const AnimationConfig: {
   },
   [Pkm.ONIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.STEELIX]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   },
   [Pkm.MEGA_STEELIX]: {
@@ -6114,18 +6118,18 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.TEPIG]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.PIGNITE]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.EMBOAR]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot
   },
   [Pkm.WYNAUT]: {
@@ -8000,5 +8004,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hover,
     emote: AnimationType.Shoot
+  },
+  [Pkm.ZACIAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
+  },
+  [Pkm.ZACIAN_CROWNED]: {
+    attack: AnimationType.Scratch,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge
   }
 }

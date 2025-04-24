@@ -141,6 +141,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.ARTICUNO, 6, 2]
     ],
     marowakItems: [[Item.FLUFFY_TAIL], [Item.POKEMONOMICON], [Item.AQUA_EGG]],
+    getRewards(player: Player) {
+      for (const p of values(player.board)) {
+        if (p.name === Pkm.ZACIAN) {
+          return [Item.RUSTED_SWORD]
+        }
+      }
+      return []
+    },
     getRewardsPropositions(player: Player) {
       const rewards = pickNRandomIn(CraftableNonSynergyItems, 2)
       rewards.push(

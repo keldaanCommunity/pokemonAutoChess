@@ -640,7 +640,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (Dishes.includes(item)) {
-      if (pokemon.meal === "") {
+      if (pokemon.meal === "" && pokemon.canEat) {
         pokemon.meal = item
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
@@ -656,7 +656,7 @@ export class OnDragDropItemCommand extends Command<
       } else {
         client.send(Transfer.DRAG_DROP_FAILED, {
           ...message,
-          text: "belly_full",
+          text: pokemon.canEat ? "belly_full" : "not_hungry",
           pokemonId: pokemon.id
         })
         return
@@ -677,7 +677,7 @@ export class OnDragDropItemCommand extends Command<
         values(player.board).forEach((pkm) => {
           if (
             pkm.meal === "" &&
-            pkm.canHoldItems &&
+            pkm.canEat &&
             pokemon &&
             distanceC(
               pkm.positionX,
@@ -785,15 +785,6 @@ export class OnDragDropItemCommand extends Command<
       pokemon = pokemonEvolved
     }
 
-    if (item === Item.SHINY_STONE) {
-      if (
-        pokemon.passive === Passive.PRISM ||
-        pokemon.passive === Passive.BLOSSOM
-      ) {
-        pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, player)
-      }
-    }
-
     if (isBasicItem && existingBasicItemToCombine) {
       const recipe = Object.entries(ItemRecipe).find(
         ([_result, recipe]) =>
@@ -825,9 +816,11 @@ export class OnDragDropItemCommand extends Command<
         player.items.push(itemCombined)
       } else {
         pokemon.items.add(itemCombined)
+        pokemon.onItemGiven(itemCombined, player)
       }
     } else {
       pokemon.items.add(item)
+      pokemon.onItemGiven(item, player)
       removeInArray(player.items, item)
     }
 
@@ -1483,6 +1476,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   const candidates = values(player.board).filter(
                     (p) =>
                       p.meal === "" &&
+                      p.canEat &&
                       !isOnBench(p) &&
                       distanceC(
                         chef.positionX,
@@ -1768,8 +1762,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const matchups = selectMatchups(this.state)
 
       matchups.forEach((matchup) => {
-        const { bluePlayer, redPlayer } = matchup
-        const weather = getWeather(bluePlayer, redPlayer, redPlayer.board)
+        const { bluePlayer, redPlayer, ghost } = matchup
+        const weather = getWeather(
+          bluePlayer,
+          redPlayer,
+          redPlayer.board,
+          ghost
+        )
         const simulationId = nanoid()
 
         bluePlayer.simulationId = simulationId

@@ -5,17 +5,17 @@ import {
   PassivesAssociatedToWeather
 } from "../types/enum/Weather"
 
-import { SynergyGivenByItem, WeatherByWeatherRocks } from "../types/enum/Item"
+import { WeatherByWeatherRocks } from "../types/enum/Item"
 import { MapSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { WeatherThreshold } from "../types/Config"
 import Player from "../models/colyseus-models/player"
-import { values } from "../utils/schemas"
 
 export function getWeather(
   bluePlayer: Player,
   redPlayer: Player | null,
-  redPlayerBoard: MapSchema<Pokemon, string>
+  redPlayerBoard: MapSchema<Pokemon, string>,
+  isGhostBattle = false
 ): Weather {
   function getDominantWeather(
     count: Map<Weather, number>,
@@ -126,7 +126,10 @@ export function getWeather(
     // apply special weather passives
     board.forEach((pkm) => {
       if (pkm.positionY != 0) {
-        if (pkm.passive === Passive.CASTFORM) {
+        if (
+          pkm.passive === Passive.CASTFORM &&
+          !(isGhostBattle && board === redPlayerBoard)
+        ) {
           const dominant = getDominantWeather(playerWeatherScore, [
             Weather.SUN,
             Weather.RAIN,

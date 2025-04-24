@@ -120,6 +120,8 @@ export default class Simulation extends Schema implements ISimulation {
       if (player) {
         player.board.forEach((pokemon, id) => {
           pokemon.beforeSimulationStart({
+            simulationId: this.id,
+            isGhostBattle: this.isGhostBattle,
             weather: this.weather,
             player,
             teamEffects,

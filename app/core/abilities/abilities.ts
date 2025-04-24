@@ -3100,18 +3100,42 @@ export class IronTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let damage = 20
-    let defenseBuff = 2
-    if (pokemon.stars === 2) {
-      damage = 40
-      defenseBuff = 4
+    const damage = pokemon.def
+    const cellsHit = board.getCellsInFront(pokemon, target, 1)
+
+    for (const cell of cellsHit) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        const orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          cell.value.positionX,
+          cell.value.positionY,
+          pokemon,
+          undefined
+        )
+        const destination = board.getKnockBackPlace(
+          cell.value.positionX,
+          cell.value.positionY,
+          orientation
+        )
+
+        // console.log(
+        //   `pokemon on ${pokemon.positionX} ${pokemon.positionY} will move the target ${cell.value.positionX}, ${cell.value.positionY} will be moved to ${destination?.x}, ${destination?.y} orientation ${orientation}`
+        // )
+
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board)
+          cell.value.cooldown = 500
+        }
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
     }
-    if (pokemon.stars === 3) {
-      damage = 80
-      defenseBuff = 8
-    }
-    pokemon.addDefense(defenseBuff, pokemon, 0, false)
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -12311,16 +12335,20 @@ export class ScaleShotStrategy extends AbilityStrategy {
     pokemon.status.triggerArmorReduction(2000, pokemon)
     const scalePositions = new Array<{ x: number; y: number; delay: number }>()
 
-    const adjacentCells = board.getAdjacentCells(
-      pokemon.positionX,
-      pokemon.positionY,
-      false
-    )
+    const adjacentCells = [
+      [pokemon.positionX, pokemon.positionY - 1],
+      [pokemon.positionX, pokemon.positionY + 1],
+      [pokemon.positionX - 1, pokemon.positionY],
+      [pokemon.positionX + 1, pokemon.positionY],
+      [pokemon.positionX - 1, pokemon.positionY - 1],
+      [pokemon.positionX + 1, pokemon.positionY - 1],
+      [pokemon.positionX - 1, pokemon.positionY + 1],
+      [pokemon.positionX + 1, pokemon.positionY + 1]
+    ]
 
     let inc = 0
     for (const cell of adjacentCells) {
-      const x = cell.x
-      const y = cell.y
+      const [x, y] = cell
       const delay = 2000 + inc
       scalePositions.push({
         x,
@@ -12336,9 +12364,10 @@ export class ScaleShotStrategy extends AbilityStrategy {
         targetY: y,
         delay: delay
       })
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerArmorReduction(2000, cell.value)
-        cell.value.handleSpecialDamage(
+      const entityOnCell = board.getValue(x, y)
+      if (entityOnCell && entityOnCell.team !== pokemon.team) {
+        entityOnCell.status.triggerArmorReduction(2000, entityOnCell)
+        entityOnCell.handleSpecialDamage(
           40,
           board,
           AttackType.PHYSICAL,
@@ -12536,6 +12565,79 @@ export class SuctionHealStrategy extends AbilityStrategy {
         pokemon.handleHeal(attack.takenDamage * 0.5, pokemon, 1, crit)
       }
     })
+  }
+}
+
+export class BehemothBladeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    const damage = 100 + pokemon.atk
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.PHYSICAL,
+      pokemon,
+      crit
+    )
+
+    const orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      undefined
+    )
+
+    const destination = board.getKnockBackPlace(
+      target.positionX,
+      target.positionY,
+      orientation
+    )
+
+    if (destination) {
+      pokemon.moveTo(destination.x, destination.y, board)
+    }
+  }
+}
+
+export class HeatCrashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    // Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.
+    let damage = [40, 60, 80][pokemon.stars - 1] ?? 80
+    const attackDifference = pokemon.atk - target.atk
+    damage += attackDifference * 2
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const knockbackCell = board.getKnockBackPlace(
+      target.positionX,
+      target.positionY,
+      pokemon.orientation
+    )
+    if (knockbackCell) {
+      target.moveTo(knockbackCell.x, knockbackCell.y, board)
+      target.cooldown = 500
+    }
   }
 }
 
@@ -12986,5 +13088,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
   [Ability.ARMOR_CANNON]: new ArmorCannonStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
-  [Ability.ROOST]: new RoostStrategy()
+  [Ability.ROOST]: new RoostStrategy(),
+  [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
+  [Ability.HEAT_CRASH]: new HeatCrashStrategy()
 }

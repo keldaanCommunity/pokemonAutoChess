@@ -532,7 +532,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async fetchTournaments() {
     try {
-      const tournaments = await Tournament.find()
+      const tournaments = await Tournament.find().exec()
       if (tournaments) {
         this.state.tournaments.clear()
         tournaments.forEach(async (tournament) => {

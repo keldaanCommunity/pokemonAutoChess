@@ -149,6 +149,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  get canEat(): boolean {
+    return this.passive !== Passive.INANIMATE
+  }
+
   get hasEvolution(): boolean {
     return this.evolution !== Pkm.DEFAULT || this.evolutions.length > 0
   }
@@ -176,6 +180,10 @@ export class Pokemon extends Schema implements IPokemon {
     // called after manually changing position of the pokemon on board
   }
 
+  onItemGiven(item: Item, player: Player) {
+    // called after giving an item to the mon
+  }
+
   onAcquired(player: Player) {
     // called after buying or picking the mon
   }
@@ -193,6 +201,8 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   beforeSimulationStart(params: {
+    simulationId: string
+    isGhostBattle: boolean
     weather: Weather
     player: Player
     teamEffects: Set<Effect>
@@ -790,7 +800,7 @@ export class Onix extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.SPIKY_SHIELD
+  skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -807,7 +817,7 @@ export class Steelix extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.SPIKY_SHIELD
+  skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -824,7 +834,7 @@ export class MegaSteelix extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
-  //skill = Ability.SPIKY_SHIELD
+  //skill = Ability.IRON_TAIL
   attackSprite = AttackSprite.ROCK_MELEE
   additional = true
 }
@@ -1793,8 +1803,8 @@ export class Lampent extends Pokemon {
   hp = 90
   atk = 9
   speed = 51
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 3
   skill = Ability.HEX
@@ -1808,8 +1818,8 @@ export class Chandelure extends Pokemon {
   hp = 160
   atk = 14
   speed = 51
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.HEX
@@ -3178,7 +3188,7 @@ export class Pichu extends Pokemon {
   hp = 60
   atk = 5
   speed = 54
-  def = 2
+  def = 1
   speDef = 2
   maxPP = 100
   range = 1
@@ -3202,7 +3212,7 @@ export class Pikachu extends Pokemon {
   hp = 120
   atk = 8
   speed = 54
-  def = 6
+  def = 4
   speDef = 6
   maxPP = 100
   range = 1
@@ -3217,7 +3227,7 @@ export class Raichu extends Pokemon {
   hp = 220
   atk = 17
   speed = 54
-  def = 10
+  def = 7
   speDef = 10
   maxPP = 100
   range = 1
@@ -4332,8 +4342,8 @@ export class Wartortle extends Pokemon {
   hp = 120
   atk = 9
   speed = 50
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -4878,7 +4888,7 @@ export class Kakuna extends Pokemon {
   hp = 110
   atk = 10
   speed = 49
-  def = 4
+  def = 8
   speDef = 4
   maxPP = 100
   range = 1
@@ -5112,8 +5122,8 @@ export class Charmander extends Pokemon {
   hp = 60
   atk = 4
   speed = 57
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
@@ -5143,8 +5153,8 @@ export class Charizard extends Pokemon {
   hp = 220
   atk = 18
   speed = 57
-  def = 4
-  speDef = 4
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
@@ -6261,10 +6271,13 @@ export class Castform extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6288,10 +6301,13 @@ export class CastformSun extends Pokemon {
   attackSprite = AttackSprite.DRAGON_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6315,10 +6331,13 @@ export class CastformRain extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -6342,10 +6361,13 @@ export class CastformHail extends Pokemon {
   attackSprite = AttackSprite.ICE_RANGE
 
   beforeSimulationStart({
+    isGhostBattle,
     weather,
     player
-  }: { weather: Weather; player: Player }) {
-    updateCastform(this, weather, player)
+  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+    if (!isGhostBattle) {
+      updateCastform(this, weather, player)
+    }
   }
 }
 
@@ -8100,7 +8122,7 @@ export class Fennekin extends Pokemon {
   speed = 58
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 80
   range = 2
   skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
@@ -8114,8 +8136,8 @@ export class Braixen extends Pokemon {
   atk = 8
   speed = 58
   def = 2
-  speDef = 2
-  maxPP = 90
+  speDef = 4
+  maxPP = 80
   range = 2
   skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
@@ -8128,8 +8150,8 @@ export class Delphox extends Pokemon {
   atk = 16
   speed = 58
   def = 2
-  speDef = 2
-  maxPP = 90
+  speDef = 6
+  maxPP = 80
   range = 2
   skill = Ability.MYSTICAL_FIRE
   attackSprite = AttackSprite.FIRE_RANGE
@@ -12002,7 +12024,7 @@ export class Tepig extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   passive = Passive.HATCH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -12020,7 +12042,7 @@ export class Pignite extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   passive = Passive.HATCH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -12036,7 +12058,7 @@ export class Emboar extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.IRON_TAIL
+  skill = Ability.HEAT_CRASH
   attackSprite = AttackSprite.NORMAL_MELEE
 }
 
@@ -12946,6 +12968,12 @@ export class Necrozma extends Pokemon {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
     }
   }
+
+  onItemGiven(item: Item, player: Player) {
+    if (item === Item.SHINY_STONE) {
+      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
+    }
+  }
 }
 
 export class UltraNecrozma extends Pokemon {
@@ -13028,6 +13056,12 @@ export class Cherrim extends Pokemon {
       (x === player.lightX && y === player.lightY && hasLight) ||
       this.items.has(Item.SHINY_STONE)
     ) {
+      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
+    }
+  }
+
+  onItemGiven(item: Item, player: Player) {
+    if (item === Item.SHINY_STONE) {
       player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
     }
   }
@@ -18057,8 +18091,8 @@ export class Pidove extends Pokemon {
   hp = 50
   atk = 5
   speed = 64
-  def = 2
-  speDef = 1
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.ROOST
@@ -18075,10 +18109,10 @@ export class Tranquill extends Pokemon {
   stars = 2
   evolution = Pkm.UNFEZANT
   hp = 100
-  atk = 8
+  atk = 9
   speed = 64
-  def = 3
-  speDef = 2
+  def = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.ROOST
@@ -18094,10 +18128,10 @@ export class Unfezant extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 170
-  atk = 16
+  atk = 19
   speed = 64
-  def = 4
-  speDef = 3
+  def = 7
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.ROOST
@@ -18106,6 +18140,39 @@ export class Unfezant extends Pokemon {
   isInRegion(map: DungeonPMDO, state?: GameState) {
     return Object.keys(DungeonPMDO).indexOf(map) % 3 === 2
   }
+}
+
+export class Zacian extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.WILD])
+  rarity = Rarity.LEGENDARY
+  evolution = Pkm.ZACIAN_CROWNED
+  evolutionRule = new ItemEvolutionRule([Item.RUSTED_SWORD])
+  stars = 3
+  hp = 260
+  atk = 22
+  speed = 69
+  def = 11
+  speDef = 11
+  maxPP = 100
+  range = 1
+  skill = Ability.BEHEMOTH_BLADE
+  passive = Passive.ZACIAN
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
+
+export class ZacianCrowned extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.WILD, Synergy.STEEL])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  hp = 260
+  atk = 22
+  speed = 69
+  def = 12
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.BEHEMOTH_BLADE
+  attackSprite = AttackSprite.FAIRY_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -19060,7 +19127,9 @@ export const PokemonClasses: Record<
   [Pkm.EELEKTROSS]: Eelektross,
   [Pkm.PIDOVE]: Pidove,
   [Pkm.TRANQUILL]: Tranquill,
-  [Pkm.UNFEZANT]: Unfezant
+  [Pkm.UNFEZANT]: Unfezant,
+  [Pkm.ZACIAN]: Zacian,
+  [Pkm.ZACIAN_CROWNED]: ZacianCrowned
 }
 
 // declare all the classes in colyseus schema TypeRegistry

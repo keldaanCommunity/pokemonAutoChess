@@ -2,7 +2,7 @@ import { t } from "i18next"
 import React, { ReactElement } from "react"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
-import { Status } from "../../../../types/enum/Status"
+import { PositiveStatuses, Status } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
 import { roundToNDigits } from "../../../../utils/number"
@@ -82,7 +82,7 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
             title={t(`status_description.${token}`)}
           >
             <img src={`assets/icons/${token}.svg`} />
-            <span className="status-label">{t(`status.${token}`)}</span>
+            <span className={cc("status-label", { positive: PositiveStatuses.includes(token as Status) })}>{t(`status.${token}`)}</span>
           </span>
         )
       } else if (Weathers.includes(token as Weather)) {
