@@ -465,7 +465,9 @@
 		"BITTER_BLADE": "悔念剑",
 		"ARMOR_CANNON": "铠农炮",
 		"SUCTION_HEAL": "真空治愈",
-		"ROOST": "羽栖"
+		"ROOST": "羽栖",
+		"BEHEMOTH_BLADE": "巨兽斩",
+		"HEAT_CRASH": "高温重压"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1413,7 +1415,9 @@
 		"EELEKTROSS": "麻麻鳗鱼王",
 		"PIDOVE": "豆豆鸽",
 		"TRANQUILL": "咕咕鸽",
-		"UNFEZANT": "高傲雉鸡"
+		"UNFEZANT": "高傲雉鸡",
+		"ZACIAN": "苍响",
+		"ZACIAN_CROWNED": "苍响（剑之王）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1471,6 +1475,7 @@
 		"SOAK": "对目标造成[20,40,80,SP]点SPECIAL，并为所有我方宝可梦恢复10点PP。",
 		"ORIGIN_PULSE": "一道海浪横向穿过战场，对击中的所有敌方宝可梦造成[100,SP]点SPECIAL。",
 		"SEED_FLARE": "释放冲击波，对5格半径内所有敌方宝可梦造成[30,SP]点SPECIAL，并降低其3点SPE_DEF。",
+		"IRON_TAIL": "甩动巨大的尾巴，对前方的3只敌方宝可梦造成SPECIAL，数值相当于使用者[100,SP]%的DEF，并将他们击退。",
 		"BLAST_BURN": "对所有相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL。",
 		"CHARGE": "本场战斗的剩余时间内，攻击额外造成[100,SP]%的SPECIAL（可以叠加）。",
 		"DISCHARGE": "对所有相邻敌方宝可梦造成[25,50,75,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
@@ -1858,7 +1863,9 @@
 		"ARMOR_CANNON": "发射熊熊燃烧的炮弹，对目标造成[70,SP]点SPECIAL，随后弹射至最近的[2,SP]名敌方宝可梦，对他们也各造成[35,SP]点SPECIAL，最后弹射回到初始目标再造成[10,SP]点SPECIAL。",
 		"BITTER_BLADE": "将对世间的留恋聚集于剑尖，并斩击所有相邻敌方宝可梦，造成[70,SP]点SPECIAL。每击中一个敌方宝可梦，使用者自身恢复[10,SP]%的HP。",
 		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的锥形范围内所有敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害量[50,SP]%的HP。",
-		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 2秒，并恢复[20,40,80,SP]点HP."
+		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 2秒，并恢复[20,40,80,SP]点HP。",
+		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成PHYSICAL，数值相当于1乘以ATK加上[100,SP]。",
+		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL使用者的ATK比目标的越高，造成的伤害越高。"
 	},
 	"effect": {
 		"INGRAIN": "扎根",
@@ -2280,7 +2287,8 @@
 		"GIMMIGHOUL_COIN": "索财灵的硬币",
 		"EXCHANGE_TICKET": "交换券",
 		"AUSPICIOUS_ARMOR": "庆祝之铠",
-		"MALICIOUS_ARMOR": "咒术之铠"
+		"MALICIOUS_ARMOR": "咒术之铠",
+		"RUSTED_SWORD": "腐朽的剑"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2474,7 +2482,8 @@
 		"GIMMIGHOUL_COIN": "每轮额外获得1 GOLD的收入，且利息收入上限+1。",
 		"EXCHANGE_TICKET": "将备战区内的一个道具组件或一件合成道具交换为随机同类道具。一次性使用。",
 		"AUSPICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着祝贺的感情。",
-		"MALICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着诅咒的感情。"
+		"MALICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着诅咒的感情。",
+		"RUSTED_SWORD": "据说很久以前，英雄就是拿着这把剑驱走了灾厄。携带者提升50%的ATK。携带者倒下时，ATK最低的我方宝可梦获得此道具。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -2620,7 +2629,8 @@
 		"CARAMEL_SWIRL_CREAM": "释放招式时，CARAMEL_SWIRL_FLAVOR为最近的我方宝可梦提升[80,SP]%的CRIT_POWER。",
 		"RAINBOW_SWIRL_CREAM": "释放招式时，RAINBOW_SWIRL_FLAVOR为最近的我方宝可梦提升[60,SP]点AP。",
 		"DURALUDON": "铝钢龙似乎需要一件ARTIFICIAL道具……",
-		"CHARCADET": "碳小侍似乎需要一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR……"
+		"CHARCADET": "碳小侍似乎需要一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR……",
+		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -2846,6 +2856,7 @@
 		"OUTSIDER": "黑马",
 		"WILD": "野生的",
 		"GLUTTON": "暴食饕餮",
+		"PICNICKER": "野餐女孩",
 		"STARGAZER": "观星者",
 		"BLOODY": "赫然之人",
 		"ETERNAL": "永恒者",
@@ -2923,6 +2934,7 @@
 		"VANQUISHER": "取得一场排位赛的胜利",
 		"OUTSIDER": "在自身的Elo分数全场最低的情况下，取得一场8人排位赛的胜利",
 		"GLUTTON": "将一只卡比兽的最大生命值提升至超过750",
+		"PICNICKER": "使9只宝可梦加入同一场野餐",
 		"STARGAZER": "获得索尔伽雷欧或露奈雅拉",
 		"BLOODY": "获得赫月月月熊",
 		"ETERNAL": "在第40轮，遇到阿尔宙斯"
@@ -3384,6 +3396,7 @@
 	"berry_unripe": "树果尚未成熟！",
 	"full": "已满",
 	"belly_full": "吃撑了！",
+	"not_hungry": "还不饿！",
 	"drop_here_to_sell": "拖动至此松开，",
 	"for_price_gold": "以{{price}}金币的价格出售",
 	"buy_xp": "购买经验{{cost}}",
