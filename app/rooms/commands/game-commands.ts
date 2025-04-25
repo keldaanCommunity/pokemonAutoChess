@@ -585,10 +585,16 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (
-      CharcadetArmors.includes(item) &&
-      pokemon.passive !== Passive.CHARCADET
+      CharcadetArmors.includes(item)
     ) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      if(pokemon.passive == Passive.CHARCADET) {
+        pokemon.items.add(item)
+        this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
+        player.updateSynergies()
+      }
+      else{
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+      }
       return
     }
 
