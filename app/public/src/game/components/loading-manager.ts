@@ -171,6 +171,17 @@ export default class LoadingManager {
         endFrame: 23
       }
     })
+    
+    scene.load.spritesheet({
+      key: "board_cell",
+      url: "/assets/ui/board_cell.png",
+      frameConfig: {
+        frameWidth: 32,
+        frameHeight: 32,
+        startFrame: 0,
+        endFrame: 1
+      }
+    })
 
     for (const pack in atlas.packs) {
       scene.load.multiatlas(

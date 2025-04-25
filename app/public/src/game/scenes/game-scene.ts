@@ -389,10 +389,11 @@ export default class GameScene extends Scene {
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
         const spotSprite = this.add
-          .image(zone.x, zone.y, "cell", 0)
+          .image(zone.x, zone.y, "board_cell", 0)
           .setVisible(false)
           .setData({ x, y })
           .setDepth(DEPTH.DROP_ZONE)
+          .setScale(2, 2)
         zone.setData({ x, y, sprite: spotSprite })
         this.dropSpots.push(spotSprite)
       }
