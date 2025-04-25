@@ -17981,6 +17981,10 @@ export class Charcadet extends Pokemon {
     player.items.push(Item.AUSPICIOUS_ARMOR)
     player.items.push(Item.MALICIOUS_ARMOR)
   }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.MALICIOUS_ARMOR)
+    removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
+  }
 }
 
 export class Armarouge extends Pokemon {
