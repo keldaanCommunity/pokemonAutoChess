@@ -7163,7 +7163,7 @@ export class Cryogonal extends Pokemon {
   speed = 59
   def = 4
   speDef = 16
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FREEZE_DRY
   attackSprite = AttackSprite.ICE_RANGE

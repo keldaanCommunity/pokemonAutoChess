@@ -17,6 +17,7 @@
 - New ability for Onix line: Iron Tail: Swings its massive tail, hitting 3 enemy pokemon in front, knocking them back and dealing 100% of user's defense as special damage.
 - New ability for Tepig line: Heat Crash: Crashes into the target, knocking it back and dealing 40/60/80 special damage. The ability does more damage the more Attack the user has compared to the target.
 - Archaludon no longer devolves when artificial item is removed
+- Buff Cryogonal: PP 110 → 100
 
 # Changes to Synergies
 
