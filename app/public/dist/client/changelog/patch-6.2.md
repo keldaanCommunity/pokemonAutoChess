@@ -27,6 +27,7 @@
 
 # Gameplay
 
+- Carousels shape and centering have been adjusted to ease movement on top and bottom of the board
 - Rage is no longer considered a negative status, meaning it's not cleansed by Rune Protect, Cleanse Tag and other effects that remove negative status.
 
 # UI
