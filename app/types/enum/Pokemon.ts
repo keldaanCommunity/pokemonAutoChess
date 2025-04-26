@@ -377,6 +377,7 @@ export enum Pkm {
   INTELEON = "INTELEON",
   IRON_BUNDLE = "IRON_BUNDLE",
   IRON_HANDS = "IRON_HANDS",
+  IRON_VALIANT = "IRON_VALIANT",
   IVYSAUR = "IVYSAUR",
   JANGMO_O = "JANGMO_O",
   JIGGLYPUFF = "JIGGLYPUFF",
@@ -2102,6 +2103,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
   [Pkm.ROARING_MOON]: "1005",
+  [Pkm.IRON_VALIANT]: "1006",
   [Pkm.DIPPLIN]: "1011",
   [Pkm.OGERPON_TEAL]: "1017",
   [Pkm.OGERPON_WELLSPRING]: "1017-0001",
@@ -3068,7 +3070,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TRANQUILL]: Pkm.PIDOVE,
   [Pkm.UNFEZANT]: Pkm.PIDOVE,
   [Pkm.ZACIAN]: Pkm.ZACIAN,
-  [Pkm.ZACIAN_CROWNED]: Pkm.ZACIAN
+  [Pkm.ZACIAN_CROWNED]: Pkm.ZACIAN,
+  [Pkm.IRON_VALIANT]: Pkm.IRON_VALIANT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8014,5 +8017,10 @@ export const AnimationConfig: {
     attack: AnimationType.Scratch,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
+  },
+  [Pkm.IRON_VALIANT]: {
+    attack: AnimationType.Slice,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.SpAttack
   }
 }

@@ -372,12 +372,7 @@ export default class BattleManager {
         }
       } else if (field == "ult") {
         if (value != 0) {
-          this.animationManager.play(
-            pkm,
-            AnimationConfig[PkmByIndex[pkm.index]].ability,
-            { flip: this.flip, lock: true, repeat: 0 }
-          )
-          pkm.specialAttackAnimation(this.group, value)
+          pkm.specialAttackAnimation(pokemon)
         }
       } else if (field === "fieldCount") {
         if (value != 0) {
@@ -528,7 +523,7 @@ export default class BattleManager {
         if (pokemon.skill == Ability.TELEPORT) {
           pkm.x = coordinates[0]
           pkm.y = coordinates[1]
-          pkm.specialAttackAnimation(this.group, pokemon.count.ult)
+          pkm.specialAttackAnimation(pokemon)
         } else if (!pokemon.status.skydiving) {
           pkm.moveManager.setSpeed(
             3 *
