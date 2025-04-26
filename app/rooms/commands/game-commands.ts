@@ -1448,7 +1448,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
 
           if (chef.passive === Passive.GLUTTON) {
-            chef.hp += 20
+            chef.hp += 30
             if (chef.hp > 750) {
               player.titles.add(Title.GLUTTON)
             }

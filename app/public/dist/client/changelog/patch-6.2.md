@@ -18,6 +18,7 @@
 - New ability for Tepig line: Heat Crash: Crashes into the target, knocking it back and dealing 40/60/80 special damage. The ability does more damage the more Attack the user has compared to the target.
 - Archaludon no longer devolves when artificial item is removed
 - Buff Cryogonal: PP 110 → 100
+- Buff Munchlax line passive: Permanently gains max HP when eating: 5 → 10 HP for each berry, 10 → 20 HP for each dish, 20 → 30 HP when cooking as a Chef
 
 # Changes to Synergies
 

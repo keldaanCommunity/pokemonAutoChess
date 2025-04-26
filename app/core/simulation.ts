@@ -448,7 +448,7 @@ export default class Simulation extends Schema implements ISimulation {
     dishEffects.forEach((effect) => pokemon.effectsSet.add(effect))
 
     if (pokemon.passive === Passive.GLUTTON) {
-      pokemon.addMaxHP(10, pokemon, 0, false, true)
+      pokemon.addMaxHP(20, pokemon, 0, false, true)
       if (pokemon.player && pokemon.hp > 750) {
         pokemon.player.titles.add(Title.GLUTTON)
       }
