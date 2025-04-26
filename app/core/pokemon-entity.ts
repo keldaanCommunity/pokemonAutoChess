@@ -1169,7 +1169,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const nbBloodStones = count(this.player.items, Item.BLOOD_STONE)
       if (nbBloodStones > 0) {
-        this.handleHeal(Math.ceil(0.2 * damage), this, 0, false)
+        this.handleHeal(Math.ceil(0.2 * nbBloodStones * damage), this, 0, false)
       }
     }
   }
