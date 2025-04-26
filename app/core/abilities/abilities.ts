@@ -10788,7 +10788,7 @@ export class FieryWrathStrategy extends AbilityStrategy {
   }
 }
 
-export class ViseGripStrategy extends AbilityStrategy {
+export class ViceGripStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     state: PokemonState,
@@ -13036,7 +13036,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FREEZING_GLARE]: new FreezingGlareStrategy(),
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.FIERY_WRATH]: new FieryWrathStrategy(),
-  [Ability.VISE_GRIP]: new ViseGripStrategy(),
+  [Ability.VICEGRIP]: new ViceGripStrategy(),
   [Ability.LAVA_PLUME]: new LavaPlumeStrategy(),
   [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),

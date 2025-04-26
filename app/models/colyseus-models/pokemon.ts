@@ -16737,7 +16737,7 @@ export class Krabby extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.VISE_GRIP
+  skill = Ability.VICEGRIP
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
@@ -16753,7 +16753,7 @@ export class Kingler extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.VISE_GRIP
+  skill = Ability.VICEGRIP
   additional = true
   attackSprite = AttackSprite.NORMAL_MELEE
 }
