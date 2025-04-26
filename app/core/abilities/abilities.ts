@@ -83,6 +83,7 @@ import { values } from "../../utils/schemas"
 import { DarkHarvestEffect } from "../effect"
 import { DelayedCommand } from "../simulation-command"
 import { giveRandomEgg } from "../../core/eggs"
+import { t } from "i18next"
 
 const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -12641,6 +12642,67 @@ export class HeatCrashStrategy extends AbilityStrategy {
   }
 }
 
+export class LaserBladeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    if (pokemon.count.ult % 2 === 1) {
+      // Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.
+      const damage = 30
+      const shield = 30
+      const enemiesHit = new Set<PokemonEntity>()
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+        .concat(
+          board.getAdjacentCells(target.positionX, target.positionY, false)
+        )
+        .map((cell) => cell.value)
+        .filter(
+          (entity): entity is PokemonEntity =>
+            entity != null && entity.team !== pokemon.team
+        )
+        .forEach((enemy) => enemiesHit.add(enemy))
+      pokemon.moveTo(target.positionX, target.positionY, board)
+      pokemon.addShield(shield, pokemon, 1, crit)
+      enemiesHit.forEach((enemy) => {
+        enemy.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      })
+    } else {
+      // Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL
+      const damage = 30 + pokemon.atk
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }, 300)
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13090,5 +13152,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.ROOST]: new RoostStrategy(),
   [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
-  [Ability.HEAT_CRASH]: new HeatCrashStrategy()
+  [Ability.HEAT_CRASH]: new HeatCrashStrategy(),
+  [Ability.LASER_BLADE]: new LaserBladeStrategy()
 }

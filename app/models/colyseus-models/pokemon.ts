@@ -18175,6 +18175,25 @@ export class ZacianCrowned extends Pokemon {
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
+export class IronValiant extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.FAIRY,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 26
+  speed = 76
+  def = 10
+  speDef = 6
+  maxPP = 50
+  range = 1
+  skill = Ability.LASER_BLADE
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19129,7 +19148,8 @@ export const PokemonClasses: Record<
   [Pkm.TRANQUILL]: Tranquill,
   [Pkm.UNFEZANT]: Unfezant,
   [Pkm.ZACIAN]: Zacian,
-  [Pkm.ZACIAN_CROWNED]: ZacianCrowned
+  [Pkm.ZACIAN_CROWNED]: ZacianCrowned,
+  [Pkm.IRON_VALIANT]: IronValiant
 }
 
 // declare all the classes in colyseus schema TypeRegistry
