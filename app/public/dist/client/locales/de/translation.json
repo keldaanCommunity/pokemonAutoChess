@@ -1534,7 +1534,7 @@
 		"STEAM_ERUPTION": "Fügt dem Ziel und allen angrenzenden Feinden [80,SP] SPECIAL zu und BURN sie 3 Sekunden lang",
 		"APPLE_ACID": "Fügt dem Ziel [15,30,60,SP] SPECIAL an den Zielen vor dir und senkt seine DEF und SPE_DEF um [5,SP] Punkte",
 		"NUTRIENTS": "Werfe einen Apfel zum Verbündeten mit den wenigsten HP, heilt für [40,SP]",
-		"SYRUP_BOMB": "Der Nutzer löst eine Explosion von klebrigen Zuckersirup aus, welches den Gegner mit dem höchsten SPEED umhüllt und [50,SP] SPECIAL und PARALYSIS für 3 Sekunden verursacht.",
+		"SYRUP_BOMB": "Der Nutzer löst eine Explosion von klebrigen Zuckersirup aus, welches den Gegner mit dem höchsten SPEED umhüllt und [50,SP] SPECIAL und seine SPEED um 30 reduziert.",
 		"FICKLE_BEAM": "Jeder der 4 Köpfe der Hydra hat eine [60,LK]% Chance [60,SP] SPECIAL und 2 Sekunden PARALYSIS auf die Gegner mit der höchsten Geschwindigkeit zu verursachen.",
 		"GRAV_APPLE": "Der Nutzer verursacht [80,SP] PHYSICAL indem er einen Apfel von weit oben fallen lässt. Verursacht [160,SP] PHYSICAL if target DEF is 0.",
 		"SACRED_SWORD_IRON": "Fügt dem Ziel [80,SP] TRUE + [15,SP] TRUE pro gefallenem Verbündeten zu.",

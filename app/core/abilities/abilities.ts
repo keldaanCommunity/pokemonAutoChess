@@ -3542,12 +3542,7 @@ export class SyrupBombStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)[0]
 
     if (highestSpeedEnemy) {
-      highestSpeedEnemy.status.triggerParalysis(
-        3000,
-        highestSpeedEnemy,
-        pokemon,
-        false
-      )
+      highestSpeedEnemy.addSpeed(-30, pokemon, 1, crit)
       highestSpeedEnemy.handleSpecialDamage(
         damage,
         board,
