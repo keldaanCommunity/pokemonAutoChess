@@ -10745,7 +10745,7 @@ export class AlolanSandslash extends Pokemon {
 }
 
 export class Nosepass extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PROBOPASS
@@ -10762,7 +10762,7 @@ export class Nosepass extends Pokemon {
 }
 
 export class Probopass extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
