@@ -8966,9 +8966,6 @@ export class DreamEaterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 1 ? 45 : 90
-    const duration = pokemon.stars === 1 ? 2500 : 5000
-
     const sleepingTarget = board.find(
       (x, y, entity) => entity.status.sleep && entity.team !== pokemon.team
     )
@@ -8986,6 +8983,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
       if (coord) {
         pokemon.moveTo(coord.x, coord.y, board)
       }
+      const damage = [45, 90, 150][pokemon.stars - 1] ?? 150
       const { takenDamage } = sleepingTarget.handleSpecialDamage(
         damage,
         board,
@@ -8996,6 +8994,9 @@ export class DreamEaterStrategy extends AbilityStrategy {
       )
       pokemon.handleHeal(takenDamage, pokemon, 1, crit)
     } else {
+      const duration = Math.round(
+        ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
+      )
       target.status.triggerSleep(duration, target)
       broadcastAbility(pokemon, {
         targetX: target.positionX,

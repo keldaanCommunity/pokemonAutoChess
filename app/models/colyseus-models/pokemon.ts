@@ -14838,8 +14838,8 @@ export class Grimmsnarl extends Pokemon {
 
 export class Drowzee extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.HUMAN,
     Synergy.PSYCHIC,
+    Synergy.HUMAN,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC
@@ -14859,8 +14859,8 @@ export class Drowzee extends Pokemon {
 
 export class Hypno extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.HUMAN,
     Synergy.PSYCHIC,
+    Synergy.HUMAN,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC
