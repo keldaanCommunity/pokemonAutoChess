@@ -3011,7 +3011,7 @@ export class CosmicPowerMoonStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const apGain = 20
+    const apGain = 25
     board.forEach((x, y, ally) => {
       if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAbilityPower(apGain, pokemon, 1, crit)
@@ -3031,7 +3031,7 @@ export class CosmicPowerSunStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const atkBuffMultiplier = 0.25
     board.forEach((x, y, ally) => {
-      if (ally && ally.team === pokemon.team) {
+      if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAttack(atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
       }
     })
