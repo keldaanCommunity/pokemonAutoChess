@@ -2,6 +2,7 @@
 
  - Zacian
  - Zacian (Crowned)
+ - Iron Valiant
  
 # Changes to Pokemon & Abilities
 
