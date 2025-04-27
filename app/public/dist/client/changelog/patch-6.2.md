@@ -20,6 +20,11 @@
 - Archaludon no longer devolves when artificial item is removed
 - Buff Cryogonal: PP 110 → 100
 - Buff Munchlax line passive: Permanently gains max HP when eating: 5 → 10 HP for each berry, 10 → 20 HP for each dish, 20 → 30 HP when cooking as a Chef
+- Buff Flapple: Speed 31 → 50
+- Change Dipplin: Range 1 → 3 ; Sirupy Bomb: no longer inflict Paralysis, but reduce Speed by 30.
+- Change Cosmic Power (Sun): Increase the base attack of all allied Pokémon **other than the user** by 25%
+- Buff Cosmic Power (Moon): Increase the AP of all allied Pokémon by 20 → 25
+- Change Dream Eater (Drowzee): sleep duration changed from 2.5/5 to 3/4/5 seconds and now scales with AP. Added tier 3 damage: 45/90/150
 
 # Changes to Synergies
 

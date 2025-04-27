@@ -1317,7 +1317,7 @@
 		"SPLASH": "パタパタと飛び散るだけで、まったく効果がありません...",
 		"PECK": "対象者に【10,30,50,SP】SPECIALを与える",
 		"COUNTER": "隣接する敵に[50,SP]%のHPを特殊攻撃として与える。",
-		"COSMIC_POWER_MOON": "チームAPを[20,SP]バフします",
+		"COSMIC_POWER_MOON": "チームAPを[25,SP]バフします",
 		"ENTANGLING_THREAD": "ターゲットと隣接する敵に4秒間[10,20,40,SP]SPECIALと麻痺を与える",
 		"SILVER_WIND": "敵の後衛にダッシュし、進路上のすべての敵に[20,40,80,SP]のSPECIALを与える。その後、ATK 1、DEF 1、SPE_DEF 1、AP 10%、SPEED 10% を獲得します。",
 		"POISON_POWDER": "敵の後衛にダッシュし、[20,40,80,SP]を与え、パス上のすべての敵に5秒間 POISONNED を適用します",

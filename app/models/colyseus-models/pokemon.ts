@@ -10034,7 +10034,7 @@ export class Dipplin extends Pokemon {
   def = 8
   speDef = 8
   maxPP = 60
-  range = 1
+  range = 3
   skill = Ability.SYRUP_BOMB
   attackSprite = AttackSprite.GRASS_MELEE
   passive = Passive.DIPPLIN
@@ -10079,7 +10079,7 @@ export class Flapple extends Pokemon {
   stars = 3
   hp = 180
   atk = 19
-  speed = 31
+  speed = 50
   def = 4
   speDef = 4
   maxPP = 80
@@ -14838,8 +14838,8 @@ export class Grimmsnarl extends Pokemon {
 
 export class Drowzee extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.HUMAN,
     Synergy.PSYCHIC,
+    Synergy.HUMAN,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC
@@ -14859,8 +14859,8 @@ export class Drowzee extends Pokemon {
 
 export class Hypno extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.HUMAN,
     Synergy.PSYCHIC,
+    Synergy.HUMAN,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC

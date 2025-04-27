@@ -3012,7 +3012,7 @@ export class CosmicPowerMoonStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const apGain = 20
+    const apGain = 25
     board.forEach((x, y, ally) => {
       if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAbilityPower(apGain, pokemon, 1, crit)
@@ -3032,7 +3032,7 @@ export class CosmicPowerSunStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const atkBuffMultiplier = 0.25
     board.forEach((x, y, ally) => {
-      if (ally && ally.team === pokemon.team) {
+      if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAttack(atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
       }
     })
@@ -3543,12 +3543,7 @@ export class SyrupBombStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)[0]
 
     if (highestSpeedEnemy) {
-      highestSpeedEnemy.status.triggerParalysis(
-        3000,
-        highestSpeedEnemy,
-        pokemon,
-        false
-      )
+      highestSpeedEnemy.addSpeed(-30, pokemon, 1, crit)
       highestSpeedEnemy.handleSpecialDamage(
         damage,
         board,
@@ -8972,9 +8967,6 @@ export class DreamEaterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 1 ? 45 : 90
-    const duration = pokemon.stars === 1 ? 2500 : 5000
-
     const sleepingTarget = board.find(
       (x, y, entity) => entity.status.sleep && entity.team !== pokemon.team
     )
@@ -8992,6 +8984,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
       if (coord) {
         pokemon.moveTo(coord.x, coord.y, board)
       }
+      const damage = [45, 90, 150][pokemon.stars - 1] ?? 150
       const { takenDamage } = sleepingTarget.handleSpecialDamage(
         damage,
         board,
@@ -9002,6 +8995,9 @@ export class DreamEaterStrategy extends AbilityStrategy {
       )
       pokemon.handleHeal(takenDamage, pokemon, 1, crit)
     } else {
+      const duration = Math.round(
+        ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
+      )
       target.status.triggerSleep(duration, target)
       broadcastAbility(pokemon, {
         targetX: target.positionX,
