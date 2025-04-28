@@ -42,7 +42,6 @@ import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
 import type { GameDialog } from "./game-dialog"
-import PowerBar from "./power-bar"
 import { DEPTH } from "../depths"
 import { logger } from "../../../../utils/logger"
 
@@ -87,7 +86,6 @@ export default class PokemonSprite extends DraggableObject {
   pp: number | undefined
   maxPP: number
   luck: number
-  powerbar: PowerBar | undefined
   sprite: GameObjects.Sprite
   shadow?: GameObjects.Sprite
   wound: GameObjects.Sprite | undefined
@@ -261,7 +259,6 @@ export default class PokemonSprite extends DraggableObject {
 
     if (isEntity(pokemon)) {
       this.setLifeBar(pokemon, scene)
-      if (pokemon.maxPP > 0) this.setPowerBar(pokemon, scene)
       //this.setEffects(p, scene);
     } else {
       if (pokemon.meal !== "") {
@@ -682,20 +679,8 @@ export default class PokemonSprite extends DraggableObject {
       )
       this.lifebar.setShield(pokemon.shield)
       this.add(this.lifebar)
-    }
-  }
-
-  setPowerBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
-    if (pokemon.pp !== undefined) {
-      this.powerbar = new PowerBar(
-        scene,
-        0,
-        this.height / 2 + 12,
-        60,
-        pokemon.maxPP
-      )
-      this.powerbar.setAmount(pokemon.pp)
-      this.add(this.powerbar)
+      
+      if (pokemon.pp !== undefined && pokemon.maxPP > 0) this.lifebar.setPP(pokemon.maxPP)
     }
   }
 

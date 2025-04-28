@@ -13,11 +13,14 @@
     border: 1px solid #222;
     border-radius: 2px;
     background-color: #222;
+    margin-bottom: 1px;
+    overflow: hidden;
 }
 
 .life-bar-wrapper > .life-bar > .life-amount {
     flex-grow: 0;
     height: 100%;
+    transition: width 0.2s linear;
 }
 .life-bar-wrapper.ally > .life-bar > .life-amount {
     background-color: #76c442;
@@ -30,4 +33,23 @@
     flex-grow: 0;
     height: 100%;
     background-color: #ffffff;
+    transition: width 0.2s linear;
+}
+
+.life-bar-wrapper > .pp-bar {
+    display: none;
+    flex-direction: row;
+    width: 60px;
+    height: 5px;
+    position: relative;
+    border: 1px solid #222;
+    border-radius: 2px;
+    background-color: #222;
+}
+
+.life-bar-wrapper > .pp-bar > .pp-amount {
+    flex-grow: 0;
+    height: 100%;
+    background-color: #209cee;
+    transition: width 0.1s linear;
 }

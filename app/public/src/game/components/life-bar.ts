@@ -7,10 +7,14 @@ export default class LifeBar extends GameObjects.DOMElement {
   maxLife: number
   life: number
   shield: number
+  PP?: number
+  maxPP?: number
   wrap: HTMLDivElement
   lifeBar: HTMLDivElement
   lifeAmount: HTMLDivElement
   shieldAmount: HTMLDivElement
+  PPBar: HTMLDivElement
+  PPAmount: HTMLDivElement
   
   constructor(
     scene: Phaser.Scene,
@@ -36,8 +40,13 @@ export default class LifeBar extends GameObjects.DOMElement {
     this.lifeAmount.classList.add("life-amount")
     this.shieldAmount = document.createElement("div")
     this.shieldAmount.classList.add("shield-amount")
-    this.wrap.appendChild(this.lifeBar)
+    this.PPBar = document.createElement("div")
+    this.PPBar.classList.add("pp-bar")
+    this.PPAmount = document.createElement("div")
+    this.PPAmount.classList.add("pp-amount")
+    this.wrap.replaceChildren(this.lifeBar, this.PPBar)
     this.lifeBar.replaceChildren(this.lifeAmount, this.shieldAmount)
+    this.PPBar.replaceChildren(this.PPAmount)
     
     this.setElement(this.wrap)
     this.setDepth(DEPTH.POKEMON_HP_BAR)
@@ -45,12 +54,17 @@ export default class LifeBar extends GameObjects.DOMElement {
   }
   
   draw() {
-    const total = Math.max(this.maxLife, this.life + this.shield)  // if life + shield exceeds maxLife, the amount of segments should expand accordingly
-    const lifePercentage = (this.life / total) * 100
-    const shieldPercentage = (this.shield / total) * 100
+    const totalLife = Math.max(this.maxLife, this.life + this.shield)  // if life + shield exceeds maxLife, the amount of segments should expand accordingly
+    const lifePercentage = (this.life / totalLife) * 100
+    const shieldPercentage = (this.shield / totalLife) * 100
     
     this.lifeAmount.style.width = `${lifePercentage}%`
     this.shieldAmount.style.width = `${shieldPercentage}%`
+    
+    if (this.PP !== undefined && this.maxPP !== undefined) {
+      const PPPercentage = (this.PP / this.maxPP) * 100
+      this.PPAmount.style.width = `${PPPercentage}%`
+    }
   }
   
   setLife(value: number) {
@@ -67,7 +81,18 @@ export default class LifeBar extends GameObjects.DOMElement {
     this.maxLife = value
     this.draw()
   }
-
+  
+  setPP(value: number) {
+    this.PP = value
+    if (this.maxPP === undefined) this.setMaxPP(value)
+  }
+  
+  setMaxPP(value: number) {
+    this.PP = 0
+    this.maxPP = value
+    this.PPBar.style.display = "flex"
+  }
+  
   setTeam(team: number, flip: boolean) {
     if (team === (flip ? 1 : 0)) {
       this.wrap.classList.remove("enemy")

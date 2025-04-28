@@ -620,7 +620,7 @@ export default class BattleManager {
         }
       } else if (field === "pp") {
         pkm.pp = pokemon.pp
-        pkm.powerbar?.setAmount(max(pkm.maxPP)(pkm.pp))
+        pkm.lifebar?.setPP(max(pkm.maxPP)(pkm.pp))
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateValue(
             pkm.detail.pp,
