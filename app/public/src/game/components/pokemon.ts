@@ -527,7 +527,7 @@ export default class PokemonSprite extends DraggableObject {
   deathAnimation() {
     this.life = 0
     if (this.lifebar) {
-      this.lifebar.setAmount(this.life)
+      this.lifebar.setLife(this.life)
     }
 
     this.scene.add.tween({
@@ -547,7 +547,7 @@ export default class PokemonSprite extends DraggableObject {
 
   resurectAnimation() {
     if (this.lifebar) {
-      this.lifebar.setAmount(0)
+      this.lifebar.setLife(0)
     }
 
     const resurectAnim = this.scene.add.sprite(0, -10, "RESURECT", "000")
@@ -674,14 +674,13 @@ export default class PokemonSprite extends DraggableObject {
         scene,
         0,
         this.height / 2 + 6,
-        60,
-        pokemon.life + pokemon.shield,
+        pokemon.life,
+        pokemon.life,
         pokemon.shield,
         pokemon.team as Team,
         this.flip
       )
-      this.lifebar.setAmount(pokemon.life)
-      this.lifebar.setShieldAmount(pokemon.shield)
+      this.lifebar.setShield(pokemon.shield)
       this.add(this.lifebar)
     }
   }

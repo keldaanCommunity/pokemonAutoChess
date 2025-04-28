@@ -165,7 +165,7 @@ export default class PokemonAvatar extends PokemonSprite {
   }
 
   updateLife(life: number) {
-    this.lifebar?.setAmount(life)
+    this.lifebar?.setLife(life)
   }
 
   drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
@@ -194,7 +194,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.scene,
       0,
       28,
-      60,
+      100,
       100,
       0,
       this.isCurrentPlayerAvatar ? 0 : 1,

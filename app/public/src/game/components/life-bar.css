@@ -1,0 +1,33 @@
+.life-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.life-bar-wrapper > .life-bar {
+    display: flex;
+    flex-direction: row;
+    width: 60px;
+    height: 7px;
+    position: relative;
+    border: 1px solid #222;
+    border-radius: 2px;
+    background-color: #222;
+}
+
+.life-bar-wrapper > .life-bar > .life-amount {
+    flex-grow: 0;
+    height: 100%;
+}
+.life-bar-wrapper.ally > .life-bar > .life-amount {
+    background-color: #76c442;
+}
+.life-bar-wrapper.enemy > .life-bar > .life-amount {
+    background-color: #e76e55;
+}
+
+.life-bar-wrapper > .life-bar > .shield-amount {
+    flex-grow: 0;
+    height: 100%;
+    background-color: #ffffff;
+}
