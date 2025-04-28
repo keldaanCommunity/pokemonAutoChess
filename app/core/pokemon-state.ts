@@ -89,10 +89,9 @@ export default abstract class PokemonState {
       if (pokemon.status.blinded) {
         dodgeChance += 0.5
       }
-      dodgeChance = max(0.9)(dodgeChance)
 
       if (
-        chance(dodgeChance, target) &&
+        chance(dodgeChance, target, 0.9) &&
         !pokemon.items.has(Item.XRAY_VISION) &&
         !pokemon.effects.has(Effect.LOCK_ON) &&
         !target.status.paralysis &&
