@@ -620,7 +620,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       return
     }
-    
+
     if (this.items.has(item) == false) {
       this.items.add(item)
       this.simulation.applyItemEffect(this, item)
@@ -1169,7 +1169,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const nbBloodStones = count(this.player.items, Item.BLOOD_STONE)
       if (nbBloodStones > 0) {
-        this.handleHeal(Math.ceil(0.2 * damage), this, 0, false)
+        this.handleHeal(Math.ceil(0.2 * nbBloodStones * damage), this, 0, false)
       }
     }
   }
@@ -2053,7 +2053,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.GLUTTON) {
-      this.applyStat(Stat.HP, 5, true)
+      this.applyStat(Stat.HP, 10, true)
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }

@@ -585,10 +585,22 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (
-      CharcadetArmors.includes(item) &&
-      pokemon.passive !== Passive.CHARCADET
+      CharcadetArmors.includes(item)
     ) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      if (pokemon.passive == Passive.CHARCADET) {
+        pokemon.items.add(item)
+        const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
+          playerId,
+          pokemon
+        )
+        if (!pokemonEvolved) {
+          pokemon.items.delete(item)
+          client.send(Transfer.DRAG_DROP_FAILED, message)
+        } else removeInArray(player.items, item)
+      }
+      else {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+      }
       return
     }
 
@@ -920,7 +932,7 @@ export class OnSpectateCommand extends Command<
 > {
   execute({ id, spectatedPlayerId }) {
     const player = this.state.players.get(id)
-    if (!player || !player.alive) return
+    if (!player) return
     player.spectatedPlayerId = spectatedPlayerId
   }
 }
@@ -1448,7 +1460,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
 
           if (chef.passive === Passive.GLUTTON) {
-            chef.hp += 20
+            chef.hp += 30
             if (chef.hp > 750) {
               player.titles.add(Title.GLUTTON)
             }

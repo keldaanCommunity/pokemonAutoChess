@@ -1,27 +1,43 @@
-import ItemsStatistics, {
-  IItemsStatistic
-} from "../models/mongo-models/items-statistic"
+import { log } from "console"
 import PokemonsStatistics, {
   IPokemonsStatisticV2
 } from "../models/mongo-models/pokemons-statistic-v2"
+import ReportMetadata, {
+  IReportMetadata
+} from "../models/mongo-models/report-metadata"
 import { logger } from "../utils/logger"
+import ItemsStatistic, {
+  IItemsStatisticV2
+} from "../models/mongo-models/items-statistic-v2"
 
-export function fetchMetaReports() {
+export async function fetchMetaReports() {
   logger.info("Refreshing meta reports...")
-  return Promise.all([fetchMetaItems(), fetchMetaPokemons()])
+  const data = await Promise.all([
+    fetchMetadata(),
+    fetchMetaItems(),
+    fetchMetaPokemons()
+  ])
+  logger.info("Meta reports refreshed")
+  return data
 }
 
-let metaItems = new Array<IItemsStatistic>()
+let metadata = new Array<IReportMetadata>()
+let metaItems = new Array<IItemsStatisticV2>()
 let metaPokemons = new Array<IPokemonsStatisticV2>()
 
-export async function fetchMetaItems() {
-  metaItems = await ItemsStatistics.find().exec()
+async function fetchMetaItems() {
+  metaItems = await ItemsStatistic.find().exec()
   return metaItems
 }
 
-export async function fetchMetaPokemons() {
+async function fetchMetaPokemons() {
   metaPokemons = await PokemonsStatistics.find().exec()
   return metaPokemons
+}
+
+async function fetchMetadata() {
+  metadata = await ReportMetadata.find().exec()
+  return metadata
 }
 
 export function getMetaPokemons() {
@@ -30,4 +46,8 @@ export function getMetaPokemons() {
 
 export function getMetaItems() {
   return metaItems
+}
+
+export function getMetadata() {
+  return metadata
 }

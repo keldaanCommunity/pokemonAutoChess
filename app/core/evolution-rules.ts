@@ -172,7 +172,7 @@ export class CountEvolutionRule extends EvolutionRule {
     shuffleArray(itemComponentsToAdd)
     for (const itemComponent of itemComponentsToAdd) {
       if (
-        pokemonEvolved.items.has(itemComponent) ||
+        values(pokemonEvolved.items).some((i) => ItemComponents.includes(i)) ||
         pokemonEvolved.items.size >= 3
       ) {
         player.items.push(itemComponent)

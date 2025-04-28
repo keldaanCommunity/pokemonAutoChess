@@ -7163,7 +7163,7 @@ export class Cryogonal extends Pokemon {
   speed = 59
   def = 4
   speDef = 16
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.FREEZE_DRY
   attackSprite = AttackSprite.ICE_RANGE
@@ -10034,7 +10034,7 @@ export class Dipplin extends Pokemon {
   def = 8
   speDef = 8
   maxPP = 60
-  range = 1
+  range = 3
   skill = Ability.SYRUP_BOMB
   attackSprite = AttackSprite.GRASS_MELEE
   passive = Passive.DIPPLIN
@@ -10079,7 +10079,7 @@ export class Flapple extends Pokemon {
   stars = 3
   hp = 180
   atk = 19
-  speed = 31
+  speed = 50
   def = 4
   speDef = 4
   maxPP = 80
@@ -10745,7 +10745,7 @@ export class AlolanSandslash extends Pokemon {
 }
 
 export class Nosepass extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.PROBOPASS
@@ -10762,7 +10762,7 @@ export class Nosepass extends Pokemon {
 }
 
 export class Probopass extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.ARTIFICIAL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
@@ -14838,8 +14838,8 @@ export class Grimmsnarl extends Pokemon {
 
 export class Drowzee extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.HUMAN,
     Synergy.PSYCHIC,
+    Synergy.HUMAN,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC
@@ -14859,8 +14859,8 @@ export class Drowzee extends Pokemon {
 
 export class Hypno extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.HUMAN,
     Synergy.PSYCHIC,
+    Synergy.HUMAN,
     Synergy.MONSTER
   ])
   rarity = Rarity.EPIC
@@ -17981,6 +17981,10 @@ export class Charcadet extends Pokemon {
     player.items.push(Item.AUSPICIOUS_ARMOR)
     player.items.push(Item.MALICIOUS_ARMOR)
   }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.MALICIOUS_ARMOR)
+    removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
+  }
 }
 
 export class Armarouge extends Pokemon {
@@ -18173,6 +18177,25 @@ export class ZacianCrowned extends Pokemon {
   range = 1
   skill = Ability.BEHEMOTH_BLADE
   attackSprite = AttackSprite.FAIRY_MELEE
+}
+
+export class IronValiant extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FIGHTING,
+    Synergy.FAIRY,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 26
+  speed = 76
+  def = 10
+  speDef = 6
+  maxPP = 50
+  range = 1
+  skill = Ability.LASER_BLADE
+  attackSprite = AttackSprite.STEEL_MELEE
 }
 
 export const PokemonClasses: Record<
@@ -19129,7 +19152,8 @@ export const PokemonClasses: Record<
   [Pkm.TRANQUILL]: Tranquill,
   [Pkm.UNFEZANT]: Unfezant,
   [Pkm.ZACIAN]: Zacian,
-  [Pkm.ZACIAN_CROWNED]: ZacianCrowned
+  [Pkm.ZACIAN_CROWNED]: ZacianCrowned,
+  [Pkm.IRON_VALIANT]: IronValiant
 }
 
 // declare all the classes in colyseus schema TypeRegistry

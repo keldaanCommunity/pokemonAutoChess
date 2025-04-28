@@ -3360,7 +3360,7 @@ export function displayAbility(
 
     case "HATCH":
       addAbilitySprite("SOFT_BOILED", coordinates, true)
-        .setOrigin(0.5, -0.4)
+        .setOrigin(0.5, 0.4)
         .setDepth(DEPTH.BOOST_BACK)
         .setScale(2)
       break

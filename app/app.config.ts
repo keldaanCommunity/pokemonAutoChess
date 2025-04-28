@@ -30,7 +30,7 @@ import PreparationRoom from "./rooms/preparation-room"
 import { getBotData, getBotsList } from "./services/bots"
 import { discordService } from "./services/discord"
 import { getLeaderboard } from "./services/leaderboard"
-import { getMetaItems, getMetaPokemons } from "./services/meta"
+import { getMetadata, getMetaItems, getMetaPokemons } from "./services/meta"
 import { pastebinService } from "./services/pastebin"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
@@ -250,6 +250,12 @@ export default config({
 
     app.get("/titles", async (req, res) => {
       res.send(await TitleStatistic.find().sort({ name: 1 }).exec()) // Ensure a consistent order by sorting on a unique field
+    })
+
+    app.get("/meta/metadata", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      res.set("Cache-Control", "max-age=86400")
+      res.send(getMetadata())
     })
 
     app.get("/meta/items", async (req, res) => {

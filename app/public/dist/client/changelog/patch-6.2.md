@@ -2,6 +2,7 @@
 
  - Zacian
  - Zacian (Crowned)
+ - Iron Valiant
  
 # Changes to Pokemon & Abilities
 
@@ -17,6 +18,14 @@
 - New ability for Onix line: Iron Tail: Swings its massive tail, hitting 3 enemy pokemon in front, knocking them back and dealing 100% of user's defense as special damage.
 - New ability for Tepig line: Heat Crash: Crashes into the target, knocking it back and dealing 40/60/80 special damage. The ability does more damage the more Attack the user has compared to the target.
 - Archaludon no longer devolves when artificial item is removed
+- Buff Cryogonal: PP 110 → 100
+- Buff Munchlax line passive: Permanently gains max HP when eating: 5 → 10 HP for each berry, 10 → 20 HP for each dish, 20 → 30 HP when cooking as a Chef
+- Buff Flapple: Speed 31 → 50
+- Change Dipplin: Range 1 → 3 ; Sirupy Bomb: no longer inflict Paralysis, but reduce Speed by 30.
+- Change Cosmic Power (Sun): Increase the base attack of all allied Pokémon **other than the user** by 25%
+- Buff Cosmic Power (Moon): Increase the AP of all allied Pokémon by 20 → 25
+- Change Dream Eater (Drowzee): sleep duration changed from 2.5/5 to 3/4/5 seconds and now scales with AP. Added tier 3 damage: 45/90/150
+- Nosepass line is now Rock/Steel instead of Rock/Artificial
 
 # Changes to Synergies
 
@@ -26,6 +35,7 @@
 
 # Gameplay
 
+- Carousels shape and centering have been adjusted to ease movement on top and bottom of the board
 - Rage is no longer considered a negative status, meaning it's not cleansed by Rune Protect, Cleanse Tag and other effects that remove negative status.
 
 # UI
@@ -35,6 +45,9 @@
 
 # Bugfix
 
+- When 3 Pokémon copies merge to evolve, if two copies hold an item component, one of the component will go to item bench instead of the evolved Pokémon holding two components.
+
 # Misc
 
 - New title: Picnicker: Make a picnic with 9 Pokémon
+- Meta report items are sorted by elo tiers (same as pokémons)

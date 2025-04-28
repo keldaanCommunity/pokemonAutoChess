@@ -361,7 +361,7 @@ export default class MinigameManager {
   }
 
   addVillagers(encounter: TownEncounter | null, podium: ILeaderboardInfo[]) {
-    const cx = 964,
+    const cx = 980,
       cy = 404
     const kecleon = new PokemonSpecial({
       scene: this.scene,
@@ -462,7 +462,10 @@ export default class MinigameManager {
       y: encounter === TownEncounters.MUNCHLAX ? cy : 17 * 48,
       name: Pkm.MUNCHLAX,
       orientation: Orientation.DOWNLEFT,
-      animation: encounter === TownEncounters.MUNCHLAX ? PokemonActionState.EAT : PokemonActionState.SLEEP
+      animation:
+        encounter === TownEncounters.MUNCHLAX
+          ? PokemonActionState.EAT
+          : PokemonActionState.SLEEP
     })
 
     const podiumPokemons = podium.map((p, rank) => {

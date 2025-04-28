@@ -40,10 +40,14 @@ async function main() {
     initCronJobs()
   }
 
+  logger.info("Fetching bots...")
   await fetchBots()
+  logger.info("Bots fetched")
   setInterval(() => fetchBots(), 1000 * 60 * 24) // refresh every 24 hours
+  logger.info("Fetching leaderboards...")
   fetchLeaderboards()
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
+  logger.info("Fetching meta reports...")
   fetchMetaReports()
   setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
 }
