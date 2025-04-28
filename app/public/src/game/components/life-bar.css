@@ -16,6 +16,16 @@
     margin-bottom: 1px;
     overflow: hidden;
 }
+.life-bar-wrapper > .life-bar > .life-bar-segments {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:  repeating-linear-gradient(to right, #222, #222 1px, transparent 1px, transparent);
+    background-position: -1px 0;
+    opacity: 1;
+}
 
 .life-bar-wrapper > .life-bar > .life-amount {
     flex-grow: 0;

@@ -11,6 +11,7 @@ export default class LifeBar extends GameObjects.DOMElement {
   maxPP?: number
   wrap: HTMLDivElement
   lifeBar: HTMLDivElement
+  lifeSegments: HTMLDivElement
   lifeAmount: HTMLDivElement
   shieldAmount: HTMLDivElement
   PPBar: HTMLDivElement
@@ -40,12 +41,14 @@ export default class LifeBar extends GameObjects.DOMElement {
     this.lifeAmount.classList.add("life-amount")
     this.shieldAmount = document.createElement("div")
     this.shieldAmount.classList.add("shield-amount")
+    this.lifeSegments = document.createElement("div")
+    this.lifeSegments.classList.add("life-bar-segments")
     this.PPBar = document.createElement("div")
     this.PPBar.classList.add("pp-bar")
     this.PPAmount = document.createElement("div")
     this.PPAmount.classList.add("pp-amount")
     this.wrap.replaceChildren(this.lifeBar, this.PPBar)
-    this.lifeBar.replaceChildren(this.lifeAmount, this.shieldAmount)
+    this.lifeBar.replaceChildren(this.lifeAmount, this.shieldAmount, this.lifeSegments)
     this.PPBar.replaceChildren(this.PPAmount)
     
     this.setElement(this.wrap)
@@ -60,6 +63,11 @@ export default class LifeBar extends GameObjects.DOMElement {
     
     this.lifeAmount.style.width = `${lifePercentage}%`
     this.shieldAmount.style.width = `${shieldPercentage}%`
+    
+    // calculate segmentation mask
+    const segmentSize = 20
+    const segmentPercentage = (segmentSize / totalLife) * 100
+    this.lifeSegments.style.backgroundSize = `${segmentPercentage}% 100%`
     
     if (this.PP !== undefined && this.maxPP !== undefined) {
       const PPPercentage = (this.PP / this.maxPP) * 100
