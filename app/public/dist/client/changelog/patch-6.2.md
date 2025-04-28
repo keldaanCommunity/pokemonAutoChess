@@ -25,6 +25,7 @@
 - Change Cosmic Power (Sun): Increase the base attack of all allied Pokémon **other than the user** by 25%
 - Buff Cosmic Power (Moon): Increase the AP of all allied Pokémon by 20 → 25
 - Change Dream Eater (Drowzee): sleep duration changed from 2.5/5 to 3/4/5 seconds and now scales with AP. Added tier 3 damage: 45/90/150
+- Nosepass line is now Rock/Steel instead of Rock/Artificial
 
 # Changes to Synergies
 
