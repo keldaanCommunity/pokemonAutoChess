@@ -50,3 +50,4 @@
 # Misc
 
 - New title: Picnicker: Make a picnic with 9 Pokémon
+- Meta report items are sorted by elo tiers (same as pokémons)
