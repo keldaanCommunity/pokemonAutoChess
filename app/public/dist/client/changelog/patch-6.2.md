@@ -44,6 +44,8 @@
 
 # Bugfix
 
+- When 3 Pokémon copies merge to evolve, if two copies hold an item component, one of the component will go to item bench instead of the evolved Pokémon holding two components.
+
 # Misc
 
 - New title: Picnicker: Make a picnic with 9 Pokémon
