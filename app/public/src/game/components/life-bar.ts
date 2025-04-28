@@ -1,21 +1,18 @@
 import { GameObjects } from "phaser"
 import { DEPTH } from "../depths"
 import { Team } from "../../../../types/enum/Game"
-import "./life-bar.css"
 
-export default class LifeBar extends GameObjects.DOMElement {
+export default class LifeBar extends GameObjects.Graphics {
   maxLife: number
   life: number
   shield: number
   PP?: number
   maxPP?: number
-  wrap: HTMLDivElement
-  lifeBar: HTMLDivElement
-  lifeSegments: HTMLDivElement
-  lifeAmount: HTMLDivElement
-  shieldAmount: HTMLDivElement
-  PPBar: HTMLDivElement
-  PPAmount: HTMLDivElement
+  team: Team
+  flip: boolean
+  lifeDisplay: number
+  shieldDisplay: number
+  PPDisplay: number
   
   constructor(
     scene: Phaser.Scene,
@@ -27,87 +24,113 @@ export default class LifeBar extends GameObjects.DOMElement {
     team: Team,
     flip: boolean
   ) {
-    super(scene, x, y)
+    super(scene, { x: x - 35, y: y });
     
     this.maxLife = maxLife
     this.life = life
     this.shield = shield
+    this.team = team
+    this.flip = flip
     
-    this.wrap = document.createElement("div")
-    this.wrap.classList.add("life-bar-wrapper", team === (flip ? 1 : 0) ? "ally" : "enemy")
-    this.lifeBar = document.createElement("div")
-    this.lifeBar.classList.add("life-bar")
-    this.lifeAmount = document.createElement("div")
-    this.lifeAmount.classList.add("life-amount")
-    this.shieldAmount = document.createElement("div")
-    this.shieldAmount.classList.add("shield-amount")
-    this.lifeSegments = document.createElement("div")
-    this.lifeSegments.classList.add("life-bar-segments")
-    this.PPBar = document.createElement("div")
-    this.PPBar.classList.add("pp-bar")
-    this.PPAmount = document.createElement("div")
-    this.PPAmount.classList.add("pp-amount")
-    this.wrap.replaceChildren(this.lifeBar, this.PPBar)
-    this.lifeBar.replaceChildren(this.lifeAmount, this.shieldAmount, this.lifeSegments)
-    this.PPBar.replaceChildren(this.PPAmount)
+    this.lifeDisplay = 1
+    this.shieldDisplay = 1
+    this.PPDisplay = 1
     
-    this.setElement(this.wrap)
     this.setDepth(DEPTH.POKEMON_HP_BAR)
-    this.draw()
   }
   
   draw() {
-    const totalLife = Math.max(this.maxLife, this.life + this.shield)  // if life + shield exceeds maxLife, the amount of segments should expand accordingly
-    const lifePercentage = (this.life / totalLife) * 100
-    const shieldPercentage = (this.shield / totalLife) * 100
+    const barWidth = 70
+    const innerBarWidth = barWidth - 2
     
-    this.lifeAmount.style.width = `${lifePercentage}%`
-    this.shieldAmount.style.width = `${shieldPercentage}%`
+    this.clear()
+    this.clearMask()
     
-    // calculate segmentation mask
-    const segmentSize = 20
-    const segmentPercentage = (segmentSize / totalLife) * 100
-    this.lifeSegments.style.backgroundSize = `${segmentPercentage}% 100%`
+    // life bar
+    this.fillStyle(0x222222)
+    this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
     
-    if (this.PP !== undefined && this.maxPP !== undefined) {
-      const PPPercentage = (this.PP / this.maxPP) * 100
-      this.PPAmount.style.width = `${PPPercentage}%`
+    // life and shield amount
+    if (this.life > 0) {
+      const totalLife = Math.max(this.maxLife, this.life + this.shield)  // if life + shield exceeds maxLife, the amount of segments should expand accordingly
+      const lifePercentage = this.life / totalLife
+      const shieldPercentage = this.shield / totalLife
+      
+      this.save()
+      this.translateCanvas(1, 1)
+      const color = (this.team === (this.flip ? 1 : 0)) ? 0x76c442 : 0xe76e55
+      this.fillStyle(color, 1)
+      this.fillRect(0, 0, lifePercentage * innerBarWidth, 6)
+      if (this.shield > 0) {
+        this.fillStyle(0x969696)
+        this.fillRect(lifePercentage * innerBarWidth, 0, shieldPercentage * 68, 5)
+      }
+      
+      // hp segmentation
+      const hpPerSegment = 30
+      const segmentSize = (hpPerSegment / totalLife) * innerBarWidth
+      const numberOfSegments = totalLife / hpPerSegment >> 0
+      this.lineStyle(1, 0x222222)
+      this.beginPath()
+      for (let i = 1; i <= numberOfSegments; i++) {
+        this.moveTo(i * segmentSize, 0)
+        this.lineTo(i * segmentSize, 6)
+      }
+      this.closePath()
+      this.strokePath()
+      this.restore()
     }
+    
+    // PP
+    if (this.PP !== undefined && this.maxPP !== undefined) {
+      const PPPercentage = this.PP / this.maxPP
+      this.fillStyle(0x209cee)
+      this.fillRect(1, 9, PPPercentage * innerBarWidth, 3)
+    }
+    
   }
   
   setLife(value: number) {
-    this.life = value
-    this.draw()
+    this.scene.tweens.add({
+      targets: this,
+      life: value,
+      duration: 150,
+      onUpdate: this.draw.bind(this),
+      ease: 'Sine.easeOut'
+    })
   }
   
   setShield(value: number) {
-    this.shield = value
-    this.draw()
+    this.scene.tweens.add({
+      targets: this,
+      shield: value,
+      duration: 150,
+      onUpdate: this.draw.bind(this),
+      ease: 'Sine.easeOut'
+    })
   }
 
   setMaxLife(value: number) {
     this.maxLife = value
-    this.draw()
   }
   
   setPP(value: number) {
-    this.PP = value
-    if (this.maxPP === undefined) this.setMaxPP(value)
+    this.scene.tweens.add({
+      targets: this,
+      PP: value,
+      duration: 150,
+      onUpdate: this.draw.bind(this),
+      ease: 'Sine.easeOut'
+    })
   }
   
   setMaxPP(value: number) {
-    this.PP = 0
     this.maxPP = value
-    this.PPBar.style.display = "flex"
+    if (this.PP === undefined) this.PP = 0
   }
   
   setTeam(team: number, flip: boolean) {
-    if (team === (flip ? 1 : 0)) {
-      this.wrap.classList.remove("enemy")
-      this.wrap.classList.add("ally")
-    } else {
-      this.wrap.classList.remove("ally")
-      this.wrap.classList.add("enemy")
-    }
+    this.team = team
+    this.flip = flip
   }
 }

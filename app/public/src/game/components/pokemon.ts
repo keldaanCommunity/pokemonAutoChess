@@ -696,7 +696,7 @@ export default class PokemonSprite extends DraggableObject {
       this.lifebar.setShield(pokemon.shield)
       this.add(this.lifebar)
       
-      if (pokemon.pp !== undefined && pokemon.maxPP > 0) this.lifebar.setPP(pokemon.maxPP)
+      if (pokemon.pp !== undefined && pokemon.maxPP > 0) this.lifebar.setMaxPP(pokemon.maxPP)
     }
   }
 
