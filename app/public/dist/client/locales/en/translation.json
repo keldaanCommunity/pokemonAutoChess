@@ -2919,7 +2919,7 @@
 		"GYM_TRAINER": "Reach 1100 Elo",
 		"CAMPER": "Max Synergy with Field Type in a game",
 		"RIVAL": "Max Synergy with Human Type in a game",
-		"TYRANT": "Win a game at 100 HP",
+		"TYRANT": "Win a game at 100 HP or more",
 		"SURVIVOR": "Win a game with only 1 HP remaining",
 		"GAMBLER": "Reroll over 60 times in a single match",
 		"NATURAL": "Win a game while rolling less than 20 times",

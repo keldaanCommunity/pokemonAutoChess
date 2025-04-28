@@ -880,7 +880,7 @@ export default class GameRoom extends Room<GameState> {
         })
       }
 
-      if (player.life === 100 && rank === 1) {
+      if (player.life >= 100 && rank === 1) {
         player.titles.add(Title.TYRANT)
       }
       if (player.life === 1 && rank === 1) {
