@@ -467,7 +467,8 @@
 		"SUCTION_HEAL": "Suction Heal",
 		"ROOST": "Roost",
 		"BEHEMOTH_BLADE": "Behemoth Blade",
-		"HEAT_CRASH": "Heat Crash"
+		"HEAT_CRASH": "Heat Crash",
+		"LASER_BLADE": "Laser Blade"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1417,7 +1418,8 @@
 		"TRANQUILL": "Tranquill",
 		"UNFEZANT": "Unfezant",
 		"ZACIAN": "Zacian",
-		"ZACIAN_CROWNED": "Zacian (Crowned)"
+		"ZACIAN_CROWNED": "Zacian (Crowned)",
+		"IRON_VALIANT": "Iron Valiant"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1539,7 +1541,7 @@
 		"STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all adjacent enemy Pokémon and BURN them for 3 seconds.",
 		"APPLE_ACID": "Deal [50,SP] SPECIAL to the 3 enemy Pokémon in front. Deals [100,SP] SPECIAL if target SPE_DEF is 0.",
 		"NUTRIENTS": "Throw an apple to the ally with the fewest HP, healing for [40,SP] HP and increasing its DEF and SPE_DEF by [2,SP].",
-		"SYRUP_BOMB": "The user sets off an explosion of sticky candy syrup which coats the highest SPEED enemy, dealing [50,SP] SPECIAL and PARALYSIS for 3 seconds.",
+		"SYRUP_BOMB": "The user sets off an explosion of sticky candy syrup which coats the highest SPEED enemy, dealing [50,SP] SPECIAL and reducing its SPEED by 30.",
 		"FICKLE_BEAM": "Each of the hydra's 4 heads has a [60,LK]% chance of inflicting [60,SP] SPECIAL and 2 seconds PARALYSIS on enemies with the highest SPEED.",
 		"GRAV_APPLE": "The user deals [80,SP] PHYSICAL by dropping an apple from high above. Deals [160,SP] PHYSICAL if target DEF is 0.",
 		"SACRED_SWORD_IRON": "Deal [80,SP] TRUE to the target + [15,SP] TRUE per fallen ally.",
@@ -1597,8 +1599,8 @@
 		"SPLASH": "The user just flops and splashes around to no effect at all...",
 		"PECK": "Deal [10,30,50,SP] SPECIAL to the target.",
 		"COUNTER": "The user lashes out at adjacent enemy Pokémon dealing [50,SP]% of its missing HP as SPECIAL.",
-		"COSMIC_POWER_MOON": "Increase the AP of all allied Pokémon other than the user by [20,SP].",
-		"COSMIC_POWER_SUN": "Increase the base ATK of all allied Pokémon by [25,SP]%.",
+		"COSMIC_POWER_MOON": "Increase the AP of all allied Pokémon other than the user by [25,SP].",
+		"COSMIC_POWER_SUN": "Increase the base ATK of all allied Pokémon other than the user by [25,SP]%.",
 		"ENTANGLING_THREAD": "Deal [10,20,40,SP] SPECIAL to the target and adjacent enemies and inflict them with PARALYSIS 4 seconds.",
 		"SILVER_WIND": "Dash to the farthest reachable enemy, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon in the path. Then gain 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP and 10 SPEED.",
 		"POISON_POWDER": "Dash to the farthest reachable enemy, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon in the path and inflicting them with POISONNED for 5 seconds.",
@@ -1750,7 +1752,7 @@
 		"POLLEN_PUFF": "Give the lowest HP allied Pokémon a pollen puff that heals them for [30,60,120,SP] HP.",
 		"PSYSTRIKE": "Materialize a strange psychic wave toward the farthest enemy Pokémon, dealing [80,SP] PHYSICAL to them and teleporting all Pokémon in its path.",
 		"FACADE": "Deal [20,40,80,SP] SPECIAL, doubled if the user suffers from a negative status condition.",
-		"DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [2.5,5,ND=1] seconds.",
+		"DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,150,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [3,4,5,SP] seconds.",
 		"SPARK": "Fire a spark charged with electricity at the target, dealing [40,80,SP] SPECIAL. The spark can bounce up to 4 times between adjacent enemy Pokémon. Each rebound halves the SPECIAL.",
 		"CRUNCH": "Deal [40,80,150,SP] SPECIAL to the target. If it kills the target, heal for 50% of the target's max HP.",
 		"CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon adjacent to them and inflict them with POISONNED for 2 seconds.",
@@ -1865,7 +1867,8 @@
 		"SUCTION_HEAL": "Drains the energy from its targets, dealing [15,30,60,SP] SPECIAL in a 2-tile cone in front of the user and heals HP for [50,SP]% of the damage dealt.",
 		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerfull slash, dealing [100,SP] + 1x ATK as PHYSICAL",
-		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target."
+		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
+		"LASER_BLADE": "Alternatively:\n- Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n- Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2398,7 +2401,7 @@
 		"ABSORB_BULB": "All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to adjacent enemy units as SPECIAL.",
 		"SACRED_ASH": "Gives RESURECTION. After resurecting, up to 3 allies KO are resurected as well, but without items.",
 		"COMET_SHARD": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 300% ATK as SPECIAL to target and adjacent enemies, while gaining PROTECT for 3 seconds.",
-		"REPEAT_BALL": "For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. Additionally, each time you spend gold on a reroll, gain 1 free reroll. After lots of rerolls, you may encounter powerful Pokémon in your shop.",
+		"REPEAT_BALL": "Each time you spend gold on a reroll, gain 1 free reroll. For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. After lots of rerolls, you may encounter powerful Pokémon in your shop.",
 		"GOLD_BOW": "The holder does not count for team size limit.",
 		"DAMP_ROCK": "Counts for 3 towards RAIN. Under RAIN, your team gains +2 PP per second.",
 		"ICY_ROCK": "Counts for 3 towards SNOW. Under SNOW, your team recovers from FREEZE 20% faster and have 5% additional chance to FREEZE their opponents with their attacks.",
@@ -2916,7 +2919,7 @@
 		"GYM_TRAINER": "Reach 1100 Elo",
 		"CAMPER": "Max Synergy with Field Type in a game",
 		"RIVAL": "Max Synergy with Human Type in a game",
-		"TYRANT": "Win a game at 100 HP",
+		"TYRANT": "Win a game at 100 HP or more",
 		"SURVIVOR": "Win a game with only 1 HP remaining",
 		"GAMBLER": "Reroll over 60 times in a single match",
 		"NATURAL": "Win a game while rolling less than 20 times",

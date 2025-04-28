@@ -83,6 +83,7 @@ import { values } from "../../utils/schemas"
 import { DarkHarvestEffect } from "../effect"
 import { DelayedCommand } from "../simulation-command"
 import { giveRandomEgg } from "../../core/eggs"
+import { t } from "i18next"
 
 const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -3011,7 +3012,7 @@ export class CosmicPowerMoonStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const apGain = 20
+    const apGain = 25
     board.forEach((x, y, ally) => {
       if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAbilityPower(apGain, pokemon, 1, crit)
@@ -3031,7 +3032,7 @@ export class CosmicPowerSunStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const atkBuffMultiplier = 0.25
     board.forEach((x, y, ally) => {
-      if (ally && ally.team === pokemon.team) {
+      if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
         ally.addAttack(atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
       }
     })
@@ -3542,12 +3543,7 @@ export class SyrupBombStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)[0]
 
     if (highestSpeedEnemy) {
-      highestSpeedEnemy.status.triggerParalysis(
-        3000,
-        highestSpeedEnemy,
-        pokemon,
-        false
-      )
+      highestSpeedEnemy.addSpeed(-30, pokemon, 1, crit)
       highestSpeedEnemy.handleSpecialDamage(
         damage,
         board,
@@ -8971,9 +8967,6 @@ export class DreamEaterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit, true)
-    const damage = pokemon.stars === 1 ? 45 : 90
-    const duration = pokemon.stars === 1 ? 2500 : 5000
-
     const sleepingTarget = board.find(
       (x, y, entity) => entity.status.sleep && entity.team !== pokemon.team
     )
@@ -8991,6 +8984,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
       if (coord) {
         pokemon.moveTo(coord.x, coord.y, board)
       }
+      const damage = [45, 90, 150][pokemon.stars - 1] ?? 150
       const { takenDamage } = sleepingTarget.handleSpecialDamage(
         damage,
         board,
@@ -9001,6 +8995,9 @@ export class DreamEaterStrategy extends AbilityStrategy {
       )
       pokemon.handleHeal(takenDamage, pokemon, 1, crit)
     } else {
+      const duration = Math.round(
+        ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
+      )
       target.status.triggerSleep(duration, target)
       broadcastAbility(pokemon, {
         targetX: target.positionX,
@@ -12641,6 +12638,67 @@ export class HeatCrashStrategy extends AbilityStrategy {
   }
 }
 
+export class LaserBladeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit)
+    if (pokemon.count.ult % 2 === 1) {
+      // Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.
+      const damage = 30
+      const shield = 30
+      const enemiesHit = new Set<PokemonEntity>()
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+        .concat(
+          board.getAdjacentCells(target.positionX, target.positionY, false)
+        )
+        .map((cell) => cell.value)
+        .filter(
+          (entity): entity is PokemonEntity =>
+            entity != null && entity.team !== pokemon.team
+        )
+        .forEach((enemy) => enemiesHit.add(enemy))
+      pokemon.moveTo(target.positionX, target.positionY, board)
+      pokemon.addShield(shield, pokemon, 1, crit)
+      enemiesHit.forEach((enemy) => {
+        enemy.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      })
+    } else {
+      // Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL
+      const damage = 30 + pokemon.atk
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }, 300)
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13090,5 +13148,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.ROOST]: new RoostStrategy(),
   [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
-  [Ability.HEAT_CRASH]: new HeatCrashStrategy()
+  [Ability.HEAT_CRASH]: new HeatCrashStrategy(),
+  [Ability.LASER_BLADE]: new LaserBladeStrategy()
 }

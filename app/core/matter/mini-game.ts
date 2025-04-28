@@ -55,7 +55,9 @@ const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
 const PORTAL_ROTATION_SPEED = 0.0003
 const SYMBOL_ROTATION_SPEED = 0.0006
-const CAROUSEL_RADIUS = 150
+const CAROUSEL_RADIUS_X = 150
+const CAROUSEL_RADIUS_Y = 125
+const AVATAR_RADIUS = 25
 const NB_SYMBOLS_PER_PLAYER = 4
 
 export class MiniGame {
@@ -67,8 +69,8 @@ export class MiniGame {
   bodies: Map<string, Body>
   alivePlayers: Player[]
   engine: Engine
-  centerX: number = 325
-  centerY: number = 250
+  centerX: number = 335
+  centerY: number = 235
   timeElapsed: number = 0
   rotationDirection: number = 1
 
@@ -78,19 +80,35 @@ export class MiniGame {
     this.alivePlayers = []
     Composite.add(
       this.engine.world,
-      Bodies.rectangle(0, -70, 2000, 40, { isStatic: true, restitution: 1 })
+      // bottom wall
+      Bodies.rectangle(-50, -70, 2000, 40, {
+        isStatic: true,
+        restitution: 1
+      })
     )
     Composite.add(
       this.engine.world,
-      Bodies.rectangle(-70, 0, 40, 2000, { isStatic: true, restitution: 1 })
+      // left wall
+      Bodies.rectangle(-70, 0, 40, 2000, {
+        isStatic: true,
+        restitution: 1
+      })
     )
     Composite.add(
       this.engine.world,
-      Bodies.rectangle(740, 0, 40, 2000, { isStatic: true, restitution: 1 })
+      // right wall
+      Bodies.rectangle(740, 0, 40, 2000, {
+        isStatic: true,
+        restitution: 1
+      })
     )
     Composite.add(
       this.engine.world,
-      Bodies.rectangle(0, 610, 2000, 40, { isStatic: true, restitution: 1 })
+      // up wall
+      Bodies.rectangle(-50, 540, 2000, 40, {
+        isStatic: true,
+        restitution: 1
+      })
     )
     Events.on(this.engine, "beforeUpdate", () => {
       this.items?.forEach((item) => {
@@ -101,11 +119,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * item.index) / this.items!.size) *
-                CAROUSEL_RADIUS
+                CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * item.index) / this.items!.size) *
-                CAROUSEL_RADIUS
+                CAROUSEL_RADIUS_Y
             Body.setPosition(itemBody, { x, y })
           }
         }
@@ -119,11 +137,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-                CAROUSEL_RADIUS
+                CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-                CAROUSEL_RADIUS
+                CAROUSEL_RADIUS_Y
             Body.setPosition(portalBody, { x, y })
           }
         }
@@ -275,15 +293,15 @@ export class MiniGame {
         avatar.targetX =
           this.centerX +
           Math.cos((2 * Math.PI * i) / this.alivePlayers.length) *
-            CAROUSEL_RADIUS
+            CAROUSEL_RADIUS_X
         avatar.targetY =
           this.centerY +
           Math.sin((2 * Math.PI * i) / this.alivePlayers.length) *
-            CAROUSEL_RADIUS
+            CAROUSEL_RADIUS_Y
       }
 
       this.avatars!.set(avatar.id, avatar)
-      const body = Bodies.circle(x, y, 25)
+      const body = Bodies.circle(x, y, AVATAR_RADIUS)
       body.label = avatar.id
       body.collisionFilter.mask = 0 // disable collision until release time
       this.bodies.set(avatar.id, body)
@@ -389,8 +407,8 @@ export class MiniGame {
       ) {
         // prevent going out of bounds in case of lag
         Body.setPosition(body, {
-          x: clamp(body.position.x, 0, 720),
-          y: clamp(body.position.y, 0, 590)
+          x: clamp(body.position.x, -50 + AVATAR_RADIUS, 740 - AVATAR_RADIUS),
+          y: clamp(body.position.y, -70 + AVATAR_RADIUS, 540 - AVATAR_RADIUS)
         })
       }
       if (this.avatars?.has(id)) {

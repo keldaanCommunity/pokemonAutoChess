@@ -27,7 +27,11 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import type { Passive } from "../../../../types/enum/Passive"
-import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import {
+  AnimationConfig,
+  Pkm,
+  PkmByIndex
+} from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
@@ -48,6 +52,7 @@ import { logger } from "../../../../utils/logger"
 const spriteCountPerPokemon = new Map<string, number>()
 
 export default class PokemonSprite extends DraggableObject {
+  scene: GameScene | DebugScene
   evolution: Pkm
   rarity: Rarity
   emotion: Emotion
@@ -139,6 +144,7 @@ export default class PokemonSprite extends DraggableObject {
     flip: boolean
   ) {
     super(scene, x, y, 75, 75, playerId !== scene.uid)
+    this.scene = scene
     this.flip = flip
     this.playerId = playerId
     this.shouldShowTooltip = true
@@ -659,10 +665,20 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  specialAttackAnimation(group: Phaser.GameObjects.Group, ultCount: number) {
-    if (this.skill && this.skill === Ability.GROWTH) {
-      this.sprite.setScale(2 + 0.5 * ultCount)
+  specialAttackAnimation(pokemon: IPokemonEntity) {
+    let anim = AnimationConfig[PkmByIndex[pokemon.index]].ability
+    if (pokemon.skill === Ability.LASER_BLADE && pokemon.count.ult % 2 === 0) {
+      anim = AnimationConfig[PkmByIndex[pokemon.index]].emote
     }
+    if (pokemon.skill === Ability.GROWTH) {
+      this.sprite.setScale(2 + 0.5 * pokemon.count.ult)
+    }
+
+    this.scene.animationManager?.play(this, anim, {
+      flip: this.flip,
+      lock: true,
+      repeat: 0
+    })
   }
 
   setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
