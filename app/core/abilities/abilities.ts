@@ -3871,12 +3871,14 @@ export class DragonBreathStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const maxRange = pokemon.range + 1
 
     effectInLine(board, pokemon, target, (cell) => {
       if (
         cell.value != null &&
         cell.value.team !== pokemon.team &&
-        distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) <= 2
+        distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) <=
+          maxRange
       ) {
         cell.value.handleSpecialDamage(
           damage,
