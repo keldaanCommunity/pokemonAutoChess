@@ -467,7 +467,8 @@
 		"SUCTION_HEAL": "真空治愈",
 		"ROOST": "羽栖",
 		"BEHEMOTH_BLADE": "巨兽斩",
-		"HEAT_CRASH": "高温重压"
+		"HEAT_CRASH": "高温重压",
+		"LASER_BLADE": "激光刃"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1417,7 +1418,8 @@
 		"TRANQUILL": "咕咕鸽",
 		"UNFEZANT": "高傲雉鸡",
 		"ZACIAN": "苍响",
-		"ZACIAN_CROWNED": "苍响（剑之王）"
+		"ZACIAN_CROWNED": "苍响（剑之王）",
+		"IRON_VALIANT": "铁武者"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1539,7 +1541,7 @@
 		"STEAM_ERUPTION": "对目标和所有相邻敌方宝可梦造成[80,SP]点SPECIAL，并使他们陷入BURN 3秒。",
 		"APPLE_ACID": "对前方的3只敌方宝可梦造成[50,SP]点SPECIAL。若目标的SPE_DEF为0，改为造成[100,SP]点SPECIAL。",
 		"NUTRIENTS": "朝HP最低的我方宝可梦投掷一个苹果，为其恢复[40,SP]点HP，并提升其[2,SP]点DEF和SPE_DEF。",
-		"SYRUP_BOMB": "使粘稠的麦芽糖浆爆炸，对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，SPEED -30。",
+		"SYRUP_BOMB": "使粘稠的麦芽糖浆爆炸，对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，并降低其30点SPEED。",
 		"FICKLE_BEAM": "密集大蛇的4个头各自有[60,LK]%的概率对SPEED最高的敌方宝可梦造成[60,SP]点SPECIAL，并使其陷入PARALYSIS 2秒。",
 		"GRAV_APPLE": "从高处落下苹果，对目标造成[80,SP]点PHYSICAL。若目标的DEF为0，改为造成[160,SP]点PHYSICAL。",
 		"SACRED_SWORD_IRON": "对目标造成[80,SP]点TRUE。每有一个倒下的我方宝可梦，该伤害提升[15,SP]。",
@@ -1598,7 +1600,7 @@
 		"PECK": "对目标造成[10,30,50,SP]点SPECIAL。",
 		"COUNTER": "对相邻的敌方宝可梦造成SPECIAL，数值相当于使用者[50,SP]%的已损失HP。",
 		"COSMIC_POWER_MOON": "除使用者自身外的我方宝可梦提升[25,SP]点AP。",
-		"COSMIC_POWER_SUN": "所有我方宝可梦提升[25,SP]%的基础ATK。",
+		"COSMIC_POWER_SUN": "除使用者自身外的我方宝可梦提升[25,SP]%的基础ATK。",
 		"ENTANGLING_THREAD": "对目标及相邻宝可梦造成[10,20,40,SP]点SPECIAL，并使他们陷入PARALYSIS 4秒。",
 		"SILVER_WIND": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，然后提升1点ATK、1点DEF、1点SPE_DEF、10点AP以及10点SPEED。",
 		"POISON_POWDER": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入POISONNED 5秒。",
@@ -1607,7 +1609,7 @@
 		"ACROBATICS": "对目标造成[20,40,80,SP]点SPECIAL，并移动至与目标有一定距离的单元格。若使用者没有携带任何道具，与目标的距离会进一步提升。",
 		"ABSORB": "对目标造成[30,60,120,SP]点SPECIAL，并为相邻我方宝可梦恢复[3,6,12,SP]点HP。",
 		"ROLLOUT": "提升[2,5,10,SP]点DEF，随后对目标造成SPECIAL，数值相当于DEF乘以2。",
-		"ICE_BALL": "提升使用者10点SPE_DEF，随后对目标造成SPECIAL，数值相当于[50,100,150,SP]%的SPE_DEF加上[10,20,30,SP]。",
+		"ICE_BALL": "提升使用者10点SPE_DEF，随后对目标造成SPECIAL，数值相当于[50,100,150,SP]%的SPE_DEF加[10,20,30,SP]。",
 		"THRASH": "提升[100,SP]%的ATK，但陷入CONFUSION 3秒。",
 		"SOLAR_BEAM": "对目标身后的一条直线上的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL。若天气为SUN，造成的伤害翻倍，还会恢复40点PP并使击中的宝可梦陷入BURN 3秒。",
 		"MAGMA_STORM": "用火焰漩涡困住目标，对其造成[80,SP]点SPECIAL。这个漩涡随后会传递到相邻的目标身上。",
@@ -1833,14 +1835,14 @@
 		"CUT": "对目标造成SPECIAL，数值相当于其最大HP的[40,SP]%，并使其陷入WOUND 5秒。",
 		"FLY": "飞上天空，在1秒后落至最远敌人的位置，对其造成SPECIAL，数值相当于[400,SP]%的ATK。",
 		"SURF": "一道海浪将使用者与路径上的所有敌方宝可梦推至敌方后排的位置。所有被击中的敌方宝可梦受到[20,40,80,SP]点SPECIAL。",
-		"STRENGTH": "对目标造成PHYSICAL，数值相当于ATK、DEF与SPE_DEF之和的2倍加上AP。",
+		"STRENGTH": "对目标造成PHYSICAL，数值相当于ATK、DEF与SPE_DEF之和的2倍加AP。",
 		"HARDEN": "提升[4,8,12,SP]点DEF。",
 		"TOPSY_TURVY": "对目标造成[40,80,100,SP]点SPECIAL，并反转其ATK，AP，DEF和SPE_DEF的变化。任何增幅变为等额的减幅，反之亦然。",
-		"COLUMN_CRUSH": "在最近的空格子上建造一根立柱。若场上已经存在立柱，改为跳至立柱的位置，并将其丢向最近的目标，对其造成SPECIAL，数值相当于[50,100,150,SP]加上立柱剩余的HP。",
+		"COLUMN_CRUSH": "在最近的空格子上建造一根立柱。若场上已经存在立柱，改为跳至立柱的位置，并将其丢向最近的目标，对其造成SPECIAL，数值相当于[50,100,150,SP]加立柱剩余的HP。",
 		"WONDER_ROOM": "在目标周围制造离奇的空间。空间内的敌方宝可梦的DEF和SPE_DEF被交换，持续5秒，且受到的普攻伤害为受攻击方AP加成的SPECIAL。",
 		"DARK_LARIAT": "旋转双臂多次打向对手，同时移动至其背后。每次造成SPECIAL，数值相当于[100,SP]%的ATK。攻击次数随SPEED提升而增加。目标在此期间陷入FLINCH。",
 		"BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。",
-		"FREEZE_DRY": "对目标造成SPECIAL，数值相当于100%的SPE_DEF加上[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对相邻的敌方宝可梦造成SPECIAL，数值相当于50%的SPE_DEF加上[30,SP]。",
+		"FREEZE_DRY": "对目标造成SPECIAL，数值相当于100%的SPE_DEF加[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对相邻的敌方宝可梦造成SPECIAL，数值相当于50%的SPE_DEF加[30,SP]。",
 		"DRAGON_PULSE": "从大大的口中掀起冲击波，对目标和相邻敌方宝可梦造成[20,SP]点SPECIAL。冲击波会在敌方宝可梦之间回荡。",
 		"FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对前方2格半径的锥形区域内的敌方宝可梦造成[30,60,120,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。",
 		"SALT_CURE": "相邻我方宝可梦获得[10,20,40,SP]点SHIELD，并移除他们的异常状态。相邻的WATER，STEEL或GHOST敌方宝可梦陷入BURN 5秒。",
@@ -1864,8 +1866,9 @@
 		"BITTER_BLADE": "将对世间的留恋聚集于剑尖，并斩击所有相邻敌方宝可梦，造成[70,SP]点SPECIAL。每击中一个敌方宝可梦，使用者自身恢复[10,SP]%的HP。",
 		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的锥形范围内所有敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害量[50,SP]%的HP。",
 		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 2秒，并恢复[20,40,80,SP]点HP。",
-		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成PHYSICAL，数值相当于1乘以ATK加上[100,SP]。",
-		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL使用者的ATK比目标的越高，造成的伤害越高。"
+		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成PHYSICAL，数值相当于1乘以ATK加[100,SP]。",
+		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL。使用者的ATK比目标的越高，造成的伤害越高。",
+		"LASER_BLADE": "每次使用招式时交替执行以下行为：\n——旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的相邻宝可梦造成[30,SP]点SPECIAL。\n——向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[30,SP]。"
 	},
 	"effect": {
 		"INGRAIN": "扎根",
@@ -2916,7 +2919,7 @@
 		"GYM_TRAINER": "Elo分数达到1100",
 		"CAMPER": "在一局游戏中，将陆上共鸣提升到最大等级",
 		"RIVAL": "在一局游戏中，将人型共鸣提升到最大等级",
-		"TYRANT": "在玩家生命值为100的情况下赢得一场游戏的胜利",
+		"TYRANT": "在玩家生命值至少为100的情况下赢得一场游戏的胜利",
 		"SURVIVOR": "在玩家生命值仅剩1的情况下赢得一场游戏的胜利",
 		"GAMBLER": "在单场游戏中刷新至少60次",
 		"NATURAL": "在单场游戏中刷新不超过20次，并取得胜利",
@@ -3728,7 +3731,7 @@
 		"defense_calculation": "防御的减伤计算",
 		"defense_calculation_description": "和英雄联盟一致，伤害等于攻击除以（1+0.05×防御力）。防御对物理伤害生效，特防对特殊伤害生效。",
 		"round_damage_calculation": "对玩家伤害计算",
-		"round_damage_calculation_description": "每轮结束时，战败玩家受到的伤害等于当前轮次序数除以2加上存活的敌方宝可梦数量，向上取整。复制体和召唤物不计数。",
+		"round_damage_calculation_description": "每轮结束时，战败玩家受到的伤害等于当前轮次序数除以2加存活的敌方宝可梦数量，向上取整。复制体和召唤物不计数。",
 		"pool_size_per_category": "每类的精灵池大小",
 		"pool_size_per_category_description": "商店中刷出的宝可梦均来自全体玩家共享的精灵池。精灵池中单种宝可梦的数量由其稀有度和进化段数决定。"
 	},
