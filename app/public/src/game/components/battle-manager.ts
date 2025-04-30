@@ -598,10 +598,10 @@ export default class BattleManager {
         const baseHP = getPokemonData(pokemon.name).hp
         const sizeBuff = (pokemon.hp - baseHP) / baseHP
         pkm.sprite.setScale(2 + sizeBuff)
-        pkm.lifebar?.setMaxAmount(pokemon.hp)
+        pkm.lifebar?.setMaxLife(pokemon.hp)
       } else if (field == "life") {
         pkm.life = pokemon.life
-        pkm.lifebar?.setAmount(pkm.life)
+        pkm.lifebar?.setLife(pkm.life)
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.hp.textContent = pokemon.life.toString()
         }
@@ -611,11 +611,11 @@ export default class BattleManager {
             this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
           }
           pkm.shield = pokemon.shield
-          pkm.lifebar?.setShieldAmount(pkm.shield)
+          pkm.lifebar?.setShield(pkm.shield)
         }
       } else if (field === "pp") {
         pkm.pp = pokemon.pp
-        pkm.powerbar?.setAmount(max(pkm.maxPP)(pkm.pp))
+        pkm.lifebar?.setPP(max(pkm.maxPP)(pkm.pp))
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.updateValue(
             pkm.detail.pp,
