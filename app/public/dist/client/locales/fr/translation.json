@@ -2086,8 +2086,8 @@
 		"FLUID": "L'équipe gagne 1 SPEED et 3 HP par synergie unique active",
 		"SHAPELESS": "L'équipe gagne 3 SPEED et 6 HP par synergie unique active",
 		"ETHEREAL": "L'équipe gagne 6 SPEED et 12 HP par synergie unique active",
-		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un plat signature après chaque manche et nourrissez un allié adjacent.",
-		"LUNCH_BREAK": "Le chef cuisine deux plats et nourrit deux alliés adjacents après chaque tour.",
+		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un plat signature après chaque manche et nourrissez l'allié adjacent le plus fort.",
+		"LUNCH_BREAK": "Le chef cuisine deux plats et nourrit les deux alliés adjacents les plus forts après chaque tour.",
 		"BANQUET": "Gagnez une deuxième CHEF_HAT."
 	},
 	"item": {

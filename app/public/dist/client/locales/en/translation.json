@@ -2095,8 +2095,8 @@
 		"FLUID": "Ally team gains 1 SPEED and 3 HP per unique active synergy",
 		"SHAPELESS": "Ally team gains 3 SPEED and 6 HP per unique active synergy",
 		"ETHEREAL": "Ally team gains 6 SPEED and 12 HP per unique active synergy",
-		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed one adjacent ally.",
-		"LUNCH_BREAK": "The Chef cook two dishes and feed two adjacent allies after every round.",
+		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the strongest adjacent ally.",
+		"LUNCH_BREAK": "The Chef cook two dishes and feed the two strongest adjacent allies after every round.",
 		"BANQUET": "Gain a second CHEF_HAT."
 	},
 	"item": {

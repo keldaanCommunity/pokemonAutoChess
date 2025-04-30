@@ -32,6 +32,7 @@
 # Changes to Synergies
 
 - Wild Pokemon can now be found in initial shop at stage 0
+- Gourmet dishes are now distributed to the strongest adjacent Pokémons instead of a random one
 
 # Changes to Items
 
