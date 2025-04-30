@@ -2041,8 +2041,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(this.hp - this.life)
         break
       case Item.BABIRI_BERRY:
-        this.status.triggerProtect(2000)
         heal(20)
+        this.status.triggerProtect(2000)
         break
     }
 
