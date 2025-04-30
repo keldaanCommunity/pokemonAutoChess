@@ -1,10 +1,14 @@
 import { IPokemon, IPokemonEntity } from "../types"
+import { max } from "./number"
 
 export function chance(
   probability: number,
-  pokemon?: IPokemonEntity | IPokemon
+  pokemon?: IPokemonEntity | IPokemon,
+  cap = 1
 ): boolean {
-  return Math.random() < probability * (1 + (pokemon?.luck ?? 0) / 100)
+  return (
+    Math.random() < max(cap)(probability * (1 + (pokemon?.luck ?? 0) / 100))
+  )
 }
 
 export function randomWeighted<T extends string>(

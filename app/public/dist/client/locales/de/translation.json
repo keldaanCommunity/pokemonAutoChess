@@ -2549,7 +2549,7 @@
 		"SAND_STREAM": "Dieses Pokémon zählt als 3 für SANDSTORM",
 		"DRIZZLE": "Dieses Pokémon zählt als 3 für RAIN",
 		"WIND_POWER": "Das Pokémon zählt als 3 für STORM",
-		"GLUTTON": "Erhalte permanente max HP nach Essen: 5 HP für jede Beere, 10 HP für jedes Gericht, 20 HP wenn als Koch gekocht wird.",
+		"GLUTTON": "Erhalte permanente max HP nach Essen: 10 HP für jede Beere, 20 HP für jedes Gericht, 30 HP wenn als Koch gekocht wird.",
 		"COMFEY": "Comfey kann keine Gegenstände tragen. Zu Beginn des Kampfes trägt der nächste Verbündete, mit einem freien Itemplatz, Curelei und erhält alle seine Statuswerte. Curelei setzt seine Fähigkeit gleichzeitig mit seinem Träger. Wenn der Träger besiegt wird, kämpft Curelei alleine weiter",
 		"HISUIAN_TYPHLOSION": "Dieses Pokémon beginnt den Kampf mit einem zufälligen Item, wenn es keines hält",
 		"PICKUP": "Das Pokemon startet den Kampf mit einem zufälligen Item, wenn es keines trägt.",

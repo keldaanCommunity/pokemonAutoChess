@@ -35,12 +35,6 @@ export default class LifeBar extends GameObjects.Graphics {
   draw() {
     const barWidth = 70
     const innerBarWidth = barWidth - 2
-    const barColor = 0x222222
-    const allyLifeColor = 0x76c442
-    const enemyLifeColor = 0xe76e55
-    const shieldColor = 0x969696
-    const ppColor = 0x209cee
-    const hpPerSegment = 25
     
     this.clear()
     this.clearMask()

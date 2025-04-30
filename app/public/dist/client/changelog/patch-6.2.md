@@ -26,6 +26,7 @@
 - Buff Cosmic Power (Moon): Increase the AP of all allied Pokémon by 20 → 25
 - Change Dream Eater (Drowzee): sleep duration changed from 2.5/5 to 3/4/5 seconds and now scales with AP. Added tier 3 damage: 45/90/150
 - Nosepass line is now Rock/Steel instead of Rock/Artificial
+- Fix Dragon Breath sometimes not hitting target when holding Wide Lens ; it now hits all enemies between the user and its target + the enemy behind it
 
 # Changes to Synergies
 
@@ -37,6 +38,7 @@
 
 - Carousels shape and centering have been adjusted to ease movement on top and bottom of the board
 - Rage is no longer considered a negative status, meaning it's not cleansed by Rune Protect, Cleanse Tag and other effects that remove negative status.
+- Dodge chance is now capped at 90% even with a high luck stat
 
 # UI
 
