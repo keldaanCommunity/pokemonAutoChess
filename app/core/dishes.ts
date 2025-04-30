@@ -154,7 +154,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   POFFIN: [
     new OnSpawnEffect((entity) => {
-      entity.addShield(50, entity, 0, false)
+      entity.addShield(100, entity, 0, false)
       values(entity.items)
         .filter((item) => Berries.includes(item))
         .forEach((item) => {

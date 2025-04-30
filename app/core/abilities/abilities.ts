@@ -5124,7 +5124,7 @@ export class GeomancyStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     pokemon.addAttack(15, pokemon, 1, crit)
-    pokemon.addSpecialDefense(5, pokemon, 1, crit)
+    pokemon.addSpecialDefense(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 0, false)
   }
 }
@@ -5640,8 +5640,8 @@ export class RolloutStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const multiplier = 5
-    const defenseBoost = [1, 3, 5][pokemon.stars - 1] ?? 5
+    const multiplier = 2
+    const defenseBoost = [2, 5, 10][pokemon.stars - 1] ?? 10
 
     pokemon.addDefense(defenseBoost, pokemon, 1, crit)
     target.handleSpecialDamage(
