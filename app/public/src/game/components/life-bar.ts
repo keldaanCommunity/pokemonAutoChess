@@ -35,6 +35,12 @@ export default class LifeBar extends GameObjects.Graphics {
   draw() {
     const barWidth = 70
     const innerBarWidth = barWidth - 2
+    const barColor = 0x444444
+    const allyLifeColor = 0x76c442
+    const enemyLifeColor = 0xe76e55
+    const shieldColor = 0xbbbbbb
+    const ppColor = 0x209cee
+    const hpPerSegment = 25
     
     this.clear()
     this.clearMask()
@@ -42,7 +48,7 @@ export default class LifeBar extends GameObjects.Graphics {
     this.translateCanvas(-barWidth / 2, 0)
     
     // life bar
-    this.fillStyle(barColor)
+    this.fillStyle(0x000000)
     this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
     
     // life and shield amount
@@ -53,6 +59,9 @@ export default class LifeBar extends GameObjects.Graphics {
       
       this.save()
       this.translateCanvas(1, 1)
+      
+      this.fillStyle(barColor, 1)
+      this.fillRect(0, 0, innerBarWidth, 6)
       
       const color = (this.team === (this.flip ? 1 : 0)) ? allyLifeColor : enemyLifeColor
       this.fillStyle(color, 1)
@@ -80,6 +89,10 @@ export default class LifeBar extends GameObjects.Graphics {
     // PP
     if (this.PP !== undefined && this.maxPP !== undefined) {
       const ppPercentage = this.PP / this.maxPP
+      
+      this.fillStyle(barColor, 1)
+      this.fillRect(1, 9, innerBarWidth, 3)
+      
       this.fillStyle(ppColor)
       this.fillRect(1, 9, ppPercentage * innerBarWidth, 3)
     }
