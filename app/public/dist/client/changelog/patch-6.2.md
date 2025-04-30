@@ -28,6 +28,7 @@
 - Nosepass line is now Rock/Steel instead of Rock/Artificial
 - Fix Dragon Breath sometimes not hitting target when holding Wide Lens ; it now hits all enemies between the user and its target + the enemy behind it
 - Nerf Heatmor: def/spedef 10 → 7
+- Buff Kingler: Attack 14 → 16, def 12 → 14
 
 # Changes to Synergies
 

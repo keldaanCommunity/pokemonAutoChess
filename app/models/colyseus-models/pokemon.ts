@@ -16747,9 +16747,9 @@ export class Kingler extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
-  atk = 14
+  atk = 16
   speed = 49
-  def = 12
+  def = 14
   speDef = 4
   maxPP = 100
   range = 1
