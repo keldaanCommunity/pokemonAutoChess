@@ -7146,8 +7146,8 @@ export class Heatmor extends Pokemon {
   hp = 200
   atk = 22
   speed = 46
-  def = 10
-  speDef = 10
+  def = 7
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.FIRE_LASH
