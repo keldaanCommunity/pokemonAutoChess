@@ -261,7 +261,7 @@ export default function PreparationMenu() {
         >
           {specialGameRule ? t("disable_scribble") : t("enable_scribble")}
         </button>
-        {(isModerator || isAdmin) && (
+        {isAdmin && (
           <label>
             {t("smeargle_scribble")}
             <select
