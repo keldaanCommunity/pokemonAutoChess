@@ -9988,7 +9988,7 @@ export class Applin extends Pokemon {
     Synergy.GOURMET
   ])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 2
   evolutions = [Pkm.APPLETUN, Pkm.FLAPPLE, Pkm.DIPPLIN]
   evolutionRule = new ItemEvolutionRule(
     [Item.SWEET_APPLE, Item.TART_APPLE, Item.SIRUPY_APPLE],
