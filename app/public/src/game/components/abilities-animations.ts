@@ -3770,6 +3770,52 @@ export function displayAbility(
       break
     }
 
+    case Ability.ICICLE_MISSILE: {
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      const dx = delay === 1 ? -3 : delay === 2 ? +3 : 0
+      const topCoords = transformAttackCoordinate(
+        targetX + dx,
+        positionY + 5,
+        false
+      )
+      const angle1 =
+        Math.atan2(
+          topCoords[1] - coordinates[1],
+          topCoords[0] - coordinates[0]
+        ) -
+        Math.PI / 2
+      const angle2 =
+        Math.atan2(
+          coordinatesTarget[1] - topCoords[1],
+          coordinatesTarget[0] - topCoords[0]
+        ) -
+        Math.PI / 2
+      specialProjectile.setRotation(angle1)
+
+      scene.tweens.chain({
+        targets: specialProjectile,
+        tweens: [
+          {
+            x: topCoords[0],
+            y: topCoords[1],
+            rotation: angle2,
+            duration: 750,
+            ease: Phaser.Math.Easing.Quadratic.Out
+          },
+          {
+            x: coordinatesTarget[0],
+            y: coordinatesTarget[1],
+            duration: 750,
+            ease: Phaser.Math.Easing.Quadratic.In
+          }
+        ],
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     default:
       break
   }

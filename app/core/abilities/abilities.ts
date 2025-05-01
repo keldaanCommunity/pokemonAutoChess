@@ -850,15 +850,8 @@ export class DynamicPunchStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    let duration = 1500
-    let damage = 20
-    if (pokemon.stars == 2) {
-      damage = 40
-      duration = 3000
-    } else if (pokemon.stars == 3) {
-      damage = 80
-      duration = 6000
-    }
+    const duration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
+    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
     target.status.triggerConfusion(duration, target, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -2453,6 +2446,58 @@ export class SingStrategy extends AbilityStrategy {
       const tg = rank[i]
       if (tg) {
         tg.status.triggerSleep(timer, tg)
+      }
+    }
+  }
+}
+
+export class IcicleMissileStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const timer = Math.round(
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
+    const damage = 50
+    const count = pokemon.stars
+    const rank = new Array<PokemonEntity>()
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        rank.push(tg)
+      }
+    })
+    rank.sort((a, b) => {
+      if (a.team === Team.BLUE_TEAM) {
+        return a.positionY - b.positionY
+      } else {
+        return b.positionY - a.positionY
+      }
+    })
+    for (let i = 0; i < count; i++) {
+      const tg = rank[i]
+      if (tg) {
+        broadcastAbility(pokemon, {
+          targetX: tg.positionX,
+          targetY: tg.positionY,
+          delay: i
+        })
+        tg.commands.push(
+          new DelayedCommand(() => {
+            tg.status.triggerFreeze(timer, tg)
+            tg.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }, 1500)
+        )
       }
     }
   }
@@ -13151,5 +13196,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROOST]: new RoostStrategy(),
   [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
   [Ability.HEAT_CRASH]: new HeatCrashStrategy(),
-  [Ability.LASER_BLADE]: new LaserBladeStrategy()
+  [Ability.LASER_BLADE]: new LaserBladeStrategy(),
+  [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy()
 }

@@ -1252,7 +1252,7 @@
 		"DIAMOND_STORM": "Gây [100,SP]% SPECIAL tương đương với chỉ số DEF của pkm vận chiêu đến tất cả Pokemon ở gần",
 		"DRACO_ENERGY": "Gây [100,SP]% SPECIAL tương đương với chỉ số HP của pkm vận chiêu lên mục tiêu",
 		"DYNAMAX_CANNON": "Bắn ra một luồng năng lượng Dynamax theo đường thẳng. Pokémon đối thủ trúng chiêu sẽ nhận SPECIAL tương đương [50,SP]% chỉ số máu của chúng",
-		"DYNAMIC_PUNCH": "Gây [20,40,80,SP] SPECIAL lên mục tiêu và khiến chúng CONFUSION trong [1.5,3,6] giây",
+		"DYNAMIC_PUNCH": "Gây [40,80,160,SP] SPECIAL lên mục tiêu và khiến chúng CONFUSION trong [2,4,6] giây",
 		"ELECTRO_BOOST": "Pokémon đồng minh hệ ELECTRIC nhận RUNE_PROTECT trong 5 giây",
 		"ELECTRO_WEB": "Đánh cắp [15,30,60,SP] SPEED từ các Pokémon đối thủ ở gần và gây [15,30,60,SP] SPECIAL",
 		"MYSTICAL_FIRE": "Gây [20,40,80,SP] SPECIAL",

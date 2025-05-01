@@ -1507,7 +1507,7 @@
 		"DIAMOND_STORM": "Inflige [100,SP] % de la DEF actuelle sous forme de SPECIAL aux ennemis adjacents",
 		"DRACO_ENERGY": "Inflige [100,SP] % des HP de Regidraco en tant que SPECIAL",
 		"DYNAMAX_CANNON": "Tire un rayon Dynamax en ligne droite, infligeant à chaque pokémon touché [50,SP]% de leurs HP max en SPECIAL",
-		"DYNAMIC_PUNCH": "Inflige [20,40,80,SP] SPECIAL et rend la cible CONFUSION pendant [1,5,3,6] secondes",
+		"DYNAMIC_PUNCH": "Inflige [40,80,160,SP] SPECIAL et rend la cible CONFUSION pendant [2,4,6] secondes",
 		"ELECTRO_BOOST": "Tous les alliés ELECTRIC reçoivent RUNE_PROTECT pendant 5 secondes",
 		"ELECTRO_WEB": "Vole [15,30,60,SP]% de la SPEED des ennemis adjacents et leur inflige [15,30,60,SP] SPECIAL",
 		"MYSTICAL_FIRE": "Inflige [20,40,80,SP] SPECIAL et réduit la AP de la cible de [10,SP]",
@@ -2086,8 +2086,8 @@
 		"FLUID": "L'équipe gagne 1 SPEED et 3 HP par synergie unique active",
 		"SHAPELESS": "L'équipe gagne 3 SPEED et 6 HP par synergie unique active",
 		"ETHEREAL": "L'équipe gagne 6 SPEED et 12 HP par synergie unique active",
-		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un plat signature après chaque manche et nourrissez un allié adjacent.",
-		"LUNCH_BREAK": "Le chef cuisine deux plats et nourrit deux alliés adjacents après chaque tour.",
+		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un plat signature après chaque manche et nourrissez l'allié adjacent le plus fort.",
+		"LUNCH_BREAK": "Le chef cuisine deux plats et nourrit les deux alliés adjacents les plus forts après chaque tour.",
 		"BANQUET": "Gagnez une deuxième CHEF_HAT."
 	},
 	"item": {

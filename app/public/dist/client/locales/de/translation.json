@@ -1506,7 +1506,7 @@
 		"DIAMOND_STORM": "Fügt [100,SP] % der aktuellen DEF als Spezialschaden an umliegenden Feinden zu",
 		"DRACO_ENERGY": "Bietet [100,SP] % der Regidraco-HP als SPECIAL",
 		"DYNAMAX_CANNON": "Schieße einen Dynamax-Strahl auf einer geraden Linie ab und erteile jedem getroffenen Pokémon [80,SP] % seiner HP als SPECIAL",
-		"DYNAMIC_PUNCH": "Verursacht [20,40,80,SP] SPECIAL und versetzt das Ziel für [1,5,3,6] Sekunden in Verwirrung",
+		"DYNAMIC_PUNCH": "Verursacht [40,80,160,SP] SPECIAL und versetzt das Ziel für [2,4,6] Sekunden in Verwirrung",
 		"ELECTRO_BOOST": "Alle verbündeten ELECTRIC Pokémon erhalten 5 Sekunden lang RUNE_PROTECT",
 		"ELECTRO_WEB": "Stehlen Sie [15,30,60,SP] der SPEED der benachbarten Feinde und verursacht [15,30,60,SP] SPECIAL ",
 		"MYSTICAL_FIRE": "Verursacht [20,40,80,SP] SPECIAL und senkt die AP des Ziels um [10,SP]",

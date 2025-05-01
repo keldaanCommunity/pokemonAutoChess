@@ -27,10 +27,18 @@
 - Change Dream Eater (Drowzee): sleep duration changed from 2.5/5 to 3/4/5 seconds and now scales with AP. Added tier 3 damage: 45/90/150
 - Nosepass line is now Rock/Steel instead of Rock/Artificial
 - Fix Dragon Breath sometimes not hitting target when holding Wide Lens ; it now hits all enemies between the user and its target + the enemy behind it
+- Nerf Heatmor: def/spedef 10 → 7
+- Buff Kingler: Attack 14 → 16, def 12 → 14
+- New ability for Vanilluxe line: Icicle Missile: Launches 1/2/3 icicle missiles on enemies in the backline, dealing 50 special damage and inflicting freeze for 2 seconds
+- Buff Totodile line: PP 120 → 100
+- Buff Oshawott line: PP 120 → 100
+- Buff Lotad line: PP 120 → 100
+- Buff Dynamic Punch (Makuhita): damage 20/40/80 → 40/80/160, confusion duration 1.5/3/6 → 2/4/6 seconds
 
 # Changes to Synergies
 
 - Wild Pokemon can now be found in initial shop at stage 0
+- Gourmet dishes are now distributed to the strongest adjacent Pokémons instead of a random one
 
 # Changes to Items
 
