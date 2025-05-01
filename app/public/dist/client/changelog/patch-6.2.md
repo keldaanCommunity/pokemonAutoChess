@@ -62,3 +62,4 @@
 
 - New title: Picnicker: Make a picnic with 9 Pokémon
 - Meta report items are sorted by elo tiers (same as pokémons)
+- Shiny hunter scribble no longer gets shiny PvE encounters at stages where there's no shiny encounter possible in base rules
