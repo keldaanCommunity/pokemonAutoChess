@@ -7589,7 +7589,7 @@ export class RetaliateStrategy extends AbilityStrategy {
     const meter =
       pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
     const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
-    const damage = pokemon.atk
+    const damage = pokemon.atk * 1.25
 
     for (let i = 0; i <= nbFallenAllies; i++) {
       target.handleSpecialDamage(
