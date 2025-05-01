@@ -1252,7 +1252,7 @@
 		"DIAMOND_STORM": "周囲の敵に現在のDEFの[100,SP]%の特殊ダメージを与える",
 		"DRACO_ENERGY": "レジドラコHPの[100,SP]%をSPECIALとして付与",
 		"DYNAMAX_CANNON": "ダイマックスビームを直線上に放ち、ヒットしたポケモン全員にHPの[80,SP]%をSPECIALとして与える",
-		"DYNAMIC_PUNCH": "[20,40,80,SP] SPECIALを与え、ターゲットを[1.5,3,6]秒間混乱させる",
+		"DYNAMIC_PUNCH": "[40,80,160,SP] SPECIALを与え、ターゲットを[2,4,6]秒間混乱させる",
 		"ELECTRO_BOOST": "味方の ELECTRIC ポケモン全員が5秒間 RUNE_PROTECT を受ける",
 		"ELECTRO_WEB": "隣接する全ての敵ポケモンからSPEEDを[15,30,60,SP]%奪い、SPECIALを[15,30,60,SP]与える。",
 		"MYSTICAL_FIRE": "[20,40,80,SP] SPECIALを達成し",

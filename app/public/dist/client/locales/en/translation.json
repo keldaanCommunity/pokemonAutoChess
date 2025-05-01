@@ -1514,7 +1514,7 @@
 		"DIAMOND_STORM": "Deal [100,SP]% of the user's DEF as SPECIAL to all adjacent enemy Pokémon.",
 		"DRACO_ENERGY": "Deal [100,SP]% of the user's HP as SPECIAL to the target.",
 		"DYNAMAX_CANNON": "Shoot a Dynamax beam in a straight line. Enemy Pokémon hit take [50,SP]% of their max HP as SPECIAL.",
-		"DYNAMIC_PUNCH": "Deal [20,40,80,SP] SPECIAL to the target and inflict them with CONFUSION for [1.5,3,6] seconds.",
+		"DYNAMIC_PUNCH": "Deal [40,80,160,SP] SPECIAL to the target and inflict them with CONFUSION for [2,4,6] seconds.",
 		"ELECTRO_BOOST": "All allied ELECTRIC Pokémon receive RUNE_PROTECT for 5 seconds.",
 		"ELECTRO_WEB": "Deal [15,30,60,SP] SPECIAL to all adjacent enemy Pokémon and steal [15,30,60,SP] SPEED.",
 		"MYSTICAL_FIRE": "Deal [20,40,80,SP] SPECIAL to the target and reduce their AP by [10,SP].",

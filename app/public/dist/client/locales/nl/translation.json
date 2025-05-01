@@ -962,7 +962,7 @@
 		"DIAMOND_STORM": "Breng [100,SP]% van de gebruiker's DEF als SPECIAL toe aan alle aangrenzende vijandelijke Pokémon",
 		"DRACO_ENERGY": "Breng [100,SP]% van de gebruiker's HP toe als SPECIAL aan het doelwit",
 		"DYNAMAX_CANNON": "Schiet een Dynamaxstraal in een rechte lijn af. Vijandelijke Pokémon die geraakt zijn nemen [80,SP] % van hun HP als SPECIAL",
-		"DYNAMIC_PUNCH": "Brengt [20,40,80,SP] SPECIAL toe aan het doelwit en pas de CONFUSION status op hun toe voor [1.5,3,6] seconden",
+		"DYNAMIC_PUNCH": "Brengt [40,80,160,SP] SPECIAL toe aan het doelwit en pas de CONFUSION status op hun toe voor [2,4,6] seconden",
 		"ELECTRO_BOOST": "Alle geallieerde ELECTRIC Pokémon ontvangen RUNE_PROTECT gedurende 5 seconden",
 		"ELECTRO_WEB": "Steel [15,30,60,SP] SPEED van alle aangrenzende vijandelijke Pokémon en breng [15,30,60,SP]",
 		"MYSTICAL_FIRE": "Breng [20,40,80,SP] SPECIAL",

@@ -33,6 +33,7 @@
 - Buff Totodile line: PP 120 → 100
 - Buff Oshawott line: PP 120 → 100
 - Buff Lotad line: PP 120 → 100
+- Buff Dynamic Punch (Makuhita): damage 20/40/80 → 40/80/160, confusion duration 1.5/3/6 → 2/4/6 seconds
 
 # Changes to Synergies
 
