@@ -10,9 +10,6 @@ export default class LifeBar extends GameObjects.Graphics {
   maxPP?: number
   team: Team
   flip: boolean
-  lifeDisplay: number
-  shieldDisplay: number
-  PPDisplay: number
   
   constructor(
     scene: Phaser.Scene,
@@ -24,7 +21,7 @@ export default class LifeBar extends GameObjects.Graphics {
     team: Team,
     flip: boolean
   ) {
-    super(scene, { x: x - 35, y: y });
+    super(scene, { x: x, y: y });
     
     this.maxLife = maxLife
     this.life = life
@@ -32,22 +29,26 @@ export default class LifeBar extends GameObjects.Graphics {
     this.team = team
     this.flip = flip
     
-    this.lifeDisplay = 1
-    this.shieldDisplay = 1
-    this.PPDisplay = 1
-    
     this.setDepth(DEPTH.POKEMON_HP_BAR)
   }
   
   draw() {
     const barWidth = 70
     const innerBarWidth = barWidth - 2
+    const barColor = 0x444444
+    const allyLifeColor = 0x76c442
+    const enemyLifeColor = 0xe76e55
+    const shieldColor = 0xbbbbbb
+    const ppColor = 0x209cee
+    const hpPerSegment = 25
     
     this.clear()
     this.clearMask()
     
+    this.translateCanvas(-barWidth / 2, 0)
+    
     // life bar
-    this.fillStyle(0x222222)
+    this.fillStyle(0x000000)
     this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
     
     // life and shield amount
@@ -58,34 +59,42 @@ export default class LifeBar extends GameObjects.Graphics {
       
       this.save()
       this.translateCanvas(1, 1)
-      const color = (this.team === (this.flip ? 1 : 0)) ? 0x76c442 : 0xe76e55
+      
+      this.fillStyle(barColor, 1)
+      this.fillRect(0, 0, innerBarWidth, 6)
+      
+      const color = (this.team === (this.flip ? 1 : 0)) ? allyLifeColor : enemyLifeColor
       this.fillStyle(color, 1)
       this.fillRect(0, 0, lifePercentage * innerBarWidth, 6)
       if (this.shield > 0) {
-        this.fillStyle(0x969696)
-        this.fillRect(lifePercentage * innerBarWidth, 0, shieldPercentage * 68, 5)
+        this.fillStyle(shieldColor)
+        this.fillRect(lifePercentage * innerBarWidth, 0, shieldPercentage * 68, 6)
       }
       
       // hp segmentation
-      const hpPerSegment = 30
       const segmentSize = (hpPerSegment / totalLife) * innerBarWidth
-      const numberOfSegments = totalLife / hpPerSegment >> 0
-      this.lineStyle(1, 0x222222)
+      const numberOfSegments = (totalLife - 0.1) / hpPerSegment >> 0  // -0.1 to remove final segment on perfect intervals
+      this.lineStyle(1, barColor)
       this.beginPath()
       for (let i = 1; i <= numberOfSegments; i++) {
         this.moveTo(i * segmentSize, 0)
-        this.lineTo(i * segmentSize, 6)
+        this.lineTo(i * segmentSize, 5)
       }
       this.closePath()
       this.strokePath()
+      
       this.restore()
     }
     
     // PP
     if (this.PP !== undefined && this.maxPP !== undefined) {
-      const PPPercentage = this.PP / this.maxPP
-      this.fillStyle(0x209cee)
-      this.fillRect(1, 9, PPPercentage * innerBarWidth, 3)
+      const ppPercentage = this.PP / this.maxPP
+      
+      this.fillStyle(barColor, 1)
+      this.fillRect(1, 9, innerBarWidth, 3)
+      
+      this.fillStyle(ppColor)
+      this.fillRect(1, 9, ppPercentage * innerBarWidth, 3)
     }
     
   }

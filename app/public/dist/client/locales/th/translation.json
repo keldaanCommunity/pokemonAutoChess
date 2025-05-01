@@ -102,7 +102,7 @@
 		"DIAMOND_STORM": "สร้าง [100,SP]% DEF ของผู้ใช้เป็น SPECIAL แก่โปเกมอนศัตรูทุกตัวที่อยู่ติดกับผู้ใช้",
 		"DRACO_ENERGY": "สร้าง [100,SP]% ของ HP เป็น SPECIAL แก่เป้าหมาย",
 		"DYNAMAX_CANNON": "ยิง Dynamax beam เป็นเส้นตรง. โปเกมอนศัตรูจะได้รับ [50,SP]% ของ HP สูงสุดเป็น SPECIAL",
-		"DYNAMIC_PUNCH": "สร้าง [20,40,80,SP] SPECIAL แก่เป้าหมายและมอบสถานะ CONFUSION เป็นเวลา [1.5,3,6] วินาที",
+		"DYNAMIC_PUNCH": "สร้าง [40,80,160,SP] SPECIAL แก่เป้าหมายและมอบสถานะ CONFUSION เป็นเวลา [2,4,6] วินาที",
 		"ELECTRO_BOOST": "โปเกมอนฝั่งเราที่เป็นประเภท ELECTRIC ทุกตัวรับสถานะ RUNE_PROTECT เป็น 5 วินาที",
 		"ELECTRO_WEB": "ขโมย [15,30,60,SP] SPEED จากโปเกมอนศัตรูที่อยู่ติดกับผู้ใช้พร้อมสร้าง [15,30,60,SP] SPECIAL",
 		"MYSTICAL_FIRE": "สร้าง [20,40,80,SP] SPECIAL และลด AP ของเป้าหมายลง [10,SP]",

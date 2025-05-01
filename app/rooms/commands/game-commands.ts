@@ -10,7 +10,7 @@ import {
   HatchEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
-import { canSell } from "../../core/pokemon-entity"
+import { canSell, getUnitScore } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
@@ -584,9 +584,7 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    if (
-      CharcadetArmors.includes(item)
-    ) {
+    if (CharcadetArmors.includes(item)) {
       if (pokemon.passive == Passive.CHARCADET) {
         pokemon.items.add(item)
         const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
@@ -597,8 +595,7 @@ export class OnDragDropItemCommand extends Command<
           pokemon.items.delete(item)
           client.send(Transfer.DRAG_DROP_FAILED, message)
         } else removeInArray(player.items, item)
-      }
-      else {
+      } else {
         client.send(Transfer.DRAG_DROP_FAILED, message)
       }
       return
@@ -1497,7 +1494,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                         p.positionY
                       ) === 1
                   )
-                  for (const meal of dishes) {
+                  candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+                  dishes.forEach((meal, i) => {
                     if (
                       [
                         Item.TART_APPLE,
@@ -1508,12 +1506,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                     ) {
                       player.items.push(meal)
                     } else {
-                      const pokemon = pickRandomIn(candidates) ?? chef
+                      const pokemon = candidates[i] ?? chef
                       pokemon.meal = meal
                       pokemon.action = PokemonActionState.EAT
                       removeInArray(candidates, pokemon)
                     }
-                  }
+                  })
                 }, 2000)
               }, 1000)
             }

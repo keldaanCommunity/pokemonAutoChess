@@ -468,7 +468,8 @@
 		"ROOST": "Roost",
 		"BEHEMOTH_BLADE": "Behemoth Blade",
 		"HEAT_CRASH": "Heat Crash",
-		"LASER_BLADE": "Laser Blade"
+		"LASER_BLADE": "Laser Blade",
+		"ICICLE_MISSILE": "Icicle Missile"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1513,7 +1514,7 @@
 		"DIAMOND_STORM": "Deal [100,SP]% of the user's DEF as SPECIAL to all adjacent enemy Pokémon.",
 		"DRACO_ENERGY": "Deal [100,SP]% of the user's HP as SPECIAL to the target.",
 		"DYNAMAX_CANNON": "Shoot a Dynamax beam in a straight line. Enemy Pokémon hit take [50,SP]% of their max HP as SPECIAL.",
-		"DYNAMIC_PUNCH": "Deal [20,40,80,SP] SPECIAL to the target and inflict them with CONFUSION for [1.5,3,6] seconds.",
+		"DYNAMIC_PUNCH": "Deal [40,80,160,SP] SPECIAL to the target and inflict them with CONFUSION for [2,4,6] seconds.",
 		"ELECTRO_BOOST": "All allied ELECTRIC Pokémon receive RUNE_PROTECT for 5 seconds.",
 		"ELECTRO_WEB": "Deal [15,30,60,SP] SPECIAL to all adjacent enemy Pokémon and steal [15,30,60,SP] SPEED.",
 		"MYSTICAL_FIRE": "Deal [20,40,80,SP] SPECIAL to the target and reduce their AP by [10,SP].",
@@ -1868,7 +1869,8 @@
 		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerfull slash, dealing [100,SP] + 1x ATK as PHYSICAL",
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
-		"LASER_BLADE": "Alternatively:\n- Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n- Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL."
+		"LASER_BLADE": "Alternatively:\n- Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n- Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL.",
+		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2095,8 +2097,8 @@
 		"FLUID": "Ally team gains 1 SPEED and 3 HP per unique active synergy",
 		"SHAPELESS": "Ally team gains 3 SPEED and 6 HP per unique active synergy",
 		"ETHEREAL": "Ally team gains 6 SPEED and 12 HP per unique active synergy",
-		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed one adjacent ally.",
-		"LUNCH_BREAK": "The Chef cook two dishes and feed two adjacent allies after every round.",
+		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the strongest adjacent ally.",
+		"LUNCH_BREAK": "The Chef cook two dishes and feed the two strongest adjacent allies after every round.",
 		"BANQUET": "Gain a second CHEF_HAT."
 	},
 	"item": {

@@ -1513,7 +1513,7 @@
 		"DIAMOND_STORM": "对所有相邻敌方宝可梦造成SPECIAL，数值相当于使用者[100,SP]%的DEF。",
 		"DRACO_ENERGY": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的HP。",
 		"DYNAMAX_CANNON": "发射一条极巨光束攻击直线上的目标。被击中的敌方宝可梦受到SPECIAL，数值相当于其最大HP的[50,SP]%。",
-		"DYNAMIC_PUNCH": "对目标造成[20,40,80,SP]点SPECIAL，并使其陷入CONFUSION [1.5,3,6]秒。",
+		"DYNAMIC_PUNCH": "对目标造成[40,80,160,SP]点SPECIAL，并使其陷入CONFUSION [2,4,6]秒。",
 		"ELECTRO_BOOST": "所有我方ELECTRIC宝可梦获得RUNE_PROTECT 5秒。",
 		"ELECTRO_WEB": "对所有相邻敌方宝可梦造成[15,30,60,SP]点SPECIAL，并偷取他们[15,30,60,SP]点SPEED。",
 		"MYSTICAL_FIRE": "对目标造成[20,40,80,SP]点SPECIAL，并降低其[10,SP]点AP。",
