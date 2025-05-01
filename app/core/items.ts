@@ -14,6 +14,7 @@ import { DEFAULT_SPEED } from "../types/Config"
 import { Pkm } from "../types/enum/Pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { Stat } from "../types/enum/Game"
+import { Effect as EffectEnum } from "../types/enum/Effect"
 
 export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
   const wonderboxItems: Item[] = []
@@ -351,6 +352,15 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.count.magmarizerCount, pokemon, 0, false)
       pokemon.count.magmarizerCount = 0
+    })
+  ],
+
+  [Item.REAPER_CLOTH]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.ABILITY_CRIT)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.ABILITY_CRIT)
     })
   ]
 }
