@@ -30,6 +30,9 @@
 - Nerf Heatmor: def/spedef 10 → 7
 - Buff Kingler: Attack 14 → 16, def 12 → 14
 - New ability for Vanilluxe line: Icicle Missile: Launches 1/2/3 icicle missiles on enemies in the backline, dealing 50 special damage and inflicting freeze for 2 seconds
+- Buff Totodile line: PP 120 → 100
+- Buff Oshawott line: PP 120 → 100
+- Buff Lotad line: PP 120 → 100
 
 # Changes to Synergies
 

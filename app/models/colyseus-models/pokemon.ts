@@ -1519,7 +1519,7 @@ export class Oshawott extends Pokemon {
   speed = 47
   def = 8
   speDef = 8
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
@@ -1539,7 +1539,7 @@ export class Dewott extends Pokemon {
   speed = 47
   def = 12
   speDef = 12
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
@@ -1558,7 +1558,7 @@ export class Samurott extends Pokemon {
   speed = 47
   def = 16
   speDef = 16
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.AQUA_TAIL
   attackSprite = AttackSprite.WATER_MELEE
@@ -2670,7 +2670,7 @@ export class Lotad extends Pokemon {
   speed = 47
   def = 2
   speDef = 2
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
@@ -2691,7 +2691,7 @@ export class Lombre extends Pokemon {
   speed = 47
   def = 4
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
@@ -2711,7 +2711,7 @@ export class Ludicolo extends Pokemon {
   speed = 47
   def = 6
   speDef = 6
-  maxPP = 120
+  maxPP = 100
   range = 3
   skill = Ability.TORMENT
   attackSprite = AttackSprite.GRASS_RANGE
@@ -4536,7 +4536,7 @@ export class Totodile extends Pokemon {
   speed = 50
   def = 4
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.CRUNCH
   attackSprite = AttackSprite.WATER_MELEE
@@ -4556,7 +4556,7 @@ export class Croconaw extends Pokemon {
   speed = 50
   def = 6
   speDef = 6
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.CRUNCH
   attackSprite = AttackSprite.WATER_MELEE
@@ -4575,7 +4575,7 @@ export class Feraligatr extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.CRUNCH
   attackSprite = AttackSprite.WATER_MELEE
