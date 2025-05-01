@@ -53,6 +53,7 @@
 
 - Positive status and negative status are now displayed in different text colors
 - Add picks and Unique/Legendary propositions now display the team planner icon if added in the team planner
+- Show next level rates in Encounter rates tooltip
 
 # Bugfix
 

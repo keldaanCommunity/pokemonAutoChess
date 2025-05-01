@@ -3247,6 +3247,7 @@
 	"pool_label": "Pool",
 	"tier": "Tier",
 	"rate": "Rate",
+	"next_level": "Next level",
 	"increase_level_hint": "Increase your level to raise your chances to get higher tier Pokémon.",
 	"refresh_gold_hint": "Refresh shop for 1 gold",
 	"refresh": "Reroll",
