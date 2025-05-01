@@ -3086,7 +3086,7 @@ export class Vanillite extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.SING
+  skill = Ability.ICICLE_MISSILE
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -3106,7 +3106,7 @@ export class Vanillish extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.SING
+  skill = Ability.ICICLE_MISSILE
   attackSprite = AttackSprite.ICE_RANGE
 }
 
@@ -3125,7 +3125,7 @@ export class Vanilluxe extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 3
-  skill = Ability.SING
+  skill = Ability.ICICLE_MISSILE
   attackSprite = AttackSprite.ICE_RANGE
 }
 

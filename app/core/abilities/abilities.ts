@@ -2458,6 +2458,58 @@ export class SingStrategy extends AbilityStrategy {
   }
 }
 
+export class IcicleMissileStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    const timer = Math.round(
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
+    const damage = 50
+    const count = pokemon.stars
+    const rank = new Array<PokemonEntity>()
+    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+      if (tg && pokemon.team != tg.team) {
+        rank.push(tg)
+      }
+    })
+    rank.sort((a, b) => {
+      if (a.team === Team.BLUE_TEAM) {
+        return a.positionY - b.positionY
+      } else {
+        return b.positionY - a.positionY
+      }
+    })
+    for (let i = 0; i < count; i++) {
+      const tg = rank[i]
+      if (tg) {
+        broadcastAbility(pokemon, {
+          targetX: tg.positionX,
+          targetY: tg.positionY,
+          delay: i
+        })
+        tg.commands.push(
+          new DelayedCommand(() => {
+            tg.status.triggerFreeze(timer, tg)
+            tg.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }, 1500)
+        )
+      }
+    }
+  }
+}
+
 export class ConfusionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13151,5 +13203,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROOST]: new RoostStrategy(),
   [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
   [Ability.HEAT_CRASH]: new HeatCrashStrategy(),
-  [Ability.LASER_BLADE]: new LaserBladeStrategy()
+  [Ability.LASER_BLADE]: new LaserBladeStrategy(),
+  [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy()
 }

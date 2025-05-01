@@ -29,6 +29,7 @@
 - Fix Dragon Breath sometimes not hitting target when holding Wide Lens ; it now hits all enemies between the user and its target + the enemy behind it
 - Nerf Heatmor: def/spedef 10 → 7
 - Buff Kingler: Attack 14 → 16, def 12 → 14
+- New ability for Vanilluxe line: Icicle Missile: Launches 1/2/3 icicle missiles on enemies in the backline, dealing 50 special damage and inflicting freeze for 2 seconds
 
 # Changes to Synergies
 
