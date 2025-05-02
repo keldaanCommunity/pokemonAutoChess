@@ -469,7 +469,8 @@
 		"BEHEMOTH_BLADE": "Behemoth Blade",
 		"HEAT_CRASH": "Heat Crash",
 		"LASER_BLADE": "Laser Blade",
-		"ICICLE_MISSILE": "Icicle Missile"
+		"ICICLE_MISSILE": "Icicle Missile",
+		"ARM_THRUST": "Arm Thrust"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1420,7 +1421,9 @@
 		"UNFEZANT": "Unfezant",
 		"ZACIAN": "Zacian",
 		"ZACIAN_CROWNED": "Zacian (Crowned)",
-		"IRON_VALIANT": "Iron Valiant"
+		"IRON_VALIANT": "Iron Valiant",
+		"PANCHAM": "Pancham",
+		"PANGORO": "Pangoro"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1787,7 +1790,7 @@
 		"FAIRY_LOCK": "Spread [90,SP] SPECIAL evenly across the target and adjacent enemy Pokémon. The target is LOCKED for 5 seconds.",
 		"DRAIN_PUNCH": " Deal [200,SP]% of ATK as SPECIAL and heal for 200% of the damage dealt.",
 		"GRAVITY": "All enemy Pokémon are LOCKED for [2,SP] seconds.",
-		"FAKE_OUT": "Deal [50,100,150,SP] SPECIAL to the target and reduce the user's AP by 30. Inflict the target with FLINCH for 3 seconds unless the user's AP was negative.",
+		"FAKE_OUT": "Deal [40,80,150,SP] SPECIAL to the target and reduce the user's AP by 30. Inflict the target with FLINCH for 3 seconds unless the user's AP was negative.",
 		"FELL_STINGER": "Deal [25,50,100,SP] SPECIAL to the target. If it kills the target, permanently gain 1 ATK and 10 HP.",
 		"GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [55,SP] SPECIAL to the target and adjacent enemy Pokémon. There is a [33,LK]% chance a $t(pkm.PIKACHU) will be fired instead.",
 		"SCHOOLING": "Deal [10,SP]% of the user's max HP as SPECIAL to the target and adjacent enemy Pokémon. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent max HP to the user.",
@@ -1870,7 +1873,8 @@
 		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerfull slash, dealing [100,SP] + 1x ATK as PHYSICAL",
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
 		"LASER_BLADE": "Alternatively:\n- Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n- Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL.",
-		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds."
+		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds.",
+		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2635,7 +2639,8 @@
 		"RAINBOW_SWIRL_CREAM": "Upon casting, the RAINBOW_SWIRL_FLAVOR adds [60,SP] AP to the nearest ally",
 		"DURALUDON": "Duraludon is looking for an ARTIFICIAL item",
 		"CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR",
-		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD"
+		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD",
+		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%"
 	},
 	"stat": {
 		"ATK": "Attack",

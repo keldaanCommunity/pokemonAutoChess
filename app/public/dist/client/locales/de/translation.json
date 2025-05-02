@@ -1779,7 +1779,7 @@
 		"FAIRY_LOCK": "Verteilt [90,SP] SPECIAL gleichmäßig auf das Ziel und benachbarte Gegner. Das Ziel ist für 5 Sekunden LOCKED.",
 		"DRAIN_PUNCH": " Der nächste Angriff fügt [100,SP]% zusätzliche SPECIAL zu und stellt 200% HP des zugefügten Schadens wieder her.",
 		"GRAVITY": "Das gegnerische Team ist für [2,SP] Sekunden LOCKED",
-		"FAKE_OUT": "Fügt dem Ziel [50,100,150,SP] SPECIAL zu, dann verliert der Anwender 30 AP. Das Ziel ist für 3 Sekunden FLINCH, es sei denn, die AP des Anwenders waren negativ.",
+		"FAKE_OUT": "Fügt dem Ziel [40,80,150,SP] SPECIAL zu, dann verliert der Anwender 30 AP. Das Ziel ist für 3 Sekunden FLINCH, es sei denn, die AP des Anwenders waren negativ.",
 		"FELL_STINGER": "Fügt dem Ziel [25,50,100,SP] SPECIAL zu. Wenn es das Ziel besiegt, erhält es dauerhaft +1 ATK und +10 HP.",
 		"GULP_MISSILE": "Schießt ein $t(pkm.ARROKUDA) mit vollen PP auf das Ziel, die allen benachbarten Feinden [55,SP] SPECIAL zufügt. Es besteht eine [33,LK]% Chance, dass stattdessen ein $t(pkm.PIKACHU) abgefeuert wird.",
 		"SCHOOLING": "Fügt dem Ziel und benachbarten Feinden [10,SP]% seiner maximalen HP als SPECIAL zu. Wenn ein Lusardin auf der Bank liegt, tritt er dem Schwarm bei und verleiht dem Benutzer 50 permanente HP.",

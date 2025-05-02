@@ -1780,7 +1780,7 @@
 		"FAIRY_LOCK": "Répartit [90,SP] SPECIAL uniformément entre la cible et les ennemis adjacents. La cible est LOCKED pendant 5 secondes.",
 		"DRAIN_PUNCH": "Inflige [200,SP]% de l'ATK en SPECIAL et restaure 200% des dégâts infligés en HP.",
 		"GRAVITY": "L'équipe ennemie est LOCKED pendant [2,SP] secondes",
-		"FAKE_OUT": "Inflige [50,100,150,SP] SPECIAL à la cible, puis le lanceur perd 30% de AP. La cible est FLINCH pendant 3 secondes sauf si la AP du lanceur était négative.",
+		"FAKE_OUT": "Inflige [40,80,150,SP] SPECIAL à la cible, puis le lanceur perd 30% de AP. La cible est FLINCH pendant 3 secondes sauf si la AP du lanceur était négative.",
 		"FELL_STINGER": "Inflige [25,50,100,SP] SPECIAL à la cible. SI la cible est KO, gagne de façon permanente +1 ATK et +10 HP.",
 		"GULP_MISSILE": "Recrache un $t(pkm.ARROKUDA) avec PP au max sur la cible, infligeant [55,SP] SPECIAL à la cible et aux ennemis adjacents. Il y a [33,LK]% de chance qu'un $t(pkm.PIKACHU) soit recraché à la place.",
 		"SCHOOLING": "Inflige [10,SP]% des HP max du lanceur en SPECIAL à la cible et aux ennemis adjacents. Si une Froussardine est seule sur le banc, elle rejoint le banc de Froussardines et lui fait gagner 50 HP permanents.",
