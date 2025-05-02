@@ -437,6 +437,12 @@ export interface IPokemon {
   canEat: boolean
   deathCount: number
   readonly hasEvolution: boolean
+  applyStat(
+    stat: Stat,
+    value: number,
+    context?: Pokemon | IPokemonEntity,
+    base?: boolean
+  ): void
 }
 
 export interface IExperienceManager {
@@ -494,20 +500,13 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   get player(): IPlayer | undefined
-  applyStat(stat: Stat, value: number): void
-  addAbilityPower(
+  applyStat(
+    stat: Stat, 
     value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addLuck(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
+    caster?: IPokemonEntity,
+    apBoost?: number,
+    crit?: boolean,
+    base?: boolean
   ): void
   addPP(
     value: number,
@@ -515,46 +514,11 @@ export interface IPokemonEntity {
     apBoost: number,
     crit: boolean
   ): void
-  addAttack(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addSpeed(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addMaxHP(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
   addShield(
     value: number,
     caster: IPokemonEntity,
     apBoost: number,
     crit: boolean
-  ): void
-  addDefense(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addSpecialDefense(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
   ): void
   addCritChance(
     value: number,

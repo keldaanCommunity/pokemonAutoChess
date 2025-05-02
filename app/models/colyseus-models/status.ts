@@ -3,7 +3,7 @@ import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { Effect } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Stat } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
@@ -264,7 +264,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.enraged) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(100, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPEED, 100)
       this.enrageCooldown = duration
     } else if (duration > this.enrageCooldown) {
       this.enrageCooldown = duration
@@ -279,14 +279,14 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(100, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPEED, 100)
     } else if (
       this.enraged &&
       this.enrageCooldown - dt <= 0 &&
       this.enrageDelay - dt > 0
     ) {
       this.enraged = false
-      pokemon.addSpeed(-100, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPEED, -100)
     }
 
     this.enrageDelay -= dt
@@ -319,11 +319,11 @@ export default class Status extends Schema implements IStatus {
         !pkm.effects.has(Effect.GUTS_PASSIVE)
       ) {
         pkm.effects.add(Effect.GUTS_PASSIVE)
-        pkm.addAttack(5, pkm, 0, false)
+        pkm.applyStat(Stat.ATK, 5)
       }
 
       if (pkm.passive === Passive.WELL_BAKED) {
-        pkm.addDefense(20, pkm, 0, false)
+        pkm.applyStat(Stat.DEF, 20)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -357,7 +357,7 @@ export default class Status extends Schema implements IStatus {
         }
 
         if (pkm.items.has(Item.COOKING_POT)) {
-          pkm.addSpeed(10, pkm, 0, false)
+          pkm.applyStat(Stat.SPEED, 10)
         }
 
         if (burnDamage > 0) {
@@ -388,10 +388,10 @@ export default class Status extends Schema implements IStatus {
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       pkm.effects.delete(Effect.GUTS_PASSIVE)
-      pkm.addAttack(-5, pkm, 0, false)
+      pkm.applyStat(Stat.ATK, -5)
     }
     if (pkm.passive === Passive.WELL_BAKED) {
-      pkm.addDefense(-20, pkm, 0, false)
+      pkm.applyStat(Stat.DEF, -20)
     }
   }
 
@@ -465,7 +465,7 @@ export default class Status extends Schema implements IStatus {
         !pkm.effects.has(Effect.GUTS_PASSIVE)
       ) {
         pkm.effects.add(Effect.GUTS_PASSIVE)
-        pkm.addAttack(5, pkm, 0, false)
+        pkm.applyStat(Stat.ATK, 5)
       }
 
       if (
@@ -473,7 +473,7 @@ export default class Status extends Schema implements IStatus {
         !pkm.effects.has(Effect.TOXIC_BOOST)
       ) {
         pkm.effects.add(Effect.TOXIC_BOOST)
-        pkm.addAttack(10, pkm, 0, false)
+        pkm.applyStat(Stat.ATK, 10)
       }
 
       if (pkm.items.has(Item.PECHA_BERRY)) {
@@ -527,11 +527,11 @@ export default class Status extends Schema implements IStatus {
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         pkm.effects.delete(Effect.GUTS_PASSIVE)
-        pkm.addAttack(-5, pkm, 0, false)
+        pkm.applyStat(Stat.ATK, -5)
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
         pkm.effects.delete(Effect.TOXIC_BOOST)
-        pkm.addAttack(-10, pkm, 0, false)
+        pkm.applyStat(Stat.ATK, -10)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
@@ -655,7 +655,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.passive === Passive.PSYDUCK) {
-        pkm.addAbilityPower(100, pkm, 0, false)
+        pkm.applyStat(Stat.AP, 100)
       }
     }
   }
@@ -743,7 +743,7 @@ export default class Status extends Schema implements IStatus {
       if (!this.paralysis) {
         this.paralysis = true
         this.paralysisSpeedLost = max(50)(pkm.speed)
-        pkm.addSpeed(-this.paralysisSpeedLost, pkm, 0, false)
+        pkm.applyStat(Stat.SPEED, -this.paralysisSpeedLost)
       }
       const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
       duration = duration + boost
@@ -781,7 +781,7 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addSpeed(this.paralysisSpeedLost, pkm, 0, false)
+      pkm.applyStat(Stat.SPEED, this.paralysisSpeedLost)
     }
   }
 
@@ -916,8 +916,8 @@ export default class Status extends Schema implements IStatus {
 
   updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (this.pokerusCooldown - dt <= 0) {
-      pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.addAbilityPower(10, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, 1)
+      pokemon.applyStat(Stat.AP, 10)
       let infectCount = 0
       const cells = board.getAdjacentCells(
         pokemon.positionX,
@@ -1005,28 +1005,28 @@ export default class Status extends Schema implements IStatus {
   addPsychicField(entity: IPokemonEntity) {
     this.psychicField = true
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addSpeed(30, entity, 0, false)
+      entity.applyStat(Stat.SPEED, 30)
     }
   }
 
   removePsychicField(entity: IPokemonEntity) {
     this.psychicField = false
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addSpeed(-30, entity, 0, false)
+      entity.applyStat(Stat.SPEED, -30)
     }
   }
 
   addElectricField(entity: IPokemonEntity) {
     this.electricField = true
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addSpeed(30, entity, 0, false)
+      entity.applyStat(Stat.SPEED, 30)
     }
   }
 
   removeElectricField(entity: IPokemonEntity) {
     this.electricField = false
     if (entity.passive === Passive.SURGE_SURFER) {
-      entity.addSpeed(-30, entity, 0, false)
+      entity.applyStat(Stat.SPEED, -30)
     }
   }
 }

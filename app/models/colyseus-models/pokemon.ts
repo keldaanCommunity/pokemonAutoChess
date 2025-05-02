@@ -74,6 +74,7 @@ import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { clamp, min } from "../../utils/number"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -174,6 +175,105 @@ export class Pokemon extends Schema implements IPokemon {
 
   set luck(value: number) {
     this.permanentLuck = value
+  }
+
+  applyStat(
+    stat: Stat,
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base = false
+  ) {
+    switch (stat) {
+      case Stat.ATK:
+        this.addAttack(value, context, base)
+        break
+      case Stat.DEF:
+        this.addDefense(value, context, base)
+        break
+      case Stat.SPE_DEF:
+        this.addSpecialDefense(value, context, base)
+        break
+      case Stat.AP:
+        this.addAbilityPower(value, context, base)
+        break
+      case Stat.SPEED:
+        this.addSpeed(value, context, base)
+        break
+      case Stat.HP:
+        this.addMaxHP(value, context, base)
+        break
+      case Stat.LUCK:
+        this.addLuck(value, context, base)
+        break
+    }
+
+    if (base && context == this) {
+      // recalculate items
+      // recalculate synergy stats
+    }
+  }
+
+  addAttack(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseAtk' : 'atk'
+    context[property] = min(1)(context[property] + value)
+  }
+
+  addDefense(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseDef' : 'def'
+    context[property] = min(0)(context[property] + value)
+  }
+  
+  addSpecialDefense(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseSpeDef' : 'speDef'
+    context[property] = min(0)(context[property] + value)
+  }
+
+  addAbilityPower(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseAP' : 'ap'
+    context[property] = min(-100)(context[property] + value)
+  }
+  
+  addSpeed(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseSpeed' : 'speed'
+    context[property] = clamp(context[property] + value, 0, 300)
+  }
+  
+  addMaxHP(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseHP' : 'hp'
+    context[property] = min(1)(context[property] + value)
+  }
+
+  addLuck(
+    value: number,
+    context: Pokemon | IPokemonEntity = this,
+    base: boolean
+  ) {
+    const property = base ? 'baseLuck' : 'luck'
+    context[property] = min(-100)(context[property] + value)
   }
 
   onChangePosition(x: number, y: number, player: Player) {
@@ -1879,8 +1979,8 @@ const conversionEffect = ({
       entity.addShield(dragonLevel * 5, entity, 0, false)
     }
     if (effect === Effect.DRAGON_DANCE) {
-      entity.addAbilityPower(dragonLevel, entity, 0, false)
-      entity.addSpeed(dragonLevel, entity, 0, false)
+      entity.applyStat(Stat.AP, dragonLevel)
+      entity.applyStat(Stat.SPEED, dragonLevel)
     }
   }
 
@@ -5658,6 +5758,10 @@ export class Melmetal extends Pokemon {
   skill = Ability.DOUBLE_IRON_BASH
   attackSprite = AttackSprite.DRAGON_MELEE
   passive = Passive.MELMETAL
+
+  addSpeed(value, context, base) {
+    this.addAttack(Math.round(value * 0.5), context, base)
+  }
 }
 
 export class Suicune extends Pokemon {
@@ -5868,7 +5972,7 @@ export class Regigigas extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.addSpeed(-30, entity, 0, false)
+    entity.applyStat(Stat.SPEED, -30)
   }
 }
 
@@ -12517,7 +12621,7 @@ export class Helioptile extends Pokemon {
     } else if (simulation.weather === Weather.SANDSTORM) {
       entity.addDodgeChance(0.25, entity, 0, false)
     } else if (simulation.weather === Weather.SUN) {
-      entity.addAbilityPower(50, entity, 0, false)
+      entity.applyStat(Stat.AP, 50)
     }
   }
 }
@@ -12550,7 +12654,7 @@ export class Heliolisk extends Pokemon {
     } else if (simulation.weather === Weather.SANDSTORM) {
       entity.addDodgeChance(0.25, entity, 0, false)
     } else if (simulation.weather === Weather.SUN) {
-      entity.addAbilityPower(50, entity, 0, false)
+      entity.applyStat(Stat.AP, 50)
     }
   }
 }
@@ -15403,7 +15507,7 @@ export class Trubbish extends Pokemon {
   attackSprite = AttackSprite.POISON_MELEE
   additional = true
 
-  statIncreases = {
+  statIncreases: Partial<Record<Stat, number>> = {
     [Stat.SPEED]: 0,
     [Stat.AP]: 0,
     [Stat.CRIT_CHANCE]: 0,
@@ -15424,7 +15528,7 @@ export class Trubbish extends Pokemon {
         this.hp += 25
         Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
           if (stat in this.statIncreases) {
-            this.statIncreases[stat as Stat] += value
+            this.statIncreases[stat as Stat]! += value
           }
         })
         this.items.delete(item)
@@ -15433,7 +15537,7 @@ export class Trubbish extends Pokemon {
         this.hp += 50
         Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
           if (stat in this.statIncreases) {
-            this.statIncreases[stat as Stat] += value
+            this.statIncreases[stat as Stat]! += value
           }
         })
 
@@ -15448,14 +15552,9 @@ export class Trubbish extends Pokemon {
 
   onSpawn({ entity }: { entity: IPokemonEntity }) {
     // Add non-permanent stats to Trubbish
-    entity.addAbilityPower(this.statIncreases[Stat.AP], entity, 0, false)
-    entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
-    entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
-    entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
-    entity.addSpeed(this.statIncreases[Stat.SPEED], entity, 0, false)
-    entity.addAttack(this.statIncreases[Stat.ATK], entity, 0, false)
-    entity.addSpecialDefense(this.statIncreases[Stat.SPE_DEF], entity, 0, false)
-    entity.addDefense(this.statIncreases[Stat.DEF], entity, 0, false)
+    for (const [key, value] of Object.entries(this.statIncreases)) {
+      entity.applyStat(key as Stat, value)
+    }
   }
 
   afterEvolve({
@@ -15791,7 +15890,7 @@ export class Stonjourner extends Pokemon {
       .getAdjacentCells(entity.positionX, entity.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team === entity.team) {
-          cell.value.addAbilityPower(50, cell.value, 0, false)
+          cell.value.applyStat(Stat.AP, 50)
         }
       })
   }

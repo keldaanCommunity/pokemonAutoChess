@@ -12,6 +12,7 @@ import { AbilityStrategies } from "./abilities"
 import { min } from "../../utils/number"
 import { OnAbilityCastEffect } from "../effect"
 import { DelayedCommand } from "../simulation-command"
+import { Stat } from "../../types/enum/Game"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -45,7 +46,7 @@ export class AbilityStrategy {
     })
 
     if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.addPP(20, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 20)
     }
 
     if (pokemon.items.has(Item.STAR_DUST)) {
@@ -60,7 +61,7 @@ export class AbilityStrategy {
     if (pokemon.items.has(Item.MAX_ELIXIR) && pokemon.count.ult === 1) {
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.addPP(pokemon.maxPP, pokemon, 0, false)
+          pokemon.applyStat(Stat.PP, pokemon.maxPP, pokemon, 0, false)
           pokemon.removeItem(Item.MAX_ELIXIR, false)
         }, 1000)
       )
@@ -78,8 +79,8 @@ export class AbilityStrategy {
     }
 
     if (pokemon.passive === Passive.SLOW_START && pokemon.count.ult === 1) {
-      pokemon.addSpeed(30, pokemon, 0, false)
-      pokemon.addAttack(10, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPEED, 30)
+      pokemon.applyStat(Stat.SPEED, 10)
     }
   }
 }

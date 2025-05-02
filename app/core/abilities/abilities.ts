@@ -39,7 +39,7 @@ import {
   EvolutionTime
 } from "../../types/Config"
 import { Effect } from "../../types/enum/Effect"
-import { AttackType, Orientation, Team } from "../../types/enum/Game"
+import { AttackType, Orientation, Stat, Team } from "../../types/enum/Game"
 import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -444,7 +444,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
           pokemon,
           false
         )
-        targetCharmed.addAttack(-3, pokemon, 1, crit)
+        targetCharmed.applyStat(Stat.ATK, -3, pokemon, 1, crit)
       }
     }
   }
@@ -623,7 +623,7 @@ export class ElectricSurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.ELECTRIC)
       ) {
-        ally.addSpeed(buff, pokemon, 1, crit)
+        ally.applyStat(Stat.SPEED, buff, pokemon, 1, crit)
       }
     })
   }
@@ -646,7 +646,7 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.PSYCHIC)
       ) {
-        ally.addAbilityPower(buff, pokemon, 1, crit)
+        ally.applyStat(Stat.AP, buff, pokemon, 1, crit)
       }
     })
   }
@@ -670,7 +670,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.FAIRY)
       ) {
-        ally.addPP(ppGain, pokemon, 1, crit)
+        ally.applyStat(Stat.PP, ppGain, pokemon, 1, crit)
         ally.handleHeal(hpGain, pokemon, 1, crit)
       }
     })
@@ -694,7 +694,7 @@ export class GrassySurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.GRASS)
       ) {
-        ally.addAttack(buff, pokemon, 1, crit)
+        ally.applyStat(Stat.ATK, buff, pokemon, 1, crit)
       }
     })
   }
@@ -724,7 +724,7 @@ export class PsychicStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.addPP(-15, pokemon, 0, false)
+        cell.value.applyStat(Stat.PP, -15, pokemon, 0, false)
         cell.value.count.manaBurnCount++
       }
     })
@@ -984,7 +984,7 @@ export class SchoolingStrategy extends AbilityStrategy {
     if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.board.forEach((ally, id) => {
         if (ally && ally.name === Pkm.WISHIWASHI && isOnBench(ally)) {
-          pokemon.addMaxHP(50, pokemon, 0, false, true)
+          pokemon.applyStat(Stat.HP, 50, pokemon, 0, false, true)
           pokemon.player!.board.delete(id)
         }
       })
@@ -1014,8 +1014,8 @@ export class ElectroWebStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.addSpeed(-steal, pokemon, 1, crit)
-          pokemon.addSpeed(steal, pokemon, 1, crit)
+          cell.value.applyStat(Stat.SPEED, -steal, pokemon, 1, crit)
+          pokemon.applyStat(Stat.SPEED, steal, pokemon, 1, crit)
         }
       })
   }
@@ -1032,7 +1032,7 @@ export class MysticalFireStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAbilityPower(-10, pokemon, 1, crit)
+    target.applyStat(Stat.AP, -10, pokemon, 1, crit)
   }
 }
 
@@ -1263,9 +1263,9 @@ export class KingShieldStrategy extends AbilityStrategy {
     if (pokemon.name === Pkm.AEGISLASH) {
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.addAttack(10, pokemon, 1, crit)
-          pokemon.addDefense(-5, pokemon, 1, crit)
-          pokemon.addSpecialDefense(-5, pokemon, 1, crit)
+          pokemon.applyStat(Stat.ATK, 10, pokemon, 1, crit)
+          pokemon.applyStat(Stat.DEF, -5, pokemon, 1, crit)
+          pokemon.applyStat(Stat.SPE_DEF, -5, pokemon, 1, crit)
           pokemon.name = Pkm.AEGISLASH_BLADE
           pokemon.index = PkmIndex[Pkm.AEGISLASH_BLADE]
         }, 1500)
@@ -1273,9 +1273,9 @@ export class KingShieldStrategy extends AbilityStrategy {
     } else if (pokemon.name === Pkm.AEGISLASH_BLADE) {
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.addAttack(-10, pokemon, 1, crit)
-          pokemon.addDefense(5, pokemon, 1, crit)
-          pokemon.addSpecialDefense(5, pokemon, 1, crit)
+          pokemon.applyStat(Stat.ATK, -10, pokemon, 1, crit)
+          pokemon.applyStat(Stat.DEF, 5, pokemon, 1, crit)
+          pokemon.applyStat(Stat.SPE_DEF, 5, pokemon, 1, crit)
           pokemon.name = Pkm.AEGISLASH
           pokemon.index = PkmIndex[Pkm.AEGISLASH]
         }, 1500)
@@ -1407,9 +1407,9 @@ export class ClangorousSoulStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team == cell.value.team) {
-        cell.value.addAttack(buff, pokemon, 1, crit)
-        cell.value.addDefense(buff, pokemon, 1, crit)
-        cell.value.addSpecialDefense(buff, pokemon, 1, crit)
+        cell.value.applyStat(Stat.ATK, buff, pokemon, 1, crit)
+        cell.value.applyStat(Stat.DEF, buff, pokemon, 1, crit)
+        cell.value.applyStat(Stat.SPE_DEF, buff, pokemon, 1, crit)
       }
     })
   }
@@ -1444,7 +1444,7 @@ export class LiquidationStrategy extends AbilityStrategy {
     }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addDefense(-defReduction, pokemon, 1, crit)
+    target.applyStat(Stat.DEF, -defReduction, pokemon, 1, crit)
   }
 }
 
@@ -1492,7 +1492,7 @@ export class ShadowBoneStrategy extends AbilityStrategy {
       if (tg && pokemon.team != tg.team && x == target.positionX) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
         if (chance(0.5, pokemon)) {
-          tg.addDefense(-6, pokemon, 1, crit)
+          tg.applyStat(Stat.DEF, -6, pokemon, 1, crit)
         }
       }
     })
@@ -1551,7 +1551,7 @@ export class GrowlStrategy extends AbilityStrategy {
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.status.triggerFlinch(3000, cell.value, pokemon)
-          cell.value.addAttack(-atkDebuff, pokemon, 1, crit)
+          cell.value.applyStat(Stat.ATK, -atkDebuff, pokemon, 1, crit)
         }
       })
   }
@@ -1600,7 +1600,7 @@ export class FairyWindStrategy extends AbilityStrategy {
     const ppGain = [5, 10, 20][pokemon.stars - 1] ?? 0
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team === tg.team && tg.id !== pokemon.id) {
-        tg.addPP(ppGain, pokemon, 0.5, crit)
+        tg.applyStat(Stat.PP, ppGain, pokemon, 0.5, crit)
       }
     })
   }
@@ -1639,8 +1639,8 @@ export class HighJumpKickStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     const ppStolen = max(40)(target.pp)
-    pokemon.addPP(ppStolen, pokemon, 0, false)
-    target.addPP(-ppStolen, pokemon, 0, false)
+    pokemon.applyStat(Stat.PP, ppStolen, pokemon, 0, false)
+    target.applyStat(Stat.PP, -ppStolen, pokemon, 0, false)
     target.count.manaBurnCount++
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -1657,7 +1657,7 @@ export class TropKickStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
     const atkDebuff = [3, 5, 7][pokemon.stars - 1] ?? 7
-    target.addAttack(-atkDebuff, pokemon, 1, crit)
+    target.applyStat(Stat.ATK, -atkDebuff, pokemon, 1, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -1970,8 +1970,8 @@ export class AccelerockStrategy extends AbilityStrategy {
     const nbEffects = max(Math.floor(pokemon.def / 2))(
       Math.round(5 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
     )
-    pokemon.addDefense(-2 * nbEffects, pokemon, 0, false)
-    pokemon.addSpeed(nbEffects * 5, pokemon, 0, false)
+    pokemon.applyStat(Stat.DEF, -2 * nbEffects, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPEED, nbEffects * 5, pokemon, 0, false)
     pokemon.cooldown = 0
   }
 }
@@ -2122,7 +2122,7 @@ export class RockTombStrategy extends AbilityStrategy {
     const debuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addSpeed(-debuff, pokemon, 0, false)
+    target.applyStat(Stat.SPEED, -debuff, pokemon, 0, false)
   }
 }
 
@@ -2142,7 +2142,7 @@ export class RoarOfTimeStrategy extends AbilityStrategy {
     const strongest = getStrongestUnit(candidates)
     if (strongest) {
       strongest.status.addResurrection(strongest)
-      strongest.addSpeed(speedBuff, pokemon, 1, true)
+      strongest.applyStat(Stat.SPEED, speedBuff, pokemon, 1, true)
     }
   }
 }
@@ -2248,7 +2248,7 @@ export class SeedFlareStrategy extends AbilityStrategy {
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 5)
       .forEach((cell) => {
         if (cell.value && pokemon.team !== cell.value.team) {
-          cell.value.addSpecialDefense(-3, pokemon, 0, false)
+          cell.value.applyStat(Stat.SPE_DEF, -3, pokemon, 0, false)
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -2589,7 +2589,7 @@ export class FieryDanceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
-    pokemon.addAbilityPower(30, pokemon, 0, crit)
+    pokemon.applyStat(Stat.AP, 30, pokemon, 0, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -2634,7 +2634,7 @@ export class GuillotineStrategy extends AbilityStrategy {
       crit
     )
     if (death) {
-      pokemon.addPP(pokemon.maxPP * 0.5, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, pokemon.maxPP * 0.5, pokemon, 0, false)
     }
   }
 }
@@ -2849,7 +2849,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     if (pokemon.simulation.weather === Weather.SUN) {
       damage = damage * 2
-      pokemon.addPP(40, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 40, pokemon, 0, false)
     }
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -2977,7 +2977,7 @@ export class WishStrategy extends AbilityStrategy {
         ally.life < ally.hp
       ) {
         ally.handleHeal(heal, pokemon, 1, crit)
-        ally.addLuck(20, pokemon, 1, crit)
+        ally.applyStat(Stat.LUCK, 20, pokemon, 1, crit)
         count -= 1
       }
     })
@@ -3044,7 +3044,7 @@ export class CalmMindStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const buff = 1
-    pokemon.addAttack(buff * pokemon.baseAtk, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, buff * pokemon.baseAtk, pokemon, 1, crit)
   }
 }
 
@@ -3060,7 +3060,7 @@ export class CosmicPowerMoonStrategy extends AbilityStrategy {
     const apGain = 25
     board.forEach((x, y, ally) => {
       if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
-        ally.addAbilityPower(apGain, pokemon, 1, crit)
+        ally.applyStat(Stat.AP, apGain, pokemon, 1, crit)
       }
     })
   }
@@ -3078,7 +3078,7 @@ export class CosmicPowerSunStrategy extends AbilityStrategy {
     const atkBuffMultiplier = 0.25
     board.forEach((x, y, ally) => {
       if (ally && ally.id !== pokemon.id && ally.team === pokemon.team) {
-        ally.addAttack(atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
+        ally.applyStat(Stat.ATK, atkBuffMultiplier * ally.baseAtk, pokemon, 1, crit)
       }
     })
   }
@@ -3094,8 +3094,8 @@ export class DefenseCurlStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
-    pokemon.addDefense(buff, pokemon, 1, crit)
-    pokemon.addSpecialDefense(buff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, buff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPE_DEF, buff, pokemon, 1, crit)
     pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
   }
 }
@@ -3131,7 +3131,7 @@ export class SoakStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.addPP(10, pokemon, 0, false)
+        ally.applyStat(Stat.PP, 10, pokemon, 0, false)
       }
     })
   }
@@ -3251,7 +3251,7 @@ export class TailwindStrategy extends AbilityStrategy {
     const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.addSpeed(buff, pokemon, 1, crit)
+        ally.applyStat(Stat.SPEED, buff, pokemon, 1, crit)
       }
     })
   }
@@ -3558,8 +3558,8 @@ export class NutrientsStrategy extends AbilityStrategy {
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
-      lowestHealthAlly.addDefense(2, pokemon, 1, crit)
-      lowestHealthAlly.addSpecialDefense(2, pokemon, 1, crit)
+      lowestHealthAlly.applyStat(Stat.DEF, 2, pokemon, 1, crit)
+      lowestHealthAlly.applyStat(Stat.SPE_DEF, 2, pokemon, 1, crit)
       broadcastAbility(pokemon, {
         positionX: pokemon.positionX,
         positionY: pokemon.positionY,
@@ -3588,7 +3588,7 @@ export class SyrupBombStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)[0]
 
     if (highestSpeedEnemy) {
-      highestSpeedEnemy.addSpeed(-30, pokemon, 1, crit)
+      highestSpeedEnemy.applyStat(Stat.SPEED, -30, pokemon, 1, crit)
       highestSpeedEnemy.handleSpecialDamage(
         damage,
         board,
@@ -3885,8 +3885,8 @@ export class DragonTailStrategy extends AbilityStrategy {
     const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
     const defenseBuff = [2, 4, 6][pokemon.stars - 1] ?? 6
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.addDefense(defenseBuff, pokemon, 1, crit)
-    pokemon.addSpecialDefense(defenseBuff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, defenseBuff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPE_DEF, defenseBuff, pokemon, 1, crit)
   }
 }
 
@@ -4047,7 +4047,7 @@ export class TormentStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const boost = [20, 40, 60][pokemon.stars - 1] ?? 60
-    pokemon.addSpeed(boost, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, boost, pokemon, 1, crit)
     pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
   }
 }
@@ -4106,7 +4106,7 @@ export class ShadowBallStrategy extends AbilityStrategy {
 
     board.forEach((x: number, y: number, v: PokemonEntity | undefined) => {
       if (v && pokemon.team != v.team) {
-        v.addSpecialDefense(-2, pokemon, 0, false)
+        v.applyStat(Stat.SPE_DEF, -2, pokemon, 0, false)
       }
     })
   }
@@ -4287,7 +4287,7 @@ export class HappyHourStrategy extends AbilityStrategy {
     const buff = [2, 5, 8][pokemon.stars - 1] ?? 8
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
-        ally.addAttack(buff, pokemon, 1, crit)
+        ally.applyStat(Stat.ATK, buff, pokemon, 1, crit)
       }
     })
   }
@@ -4332,7 +4332,7 @@ export class NastyPlotStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const buff = 10
-    pokemon.addAttack(buff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, buff, pokemon, 1, crit)
     pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
   }
 }
@@ -4346,8 +4346,8 @@ export class TakeHeartStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addAttack(8, pokemon, 1, crit)
-    pokemon.addSpecialDefense(8, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, 8, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPE_DEF, 8, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     pokemon.cooldown = Math.round(100 * (50 / pokemon.speed))
   }
@@ -4384,11 +4384,11 @@ export class SpectralThiefStrategy extends AbilityStrategy {
       target.atk = target.baseAtk
       target.def = target.baseDef
       target.speDef = target.baseSpeDef
-      pokemon.addAttack(boostAtk, pokemon, 0, false)
-      pokemon.addDefense(boostDef, pokemon, 0, false)
-      pokemon.addSpecialDefense(boostSpeDef, pokemon, 0, false)
-      pokemon.addAbilityPower(boostAP, pokemon, 0, false)
-      pokemon.addSpeed(boostSpeed, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, boostAtk, pokemon, 0, false)
+      pokemon.applyStat(Stat.DEF, boostDef, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPE_DEF, boostSpeDef, pokemon, 0, false)
+      pokemon.applyStat(Stat.AP, boostAP, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPEED, boostSpeed, pokemon, 0, false)
     }
   }
 }
@@ -4476,7 +4476,7 @@ export class MeteorMashStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const nbHits = 3
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    pokemon.addAttack(2, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, 2, pokemon, 1, crit)
     for (let n = 0; n < nbHits; n++) {
       target.handleSpecialDamage(
         damage,
@@ -4536,7 +4536,7 @@ export class FleurCannonStrategy extends AbilityStrategy {
         )
       }
     })
-    pokemon.addAbilityPower(-20, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, -20, pokemon, 0, false)
   }
 }
 
@@ -4725,7 +4725,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
       )
     }
     if (target.life <= 0) {
-      pokemon.addPP(40, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 40, pokemon, 0, false)
     }
   }
 }
@@ -4886,7 +4886,7 @@ export class AgilityStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const boost = [10, 20, 30][pokemon.stars - 1] ?? 30
-    pokemon.addSpeed(boost, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, boost, pokemon, 1, crit)
     pokemon.cooldown = 0
   }
 }
@@ -5041,14 +5041,14 @@ export class ForecastStrategy extends AbilityStrategy {
       if (p && pokemon.team === p.team) {
         p.addShield(10, pokemon, 1, crit)
         if (pokemon.name === Pkm.CASTFORM_SUN) {
-          p.addAttack(4, pokemon, 1, crit)
+          p.applyStat(Stat.ATK, 4, pokemon, 1, crit)
         }
         if (pokemon.name === Pkm.CASTFORM_RAIN) {
-          p.addPP(8, pokemon, 1, crit)
+          p.applyStat(Stat.PP, 8, pokemon, 1, crit)
         }
         if (pokemon.name === Pkm.CASTFORM_HAIL) {
-          p.addDefense(2, pokemon, 1, crit)
-          p.addSpecialDefense(2, pokemon, 1, crit)
+          p.applyStat(Stat.DEF, 2, pokemon, 1, crit)
+          p.applyStat(Stat.SPE_DEF, 2, pokemon, 1, crit)
         }
       }
     })
@@ -5168,9 +5168,9 @@ export class GeomancyStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addAttack(15, pokemon, 1, crit)
-    pokemon.addSpecialDefense(10, pokemon, 1, crit)
-    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, 15, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPE_DEF, 10, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, 20, pokemon, 0, false)
   }
 }
 
@@ -5251,8 +5251,8 @@ export class GrowthStrategy extends AbilityStrategy {
       attackBuff *= 2 // grows twice as fast if sunny weather
       hpBuff *= 2
     }
-    pokemon.addAttack(attackBuff, pokemon, 1, crit)
-    pokemon.addMaxHP(hpBuff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, attackBuff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.HP, hpBuff, pokemon, 1, crit)
     pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
   }
 }
@@ -5533,11 +5533,11 @@ export class SilverWindStrategy extends AbilityStrategy {
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
-    pokemon.addAttack(1, pokemon, 0, false)
-    pokemon.addDefense(1, pokemon, 0, false)
-    pokemon.addSpecialDefense(1, pokemon, 0, false)
-    pokemon.addSpeed(10, pokemon, 0, false)
-    pokemon.addAbilityPower(10, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, 1, pokemon, 0, false)
+    pokemon.applyStat(Stat.DEF, 1, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPE_DEF, 1, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPEED, 10, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, 10, pokemon, 0, false)
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -5584,7 +5584,7 @@ export class IcyWindStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.addSpeed(-speedDebuff, pokemon, 0, false)
+        cell.value.applyStat(Stat.SPEED, -speedDebuff, pokemon, 0, false)
       }
     })
   }
@@ -5688,7 +5688,7 @@ export class RolloutStrategy extends AbilityStrategy {
     const multiplier = 2
     const defenseBoost = [2, 5, 10][pokemon.stars - 1] ?? 10
 
-    pokemon.addDefense(defenseBoost, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, defenseBoost, pokemon, 1, crit)
     target.handleSpecialDamage(
       multiplier * pokemon.def,
       board,
@@ -5712,7 +5712,7 @@ export class IceBallStrategy extends AbilityStrategy {
     const multiplier = [0.5, 1, 1.5][pokemon.stars - 1] ?? 1.5
     const speDefBoost = 10
 
-    pokemon.addSpecialDefense(speDefBoost, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPE_DEF, speDefBoost, pokemon, 0, false)
     target.handleSpecialDamage(
       baseDamage + multiplier * pokemon.speDef,
       board,
@@ -5732,7 +5732,7 @@ export class ThrashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addAttack(pokemon.baseAtk, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, pokemon.baseAtk, pokemon, 1, crit)
     pokemon.status.triggerConfusion(3000, pokemon, pokemon)
   }
 }
@@ -5849,7 +5849,7 @@ export class FakeOutStrategy extends AbilityStrategy {
     const damage = [50, 100, 150][pokemon.stars - 1] ?? 150
     if (pokemon.ap >= 0) target.status.triggerFlinch(3000, target)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.addAbilityPower(-30, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, -30, pokemon, 0, false)
   }
 }
 
@@ -5871,8 +5871,8 @@ export class FellStingerStrategy extends AbilityStrategy {
       crit
     )
     if (victim.death && !pokemon.isSpawn) {
-      pokemon.addAttack(1, pokemon, 0, false, true)
-      pokemon.addMaxHP(10, pokemon, 0, false, true)
+      pokemon.applyStat(Stat.ATK, 1, pokemon, 0, false, true)
+      pokemon.applyStat(Stat.HP, 10, pokemon, 0, false, true)
     }
   }
 }
@@ -5982,7 +5982,7 @@ export class MistBallStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.addAbilityPower(-30, pokemon, 0, false)
+        cell.value.applyStat(Stat.AP, -30, pokemon, 0, false)
       }
     })
 
@@ -5997,7 +5997,7 @@ export class MistBallStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-            cell.value.addAbilityPower(-30, pokemon, 0, false)
+            cell.value.applyStat(Stat.AP, -30, pokemon, 0, false)
           }
         })
       }, 1000)
@@ -6034,7 +6034,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.addSpecialDefense(-5, pokemon, 0, false)
+        cell.value.applyStat(Stat.SPE_DEF, -5, pokemon, 0, false)
       }
     })
 
@@ -6049,7 +6049,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-            cell.value.addSpecialDefense(-3, pokemon, 0, false)
+            cell.value.applyStat(Stat.SPE_DEF, -3, pokemon, 0, false)
           }
         })
       }, 1000)
@@ -6205,11 +6205,11 @@ export class ShellSmashStrategy extends AbilityStrategy {
         )
       }
     })
-    pokemon.addAbilityPower(20, pokemon, 0, false)
-    pokemon.addAttack(2, pokemon, 0, false)
-    pokemon.addSpeed(20, pokemon, 0, false)
-    pokemon.addDefense(-2, pokemon, 0, false)
-    pokemon.addSpecialDefense(-2, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, 20, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, 2, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPEED, 20, pokemon, 0, false)
+    pokemon.applyStat(Stat.DEF, -2, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPE_DEF, -2, pokemon, 0, false)
   }
 }
 
@@ -6474,7 +6474,7 @@ export class ShelterStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const defGain = [5, 10, 15][pokemon.stars - 1] ?? 15
-    pokemon.addDefense(defGain, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, defGain, pokemon, 1, crit)
     const cells = board.getCellsInFront(pokemon, target)
     cells.forEach((cell) => {
       board.addBoardEffect(cell.x, cell.y, Effect.SMOKE, pokemon.simulation)
@@ -6650,7 +6650,7 @@ export class TeeterDanceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addSpeed(20, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, 20, pokemon, 1, crit)
     board.cells
       .filter((v) => v !== undefined)
       .forEach((v) => v && v.status.triggerConfusion(3000, v, pokemon))
@@ -6666,8 +6666,8 @@ export class CloseCombatStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addDefense(-2, pokemon, 0, false)
-    pokemon.addSpecialDefense(-2, pokemon, 0, false)
+    pokemon.applyStat(Stat.DEF, -2, pokemon, 0, false)
+    pokemon.applyStat(Stat.SPE_DEF, -2, pokemon, 0, false)
     target.handleSpecialDamage(130, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -6826,7 +6826,7 @@ export class LungeStrategy extends AbilityStrategy {
     if (cellToGo) {
       pokemon.moveTo(cellToGo.x, cellToGo.y, board)
       if (enemy) {
-        enemy.addAttack(-5, pokemon, 1, crit)
+        enemy.applyStat(Stat.ATK, -5, pokemon, 1, crit)
         enemy.handleSpecialDamage(
           50,
           board,
@@ -7053,7 +7053,7 @@ export class StruggleBugStrategy extends AbilityStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.addAbilityPower(-50, pokemon, 0, false)
+        cell.value.applyStat(Stat.AP, -50, pokemon, 0, false)
         cell.value.handleSpecialDamage(
           30,
           board,
@@ -7075,10 +7075,10 @@ export class QuiverDanceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    pokemon.addAttack(5, pokemon, 1, crit)
-    pokemon.addSpecialDefense(5, pokemon, 1, crit)
-    pokemon.addSpeed(10, pokemon, 1, crit)
-    pokemon.addAbilityPower(20, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, 5, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPE_DEF, 5, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, 10, pokemon, 1, crit)
+    pokemon.applyStat(Stat.AP, 20, pokemon, 0, false)
   }
 }
 
@@ -7094,7 +7094,7 @@ export class TailGlowStrategy extends AbilityStrategy {
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
-    pokemon.addAbilityPower(50, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, 50, pokemon, 0, false)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -7264,7 +7264,7 @@ export class ScreechStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.addDefense(debuff, pokemon, 1, crit)
+        cell.value.applyStat(Stat.DEF, debuff, pokemon, 1, crit)
         broadcastAbility(pokemon, { targetX: cell.x, targetY: cell.y })
       }
     })
@@ -7341,7 +7341,7 @@ export class AcidSprayStrategy extends AbilityStrategy {
           targetX: tg.positionX,
           targetY: tg.positionY
         })
-        tg.addSpecialDefense(-5, pokemon, 0, false)
+        tg.applyStat(Stat.SPE_DEF, -5, pokemon, 0, false)
         tg.handleSpecialDamage(33, board, AttackType.SPECIAL, pokemon, crit)
         affectedTargetsIds.push(tg.id)
         const cells = board.getAdjacentCells(tg.positionX, tg.positionY)
@@ -7371,8 +7371,8 @@ export class UnboundStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     pokemon.index = PkmIndex[Pkm.HOOPA_UNBOUND]
     pokemon.skill = Ability.HYPERSPACE_FURY
-    pokemon.addAttack(10, pokemon, 0, false)
-    pokemon.addMaxHP(100, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, 10, pokemon, 0, false)
+    pokemon.applyStat(Stat.HP, 100, pokemon, 0, false)
     pokemon.toMovingState()
   }
 }
@@ -7388,8 +7388,8 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const nbHits = 4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     for (let i = 0; i < nbHits; i++) {
-      target.addDefense(-1, pokemon, 0, false)
-      target.addSpecialDefense(-1, pokemon, 0, false)
+      target.applyStat(Stat.DEF, -1, pokemon, 0, false)
+      target.applyStat(Stat.SPE_DEF, -1, pokemon, 0, false)
       target.handleSpecialDamage(
         15,
         board,
@@ -7848,7 +7848,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(60, pokemon, 0, false)
+          pokemon.applyStat(Stat.PP, 60, pokemon, 0, false)
         }
       }, 2000)
     )
@@ -8328,7 +8328,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]
     }
-    pokemon.addSpeed(10, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, 10, pokemon, 1, crit)
 
     target.handleSpecialDamage(
       60,
@@ -8419,8 +8419,8 @@ export class TickleStrategy extends AbilityStrategy {
           nbEnemiesHit < nbMaxEnemiesHit
         ) {
           nbEnemiesHit++
-          cell.value.addAttack(-attackLost, pokemon, 1, true)
-          cell.value.addDefense(-defLost, pokemon, 1, true)
+          cell.value.applyStat(Stat.ATK, -attackLost, pokemon, 1, true)
+          cell.value.applyStat(Stat.DEF, -defLost, pokemon, 1, true)
         }
       })
   }
@@ -8578,7 +8578,7 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
           )
         }
       })
-    pokemon.addAbilityPower(10, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, 10, pokemon, 0, false)
   }
 }
 
@@ -8754,7 +8754,7 @@ export class SpiritBreakStrategy extends AbilityStrategy {
       true
     )
     const apDebuff = -20
-    target.addAbilityPower(apDebuff, pokemon, 1, crit)
+    target.applyStat(Stat.AP, apDebuff, pokemon, 1, crit)
   }
 }
 
@@ -8926,7 +8926,7 @@ export class PsychoBoostStrategy extends AbilityStrategy {
             true
           )
 
-          pokemon.addAbilityPower(-20, pokemon, 0, false)
+          pokemon.applyStat(Stat.AP, -20, pokemon, 0, false)
         }
       }
     )
@@ -9242,7 +9242,7 @@ export class TailWhipStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const defLoss = -0.3 * target.def
-    target.addDefense(defLoss, pokemon, 1, crit)
+    target.applyStat(Stat.DEF, defLoss, pokemon, 1, crit)
   }
 }
 
@@ -9319,7 +9319,7 @@ export class TorchSongStrategy extends AbilityStrategy {
             targetX: randomTarget.positionX,
             targetY: randomTarget.positionY
           })
-          pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
+          pokemon.applyStat(Stat.AP, apGainPerFlame, pokemon, 0, false)
           if (randomTarget?.life > 0) {
             randomTarget.handleSpecialDamage(
               damagePerFlame,
@@ -9417,11 +9417,11 @@ export class StoneEdgeStrategy extends AbilityStrategy {
 
     pokemon.status.triggerSilence(duration, pokemon, pokemon)
     pokemon.effects.add(Effect.STONE_EDGE)
-    pokemon.addCritChance(20, pokemon, 1, false)
+    pokemon.applyStat(Stat.CRIT_CHANCE, 20, pokemon, 1, false)
     pokemon.range += 2
     pokemon.commands.push(
       new DelayedCommand(() => {
-        pokemon.addCritChance(-20, pokemon, 1, false)
+        pokemon.applyStat(Stat.CRIT_CHANCE, -20, pokemon, 1, false)
         pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
         pokemon.effects.delete(Effect.STONE_EDGE)
       }, duration)
@@ -9443,7 +9443,7 @@ export class PsyShockStrategy extends AbilityStrategy {
     const ppStolen = max(target.pp)(ppBurn)
     const extraPP = ppBurn - ppStolen
 
-    target.addPP(-ppStolen, pokemon, 0, crit)
+    target.applyStat(Stat.PP, -ppStolen, pokemon, 0, crit)
     pokemon.addShield(ppBurn, pokemon, 0, crit)
     if (extraPP > 0) {
       target.handleSpecialDamage(
@@ -9533,7 +9533,7 @@ export class BulldozeStrategy extends AbilityStrategy {
           cell.value.cooldown = 500
         }
 
-        cell.value.addSpeed(-speedReduction, pokemon, 0, crit)
+        cell.value.applyStat(Stat.SPEED, -speedReduction, pokemon, 0, crit)
 
         cell.value.handleSpecialDamage(
           damage,
@@ -9561,8 +9561,8 @@ export class RapidSpinStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
-    pokemon.addDefense(buffAmount, pokemon, 1, true)
-    pokemon.addSpecialDefense(buffAmount, pokemon, 1, true)
+    pokemon.applyStat(Stat.DEF, buffAmount, pokemon, 1, true)
+    pokemon.applyStat(Stat.SPE_DEF, buffAmount, pokemon, 1, true)
   }
 }
 
@@ -9638,7 +9638,7 @@ export class AncientPowerStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit)
     const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.addAbilityPower(25, pokemon, 0, false)
+    pokemon.applyStat(Stat.AP, 25, pokemon, 0, false)
   }
 }
 
@@ -9796,7 +9796,7 @@ export class CrushClawStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const defLoss = [-5, -10][pokemon.stars - 1] ?? -6
-    target.addDefense(defLoss, pokemon, 0, false)
+    target.applyStat(Stat.DEF, defLoss, pokemon, 0, false)
     for (let i = 0; i < 2; i++) {
       target.handleSpecialDamage(
         pokemon.atk,
@@ -10114,7 +10114,7 @@ export class CharmStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const attackReduce = [2, 3, 4][pokemon.stars - 1] ?? 4
-    target.addAttack(-attackReduce, pokemon, 1, crit)
+    target.applyStat(Stat.ATK, -attackReduce, pokemon, 1, crit)
     target.status.triggerCharm(3000, target, pokemon, false)
   }
 }
@@ -10129,7 +10129,7 @@ export class EntrainmentStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const ppGained = 10
-    pokemon.addPP(ppGained, pokemon, 1, crit)
+    pokemon.applyStat(Stat.PP, ppGained, pokemon, 1, crit)
     if (target.skill !== Ability.ENTRAINMENT) {
       target.skill = Ability.ENTRAINMENT
     } else {
@@ -10394,7 +10394,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.addPP(20, pokemon, 1, crit)
+            cell.value.applyStat(Stat.PP, 20, pokemon, 1, crit)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {
@@ -10469,8 +10469,8 @@ export class SteelWingStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           broadcastAbility(pokemon, { positionX: cell.x, positionY: cell.y })
-          pokemon.addDefense(1, pokemon, 0, false)
-          cell.value.addDefense(-1, pokemon, 0, false)
+          pokemon.applyStat(Stat.DEF, 1, pokemon, 0, false)
+          cell.value.applyStat(Stat.DEF, -1, pokemon, 0, false)
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -10543,7 +10543,7 @@ export class YawnStrategy extends AbilityStrategy {
 
     opponentsTargetingMe.forEach((opponent) => {
       opponent.status.triggerFatigue(3000, pokemon)
-      opponent.addAbilityPower(-20, pokemon, 0, false)
+      opponent.applyStat(Stat.AP, -20, pokemon, 0, false)
     })
 
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
@@ -10758,7 +10758,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
     const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
 
     target.status.triggerFlinch(4000, pokemon)
-    target.addDefense(-10, pokemon, 1, crit)
+    target.applyStat(Stat.DEF, -10, pokemon, 1, crit)
     target.handleSpecialDamage(
       damage,
       board,
@@ -10771,7 +10771,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
       if (cell.value != null && target.id !== cell.value.id) {
         if (cell.value.team !== pokemon.team) {
           cell.value.status.triggerFlinch(4000, pokemon)
-          cell.value.addDefense(-5, pokemon, 1, crit)
+          cell.value.applyStat(Stat.DEF, -5, pokemon, 1, crit)
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -10847,12 +10847,12 @@ export class ViseGripStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const defGain = target.def * 1
     const spedefGain = target.speDef * 1
-    pokemon.addDefense(defGain, pokemon, 1, crit)
-    pokemon.addSpecialDefense(spedefGain, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, defGain, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPE_DEF, spedefGain, pokemon, 1, crit)
     pokemon.commands.push(
       new DelayedCommand(() => {
-        pokemon.addDefense(-defGain, pokemon, 1, crit)
-        pokemon.addSpecialDefense(-spedefGain, pokemon, 1, crit)
+        pokemon.applyStat(Stat.DEF, -defGain, pokemon, 1, crit)
+        pokemon.applyStat(Stat.SPE_DEF, -spedefGain, pokemon, 1, crit)
       }, 4000)
     )
   }
@@ -10884,8 +10884,8 @@ export class LandsWrathStrategy extends AbilityStrategy {
           crit,
           false
         )
-        cell.value.addDefense(-8, pokemon, 0.5, crit)
-        cell.value.addSpecialDefense(-8, pokemon, 0.5, crit)
+        cell.value.applyStat(Stat.DEF, -8, pokemon, 0.5, crit)
+        cell.value.applyStat(Stat.SPE_DEF, -8, pokemon, 0.5, crit)
         broadcastAbility(pokemon, {
           skill: "LANDS_WRATH/hit",
           positionX: cell.x,
@@ -11070,7 +11070,7 @@ export class MetalClawStrategy extends AbilityStrategy {
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const atkBuff = [2, 4, 6][pokemon.stars - 1] ?? 6
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
-    pokemon.addAttack(atkBuff, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, atkBuff, pokemon, 1, crit)
   }
 }
 
@@ -11102,7 +11102,7 @@ export class FirestarterStrategy extends AbilityStrategy {
         ) {
           pokemon.commands.push(
             new DelayedCommand(() => {
-              pokemon.addSpeed(speedBuff, pokemon, 1, crit)
+              pokemon.applyStat(Stat.SPEED, speedBuff, pokemon, 1, crit)
             }, 500)
           )
         } else {
@@ -11181,8 +11181,8 @@ export class BoneArmorStrategy extends AbilityStrategy {
         pokemon.handleHeal(attack.takenDamage, pokemon, 1, crit)
       }
       if (attack.death) {
-        pokemon.addDefense(defBuff, pokemon, 0, false)
-        pokemon.addSpecialDefense(defBuff, pokemon, 0, false)
+        pokemon.applyStat(Stat.DEF, defBuff, pokemon, 0, false)
+        pokemon.applyStat(Stat.SPE_DEF, defBuff, pokemon, 0, false)
       }
     }
   }
@@ -11209,18 +11209,18 @@ export class TopsyTurvyStrategy extends AbilityStrategy {
         )
         if (target.atk > target.baseAtk) {
           const d = target.atk - target.baseAtk
-          target.addAttack(-2 * d, pokemon, 0, false)
+          target.applyStat(Stat.ATK, -2 * d, pokemon, 0, false)
         }
         if (target.ap > 0) {
-          target.addAbilityPower(-2 * target.ap, pokemon, 0, false)
+          target.applyStat(Stat.AP, -2 * target.ap, pokemon, 0, false)
         }
         if (target.def > target.baseDef) {
           const d = target.def - target.baseDef
-          target.addDefense(-2 * d, pokemon, 0, false)
+          target.applyStat(Stat.DEF, -2 * d, pokemon, 0, false)
         }
         if (target.speDef > target.baseSpeDef) {
           const d = target.speDef - target.baseSpeDef
-          target.addSpecialDefense(-2 * d, pokemon, 0, false)
+          target.applyStat(Stat.SPE_DEF, -2 * d, pokemon, 0, false)
         }
       }, 500)
     )
@@ -11243,7 +11243,7 @@ export class RageStrategy extends AbilityStrategy {
     const missingHp = pokemon.hp - pokemon.life
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
-    pokemon.addAttack(atkBoost, pokemon, 1, true)
+    pokemon.applyStat(Stat.ATK, atkBoost, pokemon, 1, true)
   }
 }
 
@@ -11310,8 +11310,8 @@ export class BulkUpStrategy extends AbilityStrategy {
     // Increase base Attack and base Defense by 40%
     const atkBoost = Math.ceil(0.5 * pokemon.baseAtk)
     const defBoost = Math.ceil(0.5 * pokemon.baseDef)
-    pokemon.addAttack(atkBoost, pokemon, 1, crit)
-    pokemon.addDefense(defBoost, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, atkBoost, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, defBoost, pokemon, 1, crit)
   }
 }
 
@@ -11472,7 +11472,7 @@ export class HardenStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     const defGain = [4, 8, 12][pokemon.stars - 1] ?? 12
-    pokemon.addDefense(defGain, pokemon, 1, crit)
+    pokemon.applyStat(Stat.DEF, defGain, pokemon, 1, crit)
   }
 }
 
@@ -11650,11 +11650,11 @@ export class DarkLariatStrategy extends AbilityStrategy {
                 crit
               )
               if (pokemon.effects.has(Effect.VICTORY_STAR)) {
-                pokemon.addAttack(1, pokemon, 0, false)
+                pokemon.applyStat(Stat.ATK, 1, pokemon, 0, false)
               } else if (pokemon.effects.has(Effect.DROUGHT)) {
-                pokemon.addAttack(2, pokemon, 0, false)
+                pokemon.applyStat(Stat.ATK, 2, pokemon, 0, false)
               } else if (pokemon.effects.has(Effect.DESOLATE_LAND)) {
-                pokemon.addAttack(3, pokemon, 0, false)
+                pokemon.applyStat(Stat.ATK, 3, pokemon, 0, false)
               }
             }
           },
@@ -11982,7 +11982,7 @@ export class SweetScentStrategy extends AbilityStrategy {
         if (chance(0.3, pokemon)) {
           cell.value.status.triggerCharm(1000, cell.value, pokemon, false)
         }
-        cell.value.addSpecialDefense(-6, pokemon, 1, crit)
+        cell.value.applyStat(Stat.SPE_DEF, -6, pokemon, 1, crit)
         cell.value.addDodgeChance(-cell.value.dodge, pokemon, 0, false)
       }
     })
@@ -12024,8 +12024,8 @@ export class SwallowStrategy extends AbilityStrategy {
       broadcastAbility(pokemon, { skill: Ability.SWALLOW })
       pokemon.count.ult = 0
     } else {
-      pokemon.addDefense(3, pokemon, 0, false)
-      pokemon.addSpecialDefense(3, pokemon, 0, false)
+      pokemon.applyStat(Stat.DEF, 3, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPE_DEF, 3, pokemon, 0, false)
     }
   }
 }
@@ -12047,29 +12047,29 @@ export class DecorateStrategy extends AbilityStrategy {
         targetX: nearestAlly.positionX,
         targetY: nearestAlly.positionY
       })
-      nearestAlly.addAttack(atkBoost, pokemon, 1, crit)
-      nearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
+      nearestAlly.applyStat(Stat.ATK, atkBoost, pokemon, 1, crit)
+      nearestAlly.applyStat(Stat.AP, apBoost, pokemon, 1, crit)
 
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
         nearestAlly.addShield(60, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
-        nearestAlly.addSpeed(30, pokemon, 1, crit)
+        nearestAlly.applyStat(Stat.SPEED, 30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
-        nearestAlly.addMaxHP(40, pokemon, 1, crit)
+        nearestAlly.applyStat(Stat.HP, 40, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
         nearestAlly.handleHeal(40, pokemon, 0, crit)
-        nearestAlly.addSpecialDefense(15, pokemon, 0, crit)
+        nearestAlly.applyStat(Stat.SPE_DEF, 15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
-        nearestAlly.addCritChance(40, pokemon, 0, crit)
+        nearestAlly.applyStat(Stat.CRIT_CHANCE, 40, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
         nearestAlly.handleHeal(40, pokemon, 1, crit)
-        nearestAlly.addDefense(15, pokemon, 0, crit)
+        nearestAlly.applyStat(Stat.DEF, 15, pokemon, 0, crit)
       } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
-        nearestAlly.addAttack(8, pokemon, 1, crit)
+        nearestAlly.applyStat(Stat.ATK, 8, pokemon, 1, crit)
       } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
-        nearestAlly.addCritPower(80, pokemon, 1, crit)
+        nearestAlly.applyStat(Stat.CRIT_POWER, 80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        nearestAlly.addAbilityPower(60, pokemon, 1, crit)
+        nearestAlly.applyStat(Stat.AP, 60, pokemon, 1, crit)
       }
     }
   }
@@ -12145,7 +12145,7 @@ export class MudShotStrategy extends AbilityStrategy {
     const damage = [25, 50, 75][pokemon.stars - 1] ?? 75
     const speedDebuff = [10, 20, 30][pokemon.stars - 1] ?? 30
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addSpeed(-speedDebuff, pokemon, 1, crit)
+    target.applyStat(Stat.SPEED, -speedDebuff, pokemon, 1, crit)
   }
 }
 
@@ -12190,8 +12190,8 @@ export class FilletAwayStrategy extends AbilityStrategy {
       false,
       false
     )
-    pokemon.addAttack(10, pokemon, 1, crit)
-    pokemon.addSpeed(20, pokemon, 1, crit)
+    pokemon.applyStat(Stat.ATK, 10, pokemon, 1, crit)
+    pokemon.applyStat(Stat.SPEED, 20, pokemon, 1, crit)
     pokemon.status.triggerProtect(400)
     // move to backline
     const corner = board.getTeleportationCell(
@@ -12254,7 +12254,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
         () => {
           const damage = [80, 90, 100][pokemon.stars - 1] ?? 100
           const apBoost = 40
-          pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
+          pokemon.applyStat(Stat.AP, apBoost, pokemon, 0, crit)
           broadcastAbility(pokemon, {
             skill: Ability.ELECTRO_SHOT,
             targetX: target.positionX,

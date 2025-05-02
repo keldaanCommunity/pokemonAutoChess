@@ -7,7 +7,7 @@ import PokemonState from "./pokemon-state"
 import { Passive } from "../types/enum/Passive"
 import { Ability } from "../types/enum/Ability"
 import { SynergyEffects } from "../models/effects"
-import { AttackType } from "../types/enum/Game"
+import { AttackType, Stat } from "../types/enum/Game"
 import { chance } from "../utils/random"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
@@ -139,9 +139,9 @@ export class MonsterKillEffect extends OnKillEffect {
     const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
     const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
     const lifeBoost = hpGain * target.hp
-    pokemon.addAttack(attackBoost, pokemon, 0, false)
-    pokemon.addAbilityPower(apBoost, pokemon, 0, false)
-    pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, attackBoost)
+    pokemon.applyStat(Stat.AP, apBoost)
+    pokemon.applyStat(Stat.HP, lifeBoost)
     this.hpBoosted += lifeBoost
     this.count += 1
   }
@@ -155,9 +155,9 @@ export class GrowGroundEffect extends PeriodicEffect {
         if (this.count > 5) {
           return
         }
-        pokemon.addDefense(this.synergyLevel * 2, pokemon, 0, false)
-        pokemon.addSpecialDefense(this.synergyLevel * 2, pokemon, 0, false)
-        pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+        pokemon.applyStat(Stat.DEF, this.synergyLevel * 2)
+        pokemon.applyStat(Stat.SPE_DEF, this.synergyLevel * 2)
+        pokemon.applyStat(Stat.ATK, this.synergyLevel)
         pokemon.transferAbility("GROUND_GROW")
         if (
           pokemon.items.has(Item.BIG_NUGGET) &&
@@ -179,7 +179,7 @@ export class ClearWingEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(2, pokemon, 0, false)
+        pokemon.applyStat(Stat.SPEED, 2)
       },
       Passive.CLEAR_WING,
       1000
@@ -306,7 +306,7 @@ export class FireHitEffect extends OnAttackEffect {
   }
 
   apply(pokemon, target, board) {
-    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+    pokemon.applyStat(Stat.ATK, this.synergyLevel)
     this.count += 1
   }
 }
@@ -336,9 +336,9 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     board.cells.forEach((ally) => {
       if (ally?.team === pokemon.team) {
         ally.status.sleep = false
-        ally.addAttack(attackBoost * scale, pokemon, 0, false)
-        ally.addSpeed(speedBoost * scale, pokemon, 0, false)
-        ally.addPP(manaBoost * scale, pokemon, 0, false)
+        ally.applyStat(Stat.ATK, attackBoost * scale)
+        ally.applyStat(Stat.SPEED, speedBoost * scale)
+        ally.applyStat(Stat.PP, manaBoost * scale)
         ally.count.soundCryCount += scale
       }
     })
@@ -349,7 +349,7 @@ export class WaterSpringEffect extends OnAbilityCastEffect {
   apply(pokemon) {
     pokemon.simulation.board.forEach((x, y, pkm) => {
       if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
-        pkm.addPP(5, pkm, 0, false)
+        pkm.applyStat(Stat.PP, 5)
         pkm.transferAbility(pkm.skill)
       }
     })

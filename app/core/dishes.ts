@@ -1,4 +1,5 @@
 import { Effect as EffectEnum } from "../types/enum/Effect"
+import { Stat } from "../types/enum/Game"
 import { Berries, Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
@@ -117,39 +118,39 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   FRUIT_JUICE: [
     new OnSpawnEffect((entity) => {
-      entity.addSpeed(50, entity, 0, false)
+      entity.applyStat(Stat.SPEED, 50)
     })
   ],
   HEARTY_STEW: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(0.3 * entity.baseHP, entity, 0, false)
+      entity.applyStat(Stat.HP, 0.3 * entity.baseHP)
     })
   ],
   HONEY: [],
   LARGE_LEEK: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
-      entity.addCritPower(100, entity, 0, false)
+      entity.applyStat(Stat.CRIT_POWER, 100)
     })
   ],
   LEEK: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
-      entity.addCritChance(50, entity, 0, false)
+      entity.applyStat(Stat.CRIT_CHANCE, 50)
     })
   ],
   LEFTOVERS: [],
   MOOMOO_MILK: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(10, entity, 0, false, true)
+      entity.applyStat(Stat.HP, 10, entity, 0, false, true)
     })
   ],
   NUTRITIOUS_EGG: [
     new OnSpawnEffect((entity) => {
       // Start the next fight with +30% base ATK, DEF, SPE_DEF and AP
-      entity.addAttack(0.3 * entity.baseAtk, entity, 0, false)
-      entity.addDefense(0.3 * entity.baseDef, entity, 0, false)
-      entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
+      entity.applyStat(Stat.ATK, 0.3 * entity.baseAtk)
+      entity.applyStat(Stat.DEF, 0.3 * entity.baseDef)
+      entity.applyStat(Stat.SPE_DEF, 0.3 * entity.baseSpeDef)
     })
   ],
   POFFIN: [
@@ -164,7 +165,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   RAGE_CANDY_BAR: [
     new OnSpawnEffect((entity) => {
-      entity.addAttack(10, entity, 0, false)
+      entity.applyStat(Stat.ATK, 10)
     })
   ],
   ROCK_SALT: [
@@ -181,7 +182,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
           case Synergy.GOURMET:
           case Synergy.BUG:
           case Synergy.AMORPHOUS:
-            entity.addMaxHP(20, entity, 0, false)
+            entity.applyStat(Stat.HP, 20)
             break
           case Synergy.NORMAL:
           case Synergy.ARTIFICIAL:
@@ -192,7 +193,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
           case Synergy.FIRE:
           case Synergy.STEEL:
           case Synergy.FOSSIL:
-            entity.addAttack(5, entity, 0, false)
+            entity.applyStat(Stat.ATK, 5)
             break
           case Synergy.FLYING:
           case Synergy.GHOST:
@@ -201,31 +202,31 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
           case Synergy.ELECTRIC:
           case Synergy.FIELD:
           case Synergy.WILD:
-            entity.addSpeed(10, entity, 0, false)
+            entity.applyStat(Stat.SPEED, 10)
             break
           case Synergy.ICE:
           case Synergy.AQUATIC:
           case Synergy.FLORA:
-            entity.addSpecialDefense(5, entity, 0, false)
+            entity.applyStat(Stat.SPE_DEF, 5)
             break
           case Synergy.GROUND:
           case Synergy.FIGHTING:
           case Synergy.ROCK:    
-            entity.addDefense(5, entity, 0, false)
+            entity.applyStat(Stat.DEF, 5)
             break
           case Synergy.PSYCHIC:
           case Synergy.HUMAN:
           case Synergy.LIGHT:
-            entity.addAbilityPower(20, entity, 0, false)
+            entity.applyStat(Stat.AP, 20)
             break
           case Synergy.FAIRY:
           case Synergy.DARK:
-            entity.addCritChance(5, entity, 0, false)
-            entity.addCritPower(10, entity, 0, false)
+            entity.applyStat(Stat.CRIT_CHANCE, 5)
+            entity.applyStat(Stat.CRIT_POWER, 10)
             break
           case Synergy.WATER:
           case Synergy.SOUND:
-            entity.addPP(20, entity, 0, false)
+            entity.applyStat(Stat.PP, 20)
             break
         }
       })
@@ -233,21 +234,21 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SMOKED_FILET: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(-10, entity, 0, false, true)
-      entity.addAttack(3, entity, 0, false, true)
-      entity.addAbilityPower(5, entity, 0, false, true)
+      entity.applyStat(Stat.HP, -10, entity, 0, false, true)
+      entity.applyStat(Stat.ATK, 3, entity, 0, false, true)
+      entity.applyStat(Stat.AP, 5, entity, 0, false, true)
     })
   ],
   SPINDA_COCKTAIL: [
     new OnSpawnEffect((entity) => {
       if (chance(0.8, entity)) {
-        entity.addAttack(5, entity, 0, false)
+        entity.applyStat(Stat.ATK, 5)
       }
       if (chance(0.8, entity)) {
-        entity.addSpeed(25, entity, 0, false)
+        entity.applyStat(Stat.SPEED, 25)
       }
       if (chance(0.8, entity)) {
-        entity.addAbilityPower(25, entity, 0, false)
+        entity.applyStat(Stat.AP, 25)
       }
       if (chance(0.8, entity)) {
         entity.addShield(50, entity, 0, false)
@@ -271,22 +272,22 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SWEET_APPLE: [
     new OnHitEffect((entity, target, board) => {
-      target.addSpecialDefense(-2, entity, 0, false)
+      target.applyStat(Stat.SPE_DEF, -2)
     })
   ],
   TART_APPLE: [
     new OnHitEffect((entity, target, board) => {
-      target.addDefense(-2, entity, 0, false)
+      target.applyStat(Stat.DEF, -2)
     })
   ],
   SWEET_HERB: [
     new OnSpawnEffect((entity) => {
-      entity.addAbilityPower(80, entity, 0, false)
+      entity.applyStat(Stat.AP, 80)
     })
   ],
   TEA: [
     new OnSpawnEffect((entity) => {
-      entity.addPP(80, entity, 0, false)
+      entity.applyStat(Stat.PP, 80)
     })
   ],
   WHIPPED_DREAM: [
@@ -303,37 +304,37 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   SWEETS: [],
   STRAWBERRY_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addAttack(3, entity, 0, false, true)
+      entity.applyStat(Stat.ATK, 3, entity, 0, false, true)
     })
   ],
   LOVE_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addDefense(3, entity, 0, false, true)
+      entity.applyStat(Stat.DEF, 3, entity, 0, false, true)
     })
   ],
   BERRY_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(10, entity, 0, false, true)
+      entity.applyStat(Stat.HP, 10, entity, 0, false, true)
     })
   ],
   CLOVER_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addLuck(10, entity, 0, false, true)
+      entity.applyStat(Stat.LUCK, 10, entity, 0, false, true)
     })
   ],
   FLOWER_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addSpeed(5, entity, 0, false, true)
+      entity.applyStat(Stat.SPEED, 5, entity, 0, false, true)
     })
   ],
   STAR_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addAbilityPower(5, entity, 0, false, true)
+      entity.applyStat(Stat.AP, 5, entity, 0, false, true)
     })
   ],
   RIBBON_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addSpecialDefense(3, entity, 0, false, true)
+      entity.applyStat(Stat.SPE_DEF, 3, entity, 0, false, true)
     })
   ]
 }

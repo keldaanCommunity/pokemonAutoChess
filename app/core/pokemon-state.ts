@@ -503,7 +503,7 @@ export default abstract class PokemonState {
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
 
       if (shouldTargetGainMana) {
-        pokemon.addPP(Math.ceil(residualDamage / 10), pokemon, 0, false)
+        pokemon.applyStat(Stat.PP, Math.ceil(residualDamage / 10))
       }
 
       if (takenDamage > 0) {
@@ -554,7 +554,7 @@ export default abstract class PokemonState {
               ? 0.6
               : 0.3
           pokemon.life = pokemon.hp * healBonus
-          pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
+          pokemon.applyStat(Stat.ATK, pokemon.baseAtk * attackBonus)
           SynergyEffects[Synergy.FOSSIL].forEach((e) =>
             pokemon.effects.delete(e)
           )
@@ -576,7 +576,7 @@ export default abstract class PokemonState {
         }
 
         if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.applyStat(Stat.ATK, 1, true)
+          pokemon.applyStat(Stat.ATK, 1, pokemon, 0, false, true)
         }
       }
 
@@ -698,7 +698,7 @@ export default abstract class PokemonState {
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
           sandstormDamage -= nbSmoothRocks
-          pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
+          pokemon.applyStat(Stat.SPEED, nbSmoothRocks)
         }
         if (pokemon.types.has(Synergy.GROUND) === false) {
           pokemon.handleDamage({
@@ -741,30 +741,30 @@ export default abstract class PokemonState {
   }
 
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
-    pokemon.addPP(10, pokemon, 0, false)
+    pokemon.applyStat(Stat.PP, 10)
     if (pokemon.effects.has(Effect.RAIN_DANCE)) {
-      pokemon.addPP(4, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 4)
     }
     if (pokemon.effects.has(Effect.DRIZZLE)) {
-      pokemon.addPP(8, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 8)
     }
     if (pokemon.effects.has(Effect.PRIMORDIAL_SEA)) {
-      pokemon.addPP(12, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 12)
     }
     if (pokemon.simulation.weather === Weather.RAIN) {
-      pokemon.addPP(3, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 3)
       const nbDampRocks = pokemon.player
         ? count(pokemon.player.items, Item.DAMP_ROCK)
         : 0
       if (nbDampRocks > 0) {
-        pokemon.addPP(2 * nbDampRocks, pokemon, 0, false)
+        pokemon.applyStat(Stat.PP, 2 * nbDampRocks)
       }
     }
 
     if (pokemon.passive === Passive.ILLUMISE_VOLBEAT) {
       board.forEach((x, y, p) => {
         if (p && p.passive === Passive.ILLUMISE_VOLBEAT && p !== pokemon) {
-          pokemon.addPP(5, pokemon, 0, false)
+          pokemon.applyStat(Stat.PP, 5)
         }
       })
     }
@@ -774,11 +774,11 @@ export default abstract class PokemonState {
       pokemon.effects.has(Effect.ETERNAL_LIGHT) ||
       pokemon.effects.has(Effect.MAX_ILLUMINATION)
     ) {
-      pokemon.addPP(8, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 8)
     }
 
     if (pokemon.items.has(Item.METRONOME)) {
-      pokemon.addPP(5, pokemon, 0, false)
+      pokemon.applyStat(Stat.PP, 5)
     }
 
     if (pokemon.items.has(Item.GREEN_ORB)) {
@@ -867,9 +867,9 @@ export default abstract class PokemonState {
         pokemon.pp = 0
         pokemon.status.tree = false
         pokemon.toMovingState()
-        pokemon.addAttack(10, pokemon, 0, false)
-        pokemon.addDefense(-5, pokemon, 0, false)
-        pokemon.addSpecialDefense(-5, pokemon, 0, false)
+        pokemon.applyStat(Stat.ATK, 10)
+        pokemon.applyStat(Stat.DEF, -5)
+        pokemon.applyStat(Stat.SPE_DEF, -5)
       }
     }
   }

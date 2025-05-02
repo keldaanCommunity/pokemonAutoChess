@@ -126,10 +126,10 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
 export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.RUSTED_SWORD]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addAttack(pokemon.baseAtk * 0.5, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, pokemon.baseAtk * 0.5)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.baseAtk * 0.5, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, -pokemon.baseAtk * 0.5)
     })
   ],
   [Item.SOUL_DEW]: [
@@ -139,7 +139,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnItemRemovedEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof SoulDewEffect) {
-          pokemon.addAbilityPower(-10 * effect.count, pokemon, 0, false)
+          pokemon.applyStat(Stat.AP, -10 * effect.count)
           pokemon.effectsSet.delete(effect)
           pokemon.count.soulDewCount = 0
           break
@@ -177,7 +177,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.FLAME_ORB]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, pokemon.baseAtk)
       pokemon.status.triggerBurn(
         60000,
         pokemon as PokemonEntity,
@@ -185,14 +185,14 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       )
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, -pokemon.baseAtk)
       pokemon.status.burnCooldown = 0
     })
   ],
 
   [Item.TOXIC_ORB]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, pokemon.baseAtk)
       pokemon.status.triggerPoison(
         60000,
         pokemon as PokemonEntity,
@@ -200,7 +200,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       )
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, -pokemon.baseAtk)
       pokemon.status.poisonCooldown = 0
     })
   ],
@@ -232,21 +232,21 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.DYNAMAX_BAND]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addMaxHP(2 * pokemon.baseHP, pokemon, 0, false)
+      pokemon.applyStat(Stat.HP, 2 * pokemon.baseHP)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addMaxHP(-2 * pokemon.baseHP, pokemon, 0, false)
+      pokemon.applyStat(Stat.HP, -2 * pokemon.baseHP)
     })
   ],
 
   [Item.GOLD_BOTTLE_CAP]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addCritChance(pokemon.player?.money ?? 0, pokemon, 0, false)
-      pokemon.addCritPower(pokemon.player?.money ?? 0, pokemon, 0, false)
+      pokemon.applyStat(Stat.CRIT_CHANCE, pokemon.player?.money ?? 0)
+      pokemon.applyStat(Stat.CRIT_POWER, pokemon.player?.money ?? 0)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addCritChance(-(pokemon.player?.money ?? 0), pokemon, 0, false)
-      pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
+      pokemon.applyStat(Stat.CRIT_CHANCE, -(pokemon.player?.money ?? 0))
+      pokemon.applyStat(Stat.CRIT_POWER, -(pokemon.player?.money ?? 0))
     }),
     new OnKillEffect((pokemon, target, board) => {
       if (pokemon.player) {
@@ -276,18 +276,16 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         0,
         false
       )
-      pokemon.addSpeed(
+      pokemon.applyStat(
+        Stat.SPEED, 
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
             2
-        ),
-        pokemon,
-        0,
-        false
+        )
       )
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAbilityPower(
+      pokemon.applyStat(Stat.AP, 
         -Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
             2
@@ -310,7 +308,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.UPGRADE]: [
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addSpeed(-5 * pokemon.count.upgradeCount, pokemon, 0, false)
+      pokemon.applyStat(Stat.SPEED, -5 * pokemon.count.upgradeCount)
       pokemon.count.upgradeCount = 0
     })
   ],
@@ -318,9 +316,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.DEFENSIVE_RIBBON]: [
     new OnItemRemovedEffect((pokemon) => {
       const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
-      pokemon.addAttack(-stacks, pokemon, 0, false)
-      pokemon.addDefense(-2 * stacks, pokemon, 0, false)
-      pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, -stacks)
+      pokemon.applyStat(Stat.DEF, -2 * stacks)
+      pokemon.applyStat(Stat.SPEED, -5 * stacks)
       pokemon.count.defensiveRibbonCount = 0
     })
   ],
@@ -338,27 +336,27 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
-      pokemon.addAbilityPower(comfey.ap, pokemon, 0, false)
-      pokemon.addAttack(comfey.atk, pokemon, 0, false)
-      pokemon.addSpeed(comfey.speed - DEFAULT_SPEED, pokemon, 0, false)
-      pokemon.addMaxHP(comfey.hp, pokemon, 0, false)
-      pokemon.addDefense(comfey.def, pokemon, 0, false)
-      pokemon.addSpecialDefense(comfey.speDef, pokemon, 0, false)
+      pokemon.applyStat(Stat.AP, comfey.ap)
+      pokemon.applyStat(Stat.ATK, comfey.atk)
+      pokemon.applyStat(Stat.SPEED, comfey.speed - DEFAULT_SPEED)
+      pokemon.applyStat(Stat.HP, comfey.hp)
+      pokemon.applyStat(Stat.DEF, comfey.def)
+      pokemon.applyStat(Stat.SPE_DEF, comfey.speDef)
     }),
     new OnItemRemovedEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
-      pokemon.addAbilityPower(-comfey.ap, pokemon, 0, false)
-      pokemon.addAttack(-comfey.atk, pokemon, 0, false)
-      pokemon.addSpeed(-(comfey.speed - DEFAULT_SPEED), pokemon, 0, false)
-      pokemon.addMaxHP(-comfey.hp, pokemon, 0, false)
-      pokemon.addDefense(-comfey.def, pokemon, 0, false)
-      pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
+      pokemon.applyStat(Stat.AP, -comfey.ap)
+      pokemon.applyStat(Stat.ATK, -comfey.atk)
+      pokemon.applyStat(Stat.SPEED, -(comfey.speed - DEFAULT_SPEED))
+      pokemon.applyStat(Stat.HP, -comfey.hp)
+      pokemon.applyStat(Stat.DEF, -comfey.def)
+      pokemon.applyStat(Stat.SPE_DEF, -comfey.speDef)
     })
   ],
 
   [Item.MAGMARIZER]: [
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.count.magmarizerCount, pokemon, 0, false)
+      pokemon.applyStat(Stat.ATK, -pokemon.count.magmarizerCount)
       pokemon.count.magmarizerCount = 0
     })
   ],
@@ -377,7 +375,7 @@ export class SoulDewEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addAbilityPower(10, pokemon, 0, false)
+        pokemon.applyStat(Stat.AP, 10)
         pokemon.count.soulDewCount++
       },
       Item.SOUL_DEW,

@@ -338,7 +338,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.triggerBurn(3000, this, attacker)
       }
       if (attacker?.passive === Passive.BERSERK) {
-        attacker.addAbilityPower(5, attacker, 0, false, false)
+        attacker.applyStat(Stat.AP, 5)
       }
 
       const damageResult = this.state.handleDamage({
@@ -409,12 +409,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
+  addPP(value: number) {
     value = Math.round(
-      value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1) *
-        (this.status.fatigue && value > 0 ? 0.5 : 1)
+      value * (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -427,57 +424,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  addCritChance(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean
-  ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-
+  addCritChance(value: number) {
     // for every 5% crit chance > 100, +10 crit power
     this.critChance += value
 
     if (this.critChance > 100) {
       const overCritChance = Math.round(this.critChance - 100)
-      this.addCritPower(overCritChance * 2, this, 0, false)
+      this.addCritPower(overCritChance * 2)
       this.critChance = 100
     }
   }
 
-  addCritPower(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean
-  ) {
-    value =
-      (value / 100) *
-      (1 + (apBoost * caster.ap) / 100) *
-      (crit ? caster.critPower : 1)
-
+  addCritPower(value: number) {
     this.critPower = min(0)(roundToNDigits(this.critPower + value, 2))
-  }
-
-  addMaxHP(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    if (this.life <= 0) return
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const update = (target: { hp: number }) => {
-      target.hp = min(1)(target.hp + value)
-    }
-    update(this)
-    this.life = clamp(this.life + value, 1, this.hp)
-    if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
   }
 
   addDodgeChance(
@@ -489,124 +448,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     this.dodge = clamp(this.dodge + value, 0, 0.9)
-  }
-
-  addAbilityPower(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
-    const update = (target: { ap: number }) => {
-      target.ap = min(-100)(target.ap + value)
-    }
-    update(this)
-    if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
-  }
-
-  addLuck(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const update = (target: { luck: number }) => {
-      target.luck = min(-100)(target.luck + value)
-    }
-    update(this)
-    if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
-  }
-
-  addDefense(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
-    const update = (target: { def: number }) => {
-      target.def = min(0)(target.def + value)
-    }
-    update(this)
-    if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
-  }
-
-  addSpecialDefense(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
-    const update = (target: { speDef: number }) => {
-      target.speDef = min(0)(target.speDef + value)
-    }
-    update(this)
-    if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
-  }
-
-  addAttack(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
-    const update = (target: { atk: number }) => {
-      target.atk = min(1)(target.atk + value)
-    }
-    update(this)
-    if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
-  }
-
-  addSpeed(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent = false
-  ) {
-    if (this.passive === Passive.MELMETAL) {
-      this.addAttack(value * 0.5, caster, apBoost, crit, permanent)
-    } else {
-      value =
-        value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1)
-      const update = (target: { speed: number }) => {
-        target.speed = clamp(target.speed + value, 0, 300)
-      }
-      update(this)
-      if (permanent && !this.isGhostOpponent) {
-        update(this.refToBoardPokemon)
-      }
-    }
   }
 
   addItem(item: Item, permanent = false) {
@@ -694,7 +535,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
   }) {
-    this.addPP(ON_ATTACK_MANA, this, 0, false)
+    this.applyStat(Stat.PP, ON_ATTACK_MANA)
 
     this.effectsSet.forEach((effect) => {
       if (effect instanceof OnAttackEffect) {
@@ -746,7 +587,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               targetY: tg.positionY
             })
             tg.handleSpecialDamage(10, board, AttackType.SPECIAL, this, false)
-            tg.addPP(-20, this, 0, false)
+            tg.applyStat(Stat.PP, -20)
             tg.count.manaBurnCount++
             previousTg = tg
           } else {
@@ -884,21 +725,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.MANA_SCARF)) {
-      this.addPP(MANA_SCARF_MANA, this, 0, false)
+      this.applyStat(Stat.PP, MANA_SCARF_MANA)
     }
 
     if (this.items.has(Item.UPGRADE)) {
-      this.addSpeed(5, this, 0, false)
+      this.applyStat(Stat.SPEED, 5)
       this.count.upgradeCount++
     }
 
     if (this.items.has(Item.MAGMARIZER)) {
-      this.addAttack(1, this, 0, false)
+      this.applyStat(Stat.ATK, 1)
       this.count.magmarizerCount++
     }
 
     if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
-      target.addPP(-15, this, 0, false)
+      target.applyStat(Stat.PP, -15)
       target.count.manaBurnCount++
     }
 
@@ -931,7 +772,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (target.effects.has(Effect.OBSTRUCT)) {
-      this.addDefense(-2, target, 0, false)
+      this.applyStat(Stat.DEF, -2)
     }
 
     if (this.passive === Passive.SHARED_VISION) {
@@ -976,7 +817,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.name === Pkm.MINIOR) {
-      this.addSpeed(5, this, 1, false)
+      this.applyStat(Stat.SPEED, 5)
     }
 
     if (this.passive === Passive.DREAM_CATCHER && target.status.sleep) {
@@ -992,7 +833,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         .slice(0, 2)
 
       alliesHit.forEach((ally) => {
-        ally.addShield(10, ally, 1, false)
+        ally.applyStat(Stat.SHIELD, 10)
         ally.simulation.room.broadcast(Transfer.ABILITY, {
           id: ally.simulation.id,
           skill: Ability.MOON_DREAM,
@@ -1191,9 +1032,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       this.count.defensiveRibbonCount++
       if (this.count.defensiveRibbonCount % 2 === 0) {
-        this.addAttack(1, this, 0, false)
-        this.addDefense(2, this, 0, false)
-        this.addSpeed(5, this, 0, false)
+        this.applyStat(Stat.ATK, 1)
+        this.applyStat(Stat.DEF, 2)
+        this.applyStat(Stat.SPEED, 5)
       }
     }
 
@@ -1367,7 +1208,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       this.name = Pkm.MIMIKYU_BUSTED
       this.passive = Passive.MIMIKYU_BUSTED
-      this.addAttack(10, this, 0, false)
+      this.applyStat(Stat.ATK, 10)
       this.status.triggerProtect(2000)
     }
 
@@ -1385,9 +1226,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (destination) this.moveTo(destination.x, destination.y, board)
       this.status.tree = true
       this.toIdleState()
-      this.addAttack(-10, this, 0, false)
-      this.addDefense(5, this, 0, false)
-      this.addSpecialDefense(5, this, 0, false)
+      this.applyStat(Stat.ATK, -10)
+      this.applyStat(Stat.DEF, 5)
+      this.applyStat(Stat.SPE_DEF, 5)
     }
 
     if (
@@ -1396,16 +1237,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.life < 0.3 * this.hp
     ) {
       this.handleHeal(0.2 * this.hp, this, 0, false)
-      this.addSpeed(-25, this, 0, false)
+      this.applyStat(Stat.SPEED, -25)
       if (this.passive === Passive.ZYGARDE10) {
-        this.addDefense(1, this, 0, false)
-        this.addSpecialDefense(1, this, 0, false)
-        this.addMaxHP(50, this, 0, false)
+        this.applyStat(Stat.DEF, 1)
+        this.applyStat(Stat.SPE_DEF, 1)
+        this.applyStat(Stat.HP, 50)
       } else {
-        this.addAttack(5, this, 0, false)
-        this.addDefense(2, this, 0, false)
-        this.addSpecialDefense(2, this, 0, false)
-        this.addMaxHP(80, this, 0, false)
+        this.applyStat(Stat.ATK, 5)
+        this.applyStat(Stat.DEF, 2)
+        this.applyStat(Stat.SPE_DEF, 2)
+        this.applyStat(Stat.HP, 80)
         this.range = min(1)(this.range - 1)
       }
 
@@ -1523,8 +1364,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.addPP(SCOPE_LENS_MANA, this, 0, false)
-      target.addPP(-SCOPE_LENS_MANA, this, 0, false)
+      this.applyStat(Stat.PP, SCOPE_LENS_MANA)
+      target.applyStat(Stat.PP, -SCOPE_LENS_MANA)
       target.count.manaBurnCount++
     }
 
@@ -1553,15 +1394,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     if (this.passive === Passive.SOUL_HEART) {
-      this.addPP(10, this, 0, false)
-      this.addAbilityPower(10, this, 0, false)
+      this.applyStat(Stat.PP, 10)
+      this.applyStat(Stat.AP, 10)
     }
 
     if (this.passive === Passive.BEAST_BOOST_ATK) {
-      this.addAttack(5, this, 0, false)
+      this.applyStat(Stat.ATK, 5)
     }
     if (this.passive === Passive.BEAST_BOOST_AP) {
-      this.addAbilityPower(10, this, 0, false)
+      this.applyStat(Stat.AP, 10)
     }
 
     board.forEach(
@@ -1569,7 +1410,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         v &&
         v.passive === Passive.MOXIE &&
         v.team === this.team &&
-        v.addAttack(target.stars, v, 0, false)
+        v.applyStat(Stat.ATK, target.stars)
     )
 
     if (
@@ -1639,12 +1480,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.GRIM_NEIGH) {
-      this.addAbilityPower(30, this, 0, false)
+      this.applyStat(Stat.AP, 30)
     }
 
     if (this.passive === Passive.GUZZLORD && this.items.has(Item.CHEF_HAT)) {
-      this.addAbilityPower(5, this, 0, false, true)
-      this.addMaxHP(10, this, 0, false, true)
+      this.applyStat(Stat.AP, 5, this, 0, false, true)
+      this.applyStat(Stat.HP, 10, this, 0, false, true)
     }
 
     if (
@@ -1690,7 +1531,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ) {
             value.count.fieldCount++
             value.handleHeal(heal, _pokemon, 0, false)
-            value.addSpeed(speedBoost, value, 0, false)
+            value.applyStat(Stat.SPEED, speedBoost)
           }
         })
       }, 16) // delay to next tick, targeting 60 ticks per second
@@ -1753,41 +1594,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  applyStat(stat: Stat, value: number, permanent = false) {
+  applyStat(
+    stat: Stat, 
+    value: number,
+    caster = this,
+    apBoost = 0,
+    crit = false,
+    base = false
+  ) {
+    value = Math.round(
+      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    )
     switch (stat) {
-      case Stat.ATK:
-        this.addAttack(value, this, 0, false, permanent)
-        break
-      case Stat.DEF:
-        this.addDefense(value, this, 0, false, permanent)
-        break
-      case Stat.SPE_DEF:
-        this.addSpecialDefense(value, this, 0, false, permanent)
-        break
-      case Stat.AP:
-        this.addAbilityPower(value, this, 0, false, permanent)
-        break
       case Stat.PP:
-        this.addPP(value, this, 0, false)
-        break
-      case Stat.SPEED:
-        this.addSpeed(value, this, 0, false, permanent)
+        this.addPP(value)
         break
       case Stat.CRIT_CHANCE:
-        this.addCritChance(value, this, 0, false)
+        this.addCritChance(value)
         break
       case Stat.CRIT_POWER:
-        this.addCritPower(value, this, 0, false)
+        this.addCritPower(value)
         break
       case Stat.SHIELD:
         this.addShield(value, this, 0, false)
         break
-      case Stat.HP:
-        this.addMaxHP(value, this, 0, false, permanent)
-        break
-      case Stat.LUCK:
-        this.addLuck(value, this, 0, false, permanent)
-        break
+      default:
+        this.refToBoardPokemon.applyStat(stat, value, this, base)
     }
   }
 
@@ -1880,25 +1712,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     const resetGroundStacks = (effect: GrowGroundEffect) => {
       const removalAmount = -effect.synergyLevel * effect.count
-      this.addDefense(removalAmount, this, 0, false)
-      this.addSpecialDefense(removalAmount, this, 0, false)
-      this.addAttack(removalAmount, this, 0, false)
+      this.applyStat(Stat.DEF, removalAmount)
+      this.applyStat(Stat.SPE_DEF, removalAmount)
+      this.applyStat(Stat.ATK, removalAmount)
       effect.count = 0
     }
 
     const resetMonsterStacks = (effect: MonsterKillEffect) => {
       const attackBoost = [3, 6, 10, 10][effect.synergyLevel] ?? 10
       const apBoost = [10, 20, 30, 30][effect.synergyLevel] ?? 30
-      this.addAttack(-effect.count * attackBoost, this, 0, false)
-      this.addAbilityPower(-effect.count * apBoost, this, 0, false)
-      this.addMaxHP(-effect.hpBoosted, this, 0, false)
+      this.applyStat(Stat.ATK, -effect.count * attackBoost)
+      this.applyStat(Stat.AP, -effect.count * apBoost)
+      this.applyStat(Stat.HP, -effect.hpBoosted)
       effect.hpBoosted = 0
       effect.count = 0
     }
 
     const resetFireStacks = (effect: FireHitEffect) => {
       const removalAmount = -effect.count * effect.synergyLevel
-      this.addAttack(removalAmount, this, 0, false)
+      this.applyStat(Stat.ATK, removalAmount)
       effect.count = 0
     }
 
@@ -1910,9 +1742,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         ([0, 5, 5][synergyLevel] ?? 0) * -this.count.soundCryCount
       const manaBoost =
         ([0, 0, 3][synergyLevel] ?? 0) * -this.count.soundCryCount
-      this.addAttack(attackBoost, this, 0, false)
-      this.addSpeed(speedBoost, this, 0, false)
-      this.addPP(manaBoost, this, 0, false)
+      this.applyStat(Stat.ATK, attackBoost)
+      this.applyStat(Stat.SPEED, speedBoost)
+      this.applyStat(Stat.PP, manaBoost)
       this.count.soundCryCount = 0
     }
 
@@ -1950,31 +1782,31 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.APICOT_BERRY:
         heal(20)
-        this.addSpecialDefense(20, this, 0, false)
+        this.applyStat(Stat.SPE_DEF, 20)
         break
       case Item.ASPEAR_BERRY:
         this.status.freeze = false
         this.status.freezeCooldown = 0
         this.effects.add(Effect.IMMUNITY_FREEZE)
         heal(20)
-        this.addSpeed(15, this, 0, false)
+        this.applyStat(Stat.SPEED, 15)
         break
       case Item.CHERI_BERRY:
         this.status.healParalysis(this)
         this.effects.add(Effect.IMMUNITY_PARALYSIS)
         heal(20)
-        this.addAttack(10, this, 0, false)
+        this.applyStat(Stat.ATK, 10)
         break
       case Item.CHESTO_BERRY:
         this.status.sleep = false
         this.status.sleepCooldown = 0
         this.effects.add(Effect.IMMUNITY_SLEEP)
         heal(20)
-        this.addAbilityPower(50, this, 0, false)
+        this.applyStat(Stat.AP, 50)
         break
       case Item.GANLON_BERRY:
         heal(20)
-        this.addDefense(20, this, 0, false)
+        this.applyStat(Stat.DEF, 20)
         break
       case Item.JABOCA_BERRY:
         heal(20)
@@ -1982,15 +1814,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.LANSAT_BERRY:
         heal(20)
-        this.addCritChance(50, this, 0, false)
+        this.applyStat(Stat.CRIT_CHANCE, 50)
         break
       case Item.LEPPA_BERRY:
         heal(20)
-        this.addPP(50, this, 0, false)
+        this.applyStat(Stat.PP, 50)
         break
       case Item.LIECHI_BERRY:
         heal(20)
-        this.addAttack(15, this, 0, false)
+        this.applyStat(Stat.ATK, 15)
         break
       case Item.LUM_BERRY:
         heal(20)
@@ -2013,11 +1845,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.confusionCooldown = 0
         this.effects.add(Effect.IMMUNITY_CONFUSION)
         heal(20)
-        this.addSpecialDefense(10, this, 0, false)
+        this.applyStat(Stat.SPE_DEF, 10)
         break
       case Item.PETAYA_BERRY:
         heal(20)
-        this.addAbilityPower(80, this, 0, false)
+        this.applyStat(Stat.AP, 80)
         break
       case Item.ROWAP_BERRY:
         heal(20)
@@ -2027,11 +1859,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.healBurn(this)
         this.effects.add(Effect.IMMUNITY_BURN)
         heal(20)
-        this.addDefense(10, this, 0, false)
+        this.applyStat(Stat.DEF, 10)
         break
       case Item.SALAC_BERRY:
         heal(20)
-        this.addSpeed(50, this, 0, false)
+        this.applyStat(Stat.SPEED, 50)
         break
       case Item.SITRUS_BERRY:
         this.effects.add(Effect.BUFF_HEAL_RECEIVED)
@@ -2053,7 +1885,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.GLUTTON) {
-      this.applyStat(Stat.HP, 10, true)
+      this.applyStat(Stat.HP, 10, this, 0, false, true)
       if (this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
@@ -2083,7 +1915,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 }
 
-export function getStrongestUnit<T extends Pokemon | PokemonEntity>(
+export function getStrongestUnit<T extends IPokemon | IPokemonEntity>(
   pokemons: T[]
 ): T {
   /*
