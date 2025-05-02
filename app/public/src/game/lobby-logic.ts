@@ -31,7 +31,6 @@ import {
   addTournamentBracket,
   changeTournamentBracket,
   removeTournamentBracket,
-  pushBotLog,
   addRoom,
   removeRoom,
   setSearchedUser,
@@ -234,10 +233,6 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.BANNED, (message) => {
             alert(message)
-          })
-
-          room.onMessage(Transfer.BOT_DATABASE_LOG, (message) => {
-            dispatch(pushBotLog(message))
           })
 
           room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {

@@ -58,16 +58,15 @@ export const discordService = {
     }
   },
 
-  announceBotCreation(bot: IBot, url: string, author: string) {
+  announceBotCreation(bot: IBot) {
     const dsEmbed = new EmbedBuilder()
-      .setTitle(`BOT ${bot.name} created by ${author}`)
-      .setURL(url)
+      .setTitle(`BOT ${bot.name} created by ${bot.author}`)
       .setAuthor({
-        name: author,
+        name: bot.author,
         iconURL: getAvatarSrc(bot.avatar)
       })
       .setDescription(
-        `A new bot has been created by ${author}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${url} ).`
+        `A new bot has been created by ${bot.author}, pending approval by a Bot Manager.`
       )
       .setThumbnail(getAvatarSrc(bot.avatar))
 
@@ -80,42 +79,19 @@ export const discordService = {
     }
   },
 
-  announceBotAddition(botData: IBot, url: string, user: IUserMetadata) {
+  announceBotApproval(botData: IBot, approver: IUserMetadata) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(
-        `BOT ${botData.name} by @${botData.author} loaded by ${user.displayName}`
+        `BOT ${botData.name} by @${botData.author} approved by ${approver.displayName}`
       )
-      .setURL(url)
       .setAuthor({
-        name: user.displayName,
-        iconURL: getAvatarSrc(user.avatar)
+        name: approver.displayName,
+        iconURL: getAvatarSrc(approver.avatar)
       })
       .setDescription(
-        `BOT ${botData.name} by @${botData.author} (url: ${url} ) loaded by ${user.displayName}`
+        `BOT ${botData.name} by @${botData.author} approved by ${approver.displayName}`
       )
       .setThumbnail(getAvatarSrc(botData.avatar))
-    try {
-      discordWebhook?.send({
-        embeds: [dsEmbed]
-      })
-    } catch (error) {
-      logger.error(error)
-    }
-  },
-
-  announceBotDeletion(botData: IBot, user: IUserMetadata) {
-    const dsEmbed = new EmbedBuilder()
-      .setTitle(
-        `BOT ${botData?.name} by @${botData?.author} deleted by ${user.displayName}`
-      )
-      .setAuthor({
-        name: user.displayName,
-        iconURL: getAvatarSrc(user.avatar)
-      })
-      .setDescription(
-        `BOT ${botData?.name} by @${botData?.author} (id: ${botData?.id} ) deleted by ${user.displayName}`
-      )
-      .setThumbnail(getAvatarSrc(botData?.avatar ? botData?.avatar : ""))
     try {
       discordWebhook?.send({
         embeds: [dsEmbed]

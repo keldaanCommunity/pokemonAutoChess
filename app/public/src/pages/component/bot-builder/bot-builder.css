@@ -72,8 +72,12 @@
   background-repeat: no-repeat;
 }
 
+.bot-export-modal {
+  max-width: 400px;
+}
+
 .bot-export-modal .error,
 .bot-import-modal .error {
-  background-color: red;
+  color: red;
   font-weight: bold;
 }

@@ -729,20 +729,20 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       } else {
         // pick a random bot per difficulty
         const difficulty = type
-        let d: FilterQuery<IBot> | undefined
+        let elo: FilterQuery<IBot> | undefined
 
         switch (difficulty) {
           case BotDifficulty.EASY:
-            d = { $lt: 800 }
+            elo = { $lt: 800 }
             break
           case BotDifficulty.MEDIUM:
-            d = { $gte: 800, $lt: 1100 }
+            elo = { $gte: 800, $lt: 1100 }
             break
           case BotDifficulty.HARD:
-            d = { $gte: 1100, $lt: 1400 }
+            elo = { $gte: 1100, $lt: 1400 }
             break
           case BotDifficulty.EXTREME:
-            d = { $gte: 1400 }
+            elo = { $gte: 1400 }
             break
         }
 
@@ -753,12 +753,10 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           }
         })
 
-        const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
-          "avatar",
-          "elo",
-          "name",
-          "id"
-        ])
+        const bots = await BotV2.find(
+          { id: { $nin: existingBots }, elo, approved: true },
+          ["avatar", "elo", "name", "id"]
+        )
 
         if (bots.length <= 0) {
           this.room.state.addMessage({

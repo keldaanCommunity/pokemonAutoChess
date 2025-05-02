@@ -22,16 +22,21 @@ import { GameRecord } from "./models/colyseus-models/game-record"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
+import UserMetadata from "./models/mongo-models/user-metadata"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
-import { getBotData, getBotsList } from "./services/bots"
-import { discordService } from "./services/discord"
+import {
+  addBotToDatabase,
+  approveBot,
+  deleteBotFromDatabase,
+  getBotData,
+  getBotsList
+} from "./services/bots"
 import { getLeaderboard } from "./services/leaderboard"
 import { getMetadata, getMetaItems, getMetaPokemons } from "./services/meta"
-import { pastebinService } from "./services/pastebin"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
   MAX_POOL_CONNECTIONS_SIZE,
@@ -42,6 +47,9 @@ import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
 import chatV2 from "./models/mongo-models/chat-v2"
+import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import { Role } from "./types"
+import { BotV2 } from "./models/mongo-models/bot-v2"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -327,38 +335,98 @@ export default config({
     })
 
     app.get("/bots", async (req, res) => {
-      const botsData =
-        await getBotsList(
-          //breaks build {
-          //   withSteps: req.query.withSteps === "true"
-          // }
-        )
+      const botsData = await getBotsList(
+        req.query.approved === "true"
+          ? true
+          : req.query.approved === "false"
+            ? false
+            : undefined
+      )
       res.send(botsData)
-    })
-
-    app.post("/bots", async (req, res) => {
-      // get json from body
-      try {
-        const { bot, author } = req.body
-        const pastebinUrl = (await pastebinService.createPaste(
-          `${author} has uploaded BOT ${bot.name}`,
-          JSON.stringify(bot, null, 2)
-        )) as string
-
-        logger.debug(
-          `bot ${bot.name} created by ${author} with pastebin url ${pastebinUrl}`
-        )
-
-        discordService.announceBotCreation(bot, pastebinUrl, author)
-        res.status(201).send(pastebinUrl)
-      } catch (error) {
-        logger.error(error)
-        res.status(500).send("Internal server error")
-      }
     })
 
     app.get("/bots/:id", async (req, res) => {
       res.send(await getBotData(req.params.id))
+    })
+
+    const authUser = async (req, res): Promise<UserRecord | null> => {
+      let user
+      try {
+        //get header Authorization
+        const authHeader = req.headers.authorization
+        if (!authHeader) throw new Error("Unauthorized")
+        const token = authHeader.split(" ")[1]
+        if (!token) throw new Error("Unauthorized")
+        // get user from firebase
+        const decodedToken = await admin.auth().verifyIdToken(token)
+        user = await admin.auth().getUser(decodedToken.uid)
+        if (!user || !user.displayName) throw new Error("Unauthorized")
+        return user
+      } catch (error) {
+        res.status(401).send(error)
+        return null
+      }
+    }
+
+    app.post("/bots", async (req, res) => {
+      const user = await authUser(req, res)
+      if (!user) return
+      try {
+        const bot = req.body
+        bot.author = user.displayName
+        const botAdded = addBotToDatabase(bot)
+        res.status(201).send(botAdded)
+      } catch (error) {
+        logger.error("Error submitting bot", error)
+        res.status(500).send("Error submitting bot")
+      }
+    })
+
+    app.delete("/bots/:id", async (req, res) => {
+      const userRecord = await authUser(req, res)
+      if (!userRecord) return
+      const user = await UserMetadata.findOne({ uid: userRecord.uid })
+      if (
+        !user ||
+        (user.role !== Role.BOT_MANAGER && user.role !== Role.ADMIN)
+      ) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+
+      try {
+        const deleteResult = await deleteBotFromDatabase(req.params.id, user)
+        res.status(deleteResult.deletedCount > 0 ? 200 : 404).send()
+      } catch (error) {
+        logger.error("Error deleting bot", error)
+        res.status(500).send("Error deleting bot")
+      }
+    })
+
+    app.post("/bots/:id/approve", async (req, res) => {
+      const userRecord = await authUser(req, res)
+      if (!userRecord) return
+      const user = await UserMetadata.findOne({ uid: userRecord.uid })
+      if (
+        !user ||
+        (user.role !== Role.BOT_MANAGER && user.role !== Role.ADMIN)
+      ) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+
+      try {
+        const approved = req.body.approved
+        const updateResult = await approveBot(req.params.id, approved, user)
+        if (updateResult.modifiedCount === 0) {
+          res.status(404).send("Bot not found")
+          return
+        }
+        res.status(200).send()
+      } catch (error) {
+        logger.error("Error approving bot", error)
+        res.status(500).send("Error approving bot")
+      }
     })
 
     app.get("/status", async (req, res) => {

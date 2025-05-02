@@ -24,7 +24,6 @@ import { Language } from "../types/enum/Language"
 import { ITournament } from "../types/interfaces/Tournament"
 import { logger } from "../utils/logger"
 import {
-  AddBotCommand,
   BanUserCommand,
   BuyBoosterCommand,
   BuyEmotionCommand,
@@ -33,7 +32,6 @@ import {
   ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
   CreateTournamentLobbiesCommand,
-  DeleteBotCommand,
   EndTournamentMatchCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
@@ -60,7 +58,6 @@ import {
 import LobbyState from "./states/lobby-state"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
-  bots: Map<string, IBot> = new Map<string, IBot>()
   unsubscribeLobby: (() => void) | undefined
   rooms: IRoomCache[] | undefined
   dispatcher: Dispatcher<this>
@@ -138,14 +135,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
 
     this.rooms = await matchMaker.query({ private: false, unlisted: false })
-
-    this.onMessage(Transfer.DELETE_BOT_DATABASE, async (client, message) => {
-      this.dispatcher.dispatch(new DeleteBotCommand(), { client, message })
-    })
-
-    this.onMessage(Transfer.ADD_BOT_DATABASE, async (client, url) => {
-      this.dispatcher.dispatch(new AddBotCommand(), { client, url })
-    })
 
     this.onMessage(
       Transfer.REQUEST_ROOM,
