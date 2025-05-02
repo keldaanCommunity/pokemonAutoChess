@@ -196,6 +196,12 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base = false
   ) {
+    // temporary implementation to handle permanent stat applications
+    if (base) {
+      this.applyStat(stat, value)
+      return
+    }
+
     switch (stat) {
       case Stat.ATK:
         this.addAttack(value, context, base)
@@ -218,11 +224,6 @@ export class Pokemon extends Schema implements IPokemon {
       case Stat.LUCK:
         this.addLuck(value, context, base)
         break
-    }
-
-    if (base && context == this) {
-      // recalculate items
-      // recalculate synergy stats
     }
   }
 
