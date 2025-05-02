@@ -23,7 +23,6 @@ import {
 } from "../../../types/interfaces/LeaderboardInfo"
 
 export interface IUserLobbyState {
-  botLogDatabase: string[]
   messages: IChatV2[]
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardBotInfo[]
@@ -43,7 +42,6 @@ export interface IUserLobbyState {
 
 const initialState: IUserLobbyState = {
   language: Language.en,
-  botLogDatabase: [],
   suggestions: [],
   boosterContent: [],
   pokemonCollection: [],
@@ -64,9 +62,6 @@ export const lobbySlice = createSlice({
   name: "lobby",
   initialState: initialState,
   reducers: {
-    pushBotLog: (state, action: PayloadAction<string>) => {
-      state.botLogDatabase.push(action.payload)
-    },
     pushMessage: (state, action: PayloadAction<Message>) => {
       state.messages.push(structuredClone(action.payload))
     },
@@ -258,7 +253,6 @@ export const {
   setSearchedUser,
   resetLobby,
   setSuggestions,
-  pushBotLog,
   addTournament,
   removeTournament,
   changeTournament,

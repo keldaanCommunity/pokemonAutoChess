@@ -1,3 +1,4 @@
+import { app } from "firebase-admin"
 import { IBot, IDetailledPokemon, IStep } from "../models/mongo-models/bot-v2"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"
@@ -18,7 +19,8 @@ export const DEFAULT_BOT_STATE = {
   author: "",
   elo: 1200,
   name: Pkm.DITTO,
-  id: ""
+  id: "",
+  approved: false
 }
 
 export const POWER_SCORE_BY_CATEGORY = {

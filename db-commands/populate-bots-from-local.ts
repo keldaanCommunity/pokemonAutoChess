@@ -1,7 +1,6 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import { nanoid } from "nanoid"
-import { BotV2, IBot } from "../app/models/mongo-models/bot-v2"
+import { IBot } from "../app/models/mongo-models/bot-v2"
 import { logger } from "../app/utils/logger"
 import { readFile } from "fs/promises"
 import { addBots } from "./support/populate-bot"

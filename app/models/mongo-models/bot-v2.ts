@@ -25,6 +25,7 @@ export interface IBot {
   steps: IStep[]
   name: string
   id: string
+  approved: boolean
 }
 
 export type IBotLight = Omit<IBot, "steps"> & { valid: boolean }
@@ -78,6 +79,10 @@ const bot = new Schema(
       type: String,
       required: true,
       default: nanoid()
+    },
+    approved: {
+      type: Boolean,
+      default: false
     },
     name: {
       type: String

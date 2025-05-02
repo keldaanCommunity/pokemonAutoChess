@@ -11,7 +11,6 @@ import {
   TournamentBracketSchema,
   TournamentPlayerSchema
 } from "../../models/colyseus-models/tournament"
-import { BotV2 } from "../../models/mongo-models/bot-v2"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata, {
   IPokemonCollectionItem,
@@ -20,13 +19,7 @@ import UserMetadata, {
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import {
-  addBotToDatabase,
-  deleteBotFromDatabase,
-  getBotData
-} from "../../services/bots"
 import { discordService } from "../../services/discord"
-import { pastebinService } from "../../services/pastebin"
 import {
   CDN_PORTRAIT_URL,
   Emotion,
@@ -907,109 +900,6 @@ export class SelectLanguageCommand extends Command<
       }
     } catch (error) {
       logger.error(error)
-    }
-  }
-}
-
-export class AddBotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; url: string }
-> {
-  async execute({ client, url }: { client: Client; url: string }) {
-    try {
-      const user = this.room.users.get(client.auth.uid)
-      if (
-        user &&
-        (user.role === Role.ADMIN || user.role === Role.BOT_MANAGER)
-      ) {
-        const id = url.slice(21)
-        client.send(Transfer.BOT_DATABASE_LOG, `retrieving id : ${id} ...`)
-        client.send(Transfer.BOT_DATABASE_LOG, "retrieving data ...")
-        const data = await pastebinService.getPaste(id, false)
-        if (data) {
-          client.send(Transfer.BOT_DATABASE_LOG, "parsing JSON data ...")
-          const json = JSON.parse(data)
-          const resultDelete = await BotV2.deleteMany({
-            avatar: json.avatar,
-            author: json.author
-          })
-          const keys = new Array<string>()
-          this.room.bots.forEach((b) => {
-            if (b.avatar === json.avatar && b.author === json.author) {
-              keys.push(b.id)
-            }
-          })
-          keys.forEach((k) => {
-            this.room.bots.delete(k)
-          })
-          client.send(
-            Transfer.BOT_DATABASE_LOG,
-            JSON.stringify(resultDelete, null, 2)
-          )
-          client.send(
-            Transfer.BOT_DATABASE_LOG,
-            `creating Bot ${json.avatar} by ${json.author}...`
-          )
-
-          const resultCreate = await addBotToDatabase({
-            name: json.name,
-            avatar: json.avatar,
-            elo: json.elo ? json.elo : 1200,
-            author: json.author,
-            steps: json.steps
-          })
-
-          discordService.announceBotAddition(resultCreate, url, user)
-
-          this.room.bots.set(resultCreate.id, resultCreate)
-        } else {
-          client.send(
-            Transfer.BOT_DATABASE_LOG,
-            `no pastebin found with given url ${url}`
-          )
-        }
-      }
-    } catch (error) {
-      logger.error(error)
-      client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
-    }
-  }
-}
-
-export class DeleteBotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; message: string }
-> {
-  async execute({ client, message }: { client: Client; message: string }) {
-    try {
-      const user = this.room.users.get(client.auth.uid)
-      if (
-        user &&
-        (user.role === Role.ADMIN || user.role === Role.BOT_MANAGER)
-      ) {
-        const id = message
-        const botData = await getBotData(id)
-        if (!botData) {
-          client.send(Transfer.BOT_DATABASE_LOG, `Bot not found:${id}`)
-          return
-        }
-        client.send(
-          Transfer.BOT_DATABASE_LOG,
-          `deleting bot ${botData?.name}by @${botData?.author} id ${id}`
-        )
-        const resultDelete = await deleteBotFromDatabase(id)
-        client.send(
-          Transfer.BOT_DATABASE_LOG,
-          JSON.stringify(resultDelete, null, 2)
-        )
-        client.send(Transfer.DELETE_BOT_DATABASE, id)
-        discordService.announceBotDeletion(botData, user)
-
-        this.room.bots.delete(id)
-      }
-    } catch (error) {
-      logger.error(error)
-      client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
     }
   }
 }
