@@ -105,7 +105,7 @@ function BotsList(props: { approved?: boolean }) {
           <tbody>
             {bots.filter(b => props.approved === undefined || b.approved === props.approved).map((b) => (
               <tr key={b.id}>
-                <td style={{ paddingLeft: 0 }}>
+                <td>
                   <PokemonPortrait avatar={b.avatar} />
                 </td>
                 <td>{t(`pkm.${b.name}`)}</td>
