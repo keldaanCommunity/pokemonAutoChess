@@ -4,6 +4,7 @@ import { getLevelUpCost } from "../../../../../models/colyseus-models/experience
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
+import { MAX_LEVEL } from "../../../../../types/Config"
 
 export default function GameExperience() {
   const { t } = useTranslation()
@@ -12,7 +13,7 @@ export default function GameExperience() {
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
-  const isLevelMax = experienceManager.level >= 9
+  const isLevelMax = experienceManager.level >= MAX_LEVEL
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const levelUpCost = getLevelUpCost(specialGameRule)
 

@@ -1,6 +1,6 @@
 import { Emotion } from "."
 import { EloRank } from "./enum/EloRank"
-import { AttackType, Rarity, Stat } from "./enum/Game"
+import { AttackType, Rarity } from "./enum/Game"
 import { FishingRod, Item } from "./enum/Item"
 import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
@@ -13,6 +13,7 @@ export const ARMOR_FACTOR = 0.05
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 export const BOARD_SIDE_HEIGHT = 4 // 0 = bench
+export const MAX_LEVEL = 9
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,
