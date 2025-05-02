@@ -61,7 +61,8 @@
 
 # Misc
 
-- New title: Picnicker: Make a picnic with 9 Pokémon
-- Meta report items are sorted by elo tiers (same as pokémons)
+- Items meta report can now be sorted by elo rank tiers, like Pokémons report
+- Smeargle's Scribble can no longer be added in custom lobbies and is restricted to its own game mode
 - Shiny hunter scribble no longer gets shiny PvE encounters at stages where there's no shiny encounter possible in base rules
 - Bot manager submission process has been reworked to no longer rely on Pastebin service
+- New title: Picnicker: Make a picnic with 9 Pokémon

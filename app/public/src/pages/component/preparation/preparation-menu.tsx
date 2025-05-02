@@ -245,41 +245,24 @@ export default function PreparationMenu() {
     )
 
   const scribbleRule = gameMode === GameMode.CUSTOM_LOBBY &&
-    isOwner &&
+    isAdmin &&
     noElo && (
-      <>
-        <button
-          className="bubbly blue"
-          onClick={() =>
-            changeSpecialRule(
-              specialGameRule
-                ? "none"
-                : pickRandomIn(Object.values(SpecialGameRule))
-            )
+      <label>
+        {t("smeargle_scribble")}
+        <select
+          onChange={(e) =>
+            changeSpecialRule(e.target.value as SpecialGameRule)
           }
-          title={t("smeargle_scribble_hint")}
+          value={specialGameRule ?? "none"}
         >
-          {specialGameRule ? t("disable_scribble") : t("enable_scribble")}
-        </button>
-        {isAdmin && (
-          <label>
-            {t("smeargle_scribble")}
-            <select
-              onChange={(e) =>
-                changeSpecialRule(e.target.value as SpecialGameRule)
-              }
-              value={specialGameRule ?? "none"}
-            >
-              <option value="none">{t("no_rule")}</option>
-              {Object.values(SpecialGameRule).map((rule) => (
-                <option key={rule} value={rule}>
-                  {t("scribble." + rule)}
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
-      </>
+          <option value="none">{t("no_rule")}</option>
+          {Object.values(SpecialGameRule).map((rule) => (
+            <option key={rule} value={rule}>
+              {t("scribble." + rule)}
+            </option>
+          ))}
+        </select>
+      </label>
     )
 
   const roomNameInput = gameMode === GameMode.CUSTOM_LOBBY &&

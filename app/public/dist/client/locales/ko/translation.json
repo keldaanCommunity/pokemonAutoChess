@@ -3093,8 +3093,6 @@
 	"smeargle_scribble_description": "재미를 위한 플레이, Elo 비활성화 !\n이 게임에는 새로운 특별한 룰이 적용됩니다.",
 	"smeargle_scribble_hint": "매 게임마다 루브도가 게임내내 무작위 경기규칙을 적용시킵니다.",
 	"no_rule": "특별한 규칙 없음",
-	"enable_scribble": "루브도의 낙서 활성화",
-	"disable_scribble": "루브도의 낙서 비활성화",
 	"quick_play": "자동매칭",
 	"quick_play_description": "클래식한 PAC 경험 !\n8 플레이어, Elo 활성화, 누구나 참여 가능.",
 	"quick_play_hint": "참가자 8명이 모이면 자동으로 시작합니다.",

@@ -2805,8 +2805,6 @@
 	"smeargle_scribble_description": "Juega por diversión, sin ganar/perder Elo!                                                                                                                                                                              Una nueva regla especial es añadida para esta partida.",
 	"smeargle_scribble_hint": "Smeargle dibuja una nueva regla aleatoria que se aplica durante todo el juego.",
 	"no_rule": "No hay regla especial.",
-	"enable_scribble": "Activar Bocetos de Smeargle",
-	"disable_scribble": "Desactivar Bocetos de Smeargle",
 	"quick_play": "Partida Rápida",
 	"quick_play_description": "La experiencia clásica de PAC!                                                                                                                                                                                                 8 jugadores, Elo activado, abierta para todos.",
 	"quick_play_hint": "El juego comenzará automáticamente cuando se unan 8 jugadores.",

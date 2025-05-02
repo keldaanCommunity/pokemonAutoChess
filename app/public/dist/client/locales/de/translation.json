@@ -3081,8 +3081,6 @@
 	"smeargle_scribble_description": "Freundschaftspiel, kein Elo-Gewinn/-Verlust!\nFür dieses Spiel wurde eine neue Sonderregel hinzugefügt.",
 	"smeargle_scribble_hint": "Farbeagle kritzelt eine neue Zufallsregel, die während des gesamten Spiels gilt.",
 	"no_rule": "Keine Spezialregel",
-	"enable_scribble": "Aktiviere Farbeagles Kritzeln (Spezialmodus)",
-	"disable_scribble": "Deaktiviere Farbeagles Kritzeln (Spezialmodus)",
 	"quick_play": "Treten Sie einer Lobby bei",
 	"quick_play_description": "Das klassische PAC-Erlebnis!\n8 Spieler, Elo aktiviert, offen für jeden.",
 	"quick_play_hint": "Das Spiel wird automatisch gestartet, wenn sich 8 Spieler in der Lobby befinden.",

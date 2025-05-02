@@ -3096,8 +3096,6 @@
 	"smeargle_scribble_description": "娱乐模式，不影响Elo分数！\n本场游戏中会加入一条特殊规则。",
 	"smeargle_scribble_hint": "图图犬会随机涂鸦一条全局有效的新规则。",
 	"no_rule": "无特殊规则",
-	"enable_scribble": "开启图图犬涂鸦",
-	"disable_scribble": "关闭图图犬涂鸦",
 	"quick_play": "快速游戏",
 	"quick_play_description": "经典宝可梦自走棋！\n8人游戏，开启Elo，所有人均可参加",
 	"quick_play_hint": "当参加者满8人时，游戏会自动开始",

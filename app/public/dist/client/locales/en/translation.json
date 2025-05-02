@@ -3098,8 +3098,6 @@
 	"smeargle_scribble_description": "Play for fun, no Elo gain/loss !\nA new special rule is added for this game.",
 	"smeargle_scribble_hint": "Smeargle scribbles a new random rule applied during the entire game.",
 	"no_rule": "No special rule",
-	"enable_scribble": "Enable Smeargle's Scribble",
-	"disable_scribble": "Disable Smeargle's Scribble",
 	"quick_play": "Quick play",
 	"quick_play_description": "The classic PAC Experience !\n8 players, Elo enabled, open to everyone.",
 	"quick_play_hint": "The game will automatically start when 8 players joined",

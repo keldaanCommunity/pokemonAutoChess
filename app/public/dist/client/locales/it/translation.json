@@ -2711,8 +2711,6 @@
 	"smeargle_scribble_description": "Gioca per divertirti, non perdi/guadagni Elo!\nUna nuova regola speciale viene aggiunta alla partita.",
 	"smeargle_scribble_hint": "Smeargle scarabocchia una nuova regola casuale che viene applicata per tutta la partita",
 	"no_rule": "Nessuna regola speciale",
-	"enable_scribble": "Abilità Scarabocchi di Smeargle",
-	"disable_scribble": "Disabilità Scarabocchi di Smeargle",
 	"quick_play": "Unisciti ad una lobby",
 	"quick_play_description": "La classica esperienza di PAC!\n8 giocatori, sistema Elo attivo, aperta a tutti.",
 	"quick_play_hint": "La partita inizierà automaticamente quando 8 giocatori si uniranno",

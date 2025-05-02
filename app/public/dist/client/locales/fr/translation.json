@@ -3082,8 +3082,6 @@
 	"smeargle_scribble_description": "Jouez pour le fun, pas de gain/perte d'Elo !\nUne nouvelle règle spéciale est ajoutée à la partie.",
 	"smeargle_scribble_hint": "Queulorior gribouille une nouvelle règle aléatoire appliquée pendant toute la partie",
 	"no_rule": "Aucune règle spéciale",
-	"enable_scribble": "Activer la Gribouille de Queulorior",
-	"disable_scribble": "Désactiver la Gribouille de Queulorior",
 	"quick_play": "Partie rapide",
 	"quick_play_description": "L'expérience PAC classique !\n8 joueurs, Elo activé, ouvert à tous",
 	"quick_play_hint": "La partie démarrera automatiquement quand 8 joueurs auront rejoint",
