@@ -121,6 +121,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   baseSpeDef: number
   baseRange: number
   baseHP: number
+  baseAP: number
+  baseSpeed: number
+  baseLuck: number
   dodge: number
   physicalDamage: number
   specialDamage: number
@@ -170,6 +173,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.baseSpeDef = pokemon.speDef
     this.baseRange = pokemon.range
     this.baseHP = pokemon.hp
+    this.baseAP = pokemon.baseAP
+    this.baseSpeed = pokemon.baseSpeed
+    this.baseHP = pokemon.baseHP
+    this.baseLuck = pokemon.baseLuck
     this.atk = pokemon.atk
     this.def = pokemon.def
     this.speDef = pokemon.speDef
@@ -187,7 +194,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
-    this.luck = pokemon.permanentLuck
+    this.luck = pokemon.baseLuck
     this.dodge = 0
     this.physicalDamage = 0
     this.specialDamage = 0

@@ -103,7 +103,13 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
-  permanentLuck: number = 0
+  baseAtk: number
+  baseDef: number
+  baseSpeDef: number
+  baseAP: number
+  baseSpeed: number
+  baseHP: number
+  baseLuck: number
   deathCount: number = 0
   evolutions: Pkm[] = []
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
@@ -125,6 +131,13 @@ export class Pokemon extends Schema implements IPokemon {
     this.index = PkmIndex[name]
     this.shiny = shiny
     this.emotion = emotion
+    this.baseAtk = this.atk
+    this.baseDef = this.def
+    this.baseSpeDef = this.speDef
+    this.baseAP = this.ap
+    this.baseSpeed = this.speed
+    this.baseHP = this.hp
+    this.baseLuck = this.luck
   }
 
   get final(): boolean {
@@ -166,7 +179,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get luck(): number {
-    let luck = this.permanentLuck
+    let luck = this.baseLuck
     this.items.forEach((item) => {
       luck += ItemStats[item]?.[Stat.LUCK] ?? 0
     })
@@ -174,7 +187,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   set luck(value: number) {
-    this.permanentLuck = value
+    this.baseLuck = value
   }
 
   applyStat(
@@ -218,7 +231,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseAtk' : 'atk'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseAtk' : 'atk'
     context[property] = min(1)(context[property] + value)
   }
 
@@ -227,7 +240,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseDef' : 'def'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseDef' : 'def'
     context[property] = min(0)(context[property] + value)
   }
   
@@ -236,7 +249,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseSpeDef' : 'speDef'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseSpeDef' : 'speDef'
     context[property] = min(0)(context[property] + value)
   }
 
@@ -245,7 +258,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseAP' : 'ap'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseAP' : 'ap'
     context[property] = min(-100)(context[property] + value)
   }
   
@@ -254,7 +267,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseSpeed' : 'speed'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseSpeed' : 'speed'
     context[property] = clamp(context[property] + value, 0, 300)
   }
   
@@ -263,7 +276,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseHP' : 'hp'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseHP' : 'hp'
     context[property] = min(1)(context[property] + value)
   }
 
@@ -272,7 +285,7 @@ export class Pokemon extends Schema implements IPokemon {
     context: Pokemon | IPokemonEntity = this,
     base: boolean
   ) {
-    const property = base ? 'baseLuck' : 'luck'
+    const property: keyof Pokemon & keyof IPokemonEntity = base ? 'baseLuck' : 'luck'
     context[property] = min(-100)(context[property] + value)
   }
 

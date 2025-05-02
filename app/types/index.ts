@@ -419,7 +419,10 @@ export interface IPokemon {
   stars: number
   maxPP: number
   luck: number
-  permanentLuck: number
+  baseLuck: number
+  baseAP: number
+  baseSpeed: number
+  baseHP: number
   ap: number
   skill: Ability
   passive: Passive
@@ -568,6 +571,10 @@ export interface IPokemonEntity {
   baseAtk: number
   baseDef: number
   baseSpeDef: number
+  baseAP: number
+  baseSpeed: number
+  baseHP: number
+  baseLuck: number
   attackType: AttackType
   life: number
   shield: number
