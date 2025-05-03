@@ -38,11 +38,12 @@
 - Buff Lotad line: PP 120 → 100
 - Buff Dynamic Punch (Makuhita): damage 20/40/80 → 40/80/160, confusion duration 1.5/3/6 → 2/4/6 seconds
 - Purrloin line is now Uncommon ; adjusted Fake out damage: 50/100/150 → 40/80/150
+- Change Decorate (Alcremy): now targets the **strongest** nearest ally instead of a random ally among the nearest ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 
 # Changes to Synergies
 
 - Wild Pokemon can now be found in initial shop at stage 0
-- Gourmet dishes are now distributed to the strongest adjacent Pokémons instead of a random one
+- Gourmet dishes are now distributed to the strongest adjacent allies instead of random among the adjacent ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 
 # Changes to Items
 

@@ -12040,35 +12040,36 @@ export class DecorateStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const atkBoost = [1, 2, 3][pokemon.stars - 1] ?? 8
     const apBoost = [10, 20, 30][pokemon.stars - 1] ?? 50
-    const nearestAlly = state.getNearestAlly(pokemon, board)
-    if (nearestAlly) {
+    const nearestAllies = state.getNearestAllies(pokemon, board)
+    const strongestNearestAlly = getStrongestUnit(nearestAllies)
+    if (strongestNearestAlly) {
       broadcastAbility(pokemon, {
-        targetX: nearestAlly.positionX,
-        targetY: nearestAlly.positionY
+        targetX: strongestNearestAlly.positionX,
+        targetY: strongestNearestAlly.positionY
       })
-      nearestAlly.addAttack(atkBoost, pokemon, 1, crit)
-      nearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
+      strongestNearestAlly.addAttack(atkBoost, pokemon, 1, crit)
+      strongestNearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
 
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
-        nearestAlly.addShield(60, pokemon, 1, crit)
+        strongestNearestAlly.addShield(60, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
-        nearestAlly.addSpeed(30, pokemon, 1, crit)
+        strongestNearestAlly.addSpeed(30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
-        nearestAlly.addMaxHP(40, pokemon, 1, crit)
+        strongestNearestAlly.addMaxHP(40, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
-        nearestAlly.handleHeal(40, pokemon, 0, crit)
-        nearestAlly.addSpecialDefense(15, pokemon, 0, crit)
+        strongestNearestAlly.handleHeal(40, pokemon, 0, crit)
+        strongestNearestAlly.addSpecialDefense(15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
-        nearestAlly.addCritChance(40, pokemon, 0, crit)
+        strongestNearestAlly.addCritChance(40, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
-        nearestAlly.handleHeal(40, pokemon, 1, crit)
-        nearestAlly.addDefense(15, pokemon, 0, crit)
-      } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
-        nearestAlly.addAttack(8, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
-        nearestAlly.addCritPower(80, pokemon, 1, crit)
+        strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
+        strongestNearestAlly.addDefense(15, pokemon, 0, crit)
+      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
+        strongestNearestAlly.addAttack(8, pokemon, 1, crit)
+      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
+        strongestNearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        nearestAlly.addAbilityPower(60, pokemon, 1, crit)
+        strongestNearestAlly.addAbilityPower(60, pokemon, 1, crit)
       }
     }
   }
@@ -12180,7 +12181,7 @@ export class FilletAwayStrategy extends AbilityStrategy {
     // lose 50% of max HP and gain 10 attack and 20 speed
     const lostMaxHP = Math.floor(pokemon.hp * 0.5)
     pokemon.addMaxHP(-lostMaxHP, pokemon, 0, false)
-    
+
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
     pokemon.status.triggerProtect(400)
