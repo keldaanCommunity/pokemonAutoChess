@@ -2757,7 +2757,7 @@
 	"synergy_description": {
 		"NORMAL": "NORMAL Pokémon and their adjacent allies gain SHIELD when combat starts.",
 		"GRASS": "GRASS Pokémon heal and produce berries over time.",
-		"FIRE": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every hit.",
+		"FIRE": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every attack.",
 		"WATER": "WATER Pokémon generate more PP and can be fished with a rod.",
 		"ELECTRIC": "ELECTRIC Pokémon basic attacks can trigger two additional attacks.",
 		"FIGHTING": "FIGHTING Pokémon block a flat amount of damage on every hit received. After 10 hits blocked, throw the target away, destroying their SHIELD.",
