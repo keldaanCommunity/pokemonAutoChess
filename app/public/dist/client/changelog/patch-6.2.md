@@ -61,6 +61,7 @@
 # Bugfix
 
 - When 3 Pokémon copies merge to evolve, if two copies hold an item component, one of the component will go to item bench instead of the evolved Pokémon holding two components.
+- Units with rare candy are now properly evaluated when looking for the strongest unit of a group
 
 # Misc
 
