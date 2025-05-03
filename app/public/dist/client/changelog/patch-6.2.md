@@ -35,6 +35,7 @@
 - Buff Oshawott line: PP 120 → 100
 - Buff Lotad line: PP 120 → 100
 - Buff Dynamic Punch (Makuhita): damage 20/40/80 → 40/80/160, confusion duration 1.5/3/6 → 2/4/6 seconds
+- Rework Zygarde: Zygarde 50% range 2 → 3 ; Zygarde 100% range 1 → 2 PP 120 → 100 ; Zygarde now evolves into 100% form after getting max stacks of ground (15 seconds) ; Rework Core Enforcer: now hits in an area of effect in the shape of a Z around the target, dealing 80 special damage and inflicting Silence for 3 seconds.
 
 # Changes to Synergies
 

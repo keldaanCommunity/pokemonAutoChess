@@ -1822,7 +1822,6 @@
 		"BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。",
 		"LANDS_WRATH": "大地破裂，对目标和相邻敌方宝可梦造成PHYSICAL，数值相当于[100,SP]%的ATK加40，然后降低他们[8,SP=0.5]点 DEF和SPE_DEF。",
 		"THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
-		"CORE_ENFORCER": "对目标造成[150,SP]点SPECIAL，并使其陷入LOCKED和SILENCE 3秒。",
 		"POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
 		"MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
 		"METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。",

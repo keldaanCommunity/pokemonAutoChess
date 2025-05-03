@@ -218,11 +218,39 @@ export function displayAbility(
       break
 
     case Ability.CORE_ENFORCER:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
-      break
-
-    case "CORE_ENFORCER/hit":
-      addAbilitySprite("CORE_ENFORCER/hit", coordinates, true).setScale(3)
+      {
+        const topLeft = transformAttackCoordinate(
+          targetX - 1,
+          targetY + 1,
+          flip
+        )
+        const topRight = transformAttackCoordinate(
+          targetX + 1,
+          targetY + 1,
+          flip
+        )
+        const bottomLeft = transformAttackCoordinate(
+          targetX - 1,
+          targetY - 1,
+          flip
+        )
+        addAbilitySprite(skill, topLeft, true).setOrigin(0, 0.5).setScale(2)
+        setTimeout(
+          () =>
+            addAbilitySprite(skill, topRight, true)
+              .setScale(2)
+              .setOrigin(0, 0.5)
+              .setRotation((Math.PI * 3) / 4),
+          100
+        )
+        setTimeout(
+          () =>
+            addAbilitySprite(skill, bottomLeft, true)
+              .setOrigin(0, 0.5)
+              .setScale(2),
+          200
+        )
+      }
       break
 
     case Ability.LEECH_SEED:
@@ -2800,7 +2828,11 @@ export function displayAbility(
     }
 
     case "LINK_CABLE_discharge":
-      addAbilitySprite(Ability.DISCHARGE, coordinates, true).setScale(2)
+      setTimeout(
+        () =>
+          addAbilitySprite(Ability.DISCHARGE, coordinates, true).setScale(2),
+        delay
+      )
       break
 
     case "GRASS_HEAL":

@@ -7613,8 +7613,7 @@ export const AnimationConfig: {
   [Pkm.ZYGARDE_100]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
-    emote: AnimationType.Emit,
-    shinyUnavailable: true
+    emote: AnimationType.Emit
   },
   [Pkm.SIZZLIPEDE]: {
     attack: AnimationType.Attack,

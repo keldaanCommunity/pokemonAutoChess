@@ -1815,7 +1815,6 @@
 		"BURN_UP": "Fügt sich selbst für 3 Sekunden BURN zu und verursacht [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "Der Boden bebt Fügt dem Ziel und benachbarten Gegnern 40 + [100,SP]% ATK als PHYSICAL zu und reduziert ihre DEF und SPE_DEF um [8,SP=0.5].",
 		"THOUSAND_ARROWS": "33 energiegeladene Pfeile fallen zufällig auf das Spielfeld herab und verursachen je [60,SP] SPECIAL. Getroffene Gegner werden für 1 Sekunde LOCKED.",
-		"CORE_ENFORCER": "Fügt dem Gegner [150,SP] SPECIAL zu. Gegner erhält für 3 Sekunden SILENCE und wird LOCKED.",
 		"POWER_HUG": "Fügt dem Gegner [40,80,SP] SPECIAL zu. Gegner erhält für 3 Sekunden PARALYSIS und wird LOCKED.",
 		"MORTAL_SPIN": "Wirf alle Gegner zurück, die den Anwender in Nahkampfreichweite angreifen. Verursache [20,30,40,SP] SPECIAL und POISONNED für 4 Sekunden.",
 		"METAL_CLAW": "Verursacht [10,20,40,SP] TRUE am Ziel und erhöht dem ATK des Anwenders um [2,4,6].",

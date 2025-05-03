@@ -1660,7 +1660,6 @@
 		"BURN_UP": "Causa a se stesso BURN per 3 secondi per infliggere [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "La terra esplode, infliggendo 40 + [100,SP]% dell'ATK come PHYSICAL al bersaglio ed ai nemici adiacenti, inoltre diminuisce la loro DEF e SPE_DEF di [8,SP=0.5].",
 		"THOUSAND_ARROWS": "33 frecce d'energia piombano su spazi casuali, infliggendo ognuna [60,SP] SPECIAL. Tutti i nemici colpiti subiscono LOCKED per 1 secondo.",
-		"CORE_ENFORCER": "Infliggi [150,SP] SPECIAL al bersaglio e causa LOCKED e SILENCE per 3 secondi.",
 		"POWER_HUG": "Infliggi [40,80,SP] SPECIAL al bersaglio e causa LOCKED e PARALYSIS per 3 secondi.",
 		"MORTAL_SPIN": "Spingi via ogni Pokèmon adiacente che ha come bersaglio l'utilizzatore. Infliggi [20,30,40,SP] SPECIAL ad ogni nemico colpito e causa POISONNED per 4 secondi."
 	},
