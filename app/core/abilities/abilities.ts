@@ -12178,17 +12178,9 @@ export class FilletAwayStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     // lose 50% of max HP and gain 10 attack and 20 speed
-    const newMaxHP = Math.ceil(pokemon.hp * 0.5)
-    const lostLife = min(0)(pokemon.life - newMaxHP)
-    pokemon.hp = newMaxHP
-    pokemon.handleSpecialDamage(
-      lostLife,
-      board,
-      AttackType.TRUE,
-      pokemon,
-      false,
-      false
-    )
+    const lostMaxHP = Math.floor(pokemon.hp * 0.5)
+    pokemon.addMaxHP(-lostMaxHP, pokemon, 0, false)
+    
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
     pokemon.status.triggerProtect(400)
