@@ -3816,6 +3816,63 @@ export function displayAbility(
       break
     }
 
+    case Ability.ARM_THRUST: {
+      for (let i = 0; i < (delay ?? 2); i++) {
+        setTimeout(() => {
+          const anim = addAbilitySprite(
+            Ability.BRICK_BREAK,
+            [
+              coordinatesTarget[0] + randomBetween(-30, 30),
+              coordinatesTarget[1] + randomBetween(-30, 30)
+            ],
+            true
+          )
+          scene.tweens.add({
+            targets: anim,
+            alpha: 0,
+            ease: "linear",
+            onComplete: () => {
+              anim.destroy()
+            }
+          })
+        }, i * 250)
+      }
+      break
+    }
+
+    case "PARTING_SHOT": {
+      setTimeout(() => {
+        const anim = addAbilitySprite(skill, coordinates, true)
+        //add tween chain to make it bouncy (scale 120% with quad easing before scaling back to 100M) before fading out
+        scene.tweens.chain({
+          targets: anim,
+          tweens: [
+            {
+              scaleX: 1.2,
+              scaleY: 1.2,
+              ease: Phaser.Math.Easing.Quadratic.Out,
+              duration: 100
+            },
+            {
+              scaleX: 1,
+              scaleY: 1,
+              ease: Phaser.Math.Easing.Quadratic.In,
+              duration: 200
+            },
+            {
+              alpha: 0,
+              duration: 200
+            }
+          ],
+          onComplete: () => {
+            anim.destroy()
+          }
+        })
+      }, 750)
+
+      break
+    }
+
     default:
       break
   }
