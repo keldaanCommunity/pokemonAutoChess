@@ -47,6 +47,8 @@
 
 # Changes to Items
 
+- Max Elixir: removed -25 AP penalty
+
 # Gameplay
 
 - Carousels shape and centering have been adjusted to ease movement on top and bottom of the board
