@@ -16821,10 +16821,10 @@ export class Zygarde50 extends Pokemon {
   hp = 220
   atk = 23
   speed = 55
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 100
-  range = 2
+  range = 3
   skill = Ability.THOUSAND_ARROWS
   attackSprite = AttackSprite.DRAGON_GREEN_RANGE
   passive = Passive.ZYGARDE50
@@ -16844,10 +16844,10 @@ export class Zygarde100 extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 120
-  range = 1
+  maxPP = 100
+  range = 2
   skill = Ability.CORE_ENFORCER
-  attackSprite = AttackSprite.DRAGON_MELEE
+  attackSprite = AttackSprite.DRAGON_GREEN_RANGE
 }
 
 export class Sizzlipede extends Pokemon {

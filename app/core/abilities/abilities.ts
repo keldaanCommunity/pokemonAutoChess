@@ -6143,7 +6143,8 @@ export class LinkCableStrategy extends AbilityStrategy {
           broadcastAbility(pokemon, {
             skill: "LINK_CABLE_discharge",
             positionX: partner.positionX,
-            positionY: partner.positionY
+            positionY: partner.positionY,
+            delay: 200
           })
         } else {
           const damage = 50
@@ -10924,6 +10925,7 @@ export class ThousandArrowsStrategy extends AbilityStrategy {
             )
           }
           broadcastAbility(pokemon, {
+            skill: Ability.THOUSAND_ARROWS,
             positionX: x,
             positionY: BOARD_HEIGHT - 1,
             targetX: x,
@@ -10944,20 +10946,25 @@ export class CoreEnforcerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    target.status.triggerLocked(3000, target)
-    target.status.triggerSilence(3000, target)
-    target.handleSpecialDamage(
-      150,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit,
-      true
-    )
-    broadcastAbility(pokemon, {
-      skill: "CORE_ENFORCER/hit",
-      positionX: target.positionX,
-      positionY: target.positionY
+
+    const cellsHit = board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .filter(
+        (cell) => cell.y !== target.positionY || cell.x === target.positionX
+      ) // Z shape
+
+    cellsHit.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerSilence(3000, cell.value)
+        cell.value.handleSpecialDamage(
+          80,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+      }
     })
   }
 }

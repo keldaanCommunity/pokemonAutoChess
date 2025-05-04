@@ -19,7 +19,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
-import { AnimationConfig, PkmByIndex } from "../../../../types/enum/Pokemon"
+import { PkmByIndex } from "../../../../types/enum/Pokemon"
 import { max } from "../../../../utils/number"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
@@ -31,6 +31,7 @@ import { pickRandomIn } from "../../../../utils/random"
 import { displayBoost } from "./boosts-animations"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { DEPTH } from "../depths"
+import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -688,6 +689,9 @@ export default class BattleManager {
         if (pkm.index !== value) {
           pkm.lazyloadAnimations(this.scene, true) // unload previous index animations
           pkm.index = value as IPokemonEntity["index"]
+          pkm.attackSprite =
+            new PokemonClasses[PkmByIndex[value as string]]()?.attackSprite ??
+            pkm.attackSprite
           pkm.lazyloadAnimations(this.scene) // load the new ones
           pkm.displayAnimation("EVOLUTION")
           this.animationManager.animatePokemon(

@@ -9,6 +9,8 @@ import { Ability } from "../types/enum/Ability"
 import { SynergyEffects } from "../models/effects"
 import { AttackType } from "../types/enum/Game"
 import { chance } from "../utils/random"
+import { min } from "../utils/number"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
@@ -166,6 +168,34 @@ export class GrowGroundEffect extends PeriodicEffect {
         ) {
           pokemon.player.addMoney(3, true, pokemon)
           pokemon.count.moneyCount += 3
+        }
+
+        if (
+          (pokemon.passive === Passive.ZYGARDE10 ||
+            pokemon.passive === Passive.ZYGARDE50) &&
+          this.count === 5
+        ) {
+          pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
+          pokemon.addSpeed(-25, pokemon, 0, false)
+          if (pokemon.passive === Passive.ZYGARDE10) {
+            pokemon.addDefense(1, pokemon, 0, false)
+            pokemon.addSpecialDefense(1, pokemon, 0, false)
+            pokemon.addMaxHP(50, pokemon, 0, false)
+            pokemon.range = min(1)(pokemon.range + 1)
+          } else {
+            pokemon.addAttack(5, pokemon, 0, false)
+            pokemon.addDefense(2, pokemon, 0, false)
+            pokemon.addSpecialDefense(2, pokemon, 0, false)
+            pokemon.addMaxHP(80, pokemon, 0, false)
+            pokemon.range = min(1)(pokemon.range - 1)
+          }
+
+          pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
+          pokemon.name = Pkm.ZYGARDE_100
+          pokemon.passive = Passive.NONE
+          pokemon.skill = Ability.CORE_ENFORCER
+          pokemon.pp = 0
+          pokemon.maxPP = 120
         }
       },
       effect,
