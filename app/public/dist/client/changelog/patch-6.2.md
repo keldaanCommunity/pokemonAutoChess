@@ -3,6 +3,8 @@
  - Zacian
  - Zacian (Crowned)
  - Iron Valiant
+ - Pancham
+ - Pangoro
  
 # Changes to Pokemon & Abilities
 
@@ -36,13 +38,17 @@
 - Buff Lotad line: PP 120 → 100
 - Buff Dynamic Punch (Makuhita): damage 20/40/80 → 40/80/160, confusion duration 1.5/3/6 → 2/4/6 seconds
 - Rework Zygarde: Zygarde 50% range 2 → 3 ; Zygarde 100% range 1 → 2 PP 120 → 100 ; Zygarde now evolves into 100% form after getting max stacks of ground (15 seconds) ; Rework Core Enforcer: now hits in an area of effect in the shape of a Z around the target, dealing 80 special damage and inflicting Silence for 3 seconds.
+- Purrloin line is now Uncommon ; adjusted Fake out damage: 50/100/150 → 40/80/150
+- Change Decorate (Alcremy): now targets the **strongest** nearest ally instead of a random ally among the nearest ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 
 # Changes to Synergies
 
 - Wild Pokemon can now be found in initial shop at stage 0
-- Gourmet dishes are now distributed to the strongest adjacent Pokémons instead of a random one
+- Gourmet dishes are now distributed to the strongest adjacent allies instead of random among the adjacent ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 
 # Changes to Items
+
+- Max Elixir: removed -25 AP penalty
 
 # Gameplay
 
@@ -59,6 +65,7 @@
 # Bugfix
 
 - When 3 Pokémon copies merge to evolve, if two copies hold an item component, one of the component will go to item bench instead of the evolved Pokémon holding two components.
+- Units with rare candy are now properly evaluated when looking for the strongest unit of a group
 
 # Misc
 

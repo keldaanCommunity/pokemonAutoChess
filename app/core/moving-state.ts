@@ -3,12 +3,12 @@ import { Effect } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
-import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import Board from "./board"
 import { PokemonEntity, getMoveSpeed } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { findPath } from "../utils/pathfind"
+import { broadcastAbility } from "./abilities/abilities"
 
 export default class MovingState extends PokemonState {
   name = "moving"
@@ -92,6 +92,21 @@ export default class MovingState extends PokemonState {
                 )
               }
             })
+        }
+
+        if (pokemon.passive === Passive.PARTING_SHOT) {
+          farthestCoordinate.target.addAbilityPower(-20, pokemon, 0, false)
+          farthestCoordinate.target.addAttack(
+            -0.2 * farthestCoordinate.target.baseAtk,
+            pokemon,
+            0,
+            false
+          )
+          broadcastAbility(pokemon, {
+            skill: "PARTING_SHOT",
+            positionX: x,
+            positionY: y
+          })
         }
 
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);

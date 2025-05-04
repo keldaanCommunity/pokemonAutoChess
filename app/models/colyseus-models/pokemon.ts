@@ -12725,14 +12725,14 @@ export class Claydol extends Pokemon {
 
 export class Purrloin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.LIEPARD
-  hp = 80
-  atk = 8
+  hp = 70
+  atk = 7
   speed = 59
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 90
   range = 1
   skill = Ability.FAKE_OUT
@@ -12744,16 +12744,51 @@ export class Liepard extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
   rarity = Rarity.RARE
   stars = 2
-  hp = 175
-  atk = 22
+  hp = 150
+  atk = 19
   speed = 59
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 90
   range = 1
   skill = Ability.FAKE_OUT
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
+}
+
+export class Pancham extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PANGORO
+  hp = 80
+  atk = 8
+  speed = 42
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.ARM_THRUST
+  passive = Passive.PARTING_SHOT
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
+export class Pangoro extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 210
+  atk = 22
+  speed = 42
+  def = 8
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.ARM_THRUST
+  passive = Passive.PARTING_SHOT
+  additional = true
+  attackSprite = AttackSprite.FIGHTING_MELEE
 }
 
 export class Barboach extends Pokemon {
@@ -19153,7 +19188,9 @@ export const PokemonClasses: Record<
   [Pkm.UNFEZANT]: Unfezant,
   [Pkm.ZACIAN]: Zacian,
   [Pkm.ZACIAN_CROWNED]: ZacianCrowned,
-  [Pkm.IRON_VALIANT]: IronValiant
+  [Pkm.IRON_VALIANT]: IronValiant,
+  [Pkm.PANCHAM]: Pancham,
+  [Pkm.PANGORO]: Pangoro
 }
 
 // declare all the classes in colyseus schema TypeRegistry

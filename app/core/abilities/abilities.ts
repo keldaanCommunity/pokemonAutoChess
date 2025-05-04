@@ -83,9 +83,8 @@ import { values } from "../../utils/schemas"
 import { DarkHarvestEffect } from "../effect"
 import { DelayedCommand } from "../simulation-command"
 import { giveRandomEgg } from "../../core/eggs"
-import { t } from "i18next"
 
-const broadcastAbility = (
+export const broadcastAbility = (
   pokemon: PokemonEntity,
   {
     skill = pokemon.skill,
@@ -228,7 +227,7 @@ export class GlaciateStrategy extends AbilityStrategy {
             )
           }
         })
-      }, 250)
+      }, 300)
     )
   }
 }
@@ -5846,7 +5845,7 @@ export class FakeOutStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, state, board, target, crit)
-    const damage = [50, 100, 150][pokemon.stars - 1] ?? 150
+    const damage = [40, 80, 150][pokemon.stars - 1] ?? 150
     if (pokemon.ap >= 0) target.status.triggerFlinch(3000, target)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.addAbilityPower(-30, pokemon, 0, false)
@@ -12048,35 +12047,36 @@ export class DecorateStrategy extends AbilityStrategy {
     super.process(pokemon, state, board, target, crit, true)
     const atkBoost = [1, 2, 3][pokemon.stars - 1] ?? 8
     const apBoost = [10, 20, 30][pokemon.stars - 1] ?? 50
-    const nearestAlly = state.getNearestAlly(pokemon, board)
-    if (nearestAlly) {
+    const nearestAllies = state.getNearestAllies(pokemon, board)
+    const strongestNearestAlly = getStrongestUnit(nearestAllies)
+    if (strongestNearestAlly) {
       broadcastAbility(pokemon, {
-        targetX: nearestAlly.positionX,
-        targetY: nearestAlly.positionY
+        targetX: strongestNearestAlly.positionX,
+        targetY: strongestNearestAlly.positionY
       })
-      nearestAlly.addAttack(atkBoost, pokemon, 1, crit)
-      nearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
+      strongestNearestAlly.addAttack(atkBoost, pokemon, 1, crit)
+      strongestNearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
 
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
-        nearestAlly.addShield(60, pokemon, 1, crit)
+        strongestNearestAlly.addShield(60, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
-        nearestAlly.addSpeed(30, pokemon, 1, crit)
+        strongestNearestAlly.addSpeed(30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
-        nearestAlly.addMaxHP(40, pokemon, 1, crit)
+        strongestNearestAlly.addMaxHP(40, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
-        nearestAlly.handleHeal(40, pokemon, 0, crit)
-        nearestAlly.addSpecialDefense(15, pokemon, 0, crit)
+        strongestNearestAlly.handleHeal(40, pokemon, 0, crit)
+        strongestNearestAlly.addSpecialDefense(15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
-        nearestAlly.addCritChance(40, pokemon, 0, crit)
+        strongestNearestAlly.addCritChance(40, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
-        nearestAlly.handleHeal(40, pokemon, 1, crit)
-        nearestAlly.addDefense(15, pokemon, 0, crit)
-      } else if (pokemon.items.has(Item.RUBY_SWIRL_FLAVOR)) {
-        nearestAlly.addAttack(8, pokemon, 1, crit)
-      } else if (pokemon.items.has(Item.CARAMEL_SWIRL_FLAVOR)) {
-        nearestAlly.addCritPower(80, pokemon, 1, crit)
+        strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
+        strongestNearestAlly.addDefense(15, pokemon, 0, crit)
+      } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
+        strongestNearestAlly.addAttack(8, pokemon, 1, crit)
+      } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
+        strongestNearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        nearestAlly.addAbilityPower(60, pokemon, 1, crit)
+        strongestNearestAlly.addAbilityPower(60, pokemon, 1, crit)
       }
     }
   }
@@ -12186,17 +12186,9 @@ export class FilletAwayStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, state, board, target, crit)
     // lose 50% of max HP and gain 10 attack and 20 speed
-    const newMaxHP = Math.ceil(pokemon.hp * 0.5)
-    const lostLife = min(0)(pokemon.life - newMaxHP)
-    pokemon.hp = newMaxHP
-    pokemon.handleSpecialDamage(
-      lostLife,
-      board,
-      AttackType.TRUE,
-      pokemon,
-      false,
-      false
-    )
+    const lostMaxHP = Math.floor(pokemon.hp * 0.5)
+    pokemon.addMaxHP(-lostMaxHP, pokemon, 0, false)
+
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
     pokemon.status.triggerProtect(400)
@@ -12753,6 +12745,38 @@ export class LaserBladeStrategy extends AbilityStrategy {
   }
 }
 
+export class ArmThrustStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    state: PokemonState,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, state, board, target, crit, true)
+    // Deal 2 to 5 hits (luck based increasing with AP) each dealing 100% of the user's ATK as physical damage. Each hit has the same individual crit chance.
+    const damage = pokemon.atk
+    const nbHits = clamp(
+      Math.floor(2 + Math.random() * 3 * (1 + pokemon.luck / 100)),
+      2,
+      5
+    )
+    broadcastAbility(pokemon, {
+      skill: Ability.ARM_THRUST,
+      delay: nbHits
+    })
+    for (let i = 0; i < nbHits; i++) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        chance(pokemon.critChance, pokemon)
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13204,5 +13228,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BEHEMOTH_BLADE]: new BehemothBladeStrategy(),
   [Ability.HEAT_CRASH]: new HeatCrashStrategy(),
   [Ability.LASER_BLADE]: new LaserBladeStrategy(),
-  [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy()
+  [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy(),
+  [Ability.ARM_THRUST]: new ArmThrustStrategy()
 }

@@ -568,6 +568,8 @@ export enum Pkm {
   PALKIA = "PALKIA",
   PALOSSAND = "PALOSSAND",
   PALPITOAD = "PALPITOAD",
+  PANCHAM = "PANCHAM",
+  PANGORO = "PANGORO",
   PARAS = "PARAS",
   PARASECT = "PARASECT",
   PATRAT = "PATRAT",
@@ -1738,8 +1740,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FLORGES]: "0671",
   //[Pkm.SKIDDO]: "0672",
   //[Pkm.GOGOAT]: "0673",
-  //[Pkm.PANCHAM]: "0674",
-  //[Pkm.PANGORO]: "0675",
+  [Pkm.PANCHAM]: "0674",
+  [Pkm.PANGORO]: "0675",
   //[Pkm.FURFROU]: "0676",
   //[Pkm.ESPURR]: "0677",
   //[Pkm.MEOWSTIC]: "0678",
@@ -3071,7 +3073,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.UNFEZANT]: Pkm.PIDOVE,
   [Pkm.ZACIAN]: Pkm.ZACIAN,
   [Pkm.ZACIAN_CROWNED]: Pkm.ZACIAN,
-  [Pkm.IRON_VALIANT]: Pkm.IRON_VALIANT
+  [Pkm.IRON_VALIANT]: Pkm.IRON_VALIANT,
+  [Pkm.PANCHAM]: Pkm.PANCHAM,
+  [Pkm.PANGORO]: Pkm.PANCHAM
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8021,5 +8025,15 @@ export const AnimationConfig: {
     attack: AnimationType.Slice,
     ability: AnimationType.Twirl,
     emote: AnimationType.SpAttack
+  },
+  [Pkm.PANCHAM]: {
+    attack: AnimationType.Punch,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PANGORO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot
   }
 }

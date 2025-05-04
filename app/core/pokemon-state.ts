@@ -983,27 +983,26 @@ export default abstract class PokemonState {
     return farthestTarget
   }
 
-  getNearestAlly(
-    pokemon: PokemonEntity,
-    board: Board
-  ): PokemonEntity | undefined {
-    let nearestAlly: PokemonEntity | undefined = undefined
+  getNearestAllies(pokemon: PokemonEntity, board: Board): PokemonEntity[] {
+    let nearestAllies: PokemonEntity[] = []
     let minDistance = 999
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && value.team === pokemon.team && pokemon.id !== value.id) {
-        const distance = distanceM(
+        const distance = distanceC(
           pokemon.positionX,
           pokemon.positionY,
           value.positionX,
           value.positionY
         )
         if (distance < minDistance) {
-          nearestAlly = value
+          nearestAllies = [value]
           minDistance = distance
+        } else if (distance === minDistance) {
+          nearestAllies.push(value)
         }
       }
     })
-    return nearestAlly
+    return nearestAllies
   }
 
   getMostSurroundedCoordinateAvailablePlace(

@@ -77,7 +77,8 @@ export function getAdditionalsTier1(pokemons: Pkm[]) {
 
 export function getSellPrice(
   pokemon: IPokemon | IPokemonEntity,
-  specialGameRule?: SpecialGameRule | null
+  specialGameRule?: SpecialGameRule | null,
+  ignoreRareCandy = false
 ): number {
   const name = pokemon.name
 
@@ -90,7 +91,7 @@ export function getSellPrice(
   let stars = pokemon.stars
   const hasRareCandy = pokemon.items && pokemon.items.has(Item.RARE_CANDY)
 
-  if (hasRareCandy) {
+  if (hasRareCandy && !ignoreRareCandy) {
     stars = min(1)(stars - 1)
   }
 
