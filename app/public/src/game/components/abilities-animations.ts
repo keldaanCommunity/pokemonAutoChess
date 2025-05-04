@@ -333,7 +333,7 @@ export function displayAbility(
         y: coordinatesTarget[1],
         ease: "linear",
         yoyo: false,
-        duration: 1350,
+        duration: 1000,
         onComplete: () => {
           specialProjectile.destroy()
         }

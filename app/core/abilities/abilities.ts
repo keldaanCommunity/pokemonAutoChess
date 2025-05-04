@@ -227,7 +227,7 @@ export class GlaciateStrategy extends AbilityStrategy {
             )
           }
         })
-      }, 250)
+      }, 300)
     )
   }
 }
