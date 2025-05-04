@@ -36,7 +36,10 @@ import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
+import {
+  transformEntityCoordinates,
+  transformBoardCoordinates
+} from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
@@ -478,7 +481,7 @@ export default class PokemonSprite extends DraggableObject {
     }
 
     if (startX != null && startY != null) {
-      const coordinates = transformAttackCoordinate(startX, startY, this.flip)
+      const coordinates = transformEntityCoordinates(startX, startY, this.flip)
       const projectile = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -503,7 +506,7 @@ export default class PokemonSprite extends DraggableObject {
         )
       } else {
         projectile.anims.play({ key: attackSprite })
-        const coordinatesTarget = transformAttackCoordinate(
+        const coordinatesTarget = transformEntityCoordinates(
           targetX,
           targetY,
           this.flip
@@ -695,8 +698,9 @@ export default class PokemonSprite extends DraggableObject {
       )
       this.lifebar.setShield(pokemon.shield)
       this.add(this.lifebar)
-      
-      if (pokemon.pp !== undefined && pokemon.maxPP > 0) this.lifebar.setMaxPP(pokemon.maxPP)
+
+      if (pokemon.pp !== undefined && pokemon.maxPP > 0)
+        this.lifebar.setMaxPP(pokemon.maxPP)
     }
   }
 
@@ -1041,12 +1045,12 @@ export default class PokemonSprite extends DraggableObject {
   skydiveDown() {
     if (this.skydiving) {
       // animation after a skydiving attack where pokemon moves from its target cell to its final reserved adjacent cell
-      const landingCoordinates = transformAttackCoordinate(
+      const landingCoordinates = transformEntityCoordinates(
         this.targetX ?? this.positionX,
         this.targetY ?? this.positionY,
         this.flip
       )
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         this.positionX,
         this.positionY,
         this.flip

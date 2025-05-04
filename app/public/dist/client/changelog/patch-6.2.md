@@ -60,6 +60,8 @@
 - Positive status and negative status are now displayed in different text colors
 - Add picks and Unique/Legendary propositions now display the team planner icon if added in the team planner
 - Show next level rates in Encounter rates tooltip
+- Life and PP bars have been reworked to be more readable with graduations every 25 HP.
+- Wild pokemons in PvE round now make a stage entrance during the picking phase
 
 # Bugfix
 

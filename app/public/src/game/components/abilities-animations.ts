@@ -18,7 +18,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
+import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
@@ -37,8 +37,8 @@ export function displayAbility(
   flip: boolean,
   delay?: number
 ) {
-  const coordinates = transformAttackCoordinate(positionX, positionY, flip)
-  const coordinatesTarget = transformAttackCoordinate(targetX, targetY, flip)
+  const coordinates = transformEntityCoordinates(positionX, positionY, flip)
+  const coordinatesTarget = transformEntityCoordinates(targetX, targetY, flip)
 
   function addAbilitySprite(
     skill: Ability | string,
@@ -376,7 +376,7 @@ export function displayAbility(
     case Ability.ICY_WIND: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(1)
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -399,7 +399,7 @@ export function displayAbility(
     case Ability.SOLAR_BEAM: {
       const specialProjectile = addAbilitySprite(
         skill,
-        transformAttackCoordinate(targetX, targetY - 3, flip)
+        transformEntityCoordinates(targetX, targetY - 3, flip)
       ).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
@@ -416,8 +416,8 @@ export function displayAbility(
     }
 
     case Ability.ORIGIN_PULSE: {
-      const startCoords = transformAttackCoordinate(0, targetY, flip)
-      const finalCoords = transformAttackCoordinate(8, targetY, flip)
+      const startCoords = transformEntityCoordinates(0, targetY, flip)
+      const finalCoords = transformEntityCoordinates(8, targetY, flip)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(4)
       scene.tweens.add({
         targets: specialProjectile,
@@ -432,7 +432,7 @@ export function displayAbility(
     }
 
     case Ability.SPACIAL_REND: {
-      const coords = transformAttackCoordinate(4, targetY, flip)
+      const coords = transformEntityCoordinates(4, targetY, flip)
       addAbilitySprite(skill, coords, true).setScale(4)
       break
     }
@@ -649,7 +649,7 @@ export function displayAbility(
             Math.PI / 2
         )
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 1.5,
         positionY + dy * 1.5,
         flip
@@ -752,7 +752,7 @@ export function displayAbility(
             Math.PI / 2
         )
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 1.5,
         positionY + dy * 1.5,
         flip
@@ -852,7 +852,7 @@ export function displayAbility(
 
     case Ability.HURRICANE: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -874,7 +874,7 @@ export function displayAbility(
 
     case Ability.ROAR: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -899,7 +899,7 @@ export function displayAbility(
 
     case Ability.FLEUR_CANNON: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -924,7 +924,7 @@ export function displayAbility(
     case Ability.BLEAKWIND_STORM:
     case Ability.SPRINGTIDE_STORM: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -1080,7 +1080,7 @@ export function displayAbility(
     }
 
     case Ability.SKY_ATTACK: {
-      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformEntityCoordinates(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
         1.5
       )
@@ -1098,7 +1098,7 @@ export function displayAbility(
     }
 
     case Ability.SKY_ATTACK_SHADOW: {
-      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformEntityCoordinates(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
         1.5
       )
@@ -1116,7 +1116,7 @@ export function displayAbility(
     }
 
     case Ability.FLYING_PRESS: {
-      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformEntityCoordinates(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
@@ -1133,7 +1133,7 @@ export function displayAbility(
     }
 
     case Ability.SUNSTEEL_STRIKE: {
-      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformEntityCoordinates(targetX, 9, false)
       const specialProjectile = addAbilitySprite(skill, startCoords)
       scene.tweens.add({
         targets: specialProjectile,
@@ -1174,7 +1174,7 @@ export function displayAbility(
     }
 
     case "COMET_CRASH": {
-      const startCoords = transformAttackCoordinate(targetX, 9, false)
+      const startCoords = transformEntityCoordinates(targetX, 9, false)
       const specialProjectile = addAbilitySprite(
         Ability.SUNSTEEL_STRIKE,
         startCoords
@@ -1195,7 +1195,7 @@ export function displayAbility(
     }
 
     case Ability.ACROBATICS: {
-      const startCoords = transformAttackCoordinate(
+      const startCoords = transformEntityCoordinates(
         targetX + 1,
         targetY + 1,
         flip
@@ -1320,7 +1320,7 @@ export function displayAbility(
     }
 
     case Ability.GRAV_APPLE: {
-      const aboveTargetCoordinates = transformAttackCoordinate(
+      const aboveTargetCoordinates = transformEntityCoordinates(
         targetX,
         targetY,
         flip
@@ -1567,7 +1567,7 @@ export function displayAbility(
     }
 
     case Ability.MOON_DREAM: {
-      const aboveTargetCoordinates = transformAttackCoordinate(
+      const aboveTargetCoordinates = transformEntityCoordinates(
         positionX,
         positionY,
         flip
@@ -1865,7 +1865,7 @@ export function displayAbility(
       break
 
     case Ability.ERUPTION: {
-      const startCoords = transformAttackCoordinate(
+      const startCoords = transformEntityCoordinates(
         targetX + 3,
         targetY + 3,
         flip
@@ -2022,8 +2022,8 @@ export function displayAbility(
       break
 
     case Ability.HYPER_VOICE: {
-      const startCoords = transformAttackCoordinate(0, targetY, flip)
-      const finalCoords = transformAttackCoordinate(8, targetY, flip)
+      const startCoords = transformEntityCoordinates(0, targetY, flip)
+      const finalCoords = transformEntityCoordinates(8, targetY, flip)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
@@ -2203,9 +2203,9 @@ export function displayAbility(
     }
 
     case Ability.BONEMERANG: {
-      const startCoords = transformAttackCoordinate(positionX, positionY, flip)
+      const startCoords = transformEntityCoordinates(positionX, positionY, flip)
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoords = transformAttackCoordinate(
+      const finalCoords = transformEntityCoordinates(
         positionX + dx * 5,
         positionY + dy * 5,
         flip
@@ -2226,9 +2226,9 @@ export function displayAbility(
     }
 
     case Ability.SHADOW_BONE: {
-      const startCoords = transformAttackCoordinate(positionX, positionY, flip)
+      const startCoords = transformEntityCoordinates(positionX, positionY, flip)
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoords = transformAttackCoordinate(
+      const finalCoords = transformEntityCoordinates(
         positionX + dx * 5,
         positionY + dy * 5,
         flip
@@ -2253,8 +2253,8 @@ export function displayAbility(
     }
 
     case Ability.PRISMATIC_LASER: {
-      const startCoords = transformAttackCoordinate(positionX, 0, flip)
-      const finalCoords = transformAttackCoordinate(positionX, 6, flip)
+      const startCoords = transformEntityCoordinates(positionX, 0, flip)
+      const finalCoords = transformEntityCoordinates(positionX, 6, flip)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(5)
       scene.tweens.add({
         targets: specialProjectile,
@@ -2322,7 +2322,7 @@ export function displayAbility(
 
     case Ability.AURORA_BEAM: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoords = transformAttackCoordinate(
+      const finalCoords = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -2426,7 +2426,7 @@ export function displayAbility(
         )
 
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -2479,7 +2479,7 @@ export function displayAbility(
       ]
       orientations.forEach((orientation) => {
         const [dx, dy] = OrientationVector[orientation]
-        const finalCoordinates = transformAttackCoordinate(
+        const finalCoordinates = transformEntityCoordinates(
           positionX + dx * 8,
           positionY + dy * 8,
           flip
@@ -2502,7 +2502,7 @@ export function displayAbility(
 
     case Ability.RAZOR_LEAF: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -2525,7 +2525,7 @@ export function displayAbility(
     case Ability.SPIKY_SHIELD:
       OrientationArray.forEach((orientation) => {
         const [dx, dy] = OrientationVector[orientation]
-        const finalCoordinates = transformAttackCoordinate(
+        const finalCoordinates = transformEntityCoordinates(
           positionX + dx * 8,
           positionY + dy * 8,
           flip
@@ -2671,7 +2671,7 @@ export function displayAbility(
 
     case Ability.MIST_BALL: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoords = transformAttackCoordinate(
+      const finalCoords = transformEntityCoordinates(
         positionX + dx * 4,
         positionY + dy * 4,
         flip
@@ -2693,7 +2693,7 @@ export function displayAbility(
 
     case Ability.LUSTER_PURGE: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoords = transformAttackCoordinate(
+      const finalCoords = transformEntityCoordinates(
         positionX + dx * 5,
         positionY + dy * 5,
         flip
@@ -2714,7 +2714,7 @@ export function displayAbility(
     }
 
     case Ability.AERIAL_ACE: {
-      const startCoords = transformAttackCoordinate(targetX, 8, false)
+      const startCoords = transformEntityCoordinates(targetX, 8, false)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
@@ -2877,7 +2877,7 @@ export function displayAbility(
 
     case Ability.TEETER_DANCE:
       pokemonsOnBoard.forEach((pkmUI) => {
-        const coordinates = transformAttackCoordinate(
+        const coordinates = transformEntityCoordinates(
           pkmUI.positionX,
           pkmUI.positionY,
           flip
@@ -2950,7 +2950,7 @@ export function displayAbility(
 
     case Ability.AURASPHERE: {
       const [dx, dy] = OrientationVector[orientation]
-      const finalCoordinates = transformAttackCoordinate(
+      const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
@@ -3034,7 +3034,7 @@ export function displayAbility(
     case Ability.DARK_HARVEST:
       {
         const darkHarvestGroup = scene.add.group()
-        const [x, y] = transformAttackCoordinate(positionX, positionY, flip)
+        const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
 
         for (let i = 0; i < 5; i++) {
           const darkHarvestSprite = scene.add
@@ -3073,7 +3073,7 @@ export function displayAbility(
     case Ability.DECORATE:
       {
         const decorateGroup = scene.add.group()
-        const [x, y] = transformAttackCoordinate(targetX, targetY, flip)
+        const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
 
         Sweets.forEach((sweet) => {
           const sweetSprite = scene.add
@@ -3373,7 +3373,7 @@ export function displayAbility(
 
     case "FLYING_SKYDIVE":
       {
-        const startCoords = transformAttackCoordinate(targetX, 9, false)
+        const startCoords = transformEntityCoordinates(targetX, 9, false)
         const specialProjectile = addAbilitySprite(skill, startCoords).setScale(
           2
         )
@@ -3393,8 +3393,8 @@ export function displayAbility(
     case "TIDAL_WAVE":
       {
         const down = orientation === (flip ? Orientation.UP : Orientation.DOWN)
-        const startCoords = transformAttackCoordinate(3.6, -4, down)
-        const endCoords = transformAttackCoordinate(3.6, 10, down)
+        const startCoords = transformEntityCoordinates(3.6, -4, down)
+        const endCoords = transformEntityCoordinates(3.6, 10, down)
         const wave = scene.add
           .sprite(
             startCoords[0],
@@ -3533,10 +3533,10 @@ export function displayAbility(
       break
 
     case Ability.BONE_ARMOR: {
-      const startCoords = transformAttackCoordinate(targetX, targetY, flip)
+      const startCoords = transformEntityCoordinates(targetX, targetY, flip)
       Object.values(Orientation).forEach((o) => {
         const [dx, dy] = OrientationVector[o]
-        const finalCoords = transformAttackCoordinate(
+        const finalCoords = transformEntityCoordinates(
           positionX + dx * 1,
           positionY + dy * 1,
           flip
@@ -3773,7 +3773,7 @@ export function displayAbility(
     case Ability.ICICLE_MISSILE: {
       const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
       const dx = delay === 1 ? -3 : delay === 2 ? +3 : 0
-      const topCoords = transformAttackCoordinate(
+      const topCoords = transformEntityCoordinates(
         targetX + dx,
         positionY + 5,
         false
@@ -3885,7 +3885,7 @@ export function hiddenPowerAnimation(
   originY: number,
   flip: boolean
 ) {
-  const [x, y] = transformAttackCoordinate(originX, originY, flip)
+  const [x, y] = transformEntityCoordinates(originX, originY, flip)
   const unownsGroup = scene.add.group()
   const letters = UNOWNS_PER_ABILITY.get(skill)
   for (let n = 0; n < 8; n++) {
