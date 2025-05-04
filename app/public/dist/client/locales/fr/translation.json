@@ -1816,7 +1816,7 @@
 		"BURN_UP": "S'auto-inflige BURN pendant 3 secondes et inflige [50,100,200,SP] SPECIAL à la cible.",
 		"LANDS_WRATH": "Le sol entre en éruption, infligeant 40 + [100,SP]% de l'ATK en PHYSICAL à la cible et aux ennemis adjacents, puis diminue leur DEF et SPE_DEF de [8,SP=0,5].",
 		"THOUSAND_ARROWS": "33 flèches d'énergie pleuvent sur des cases aléatoires, infligeant [60,SP] SPECIAL chacune. Tous les ennemis touchés sont LOCKED pendant 1 seconde.",
-		"CORE_ENFORCER": "Inflige [150,SP] SPECIAL à la cible. La cible est LOCKED et SILENCE pendant 3 secondes.",
+		"CORE_ENFORCER": "Attaque à zone d'effet en forme de Z autour de la cible, infligeant [80,SP] SPECIAL et SILENCE pendant 3 secondes.",
 		"POWER_HUG": "Inflige [40,80,SP] SPECIAL à la cible. La cible est LOCKED et PARALYSIS pendant 3 secondes.",
 		"MORTAL_SPIN": "Repousse tous les Pokémon ciblant l'utilisateur à portée de mêlée. Inflige [20,30,40,SP] SPECIAL à tous les ennemis touchés et applique POISONNED pendant 4 secondes.",
 		"METAL_CLAW": "Inflige [10,20,40,SP] TRUE à la cible et augmente l'ATK du lanceur de [2,4,6].",

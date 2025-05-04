@@ -1826,7 +1826,7 @@
 		"BURN_UP": "BURN itself for 3 seconds to inflict [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "The ground erupts, dealing 40 + [100,SP]% ATK as PHYSICAL to the target and adjacent enemies, then lower their DEF and SPE_DEF by [8,SP=0.5].",
 		"THOUSAND_ARROWS": "33 energy arrows rain down on random tiles, dealing [60,SP] SPECIAL each. All enemies hit are LOCKED for 1 second.",
-		"CORE_ENFORCER": "Deal [150,SP] SPECIAL to the target. The target is LOCKED and SILENCE for 3 seconds.",
+		"CORE_ENFORCER": "Hits in a Z-shape area around the target, dealing [80,SP] SPECIAL and inflicting SILENCE for 3 seconds.",
 		"POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. The target is LOCKED and PARALYSIS for 3 seconds.",
 		"MORTAL_SPIN": "Knock back any Pokemon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds",
 		"METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6].",

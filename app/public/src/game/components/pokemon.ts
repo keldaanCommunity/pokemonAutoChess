@@ -472,20 +472,23 @@ export default class PokemonSprite extends DraggableObject {
     let attackSprite = this.attackSprite
     let tint = 0xffffff
 
-    if (attackSprite === AttackSprite.DRAGON_GREEN_RANGE) {
-      attackSprite = AttackSprite.DRAGON_RANGE
-      tint = 0x80ff80
-    }
-
     if (startX != null && startY != null) {
       const coordinates = transformAttackCoordinate(startX, startY, this.flip)
+      let scale = AttackSpriteScale[attackSprite]
+
+      if (attackSprite === AttackSprite.DRAGON_GREEN_RANGE) {
+        attackSprite = AttackSprite.DRAGON_RANGE
+        scale = [1.5, 1.5]
+        tint = 0x80ff60
+      }
+
       const projectile = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "attacks",
         `${attackSprite}/000.png`
       )
-      const scale = AttackSpriteScale[attackSprite]
+
       projectile
         .setScale(scale[0], scale[1])
         .setTint(tint)
@@ -695,8 +698,9 @@ export default class PokemonSprite extends DraggableObject {
       )
       this.lifebar.setShield(pokemon.shield)
       this.add(this.lifebar)
-      
-      if (pokemon.pp !== undefined && pokemon.maxPP > 0) this.lifebar.setMaxPP(pokemon.maxPP)
+
+      if (pokemon.pp !== undefined && pokemon.maxPP > 0)
+        this.lifebar.setMaxPP(pokemon.maxPP)
     }
   }
 
