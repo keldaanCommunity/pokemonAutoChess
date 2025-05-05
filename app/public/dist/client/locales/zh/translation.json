@@ -468,7 +468,9 @@
 		"ROOST": "羽栖",
 		"BEHEMOTH_BLADE": "巨兽斩",
 		"HEAT_CRASH": "高温重压",
-		"LASER_BLADE": "激光刃"
+		"LASER_BLADE": "激光刃",
+		"ICICLE_MISSILE": "冰锥飞弹",
+		"ARM_THRUST": "猛推"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1419,7 +1421,9 @@
 		"UNFEZANT": "高傲雉鸡",
 		"ZACIAN": "苍响",
 		"ZACIAN_CROWNED": "苍响（剑之王）",
-		"IRON_VALIANT": "铁武者"
+		"IRON_VALIANT": "铁武者",
+		"PANCHAM": "顽皮熊猫",
+		"PANGORO": "霸道熊猫"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1786,7 +1790,7 @@
 		"FAIRY_LOCK": "使目标陷入LOCKED 5秒，其和相邻敌方宝可梦分摊[90,SP]点SPECIAL。",
 		"DRAIN_PUNCH": "对目标造成SPECIAL，数值相当于ATK的[200,SP]%，使用者自身恢复造成伤害量的200%。",
 		"GRAVITY": "使所有敌方宝可梦陷入LOCKED [2,SP]秒。",
-		"FAKE_OUT": "对目标造成[40,80,150,SP]点SPECIAL，随后使用者失去30点AP。除非使用者的AP为负，否则使目标陷入FLINCH 3秒。",
+		"FAKE_OUT": "对目标造成[40,80,150,SP]点SPECIAL，随后使用者降低30点AP。除非使用者的AP为负，否则使目标陷入FLINCH 3秒。",
 		"FELL_STINGER": "对目标造成[25,50,100,SP]点SPECIAL。若目标因此倒下，使用者永久提升1点ATK和10点HP。",
 		"GULP_MISSILE": "朝目标发射一只PP已满的$t(pkm.ARROKUDA)，对其和相邻敌方宝可梦造成[55,SP]点SPECIAL。有[33,LK]%的概率改为发射$t(pkm.PIKACHU)。",
 		"SCHOOLING": "对目标和相邻敌方宝可梦造成SPECIAL，数值相当于使用者[10,SP]%的最大HP。若备战区有弱丁鱼，其将加入鱼群并永久提升使用者50点HP。",
@@ -1822,6 +1826,7 @@
 		"BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。",
 		"LANDS_WRATH": "大地破裂，对目标和相邻敌方宝可梦造成PHYSICAL，数值相当于[100,SP]%的ATK加40，然后降低他们[8,SP=0.5]点 DEF和SPE_DEF。",
 		"THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[60,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
+		"CORE_ENFORCER": "对目标周围的Z形区域造成[80,SP]点SPECIAL，并使击中的敌方宝可梦陷入SILENCE 3秒。",
 		"POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
 		"MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
 		"METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6]点ATK。",
@@ -1848,7 +1853,7 @@
 		"SPICY_EXTRACT": "最近的1/2/3只我方宝可梦陷入RAGE [2,SP]秒。",
 		"SWEET_SCENT": "3格半径范围内的敌方宝可梦失去闪避能力，且降低[6,SP]点SPE_DEF，还有[30,LK]%的概率陷入CHARM 1秒。",
 		"SWALLOW": "积蓄力量，使自身提升3点DEF和SPE_DEF，至多叠加3次。若HP低于25%，则将积蓄的力量吞下，每层蓄力恢复[20,SP]%的最大HP。若叠加层数已满，则将积蓄的力量撞向前方所有敌方宝可梦，造成[40,80,150,SP]点SPECIAL。",
-		"DECORATE": "通过装饰，为最近的我方宝可梦提升[1,2,3,SP]点ATK和[10,20,30,SP]点AP，并根据进化时使用的调味料追加额外效果。",
+		"DECORATE": "通过装饰，为最近的我方宝可梦中最强的那只提升[1,2,3,SP]点ATK和[10,20,30,SP]点AP，并根据进化时使用的调味料追加额外效果。",
 		"DRAGON_CLAW": "对生命值最低的相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使其陷入WOUND 4秒。",
 		"TAILWIND": "提升所有我方宝可梦[5,10,15,SP]点SPEED。",
 		"HORN_ATTACK": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK，并使其陷入ARMOR_BREAK 8秒。",
@@ -1867,7 +1872,9 @@
 		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 2秒，并恢复[20,40,80,SP]点HP。",
 		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成PHYSICAL，数值相当于1乘以ATK加[100,SP]。",
 		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL。使用者的ATK比目标的越高，造成的伤害越高。",
-		"LASER_BLADE": "每次使用招式时交替执行以下行为：\n——旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的相邻宝可梦造成[30,SP]点SPECIAL。\n——向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[30,SP]。"
+		"LASER_BLADE": "每次使用招式时交替执行以下行为：\n——旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的相邻宝可梦造成[30,SP]点SPECIAL。\n——向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[30,SP]。",
+		"ICICLE_MISSILE": "对后排的敌方宝可梦发射[1,2,3]枚冰锥飞弹，每枚造成[50,SP]点SPECIAL，并使目标陷入FREEZE [2,SP]秒。",
+		"ARM_THRUST": "连续攻击[2,LK]至[5,LK]次，每次造成PHYSICAL，数值相当于[100,SP]%的ATK。每次攻击各自可以按CRIT_CHANCE产生暴击。"
 	},
 	"effect": {
 		"INGRAIN": "扎根",
@@ -2094,8 +2101,8 @@
 		"FLUID": "每有一种不同的激活共鸣，所有我方宝可梦提升1点SPEED和3点HP。",
 		"SHAPELESS": "每有一种不同的激活共鸣，所有我方宝可梦提升3点SPEED和6点HP。",
 		"ETHEREAL": "每有一种不同的激活共鸣，所有我方宝可梦提升6点SPEED和12点HP。",
-		"APPETIZER": "获得一顶CHEF_HAT。厨师会在每轮结束后制作一份专属料理，并将另一份喂给一个相邻我方宝可梦。",
-		"LUNCH_BREAK": "厨师能制作两份料理，并会投喂两个相邻我方宝可梦。",
+		"APPETIZER": "获得一顶CHEF_HAT。厨师会在每轮结束后制作一份专属料理，并将另一份喂给最强的相邻我方宝可梦。",
+		"LUNCH_BREAK": "厨师能制作两份料理，并会投喂两个最强的相邻我方宝可梦。",
 		"BANQUET": "获得第二顶CHEF_HAT。"
 	},
 	"item": {
@@ -2632,7 +2639,8 @@
 		"RAINBOW_SWIRL_CREAM": "释放招式时，RAINBOW_SWIRL_FLAVOR为最近的我方宝可梦提升[60,SP]点AP。",
 		"DURALUDON": "铝钢龙似乎需要一件ARTIFICIAL道具……",
 		"CHARCADET": "碳小侍似乎需要一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR……",
-		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。"
+		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
+		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和AP。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3125,13 +3133,17 @@
 	"lobby": "大厅",
 	"announcements": "公告",
 	"chat": "聊天",
-	"edit": "编辑",
+	"edit": "查看/编辑",
 	"delete": "删除",
+	"approve": "审核通过",
+	"disapprove": "撤回通过",
 	"load": "加载",
 	"url_created": "URL已创建",
-	"bot_ready_submission": "如果你觉得机器人准备就绪了，可以在官方Discord服务器提交你的机器人。#bot-creation频道将负责对其审核。",
+	"bot_ready_submission": "如果你觉得机器人准备就绪了，可以提交你的机器人。审核员审核通过之后，此机器人将被加入服务器。",
 	"cancel": "取消",
 	"submit_your_bot": "提交机器人",
+	"bot_submitted_success": "机器人提交成功。你可以前往Discord服务器的#bot-creation频道追踪进度以及提出问题。",
+	"bot_submission_failed": "提交机器人时发生错误：{{error}}.\n请稍后重试。若问题未能解决，请前往Discord服务器的#bug-report频道反馈。",
 	"import": "导入",
 	"get_started_bot": "通过现有BOT开始，或粘贴你自己的BOT数据",
 	"existing_bot": "现有BOT",
@@ -3139,6 +3151,7 @@
 	"by": "，作者为",
 	"shiny": "闪光",
 	"emotion_label": "表情",
+	"submit": "提交",
 	"help_create_bot": "创建机器人需要经过数个步骤，每步均代表游戏中某一时刻你的机器人的队伍状态。游戏开始时，机器人拥有步骤1规定的队伍，随后演化到步骤2的队伍，以此类推。靠后的队伍的强度应该始终强于之前的队伍。玩家每步不可能获得超过10只宝可梦，因此你的机器人也不得超过此上限。",
 	"item_components": "道具组件",
 	"board_power": "战场战力",
@@ -3239,6 +3252,7 @@
 	"pool_label": "精灵池",
 	"tier": "等阶",
 	"rate": "概率",
+	"next_level": "下一级",
 	"increase_level_hint": "提升你的等级，从而提升获得更高等阶宝可梦的概率。",
 	"refresh_gold_hint": "花费1金币刷新商店",
 	"refresh": "刷新",
@@ -3673,7 +3687,7 @@
 		"TECHNOLOGIC": "在第3和第15轮，选择3件人造道具之一。",
 		"CROWDED": "出战区宝可梦数量上限+3。",
 		"FREE_MARKET": "免费购买和出售宝可梦。",
-		"SHINY_HUNTER": "所有野生对战轮次中出现的对手均为闪光队伍。",
+		"SHINY_HUNTER": "第1，9和19轮的野生对战轮次中出现的对手必定为闪光队伍。",
 		"DO_IT_ALL_YOURSELF": "游戏开始时，以你的玩家形象作为起始宝可梦。稀有度较低的形象可以额外获得最大HP提升和额外初始GOLD作为补偿。",
 		"FIRST_PARTNER": "游戏开始时，选择一只起始宝可梦。每轮（直到第10轮）开始时，你获得一只此宝可梦。",
 		"SLAMINGO": "当宝可梦回到备战区时，卸下所有道具。游戏开始时获得4个随机道具组件。",
