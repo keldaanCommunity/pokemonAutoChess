@@ -1550,6 +1550,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     this.spawnWanderingPokemons()
 
+    // PvE stage initialization
+    const pveStage = PVEStages[this.state.stageLevel]
+    if (pveStage) {
+      const shinyChance = pveStage.shinyChance ?? 0
+      this.state.shinyEncounter =
+        (shinyChance > 0 &&
+          this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER) ||
+        chance(shinyChance)
+    }
+
     return commands
   }
 
@@ -1722,13 +1732,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.botManager.updateBots()
 
     const pveStage = PVEStages[this.state.stageLevel]
-
     if (pveStage) {
-      const shinyChance = pveStage.shinyChance ?? 0
-      this.state.shinyEncounter =
-        (shinyChance > 0 &&
-          this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER) ||
-        chance(shinyChance)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
           player.opponentId = "pve"

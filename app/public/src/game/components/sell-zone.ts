@@ -1,7 +1,7 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import { getSellPrice } from "../../../../models/shop"
-import { transformCoordinate } from "../../pages/utils/utils"
+import { transformBoardCoordinates } from "../../pages/utils/utils"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { DEPTH } from "../depths"
@@ -12,7 +12,7 @@ export class SellZone extends GameObjects.Container {
   text: Phaser.GameObjects.Text
 
   constructor(scene: GameScene) {
-    const sellZoneCoord = transformCoordinate(4, 5.5)
+    const sellZoneCoord = transformBoardCoordinates(4, 5.5)
     super(scene, sellZoneCoord[0] - 48, sellZoneCoord[1] + 24)
     this.scene = scene
 

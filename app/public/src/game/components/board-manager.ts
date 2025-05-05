@@ -19,7 +19,10 @@ import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../utils/board"
 import { values } from "../../../../utils/schemas"
-import { transformCoordinate } from "../../pages/utils/utils"
+import {
+  transformBoardCoordinates,
+  transformEntityCoordinates
+} from "../../pages/utils/utils"
 import store from "../../stores"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
@@ -32,7 +35,8 @@ import { playMusic } from "../../pages/utils/audio"
 import { DEPTH } from "../depths"
 import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import { refreshShopUI } from "../../stores/GameStore"
-import { Portal } from "./portal"
+import { PVEStage, PVEStages } from "../../../../models/pve-stages"
+import PokemonFactory from "../../../../models/pokemon-factory"
 
 export enum BoardMode {
   PICK = "pick",
@@ -171,7 +175,7 @@ export default class BoardManager {
     if (this.pokemons.has(pokemon.id)) {
       return this.pokemons.get(pokemon.id)!
     }
-    const coordinates = transformCoordinate(
+    const coordinates = transformBoardCoordinates(
       pokemon.positionX,
       pokemon.positionY
     )
@@ -226,7 +230,7 @@ export default class BoardManager {
     this.hideLightCell()
     const lightCount = this.player.synergies.get(Synergy.LIGHT)
     if (lightCount && lightCount >= SynergyTriggers[Synergy.LIGHT][0]) {
-      const coordinates = transformCoordinate(this.lightX, this.lightY)
+      const coordinates = transformBoardCoordinates(this.lightX, this.lightY)
       this.lightCell = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -553,6 +557,13 @@ export default class BoardManager {
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
+
+    if (this.state.stageLevel in PVEStages) {
+      setTimeout(
+        () => this.addPvePokemons(PVEStages[this.state.stageLevel]),
+        1500
+      )
+    }
   }
 
   minigameMode() {
@@ -624,7 +635,7 @@ export default class BoardManager {
         case "positionX":
           pokemonUI.positionX = value as IPokemon["positionX"]
           pokemonUI.positionY = pokemon.positionY
-          coordinates = transformCoordinate(
+          coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
           )
@@ -636,7 +647,7 @@ export default class BoardManager {
         case "positionY":
           pokemonUI.positionY = value as IPokemon["positionY"]
           pokemonUI.positionX = pokemon.positionX
-          coordinates = transformCoordinate(
+          coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
           )
@@ -757,9 +768,58 @@ export default class BoardManager {
     })
   }
 
+  addPvePokemons(pveStage: PVEStage) {
+    pveStage.board.forEach(([pkm, boardX, boardY], i) => {
+      const [x, y] = transformEntityCoordinates(boardX, boardY - 1, true)
+      const id = `pve_${this.state.stageLevel}_${i}`
+
+      const pkmSprite = new PokemonSprite(
+        this.scene,
+        x,
+        y,
+        PokemonFactory.createPokemonFromName(pkm, {
+          shiny: this.state.shinyEncounter
+        }),
+        id,
+        false,
+        true
+      )
+
+      this.pokemons.set(id, pkmSprite)
+
+      pkmSprite.setDepth(DEPTH.POKEMON)
+      pkmSprite.y -= 500
+      pkmSprite.orientation = Orientation.DOWN
+      this.scene.animationManager?.animatePokemon(
+        pkmSprite,
+        PokemonActionState.WALK,
+        false
+      )
+      this.scene.tweens.add({
+        targets: pkmSprite,
+        y,
+        ease: "Linear",
+        duration: 3000,
+        onComplete: () => {
+          if (pkmSprite) {
+            pkmSprite.orientation = Orientation.DOWNLEFT
+            this.scene.animationManager?.animatePokemon(
+              pkmSprite,
+              PokemonActionState.IDLE,
+              false
+            )
+          }
+        }
+      })
+    })
+  }
+
   displayBoost(stat: Stat, pokemon: PokemonSprite) {
     pokemon.emoteAnimation()
-    const coords = transformCoordinate(pokemon.positionX, pokemon.positionY)
+    const coords = transformBoardCoordinates(
+      pokemon.positionX,
+      pokemon.positionY
+    )
     displayBoost(this.scene, coords[0], coords[1], stat)
   }
 }

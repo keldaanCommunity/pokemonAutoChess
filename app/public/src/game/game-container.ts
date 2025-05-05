@@ -37,7 +37,7 @@ import { Weather } from "../../../types/enum/Weather"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { SOUNDS, playSound } from "../pages/utils/audio"
-import { transformCoordinate } from "../pages/utils/utils"
+import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
@@ -632,7 +632,7 @@ class GameContainer {
     const gameScene = this.gameScene
     if (gameScene?.lastDragDropPokemon && message.updateBoard) {
       const tg = gameScene.lastDragDropPokemon
-      const coordinates = transformCoordinate(tg.positionX, tg.positionY)
+      const coordinates = transformBoardCoordinates(tg.positionX, tg.positionY)
       tg.x = coordinates[0]
       tg.y = coordinates[1]
     }
@@ -644,7 +644,10 @@ class GameContainer {
     if (message.text && message.pokemonId) {
       const pokemon = this.player?.board.get(message.pokemonId)
       if (pokemon) {
-        const [x, y] = transformCoordinate(pokemon.positionX, pokemon.positionY)
+        const [x, y] = transformBoardCoordinates(
+          pokemon.positionX,
+          pokemon.positionY
+        )
         gameScene?.board?.displayText(x, y, t(message.text))
       }
     }
