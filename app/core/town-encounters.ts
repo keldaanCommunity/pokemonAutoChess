@@ -22,7 +22,7 @@ export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
     [Pkm.KANGASKHAN]: 10,
     [Pkm.CHANSEY]: 10,
     [Pkm.ELECTIVIRE]: 10,
-    [Pkm.XATU]: 10,
+    [Pkm.XATU]: 15,
     [Pkm.DUSKULL]: 10
   }
 
@@ -34,7 +34,6 @@ export const TownEncountersByStage: {
     [Pkm.KANGASKHAN]: 1 / 10,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,
-    [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20
   },
   12: {
