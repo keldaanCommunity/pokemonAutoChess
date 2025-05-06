@@ -40,6 +40,7 @@ import { Portal } from "./portal"
 import { logger } from "../../../../utils/logger"
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { randomBetween } from "../../../../utils/random"
 
 export enum BoardMode {
   PICK = "pick",
@@ -860,16 +861,30 @@ export default class BoardManager {
     }
 
     if (isRedPlayer) {
-      // move board pokemons into the portal
-      const monsToTeleport = [...this.pokemons.values()]
+      // avatar goes first in the portal
       this.scene.tweens.add({
-        targets: [...monsToTeleport, this.playerAvatar],
+        targets: this.playerAvatar,
         ease: Phaser.Math.Easing.Quadratic.In,
-        duration: 1000,
+        duration: 700,
         scale: 0,
         x: portalX,
         y: portalY
       })
+
+      // move board pokemons into the portal
+      const pokemonsToTeleport = [...this.pokemons.values()]
+      for (const pokemon of pokemonsToTeleport) {
+        const delay = randomBetween(0, 300)
+        this.scene.tweens.add({
+          targets: pokemon,
+          ease: Phaser.Math.Easing.Quadratic.In,
+          delay,
+          duration: 700,
+          scale: 0,
+          x: portalX,
+          y: portalY
+        })
+      }
 
       // portal close
       this.scene.tweens.add({
@@ -894,7 +909,7 @@ export default class BoardManager {
               pokemon.positionY - 1,
               true
             )
-            const pokemonUI = new PokemonSprite(
+            const pokemonSprite = new PokemonSprite(
               this.scene,
               x,
               y,
@@ -904,11 +919,11 @@ export default class BoardManager {
               false
             )
             this.animationManager.animatePokemon(
-              pokemonUI,
+              pokemonSprite,
               PokemonActionState.IDLE,
               true
             )
-            this.pokemons.set(pokemonUI.id, pokemonUI)
+            this.pokemons.set(pokemonSprite.id, pokemonSprite)
           })
 
           // show the opponent avatar
@@ -924,25 +939,45 @@ export default class BoardManager {
               duration: 1000,
               scale: 1,
               x: 504,
-              y: 696
+              y: 696,
+              onStart: () => {
+                if (this.playerAvatar) {
+                  this.animationManager.animatePokemon(
+                    this.playerAvatar,
+                    PokemonActionState.HOP,
+                    false,
+                    false
+                  )
+                }
+              }
             })
           }
 
           // replace the red pokemons
-          monsToTeleport.forEach((p) => {
+          pokemonsToTeleport.forEach((pokemon) => {
             const [originalX, originalY] = transformBoardCoordinates(
-              p.positionX,
-              p.positionY
+              pokemon.positionX,
+              pokemon.positionY
             )
-            p.x = x
-            p.y = y
+            pokemon.x = x
+            pokemon.y = y
+            const delay = randomBetween(0, 300)
             this.scene.tweens.add({
-              targets: p,
+              targets: pokemon,
               ease: Phaser.Math.Easing.Quadratic.Out,
-              duration: 1000,
+              delay,
+              duration: 700,
               scale: 1,
               x: originalX,
-              y: originalY
+              y: originalY,
+              onStart: () => {
+                this.animationManager.animatePokemon(
+                  pokemon,
+                  PokemonActionState.HOP,
+                  false,
+                  false
+                )
+              }
             })
           })
 
@@ -973,7 +1008,17 @@ export default class BoardManager {
           duration: 1500,
           scale: 1,
           x: 1512,
-          y: 122
+          y: 122,
+          onStart: () => {
+            if (this.opponentAvatar) {
+              this.animationManager.animatePokemon(
+                this.opponentAvatar,
+                PokemonActionState.HOP,
+                false,
+                false
+              )
+            }
+          }
         })
       }
 
@@ -984,7 +1029,7 @@ export default class BoardManager {
         )
         if (!opponent) return
         opponent.board.forEach((pokemon) => {
-          const pokemonUI = new PokemonSprite(
+          const pokemonSprite = new PokemonSprite(
             this.scene,
             portalX,
             portalY,
@@ -993,27 +1038,31 @@ export default class BoardManager {
             false,
             false
           )
-          pokemonUI.setScale(0)
-          this.animationManager.animatePokemon(
-            pokemonUI,
-            PokemonActionState.HOP,
-            false,
-            false
-          )
-          this.pokemons.set(pokemonUI.id, pokemonUI)
+          pokemonSprite.setScale(0)
+          this.pokemons.set(pokemonSprite.id, pokemonSprite)
 
           const [originalX, originalY] = transformEntityCoordinates(
             pokemon.positionX,
             pokemon.positionY - 1,
             true
           )
+          const delay = randomBetween(0, 300)
           this.scene.tweens.add({
-            targets: pokemonUI,
+            targets: pokemonSprite,
             ease: Phaser.Math.Easing.Quadratic.Out,
-            duration: 1000,
+            delay,
+            duration: 700,
             scale: 1,
             x: originalX,
-            y: originalY
+            y: originalY,
+            onStart: () => {
+              this.animationManager.animatePokemon(
+                pokemonSprite,
+                PokemonActionState.HOP,
+                false,
+                false
+              )
+            }
           })
         })
       }, 1000)
