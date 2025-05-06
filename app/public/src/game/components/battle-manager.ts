@@ -21,7 +21,7 @@ import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { PkmByIndex } from "../../../../types/enum/Pokemon"
 import { max } from "../../../../utils/number"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
+import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
@@ -79,7 +79,7 @@ export default class BattleManager {
       this.simulation?.id === simulationId &&
       this.pokemonSprites.has(pokemon.id) === false
     ) {
-      const coordinates = transformAttackCoordinate(
+      const coordinates = transformEntityCoordinates(
         pokemon.positionX,
         pokemon.positionY,
         this.flip
@@ -517,7 +517,7 @@ export default class BattleManager {
         } else if (field == "positionY") {
           pkm.positionY = pokemon.positionY
         }
-        const coordinates = transformAttackCoordinate(
+        const coordinates = transformEntityCoordinates(
           pokemon.positionX,
           pokemon.positionY,
           this.flip
@@ -765,7 +765,7 @@ export default class BattleManager {
   }
 
   displayBoost(stat: Stat, positionX: number, positionY: number) {
-    const coords = transformAttackCoordinate(positionX, positionY, this.flip)
+    const coords = transformEntityCoordinates(positionX, positionY, this.flip)
     displayBoost(this.scene, coords[0], coords[1], stat)
   }
 
@@ -956,7 +956,7 @@ export default class BattleManager {
   }
 
   displayBoardEvent(event: IBoardEvent) {
-    const coordinates = transformAttackCoordinate(event.x, event.y, this.flip)
+    const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
     const index = event.y * BOARD_WIDTH + event.x
 
     const existingBoardEventSprite = this.boardEventSprites[index]
@@ -1190,7 +1190,7 @@ export default class BattleManager {
     id: string
   ) {
     if (this.simulation?.id === id) {
-      const coordinates = transformAttackCoordinate(
+      const coordinates = transformEntityCoordinates(
         positionX,
         positionY,
         this.flip
@@ -1215,7 +1215,7 @@ export default class BattleManager {
     id: string
   ) {
     if (this.simulation?.id === id) {
-      const coordinates = transformAttackCoordinate(
+      const coordinates = transformEntityCoordinates(
         positionX,
         positionY,
         this.flip

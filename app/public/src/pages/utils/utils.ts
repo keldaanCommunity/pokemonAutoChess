@@ -7,7 +7,7 @@ export const FIREBASE_CONFIG = {
   appId: process.env.FIREBASE_APP_ID
 }
 
-export function transformCoordinate(x: number, y: number) {
+export function transformBoardCoordinates(x: number, y: number) {
   if (y === 0) {
     return [28 * 24 + 96 * x, 808]
   } else {
@@ -15,7 +15,11 @@ export function transformCoordinate(x: number, y: number) {
   }
 }
 
-export function transformAttackCoordinate(x: number, y: number, flip: boolean) {
+export function transformEntityCoordinates(
+  x: number,
+  y: number,
+  flip: boolean
+) {
   return [28 * 24 + 96 * x, flip ? 184 + 96 * y : 664 - 96 * y]
 }
 

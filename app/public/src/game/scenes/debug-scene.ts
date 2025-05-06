@@ -9,7 +9,7 @@ import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
-import { transformAttackCoordinate } from "../../pages/utils/utils"
+import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { displayAbility } from "../components/abilities-animations"
 import { displayBoost } from "../components/boosts-animations"
@@ -82,7 +82,7 @@ export class DebugScene extends Phaser.Scene {
       this.target.destroy()
       clearInterval(this.attackAnimInterval)
     }
-    const [px, py] = transformAttackCoordinate(3, 3, false)
+    const [px, py] = transformEntityCoordinates(3, 3, false)
     this.pokemon = new PokemonSprite(
       this,
       px,
@@ -353,7 +353,7 @@ export class DebugScene extends Phaser.Scene {
     const ty = this.pokemon!.positionY + OrientationVector[or][1] * range
     this.pokemon!.targetX = tx
     this.pokemon!.targetY = ty
-    const [rtx, rty] = transformAttackCoordinate(tx, ty, false)
+    const [rtx, rty] = transformEntityCoordinates(tx, ty, false)
     this.target = new PokemonSprite(
       this,
       rtx,
@@ -398,7 +398,7 @@ export class DebugScene extends Phaser.Scene {
   }
 
   displayBoost(stat: Stat) {
-    const coords = transformAttackCoordinate(
+    const coords = transformEntityCoordinates(
       this.pokemon!.positionX,
       this.pokemon!.positionY,
       false

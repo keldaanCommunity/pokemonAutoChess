@@ -26,7 +26,7 @@ import { logger } from "../../../../utils/logger"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
-import { transformCoordinate } from "../../pages/utils/utils"
+import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import BattleManager from "../components/battle-manager"
@@ -384,7 +384,7 @@ export default class GameScene extends Scene {
 
     for (let y = 0; y < 4; y++) {
       for (let x = 0; x < 8; x++) {
-        const coord = transformCoordinate(x, y)
+        const coord = transformBoardCoordinates(x, y)
         const zone = this.add.zone(coord[0], coord[1], 96, 96)
         zone.setRectangleDropZone(96, 96)
         zone.setName("board-zone")
@@ -546,7 +546,7 @@ export default class GameScene extends Scene {
               this.lastDragDropPokemon = gameObject
             } else {
               // RETURN TO ORIGINAL SPOT
-              gameObject.setPosition(...transformCoordinate(x, y))
+              gameObject.setPosition(...transformBoardCoordinates(x, y))
             }
           }
           // POKEMON -> SELL-ZONE = SELL POKEMON
@@ -557,7 +557,7 @@ export default class GameScene extends Scene {
           }
           // RETURN TO ORIGINAL SPOT
           else {
-            const [x, y] = transformCoordinate(
+            const [x, y] = transformBoardCoordinates(
               gameObject.positionX,
               gameObject.positionY
             )

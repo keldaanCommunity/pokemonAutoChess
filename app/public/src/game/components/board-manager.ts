@@ -21,8 +21,8 @@ import { Synergy } from "../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../utils/board"
 import { values } from "../../../../utils/schemas"
 import {
-  transformAttackCoordinate,
-  transformCoordinate
+  transformBoardCoordinates,
+  transformEntityCoordinates
 } from "../../pages/utils/utils"
 import store from "../../stores"
 import AnimationManager from "../animation-manager"
@@ -38,6 +38,8 @@ import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import { refreshShopUI } from "../../stores/GameStore"
 import { Portal } from "./portal"
 import { logger } from "../../../../utils/logger"
+import { PVEStage, PVEStages } from "../../../../models/pve-stages"
+import PokemonFactory from "../../../../models/pokemon-factory"
 
 export enum BoardMode {
   PICK = "pick",
@@ -177,7 +179,7 @@ export default class BoardManager {
     if (this.pokemons.has(pokemon.id)) {
       return this.pokemons.get(pokemon.id)!
     }
-    const coordinates = transformCoordinate(
+    const coordinates = transformBoardCoordinates(
       pokemon.positionX,
       pokemon.positionY
     )
@@ -232,7 +234,7 @@ export default class BoardManager {
     this.hideLightCell()
     const lightCount = this.player.synergies.get(Synergy.LIGHT)
     if (lightCount && lightCount >= SynergyTriggers[Synergy.LIGHT][0]) {
-      const coordinates = transformCoordinate(this.lightX, this.lightY)
+      const coordinates = transformBoardCoordinates(this.lightX, this.lightY)
       this.lightCell = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -569,6 +571,13 @@ export default class BoardManager {
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
+
+    if (this.state.stageLevel in PVEStages) {
+      setTimeout(
+        () => this.addPvePokemons(PVEStages[this.state.stageLevel]),
+        1500
+      )
+    }
   }
 
   minigameMode() {
@@ -640,7 +649,7 @@ export default class BoardManager {
         case "positionX":
           pokemonUI.positionX = value as IPokemon["positionX"]
           pokemonUI.positionY = pokemon.positionY
-          coordinates = transformCoordinate(
+          coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
           )
@@ -652,7 +661,7 @@ export default class BoardManager {
         case "positionY":
           pokemonUI.positionY = value as IPokemon["positionY"]
           pokemonUI.positionX = pokemon.positionX
-          coordinates = transformCoordinate(
+          coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
           )
@@ -773,15 +782,64 @@ export default class BoardManager {
     })
   }
 
+  addPvePokemons(pveStage: PVEStage) {
+    pveStage.board.forEach(([pkm, boardX, boardY], i) => {
+      const [x, y] = transformEntityCoordinates(boardX, boardY - 1, true)
+      const id = `pve_${this.state.stageLevel}_${i}`
+
+      const pkmSprite = new PokemonSprite(
+        this.scene,
+        x,
+        y,
+        PokemonFactory.createPokemonFromName(pkm, {
+          shiny: this.state.shinyEncounter
+        }),
+        id,
+        false,
+        true
+      )
+
+      this.pokemons.set(id, pkmSprite)
+
+      pkmSprite.setDepth(DEPTH.POKEMON)
+      pkmSprite.y -= 500
+      pkmSprite.orientation = Orientation.DOWN
+      this.scene.animationManager?.animatePokemon(
+        pkmSprite,
+        PokemonActionState.WALK,
+        false
+      )
+      this.scene.tweens.add({
+        targets: pkmSprite,
+        y,
+        ease: "Linear",
+        duration: 3000,
+        onComplete: () => {
+          if (pkmSprite) {
+            pkmSprite.orientation = Orientation.DOWNLEFT
+            this.scene.animationManager?.animatePokemon(
+              pkmSprite,
+              PokemonActionState.IDLE,
+              false
+            )
+          }
+        }
+      })
+    })
+  }
+
   displayBoost(stat: Stat, pokemon: PokemonSprite) {
     pokemon.emoteAnimation()
-    const coords = transformCoordinate(pokemon.positionX, pokemon.positionY)
+    const coords = transformBoardCoordinates(
+      pokemon.positionX,
+      pokemon.positionY
+    )
     displayBoost(this.scene, coords[0], coords[1], stat)
   }
 
   addPortal() {
     if (this.portal) this.portal.destroy()
-    const [x, y] = transformCoordinate(3.5, 5)
+    const [x, y] = transformBoardCoordinates(3.5, 5)
     this.portal = new Portal(this.scene, "portal", x, y).setScale(0)
     this.scene.tweens.add({
       targets: this.portal,
@@ -792,7 +850,7 @@ export default class BoardManager {
   }
 
   portalTransition(isRedPlayer: boolean) {
-    const [portalX, portalY] = transformCoordinate(3.5, 5)
+    const [portalX, portalY] = transformBoardCoordinates(3.5, 5)
     const opponent = values(this.state.players).find(
       (p) => p.id === this.player.opponentId
     )
@@ -826,12 +884,12 @@ export default class BoardManager {
           this.scene.setMap(opponent.map)
 
           // move portal to the other side when spawning
-          const [x, y] = transformCoordinate(3.5, 2)
+          const [x, y] = transformBoardCoordinates(3.5, 2)
           this.portal?.setPosition(x, y).setScale(1)
 
           // show the opponent pokemons
           opponent.board.forEach((pokemon) => {
-            const [x, y] = transformAttackCoordinate(
+            const [x, y] = transformEntityCoordinates(
               pokemon.positionX,
               pokemon.positionY - 1,
               true
@@ -872,7 +930,7 @@ export default class BoardManager {
 
           // replace the red pokemons
           monsToTeleport.forEach((p) => {
-            const [originalX, originalY] = transformCoordinate(
+            const [originalX, originalY] = transformBoardCoordinates(
               p.positionX,
               p.positionY
             )
@@ -944,7 +1002,7 @@ export default class BoardManager {
           )
           this.pokemons.set(pokemonUI.id, pokemonUI)
 
-          const [originalX, originalY] = transformAttackCoordinate(
+          const [originalX, originalY] = transformEntityCoordinates(
             pokemon.positionX,
             pokemon.positionY - 1,
             true
