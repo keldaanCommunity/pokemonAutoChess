@@ -93,6 +93,7 @@ export default class BattleManager {
         true,
         this.flip
       )
+      pokemonUI.setVisible(this.simulation?.started ?? false)
       this.animationManager.animatePokemon(
         pokemonUI,
         pokemon.status.tree ? PokemonActionState.IDLE : PokemonActionState.WALK,
@@ -1303,6 +1304,12 @@ export default class BattleManager {
     this.simulation = simulation
     this.clear()
     this.buildPokemons()
+  }
+
+  onSimulationStart() {
+    this.pokemonSprites.forEach((pkm) => {
+      pkm.setVisible(true)
+    })
   }
 
   setPlayer(player: Player) {

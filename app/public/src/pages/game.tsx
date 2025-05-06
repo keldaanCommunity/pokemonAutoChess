@@ -23,7 +23,7 @@ import {
 } from "../../../types"
 import { MinStageLevelForGameToCount, PortalCarouselStages } from "../../../types/Config"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
-import { Team } from "../../../types/enum/Game"
+import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
 import { getFreeSpaceOnBench } from "../../../utils/board"
@@ -85,6 +85,7 @@ import { Passive } from "../../../types/enum/Passive"
 import { Item } from "../../../types/enum/Item"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import { PVEStages } from "../../../models/pve-stages"
 
 let gameContainer: GameContainer
 
@@ -542,6 +543,10 @@ export default function Game() {
 
       $state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
+        const stageLevel = room.state.stageLevel ?? 0
+        if (room.state.phase === GamePhaseState.PICK && stageLevel in PVEStages === false && value < 5 && gameContainer.gameScene?.board && !gameContainer.gameScene.board.portal) {
+          gameContainer.gameScene.board.addPortal()
+        }
       })
 
       $state.listen("phase", (newPhase, previousPhase) => {

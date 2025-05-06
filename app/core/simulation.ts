@@ -74,6 +74,7 @@ export default class Simulation extends Schema implements ISimulation {
   @type("string") bluePlayerId: string
   @type("string") redPlayerId: string
   @type("boolean") isGhostBattle: boolean
+  @type("boolean") started: boolean
   room: GameRoom
   blueEffects = new Set<Effect>()
   redEffects = new Set<Effect>()
@@ -108,8 +109,8 @@ export default class Simulation extends Schema implements ISimulation {
     this.stageLevel = stageLevel
     this.weather = weather
     this.isGhostBattle = isGhostBattle
-
     this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
+    this.started = false
 
     // beforeSimulationStart hooks
     const playerEffects: [Player | undefined, Set<Effect>, Set<Effect>][] = [
@@ -192,6 +193,10 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
+  start() {
+    this.started = true
+  }
+
   getEffects(playerId: string) {
     return playerId === this.bluePlayer?.id
       ? this.blueEffects
@@ -233,6 +238,8 @@ export default class Simulation extends Schema implements ISimulation {
   ) {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isSpawn = isSpawn
+    pokemonEntity.orientation =
+      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
     if (pokemon.meal) {

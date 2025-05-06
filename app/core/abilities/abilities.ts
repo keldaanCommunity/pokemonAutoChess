@@ -3164,10 +3164,6 @@ export class IronTailStrategy extends AbilityStrategy {
           orientation
         )
 
-        // console.log(
-        //   `pokemon on ${pokemon.positionX} ${pokemon.positionY} will move the target ${cell.value.positionX}, ${cell.value.positionY} will be moved to ${destination?.x}, ${destination?.y} orientation ${orientation}`
-        // )
-
         if (destination) {
           cell.value.moveTo(destination.x, destination.y, board)
           cell.value.cooldown = 500
@@ -9523,10 +9519,6 @@ export class BulldozeStrategy extends AbilityStrategy {
           cell.value.positionY,
           orientation
         )
-
-        // console.log(
-        //   `pokemon on ${pokemon.positionX} ${pokemon.positionY} will move the target ${cell.value.positionX}, ${cell.value.positionY} will be moved to ${destination?.x}, ${destination?.y} orientation ${orientation}`
-        // )
 
         if (destination) {
           cell.value.moveTo(destination.x, destination.y, board)

@@ -539,7 +539,7 @@ export default class GameRoom extends Room<GameState> {
       /* in case of lag spikes, the game should feel slower, 
       but this max simulation dt helps preserving the correctness of simulation result */
       deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
-      if (!this.state.gameFinished) {
+      if (!this.state.gameFinished && !this.state.simulationPaused) {
         try {
           this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
         } catch (error) {

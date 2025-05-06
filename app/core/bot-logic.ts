@@ -1,4 +1,3 @@
-import { app } from "firebase-admin"
 import { IBot, IDetailledPokemon, IStep } from "../models/mongo-models/bot-v2"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"

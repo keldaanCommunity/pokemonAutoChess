@@ -101,6 +101,17 @@ class GameContainer {
         this.gameScene?.battle?.removePokemon(simulation.id, pokemon)
       })
     })
+
+    $simulation.listen("started", (value, previousValue) => {
+      if (
+        this.gameScene?.board?.player.simulationId === simulation.id &&
+        value === true &&
+        value !== previousValue
+      ) {
+        this.gameScene?.board?.removePokemonsOnBoard()
+        this.gameScene?.battle?.onSimulationStart()
+      }
+    })
   }
 
   initializePokemon(pokemon: PokemonEntity, simulation: Simulation) {
