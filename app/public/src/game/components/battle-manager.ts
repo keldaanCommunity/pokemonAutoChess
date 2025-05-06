@@ -1307,7 +1307,6 @@ export default class BattleManager {
   }
 
   onSimulationStart() {
-    console.log("Simulation starts")
     this.pokemonSprites.forEach((pkm) => {
       pkm.setVisible(true)
     })
