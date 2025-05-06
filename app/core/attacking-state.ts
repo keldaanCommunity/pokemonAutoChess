@@ -1,6 +1,5 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
-import { Weather } from "../types/enum/Weather"
 import { distanceC } from "../utils/distance"
 import { chance } from "../utils/random"
 import { AbilityStrategies } from "./abilities/abilities"

@@ -51,6 +51,7 @@ export default class GameState extends Schema {
   updatePhaseNeeded = false
   botManager: BotManager = new BotManager()
   shop: Shop = new Shop()
+  simulationPaused = false
   gameFinished = false
   gameLoaded = false
   name: string

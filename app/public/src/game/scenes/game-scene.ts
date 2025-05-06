@@ -290,7 +290,7 @@ export default class GameScene extends Scene {
     }
 
     if (newPhase === GamePhaseState.FIGHT) {
-      this.board?.battleMode()
+      this.board?.battleMode(true)
     } else if (newPhase === GamePhaseState.TOWN) {
       this.board?.minigameMode()
       this.weatherManager?.setTownDaytime(this.room?.state.stageLevel ?? 0)

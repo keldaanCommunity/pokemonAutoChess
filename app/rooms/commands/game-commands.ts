@@ -1012,7 +1012,7 @@ export class OnUpdateCommand extends Command<
 
         this.state.simulations.forEach((simulation) => {
           if (!simulation.finished) {
-            simulation.update(deltaTime)
+            if (simulation.started) simulation.update(deltaTime)
             everySimulationFinished = false
           }
         })
@@ -1619,6 +1619,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const isGameFinished = this.checkEndGame()
 
     if (!isGameFinished) {
+      this.state.botManager.updateBots()
       this.state.stageLevel += 1
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
@@ -1717,9 +1718,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.simulations.clear()
     this.state.phase = GamePhaseState.FIGHT
     this.state.time = FIGHTING_PHASE_DURATION
+    this.state.roundTime = Math.round(this.state.time / 1000)
     this.room.setMetadata({ stageLevel: this.state.stageLevel })
     updateLobby(this.room)
-    this.state.botManager.updateBots()
 
     const pveStage = PVEStages[this.state.stageLevel]
 
@@ -1768,10 +1769,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           player.simulationId = simulation.id
           this.state.simulations.set(simulation.id, simulation)
+          simulation.start()
         }
       })
     } else {
       const matchups = selectMatchups(this.state)
+      this.state.simulationPaused = true // 2 seconds pause for portal transition animation
 
       matchups.forEach((matchup) => {
         const { bluePlayer, redPlayer, ghost } = matchup
@@ -1822,6 +1825,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         )
 
         this.state.simulations.set(simulation.id, simulation)
+        setTimeout(() => {
+          this.state.simulationPaused = false
+          simulation.start()
+        }, 2000) // 2 seconds for portal transition animation
       })
     }
   }
