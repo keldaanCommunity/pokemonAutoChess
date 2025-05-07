@@ -38,6 +38,7 @@
     "precompute": "cd gen && ts-node precompute-all.ts",
     "colyseus-post-deploy": "npx colyseus-post-deploy",
     "deploy-live": "pm2 deploy production update",
+    "setup-live": "pm2 deploy production setup",
     "check-circular-refs": "npx madge ./app -- --circular --exclude '^public/dist'"
   },
   "dependencies": {
