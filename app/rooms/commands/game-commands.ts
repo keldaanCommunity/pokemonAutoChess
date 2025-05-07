@@ -1894,9 +1894,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               client.send(Transfer.POKEMON_WANDERING, { id, pkm: Pkm.SABLEYE })
               this.clock.setTimeout(() => {
                 if (this.state.wanderers.has(id)) {
-                  itemStolen = pickRandomIn(player.items)
+                  itemStolen = pickRandomIn(values(player.items))
                   if (itemStolen) {
-                    player.items.splice(player.items.indexOf(itemStolen), 1)
+                    const index = player.items.indexOf(itemStolen)
+                    player.items.splice(index, 1)
                   }
                   this.clock.setTimeout(() => {
                     if (itemStolen && this.state.wanderers.has(id) === false) {

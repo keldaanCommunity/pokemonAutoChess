@@ -3376,7 +3376,7 @@ export const AnimationConfig: {
   },
   [Pkm.IGGLYBUFF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Special6,
+    ability: AnimationType.Sing,
     emote: AnimationType.Shoot
   },
   [Pkm.WIGGLYTUFF]: {

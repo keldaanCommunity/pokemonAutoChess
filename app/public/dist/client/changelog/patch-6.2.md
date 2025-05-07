@@ -57,6 +57,7 @@
 - Dodge chance is now capped at 90% even with a high luck stat
 - Change Xatu encounter: cost increased 10 → 15 gold. No longer appear on stage 4.
 - Change Wobuffet encounter: exchange ticket no longer replace the carousel content, but is given to all players immediately after the carousel.
+- New town encounter: Sableye
 
 # UI
 

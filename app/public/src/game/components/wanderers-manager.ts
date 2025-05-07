@@ -10,7 +10,6 @@ import { t } from "i18next"
 import { chance } from "../../../../utils/random"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
-import { Pokemon } from "../../../../models/colyseus-models/pokemon"
 
 const SHARDS_PER_UNOWN_WANDERER = 50
 const DEFAULT_WANDERER_SPEED = 0.3
@@ -48,6 +47,9 @@ export default class WanderersManager {
         this.displayShardGain([pointer.x, pointer.y], unown.index)
         unown.destroy()
         tween.destroy()
+      },
+      onComplete: (sprite) => {
+        sprite.destroy()
       }
     })
   }
@@ -67,18 +69,22 @@ export default class WanderersManager {
         } else if (this.scene.board) {
           this.scene.board.displayText(pointer.x, pointer.y, t("full"))
         }
+      },
+      onComplete: (sprite) => {
+        sprite.destroy()
       }
     })
   }
 
   addSableye(id: string) {
     let stopped = false
-    const sableye = this.addWanderingPokemon({
+    const tweens: Phaser.Tweens.Tween[] = []
+    const { sprite: sableye, tween } = this.addWanderingPokemon({
       id,
       pkm: Pkm.SABLEYE,
       startX: -100,
-      startY: 100,
-      endX: 494,
+      startY: 700,
+      endX: 484,
       endY: 686,
       duration: 3000,
       onClick: (sprite, id, pointer) => {
@@ -89,6 +95,7 @@ export default class WanderersManager {
           PokemonActionState.HURT,
           false
         )
+        tweens.forEach((tween) => tween.stop())
         this.scene.add.tween({
           targets: [sprite],
           ease: "linear",
@@ -101,19 +108,28 @@ export default class WanderersManager {
       },
       onComplete: () => {
         if (!stopped) {
-          this.scene.add.tween({
-            targets: [sableye],
-            ease: "linear",
-            duration: 2000,
-            x: -100,
-            y: 100,
-            onComplete: () => {
-              sableye.destroy()
-            }
-          })
+          sableye.orientation = Orientation.LEFT
+          this.scene.animationManager?.animatePokemon(
+            sableye,
+            PokemonActionState.WALK,
+            false
+          )
+          tweens.push(
+            this.scene.add.tween({
+              targets: [sableye],
+              ease: "linear",
+              duration: 2000,
+              x: -100,
+              y: 700,
+              onComplete: () => {
+                sableye.destroy()
+              }
+            })
+          )
         }
       }
     })
+    tweens.push(tween)
   }
 
   addWanderingPokemon({
@@ -140,8 +156,8 @@ export default class WanderersManager {
       pointer: Phaser.Input.Pointer,
       tween: Phaser.Tweens.Tween
     ) => void
-    onComplete?: () => void
-  }): PokemonSprite {
+    onComplete?: (pokemon: PokemonSprite, id: string) => void
+  }): { tween: Phaser.Tweens.Tween; sprite: PokemonSprite } {
     const fromLeft = chance(1 / 2)
     startX = startX || (fromLeft ? -100 : +window.innerWidth + 100)
     startY = startY || 100 + Math.round(Math.random() * 500)
@@ -157,7 +173,7 @@ export default class WanderersManager {
       false,
       false
     )
-    pokemon.orientation = fromLeft ? Orientation.RIGHT : Orientation.LEFT
+    pokemon.orientation = startX < endX ? Orientation.RIGHT : Orientation.LEFT
     this.scene.animationManager?.animatePokemon(
       pokemon,
       PokemonActionState.WALK,
@@ -170,11 +186,8 @@ export default class WanderersManager {
       y: endY,
       ease: "Linear",
       duration,
-      onComplete: () => {
-        if (pokemon) {
-          pokemon.destroy()
-          onComplete?.()
-        }
+      onComplete() {
+        onComplete?.(pokemon, id)
       }
     })
 
@@ -183,7 +196,7 @@ export default class WanderersManager {
     pokemon.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       onClick(pokemon, id, pointer, tween)
     })
-    return pokemon
+    return { tween, sprite: pokemon }
   }
 
   displayShardGain(coordinates: number[], index: string) {

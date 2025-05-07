@@ -447,6 +447,14 @@ export default class MinigameManager {
       name: Pkm.SPINDA
     })
 
+    const sableye = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.SABLEYE ? cx : 37 * 48,
+      y: encounter === TownEncounters.SABLEYE ? cy : 4 * 48,
+      orientation: Orientation.DOWNLEFT,
+      name: Pkm.SABLEYE
+    })
+
     const mareep = new PokemonSpecial({
       scene: this.scene,
       x: 46 * 48,
@@ -499,6 +507,7 @@ export default class MinigameManager {
       wobbuffet,
       wynaut,
       spinda,
+      sableye,
       munchlax,
       ...podiumPokemons
     )
