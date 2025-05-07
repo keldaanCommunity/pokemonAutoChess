@@ -447,31 +447,12 @@ export default function Game() {
         )
       })
 
-      room.onMessage(Transfer.UNOWN_WANDERING, ({ id, pkm }: { id: string, pkm: Pkm }) => {
+      room.onMessage(Transfer.POKEMON_WANDERING, ({ id, pkm }: { id: string, pkm: Pkm }) => {
         if (gameContainer.game) {
           const g = getGameScene()
-          if (g && g.unownManager) {
-            g.unownManager.addWanderingUnown(pkm, id)
+          if (g && g.wandererManager) {
+            g.wandererManager.addWanderer(pkm, id)
           }
-        }
-      })
-
-      room.onMessage(Transfer.POKEMON_WANDERING, (data: { id: string, pkm: Pkm }) => {
-        const scene = getGameScene()
-        const { id, pkm } = data
-        if (scene) {
-          addWanderingPokemon(scene, id, pkm, (sprite, id, pointer, tween) => {
-            if (
-              scene.board &&
-              getFreeSpaceOnBench(scene.board.player.board) > 0
-            ) {
-              room.send(Transfer.POKEMON_WANDERING, { id })
-              sprite.destroy()
-              tween.destroy()
-            } else if (scene.board) {
-              scene.board.displayText(pointer.x, pointer.y, t("full"))
-            }
-          })
         }
       })
 

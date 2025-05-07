@@ -3707,7 +3707,8 @@
 		"WOBBUFFET": "Wobbuffet let you recycle an unused item component or crafted item",
 		"SPINDA": "Spinda changes the direction of rotation of the carousel randomly",
 		"REGIROCK": "Regirock grants all players 15 additional HP",
-		"MUNCHLAX": "Munchlax brought a PICNIC_SET for everyone"
+		"MUNCHLAX": "Munchlax brought a PICNIC_SET for everyone",
+		"SABLEYE": "Sableye might come and try to steal one of your unused items"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

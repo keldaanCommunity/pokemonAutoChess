@@ -353,6 +353,10 @@ export class MiniGame {
       this.alivePlayers.forEach((player) => {
         player.life += 15
       })
+    } else if (state.townEncounter === TownEncounters.WOBBUFFET) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.EXCHANGE_TICKET)
+      })
     }
   }
 
@@ -490,12 +494,6 @@ export class MiniGame {
 
     if (encounter === TownEncounters.DUSKULL) {
       itemsSet = [Item.GIMMIGHOUL_COIN]
-      nbItemsToPick = this.alivePlayers.length
-      maxCopiesPerItem = 99
-    }
-
-    if (encounter === TownEncounters.WOBBUFFET) {
-      itemsSet = [Item.EXCHANGE_TICKET]
       nbItemsToPick = this.alivePlayers.length
       maxCopiesPerItem = 99
     }

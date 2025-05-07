@@ -22,7 +22,7 @@ import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { UNOWNS_PER_ABILITY } from "./unown-manager"
+import { UNOWNS_PER_ABILITY } from "./wanderers-manager"
 import { DEPTH } from "../depths"
 
 export function displayAbility(
@@ -219,17 +219,17 @@ export function displayAbility(
 
     case Ability.CORE_ENFORCER:
       {
-        const topLeft = transformAttackCoordinate(
+        const topLeft = transformEntityCoordinates(
           targetX - 1,
           targetY + 1,
           flip
         )
-        const topRight = transformAttackCoordinate(
+        const topRight = transformEntityCoordinates(
           targetX + 1,
           targetY + 1,
           flip
         )
-        const bottomLeft = transformAttackCoordinate(
+        const bottomLeft = transformEntityCoordinates(
           targetX - 1,
           targetY - 1,
           flip

@@ -37,7 +37,7 @@ import LoadingManager from "../components/loading-manager"
 import MinigameManager from "../components/minigame-manager"
 import PokemonSprite from "../components/pokemon"
 import { SellZone } from "../components/sell-zone"
-import UnownManager from "../components/unown-manager"
+import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
 import { clamp } from "../../../../utils/number"
@@ -53,7 +53,7 @@ export default class GameScene extends Scene {
   board: BoardManager | undefined
   battle: BattleManager | undefined
   weatherManager: WeatherManager | undefined
-  unownManager?: UnownManager
+  wandererManager?: WanderersManager
   music: Phaser.Sound.WebAudioSound | undefined
   pokemonHovered: PokemonSprite | null = null
   pokemonDragged: PokemonSprite | null = null
@@ -152,7 +152,7 @@ export default class GameScene extends Scene {
       this.weatherManager = new WeatherManager(this)
       this.weatherManager?.setTownDaytime(0)
 
-      this.unownManager = new UnownManager(this)
+      this.wandererManager = new WanderersManager(this)
       if (!this.music) {
         playMusic(
           this,
