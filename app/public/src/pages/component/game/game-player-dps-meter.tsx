@@ -1,16 +1,14 @@
-import React, { useMemo } from "react"
-import { useTranslation } from "react-i18next"
-import { IDps } from "../../../../../types"
-import GameDps from "./game-dps"
+import { useMemo } from "react";
+import { IDps } from "../../../../../types";
+import GameDps from "./game-dps";
 
 type GamePlayerDpsMeterInput = {
-  dpsMeter: IDps[]
-}
+  dpsMeter: IDps[];
+};
 
 export default function GamePlayerDpsMeter({
-  dpsMeter = []
+  dpsMeter = [],
 }: GamePlayerDpsMeterInput) {
-  const { t } = useTranslation()
   const sortedDps = useMemo(
     () =>
       [...dpsMeter].sort((a, b) => {
@@ -19,40 +17,26 @@ export default function GamePlayerDpsMeter({
           b.specialDamage +
           b.trueDamage -
           (a.physicalDamage + a.specialDamage + a.trueDamage)
-        )
+        );
       }),
     [dpsMeter]
-  )
+  );
 
   const maxDamage = useMemo(() => {
-    const firstDps = sortedDps.at(0)
+    const firstDps = sortedDps.at(0);
     if (!firstDps) {
-      return 0
+      return 0;
     }
     return (
       firstDps.physicalDamage + firstDps.specialDamage + firstDps.trueDamage
-    )
-  }, [sortedDps])
-
-  const totalDamage = useMemo(
-    () =>
-      sortedDps.reduce((acc, dps) => {
-        acc += dps.physicalDamage + dps.specialDamage + dps.trueDamage
-        return acc
-      }, 0),
-    [sortedDps]
-  )
+    );
+  }, [sortedDps]);
 
   return (
     <div>
       {sortedDps.map((p) => {
-        return <GameDps key={p.id} dps={p} maxDamage={maxDamage} />
+        return <GameDps key={p.id} dps={p} maxDamage={maxDamage} />;
       })}
-      {sortedDps.length > 0 && (
-        <div>
-          {t("total")}: {totalDamage}
-        </div>
-      )}
     </div>
-  )
+  );
 }

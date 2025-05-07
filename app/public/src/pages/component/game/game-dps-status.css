@@ -1,0 +1,47 @@
+.game-dps-status-bar {
+  display: flex;
+  height: 24px;
+  width: 100%;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 8px 0;
+  box-shadow: 0 1px 4px #0000001a;
+  border: 2px solid black;
+}
+.game-dps-status-bar-my {
+  background: #76c442;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 8px;
+  font-weight: bold;
+  transition: width 0.3s;
+  border-right: 2px solid var(--color-shadow);
+}
+
+.game-dps-status-bar-opponent {
+  background: #8d8d8d;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  font-weight: bold;
+  transition: width 0.3s;
+}
+
+.game-dps-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+  gap: 8px;
+  height: 24px;
+  flex: 1;
+}
+
+.game-dps-status-bar-value {
+  z-index: 1;
+}
