@@ -40,6 +40,7 @@
 - Rework Zygarde: Zygarde 50% range 2 → 3 ; Zygarde 100% range 1 → 2 PP 120 → 100 ; Zygarde now evolves into 100% form after getting max stacks of ground (15 seconds) ; Rework Core Enforcer: now hits in an area of effect in the shape of a Z around the target, dealing 80 special damage and inflicting Silence for 3 seconds.
 - Purrloin line is now Uncommon ; adjusted Fake out damage: 50/100/150 → 40/80/150
 - Change Decorate (Alcremy): now targets the **strongest** nearest ally instead of a random ally among the nearest ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
+- Caterpie line is now Bug/Amorphous instead of Bug/Grass
 
 # Changes to Synergies
 

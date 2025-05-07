@@ -4818,7 +4818,7 @@ export class Clefable extends Pokemon {
 }
 
 export class Caterpie extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS])
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.METAPOD
@@ -4834,7 +4834,7 @@ export class Caterpie extends Pokemon {
 }
 
 export class Metapod extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS])
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.BUTTERFREE
@@ -4850,7 +4850,11 @@ export class Metapod extends Pokemon {
 }
 
 export class Butterfree extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG, Synergy.FLYING])
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.FLYING,
+    Synergy.AMORPHOUS
+  ])
   rarity = Rarity.COMMON
   stars = 3
   hp = 180
@@ -4865,7 +4869,7 @@ export class Butterfree extends Pokemon {
 }
 
 export class Weedle extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.KAKUNA
@@ -4881,7 +4885,7 @@ export class Weedle extends Pokemon {
 }
 
 export class Kakuna extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.BEEDRILL
@@ -4897,7 +4901,7 @@ export class Kakuna extends Pokemon {
 }
 
 export class Beedrill extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG, Synergy.FLYING])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
   hp = 170
