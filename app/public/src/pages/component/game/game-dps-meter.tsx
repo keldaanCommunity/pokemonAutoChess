@@ -2,19 +2,16 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { usePreference, usePreferences } from "../../../preferences"
-import { getAvatarSrc } from "../../../../../utils/avatar"
+import { usePreference } from "../../../preferences"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
 import { GamePhaseState, Team } from "../../../../../types/enum/Game"
 import { PVEStages } from "../../../../../models/pve-stages"
-import "./game-dps-meter.css"
-import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
+import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
-  const [{ antialiasing }] = usePreferences()
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const team = useAppSelector(
@@ -40,7 +37,7 @@ export default function GameDpsMeter() {
   const opponentAvatar = currentPlayer.opponentAvatar
 
   function toggleOpen() {
-    setOpen((old) => !old)
+    setOpen(!isOpen)
   }
 
   if (opponentAvatar == "") {
