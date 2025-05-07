@@ -29,7 +29,7 @@ async function main() {
   if (process.env.NODE_APP_INSTANCE) {
     initializeMetrics()
     await listen(app)
-    if (process.env.PORT && parseInt(process.env.PORT) === 2567) {
+    if (process.env.PORT && parseInt(process.env.PORT) === 2569) {
       await matchMaker.createRoom("lobby", {})
       checkLobby()
       initCronJobs()
