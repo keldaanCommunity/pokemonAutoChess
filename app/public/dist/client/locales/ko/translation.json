@@ -1540,7 +1540,7 @@
 		"APPLE_ACID": "전방의 대상 3마리에게 [15,30,60,SP] 의 SPECIAL 을 가하고 DEF 와 SPE_DEF 를 [5,SP] 만큼 낮춘다.",
 		"NUTRIENTS": "체력이 가장 적은 아군에게 사과를 던져 [40,SP] HP 을 회복시키고 DEF 과 SPE_DEF 을 [2,SP] 증가시킨다.",
 		"SYRUP_BOMB": "SPEED 가 가장 높은 적에게 시럽을 폭발시켜 [50,SP] SPECIAL 와 SPEED -30.",
-		"FICKLE_BEAM": "머리 4개 각각에서 60% LUCK 로 [60,SP] SPECIAL 및 2초 PARALYSIS 를 가장 SPEED 가 높은 적들에게 가한다.",
+		"FICKLE_BEAM": "머리 5개 각각에서 50% LUCK 로 [50,SP] SPECIAL 및 2초 PARALYSIS 를 가장 SPEED 가 높은 적들에게 가한다.",
 		"GRAV_APPLE": "고공에서 사과를 떨어뜨려 [80,SP] PHYSICAL 를 가한다. 대상 DEF 이 0이라면 [160,SP] PHYSICAL 를 가한다.",
 		"SACRED_SWORD_IRON": "대상에게 [80,SP] TRUE를 가한다. 기절한 아군당 [15,SP] 증가한다.",
 		"SACRED_SWORD_GRASS": "대상에게 [80,SP] TRUE를 가한다. 생존한 아군당 [10,SP] 증가한다.",
