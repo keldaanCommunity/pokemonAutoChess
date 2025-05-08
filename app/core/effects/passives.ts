@@ -2,6 +2,7 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import Board from "../board"
 import { Effect, OnAttackEffect } from "./effect"
+import { ItemEffects } from "./items"
 import { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
 import { Passive } from "../../types/enum/Passive"
@@ -10,6 +11,7 @@ import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { Pkm } from "../../types/enum/Pokemon"
 import { chance } from "../../utils/random"
+import { values } from "../../utils/schemas"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
@@ -47,6 +49,20 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
         totalDamage: 0
       })
     }
+  })
+  const itemEffects: OnAttackEffect[] = values(pokemon.items)
+    .flatMap((item) => ItemEffects[item] ?? [])
+    .filter((effect) => effect instanceof OnAttackEffect)
+  itemEffects.forEach((effect) => {
+    effect.apply({
+      pokemon,
+      target: null,
+      board,
+      physicalDamage: 0,
+      specialDamage: 0,
+      trueDamage: 0,
+      totalDamage: 0
+    })
   })
 }
 
