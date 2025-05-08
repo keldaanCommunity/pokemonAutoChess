@@ -27,7 +27,12 @@ export abstract class Effect {
 }
 
 // applied on fight start or when spawning
-export class OnSpawnEffect extends Effect {}
+export class OnSpawnEffect extends Effect {
+  constructor(effect?: (entity: PokemonEntity) => void) {
+    super(effect)
+  }
+  override apply(entity: PokemonEntity) {}
+}
 
 // item effect applied on fight start of after stealing/obtaining an item
 export class OnItemGainedEffect extends Effect {}
@@ -100,7 +105,7 @@ interface OnAttackEffectArgs {
 }
 
 export class OnAttackEffect extends Effect {
-  apply(args: OnAttackEffectArgs) {}
+  override apply(args: OnAttackEffectArgs) {}
   constructor(
     effect?: (args: OnAttackEffectArgs) => void,
     origin?: EffectOrigin
