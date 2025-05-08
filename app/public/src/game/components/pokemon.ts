@@ -2,7 +2,6 @@ import { SetSchema } from "@colyseus/schema"
 import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
-import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
   AttackSprite,
@@ -34,12 +33,8 @@ import {
 } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
-import { chance } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
-import {
-  transformEntityCoordinates,
-  transformBoardCoordinates
-} from "../../pages/utils/utils"
+import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
@@ -1269,62 +1264,4 @@ export default class PokemonSprite extends DraggableObject {
       }
     })
   }
-}
-
-export function addWanderingPokemon(
-  scene: GameScene,
-  id: string,
-  pkm: Pkm,
-  onClick: (
-    pokemon: PokemonSprite,
-    id: string,
-    pointer: Phaser.Input.Pointer,
-    tween: Phaser.Tweens.Tween
-  ) => void
-) {
-  const fromLeft = chance(1 / 2)
-  const [startX, endX] = fromLeft
-    ? [-100, +window.innerWidth + 100]
-    : [+window.innerWidth + 100, -100]
-  const [startY, endY] = [
-    100 + Math.round(Math.random() * 500),
-    100 + Math.round(Math.random() * 500)
-  ]
-
-  const SPEED = 0.3
-
-  const pokemon = new PokemonSprite(
-    scene,
-    startX,
-    startY,
-    PokemonFactory.createPokemonFromName(pkm),
-    "wanderer",
-    false,
-    false
-  )
-  pokemon.orientation = fromLeft ? Orientation.RIGHT : Orientation.LEFT
-  scene.animationManager?.animatePokemon(
-    pokemon,
-    PokemonActionState.WALK,
-    false
-  )
-
-  const tween = scene.tweens.add({
-    targets: pokemon,
-    x: endX,
-    y: endY,
-    ease: "Linear",
-    duration: window.innerWidth / SPEED,
-    onComplete: () => {
-      if (pokemon) {
-        pokemon.destroy()
-      }
-    }
-  })
-
-  pokemon.draggable = false
-  pokemon.sprite.setInteractive()
-  pokemon.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-    onClick(pokemon, id, pointer, tween)
-  })
 }

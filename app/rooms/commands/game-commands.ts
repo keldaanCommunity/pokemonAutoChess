@@ -18,7 +18,9 @@ import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
+import UserMetadata from "../../models/mongo-models/user-metadata"
 import {
+  Emotion,
   IClient,
   IDragDropCombineMessage,
   IDragDropItemMessage,
@@ -30,7 +32,6 @@ import {
   AdditionalPicksStages,
   BOARD_SIDE_HEIGHT,
   BOARD_WIDTH,
-  EvolutionTime,
   FIGHTING_PHASE_DURATION,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
@@ -98,6 +99,7 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
+import { TownEncounters } from "../../core/town-encounters"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -192,32 +194,58 @@ export class OnRemoveFromShopCommand extends Command<
 export class OnPokemonCatchCommand extends Command<
   GameRoom,
   {
+    client: Client
     playerId: string
     id: string
   }
 > {
-  execute({ playerId, id }) {
+  async execute({ client, playerId, id }) {
     if (playerId === undefined || !this.state.players.has(playerId)) return
     const player = this.state.players.get(playerId)
     const pkm = this.state.wanderers.get(id)
     if (!player || !player.alive || !pkm) return
     this.state.wanderers.delete(id)
 
-    const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
-    const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
-    const hasSpaceOnBench =
-      freeSpaceOnBench > 0 ||
-      (pokemon.evolutionRule &&
-        pokemon.evolutionRule instanceof CountEvolutionRule &&
-        pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player))
+    if (pkm === Pkm.SABLEYE) {
+    } else if (Unowns.includes(pkm)) {
+      const unownIndex = PkmIndex[pkm]
+      if (client.auth) {
+        const DUST_PER_ENCOUNTER = 50
+        const u = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (u) {
+          const c = u.pokemonCollection.get(unownIndex)
+          if (c) {
+            c.dust += DUST_PER_ENCOUNTER
+          } else {
+            u.pokemonCollection.set(unownIndex, {
+              id: unownIndex,
+              emotions: [],
+              shinyEmotions: [],
+              dust: DUST_PER_ENCOUNTER,
+              selectedEmotion: Emotion.NORMAL,
+              selectedShiny: false
+            })
+          }
+          u.save()
+        }
+      }
+    } else {
+      const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+      const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
+      const hasSpaceOnBench =
+        freeSpaceOnBench > 0 ||
+        (pokemon.evolutionRule &&
+          pokemon.evolutionRule instanceof CountEvolutionRule &&
+          pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player))
 
-    if (hasSpaceOnBench) {
-      const x = getFirstAvailablePositionInBench(player.board)
-      pokemon.positionX = x !== undefined ? x : -1
-      pokemon.positionY = 0
-      player.board.set(pokemon.id, pokemon)
-      pokemon.onAcquired(player)
-      this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+      if (hasSpaceOnBench) {
+        const x = getFirstAvailablePositionInBench(player.board)
+        pokemon.positionX = x !== undefined ? x : -1
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+      }
     }
   }
 }
@@ -1854,10 +1882,41 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           this.state.wanderers.set(id, pkm)
           this.clock.setTimeout(
             () => {
-              client.send(Transfer.UNOWN_WANDERING, { id, pkm })
+              client.send(Transfer.POKEMON_WANDERING, { id, pkm })
             },
             Math.round((5 + 15 * Math.random()) * 1000)
           )
+        }
+
+        if (
+          this.state.townEncounter === TownEncounters.SABLEYE &&
+          player.items.length > 0 &&
+          chance(0.1)
+        ) {
+          const id = nanoid()
+          let itemStolen
+          this.state.wanderers.set(id, Pkm.SABLEYE)
+          this.clock.setTimeout(
+            () => {
+              client.send(Transfer.POKEMON_WANDERING, { id, pkm: Pkm.SABLEYE })
+              this.clock.setTimeout(() => {
+                if (this.state.wanderers.has(id)) {
+                  itemStolen = pickRandomIn(values(player.items))
+                  if (itemStolen) {
+                    const index = player.items.indexOf(itemStolen)
+                    player.items.splice(index, 1)
+                  }
+                  this.clock.setTimeout(() => {
+                    if (itemStolen && this.state.wanderers.has(id) === false) {
+                      player.items.push(itemStolen) // give back the item if sableye has been caught
+                    }
+                  }, 2000)
+                }
+              }, 3000)
+            },
+            Math.round((5 + 15 * Math.random()) * 1000)
+          )
+          //TODO: steal an item after 5 seconds
         }
 
         if (
@@ -1867,7 +1926,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
           for (let i = 0; i < nbPokemonsToSpawn; i++) {
             const id = nanoid()
-            const pkm = this.state.shop.pickPokemon(player, this.state)
+            const pkm = this.state.shop.pickPokemon(
+              player,
+              this.state,
+              -1,
+              true
+            )
             this.state.wanderers.set(id, pkm)
             this.clock.setTimeout(
               () => {

@@ -443,44 +443,11 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(
-      Transfer.UNOWN_WANDERING,
-      async (client, { id: unownId }) => {
-        try {
-          const pkm = this.state.wanderers.get(unownId)
-          if (!pkm) return
-          const unownIndex = PkmIndex[pkm]
-          this.state.wanderers.delete(unownId)
-          if (client.auth) {
-            const DUST_PER_ENCOUNTER = 50
-            const u = await UserMetadata.findOne({ uid: client.auth.uid })
-            if (u) {
-              const c = u.pokemonCollection.get(unownIndex)
-              if (c) {
-                c.dust += DUST_PER_ENCOUNTER
-              } else {
-                u.pokemonCollection.set(unownIndex, {
-                  id: unownIndex,
-                  emotions: [],
-                  shinyEmotions: [],
-                  dust: DUST_PER_ENCOUNTER,
-                  selectedEmotion: Emotion.NORMAL,
-                  selectedShiny: false
-                })
-              }
-              u.save()
-            }
-          }
-        } catch (error) {
-          logger.error(error)
-        }
-      }
-    )
-
     this.onMessage(Transfer.POKEMON_WANDERING, async (client, msg) => {
       if (client.auth) {
         try {
           this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+            client,
             playerId: client.auth.uid,
             id: msg.id
           })
