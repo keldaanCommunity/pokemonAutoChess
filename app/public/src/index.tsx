@@ -19,7 +19,12 @@ import "./style/index.css"
 
 // Redirect top window if running in an iframe
 if (window.top && window !== window.top) {
-  window.top.location = window.location;
+  window.top.location.replace(window.location.href);
+}
+
+// Prevent the website to be opened from window.open()
+if (window.opener) {
+  window.opener.location.replace(window.location.href);
 }
 
 const container = document.getElementById("root")
