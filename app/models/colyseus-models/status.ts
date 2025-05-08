@@ -2,7 +2,7 @@ import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
-import { Effect } from "../../types/enum/Effect"
+import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -124,15 +124,15 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
+    if (pokemon.effects.has(EffectEnum.POISON_GAS) && this.poisonStacks === 0) {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
-    if (pokemon.effects.has(Effect.SMOKE) && !this.blinded) {
+    if (pokemon.effects.has(EffectEnum.SMOKE) && !this.blinded) {
       this.triggerBlinded(1000, pokemon)
     }
 
-    if (pokemon.effects.has(Effect.STICKY_WEB) && !this.paralysis) {
+    if (pokemon.effects.has(EffectEnum.STICKY_WEB) && !this.paralysis) {
       this.triggerParalysis(2000, pokemon, null)
     }
 
@@ -299,7 +299,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined
   ) {
     if (
-      !pkm.effects.has(Effect.IMMUNITY_BURN) &&
+      !pkm.effects.has(EffectEnum.IMMUNITY_BURN) &&
       !this.runeProtect &&
       pkm.passive !== Passive.WATER_BUBBLE
     ) {
@@ -316,9 +316,9 @@ export default class Status extends Schema implements IStatus {
 
       if (
         pkm.passive === Passive.GUTS &&
-        !pkm.effects.has(Effect.GUTS_PASSIVE)
+        !pkm.effects.has(EffectEnum.GUTS_PASSIVE)
       ) {
-        pkm.effects.add(Effect.GUTS_PASSIVE)
+        pkm.effects.add(EffectEnum.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
 
@@ -387,7 +387,7 @@ export default class Status extends Schema implements IStatus {
     this.burnOrigin = undefined
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
-      pkm.effects.delete(Effect.GUTS_PASSIVE)
+      pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
       pkm.addAttack(-5, pkm, 0, false)
     }
     if (pkm.passive === Passive.WELL_BAKED) {
@@ -442,14 +442,14 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (!pkm.effects.has(Effect.IMMUNITY_POISON) && !this.runeProtect) {
+    if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin
-        if (origin.effects.has(Effect.VENOMOUS)) {
+        if (origin.effects.has(EffectEnum.VENOMOUS)) {
           maxStacks = 4
         }
-        if (origin.effects.has(Effect.TOXIC)) {
+        if (origin.effects.has(EffectEnum.TOXIC)) {
           maxStacks = 5
         }
       }
@@ -462,17 +462,17 @@ export default class Status extends Schema implements IStatus {
       }
       if (
         pkm.passive === Passive.GUTS &&
-        !pkm.effects.has(Effect.GUTS_PASSIVE)
+        !pkm.effects.has(EffectEnum.GUTS_PASSIVE)
       ) {
-        pkm.effects.add(Effect.GUTS_PASSIVE)
+        pkm.effects.add(EffectEnum.GUTS_PASSIVE)
         pkm.addAttack(5, pkm, 0, false)
       }
 
       if (
         pkm.passive === Passive.TOXIC_BOOST &&
-        !pkm.effects.has(Effect.TOXIC_BOOST)
+        !pkm.effects.has(EffectEnum.TOXIC_BOOST)
       ) {
-        pkm.effects.add(Effect.TOXIC_BOOST)
+        pkm.effects.add(EffectEnum.TOXIC_BOOST)
         pkm.addAttack(10, pkm, 0, false)
       }
 
@@ -511,7 +511,7 @@ export default class Status extends Schema implements IStatus {
         })
       }
 
-      if (pkm.effects.has(Effect.POISON_GAS)) {
+      if (pkm.effects.has(EffectEnum.POISON_GAS)) {
         // reapply poison stack on every poison tick if in poison gas
         this.triggerPoison(1500, pkm, undefined)
       }
@@ -526,11 +526,11 @@ export default class Status extends Schema implements IStatus {
       this.poisonOrigin = undefined
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
-        pkm.effects.delete(Effect.GUTS_PASSIVE)
+        pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
         pkm.addAttack(-5, pkm, 0, false)
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
-        pkm.effects.delete(Effect.TOXIC_BOOST)
+        pkm.effects.delete(EffectEnum.TOXIC_BOOST)
         pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
@@ -543,7 +543,7 @@ export default class Status extends Schema implements IStatus {
       !this.freeze && // freeze cannot be stacked
       !this.runeProtect &&
       !this.skydiving &&
-      !pkm.effects.has(Effect.IMMUNITY_FREEZE)
+      !pkm.effects.has(EffectEnum.IMMUNITY_FREEZE)
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
         duration *= 1.3
@@ -600,7 +600,7 @@ export default class Status extends Schema implements IStatus {
       !this.sleep &&
       !this.runeProtect &&
       !this.skydiving &&
-      !pkm.effects.has(Effect.IMMUNITY_SLEEP)
+      !pkm.effects.has(EffectEnum.IMMUNITY_SLEEP)
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
         duration *= 1.3
@@ -637,7 +637,7 @@ export default class Status extends Schema implements IStatus {
     if (
       !this.confusion &&
       !this.runeProtect &&
-      !pkm.effects.has(Effect.IMMUNITY_CONFUSION)
+      !pkm.effects.has(EffectEnum.IMMUNITY_CONFUSION)
     ) {
       const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
       duration = duration + boost
@@ -739,7 +739,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | null,
     apBoost = false
   ) {
-    if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
+    if (!this.runeProtect && !pkm.effects.has(EffectEnum.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
         this.paralysisSpeedLost = max(50)(pkm.speed)
@@ -992,11 +992,11 @@ export default class Status extends Schema implements IStatus {
   }
 
   private applyAquaticReduction(duration: number, pkm: IPokemonEntity): number {
-    if (pkm.effects.has(Effect.SWIFT_SWIM)) {
+    if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
       duration = Math.round(duration * 0.7)
-    } else if (pkm.effects.has(Effect.HYDRATION)) {
+    } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
       duration = Math.round(duration * 0.4)
-    } else if (pkm.effects.has(Effect.WATER_VEIL)) {
+    } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
       duration = Math.round(duration * 0.1)
     }
     return duration

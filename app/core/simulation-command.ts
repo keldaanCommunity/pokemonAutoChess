@@ -1,5 +1,5 @@
 import { ISimulationCommand, Transfer } from "../types"
-import { Effect } from "../types/enum/Effect"
+import { EffectEnum } from "../types/enum/Effect"
 import { AttackType } from "../types/enum/Game"
 import { Pkm } from "../types/enum/Pokemon"
 import Board from "./board"
@@ -53,68 +53,5 @@ export class AttackCommand extends SimulationCommand {
 
   execute(): void {
     this.pokemon.state.attack(this.pokemon, this.board, this.target)
-    if (
-      this.pokemon.effects.has(Effect.RISING_VOLTAGE) ||
-      this.pokemon.effects.has(Effect.OVERDRIVE) ||
-      this.pokemon.effects.has(Effect.POWER_SURGE)
-    ) {
-      let isTripleAttack = false,
-        isPowerSurge = false
-      if (this.pokemon.effects.has(Effect.RISING_VOLTAGE)) {
-        isTripleAttack = this.pokemon.count.attackCount % 4 === 0
-      } else if (this.pokemon.effects.has(Effect.OVERDRIVE)) {
-        isTripleAttack = this.pokemon.count.attackCount % 3 === 0
-      } else if (this.pokemon.effects.has(Effect.POWER_SURGE)) {
-        isTripleAttack = this.pokemon.count.attackCount % 3 === 0
-        isPowerSurge = true
-      }
-      if (isTripleAttack) {
-        this.pokemon.count.tripleAttackCount++
-
-        if (this.pokemon.name === Pkm.MORPEKO) {
-          this.target.status.triggerParalysis(2000, this.target, this.pokemon)
-        }
-
-        if (this.pokemon.name === Pkm.MORPEKO_HANGRY) {
-          this.target.status.triggerWound(4000, this.target, this.pokemon)
-        }
-
-        this.pokemon.state.attack(this.pokemon, this.board, this.target)
-        this.pokemon.state.attack(this.pokemon, this.board, this.target)
-        if (isPowerSurge) {
-          this.board
-            .getAdjacentCells(
-              this.target.positionX,
-              this.target.positionY,
-              true
-            )
-            .forEach((cell) => {
-              if (cell) {
-                const enemy = this.board.getValue(cell.x, cell.y)
-                if (enemy && this.pokemon.team !== enemy.team) {
-                  enemy.handleSpecialDamage(
-                    10,
-                    this.board,
-                    AttackType.SPECIAL,
-                    this.pokemon,
-                    false,
-                    false
-                  )
-                  if (enemy !== this.target) {
-                    this.pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-                      id: this.pokemon.simulation.id,
-                      skill: "LINK_CABLE_link",
-                      positionX: this.target.positionX,
-                      positionY: this.target.positionY,
-                      targetX: enemy.positionX,
-                      targetY: enemy.positionY
-                    })
-                  }
-                }
-              }
-            })
-        }
-      }
-    }
   }
 }

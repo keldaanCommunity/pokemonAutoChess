@@ -1,4 +1,4 @@
-export enum Effect {
+export enum EffectEnum {
   INGRAIN = "INGRAIN",
   GROWTH = "GROWTH",
   SPORE = "SPORE",
@@ -161,15 +161,15 @@ export enum Effect {
 }
 
 export const BoardEffects = [
-  Effect.LIGHTNING_STRIKE,
-  Effect.SMOKE,
-  Effect.POISON_GAS,
-  Effect.STEALTH_ROCKS,
-  Effect.SPIKES,
-  Effect.TOXIC_SPIKES,
-  Effect.STICKY_WEB,
-  Effect.HAIL,
-  Effect.EMBER
+  EffectEnum.LIGHTNING_STRIKE,
+  EffectEnum.SMOKE,
+  EffectEnum.POISON_GAS,
+  EffectEnum.STEALTH_ROCKS,
+  EffectEnum.SPIKES,
+  EffectEnum.TOXIC_SPIKES,
+  EffectEnum.STICKY_WEB,
+  EffectEnum.HAIL,
+  EffectEnum.EMBER
 ] as const
 
 export type BoardEffect = (typeof BoardEffects)[number]

@@ -42,7 +42,7 @@ import {
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { Effect } from "../../types/enum/Effect"
+import { EffectEnum } from "../../types/enum/Effect"
 import {
   BattleResult,
   GamePhaseState,
@@ -1074,97 +1074,97 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (effects) {
       effects.forEach((effect) => {
         switch (effect) {
-          case Effect.PURE_POWER:
+          case EffectEnum.PURE_POWER:
             player.titles.add(Title.POKEFAN)
             break
-          case Effect.SPORE:
+          case EffectEnum.SPORE:
             player.titles.add(Title.POKEMON_RANGER)
             break
-          case Effect.DESOLATE_LAND:
+          case EffectEnum.DESOLATE_LAND:
             player.titles.add(Title.KINDLER)
             break
-          case Effect.PRIMORDIAL_SEA:
+          case EffectEnum.PRIMORDIAL_SEA:
             player.titles.add(Title.FIREFIGHTER)
             break
-          case Effect.POWER_SURGE:
+          case EffectEnum.POWER_SURGE:
             player.titles.add(Title.ELECTRICIAN)
             break
-          case Effect.JUSTIFIED:
+          case EffectEnum.JUSTIFIED:
             player.titles.add(Title.BLACK_BELT)
             break
-          case Effect.EERIE_SPELL:
+          case EffectEnum.EERIE_SPELL:
             player.titles.add(Title.TELEKINESIST)
             break
-          case Effect.BEAT_UP:
+          case EffectEnum.BEAT_UP:
             player.titles.add(Title.DELINQUENT)
             break
-          case Effect.MAX_MELTDOWN:
+          case EffectEnum.MAX_MELTDOWN:
             player.titles.add(Title.ENGINEER)
             break
-          case Effect.DEEP_MINER:
+          case EffectEnum.DEEP_MINER:
             player.titles.add(Title.GEOLOGIST)
             break
-          case Effect.TOXIC:
+          case EffectEnum.TOXIC:
             player.titles.add(Title.TEAM_ROCKET_GRUNT)
             break
-          case Effect.DRAGON_DANCE:
+          case EffectEnum.DRAGON_DANCE:
             player.titles.add(Title.DRAGON_TAMER)
             break
-          case Effect.ANGER_POINT:
+          case EffectEnum.ANGER_POINT:
             player.titles.add(Title.CAMPER)
             break
-          case Effect.MERCILESS:
+          case EffectEnum.MERCILESS:
             player.titles.add(Title.MYTH_TRAINER)
             break
-          case Effect.CALM_MIND:
+          case EffectEnum.CALM_MIND:
             player.titles.add(Title.RIVAL)
             break
-          case Effect.WATER_VEIL:
+          case EffectEnum.WATER_VEIL:
             player.titles.add(Title.DIVER)
             break
-          case Effect.HEART_OF_THE_SWARM:
+          case EffectEnum.HEART_OF_THE_SWARM:
             player.titles.add(Title.BUG_MANIAC)
             break
-          case Effect.SKYDIVE:
+          case EffectEnum.SKYDIVE:
             player.titles.add(Title.BIRD_KEEPER)
             break
-          case Effect.SUN_FLOWER:
+          case EffectEnum.SUN_FLOWER:
             player.titles.add(Title.GARDENER)
             break
-          case Effect.GOOGLE_SPECS:
+          case EffectEnum.GOOGLE_SPECS:
             player.titles.add(Title.ALCHEMIST)
             break
-          case Effect.BERSERK:
+          case EffectEnum.BERSERK:
             player.titles.add(Title.BERSERKER)
             break
-          case Effect.ETHEREAL:
+          case EffectEnum.ETHEREAL:
             player.titles.add(Title.BLOB)
             break
-          case Effect.BANQUET:
+          case EffectEnum.BANQUET:
             player.titles.add(Title.CHEF)
             break
-          case Effect.DIAMOND_STORM:
+          case EffectEnum.DIAMOND_STORM:
             player.titles.add(Title.HIKER)
             break
-          case Effect.CURSE_OF_FATE:
+          case EffectEnum.CURSE_OF_FATE:
             player.titles.add(Title.HEX_MANIAC)
             break
-          case Effect.MOON_FORCE:
+          case EffectEnum.MOON_FORCE:
             player.titles.add(Title.CUTE_MANIAC)
             break
-          case Effect.SHEER_COLD:
+          case EffectEnum.SHEER_COLD:
             player.titles.add(Title.SKIER)
             break
-          case Effect.FORGOTTEN_POWER:
+          case EffectEnum.FORGOTTEN_POWER:
             player.titles.add(Title.MUSEUM_DIRECTOR)
             break
-          case Effect.PRESTO:
+          case EffectEnum.PRESTO:
             player.titles.add(Title.MUSICIAN)
             break
-          case Effect.GOLDEN_EGGS:
+          case EffectEnum.GOLDEN_EGGS:
             player.titles.add(Title.BABYSITTER)
             break
-          case Effect.MAX_ILLUMINATION:
+          case EffectEnum.MAX_ILLUMINATION:
             player.titles.add(Title.CHOSEN_ONE)
             break
           default:
@@ -1883,9 +1883,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   spawnBabyEggs(player: Player, isPVE: boolean) {
     const hasBabyActive =
-      player.effects.has(Effect.HATCHER) ||
-      player.effects.has(Effect.BREEDER) ||
-      player.effects.has(Effect.GOLDEN_EGGS)
+      player.effects.has(EffectEnum.HATCHER) ||
+      player.effects.has(EffectEnum.BREEDER) ||
+      player.effects.has(EffectEnum.GOLDEN_EGGS)
     const hasLostLastBattle =
       player.history.at(-1)?.result === BattleResult.DEFEAT
     const eggsOnBench = values(player.board).filter((p) => p.name === Pkm.EGG)
@@ -1904,7 +1904,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       for (const baby of babies) {
         if (
-          player.effects.has(Effect.GOLDEN_EGGS) &&
+          player.effects.has(EffectEnum.GOLDEN_EGGS) &&
           nbOfGoldenEggsOnBench === 0 &&
           chance(GOLDEN_EGG_CHANCE, baby)
         ) {
@@ -1913,9 +1913,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         } else if (chance(EGG_CHANCE, baby)) {
           nbEggsFound++
         }
-        if (player.effects.has(Effect.GOLDEN_EGGS) && !goldenEggFound) {
+        if (player.effects.has(EffectEnum.GOLDEN_EGGS) && !goldenEggFound) {
           player.goldenEggChance += GOLDEN_EGG_CHANCE * (1 + baby.luck / 100)
-        } else if (player.effects.has(Effect.HATCHER) && nbEggsFound === 0) {
+        } else if (
+          player.effects.has(EffectEnum.HATCHER) &&
+          nbEggsFound === 0
+        ) {
           player.eggChance += EGG_CHANCE * (1 + baby.luck / 100)
         }
       }
@@ -1923,15 +1926,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       // Second chance with chance stacked after lose streaks
       if (
         nbEggsFound === 0 &&
-        (player.effects.has(Effect.BREEDER) ||
-          player.effects.has(Effect.GOLDEN_EGGS) ||
+        (player.effects.has(EffectEnum.BREEDER) ||
+          player.effects.has(EffectEnum.GOLDEN_EGGS) ||
           chance(playerEggChanceStacked))
       ) {
         nbEggsFound = 1 // baby >= 5 guarantees at least 1 egg after a defeat
       }
       if (
         goldenEggFound === false &&
-        player.effects.has(Effect.GOLDEN_EGGS) &&
+        player.effects.has(EffectEnum.GOLDEN_EGGS) &&
         nbOfGoldenEggsOnBench === 0 &&
         chance(playerGoldenEggChanceStacked)
       ) {
@@ -1955,10 +1958,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const isGoldenEgg =
         goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
       giveRandomEgg(player, isGoldenEgg)
-      if (player.effects.has(Effect.HATCHER)) {
+      if (player.effects.has(EffectEnum.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
       }
-      if (player.effects.has(Effect.GOLDEN_EGGS) && isGoldenEgg) {
+      if (player.effects.has(EffectEnum.GOLDEN_EGGS) && isGoldenEgg) {
         player.goldenEggChance = 0 // getting a golden egg resets the stacked egg chance
       }
     }

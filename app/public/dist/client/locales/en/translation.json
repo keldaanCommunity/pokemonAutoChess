@@ -470,7 +470,8 @@
 		"HEAT_CRASH": "Heat Crash",
 		"LASER_BLADE": "Laser Blade",
 		"ICICLE_MISSILE": "Icicle Missile",
-		"ARM_THRUST": "Arm Thrust"
+		"ARM_THRUST": "Arm Thrust",
+		"DRUM_BEATING": "Drum Beating"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1423,7 +1424,10 @@
 		"ZACIAN_CROWNED": "Zacian (Crowned)",
 		"IRON_VALIANT": "Iron Valiant",
 		"PANCHAM": "Pancham",
-		"PANGORO": "Pangoro"
+		"PANGORO": "Pangoro",
+		"GROOKEY": "Grookey",
+		"THWACKEY": "Thwackey",
+		"RILLABOOM": "Rillaboom"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1874,7 +1878,8 @@
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
 		"LASER_BLADE": "Alternatively:\n- Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n- Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL.",
 		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds.",
-		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE."
+		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
+		"DRUM_BEATING": "Alternatively:\n- Wood block: give [10,20,40,SP] SHIELD to the entire team\n- Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n- Raise the tempo: give [10,20,40,SP] SPEED to the entire team"
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2640,7 +2645,8 @@
 		"DURALUDON": "Duraludon is looking for an ARTIFICIAL item",
 		"CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR",
 		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD",
-		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%"
+		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%",
+		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants 2 bonus PP to user and adjacent allies. This counts as an attack."
 	},
 	"stat": {
 		"ATK": "Attack",

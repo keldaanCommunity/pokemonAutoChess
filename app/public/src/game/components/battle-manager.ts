@@ -9,7 +9,7 @@ import { getPokemonData } from "../../../../models/precomputed/precomputed-pokem
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
-import { Effect } from "../../../../types/enum/Effect"
+import { EffectEnum } from "../../../../types/enum/Effect"
 import {
   AttackType,
   HealType,
@@ -965,7 +965,7 @@ export default class BattleManager {
       this.boardEventSprites[index] = null
     }
 
-    if (event.effect === Effect.LIGHTNING_STRIKE) {
+    if (event.effect === EffectEnum.LIGHTNING_STRIKE) {
       const thunderSprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -980,7 +980,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.SMOKE) {
+    if (event.effect === EffectEnum.SMOKE) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -988,7 +988,7 @@ export default class BattleManager {
         "SMOKE/000.png"
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
-      sprite.anims.play(Effect.SMOKE)
+      sprite.anims.play(EffectEnum.SMOKE)
       sprite.setScale(3, 3)
       sprite.setAlpha(0)
       this.boardEventSprites[index] = sprite
@@ -1001,16 +1001,16 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.POISON_GAS) {
+    if (event.effect === EffectEnum.POISON_GAS) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "abilities",
-        `${Effect.SMOKE}/000.png`
+        `${EffectEnum.SMOKE}/000.png`
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
       sprite.setScale(3, 3)
-      sprite.anims.play(Effect.SMOKE)
+      sprite.anims.play(EffectEnum.SMOKE)
       sprite.setTint(0xa0ff20)
       sprite.setFlipX(true)
       sprite.setAlpha(0)
@@ -1025,7 +1025,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.STEALTH_ROCKS) {
+    if (event.effect === EffectEnum.STEALTH_ROCKS) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1045,7 +1045,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.SPIKES) {
+    if (event.effect === EffectEnum.SPIKES) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1] + 16,
@@ -1069,7 +1069,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.TOXIC_SPIKES) {
+    if (event.effect === EffectEnum.TOXIC_SPIKES) {
       const spriteNumber = pickRandomIn([0, 1, 2]).toString()
       const sprite = this.scene.add.sprite(
         coordinates[0],
@@ -1094,16 +1094,16 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.STICKY_WEB) {
+    if (event.effect === EffectEnum.STICKY_WEB) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "abilities",
-        `${Effect.STICKY_WEB}/000.png`
+        `${EffectEnum.STICKY_WEB}/000.png`
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_POKEMON_LEVEL)
       sprite.setScale(3, 3)
-      sprite.anims.play(Effect.STICKY_WEB)
+      sprite.anims.play(EffectEnum.STICKY_WEB)
       sprite.setAlpha(0)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
@@ -1116,15 +1116,15 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.HAIL) {
+    if (event.effect === EffectEnum.HAIL) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
         "abilities",
-        `${Effect.HAIL}/000.png`
+        `${EffectEnum.HAIL}/000.png`
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(1).setAlpha(0)
-      sprite.anims.play(Effect.HAIL)
+      sprite.anims.play(EffectEnum.HAIL)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 
@@ -1136,15 +1136,15 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === Effect.EMBER) {
+    if (event.effect === EffectEnum.EMBER) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1] + 12,
         "abilities",
-        `${Effect.EMBER}/000.png`
+        `${EffectEnum.EMBER}/000.png`
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(2).setAlpha(0)
-      sprite.anims.play(Effect.EMBER)
+      sprite.anims.play(EffectEnum.EMBER)
       this.boardEventSprites[index] = sprite
       this.group.add(sprite)
 

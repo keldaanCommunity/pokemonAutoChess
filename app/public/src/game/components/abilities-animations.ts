@@ -219,17 +219,17 @@ export function displayAbility(
 
     case Ability.CORE_ENFORCER:
       {
-        const topLeft = transformAttackCoordinate(
+        const topLeft = transformEntityCoordinates(
           targetX - 1,
           targetY + 1,
           flip
         )
-        const topRight = transformAttackCoordinate(
+        const topRight = transformEntityCoordinates(
           targetX + 1,
           targetY + 1,
           flip
         )
-        const bottomLeft = transformAttackCoordinate(
+        const bottomLeft = transformEntityCoordinates(
           targetX - 1,
           targetY - 1,
           flip
@@ -1789,17 +1789,16 @@ export function displayAbility(
       break
 
     case Ability.FISSURE: {
-      const specialProjectile = addAbilitySprite(
-        skill,
-        coordinatesTarget
-      ).setScale(1)
+      const specialProjectile = addAbilitySprite(skill, coordinatesTarget)
+        .setScale(1)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       scene.tweens.add({
         targets: specialProjectile,
         scaleX: 3,
         scaleY: 3,
         yoyo: true,
-        ease: "linear",
-        duration: 1000,
+        ease: Phaser.Math.Easing.Sine.InOut,
+        duration: 800,
         onComplete: () => {
           specialProjectile.destroy()
         }
@@ -3667,8 +3666,17 @@ export function displayAbility(
       break
     }
 
-    case Ability.BRICK_BREAK:
+    case Ability.DRUM_BEATING:
+      addAbilitySprite(
+        Ability.DRUM_BEATING,
+        [coordinates[0] - 20, coordinates[1] - 40],
+        true
+      )
+        .setScale(2)
+        .setAngle(-45)
+      break
 
+    case Ability.BRICK_BREAK:
     case Ability.BULK_UP:
     case Ability.FLASH:
       addAbilitySprite(skill, coordinates, true).setScale(2)

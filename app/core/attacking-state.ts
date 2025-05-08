@@ -11,7 +11,7 @@ import delays from "../types/delays.json"
 import { IPokemonEntity } from "../types"
 import { PROJECTILE_SPEED } from "../types/Config"
 import { max } from "../utils/number"
-import { Effect } from "../types/enum/Effect"
+import { EffectEnum } from "../types/enum/Effect"
 
 export default class AttackingState extends PokemonState {
   name = "attacking"
@@ -29,7 +29,7 @@ export default class AttackingState extends PokemonState {
         y: pokemon.targetY
       }
 
-      if (pokemon.effects.has(Effect.MERCILESS)) {
+      if (pokemon.effects.has(EffectEnum.MERCILESS)) {
         const candidates = this.getTargetsAtRange(pokemon, board)
         let minLife = Infinity
         for (const candidate of candidates) {
@@ -68,10 +68,7 @@ export default class AttackingState extends PokemonState {
 
       // no target at range, changing to moving state
       if (!target || !targetCoordinate || pokemon.status.charm) {
-        const targetAtSight = this.getNearestTargetAtSightCoordinates(
-          pokemon,
-          board
-        )
+        const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
         if (targetAtSight) {
           pokemon.toMovingState()
         }
@@ -82,16 +79,10 @@ export default class AttackingState extends PokemonState {
       ) {
         // CAST ABILITY
         let crit = false
-        if (pokemon.effects.has(Effect.ABILITY_CRIT)) {
+        if (pokemon.effects.has(EffectEnum.ABILITY_CRIT)) {
           crit = chance(pokemon.critChance / 100, pokemon)
         }
-        AbilityStrategies[pokemon.skill].process(
-          pokemon,
-          this,
-          board,
-          target,
-          crit
-        )
+        AbilityStrategies[pokemon.skill].process(pokemon, board, target, crit)
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++
