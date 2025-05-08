@@ -1550,7 +1550,7 @@
 		"APPLE_ACID": "Deal [50,SP] SPECIAL to the 3 enemy Pokémon in front. Deals [100,SP] SPECIAL if target SPE_DEF is 0.",
 		"NUTRIENTS": "Throw an apple to the ally with the fewest HP, healing for [40,SP] HP and increasing its DEF and SPE_DEF by [2,SP].",
 		"SYRUP_BOMB": "The user sets off an explosion of sticky candy syrup which coats the highest SPEED enemy, dealing [50,SP] SPECIAL and reducing its SPEED by 30.",
-		"FICKLE_BEAM": "Each of the hydra's 4 heads has a [60,LK]% chance of inflicting [60,SP] SPECIAL and 2 seconds PARALYSIS on enemies with the highest SPEED.",
+		"FICKLE_BEAM": "Each of the hydra's 5 heads has a [50,LK]% chance of inflicting [50,SP] SPECIAL and 2 seconds PARALYSIS on enemies with the highest SPEED.",
 		"GRAV_APPLE": "The user deals [80,SP] PHYSICAL by dropping an apple from high above. Deals [160,SP] PHYSICAL if target DEF is 0.",
 		"SACRED_SWORD_IRON": "Deal [80,SP] TRUE to the target + [15,SP] TRUE per fallen ally.",
 		"SACRED_SWORD_GRASS": "Deal [80,SP] TRUE to the target + [10,SP] TRUE per remaining ally.",

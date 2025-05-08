@@ -3474,21 +3474,15 @@ export class FickleBeamStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)
 
     let numberOfBeam = 0
-    for (let i = 0; i < 4; i++) {
-      chance(0.6, pokemon) && numberOfBeam++
+    for (let i = 0; i < 5; i++) {
+      chance(0.5, pokemon) && numberOfBeam++
     }
 
     for (let i = 0; i < numberOfBeam; i++) {
       const enemy = highestSpeedEnemies[i % highestSpeedEnemies.length]
       if (enemy) {
         enemy.status.triggerParalysis(2000, enemy, pokemon, false)
-        enemy.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
+        enemy.handleSpecialDamage(50, board, AttackType.SPECIAL, pokemon, crit)
         broadcastAbility(pokemon, {
           positionX: pokemon.positionX,
           positionY: pokemon.positionY,
