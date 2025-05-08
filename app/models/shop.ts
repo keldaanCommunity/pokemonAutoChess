@@ -434,11 +434,17 @@ export default class Shop {
     return pkm
   }
 
-  pickPokemon(player: Player, state: GameState, shopIndex: number = -1): Pkm {
+  pickPokemon(
+    player: Player,
+    state: GameState,
+    shopIndex: number = -1,
+    noSpecial = false
+  ): Pkm {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE) &&
-      state.stageLevel >= 2
+      state.stageLevel >= 2 &&
+      !noSpecial
     ) {
       return Pkm.DITTO
     }
@@ -446,7 +452,8 @@ export default class Shop {
     if (
       player.effects.has(EffectEnum.LIGHT_SCREEN) &&
       shopIndex === 5 &&
-      (player.rerollCount + state.stageLevel) % 3 === 0
+      (player.rerollCount + state.stageLevel) % 3 === 0 &&
+      !noSpecial
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
@@ -493,7 +500,8 @@ export default class Shop {
 
     if (
       state.specialGameRule === SpecialGameRule.HIGH_ROLLER &&
-      chance(2 / 100)
+      chance(2 / 100) &&
+      !noSpecial
     ) {
       if (state.stageLevel < 10) return this.pickSpecialPokemon(Rarity.HATCH)
       if (state.stageLevel < 20) return this.pickSpecialPokemon(Rarity.UNIQUE)
@@ -515,7 +523,8 @@ export default class Shop {
     if (
       repeatBallHolders.length > 0 &&
       shopIndex >= 0 &&
-      shopIndex < repeatBallHolders.length
+      shopIndex < repeatBallHolders.length &&
+      !noSpecial
     ) {
       if (totalRerolls >= 150 && totalRerolls % 10 === 0) {
         return this.pickSpecialPokemon(Rarity.LEGENDARY)

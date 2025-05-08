@@ -22,7 +22,7 @@ import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { UNOWNS_PER_ABILITY } from "./unown-manager"
+import { UNOWNS_PER_ABILITY } from "./wanderers-manager"
 import { DEPTH } from "../depths"
 
 export function displayAbility(
