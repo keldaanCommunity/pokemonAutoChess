@@ -1,5 +1,5 @@
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Orientation } from "../../types/enum/Game"
+import { AttackType } from "../../types/enum/Game"
 import Board from "../board"
 import { Effect, OnAttackEffect } from "./effect"
 import { PokemonEntity } from "../pokemon-entity"
@@ -27,11 +27,12 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
 
   pokemon.count.attackCount++
   pokemon.targetY = -1
+  const ppGained = 1 + pokemon.stars
   board
     .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
     .forEach((cell) => {
       if (cell.value && cell.value.team === pokemon.team) {
-        cell.value.addPP(2, pokemon, 0, false)
+        cell.value.addPP(ppGained, pokemon, 0, false)
       }
     })
   pokemon.effectsSet.forEach((effect) => {
