@@ -511,8 +511,13 @@ export default function Game() {
           // Between 1001 and 1015 - Abnormal socket shutdown
           if (connectionStatus === ConnectionStatus.CONNECTED) {
             dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
-            // attempting to auto reconnect
-            connectToGame()
+            // attempting to auto reconnect after 3 seconds
+            /* We leave 3 seconds because when refreshing the page, the connection is closed with code 1001 on Firefox
+              and this code is called, so the reconnection token might be reused before the page reload, causing the
+              reconnection token to be invalid the second time after page reload
+              3 seconds should be enough for the browser to kill all existing connections and timeouts for the tab
+              before reloading the page */
+            setTimeout(() => connectToGame(), 3000) //TOFIX: find a better way to handle this
           } else {
             dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
           }
