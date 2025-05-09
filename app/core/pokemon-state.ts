@@ -111,6 +111,18 @@ export default abstract class PokemonState {
         specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
       }
 
+      if (target.effects.has(Effect.WONDER_ROOM)) {
+        specialDamage = Math.ceil(damage * (1 + pokemon.ap / 100))
+      } else if (pokemon.attackType === AttackType.SPECIAL) {
+        specialDamage = damage
+      } else {
+        physicalDamage = damage
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
+      }
+
       let trueDamagePart = 0
       if (pokemon.effects.has(Effect.STEEL_SURGE)) {
         trueDamagePart += 0.33
@@ -142,18 +154,6 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
-      }
-
-      if (target.effects.has(Effect.WONDER_ROOM)) {
-        specialDamage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      } else if (pokemon.attackType === AttackType.SPECIAL) {
-        specialDamage = damage
-      } else {
-        physicalDamage = damage
-      }
-
-      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
       }
 
       if (physicalDamage > 0) {
