@@ -302,7 +302,7 @@ export default class AnimationManager {
     flip: boolean,
     loop: boolean = true
   ) {
-    const animation = this.convertPokemonActionStateToAnimationType(
+    let animation = this.convertPokemonActionStateToAnimationType(
       action,
       entity
     )
@@ -316,6 +316,15 @@ export default class AnimationManager {
       action === PokemonActionState.ATTACK
         ? getAttackAnimTimeScale(entity.index, entity.speed)
         : 1
+
+    if (
+      entity.passive === Passive.DRUMMER &&
+      entity.targetY == null &&
+      action === PokemonActionState.WALK
+    ) {
+      animation = AnimationConfig[PkmByIndex[entity.index]].emote // use drumming animation instead of attack
+      entity.orientation = Orientation.DOWN
+    }
 
     try {
       this.play(entity, animation, {

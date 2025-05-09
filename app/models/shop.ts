@@ -15,7 +15,7 @@ import {
   UniquePool
 } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
-import { Effect } from "../types/enum/Effect"
+import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import { FishingRod, Item } from "../types/enum/Item"
 import {
@@ -298,7 +298,7 @@ export default class Shop {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
     if (
-      player.effects.has(Effect.EERIE_SPELL) &&
+      player.effects.has(EffectEnum.EERIE_SPELL) &&
       !manualRefresh &&
       !player.shopLocked
     ) {
@@ -450,7 +450,7 @@ export default class Shop {
     }
 
     if (
-      player.effects.has(Effect.LIGHT_SCREEN) &&
+      player.effects.has(EffectEnum.LIGHT_SCREEN) &&
       shopIndex === 5 &&
       (player.rerollCount + state.stageLevel) % 3 === 0 &&
       !noSpecial

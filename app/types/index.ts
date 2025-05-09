@@ -18,7 +18,7 @@ import GameRoom from "../rooms/game-room"
 import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
-import { BoardEffect, Effect } from "./enum/Effect"
+import { BoardEffect, EffectEnum } from "./enum/Effect"
 import { Emotion } from "./enum/Emotion"
 import {
   AttackType,
@@ -34,7 +34,7 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
-import { Effect as EffectClass } from "../core/effect"
+import { Effect as EffectClass } from "../core/effects/effect"
 
 export * from "./enum/Emotion"
 
@@ -196,7 +196,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "FAIRY/range": [2, 2],
     "FIGHTING/melee": [2, 2],
     "FIGHTING/range": [2, 2],
-    "FIRE/melee": [1, 1],
+    "FIRE/melee": [1.5, 1.5],
     "FIRE/range": [2, 2],
     "FLYING/melee": [1, 1],
     "FLYING/range": [1.5, 1.5],
@@ -207,7 +207,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
     "GROUND/melee": [1, 1],
     "ICE/melee": [2, 2],
     "ICE/range": [2, 2],
-    "NORMAL/melee": [2, 2],
+    "NORMAL/melee": [1.5, 1.5],
     "POISON/melee": [2, 2],
     "POISON/range": [1, 1],
     "PSYCHIC/melee": [1.5, 1.5],
@@ -446,8 +446,8 @@ export interface ISimulation {
   room: GameRoom
   id: string
   weather: Weather
-  blueEffects: Set<Effect>
-  redEffects: Set<Effect>
+  blueEffects: Set<EffectEnum>
+  redEffects: Set<EffectEnum>
   blueTeam: MapSchema<IPokemonEntity>
   redTeam: MapSchema<IPokemonEntity>
   blueDpsMeter: MapSchema<Dps>
@@ -611,7 +611,7 @@ export interface IPokemonEntity {
   attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm
-  effects: SetSchema<Effect>
+  effects: SetSchema<EffectEnum>
   items: SetSchema<Item>
   types: SetSchema<Synergy>
   stars: number

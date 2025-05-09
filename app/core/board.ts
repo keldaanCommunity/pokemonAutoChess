@@ -1,5 +1,5 @@
 import { IPokemonEntity, Transfer } from "../types"
-import { BoardEffect, Effect } from "../types/enum/Effect"
+import { BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { distanceC, distanceM } from "../utils/distance"
@@ -18,13 +18,13 @@ export default class Board {
   rows: number
   columns: number
   cells: Array<PokemonEntity | undefined>
-  effects: Array<Effect | undefined>
+  effects: Array<EffectEnum | undefined>
 
   constructor(rows: number, colums: number) {
     this.rows = rows
     this.columns = colums
     this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
-    this.effects = new Array<Effect | undefined>(this.rows * this.columns)
+    this.effects = new Array<EffectEnum | undefined>(this.rows * this.columns)
   }
 
   getValue(x: number, y: number): PokemonEntity | undefined {
@@ -47,7 +47,7 @@ export default class Board {
 
         if (value.passive === Passive.STENCH) {
           this.effects[value.positionY * this.columns + value.positionX] =
-            Effect.POISON_GAS
+            EffectEnum.POISON_GAS
         }
 
         value.positionX = x
@@ -374,7 +374,7 @@ export default class Board {
     return candidates[0].value === undefined ? candidates[0] : null
   }
 
-  getEffectOnCell(x: number, y: number): Effect | undefined {
+  getEffectOnCell(x: number, y: number): EffectEnum | undefined {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       return this.effects[this.columns * y + x]
     }

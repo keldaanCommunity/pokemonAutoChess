@@ -1,26 +1,24 @@
-import Board from "./board"
-import { PokemonEntity } from "./pokemon-entity"
-import { Item } from "../types/enum/Item"
-import { Effect as EffectEnum } from "../types/enum/Effect"
-import { Synergy } from "../types/enum/Synergy"
-import PokemonState from "./pokemon-state"
-import { Passive } from "../types/enum/Passive"
-import { Ability } from "../types/enum/Ability"
-import { SynergyEffects } from "../models/effects"
-import { AttackType } from "../types/enum/Game"
-import { chance } from "../utils/random"
-import { min } from "../utils/number"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import Board from "../board"
+import { PokemonEntity } from "../pokemon-entity"
+import { Item } from "../../types/enum/Item"
+import { EffectEnum } from "../../types/enum/Effect"
+import { Synergy } from "../../types/enum/Synergy"
+import PokemonState from "../pokemon-state"
+import { Passive } from "../../types/enum/Passive"
+import { Ability } from "../../types/enum/Ability"
+import { SynergyEffects } from "../../models/effects"
+import { AttackType } from "../../types/enum/Game"
+import { chance } from "../../utils/random"
+import { min } from "../../utils/number"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Transfer } from "../../types"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
 export abstract class Effect {
   origin?: EffectOrigin
-  apply(entity: PokemonEntity, ...others: any[]) {}
-  constructor(
-    effect?: (entity: PokemonEntity, ...others: any[]) => void,
-    origin?: EffectOrigin
-  ) {
+  apply(...args: any[]) {}
+  constructor(effect?: (...args: any[]) => void, origin?: EffectOrigin) {
     if (effect) {
       this.apply = effect
     }
@@ -29,7 +27,12 @@ export abstract class Effect {
 }
 
 // applied on fight start or when spawning
-export class OnSpawnEffect extends Effect {}
+export class OnSpawnEffect extends Effect {
+  constructor(effect?: (entity: PokemonEntity) => void) {
+    super(effect)
+  }
+  override apply(entity: PokemonEntity) {}
+}
 
 // item effect applied on fight start of after stealing/obtaining an item
 export class OnItemGainedEffect extends Effect {}
@@ -91,14 +94,20 @@ export class OnHitEffect extends Effect {
   }
 }
 
+interface OnAttackEffectArgs {
+  pokemon: PokemonEntity
+  target: PokemonEntity | null
+  board: Board
+  physicalDamage: number
+  specialDamage: number
+  trueDamage: number
+  totalDamage: number
+}
+
 export class OnAttackEffect extends Effect {
-  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
+  override apply(args: OnAttackEffectArgs) {}
   constructor(
-    effect?: (
-      entity: PokemonEntity,
-      target: PokemonEntity,
-      board: Board
-    ) => void,
+    effect?: (args: OnAttackEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -108,7 +117,6 @@ export class OnAttackEffect extends Effect {
 export class OnAbilityCastEffect extends Effect {
   apply(
     pokemon: PokemonEntity,
-    state: PokemonState,
     board: Board,
     target: PokemonEntity,
     crit: boolean
@@ -116,7 +124,6 @@ export class OnAbilityCastEffect extends Effect {
   constructor(
     effect?: (
       pokemon: PokemonEntity,
-      state: PokemonState,
       board: Board,
       target: PokemonEntity,
       crit: boolean
@@ -335,11 +342,70 @@ export class FireHitEffect extends OnAttackEffect {
     this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
   }
 
-  apply(pokemon, target, board) {
+  apply({ pokemon }: OnAttackEffectArgs) {
     pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
     this.count += 1
   }
 }
+
+export const electricTripleAttackEffect = new OnAttackEffect(
+  ({ pokemon, target, board }) => {
+    let isTripleAttack = false,
+      isPowerSurge = false
+    if (pokemon.effects.has(EffectEnum.RISING_VOLTAGE)) {
+      isTripleAttack = pokemon.count.attackCount % 4 === 0
+    } else if (pokemon.effects.has(EffectEnum.OVERDRIVE)) {
+      isTripleAttack = pokemon.count.attackCount % 3 === 0
+    } else if (pokemon.effects.has(EffectEnum.POWER_SURGE)) {
+      isTripleAttack = pokemon.count.attackCount % 3 === 0
+      isPowerSurge = true
+    }
+    if (isTripleAttack) {
+      pokemon.count.tripleAttackCount++
+
+      if (pokemon.name === Pkm.MORPEKO && target) {
+        target.status.triggerParalysis(2000, target, pokemon)
+      }
+
+      if (pokemon.name === Pkm.MORPEKO_HANGRY && target) {
+        target.status.triggerWound(4000, target, pokemon)
+      }
+
+      pokemon.state.attack(pokemon, board, target)
+      pokemon.state.attack(pokemon, board, target)
+      if (isPowerSurge && target) {
+        board
+          .getAdjacentCells(target.positionX, target.positionY, true)
+          .forEach((cell) => {
+            if (cell) {
+              const enemy = board.getValue(cell.x, cell.y)
+              if (enemy && pokemon.team !== enemy.team) {
+                enemy.handleSpecialDamage(
+                  10,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  false,
+                  false
+                )
+                if (enemy !== target) {
+                  pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+                    id: pokemon.simulation.id,
+                    skill: "LINK_CABLE_link",
+                    positionX: target.positionX,
+                    positionY: target.positionY,
+                    targetX: enemy.positionX,
+                    targetY: enemy.positionY
+                  })
+                }
+              }
+            }
+          })
+      }
+    }
+  }
+)
+
 export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
   synergyLevel: number = -1
@@ -350,7 +416,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     }
   }
 
-  apply(pokemon, state, board, target, crit) {
+  apply(pokemon, board, target, crit) {
     pokemon.transferAbility(Ability.ECHO)
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
     const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0

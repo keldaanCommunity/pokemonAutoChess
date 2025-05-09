@@ -4,7 +4,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { IPlayer } from "../types"
 import { EvolutionTime } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
-import { Effect } from "../types/enum/Effect"
+import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { Item, ItemComponents, ShinyItems } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -251,8 +251,8 @@ export class HatchEvolutionRule extends EvolutionRule {
 
   getHatchTime(pokemon: Pokemon, player: Player): number {
     if (pokemon.name === Pkm.EGG) {
-      return player.effects.has(Effect.BREEDER) ||
-        player.effects.has(Effect.GOLDEN_EGGS)
+      return player.effects.has(EffectEnum.BREEDER) ||
+        player.effects.has(EffectEnum.GOLDEN_EGGS)
         ? EvolutionTime.EGG_HATCH - 1
         : EvolutionTime.EGG_HATCH
     }

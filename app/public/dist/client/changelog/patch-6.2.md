@@ -1,10 +1,13 @@
 # New Pokemons:
 
- - Zacian
- - Zacian (Crowned)
- - Iron Valiant
- - Pancham
- - Pangoro
+- Zacian
+- Zacian (Crowned)
+- Iron Valiant
+- Pancham
+- Pangoro
+- Grookey
+- Thwackey
+- Rillaboom
  
 # Changes to Pokemon & Abilities
 

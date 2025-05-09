@@ -1,10 +1,15 @@
-import { Effect as EffectEnum } from "../types/enum/Effect"
+import { EffectEnum } from "../types/enum/Effect"
 import { Berries, Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
 import { values } from "../utils/schemas"
-import { Effect, OnHitEffect, OnSpawnEffect, PeriodicEffect } from "./effect"
+import {
+  Effect,
+  OnHitEffect,
+  OnSpawnEffect,
+  PeriodicEffect
+} from "./effects/effect"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,

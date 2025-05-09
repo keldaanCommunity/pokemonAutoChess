@@ -315,6 +315,7 @@ export enum Pkm {
   GRENINJA = "GRENINJA",
   GRIMER = "GRIMER",
   GRIMMSNARL = "GRIMMSNARL",
+  GROOKEY = "GROOKEY",
   GROTLE = "GROTLE",
   GROUDON = "GROUDON",
   GROVYLE = "GROVYLE",
@@ -650,6 +651,7 @@ export enum Pkm {
   RHYHORN = "RHYHORN",
   RHYPERIOR = "RHYPERIOR",
   RIBOMBEE = "RIBOMBEE",
+  RILLABOOM = "RILLABOOM",
   RIOLU = "RIOLU",
   ROCKRUFF = "ROCKRUFF",
   ROOKIDEE = "ROOKIDEE",
@@ -787,6 +789,7 @@ export enum Pkm {
   TERRAKION = "TERRAKION",
   THIEVUL = "THIEVUL",
   THUNDURUS = "THUNDURUS",
+  THWACKEY = "THWACKEY",
   TIMBURR = "TIMBURR",
   TINKATINK = "TINKATINK",
   TINKATON = "TINKATON",
@@ -1893,9 +1896,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MELMETAL]: "0809",
 
   // Gen 8
-  //[Pkm.GROOKEY]: "0810",
-  //[Pkm.THWACKEY]: "0811",
-  //[Pkm.RILLABOOM]: "0812",
+  [Pkm.GROOKEY]: "0810",
+  [Pkm.THWACKEY]: "0811",
+  [Pkm.RILLABOOM]: "0812",
   [Pkm.SCORBUNNY]: "0813",
   [Pkm.RABOOT]: "0814",
   [Pkm.CINDERACE]: "0815",
@@ -3075,7 +3078,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ZACIAN_CROWNED]: Pkm.ZACIAN,
   [Pkm.IRON_VALIANT]: Pkm.IRON_VALIANT,
   [Pkm.PANCHAM]: Pkm.PANCHAM,
-  [Pkm.PANGORO]: Pkm.PANCHAM
+  [Pkm.PANGORO]: Pkm.PANCHAM,
+  [Pkm.GROOKEY]: Pkm.GROOKEY,
+  [Pkm.THWACKEY]: Pkm.GROOKEY,
+  [Pkm.RILLABOOM]: Pkm.GROOKEY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -5320,8 +5326,7 @@ export const AnimationConfig: {
   [Pkm.HISUI_ELECTRODE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Hurt,
-    emote: AnimationType.Twirl,
-    shinyUnavailable: true
+    emote: AnimationType.Twirl
   },
   [Pkm.SLUGMA]: {
     attack: AnimationType.Shoot,
@@ -5686,8 +5691,7 @@ export const AnimationConfig: {
   [Pkm.ALOLAN_SANDSLASH]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.FARFETCH_D]: {
     attack: AnimationType.Strike,
@@ -7764,8 +7768,7 @@ export const AnimationConfig: {
     emote: AnimationType.Twirl,
     hop: AnimationType.Twirl,
     hurt: AnimationType.Idle,
-    sleep: AnimationType.Idle,
-    shinyUnavailable: true
+    sleep: AnimationType.Idle
   },
   [Pkm.CRYOGONAL]: {
     attack: AnimationType.Attack,
@@ -7961,8 +7964,7 @@ export const AnimationConfig: {
   [Pkm.ROARING_MOON]: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
-    emote: AnimationType.RearUp,
-    shinyUnavailable: true
+    emote: AnimationType.RearUp
   },
   [Pkm.CHARCADET]: {
     attack: AnimationType.Strike,
@@ -8035,5 +8037,21 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Strike,
     emote: AnimationType.Shoot
+  },
+  [Pkm.GROOKEY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Strike
+  },
+  [Pkm.THWACKEY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Sing
+  },
+  [Pkm.RILLABOOM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Sing,
+    shinyUnavailable: true
   }
 }

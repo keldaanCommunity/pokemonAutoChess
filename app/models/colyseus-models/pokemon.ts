@@ -4,7 +4,7 @@ import {
   ClearWingEffect,
   DrySkinEffect,
   SynchroEffect
-} from "../../core/effect"
+} from "../../core/effects/effect"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -32,7 +32,7 @@ import {
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { Effect } from "../../types/enum/Effect"
+import { EffectEnum } from "../../types/enum/Effect"
 import {
   AttackType,
   PokemonActionState,
@@ -205,8 +205,8 @@ export class Pokemon extends Schema implements IPokemon {
     isGhostBattle: boolean
     weather: Weather
     player: Player
-    teamEffects: Set<Effect>
-    opponentEffects: Set<Effect>
+    teamEffects: Set<EffectEnum>
+    opponentEffects: Set<EffectEnum>
   }) {
     // called at simulation start before entities are generated
   }
@@ -1875,10 +1875,13 @@ const conversionEffect = ({
       (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
       0
     )
-    if (effect === Effect.DRAGON_SCALES || effect === Effect.DRAGON_DANCE) {
+    if (
+      effect === EffectEnum.DRAGON_SCALES ||
+      effect === EffectEnum.DRAGON_DANCE
+    ) {
       entity.addShield(dragonLevel * 5, entity, 0, false)
     }
-    if (effect === Effect.DRAGON_DANCE) {
+    if (effect === EffectEnum.DRAGON_DANCE) {
       entity.addAbilityPower(dragonLevel, entity, 0, false)
       entity.addSpeed(dragonLevel, entity, 0, false)
     }
@@ -4001,8 +4004,8 @@ export class Mudkip extends Pokemon {
 
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<Effect> }): void {
-    opponentEffects.add(Effect.WATER_SPRING)
+  }: { opponentEffects: Set<EffectEnum> }): void {
+    opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
 
@@ -4024,8 +4027,8 @@ export class Marshtomp extends Pokemon {
 
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<Effect> }): void {
-    opponentEffects.add(Effect.WATER_SPRING)
+  }: { opponentEffects: Set<EffectEnum> }): void {
+    opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
 
@@ -4046,8 +4049,8 @@ export class Swampert extends Pokemon {
 
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<Effect> }): void {
-    opponentEffects.add(Effect.WATER_SPRING)
+  }: { opponentEffects: Set<EffectEnum> }): void {
+    opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
 
@@ -6886,8 +6889,10 @@ export class Victini extends Pokemon {
   skill = Ability.SEARING_SHOT
   passive = Passive.VICTINI
   attackSprite = AttackSprite.FIRE_MELEE
-  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
-    opponentEffects.add(Effect.VICTINI_PASSIVE)
+  beforeSimulationStart({
+    opponentEffects
+  }: { opponentEffects: Set<EffectEnum> }) {
+    opponentEffects.add(EffectEnum.VICTINI_PASSIVE)
   }
 }
 
@@ -6909,8 +6914,8 @@ export class Jirachi extends Pokemon {
   skill = Ability.DOOM_DESIRE
   passive = Passive.GOOD_LUCK
   attackSprite = AttackSprite.PSYCHIC_RANGE
-  beforeSimulationStart({ teamEffects }: { teamEffects: Set<Effect> }) {
-    teamEffects.add(Effect.GOOD_LUCK)
+  beforeSimulationStart({ teamEffects }: { teamEffects: Set<EffectEnum> }) {
+    teamEffects.add(EffectEnum.GOOD_LUCK)
   }
 }
 
@@ -12682,7 +12687,7 @@ export class Spinda extends Pokemon {
   passive = Passive.SPOT_PANDA
   attackSprite = AttackSprite.NORMAL_MELEE
   onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.effects.add(Effect.IMMUNITY_CONFUSION)
+    entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
   }
 }
 
@@ -13331,8 +13336,10 @@ export class Murkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
-    opponentEffects.add(Effect.BAD_LUCK)
+  beforeSimulationStart({
+    opponentEffects
+  }: { opponentEffects: Set<EffectEnum> }) {
+    opponentEffects.add(EffectEnum.BAD_LUCK)
   }
 }
 
@@ -13351,8 +13358,10 @@ export class Honchkrow extends Pokemon {
   passive = Passive.BAD_LUCK
   additional = true
   attackSprite = AttackSprite.DARK_MELEE
-  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<Effect> }) {
-    opponentEffects.add(Effect.BAD_LUCK)
+  beforeSimulationStart({
+    opponentEffects
+  }: { opponentEffects: Set<EffectEnum> }) {
+    opponentEffects.add(EffectEnum.BAD_LUCK)
   }
 }
 
@@ -16382,7 +16391,7 @@ export class Skarmory extends Pokemon {
           } while (positions.has(`${x},${y}`))
           positions.add(`${x},${y}`)
 
-          board.addBoardEffect(x, y, Effect.SPIKES, simulation)
+          board.addBoardEffect(x, y, EffectEnum.SPIKES, simulation)
           simulation.room.broadcast(Transfer.ABILITY, {
             id: simulation.id,
             skill: Ability.SPIKES,
@@ -18237,6 +18246,56 @@ export class IronValiant extends Pokemon {
   attackSprite = AttackSprite.STEEL_MELEE
 }
 
+export class Grookey extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.GRASS])
+  rarity = Rarity.ULTRA
+  stars = 1
+  evolution = Pkm.THWACKEY
+  hp = 120
+  atk = 17
+  speed = 58
+  def = 8
+  speDef = 6
+  maxPP = 60
+  range = 1
+  skill = Ability.DRUM_BEATING
+  passive = Passive.DRUMMER
+  attackSprite: AttackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Thwackey extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.GRASS])
+  rarity = Rarity.ULTRA
+  stars = 2
+  evolution = Pkm.RILLABOOM
+  hp = 250
+  atk = 29
+  speed = 58
+  def = 14
+  speDef = 11
+  maxPP = 60
+  range = 1
+  skill = Ability.DRUM_BEATING
+  passive = Passive.DRUMMER
+  attackSprite: AttackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Rillaboom extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.SOUND, Synergy.GRASS])
+  rarity = Rarity.ULTRA
+  stars = 3
+  hp = 400
+  atk = 40
+  speed = 58
+  def = 20
+  speDef = 16
+  maxPP = 60
+  range = 1
+  skill = Ability.DRUM_BEATING
+  passive = Passive.DRUMMER
+  attackSprite: AttackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19194,7 +19253,10 @@ export const PokemonClasses: Record<
   [Pkm.ZACIAN_CROWNED]: ZacianCrowned,
   [Pkm.IRON_VALIANT]: IronValiant,
   [Pkm.PANCHAM]: Pancham,
-  [Pkm.PANGORO]: Pangoro
+  [Pkm.PANGORO]: Pangoro,
+  [Pkm.GROOKEY]: Grookey,
+  [Pkm.THWACKEY]: Thwackey,
+  [Pkm.RILLABOOM]: Rillaboom
 }
 
 // declare all the classes in colyseus schema TypeRegistry

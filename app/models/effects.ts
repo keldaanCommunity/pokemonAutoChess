@@ -2,12 +2,12 @@ import { MapSchema, SetSchema } from "@colyseus/schema"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyTriggers } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
-import { Effect } from "../types/enum/Effect"
+import { EffectEnum } from "../types/enum/Effect"
 import { Synergy } from "../types/enum/Synergy"
 import { isOnBench } from "../utils/board"
 import Synergies from "./colyseus-models/synergies"
 
-export class Effects extends SetSchema<Effect> {
+export class Effects extends SetSchema<EffectEnum> {
   update(synergies: Synergies, board: MapSchema<Pokemon>) {
     this.clear()
     ;(Object.values(Synergy) as Synergy[]).forEach((synergy) => {
@@ -24,142 +24,182 @@ export class Effects extends SetSchema<Effect> {
     board.forEach((p) => {
       if (!isOnBench(p)) {
         if (p.skill === Ability.GRASSY_SURGE) {
-          this.add(Effect.GRASSY_TERRAIN)
+          this.add(EffectEnum.GRASSY_TERRAIN)
         }
         if (p.skill === Ability.MISTY_SURGE) {
-          this.add(Effect.MISTY_TERRAIN)
+          this.add(EffectEnum.MISTY_TERRAIN)
         }
         if (p.skill === Ability.ELECTRIC_SURGE) {
-          this.add(Effect.ELECTRIC_TERRAIN)
+          this.add(EffectEnum.ELECTRIC_TERRAIN)
         }
         if (p.skill === Ability.PSYCHIC_SURGE) {
-          this.add(Effect.PSYCHIC_TERRAIN)
+          this.add(EffectEnum.PSYCHIC_TERRAIN)
         }
       }
     })
   }
 }
 
-export const SynergyEffects: { [key in Synergy]: readonly Effect[] } = {
+export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
   [Synergy.NORMAL]: [
-    Effect.STAMINA,
-    Effect.STRENGTH,
-    Effect.ENDURE,
-    Effect.PURE_POWER
+    EffectEnum.STAMINA,
+    EffectEnum.STRENGTH,
+    EffectEnum.ENDURE,
+    EffectEnum.PURE_POWER
   ],
-  [Synergy.GRASS]: [Effect.INGRAIN, Effect.GROWTH, Effect.SPORE],
+  [Synergy.GRASS]: [EffectEnum.INGRAIN, EffectEnum.GROWTH, EffectEnum.SPORE],
   [Synergy.FIRE]: [
-    Effect.BLAZE,
-    Effect.VICTORY_STAR,
-    Effect.DROUGHT,
-    Effect.DESOLATE_LAND
+    EffectEnum.BLAZE,
+    EffectEnum.VICTORY_STAR,
+    EffectEnum.DROUGHT,
+    EffectEnum.DESOLATE_LAND
   ],
-  [Synergy.WATER]: [Effect.RAIN_DANCE, Effect.DRIZZLE, Effect.PRIMORDIAL_SEA],
+  [Synergy.WATER]: [
+    EffectEnum.RAIN_DANCE,
+    EffectEnum.DRIZZLE,
+    EffectEnum.PRIMORDIAL_SEA
+  ],
   [Synergy.ELECTRIC]: [
-    Effect.RISING_VOLTAGE,
-    Effect.OVERDRIVE,
-    Effect.POWER_SURGE
+    EffectEnum.RISING_VOLTAGE,
+    EffectEnum.OVERDRIVE,
+    EffectEnum.POWER_SURGE
   ],
   [Synergy.FIGHTING]: [
-    Effect.GUTS,
-    Effect.STURDY,
-    Effect.DEFIANT,
-    Effect.JUSTIFIED
+    EffectEnum.GUTS,
+    EffectEnum.STURDY,
+    EffectEnum.DEFIANT,
+    EffectEnum.JUSTIFIED
   ],
-  [Synergy.PSYCHIC]: [Effect.AMNESIA, Effect.LIGHT_SCREEN, Effect.EERIE_SPELL],
-  [Synergy.DARK]: [Effect.HONE_CLAWS, Effect.ASSURANCE, Effect.BEAT_UP],
+  [Synergy.PSYCHIC]: [
+    EffectEnum.AMNESIA,
+    EffectEnum.LIGHT_SCREEN,
+    EffectEnum.EERIE_SPELL
+  ],
+  [Synergy.DARK]: [
+    EffectEnum.HONE_CLAWS,
+    EffectEnum.ASSURANCE,
+    EffectEnum.BEAT_UP
+  ],
   [Synergy.STEEL]: [
-    Effect.STEEL_SURGE,
-    Effect.STEEL_SPIKE,
-    Effect.CORKSCREW_CRASH,
-    Effect.MAX_MELTDOWN
+    EffectEnum.STEEL_SURGE,
+    EffectEnum.STEEL_SPIKE,
+    EffectEnum.CORKSCREW_CRASH,
+    EffectEnum.MAX_MELTDOWN
   ],
   [Synergy.GROUND]: [
-    Effect.TILLER,
-    Effect.DIGGER,
-    Effect.DRILLER,
-    Effect.DEEP_MINER
+    EffectEnum.TILLER,
+    EffectEnum.DIGGER,
+    EffectEnum.DRILLER,
+    EffectEnum.DEEP_MINER
   ],
-  [Synergy.POISON]: [Effect.POISONOUS, Effect.VENOMOUS, Effect.TOXIC],
+  [Synergy.POISON]: [
+    EffectEnum.POISONOUS,
+    EffectEnum.VENOMOUS,
+    EffectEnum.TOXIC
+  ],
   [Synergy.DRAGON]: [
-    Effect.DRAGON_ENERGY,
-    Effect.DRAGON_SCALES,
-    Effect.DRAGON_DANCE
+    EffectEnum.DRAGON_ENERGY,
+    EffectEnum.DRAGON_SCALES,
+    EffectEnum.DRAGON_DANCE
   ],
-  [Synergy.FIELD]: [Effect.BULK_UP, Effect.RAGE, Effect.ANGER_POINT],
+  [Synergy.FIELD]: [
+    EffectEnum.BULK_UP,
+    EffectEnum.RAGE,
+    EffectEnum.ANGER_POINT
+  ],
   [Synergy.MONSTER]: [
-    Effect.PURSUIT,
-    Effect.BRUTAL_SWING,
-    Effect.POWER_TRIP,
-    Effect.MERCILESS
+    EffectEnum.PURSUIT,
+    EffectEnum.BRUTAL_SWING,
+    EffectEnum.POWER_TRIP,
+    EffectEnum.MERCILESS
   ],
-  [Synergy.HUMAN]: [Effect.MEDITATE, Effect.FOCUS_ENERGY, Effect.CALM_MIND],
-  [Synergy.AQUATIC]: [Effect.SWIFT_SWIM, Effect.HYDRATION, Effect.WATER_VEIL],
+  [Synergy.HUMAN]: [
+    EffectEnum.MEDITATE,
+    EffectEnum.FOCUS_ENERGY,
+    EffectEnum.CALM_MIND
+  ],
+  [Synergy.AQUATIC]: [
+    EffectEnum.SWIFT_SWIM,
+    EffectEnum.HYDRATION,
+    EffectEnum.WATER_VEIL
+  ],
   [Synergy.BUG]: [
-    Effect.COCOON,
-    Effect.INFESTATION,
-    Effect.HORDE,
-    Effect.HEART_OF_THE_SWARM
+    EffectEnum.COCOON,
+    EffectEnum.INFESTATION,
+    EffectEnum.HORDE,
+    EffectEnum.HEART_OF_THE_SWARM
   ],
   [Synergy.FLYING]: [
-    Effect.TAILWIND,
-    Effect.FEATHER_DANCE,
-    Effect.MAX_AIRSTREAM,
-    Effect.SKYDIVE
+    EffectEnum.TAILWIND,
+    EffectEnum.FEATHER_DANCE,
+    EffectEnum.MAX_AIRSTREAM,
+    EffectEnum.SKYDIVE
   ],
   [Synergy.FLORA]: [
-    Effect.ODD_FLOWER,
-    Effect.GLOOM_FLOWER,
-    Effect.VILE_FLOWER,
-    Effect.SUN_FLOWER
+    EffectEnum.ODD_FLOWER,
+    EffectEnum.GLOOM_FLOWER,
+    EffectEnum.VILE_FLOWER,
+    EffectEnum.SUN_FLOWER
   ],
   [Synergy.ROCK]: [
-    Effect.BATTLE_ARMOR,
-    Effect.MOUTAIN_RESISTANCE,
-    Effect.DIAMOND_STORM
+    EffectEnum.BATTLE_ARMOR,
+    EffectEnum.MOUTAIN_RESISTANCE,
+    EffectEnum.DIAMOND_STORM
   ],
   [Synergy.GHOST]: [
-    Effect.CURSE_OF_VULNERABILITY,
-    Effect.CURSE_OF_WEAKNESS,
-    Effect.CURSE_OF_TORMENT,
-    Effect.CURSE_OF_FATE
+    EffectEnum.CURSE_OF_VULNERABILITY,
+    EffectEnum.CURSE_OF_WEAKNESS,
+    EffectEnum.CURSE_OF_TORMENT,
+    EffectEnum.CURSE_OF_FATE
   ],
   [Synergy.FAIRY]: [
-    Effect.AROMATIC_MIST,
-    Effect.FAIRY_WIND,
-    Effect.STRANGE_STEAM,
-    Effect.MOON_FORCE
+    EffectEnum.AROMATIC_MIST,
+    EffectEnum.FAIRY_WIND,
+    EffectEnum.STRANGE_STEAM,
+    EffectEnum.MOON_FORCE
   ],
   [Synergy.ICE]: [
-    Effect.CHILLY,
-    Effect.FROSTY,
-    Effect.FREEZING,
-    Effect.SHEER_COLD
+    EffectEnum.CHILLY,
+    EffectEnum.FROSTY,
+    EffectEnum.FREEZING,
+    EffectEnum.SHEER_COLD
   ],
   [Synergy.FOSSIL]: [
-    Effect.ANCIENT_POWER,
-    Effect.ELDER_POWER,
-    Effect.FORGOTTEN_POWER
+    EffectEnum.ANCIENT_POWER,
+    EffectEnum.ELDER_POWER,
+    EffectEnum.FORGOTTEN_POWER
   ],
-  [Synergy.SOUND]: [Effect.LARGO, Effect.ALLEGRO, Effect.PRESTO],
+  [Synergy.SOUND]: [EffectEnum.LARGO, EffectEnum.ALLEGRO, EffectEnum.PRESTO],
   [Synergy.ARTIFICIAL]: [
-    Effect.DUBIOUS_DISC,
-    Effect.LINK_CABLE,
-    Effect.GOOGLE_SPECS
+    EffectEnum.DUBIOUS_DISC,
+    EffectEnum.LINK_CABLE,
+    EffectEnum.GOOGLE_SPECS
   ],
-  [Synergy.BABY]: [Effect.HATCHER, Effect.BREEDER, Effect.GOLDEN_EGGS],
+  [Synergy.BABY]: [
+    EffectEnum.HATCHER,
+    EffectEnum.BREEDER,
+    EffectEnum.GOLDEN_EGGS
+  ],
   [Synergy.LIGHT]: [
-    Effect.SHINING_RAY,
-    Effect.LIGHT_PULSE,
-    Effect.ETERNAL_LIGHT,
-    Effect.MAX_ILLUMINATION
+    EffectEnum.SHINING_RAY,
+    EffectEnum.LIGHT_PULSE,
+    EffectEnum.ETERNAL_LIGHT,
+    EffectEnum.MAX_ILLUMINATION
   ],
   [Synergy.WILD]: [
-    Effect.QUICK_FEET,
-    Effect.RUN_AWAY,
-    Effect.HUSTLE,
-    Effect.BERSERK
+    EffectEnum.QUICK_FEET,
+    EffectEnum.RUN_AWAY,
+    EffectEnum.HUSTLE,
+    EffectEnum.BERSERK
   ],
-  [Synergy.AMORPHOUS]: [Effect.FLUID, Effect.SHAPELESS, Effect.ETHEREAL],
-  [Synergy.GOURMET]: [Effect.APPETIZER, Effect.LUNCH_BREAK, Effect.BANQUET]
+  [Synergy.AMORPHOUS]: [
+    EffectEnum.FLUID,
+    EffectEnum.SHAPELESS,
+    EffectEnum.ETHEREAL
+  ],
+  [Synergy.GOURMET]: [
+    EffectEnum.APPETIZER,
+    EffectEnum.LUNCH_BREAK,
+    EffectEnum.BANQUET
+  ]
 } as const

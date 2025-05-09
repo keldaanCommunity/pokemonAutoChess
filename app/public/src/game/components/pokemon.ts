@@ -33,6 +33,7 @@ import {
 } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { clamp, min } from "../../../../utils/number"
+import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -481,8 +482,8 @@ export default class PokemonSprite extends DraggableObject {
       }
 
       const projectile = this.scene.add.sprite(
-        coordinates[0],
-        coordinates[1],
+        coordinates[0] + randomBetween(-5, 5),
+        coordinates[1] + randomBetween(-5, 5),
         "attacks",
         `${attackSprite}/000.png`
       )

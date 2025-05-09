@@ -1,23 +1,18 @@
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
-import { Effect } from "../../types/enum/Effect"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Synergy } from "../../types/enum/Synergy"
-import { distanceC } from "../../utils/distance"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
-import PokemonState from "../pokemon-state"
 import { AbilityStrategies } from "./abilities"
 import { min } from "../../utils/number"
-import { OnAbilityCastEffect } from "../effect"
+import { OnAbilityCastEffect } from "../effects/effect"
 import { DelayedCommand } from "../simulation-command"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
   process(
     pokemon: PokemonEntity,
-    state: PokemonState,
     board: Board,
     target: PokemonEntity,
     crit: boolean,
@@ -40,7 +35,7 @@ export class AbilityStrategy {
 
     pokemon.effectsSet.forEach((effect) => {
       if (effect instanceof OnAbilityCastEffect) {
-        effect.apply(pokemon, state, board, target, crit)
+        effect.apply(pokemon, board, target, crit)
       }
     })
 
@@ -69,7 +64,6 @@ export class AbilityStrategy {
     if (pokemon.items.has(Item.COMFEY)) {
       AbilityStrategies[Ability.FLORAL_HEALING].process(
         pokemon,
-        state,
         board,
         target,
         crit,
