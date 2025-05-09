@@ -107,6 +107,10 @@ export default abstract class PokemonState {
         damage = 0
       }
 
+      if (additionalSpecialDamagePart > 0) {
+        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
+      }
+
       let trueDamagePart = 0
       if (pokemon.effects.has(Effect.STEEL_SURGE)) {
         trueDamagePart += 0.33
@@ -146,10 +150,6 @@ export default abstract class PokemonState {
         specialDamage = damage
       } else {
         physicalDamage = damage
-      }
-
-      if (additionalSpecialDamagePart > 0) {
-        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
       }
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
