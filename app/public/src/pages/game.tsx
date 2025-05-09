@@ -26,9 +26,7 @@ import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
-import { getFreeSpaceOnBench } from "../../../utils/board"
 import { logger } from "../../../utils/logger"
-import { addWanderingPokemon } from "../game/components/pokemon"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
@@ -655,6 +653,7 @@ export default function Game() {
           }
         })
         $player.listen("experienceManager", (experienceManager) => {
+          const $experienceManager = $(experienceManager)
           if (player.id === uid) {
             dispatch(updateExperienceManager(experienceManager))
             const fields: NonFunctionPropNames<IExperienceManager>[] = [
@@ -662,7 +661,6 @@ export default function Game() {
               "expNeeded",
               "level"
             ]
-            const $experienceManager = $(experienceManager)
             fields.forEach((field) => {
               $experienceManager.listen(field, (value) => {
                 dispatch(
@@ -674,6 +672,14 @@ export default function Game() {
               })
             })
           }
+          $experienceManager.listen("level", (value) => {
+            if (value > 1) {
+              toast(<p>{t("level")} {value}</p>, {
+                containerId: player.rank.toString(),
+                className: "toast-level-up"
+              })
+            }
+          })
         })
         $player.listen("loadingProgress", (value) => {
           dispatch(setLoadingProgress({ id: player.id, value: value }))

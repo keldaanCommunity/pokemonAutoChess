@@ -12,8 +12,10 @@
   background-color: var(--color-bg-primary) !important;
 }
 
-.toast-new-pokemon {
+.toast-new-pokemon,
+.toast-level-up {
   right: 76px !important;
+  color: white !important;
 }
 
 .toast-new-pokemon img {

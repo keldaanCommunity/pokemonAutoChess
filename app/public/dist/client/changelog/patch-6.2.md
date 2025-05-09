@@ -69,6 +69,7 @@
 - Life and PP bars have been reworked to be more readable with graduations every 25 HP.
 - Wild pokemons in PvE round now make a stage entrance during the picking phase
 - PvP fights now have a portal transition effect when entering the fight. You may go to your opponent's region for the duration of a fight, but your shop will still be for the same region as your current one.
+- Level ups are now notified per player with a toast message next to their avatar
 
 # Bugfix
 
