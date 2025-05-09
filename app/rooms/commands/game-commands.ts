@@ -1581,11 +1581,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // PvE stage initialization
     const pveStage = PVEStages[this.state.stageLevel]
     if (pveStage) {
-      const shinyChance = pveStage.shinyChance ?? 0
       this.state.shinyEncounter =
-        (shinyChance > 0 &&
-          this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER) ||
-        chance(shinyChance)
+        this.state.townEncounter === TownEncounters.CELEBI ||
+        this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER ||
+        chance(pveStage.shinyChance ?? 0)
     }
 
     return commands
@@ -1777,9 +1776,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const rewards = pveStage.getRewards?.(player) ?? ([] as Item[])
           resetArraySchema(player.pveRewards, rewards)
 
-          const rewardsPropositions = this.state.shinyEncounter
-            ? pickNRandomIn(ShinyItems, 3)
-            : (pveStage.getRewardsPropositions?.(player) ?? ([] as Item[]))
+          const rewardsPropositions =
+            this.state.shinyEncounter && this.state.stageLevel > 1
+              ? pickNRandomIn(ShinyItems, 3)
+              : (pveStage.getRewardsPropositions?.(player) ?? ([] as Item[]))
 
           resetArraySchema(player.pveRewardsPropositions, rewardsPropositions)
 

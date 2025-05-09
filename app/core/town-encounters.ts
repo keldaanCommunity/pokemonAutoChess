@@ -12,7 +12,8 @@ export const TownEncounters = {
   [Pkm.SPINDA]: Pkm.SPINDA,
   [Pkm.REGIROCK]: Pkm.REGIROCK,
   [Pkm.MUNCHLAX]: Pkm.MUNCHLAX,
-  [Pkm.SABLEYE]: Pkm.SABLEYE
+  [Pkm.SABLEYE]: Pkm.SABLEYE,
+  [Pkm.CELEBI]: Pkm.CELEBI
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
@@ -35,7 +36,8 @@ export const TownEncountersByStage: {
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.SABLEYE]: 1 / 20
+    [Pkm.SABLEYE]: 1 / 20,
+    [Pkm.CELEBI]: 1 / 40
   },
   12: {
     [Pkm.DUSKULL]: 1 / 20,
@@ -53,7 +55,8 @@ export const TownEncountersByStage: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
-    [Pkm.MAROWAK]: 1 / 20
+    [Pkm.MAROWAK]: 1 / 20,
+    [Pkm.CELEBI]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,

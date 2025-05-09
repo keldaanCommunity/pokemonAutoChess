@@ -3714,7 +3714,8 @@
 		"SPINDA": "Spinda changes the direction of rotation of the carousel randomly",
 		"REGIROCK": "Regirock grants all players 15 additional HP",
 		"MUNCHLAX": "Munchlax brought a PICNIC_SET for everyone",
-		"SABLEYE": "Sableye might come and try to steal one of your unused items"
+		"SABLEYE": "Sableye might come and try to steal one of your unused items",
+		"CELEBI": "Celebi predicts the next PvE fight will be shiny"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

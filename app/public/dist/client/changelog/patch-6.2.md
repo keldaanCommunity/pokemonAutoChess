@@ -63,6 +63,8 @@
 - Change Xatu encounter: cost increased 10 → 15 gold. No longer appear on stage 4.
 - Change Wobuffet & Munchlax encounters: exchange ticket and picnic set no longer replace the carousel content, but is given to all players immediately after the carousel.
 - New town encounter: Sableye
+- New town encounter: Celebi
+- Shiny Magikarps at stage 1 now give 10 gold each instead of shiny items
 
 # UI
 
