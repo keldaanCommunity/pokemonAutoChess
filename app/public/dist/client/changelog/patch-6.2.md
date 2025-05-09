@@ -58,7 +58,7 @@
 - Rage is no longer considered a negative status, meaning it's not cleansed by Rune Protect, Cleanse Tag and other effects that remove negative status.
 - Dodge chance is now capped at 90% even with a high luck stat
 - Change Xatu encounter: cost increased 10 → 15 gold. No longer appear on stage 4.
-- Change Wobuffet encounter: exchange ticket no longer replace the carousel content, but is given to all players immediately after the carousel.
+- Change Wobuffet & Munchlax encounters: exchange ticket and picnic set no longer replace the carousel content, but is given to all players immediately after the carousel.
 - New town encounter: Sableye
 
 # UI

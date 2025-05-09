@@ -357,6 +357,10 @@ export class MiniGame {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.EXCHANGE_TICKET)
       })
+    } else if (state.townEncounter === TownEncounters.MUNCHLAX) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.PICNIC_SET)
+      })
     }
   }
 
@@ -494,12 +498,6 @@ export class MiniGame {
 
     if (encounter === TownEncounters.DUSKULL) {
       itemsSet = [Item.GIMMIGHOUL_COIN]
-      nbItemsToPick = this.alivePlayers.length
-      maxCopiesPerItem = 99
-    }
-
-    if (encounter === TownEncounters.MUNCHLAX) {
-      itemsSet = [Item.PICNIC_SET]
       nbItemsToPick = this.alivePlayers.length
       maxCopiesPerItem = 99
     }
