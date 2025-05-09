@@ -426,6 +426,15 @@ export default class MinigameManager {
       name: Pkm.MAROWAK
     })
 
+    const celebi = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CELEBI ? cx : 36 * 48,
+      y: encounter === TownEncounters.CELEBI ? cy : 25 * 48,
+      name: Pkm.CELEBI,
+      shiny: true,
+      orientation: Orientation.DOWNLEFT
+    })
+
     const wobbuffet = new PokemonSpecial({
       scene: this.scene,
       x: encounter === TownEncounters.WOBBUFFET ? cx + 24 : 44.5 * 48,
@@ -503,6 +512,7 @@ export default class MinigameManager {
       duskull,
       regirock,
       marowak,
+      celebi,
       mareep,
       wobbuffet,
       wynaut,

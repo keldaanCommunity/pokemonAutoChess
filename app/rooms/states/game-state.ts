@@ -39,6 +39,7 @@ export default class GameState extends Schema {
   @type(["string"]) additionalPokemons = new ArraySchema<Pkm>()
   @type("uint8") stageLevel = 0
   @type("string") weather: Weather
+  @type("boolean") shinyEncounter = false
   @type("boolean") noElo = false
   @type("string") gameMode: GameMode = GameMode.CUSTOM_LOBBY
   @type({ set: "string" }) spectators = new SetSchema<string>()
@@ -58,7 +59,6 @@ export default class GameState extends Schema {
   startTime: number
   endTime: number | undefined = undefined
   preparationId: string
-  shinyEncounter = false
   townEncounters: Set<TownEncounter> = new Set<TownEncounter>()
   pveRewards: Item[] = []
   pveRewardsPropositions: Item[] = []

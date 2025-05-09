@@ -79,7 +79,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
   9: {
     name: "pkm.GYARADOS",
     avatar: Pkm.GYARADOS,
-    shinyChance: 1 / 40,
     board: [[Pkm.GYARADOS, 4, 2]],
     marowakItems: [[Item.KINGS_ROCK]],
     getRewards(player: Player) {
@@ -92,7 +91,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     name: "pkm.MEWTWO",
     avatar: Pkm.MEWTWO,
     emotion: Emotion.DETERMINED,
-    shinyChance: 0, // can't propose shiny items because item proposition on stage 15
     board: [
       [Pkm.MEWTWO, 0, 1],
       [Pkm.MEW, 7, 1]
@@ -110,7 +108,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     name: "tower_duo",
     avatar: Pkm.LUGIA,
     emotion: Emotion.DETERMINED,
-    shinyChance: 1 / 40,
     board: [
       [Pkm.LUGIA, 3, 1],
       [Pkm.HO_OH, 5, 1]

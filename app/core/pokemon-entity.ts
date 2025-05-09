@@ -1629,6 +1629,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.player.addMoney(1, true, this)
       this.count.moneyCount += 1
     }
+
+    if (
+      target.name === Pkm.MAGIKARP &&
+      target.shiny &&
+      target.simulation.stageLevel === 1 &&
+      this.player
+    ) {
+      this.player.addMoney(10, true, this)
+      this.count.moneyCount += 10
+    }
   }
 
   // called after death (does not proc if resurection)
