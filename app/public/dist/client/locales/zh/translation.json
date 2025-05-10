@@ -470,7 +470,8 @@
 		"HEAT_CRASH": "高温重压",
 		"LASER_BLADE": "激光刃",
 		"ICICLE_MISSILE": "冰锥飞弹",
-		"ARM_THRUST": "猛推"
+		"ARM_THRUST": "猛推",
+		"DRUM_BEATING": "鼓击"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1423,7 +1424,10 @@
 		"ZACIAN_CROWNED": "苍响（剑之王）",
 		"IRON_VALIANT": "铁武者",
 		"PANCHAM": "顽皮熊猫",
-		"PANGORO": "霸道熊猫"
+		"PANGORO": "霸道熊猫",
+		"GROOKEY": "敲音猴",
+		"THWACKEY": "啪咚猴",
+		"RILLABOOM": "轰擂金刚猩"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1499,7 +1503,7 @@
 		"STRING_SHOT": "对目标造成[10,20,50,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
 		"VENOSHOCK": "对目标造成[30,60,120,SP]点SPECIAL。若目标处于POISONNED，造成的伤害翻倍。",
 		"LEECH_LIFE": "对目标造成[20,40,80,SP]点SPECIAL，使用者自身恢复等量HP。",
-		"HAPPY_HOUR": "提升所有我方宝可梦[2,5,8,SP]点ATK。",
+		"HAPPY_HOUR": "所有我方宝可梦提升[2,5,8,SP]点ATK。",
 		"TELEPORT": "将使用者传送至战场的一个角落。使用者下一次攻击额外造成[15,30,60,SP]点SPECIAL。",
 		"NASTY_PLOT": "提升使用者[10,SP]点ATK。",
 		"TAKE_HEART": "使用者以勇气治疗自身的异常状态，并提升[8,SP]点ATK以及[8,SP]点SPE_DEF。",
@@ -1855,7 +1859,7 @@
 		"SWALLOW": "积蓄力量，使自身提升3点DEF和SPE_DEF，至多叠加3次。若HP低于25%，则将积蓄的力量吞下，每层蓄力恢复[20,SP]%的最大HP。若叠加层数已满，则将积蓄的力量撞向前方所有敌方宝可梦，造成[40,80,150,SP]点SPECIAL。",
 		"DECORATE": "通过装饰，为最近的我方宝可梦中最强的那只提升[1,2,3,SP]点ATK和[10,20,30,SP]点AP，并根据进化时使用的调味料追加额外效果。",
 		"DRAGON_CLAW": "对生命值最低的相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使其陷入WOUND 4秒。",
-		"TAILWIND": "提升所有我方宝可梦[5,10,15,SP]点SPEED。",
+		"TAILWIND": "所有我方宝可梦提升[5,10,15,SP]点SPEED。",
 		"HORN_ATTACK": "对目标造成SPECIAL，数值相当于[3,4,5,SP]乘以ATK，并使其陷入ARMOR_BREAK 8秒。",
 		"RAZOR_LEAF": "飞出叶片攻击目标身后的一条直线，对所有击中的敌方宝可梦造成[20,40,80,SP]点SPECIAL。该招式可以暴击。",
 		"MUD_SHOT": "向目标投掷泥块，造成[25,50,75,SP]点SPECIAL，并降低其[10,20,30,SP]点SPEED。",
@@ -1872,9 +1876,10 @@
 		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 2秒，并恢复[20,40,80,SP]点HP。",
 		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成PHYSICAL，数值相当于1乘以ATK加[100,SP]。",
 		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL。使用者的ATK比目标的越高，造成的伤害越高。",
-		"LASER_BLADE": "每次使用招式时交替执行以下行为：\n——旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的相邻宝可梦造成[30,SP]点SPECIAL。\n——向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[30,SP]。",
+		"LASER_BLADE": "每次使用招式时依次循环执行以下行为之一：\n1.旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的相邻宝可梦造成[30,SP]点SPECIAL；\n2.向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[30,SP]。",
 		"ICICLE_MISSILE": "对后排的敌方宝可梦发射[1,2,3]枚冰锥飞弹，每枚造成[50,SP]点SPECIAL，并使目标陷入FREEZE [2,SP]秒。",
-		"ARM_THRUST": "连续攻击[2,LK]至[5,LK]次，每次造成PHYSICAL，数值相当于[100,SP]%的ATK。每次攻击各自可以按CRIT_CHANCE产生暴击。"
+		"ARM_THRUST": "连续攻击[2,LK]至[5,LK]次，每次造成PHYSICAL，数值相当于[100,SP]%的ATK。每次攻击各自可以按CRIT_CHANCE产生暴击。",
+		"DRUM_BEATING": "每次使用招式时依次循环执行以下行为之一：\n1.木之格挡：所有我方宝可梦获得[10,20,40,SP]点SHIELD；\n2.迅疾连打：对所有敌方宝可梦造成[10,20,40,SP]点SPECIAL；\n3.加快节奏：所有我方宝可梦提升[10,20,40,SP]点SPEED。"
 	},
 	"effect": {
 		"INGRAIN": "扎根",
@@ -2640,7 +2645,8 @@
 		"DURALUDON": "铝钢龙似乎需要一件ARTIFICIAL道具……",
 		"CHARCADET": "碳小侍似乎需要一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR……",
 		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
-		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和AP。"
+		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和AP。",
+		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为使用者和相邻我方宝可梦额外恢复[2,3,4]点PP，且算作一次普通攻击。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3707,7 +3713,9 @@
 		"WOBBUFFET": "果然翁会回收未使用的道具组件或合成道具。",
 		"SPINDA": "晃晃斑会随机改变道具轮盘的旋转方向。",
 		"REGIROCK": "雷吉洛克会为所有玩家提升15点HP。",
-		"MUNCHLAX": "小卡比兽给大家带来了PICNIC_SET。"
+		"MUNCHLAX": "小卡比兽给大家带来了PICNIC_SET。",
+		"SABLEYE": "勾魂眼可能会来偷取你的一件未装备的道具。",
+		"CELEBI": "时拉比预见到下一轮野生对战必定出现闪光的对手。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
