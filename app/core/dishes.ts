@@ -196,7 +196,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
             break
           case Synergy.FLYING:
           case Synergy.GHOST:
-            entity.addDodgeChance(5, entity, 0, false)
+            entity.addDodgeChance(0.05, entity, 0, false)
             break
           case Synergy.ELECTRIC:
           case Synergy.FIELD:
@@ -210,7 +210,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
             break
           case Synergy.GROUND:
           case Synergy.FIGHTING:
-          case Synergy.ROCK:    
+          case Synergy.ROCK:
             entity.addDefense(5, entity, 0, false)
             break
           case Synergy.PSYCHIC:
