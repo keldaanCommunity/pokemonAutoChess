@@ -4262,7 +4262,7 @@ export class HisuianTyphlosion extends Pokemon {
 }
 
 export class Slowpoke extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
@@ -4279,7 +4279,7 @@ export class Slowpoke extends Pokemon {
 }
 
 export class Slowbro extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
@@ -4296,7 +4296,7 @@ export class Slowbro extends Pokemon {
 }
 
 export class Slowking extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 260
