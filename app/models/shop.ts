@@ -572,7 +572,7 @@ export default class Shop {
     const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
-    if (mantine && chance(0.3, mantine)) return Pkm.REMORAID
+    if (mantine && chance(0.33, mantine)) return Pkm.REMORAID
 
     const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()

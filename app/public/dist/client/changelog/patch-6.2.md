@@ -45,6 +45,7 @@
 - Change Decorate (Alcremy): now targets the **strongest** nearest ally instead of a random ally among the nearest ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 - Caterpie line is now Bug/Amorphous instead of Bug/Grass
 - Change Fickle Beam (Hydrapple): 4 → 5 heads, 60 → 50% chance of inflicting 60 → 50 special damage
+- Mantyke: chance to fish Remoraid 30 → 33%
 
 # Changes to Synergies
 
