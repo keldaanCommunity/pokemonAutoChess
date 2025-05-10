@@ -4,6 +4,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
 import { values } from "../utils/schemas"
+import { AbilityStrategies } from "./abilities/abilities"
 import {
   Effect,
   OnHitEffect,
@@ -135,12 +136,18 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
       entity.addCritPower(100, entity, 0, false)
+      if (AbilityStrategies[entity.skill].canCritByDefault) {
+        entity.addCritPower(50, entity, 0, false)
+      }
     })
   ],
   LEEK: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
       entity.addCritChance(50, entity, 0, false)
+      if (AbilityStrategies[entity.skill].canCritByDefault) {
+        entity.addCritPower(50, entity, 0, false)
+      }
     })
   ],
   LEFTOVERS: [],

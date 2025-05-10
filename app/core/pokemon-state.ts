@@ -120,7 +120,7 @@ export default abstract class PokemonState {
       if (target.effects.has(EffectEnum.WONDER_ROOM)) {
         damage = Math.ceil(damage * (1 + pokemon.ap / 100))
         attackType = AttackType.SPECIAL
-      } 
+      }
 
       let trueDamagePart = 0
       if (pokemon.effects.has(EffectEnum.STEEL_SURGE)) {
@@ -864,7 +864,7 @@ export default abstract class PokemonState {
 
     if (pokemon.effects.has(EffectEnum.ZEN_MODE)) {
       const crit =
-        pokemon.items.has(Item.REAPER_CLOTH) &&
+        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
         chance(pokemon.critChance / 100, pokemon)
       pokemon.handleHeal(15, pokemon, 1, crit)
       if (pokemon.life >= pokemon.hp) {

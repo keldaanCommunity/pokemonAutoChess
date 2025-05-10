@@ -8,6 +8,7 @@
 - Grookey
 - Thwackey
 - Rillaboom
+- Gallade
  
 # Changes to Pokemon & Abilities
 
@@ -55,6 +56,7 @@
 # Changes to Items
 
 - Max Elixir: removed -25 AP penalty
+- Change for Reaper Cloth, Leek and Large Leek: if the ability already crits by default, gains +50% crit power
 
 # Gameplay
 

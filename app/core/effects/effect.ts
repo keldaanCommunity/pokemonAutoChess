@@ -279,7 +279,7 @@ export class DarkHarvestEffect extends PeriodicEffect {
       (pokemon) => {
         pokemon.transferAbility(Ability.DARK_HARVEST)
         const board = pokemon.simulation.board
-        const crit = pokemon.items.has(Item.REAPER_CLOTH)
+        const crit = pokemon.effects.has(EffectEnum.ABILITY_CRIT)
           ? chance(pokemon.critChance, pokemon)
           : false
         const darkHarvestDamage = [5, 10, 20][pokemon.stars - 1] ?? 20

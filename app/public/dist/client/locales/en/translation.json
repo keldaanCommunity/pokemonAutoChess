@@ -471,7 +471,8 @@
 		"LASER_BLADE": "Laser Blade",
 		"ICICLE_MISSILE": "Icicle Missile",
 		"ARM_THRUST": "Arm Thrust",
-		"DRUM_BEATING": "Drum Beating"
+		"DRUM_BEATING": "Drum Beating",
+		"PSYCHO_CUT": "Psycho Cut"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -613,6 +614,7 @@
 		"RALTS": "Ralts",
 		"KIRLIA": "Kirlia",
 		"GARDEVOIR": "Gardevoir",
+		"GALLADE": "Gallade",
 		"BAGON": "Bagon",
 		"SHELGON": "Shelgon",
 		"SALAMENCE": "Salamence",
@@ -1879,7 +1881,8 @@
 		"LASER_BLADE": "Alternatively:\n1. Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL.",
 		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds.",
 		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
-		"DRUM_BEATING": "Alternatively:\n1. Wood block: give [10,20,40,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,SP] SPEED to the entire team"
+		"DRUM_BEATING": "Alternatively:\n1. Wood block: give [10,20,40,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,SP] SPEED to the entire team",
+		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,30,SP] SPECIAL to all enemies hit. Can crit by default."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2326,7 +2329,7 @@
 		"CHOICE_SPECS": "The holder gains 100 bonus AP",
 		"SOUL_DEW": "During combat, the holder gains 10 AP every second",
 		"UPGRADE": "Attacks grant +5 SPEED (stackable)",
-		"REAPER_CLOTH": "The holder's ability can now critically strike based on CRIT_CHANCE",
+		"REAPER_CLOTH": "The holder's ability can now critically strike based on CRIT_CHANCE. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead.",
 		"POKEMONOMICON": "When the holder deals SPECIAL, they BURN the target for 3 seconds",
 		"POWER_LENS": "The amount of SPECIAL blocked by SPE_DEF is inflicted back to the attacker",
 		"SHELL_BELL": "Holder heals for 33% of all damages inflicted",
@@ -2471,8 +2474,8 @@
 		"BLACK_SLUDGE": "POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead.",
 		"BINDING_MOCHI": "The first attack in the next fight will inflict CHARM and POISONNED for 4 seconds on hit.",
 		"FRUIT_JUICE": "Gain 50 SPEED in the next fight.",
-		"LEEK": "Gain 50% CRIT_CHANCE and allow ability to critically strike in the next fight.",
-		"LARGE_LEEK": "Gain 100% CRIT_POWER and allow ability to critically strike in the next fight.",
+		"LEEK": "Gain 50% CRIT_CHANCE and allow ability to critically strike in the next fight. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead.",
+		"LARGE_LEEK": "Gain 100% CRIT_POWER and allow ability to critically strike in the next fight. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead.",
 		"SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can buff stats or make you dizzy.",
 		"SMOKED_FILET": "Permanently lose 10 max HP to gain 3 ATK and 5 AP.",
 		"SWEETS": "A random candy granting a permanent stats bonus",
@@ -2646,7 +2649,8 @@
 		"CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR",
 		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD",
 		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%",
-		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,4] bonus PP to user and adjacent allies. This counts as an attack."
+		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,4] bonus PP to user and adjacent allies. This counts as an attack.",
+		"KIRLIA": "Will evolve into Gallade or Gardevoir based on the dominant synergy between FIGHTING and FAIRY"
 	},
 	"stat": {
 		"ATK": "Attack",

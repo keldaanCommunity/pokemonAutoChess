@@ -1250,7 +1250,12 @@ export class Kirlia extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.GARDEVOIR
+  evolutions = [Pkm.GARDEVOIR, Pkm.GALLADE]
+  evolutionRule = new CountEvolutionRule(3, (pokemon, player) => {
+    const fairyCount = player.synergies.get(Synergy.FAIRY) ?? 0
+    const fightingCount = player.synergies.get(Synergy.FIGHTING) ?? 0
+    return fightingCount >= fairyCount ? Pkm.GALLADE : Pkm.GARDEVOIR
+  })
   hp = 130
   atk = 12
   speed = 51
@@ -1260,6 +1265,7 @@ export class Kirlia extends Pokemon {
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
+  passive = Passive.KIRLIA
 }
 
 export class Gardevoir extends Pokemon {
@@ -1279,6 +1285,25 @@ export class Gardevoir extends Pokemon {
   range = 3
   skill = Ability.FUTURE_SIGHT
   attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class Gallade extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
+  rarity: Rarity = Rarity.EPIC
+  stars = 3
+  hp = 260
+  atk = 38
+  speed = 51
+  def = 10
+  speDef = 20
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYCHO_CUT
+  attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
 export class Fuecoco extends Pokemon {
@@ -19256,7 +19281,8 @@ export const PokemonClasses: Record<
   [Pkm.PANGORO]: Pangoro,
   [Pkm.GROOKEY]: Grookey,
   [Pkm.THWACKEY]: Thwackey,
-  [Pkm.RILLABOOM]: Rillaboom
+  [Pkm.RILLABOOM]: Rillaboom,
+  [Pkm.GALLADE]: Gallade
 }
 
 // declare all the classes in colyseus schema TypeRegistry
