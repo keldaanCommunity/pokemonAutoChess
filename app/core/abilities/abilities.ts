@@ -720,9 +720,9 @@ export class CrabHammerStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
     let damage = [40, 80, 120][pokemon.stars - 1] ?? 120
     crit = chance((pokemon.critChance + 30) / 100, pokemon) // can crit by default with a 30% increased crit chance
+    super.process(pokemon, board, target, crit)
     let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
       damage = target.life
@@ -1082,8 +1082,8 @@ export class RazorWindStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
     crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    super.process(pokemon, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -4596,8 +4596,8 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, board, target, crit, true)
-    crit = crit || chance(pokemon.critChance / 100, pokemon)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.skydiveTo(destination.x, destination.y, board)
@@ -4782,6 +4782,32 @@ export class RazorLeafStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+      }
+    })
+  }
+}
+
+export class PsychoCutStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
+    super.process(pokemon, board, target, crit)
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    effectInLine(board, pokemon, target, (cell) => {
+      if (cell.value != null && cell.value.team !== pokemon.team) {
+        for (let i = 0; i < 3; i++) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
       }
     })
   }
@@ -7358,10 +7384,10 @@ export class SlashStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const increasedCrit = [30, 60, 90][pokemon.stars - 1] ?? 90
     crit = chance((pokemon.critChance + increasedCrit) / 100, pokemon) // can crit by default
+    super.process(pokemon, board, target, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -7918,9 +7944,9 @@ export class NightSlashStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     crit = crit || chance(pokemon.critChance / 100, pokemon)
+    super.process(pokemon, board, target, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -12835,5 +12861,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LASER_BLADE]: new LaserBladeStrategy(),
   [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy(),
   [Ability.ARM_THRUST]: new ArmThrustStrategy(),
-  [Ability.DRUM_BEATING]: new DrumBeatingStrategy()
+  [Ability.DRUM_BEATING]: new DrumBeatingStrategy(),
+  [Ability.PSYCHO_CUT]: new PsychoCutStrategy()
 }

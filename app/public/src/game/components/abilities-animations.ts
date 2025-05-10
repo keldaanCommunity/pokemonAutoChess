@@ -2549,6 +2549,41 @@ export function displayAbility(
       break
     }
 
+    case Ability.PSYCHO_CUT: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformEntityCoordinates(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      for (let i = 0; i < 3; i++) {
+        const projectile = addAbilitySprite(skill, coordinates)
+          .setScale(2)
+          .setAlpha(0)
+          .setRotation(
+            Math.atan2(
+              finalCoordinates[1] - coordinates[1],
+              finalCoordinates[0] - coordinates[0]
+            ) -
+              Math.PI / 2
+          )
+        scene.tweens.add({
+          targets: projectile,
+          x: finalCoordinates[0],
+          y: finalCoordinates[1],
+          alpha: { from: 1, to: 1 },
+          ease: "linear",
+          yoyo: false,
+          duration: 1000,
+          delay: i * 100,
+          onComplete: () => {
+            projectile.destroy()
+          }
+        })
+      }
+      break
+    }
+
     case Ability.SPIKY_SHIELD:
       OrientationArray.forEach((orientation) => {
         const [dx, dy] = OrientationVector[orientation]

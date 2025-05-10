@@ -8,6 +8,7 @@
 - Grookey
 - Thwackey
 - Rillaboom
+- Gallade
  
 # Changes to Pokemon & Abilities
 

@@ -275,6 +275,7 @@ export enum Pkm {
   GALARIAN_RAPIDASH = "GALARIAN_RAPIDASH",
   GALARIAN_ZAPDOS = "GALARIAN_ZAPDOS",
   GALARIAN_ZIGZAGOON = "GALARIAN_ZIGZAGOON",
+  GALLADE = "GALLADE",
   GALVANTULA = "GALVANTULA",
   GARBODOR = "GARBODOR",
   GARCHOMP = "GARCHOMP",
@@ -1531,7 +1532,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GLISCOR]: "0472",
   [Pkm.MAMOSWINE]: "0473",
   [Pkm.PORYGON_Z]: "0474",
-  //[Pkm.GALLADE]: "0475",
+  [Pkm.GALLADE]: "0475",
   [Pkm.PROBOPASS]: "0476",
   [Pkm.DUSKNOIR]: "0477",
   [Pkm.FROSLASS]: "0478",
@@ -2267,6 +2268,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.RALTS]: Pkm.RALTS,
   [Pkm.KIRLIA]: Pkm.RALTS,
   [Pkm.GARDEVOIR]: Pkm.RALTS,
+  [Pkm.GALLADE]: Pkm.RALTS,
   [Pkm.BAGON]: Pkm.BAGON,
   [Pkm.SHELGON]: Pkm.BAGON,
   [Pkm.SALAMENCE]: Pkm.BAGON,
@@ -3934,6 +3936,11 @@ export const AnimationConfig: {
     attack: AnimationType.Appeal,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot
+  },
+  [Pkm.GALLADE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   },
   [Pkm.BAGON]: {
     attack: AnimationType.Shoot,
