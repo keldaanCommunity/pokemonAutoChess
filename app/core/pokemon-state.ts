@@ -156,7 +156,7 @@ export default abstract class PokemonState {
       }
 
       if (attackType === AttackType.SPECIAL) {
-        specialDamage = damage
+        specialDamage += damage
       } else {
         physicalDamage = damage
       }
