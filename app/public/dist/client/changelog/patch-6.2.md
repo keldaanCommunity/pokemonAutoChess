@@ -47,6 +47,7 @@
 - Caterpie line is now Bug/Amorphous instead of Bug/Grass
 - Change Fickle Beam (Hydrapple): 4 → 5 heads, 60 → 50% chance of inflicting 60 → 50 special damage
 - Mantyke: chance to fish Remoraid 30 → 33%
+- Buff Slowking: Def 12 → 14
 
 # Changes to Synergies
 

@@ -4302,7 +4302,7 @@ export class Slowking extends Pokemon {
   hp = 260
   atk = 27
   speed = 35
-  def = 12
+  def = 14
   speDef = 8
   maxPP = 100
   range = 1
