@@ -2079,7 +2079,7 @@
 		"FREEZING": "提升40点SPE_DEF，敌方陷入FREEZE的概率为[40,LK]%。",
 		"SHEER_COLD": "提升60点SPE_DEF。处于FREEZE的敌方宝可梦受到伤害增加30%。",
 		"ANCIENT_POWER": "复活时拥有40%的HP，并提升30%的ATK。",
-		"ELDER_POWER": "复活时拥有80%的HP，并提升60%的ATK。",
+		"ELDER_POWER": "复活时拥有70%的HP，并提升60%的ATK。",
 		"FORGOTTEN_POWER": "复活时拥有100%的HP，并提升100%的ATK。",
 		"LARGO": "所有我方宝可梦提升2点ATK。",
 		"ALLEGRO": "所有我方宝可梦提升1点ATK和5点SPEED。",

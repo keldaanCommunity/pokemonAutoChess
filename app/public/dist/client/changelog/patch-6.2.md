@@ -52,6 +52,8 @@
 
 - Wild Pokemon can now be found in initial shop at stage 0
 - Gourmet dishes are now distributed to the strongest adjacent allies instead of random among the adjacent ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
+- Change Fossil: add an animation and reset attack cooldown when fossil resurrection is triggered
+- Nerf Fossil 4: HP after resurrect 80% → 70%
 
 # Changes to Items
 

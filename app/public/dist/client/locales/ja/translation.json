@@ -1551,7 +1551,7 @@
 		"FREEZING": "+40 SPE_DEF、[40,LK]% の確率でフリーズ",
 		"SHEER_COLD": "+60 SPE_DEF、凍った敵は30%の追加ダメージを受ける",
 		"ANCIENT_POWER": "HP40%、攻撃力+30%で復活",
-		"ELDER_POWER": "HP 80%、攻撃力 +60% で復活します。",
+		"ELDER_POWER": "HP 70%、攻撃力 +60% で復活します。",
 		"FORGOTTEN_POWER": "HP 100%、攻撃力 +100% で復活します。",
 		"LARGO": "味方チームのATKが+2される",
 		"ALLEGRO": "味方チームのATKが+1、SPEEDが+5%増加",

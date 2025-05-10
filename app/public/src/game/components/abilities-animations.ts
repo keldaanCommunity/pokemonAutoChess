@@ -3737,6 +3737,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(3)
       break
 
+    case "FOSSIL_RESURRECT":
+      addAbilitySprite(skill, coordinates, true).setScale(2)
+      break
+
     case Ability.RETALIATE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break

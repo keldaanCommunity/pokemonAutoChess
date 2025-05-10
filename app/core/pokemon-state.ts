@@ -21,6 +21,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
+import { broadcastAbility } from "./abilities/abilities"
 import Board, { Cell } from "./board"
 import { PeriodicEffect } from "./effects/effect"
 import { PokemonEntity } from "./pokemon-entity"
@@ -551,7 +552,7 @@ export default abstract class PokemonState {
           const healBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
             ? 1
             : pokemon.effects.has(EffectEnum.ELDER_POWER)
-              ? 0.8
+              ? 0.7
               : 0.4
           const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
             ? 1
@@ -560,6 +561,8 @@ export default abstract class PokemonState {
               : 0.3
           pokemon.life = pokemon.hp * healBonus
           pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
+          pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
+          broadcastAbility(pokemon, { skill: "FOSSIL_RESURRECT" })
           SynergyEffects[Synergy.FOSSIL].forEach((e) =>
             pokemon.effects.delete(e)
           )

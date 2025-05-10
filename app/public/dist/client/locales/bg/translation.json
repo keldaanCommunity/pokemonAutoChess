@@ -1174,7 +1174,7 @@
 		"FREEZING": "+40 SPE_DEF, [40,LK]% шанс за FREEZE",
 		"SHEER_COLD": "+60 SPE_DEF, замразените врагове поемат 30% допълнителни щети",
 		"ANCIENT_POWER": "Съживете с 40% HP и +30% ATK",
-		"ELDER_POWER": "Съживете с 80% HP и +60% ATK.",
+		"ELDER_POWER": "Съживете с 70% HP и +60% ATK.",
 		"FORGOTTEN_POWER": "Съживете със 100% HP и +100% ATK.",
 		"LARGO": "Съюзният отбор печели +2 ATK",
 		"ALLEGRO": "Съюзният отбор печели +1 ATK и +5 SPEED",

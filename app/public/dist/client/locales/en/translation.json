@@ -2082,7 +2082,7 @@
 		"FREEZING": "+40 SPE_DEF, [40,LK]% chance to FREEZE",
 		"SHEER_COLD": "+60 SPE_DEF, frozen enemies take 30% additional damage",
 		"ANCIENT_POWER": "Revive with 40% HP and +30% ATK",
-		"ELDER_POWER": "Revive with 80% HP and +60% ATK.",
+		"ELDER_POWER": "Revive with 70% HP and +60% ATK.",
 		"FORGOTTEN_POWER": "Revive with 100% HP and +100% ATK.",
 		"LARGO": "Ally team gains +2 ATK",
 		"ALLEGRO": "Ally team gains +1 ATK and +5 SPEED",
