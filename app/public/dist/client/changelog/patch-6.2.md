@@ -48,6 +48,7 @@
 - Change Fickle Beam (Hydrapple): 4 → 5 heads, 60 → 50% chance of inflicting 60 → 50 special damage
 - Mantyke: chance to fish Remoraid 30 → 33%
 - Buff Slowking: Def 12 → 14
+- Buff Rookidee line: HP 80/130/220 → 80/150/250, Attack 6/10/20 → 8/14/28,  Def 8/12/16 → 8/13/18, Spe def 4/6/8 → 4/8/12
 
 # Changes to Synergies
 
