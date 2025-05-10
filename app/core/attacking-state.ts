@@ -79,10 +79,14 @@ export default class AttackingState extends PokemonState {
       ) {
         // CAST ABILITY
         let crit = false
-        if (pokemon.effects.has(EffectEnum.ABILITY_CRIT)) {
+        const ability = AbilityStrategies[pokemon.skill]
+        if (
+          pokemon.effects.has(EffectEnum.ABILITY_CRIT) ||
+          ability.canCritByDefault
+        ) {
           crit = chance(pokemon.critChance / 100, pokemon)
         }
-        AbilityStrategies[pokemon.skill].process(pokemon, board, target, crit)
+        ability.process(pokemon, board, target, crit)
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++

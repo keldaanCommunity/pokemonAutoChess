@@ -11,6 +11,7 @@ import { DelayedCommand } from "../simulation-command"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
+  canCritByDefault = false
   process(
     pokemon: PokemonEntity,
     board: Board,

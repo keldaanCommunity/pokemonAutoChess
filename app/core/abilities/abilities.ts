@@ -714,6 +714,7 @@ export class ChatterStrategy extends AbilityStrategy {
 }
 
 export class CrabHammerStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -1076,13 +1077,13 @@ export class PsychUpStrategy extends AbilityStrategy {
 }
 
 export class RazorWindStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -4590,13 +4591,13 @@ export class SkyAttackStrategy extends AbilityStrategy {
 }
 
 export class SkyAttackShadowStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, board, target, crit, true)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
@@ -4764,15 +4765,15 @@ export class WaterShurikenStrategy extends AbilityStrategy {
 }
 
 export class RazorLeafStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     super.process(pokemon, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -4788,13 +4789,13 @@ export class RazorLeafStrategy extends AbilityStrategy {
 }
 
 export class PsychoCutStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, board, target, crit)
     const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
     effectInLine(board, pokemon, target, (cell) => {
@@ -7378,6 +7379,7 @@ export class RetaliateStrategy extends AbilityStrategy {
 }
 
 export class SlashStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -7386,7 +7388,7 @@ export class SlashStrategy extends AbilityStrategy {
   ) {
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const increasedCrit = [30, 60, 90][pokemon.stars - 1] ?? 90
-    crit = chance((pokemon.critChance + increasedCrit) / 100, pokemon) // can crit by default
+    crit = chance((pokemon.critChance + increasedCrit) / 100, pokemon) // can crit by default with increased crit chance
     super.process(pokemon, board, target, crit)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
@@ -7938,27 +7940,27 @@ export class MagnetBombStrategy extends AbilityStrategy {
 }
 
 export class NightSlashStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    crit = crit || chance(pokemon.critChance / 100, pokemon)
     super.process(pokemon, board, target, crit)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
 export class KowtowCleaveStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, board, target, crit)
     const nbAlliesAlive = board.cells.filter(
       (p) => p && p.team === pokemon.team
@@ -11441,13 +11443,13 @@ export class DragonPulseStrategy extends AbilityStrategy {
 }
 
 export class FrostBreathStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default
     super.process(pokemon, board, target, crit)
     const damage = [35, 70, 120][pokemon.stars - 1] ?? 120
 

@@ -16,6 +16,7 @@ import {
   OnKillEffect,
   PeriodicEffect
 } from "./effect"
+import { AbilityStrategies } from "../abilities/abilities"
 
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
@@ -425,9 +426,15 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.REAPER_CLOTH]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effects.add(EffectEnum.ABILITY_CRIT)
+      if (AbilityStrategies[pokemon.skill].canCritByDefault) {
+        pokemon.addCritPower(50, pokemon, 0, false)
+      }
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.effects.delete(EffectEnum.ABILITY_CRIT)
+      if (AbilityStrategies[pokemon.skill].canCritByDefault) {
+        pokemon.addCritPower(-50, pokemon, 0, false)
+      }
     })
   ],
 
