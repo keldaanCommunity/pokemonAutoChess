@@ -4,11 +4,11 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { RarityColor } from "../../../../../types/Config"
 import { PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
+import { getCachedPortrait } from "./game-pokemon-portrait"
 import "./game-pokemon-portrait.css"
 
 export default function GamePokemonDuoPortrait(props: {
@@ -41,11 +41,7 @@ export default function GamePokemonDuoPortrait(props: {
             )}
             data-tooltip-id={`tooltip-${props.origin}-${props.index}-${p.index}`}
             style={{
-              backgroundImage: `url("${getPortraitSrc(
-                p.index,
-                duoCustom[i]?.shiny,
-                duoCustom[i]?.emotion
-              )}")`
+              backgroundImage: `url("${getCachedPortrait(p.index, currentPlayer?.pokemonCustoms)}")`
             }}
           ></div>
           <Tooltip

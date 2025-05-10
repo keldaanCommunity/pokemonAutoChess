@@ -5,9 +5,8 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { RarityColor, RarityCost } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
-import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
+import { getCachedPortrait } from "./game-pokemon-portrait"
 
 export function GameRegionalPokemonsIcon() {
   return (
@@ -50,7 +49,6 @@ export function GameRegionalPokemons() {
         <div className="grid">
           {regionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
-            const pokemonCustom = getPkmWithCustom(pokemon.index, currentPlayer?.pokemonCustoms)
             const rarityColor = RarityColor[pokemon.rarity]
 
             return (
@@ -60,11 +58,7 @@ export function GameRegionalPokemons() {
                 style={{
                   backgroundColor: rarityColor,
                   borderColor: rarityColor,
-                  backgroundImage: `url("${getPortraitSrc(
-                    pokemon.index,
-                    pokemonCustom.shiny,
-                    pokemonCustom.emotion
-                  )}")`
+                  backgroundImage: `url("${getCachedPortrait(pokemon.index, currentPlayer?.pokemonCustoms)}")`
                 }}
               >
                 <ul className="game-pokemon-portrait-types">

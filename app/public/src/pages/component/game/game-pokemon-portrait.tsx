@@ -13,9 +13,19 @@ import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import { usePreference } from "../../../preferences"
-import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
+import { getPkmWithCustom, PokemonCustoms } from "../../../../../models/colyseus-models/pokemon-customs"
+import { getGameScene } from "../../game"
 import "./game-pokemon-portrait.css"
+
+export function getCachedPortrait(index: string, customs?: PokemonCustoms): string {
+  const scene = getGameScene()
+  const pokemonCustom = getPkmWithCustom(index, customs)
+  return scene?.textures.getBase64(`portrait-${index}`) ?? getPortraitSrc(
+    index,
+    pokemonCustom.shiny,
+    pokemonCustom.emotion
+  )
+}
 
 export default function GamePokemonPortrait(props: {
   index: number
@@ -26,7 +36,6 @@ export default function GamePokemonPortrait(props: {
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>,
   inPlanner?: boolean
 }) {
-  const [antialiasing] = usePreference("antialiasing")
   const pokemon = useMemo(
     () =>
       typeof props.pokemon === "string"
@@ -82,7 +91,8 @@ export default function GamePokemonPortrait(props: {
     return <div className="game-pokemon-portrait my-box empty" />
   }
 
-  const pokemonCustom = getPkmWithCustom(pokemon.index, currentPlayer?.pokemonCustoms)
+  const customs = currentPlayer?.pokemonCustoms
+  const pokemonCustom = getPkmWithCustom(pokemon.index, customs)
   const rarityColor = RarityColor[pokemon.rarity]
 
   const evolutionName = currentPlayer
@@ -138,11 +148,7 @@ export default function GamePokemonPortrait(props: {
       style={{
         backgroundColor: rarityColor,
         borderColor: rarityColor,
-        backgroundImage: `url("${getPortraitSrc(
-          pokemonInPortrait.index,
-          pokemonCustom.shiny,
-          pokemonCustom.emotion
-        )}")`
+        backgroundImage: `url("${getCachedPortrait(pokemonInPortrait.index, customs)}")`
       }}
       onClick={(e) => {
         if (canBuy && props.click) props.click(e)
@@ -166,11 +172,7 @@ export default function GamePokemonPortrait(props: {
       {willEvolve && pokemonEvolution && (
         <div className="game-pokemon-portrait-evolution">
           <img
-            src={getPortraitSrc(
-              pokemon.index,
-              pokemonCustom.shiny,
-              pokemonCustom.emotion
-            )}
+            src={getCachedPortrait(pokemon.index, customs)}
             className="game-pokemon-portrait-evolution-portrait"
           />
           <img
