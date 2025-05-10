@@ -35,6 +35,7 @@ export default abstract class PokemonState {
       let specialDamage = 0
       let trueDamage = 0
       let totalTakenDamage = 0
+      let attackType = pokemon.attackType
 
       if (chance(pokemon.critChance / 100, pokemon)) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
@@ -108,6 +109,19 @@ export default abstract class PokemonState {
         damage = 0
       }
 
+      if (additionalSpecialDamagePart > 0) {
+        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
+      }
+
+      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
+        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
+      }
+
+      if (target.effects.has(EffectEnum.WONDER_ROOM)) {
+        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
+        attackType = AttackType.SPECIAL
+      } 
+
       let trueDamagePart = 0
       if (pokemon.effects.has(EffectEnum.STEEL_SURGE)) {
         trueDamagePart += 0.33
@@ -141,20 +155,10 @@ export default abstract class PokemonState {
         totalTakenDamage += takenDamage
       }
 
-      if (target.effects.has(EffectEnum.WONDER_ROOM)) {
-        specialDamage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      } else if (pokemon.attackType === AttackType.SPECIAL) {
+      if (attackType === AttackType.SPECIAL) {
         specialDamage = damage
       } else {
         physicalDamage = damage
-      }
-
-      if (additionalSpecialDamagePart > 0) {
-        specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
-      }
-
-      if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
       }
 
       if (physicalDamage > 0) {
