@@ -1,4 +1,5 @@
 import { getStateCallbacks, Room } from "colyseus.js"
+import { SchemaCallbackProxy } from "@colyseus/schema"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
@@ -41,14 +42,12 @@ import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
-import { getPortraitSrc } from "../../../utils/avatar"
 import { BoardMode } from "./components/board-manager"
 import GameScene from "./scenes/game-scene"
 import { t } from "i18next"
 import { values } from "../../../utils/schemas"
-import { SchemaCallbackProxy } from "@colyseus/schema"
-import { getPkmWithCustom } from "../../../models/colyseus-models/pokemon-customs"
 import { DEPTH } from "./depths"
+import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 
 class GameContainer {
   room: Room<GameState>
@@ -450,11 +449,10 @@ class GameContainer {
 
     $player.board.onAdd((pokemon, key) => {
       if (pokemon.stars > 1) {
-        const custom = getPkmWithCustom(pokemon.index, player.pokemonCustoms)
         const i = React.createElement(
           "img",
           {
-            src: getPortraitSrc(pokemon.index, custom.shiny, custom.emotion)
+            src: getCachedPortrait(pokemon.index, player.pokemonCustoms)
           },
           null
         )

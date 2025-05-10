@@ -90,3 +90,4 @@
 - Shiny hunter scribble no longer gets shiny PvE encounters at stages where there's no shiny encounter possible in base rules
 - Bot manager submission process has been reworked to no longer rely on Pastebin service
 - New title: Picnicker: Make a picnic with 9 Pokémon
+- Performance improvement: improve use of texture cache for pokemon portraits, which should make them appear instantly when rolling shop

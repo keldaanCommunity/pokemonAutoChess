@@ -13,6 +13,8 @@ import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
+import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
+import type Player from "../../../../models/colyseus-models/player"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -120,15 +122,6 @@ export default class LoadingManager {
       }
     )
 
-    indexList.forEach((id) => {
-      scene.load.image(`portrait-${id}`, getPortraitSrc(id))
-      /*scene.load.multiatlas(
-        id,
-        `/assets/pokemons/${id}.json`,
-        "/assets/pokemons"
-      )*/
-    })
-
     if (scene instanceof GameScene) {
       const players = values(scene.room?.state.players!)
       const player = players.find((p) => p.id === scene.uid) ?? players[0]
@@ -138,6 +131,7 @@ export default class LoadingManager {
           .filter<DungeonPMDO>((map): map is DungeonPMDO => map !== "town")
       )
       preloadMusic(scene, DungeonDetails[player.map].music)
+      preloadPortraits(this.scene, player)
     }
 
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
@@ -171,7 +165,7 @@ export default class LoadingManager {
         endFrame: 23
       }
     })
-    
+
     scene.load.spritesheet({
       key: "board_cell",
       url: "/assets/ui/board_cell.png",
@@ -216,4 +210,14 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
     "/assets/environment/berry_trees.json",
     "/assets/environment/"
   )
+}
+
+export function preloadPortraits(scene: Phaser.Scene, player: Player) {
+  indexList.forEach((index) => {
+    const pokemonCustom = getPkmWithCustom(index, player.pokemonCustoms)
+    scene.load.image(
+      `portrait-${index}`,
+      getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
+    )
+  })
 }

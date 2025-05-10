@@ -17,11 +17,11 @@ import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { roundToNDigits } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
 import { useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
+import { getCachedPortrait } from "../game/game-pokemon-portrait"
 
 export default function SynergyDetailComponent(props: {
   type: Synergy
@@ -180,7 +180,7 @@ function PokemonPortrait(props: { p: IPokemonData, type: Synergy, player?: IPlay
       key={props.p.name}
       style={{ color: RarityColor[props.p.rarity], border: "3px solid " + RarityColor[props.p.rarity] }}
     >
-      <img src={getPortraitSrc(props.p.index)} />
+      <img src={getCachedPortrait(props.p.index, props.player?.pokemonCustoms)} />
     </div>
   )
 }
