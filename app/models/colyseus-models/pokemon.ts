@@ -4262,7 +4262,7 @@ export class HisuianTyphlosion extends Pokemon {
 }
 
 export class Slowpoke extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SLOWBRO
@@ -4279,7 +4279,7 @@ export class Slowpoke extends Pokemon {
 }
 
 export class Slowbro extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
@@ -4296,13 +4296,13 @@ export class Slowbro extends Pokemon {
 }
 
 export class Slowking extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 260
   atk = 27
   speed = 35
-  def = 12
+  def = 14
   speDef = 8
   maxPP = 100
   range = 1
@@ -16618,7 +16618,7 @@ export class Rookidee extends Pokemon {
   stars = 1
   evolution = Pkm.CORVISQUIRE
   hp = 80
-  atk = 6
+  atk = 8
   speed = 46
   def = 8
   speDef = 4
@@ -16634,11 +16634,11 @@ export class Corvisquire extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.CORVIKNIGHT
-  hp = 130
-  atk = 10
+  hp = 150
+  atk = 14
   speed = 46
-  def = 12
-  speDef = 6
+  def = 13
+  speDef = 8
   maxPP = 90
   range = 1
   skill = Ability.STEEL_WING
@@ -16650,11 +16650,11 @@ export class Corviknight extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING])
   rarity = Rarity.RARE
   stars = 3
-  hp = 220
-  atk = 20
+  hp = 250
+  atk = 28
   speed = 46
-  def = 16
-  speDef = 8
+  def = 18
+  speDef = 12
   maxPP = 90
   range = 1
   skill = Ability.STEEL_WING

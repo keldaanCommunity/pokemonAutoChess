@@ -1858,7 +1858,7 @@
 		"FREEZING": "+40 SPE_DEF, gli attacchi hanno il [40,LK]% di possibilità di infliggere FREEZE",
 		"SHEER_COLD": "+60 SPE_DEF, i nemici congelati subiscono il 30% di danni aggiuntivi",
 		"ANCIENT_POWER": "Rianima con il 40% di HP e il 30% in più di ATK",
-		"ELDER_POWER": "Rianima con il 80% di HP e il 60% in più di ATK",
+		"ELDER_POWER": "Rianima con il 70% di HP e il 60% in più di ATK",
 		"FORGOTTEN_POWER": "Rianima con il 100% di HP e il 100% in più di ATK",
 		"LARGO": "La squadra alleata guadagna +2 di ATK",
 		"ALLEGRO": "La squadra alleata ottiene +1 di ATK e il 5 in più di SPEED",
