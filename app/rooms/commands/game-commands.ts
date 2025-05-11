@@ -63,6 +63,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  KubfuScrolls,
   NonHoldableItems,
   OgerponMasks,
   ShinyItems,
@@ -614,6 +615,23 @@ export class OnDragDropItemCommand extends Command<
 
     if (CharcadetArmors.includes(item)) {
       if (pokemon.passive == Passive.CHARCADET) {
+        pokemon.items.add(item)
+        const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
+          playerId,
+          pokemon
+        )
+        if (!pokemonEvolved) {
+          pokemon.items.delete(item)
+          client.send(Transfer.DRAG_DROP_FAILED, message)
+        } else removeInArray(player.items, item)
+      } else {
+        client.send(Transfer.DRAG_DROP_FAILED, message)
+      }
+      return
+    }
+
+    if (KubfuScrolls.includes(item)) {
+      if (pokemon.passive == Passive.KUBFU) {
         pokemon.items.add(item)
         const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
           playerId,

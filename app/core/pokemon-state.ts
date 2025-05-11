@@ -28,7 +28,12 @@ import { PokemonEntity } from "./pokemon-entity"
 export default abstract class PokemonState {
   name: string = ""
 
-  attack(pokemon: PokemonEntity, board: Board, target: PokemonEntity | null) {
+  attack(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity | null,
+    isTripleAttack = false
+  ) {
     if (target && target.life > 0) {
       let damage = pokemon.atk
       let physicalDamage = 0
@@ -192,7 +197,8 @@ export default abstract class PokemonState {
         physicalDamage,
         specialDamage,
         trueDamage,
-        totalDamage
+        totalDamage,
+        isTripleAttack
       })
       if (isAttackSuccessful) {
         pokemon.onHit({
@@ -589,7 +595,7 @@ export default abstract class PokemonState {
         pokemon.onDeath({ board })
         board.setValue(pokemon.positionX, pokemon.positionY, undefined)
         if (attacker && pokemon !== attacker) {
-          attacker.onKill({ target: pokemon, board })
+          attacker.onKill({ target: pokemon, board, attackType })
         }
         const effectsRemovedList: EffectEnum[] = []
 

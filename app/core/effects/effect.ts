@@ -41,12 +41,18 @@ export class OnItemRemovedEffect extends Effect {}
 
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {
-  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
+  apply(
+    attacker: PokemonEntity,
+    target: PokemonEntity,
+    board: Board,
+    attackType: AttackType
+  ) {}
   constructor(
     effect?: (
       entity: PokemonEntity,
       target: PokemonEntity,
-      board: Board
+      board: Board,
+      attackType: AttackType
     ) => void,
     origin?: EffectOrigin
   ) {
@@ -102,6 +108,7 @@ interface OnAttackEffectArgs {
   specialDamage: number
   trueDamage: number
   totalDamage: number
+  isTripleAttack?: boolean
 }
 
 export class OnAttackEffect extends Effect {
@@ -143,7 +150,7 @@ export class MonsterKillEffect extends OnKillEffect {
     this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
   }
 
-  apply(pokemon, target, board) {
+  apply(pokemon, target, board, attackType) {
     const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
     const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
     const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
@@ -349,18 +356,19 @@ export class FireHitEffect extends OnAttackEffect {
 }
 
 export const electricTripleAttackEffect = new OnAttackEffect(
-  ({ pokemon, target, board }) => {
-    let isTripleAttack = false,
+  ({ pokemon, target, board, isTripleAttack }) => {
+    if (isTripleAttack) return // ignore the effect of the 2nd and 3d attacks of triple attacks
+    let shouldTriggerTripleAttack = false,
       isPowerSurge = false
     if (pokemon.effects.has(EffectEnum.RISING_VOLTAGE)) {
-      isTripleAttack = pokemon.count.attackCount % 4 === 0
+      shouldTriggerTripleAttack = pokemon.count.attackCount % 4 === 0
     } else if (pokemon.effects.has(EffectEnum.OVERDRIVE)) {
-      isTripleAttack = pokemon.count.attackCount % 3 === 0
+      shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
     } else if (pokemon.effects.has(EffectEnum.POWER_SURGE)) {
-      isTripleAttack = pokemon.count.attackCount % 3 === 0
+      shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
       isPowerSurge = true
     }
-    if (isTripleAttack) {
+    if (shouldTriggerTripleAttack) {
       pokemon.count.tripleAttackCount++
 
       if (pokemon.name === Pkm.MORPEKO && target) {
@@ -371,8 +379,8 @@ export const electricTripleAttackEffect = new OnAttackEffect(
         target.status.triggerWound(4000, target, pokemon)
       }
 
-      pokemon.state.attack(pokemon, board, target)
-      pokemon.state.attack(pokemon, board, target)
+      pokemon.state.attack(pokemon, board, target, true)
+      pokemon.state.attack(pokemon, board, target, true)
       if (isPowerSurge && target) {
         board
           .getAdjacentCells(target.positionX, target.positionY, true)
