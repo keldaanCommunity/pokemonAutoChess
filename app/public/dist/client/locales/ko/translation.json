@@ -2064,7 +2064,7 @@
 		"FREEZING": "+40 SPE_DEF, [40,LK]% 확률로 FREEZE",
 		"SHEER_COLD": "+60 SPE_DEF, 얼어붙은 적은 30%의 추가 피해를 입습니다.",
 		"ANCIENT_POWER": "40%의 HP와 30% 증가된 ATK로 부활",
-		"ELDER_POWER": "80%의 HP와 60% 증가된 ATK로 부활",
+		"ELDER_POWER": "70%의 HP와 60% 증가된 ATK로 부활",
 		"FORGOTTEN_POWER": "100%의 HP와 100% 증가된 ATK로 부활",
 		"LARGO": "아군에게 +2 ATK",
 		"ALLEGRO": "아군에게 +1 ATK, +5 SPEED",

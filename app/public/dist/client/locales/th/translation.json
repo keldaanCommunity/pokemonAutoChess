@@ -455,7 +455,7 @@
 		"FREEZING": "+40 SPE_DEF, [40,LK]% โอกาสมอบสถานะ FREEZE",
 		"SHEER_COLD": "+60 SPE_DEF, ศัตรูที่ถูกแช่แข็งจะได้รับความเสียหายเพิ่มขึ้น 30%",
 		"ANCIENT_POWER": "คืนชีพด้วย 40% HP และ +30% ATK",
-		"ELDER_POWER": "คืนชีพด้วย 80% HP และ +60% ATK",
+		"ELDER_POWER": "คืนชีพด้วย 70% HP และ +60% ATK",
 		"FORGOTTEN_POWER": "คืนชีพด้วย 100% HP และ +100% ATK.",
 		"LARGO": "เพื่อนร่วมทีมจะได้รับ +2 ATK",
 		"ALLEGRO": "เพื่อนร่วมทีมจะได้รับ +1 ATK และ +5 SPEED",

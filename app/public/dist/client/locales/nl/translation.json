@@ -1261,7 +1261,7 @@
 		"FREEZING": "+40 SPE_DEF, [40,LK]% kans om te FREEZE",
 		"SHEER_COLD": "+60 SPE_DEF, bevroren vijanden krijgen 30% extra schade",
 		"ANCIENT_POWER": "Herleef met 40% HP en +30% ATK",
-		"ELDER_POWER": "Herleef met 80% HP en +60% ATK.",
+		"ELDER_POWER": "Herleef met 70% HP en +60% ATK.",
 		"FORGOTTEN_POWER": "Herleef met 100% HP en +100% ATK.",
 		"LARGO": "Ally-team krijgt +2 ATK",
 		"ALLEGRO": "Ally-team wint +1 ATK en +5 SPEED",
