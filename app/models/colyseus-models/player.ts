@@ -291,14 +291,7 @@ export default class Player extends Schema implements IPlayer {
   updateSynergies() {
     const pokemons: Pokemon[] = values(this.board)
     const previousSynergies = this.synergies.toMap()
-    let updatedSynergies = computeSynergies(pokemons)
-
-    this.bonusSynergies.forEach((value, synergy) => {
-      updatedSynergies.set(
-        synergy,
-        (updatedSynergies.get(synergy) ?? 0) + value
-      )
-    })
+    let updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
 
     const artifNeedsRecomputing = this.updateArtificialItems(
       previousSynergies,
@@ -310,7 +303,7 @@ export default class Player extends Schema implements IPlayer {
       losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
       decrementing by 1 in updatedSynergies map count
       */
-      updatedSynergies = computeSynergies(pokemons)
+      updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
     }
 
     const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0

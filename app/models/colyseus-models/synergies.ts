@@ -59,10 +59,13 @@ export default class Synergies
   }
 }
 
-export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
+export function computeSynergies(
+  board: IPokemon[],
+  bonusSynergies?: Map<Synergy, number>
+): Map<Synergy, number> {
   const synergies = new Map<Synergy, number>()
   Object.keys(Synergy).forEach((key) => {
-    synergies.set(key as Synergy, 0)
+    synergies.set(key as Synergy, bonusSynergies?.get(key as Synergy) ?? 0)
   })
 
   const typesPerFamily = new Map<Pkm, Set<Synergy>>()
@@ -110,7 +113,8 @@ export function computeSynergies(board: IPokemon[]): Map<Synergy, number> {
         (a, b) => +synergies.get(b)! - synergies.get(a)!
       )
       const family = PkmFamily[pkm.name]
-      if (!dynamicTypesPerFamily.has(family)) dynamicTypesPerFamily.set(family, new Set())
+      if (!dynamicTypesPerFamily.has(family))
+        dynamicTypesPerFamily.set(family, new Set())
       const types: Set<Synergy> = dynamicTypesPerFamily.get(family)!
 
       for (let i = 0; i < n; i++) {
