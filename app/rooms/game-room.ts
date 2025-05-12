@@ -52,7 +52,6 @@ import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
-  PkmIndex,
   PkmProposition,
   PkmRegionalVariants
 } from "../types/enum/Pokemon"

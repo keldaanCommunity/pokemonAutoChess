@@ -12410,6 +12410,43 @@ export class DrumBeatingStrategy extends AbilityStrategy {
   }
 }
 
+export class SurgingStrikesStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // strikes the target with a flowing motion three times in a row, dealing [100,SP]% of ATK each as SPECIAL. Always deal critical hits.
+    super.process(pokemon, board, target, true)
+    const damage = pokemon.atk
+    const nbHits = 3
+    for (let i = 0; i < nbHits; i++) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        true
+      )
+    }
+  }
+}
+
+export class WickedBlowStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Deal 80AP true damage to the target. Always deal a critical hit.
+    super.process(pokemon, board, target, true)
+    const damage = 80
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, true)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12864,5 +12901,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy(),
   [Ability.ARM_THRUST]: new ArmThrustStrategy(),
   [Ability.DRUM_BEATING]: new DrumBeatingStrategy(),
-  [Ability.PSYCHO_CUT]: new PsychoCutStrategy()
+  [Ability.PSYCHO_CUT]: new PsychoCutStrategy(),
+  [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
+  [Ability.WICKED_BLOW]: new WickedBlowStrategy()
 }

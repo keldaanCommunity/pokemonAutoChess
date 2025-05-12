@@ -472,7 +472,9 @@
 		"ICICLE_MISSILE": "Icicle Missile",
 		"ARM_THRUST": "Arm Thrust",
 		"DRUM_BEATING": "Drum Beating",
-		"PSYCHO_CUT": "Psycho Cut"
+		"PSYCHO_CUT": "Psycho Cut",
+		"WICKED_BLOW": "Wicked Blow",
+		"SURGING_STRIKES": "Surging Strikes"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1429,7 +1431,10 @@
 		"PANGORO": "Pangoro",
 		"GROOKEY": "Grookey",
 		"THWACKEY": "Thwackey",
-		"RILLABOOM": "Rillaboom"
+		"RILLABOOM": "Rillaboom",
+		"KUBFU": "Kubfu",
+		"URSHIFU_SINGLE": "Urshifu (Single Strike)",
+		"URSHIFU_RAPID": "Urshifu (Rapid Strike)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1882,7 +1887,9 @@
 		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds.",
 		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
 		"DRUM_BEATING": "Alternatively:\n1. Wood block: give [10,20,40,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,SP] SPEED to the entire team",
-		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,30,SP] SPECIAL to all enemies hit. Can crit by default."
+		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,30,SP] SPECIAL to all enemies hit. Can crit by default.",
+		"WICKED_BLOW": "Deal [80,SP] TRUE to the target. Always deal a critical hit.",
+		"SURGING_STRIKES": "Strikes the target with a flowing motion 3 times in a row, dealing [100,SP]% of ATK each as SPECIAL. Always deal critical hits."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2305,7 +2312,9 @@
 		"EXCHANGE_TICKET": "Exchange Ticket",
 		"AUSPICIOUS_ARMOR": "Auspicious Armor",
 		"MALICIOUS_ARMOR": "Malicious Armor",
-		"RUSTED_SWORD": "Rusted Sword"
+		"RUSTED_SWORD": "Rusted Sword",
+		"SCROLL_OF_WATERS": "Scroll of Waters",
+		"SCROLL_OF_DARKNESS": "Scroll of Darkness"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2500,7 +2509,9 @@
 		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
 		"AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
-		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% ATK. Transfers to the ally with the weakest ATK when the holder faints."
+		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% ATK. Transfers to the ally with the weakest ATK when the holder faints.",
+		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
+		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -2650,7 +2661,8 @@
 		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD",
 		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%",
 		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,4] bonus PP to user and adjacent allies. This counts as an attack.",
-		"KIRLIA": "Will evolve into Gallade or Gardevoir based on the dominant synergy between FIGHTING and FAIRY"
+		"KIRLIA": "Will evolve into Gallade or Gardevoir based on the dominant synergy between FIGHTING and FAIRY",
+		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS."
 	},
 	"stat": {
 		"ATK": "Attack",

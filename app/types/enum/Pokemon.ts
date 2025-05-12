@@ -410,6 +410,7 @@ export enum Pkm {
   KRICKETUNE = "KRICKETUNE",
   KROKOROK = "KROKOROK",
   KROOKODILE = "KROOKODILE",
+  KUBFU = "KUBFU",
   KYOGRE = "KYOGRE",
   KYUREM = "KYUREM",
   LAIRON = "LAIRON",
@@ -860,6 +861,8 @@ export enum Pkm {
   URSALUNA = "URSALUNA",
   URSALUNA_BLOODMOON = "URSALUNA_BLOODMOON",
   URSARING = "URSARING",
+  URSHIFU_RAPID = "URSHIFU_RAPID",
+  URSHIFU_SINGLE = "URSHIFU_SINGLE",
   UXIE = "UXIE",
   VANILLISH = "VANILLISH",
   VANILLITE = "VANILLITE",
@@ -1990,9 +1993,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.ZAMAZENTA_CROWNED]: "0889-0001",
   [Pkm.ETERNATUS]: "0890",
   //[Pkm.ETERNATUS_ETERNAMAX]: "0890-0001",
-  //[Pkm.KUBFU]: "0891",
-  //[Pkm.URSHIFU_SINGLE]: "0892",
-  //[Pkm.URSHIFU_RAPID]: "0892-0001",
+  [Pkm.KUBFU]: "0891",
+  [Pkm.URSHIFU_SINGLE]: "0892",
+  [Pkm.URSHIFU_RAPID]: "0892-0001",
   //[Pkm.ZARUDE]: "0893",
   [Pkm.REGIELEKI]: "0894",
   [Pkm.REGIDRAGO]: "0895",
@@ -3083,7 +3086,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PANGORO]: Pkm.PANCHAM,
   [Pkm.GROOKEY]: Pkm.GROOKEY,
   [Pkm.THWACKEY]: Pkm.GROOKEY,
-  [Pkm.RILLABOOM]: Pkm.GROOKEY
+  [Pkm.RILLABOOM]: Pkm.GROOKEY,
+  [Pkm.KUBFU]: Pkm.KUBFU,
+  [Pkm.URSHIFU_SINGLE]: Pkm.KUBFU,
+  [Pkm.URSHIFU_RAPID]: Pkm.KUBFU
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8060,5 +8066,20 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Sing,
     shinyUnavailable: true
+  },
+  [Pkm.KUBFU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Pose
+  },
+  [Pkm.URSHIFU_RAPID]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.URSHIFU_SINGLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   }
 }

@@ -9,6 +9,9 @@
 - Thwackey
 - Rillaboom
 - Gallade
+- Kubfu
+- Urshifu (Single Strike)
+- Urshifu (Rapid Strike)
  
 # Changes to Pokemon & Abilities
 
@@ -78,9 +81,9 @@
 - Positive status and negative status are now displayed in different text colors
 - Add picks and Unique/Legendary propositions now display the team planner icon if added in the team planner
 - Show next level rates in Encounter rates tooltip
-- Life and PP bars have been reworked to be more readable with graduations every 25 HP.
+- Life and PP bars have been redesigned to be more readable with graduations every 25 HP.
 - Wild pokemons in PvE round now make a stage entrance during the picking phase
-- PvP fights now have a portal transition effect when entering the fight. You may go to your opponent's region for the duration of a fight, but your shop will still be for the same region as your current one.
+- PvP fights now have a portal transition animation when entering the fight. You may go to your opponent's region for the duration of a fight, but your shop will still be for the same region as your current one.
 - Level ups are now notified per player with a toast message next to their avatar
 
 # Bugfix
@@ -96,4 +99,4 @@
 - Shiny hunter scribble no longer gets shiny PvE encounters at stages where there's no shiny encounter possible in base rules
 - Bot manager submission process has been reworked to no longer rely on Pastebin service
 - New title: Picnicker: Make a picnic with 9 Pokémon
-- Performance improvement: improve use of texture cache for pokemon portraits, which should make them appear instantly when rolling shop
+- Performance improvement: improve use of cache for pokemon portraits, which should make them appear instantly when rolling shop

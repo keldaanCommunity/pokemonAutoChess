@@ -285,7 +285,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addCritChance(-(pokemon.player?.money ?? 0), pokemon, 0, false)
       pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
     }),
-    new OnKillEffect((pokemon, target, board) => {
+    new OnKillEffect((pokemon, target, board, attackType) => {
       if (pokemon.player) {
         const isLastEnemy =
           board.cells.some(

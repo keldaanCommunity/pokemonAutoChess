@@ -18321,6 +18321,71 @@ export class Rillaboom extends Pokemon {
   attackSprite: AttackSprite = AttackSprite.NORMAL_MELEE
 }
 
+export class Kubfu extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.BABY])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolutions = [Pkm.URSHIFU_RAPID, Pkm.URSHIFU_SINGLE]
+  evolutionRule = new ItemEvolutionRule(
+    [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS],
+    (pokemon, player, item: Item) => {
+      return item === Item.SCROLL_OF_WATERS
+        ? Pkm.URSHIFU_RAPID
+        : Pkm.URSHIFU_SINGLE
+    }
+  )
+  hp = 150
+  atk = 15
+  speed = 50
+  def = 8
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.MACH_PUNCH
+  passive = Passive.KUBFU
+  attackSprite = AttackSprite.FIGHTING_MELEE
+}
+
+export class UrshifuRapid extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.WATER])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 25
+  speed = 50
+  def = 12
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.SURGING_STRIKES
+  attackSprite = AttackSprite.WATER_MELEE
+  onAcquired(player: Player): void {
+    removeInArray(player.items, Item.SCROLL_OF_WATERS)
+    removeInArray(player.items, Item.SCROLL_OF_DARKNESS)
+    this.items.delete(Item.SCROLL_OF_WATERS)
+  }
+}
+
+export class UrshifuSingle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.DARK])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 25
+  speed = 50
+  def = 12
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.WICKED_BLOW
+  attackSprite = AttackSprite.DARK_MELEE
+  onAcquired(player: Player): void {
+    removeInArray(player.items, Item.SCROLL_OF_WATERS)
+    removeInArray(player.items, Item.SCROLL_OF_DARKNESS)
+    this.items.delete(Item.SCROLL_OF_DARKNESS)
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19282,7 +19347,10 @@ export const PokemonClasses: Record<
   [Pkm.GROOKEY]: Grookey,
   [Pkm.THWACKEY]: Thwackey,
   [Pkm.RILLABOOM]: Rillaboom,
-  [Pkm.GALLADE]: Gallade
+  [Pkm.GALLADE]: Gallade,
+  [Pkm.KUBFU]: Kubfu,
+  [Pkm.URSHIFU_SINGLE]: UrshifuSingle,
+  [Pkm.URSHIFU_RAPID]: UrshifuRapid
 }
 
 // declare all the classes in colyseus schema TypeRegistry

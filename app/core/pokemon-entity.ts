@@ -693,7 +693,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     physicalDamage,
     specialDamage,
     trueDamage,
-    totalDamage
+    totalDamage,
+    isTripleAttack
   }: {
     target: PokemonEntity
     board: Board
@@ -701,6 +702,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     specialDamage: number
     trueDamage: number
     totalDamage: number
+    isTripleAttack: boolean
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
 
@@ -713,7 +715,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           physicalDamage,
           specialDamage,
           trueDamage,
-          totalDamage
+          totalDamage,
+          isTripleAttack
         })
       }
     })
@@ -729,7 +732,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         physicalDamage,
         specialDamage,
         trueDamage,
-        totalDamage
+        totalDamage,
+        isTripleAttack
       })
     })
 
@@ -1328,17 +1332,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called after killing an opponent (does not proc if resurection)
-  onKill({ target, board }: { target: PokemonEntity; board: Board }) {
+  onKill({
+    target,
+    board,
+    attackType
+  }: { target: PokemonEntity; board: Board; attackType: AttackType }) {
     const itemEffects: OnKillEffect[] = values(this.items)
       .flatMap((item) => ItemEffects[item] ?? [])
       .filter((effect) => effect instanceof OnKillEffect)
     itemEffects.forEach((effect) => {
-      effect.apply(this, target, board)
+      effect.apply(this, target, board, attackType)
     })
 
     this.effectsSet.forEach((effect) => {
       if (effect instanceof OnKillEffect) {
-        effect.apply(this, target, board)
+        effect.apply(this, target, board, attackType)
       }
     })
 

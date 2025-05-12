@@ -1,7 +1,7 @@
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import Board from "../board"
-import { Effect, OnAttackEffect } from "./effect"
+import { Effect, OnAttackEffect, OnKillEffect } from "./effect"
 import { ItemEffects } from "./items"
 import { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
@@ -12,6 +12,8 @@ import { Ability } from "../../types/enum/Ability"
 import { Pkm } from "../../types/enum/Pokemon"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
+import { Item } from "../../types/enum/Item"
+import { Kubfu } from "../../models/colyseus-models/pokemon"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
@@ -198,8 +200,47 @@ const miniorKernelOnAttackEffect = new OnAttackEffect(
   }
 )
 
+const kubfuOnKillEffect = new OnKillEffect(
+  (pokemon, target, board, attackType) => {
+    const SPEED_BUFF_PER_KILL = 3
+    const AP_BUFF_PER_KILL = 5
+    const MAX_BUFFS = 10
+    if (attackType === AttackType.PHYSICAL) {
+      const baseSpeed = new Kubfu().speed
+      const nbBuffs = Math.floor(
+        (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
+      )
+      if (nbBuffs < MAX_BUFFS) {
+        pokemon.addSpeed(SPEED_BUFF_PER_KILL, pokemon, 0, false, true)
+        if (
+          nbBuffs + 1 === MAX_BUFFS &&
+          pokemon.player &&
+          pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
+        ) {
+          pokemon.player.items.push(Item.SCROLL_OF_WATERS)
+        }
+      }
+    } else {
+      const nbBuffs = Math.floor(
+        pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL
+      )
+      if (nbBuffs < MAX_BUFFS) {
+        pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
+        if (
+          nbBuffs + 1 === MAX_BUFFS &&
+          pokemon.player &&
+          pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
+        ) {
+          pokemon.player.items.push(Item.SCROLL_OF_DARKNESS)
+        }
+      }
+    }
+  }
+)
+
 export const PassiveEffects: Partial<Record<Passive, Effect[]>> = {
   [Passive.DURANT]: [durantBugBuff],
   [Passive.SHARED_VISION]: [sharedVision],
-  [Passive.METEOR]: [miniorKernelOnAttackEffect]
+  [Passive.METEOR]: [miniorKernelOnAttackEffect],
+  [Passive.KUBFU]: [kubfuOnKillEffect]
 }
