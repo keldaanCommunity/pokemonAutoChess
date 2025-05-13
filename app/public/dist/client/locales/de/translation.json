@@ -1855,7 +1855,7 @@
 		"SCALE_SHOT": "Der Nutzer schießt seine Schuppen und verursacht [40,SP] PHYSICAL an benachbarten Gegnern, was an Gegnern und ihm selbst für 2 Sekunden ARMOR_BREAK auslöst. 2 Sekunden nachdem die Schuppen zum weitest entfernten Gegner geschossen wurden, erhalten alle Gegner auf dem Weg [25,SP] PHYSICAL.",
 		"BULLDOZE": "Der Nutzer stampft auf den Boden unter sich und verursacht [25,45,85,SP] SPECIAL zu benachbarten Feinden. Getroffene Pokémon werden zurückgestoßen und verlieren [10] SPEED.",
 		"ARMOR_CANNON": "Der Nutzer schießt ein brennendes Projektil, verursacht [70,SP] SPECIAL an dem Ziel bevor es zu den [2,SP] nächsten Gegnern springt und jeweils [35,SP] SPECIAL verursacht. Die Projektile kommen dann zum originalen Ziel zurück und verursachen jeweils extra [10,SP] SPECIAL.",
-		"BITTER_BLADE": "Der Nutzer fokussiert seine bitteren Gefühle in eine Schlitz-Attacke, verursacht [70,SP] SPECIAL zu jedem benachbarten Gegner. Der Nutzer heilt sich um [10,SP]% seiner HP für jeden getroffenen Gegner.",
+		"BITTER_BLADE": "Der Nutzer fokussiert seine bitteren Gefühle in eine Schlitz-Attacke, verursacht [70,SP] SPECIAL zu jedem benachbarten Gegner. Der Nutzer heilt sich um 10% seiner HP für jeden getroffenen Gegner.",
 		"SUCTION_HEAL": "Saugt die Energy von seinen Zielen, verursacht [15,30,60,SP] SPECIAL in einem 2-Feld-Kegel vor dem Nutzer und heilt HP um [50,SP]% des verursachten Schadens.",
 		"ROOST": "Fliegt davon und landet in der hinteren Reihe, SLEEP für 2 Sekunden und heilt für [20,40,80,SP] HP."
 	},

@@ -12058,8 +12058,10 @@ export class BitterBladeStrategy extends AbilityStrategy {
       pokemon.positionY,
       false
     )
+    let nbEnemiesHit = 0
     for (const cell of adjacentCells) {
       if (cell.value && cell.value.team !== pokemon.team) {
+        nbEnemiesHit++
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -12067,9 +12069,9 @@ export class BitterBladeStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        pokemon.handleHeal(pokemon.baseHP * 0.1, pokemon, 1, crit)
       }
     }
+    pokemon.handleHeal(pokemon.baseHP * 0.1 * nbEnemiesHit, pokemon, 0, false)
   }
 }
 
