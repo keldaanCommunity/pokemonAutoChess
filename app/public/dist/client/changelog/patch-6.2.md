@@ -62,6 +62,7 @@
 - Gourmet dishes are now distributed to the strongest adjacent allies instead of random among the adjacent ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 - Change Fossil: add an animation and reset attack cooldown when fossil resurrection is triggered
 - Nerf Fossil 4: HP after resurrect 80% → 70%
+- Nerf Artificial: 6/12 → 5/10% base Attack, Ability Power and max HP as Shield per held item
 
 # Changes to Items
 

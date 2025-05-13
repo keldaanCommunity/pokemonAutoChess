@@ -1185,18 +1185,18 @@ export default class Simulation extends Schema implements ISimulation {
           )
           const attackBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: (6 / 100) * pokemon.baseAtk,
-            [EffectEnum.GOOGLE_SPECS]: (12 / 100) * pokemon.baseAtk
+            [EffectEnum.LINK_CABLE]: (5 / 100) * pokemon.baseAtk,
+            [EffectEnum.GOOGLE_SPECS]: (10 / 100) * pokemon.baseAtk
           }[effect]
           const apBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: 6,
-            [EffectEnum.GOOGLE_SPECS]: 12
+            [EffectEnum.LINK_CABLE]: 5,
+            [EffectEnum.GOOGLE_SPECS]: 10
           }[effect]
           const shieldBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: (6 / 100) * pokemon.hp,
-            [EffectEnum.GOOGLE_SPECS]: (12 / 100) * pokemon.hp
+            [EffectEnum.LINK_CABLE]: (5 / 100) * pokemon.hp,
+            [EffectEnum.GOOGLE_SPECS]: (10 / 100) * pokemon.hp
           }[effect]
           pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
           pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
