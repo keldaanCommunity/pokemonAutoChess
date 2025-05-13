@@ -55,6 +55,7 @@
 - Nerf Morpeko: Aura wheel base cooldown: 200ms → 500ms (reduced with speed)
 - Buff Electro Shot (Duraludon): damage 80/90/100 → 80/100/120
 - Nerf Bitter Blade (Ceruledge): remove AP scaling on the healing part
+- Buff Articuno: PP 120 → 110
 
 # Changes to Synergies
 
