@@ -1821,7 +1821,7 @@
 		"SHORE_UP": "使用者恢复[20,25,SP]%的HP。若天气为SANDSTORM，额外恢复10%。",
 		"POISON_STING": "使目标陷入[2,3,4]层的POISONNED。溢出的层数改为立刻对目标造成[25,50,100,SP]点SPECIAL。",
 		"TRANSE": "恢复攻击和移动，但不再被动恢复HP。",
-		"WOOD_HAMMER": "对目标造成SPECIAL，数值相当于使用者[300,SP]%的ATK。使用者受到33%的反冲伤害。",
+		"WOOD_HAMMER": "对目标造成SPECIAL，数值相当于使用者[400,SP]%的ATK。使用者受到25%的反冲伤害。",
 		"TRICK_OR_TREAT": "目标必须将一件携带道具交给使用者。若没有，则其受到诅咒，诅咒强度随使用者AP增加而增加。",
 		"FREEZING_GLARE": "对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。并有[50,LK]%的概率使他们陷入FREEZE 3秒。",
 		"THUNDEROUS_KICK": "将目标击退。其和所有击退路径上的敌方宝可梦陷入FLINCH 4秒，降低[10,SP]点DEF，并受到[20,40,60,SP]点PHYSICAL。",

@@ -56,6 +56,7 @@
 - Buff Electro Shot (Duraludon): damage 80/90/100 → 80/100/120
 - Nerf Bitter Blade (Ceruledge): remove AP scaling on the healing part
 - Buff Articuno: PP 120 → 110
+- Buff Wood Hammer (Bonsly): damage 300% → 400% of attack, recoil damage 33% → 25% of damage done
 
 # Changes to Synergies
 

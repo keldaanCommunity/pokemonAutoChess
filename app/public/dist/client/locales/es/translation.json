@@ -1707,7 +1707,7 @@
 		"SHORE_UP": "Se cura un [20,25,SP]% de sus HP, +10% si el clima es SANDSTORM.",
 		"POISON_STING": "Deja al objetivo con [2,3,4] cargas de POISONNED. Cada carga sobre el máximo inmediatamente inflige [25,50,100,SP] SPECIAL.",
 		"TRANSE": "Comienza a atacar y moverse de nuevo, pero deja de curarse pasivamente.",
-		"WOOD_HAMMER": "Inflige [300,SP]% de ATK como SPECIAL al objetivo y recibe daño de retroceso igual al 33% del daño realizado.",
+		"WOOD_HAMMER": "Inflige [400,SP]% de ATK como SPECIAL al objetivo y recibe daño de retroceso igual al 25% del daño realizado.",
 		"TRICK_OR_TREAT": "El objetivo debe dar uno de sus objetos al usuario. Si este no tiene alguno, recibe una maldición cuyo poder aumenta con el AP del usuario.",
 		"FREEZING_GLARE": "Inflige [20,40,80,SP] SPECIAL a todos los enemigos en una línea, con un [50,LK]% de FREEZE por 3 segundos",
 		"THUNDEROUS_KICK": "El objetivo es empujado. Este y todos los enemigos en el camino son FLINCH por 4 segundos, pierden [10,SP] DEF y reciben [20,40,60,SP] PHYSICAL.",

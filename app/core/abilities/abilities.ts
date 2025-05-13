@@ -10250,7 +10250,7 @@ export class WoodHammerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 3 * pokemon.atk
+    const damage = 4 * pokemon.atk
     const recoil = pokemon.atk
 
     pokemon.commands.push(

@@ -1651,7 +1651,7 @@
 		"SHORE_UP": "Cura l'utilizzatore del [20,25,SP] % dei HP. Se il meteo è SANDSTORM, aumenta la cura al [30,35,SP] % dei HP.",
 		"POISON_STING": "Infliggi [2,3,4] istanze di POISONNED al bersaglio. Ogni istanza sopra al massimo infligge immediatamente [25,50,100,SP] SPECIAL.",
 		"TRANSE": "Comincia a muoversi ed attaccare di nuovo, ma smette di curarsi passivamente.",
-		"WOOD_HAMMER": "Infliggi [300,SP]% dell'ATK come SPECIAL al bersaglio, e subisci danno da contraccolpo pari al 33% del danno inflitto.",
+		"WOOD_HAMMER": "Infliggi [400,SP]% dell'ATK come SPECIAL al bersaglio, e subisci danno da contraccolpo pari al 25% del danno inflitto.",
 		"TRICK_OR_TREAT": "Il bersaglio deve dare uno dei suoi oggetti equipaggiati all'utilizzatore. Se non ne ha, riceve una maledizione la quale potenza aumenta con la AP dell'utilizzatore.",
 		"FREEZING_GLARE": "Infliggi [20,40,80,SP] SPECIAL a tutti i nemici in linea retta, con il [50,LK]% di possibilità di causare FREEZE per 3 secondi.",
 		"THUNDEROUS_KICK": "Il bersaglio viene scaraventato via. Tutti i nemici nella traiettoria e il bersaglio subiscono FLINCH per 4 secondi, perdono [10,SP] di DEF e gli vengono inflitti [20,40,60,SP] PHYSICAL.",

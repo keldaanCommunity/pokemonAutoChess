@@ -1806,7 +1806,7 @@
 		"SHORE_UP": "Heilt den Anwender um [20,25,SP]% seiner HP, +10% wenn SANDSTORM aktiv ist.",
 		"POISON_STING": "Fügt dem Gegner [2,3,4] Stapel POISONNED zu. Jeder Stapel über dem Maximum (3) fügt dem Gegner [25,50,100,SP] SPECIAL zu.",
 		"TRANSE": "Anwender erwacht aus der Trance und stoppt die passive Heilung.",
-		"WOOD_HAMMER": "Fügt dem Gegner [300,SP]% des ATK als SPECIAL zu und erhalte 33% des verursachten Schadens als Rückstoß.",
+		"WOOD_HAMMER": "Fügt dem Gegner [400,SP]% des ATK als SPECIAL zu und erhalte 25% des verursachten Schadens als Rückstoß.",
 		"TRICK_OR_TREAT": "Übergibt dem Gegner ein getragenes Item. Wenn es kein Item trägt, erhält es einen Fluch, der die AP des Anwenders erhöht.",
 		"FREEZING_GLARE": "Fügt getroffenen Gegnern [20,40,80,SP] SPECIAL zu, mit einer Chance von [50,LK]% 3 Sekunden FREEZE zuzufügen.",
 		"THUNDEROUS_KICK": "Der Gegner wird weggetreten. Fügt diesem und allen Gegnern auf dem Weg [20,40,60,SP] PHYSICAL und für 4 Sekunden FLINCH zu und reduziert ihre DEF um [10,SP].",

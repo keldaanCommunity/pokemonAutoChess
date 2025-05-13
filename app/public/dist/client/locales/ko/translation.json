@@ -1811,7 +1811,7 @@
 		"SHORE_UP": "시전자의 HP 를 [20,25,SP] % 회복한다. 날씨가 SANDSTORM 이라면 [30,35,SP] % HP 을 회복한다.",
 		"POISON_STING": "대상에게 POISONNED 을 [2,3,4] 중첩 가한다. 최대 중첩을 넘어서는 중첩은 각각 즉시 [25,50,100,SP] SPECIAL 를 가한다.",
 		"TRANSE": "회복을 중지하고 공격과 이동을 재개한다.",
-		"WOOD_HAMMER": "ATK의 [300,SP] % 의 SPECIAL 를 대상에게 가하고, 피해량의 33%를 반동 피해로 입는다.",
+		"WOOD_HAMMER": "ATK의 [400,SP] % 의 SPECIAL 를 대상에게 가하고, 피해량의 25%를 반동 피해로 입는다.",
 		"TRICK_OR_TREAT": "대상은 지닌 도구 중 하나를 시전자에게 넘겨준다. 지닌 도구가 없다면 시전자의 AP 에 따라 강해지는 저주를 받는다.",
 		"FREEZING_GLARE": "직선상의 모든 적에게 [20,40,80,SP] SPECIAL 를 입히고, [50,LK]% 확률로 3초간 FREEZE 을 가한다.",
 		"THUNDEROUS_KICK": "대상을 밀어낸다. 대상과 경로상의 모든 적에게 4초간 FLINCH 및 [20,40,60,SP] PHYSICAL 를 가하고, [10,SP] DEF 을 감소시킨다.",

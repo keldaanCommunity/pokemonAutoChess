@@ -1807,7 +1807,7 @@
 		"SHORE_UP": "Soigne le lanceur de [20,25,SP]% des HP max. Si la météo est SANDSTORM, le soin augmente à [30,35,SP]% des HP max.",
 		"POISON_STING": "Inflige [2,3,4] cumuls de POISONNED à la cible. Chaque cumul au delà du maximum inflige immédiatement [25,50,100,SP] SPECIAL.",
 		"TRANSE": "Sort de sa méditation et recommence à attaquer et se déplacer, mais ne se soigne plus passivement.",
-		"WOOD_HAMMER": "Inflige [300,SP]% de l'ATK en SPECIAL à la cible",
+		"WOOD_HAMMER": "Inflige [400,SP]% de l'ATK en SPECIAL à la cible et subit des dégâts égaux à 25% des dégâts infligés.",
 		"TRICK_OR_TREAT": "La cible doit céder au lanceur l'un de ses objets. Si elle n'en a pas, elle reçoit un maléfice dont l'effet varie selon la AP du lanceur.",
 		"FREEZING_GLARE": "Inflige [20,40,80,SP] SPECIAL à tous les ennemis dans la ligne d'impact, avec [50,LK]% de chance de FREEZE pendant 3 secondes.",
 		"THUNDEROUS_KICK": "La cible est repoussée au loin. Elle et les ennemis sur le chemin sont FLINCH pendant 4 secondes, perdent [10,SP] DEF et reçoivent  [20,40,60,SP] PHYSICAL.",
