@@ -8045,7 +8045,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       true
     )
 
-    pokemon.cooldown = Math.round(200 * (50 / pokemon.speed))
+    pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
   }
 }
 

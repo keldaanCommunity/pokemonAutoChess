@@ -52,6 +52,7 @@
 - Mantyke: chance to fish Remoraid 30 → 33%
 - Change Slowpoke line: Psy/Aquatic → Psy/Water ; Buff Slowking: Def 12 → 14
 - Buff Rookidee line: HP 80/130/220 → 80/150/250, Attack 6/10/20 → 8/14/28,  Def 8/12/16 → 8/13/18, Spe def 4/6/8 → 4/8/12
+- Nerf Morpeko: Aura wheel base cooldown: 200ms → 500ms (reduced with speed)
 
 # Changes to Synergies
 
