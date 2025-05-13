@@ -2405,7 +2405,7 @@
 		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder. Dropped when benching the unit.",
 		"EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of adjacent allies in the same row. Dropped when benching the unit.",
 		"POKERUS_VIAL": "Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2.5 seconds and transmitting to allies. Dropped when benching the unit.",
-		"ROTOM_PHONE": "Gives GHOST synergy. Summons Rotom Drone near the holder. Dropped when benching the unit.",
+		"ROTOM_PHONE": "Gives GHOST synergy. After 8 seconds, summons Rotom Drone near the holder. Dropped when benching the unit.",
 		"SILK_SCARF": "Gives NORMAL synergy and increase SHIELD from all sources by 50%. Dropped when benching the unit.",
 		"TINY_MUSHROOM": "Gives BUG synergy but reduce the holder's max HP by 50% when cloned. Dropped when benching the unit.",
 		"COOKING_POT": "Gives GOURMET synergy. When BURN, the COOKING_POT is heated little by little which gives 10 SPEED per second.",

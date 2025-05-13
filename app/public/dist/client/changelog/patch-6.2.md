@@ -64,7 +64,8 @@
 
 # Changes to Items
 
-- Max Elixir: removed -25 AP penalty
+- Buff Max Elixir: removed -25 AP penalty
+- Nerf Rotom phone: summon Rotom Drone after 8 seconds instead of at the start of the fight
 - Change for Reaper Cloth, Leek and Large Leek: if the ability already crits by default, gains +50% crit power
 
 # Gameplay

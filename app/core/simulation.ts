@@ -558,15 +558,25 @@ export default class Simulation extends Schema implements ISimulation {
       board.forEach((pokemon) => {
         if (pokemon.items.has(Item.ROTOM_PHONE) && !isOnBench(pokemon)) {
           const player = board === blueBoard ? this.bluePlayer : this.redPlayer
-          const rotomDrone = PokemonFactory.createPokemonFromName(
-            Pkm.ROTOM_DRONE,
-            player
+          const team = board === blueBoard ? this.blueTeam : this.redTeam
+          const entity = values(team).find(
+            (e) => e.refToBoardPokemon.id === pokemon.id
           )
-          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-            pokemon,
-            teamIndex
-          )
-          this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
+          if (entity) {
+            entity.commands.push(
+              new DelayedCommand(() => {
+                const rotomDrone = PokemonFactory.createPokemonFromName(
+                  Pkm.ROTOM_DRONE,
+                  player
+                )
+                const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+                  pokemon,
+                  teamIndex
+                )
+                this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
+              }, 8000)
+            )
+          }
         }
 
         if (pokemon.items.has(Item.WHITE_FLUTE) && !isOnBench(pokemon)) {

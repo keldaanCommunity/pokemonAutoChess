@@ -2372,7 +2372,7 @@
 		"INCENSE": "Chaque Pokémon du magasin a 5% de chances en plus de partager une synergie commune avec le porteur.",
 		"EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés adjacents sur la même ligne",
 		"POKERUS_VIAL": "Infecte le porteur avec le POKERUS, qui fait gagner 1 ATK et 10 AP toutes les 2,5 secondes et infecte les alliés",
-		"ROTOM_PHONE": "Donne la synergie GHOST. Invoque Motismart près du porteur",
+		"ROTOM_PHONE": "Donne la synergie GHOST. Après 8 secondes, invoque Motismart près du porteur",
 		"SILK_SCARF": "Donne la synergie NORMAL et augmente le SHIELD reçu de 50% toutes sources confondues.",
 		"TINY_MUSHROOM": "Donne la synergie BUG mais réduit les HP max du porteur de 50% lorsqu'il est clôné",
 		"COOKING_POT": "Donne la synergie GOURMET. Quand le porteur subit BURN, la marmite chauffe progressivement, ce qui lui confère 10 de SPEED par seconde.",
