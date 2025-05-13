@@ -4190,7 +4190,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - DEFAULT_SPEED)
-      const boostDef = min(0)(target.def - target.baseSpeDef)
+      const boostDef = min(0)(target.def - target.baseDef)
       const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
       const boostAP = target.ap
 
