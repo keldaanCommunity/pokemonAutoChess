@@ -1849,7 +1849,7 @@
 		"MUD_SHOT": "Schleudert Schlamm an das Ziel, versursacht dabei [25,50,75,SP] SPECIAL und reduziert dessen SPEED by [10,20,30,SP].",
 		"MALIGNANT_CHAIN": "Verlängere eine giftige Kette, um das Ziel zu fangen und verursache LOCKED und 3 Stapel von POISONNED für [3,SP] Sekunden.",
 		"FILLET_AWAY": "Opfere 50% dere aktuellen max HP um abzuhauen, erhällt [10,SP] ATK, [20,SP] SPEED und PROTECT für eine ganz kurze Zeit.",
-		"ELECTRO_SHOT": "Der Nutzer sammelt Elektrizität für 2 Sekunden, erhält dann 40 AP und feuert einen Hochspannungsschuss in eine gerade Linie, welcher [80,90,100,SP] verursacht. Der Schuss wird bei STORM direkt abgefeuert.",
+		"ELECTRO_SHOT": "Der Nutzer sammelt Elektrizität für 2 Sekunden, erhält dann 40 AP und feuert einen Hochspannungsschuss in eine gerade Linie, welcher [80,100,120,SP] verursacht. Der Schuss wird bei STORM direkt abgefeuert.",
 		"FLOWER_TRICK": "The Nutzer wirft einen manipulierten Blumenstrauß auf das Ziel, welcher nach 3 Sekunden explodiert. Jeder kritische Treffer, der während der Zeit durch das Ziel erlitten wurde, fügt [15,SP] SPECIAL zu der Explosion hinzu.",
 		"SOLAR_BLADE": "Der Nutzer sammelt Licht und füllt eine Klinge mit der Energie für 2 Sekunden (oder direkt, wenn der Nutzer im LIGHT Feld steht), dann schlitzt dieser bis zu 3 Pokémon in einem Kegel vor dem Nutzer auf und verursacht [30,60,120,SP] TRUE.",
 		"SCALE_SHOT": "Der Nutzer schießt seine Schuppen und verursacht [40,SP] PHYSICAL an benachbarten Gegnern, was an Gegnern und ihm selbst für 2 Sekunden ARMOR_BREAK auslöst. 2 Sekunden nachdem die Schuppen zum weitest entfernten Gegner geschossen wurden, erhalten alle Gegner auf dem Weg [25,SP] PHYSICAL.",

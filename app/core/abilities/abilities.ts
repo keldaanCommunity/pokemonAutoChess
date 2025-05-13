@@ -11843,7 +11843,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(
         () => {
-          const damage = [80, 90, 100][pokemon.stars - 1] ?? 100
+          const damage = [80, 100, 120][pokemon.stars - 1] ?? 120
           const apBoost = 40
           pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
           broadcastAbility(pokemon, {
