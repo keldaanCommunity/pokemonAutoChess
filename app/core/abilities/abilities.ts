@@ -8045,7 +8045,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       true
     )
 
-    pokemon.cooldown = Math.round(200 * (50 / pokemon.speed))
+    pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
   }
 }
 
@@ -10250,7 +10250,7 @@ export class WoodHammerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 3 * pokemon.atk
+    const damage = 4 * pokemon.atk
     const recoil = pokemon.atk
 
     pokemon.commands.push(
@@ -11843,7 +11843,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(
         () => {
-          const damage = [80, 90, 100][pokemon.stars - 1] ?? 100
+          const damage = [80, 100, 120][pokemon.stars - 1] ?? 120
           const apBoost = 40
           pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
           broadcastAbility(pokemon, {
@@ -12058,8 +12058,10 @@ export class BitterBladeStrategy extends AbilityStrategy {
       pokemon.positionY,
       false
     )
+    let nbEnemiesHit = 0
     for (const cell of adjacentCells) {
       if (cell.value && cell.value.team !== pokemon.team) {
+        nbEnemiesHit++
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -12067,9 +12069,9 @@ export class BitterBladeStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        pokemon.handleHeal(pokemon.baseHP * 0.1, pokemon, 1, crit)
       }
     }
+    pokemon.handleHeal(pokemon.baseHP * 0.1 * nbEnemiesHit, pokemon, 0, false)
   }
 }
 

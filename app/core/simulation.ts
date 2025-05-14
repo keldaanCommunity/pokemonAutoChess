@@ -558,15 +558,25 @@ export default class Simulation extends Schema implements ISimulation {
       board.forEach((pokemon) => {
         if (pokemon.items.has(Item.ROTOM_PHONE) && !isOnBench(pokemon)) {
           const player = board === blueBoard ? this.bluePlayer : this.redPlayer
-          const rotomDrone = PokemonFactory.createPokemonFromName(
-            Pkm.ROTOM_DRONE,
-            player
+          const team = board === blueBoard ? this.blueTeam : this.redTeam
+          const entity = values(team).find(
+            (e) => e.refToBoardPokemon.id === pokemon.id
           )
-          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-            pokemon,
-            teamIndex
-          )
-          this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
+          if (entity) {
+            entity.commands.push(
+              new DelayedCommand(() => {
+                const rotomDrone = PokemonFactory.createPokemonFromName(
+                  Pkm.ROTOM_DRONE,
+                  player
+                )
+                const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+                  pokemon,
+                  teamIndex
+                )
+                this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
+              }, 8000)
+            )
+          }
         }
 
         if (pokemon.items.has(Item.WHITE_FLUTE) && !isOnBench(pokemon)) {
@@ -588,27 +598,27 @@ export default class Simulation extends Schema implements ISimulation {
           if (this.stageLevel <= 5) {
             pickWild(Rarity.COMMON, 1)
             pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.UNCOMMON, 1)
+            pickWild(Rarity.COMMON, 1)
           } else if (this.stageLevel <= 10) {
-            pickWild(Rarity.COMMON, 2)
+            pickWild(Rarity.COMMON, 1)
             pickWild(Rarity.COMMON, 1)
             pickWild(Rarity.UNCOMMON, 1)
           } else if (this.stageLevel <= 15) {
             pickWild(Rarity.UNCOMMON, 1)
-            pickWild(Rarity.COMMON, 2)
+            pickWild(Rarity.UNCOMMON, 1)
             pickWild(Rarity.RARE, 1)
           } else if (this.stageLevel <= 20) {
-            pickWild(Rarity.UNCOMMON, 2)
+            pickWild(Rarity.UNCOMMON, 1)
             pickWild(Rarity.RARE, 1)
             pickWild(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 25) {
             pickWild(Rarity.UNCOMMON, 2)
-            pickWild(Rarity.RARE, 2)
+            pickWild(Rarity.RARE, 1)
             pickWild(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 30) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 1)
-            pickWild(Rarity.EPIC, 2)
+            pickWild(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 35) {
             pickWild(Rarity.RARE, 2)
             pickWild(Rarity.EPIC, 2)
@@ -1175,18 +1185,18 @@ export default class Simulation extends Schema implements ISimulation {
           )
           const attackBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: (6 / 100) * pokemon.baseAtk,
-            [EffectEnum.GOOGLE_SPECS]: (12 / 100) * pokemon.baseAtk
+            [EffectEnum.LINK_CABLE]: (5 / 100) * pokemon.baseAtk,
+            [EffectEnum.GOOGLE_SPECS]: (10 / 100) * pokemon.baseAtk
           }[effect]
           const apBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: 6,
-            [EffectEnum.GOOGLE_SPECS]: 12
+            [EffectEnum.LINK_CABLE]: 5,
+            [EffectEnum.GOOGLE_SPECS]: 10
           }[effect]
           const shieldBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: (6 / 100) * pokemon.hp,
-            [EffectEnum.GOOGLE_SPECS]: (12 / 100) * pokemon.hp
+            [EffectEnum.LINK_CABLE]: (5 / 100) * pokemon.hp,
+            [EffectEnum.GOOGLE_SPECS]: (10 / 100) * pokemon.hp
           }[effect]
           pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
           pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)

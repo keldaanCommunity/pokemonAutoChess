@@ -52,6 +52,11 @@
 - Mantyke: chance to fish Remoraid 30 → 33%
 - Change Slowpoke line: Psy/Aquatic → Psy/Water ; Buff Slowking: Def 12 → 14
 - Buff Rookidee line: HP 80/130/220 → 80/150/250, Attack 6/10/20 → 8/14/28,  Def 8/12/16 → 8/13/18, Spe def 4/6/8 → 4/8/12
+- Nerf Morpeko: Aura wheel base cooldown: 200ms → 500ms (reduced with speed)
+- Buff Electro Shot (Duraludon): damage 80/90/100 → 80/100/120
+- Nerf Bitter Blade (Ceruledge): remove AP scaling on the healing part
+- Buff Articuno: PP 120 → 110
+- Buff Wood Hammer (Bonsly): damage 300% → 400% of attack, recoil damage 33% → 25% of damage done
 
 # Changes to Synergies
 
@@ -59,11 +64,14 @@
 - Gourmet dishes are now distributed to the strongest adjacent allies instead of random among the adjacent ones. Strongest is defined by 1) number of items 2) star level 3) rarity category.
 - Change Fossil: add an animation and reset attack cooldown when fossil resurrection is triggered
 - Nerf Fossil 4: HP after resurrect 80% → 70%
+- Nerf Artificial: 6/12 → 5/10% base Attack, Ability Power and max HP as Shield per held item
 
 # Changes to Items
 
-- Max Elixir: removed -25 AP penalty
+- Buff Max Elixir: removed -25 AP penalty
+- Nerf Rotom phone: summon Rotom Drone after 8 seconds instead of at the start of the fight
 - Change for Reaper Cloth, Leek and Large Leek: if the ability already crits by default, gains +50% crit power
+- Nerf White Flute: reduce rarity of spawned wild mons
 
 # Gameplay
 
