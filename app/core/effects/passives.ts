@@ -5,8 +5,7 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
-  OnKillEffect,
-  PeriodicEffect
+  OnKillEffect
 } from "./effect"
 import { ItemEffects } from "./items"
 import { PokemonEntity } from "../pokemon-entity"
@@ -252,66 +251,6 @@ export const waterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
     }
   })
 })
-
-export class SynchroEffect extends PeriodicEffect {
-  constructor() {
-    super(
-      (pokemon) => {
-        const status = pokemon.status
-        if (status.burn && status.burnOrigin) {
-          status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
-        }
-        if (status.poisonStacks && status.poisonOrigin) {
-          status.poisonOrigin.status.triggerPoison(
-            3000,
-            status.poisonOrigin,
-            pokemon
-          )
-        }
-        if (status.wound && status.woundOrigin) {
-          status.woundOrigin.status.triggerWound(
-            3000,
-            status.woundOrigin,
-            pokemon
-          )
-        }
-        if (status.silence && status.silenceOrigin) {
-          status.silenceOrigin.status.triggerSilence(
-            3000,
-            status.silenceOrigin,
-            pokemon
-          )
-        }
-      },
-      Passive.SYNCHRO,
-      3000
-    )
-  }
-}
-
-export class DrySkinEffect extends PeriodicEffect {
-  constructor() {
-    super(
-      (pokemon) => {
-        pokemon.handleHeal(8, pokemon, 0, false)
-      },
-      Passive.DRY_SKIN,
-      1000
-    )
-  }
-}
-
-export class ClearWingEffect extends PeriodicEffect {
-  constructor() {
-    super(
-      (pokemon) => {
-        pokemon.addSpeed(2, pokemon, 0, false)
-      },
-      Passive.CLEAR_WING,
-      1000
-    )
-  }
-}
 
 export const PassiveEffects: Partial<Record<Passive, Effect[]>> = {
   [Passive.DURANT]: [durantBugBuff],

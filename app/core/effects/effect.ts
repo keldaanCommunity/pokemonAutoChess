@@ -3,6 +3,7 @@ import { PokemonEntity } from "../pokemon-entity"
 import { Item } from "../../types/enum/Item"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Synergy } from "../../types/enum/Synergy"
+import PokemonState from "../pokemon-state"
 import { Passive } from "../../types/enum/Passive"
 import { Ability } from "../../types/enum/Ability"
 import { SynergyEffects } from "../../models/effects"
@@ -215,6 +216,66 @@ export class GrowGroundEffect extends PeriodicEffect {
       3000
     )
     this.synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
+  }
+}
+
+export class ClearWingEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.addSpeed(2, pokemon, 0, false)
+      },
+      Passive.CLEAR_WING,
+      1000
+    )
+  }
+}
+
+export class SynchroEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        const status = pokemon.status
+        if (status.burn && status.burnOrigin) {
+          status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
+        }
+        if (status.poisonStacks && status.poisonOrigin) {
+          status.poisonOrigin.status.triggerPoison(
+            3000,
+            status.poisonOrigin,
+            pokemon
+          )
+        }
+        if (status.wound && status.woundOrigin) {
+          status.woundOrigin.status.triggerWound(
+            3000,
+            status.woundOrigin,
+            pokemon
+          )
+        }
+        if (status.silence && status.silenceOrigin) {
+          status.silenceOrigin.status.triggerSilence(
+            3000,
+            status.silenceOrigin,
+            pokemon
+          )
+        }
+      },
+      Passive.SYNCHRO,
+      3000
+    )
+  }
+}
+
+export class DrySkinEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.handleHeal(8, pokemon, 0, false)
+      },
+      Passive.DRY_SKIN,
+      1000
+    )
   }
 }
 
