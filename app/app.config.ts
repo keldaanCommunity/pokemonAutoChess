@@ -64,7 +64,7 @@ let gameOptions: ServerOptions = {}
 
 if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
-  const port = (Number(process.env.PORT) || 2567) + processNumber
+  const port = (Number(process.env.PORT) || 2569) + processNumber
   gameOptions = {
     presence: new RedisPresence(
       process.env.REDIS_URI
