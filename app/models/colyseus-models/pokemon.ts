@@ -1,10 +1,10 @@
 import { MapSchema, Schema, SetSchema, type, entity } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
+  SynchroEffect,
   ClearWingEffect,
-  DrySkinEffect,
-  SynchroEffect
-} from "../../core/effects/effect"
+  DrySkinEffect
+} from "../../core/effects/passives"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
