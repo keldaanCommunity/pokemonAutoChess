@@ -243,11 +243,15 @@ export default function TeamBuilder(props: {
       const reader = new FileReader()
       reader.onload = async (e) => {
         if (!e.target) return
-        const data = JSON.parse(e.target.result as string)
-        if (data.length == 0) {
+        try {
+          const data = JSON.parse(e.target.result as string)
+          if (!data || !Array.isArray(data)) {
+            throw new Error("Invalid file content")
+          } else {
+            updateBoard(data)
+          }
+        } catch (e) {
           alert("Invalid file")
-        } else {
-          updateBoard(data)
         }
       }
       reader.readAsText(file)

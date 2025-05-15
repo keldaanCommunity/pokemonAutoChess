@@ -13,6 +13,9 @@ export default function GameStore() {
   const shop = useAppSelector((state) => state.game.shop)
   const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(localStore.get(LocalStoreKeys.TEAM_PLANNER))
   useEffect(() => {
+    if (teamPlanner && !Array.isArray(teamPlanner)) {
+      setTeamPlanner([]) // in case team planner local storage has been corrupted somehow (loading a wrong file for example)
+    }
     const updateTeamPlanner = (e: StorageEvent) => {
       if (e.key === LocalStoreKeys.TEAM_PLANNER) {
         setTeamPlanner(localStore.get(LocalStoreKeys.TEAM_PLANNER))
