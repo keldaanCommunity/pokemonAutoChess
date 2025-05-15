@@ -479,7 +479,7 @@ export class ChangeTitleCommand extends Command<
 
 export class ChangeSelectedEmotionCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; index: string; emotion: Emotion; shiny: boolean }
+  { client: Client; index: string; emotion: Emotion | null; shiny: boolean }
 > {
   async execute({
     client,
@@ -501,7 +501,7 @@ export class ChangeSelectedEmotionCommand extends Command<
           ? pokemonCollectionItem.shinyEmotions
           : pokemonCollectionItem.emotions
         if (
-          emotionsToCheck.includes(emotion) &&
+          (emotionsToCheck.includes(emotion) || emotion === null) &&
           (emotion != pokemonCollectionItem.selectedEmotion ||
             shiny != pokemonCollectionItem.selectedShiny)
         ) {

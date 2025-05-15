@@ -320,7 +320,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
           index,
           emotion,
           shiny
-        }: { index: string; emotion: Emotion; shiny: boolean }
+        }: { index: string; emotion: Emotion | null; shiny: boolean }
       ) => {
         this.dispatcher.dispatch(new ChangeSelectedEmotionCommand(), {
           client,

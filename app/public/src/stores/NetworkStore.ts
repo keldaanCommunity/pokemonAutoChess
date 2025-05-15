@@ -207,7 +207,11 @@ export const networkSlice = createSlice({
     },
     changeSelectedEmotion: (
       state,
-      action: PayloadAction<{ index: string; emotion: Emotion; shiny: boolean }>
+      action: PayloadAction<{
+        index: string
+        emotion: Emotion | null
+        shiny: boolean
+      }>
     ) => {
       if (state.profile) {
         const pokemonCollectionItem = state.profile.pokemonCollection.get(

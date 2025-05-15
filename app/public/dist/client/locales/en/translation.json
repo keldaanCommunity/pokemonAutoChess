@@ -3207,6 +3207,7 @@
 	"sort_by_shards": "Sort by shards",
 	"normal_emotions": "Normal Emotions",
 	"shiny_emotions": "Shiny Emotions",
+	"reset_emotion": "Reset to default portrait",
 	"buy_booster": "Buy a new booster for {{cost}} shards ",
 	"choose_as_avatar": "Choose as player avatar",
 	"close": "Close",
