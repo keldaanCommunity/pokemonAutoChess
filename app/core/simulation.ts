@@ -58,10 +58,10 @@ import {
   FireHitEffect,
   MonsterKillEffect,
   SoundCryEffect,
-  WaterSpringEffect,
   OnSpawnEffect,
   electricTripleAttackEffect
 } from "./effects/effect"
+import { waterSpringEffect } from "./effects/passives"
 import { SynergyEffects } from "../models/effects"
 import { DishEffects } from "./dishes"
 
@@ -436,13 +436,6 @@ export default class Simulation extends Schema implements ISimulation {
       allyEffects.forEach((effect) => {
         apply(effect)
       })
-    }
-
-    if (
-      singleType === Synergy.GHOST ||
-      (!singleType && pokemon.types.has(Synergy.GHOST))
-    ) {
-      pokemon.addDodgeChance(0.2, pokemon, 0, false)
     }
 
     if (
@@ -1335,6 +1328,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.CURSE_OF_FATE:
         if (pokemon.types.has(Synergy.GHOST)) {
           pokemon.effects.add(effect)
+          pokemon.addDodgeChance(0.2, pokemon, 0, false)
         }
         break
 
@@ -1357,7 +1351,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.WATER_SPRING: {
-        pokemon.effectsSet.add(new WaterSpringEffect())
+        pokemon.effectsSet.add(waterSpringEffect)
         break
       }
 

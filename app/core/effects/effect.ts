@@ -448,14 +448,3 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     })
   }
 }
-
-export class WaterSpringEffect extends OnAbilityCastEffect {
-  apply(pokemon) {
-    pokemon.simulation.board.forEach((x, y, pkm) => {
-      if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
-        pkm.addPP(5, pkm, 0, false)
-        pkm.transferAbility(pkm.skill)
-      }
-    })
-  }
-}

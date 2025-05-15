@@ -1,7 +1,12 @@
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import Board from "../board"
-import { Effect, OnAttackEffect, OnKillEffect } from "./effect"
+import {
+  Effect,
+  OnAbilityCastEffect,
+  OnAttackEffect,
+  OnKillEffect
+} from "./effect"
 import { ItemEffects } from "./items"
 import { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
@@ -237,6 +242,15 @@ const kubfuOnKillEffect = new OnKillEffect(
     }
   }
 )
+
+export const waterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
+  board.forEach((x, y, pkm) => {
+    if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
+      pkm.addPP(5, pkm, 0, false)
+      pkm.transferAbility(pkm.skill)
+    }
+  })
+})
 
 export const PassiveEffects: Partial<Record<Passive, Effect[]>> = {
   [Passive.DURANT]: [durantBugBuff],
