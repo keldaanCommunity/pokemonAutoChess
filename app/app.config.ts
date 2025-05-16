@@ -49,7 +49,6 @@ import { logger } from "./utils/logger"
 import chatV2 from "./models/mongo-models/chat-v2"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { Role } from "./types"
-import { BotV2 } from "./models/mongo-models/bot-v2"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")

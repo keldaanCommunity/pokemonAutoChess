@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react"
 import { fetchMetadata } from "../../../../../models/mongo-models/report-metadata"
+import { formatDate } from "../../utils/date"
+import { useTranslation } from "react-i18next"
 import "./metadata-report.css"
-import dayjs from "dayjs"
-import customParseFormat from "dayjs/plugin/customParseFormat"
-dayjs.extend(customParseFormat)
-const format = "YYYY-MM-DDTHH:mm:ss"
 
 const MetadataReport = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [count, setCount] = useState<number>(0)
   const [createdAt, setCreatedAt] = useState<string>("")
   const [timeLimit, setTimeLimit] = useState<string>("")
+  const { t } = useTranslation()
 
   useEffect(() => {
     fetchMetadata().then((res) => {
@@ -28,11 +27,13 @@ const MetadataReport = () => {
   }
 
   return (
-    <div id="metadata-report">
-      <p>Generated at {dayjs(createdAt, format).toString()}</p>
-      <p>From {dayjs(timeLimit, format).toString()}</p>
-      <p>{count} Games</p>
-    </div>
+    <p id="metadata-report">
+      {t("meta_report_info", {
+        report_date: formatDate(new Date(createdAt), { dateStyle: "long" }),
+        time_limit: formatDate(new Date(timeLimit), { dateStyle: "long" }),
+        count
+      })}
+    </p>
   )
 }
 
