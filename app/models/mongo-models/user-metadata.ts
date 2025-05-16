@@ -24,7 +24,7 @@ export interface IPokemonCollectionItem {
   dust: number
   emotions: Emotion[] | ArraySchema<Emotion>
   shinyEmotions: Emotion[] | ArraySchema<Emotion>
-  selectedEmotion: Emotion
+  selectedEmotion: Emotion | null
   selectedShiny: boolean
   id: string
 }

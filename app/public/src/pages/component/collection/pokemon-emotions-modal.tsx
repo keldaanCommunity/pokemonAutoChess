@@ -72,6 +72,10 @@ export default function PokemonEmotionsModal(props: {
     [dispatch]
   )
 
+  const resetEmotion = useCallback(() => {
+    dispatch(changeSelectedEmotion({ index: index, emotion: null, shiny: false }))
+  }, [dispatch])
+
   return (
     <Modal
       show={true}
@@ -82,7 +86,7 @@ export default function PokemonEmotionsModal(props: {
           src={getPortraitSrc(
             index,
             pConfig.selectedShiny,
-            pConfig.selectedEmotion
+            pConfig.selectedEmotion ?? Emotion.NORMAL
           )}
           className={cc({ unlocked: pConfig != null })}
         />
@@ -166,14 +170,14 @@ export default function PokemonEmotionsModal(props: {
               getPortraitSrc(
                 index,
                 pConfig.selectedShiny,
-                pConfig.selectedEmotion
+                pConfig.selectedEmotion ?? Emotion.NORMAL
               ))
           }
           onClick={() =>
             dispatch(
               changeAvatar({
                 index,
-                emotion: pConfig.selectedEmotion,
+                emotion: pConfig.selectedEmotion ?? Emotion.NORMAL,
                 shiny: pConfig.selectedShiny
               })
             )
@@ -184,7 +188,7 @@ export default function PokemonEmotionsModal(props: {
             src={getPortraitSrc(
               index,
               pConfig.selectedShiny,
-              pConfig.selectedEmotion
+              pConfig.selectedEmotion ?? Emotion.NORMAL
             )}
             alt="avatar"
           />
@@ -198,6 +202,11 @@ export default function PokemonEmotionsModal(props: {
           {t("buy_booster", { cost: boosterCost })}
           <img src={getPortraitSrc(index)} className="dust" alt="dust" />
         </button>
+
+        {pConfig.selectedEmotion != null && pConfig.selectedEmotion != Emotion.NORMAL && <button className="bubbly blue" onClick={resetEmotion}>
+          {t("reset_emotion")}
+        </button>}
+
         <div className="spacer"></div>
         <button className="bubbly red" onClick={props.onClose}>
           {t("close")}
