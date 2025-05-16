@@ -1676,6 +1676,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (!isGameFinished) {
       this.state.botManager.updateBots()
       this.state.stageLevel += 1
+      this.room.setMetadata({ stageLevel: this.state.stageLevel })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         if (player.alive) {
@@ -1774,7 +1775,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.phase = GamePhaseState.FIGHT
     this.state.time = FIGHTING_PHASE_DURATION
     this.state.roundTime = Math.round(this.state.time / 1000)
-    this.room.setMetadata({ stageLevel: this.state.stageLevel })
     updateLobby(this.room)
 
     const pveStage = PVEStages[this.state.stageLevel]
