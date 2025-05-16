@@ -153,7 +153,7 @@ export default class Player extends Schema implements IPlayer {
       PkmIndex[avatarCustom.name]
     )
     this.emotesUnlocked = (
-      (avatarInCollection?.selectedShiny
+      (avatarCustom.shiny
         ? avatarInCollection?.shinyEmotions
         : avatarInCollection?.emotions) ?? []
     ).join(",")
