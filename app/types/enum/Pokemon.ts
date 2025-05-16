@@ -8059,7 +8059,8 @@ export const AnimationConfig: {
   [Pkm.THWACKEY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Sing
+    emote: AnimationType.Sing,
+    shinyUnavailable: true
   },
   [Pkm.RILLABOOM]: {
     attack: AnimationType.Attack,
