@@ -409,6 +409,9 @@ export default class GameScene extends Scene {
         const camera = this.cameras.main
         const x = camera.worldView.left + pointer.x / camera.zoom
         const y = camera.worldView.top + pointer.y / camera.zoom
+        const [minX, maxY] = transformBoardCoordinates(-1, 0)
+        const [maxX, minY] = transformBoardCoordinates(8, 7)
+        if (x < minX || x > maxX || y > maxY || y < minY) return
         const vector = this.minigameManager.getVector(x, y)
         this.room?.send(Transfer.VECTOR, vector)
 
