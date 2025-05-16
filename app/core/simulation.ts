@@ -61,7 +61,7 @@ import {
   OnSpawnEffect,
   electricTripleAttackEffect
 } from "./effects/effect"
-import { waterSpringEffect } from "./effects/passives"
+import { WaterSpringEffect } from "./effects/passives"
 import { SynergyEffects } from "../models/effects"
 import { DishEffects } from "./dishes"
 
@@ -1351,7 +1351,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.WATER_SPRING: {
-        pokemon.effectsSet.add(waterSpringEffect)
+        pokemon.effectsSet.add(WaterSpringEffect)
         break
       }
 

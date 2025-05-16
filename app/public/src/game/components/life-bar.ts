@@ -39,7 +39,7 @@ export default class LifeBar extends GameObjects.Graphics {
     const ppBarBgColor = 0x282828
     const allyLifeColor = 0x76c442
     const enemyLifeColor = 0xe76e55
-    const shieldColor = 0xbbbbbb
+    const shieldColor = 0xe0e0e0
     const ppColor = 0x209cee
     const hpPerSegment = 25
 

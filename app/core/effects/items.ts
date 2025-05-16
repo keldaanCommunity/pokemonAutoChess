@@ -10,6 +10,7 @@ import { min } from "../../utils/number"
 import { PokemonEntity } from "../pokemon-entity"
 import {
   Effect,
+  OnAbilityCastEffect,
   OnAttackEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -17,6 +18,8 @@ import {
   PeriodicEffect
 } from "./effect"
 import { AbilityStrategies } from "../abilities/abilities"
+import { DelayedCommand } from "../simulation-command"
+import { Ability } from "../../types/enum/Ability"
 
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
@@ -400,6 +403,15 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addMaxHP(-comfey.hp, pokemon, 0, false)
       pokemon.addDefense(-comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
+    }),
+    new OnAbilityCastEffect((pokemon, board, target, crit) => {
+      AbilityStrategies[Ability.FLORAL_HEALING].process(
+        pokemon,
+        board,
+        target,
+        crit,
+        true
+      )
     })
   ],
 
@@ -438,5 +450,37 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.BLUE_ORB]: [blueOrbOnAttackEffect]
+  [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
+
+  [Item.AQUA_EGG]: [
+    new OnAbilityCastEffect((pokemon) => {
+      pokemon.addPP(20, pokemon, 0, false)
+    })
+  ],
+
+  [Item.STAR_DUST]: [
+    new OnAbilityCastEffect((pokemon) => {
+      pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
+      pokemon.count.starDustCount++
+    })
+  ],
+
+  [Item.LEPPA_BERRY]: [
+    new OnAbilityCastEffect((pokemon) => {
+      pokemon.eatBerry(Item.LEPPA_BERRY)
+    })
+  ],
+
+  [Item.MAX_ELIXIR]: [
+    new OnAbilityCastEffect((pokemon) => {
+      if (pokemon.count.ult === 1) {
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            pokemon.addPP(pokemon.maxPP, pokemon, 0, false)
+            pokemon.removeItem(Item.MAX_ELIXIR, false)
+          }, 1000)
+        )
+      }
+    })
+  ]
 }

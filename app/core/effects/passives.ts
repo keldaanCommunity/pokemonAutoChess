@@ -108,7 +108,7 @@ export function partingShot(
   })
 }
 
-const sharedVision = new OnAttackEffect(({ pokemon, board }) => {
+const SharedVisionEffect = new OnAttackEffect(({ pokemon, board }) => {
   board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
     if (
       ally &&
@@ -124,7 +124,7 @@ const sharedVision = new OnAttackEffect(({ pokemon, board }) => {
   })
 })
 
-const durantBugBuff = new OnAttackEffect(({ pokemon, target, board }) => {
+const DurantBugBuffEffect = new OnAttackEffect(({ pokemon, target, board }) => {
   if (target) {
     const bugAllies =
       board.cells.filter(
@@ -145,7 +145,7 @@ const durantBugBuff = new OnAttackEffect(({ pokemon, target, board }) => {
   }
 })
 
-const miniorKernelOnAttackEffect = new OnAttackEffect(
+const MiniorKernelOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board, physicalDamage }) => {
     if (
       target &&
@@ -205,7 +205,7 @@ const miniorKernelOnAttackEffect = new OnAttackEffect(
   }
 )
 
-const kubfuOnKillEffect = new OnKillEffect(
+const KubfuOnKillEffect = new OnKillEffect(
   (pokemon, target, board, attackType) => {
     const SPEED_BUFF_PER_KILL = 3
     const AP_BUFF_PER_KILL = 5
@@ -243,7 +243,7 @@ const kubfuOnKillEffect = new OnKillEffect(
   }
 )
 
-export const waterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
+export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   board.forEach((x, y, pkm) => {
     if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
       pkm.addPP(5, pkm, 0, false)
@@ -252,9 +252,17 @@ export const waterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   })
 })
 
+export const SlowStartEffect = new OnAbilityCastEffect((pokemon, board) => {
+  if (pokemon.count.ult === 1) {
+    pokemon.addSpeed(30, pokemon, 0, false)
+    pokemon.addAttack(10, pokemon, 0, false)
+  }
+})
+
 export const PassiveEffects: Partial<Record<Passive, Effect[]>> = {
-  [Passive.DURANT]: [durantBugBuff],
-  [Passive.SHARED_VISION]: [sharedVision],
-  [Passive.METEOR]: [miniorKernelOnAttackEffect],
-  [Passive.KUBFU]: [kubfuOnKillEffect]
+  [Passive.DURANT]: [DurantBugBuffEffect],
+  [Passive.SHARED_VISION]: [SharedVisionEffect],
+  [Passive.METEOR]: [MiniorKernelOnAttackEffect],
+  [Passive.KUBFU]: [KubfuOnKillEffect],
+  [Passive.SLOW_START]: [SlowStartEffect]
 }

@@ -1,13 +1,11 @@
 import { Transfer } from "../../types"
-import { Ability } from "../../types/enum/Ability"
 import { Item } from "../../types/enum/Item"
-import { Passive } from "../../types/enum/Passive"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
-import { AbilityStrategies } from "./abilities"
 import { min } from "../../utils/number"
 import { OnAbilityCastEffect } from "../effects/effect"
-import { DelayedCommand } from "../simulation-command"
+import { values } from "../../utils/schemas"
+import { ItemEffects } from "../effects/items"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome...
@@ -34,47 +32,13 @@ export class AbilityStrategy {
       })
     }
 
-    pokemon.effectsSet.forEach((effect) => {
-      if (effect instanceof OnAbilityCastEffect) {
-        effect.apply(pokemon, board, target, crit)
-      }
+    const onAbilityCastEffects = [
+      ...pokemon.effectsSet.values(),
+      ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
+    ].filter((effect) => effect instanceof OnAbilityCastEffect)
+
+    onAbilityCastEffects.forEach((effect) => {
+      effect.apply(pokemon, board, target, crit)
     })
-
-    if (pokemon.items.has(Item.AQUA_EGG)) {
-      pokemon.addPP(20, pokemon, 0, false)
-    }
-
-    if (pokemon.items.has(Item.STAR_DUST)) {
-      pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
-      pokemon.count.starDustCount++
-    }
-
-    if (pokemon.items.has(Item.LEPPA_BERRY)) {
-      pokemon.eatBerry(Item.LEPPA_BERRY)
-    }
-
-    if (pokemon.items.has(Item.MAX_ELIXIR) && pokemon.count.ult === 1) {
-      pokemon.commands.push(
-        new DelayedCommand(() => {
-          pokemon.addPP(pokemon.maxPP, pokemon, 0, false)
-          pokemon.removeItem(Item.MAX_ELIXIR, false)
-        }, 1000)
-      )
-    }
-
-    if (pokemon.items.has(Item.COMFEY)) {
-      AbilityStrategies[Ability.FLORAL_HEALING].process(
-        pokemon,
-        board,
-        target,
-        crit,
-        true
-      )
-    }
-
-    if (pokemon.passive === Passive.SLOW_START && pokemon.count.ult === 1) {
-      pokemon.addSpeed(30, pokemon, 0, false)
-      pokemon.addAttack(10, pokemon, 0, false)
-    }
   }
 }
