@@ -25,6 +25,7 @@ import {
   pushMessage,
   setCcu,
   addTournament,
+  removeTournament,
   changeTournament,
   updateTournament,
   changeTournamentPlayer,
@@ -41,7 +42,6 @@ import {
 import {
   logIn,
   removeMessage,
-  deleteTournament,
   setProfile,
   joinLobby,
   setErrorAlertMessage,
@@ -228,7 +228,7 @@ export async function joinLobbyRoom(
           })
 
           $state.tournaments.onRemove((tournament) => {
-            dispatch(deleteTournament(tournament))
+            dispatch(removeTournament(tournament))
           })
 
           room.onMessage(Transfer.BANNED, (message) => {
