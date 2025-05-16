@@ -34,7 +34,7 @@ export default function ChatMessage(props: { message: IChatV2 }) {
           </div>
           {role &&
             (role === Role.MODERATOR || role === Role.ADMIN) &&
-            !isServerMessage && (
+            (
               <button
                 className="remove-chat bubbly red"
                 title="Remove message"
