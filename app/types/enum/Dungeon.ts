@@ -30,6 +30,7 @@ export enum DungeonMusic {
   DEEP_DUSK_FOREST = "Deep Dusk Forest",
   DEEP_STAR_CAVE = "Deep Star Cave",
   DEFY_THE_LEGENDS = "Defy the Legends",
+  DIALGA_FIGHT_TO_THE_FINISH = "Dialga Fight to the Finish",
   DRENCHED_BLUFF = "Drenched Bluff",
   DUN_HONOO_2 = "Dun Honoo 2",
   DUSK_FOREST = "Dusk Forest",
@@ -104,7 +105,7 @@ export enum DungeonMusic {
   SHAYMIN_VILLAGE = "Shaymin Village",
   SILENT_CHASM = "Silent Chasm",
   SINISTER_WOODS = "Sinister Woods",
-  SKY_PEAK_CAVE = "Sky Peak Cave",
+  SKY_PEAK_CAVE = "Sky Peak Cave", // UNUSED
   SKY_PEAK_COAST = "Sky Peak Coast",
   SKY_PEAK_FINAL_PASS = "Sky Peak Final Pass",
   SKY_PEAK_FOREST = "Sky Peak Forest",
@@ -800,7 +801,7 @@ export const DungeonDetails: {
   },
   [DungeonPMDO.SkyPeak7thPass]: {
     synergies: [Synergy.ICE, Synergy.DRAGON, Synergy.FAIRY],
-    music: DungeonMusic.SKY_PEAK_CAVE,
+    music: DungeonMusic.DIALGA_FIGHT_TO_THE_FINISH,
     regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.SkyPeakSummitPass]: {

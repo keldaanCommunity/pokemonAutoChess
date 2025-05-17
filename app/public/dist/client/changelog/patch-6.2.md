@@ -110,3 +110,4 @@
 - Bot manager submission process has been reworked to no longer rely on Pastebin service
 - New title: Picnicker: Make a picnic with 9 Pokémon
 - Performance improvement: improve use of cache for pokemon portraits, which should make them appear instantly when rolling shop
+- New music for SkyPeak 7th pass region: Dialga Fight to the Finish!
