@@ -45,6 +45,9 @@ export function NameTab() {
           {t("change")}
         </button>
       </div>
+      <p className="disclaimer">
+        {t("username_disclaimer")}
+      </p>
     </div>
   ) : null
 }

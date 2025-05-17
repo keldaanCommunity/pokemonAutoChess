@@ -19,6 +19,12 @@
   text-align: center;
 }
 
+.profile-modal .disclaimer {
+  font-size: 1rem;
+  margin: 0.5em 0;
+  font-style: italic;
+}
+
 .profile-modal .profile-box {
   grid-area: card;
 }

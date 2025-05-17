@@ -3424,6 +3424,7 @@
 	"bot_admin": "Bot Admin",
 	"change_name": "Change Name",
 	"invalid_username": "Invalid username. Username must be between 3 and 24 characters, start with a letter, only contain letters or numbers or \".-_\" , no whitespaces.",
+	"username_disclaimer": "Inappropriate usernames will lead to a ban of your account. This includes profanity, adult/sexual themes, direct & indirect threats, political statements, and advertisement for things not related to the game.",
 	"change": "Change",
 	"change_avatar": "Change Avatar",
 	"play_more_games_hint": "Play more games to earn boosters and unlock new avatars !",
