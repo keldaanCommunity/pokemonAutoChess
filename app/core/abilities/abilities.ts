@@ -43,7 +43,6 @@ import { Weather } from "../../types/enum/Weather"
 import PokemonFactory from "../../models/pokemon-factory"
 import Board, { Cell } from "../board"
 import { PokemonEntity, getStrongestUnit } from "../pokemon-entity"
-import PokemonState from "../pokemon-state"
 
 import { Passive } from "../../types/enum/Passive"
 import { isOnBench } from "../../utils/board"
