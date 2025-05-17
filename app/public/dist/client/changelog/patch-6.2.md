@@ -57,6 +57,7 @@
 - Nerf Bitter Blade (Ceruledge): remove AP scaling on the healing part
 - Buff Articuno: PP 120 → 110
 - Buff Wood Hammer (Bonsly): damage 300% → 400% of attack, recoil damage 33% → 25% of damage done
+- Simplify Trick or Treat (Pumpkaboo): the 4 different curses have been reduced to one, turning the enemy into Magikarp for 3 seconds.
 
 # Changes to Synergies
 

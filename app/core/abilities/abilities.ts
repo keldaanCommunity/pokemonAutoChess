@@ -10292,22 +10292,8 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       const item = values(target.items)[0]!
       target.removeItem(item)
       pokemon.addItem(item)
-    } else if (pokemon.ap <= 50) {
-      // 0-50 AP: shrink unit size and HP
-      const lifeReductionFactor =
-        0.4 / ((1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
-      target.handleSpecialDamage(
-        target.life * (1 - lifeReductionFactor),
-        board,
-        AttackType.TRUE,
-        pokemon,
-        false,
-        false
-      )
-      target.hp = min(1)(Math.floor(target.hp * lifeReductionFactor))
-      target.status.triggerFlinch(3000, target, pokemon)
-    } else if (pokemon.ap <= 100) {
-      // 51-100 AP: transforms the unit into magikarp for X seconds, replacing its ability with splash
+    } else {
+      // transforms the unit into magikarp for X seconds, replacing its ability with splash
       const originalAbility = target.skill
       const originalAttack = target.atk
       const originalDefense = target.def
@@ -10330,26 +10316,6 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
           target.index = originalIndex
         }, duration)
       )
-    } else if (pokemon.ap <= 150) {
-      // 101-150 AP: sleep, poison, burn, wound the unit during X seconds; bypass rune protect
-      target.status.runeProtect = false
-      const duration = Math.round(
-        3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-      )
-      target.status.triggerSleep(duration, target)
-      target.status.triggerPoison(duration, target, pokemon)
-      target.status.triggerBurn(duration, target, pokemon)
-      target.status.triggerWound(duration, target, pokemon)
-    } else {
-      // > 150 AP: add all ghost curses to the enemy and curse status applying in X seconds
-      target.status.curseFate = true
-      target.status.curseTorment = true
-      target.status.curseVulnerability = true
-      target.status.curseFate = true
-      const curseTimer = Math.round(
-        3000 / ((1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
-      )
-      target.status.triggerCurse(curseTimer)
     }
   }
 }
