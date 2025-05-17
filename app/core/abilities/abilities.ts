@@ -36,7 +36,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Orientation, Team } from "../../types/enum/Game"
 import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 
@@ -73,6 +73,7 @@ import { values } from "../../utils/schemas"
 import { DarkHarvestEffect } from "../effects/effect"
 import { DelayedCommand } from "../simulation-command"
 import { giveRandomEgg } from "../../core/eggs"
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 
 export const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -4188,8 +4189,10 @@ export class SpectralThiefStrategy extends AbilityStrategy {
       )
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+      const PkmClass = PokemonClasses[PkmByIndex[target.index]]
+      const baseSpeed = PkmClass ? new PkmClass().speed : DEFAULT_SPEED
       const boostAtk = min(0)(target.atk - target.baseAtk)
-      const boostSpeed = min(0)(target.speed - DEFAULT_SPEED)
+      const boostSpeed = min(0)(target.speed - baseSpeed)
       const boostDef = min(0)(target.def - target.baseDef)
       const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
       const boostAP = target.ap
