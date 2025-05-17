@@ -1601,7 +1601,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (pveStage) {
       this.state.shinyEncounter =
         this.state.townEncounter === TownEncounters.CELEBI ||
-        this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER ||
+        (this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER &&
+          pveStage.shinyChance !== undefined) ||
         chance(pveStage.shinyChance ?? 0)
     }
 

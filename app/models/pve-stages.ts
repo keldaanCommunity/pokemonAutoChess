@@ -81,6 +81,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     board: [[Pkm.GYARADOS, 4, 2]],
     marowakItems: [[Item.KINGS_ROCK]],
+    shinyChance: 1 / 100,
     getRewards(player: Player) {
       const randomComponents = pickNRandomIn(ItemComponents, 1)
       return randomComponents
@@ -113,6 +114,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.HO_OH, 5, 1]
     ],
     marowakItems: [[Item.COMET_SHARD], [Item.SACRED_ASH]],
+    shinyChance: 1 / 100,
     getRewards(player: Player) {
       const items = values(player.board)
         .flatMap((p) => values(p.items))
