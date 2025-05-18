@@ -2587,7 +2587,7 @@ export class Goomy extends Pokemon {
   )
   hp = 90
   atk = 6
-  speed = 38
+  speed = 51
   def = 8
   speDef = 12
   maxPP = 80
@@ -2607,7 +2607,7 @@ export class Sligoo extends Pokemon {
   evolution = Pkm.GOODRA
   hp = 160
   atk = 13
-  speed = 38
+  speed = 51
   def = 10
   speDef = 14
   maxPP = 80
@@ -2626,10 +2626,10 @@ export class Goodra extends Pokemon {
   stars = 3
   hp = 300
   atk = 28
-  speed = 38
+  speed = 51
   def = 12
   speDef = 20
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.LIQUIDATION
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -2649,7 +2649,7 @@ export class HisuiSliggoo extends Pokemon {
   speed = 38
   def = 14
   speDef = 10
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
@@ -2673,7 +2673,7 @@ export class HisuiGoodra extends Pokemon {
   speed = 38
   def = 20
   speDef = 12
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
@@ -5343,8 +5343,8 @@ export class Meloetta extends Pokemon {
   hp = 250
   atk = 23
   speed = 54
-  def = 10
-  speDef = 10
+  def = 8
+  speDef = 12
   maxPP = 60
   range = 4
   skill = Ability.RELIC_SONG
@@ -5369,9 +5369,9 @@ export class PirouetteMeloetta extends Pokemon {
   hp = 250
   atk = 23
   speed = 54
-  def = 10
-  speDef = 10
-  maxPP = 90
+  def = 12
+  speDef = 18
+  maxPP = 100
   range = 1
   skill = Ability.U_TURN
   attackSprite = AttackSprite.FIGHTING_MELEE
@@ -6022,11 +6022,11 @@ export class Vaporeon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
-  atk = 12
-  speed = 43
+  atk = 6
+  speed = 83
   def = 6
   speDef = 4
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.WATER_MELEE
@@ -6037,11 +6037,11 @@ export class Jolteon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
-  atk = 12
-  speed = 43
+  atk = 8
+  speed = 83
   def = 6
   speDef = 4
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -6067,8 +6067,8 @@ export class Espeon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
-  atk = 12
-  speed = 43
+  atk = 8
+  speed = 70
   def = 6
   speDef = 4
   maxPP = 100
@@ -6097,8 +6097,8 @@ export class Leafeon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
-  atk = 12
-  speed = 43
+  atk = 9
+  speed = 61
   def = 6
   speDef = 4
   maxPP = 100
@@ -11875,7 +11875,7 @@ export class Hitmontop extends Pokemon {
   stars = 3
   hp = 200
   atk = 22
-  speed = 36
+  speed = 45
   def = 10
   speDef = 10
   maxPP = 80
@@ -11890,7 +11890,7 @@ export class Hitmonlee extends Pokemon {
   stars = 3
   hp = 200
   atk = 33
-  speed = 36
+  speed = 56
   def = 6
   speDef = 6
   maxPP = 100
@@ -11905,7 +11905,7 @@ export class Hitmonchan extends Pokemon {
   stars = 3
   hp = 200
   atk = 22
-  speed = 36
+  speed = 49
   def = 14
   speDef = 14
   maxPP = 100
@@ -12124,9 +12124,9 @@ export class Silcoon extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.BEAUTIFLY
-  hp = 180
+  hp = 200
   atk = 23
-  speed = 31
+  speed = 20
   def = 12
   speDef = 12
   maxPP = 100
@@ -12141,7 +12141,7 @@ export class Beautifly extends Pokemon {
   stars = 3
   hp = 250
   atk = 35
-  speed = 31
+  speed = 42
   def = 12
   speDef = 12
   maxPP = 60
@@ -12155,9 +12155,9 @@ export class Cascoon extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.DUSTOX
-  hp = 180
+  hp = 200
   atk = 23
-  speed = 31
+  speed = 20
   def = 12
   speDef = 12
   maxPP = 100
@@ -12177,7 +12177,7 @@ export class Dustox extends Pokemon {
   stars = 3
   hp = 250
   atk = 35
-  speed = 31
+  speed = 42
   def = 12
   speDef = 12
   maxPP = 60
@@ -17699,7 +17699,7 @@ export class Milcery extends Pokemon {
   )
   hp = 130
   atk = 10
-  speed = 36
+  speed = 41
   def = 2
   speDef = 6
   maxPP = 80
@@ -17727,7 +17727,7 @@ export class AlcremieVanilla extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17748,7 +17748,7 @@ export class AlcremieRuby extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17769,7 +17769,7 @@ export class AlcremieMatcha extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17790,7 +17790,7 @@ export class AlcremieMint extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17811,7 +17811,7 @@ export class AlcremieLemon extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17832,7 +17832,7 @@ export class AlcremieSalted extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17853,7 +17853,7 @@ export class AlcremieRubySwirl extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17874,7 +17874,7 @@ export class AlcremieCaramelSwirl extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80
@@ -17895,7 +17895,7 @@ export class AlcremieRainbowSwirl extends Pokemon {
   stars = 3
   hp = 160
   atk = 16
-  speed = 36
+  speed = 41
   def = 6
   speDef = 12
   maxPP = 80

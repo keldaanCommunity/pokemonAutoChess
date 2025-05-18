@@ -58,6 +58,19 @@
 - Buff Articuno: PP 120 → 110
 - Buff Wood Hammer (Bonsly): damage 300% → 400% of attack, recoil damage 33% → 25% of damage done
 - Simplify Trick or Treat (Pumpkaboo): the 4 different curses have been reduced to one, turning the enemy into Magikarp for 3 seconds.
+- Speed adjustments:
+    - Jolteon: speed 43 → 83 ; attack 12 → 8, PP 100 → 120
+    - Espeon: speed 43 → 70 ; attack 12 → 8
+    - Leafeon: speed 43 → 61 ; attack: 12 → 9
+    - Hitmonchan: speed 36 → 49
+    - Hitmonlee: speed 36 → 56
+    - Hitmontop: speed 36 → 45
+    - Meloetta Pirouette form: speed 54 →  82 ; PP 90 → 100
+    - Milcery line: speed 36 → 41
+    - Goomy line (excluding Hisui forms): speed 38 → 51, PP 80 → 100
+    - Beautifly & Dustox: speed 31 → 42
+    - Silcoon & Cascoon: speed 31 → 20, HP 180 → 200
+
 
 # Changes to Synergies
 
