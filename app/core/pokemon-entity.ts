@@ -365,7 +365,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
-        const damageAfterReduction = damage / (1 + ARMOR_FACTOR * this.speDef)
+        let speDef = this.status.armorReduction ? Math.round(this.speDef / 2) : this.speDef
+        const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
         const damageBlocked = min(0)(specialDamage - damageAfterReduction)
         attacker.handleDamage({
           damage: Math.round(damageBlocked),
