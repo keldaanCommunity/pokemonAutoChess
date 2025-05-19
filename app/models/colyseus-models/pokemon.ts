@@ -12776,7 +12776,7 @@ export class Purrloin extends Pokemon {
 
 export class Liepard extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
   atk = 19
