@@ -42,7 +42,7 @@ import {
   ExpPlace,
   LegendaryPool,
   MAX_SIMULATION_DELTA_TIME,
-  MinStageLevelForGameToCount,
+  MinStageForGameToCount,
   PortalCarouselStages,
   UniquePool
 } from "../types/Config"
@@ -619,13 +619,14 @@ export default class GameRoom extends Room<GameState> {
           player.hasLeftGame = true
           player.spectatedPlayerId = player.id
 
-          if (!this.state.gameFinished && player.life > 0) {
+          const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
+          if (hasLeftBeforeEnd) {
             // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
             player.life = -99
             this.rankPlayers()
           }
 
-          this.updatePlayerAfterGame(player)
+          this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
         }
       }
       if (
@@ -684,7 +685,7 @@ export default class GameRoom extends Room<GameState> {
         players: humans.map((p) => this.transformToSimplePlayer(p))
       })
 
-      if (this.state.stageLevel >= MinStageLevelForGameToCount) {
+      if (this.state.stageLevel >= MinStageForGameToCount) {
         const elligibleToXP = this.state.players.size >= 2
         if (elligibleToXP) {
           for (let i = 0; i < bots.length; i++) {
@@ -706,7 +707,7 @@ export default class GameRoom extends Room<GameState> {
             const player = humans[i]
             if (!player.hasLeftGame) {
               player.hasLeftGame = true
-              this.updatePlayerAfterGame(player)
+              this.updatePlayerAfterGame(player, false)
             }
           }
         }
@@ -727,11 +728,11 @@ export default class GameRoom extends Room<GameState> {
   }
 
   // when a player leaves the game
-  async updatePlayerAfterGame(player: Player) {
+  async updatePlayerAfterGame(player: Player, hasLeftBeforeEnd: boolean) {
     // if player left before stage 10, they do not earn experience to prevent xp farming abuse
     const elligibleToXP =
       this.state.players.size >= 2 &&
-      this.state.stageLevel >= MinStageLevelForGameToCount
+      this.state.stageLevel >= MinStageForGameToCount
 
     const humans: Player[] = []
     const bots: Player[] = []
@@ -746,7 +747,7 @@ export default class GameRoom extends Room<GameState> {
 
     const elligibleToELO =
       !this.state.noElo &&
-      this.state.stageLevel >= MinStageLevelForGameToCount &&
+      (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
       humans.length >= 2
 
     const rank = player.rank

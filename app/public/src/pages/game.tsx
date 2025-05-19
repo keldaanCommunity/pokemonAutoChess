@@ -21,7 +21,7 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import { MinStageLevelForGameToCount, PortalCarouselStages } from "../../../types/Config"
+import { MinStageForGameToCount, PortalCarouselStages } from "../../../types/Config"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
@@ -209,6 +209,7 @@ export default function Game() {
     }
 
     const nbPlayers = room?.state.players.size ?? 0
+    const hasLeftBeforeEnd = currentPlayer?.alive === true && room?.state?.gameFinished === false
 
     if (nbPlayers > 0) {
       room?.state.players.forEach((p) => {
@@ -253,9 +254,10 @@ export default function Game() {
 
     const elligibleToXP =
       nbPlayers >= 2 &&
-      (room?.state.stageLevel ?? 0) >= MinStageLevelForGameToCount
+      (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
     const elligibleToELO =
-      elligibleToXP &&
+      nbPlayers >= 2 &&
+      ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount || hasLeftBeforeEnd) &&
       !room?.state.noElo &&
       afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
     const gameMode = room?.state.gameMode
