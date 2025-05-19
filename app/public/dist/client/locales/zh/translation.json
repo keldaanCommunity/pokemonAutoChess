@@ -471,7 +471,10 @@
 		"LASER_BLADE": "激光刃",
 		"ICICLE_MISSILE": "冰锥飞弹",
 		"ARM_THRUST": "猛推",
-		"DRUM_BEATING": "鼓击"
+		"DRUM_BEATING": "鼓击",
+		"PSYCHO_CUT": "精神利刃",
+		"WICKED_BLOW": "暗冥强击",
+		"SURGING_STRIKES": "水流连打"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -613,6 +616,7 @@
 		"RALTS": "拉鲁拉丝",
 		"KIRLIA": "奇鲁莉安",
 		"GARDEVOIR": "沙奈朵",
+		"GALLADE": "艾路雷朵",
 		"BAGON": "宝贝龙",
 		"SHELGON": "甲壳龙",
 		"SALAMENCE": "暴飞龙",
@@ -1427,7 +1431,10 @@
 		"PANGORO": "霸道熊猫",
 		"GROOKEY": "敲音猴",
 		"THWACKEY": "啪咚猴",
-		"RILLABOOM": "轰擂金刚猩"
+		"RILLABOOM": "轰擂金刚猩",
+		"KUBFU": "熊徒弟",
+		"URSHIFU_SINGLE": "武道熊师（一击流）",
+		"URSHIFU_RAPID": "武道熊师（连击流）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1822,7 +1829,7 @@
 		"POISON_STING": "使目标陷入[2,3,4]层的POISONNED。溢出的层数改为立刻对目标造成[25,50,100,SP]点SPECIAL。",
 		"TRANSE": "恢复攻击和移动，但不再被动恢复HP。",
 		"WOOD_HAMMER": "对目标造成SPECIAL，数值相当于使用者[400,SP]%的ATK。使用者受到25%的反冲伤害。",
-		"TRICK_OR_TREAT": "目标必须将一件携带道具交给使用者。若没有，则其受到诅咒，诅咒强度随使用者AP增加而增加。",
+		"TRICK_OR_TREAT": "目标必须将一件携带道具交给使用者。若没有，则其被变形为$t(pkm.MAGIKARP)，持续[3,SP,ND=1]秒。",
 		"FREEZING_GLARE": "对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。并有[50,LK]%的概率使他们陷入FREEZE 3秒。",
 		"THUNDEROUS_KICK": "将目标击退。其和所有击退路径上的敌方宝可梦陷入FLINCH 4秒，降低[10,SP]点DEF，并受到[20,40,60,SP]点PHYSICAL。",
 		"FIERY_WRATH": "对所有敌方宝可梦造成[33,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FLINCH 4秒。",
@@ -1879,7 +1886,10 @@
 		"LASER_BLADE": "每次使用招式时依次循环执行以下行为之一：\n1.旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的相邻宝可梦造成[30,SP]点SPECIAL；\n2.向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[30,SP]。",
 		"ICICLE_MISSILE": "对后排的敌方宝可梦发射[1,2,3]枚冰锥飞弹，每枚造成[50,SP]点SPECIAL，并使目标陷入FREEZE [2,SP]秒。",
 		"ARM_THRUST": "连续攻击[2,LK]至[5,LK]次，每次造成PHYSICAL，数值相当于[100,SP]%的ATK。每次攻击各自可以按CRIT_CHANCE产生暴击。",
-		"DRUM_BEATING": "每次使用招式时依次循环执行以下行为之一：\n1.木之格挡：所有我方宝可梦获得[10,20,40,SP]点SHIELD；\n2.迅疾连打：对所有敌方宝可梦造成[10,20,40,SP]点SPECIAL；\n3.加快节奏：所有我方宝可梦提升[10,20,40,SP]点SPEED。"
+		"DRUM_BEATING": "每次使用招式时依次循环执行以下行为之一：\n1.木之格挡：所有我方宝可梦获得[10,20,40,SP]点SHIELD；\n2.迅疾连打：对所有敌方宝可梦造成[10,20,40,SP]点SPECIAL；\n3.加快节奏：所有我方宝可梦提升[10,20,40,SP]点SPEED。",
+		"PSYCHO_CUT": "三道精神利刃斩击并直线穿透目标背后一条直线上的敌方宝可梦，每道对所有击中的敌方宝可梦造成[10,20,30,SP]点SPECIAL。该招式可以暴击。",
+		"WICKED_BLOW": "对目标造成[80,SP]点TRUE。该招式必定暴击。",
+		"SURGING_STRIKES": "仿若行云流水般的3次连击，每次造成SPECIAL，数值相当于[100,SP]%的ATK。该招式必定暴击。"
 	},
 	"effect": {
 		"INGRAIN": "扎根",
@@ -2085,8 +2095,8 @@
 		"ALLEGRO": "所有我方宝可梦提升1点ATK和5点SPEED。",
 		"PRESTO": "所有我方宝可梦提升1点ATK，5点SPEED和3点PP。",
 		"DUBIOUS_DISC": "获得一件ARTIFICIAL道具。若此共鸣失效，移除该道具。",
-		"LINK_CABLE": "每携带一件道具，提升5%的基础ATK和AP，并获得SHIELD，数值相当于最大HP的6%。获得另一件ARTIFICIAL道具。",
-		"GOOGLE_SPECS": "每携带一件道具，提升10%的基础ATK和AP，并获得SHIELD，数值相当于最大HP的12%。获得另一件ARTIFICIAL道具。",
+		"LINK_CABLE": "每携带一件道具，提升5%的基础ATK和AP，并获得SHIELD，数值相当于最大HP的5%。获得另一件ARTIFICIAL道具。",
+		"GOOGLE_SPECS": "每携带一件道具，提升10%的基础ATK和AP，并获得SHIELD，数值相当于最大HP的10%。获得另一件ARTIFICIAL道具。",
 		"HATCHER": "每只BABY宝可梦有[10,LK]%的概率发现一枚蛋。",
 		"BREEDER": "每次在玩家对战中战败时，一定能发现至少一枚蛋。蛋的孵化用时缩短1轮。",
 		"GOLDEN_EGGS": "每只BABY宝可梦有[5,LK]%的概率发现一枚金蛋（备战区至多同时有1枚）。金蛋的售价为10 GOLD，孵化时将提供一件闪光道具。",
@@ -2302,7 +2312,9 @@
 		"EXCHANGE_TICKET": "交换券",
 		"AUSPICIOUS_ARMOR": "庆祝之铠",
 		"MALICIOUS_ARMOR": "咒术之铠",
-		"RUSTED_SWORD": "腐朽的剑"
+		"RUSTED_SWORD": "腐朽的剑",
+		"SCROLL_OF_WATERS": "水之挂轴",
+		"SCROLL_OF_DARKNESS": "恶之挂轴"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2326,7 +2338,7 @@
 		"CHOICE_SPECS": "携带者额外提升100点AP",
 		"SOUL_DEW": "在战斗中，携带者每秒提升10点AP",
 		"UPGRADE": "攻击使携带者提升5点SPEED（可以叠加）",
-		"REAPER_CLOTH": "携带者的招式也可以按CRIT_CHANCE的概率暴击",
+		"REAPER_CLOTH": "携带者的招式也可以按CRIT_CHANCE的概率暴击。若招式已经可以暴击，则改为提升50%的CRIT_POWER。",
 		"POKEMONOMICON": "携带者造成SPECIAL时还会使目标陷入BURN 3秒",
 		"POWER_LENS": "由SPE_DEF减免的SPECIAL改为反弹至进攻方",
 		"SHELL_BELL": "携带者造成任意伤害时，恢复伤害额的33%",
@@ -2393,7 +2405,7 @@
 		"INCENSE": "商店中的宝可梦与携带者至少一项共鸣相同的概率提升5%。返回备战区时卸下。",
 		"EXP_SHARE": "获得同一横排上所有我方宝可梦中最高的ATK，AP，DEF与SPE_DEF。返回备战区时卸下。",
 		"POKERUS_VIAL": "携带者受到POKERUS，每2.5秒提升1点ATK和10点AP，且会将病毒传播给其他我方宝可梦。返回备战区时卸下。",
-		"ROTOM_PHONE": "携带者也被视作GHOST宝可梦。在携带者附近召唤空拍洛托姆。返回备战区时卸下。",
+		"ROTOM_PHONE": "携带者也被视作GHOST宝可梦。战斗开始8秒后，在携带者附近召唤空拍洛托姆。返回备战区时卸下。",
 		"SILK_SCARF": "携带者也被视作NORMAL宝可梦。携带者获得的任何SHIELD提升50%。返回备战区时卸下。",
 		"TINY_MUSHROOM": "携带者也被视作BUG宝可梦。若携带者被复制，携带者降低50%的最大HP。返回备战区时卸下。",
 		"COOKING_POT": "携带者也被视作GOURMET宝可梦。处于BURN时，COOKING_POT会缓慢加热，每秒提升携带者10点SPEED。",
@@ -2471,8 +2483,8 @@
 		"BLACK_SLUDGE": "食用的宝可梦陷入POISONNED。若为POISON，改为每2秒恢复5%的最大HP。",
 		"BINDING_MOCHI": "仅在下一轮战斗中，第一次命中的攻击会使目标陷入CHARM和POISONNED 4秒。",
 		"FRUIT_JUICE": "仅在下一轮战斗中，提升50点SPEED。",
-		"LEEK": "仅在下一轮战斗中，提升50%的CRIT_CHANCE，且招式能够暴击。",
-		"LARGE_LEEK": "仅在下一轮战斗中，提升100%的CRIT_POWER，且招式能够暴击。",
+		"LEEK": "仅在下一轮战斗中，提升50%的CRIT_CHANCE，且招式能够暴击。若招式已经可以暴击，则改为额外提升50%的CRIT_POWER。",
+		"LARGE_LEEK": "仅在下一轮战斗中，提升100%的CRIT_POWER，且招式能够暴击。若招式已经可以暴击，则改为再提升50%的CRIT_POWER。",
 		"SPINDA_COCKTAIL": "一瓶神秘的混调，富含多种[LK]随机效果，例如提升属性或是令饮用者晕眩。",
 		"SMOKED_FILET": "永久降低10点最大HP，提升3点ATK和5点AP。",
 		"SWEETS": "一枚随机糖饰，能永久提升某一项能力",
@@ -2497,7 +2509,9 @@
 		"EXCHANGE_TICKET": "将备战区内的一个道具组件或一件合成道具交换为随机同类道具。一次性使用。",
 		"AUSPICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着祝贺的感情。",
 		"MALICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着诅咒的感情。",
-		"RUSTED_SWORD": "据说很久以前，英雄就是拿着这把剑驱走了灾厄。携带者提升50%的ATK。携带者倒下时，ATK最低的我方宝可梦获得此道具。"
+		"RUSTED_SWORD": "据说很久以前，英雄就是拿着这把剑驱走了灾厄。携带者提升50%的ATK。携带者倒下时，ATK最低的我方宝可梦获得此道具。",
+		"SCROLL_OF_WATERS": "上面写着水之奥秘。对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_RAPID)。",
+		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -2646,7 +2660,9 @@
 		"CHARCADET": "碳小侍似乎需要一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR……",
 		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
 		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和AP。",
-		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为使用者和相邻我方宝可梦额外恢复[2,3,4]点PP，且算作一次普通攻击。"
+		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为使用者和相邻我方宝可梦额外恢复[2,3,4]点PP，且算作一次普通攻击。",
+		"KIRLIA": "奇鲁莉安会根据FAIRY和FIGHTING共鸣中等级较高的一方进化为沙奈朵或艾路雷朵。",
+		"KUBFU": "每次使用招式击倒宝可梦时，永久提升5点AP，至多提升10次，封顶时获得SCROLL_OF_DARKNESS。\n每次普通攻击击倒宝可梦时，永久提升3点SPEED，至多提升10次，封顶时获得SCROLL_OF_WATERS。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3190,7 +3206,8 @@
 	"sort_by_index": "按序号排序",
 	"sort_by_shards": "按碎片排序",
 	"normal_emotions": "普通表情",
-	"shiny_emotions": "闪光表情",
+	"shiny_emotions": "闪光表情",,
+	"reset_emotion": "重置为默认形象",
 	"buy_booster": "花费{{cost}}碎片购买新的补充包",
 	"choose_as_avatar": "选定为玩家形象",
 	"close": "关闭",
@@ -3407,6 +3424,7 @@
 	"change_name": "更改名字",
 	"invalid_username": "无效的用户名。用户名长度必须为3到24个字符，第一个字符必须为字母，且只能包含字母、数字和 . - _ 三种特殊符号，还不能含有空格。",
 	"change": "更改",
+	"username_disclaimer": "管理员有权因不当用户名将你的账户封禁。“不当”包括但不限于：侮辱性内容，黄色内容，直接或间接的威胁，政治敏感内容和与本游戏无关的广告。",
 	"change_avatar": "更改形象",
 	"play_more_games_hint": "玩更多游戏，赚取补充包，解锁新的形象！",
 	"berry_gained": "收获树果！",
