@@ -9797,7 +9797,7 @@ export class EntrainmentStrategy extends AbilityStrategy {
           distanceC(pokemon.positionX, pokemon.positionY, b.x, b.y)
       )
       if (potentialTargets.length > 0) {
-        target.skill = Ability.ENTRAINMENT
+        potentialTargets[0].value.skill = Ability.ENTRAINMENT
       }
     }
   }
