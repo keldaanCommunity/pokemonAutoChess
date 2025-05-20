@@ -2256,8 +2256,7 @@
 		"BAD_LUCK": "Riduce la LUCK dei nemici del 20%.",
 		"GOOD_LUCK": "Aumenta la LUCK di tutti gli alleati del 20%.",
 		"PRIMEAPE": "Primeape diventa più arrabbiato quando va KO, ottenendo 1 di ATK permanentemente. Dopo che Primeape è andato KO 10 volte, si evolve in Annihilape.",
-		"ZYGARDE10": "Zygarde assorbirà le sue cellule, trasformandolo in un'altra forma. Una volta sotto il 30% di HP massimi, assorbirà tutte le sue cellule, tramutandosi nella sua forma completa.",
-		"ZYGARDE50": "Zygarde assorbirà le sue cellule, trasformandolo in un'altra forma. Una volta sotto il 30% di HP massimi, assorbirà tutte le sue cellule, tramutandosi nella sua forma completa.",
+		"ZYGARDE": "Zygarde assorbirà le sue cellule, trasformandolo in un'altra forma. Dopo aver ottenuto 5 stack di effetto GROUND, assorbirà tutte le sue cellule, tramutandosi nella sua forma completa.",
 		"GLIMMORA": "Una volta sotto il 50% di HP massimi, questa unità lancia davanti a sè delle Fielepunte in un rettangolo 2x3, infliggendo 20 danni. Le Fielepunte causano POISONNED a tutti i Pokèmon che ci camminano sopra, tranne ai tipi POISON."
 	},
 	"stat": {

@@ -16844,7 +16844,7 @@ export class Zygarde10 extends Pokemon {
   range = 1
   skill = Ability.LANDS_WRATH
   attackSprite = AttackSprite.DRAGON_MELEE
-  passive = Passive.ZYGARDE10
+  passive = Passive.ZYGARDE
   onAcquired(player: Player) {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)
@@ -16865,7 +16865,7 @@ export class Zygarde50 extends Pokemon {
   range = 3
   skill = Ability.THOUSAND_ARROWS
   attackSprite = AttackSprite.DRAGON_GREEN_RANGE
-  passive = Passive.ZYGARDE50
+  passive = Passive.ZYGARDE
   onAcquired(player: Player) {
     if (player.items.includes(Item.ZYGARDE_CUBE) === false) {
       player.items.push(Item.ZYGARDE_CUBE)

@@ -184,14 +184,10 @@ export class GrowGroundEffect extends PeriodicEffect {
           pokemon.count.moneyCount += 3
         }
 
-        if (
-          (pokemon.passive === Passive.ZYGARDE10 ||
-            pokemon.passive === Passive.ZYGARDE50) &&
-          this.count === 5
-        ) {
+        if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {
           pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
           pokemon.addSpeed(-25, pokemon, 0, false)
-          if (pokemon.passive === Passive.ZYGARDE10) {
+          if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
             pokemon.addDefense(1, pokemon, 0, false)
             pokemon.addSpecialDefense(1, pokemon, 0, false)
             pokemon.addMaxHP(50, pokemon, 0, false)

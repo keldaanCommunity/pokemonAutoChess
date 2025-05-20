@@ -594,10 +594,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (item === Item.ZYGARDE_CUBE) {
-      if (
-        pokemon?.passive === Passive.ZYGARDE10 ||
-        pokemon?.passive === Passive.ZYGARDE50
-      ) {
+      if (pokemon?.passive === Passive.ZYGARDE) {
         if (pokemon.name === Pkm.ZYGARDE_10) {
           player.transformPokemon(pokemon, Pkm.ZYGARDE_50)
         } else if (pokemon.name === Pkm.ZYGARDE_50) {
