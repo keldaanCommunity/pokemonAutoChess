@@ -66,7 +66,7 @@ export default function PokemonCollectionItem(props: {
         src={getPortraitSrc(
           props.index,
           props.config?.selectedShiny,
-          props.config?.selectedEmotion
+          props.config?.selectedEmotion ?? Emotion.NORMAL
         )}
         loading="lazy"
       />
