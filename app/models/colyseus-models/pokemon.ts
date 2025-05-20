@@ -2590,7 +2590,7 @@ export class Goomy extends Pokemon {
   speed = 51
   def = 8
   speDef = 12
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.LIQUIDATION
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -2610,7 +2610,7 @@ export class Sligoo extends Pokemon {
   speed = 51
   def = 10
   speDef = 14
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.LIQUIDATION
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -2649,7 +2649,7 @@ export class HisuiSliggoo extends Pokemon {
   speed = 38
   def = 14
   speDef = 10
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
@@ -2673,7 +2673,7 @@ export class HisuiGoodra extends Pokemon {
   speed = 38
   def = 20
   speDef = 12
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SHELTER
   attackSprite = AttackSprite.STEEL_MELEE
@@ -5368,9 +5368,9 @@ export class PirouetteMeloetta extends Pokemon {
   stars = 3
   hp = 250
   atk = 23
-  speed = 54
+  speed = 82
   def = 12
-  speDef = 18
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.U_TURN
