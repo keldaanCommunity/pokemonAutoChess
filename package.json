@@ -1,6 +1,6 @@
 {
   "name": "pokemon-auto-chess",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "",
   "keywords": [],
   "license": "BSD-3-Clause",
@@ -17,7 +17,10 @@
     "url": "https://github.com/keldaanCommunity/pokemonAutoChess/issues"
   },
   "author": "keldaan-ag",
-  "contributors": ["ogus", "sylvainpolletvillard"],
+  "contributors": [
+    "ogus",
+    "sylvainpolletvillard"
+  ],
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "dev-client": "node esbuild.js --dev",
