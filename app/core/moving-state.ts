@@ -41,7 +41,9 @@ export default class MovingState extends PokemonState {
         pokemon.passive === Passive.DRUMMER &&
         board.cells.some(
           (entity) =>
-            entity?.team === pokemon.team && entity?.passive !== Passive.DRUMMER
+            entity?.team === pokemon.team &&
+            entity?.passive !== Passive.DRUMMER &&
+            entity?.passive !== Passive.INANIMATE
         )
       ) {
         drumBeat(pokemon, board)
