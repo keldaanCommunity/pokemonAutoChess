@@ -6022,11 +6022,11 @@ export class Vaporeon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
-  atk = 6
-  speed = 83
+  atk = 12
+  speed = 43
   def = 6
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
   attackSprite = AttackSprite.WATER_MELEE
