@@ -21,6 +21,7 @@ import { Item } from "../../types/enum/Item"
 import { Kubfu } from "../../models/colyseus-models/pokemon"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
+  pokemon.cooldown = Math.round(1000 / (0.4 + pokemon.speed * 0.007)) // use attack state cooldown
   if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
     // CAST ABILITY
     let crit = false
