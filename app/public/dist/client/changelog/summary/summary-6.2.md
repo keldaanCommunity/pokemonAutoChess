@@ -1,4 +1,4 @@
-> April 20, 2025
+> May 21, 2025
 
 # Patch 6.2: Close Combat
 
