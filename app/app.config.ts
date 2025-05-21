@@ -369,9 +369,11 @@ export default config({
     }
 
     app.post("/bots", async (req, res) => {
-      const user = await authUser(req, res)
-      if (!user) return
       try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const user = await UserMetadata.findOne({ uid: userAuth.uid })
+        if (!user) return
         const bot = req.body
         bot.author = user.displayName
         const botAdded = addBotToDatabase(bot)
@@ -383,9 +385,9 @@ export default config({
     })
 
     app.delete("/bots/:id", async (req, res) => {
-      const userRecord = await authUser(req, res)
-      if (!userRecord) return
-      const user = await UserMetadata.findOne({ uid: userRecord.uid })
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const user = await UserMetadata.findOne({ uid: userAuth.uid })
       if (
         !user ||
         (user.role !== Role.BOT_MANAGER && user.role !== Role.ADMIN)
