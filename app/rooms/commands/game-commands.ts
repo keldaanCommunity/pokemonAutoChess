@@ -1552,7 +1552,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                       const pokemon = candidates[i] ?? chef
                       pokemon.meal = meal
                       pokemon.action = PokemonActionState.EAT
-                      removeInArray(candidates, pokemon)
                     }
                   })
                 }, 2000)
