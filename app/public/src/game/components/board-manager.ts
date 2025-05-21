@@ -523,7 +523,7 @@ export default class BoardManager {
     // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
-    if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
+    if (!phaseChanged) this.removePokemonsOnBoard(false) // remove immediately board sprites if arriving in battle mode
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
@@ -546,9 +546,9 @@ export default class BoardManager {
     }, 0) // need to wait for next event loop for state to be up to date
   }
 
-  removePokemonsOnBoard() {
+  removePokemonsOnBoard(includingBench: boolean = false) {
     this.pokemons.forEach((pokemon) => {
-      if (!isOnBench(pokemon)) {
+      if (includingBench === true || !isOnBench(pokemon)) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -592,11 +592,7 @@ export default class BoardManager {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
     this.hideLightCell()
     this.hideBerryTrees()
-    this.pokemons.forEach((pokemon) => {
-      if (pokemon.positionY != 0) {
-        pokemon.setVisible(false)
-      }
-    })
+    this.removePokemonsOnBoard(true)
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
@@ -904,6 +900,7 @@ export default class BoardManager {
 
           // show the opponent pokemons
           opponent.board.forEach((pokemon) => {
+            if (isOnBench(pokemon)) return
             const [x, y] = transformEntityCoordinates(
               pokemon.positionX,
               pokemon.positionY - 1,
@@ -921,7 +918,7 @@ export default class BoardManager {
             this.animationManager.animatePokemon(
               pokemonSprite,
               PokemonActionState.IDLE,
-              true
+              false
             )
             this.pokemons.set(pokemonSprite.id, pokemonSprite)
           })
@@ -1029,6 +1026,7 @@ export default class BoardManager {
         )
         if (!opponent) return
         opponent.board.forEach((pokemon) => {
+          if (isOnBench(pokemon)) return
           const pokemonSprite = new PokemonSprite(
             this.scene,
             portalX,
