@@ -1875,7 +1875,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         setTimeout(() => {
           this.state.simulationPaused = false
           simulation.start()
-        }, 2000) // 2 seconds for portal transition animation
+        }, 2500) // 2 seconds for portal transition animation, 500 ms for latency
       })
     }
   }
