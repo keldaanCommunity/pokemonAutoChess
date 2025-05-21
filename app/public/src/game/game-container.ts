@@ -107,7 +107,7 @@ class GameContainer {
         value === true &&
         value !== previousValue
       ) {
-        this.gameScene?.board?.removePokemonsOnBoard()
+        this.gameScene?.board?.removePokemonsOnBoard(false)
         this.gameScene?.battle?.onSimulationStart()
       }
     })
