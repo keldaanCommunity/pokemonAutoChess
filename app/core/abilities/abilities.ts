@@ -4197,8 +4197,10 @@ export class SpectralThiefStrategy extends AbilityStrategy {
       const boostAP = target.ap
 
       target.atk = target.baseAtk
+      target.speed = baseSpeed
       target.def = target.baseDef
       target.speDef = target.baseSpeDef
+      target.ap = 0
       pokemon.addAttack(boostAtk, pokemon, 0, false)
       pokemon.addDefense(boostDef, pokemon, 0, false)
       pokemon.addSpecialDefense(boostSpeDef, pokemon, 0, false)
