@@ -3422,8 +3422,8 @@
 	"bot_admin": "机器人管理员",
 	"change_name": "更改名字",
 	"invalid_username": "无效的用户名。用户名长度必须为3到24个字符，第一个字符必须为字母，且只能包含字母、数字和 . - _ 三种特殊符号，还不能含有空格。",
-	"change": "更改",
 	"username_disclaimer": "管理员有权因不当用户名将你的账户封禁。“不当”包括但不限于：侮辱性内容，黄色内容，直接或间接的威胁，政治敏感内容和与本游戏无关的广告。",
+	"change": "更改",
 	"change_avatar": "更改形象",
 	"play_more_games_hint": "玩更多游戏，赚取补充包，解锁新的形象！",
 	"berry_gained": "收获树果！",
@@ -3781,7 +3781,7 @@
 		"ROOM_EMPTY": "这个房间缺少玩家，已被自动移除。",
 		"ROOM_DELETED": "这个房间已被删除。",
 		"UNKNOWN_ERROR": "发生错误。异常代码：{{error}}"
-		},
+	},
 	"connection_status": {
 		"CONNECTION_LOST": "连接已断开。正在尝试重新连接……",
 		"CONNECTION_FAILED": "重新连接失败。请尝试刷新页面。"

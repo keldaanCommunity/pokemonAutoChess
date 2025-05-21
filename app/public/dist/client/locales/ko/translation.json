@@ -2264,7 +2264,6 @@
 		"LEEK": "대파",
 		"LARGE_LEEK": "큰 대파",
 		"SPINDA_COCKTAIL": "얼루기의 칵테일",
-		"SMOKED_FILLET": "훈제토막",
 		"SWEETS": "사탕공예",
 		"RIBBON_SWEET": "리본사탕공예",
 		"STAR_SWEET": "스타사탕공예",
@@ -2287,7 +2286,8 @@
 		"EXCHANGE_TICKET": "교환 티켓",
 		"AUSPICIOUS_ARMOR": "축복받은갑옷",
 		"MALICIOUS_ARMOR": "저주받은갑옷",
-		"RUSTED_SWORD": "녹슨검"
+		"RUSTED_SWORD": "녹슨검",
+		"SMOKED_FILLET": "훈제토막"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -2459,7 +2459,6 @@
 		"LEEK": "다음 전투에 50% CRIT_CHANCE 증가 및 스킬에 치명타 적용 가능",
 		"LARGE_LEEK": "다음 전투에 100% CRIT_POWER 증가 및 스킬에 치명타 적용 가능",
 		"SPINDA_COCKTAIL": "[LK] 무작위 효과",
-		"SMOKED_FILLET": "영구적으로 10 최대 HP 를 잃고 3 ATK 과 5 AP 를 획득",
 		"SWEETS": "영구적인 스탯 버프를 주는 사탕",
 		"RIBBON_SWEET": "영구적으로 SPE_DEF 3 증가",
 		"STAR_SWEET": "영구적으로 AP 5 증가",
@@ -2482,7 +2481,8 @@
 		"EXCHANGE_TICKET": "대기석에 있는 도구 재료 또는 완성 도구를 다른 무작위 도구로 바꾼다. 1회용",
 		"AUSPICIOUS_ARMOR": "특정 포켓몬 종을 진화시킬 수 있는 갑옷. 길조가 깃들어 있다.",
 		"MALICIOUS_ARMOR": "특정 포켓몬 종을 진화시킬 수 있는 갑옷. 흉조가 깃들어 있다.",
-		"RUSTED_SWORD": "이 검은 고대에 재앙을 막기 위해 영웅이 사용했다고 알려져 있다. 착용 시 +50% ATK. 소지자가 전투불능이 되면 가장 ATK 이 낮은 아군에게 옮겨간다."
+		"RUSTED_SWORD": "이 검은 고대에 재앙을 막기 위해 영웅이 사용했다고 알려져 있다. 착용 시 +50% ATK. 소지자가 전투불능이 되면 가장 ATK 이 낮은 아군에게 옮겨간다.",
+		"SMOKED_FILLET": "영구적으로 10 최대 HP 를 잃고 3 ATK 과 5 AP 를 획득"
 	},
 	"passive_description": {
 		"NONE": "아무런 효과가 없습니다.",
@@ -3739,8 +3739,8 @@
 		"ROOM_DELETED": "삭제된 방입니다",
 		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}"
 	},
-  "connection_status": {
-    "CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
-    "CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
-  }
+	"connection_status": {
+		"CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
+		"CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
+	}
 }
