@@ -3274,7 +3274,7 @@ export class AlolanRaichu extends Pokemon {
   hp = 220
   atk = 17
   speed = 54
-  def = 10
+  def = 7
   speDef = 10
   maxPP = 100
   range = 1
