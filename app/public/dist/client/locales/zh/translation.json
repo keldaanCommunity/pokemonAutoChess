@@ -3205,7 +3205,7 @@
 	"sort_by_index": "按序号排序",
 	"sort_by_shards": "按碎片排序",
 	"normal_emotions": "普通表情",
-	"shiny_emotions": "闪光表情",,
+	"shiny_emotions": "闪光表情",
 	"reset_emotion": "重置为默认形象",
 	"buy_booster": "花费{{cost}}碎片购买新的补充包",
 	"choose_as_avatar": "选定为玩家形象",
