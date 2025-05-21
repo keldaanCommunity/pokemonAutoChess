@@ -452,6 +452,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
 
+  [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
+
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addPP(20, pokemon, 0, false)
