@@ -12,7 +12,7 @@ You get 2x more items. For each PVE turns, you get one random item and you choos
 
 There is 8 items: Fossil Stone, Twisted Spoon, Mystic Water, Miracle Seed, Magnet, Black Glasses, Never Melt Ice, Charcoal, Heart Scale.
 
-You can combine 2 of those items to get a powerfull tier 2 item.
+You can combine 2 of those items to get a powerful tier 2 item.
 
 Fossil Stone: Give it to a Ditto to obtain a random fossil
 Twisted Spoon: +1 AP
