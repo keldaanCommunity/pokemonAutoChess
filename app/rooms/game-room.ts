@@ -513,6 +513,7 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
+    this.state.botManager.updateBots()
     this.miniGame.initialize(this.state, this)
   }
 
