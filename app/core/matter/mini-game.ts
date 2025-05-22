@@ -175,7 +175,8 @@ export class MiniGame {
                 // too poor to buy one item from kecleon's shop
                 client?.send(Transfer.NPC_DIALOG, {
                   npc: encounter,
-                  dialog: "npc_dialog.tell_price"
+                  dialog: "npc_dialog.tell_price",
+                  price: price
                 })
                 return
               } else {

@@ -3679,7 +3679,7 @@
 	"blacklisted": "You have been kicked from this match",
 	"npc_dialog": {
 		"welcome": "Welcome !",
-		"tell_price": "10 GOLD each !",
+		"tell_price": "{{price}} GOLD each !",
 		"thank_you": "THANK YOU !"
 	},
 	"scribble": {
