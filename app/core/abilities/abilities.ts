@@ -11997,7 +11997,7 @@ export class ScaleShotStrategy extends AbilityStrategy {
             for (const cell of cellsBetween) {
               if (cell.value && cell.value.team !== pokemon.team) {
                 cell.value.handleSpecialDamage(
-                  30,
+                  20,
                   board,
                   AttackType.PHYSICAL,
                   pokemon,

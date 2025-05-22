@@ -1857,7 +1857,7 @@
 		"ELECTRO_SHOT": "2초간 전기를 모아 40 AP 을 획득하고 직선으로 전류를 방출하여 [80,100,120,SP] SPECIAL 를 가한다. 날씨가 STORM 일 때 즉시 방출한다.",
 		"FLOWER_TRICK": "3초 후에 폭발하는 꽃다발을 던져 대상과 주변 적에게 [15,40,85,SP] SPECIAL 를 가한다. 유예시간 동안 대상이 입은 치명타 1회당 [15,SP] SPECIAL 를 폭발에 가산한다.",
 		"SOLAR_BLADE": "2초간 빛을 충전하여(시전자가 LIGHT 위치인 경우 즉시)  전방 부채꼴 내 적 3 포켓몬에게 [30,60,120,SP] TRUE 를 가한다.",
-		"SCALE_SHOT": "주변 적에게 [40,SP] SPECIAL 를 가하고 피격 대상과 시전자 자신에게 2초간 ARMOR_BREAK 를 가한다. 2초 후 가장 먼 적에게 비늘을 쏘아내어 [25,SP] PHYSICAL 를 경로상 모든 적에게 가한다.",
+		"SCALE_SHOT": "주변 적에게 [40,SP] SPECIAL 를 가하고 피격 대상과 시전자 자신에게 2초간 ARMOR_BREAK 를 가한다. 2초 후 가장 먼 적에게 비늘을 쏘아내어 [20,SP] PHYSICAL 를 경로상 모든 적에게 가한다.",
 		"BULLDOZE": "주변 적에게 [25,45,85,SP] SPECIAL 를 가한다. 피격 대상은 밀려나며 SPEED 가 10 감소한다.",
 		"ARMOR_CANNON": "불타는 투사체를 쏘아내어 대상에게 [70,SP] SPECIAL 를 가하고 가장 가까운 [2,SP] 적에게 튕겨 [35,SP] SPECIAL 를 가한다. 튕긴 이후 투사체는 기존 대상에게 돌아가 각각 [10,SP] SPECIAL 를 가한다.",
 		"BITTER_BLADE": "주변 적에게 [70,SP] SPECIAL 를 가한다. 피격 대상 수만큼 시전자의 최대 HP 의 10% 를 회복한다.",
