@@ -32,6 +32,7 @@ export const PositiveStatuses = [
   Status.POKERUS,
   Status.RESURECTION,
   Status.RUNE_PROTECT,
+  Status.PROTECT,
   Status.ELECTRIC_FIELD,
   Status.PSYCHIC_FIELD,
   Status.GRASS_FIELD,
