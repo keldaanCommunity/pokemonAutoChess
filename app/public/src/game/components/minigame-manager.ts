@@ -561,11 +561,15 @@ export default class MinigameManager {
     }
   }
 
-  onNpcDialog({ npc, dialog }: { npc: Pkm; dialog: string }) {
+  onNpcDialog({ npc, dialog, ...otherArgs }: { npc: Pkm; dialog: string }) {
     const villager = this.villagers.find((pkm) => pkm.name === npc)
     if (villager) {
       if (dialog) {
-        this.scene.board?.displayText(villager.x, villager.y - 10, t(dialog))
+        this.scene.board?.displayText(
+          villager.x,
+          villager.y - 10,
+          t(dialog, otherArgs)
+        )
       } else {
         villager.emoteAnimation()
       }
