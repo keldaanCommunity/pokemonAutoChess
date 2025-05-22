@@ -535,7 +535,7 @@ export default class BoardManager {
     // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
-    if (!phaseChanged) this.removePokemonsOnBoard(false) // remove immediately board sprites if arriving in battle mode
+    if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
@@ -558,9 +558,9 @@ export default class BoardManager {
     }, 0) // need to wait for next event loop for state to be up to date
   }
 
-  removePokemonsOnBoard(includingBench: boolean = false) {
+  removePokemonsOnBoard() {
     this.pokemons.forEach((pokemon) => {
-      if (includingBench === true || !isOnBench(pokemon)) {
+      if (!isOnBench(pokemon)) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -597,7 +597,7 @@ export default class BoardManager {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
     this.hideLightCell()
     this.hideBerryTrees()
-    this.removePokemonsOnBoard(true)
+    this.removePokemonsOnBoard()
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
