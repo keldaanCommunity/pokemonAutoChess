@@ -146,7 +146,8 @@ export default config({
               "https://www.penumbra-autochess.com",
               "https://pokechess.com.br",
               "https://uruwhy.online",
-              "https://koala-pac.com"
+              "https://koala-pac.com",
+              "https://pokev9.52kx.net"
             ],
             scriptSrc: [
               "'self'",
