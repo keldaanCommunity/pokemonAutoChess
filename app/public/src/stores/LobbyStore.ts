@@ -13,14 +13,14 @@ import {
   IChatV2,
   IGameMetadata,
   IPreparationMetadata,
-  ISuggestionUser,
-  PkmWithCustom
+  ISuggestionUser
 } from "../../../types"
 import { Language } from "../../../types/enum/Language"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../../../types/interfaces/LeaderboardInfo"
+import type { Booster } from "../../../types/Booster"
 
 export interface IUserLobbyState {
   messages: IChatV2[]
@@ -33,7 +33,7 @@ export interface IUserLobbyState {
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
   pokemonCollection: IPokemonCollectionItem[]
-  boosterContent: PkmWithCustom[]
+  boosterContent: Booster
   suggestions: ISuggestionUser[]
   language: Language
   tournaments: TournamentSchema[]
@@ -134,7 +134,7 @@ export const lobbySlice = createSlice({
       state.searchedUser = action.payload
       state.suggestions = []
     },
-    setBoosterContent: (state, action: PayloadAction<PkmWithCustom[]>) => {
+    setBoosterContent: (state, action: PayloadAction<Booster>) => {
       state.boosterContent = action.payload
     },
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {

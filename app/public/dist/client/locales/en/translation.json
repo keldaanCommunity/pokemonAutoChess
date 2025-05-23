@@ -3231,6 +3231,7 @@
 	"lose_game_hint": "You lose the game when you have no more Health Points",
 	"unlock": "Unlock",
 	"lock": "Lock",
+	"new": "NEW !",
 	"current_shop_for_next_turn": "current shop for next turn",
 	"leave_game": "Leave game",
 	"leave_room": "Leave room",
