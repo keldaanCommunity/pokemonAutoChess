@@ -861,17 +861,6 @@ export default class GameRoom extends Room<GameState> {
         player.titles.add(Title.NATURAL)
       }
 
-      if (usr.titles === undefined) {
-        usr.titles = []
-      }
-
-      player.titles.forEach((t) => {
-        if (!usr.titles.includes(t)) {
-          //logger.info("title added ", t)
-          usr.titles.push(t)
-        }
-      })
-
       // update all pokemons played count
       player.pokemonsPlayed.forEach((pkm) => {
         const index = PkmIndex[pkm]
@@ -890,6 +879,24 @@ export default class GameRoom extends Room<GameState> {
             played: 1
           }
           usr.pokemonCollection.set(index, newConfig)
+        }
+      })
+
+      if (player.titles.has(Title.COLLECTOR) === false && Object.values(PkmIndex).every((pkmIndex) => {
+        const pokemonCollectionItem = usr.pokemonCollection.get(pkmIndex)
+        return pokemonCollectionItem && pokemonCollectionItem.played > 0
+      })) {
+        player.titles.add(Title.COLLECTOR)
+      }
+
+      if (usr.titles === undefined) {
+        usr.titles = []
+      }
+
+      player.titles.forEach((t) => {
+        if (!usr.titles.includes(t)) {
+          //logger.info("title added ", t)
+          usr.titles.push(t)
         }
       })
 
