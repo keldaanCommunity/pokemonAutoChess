@@ -24,10 +24,11 @@
 
 .pokemon-collection-item > p {
   text-align: center;
-  line-height: 1em;
   border-radius: 0 0 8px 8px;
   font-weight: 500;
-  font-size: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pokemon-collection-item p > * {
@@ -39,9 +40,11 @@
   color: black;
 }
 
-.pokemon-collection-item p > img {
+.pokemon-collection-item .dust > img {
   width: 20px;
   height: 20px;
   image-rendering: pixelated;
-  margin-left: 0.5em;
+  margin: 2px 2px 2px calc(2px + 0.25em);
+  border-radius: 50%;
+  border: 1px solid black;
 }

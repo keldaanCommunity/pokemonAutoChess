@@ -35,7 +35,8 @@ export default function UnownPanel(props: {
           shinyEmotions: [] as Emotion[],
           selectedEmotion: Emotion.NORMAL,
           selectedShiny: false,
-          id: PkmIndex[pkm]
+          id: PkmIndex[pkm],
+          played: 0
         }
         const { emotions, shinyEmotions } = config
         const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0

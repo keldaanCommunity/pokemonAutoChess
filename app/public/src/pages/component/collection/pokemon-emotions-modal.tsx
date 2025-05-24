@@ -46,13 +46,14 @@ export default function PokemonEmotionsModal(props: {
     AnimationConfig[props.pokemon]?.shinyUnavailable !== true
 
   const pConfig = useMemo(() => {
-    const foundPokemon = pokemonCollection.get(index) ?? {
+    const foundPokemon: IPokemonCollectionItem = pokemonCollection.get(index) ?? {
       dust: 0,
       emotions: [],
       shinyEmotions: [],
       selectedEmotion: Emotion.NORMAL,
       selectedShiny: false,
-      id: "0000"
+      id: "0000",
+      played: 0
     }
 
     return foundPokemon
@@ -90,15 +91,15 @@ export default function PokemonEmotionsModal(props: {
           )}
           className={cc({ unlocked: pConfig != null })}
         />
-        <h2>{t(`pkm.${props.pokemon}`)}</h2>
+        <h2>{t(`pkm.${props.pokemon}`)} #{PkmIndex[props.pokemon]} - {t("played_times", { count: pConfig.played })}</h2>
         <div className="spacer" />
         <p className="dust">
-          {pConfig.dust} {t("shards")}{" "}
           <img
             src={getPortraitSrc(index)}
             className="dust"
             alt="dust"
           />
+          {pConfig.dust} {t("shards")}{" "}
         </p>
       </>}
       body={<>

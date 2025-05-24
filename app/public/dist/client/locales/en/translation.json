@@ -3149,6 +3149,7 @@
 	"players_other": "{{count}} players",
 	"online": "Online",
 	"shards": "shards",
+	"played_times": "Played {{count}} times",
 	"boosters_hint": "Play more games to level up and earn new boosters.",
 	"open_boosters_hint": "Open boosters to unlock new avatars and complete your collection !",
 	"open_booster": "Open a Booster",

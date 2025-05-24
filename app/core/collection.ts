@@ -75,7 +75,8 @@ export function acquireBoosterCard(collection: Map<string, IPokemonCollectionIte
             shinyEmotions: [],
             dust: 0,
             selectedEmotion: Emotion.NORMAL,
-            selectedShiny: false
+            selectedShiny: false,
+            played: 0
         })
     }
 

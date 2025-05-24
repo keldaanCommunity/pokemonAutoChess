@@ -339,7 +339,8 @@ export class OpenBoosterCommand extends Command<
             emotions: mongoPokemonCollectionItem.emotions.slice(),
             shinyEmotions: mongoPokemonCollectionItem.shinyEmotions.slice(),
             selectedEmotion: mongoPokemonCollectionItem.selectedEmotion,
-            selectedShiny: mongoPokemonCollectionItem.selectedShiny
+            selectedShiny: mongoPokemonCollectionItem.selectedShiny,
+            played: mongoPokemonCollectionItem.played
           }
           user.pokemonCollection.set(index, newConfig)
         }

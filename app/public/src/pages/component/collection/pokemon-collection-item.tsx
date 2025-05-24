@@ -35,7 +35,7 @@ export default function PokemonCollectionItem(props: {
   const availableEmotions = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
   )
-
+  const played = props.config?.played ?? 0
   const rarity = getPokemonData(props.name).rarity
   const boosterCost = BoosterPriceByRarity[rarity]
   if (props.refundableOnly && dust < boosterCost) return null
@@ -70,7 +70,7 @@ export default function PokemonCollectionItem(props: {
         )}
         loading="lazy"
       />
-      <p>
+      <p className="dust">
         <span>{props.config ? props.config.dust : 0}</span>
         <img
           src={getPortraitSrc(props.index)}
