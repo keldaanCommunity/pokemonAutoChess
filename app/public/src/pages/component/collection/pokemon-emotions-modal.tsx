@@ -91,7 +91,7 @@ export default function PokemonEmotionsModal(props: {
           )}
           className={cc({ unlocked: pConfig != null })}
         />
-        <h2>{t(`pkm.${props.pokemon}`)} #{PkmIndex[props.pokemon]} - {t("played_times", { count: pConfig.played })}</h2>
+        <h2>{t(`pkm.${props.pokemon}`)} #{PkmIndex[props.pokemon]} - {t("played_times", { count: pConfig.played ?? 0 })}</h2>
         <div className="spacer" />
         <p className="dust">
           <img

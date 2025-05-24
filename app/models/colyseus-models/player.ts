@@ -124,6 +124,7 @@ export default class Player extends Schema implements IPlayer {
   firstPartner: Pkm | undefined
   hasLeftGame: boolean = false
   bonusSynergies: Map<Synergy, number> = new Map<Synergy, number>()
+  pokemonsPlayed: Set<Pkm> = new Set<Pkm>()
 
   constructor(
     id: string,
@@ -285,6 +286,7 @@ export default class Player extends Schema implements IPlayer {
     newPokemon.onAcquired(this)
     this.updateSynergies()
     carryOverPermanentStats(newPokemon, [pokemon])
+    this.pokemonsPlayed.add(newPokemon.name)
     return newPokemon
   }
 
@@ -581,6 +583,12 @@ export default class Player extends Schema implements IPlayer {
       if (pokemonsReactingToLight.includes(pokemon.name)) {
         pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, this)
       }
+    })
+  }
+
+  registerPlayedPokemons() {
+    this.board.forEach((pokemon) => {
+      this.pokemonsPlayed.add(pokemon.name)
     })
   }
 }

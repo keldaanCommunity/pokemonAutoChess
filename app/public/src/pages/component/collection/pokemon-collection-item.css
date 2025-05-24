@@ -29,15 +29,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 .pokemon-collection-item p > * {
   vertical-align: middle;
-  color: white;
-}
-
-.pokemon-collection-item.unlockable p {
-  color: black;
 }
 
 .pokemon-collection-item .dust > img {

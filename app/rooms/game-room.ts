@@ -52,6 +52,7 @@ import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
+  PkmIndex,
   PkmProposition,
   PkmRegionalVariants
 } from "../types/enum/Pokemon"
@@ -870,6 +871,28 @@ export default class GameRoom extends Room<GameState> {
           usr.titles.push(t)
         }
       })
+
+      // update all pokemons played count
+      player.pokemonsPlayed.forEach((pkm) => {
+        const index = PkmIndex[pkm]
+        const pokemonCollectionItem = usr.pokemonCollection.get(index)
+        if (pokemonCollectionItem) {
+          pokemonCollectionItem.played = pokemonCollectionItem.played + 1
+          usr.markModified(`pokemonCollection.${index}.played`)
+        } else {
+          const newConfig: IPokemonCollectionItem = {
+            dust: 0,
+            id: index,
+            emotions: [],
+            shinyEmotions: [],
+            selectedEmotion: null,
+            selectedShiny: false,
+            played: 1
+          }
+          usr.pokemonCollection.set(index, newConfig)
+        }
+      })
+
       //logger.debug(usr);
       //usr.markModified('metadata');
       usr.save()

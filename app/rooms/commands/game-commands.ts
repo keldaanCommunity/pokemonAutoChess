@@ -224,7 +224,8 @@ export class OnPokemonCatchCommand extends Command<
               shinyEmotions: [],
               dust: DUST_PER_ENCOUNTER,
               selectedEmotion: Emotion.NORMAL,
-              selectedShiny: false
+              selectedShiny: false,
+              played: 0
             })
           }
           u.save()
@@ -1773,6 +1774,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.time = FIGHTING_PHASE_DURATION
     this.state.roundTime = Math.round(this.state.time / 1000)
     updateLobby(this.room)
+    this.state.players.forEach((player: Player) => {
+      if (player.alive) {
+        player.registerPlayedPokemons()
+      }
+    })
 
     const pveStage = PVEStages[this.state.stageLevel]
     if (pveStage) {

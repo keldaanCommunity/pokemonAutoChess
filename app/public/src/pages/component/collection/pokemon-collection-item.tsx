@@ -14,8 +14,6 @@ export default function PokemonCollectionItem(props: {
   index: string
   config: IPokemonCollectionItem | undefined
   filter: string
-  shinyOnly: boolean
-  refundableOnly: boolean
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
   if (
@@ -31,23 +29,27 @@ export default function PokemonCollectionItem(props: {
     shinyEmotions: [] as Emotion[]
   }
   const isUnlocked =
-    (!props.shinyOnly && emotions?.length > 0) || shinyEmotions?.length > 0
+    props.filter === "pokedex" ? (props.config?.played ?? 0) > 0
+      : props.filter === "shiny" ? shinyEmotions?.length > 0
+        : emotions?.length > 0 || shinyEmotions?.length > 0
+
+
   const availableEmotions = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
   )
-  const played = props.config?.played ?? 0
   const rarity = getPokemonData(props.name).rarity
   const boosterCost = BoosterPriceByRarity[rarity]
-  if (props.refundableOnly && dust < boosterCost) return null
+  if (props.filter === "refundable" && dust < boosterCost) return null
 
-  const canUnlock = availableEmotions.some(
+  const canUnlock = props.filter !== "pokedex" && availableEmotions.some(
     (e) =>
       (emotions.includes(e) === false &&
         dust >= getEmotionCost(e, false) &&
-        !props.shinyOnly) ||
+        props.filter !== "shiny") ||
       (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true))
   )
 
+  if (props.filter === "shiny" && (isUnlocked || !canUnlock)) return null
   if (props.filter === "unlocked" && !isUnlocked) return null
   if (props.filter === "unlockable" && !canUnlock) return null
   if (props.filter === "locked" && isUnlocked) return null
@@ -70,12 +72,12 @@ export default function PokemonCollectionItem(props: {
         )}
         loading="lazy"
       />
-      <p className="dust">
+      {props.filter === "pokedex" ? <p>{props.config?.played ?? 0}</p> : <p className="dust">
         <span>{props.config ? props.config.dust : 0}</span>
         <img
           src={getPortraitSrc(props.index)}
         />
-      </p>
+      </p>}
     </div>
   )
 }

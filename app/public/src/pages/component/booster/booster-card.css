@@ -158,6 +158,7 @@
   margin: 0 0.5em;
   image-rendering: pixelated;
   border-radius: 50%;
+  border: 1px solid black;
 }
 
 .booster-card .new {

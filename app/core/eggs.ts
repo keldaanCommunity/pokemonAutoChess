@@ -39,6 +39,7 @@ export function giveRandomEgg(player: Player, shiny = false): Egg | undefined {
     egg.positionX = x
     egg.positionY = 0
     player.board.set(egg.id, egg)
+    player.pokemonsPlayed.add(Pkm.EGG)
     return egg
   }
 }

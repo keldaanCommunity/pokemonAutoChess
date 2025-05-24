@@ -10,11 +10,13 @@
 
 # UI
 
+- Simplified the collection system UI. Added counters for portraits unlocked, shinies unlocked, and pokémons played.
+
 # Collection system rework
 
 - Booster now immediately unlocks the emote you get from the card. Some emotions are rarer than others. If you draw an emote you already unlocked, you get 50 shards instead (250 if shiny).
 - Shiny rate in boosters is increased: 3% → 5%
-- Your collection now displays the number of times you've played each Pokémon. If a Pokémon has never been played, its portrait is a dark silhouette. This count is not retroactive, every player starts with an empty pokédex as of this patch.
+- Your collection now displays the number of times you've played each Pokémon. This count is not retroactive, every player starts with an empty pokédex as of this patch.
 
 
 # Bugfix

@@ -3157,7 +3157,7 @@
 	"type_here": "이곳에 입력하세요 ...",
 	"send_message": "메세지 전송",
 	"shiny_hunter": "이로치만 보기",
-	"refundable": "환불 가능",
+	"show_refundable": "환불 가능",
 	"show_all": "모두 보기",
 	"show_locked": "잠겨진 감정표현만 보기",
 	"show_unlockable": "해금가능한 감정표현만 보기",
