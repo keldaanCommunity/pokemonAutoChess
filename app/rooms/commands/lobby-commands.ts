@@ -566,11 +566,10 @@ export class BuyEmotionCommand extends Command<
       }
 
       if (!mongoUser.titles.includes(Title.DUKE)) {
-        let countProfile = 0
-        mongoUser.pokemonCollection.forEach((c) => {
-          countProfile += c.emotions.length + c.shinyEmotions.length
-        })
-        if (countProfile >= 30) {
+        if (Object.values(Pkm).filter((p) => p !== Pkm.DEFAULT).every(pkm => {
+          const collectionItem = mongoUser.pokemonCollection.get(PkmIndex[pkm])
+          return collectionItem && (collectionItem.emotions.length > 0 || collectionItem.shinyEmotions.length > 0)
+        })) {
           mongoUser.titles.push(Title.DUKE)
         }
       }
