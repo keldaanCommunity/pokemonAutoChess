@@ -683,7 +683,7 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
-  setLifeBar(pokemon: IPokemonEntity, scene: Phaser.Scene) {
+  setLifeBar(pokemon: IPokemonEntity, scene: GameScene | DebugScene) {
     if (pokemon.life !== undefined) {
       this.lifebar = new Lifebar(
         scene,
