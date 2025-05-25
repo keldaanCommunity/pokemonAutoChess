@@ -522,11 +522,11 @@ export default class BoardManager {
   }
 
   updateAvatarLife(playerId: string, value: number) {
-    if (this.playerAvatar && this.player.id === playerId) {
+    if (this.playerAvatar && this.playerAvatar.scene && this.player.id === playerId) {
       this.playerAvatar.updateLife(value)
     }
 
-    if (this.opponentAvatar && this.opponentAvatar.playerId === playerId) {
+    if (this.opponentAvatar && this.opponentAvatar.scene && this.opponentAvatar.playerId === playerId) {
       this.opponentAvatar.updateLife(value)
     }
   }
