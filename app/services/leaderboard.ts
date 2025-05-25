@@ -73,6 +73,7 @@ export async function fetchBotsLeaderboard() {
       author: bot.author
     })
   })
+  botLeaderboard.sort((a, b) => b.value - a.value)
   return botLeaderboard
 }
 
