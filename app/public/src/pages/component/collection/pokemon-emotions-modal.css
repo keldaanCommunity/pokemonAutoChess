@@ -24,6 +24,7 @@
 
 .pokemon-emotions-modal header > h2 {
   margin: 0;
+  text-transform: none;
 }
 
 .pokemon-emotions-modal header .dust {
@@ -42,6 +43,16 @@
 
 .pokemon-emotions-modal img.dust {
   border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  margin: 2px;
+}
+
+.pokemon-emotions-modal .bubbly img.dust {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0;
 }
 
 .pokemon-emotions-modal .modal-body {

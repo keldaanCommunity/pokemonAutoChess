@@ -27,6 +27,7 @@ export interface IPokemonCollectionItem {
   selectedEmotion: Emotion | null
   selectedShiny: boolean
   id: string
+  played: number
 }
 
 const userMetadataSchema = new Schema({
@@ -109,6 +110,10 @@ const userMetadataSchema = new Schema({
       },
       id: {
         type: String
+      },
+      played: {
+        type: Number,
+        default: 0
       }
     }
   }

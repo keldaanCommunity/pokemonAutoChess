@@ -52,6 +52,7 @@ import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
+  PkmIndex,
   PkmProposition,
   PkmRegionalVariants
 } from "../types/enum/Pokemon"
@@ -860,6 +861,34 @@ export default class GameRoom extends Room<GameState> {
         player.titles.add(Title.NATURAL)
       }
 
+      // update all pokemons played count
+      player.pokemonsPlayed.forEach((pkm) => {
+        const index = PkmIndex[pkm]
+        const pokemonCollectionItem = usr.pokemonCollection.get(index)
+        if (pokemonCollectionItem) {
+          pokemonCollectionItem.played = pokemonCollectionItem.played + 1
+          usr.markModified(`pokemonCollection.${index}.played`)
+        } else {
+          const newConfig: IPokemonCollectionItem = {
+            dust: 0,
+            id: index,
+            emotions: [],
+            shinyEmotions: [],
+            selectedEmotion: null,
+            selectedShiny: false,
+            played: 1
+          }
+          usr.pokemonCollection.set(index, newConfig)
+        }
+      })
+
+      if (player.titles.has(Title.COLLECTOR) === false && Object.values(PkmIndex).every((pkmIndex) => {
+        const pokemonCollectionItem = usr.pokemonCollection.get(pkmIndex)
+        return pokemonCollectionItem && pokemonCollectionItem.played > 0
+      })) {
+        player.titles.add(Title.COLLECTOR)
+      }
+
       if (usr.titles === undefined) {
         usr.titles = []
       }
@@ -870,6 +899,7 @@ export default class GameRoom extends Room<GameState> {
           usr.titles.push(t)
         }
       })
+
       //logger.debug(usr);
       //usr.markModified('metadata');
       usr.save()

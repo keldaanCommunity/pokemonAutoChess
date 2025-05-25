@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { Client, Room, matchMaker } from "colyseus"
+import { Client, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
 import { writeHeapSnapshot } from "v8"
 import {
@@ -7,6 +7,7 @@ import {
   getTournamentStage,
   makeBrackets
 } from "../../core/tournament-logic"
+import { acquireBoosterCard, createBooster } from "../../core/collection"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema
@@ -16,16 +17,13 @@ import UserMetadata, {
   IPokemonCollectionItem,
   IUserMetadata
 } from "../../models/mongo-models/user-metadata"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import { discordService } from "../../services/discord"
 import {
   CDN_PORTRAIT_URL,
   Emotion,
   IPlayer,
   ISuggestionUser,
-  PkmWithCustom,
   Role,
   Title,
   Transfer,
@@ -33,27 +31,22 @@ import {
 } from "../../types"
 import {
   BoosterPriceByRarity,
-  BoosterRarityProbability,
-  DUST_PER_BOOSTER,
-  DUST_PER_SHINY,
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
   getEmotionCost
 } from "../../types/Config"
-import { Ability } from "../../types/enum/Ability"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
-import { GameMode, Rarity } from "../../types/enum/Game"
+import { GameMode } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
 import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
-import { sum } from "../../utils/array"
 import { getPortraitSrc } from "../../utils/avatar"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { cleanProfanity } from "../../utils/profanity-filter"
-import { chance, pickRandomIn } from "../../utils/random"
+import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
 
@@ -322,32 +315,9 @@ export class OpenBoosterCommand extends Command<
       )
       if (!mongoUser) return
 
-      const NB_PER_BOOSTER = 10
-      const boosterContent: PkmWithCustom[] = []
-
-      for (let i = 0; i < NB_PER_BOOSTER; i++) {
-        const guaranteedUnique = i === NB_PER_BOOSTER - 1
-        boosterContent.push(pickRandomPokemonBooster(guaranteedUnique))
-      }
-
-      boosterContent.forEach((pkmWithCustom) => {
-        const index = PkmIndex[pkmWithCustom.name]
-        const mongoPokemonCollectionItem =
-          mongoUser.pokemonCollection.get(index)
-        const dustGain = pkmWithCustom.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
-
-        if (mongoPokemonCollectionItem) {
-          mongoPokemonCollectionItem.dust += dustGain
-        } else {
-          mongoUser.pokemonCollection.set(index, {
-            id: index,
-            emotions: [],
-            shinyEmotions: [],
-            dust: dustGain,
-            selectedEmotion: Emotion.NORMAL,
-            selectedShiny: false
-          })
-        }
+      const boosterContent = createBooster(mongoUser)
+      boosterContent.forEach((card) => {
+        acquireBoosterCard(mongoUser.pokemonCollection, card)
       })
 
       mongoUser.save()
@@ -366,12 +336,11 @@ export class OpenBoosterCommand extends Command<
           const newConfig: IPokemonCollectionItem = {
             dust: mongoPokemonCollectionItem.dust,
             id: mongoPokemonCollectionItem.id,
-            emotions: mongoPokemonCollectionItem.emotions.map((e) => e),
-            shinyEmotions: mongoPokemonCollectionItem.shinyEmotions.map(
-              (e) => e
-            ),
+            emotions: mongoPokemonCollectionItem.emotions.slice(),
+            shinyEmotions: mongoPokemonCollectionItem.shinyEmotions.slice(),
             selectedEmotion: mongoPokemonCollectionItem.selectedEmotion,
-            selectedShiny: mongoPokemonCollectionItem.selectedShiny
+            selectedShiny: mongoPokemonCollectionItem.selectedShiny,
+            played: mongoPokemonCollectionItem.played
           }
           user.pokemonCollection.set(index, newConfig)
         }
@@ -385,47 +354,7 @@ export class OpenBoosterCommand extends Command<
   }
 }
 
-function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithCustom {
-  let pkm = Pkm.MAGIKARP,
-    emotion = Emotion.NORMAL
-  const shiny = chance(0.03)
-  const rarities = Object.keys(Rarity) as Rarity[]
-  const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
-  let threshold = 0
 
-  if (guarantedUnique) {
-    pkm = pickRandomIn([
-      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
-      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
-    ]) as Pkm
-  } else {
-    for (let i = 0; i < rarities.length; i++) {
-      const rarity = rarities[i]
-      const rarityProbability = BoosterRarityProbability[rarity]
-      threshold += rarityProbability
-      if (seed < threshold) {
-        const candidates: Pkm[] = (
-          PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
-        ).filter(
-          (p) =>
-            Unowns.includes(p) === false &&
-            getPokemonData(p).skill !== Ability.DEFAULT
-        )
-        if (candidates.length > 0) {
-          pkm = pickRandomIn(candidates) as Pkm
-          break
-        }
-      }
-    }
-  }
-
-  const availableEmotions = Object.values(Emotion).filter(
-    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[PkmIndex[pkm]]?.[i] === 1
-  )
-  emotion = pickRandomIn(availableEmotions)
-
-  return { name: pkm, shiny, emotion }
-}
 
 export class ChangeNameCommand extends Command<
   CustomLobbyRoom,
@@ -637,11 +566,10 @@ export class BuyEmotionCommand extends Command<
       }
 
       if (!mongoUser.titles.includes(Title.DUKE)) {
-        let countProfile = 0
-        mongoUser.pokemonCollection.forEach((c) => {
-          countProfile += c.emotions.length + c.shinyEmotions.length
-        })
-        if (countProfile >= 30) {
+        if (Object.values(Pkm).filter((p) => p !== Pkm.DEFAULT).every(pkm => {
+          const collectionItem = mongoUser.pokemonCollection.get(PkmIndex[pkm])
+          return collectionItem && (collectionItem.emotions.length > 0 || collectionItem.shinyEmotions.length > 0)
+        })) {
           mongoUser.titles.push(Title.DUKE)
         }
       }
@@ -674,9 +602,9 @@ export class BuyEmotionCommand extends Command<
       if (
         !mongoUser.titles.includes(Title.DUCHESS) &&
         mongoPokemonCollectionItem.shinyEmotions.length >=
-          Object.keys(Emotion).length &&
+        Object.keys(Emotion).length &&
         mongoPokemonCollectionItem.emotions.length >=
-          Object.keys(Emotion).length
+        Object.keys(Emotion).length
       ) {
         mongoUser.titles.push(Title.DUCHESS)
       }

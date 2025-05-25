@@ -4,7 +4,7 @@
   transition: all 1s ease-out;
   transform: translateX(-50%);
   height: 40%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 7 / 10;
   animation: 1s ease-in-out distribute;
   animation-fill-mode: forwards;
   transform-style: preserve-3d;
@@ -40,7 +40,6 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  transition: all 100ms ease-out;
 }
 
 .booster-card .back {
@@ -142,15 +141,45 @@
 .booster-card .name {
   text-align: center;
   background-color: #4f5160;
-  text-transform: capitalize;
-  font-variant: small-caps;
-  padding: 0.25em 0.5em;
-  margin: 0 -5px 4px -5px;
+  font-weight: bold;
+  margin: 0px -5px 4px -5px;
   font-size: 1em;
+  padding: 4px 5px 2px 5px;
   box-shadow: 0 0.1em 0.25em rgb(0 0 0 / 50%);
-  line-height: 1;
 }
 
 .booster-card.shiny .name {
   color: gold;
+}
+
+.booster-card img.dust {
+  width: 40px;
+  height: 40px;
+  margin: 0 0.5em;
+  image-rendering: pixelated;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.booster-card .new {
+  background: linear-gradient(45deg, #fff 20%, gold 40%, gold 60%, #fff 80%);
+  background-size: 200% auto;
+
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 1s linear infinite;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+@keyframes shine {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: 200% center;
+  }
 }

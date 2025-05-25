@@ -1,33 +1,39 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { PkmWithCustom } from "../../../../../types"
-import { RarityColor } from "../../../../../types/Config"
+import { DUST_PER_BOOSTER, DUST_PER_SHINY, RarityColor } from "../../../../../types/Config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
+import { useAppSelector } from "../../../hooks"
+import { hasUnlocked } from "../../../../../core/collection"
+import { BoosterCard } from "../../../../../types/Booster"
 import "./booster-card.css"
 
 interface BoosterCardProps {
-  pkm: PkmWithCustom
-  shards: number
+  card: BoosterCard
   flipped: boolean
   onFlip: () => void
 }
 
-export function BoosterCard({ pkm, shards, flipped, onFlip }: BoosterCardProps) {
+export function BoosterCard({ card, flipped, onFlip }: BoosterCardProps) {
   const { t } = useTranslation()
-  const pokemonData = getPokemonData(pkm.name)
+  const pokemonData = getPokemonData(card.name)
   const style = {
     "--rarity-color": RarityColor[pokemonData.rarity]
   } as React.CSSProperties
+
+  const pokemonCollection = useAppSelector(
+    (state) => state.network.profile?.pokemonCollection
+  )
+  const hasUnlockedCard = pokemonCollection != null && hasUnlocked(pokemonCollection, card)
 
   return (
     <div
       className={cc(
         "booster-card",
         "rarity-" + pokemonData.rarity.toLowerCase(),
-        { shiny: pkm.shiny || false, flipped }
+        { shiny: card.shiny || false, flipped }
       )}
       style={style}
       onClick={onFlip}
@@ -35,21 +41,35 @@ export function BoosterCard({ pkm, shards, flipped, onFlip }: BoosterCardProps) 
       <div className="back">
         <img src="/assets/ui/pokecard.png" />
       </div>
-      <div className={cc("front", { shimmer: !!pkm.shiny })}>
+      <div className={cc("front", { shimmer: card.shiny })}>
         <img
           src={getPortraitSrc(
-            PkmIndex[pkm.name],
-            pkm.shiny,
-            pkm.emotion
+            PkmIndex[card.name],
+            card.shiny,
+            card.emotion
           )}
         ></img>
         <div className="front-text">
-          <p className="name">{t(`pkm.${pkm.name}`)}</p>
-          <p>
-            {shards} {t("shards")}
+          <p className="name">{t(`pkm.${card.name}`)}
+            <br /> <span style={{ fontWeight: 'normal' }}>{t(`emotion.${card.emotion}`)}</span>
           </p>
+          {card.new
+            ? <p className={cc({ new: hasUnlockedCard })}>{t("new")}</p>
+            : <p className="dust">
+              +{card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER} {t("shards")}{" "}
+              <img
+                src={getPortraitSrc(
+                  PkmIndex[card.name],
+                  card.shiny,
+                  card.emotion
+                )}
+                className="dust"
+                alt="dust"
+              />
+            </p>
+          }
         </div>
       </div>
-    </div>
+    </div >
   )
 }
