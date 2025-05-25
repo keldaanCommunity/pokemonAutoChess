@@ -38,6 +38,8 @@ function BotsList(props: { approved?: boolean }) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [bots, setBots] = useState<IBotLight[] | null>(null)
+  const [sortColumn, setSortColumn] = useState<string>("")
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
 
   useEffect(() => {
     // Initialize Firebase
@@ -84,6 +86,41 @@ function BotsList(props: { approved?: boolean }) {
     } else alert(res.statusText)
   }
 
+  function handleSort(column: string) {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+    } else {
+      setSortColumn(column)
+      setSortDirection("asc")
+    }
+  }
+
+  function getSortedBots(bots: IBotLight[]) {
+    if (!sortColumn) return bots
+    const sorted = [...bots].sort((a, b) => {
+      let aValue = a[sortColumn as keyof IBotLight]
+      let bValue = b[sortColumn as keyof IBotLight]
+      // Special handling for name (translated), elo (number), and avatar (string)
+      if (sortColumn === "name") {
+        aValue = t(`pkm.${a.name}`)
+        bValue = t(`pkm.${b.name}`)
+      }
+      if (sortColumn === "elo") {
+        aValue = Number(a.elo)
+        bValue = Number(b.elo)
+      }
+      if (aValue === undefined || bValue === undefined) return 0
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        const cmp = aValue.localeCompare(bValue)
+        return sortDirection === "asc" ? cmp : -cmp
+      }
+      if (aValue < bValue) return sortDirection === "asc" ? -1 : 1
+      if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
+      return 0
+    })
+    return sorted
+  }
+
   return (
     <main id="bots-list" className="my-container">
       {bots === null ? (
@@ -92,18 +129,34 @@ function BotsList(props: { approved?: boolean }) {
         <table>
           <thead>
             <tr>
-              <th>Avatar</th>
-              <th>Name</th>
-              <th>Author</th>
-              <th>Elo</th>
-              <th>UID</th>
-              <th>Validity</th>
-              <th>Approved</th>
+              <th onClick={() => handleSort("avatar")} style={{ cursor: "pointer" }}>
+                Avatar {sortColumn === "avatar" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
+              <th onClick={() => handleSort("name")} style={{ cursor: "pointer" }}>
+                Name {sortColumn === "name" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
+              <th onClick={() => handleSort("author")} style={{ cursor: "pointer" }}>
+                Author {sortColumn === "author" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
+              <th onClick={() => handleSort("elo")} style={{ cursor: "pointer" }}>
+                Elo {sortColumn === "elo" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
+              <th onClick={() => handleSort("id")} style={{ cursor: "pointer" }}>
+                UID {sortColumn === "id" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
+              <th onClick={() => handleSort("valid")} style={{ cursor: "pointer" }}>
+                Validity {sortColumn === "valid" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
+              <th onClick={() => handleSort("approved")} style={{ cursor: "pointer" }}>
+                Approved {sortColumn === "approved" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+              </th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {bots.filter(b => props.approved === undefined || b.approved === props.approved).map((b) => (
+            {getSortedBots(
+              bots.filter(b => props.approved === undefined || b.approved === props.approved)
+            ).map((b) => (
               <tr key={b.id}>
                 <td>
                   <PokemonPortrait avatar={b.avatar} />
