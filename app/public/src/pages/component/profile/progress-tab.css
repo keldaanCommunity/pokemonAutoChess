@@ -1,0 +1,22 @@
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  margin: 0.5em 0;
+}
+
+.progress-box {
+  display: grid;
+  aspect-ratio: 1;
+  place-content: center;
+  text-align: center;
+  padding: 1em;
+  border: var(--border-thin);
+  border-radius: 12px;
+  position: relative;
+  box-sizing: border-box;
+  background: conic-gradient(
+    var(--color-bg-accent) var(--pc),
+    var(--color-bg-primary) 0
+  );
+}

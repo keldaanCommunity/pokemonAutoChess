@@ -1415,7 +1415,7 @@
 	"search_pokemon": "ค้นหาสำหรับโปเกมอน",
 	"search_player": "ค้นหาโดยชื่อผู้เล่น...",
 	"team_builder": "จัดการแผน",
-	"titles_unlocked": "ปลดล็อคฉายา",
+	"titles_unlocked": "{{count}}/{{total}} ปลดล็อคฉายา",
 	"game-reconnect-modal-title": "เชื่อมต่ออีกครั้ง",
 	"game-reconnect-modal-body": "คุณได้ออกจากเกมล่าสุดมา ต้องการเชื่อมต่ออีกครั้งหรือไม่ ?",
 	"toggle_locked": "สลับการล็อค",
@@ -1429,7 +1429,7 @@
 	"key_desc_avatar_show_emote": "ใช้งานอีโมท",
 	"jukebox": "เลือกเพลง",
 	"gadgets": "อุปกรณ์เสริม",
-	"gadgets_unlocked": "ปลดล็อค : อุปกรณ์เสริม",
+	"gadgets_unlocked": "{{count}}/{{total}} ปลดล็อค : อุปกรณ์เสริม",
 	"gadget": {
 		"trainer_card": "บัตรประจำตัวเทรนเนอร์",
 		"trainer_card_desc": "อนุญาตให้เปลี่ยนชื่อและอวาตาร์ของคุณในเซิฟเวอร์ได้",

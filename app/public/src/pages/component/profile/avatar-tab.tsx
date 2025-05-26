@@ -7,6 +7,7 @@ import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonPortrait from "../pokemon-portrait"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
+import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
 
 export function AvatarTab() {
   const { t } = useTranslation()
@@ -22,11 +23,11 @@ export function AvatarTab() {
 
   const unlocked = pokemonCollection.filter((item) => item.emotions.length > 0 || item.shinyEmotions.length > 0)
   const nbUnlocked = unlocked.length
-  const nbTotal = Object.keys(PkmByIndex).length
+  const nbTotal = precomputedPokemons.length
 
   return (
     <div>
-      <h3 style={{ display: "flex" }}>{t("change_avatar")} <div className="spacer"></div> {t("avatars_unlocked", { nbUnlocked, nbTotal })}</h3>
+      <h3 style={{ display: "flex" }}>{t("change_avatar")} <div className="spacer"></div> {t("avatars_unlocked", { count: nbUnlocked, total: nbTotal })}</h3>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5em" }}>
         <PokemonTypeahead value={selectedPkm} onChange={setSelectedPkm} />
         {selectedPkm != "" && <button className="bubbly blue" onClick={() => setSelectedPkm("")}>

@@ -16,7 +16,7 @@ export function GadgetsTab() {
   return user ? (
     <div>
       <p style={{ textAlign: "right" }}>
-        {nbGadgetsUnlocked} / {gadgets.length} {t("gadgets_unlocked")}
+        {t("gadgets_unlocked", { count: nbGadgetsUnlocked, total: gadgets.length })}
       </p>
       <ul className="gadgets">
         {gadgets.map((g) => (
