@@ -314,9 +314,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             chance(this.critChance, this))
         const bounceDamage = Math.round(
           ([0.5, 1][this.stars - 1] ?? 1) *
-            damage *
-            (1 + this.ap / 100) *
-            (bounceCrit ? this.critPower : 1)
+          damage *
+          (1 + this.ap / 100) *
+          (bounceCrit ? this.critPower : 1)
         )
         // not handleSpecialDamage to not trigger infinite loop between two magic bounces
         attacker.handleDamage({
@@ -365,7 +365,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
-        let speDef = this.status.armorReduction ? Math.round(this.speDef / 2) : this.speDef
+        const speDef = this.status.armorReduction ? Math.round(this.speDef / 2) : this.speDef
         const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
         const damageBlocked = min(0)(specialDamage - damageAfterReduction)
         attacker.handleDamage({
@@ -421,9 +421,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
       value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1) *
-        (this.status.fatigue && value > 0 ? 0.5 : 1)
+      (1 + (apBoost * caster.ap) / 100) *
+      (crit ? caster.critPower : 1) *
+      (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -1145,7 +1145,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.fightingBlockCount > 0 &&
       this.count.fightingBlockCount % 10 === 0 &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
-        1
+      1
     ) {
       const targetAtContact = board.getValue(this.targetX, this.targetY)
       const destination = this.state.getNearestAvailablePlaceCoordinates(
@@ -1239,7 +1239,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               y: this.positionY + y,
               value:
                 board.cells[
-                  board.columns * this.positionY + y + this.positionX + x
+                board.columns * this.positionY + y + this.positionX + x
                 ]
             })
           }
@@ -1449,7 +1449,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       this.player &&
       this.simulation.room.state.specialGameRule ===
-        SpecialGameRule.BLOOD_MONEY &&
+      SpecialGameRule.BLOOD_MONEY &&
       !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)
@@ -1627,11 +1627,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
             ? []
             : [
-                PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                  shiny: this.shiny,
-                  emotion: Emotion.ANGRY
-                })
-              ]
+              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+                shiny: this.shiny,
+                emotion: Emotion.ANGRY
+              })
+            ]
         }
 
         const spawns = pickNRandomIn(koAllies, 3)
