@@ -3103,7 +3103,7 @@
 	"search_pokemon": "Selecciona un Pokémon",
 	"search_player": "Buscar por nombre de jugador...",
 	"team_builder": "Planificador de Equipos",
-	"titles_unlocked": "Títulos desbloqueados",
+	"titles_unlocked": "{{count}}/{{total}} Títulos desbloqueados",
 	"game-reconnect-modal-title": "Vuelve a conectarte al juego",
 	"game-reconnect-modal-body": "Dejaste un juego en progreso. ¿Quieres volver a conectarte a tu juego anterior?",
 	"toggle_locked": "Mostrar Bloqueados",
@@ -3124,7 +3124,7 @@
 	"key_desc_avatar_show_emote": "Usar emote",
 	"jukebox": "Rocola",
 	"gadgets": "Artilugios",
-	"gadgets_unlocked": "Artilugios desbloqueados ",
+	"gadgets_unlocked": "{{count}}/{{total}} Artilugios desbloqueados ",
 	"gadget": {
 		"trainer_card": "Tarjeta de Entrenador",
 		"trainer_card_desc": "Permite que cambies el tu nombre, título y avatar",

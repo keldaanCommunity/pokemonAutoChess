@@ -20,7 +20,7 @@ import { AvatarTab } from "./avatar-tab"
 import { GadgetsTab } from "./gadgets-tab"
 import GameHistory from "./game-history"
 import { ProfileChatHistory } from "./profile-chat-history"
-import { NameTab } from "./name-tab"
+import { ProgressTab } from "./progress-tab"
 import PlayerBox from "./player-box"
 import { SearchBar } from "./search-bar"
 import SearchResults from "./search-results"
@@ -83,7 +83,7 @@ function MyProfileMenu() {
   return (
     <Tabs>
       <TabList>
-        <Tab>{t("name")}</Tab>
+        <Tab>{t("progress")}</Tab>
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
         <Tab>{t("gadgets")}</Tab>
@@ -91,7 +91,7 @@ function MyProfileMenu() {
       </TabList>
 
       <TabPanel>
-        <NameTab />
+        <ProgressTab />
       </TabPanel>
       <TabPanel>
         <AvatarTab />

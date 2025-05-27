@@ -3008,7 +3008,7 @@
 	"search_pokemon": "Cerca per un Pokèmon",
 	"search_player": "Cerca per nome giocatore...",
 	"team_builder": "Team Planner",
-	"titles_unlocked": "Titoli sbloccati",
+	"titles_unlocked": "{{count}}/{{total}} Titoli sbloccati",
 	"game-reconnect-modal-title": "Riconnettiti al gioco",
 	"game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti alla partita precedente?",
 	"toggle_locked": "Mostra non sbloccati",
@@ -3029,7 +3029,7 @@
 	"key_desc_avatar_show_emote": "Usa emote",
 	"jukebox": "Jukebox",
 	"gadgets": "Gadget",
-	"gadgets_unlocked": "Gadget sbloccati",
+	"gadgets_unlocked": "{{count}}/{{total}} Gadget sbloccati",
 	"gadget": {
 		"trainer_card": "Carta Allenatore",
 		"trainer_card_desc": "Ti dà la possibilità di cambiare il tuo nome, l'avatar ed il titolo",

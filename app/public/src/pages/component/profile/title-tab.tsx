@@ -38,8 +38,7 @@ export function TitleTab() {
           isDark
         />
         <p>
-          {user.titles.length} / {Object.keys(Title).length}{" "}
-          {t("titles_unlocked")}
+          {t("titles_unlocked", { count: user.titles.length, total: Object.keys(Title).length })}
         </p>
       </div>
       <ul className="titles">
