@@ -24,7 +24,7 @@ export async function fetchBots() {
       if (ids.includes(bot.id)) {
         const id = nanoid()
         bot.id = id
-        bot.save()
+        await bot.save()
       }
       ids.push(bot.id)
       bots.set(bot.id, bot)
