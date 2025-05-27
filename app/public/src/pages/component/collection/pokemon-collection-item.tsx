@@ -4,7 +4,7 @@ import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/pr
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { BoosterPriceByRarity, getEmotionCost } from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { AnimationConfig, Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import "./pokemon-collection-item.css"
@@ -46,7 +46,7 @@ export default function PokemonCollectionItem(props: {
       (emotions.includes(e) === false &&
         dust >= getEmotionCost(e, false) &&
         props.filter !== "shiny") ||
-      (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true))
+      (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true) && !AnimationConfig[props.name]?.shinyUnavailable)
   )
 
   if (props.filter === "shiny" && (isUnlocked || !canUnlock)) return null
