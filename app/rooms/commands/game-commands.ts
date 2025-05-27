@@ -1476,7 +1476,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       const bestRod = FishingRods.find((rod) => player.items.includes(rod))
 
-      if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE) {
+      if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE && !player.isBot) {
         const fish = this.state.shop.pickFish(player, bestRod)
         this.room.spawnOnBench(player, fish, "fishing")
       }

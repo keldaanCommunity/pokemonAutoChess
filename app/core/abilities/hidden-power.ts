@@ -144,7 +144,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     const nbFishes = 3
     const player = unown.player
 
-    if (player && !unown.isGhostOpponent) {
+    if (player && !unown.isGhostOpponent && !player.isBot) {
       for (let i = 0; i < nbFishes; i++) {
         const fish = unown.simulation.room.state.shop.pickFish(
           player,
