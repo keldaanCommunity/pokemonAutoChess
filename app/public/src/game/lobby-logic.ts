@@ -13,7 +13,6 @@ import PreparationState from "../../../rooms/states/preparation-state"
 import {
   ICustomLobbyState,
   Transfer,
-  PkmWithCustom,
   ISuggestionUser
 } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
@@ -50,6 +49,7 @@ import {
 } from "../stores/NetworkStore"
 import { resetPreparation } from "../stores/PreparationStore"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import type { Booster } from "../../../types/Booster"
 
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
@@ -273,7 +273,7 @@ export async function joinLobbyRoom(
 
           room.onMessage(
             Transfer.BOOSTER_CONTENT,
-            (boosterContent: PkmWithCustom[]) => {
+            (boosterContent: Booster) => {
               dispatch(setBoosterContent(boosterContent))
             }
           )

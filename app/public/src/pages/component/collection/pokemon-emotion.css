@@ -32,7 +32,6 @@
 }
 
 .pokemon-emotion > p {
-  line-height: 1em;
   max-width: 80px;
   word-break: break-word;
   font-weight: 500;
@@ -55,9 +54,17 @@
   color: white;
 }
 
-.pokemon-emotion p > img {
+.pokemon-emotion .dust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-emotion .dust > img {
   width: 20px;
   height: 20px;
   image-rendering: pixelated;
-  margin-left: 0.5em;
+  margin: 2px 2px 0px calc(2px + 0.25em);
+  border-radius: 50%;
+  border: 1px solid black;
 }

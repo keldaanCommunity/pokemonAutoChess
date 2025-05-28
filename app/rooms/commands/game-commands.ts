@@ -224,7 +224,8 @@ export class OnPokemonCatchCommand extends Command<
               shinyEmotions: [],
               dust: DUST_PER_ENCOUNTER,
               selectedEmotion: Emotion.NORMAL,
-              selectedShiny: false
+              selectedShiny: false,
+              played: 0
             })
           }
           u.save()
@@ -1475,7 +1476,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       const bestRod = FishingRods.find((rod) => player.items.includes(rod))
 
-      if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE) {
+      if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE && !player.isBot) {
         const fish = this.state.shop.pickFish(player, bestRod)
         this.room.spawnOnBench(player, fish, "fishing")
       }
@@ -1519,7 +1520,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 pokemonId: chef.id,
                 dishes
               })
-
               this.clock.setTimeout(() => {
                 const candidates = values(player.board).filter(
                   (p) =>
@@ -1603,6 +1603,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   checkForLazyTeam() {
     // force move on board some units if room available
     this.state.players.forEach((player, key) => {
+      if (player.isBot) return
+      
       const teamSize = this.room.getTeamSize(player.board)
       const maxTeamSize = getMaxTeamSize(
         player.experienceManager.level,
@@ -1768,6 +1770,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.time = FIGHTING_PHASE_DURATION
     this.state.roundTime = Math.round(this.state.time / 1000)
     updateLobby(this.room)
+    this.state.players.forEach((player: Player) => {
+      if (player.alive) {
+        player.registerPlayedPokemons()
+      }
+    })
 
     const pveStage = PVEStages[this.state.stageLevel]
     if (pveStage) {

@@ -1401,6 +1401,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             target.team,
             true
           )
+          if (target.player) {
+            target.player.pokemonsPlayed.add(flowerSpawnName)
+          }
         }
       }
 

@@ -16,9 +16,17 @@
 
 #pokemon-collection header {
   display: flex;
-  align-content: center;
+  width: 100%;
+  align-items: center;
   gap: 1vw;
-  padding: 5px 1em;
+  padding: 4px 8px;
+}
+
+#pokemon-collection header p {
+  flex: 1;
+  text-align: left;
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
 #pokemon-collection header label {

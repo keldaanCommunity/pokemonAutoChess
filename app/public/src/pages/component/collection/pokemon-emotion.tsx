@@ -38,7 +38,7 @@ export default function PokemonEmotion(props: {
       {props.unlocked ? (
         <p>{t(`emotion.${props.emotion}`)}</p>
       ) : (
-        <p>
+        <p className="dust">
           <span>{cost}</span>
           <img src={getPortraitSrc(props.index)} />
         </p>

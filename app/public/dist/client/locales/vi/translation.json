@@ -1494,7 +1494,7 @@
 	"search_pokemon": "Tìm pokemon",
 	"search_player": "Tìm người chơi",
 	"team_builder": "Lên đồ",
-	"titles_unlocked": "Thành tích đạt được",
+	"titles_unlocked": "{{count}}/{{total}} Thành tích đạt được",
 	"game-reconnect-modal-title": "Kết nối lại",
 	"game-reconnect-modal-body": "Bạn vừa thoát trận. Bạn có muốn quay trở lại trận đấu vừa nãy?",
 	"key": "Chìa khoá",
@@ -1506,7 +1506,7 @@
 	"key_desc_avatar_show_emote": "Kích hoạt biểu cảm ",
 	"jukebox": "Máy phát nhạc",
 	"gadgets": "Dụng cụ",
-	"gadgets_unlocked": "Công cụ đã mở khoá",
+	"gadgets_unlocked": "{{count}}/{{total}} Công cụ đã mở khoá",
 	"gadget": {
 		"trainer_card": "Thẻ người chơi",
 		"trainer_card_desc": "Thay đổi tên, ava và danh hiệu",

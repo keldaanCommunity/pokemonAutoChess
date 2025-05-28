@@ -120,9 +120,9 @@ export default class Simulation extends Schema implements ISimulation {
       Set<EffectEnum>,
       Set<EffectEnum>
     ][] = [
-      [this.bluePlayer, this.blueEffects, this.redEffects],
-      [this.redPlayer, this.redEffects, this.blueEffects]
-    ]
+        [this.bluePlayer, this.blueEffects, this.redEffects],
+        [this.redPlayer, this.redEffects, this.blueEffects]
+      ]
     for (const [player, teamEffects, opponentEffects] of playerEffects) {
       if (player) {
         player.board.forEach((pokemon, id) => {
@@ -562,6 +562,7 @@ export default class Simulation extends Schema implements ISimulation {
                   Pkm.ROTOM_DRONE,
                   player
                 )
+                player?.pokemonsPlayed.add(Pkm.ROTOM_DRONE)
                 const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
                   pokemon,
                   teamIndex
