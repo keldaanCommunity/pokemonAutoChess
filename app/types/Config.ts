@@ -14,6 +14,7 @@ export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 export const BOARD_SIDE_HEIGHT = 4 // 0 = bench
 export const MAX_LEVEL = 9
+export const ALLOWED_GAME_RECONNECTION_TIME = 60 * 1; // 5 minutes
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,

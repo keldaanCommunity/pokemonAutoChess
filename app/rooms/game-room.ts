@@ -38,6 +38,7 @@ import {
 } from "../types"
 import {
   AdditionalPicksStages,
+  ALLOWED_GAME_RECONNECTION_TIME,
   EloRank,
   ExpPlace,
   LegendaryPool,
@@ -86,6 +87,8 @@ import {
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 import { CloseCodes } from "../types/enum/CloseCodes"
+import { clearPendingGame, getPendingGame, givePlayerTimeout, setPendingGame } from "../core/pending-game-manager"
+import { isValidDate } from "../utils/date"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -236,7 +239,7 @@ export default class GameRoom extends Room<GameState> {
       () => {
         this.broadcast(Transfer.LOADING_COMPLETE)
         this.state.players.forEach((player) => {
-          this.presence.hdel(player.id, "pending_game_id")
+          clearPendingGame(this.presence, player.id)
         })
         this.startGame()
       },
@@ -484,7 +487,7 @@ export default class GameRoom extends Room<GameState> {
         const player = this.state.players.get(client.auth.uid)
         if (player) {
           player.loadingProgress = 100
-          this.presence.hdel(client.auth.uid, "pending_game_id")
+          clearPendingGame(this.presence, client.auth.uid)
         }
         if (this.state.gameLoaded) {
           // already started, presumably a user refreshed page and wants to reconnect to game
@@ -544,14 +547,11 @@ export default class GameRoom extends Room<GameState> {
     }
     client.send(Transfer.USER_PROFILE, userProfile)
     this.dispatcher.dispatch(new OnJoinCommand(), { client })
-    const pendingGameId = await this.presence.hget(
-      client.auth.uid,
-      "pending_game_id"
-    )
-    if (pendingGameId === this.roomId) {
+    const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+    if (pendingGame?.gameId === this.roomId) {
       // user reconnected without reconnection token (new browser/machine/session)
-      this.presence.hdel(client.auth.uid, "pending_game_id")
-    } else if (pendingGameId != null) {
+      clearPendingGame(this.presence, client.auth.uid)
+    } else if (pendingGame != null) {
       client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
     }
   }
@@ -565,22 +565,23 @@ export default class GameRoom extends Room<GameState> {
         throw new Error("consented leave")
       }
 
-      this.presence.hset(client.auth.uid, "pending_game_id", this.roomId)
-
       // allow disconnected client to reconnect into this room until 5 minutes
-      await this.allowReconnection(client, 300)
-      this.presence.hdel(client.auth.uid, "pending_game_id")
+      setPendingGame(this.presence, client.auth.uid, this.roomId)
+      await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+      clearPendingGame(this.presence, client.auth.uid)
       const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
       client.send(Transfer.USER_PROFILE, userProfile) // send profile info again after a /game page refresh
       this.dispatcher.dispatch(new OnJoinCommand(), { client })
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
-        const pendingGameId = await this.presence.hget(
-          client.auth.uid,
-          "pending_game_id"
-        )
-        if (pendingGameId == undefined && !consented) return // user has reconnected through other ways (new browser/machine/session)
-        this.presence.hdel(client.auth.uid, "pending_game_id")
+        const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+        if (!pendingGame && !consented) return // user has reconnected through other ways (new browser/machine/session)
+        else if (pendingGame && isValidDate(pendingGame.reconnectionDeadline) && pendingGame.reconnectionDeadline.getTime() > Date.now()) {
+          // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
+          // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
+          return
+        }
+        clearPendingGame(this.presence, client.auth.uid)
 
         //logger.info(`${client.auth.displayName} left game`)
         const player = this.state.players.get(client.auth.uid)
@@ -596,11 +597,7 @@ export default class GameRoom extends Room<GameState> {
         ) {
           /* if a user leaves a game before the end, 
           they cannot join another in the next 5 minutes */
-          this.presence.hset(
-            client.auth.uid,
-            "user_timeout",
-            new Date(Date.now() + 1000 * 60 * 5).toISOString()
-          )
+          givePlayerTimeout(this.presence, client.auth.uid)
         }
 
         if (player && this.state.stageLevel <= 5 && !consented) {
