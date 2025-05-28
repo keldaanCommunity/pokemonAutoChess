@@ -64,7 +64,7 @@ export async function fetchBotsLeaderboard() {
   const bots = Object.values(await matchMaker.presence.hgetall("bots")).map(
     (bot) => JSON.parse(bot) as IBot
   )
-  bots.forEach((bot, i) => {
+  bots.sort((a, b) => b.elo - a.elo).forEach((bot, i) => {
     botLeaderboard.push({
       name: bot.name,
       avatar: bot.avatar,

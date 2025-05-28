@@ -1515,49 +1515,43 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (dish === Item.SWEETS) {
               dishes = pickNRandomIn(Sweets, nbDishes)
             }
-            const client = this.room.clients.find(
-              (cli) => cli.auth.uid === player.id
-            )
-            if (client) {
-              this.clock.setTimeout(async () => {
-                client.send(Transfer.COOK, {
-                  pokemonId: chef.id,
-                  dishes
+            this.clock.setTimeout(async () => {
+              this.room.broadcast(Transfer.COOK, {
+                pokemonId: chef.id,
+                dishes
+              })
+              this.clock.setTimeout(() => {
+                const candidates = values(player.board).filter(
+                  (p) =>
+                    p.meal === "" &&
+                    p.canEat &&
+                    !isOnBench(p) &&
+                    distanceC(
+                      chef.positionX,
+                      chef.positionY,
+                      p.positionX,
+                      p.positionY
+                    ) === 1
+                )
+                candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+                dishes.forEach((meal, i) => {
+                  if (
+                    [
+                      Item.TART_APPLE,
+                      Item.SWEET_APPLE,
+                      Item.SIRUPY_APPLE,
+                      ...Berries
+                    ].includes(meal)
+                  ) {
+                    player.items.push(meal)
+                  } else {
+                    const pokemon = candidates[i] ?? chef
+                    pokemon.meal = meal
+                    pokemon.action = PokemonActionState.EAT
+                  }
                 })
-
-                this.clock.setTimeout(() => {
-                  const candidates = values(player.board).filter(
-                    (p) =>
-                      p.meal === "" &&
-                      p.canEat &&
-                      !isOnBench(p) &&
-                      distanceC(
-                        chef.positionX,
-                        chef.positionY,
-                        p.positionX,
-                        p.positionY
-                      ) === 1
-                  )
-                  candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-                  dishes.forEach((meal, i) => {
-                    if (
-                      [
-                        Item.TART_APPLE,
-                        Item.SWEET_APPLE,
-                        Item.SIRUPY_APPLE,
-                        ...Berries
-                      ].includes(meal)
-                    ) {
-                      player.items.push(meal)
-                    } else {
-                      const pokemon = candidates[i] ?? chef
-                      pokemon.meal = meal
-                      pokemon.action = PokemonActionState.EAT
-                    }
-                  })
-                }, 2000)
-              }, 1000)
-            }
+              }, 2000)
+            }, 1000)
           }
         }
       }

@@ -333,7 +333,14 @@ export function carryOverPermanentStats(
   pokemonsBeforeEvolution: Pokemon[]
 ) {
   // carry over the permanent stat buffs
-  const permanentBuffStats = ["hp", "atk", "def", "speDef"] as const
+  const permanentBuffStats = [
+    "hp",
+    "atk",
+    "def",
+    "speDef",
+    "speed",
+    "ap"
+  ] as const
   const baseData = new PokemonClasses[pokemonsBeforeEvolution[0].name]()
   for (const stat of permanentBuffStats) {
     const sumOfPermaStatsModifier = sum(

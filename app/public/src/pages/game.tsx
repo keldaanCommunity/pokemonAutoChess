@@ -290,7 +290,7 @@ export default function Game() {
     if (gameContainer.gameScene) {
       gameContainer.gameScene.spectate = true
       // rerender to make items and units not dragable anymore
-      gameContainer.gameScene?.board?.renderBoard()
+      gameContainer.gameScene?.board?.renderBoard(false)
       gameContainer.gameScene?.itemsContainer?.render(gameContainer.player!.items)
     }
   }

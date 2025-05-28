@@ -56,6 +56,7 @@ import {
   DeleteAccountCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
+import { fetchBots } from "../services/bots"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   unsubscribeLobby: (() => void) | undefined
@@ -421,6 +422,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()
+
+    // Fetching bots is done on lobby room because the info is then shared to all processes through Redis presence
+    logger.info("Fetching bots...")
+    await fetchBots()
+    logger.info("Bots fetched")
+    setInterval(() => fetchBots(), 1000 * 60 * 24) // refresh every 24 hours
   }
 
   async onAuth(client: Client, options, context) {

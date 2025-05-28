@@ -20,16 +20,16 @@ export async function fetchBots() {
     )
     if (!botsData || botsData.length === 0) break
 
-    botsData.forEach((bot) => {
+    for (const bot of botsData) {
       if (ids.includes(bot.id)) {
         const id = nanoid()
         bot.id = id
-        bot.save()
+        await bot.save()
       }
       ids.push(bot.id)
       bots.set(bot.id, bot)
-      matchMaker.presence.hset("bots", bot.id, JSON.stringify(bot))
-    })
+      await matchMaker.presence.hset("bots", bot.id, JSON.stringify(bot))
+    }
 
     skip += chunkSize
   }

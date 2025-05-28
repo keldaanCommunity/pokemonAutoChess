@@ -17,7 +17,6 @@ import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
-import { fetchBots } from "./services/bots"
 
 /*
 Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
@@ -42,11 +41,7 @@ async function main() {
     await matchMaker.createRoom("lobby", {})
     initCronJobs()
   }
-
-  logger.info("Fetching bots...")
-  await fetchBots()
-  logger.info("Bots fetched")
-  setInterval(() => fetchBots(), 1000 * 60 * 24) // refresh every 24 hours
+  
   logger.info("Fetching leaderboards...")
   fetchLeaderboards()
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
