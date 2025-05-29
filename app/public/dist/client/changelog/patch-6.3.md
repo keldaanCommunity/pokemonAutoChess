@@ -2,6 +2,8 @@
 
 # Changes to Pokemon & Abilities
 
+- Hisuian Lilligant
+
 # Changes to Synergies
 
 # Changes to Items
