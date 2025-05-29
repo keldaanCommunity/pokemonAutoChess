@@ -237,6 +237,7 @@ export default class GameRoom extends Room<GameState> {
 
     this.clock.setTimeout(
       () => {
+        if (this.state.gameLoaded) return // already started
         this.broadcast(Transfer.LOADING_COMPLETE)
         this.state.players.forEach((player) => {
           clearPendingGame(this.presence, player.id)
