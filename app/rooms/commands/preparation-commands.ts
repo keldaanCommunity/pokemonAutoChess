@@ -25,6 +25,7 @@ import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
 import { getPendingGame, isPlayerTimeout, setPendingGame } from "../../core/pending-game-manager"
+import { isValidDate } from "../../utils/date"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -42,7 +43,7 @@ export class OnJoinCommand extends Command<
       }
 
       const pendingGame = await getPendingGame(this.room.presence, client.auth.uid)
-      if (pendingGame != null) {
+      if (pendingGame != null && isValidDate(pendingGame.reconnectionDeadline) && pendingGame.reconnectionDeadline?.getTime() > Date.now()) {
         client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
         return
       }

@@ -50,6 +50,7 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
+import { isValidDate } from "../../utils/date"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -75,7 +76,7 @@ export class OnJoinCommand extends Command<
         this.room.users.set(client.auth.uid, user)
         client.send(Transfer.USER_PROFILE, user)
         const pendingGame = await getPendingGame(this.room.presence, client.auth.uid)
-        if (pendingGame != null) {
+        if (pendingGame != null && isValidDate(pendingGame.reconnectionDeadline) && pendingGame.reconnectionDeadline?.getTime() > Date.now()) {
           client.send(Transfer.RECONNECT_PROMPT, pendingGame.gameId)
         }
       } else {

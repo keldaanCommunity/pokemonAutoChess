@@ -41,14 +41,12 @@ export async function getPendingGame(presence: Presence, playerId: string): Prom
             //logger.error("Invalid reconnection deadline date", pendingGameId, reconnectionDeadlineStr);
             return null;
         }
-        // Check if the reconnection deadline is not expired        
-        if (reconnectionDeadline > new Date()) {
-            //logger.debug(`Pending game found for player ${playerId}: ${pendingGameId}, deadline: ${reconnectionDeadline.toISOString()}`);
-            return {
-                gameId: pendingGameId,
-                reconnectionDeadline,
-            };
-        }
+
+        //logger.debug(`Pending game found for player ${playerId}: ${pendingGameId}, deadline: ${reconnectionDeadline.toISOString()}`);
+        return {
+            gameId: pendingGameId,
+            reconnectionDeadline,
+        };
     }
     //logger.debug(`No pending game found for player ${playerId}`);
     return null;
