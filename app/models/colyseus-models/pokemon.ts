@@ -264,7 +264,7 @@ export class Pokemon extends Schema implements IPokemon {
     if (
       item in SynergyGivenByItem &&
       new PokemonClasses[this.name]().types.has(SynergyGivenByItem[item]) ===
-        false
+      false
     ) {
       this.types.delete(SynergyGivenByItem[item])
     }
@@ -3336,7 +3336,7 @@ export class Venusaur extends Pokemon {
 }
 
 export class Igglybuff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BABY, Synergy.SOUND, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.BABY])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.JIGGLYPUFF
@@ -3352,7 +3352,7 @@ export class Igglybuff extends Pokemon {
 }
 
 export class Jigglypuff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.WIGGLYTUFF
@@ -3368,7 +3368,7 @@ export class Jigglypuff extends Pokemon {
 }
 
 export class Wigglytuff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 250
@@ -17164,35 +17164,35 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-  (params: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-    player: Player
-  }) => {
-    const pkmOnBoard = values(params.player.board).filter(
-      (p) =>
-        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-    )
-    const pillars = values(params.player.board).filter(
-      (p) => p.name === pillarToRemove
-    )
-    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-      params.player.board.delete(pillars[i].id)
-    }
-    const coords =
-      pillars.length > 0
-        ? [pillars[0].positionX, pillars[0].positionY]
-        : getFirstAvailablePositionOnBoard(params.player.board)
-    if (coords && params.pokemonEvolved.positionY > 0) {
-      const pillar = PokemonFactory.createPokemonFromName(
-        pillarEvolution,
-        params.player
+    (params: {
+      pokemonEvolved: Pokemon
+      pokemonsBeforeEvolution: Pokemon[]
+      player: Player
+    }) => {
+      const pkmOnBoard = values(params.player.board).filter(
+        (p) =>
+          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
       )
-      pillar.positionX = coords[0]
-      pillar.positionY = coords[1]
-      params.player.board.set(pillar.id, pillar)
+      const pillars = values(params.player.board).filter(
+        (p) => p.name === pillarToRemove
+      )
+      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+        params.player.board.delete(pillars[i].id)
+      }
+      const coords =
+        pillars.length > 0
+          ? [pillars[0].positionX, pillars[0].positionY]
+          : getFirstAvailablePositionOnBoard(params.player.board)
+      if (coords && params.pokemonEvolved.positionY > 0) {
+        const pillar = PokemonFactory.createPokemonFromName(
+          pillarEvolution,
+          params.player
+        )
+        pillar.positionX = coords[0]
+        pillar.positionY = coords[1]
+        params.player.board.set(pillar.id, pillar)
+      }
     }
-  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])

@@ -3,6 +3,7 @@
 # Changes to Pokemon & Abilities
 
 - Hisuian Lilligant
+- Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
 
 # Changes to Synergies
 
