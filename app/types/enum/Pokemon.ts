@@ -353,6 +353,7 @@ export enum Pkm {
   HISUI_VOLTORB = "HISUI_VOLTORB",
   HISUI_ZOROARK = "HISUI_ZOROARK",
   HISUI_ZORUA = "HISUI_ZORUA",
+  HISUIAN_LILLIGANT = "HISUIAN_LILLIGANT",
   HISUIAN_QWILFISH = "HISUIAN_QWILFISH",
   HISUIAN_TYPHLOSION = "HISUIAN_TYPHLOSION",
   HITMONCHAN = "HITMONCHAN",
@@ -1618,6 +1619,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.WHIMSICOTT]: "0547",
   [Pkm.PETILIL]: "0548",
   [Pkm.LILIGANT]: "0549",
+  [Pkm.HISUIAN_LILLIGANT]: "0549-0001",
   //[Pkm.BASCULIN]: "0550",
   [Pkm.SANDILE]: "0551",
   [Pkm.KROKOROK]: "0552",
@@ -2967,6 +2969,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.AUDINO]: Pkm.AUDINO,
   [Pkm.PETILIL]: Pkm.PETILIL,
   [Pkm.LILIGANT]: Pkm.PETILIL,
+  [Pkm.HISUIAN_LILLIGANT]: Pkm.PETILIL,
   [Pkm.MANTYKE]: Pkm.MANTYKE,
   [Pkm.MANTINE]: Pkm.MANTYKE,
   [Pkm.REMORAID]: Pkm.REMORAID,
@@ -7436,6 +7439,11 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.DeepBreath,
     emote: AnimationType.Pose
+  },
+  [Pkm.HISUIAN_LILLIGANT]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot
   },
   [Pkm.MANTYKE]: {
     attack: AnimationType.Shoot,
