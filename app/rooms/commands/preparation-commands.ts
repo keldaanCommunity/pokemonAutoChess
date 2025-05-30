@@ -43,7 +43,7 @@ export class OnJoinCommand extends Command<
       }
 
       const pendingGame = await getPendingGame(this.room.presence, client.auth.uid)
-      if (pendingGame != null && isValidDate(pendingGame.reconnectionDeadline) && pendingGame.reconnectionDeadline?.getTime() > Date.now()) {
+      if (pendingGame != null && !pendingGame.isExpired) {
         client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
         return
       }

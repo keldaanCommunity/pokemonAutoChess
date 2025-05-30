@@ -552,7 +552,7 @@ export default class GameRoom extends Room<GameState> {
     if (pendingGame?.gameId === this.roomId) {
       // user reconnected without reconnection token (new browser/machine/session)
       clearPendingGame(this.presence, client.auth.uid)
-    } else if (pendingGame != null && isValidDate(pendingGame.reconnectionDeadline) && pendingGame.reconnectionDeadline?.getTime() > Date.now()) {
+    } else if (pendingGame != null && !pendingGame.isExpired) {
       client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
     }
   }

@@ -6,6 +6,7 @@ import { ALLOWED_GAME_RECONNECTION_TIME } from "../types/Config";
 interface PendingGame {
     gameId: string;
     reconnectionDeadline: Date;
+    isExpired: boolean;
 }
 
 const PENDING_GAME = "pending_game";
@@ -46,6 +47,7 @@ export async function getPendingGame(presence: Presence, playerId: string): Prom
         return {
             gameId: pendingGameId,
             reconnectionDeadline,
+            isExpired: !isValidDate(reconnectionDeadline) || reconnectionDeadline.getTime() > Date.now()
         };
     }
     //logger.debug(`No pending game found for player ${playerId}`);
