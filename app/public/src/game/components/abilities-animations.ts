@@ -509,7 +509,7 @@ export function displayAbility(
     case Ability.PSYBEAM:
     case Ability.TWIN_BEAM:
       addAbilitySprite(Ability.PSYBEAM, coordinates, true)
-        .setScale(2)
+        .setScale(1, 2)
         .setOrigin(0.5, 0)
         .setRotation(
           Math.atan2(

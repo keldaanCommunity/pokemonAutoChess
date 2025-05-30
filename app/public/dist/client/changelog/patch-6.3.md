@@ -13,6 +13,7 @@
 # Changes to Pokemon & Abilities
 
 - Unowns can no longer eat Gourmet dishes
+- Psyshield Bash: damage 60 → 30/40/50/60
 
 # Changes to Synergies
 

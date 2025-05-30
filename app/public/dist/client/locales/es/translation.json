@@ -1656,7 +1656,7 @@
 		"ICE_FANG": "Inflige [30,60,120,SP] de SPECIAL y FREEZE por 1 segundo",
 		"THUNDER_FANG": "Inflige [30,60,120,SP] de SPECIAL y PARALYSIS por 3 segundos",
 		"TAIL_WHIP": "Reduce la DEF del objetivo en un [30,SP] %",
-		"PSYSHIELD_BASH": "Se cuela en la retaguardia enemiga, inflige [60,SP] de SPECIAL a todos los enemigos en el camino y da PROTECT al usuario por 1 segundo.",
+		"PSYSHIELD_BASH": "Se cuela en la retaguardia enemiga, inflige [30,40,50,60,SP] de SPECIAL a todos los enemigos en el camino y da PROTECT al usuario por 1 segundo.",
 		"QUIVER_DANCE": "Gana [5,SP] ATK, [5,SP] SPE_DEF, [10,SP] SPEED y 20 AP",
 		"POWER_WHIP": "Fija al enemigo más lejano y lanza una enredadera gigante hacia él. Inflige [30,60,SP] de SPECIAL a cualquier enemigo golpeado por la enredadera.",
 		"DARK_HARVEST": "El Pokémon se teletransporta al grupo más grande de enemigos. Durante los siguientes 3 segundos, el pokémon sufre SILENCE y drena el HP de los enemigos adyacentes, infligiendo [5,10,20,SP] de SPECIAL por segundo y curando su HP un 30% del SPECIAL infligido.",

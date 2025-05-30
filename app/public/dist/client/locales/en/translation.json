@@ -1804,7 +1804,7 @@
 		"ICE_FANG": "Deal [30,60,120,SP] SPECIAL and apply FREEZE for 1 second.",
 		"THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflict PARALYSIS for 3 seconds.",
 		"TAIL_WHIP": "Reduce the target's DEF by [30,SP]%.",
-		"PSYSHIELD_BASH": "Dash to the farthest reachable enemy Pokémon, dealing [60,SP] SPECIAL to all enemy Pokémon in the path and PROTECT the user for 1 second.",
+		"PSYSHIELD_BASH": "Dash to the farthest reachable enemy Pokémon, dealing [30,40,50,60,SP] SPECIAL to all enemy Pokémon in the path and PROTECT the user for 1 second.",
 		"QUIVER_DANCE": "Gain [5,SP] ATK, [5,SP] SPE_DEF, [10,SP] SPEED and 20 AP.",
 		"TORCH_SONG": "Blow out [4,SP] raging flames to random opponents. Each flame deals 50% of ATK as SPECIAL, with [30,LK]% chance to BURN for 2 seconds, and buff the user AP by [1,2,3].",
 		"POWER_WHIP": "Unleash a giant vine toward the farthest enemy Pokémon, dealing [30,60,SP] SPECIAL to any enemy Pokémon in the path.",

@@ -1130,7 +1130,7 @@ export default class BattleManager {
 
       this.scene.tweens.add({
         targets: sprite,
-        alpha: 0.4,
+        alpha: 0.5,
         duration: 1000
       })
     }

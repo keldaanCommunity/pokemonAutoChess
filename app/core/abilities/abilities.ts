@@ -8976,7 +8976,7 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 60
+    const damage = [30,40,50,60][pokemon.stars - 1] ?? 60
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
@@ -12532,7 +12532,7 @@ export class TwinBeamStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     // Fires out two beams that hit the furthest enemies, dealing 30/60 special damage to all enemies in a line.
     const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
     const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
