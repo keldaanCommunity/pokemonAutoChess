@@ -2512,7 +2512,7 @@
 		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
 		"AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
-		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% ATK. Transfers to the ally with the weakest ATK when the holder faints.",
+		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
 		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
 		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)"
 	},
