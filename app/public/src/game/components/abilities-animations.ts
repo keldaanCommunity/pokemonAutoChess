@@ -197,7 +197,6 @@ export function displayAbility(
       break
 
     case Ability.PSYSHIELD_BASH:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
