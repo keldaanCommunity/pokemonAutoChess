@@ -767,7 +767,7 @@ export default class Simulation extends Schema implements ISimulation {
                 )
                 pokemon.targetX = target.positionX
                 pokemon.targetY = target.positionY
-                pokemon.status.triggerProtect(3000)
+                pokemon.status.triggerProtect(2000)
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     pokemon.simulation.room.broadcast(Transfer.ABILITY, {

@@ -402,8 +402,8 @@ export default class Shop {
         const types = getPokemonData(pkm).types
         const isOfTypeWanted = specificTypesWanted
           ? specificTypesWanted.some((specificTypeWanted) =>
-              types.includes(specificTypeWanted)
-            )
+            types.includes(specificTypeWanted)
+          )
           : types.includes(Synergy.WILD) === false
 
         return isOfTypeWanted && !finals.has(pkm)
@@ -526,9 +526,9 @@ export default class Shop {
       shopIndex < repeatBallHolders.length &&
       !noSpecial
     ) {
-      if (totalRerolls >= 150 && totalRerolls % 10 === 0) {
+      if (totalRerolls >= 120 && totalRerolls % 10 === 0) {
         return this.pickSpecialPokemon(Rarity.LEGENDARY)
-      } else if (totalRerolls >= 100 && totalRerolls % 10 === 0) {
+      } else if (totalRerolls >= 80 && totalRerolls % 10 === 0) {
         return this.pickSpecialPokemon(Rarity.UNIQUE)
       }
     }
