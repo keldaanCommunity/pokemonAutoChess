@@ -8,6 +8,12 @@
 
 # Changes to Items
 
+- Nerf Comet Shard: Attack 15 → 10, Protect duration 3 → 2 seconds
+- Buff Gold Bow ; now gives 50 shield
+- Buff Absorb Bulb: 15 → 20 defense & special defense
+- Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
+- Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
+
 # Gameplay
 
 # UI
