@@ -1,6 +1,18 @@
 # New Pokemons:
 
+- Hisuian Lilligant
+- Scream Tail
+- Wyrdeer
+- Indeedee (Female)
+- Indeedee (Male)
+- Cottonee,
+- Whimsicott
+- Girafarig
+- Farigiraf
+
 # Changes to Pokemon & Abilities
+
+- Unowns can no longer eat Gourmet dishes
 
 # Changes to Synergies
 

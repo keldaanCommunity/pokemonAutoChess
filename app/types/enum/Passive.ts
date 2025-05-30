@@ -154,5 +154,6 @@ export enum Passive {
   PARTING_SHOT = "PARTING_SHOT",
   DRUMMER = "DRUMMER",
   KIRLIA = "KIRLIA",
-  KUBFU = "KUBFU"
+  KUBFU = "KUBFU",
+  STANTLER = "STANTLER"
 }

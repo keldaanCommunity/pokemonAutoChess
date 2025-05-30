@@ -151,6 +151,7 @@ export enum Pkm {
   CORVISQUIRE = "CORVISQUIRE",
   COSMOEM = "COSMOEM",
   COSMOG = "COSMOG",
+  COTTONEE = "COTTONEE",
   CRABOMINABLE = "CRABOMINABLE",
   CRABRAWLER = "CRABRAWLER",
   CRADILY = "CRADILY",
@@ -239,6 +240,7 @@ export enum Pkm {
   EXEGGUTOR = "EXEGGUTOR",
   EXPLOUD = "EXPLOUD",
   FARFETCH_D = "FARFETCH_D",
+  FARIGIRAF = "FARIGIRAF",
   FEAROW = "FEAROW",
   FEEBAS = "FEEBAS",
   FENNEKIN = "FENNEKIN",
@@ -290,6 +292,7 @@ export enum Pkm {
   GHOLDENGO = "GHOLDENGO",
   GIBLE = "GIBLE",
   GIMMIGHOUL = "GIMMIGHOUL",
+  GIRAFARIG = "GIRAFARIG",
   GIRATINA = "GIRATINA",
   GLACEON = "GLACEON",
   GLALIE = "GLALIE",
@@ -375,6 +378,8 @@ export enum Pkm {
   ILLUMISE = "ILLUMISE",
   IMPIDIMP = "IMPIDIMP",
   INCINEROAR = "INCINEROAR",
+  INDEEDEE_FEMALE = "INDEEDEE_FEMALE",
+  INDEEDEE_MALE = "INDEEDEE_MALE",
   INFERNAPE = "INFERNAPE",
   INTELEON = "INTELEON",
   IRON_BUNDLE = "IRON_BUNDLE",
@@ -682,6 +687,7 @@ export enum Pkm {
   SCOVILLAIN = "SCOVILLAIN",
   SCRAFTY = "SCRAFTY",
   SCRAGGY = "SCRAGGY",
+  SCREAM_TAIL = "SCREAM_TAIL",
   SCYTHER = "SCYTHER",
   SEADRA = "SEADRA",
   SEAKING = "SEAKING",
@@ -896,6 +902,7 @@ export enum Pkm {
   WEEDLE = "WEEDLE",
   WEEPINBELL = "WEEPINBELL",
   WEEZING = "WEEZING",
+  WHIMSICOTT = "WHIMSICOTT",
   WHIRLIPEDE = "WHIRLIPEDE",
   WHISCASH = "WHISCASH",
   WHISMUR = "WHISMUR",
@@ -911,6 +918,7 @@ export enum Pkm {
   WORMADAM_TRASH = "WORMADAM_TRASH",
   WURMPLE = "WURMPLE",
   WYNAUT = "WYNAUT",
+  WYRDEER = "WYRDEER",
   XATU = "XATU",
   XERNEAS = "XERNEAS",
   XURKITREE = "XURKITREE",
@@ -1228,7 +1236,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.UNOWN_QUESTION]: "0201-0027",
   [Pkm.UNOWN_EXCLAMATION]: "0201-0026",
   [Pkm.WOBBUFFET]: "0202",
-  //[Pkm.GIRAFARIG]: "0203",
+  [Pkm.GIRAFARIG]: "0203",
   [Pkm.PINECO]: "0204",
   [Pkm.FORRETRESS]: "0205",
   //[Pkm.DUNSPARCE]: "0206",
@@ -1614,8 +1622,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VENIPEDE]: "0543",
   [Pkm.WHIRLIPEDE]: "0544",
   [Pkm.SCOLIPEDE]: "0545",
-  //[Pkm.COTTONEE]: "0546",
-  //[Pkm.WHIMSICOTT]: "0547",
+  [Pkm.COTTONEE]: "0546",
+  [Pkm.WHIMSICOTT]: "0547",
   [Pkm.PETILIL]: "0548",
   [Pkm.LILIGANT]: "0549",
   //[Pkm.BASCULIN]: "0550",
@@ -1974,7 +1982,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FROSMOTH]: "0873",
   [Pkm.STONJOURNER]: "0874",
   //[Pkm.EISCUE]: "0875",
-  //[Pkm.INDEEDEE]: "0876",
+  [Pkm.INDEEDEE_MALE]: "0876",
+  [Pkm.INDEEDEE_FEMALE]: "0876-0000-0000-0002",
   [Pkm.MORPEKO]: "0877",
   [Pkm.MORPEKO_HANGRY]: "0877-0001",
   //[Pkm.CUFANT]: "0878",
@@ -2004,7 +2013,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.CALYREX]: "0898",
   //[Pkm.CALYREX_ICE]: "0898-0001",
   //[Pkm.CALYREX_SHADOW]: "0898-0002",
-  //[Pkm.WYRDEER]: "0899",
+  [Pkm.WYRDEER]: "0899",
   [Pkm.KLEAVOR]: "0900",
   [Pkm.URSALUNA]: "0901",
   [Pkm.URSALUNA_BLOODMOON]: "0901-0001",
@@ -2091,11 +2100,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.TATSUGIRI]: "0978",
   [Pkm.ANNIHILAPE]: "0979",
   [Pkm.CLODSIRE]: "0980",
-  //[Pkm.FARIGIRAF]: "0981",
+  [Pkm.FARIGIRAF]: "0981",
   //[Pkm.DUDUNSPARCE]: "0982",
   [Pkm.KINGAMBIT]: "0983",
   //[Pkm.GREAT_TUSK]: "0984",
-  //[Pkm.SCREAM_TAIL]: "0985",
+  [Pkm.SCREAM_TAIL]: "0985",
   //[Pkm.BRUTE_BONNET]: "0986",
   //[Pkm.FLUTTER_MANE]: "0987",
   //[Pkm.SLITHER_WING]: "0988",
@@ -2902,6 +2911,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WATTREL]: Pkm.WATTREL,
   [Pkm.KILOWATTREL]: Pkm.WATTREL,
   [Pkm.STANTLER]: Pkm.STANTLER,
+  [Pkm.WYRDEER]: Pkm.STANTLER,
   [Pkm.BURMY_PLANT]: Pkm.BURMY_PLANT,
   [Pkm.BURMY_SANDY]: Pkm.BURMY_SANDY,
   [Pkm.BURMY_TRASH]: Pkm.BURMY_TRASH,
@@ -3089,7 +3099,14 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.RILLABOOM]: Pkm.GROOKEY,
   [Pkm.KUBFU]: Pkm.KUBFU,
   [Pkm.URSHIFU_SINGLE]: Pkm.KUBFU,
-  [Pkm.URSHIFU_RAPID]: Pkm.KUBFU
+  [Pkm.URSHIFU_RAPID]: Pkm.KUBFU,
+  [Pkm.SCREAM_TAIL]: Pkm.SCREAM_TAIL,
+  [Pkm.INDEEDEE_FEMALE]: Pkm.INDEEDEE_FEMALE,
+  [Pkm.INDEEDEE_MALE]: Pkm.INDEEDEE_MALE,
+  [Pkm.COTTONEE]: Pkm.COTTONEE,
+  [Pkm.WHIMSICOTT]: Pkm.COTTONEE,
+  [Pkm.GIRAFARIG]: Pkm.GIRAFARIG,
+  [Pkm.FARIGIRAF]: Pkm.GIRAFARIG
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3125,7 +3142,8 @@ export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
   PLUSLE_MINUN = "PLUSLE_MINUN",
   ILLUMISE_VOLBEAT = "ILLUMISE_VOLBEAT",
-  NINJASK_SHEDINJA = "NINJASK_SHEDINJA"
+  NINJASK_SHEDINJA = "NINJASK_SHEDINJA",
+  INDEEDEE = "INDEEDEE"
 }
 
 export type PkmProposition = Pkm | PkmDuo
@@ -3134,7 +3152,8 @@ export const PkmDuos = {
   [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
   [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN],
   [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT],
-  [PkmDuo.NINJASK_SHEDINJA]: [Pkm.NINJASK, Pkm.SHEDINJA]
+  [PkmDuo.NINJASK_SHEDINJA]: [Pkm.NINJASK, Pkm.SHEDINJA],
+  [PkmDuo.INDEEDEE]: [Pkm.INDEEDEE_FEMALE, Pkm.INDEEDEE_MALE]
 }
 
 export const Unowns: Pkm[] = [
@@ -7112,6 +7131,11 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge
   },
+  [Pkm.WYRDEER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
+  },
   [Pkm.BURMY_PLANT]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Swing,
@@ -8082,5 +8106,40 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot
-  }
+  },
+  [Pkm.SCREAM_TAIL]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Withdraw
+  },
+  [Pkm.INDEEDEE_MALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.INDEEDEE_FEMALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.COTTONEE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.WHIMSICOTT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GIRAFARIG]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Bite
+  },
+  [Pkm.FARIGIRAF]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
 }

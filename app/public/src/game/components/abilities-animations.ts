@@ -95,7 +95,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -108,7 +108,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -127,7 +127,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       addAbilitySprite("COSMIC_POWER", coordinates, true)
         .setTint(0xff5060)
@@ -162,7 +162,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -187,7 +187,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -496,7 +496,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -507,14 +507,16 @@ export function displayAbility(
       break
 
     case Ability.PSYBEAM:
-      addAbilitySprite(skill, coordinatesTarget, true)
+    case Ability.TWIN_BEAM:
+      addAbilitySprite(Ability.PSYBEAM, coordinates, true)
         .setScale(2)
+        .setOrigin(0.5, 0)
         .setRotation(
           Math.atan2(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
-          ) +
-            Math.PI / 2
+          ) -
+          Math.PI / 2
         )
       break
 
@@ -532,7 +534,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -546,7 +548,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -599,8 +601,28 @@ export function displayAbility(
         .setScale(2)
       break
 
+    case Ability.FOLLOW_ME:
+    case Ability.AFTER_YOU: {
+      const sprite = addAbilitySprite(skill, [coordinates[0], coordinates[1] - 50], true)
+        .setDepth(DEPTH.ABILITY)
+        .setScale(0.5)
+      scene.tweens.add({
+        targets: sprite,
+        ease: Phaser.Math.Easing.Sine.InOut,
+        alpha: { from: 0, to: 1 },
+        yoyo: true,
+        duration: 500,
+        onComplete: () => {
+          sprite.destroy()
+        }
+      })
+
+      break
+    }
+
     case Ability.CHATTER:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+    case Ability.BOOMBURST:
+      addAbilitySprite(Ability.CHATTER, coordinates, true).setScale(2)
       break
 
     case Ability.DEFENSE_CURL:
@@ -674,7 +696,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformEntityCoordinates(
@@ -777,7 +799,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformEntityCoordinates(
@@ -1006,7 +1028,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -1018,7 +1040,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       addAbilitySprite(skill, coordinatesTarget, true).setScale(3)
       break
@@ -1555,7 +1577,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -1569,7 +1591,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -2094,7 +2116,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -2305,7 +2327,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -2331,7 +2353,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -2361,7 +2383,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -2425,7 +2447,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -2565,7 +2587,7 @@ export function displayAbility(
               finalCoordinates[1] - coordinates[1],
               finalCoordinates[0] - coordinates[0]
             ) -
-              Math.PI / 2
+            Math.PI / 2
           )
         scene.tweens.add({
           targets: projectile,
@@ -2597,7 +2619,7 @@ export function displayAbility(
             finalCoordinates[1] - coordinates[1],
             finalCoordinates[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
         scene.tweens.add({
           targets: spike,
@@ -2804,7 +2826,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -2829,7 +2851,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -2856,7 +2878,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
     }
@@ -2889,7 +2911,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -3210,6 +3232,10 @@ export function displayAbility(
 
     case Ability.RAPID_SPIN:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(1.5)
+      break
+
+    case Ability.COTTON_SPORE:
+      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
     case Ability.BOUNCE:
@@ -3549,7 +3575,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,

@@ -292,7 +292,9 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.VELUZA,
   Pkm.DURALUDON,
   Pkm.CHARCADET,
-  Pkm.KUBFU
+  Pkm.KUBFU,
+  Pkm.SCREAM_TAIL,
+  PkmDuo.INDEEDEE
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
