@@ -4919,7 +4919,7 @@ export class Kakuna extends Pokemon {
   evolution = Pkm.BEEDRILL
   hp = 110
   atk = 10
-  speed = 49
+  speed = 35
   def = 8
   speDef = 4
   maxPP = 100
