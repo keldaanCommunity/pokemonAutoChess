@@ -2,7 +2,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Hisuian Lilligant
+- Slakoth line changes: Slack Off heals 30% max HP at all tiers ; AP scaling 0.5 → 1. Reduce Sleep duration to 3 seconds. New passive to Vigoroth: Vigoroth is immune to Sleep ; New passive to Slaking: after waking up after falling asleep, get Enraged status for 3 seconds
 
 # Changes to Synergies
 

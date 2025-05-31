@@ -437,10 +437,9 @@ export class SlackOffStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     pokemon.status.clearNegativeStatus()
-    const healFactor =
-      pokemon.stars === 3 ? 0.5 : pokemon.stars === 2 ? 0.4 : 0.3
-    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5, crit)
-    pokemon.status.triggerSleep(5000, pokemon)
+    const healFactor = 0.3
+    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 1, crit)
+    pokemon.status.triggerSleep(3000, pokemon)
   }
 }
 

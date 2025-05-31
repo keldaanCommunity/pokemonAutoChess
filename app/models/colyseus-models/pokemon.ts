@@ -1430,6 +1430,7 @@ export class Vigoroth extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLACK_OFF
+  passive = Passive.VIGOROTH
   attackSprite = AttackSprite.NORMAL_MELEE
   regional = true
 }
@@ -1446,6 +1447,7 @@ export class Slaking extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SLACK_OFF
+  passive = Passive.SLAKING
   attackSprite = AttackSprite.NORMAL_MELEE
   regional = true
 }
