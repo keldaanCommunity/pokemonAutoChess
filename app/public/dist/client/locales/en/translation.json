@@ -1601,7 +1601,7 @@
 		"SPECTRAL_THIEF": "Disappear and reappear, dealing [50,SP] SPECIAL and steal all stat boosts from the target.",
 		"GEOMANCY": "Gain [15,SP] ATK, [10,SP] SPE_DEF and 20 SPEED.",
 		"DEATH_WING": "Deal [150,SP] SPECIAL and heal for 75% of the damage taken.",
-		"SLACK_OFF": "Cure all negative status conditions, heal [30,40,50,SP=0.5] % of max HP and put the user to SLEEP for 5 seconds.",
+		"SLACK_OFF": "Cure all negative status conditions, heal [30,SP] % of max HP and put the user to SLEEP for 3 seconds.",
 		"DARK_VOID": "Deal [30,SP] SPECIAL to all enemy Pokémon. All enemy Pokémon that suffer from SILENCE are put to SLEEP for 2 seconds.",
 		"OVERHEAT": "Deal [40,SP] SPECIAL to all enemy Pokémon, +30% if they suffer from BURN.",
 		"HYPNOSIS": "Put the farthest enemy Pokémon to SLEEP for [2,3.5,6,SP=0.5] seconds.",
@@ -2664,7 +2664,9 @@
 		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%",
 		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,4] bonus PP to user and adjacent allies. This counts as an attack.",
 		"KIRLIA": "Will evolve into Gallade or Gardevoir based on the dominant synergy between FIGHTING and FAIRY",
-		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS."
+		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS.",
+		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",
+		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKOTH) gains RAGE for 3 seconds"
 	},
 	"stat": {
 		"ATK": "Attack",

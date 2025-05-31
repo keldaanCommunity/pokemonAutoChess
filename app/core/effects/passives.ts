@@ -5,7 +5,8 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
-  OnKillEffect
+  OnKillEffect,
+  OnSpawnEffect
 } from "./effect"
 import { ItemEffects } from "./items"
 import { PokemonEntity } from "../pokemon-entity"
@@ -265,5 +266,6 @@ export const PassiveEffects: Partial<Record<Passive, Effect[]>> = {
   [Passive.SHARED_VISION]: [SharedVisionEffect],
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
   [Passive.KUBFU]: [KubfuOnKillEffect],
-  [Passive.SLOW_START]: [SlowStartEffect]
+  [Passive.SLOW_START]: [SlowStartEffect],
+  [Passive.VIGOROTH]: [new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))]
 }

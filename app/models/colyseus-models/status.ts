@@ -149,7 +149,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.sleep) {
-      this.updateSleep(dt)
+      this.updateSleep(dt, pokemon)
     }
 
     if (this.silence) {
@@ -620,9 +620,12 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updateSleep(dt: number) {
+  updateSleep(dt: number, pkm: PokemonEntity) {
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
+      if (pkm.passive === Passive.SLAKING) {
+        this.triggerRage(3000, pkm)
+      }
     } else {
       this.sleepCooldown = this.sleepCooldown - dt
     }

@@ -1426,7 +1426,7 @@
 		"SPECTRAL_THIEF": "Scompare e riappare infliggendo [50,SP] SPECIAL, rubando tutti i potenziamenti alle statistiche del bersaglio.",
 		"GEOMANCY": "Aumenta l' ATT di [15,SP], la SPE_DEF di [10,SP] e la SPEED del 20.",
 		"DEATH_WING": "Infligge [150 SP] SPECIAL e cura il 75% dei danni subiti dal bersaglio",
-		"SLACK_OFF": "Cura l'utilizzatore di tutti gli status negativi, guarisci il [30,40,50,SP=0.5]% dei HP massimi e subisci lo status SLEEP per 5 secondi.",
+		"SLACK_OFF": "Cura l'utilizzatore di tutti gli status negativi, guarisci il [30,SP]% dei HP massimi e subisci lo status SLEEP per 3 secondi.",
 		"DARK_VOID": "Infliggi [30 SP] SPECIAL a tutti i nemici. Se uno dei bersagli è afflitto da SILENCE, viene SLEEP per 2 secondi.",
 		"OVERHEAT": "Infliggi [40 SP] SPECIAL a tutti i nemici. Il danno  aumenta del 30% se il bersaglio è afflitto da BURN.",
 		"HYPNOSIS": "Infliggi lo status SLEEP  ad 1 nemico nelle retrovie per [2,4,6,SP=0.5] secondi.",

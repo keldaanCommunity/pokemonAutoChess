@@ -1599,7 +1599,7 @@
 		"SPECTRAL_THIEF": "从战场上消失，随后再次出现，造成[50,SP]点SPECIAL，并偷取目标的所有属性提升。",
 		"GEOMANCY": "提升[15,SP]点ATK，[10,SP]点SPE_DEF和20点SPEED。",
 		"DEATH_WING": "对目标造成[150,SP]点SPECIAL。使用者自身恢复造成伤害的75%。",
-		"SLACK_OFF": "清除自身所有负面状态，恢复[30,40,50,SP=0.5]%的最大HP，并陷入SLEEP 5秒。",
+		"SLACK_OFF": "清除自身所有负面状态，恢复[30,SP]%的最大HP，并陷入SLEEP 3秒。",
 		"DARK_VOID": "对所有敌方宝可梦造成[30,SP]点SPECIAL。若有目标处于SILENCE，使这些目标陷入SLEEP 2秒。",
 		"OVERHEAT": "对所有敌方宝可梦造成[40,SP]点SPECIAL。若目标处于BURN，造成的伤害增加30%。",
 		"HYPNOSIS": "使最远的敌方宝可梦陷入SLEEP [2,3.5,6,SP=0.5]秒。",

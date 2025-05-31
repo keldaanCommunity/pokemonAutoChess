@@ -1305,7 +1305,7 @@
 		"MANTIS_BLADES": "Phóng ra ba lưỡi kiếm vào mục tiêu, mỗi lưỡi kiếm gây ra [30,60,120,SP] một loại sát thương riêng biệt: PHYSICAL, SPECIAL and TRUE",
 		"GEOMANCY": "Tăng [15,SP] ATK, [5,SP] SPE_DEF và 20 SPEED",
 		"DEATH_WING": "Gây [150,SP] SPECIAL và hồi phục một lượng bằng 75% lượng sát thương lên mục tiêu",
-		"SLACK_OFF": "Giải trừ toàn bộ hiệu ứng xấu, hồi phục [30,40,50,SP=0.5] % tương đương với chỉ số HP cao nhất và khiến Pokémon thi triển SLEEP trong 5 giây",
+		"SLACK_OFF": "Giải trừ toàn bộ hiệu ứng xấu, hồi phục [30,SP] % tương đương với chỉ số HP cao nhất và khiến Pokémon thi triển SLEEP trong 3 giây",
 		"DARK_VOID": "Gây [30,SP] SPECIAL lên toàn bộ đối thủ. Đối với Pokémon đang SILENCE, chúng trúng thêm hiệu ứng SLEEP trong 2 giây",
 		"OVERHEAT": "Gây [40,SP] SPECIAL lên toàn bộ đối thủ. Thêm 30% sát thương nếu mục tiêu đang trúng hiệu ứng BURN",
 		"HYPNOSIS": "Khiến 1 đối thủ ở hậu tuyến SLEEP trong [2,4,6,SP=0.5] giây",
