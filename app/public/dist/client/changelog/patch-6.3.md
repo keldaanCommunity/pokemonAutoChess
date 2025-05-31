@@ -3,6 +3,7 @@
 # Changes to Pokemon & Abilities
 
 - Hisuian Lilligant
+- Conkeldurr now spawns 2 pillars instead of 1.
 
 # Changes to Synergies
 
