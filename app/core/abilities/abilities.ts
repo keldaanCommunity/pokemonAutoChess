@@ -12252,8 +12252,8 @@ export class LaserBladeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     if (pokemon.count.ult % 2 === 1) {
       // Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.
-      const damage = 30
-      const shield = 30
+      const damage = 25
+      const shield = 25
       const enemiesHit = new Set<PokemonEntity>()
       board
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
@@ -12279,7 +12279,7 @@ export class LaserBladeStrategy extends AbilityStrategy {
       })
     } else {
       // Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL
-      const damage = 30 + pokemon.atk
+      const damage = 25 + pokemon.atk
       target.handleSpecialDamage(
         damage,
         board,

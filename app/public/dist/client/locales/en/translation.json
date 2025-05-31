@@ -1885,7 +1885,7 @@
 		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Dash behind the target and delivers a powerful slash, dealing [100,SP] + 1x ATK as PHYSICAL",
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
-		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL.",
+		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [25,SP] SHIELD and dealing [25,SP] SPECIAL to target and adjacent enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [25,SP] + ATK as SPECIAL.",
 		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for [2,SP] seconds.",
 		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
 		"DRUM_BEATING": "Cycles through:\n1. Wood block: give [10,20,40,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,SP] SPEED to the entire team",

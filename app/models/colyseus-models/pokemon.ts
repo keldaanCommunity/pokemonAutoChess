@@ -18291,7 +18291,7 @@ export class IronValiant extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250
-  atk = 26
+  atk = 25
   speed = 76
   def = 10
   speDef = 6
