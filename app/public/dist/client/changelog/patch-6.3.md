@@ -12,6 +12,7 @@
 
 # UI
 
+- **Mouse right button no longer allows you to move on carousel rounds in town. Use the left button instead.** This is to prevent accidentally opening carousel items tooltips and not being able to move to the location behind the tooltip.
 - Simplified the collection system UI. Added counters for portraits unlocked, shinies unlocked, and pokémons played.
 
 # Collection system rework

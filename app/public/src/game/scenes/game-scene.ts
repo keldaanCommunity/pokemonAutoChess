@@ -401,6 +401,7 @@ export default class GameScene extends Scene {
 
     this.input.on("pointerdown", (pointer) => {
       if (
+        pointer.leftButtonDown() &&
         this.minigameManager &&
         this.room?.state.phase === GamePhaseState.TOWN &&
         !this.spectate
