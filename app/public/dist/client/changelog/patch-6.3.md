@@ -8,10 +8,19 @@
 - Nerf Surging Strikes (Urshifu Rapid Strike): add a 200ms delay between each hit
 - Buff Blizzard (Articuno): damage 5/10/15 → 10/20/30
 - Nerf Laser Blade (Iron Valiant): shield & special damage 30 → 25
+- Buff Alcremie Vanilla: 60 → 80 shield on cast
+- Buff Alcremie Ruby Swirl: 8 → 10 attack on cast
+- Change Alcremie Rainbow Swirl: give 60 PP instead of 60 AP
 
 # Changes to Synergies
 
 # Changes to Items
+
+- Buff Moomoo Milk: 10 → 15 permanent HP
+- Buff Star Sweet: 5 → 10 permanent AP
+- Buff Berry Sweet: 10 → 15 permanent HP
+- Buff Berry Juice: 80 → 100 shield
+- Buffed Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
 
 # Gameplay
 

@@ -11629,7 +11629,7 @@ export class DecorateStrategy extends AbilityStrategy {
       strongestNearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
 
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
-        strongestNearestAlly.addShield(60, pokemon, 1, crit)
+        strongestNearestAlly.addShield(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
         strongestNearestAlly.addSpeed(30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
@@ -11643,11 +11643,11 @@ export class DecorateStrategy extends AbilityStrategy {
         strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
         strongestNearestAlly.addDefense(15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
-        strongestNearestAlly.addAttack(8, pokemon, 1, crit)
+        strongestNearestAlly.addAttack(10, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
         strongestNearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        strongestNearestAlly.addAbilityPower(60, pokemon, 1, crit)
+        strongestNearestAlly.addPP(60, pokemon, 1, crit)
       }
     }
   }
@@ -11757,7 +11757,7 @@ export class FilletAwayStrategy extends AbilityStrategy {
 
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
-    pokemon.status.triggerProtect(400)
+    pokemon.status.triggerProtect(500)
     // move to backline
     const corner = board.getTeleportationCell(
       pokemon.positionX,

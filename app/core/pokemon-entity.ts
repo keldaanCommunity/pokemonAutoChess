@@ -1872,7 +1872,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.effects.has(EffectEnum.BERRY_JUICE)) {
-      this.addShield(80, this, 0, false)
+      this.addShield(100, this, 0, false)
     }
   }
 
