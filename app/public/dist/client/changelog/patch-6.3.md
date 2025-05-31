@@ -12,6 +12,7 @@
 - Buff Alcremie Ruby Swirl: 8 → 10 attack on cast
 - Change Alcremie Rainbow Swirl: give 60 PP instead of 60 AP
 - Buff Fillet Away (Veluza): HP sacrified 50% → 30%
+- Buff Piplup line Attack: 5/9/20 → 6/12/24
 
 # Changes to Synergies
 

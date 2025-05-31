@@ -3908,7 +3908,7 @@ export class Piplup extends Pokemon {
   stars = 1
   evolution = Pkm.PRINPLUP
   hp = 60
-  atk = 5
+  atk = 6
   speed = 44
   def = 6
   speDef = 6
@@ -3924,7 +3924,7 @@ export class Prinplup extends Pokemon {
   stars = 2
   evolution = Pkm.EMPOLEON
   hp = 130
-  atk = 9
+  atk = 12
   speed = 44
   def = 8
   speDef = 8
@@ -3939,7 +3939,7 @@ export class Empoleon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 240
-  atk = 20
+  atk = 24
   speed = 44
   def = 10
   speDef = 10
