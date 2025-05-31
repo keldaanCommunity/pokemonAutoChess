@@ -3623,7 +3623,7 @@
 	"blacklisted": "Du wurdest von diesem match gekickt",
 	"npc_dialog": {
 		"welcome": "Willkommen!",
-		"tell_price": "10 GOLD pro!",
+		"tell_price": "{{price}} GOLD pro!",
 		"thank_you": "DANKESCHÖN!"
 	},
 	"scribble": {

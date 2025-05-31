@@ -3221,7 +3221,7 @@
 	"blacklisted": "Sei stato cacciato da questa partita",
 	"npc_dialog": {
 		"welcome": "Benvenuto!",
-		"tell_price": "10 GOLD ad ognuno!",
+		"tell_price": "{{price}} GOLD ad ognuno!",
 		"thank_you": "GRAZIE MILLE!"
 	},
 	"scribble": {

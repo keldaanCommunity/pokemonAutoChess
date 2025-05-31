@@ -3627,7 +3627,7 @@
 	"blacklisted": "Vous avez été expulsé de ce match",
 	"npc_dialog": {
 		"welcome": "Bienvenue!",
-		"tell_price": "C'est 10 GOLD pièce !",
+		"tell_price": "C'est {{price}} GOLD pièce !",
 		"thank_you": "MERCI !"
 	},
 	"scribble": {

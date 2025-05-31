@@ -3636,7 +3636,7 @@
 	"blacklisted": "이 경기에서 추방당했습니다.",
 	"npc_dialog": {
 		"welcome": "어서와요!",
-		"tell_price": "각각 10골드입니다!",
+		"tell_price": "각각 {{price}}골드입니다!",
 		"thank_you": "감사합니다!"
 	},
 	"scribble": {

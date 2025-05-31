@@ -3687,7 +3687,7 @@
 	"blacklisted": "Has sido expulsado de esta Partida.",
 	"npc_dialog": {
 		"welcome": "¡Bienvenido!",
-		"tell_price": "10 GOLD cada uno!",
+		"tell_price": "{{price}} GOLD cada uno!",
 		"thank_you": "GRACIAS !"
 	},
 	"scribble": {

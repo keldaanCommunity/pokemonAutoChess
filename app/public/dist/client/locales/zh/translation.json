@@ -3677,7 +3677,7 @@
 	"blacklisted": "你已被房主踢出房间",
 	"npc_dialog": {
 		"welcome": "欢迎！",
-		"tell_price": "每件10 GOLD！",
+		"tell_price": "每件{{price}} GOLD！",
 		"thank_you": "谢谢惠顾！"
 	},
 	"scribble": {

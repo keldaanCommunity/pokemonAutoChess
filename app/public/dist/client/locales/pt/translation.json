@@ -2511,7 +2511,7 @@
 	"not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
 	"npc_dialog": {
 		"welcome": "Bem-vindo !",
-		"tell_price": "10 GOLD para cada !",
+		"tell_price": "{{price}} GOLD para cada !",
 		"thank_you": "OBRIGADO !"
 	},
 	"scribble": {
