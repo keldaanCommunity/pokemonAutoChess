@@ -1469,7 +1469,7 @@
 		"SING": "Hace que [1,2,3] Pokémon enemigos de la retaguardia queden SLEEP por [2,SP] segundos",
 		"PROTECT": "Garantiza PROTECT al usuario, volviéndose invulnerable por [1,3,5,SP=0.5] segundos",
 		"OBSTRUCT": "Otorga PROTECT al usuario, volviéndose invulnerable durante [1,2,3,SP=0.5] segundos. Cualquier ataque recibido durante este tiempo reduce la DEF del agresor en 2.",
-		"BLIZZARD": "Aplica FREEZE a todos los Pokémon enemigos durante 2 segundos e inflige [5,10,15,SP] de SPECIAL. Causa el doble de daño si el enemigo ya está FREEZE",
+		"BLIZZARD": "Aplica FREEZE a todos los Pokémon enemigos durante 2 segundos e inflige [10,20,30,SP] de SPECIAL. Causa el doble de daño si el enemigo ya está FREEZE",
 		"CONFUSION": "Aplica CONFUSION y SILENCE al objetivo durante [3,5,7] segundos. Si el objetivo ya está CONFUSION, inflige [75,150,300,SP] de SPECIAL en su lugar",
 		"FIRE_BLAST": "Lanza una llamarada en forma de estrella, realizando [30,60,110,SP] SPECIAL a todos los Pokémon enemigos golpeados.",
 		"WHEEL_OF_FIRE": "El usuario se envuelve en llamas, rodando hacia los enemigos de ida y vuelta. Inflige [10,20,30,SP] de SPECIAL dos veces a todos los Pokémon enemigos que golpea",

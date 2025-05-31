@@ -1308,7 +1308,7 @@
 		"TOXIC": "Infligge POISONNED a [1,2,3] Pokèmon nemici più vicini per [3,6,9,SP=0.5] secondi.",
 		"SING": "Infligge SLEEP a [1,2,3] Pokémon nemici nelle retrovie per [2,SP] secondi",
 		"PROTECT": "Garantisce PROTECT all'utilizzatore, diventando invulnerabile per [1,3,5,SP=0.5] secondi.",
-		"BLIZZARD": "Infligge FREEZE a tutti i Pokémon nemici per 2 secondi e infliggi [5,10,15,SP] SPECIAL. Subiscono il doppio del danno se il nemico ha già lo status FREEZE.",
+		"BLIZZARD": "Infligge FREEZE a tutti i Pokémon nemici per 2 secondi e infliggi [10,20,30,SP] SPECIAL. Subiscono il doppio del danno se il nemico ha già lo status FREEZE.",
 		"CONFUSION": "Infliggi CONFUSION e SILENCE al bersaglio per [3,5,7] secondi. Se il bersaglio è già con lo status CONFUSION, infligge invece [75.150.300 SP] SPECIAL.",
 		"FIRE_BLAST": "Spara una Fuocobomba in un'area a forma di stella, infliggendo [30,60,110,SP] SPECIAL a tutti gli avversari colpiti.",
 		"WHEEL_OF_FIRE": "Lancia un Ruotafuoco ritornante che infligge [10,20,30,SP] SPECIAL a tutti i Pokèmon nemici nel suo tragitto.",

@@ -6,6 +6,7 @@
 - Buff Mach Punch (Kubfu, Tyrogue): 50 → 60 special damage
 - Nerf Wicked Blow (Urshifu Single Strike): 80 → 60 true damage
 - Nerf Surging Strikes (Urshifu Rapid Strike): add a 200ms delay between each hit
+- Buff Blizzard (Articuno): damage 5/10/15 → 10/20/30
 
 # Changes to Synergies
 
