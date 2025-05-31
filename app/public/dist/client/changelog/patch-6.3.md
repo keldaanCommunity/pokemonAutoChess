@@ -14,6 +14,7 @@
 - Buff Fillet Away (Veluza): HP sacrified 50% → 30%
 - Buff Piplup line Attack: 5/9/20 → 6/12/24
 - Buff Waterfall (TM, Seaking): 40/80/120 → 50/100/150 shield
+- Nerf Chimchar line: Def & Spe Def: 4/4/4 → 2/3/4
 
 # Changes to Synergies
 

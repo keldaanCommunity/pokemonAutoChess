@@ -3961,8 +3961,8 @@ export class Chimchar extends Pokemon {
   hp = 60
   atk = 4
   speed = 60
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
@@ -3982,8 +3982,8 @@ export class Monferno extends Pokemon {
   hp = 100
   atk = 10
   speed = 60
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
