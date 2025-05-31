@@ -1871,7 +1871,7 @@
 		"RAZOR_LEAF": "飞出叶片攻击目标身后的一条直线，对所有击中的敌方宝可梦造成[20,40,80,SP]点SPECIAL。该招式可以暴击。",
 		"MUD_SHOT": "向目标投掷泥块，造成[25,50,75,SP]点SPECIAL，并降低其[10,20,30,SP]点SPEED。",
 		"MALIGNANT_CHAIN": "伸出用由毒形成的锁链缠住对手，使其陷入LOCKED和3层POISONNED [3,SP]秒。",
-		"FILLET_AWAY": "损失当前最大HP的50%来逃离当前位置，提升[10,SP]点ATK和[20,SP]点SPEED，并短暂获得PROTECT。",
+		"FILLET_AWAY": "损失当前最大HP的30%来逃离当前位置，提升[10,SP]点ATK和[20,SP]点SPEED，并短暂获得PROTECT。",
 		"ELECTRO_SHOT": "收集电力2秒，随后提升40点AP并将高压的电力发射出去，对一条直线上的目标造成[80,100,120,SP]点SPECIAL。在STORM中能立即发射。",
 		"FLOWER_TRICK": "将做了手脚的花束扔向目标，在3秒后爆炸，对目标及相邻敌方宝可梦造成[15,40,85,SP]点SPECIAL。目标在此期间受到的每次暴击使本次爆炸伤害提升[15,SP]点SPECIAL。",
 		"SOLAR_BLADE": "用2秒（若被LIGHT共鸣的聚光灯照射则无需蓄力）收集满满的日光，将此力量集中在剑上斩击前方锥形区域内至多3只宝可梦，造成[30,60,120,SP]点TRUE。",

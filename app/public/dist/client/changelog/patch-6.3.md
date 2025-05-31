@@ -11,6 +11,7 @@
 - Buff Alcremie Vanilla: 60 → 80 shield on cast
 - Buff Alcremie Ruby Swirl: 8 → 10 attack on cast
 - Change Alcremie Rainbow Swirl: give 60 PP instead of 60 AP
+- Buff Fillet Away (Veluza): HP sacrified 50% → 30%
 
 # Changes to Synergies
 
