@@ -13,6 +13,7 @@
 - Change Alcremie Rainbow Swirl: give 60 PP instead of 60 AP
 - Buff Fillet Away (Veluza): HP sacrified 50% → 30%
 - Buff Piplup line Attack: 5/9/20 → 6/12/24
+- Buff Waterfall (TM, Seaking): 40/80/120 → 50/100/150 shield
 
 # Changes to Synergies
 

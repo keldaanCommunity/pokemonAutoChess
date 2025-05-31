@@ -1669,7 +1669,7 @@
 		"SHELL_SMASH": "Causa [15,30,SP] de SPECIAL a los enemigos adyacentes; gana 2 ATK, 20 AP y 20 SPEED, y pierde 2 DEF, 2 SPE_DEF",
 		"HELPING_HAND": "Da [30,60,100,SP] SHIELD a los 2 aliados más cercanos y dobla el daño de la siguiente habilidad",
 		"ASTRAL_BARRAGE": "Envía [7,SP] pequeños fantasmas a Pokémon enemigos aleatorios. Cada uno de ellos causa 20 de SPECIAL",
-		"WATERFALL": "Obtiene [40,80,120,SP] de SHIELD, cura cualquier estado negativo y limpia la casilla",
+		"WATERFALL": "Obtiene [50,100,150,SP] de SHIELD, cura cualquier estado negativo y limpia la casilla",
 		"PYRO_BALL": "El usuario ataca encendiendo una pequeña piedra y lanzándola como una bola de fuego al objetivo más lejano, infligiendo [10,20,40,SP] de SPECIAL y dejando BURN durante 2 segundos todo lo que encuentre en su camino.",
 		"WHIRLPOOL": "Fija al enemigo más lejano y desata una lluvia de 4 remolinos hacia él. Cada uno inflige [125,SP] % de ATK SPECIAL al primer enemigo que alcance",
 		"SMOKE_SCREEN": "Se esconde bajo tierra y reaparece en medio del equipo enemigo, causando [10,20,40,SP] de SPECIAL a todas las unidades adyacentes y fumigando la fila trasera para reducir su precisión en 50%",

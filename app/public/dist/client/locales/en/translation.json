@@ -1671,7 +1671,7 @@
 		"SHELL_SMASH": "Deal [15,30,SP] SPECIAL to adjacent enemy Pokémon. Gain 2 ATK, 20 AP and 20 SPEED and lose 2 DEF and 2 SPE_DEF.",
 		"HELPING_HAND": "Grant [30,60,100,SP] SHIELD to the 2 nearest allied Pokémon and double the damage of their next ability.",
 		"ASTRAL_BARRAGE": "Send [7,SP] small ghosts toward random enemy Pokémon, each dealing 20 SPECIAL.",
-		"WATERFALL": "Gain [40,80,120,SP] SHIELD, cure any negative status conditions and clear the tile.",
+		"WATERFALL": "Gain [50,100,150,SP] SHIELD, cure any negative status conditions and clear the tile.",
 		"PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest enemy Pokémon, dealing [10,20,40,SP] SPECIAL and applying BURN for 2 seconds to all enemy Pokémon in its path.",
 		"WHIRLPOOL": "Unleash a hail of 4 whirlpools toward the farthest enemy Pokémon, each dealing [125,SP]% ATK SPECIAL to the first enemy Pokémon in their path.",
 		"SMOKE_SCREEN": "Channel underground and reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all adjacent enemy Pokémon and applying smoke to the back row, making enemies BLINDED.",
