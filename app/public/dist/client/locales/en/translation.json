@@ -1590,7 +1590,7 @@
 		"SPIRIT_SHACKLE": "Shoot a Piercing Arrow, dealing [30,60,90,SP] SPECIAL in a line behind the target and apply WOUND for 4 seconds.",
 		"WATER_SHURIKEN": "Throw 3 shuriken in 3 directions that pass through enemy Pokémon and deal [20,40,60,SP] SPECIAL.",
 		"SHADOW_SNEAK": "Deal [50,SP] SPECIAL to the target. If the target suffers from SILENCE, deal TRUE instead.",
-		"MACH_PUNCH": "Deal [50,SP] SPECIAL to the target and attack immediately after.",
+		"MACH_PUNCH": "Deal [60,SP] SPECIAL to the target and attack immediately after.",
 		"MEGA_PUNCH": "Deal [60,SP] SPECIAL to the target. The damage is doubled if the user has a higher DEF than the target.",
 		"TRIPLE_KICK": "Deal [60,SP] SPECIAL to up to 3 adjacent enemy Pokémon.",
 		"MAWASHI_GERI": "Deal [60,SP] SPECIAL to the target and push it away. The damage is doubled if the user has a higher ATK than the target.",
@@ -1890,7 +1890,7 @@
 		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
 		"DRUM_BEATING": "Cycles through:\n1. Wood block: give [10,20,40,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,SP] SPEED to the entire team",
 		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,30,SP] SPECIAL to all enemies hit. Can crit by default.",
-		"WICKED_BLOW": "Deal [80,SP] TRUE to the target. Always deal a critical hit.",
+		"WICKED_BLOW": "Deal [60,SP] TRUE to the target. Always deal a critical hit.",
 		"SURGING_STRIKES": "Strikes the target with a flowing motion 3 times in a row, dealing [100,SP]% of ATK each as SPECIAL. Always deal critical hits.",
 		"VICTORY_DANCE": "Performs a dance to usher in victory. Raise user's ATK and DEF by [3,SP] and SPEED by [10,SP]."
 	},

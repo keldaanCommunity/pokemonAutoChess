@@ -1588,7 +1588,7 @@
 		"SPIRIT_SHACKLE": "Dispara una flecha perforante que inflige [30,60,90,SP] de SPECIAL en una línea detrás del objetivo y deja WOUND durante 4 segundos a todos los Pokémon golpeados",
 		"WATER_SHURIKEN": "Lanza 3 shuriken en 3 direcciones que atraviesan a los enemigos e infligen [20,40,60,SP] de SPECIAL",
 		"SHADOW_SNEAK": "Inflige [50,SP] de SPECIAL. Si el objetivo se encuentra SILENCE, se convierte en TRUE",
-		"MACH_PUNCH": "Inflige [50,SP] de SPECIAL y ataca inmediatamente después",
+		"MACH_PUNCH": "Inflige [60,SP] de SPECIAL y ataca inmediatamente después",
 		"MEGA_PUNCH": "Inflige [60,SP] de SPECIAL. Causa daño doble si el atacante tiene más DEF que el objetivo",
 		"TRIPLE_KICK": "Inflige [60,SP] de SPECIAL a hasta 3 enemigos adyacentes",
 		"MAWASHI_GERI": "Inflige [60,SP] de SPECIAL al objetivo y lo empuja. Causa el doble de daño si el atacante tiene más ATK que el objetivo",
@@ -1888,7 +1888,7 @@
 		"ARM_THRUST": "Ataca de [2,LK] a [5,LK] veces, causando [100,SP]% del ATK del usuario como PHYSICAL cada vez. Todos los golpes pueden ser críticos de manera independiente por defecto en función de la CRIT_CHANCE del usuario.",
 		"DRUM_BEATING": "Realiza sucesivamente las siguientes acciones:\n1. Caja: otorga [10,20,40,SP] de SHIELD a todo el equipo aliado.\n2. Redoble de tambor: inflige [10,20,40,SP] de SPECIAL a todos los enemigos.\n3. Acelerar el ritmo: otorga [10,20,40,SP] de SPEED a todo el equipo aliado.",
 		"PSYCHO_CUT": "Tres cuchillas psíquicas cortan y atraviesan a los enemigos en una línea detrás del objetivo, cada una infligiendo [10,20,30,SP] de SPECIAL a todos los enemigos golpeados. Puede ser crítico por defecto.",
-		"WICKED_BLOW": "Inflige [80,SP] de TRUE al objetivo. Siempre es un golpe crítico.",
+		"WICKED_BLOW": "Inflige [60,SP] de TRUE al objetivo. Siempre es un golpe crítico.",
 		"SURGING_STRIKES": "Golpea con un movimiento fluido al objetivo 3 veces seguidas, cada una causando un [100,SP]% del ATK como SPECIAL. Siempre son golpes críticos."
 	},
 	"effect": {

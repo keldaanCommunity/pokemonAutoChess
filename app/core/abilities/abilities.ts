@@ -12396,14 +12396,17 @@ export class SurgingStrikesStrategy extends AbilityStrategy {
     const damage = pokemon.atk
     const nbHits = 3
     for (let i = 0; i < nbHits; i++) {
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        true
-      )
+      pokemon.commands.push(new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          true
+        )
+      }, i * 200))
     }
+    pokemon.cooldown += 200 * nbHits
   }
 }
 
@@ -12416,7 +12419,7 @@ export class WickedBlowStrategy extends AbilityStrategy {
   ) {
     // Deal 80AP true damage to the target. Always deal a critical hit.
     super.process(pokemon, board, target, true)
-    const damage = 80
+    const damage = 60
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, true)
   }
 }

@@ -1588,7 +1588,7 @@
 		"SPIRIT_SHACKLE": "发射一支穿透敌人的箭，对目标身后的一条直线上的所有敌方宝可梦造成[30,60,90,SP]点SPECIAL，并使他们陷入WOUND 4秒。",
 		"WATER_SHURIKEN": "朝3个方向扔出3枚穿透敌人的手里剑，造成[20,40,60,SP]点SPECIAL。",
 		"SHADOW_SNEAK": "对目标造成[50,SP]点SPECIAL。若目标处于SILENCE，改为造成TRUE。",
-		"MACH_PUNCH": "对目标造成[50,SP]点SPECIAL，并立即攻击一次。",
+		"MACH_PUNCH": "对目标造成[60,SP]点SPECIAL，并立即攻击一次。",
 		"MEGA_PUNCH": "对目标造成[60,SP]点SPECIAL。若使用者的DEF高于目标，造成的伤害翻倍。",
 		"TRIPLE_KICK": "对至多3个相邻的敌方宝可梦造成[60,SP]点SPECIAL。",
 		"MAWASHI_GERI": "对目标造成[60,SP]点SPECIAL，并将其击退。若使用者的ATK高于目标，造成的伤害翻倍。",
@@ -1888,7 +1888,7 @@
 		"ARM_THRUST": "连续攻击[2,LK]至[5,LK]次，每次造成PHYSICAL，数值相当于[100,SP]%的ATK。每次攻击各自可以按CRIT_CHANCE产生暴击。",
 		"DRUM_BEATING": "每次使用招式时依次循环执行以下行为之一：\n1.木之格挡：所有我方宝可梦获得[10,20,40,SP]点SHIELD；\n2.迅疾连打：对所有敌方宝可梦造成[10,20,40,SP]点SPECIAL；\n3.加快节奏：所有我方宝可梦提升[10,20,40,SP]点SPEED。",
 		"PSYCHO_CUT": "三道精神利刃斩击并直线穿透目标背后一条直线上的敌方宝可梦，每道对所有击中的敌方宝可梦造成[10,20,30,SP]点SPECIAL。该招式可以暴击。",
-		"WICKED_BLOW": "对目标造成[80,SP]点TRUE。该招式必定暴击。",
+		"WICKED_BLOW": "对目标造成[60,SP]点TRUE。该招式必定暴击。",
 		"SURGING_STRIKES": "仿若行云流水般的3次连击，每次造成SPECIAL，数值相当于[100,SP]%的ATK。该招式必定暴击。"
 	},
 	"effect": {
