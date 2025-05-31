@@ -92,15 +92,16 @@ class GameContainer {
     $simulation.listen("weather", (value, previousValue) => {
       this.handleWeatherChange(simulation, value)
     })
-      ;[$simulation.blueTeam, $simulation.redTeam].forEach((team) => {
-        team.onAdd((p, key) =>
-          this.initializePokemon(<PokemonEntity>p, simulation)
-        )
-        team.onRemove((pokemon, key) => {
-          // logger.debug('remove pokemon');
-          this.gameScene?.battle?.removePokemon(simulation.id, pokemon)
-        })
+
+    for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
+      team.onAdd((p, key) =>
+        this.initializePokemon(<PokemonEntity>p, simulation)
+      )
+      team.onRemove((pokemon, key) => {
+        // logger.debug('remove pokemon');
+        this.gameScene?.battle?.removePokemon(simulation.id, pokemon)
       })
+    }
 
     $simulation.listen("started", (value, previousValue) => {
       if (
