@@ -2,7 +2,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Hisuian Lilligant
+- Cherrim Sunlight is now tier 3 ; adjusted stats accordingly.
 
 # Changes to Synergies
 
