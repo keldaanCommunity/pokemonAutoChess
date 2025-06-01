@@ -2250,7 +2250,7 @@ export class BlizzardStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const freezeDuration = 2000
-    const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
         enemy.handleSpecialDamage(
@@ -2891,10 +2891,11 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
     ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(
-        pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
+        heal,
         pokemon,
         1,
         crit
@@ -3680,7 +3681,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const shield = [40, 80, 120][pokemon.stars - 1] ?? 120
+    const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     board.clearBoardEffect(
@@ -11668,7 +11669,7 @@ export class DecorateStrategy extends AbilityStrategy {
       strongestNearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
 
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
-        strongestNearestAlly.addShield(60, pokemon, 1, crit)
+        strongestNearestAlly.addShield(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
         strongestNearestAlly.addSpeed(30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
@@ -11682,11 +11683,11 @@ export class DecorateStrategy extends AbilityStrategy {
         strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
         strongestNearestAlly.addDefense(15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
-        strongestNearestAlly.addAttack(8, pokemon, 1, crit)
+        strongestNearestAlly.addAttack(10, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
         strongestNearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        strongestNearestAlly.addAbilityPower(60, pokemon, 1, crit)
+        strongestNearestAlly.addPP(60, pokemon, 1, crit)
       }
     }
   }
@@ -11791,12 +11792,12 @@ export class FilletAwayStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     // lose 50% of max HP and gain 10 attack and 20 speed
-    const lostMaxHP = Math.floor(pokemon.hp * 0.5)
+    const lostMaxHP = Math.floor(pokemon.hp * 0.3)
     pokemon.addMaxHP(-lostMaxHP, pokemon, 0, false)
 
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
-    pokemon.status.triggerProtect(400)
+    pokemon.status.triggerProtect(500)
     // move to backline
     const corner = board.getTeleportationCell(
       pokemon.positionX,
@@ -12291,8 +12292,8 @@ export class LaserBladeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     if (pokemon.count.ult % 2 === 1) {
       // Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.
-      const damage = 30
-      const shield = 30
+      const damage = 25
+      const shield = 25
       const enemiesHit = new Set<PokemonEntity>()
       board
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
@@ -12318,7 +12319,7 @@ export class LaserBladeStrategy extends AbilityStrategy {
       })
     } else {
       // Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL
-      const damage = 30 + pokemon.atk
+      const damage = 25 + pokemon.atk
       target.handleSpecialDamage(
         damage,
         board,
@@ -12435,14 +12436,17 @@ export class SurgingStrikesStrategy extends AbilityStrategy {
     const damage = pokemon.atk
     const nbHits = 3
     for (let i = 0; i < nbHits; i++) {
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        true
-      )
+      pokemon.commands.push(new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          true
+        )
+      }, i * 200))
     }
+    pokemon.cooldown += 200 * nbHits
   }
 }
 
@@ -12455,7 +12459,7 @@ export class WickedBlowStrategy extends AbilityStrategy {
   ) {
     // Deal 80AP true damage to the target. Always deal a critical hit.
     super.process(pokemon, board, target, true)
-    const damage = 80
+    const damage = 60
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, true)
   }
 }

@@ -3911,7 +3911,7 @@ export class Piplup extends Pokemon {
   stars = 1
   evolution = Pkm.PRINPLUP
   hp = 60
-  atk = 5
+  atk = 6
   speed = 44
   def = 6
   speDef = 6
@@ -3927,7 +3927,7 @@ export class Prinplup extends Pokemon {
   stars = 2
   evolution = Pkm.EMPOLEON
   hp = 130
-  atk = 9
+  atk = 12
   speed = 44
   def = 8
   speDef = 8
@@ -3942,7 +3942,7 @@ export class Empoleon extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 240
-  atk = 20
+  atk = 24
   speed = 44
   def = 10
   speDef = 10
@@ -3964,8 +3964,8 @@ export class Chimchar extends Pokemon {
   hp = 60
   atk = 4
   speed = 60
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
@@ -3985,8 +3985,8 @@ export class Monferno extends Pokemon {
   hp = 100
   atk = 10
   speed = 60
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.TORMENT
@@ -4922,7 +4922,7 @@ export class Kakuna extends Pokemon {
   evolution = Pkm.BEEDRILL
   hp = 110
   atk = 10
-  speed = 49
+  speed = 35
   def = 8
   speDef = 4
   maxPP = 100
@@ -13170,12 +13170,12 @@ export class CherrimSunlight extends Pokemon {
     Synergy.GOURMET
   ])
   rarity = Rarity.EPIC
-  stars = 2
-  hp = 210
-  atk = 17
+  stars = 3
+  hp = 250
+  atk = 30
   speed = 52
   def = 6
-  speDef = 6
+  speDef = 9
   maxPP = 65
   range = 3
   skill = Ability.NATURAL_GIFT
@@ -18318,7 +18318,7 @@ export class IronValiant extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250
-  atk = 26
+  atk = 25
   speed = 76
   def = 10
   speDef = 6
