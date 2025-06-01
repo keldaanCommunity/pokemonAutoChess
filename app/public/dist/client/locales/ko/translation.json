@@ -1759,7 +1759,7 @@
 		"ICE_FANG": "[30,60,120,SP] SPECIAL을 입히고 1초 동안 FREEZE 를 부여합니다.",
 		"THUNDER_FANG": "[30,60,120,SP] SPECIAL을 입히고 3초 동안 PARALYSIS 를 부여한다.",
 		"TAIL_WHIP": "타겟의 DEF 를 [30,SP]% 감소시킨다.",
-		"PSYSHIELD_BASH": "적의 후방으로 돌진하여 경로상의 모든 적에게 [60,SP]의 SPECIAL 을 입히고 자신에게 1초 동안 PROTECT 를 건다.",
+		"PSYSHIELD_BASH": "적의 후방으로 돌진하여 경로상의 모든 적에게 [30,40,50,60,SP]의 SPECIAL 을 입히고 자신에게 1초 동안 PROTECT 를 건다.",
 		"QUIVER_DANCE": "ATK [5,SP], SPE_DEF [5,SP], SPEED [10,SP], 와 AP 20%를 획득한다.",
 		"TORCH_SONG": "무작위 적들에게 [4,SP] 불꽃을 쏘아낸다. 각각의 불꽃은 ATK 의 50%를 SPEICAL 로 가하고, [30,LK]% 확률로 2초간 BURN 을 가하며, 시전자의 AP 을 [1,2,3] 증가시킨다.",
 		"POWER_WHIP": "가장 먼 적을 목표로 거대한 덩굴을 풀어서 맞는 모든 적에게 [30,60,SP] SPECIAL를 입힌다.",

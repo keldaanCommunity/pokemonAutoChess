@@ -1754,7 +1754,7 @@
 		"ICE_FANG": "Verursacht [30,60,120,SP] SPECIAL und verursacht 1 Sekunde lang FREEZE",
 		"THUNDER_FANG": "Verursacht [30,60,120,SP] SPECIAL und fügt 3 Sekunden lang PARALYSIS zu",
 		"TAIL_WHIP": "Verringert die DEF des Ziels um [30,SP] %.",
-		"PSYSHIELD_BASH": "Rennt in den Rücken des Feindes und fügt allen Gegnern im Weg [60,SP] SPECIAL zu und PROTECT den Zaubernden 1 Sekunde lang",
+		"PSYSHIELD_BASH": "Rennt in den Rücken des Feindes und fügt allen Gegnern im Weg [30,40,50,60,SP] SPECIAL zu und PROTECT den Zaubernden 1 Sekunde lang",
 		"QUIVER_DANCE": "Erhält [5,SP] ATK, [5,SP] SPE_DEF, [10,SP] SPEED und 20 AP",
 		"TORCH_SONG": "Bläst [4,SP] lodernde Flammen zu zufälligen Gegnern. Jede Flamme verursacht 50% des ATK als SPECIAL, mit [30,LK]% chance den Gegner für 2 Sekunden zu BURN und die AP des Nnutzers um [1,2,3] zu erhöhen.",
 		"POWER_WHIP": "Erfasst den am weitesten entfernten Gegner und entfesselt eine riesige Ranke, die allen getroffenen Feinden [30,60,SP] SPECIAL zufügt.",

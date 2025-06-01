@@ -148,8 +148,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     super()
     this.state = new MovingState()
-    this.effects = new SetSchema()
-    this.items = new SetSchema()
     this.refToBoardPokemon = pokemon
     pokemon.items.forEach((it) => {
       this.items.add(it)

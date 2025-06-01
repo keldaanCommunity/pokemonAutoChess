@@ -463,12 +463,9 @@ export default abstract class PokemonState {
       if (isNaN(reducedDamage)) {
         reducedDamage = 0
         logger.error(
-          `error calculating damage, damage: ${damage}, target: ${
-            pokemon.name
-          }, attacker: ${
-            attacker ? attacker.name : "Environment"
-          }, attack type: ${attackType}, defense : ${
-            pokemon.def
+          `error calculating damage, damage: ${damage}, target: ${pokemon.name
+          }, attacker: ${attacker ? attacker.name : "Environment"
+          }, attack type: ${attackType}, defense : ${pokemon.def
           }, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
         )
       }
@@ -891,9 +888,9 @@ export default abstract class PokemonState {
     }
   }
 
-  onEnter(pokemon: PokemonEntity) {}
+  onEnter(pokemon: PokemonEntity) { }
 
-  onExit(pokemon: PokemonEntity) {}
+  onExit(pokemon: PokemonEntity) { }
 
   getTargetsAtRange(pokemon: PokemonEntity, board: Board): PokemonEntity[] {
     const targets: PokemonEntity[] = []
@@ -984,13 +981,14 @@ export default abstract class PokemonState {
 
   getFarthestTarget(
     pokemon: PokemonEntity,
-    board: Board
+    board: Board,
+    targettableBy: PokemonEntity = pokemon
   ): PokemonEntity | undefined {
     let farthestTarget: PokemonEntity | undefined = undefined
     let maxDistance = 0
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (enemy && enemy.isTargettableBy(pokemon)) {
+      if (enemy && enemy.isTargettableBy(targettableBy)) {
         const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
         if (distance > maxDistance) {
           farthestTarget = enemy

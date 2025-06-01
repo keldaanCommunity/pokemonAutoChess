@@ -136,6 +136,10 @@ export default class Status extends Schema implements IStatus {
       this.triggerParalysis(2000, pokemon, null)
     }
 
+    if (pokemon.effects.has(EffectEnum.COTTON_BALL) && !this.sleep) {
+      this.triggerSleep(1000, pokemon)
+    }
+
     if (pokemon.status.runeProtect) {
       this.updateRuneProtect(dt)
     }

@@ -1,8 +1,19 @@
 # New Pokemons:
 
+- Hisuian Lilligant
+- Scream Tail
+- Wyrdeer
+- Indeedee (Female)
+- Indeedee (Male)
+- Cottonee,
+- Whimsicott
+- Girafarig
+- Farigiraf
+
 # Changes to Pokemon & Abilities
 
-- Hisuian Lilligant
+- Unowns can no longer eat Gourmet dishes
+- Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
 - Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
 
 # Changes to Synergies

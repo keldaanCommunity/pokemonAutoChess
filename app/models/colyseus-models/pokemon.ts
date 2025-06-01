@@ -58,7 +58,8 @@ import {
   Pkm,
   PkmFamily,
   PkmIndex,
-  PkmRegionalVariants
+  PkmRegionalVariants,
+  Unowns
 } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
@@ -150,7 +151,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get canEat(): boolean {
-    return this.passive !== Passive.INANIMATE
+    return this.passive !== Passive.INANIMATE && !Unowns.includes(this.name)
   }
 
   get hasEvolution(): boolean {
@@ -5530,6 +5531,30 @@ export class Stantler extends Pokemon {
   speed = 52
   def = 6
   speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYSHIELD_BASH
+  passive = Passive.STANTLER
+  attackSprite = AttackSprite.NORMAL_MELEE
+  evolution: Pkm = Pkm.WYRDEER
+  evolutionRule = new ConditionBasedEvolutionRule((pokemon: Pokemon, player: Player, stageLevel: number) => {
+    return player.map !== this.originalMap && stageLevel >= 20
+  })
+  originalMap: DungeonPMDO | "town" = "town"
+  onAcquired(player: Player): void {
+    this.originalMap = player.map
+  }
+}
+
+export class Wyrdeer extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 250
+  atk = 21
+  speed = 42
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.PSYSHIELD_BASH
@@ -16139,7 +16164,7 @@ export class HisuianLilligant extends Pokemon {
   def = 6
   speDef = 6
   maxPP = 100
-  range = 1  
+  range = 1
   skill = Ability.VICTORY_DANCE
   attackSprite = AttackSprite.GRASS_MELEE
   additional = true
@@ -18416,6 +18441,141 @@ export class UrshifuSingle extends Pokemon {
   }
 }
 
+export class ScreamTail extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.FAIRY,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 14
+  speed = 71
+  def = 8
+  speDef = 12
+  maxPP = 90
+  range = 1
+  skill = Ability.BOOMBURST
+  attackSprite = AttackSprite.FAIRY_MELEE
+}
+
+export class IndeedeeFemale extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 170
+  atk = 9
+  speed = 61
+  def = 3
+  speDef = 6
+  maxPP = 100
+  range = 2
+  skill = Ability.FOLLOW_ME
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class IndeedeeMale extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 140
+  atk = 13
+  speed = 61
+  def = 2
+  speDef = 4
+  maxPP = 80
+  range = 2
+  skill = Ability.AFTER_YOU
+  attackSprite = AttackSprite.PSYCHIC_RANGE
+}
+
+export class Cottonee extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.WHIMSICOTT
+  hp = 60
+  atk = 5
+  speed = 74
+  def = 3
+  speDef = 1
+  maxPP = 80
+  range = 2
+  skill = Ability.COTTON_SPORE
+  attackSprite = AttackSprite.GRASS_RANGE
+  additional = true
+}
+
+export class Whimsicott extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 120
+  atk = 11
+  speed = 74
+  def = 7
+  speDef = 5
+  maxPP = 80
+  range = 2
+  skill = Ability.COTTON_SPORE
+  attackSprite = AttackSprite.GRASS_RANGE
+  additional = true
+}
+
+export class Girafarig extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.EPIC
+  evolution = Pkm.FARIGIRAF
+  stars = 1
+  hp = 90
+  atk = 11
+  speed = 39
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.TWIN_BEAM
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Farigiraf extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 210
+  atk = 24
+  speed = 39
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.TWIN_BEAM
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19381,7 +19541,15 @@ export const PokemonClasses: Record<
   [Pkm.KUBFU]: Kubfu,
   [Pkm.URSHIFU_SINGLE]: UrshifuSingle,
   [Pkm.URSHIFU_RAPID]: UrshifuRapid,
-  [Pkm.HISUIAN_LILLIGANT]: HisuianLilligant
+  [Pkm.HISUIAN_LILLIGANT]: HisuianLilligant,
+  [Pkm.SCREAM_TAIL]: ScreamTail,
+  [Pkm.WYRDEER]: Wyrdeer,
+  [Pkm.INDEEDEE_FEMALE]: IndeedeeFemale,
+  [Pkm.INDEEDEE_MALE]: IndeedeeMale,
+  [Pkm.COTTONEE]: Cottonee,
+  [Pkm.WHIMSICOTT]: Whimsicott,
+  [Pkm.GIRAFARIG]: Girafarig,
+  [Pkm.FARIGIRAF]: Farigiraf,
 }
 
 // declare all the classes in colyseus schema TypeRegistry
