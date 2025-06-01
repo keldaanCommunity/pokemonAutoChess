@@ -862,7 +862,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.FIRE)) {
-      const burnChance = 0.3
+      let burnChance = 0.3
       const nbHeatRocks =
         this.player && this.simulation.weather === Weather.SUN
           ? count(this.player.items, Item.HEAT_ROCK)
