@@ -72,7 +72,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   BERRIES: [],
   BERRY_JUICE: [
     new OnSpawnEffect((entity) => {
-      entity.addShield(80, entity, 0, false)
+      entity.addShield(100, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
     })
   ],
@@ -153,7 +153,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   LEFTOVERS: [],
   MOOMOO_MILK: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(10, entity, 0, false, true)
+      entity.addMaxHP(15, entity, 0, false, true)
     })
   ],
   NUTRITIOUS_EGG: [
@@ -246,8 +246,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   SMOKED_FILET: [
     new OnSpawnEffect((entity) => {
       entity.addMaxHP(-10, entity, 0, false, true)
-      entity.addAttack(3, entity, 0, false, true)
-      entity.addAbilityPower(5, entity, 0, false, true)
+      entity.addAttack(5, entity, 0, false, true)
+      entity.addAbilityPower(10, entity, 0, false, true)
     })
   ],
   SPINDA_COCKTAIL: [
@@ -325,7 +325,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   BERRY_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(10, entity, 0, false, true)
+      entity.addMaxHP(15, entity, 0, false, true)
     })
   ],
   CLOVER_SWEET: [
@@ -340,7 +340,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   STAR_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.addAbilityPower(5, entity, 0, false, true)
+      entity.addAbilityPower(10, entity, 0, false, true)
     })
   ],
   RIBBON_SWEET: [

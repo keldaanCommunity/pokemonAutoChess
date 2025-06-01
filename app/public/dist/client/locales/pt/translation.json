@@ -1169,7 +1169,7 @@
 		"TOXIC": "Aplique POISONNED em [1,2,3] oponentes mais próximos por [3,6,9,SP=0.5] segundos",
 		"SING": "Faça com que [1,2,3] Pokémon inimigos na linha de fundo SLEEP por [2,SP] segundos",
 		"PROTECT": "PROTECT o usuário, tornando-se invulnerável por [1,3,5,SP=0,5] segundos.",
-		"BLIZZARD": "FREEZE todos os Pokémon inimigos por 2 segundos e dê [5,10,15,SP] SPECIAL. Dano dobrado se o inimigo já estiver FREEZE",
+		"BLIZZARD": "FREEZE todos os Pokémon inimigos por 2 segundos e dê [10,20,30,SP] SPECIAL. Dano dobrado se o inimigo já estiver FREEZE",
 		"CONFUSION": "O alvo sofre CONFUSION e SILENCE durante [3,5,7] segundos. Se já tiver CONFUSION, causa [75,150,300,SP] SPECIAL em vez disso",
 		"WHEEL_OF_FIRE": "Envia uma roda de fogo que faz uma viagem de ida e volta fazendo [10,20,30,SP] SPECIAL",
 		"SEISMIC_TOSS": "Inflige [5,10,20,SP] TRUE no alvo multiplicado pelo seu nível de jogador",
@@ -1266,7 +1266,7 @@
 		"SPIRIT_SHACKLE": "Atira uma Flecha Perfurante que causa [30,60,90,SP] SPECIAL em uma linha atrás do alvo e aplica WOUND por 4 segundos a todos atingidos",
 		"WATER_SHURIKEN": "Lança 3 shuriken em 3 direções que passam pelos inimigos e infligem [20,40,60,SP] SPECIAL",
 		"SHADOW_SNEAK": "Inflige [50,SP] SPECIAL. Se o alvo for SILENCE, dá TRUE",
-		"MACH_PUNCH": "Oferece [50,SP] SPECIAL e ataca imediatamente após",
+		"MACH_PUNCH": "Oferece [60,SP] SPECIAL e ataca imediatamente após",
 		"MEGA_PUNCH": "Inflige [60,SP] SPECIAL. Dano dobrado se o atacante tiver uma DEF melhor que o alvo",
 		"TRIPLE_KICK": "Oferece [60,SP] SPECIAL para até 3 inimigos adjacentes",
 		"MAWASHI_GERI": "Inflige [60,SP] SPECIAL. Dano dobrado se o atacante tiver um ATK melhor que o alvo",
@@ -1277,7 +1277,7 @@
 		"SPECTRAL_THIEF": "Desaparece e reaparece distribuindo [50,SP] SPECIAL, roubando todo o boost estatístico do alvo",
 		"GEOMANCY": "Ganhe [15,SP] ATK, [10,SP] SPE_DEF e 20 SPEED",
 		"DEATH_WING": "Inflige [150,SP] SPECIAL e cura 75% do dano sofrido pelo alvo",
-		"SLACK_OFF": "Limpe todos os status negativos, cure [30,40,50,SP=0,5]% do HP máximo e coloque o lançador SLEEP por 5 segundos",
+		"SLACK_OFF": "Limpe todos os status negativos, cure [30,SP]% do HP máximo e coloque o lançador SLEEP por 3 segundos",
 		"DARK_VOID": "Oferece [30,SP] SPECIAL a todos os inimigos. Se algum alvo afetado foi SILENCE, ele é colocado em SLEEP por 2 segundos",
 		"OVERHEAT": "Oferece [40,SP] SPECIAL a todos os inimigos. Dano +30% se o alvo for BURN",
 		"HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,4,6,SP=0.5] segundos",
@@ -1345,7 +1345,7 @@
 		"SHELL_SMASH": "Oferece [15,30,SP] SPECIAL aos inimigos adjacentes; ganhe 2 ATK, 20 AP e 20 SPEED e perca 2 DEF, 2 SPE_DEF",
 		"HELPING_HAND": "Dá [30,60,100,SP] SHIELD aos 2 aliados mais próximos e duplica o dano da próxima habilidade",
 		"ASTRAL_BARRAGE": "Envia [7,SP] pequenos fantasmas em Pokémon adversários aleatórios. Cada um deles oferece 20 ESPECIAIS",
-		"WATERFALL": "SHIELD por [40,80,120,SP], limpar status negativo e efeito de célula de placa",
+		"WATERFALL": "SHIELD por [50,100,150,SP], limpar status negativo e efeito de célula de placa",
 		"PYRO_BALL": "O usuário ataca acendendo uma pequena pedra e lançando-a como uma bola de fogo no alvo mais distante, distribuindo [10,20,40,SP] SPECIAL e QUEIMADURA por 2s em tudo que estiver em seu caminho",
 		"WHIRLPOOL": "Fixe-se no inimigo mais distante e solte uma saraivada de 4 redemoinhos em direção a ele. Cada um causa [125,SP]% de ATQ SPECIAL ao primeiro inimigo atingido",
 		"SMOKE_SCREEN": "Passa por baixo do chão e reaparece no meio do time inimigo, causando [10,20,40,SP] ESPECIAL para todas as unidades adjacentes e jogando fumaça à última fileira para reduzir sua precisão",
@@ -1744,9 +1744,9 @@
 		"SHINY_STONE": "Concede +2 à sinergia de LIGHT e gera um segundo ponto de luz no espaço de quem segura",
 		"EVIOLITE": "Só pode ser segurado por Pokémon não totalmente evoluídos. Impede que o titular evolua.",
 		"WHITE_FLUTE": "Gere 3 Pokémons SELVAGENS ao redor do titular no início da luta. A raridade e o nível aumentam com o nível do estágio.",
-		"GOLD_BOTTLE_CAP": "+1% de CRIT_CHANCE e CRIT_POWER por GOLD que você possui. Ganhe 1 OURO por nocaute. Se eliminar o último inimigo, ganhe um Jackpot que dobra o valor ganho durante a rodada.",
+		"GOLD_BOTTLE_CAP": "+1% de CRIT_POWER por GOLD que você possui. Ganhe 1 OURO por nocaute. Se eliminar o último inimigo, ganhe um Jackpot que dobra o valor ganho durante a rodada.",
 		"SACRED_ASH": "Dá RESSURREIÇÃO. Após a ressurreição, até 3 aliados nocauteados também são ressuscitados, mas sem itens.",
-		"COMET_SHARD": "Começa a rodada mergulhando como um cometa em um inimigo no lado oposto do tabuleiro, causando 300% de ATK como SPECIAL ao alvo e aos inimigos adjacentes, e ganhando PROTECT por 3 segundos."
+		"COMET_SHARD": "Começa a rodada mergulhando como um cometa em um inimigo no lado oposto do tabuleiro, causando 300% de ATK como SPECIAL ao alvo e aos inimigos adjacentes, e ganhando PROTECT por 2 segundos."
 	},
 	"passive_description": {
 		"NONE": "sem passivo",
@@ -2511,7 +2511,7 @@
 	"not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
 	"npc_dialog": {
 		"welcome": "Bem-vindo !",
-		"tell_price": "10 GOLD para cada !",
+		"tell_price": "{{price}} GOLD para cada !",
 		"thank_you": "OBRIGADO !"
 	},
 	"scribble": {

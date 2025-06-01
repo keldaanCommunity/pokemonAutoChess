@@ -1,13 +1,51 @@
 # New Pokemons:
 
+- Hisuian Lilligant
+- Scream Tail
+- Wyrdeer
+- Indeedee (Female)
+- Indeedee (Male)
+- Cottonee,
+- Whimsicott
+- Girafarig
+- Farigiraf
+
 # Changes to Pokemon & Abilities
 
-- Hisuian Lilligant
 - Conkeldurr now spawns 2 pillars instead of 1.
+- Cherrim Sunlight is now tier 3 ; adjusted stats accordingly.
+- Buff Mach Punch (Kubfu, Tyrogue): 50 → 60 special damage
+- Nerf Wicked Blow (Urshifu Single Strike): 80 → 60 true damage
+- Nerf Surging Strikes (Urshifu Rapid Strike): add a 200ms delay between each hit
+- Buff Blizzard (Articuno): damage 5/10/15 → 10/20/30
+- Nerf Laser Blade (Iron Valiant): shield & special damage 30 → 25
+- Buff Alcremie Vanilla: 60 → 80 shield on cast
+- Buff Alcremie Ruby Swirl: 8 → 10 attack on cast
+- Change Alcremie Rainbow Swirl: give 60 PP instead of 60 AP
+- Buff Fillet Away (Veluza): HP sacrified 50% → 30%
+- Buff Piplup line Attack: 5/9/20 → 6/12/24
+- Buff Waterfall (TM, Seaking): 40/80/120 → 50/100/150 shield
+- Nerf Chimchar line: Def & Spe Def: 4/4/4 → 2/3/4
+- Nerf Kakuna: Speed 49 → 35
+- Slakoth line changes: Slack Off heals 30% max HP at all tiers ; AP scaling 0.5 → 1. Reduce Sleep duration to 3 seconds. New passive to Vigoroth: Vigoroth is immune to Sleep ; New passive to Slaking: after waking up after falling asleep, get Enraged status for 3 seconds
+- Unowns can no longer eat Gourmet dishes
+- Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
+- Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
 
 # Changes to Synergies
 
 # Changes to Items
+
+- Buff Moomoo Milk: 10 → 15 permanent HP
+- Buff Star Sweet: 5 → 10 permanent AP
+- Buff Berry Sweet: 10 → 15 permanent HP
+- Buff Berry Juice: 80 → 100 shield
+- Buffed Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
+- Nerf Comet Shard: Protect duration 3 → 2 seconds
+- Buff Gold Bow ; now gives 50 shield
+- Buff Absorb Bulb: 15 → 20 defense & special defense
+- Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
+- Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
 
 # Gameplay
 

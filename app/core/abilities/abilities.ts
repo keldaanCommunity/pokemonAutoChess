@@ -437,10 +437,9 @@ export class SlackOffStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     pokemon.status.clearNegativeStatus()
-    const healFactor =
-      pokemon.stars === 3 ? 0.5 : pokemon.stars === 2 ? 0.4 : 0.3
-    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 0.5, crit)
-    pokemon.status.triggerSleep(5000, pokemon)
+    const healFactor = 0.3
+    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 1, crit)
+    pokemon.status.triggerSleep(3000, pokemon)
   }
 }
 
@@ -2251,7 +2250,7 @@ export class BlizzardStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const freezeDuration = 2000
-    const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
         enemy.handleSpecialDamage(
@@ -2892,10 +2891,11 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
     ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(
-        pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30,
+        heal,
         pokemon,
         1,
         crit
@@ -3681,7 +3681,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const shield = [40, 80, 120][pokemon.stars - 1] ?? 120
+    const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     board.clearBoardEffect(
@@ -6794,6 +6794,47 @@ export class StickyWebStrategy extends AbilityStrategy {
   }
 }
 
+export class CottonSporeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const NB_MAX_TARGETS = 3
+    const speedDebuff = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const enemies = board.cells.filter<PokemonEntity>((v): v is PokemonEntity => v != null && v.team !== pokemon.team).sort((a, b) => {
+      const distanceA = distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        a.positionX,
+        a.positionY
+      )
+      const distanceB = distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        b.positionX,
+        b.positionY
+      )
+      return distanceA - distanceB
+    })
+    const nearestEnemies = enemies.slice(0, NB_MAX_TARGETS)
+
+    nearestEnemies.forEach((enemy) => {
+      enemy.addSpeed(-speedDebuff, pokemon, 1, crit)
+      board.addBoardEffect(
+        enemy.positionX,
+        enemy.positionY,
+        EffectEnum.COTTON_BALL,
+        pokemon.simulation
+      )
+      broadcastAbility(pokemon, { targetX: enemy.positionX, targetY: enemy.positionY })
+    })
+  }
+}
+
 export class StruggleBugStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8935,7 +8976,7 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 60
+    const damage = [30,40,50,60][pokemon.stars - 1] ?? 60
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
@@ -11628,7 +11669,7 @@ export class DecorateStrategy extends AbilityStrategy {
       strongestNearestAlly.addAbilityPower(apBoost, pokemon, 1, crit)
 
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
-        strongestNearestAlly.addShield(60, pokemon, 1, crit)
+        strongestNearestAlly.addShield(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
         strongestNearestAlly.addSpeed(30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
@@ -11642,11 +11683,11 @@ export class DecorateStrategy extends AbilityStrategy {
         strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
         strongestNearestAlly.addDefense(15, pokemon, 0, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
-        strongestNearestAlly.addAttack(8, pokemon, 1, crit)
+        strongestNearestAlly.addAttack(10, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
         strongestNearestAlly.addCritPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        strongestNearestAlly.addAbilityPower(60, pokemon, 1, crit)
+        strongestNearestAlly.addPP(60, pokemon, 1, crit)
       }
     }
   }
@@ -11751,12 +11792,12 @@ export class FilletAwayStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     // lose 50% of max HP and gain 10 attack and 20 speed
-    const lostMaxHP = Math.floor(pokemon.hp * 0.5)
+    const lostMaxHP = Math.floor(pokemon.hp * 0.3)
     pokemon.addMaxHP(-lostMaxHP, pokemon, 0, false)
 
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
-    pokemon.status.triggerProtect(400)
+    pokemon.status.triggerProtect(500)
     // move to backline
     const corner = board.getTeleportationCell(
       pokemon.positionX,
@@ -12251,8 +12292,8 @@ export class LaserBladeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     if (pokemon.count.ult % 2 === 1) {
       // Spins laser blade around, moving behind their target, gaining [30,SP] SHIELD and dealing [30,SP] SPECIAL to target and adjacent enemies on the path.
-      const damage = 30
-      const shield = 30
+      const damage = 25
+      const shield = 25
       const enemiesHit = new Set<PokemonEntity>()
       board
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
@@ -12278,7 +12319,7 @@ export class LaserBladeStrategy extends AbilityStrategy {
       })
     } else {
       // Spins laser blade in front of them, dealing 2 times [30,SP] + ATK as SPECIAL
-      const damage = 30 + pokemon.atk
+      const damage = 25 + pokemon.atk
       target.handleSpecialDamage(
         damage,
         board,
@@ -12395,14 +12436,17 @@ export class SurgingStrikesStrategy extends AbilityStrategy {
     const damage = pokemon.atk
     const nbHits = 3
     for (let i = 0; i < nbHits; i++) {
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        true
-      )
+      pokemon.commands.push(new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          true
+        )
+      }, i * 200))
     }
+    pokemon.cooldown += 200 * nbHits
   }
 }
 
@@ -12415,7 +12459,7 @@ export class WickedBlowStrategy extends AbilityStrategy {
   ) {
     // Deal 80AP true damage to the target. Always deal a critical hit.
     super.process(pokemon, board, target, true)
-    const damage = 80
+    const damage = 60
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, true)
   }
 }
@@ -12432,6 +12476,122 @@ export class VictoryDanceStrategy extends AbilityStrategy {
     pokemon.addAttack(3, pokemon, 1, crit)
     pokemon.addDefense(3, pokemon, 1, crit)
     pokemon.addSpeed(10, pokemon, 1, crit)
+  }
+}
+
+export class BoomBurstStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Deal 60 special damage to all adjacent units including allies
+    super.process(pokemon, board, target, crit)
+    const damage = 60
+    board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    ).forEach((cell) => {
+      if (cell.value) {
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        cell.value.status.triggerFlinch(4000, cell.value, pokemon)
+      }
+    })
+  }
+}
+
+export class FollowMeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //Jump to a free cell far away and gain [40,SP] SHIELD. Enemies that were targeting the user are CHARM for 3 seconds.
+    const cellToJump = board.getFlyAwayCell(pokemon.positionX, pokemon.positionY)
+    if (cellToJump) {
+      const enemiesTargetingPokemon = board.cells.filter<PokemonEntity>(
+        (entity): entity is PokemonEntity => entity != null && entity.targetX === pokemon.positionX && entity.targetY === pokemon.positionY && entity.team !== pokemon.team
+      )
+      enemiesTargetingPokemon.forEach((enemy) => {
+        enemy.status.triggerCharm(3000, enemy, pokemon, false)
+      })
+      pokemon.moveTo(cellToJump.x, cellToJump.y, board)
+      pokemon.addShield(40, pokemon, 1, crit)
+    }
+  }
+}
+
+export class AfterYouStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.
+    const nearestAllies = pokemon.state.getNearestAllies(pokemon, board)
+    const strongestNearestAlly = getStrongestUnit(nearestAllies)
+    if (strongestNearestAlly) {
+      strongestNearestAlly.addPP(15, pokemon, 1, crit)
+      strongestNearestAlly.addSpeed(10, pokemon, 1, crit)
+    }
+  }
+}
+
+export class TwinBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Fires out two beams that hit the furthest enemies, dealing 30/60 special damage to all enemies in a line.
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
+    if (farthestTarget) {
+      effectInLine(board, pokemon, farthestTarget, (cell) => {
+        if (cell.value != null && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+      broadcastAbility(pokemon, {
+        skill: Ability.TWIN_BEAM,
+        targetX: farthestTarget.positionX,
+        targetY: farthestTarget.positionY
+      })
+
+      const oppositeFarthestTarget = pokemon.state.getFarthestTarget(farthestTarget, board, pokemon)
+      if (oppositeFarthestTarget) {
+        effectInLine(board, pokemon, oppositeFarthestTarget, (cell) => {
+          if (cell.value != null && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+        broadcastAbility(pokemon, {
+          skill: Ability.TWIN_BEAM,
+          targetX: oppositeFarthestTarget.positionX,
+          targetY: oppositeFarthestTarget.positionY
+        })
+      }
+    }
   }
 }
 
@@ -12892,5 +13052,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYCHO_CUT]: new PsychoCutStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.WICKED_BLOW]: new WickedBlowStrategy(),
-  [Ability.VICTORY_DANCE]: new VictoryDanceStrategy()
+  [Ability.VICTORY_DANCE]: new VictoryDanceStrategy(),
+  [Ability.BOOMBURST]: new BoomBurstStrategy(),
+  [Ability.FOLLOW_ME]: new FollowMeStrategy(),
+  [Ability.AFTER_YOU]: new AfterYouStrategy(),
+  [Ability.COTTON_SPORE]: new CottonSporeStrategy(),
+  [Ability.TWIN_BEAM]: new TwinBeamStrategy()
 }

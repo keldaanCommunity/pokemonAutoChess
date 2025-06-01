@@ -529,11 +529,11 @@ export default class BattleManager {
         } else if (!pokemon.status.skydiving) {
           pkm.moveManager.setSpeed(
             3 *
-              getMoveSpeed(pokemon) *
-              Math.max(
-                Math.abs(pkm.x - coordinates[0]),
-                Math.abs(pkm.y - coordinates[1])
-              )
+            getMoveSpeed(pokemon) *
+            Math.max(
+              Math.abs(pkm.x - coordinates[0]),
+              Math.abs(pkm.y - coordinates[1])
+            )
           )
           pkm.moveManager.moveTo(coordinates[0], coordinates[1])
         }
@@ -1111,8 +1111,27 @@ export default class BattleManager {
       this.scene.tweens.add({
         targets: sprite,
         alpha: 0.4,
-        duration: 1000,
-        delay: (8 - coordinates[1]) * 100
+        duration: 1000
+      })
+    }
+
+    if (event.effect === EffectEnum.COTTON_BALL) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        `${Ability.COTTON_SPORE}/025.png`
+      )
+      sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+      sprite.setScale(2, 2)
+      sprite.setAlpha(0)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 0.5,
+        duration: 1000
       })
     }
 

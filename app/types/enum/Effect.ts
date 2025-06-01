@@ -131,6 +131,7 @@ export enum EffectEnum {
   HUSTLE = "HUSTLE",
   BERSERK = "BERSERK",
   STICKY_WEB = "STICKY_WEB",
+  COTTON_BALL = "COTTON_BALL",
   HAIL = "HAIL",
   EMBER = "EMBER",
   FLUID = "FLUID",
@@ -168,6 +169,7 @@ export const BoardEffects = [
   EffectEnum.SPIKES,
   EffectEnum.TOXIC_SPIKES,
   EffectEnum.STICKY_WEB,
+  EffectEnum.COTTON_BALL,
   EffectEnum.HAIL,
   EffectEnum.EMBER
 ] as const
