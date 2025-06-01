@@ -65,6 +65,7 @@
 
 # Misc
 
+- New gadget: Pokeguessr, a "Guess the Pokémon" game when waiting for lobby to start
 - Changed title Duke: owns at least one emote of all current pokémons in the game ; all the accounts hat this title before this patch lose it.
 - New title: Collector: has played all current pokémons in the game
 - Putting the evolved pokemon into the team planner should mark the basic pokemon in the shop
