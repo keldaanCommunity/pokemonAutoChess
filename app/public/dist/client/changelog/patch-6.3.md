@@ -1,5 +1,15 @@
 # New Pokemons:
 
+- Hisuian Lilligant
+- Scream Tail
+- Wyrdeer
+- Indeedee (Female)
+- Indeedee (Male)
+- Cottonee,
+- Whimsicott
+- Girafarig
+- Farigiraf
+
 # Changes to Pokemon & Abilities
 
 - Cherrim Sunlight is now tier 3 ; adjusted stats accordingly.
@@ -16,6 +26,10 @@
 - Buff Waterfall (TM, Seaking): 40/80/120 → 50/100/150 shield
 - Nerf Chimchar line: Def & Spe Def: 4/4/4 → 2/3/4
 - Nerf Kakuna: Speed 49 → 35
+- Slakoth line changes: Slack Off heals 30% max HP at all tiers ; AP scaling 0.5 → 1. Reduce Sleep duration to 3 seconds. New passive to Vigoroth: Vigoroth is immune to Sleep ; New passive to Slaking: after waking up after falling asleep, get Enraged status for 3 seconds
+- Unowns can no longer eat Gourmet dishes
+- Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
+- Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
 
 # Changes to Synergies
 
@@ -26,11 +40,17 @@
 - Buff Berry Sweet: 10 → 15 permanent HP
 - Buff Berry Juice: 80 → 100 shield
 - Buffed Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
+- Nerf Comet Shard: Protect duration 3 → 2 seconds
+- Buff Gold Bow ; now gives 50 shield
+- Buff Absorb Bulb: 15 → 20 defense & special defense
+- Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
+- Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
 
 # Gameplay
 
 # UI
 
+- **Mouse right button no longer allows you to move on carousel rounds in town. Use the left button instead.** This is to prevent accidentally opening carousel items tooltips and not being able to move to the location behind the tooltip.
 - Simplified the collection system UI. Added counters for portraits unlocked, shinies unlocked, and pokémons played.
 
 # Collection system rework
