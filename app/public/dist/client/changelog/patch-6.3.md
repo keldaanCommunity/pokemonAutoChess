@@ -12,6 +12,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Slakoth line changes: Slack Off heals 30% max HP at all tiers ; AP scaling 0.5 → 1. Reduce Sleep duration to 3 seconds. New passive to Vigoroth: Vigoroth is immune to Sleep ; New passive to Slaking: after waking up after falling asleep, get Enraged status for 3 seconds
 - Unowns can no longer eat Gourmet dishes
 - Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
 - Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby

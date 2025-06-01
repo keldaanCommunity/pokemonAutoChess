@@ -155,5 +155,7 @@ export enum Passive {
   DRUMMER = "DRUMMER",
   KIRLIA = "KIRLIA",
   KUBFU = "KUBFU",
+  VIGOROTH = "VIGOROTH",
+  SLAKING = "SLAKING",
   STANTLER = "STANTLER"
 }
