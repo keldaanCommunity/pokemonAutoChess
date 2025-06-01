@@ -17172,8 +17172,9 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
     (p) => p.name === pkm && p.positionY > 0
   )
   const pillars = values(player.board).filter((p) => p.name === pillarPkm)
-  if (pillars.length < pkmOnBoard.length) {
-    for (let i = 0; i < pkmOnBoard.length - pillars.length; i++) {
+  const nbPillars = pkmOnBoard.length * (pkm === Pkm.CONKELDURR ? 2 : 1)
+  if (pillars.length < nbPillars) {
+    for (let i = 0; i < nbPillars - pillars.length; i++) {
       const freeSpace = getFirstAvailablePositionOnBoard(player.board)
       if (freeSpace) {
         const pillar = PokemonFactory.createPokemonFromName(pillarPkm, player)
@@ -17182,8 +17183,8 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
         player.board.set(pillar.id, pillar)
       }
     }
-  } else if (pkmOnBoard.length < pillars.length) {
-    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+  } else if (nbPillars < pillars.length) {
+    for (let i = 0; i < pillars.length - nbPillars; i++) {
       player.board.delete(pillars[i].id)
     }
   }
@@ -17219,6 +17220,7 @@ const pillarEvolve =
         pillar.positionY = coords[1]
         params.player.board.set(pillar.id, pillar)
       }
+      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
     }
 
 export class Timburr extends Pokemon {

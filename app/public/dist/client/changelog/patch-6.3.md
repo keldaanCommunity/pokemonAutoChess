@@ -12,6 +12,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Conkeldurr now spawns 2 pillars instead of 1.
 - Cherrim Sunlight is now tier 3 ; adjusted stats accordingly.
 - Buff Mach Punch (Kubfu, Tyrogue): 50 → 60 special damage
 - Nerf Wicked Blow (Urshifu Single Strike): 80 → 60 true damage
