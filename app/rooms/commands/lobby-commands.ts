@@ -7,6 +7,7 @@ import {
   getTournamentStage,
   makeBrackets
 } from "../../core/tournament-logic"
+import { getPendingGame } from "../../core/pending-game-manager"
 import { acquireBoosterCard, createBooster } from "../../core/collection"
 import {
   TournamentBracketSchema,
@@ -49,6 +50,7 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
+import { isValidDate } from "../../utils/date"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -73,12 +75,9 @@ export class OnJoinCommand extends Command<
         // load existing account
         this.room.users.set(client.auth.uid, user)
         client.send(Transfer.USER_PROFILE, user)
-        const pendingGameId = await this.room.presence.hget(
-          client.auth.uid,
-          "pending_game_id"
-        )
-        if (pendingGameId != null) {
-          client.send(Transfer.RECONNECT_PROMPT, pendingGameId)
+        const pendingGame = await getPendingGame(this.room.presence, client.auth.uid)
+        if (pendingGame != null && !pendingGame.isExpired) {
+          client.send(Transfer.RECONNECT_PROMPT, pendingGame.gameId)
         }
       } else {
         // create new user account

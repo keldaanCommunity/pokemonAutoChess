@@ -10,7 +10,7 @@ export function getPortraitSrc(
 }
 
 export function getAvatarSrc(avatar: string) {
-  return `${CDN_PORTRAIT_URL}${avatar.replace(/(\d+)\-(\d+)/, "$1/$2")}.png`
+  return `${CDN_PORTRAIT_URL}${avatar.replace(/(\d+)\-/g, "$1/")}.png`
 }
 
 export function getAvatarString(
@@ -24,9 +24,8 @@ export function getAvatarString(
       ? "/0000/0001"
       : "/0001"
     : ""
-  return `${defaultIndex.replace("-", "/")}${shinyPad}/${
-    emotion || Emotion.NORMAL
-  }`
+  return `${defaultIndex.replace("-", "/")}${shinyPad}/${emotion || Emotion.NORMAL
+    }`
 }
 
 export function getPokemonCustomFromAvatar(avatar: string): PkmWithCustom {

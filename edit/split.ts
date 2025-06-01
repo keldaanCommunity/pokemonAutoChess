@@ -88,8 +88,7 @@ export function loadDurationsFile() {
   )
   Object.assign(durations, JSON.parse(rawdata))
   logger.debug(
-    `Loaded durations file, ${
-      Object.keys(durations).length
+    `Loaded durations file, ${Object.keys(durations).length
     } durations already computed`
   )
 }
@@ -99,8 +98,7 @@ export function loadDelaysFile() {
     const rawdata = fs.readFileSync("../app/types/delays.json", "utf8")
     Object.assign(delays, JSON.parse(rawdata))
     logger.debug(
-      `Loaded delays file, ${
-        Object.keys(delays).length
+      `Loaded delays file, ${Object.keys(delays).length
       } delays already computed`
     )
   } catch (error) {
@@ -188,9 +186,8 @@ function zeroPad(num: number) {
 }
 
 async function splitIndex(index: string) {
-  const pathIndex = index.replace("-", "/")
-  const shinyPad =
-    pathIndex.length == 4 ? `${pathIndex}/0000/0001` : `${pathIndex}/0001`
+  const pathIndex = index.replaceAll("-", "/")
+  const shinyPad = pathIndex.split("/").with(2, "0001").join("/")
   const conf =
     AnimationConfig[mapName.get(index) as Pkm] ?? AnimationConfig[Pkm.DEFAULT]
   const allPads = [pathIndex]

@@ -24,6 +24,8 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { entries, values } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
+import { getPendingGame, isPlayerTimeout, setPendingGame } from "../../core/pending-game-manager"
+import { isValidDate } from "../../utils/date"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -35,23 +37,13 @@ export class OnJoinCommand extends Command<
 > {
   async execute({ client, options, auth }) {
     try {
-      const timeoutDateStr = await this.room.presence.hget(
-        client.auth.uid,
-        "user_timeout"
-      )
-      if (timeoutDateStr) {
-        const timeout = new Date(timeoutDateStr).getTime()
-        if (timeout > Date.now()) {
-          client.leave(CloseCodes.USER_TIMEOUT)
-          return
-        }
+      if (await isPlayerTimeout(this.room.presence, client.auth.uid)) {
+        client.leave(CloseCodes.USER_TIMEOUT)
+        return
       }
 
-      const pendingGameId = await this.room.presence.hget(
-        client.auth.uid,
-        "pending_game_id"
-      )
-      if (pendingGameId != null) {
+      const pendingGame = await getPendingGame(this.room.presence, client.auth.uid)
+      if (pendingGame != null && !pendingGame.isExpired) {
         client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
         return
       }
@@ -99,7 +91,7 @@ export class OnJoinCommand extends Command<
           this.state.maxRank != null &&
           u.elo &&
           EloRankThreshold[getRank(u.elo)] >
-            EloRankThreshold[this.state.maxRank] &&
+          EloRankThreshold[this.state.maxRank] &&
           !isAdmin
         ) {
           client.leave(CloseCodes.USER_RANK_TOO_HIGH)
@@ -284,7 +276,11 @@ export class OnGameStartRequestCommand extends Command<
         })
 
         this.state.users.forEach((user) => {
-          this.room.presence.hset(user.uid, "pending_game_id", gameRoom.roomId)
+          setPendingGame(
+            this.room.presence,
+            user.uid,
+            gameRoom.roomId
+          )
         })
 
         this.room.presence.publish("game-started", {
@@ -437,9 +433,8 @@ export class OnRoomChangeSpecialRule extends Command<
         this.room.state.addMessage({
           author: "Server",
           authorId: "server",
-          payload: `Room leader ${
-            specialRule ? "enabled" : "disabled"
-          } Smeargle's Scribble for this game. Players need to ready again.`,
+          payload: `Room leader ${specialRule ? "enabled" : "disabled"
+            } Smeargle's Scribble for this game. Players need to ready again.`,
           avatar: leader?.avatar
         })
 
@@ -475,9 +470,8 @@ export class OnChangeNoEloCommand extends Command<
         this.room.state.addMessage({
           author: "Server",
           authorId: "server",
-          payload: `Room leader ${
-            noElo ? "disabled" : "enabled"
-          } ELO gain for this game. Players need to ready again.`,
+          payload: `Room leader ${noElo ? "disabled" : "enabled"
+            } ELO gain for this game. Players need to ready again.`,
           avatar: leader?.avatar
         })
 
@@ -565,8 +559,7 @@ export class OnLeaveCommand extends Command<
               this.state.ownerName = newOwner.name
               this.room.setMetadata({ ownerName: this.state.ownerName })
               this.room.setName(
-                `${newOwner.name}'${
-                  newOwner.name.endsWith("s") ? "" : "s"
+                `${newOwner.name}'${newOwner.name.endsWith("s") ? "" : "s"
                 } room`
               )
               this.room.state.addMessage({
@@ -605,7 +598,7 @@ export class OnToggleReadyCommand extends Command<
 
       const nbExpectedPlayers =
         this.room.metadata?.whitelist &&
-        this.room.metadata?.whitelist.length > 0
+          this.room.metadata?.whitelist.length > 0
           ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
           : MAX_PLAYERS_PER_GAME
 

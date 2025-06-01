@@ -1776,7 +1776,7 @@
 		"ICE_FANG": "Inflige [30,60,120,SP] de SPECIAL y FREEZE por 1 segundo",
 		"THUNDER_FANG": "Inflige [30,60,120,SP] de SPECIAL y PARALYSIS por 3 segundos",
 		"TAIL_WHIP": "Reduce la DEF del objetivo en un [30,SP] %",
-		"PSYSHIELD_BASH": "Se cuela en la retaguardia enemiga, inflige [60,SP] de SPECIAL a todos los enemigos en el camino y da PROTECT al usuario por 1 segundo.",
+		"PSYSHIELD_BASH": "Se cuela en la retaguardia enemiga, inflige [30,40,50,60,SP] de SPECIAL a todos los enemigos en el camino y da PROTECT al usuario por 1 segundo.",
 		"QUIVER_DANCE": "Gana [5,SP] ATK, [5,SP] SPE_DEF, [10,SP] SPEED y 20 AP",
 		"TORCH_SONG": "Escupe [4,SP] ardientes llamas a objetivos aleatorios. Cada una de las llamas inflige 50% de ATK como SPECIAL, con un [30,LK]% de posibilidades de BURN durante 2 segundos, e incrementa el AP del usuario en [1,2,3] puntos.",
 		"POWER_WHIP": "Fija al enemigo más lejano y lanza una enredadera gigante hacia él. Inflige [30,60,SP] de SPECIAL a cualquier enemigo golpeado por la enredadera.",
@@ -2420,10 +2420,10 @@
 		"RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon. Impide que el titular evolucione. El titular ahora se vende por el precio de su nivel anterior.",
 		"EVIOLITE": "Sólo lo pueden tener Pokémon que no estén completamente evolucionados. Impide que el titular evolucione.",
 		"WHITE_FLUTE": "Genera 3 Pokémon WILD alrededor del poseedor al comienzo de la pelea. La rareza y el nivel aumentan con el nivel del escenario.",
-		"GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE y CRIT_POWER por GOLD que tengas. Obtén 1 GOLD por KO. Si eliminas al último enemigo, obtendrás un Jackpot que duplica la cantidad ganada durante la ronda.",
+		"GOLD_BOTTLE_CAP": "+1% CRIT_POWER por GOLD que tengas. Obtén 1 GOLD por KO. Si eliminas al último enemigo, obtendrás un Jackpot que duplica la cantidad ganada durante la ronda.",
 		"ABSORB_BULB": "Toda la reducción de daño es absorbida por el tubérculo. Una vez pasados los 50% HP, el tubérculo explota, infligiendo todo el daño absorbido a las unidades enemigas adyacentes como SPECIAL.",
 		"SACRED_ASH": "Da RESURECTION. Después de revivir, hasta 3 aliados ya noqueados son revividos también, pero sin objetos.",
-		"COMET_SHARD": "Empieza la ronda lanzándose como un cometa sobre un enemigo en el lado opuesto del tablero, infligiendo 300% ATK como SPECIAL al objetivo y a los enemigos adyacentes, y obteniendo PROTECT por 3 segundos.",
+		"COMET_SHARD": "Empieza la ronda lanzándose como un cometa sobre un enemigo en el lado opuesto del tablero, infligiendo 300% ATK como SPECIAL al objetivo y a los enemigos adyacentes, y obteniendo PROTECT por 2 segundos.",
 		"REPEAT_BALL": "Por cada 2 rerolls en la tienda, obtienes 1 de SPEED y 2 SHIELD. Además, cada vez que gastes oro en un reroll, obtienes 1 reroll gratis. Después de muchos rerolls, puedes encontrarte con Pokémon poderosos en tu tienda.",
 		"GOLD_BOW": "El portador no cuenta para el límite de tamaño del equipo.",
 		"DAMP_ROCK": "Cuenta por 3 para RAIN. Bajo RAIN, tu equipo obtiene +2 PP por segundo.",
@@ -3687,7 +3687,7 @@
 	"blacklisted": "Has sido expulsado de esta Partida.",
 	"npc_dialog": {
 		"welcome": "¡Bienvenido!",
-		"tell_price": "10 GOLD cada uno!",
+		"tell_price": "{{price}} GOLD cada uno!",
 		"thank_you": "GRACIAS !"
 	},
 	"scribble": {

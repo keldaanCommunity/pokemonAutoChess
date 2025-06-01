@@ -157,4 +157,5 @@ export enum Passive {
   KUBFU = "KUBFU",
   VIGOROTH = "VIGOROTH",
   SLAKING = "SLAKING",
+  STANTLER = "STANTLER"
 }

@@ -6793,6 +6793,47 @@ export class StickyWebStrategy extends AbilityStrategy {
   }
 }
 
+export class CottonSporeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const NB_MAX_TARGETS = 3
+    const speedDebuff = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const enemies = board.cells.filter<PokemonEntity>((v): v is PokemonEntity => v != null && v.team !== pokemon.team).sort((a, b) => {
+      const distanceA = distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        a.positionX,
+        a.positionY
+      )
+      const distanceB = distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        b.positionX,
+        b.positionY
+      )
+      return distanceA - distanceB
+    })
+    const nearestEnemies = enemies.slice(0, NB_MAX_TARGETS)
+
+    nearestEnemies.forEach((enemy) => {
+      enemy.addSpeed(-speedDebuff, pokemon, 1, crit)
+      board.addBoardEffect(
+        enemy.positionX,
+        enemy.positionY,
+        EffectEnum.COTTON_BALL,
+        pokemon.simulation
+      )
+      broadcastAbility(pokemon, { targetX: enemy.positionX, targetY: enemy.positionY })
+    })
+  }
+}
+
 export class StruggleBugStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -8934,7 +8975,7 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 60
+    const damage = [30,40,50,60][pokemon.stars - 1] ?? 60
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
@@ -12434,6 +12475,122 @@ export class VictoryDanceStrategy extends AbilityStrategy {
   }
 }
 
+export class BoomBurstStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Deal 60 special damage to all adjacent units including allies
+    super.process(pokemon, board, target, crit)
+    const damage = 60
+    board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      false
+    ).forEach((cell) => {
+      if (cell.value) {
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        cell.value.status.triggerFlinch(4000, cell.value, pokemon)
+      }
+    })
+  }
+}
+
+export class FollowMeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //Jump to a free cell far away and gain [40,SP] SHIELD. Enemies that were targeting the user are CHARM for 3 seconds.
+    const cellToJump = board.getFlyAwayCell(pokemon.positionX, pokemon.positionY)
+    if (cellToJump) {
+      const enemiesTargetingPokemon = board.cells.filter<PokemonEntity>(
+        (entity): entity is PokemonEntity => entity != null && entity.targetX === pokemon.positionX && entity.targetY === pokemon.positionY && entity.team !== pokemon.team
+      )
+      enemiesTargetingPokemon.forEach((enemy) => {
+        enemy.status.triggerCharm(3000, enemy, pokemon, false)
+      })
+      pokemon.moveTo(cellToJump.x, cellToJump.y, board)
+      pokemon.addShield(40, pokemon, 1, crit)
+    }
+  }
+}
+
+export class AfterYouStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.
+    const nearestAllies = pokemon.state.getNearestAllies(pokemon, board)
+    const strongestNearestAlly = getStrongestUnit(nearestAllies)
+    if (strongestNearestAlly) {
+      strongestNearestAlly.addPP(15, pokemon, 1, crit)
+      strongestNearestAlly.addSpeed(10, pokemon, 1, crit)
+    }
+  }
+}
+
+export class TwinBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Fires out two beams that hit the furthest enemies, dealing 30/60 special damage to all enemies in a line.
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
+    const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
+    if (farthestTarget) {
+      effectInLine(board, pokemon, farthestTarget, (cell) => {
+        if (cell.value != null && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+      broadcastAbility(pokemon, {
+        skill: Ability.TWIN_BEAM,
+        targetX: farthestTarget.positionX,
+        targetY: farthestTarget.positionY
+      })
+
+      const oppositeFarthestTarget = pokemon.state.getFarthestTarget(farthestTarget, board, pokemon)
+      if (oppositeFarthestTarget) {
+        effectInLine(board, pokemon, oppositeFarthestTarget, (cell) => {
+          if (cell.value != null && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+        broadcastAbility(pokemon, {
+          skill: Ability.TWIN_BEAM,
+          targetX: oppositeFarthestTarget.positionX,
+          targetY: oppositeFarthestTarget.positionY
+        })
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -12891,5 +13048,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYCHO_CUT]: new PsychoCutStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.WICKED_BLOW]: new WickedBlowStrategy(),
-  [Ability.VICTORY_DANCE]: new VictoryDanceStrategy()
+  [Ability.VICTORY_DANCE]: new VictoryDanceStrategy(),
+  [Ability.BOOMBURST]: new BoomBurstStrategy(),
+  [Ability.FOLLOW_ME]: new FollowMeStrategy(),
+  [Ability.AFTER_YOU]: new AfterYouStrategy(),
+  [Ability.COTTON_SPORE]: new CottonSporeStrategy(),
+  [Ability.TWIN_BEAM]: new TwinBeamStrategy()
 }
