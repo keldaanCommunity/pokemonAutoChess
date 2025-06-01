@@ -110,7 +110,7 @@ export function PokemonSelect({ value, setValue, onSubmit }: PokemonSelectProps)
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const handleSelect = (name: string) => {
+    const handleSelect = (name: Pkm) => {
         setValue(name);
         setShowDropdown(false);
     };
@@ -144,12 +144,24 @@ export function PokemonSelect({ value, setValue, onSubmit }: PokemonSelectProps)
                     id="pokemon-custom-input"
                     value={value}
                     onChange={(e) => {
-                        setValue(e.target.value);
+                        setValue(e.target.value as Pkm | "");
                         setShowDropdown(true);
                     }}
                     autoComplete="off"
                     placeholder="Select a Pokémon..."
                     onFocus={() => setShowDropdown(true)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && filtered.length === 1) {
+                            e.preventDefault();
+                            setShowDropdown(false);
+                            if (onSubmit) {
+                                onSubmit(filtered[0].name);
+                            }
+                        } else if (e.key === "Escape") {
+                            setShowDropdown(false);
+                            e.stopPropagation();
+                        }
+                    }}
                 />
                 {showDropdown && filtered.length > 0 && (
                     <div
