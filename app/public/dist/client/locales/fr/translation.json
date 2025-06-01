@@ -2387,10 +2387,10 @@
 		"RARE_CANDY": "Fait évoluer immédiatement un Pokémon. Peut seulement être porté par un Pokémon pouvant évoluer, et réduit son prix de vente à son niveau précédent.",
 		"EVIOLITE": "Le lanceur gagne beaucoup de statistiques mais son espèce ne peut plus évoluer. Peut seulement être porté par un Pokémon pouvant évoluer.",
 		"WHITE_FLUTE": "Invoque 3 Pokémons WILD autour du porteur au début du combat. La rareté et le niveau augmentent de tour en tour.",
-		"GOLD_BOTTLE_CAP": "+1% CRIT_CHANCE et CRIT_POWER par GOLD en votre possession. +1 GOLD à chaque fois que le porteur met KO un adversaire. S'il élimine le dernier adversaire, remporte le Jackpot qui double le montant gagné pendant ce combat.",
+		"GOLD_BOTTLE_CAP": "+1% CRIT_POWER par GOLD en votre possession. +1 GOLD à chaque fois que le porteur met KO un adversaire. S'il élimine le dernier adversaire, remporte le Jackpot qui double le montant gagné pendant ce combat.",
 		"ABSORB_BULB": "Tous les dégâts réduits sont absorbés par le bulbe. Une fois sous les 50% de HP, le bulbe explose, infligeant tous les dégâts absorbés en SPECIAL aux ennemis adjacents ",
 		"SACRED_ASH": "Octroie RESURECTION. Après résurrection, jusqu'à 3 alliés KO sont ressuscités également, mais sans leurs objets.",
-		"COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 300% de son ATK en SPECIAL à la cible et aux ennemis adjacents, et gagnant PROTECT pendant 3 secondes.",
+		"COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 300% de son ATK en SPECIAL à la cible et aux ennemis adjacents, et gagnant PROTECT pendant 2 secondes.",
 		"REPEAT_BALL": "Toutes les 2 relances du magasin, gagne +1 SPEED et 2 SHIELD. De plus, chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
 		"GOLD_BOW": "Le porteur ne compte pas dans la limite de taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
@@ -3627,7 +3627,7 @@
 	"blacklisted": "Vous avez été expulsé de ce match",
 	"npc_dialog": {
 		"welcome": "Bienvenue!",
-		"tell_price": "C'est 10 GOLD pièce !",
+		"tell_price": "C'est {{price}} GOLD pièce !",
 		"thank_you": "MERCI !"
 	},
 	"scribble": {

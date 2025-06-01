@@ -12461,6 +12461,21 @@ export class WickedBlowStrategy extends AbilityStrategy {
   }
 }
 
+export class VictoryDanceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, true)
+    // gain 3 Attack, 3 Defense and 10 Speed.
+    pokemon.addAttack(3, pokemon, 1, crit)
+    pokemon.addDefense(3, pokemon, 1, crit)
+    pokemon.addSpeed(10, pokemon, 1, crit)
+  }
+}
+
 export class BoomBurstStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13034,6 +13049,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYCHO_CUT]: new PsychoCutStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.WICKED_BLOW]: new WickedBlowStrategy(),
+  [Ability.VICTORY_DANCE]: new VictoryDanceStrategy(),
   [Ability.BOOMBURST]: new BoomBurstStrategy(),
   [Ability.FOLLOW_ME]: new FollowMeStrategy(),
   [Ability.AFTER_YOU]: new AfterYouStrategy(),

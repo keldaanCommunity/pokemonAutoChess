@@ -3337,7 +3337,7 @@ export class Venusaur extends Pokemon {
 }
 
 export class Igglybuff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BABY, Synergy.SOUND, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.BABY])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.JIGGLYPUFF
@@ -3353,7 +3353,7 @@ export class Igglybuff extends Pokemon {
 }
 
 export class Jigglypuff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.WIGGLYTUFF
@@ -3369,7 +3369,7 @@ export class Jigglypuff extends Pokemon {
 }
 
 export class Wigglytuff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.SOUND, Synergy.NORMAL])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 250
@@ -16116,7 +16116,15 @@ export class Audino extends Pokemon {
 export class Petilil extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
   rarity = Rarity.UNCOMMON
-  evolution = Pkm.LILIGANT
+  evolutions = [Pkm.LILIGANT, Pkm.HISUIAN_LILLIGANT]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: IPlayer) => {
+      if (player.regionalPokemons.includes(Pkm.HISUIAN_LILLIGANT))
+        return Pkm.HISUIAN_LILLIGANT
+      else return Pkm.LILIGANT
+    }
+  )
   stars = 1
   hp = 85
   atk = 5
@@ -16136,6 +16144,7 @@ export class Lilligant extends Pokemon {
   stars = 2
   hp = 180
   atk = 10
+  speed = 54
   def = 8
   speDef = 8
   maxPP = 100
@@ -16143,6 +16152,27 @@ export class Lilligant extends Pokemon {
   skill = Ability.AROMATHERAPY
   attackSprite = AttackSprite.GRASS_MELEE
   additional = true
+}
+
+export class HisuianLilligant extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING, Synergy.HUMAN])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 14
+  speed = 59
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.VICTORY_DANCE
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.FIGHTING)
+  }
 }
 
 export class Mantyke extends Pokemon {
@@ -19511,6 +19541,7 @@ export const PokemonClasses: Record<
   [Pkm.KUBFU]: Kubfu,
   [Pkm.URSHIFU_SINGLE]: UrshifuSingle,
   [Pkm.URSHIFU_RAPID]: UrshifuRapid,
+  [Pkm.HISUIAN_LILLIGANT]: HisuianLilligant,
   [Pkm.SCREAM_TAIL]: ScreamTail,
   [Pkm.WYRDEER]: Wyrdeer,
   [Pkm.INDEEDEE_FEMALE]: IndeedeeFemale,
