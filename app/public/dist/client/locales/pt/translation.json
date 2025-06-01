@@ -2440,7 +2440,6 @@
 	"key_desc_refresh": "Renovar a loja",
 	"key_desc_avatar_anim": "Mostrar a animação do avatar",
 	"key_desc_avatar_emotes": "Ativar o menú de emotes",
-	"jukebox": "Caixa de música",
 	"gadgets": "Engenhocas",
 	"gadgets_unlocked": "{{count}}/{{total}} Engenhocas disponíveis",
 	"gadget": {

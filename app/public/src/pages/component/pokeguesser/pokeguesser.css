@@ -1,0 +1,80 @@
+.game-pokeguesser-modal {
+  min-width: 980px;
+}
+
+.game-pokeguesser-modal .modal-body {
+  min-height: 480px;
+  text-align: center;
+}
+
+#pokemon-select-form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#pokemon-select-form > div {
+  position: relative;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+#pokemon-select-form input {
+  width: 100%;
+  border: none;
+}
+
+#pokemon-select-form .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+#pokemon-select-form .dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.game-pokeguesser-modal .attempts {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.game-pokeguesser-modal ul {
+  padding: 0;
+  margin: 0;
+}
+
+.game-pokeguesser-modal .pokemon-attempt {
+  display: flex;
+  list-style: none;
+  gap: 1em;
+  align-items: stretch;
+  margin: 8px 0;
+}
+
+.game-pokeguesser-modal .pokemon-attempt span {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  background-color: var(--color-bg-red);
+  padding: 5px;
+}
+
+.game-pokeguesser-modal .pokemon-attempt span.valid {
+  background-color: var(--color-bg-green);
+}

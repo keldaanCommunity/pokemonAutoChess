@@ -3527,7 +3527,6 @@
 	"key_desc_avatar_anim": "Play avatar animation",
 	"key_desc_avatar_emotes": "Toggle emote menu",
 	"key_desc_avatar_show_emote": "Trigger emote",
-	"jukebox": "Jukebox",
 	"gadgets": "Gadgets",
 	"gadgets_unlocked": "{{count}}/{{total}} gadgets unlocked",
 	"gadget": {
@@ -3542,7 +3541,9 @@
 		"jukebox": "Jukebox",
 		"jukebox_desc": "Choose your music ingame",
 		"gameboy": "Gameboy",
-		"gameboy_desc": "Play the Gameboy prototype of the game"
+		"gameboy_desc": "Play the Gameboy prototype of the game",
+		"pokeguesser": "PokeGuessr",
+		"pokeguesser_desc": "Guess the Pokémon trivia game when waiting for lobby to start"
 	},
 	"level_required": "Level required",
 	"map": {
@@ -3833,5 +3834,12 @@
   "connection_status": {
     "CONNECTION_LOST": "Connection lost. Attempting to reconnect...",
     "CONNECTION_FAILED": "Connection failed. Try to refresh page."
+  },
+  "pokeguessr": {
+	"whosthatpokemon": "Who's that Pokémon ?",
+	"itssolution": "It's $t(pkm.{{pokemon}}) !",
+	"attempts": "Attempts: {{count}}",
+	"guess": "Guess",
+	"reset": "Reset"
   }
 }

@@ -1427,7 +1427,6 @@
 	"key_desc_avatar_anim": "เล่นอนิเมชั่นภาพโปรไฟล์",
 	"key_desc_avatar_emotes": "เปิดดูอีโมท",
 	"key_desc_avatar_show_emote": "ใช้งานอีโมท",
-	"jukebox": "เลือกเพลง",
 	"gadgets": "อุปกรณ์เสริม",
 	"gadgets_unlocked": "{{count}}/{{total}} ปลดล็อค : อุปกรณ์เสริม",
 	"gadget": {

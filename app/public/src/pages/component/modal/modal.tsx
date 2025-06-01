@@ -52,7 +52,7 @@ export function Modal(props: ModalProps) {
             event.clientY <= rect.top + rect.height &&
             rect.left <= event.clientX &&
             event.clientX <= rect.left + rect.width) ||
-          ["OPTION", "SELECT"].includes((event.target as any).tagName)
+          ["OPTION", "SELECT", "BUTTON"].includes((event.target as any).tagName)
         if (!isInDialog) {
           close()
         }

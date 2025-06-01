@@ -3437,7 +3437,6 @@
 	"key_desc_avatar_anim": "아바타 애니메이션 재생",
 	"key_desc_avatar_emotes": "감정표현 매뉴로 전환",
 	"key_desc_avatar_show_emote": "감정표현하기",
-	"jukebox": "주크박스",
 	"gadgets": "기구들",
 	"gadgets_unlocked": "{{count}}/{{total}} 잠금해제된 기구들",
 	"gadget": {
