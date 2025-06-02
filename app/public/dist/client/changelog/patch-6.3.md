@@ -31,6 +31,7 @@
 - Unowns can no longer eat Gourmet dishes
 - Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
 - Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
+- Change Prismatic Laser (Necrozma): laser now hits in a 3-wide column centered on the target instead of the caster, and pushes enemies in the direction of the laser.
 
 # Changes to Synergies
 

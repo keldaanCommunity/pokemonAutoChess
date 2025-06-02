@@ -187,7 +187,9 @@ function zeroPad(num: number) {
 
 async function splitIndex(index: string) {
   const pathIndex = index.replaceAll("-", "/")
-  const shinyPad = pathIndex.split("/").with(2, "0001").join("/")
+  const split = pathIndex.split("/")
+
+  const shinyPad = split.length === 1 ? `${pathIndex}/0000/0001` : split.length === 2 ? `${pathIndex}/0001` : pathIndex.split("/").with(2, "0001").join("/")
   const conf =
     AnimationConfig[mapName.get(index) as Pkm] ?? AnimationConfig[Pkm.DEFAULT]
   const allPads = [pathIndex]

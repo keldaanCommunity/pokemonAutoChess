@@ -6910,29 +6910,22 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const affectedCells = board.cells.filter(
-      (v) =>
-        v &&
-        v.team !== pokemon.team &&
-        (v.positionX === pokemon.positionX ||
-          v.positionX === pokemon.positionX - 1 ||
-          v.positionX === pokemon.positionX + 1)
-    )
-
-    affectedCells.forEach((tg) => {
-      if (tg) {
-        tg.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
-        const teleportationCell = board.getTeleportationCell(
-          tg.positionX,
-          tg.positionY
-        )
-        if (teleportationCell) {
-          tg.moveTo(teleportationCell.x, teleportationCell.y, board)
-        } else {
-          logger.error("unable to teleport pokemon", tg)
+    const flip = pokemon.team === Team.RED_TEAM
+    for (let dx = -1; dx <= 1; dx++) {
+      const x = target.positionX + dx
+      if (x < 0 || x >= board.columns) continue
+      for (let y = flip ? 0 : board.rows; flip ? y < board.rows : y > 0; y += flip ? 1 : -1) {
+        const entityOnCell = board.getValue(x, y)
+        if (entityOnCell && entityOnCell.team !== pokemon.team) {
+          entityOnCell.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+          // move the entity to the next cell in the direction of the laser
+          const newY = y + (flip ? -1 : 1)
+          if (newY >= 0 && newY < board.rows && !board.getValue(x, newY)) {
+            entityOnCell.moveTo(x, newY, board)
+          }
         }
       }
-    })
+    }
   }
 }
 
@@ -8976,7 +8969,7 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30,40,50,60][pokemon.stars - 1] ?? 60
+    const damage = [30, 40, 50, 60][pokemon.stars - 1] ?? 60
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)

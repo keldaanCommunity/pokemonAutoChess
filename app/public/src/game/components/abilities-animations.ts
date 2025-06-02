@@ -2301,8 +2301,8 @@ export function displayAbility(
     }
 
     case Ability.PRISMATIC_LASER: {
-      const startCoords = transformEntityCoordinates(positionX, 0, flip)
-      const finalCoords = transformEntityCoordinates(positionX, 6, flip)
+      const startCoords = transformEntityCoordinates(targetX, flip ? 6 : 0, flip)
+      const finalCoords = transformEntityCoordinates(targetX, flip ? 0 : 6, flip)
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(5)
       scene.tweens.add({
         targets: specialProjectile,

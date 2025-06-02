@@ -6555,8 +6555,8 @@ export const AnimationConfig: {
   },
   [Pkm.NECROZMA]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Idle,
-    emote: AnimationType.Charge
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
   },
   [Pkm.ULTRA_NECROZMA]: {
     attack: AnimationType.Shoot,
