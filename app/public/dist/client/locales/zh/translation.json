@@ -3478,7 +3478,6 @@
 	"key_desc_avatar_anim": "播放形象动画",
 	"key_desc_avatar_emotes": "显示/隐藏表情菜单",
 	"key_desc_avatar_show_emote": "发送表情",
-	"jukebox": "八音盒",
 	"gadgets": "工具",
 	"gadgets_unlocked": "{{count}}/{{total}} 件工具已解锁",
 	"gadget": {

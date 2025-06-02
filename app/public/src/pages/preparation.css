@@ -29,6 +29,11 @@
   flex-direction: column;
 }
 
+.preparation-page .chat-container h2 {
+  font-size: 1.5em;
+  text-align: center;
+}
+
 .preparation-page > footer {
   position: absolute;
   bottom: 0;

@@ -3428,7 +3428,6 @@
 	"key_desc_avatar_anim": "Jouer l'emote de l'avatar",
 	"key_desc_avatar_emotes": "Voir le menu des emotes",
 	"key_desc_avatar_show_emote": "Lancer l'emote",
-	"jukebox": "Jukebox",
 	"gadgets": "Gadgets",
 	"gadgets_unlocked": "{{count}}/{{total}} gadgets débloqués",
 	"gadget": {

@@ -12,6 +12,7 @@ import { cc } from "../../utils/jsx"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
+import PokeGuesser from "../pokeguesser/pokeguesser"
 import Jukebox from "../jukebox/jukebox"
 import MetaReport from "../meta-report/meta-report"
 import { Modal } from "../modal/modal"
@@ -195,6 +196,12 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
+        {page !== "game" && ((!GADGETS.POKEGUESSER.disabled && profileLevel >= GADGETS.POKEGUESSER.levelRequired) || profile?.role === Role.ADMIN) && (
+          <NavLink svg="pokeguesser" location="pokeguesser" handleClick={changeModal}>
+            {t("gadget.pokeguesser")}
+          </NavLink>
+        )}
+
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
             <NavLink
@@ -348,19 +355,20 @@ function NavLink(props: NavLinkProps) {
 }
 
 export type Modals =
-  | "profile"
-  | "meta"
-  | "wiki"
-  | "team-builder"
-  | "collection"
+  | "announcement"
   | "booster"
+  | "collection"
+  | "jukebox"
+  | "keybinds"
+  | "meta"
   | "news"
   | "options"
-  | "keybinds"
-  | "jukebox"
-  | "announcement"
-  | "tournaments"
+  | "pokeguesser"
+  | "profile"
   | "servers"
+  | "team-builder"
+  | "tournaments"
+  | "wiki"
 
 function Modals({
   modal,
@@ -454,6 +462,7 @@ function Modals({
         <TournamentsAdmin />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
+      <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />
     </>
   )
 }

@@ -51,11 +51,19 @@ const GAMEBOY: Gadget = {
   levelRequired: 30
 }
 
+const POKEGUESSER: Gadget = {
+  name: "gadget.pokeguesser",
+  description: "gadget.pokeguesser_desc",
+  icon: "pokeguesser",
+  levelRequired: 40
+}
+
 export const GADGETS = {
   TRAINER_CARD,
   BAG,
   TEAM_PLANNER,
   JUKEBOX,
   BOT_BUILDER,
-  GAMEBOY
+  GAMEBOY,
+  POKEGUESSER
 } as const

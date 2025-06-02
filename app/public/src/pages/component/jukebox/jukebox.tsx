@@ -66,7 +66,7 @@ export default function Jukebox(props: {
   return (
     <Modal show={props.show} onClose={props.handleClose}
       className="game-jukebox-modal"
-      header={t("jukebox")}
+      header={t("gadget.jukebox")}
     >
       <div className="actions" style={{ marginBottom: "0.5em" }}>
         <button className="bubbly blue" onClick={() => nextMusic(-1)}>
