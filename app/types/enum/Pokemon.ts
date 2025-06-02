@@ -5429,9 +5429,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.DRIFBLIM]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Idle,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
   },
   [Pkm.SHROOMISH]: {
     attack: AnimationType.Attack,
@@ -6920,9 +6920,9 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.URSALUNA]: {
-    attack: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    ability: AnimationType.Idle, // TEMP while waiting for anims to be drawn
-    emote: AnimationType.Idle // TEMP while waiting for anims to be drawn
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp
   },
   [Pkm.URSALUNA_BLOODMOON]: {
     attack: AnimationType.Strike,
@@ -7237,7 +7237,7 @@ export const AnimationConfig: {
   [Pkm.DONPHAN]: {
     attack: AnimationType.Attack,
     ability: AnimationType.TumbleBack,
-    emote: AnimationType.Idle
+    emote: AnimationType.Shoot
   },
   [Pkm.SPOINK]: {
     attack: AnimationType.Attack,
@@ -7286,8 +7286,8 @@ export const AnimationConfig: {
   },
   [Pkm.GARBODOR]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Idle
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake
   },
   [Pkm.GRUBBIN]: {
     attack: AnimationType.Shoot,
@@ -7616,7 +7616,7 @@ export const AnimationConfig: {
   [Pkm.TURTONATOR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Idle
+    emote: AnimationType.Rumble
   },
   [Pkm.SKORUPI]: {
     attack: AnimationType.Attack,
@@ -7726,9 +7726,7 @@ export const AnimationConfig: {
   [Pkm.INKAY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Twirl,
-    hurt: AnimationType.Idle,
-    hop: AnimationType.Twirl
+    emote: AnimationType.Twirl
   },
   [Pkm.MALAMAR]: {
     attack: AnimationType.Strike,
