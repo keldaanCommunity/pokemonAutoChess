@@ -11573,8 +11573,7 @@ export class HisuiZorua extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.ZORUA)) &&
-      (regionSynergies.includes(Synergy.NORMAL) ||
-        regionSynergies.includes(Synergy.GHOST))
+      regionSynergies.includes(Synergy.GHOST)
     )
   }
 }
@@ -11598,8 +11597,7 @@ export class HisuiZoroark extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.ZORUA)) &&
-      (regionSynergies.includes(Synergy.NORMAL) ||
-        regionSynergies.includes(Synergy.GHOST))
+      regionSynergies.includes(Synergy.GHOST)
     )
   }
 }
@@ -18580,6 +18578,86 @@ export class Farigiraf extends Pokemon {
   additional = true
 }
 
+export class Skitty extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FAIRY,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.DELCATTY
+  stars = 1
+  hp = 65
+  atk = 6
+  speed = 32
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.ATTRACT
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Delcatty extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FAIRY,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 160
+  atk = 14
+  speed = 32
+  def = 5
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ATTRACT
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Glameow extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.DARK
+  ])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.PURUGLY
+  stars = 1
+  hp = 65
+  atk = 6
+  speed = 70
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SWAGGER
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
+export class Purugly extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.DARK
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 14
+  speed = 70
+  def = 5
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SWAGGER
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19554,6 +19632,10 @@ export const PokemonClasses: Record<
   [Pkm.WHIMSICOTT]: Whimsicott,
   [Pkm.GIRAFARIG]: Girafarig,
   [Pkm.FARIGIRAF]: Farigiraf,
+  [Pkm.SKITTY]: Skitty,
+  [Pkm.DELCATTY]: Delcatty,
+  [Pkm.GLAMEOW]: Glameow,
+  [Pkm.PURUGLY]: Purugly
 }
 
 // declare all the classes in colyseus schema TypeRegistry

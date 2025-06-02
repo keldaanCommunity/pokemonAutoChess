@@ -480,7 +480,8 @@
 		"FOLLOW_ME": "Follow Me",
 		"AFTER_YOU": "After You",
 		"COTTON_SPORE": "Cotton Spore",
-		"TWIN_BEAM": "Twin Beam"
+		"TWIN_BEAM": "Twin Beam",
+		"SWAGGER": "Swagger"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1925,7 +1926,8 @@
 		"FOLLOW_ME": "Jump to a free cell far away and gain [40,SP] SHIELD. Enemies that were targeting the user get CHARM for 3 seconds.",
 		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.",
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
-		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line."
+		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
+		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",

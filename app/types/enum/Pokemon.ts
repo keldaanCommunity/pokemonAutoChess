@@ -180,6 +180,7 @@ export enum Pkm {
   DEERLING = "DEERLING",
   DEFAULT = "DEFAULT",
   DEINO = "DEINO",
+  DELCATTY = "DELCATTY",
   DELIBIRD = "DELIBIRD",
   DELPHOX = "DELPHOX",
   DEOXYS = "DEOXYS",
@@ -296,6 +297,7 @@ export enum Pkm {
   GIRATINA = "GIRATINA",
   GLACEON = "GLACEON",
   GLALIE = "GLALIE",
+  GLAMEOW = "GLAMEOW",
   GLIGAR = "GLIGAR",
   GLISCOR = "GLISCOR",
   GLIMMET = "GLIMMET",
@@ -633,6 +635,7 @@ export enum Pkm {
   PUMPKABOO = "PUMPKABOO",
   PUPITAR = "PUPITAR",
   PURRLOIN = "PURRLOIN",
+  PURUGLY = "PURUGLY",
   PYUKUMUKU = "PYUKUMUKU",
   QUAGSIRE = "QUAGSIRE",
   QUILAVA = "QUILAVA",
@@ -724,6 +727,7 @@ export enum Pkm {
   SKARMORY = "SKARMORY",
   SKELEDIRGE = "SKELEDIRGE",
   SKIPLOOM = "SKIPLOOM",
+  SKITTY = "SKITTY",
   SKORUPI = "SKORUPI",
   SKRELP = "SKRELP",
   SKUNTANK = "SKUNTANK",
@@ -1344,8 +1348,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.HARIYAMA]: "0297",
   [Pkm.AZURILL]: "0298",
   [Pkm.NOSEPASS]: "0299",
-  //[Pkm.SKITTY]: "0300",
-  //[Pkm.DELCATTY]: "0301",
+  [Pkm.SKITTY]: "0300",
+  [Pkm.DELCATTY]: "0301",
   [Pkm.SABLEYE]: "0302",
   [Pkm.MEGA_SABLEYE]: "0302-0001",
   [Pkm.MAWILE]: "0303",
@@ -1499,8 +1503,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MEGA_LOPUNNY]: "0428-0001",
   [Pkm.MISMAGIUS]: "0429",
   [Pkm.HONCHKROW]: "0430",
-  //[Pkm.GLAMEOW]: "0431",
-  //[Pkm.PURUGLY]: "0432",
+  [Pkm.GLAMEOW]: "0431",
+  [Pkm.PURUGLY]: "0432",
   [Pkm.CHINGLING]: "0433",
   [Pkm.STUNKY]: "0434",
   [Pkm.SKUNTANK]: "0435",
@@ -3109,7 +3113,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.COTTONEE]: Pkm.COTTONEE,
   [Pkm.WHIMSICOTT]: Pkm.COTTONEE,
   [Pkm.GIRAFARIG]: Pkm.GIRAFARIG,
-  [Pkm.FARIGIRAF]: Pkm.GIRAFARIG
+  [Pkm.FARIGIRAF]: Pkm.GIRAFARIG,
+  [Pkm.SKITTY]: Pkm.SKITTY,
+  [Pkm.DELCATTY]: Pkm.SKITTY,
+  [Pkm.GLAMEOW]: Pkm.GLAMEOW,
+  [Pkm.PURUGLY]: Pkm.GLAMEOW
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8146,6 +8154,26 @@ export const AnimationConfig: {
   [Pkm.FARIGIRAF]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SKITTY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.DELCATTY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GLAMEOW]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.PURUGLY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot
   },
 }

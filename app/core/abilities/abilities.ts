@@ -12588,6 +12588,23 @@ export class TwinBeamStrategy extends AbilityStrategy {
   }
 }
 
+export class SwaggerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //Confuses and enrage the target for 2 seconds
+    const duration = Math.round(
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
+    target.status.triggerConfusion(duration, target, pokemon)
+    target.status.triggerRage(duration, target)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13050,5 +13067,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FOLLOW_ME]: new FollowMeStrategy(),
   [Ability.AFTER_YOU]: new AfterYouStrategy(),
   [Ability.COTTON_SPORE]: new CottonSporeStrategy(),
-  [Ability.TWIN_BEAM]: new TwinBeamStrategy()
+  [Ability.TWIN_BEAM]: new TwinBeamStrategy(),
+  [Ability.SWAGGER]: new SwaggerStrategy()
 }

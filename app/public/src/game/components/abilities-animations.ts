@@ -1855,7 +1855,7 @@ export function displayAbility(
       break
 
     case Ability.ATTRACT:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, [coordinates[0], coordinates[1] - 70], true).setScale(2)
       break
 
     case Ability.MAGNET_RISE:
