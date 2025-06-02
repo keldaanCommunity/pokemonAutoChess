@@ -481,7 +481,8 @@
 		"AFTER_YOU": "After You",
 		"COTTON_SPORE": "Cotton Spore",
 		"TWIN_BEAM": "Twin Beam",
-		"SWAGGER": "Swagger"
+		"SWAGGER": "Swagger",
+		"ENCORE": "Encore"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1927,7 +1928,8 @@
 		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.",
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
-		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds."
+		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
+		"ENCORE": "Casts the last ability used by an ally"
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",

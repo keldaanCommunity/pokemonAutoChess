@@ -3,6 +3,7 @@ import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
   DrySkinEffect,
+  OnAbilityCastEffect,
   SynchroEffect
 } from "../../core/effects/effect"
 import {
@@ -27,7 +28,6 @@ import {
 } from "../../types"
 import {
   DEFAULT_SPEED,
-  EvolutionTime,
   SynergyTriggers
 } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
@@ -18658,6 +18658,79 @@ export class Purugly extends Pokemon {
   additional = true
 }
 
+export class Minccino extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.CINCCINO
+  stars = 1
+  hp = 60
+  atk = 8
+  speed = 74
+  def = 3
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.ENCORE
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+  abilitiesCasted: Ability[] = []
+  afterSimulationStart(params: {
+    player: IPlayer
+    simulation: Simulation
+    team: MapSchema<IPokemonEntity>
+    entity: IPokemonEntity
+  }) {
+    this.abilitiesCasted = []
+    params.team.forEach((pokemon) => {
+      if (pokemon.refToBoardPokemon.id !== this.id) {
+        pokemon.effectsSet.add(new OnAbilityCastEffect(() => {
+          this.abilitiesCasted.push(pokemon.skill)
+        }))
+      }
+    })
+  }
+}
+
+export class Cinccino extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 15
+  speed = 74
+  def = 4
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.ENCORE
+  attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
+  abilitiesCasted: Ability[] = []
+  afterSimulationStart(params: {
+    player: IPlayer
+    simulation: Simulation
+    team: MapSchema<IPokemonEntity>
+    entity: IPokemonEntity
+  }) {
+    this.abilitiesCasted = []
+    params.team.forEach((pokemon) => {
+      if (pokemon.refToBoardPokemon.id !== this.id) {
+        pokemon.effectsSet.add(new OnAbilityCastEffect(() => {
+          this.abilitiesCasted.push(pokemon.skill)
+        }))
+      }
+    })
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19635,7 +19708,9 @@ export const PokemonClasses: Record<
   [Pkm.SKITTY]: Skitty,
   [Pkm.DELCATTY]: Delcatty,
   [Pkm.GLAMEOW]: Glameow,
-  [Pkm.PURUGLY]: Purugly
+  [Pkm.PURUGLY]: Purugly,
+  [Pkm.MINCCINO]: Minccino,
+  [Pkm.CINCCINO]: Cinccino
 }
 
 // declare all the classes in colyseus schema TypeRegistry

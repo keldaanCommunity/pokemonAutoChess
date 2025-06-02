@@ -130,6 +130,7 @@ export enum Pkm {
   CHIMECHO = "CHIMECHO",
   CHINCHOU = "CHINCHOU",
   CHINGLING = "CHINGLING",
+  CINCCINO = "CINCCINO",
   CINDERACE = "CINDERACE",
   CLAMPERL = "CLAMPERL",
   CLAUNCHER = "CLAUNCHER",
@@ -515,6 +516,7 @@ export enum Pkm {
   MIME_JR = "MIME_JR",
   MIMIKYU = "MIMIKYU",
   MIMIKYU_BUSTED = "MIMIKYU_BUSTED",
+  MINCCINO = "MINCCINO",
   MINIOR = "MINIOR",
   MINIOR_KERNEL_BLUE = "MINIOR_KERNEL_BLUE",
   MINIOR_KERNEL_GREEN = "MINIOR_KERNEL_GREEN",
@@ -1657,8 +1659,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ZOROARK]: "0571",
   [Pkm.HISUI_ZORUA]: "0570-0001",
   [Pkm.HISUI_ZOROARK]: "0571-0001",
-  //[Pkm.MINCCINO]: "0572",
-  //[Pkm.CINCCINO]: "0573",
+  [Pkm.MINCCINO]: "0572",
+  [Pkm.CINCCINO]: "0573",
   [Pkm.GOTHITA]: "0574",
   [Pkm.GOTHORITA]: "0575",
   [Pkm.GOTHITELLE]: "0576",
@@ -3117,7 +3119,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SKITTY]: Pkm.SKITTY,
   [Pkm.DELCATTY]: Pkm.SKITTY,
   [Pkm.GLAMEOW]: Pkm.GLAMEOW,
-  [Pkm.PURUGLY]: Pkm.GLAMEOW
+  [Pkm.PURUGLY]: Pkm.GLAMEOW,
+  [Pkm.MINCCINO]: Pkm.MINCCINO,
+  [Pkm.CINCCINO]: Pkm.MINCCINO
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8175,5 +8179,15 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot
+  },
+  [Pkm.MINCCINO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Appeal
+  },
+  [Pkm.CINCCINO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Dance
   },
 }

@@ -31,7 +31,7 @@ import {
   HiddenPowerZStrategy
 } from "./hidden-power"
 
-import { Transfer } from "../../types"
+import { IPokemon, Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Orientation, Team } from "../../types/enum/Game"
@@ -12601,6 +12601,25 @@ export class SwaggerStrategy extends AbilityStrategy {
   }
 }
 
+export class EncoreStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const abilitiesCasted = (pokemon.refToBoardPokemon as IPokemon & { abilitiesCasted: Ability[] }).abilitiesCasted
+    const lastAbilityUsed = abilitiesCasted.findLast(
+      (ability) => ability !== Ability.ENCORE && AbilityStrategies[ability]?.copyable
+    )
+    if (lastAbilityUsed) {
+      AbilityStrategies[lastAbilityUsed].process(pokemon, board, target, crit)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13064,5 +13083,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AFTER_YOU]: new AfterYouStrategy(),
   [Ability.COTTON_SPORE]: new CottonSporeStrategy(),
   [Ability.TWIN_BEAM]: new TwinBeamStrategy(),
-  [Ability.SWAGGER]: new SwaggerStrategy()
+  [Ability.SWAGGER]: new SwaggerStrategy(),
+  [Ability.ENCORE]: new EncoreStrategy()
 }

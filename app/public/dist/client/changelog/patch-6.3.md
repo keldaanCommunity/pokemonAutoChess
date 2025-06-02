@@ -13,6 +13,8 @@
 - Delcatty
 - Glameow
 - Purugly
+- Minccino
+- Cinccino
 
 # Changes to Pokemon & Abilities
 
