@@ -18594,7 +18594,7 @@ export class Skitty extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.ATTRACT
+  skill = Ability.DISARMING_VOICE
   attackSprite = AttackSprite.NORMAL_MELEE
   additional = true
 }
@@ -18614,7 +18614,7 @@ export class Delcatty extends Pokemon {
   speDef = 3
   maxPP = 100
   range = 1
-  skill = Ability.ATTRACT
+  skill = Ability.DISARMING_VOICE
   attackSprite = AttackSprite.NORMAL_MELEE
   additional = true
 }

@@ -1189,7 +1189,7 @@
 		"GROWL": "Đối thủ gần nhất bị FLINCH trong 3 giây và bị giảm [3,5,7,SP] chỉ số ATK",
 		"RELIC_SONG": "Tạo ra bản nhạc. Hai nốt nhạc đầu tiên cung cấp [10,SP] SHIELD cho tất cả đồng minh. Nốt nhạc thứ ba gây SLEEP cho toàn bộ đội địch trong [2,SP=0,5] giây.",
 		"FAIRY_WIND": "Tặng [5,10,20,SP=0.5] PP cho tất cả Pokemon đồng minh, ngoại trừ bản thân",
-		"DISARMING_VOICE": "Khiến đối thủ trong vòng bán kính 2 ô bị CHARM trong [1,SP] giây",
+		"DISARMING_VOICE": "Khiến đối thủ trong vòng bán kính 1 ô bị CHARM trong [1,SP] giây",
 		"HIGH_JUMP_KICK": "Gây [15,30,60,SP] SPECIAL và đánh cắp tới 40 PP từ mục tiêu",
 		"GRASS_WHISTLE": "Ru SLEEP [1,2,4] Pokemon đối thủ trong 2 giây",
 		"TRI_ATTACK": "Gây [60,120,250,SP] SPECIAL. Có thể BURN, FREEZE hoặc PARALYSIS mục tiêu",

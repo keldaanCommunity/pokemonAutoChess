@@ -1453,7 +1453,7 @@
 		"GROWL": "使相邻的敌方宝可梦陷入FLINCH 3秒，并降低其[3,5,7,SP]点ATK。",
 		"RELIC_SONG": "发射一枚音符。前两枚音符使所有我方宝可梦获得[10,SP]点SHIELD，第三枚使所有敌方宝可梦陷入SLEEP [2,SP=0.5]秒。",
 		"FAIRY_WIND": "除使用者自身外，所有我方宝可梦恢复[5,10,20,SP=0.5]点PP。",
-		"DISARMING_VOICE": "使半径2格之内的敌方宝可梦陷入CHARM [1,SP]秒。",
+		"DISARMING_VOICE": "使半径1格之内的敌方宝可梦陷入CHARM [1,SP]秒。",
 		"HIGH_JUMP_KICK": "对目标造成[15,30,60,SP]点SPECIAL，并偷取其至多40点PP。",
 		"TROP_KICK": "对目标造成[50,100,200,SP]点SPECIAL，并降低其[3,5,7,SP]点ATK。",
 		"GRASS_WHISTLE": "使[1,2,4]只敌方宝可梦陷入SLEEP 2秒。",

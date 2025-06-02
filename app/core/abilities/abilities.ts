@@ -1541,11 +1541,7 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInRadius(
-      pokemon.positionX,
-      pokemon.positionY,
-      2
-    )
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.status.triggerCharm(1000, target, pokemon, true)
