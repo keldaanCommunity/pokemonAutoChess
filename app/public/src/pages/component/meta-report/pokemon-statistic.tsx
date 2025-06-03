@@ -19,7 +19,7 @@ export default function PokemonStatistic(props: {
   rankingBy: string
   synergy: Synergy | "all"
   rarity: Rarity | "all"
-  pool: "regular" | "additional" | "regional" | "special" | "all"
+  pool: string
   selectedPkm: string
 }) {
   const { t } = useTranslation()
@@ -184,7 +184,7 @@ function computeAverageItemHeld(pokemons: IPokemonsStatistic[]): number | null {
 
 function isInPool(
   pokemon: IPokemonsStatistic,
-  pool: "regular" | "additional" | "regional" | "special" | "all"
+  pool: string
 ): boolean {
   if (pool === "all") return true
   const data = getPokemonData(pokemon.name)
