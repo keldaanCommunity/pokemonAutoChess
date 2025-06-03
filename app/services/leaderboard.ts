@@ -4,8 +4,7 @@ import {
 } from "../types/interfaces/LeaderboardInfo"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { logger } from "../utils/logger"
-import { matchMaker } from "colyseus"
-import { IBot } from "../models/mongo-models/bot-v2"
+import { fetchBotsList } from "./bots"
 
 let leaderboard = new Array<ILeaderboardInfo>()
 let levelLeaderboard = new Array<ILeaderboardInfo>()
@@ -61,9 +60,7 @@ export async function fetchLevelLeaderboard() {
 
 export async function fetchBotsLeaderboard() {
   botLeaderboard = []
-  const bots = Object.values(await matchMaker.presence.hgetall("bots")).map(
-    (bot) => JSON.parse(bot) as IBot
-  )
+  const bots = await fetchBotsList(true)
   bots.sort((a, b) => b.elo - a.elo).forEach((bot, i) => {
     botLeaderboard.push({
       name: bot.name,

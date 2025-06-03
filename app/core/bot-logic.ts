@@ -99,7 +99,7 @@ export function getCategory(pkm: Pkm): string {
   let category = p.rarity.toUpperCase()
   if (
     [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL].includes(p.rarity) ===
-      false &&
+    false &&
     p.stars > 1
   ) {
     category += p.stages === 2 ? " 2S" : " 3S"
@@ -166,7 +166,6 @@ export function rewriteBotRoundsRequiredto1(bot: IBot) {
       oneSteps.push({ board: step.board, roundsRequired: 1 })
     }
   })
-  bot = structuredClone(bot)
   bot.steps = oneSteps.slice(0, MAX_BOTS_STAGE + 1)
   return bot
 }
