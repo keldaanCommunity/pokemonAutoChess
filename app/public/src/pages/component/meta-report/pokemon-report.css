@@ -5,6 +5,12 @@
   padding: 1rem;
 }
 
+#pokemon-report .filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 #pokemon-report article {
   overflow-y: auto;
 }

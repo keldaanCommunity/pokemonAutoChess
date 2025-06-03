@@ -12,7 +12,6 @@ import {
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function PokemonStatistic(props: {
@@ -20,6 +19,7 @@ export default function PokemonStatistic(props: {
   rankingBy: string
   synergy: Synergy | "all"
   rarity: Rarity | "all"
+  pool: "regular" | "additional" | "regional" | "special" | "all"
   selectedPkm: string
 }) {
   const { t } = useTranslation()
@@ -34,14 +34,8 @@ export default function PokemonStatistic(props: {
   const duos = Object.values(PkmDuos)
 
   const filteredPokemons = props.pokemons.filter(
-    (v) =>
-      (props.synergy === "all"
-        ? v
-        : PRECOMPUTED_POKEMONS_PER_TYPE[props.synergy].includes(v.name)) &&
-      (props.rarity === "all"
-        ? v
-        : PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity].includes(v.name)) &&
-      (props.selectedPkm === "" || v.name === props.selectedPkm)
+    (p) => hasType(p, props.synergy) && hasRarity(p, props.rarity) && isInPool(p, props.pool) &&
+      (props.selectedPkm === "" || p.name === props.selectedPkm)
   )
 
   filteredPokemons.forEach((pokemon) => {
@@ -186,4 +180,34 @@ function computeAverageItemHeld(pokemons: IPokemonsStatistic[]): number | null {
       0
     ) / pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.count, 0)
   )
+}
+
+function isInPool(
+  pokemon: IPokemonsStatistic,
+  pool: "regular" | "additional" | "regional" | "special" | "all"
+): boolean {
+  if (pool === "all") return true
+  const data = getPokemonData(pokemon.name)
+  if (pool === "special") return data.rarity === Rarity.SPECIAL
+  if (pool === "additional") return data.additional
+  if (pool === "regional") return data.regional
+  if (pool === "regular") return !data.additional && !data.regional && data.rarity !== Rarity.SPECIAL
+  return false
+}
+
+function hasType(
+  pokemon: IPokemonsStatistic,
+  synergy: Synergy | "all"
+): boolean {
+  if (synergy === "all") return true
+  const types = PRECOMPUTED_POKEMONS_PER_TYPE[synergy]
+  return types.includes(pokemon.name)
+}
+
+function hasRarity(
+  pokemon: IPokemonsStatistic,
+  rarity: Rarity | "all"
+): boolean {
+  if (rarity === "all") return true
+  return PRECOMPUTED_POKEMONS_PER_RARITY[rarity].includes(pokemon.name)
 }

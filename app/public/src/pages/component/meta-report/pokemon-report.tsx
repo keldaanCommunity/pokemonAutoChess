@@ -18,6 +18,7 @@ export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
   const [synergy, setSynergy] = useState<Synergy | "all">("all")
   const [rarity, setRarity] = useState<Rarity | "all">("all")
+  const [pool, setPool] = useState<string>("all")
   const [loading, setLoading] = useState<boolean>(true)
   const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
@@ -47,58 +48,76 @@ export function PokemonReport() {
     <div id="pokemon-report">
       <header>
         <h2>{t("best_pokemons")}</h2>
-        <select
-          value={pokemonRankingBy}
-          onChange={(e) => setPokemonRanking(e.target.value)}
-        >
-          <option value="count">
-            {t("rank")} {t("by_popularity")}
-          </option>
-          <option value="rank">
-            {t("rank")} {t("by_average_place")}
-          </option>
-          <option value="item_count">
-            {t("rank")} {t("by_average_held_items")}
-          </option>
-        </select>
-        <select
-          value={synergy}
-          onChange={(e) => {
-            setSynergy(e.target.value as Synergy | "all")
-          }}
-        >
-          <option value={"all"}>
-            {t("all")} {t("synergies")}
-          </option>
-          {Object.keys(Synergy).map((s) => (
-            <option value={s} key={s}>
-              {t(`synergy.${s}`)}
+        <div className="filters">
+          <select
+            value={pokemonRankingBy}
+            onChange={(e) => setPokemonRanking(e.target.value)}
+          >
+            <option value="count">
+              {t("rank")} {t("by_popularity")}
             </option>
-          ))}
-        </select>
-        <select
-          value={rarity}
-          onChange={(e) => setRarity(e.target.value as Rarity | "all")}
-        >
-          <option value={"all"}>
-            {t("rarity_label")}: {t("all")}
-          </option>
-          {Object.keys(Rarity).map((r) => (
-            <option value={r} key={r}>
-              {t(`rarity.${r}`)}
+            <option value="rank">
+              {t("rank")} {t("by_average_place")}
             </option>
-          ))}
-        </select>
-        <select
-          value={eloThreshold}
-          onChange={(e) => setEloTreshold(e.target.value as EloRank)}
-        >
-          {Object.keys(EloRank).map((r) => (
-            <option value={r} key={r}>
-              {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
+            <option value="item_count">
+              {t("rank")} {t("by_average_held_items")}
             </option>
-          ))}
-        </select>
+          </select>
+          <select
+            value={synergy}
+            onChange={(e) => {
+              setSynergy(e.target.value as Synergy | "all")
+            }}
+          >
+            <option value={"all"}>
+              {t("all")} {t("synergies")}
+            </option>
+            {Object.keys(Synergy).map((s) => (
+              <option value={s} key={s}>
+                {t(`synergy.${s}`)}
+              </option>
+            ))}
+          </select>
+          <select
+            value={rarity}
+            onChange={(e) => setRarity(e.target.value as Rarity | "all")}
+          >
+            <option value={"all"}>
+              {t("rarity_label")}: {t("all")}
+            </option>
+            {Object.keys(Rarity).map((r) => (
+              <option value={r} key={r}>
+                {t(`rarity.${r}`)}
+              </option>
+            ))}
+          </select>
+          <select
+            value={pool}
+            onChange={(e) => setPool(e.target.value)}
+          >
+            <option value={"all"}>
+              {t("pool_label")}: {t("all")}
+            </option>
+            {["regular", "additional", "regional"].map((p) => (
+              <option value={p} key={p}>
+                {t(`pool.${p}`)}
+              </option>
+            ))}
+            <option value={"special"} key={"special"}>
+              {t(`rarity.SPECIAL`)}
+            </option>
+          </select>
+          <select
+            value={eloThreshold}
+            onChange={(e) => setEloTreshold(e.target.value as EloRank)}
+          >
+            {Object.keys(EloRank).map((r) => (
+              <option value={r} key={r}>
+                {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
+              </option>
+            ))}
+          </select>
+        </div>
         <PokemonTypeahead
           value={selectedPkm ?? ""}
           onChange={(pkm) => setSelectedPkm(pkm)}
@@ -114,6 +133,7 @@ export function PokemonReport() {
           rankingBy={pokemonRankingBy}
           synergy={synergy}
           rarity={rarity}
+          pool={pool}
           selectedPkm={selectedPkm}
         />
       )}
