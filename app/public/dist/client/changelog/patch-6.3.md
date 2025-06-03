@@ -9,6 +9,12 @@
 - Whimsicott
 - Girafarig
 - Farigiraf
+- Skitty
+- Delcatty
+- Glameow
+- Purugly
+- Minccino
+- Cinccino
 
 # Changes to Pokemon & Abilities
 
@@ -32,6 +38,7 @@
 - Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
 - Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
 - Change Prismatic Laser (Necrozma): laser now hits in a 3-wide column centered on the target instead of the caster, and pushes enemies in the direction of the laser.
+- Hisuian Zorua no longer appears on Normal regions, only Ghost regions.
 
 # Changes to Synergies
 

@@ -480,7 +480,9 @@
 		"FOLLOW_ME": "Follow Me",
 		"AFTER_YOU": "After You",
 		"COTTON_SPORE": "Cotton Spore",
-		"TWIN_BEAM": "Twin Beam"
+		"TWIN_BEAM": "Twin Beam",
+		"SWAGGER": "Swagger",
+		"ENCORE": "Encore"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1483,7 +1485,7 @@
 		"GROWL": "Cause adjacent enemy Pokémon to FLINCH for 3 seconds and reduce their ATK by [3,5,7,SP].",
 		"RELIC_SONG": "Emit a note. The first two casts of this ability grant [10,SP] SHIELD to all allied Pokémon. The third cast puts all enemy Pokémon to SLEEP for [2,SP=0.5] seconds.",
 		"FAIRY_WIND": "Restore [5,10,20,SP=0.5] PP to all allied Pokémon other than the user.",
-		"DISARMING_VOICE": "Inflict CHARM onto all enemy Pokémon within a 2 tile radius for [1,SP] seconds.",
+		"DISARMING_VOICE": "Inflict CHARM to all adjacent enemies for [1,SP] seconds.",
 		"HIGH_JUMP_KICK": "Deal [15,30,60,SP] SPECIAL and steal up to 40 PP from the target.",
 		"TROP_KICK": "Deal [50,100,200,SP] SPECIAL and reduce the target's ATK by [3,5,7,SP].",
 		"GRASS_WHISTLE": "Put [1,2,4] enemy Pokémon to SLEEP for 2 seconds.",
@@ -1925,7 +1927,9 @@
 		"FOLLOW_ME": "Jump to a free cell far away and gain [40,SP] SHIELD. Enemies that were targeting the user get CHARM for 3 seconds.",
 		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.",
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
-		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line."
+		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
+		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
+		"ENCORE": "Casts the last ability used by an ally"
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",

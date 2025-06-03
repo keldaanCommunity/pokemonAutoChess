@@ -31,7 +31,7 @@ import {
   HiddenPowerZStrategy
 } from "./hidden-power"
 
-import { Transfer } from "../../types"
+import { IPokemon, Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Orientation, Team } from "../../types/enum/Game"
@@ -1541,11 +1541,7 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInRadius(
-      pokemon.positionX,
-      pokemon.positionY,
-      2
-    )
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.status.triggerCharm(1000, target, pokemon, true)
@@ -12588,6 +12584,42 @@ export class TwinBeamStrategy extends AbilityStrategy {
   }
 }
 
+export class SwaggerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //Confuses and enrage the target for 2 seconds
+    const duration = Math.round(
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
+    target.status.triggerConfusion(duration, target, pokemon)
+    target.status.triggerRage(duration, target)
+  }
+}
+
+export class EncoreStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const abilitiesCasted = (pokemon.refToBoardPokemon as IPokemon & { abilitiesCasted: Ability[] }).abilitiesCasted
+    const lastAbilityUsed = abilitiesCasted.findLast(
+      (ability) => ability !== Ability.ENCORE && AbilityStrategies[ability]?.copyable
+    )
+    if (lastAbilityUsed) {
+      AbilityStrategies[lastAbilityUsed].process(pokemon, board, target, crit)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13050,5 +13082,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FOLLOW_ME]: new FollowMeStrategy(),
   [Ability.AFTER_YOU]: new AfterYouStrategy(),
   [Ability.COTTON_SPORE]: new CottonSporeStrategy(),
-  [Ability.TWIN_BEAM]: new TwinBeamStrategy()
+  [Ability.TWIN_BEAM]: new TwinBeamStrategy(),
+  [Ability.SWAGGER]: new SwaggerStrategy(),
+  [Ability.ENCORE]: new EncoreStrategy()
 }

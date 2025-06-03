@@ -8,7 +8,7 @@ import { values } from "../../utils/schemas"
 import { ItemEffects } from "../effects/items"
 
 export class AbilityStrategy {
-  copyable = true // if true, can be copied by mimic, metronome...
+  copyable = true // if true, can be copied by mimic, metronome, encore...
   canCritByDefault = false
   process(
     pokemon: PokemonEntity,
