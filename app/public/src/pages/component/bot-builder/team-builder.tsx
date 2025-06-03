@@ -163,7 +163,7 @@ export default function TeamBuilder(props: {
   }
 
   function getFirstEmptyCell(): { x: number; y: number } | null {
-    for (let y = 1; y < 3; y++) {
+    for (let y = 1; y <= 3; y++) {
       for (let x = 0; x < 8; x++) {
         if (board.find(p => p.x === x && p.y === y) === undefined) {
           return { x, y }
