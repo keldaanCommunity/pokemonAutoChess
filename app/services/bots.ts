@@ -28,7 +28,7 @@ export async function fetchBotsList(
 
   return bots
     .filter((bot) => approved === undefined || bot.approved === approved)
-    .map((bot) => {      
+    .map((bot) => {
       const errors = validateBot(rewriteBotRoundsRequiredto1(bot))
       return {
         name: bot.name,
