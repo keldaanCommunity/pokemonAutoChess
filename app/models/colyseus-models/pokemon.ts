@@ -18668,7 +18668,7 @@ export class Minccino extends Pokemon {
   evolution = Pkm.CINCCINO
   stars = 1
   hp = 60
-  atk = 8
+  atk = 5
   speed = 74
   def = 3
   speDef = 3
@@ -18704,7 +18704,7 @@ export class Cinccino extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
-  atk = 15
+  atk = 12
   speed = 74
   def = 4
   speDef = 4
