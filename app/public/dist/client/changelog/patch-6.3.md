@@ -57,6 +57,8 @@
 
 # Gameplay
 
+- Change Paralysis: 50 -> 50% speed reduction
+
 # UI
 
 - **Mouse right button no longer allows you to move on carousel rounds in town. Use the left button instead.** This is to prevent accidentally opening carousel items tooltips and not being able to move to the location behind the tooltip.
