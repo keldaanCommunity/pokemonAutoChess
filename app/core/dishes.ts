@@ -253,16 +253,16 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   SPINDA_COCKTAIL: [
     new OnSpawnEffect((entity) => {
       if (chance(0.8, entity)) {
-        entity.addAttack(5, entity, 0, false)
+        entity.addAttack(10, entity, 0, false)
       }
       if (chance(0.8, entity)) {
-        entity.addSpeed(25, entity, 0, false)
+        entity.addSpeed(50, entity, 0, false)
       }
       if (chance(0.8, entity)) {
-        entity.addAbilityPower(25, entity, 0, false)
+        entity.addAbilityPower(50, entity, 0, false)
       }
       if (chance(0.8, entity)) {
-        entity.addShield(50, entity, 0, false)
+        entity.addShield(100, entity, 0, false)
       }
 
       if (!chance(0.8, entity)) {
