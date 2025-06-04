@@ -47,6 +47,7 @@
 # Changes to Synergies
 
 - Nerf Dark: Crit Power +30/60/100 → +30/50/80%
+- Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
 
 # Changes to Items
 
