@@ -42,6 +42,7 @@
 - Nerf Skorupi line: HP 90/180 → 80/160
 - Nerf Fiery Wraith (Galar Moltres): damage 33 → 30
 - Change Obstruct (Obstagoon): protect duration 1/2/3 → 2 seconds at all tiers; PP 120 → 100
+- Change Scorbunny line: range 1 → 2 ; def/spedef 6/10/14 → 4/6/9
 
 # Changes to Synergies
 

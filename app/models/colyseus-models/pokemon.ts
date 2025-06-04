@@ -10531,10 +10531,10 @@ export class Scorbunny extends Pokemon {
   hp = 75
   atk = 5
   speed = 63
-  def = 6
-  speDef = 6
+  def = 4
+  speDef = 4
   maxPP = 50
-  range = 1
+  range = 2
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
   attackSprite = AttackSprite.FIRE_MELEE
@@ -10549,10 +10549,10 @@ export class Raboot extends Pokemon {
   hp = 130
   atk = 10
   speed = 63
-  def = 10
-  speDef = 10
+  def = 6
+  speDef = 6
   maxPP = 50
-  range = 1
+  range = 2
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
   attackSprite = AttackSprite.FIRE_MELEE
@@ -10565,10 +10565,10 @@ export class Cinderace extends Pokemon {
   hp = 180
   atk = 17
   speed = 63
-  def = 14
-  speDef = 14
+  def = 9
+  speDef = 9
   maxPP = 50
-  range = 1
+  range = 2
   skill = Ability.PYRO_BALL
   attackSprite = AttackSprite.FIRE_MELEE
 }
