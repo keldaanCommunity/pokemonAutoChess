@@ -1695,7 +1695,7 @@
 		"STEALTH_ROCKS": "Despliega una capa de rocas afiladas alrededor, causando [50,SP] de SPECIAL. Las rocas se mantienen en el campo, causando 10 de PHYSICAL por segundo y dejando WOUND a los oponentes que caminen sobre ellas si no son ROCK.",
 		"TAIL_GLOW": "Inflige [30,SP] de SPECIAL a enemigos adyacentes y aumenta el AP del usuario en 50%",
 		"STRUGGLE_BUG": "Inflige [30,SP] de SPECIAL a enemigos adyacentes y reduce sus AP en 50%",
-		"PRISMATIC_LASER": "El usuario lanza un láser prismático en una gran linea recta, causando [80,SP] de SPECIAL y desplazando a los enemigos que golpea.",
+		"PRISMATIC_LASER": "El usuario lanza un láser prismático en una gran linea recta, causando [60,SP] de SPECIAL y desplazando a los enemigos que golpea.",
 		"NATURAL_GIFT": "Cura [30,60,120,SP] de HP al aliado mas dañado y le otorga RUNE_PROTECT por [1,2,3] segundos",
 		"NIGHT_SHADE": "Inflige [25,33,50,SP=0.5]% del HP máximo del objetivo como TRUE",
 		"CHARGE_BEAM": "Dispara electricidad concentrada que se propaga hasta 3 objetivos adyacentes, causando [15,30,60,SP] de SPECIAL a cada uno.",

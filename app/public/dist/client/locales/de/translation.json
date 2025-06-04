@@ -1673,7 +1673,7 @@
 		"STEALTH_ROCKS": "Legt scharfe Steine in einem 2-Zellen-Radius vor sich, die [50,SP] SPECIAL verursachen. Die Steine bleiben auf dem Feld liegen und verursachen 10 PHYSICAL pro Sekunde und WOUND Gegner, die darauf laufen, wenn sie nicht ROCK.",
 		"TAIL_GLOW": "Verursacht [30,SP] SPECIAL an benachbarten Gegnern und erhöht die AP des Anwenders um 50%.",
 		"STRUGGLE_BUG": "Fügt benachbarten Feinden [30,SP] SPECIAL zu und reduziert ihre AP um 50%.",
-		"PRISMATIC_LASER": "Der Anwender schießt einen prismatischen Laser in einer großen geraden Linie, der [80,SP] SPECIAL verursacht und alle getroffenen Feinde vertreibt.",
+		"PRISMATIC_LASER": "Der Anwender schießt einen prismatischen Laser in einer großen geraden Linie, der [60,SP] SPECIAL verursacht und alle getroffenen Feinde vertreibt.",
 		"NATURAL_GIFT": "Heilt [30,60,120,SP] HP bei dem am meisten verletzten Verbündeten und RUNE_PROTECT für [1,2,3] sekunden",
 		"NIGHT_SHADE": "Verursacht [25,33,50,SP=0.5]% der max. HP des Ziels als TRUE.",
 		"CHARGE_BEAM": "Feuert ein konzentriertes Elektrizitätsbündel ab, das sich auf maximal 3 benachbarte Ziele ausbreitet und ihnen jeweils [15,30,60,SP] SPECIAL zufügt.",

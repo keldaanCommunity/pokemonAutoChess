@@ -1674,7 +1674,7 @@
 		"STEALTH_ROCKS": "Lance des pierres pointues dans un rayon de 2 cases devant le lanceur, infligeant [50,SP] SPECIAL. Les pierres restent sur le terrain et infligent 10 PHYSICAL par seconde et WOUND aux adversaires qui marchent dessus, excepté les Pokémon ROCK.",
 		"TAIL_GLOW": "Inflige [30,SP] SPECIAL aux ennemis adjacents et augmente la AP du lanceur de 50%",
 		"STRUGGLE_BUG": "Inflige [30,SP] SPECIAL aux ennemis adjacents et réduit leur AP de 50%",
-		"PRISMATIC_LASER": "Envoie un laser prismatique dans une large ligne droite, infligeant [80,SP] SPECIAL et déplaçant tous les ennemis touchés.",
+		"PRISMATIC_LASER": "Envoie un laser prismatique dans une large ligne droite, infligeant [60,SP] SPECIAL et déplaçant tous les ennemis touchés.",
 		"NATURAL_GIFT": "Soigne [30,60,120,SP] HP de l'allié le plus blessé et lui donne RUNE_PROTECT pendant [1,2,3] secondes",
 		"NIGHT_SHADE": "Inflige [25,33,50,SP=0.5]% des HP max de la cible en TRUE",
 		"CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 cibles adjacentes, infligeant [15,30,60,SP] SPECIAL à chacune.",

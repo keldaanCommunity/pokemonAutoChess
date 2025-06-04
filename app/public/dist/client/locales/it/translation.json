@@ -1520,7 +1520,7 @@
 		"STEALTH_ROCKS": "Lascia di fronte all'utilizzatore rocce appuntite in un raggio di 2 celle, infliggendo [50,SP] SPECIAL. Le rocce rimangono sul campo, infliggendo 10 PHYSICAL per secondo e WOUND a tutti i Pokèmon nemici che ci camminano sopra, tranne se sono di tipo ROCK.",
 		"TAIL_GLOW": "Infliggi [30,SP] SPECIAL a tutti i nemici adiacenti ed aumenta i AP dell'utilizzatore del 50%.",
 		"STRUGGLE_BUG": "Infliggi [30,SP] SPECIAL a tutti i nemici adiacenti e riduci i loro AP del 50%.",
-		"PRISMATIC_LASER": "Spara un raggio prismatico in linea retta, infliggendo [80,SP] SPECIAL e spostando ogni nemico colpito.",
+		"PRISMATIC_LASER": "Spara un raggio prismatico in linea retta, infliggendo [60,SP] SPECIAL e spostando ogni nemico colpito.",
 		"NATURAL_GIFT": "Cura [30,60,120,SP] HP al Pokèmon alleato più ferito e riceve RUNE_PROTECT per [1,2,3] secondi.",
 		"NIGHT_SHADE": "Infliggi il [25,33,50,SP=0.5]% dei HP massimi del bersaglio come TRUE.",
 		"CHARGE_BEAM": "Spara un fascio di elettricità concentrato che si propaga ad un massimo di 3 bersagli adiacenti, infliggendo ad ognuno [15,30,60,SP] SPECIAL.",

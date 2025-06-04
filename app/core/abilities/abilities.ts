@@ -6913,7 +6913,7 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
       for (let y = flip ? 0 : board.rows; flip ? y < board.rows : y > 0; y += flip ? 1 : -1) {
         const entityOnCell = board.getValue(x, y)
         if (entityOnCell && entityOnCell.team !== pokemon.team) {
-          entityOnCell.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+          entityOnCell.handleSpecialDamage(60, board, AttackType.SPECIAL, pokemon, crit)
           // move the entity to the next cell in the direction of the laser
           const newY = y + (flip ? -1 : 1)
           if (newY >= 0 && newY < board.rows && !board.getValue(x, newY)) {

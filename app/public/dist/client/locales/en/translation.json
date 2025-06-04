@@ -1727,7 +1727,7 @@
 		"STEALTH_ROCKS": "Lay sharp stones within a 2 tile sector in front of the user, dealing [50,SP] SPECIAL to any enemy Pokémon in the area. The stones remain on the battlefield, dealing 10 PHYSICAL per second and WOUND non ROCK enemy Pokémon that walk on it.",
 		"TAIL_GLOW": "Deal [30,SP] SPECIAL to adjacent enemy Pokémon and increase the user's AP by 50%.",
 		"STRUGGLE_BUG": "Deal [30,SP] SPECIAL to adjacent enemy Pokémon and reduce their AP by 50%.",
-		"PRISMATIC_LASER": "The user shoots a 3-tile wide prismatic laser in a vertical straight line, dealing [80,SP] SPECIAL and pushing any enemy in its path.",
+		"PRISMATIC_LASER": "The user shoots a 3-tile wide prismatic laser in a vertical straight line, dealing [60,SP] SPECIAL and pushing any enemy in its path.",
 		"NATURAL_GIFT": "Heal the most damaged allied Pokémon for [30,60,120,SP] HP and grant them RUNE_PROTECT for [1,2,3] seconds.",
 		"NIGHT_SHADE": "Deal [25,33,50,SP=0.5]% of target's max HP as TRUE.",
 		"CHARGE_BEAM": "Fire a concentrated bundle of electricity that propagates to a maximum of 3 adjacent enemy Pokémon, dealing [15,30,60,SP] SPECIAL to each.",

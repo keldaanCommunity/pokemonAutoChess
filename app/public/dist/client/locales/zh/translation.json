@@ -1725,7 +1725,7 @@
 		"STEALTH_ROCKS": "在前方2格半径的区域内设下尖锐的岩石，对其中的目标造成[50,SP]点SPECIAL。这些岩石会留在场上，对在其中移动的非ROCK宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
 		"TAIL_GLOW": "对相邻敌方宝可梦造成[30,SP]点SPECIAL，并提升使用者50%的AP。",
 		"STRUGGLE_BUG": "对相邻敌方宝可梦造成[30,SP]点SPECIAL，并降低他们50%的AP。",
-		"PRISMATIC_LASER": "使用者发射一道直线传播的3格宽的棱镜光束，对击中的敌方宝可梦造成[80,SP]点SPECIAL并将他们击退。",
+		"PRISMATIC_LASER": "使用者发射一道直线传播的3格宽的棱镜光束，对击中的敌方宝可梦造成[60,SP]点SPECIAL并将他们击退。",
 		"NATURAL_GIFT": "为受伤最严重的我方宝可梦恢复[30,60,120,SP]点HP，并使其获得RUNE_PROTECT [1,2,3]秒。",
 		"NIGHT_SHADE": "对目标造成TRUE，数值相当于其最大HP的[25,33,50,SP=0.5]%。",
 		"CHARGE_BEAM": "发射一道电力集束，弹射至至多3个相邻的敌方宝可梦，对每个击中的目标造成[15,30,60,SP]点SPECIAL。",
