@@ -1604,7 +1604,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // force move on board some units if room available
     this.state.players.forEach((player, key) => {
       if (player.isBot) return
-      
+
       const teamSize = this.room.getTeamSize(player.board)
       const maxTeamSize = getMaxTeamSize(
         player.experienceManager.level,
@@ -1929,9 +1929,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                     }
                   }, 2000)
                 }
-              }, 3000)
+              }, 6000)
             },
-            Math.round((5 + 15 * Math.random()) * 1000)
+            Math.round((5 + 12 * Math.random()) * 1000)
           )
           //TODO: steal an item after 5 seconds
         }

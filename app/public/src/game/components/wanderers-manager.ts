@@ -86,7 +86,7 @@ export default class WanderersManager {
       startY: 700,
       endX: 484,
       endY: 686,
-      duration: 3000,
+      duration: 6000,
       onClick: (sprite, id, pointer) => {
         this.scene.room?.send(Transfer.POKEMON_WANDERING, { id })
         stopped = true
