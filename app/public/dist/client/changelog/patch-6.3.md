@@ -39,8 +39,13 @@
 - Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
 - Change Prismatic Laser (Necrozma): laser now hits in a 3-wide column centered on the target instead of the caster, and pushes enemies in the direction of the laser.
 - Hisuian Zorua no longer appears on Normal regions, only Ghost regions.
+- Nerf Skorupi line: HP 90/180 → 80/160
+- Nerf Fiery Wraith (Galar Moltres): damage 33 → 30
+- Change Obstruct (Obstagoon): protect duration 1/2/3 → 2 seconds at all tiers; PP 120 → 100
 
 # Changes to Synergies
+
+- Nerf Dark: Crit Power +30/60/100 → +30/50/80%
 
 # Changes to Items
 

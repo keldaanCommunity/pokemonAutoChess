@@ -2290,7 +2290,7 @@ export class ObstructStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const factor = 0.5
     const duration = Math.round(
-      ([1000, 2000, 3000][pokemon.stars - 1] ?? 3000) *
+      2000 *
       (1 + (pokemon.ap / 100) * factor) *
       (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
@@ -10438,7 +10438,7 @@ export class FieryWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = 33
+    const damage = 30
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {

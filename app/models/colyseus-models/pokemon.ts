@@ -13491,7 +13491,7 @@ export class Obstagoon extends Pokemon {
   speed = 55
   def = 16
   speDef = 10
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.OBSTRUCT
   attackSprite = AttackSprite.DARK_MELEE
@@ -16777,7 +16777,7 @@ export class Skorupi extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAPION
-  hp = 90
+  hp = 80
   atk = 9
   speed = 55
   def = 10
@@ -16793,7 +16793,7 @@ export class Drapion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
+  hp = 160
   atk = 16
   speed = 55
   def = 16
