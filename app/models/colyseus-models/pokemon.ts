@@ -18107,10 +18107,6 @@ export class Charcadet extends Pokemon {
   skill = Ability.FLAME_CHARGE
   passive = Passive.CHARCADET
   attackSprite = AttackSprite.FIRE_MELEE
-  onAcquired = (player) => {
-    player.items.push(Item.AUSPICIOUS_ARMOR)
-    player.items.push(Item.MALICIOUS_ARMOR)
-  }
   afterSell(player: Player): void {
     removeInArray(player.items, Item.MALICIOUS_ARMOR)
     removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
@@ -18132,7 +18128,6 @@ export class Armarouge extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
   onAcquired = (player) => {
     this.items.delete(Item.AUSPICIOUS_ARMOR)
-    removeInArray(player.items, Item.MALICIOUS_ARMOR)
   }
 }
 
@@ -18151,7 +18146,6 @@ export class Ceruledge extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
   onAcquired = (player) => {
     this.items.delete(Item.MALICIOUS_ARMOR)
-    removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
   }
 }
 

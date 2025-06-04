@@ -8,7 +8,8 @@ import {
   CraftableNonSynergyItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
-import { pickNRandomIn, pickRandomIn } from "../utils/random"
+import { Synergy } from "../types/enum/Synergy"
+import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 
@@ -101,7 +102,14 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.WIDE_LENS, Item.MANA_SCARF]
     ],
     getRewards(player: Player) {
-      return [pickRandomIn(NonSpecialItemComponents)]
+      const rewards = [pickRandomIn(NonSpecialItemComponents)]
+      if(values(player.board).some((p) => p.name === Pkm.CHARCADET)) {
+        const psyLevel = player.synergies.get(Synergy.PSYCHIC) || 0
+        const ghostLevel = player.synergies.get(Synergy.GHOST) || 0
+        const armorReceived = psyLevel > ghostLevel ? Item.AUSPICIOUS_ARMOR : psyLevel < ghostLevel ? Item.MALICIOUS_ARMOR : chance(1/2) ? Item.AUSPICIOUS_ARMOR : Item.MALICIOUS_ARMOR
+        rewards.push(armorReceived)
+      }
+      return rewards
     }
   },
 
