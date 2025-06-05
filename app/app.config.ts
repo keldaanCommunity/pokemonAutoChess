@@ -32,8 +32,8 @@ import {
   addBotToDatabase,
   approveBot,
   deleteBotFromDatabase,
-  getBotData,
-  getBotsList
+  fetchBot,
+  fetchBotsList
 } from "./services/bots"
 import { getLeaderboard } from "./services/leaderboard"
 import { getMetadata, getMetaItems, getMetaPokemons } from "./services/meta"
@@ -336,7 +336,7 @@ export default config({
     })
 
     app.get("/bots", async (req, res) => {
-      const botsData = await getBotsList(
+      const botsData = await fetchBotsList(
         req.query.approved === "true"
           ? true
           : req.query.approved === "false"
@@ -347,7 +347,7 @@ export default config({
     })
 
     app.get("/bots/:id", async (req, res) => {
-      res.send(await getBotData(req.params.id))
+      res.send(await fetchBot(req.params.id))
     })
 
     const authUser = async (req, res): Promise<UserRecord | null> => {

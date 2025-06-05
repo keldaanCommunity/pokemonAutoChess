@@ -1,14 +1,17 @@
 import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
 import { nanoid } from "nanoid"
 import { mongo } from "mongoose"
-import { logger, matchMaker } from "colyseus"
+import { logger } from "colyseus"
 import { rewriteBotRoundsRequiredto1, validateBot } from "../core/bot-logic"
 import { discordService } from "./discord"
 import { IUserMetadata } from "../models/mongo-models/user-metadata"
 
-export async function fetchBots() {
-  const bots = new Map<string, IBot>()
-  const ids = new Array<string>()
+export type IBotListItem = Omit<IBot, "steps"> & { valid: boolean }
+
+export async function fetchBotsList(
+  approved?: boolean
+): Promise<IBotListItem[]> {
+  const bots = new Array<IBot>()
   const chunkSize = 100
   let skip = 0
 
@@ -19,30 +22,10 @@ export async function fetchBots() {
       { sort: { elo: -1 }, limit: chunkSize, skip }
     )
     if (!botsData || botsData.length === 0) break
-
-    for (const bot of botsData) {
-      if (ids.includes(bot.id)) {
-        const id = nanoid()
-        bot.id = id
-        await bot.save()
-      }
-      ids.push(bot.id)
-      bots.set(bot.id, bot)
-      await matchMaker.presence.hset("bots", bot.id, JSON.stringify(bot))
-    }
-
+    bots.push(...botsData)
     skip += chunkSize
   }
 
-  return bots
-}
-
-export async function getBotsList(
-  approved?: boolean
-): Promise<Partial<IBot>[]> {
-  const bots = Object.values(await matchMaker.presence.hgetall("bots")).map(
-    (bot) => JSON.parse(bot) as IBot
-  )
   return bots
     .filter((bot) => approved === undefined || bot.approved === approved)
     .map((bot) => {
@@ -59,14 +42,13 @@ export async function getBotsList(
     })
 }
 
-export async function getBotData(id: string): Promise<IBot | undefined> {
+export async function fetchBot(id: string): Promise<IBot | null> {
   try {
-    const json = await matchMaker.presence.hget("bots", id)
-    if (!json) return undefined
-    return JSON.parse(json) as IBot
+    const bot: IBot | null = await BotV2.findOne({ id }, {})
+    return bot
   } catch (e) {
-    logger.error(`Error parsing bot data id ${id}: ${e}`)
-    return undefined
+    logger.error(`Error fetching bot data id ${id}: ${e}`)
+    return null
   }
 }
 
@@ -93,11 +75,6 @@ export async function addBotToDatabase(bot: {
   })
 
   logger.info(`Bot with id ${resultCreate.id} created`)
-  matchMaker.presence.hset(
-    "bots",
-    resultCreate.id,
-    JSON.stringify(resultCreate)
-  )
   discordService.announceBotCreation(resultCreate)
   return resultCreate
 }
@@ -107,7 +84,6 @@ export async function deleteBotFromDatabase(
   user: IUserMetadata
 ): Promise<mongo.DeleteResult> {
   const resultDelete = await BotV2.deleteOne({ id: botId })
-  matchMaker.presence.hdel("bots", botId)
   if (resultDelete.deletedCount > 0) {
     logger.info(`Bot with id ${botId} has been deleted by ${user.displayName}`)
   } else {
@@ -128,9 +104,6 @@ export async function approveBot(
   const result = await BotV2.updateOne({ id: botId }, { $set: { approved } })
   if (result.modifiedCount > 0) {
     logger.info(`Bot with id ${botId} ${approved ? "approved" : "disapproved"}`)
-    const botInRam = JSON.parse(await matchMaker.presence.hget("bots", botId))
-    botInRam.approved = approved
-    await matchMaker.presence.hset("bots", botId, JSON.stringify(botInRam))
   } else {
     logger.warn(`Bot with id ${botId} not found`)
   }
