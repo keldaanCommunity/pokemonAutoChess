@@ -10531,10 +10531,10 @@ export class Scorbunny extends Pokemon {
   hp = 75
   atk = 5
   speed = 63
-  def = 6
-  speDef = 6
+  def = 4
+  speDef = 4
   maxPP = 50
-  range = 1
+  range = 2
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
   attackSprite = AttackSprite.FIRE_MELEE
@@ -10549,10 +10549,10 @@ export class Raboot extends Pokemon {
   hp = 130
   atk = 10
   speed = 63
-  def = 10
-  speDef = 10
+  def = 6
+  speDef = 6
   maxPP = 50
-  range = 1
+  range = 2
   skill = Ability.PYRO_BALL
   passive = Passive.HATCH
   attackSprite = AttackSprite.FIRE_MELEE
@@ -10565,10 +10565,10 @@ export class Cinderace extends Pokemon {
   hp = 180
   atk = 17
   speed = 63
-  def = 14
-  speDef = 14
+  def = 9
+  speDef = 9
   maxPP = 50
-  range = 1
+  range = 2
   skill = Ability.PYRO_BALL
   attackSprite = AttackSprite.FIRE_MELEE
 }
@@ -13491,7 +13491,7 @@ export class Obstagoon extends Pokemon {
   speed = 55
   def = 16
   speDef = 10
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.OBSTRUCT
   attackSprite = AttackSprite.DARK_MELEE
@@ -16777,7 +16777,7 @@ export class Skorupi extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAPION
-  hp = 90
+  hp = 80
   atk = 9
   speed = 55
   def = 10
@@ -16793,7 +16793,7 @@ export class Drapion extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON, Synergy.DARK])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 180
+  hp = 160
   atk = 16
   speed = 55
   def = 16
@@ -18107,10 +18107,6 @@ export class Charcadet extends Pokemon {
   skill = Ability.FLAME_CHARGE
   passive = Passive.CHARCADET
   attackSprite = AttackSprite.FIRE_MELEE
-  onAcquired = (player) => {
-    player.items.push(Item.AUSPICIOUS_ARMOR)
-    player.items.push(Item.MALICIOUS_ARMOR)
-  }
   afterSell(player: Player): void {
     removeInArray(player.items, Item.MALICIOUS_ARMOR)
     removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
@@ -18132,7 +18128,6 @@ export class Armarouge extends Pokemon {
   attackSprite = AttackSprite.FIRE_RANGE
   onAcquired = (player) => {
     this.items.delete(Item.AUSPICIOUS_ARMOR)
-    removeInArray(player.items, Item.MALICIOUS_ARMOR)
   }
 }
 
@@ -18151,7 +18146,6 @@ export class Ceruledge extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
   onAcquired = (player) => {
     this.items.delete(Item.MALICIOUS_ARMOR)
-    removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
   }
 }
 

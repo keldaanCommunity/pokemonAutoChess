@@ -2290,7 +2290,7 @@ export class ObstructStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const factor = 0.5
     const duration = Math.round(
-      ([1000, 2000, 3000][pokemon.stars - 1] ?? 3000) *
+      2000 *
       (1 + (pokemon.ap / 100) * factor) *
       (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
@@ -6913,7 +6913,7 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
       for (let y = flip ? 0 : board.rows; flip ? y < board.rows : y > 0; y += flip ? 1 : -1) {
         const entityOnCell = board.getValue(x, y)
         if (entityOnCell && entityOnCell.team !== pokemon.team) {
-          entityOnCell.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+          entityOnCell.handleSpecialDamage(60, board, AttackType.SPECIAL, pokemon, crit)
           // move the entity to the next cell in the direction of the laser
           const newY = y + (flip ? -1 : 1)
           if (newY >= 0 && newY < board.rows && !board.getValue(x, newY)) {
@@ -10438,7 +10438,7 @@ export class FieryWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = 33
+    const damage = 30
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && pokemon.team != value.team) {

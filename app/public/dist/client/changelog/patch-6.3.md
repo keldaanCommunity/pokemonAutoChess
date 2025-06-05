@@ -37,10 +37,18 @@
 - Unowns can no longer eat Gourmet dishes
 - Psyshield Bash: damage 60 → 30/40/50/60 ; new animation
 - Change Igglybuff types: Normal/Sound/Baby → Normal/Fairy/Baby
-- Change Prismatic Laser (Necrozma): laser now hits in a 3-wide column centered on the target instead of the caster, and pushes enemies in the direction of the laser.
+- Change Prismatic Laser (Necrozma): laser now hits in a 3-wide column centered on the target instead of the caster, and pushes enemies in the direction of the laser. Damage 80 → 60
 - Hisuian Zorua no longer appears on Normal regions, only Ghost regions.
+- Nerf Skorupi line: HP 90/180 → 80/160
+- Nerf Fiery Wraith (Galar Moltres): damage 33 → 30
+- Change Obstruct (Obstagoon): protect duration 1/2/3 → 2 seconds at all tiers; PP 120 → 100
+- Change Scorbunny line: range 1 → 2 ; def/spedef 6/10/14 → 4/6/9
+- Charcader armors are now obtained after beating PvE stage 15. You gain one armor depending on your highest synergy between psychic and ghost.
 
 # Changes to Synergies
+
+- Nerf Dark: Crit Power +30/60/100 → +30/50/80%
+- Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
 
 # Changes to Items
 
@@ -48,7 +56,8 @@
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
 - Buff Berry Juice: 80 → 100 shield
-- Buffed Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
+- Buff Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
+- Buff Spindas Cocktail possible positive effects: attack 5 → 10, AP 25 → 50, speed 25 → 50, shield 50 → 100
 - Nerf Comet Shard: Protect duration 3 → 2 seconds
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
