@@ -2606,7 +2606,7 @@
 		"CHIMECHO": "只要风铃铃仍然存活，它就能和相邻我方宝可梦的叫声共鸣，使其效果翻倍。",
 		"SURGE_SURFER": "电泳冲浪者在处于ELECTRIC_FIELD或PSYCHIC_FIELD下时提升30%的SPEED。",
 		"MEGA_LAUNCHER": "此宝可梦发出SOUND共鸣的叫声时，连续发出3次。",
-		"CLEAR_WING": "每秒提升2点SPEED。",
+		"CLEAR_WING": "每秒提升1点SPEED。",
 		"DRY_SKIN": "在RAIN中，每秒恢复8点HP。在SANDSTORM中，提升25%的闪避率。在SUN中，提升50点AP。",
 		"SPOT_PANDA": "此宝可梦免疫CONFUSION，且对处于CONFUSION的宝可梦额外造成[100,SP]%的SPECIAL。",
 		"GUTS": "此宝可梦在处于BURN或POISONNED时，提升5点ATK。",

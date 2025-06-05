@@ -2532,7 +2532,7 @@
 		"CHIMECHO": "Resoniert mit den Rufen von benachbarter Verbündeten, wodurch deren Ruf verdoppelt wird, solange Palimpalim auf dem Feld ist.",
 		"SURGE_SURFER": "Das SPEED von Alola-Raichu erhöht sich im ELECTRIC_FIELD oder PSYCHIC_FIELD um 30%.",
 		"MEGA_LAUNCHER": "Die Fähigkeit des Pokemon erzeugt 3 SOUND-Rufe statt einem.",
-		"CLEAR_WING": "Gewinnt jede Sekunde 2% Bonus SPEED",
+		"CLEAR_WING": "Gewinnt jede Sekunde 1 SPEED",
 		"DRY_SKIN": "Das Pokemon erhält 25% Fluchtwert bei SANDSTORM, 50 AP bei SUN und regeneriert 8 HP pro Sekunde bei RAIN.",
 		"SPOT_PANDA": "Pandir ist immun gegen CONFUSION und fügt Pokemon unter CONFUSION zusätzlich [100,SP]% SPECIAL zu.",
 		"GUTS": "Das Pokemon erhält 5 ATK, solange es unter BURN oder POISONNED leidet.",

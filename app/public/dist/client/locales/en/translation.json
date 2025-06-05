@@ -2610,7 +2610,7 @@
 		"CHIMECHO": "Resonates to the sounds of adjacent allies, which doubles their cry while Chimecho is alive",
 		"SURGE_SURFER": "The surge surfer gets +30 SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "This Pokémon ability emits 3 SOUND cries instead of one",
-		"CLEAR_WING": "Gains 2 SPEED each second",
+		"CLEAR_WING": "Gains 1 SPEED each second",
 		"DRY_SKIN": "Heals 8 HP per second under RAIN. Gains 25% dodge chance under SANDSTORM. Gains 50 AP under SUN",
 		"SPOT_PANDA": "The Pokémon is immune to CONFUSION and deals [100,SP]% additional SPECIAL to Pokémon CONFUSION",
 		"GUTS": "The Pokémon gains 5 ATK as long as it is BURN or POISONNED",

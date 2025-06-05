@@ -1798,7 +1798,7 @@
 		"CHIMECHO": "Ressoa com os sons dos aliados adjacentes, o que duplica seu grito enquanto Chimecho estiver vivo",
 		"SURGE_SURFER": "O surfista ganha +30 de SPEED em ELECTRIC_FIELD ou PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "Esta habilidade do Pokémon emite 3 gritos SOM em vez de um",
-		"CLEAR_WING": "Ganha 2 de bônus de SPEED a cada segundo",
+		"CLEAR_WING": "Ganha 1 de bônus de SPEED a cada segundo",
 		"DRY_SKIN": "Cura 8 HP por segundo sob RAIN. Ganha 25% de chance de esquiva sob SANDSTORM. Ganha 50 AP sob SUN",
 		"SPOT_PANDA": "O Pokémon é imune a CONFUSION e causa [100,SP]% adicional de ESPECIAL para Pokémons CONFUSION",
 		"GUTS": "O Pokémon ganha 5 ATK enquanto estiver QUEIMADO ou ENVENENADO",

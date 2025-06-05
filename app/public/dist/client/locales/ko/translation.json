@@ -2541,7 +2541,7 @@
 		"CHIMECHO": "치렁은 생존중일때 인접한 아군이 내는 소리와 공명하며, 그들이 울음소리를 2배로 내게 합니다.",
 		"SURGE_SURFER": "이 포켓몬은 ELECTRIC_FIELD 또는 PSYCHIC_FIELD 상태일때 SPEED +30됩니다.",
 		"MEGA_LAUNCHER": "이 포켓몬의 기술은 SOUND 울음소리를 3개 냅니다.",
-		"CLEAR_WING": "초당 2의 SPEED 추가로 증가합니다.",
+		"CLEAR_WING": "초당 1의 SPEED 추가로 증가합니다.",
 		"DRY_SKIN": "RAIN일시 초당 8HP를 회복합니다. SANDSTORM일시 25%의 회피율을 얻습니다. SUN일시 50 AP를 얻습니다.",
 		"SPOT_PANDA": "이 포켓몬은 CONFUSION상태에 면역이며 CONFUSION상태의 적에게 [100,SP]%의 추가 SPECIAL을 가합니다.",
 		"GUTS": "이 포켓몬은 BURN 혹은 POISONNED일시 5ATK를 얻습니다.",

@@ -44,6 +44,7 @@
 - Change Obstruct (Obstagoon): protect duration 1/2/3 → 2 seconds at all tiers; PP 120 → 100
 - Change Scorbunny line: range 1 → 2 ; def/spedef 6/10/14 → 4/6/9
 - Charcader armors are now obtained after beating PvE stage 15. You gain one armor depending on your highest synergy between psychic and ghost.
+- Nerf Yanma line passive: +2 → +1 speed per second
 
 # Changes to Synergies
 

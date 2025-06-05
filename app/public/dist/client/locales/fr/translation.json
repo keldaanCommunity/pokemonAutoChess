@@ -2534,7 +2534,7 @@
 		"CHIMECHO": "Résonne aux sons des alliés adjacents, ce qui double leur cri tant que $t(pkm.CHIMECHO) est en vie",
 		"SURGE_SURFER": "Le surfeur gagne +30 SPEED lorsqu'il est en ELECTRIC_FIELD ou PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "Emet 3 cris SOUND au lieu d'un au lancement de la capacité spéciale",
-		"CLEAR_WING": "Gagne 2 SPEED bonus chaque seconde",
+		"CLEAR_WING": "Gagne +1 SPEED chaque seconde",
 		"DRY_SKIN": "Soigne 8 HP par seconde sous RAIN. Gagne 25% de chance d'esquive sous SANDSTORM. Gagne 50 AP sous SUN",
 		"SPOT_PANDA": "Ce Pokémon ne peut pas être CONFUSION et inflige [100,SP]% de SPECIAL supplémentaires aux pokémons CONFUSION",
 		"GUTS": "Gagne 5 ATK tant que le pokémon subit BURN ou POISONNED",

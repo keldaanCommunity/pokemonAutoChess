@@ -17,7 +17,7 @@ type EffectOrigin = EffectEnum | Item | Passive | Ability
 
 export abstract class Effect {
   origin?: EffectOrigin
-  apply(...args: any[]) {}
+  apply(...args: any[]) { }
   constructor(effect?: (...args: any[]) => void, origin?: EffectOrigin) {
     if (effect) {
       this.apply = effect
@@ -31,13 +31,13 @@ export class OnSpawnEffect extends Effect {
   constructor(effect?: (entity: PokemonEntity) => void) {
     super(effect)
   }
-  override apply(entity: PokemonEntity) {}
+  override apply(entity: PokemonEntity) { }
 }
 
 // item effect applied on fight start of after stealing/obtaining an item
-export class OnItemGainedEffect extends Effect {}
+export class OnItemGainedEffect extends Effect { }
 
-export class OnItemRemovedEffect extends Effect {}
+export class OnItemRemovedEffect extends Effect { }
 
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {
@@ -46,7 +46,7 @@ export class OnKillEffect extends Effect {
     target: PokemonEntity,
     board: Board,
     attackType: AttackType
-  ) {}
+  ) { }
   constructor(
     effect?: (
       entity: PokemonEntity,
@@ -87,7 +87,7 @@ export class PeriodicEffect extends Effect {
 }
 
 export class OnHitEffect extends Effect {
-  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) {}
+  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) { }
   constructor(
     effect?: (
       entity: PokemonEntity,
@@ -112,7 +112,7 @@ interface OnAttackEffectArgs {
 }
 
 export class OnAttackEffect extends Effect {
-  override apply(args: OnAttackEffectArgs) {}
+  override apply(args: OnAttackEffectArgs) { }
   constructor(
     effect?: (args: OnAttackEffectArgs) => void,
     origin?: EffectOrigin
@@ -127,7 +127,7 @@ export class OnAbilityCastEffect extends Effect {
     board: Board,
     target: PokemonEntity,
     crit: boolean
-  ) {}
+  ) { }
   constructor(
     effect?: (
       pokemon: PokemonEntity,
@@ -219,7 +219,7 @@ export class ClearWingEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(2, pokemon, 0, false)
+        pokemon.addSpeed(1, pokemon, 0, false)
       },
       Passive.CLEAR_WING,
       1000
