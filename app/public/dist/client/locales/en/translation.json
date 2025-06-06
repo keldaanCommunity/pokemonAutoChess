@@ -482,7 +482,8 @@
 		"COTTON_SPORE": "Cotton Spore",
 		"TWIN_BEAM": "Twin Beam",
 		"SWAGGER": "Swagger",
-		"ENCORE": "Encore"
+		"ENCORE": "Encore",
+		"SURF_SLIDE": "Surf Slide"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -568,6 +569,7 @@
 		"NIDOKING": "Nidoking",
 		"PICHU": "Pichu",
 		"PIKACHU": "Pikachu",
+		"PIKACHU_SURFER": "Surfing Pikachu",
 		"RAICHU": "Raichu",
 		"MACHOP": "Machop",
 		"MACHOKE": "Machoke",
@@ -1929,7 +1931,8 @@
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
 		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
-		"ENCORE": "Casts the last ability used by an ally"
+		"ENCORE": "Casts the last ability used by an ally",
+		"SURF_SLIDE": "Slide to the farthest enemy, dealing [20,40,60,SP] SPECIAL to all enemies in the path."
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -1990,6 +1993,7 @@
 		"SWIFT_SWIM": "Swift Swim",
 		"HYDRATION": "Hydration",
 		"WATER_VEIL": "Water Veil",
+		"SUMMER_BREAK": "Summer Break",
 		"TAILWIND": "Tailwind",
 		"FEATHER_DANCE": "Feather Dance",
 		"MAX_AIRSTREAM": "Max Airstream",
@@ -2097,6 +2101,7 @@
 		"SWIFT_SWIM": "-30% negative status duration. Wave heals 10% HP and deal 5% TRUE.",
 		"HYDRATION": "-60% negative status duration. Wave heals 20% HP and deal 10% TRUE.",
 		"WATER_VEIL": "-90% negative status duration. Wave heals 30% HP and deal 15% TRUE. A second wave hits after 16 seconds.",
+		"SUMMER_BREAK": "-90% negative status duration. Wave heals 30% HP and deal 15% TRUE. After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 12 seconds for the rest of combat.",
 		"COCOON": "Copy 1 BUG Pokémon",
 		"INFESTATION": "Copy 2 BUG Pokémon",
 		"HORDE": "Copy 3 BUG Pokémon",
@@ -2704,7 +2709,8 @@
 		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",
 		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKOTH) gains RAGE for 3 seconds",
-		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region."
+		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region.",
+		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar"
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -2935,7 +2941,8 @@
 		"STARGAZER": "Stargazer",
 		"BLOODY": "Bloody",
 		"ETERNAL": "Eternal",
-		"ANNIHILATOR": "Annihilator"
+		"ANNIHILATOR": "Annihilator",
+		"SURFER": "Surfer"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3013,7 +3020,8 @@
 		"PICNICKER": "Make a picnic with 9 Pokémon",
 		"STARGAZER": "Get Solgaleo or Lunala",
 		"BLOODY": "Get Bloodmoon Ursaluna",
-		"ETERNAL": "Meet Arceus at stage 40"
+		"ETERNAL": "Meet Arceus at stage 40",
+		"SURFER": "Go on a summer break with a Surfing Pikachu"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
