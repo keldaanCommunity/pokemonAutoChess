@@ -75,9 +75,9 @@ export default function SynergyComponent(props: {
           props.value >= SynergyTriggers[props.type][0]
             ? "var(--color-bg-secondary)"
             : "rgba(84, 89, 107,0)",
-        margin: "5px",
+        margin: "4px",
         borderRadius: "12px",
-        padding: "2px",
+        padding: "2px 0",
         border:
           props.value >= SynergyTriggers[props.type][0]
             ? "var(--border-thin)"
