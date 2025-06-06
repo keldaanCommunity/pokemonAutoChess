@@ -42,3 +42,4 @@ id_digital_ocean.pub
 /app/public/dist/server/app/public/src/assets/pokemons/indexList.json
 /app/public/dist/server/package.json
 /app/public/dist/server/app/public/src/assets/pokemons/durations.json
+.devmode.json
