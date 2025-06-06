@@ -1825,11 +1825,17 @@ export default class Simulation extends Schema implements ISimulation {
             ? 1
             : 0
 
-    if (
-      this.blueEffects.has(EffectEnum.SUMMER_BREAK) &&
-      this.tidalWaveCounter === 1
-    ) {
-      this.addPikachuSurferToBoard(Team.BLUE_TEAM)
+    if (this.blueEffects.has(EffectEnum.SUMMER_BREAK)) {
+      if (this.tidalWaveCounter === 1) {
+        this.addPikachuSurferToBoard(Team.BLUE_TEAM)
+      }
+      this.board.forEach((cell) => {
+        for (const cell of this.board.cells) {
+          if (cell?.name === Pkm.PIKACHU_SURFER) {
+            cell.addPP(cell.maxPP, cell, 0, false)
+          }
+        }
+      })
     }
     if (
       (blueWaterLevel > 0 && this.tidalWaveCounter === 1) ||
