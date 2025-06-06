@@ -70,6 +70,7 @@
 # Gameplay
 
  - New Title: Surfer: Surf with Pikachu Surfer.
+- Change Paralysis: 50 -> 50% speed reduction
 
 # UI
 

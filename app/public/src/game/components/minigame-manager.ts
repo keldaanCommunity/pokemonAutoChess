@@ -277,7 +277,7 @@ export default class MinigameManager {
     if (pokemonUI.isCurrentPlayerAvatar) {
       const arrowIndicator = this.scene.add
         .sprite(
-          pokemonUI.x + pokemonUI.width / 2 - 16,
+          pokemonUI.x,
           pokemonUI.y - 70,
           "arrowDown"
         )

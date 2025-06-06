@@ -11,6 +11,8 @@ import {
   type IPokemonEntity
 } from "../../../../types"
 import {
+    CELL_VISUAL_HEIGHT,
+    CELL_VISUAL_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER
 } from "../../../../types/Config"
@@ -142,7 +144,14 @@ export default class PokemonSprite extends DraggableObject {
     inBattle: boolean,
     flip: boolean
   ) {
-    super(scene, x, y, 75, 75, playerId !== scene.uid)
+    super(
+      scene,
+      x,
+      y,
+      CELL_VISUAL_WIDTH,
+      CELL_VISUAL_HEIGHT,
+      playerId !== scene.uid
+    )
     this.scene = scene
     this.flip = flip
     this.playerId = playerId
@@ -152,8 +161,8 @@ export default class PokemonSprite extends DraggableObject {
     this.evolution = inBattle ? Pkm.DEFAULT : (pokemon as IPokemon).evolution
     this.emotion = pokemon.emotion
     this.shiny = pokemon.shiny
-    this.height = 0
-    this.width = 0
+    this.width = CELL_VISUAL_WIDTH
+    this.height = CELL_VISUAL_HEIGHT
     this.index = pokemon.index
     this.name = pokemon.name
     this.rarity = pokemon.rarity
@@ -221,12 +230,10 @@ export default class PokemonSprite extends DraggableObject {
       // go back to idle anim if no more animation in queue
       scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
     })
-    this.height = this.sprite.height
-    this.width = this.sprite.width
     this.itemsContainer = new ItemsContainer(
       scene,
       pokemon.items ?? new SetSchema(),
-      this.width / 2 + 25,
+      this.sprite.width / 2 + 25,
       -35,
       this.id,
       playerId
@@ -688,7 +695,7 @@ export default class PokemonSprite extends DraggableObject {
       this.lifebar = new Lifebar(
         scene,
         0,
-        this.height / 2 + 6,
+        25,
         pokemon.life,
         pokemon.life,
         pokemon.shield,

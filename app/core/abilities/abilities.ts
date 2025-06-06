@@ -7583,10 +7583,11 @@ export class CurseStrategy extends AbilityStrategy {
     const cursedEnemy = pickRandomIn(enemiesWithHighestHP)
     if (cursedEnemy) {
       const factor = 0.2
-      const curseDelay =
+      const curseDelay = min(0)(
         ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
         (1 - (factor * pokemon.ap) / 100) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
+      )
       cursedEnemy.status.triggerCurse(curseDelay)
     }
   }
