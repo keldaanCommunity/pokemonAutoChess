@@ -53,6 +53,7 @@ export default function GameStore() {
               click={(e) => {
                 playSound(SOUNDS.BUTTON_CLICK)
                 dispatch(shopClick(index))
+                if (scene) scene.shopIndexHovered = null
               }}
             />
           )

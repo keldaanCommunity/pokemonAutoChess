@@ -15,6 +15,7 @@
 - Purugly
 - Minccino
 - Cinccino
+- Pikachu Surfer
 
 # Changes to Pokemon & Abilities
 
@@ -45,11 +46,13 @@
 - Change Scorbunny line: range 1 → 2 ; def/spedef 6/10/14 → 4/6/9
 - Charcader armors are now obtained after beating PvE stage 15. You gain one armor depending on your highest synergy between psychic and ghost.
 - Nerf Yanma line passive: +2 → +1 speed per second
+- Change Armor Cannon (Armarouge): number of secondary targets no longer scale with AP; final damage: 10 → 15 ; fixed incorrect damage numbers in the description
 
 # Changes to Synergies
 
 - Nerf Dark: Crit Power +30/60/100 → +30/50/80%
 - Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
+- Aquatic 8: (8) Summer Break: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 12 seconds for the rest of combat.
 
 # Changes to Items
 
@@ -68,6 +71,8 @@
 # Gameplay
 
 - Targeting and aggro changes: Units now aim to continue targeting the same enemy if it moves, unless it moves out of their attack range. If the enemy moves out of range, they will pick another target.
+- New Title: Surfer: Surf with Pikachu Surfer.
+- Change Paralysis: 50 -> 50% speed reduction
 
 # UI
 

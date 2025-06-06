@@ -158,7 +158,8 @@ export enum EffectEnum {
   DOUBLE_DAMAGE = "DOUBLE_DAMAGE",
   DARK_HARVEST = "DARK_HARVEST",
   STONE_EDGE = "STONE_EDGE",
-  CHARGE = "CHARGE"
+  CHARGE = "CHARGE",
+  SUMMER_BREAK = "SUMMER_BREAK"
 }
 
 export const BoardEffects = [
