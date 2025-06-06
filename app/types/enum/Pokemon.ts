@@ -605,6 +605,7 @@ export enum Pkm {
   PIDOVE = "PIDOVE",
   PIGNITE = "PIGNITE",
   PIKACHU = "PIKACHU",
+  PIKACHU_SURFER = "PIKACHU_SURFER",
   //PIKIPEK = "PIKIPEK",
   PILLAR_WOOD = "PILLAR_WOOD",
   PILLAR_IRON = "PILLAR_IRON",
@@ -1009,6 +1010,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.EKANS]: "0023",
   [Pkm.ARBOK]: "0024",
   [Pkm.PIKACHU]: "0025",
+  [Pkm.PIKACHU_SURFER]: "0025-9999",
   [Pkm.RAICHU]: "0026",
   [Pkm.ALOLAN_RAICHU]: "0026-0001",
   [Pkm.SANDSHREW]: "0027",
@@ -2233,6 +2235,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.NIDOKING]: Pkm.NIDORANM,
   [Pkm.PICHU]: Pkm.PICHU,
   [Pkm.PIKACHU]: Pkm.PICHU,
+  [Pkm.PIKACHU_SURFER]: Pkm.PIKACHU_SURFER,
   [Pkm.RAICHU]: Pkm.PICHU,
   [Pkm.MACHOP]: Pkm.MACHOP,
   [Pkm.MACHOKE]: Pkm.MACHOP,
@@ -8190,4 +8193,9 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Dance
   },
+  [Pkm.PIKACHU_SURFER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  }
 }

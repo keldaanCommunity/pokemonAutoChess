@@ -120,9 +120,9 @@ export default class Simulation extends Schema implements ISimulation {
       Set<EffectEnum>,
       Set<EffectEnum>
     ][] = [
-        [this.bluePlayer, this.blueEffects, this.redEffects],
-        [this.redPlayer, this.redEffects, this.blueEffects]
-      ]
+      [this.bluePlayer, this.blueEffects, this.redEffects],
+      [this.redPlayer, this.redEffects, this.blueEffects]
+    ]
     for (const [player, teamEffects, opponentEffects] of playerEffects) {
       if (player) {
         player.board.forEach((pokemon, id) => {
@@ -1063,6 +1063,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.SWIFT_SWIM:
       case EffectEnum.HYDRATION:
       case EffectEnum.WATER_VEIL:
+      case EffectEnum.SUMMER_BREAK:
         pokemon.effects.add(effect)
         this.tidalWaveTimer = 8000
         break
@@ -1490,7 +1491,12 @@ export default class Simulation extends Schema implements ISimulation {
       if (this.tidalWaveTimer <= 0) {
         this.tidalWaveCounter++
         this.triggerTidalWave()
-        if (this.tidalWaveCounter < 2) {
+        if (
+          this.redEffects.has(EffectEnum.SUMMER_BREAK) ||
+          this.blueEffects.has(EffectEnum.SUMMER_BREAK)
+        ) {
+          this.tidalWaveTimer = 8000
+        } else if (this.tidalWaveCounter < 2) {
           this.tidalWaveTimer = 8000
         }
       }
@@ -1718,14 +1724,39 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
+  addPikachuSurferToBoard(team: Team) {
+    const pikachuSurfer = PokemonFactory.createPokemonFromName(
+      Pkm.PIKACHU_SURFER,
+      team === Team.RED_TEAM ? this.redPlayer : this.bluePlayer
+    )
+    const coord = this.getFirstAvailablePlaceOnBoard(team)
+    if (coord) {
+      this.addPokemon(pikachuSurfer, coord.x, coord.y, team, true)
+    }
+  }
+
   triggerTidalWave() {
-    const redWaterLevel = this.redEffects.has(EffectEnum.WATER_VEIL)
-      ? 3
-      : this.redEffects.has(EffectEnum.HYDRATION)
-        ? 2
-        : this.redEffects.has(EffectEnum.SWIFT_SWIM)
-          ? 1
-          : 0
+    const redWaterLevel =
+      this.redEffects.has(EffectEnum.WATER_VEIL) ||
+      this.redEffects.has(EffectEnum.SUMMER_BREAK)
+        ? 3
+        : this.redEffects.has(EffectEnum.HYDRATION)
+          ? 2
+          : this.redEffects.has(EffectEnum.SWIFT_SWIM)
+            ? 1
+            : 0
+    if (this.redEffects.has(EffectEnum.SUMMER_BREAK)) {
+      if (this.tidalWaveCounter === 1) {
+        this.addPikachuSurferToBoard(Team.RED_TEAM)
+      }
+      this.board.forEach((cell) => {
+        for (const cell of this.board.cells) {
+          if (cell?.name === Pkm.PIKACHU_SURFER) {
+            cell.addPP(cell.maxPP, cell, 0, false)
+          }
+        }
+      })
+    }
 
     if (
       (redWaterLevel > 0 && this.tidalWaveCounter === 1) ||
@@ -1784,13 +1815,22 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
 
-    const blueWaterLevel = this.blueEffects.has(EffectEnum.WATER_VEIL)
-      ? 3
-      : this.blueEffects.has(EffectEnum.HYDRATION)
-        ? 2
-        : this.blueEffects.has(EffectEnum.SWIFT_SWIM)
-          ? 1
-          : 0
+    const blueWaterLevel =
+      this.blueEffects.has(EffectEnum.WATER_VEIL) ||
+      this.blueEffects.has(EffectEnum.SUMMER_BREAK)
+        ? 3
+        : this.blueEffects.has(EffectEnum.HYDRATION)
+          ? 2
+          : this.blueEffects.has(EffectEnum.SWIFT_SWIM)
+            ? 1
+            : 0
+
+    if (
+      this.blueEffects.has(EffectEnum.SUMMER_BREAK) &&
+      this.tidalWaveCounter === 1
+    ) {
+      this.addPikachuSurferToBoard(Team.BLUE_TEAM)
+    }
     if (
       (blueWaterLevel > 0 && this.tidalWaveCounter === 1) ||
       (blueWaterLevel === 3 && this.tidalWaveCounter === 2)

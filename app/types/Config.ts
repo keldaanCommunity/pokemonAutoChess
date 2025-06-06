@@ -14,7 +14,7 @@ export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 export const BOARD_SIDE_HEIGHT = 4 // 0 = bench
 export const MAX_LEVEL = 9
-export const ALLOWED_GAME_RECONNECTION_TIME = 60 * 5; // 5 minutes
+export const ALLOWED_GAME_RECONNECTION_TIME = 60 * 5 // 5 minutes
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,
@@ -96,7 +96,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.FIELD]: [3, 6, 9],
   [Synergy.MONSTER]: [2, 4, 6, 8],
   [Synergy.HUMAN]: [2, 4, 6],
-  [Synergy.AQUATIC]: [2, 4, 6],
+  [Synergy.AQUATIC]: [2, 4, 6, 8],
   [Synergy.BUG]: [2, 4, 6, 8],
   [Synergy.FLYING]: [2, 4, 6, 8],
   [Synergy.FLORA]: [3, 4, 5, 6],
