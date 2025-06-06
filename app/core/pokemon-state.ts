@@ -572,11 +572,7 @@ export default abstract class PokemonState {
         } else if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
-            if (
-              entity &&
-              entity.targetX === pokemon.positionX &&
-              entity.targetY === pokemon.positionY
-            ) {
+            if (entity && entity.targetEntityId === pokemon.id) {
               // switch aggro immediately to reduce retarget lag after resurection
               entity.cooldown = 0
               entity.toMovingState()

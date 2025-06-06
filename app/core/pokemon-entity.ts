@@ -98,6 +98,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("uint8") team: Team
   @type("uint8") range: number
   @type("uint16") speed: number
+  @type("string") targetEntityId: string = ""
   @type("int8") targetX = -1
   @type("int8") targetY = -1
   @type("string") attackSprite: AttackSprite
@@ -273,6 +274,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   hasSynergyEffect(synergy: Synergy): boolean {
     return SynergyEffects[synergy].some((effect) => this.effects.has(effect))
+  }
+
+  setTarget(target: IPokemonEntity | null) {
+    if (target) {
+      this.targetEntityId = target.id
+      this.targetX = target.positionX
+      this.targetY = target.positionY
+    } else {
+      this.targetEntityId = ""
+      this.targetX = -1
+      this.targetY = -1
+    }
   }
 
   handleDamage(params: {
@@ -1110,8 +1123,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               targetY: destination.target.positionY
             })
             this.skydiveTo(destination.x, destination.y, board)
-            this.targetX = destination.target.positionX
-            this.targetY = destination.target.positionY
+            this.setTarget(destination.target)
             this.flyingProtection--
             this.commands.push(
               new DelayedCommand(() => {

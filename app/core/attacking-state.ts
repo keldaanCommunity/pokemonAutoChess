@@ -44,26 +44,31 @@ export default class AttackingState extends PokemonState {
         }
       } else if (pokemon.status.confusion) {
         targetCoordinate = this.getTargetCoordinateWhenConfused(pokemon, board)
-      } else if (
-        !(
-          target &&
-          target.isTargettableBy(pokemon) &&
-          distanceC(
+      } else if(!target || target.id !== pokemon.targetEntityId){
+        // previous target has moved, check if still at range
+        const previousTarget = pokemon.simulation.blueTeam.get(pokemon.targetEntityId) || pokemon.simulation.redTeam.get(pokemon.targetEntityId)
+        if(previousTarget && previousTarget.isTargettableBy(pokemon) && distanceC(
             pokemon.positionX,
             pokemon.positionY,
-            targetCoordinate.x,
-            targetCoordinate.y
-          ) <= pokemon.range
-        )
-      ) {
-        // if target is no longer alive or at range, retargeting
-        targetCoordinate = this.getNearestTargetAtRangeCoordinates(
-          pokemon,
-          board
-        )
-        if (targetCoordinate) {
-          target = board.getValue(targetCoordinate.x, targetCoordinate.y)
-        }
+            previousTarget?.positionX,
+            previousTarget?.positionY
+          ) <= pokemon.range){
+            // updating target coordinates
+            target = previousTarget as PokemonEntity
+            targetCoordinate = {
+              x: previousTarget.positionX,
+              y: previousTarget.positionY
+            }
+          } else {
+             // if target is no longer alive or at range, retargeting
+            targetCoordinate = this.getNearestTargetAtRangeCoordinates(
+              pokemon,
+              board
+            )
+            if (targetCoordinate) {
+              target = board.getValue(targetCoordinate.x, targetCoordinate.y)
+            }
+          }
       }
 
       // no target at range, changing to moving state
@@ -73,7 +78,6 @@ export default class AttackingState extends PokemonState {
           pokemon.toMovingState()
         }
       } else if (
-        target &&
         pokemon.pp >= pokemon.maxPP &&
         !pokemon.status.silence
       ) {
@@ -92,6 +96,7 @@ export default class AttackingState extends PokemonState {
         pokemon.count.attackCount++
         pokemon.targetX = targetCoordinate.x
         pokemon.targetY = targetCoordinate.y
+        pokemon.targetEntityId = target.id
         pokemon.orientation = board.orientation(
           pokemon.positionX,
           pokemon.positionY,
@@ -124,8 +129,7 @@ export default class AttackingState extends PokemonState {
 
   onExit(pokemon) {
     super.onExit(pokemon)
-    pokemon.targetX = -1
-    pokemon.targetY = -1
+    pokemon.setTarget(null)
   }
 }
 

@@ -67,6 +67,8 @@
 
 # Gameplay
 
+- Targeting and aggro changes: Units now aim to continue targeting the same enemy if it moves, unless it moves out of their attack range. If the enemy moves out of range, they will pick another target.
+
 # UI
 
 - **Mouse right button no longer allows you to move on carousel rounds in town. Use the left button instead.** This is to prevent accidentally opening carousel items tooltips and not being able to move to the location behind the tooltip.

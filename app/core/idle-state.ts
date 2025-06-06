@@ -49,7 +49,6 @@ export class IdleState extends PokemonState {
 
   onExit(pokemon: PokemonEntity) {
     super.onExit(pokemon)
-    pokemon.targetX = -1
-    pokemon.targetY = -1
+    pokemon.setTarget(null)
   }
 }
