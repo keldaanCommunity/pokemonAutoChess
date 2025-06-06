@@ -45,6 +45,7 @@
 - Change Scorbunny line: range 1 → 2 ; def/spedef 6/10/14 → 4/6/9
 - Charcader armors are now obtained after beating PvE stage 15. You gain one armor depending on your highest synergy between psychic and ghost.
 - Nerf Yanma line passive: +2 → +1 speed per second
+- Change Armor Cannon (Armarouge): number of secondary targets no longer scale with AP; final damage: 10 → 15 ; fixed incorrect damage numbers in the description
 
 # Changes to Synergies
 

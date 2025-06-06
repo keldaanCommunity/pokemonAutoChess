@@ -12087,8 +12087,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     const mainDamage = 50
     const secondaryDamage = 30
-    const finalDamage = 10
-    let numberOfTargets = 2
+    const finalDamage = 15
+    const numberOfTargets = 2
 
     broadcastAbility(pokemon, {
       positionX: pokemon.positionX,
@@ -12126,7 +12126,6 @@ export class ArmorCannonStrategy extends AbilityStrategy {
               pokemon.positionY
             )
         )
-        numberOfTargets = Math.round(numberOfTargets * (1 + pokemon.ap / 100))
         const targets = possibleTargets.slice(0, numberOfTargets)
         targets.forEach((tg) => {
           broadcastAbility(pokemon, {
