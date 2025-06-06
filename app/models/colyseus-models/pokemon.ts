@@ -26,10 +26,7 @@ import {
   Title,
   Transfer
 } from "../../types"
-import {
-  DEFAULT_SPEED,
-  SynergyTriggers
-} from "../../types/Config"
+import { DEFAULT_SPEED, SynergyTriggers } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -265,7 +262,7 @@ export class Pokemon extends Schema implements IPokemon {
     if (
       item in SynergyGivenByItem &&
       new PokemonClasses[this.name]().types.has(SynergyGivenByItem[item]) ===
-      false
+        false
     ) {
       this.types.delete(SynergyGivenByItem[item])
     }
@@ -5236,6 +5233,29 @@ export class Gyarados extends Pokemon {
   }
 }
 
+export class PikachuSurfer extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.AQUATIC,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  hp = 260
+  atk = 20
+  speed = 51
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.SURF
+  attackSprite = AttackSprite.ELECTRIC_MELEE
+  onAcquired(player: Player) {
+    player.titles.add(Title.SURFER)
+  }
+  passive = Passive.PIKACHU_SURFER
+}
+
 export class Rattata extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL])
   rarity = Rarity.COMMON
@@ -5539,9 +5559,11 @@ export class Stantler extends Pokemon {
   passive = Passive.STANTLER
   attackSprite = AttackSprite.NORMAL_MELEE
   evolution: Pkm = Pkm.WYRDEER
-  evolutionRule = new ConditionBasedEvolutionRule((pokemon: Pokemon, player: Player, stageLevel: number) => {
-    return player.map !== this.originalMap && stageLevel >= 20
-  })
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon: Pokemon, player: Player, stageLevel: number) => {
+      return player.map !== this.originalMap && stageLevel >= 20
+    }
+  )
   originalMap: DungeonPMDO | "town" = "town"
   onAcquired(player: Player): void {
     this.originalMap = player.map
@@ -16155,7 +16177,11 @@ export class Lilligant extends Pokemon {
 }
 
 export class HisuianLilligant extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING, Synergy.HUMAN])
+  types = new SetSchema<Synergy>([
+    Synergy.GRASS,
+    Synergy.FIGHTING,
+    Synergy.HUMAN
+  ])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 180
@@ -17190,36 +17216,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -18457,10 +18483,7 @@ export class ScreamTail extends Pokemon {
 }
 
 export class IndeedeeFemale extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.PSYCHIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 170
@@ -18475,10 +18498,7 @@ export class IndeedeeFemale extends Pokemon {
 }
 
 export class IndeedeeMale extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.PSYCHIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 140
@@ -18493,10 +18513,7 @@ export class IndeedeeMale extends Pokemon {
 }
 
 export class Cottonee extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GRASS,
-    Synergy.FAIRY
-  ])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FAIRY])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.WHIMSICOTT
@@ -18513,10 +18530,7 @@ export class Cottonee extends Pokemon {
 }
 
 export class Whimsicott extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.GRASS,
-    Synergy.FAIRY
-  ])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FAIRY])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 120
@@ -18573,11 +18587,7 @@ export class Farigiraf extends Pokemon {
 }
 
 export class Skitty extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.FAIRY,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   evolution = Pkm.DELCATTY
   stars = 1
@@ -18594,11 +18604,7 @@ export class Skitty extends Pokemon {
 }
 
 export class Delcatty extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.FAIRY,
-    Synergy.FIELD
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FAIRY, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 160
@@ -18614,10 +18620,7 @@ export class Delcatty extends Pokemon {
 }
 
 export class Glameow extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.DARK
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   evolution = Pkm.PURUGLY
   stars = 1
@@ -18634,10 +18637,7 @@ export class Glameow extends Pokemon {
 }
 
 export class Purugly extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.DARK
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.DARK])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
@@ -18653,11 +18653,7 @@ export class Purugly extends Pokemon {
 }
 
 export class Minccino extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.FIELD,
-    Synergy.SOUND
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD, Synergy.SOUND])
   rarity = Rarity.UNCOMMON
   evolution = Pkm.CINCCINO
   stars = 1
@@ -18681,20 +18677,18 @@ export class Minccino extends Pokemon {
     this.abilitiesCasted = []
     params.team.forEach((pokemon) => {
       if (pokemon.refToBoardPokemon.id !== this.id) {
-        pokemon.effectsSet.add(new OnAbilityCastEffect(() => {
-          this.abilitiesCasted.push(pokemon.skill)
-        }))
+        pokemon.effectsSet.add(
+          new OnAbilityCastEffect(() => {
+            this.abilitiesCasted.push(pokemon.skill)
+          })
+        )
       }
     })
   }
 }
 
 export class Cinccino extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.FIELD,
-    Synergy.SOUND
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD, Synergy.SOUND])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
@@ -18717,9 +18711,11 @@ export class Cinccino extends Pokemon {
     this.abilitiesCasted = []
     params.team.forEach((pokemon) => {
       if (pokemon.refToBoardPokemon.id !== this.id) {
-        pokemon.effectsSet.add(new OnAbilityCastEffect(() => {
-          this.abilitiesCasted.push(pokemon.skill)
-        }))
+        pokemon.effectsSet.add(
+          new OnAbilityCastEffect(() => {
+            this.abilitiesCasted.push(pokemon.skill)
+          })
+        )
       }
     })
   }
@@ -19704,7 +19700,8 @@ export const PokemonClasses: Record<
   [Pkm.GLAMEOW]: Glameow,
   [Pkm.PURUGLY]: Purugly,
   [Pkm.MINCCINO]: Minccino,
-  [Pkm.CINCCINO]: Cinccino
+  [Pkm.CINCCINO]: Cinccino,
+  [Pkm.PIKACHU_SURFER]: PikachuSurfer
 }
 
 // declare all the classes in colyseus schema TypeRegistry

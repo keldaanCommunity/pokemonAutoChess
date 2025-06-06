@@ -15,6 +15,7 @@
 - Purugly
 - Minccino
 - Cinccino
+- Pikachu Surfer
 
 # Changes to Pokemon & Abilities
 
@@ -51,6 +52,7 @@
 
 - Nerf Dark: Crit Power +30/60/100 → +30/50/80%
 - Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
+- Aquatic 8: (8) Summer Break: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 12 seconds for the rest of combat.
 
 # Changes to Items
 
@@ -67,6 +69,9 @@
 - Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
 
 # Gameplay
+
+ - New Title: Surfer: Surf with Pikachu Surfer.
+- Change Paralysis: 50 -> 50% speed reduction
 
 # UI
 
