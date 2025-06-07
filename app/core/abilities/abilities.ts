@@ -1866,8 +1866,7 @@ export class AccelerockStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     if (destination) {
       pokemon.moveTo(destination.x, destination.y, board)
-      pokemon.targetX = destination.target.positionX
-      pokemon.targetY = destination.target.positionY
+      pokemon.setTarget(destination.target)
     }
     target.handleSpecialDamage(
       pokemon.atk,
@@ -1902,8 +1901,7 @@ export class NuzzleStrategy extends AbilityStrategy {
     const duration = 3000
 
     if (destination) {
-      pokemon.targetX = destination.target.positionX
-      pokemon.targetY = destination.target.positionY
+      pokemon.setTarget(destination.target)
       pokemon.moveTo(destination.x, destination.y, board)
     }
 
@@ -5852,8 +5850,7 @@ export class LinkCableStrategy extends AbilityStrategy {
 
     if (farthestCoordinate && farthestTarget) {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      pokemon.targetX = farthestTarget.positionX
-      pokemon.targetY = farthestTarget.positionY
+      pokemon.setTarget(farthestTarget)
     }
 
     pokemon.commands.push(
@@ -8242,6 +8239,8 @@ export class SpacialRendStrategy extends AbilityStrategy {
     )
     const n = enemies.length
     for (let i = 0; i < Math.floor(n / 2); i++) {
+      enemies[i]!.toMovingState()
+      enemies[n - 1 - i]!.toMovingState()
       board.swapValue(
         enemies[i]!.positionX,
         enemies[i]!.positionY,
@@ -10221,8 +10220,7 @@ export class YawnStrategy extends AbilityStrategy {
       (entity): entity is PokemonEntity =>
         entity != null &&
         entity.team !== pokemon.team &&
-        entity.targetX === pokemon.positionX &&
-        entity.targetY === pokemon.positionY
+        entity.targetEntityId === pokemon.id
     )
 
     opponentsTargetingMe.forEach((opponent) => {
@@ -10922,8 +10920,7 @@ export class TauntStrategy extends AbilityStrategy {
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
       .map((cell) => cell.value as PokemonEntity)
     enemiesTaunted.forEach((enemy) => {
-      enemy.targetX = pokemon.positionX
-      enemy.targetY = pokemon.positionY
+      enemy.setTarget(pokemon)
       broadcastAbility(pokemon, {
         skill: "TAUNT_HIT",
         targetX: enemy.positionX,
@@ -11156,8 +11153,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
             )
           }
           if (enemyHit) {
-            pokemon.targetX = enemyHit.positionX
-            pokemon.targetY = enemyHit.positionY
+            pokemon.setTarget(enemyHit)
             const landingX = enemyHit.positionX
             const landingY = enemyHit.positionY
             const travelTime =
@@ -11731,8 +11727,7 @@ export class DragonClawStrategy extends AbilityStrategy {
       crit
     )
     lowestHpTarget.status.triggerWound(4000, lowestHpTarget, pokemon)
-    pokemon.targetX = lowestHpTarget.positionX
-    pokemon.targetY = lowestHpTarget.positionY
+    pokemon.setTarget(lowestHpTarget)
   }
 }
 
@@ -12532,11 +12527,7 @@ export class FollowMeStrategy extends AbilityStrategy {
     )
     if (cellToJump) {
       const enemiesTargetingPokemon = board.cells.filter<PokemonEntity>(
-        (entity): entity is PokemonEntity =>
-          entity != null &&
-          entity.targetX === pokemon.positionX &&
-          entity.targetY === pokemon.positionY &&
-          entity.team !== pokemon.team
+        (entity): entity is PokemonEntity => entity != null && entity.targetEntityId === pokemon.id && entity.team !== pokemon.team
       )
       enemiesTargetingPokemon.forEach((enemy) => {
         enemy.status.triggerCharm(3000, enemy, pokemon, false)

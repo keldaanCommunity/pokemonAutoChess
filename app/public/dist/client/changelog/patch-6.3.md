@@ -71,7 +71,8 @@
 
 # Gameplay
 
- - New Title: Surfer: Surf with Pikachu Surfer.
+- Targeting changes: units now seek to continue targeting the same enemy if it moves, unless it moves out of their attack range. If the enemy moves out of their range, they will choose another target randomly among the nearest ones.
+- New Title: Surfer: Surf with Pikachu Surfer.
 - Change Paralysis: 50 -> 50% speed reduction
 
 # UI

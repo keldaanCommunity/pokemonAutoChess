@@ -117,12 +117,11 @@ const SharedVisionEffect = new OnAttackEffect(({ pokemon, board }) => {
       ally &&
       ally.passive === Passive.SHARED_VISION &&
       pokemon.team === ally.team &&
-      !(
-        pokemon.targetX === ally.positionX && pokemon.targetY === ally.positionY
-      ) // do not self inflict damage if ally is confused and targeting you
+      pokemon.targetEntityId !== ally.id // do not self inflict damage if ally is confused and targeting you
     ) {
       ally.targetX = pokemon.targetX
       ally.targetY = pokemon.targetY
+      ally.targetEntityId = pokemon.targetEntityId
     }
   })
 })

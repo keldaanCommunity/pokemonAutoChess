@@ -765,8 +765,7 @@ export default class Simulation extends Schema implements ISimulation {
                   farthestCoordinate.y,
                   this.board
                 )
-                pokemon.targetX = target.positionX
-                pokemon.targetY = target.positionY
+                pokemon.setTarget(target)
                 pokemon.status.triggerProtect(2000)
                 pokemon.commands.push(
                   new DelayedCommand(() => {
