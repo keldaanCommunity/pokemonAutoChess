@@ -1668,7 +1668,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const isGameFinished = this.checkEndGame()
 
     if (!isGameFinished) {
-      this.state.botManager.updateBots()
       this.state.stageLevel += 1
       this.room.setMetadata({ stageLevel: this.state.stageLevel })
       this.computeIncome(isPVE, this.state.specialGameRule)
@@ -1726,6 +1725,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           })
 
+          // Update Bots after unown deletion so unown in bot boards are not deleted
+          this.state.botManager.updateBots()
           // Refreshes effects (Tapu Terrains, or if player lost Psychic 6 after Unown diseappeared)
           player.updateSynergies()
 
