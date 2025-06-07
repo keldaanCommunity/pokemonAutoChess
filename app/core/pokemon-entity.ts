@@ -673,8 +673,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   moveTo(x: number, y: number, board: Board) {
-    board.swapValue(this.positionX, this.positionY, x, y)
     this.toMovingState()
+    const target = board.getValue(x, y)
+    if (target) target.toMovingState()
+    
+    board.swapValue(this.positionX, this.positionY, x, y)
     this.cooldown = 100 // for faster retargeting
   }
 
