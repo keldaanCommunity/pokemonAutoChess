@@ -16,10 +16,7 @@ export default class MovingState extends PokemonState {
     super.update(pokemon, dt, board, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = Math.round(500 / getMoveSpeed(pokemon)) // 500ms to move one cell at 50 speed in normal conditions
-      const targetAtRange = this.getNearestTargetAtRangeCoordinates(
-        pokemon,
-        board
-      )
+      const targetAtRange = this.getNearestTargetAtRange(pokemon,board)
       if (pokemon.status.charm && pokemon.canMove) {
         if (
           pokemon.status.charmOrigin &&
