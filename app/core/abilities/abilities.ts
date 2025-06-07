@@ -8239,6 +8239,8 @@ export class SpacialRendStrategy extends AbilityStrategy {
     )
     const n = enemies.length
     for (let i = 0; i < Math.floor(n / 2); i++) {
+      enemies[i]!.toMovingState()
+      enemies[n - 1 - i]!.toMovingState()
       board.swapValue(
         enemies[i]!.positionX,
         enemies[i]!.positionY,
