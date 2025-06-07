@@ -1163,7 +1163,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case EffectEnum.CALM_MIND:
             player.titles.add(Title.RIVAL)
             break
-          case EffectEnum.WATER_VEIL:
+          case EffectEnum.SUMMER_BREAK:
             player.titles.add(Title.DIVER)
             break
           case EffectEnum.HEART_OF_THE_SWARM:
