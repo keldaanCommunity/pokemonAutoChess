@@ -175,7 +175,7 @@
 
 #rarity-grid {
   display: grid;
-  grid-template: auto / 8ch 1fr 8ch 1fr;
+  grid-template: auto / 8ch 2fr 8ch 1fr;
   margin: 0;
   gap: 0 0.5em;
 }

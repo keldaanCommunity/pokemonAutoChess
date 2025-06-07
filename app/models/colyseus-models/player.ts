@@ -197,8 +197,13 @@ export default class Player extends Schema implements IPlayer {
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
     } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
+      // Simple hash function to turn a string into a boolean coin flip
+      const hash = Array.from(state.preparationId)
+        .reduce((acc, char) => acc + char.charCodeAt(0), 0)
+      const coinFlip = hash % 2 === 0
+      const rarityPartner = coinFlip ? Rarity.COMMON : Rarity.UNCOMMON
       const randomCommons = pickNRandomIn(
-        getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON).filter(
+        getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY[rarityPartner]).filter(
           (p) => getPokemonData(p).stages === 3
         ),
         3
