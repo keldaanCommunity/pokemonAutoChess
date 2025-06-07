@@ -576,6 +576,12 @@ export interface IPokemonEntity {
   skydiveTo(x: number, y: number, board: Board): void
   toIdleState(): void
   toMovingState(): void
+  isTargettableBy(
+    attacker: IPokemonEntity,
+    targetEnemies?: boolean,
+    targetAllies?: boolean
+  ): boolean
+  setTarget(target: IPokemonEntity | null): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -608,6 +614,7 @@ export interface IPokemonEntity {
   speed: number
   targetX: number
   targetY: number
+  targetEntityId: string
   attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm

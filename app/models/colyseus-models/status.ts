@@ -692,10 +692,7 @@ export default class Status extends Schema implements IStatus {
       this.charm = true
       this.charmCooldown = duration
       this.charmOrigin = origin
-      if (origin) {
-        pkm.targetX = origin?.positionX
-        pkm.targetY = origin?.positionY
-      }
+      pkm.setTarget(origin)
     }
   }
 
