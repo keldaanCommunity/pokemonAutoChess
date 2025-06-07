@@ -121,7 +121,8 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
   [Synergy.AQUATIC]: [
     EffectEnum.SWIFT_SWIM,
     EffectEnum.HYDRATION,
-    EffectEnum.WATER_VEIL
+    EffectEnum.WATER_VEIL,
+    EffectEnum.SUMMER_BREAK
   ],
   [Synergy.BUG]: [
     EffectEnum.COCOON,

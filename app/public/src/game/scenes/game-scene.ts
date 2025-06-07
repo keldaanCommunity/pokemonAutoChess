@@ -234,7 +234,7 @@ export default class GameScene extends Scene {
         this.shopIndexHovered = null
       } else if (
         this.pokemonHovered &&
-        this.pokemonHovered.sprite
+        this.pokemonHovered
           .getBounds()
           .contains(
             this.game.input.activePointer.x,
@@ -701,7 +701,7 @@ export default class GameScene extends Scene {
     const thickness = Math.round(
       1 + Math.log(gameObject.def + gameObject.speDef)
     )
-    this.pokemonHovered = gameObject
+    
     outline.add(gameObject.sprite, {
       thickness,
       outlineColor: 0xffffff
