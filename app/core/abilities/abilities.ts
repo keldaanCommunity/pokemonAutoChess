@@ -2345,9 +2345,6 @@ export class IcicleMissileStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const timer = Math.round(
-      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
     const damage = 50
     const count = pokemon.stars
     const rank = new Array<PokemonEntity>()
@@ -2373,7 +2370,7 @@ export class IcicleMissileStrategy extends AbilityStrategy {
         })
         tg.commands.push(
           new DelayedCommand(() => {
-            tg.status.triggerFreeze(timer, tg)
+            tg.status.triggerFreeze(3000, tg)
             tg.handleSpecialDamage(
               damage,
               board,

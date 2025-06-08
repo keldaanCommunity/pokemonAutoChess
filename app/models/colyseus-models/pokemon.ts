@@ -3108,7 +3108,7 @@ export class Vanillite extends Pokemon {
   stars = 1
   evolution = Pkm.VANILLISH
   hp = 70
-  atk = 5
+  atk = 6
   speed = 50
   def = 4
   speDef = 4
@@ -3128,7 +3128,7 @@ export class Vanillish extends Pokemon {
   stars = 2
   evolution = Pkm.VANILLUXE
   hp = 130
-  atk = 9
+  atk = 12
   speed = 50
   def = 4
   speDef = 4
@@ -3147,7 +3147,7 @@ export class Vanilluxe extends Pokemon {
   rarity = Rarity.RARE
   stars = 3
   hp = 230
-  atk = 20
+  atk = 24
   speed = 50
   def = 4
   speDef = 4

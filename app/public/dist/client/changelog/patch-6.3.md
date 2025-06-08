@@ -49,6 +49,7 @@
 - Change Armor Cannon (Armarouge): number of secondary targets no longer scale with AP; final damage: 10 → 15 ; fixed incorrect damage numbers in the description
 - Adjust Trapinch line: HP 80/120/180 → 70/120/190 ; Def/Spedef 8/8/8 → 2/5/8
 - Tropius gourmet dish now give 3 berries instead of 1
+- Change Vanillite line: Attack 5/9/20 → 6/12/24, freeze duration 2 → 3 seconds, no longer scales with AP
 
 # Changes to Synergies
 
