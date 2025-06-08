@@ -2519,7 +2519,7 @@
 		"SIRUPY_APPLE": "In the next fight, each attack by this pokemon has [30,LK]% chance to inflict PARALYSIS for 1 second.  Will turn into LEFTOVERS after one round.",
 		"SWEET_HERB": "Gain 80 AP in the next fight.",
 		"MOOMOO_MILK": "Gain 15 permanent max HP.",
-		"BERRIES": "Get a random berry",
+		"BERRIES": "Get 3 random berries",
 		"POFFIN": "Gain 100 SHIELD. All held berries are added to the poffin. Their effects are applied immediately, with healed HP turned into SHIELD.",
 		"HONEY": "Each Pokémon in the next shop rerolls this round has an additional 5% chance to share a common synergy with a Pokémon eating HONEY.",
 		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 8 seconds.",

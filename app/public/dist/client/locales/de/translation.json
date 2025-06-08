@@ -2439,7 +2439,7 @@
 		"SIRUPY_APPLE": "Im nächsten Kampf hat jede Attacke dieses Pokemon eine Chance von [30,LK]% 1 Sekunde PARALYSIS zu verursachen. Verwandelt sich nach einer Runde in LEFTOVERS.",
 		"SWEET_HERB": "Erhalte 80 AP im nächsten Kampf.",
 		"MOOMOO_MILK": "Erhalte 15 permanente max HP.",
-		"BERRIES": "Erhalte eine zufällige Beere.",
+		"BERRIES": "Erhalte 3 zufällige Beere.",
 		"POFFIN": "Erhalte 100 SHIELD. Alle gehaltenen Beeren werden zum Knursp hinzugefügt. Ihre Effekte werden direkt angewandt, wobei heilenden HP in SHIELD verwandelt werden.",
 		"HONEY": "Jedes Pokémon in den nächsten Shop-Rolls dieser Runde haben eine zusätzliche 5% Chance eine Sinergie mit dem HONEY essenden Pokémon zu teilen.",
 		"ROCK_SALT": "Starte den nächsten Kampf für 8 Sekunden mit RUNE_PROTECT.",

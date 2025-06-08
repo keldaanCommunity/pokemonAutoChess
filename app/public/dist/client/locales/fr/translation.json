@@ -2441,7 +2441,7 @@
 		"SIRUPY_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon a [30,LK]% de chances d'infliger PARALYSIS pendant 1 seconde. Se change en LEFTOVERS après un tour sur le banc.",
 		"SWEET_HERB": "Gagne 80 AP au début du prochain combat.",
 		"MOOMOO_MILK": "Gagne 15 HP max permanents.",
-		"BERRIES": "Obtenez une baie. Le type de baie est aléatoire.",
+		"BERRIES": "Obtenez 3 baies. Le type de baie est aléatoire.",
 		"POFFIN": "Gagne 100 points de SHIELD au début du combat. Toutes les baies tenues sont mélangées avec le poffin. Leurs effets sont alors appliqués immédiatement au début du combat, et les HP soignés sont convertis en SHIELD.",
 		"HONEY": "Chaque Pokémon dans les prochaines relances de la boutique lors de ce tour a 5 % de chances supplémentaires de partager une synergie en commun avec un Pokémon mangeant du HONEY.",
 		"ROCK_SALT": "Commence le prochain combat avec RUNE_PROTECT pendant 8 secondes.",

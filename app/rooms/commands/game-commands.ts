@@ -1510,7 +1510,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (dish && nbDishes > 0) {
             let dishes = Array.from({ length: nbDishes }, () => dish!)
             if (dish === Item.BERRIES) {
-              dishes = pickNRandomIn(Berries, nbDishes)
+              dishes = pickNRandomIn(Berries, 3 * nbDishes)
             }
             if (dish === Item.SWEETS) {
               dishes = pickNRandomIn(Sweets, nbDishes)
