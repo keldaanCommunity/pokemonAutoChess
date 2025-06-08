@@ -50,6 +50,7 @@
 - Adjust Trapinch line: HP 80/120/180 → 70/120/190 ; Def/Spedef 8/8/8 → 2/5/8
 - Tropius gourmet dish now give 3 berries instead of 1
 - Change Vanillite line: Attack 5/9/20 → 6/12/24, freeze duration 2 → 3 seconds, no longer scales with AP
+- Nerf Mega Sableye: Attack 14 → 13, Def/Spedef 15/15 → 12/12
 
 # Changes to Synergies
 

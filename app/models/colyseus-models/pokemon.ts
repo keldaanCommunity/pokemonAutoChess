@@ -12438,10 +12438,10 @@ export class MegaSableye extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 200
-  atk = 14
+  atk = 13
   speed = 31
-  def = 15
-  speDef = 15
+  def = 12
+  speDef = 12
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
