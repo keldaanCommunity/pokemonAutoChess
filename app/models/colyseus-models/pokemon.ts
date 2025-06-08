@@ -904,7 +904,7 @@ export class Meditite extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.MEDITATE
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -924,7 +924,7 @@ export class Medicham extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.MEDITATE
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
