@@ -2898,7 +2898,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
   }
 }
 
-export class CalmMindStrategy extends AbilityStrategy {
+export class MeditateStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -12695,7 +12695,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.WISH]: new WishStrategy(),
   [Ability.LUNAR_BLESSING]: new LunarBlessingStrategy(),
-  [Ability.CALM_MIND]: new CalmMindStrategy(),
+  [Ability.MEDITATE]: new MeditateStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
   [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
   [Ability.METRONOME]: new MetronomeStrategy(),
