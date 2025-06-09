@@ -37,6 +37,7 @@ export default function TeamBuilder(props: {
   })
 
   const ingame = useLocation().pathname === "/game"
+  const inBotBuilder = useLocation().pathname.startsWith("/bot-builder")
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
 
@@ -264,8 +265,8 @@ export default function TeamBuilder(props: {
       <Synergies synergies={synergies} tooltipPortal={false} />
       <div className="actions">
         {ingame && <button className="bubbly blue" onClick={snapshot}><img src="assets/ui/photo.svg" /> {t("snapshot")}</button>}
-        <button className="bubbly dark" onClick={saveFile}><img src="assets/ui/save.svg" /> {t("save")}</button>
-        <button className="bubbly dark" onClick={loadFile}><img src="assets/ui/load.svg" /> {t("load")}</button>
+        {!inBotBuilder && <button className="bubbly dark" onClick={saveFile}><img src="assets/ui/save.svg" /> {t("save")}</button>}
+        {!inBotBuilder && <button className="bubbly dark" onClick={loadFile}><img src="assets/ui/load.svg" /> {t("load")}</button>}
         <button className="bubbly red" onClick={reset}><img src="assets/ui/trash.svg" /> {t("reset")}</button>
       </div>
       <TeamEditor

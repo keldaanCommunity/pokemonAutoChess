@@ -3170,7 +3170,7 @@
 	"bot_submitted_success": "Tu bot ha sido enviado con éxito. Puedes seguir el progreso y hacer preguntas en el canal de Discord #bot-creation.",
 	"bot_submission_failed": "Un error ha ocurrido mientras se enviaba tu bot: {{error}}.\nPor favor, inténtalo de nuevo más tarde. Si no se soluciona, escribe una publicación en el canal #bug-report de Discord.",
 	"import": "Importar",
-	"get_started_bot": "Comience con un BOT existente o pegue sus propios datos BOT",
+	"import_bot": "Comience con un BOT existente o pegue sus propios datos BOT",
 	"existing_bot": "BOT existente",
 	"select": "Seleccionar...",
 	"by": "por",

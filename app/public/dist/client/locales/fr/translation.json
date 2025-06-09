@@ -3119,7 +3119,7 @@
 	"cancel": "Annuler",
 	"submit_your_bot": "Soumettez votre bot",
 	"import": "Importer",
-	"get_started_bot": "Commencez avec un BOT existant ou collez vos propres données BOT",
+	"import_bot": "Commencez avec un BOT existant ou collez vos propres données BOT",
 	"existing_bot": "BOT existant",
 	"select": "Sélectionner...",
 	"by": "par",

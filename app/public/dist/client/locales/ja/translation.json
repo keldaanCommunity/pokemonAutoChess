@@ -2164,7 +2164,7 @@
 	"cancel": "キャンセル",
 	"submit_your_bot": "ボットを送信する",
 	"import": "輸入",
-	"get_started_bot": "既存の BOT を使用して開始するか、独自の BOT データを貼り付けます",
+	"import_bot": "既存の BOT を使用して開始するか、独自の BOT データを貼り付けます",
 	"existing_bot": "既存のBOT",
 	"select": "選択する...",
 	"by": "に",

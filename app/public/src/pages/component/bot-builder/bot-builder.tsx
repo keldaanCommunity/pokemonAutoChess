@@ -130,6 +130,45 @@ export default function BotBuilder() {
     completeBotInfo()
   }
 
+  function saveFile() {
+    // save board to local JSON file    
+    const blob = new Blob([JSON.stringify(bot)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "bot.json"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function loadFile() {
+    // load from local JSON file
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = "application/json"
+    input.addEventListener("change", async (e) => {
+      if (!input.files) return
+      const file = input.files![0]
+      const reader = new FileReader()
+      reader.onload = async (e) => {
+        if (!e.target) return
+        try {
+          const data: IBot = JSON.parse(e.target.result as string)
+          if (!data) {
+            throw new Error("Invalid file content")
+          } else {
+            setBot(rewriteBotRoundsRequiredto1(data))
+          }
+        } catch (e) {
+          console.error("Failed to load bot from file:", e)
+          alert("Invalid file")
+        }
+      }
+      reader.readAsText(file)
+    })
+    input.click()
+  }
+
   const board = useMemo(
     () => bot.steps[currentStage]?.board ?? [],
     [bot, currentStage]
@@ -168,9 +207,12 @@ export default function BotBuilder() {
         <div className="spacer"></div>
         {isBotManager && (
           <button onClick={() => navigate("/bot-admin")} className="bubbly red">
+            <img src="assets/ui/bot.svg" />
             {t("bot_admin")}
           </button>
         )}
+        <button className="bubbly dark" onClick={saveFile}><img src="assets/ui/save.svg" /> {t("save")}</button>
+        <button className="bubbly dark" onClick={loadFile}><img src="assets/ui/load.svg" /> {t("load")}</button>
         <button
           onClick={() => { setCurrentModal("import") }}
           className="bubbly orange"

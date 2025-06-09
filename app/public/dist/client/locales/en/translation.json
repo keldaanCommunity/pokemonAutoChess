@@ -3221,7 +3221,7 @@
 	"bot_submitted_success": "Your bot has been submitted successfully. You can follow the progress and ask questions in the Discord channel #bot-creation.",
 	"bot_submission_failed": "An error occurred while submitting your bot: {{error}}.\nPlease try again later, and if not solved, post a #bug-report on Discord.",
 	"import": "Import",
-	"get_started_bot": "Get started with an existing BOT or paste your own BOT data",
+	"import_bot": "Import an existing BOT",
 	"existing_bot": "Existing BOT",
 	"select": "Select...",
 	"by": "by",

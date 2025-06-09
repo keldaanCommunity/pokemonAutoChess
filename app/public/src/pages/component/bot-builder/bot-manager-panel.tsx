@@ -12,9 +12,17 @@ import "./bot-manager-panel.css"
 
 export function BotManagerPanel() {
   const [filterApproved, setFilterApproved] = useState<boolean | undefined>()
+  const navigate = useNavigate()
+  const { t } = useTranslation()
   return (
     <div id="bot-manager-panel">
-      <h1>Bot Management Panel</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h1>Bot Management Panel</h1>
+        <button onClick={() => navigate("/lobby")} className="bubbly blue">
+          {t("back_to_lobby")}
+        </button>
+      </div>
+
       <div className="controls">
         <button className="bubbly blue" onClick={() => setFilterApproved(undefined)}>
           All Bots
