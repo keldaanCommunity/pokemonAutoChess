@@ -16,6 +16,9 @@
 - Minccino
 - Cinccino
 - Surfing Pikachu
+- Espurr
+- Meowstic (Male)
+- Meowstic (Female)
 
 # Changes to Pokemon & Abilities
 
@@ -51,6 +54,7 @@
 - Tropius gourmet dish now give 3 berries instead of 1
 - Change Vanillite line: Attack 5/9/20 → 6/12/24, freeze duration 2 → 3 seconds, no longer scales with AP
 - Nerf Mega Sableye: Attack 14 → 13, Def/Spedef 15/15 → 12/12
+- Bidoof is now additional pick and no longer Wild ; adjusted stats: HP 60/135 → 65/140, Attack 6/15 → 7/16, Def/Spedef: 4/4 → 4/6 ; change Super Fang: deals 25% of the target's max HP as true damage
 
 # Changes to Synergies
 

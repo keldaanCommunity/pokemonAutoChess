@@ -1507,7 +1507,7 @@
 		"PLAY_ROUGH": "Infliggi [30,60,120,SP] SPECIAL e CHARM per 2.5 secondi.",
 		"AERIAL_ACE": "Infliggi [25,50,100,SP] TRUE.",
 		"PARABOLIC_CHARGE": "Cura [25,50] HP ed infliggi [25,50,100,SP] SPECIAL. HP curati in eccesso si convertono in SPECIAL.",
-		"SUPER_FANG": "Infliggi [30,60,90,SP] SPECIAL. Il danno raddoppia sui Pokèmon GRASS.",
+		"SUPER_FANG": "Infliggi il [25,SP=0.5]% dei HP massimi del bersaglio come TRUE.",
 		"TEETER_DANCE": "Potenzia la SPEED del [20,SP]. Tutti gli altri Pokèmon, sia della tua squadra che quella avversaria, sono afflitti da CONFUSION per 3 secondi.",
 		"CLOSE_COMBAT": "Infliggi [130,SP] SPECIAL e riduci la DEF e la SPE_DEF dell'utilizzatore di 2.",
 		"AQUA_RING": "Tuffati al centro della tua squadra, creando un anello d'acqua che cura di [20,30,50,SP] HP e degli status negativi.",

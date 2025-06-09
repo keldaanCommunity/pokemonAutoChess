@@ -1665,7 +1665,7 @@
 		"PLAY_ROUGH": "대상에게 [30,60,120,SP]의 SPECIAL 를 가하고 2.5초 동안 CHARM 으로 만든다.",
 		"AERIAL_ACE": "대상에 [25,50,100,SP] TRUE를 가한다.",
 		"PARABOLIC_CHARGE": "[25,50]의 HP를 회복하고 적에게 [25,50,100,SP]의 SPECIAL 을 입힌다. 초과 HP는 SPECIAL로 전환된다.",
-		"SUPER_FANG": "현재 대상에게 [30,60,90,SP] SPECIAL. GRASS 에게는 두배의 데미지",
+		"SUPER_FANG": "대상의 최대 HP의 [25,SP=0.5]% 만큼의 데미지를 TRUE로 준다 .",
 		"TEETER_DANCE": "[20,SP]%의 공격속도를 얻는다. 팀 상관없이 모든 포켓몬은 3초 동안 CONFUSION 상태에 빠진다.",
 		"CLOSE_COMBAT": "[130,SP] SPECIAL을 가하고 시전자의 DEF와 SPE_DEF를 2만큼 감소 시킨다.",
 		"AQUA_RING": "아군팀 중앙으로 돌진하여 상태 이상을 해제하는 HP를 [20,30,50,SP] 만큼 회복시키는 물의 고리를 생성한다.",

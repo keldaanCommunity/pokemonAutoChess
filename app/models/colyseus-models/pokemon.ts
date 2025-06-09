@@ -12707,15 +12707,14 @@ export class AlolanExeggutor extends Pokemon {
 
 export class Bidoof extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.WILD,
     Synergy.NORMAL,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BIBAREL
-  hp = 60
-  atk = 6
+  hp = 65
+  atk = 7
   speed = 48
   def = 4
   speDef = 4
@@ -12723,25 +12722,26 @@ export class Bidoof extends Pokemon {
   range = 1
   skill = Ability.SUPER_FANG
   attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
 }
 
 export class Bibarel extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.WILD,
     Synergy.NORMAL,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 135
-  atk = 15
+  hp = 140
+  atk = 16
   speed = 48
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 6
   maxPP = 80
   range = 1
   skill = Ability.SUPER_FANG
   attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
 }
 
 export class Spinda extends Pokemon {
@@ -18721,6 +18721,59 @@ export class Cinccino extends Pokemon {
   }
 }
 
+export class Espurr extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  evolutions = [Pkm.MEOWSTIC_MALE, Pkm.MEOWSTIC_FEMALE]
+  evolutionRule = new CountEvolutionRule(3, (pokemon, player, stageLevel: number) => {
+    const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
+    const fieldCount = player.synergies.get(Synergy.FIELD) ?? 0
+    return psychicCount >= fieldCount ? Pkm.MEOWSTIC_MALE : Pkm.MEOWSTIC_FEMALE
+  })
+  stars = 1
+  hp = 80
+  atk = 3
+  speed = 66
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.REFLECT
+  passive = Passive.ESPURR
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class MeowsticMale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 8
+  speed = 66
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.REFLECT
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class MeowsticFemale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 8
+  speed = 66
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.STORED_POWER
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19701,7 +19754,10 @@ export const PokemonClasses: Record<
   [Pkm.PURUGLY]: Purugly,
   [Pkm.MINCCINO]: Minccino,
   [Pkm.CINCCINO]: Cinccino,
-  [Pkm.PIKACHU_SURFER]: PikachuSurfer
+  [Pkm.PIKACHU_SURFER]: PikachuSurfer,
+  [Pkm.ESPURR]: Espurr,
+  [Pkm.MEOWSTIC_MALE]: MeowsticMale,
+  [Pkm.MEOWSTIC_FEMALE]: MeowsticFemale
 }
 
 // declare all the classes in colyseus schema TypeRegistry

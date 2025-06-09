@@ -60,3 +60,9 @@ export function shuffleArray<T extends Array<unknown>>(array: T): T {
   }
   return array
 }
+
+export function simpleHashSeededCoinFlip(seed: string) {
+  // Simple hash function to turn a string into a boolean coin flip
+  const hash = Array.from(seed).reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  return hash % 2 === 0
+}

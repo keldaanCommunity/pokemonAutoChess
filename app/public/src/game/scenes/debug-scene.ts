@@ -307,10 +307,13 @@ export class DebugScene extends Phaser.Scene {
         this.pokemon.addBlinded()
       }
       if (status == Status.SPIKY_SHIELD) {
-        this.pokemon.addSpikeArmor()
+        this.pokemon.addReflectShieldAnim()
       }
       if (status == Status.MAGIC_BOUNCE) {
-        this.pokemon.addMagicBounce()
+        this.pokemon.addReflectShieldAnim(0xffa0ff)
+      }
+      if(status == Status.REFLECT){
+        this.pokemon.addReflectShieldAnim(0xff3030)
       }
       if (status == Status.ELECTRIC_FIELD) {
         this.pokemon.addElectricField()

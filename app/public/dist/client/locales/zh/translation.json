@@ -1712,7 +1712,7 @@
 		"PLAY_ROUGH": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入CHARM 2.5秒。",
 		"AERIAL_ACE": "对目标造成[25,50,100,SP]点TRUE。",
 		"PARABOLIC_CHARGE": "恢复[25,50]点HP，并对目标造成[25,50,100,SP]点SPECIAL。溢出的HP改为增加造成的SPECIAL。",
-		"SUPER_FANG": "对目标造成[30,60,90,SP]点SPECIAL。对GRASS宝可梦伤害翻倍。",
+		"SUPER_FANG": "对目标造成TRUE，数值相当于其最大HP的[25,SP=0.5]%。",
 		"TEETER_DANCE": "提升[20,SP]点SPEED。所有其他宝可梦陷入CONFUSION 3秒，无论敌我。",
 		"CLOSE_COMBAT": "对目标造成[130,SP]点SPECIAL，并降低使用者2点DEF和SPE_DEF。",
 		"AQUA_RING": "潜水至我方阵型中间，并产生一个清除负面状态且恢复[20,30,50,SP]点HP的水流环。",

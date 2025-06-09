@@ -237,6 +237,7 @@ export enum Pkm {
   ENAMORUS = "ENAMORUS",
   ENTEI = "ENTEI",
   ESPEON = "ESPEON",
+  ESPURR = "ESPURR",
   ETERNATUS = "ETERNATUS",
   EXEGGCUTE = "EXEGGCUTE",
   EXEGGUTOR = "EXEGGUTOR",
@@ -501,6 +502,8 @@ export enum Pkm {
   MEGANIUM = "MEGANIUM",
   MELMETAL = "MELMETAL",
   MELOETTA = "MELOETTA",
+  MEOWSTIC_FEMALE = "MEOWSTIC_FEMALE",
+  MEOWSTIC_MALE = "MEOWSTIC_MALE",
   MEOWTH = "MEOWTH",
   MESPRIT = "MESPRIT",
   METAGROSS = "METAGROSS",
@@ -1768,8 +1771,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PANCHAM]: "0674",
   [Pkm.PANGORO]: "0675",
   //[Pkm.FURFROU]: "0676",
-  //[Pkm.ESPURR]: "0677",
-  //[Pkm.MEOWSTIC]: "0678",
+  [Pkm.ESPURR]: "0677",
+  [Pkm.MEOWSTIC_MALE]: "0678",
+  [Pkm.MEOWSTIC_FEMALE]: "0678-0000-0000-0002",
   [Pkm.HONEDGE]: "0679",
   [Pkm.DOUBLADE]: "0680",
   [Pkm.AEGISLASH]: "0681",
@@ -3124,7 +3128,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GLAMEOW]: Pkm.GLAMEOW,
   [Pkm.PURUGLY]: Pkm.GLAMEOW,
   [Pkm.MINCCINO]: Pkm.MINCCINO,
-  [Pkm.CINCCINO]: Pkm.MINCCINO
+  [Pkm.CINCCINO]: Pkm.MINCCINO,
+  [Pkm.ESPURR]: Pkm.ESPURR,
+  [Pkm.MEOWSTIC_MALE]: Pkm.ESPURR,
+  [Pkm.MEOWSTIC_FEMALE]: Pkm.ESPURR
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8197,5 +8204,20 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.ESPURR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose
+  },
+  [Pkm.MEOWSTIC_MALE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose
+  },
+  [Pkm.MEOWSTIC_FEMALE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
   }
 }
