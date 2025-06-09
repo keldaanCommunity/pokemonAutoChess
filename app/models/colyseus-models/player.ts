@@ -202,13 +202,13 @@ export default class Player extends Schema implements IPlayer {
         .reduce((acc, char) => acc + char.charCodeAt(0), 0)
       const coinFlip = hash % 2 === 0
       const rarityPartner = coinFlip ? Rarity.COMMON : Rarity.UNCOMMON
-      const randomCommons = pickNRandomIn(
+      const partnersPropositions = pickNRandomIn(
         getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY[rarityPartner]).filter(
           (p) => getPokemonData(p).stages === 3
         ),
         3
       )
-      this.pokemonsProposition.push(...randomCommons)
+      this.pokemonsProposition.push(...partnersPropositions)
     } else {
       this.firstPartner = state.shop.getRandomPokemonFromPool(
         Rarity.COMMON,
