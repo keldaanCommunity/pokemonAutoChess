@@ -76,7 +76,7 @@
 
 - Targeting changes: units now seek to continue targeting the same enemy if it moves, unless it moves out of their attack range. If the enemy moves out of their range, they will choose another target randomly among the nearest ones.
 - New Title: Surfer: Surf with Pikachu Surfer.
-- Change Paralysis: 50 -> 50% speed reduction
+- Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 
 # UI
 
