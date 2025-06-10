@@ -150,6 +150,7 @@ class GameContainer {
       "locked",
       "blinded",
       "magicBounce",
+      "reflect",
       "tree"
     ]
 

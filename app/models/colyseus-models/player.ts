@@ -35,7 +35,7 @@ import { removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { min } from "../../utils/number"
-import { pickNRandomIn, pickRandomIn } from "../../utils/random"
+import { pickNRandomIn, pickRandomIn, simpleHashSeededCoinFlip } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
 import { createRandomEgg } from "../../core/eggs"
@@ -196,11 +196,8 @@ export default class Player extends Schema implements IPlayer {
       const avatar = spawnDIAYAvatar(this)
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
-    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
-      // Simple hash function to turn a string into a boolean coin flip
-      const hash = Array.from(state.preparationId)
-        .reduce((acc, char) => acc + char.charCodeAt(0), 0)
-      const coinFlip = hash % 2 === 0
+    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {      
+      const coinFlip = simpleHashSeededCoinFlip(state.preparationId)
       const rarityPartner = coinFlip ? Rarity.COMMON : Rarity.UNCOMMON
       const partnersPropositions = pickNRandomIn(
         getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY[rarityPartner]).filter(

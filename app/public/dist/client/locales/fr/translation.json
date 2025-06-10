@@ -1661,7 +1661,7 @@
 		"PLAY_ROUGH": "Inflige [30,60,120,SP] SPECIAL à la cible et la rend CHARM pendant 2.5 secondes",
 		"AERIAL_ACE": "Inflige [25,50,100,SP] TRUE",
 		"PARABOLIC_CHARGE": "Soigne [25,50] HP et inflige [25,50,100,SP] SPECIAL à la cible. Les HP en trop sont convertis en SPECIAL",
-		"SUPER_FANG": "Inflige [30,60,90,SP] SPECIAL. Double dégâts si la cible est GRASS",
+		"SUPER_FANG": "Inflige [25,SP=0.5]% des HP max de la cible en TRUE",
 		"TEETER_DANCE": "Gagne [20,SP] SPEED. Tous les autres pokémons sur le terrain sont CONFUSION pendant 3 secondes, alliés comme ennemis",
 		"CLOSE_COMBAT": "Inflige [130,SP] SPECIAL et réduit la DEF et SPE_DEF du lanceur de 2",
 		"AQUA_RING": "Plonge au milieu de l'équipe alliée, créant un anneau aquatique qui supprime les statuts néfastes et soigne [20,30,50,SP] HP",

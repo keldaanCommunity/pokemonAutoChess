@@ -306,15 +306,21 @@ export default class BattleManager {
         }
       } else if (field === "spikeArmor") {
         if (pokemon.status.spikeArmor) {
-          pkm.addSpikeArmor()
+          pkm.addReflectShieldAnim()
         } else {
-          pkm.removeSpikeArmor()
+          pkm.removeReflectShieldAnim()
         }
       } else if (field === "magicBounce") {
         if (pokemon.status.magicBounce) {
-          pkm.addMagicBounce()
+          pkm.addReflectShieldAnim(0xffa0ff)
         } else {
-          pkm.removeMagicBounce()
+          pkm.removeReflectShieldAnim()
+        }
+      } else if (field === "reflect") {
+        if (pokemon.status.reflect) {
+          pkm.addReflectShieldAnim(0xff3030)
+        } else {
+          pkm.removeReflectShieldAnim()
         }
       } else if (field === "electricField") {
         if (pokemon.status.electricField) {

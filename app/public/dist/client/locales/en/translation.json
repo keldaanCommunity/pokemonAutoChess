@@ -218,6 +218,7 @@
 		"MUD_BUBBLE": "Mud Bubble",
 		"LINK_CABLE": "Link Cable",
 		"MAGIC_BOUNCE": "Magic Bounce",
+		"REFLECT": "Reflect",
 		"HIDDEN_POWER_A": "Hidden Power (ABRA)",
 		"HIDDEN_POWER_B": "Hidden Power (BURN)",
 		"HIDDEN_POWER_C": "Hidden Power (COIN)",
@@ -483,7 +484,7 @@
 		"TWIN_BEAM": "Twin Beam",
 		"SWAGGER": "Swagger",
 		"ENCORE": "Encore",
-		"SURF_SLIDE": "Surf Slide"
+		"STORED_POWER": "Stored Power"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1456,7 +1457,8 @@
 		"CINCCINO": "Cinccino",
 		"FURFROU": "Furfrou",
 		"ESPURR": "Espurr",
-		"MEOWSTIC": "Meowstic",
+		"MEOWSTIC_MALE": "Meowstic ♂",
+		"MEOWSTIC_FEMALE": "Meowstic ♀",
 		"GOSSIFLEUR": "Gossifleur",
 		"ELDEGOSS": "Eldegoss",
 		"INDEEDEE_MALE": "Indeedee ♂",
@@ -1671,6 +1673,7 @@
 		"MUD_BUBBLE": "Heal the user for [10,20,40,SP] HP.",
 		"LINK_CABLE": "Dash to the farthest reachable enemy Pokémon, then trigger an electric arc between Plusle and Minun, dealing [50,SP] SPECIAL. If Plusle or Minun are alone, deal this damage to adjacent enemy Pokémon instead.",
 		"MAGIC_BOUNCE": "For 5 seconds, whenever the user is hit by an ability, block the damage and reflect [50,100,SP]% SPECIAL to the caster.",
+		"REFLECT": "For 2 seconds, whenever the user received PHYSICAL, block the damage and reflect [50,SP]% PHYSICAL to the attacker.",
 		"HIDDEN_POWER_A": "Summon 4 Abra, one at each corner of the battlefield.",
 		"HIDDEN_POWER_B": "BURN all enemy Pokémon for 30 seconds.",
 		"HIDDEN_POWER_C": "Give AMULET_COIN to all allied Pokémon. The item is removed at the end of the fight.",
@@ -1716,7 +1719,7 @@
 		"PLAY_ROUGH": "Deal [30,60,120,SP] SPECIAL to the target and inflict it with CHARM for 2.5 seconds.",
 		"AERIAL_ACE": "Deal [25,50,100,SP] TRUE to the target.",
 		"PARABOLIC_CHARGE": "Heal the user for [25,50] HP and deal [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL.",
-		"SUPER_FANG": "Deal [30,60,90,SP] SPECIAL to the target. The damage is doubled if the target is GRASS.",
+		"SUPER_FANG": "Deal [25,SP=0.5]% of target's max HP as TRUE.",
 		"TEETER_DANCE": "Gain [20,SP] SPEED. All other Pokémon are CONFUSION for 3 seconds, allies and enemies alike.",
 		"CLOSE_COMBAT": "Deal [130,SP] SPECIAL to the target and reduce the user's DEF and SPE_DEF by 2.",
 		"AQUA_RING": "Dive into the middle of the allied team, creating an aquatic ring that cures negative status conditions and heals for [20,30,50,SP] HP.",
@@ -1932,7 +1935,7 @@
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
 		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
 		"ENCORE": "Casts the last ability used by an ally",
-		"SURF_SLIDE": "Slide to the farthest enemy, dealing [20,40,60,SP] SPECIAL to all enemies in the path."
+		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)"
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",
@@ -2710,7 +2713,8 @@
 		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",
 		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKOTH) gains RAGE for 3 seconds",
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region.",
-		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar"
+		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar",
+		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD"
 	},
 	"stat": {
 		"ATK": "Attack",

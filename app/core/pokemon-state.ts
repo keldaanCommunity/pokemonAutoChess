@@ -410,6 +410,23 @@ export default abstract class PokemonState {
         speDef = swap
       }
 
+      if (pokemon.status.reflect && attackType === AttackType.PHYSICAL) {
+        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS) === false) {
+          const crit =
+            pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
+            chance(pokemon.critChance, pokemon)
+          const reflectDamage = Math.round(0.5 * damage * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+          attacker.handleDamage({
+            damage: reflectDamage,
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+        }
+        return { death: false, takenDamage: 0 }
+      }
+
       let reducedDamage = damage
       if (attackType == AttackType.PHYSICAL) {
         reducedDamage = damage / (1 + ARMOR_FACTOR * def)

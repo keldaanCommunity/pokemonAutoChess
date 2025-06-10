@@ -37,6 +37,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
   @type("boolean") magicBounce = false
+  @type("boolean") reflect = false
   @type("boolean") light = false
   @type("boolean") curse = false
   @type("boolean") curseVulnerability = false
@@ -70,6 +71,7 @@ export default class Status extends Schema implements IStatus {
   enrageCooldown = 0
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
+  reflectCooldown = 0
   resurectingCooldown = 0
   curseCooldown = 0
   pokerusCooldown = 2500
@@ -213,6 +215,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.magicBounce) {
       this.updateMagicBounce(dt)
+    }
+
+    if (this.reflect) {
+      this.updateReflect(dt)
     }
 
     if (this.resurecting) {
@@ -848,6 +854,21 @@ export default class Status extends Schema implements IStatus {
       this.magicBounce = false
     } else {
       this.magicBounceCooldown -= dt
+    }
+  }
+
+  triggerReflect(timer: number) {
+    this.reflect = true
+    if (timer > this.reflectCooldown) {
+      this.reflectCooldown = timer
+    }
+  }
+
+  updateReflect(dt: number) {
+    if (this.reflectCooldown - dt <= 0) {
+      this.reflect = false
+    } else {
+      this.reflectCooldown -= dt
     }
   }
 

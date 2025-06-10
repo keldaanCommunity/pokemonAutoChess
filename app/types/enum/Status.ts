@@ -24,6 +24,7 @@ export enum Status {
   FAIRY_FIELD = "FAIRY_FIELD",
   SPIKY_SHIELD = "SPIKY_SHIELD",
   MAGIC_BOUNCE = "MAGIC_BOUNCE",
+  REFLECT = "REFLECT",
   LOCKED = "LOCKED",
   BLINDED = "BLINDED"
 }
@@ -39,5 +40,6 @@ export const PositiveStatuses = [
   Status.FAIRY_FIELD,
   Status.SPIKY_SHIELD,
   Status.MAGIC_BOUNCE,
+  Status.REFLECT,
   Status.RAGE
 ]
