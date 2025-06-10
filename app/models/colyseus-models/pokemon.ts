@@ -7747,7 +7747,7 @@ export class Gliscor extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
-  passive = Passive.POISON_HEAL
+  passive = Passive.GLISCOR
   attackSprite = AttackSprite.ROCK_MELEE
 }
 

@@ -8,7 +8,7 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
-import { max } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
 
 export default class Status extends Schema implements IStatus {
@@ -493,7 +493,15 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
+      let poisonDamage = pkm.hp * 0.05 * this.poisonStacks
+
+      if (
+        pkm.passive === Passive.GLISCOR ||
+        pkm.passive === Passive.GLIGAR
+      ) {
+        poisonDamage = pkm.hp * 0.05 * (this.poisonStacks - 2)
+      }
+
       if (pkm.simulation.weather === Weather.RAIN) {
         poisonDamage *= 0.7
       }
@@ -505,14 +513,11 @@ export default class Status extends Schema implements IStatus {
         poisonDamage *= 0.5
       }
 
-      if (
-        pkm.passive === Passive.POISON_HEAL ||
-        pkm.passive === Passive.GLIGAR
-      ) {
-        pkm.handleHeal(Math.round(poisonDamage), pkm, 0, false)
-      } else {
+      if (poisonDamage < 0) {
+        pkm.handleHeal(Math.round(-poisonDamage), pkm, 0, false)
+      } else if (poisonDamage > 0) {
         pkm.handleDamage({
-          damage: Math.round(poisonDamage),
+          damage: min(1)(Math.round(poisonDamage)),
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,

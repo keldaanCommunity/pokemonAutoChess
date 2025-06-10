@@ -2523,7 +2523,7 @@
 		"MELOETTA": "Meloetta wechselt je nach Position auf dem Brett zwischen der Pirouetten- und der Arienform.",
 		"UNOWN": "Unown können keine Gegenstände halten und verschwinden nach einem Kampf oder nachdem sie ihre Fähigkeit gewirkt haben",
 		"GLIGAR": "Gligar sucht nach einem RAZOR_FANG. Wenn das Pokémon POISONNED ist, erhält es HP, anstatt Schaden zu erleiden.",
-		"POISON_HEAL": "Wenn das Pokemon unter POISONNED leidet, regeneriert es HP, statt welche zu verlieren.",
+		"GLISCOR": "Wenn das Pokemon unter POISONNED leidet, regeneriert es HP, statt welche zu verlieren.",
 		"GRIM_NEIGH": "Wenn Phantoross einen Gegner besiegt, gibt es ein dunkles Wiehern von sich, das seine AP um 30 erhöht.",
 		"SHAYMIN": "Shaymin ist auf der Suche nach einer GRACIDEA_FLOWER",
 		"BEAST_BOOST_ATK": "Bei einem Kill, erhält das Pokemon +5 ATK.",
