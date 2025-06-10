@@ -5250,9 +5250,6 @@ export class PikachuSurfer extends Pokemon {
   range = 1
   skill = Ability.SURF
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  onAcquired(player: Player) {
-    player.titles.add(Title.SURFER)
-  }
   passive = Passive.PIKACHU_SURFER
 }
 
