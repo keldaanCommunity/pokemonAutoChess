@@ -8650,12 +8650,12 @@ export class Gourgeist extends Pokemon {
 
 export class Natu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.XATU
   hp = 90
   atk = 5
-  speed = 55
+  speed = 60
   def = 4
   speDef = 4
   maxPP = 70
@@ -8666,13 +8666,13 @@ export class Natu extends Pokemon {
 }
 export class Xatu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 2
-  hp = 180
-  atk = 11
-  speed = 55
-  def = 6
-  speDef = 6
+  hp = 200
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
   maxPP = 70
   range = 2
   skill = Ability.MAGIC_BOUNCE
@@ -9342,14 +9342,14 @@ export class Jynx extends Pokemon {
 
 export class MimeJr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.MR_MIME
-  hp = 70
-  atk = 6
+  hp = 60
+  atk = 5
   speed = 54
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.MIMIC
@@ -9363,13 +9363,13 @@ export class MrMime extends Pokemon {
     Synergy.PSYCHIC,
     Synergy.HUMAN
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 200
-  atk = 14
+  hp = 150
+  atk = 11
   speed = 54
   def = 4
-  speDef = 8
+  speDef = 7
   maxPP = 80
   range = 2
   skill = Ability.MIMIC

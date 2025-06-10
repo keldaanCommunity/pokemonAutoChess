@@ -56,6 +56,8 @@
 - Nerf Mega Sableye: Attack 14 → 13, Def/Spedef 15/15 → 12/12
 - Bidoof is now additional pick and no longer Wild ; adjusted stats: HP 60/135 → 65/140, Attack 6/15 → 7/16, Def/Spedef: 4/4 → 4/6 ; change Super Fang: deals 25% of the target's max HP as true damage
 - Change Gliscor passive: ~~Poison heals instead of damaging~~ First stack of poison on Gliscor is healing. Poison damage is still applied on subsequent stacks.
+- Natu line is now Rare ; adjusted stats
+- Mime Jr. line is now Uncommon ; adjusted stats
 
 # Changes to Synergies
 
