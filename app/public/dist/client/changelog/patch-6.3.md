@@ -58,6 +58,7 @@
 - Change Gliscor passive: ~~Poison heals instead of damaging~~ First stack of poison on Gliscor is healing. Poison damage is still applied on subsequent stacks.
 - Natu line is now Rare ; adjusted stats
 - Mime Jr. line is now Uncommon ; adjusted stats
+- Nerf Gholdengo: HP 230 → 220, Def & SpeDef 12 → 10
 
 # Changes to Synergies
 

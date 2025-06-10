@@ -13864,11 +13864,11 @@ export class Gholdengo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 230
+  hp = 220
   atk = 20
   speed = 52
-  def = 12
-  speDef = 12
+  def = 10
+  speDef = 10
   maxPP = 90
   range = 1
   skill = Ability.MAKE_IT_RAIN
