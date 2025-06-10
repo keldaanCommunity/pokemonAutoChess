@@ -2525,7 +2525,7 @@
 		"BERRIES": "Get 3 random berries",
 		"POFFIN": "Gain 100 SHIELD. All held berries are added to the poffin. Their effects are applied immediately, with healed HP turned into SHIELD.",
 		"HONEY": "Each Pokémon in the next shop rerolls this round has an additional 5% chance to share a common synergy with a Pokémon eating HONEY.",
-		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 8 seconds.",
+		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 10 seconds.",
 		"NUTRITIOUS_EGG": "Start the next fight with +30% base ATK, DEF and SPE_DEF.",
 		"LEFTOVERS": "No effect. There is not much left to eat.",
 		"BLACK_SLUDGE": "POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead.",

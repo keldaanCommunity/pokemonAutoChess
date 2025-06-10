@@ -70,6 +70,7 @@
 - Buff Berry Sweet: 10 → 15 permanent HP
 - Buff Berry Juice: 80 → 100 shield
 - Buff Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
+- Buff Rock Salt: Rune protect duration 8 → 10 seconds
 - Buff Spindas Cocktail possible positive effects: attack 5 → 10, AP 25 → 50, speed 25 → 50, shield 50 → 100
 - Nerf Comet Shard: Protect duration 3 → 2 seconds
 - Buff Gold Bow ; now gives 50 shield

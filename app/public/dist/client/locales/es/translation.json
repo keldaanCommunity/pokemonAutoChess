@@ -2477,7 +2477,7 @@
 		"BERRIES": "Consigue 3 baya aleatoria",
 		"POFFIN": "Gana 100 de SHIELD. Todas las bayas que tengas se añaden al pokocho. Sus efectos se aplican inmediatamente, con las curaciones de HP convertidas en SHIELD.",
 		"HONEY": "Cada Pokémon en los cambios de la tienda tiene un 5% de probabilidad adicional de compartir una sinergia con el Pokémon que está comiéndose la HONEY.",
-		"ROCK_SALT": "Empieza la siguiente batalla con RUNE_PROTECT durante 8 segundos.",
+		"ROCK_SALT": "Empieza la siguiente batalla con RUNE_PROTECT durante 10 segundos.",
 		"NUTRITIOUS_EGG": "Comienza la siguiente batalla con +30% de los valores base de ATK, DEF y SPE_DEF.",
 		"LEFTOVERS": "Sin efecto. No queda mucho más que comer.",
 		"BLACK_SLUDGE": "El Pokémon que se lo come queda POISONNED. Si es de tipo POISON, recupera el 5% de los HP máximos cada 2 segundos.",

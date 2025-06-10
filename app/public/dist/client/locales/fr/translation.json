@@ -2444,7 +2444,7 @@
 		"BERRIES": "Obtenez 3 baies. Le type de baie est aléatoire.",
 		"POFFIN": "Gagne 100 points de SHIELD au début du combat. Toutes les baies tenues sont mélangées avec le poffin. Leurs effets sont alors appliqués immédiatement au début du combat, et les HP soignés sont convertis en SHIELD.",
 		"HONEY": "Chaque Pokémon dans les prochaines relances de la boutique lors de ce tour a 5 % de chances supplémentaires de partager une synergie en commun avec un Pokémon mangeant du HONEY.",
-		"ROCK_SALT": "Commence le prochain combat avec RUNE_PROTECT pendant 8 secondes.",
+		"ROCK_SALT": "Commence le prochain combat avec RUNE_PROTECT pendant 10 secondes.",
 		"NUTRITIOUS_EGG": "Commence le prochain combat avec +30% d'ATK, DEF et SPE_DEF de base.",
 		"LEFTOVERS": "Aucun effet. Il ne reste plus grand-chose à manger.",
 		"BLACK_SLUDGE": "POISONNED le Pokémon qui le mange. Si celui-ci est de type POISON, le poison restaure 5 % des HP max toutes les 2 secondes au lieu d'infliger des dégâts.",
