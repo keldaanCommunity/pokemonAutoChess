@@ -14,6 +14,7 @@ import GamePokemonPortrait from "./game-pokemon-portrait"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { localStore, LocalStoreKeys } from "../../utils/store"
 import "./game-pokemon-propositions.css"
+import { DEPTH } from "../../../game/depths"
 
 export default function GamePokemonsPropositions() {
   const { t } = useTranslation()
@@ -49,7 +50,7 @@ export default function GamePokemonsPropositions() {
   const [visible, setVisible] = useState(true)
   if (pokemonsProposition.length > 0 && life > 0) {
     return (
-      <div className="game-pokemons-proposition">
+      <div className="game-pokemons-proposition" style={{zIndex: DEPTH.TOOLTIP}}>
         <div
           className="my-container"
           style={{ visibility: visible ? "visible" : "hidden" }}
