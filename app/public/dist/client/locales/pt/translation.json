@@ -1155,7 +1155,7 @@
 		"GROWL": "FLINCH inimigos adjacentes por 3 segundos e reduz seu ATK em [3,5,7,SP]",
 		"RELIC_SONG": "Emite uma nota. As duas primeiras notas dão [10,SP] SHIELD a todos os aliados. A terceira nota causa SLEEP a todo o time inimigo por [2,SP=0.5] segundos.",
 		"FAIRY_WIND": "Concede [5,10,20,SP=0.5] PP a todos os aliados, exceto ao lançador",
-		"DISARMING_VOICE": "Deixa inimigos no raio de 1 espaços ENCANTADOS por [1,SP] segundos",
+		"DISARMING_VOICE": "Deixa inimigos no raio de [1,2,3] espaços ENCANTADOS por [1,SP] segundos",
 		"HIGH_JUMP_KICK": "Inflige [15,30,60,SP] SPECIAL e roube até 40 PP do alvo",
 		"GRASS_WHISTLE": "Coloque os inimigos SLEEP [1,2,4] por 2 segundos",
 		"TRI_ATTACK": "Inflige [60,120,250,SP] SPECIAL. Pode BURN, FREEZE ou PARALYSIS o alvo",

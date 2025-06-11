@@ -1432,7 +1432,7 @@
 		"GROWL": "Inflige FLINCH aux ennemis adjacents pendant 3 secondes et réduit leur ATK de [3,5,7,SP]",
 		"RELIC_SONG": "Émet une note. Les deux premières notes confèrent [10,SP] SHIELD à tous les alliés. La troisième note inflige SLEEP à toute l'équipe ennemie pendant [2,SP=0.5] secondes.",
 		"FAIRY_WIND": "Donne [5,10,20,SP=0.5] PP à tous les alliés sauf l'utilisateur",
-		"DISARMING_VOICE": "Les ennemis adjacents sont CHARMED pendant [1,SP] secondes.",
+		"DISARMING_VOICE": "Les ennemis dans un rayon de [1,2,3] cases sont CHARM pendant [1,SP] secondes.",
 		"HIGH_JUMP_KICK": "Inflige [15,30,60,SP] SPECIAL et vole jusqu'à 40 PP à la cible",
 		"TROP_KICK": "Inflige [50,100,200,SP] SPECIAL et réduit l'ATK de la cible de [3,5,7,SP].",
 		"GRASS_WHISTLE": "SLEEP [1,2,4] ennemis pendant 2 secondes",
