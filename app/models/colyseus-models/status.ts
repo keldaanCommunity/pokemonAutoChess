@@ -3,13 +3,14 @@ import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
+import { values } from "../../utils/schemas"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -25,6 +26,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") resurecting = false
   @type("boolean") paralysis = false
   @type("boolean") pokerus = false
+  @type("boolean") possessed = false
   @type("boolean") locked = false
   @type("boolean") blinded = false
   @type("boolean") armorReduction = false
@@ -52,6 +54,7 @@ export default class Status extends Schema implements IStatus {
   silenceOrigin: PokemonEntity | undefined = undefined
   woundOrigin: PokemonEntity | undefined = undefined
   charmOrigin: PokemonEntity | undefined = undefined
+  possessedOrigin: PokemonEntity | undefined = undefined
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -75,6 +78,7 @@ export default class Status extends Schema implements IStatus {
   resurectingCooldown = 0
   curseCooldown = 0
   pokerusCooldown = 2500
+  possessedCooldown = 0
   lockedCooldown = 0
   blindCooldown = 0
   enrageDelay = 35000
@@ -100,6 +104,7 @@ export default class Status extends Schema implements IStatus {
     this.armorReductionCooldown = 0
     this.curseCooldown = 0
     this.curse = false
+    this.possessedCooldown = 0
     this.lockedCooldown = 0
     this.blindCooldown = 0
   }
@@ -120,7 +125,8 @@ export default class Status extends Schema implements IStatus {
       this.armorReduction ||
       this.curse ||
       this.locked ||
-      this.blinded
+      this.blinded ||
+      this.possessed
     )
   }
 
@@ -187,6 +193,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.locked) {
       this.updateLocked(dt, pokemon)
+    }
+
+    if (this.possessed) {
+      this.updatePossessed(dt, pokemon)
     }
 
     if (this.blinded) {
@@ -993,6 +1003,42 @@ export default class Status extends Schema implements IStatus {
         pokemon.baseRange + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
     } else {
       this.lockedCooldown -= dt
+    }
+  }
+
+  triggerPossessed(duration: number, pkm: PokemonEntity, origin: PokemonEntity) {
+    if (!this.runeProtect) {
+      const pkmTeam = pkm.team === Team.RED_TEAM ? pkm.simulation.redTeam : pkm.simulation.blueTeam
+      if (values(pkmTeam).some(p => p.id !== pkm.id && !p.status.possessed)) {
+        this.possessed = true
+        duration = this.applyAquaticReduction(duration, pkm)
+        pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+        pkm.setTarget(null) // force retargetting
+        origin.setTarget(null) // force retargetting
+        this.possessedCooldown = Math.max(Math.round(duration), this.possessedCooldown)
+        this.possessedOrigin = origin
+      } else {
+        this.triggerCharm(duration, pkm, origin, false)
+      }
+    }
+  }
+
+  updatePossessed(dt: number, pkm: PokemonEntity) {
+    const otherTeam = pkm.team === Team.RED_TEAM ? pkm.simulation.blueTeam : pkm.simulation.redTeam
+    const possessedCount = values(otherTeam).filter((pokemon) => pokemon.status.possessed).length
+    const lastAliveArePossessed = possessedCount === otherTeam.size
+
+    this.possessedCooldown -= dt
+
+    if (this.possessedCooldown <= 0 || lastAliveArePossessed) {
+      this.possessed = false
+      pkm.team = pkm.team === Team.RED_TEAM ? Team.BLUE_TEAM : Team.RED_TEAM
+
+      if (lastAliveArePossessed && this.possessedCooldown > 0 && this.possessedOrigin) {
+        pkm.status.triggerCharm(this.possessedCooldown, pkm, this.possessedOrigin, false)
+      }
+
+      pkm.setTarget(null) // force retargeting
     }
   }
 

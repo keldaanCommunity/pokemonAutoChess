@@ -5,8 +5,8 @@ import { Orientation } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Status } from "../../../../../types/enum/Status"
 import { DebugScene } from "../../../game/scenes/debug-scene"
-import "./debug-scene.css"
 import { preference } from "../../../preferences"
+import "./debug-scene.css"
 
 export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,

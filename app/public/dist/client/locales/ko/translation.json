@@ -2454,7 +2454,7 @@
 		"NUTRITIOUS_EGG": "다음 전투 시작 시 +30% 기본 ATK, DEF, SPE_DEF",
 		"LEFTOVERS": "효과없음.",
 		"BLACK_SLUDGE": "섭취하는 포켓몬에게 POISONNED. POISON 포켓몬이면 대신 2초마다 최대 HP 5% 회복",
-		"BINDING_MOCHI": "다음 전투에서 첫 공격은 4초간 CHARM 과 POISONNED 를 가함",
+		"BINDING_MOCHI": "다음 전투에서 첫 공격은 5초간 POSSESSED 를 가함",
 		"FRUIT_JUICE": "다음 전투에 50 SPEED 증가",
 		"LEEK": "다음 전투에 50% CRIT_CHANCE 증가 및 스킬에 치명타 적용 가능",
 		"LARGE_LEEK": "다음 전투에 100% CRIT_POWER 증가 및 스킬에 치명타 적용 가능",

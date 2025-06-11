@@ -82,8 +82,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     }),
     new OnHitEffect((entity, target, board) => {
       if (entity.effects.has(EffectEnum.BINDING_MOCHI)) {
-        target.status.triggerCharm(4000, target, entity, false)
-        target.status.triggerPoison(4000, target, entity)
+        target.status.triggerPossessed(5000, target, entity)
         entity.effects.delete(EffectEnum.BINDING_MOCHI)
       }
     })

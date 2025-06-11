@@ -234,8 +234,8 @@ export class DebugScene extends Phaser.Scene {
       this.pokemon.removeArmorReduction()
       this.pokemon.removeCharm()
       this.pokemon.removeRuneProtect()
-      this.pokemon.removeSpikeArmor()
-      this.pokemon.removeMagicBounce()
+      this.pokemon.removePossessed()
+      this.pokemon.removeReflectShieldAnim()
       this.pokemon.removeFlinch()
       this.pokemon.removeCurse()
       this.pokemon.removeElectricField()
@@ -299,9 +299,12 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status == Status.RAGE) {
         this.pokemon.addRageEffect()
-      }
+      }      
       if (status == Status.LOCKED) {
         this.pokemon.addLocked()
+      }
+      if (status == Status.POSSESSED) {
+        this.pokemon.addPossessed()
       }
       if (status == Status.BLINDED) {
         this.pokemon.addBlinded()
