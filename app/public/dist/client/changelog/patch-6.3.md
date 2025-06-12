@@ -67,7 +67,7 @@
 
 - Nerf Dark: Crit Power +30/60/100 → +30/50/80%
 - Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
-- Aquatic 8: (8) Summer Break: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 8 seconds for the rest of combat.
+- New: Aquatic 8 Surge Surfer: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 8 seconds for the rest of combat.
 
 # Changes to Items
 

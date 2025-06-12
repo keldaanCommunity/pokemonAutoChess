@@ -10,6 +10,7 @@ import { GamePhaseState, Team } from "../../../../../types/enum/Game"
 import { PVEStages } from "../../../../../models/pve-stages"
 import PokemonPortrait from "../pokemon-portrait"
 import "./game-dps-meter.css"
+import { DEPTH } from "../../../game/depths"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
@@ -56,6 +57,7 @@ export default function GameDpsMeter() {
       </div>
       {isOpen && <div
         className="my-container hidden-scrollable game-dps-meter"
+        style={{ zIndex: DEPTH.TOOLTIP_BACK }}
       >
         <header>
           <div>

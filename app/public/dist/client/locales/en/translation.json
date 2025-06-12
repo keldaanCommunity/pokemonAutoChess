@@ -2001,7 +2001,7 @@
 		"SWIFT_SWIM": "Swift Swim",
 		"HYDRATION": "Hydration",
 		"WATER_VEIL": "Water Veil",
-		"SUMMER_BREAK": "Summer Break",
+		"SURGE_SURFER": "Surge Surfer",
 		"TAILWIND": "Tailwind",
 		"FEATHER_DANCE": "Feather Dance",
 		"MAX_AIRSTREAM": "Max Airstream",
@@ -2109,7 +2109,7 @@
 		"SWIFT_SWIM": "-30% negative status duration. Wave heals 10% HP and deal 5% TRUE.",
 		"HYDRATION": "-60% negative status duration. Wave heals 20% HP and deal 10% TRUE.",
 		"WATER_VEIL": "-90% negative status duration. Wave heals 30% HP and deal 15% TRUE. A second wave hits after 16 seconds.",
-		"SUMMER_BREAK": "-90% negative status duration. Wave heals 30% HP and deal 15% TRUE. After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 12 seconds for the rest of combat.",
+		"SURGE_SURFER": "Waves hit every 8 seconds for the rest of combat. After the first wave, a Surfing Pikachu joins you in battle.",
 		"COCOON": "Copy 1 BUG Pokémon",
 		"INFESTATION": "Copy 2 BUG Pokémon",
 		"HORDE": "Copy 3 BUG Pokémon",
@@ -2903,7 +2903,7 @@
 		"ELECTRICIAN": "Electrician",
 		"GEOLOGIST": "Geologist",
 		"MYTH_TRAINER": "Myth Trainer",
-		"DIVER": "Diver",
+		"SURFER": "Surfer",
 		"POKEMON_RANGER": "Pokemon Ranger",
 		"SKIER": "Skier",
 		"POKEFAN": "Pokefan",
@@ -2952,8 +2952,7 @@
 		"STARGAZER": "Stargazer",
 		"BLOODY": "Bloody",
 		"ETERNAL": "Eternal",
-		"ANNIHILATOR": "Annihilator",
-		"SURFER": "Surfer"
+		"ANNIHILATOR": "Annihilator"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -2983,7 +2982,7 @@
 		"ELECTRICIAN": "Max Synergy With Electric Type in a game",
 		"GEOLOGIST": "Max Synergy With Ground Type in a game",
 		"MYTH_TRAINER": "Max Synergy With Monster Type in a game",
-		"DIVER": "Max Synergy With Aquatic Type in a game",
+		"SURFER": "Max Synergy With Aquatic Type in a game",
 		"POKEMON_RANGER": "Max Synergy With Grass Type in a game",
 		"SKIER": "Max Synergy With Ice Type in a game",
 		"POKEFAN": "Max Synergy With Normal Type in a game",
@@ -3031,8 +3030,7 @@
 		"PICNICKER": "Make a picnic with 9 Pokémon",
 		"STARGAZER": "Get Solgaleo or Lunala",
 		"BLOODY": "Get Bloodmoon Ursaluna",
-		"ETERNAL": "Meet Arceus at stage 40",
-		"SURFER": "Go on a summer break with a Surfing Pikachu"
+		"ETERNAL": "Meet Arceus at stage 40"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
