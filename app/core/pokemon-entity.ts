@@ -1026,7 +1026,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }) {
     // Items effects
     if (
-      this.items.has(Item.DEFENSIVE_RIBBON) &&
+      this.items.has(Item.MUSCLE_BAND) &&
       this.count.defensiveRibbonCount < 20 &&
       damage > 0
     ) {
@@ -1683,7 +1683,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     const stackingItems = [
-      Item.DEFENSIVE_RIBBON,
+      Item.MUSCLE_BAND,
       Item.SOUL_DEW,
       Item.UPGRADE,
       Item.MAGMARIZER
