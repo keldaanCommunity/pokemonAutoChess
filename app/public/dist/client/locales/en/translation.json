@@ -1939,7 +1939,7 @@
 		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
 		"ENCORE": "Casts the last ability used by an ally",
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
-		"MIND_BEND": "Target is POSSESSED for [1.5,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SO] SPECIAL instead.",
+		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED"
 	},
 	"effect": {

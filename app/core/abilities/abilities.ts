@@ -12720,12 +12720,12 @@ export class MindBendStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    // Target is Possessed for 1.5 seconds. If Rune Protect or already possessed, takes 100 special damage instead.   
+    // Target is Possessed for 2 seconds. If Rune Protect or already possessed, takes 100 special damage instead.   
     if (target.status.runeProtect || target.status.possessed) {
       target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
     } else {
       const duration = Math.round(
-        1500 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+        2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
       )
       target.status.triggerPossessed(duration, target, pokemon)
     }
