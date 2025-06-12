@@ -2448,7 +2448,7 @@
 		"NUTRITIOUS_EGG": "Commence le prochain combat avec +30% d'ATK, DEF et SPE_DEF de base.",
 		"LEFTOVERS": "Aucun effet. Il ne reste plus grand-chose à manger.",
 		"BLACK_SLUDGE": "POISONNED le Pokémon qui le mange. Si celui-ci est de type POISON, le poison restaure 5 % des HP max toutes les 2 secondes au lieu d'infliger des dégâts.",
-		"BINDING_MOCHI": "La première attaque du prochain combat infligera CHARM et POISONNED pendant 4 secondes à sa cible.",
+		"BINDING_MOCHI": "La première attaque du prochain combat infligera POSSESSED pendant 5 secondes à sa cible.",
 		"FRUIT_JUICE": "Gagne 50 SPEED au début du prochain combat.",
 		"LEEK": "Gagne 50 % de CRIT_CHANCE au début du prochain combat, et permet à la capacité d'infliger un coup critique.",
 		"LARGE_LEEK": "Gagne 100 % de CRIT_POWER au début du prochain combat, et permet à la capacité d'infliger un coup critique.",

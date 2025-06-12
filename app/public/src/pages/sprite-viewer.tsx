@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom"
 import DebugScene from "./component/debug/debug-scene"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
+import { Checkbox } from "./component/checkbox/checkbox"
 
 import { Orientation } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 
 import "./sprite-viewer.css"
-import { Checkbox } from "./component/checkbox/checkbox"
 
 export function SpriteDebug() {
   const navigate = useNavigate()

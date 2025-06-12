@@ -75,6 +75,7 @@
 - Buff Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
 - Buff Rock Salt: Rune protect duration 8 → 10 seconds
 - Buff Spindas Cocktail possible positive effects: attack 5 → 10, AP 25 → 50, speed 25 → 50, shield 50 → 100
+- Change Binding Mochi: now inflicts Possessed status for 5 seconds
 - Nerf Comet Shard: Protect duration 3 → 2 seconds
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
@@ -84,6 +85,7 @@
 # Gameplay
 
 - Targeting changes: units now seek to continue targeting the same enemy if it moves, unless it moves out of their attack range. If the enemy moves out of their range, they will choose another target randomly among the nearest ones.
+- New status Possessed: temporarely fight for the other team.
 - New Title: Surfer: Surf with Pikachu Surfer.
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 

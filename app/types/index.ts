@@ -653,6 +653,7 @@ export interface IStatus {
   paralysis: boolean
   pokerus: boolean
   locked: boolean
+  possessed: boolean
   blinded: boolean
   armorReduction: boolean
   runeProtect: boolean

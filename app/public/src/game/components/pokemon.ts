@@ -103,6 +103,7 @@ export default class PokemonSprite extends DraggableObject {
   confusion: GameObjects.Sprite | undefined
   paralysis: GameObjects.Sprite | undefined
   pokerus: GameObjects.Sprite | undefined
+  possessed: GameObjects.Sprite | undefined
   locked: GameObjects.Sprite | undefined
   blinded: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
@@ -862,6 +863,26 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
+  addPossessed() {
+    if (!this.possessed) {
+      this.possessed = this.scene.add
+        .sprite(-16, -24, "status", "POSSESSED/000.png")
+        .setScale(2)
+      this.possessed.anims.play("POSSESSED")
+      this.sprite.setTint(0xff50ff)
+      this.add(this.possessed)
+      //this.bringToTop(this.sprite)
+    }
+  }
+
+  removePossessed() {
+    if (this.possessed) {
+      this.sprite.clearTint()
+      this.remove(this.possessed, true)
+      this.possessed = undefined
+    }
+  }
+
   addLocked() {
     if (!this.locked) {
       this.locked = this.scene.add
@@ -1103,7 +1124,7 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addReflectShieldAnim(colorVariation = 0xffffff){
+  addReflectShieldAnim(colorVariation = 0xffffff) {
     if (!this.reflectShield) {
       this.reflectShield = this.scene.add
         .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)

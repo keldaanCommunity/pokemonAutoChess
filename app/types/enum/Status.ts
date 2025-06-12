@@ -26,6 +26,7 @@ export enum Status {
   MAGIC_BOUNCE = "MAGIC_BOUNCE",
   REFLECT = "REFLECT",
   LOCKED = "LOCKED",
+  POSSESSED = "POSSESSED",
   BLINDED = "BLINDED"
 }
 
