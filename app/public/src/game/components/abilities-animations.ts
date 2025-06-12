@@ -569,12 +569,12 @@ export function displayAbility(
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
-    case Ability.CALM_MIND:
+    case Ability.MEDITATE:
       addAbilitySprite(skill, coordinates, true).setScale(2)
       break
 
     case Ability.GRAVITY:
-      addAbilitySprite(Ability.CALM_MIND, coordinates, true)
+      addAbilitySprite(Ability.MEDITATE, coordinates, true)
         .setScale(3)
         .setTint(0xccff33)
         .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
@@ -1805,6 +1805,10 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.MIND_BEND:
+      addAbilitySprite(Ability.ASSURANCE, [coordinatesTarget[0], coordinatesTarget[1] - 20], true)
+      break
+
     case Ability.CRUSH_GRIP:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -1855,8 +1859,7 @@ export function displayAbility(
       break
 
     case Ability.ATTRACT:
-    case Ability.DISARMING_VOICE:
-      addAbilitySprite(Ability.ATTRACT, [coordinates[0], coordinates[1] - 70], true).setScale(2)
+      addAbilitySprite(skill, [coordinates[0], coordinates[1] - 70], true).setScale(2)
       break
 
     case Ability.MAGNET_RISE:
@@ -2125,7 +2128,9 @@ export function displayAbility(
       break
 
     case Ability.RELIC_SONG:
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+    case Ability.SING:
+    case Ability.DISARMING_VOICE:
+      addAbilitySprite(Ability.RELIC_SONG, coordinates, true).setScale(2)
       break
 
     case Ability.HIGH_JUMP_KICK:
@@ -2400,8 +2405,7 @@ export function displayAbility(
     }
 
     case Ability.SONG_OF_DESIRE:
-      addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
-      addAbilitySprite(skill, coordinates, true).setScale(2)
+      addAbilitySprite(skill, [coordinatesTarget[0], coordinatesTarget[1] - 60], true).setScale(2)
       break
 
     case Ability.CONFUSING_MIND:
