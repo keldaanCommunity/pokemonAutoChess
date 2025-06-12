@@ -3453,8 +3453,8 @@ export const AnimationConfig: {
   },
   [Pkm.JIGGLYPUFF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.DeepBreath
   },
   [Pkm.CATERPIE]: {
     attack: AnimationType.Attack,
