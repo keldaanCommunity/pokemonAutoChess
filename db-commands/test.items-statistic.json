@@ -270,7 +270,7 @@
     "pokemons": ["TAPU_BULU", "VIRIZION", "MARACTUS"],
     "rank": 3.57,
     "count": 1225,
-    "name": "DEFENSIVE_RIBBON"
+    "name": "MUSCLE_BAND"
   },
   {
     "_id": { "$oid": "64e7ef36c618ca5489767062" },

@@ -503,7 +503,7 @@ export default class BattleManager {
       } else if (field === "soulDewCount") {
         pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
       } else if (field === "defensiveRibbonCount") {
-        pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, value)
+        pkm.itemsContainer.updateCount(Item.MUSCLE_BAND, value)
       } else if (field === "magmarizerCount") {
         pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
       }
