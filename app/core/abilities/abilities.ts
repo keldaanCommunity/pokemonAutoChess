@@ -7448,7 +7448,7 @@ export class RetaliateStrategy extends AbilityStrategy {
     const meter =
       pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
     const nbFallenAllies = pokemon.simulation[meter].size - nbAlliesAlive
-    const damage = pokemon.atk * 1.25
+    const damage = pokemon.atk * 1.5
 
     for (let i = 0; i <= nbFallenAllies; i++) {
       target.handleSpecialDamage(
@@ -11817,7 +11817,7 @@ export class MalignantChainStrategy extends AbilityStrategy {
     const duration = Math.round(
       3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
-    target.status.triggerLocked(duration, target)
+    target.status.triggerPossessed(duration, target, pokemon)
     const nbStacks = 3
     for (let i = 0; i < nbStacks; i++) {
       target.status.triggerPoison(duration, target, pokemon)

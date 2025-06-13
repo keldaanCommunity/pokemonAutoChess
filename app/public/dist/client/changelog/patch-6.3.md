@@ -62,12 +62,15 @@
 - Natu line is now Rare ; adjusted stats
 - Mime Jr. line is now Uncommon ; adjusted stats
 - Nerf Gholdengo: HP 230 → 220, Def & SpeDef 12 → 10
+- Change Malignant Chain (Pecharunt): now inflicts Possessed status instead of Locked
+- Buff Retaliate (Lillipup, TM): 125 → 150% of attack per fallen ally
 
 # Changes to Synergies
 
 - Nerf Dark: Crit Power +30/60/100 → +30/50/80%
 - Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
 - New: Aquatic 8 Surge Surfer: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 8 seconds for the rest of combat.
+- Change Fossil: Fossil now gain Shield instead of healing. Attack gained: +30/60/100% → +40/70/100%.
 
 # Changes to Items
 

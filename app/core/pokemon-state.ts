@@ -525,6 +525,40 @@ export default abstract class PokemonState {
         pokemon.removeItem(Item.SHINY_CHARM)
       }
 
+      if (pokemon.hasSynergyEffect(Synergy.FOSSIL) && pokemon.life - residualDamage <= 0) {
+        const shield = Math.round(pokemon.hp * (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
+          ? 1
+          : pokemon.effects.has(EffectEnum.ELDER_POWER)
+            ? 0.7
+            : 0.4))
+        const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
+          ? 1
+          : pokemon.effects.has(EffectEnum.ELDER_POWER)
+            ? 0.7
+            : 0.4
+        pokemon.addShield(shield, pokemon, 0, false)
+
+        const damageOnShield = max(shield)(residualDamage)
+
+        pokemon.shieldDamageTaken += damageOnShield
+        takenDamage += damageOnShield
+        pokemon.shield -= damageOnShield
+
+        if (residualDamage < shield) {
+          pokemon.addShield(shield - residualDamage, pokemon, 0, false)
+        }
+        takenDamage += max(shield)(residualDamage - pokemon.life)
+        pokemon.shieldDamageTaken += max(shield)(residualDamage)
+        residualDamage = min(0)(residualDamage - shield)
+
+        pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
+        pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
+        broadcastAbility(pokemon, { skill: "FOSSIL_RESURRECT" })
+        SynergyEffects[Synergy.FOSSIL].forEach((e) => {
+          pokemon.effects.delete(e)
+        })
+      }
+
       pokemon.life = Math.max(0, pokemon.life - residualDamage)
 
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
@@ -568,26 +602,8 @@ export default abstract class PokemonState {
         }
       }
 
-      if (!pokemon.life || pokemon.life <= 0) {
-        if (pokemon.hasSynergyEffect(Synergy.FOSSIL)) {
-          const healBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-            ? 1
-            : pokemon.effects.has(EffectEnum.ELDER_POWER)
-              ? 0.7
-              : 0.4
-          const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-            ? 1
-            : pokemon.effects.has(EffectEnum.ELDER_POWER)
-              ? 0.6
-              : 0.3
-          pokemon.life = pokemon.hp * healBonus
-          pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
-          pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
-          broadcastAbility(pokemon, { skill: "FOSSIL_RESURRECT" })
-          SynergyEffects[Synergy.FOSSIL].forEach((e) =>
-            pokemon.effects.delete(e)
-          )
-        } else if (pokemon.status.resurection) {
+      if (pokemon.life <= 0) {
+        if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
             if (entity && entity.targetEntityId === pokemon.id) {
