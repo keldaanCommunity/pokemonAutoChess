@@ -1725,8 +1725,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           })
 
-          // Update Bots after unown deletion so unown in bot boards are not deleted
-          this.state.botManager.updateBots()
           // Refreshes effects (Tapu Terrains, or if player lost Psychic 6 after Unown diseappeared)
           player.updateSynergies()
 
@@ -1746,6 +1744,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
       })
+      // Update Bots after unown deletion so unown in bot boards are not deleted
+      this.state.botManager.updateBots()
     }
   }
 
