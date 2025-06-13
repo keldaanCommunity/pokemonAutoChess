@@ -3,13 +3,14 @@ import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
-import { max } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
+import { values } from "../../utils/schemas"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -25,6 +26,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") resurecting = false
   @type("boolean") paralysis = false
   @type("boolean") pokerus = false
+  @type("boolean") possessed = false
   @type("boolean") locked = false
   @type("boolean") blinded = false
   @type("boolean") armorReduction = false
@@ -37,6 +39,7 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
   @type("boolean") magicBounce = false
+  @type("boolean") reflect = false
   @type("boolean") light = false
   @type("boolean") curse = false
   @type("boolean") curseVulnerability = false
@@ -51,6 +54,7 @@ export default class Status extends Schema implements IStatus {
   silenceOrigin: PokemonEntity | undefined = undefined
   woundOrigin: PokemonEntity | undefined = undefined
   charmOrigin: PokemonEntity | undefined = undefined
+  possessedOrigin: PokemonEntity | undefined = undefined
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -70,9 +74,11 @@ export default class Status extends Schema implements IStatus {
   enrageCooldown = 0
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
+  reflectCooldown = 0
   resurectingCooldown = 0
   curseCooldown = 0
   pokerusCooldown = 2500
+  possessedCooldown = 0
   lockedCooldown = 0
   blindCooldown = 0
   enrageDelay = 35000
@@ -98,6 +104,7 @@ export default class Status extends Schema implements IStatus {
     this.armorReductionCooldown = 0
     this.curseCooldown = 0
     this.curse = false
+    this.possessedCooldown = 0
     this.lockedCooldown = 0
     this.blindCooldown = 0
   }
@@ -118,7 +125,8 @@ export default class Status extends Schema implements IStatus {
       this.armorReduction ||
       this.curse ||
       this.locked ||
-      this.blinded
+      this.blinded ||
+      this.possessed
     )
   }
 
@@ -187,6 +195,10 @@ export default class Status extends Schema implements IStatus {
       this.updateLocked(dt, pokemon)
     }
 
+    if (this.possessed) {
+      this.updatePossessed(dt, pokemon)
+    }
+
     if (this.blinded) {
       this.updateBlinded(dt)
     }
@@ -213,6 +225,10 @@ export default class Status extends Schema implements IStatus {
 
     if (this.magicBounce) {
       this.updateMagicBounce(dt)
+    }
+
+    if (this.reflect) {
+      this.updateReflect(dt)
     }
 
     if (this.resurecting) {
@@ -487,7 +503,15 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
+      let poisonDamage = pkm.hp * 0.05 * this.poisonStacks
+
+      if (
+        pkm.passive === Passive.GLISCOR ||
+        pkm.passive === Passive.GLIGAR
+      ) {
+        poisonDamage = pkm.hp * 0.05 * (this.poisonStacks - 2)
+      }
+
       if (pkm.simulation.weather === Weather.RAIN) {
         poisonDamage *= 0.7
       }
@@ -499,14 +523,11 @@ export default class Status extends Schema implements IStatus {
         poisonDamage *= 0.5
       }
 
-      if (
-        pkm.passive === Passive.POISON_HEAL ||
-        pkm.passive === Passive.GLIGAR
-      ) {
-        pkm.handleHeal(Math.round(poisonDamage), pkm, 0, false)
-      } else {
+      if (poisonDamage < 0) {
+        pkm.handleHeal(Math.round(-poisonDamage), pkm, 0, false)
+      } else if (poisonDamage > 0) {
         pkm.handleDamage({
-          damage: Math.round(poisonDamage),
+          damage: min(1)(Math.round(poisonDamage)),
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
@@ -692,10 +713,7 @@ export default class Status extends Schema implements IStatus {
       this.charm = true
       this.charmCooldown = duration
       this.charmOrigin = origin
-      if (origin) {
-        pkm.targetX = origin?.positionX
-        pkm.targetY = origin?.positionY
-      }
+      pkm.setTarget(origin)
     }
   }
 
@@ -854,6 +872,21 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
+  triggerReflect(timer: number) {
+    this.reflect = true
+    if (timer > this.reflectCooldown) {
+      this.reflectCooldown = timer
+    }
+  }
+
+  updateReflect(dt: number) {
+    if (this.reflectCooldown - dt <= 0) {
+      this.reflect = false
+    } else {
+      this.reflectCooldown -= dt
+    }
+  }
+
   addResurrection(pokemon: IPokemonEntity) {
     if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot be resurrected
     this.resurection = true
@@ -970,6 +1003,42 @@ export default class Status extends Schema implements IStatus {
         pokemon.baseRange + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
     } else {
       this.lockedCooldown -= dt
+    }
+  }
+
+  triggerPossessed(duration: number, pkm: PokemonEntity, origin: PokemonEntity) {
+    if (!this.runeProtect) {
+      const pkmTeam = pkm.team === Team.RED_TEAM ? pkm.simulation.redTeam : pkm.simulation.blueTeam
+      if (values(pkmTeam).some(p => p.id !== pkm.id && !p.status.possessed)) {
+        this.possessed = true
+        duration = this.applyAquaticReduction(duration, pkm)
+        pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+        pkm.setTarget(null) // force retargetting
+        origin.setTarget(null) // force retargetting
+        this.possessedCooldown = Math.max(Math.round(duration), this.possessedCooldown)
+        this.possessedOrigin = origin
+      } else {
+        this.triggerCharm(duration, pkm, origin, false)
+      }
+    }
+  }
+
+  updatePossessed(dt: number, pkm: PokemonEntity) {
+    const otherTeam = pkm.team === Team.RED_TEAM ? pkm.simulation.blueTeam : pkm.simulation.redTeam
+    const possessedCount = values(otherTeam).filter((pokemon) => pokemon.status.possessed).length
+    const lastAliveArePossessed = possessedCount === otherTeam.size
+
+    this.possessedCooldown -= dt
+
+    if (this.possessedCooldown <= 0 || lastAliveArePossessed) {
+      this.possessed = false
+      pkm.team = pkm.team === Team.RED_TEAM ? Team.BLUE_TEAM : Team.RED_TEAM
+
+      if (lastAliveArePossessed && this.possessedCooldown > 0 && this.possessedOrigin) {
+        pkm.status.triggerCharm(this.possessedCooldown, pkm, this.possessedOrigin, false)
+      }
+
+      pkm.setTarget(null) // force retargeting
     }
   }
 

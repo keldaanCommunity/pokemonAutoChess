@@ -363,7 +363,7 @@ export default class AnimationManager {
         : "0000"
     const tint =
       entity.shiny &&
-      !AnimationConfig[PkmByIndex[entity.index]].shinyUnavailable
+        !AnimationConfig[PkmByIndex[entity.index]].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`

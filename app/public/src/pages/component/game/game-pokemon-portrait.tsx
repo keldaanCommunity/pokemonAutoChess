@@ -54,6 +54,7 @@ export default function GamePokemonPortrait(props: {
     (state) => state.game.players.find((p) => p.id === uid)?.board
   )
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
 
   const isOnAnotherBoard = currentPlayerId !== uid
 
@@ -116,7 +117,7 @@ export default function GamePokemonPortrait(props: {
     pokemonEvolution.hasEvolution
   ) {
     const evolutionName2 = currentPlayer
-      ? pokemonEvolution.evolutionRule.getEvolution(pokemonEvolution, currentPlayer)
+      ? pokemonEvolution.evolutionRule.getEvolution(pokemonEvolution, currentPlayer, stageLevel)
       : pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution
     pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
   }

@@ -82,7 +82,7 @@ export class CountEvolutionRule extends EvolutionRule {
 
   constructor(
     numberRequired: number,
-    divergentEvolution?: (pokemon: Pokemon, player: IPlayer) => Pkm
+    divergentEvolution?: (pokemon: Pokemon, player: IPlayer, stageLevel: number) => Pkm
   ) {
     super(divergentEvolution)
     this.numberRequired = numberRequired

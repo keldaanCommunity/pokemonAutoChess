@@ -347,6 +347,7 @@ export default abstract class PokemonState {
 
     if (pokemon.life === 0) {
       death = true
+      pokemon.status.possessedCooldown = 0
     } else if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false
       takenDamage = 0
@@ -408,6 +409,23 @@ export default abstract class PokemonState {
         const swap = def
         def = speDef
         speDef = swap
+      }
+
+      if (pokemon.status.reflect && attackType === AttackType.PHYSICAL) {
+        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS) === false) {
+          const crit =
+            pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
+            chance(pokemon.critChance, pokemon)
+          const reflectDamage = Math.round(0.5 * damage * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+          attacker.handleDamage({
+            damage: reflectDamage,
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+        }
+        return { death: false, takenDamage: 0 }
       }
 
       let reducedDamage = damage
@@ -572,11 +590,7 @@ export default abstract class PokemonState {
         } else if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
-            if (
-              entity &&
-              entity.targetX === pokemon.positionX &&
-              entity.targetY === pokemon.positionY
-            ) {
+            if (entity && entity.targetEntityId === pokemon.id) {
               // switch aggro immediately to reduce retarget lag after resurection
               entity.cooldown = 0
               entity.toMovingState()
@@ -630,7 +644,8 @@ export default abstract class PokemonState {
           effectsRemovedList.push(EffectEnum.MISTY_TERRAIN)
         }
 
-        if (pokemon.team == Team.BLUE_TEAM) {
+        const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
+        if (originalTeam == Team.BLUE_TEAM) {
           effectsRemovedList.forEach((x) =>
             pokemon.simulation.blueEffects.delete(x)
           )
@@ -913,16 +928,16 @@ export default abstract class PokemonState {
     return targets
   }
 
-  /* NOTE: getNearestTargetAtRangeCoordinates require another algorithm that getNearestTargetCoordinate
+  /* NOTE: getNearestTargetAtRange require another algorithm that getNearestTargetCoordinate
   because it used Chebyshev distance instead of Manhattan distance
   more info here: https://discord.com/channels/737230355039387749/1183398539456413706 */
-  getNearestTargetAtRangeCoordinates(
+  getNearestTargetAtRange(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
+  ): PokemonEntity | undefined {
     const targets = this.getTargetsAtRange(pokemon, board)
-    let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = []
+    let distance = pokemon.range + 1
+    let candidates: PokemonEntity[] = []
     for (const target of targets) {
       const candidateDistance = distanceC(
         pokemon.positionX,
@@ -932,13 +947,13 @@ export default abstract class PokemonState {
       )
       if (candidateDistance < distance) {
         distance = candidateDistance
-        candidatesCoordinates = [{ x: target.positionX, y: target.positionY }]
+        candidates = [target]
       } else if (candidateDistance == distance) {
-        candidatesCoordinates.push({ x: target.positionX, y: target.positionY })
+        candidates.push(target)
       }
     }
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+    if (candidates.length > 0) {
+      return pickRandomIn(candidates)
     } else {
       return undefined
     }
@@ -1083,21 +1098,18 @@ export default abstract class PokemonState {
     return pickRandomIn(candidateCells)
   }
 
-  getTargetCoordinateWhenConfused(
+  getTargetWhenConfused(
     pokemon: PokemonEntity,
     board: Board
-  ): { x: number; y: number } | undefined {
-    let distance = 999
-    let candidatesCoordinates: { x: number; y: number }[] = new Array<{
-      x: number
-      y: number
-    }>()
+  ): PokemonEntity | undefined {
+    let distance = pokemon.range + 1
+    let candidates: PokemonEntity[] = []
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+    board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) => {
       if (
-        value &&
-        value.id !== pokemon.id &&
-        value.isTargettableBy(pokemon, true, true)
+        pkm &&
+        pkm.id !== pokemon.id &&
+        pkm.isTargettableBy(pokemon, true, true)
       ) {
         const candidateDistance = distanceM(
           pokemon.positionX,
@@ -1107,17 +1119,17 @@ export default abstract class PokemonState {
         )
         if (candidateDistance < distance) {
           distance = candidateDistance
-          candidatesCoordinates = [{ x, y }]
+          candidates = [pkm]
         } else if (candidateDistance == distance) {
-          candidatesCoordinates.push({ x, y })
+          candidates.push(pkm)
         }
       }
     })
 
-    candidatesCoordinates.push({ x: pokemon.positionX, y: pokemon.positionY }) // sometimes attack itself when confused
+    candidates.push(pokemon) // sometimes attack itself when confused
 
-    if (candidatesCoordinates.length > 0) {
-      return pickRandomIn(candidatesCoordinates)
+    if (candidates.length > 0) {
+      return pickRandomIn(candidates)
     } else {
       return undefined
     }

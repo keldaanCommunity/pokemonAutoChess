@@ -42,7 +42,7 @@ export default function ImportBotModal(props: {
       className="bot-import-modal"
       header={t("import")}
       body={<>
-        <p>{t("get_started_bot")}</p>
+        <p>{t("import_bot")}</p>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5em", marginBottom: "0.5em" }}>
           <label htmlFor="bot_select">{t("existing_bot")}</label>
           <select
@@ -66,12 +66,15 @@ export default function ImportBotModal(props: {
             ))}
           </select>
         </div>
-        <textarea
-          rows={10}
-          value={textArea}
-          onChange={(e) => handleTextAreaChange(e.target.value)}
-        ></textarea>
-        {jsonError && <p className="error">{jsonError}</p>}
+        <details>
+          <summary>Bot code</summary>
+          <textarea
+            rows={10}
+            value={textArea}
+            onChange={(e) => handleTextAreaChange(e.target.value)}
+          ></textarea>
+          {jsonError && <p className="error">{jsonError}</p>}
+        </details>
       </>}
       footer={<>
         <button

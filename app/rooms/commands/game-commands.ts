@@ -1163,8 +1163,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case EffectEnum.CALM_MIND:
             player.titles.add(Title.RIVAL)
             break
-          case EffectEnum.WATER_VEIL:
-            player.titles.add(Title.DIVER)
+          case EffectEnum.SURGE_SURFER:
+            player.titles.add(Title.SURFER)
             break
           case EffectEnum.HEART_OF_THE_SWARM:
             player.titles.add(Title.BUG_MANIAC)
@@ -1510,7 +1510,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (dish && nbDishes > 0) {
             let dishes = Array.from({ length: nbDishes }, () => dish!)
             if (dish === Item.BERRIES) {
-              dishes = pickNRandomIn(Berries, nbDishes)
+              dishes = pickNRandomIn(Berries, 3 * nbDishes)
             }
             if (dish === Item.SWEETS) {
               dishes = pickNRandomIn(Sweets, nbDishes)

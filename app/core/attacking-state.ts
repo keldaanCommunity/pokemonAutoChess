@@ -25,10 +25,6 @@ export default class AttackingState extends PokemonState {
 
       // first, try to hit the same target than previous attack
       let target = board.getValue(pokemon.targetX, pokemon.targetY)
-      let targetCoordinate: { x: number; y: number } | undefined = {
-        x: pokemon.targetX,
-        y: pokemon.targetY
-      }
 
       if (pokemon.effects.has(EffectEnum.MERCILESS)) {
         const candidates = this.getTargetsAtRange(pokemon, board)
@@ -37,44 +33,34 @@ export default class AttackingState extends PokemonState {
           if (candidate.life + candidate.shield < minLife) {
             minLife = candidate.life + candidate.shield
             target = candidate
-            targetCoordinate = {
-              x: candidate.positionX,
-              y: candidate.positionY
-            }
           }
         }
       } else if (pokemon.status.confusion) {
-        targetCoordinate = this.getTargetCoordinateWhenConfused(pokemon, board)
-      } else if (
-        !(
-          target &&
-          target.isTargettableBy(pokemon) &&
-          distanceC(
+        target = this.getTargetWhenConfused(pokemon, board)
+      } else if(!target || target.id !== pokemon.targetEntityId){
+        // previous target has moved, check if still at range
+        const previousTarget = pokemon.simulation.blueTeam.get(pokemon.targetEntityId) || pokemon.simulation.redTeam.get(pokemon.targetEntityId)
+        if(previousTarget && previousTarget.isTargettableBy(pokemon) && distanceC(
             pokemon.positionX,
             pokemon.positionY,
-            targetCoordinate.x,
-            targetCoordinate.y
-          ) <= pokemon.range
-        )
-      ) {
-        // if target is no longer alive or at range, retargeting
-        targetCoordinate = this.getNearestTargetAtRangeCoordinates(
-          pokemon,
-          board
-        )
-        if (targetCoordinate) {
-          target = board.getValue(targetCoordinate.x, targetCoordinate.y)
-        }
+            previousTarget?.positionX,
+            previousTarget?.positionY
+          ) <= pokemon.range){
+            // updating target coordinates
+            target = previousTarget as PokemonEntity
+          } else {
+             // if target is no longer alive or at range, retargeting
+            target = this.getNearestTargetAtRange(pokemon,board)
+          }
       }
 
       // no target at range, changing to moving state
-      if (!target || !targetCoordinate || pokemon.status.charm) {
+      if (!target || pokemon.status.charm) {
         const targetAtSight = this.getNearestTargetAtSight(pokemon, board)
         if (targetAtSight) {
           pokemon.toMovingState()
         }
       } else if (
-        target &&
         pokemon.pp >= pokemon.maxPP &&
         !pokemon.status.silence
       ) {
@@ -91,13 +77,14 @@ export default class AttackingState extends PokemonState {
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++
-        pokemon.targetX = targetCoordinate.x
-        pokemon.targetY = targetCoordinate.y
+        pokemon.targetX = target.positionX
+        pokemon.targetY = target.positionY
+        pokemon.targetEntityId = target.id
         pokemon.orientation = board.orientation(
           pokemon.positionX,
           pokemon.positionY,
-          targetCoordinate.x,
-          targetCoordinate.y,
+          pokemon.targetX,
+          pokemon.targetY,
           pokemon,
           target
         )
@@ -125,8 +112,7 @@ export default class AttackingState extends PokemonState {
 
   onExit(pokemon) {
     super.onExit(pokemon)
-    pokemon.targetX = -1
-    pokemon.targetY = -1
+    pokemon.setTarget(null)
   }
 }
 

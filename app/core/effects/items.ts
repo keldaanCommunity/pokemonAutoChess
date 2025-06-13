@@ -357,7 +357,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.DEFENSIVE_RIBBON]: [
+  [Item.MUSCLE_BAND]: [
     new OnItemRemovedEffect((pokemon) => {
       const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)

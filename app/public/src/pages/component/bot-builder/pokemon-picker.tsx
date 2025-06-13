@@ -32,7 +32,7 @@ export default function PokemonPicker(props: {
   const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
   const pokemonsPerTab: IPokemonData[][] = tabs.map((t) =>
     (t === "none"
-      ? [Pkm.KECLEON, Pkm.ARCEUS]
+      ? [Pkm.KECLEON, Pkm.ARCEUS, Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
     ).map((p) => getPokemonData(p))
   )
@@ -98,8 +98,8 @@ function PokemonPickerTab(props: {
   const filteredPokemons = props.pokemons
     .filter(p => overlap ? p.types.includes(overlap) : true)
     .filter((p) => {
-      if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
+      if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (preferences.showEvolutions) return true
       else return p.name === PkmFamily[p.name]
     })

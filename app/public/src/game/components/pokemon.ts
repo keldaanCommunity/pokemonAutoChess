@@ -11,8 +11,8 @@ import {
   type IPokemonEntity
 } from "../../../../types"
 import {
-    CELL_VISUAL_HEIGHT,
-    CELL_VISUAL_WIDTH,
+  CELL_VISUAL_HEIGHT,
+  CELL_VISUAL_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER
 } from "../../../../types/Config"
@@ -103,6 +103,7 @@ export default class PokemonSprite extends DraggableObject {
   confusion: GameObjects.Sprite | undefined
   paralysis: GameObjects.Sprite | undefined
   pokerus: GameObjects.Sprite | undefined
+  possessed: GameObjects.Sprite | undefined
   locked: GameObjects.Sprite | undefined
   blinded: GameObjects.Sprite | undefined
   armorReduction: GameObjects.Sprite | undefined
@@ -113,8 +114,7 @@ export default class PokemonSprite extends DraggableObject {
   protect: GameObjects.Sprite | undefined
   resurection: GameObjects.Sprite | undefined
   runeProtect: GameObjects.Sprite | undefined
-  spikeArmor: GameObjects.Sprite | undefined
-  magicBounce: GameObjects.Sprite | undefined
+  reflectShield: GameObjects.Sprite | undefined
   electricField: GameObjects.Sprite | undefined
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
@@ -863,6 +863,26 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
+  addPossessed() {
+    if (!this.possessed) {
+      this.possessed = this.scene.add
+        .sprite(-16, -24, "status", "POSSESSED/000.png")
+        .setScale(2)
+      this.possessed.anims.play("POSSESSED")
+      this.sprite.setTint(0xff50ff)
+      this.add(this.possessed)
+      //this.bringToTop(this.sprite)
+    }
+  }
+
+  removePossessed() {
+    if (this.possessed) {
+      this.sprite.clearTint()
+      this.remove(this.possessed, true)
+      this.possessed = undefined
+    }
+  }
+
   addLocked() {
     if (!this.locked) {
       this.locked = this.scene.add
@@ -1104,38 +1124,21 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addSpikeArmor() {
-    if (!this.spikeArmor) {
-      this.spikeArmor = this.scene.add
+  addReflectShieldAnim(colorVariation = 0xffffff) {
+    if (!this.reflectShield) {
+      this.reflectShield = this.scene.add
         .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)
         .setScale(2)
-      this.spikeArmor.anims.play(Ability.SPIKY_SHIELD)
-      this.add(this.spikeArmor)
+        .setTint(colorVariation)
+      this.reflectShield.anims.play(Ability.SPIKY_SHIELD)
+      this.add(this.reflectShield)
     }
   }
 
-  removeSpikeArmor() {
-    if (this.spikeArmor) {
-      this.remove(this.spikeArmor, true)
-      this.spikeArmor = undefined
-    }
-  }
-
-  addMagicBounce() {
-    if (!this.magicBounce) {
-      this.magicBounce = this.scene.add
-        .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)
-        .setScale(2)
-        .setTint(0xffa0ff)
-      this.magicBounce.anims.play(Ability.MAGIC_BOUNCE)
-      this.add(this.magicBounce)
-    }
-  }
-
-  removeMagicBounce() {
-    if (this.magicBounce) {
-      this.remove(this.magicBounce, true)
-      this.magicBounce = undefined
+  removeReflectShieldAnim() {
+    if (this.reflectShield) {
+      this.remove(this.reflectShield, true)
+      this.reflectShield = undefined
     }
   }
 

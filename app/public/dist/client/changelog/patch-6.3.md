@@ -16,6 +16,12 @@
 - Minccino
 - Cinccino
 - Surfing Pikachu
+- Espurr
+- Meowstic (Male)
+- Meowstic (Female)
+- Munkidori 
+- Fezandipiti
+- Okidogi
 
 # Changes to Pokemon & Abilities
 
@@ -48,12 +54,20 @@
 - Nerf Yanma line passive: +2 → +1 speed per second
 - Change Armor Cannon (Armarouge): number of secondary targets no longer scale with AP; final damage: 10 → 15 ; fixed incorrect damage numbers in the description
 - Adjust Trapinch line: HP 80/120/180 → 70/120/190 ; Def/Spedef 8/8/8 → 2/5/8
+- Tropius gourmet dish now give 3 berries instead of 1
+- Change Vanillite line: Attack 5/9/20 → 6/12/24, freeze duration 2 → 3 seconds, no longer scales with AP
+- Nerf Mega Sableye: Attack 14 → 13, Def/Spedef 15/15 → 12/12
+- Bidoof is now additional pick and no longer Wild ; adjusted stats: HP 60/135 → 65/140, Attack 6/15 → 7/16, Def/Spedef: 4/4 → 4/6 ; change Super Fang: deals 25% of the target's max HP as true damage
+- Change Gliscor passive: ~~Poison heals instead of damaging~~ First stack of poison on Gliscor is healing. Poison damage is still applied on subsequent stacks.
+- Natu line is now Rare ; adjusted stats
+- Mime Jr. line is now Uncommon ; adjusted stats
+- Nerf Gholdengo: HP 230 → 220, Def & SpeDef 12 → 10
 
 # Changes to Synergies
 
 - Nerf Dark: Crit Power +30/60/100 → +30/50/80%
 - Change Water Good Rod fishing rarity: Special 30 → 35%, Common 30 → 25%
-- Aquatic 8: (8) Summer Break: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 8 seconds for the rest of combat.
+- New: Aquatic 8 Surge Surfer: After the first wave, a Surfing Pikachu joins you in battle. Waves after the first hit every 8 seconds for the rest of combat.
 
 # Changes to Items
 
@@ -62,7 +76,9 @@
 - Buff Berry Sweet: 10 → 15 permanent HP
 - Buff Berry Juice: 80 → 100 shield
 - Buff Smoked Filet: gain 3 → 5 attack and 5 → 10 AP
+- Buff Rock Salt: Rune protect duration 8 → 10 seconds
 - Buff Spindas Cocktail possible positive effects: attack 5 → 10, AP 25 → 50, speed 25 → 50, shield 50 → 100
+- Change Binding Mochi: now inflicts Possessed status for 5 seconds
 - Nerf Comet Shard: Protect duration 3 → 2 seconds
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
@@ -71,8 +87,10 @@
 
 # Gameplay
 
- - New Title: Surfer: Surf with Pikachu Surfer.
-- Change Paralysis: 50 -> 50% speed reduction
+- Targeting changes: units now seek to continue targeting the same enemy if it moves, unless it moves out of their attack range. If the enemy moves out of their range, they will choose another target randomly among the nearest ones.
+- New status Possessed: temporarely fight for the other team.
+- New Title: Surfer: Surf with Pikachu Surfer.
+- Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 
 # UI
 

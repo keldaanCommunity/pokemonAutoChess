@@ -2,7 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-areas: "synergies actions selected" "synergies board selected" "pokemons pokemons items";
-  grid-template-columns: 250px 1fr 330px;
+  grid-template-columns: 250px 1fr 350px;
   grid-template-rows: min-content 1fr 420px;
   min-width: 1400px;
   gap: 5px;
@@ -175,7 +175,7 @@
 
 #rarity-grid {
   display: grid;
-  grid-template: auto / 8ch 1fr 8ch 1fr;
+  grid-template: auto / 8ch 2fr 8ch 1fr;
   margin: 0;
   gap: 0 0.5em;
 }

@@ -246,6 +246,12 @@ export default class BattleManager {
         } else {
           pkm.removePokerus()
         }
+      } else if (field === "possessed") {
+        if (pokemon.status.possessed) {
+          pkm.addPossessed()
+        } else {
+          pkm.removePossessed()
+        }
       } else if (field === "locked") {
         if (pokemon.status.locked) {
           pkm.addLocked()
@@ -306,15 +312,21 @@ export default class BattleManager {
         }
       } else if (field === "spikeArmor") {
         if (pokemon.status.spikeArmor) {
-          pkm.addSpikeArmor()
+          pkm.addReflectShieldAnim()
         } else {
-          pkm.removeSpikeArmor()
+          pkm.removeReflectShieldAnim()
         }
       } else if (field === "magicBounce") {
         if (pokemon.status.magicBounce) {
-          pkm.addMagicBounce()
+          pkm.addReflectShieldAnim(0xffa0ff)
         } else {
-          pkm.removeMagicBounce()
+          pkm.removeReflectShieldAnim()
+        }
+      } else if (field === "reflect") {
+        if (pokemon.status.reflect) {
+          pkm.addReflectShieldAnim(0xff3030)
+        } else {
+          pkm.removeReflectShieldAnim()
         }
       } else if (field === "electricField") {
         if (pokemon.status.electricField) {
@@ -491,7 +503,7 @@ export default class BattleManager {
       } else if (field === "soulDewCount") {
         pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
       } else if (field === "defensiveRibbonCount") {
-        pkm.itemsContainer.updateCount(Item.DEFENSIVE_RIBBON, value)
+        pkm.itemsContainer.updateCount(Item.MUSCLE_BAND, value)
       } else if (field === "magmarizerCount") {
         pkm.itemsContainer.updateCount(Item.MAGMARIZER, value)
       }

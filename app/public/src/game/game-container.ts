@@ -147,9 +147,11 @@ class GameContainer {
       "spikeArmor",
       "wound",
       "enraged",
+      "possessed",
       "locked",
       "blinded",
       "magicBounce",
+      "reflect",
       "tree"
     ]
 

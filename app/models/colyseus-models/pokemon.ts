@@ -904,7 +904,7 @@ export class Meditite extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.MEDITATE
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -924,7 +924,7 @@ export class Medicham extends Pokemon {
   speDef = 12
   maxPP = 100
   range = 2
-  skill = Ability.CALM_MIND
+  skill = Ability.MEDITATE
   attackSprite = AttackSprite.PSYCHIC_RANGE
   additional = true
 }
@@ -3108,7 +3108,7 @@ export class Vanillite extends Pokemon {
   stars = 1
   evolution = Pkm.VANILLISH
   hp = 70
-  atk = 5
+  atk = 6
   speed = 50
   def = 4
   speDef = 4
@@ -3128,7 +3128,7 @@ export class Vanillish extends Pokemon {
   stars = 2
   evolution = Pkm.VANILLUXE
   hp = 130
-  atk = 9
+  atk = 12
   speed = 50
   def = 4
   speDef = 4
@@ -3147,7 +3147,7 @@ export class Vanilluxe extends Pokemon {
   rarity = Rarity.RARE
   stars = 3
   hp = 230
-  atk = 20
+  atk = 24
   speed = 50
   def = 4
   speDef = 4
@@ -5250,9 +5250,6 @@ export class PikachuSurfer extends Pokemon {
   range = 1
   skill = Ability.SURF
   attackSprite = AttackSprite.ELECTRIC_MELEE
-  onAcquired(player: Player) {
-    player.titles.add(Title.SURFER)
-  }
   passive = Passive.PIKACHU_SURFER
 }
 
@@ -7747,7 +7744,7 @@ export class Gliscor extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
-  passive = Passive.POISON_HEAL
+  passive = Passive.GLISCOR
   attackSprite = AttackSprite.ROCK_MELEE
 }
 
@@ -8650,12 +8647,12 @@ export class Gourgeist extends Pokemon {
 
 export class Natu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.XATU
   hp = 90
   atk = 5
-  speed = 55
+  speed = 60
   def = 4
   speDef = 4
   maxPP = 70
@@ -8666,13 +8663,13 @@ export class Natu extends Pokemon {
 }
 export class Xatu extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FLYING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 2
-  hp = 180
-  atk = 11
-  speed = 55
-  def = 6
-  speDef = 6
+  hp = 200
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
   maxPP = 70
   range = 2
   skill = Ability.MAGIC_BOUNCE
@@ -9342,14 +9339,14 @@ export class Jynx extends Pokemon {
 
 export class MimeJr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.PSYCHIC, Synergy.BABY])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.MR_MIME
-  hp = 70
-  atk = 6
+  hp = 60
+  atk = 5
   speed = 54
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.MIMIC
@@ -9363,13 +9360,13 @@ export class MrMime extends Pokemon {
     Synergy.PSYCHIC,
     Synergy.HUMAN
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 200
-  atk = 14
+  hp = 150
+  atk = 11
   speed = 54
   def = 4
-  speDef = 8
+  speDef = 7
   maxPP = 80
   range = 2
   skill = Ability.MIMIC
@@ -12438,10 +12435,10 @@ export class MegaSableye extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 200
-  atk = 14
+  atk = 13
   speed = 31
-  def = 15
-  speDef = 15
+  def = 12
+  speDef = 12
   maxPP = 100
   range = 1
   skill = Ability.KNOCK_OFF
@@ -12707,15 +12704,14 @@ export class AlolanExeggutor extends Pokemon {
 
 export class Bidoof extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.WILD,
     Synergy.NORMAL,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BIBAREL
-  hp = 60
-  atk = 6
+  hp = 65
+  atk = 7
   speed = 48
   def = 4
   speDef = 4
@@ -12723,25 +12719,26 @@ export class Bidoof extends Pokemon {
   range = 1
   skill = Ability.SUPER_FANG
   attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
 }
 
 export class Bibarel extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.WILD,
     Synergy.NORMAL,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 135
-  atk = 15
+  hp = 140
+  atk = 16
   speed = 48
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 6
   maxPP = 80
   range = 1
   skill = Ability.SUPER_FANG
   attackSprite = AttackSprite.NORMAL_MELEE
+  additional = true
 }
 
 export class Spinda extends Pokemon {
@@ -13864,11 +13861,11 @@ export class Gholdengo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.STEEL])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 230
+  hp = 220
   atk = 20
   speed = 52
-  def = 12
-  speDef = 12
+  def = 10
+  speDef = 10
   maxPP = 90
   range = 1
   skill = Ability.MAKE_IT_RAIN
@@ -18721,6 +18718,116 @@ export class Cinccino extends Pokemon {
   }
 }
 
+export class Espurr extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  evolutions = [Pkm.MEOWSTIC_MALE, Pkm.MEOWSTIC_FEMALE]
+  evolutionRule = new CountEvolutionRule(3, (pokemon, player, stageLevel: number) => {
+    const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
+    const fieldCount = player.synergies.get(Synergy.FIELD) ?? 0
+    return psychicCount >= fieldCount ? Pkm.MEOWSTIC_MALE : Pkm.MEOWSTIC_FEMALE
+  })
+  stars = 1
+  hp = 80
+  atk = 3
+  speed = 66
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.REFLECT
+  passive = Passive.ESPURR
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class MeowsticMale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 8
+  speed = 66
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.REFLECT
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class MeowsticFemale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIELD, Synergy.PSYCHIC])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 8
+  speed = 66
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.STORED_POWER
+  attackSprite = AttackSprite.PSYCHIC_MELEE
+}
+
+export class Okidogi extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.WILD
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 28
+  speed = 51
+  def = 12
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.CHAIN_CRAZED
+  attackSprite = AttackSprite.POISON_MELEE
+}
+
+export class Munkidori extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.PSYCHIC,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 22
+  speed = 68
+  def = 10
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.MIND_BEND
+  attackSprite = AttackSprite.POISON_MELEE
+}
+
+export class Fezandipiti extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FAIRY,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 22
+  speed = 63
+  def = 8
+  speDef = 14
+  maxPP = 80
+  range = 2
+  skill = Ability.DISARMING_VOICE
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
+
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19701,7 +19808,13 @@ export const PokemonClasses: Record<
   [Pkm.PURUGLY]: Purugly,
   [Pkm.MINCCINO]: Minccino,
   [Pkm.CINCCINO]: Cinccino,
-  [Pkm.PIKACHU_SURFER]: PikachuSurfer
+  [Pkm.PIKACHU_SURFER]: PikachuSurfer,
+  [Pkm.ESPURR]: Espurr,
+  [Pkm.MEOWSTIC_MALE]: MeowsticMale,
+  [Pkm.MEOWSTIC_FEMALE]: MeowsticFemale,
+  [Pkm.OKIDOGI]: Okidogi,
+  [Pkm.MUNKIDORI]: Munkidori,
+  [Pkm.FEZANDIPITI]: Fezandipiti
 }
 
 // declare all the classes in colyseus schema TypeRegistry
