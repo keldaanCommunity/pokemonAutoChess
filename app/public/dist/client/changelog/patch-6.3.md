@@ -94,6 +94,7 @@
 - New status Possessed: temporarely fight for the other team.
 - New Title: Surfer: Surf with Pikachu Surfer.
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
+- Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
 
 # UI
 

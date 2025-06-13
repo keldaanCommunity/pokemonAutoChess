@@ -283,8 +283,10 @@ export default class Status extends Schema implements IStatus {
     if (!this.enraged) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(100, pokemon, 0, false)
+      pokemon.addSpeed(80, pokemon, 0, false)
       this.enrageCooldown = duration
+      this.sleepCooldown = Math.floor(this.sleepCooldown * 0.5) // Rage reduces sleep duration by half
+      this.freezeCooldown = Math.floor(this.freezeCooldown * 0.5) // Rage reduces freeze duration by half
     } else if (duration > this.enrageCooldown) {
       this.enrageCooldown = duration
     }
@@ -298,14 +300,14 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(100, pokemon, 0, false)
+      pokemon.addSpeed(80, pokemon, 0, false)
     } else if (
       this.enraged &&
       this.enrageCooldown - dt <= 0 &&
       this.enrageDelay - dt > 0
     ) {
       this.enraged = false
-      pokemon.addSpeed(-100, pokemon, 0, false)
+      pokemon.addSpeed(-80, pokemon, 0, false)
     }
 
     this.enrageDelay -= dt
