@@ -18770,6 +18770,63 @@ export class MeowsticFemale extends Pokemon {
   attackSprite = AttackSprite.PSYCHIC_MELEE
 }
 
+export class Okidogi extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FIGHTING,
+    Synergy.WILD
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 28
+  speed = 51
+  def = 12
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.CHAIN_CRAZED
+  attackSprite = AttackSprite.POISON_MELEE
+}
+
+export class Munkidori extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.PSYCHIC,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 22
+  speed = 68
+  def = 10
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.MIND_BEND
+  attackSprite = AttackSprite.POISON_MELEE
+}
+
+export class Fezandipiti extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.FAIRY,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 22
+  speed = 63
+  def = 8
+  speDef = 14
+  maxPP = 80
+  range = 2
+  skill = Ability.DISARMING_VOICE
+  attackSprite = AttackSprite.FAIRY_RANGE
+}
+
 
 export const PokemonClasses: Record<
   Pkm,
@@ -19754,7 +19811,10 @@ export const PokemonClasses: Record<
   [Pkm.PIKACHU_SURFER]: PikachuSurfer,
   [Pkm.ESPURR]: Espurr,
   [Pkm.MEOWSTIC_MALE]: MeowsticMale,
-  [Pkm.MEOWSTIC_FEMALE]: MeowsticFemale
+  [Pkm.MEOWSTIC_FEMALE]: MeowsticFemale,
+  [Pkm.OKIDOGI]: Okidogi,
+  [Pkm.MUNKIDORI]: Munkidori,
+  [Pkm.FEZANDIPITI]: Fezandipiti
 }
 
 // declare all the classes in colyseus schema TypeRegistry

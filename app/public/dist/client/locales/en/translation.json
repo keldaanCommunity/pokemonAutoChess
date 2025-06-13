@@ -484,7 +484,9 @@
 		"TWIN_BEAM": "Twin Beam",
 		"SWAGGER": "Swagger",
 		"ENCORE": "Encore",
-		"STORED_POWER": "Stored Power"
+		"STORED_POWER": "Stored Power",
+		"MIND_BEND": "Mind Bend",
+		"CHAIN_CRAZED": "Chain Crazed"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1464,13 +1466,14 @@
 		"INDEEDEE_MALE": "Indeedee ♂",
 		"INDEEDEE_FEMALE": "Indeedee ♀",
 		"SCREAM_TAIL": "Scream Tail",
-		"MUNKIDORI": "Munkidori",
-		"FEZANDIPITI": "Fezandipiti",
 		"GIRAFARIG": "Girafarig",
 		"FARIGIRAF": "Farigiraf",
 		"SURSKIT": "Surskit",
 		"MASQUERAIN": "Masquerain",
-		"WYRDEER": "Wyrdeer"
+		"WYRDEER": "Wyrdeer",
+		"OKIDOGI": "Okidogi",
+		"MUNKIDORI": "Munkidori",
+		"FEZANDIPITI": "Fezandipiti"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1489,7 +1492,7 @@
 		"GROWL": "Cause adjacent enemy Pokémon to FLINCH for 3 seconds and reduce their ATK by [3,5,7,SP].",
 		"RELIC_SONG": "Emit a note. The first two casts of this ability grant [10,SP] SHIELD to all allied Pokémon. The third cast puts all enemy Pokémon to SLEEP for [2,SP=0.5] seconds.",
 		"FAIRY_WIND": "Restore [5,10,20,SP=0.5] PP to all allied Pokémon other than the user.",
-		"DISARMING_VOICE": "Inflict CHARM to all adjacent enemies for [1,SP] seconds.",
+		"DISARMING_VOICE": "Inflict CHARM for [1,SP] seconds to all enemies in a 1/2/3 tile radius.",
 		"HIGH_JUMP_KICK": "Deal [15,30,60,SP] SPECIAL and steal up to 40 PP from the target.",
 		"TROP_KICK": "Deal [50,100,200,SP] SPECIAL and reduce the target's ATK by [3,5,7,SP].",
 		"GRASS_WHISTLE": "Put [1,2,4] enemy Pokémon to SLEEP for 2 seconds.",
@@ -1935,7 +1938,9 @@
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
 		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
 		"ENCORE": "Casts the last ability used by an ally",
-		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)"
+		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
+		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
+		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED"
 	},
 	"effect": {
 		"INGRAIN": "Ingrain",

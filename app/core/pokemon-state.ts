@@ -644,7 +644,8 @@ export default abstract class PokemonState {
           effectsRemovedList.push(EffectEnum.MISTY_TERRAIN)
         }
 
-        if (pokemon.team == Team.BLUE_TEAM) {
+        const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
+        if (originalTeam == Team.BLUE_TEAM) {
           effectsRemovedList.forEach((x) =>
             pokemon.simulation.blueEffects.delete(x)
           )

@@ -250,6 +250,7 @@ export enum Pkm {
   FERALIGATR = "FERALIGATR",
   FERROSEED = "FERROSEED",
   FERROTHORN = "FERROTHORN",
+  FEZANDIPITI = "FEZANDIPITI",
   FIDOUGH = "FIDOUGH",
   FINNEON = "FINNEON",
   FLABEBE = "FLABEBE",
@@ -538,6 +539,7 @@ export enum Pkm {
   MUDKIP = "MUDKIP",
   MUK = "MUK",
   MUNCHLAX = "MUNCHLAX",
+  MUNKIDORI = "MUNKIDORI",
   MUNNA = "MUNNA",
   MURKROW = "MURKROW",
   MUSHARNA = "MUSHARNA",
@@ -574,6 +576,7 @@ export enum Pkm {
   OGERPON_TEAL_MASK = "OGERPON_TEAL_MASK",
   OGERPON_WELLSPRING = "OGERPON_WELLSPRING",
   OGERPON_WELLSPRING_MASK = "OGERPON_WELLSPRING_MASK",
+  OKIDOGI = "OKIDOGI",
   OMANYTE = "OMANYTE",
   OMASTAR = "OMASTAR",
   ONIX = "ONIX",
@@ -2137,6 +2140,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ROARING_MOON]: "1005",
   [Pkm.IRON_VALIANT]: "1006",
   [Pkm.DIPPLIN]: "1011",
+  [Pkm.OKIDOGI]: "1014",
+  [Pkm.MUNKIDORI]: "1015",
+  [Pkm.FEZANDIPITI]: "1016",
   [Pkm.OGERPON_TEAL]: "1017",
   [Pkm.OGERPON_WELLSPRING]: "1017-0001",
   [Pkm.OGERPON_HEARTHFLAME]: "1017-0002",
@@ -3131,7 +3137,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CINCCINO]: Pkm.MINCCINO,
   [Pkm.ESPURR]: Pkm.ESPURR,
   [Pkm.MEOWSTIC_MALE]: Pkm.ESPURR,
-  [Pkm.MEOWSTIC_FEMALE]: Pkm.ESPURR
+  [Pkm.MEOWSTIC_FEMALE]: Pkm.ESPURR,
+  [Pkm.OKIDOGI]: Pkm.OKIDOGI,
+  [Pkm.MUNKIDORI]: Pkm.MUNKIDORI,
+  [Pkm.FEZANDIPITI]: Pkm.FEZANDIPITI
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3444,8 +3453,8 @@ export const AnimationConfig: {
   },
   [Pkm.JIGGLYPUFF]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.DeepBreath
   },
   [Pkm.CATERPIE]: {
     attack: AnimationType.Attack,
@@ -8219,5 +8228,20 @@ export const AnimationConfig: {
     attack: AnimationType.Strike,
     ability: AnimationType.SpAttack,
     emote: AnimationType.SpAttack
+  },
+  [Pkm.OKIDOGI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.MUNKIDORI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.FEZANDIPITI]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.FlapAround
   }
 }

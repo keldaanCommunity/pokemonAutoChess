@@ -19,6 +19,9 @@
 - Espurr
 - Meowstic (Male)
 - Meowstic (Female)
+- Munkidori 
+- Fezandipiti
+- Okidogi
 
 # Changes to Pokemon & Abilities
 

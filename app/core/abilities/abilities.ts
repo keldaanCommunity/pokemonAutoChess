@@ -1541,7 +1541,8 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const radius = [1, 2, 3][pokemon.stars - 1] ?? 3
+    const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, radius)
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.status.triggerCharm(1000, target, pokemon, true)
@@ -12695,6 +12696,42 @@ export class EncoreStrategy extends AbilityStrategy {
   }
 }
 
+export class ChainCrazedStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Self inflict poison and gain 20 speed, 15 attack and 10 defense
+    pokemon.status.triggerPoison(3000, pokemon, pokemon)
+    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addAttack(15, pokemon, 1, crit)
+    pokemon.addDefense(10, pokemon, 1, crit)
+  }
+}
+
+export class MindBendStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Target is Possessed for 2 seconds. If Rune Protect or already possessed, takes 100 special damage instead.   
+    if (target.status.runeProtect || target.status.possessed) {
+      target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+    } else {
+      const duration = Math.round(
+        2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      )
+      target.status.triggerPossessed(duration, target, pokemon)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13161,5 +13198,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SWAGGER]: new SwaggerStrategy(),
   [Ability.ENCORE]: new EncoreStrategy(),
   [Ability.REFLECT]: new ReflectStrategy(),
-  [Ability.STORED_POWER]: new StoredPowerStrategy()
+  [Ability.STORED_POWER]: new StoredPowerStrategy(),
+  [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
+  [Ability.MIND_BEND]: new MindBendStrategy()
 }
