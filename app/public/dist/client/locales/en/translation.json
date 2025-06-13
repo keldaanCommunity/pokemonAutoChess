@@ -3470,7 +3470,7 @@
 	"weather_dominant_hint": "The dominant type of Pokémon on the board during a battle can influence the weather, which has various effects on all of your team's and opponent's Pokémon.",
 	"weather_dominant_hint2": "It requires a certain number of Pokémon of a type on the board to change the weather. Some powerful Pokémon can also change weather by their own.",
 	"region_hint1": "Some Pokémon can only be found in certain regions, or have regional variations that replace their base form.",
-	"region_hint2": "You can travel to a different region by taking a portal at stages 10 and 20. The portal symbols will influence the destination.",
+	"region_hint2": "You can travel to a different region by taking a portal at stages 0, 10 and 20. The portal symbols will influence the destination.",
 	"how_to_play": "How to play ?",
 	"abilities_label": "Abilities",
 	"weather_label": "Weather",

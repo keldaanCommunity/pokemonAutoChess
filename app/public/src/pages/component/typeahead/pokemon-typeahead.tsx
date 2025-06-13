@@ -8,10 +8,11 @@ import "./pokemon-typeahead.css"
 
 export function PokemonTypeahead({
   onChange,
-  value
-}: { value: string; onChange: (value: Pkm | "") => void }) {
+  value,
+  options
+}: { value: string; options?: string[]; onChange: (value: Pkm | "") => void }) {
   const { t } = useTranslation()
-  const pokemonOptions = Object.values(Pkm).filter((p) => {
+  const pokemonOptions = options || Object.values(Pkm).filter((p) => {
     const pokemon = getPokemonData(p)
     return pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE
   }).sort((a, b) => t("pkm." + a).localeCompare(t("pkm." + b)))

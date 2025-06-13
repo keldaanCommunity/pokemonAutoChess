@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useDeferredValue, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
 import { getPokemonData, PRECOMPUTED_REGIONAL_MONS } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -6,10 +6,12 @@ import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 
 export default function WikiRegions() {
   const { t } = useTranslation()
 
+  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
   const [pokemonsPerRegion, setPokemonsPerRegion] = useState<{ [key in DungeonPMDO]?: Pkm[] }>({})
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,14 +33,30 @@ export default function WikiRegions() {
     return () => clearTimeout(timer);
   }, [])
 
+  const regionalMons = useMemo(() => {
+    return [...new Set(Object.values(pokemonsPerRegion).flat() as Pkm[])].sort((a, b) => {
+      return t(`pkm.${a}`).localeCompare(t(`pkm.${b}`))
+    })
+  }, [pokemonsPerRegion])
+  const filteredRegions = useMemo(() => {
+    const regions = Object.keys(DungeonPMDO) as DungeonPMDO[];
+    if (!selectedPkm) return regions
+    return regions.filter((region) => pokemonsPerRegion[region]?.includes(selectedPkm));
+  }, [selectedPkm, pokemonsPerRegion])
+
   return (
     <div id="wiki-regions">
+      <PokemonTypeahead
+        options={regionalMons}
+        value={selectedPkm}
+        onChange={(pkm) => setSelectedPkm(pkm)}
+      />
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
         <p>{t("region_hint1")}</p>
         <p>{t("region_hint2")}</p>
       </div>
       <ul>
-        {(Object.keys(DungeonPMDO) as DungeonPMDO[])
+        {filteredRegions
           .sort((a, b) => t(`map.${a}`).localeCompare(t(`map.${b}`)))
           .map((dungeon) => {
             return (

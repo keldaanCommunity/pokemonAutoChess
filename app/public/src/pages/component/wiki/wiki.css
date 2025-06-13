@@ -85,7 +85,7 @@
   border-radius: 2px;
 }
 
-#wiki-page .wiki-pokemons .pokemon-typeahead {
+#wiki-page .pokemon-typeahead {
   float: right;
   font-size: 80%;
   padding: 0px 16px 0px 8px;
