@@ -6232,6 +6232,27 @@ export class SmogStrategy extends AbilityStrategy {
   }
 }
 
+export class CottonGuardStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const cells = board.getCellsInFront(pokemon, target)
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
+    pokemon.addShield(shield, pokemon, 1, crit)
+    pokemon.addDefense(3, pokemon, 1, crit)
+    cells.forEach((cell) => {
+      board.addBoardEffect(cell.x, cell.y, EffectEnum.COTTON_BALL, pokemon.simulation)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerSleep(1000, cell.value)
+      }
+    })
+  }
+}
+
 export class LavaPlumeStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13200,5 +13221,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.REFLECT]: new ReflectStrategy(),
   [Ability.STORED_POWER]: new StoredPowerStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
-  [Ability.MIND_BEND]: new MindBendStrategy()
+  [Ability.MIND_BEND]: new MindBendStrategy(),
+  [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
 }

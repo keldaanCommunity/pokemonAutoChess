@@ -5,7 +5,7 @@
 - Wyrdeer
 - Indeedee (Female)
 - Indeedee (Male)
-- Cottonee,
+- Cottonee
 - Whimsicott
 - Girafarig
 - Farigiraf
@@ -22,6 +22,10 @@
 - Munkidori 
 - Fezandipiti
 - Okidogi
+- Surskit 
+- Masquerain
+- Gossifleur
+- Eldegoss
 
 # Changes to Pokemon & Abilities
 
