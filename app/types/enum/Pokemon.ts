@@ -226,6 +226,7 @@ export enum Pkm {
   EEVEE = "EEVEE",
   EGG = "EGG",
   EKANS = "EKANS",
+  ELDEGOSS = "ELDEGOSS",
   ELECTABUZZ = "ELECTABUZZ",
   ELECTIVIRE = "ELECTIVIRE",
   ELECTRIKE = "ELECTRIKE",
@@ -315,6 +316,7 @@ export enum Pkm {
   GOODRA = "GOODRA",
   GOOMY = "GOOMY",
   GOREBYSS = "GOREBYSS",
+  GOSSIFLEUR = "GOSSIFLEUR",
   GOTHITA = "GOTHITA",
   GOTHITELLE = "GOTHITELLE",
   GOTHORITA = "GOTHORITA",
@@ -485,6 +487,7 @@ export enum Pkm {
   MAROWAK = "MAROWAK",
   MARSHADOW = "MARSHADOW",
   MARSHTOMP = "MARSHTOMP",
+  MASQUERAIN = "MASQUERAIN",
   MAUSHOLD_FOUR = "MAUSHOLD_FOUR",
   MAUSHOLD_THREE = "MAUSHOLD_THREE",
   MAWILE = "MAWILE",
@@ -787,6 +790,7 @@ export enum Pkm {
   SUICUNE = "SUICUNE",
   SUNFLORA = "SUNFLORA",
   SUNKERN = "SUNKERN",
+  SURSKIT = "SURSKIT",
   SWABLU = "SWABLU",
   SWADLOON = "SWADLOON",
   SWALOT = "SWALOT",
@@ -1341,8 +1345,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.RALTS]: "0280",
   [Pkm.KIRLIA]: "0281",
   [Pkm.GARDEVOIR]: "0282",
-  //[Pkm.SURSKIT]: "0283",
-  //[Pkm.MASQUERAIN]: "0284",
+  [Pkm.SURSKIT]: "0283",
+  [Pkm.MASQUERAIN]: "0284",
   [Pkm.SHROOMISH]: "0285",
   [Pkm.BRELOOM]: "0286",
   [Pkm.SLAKOTH]: "0287",
@@ -1944,8 +1948,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.ORBEETLE]: "0826",
   [Pkm.NICKIT]: "0827",
   [Pkm.THIEVUL]: "0828",
-  //[Pkm.GOSSEIFLUR]: "0829",
-  //[Pkm.ELDEGOSS]: "0830",
+  [Pkm.GOSSIFLEUR]: "0829",
+  [Pkm.ELDEGOSS]: "0830",
   //[Pkm.WOOLOO]: "0831",
   //[Pkm.DUBWOOL]: "0832",
   //[Pkm.CHEWTLE]: "0833",
@@ -3140,7 +3144,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MEOWSTIC_FEMALE]: Pkm.ESPURR,
   [Pkm.OKIDOGI]: Pkm.OKIDOGI,
   [Pkm.MUNKIDORI]: Pkm.MUNKIDORI,
-  [Pkm.FEZANDIPITI]: Pkm.FEZANDIPITI
+  [Pkm.FEZANDIPITI]: Pkm.FEZANDIPITI,
+  [Pkm.SURSKIT]: Pkm.SURSKIT,
+  [Pkm.MASQUERAIN]: Pkm.SURSKIT,
+  [Pkm.GOSSIFLEUR]: Pkm.GOSSIFLEUR,
+  [Pkm.ELDEGOSS]: Pkm.GOSSIFLEUR
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8232,16 +8240,39 @@ export const AnimationConfig: {
   [Pkm.OKIDOGI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.MUNKIDORI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.FEZANDIPITI]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround
-  }
+    emote: AnimationType.FlapAround,
+    shinyUnavailable: true
+  },
+  [Pkm.SURSKIT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.MASQUERAIN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.GOSSIFLEUR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Twirl
+  },
+  [Pkm.ELDEGOSS]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
+  },
 }

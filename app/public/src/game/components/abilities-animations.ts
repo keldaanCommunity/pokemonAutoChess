@@ -196,6 +196,21 @@ export function displayAbility(
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
 
+    case Ability.SILVER_WIND: {
+      const specialProjectile = addAbilitySprite(Ability.EXTREME_SPEED, coordinates).setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        ease: Phaser.Math.Easing.Linear,
+        duration: 500,
+        onComplete: () => {
+          specialProjectile.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.PSYSHIELD_BASH:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
       break
@@ -3240,6 +3255,10 @@ export function displayAbility(
 
     case Ability.COTTON_SPORE:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      break
+
+    case Ability.COTTON_GUARD:
+      addAbilitySprite(Ability.COTTON_SPORE, coordinates, true).setScale(3)
       break
 
     case Ability.BOUNCE:

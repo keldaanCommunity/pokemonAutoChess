@@ -18827,6 +18827,71 @@ export class Fezandipiti extends Pokemon {
   attackSprite = AttackSprite.FAIRY_RANGE
 }
 
+export class Surskit extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AQUATIC])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.MASQUERAIN
+  hp = 70
+  atk = 6
+  speed = 51
+  def = 4
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.AQUA_JET
+  attackSprite = AttackSprite.WATER_RANGE
+  additional = true
+}
+
+export class Masquerain extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AQUATIC, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 150
+  atk = 14
+  speed = 51
+  def = 6
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.SILVER_WIND
+  attackSprite = AttackSprite.BUG_RANGE
+  additional = true
+}
+
+export class Gossifleur extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.ELDEGOSS
+  hp = 70
+  atk = 5
+  speed = 50
+  def = 6
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.COTTON_GUARD
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
+
+export class Eldegoss extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 9
+  speed = 50
+  def = 10
+  speDef = 14
+  maxPP = 100
+  range = 1
+  skill = Ability.COTTON_GUARD
+  attackSprite = AttackSprite.GRASS_MELEE
+  additional = true
+}
 
 export const PokemonClasses: Record<
   Pkm,
@@ -19814,7 +19879,11 @@ export const PokemonClasses: Record<
   [Pkm.MEOWSTIC_FEMALE]: MeowsticFemale,
   [Pkm.OKIDOGI]: Okidogi,
   [Pkm.MUNKIDORI]: Munkidori,
-  [Pkm.FEZANDIPITI]: Fezandipiti
+  [Pkm.FEZANDIPITI]: Fezandipiti,
+  [Pkm.SURSKIT]: Surskit,
+  [Pkm.MASQUERAIN]: Masquerain,
+  [Pkm.GOSSIFLEUR]: Gossifleur,
+  [Pkm.ELDEGOSS]: Eldegoss
 }
 
 // declare all the classes in colyseus schema TypeRegistry
