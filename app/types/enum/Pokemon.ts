@@ -3264,7 +3264,6 @@ export const UnownsStage2 = [
 
 export const UnownsStage3 = [
   Pkm.UNOWN_B,
-  Pkm.UNOWN_G,
   Pkm.UNOWN_H,
   Pkm.UNOWN_J,
   Pkm.UNOWN_K,
