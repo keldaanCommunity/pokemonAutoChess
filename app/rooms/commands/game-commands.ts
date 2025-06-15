@@ -1891,6 +1891,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   spawnWanderingPokemons() {
     const isPVE = this.state.stageLevel in PVEStages
+    const UNOWN_ENCOUNTER_CHANCE = 1 / 50
+    const shouldSpawnUnown = this.state.stageLevel >= 6 && chance(UNOWN_ENCOUNTER_CHANCE)
 
     this.state.players.forEach((player: Player) => {
       if (player.alive && !player.isBot) {
@@ -1898,9 +1900,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (cli) => cli.auth.uid === player.id
         )
         if (!client) return
-
-        const UNOWN_ENCOUNTER_CHANCE = 1 / 50
-        if (this.state.stageLevel >= 6 && chance(UNOWN_ENCOUNTER_CHANCE)) {
+        
+        if (shouldSpawnUnown) {
           const pkm = pickRandomIn(this.state.stageLevel < 10 ? UnownsStage1 : this.state.stageLevel < 20 ? UnownsStage2 : UnownsStage3)
           const id = nanoid()
           this.state.wanderers.set(id, pkm)
