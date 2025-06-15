@@ -141,7 +141,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const nbFishes = 3
+    const nbFishes = 2
     const player = unown.player
 
     if (player && !unown.isGhostOpponent && !player.isBot) {
