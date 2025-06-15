@@ -78,7 +78,10 @@ import {
   Pkm,
   PkmIndex,
   PkmRegionalVariants,
-  Unowns
+  Unowns,
+  UnownsStage1,
+  UnownsStage2,
+  UnownsStage3
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
@@ -1898,7 +1901,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
         const UNOWN_ENCOUNTER_CHANCE = 1 / 50
         if (this.state.stageLevel >= 6 && chance(UNOWN_ENCOUNTER_CHANCE)) {
-          const pkm = pickRandomIn(Unowns)
+          const pkm = pickRandomIn(this.state.stageLevel < 10 ? UnownsStage1 : this.state.stageLevel < 20 ? UnownsStage2 : UnownsStage3)
           const id = nanoid()
           this.state.wanderers.set(id, pkm)
           this.clock.setTimeout(
