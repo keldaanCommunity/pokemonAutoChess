@@ -1,4 +1,5 @@
 import { GameObjects } from "phaser"
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { Transfer } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
 import { Pkm, Unowns } from "../../../../types/enum/Pokemon"
@@ -198,6 +199,15 @@ export default class WanderersManager {
     pokemon.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       onClick(pokemon, id, pointer, tween)
     })
+
+    const outline = <OutlinePlugin>this.scene.plugins.get("rexOutline")
+    if (outline) { // outline plugin doesnt work with canvas renderer
+      outline.add(pokemon.sprite, {
+        thickness: 4,
+        outlineColor: 0xffffff
+      })
+    }
+
     return { tween, sprite: pokemon }
   }
 
