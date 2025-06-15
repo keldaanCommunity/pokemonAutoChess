@@ -7,13 +7,14 @@ import { AttackType, Rarity } from "../../types/enum/Game"
 import { ItemComponents, Berries, Item, Dishes } from "../../types/enum/Item"
 import { Pkm, getUnownsPoolPerStage } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { pickNRandomIn, pickRandomIn } from "../../utils/random"
+import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { giveRandomEgg } from "../eggs"
+import { clamp, min } from "../../utils/number"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -350,13 +351,32 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, board, target, crit)
     const numberToSpawn = 5
-    const bugs = [
-      ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG].pokemons,
-      ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
-        .additionalPokemons
-    ].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+    const bugs = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
+    const candidates = [...bugs.pokemons, ...bugs.additionalPokemons].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+    const stageLevel = unown.simulation.stageLevel
+    const commonWeight = min(0)(2 - stageLevel / 10)
+    const uncommonWeight = min(0)(2 - stageLevel / 20)
+    const rareWeight = 1
+    const epicWeight = stageLevel / 10
+    const ultraWeight = stageLevel / 20
+    const candidatesWeights: { [pkm in Pkm]?: number } = {}
+    candidates.forEach((p) => {
+      const data = getPokemonData(p)
+      if (data.rarity === Rarity.COMMON) {
+        candidatesWeights[p] = commonWeight
+      } else if (data.rarity === Rarity.UNCOMMON) {
+        candidatesWeights[p] = uncommonWeight
+      } else if (data.rarity === Rarity.RARE) {
+        candidatesWeights[p] = rareWeight
+      } else if (data.rarity === Rarity.EPIC) {
+        candidatesWeights[p] = epicWeight
+      } else if (data.rarity === Rarity.ULTRA) {
+        candidatesWeights[p] = ultraWeight
+      }
+    })
+
     for (let i = 0; i < numberToSpawn; i++) {
-      const bug = pickRandomIn(bugs)
+      const bug = randomWeighted(candidatesWeights) ?? Pkm.WEEDLE
       const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
         unown,
         unown.team
@@ -499,21 +519,26 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         const topSynergy = pickRandomIn(player.synergies.getTopSynergies())
-        const candidates = (
-          [
-            ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy].pokemons,
-            ...PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
-              .additionalPokemons
-          ] as Pkm[]
-        )
-          .map((p) => PokemonFactory.createPokemonFromName(p, player))
-          .filter(
-            (p) =>
-              p.stars === 1 &&
-              [Rarity.RARE, Rarity.EPIC, Rarity.ULTRA].includes(p.rarity)
-          )
+        const monsOfThatSynergy = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
+        const candidates = [...monsOfThatSynergy.pokemons, ...monsOfThatSynergy.additionalPokemons].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+        const stageLevel = unown.simulation.stageLevel
+        const rareWeight = clamp(1.5 - stageLevel / 10, 0, 1)
+        const epicWeight = clamp(stageLevel < 10 ? stageLevel / 10 : 2 - stageLevel / 10, 0, 1)
+        const ultraWeight = min(0)(-1 + stageLevel / 10)
+        const candidatesWeights: { [pkm in Pkm]?: number } = {}
+        candidates.forEach((p) => {
+          const data = getPokemonData(p)
+          if (data.rarity === Rarity.RARE) {
+            candidatesWeights[p] = rareWeight
+          } else if (data.rarity === Rarity.EPIC) {
+            candidatesWeights[p] = epicWeight
+          } else if (data.rarity === Rarity.ULTRA) {
+            candidatesWeights[p] = ultraWeight
+          }
+        })
 
-        const pokemon = pickRandomIn(candidates)
+        const pkm = randomWeighted(candidatesWeights) ?? monsOfThatSynergy.pokemons[0] ?? Pkm.KECLEON
+        const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
         pokemon.positionX = x
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)

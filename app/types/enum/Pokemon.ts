@@ -3230,6 +3230,8 @@ export const UnownsStage1 = [
   Pkm.UNOWN_G,
   Pkm.UNOWN_I,
   Pkm.UNOWN_O,
+  Pkm.UNOWN_R,
+  Pkm.UNOWN_T,
   Pkm.UNOWN_V,
   Pkm.UNOWN_W
 ]
@@ -3274,7 +3276,6 @@ export const UnownsStage3 = [
   Pkm.UNOWN_P,
   Pkm.UNOWN_R,
   Pkm.UNOWN_S,
-  Pkm.UNOWN_T,
   Pkm.UNOWN_U,
   Pkm.UNOWN_V,
   Pkm.UNOWN_W,

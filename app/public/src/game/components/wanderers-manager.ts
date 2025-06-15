@@ -13,6 +13,7 @@ import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 
 const SHARDS_PER_UNOWN_WANDERER = 50
 const DEFAULT_WANDERER_SPEED = 0.3
+const UNOWN_WANDERER_SPEED = 0.2
 
 /*
 List of wanderers:
@@ -42,6 +43,7 @@ export default class WanderersManager {
     this.addWanderingPokemon({
       id,
       pkm,
+      duration: window.innerWidth / UNOWN_WANDERER_SPEED,
       onClick: (unown, id, pointer, tween) => {
         this.scene.room?.send(Transfer.POKEMON_WANDERING, { id })
         this.displayShardGain([pointer.x, pointer.y], unown.index)
