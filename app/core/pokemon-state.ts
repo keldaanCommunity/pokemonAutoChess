@@ -338,6 +338,7 @@ export default abstract class PokemonState {
     }
 
     if (pokemon.life <= 0 || pokemon.status.resurecting) {
+      pokemon.status.possessedCooldown = 0
       return { death: false, takenDamage: 0 }
     }
 
@@ -345,10 +346,7 @@ export default abstract class PokemonState {
       damage *= 2
     }
 
-    if (pokemon.life === 0) {
-      death = true
-      pokemon.status.possessedCooldown = 0
-    } else if (pokemon.status.protect || pokemon.status.skydiving) {
+    if (pokemon.status.protect || pokemon.status.skydiving) {
       death = false
       takenDamage = 0
     } else {

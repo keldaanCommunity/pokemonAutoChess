@@ -68,6 +68,13 @@
 - Nerf Gholdengo: HP 230 → 220, Def & SpeDef 12 → 10
 - Change Malignant Chain (Pecharunt): now inflicts Possessed status instead of Locked
 - Buff Retaliate (Lillipup, TM): 125 → 150% of attack per fallen ally
+- Unowns are now bought and sold for ~~1~~ 0 gold
+- Wandering Unowns are now added to your bench when caught. Reduced their frequency in the wild. They can no longer appear before stage 6.
+- Remove Unown G and T after stage 20
+- Add Unown R and T before stage 10
+- Change Unown P (Pest): rarity of bugs now increases with stage level
+- Change Unown W (Wish): rarity given now increases with stage level
+- Nerf Unown F (Fish): 3 → 2 fishes
 
 # Changes to Synergies
 
