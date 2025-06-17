@@ -14,7 +14,7 @@ export default function ImportBotModal(props: {
   const [botList, setBotList] = useState<IBot[]>([])
   useEffect(() => {
     fetch("/bots").then((res) => res.json()).then((data) => {
-      setBotList(data)
+      setBotList(data.sort((a, b) => a.name.localeCompare(b.name)))
     })
   }, [])
 
