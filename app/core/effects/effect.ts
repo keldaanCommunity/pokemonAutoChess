@@ -291,7 +291,7 @@ export class DarkHarvestEffect extends PeriodicEffect {
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
           .forEach((cell) => {
             if (cell.value && cell.value.team !== pokemon.team) {
-              cell.value.handleSpecialDamage(
+              const { takenDamage } = cell.value.handleSpecialDamage(
                 darkHarvestDamage,
                 board,
                 AttackType.SPECIAL,
@@ -300,7 +300,7 @@ export class DarkHarvestEffect extends PeriodicEffect {
                 true
               )
               pokemon.handleHeal(
-                Math.round(darkHarvestDamage * healFactor),
+                Math.round(takenDamage * healFactor),
                 pokemon,
                 0,
                 false
