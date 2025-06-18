@@ -2264,7 +2264,6 @@
 		"LEEK": "대파",
 		"LARGE_LEEK": "큰 대파",
 		"SPINDA_COCKTAIL": "얼루기의 칵테일",
-		"SMOKED_FILLET": "훈제토막",
 		"SWEETS": "사탕공예",
 		"RIBBON_SWEET": "리본사탕공예",
 		"STAR_SWEET": "스타사탕공예",
@@ -2287,7 +2286,8 @@
 		"EXCHANGE_TICKET": "교환 티켓",
 		"AUSPICIOUS_ARMOR": "축복받은갑옷",
 		"MALICIOUS_ARMOR": "저주받은갑옷",
-		"RUSTED_SWORD": "녹슨검"
+		"RUSTED_SWORD": "녹슨검",
+		"SMOKED_FILLET": "훈제토막"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -3156,12 +3156,12 @@
 	"type_here": "이곳에 입력하세요 ...",
 	"send_message": "메세지 전송",
 	"shiny_hunter": "이로치만 보기",
-	"show_refundable": "환불 가능",
 	"show_all": "모두 보기",
 	"show_locked": "잠겨진 감정표현만 보기",
 	"show_unlockable": "해금가능한 감정표현만 보기",
 	"show_unlocked": "해금된 감정표현만 보기",
 	"show_evolutions": "진화형태만 보기",
+	"show_refundable": "환불 가능",
 	"show_only_available_picks": "유효한 추가/지역 기물만 보기",
 	"sort_by_index": "도감 넘버로 정렬",
 	"sort_by_shards": "파편의 갯수로 정렬",
@@ -3737,8 +3737,8 @@
 		"ROOM_DELETED": "삭제된 방입니다",
 		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}"
 	},
-  "connection_status": {
-    "CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
-    "CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
-  }
+	"connection_status": {
+		"CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
+		"CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
+	}
 }

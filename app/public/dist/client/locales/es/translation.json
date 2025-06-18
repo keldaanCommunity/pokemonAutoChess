@@ -2271,13 +2271,12 @@
 		"CURRY": "Curry",
 		"CASTELIACONE": "Porcehelado",
 		"WHIPPED_DREAM": "Dulce de Nata",
-		"BERRY_JUICE":"Zumo de baya",
+		"BERRY_JUICE": "Zumo de baya",
 		"TART_APPLE": "Manzana Ácida",
 		"SWEET_APPLE": "Manzana Dulce",
 		"SIRUPY_APPLE": "Manzana Melosa",
 		"SWEET_HERB": "Especia Oculta Dulce",
 		"MOOMOO_MILK": "Leche Mu-Mu",
-		"Berries": "Bayas",
 		"HONEY": "Miel",
 		"POFFIN": "Pokocho",
 		"ROCK_SALT": "Sal de Roca",
@@ -2314,7 +2313,8 @@
 		"MALICIOUS_ARMOR": "Armadura Maldita",
 		"RUSTED_SWORD": "Espada Oxidada",
 		"SCROLL_OF_WATERS": "Manuscrito Aguas",
-		"SCROLL_OF_DARKNESS": "Manuscrito Sombras"
+		"SCROLL_OF_DARKNESS": "Manuscrito Sombras",
+		"Berries": "Bayas"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3471,7 +3471,6 @@
 	"game-reconnect-modal-title": "Vuelve a conectarte al juego",
 	"game-reconnect-modal-body": "Dejaste un juego en progreso. ¿Quieres volver a conectarte a tu juego anterior?",
 	"game-surrender-modal-title": "Rendirse",
-	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?",
 	"toggle_locked": "Mostrar Bloqueados",
 	"creator": "Creador",
 	"switch_server": "Cambiar a este servidor",
@@ -3727,7 +3726,7 @@
 		"HIGH_ROLLER": "Las tiendas tienen una probabilidad de contener Eclosiones en las rondas 0-10, Únicos en las rondas 10-20 y Legendarios a partir de la ronda 20.",
 		"REGIONAL_SPECIALITIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local."
 	},
-	"town_encounter_description":{
+	"town_encounter_description": {
 		"KECLEON": "Kecleon vende piedras de sinergia por {{cost}} de GOLD",
 		"CHANSEY": "Chansey vende EGG_FOR_SELL por {{cost}} de GOLD",
 		"ELECTIVIRE": "Electivire vende objetos artificiales por {{cost}} de GOLD",
@@ -3790,8 +3789,9 @@
 		"ROOM_DELETED": "Esta sala fue borrada",
 		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
 	},
-	"connection_status":{
+	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Intentando volver a conectar...",
 		"CONNECTION_FAILED": "Conexión fallida. Prueba a recargar la página."
-	}
+	},
+	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?"
 }
