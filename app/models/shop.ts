@@ -116,7 +116,7 @@ export function getSellPrice(
   } else if (name === Pkm.WISHIWASHI_SCHOOL) {
     price = hasRareCandy ? 3 : 10
   } else if (Unowns.includes(name)) {
-    price = 0
+    price = 1
   } else if (pokemon.rarity === Rarity.HATCH) {
     price = [3, 4, 5][stars - 1] ?? 5
   } else if (pokemon.rarity === Rarity.UNIQUE) {
@@ -145,7 +145,7 @@ export function getBuyPrice(
   if (name === Pkm.DITTO) {
     price = 5
   } else if (Unowns.includes(name)) {
-    price = 0
+    price = 1
   } else {
     price = RarityCost[getPokemonData(name).rarity]
   }
