@@ -3648,6 +3648,7 @@ export class ThunderCageStrategy extends AbilityStrategy {
 }
 
 export class LeafBladeStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
