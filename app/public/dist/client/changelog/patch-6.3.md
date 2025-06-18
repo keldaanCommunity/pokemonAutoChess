@@ -128,3 +128,4 @@
 - Changed title Duke: owns at least one emote of all current pokémons in the game ; all the accounts hat this title before this patch lose it.
 - New title: Collector: has played all current pokémons in the game
 - Putting the evolved pokemon into the team planner should mark the basic pokemon in the shop
+- Sableye town encounter now steals all players at the same stage and only once. It is also slower and gives 1 gold if caught.

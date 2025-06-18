@@ -91,6 +91,7 @@ export default class WanderersManager {
       endY: 686,
       duration: 6000,
       onClick: (sprite, id, pointer) => {
+        this.scene.displayMoneyGain(sprite.x, sprite.y, 1)
         this.scene.room?.send(Transfer.POKEMON_WANDERING, { id })
         stopped = true
         this.scene.animationManager?.animatePokemon(
@@ -203,7 +204,7 @@ export default class WanderersManager {
     const outline = <OutlinePlugin>this.scene.plugins.get("rexOutline")
     if (outline) { // outline plugin doesnt work with canvas renderer
       outline.add(pokemon.sprite, {
-        thickness: 4,
+        thickness: 1,
         outlineColor: 0xffffff
       })
     }

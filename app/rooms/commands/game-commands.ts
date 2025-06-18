@@ -208,7 +208,8 @@ export class OnPokemonCatchCommand extends Command<
     this.state.wanderers.delete(id)
 
     if (pkm === Pkm.SABLEYE) {
-      // nothing in particular, prevents sableye from stealing items
+      // prevents sableye from stealing items and give 1 gold
+      player.addMoney(1, true, null)
     } else if (Unowns.includes(pkm)) {
       const unownIndex = PkmIndex[pkm]
       if (client.auth) {
@@ -1887,6 +1888,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   spawnWanderingPokemons() {
     const isPVE = this.state.stageLevel in PVEStages
 
+    const shouldSpawnSableye = this.state.townEncounter === TownEncounters.SABLEYE && chance(0.15)
+    if (shouldSpawnSableye) {
+      this.state.townEncounter = null // reset sableye encounter after spawning
+    }
+
     this.state.players.forEach((player: Player) => {
       if (player.alive && !player.isBot) {
         const client = this.room.clients.find(
@@ -1907,11 +1913,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
         }
 
-        if (
-          this.state.townEncounter === TownEncounters.SABLEYE &&
-          player.items.length > 0 &&
-          chance(0.1)
-        ) {
+        if (shouldSpawnSableye && player.items.length > 0) {
           const id = nanoid()
           let itemStolen
           this.state.wanderers.set(id, Pkm.SABLEYE)
