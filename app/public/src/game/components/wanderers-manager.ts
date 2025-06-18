@@ -11,16 +11,16 @@ import { t } from "i18next"
 import { chance } from "../../../../utils/random"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import { clamp } from "../../../../utils/number"
 
 const SHARDS_PER_UNOWN_WANDERER = 50
-const DEFAULT_WANDERER_SPEED = 0.3
-const UNOWN_WANDERER_SPEED = 0.2
+const DEFAULT_WANDERER_SPEED = 0.25
 
 /*
 List of wanderers:
 - Unowns: give shard when caught
 - Sableye: from town encounter, steal an item
-- Others: from scribble, added to bench when caught
+- Others: from Gotta catch em all scribble, added to bench when caught
 */
 
 export default class WanderersManager {
@@ -44,7 +44,7 @@ export default class WanderersManager {
     this.addWanderingPokemon({
       id,
       pkm,
-      duration: window.innerWidth / UNOWN_WANDERER_SPEED,
+      duration: clamp(window.innerWidth / DEFAULT_WANDERER_SPEED, 4000, 6000),
       onClick: (unown, id, pointer, tween) => {
         this.scene.room?.send(Transfer.POKEMON_WANDERING, { id })
         this.displayShardGain([pointer.x, pointer.y], unown.index)

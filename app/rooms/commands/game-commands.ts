@@ -78,10 +78,7 @@ import {
   Pkm,
   PkmIndex,
   PkmRegionalVariants,
-  Unowns,
-  UnownsStage1,
-  UnownsStage2,
-  UnownsStage3
+  Unowns
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
@@ -212,32 +209,30 @@ export class OnPokemonCatchCommand extends Command<
 
     if (pkm === Pkm.SABLEYE) {
       // nothing in particular, prevents sableye from stealing items
-    } else {
-      if (Unowns.includes(pkm)) {
-        const unownIndex = PkmIndex[pkm]
-        if (client.auth) {
-          const DUST_PER_ENCOUNTER = 50
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          if (u) {
-            const c = u.pokemonCollection.get(unownIndex)
-            if (c) {
-              c.dust += DUST_PER_ENCOUNTER
-            } else {
-              u.pokemonCollection.set(unownIndex, {
-                id: unownIndex,
-                emotions: [],
-                shinyEmotions: [],
-                dust: DUST_PER_ENCOUNTER,
-                selectedEmotion: Emotion.NORMAL,
-                selectedShiny: false,
-                played: 0
-              })
-            }
-            u.save()
+    } else if (Unowns.includes(pkm)) {
+      const unownIndex = PkmIndex[pkm]
+      if (client.auth) {
+        const DUST_PER_ENCOUNTER = 50
+        const u = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (u) {
+          const c = u.pokemonCollection.get(unownIndex)
+          if (c) {
+            c.dust += DUST_PER_ENCOUNTER
+          } else {
+            u.pokemonCollection.set(unownIndex, {
+              id: unownIndex,
+              emotions: [],
+              shinyEmotions: [],
+              dust: DUST_PER_ENCOUNTER,
+              selectedEmotion: Emotion.NORMAL,
+              selectedShiny: false,
+              played: 0
+            })
           }
+          u.save()
         }
       }
-
+    } else {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
       const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
       const hasSpaceOnBench =
@@ -1891,8 +1886,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   spawnWanderingPokemons() {
     const isPVE = this.state.stageLevel in PVEStages
-    const UNOWN_ENCOUNTER_CHANCE = 1 / 50
-    const shouldSpawnUnown = this.state.stageLevel >= 6 && chance(UNOWN_ENCOUNTER_CHANCE)
 
     this.state.players.forEach((player: Player) => {
       if (player.alive && !player.isBot) {
@@ -1901,8 +1894,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         )
         if (!client) return
 
-        if (shouldSpawnUnown) {
-          const pkm = pickRandomIn(this.state.stageLevel < 10 ? UnownsStage1 : this.state.stageLevel < 20 ? UnownsStage2 : UnownsStage3)
+        const UNOWN_ENCOUNTER_CHANCE = 0.037
+        if (chance(UNOWN_ENCOUNTER_CHANCE)) {
+          const pkm = pickRandomIn(Unowns)
           const id = nanoid()
           this.state.wanderers.set(id, pkm)
           this.clock.setTimeout(
