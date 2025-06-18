@@ -1474,7 +1474,8 @@
 		"WYRDEER": "Wyrdeer",
 		"OKIDOGI": "Okidogi",
 		"MUNKIDORI": "Munkidori",
-		"FEZANDIPITI": "Fezandipiti"
+		"FEZANDIPITI": "Fezandipiti",
+		"MEOWSTIC": "Meowstic"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2369,7 +2370,9 @@
 		"MALICIOUS_ARMOR": "Malicious Armor",
 		"RUSTED_SWORD": "Rusted Sword",
 		"SCROLL_OF_WATERS": "Scroll of Waters",
-		"SCROLL_OF_DARKNESS": "Scroll of Darkness"
+		"SCROLL_OF_DARKNESS": "Scroll of Darkness",
+		"Berries": "Berries",
+		"SMOKED_FILLET": "Smoked Fillet"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2718,10 +2721,10 @@
 		"KIRLIA": "Will evolve into Gallade or Gardevoir based on the dominant synergy between FIGHTING and FAIRY",
 		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",
-		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKOTH) gains RAGE for 3 seconds",
+		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKING) gains RAGE for 3 seconds.",
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region.",
-		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar",
-		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD"
+		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar.",
+		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD."
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -3086,7 +3089,7 @@
 		"official_game": "Is this an official game ?",
 		"official_game_answer": "No, this is a fan game; made by fans, for fans. All rights/credits to Pokemon Company.",
 		"how_pokemon_evolve": "How do Pokémon evolve ?",
-		"how_pokemon_evolve_answer": " You need 3 copies of the same Pokémon to get the evolution. The 3 Pokémon will merge to give the evolved Pokémon. Hatch Pokemon that come from eggs evolve automatically with time every 5 stages.",
+		"how_pokemon_evolve_answer": "You need 3 copies of the same Pokémon to get the evolution. The 3 Pokémon will merge to give the evolved Pokémon. Hatch Pokemon that come from eggs evolve automatically with time every 5 stages.",
 		"income": "How does the income work ?",
 		"income_answer": "You get 5 gold per round whether you draw, win or lose. You get 1 bonus income per 10 gold saved. A maximum of 5 bonus income accrued at 50 saved gold. You get 1 bonus gold if you win. If you win multiple times, you will also gain extra gold; one bonus gold for every victory/defeat, up to 5 bonus gold for 5 streak wins / 5 streak defeat. Wins/Defeats against PVE are not taken into account.",
 		"collection": "What is the purpose of the collection/booster ?",
@@ -3398,14 +3401,14 @@
 	"count": "Count",
 	"meta_report": "Meta Report",
 	"item_report": "Item Report",
-	"pokemon_report": "Pokemon Report",
+	"pokemon_report": "Pokémon Report",
 	"best_team_compositions": "Best Team Compositions",
 	"by_poularity": "by popularity",
 	"by_average_place": "by average place",
 	"by_winrate": "by winrate",
 	"best_items": "Best Items",
 	"by_popularity": "by popularity",
-	"best_pokemons": "Best Pokemons",
+	"best_pokemons": "Best Pokémon",
 	"winrate": "Winrate",
 	"popularity": "Popularity",
 	"popular_holders": "Popular holders",
@@ -3838,7 +3841,7 @@
 		"round_damage_calculation": "Round damage calculation",
 		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponents alive) ; rounded up, clones/spawns do not count",
 		"pool_size_per_category": "Pool size per category",
-		"pool_size_per_category_description": "The pokemons you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages."
+		"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages."
 	},
 	"errors": {
 		"USER_INACTIVE": "You have been kicked for inactivity to save server resources",
@@ -3854,15 +3857,15 @@
 		"ROOM_DELETED": "This room has been deleted",
 		"UNKNOWN_ERROR": "An unexpected error occurred: {{error}}"
 	},
-  "connection_status": {
-    "CONNECTION_LOST": "Connection lost. Attempting to reconnect...",
-    "CONNECTION_FAILED": "Connection failed. Try to refresh page."
-  },
-  "pokeguessr": {
-	"whosthatpokemon": "Who's that Pokémon ?",
-	"itssolution": "It's $t(pkm.{{pokemon}}) !",
-	"attempts": "Attempts: {{count}}",
-	"guess": "Guess",
-	"reset": "Reset"
-  }
+	"connection_status": {
+		"CONNECTION_LOST": "Connection lost. Attempting to reconnect...",
+		"CONNECTION_FAILED": "Connection failed. Try to refresh page."
+	},
+	"pokeguessr": {
+		"whosthatpokemon": "Who's that Pokémon ?",
+		"itssolution": "It's $t(pkm.{{pokemon}}) !",
+		"attempts": "Attempts: {{count}}",
+		"guess": "Guess",
+		"reset": "Reset"
+	}
 }
