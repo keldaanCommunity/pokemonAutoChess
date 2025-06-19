@@ -838,20 +838,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    if (this.items.has(Item.MAGMARIZER)) {
-      target.status.triggerBurn(2000, target, this)
-    }
-
-    if (this.items.has(Item.ELECTIRIZER) && this.count.attackCount % 3 === 0) {
-      target.status.triggerParalysis(2000, target, this)
-    }
-
     // Synergy effects on hit
-
     this.effectsSet.forEach((effect) => {
       if (effect instanceof OnHitEffect) {
         effect.apply(this, target, board)
       }
+    })
+
+    // Item effects on hit
+    const itemEffects: OnHitEffect[] = values(this.items)
+      .flatMap((item) => ItemEffects[item] ?? [])
+      .filter((effect) => effect instanceof OnHitEffect)
+    itemEffects.forEach((effect) => {
+      effect.apply(this, target, board)
     })
 
     if (this.hasSynergyEffect(Synergy.ICE)) {

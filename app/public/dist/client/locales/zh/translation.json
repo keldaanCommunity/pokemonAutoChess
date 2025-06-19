@@ -2390,7 +2390,7 @@
 		"RAZOR_FANG": "提升100%的CRIT_POWER。暴击会使目标陷入ARMOR_BREAK 4秒。",
 		"PROTECTIVE_PADS": "携带者的攻击对SHIELD造成的伤害翻倍。携带者免疫反冲伤害和反击类效果。",
 		"CHOICE_SCARF": "击中目标时，也对生命最低的相邻敌方宝可梦造成50%的普通攻击伤害。此次伤害能够触发击中时效果。",
-		"PUNCHING_GLOVE": "攻击额外造成PHYSICAL，数值相当于目标最大HP的8%",
+		"PUNCHING_GLOVE": "攻击额外造成PHYSICAL，数值相当于目标最大HP的10%",
 		"MUSCLE_BAND": "携带者受到伤害时，获得1层“借力”（最多叠加20层）。每两层“借力”提升携带者2点DEF，1点ATK以及5点SPEED",
 		"WONDER_BOX": "每场战斗开始时，将WONDER_BOX替换为2件临时的随机道具（携带道具总数不会超过3）",
 		"CLEANSE_TAG": "战斗开始时，携带者和同一横排的相邻我方宝可梦获得RUNE_PROTECT 5秒，并获得SHIELD，数值相当于各自20%的HP",

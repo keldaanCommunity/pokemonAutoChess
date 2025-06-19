@@ -63,16 +63,8 @@ export default abstract class PokemonState {
         pokemon.onCriticalAttack({ target, board, damage })
       }
 
-      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
-        damage = Math.round(damage + target.hp * 0.08)
-      }
-
       if (pokemon.attackType === AttackType.SPECIAL) {
         damage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      }
-
-      if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
-        damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
       }
 
       let additionalSpecialDamagePart = 0
@@ -165,6 +157,10 @@ export default abstract class PokemonState {
         specialDamage += damage
       } else {
         physicalDamage = damage
+      }
+
+      if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
+        physicalDamage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
       }
 
       if (physicalDamage > 0) {
