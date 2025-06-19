@@ -2401,7 +2401,7 @@
 		"METAL_COAT": "El portador gana el tipo STEEL. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"SWIFT_WING": "El portador gana el tipo FLYING. Gana un 10% de probabilidad de esquivar ataques. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"HARD_STONE": "El portador gana la sinergia ROCK. Este objeto se suelta al colocar a la unidad en el banquillo.",
-		"BIG_NUGGET": "El usuario obtiene el tipo GROUND. Si el portador esta vivo después de 15 segundos y obtiene 5 acumulaciones de GROUND, gana 3 GOLD. Este objeto se suelta al colocar a la unidad en el banquillo.",
+		"BIG_NUGGET": "El usuario obtiene el tipo GROUND. Si el portador esta vivo después de 15 segundos y obtiene 5 acumulaciones de GROUND, gana 2 GOLD. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"INCENSE": "Cada Pokémon en la tienda tiene un 5% adicional de posibilidades de compartir una sinergia común con su poseedor. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"EXP_SHARE": "Obtén los mejores valores de ATK, AP, DEF y SPE_DEF de los aliados adyacentes en la misma fila. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"POKERUS_VIAL": "Inflige al poseedor con POKERUS, obteniendo 1 ATK y 10 AP cada 2.5 segundos y transmitiéndoselo a los aliados. Este objeto se suelta al colocar a la unidad en el banquillo.",

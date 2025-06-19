@@ -86,8 +86,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.SWIFT_WING]: { [Stat.SPEED]: 30 },
   [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
   [Item.BIG_NUGGET]: {
-    [Stat.DEF]: 5,
-    [Stat.SPE_DEF]: 5
+    [Stat.DEF]: 10,
+    [Stat.SPE_DEF]: 10
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 30 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },

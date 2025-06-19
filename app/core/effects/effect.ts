@@ -160,6 +160,9 @@ export class MonsterKillEffect extends OnKillEffect {
     pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
     this.hpBoosted += lifeBoost
     this.count += 1
+    if (pokemon.items.has(Item.BERSERK_GENE)) {
+      pokemon.status.triggerConfusion(30000, pokemon, pokemon)
+    }
   }
 }
 
@@ -180,8 +183,8 @@ export class GrowGroundEffect extends PeriodicEffect {
           this.count === 5 &&
           pokemon.player
         ) {
-          pokemon.player.addMoney(3, true, pokemon)
-          pokemon.count.moneyCount += 3
+          pokemon.player.addMoney(2, true, pokemon)
+          pokemon.count.moneyCount += 2
         }
 
         if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {

@@ -2368,7 +2368,7 @@
 		"METAL_COAT": "Le porteur gagne le type STEEL.",
 		"SWIFT_WING": "Le porteur gagne le type FLYING et 10% de chance d'esquiver les attaques.",
 		"HARD_STONE": "Le porteur gagne le type ROCK",
-		"BIG_NUGGET": "Le porteur gagne le type GROUND. Après 15 secondes et 5 effets de GROUND, vous gagnez 3 GOLD.",
+		"BIG_NUGGET": "Le porteur gagne le type GROUND. Après 15 secondes et 5 effets de GROUND, vous gagnez 2 GOLD.",
 		"INCENSE": "Chaque Pokémon du magasin a 5% de chances en plus de partager une synergie commune avec le porteur.",
 		"EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés adjacents sur la même ligne",
 		"POKERUS_VIAL": "Infecte le porteur avec le POKERUS, qui fait gagner 1 ATK et 10 AP toutes les 2,5 secondes et infecte les alliés",

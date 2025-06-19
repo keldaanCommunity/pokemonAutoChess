@@ -95,6 +95,7 @@ export enum Item {
   ROTOM_PHONE = "ROTOM_PHONE",
   SILK_SCARF = "SILK_SCARF",
   TINY_MUSHROOM = "TINY_MUSHROOM",
+  BERSERK_GENE = "BERSERK_GENE",
   COOKING_POT = "COOKING_POT",
   METEORITE = "METEORITE",
   TRASH = "TRASH",
@@ -341,13 +342,14 @@ export const ArtificialItems: Item[] = [
   Item.ROTOM_PHONE,
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
+  Item.BERSERK_GENE,
   Item.COOKING_POT,
   Item.INCENSE,
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
   Item.POKERUS_VIAL,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE
+  Item.EXP_SHARE,
 ]
 
 export const ShinyItems: Item[] = [
@@ -432,7 +434,8 @@ export const SynergyItems = [
   Item.SHINY_STONE,
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
-  Item.COOKING_POT
+  Item.COOKING_POT,
+  Item.BERSERK_GENE
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -460,7 +463,8 @@ export const SynergyGivenByItem: Record<
   [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.SILK_SCARF]: Synergy.NORMAL,
   [Item.TINY_MUSHROOM]: Synergy.BUG,
-  [Item.COOKING_POT]: Synergy.GOURMET
+  [Item.COOKING_POT]: Synergy.GOURMET,
+  [Item.BERSERK_GENE]: Synergy.MONSTER
 }
 
 export const NonSpecialItemComponents: Item[] = [
@@ -590,15 +594,15 @@ export const Flavors = [
 
 export const SynergyFlavors: {
   [key in Synergy]:
-    | Item.VANILLA_FLAVOR
-    | Item.RUBY_FLAVOR
-    | Item.MATCHA_FLAVOR
-    | Item.MINT_FLAVOR
-    | Item.LEMON_FLAVOR
-    | Item.SALTED_FLAVOR
-    | Item.RUBY_SWIRL_FLAVOR
-    | Item.CARAMEL_SWIRL_FLAVOR
-    | Item.RAINBOW_SWIRL_FLAVOR
+  | Item.VANILLA_FLAVOR
+  | Item.RUBY_FLAVOR
+  | Item.MATCHA_FLAVOR
+  | Item.MINT_FLAVOR
+  | Item.LEMON_FLAVOR
+  | Item.SALTED_FLAVOR
+  | Item.RUBY_SWIRL_FLAVOR
+  | Item.CARAMEL_SWIRL_FLAVOR
+  | Item.RAINBOW_SWIRL_FLAVOR
 } = {
   [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
   [Synergy.GRASS]: Item.MATCHA_FLAVOR,
