@@ -91,11 +91,14 @@
 - Buff Rock Salt: Rune protect duration 8 → 10 seconds
 - Buff Spindas Cocktail possible positive effects: attack 5 → 10, AP 25 → 50, speed 25 → 50, shield 50 → 100
 - Change Binding Mochi: now inflicts Possessed status for 5 seconds
+- Change Hearty Stew: if fed to a Pokémon holding Cooking Pot, the Pokémon is Burn for 5 seconds.
 - Nerf Comet Shard: Protect duration 3 → 2 seconds
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
 - Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
 - Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
+- Nerf Magmarizer: Attack 5 → 3
+- Nerf Big Nugget buff: Def/SpeDef 10 → 5
 
 # Gameplay
 

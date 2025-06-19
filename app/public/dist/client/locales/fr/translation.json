@@ -2429,7 +2429,7 @@
 		"CHEF_HAT": "Le Chef cuisinera son plat signature entre les combats. L'objet est lâché lorsque son porteur est mis sur le banc.",
 		"PICNIC_SET": "Immédiatement consommé. Offre un SANDWICH au porteur et à tous les alliés adjacents. Au prochain combat, ce SANDWICH procure divers bonus de statistiques en fonction des types du Pokémon qui le mange.",
 		"SANDWICH": "Donne divers bonus de statistiques pour le prochain combat en fonction des types du Pokémon qui le mange.",
-		"HEARTY_STEW": "Au début du prochain combat, augmente les HP max de 30%",
+		"HEARTY_STEW": "Au début du prochain combat, augmente les HP max de 30%. Si le Pokémon tient COOKING_POT, il est BURN pendant 5 secondes.",
 		"RAGE_CANDY_BAR": "Gagne 10 ATK au début du prochain combat.",
 		"TEA": "Gagne 80 PP au début du prochain combat.",
 		"CURRY": "Commence le prochain combat avec RAGE pendant 5 secondes.",

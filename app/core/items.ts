@@ -77,7 +77,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.FLAME_ORB]: { [Stat.ATK]: 5, [Stat.DEF]: 3 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 25 },
   [Item.ELECTIRIZER]: { [Stat.SPEED]: 30 },
-  [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
+  [Item.MAGMARIZER]: { [Stat.ATK]: 3 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.SPEED]: -15 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
   [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 4 },
@@ -86,8 +86,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.SWIFT_WING]: { [Stat.SPEED]: 30 },
   [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
   [Item.BIG_NUGGET]: {
-    [Stat.DEF]: 10,
-    [Stat.SPE_DEF]: 10
+    [Stat.DEF]: 5,
+    [Stat.SPE_DEF]: 5
   },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 30 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },

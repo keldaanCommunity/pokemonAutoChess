@@ -2462,7 +2462,7 @@
 		"CHEF_HAT": "El portador cocinará su plato insignia después de cada ronda. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"PICNIC_SET": "Se consume inmediatamente al dárselo a un Pokémon. Dale un SANDWICH al portador y a todos sus aliados adyacentes. El SANDWICH da mejoras de estadísticas para la siguiente batalla en función del tipo del Pokémon que se lo esté comiendo.",
 		"SANDWICH": "Otorga mejoras de estadísticas para la siguiente batalla dependiendo del tipo del Pokémon que se lo esté comiendo.",
-		"HEARTY_STEW": "Al comienzo de la siguiente batalla, aumenta los HP máximos en un 30%.",
+		"HEARTY_STEW": "Al comienzo de la siguiente batalla, aumenta los HP máximos en un 30%. Si se le da a un Pokémon que tiene COOKING_POT, el Pokémon se BURN durante 5 segundos.",
 		"RAGE_CANDY_BAR": "Gana 10 de ATK al comienzo de la siguiente batalla.",
 		"TEA": "Gana 80 de PP al comienzo de la siguiente batalla.",
 		"CURRY": "Comienza la siguiente batalla RAGE durante 5 segundos.",

@@ -2427,7 +2427,7 @@
 		"CHEF_HAT": "Der Halter wird sein Signatur-Gericht zwischen den Runden kochen. Fällt ab, wenn das Pokémon auf die Bank verschoben wird.",
 		"PICNIC_SET": "Wird direkt verbraucht, wenn gegeben. Gibt ein SANDWICH an den Halter und alle benachbarten Verbündeten. SANDWICH gibt einen Status-Boost für den nächsten Kampf je nach dem Typ des essenden Pokémon.",
 		"SANDWICH": "Gibt einen unterschiedlichen Status-Boost für den nächsten Kampf je nach dem Typ des essenden Pokémon.",
-		"HEARTY_STEW": "Am Start des nächsten Kampfes, erhöhe max HP um 30%",
+		"HEARTY_STEW": "Am Start des nächsten Kampfes, erhöhe max HP um 30%. Wenn es einem Pokémon gegeben wird, das COOKING_POT hält, ist das Pokémon 5 Sekunden lang BURN.",
 		"RAGE_CANDY_BAR": "Erhalte 10 ATK am Start des nächsten Kampfes.",
 		"TEA": "Erhalte 80 PP am Start des nächsten Kampfes.",
 		"CURRY": "Starte mit RAGE in den ersten 5 Sekunden des nächsten Kampfes.",
