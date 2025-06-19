@@ -159,7 +159,7 @@ class GameContainer {
 
     fields.forEach((field) => {
       $pokemon.status.listen(field, (value, previousValue) => {
-        this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field)
+        this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field, previousValue)
       })
     })
 

@@ -196,7 +196,7 @@ export default class Player extends Schema implements IPlayer {
       const avatar = spawnDIAYAvatar(this)
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
-    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {      
+    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
       const coinFlip = simpleHashSeededCoinFlip(state.preparationId)
       const rarityPartner = coinFlip ? Rarity.COMMON : Rarity.UNCOMMON
       const partnersPropositions = pickNRandomIn(
