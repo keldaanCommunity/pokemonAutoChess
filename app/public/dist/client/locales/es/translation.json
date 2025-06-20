@@ -2345,7 +2345,7 @@
 		"LUCKY_EGG": "Aumenta la LUCK del titular en un 50%",
 		"AQUA_EGG": "El poseedor gana +50 PP inicial y recupera 20 PP después de lanzar su habilidad",
 		"BLUE_ORB": "Cada 4 ataques del poseedor, desata una cadena de rayos que rebota los 2 enemigos que se acercan, causando 15 SPECIAL y quemando 20 PP.",
-		"SCOPE_LENS": "Los golpes críticos roban 15 PP del objetivo.",
+		"SCOPE_LENS": "Los golpes críticos roban 10 PP del objetivo.",
 		"STAR_DUST": "Después de lanzar la habilidad, gana el 50 % del PP máximo como SHIELD",
 		"GREEN_ORB": "El poseedor y los aliados adyacentes recuperan un 4% de sus HP máximos cada segundo",
 		"MANA_SCARF": "Los ataques del titular restauran 8 PP adicionales",

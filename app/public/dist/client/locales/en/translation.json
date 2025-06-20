@@ -2400,7 +2400,7 @@
 		"LUCKY_EGG": "Increase holder's LUCK by 50%",
 		"AQUA_EGG": "The holder gains +50 starting PP and regains 20 PP after casting its ability",
 		"BLUE_ORB": "Every 4 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 20 PP",
-		"SCOPE_LENS": "Critical attacks steal 15 PP from the target.",
+		"SCOPE_LENS": "Critical attacks steal 10 PP from the target.",
 		"STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
 		"GREEN_ORB": "Holder and adjacent allies regain 4% of their max HP every second",
 		"MANA_SCARF": "The holder attacks restore 8 additional PP",
