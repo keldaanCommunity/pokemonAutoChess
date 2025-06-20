@@ -90,6 +90,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.SPE_DEF]: 10
   },
   [Item.BERSERK_GENE]: { [Stat.ATK]: 5 },
+  [Item.SURFBOARD]: { [Stat.SPEED]: 30 },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 30 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },
   [Item.EVIOLITE]: {

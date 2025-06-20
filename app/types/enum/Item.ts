@@ -96,6 +96,7 @@ export enum Item {
   SILK_SCARF = "SILK_SCARF",
   TINY_MUSHROOM = "TINY_MUSHROOM",
   BERSERK_GENE = "BERSERK_GENE",
+  SURFBOARD = "SURFBOARD",
   COOKING_POT = "COOKING_POT",
   METEORITE = "METEORITE",
   TRASH = "TRASH",
@@ -343,6 +344,7 @@ export const ArtificialItems: Item[] = [
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
   Item.BERSERK_GENE,
+  Item.SURFBOARD,
   Item.COOKING_POT,
   Item.INCENSE,
   Item.ELECTIRIZER,
@@ -435,7 +437,8 @@ export const SynergyItems = [
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
   Item.COOKING_POT,
-  Item.BERSERK_GENE
+  Item.BERSERK_GENE,
+  Item.SURFBOARD
 ] as const
 
 export const SynergyGivenByItem: Record<
@@ -464,7 +467,8 @@ export const SynergyGivenByItem: Record<
   [Item.SILK_SCARF]: Synergy.NORMAL,
   [Item.TINY_MUSHROOM]: Synergy.BUG,
   [Item.COOKING_POT]: Synergy.GOURMET,
-  [Item.BERSERK_GENE]: Synergy.MONSTER
+  [Item.BERSERK_GENE]: Synergy.MONSTER,
+  [Item.SURFBOARD]: Synergy.AQUATIC
 }
 
 export const NonSpecialItemComponents: Item[] = [

@@ -84,6 +84,7 @@
 # Changes to Items
 
 - New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
+- New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -99,7 +100,7 @@
 - Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
 - Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
 - Nerf Magmarizer: Attack 5 → 3
-- Nerf Big Nugget buff: Gold gained at max stacks 3 → 2
+- Nerf Big Nugget: Gold gained at max stacks 3 → 2
 
 # Gameplay
 
