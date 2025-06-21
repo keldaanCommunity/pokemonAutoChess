@@ -72,6 +72,7 @@ import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -174,8 +175,30 @@ export class Pokemon extends Schema implements IPokemon {
     this.permanentLuck = value
   }
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state?: GameState) {
     // called after manually changing position of the pokemon on board
+    if (y === 0) {
+      // moved to bench
+      this.items.forEach((item) => {
+        if (
+          item === Item.CHEF_HAT ||
+          item === Item.TRASH ||
+          ArtificialItems.includes(item)
+        ) {
+          player.items.push(item)
+          this.removeItem(item)
+        }
+      })
+
+      if (state?.specialGameRule === SpecialGameRule.SLAMINGO) {
+        this.items.forEach((item) => {
+          if (item !== Item.RARE_CANDY) {
+            player.items.push(item)
+            this.removeItem(item)
+          }
+        })
+      }
+    }
   }
 
   onItemGiven(item: Item, player: Player) {
@@ -5371,7 +5394,8 @@ export class Meloetta extends Pokemon {
   attackSprite = AttackSprite.SOUND_RANGE
   passive = Passive.MELOETTA
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     if (y === 3) {
       player.transformPokemon(this, Pkm.PIROUETTE_MELOETTA)
     }
@@ -5397,7 +5421,8 @@ export class PirouetteMeloetta extends Pokemon {
   attackSprite = AttackSprite.FIGHTING_MELEE
   passive = Passive.MELOETTA
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     if (y !== 3) {
       player.transformPokemon(this, Pkm.MELOETTA)
     }
@@ -5462,7 +5487,8 @@ export class Giratina extends Pokemon {
   passive = Passive.GIRATINA
   attackSprite = AttackSprite.GHOST_MELEE
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     if (y !== 3) {
       player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
     }
@@ -5488,7 +5514,8 @@ export class OriginGiratina extends Pokemon {
   passive = Passive.GIRATINA
   attackSprite = AttackSprite.GHOST_RANGE
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     if (y === 3) {
       player.transformPokemon(this, Pkm.GIRATINA)
     }
@@ -9993,23 +10020,6 @@ export class Granbull extends Pokemon {
   attackSprite = AttackSprite.FAIRY_MELEE
 }
 
-const rksSystemOnChangePosition = function (
-  this: Pokemon,
-  x: number,
-  y: number,
-  player: Player
-) {
-  if (y === 0) {
-    SynergyItems.forEach((synergyItem) => {
-      if (this.items.has(synergyItem)) {
-        this.items.delete(synergyItem)
-        player.items.push(synergyItem)
-      }
-    })
-    player.transformPokemon(this, Pkm.TYPE_NULL)
-  }
-}
-
 const evolveMothim = function (params: {
   this: Pokemon
   pokemonEvolved: Pokemon
@@ -10058,7 +10068,18 @@ export class Silvally extends Pokemon {
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
   attackSprite = AttackSprite.NORMAL_MELEE
-  onChangePosition = rksSystemOnChangePosition
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
+    if (y === 0) {
+      SynergyItems.forEach((synergyItem) => {
+        if (this.items.has(synergyItem)) {
+          this.items.delete(synergyItem)
+          player.items.push(synergyItem)
+        }
+      })
+      player.transformPokemon(this, Pkm.TYPE_NULL)
+    }
+  }
 }
 
 export class Applin extends Pokemon {
@@ -13070,7 +13091,8 @@ export class Necrozma extends Pokemon {
   passive = Passive.PRISM
   attackSprite = AttackSprite.DRAGON_MELEE
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
@@ -13108,7 +13130,8 @@ export class UltraNecrozma extends Pokemon {
   passive = Passive.PRISM
   attackSprite = AttackSprite.GHOST_RANGE
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
@@ -13161,7 +13184,8 @@ export class Cherrim extends Pokemon {
   passive = Passive.BLOSSOM
   regional = true
   attackSprite = AttackSprite.GRASS_RANGE
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
@@ -13199,7 +13223,8 @@ export class CherrimSunlight extends Pokemon {
   passive = Passive.BLOSSOM
   regional = true
   attackSprite = AttackSprite.GRASS_RANGE
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
@@ -16234,7 +16259,8 @@ export class Mantyke extends Pokemon {
   attackSprite = AttackSprite.WATER_RANGE
   passive = Passive.MANTYKE
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     this.evolutionRule.tryEvolve(this, player, 0)
   }
 }
@@ -16270,7 +16296,8 @@ export class Remoraid extends Pokemon {
   skill = Ability.AQUA_JET
   attackSprite = AttackSprite.WATER_MELEE
 
-  onChangePosition(x: number, y: number, player: Player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     for (const pokemon of player.board.values()) {
       if (pokemon.name === Pkm.MANTYKE) {
         pokemon.evolutionRule.tryEvolve(pokemon, player, 0)
@@ -17259,7 +17286,8 @@ export class Timburr extends Pokemon {
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
   attackSprite = AttackSprite.FIGHTING_MELEE
-  onChangePosition(x, y, player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     updatePillars(player, Pkm.TIMBURR, Pkm.PILLAR_WOOD)
   }
   afterSell(player) {
@@ -17283,7 +17311,8 @@ export class Gurdurr extends Pokemon {
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
   attackSprite = AttackSprite.FIGHTING_MELEE
-  onChangePosition(x, y, player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     updatePillars(player, Pkm.GURDURR, Pkm.PILLAR_IRON)
   }
   afterSell(player) {
@@ -17306,7 +17335,8 @@ export class Conkeldurr extends Pokemon {
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
   attackSprite = AttackSprite.FIGHTING_MELEE
-  onChangePosition(x, y, player) {
+  onChangePosition(x: number, y: number, player: Player, state: GameState) {
+    super.onChangePosition(x, y, player, state)
     updatePillars(player, Pkm.CONKELDURR, Pkm.PILLAR_CONCRETE)
   }
   afterSell(player) {

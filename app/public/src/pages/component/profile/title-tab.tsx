@@ -42,6 +42,16 @@ export function TitleTab() {
         </p>
       </div>
       <ul className="titles">
+        <li
+          key="no-title"
+          className={cc("clickable", "my-box", {
+            unlocked: true,
+            selected: user.title === "",
+          })}
+          onClick={() => dispatch(setTitle(""))}
+        >
+          <span>{t("title.no_title")}</span>
+        </li>
         {titles
           .filter((title) => showUnlocked || user.titles.includes(title.name))
           .sort((a, b) => b.rarity - a.rarity)

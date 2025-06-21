@@ -73,6 +73,8 @@
 - Change Unown P (Pest): rarity of bugs now increases with stage level
 - Change Unown W (Wish): rarity given now increases with stage level
 - Nerf Unown F (Fish): 3 → 2 fishes
+- Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
+- Nerf Link Cable (Plusle & Minun): now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
 
 # Changes to Synergies
 
@@ -83,6 +85,8 @@
 
 # Changes to Items
 
+- Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
+- Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -104,6 +108,7 @@
 - New Title: Surfer: Surf with Pikachu Surfer.
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
+- Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
 
 # UI
 

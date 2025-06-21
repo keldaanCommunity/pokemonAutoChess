@@ -950,31 +950,6 @@ export default class GameRoom extends Room<GameState> {
     return simplePlayer
   }
 
-  swap(player: Player, pokemon: IPokemon, x: number, y: number) {
-    const pokemonToSwap = this.getPokemonByPosition(player, x, y)
-    if (pokemonToSwap) {
-      pokemonToSwap.positionX = pokemon.positionX
-      pokemonToSwap.positionY = pokemon.positionY
-      pokemonToSwap.onChangePosition(
-        pokemon.positionX,
-        pokemon.positionY,
-        player
-      )
-    }
-    pokemon.positionX = x
-    pokemon.positionY = y
-  }
-
-  getPokemonByPosition(
-    player: Player,
-    x: number,
-    y: number
-  ): Pokemon | undefined {
-    return values(player.board).find(
-      (pokemon) => pokemon.positionX == x && pokemon.positionY == y
-    )
-  }
-
   spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
