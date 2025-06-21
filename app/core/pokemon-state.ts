@@ -185,6 +185,19 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+
+        if (target.items.has(Item.POWER_LENS) && !pokemon.items.has(Item.PROTECTIVE_PADS)) {
+          const speDef = pokemon.status.armorReduction ? Math.round(pokemon.speDef / 2) : pokemon.speDef
+          const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
+          const damageBlocked = min(0)(specialDamage - damageAfterReduction)
+          pokemon.handleDamage({
+            damage: Math.round(damageBlocked),
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: target,
+            shouldTargetGainMana: true
+          })
+        }
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -537,12 +550,7 @@ export default abstract class PokemonState {
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-
-        if (residualDamage < shield) {
-          pokemon.addShield(shield - residualDamage, pokemon, 0, false)
-        }
-        takenDamage += max(shield)(residualDamage - pokemon.life)
-        pokemon.shieldDamageTaken += max(shield)(residualDamage)
+       
         residualDamage = min(0)(residualDamage - shield)
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)

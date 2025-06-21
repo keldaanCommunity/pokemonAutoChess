@@ -3269,6 +3269,11 @@ export class Pikachu extends Pokemon {
   range = 1
   skill = Ability.NUZZLE
   attackSprite = AttackSprite.ELECTRIC_MELEE
+  onItemGiven(item: Item, player: Player): void {
+    if (item === Item.SURFBOARD) {
+      player.transformPokemon(this, Pkm.PIKACHU_SURFER)
+    }
+  }
 }
 
 export class Raichu extends Pokemon {
@@ -12324,7 +12329,7 @@ export class Plusle extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 65
+  speed = 61
   def = 6
   speDef = 6
   maxPP = 60
@@ -12339,7 +12344,7 @@ export class Minun extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 65
+  speed = 61
   def = 6
   speDef = 6
   maxPP = 60

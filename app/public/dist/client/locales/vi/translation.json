@@ -1284,7 +1284,7 @@
 		"SPARKLING_ARIA": "Gây [15,30,60,SP] SPECIAL lên mục tiêu và kẻ thù gần đó",
 		"DRAGON_DARTS": "Ném ra 3 phi tiêu gây [10,20,40,SP] SPECIAL cho từng mục tiêu. Nếu mục tiêu bị hạ gục, hồi lập tức 40 PP",
 		"GRASSY_SURGE": "Tăng [4,SP] chỉ số ATK của toàn bộ Pokémon hệ GRASS",
-		"MISTY_SURGE": "Toàn bộ đồng minh hệ FAIRY hồi phục [30,SP] HP và [30,SP] PP",
+		"MISTY_SURGE": "Toàn bộ đồng minh hệ FAIRY hồi phục [25,SP] HP và [25,SP] PP",
 		"SKY_ATTACK": "Bay lên trên không trung và sau đó bổ nhào xuống mục tiêu xa nhất trong 1 giây, gây [120,SP] SPECIAL",
 		"FLYING_PRESS": "Bổ nhào xuống mục tiêu xa nhất, gây [50,SP]% SPECIAL tương đương với chỉ số HP của pkm vận chiêu",
 		"ILLUSION": "Bản thân hồi phục [30,50,70,SP=0.5] HP, sao chép hình dáng và các chỉ số ATK,DEF, SPE_DEF, RANGE của mục tiêu",
