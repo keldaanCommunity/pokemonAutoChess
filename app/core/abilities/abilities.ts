@@ -11071,10 +11071,12 @@ export class SurfStrategy extends AbilityStrategy {
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
-    crit: boolean
+    crit: boolean,
+    preventDefaultAnim?: boolean,
+    tierLevel = pokemon.stars
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [20, 40, 80][tierLevel - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (farthestCoordinate) {

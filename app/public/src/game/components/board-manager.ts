@@ -635,6 +635,9 @@ export default class BoardManager {
       if (item === Item.SHINY_STONE) {
         pkm?.addLight()
       }
+      if (item === Item.BERSERK_GENE) {
+        pkm?.addBerserkEffect()
+      }
     }
   }
 
