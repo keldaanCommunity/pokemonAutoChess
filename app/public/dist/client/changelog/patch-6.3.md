@@ -85,7 +85,7 @@
 
 # Changes to Items
 
-- Nerf Scope Lens: PP stolen 15 → 10
+- Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP

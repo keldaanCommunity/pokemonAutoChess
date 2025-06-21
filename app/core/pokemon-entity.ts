@@ -49,7 +49,7 @@ import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
-import { clamp, min, roundToNDigits } from "../utils/number"
+import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -1335,8 +1335,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.addPP(10, this, 0, false)
-      target.addPP(-10, this, 0, false)
+      const ppStolen = max(target.pp)(10)
+      this.addPP(ppStolen, this, 0, false)
+      target.addPP(-ppStolen, this, 0, false)
       target.count.manaBurnCount++
     }
 
