@@ -389,9 +389,6 @@ export class ChangeTitleCommand extends Command<
         throw new Error("User does not have this title unlocked")
       }
       if (user) {
-        if (user.title === title) {
-          title = "" // remove title if user already has it
-        }
         user.title = title
         const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
         if (mongoUser) {
@@ -877,7 +874,7 @@ export class JoinOrOpenRoomCommand extends Command<
           case EloRank.QUICK_BALL:
           case EloRank.POKE_BALL:
           case EloRank.SUPER_BALL:
-            
+
             minRank = EloRank.PREMIER_BALL
             maxRank = EloRank.SUPER_BALL
             break

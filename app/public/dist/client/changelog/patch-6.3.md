@@ -85,6 +85,7 @@
 
 - New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
 - New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
+- Nerf Scope Lens: PP stolen 15 → 10
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -109,6 +110,7 @@
 - New Title: Surfer: Surf with Pikachu Surfer.
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
+- Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
 
 # UI
 

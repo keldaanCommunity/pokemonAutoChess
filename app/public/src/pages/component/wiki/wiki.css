@@ -27,10 +27,6 @@
   margin: -6px -12px;
 }
 
-.wiki-modal {
-  overflow: visible;
-}
-
 #wiki-page .wiki-types li[role="tab"] {
   padding: 4px;
   line-height: 40px;

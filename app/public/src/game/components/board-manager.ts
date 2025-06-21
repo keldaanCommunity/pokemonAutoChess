@@ -236,7 +236,7 @@ export default class BoardManager {
           () => this.addPvePokemons(PVEStages[this.state.stageLevel], false),
           1500
         )
-      } else {
+      } else if (this.mode === BoardMode.PICK) {
         // immediately add PVE pokemons
         this.addPvePokemons(PVEStages[this.state.stageLevel], true)
       }
