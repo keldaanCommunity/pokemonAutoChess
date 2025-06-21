@@ -74,6 +74,7 @@
 - Change Unown W (Wish): rarity given now increases with stage level
 - Nerf Unown F (Fish): 3 → 2 fishes
 - Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
+- Nerf Link Cable (Plusle & Minun): now resets the partner's PP to 0 as well
 
 # Changes to Synergies
 
