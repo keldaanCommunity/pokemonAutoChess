@@ -22,8 +22,7 @@ import {
   BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
-  ON_ATTACK_MANA,
-  SCOPE_LENS_MANA
+  ON_ATTACK_MANA
 } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
@@ -461,7 +460,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.critChance > 100) {
       const overCritChance = Math.round(this.critChance - 100)
-      this.addCritPower(overCritChance * 2, this, 0, false)
+      this.addCritPower(overCritChance, this, 0, false)
       this.critChance = 100
     }
   }
@@ -1335,8 +1334,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.SCOPE_LENS)) {
-      this.addPP(SCOPE_LENS_MANA, this, 0, false)
-      target.addPP(-SCOPE_LENS_MANA, this, 0, false)
+      this.addPP(10, this, 0, false)
+      target.addPP(-10, this, 0, false)
       target.count.manaBurnCount++
     }
 

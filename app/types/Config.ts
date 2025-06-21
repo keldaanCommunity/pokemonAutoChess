@@ -7,8 +7,6 @@ import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
 
 export const ON_ATTACK_MANA = 5
-export const MANA_SCARF_MANA = 8
-export const SCOPE_LENS_MANA = 15
 export const ARMOR_FACTOR = 0.05
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
@@ -434,7 +432,7 @@ export const ITEM_CAROUSEL_BASE_DURATION = 15000
 export const PORTAL_CAROUSEL_BASE_DURATION = 23000
 
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
-export const ItemProposalStages =  [3, 15]
+export const ItemProposalStages = [3, 15]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [0, 10, 20]
 

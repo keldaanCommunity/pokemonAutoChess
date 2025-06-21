@@ -84,6 +84,7 @@
 # Changes to Items
 
 - Punching Glove now deals additional physical damage equal to ~~8~~ 10% of the target's max HP, applied after all other computations (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
+- Nerf Scope Lens: PP stolen 15 → 10
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -105,6 +106,7 @@
 - New Title: Surfer: Surf with Pikachu Surfer.
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
+- Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
 
 # UI
 

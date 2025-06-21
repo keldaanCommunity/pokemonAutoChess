@@ -37,9 +37,8 @@ export interface INetwork {
   error: string | null
 }
 
-const endpoint = `${window.location.protocol.replace("http", "ws")}//${
-  window.location.host
-}`
+const endpoint = `${window.location.protocol.replace("http", "ws")}//${window.location.host
+  }`
 logger.info(endpoint)
 
 const initalState: INetwork = {
@@ -242,7 +241,7 @@ export const networkSlice = createSlice({
     searchById: (state, action: PayloadAction<string>) => {
       state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
     },
-    setTitle: (state, action: PayloadAction<Title>) => {
+    setTitle: (state, action: PayloadAction<Title | "">) => {
       if (state.profile) state.profile.title = action.payload
       state.lobby?.send(Transfer.SET_TITLE, action.payload)
     },

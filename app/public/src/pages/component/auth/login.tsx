@@ -19,8 +19,10 @@ export default function Login() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const uid = useAppSelector((state) => state.network.uid)
+  console.log("Login uid", uid)
   const displayName = useAppSelector((state) => state.network.displayName)
   const [prejoining, setPrejoining] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
 
   const preJoinLobby = throttle(async function prejoin() {
     setPrejoining(true)
@@ -91,12 +93,18 @@ export default function Login() {
           <li>
             <button
               className="bubbly red"
-              onClick={() => {
-                firebase.auth().signOut()
-                dispatch(logOut())
+              disabled={prejoining || loggingOut}
+              onClick={async () => {
+                setLoggingOut(true)
+                try {
+                  await firebase.auth().signOut()
+                  dispatch(logOut())
+                } finally {
+                  setLoggingOut(false)
+                }
               }}
             >
-              {t("sign_out")}
+              {loggingOut ? t("signing_out") : t("sign_out")}
             </button>
           </li>
         </ul>
