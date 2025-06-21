@@ -2321,7 +2321,7 @@
 		"RAZOR_FANG": "+100% CRIT_POWER. Les coups critiques appliquent ARMOR_BREAK pendant 4 secondes.",
 		"PROTECTIVE_PADS": "Les attaques du porteur infligent le double de dégâts au SHIELD. Le porteur est protégé des dégâts de contre-coup et de riposte.",
 		"CHOICE_SCARF": "Chaque attaque touche également l'ennemi le plus bas en santé adjacent à la cible, lui infligeant 50% des dégâts d'attaque.",
-		"PUNCHING_GLOVE": "Les attaques infligent 8 % des HP max de la cible en PHYSICAL supplémentaires",
+		"PUNCHING_GLOVE": "Les attaques infligent 10 % des HP max de la cible en PHYSICAL supplémentaires",
 		"MUSCLE_BAND": "Lorsque le porteur subit des dégâts, gagne 1 charge. Toutes les 2 charges, le détenteur gagne +2 DEF, +1 ATK et +5 SPEED (max 20 charges)",
 		"WONDER_BOX": "Au début de chaque bataille, la Boîte à Merveilles est remplacée par 2 objets temporaires (max 3 objets portés)",
 		"CLEANSE_TAG": "Lorsque le combat commence, le porteur et ses alliés adjacents sur la même ligne reçoivent 20% de leurs HP en SHIELD et RUNE_PROTECT pendant 5 secondes.",
