@@ -21,6 +21,7 @@ export interface IPreferencesState {
   showEvolutions: boolean
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
+  disableCameraShake: boolean
   keybindings: Keybindings
   renderer: number
   antialiasing: boolean
@@ -36,6 +37,7 @@ const defaultPreferences: IPreferencesState = {
   showEvolutions: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
+  disableCameraShake: false,
   renderer: Phaser.AUTO,
   antialiasing: true,
   keybindings: {
@@ -110,13 +112,13 @@ export function usePreferences(): [IPreferencesState, typeof savePreferences] {
 export function usePreference<T extends keyof IPreferencesState>(
   key: T
 ): [
-  IPreferencesState[T],
-  (
-    set:
-      | IPreferencesState[T]
-      | ((old: IPreferencesState[T]) => IPreferencesState[T])
-  ) => void
-] {
+    IPreferencesState[T],
+    (
+      set:
+        | IPreferencesState[T]
+        | ((old: IPreferencesState[T]) => IPreferencesState[T])
+    ) => void
+  ] {
   const [preferenceState, setPreferenceState] = useState<IPreferencesState[T]>(
     preferences[key]
   )

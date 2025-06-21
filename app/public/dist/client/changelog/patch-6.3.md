@@ -116,6 +116,7 @@
 - Simplified the collection system UI. Added counters for portraits unlocked, shinies unlocked, and pokémons played.
 - Add pool filter in pokemon meta report
 - Add pokemon search bar in Wiki Regions
+- Added camera shakes to some abilities. Can be disabled in options.
 
 # Collection system rework
 
