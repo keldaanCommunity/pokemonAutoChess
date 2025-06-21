@@ -12,6 +12,7 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
@@ -188,6 +189,18 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
+  [Item.PUNCHING_GLOVE]: [
+    new OnHitEffect((pokemon, target, board) => {
+      target.handleDamage({
+        damage: Math.round(0.1 * target.hp),
+        board,
+        attackType: AttackType.PHYSICAL,
+        attacker: pokemon,
+        shouldTargetGainMana: true
+      })
+    })
+  ],
+
   [Item.WIDE_LENS]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.range += 2
@@ -308,7 +321,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addShield(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-            2
+          2
         ) * 2,
         pokemon,
         0,
@@ -317,7 +330,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addSpeed(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-            2
+          2
         ),
         pokemon,
         0,
@@ -328,7 +341,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addAbilityPower(
         -Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-            2
+          2
         ),
         pokemon,
         0,
@@ -416,7 +429,10 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.MAGMARIZER]: [
     new OnAttackEffect(({ pokemon, target, board }) => {
       pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.count.magmarizerCount++
+      pokemon.count.magmarizerCount++      
+    }),
+    new OnHitEffect((pokemon, target, board) => {
+      target.status.triggerBurn(2000, target, pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.count.magmarizerCount, pokemon, 0, false)
@@ -429,6 +445,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       if (target && pokemon.count.attackCount % 3 === 0) {
         target.addPP(-15, pokemon, 0, false)
         target.count.manaBurnCount++
+        target.status.triggerParalysis(2000, target, pokemon)
       }
     })
   ],

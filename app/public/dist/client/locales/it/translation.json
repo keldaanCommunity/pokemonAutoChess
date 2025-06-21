@@ -2049,7 +2049,7 @@
 		"RAZOR_FANG": "+100% CRIT_POWER. I colpi critici applicano ARMOR_BREAK per 4 secondi.",
 		"PROTECTIVE_PADS": "Gli attacchi infliggono il doppio dei danni sullo SHIELD. L'utilizzatore è protetto dai danni da contraccolpo e dagli effetti che rimandano i danni al attaccante.",
 		"CHOICE_SCARF": "Quando colpisci, infliggi il 50% del danno ad un nemico adiacente",
-		"PUNCHING_GLOVE": "Gli attacchi infliggono il 8% dei HP massimi del bersaglio come PHYSICAL aggiuntivi.",
+		"PUNCHING_GLOVE": "Gli attacchi infliggono il 10% dei HP massimi del bersaglio come PHYSICAL aggiuntivi.",
 		"MUSCLE_BAND": "Quando il possessore subisce danni, guadagna 1 stack. Ad ogni 2 stack,  guadagni +2 DEF, +1 ATK e +5 SPEED (massimo 20 stack)",
 		"WONDER_BOX": "All'inizio di ogni battaglia, il WONDER_BOX viene sostituito da 2 oggetti temporanei (max 3 oggetti equipaggiati)",
 		"CLEANSE_TAG": "All'inizio del combattimento, il possessore e tutti gli alleati adiacenti sulla stessa fila ricevono il 20% di HP come SHIELD e RUNE_PROTECT per 5 secondi",
