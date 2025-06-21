@@ -337,6 +337,25 @@ export class DarkHarvestEffect extends PeriodicEffect {
   }
 }
 
+export class StoneEdgeEffect extends PeriodicEffect {
+  crit: boolean
+  constructor(
+    duration: number,
+    crit: boolean
+  ) {
+    super(((pokemon) => {
+        pokemon.addCritChance(-20, pokemon, 1, this.crit)
+        pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
+        pokemon.effects.delete(EffectEnum.STONE_EDGE)
+        pokemon.effectsSet.delete(this)
+      }), 
+      EffectEnum.STONE_EDGE, 
+      duration
+    )
+    this.crit = crit
+  }
+}
+
 export class FireHitEffect extends OnAttackEffect {
   count: number = 0
   synergyLevel: number

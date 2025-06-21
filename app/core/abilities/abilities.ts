@@ -69,7 +69,7 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { DarkHarvestEffect } from "../effects/effect"
+import { DarkHarvestEffect, StoneEdgeEffect } from "../effects/effect"
 import { DelayedCommand } from "../simulation-command"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
@@ -9189,15 +9189,9 @@ export class StoneEdgeStrategy extends AbilityStrategy {
 
     pokemon.status.triggerSilence(duration, pokemon, pokemon)
     pokemon.effects.add(EffectEnum.STONE_EDGE)
-    pokemon.addCritChance(20, pokemon, 1, false)
+    pokemon.addCritChance(20, pokemon, 1, crit)
     pokemon.range += 2
-    pokemon.commands.push(
-      new DelayedCommand(() => {
-        pokemon.addCritChance(-20, pokemon, 1, false)
-        pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
-        pokemon.effects.delete(EffectEnum.STONE_EDGE)
-      }, duration)
-    )
+    pokemon.effectsSet.add(new StoneEdgeEffect(duration, crit))
   }
 }
 

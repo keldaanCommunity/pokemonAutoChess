@@ -23,7 +23,7 @@ import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import { broadcastAbility } from "./abilities/abilities"
 import Board, { Cell } from "./board"
-import { PeriodicEffect } from "./effects/effect"
+import { PeriodicEffect, StoneEdgeEffect } from "./effects/effect"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default abstract class PokemonState {
@@ -72,7 +72,15 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
-        damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+        let crit = 1
+        pokemon.effectsSet.forEach((effect) => {
+          if (effect instanceof StoneEdgeEffect) {
+            if (effect.crit) {
+              crit = pokemon.critPower
+            }
+          }
+        })
+        damage += Math.round(pokemon.def * (1 + pokemon.ap / 100) * crit)
       }
 
       let additionalSpecialDamagePart = 0
