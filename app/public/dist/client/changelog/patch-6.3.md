@@ -74,7 +74,7 @@
 - Change Unown W (Wish): rarity given now increases with stage level
 - Nerf Unown F (Fish): 3 → 2 fishes
 - Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
-- Nerf Link Cable (Plusle & Minun): now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
+- Nerf Plusle & Minun: Speed 65 → 61 ; nerf Link Cable: now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
 
 # Changes to Synergies
 

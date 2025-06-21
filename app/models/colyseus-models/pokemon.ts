@@ -12324,7 +12324,7 @@ export class Plusle extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 65
+  speed = 61
   def = 6
   speDef = 6
   maxPP = 60
@@ -12339,7 +12339,7 @@ export class Minun extends Pokemon {
   stars = 3
   hp = 140
   atk = 12
-  speed = 65
+  speed = 61
   def = 6
   speDef = 6
   maxPP = 60
