@@ -149,7 +149,8 @@ export default class BattleManager {
   changeStatus(
     simulationId: string,
     pokemon: IPokemonEntity,
-    field: NonFunctionPropNames<Status>
+    field: NonFunctionPropNames<Status>,
+    previousValue: any
   ) {
     if (pokemon.passive === Passive.INANIMATE) return // No animation for statuses for inanimate pokemons
     if (
@@ -249,7 +250,7 @@ export default class BattleManager {
       } else if (field === "possessed") {
         if (pokemon.status.possessed) {
           pkm.addPossessed()
-        } else {
+        } else if (previousValue === true) {
           pkm.removePossessed()
         }
       } else if (field === "locked") {
@@ -355,7 +356,7 @@ export default class BattleManager {
       } else if (field === "enraged") {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
-        } else {
+        } else if (previousValue === true) {
           pkm.removeRageEffect()
         }
       }

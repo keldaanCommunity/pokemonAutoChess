@@ -267,6 +267,9 @@ export default class PokemonSprite extends DraggableObject {
         this.addLight()
       }
     }
+    if (pokemon.items.has(Item.BERSERK_GENE)) {
+      this.addBerserkEffect()
+    }
     this.add(this.itemsContainer)
 
     if (isEntity(pokemon)) {
@@ -1236,6 +1239,10 @@ export default class PokemonSprite extends DraggableObject {
 
   removeRageEffect() {
     this.sprite.clearTint()
+  }
+
+  addBerserkEffect() {
+    this.sprite.setTint(0x00ff00)
   }
 
   addFlowerTrick() {

@@ -4713,18 +4713,18 @@ export const AnimationConfig: {
     emote: AnimationType.Shoot
   },
   [Pkm.SOLOSIS]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Shoot,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose
   },
   [Pkm.DUOSION]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack
   },
   [Pkm.REUNICLUS]: {
-    attack: AnimationType.MultiStrike,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
   [Pkm.MEGA_RAYQUAZA]: {

@@ -128,6 +128,9 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   HEARTY_STEW: [
     new OnSpawnEffect((entity) => {
       entity.addMaxHP(0.3 * entity.baseHP, entity, 0, false)
+      if (entity.items.has(Item.COOKING_POT)) {
+        entity.status.triggerBurn(5000, entity, entity)
+      }
     })
   ],
   HONEY: [],

@@ -541,12 +541,7 @@ export default abstract class PokemonState {
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-
-        if (residualDamage < shield) {
-          pokemon.addShield(shield - residualDamage, pokemon, 0, false)
-        }
-        takenDamage += max(shield)(residualDamage - pokemon.life)
-        pokemon.shieldDamageTaken += max(shield)(residualDamage)
+       
         residualDamage = min(0)(residualDamage - shield)
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)

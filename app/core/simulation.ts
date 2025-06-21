@@ -64,6 +64,8 @@ import {
 import { WaterSpringEffect } from "./effects/passives"
 import { SynergyEffects } from "../models/effects"
 import { DishEffects } from "./dishes"
+import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
+import { Ability } from "../types/enum/Ability"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -1747,20 +1749,10 @@ export default class Simulation extends Schema implements ISimulation {
               ? 1
               : 0
 
-      if (effects.has(EffectEnum.SURGE_SURFER)) {
-        if (this.tidalWaveCounter === 1) {
-          this.addPikachuSurferToBoard(team)
-        }
-        for (const cell of this.board.cells) {
-          if (cell?.name === Pkm.PIKACHU_SURFER) {
-            cell.addPP(cell.maxPP, cell, 0, false)
-          }
-        }
-      }
-
       const shouldTrigger =
         (tidalWaveLevel > 0 && this.tidalWaveCounter === 1) ||
-        (tidalWaveLevel === 3 && this.tidalWaveCounter === 2)
+        (tidalWaveLevel === 3 && this.tidalWaveCounter === 2) ||
+        effects.has(EffectEnum.SURGE_SURFER)
 
       if (shouldTrigger) {
         this.room.broadcast(Transfer.ABILITY, {
@@ -1775,6 +1767,10 @@ export default class Simulation extends Schema implements ISimulation {
         this.room.broadcast(Transfer.CLEAR_BOARD, {
           simulationId: this.id
         })
+
+        if (effects.has(EffectEnum.SURGE_SURFER) && this.tidalWaveCounter === 1) {
+          this.addPikachuSurferToBoard(team)
+        }
 
         const rowRange = isRed
           ? [...Array(this.board.rows).keys()]
@@ -1817,6 +1813,15 @@ export default class Simulation extends Schema implements ISimulation {
                   pokemonHit.moveTo(x, newY, this.board) // push enemies away
                   pokemonHit.cooldown = 500
                 }
+              }
+
+              if (pokemonHit.items.has(Item.SURFBOARD)) {
+                const surf = AbilityStrategies[Ability.SURF] as SurfStrategy
+                surf.process(pokemonHit, this.board, pokemonHit, false, false, tidalWaveLevel)
+              }
+
+              if (pokemonHit.passive === Passive.PIKACHU_SURFER) {
+                pokemonHit.addPP(pokemonHit.maxPP, pokemonHit, 0, false)
               }
             }
           }
