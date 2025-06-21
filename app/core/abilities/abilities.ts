@@ -623,8 +623,8 @@ export class MistySurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const ppGain = 30
-    const hpGain = 30
+    const ppGain = 25
+    const hpGain = 25
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -5929,7 +5929,7 @@ export class LinkCableStrategy extends AbilityStrategy {
             delay: 200
           })
         } else {
-          const damage = 50
+          const damage = 25
           const cells = board.getAdjacentCells(
             pokemon.positionX,
             pokemon.positionY

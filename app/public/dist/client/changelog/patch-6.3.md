@@ -73,6 +73,8 @@
 - Change Unown P (Pest): rarity of bugs now increases with stage level
 - Change Unown W (Wish): rarity given now increases with stage level
 - Nerf Unown F (Fish): 3 → 2 fishes
+- Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
+- Nerf Plusle & Minun: Speed 65 → 61 ; nerf Link Cable: now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
 
 # Changes to Synergies
 
@@ -86,6 +88,8 @@
 - New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
 - New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
 - Nerf Scope Lens: PP stolen 15 → 10
+- Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
+- Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
