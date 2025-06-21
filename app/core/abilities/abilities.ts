@@ -5881,7 +5881,6 @@ export class LinkCableStrategy extends AbilityStrategy {
             entity.team === pokemon.team
         )
         if (partner) {
-          partner.pp = 0
           const damage = 50
           const targetsHit = new Set<PokemonEntity>()
           effectInLine(board, pokemon, partner, (cell) => {
@@ -5930,7 +5929,7 @@ export class LinkCableStrategy extends AbilityStrategy {
             delay: 200
           })
         } else {
-          const damage = 50
+          const damage = 25
           const cells = board.getAdjacentCells(
             pokemon.positionX,
             pokemon.positionY
