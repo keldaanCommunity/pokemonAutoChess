@@ -161,6 +161,16 @@ export default function GameOptionsModal(props: {
           <p>
             <Checkbox
               isDark
+              checked={preferences.disableCameraShake}
+              onToggle={(checked) => {
+                setPreferences({ disableCameraShake: checked })
+              }}
+              label={t("disable_camera_shake")}
+            />
+          </p>
+          <p>
+            <Checkbox
+              isDark
               checked={preferences.antialiasing}
               onToggle={(checked) => setPreferences({ antialiasing: checked })}
               label={t("antialiasing")}

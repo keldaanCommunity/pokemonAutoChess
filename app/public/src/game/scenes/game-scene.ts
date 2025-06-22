@@ -751,4 +751,9 @@ export default class GameScene extends Scene {
       }
     })
   }
+
+  shakeCamera(intensity: number, duration: number) {
+    if (preference("disableCameraShake")) return
+    this.cameras.main.shake(duration, intensity)
+  }
 }

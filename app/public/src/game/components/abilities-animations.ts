@@ -1207,6 +1207,7 @@ export function displayAbility(
         duration: 500,
         onComplete: () => {
           specialProjectile.destroy()
+          scene.shakeCamera(250, 0.01)
         }
       })
       break
@@ -1684,10 +1685,16 @@ export function displayAbility(
 
     case Ability.HEAVY_SLAM:
       addAbilitySprite(skill, coordinates, true).setScale(2)
+      scene.shakeCamera(250, 0.01)
+      break
+
+    case Ability.BODY_SLAM:
+      scene.shakeCamera(250, 0.01)
       break
 
     case Ability.BULLDOZE:
       addAbilitySprite(Ability.HEAVY_SLAM, coordinates, true).setScale(2)
+      scene.shakeCamera(250, 0.01)
       break
 
     case Ability.FACADE:
@@ -1843,6 +1850,7 @@ export function displayAbility(
           specialProjectile.destroy()
         }
       })
+      scene.shakeCamera(250, 0.01)
       break
     }
 
@@ -1989,6 +1997,7 @@ export function displayAbility(
 
     case Ability.GIGATON_HAMMER:
       addAbilitySprite(skill, coordinatesTarget, true).setScale(2)
+      scene.shakeCamera(250, 0.01)
       break
 
     case Ability.COUNTER:
@@ -2114,12 +2123,14 @@ export function displayAbility(
 
     case Ability.EXPLOSION:
       addAbilitySprite(skill, coordinates, true).setScale(2)
+      scene.shakeCamera(250, 0.01)
       break
 
     case Ability.CHLOROBLAST:
       addAbilitySprite(Ability.EXPLOSION, coordinates, true)
         .setScale(2)
         .setTint(0x90ffd0)
+      scene.shakeCamera(250, 0.01)
       break
 
     case Ability.CLANGOROUS_SOUL:
@@ -3369,6 +3380,7 @@ export function displayAbility(
 
     case Ability.EARTHQUAKE:
       addAbilitySprite(skill, coordinates, true).setScale(3)
+      scene.shakeCamera(350, 0.01)
       break
 
     case Ability.OCTAZOOKA:
