@@ -392,7 +392,7 @@ export default class GameScene extends Scene {
           .image(zone.x, zone.y, "board_cell", 0)
           .setVisible(false)
           .setData({ x, y })
-          .setDepth(DEPTH.DROP_ZONE)
+          .setDepth(DEPTH.DROP_CELL)
           .setScale(2, 2)
         zone.setData({ x, y, sprite: spotSprite })
         this.dropSpots.push(spotSprite)
@@ -465,7 +465,7 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
-          this.pokemonDragged.setDepth(DEPTH.POKEMON_GRABBED)
+          this.pokemonDragged.setDepth(DEPTH.DRAGGED_POKEMON)
           this.dropSpots.forEach((spot) => {
             if (
               this.room?.state.phase === GamePhaseState.PICK ||
@@ -658,7 +658,7 @@ export default class GameScene extends Scene {
           dropZone.name === "sell-zone" &&
           gameObject instanceof PokemonSprite
         ) {
-          dropZone.getData("rectangle")?.setFillStyle(0x6b8bb2)
+          this.sellZone?.onDragEnter()
         }
       },
       this
@@ -685,7 +685,7 @@ export default class GameScene extends Scene {
           dropZone.name === "sell-zone" &&
           gameObject instanceof PokemonSprite
         ) {
-          dropZone.getData("rectangle")?.setFillStyle(0x61738a)
+          this.sellZone?.onDragLeave()
         }
       },
       this

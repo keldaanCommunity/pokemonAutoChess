@@ -10,6 +10,8 @@ export class SellZone extends GameObjects.Container {
   scene: GameScene
   rectangle: Phaser.GameObjects.Rectangle
   text: Phaser.GameObjects.Text
+  bgColor = 0x61738a
+  hoveredBgColor = 0x6b8bb2
 
   constructor(scene: GameScene) {
     const sellZoneCoord = transformBoardCoordinates(4, 5.5)
@@ -27,24 +29,25 @@ export class SellZone extends GameObjects.Container {
         sellZone.y,
         sellZone.input!.hitArea.width,
         sellZone.input!.hitArea.height,
-        0x61738a,
+        this.bgColor,
         1
       )
       .setStrokeStyle(2, 0x000000, 1)
+      .setAlpha(0.8)
 
     this.add(this.rectangle)
     sellZone.setData({ rectangle: this.rectangle })
 
-    this.text = scene.add.text(0, 0, t("drop_here_to_sell"), {
-      font: "600 35px Jost",
-      color: "black",
+    this.text = scene.add.text(0, 80, t("drop_here_to_sell"), {
+      font: "600 24px Jost",
+      color: "white",
       align: "center"
     })
-    this.text.setOrigin(0.5)
+    this.text.setOrigin(0.5, 0.5)
     this.add(this.text)
 
     this.setVisible(false)
-    this.setDepth(DEPTH.DROP_ZONE)
+    this.setDepth(DEPTH.SELL_ZONE)
     this.scene.add.existing(this)
   }
 
@@ -56,12 +59,20 @@ export class SellZone extends GameObjects.Container {
     this.text.setText(
       `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
     )
-    this.rectangle.setFillStyle(0x61738a)
+    this.rectangle.setFillStyle(this.bgColor)
     this.setVisible(true)
   }
 
   hide() {
-    this.rectangle.setFillStyle(0x61738a)
+    this.rectangle.setFillStyle(this.bgColor).setAlpha(0.8)
     this.setVisible(false)
+  }
+
+  onDragEnter() {
+    this.rectangle.setFillStyle(this.hoveredBgColor).setAlpha(0.9)
+  }
+
+  onDragLeave() {
+    this.rectangle.setFillStyle(this.bgColor).setAlpha(0.8)
   }
 }
