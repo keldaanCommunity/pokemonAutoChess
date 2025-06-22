@@ -9,6 +9,7 @@
   height: 80px;
   image-rendering: pixelated;
   border-radius: 8px 8px 0 0;
+  border: none;
 }
 
 .pokemon-collection-item:not(.unlocked, .unlockable) {

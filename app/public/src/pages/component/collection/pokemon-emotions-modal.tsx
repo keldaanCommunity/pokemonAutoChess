@@ -21,6 +21,7 @@ import { Modal } from "../modal/modal"
 import PokemonEmotion from "./pokemon-emotion"
 import { BoosterPriceByRarity } from "../../../../../types/Config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import PokemonPortrait from "../pokemon-portrait"
 import "./pokemon-emotions-modal.css"
 
 export default function PokemonEmotionsModal(props: {
@@ -83,12 +84,8 @@ export default function PokemonEmotionsModal(props: {
       onClose={props.onClose}
       className="pokemon-emotions-modal anchor-top"
       header={<>
-        <img
-          src={getPortraitSrc(
-            index,
-            pConfig.selectedShiny,
-            pConfig.selectedEmotion ?? Emotion.NORMAL
-          )}
+        <PokemonPortrait
+          portrait={{ index, shiny: pConfig.selectedShiny, emotion: pConfig.selectedEmotion ?? Emotion.NORMAL }}
           className={cc({ unlocked: pConfig != null })}
         />
         <h2>{t(`pkm.${props.pokemon}`)} #{PkmIndex[props.pokemon]} - {t("played_times", { count: pConfig.played ?? 0 })}</h2>
@@ -185,14 +182,7 @@ export default function PokemonEmotionsModal(props: {
           }
         >
           {t("choose_as_avatar")}&nbsp;
-          <img
-            src={getPortraitSrc(
-              index,
-              pConfig.selectedShiny,
-              pConfig.selectedEmotion ?? Emotion.NORMAL
-            )}
-            alt="avatar"
-          />
+          <PokemonPortrait portrait={{ index, shiny: pConfig.selectedShiny, emotion: pConfig.selectedEmotion ?? Emotion.NORMAL }} alt="avatar" />
         </button>
 
         <button

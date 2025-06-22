@@ -1,7 +1,7 @@
 import React from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../../../utils/avatar"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function TeamEditor(props: {
   board: IDetailledPokemon[]
@@ -56,12 +56,8 @@ export default function TeamEditor(props: {
                       }}
                     >
                       {p && (
-                        <img
-                          src={getPortraitSrc(
-                            PkmIndex[p.name],
-                            p.shiny,
-                            p.emotion
-                          )}
+                        <PokemonPortrait
+                          portrait={{ index: PkmIndex[p.name], shiny: p.shiny, emotion: p.emotion }}
                           draggable
                           onDragStart={(e) => handleOnDragStart(e, p)}
                         />

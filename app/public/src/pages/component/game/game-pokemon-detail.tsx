@@ -10,12 +10,12 @@ import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import { Item } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import PokemonPortrait from "../pokemon-portrait"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
@@ -64,14 +64,14 @@ export function GamePokemonDetail(props: {
 
   return (
     <div className="game-pokemon-detail in-shop">
-      <img
+      <PokemonPortrait
         className="game-pokemon-detail-portrait"
         style={{ borderColor: RarityColor[pokemon.rarity] }}
-        src={getPortraitSrc(
-          pokemon.index,
-          props.shiny ?? pokemon.shiny,
-          props.emotion ?? pokemon.emotion
-        )}
+        portrait={{
+          index: pokemon.index,
+          shiny: props.shiny ?? pokemon.shiny,
+          emotion: props.emotion ?? pokemon.emotion
+        }}
       />
       <div className="game-pokemon-detail-entry">
         <p className="game-pokemon-detail-entry-name">

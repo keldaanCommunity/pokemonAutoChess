@@ -1,5 +1,5 @@
-import { GameObjects } from "phaser"
 import React from "react"
+import { GameObjects } from "phaser"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../models/precomputed/precomputed-emotions"
@@ -8,8 +8,8 @@ import { AvatarEmotions, Emotion } from "../../../../types/enum/Emotion"
 import { logger } from "../../../../utils/logger"
 import { cc } from "../../pages/utils/jsx"
 import store from "../../stores"
-import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
+import PokemonPortrait from "../../pages/component/pokemon-portrait"
 import "./emote-menu.css"
 
 export function EmoteMenuComponent(props: {
@@ -34,8 +34,8 @@ export function EmoteMenuComponent(props: {
         const unlocked = store.getState().game.emotesUnlocked.includes(emotion)
         return (
           <li key={emotion}>
-            <img
-              src={getPortraitSrc(props.index, props.shiny, emotion)}
+            <PokemonPortrait
+              portrait={{ index: props.index, shiny: props.shiny, emotion }}
               title={emotion + (!unlocked ? " (locked)" : "")}
               className={cc({ locked: !unlocked })}
               onClick={() => unlocked && props.sendEmote(emotion)}

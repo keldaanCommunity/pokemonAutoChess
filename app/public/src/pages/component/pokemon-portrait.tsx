@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
 import { cc } from "../utils/jsx"
@@ -32,14 +32,28 @@ export default function PokemonPortrait(props: Props) {
   }
   const { className, ...rest } = props
 
+  const [imgSrc, setImgSrc] = useState(src)
+
+  useEffect(() => {
+    setImgSrc(src)
+  }, [src])
+
+  const handleError = () => {
+    const missingPortrait = "/assets/ui/missing-portrait.png"
+    if (imgSrc !== missingPortrait) {
+      setImgSrc(missingPortrait)
+    }
+  }
+
   return (
     <img
-      src={src}
+      src={imgSrc}
       loading="lazy"
       className={cc(
         "pokemon-portrait",
         className || ""
       )}
+      onError={handleError}
       {...rest}
     />
   )
