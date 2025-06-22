@@ -75,6 +75,7 @@
 - Nerf Unown F (Fish): 3 → 2 fishes
 - Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
 - Nerf Plusle & Minun: Speed 65 → 61 ; nerf Link Cable: now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
+- Nerf Scale Shot (Roaring moon): Damage to enemies in the path: 20 → 10 physical damage ; damage to farthest target remains unchanged
 
 # Changes to Synergies
 
