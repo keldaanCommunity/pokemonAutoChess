@@ -421,9 +421,15 @@ export class OnRoomChangeSpecialRule extends Command<
     specialRule: SpecialGameRule | null
   }
 > {
-  execute({ client, specialRule }) {
+  async execute({ client, specialRule }) {
     try {
-      if (client.auth?.uid == this.state.ownerId) {
+      const u = await UserMetadata.findOne({ uid: client.auth?.uid })
+      if (!u) {
+        client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
+        return
+      }
+
+      if (client.auth?.uid == this.state.ownerId && u.role === Role.ADMIN) {
         this.state.specialGameRule = specialRule
         if (specialRule != null) {
           this.state.noElo = true
