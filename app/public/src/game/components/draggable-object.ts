@@ -14,6 +14,7 @@ export default class DraggableObject extends GameObjects.Container {
     super(scene, x, y)
     this.dragDisabled = dragDisabled
     this.setSize(width, height)
+
     this.setInteractive()
       .on("pointerover", (pointer: Phaser.Input.Pointer) => {
         this.onPointerOver(pointer)
@@ -31,6 +32,18 @@ export default class DraggableObject extends GameObjects.Container {
         }
       )
       .on("pointerup", () => this.onPointerUp())
+
+    /* DEBUG HITBOX AREAS
+    scene.input.enableDebug(this, 0x00ff00);
+    // AFTER enabling debug, access the debug graphic and set its depth
+    if (this.input && this.input.hitAreaDebug) {
+      this.input.hitAreaDebug.setDepth(100); // Set a high depth value
+      console.log("Debug graphic created and depth set.");
+    } else {
+      console.warn("Debug graphic not found on sprite after enableDebug.");
+    }
+    */
+
     this.scene.add.existing(this)
   }
 
