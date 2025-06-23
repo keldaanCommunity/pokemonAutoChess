@@ -187,7 +187,7 @@ export default abstract class PokemonState {
         totalTakenDamage += takenDamage
 
         if (target.items.has(Item.POWER_LENS) && !pokemon.items.has(Item.PROTECTIVE_PADS)) {
-          const speDef = pokemon.status.armorReduction ? Math.round(pokemon.speDef / 2) : pokemon.speDef
+          const speDef = target.status.armorReduction ? Math.round(target.speDef / 2) : target.speDef
           const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
           const damageBlocked = min(0)(specialDamage - damageAfterReduction)
           pokemon.handleDamage({
