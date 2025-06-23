@@ -1928,7 +1928,7 @@
 		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for 3 seconds.",
 		"ARM_THRUST": "Attacks [2,LK] to [5,LK] times, dealing [100,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
 		"DRUM_BEATING": "Cycles through:\n1. Wood block: give [10,20,40,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,SP] SPEED to the entire team",
-		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,30,SP] SPECIAL to all enemies hit. Can crit by default.",
+		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,40,SP] SPECIAL to all enemies hit. Can crit by default.",
 		"WICKED_BLOW": "Deal [60,SP] TRUE to the target. Always deal a critical hit.",
 		"SURGING_STRIKES": "Strikes the target with a flowing motion 3 times in a row, dealing [100,SP]% of ATK each as SPECIAL. Always deal critical hits.",
 		"VICTORY_DANCE": "Performs a dance to usher in victory. Raise user's ATK and DEF by [3,SP] and SPEED by [10,SP].",
