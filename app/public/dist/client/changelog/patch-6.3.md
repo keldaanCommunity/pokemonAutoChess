@@ -82,6 +82,7 @@
 - Buff Mew: Speed 57 → 64
 - Buff Smoochum line: Special defense :2/6 → 3/8
 - Buff Doom Desire (Jirachi): restore ~~60~~ to max PP if target is KO in the duration
+- Nerf Capsakid line: PP 100 → 110
 
 # Changes to Synergies
 
