@@ -6865,7 +6865,7 @@ export class Mew extends Pokemon {
   stars = 3
   hp = 200
   atk = 27
-  speed = 57
+  speed = 64
   def = 10
   speDef = 10
   maxPP = 50

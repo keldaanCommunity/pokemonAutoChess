@@ -79,6 +79,7 @@
 - Buff Psycho-Cut (Gallade): 10/20/30 → 10/20/40 special damage
 - Buff Psycho Boost (Deoxys normal form): 140 → 150 special damage
 - Buff Mewtwo: PP 120 → 110
+- Buff Mew: Speed 57 → 64
 - Buff Smoochum line: Special defense :2/6 → 3/8
 - Buff Doom Desire (Jirachi): restore ~~60~~ to max PP if target is KO in the duration
 
