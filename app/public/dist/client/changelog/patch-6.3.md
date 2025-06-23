@@ -73,6 +73,7 @@
 - Change Unown P (Pest): rarity of bugs now increases with stage level
 - Change Unown W (Wish): rarity given now increases with stage level
 - Nerf Unown F (Fish): 3 → 2 fishes
+- Change Metronome: Luck now increases the chance to use a stronger ability
 
 # Changes to Synergies
 
