@@ -2725,7 +2725,8 @@
 		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKOTH) gains RAGE for 3 seconds",
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region.",
 		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar",
-		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD"
+		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD",
+		"FUR_COAT": "Its fur grows, giving +1 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats."
 	},
 	"stat": {
 		"ATK": "Attack",

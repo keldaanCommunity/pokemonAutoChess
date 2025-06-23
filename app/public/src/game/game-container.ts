@@ -48,7 +48,6 @@ import { t } from "i18next"
 import { values } from "../../../utils/schemas"
 import { DEPTH } from "./depths"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
-import { Passive } from "../../../types/enum/Passive"
 
 class GameContainer {
   room: Room<GameState>
@@ -415,6 +414,8 @@ class GameContainer {
           "hp",
           "atk",
           "ap",
+          "def",
+          "speed",
           "shiny",
           "skill",
           "meal"

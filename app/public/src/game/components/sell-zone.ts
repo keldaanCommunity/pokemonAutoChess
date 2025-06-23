@@ -38,7 +38,7 @@ export class SellZone extends GameObjects.Container {
     this.add(this.rectangle)
     sellZone.setData({ rectangle: this.rectangle })
 
-    this.text = scene.add.text(0, 80, t("drop_here_to_sell"), {
+    this.text = scene.add.text(0, 70, t("drop_here_to_sell"), {
       font: "600 24px Jost",
       color: "white",
       align: "center"

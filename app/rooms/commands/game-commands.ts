@@ -1348,48 +1348,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.time =
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
 
-    // Milcery flavors check
-    this.state.players.forEach((player: Player) => {
-      if (player.alive) {
-        player.board.forEach((pokemon) => {
-          if (pokemon.name === Pkm.MILCERY) {
-            const surroundingSynergies = new Map<Synergy, number>()
-            Object.values(Synergy).forEach((synergy) => {
-              surroundingSynergies.set(synergy, 0)
-            })
-            const adjacentAllies = values(player.board).filter(
-              (p) =>
-                distanceC(
-                  pokemon.positionX,
-                  pokemon.positionY,
-                  p.positionX,
-                  p.positionY
-                ) <= 1
-            )
-            adjacentAllies.forEach((ally) => {
-              ally.types.forEach((synergy) => {
-                surroundingSynergies.set(
-                  synergy,
-                  surroundingSynergies.get(synergy)! + 1
-                )
-              })
-            })
-            let maxSynergy = Synergy.NORMAL
-            surroundingSynergies.forEach((value, key) => {
-              if (value > surroundingSynergies.get(maxSynergy)!) {
-                maxSynergy = key
-              }
-            })
-            const flavor = SynergyFlavors[maxSynergy]
-            Flavors.forEach((f) => {
-              removeInArray(player.items, f)
-            })
-            player.items.push(flavor)
-          }
-        })
-      }
-    })
-
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
@@ -1454,6 +1412,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const commands = new Array<Command>()
 
     this.state.players.forEach((player: Player) => {
+      const board = values(player.board)
       if (
         player.synergies.getSynergyStep(Synergy.FIRE) === 4 &&
         player.items.includes(Item.FIRE_SHARD) === false &&
@@ -1474,9 +1433,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
       }
 
-      const chefs = values(player.board).filter((p) =>
-        p.items.has(Item.CHEF_HAT)
-      )
+      const chefs = board.filter((p) => p.items.has(Item.CHEF_HAT))
       if (chefs.length > 0) {
         const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
         const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
@@ -1509,7 +1466,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 dishes
               })
               this.clock.setTimeout(() => {
-                const candidates = values(player.board).filter(
+                const candidates = board.filter(
                   (p) =>
                     p.meal === "" &&
                     p.canEat &&
@@ -1571,6 +1528,55 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       ) {
         this.room.spawnOnBench(player, player.firstPartner, "spawn")
       }
+
+      // Milcery flavors check
+      const milcery = board.find((p) => p.name === Pkm.MILCERY)
+      if (milcery) {
+        const surroundingSynergies = new Map<Synergy, number>()
+        Object.values(Synergy).forEach((synergy) => {
+          surroundingSynergies.set(synergy, 0)
+        })
+        const adjacentAllies = values(player.board).filter(
+          (p) =>
+            distanceC(
+              milcery.positionX,
+              milcery.positionY,
+              p.positionX,
+              p.positionY
+            ) <= 1
+        )
+        adjacentAllies.forEach((ally) => {
+          ally.types.forEach((synergy) => {
+            surroundingSynergies.set(
+              synergy,
+              surroundingSynergies.get(synergy)! + 1
+            )
+          })
+        })
+        let maxSynergy = Synergy.NORMAL
+        surroundingSynergies.forEach((value, key) => {
+          if (value > surroundingSynergies.get(maxSynergy)!) {
+            maxSynergy = key
+          }
+        })
+        const flavor = SynergyFlavors[maxSynergy]
+        Flavors.forEach((f) => {
+          removeInArray(player.items, f)
+        })
+        player.items.push(flavor)
+      }
+
+      // Passives updating every stage
+      board.filter(p => p.passive === Passive.FUR_COAT).forEach((pokemon) => {
+        if (isOnBench(pokemon)) {
+          const { speed: initialSpeed, def: initialDef } = new PokemonClasses[pokemon.name]()
+          pokemon.speed = initialSpeed
+          pokemon.def = initialDef
+        } else if (pokemon.speed >= 5) {
+          pokemon.speed -= 5
+          pokemon.def += 1
+        }
+      })
     })
 
     this.spawnWanderingPokemons()

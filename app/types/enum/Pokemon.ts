@@ -271,6 +271,7 @@ export enum Pkm {
   FROSLASS = "FROSLASS",
   FROSMOTH = "FROSMOTH",
   FUECOCO = "FUECOCO",
+  FURFROU = "FURFROU",
   FURRET = "FURRET",
   GABITE = "GABITE",
   GALAR_CORSOLA = "GALAR_CORSOLA",
@@ -1777,7 +1778,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.GOGOAT]: "0673",
   [Pkm.PANCHAM]: "0674",
   [Pkm.PANGORO]: "0675",
-  //[Pkm.FURFROU]: "0676",
+  [Pkm.FURFROU]: "0676",
   [Pkm.ESPURR]: "0677",
   [Pkm.MEOWSTIC_MALE]: "0678",
   [Pkm.MEOWSTIC_FEMALE]: "0678-0000-0000-0002",
@@ -3148,7 +3149,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SURSKIT]: Pkm.SURSKIT,
   [Pkm.MASQUERAIN]: Pkm.SURSKIT,
   [Pkm.GOSSIFLEUR]: Pkm.GOSSIFLEUR,
-  [Pkm.ELDEGOSS]: Pkm.GOSSIFLEUR
+  [Pkm.ELDEGOSS]: Pkm.GOSSIFLEUR,
+  [Pkm.FURFROU]: Pkm.FURFROU
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8275,4 +8277,9 @@ export const AnimationConfig: {
     ability: AnimationType.SpAttack,
     emote: AnimationType.SpAttack
   },
+  [Pkm.FURFROU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.TailWhip,
+    emote: AnimationType.Shoot
+  }
 }
