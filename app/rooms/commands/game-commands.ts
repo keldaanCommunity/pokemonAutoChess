@@ -1574,7 +1574,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           pokemon.def = initialDef
         } else if (pokemon.speed >= 5) {
           pokemon.speed -= 5
-          pokemon.def += 1
+          pokemon.def += 2
         }
       })
     })
