@@ -9345,7 +9345,7 @@ export class Smoochum extends Pokemon {
   atk = 5
   speed = 55
   def = 2
-  speDef = 2
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.LOVELY_KISS
@@ -9361,7 +9361,7 @@ export class Jynx extends Pokemon {
   atk = 11
   speed = 55
   def = 6
-  speDef = 6
+  speDef = 8
   maxPP = 80
   range = 2
   skill = Ability.LOVELY_KISS

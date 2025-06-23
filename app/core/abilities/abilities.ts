@@ -7668,7 +7668,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
             true
           )
         } else {
-          pokemon.addPP(60, pokemon, 0, false)
+          pokemon.pp = pokemon.maxPP // cast again immediately if target is dead
         }
       }, 2000)
     )
@@ -8695,28 +8695,25 @@ export class PsychoBoostStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = 140
-      ;[target.positionX - 1, target.positionX, target.positionX + 1].forEach(
-        (positionX) => {
-          const tg = board.getValue(positionX, target.positionY)
-          if (tg && tg.team !== pokemon.team) {
-            broadcastAbility(pokemon, {
-              positionX: tg.positionX,
-              positionY: tg.positionY
-            })
-            tg.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit,
-              true
-            )
-
-            pokemon.addAbilityPower(-20, pokemon, 0, false)
-          }
-        }
-      )
+    const damage = 150
+    for (const positionX of [target.positionX - 1, target.positionX, target.positionX + 1]) {
+      const tg = board.getValue(positionX, target.positionY)
+      if (tg && tg.team !== pokemon.team) {
+        broadcastAbility(pokemon, {
+          positionX: tg.positionX,
+          positionY: tg.positionY
+        })
+        tg.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        pokemon.addAbilityPower(-20, pokemon, 0, false)
+      }
+    }
   }
 }
 
