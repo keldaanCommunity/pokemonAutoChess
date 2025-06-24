@@ -4,6 +4,7 @@ import { AvatarEmotions, Emotion } from "../../../../../types"
 import { getEmotionCost } from "../../../../../types/Config"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
+import PokemonPortrait from "../pokemon-portrait"
 import "./pokemon-emotion.css"
 
 export default function PokemonEmotion(props: {
@@ -29,7 +30,7 @@ export default function PokemonEmotion(props: {
       })}
       onClick={props.onClick}
     >
-      <img src={getPortraitSrc(props.index, props.shiny, props.emotion)} />
+      <PokemonPortrait portrait={props} />
       {AvatarEmotions.includes(props.emotion) && (
         <span className="shortcut">
           Ctrl+{AvatarEmotions.indexOf(props.emotion) + 1}

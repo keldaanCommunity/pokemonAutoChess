@@ -9,7 +9,7 @@ export const DEPTH = {
   POKEMON_SHADOW: 5,
 
   // 11-20: below pokemon
-  DROP_ZONE: 11,
+  DROP_CELL: 11,
   LIGHT_CELL: 12,
   HIT_FX_BELOW_POKEMON: 15,
   ABILITY_BELOW_POKEMON: 16,
@@ -25,7 +25,6 @@ export const DEPTH = {
   HIT_FX_ABOVE_POKEMON: 25,
   BOOST_FRONT: 26,
   POKEMON_HP_BAR: 29,
-  POKEMON_GRABBED: 30,
 
   // 31-40: ability sfx over pokemon
   ABILITY_MINOR: 34,
@@ -48,7 +47,11 @@ export const DEPTH = {
   // 61-70: Popup/Tooltips/HUD
   HUD: 60,
   PHASER_DOM_CONTAINER: 61,
+  SELL_ZONE: 62,
   TOOLTIP_BACK: 63,
   TOOLTIP: 64,
-  TOOLTIP_FRONT: 65
+  TOOLTIP_FRONT: 65,
+
+  // 71-80: Draggedd elements
+  DRAGGED_POKEMON: 70,
 }

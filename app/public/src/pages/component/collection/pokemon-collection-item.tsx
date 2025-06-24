@@ -7,6 +7,7 @@ import { Emotion } from "../../../../../types/enum/Emotion"
 import { AnimationConfig, Pkm } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
+import PokemonPortrait from "../pokemon-portrait"
 import "./pokemon-collection-item.css"
 
 export default function PokemonCollectionItem(props: {
@@ -64,14 +65,7 @@ export default function PokemonCollectionItem(props: {
         props.setPokemon(props.name)
       }}
     >
-      <img
-        src={getPortraitSrc(
-          props.index,
-          props.config?.selectedShiny,
-          props.config?.selectedEmotion ?? Emotion.NORMAL
-        )}
-        loading="lazy"
-      />
+      <PokemonPortrait portrait={{ index: props.index, shiny: props.config?.selectedShiny ?? false, emotion: props.config?.selectedEmotion ?? Emotion.NORMAL }} />
       {props.filter === "pokedex" ? <p>{props.config?.played ?? 0}</p> : <p className="dust">
         <span>{props.config ? props.config.dust : 0}</span>
         <img

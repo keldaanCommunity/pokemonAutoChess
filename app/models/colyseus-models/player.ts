@@ -196,7 +196,7 @@ export default class Player extends Schema implements IPlayer {
       const avatar = spawnDIAYAvatar(this)
       this.board.set(avatar.id, avatar)
       avatar.onAcquired(this)
-    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {      
+    } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
       const coinFlip = simpleHashSeededCoinFlip(state.preparationId)
       const rarityPartner = coinFlip ? Rarity.COMMON : Rarity.UNCOMMON
       const partnersPropositions = pickNRandomIn(
@@ -262,14 +262,9 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getPokemonAt(x: number, y: number): Pokemon | undefined {
-    let p: Pokemon | undefined = undefined
-
-    this.board.forEach((pokemon) => {
-      if (pokemon.positionX == x && pokemon.positionY == y) {
-        p = pokemon
-      }
-    })
-    return p
+    return values(this.board).find(
+      (pokemon) => pokemon.positionX == x && pokemon.positionY == y
+    )
   }
 
   transformPokemon(pokemon: Pokemon, newEntry: Pkm): Pokemon {

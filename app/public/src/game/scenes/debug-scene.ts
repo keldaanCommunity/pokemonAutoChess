@@ -66,7 +66,7 @@ export class DebugScene extends Phaser.Scene {
     })
   }
 
-  create() {}
+  create() { }
 
   updateSprite(
     pkm: Pkm,
@@ -184,7 +184,7 @@ export class DebugScene extends Phaser.Scene {
           )!
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
-        ;(this.sys as any).animatedTiles.init(map)
+          ; (this.sys as any).animatedTiles.init(map)
         playMusic(this as any, DungeonDetails[mapName].music)
       })
   }
@@ -299,7 +299,7 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status == Status.RAGE) {
         this.pokemon.addRageEffect()
-      }      
+      }
       if (status == Status.LOCKED) {
         this.pokemon.addLocked()
       }
@@ -315,7 +315,7 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.MAGIC_BOUNCE) {
         this.pokemon.addReflectShieldAnim(0xffa0ff)
       }
-      if(status == Status.REFLECT){
+      if (status == Status.REFLECT) {
         this.pokemon.addReflectShieldAnim(0xff3030)
       }
       if (status == Status.ELECTRIC_FIELD) {
@@ -410,5 +410,9 @@ export class DebugScene extends Phaser.Scene {
       false
     )
     displayBoost(this, coords[0], coords[1], stat)
+  }
+
+  shakeCamera(intensity: number, duration: number) {
+    this.cameras.main.shake(duration, intensity)
   }
 }

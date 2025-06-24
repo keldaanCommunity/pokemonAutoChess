@@ -149,7 +149,8 @@ export default class BattleManager {
   changeStatus(
     simulationId: string,
     pokemon: IPokemonEntity,
-    field: NonFunctionPropNames<Status>
+    field: NonFunctionPropNames<Status>,
+    previousValue: any
   ) {
     if (pokemon.passive === Passive.INANIMATE) return // No animation for statuses for inanimate pokemons
     if (
@@ -249,7 +250,7 @@ export default class BattleManager {
       } else if (field === "possessed") {
         if (pokemon.status.possessed) {
           pkm.addPossessed()
-        } else {
+        } else if (previousValue === true) {
           pkm.removePossessed()
         }
       } else if (field === "locked") {
@@ -355,7 +356,7 @@ export default class BattleManager {
       } else if (field === "enraged") {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
-        } else {
+        } else if (previousValue === true) {
           pkm.removeRageEffect()
         }
       }
@@ -468,7 +469,7 @@ export default class BattleManager {
         }
       } else if (field === "moneyCount") {
         if (value > 0) {
-          this.moneyAnimation(pkm.x, pkm.y, value - previousValue)
+          this.scene.displayMoneyGain(pkm.x, pkm.y, value - previousValue)
         }
       } else if (field === "amuletCoinCount") {
         if (value > 0) {
@@ -736,44 +737,6 @@ export default class BattleManager {
         }
       }
     }
-  }
-
-  moneyAnimation(x: number, y: number, gain: number) {
-    const textStyle = {
-      fontSize: "25px",
-      fontFamily: "Verdana",
-      color: "#FFFF00",
-      align: "center",
-      strokeThickness: 2,
-      stroke: "#000"
-    }
-    const crit = this.scene.add.existing(
-      new GameObjects.Text(
-        this.scene,
-        x - 40,
-        y - 50,
-        `${gain > 0 ? "+ " : ""}${gain} GOLD`,
-        textStyle
-      )
-    )
-    crit.setDepth(DEPTH.TEXT_MAJOR)
-    this.scene.add.tween({
-      targets: [crit],
-      ease: "Linear",
-      duration: 1000,
-      delay: 0,
-      alpha: {
-        getStart: () => 1,
-        getEnd: () => 0
-      },
-      y: {
-        getStart: () => y - 50,
-        getEnd: () => y - 110
-      },
-      onComplete: () => {
-        crit.destroy()
-      }
-    })
   }
 
   displayBoost(stat: Stat, positionX: number, positionY: number) {

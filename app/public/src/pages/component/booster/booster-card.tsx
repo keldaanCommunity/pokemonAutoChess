@@ -8,6 +8,7 @@ import { cc } from "../../utils/jsx"
 import { useAppSelector } from "../../../hooks"
 import { hasUnlocked } from "../../../../../core/collection"
 import { BoosterCard } from "../../../../../types/Booster"
+import PokemonPortrait from "../pokemon-portrait"
 import "./booster-card.css"
 
 interface BoosterCardProps {
@@ -42,13 +43,7 @@ export function BoosterCard({ card, flipped, onFlip }: BoosterCardProps) {
         <img src="/assets/ui/pokecard.png" />
       </div>
       <div className={cc("front", { shimmer: card.shiny })}>
-        <img
-          src={getPortraitSrc(
-            PkmIndex[card.name],
-            card.shiny,
-            card.emotion
-          )}
-        ></img>
+        <PokemonPortrait portrait={{ index: PkmIndex[card.name], shiny: card.shiny, emotion: card.emotion }} />
         <div className="front-text">
           <p className="name">{t(`pkm.${card.name}`)}
             <br /> <span style={{ fontWeight: 'normal' }}>{t(`emotion.${card.emotion}`)}</span>
@@ -58,11 +53,7 @@ export function BoosterCard({ card, flipped, onFlip }: BoosterCardProps) {
             : <p className="dust">
               +{card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER} {t("shards")}{" "}
               <img
-                src={getPortraitSrc(
-                  PkmIndex[card.name],
-                  card.shiny,
-                  card.emotion
-                )}
+                src={getPortraitSrc(PkmIndex[card.name])}
                 className="dust"
                 alt="dust"
               />

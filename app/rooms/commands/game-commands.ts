@@ -14,7 +14,7 @@ import { canSell, getUnitScore } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
-import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
@@ -208,7 +208,8 @@ export class OnPokemonCatchCommand extends Command<
     this.state.wanderers.delete(id)
 
     if (pkm === Pkm.SABLEYE) {
-      // nothing in particular, prevents sableye from stealing items
+      // prevents sableye from stealing items and give 1 gold
+      player.addMoney(1, true, null)
     } else if (Unowns.includes(pkm)) {
       const unownIndex = PkmIndex[pkm]
       if (client.auth) {
@@ -294,7 +295,7 @@ export class OnDragDropPokemonCommand extends Command<
           !isPositionEmpty(x, y, player.board) &&
           !(this.state.phase === GamePhaseState.FIGHT && y > 0)
         ) {
-          const pokemonToClone = this.room.getPokemonByPosition(player, x, y)
+          const pokemonToClone = player.getPokemonAt(x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
@@ -313,15 +314,13 @@ export class OnDragDropPokemonCommand extends Command<
               success = true
               message.updateBoard = false
             }
-          } else if (y === 0) {
-            this.room.swap(player, pokemon, x, y)
+          } else if (dropOnBench) {
+            this.swapPokemonPositions(player, pokemon, x, y)
             success = true
           }
         } else if (dropOnBench && dropFromBench) {
           // Drag and drop pokemons through bench has no limitation
-
-          this.room.swap(player, pokemon, x, y)
-          pokemon.onChangePosition(x, y, player)
+          this.swapPokemonPositions(player, pokemon, x, y)
           success = true
         } else if (this.state.phase == GamePhaseState.PICK) {
           // On pick, allow to drop on / from board
@@ -333,7 +332,7 @@ export class OnDragDropPokemonCommand extends Command<
               this.room.state.specialGameRule
             )
           const dropToEmptyPlace = isPositionEmpty(x, y, player.board)
-          const target = this.room.getPokemonByPosition(player, x, y)
+          const target = player.getPokemonAt(x, y)
 
           if (dropOnBench) {
             if (
@@ -342,26 +341,7 @@ export class OnDragDropPokemonCommand extends Command<
               !(isBoardFull && pokemon?.doesCountForTeamSize === false)
             ) {
               // From board to bench (bench to bench is already handled)
-              this.room.swap(player, pokemon, x, y)
-              pokemon.items.forEach((item) => {
-                if (
-                  item === Item.CHEF_HAT ||
-                  item === Item.TRASH ||
-                  ArtificialItems.includes(item)
-                ) {
-                  player.items.push(item)
-                  pokemon.removeItem(item)
-                }
-              })
-              if (this.state.specialGameRule === SpecialGameRule.SLAMINGO) {
-                pokemon.items.forEach((item) => {
-                  if (item !== Item.RARE_CANDY) {
-                    player.items.push(item)
-                    pokemon.removeItem(item)
-                  }
-                })
-              }
-              pokemon.onChangePosition(x, y, player)
+              this.swapPokemonPositions(player, pokemon, x, y)
               success = true
             }
           } else if (
@@ -380,8 +360,7 @@ export class OnDragDropPokemonCommand extends Command<
             )
           ) {
             // Prevents a pokemon to go on the board only if it's adding a pokemon from the bench on a full board
-            this.room.swap(player, pokemon, x, y)
-            pokemon.onChangePosition(x, y, player)
+            this.swapPokemonPositions(player, pokemon, x, y)
             success = true
           }
         }
@@ -402,6 +381,23 @@ export class OnDragDropPokemonCommand extends Command<
     if (commands.length > 0) {
       return commands
     }
+  }
+
+  swapPokemonPositions(player: Player, pokemon: Pokemon, x: number, y: number) {
+    const pokemonToSwap = player.getPokemonAt(x, y)
+    if (pokemonToSwap) {
+      pokemonToSwap.positionX = pokemon.positionX
+      pokemonToSwap.positionY = pokemon.positionY
+      pokemonToSwap.onChangePosition(
+        pokemon.positionX,
+        pokemon.positionY,
+        player,
+        this.state
+      )
+    }
+    pokemon.positionX = x
+    pokemon.positionY = y
+    pokemon.onChangePosition(x, y, player, this.state)
   }
 }
 
@@ -437,27 +433,18 @@ export class OnSwitchBenchAndBoardCommand extends Command<
         destination &&
         !(isBoardFull && pokemon.doesCountForTeamSize)
       ) {
-        const [dx, dy] = destination
-
-        this.room.swap(player, pokemon, dx, dy)
-        pokemon.onChangePosition(dx, dy, player)
+        const [x, y] = destination
+        pokemon.positionX = x
+        pokemon.positionY = y
+        pokemon.onChangePosition(x, y, player, this.state)
       }
     } else {
       // pokemon is on board, switch to bench
-      const dx = getFirstAvailablePositionInBench(player.board)
-      if (dx !== undefined) {
-        this.room.swap(player, pokemon, dx, 0)
-        pokemon.items.forEach((item) => {
-          if (
-            item === Item.CHEF_HAT ||
-            item === Item.TRASH ||
-            ArtificialItems.includes(item)
-          ) {
-            player.items.push(item)
-            pokemon.removeItem(item)
-          }
-        })
-        pokemon.onChangePosition(dx, 0, player)
+      const x = getFirstAvailablePositionInBench(player.board)
+      if (x !== undefined) {
+        pokemon.positionX = x
+        pokemon.positionY = 0
+        pokemon.onChangePosition(x, 0, player, this.state)
       }
     }
 
@@ -1619,8 +1606,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           const coordinate = getFirstAvailablePositionOnBoard(player.board)
           if (coordinate && pokemon) {
-            this.room.swap(player, pokemon, coordinate[0], coordinate[1])
-            pokemon.onChangePosition(coordinate[0], coordinate[1], player)
+            pokemon.positionX = coordinate[0]
+            pokemon.positionY = coordinate[1]
+            pokemon.onChangePosition(coordinate[0], coordinate[1], player, this.state)
           }
         }
         if (numberOfPokemonsToMove > 0) {
@@ -1887,6 +1875,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   spawnWanderingPokemons() {
     const isPVE = this.state.stageLevel in PVEStages
 
+    const shouldSpawnSableye = this.state.townEncounter === TownEncounters.SABLEYE && chance(0.15)
+    if (shouldSpawnSableye) {
+      this.state.townEncounter = null // reset sableye encounter after spawning
+    }
+
     this.state.players.forEach((player: Player) => {
       if (player.alive && !player.isBot) {
         const client = this.room.clients.find(
@@ -1907,11 +1900,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
         }
 
-        if (
-          this.state.townEncounter === TownEncounters.SABLEYE &&
-          player.items.length > 0 &&
-          chance(0.1)
-        ) {
+        if (shouldSpawnSableye && player.items.length > 0) {
           const id = nanoid()
           let itemStolen
           this.state.wanderers.set(id, Pkm.SABLEYE)

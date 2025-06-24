@@ -13,6 +13,7 @@ import { values } from "../../../../../utils/schemas"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Ability } from "../../../../../types/enum/Ability"
 import "./pokeguesser.css"
+import PokemonPortrait from "../pokemon-portrait"
 
 const listPokemonsToGuess = precomputedPokemons.filter(p => p.passive !== Passive.INANIMATE && p.skill !== Ability.DEFAULT)
     .filter(p => !(PkmFamily[p.name] === Pkm.MILCERY && p.stars === 2 && p.name !== Pkm.ALCREMIE_VANILLA))
@@ -53,11 +54,14 @@ export default function Pokeguesser(props: {
             header={t("gadget.pokeguesser")}
         >
             <h2>{found ? t("pokeguessr.itssolution", { pokemon: pokemonToGuess.name }) : t("pokeguessr.whosthatpokemon")}</h2>
-            <img className="pokemon-portrait" src={getPortraitSrc(pokemonToGuess.index)} style={{
-                width: 64, height: 64,
-                margin: "0 auto 16px",
-                filter: found ? '' : `blur(${16 - clamp(attempts.length, 0, 15)}px)`
-            }} />
+            <PokemonPortrait
+                portrait={{ index: pokemonToGuess.index }}
+                style={{
+                    width: 80, height: 80,
+                    margin: "0 auto 16px",
+                    filter: found ? '' : `blur(${16 - clamp(attempts.length, 0, 15)}px)`
+                }}
+            />
 
             {found ? <p><button className="bubbly blue" onClick={resetGame}>{t("pokeguessr.reset")}</button></p>
                 : <PokemonSelect value={value} setValue={setValue} onSubmit={submitGuess} />}

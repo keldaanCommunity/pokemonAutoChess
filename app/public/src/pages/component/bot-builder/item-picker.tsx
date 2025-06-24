@@ -21,7 +21,8 @@ export default function ItemPicker(props: {
   const [itemHovered, setItemHovered] = useState<Item>()
 
   function handleOnDragStart(e: React.DragEvent, item: Item) {
-    e.dataTransfer.setData("item", item)
+    e.stopPropagation()
+    e.dataTransfer.setData("text/plain", `item,${item}`)
   }
 
   const tabs = [
@@ -70,6 +71,7 @@ export default function ItemPicker(props: {
       {itemHovered && <Tooltip
         id="item-detail"
         className="custom-theme-tooltip item-detail-tooltip"
+        float
       >
         <ItemDetailTooltip item={itemHovered} />
       </Tooltip>}

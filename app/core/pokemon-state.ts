@@ -63,16 +63,8 @@ export default abstract class PokemonState {
         pokemon.onCriticalAttack({ target, board, damage })
       }
 
-      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
-        damage = Math.round(damage + target.hp * 0.08)
-      }
-
       if (pokemon.attackType === AttackType.SPECIAL) {
         damage = Math.ceil(damage * (1 + pokemon.ap / 100))
-      }
-
-      if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
-        damage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
       }
 
       let additionalSpecialDamagePart = 0
@@ -167,6 +159,10 @@ export default abstract class PokemonState {
         physicalDamage = damage
       }
 
+      if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
+        physicalDamage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+      }
+
       if (physicalDamage > 0) {
         // Apply attack physical damage
         const { takenDamage } = target.handleDamage({
@@ -189,6 +185,19 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+
+        if (target.items.has(Item.POWER_LENS) && !pokemon.items.has(Item.PROTECTIVE_PADS)) {
+          const speDef = target.status.armorReduction ? Math.round(target.speDef / 2) : target.speDef
+          const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
+          const damageBlocked = min(0)(specialDamage - damageAfterReduction)
+          pokemon.handleDamage({
+            damage: Math.round(damageBlocked),
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: target,
+            shouldTargetGainMana: true
+          })
+        }
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -541,12 +550,7 @@ export default abstract class PokemonState {
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-
-        if (residualDamage < shield) {
-          pokemon.addShield(shield - residualDamage, pokemon, 0, false)
-        }
-        takenDamage += max(shield)(residualDamage - pokemon.life)
-        pokemon.shieldDamageTaken += max(shield)(residualDamage)
+       
         residualDamage = min(0)(residualDamage - shield)
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)

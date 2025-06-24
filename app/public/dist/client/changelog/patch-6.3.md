@@ -73,6 +73,16 @@
 - Change Unown P (Pest): rarity of bugs now increases with stage level
 - Change Unown W (Wish): rarity given now increases with stage level
 - Nerf Unown F (Fish): 3 → 2 fishes
+- Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
+- Nerf Plusle & Minun: Speed 65 → 61 ; nerf Link Cable: now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
+- Nerf Scale Shot (Roaring moon): Damage to enemies in the path: 20 → 10 physical damage ; damage to farthest target remains unchanged
+- Buff Psycho-Cut (Gallade): 10/20/30 → 10/20/40 special damage
+- Buff Psycho Boost (Deoxys normal form): 140 → 150 special damage
+- Buff Mewtwo: PP 120 → 110
+- Buff Mew: Speed 57 → 64
+- Buff Smoochum line: Special defense :2/6 → 3/8
+- Buff Doom Desire (Jirachi): restore ~~60~~ to max PP if target is KO in the duration
+- Nerf Capsakid line: PP 100 → 110
 - Change Metronome: Luck now increases the chance to use a stronger ability
 
 # Changes to Synergies
@@ -84,6 +94,11 @@
 
 # Changes to Items
 
+- New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
+- New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
+- Punching Glove now deals additional physical damage equal to ~~8~~ 10% of the target's max HP, applied after all other computations (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
+- Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
+- Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -92,11 +107,14 @@
 - Buff Rock Salt: Rune protect duration 8 → 10 seconds
 - Buff Spindas Cocktail possible positive effects: attack 5 → 10, AP 25 → 50, speed 25 → 50, shield 50 → 100
 - Change Binding Mochi: now inflicts Possessed status for 5 seconds
+- Change Hearty Stew: if fed to a Pokémon holding Cooking Pot, the Pokémon is Burn for 5 seconds.
 - Nerf Comet Shard: Protect duration 3 → 2 seconds
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
 - Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
 - Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
+- Nerf Magmarizer: Attack 5 → 3
+- Nerf Big Nugget: Gold gained at max stacks 3 → 2
 
 # Gameplay
 
@@ -105,6 +123,7 @@
 - New Title: Surfer: Surf with Pikachu Surfer.
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
+- Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
 
 # UI
 
@@ -112,6 +131,7 @@
 - Simplified the collection system UI. Added counters for portraits unlocked, shinies unlocked, and pokémons played.
 - Add pool filter in pokemon meta report
 - Add pokemon search bar in Wiki Regions
+- Added camera shakes to some abilities. Can be disabled in options.
 
 # Collection system rework
 
@@ -129,3 +149,4 @@
 - Changed title Duke: owns at least one emote of all current pokémons in the game ; all the accounts hat this title before this patch lose it.
 - New title: Collector: has played all current pokémons in the game
 - Putting the evolved pokemon into the team planner should mark the basic pokemon in the shop
+- Sableye town encounter now steals all players at the same stage and only once. It is also slower and gives 1 gold if caught.

@@ -392,7 +392,7 @@ export default class GameScene extends Scene {
           .image(zone.x, zone.y, "board_cell", 0)
           .setVisible(false)
           .setData({ x, y })
-          .setDepth(DEPTH.DROP_ZONE)
+          .setDepth(DEPTH.DROP_CELL)
           .setScale(2, 2)
         zone.setData({ x, y, sprite: spotSprite })
         this.dropSpots.push(spotSprite)
@@ -465,7 +465,7 @@ export default class GameScene extends Scene {
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
-          this.pokemonDragged.setDepth(DEPTH.POKEMON_GRABBED)
+          this.pokemonDragged.setDepth(DEPTH.DRAGGED_POKEMON)
           this.dropSpots.forEach((spot) => {
             if (
               this.room?.state.phase === GamePhaseState.PICK ||
@@ -658,7 +658,7 @@ export default class GameScene extends Scene {
           dropZone.name === "sell-zone" &&
           gameObject instanceof PokemonSprite
         ) {
-          dropZone.getData("rectangle")?.setFillStyle(0x6b8bb2)
+          this.sellZone?.onDragEnter()
         }
       },
       this
@@ -685,7 +685,7 @@ export default class GameScene extends Scene {
           dropZone.name === "sell-zone" &&
           gameObject instanceof PokemonSprite
         ) {
-          dropZone.getData("rectangle")?.setFillStyle(0x61738a)
+          this.sellZone?.onDragLeave()
         }
       },
       this
@@ -701,7 +701,7 @@ export default class GameScene extends Scene {
     const thickness = Math.round(
       1 + Math.log(gameObject.def + gameObject.speDef)
     )
-    
+
     outline.add(gameObject.sprite, {
       thickness,
       outlineColor: 0xffffff
@@ -712,5 +712,48 @@ export default class GameScene extends Scene {
     const outline = <OutlinePlugin>this.plugins.get("rexOutline")
     if (!outline) return // outline plugin doesnt work with canvas renderer
     outline.remove(gameObject.sprite)
+  }
+
+  displayMoneyGain(x: number, y: number, gain: number) {
+    const textStyle = {
+      fontSize: "25px",
+      fontFamily: "Verdana",
+      color: "#FFFF00",
+      align: "center",
+      strokeThickness: 2,
+      stroke: "#000"
+    }
+    const text = this.add.existing(
+      new GameObjects.Text(
+        this,
+        x - 40,
+        y - 50,
+        `${gain > 0 ? "+ " : ""}${gain} GOLD`,
+        textStyle
+      )
+    )
+    text.setDepth(DEPTH.TEXT_MAJOR)
+    this.add.tween({
+      targets: [text],
+      ease: "Linear",
+      duration: 1000,
+      delay: 0,
+      alpha: {
+        getStart: () => 1,
+        getEnd: () => 0
+      },
+      y: {
+        getStart: () => y - 50,
+        getEnd: () => y - 110
+      },
+      onComplete: () => {
+        text.destroy()
+      }
+    })
+  }
+
+  shakeCamera(intensity: number, duration: number) {
+    if (preference("disableCameraShake")) return
+    this.cameras.main.shake(duration, intensity)
   }
 }
