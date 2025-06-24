@@ -2409,7 +2409,7 @@
 		"RAZOR_FANG": "+100% CRIT_POWER. Los golpes críticos aplican ARMOR_BREAK durante 4 segundos.",
 		"PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de represalia.",
 		"CHOICE_SCARF": "Al golpear, inflige un 50% de daño de ataque a un enemigo adyacente",
-		"PUNCHING_GLOVE": "Los ataques infligen un 10 % del HP máximo del objetivo como daño adicional.",
+		"PUNCHING_GLOVE": "Los ataques infligen un 8 % del HP máximo del objetivo como daño adicional.",
 		"MUSCLE_BAND": "Cuando el portador recibe daño, gana 1 acumulación. Cada 2 acumulaciones, el titular gana +2 DEF, +1 ATK y +5 SPEED (máx. 20 acumulaciones)",
 		"WONDER_BOX": "Al comienzo de cada batalla, la caja de maravillas se reemplaza por 2 objetos temporales (máximo 3 objetos retenidos)",
 		"CLEANSE_TAG": "Cuando comienza el combate, el poseedor y todos los aliados adyacentes en la misma fila reciben 20% de HP como SHIELD y RUNE_PROTECT durante 5 segundos.",

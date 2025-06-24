@@ -95,7 +95,7 @@
 
 - New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
 - New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
-- Punching Glove now deals additional physical damage equal to ~~8~~ 10% of the target's max HP, applied after all other computations (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
+- Punching Glove now deals additional physical damage **after all other computations** (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
 - Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
 - Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
 - Buff Moomoo Milk: 10 → 15 permanent HP

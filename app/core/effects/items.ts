@@ -192,7 +192,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.PUNCHING_GLOVE]: [
     new OnHitEffect((pokemon, target, board) => {
       target.handleDamage({
-        damage: Math.round(0.1 * target.hp),
+        damage: Math.round(0.08 * target.hp),
         board,
         attackType: AttackType.PHYSICAL,
         attacker: pokemon,
@@ -429,7 +429,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.MAGMARIZER]: [
     new OnAttackEffect(({ pokemon, target, board }) => {
       pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.count.magmarizerCount++      
+      pokemon.count.magmarizerCount++
     }),
     new OnHitEffect((pokemon, target, board) => {
       target.status.triggerBurn(2000, target, pokemon)
