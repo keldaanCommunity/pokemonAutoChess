@@ -2319,7 +2319,7 @@
 		"RAZOR_FANG": "+100% CRIT_POWER. Kritische Treffer verursachen 4 Sekunden lang ARMOR_BREAK.",
 		"PROTECTIVE_PADS": "Angriffe verursachen doppelten Schaden gegen SHIELD. Der Benutzer ist vor Rückstoßschäden und Vergeltungseffekten geschützt.",
 		"CHOICE_SCARF": "Eine weitere Attacke trifft das benachbarte Pokemon mit den geringsten Lebenspunkten für 50% des Originalschaden.",
-		"PUNCHING_GLOVE": "Angriffe verursachen 10% der max. HP des Ziels als zusätzlichen Schaden",
+		"PUNCHING_GLOVE": "Angriffe verursachen 8% der max. HP des Ziels als zusätzlichen Schaden",
 		"MUSCLE_BAND": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +2 DEF, +1 ATK und +5 SPEED (maximal 20 Stapel).",
 		"WONDER_BOX": "Zu Beginn jeder Schlacht wird die Wunderkiste durch 2 temporäre Gegenstände ersetzt (maximal 3 Gegenstände enthalten).",
 		"CLEANSE_TAG": "Wenn der Kampf beginnt, erhalten der Träger und alle benachbarten Verbündeten in derselben Reihe 20 % HP als SHIELD und 5 Sekunden lang RUNE_PROTECT",
