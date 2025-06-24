@@ -132,11 +132,11 @@ export default function TeamBuilder(props: {
   }
 
   function handleDrop(x: number, y: number, e: React.DragEvent) {
-    if (e.dataTransfer.getData("cell") != "") {
-      const [originX, originY] = e.dataTransfer
-        .getData("cell")
-        .split(",")
-        .map(Number)
+    e.stopPropagation()
+    e.preventDefault()
+    const data = e.dataTransfer.getData("text/plain")
+    if (data.startsWith("cell")) {
+      const [type, originX, originY] = data.split(",").map(Number)
       const pkm = board.find((p) => p.x === originX && p.y === originY)
       const otherPokemonOnCell = board.find((p) => p.x === x && p.y === y)
       if (pkm) {
@@ -148,16 +148,17 @@ export default function TeamBuilder(props: {
         pkm.y = y
         updateBoard([...board])
       }
-    } else if (e.dataTransfer.getData("pokemon") != "") {
+    } else if (data.startsWith("pokemon")) {
+      const [type, name] = data.split(",") as [string, Pkm]
       const pkm: PkmWithCustom = {
-        name: e.dataTransfer.getData("pokemon") as Pkm,
+        name,
         emotion: Emotion.NORMAL,
         shiny: false
       }
       addPokemon(x, y, pkm)
       setSelection(pkm)
-    } else if (e.dataTransfer.getData("item") != "") {
-      const item = e.dataTransfer.getData("item") as Item
+    } else if (data.startsWith("item")) {
+      const [type, item] = data.split(",") as [string, Item]
       addItem(x, y, item)
       setSelection(item)
     }

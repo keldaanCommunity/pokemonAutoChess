@@ -6865,7 +6865,7 @@ export class Mew extends Pokemon {
   stars = 3
   hp = 200
   atk = 27
-  speed = 57
+  speed = 64
   def = 10
   speDef = 10
   maxPP = 50
@@ -6892,7 +6892,7 @@ export class Mewtwo extends Pokemon {
   speed = 67
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 110
   range = 3
   skill = Ability.PSYSTRIKE
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -9345,7 +9345,7 @@ export class Smoochum extends Pokemon {
   atk = 5
   speed = 55
   def = 2
-  speDef = 2
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.LOVELY_KISS
@@ -9361,7 +9361,7 @@ export class Jynx extends Pokemon {
   atk = 11
   speed = 55
   def = 6
-  speDef = 6
+  speDef = 8
   maxPP = 80
   range = 2
   skill = Ability.LOVELY_KISS
@@ -17637,7 +17637,7 @@ export class Capsakid extends Pokemon {
   speed = 49
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 110
   range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
@@ -17653,7 +17653,7 @@ export class Scovillain extends Pokemon {
   speed = 49
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 110
   range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
