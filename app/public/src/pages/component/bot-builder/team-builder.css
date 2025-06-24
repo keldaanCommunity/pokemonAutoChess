@@ -69,6 +69,8 @@
   display: flex;
   justify-content: space-evenly;
   gap: 1px;
+  pointer-events: none;
+  user-select: none;
 }
 
 #team-editor td .pokemon-items > img {
@@ -132,13 +134,13 @@
   outline: 4px solid #109fff;
 }
 
-#pokemon-picker .pokemon-portrait {
+#pokemon-picker dd > .pokemon-portrait {
   width: 40px;
   height: 40px;
   cursor: var(--cursor-hover);
 }
 
-#pokemon-picker .pokemon-portrait img {
+#pokemon-picker dd > .pokemon-portrait img {
   display: block;
   image-rendering: pixelated;
 }

@@ -78,8 +78,9 @@ function PokemonPickerTab(props: {
   const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
   function handleOnDragStart(e: React.DragEvent, name: Pkm) {
+    e.stopPropagation()
     setHoveredPokemon(undefined)
-    e.dataTransfer.setData("pokemon", name)
+    e.dataTransfer.setData("text/plain", `pokemon,${name}`)
   }
 
   const ingame = useLocation().pathname === "/game"
