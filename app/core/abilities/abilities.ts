@@ -4569,15 +4569,19 @@ export class MetronomeStrategy extends AbilityStrategy {
       rarity = Rarity.LEGENDARY
     }
 
-    const options = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
+    const pokemonOptions = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
     if (rarity === Rarity.SPECIAL) {
-      options.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
+      pokemonOptions.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
     }
     
-    const skill = pickRandomIn(
-      options.map((p) => 
+    const skillOptions = [...new Set(
+      pokemonOptions.map((p) => 
         getPokemonData(p).skill
-      ).filter((s) => 
+      )
+    )]
+
+    const skill = pickRandomIn(
+      skillOptions.filter((s) => 
         AbilityStrategies[s].copyable
       )
     )
