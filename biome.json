@@ -6,6 +6,7 @@
       "!**/node_modules/**/*",
       "!**/app/public/dist/server/**/*",
       "!**/app/public/dist/client/pokechess",
+      "!**/app/public/dist/client/assets",
       "!**/app/public/dist/client/locales/**/translation.json"
     ],
     "maxSize": 10000000

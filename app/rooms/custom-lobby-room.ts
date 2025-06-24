@@ -438,8 +438,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
       return user
     } catch (error) {
-      //logger.info(error)
-      // biome-ignore lint/complexity/noUselessCatch: <explanation>
+      logger.error(`Error on authentication on lobby room`, error)
       throw error // https://docs.colyseus.io/community/deny-player-join-a-room/
     }
   }
