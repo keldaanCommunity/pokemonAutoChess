@@ -103,12 +103,11 @@ if (process.env.MODE === "dev") {
 export default config({
   options: gameOptions,
 
-  // uWebSockets caused many issues unfortunately, reverting to WebSocketTransport for now
-  /*initializeTransport: function () {
+  initializeTransport: function () {
     return new uWebSocketsTransport({
       compression: uWebSockets.SHARED_COMPRESSOR
     })
-  },*/
+  },
 
   initializeGameServer: (gameServer) => {
     /**
