@@ -158,7 +158,7 @@
 		"GRASSY_SURGE": "Grassy Surge",
 		"MISTY_SURGE": "Misty Surge",
 		"SKY_ATTACK": "Sky Attack",
-		"SKY_ATTACK_SHADOW": "Shadow Sky Attack",
+		"SKY_ATTACK_SHADOW": "Sky Attack",
 		"ILLUSION": "Illusion",
 		"SHELTER": "Shelter",
 		"LAVA_PLUME": "Lava Plume",
@@ -1474,14 +1474,13 @@
 		"WYRDEER": "Wyrdeer",
 		"OKIDOGI": "Okidogi",
 		"MUNKIDORI": "Munkidori",
-		"FEZANDIPITI": "Fezandipiti",
-		"MEOWSTIC": "Meowstic"
+		"FEZANDIPITI": "Fezandipiti"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
 		"EARTHQUAKE": "Deal [100,SP] SPECIAL to all enemy Pokémon in the same row or column as the user.",
 		"SONG_OF_DESIRE": "Inflict 2 targets on the back line with CHARM for 3 seconds and reduce their ATK by [3,SP].",
-		"CONFUSING_MIND": "Inflict 2 opponents on the back line with CONFUSION for 3 seconds.",
+		"CONFUSING_MIND": "Inflict 2 opponents on the back line with CONFUSION for [3,SP] seconds.",
 		"KNOWLEDGE_THIEF": "Use the target's ability. The allied player gains 1 XP.",
 		"KING_SHIELD": "PROTECT the user for 1.5 seconds, gain [10,20,30,SP] SHIELD and swap positions with the farthest enemy Pokémon.",
 		"U_TURN": "Gain [15,30,50,SP] SHIELD, swap positions with the target and inflict them with CHARM for 1 second.",
@@ -1719,7 +1718,7 @@
 		"LEAF_BLADE": "The user's next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE.",
 		"ANCHOR_SHOT": "Grab the farthest enemy Pokémon and deal [20,40,80,SP] SPECIAL.",
 		"MAGNET_RISE": "Grant PROTECT for 2 seconds and [10,SP]% dodge chance to the user to the [2,4,6] adjacent allied Pokémon with the lowest health.",
-		"ATTRACT": "Inflict [1,2,3] random enemy Pokémon with CHARM for 1 second.",
+		"ATTRACT": "Inflict [1,2,3] random enemy Pokémon with CHARM for [1,SP] second.",
 		"WATER_PULSE": "Deal [75,150,SP] SPECIAL to the target and adjacent enemy Pokémon and inflict them with CONFUSION for 2 seconds.",
 		"PLAY_ROUGH": "Deal [30,60,120,SP] SPECIAL to the target and inflict it with CHARM for 2.5 seconds.",
 		"AERIAL_ACE": "Deal [25,50,100,SP] TRUE to the target.",
@@ -2372,9 +2371,7 @@
 		"MALICIOUS_ARMOR": "Malicious Armor",
 		"RUSTED_SWORD": "Rusted Sword",
 		"SCROLL_OF_WATERS": "Scroll of Waters",
-		"SCROLL_OF_DARKNESS": "Scroll of Darkness",
-		"Berries": "Berries",
-		"SMOKED_FILLET": "Smoked Fillet"
+		"SCROLL_OF_DARKNESS": "Scroll of Darkness"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2438,7 +2435,7 @@
 		"CHERI_BERRY": "Consumed once below 50% HP or after being PARALYSIS, heal 20 HP and give +10 ATK and immunity to PARALYSIS for the rest of the fight",
 		"CHESTO_BERRY": "Consumed once below 50% HP or after being SLEEP, heal 20 HP and give +50 AP and immunity to SLEEP for the rest of the fight",
 		"GANLON_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 20 DEF",
-		"JABOCA_BERRY": "Consumed once below 50% HP, heal 20 HP and cast $t(ability.SPIKY_SHIELD) for 10 seconds.",
+		"JABOCA_BERRY": "Consumed once below 50% HP, heal 20 HP and cast $t(ability.SPIKY_SHIELD) for 10 seconds",
 		"LANSAT_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 50% CRIT_CHANCE",
 		"LEPPA_BERRY": "Consumed once below 50% HP or after casting ability, heal 20 HP and gain 50 PP once",
 		"LIECHI_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 15 ATK",
@@ -2706,7 +2703,7 @@
 		"APPLIN": "Applin is looking for a SWEET_APPLE, a TART_APPLE or a SIRUPY_APPLE.",
 		"DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE.",
 		"WELL_BAKED": "The Pokémon doesn't suffer from BURN. Instead, it gains 20 DEF when it is affected by BURN.",
-		"CONVERSION": "Get the highest synergy of your opponent and its effects at the start of the fight.",
+		"CONVERSION": "Conversion: Get the highest synergy of your opponent and its effects at the start of the fight.",
 		"CREAM": "$t(pkm.MILCERY) is looking for a delicious flavor...",
 		"VANILLA_CREAM": "Upon casting, the VANILLA_FLAVOR adds [80,SP] SHIELD to the decorated ally",
 		"RUBY_CREAM": "Upon casting, the RUBY_FLAVOR adds [30,SP] SPEED to the decorated ally",
