@@ -1,5 +1,5 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, IRoomCache, Room, matchMaker, subscribeLobby } from "colyseus"
+import { Client, IRoomCache, matchMaker, Room, subscribeLobby } from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import Message from "../models/colyseus-models/message"
@@ -32,6 +32,9 @@ import {
   ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
   CreateTournamentLobbiesCommand,
+  DeleteAccountCommand,
+  DeleteRoomCommand,
+  DeleteTournamentCommand,
   EndTournamentMatchCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
@@ -40,7 +43,6 @@ import {
   JoinOrOpenRoomCommand,
   NextTournamentStageCommand,
   OnCreateTournamentCommand,
-  DeleteRoomCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
@@ -48,12 +50,10 @@ import {
   OnSearchCommand,
   OpenBoosterCommand,
   ParticipateInTournamentCommand,
-  RemoveMessageCommand,
-  DeleteTournamentCommand,
-  SelectLanguageCommand,
-  UnbanUserCommand,
   RemakeTournamentLobbyCommand,
-  DeleteAccountCommand
+  RemoveMessageCommand,
+  SelectLanguageCommand,
+  UnbanUserCommand
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
