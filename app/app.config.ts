@@ -1,24 +1,26 @@
-import path from "path"
+import uWebSockets from "uWebSockets.js"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
 import { uWebSocketsTransport } from "@colyseus/uwebsockets-transport"
-import uWebSockets from "uWebSockets.js"
 import {
+  matchMaker,
   Presence,
   RedisDriver,
   RedisPresence,
-  ServerOptions,
-  matchMaker
+  ServerOptions
 } from "colyseus"
-import helmet from "helmet"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
+import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import helmet from "helmet"
 import { connect } from "mongoose"
+import path from "path"
 import pkg from "../package.json"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
+import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
@@ -37,6 +39,7 @@ import {
 } from "./services/bots"
 import { getLeaderboard } from "./services/leaderboard"
 import { getMetadata, getMetaItems, getMetaPokemons } from "./services/meta"
+import { Role } from "./types"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
   MAX_POOL_CONNECTIONS_SIZE,
@@ -46,9 +49,6 @@ import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
-import chatV2 from "./models/mongo-models/chat-v2"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import { Role } from "./types"
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -105,7 +105,8 @@ export default config({
 
   initializeTransport: function () {
     return new uWebSocketsTransport({
-      compression: uWebSockets.SHARED_COMPRESSOR
+      compression: uWebSockets.SHARED_COMPRESSOR,
+      idleTimeout: 0, // disable idle timeout
     })
   },
 
