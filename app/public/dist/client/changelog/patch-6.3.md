@@ -98,6 +98,7 @@
 - Punching Glove now deals additional physical damage **after all other computations** (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
 - Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
 - Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
+- Nerf Curry: 5 → 4 seconds rage duration
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP

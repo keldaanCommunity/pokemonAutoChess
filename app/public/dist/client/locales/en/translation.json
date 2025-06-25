@@ -2524,7 +2524,7 @@
 		"HEARTY_STEW": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds.",
 		"RAGE_CANDY_BAR": "Gain 10 ATK at the start of the next fight.",
 		"TEA": "Gain 80 PP at the start of the next fight.",
-		"CURRY": "Start the next fight RAGE for 5 seconds.",
+		"CURRY": "Start the next fight RAGE for 4 seconds.",
 		"CASTELIACONE": "The first attack in the next fight will inflict FREEZE for 5 seconds on hit.",
 		"WHIPPED_DREAM": "The first attack in the next fight will inflict CHARM for 5 seconds on hit.",
 		"BERRY_JUICE": "Gain 100 SHIELD at the start of the next fight and every time a berry is consumed.",

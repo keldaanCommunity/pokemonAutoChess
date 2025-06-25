@@ -2519,7 +2519,7 @@
 		"HEARTY_STEW": "仅在下一轮战斗中，提升30%的最大HP。如果喂给持有 COOKING_POT 的神奇宝贝，该神奇宝贝将会 BURN 5 秒。",
 		"RAGE_CANDY_BAR": "仅在下一轮战斗中，提升10点ATK。",
 		"TEA": "在下一轮战斗开始时，获得80点PP。",
-		"CURRY": "在下一轮战斗开始时，陷入RAGE 5秒。",
+		"CURRY": "在下一轮战斗开始时，陷入RAGE 4秒。",
 		"CASTELIACONE": "仅在下一轮战斗中，第一次攻击会使命中的敌方宝可梦陷入FREEZE 5秒。",
 		"WHIPPED_DREAM": "仅在下一轮战斗中，第一次攻击会使命中的敌方宝可梦陷入CHARM 5秒。",
 		"BERRY_JUICE": "仅在下一轮战斗中，战斗开始时以及每次食用树果时获得100点SHIELD。",

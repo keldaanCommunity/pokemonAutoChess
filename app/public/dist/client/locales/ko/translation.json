@@ -2438,7 +2438,7 @@
 		"HEARTY_STEW": "다음 전투 시작 시 최대 HP 30% 증가. COOKING_POT을 들고 있는 포켓몬에게 먹이면, 포켓몬은 5초 동안 BURN 상태가 됩니다.",
 		"RAGE_CANDY_BAR": "다음 전투에 10 ATK 증가",
 		"TEA": "다음 전투 시작 시 80 PP 획득",
-		"CURRY": "다음 전투 시작 시 5초간 RAGE",
+		"CURRY": "다음 전투 시작 시 4초간 RAGE",
 		"CASTELIACONE": "다음 전투 첫 공격 시 5초간 FREEZE",
 		"WHIPPED_DREAM": "다음 전투 첫 공격 시 5초간 CHARM",
 		"BERRY_JUICE": "다음 전투 시작 시 및 나무열매 소모 시마다 100 SHIELD 을 획득",
