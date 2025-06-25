@@ -12196,7 +12196,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
             positionX: target.positionX,
             positionY: target.positionY,
             targetX: tg.positionX,
-            targetY: tg.positionY
+            targetY: tg.positionY,
+            delay: 1
           })
           pokemon.commands.push(
             new DelayedCommand(() => {
@@ -12211,7 +12212,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
                 positionX: tg.positionX,
                 positionY: tg.positionY,
                 targetX: target.positionX,
-                targetY: target.positionY
+                targetY: target.positionY,
+                delay: 2
               })
               pokemon.commands.push(
                 new DelayedCommand(() => {

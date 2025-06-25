@@ -19,11 +19,11 @@ import {
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
+import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import { UNOWNS_PER_ABILITY } from "./wanderers-manager"
-import { DEPTH } from "../depths"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -197,7 +197,10 @@ export function displayAbility(
       break
 
     case Ability.SILVER_WIND: {
-      const specialProjectile = addAbilitySprite(Ability.EXTREME_SPEED, coordinates).setScale(2)
+      const specialProjectile = addAbilitySprite(
+        Ability.EXTREME_SPEED,
+        coordinates
+      ).setScale(2)
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
@@ -617,7 +620,11 @@ export function displayAbility(
 
     case Ability.FOLLOW_ME:
     case Ability.AFTER_YOU: {
-      const sprite = addAbilitySprite(skill, [coordinates[0], coordinates[1] - 50], true)
+      const sprite = addAbilitySprite(
+        skill,
+        [coordinates[0], coordinates[1] - 50],
+        true
+      )
         .setDepth(DEPTH.ABILITY)
         .setScale(0.5)
       scene.tweens.add({
@@ -1806,7 +1813,9 @@ export function displayAbility(
     }
 
     case Ability.ARMOR_CANNON: {
-      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(2)
+      const specialProjectile = addAbilitySprite(skill, coordinates).setScale(
+        2 - (delay ?? 0) * 0.5
+      )
       scene.tweens.add({
         targets: specialProjectile,
         x: coordinatesTarget[0],
@@ -1828,7 +1837,11 @@ export function displayAbility(
       break
 
     case Ability.MIND_BEND:
-      addAbilitySprite(Ability.ASSURANCE, [coordinatesTarget[0], coordinatesTarget[1] - 20], true)
+      addAbilitySprite(
+        Ability.ASSURANCE,
+        [coordinatesTarget[0], coordinatesTarget[1] - 20],
+        true
+      )
       break
 
     case Ability.CRUSH_GRIP:
@@ -1882,7 +1895,11 @@ export function displayAbility(
       break
 
     case Ability.ATTRACT:
-      addAbilitySprite(skill, [coordinates[0], coordinates[1] - 70], true).setScale(2)
+      addAbilitySprite(
+        skill,
+        [coordinates[0], coordinates[1] - 70],
+        true
+      ).setScale(2)
       break
 
     case Ability.MAGNET_RISE:
@@ -2333,8 +2350,16 @@ export function displayAbility(
     }
 
     case Ability.PRISMATIC_LASER: {
-      const startCoords = transformEntityCoordinates(targetX, flip ? 6 : 0, flip)
-      const finalCoords = transformEntityCoordinates(targetX, flip ? 0 : 6, flip)
+      const startCoords = transformEntityCoordinates(
+        targetX,
+        flip ? 6 : 0,
+        flip
+      )
+      const finalCoords = transformEntityCoordinates(
+        targetX,
+        flip ? 0 : 6,
+        flip
+      )
       const specialProjectile = addAbilitySprite(skill, startCoords).setScale(5)
       scene.tweens.add({
         targets: specialProjectile,
@@ -2431,7 +2456,11 @@ export function displayAbility(
     }
 
     case Ability.SONG_OF_DESIRE:
-      addAbilitySprite(skill, [coordinatesTarget[0], coordinatesTarget[1] - 60], true).setScale(2)
+      addAbilitySprite(
+        skill,
+        [coordinatesTarget[0], coordinatesTarget[1] - 60],
+        true
+      ).setScale(2)
       break
 
     case Ability.CONFUSING_MIND:
