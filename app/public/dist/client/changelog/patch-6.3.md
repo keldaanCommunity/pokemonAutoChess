@@ -116,6 +116,7 @@
 - Nerf Magmarizer: Attack 5 → 3
 - Nerf Big Nugget: Gold gained at max stacks 3 → 2
 - Change Ghimmigoul coin: no longer gives 1 additional gold per round ; Duskull encounter gives it for free along with regular items in carousel
+- New item: Treasure box ; Xatu town encounter now sells a treasure box for 10 gold. It contains two random item components.
 
 # Gameplay
 

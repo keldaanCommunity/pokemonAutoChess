@@ -3680,7 +3680,7 @@
 		"KECLEON": "켈리몬이 시너지 돌들을 {{cost}} GOLD 에 판매합니다.",
 		"CHANSEY": "럭키가 EGG_FOR_SELL 을 {{cost}} GOLD 에 판매합니다.",
 		"ELECTIVIRE": "에레키블이 인공 도구들을 {{cost}} GOLD 에 판매합니다.",
-		"XATU": "네이티오가 WONDERBOX 를 {{cost}} GOLD 에 판매합니다.",
+		"XATU": "네이티오가 TREASURE_BOX 를 {{cost}} GOLD 에 판매합니다.",
 		"KANGASKHAN": "캥카가 완성 도구들을 {{cost}} GOLD 에 판매합니다.",
 		"DUSKULL": "해골몽이 코인은 장기적인 금전 수입을 늘려줍니다.",
 		"MAROWAK": "텅구리가 다음 PVE 전투를 어렵게 만듭니다.",

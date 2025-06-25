@@ -3804,7 +3804,7 @@
 		"KECLEON": "$t(pkm.KECLEON) vend des pierres synergies pour {{cost}} GOLD",
 		"CHANSEY": "$t(pkm.CHANSEY) vend des EGG_FOR_SELL pour {{cost}} GOLD",
 		"ELECTIVIRE": "$t(pkm.ELECTIVIRE) vend des objets artificiels pour {{cost}} GOLD",
-		"XATU": "$t(pkm.XATU) vend des WONDERBOX pour {{cost}} GOLD",
+		"XATU": "$t(pkm.XATU) vend une TREASURE_BOX contenant deux composants aléatoires pour {{cost}} GOLD",
 		"KANGASKHAN": "$t(pkm.KANGASKHAN) vend des objets fabricables pour {{cost}} GOLD",
 		"DUSKULL": "$t(pkm.DUSKULL) offre des pièces qui augmentent votre revenu à long terme",
 		"MAROWAK": "$t(pkm.MAROWAK) rend le prochain combat PvE plus difficile",

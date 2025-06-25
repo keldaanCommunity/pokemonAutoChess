@@ -492,7 +492,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.XATU) {
-      itemsSet = [Item.WONDER_BOX]
+      itemsSet = [Item.TREASURE_BOX]
       nbItemsToPick = this.alivePlayers.length
       maxCopiesPerItem = 99
     }
@@ -728,6 +728,8 @@ export class MiniGame {
         if (item && player && !player.isBot) {
           if (item.name === Item.EGG_FOR_SELL) {
             giveRandomEgg(player, false)
+          } else if(item.name === Item.TREASURE_BOX){
+            player.items.push(...pickNRandomIn(ItemComponents, 2))
           } else {
             player.items.push(item.name)
           }

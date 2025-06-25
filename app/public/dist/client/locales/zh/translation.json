@@ -3788,7 +3788,7 @@
 		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",
 		"CHANSEY": "吉利蛋会以每枚{{cost}} GOLD的价格出售EGG_FOR_SELL。",
 		"ELECTIVIRE": "电击魔兽会以每件{{cost}} GOLD的价格出售人造道具。",
-		"XATU": "天然鸟会以每个{{cost}} GOLD的价格出售WONDERBOX。",
+		"XATU": "天然鸟会以每个{{cost}} GOLD的价格出售TREASURE_BOX。",
 		"KANGASKHAN": "袋兽会以每件{{cost}} GOLD的价格出售由两件组件合成的道具。",
 		"DUSKULL": "夜巡灵币可增加您的长期收入。",
 		"MAROWAK": "嘎啦嘎啦会提升下一野生轮次的敌方宝可梦强度。",

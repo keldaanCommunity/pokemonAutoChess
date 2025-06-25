@@ -24,7 +24,7 @@ export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
   [Pkm.KANGASKHAN]: 10,
   [Pkm.CHANSEY]: 10,
   [Pkm.ELECTIVIRE]: 10,
-  [Pkm.XATU]: 15
+  [Pkm.XATU]: 10
 }
 
 export const TownEncountersByStage: {
@@ -60,7 +60,6 @@ export const TownEncountersByStage: {
   22: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
     [Pkm.REGIROCK]: 1 / 20,
@@ -69,7 +68,6 @@ export const TownEncountersByStage: {
   27: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
     [Pkm.REGIROCK]: 1 / 20,
@@ -78,7 +76,6 @@ export const TownEncountersByStage: {
   34: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
     [Pkm.REGIROCK]: 1 / 20,

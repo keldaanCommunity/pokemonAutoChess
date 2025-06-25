@@ -3795,7 +3795,7 @@
 		"KECLEON": "Kecleon vende piedras de sinergia por {{cost}} de GOLD",
 		"CHANSEY": "Chansey vende EGG_FOR_SELL por {{cost}} de GOLD",
 		"ELECTIVIRE": "Electivire vende objetos artificiales por {{cost}} de GOLD",
-		"XATU": "Xatu vende WONDER_BOX por {{cost}} de GOLD",
+		"XATU": "Xatu vende TREASURE_BOX por {{cost}} de GOLD",
 		"KANGASKHAN": "Kangaskhan vende objetos completos por {{cost}} de GOLD",
 		"DUSKULL": "Duskull moneda aumenta tus ingresos a largo plazo",
 		"MAROWAK": "Marowak hace que la siguiente batalla JcE sea más difícil",
