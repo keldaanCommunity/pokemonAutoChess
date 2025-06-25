@@ -1718,7 +1718,7 @@
 		"LEAF_BLADE": "The user's next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE.",
 		"ANCHOR_SHOT": "Grab the farthest enemy Pokémon and deal [20,40,80,SP] SPECIAL.",
 		"MAGNET_RISE": "Grant PROTECT for 2 seconds and [10,SP]% dodge chance to the user to the [2,4,6] adjacent allied Pokémon with the lowest health.",
-		"ATTRACT": "Inflict [1,2,3] random enemy Pokémon with CHARM for [1,SP] second.",
+		"ATTRACT": "Inflict [1,2,3] random enemy Pokémon with CHARM for [1,SP] seconds.",
 		"WATER_PULSE": "Deal [75,150,SP] SPECIAL to the target and adjacent enemy Pokémon and inflict them with CONFUSION for 2 seconds.",
 		"PLAY_ROUGH": "Deal [30,60,120,SP] SPECIAL to the target and inflict it with CHARM for 2.5 seconds.",
 		"AERIAL_ACE": "Deal [25,50,100,SP] TRUE to the target.",
