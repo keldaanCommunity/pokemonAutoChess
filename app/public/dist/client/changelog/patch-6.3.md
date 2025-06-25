@@ -115,6 +115,7 @@
 - Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
 - Nerf Magmarizer: Attack 5 → 3
 - Nerf Big Nugget: Gold gained at max stacks 3 → 2
+- Change Ghimmigoul coin: no longer gives 1 additional gold per round ; Duskull encounter gives it for free along with regular items in carousel
 
 # Gameplay
 
