@@ -41,7 +41,7 @@ async function main() {
     await matchMaker.createRoom("lobby", {})
     initCronJobs()
   }
-  
+
   logger.info("Fetching leaderboards...")
   fetchLeaderboards()
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
