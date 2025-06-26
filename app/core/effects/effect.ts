@@ -188,17 +188,18 @@ export class GrowGroundEffect extends PeriodicEffect {
 
         if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {
           pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
-          pokemon.addSpeed(-25, pokemon, 0, false)
           if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
-            pokemon.addDefense(1, pokemon, 0, false)
-            pokemon.addSpecialDefense(1, pokemon, 0, false)
+            pokemon.addDefense(2, pokemon, 0, false)
+            pokemon.addSpecialDefense(2, pokemon, 0, false)
             pokemon.addMaxHP(50, pokemon, 0, false)
+            pokemon.addSpeed(-12, pokemon, 0, false)
             pokemon.range = min(1)(pokemon.range + 1)
           } else {
             pokemon.addAttack(5, pokemon, 0, false)
-            pokemon.addDefense(2, pokemon, 0, false)
-            pokemon.addSpecialDefense(2, pokemon, 0, false)
+            pokemon.addDefense(5, pokemon, 0, false)
+            pokemon.addSpecialDefense(5, pokemon, 0, false)
             pokemon.addMaxHP(80, pokemon, 0, false)
+            pokemon.addSpeed(-5, pokemon, 0, false)
             pokemon.range = min(1)(pokemon.range - 1)
           }
 
@@ -207,7 +208,6 @@ export class GrowGroundEffect extends PeriodicEffect {
           pokemon.passive = Passive.NONE
           pokemon.skill = Ability.CORE_ENFORCER
           pokemon.pp = 0
-          pokemon.maxPP = 120
         }
       },
       effect,
