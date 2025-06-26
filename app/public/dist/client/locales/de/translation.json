@@ -3641,7 +3641,7 @@
 		"BLOOD_MONEY": "Blutgeld",
 		"TOWN_FESTIVAL": "Stadtfest",
 		"HIGH_ROLLER": "Glücksspieler",
-		"REGIONAL_SPECIALITIES": "Regionale Spezialitäten"
+		"REGIONAL_SPECIALTIES": "Regionale Spezialitäten"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Alle zusätzlichen Picks sind sofort verfügbar",
@@ -3660,7 +3660,7 @@
 		"BLOOD_MONEY": "Jeder KO gibt 1 GOLD (außer Klone und Spawns). Kein Extraeinkommen von Zinsen.",
 		"TOWN_FESTIVAL": "Du bekommst immer eine Begegnung in der Stadt und alle Karusell-Items sind kostenlos.",
 		"HIGH_ROLLER": "Laden haben eine Chance Schlüpf-Pokémon in Runden 0-10, Einzigartige in Runden 10-20 und Legendäre nach Runde 20 zu beinhalten.",
-		"REGIONAL_SPECIALITIES": "Deine aktuellen Regions-Typen zählen zu deiner Synergie dazu. Nachdem eine Region gewechselt wird, erhält dein Team ein lokales Gericht."
+		"REGIONAL_SPECIALTIES": "Deine aktuellen Regions-Typen zählen zu deiner Synergie dazu. Nachdem eine Region gewechselt wird, erhält dein Team ein lokales Gericht."
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon verkauft Synergiesteine für {{cost}} GOLD",

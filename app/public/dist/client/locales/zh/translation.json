@@ -3763,7 +3763,7 @@
 		"BLOOD_MONEY": "重 武 轻 商",
 		"TOWN_FESTIVAL": "欢 庆 节 日",
 		"HIGH_ROLLER": "幸 运 之 星",
-		"REGIONAL_SPECIALITIES": "本 地 特 产"
+		"REGIONAL_SPECIALTIES": "本 地 特 产"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "所有附加宝可梦在游戏开始时立即可选。",
@@ -3782,7 +3782,7 @@
 		"BLOOD_MONEY": "击倒宝可梦时获得1 GOLD，但积攒GOLD不提供利息收入。",
 		"TOWN_FESTIVAL": "必定能在轮盘轮次遭遇宝藏镇NPC，且所有轮盘道具免费。",
 		"HIGH_ROLLER": "在第0-9轮，商店有概率刷出孵化宝可梦；第10-19轮，独特宝可梦；第20轮起，传说宝可梦。",
-		"REGIONAL_SPECIALITIES": "当前所在地区的共鸣类型也会计入你的共鸣等级。穿过传送门后，所有我方宝可梦食用一道本地特色料理。"
+		"REGIONAL_SPECIALTIES": "当前所在地区的共鸣类型也会计入你的共鸣等级。穿过传送门后，所有我方宝可梦食用一道本地特色料理。"
 	},
 	"town_encounter_description": {
 		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",

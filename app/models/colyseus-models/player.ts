@@ -1,10 +1,11 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
+import { getUnitPowerScore } from "../../core/bot-logic"
+import { createRandomEgg } from "../../core/eggs"
 import {
-  carryOverPermanentStats,
-  ConditionBasedEvolutionRule
+  ConditionBasedEvolutionRule,
+  carryOverPermanentStats
 } from "../../core/evolution-rules"
 import { PokemonEntity } from "../../core/pokemon-entity"
-import { getUnitPowerScore } from "../../core/bot-logic"
 import type GameState from "../../rooms/states/game-state"
 import type { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniquePool } from "../../types/Config"
@@ -35,15 +36,18 @@ import { removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { min } from "../../utils/number"
-import { pickNRandomIn, pickRandomIn, simpleHashSeededCoinFlip } from "../../utils/random"
+import {
+  pickNRandomIn,
+  pickRandomIn,
+  simpleHashSeededCoinFlip
+} from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import { createRandomEgg } from "../../core/eggs"
 import type { IPokemonCollectionItem } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
-  PRECOMPUTED_REGIONAL_MONS,
-  getPokemonData
+  getPokemonData,
+  PRECOMPUTED_REGIONAL_MONS
 } from "../precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../precomputed/precomputed-rarity"
 import { getRegularsTier1 } from "../shop"
@@ -533,7 +537,7 @@ export default class Player extends Schema implements IPlayer {
         }
       })
 
-      if (state.specialGameRule === SpecialGameRule.REGIONAL_SPECIALITIES) {
+      if (state.specialGameRule === SpecialGameRule.REGIONAL_SPECIALTIES) {
         this.bonusSynergies.clear()
         const { synergies, regionalSpeciality } = DungeonDetails[this.map]
         synergies.forEach((synergy) => {

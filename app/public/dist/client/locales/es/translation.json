@@ -2332,7 +2332,7 @@
 		"SIRUPY_APPLE": "Manzana Melosa",
 		"SWEET_HERB": "Especia Oculta Dulce",
 		"MOOMOO_MILK": "Leche Mu-Mu",
-		"Berries": "Bayas",
+		"BERRIES": "Bayas",
 		"HONEY": "Miel",
 		"POFFIN": "Pokocho",
 		"ROCK_SALT": "Sal de Roca",
@@ -3533,7 +3533,7 @@
 	"game-reconnect-modal-title": "Vuelve a conectarte al juego",
 	"game-reconnect-modal-body": "Dejaste un juego en progreso. ¿Quieres volver a conectarte a tu juego anterior?",
 	"game-surrender-modal-title": "Rendirse",
-	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?",
+	"game-surrender-modal-body": "La partida todavía no ha terminado. Quieres rendirte?",
 	"toggle_locked": "Mostrar Bloqueados",
 	"creator": "Creador",
 	"switch_server": "Cambiar a este servidor",
@@ -3770,7 +3770,7 @@
 		"BLOOD_MONEY": "El precio de la ganancia",
 		"TOWN_FESTIVAL": "Festival de la aldea",
 		"HIGH_ROLLER": "Suertudo",
-		"REGIONAL_SPECIALITIES": "Especialidades Regionales"
+		"REGIONAL_SPECIALTIES": "Especialidades Regionales"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Todas los pokémon adicionales están disponibles de inmediato.",
@@ -3789,7 +3789,7 @@
 		"BLOOD_MONEY": "Cada KO otorga 1 GOLD. No se obtiene dinero adicional del interés. ",
 		"TOWN_FESTIVAL": "Siempre habrá un encuentro en la Aldea Tesoro y todos los objetos de carrusel son gratuitos.",
 		"HIGH_ROLLER": "Las tiendas tienen una probabilidad de contener Eclosiones en las rondas 0-10, Únicos en las rondas 10-20 y Legendarios a partir de la ronda 20.",
-		"REGIONAL_SPECIALITIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local."
+		"REGIONAL_SPECIALTIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local."
 	},
 	"town_encounter_description":{
 		"KECLEON": "Kecleon vende piedras de sinergia por {{cost}} de GOLD",

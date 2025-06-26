@@ -3779,7 +3779,7 @@
 		"BLOOD_MONEY": "Le prix du sang",
 		"TOWN_FESTIVAL": "Festival en ville",
 		"HIGH_ROLLER": "High Roller",
-		"REGIONAL_SPECIALITIES": "Spécialités régionales"
+		"REGIONAL_SPECIALTIES": "Spécialités régionales"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Tous les Pokémon additionnels sont disponibles immédiatement",
@@ -3798,7 +3798,7 @@
 		"BLOOD_MONEY": "Chaque KO donne 1 GOLD (excepté les clônes et invocations). Aucun revenu supplémentaire provenant des intérêts.",
 		"TOWN_FESTIVAL": "Vous faites toujours une rencontre en ville et tous les objets du carrousel sont gratuits.",
 		"HIGH_ROLLER": "Vos boutiques ont une chance de contenir des Pokémon éclos aux tours 0 à 10, des Uniques aux tours 10 à 20 et des Légendaires après le tour 20.",
-		"REGIONAL_SPECIALITIES": "Les types de votre région actuelle contribuent à vos synergies. Après avoir changé de région, votre équipe goûte un plat local."
+		"REGIONAL_SPECIALTIES": "Les types de votre région actuelle contribuent à vos synergies. Après avoir changé de région, votre équipe goûte un plat local."
 	},
 	"town_encounter_description": {
 		"KECLEON": "$t(pkm.KECLEON) vend des pierres synergies pour {{cost}} GOLD",
