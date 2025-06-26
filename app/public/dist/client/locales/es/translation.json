@@ -1945,6 +1945,10 @@
 		"CHAIN_CRAZED": "El usuario se inflige a sí mismo POISON durante 3 segundos y gana [15,SP] de ATK, [10,SP] de DEF y 20 de SPEED."
 	},
 	"effect": {
+		"STAMINA": "Firmeza",
+		"STRENGTH": "Fuerza",
+		"ENDURE": "Endure",
+		"PURE_POWER": "Energía pura",
 		"INGRAIN": "Arraigo",
 		"GROWTH": "Desarrollo",
 		"SPORE": "Espora",
@@ -1952,13 +1956,9 @@
 		"VICTORY_STAR": "Tinovictoria",
 		"DROUGHT": "Sequía",
 		"DESOLATE_LAND": "Tierra del Ocaso",
-		"DRIZZLE": "Llovizna",
 		"RAIN_DANCE": "Danza Lluvia",
+		"DRIZZLE": "Llovizna",
 		"PRIMORDIAL_SEA": "Mar del Albor",
-		"STAMINA": "Firmeza",
-		"STRENGTH": "Fuerza",
-		"ENDURE": "Endure",
-		"PURE_POWER": "Energía pura",
 		"RISING_VOLTAGE": "Alto Voltaje",
 		"OVERDRIVE": "Amplificador",
 		"POWER_SURGE": "Sobretensión",
@@ -1995,14 +1995,14 @@
 		"MERCILESS": "Ensañamiento",
 		"MEDITATE": "Meditación",
 		"FOCUS_ENERGY": "Foco Energía",
+		"SWIFT_SWIM": "Nado Rápido",
+		"HYDRATION": "Hidratación",
+		"WATER_VEIL": "Velo Agua",
 		"CALM_MIND": "Mente tranquila",
 		"COCOON": "Crisalida",
 		"INFESTATION": "Acoso",
 		"HORDE": "Horda",
 		"HEART_OF_THE_SWARM": "Corazón del Enjambre",
-		"SWIFT_SWIM": "Nado Rápido",
-		"HYDRATION": "Hidratación",
-		"WATER_VEIL": "Velo Agua",
 		"SURGE_SURFER": "Cola Surf",
 		"TAILWIND": "Viento Afín",
 		"FEATHER_DANCE": "Danza pluma",
@@ -2088,6 +2088,10 @@
 		"HONE_CLAWS": "Gana +30% CRIT_CHANCE y +30% CRIT_POWER",
 		"ASSURANCE": "Gana +40% CRIT_CHANCE y +50% CRIT_POWER",
 		"BEAT_UP": "Gana +50% CRIT_CHANCE y +80% CRIT_POWER",
+		"STEEL_SURGE": "Reparte el 33 % del ATK como TRUE",
+		"STEEL_SPIKE": "Repartir el 66% del ATK como TRUE",
+		"CORKSCREW_CRASH": "Reparte el 100 % del ATK como TRUE",
+		"MAX_MELTDOWN": "Reparte el 120 % del ATK como TRUE",
 		"TILLER": "Gana +1 ATK, +2 DEF / SPE_DEF",
 		"DIGGER": "Gana +2 ATK, +4 DEF / SPE_DEF",
 		"DRILLER": "Gana +3 ATK, +6 DEF / SPE_DEF",
@@ -2127,10 +2131,6 @@
 		"BATTLE_ARMOR": "Gana 10 DEF, recibe -30% de daño crítico. Consigue una piedra climática cada vez que cambie el tiempo.",
 		"MOUTAIN_RESISTANCE": "Gana 30 DEF, recibe -50% de daño crítico. Consigue hasta 2 piedras climáticas.",
 		"DIAMOND_STORM": "Gana 60 DEF, recibe -70% de daño crítico. Consigue hasta 3 piedras climáticas.",
-		"STEEL_SURGE": "Reparte el 33 % del ATK como TRUE",
-		"STEEL_SPIKE": "Repartir el 66% del ATK como TRUE",
-		"CORKSCREW_CRASH": "Reparte el 100 % del ATK como TRUE",
-		"MAX_MELTDOWN": "Reparte el 120 % del ATK como TRUE",
 		"CURSE_OF_VULNERABILITY": "La unidad rival con mayor DEF + SPE_DEF pierde 5 del mismo y es FLINCH",
 		"CURSE_OF_WEAKNESS": "Además, la unidad rival con mayor ATK pierde el 25% del mismo y es PARALYSIS",
 		"CURSE_OF_TORMENT": "Además, la unidad rival con el AP más alto pierde un 50% del mismo y es FATIGUE",
@@ -2326,7 +2326,7 @@
 		"CURRY": "Curry",
 		"CASTELIACONE": "Porcehelado",
 		"WHIPPED_DREAM": "Dulce de Nata",
-		"BERRY_JUICE":"Zumo de baya",
+		"BERRY_JUICE": "Zumo de baya",
 		"TART_APPLE": "Manzana Ácida",
 		"SWEET_APPLE": "Manzana Dulce",
 		"SIRUPY_APPLE": "Manzana Melosa",
@@ -2369,7 +2369,8 @@
 		"MALICIOUS_ARMOR": "Armadura Maldita",
 		"RUSTED_SWORD": "Espada Oxidada",
 		"SCROLL_OF_WATERS": "Manuscrito Aguas",
-		"SCROLL_OF_DARKNESS": "Manuscrito Sombras"
+		"SCROLL_OF_DARKNESS": "Manuscrito Sombras",
+		"Berries": "Bayas"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3791,7 +3792,7 @@
 		"HIGH_ROLLER": "Las tiendas tienen una probabilidad de contener Eclosiones en las rondas 0-10, Únicos en las rondas 10-20 y Legendarios a partir de la ronda 20.",
 		"REGIONAL_SPECIALTIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local."
 	},
-	"town_encounter_description":{
+	"town_encounter_description": {
 		"KECLEON": "Kecleon vende piedras de sinergia por {{cost}} de GOLD",
 		"CHANSEY": "Chansey vende EGG_FOR_SELL por {{cost}} de GOLD",
 		"ELECTIVIRE": "Electivire vende objetos artificiales por {{cost}} de GOLD",
@@ -3854,7 +3855,7 @@
 		"ROOM_DELETED": "Esta sala fue borrada",
 		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
 	},
-	"connection_status":{
+	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Intentando volver a conectar...",
 		"CONNECTION_FAILED": "Conexión fallida. Prueba a recargar la página."
 	},
@@ -3864,5 +3865,6 @@
 		"attempts": "Intentos: {{count}}",
 		"guess": "Adivinar",
 		"reset": "Reiniciar"
-	}
+	},
+	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?"
 }
