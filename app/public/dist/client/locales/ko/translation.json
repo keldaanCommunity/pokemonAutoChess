@@ -1867,6 +1867,10 @@
 		"HEAT_CRASH": "대상에게 돌진하여 밀어내고 [40,60,80,SP] SPECIAL 를 가한다. 시전자의 ATK 이 대상보다 클수록 피해량이 증가한다."
 	},
 	"effect": {
+		"STAMINA": "지구력",
+		"STRENGTH": "괴력",
+		"ENDURE": "버티기",
+		"PURE_POWER": "순수한힘",
 		"INGRAIN": "뿌리박기",
 		"GROWTH": "성장",
 		"SPORE": "버섯포자",
@@ -1874,13 +1878,9 @@
 		"VICTORY_STAR": "승리의별",
 		"DROUGHT": "가뭄",
 		"DESOLATE_LAND": "끝의대지",
-		"DRIZZLE": "잔비",
 		"RAIN_DANCE": "비바라기",
+		"DRIZZLE": "잔비",
 		"PRIMORDIAL_SEA": "시작의바다",
-		"STAMINA": "지구력",
-		"STRENGTH": "괴력",
-		"ENDURE": "버티기",
-		"PURE_POWER": "순수한힘",
 		"RISING_VOLTAGE": "라이징볼트",
 		"OVERDRIVE": "오버드라이브",
 		"POWER_SURGE": "일렉트릭메이커",
@@ -1917,14 +1917,14 @@
 		"MERCILESS": "무도한행동",
 		"MEDITATE": "요가포즈",
 		"FOCUS_ENERGY": "기충전",
+		"SWIFT_SWIM": "쓱쓱",
+		"HYDRATION": "촉촉바디",
+		"WATER_VEIL": "수의베일",
 		"CALM_MIND": "명상",
 		"COCOON": "고치",
 		"INFESTATION": "엉겨붙기",
 		"HORDE": "군집",
 		"HEART_OF_THE_SWARM": "군단의 심장",
-		"SWIFT_SWIM": "쓱쓱",
-		"HYDRATION": "촉촉바디",
-		"WATER_VEIL": "수의베일",
 		"TAILWIND": "순풍",
 		"FEATHER_DANCE": "깃털댄스",
 		"MAX_AIRSTREAM": "다이제트",
@@ -2009,6 +2009,10 @@
 		"HONE_CLAWS": "+30% CRIT_CHANCE, +30% CRIT_POWER",
 		"ASSURANCE": "+40% CRIT_CHANCE, +50% CRIT_POWER",
 		"BEAT_UP": "+50% CRIT_CHANCE, +80% CRIT_POWER",
+		"STEEL_SURGE": "ATK의 33%만큼 TRUE",
+		"STEEL_SPIKE": "ATK의 66%만큼 TRUE",
+		"CORKSCREW_CRASH": "ATK의 100%만큼 TRUE",
+		"MAX_MELTDOWN": "ATK의 120%만큼 TRUE",
 		"TILLER": "+1 ATK, +2 DEF,SPE_DEF",
 		"DIGGER": "+2 ATK, +4 DEF,SPE_DEF",
 		"DRILLER": "+3 ATK, +6 DEF,SPE_DEF",
@@ -2047,10 +2051,6 @@
 		"BATTLE_ARMOR": "10 DEF 증가, 치명타 대미지 30% 감소. 날씨 변화 시 날씨돌 1개 획득",
 		"MOUTAIN_RESISTANCE": "30 DEF 증가, 치명타 대미지 50% 감소. 2번째 날씨돌 획득",
 		"DIAMOND_STORM": "60 DEF 증가, 치명타 대미지 70% 감소. 3번째 날씨돌 획득",
-		"STEEL_SURGE": "ATK의 33%만큼 TRUE",
-		"STEEL_SPIKE": "ATK의 66%만큼 TRUE",
-		"CORKSCREW_CRASH": "ATK의 100%만큼 TRUE",
-		"MAX_MELTDOWN": "ATK의 120%만큼 TRUE",
 		"CURSE_OF_VULNERABILITY": "DEF+SPE_DEF가 가장 높은 적은 그것들을 5씩 잃으며 FLINCH상태가 됨",
 		"CURSE_OF_WEAKNESS": "추가로 ATK가 가장 높은 적은 그것이 25% 감소하며 PARALYSIS상태가 됨",
 		"CURSE_OF_TORMENT": "추가로 AP가 가장 높은 적은 그것이 50% 감소하며 FATIGUE 상태가 됨",
@@ -2264,7 +2264,6 @@
 		"LEEK": "대파",
 		"LARGE_LEEK": "큰 대파",
 		"SPINDA_COCKTAIL": "얼루기의 칵테일",
-		"SMOKED_FILLET": "훈제토막",
 		"SWEETS": "사탕공예",
 		"RIBBON_SWEET": "리본사탕공예",
 		"STAR_SWEET": "스타사탕공예",
@@ -2287,7 +2286,8 @@
 		"EXCHANGE_TICKET": "교환 티켓",
 		"AUSPICIOUS_ARMOR": "축복받은갑옷",
 		"MALICIOUS_ARMOR": "저주받은갑옷",
-		"RUSTED_SWORD": "녹슨검"
+		"RUSTED_SWORD": "녹슨검",
+		"SMOKED_FILLET": "훈제토막"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
@@ -3156,12 +3156,12 @@
 	"type_here": "이곳에 입력하세요 ...",
 	"send_message": "메세지 전송",
 	"shiny_hunter": "이로치만 보기",
-	"show_refundable": "환불 가능",
 	"show_all": "모두 보기",
 	"show_locked": "잠겨진 감정표현만 보기",
 	"show_unlockable": "해금가능한 감정표현만 보기",
 	"show_unlocked": "해금된 감정표현만 보기",
 	"show_evolutions": "진화형태만 보기",
+	"show_refundable": "환불 가능",
 	"show_only_available_picks": "유효한 추가/지역 기물만 보기",
 	"sort_by_index": "도감 넘버로 정렬",
 	"sort_by_shards": "파편의 갯수로 정렬",
@@ -3737,8 +3737,8 @@
 		"ROOM_DELETED": "삭제된 방입니다",
 		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}"
 	},
-  "connection_status": {
-    "CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
-    "CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
-  }
+	"connection_status": {
+		"CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
+		"CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
+	}
 }
