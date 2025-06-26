@@ -116,14 +116,27 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
             totalTakenDamage += takenDamage
           }
           if (specialDamage > 0) {
+            const scarfSpecialDamage = Math.ceil(0.5 * specialDamage)
             const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * specialDamage),
+              damage: scarfSpecialDamage,
               board,
               attackType: AttackType.SPECIAL,
               attacker: pokemon,
               shouldTargetGainMana: true
             })
             totalTakenDamage += takenDamage
+            if (target.items.has(Item.POWER_LENS) && !pokemon.items.has(Item.PROTECTIVE_PADS)) {
+              const speDef = target.status.armorReduction ? Math.round(target.speDef / 2) : target.speDef
+              const damageAfterReduction = scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
+              const damageBlocked = min(0)(scarfSpecialDamage - damageAfterReduction)
+              pokemon.handleDamage({
+                damage: Math.round(damageBlocked),
+                board,
+                attackType: AttackType.SPECIAL,
+                attacker: target,
+                shouldTargetGainMana: true
+              })
+            }
           }
           if (trueDamage > 0) {
             const { takenDamage } = target.handleDamage({
