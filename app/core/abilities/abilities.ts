@@ -12260,7 +12260,7 @@ export class SuctionHealStrategy extends AbilityStrategy {
           targetX: cell.value.positionX,
           targetY: cell.value.positionY
         })
-        pokemon.handleHeal(attack.takenDamage * 0.5, pokemon, 1, crit)
+        pokemon.handleHeal(attack.takenDamage * 0.5, pokemon, 0, false)
       }
     })
   }

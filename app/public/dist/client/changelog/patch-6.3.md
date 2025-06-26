@@ -83,6 +83,7 @@
 - Buff Smoochum line: Special defense :2/6 → 3/8
 - Buff Doom Desire (Jirachi): restore ~~60~~ to max PP if target is KO in the duration
 - Nerf Capsakid line: PP 100 → 110
+- Change Sunction Heal: healing no longer scales with AP ; Eelektross line PP 90 → 80
 
 # Changes to Synergies
 

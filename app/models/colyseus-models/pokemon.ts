@@ -18221,7 +18221,7 @@ export class Tynamo extends Pokemon {
   speed = 41
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -18242,7 +18242,7 @@ export class Eelektrik extends Pokemon {
   speed = 41
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -18262,7 +18262,7 @@ export class Eelektross extends Pokemon {
   speed = 41
   def = 12
   speDef = 12
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
   attackSprite = AttackSprite.ELECTRIC_MELEE

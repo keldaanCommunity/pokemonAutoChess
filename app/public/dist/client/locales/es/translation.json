@@ -1920,7 +1920,7 @@
 		"BULLDOZE": "Pisotea el suelo causando [25,45,85,SP] de SPECIAL a los enemigos adyacentes. Los Pokémon golpeados son empujados hacia atrás y pierden 10 de SPEED.",
 		"ARMOR_CANNON": "Dispara un proyectil incandescente, causando [50,SP] SPECIAL al objetivo y después rebota en los 2 enemigos más cercanos, infligiendo [30,SP] de SPECIAL a cada uno. Los proyectiles luego vuelven al objetivo original, cada uno haciendo [15,SP] de SPECIAL adicional.",
 		"BITTER_BLADE": "Concentra sus lamentos en un ataque cortante, infligiendo [70,SP] de SPECIAL a todos los enemigos adyacentes. El usuario recupera un 10% de sus HP máximos por cada enemigo golpeado.",
-		"SUCTION_HEAL": "Absorbe la energía de sus objetivos, causando [15,30,60,SP] de SPECIAL en un área de 2 casillas en forma de cono frente al usuario y recupera el [50,SP]% del daño inflingido como HP.",
+		"SUCTION_HEAL": "Absorbe la energía de sus objetivos, causando [15,30,60,SP] de SPECIAL en un área de 2 casillas en forma de cono frente al usuario y recupera el 50% del daño inflingido como HP.",
 		"ROOST": "Sale volando y aterriza en la retaguardia, el usuario se queda SLEEP durante 2 segundos y recupera [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Se coloca detrás del enemigo y le propicia un poderoso corte, infligiendo [100,SP] + 1x ATK como PHYSICAL.",
 		"HEAT_CRASH": "Choca contra el enemigo, empujándolo hacia atrás e infligiéndole [40,60,80,SP] de SPECIAL. Causa más daño cuanto más ATK tenga el usuario en comparación con el objetivo.",
