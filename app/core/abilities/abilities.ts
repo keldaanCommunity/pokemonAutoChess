@@ -3325,7 +3325,7 @@ export class BiteStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1, crit)
+    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 0, false)
     if (takenDamage > 0) target.status.triggerFlinch(5000, target, pokemon)
   }
 }
@@ -4068,7 +4068,7 @@ export class LeechLifeStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    pokemon.handleHeal(takenDamage, pokemon, 1, crit)
+    pokemon.handleHeal(takenDamage, pokemon, 0, false)
   }
 }
 
@@ -8821,7 +8821,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
         crit,
         true
       )
-      pokemon.handleHeal(takenDamage, pokemon, 1, crit)
+      pokemon.handleHeal(takenDamage, pokemon, 0, false)
     } else {
       const duration = Math.round(
         ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
