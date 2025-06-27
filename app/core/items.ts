@@ -101,7 +101,6 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.SPE_DEF]: 10
   },
   [Item.GOLD_BOTTLE_CAP]: {
-    [Stat.CRIT_CHANCE]: 50,
     [Stat.LUCK]: 50
   },
   [Item.COMET_SHARD]: { [Stat.ATK]: 15 },

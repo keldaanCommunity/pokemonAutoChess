@@ -1,13 +1,16 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { Transfer } from "../../types"
-import { DEFAULT_SPEED } from "../../types/Config"
-import { AttackType } from "../../types/enum/Game"
+import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
+import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
+import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
+import { AbilityStrategies } from "../abilities/abilities"
 import { PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
 import {
   Effect,
   OnAbilityCastEffect,
@@ -18,9 +21,6 @@ import {
   OnKillEffect,
   PeriodicEffect
 } from "./effect"
-import { AbilityStrategies } from "../abilities/abilities"
-import { DelayedCommand } from "../simulation-command"
-import { Ability } from "../../types/enum/Ability"
 
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
@@ -125,10 +125,18 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
               shouldTargetGainMana: true
             })
             totalTakenDamage += takenDamage
-            if (target.items.has(Item.POWER_LENS) && !pokemon.items.has(Item.PROTECTIVE_PADS)) {
-              const speDef = target.status.armorReduction ? Math.round(target.speDef / 2) : target.speDef
-              const damageAfterReduction = scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
-              const damageBlocked = min(0)(scarfSpecialDamage - damageAfterReduction)
+            if (
+              target.items.has(Item.POWER_LENS) &&
+              !pokemon.items.has(Item.PROTECTIVE_PADS)
+            ) {
+              const speDef = target.status.armorReduction
+                ? Math.round(target.speDef / 2)
+                : target.speDef
+              const damageAfterReduction =
+                scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
+              const damageBlocked = min(0)(
+                scarfSpecialDamage - damageAfterReduction
+              )
               pokemon.handleDamage({
                 damage: Math.round(damageBlocked),
                 board,

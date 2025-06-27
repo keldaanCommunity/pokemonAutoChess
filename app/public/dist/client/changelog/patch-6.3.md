@@ -115,7 +115,7 @@
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
 - Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
-- Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
+- Change Gold Bottle Cap: no longer gives +1% crit chance per gold you have ; compensated by new luck formula
 - Nerf Magmarizer: Attack 5 → 3
 - Nerf Big Nugget: Gold gained at max stacks 3 → 2
 - Change Ghimmigoul coin: no longer gives 1 additional gold per round ; Duskull encounter gives it for free along with regular items in carousel
