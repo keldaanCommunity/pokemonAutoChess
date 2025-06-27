@@ -30,6 +30,7 @@
 		"KING_SHIELD": "Escudo do Rei",
 		"U_TURN": "Meia-volta",
 		"EXPLOSION": "Explosão",
+		"CHLOROBLAST": "Explosão de Cloro",
 		"NIGHTMARE": "Pesadelo",
 		"CLANGOROUS_SOUL": "Alma Estridente",
 		"BONEMERANG": "Osso Bumerangue",
@@ -2539,6 +2540,39 @@
 	},
 	"wiki": {
 		"experience_by_rank": "Experiência por ranque",
-		"experience_by_rank_description": "Você ganha pontos de experiência no final de cada jogo baseado no seu ranque final. A cada 1000 XP, você sobe de nível e ganha um pacote."
+		"experience_by_rank_description": "Você ganha pontos de experiência no final de cada jogo baseado no seu ranque final. A cada 1000 XP, você sobe de nível e ganha um pacote.",
+		"fishing_rarity_rate": "Raridade da pesca pela qualidade da vara de pescar",
+		"fishing_rarity_rate_description": "A qualidade da vara de pesca influencia na raridade dos Pokémon que podem ser pescados.",
+		"defense_calculation": "Como a defesa funciona?",
+		"defense_calculation_description": "Mesmo sistema do League of Legends: Dano = ATAQUE / (1+(0.05*DEFESA)), arredondado para cima. DEFESA funciona para o dano FISICO, DEFESA_ESPECIAL funciona para ESPECIAL.",
+		"round_damage_calculation": "Calculo de dano do Round",
+		"round_damage_calculation_description": "O dano que um jogador recebe após perder um round é calculado da seguinte forma: Dano do Round = (Nivel do estagio  / 2) + (Numero de oponentes vivos) : arredondado para cima, clones/nascimentos não contam",
+		"pool_size_per_category": "Tamanho do conjunto por categoria",
+		"pool_size_per_category_description": "Os Pokémon que são encontrados na loja são de um conjunto compartilhado com todos os jogadores da partida. O numero de cada espécie Pokémon no conjunto depende da raridade e do numero dos estágios de evolução."
+	},
+	"errors": {
+		"USER_INACTIVE": "Você foi expulso por inatividade a fim de economizar recursos do servidor",
+		"USER_KICKED": "Você foi expulso desta sala",
+		"USER_BANNED": "Sua conta foi banida",
+		"USER_DELETED": "Sua conta foi permanentemente excluída",
+		"USER_RANK_TOO_LOW": "Seu ranque não é suficiente para participar nessa sala",
+		"USER_NOT_AUTHENTICATED": "Por favor, faça login novamente",
+		"USER_TIMEOUT": "Você recentemente deixou um jogo antes do fim, então é necessário aguardar 5 minutos antes de entrar em um novo jogo.",
+		"USER_IN_ANOTHER_GAME": "Você já esta jogando outro partida, volte a pagina inicial e reconecte",
+		"ROOM_FULL": "Sala cheia",
+		"ROOM_EMPTY": "Esta sala foi removida devido a falta de jogadores",
+		"ROOM_DELETED": "Esta sala foi excluída",
+		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}"
+	},
+	"connection_status": {
+		"CONNECTION_LOST": "Conexão perdida. Tentando reconectar...",
+		"CONNECTION_FAILED": "Reconexão falhou. Tente atualizar a página. "
+	},
+	"pokeguessr": {
+		"whosthatpokemon": "Qual é esse pokemon ?",
+		"itssolution": "É um $t(pkm.{{pokemon}}) !",
+		"attempts": "Tentativas: {{count}}",
+		"guess": "Adivinhar",
+		"reset": "Resetar"
 	}
 }
