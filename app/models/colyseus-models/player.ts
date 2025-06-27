@@ -35,7 +35,7 @@ import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
-import { min } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import {
   pickNRandomIn,
   pickRandomIn,
@@ -486,7 +486,7 @@ export default class Player extends Schema implements IPlayer {
     this.wildChance =
       values(this.board)
         .filter((p) => p.types.has(Synergy.WILD))
-        .reduce((total, p) => total + p.stars * (1 + p.luck / 100), 0) / 100
+        .reduce((total, p) => total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 100)), 0)
   }
 
   updateChefsHats() {
