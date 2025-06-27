@@ -1,4 +1,46 @@
+import { giveRandomEgg } from "../../core/eggs"
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import PokemonFactory from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
+import { IPokemon, Transfer } from "../../types"
+import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
+import { EffectEnum } from "../../types/enum/Effect"
+import { AttackType, Orientation, Rarity, Team } from "../../types/enum/Game"
+import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { Weather } from "../../types/enum/Weather"
+import { isOnBench } from "../../utils/board"
+import { distanceC, distanceE, distanceM } from "../../utils/distance"
+import { repeat } from "../../utils/function"
+import { logger } from "../../utils/logger"
+import {
+  calcAngleDegrees,
+  clamp,
+  isBetween,
+  max,
+  min
+} from "../../utils/number"
+import {
+  effectInLine,
+  OrientationArray,
+  OrientationVector
+} from "../../utils/orientation"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  randomBetween,
+  shuffleArray
+} from "../../utils/random"
+import { values } from "../../utils/schemas"
+import Board, { Cell } from "../board"
+import { DarkHarvestEffect } from "../effects/effect"
+import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
 import {
   HiddenPowerAStrategy,
@@ -30,51 +72,6 @@ import {
   HiddenPowerYStrategy,
   HiddenPowerZStrategy
 } from "./hidden-power"
-
-import { IPokemon, Transfer } from "../../types"
-import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
-import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Orientation, Rarity, Team } from "../../types/enum/Game"
-import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
-import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
-import { Weather } from "../../types/enum/Weather"
-
-import PokemonFactory from "../../models/pokemon-factory"
-import Board, { Cell } from "../board"
-import { PokemonEntity, getStrongestUnit } from "../pokemon-entity"
-
-import { Passive } from "../../types/enum/Passive"
-import { isOnBench } from "../../utils/board"
-import { distanceC, distanceE, distanceM } from "../../utils/distance"
-import { repeat } from "../../utils/function"
-import { logger } from "../../utils/logger"
-import {
-  calcAngleDegrees,
-  clamp,
-  isBetween,
-  max,
-  min
-} from "../../utils/number"
-import {
-  OrientationArray,
-  OrientationVector,
-  effectInLine
-} from "../../utils/orientation"
-import {
-  chance,
-  pickNRandomIn,
-  pickRandomIn,
-  randomBetween,
-  shuffleArray
-} from "../../utils/random"
-import { values } from "../../utils/schemas"
-import { DarkHarvestEffect } from "../effects/effect"
-import { DelayedCommand } from "../simulation-command"
-import { giveRandomEgg } from "../../core/eggs"
-import { PokemonClasses } from "../../models/colyseus-models/pokemon"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 
 export const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -1544,7 +1541,11 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const radius = [1, 2, 3][pokemon.stars - 1] ?? 3
-    const cells = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, radius)
+    const cells = board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      radius
+    )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.status.triggerCharm(1000, target, pokemon, true)
@@ -3519,7 +3520,7 @@ export class PresentStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const chance = Math.random() * (1 + pokemon.luck / 100)
+    const chance = Math.pow(Math.random(), 1 - pokemon.luck / 100)
     /* 80 damage: 40%
        150 damage: 30%
        300 damage: 20%
@@ -4207,17 +4208,12 @@ export class StoredPowerStrategy extends AbilityStrategy {
     const boostSpeDef = pokemon.speDef / pokemon.baseSpeDef
     const boostAP = pokemon.ap / 100
 
-    const damage = Math.round(20 * (1 + boostAtk + boostDef + boostSpeDef + boostSpeed + boostAP))
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
+    const damage = Math.round(
+      20 * (1 + boostAtk + boostDef + boostSpeDef + boostSpeed + boostAP)
     )
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
-
 
 export class ThiefStrategy extends AbilityStrategy {
   process(
@@ -4551,39 +4547,37 @@ export class MetronomeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const threshold = Math.random() * (1 + pokemon.luck/100)
-    let rarity = Rarity.ULTRA
-    if (threshold < 1/8) {
-      rarity = Rarity.COMMON
-    } else if (threshold < 2/8) {
-      rarity = Rarity.UNCOMMON
-    } else if (threshold < 3/8) {
-      rarity = Rarity.SPECIAL
-    } else if (threshold < 4/8) {
-      rarity = Rarity.RARE
-    } else if (threshold < 5/8) {
-      rarity = Rarity.UNIQUE
-    } else if (threshold < 6/8) {
-      rarity = Rarity.EPIC
-    } else if (threshold < 7/8) {
+    const threshold = Math.pow(Math.random(), 1 + pokemon.luck / 100)
+    let rarity = Rarity.COMMON
+    if (threshold < 1 / 8) {
+      rarity = Rarity.ULTRA
+    } else if (threshold < 2 / 8) {
       rarity = Rarity.LEGENDARY
+    } else if (threshold < 3 / 8) {
+      rarity = Rarity.EPIC
+    } else if (threshold < 4 / 8) {
+      rarity = Rarity.UNIQUE
+    } else if (threshold < 5 / 8) {
+      rarity = Rarity.RARE
+    } else if (threshold < 6 / 8) {
+      rarity = Rarity.SPECIAL
+    } else if (threshold < 7 / 8) {
+      rarity = Rarity.UNCOMMON
+    } else {
+      rarity = Rarity.COMMON
     }
 
     const pokemonOptions = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
     if (rarity === Rarity.SPECIAL) {
       pokemonOptions.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
     }
-    
-    const skillOptions = [...new Set(
-      pokemonOptions.map((p) => 
-        getPokemonData(p).skill
-      )
-    )]
+
+    const skillOptions = [
+      ...new Set(pokemonOptions.map((p) => getPokemonData(p).skill))
+    ]
 
     const skill = pickRandomIn(
-      skillOptions.filter((s) => 
-        AbilityStrategies[s].copyable
-      )
+      skillOptions.filter((s) => AbilityStrategies[s].copyable)
     )
 
     broadcastAbility(pokemon, { skill })
@@ -6268,7 +6262,12 @@ export class CottonGuardStrategy extends AbilityStrategy {
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.addDefense(3, pokemon, 1, crit)
     cells.forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, EffectEnum.COTTON_BALL, pokemon.simulation)
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        EffectEnum.COTTON_BALL,
+        pokemon.simulation
+      )
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerSleep(1000, cell.value)
       }
@@ -8727,7 +8726,11 @@ export class PsychoBoostStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const damage = 150
-    for (const positionX of [target.positionX - 1, target.positionX, target.positionX + 1]) {
+    for (const positionX of [
+      target.positionX - 1,
+      target.positionX,
+      target.positionX + 1
+    ]) {
       const tg = board.getValue(positionX, target.positionY)
       if (tg && tg.team !== pokemon.team) {
         broadcastAbility(pokemon, {
@@ -12617,7 +12620,10 @@ export class FollowMeStrategy extends AbilityStrategy {
     )
     if (cellToJump) {
       const enemiesTargetingPokemon = board.cells.filter<PokemonEntity>(
-        (entity): entity is PokemonEntity => entity != null && entity.targetEntityId === pokemon.id && entity.team !== pokemon.team
+        (entity): entity is PokemonEntity =>
+          entity != null &&
+          entity.targetEntityId === pokemon.id &&
+          entity.team !== pokemon.team
       )
       enemiesTargetingPokemon.forEach((enemy) => {
         enemy.status.triggerCharm(3000, enemy, pokemon, false)
@@ -12765,7 +12771,7 @@ export class MindBendStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    // Target is Possessed for 2 seconds. If Rune Protect or already possessed, takes 100 special damage instead.   
+    // Target is Possessed for 2 seconds. If Rune Protect or already possessed, takes 100 special damage instead.
     if (target.status.runeProtect || target.status.possessed) {
       target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
     } else {
@@ -13246,5 +13252,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STORED_POWER]: new StoredPowerStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
   [Ability.MIND_BEND]: new MindBendStrategy(),
-  [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
+  [Ability.COTTON_GUARD]: new CottonGuardStrategy()
 }
