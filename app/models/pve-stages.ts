@@ -1,11 +1,11 @@
 import { Emotion } from "../types"
 import {
-  ItemComponents,
   CraftableItems,
   Item,
+  ItemComponents,
+  LateGameItems,
   NonSpecialItemComponents,
-  ShinyItems,
-  CraftableNonSynergyItems
+  ShinyItems
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
@@ -103,10 +103,17 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     getRewards(player: Player) {
       const rewards = [pickRandomIn(NonSpecialItemComponents)]
-      if(values(player.board).some((p) => p.name === Pkm.CHARCADET)) {
+      if (values(player.board).some((p) => p.name === Pkm.CHARCADET)) {
         const psyLevel = player.synergies.get(Synergy.PSYCHIC) || 0
         const ghostLevel = player.synergies.get(Synergy.GHOST) || 0
-        const armorReceived = psyLevel > ghostLevel ? Item.AUSPICIOUS_ARMOR : psyLevel < ghostLevel ? Item.MALICIOUS_ARMOR : chance(1/2) ? Item.AUSPICIOUS_ARMOR : Item.MALICIOUS_ARMOR
+        const armorReceived =
+          psyLevel > ghostLevel
+            ? Item.AUSPICIOUS_ARMOR
+            : psyLevel < ghostLevel
+              ? Item.MALICIOUS_ARMOR
+              : chance(1 / 2)
+                ? Item.AUSPICIOUS_ARMOR
+                : Item.MALICIOUS_ARMOR
         rewards.push(armorReceived)
       }
       return rewards
@@ -134,7 +141,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
         // ensure we dont stay with a single useless component
         return [pickRandomIn(NonSpecialItemComponents)]
       } else {
-        return [pickRandomIn(CraftableNonSynergyItems)]
+        return [pickRandomIn(LateGameItems)]
       }
     }
   },
@@ -157,7 +164,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       return []
     },
     getRewardsPropositions(player: Player) {
-      const rewards = pickNRandomIn(CraftableNonSynergyItems, 2)
+      const rewards = pickNRandomIn(LateGameItems, 2)
       rewards.push(
         pickRandomIn(CraftableItems.filter((o) => !rewards.includes(o)))
       )
@@ -180,7 +187,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.FIRE_STONE, Item.THUNDER_STONE, Item.SHELL_BELL]
     ],
     getRewardsPropositions(player: Player) {
-      const rewards = pickNRandomIn(CraftableNonSynergyItems, 2)
+      const rewards = pickNRandomIn(LateGameItems, 2)
       rewards.push(
         pickRandomIn(CraftableItems.filter((o) => !rewards.includes(o)))
       )
@@ -203,7 +210,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.RED_ORB, Item.FLAME_ORB, Item.PROTECTIVE_PADS]
     ],
     getRewardsPropositions(player: Player) {
-      const rewards = pickNRandomIn(CraftableNonSynergyItems, 2)
+      const rewards = pickNRandomIn(LateGameItems, 2)
       rewards.push(
         pickRandomIn(CraftableItems.filter((o) => !rewards.includes(o)))
       )
@@ -232,7 +239,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.OLD_AMBER]
     ],
     getRewardsPropositions(player: Player) {
-      const rewards = pickNRandomIn(CraftableNonSynergyItems, 2)
+      const rewards = pickNRandomIn(LateGameItems, 2)
       rewards.push(
         pickRandomIn(CraftableItems.filter((o) => !rewards.includes(o)))
       )

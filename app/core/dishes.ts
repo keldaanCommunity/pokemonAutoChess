@@ -117,7 +117,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   CURRY: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRage(5000, entity)
+      entity.status.triggerRage(4000, entity)
     })
   ],
   FRUIT_JUICE: [

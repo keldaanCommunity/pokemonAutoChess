@@ -12,13 +12,14 @@ import {
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell, getUnitScore } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
+import { TownEncounters } from "../../core/town-encounters"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
+import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
-import UserMetadata from "../../models/mongo-models/user-metadata"
 import {
   Emotion,
   IClient,
@@ -100,7 +101,6 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
-import { TownEncounters } from "../../core/town-encounters"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -1308,7 +1308,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (!isPVE) {
           income += max(5)(player.streak)
         }
-        income += 5 + nbGimmighoulCoins
+        income += 5
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
@@ -1464,7 +1464,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       const bestRod = FishingRods.find((rod) => player.items.includes(rod))
 
-      if (bestRod && getFreeSpaceOnBench(player.board) > 0 && !isAfterPVE && !player.isBot) {
+      if (
+        bestRod &&
+        getFreeSpaceOnBench(player.board) > 0 &&
+        !isAfterPVE &&
+        !player.isBot
+      ) {
         const fish = this.state.shop.pickFish(player, bestRod)
         this.room.spawnOnBench(player, fish, "fishing")
       }
@@ -1608,7 +1613,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (coordinate && pokemon) {
             pokemon.positionX = coordinate[0]
             pokemon.positionY = coordinate[1]
-            pokemon.onChangePosition(coordinate[0], coordinate[1], player, this.state)
+            pokemon.onChangePosition(
+              coordinate[0],
+              coordinate[1],
+              player,
+              this.state
+            )
           }
         }
         if (numberOfPokemonsToMove > 0) {
@@ -1875,7 +1885,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   spawnWanderingPokemons() {
     const isPVE = this.state.stageLevel in PVEStages
 
-    const shouldSpawnSableye = this.state.townEncounter === TownEncounters.SABLEYE && chance(0.15)
+    const shouldSpawnSableye =
+      this.state.townEncounter === TownEncounters.SABLEYE && chance(0.15)
     if (shouldSpawnSableye) {
       this.state.townEncounter = null // reset sableye encounter after spawning
     }

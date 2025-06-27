@@ -116,14 +116,27 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
             totalTakenDamage += takenDamage
           }
           if (specialDamage > 0) {
+            const scarfSpecialDamage = Math.ceil(0.5 * specialDamage)
             const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * specialDamage),
+              damage: scarfSpecialDamage,
               board,
               attackType: AttackType.SPECIAL,
               attacker: pokemon,
               shouldTargetGainMana: true
             })
             totalTakenDamage += takenDamage
+            if (target.items.has(Item.POWER_LENS) && !pokemon.items.has(Item.PROTECTIVE_PADS)) {
+              const speDef = target.status.armorReduction ? Math.round(target.speDef / 2) : target.speDef
+              const damageAfterReduction = scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
+              const damageBlocked = min(0)(scarfSpecialDamage - damageAfterReduction)
+              pokemon.handleDamage({
+                damage: Math.round(damageBlocked),
+                board,
+                attackType: AttackType.SPECIAL,
+                attacker: target,
+                shouldTargetGainMana: true
+              })
+            }
           }
           if (trueDamage > 0) {
             const { takenDamage } = target.handleDamage({
@@ -192,7 +205,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.PUNCHING_GLOVE]: [
     new OnHitEffect((pokemon, target, board) => {
       target.handleDamage({
-        damage: Math.round(0.1 * target.hp),
+        damage: Math.round(0.08 * target.hp),
         board,
         attackType: AttackType.PHYSICAL,
         attacker: pokemon,
@@ -429,7 +442,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.MAGMARIZER]: [
     new OnAttackEffect(({ pokemon, target, board }) => {
       pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.count.magmarizerCount++      
+      pokemon.count.magmarizerCount++
     }),
     new OnHitEffect((pokemon, target, board) => {
       target.status.triggerBurn(2000, target, pokemon)

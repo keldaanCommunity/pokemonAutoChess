@@ -84,6 +84,7 @@
 - Buff Doom Desire (Jirachi): restore ~~60~~ to max PP if target is KO in the duration
 - Nerf Capsakid line: PP 100 → 110
 - Change Metronome: Luck now increases the chance to use a stronger ability
+- Change Sunction Heal: healing no longer scales with AP ; Eelektross line PP 90 → 80
 
 # Changes to Synergies
 
@@ -96,9 +97,10 @@
 
 - New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
 - New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
-- Punching Glove now deals additional physical damage equal to ~~8~~ 10% of the target's max HP, applied after all other computations (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
+- Punching Glove now deals additional physical damage **after all other computations** (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
 - Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
 - Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
+- Nerf Curry: 5 → 4 seconds rage duration
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -115,6 +117,8 @@
 - Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
 - Nerf Magmarizer: Attack 5 → 3
 - Nerf Big Nugget: Gold gained at max stacks 3 → 2
+- Change Ghimmigoul coin: no longer gives 1 additional gold per round ; Duskull encounter gives it for free along with regular items in carousel
+- New item: Treasure box ; Xatu town encounter now sells a treasure box for 10 gold. It contains two random item components.
 
 # Gameplay
 
@@ -124,6 +128,7 @@
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
 - Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
+- Change Luck formula: `chance^(1-luck/100)` instead of `chance*(1+luck/100)`. Luck is now more valuable for low base chance effects, and less valuable for high base chance effects. You always have a risk of missing unless you reach 100% luck, which is the new max cap for Luck.
 
 # UI
 

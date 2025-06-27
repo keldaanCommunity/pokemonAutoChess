@@ -2,11 +2,10 @@ import { CronJob } from "cron"
 import dayjs from "dayjs"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import { logger } from "../utils/logger"
-import UserMetadata from "../models/mongo-models/user-metadata"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import TitleStatistic from "../models/mongo-models/title-statistic"
 import History from "../models/mongo-models/history"
+import TitleStatistic from "../models/mongo-models/title-statistic"
+import UserMetadata from "../models/mongo-models/user-metadata"
 import { Title } from "../types"
 import {
   CRON_ELO_DECAY_DELAY,
@@ -16,6 +15,7 @@ import {
   EloRankThreshold
 } from "../types/Config"
 import { GameMode } from "../types/enum/Game"
+import { logger } from "../utils/logger"
 import { min } from "../utils/number"
 
 export function initCronJobs() {
@@ -108,7 +108,7 @@ async function eloDecay() {
         {
           playerId: u.uid,
           ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] &&
-          Date.now() > new Date("2025-05-05").getTime()
+            Date.now() > new Date("2025-05-05").getTime()
             ? { gameMode: GameMode.RANKED } // TEMP: activate ranked mode decay after 15 days to let time to collect the new game mode info. Can be safely removed after that date
             : {})
         },

@@ -7,7 +7,7 @@ export function chance(
   cap = 1
 ): boolean {
   return (
-    Math.random() < max(cap)(probability * (1 + (pokemon?.luck ?? 0) / 100))
+    Math.random() < max(cap)(Math.pow(probability, (1 - (pokemon?.luck ?? 0) / 100)))
   )
 }
 

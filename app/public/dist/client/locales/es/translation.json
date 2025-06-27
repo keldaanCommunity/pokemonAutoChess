@@ -1920,7 +1920,7 @@
 		"BULLDOZE": "Pisotea el suelo causando [25,45,85,SP] de SPECIAL a los enemigos adyacentes. Los Pokémon golpeados son empujados hacia atrás y pierden 10 de SPEED.",
 		"ARMOR_CANNON": "Dispara un proyectil incandescente, causando [50,SP] SPECIAL al objetivo y después rebota en los 2 enemigos más cercanos, infligiendo [30,SP] de SPECIAL a cada uno. Los proyectiles luego vuelven al objetivo original, cada uno haciendo [15,SP] de SPECIAL adicional.",
 		"BITTER_BLADE": "Concentra sus lamentos en un ataque cortante, infligiendo [70,SP] de SPECIAL a todos los enemigos adyacentes. El usuario recupera un 10% de sus HP máximos por cada enemigo golpeado.",
-		"SUCTION_HEAL": "Absorbe la energía de sus objetivos, causando [15,30,60,SP] de SPECIAL en un área de 2 casillas en forma de cono frente al usuario y recupera el [50,SP]% del daño inflingido como HP.",
+		"SUCTION_HEAL": "Absorbe la energía de sus objetivos, causando [15,30,60,SP] de SPECIAL en un área de 2 casillas en forma de cono frente al usuario y recupera el 50% del daño inflingido como HP.",
 		"ROOST": "Sale volando y aterriza en la retaguardia, el usuario se queda SLEEP durante 2 segundos y recupera [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Se coloca detrás del enemigo y le propicia un poderoso corte, infligiendo [100,SP] + 1x ATK como PHYSICAL.",
 		"HEAT_CRASH": "Choca contra el enemigo, empujándolo hacia atrás e infligiéndole [40,60,80,SP] de SPECIAL. Causa más daño cuanto más ATK tenga el usuario en comparación con el objetivo.",
@@ -1945,6 +1945,10 @@
 		"CHAIN_CRAZED": "El usuario se inflige a sí mismo POISON durante 3 segundos y gana [15,SP] de ATK, [10,SP] de DEF y 20 de SPEED."
 	},
 	"effect": {
+		"STAMINA": "Firmeza",
+		"STRENGTH": "Fuerza",
+		"ENDURE": "Endure",
+		"PURE_POWER": "Energía pura",
 		"INGRAIN": "Arraigo",
 		"GROWTH": "Desarrollo",
 		"SPORE": "Espora",
@@ -1952,13 +1956,9 @@
 		"VICTORY_STAR": "Tinovictoria",
 		"DROUGHT": "Sequía",
 		"DESOLATE_LAND": "Tierra del Ocaso",
-		"DRIZZLE": "Llovizna",
 		"RAIN_DANCE": "Danza Lluvia",
+		"DRIZZLE": "Llovizna",
 		"PRIMORDIAL_SEA": "Mar del Albor",
-		"STAMINA": "Firmeza",
-		"STRENGTH": "Fuerza",
-		"ENDURE": "Endure",
-		"PURE_POWER": "Energía pura",
 		"RISING_VOLTAGE": "Alto Voltaje",
 		"OVERDRIVE": "Amplificador",
 		"POWER_SURGE": "Sobretensión",
@@ -1995,14 +1995,14 @@
 		"MERCILESS": "Ensañamiento",
 		"MEDITATE": "Meditación",
 		"FOCUS_ENERGY": "Foco Energía",
+		"SWIFT_SWIM": "Nado Rápido",
+		"HYDRATION": "Hidratación",
+		"WATER_VEIL": "Velo Agua",
 		"CALM_MIND": "Mente tranquila",
 		"COCOON": "Crisalida",
 		"INFESTATION": "Acoso",
 		"HORDE": "Horda",
 		"HEART_OF_THE_SWARM": "Corazón del Enjambre",
-		"SWIFT_SWIM": "Nado Rápido",
-		"HYDRATION": "Hidratación",
-		"WATER_VEIL": "Velo Agua",
 		"SURGE_SURFER": "Cola Surf",
 		"TAILWIND": "Viento Afín",
 		"FEATHER_DANCE": "Danza pluma",
@@ -2088,6 +2088,10 @@
 		"HONE_CLAWS": "Gana +30% CRIT_CHANCE y +30% CRIT_POWER",
 		"ASSURANCE": "Gana +40% CRIT_CHANCE y +50% CRIT_POWER",
 		"BEAT_UP": "Gana +50% CRIT_CHANCE y +80% CRIT_POWER",
+		"STEEL_SURGE": "Reparte el 33 % del ATK como TRUE",
+		"STEEL_SPIKE": "Repartir el 66% del ATK como TRUE",
+		"CORKSCREW_CRASH": "Reparte el 100 % del ATK como TRUE",
+		"MAX_MELTDOWN": "Reparte el 120 % del ATK como TRUE",
 		"TILLER": "Gana +1 ATK, +2 DEF / SPE_DEF",
 		"DIGGER": "Gana +2 ATK, +4 DEF / SPE_DEF",
 		"DRILLER": "Gana +3 ATK, +6 DEF / SPE_DEF",
@@ -2127,10 +2131,6 @@
 		"BATTLE_ARMOR": "Gana 10 DEF, recibe -30% de daño crítico. Consigue una piedra climática cada vez que cambie el tiempo.",
 		"MOUTAIN_RESISTANCE": "Gana 30 DEF, recibe -50% de daño crítico. Consigue hasta 2 piedras climáticas.",
 		"DIAMOND_STORM": "Gana 60 DEF, recibe -70% de daño crítico. Consigue hasta 3 piedras climáticas.",
-		"STEEL_SURGE": "Reparte el 33 % del ATK como TRUE",
-		"STEEL_SPIKE": "Repartir el 66% del ATK como TRUE",
-		"CORKSCREW_CRASH": "Reparte el 100 % del ATK como TRUE",
-		"MAX_MELTDOWN": "Reparte el 120 % del ATK como TRUE",
 		"CURSE_OF_VULNERABILITY": "La unidad rival con mayor DEF + SPE_DEF pierde 5 del mismo y es FLINCH",
 		"CURSE_OF_WEAKNESS": "Además, la unidad rival con mayor ATK pierde el 25% del mismo y es PARALYSIS",
 		"CURSE_OF_TORMENT": "Además, la unidad rival con el AP más alto pierde un 50% del mismo y es FATIGUE",
@@ -2326,13 +2326,13 @@
 		"CURRY": "Curry",
 		"CASTELIACONE": "Porcehelado",
 		"WHIPPED_DREAM": "Dulce de Nata",
-		"BERRY_JUICE":"Zumo de baya",
+		"BERRY_JUICE": "Zumo de baya",
 		"TART_APPLE": "Manzana Ácida",
 		"SWEET_APPLE": "Manzana Dulce",
 		"SIRUPY_APPLE": "Manzana Melosa",
 		"SWEET_HERB": "Especia Oculta Dulce",
 		"MOOMOO_MILK": "Leche Mu-Mu",
-		"Berries": "Bayas",
+		"BERRIES": "Bayas",
 		"HONEY": "Miel",
 		"POFFIN": "Pokocho",
 		"ROCK_SALT": "Sal de Roca",
@@ -2369,7 +2369,8 @@
 		"MALICIOUS_ARMOR": "Armadura Maldita",
 		"RUSTED_SWORD": "Espada Oxidada",
 		"SCROLL_OF_WATERS": "Manuscrito Aguas",
-		"SCROLL_OF_DARKNESS": "Manuscrito Sombras"
+		"SCROLL_OF_DARKNESS": "Manuscrito Sombras",
+		"Berries": "Bayas"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -2409,7 +2410,7 @@
 		"RAZOR_FANG": "+100% CRIT_POWER. Los golpes críticos aplican ARMOR_BREAK durante 4 segundos.",
 		"PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de represalia.",
 		"CHOICE_SCARF": "Al golpear, inflige un 50% de daño de ataque a un enemigo adyacente",
-		"PUNCHING_GLOVE": "Los ataques infligen un 10 % del HP máximo del objetivo como daño adicional.",
+		"PUNCHING_GLOVE": "Los ataques infligen un 8 % del HP máximo del objetivo como daño adicional.",
 		"MUSCLE_BAND": "Cuando el portador recibe daño, gana 1 acumulación. Cada 2 acumulaciones, el titular gana +2 DEF, +1 ATK y +5 SPEED (máx. 20 acumulaciones)",
 		"WONDER_BOX": "Al comienzo de cada batalla, la caja de maravillas se reemplaza por 2 objetos temporales (máximo 3 objetos retenidos)",
 		"CLEANSE_TAG": "Cuando comienza el combate, el poseedor y todos los aliados adyacentes en la misma fila reciben 20% de HP como SHIELD y RUNE_PROTECT durante 5 segundos.",
@@ -2520,7 +2521,7 @@
 		"HEARTY_STEW": "Al comienzo de la siguiente batalla, aumenta los HP máximos en un 30%. Si se le da a un Pokémon que tiene COOKING_POT, el Pokémon se BURN durante 5 segundos.",
 		"RAGE_CANDY_BAR": "Gana 10 de ATK al comienzo de la siguiente batalla.",
 		"TEA": "Gana 80 de PP al comienzo de la siguiente batalla.",
-		"CURRY": "Comienza la siguiente batalla RAGE durante 5 segundos.",
+		"CURRY": "Comienza la siguiente batalla RAGE durante 4 segundos.",
 		"CASTELIACONE": "El primer ataque en la siguiente batalla infligirá FREEZE durante 5 segundos al golpear.",
 		"WHIPPED_DREAM": "El primer ataque en la siguiente batalla infligirá CHARM durante 5 segundos al golpear",
 		"BERRY_JUICE": "Gana 100 de SHIELD al comienzo de la siguiente batalla y siempre que consumas una baya durante el transcurso de ésta.",
@@ -2560,7 +2561,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "Horneado con aliados de tipo DARK MONSTER DRAGON. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "Horneado con aliados de tipo PSYCHIC AMORPHOUS BABY LIGHT. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Un Huevo vendido en la guardería de Chansey",
-		"GIMMIGHOUL_COIN": "Consigue 1 de GOLD adicional cada ronda, e incrementa el máximo de interés en 10 de GOLD.",
+		"GIMMIGHOUL_COIN": "Incrementa el máximo de interés en 10 de GOLD.",
 		"EXCHANGE_TICKET": "Intercambia un componente o un objeto completo del banquillo por otro aleatorio. Un único uso.",
 		"AUSPICIOUS_ARMOR": "Una peculiar armadura que permite evolucionar a una especie de Pokémon. Deseos auspiciosos residen en ella.",
 		"MALICIOUS_ARMOR": "Una peculiar armadura que permite evolucionar a una especie de Pokémon. Un ímpetu malicioso reside en ella.",
@@ -3533,7 +3534,7 @@
 	"game-reconnect-modal-title": "Vuelve a conectarte al juego",
 	"game-reconnect-modal-body": "Dejaste un juego en progreso. ¿Quieres volver a conectarte a tu juego anterior?",
 	"game-surrender-modal-title": "Rendirse",
-	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?",
+	"game-surrender-modal-body": "La partida todavía no ha terminado. Quieres rendirte?",
 	"toggle_locked": "Mostrar Bloqueados",
 	"creator": "Creador",
 	"switch_server": "Cambiar a este servidor",
@@ -3770,7 +3771,7 @@
 		"BLOOD_MONEY": "El precio de la ganancia",
 		"TOWN_FESTIVAL": "Festival de la aldea",
 		"HIGH_ROLLER": "Suertudo",
-		"REGIONAL_SPECIALITIES": "Especialidades Regionales"
+		"REGIONAL_SPECIALTIES": "Especialidades Regionales"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Todas los pokémon adicionales están disponibles de inmediato.",
@@ -3789,15 +3790,15 @@
 		"BLOOD_MONEY": "Cada KO otorga 1 GOLD. No se obtiene dinero adicional del interés. ",
 		"TOWN_FESTIVAL": "Siempre habrá un encuentro en la Aldea Tesoro y todos los objetos de carrusel son gratuitos.",
 		"HIGH_ROLLER": "Las tiendas tienen una probabilidad de contener Eclosiones en las rondas 0-10, Únicos en las rondas 10-20 y Legendarios a partir de la ronda 20.",
-		"REGIONAL_SPECIALITIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local."
+		"REGIONAL_SPECIALTIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local."
 	},
-	"town_encounter_description":{
+	"town_encounter_description": {
 		"KECLEON": "Kecleon vende piedras de sinergia por {{cost}} de GOLD",
 		"CHANSEY": "Chansey vende EGG_FOR_SELL por {{cost}} de GOLD",
 		"ELECTIVIRE": "Electivire vende objetos artificiales por {{cost}} de GOLD",
-		"XATU": "Xatu vende WONDER_BOX por {{cost}} de GOLD",
+		"XATU": "Xatu vende TREASURE_BOX por {{cost}} de GOLD",
 		"KANGASKHAN": "Kangaskhan vende objetos completos por {{cost}} de GOLD",
-		"DUSKULL": "Duskull aumenta tus ingresos a largo plazo por {{cost}} de GOLD",
+		"DUSKULL": "Duskull moneda aumenta tus ingresos a largo plazo",
 		"MAROWAK": "Marowak hace que la siguiente batalla JcE sea más difícil",
 		"WOBBUFFET": "Wobbuffet te permite reciclar un componente u objeto completo sin utilizar",
 		"SPINDA": "Spinda cambia la dirección del carrusel de manera aleatoria",
@@ -3854,7 +3855,7 @@
 		"ROOM_DELETED": "Esta sala fue borrada",
 		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
 	},
-	"connection_status":{
+	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Intentando volver a conectar...",
 		"CONNECTION_FAILED": "Conexión fallida. Prueba a recargar la página."
 	},
@@ -3864,5 +3865,6 @@
 		"attempts": "Intentos: {{count}}",
 		"guess": "Adivinar",
 		"reset": "Reiniciar"
-	}
+	},
+	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?"
 }

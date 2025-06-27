@@ -3327,7 +3327,7 @@ export class BiteStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 1, crit)
+    pokemon.handleHeal(Math.ceil(0.3 * takenDamage), pokemon, 0, false)
     if (takenDamage > 0) target.status.triggerFlinch(5000, target, pokemon)
   }
 }
@@ -4070,7 +4070,7 @@ export class LeechLifeStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    pokemon.handleHeal(takenDamage, pokemon, 1, crit)
+    pokemon.handleHeal(takenDamage, pokemon, 0, false)
   }
 }
 
@@ -8852,7 +8852,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
         crit,
         true
       )
-      pokemon.handleHeal(takenDamage, pokemon, 1, crit)
+      pokemon.handleHeal(takenDamage, pokemon, 0, false)
     } else {
       const duration = Math.round(
         ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
@@ -12227,7 +12227,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
             positionX: target.positionX,
             positionY: target.positionY,
             targetX: tg.positionX,
-            targetY: tg.positionY
+            targetY: tg.positionY,
+            delay: 1
           })
           pokemon.commands.push(
             new DelayedCommand(() => {
@@ -12242,7 +12243,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
                 positionX: tg.positionX,
                 positionY: tg.positionY,
                 targetX: target.positionX,
-                targetY: target.positionY
+                targetY: target.positionY,
+                delay: 2
               })
               pokemon.commands.push(
                 new DelayedCommand(() => {
@@ -12289,7 +12291,7 @@ export class SuctionHealStrategy extends AbilityStrategy {
           targetX: cell.value.positionX,
           targetY: cell.value.positionY
         })
-        pokemon.handleHeal(attack.takenDamage * 0.5, pokemon, 1, crit)
+        pokemon.handleHeal(attack.takenDamage * 0.5, pokemon, 0, false)
       }
     })
   }
