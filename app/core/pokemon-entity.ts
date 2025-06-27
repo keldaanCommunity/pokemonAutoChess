@@ -499,6 +499,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
+    if (this.hp >= 1500 && this.player) {
+      this.player.titles.add(Title.GIANT)
+    }
   }
 
   addDodgeChance(

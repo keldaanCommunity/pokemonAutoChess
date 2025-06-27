@@ -363,6 +363,10 @@ export class OnDragDropPokemonCommand extends Command<
             this.swapPokemonPositions(player, pokemon, x, y)
             success = true
           }
+
+          if(teamSize >= 10 && !isBoardFull){
+            player.titles.add(Title.DECURION)
+          }
         }
       }
 

@@ -153,6 +153,10 @@
 - Minimum elo ranks for ranked mode have been adjusted to reduce waiting times for high elo players.
 - New gadget: Pokeguessr, a "Guess the Pokémon" game when waiting for lobby to start
 - Changed title Duke: owns at least one emote of all current pokémons in the game ; all the accounts hat this title before this patch lose it.
-- New title: Collector: has played all current pokémons in the game
-- Putting the evolved pokemon into the team planner should mark the basic pokemon in the shop
+- New title Collector: has played all current pokémons in the game
+- New title Lucky: Get a 10 gold jackpot or more with a Gold Bottle Cap
+- New title Giant: Get a Pokémon over 1500 HP
+- New title Legend: Play with 3 legendaries or more in your team
+- New title Decurion: Play with 10 units in your team, not counting clones/spawns
+- Putting the evolved pokemon into the team planner now marks the tier 1 pokemon in the shop
 - Sableye town encounter now steals all players at the same stage and only once. It is also slower and gives 1 gold if caught.

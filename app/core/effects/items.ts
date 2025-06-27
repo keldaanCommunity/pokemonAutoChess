@@ -1,5 +1,5 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { Transfer } from "../../types"
+import { Title, Transfer } from "../../types"
 import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -333,6 +333,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         const moneyGained = isLastEnemy ? pokemon.count.bottleCapCount + 1 : 1
         pokemon.player.addMoney(moneyGained, true, pokemon)
         pokemon.count.moneyCount += moneyGained
+        if (isLastEnemy && pokemon.count.bottleCapCount >= 10) {
+          pokemon.player.titles.add(Title.LUCKY)
+        }
       }
     })
   ],
