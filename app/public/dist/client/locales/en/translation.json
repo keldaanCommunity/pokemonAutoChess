@@ -1528,7 +1528,7 @@
 		"MEDITATE": "Increase the user's ATK by [100,SP]%.",
 		"DEFENSE_CURL": "Increase the user's DEF and SPE_DEF by [5,10,15,SP].",
 		"IRON_DEFENSE": "Grant [20,40,80,SP] SHIELD to all allied Pokémon in the same row as the user.",
-		"METRONOME": "Use a random ability.",
+		"METRONOME": "Use a random ability whose strength depends on LUCK.",
 		"SOAK": "Deal [20,40,80,SP] SPECIAL to the target and restore 10 PP to all allied Pokémon.",
 		"ORIGIN_PULSE": "A wave travels horizontally across the battlefield, dealing [100,SP] SPECIAL to all enemy Pokémon in its path.",
 		"SEED_FLARE": "Emit a shockwave, deal [30,SP] SPECIAL to all enemy Pokémon in a 5 tile radius and decrease their SPE_DEF by 3",

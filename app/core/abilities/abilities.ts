@@ -34,7 +34,7 @@ import {
 import { IPokemon, Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Orientation, Team } from "../../types/enum/Game"
+import { AttackType, Orientation, Rarity, Team } from "../../types/enum/Game"
 import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -73,6 +73,8 @@ import { DarkHarvestEffect } from "../effects/effect"
 import { DelayedCommand } from "../simulation-command"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 
 export const broadcastAbility = (
   pokemon: PokemonEntity,
@@ -4549,9 +4551,38 @@ export class MetronomeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    const threshold = Math.random() * (1 + pokemon.luck/100)
+    let rarity = Rarity.ULTRA
+    if (threshold < 1/8) {
+      rarity = Rarity.COMMON
+    } else if (threshold < 2/8) {
+      rarity = Rarity.UNCOMMON
+    } else if (threshold < 3/8) {
+      rarity = Rarity.SPECIAL
+    } else if (threshold < 4/8) {
+      rarity = Rarity.RARE
+    } else if (threshold < 5/8) {
+      rarity = Rarity.UNIQUE
+    } else if (threshold < 6/8) {
+      rarity = Rarity.EPIC
+    } else if (threshold < 7/8) {
+      rarity = Rarity.LEGENDARY
+    }
+
+    const pokemonOptions = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
+    if (rarity === Rarity.SPECIAL) {
+      pokemonOptions.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
+    }
+    
+    const skillOptions = [...new Set(
+      pokemonOptions.map((p) => 
+        getPokemonData(p).skill
+      )
+    )]
+
     const skill = pickRandomIn(
-      (Object.keys(Ability) as Ability[]).filter(
-        (a) => AbilityStrategies[a].copyable
+      skillOptions.filter((s) => 
+        AbilityStrategies[s].copyable
       )
     )
 
