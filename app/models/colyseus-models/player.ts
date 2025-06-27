@@ -486,7 +486,7 @@ export default class Player extends Schema implements IPlayer {
     this.wildChance =
       values(this.board)
         .filter((p) => p.types.has(Synergy.WILD))
-        .reduce((total, p) => total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 100)), 0)
+        .reduce((total, p) => total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)), 0)
   }
 
   updateChefsHats() {
