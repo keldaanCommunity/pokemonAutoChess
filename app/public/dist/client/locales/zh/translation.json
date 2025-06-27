@@ -2396,7 +2396,7 @@
 		"POKEMONOMICON": "携带者造成SPECIAL时还会使目标陷入BURN 3秒",
 		"POWER_LENS": "由SPE_DEF减免的SPECIAL改为反弹至进攻方",
 		"SHELL_BELL": "携带者造成任意伤害时，恢复伤害额的33%",
-		"LUCKY_EGG": "携带者提升50%的LUCK",
+		"LUCKY_EGG": "携带者提升30%的LUCK",
 		"AQUA_EGG": "携带者开场时恢复50点PP，且每次释放招式后恢复20点PP",
 		"BLUE_ORB": "每4次攻击会额外释放一道链状闪电，弹射至2个最近的敌方宝可梦，对他们造成10点SPECIAL并移除他们20点PP",
 		"SCOPE_LENS": "造成暴击时会偷取目标10点PP。",

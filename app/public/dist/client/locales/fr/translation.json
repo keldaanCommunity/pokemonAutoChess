@@ -2402,7 +2402,7 @@
 		"POKEMONOMICON": "Lorsque le porteur inflige des SPECIAL, il inflige également BURN à la cible pendant 3 secondes",
 		"POWER_LENS": "Le montant de SPECIAL reçus bloqués par la SPE_DEF est renvoyé vers l'attaquant",
 		"SHELL_BELL": "Le porteur se soigne d'un montant équivalent à 33% de tous les dégâts infligés",
-		"LUCKY_EGG": "Augmente la LUCK du porteur de 50%",
+		"LUCKY_EGG": "Augmente la LUCK du porteur de 30%",
 		"AQUA_EGG": "Le détenteur gagne +50 PP de départ et regagne 20 PP après avoir lancé sa capacité",
 		"BLUE_ORB": "Toutes les 4 attaques, libère une chaîne d'éclairs qui rebondit sur les 2 ennemis les plus proches, infligeant 10 SPECIAL et retirant 20 PP",
 		"SCOPE_LENS": "Les coups critiques volent 10 PP à la cible.",

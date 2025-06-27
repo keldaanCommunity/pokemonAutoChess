@@ -2400,7 +2400,7 @@
 		"POKEMONOMICON": "When the holder deals SPECIAL, they BURN the target for 3 seconds",
 		"POWER_LENS": "The amount of SPECIAL blocked by SPE_DEF is inflicted back to the attacker",
 		"SHELL_BELL": "Holder heals for 33% of all damages inflicted",
-		"LUCKY_EGG": "Increase holder's LUCK by 50%",
+		"LUCKY_EGG": "Increase holder's LUCK by 30%",
 		"AQUA_EGG": "The holder gains +50 starting PP and regains 20 PP after casting its ability",
 		"BLUE_ORB": "Every 4 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 20 PP",
 		"SCOPE_LENS": "Critical attacks steal 10 PP from the target.",

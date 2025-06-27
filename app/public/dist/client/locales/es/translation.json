@@ -2398,7 +2398,7 @@
 		"POKEMONOMICON": "Cuando el poseedor inflige SPECIAL, BURN al objetivo durante 3 segundos.",
 		"POWER_LENS": "La cantidad de SPECIAL reducida en SPE_DEF se devuelve al atacante.",
 		"SHELL_BELL": "El usuario cura el 33% de todos los daños infligidos.",
-		"LUCKY_EGG": "Aumenta la LUCK del titular en un 50%",
+		"LUCKY_EGG": "Aumenta la LUCK del titular en un 30%",
 		"AQUA_EGG": "El poseedor gana +50 PP inicial y recupera 20 PP después de lanzar su habilidad",
 		"BLUE_ORB": "Cada 4 ataques del poseedor, desata una cadena de rayos que rebota los 2 enemigos que se acercan, causando 15 SPECIAL y quemando 20 PP.",
 		"SCOPE_LENS": "Los golpes críticos roban 10 PP del objetivo.",

@@ -1,7 +1,7 @@
 import { SetSchema } from "@colyseus/schema"
+import { Stat } from "../types/enum/Game"
 import { CraftableItems, Item, SynergyStones } from "../types/enum/Item"
 import { pickRandomIn } from "../utils/random"
-import { Stat } from "../types/enum/Game"
 
 export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
   const wonderboxItems: Item[] = []
@@ -43,7 +43,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 10 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
-  [Item.LUCKY_EGG]: { [Stat.AP]: 60, [Stat.DEF]: 12, [Stat.LUCK]: 50 },
+  [Item.LUCKY_EGG]: { [Stat.AP]: 50, [Stat.DEF]: 10, [Stat.LUCK]: 30 },
   [Item.AQUA_EGG]: { [Stat.PP]: 50 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
