@@ -127,6 +127,7 @@
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
 - Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
+- Change Luck formula: `chance^(1-luck/100)` instead of `chance*(1+luck/100)`. Luck is now more valuable for low base chance effects, and less valuable for high base chance effects. You always have a risk of missing unless you reach 100% luck, which is the new max cap for Luck.
 
 # UI
 
