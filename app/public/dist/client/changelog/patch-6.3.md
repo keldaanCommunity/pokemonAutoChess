@@ -85,6 +85,7 @@
 - Nerf Capsakid line: PP 100 → 110
 - Change Metronome: Luck now increases the chance to use a stronger ability
 - Change Sunction Heal: healing no longer scales with AP ; Eelektross line PP 90 → 80
+- If Kecleon or Arceus are Dragon, Dragon always is their first type, which allows doubling your other main type with Dragon 3 effect. Fixed synergy compute when Arceus or Kecleon are Dragon.
 
 # Changes to Synergies
 
