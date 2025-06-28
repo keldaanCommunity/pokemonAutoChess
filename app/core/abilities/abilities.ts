@@ -3606,7 +3606,7 @@ export class SecretSwordStrategy extends AbilityStrategy {
     const damageType =
       pokemon.count.fightingBlockCount >= 20
         ? AttackType.TRUE
-        : AttackType.PHYSICAL
+        : AttackType.SPECIAL
     target.handleSpecialDamage(damage, board, damageType, pokemon, crit)
   }
 }
@@ -7734,7 +7734,7 @@ export class CrushGripStrategy extends AbilityStrategy {
     target.handleSpecialDamage(
       damage,
       board,
-      AttackType.PHYSICAL,
+      AttackType.SPECIAL,
       pokemon,
       crit,
       true
@@ -7883,17 +7883,17 @@ export class PsychicFangsStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    target.atk = Math.min(target.atk, target.baseAtk)
+    target.def = Math.min(target.def, target.baseDef)
+    target.speDef = Math.min(target.speDef, target.baseSpeDef)
     target.handleSpecialDamage(
-      100,
+      80,
       board,
-      AttackType.PHYSICAL,
+      AttackType.SPECIAL,
       pokemon,
       crit,
       true
     )
-    target.atk = Math.min(target.atk, target.baseAtk)
-    target.def = Math.min(target.def, target.baseDef)
-    target.speDef = Math.min(target.speDef, target.baseSpeDef)
   }
 }
 
@@ -8705,7 +8705,7 @@ export class ExtremeSpeedStrategy extends AbilityStrategy {
           cell.value.handleSpecialDamage(
             damage,
             board,
-            AttackType.PHYSICAL,
+            AttackType.SPECIAL,
             pokemon,
             crit
           )
@@ -8801,7 +8801,7 @@ export class PsystrikeStrategy extends AbilityStrategy {
           cell.value.handleSpecialDamage(
             80,
             board,
-            AttackType.PHYSICAL,
+            AttackType.SPECIAL,
             pokemon,
             crit
           )
@@ -10604,13 +10604,13 @@ export class LandsWrathStrategy extends AbilityStrategy {
         cell.value.handleSpecialDamage(
           40 + atkDamage,
           board,
-          AttackType.PHYSICAL,
+          AttackType.SPECIAL,
           pokemon,
           crit,
           false
         )
-        cell.value.addDefense(-8, pokemon, 0.5, crit)
-        cell.value.addSpecialDefense(-8, pokemon, 0.5, crit)
+        cell.value.addDefense(-5, pokemon, 1, crit)
+        cell.value.addSpecialDefense(-5, pokemon, 1, crit)
         broadcastAbility(pokemon, {
           skill: "LANDS_WRATH/hit",
           positionX: cell.x,
@@ -11173,7 +11173,7 @@ export class StrengthStrategy extends AbilityStrategy {
     target.handleSpecialDamage(
       damage,
       board,
-      AttackType.PHYSICAL,
+      AttackType.SPECIAL,
       pokemon,
       crit,
       false
@@ -12103,7 +12103,7 @@ export class ScaleShotStrategy extends AbilityStrategy {
         entityOnCell.handleSpecialDamage(
           40,
           board,
-          AttackType.PHYSICAL,
+          AttackType.SPECIAL,
           pokemon,
           crit
         )
@@ -12132,7 +12132,7 @@ export class ScaleShotStrategy extends AbilityStrategy {
                 cell.value.handleSpecialDamage(
                   cell.value.id === farthestTarget.id ? 20 : 10,
                   board,
-                  AttackType.PHYSICAL,
+                  AttackType.SPECIAL,
                   pokemon,
                   crit
                 )
@@ -12313,7 +12313,7 @@ export class BehemothBladeStrategy extends AbilityStrategy {
     target.handleSpecialDamage(
       damage,
       board,
-      AttackType.PHYSICAL,
+      AttackType.SPECIAL,
       pokemon,
       crit
     )

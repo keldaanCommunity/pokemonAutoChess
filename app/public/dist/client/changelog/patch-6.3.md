@@ -91,6 +91,9 @@
 - Change Metronome: Luck now increases the chance to use a stronger ability
 - Change Sunction Heal: healing no longer scales with AP ; Eelektross line PP 90 → 80
 - If Kecleon or Arceus are Dragon, Dragon always is their first type, which allows doubling your other main type with Dragon 3 effect. Fixed synergy compute when Arceus or Kecleon are Dragon.
+- Change Psychic Fangs (Bruxish): defense and special defense reset is now applied before doing damage. 100 physical damage → 80 special damage.
+- Change Lands Wrath (Zygarde 10%): defense and special defense debuff: 8 → 5, AP scaling 0.5 → 1
+- Change Secret Sword, Crush Grip, Psychic Fangs, Extreme Speed, PsyStrike, Lands Wrath, Strength, Scale Shot, Behemoth Blade: now doing special damage instead of physical damage.
 
 # Changes to Synergies
 
