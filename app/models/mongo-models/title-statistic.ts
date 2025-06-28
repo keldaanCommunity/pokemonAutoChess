@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import { model, Schema } from "mongoose"
 import { Title } from "../../types"
 
 export interface ITitleStatistic {
