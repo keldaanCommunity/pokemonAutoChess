@@ -8865,6 +8865,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
         targetX: target.positionX,
         targetY: target.positionY
       })
+      pokemon.pp = pokemon.maxPP
     }
   }
 }

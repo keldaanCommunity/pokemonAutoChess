@@ -46,6 +46,7 @@
 - Buff Drampa: PP 90 → 80
 - Buff Dialga: PP 120 → 110
 - Buff Palkia: PP 120 → 110
+- Buff Dream Eater (Drowzee) : If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [3,4,5,SP] seconds **and regain all PP**.
 - Nerf Chimchar line: Def & Spe Def: 4/4/4 → 2/3/4
 - Nerf Kakuna: Speed 49 → 35
 - Slakoth line changes: Slack Off heals 30% max HP at all tiers ; AP scaling 0.5 → 1. Reduce Sleep duration to 3 seconds. New passive to Vigoroth: Vigoroth is immune to Sleep ; New passive to Slaking: after waking up after falling asleep, get Enraged status for 3 seconds
