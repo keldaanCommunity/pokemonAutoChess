@@ -7,7 +7,7 @@ import {
 } from "../../core/evolution-rules"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
-import type { IPlayer, Role, Title } from "../../types"
+import { IPlayer, Role, Title } from "../../types"
 import { SynergyTriggers, UniquePool } from "../../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult, Rarity, Team } from "../../types/enum/Game"
@@ -588,9 +588,16 @@ export default class Player extends Schema implements IPlayer {
   }
 
   registerPlayedPokemons() {
+    let legendaryCount = 0
     this.board.forEach((pokemon) => {
       this.pokemonsPlayed.add(pokemon.name)
+      if (pokemon.rarity === Rarity.LEGENDARY) {
+        legendaryCount++
+      }
     })
+    if (legendaryCount >= 3) {
+      this.titles.add(Title.LEGEND)
+    }
   }
 }
 
