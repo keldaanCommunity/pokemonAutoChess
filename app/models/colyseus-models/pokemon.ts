@@ -5736,7 +5736,7 @@ export class Dialga extends Pokemon {
   speed = 54
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.ROAR_OF_TIME
   attackSprite = AttackSprite.FIRE_RANGE
@@ -5751,7 +5751,7 @@ export class Palkia extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.SPACIAL_REND
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -7311,7 +7311,7 @@ export class Drampa extends Pokemon {
   speed = 37
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.DRAGON_PULSE
   passive = Passive.BERSERK
