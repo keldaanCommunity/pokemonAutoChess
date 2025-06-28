@@ -146,9 +146,6 @@
 - Shiny rate in boosters is increased: 3% → 5%
 - Your collection now displays the number of times you've played each Pokémon. This count is not retroactive, every player starts with an empty pokédex as of this patch.
 
-
-# Bugfix
-
 # Misc
 
 - Minimum elo ranks for ranked mode have been adjusted to reduce waiting times for high elo players.
