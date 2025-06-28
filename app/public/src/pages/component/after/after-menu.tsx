@@ -26,7 +26,7 @@ export default function AfterMenu() {
   const playerRank = currentPlayer ? currentPlayer.rank : null
   const humans = players.filter((p) => p.role !== Role.BOT)
   const newElo = currentPlayer
-    ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans, gameMode)
+    ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans, gameMode, false)
     : null
   const shouldShowElo = elligibleToELO && currentPlayer && newElo
 
