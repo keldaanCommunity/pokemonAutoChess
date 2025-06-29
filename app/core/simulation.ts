@@ -358,7 +358,7 @@ export default class Simulation extends Schema implements ISimulation {
     ]
     for (const [dx, dy] of placesToConsiderByOrderOfPriority) {
       const x = positionX + dx
-      const y = positionY - 1 + dy * (team === Team.BLUE_TEAM ? 1 : -1)
+      const y = positionY + dy * (team === Team.BLUE_TEAM ? 1 : -1)
 
       if (
         x >= 0 &&
@@ -374,8 +374,23 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getClosestAvailablePlaceOnBoardToPokemon(
-    pokemon: IPokemon | IPokemonEntity,
+    pokemon: IPokemon,
     team: Team
+  ): { x: number; y: number } {
+    const positionX = pokemon.positionX
+    const positionY = team === Team.BLUE_TEAM
+      ? pokemon.positionY - 1
+      : 5 - (pokemon.positionY - 1)
+    return this.getClosestAvailablePlaceOnBoardTo(
+      positionX,
+      positionY,
+      team
+    )
+  }
+
+  getClosestAvailablePlaceOnBoardToPokemonEntity(
+    pokemon: IPokemonEntity,
+    team: Team = pokemon.team
   ): { x: number; y: number } {
     return this.getClosestAvailablePlaceOnBoardTo(
       pokemon.positionX,

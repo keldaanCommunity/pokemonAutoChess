@@ -212,10 +212,7 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     const numberToSpawn = 2
     for (let i = 0; i < numberToSpawn; i++) {
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        unown,
-        unown.team
-      )
+      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
       const sharpedo = unown.simulation.addPokemon(
         PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, unown.player),
         coord.x,
@@ -236,10 +233,7 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-      unown,
-      unown.team
-    )
+    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
     const hitmonlee = unown.simulation.addPokemon(
       PokemonFactory.createPokemonFromName(Pkm.HITMONLEE, unown.player),
       coord.x,
@@ -377,10 +371,7 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
 
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = randomWeighted(candidatesWeights) ?? Pkm.WEEDLE
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        unown,
-        unown.team
-      )
+      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
       unown.simulation.addPokemon(
         PokemonFactory.createPokemonFromName(bug, unown.player),
         coord.x,
@@ -460,10 +451,7 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-      unown,
-      unown.team
-    )
+    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
     const uxie = unown.simulation.addPokemon(
       PokemonFactory.createPokemonFromName(Pkm.UXIE, unown.player),
       coord.x,
@@ -576,10 +564,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     const numberToSpawn = 2
     for (let i = 0; i < numberToSpawn; i++) {
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        unown,
-        unown.team
-      )
+      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
       const meditite = unown.simulation.addPokemon(
         PokemonFactory.createPokemonFromName(Pkm.MEDITITE, unown.player),
         coord.x,
