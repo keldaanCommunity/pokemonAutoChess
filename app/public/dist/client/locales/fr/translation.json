@@ -1474,8 +1474,7 @@
 		"WYRDEER": "Cerbyllin",
 		"OKIDOGI": "Félicanis",
 		"MUNKIDORI": "Fortusimia",
-		"FEZANDIPITI": "Favianos",
-		"MEOWSTIC": "Mistigrix"
+		"FEZANDIPITI": "Favianos"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -3034,7 +3033,7 @@
 		"DENTIST": "Débloquez l'emote Arbok en colère",
 		"FISHERMAN": "Obtenez un Léviator",
 		"SIREN": "Obtenez un Milobellus",
-		"FEARSOME": "Formez un Banc de Froussardin",
+		"FEARSOME": "Formez un Banc de Froussardine",
 		"GOLDEN": "Obtenez un Gromago",
 		"ANNIHILATOR": "Obtenez un Courrousinge",
 		"LUCKY": "Obtenez un jackpot de 10 pièces ou plus avec une Capsule d'Or",
