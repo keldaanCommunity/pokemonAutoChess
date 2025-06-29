@@ -89,6 +89,8 @@
   padding: 5px;
   overflow-y: auto;
   max-height: 100%;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 #selected-entity fieldset {
@@ -166,7 +168,7 @@
 }
 
 #pokemon-picker summary {
-  margin: .5em 0;
+  margin: 0.5em 0;
   font-size: 1rem;
 }
 

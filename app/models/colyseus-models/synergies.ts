@@ -68,7 +68,6 @@ export function computeSynergies(
   })
 
   const typesPerFamily = new Map<Pkm, Set<Synergy>>()
-  const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
 
   board.forEach((pkm: IPokemon) => {
     // reset dynamic synergies
@@ -83,11 +82,6 @@ export function computeSynergies(
       if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
       const types: Set<Synergy> = typesPerFamily.get(family)!
       pkm.types.forEach((type) => types.add(type))
-      if (pkm.types.has(Synergy.DRAGON) && pkm.types.size > 1) {
-        if (!dragonDoubleTypes.has(family))
-          dragonDoubleTypes.set(family, new Set())
-        dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
-      }
       if (pkm.items.has(Item.SHINY_STONE)) {
         synergies.set(Synergy.LIGHT, (synergies.get(Synergy.LIGHT) ?? 0) + 1)
       }
@@ -101,18 +95,24 @@ export function computeSynergies(
   })
 
   function applyDragonDoubleTypes() {
-    if (
-      (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
-    ) {
-      dragonDoubleTypes.forEach((types) => {
-        types.forEach((type, i) => {
-          synergies.set(type, (synergies.get(type) ?? 0) + 1)
-        })
+    const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
+    board.forEach((pkm: IPokemon) => {
+      if (pkm.positionY != 0 && pkm.types.has(Synergy.DRAGON) && pkm.types.size > 1) {
+        const family = PkmFamily[pkm.name]
+        if (!dragonDoubleTypes.has(family)) dragonDoubleTypes.set(family, new Set())
+        dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
+      }
+    })
+    dragonDoubleTypes.forEach((types) => {
+      types.forEach((type, i) => {
+        synergies.set(type, (synergies.get(type) ?? 0) + 1)
       })
-    }
+    })
   }
 
-  applyDragonDoubleTypes()
+  if ((synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]) {
+    applyDragonDoubleTypes()
+  }
 
   // add dynamic synergies (Arceus & Kecleon)
   board.forEach((pkm: IPokemon) => {
@@ -139,7 +139,7 @@ export function computeSynergies(
           synergies.set(type, (synergies.get(type) ?? 0) + 1)
           //apply dragon double synergies just for Arceus & Kecleon if Dragon
           if (type === Synergy.DRAGON) {
-            if (synergies.get(Synergy.DRAGON)! === SynergyTriggers[Synergy.DRAGON][0]) {
+            if (synergies.get(Synergy.DRAGON) === SynergyTriggers[Synergy.DRAGON][0]) {
               // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
               applyDragonDoubleTypes()
             } else if (synergies.get(Synergy.DRAGON)! > SynergyTriggers[Synergy.DRAGON][0]) {
