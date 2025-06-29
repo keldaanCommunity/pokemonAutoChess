@@ -68,7 +68,6 @@ export function computeSynergies(
   })
 
   const typesPerFamily = new Map<Pkm, Set<Synergy>>()
-  const dynamicTypesPerFamily = new Map<Pkm, Set<Synergy>>()
   const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
 
   board.forEach((pkm: IPokemon) => {
@@ -101,16 +100,19 @@ export function computeSynergies(
     })
   })
 
-  // apply dragon double synergies
-  if (
-    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
-  ) {
-    dragonDoubleTypes.forEach((types) => {
-      types.forEach((type, i) => {
-        synergies.set(type, (synergies.get(type) ?? 0) + 1)
+  function applyDragonDoubleTypes() {
+    if (
+      (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
+    ) {
+      dragonDoubleTypes.forEach((types) => {
+        types.forEach((type, i) => {
+          synergies.set(type, (synergies.get(type) ?? 0) + 1)
+        })
       })
-    })
+    }
   }
+
+  applyDragonDoubleTypes()
 
   // add dynamic synergies (Arceus & Kecleon)
   board.forEach((pkm: IPokemon) => {
@@ -136,9 +138,15 @@ export function computeSynergies(
           pkm.types.add(type)
           synergies.set(type, (synergies.get(type) ?? 0) + 1)
           //apply dragon double synergies just for Arceus & Kecleon if Dragon
-          if (type === Synergy.DRAGON && synergies.get(Synergy.DRAGON)! >= SynergyTriggers[Synergy.DRAGON][0]) {
-            const doubledType = synergiesSorted[1]
-            synergies.set(doubledType, (synergies.get(doubledType) ?? 0) + 1)
+          if (type === Synergy.DRAGON) {
+            if (synergies.get(Synergy.DRAGON)! === SynergyTriggers[Synergy.DRAGON][0]) {
+              // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
+              applyDragonDoubleTypes()
+            } else {
+              // Dragon 3 was already activated, so we just need to double the synergy of Arceus/Kecleon
+              const doubledType = synergiesSorted[1]
+              synergies.set(doubledType, (synergies.get(doubledType) ?? 0) + 1)
+            }
           }
         }
       }
