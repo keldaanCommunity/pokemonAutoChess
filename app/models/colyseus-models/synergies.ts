@@ -13,8 +13,7 @@ import { values } from "../../utils/schemas"
 
 export default class Synergies
   extends MapSchema<number, Synergy>
-  implements Map<Synergy, number>
-{
+  implements Map<Synergy, number> {
   constructor() {
     super()
     Object.keys(Synergy).forEach((key) => {
@@ -109,19 +108,24 @@ export function computeSynergies(
       (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3)
     ) {
       const n = pkm.passive === Passive.PROTEAN3 ? 3 : 2
-      const synergiesSorted = [...synergies.keys()].sort(
-        (a, b) => +synergies.get(b)! - synergies.get(a)!
-      )
+      const synergiesSorted = [...synergies.keys()].sort((a, b) => {
+        if (a === Synergy.DRAGON) return -1
+        if (b === Synergy.DRAGON) return 1
+        return +synergies.get(b)! - +synergies.get(a)!
+      })
       const family = PkmFamily[pkm.name]
       if (!dynamicTypesPerFamily.has(family))
         dynamicTypesPerFamily.set(family, new Set())
       const types: Set<Synergy> = dynamicTypesPerFamily.get(family)!
 
       for (let i = 0; i < n; i++) {
-        const type = synergiesSorted.shift()
+        const type = synergiesSorted[i]
         if (type && !pkm.types.has(type) && synergies.get(type)! > 0) {
           pkm.types.add(type)
           types.add(type)
+          if (type === Synergy.DRAGON && (i + 1) in synergiesSorted) {
+            dragonDoubleTypes.set(family, new Set([synergiesSorted[i + 1]]))
+          }
         }
       }
     }

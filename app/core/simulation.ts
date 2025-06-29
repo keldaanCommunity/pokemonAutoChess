@@ -1,7 +1,7 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { getWonderboxItems, ItemStats } from "./items"
+import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
@@ -14,8 +14,8 @@ import {
   Transfer
 } from "../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../types/Config"
+import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
-import { ItemEffects } from "./effects/items"
 import {
   AttackType,
   BattleResult,
@@ -37,8 +37,10 @@ import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
-import { logger } from "../utils/logger"
+import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
+import { logger } from "../utils/logger"
+import { max } from "../utils/number"
 import {
   chance,
   pickRandomIn,
@@ -46,26 +48,24 @@ import {
   shuffleArray
 } from "../utils/random"
 import { values } from "../utils/schemas"
-import Board from "./board"
-import Dps from "./dps"
-import { PokemonEntity, getStrongestUnit, getUnitScore } from "./pokemon-entity"
-import { DelayedCommand } from "./simulation-command"
-import { getAvatarString } from "../utils/avatar"
-import { max } from "../utils/number"
-import {
-  OnItemGainedEffect,
-  GrowGroundEffect,
-  FireHitEffect,
-  MonsterKillEffect,
-  SoundCryEffect,
-  OnSpawnEffect,
-  electricTripleAttackEffect
-} from "./effects/effect"
-import { WaterSpringEffect } from "./effects/passives"
-import { SynergyEffects } from "../models/effects"
-import { DishEffects } from "./dishes"
 import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
-import { Ability } from "../types/enum/Ability"
+import Board from "./board"
+import { DishEffects } from "./dishes"
+import Dps from "./dps"
+import {
+  electricTripleAttackEffect,
+  FireHitEffect,
+  GrowGroundEffect,
+  MonsterKillEffect,
+  OnItemGainedEffect,
+  OnSpawnEffect,
+  SoundCryEffect
+} from "./effects/effect"
+import { ItemEffects } from "./effects/items"
+import { WaterSpringEffect } from "./effects/passives"
+import { getWonderboxItems, ItemStats } from "./items"
+import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
+import { DelayedCommand } from "./simulation-command"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -358,8 +358,7 @@ export default class Simulation extends Schema implements ISimulation {
     ]
     for (const [dx, dy] of placesToConsiderByOrderOfPriority) {
       const x = positionX + dx
-      const y =
-        team === Team.BLUE_TEAM ? positionY - 1 + dy : 5 - (positionY - 1) - dy
+      const y = positionY + dy * (team === Team.BLUE_TEAM ? 1 : -1)
 
       if (
         x >= 0 &&
@@ -375,8 +374,23 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getClosestAvailablePlaceOnBoardToPokemon(
-    pokemon: IPokemon | IPokemonEntity,
+    pokemon: IPokemon,
     team: Team
+  ): { x: number; y: number } {
+    const positionX = pokemon.positionX
+    const positionY = team === Team.BLUE_TEAM
+      ? pokemon.positionY - 1
+      : 5 - (pokemon.positionY - 1)
+    return this.getClosestAvailablePlaceOnBoardTo(
+      positionX,
+      positionY,
+      team
+    )
+  }
+
+  getClosestAvailablePlaceOnBoardToPokemonEntity(
+    pokemon: IPokemonEntity,
+    team: Team = pokemon.team
   ): { x: number; y: number } {
     return this.getClosestAvailablePlaceOnBoardTo(
       pokemon.positionX,
@@ -1495,7 +1509,8 @@ export default class Simulation extends Schema implements ISimulation {
         if (
           this.redEffects.has(EffectEnum.SURGE_SURFER) ||
           this.blueEffects.has(EffectEnum.SURGE_SURFER) ||
-          this.tidalWaveCounter < 2) {
+          this.tidalWaveCounter < 2
+        ) {
           this.tidalWaveTimer = 8000
         }
       }
@@ -1741,7 +1756,8 @@ export default class Simulation extends Schema implements ISimulation {
       const orientation = isRed ? Orientation.DOWN : Orientation.UP
 
       const tidalWaveLevel =
-        effects.has(EffectEnum.WATER_VEIL) || effects.has(EffectEnum.SURGE_SURFER)
+        effects.has(EffectEnum.WATER_VEIL) ||
+          effects.has(EffectEnum.SURGE_SURFER)
           ? 3
           : effects.has(EffectEnum.HYDRATION)
             ? 2
@@ -1768,7 +1784,10 @@ export default class Simulation extends Schema implements ISimulation {
           simulationId: this.id
         })
 
-        if (effects.has(EffectEnum.SURGE_SURFER) && this.tidalWaveCounter === 1) {
+        if (
+          effects.has(EffectEnum.SURGE_SURFER) &&
+          this.tidalWaveCounter === 1
+        ) {
           this.addPikachuSurferToBoard(team)
         }
 
@@ -1801,11 +1820,17 @@ export default class Simulation extends Schema implements ISimulation {
                 })
                 let newY = y
                 if (isRed) {
-                  while (newY > 0 && this.board.getValue(x, newY - 1) === undefined) {
+                  while (
+                    newY > 0 &&
+                    this.board.getValue(x, newY - 1) === undefined
+                  ) {
                     newY--
                   }
                 } else {
-                  while (newY < this.board.rows - 1 && this.board.getValue(x, newY + 1) === undefined) {
+                  while (
+                    newY < this.board.rows - 1 &&
+                    this.board.getValue(x, newY + 1) === undefined
+                  ) {
                     newY++
                   }
                 }
@@ -1817,7 +1842,14 @@ export default class Simulation extends Schema implements ISimulation {
 
               if (pokemonHit.items.has(Item.SURFBOARD)) {
                 const surf = AbilityStrategies[Ability.SURF] as SurfStrategy
-                surf.process(pokemonHit, this.board, pokemonHit, false, false, tidalWaveLevel)
+                surf.process(
+                  pokemonHit,
+                  this.board,
+                  pokemonHit,
+                  false,
+                  false,
+                  tidalWaveLevel
+                )
               }
 
               if (pokemonHit.passive === Passive.PIKACHU_SURFER) {

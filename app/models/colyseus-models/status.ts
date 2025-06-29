@@ -2,6 +2,7 @@ import { Schema, type } from "@colyseus/schema"
 import Board from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
+import { FIGHTING_PHASE_DURATION } from "../../types/Config"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -9,7 +10,6 @@ import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
-import { FIGHTING_PHASE_DURATION } from "../../types/Config"
 import { values } from "../../utils/schemas"
 
 export default class Status extends Schema implements IStatus {
@@ -145,6 +145,7 @@ export default class Status extends Schema implements IStatus {
 
     if (pokemon.effects.has(EffectEnum.COTTON_BALL) && !this.sleep) {
       this.triggerSleep(1000, pokemon)
+      pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
 
     if (pokemon.status.runeProtect) {
@@ -180,7 +181,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.confusion) {
-      this.updateConfusion(dt)
+      this.updateConfusion(dt, pokemon)
     }
 
     if (this.wound) {
@@ -507,10 +508,7 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonDamageCooldown - dt <= 0) {
       let poisonDamage = pkm.hp * 0.05 * this.poisonStacks
 
-      if (
-        pkm.passive === Passive.GLISCOR ||
-        pkm.passive === Passive.GLIGAR
-      ) {
+      if (pkm.passive === Passive.GLISCOR || pkm.passive === Passive.GLIGAR) {
         poisonDamage = pkm.hp * 0.05 * (this.poisonStacks - 2)
       }
 
@@ -689,9 +687,10 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updateConfusion(dt: number) {
+  updateConfusion(dt: number, pkm: PokemonEntity) {
     if (this.confusionCooldown - dt <= 0) {
       this.confusion = false
+      pkm.setTarget(null) // Clear target when confusion ends
     } else {
       this.confusionCooldown -= dt
     }
@@ -1008,16 +1007,26 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerPossessed(duration: number, pkm: PokemonEntity, origin: PokemonEntity) {
+  triggerPossessed(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity
+  ) {
     if (!this.runeProtect) {
-      const pkmTeam = pkm.team === Team.RED_TEAM ? pkm.simulation.redTeam : pkm.simulation.blueTeam
-      if (values(pkmTeam).some(p => p.id !== pkm.id && !p.status.possessed)) {
+      const pkmTeam =
+        pkm.team === Team.RED_TEAM
+          ? pkm.simulation.redTeam
+          : pkm.simulation.blueTeam
+      if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
         this.possessed = true
         duration = this.applyAquaticReduction(duration, pkm)
         pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
         pkm.setTarget(null) // force retargetting
         origin.setTarget(null) // force retargetting
-        this.possessedCooldown = Math.max(Math.round(duration), this.possessedCooldown)
+        this.possessedCooldown = Math.max(
+          Math.round(duration),
+          this.possessedCooldown
+        )
         this.possessedOrigin = origin
       } else {
         this.triggerCharm(duration, pkm, origin, false)
@@ -1026,8 +1035,13 @@ export default class Status extends Schema implements IStatus {
   }
 
   updatePossessed(dt: number, pkm: PokemonEntity) {
-    const otherTeam = pkm.team === Team.RED_TEAM ? pkm.simulation.blueTeam : pkm.simulation.redTeam
-    const possessedCount = values(otherTeam).filter((pokemon) => pokemon.status.possessed).length
+    const otherTeam =
+      pkm.team === Team.RED_TEAM
+        ? pkm.simulation.blueTeam
+        : pkm.simulation.redTeam
+    const possessedCount = values(otherTeam).filter(
+      (pokemon) => pokemon.status.possessed
+    ).length
     const lastAliveArePossessed = possessedCount === otherTeam.size
 
     this.possessedCooldown -= dt
@@ -1036,8 +1050,17 @@ export default class Status extends Schema implements IStatus {
       this.possessed = false
       pkm.team = pkm.team === Team.RED_TEAM ? Team.BLUE_TEAM : Team.RED_TEAM
 
-      if (lastAliveArePossessed && this.possessedCooldown > 0 && this.possessedOrigin) {
-        pkm.status.triggerCharm(this.possessedCooldown, pkm, this.possessedOrigin, false)
+      if (
+        lastAliveArePossessed &&
+        this.possessedCooldown > 0 &&
+        this.possessedOrigin
+      ) {
+        pkm.status.triggerCharm(
+          this.possessedCooldown,
+          pkm,
+          this.possessedOrigin,
+          false
+        )
       }
 
       pkm.setTarget(null) // force retargeting

@@ -43,6 +43,11 @@
 - Buff Fillet Away (Veluza): HP sacrified 50% → 30%
 - Buff Piplup line Attack: 5/9/20 → 6/12/24
 - Buff Waterfall (TM, Seaking): 40/80/120 → 50/100/150 shield
+- Buff Horsea line: Attack 6/11/21 → 6/12/24
+- Buff Drampa: PP 90 → 80
+- Buff Dialga: PP 120 → 110
+- Buff Palkia: PP 120 → 110
+- Buff Dream Eater (Drowzee) : If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [3,4,5,SP] seconds **and regain all PP**.
 - Nerf Chimchar line: Def & Spe Def: 4/4/4 → 2/3/4
 - Nerf Kakuna: Speed 49 → 35
 - Slakoth line changes: Slack Off heals 30% max HP at all tiers ; AP scaling 0.5 → 1. Reduce Sleep duration to 3 seconds. New passive to Vigoroth: Vigoroth is immune to Sleep ; New passive to Slaking: after waking up after falling asleep, get Enraged status for 3 seconds
@@ -76,6 +81,20 @@
 - Nerf Unown F (Fish): 3 → 2 fishes
 - Nerf Misty Surge (Tapu Fini): HP and PP gain 30 → 25
 - Nerf Plusle & Minun: Speed 65 → 61 ; nerf Link Cable: now if Plusle and Minun are alone, only deal half the damage to adjacent enemies
+- Nerf Scale Shot (Roaring moon): Damage to enemies in the path: 20 → 10 physical damage ; damage to farthest target remains unchanged
+- Buff Psycho-Cut (Gallade): 10/20/30 → 10/20/40 special damage
+- Buff Psycho Boost (Deoxys normal form): 140 → 150 special damage
+- Buff Mewtwo: PP 120 → 110
+- Buff Mew: Speed 57 → 64
+- Buff Smoochum line: Special defense :2/6 → 3/8
+- Buff Doom Desire (Jirachi): restore ~~60~~ to max PP if target is KO in the duration
+- Nerf Capsakid line: PP 100 → 110
+- Change Metronome: Luck now increases the chance to use a stronger ability
+- Change Sunction Heal: healing no longer scales with AP ; Eelektross line PP 90 → 80
+- If Kecleon or Arceus are Dragon, Dragon always is their first type, which allows doubling your other main type with Dragon 3 effect. Fixed synergy compute when Arceus or Kecleon are Dragon.
+- Change Psychic Fangs (Bruxish): defense and special defense reset is now applied before doing damage. 100 physical damage → 80 special damage.
+- Change Lands Wrath (Zygarde 10%): defense and special defense debuff: 8 → 5, AP scaling 0.5 → 1
+- Change Secret Sword, Crush Grip, Psychic Fangs, Extreme Speed, PsyStrike, Lands Wrath, Strength, Scale Shot, Behemoth Blade: now doing special damage instead of physical damage.
 
 # Changes to Synergies
 
@@ -88,9 +107,11 @@
 
 - New artificial item: Berserk Gene: Gives Monster synergy. The holder gets Confused for the whole fight if gaining Monster stacks.
 - New artificial item: Surfing Board: Gives Aquatic synergy. The holder casts Surf at every tidal wave, with the ability level matching current Aquatic synergy level.
-- Punching Glove now deals additional physical damage equal to ~~8~~ 10% of the target's max HP, applied after all other computations (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
+- Punching Glove now deals additional physical damage **after all other computations** (crit/fairy spcial damage/steel true damage etc.). It is a separate instance of damage, meaning it will be reduced by Fighting resistance, will give 2 stacks to Muscle Band, and won't benefit from other damage boosts like Fairy special damage bonus.
 - Nerf Scope Lens: PP stolen 15 → 10 ; now cannot steal more PP than the target has
 - Power lens now also reflects special damage added to basic attacks (from Fairy, Charge, Teleport, etc.)
+- Nerf Lucky Egg: Def 12→10, AP 60→50, Luck 50→30
+- Nerf Curry: 5 → 4 seconds rage duration
 - Buff Moomoo Milk: 10 → 15 permanent HP
 - Buff Star Sweet: 5 → 10 permanent AP
 - Buff Berry Sweet: 10 → 15 permanent HP
@@ -104,9 +125,11 @@
 - Buff Gold Bow ; now gives 50 shield
 - Buff Absorb Bulb: 15 → 20 defense & special defense
 - Buff Repeat Ball: Unique in shop are now unlocked at 100 → 80 rerolls and Legendary at 150 → 120 rerolls
-- Change Gold Bottle Cap: now always give +50% crit chance, no longer gives +1% crit chance per gold you have
+- Change Gold Bottle Cap: no longer gives +1% crit chance per gold you have ; compensated by new luck formula
 - Nerf Magmarizer: Attack 5 → 3
 - Nerf Big Nugget: Gold gained at max stacks 3 → 2
+- Change Ghimmigoul coin: no longer gives 1 additional gold per round ; Duskull encounter gives it for free along with regular items in carousel
+- New item: Treasure box ; Xatu town encounter now sells a treasure box for 10 gold. It contains two random item components.
 
 # Gameplay
 
@@ -116,6 +139,7 @@
 - Paralysis status effect has changed: -50 speed debuff -> speed stat is 50% less effective for move speed and attack speed calculations. In practice, Paralysis status is more impactful on fast Pokémon, and less impactful on slow Pokémon.
 - Small adjustment to Rage status: +100 → +80 speed, half sleep and freeze durations immediately if unit has the status when getting enraged. Fixed status description.
 - Every % of crit chance above 100% crit chance now gives +1% crit power instead of +2% crit power.
+- Change Luck formula: `chance^(1-luck/100)` instead of `chance*(1+luck/100)`. Luck is now more valuable for low base chance effects (<50%), and less valuable for high base chance effects (>50%). You always have a risk of missing unless you reach 100% luck, which is the new max cap for Luck.
 
 # UI
 
@@ -131,14 +155,15 @@
 - Shiny rate in boosters is increased: 3% → 5%
 - Your collection now displays the number of times you've played each Pokémon. This count is not retroactive, every player starts with an empty pokédex as of this patch.
 
-
-# Bugfix
-
 # Misc
 
 - Minimum elo ranks for ranked mode have been adjusted to reduce waiting times for high elo players.
 - New gadget: Pokeguessr, a "Guess the Pokémon" game when waiting for lobby to start
 - Changed title Duke: owns at least one emote of all current pokémons in the game ; all the accounts hat this title before this patch lose it.
-- New title: Collector: has played all current pokémons in the game
-- Putting the evolved pokemon into the team planner should mark the basic pokemon in the shop
+- New title Collector: has played all current pokémons in the game
+- New title Lucky: Get a 10 gold jackpot or more with a Gold Bottle Cap
+- New title Giant: Get a Pokémon over 1500 HP
+- New title Legend: Play with 3 legendaries or more in your team
+- New title Decurion: Play with 10 units in your team, not counting clones/spawns
+- Putting the evolved pokemon into the team planner now marks the tier 1 pokemon in the shop
 - Sableye town encounter now steals all players at the same stage and only once. It is also slower and gives 1 gold if caught.

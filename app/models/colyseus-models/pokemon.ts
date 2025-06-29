@@ -1,4 +1,4 @@
-import { MapSchema, Schema, SetSchema, type, entity } from "@colyseus/schema"
+import { entity, MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
@@ -58,6 +58,7 @@ import {
   PkmRegionalVariants,
   Unowns
 } from "../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
@@ -72,7 +73,6 @@ import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -241,10 +241,7 @@ export class Pokemon extends Schema implements IPokemon {
     // called at simulation start after entities are generated
   }
 
-  onSpawn(params: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
+  onSpawn(params: { entity: IPokemonEntity; simulation: Simulation }) {
     // called after entity is added, either at simulation start or when cloned/spawned
   }
 
@@ -1909,7 +1906,7 @@ const conversionEffect = ({
       entity.name,
       player as Player
     )
-    const coord = simulation.getClosestAvailablePlaceOnBoardToPokemon(
+    const coord = simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
       entity,
       player.team
     )
@@ -3526,7 +3523,7 @@ export class Seadra extends Pokemon {
   stars = 2
   evolution = Pkm.KINGDRA
   hp = 140
-  atk = 11
+  atk = 12
   speed = 52
   def = 2
   speDef = 2
@@ -3541,7 +3538,7 @@ export class Kingdra extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 250
-  atk = 21
+  atk = 24
   speed = 52
   def = 4
   speDef = 4
@@ -4057,7 +4054,9 @@ export class Mudkip extends Pokemon {
 
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<EffectEnum> }): void {
+  }: {
+    opponentEffects: Set<EffectEnum>
+  }): void {
     opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
@@ -4080,7 +4079,9 @@ export class Marshtomp extends Pokemon {
 
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<EffectEnum> }): void {
+  }: {
+    opponentEffects: Set<EffectEnum>
+  }): void {
     opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
@@ -4102,7 +4103,9 @@ export class Swampert extends Pokemon {
 
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<EffectEnum> }): void {
+  }: {
+    opponentEffects: Set<EffectEnum>
+  }): void {
     opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
@@ -5733,7 +5736,7 @@ export class Dialga extends Pokemon {
   speed = 54
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.ROAR_OF_TIME
   attackSprite = AttackSprite.FIRE_RANGE
@@ -5748,7 +5751,7 @@ export class Palkia extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 110
   range = 1
   skill = Ability.SPACIAL_REND
   attackSprite = AttackSprite.DRAGON_MELEE
@@ -6384,7 +6387,11 @@ export class Castform extends Pokemon {
     isGhostBattle,
     weather,
     player
-  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+  }: {
+    isGhostBattle: boolean
+    weather: Weather
+    player: Player
+  }) {
     if (!isGhostBattle) {
       updateCastform(this, weather, player)
     }
@@ -6414,7 +6421,11 @@ export class CastformSun extends Pokemon {
     isGhostBattle,
     weather,
     player
-  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+  }: {
+    isGhostBattle: boolean
+    weather: Weather
+    player: Player
+  }) {
     if (!isGhostBattle) {
       updateCastform(this, weather, player)
     }
@@ -6444,7 +6455,11 @@ export class CastformRain extends Pokemon {
     isGhostBattle,
     weather,
     player
-  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+  }: {
+    isGhostBattle: boolean
+    weather: Weather
+    player: Player
+  }) {
     if (!isGhostBattle) {
       updateCastform(this, weather, player)
     }
@@ -6474,7 +6489,11 @@ export class CastformHail extends Pokemon {
     isGhostBattle,
     weather,
     player
-  }: { isGhostBattle: boolean; weather: Weather; player: Player }) {
+  }: {
+    isGhostBattle: boolean
+    weather: Weather
+    player: Player
+  }) {
     if (!isGhostBattle) {
       updateCastform(this, weather, player)
     }
@@ -6865,7 +6884,7 @@ export class Mew extends Pokemon {
   stars = 3
   hp = 200
   atk = 27
-  speed = 57
+  speed = 64
   def = 10
   speDef = 10
   maxPP = 50
@@ -6892,7 +6911,7 @@ export class Mewtwo extends Pokemon {
   speed = 67
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 110
   range = 3
   skill = Ability.PSYSTRIKE
   attackSprite = AttackSprite.PSYCHIC_RANGE
@@ -6994,7 +7013,9 @@ export class Victini extends Pokemon {
   attackSprite = AttackSprite.FIRE_MELEE
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<EffectEnum> }) {
+  }: {
+    opponentEffects: Set<EffectEnum>
+  }) {
     opponentEffects.add(EffectEnum.VICTINI_PASSIVE)
   }
 }
@@ -7290,7 +7311,7 @@ export class Drampa extends Pokemon {
   speed = 37
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 80
   range = 3
   skill = Ability.DRAGON_PULSE
   passive = Passive.BERSERK
@@ -9345,7 +9366,7 @@ export class Smoochum extends Pokemon {
   atk = 5
   speed = 55
   def = 2
-  speDef = 2
+  speDef = 3
   maxPP = 80
   range = 2
   skill = Ability.LOVELY_KISS
@@ -9361,7 +9382,7 @@ export class Jynx extends Pokemon {
   atk = 11
   speed = 55
   def = 6
-  speDef = 6
+  speDef = 8
   maxPP = 80
   range = 2
   skill = Ability.LOVELY_KISS
@@ -12615,7 +12636,10 @@ export class Helioptile extends Pokemon {
   onSpawn({
     entity,
     simulation
-  }: { entity: IPokemonEntity; simulation: Simulation }) {
+  }: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
     if (simulation.weather === Weather.RAIN) {
       entity.effectsSet.add(new DrySkinEffect())
     } else if (simulation.weather === Weather.SANDSTORM) {
@@ -12648,7 +12672,10 @@ export class Heliolisk extends Pokemon {
   onSpawn({
     entity,
     simulation
-  }: { entity: IPokemonEntity; simulation: Simulation }) {
+  }: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
     if (simulation.weather === Weather.RAIN) {
       entity.effectsSet.add(new DrySkinEffect())
     } else if (simulation.weather === Weather.SANDSTORM) {
@@ -12729,10 +12756,7 @@ export class AlolanExeggutor extends Pokemon {
 }
 
 export class Bidoof extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.AQUATIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.AQUATIC])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BIBAREL
@@ -12749,10 +12773,7 @@ export class Bidoof extends Pokemon {
 }
 
 export class Bibarel extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.AQUATIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.AQUATIC])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 140
@@ -12914,7 +12935,10 @@ export class Barboach extends Pokemon {
   onSpawn({
     entity,
     simulation
-  }: { entity: IPokemonEntity; simulation: Simulation }) {
+  }: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
     if (simulation.weather === Weather.RAIN) {
       entity.status.triggerRuneProtect(60000)
     }
@@ -12939,7 +12963,10 @@ export class Whiscash extends Pokemon {
   onSpawn({
     entity,
     simulation
-  }: { entity: IPokemonEntity; simulation: Simulation }) {
+  }: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
     if (simulation.weather === Weather.RAIN) {
       entity.status.triggerRuneProtect(60000)
     }
@@ -13437,7 +13464,9 @@ export class Murkrow extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<EffectEnum> }) {
+  }: {
+    opponentEffects: Set<EffectEnum>
+  }) {
     opponentEffects.add(EffectEnum.BAD_LUCK)
   }
 }
@@ -13459,7 +13488,9 @@ export class Honchkrow extends Pokemon {
   attackSprite = AttackSprite.DARK_MELEE
   beforeSimulationStart({
     opponentEffects
-  }: { opponentEffects: Set<EffectEnum> }) {
+  }: {
+    opponentEffects: Set<EffectEnum>
+  }) {
     opponentEffects.add(EffectEnum.BAD_LUCK)
   }
 }
@@ -14549,7 +14580,10 @@ export class Ursaluna extends Pokemon {
   beforeSimulationStart({
     weather,
     player
-  }: { weather: Weather; player: Player }) {
+  }: {
+    weather: Weather
+    player: Player
+  }) {
     if (weather === Weather.BLOODMOON) {
       player.transformPokemon(this, Pkm.URSALUNA_BLOODMOON)
     }
@@ -14572,7 +14606,10 @@ export class UrsalunaBloodmoon extends Pokemon {
   beforeSimulationStart({
     weather,
     player
-  }: { weather: Weather; player: Player }) {
+  }: {
+    weather: Weather
+    player: Player
+  }) {
     if (weather !== Weather.BLOODMOON) {
       player.transformPokemon(this, Pkm.URSALUNA)
     }
@@ -15933,7 +15970,10 @@ export class Stonjourner extends Pokemon {
   afterSimulationStart({
     entity,
     simulation
-  }: { entity: IPokemonEntity; simulation: Simulation }) {
+  }: {
+    entity: IPokemonEntity
+    simulation: Simulation
+  }) {
     simulation.board
       .getAdjacentCells(entity.positionX, entity.positionY)
       .forEach((cell) => {
@@ -17637,7 +17677,7 @@ export class Capsakid extends Pokemon {
   speed = 49
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 110
   range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
@@ -17653,7 +17693,7 @@ export class Scovillain extends Pokemon {
   speed = 49
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 110
   range = 2
   skill = Ability.SPICY_EXTRACT
   attackSprite = AttackSprite.FIRE_MELEE
@@ -18221,7 +18261,7 @@ export class Tynamo extends Pokemon {
   speed = 41
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -18242,7 +18282,7 @@ export class Eelektrik extends Pokemon {
   speed = 41
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -18262,7 +18302,7 @@ export class Eelektross extends Pokemon {
   speed = 41
   def = 12
   speDef = 12
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
   attackSprite = AttackSprite.ELECTRIC_MELEE
@@ -18757,11 +18797,16 @@ export class Espurr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
   rarity = Rarity.UNCOMMON
   evolutions = [Pkm.MEOWSTIC_MALE, Pkm.MEOWSTIC_FEMALE]
-  evolutionRule = new CountEvolutionRule(3, (pokemon, player, stageLevel: number) => {
-    const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
-    const fieldCount = player.synergies.get(Synergy.FIELD) ?? 0
-    return psychicCount >= fieldCount ? Pkm.MEOWSTIC_MALE : Pkm.MEOWSTIC_FEMALE
-  })
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon, player, stageLevel: number) => {
+      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
+      const fieldCount = player.synergies.get(Synergy.FIELD) ?? 0
+      return psychicCount >= fieldCount
+        ? Pkm.MEOWSTIC_MALE
+        : Pkm.MEOWSTIC_FEMALE
+    }
+  )
   stars = 1
   hp = 80
   atk = 3
@@ -18844,11 +18889,7 @@ export class Munkidori extends Pokemon {
 }
 
 export class Fezandipiti extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.POISON,
-    Synergy.FAIRY,
-    Synergy.SOUND
-  ])
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.FAIRY, Synergy.SOUND])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250

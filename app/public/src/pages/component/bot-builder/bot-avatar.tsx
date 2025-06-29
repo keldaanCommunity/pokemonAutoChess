@@ -14,13 +14,18 @@ export default function BotAvatar(props: {
   const { t } = useTranslation()
 
   function handleOnDragOver(e: React.DragEvent) {
+    e.stopPropagation()
     e.preventDefault()
   }
 
   function handleDrop(e: React.DragEvent) {
-    if (e.dataTransfer.getData("pokemon") != "") {
+    e.stopPropagation()
+    e.preventDefault()
+    const data = e.dataTransfer.getData("text/plain")
+    if (data.startsWith("pokemon")) {
+      const [type, name] = data.split(",") as [string, Pkm]
       props.onChangeAvatar({
-        name: e.dataTransfer.getData("pokemon") as Pkm,
+        name,
         emotion: Emotion.NORMAL,
         shiny: false
       })

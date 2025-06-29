@@ -697,7 +697,8 @@ export default class GameRoom extends Room<GameState> {
                 botPlayer.rank,
                 bot.elo,
                 players,
-                this.state.gameMode
+                this.state.gameMode,
+                true
               )
               bot.save()
             }
@@ -813,7 +814,8 @@ export default class GameRoom extends Room<GameState> {
           rank,
           usr.elo,
           humans.map((p) => this.transformToSimplePlayer(p)),
-          this.state.gameMode
+          this.state.gameMode,
+          false
         )
         if (elo) {
           if (elo >= 1100) {

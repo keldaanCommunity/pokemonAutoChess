@@ -1,13 +1,16 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { Transfer } from "../../types"
-import { DEFAULT_SPEED } from "../../types/Config"
-import { AttackType } from "../../types/enum/Game"
+import { Title, Transfer } from "../../types"
+import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
+import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
+import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
+import { AbilityStrategies } from "../abilities/abilities"
 import { PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
 import {
   Effect,
   OnAbilityCastEffect,
@@ -18,9 +21,6 @@ import {
   OnKillEffect,
   PeriodicEffect
 } from "./effect"
-import { AbilityStrategies } from "../abilities/abilities"
-import { DelayedCommand } from "../simulation-command"
-import { Ability } from "../../types/enum/Ability"
 
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
@@ -116,14 +116,35 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
             totalTakenDamage += takenDamage
           }
           if (specialDamage > 0) {
+            const scarfSpecialDamage = Math.ceil(0.5 * specialDamage)
             const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * specialDamage),
+              damage: scarfSpecialDamage,
               board,
               attackType: AttackType.SPECIAL,
               attacker: pokemon,
               shouldTargetGainMana: true
             })
             totalTakenDamage += takenDamage
+            if (
+              target.items.has(Item.POWER_LENS) &&
+              !pokemon.items.has(Item.PROTECTIVE_PADS)
+            ) {
+              const speDef = target.status.armorReduction
+                ? Math.round(target.speDef / 2)
+                : target.speDef
+              const damageAfterReduction =
+                scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
+              const damageBlocked = min(0)(
+                scarfSpecialDamage - damageAfterReduction
+              )
+              pokemon.handleDamage({
+                damage: Math.round(damageBlocked),
+                board,
+                attackType: AttackType.SPECIAL,
+                attacker: target,
+                shouldTargetGainMana: true
+              })
+            }
           }
           if (trueDamage > 0) {
             const { takenDamage } = target.handleDamage({
@@ -192,7 +213,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.PUNCHING_GLOVE]: [
     new OnHitEffect((pokemon, target, board) => {
       target.handleDamage({
-        damage: Math.round(0.1 * target.hp),
+        damage: Math.round(0.08 * target.hp),
         board,
         attackType: AttackType.PHYSICAL,
         attacker: pokemon,
@@ -312,6 +333,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         const moneyGained = isLastEnemy ? pokemon.count.bottleCapCount + 1 : 1
         pokemon.player.addMoney(moneyGained, true, pokemon)
         pokemon.count.moneyCount += moneyGained
+        if (isLastEnemy && pokemon.count.bottleCapCount >= 10) {
+          pokemon.player.titles.add(Title.LUCKY)
+        }
       }
     })
   ],
@@ -429,7 +453,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.MAGMARIZER]: [
     new OnAttackEffect(({ pokemon, target, board }) => {
       pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.count.magmarizerCount++      
+      pokemon.count.magmarizerCount++
     }),
     new OnHitEffect((pokemon, target, board) => {
       target.status.triggerBurn(2000, target, pokemon)

@@ -374,12 +374,6 @@ export default class Board {
     return candidates[0].value === undefined ? candidates[0] : null
   }
 
-  getEffectOnCell(x: number, y: number): EffectEnum | undefined {
-    if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
-      return this.effects[this.columns * y + x]
-    }
-  }
-
   getClosestAvailablePlace(
     targetX: number,
     targetY: number

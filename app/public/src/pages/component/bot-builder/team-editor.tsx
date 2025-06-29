@@ -14,18 +14,28 @@ export default function TeamEditor(props: {
   handleDrop: (x: number, y: number, e: React.DragEvent) => void
 }) {
   function handleOnDragStart(e: React.DragEvent, p: IDetailledPokemon) {
-    e.dataTransfer.setData("cell", [p.x, p.y].join(","))
+    e.stopPropagation()
+    e.dataTransfer.setData("text/plain", ["cell", p.x, p.y].join(","))
   }
 
   function handleOnDragOver(e: React.DragEvent) {
     e.preventDefault()
+    e.stopPropagation()
     const target = e.target as HTMLElement
     target.classList.add("dragover")
   }
 
   function handleOnDragEnd(e: React.DragEvent) {
+    e.stopPropagation()
     const target = e.target as HTMLElement
     target.classList.remove("dragover")
+  }
+
+  function handleDrop(x: number, y: number, e: React.DragEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    props.handleDrop(x, y, e)
+    handleOnDragEnd(e)
   }
 
   return (
@@ -50,10 +60,7 @@ export default function TeamEditor(props: {
                       }}
                       onDragOver={handleOnDragOver}
                       onDragLeave={handleOnDragEnd}
-                      onDrop={(e) => {
-                        props.handleDrop(x, y, e)
-                        handleOnDragEnd(e)
-                      }}
+                      onDrop={(e) => handleDrop(x, y, e)}
                     >
                       {p && (
                         <PokemonPortrait

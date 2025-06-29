@@ -195,6 +195,7 @@ export enum Item {
   EGG_FOR_SELL = "EGG_FOR_SELL",
   GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
   EXCHANGE_TICKET = "EXCHANGE_TICKET",
+  TREASURE_BOX = "TREASURE_BOX",
   AUSPICIOUS_ARMOR = "AUSPICIOUS_ARMOR",
   MALICIOUS_ARMOR = "MALICIOUS_ARMOR",
   RUSTED_SWORD = "RUSTED_SWORD",
@@ -235,6 +236,7 @@ export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,
   Item.GIMMIGHOUL_COIN,
   Item.EXCHANGE_TICKET,
+  Item.TREASURE_BOX,
   Item.RUSTED_SWORD,
   Item.SCROLL_OF_WATERS,
   Item.SCROLL_OF_DARKNESS
@@ -485,6 +487,8 @@ export const NonSpecialItemComponents: Item[] = [
 export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
   (item) => SynergyGivenByItem.hasOwnProperty(item) === false
 )
+
+export const LateGameItems: Item[] = CraftableNonSynergyItems.filter(item => item !== Item.AMULET_COIN)
 
 export const NonHoldableItems: Item[] = [
   ...WeatherRocks,
