@@ -1,16 +1,16 @@
+import { t } from "i18next"
 import { GameObjects } from "phaser"
+import PokemonFactory from "../../../../models/pokemon-factory"
 import { Transfer } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
+import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm, Unowns } from "../../../../types/enum/Pokemon"
+import { getFreeSpaceOnBench } from "../../../../utils/board"
+import { clamp } from "../../../../utils/number"
+import { chance } from "../../../../utils/random"
+import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { DEPTH } from "../depths"
-import { getFreeSpaceOnBench } from "../../../../utils/board"
-import { t } from "i18next"
-import { chance } from "../../../../utils/random"
-import PokemonFactory from "../../../../models/pokemon-factory"
-import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
-import { clamp } from "../../../../utils/number"
 
 const SHARDS_PER_UNOWN_WANDERER = 50
 const DEFAULT_WANDERER_SPEED = 0.25
@@ -90,6 +90,7 @@ export default class WanderersManager {
       endY: 686,
       duration: 6000,
       onClick: (sprite, id, pointer) => {
+        if (stopped) return
         this.scene.displayMoneyGain(sprite.x, sprite.y, 1)
         this.scene.room?.send(Transfer.POKEMON_WANDERING, { id })
         stopped = true
