@@ -1673,11 +1673,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             emotion: spawn.emotion,
             shiny: spawn.shiny
           })
-          const coord =
-            this.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-              this,
-              this.team
-            )
+          const coord = this.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(this)
           const spawnedEntity = this.simulation.addPokemon(
             mon,
             coord.x,

@@ -2,13 +2,13 @@ import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
 import { writeHeapSnapshot } from "v8"
+import { createBooster } from "../../core/collection"
+import { getPendingGame } from "../../core/pending-game-manager"
 import {
   getRemainingPlayers,
   getTournamentStage,
   makeBrackets
 } from "../../core/tournament-logic"
-import { getPendingGame } from "../../core/pending-game-manager"
-import { acquireBoosterCard, createBooster } from "../../core/collection"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema
@@ -32,9 +32,11 @@ import {
 } from "../../types"
 import {
   BoosterPriceByRarity,
+  DUST_PER_BOOSTER,
+  DUST_PER_SHINY,
   EloRankThreshold,
-  MAX_PLAYERS_PER_GAME,
-  getEmotionCost
+  getEmotionCost,
+  MAX_PLAYERS_PER_GAME
 } from "../../types/Config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
@@ -50,7 +52,6 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
-import { isValidDate } from "../../utils/date"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -75,7 +76,10 @@ export class OnJoinCommand extends Command<
         // load existing account
         this.room.users.set(client.auth.uid, user)
         client.send(Transfer.USER_PROFILE, user)
-        const pendingGame = await getPendingGame(this.room.presence, client.auth.uid)
+        const pendingGame = await getPendingGame(
+          this.room.presence,
+          client.auth.uid
+        )
         if (pendingGame != null && !pendingGame.isExpired) {
           client.send(Transfer.RECONNECT_PROMPT, pendingGame.gameId)
         }
@@ -165,11 +169,7 @@ export class GiveTitleCommand extends Command<
 }
 
 export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
-  async execute({
-    client
-  }: {
-    client: Client
-  }) {
+  async execute({ client }: { client: Client }) {
     try {
       if (client.auth.uid) {
         await UserMetadata.deleteOne({ uid: client.auth.uid })
@@ -307,22 +307,69 @@ export class OpenBoosterCommand extends Command<
       const user = this.room.users.get(client.auth.uid)
       if (!user) return
 
-      const mongoUser = await UserMetadata.findOneAndUpdate(
-        { uid: client.auth.uid, booster: { $gt: 0 } },
-        { $inc: { booster: -1 } },
-        { new: true }
-      )
-      if (!mongoUser) return
+      // First, find the user and check if they have boosters
+      const userDoc = await UserMetadata.findOne({
+        uid: client.auth.uid,
+        booster: { $gt: 0 }
+      })
+      if (!userDoc) return
 
-      const boosterContent = createBooster(mongoUser)
+      const boosterContent = createBooster(userDoc)
+
+      // Build update operations for all booster cards
+      const updateOperations: any = {
+        $inc: { booster: -1 }
+      }
+
       boosterContent.forEach((card) => {
-        acquireBoosterCard(mongoUser.pokemonCollection, card)
+        const index = PkmIndex[card.name]
+        const existingItem = userDoc.pokemonCollection.get(index)
+
+        if (!existingItem) {
+          // Create new collection item
+          updateOperations[`pokemonCollection.${index}`] = {
+            id: index,
+            emotions: card.shiny ? [] : [card.emotion],
+            shinyEmotions: card.shiny ? [card.emotion] : [],
+            dust: 0,
+            selectedEmotion: Emotion.NORMAL,
+            selectedShiny: false,
+            played: 0
+          }
+        } else {
+          // Check if already unlocked
+          const emotions = card.shiny
+            ? existingItem.shinyEmotions
+            : existingItem.emotions
+          const hasUnlocked = emotions.includes(card.emotion)
+
+          if (hasUnlocked) {
+            // Add dust
+            const dustGain = card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
+            updateOperations.$inc = updateOperations.$inc || {}
+            updateOperations.$inc[`pokemonCollection.${index}.dust`] = dustGain
+          } else {
+            // Add new emotion
+            const emotionField = card.shiny ? "shinyEmotions" : "emotions"
+            updateOperations.$push = updateOperations.$push || {}
+            updateOperations.$push[
+              `pokemonCollection.${index}.${emotionField}`
+            ] = card.emotion
+          }
+        }
       })
 
-      mongoUser.save()
+      // Perform atomic update
+      const mongoUser = await UserMetadata.findOneAndUpdate(
+        { uid: client.auth.uid, booster: { $gt: 0 } },
+        updateOperations,
+        { new: true }
+      )
+
+      if (!mongoUser) return
 
       // resync, db-authoritative
-      user.booster = mongoUser.booster - 1
+      user.booster = mongoUser.booster
       boosterContent.forEach((pkmWithCustom) => {
         const index = PkmIndex[pkmWithCustom.name]
         const pokemonCollectionItem = user.pokemonCollection.get(index)
@@ -331,6 +378,10 @@ export class OpenBoosterCommand extends Command<
         if (!mongoPokemonCollectionItem) return
         if (pokemonCollectionItem) {
           pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust
+          pokemonCollectionItem.emotions =
+            mongoPokemonCollectionItem.emotions.slice()
+          pokemonCollectionItem.shinyEmotions =
+            mongoPokemonCollectionItem.shinyEmotions.slice()
         } else {
           const newConfig: IPokemonCollectionItem = {
             dust: mongoPokemonCollectionItem.dust,
@@ -352,8 +403,6 @@ export class OpenBoosterCommand extends Command<
     }
   }
 }
-
-
 
 export class ChangeNameCommand extends Command<
   CustomLobbyRoom,
@@ -562,10 +611,20 @@ export class BuyEmotionCommand extends Command<
       }
 
       if (!mongoUser.titles.includes(Title.DUKE)) {
-        if (Object.values(Pkm).filter((p) => p !== Pkm.DEFAULT).every(pkm => {
-          const collectionItem = mongoUser.pokemonCollection.get(PkmIndex[pkm])
-          return collectionItem && (collectionItem.emotions.length > 0 || collectionItem.shinyEmotions.length > 0)
-        })) {
+        if (
+          Object.values(Pkm)
+            .filter((p) => p !== Pkm.DEFAULT)
+            .every((pkm) => {
+              const collectionItem = mongoUser.pokemonCollection.get(
+                PkmIndex[pkm]
+              )
+              return (
+                collectionItem &&
+                (collectionItem.emotions.length > 0 ||
+                  collectionItem.shinyEmotions.length > 0)
+              )
+            })
+        ) {
           mongoUser.titles.push(Title.DUKE)
         }
       }
@@ -874,7 +933,6 @@ export class JoinOrOpenRoomCommand extends Command<
           case EloRank.QUICK_BALL:
           case EloRank.POKE_BALL:
           case EloRank.SUPER_BALL:
-
             minRank = EloRank.PREMIER_BALL
             maxRank = EloRank.SUPER_BALL
             break

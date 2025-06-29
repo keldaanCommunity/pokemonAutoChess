@@ -1,14 +1,19 @@
-
-import { IPokemonCollectionItem, IUserMetadata } from "../models/mongo-models/user-metadata"
+import {
+    IPokemonCollectionItem,
+    IUserMetadata
+} from "../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
-import { PkmWithCustom, Emotion } from "../types"
-import { BoosterRarityProbability, DUST_PER_BOOSTER, DUST_PER_SHINY, EmotionCost } from "../types/Config"
+import { Emotion, PkmWithCustom } from "../types"
+import { Booster, BoosterCard } from "../types/Booster"
+import {
+    BoosterRarityProbability,
+    EmotionCost
+} from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { Rarity } from "../types/enum/Game"
-import { Pkm, Unowns, PkmIndex } from "../types/enum/Pokemon"
-import { BoosterCard, Booster } from "../types/Booster"
+import { Pkm, PkmIndex, Unowns } from "../types/enum/Pokemon"
 import { sum } from "../utils/array"
 import { chance, pickRandomIn, randomWeighted } from "../utils/random"
 
@@ -23,7 +28,10 @@ export function createBooster(user: IUserMetadata): Booster {
     return boosterContent
 }
 
-export function pickRandomPokemonBooster(user: IUserMetadata, guarantedUnique: boolean): BoosterCard {
+export function pickRandomPokemonBooster(
+    user: IUserMetadata,
+    guarantedUnique: boolean
+): BoosterCard {
     let name = Pkm.MAGIKARP
     const rarities = Object.keys(Rarity) as Rarity[]
     const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
@@ -58,47 +66,34 @@ export function pickRandomPokemonBooster(user: IUserMetadata, guarantedUnique: b
     const availableEmotions = Object.values(Emotion).filter(
         (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[PkmIndex[name]]?.[i] === 1
     )
-    const emotion = randomWeighted<Emotion>(availableEmotions.reduce((o, e) => ({ ...o, [e]: 1 / EmotionCost[e] }), {})) ?? Emotion.NORMAL
+    const emotion =
+        randomWeighted<Emotion>(
+            availableEmotions.reduce(
+                (o, e) => ({ ...o, [e]: 1 / EmotionCost[e] }),
+                {}
+            )
+        ) ?? Emotion.NORMAL
     const shiny = chance(0.05)
-    const hasAlreadyUnlocked = hasUnlocked(user.pokemonCollection, { name, shiny, emotion })
+    const hasAlreadyUnlocked = hasUnlocked(user.pokemonCollection, {
+        name,
+        shiny,
+        emotion
+    })
 
     return { name: name, shiny, emotion, new: !hasAlreadyUnlocked }
 }
 
-export function acquireBoosterCard(collection: Map<string, IPokemonCollectionItem>, card: BoosterCard) {
-    const index = PkmIndex[card.name]
-
-    if (collection.has(index) === false) {
-        collection.set(index, {
-            id: index,
-            emotions: [],
-            shinyEmotions: [],
-            dust: 0,
-            selectedEmotion: Emotion.NORMAL,
-            selectedShiny: false,
-            played: 0
-        })
-    }
-
-    const collectionItem = collection.get(index)!
-    if (hasUnlocked(collection, card)) {
-        const dustGain = card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
-        collectionItem.dust += dustGain
-    } else {
-        if (card.shiny) {
-            collectionItem.shinyEmotions.push(card.emotion ?? Emotion.NORMAL)
-        } else {
-            collectionItem.emotions.push(card.emotion ?? Emotion.NORMAL)
-        }
-    }
-}
-
-export function hasUnlocked(collection: Map<string, IPokemonCollectionItem>, card: PkmWithCustom): boolean {
+export function hasUnlocked(
+    collection: Map<string, IPokemonCollectionItem>,
+    card: PkmWithCustom
+): boolean {
     const index = PkmIndex[card.name]
     if (collection.has(index) === false) {
         return false
     }
     const collectionItem = collection.get(index)!
-    const emotions = card.shiny ? collectionItem.shinyEmotions : collectionItem.emotions
+    const emotions = card.shiny
+        ? collectionItem.shinyEmotions
+        : collectionItem.emotions
     return emotions.includes(card.emotion ?? Emotion.NORMAL)
 }
