@@ -1678,7 +1678,7 @@
 		"MUD_BUBBLE": "Soigne le lanceur de [10,20,40,SP] HP.",
 		"LINK_CABLE": "Fonce vers l'ennemi le plus proche, puis déclenche un arc électrique entre $t(pkm.PLUSLE) et $t(pkm.MINUN) qui inflige [50,SP] SPECIAL. Si $t(pkm.PLUSLE) ou $t(pkm.MINUN) se retrouve seul, inflige la moitié de ces dégâts aux ennemis adjacents à la place.",
 		"MAGIC_BOUNCE": "Pendant 5 secondes, chaque fois que le lanceur est touché par une capacité, bloque les dégâts et renvoie [50,100,SP]% SPECIAL au lanceur.",
-		"REFLECT": "Pendant 2 secondes, chaque fois que le lanceur reçoit des PHYSICAL, bloque les dégâts et renvoie [50,SP]% PHYSICAL au lanceur.",
+		"REFLECT": "Pendant 2 secondes, chaque fois que le lanceur reçoit des PHYSICAL, bloque les dégâts et renvoie [50,SP]% des dégâts en SPECIAL au lanceur.",
 		"HIDDEN_POWER_A": "Invoque 4 $t(pkm.ABRA) à chaque coin du plateau.",
 		"HIDDEN_POWER_B": "Inflige BURN à l'équipe adverse pendant 30 secondes.",
 		"HIDDEN_POWER_C": "Donne une AMULET_COIN à toute votre équipe. Les objets sont retirés à la fin du combat.",
