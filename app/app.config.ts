@@ -1,7 +1,5 @@
-import uWebSockets from "uWebSockets.js"
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import { uWebSocketsTransport } from "@colyseus/uwebsockets-transport"
 import {
   matchMaker,
   Presence,
@@ -103,12 +101,16 @@ if (process.env.MODE === "dev") {
 export default config({
   options: gameOptions,
 
+
+  /* uWebSockets turned out to be unstable in production, so we are using the default transport
+  2025-06-29T16:50:08: Error: Invalid access of closed uWS.WebSocket/SSLWebSocket.
+  
   initializeTransport: function () {
     return new uWebSocketsTransport({
       compression: uWebSockets.SHARED_COMPRESSOR,
       idleTimeout: 0, // disable idle timeout
     })
-  },
+  },*/
 
   initializeGameServer: (gameServer) => {
     /**
