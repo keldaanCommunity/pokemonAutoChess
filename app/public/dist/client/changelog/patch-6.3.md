@@ -26,6 +26,7 @@
 - Masquerain
 - Gossifleur
 - Eldegoss
+- Furfrou
 
 # Changes to Pokemon & Abilities
 

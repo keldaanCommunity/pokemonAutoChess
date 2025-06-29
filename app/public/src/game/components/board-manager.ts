@@ -701,6 +701,18 @@ export default class BoardManager {
             this.displayBoost(Stat.ATK, pokemonUI)
           break
 
+        case "def":
+          pokemonUI.def = value as IPokemon["def"]
+          if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
+            this.displayBoost(Stat.DEF, pokemonUI)
+          break
+
+        case "speed":
+          pokemonUI.speed = value as IPokemon["speed"]
+          if ((value as IPokemon["speed"]) > (previousValue as IPokemon["speed"]))
+            this.displayBoost(Stat.SPEED, pokemonUI)
+          break
+
         case "ap":
           pokemonUI.ap = value as IPokemon["ap"]
           if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
