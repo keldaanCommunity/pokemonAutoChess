@@ -1906,7 +1906,7 @@ const conversionEffect = ({
       entity.name,
       player as Player
     )
-    const coord = simulation.getClosestAvailablePlaceOnBoardToPokemon(
+    const coord = simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
       entity,
       player.team
     )

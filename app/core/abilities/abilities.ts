@@ -231,10 +231,7 @@ export class BeatUpStrategy extends AbilityStrategy {
         Pkm.HOUNDOUR,
         pokemon.player
       )
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        pokemon,
-        pokemon.team
-      )
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(pokemon)
       const entity = pokemon.simulation.addPokemon(
         houndour,
         coord.x,
@@ -7919,10 +7916,7 @@ export class ShedTailStrategy extends AbilityStrategy {
         Pkm.SUBSTITUTE,
         pokemon.player
       )
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        lowestHealthAlly,
-        lowestHealthAlly.team
-      )
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(lowestHealthAlly)
       pokemon.moveTo(coord.x, coord.y, board)
       pokemon.simulation.addPokemon(substitute, x, y, pokemon.team, true)
     }
@@ -7946,7 +7940,7 @@ export class ShadowPunchStrategy extends AbilityStrategy {
     ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
 
     if (lowestHealthEnemy) {
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
         lowestHealthEnemy,
         (lowestHealthEnemy.team + 1) % 2
       )
@@ -10886,7 +10880,7 @@ export class BoneArmorStrategy extends AbilityStrategy {
     ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
 
     if (lowestHealthEnemy) {
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
         lowestHealthEnemy,
         (lowestHealthEnemy.team + 1) % 2
       )
@@ -11302,10 +11296,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
         pillarType,
         pokemon.player
       )
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemon(
-        pokemon,
-        pokemon.team
-      )
+      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(pokemon)
       pokemon.simulation.addPokemon(
         pillar,
         coord.x,
