@@ -1,46 +1,71 @@
-const mongoose = require("mongoose")
+import dotenv from "dotenv"
+import { connect } from "mongoose"
+import { BotV2 } from "../../app/models/mongo-models/bot-v2"
+import { ItemsStatistics } from "../../app/models/mongo-models/items-statistic"
+import { Item } from "../../app/types/enum/Item"
+import { logger } from "../../app/utils/logger"
 
-const dbName = "dev"
-const collectionName = "botv2"
-const oldValue = "DEFENSIVE_RIBBON"
-const newValue = "MUSCLE_BAND"
+const itemsToReplace = new Map<string, Item>([
+  ["DEFENSIVE_RIBBON", Item.MUSCLE_BAND]
+])
 
-async function renameItem() {
-  const genericSchema = new mongoose.Schema({}, { strict: false})
-  const Model = mongoose.model('TempDoc', genericSchema, collectionName)
+async function main() {
+  dotenv.config()
+
   try {
-    await mongoose.connect(process.env.MONGO_URI, {dbName})
-
-    const docs = await Model.find().lean()
-
-    for (const doc of docs) {
+    logger.info("connect to db ...")
+    const db = await connect(process.env.MONGO_URI!)
+    const bots = await BotV2.find().exec()
+    for (let i = 0; i < bots.length; i++) {
       let modified = false
-      console.log(doc._id)
-      const updatedDoc = JSON.parse(JSON.stringify(doc))
-
-      for (let step of updatedDoc.steps ?? []) {
-        for (let unit of step.board ?? []) {
-          const newItems = unit.items.map((item) => {
-            if (item === oldValue) {
+      const bot = bots[i]
+      bot.steps.forEach((step) => {
+        step.board.forEach((p) => {
+          for (let j = 0; j < p.items.length; j++) {
+            const item = p.items[j] as string
+            if (itemsToReplace.has(item)) {
+              logger.debug(
+                `Bot ${
+                  bot.name
+                }: Replacing item ${item} by ${itemsToReplace.get(item)} for ${
+                  p.name
+                }`
+              )
+              p.items[j] = itemsToReplace.get(item)!
               modified = true
-              return newValue
             }
-            return item
-          })
-          unit.items = newItems
-        }
-      }
+          }
+        })
+      })
       if (modified) {
-        await Model.updateOne({ _id: doc._id}, { $set: { steps: updatedDoc.steps } })
-        console.log(`Updated document with _id: ${doc._id}`)
+        bot.markModified("steps")
+        await bot.save()
       }
     }
-    console.log("Update complete")
-  } catch (error) {
-    console.error("Error:", error)
-  } finally {
-    await mongoose.disconnect()
+
+    const itemsStatistics = await ItemsStatistics.find().exec()
+    for (let i = 0; i < itemsStatistics.length; i++) {
+      let modified = false
+      const itemStat = itemsStatistics[i]
+      if (itemsToReplace.has(itemStat.name)) {
+        logger.debug(
+          `ItemStat: Replacing item ${itemStat.name} by ${itemsToReplace.get(
+            itemStat.name
+          )}`
+        )
+        itemStat.name = itemsToReplace.get(itemStat.name)!
+        modified = true
+      }
+      if (modified) {
+        itemStat.markModified("name")
+        await itemStat.save()
+      }
+    }
+
+    await db.disconnect()
+  } catch (e) {
+    logger.error("Parsing error:", e)
   }
 }
 
-renameItem()
+main()
