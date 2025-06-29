@@ -667,13 +667,14 @@ export default abstract class PokemonState {
           effectsRemovedList.forEach((x) =>
             pokemon.simulation.blueEffects.delete(x)
           )
-          pokemon.simulation.blueTeam.delete(pokemon.id)
         } else {
           effectsRemovedList.forEach((x) =>
             pokemon.simulation.redEffects.delete(x)
           )
-          pokemon.simulation.redTeam.delete(pokemon.id)
         }
+
+        pokemon.simulation.redTeam.delete(pokemon.id)
+        pokemon.simulation.blueTeam.delete(pokemon.id)
       }
     }
 
