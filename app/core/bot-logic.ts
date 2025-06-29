@@ -3,6 +3,7 @@ import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { CraftableItems, Item, ItemComponents } from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
 import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
@@ -204,11 +205,16 @@ export function validateBot(bot: IBot): string[] {
 }
 
 export function validateBoard(board: IDetailledPokemon[], stage: number) {
-  const team = board.map((p) => getPokemonData(p.name))
+  const team = board.map((p) => getPokemonData(p.name)).filter(p => p.passive !== Passive.INANIMATE)
   const items = getNbComponentsOnBoard(board)
   const maxItems = getMaxItemComponents(stage)
 
   const duos = Object.values(PkmDuos)
+
+  const numberOfGoldBows = board.flatMap((p) => p.items).filter(
+    (item) => item === Item.GOLD_BOW
+  ).length
+  const maxTeamSize = 9 + numberOfGoldBows
 
   function removeDuoPartner(p, index, arr) {
     const duo = duos.find((duo) => duo.includes(p.name))
@@ -283,8 +289,8 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   if (legendaries.length > 1) {
     throw new Error(`Only one Legendary Pokemon can be played`)
   }
-  if (team.length > 9) {
-    throw new Error(`Maximum 9 Pokemon can be played in a team`)
+  if (team.length > maxTeamSize) {
+    throw new Error(`Too many Pokémon are being played in this team`)
   }
   if (items > maxItems) {
     throw new Error(`Too many item components are used at this stage`)
