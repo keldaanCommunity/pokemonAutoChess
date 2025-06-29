@@ -47,10 +47,13 @@ export const DEPTH = {
   // 61-70: Popup/Tooltips/HUD
   HUD: 60,
   PHASER_DOM_CONTAINER: 61,
-  SELL_ZONE: 62,
-  TOOLTIP_BACK: 63,
-  TOOLTIP: 64,
-  TOOLTIP_FRONT: 65,
+  DPS_METER: 62,
+  PLAYER_ICON: 63,
+  MODAL: 64,
+  SELL_ZONE: 65,
+  TOOLTIP_BACK: 66,
+  TOOLTIP: 67,
+  TOOLTIP_FRONT: 68,
 
   // 71-80: Draggedd elements
   DRAGGED_POKEMON: 70,

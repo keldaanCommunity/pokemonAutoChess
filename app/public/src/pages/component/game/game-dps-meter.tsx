@@ -1,23 +1,21 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { PVEStages } from "../../../../../models/pve-stages"
+import { GamePhaseState, Team } from "../../../../../types/enum/Game"
+import { DEPTH } from "../../../game/depths"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { usePreference } from "../../../preferences"
+import PokemonPortrait from "../pokemon-portrait"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
 import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
-import { GamePhaseState, Team } from "../../../../../types/enum/Game"
-import { PVEStages } from "../../../../../models/pve-stages"
-import PokemonPortrait from "../pokemon-portrait"
 import "./game-dps-meter.css"
-import { DEPTH } from "../../../game/depths"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const team = useAppSelector(
-    (state) => state.game.currentTeam
-  )
+  const team = useAppSelector((state) => state.game.currentTeam)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const phase = useAppSelector((state) => state.game.phase)
 
@@ -30,7 +28,10 @@ export default function GameDpsMeter() {
 
   if (!currentPlayer) return null
 
-  const isPVE = phase === GamePhaseState.FIGHT ? stageLevel in PVEStages : (stageLevel - 1) in PVEStages
+  const isPVE =
+    phase === GamePhaseState.FIGHT
+      ? stageLevel in PVEStages
+      : stageLevel - 1 in PVEStages
 
   const name = currentPlayer.name
   const avatar = currentPlayer.avatar
@@ -57,7 +58,7 @@ export default function GameDpsMeter() {
       </div>
       {isOpen && <div
         className="my-container hidden-scrollable game-dps-meter"
-        style={{ zIndex: DEPTH.TOOLTIP_BACK }}
+        style={{ zIndex: DEPTH.DPS_METER }}
       >
         <header>
           <div>
@@ -113,7 +114,8 @@ export default function GameDpsMeter() {
             <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
           </TabPanel>
         </Tabs>
-      </div>}
+      </div>
+      }
     </>
   )
 }
