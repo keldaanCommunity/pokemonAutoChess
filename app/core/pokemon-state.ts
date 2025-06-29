@@ -624,6 +624,8 @@ export default abstract class PokemonState {
       }
 
       if (death) {
+        const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
+        pokemon.team = originalTeam
         pokemon.onDeath({ board })
         board.setValue(pokemon.positionX, pokemon.positionY, undefined)
         if (attacker && pokemon !== attacker) {
@@ -662,7 +664,6 @@ export default abstract class PokemonState {
           effectsRemovedList.push(EffectEnum.MISTY_TERRAIN)
         }
 
-        const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
         if (originalTeam == Team.BLUE_TEAM) {
           effectsRemovedList.forEach((x) =>
             pokemon.simulation.blueEffects.delete(x)
