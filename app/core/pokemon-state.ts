@@ -427,7 +427,7 @@ export default abstract class PokemonState {
           attacker.handleDamage({
             damage: reflectDamage,
             board,
-            attackType: AttackType.PHYSICAL,
+            attackType: AttackType.SPECIAL, // it's important that it deals special damage to avoid an infinite loop when two reflects are attacking each other
             attacker: pokemon,
             shouldTargetGainMana: true
           })
@@ -550,7 +550,7 @@ export default abstract class PokemonState {
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-       
+
         residualDamage = min(0)(residualDamage - shield)
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)

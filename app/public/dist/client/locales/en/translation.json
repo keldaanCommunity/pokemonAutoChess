@@ -1677,7 +1677,7 @@
 		"MUD_BUBBLE": "Heal the user for [10,20,40,SP] HP.",
 		"LINK_CABLE": "Dash to the farthest reachable enemy Pokémon, then trigger an electric arc between $t(pkm.PLUSLE) and $t(pkm.MINUN), dealing [50,SP] SPECIAL. If $t(pkm.PLUSLE) or $t(pkm.MINUN) are alone, deal half this damage to adjacent enemy Pokémon instead.",
 		"MAGIC_BOUNCE": "For 5 seconds, whenever the user is hit by an ability, block the damage and reflect [50,100,SP]% SPECIAL to the caster.",
-		"REFLECT": "For 2 seconds, whenever the user received PHYSICAL, block the damage and reflect [50,SP]% PHYSICAL to the attacker.",
+		"REFLECT": "For 2 seconds, whenever the user received PHYSICAL, block the damage and reflect [50,SP]% of the damage as SPECIAL to the attacker.",
 		"HIDDEN_POWER_A": "Summon 4 Abra, one at each corner of the battlefield.",
 		"HIDDEN_POWER_B": "BURN all enemy Pokémon for 30 seconds.",
 		"HIDDEN_POWER_C": "Give AMULET_COIN to all allied Pokémon. The item is removed at the end of the fight.",

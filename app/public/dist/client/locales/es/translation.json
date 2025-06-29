@@ -1677,7 +1677,7 @@
 		"MUD_BUBBLE": "Cura al usuario por [10,20,40,SP] HP",
 		"LINK_CABLE": "Se mueve hacia un nuevo lugar, luego activa un arco eléctrico entre Plusle y Minun que causa [50,SP] de SPECIAL. Si Plusle o Minun están solos, inflige este daño a los enemigos adyacentes.",
 		"MAGIC_BOUNCE": "Durante 5 segundos, cada vez que este Pokémon es golpeado por una habilidad, bloquea el daño y refleja [50,100,SP]% de SPECIAL al atacante.",
-		"REFLECT": "Durante 2 segundos, cada vez que el usuario reciba PHYSICAL, bloquea el daño y devuelve [50,SP]% de PHYSICAL al atacante.",
+		"REFLECT": "Durante 2 segundos, cada vez que el usuario reciba PHYSICAL, bloquea el daño y devuelve [50,SP]% de SPECIAL al atacante.",
 		"HIDDEN_POWER_A": "Invoca 4 Abra en cada esquina del tablero",
 		"HIDDEN_POWER_B": "Deja BURN al equipo oponente por 30 segundos",
 		"HIDDEN_POWER_C": "Otorga AMULET_COIN a todo tu equipo. El objeto se elimina al final de la ronda.",
