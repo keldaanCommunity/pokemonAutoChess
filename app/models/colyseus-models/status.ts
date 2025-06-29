@@ -145,6 +145,7 @@ export default class Status extends Schema implements IStatus {
 
     if (pokemon.effects.has(EffectEnum.COTTON_BALL) && !this.sleep) {
       this.triggerSleep(1000, pokemon)
+      pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
 
     if (pokemon.status.runeProtect) {
