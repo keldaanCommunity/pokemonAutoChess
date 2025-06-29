@@ -142,7 +142,7 @@ export function computeSynergies(
             if (synergies.get(Synergy.DRAGON)! === SynergyTriggers[Synergy.DRAGON][0]) {
               // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
               applyDragonDoubleTypes()
-            } else {
+            } else if (synergies.get(Synergy.DRAGON)! > SynergyTriggers[Synergy.DRAGON][0]) {
               // Dragon 3 was already activated, so we just need to double the synergy of Arceus/Kecleon
               const doubledType = synergiesSorted[1]
               synergies.set(doubledType, (synergies.get(doubledType) ?? 0) + 1)
