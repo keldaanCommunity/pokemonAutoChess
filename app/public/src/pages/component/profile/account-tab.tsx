@@ -44,7 +44,12 @@ function ChangeNameForm() {
   const isAnonymous = false // TODO: retrieve from profile if we decide to add back anonymous users
 
   function tryChangeName(newName: string) {
-    if (USERNAME_REGEXP.test(newName)) {
+    // Check for valid username and not fully invisible characters (e.g., Hangul Filler)
+    if (
+      USERNAME_REGEXP.test(newName) &&
+      // Remove all invisible characters and check if anything remains
+      newName.replace(/[\u3164\u200B-\u200D\u2060\uFEFF]/g, "").trim().length > 0
+    ) {
       dispatch(changeName(newName))
     } else {
       dispatch(setErrorAlertMessage(t("invalid_username")))
