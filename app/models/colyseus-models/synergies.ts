@@ -132,6 +132,7 @@ export function computeSynergies(
         }
       }
 
+      let shouldComputeDragonDoubleTypeAgain = false
       for (let i = 0; i < nbDynamicSynergies; i++) {
         const type = synergiesSorted[i]
         if (type && !pkm.types.has(type) && synergies.get(type)! > 0) {
@@ -141,7 +142,7 @@ export function computeSynergies(
           if (type === Synergy.DRAGON) {
             if (synergies.get(Synergy.DRAGON) === SynergyTriggers[Synergy.DRAGON][0]) {
               // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
-              applyDragonDoubleTypes()
+              shouldComputeDragonDoubleTypeAgain = true
             } else if (synergies.get(Synergy.DRAGON)! > SynergyTriggers[Synergy.DRAGON][0]) {
               // Dragon 3 was already activated, so we just need to double the synergy of Arceus/Kecleon
               const doubledType = synergiesSorted[1]
@@ -149,6 +150,10 @@ export function computeSynergies(
             }
           }
         }
+      }
+
+      if (shouldComputeDragonDoubleTypeAgain) {
+        applyDragonDoubleTypes()
       }
     }
   })
