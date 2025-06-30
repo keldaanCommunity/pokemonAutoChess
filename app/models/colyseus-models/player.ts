@@ -483,10 +483,13 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWildChance() {
-    this.wildChance =
-      values(this.board)
-        .filter((p) => p.types.has(Synergy.WILD))
-        .reduce((total, p) => total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)), 0)
+    this.wildChance = values(this.board)
+      .filter((p) => p.types.has(Synergy.WILD))
+      .reduce(
+        (total, p) =>
+          total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)),
+        0
+      )
   }
 
   updateChefsHats() {
@@ -589,14 +592,21 @@ export default class Player extends Schema implements IPlayer {
 
   registerPlayedPokemons() {
     let legendaryCount = 0
+    let count = 0
     this.board.forEach((pokemon) => {
-      this.pokemonsPlayed.add(pokemon.name)
-      if (pokemon.rarity === Rarity.LEGENDARY) {
-        legendaryCount++
+      if (!isOnBench(pokemon)) {
+        count++
+        this.pokemonsPlayed.add(pokemon.name)
+        if (pokemon.rarity === Rarity.LEGENDARY) {
+          legendaryCount++
+        }
       }
     })
     if (legendaryCount >= 3) {
       this.titles.add(Title.LEGEND)
+    }
+    if (count >= 10) {
+      this.titles.add(Title.DECURION)
     }
   }
 }
