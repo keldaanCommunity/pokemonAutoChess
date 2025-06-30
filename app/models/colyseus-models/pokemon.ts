@@ -16264,7 +16264,7 @@ export class HisuianLilligant extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.FIGHTING)
+    return (!state || state.additionalPokemons.includes(Pkm.PETILIL)) && regionSynergies.includes(Synergy.FIGHTING)
   }
 }
 
