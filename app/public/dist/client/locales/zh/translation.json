@@ -1936,7 +1936,7 @@
 		"FOLLOW_ME": "跳至远处的一个空位，并获得[40,SP]点SHIELD。正以使用者为目标的敌方宝可梦陷入CHARM 3秒。",
 		"AFTER_YOU": "使最近的我方宝可梦中最强的那个恢复[15,SP]点PP并提升[10,SP]点SPEED。",
 		"COTTON_SPORE": "制造一团棉孢子，使最近的3只敌方宝可梦降低[10,20,30,SP]点SPEED。棉孢子会留在地上，使走到此处的宝可梦陷入SLEEP 1秒。",
-		"COTTON_GUARD": "在使用者身边创造保护屏障，使自身获得[15,30,60,SP]点SHIELD并提升3点DEF，同时向前方3格投掷棉絮。棉絮会留在地上，使走到此处的宝可梦陷入SLEEP 1秒。",
+		"COTTON_GUARD": "用软绵绵的绒毛包裹住自己的身体，使自身获得[15,30,60,SP]点SHIELD并提升3点DEF，然后向前方3格投掷棉絮。棉絮会留在地上，使走到此处的宝可梦陷入SLEEP 1秒。",
 		"TWIN_BEAM": "发射两道攻击最远敌方宝可梦的光束，对一条直线上的所有敌方宝可梦造成[30,60,100,SP]点SPECIAL。",
 		"SWAGGER": "使目标陷入RAGE和CONFUSION [3,SP]秒。",
 		"ENCORE": "重复最近一个被我方宝可梦释放的招式。",
@@ -2727,7 +2727,8 @@
 		"SLAKING": "从SLEEP中醒来时, $t(pkm.SLAKING)陷入RAGE 3秒",
 		"STANTLER": "在地区变更后进化为$t(pkm.WYRDEER)。",
 		"PIKACHU_SURFER": "海浪逼近时，$t(pkm.PIKACHU_SURFER)会充满动力，回复PP。",
-		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。"
+		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。",
+		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。"
 	},
 	"stat": {
 		"ATK": "攻击",
