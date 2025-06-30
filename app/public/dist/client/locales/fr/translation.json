@@ -1936,7 +1936,7 @@
 		"FOLLOW_ME": "Saute vers une case libre éloignée et gagne [40,SP] SHIELD. Les ennemis qui ciblaient le lanceur deviennent CHARM pendant 3 secondes.",
 		"AFTER_YOU": "Donne [15,SP] PP et [10,SP] SPEED en bonus à l'allié le plus proche et le plus fort.",
 		"COTTON_SPORE": "Crée un nuage de spores de coton qui réduit la SPEED des 3 ennemis les plus proches de [10,20,30,SP]. Le coton reste sur le plateau, causant SLEEP pendant 1 seconde à tous les Pokémon qui marchent dessus.",
-		"COTTON_GUARD": "Crée une barrière protectrice autour du lanceur, lui octroyant [15,30,60,SP] SHIELD et 3 DEF, puis lance des boules de coton sur les 3 cases en face du lanceur. Le coton reste sur le plateau, causant SLEEP pendant 1 seconde à tous les Pokémon qui marchent dessus.",
+		"COTTON_GUARD": "Enveloppe son corps dans du coton doux, gagne [15,30,60,SP] SHIELD et 3 DEF, puis laisse tomber des boules de coton sur les 3 cases devant lui. Les boules de coton restent au sol, infligeant SLEEP pendant 1 seconde à tous les Pokémon qui marchent dessus.",
 		"TWIN_BEAM": "Tire deux faisceaux qui atteignent les ennemis les plus éloignés, infligeant [30,60,100,SP] SPECIAL à tous les ennemis sur le chemin.",
 		"SWAGGER": "Rend RAGE et CONFUSION la cible pendant [3,SP] secondes.",
 		"ENCORE": "Lance la dernière capacité utilisée par un allié.",
@@ -2727,7 +2727,8 @@
 		"SLAKING": "Lorsqu'il se réveille après avoir été en SLEEP, $t(pkm.SLAKING) devient RAGE pendant 3 secondes.",
 		"STANTLER": "Évolue en $t(pkm.WYRDEER) en changeant de région.",
 		"PIKACHU_SURFER": "Pour chaque vague qui approche, $t(pkm.PIKACHU_SURFER) se sent motivé, ce qui remplit sa barre de PP.",
-		"ESPURR": "Évolue en $t(MEOWSTIC) Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD."
+		"ESPURR": "Évolue en $t(MEOWSTIC) Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD.",
+		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être toiletté en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED."
 	},
 	"stat": {
 		"ATK": "Attaque",
