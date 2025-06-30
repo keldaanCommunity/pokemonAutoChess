@@ -26,11 +26,13 @@ export async function fetchBotsList(
         // Last chunk
         return botsData
       }
-      // Continue fetching next page
-      return fetchPage(page+1).then((nextPageBotsData) => [
-        ...botsData,
-        ...nextPageBotsData
-      ])
+      // Wait for 10 seconds before fetching next page to not block the event loop
+      return new Promise<IBot[]>((resolve) => setTimeout(resolve, 1000)).then(() =>
+        fetchPage(page + 1).then((nextPageBotsData) => [
+          ...botsData,
+          ...nextPageBotsData
+        ])
+      )
     })
   }
 
