@@ -1,12 +1,11 @@
 import { logger } from "colyseus"
 import { mongo } from "mongoose"
 import { nanoid } from "nanoid"
-import { rewriteBotRoundsRequiredto1, validateBot } from "../core/bot-logic"
 import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../models/mongo-models/user-metadata"
 import { discordService } from "./discord"
 
-export type IBotListItem = Omit<IBot, "steps"> & { valid: boolean }
+export type IBotListItem = Omit<IBot, "steps">
 
 export async function fetchBotsList(
   approved?: boolean
@@ -27,7 +26,8 @@ export async function fetchBotsList(
         return botsData
       }
       // Wait for 10 seconds before fetching next page to not block the event loop
-      return new Promise<IBot[]>((resolve) => setTimeout(resolve, 1000)).then(() =>
+      const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+      return wait(100).then(() =>
         fetchPage(page + 1).then((nextPageBotsData) => [
           ...botsData,
           ...nextPageBotsData
@@ -39,18 +39,14 @@ export async function fetchBotsList(
   return fetchPage(0).then((bots) =>
     bots
       .filter((bot) => approved === undefined || bot.approved === approved)
-      .map((bot) => {
-        const errors = validateBot(rewriteBotRoundsRequiredto1(bot))
-        return {
-          name: bot.name,
-          avatar: bot.avatar,
-          id: bot.id,
-          approved: bot.approved,
-          author: bot.author,
-          elo: bot.elo,
-          valid: errors.length === 0
-        }
-      })
+      .map((bot) => ({
+        name: bot.name,
+        avatar: bot.avatar,
+        id: bot.id,
+        approved: bot.approved,
+        author: bot.author,
+        elo: bot.elo
+      }))
   )
 }
 
