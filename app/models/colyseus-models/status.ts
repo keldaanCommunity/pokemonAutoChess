@@ -1093,7 +1093,7 @@ export default class Status extends Schema implements IStatus {
       duration = Math.round(duration * 0.7)
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
       duration = Math.round(duration * 0.4)
-    } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+    } else if (pkm.effects.has(EffectEnum.WATER_VEIL) || pkm.effects.has(EffectEnum.SURGE_SURFER)) {
       duration = Math.round(duration * 0.1)
     }
     return duration
