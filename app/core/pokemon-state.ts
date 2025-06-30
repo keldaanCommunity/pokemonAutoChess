@@ -674,8 +674,12 @@ export default abstract class PokemonState {
           )
         }
 
-        pokemon.simulation.redTeam.delete(pokemon.id)
-        pokemon.simulation.blueTeam.delete(pokemon.id)
+        if (pokemon.simulation.redTeam.has(pokemon.id)) {
+          pokemon.simulation.redTeam.delete(pokemon.id)
+        }
+        if (pokemon.simulation.blueTeam.has(pokemon.id)) {
+          pokemon.simulation.blueTeam.delete(pokemon.id)
+        }
       }
     }
 
