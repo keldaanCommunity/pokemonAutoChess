@@ -8,7 +8,6 @@
   border-radius: 50%;
   image-rendering: pixelated;
   box-shadow: inset 0 0 0 0.8vh black;
-  z-index: 30;
 }
 
 .game-player .CircularProgressbar {

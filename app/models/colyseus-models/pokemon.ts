@@ -186,7 +186,7 @@ export class Pokemon extends Schema implements IPokemon {
           ArtificialItems.includes(item)
         ) {
           player.items.push(item)
-          this.removeItem(item)
+          this.removeItem(item, player)
         }
       })
 
@@ -194,7 +194,7 @@ export class Pokemon extends Schema implements IPokemon {
         this.items.forEach((item) => {
           if (item !== Item.RARE_CANDY) {
             player.items.push(item)
-            this.removeItem(item)
+            this.removeItem(item, player)
           }
         })
       }
@@ -203,6 +203,10 @@ export class Pokemon extends Schema implements IPokemon {
 
   onItemGiven(item: Item, player: Player) {
     // called after giving an item to the mon
+  }
+
+  onItemRemoved(item: Item, player: Player) {
+    // called after an item is unequipped from the mon
   }
 
   onAcquired(player: Player) {
@@ -277,7 +281,7 @@ export class Pokemon extends Schema implements IPokemon {
     return regionSynergies.some((s) => this.types.has(s))
   }
 
-  removeItem(item: Item) {
+  removeItem(item: Item, player: Player) {
     this.items.delete(item)
     if (
       item in SynergyGivenByItem &&
@@ -286,6 +290,7 @@ export class Pokemon extends Schema implements IPokemon {
     ) {
       this.types.delete(SynergyGivenByItem[item])
     }
+    this.onItemRemoved(item, player)
   }
 }
 
@@ -5282,6 +5287,11 @@ export class PikachuSurfer extends Pokemon {
   skill = Ability.SURF
   attackSprite = AttackSprite.ELECTRIC_MELEE
   passive = Passive.PIKACHU_SURFER
+  onItemRemoved(item: Item, player: Player): void {
+    if (item === Item.SURFBOARD) {
+      player.transformPokemon(this, Pkm.PIKACHU)
+    }
+  }
 }
 
 export class Rattata extends Pokemon {
@@ -16264,7 +16274,7 @@ export class HisuianLilligant extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.FIGHTING)
+    return (!state || state.additionalPokemons.includes(Pkm.PETILIL)) && regionSynergies.includes(Synergy.FIGHTING)
   }
 }
 

@@ -153,6 +153,9 @@ export default class Simulation extends Schema implements ISimulation {
     this.winnerId = ""
     this.flowerSpawn = [false, false]
     this.stormLightningTimer = randomBetween(4000, 8000)
+    if (SynergyEffects[Synergy.AQUATIC].some((e) => this.blueEffects.has(e) || this.redEffects.has(e))) {
+      this.tidalWaveTimer = 8000
+    }
 
     blueBoard.forEach((pokemon) => {
       if (!isOnBench(pokemon)) {
@@ -1080,7 +1083,6 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.WATER_VEIL:
       case EffectEnum.SURGE_SURFER:
         pokemon.effects.add(effect)
-        this.tidalWaveTimer = 8000
         break
 
       case EffectEnum.ODD_FLOWER:

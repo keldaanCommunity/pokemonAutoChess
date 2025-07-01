@@ -56,6 +56,7 @@ import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
+import { Passive } from "../../types/enum/Passive"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -483,10 +484,13 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWildChance() {
-    this.wildChance =
-      values(this.board)
-        .filter((p) => p.types.has(Synergy.WILD))
-        .reduce((total, p) => total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)), 0)
+    this.wildChance = values(this.board)
+      .filter((p) => p.types.has(Synergy.WILD))
+      .reduce(
+        (total, p) =>
+          total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)),
+        0
+      )
   }
 
   updateChefsHats() {
@@ -589,14 +593,21 @@ export default class Player extends Schema implements IPlayer {
 
   registerPlayedPokemons() {
     let legendaryCount = 0
+    let count = 0
     this.board.forEach((pokemon) => {
-      this.pokemonsPlayed.add(pokemon.name)
-      if (pokemon.rarity === Rarity.LEGENDARY) {
-        legendaryCount++
+      if (!isOnBench(pokemon) && pokemon.passive !== Passive.INANIMATE) {
+        count++
+        this.pokemonsPlayed.add(pokemon.name)
+        if (pokemon.rarity === Rarity.LEGENDARY) {
+          legendaryCount++
+        }
       }
     })
     if (legendaryCount >= 3) {
       this.titles.add(Title.LEGEND)
+    }
+    if (count >= 10) {
+      this.titles.add(Title.DECURION)
     }
   }
 }

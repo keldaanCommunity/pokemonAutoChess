@@ -3,8 +3,9 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import { Tooltip } from "react-tooltip"
 
 import { IPlayer } from "../../../../../types"
-import { useAppSelector } from "../../../hooks"
 import { getAvatarSrc } from "../../../../../utils/avatar"
+import { DEPTH } from "../../../game/depths"
+import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import GamePlayerDetail from "./game-player-detail"
 
@@ -39,13 +40,16 @@ export default function GamePlayer(props: {
       onClick={playerClick}
       data-tooltip-id={"detail-" + props.player.id}
     >
-      <CircularProgressbarWithChildren value={props.player.life} />
-      <div className="my-container life-text">{props.player.life}</div>
+      <div style={{ zIndex: DEPTH.PLAYER_ICON }}>
+        <CircularProgressbarWithChildren value={props.player.life} />
+        <div className="my-container life-text">{props.player.life}</div>
+      </div>
       <Tooltip
         id={"detail-" + props.player.id}
         className="custom-theme-tooltip"
         place="left"
         data-tooltip-offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
+        style={{ zIndex: DEPTH.TOOLTIP }}
       >
         <GamePlayerDetail player={props.player} />
       </Tooltip>

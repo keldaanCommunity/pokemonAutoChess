@@ -1,45 +1,71 @@
-import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
-import { nanoid } from "nanoid"
-import { mongo } from "mongoose"
 import { logger } from "colyseus"
-import { rewriteBotRoundsRequiredto1, validateBot } from "../core/bot-logic"
-import { discordService } from "./discord"
+import { mongo } from "mongoose"
+import { nanoid } from "nanoid"
+import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../models/mongo-models/user-metadata"
+import { discordService } from "./discord"
 
-export type IBotListItem = Omit<IBot, "steps"> & { valid: boolean }
+export type IBotListItem = Omit<IBot, "steps">
 
 export async function fetchBotsList(
   approved?: boolean
 ): Promise<IBotListItem[]> {
-  const bots = new Array<IBot>()
-  const chunkSize = 100
-  let skip = 0
+  const pageSize = 100
+  const maxPages = 20 // Fail-safe: prevent infinite loops (max 2000 bots)
+  const allBots: IBotListItem[] = []
 
-  while (true) {
-    const botsData = await BotV2.find(
-      {},
-      {},
-      { sort: { elo: -1 }, limit: chunkSize, skip }
-    )
-    if (!botsData || botsData.length === 0) break
-    bots.push(...botsData)
-    skip += chunkSize
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+  let page = 0
+  let hasMoreData = true
+
+  while (hasMoreData && page < maxPages) {
+    try {
+      const botsData = await BotV2.find(
+        {},
+        { steps: 0 }, // Exclude the 'steps' field
+        { sort: { elo: -1 }, limit: pageSize, skip: page * pageSize }
+      )
+
+      if (!botsData || botsData.length === 0) {
+        hasMoreData = false
+        break
+      }
+
+      // Process and filter bots immediately, then add to result array
+      const processedBots = botsData
+        .filter((bot) => approved === undefined || bot.approved === approved)
+        .map((bot) => ({
+          name: bot.name,
+          avatar: bot.avatar,
+          id: bot.id,
+          approved: bot.approved,
+          author: bot.author,
+          elo: bot.elo
+        }))
+
+      // Use push.apply to add elements without creating intermediate arrays
+      allBots.push(...processedBots)
+
+      if (botsData.length < pageSize) {
+        // Last chunk
+        hasMoreData = false
+      } else {
+        // Wait briefly before fetching next page to not block the event loop
+        await wait(100)
+        page++
+      }
+    } catch (error) {
+      logger.error(`Error fetching bots page ${page}:`, error)
+      hasMoreData = false // Stop on error to prevent infinite loop
+    }
   }
 
-  return bots
-    .filter((bot) => approved === undefined || bot.approved === approved)
-    .map((bot) => {
-      const errors = validateBot(rewriteBotRoundsRequiredto1(bot))
-      return {
-        name: bot.name,
-        avatar: bot.avatar,
-        id: bot.id,
-        approved: bot.approved,
-        author: bot.author,
-        elo: bot.elo,
-        valid: errors.length === 0
-      }
-    })
+  if (page >= maxPages) {
+    logger.warn(`Reached maximum page limit (${maxPages}) while fetching bots`)
+  }
+
+  return allBots
 }
 
 export async function fetchBot(id: string): Promise<IBot | null> {

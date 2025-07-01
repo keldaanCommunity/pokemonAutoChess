@@ -44,6 +44,8 @@ function ChangeNameForm() {
   const isAnonymous = false // TODO: retrieve from profile if we decide to add back anonymous users
 
   function tryChangeName(newName: string) {
+    // Remove all invisible characters
+    newName = newName.replace(/[\u3164\u200B-\u200D\u2060\uFEFF]/g, "")
     if (USERNAME_REGEXP.test(newName)) {
       dispatch(changeName(newName))
     } else {

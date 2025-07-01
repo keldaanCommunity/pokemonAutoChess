@@ -62,15 +62,12 @@ export default function TeamEditor(props: {
                       onDragLeave={handleOnDragEnd}
                       onDrop={(e) => handleDrop(x, y, e)}
                     >
-                      {p && (
+                      {p && <div draggable onDragStart={(e) => handleOnDragStart(e, p)}>
                         <PokemonPortrait
                           portrait={{ index: PkmIndex[p.name], shiny: p.shiny, emotion: p.emotion }}
-                          draggable
-                          onDragStart={(e) => handleOnDragStart(e, p)}
+
                         />
-                      )}
-                      {p && p.items && (
-                        <div className="pokemon-items">
+                        {p.items && <div className="pokemon-items">
                           {p.items.map((it, j) => {
                             return (
                               <img
@@ -84,8 +81,8 @@ export default function TeamEditor(props: {
                               />
                             )
                           })}
-                        </div>
-                      )}
+                        </div>}
+                      </div>}
                     </td>
                   )
                 })}
