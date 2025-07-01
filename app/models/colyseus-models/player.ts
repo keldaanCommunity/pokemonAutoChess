@@ -56,6 +56,7 @@ import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
+import { Passive } from "../../types/enum/Passive"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -594,7 +595,7 @@ export default class Player extends Schema implements IPlayer {
     let legendaryCount = 0
     let count = 0
     this.board.forEach((pokemon) => {
-      if (!isOnBench(pokemon)) {
+      if (!isOnBench(pokemon) && pokemon.passive !== Passive.INANIMATE) {
         count++
         this.pokemonsPlayed.add(pokemon.name)
         if (pokemon.rarity === Rarity.LEGENDARY) {
