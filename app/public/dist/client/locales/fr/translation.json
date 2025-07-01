@@ -2699,7 +2699,7 @@
 		"PRIMEAPE": "A chaque KO subi, Colossinge se met encore plus en colère et gagne 1 ATK de façon permanente. Après 10 KO, évolue en Courroussinge.",
 		"ZYGARDE": "Après avoir gagné 5 cumuls d'effet de GROUND, Zygarde absorbe toutes ses cellules et prend sa forme complète.",
 		"GLIMMORA": "Une fois sous les 50% de ses HP max, lance des piques toxiques dans une zone de 2x3 devant elle, infligeant 20 SPECIAL. Les piques toxiques appliquent le statut POISONNED aux Pokémon, sauf s'ils sont de type POISON.",
-		"PILLAR": "Construit un pilier pouvant être placé sur le plateau et qui bloque son chemin des ennemis, avec des HP, DEF et SPE_DEF augmentés en fonction des STAR de l'unité.",
+		"PILLAR": "Construit [1,1,2] piliers pouvant être placés sur le plateau et qui bloquent le chemin des ennemis, avec des HP, DEF et SPE_DEF augmentés en fonction des STAR de l'unité.",
 		"INANIMATE": "Les objets inanimés ne peuvent pas être copiés, mis sur le banc ou vendus. Ils ne peuvent pas se déplacer ni attaquer, et sont immunisés contre les effets de statut.",
 		"BERSERK": "Gagne 5 AP à chaque fois qu'un Pokémon est affecté par sa capacité.",
 		"APPLIN": "$t(pkm.APPLIN) cherche une SWEET_APPLE, une TART_APPLE ou une SIRUPY_APPLE.",
