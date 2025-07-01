@@ -188,6 +188,7 @@ export default class Simulation extends Schema implements ISimulation {
     ]) {
       if (player) {
         player.board.forEach((pokemon) => {
+          pokemon.meal = "" // consume all meals
           const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
           )
@@ -254,8 +255,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
     if (pokemon.meal) {
-      this.applyDishEffects(pokemonEntity, pokemon.meal)
-      pokemon.meal = ""
+      this.applyDishEffects(pokemonEntity, pokemon.meal)      
       pokemon.action = PokemonActionState.IDLE
     }
 
