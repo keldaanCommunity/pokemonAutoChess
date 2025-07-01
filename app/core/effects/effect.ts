@@ -1,16 +1,16 @@
+import { SynergyEffects } from "../../models/effects"
+import { Transfer } from "../../types"
+import { Ability } from "../../types/enum/Ability"
+import { EffectEnum } from "../../types/enum/Effect"
+import { AttackType } from "../../types/enum/Game"
+import { Item } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { min } from "../../utils/number"
+import { chance } from "../../utils/random"
 import Board from "../board"
 import { PokemonEntity } from "../pokemon-entity"
-import { Item } from "../../types/enum/Item"
-import { EffectEnum } from "../../types/enum/Effect"
-import { Synergy } from "../../types/enum/Synergy"
-import { Passive } from "../../types/enum/Passive"
-import { Ability } from "../../types/enum/Ability"
-import { SynergyEffects } from "../../models/effects"
-import { AttackType } from "../../types/enum/Game"
-import { chance } from "../../utils/random"
-import { min } from "../../utils/number"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { Transfer } from "../../types"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
@@ -208,6 +208,9 @@ export class GrowGroundEffect extends PeriodicEffect {
           pokemon.passive = Passive.NONE
           pokemon.skill = Ability.CORE_ENFORCER
           pokemon.pp = 0
+          if (pokemon.player) {
+            pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
+          }
         }
       },
       effect,
