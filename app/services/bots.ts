@@ -11,43 +11,61 @@ export async function fetchBotsList(
   approved?: boolean
 ): Promise<IBotListItem[]> {
   const pageSize = 100
+  const maxPages = 20 // Fail-safe: prevent infinite loops (max 2000 bots)
+  const allBots: IBotListItem[] = []
 
-  const fetchPage = (page: number): Promise<IBot[]> => {
-    return BotV2.find(
-      {},
-      {},
-      { sort: { elo: -1 }, limit: pageSize, skip: page * pageSize }
-    ).then((botsData) => {
+  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+  let page = 0
+  let hasMoreData = true
+
+  while (hasMoreData && page < maxPages) {
+    try {
+      const botsData = await BotV2.find(
+        {},
+        { steps: 0 }, // Exclude the 'steps' field
+        { sort: { elo: -1 }, limit: pageSize, skip: page * pageSize }
+      )
+
       if (!botsData || botsData.length === 0) {
-        return []
+        hasMoreData = false
+        break
       }
+
+      // Process and filter bots immediately, then add to result array
+      const processedBots = botsData
+        .filter((bot) => approved === undefined || bot.approved === approved)
+        .map((bot) => ({
+          name: bot.name,
+          avatar: bot.avatar,
+          id: bot.id,
+          approved: bot.approved,
+          author: bot.author,
+          elo: bot.elo
+        }))
+
+      // Use push.apply to add elements without creating intermediate arrays
+      allBots.push(...processedBots)
+
       if (botsData.length < pageSize) {
         // Last chunk
-        return botsData
+        hasMoreData = false
+      } else {
+        // Wait briefly before fetching next page to not block the event loop
+        await wait(100)
+        page++
       }
-      // Wait for 10 seconds before fetching next page to not block the event loop
-      const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
-      return wait(100).then(() =>
-        fetchPage(page + 1).then((nextPageBotsData) => [
-          ...botsData,
-          ...nextPageBotsData
-        ])
-      )
-    })
+    } catch (error) {
+      logger.error(`Error fetching bots page ${page}:`, error)
+      hasMoreData = false // Stop on error to prevent infinite loop
+    }
   }
 
-  return fetchPage(0).then((bots) =>
-    bots
-      .filter((bot) => approved === undefined || bot.approved === approved)
-      .map((bot) => ({
-        name: bot.name,
-        avatar: bot.avatar,
-        id: bot.id,
-        approved: bot.approved,
-        author: bot.author,
-        elo: bot.elo
-      }))
-  )
+  if (page >= maxPages) {
+    logger.warn(`Reached maximum page limit (${maxPages}) while fetching bots`)
+  }
+
+  return allBots
 }
 
 export async function fetchBot(id: string): Promise<IBot | null> {

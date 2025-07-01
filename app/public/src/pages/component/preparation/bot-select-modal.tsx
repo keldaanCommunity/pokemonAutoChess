@@ -31,7 +31,7 @@ export function BotSelectModal(props: { botsSelected: string[], close: () => voi
   const [botsList, setBotsList] = useState<IBot[] | null>(null)
   useEffect(() => {
     if (botsList === null) {
-      fetch("/bots?approved=true").then((r) => r.json()).then((bots) => {
+      fetch(`/bots?approved=true&t=${Date.now()}`).then((r) => r.json()).then((bots) => {
         setBotsList(bots)
         setLoading(false)
       })
