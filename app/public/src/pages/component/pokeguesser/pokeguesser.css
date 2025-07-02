@@ -7,6 +7,13 @@
   text-align: center;
 }
 
+.pokeguesser-options {
+  text-align: right;
+  margin: 0 0 0.25em 0.5em;
+  padding: 0;
+  border: none;
+}
+
 #pokemon-select-form {
   display: flex;
   gap: 1rem;
@@ -77,4 +84,16 @@
 
 .game-pokeguesser-modal .pokemon-attempt span.valid {
   background-color: var(--color-bg-green);
+}
+
+.game-pokeguesser-modal h2 {
+  margin: 0 0.25em;
+}
+
+.game-pokeguesser-modal h2 + .pokemon-portrait {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+  pointer-events: none;
+  user-select: none;
 }

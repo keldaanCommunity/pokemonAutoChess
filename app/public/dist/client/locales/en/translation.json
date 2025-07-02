@@ -3881,6 +3881,10 @@
 		"itssolution": "It's $t(pkm.{{pokemon}}) !",
 		"attempts": "Attempts: {{count}}",
 		"guess": "Guess",
-		"reset": "Reset"
+		"reset": "Reset",
+		"difficulty": "Difficulty",
+		"easy": "Easy",
+		"normal": "Normal",
+		"hard": "Ultra"
 	}
 }

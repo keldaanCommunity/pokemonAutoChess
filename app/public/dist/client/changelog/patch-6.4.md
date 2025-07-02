@@ -15,3 +15,5 @@
 - Pokemons meals are now consumed even if the Pokemon is on bench.
 
 # Misc
+
+- Add 3 levels of difficulty to Pokeguesser game.
