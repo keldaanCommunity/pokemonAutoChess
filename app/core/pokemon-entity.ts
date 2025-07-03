@@ -1231,6 +1231,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addAttack(-10, this, 0, false)
       this.addDefense(5, this, 0, false)
       this.addSpecialDefense(5, this, 0, false)
+      if (this.player) {
+        this.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
+      }
     }
 
     if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {
