@@ -6,13 +6,27 @@
 
 .lobby-container {
   padding: 10px;
+  padding-top: 90px;
   padding-left: calc(var(--sidebar-width) + 10px);
   width: 100%;
+}
+
+#lobby-logo {
+  position: fixed;
+  top: 0;
+  left: 50vw;
+  transform: translate(-50%);
+  height: 90px;
+  z-index: 1;
 }
 
 .lobby section {
   height: 100%;
   width: 25%;
+}
+
+.lobby section.rooms {
+  width: 50%;
 }
 
 .lobby .user-menu {
@@ -24,7 +38,7 @@
 
 .lobby .user-menu .react-tabs,
 .lobby .user-menu .react-tabs__tab-panel--selected,
-.lobby .room-menu .react-tabs__tab-panel--selected  {
+.lobby .room-menu .react-tabs__tab-panel--selected {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -33,7 +47,9 @@
   padding-right: 2px;
 }
 
-.lobby .room-menu {
+.lobby .room-menu,
+.lobby .events-menu {
+  position: relative;
   height: 100%;
 }
 
@@ -115,6 +131,10 @@
 }
 
 @media (width <= 960px) {
+  #lobby-logo {
+    display: none;
+  }
+
   .lobby nav {
     flex-wrap: wrap;
   }

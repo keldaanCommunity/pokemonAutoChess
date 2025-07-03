@@ -3215,6 +3215,8 @@
 	"new_game": "New Game",
 	"in_game": "In Game",
 	"tournament": "Tournament",
+	"events": "Events",
+	"victory_road": "Victory Road",
 	"custom_room": "Custom room",
 	"custom_room_description": "Create a private room with your own rules",
 	"loading": "Loading...",
