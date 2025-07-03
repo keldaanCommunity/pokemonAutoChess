@@ -18,8 +18,9 @@ import { values } from "../../../../../utils/schemas"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { Modal } from "../modal/modal"
-import "./pokeguesser.css"
 import PokemonPortrait from "../pokemon-portrait"
+import "./pokeguesser.css"
+import { Stat } from "../../../../../types/enum/Game"
 
 const listPokemonsToGuess = precomputedPokemons
     .filter((p) => p.passive !== Passive.INANIMATE && p.skill !== Ability.DEFAULT)
@@ -48,6 +49,7 @@ export default function Pokeguesser(props: {
     const [attempts, setAttempts] = useState<Pokemon[]>([])
     const [value, setValue] = useState<Pkm | "">("")
     const [found, setFound] = useState(false)
+    const [difficulty, setDifficulty] = useState<"easy" | "normal" | "hard">("normal")
 
     const submitGuess = (pokemonName: Pkm) => {
         const pokemon = listPokemonsToGuess.find((p) => p.name === pokemonName)
@@ -66,6 +68,10 @@ export default function Pokeguesser(props: {
         setFound(false)
     }
 
+    useEffect(() => {
+        resetGame()
+    }, [difficulty])
+
     return (
         <Modal
             show={props.show}
@@ -73,24 +79,39 @@ export default function Pokeguesser(props: {
             className="game-pokeguesser-modal"
             header={t("gadget.pokeguesser")}
         >
+            <fieldset className="pokeguesser-options">
+                <label htmlFor="difficulty-select" style={{ marginRight: 8 }}>
+                    {t("pokeguessr.difficulty") || "Difficulty"}:
+                </label>
+                <select
+                    id="difficulty-select"
+                    style={{ marginRight: 16 }}
+                    value={difficulty}
+                    onChange={e => setDifficulty(e.target.value as "easy" | "normal" | "hard")}
+                >
+                    <option value="easy">{t("pokeguessr.easy")}</option>
+                    <option value="normal">{t("pokeguessr.normal")}</option>
+                    <option value="hard">{t("pokeguessr.hard")}</option>
+                </select>
+            </fieldset>
             <h2>
                 {found
                     ? t("pokeguessr.itssolution", { pokemon: pokemonToGuess.name })
                     : t("pokeguessr.whosthatpokemon")}
             </h2>
-            <PokemonPortrait
-                portrait={{ index: pokemonToGuess.index }}
-                draggable="false"
-                onDragStart={(e) => e.preventDefault()}
-                style={{
-                    width: 80,
-                    height: 80,
-                    margin: "0 auto 16px",
-                    filter: found ? "" : `blur(${16 - clamp(attempts.length, 0, 15)}px)`,
-                    pointerEvents: "none",
-                    userSelect: "none"
-                }}
-            />
+            {difficulty === "hard" && !found
+                ? <img src="assets/ui/missing-portrait.png" className="pokemon-portrait" />
+                : <PokemonPortrait
+                    portrait={{ index: pokemonToGuess.index }}
+                    draggable="false"
+                    onDragStart={(e) => e.preventDefault()}
+                    style={{
+                        filter: found ? "" :
+                            difficulty === "easy" ? `blur(${16 - clamp(attempts.length, 0, 15)}px)`
+                                : `blur(${16 - clamp(attempts.length, 0, 15)}px) grayscale(${100 - clamp(attempts.length, 0, 10) * 10}%)`
+                    }}
+                />
+            }
 
             {found ? (
                 <p>
@@ -115,6 +136,7 @@ export default function Pokeguesser(props: {
                             index={i}
                             pokemon={pkm}
                             solution={pokemonToGuess}
+                            difficulty={difficulty}
                         />
                     ))}
                 </ul>
@@ -248,13 +270,28 @@ export function PokemonSelect({
 export function PokemonAttempt({
     pokemon,
     solution,
-    index
+    index,
+    difficulty
 }: {
     pokemon: Pokemon
     solution: Pokemon
     index: number
+    difficulty: "easy" | "normal" | "hard"
 }) {
     const { t } = useTranslation()
+    const statsHints = [Stat.HP, Stat.ATK, Stat.DEF, Stat.SPEED, Stat.SPE_DEF, Stat.RANGE, Stat.PP] as const
+    const randomStat = statsHints[(index + parseInt(solution.index)) % 7]
+    const statMapping: Record<typeof statsHints[number], string> = {
+        [Stat.HP]: "hp",
+        [Stat.ATK]: "atk",
+        [Stat.DEF]: "def",
+        [Stat.SPEED]: "speed",
+        [Stat.SPE_DEF]: "speDef",
+        [Stat.RANGE]: "range",
+        [Stat.PP]: "maxPP"
+    }
+    const pokemonStat = pokemon[statMapping[randomStat]]
+    const solutionStat = solution[statMapping[randomStat]]
 
     return (
         <li className="pokemon-attempt">
@@ -284,7 +321,7 @@ export function PokemonAttempt({
                     <img src="assets/ui/star.svg" height="24" key={"star" + i}></img>
                 ))}
             </span>
-            {index >= 8 && (
+            {(difficulty === "easy" || index >= 8) && (
                 <span
                     className={cc("pool", {
                         valid:
@@ -305,6 +342,11 @@ export function PokemonAttempt({
                     <SynergyIcon type={type} /> {t(`synergy.${type}`)}
                 </span>
             ))}
+            <span className={cc("stat", { valid: pokemonStat === solutionStat })}>
+                <img src={`assets/icons/${randomStat.toUpperCase()}.png`} alt={t(`stat.${randomStat}`)} title={t(`stat.${randomStat}`)} height="32" />
+                {" "}{pokemonStat}
+                {solutionStat > pokemonStat ? " ⏶" : solutionStat < pokemonStat ? " ⏷" : ""}
+            </span>
         </li>
     )
 }
