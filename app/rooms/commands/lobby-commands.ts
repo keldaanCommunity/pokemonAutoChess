@@ -326,15 +326,26 @@ export class OpenBoosterCommand extends Command<
         const existingItem = userDoc.pokemonCollection.get(index)
 
         if (!existingItem) {
-          // Create new collection item
-          updateOperations[`pokemonCollection.${index}`] = {
-            id: index,
-            emotions: card.shiny ? [] : [card.emotion],
-            shinyEmotions: card.shiny ? [card.emotion] : [],
-            dust: 0,
-            selectedEmotion: Emotion.NORMAL,
-            selectedShiny: false,
-            played: 0
+          if (`pokemonCollection.${index}` in updateOperations) {
+            // If the item already exists in the update operations, we need to merge
+            // the new emotions with the existing ones.
+            const existingEmotions = updateOperations[`pokemonCollection.${index}`]
+            if (card.shiny) {
+              existingEmotions.shinyEmotions.push(card.emotion)
+            } else {
+              existingEmotions.emotions.push(card.emotion)
+            }
+          } else {
+            // Create new collection item
+            updateOperations[`pokemonCollection.${index}`] = {
+              id: index,
+              emotions: card.shiny ? [] : [card.emotion],
+              shinyEmotions: card.shiny ? [card.emotion] : [],
+              dust: 0,
+              selectedEmotion: Emotion.NORMAL,
+              selectedShiny: false,
+              played: 0
+            }
           }
         } else {
           // Check if already unlocked
