@@ -93,7 +93,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.clock.start()
 
     // logger.debug(defaultRoomName);
-    this.state = new PreparationState(options)
+    this.setState(new PreparationState(options))
     this.setMetadata(<IPreparationMetadata>{
       name: options.roomName.slice(0, 30),
       ownerName:
@@ -169,9 +169,8 @@ export default class PreparationRoom extends Room<PreparationState> {
                 this.state.addMessage({
                   author: "Server",
                   authorId: "server",
-                  payload: `Game will start automatically in ${10 - t} minute${
-                    t !== 9 ? "s" : ""
-                  }`,
+                  payload: `Game will start automatically in ${10 - t} minute${t !== 9 ? "s" : ""
+                    }`,
                   avatar: "0340/Special1"
                 })
               },
