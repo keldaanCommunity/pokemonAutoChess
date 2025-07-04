@@ -208,6 +208,10 @@ export class GrowGroundEffect extends PeriodicEffect {
           pokemon.passive = Passive.NONE
           pokemon.skill = Ability.CORE_ENFORCER
           pokemon.pp = 0
+
+          if (pokemon.player) {
+            pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
+          }
         }
       },
       effect,

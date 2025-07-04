@@ -1203,6 +1203,9 @@ export class KingShieldStrategy extends AbilityStrategy {
           pokemon.addSpecialDefense(-5, pokemon, 1, crit)
           pokemon.name = Pkm.AEGISLASH_BLADE
           pokemon.index = PkmIndex[Pkm.AEGISLASH_BLADE]
+          if (pokemon.player) {
+            pokemon.player.pokemonsPlayed.add(Pkm.AEGISLASH_BLADE)
+          }
         }, 1500)
       )
     } else if (pokemon.name === Pkm.AEGISLASH_BLADE) {
@@ -7237,6 +7240,9 @@ export class UnboundStrategy extends AbilityStrategy {
     pokemon.addAttack(10, pokemon, 0, false)
     pokemon.addMaxHP(100, pokemon, 0, false)
     pokemon.toMovingState()
+    if (pokemon.player) {
+      pokemon.player.pokemonsPlayed.add(Pkm.HOOPA_UNBOUND)
+    }
   }
 }
 
@@ -8122,6 +8128,9 @@ export class ShieldsDownStrategy extends AbilityStrategy {
     pokemon.index = PkmIndex[pkm]
     pokemon.name = pkm
     pokemon.skill = Ability.SHIELDS_UP
+    if (pokemon.player) {
+      pokemon.player.pokemonsPlayed.add(pkm)
+    }
   }
 }
 
@@ -8152,6 +8161,9 @@ export class AuraWheelStrategy extends AbilityStrategy {
     if (pokemon.name === Pkm.MORPEKO) {
       pokemon.name = Pkm.MORPEKO_HANGRY
       pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.MORPEKO_HANGRY)
+      }
     } else {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]
