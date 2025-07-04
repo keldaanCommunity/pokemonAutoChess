@@ -36,6 +36,14 @@
   flex-direction: column;
 }
 
+.lobby .react-tabs__tab img {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: text-bottom;
+  margin-right: 0.5em;
+  border-radius: 50%;
+}
+
 .lobby .user-menu .react-tabs,
 .lobby .user-menu .react-tabs__tab-panel--selected,
 .lobby .room-menu .react-tabs__tab-panel--selected,
