@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { Client, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
@@ -14,7 +14,7 @@ import {
 } from "../stores/AfterGameStore"
 import { joinAfter, logIn } from "../stores/NetworkStore"
 import AfterMenu from "./component/after/after-menu"
-import { SOUNDS, playSound } from "./utils/audio"
+import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import { FIREBASE_CONFIG } from "./utils/utils"
 
@@ -75,22 +75,28 @@ export default function AfterGame() {
 
     const initialize = async (room: Room<AfterGameState>) => {
       localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
-      localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, { reconnectionToken: room.reconnectionToken, roomId: room.roomId }, 30)
-      const $ = getStateCallbacks(room)
-      const $state = $(room.state)
-      $state.players.onAdd((player) => {
+      localStore.set(
+        LocalStoreKeys.RECONNECTION_AFTER_GAME,
+        { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+        30
+      )
+
+      room.state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
-          playSound(SOUNDS["FINISH" + player.rank], preference("musicVolume") / 100)
+          playSound(
+            SOUNDS["FINISH" + player.rank],
+            preference("musicVolume") / 100
+          )
         }
       })
-      $state.listen("elligibleToELO", (value, previousValue) => {
+      room.state.listen("elligibleToELO", (value, previousValue) => {
         dispatch(setElligibilityToELO(value))
       })
-      $state.listen("elligibleToXP", (value, previousValue) => {
+      room.state.listen("elligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
       })
-      $state.listen("gameMode", (value, previousValue) => {
+      room.state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
       })
     }

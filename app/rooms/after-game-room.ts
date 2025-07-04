@@ -24,7 +24,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }) {
     logger.info("Create AfterGame ", this.roomId)
 
-    this.state = new AfterGameState(options)
+    this.setState(new AfterGameState(options))
     // logger.debug('before', this.state.players);
     if (options.players) {
       options.players.forEach((plyr: IAfterGamePlayer) => {

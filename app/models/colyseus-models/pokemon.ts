@@ -1,4 +1,4 @@
-import { entity, MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
@@ -19988,8 +19988,3 @@ export const PokemonClasses: Record<
   [Pkm.ELDEGOSS]: Eldegoss,
   [Pkm.FURFROU]: Furfrou
 }
-
-// declare all the classes in colyseus schema TypeRegistry
-// required if schema class doesnt have a @type decorator
-// see https://discord.com/channels/525739117951320081/1341559052299407412/1342631038152868072
-Object.values(PokemonClasses).forEach((pokemonClass) => entity(pokemonClass))

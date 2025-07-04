@@ -1,55 +1,51 @@
-import { RoomAvailable, Room, Client, getStateCallbacks } from "colyseus.js"
+import { Client, Room, RoomAvailable } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { NavigateFunction } from "react-router-dom"
-import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import {
-  TournamentSchema,
+  TournamentBracketSchema,
   TournamentPlayerSchema,
-  TournamentBracketSchema
+  TournamentSchema
 } from "../../../models/colyseus-models/tournament"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import PreparationState from "../../../rooms/states/preparation-state"
-import {
-  ICustomLobbyState,
-  Transfer,
-  ISuggestionUser
-} from "../../../types"
+import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
+import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
-import { localStore, LocalStoreKeys } from "../pages/utils/store"
+import { LocalStoreKeys, localStore } from "../pages/utils/store"
 import { FIREBASE_CONFIG } from "../pages/utils/utils"
 import store, { AppDispatch } from "../stores"
 import {
-  pushMessage,
-  setCcu,
-  addTournament,
-  removeTournament,
-  changeTournament,
-  updateTournament,
-  changeTournamentPlayer,
-  addTournamentBracket,
-  changeTournamentBracket,
-  removeTournamentBracket,
   addRoom,
+  addTournament,
+  addTournamentBracket,
+  changeTournament,
+  changeTournamentBracket,
+  changeTournamentPlayer,
+  pushMessage,
   removeRoom,
-  setSearchedUser,
+  removeTournament,
+  removeTournamentBracket,
+  resetLobby,
   setBoosterContent,
+  setCcu,
+  setSearchedUser,
   setSuggestions,
-  resetLobby
+  updateTournament
 } from "../stores/LobbyStore"
 import {
+  joinLobby,
   logIn,
   removeMessage,
-  setProfile,
-  joinLobby,
+  setConnectionStatus,
   setErrorAlertMessage,
   setPendingGameId,
-  setConnectionStatus
+  setProfile
 } from "../stores/NetworkStore"
 import { resetPreparation } from "../stores/PreparationStore"
-import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
-import type { Booster } from "../../../types/Booster"
 
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
@@ -102,8 +98,6 @@ export async function joinLobbyRoom(
           )
 
           // setup event listeners for the lobby room
-          const $ = getStateCallbacks(room)
-          const $state = $(room.state)
 
           room.onLeave((code: number) => {
             logger.info(`left lobby with code ${code}`)
@@ -122,20 +116,19 @@ export async function joinLobbyRoom(
             }
           })
 
-          $state.messages.onAdd((m) => {
+          room.state.messages.onAdd((m) => {
             dispatch(pushMessage(m))
           })
-          $state.messages.onRemove((m) => {
+          room.state.messages.onRemove((m) => {
             dispatch(removeMessage(m))
           })
 
-          $state.listen("ccu", (value) => {
+          room.state.listen("ccu", (value) => {
             dispatch(setCcu(value))
           })
 
-          $state.tournaments.onAdd((tournament) => {
+          room.state.tournaments.onAdd((tournament) => {
             dispatch(addTournament(tournament))
-            const $tournament = $(tournament)
             const fields: NonFunctionPropNames<TournamentSchema>[] = [
               "id",
               "name",
@@ -143,7 +136,7 @@ export async function joinLobbyRoom(
             ]
 
             fields.forEach((field) => {
-              $tournament.listen(field, (value) => {
+              tournament.listen(field, (value) => {
                 dispatch(
                   changeTournament({
                     tournamentId: tournament.id,
@@ -154,14 +147,13 @@ export async function joinLobbyRoom(
               })
             })
 
-            $tournament.players.onAdd((player, userId) => {
+            tournament.players.onAdd((player, userId) => {
               dispatch(updateTournament()) // TOFIX: force redux reactivity
-              const $player = $(player)
               const fields: NonFunctionPropNames<TournamentPlayerSchema>[] = [
                 "eliminated"
               ]
               fields.forEach((field) => {
-                $player.listen(field, (value) => {
+                player.listen(field, (value) => {
                   dispatch(
                     changeTournamentPlayer({
                       tournamentId: tournament.id,
@@ -174,11 +166,11 @@ export async function joinLobbyRoom(
               })
             })
 
-            $tournament.players.onRemove((player, userId) => {
+            tournament.players.onRemove((player, userId) => {
               dispatch(updateTournament()) // TOFIX: force redux reactivity
             })
 
-            $tournament.brackets.onAdd((bracket, bracketId) => {
+            tournament.brackets.onAdd((bracket, bracketId) => {
               dispatch(
                 addTournamentBracket({
                   tournamendId: tournament.id,
@@ -187,13 +179,12 @@ export async function joinLobbyRoom(
                 })
               )
 
-              const $bracket = $(bracket)
               const fields: NonFunctionPropNames<TournamentBracketSchema>[] = [
                 "name",
                 "finished"
               ]
               fields.forEach((field) => {
-                $bracket.listen(field, (value) => {
+                bracket.listen(field, (value) => {
                   dispatch(
                     changeTournamentBracket({
                       tournamentId: tournament.id,
@@ -205,7 +196,7 @@ export async function joinLobbyRoom(
                 })
               })
 
-              $bracket.playersId.onChange(() => {
+              bracket.playersId.onChange(() => {
                 dispatch(
                   changeTournamentBracket({
                     tournamentId: tournament.id,
@@ -217,7 +208,7 @@ export async function joinLobbyRoom(
               })
             })
 
-            $tournament.brackets.onRemove((bracket, bracketId) => {
+            tournament.brackets.onRemove((bracket, bracketId) => {
               dispatch(
                 removeTournamentBracket({
                   tournamendId: tournament.id,
@@ -227,7 +218,7 @@ export async function joinLobbyRoom(
             })
           })
 
-          $state.tournaments.onRemove((tournament) => {
+          room.state.tournaments.onRemove((tournament) => {
             dispatch(removeTournament(tournament))
           })
 
