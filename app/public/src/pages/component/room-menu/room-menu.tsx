@@ -15,8 +15,8 @@ import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
-import "./room-menu.css"
 import { IngameRoomsList } from "./game-rooms-menu"
+import "./room-menu.css"
 
 export default function RoomMenu() {
   const dispatch = useAppDispatch()
@@ -85,11 +85,11 @@ export default function RoomMenu() {
       </p>
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
-        <Tab><img src="/assets/ui/quickplay.png" alt="" />{t("quick_play")}</Tab>
-        <Tab><img src="/assets/ui/ranked.png" alt="" />{t("ranked_match")}</Tab>
-        <Tab><img src="/assets/ui/scribble.png" alt="" />{t("smeargle_scribble")}</Tab>
-        <Tab><img src="/assets/ui/custom.png" alt="" />{t("custom_room")}</Tab>
-        <Tab><img src="/assets/ui/spectate.svg" alt="" />{t("in_game")}</Tab>
+        <Tab><img src="/assets/ui/quickplay.png" alt="" /><span>{t("quick_play")}</span></Tab>
+        <Tab><img src="/assets/ui/ranked.png" alt="" /><span>{t("ranked_match_short")}</span></Tab>
+        <Tab><img src="/assets/ui/scribble.png" alt="" /><span>{t("smeargle_scribble_short")}</span></Tab>
+        <Tab><img src="/assets/ui/custom.png" alt="" /><span>{t("custom_room_short")}</span></Tab>
+        <Tab><img src="/assets/ui/spectate.svg" alt="" /><span>{t("in_game")}</span></Tab>
       </TabList>
       <TabPanel>
         <RoomList onRoomAction={onRoomAction} />

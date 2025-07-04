@@ -94,3 +94,11 @@
 .react-tabs__tab--selected.icon-tab::after {
   content: none;
 }
+
+.react-tabs__tab img {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5em;
+  vertical-align: text-bottom;
+  border-radius: 50%;
+}

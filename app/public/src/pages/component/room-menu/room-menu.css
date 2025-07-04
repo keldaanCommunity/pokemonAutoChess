@@ -1,6 +1,7 @@
 .room-menu {
   display: flex;
   flex-direction: column;
+  container-type: inline-size;
 }
 
 .room-menu .subtitle {
@@ -8,14 +9,6 @@
   color: white;
   font-size: 1.5rem;
   margin-top: 1em;
-}
-
-.room-menu .react-tabs__tab img {
-  width: 1.5em;
-  height: 1.5em;
-  margin-right: 0.5em;
-  vertical-align: text-bottom;
-  border-radius: 50%;
 }
 
 .room-menu .tab-tournament.react-tabs__tab-panel--selected {
@@ -54,4 +47,15 @@ section.room-menu .room-menu > ul {
 .room-menu .room-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+@container (width < 900px) {
+  .room-menu .react-tabs__tab:not(:first-child, :last-child) {
+    & img {
+      margin-right: 0;
+    }
+    & span{
+      display: none;
+    }
+  }
 }
