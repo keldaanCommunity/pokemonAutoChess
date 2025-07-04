@@ -14050,7 +14050,7 @@ export class Comfey extends Pokemon {
 
       // delete comfey
       team.delete(entity.id)
-      simulation.board.setValue(entity.positionX, entity.positionY, undefined)
+      simulation.board.setEntityOnCell(entity.positionX, entity.positionY, undefined)
       if (simulation.blueDpsMeter.has(entity.id)) {
         simulation.blueDpsMeter.delete(entity.id)
       }

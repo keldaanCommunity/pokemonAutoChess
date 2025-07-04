@@ -16,7 +16,7 @@ export default class MovingState extends PokemonState {
     super.update(pokemon, dt, board, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = Math.round(500 / getMoveSpeed(pokemon)) // 500ms to move one cell at 50 speed in normal conditions
-      const targetAtRange = this.getNearestTargetAtRange(pokemon,board)
+      const targetAtRange = this.getNearestTargetAtRange(pokemon, board)
       if (pokemon.status.charm && pokemon.canMove) {
         if (
           pokemon.status.charmOrigin &&
@@ -91,7 +91,7 @@ export default class MovingState extends PokemonState {
         }
 
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
         pokemon.orientation = board.orientation(
           x,
           y,
@@ -140,7 +140,7 @@ export default class MovingState extends PokemonState {
           undefined
         )
         // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
       }
     }
   }
