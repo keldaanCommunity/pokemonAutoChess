@@ -124,7 +124,7 @@ export function getPowerScore(board: IDetailledPokemon[]): number {
 }
 
 export function getUnitPowerScore(pkm: Pkm): number {
-  if ([Pkm.PILLAR_CONCRETE, Pkm.PILOSWINE, Pkm.PILLAR_WOOD].includes(pkm)) return 0
+  if ([Pkm.PILLAR_CONCRETE, Pkm.PILLAR_IRON, Pkm.PILLAR_WOOD].includes(pkm)) return 0
   return POWER_SCORE_BY_CATEGORY[getCategory(pkm)] ?? 1
 }
 
