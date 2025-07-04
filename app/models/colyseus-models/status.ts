@@ -1017,7 +1017,9 @@ export default class Status extends Schema implements IStatus {
         pkm.team === Team.RED_TEAM
           ? pkm.simulation.redTeam
           : pkm.simulation.blueTeam
-      if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
+      if (this.possessed) {
+        this.possessedCooldown = Math.max(duration, this.possessedCooldown)
+      } else if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
         this.possessed = true
         duration = this.applyAquaticReduction(duration, pkm)
         pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
