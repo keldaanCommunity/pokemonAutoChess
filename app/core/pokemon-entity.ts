@@ -1228,9 +1228,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (destination) this.moveTo(destination.x, destination.y, board)
       this.status.tree = true
       this.toIdleState()
-      this.addAttack(-10, this, 0, false)
-      this.addDefense(5, this, 0, false)
-      this.addSpecialDefense(5, this, 0, false)
+      this.addAttack(-9, this, 0, false)
+      this.addDefense(10, this, 0, false)
+      this.addSpecialDefense(10, this, 0, false)
     }
 
     if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {
