@@ -2,9 +2,16 @@ import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
 import { Client, Room } from "colyseus"
 import admin from "firebase-admin"
+import { nanoid } from "nanoid"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/matter/mini-game"
+import {
+  clearPendingGame,
+  getPendingGame,
+  givePlayerTimeout,
+  setPendingGame
+} from "../core/pending-game-manager"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -16,8 +23,8 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
-  PRECOMPUTED_REGIONAL_MONS,
-  getPokemonData
+  getPokemonData,
+  PRECOMPUTED_REGIONAL_MONS
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
@@ -47,6 +54,7 @@ import {
   PortalCarouselStages,
   UniquePool
 } from "../types/Config"
+import { CloseCodes } from "../types/enum/CloseCodes"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -65,30 +73,28 @@ import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
 } from "../utils/board"
+import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"
 import { shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
+  OnBuyPokemonCommand,
   OnDragDropCombineCommand,
-  OnDragDropPokemonCommand,
   OnDragDropItemCommand,
+  OnDragDropPokemonCommand,
   OnJoinCommand,
   OnLevelUpCommand,
   OnLockCommand,
   OnPickBerryCommand,
   OnPokemonCatchCommand,
-  OnShopRerollCommand,
   OnRemoveFromShopCommand,
   OnSellPokemonCommand,
-  OnBuyPokemonCommand,
+  OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
-import { CloseCodes } from "../types/enum/CloseCodes"
-import { clearPendingGame, getPendingGame, givePlayerTimeout, setPendingGame } from "../core/pending-game-manager"
-import { isValidDate } from "../utils/date"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -140,15 +146,17 @@ export default class GameRoom extends Room<GameState> {
       bracketId: options.bracketId
     })
     // logger.debug(options);
-    this.setState(new GameState(
-      options.preparationId,
-      options.name,
-      options.noElo,
-      options.gameMode,
-      options.minRank,
-      options.maxRank,
-      options.specialGameRule
-    ))
+    this.setState(
+      new GameState(
+        options.preparationId,
+        options.name,
+        options.noElo,
+        options.gameMode,
+        options.minRank,
+        options.maxRank,
+        options.specialGameRule
+      )
+    )
     this.miniGame.create(
       this.state.avatars,
       this.state.floatingItems,
@@ -576,8 +584,13 @@ export default class GameRoom extends Room<GameState> {
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
         const pendingGame = await getPendingGame(this.presence, client.auth.uid)
-        if (!pendingGame && !consented) return // user has reconnected through other ways (new browser/machine/session)
-        else if (pendingGame && isValidDate(pendingGame.reconnectionDeadline) && pendingGame.reconnectionDeadline.getTime() > Date.now()) {
+        if (!pendingGame && !consented)
+          return // user has reconnected through other ways (new browser/machine/session)
+        else if (
+          pendingGame &&
+          isValidDate(pendingGame.reconnectionDeadline) &&
+          pendingGame.reconnectionDeadline.getTime() > Date.now()
+        ) {
           // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
           // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
           return
@@ -883,10 +896,13 @@ export default class GameRoom extends Room<GameState> {
         }
       })
 
-      if (player.titles.has(Title.COLLECTOR) === false && Object.values(PkmIndex).every((pkmIndex) => {
-        const pokemonCollectionItem = usr.pokemonCollection.get(pkmIndex)
-        return pokemonCollectionItem && pokemonCollectionItem.played > 0
-      })) {
+      if (
+        player.titles.has(Title.COLLECTOR) === false &&
+        Object.values(PkmIndex).every((pkmIndex) => {
+          const pokemonCollectionItem = usr.pokemonCollection.get(pkmIndex)
+          return pokemonCollectionItem && pokemonCollectionItem.played > 0
+        })
+      ) {
         player.titles.add(Title.COLLECTOR)
       }
 
@@ -1171,5 +1187,15 @@ export default class GameRoom extends Room<GameState> {
     if (this.roomId === roomId) {
       this.disconnect(CloseCodes.ROOM_DELETED)
     }
+  }
+
+  spawnWanderingPokemon(pkm: Pkm, player: Player, delay: number = 4000) {
+    const client = this.clients.find((cli) => cli.auth.uid === player.id)
+    if (!client) return
+    const id = nanoid()
+    this.state.wanderers.set(id, pkm)
+    this.clock.setTimeout(() => {
+      client.send(Transfer.POKEMON_WANDERING, { id, pkm })
+    }, delay)
   }
 }

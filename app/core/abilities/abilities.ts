@@ -1,3 +1,4 @@
+import { SetSchema } from "@colyseus/schema"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -12763,6 +12764,35 @@ export class MindBendStrategy extends AbilityStrategy {
   }
 }
 
+export class MagnetPullStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const lockDuration = Math.round(3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    // grab an item from an enemy, if none, get a random item from the ground
+    board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      3
+    ).filter(cell => cell.value && cell.value.team !== pokemon.team)
+      .forEach((cell) => {
+        cell.value!.status.triggerLocked(3000, cell.value!)
+      })
+    if (pokemon.player) {
+      const randomSteelPkm = pokemon.simulation.room.state.shop.magnetPull(pokemon, pokemon.player)
+      pokemon.simulation.room.spawnWanderingPokemon(
+        randomSteelPkm,
+        pokemon.player,
+        0
+      )
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13232,5 +13262,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STORED_POWER]: new StoredPowerStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
   [Ability.MIND_BEND]: new MindBendStrategy(),
-  [Ability.COTTON_GUARD]: new CottonGuardStrategy()
+  [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
+  [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
 }

@@ -487,7 +487,8 @@
 		"ENCORE": "Encore",
 		"STORED_POWER": "Stored Power",
 		"MIND_BEND": "Mind Bend",
-		"CHAIN_CRAZED": "Chain Crazed"
+		"CHAIN_CRAZED": "Chain Crazed",
+		"MAGNET_PULL": "Magnet Pull"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1058,6 +1059,7 @@
 		"MR_MIME": "Mr. Mime",
 		"ORIGIN_GIRATINA": "Giratina (Origin)",
 		"PIROUETTE_MELOETTA": "Meloetta (Pirouette)",
+		"MELTAN": "Meltan",
 		"MELMETAL": "Melmetal",
 		"HOOPA": "Hoopa",
 		"HOOPA_UNBOUND": "Hoopa (Unbound)",
@@ -1942,7 +1944,8 @@
 		"ENCORE": "Casts the last ability used by an ally",
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
-		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED"
+		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
+		"MAGNET_PULL": "Enemies in 3 tile radius are LOCKED for [3,SP] seconds. Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

@@ -5767,6 +5767,23 @@ export class Palkia extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Meltan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.AMORPHOUS])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.MELMETAL
+  evolutionRule = new CountEvolutionRule(6)
+  hp = 150
+  atk = 16
+  speed = 36
+  def = 10
+  speDef = 5
+  maxPP = 110
+  range = 1
+  skill = Ability.MAGNET_PULL
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
 export class Melmetal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.AMORPHOUS])
   rarity = Rarity.LEGENDARY
@@ -19986,5 +20003,6 @@ export const PokemonClasses: Record<
   [Pkm.MASQUERAIN]: Masquerain,
   [Pkm.GOSSIFLEUR]: Gossifleur,
   [Pkm.ELDEGOSS]: Eldegoss,
-  [Pkm.FURFROU]: Furfrou
+  [Pkm.FURFROU]: Furfrou,
+  [Pkm.MELTAN]: Meltan
 }

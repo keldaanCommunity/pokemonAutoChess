@@ -507,6 +507,7 @@ export enum Pkm {
   MEGANIUM = "MEGANIUM",
   MELMETAL = "MELMETAL",
   MELOETTA = "MELOETTA",
+  MELTAN = "MELTAN",
   MEOWSTIC_FEMALE = "MEOWSTIC_FEMALE",
   MEOWSTIC_MALE = "MEOWSTIC_MALE",
   MEOWTH = "MEOWTH",
@@ -1926,7 +1927,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.STAKATAKA]: "0805",
   [Pkm.BLACEPHALON]: "0806",
   [Pkm.ZERAORA]: "0807",
-  //[Pkm.MELTAN]: "0808",
+  [Pkm.MELTAN]: "0808",
   [Pkm.MELMETAL]: "0809",
 
   // Gen 8
@@ -2727,7 +2728,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MR_MIME]: Pkm.MIME_JR,
   [Pkm.ORIGIN_GIRATINA]: Pkm.GIRATINA,
   [Pkm.PIROUETTE_MELOETTA]: Pkm.MELOETTA,
-  [Pkm.MELMETAL]: Pkm.MELMETAL,
+  [Pkm.MELTAN]: Pkm.MELTAN,
+  [Pkm.MELMETAL]: Pkm.MELTAN,
   [Pkm.HOOPA]: Pkm.HOOPA,
   [Pkm.HOOPA_UNBOUND]: Pkm.HOOPA,
   [Pkm.SILVALLY]: Pkm.TYPE_NULL,
@@ -6118,6 +6120,11 @@ export const AnimationConfig: {
     attack: AnimationType.Scratch,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
+  },
+  [Pkm.MELTAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
   },
   [Pkm.MELMETAL]: {
     attack: AnimationType.Strike,
