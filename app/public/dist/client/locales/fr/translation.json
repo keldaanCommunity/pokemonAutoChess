@@ -1886,7 +1886,7 @@
 		"BONE_ARMOR": "Vole vers l'ennemi le plus faible et lui inflige [20,40,80,SP] SPECIAL, se soignant à hauteur des dégâts infligés. Si la cible est mise KO, le lanceur récupère ses os pour fabriquer une armure, gagnant [4,8,12] DEF et SPE_DEF.",
 		"RAGE": "Gagne le statut RAGE pendant 3 secondes et [10,SP]% d'ATK de base pour chaque tranche de 10% des HP max perdus.",
 		"BRICK_BREAK": "Inflige [150,SP]% de l'ATK comme TRUE. Brise la PROTECT et le Miroir Magik de la cible.",
-		"TAUNT": "Gagne [25,SP=0,5]% de vos HP max en tant que SHIELD et force les ennemis dans un rayon de 2 cases à vous choisir comme cible.",
+		"TAUNT": "Gagne [25,SP=0.5]% de vos HP max en tant que SHIELD et force les ennemis dans un rayon de 2 cases à vous choisir comme cible.",
 		"BULK_UP": "Augmente l'ATK de base et la DEF de base de [50,SP]%.",
 		"CUT": "Inflige [40,SP]% des HP max de la cible comme SPECIAL et WOUND pendant 5 secondes.",
 		"FLY": "S'élève dans les airs et retombe sur la cible la plus éloignée après 1 seconde, infligeant [400,SP]% de l'ATK en tant que SPECIAL.",
