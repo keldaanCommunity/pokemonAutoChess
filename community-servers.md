@@ -18,6 +18,15 @@ The official server maintained by the creators of Pokemon Auto Chess
 
 German Community for Pokemon Auto Chess
 
+# China PAC
+
+- url: https://pokev9.52kx.net
+- logo: /assets/community-servers/pac-cn.png
+- creator: dforel
+- location: china
+
+China Community Server for Pokemon Auto Chess
+
 # Eternara PAC
 
 - url: https://eternara.site
@@ -74,12 +83,3 @@ UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el 
 - location: Australia
 
 Australian Community Server for Pokemon Auto Chess
-
-# China PAC
-
-- url: https://pokev9.52kx.net
-- logo: /assets/community-servers/pac-cn.png
-- creator: dforel
-- location: china
-
-China Community Server for Pokemon Auto Chess
