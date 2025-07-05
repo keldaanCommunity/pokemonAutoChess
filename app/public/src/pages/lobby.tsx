@@ -3,20 +3,23 @@ import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import GameState from "../../../rooms/states/game-state"
+import { throttle } from "../../../utils/function"
+import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { resetLobby } from "../stores/LobbyStore"
-import { logOut, setPendingGameId, setErrorAlertMessage } from "../stores/NetworkStore"
-import { Announcements } from "./component/announcements/announcements"
-import AvailableRoomMenu from "./component/available-room-menu/available-room-menu"
-import { GameRoomsMenu } from "./component/available-room-menu/game-rooms-menu"
+import {
+  logOut,
+  setErrorAlertMessage,
+  setPendingGameId
+} from "../stores/NetworkStore"
+import { EventsMenu } from "./component/events-menu/events-menu"
 import LeaderboardMenu from "./component/leaderboard/leaderboard-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { Modal } from "./component/modal/modal"
+import RoomMenu from "./component/room-menu/room-menu"
 import { cc } from "./utils/jsx"
-import { joinLobbyRoom } from "../game/lobby-logic"
-import { localStore, LocalStoreKeys } from "./utils/store"
-import GameState from "../../../rooms/states/game-state"
-import { throttle } from "../../../utils/function"
+import { LocalStoreKeys, localStore } from "./utils/store"
 import "./lobby.css"
 
 export default function Lobby() {
@@ -24,12 +27,13 @@ export default function Lobby() {
   const navigate = useNavigate()
   const lobby = useAppSelector((state) => state.network.lobby)
   const client = useAppSelector((state) => state.network.client)
-  const networkError = useAppSelector(state => state.network.error)
-  const pendingGameId = useAppSelector(state => state.network.pendingGameId)
+  const networkError = useAppSelector((state) => state.network.error)
+  const pendingGameId = useAppSelector((state) => state.network.pendingGameId)
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
-  const showGameReconnect = pendingGameId != null && gameRooms.some((r) => r.roomId === pendingGameId)
+  const showGameReconnect =
+    pendingGameId != null && gameRooms.some((r) => r.roomId === pendingGameId)
 
   const { t } = useTranslation()
 
@@ -54,7 +58,9 @@ export default function Lobby() {
   const reconnectToGame = throttle(async function reconnectToGame() {
     const idToken = await firebase.auth().currentUser?.getIdToken()
     if (idToken && pendingGameId) {
-      const game: Room<GameState> = await client.joinById(pendingGameId, { idToken })
+      const game: Room<GameState> = await client.joinById(pendingGameId, {
+        idToken
+      })
       localStore.set(
         LocalStoreKeys.RECONNECTION_GAME,
         { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
@@ -114,6 +120,7 @@ function MainLobby() {
   const { t } = useTranslation()
   return (
     <div className="main-lobby">
+      <img src="/assets/ui/pac_fullwidth.svg" alt="Pokémon Auto Chess" id="lobby-logo" />
       <nav className="main-lobby-nav">
         <ul>
           <li
@@ -124,20 +131,20 @@ function MainLobby() {
             {t("leaderboard")}
           </li>
           <li
-            onClick={() => setActive("available_rooms")}
-            className={cc({ active: activeSection === "available_rooms" })}
+            onClick={() => setActive("rooms")}
+            className={cc({ active: activeSection === "rooms" })}
           >
             <img width={32} height={32} src={`assets/ui/room.svg`} />
             {t("rooms")}
           </li>
-          <li
+          {/*<li
             onClick={() => setActive("game_rooms")}
             className={cc({ active: activeSection === "game_rooms" })}
           >
             <img width={32} height={32} src={`assets/ui/spectate.svg`} />
             {t("in_game")}
           </li>
-          {/*<li
+          <li
             onClick={() => setActive("online")}
             className={cc({ active: activeSection === "online" })}
           >
@@ -145,11 +152,11 @@ function MainLobby() {
             {t("online")}
           </li>*/}
           <li
-            onClick={() => setActive("announcements")}
-            className={cc({ active: activeSection === "announcements" })}
+            onClick={() => setActive("events")}
+            className={cc({ active: activeSection === "events" })}
           >
             <img width={32} height={32} src={`assets/ui/chat.svg`} />
-            {t("announcements")}
+            {t("events")}
           </li>
         </ul>
       </nav>
@@ -161,24 +168,24 @@ function MainLobby() {
         <LeaderboardMenu />
       </section>
       <section
-        className={cc("rooms", { active: activeSection === "available_rooms" })}
+        className={cc("rooms", { active: activeSection === "rooms" })}
       >
-        <AvailableRoomMenu />
+        <RoomMenu />
       </section>
-      <section
+      {/*<section
         className={cc("game_rooms", { active: activeSection === "game_rooms" })}
       >
         <GameRoomsMenu />
       </section>
-      {/*<section className={cc("online", { active: activeSection === "online" })}>
+      <section className={cc("online", { active: activeSection === "online" })}>
         <CurrentUsers />
       </section>*/}
       <section
-        className={cc("announcements", {
-          active: activeSection === "announcements"
+        className={cc("events", {
+          active: activeSection === "events"
         })}
       >
-        <Announcements />
+        <EventsMenu />
       </section>
     </div>
   )

@@ -6,13 +6,27 @@
 
 .lobby-container {
   padding: 10px;
+  padding-top: 90px;
   padding-left: calc(var(--sidebar-width) + 10px);
   width: 100%;
+}
+
+#lobby-logo {
+  position: fixed;
+  top: 0;
+  left: calc(50vw + 45px);
+  transform: translate(-50%);
+  height: 90px;
+  z-index: 1;
 }
 
 .lobby section {
   height: 100%;
   width: 25%;
+}
+
+.lobby section.rooms {
+  width: 50%;
 }
 
 .lobby .user-menu {
@@ -22,9 +36,18 @@
   flex-direction: column;
 }
 
+.lobby .react-tabs__tab img {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: text-bottom;
+  margin-right: 0.5em;
+  border-radius: 50%;
+}
+
 .lobby .user-menu .react-tabs,
 .lobby .user-menu .react-tabs__tab-panel--selected,
-.lobby .room-menu .react-tabs__tab-panel--selected  {
+.lobby .room-menu .react-tabs__tab-panel--selected,
+.lobby .events-menu .react-tabs__tab-panel--selected {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -33,8 +56,12 @@
   padding-right: 2px;
 }
 
-.lobby .room-menu {
+.lobby .room-menu,
+.lobby .events-menu {
+  position: relative;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-lobby ul.react-tabs__tab-list {
@@ -115,6 +142,10 @@
 }
 
 @media (width <= 960px) {
+  #lobby-logo {
+    display: none;
+  }
+
   .lobby nav {
     flex-wrap: wrap;
   }

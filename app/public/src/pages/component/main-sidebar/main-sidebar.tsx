@@ -12,17 +12,17 @@ import { cc } from "../../utils/jsx"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
-import PokeGuesser from "../pokeguesser/pokeguesser"
 import Jukebox from "../jukebox/jukebox"
 import MetaReport from "../meta-report/meta-report"
 import { Modal } from "../modal/modal"
 import GameOptionsModal from "../options/game-options-modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
+import PokeGuesser from "../pokeguesser/pokeguesser"
 import Profile from "../profile/profile"
+import ServersList from "../servers/servers-list"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
-import ServersList from "../servers/servers-list"
 
 import "./main-sidebar.css"
 import { createSelector } from "@reduxjs/toolkit"
@@ -78,11 +78,12 @@ export function MainSidebar(props: MainSidebarProps) {
     }
   }, [])
 
-  const player = useAppSelector(state => state.game.players.find((p) => p.id === state.network.uid))
+  const player = useAppSelector((state) =>
+    state.game.players.find((p) => p.id === state.network.uid)
+  )
   const playersAlive = useAppSelector(
-    createSelector(
-      [(state) => state.game.players],
-      (players) => players.filter((p) => p.life > 0)
+    createSelector([(state) => state.game.players], (players) =>
+      players.filter((p) => p.life > 0)
     )
   )
   function onClickLeave() {
@@ -184,23 +185,36 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && ((!GADGETS.BOT_BUILDER.disabled && profileLevel >= GADGETS.BOT_BUILDER.levelRequired) || profile?.role === Role.ADMIN) && (
-          <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-            {t("bot_builder")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.POKEGUESSER.disabled &&
+            profileLevel >= GADGETS.POKEGUESSER.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink
+              svg="pokeguesser"
+              location="pokeguesser"
+              handleClick={changeModal}
+            >
+              {t("gadget.pokeguesser")}
+            </NavLink>
+          )}
 
-        {page !== "game" && ((!GADGETS.GAMEBOY.disabled && profileLevel >= GADGETS.GAMEBOY.levelRequired) || profile?.role === Role.ADMIN) && (
-          <NavLink svg="gameboy" onClick={() => navigate("/gameboy")}>
-            {t("gadget.gameboy")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.BOT_BUILDER.disabled &&
+            profileLevel >= GADGETS.BOT_BUILDER.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
+              {t("bot_builder")}
+            </NavLink>
+          )}
 
-        {page !== "game" && ((!GADGETS.POKEGUESSER.disabled && profileLevel >= GADGETS.POKEGUESSER.levelRequired) || profile?.role === Role.ADMIN) && (
-          <NavLink svg="pokeguesser" location="pokeguesser" handleClick={changeModal}>
-            {t("gadget.pokeguesser")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.GAMEBOY.disabled &&
+            profileLevel >= GADGETS.GAMEBOY.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="gameboy" onClick={() => navigate("/gameboy")}>
+              {t("gadget.gameboy")}
+            </NavLink>
+          )}
 
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
@@ -237,12 +251,11 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("options")}
         </NavLink>
 
-        {page === "game" && document.fullscreenEnabled && <NavLink
-          svg="fullscreen"
-          onClick={toggleFullScreen}
-        >
-          {t("toggle_fullscreen")}
-        </NavLink>}
+        {page === "game" && document.fullscreenEnabled && (
+          <NavLink svg="fullscreen" onClick={toggleFullScreen}>
+            {t("toggle_fullscreen")}
+          </NavLink>
+        )}
 
         <div className="spacer"></div>
 
@@ -250,7 +263,8 @@ export function MainSidebar(props: MainSidebarProps) {
           <NavLink
             svg="players"
             className="community-servers"
-            location="servers" handleClick={changeModal}
+            location="servers"
+            handleClick={changeModal}
           >
             {t("community_servers")}
           </NavLink>
@@ -442,7 +456,8 @@ function Modals({
         onClose={closeModal}
         show={modal === "servers"}
         className="servers-modal"
-        header={t("community_servers")}>
+        header={t("community_servers")}
+      >
         <ServersList />
       </Modal>
       <TeamBuilderModal

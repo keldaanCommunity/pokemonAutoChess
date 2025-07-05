@@ -1,6 +1,7 @@
 .room-menu {
   display: flex;
   flex-direction: column;
+  container-type: inline-size;
 }
 
 .room-menu .subtitle {
@@ -21,8 +22,7 @@
 }
 
 .room-menu .play-button {
-  width: 100%;
-  margin: 0.5em auto 0 auto;
+  margin: 0.5em 0 0 auto;
 }
 
 .room-menu .rank.icon {
@@ -42,4 +42,20 @@ section.room-menu .room-menu > ul {
 
 .room-menu li {
   list-style: none;
+}
+
+.room-menu .room-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@container (width < 900px) {
+  .room-menu .react-tabs__tab:not(:first-child, :last-child) {
+    & img {
+      margin-right: 0;
+    }
+    & span{
+      display: none;
+    }
+  }
 }
