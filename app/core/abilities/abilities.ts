@@ -8522,34 +8522,18 @@ export class MantisBladesStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = pokemon.stars === 1 ? 30 : pokemon.stars === 2 ? 60 : 120
+    const damage = pokemon.stars === 1 ? 10 : pokemon.stars === 2 ? 20 : 40
 
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.PHYSICAL,
-      pokemon,
-      crit,
-      true
-    )
-
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit,
-      true
-    )
-
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.TRUE,
-      pokemon,
-      crit,
-      true
-    )
+    for (const damageType of [AttackType.PHYSICAL, AttackType.SPECIAL, AttackType.TRUE]) {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        damageType,
+        pokemon,
+        crit,
+        true
+      )
+    }
   }
 }
 
@@ -12763,6 +12747,48 @@ export class MindBendStrategy extends AbilityStrategy {
   }
 }
 
+export class SteamrollerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = ([0.5, 1, 2][pokemon.stars - 1] ?? 2) * pokemon.speed
+
+    const farthestCoordinate =
+      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    if (farthestCoordinate) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        farthestCoordinate.x,
+        farthestCoordinate.y
+      )
+      cells.forEach((cell, i) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (chance(0.5, pokemon)) {
+            cell.value.status.triggerFlinch(
+              3000,
+              cell.value,
+              pokemon
+            )
+          }
+        }
+      })
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13232,5 +13258,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STORED_POWER]: new StoredPowerStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
   [Ability.MIND_BEND]: new MindBendStrategy(),
-  [Ability.COTTON_GUARD]: new CottonGuardStrategy()
+  [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
+  [Ability.STEAMROLLER]: new SteamrollerStrategy(),
 }

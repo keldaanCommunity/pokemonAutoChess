@@ -2003,14 +2003,14 @@ export class PorygonZ extends Pokemon {
 
 export class Sewaddle extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.SWADLOON
-  hp = 140
-  atk = 13
+  hp = 60
+  atk = 5
   speed = 54
-  def = 12
-  speDef = 8
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
@@ -2019,14 +2019,14 @@ export class Sewaddle extends Pokemon {
 
 export class Swadloon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.LEAVANNY
-  hp = 280
-  atk = 22
+  hp = 110
+  atk = 11
   speed = 54
-  def = 20
-  speDef = 12
+  def = 6
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
@@ -2035,13 +2035,13 @@ export class Swadloon extends Pokemon {
 
 export class Leavanny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.BUG])
-  rarity = Rarity.ULTRA
+  rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 400
-  atk = 40
+  hp = 190
+  atk = 23
   speed = 54
-  def = 16
-  speDef = 12
+  def = 8
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.MANTIS_BLADES
@@ -3648,49 +3648,49 @@ export class Meganium extends Pokemon {
 
 export class Venipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.ULTRA
   stars = 1
   evolution = Pkm.WHIRLIPEDE
-  hp = 70
-  atk = 4
-  speed = 61
+  hp = 90
+  atk = 12
+  speed = 72
   def = 6
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE
+  skill = Ability.STEAMROLLER
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Whirlipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.ULTRA
   stars = 2
   evolution = Pkm.SCOLIPEDE
-  hp = 120
-  atk = 8
-  speed = 61
-  def = 6
-  speDef = 4
+  hp = 180
+  atk = 24
+  speed = 72
+  def = 10
+  speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE
+  skill = Ability.STEAMROLLER
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Scolipede extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.ULTRA
   stars = 3
-  hp = 210
-  atk = 17
-  speed = 61
-  def = 6
-  speDef = 6
+  hp = 300
+  atk = 36
+  speed = 72
+  def = 14
+  speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT
-  attackSprite = AttackSprite.GRASS_MELEE
+  skill = Ability.STEAMROLLER
+  attackSprite = AttackSprite.BUG_MELEE
 }
 
 export class Spheal extends Pokemon {
@@ -16878,7 +16878,7 @@ export class Palossand extends Pokemon {
 }
 
 export class Skorupi extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.POISON])
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.BUG, Synergy.POISON])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAPION
