@@ -920,9 +920,9 @@ export default abstract class PokemonState {
         pokemon.pp = 0
         pokemon.status.tree = false
         pokemon.toMovingState()
-        pokemon.addAttack(10, pokemon, 0, false)
-        pokemon.addDefense(-5, pokemon, 0, false)
-        pokemon.addSpecialDefense(-5, pokemon, 0, false)
+        pokemon.addAttack(9, pokemon, 0, false)
+        pokemon.addDefense(-10, pokemon, 0, false)
+        pokemon.addSpecialDefense(-10, pokemon, 0, false)
       }
     }
   }
