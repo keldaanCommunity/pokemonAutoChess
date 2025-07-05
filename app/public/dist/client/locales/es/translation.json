@@ -2694,7 +2694,7 @@
 		"PRIMEAPE": "Primeape se enoja al ser KO, obteniendo 1 ATK permanente. Tras ser KO 10 veces, Primeape evoluciona a Annihilape.",
 		"ZYGARDE": "Zygarde absorberá sus células, transformándose a otra forma. Después de obtener 5 acumulaciones de efecto GROUND, absorbe todas sus células, consiguiendo su forma completa.",
 		"GLIMMORA": "Tras bajar del 50% de sus HP máximos, esta unidad lanza púas tóxicas en un rectángulo de 2x3 frente a si misma, causando 20 de daño. Las púas tóxicas aplican POISONNED a los Pokémon, a menos que sean POISON.",
-		"PILLAR": "Construye un pilar movible que bloquea el camino de los enemigos, con HP, DEF y SPE_DEF incrementando según STAR de la unidad.",
+		"PILLAR": "Construye [1,1,2] pilares móviles que bloquean el camino de los enemigos, con HP, DEF y SPE_DEF incrementando según STAR de la unidad.",
 		"INANIMATE": "Los objetos inanimados no pueden ser copiados, puestos en la banca o vendidos. No pueden moverse ni atacar, y son inmunes a los efectos de estado.",
 		"BERSERK": "Gana 5 de AP cada vez que un Pokémon se ve afectado por su habilidad.",
 		"APPLIN": "Appli está buscando una SWEET_APPLE, una TART_APPLE o una SIRUPY_APPLE.",
