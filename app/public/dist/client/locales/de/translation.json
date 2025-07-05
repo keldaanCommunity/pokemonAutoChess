@@ -1572,7 +1572,7 @@
 		"MAWASHI_GERI": "Angebote [60,SP] SPECIAL. Doppelter Schaden, wenn der Angreifer einen besseren ATK als das Ziel hat",
 		"FORECAST": "Gibt Ihrem Team [10,SP] SHIELD sowie einen zusätzlichen Bonus je nach Wetterlage:\n SNOW: gibt auch [2,SP] DEF / SPE_DEF\n SUN: gibt auch [4,SP] ATK\n RAIN: Gibt auch [8,SP] PP",
 		"X_SCISSOR": "Fügt dem Ziel zweimal [10,20,40,60,SP] TRUE zu.",
-		"MANTIS_BLADES": "Entfesselt drei Klingen die dem Ziel jeweils [30,60,120,SP] PHYSICAL, SPECIAL und TRUE zufügen.",
+		"MANTIS_BLADES": "Entfesselt drei Klingen die dem Ziel jeweils [10,20,40,SP] PHYSICAL, SPECIAL und TRUE zufügen.",
 		"PLASMA_FIST": "Bietet [120,SP] SPECIAL mit 25 % Lebensraub",
 		"SPECTRAL_THIEF": "Verschwindet und erscheint wieder, verursacht [50,SP] SPECIAL und stiehlt dem Ziel den gesamten Statistik-Boost",
 		"GEOMANCY": "Erhalte [15,SP] ATK, [10,SP] SPE_DEF und 20 SPEED",
