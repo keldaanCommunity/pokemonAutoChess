@@ -24,7 +24,7 @@ export default class AttackingState extends PokemonState {
       pokemon.cooldown = Math.round(1000 / (0.4 + speed * 0.007))
 
       // first, try to hit the same target than previous attack
-      let target = board.getValue(pokemon.targetX, pokemon.targetY)
+      let target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
 
       if (pokemon.effects.has(EffectEnum.MERCILESS)) {
         const candidates = this.getTargetsAtRange(pokemon, board)
@@ -37,21 +37,21 @@ export default class AttackingState extends PokemonState {
         }
       } else if (pokemon.status.confusion) {
         target = this.getTargetWhenConfused(pokemon, board)
-      } else if(!target || target.id !== pokemon.targetEntityId){
+      } else if (!target || target.id !== pokemon.targetEntityId) {
         // previous target has moved, check if still at range
         const previousTarget = pokemon.simulation.blueTeam.get(pokemon.targetEntityId) || pokemon.simulation.redTeam.get(pokemon.targetEntityId)
-        if(previousTarget && previousTarget.isTargettableBy(pokemon) && distanceC(
-            pokemon.positionX,
-            pokemon.positionY,
-            previousTarget?.positionX,
-            previousTarget?.positionY
-          ) <= pokemon.range){
-            // updating target coordinates
-            target = previousTarget as PokemonEntity
-          } else {
-             // if target is no longer alive or at range, retargeting
-            target = this.getNearestTargetAtRange(pokemon,board)
-          }
+        if (previousTarget && previousTarget.isTargettableBy(pokemon) && distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          previousTarget?.positionX,
+          previousTarget?.positionY
+        ) <= pokemon.range) {
+          // updating target coordinates
+          target = previousTarget as PokemonEntity
+        } else {
+          // if target is no longer alive or at range, retargeting
+          target = this.getNearestTargetAtRange(pokemon, board)
+        }
       }
 
       // no target at range, changing to moving state

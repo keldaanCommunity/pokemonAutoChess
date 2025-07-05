@@ -357,7 +357,7 @@ export default class BattleManager {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
         } else if (previousValue === true) {
-          pkm.removeRageEffect()
+          pkm.removeRageEffect(pokemon.items.has(Item.BERSERK_GENE))
         }
       }
     }

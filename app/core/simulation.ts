@@ -255,11 +255,11 @@ export default class Simulation extends Schema implements ISimulation {
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
     if (pokemon.meal) {
-      this.applyDishEffects(pokemonEntity, pokemon.meal)      
+      this.applyDishEffects(pokemonEntity, pokemon.meal)
       pokemon.action = PokemonActionState.IDLE
     }
 
-    this.board.setValue(
+    this.board.setEntityOnCell(
       pokemonEntity.positionX,
       pokemonEntity.positionY,
       pokemonEntity
@@ -296,7 +296,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (team === Team.BLUE_TEAM) {
       outerloop: for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
-          if (this.board.getValue(x, y) === undefined) {
+          if (this.board.getEntityOnCell(x, y) === undefined) {
             candidateX = x
             candidateY = y
             break outerloop
@@ -306,7 +306,7 @@ export default class Simulation extends Schema implements ISimulation {
     } else {
       outerloop: for (let y = 0; y < this.board.rows; y++) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
-          if (this.board.getValue(x, y) === undefined) {
+          if (this.board.getEntityOnCell(x, y) === undefined) {
             candidateX = x
             candidateY = y
             break outerloop
@@ -368,7 +368,7 @@ export default class Simulation extends Schema implements ISimulation {
         x < this.board.columns &&
         y >= 0 &&
         y < this.board.rows &&
-        this.board.getValue(x, y) === undefined
+        this.board.getEntityOnCell(x, y) === undefined
       ) {
         return { x, y }
       }
@@ -709,7 +709,7 @@ export default class Simulation extends Schema implements ISimulation {
       team.forEach((pokemon) => {
         if (pokemon.items.has(Item.CLEANSE_TAG)) {
           ;[-1, 0, 1].forEach((offset) => {
-            const ally = this.board.getValue(
+            const ally = this.board.getEntityOnCell(
               pokemon.positionX + offset,
               pokemon.positionY
             )
@@ -722,7 +722,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         if (pokemon.items.has(Item.GRACIDEA_FLOWER)) {
           ;[-1, 0, 1].forEach((offset) => {
-            const value = this.board.getValue(
+            const value = this.board.getEntityOnCell(
               pokemon.positionX + offset,
               pokemon.positionY
             )
@@ -734,7 +734,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         if (pokemon.items.has(Item.EXP_SHARE)) {
           ;[-1, 1].forEach((offset) => {
-            const value = this.board.getValue(
+            const value = this.board.getEntityOnCell(
               pokemon.positionX + offset,
               pokemon.positionY
             )
@@ -749,7 +749,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         if (pokemon.passive === Passive.LUVDISC) {
           const lovers = [-1, 1].map((offset) =>
-            this.board.getValue(pokemon.positionX + offset, pokemon.positionY)
+            this.board.getEntityOnCell(pokemon.positionX + offset, pokemon.positionY)
           )
           if (lovers[0] && lovers[1]) {
             const bestAtk = Math.max(lovers[0].atk, lovers[1].atk)
@@ -1471,7 +1471,7 @@ export default class Simulation extends Schema implements ISimulation {
         const x = randomBetween(0, this.board.columns - 1)
         const y = randomBetween(0, this.board.rows - 1)
         //logger.debug('lightning at ' + x + ' ' + y)
-        const pokemonOnCell = this.board.getValue(x, y)
+        const pokemonOnCell = this.board.getEntityOnCell(x, y)
         if (pokemonOnCell) {
           const nbElectricQuartz = pokemonOnCell.player
             ? count(pokemonOnCell.player.items, Item.ELECTRIC_QUARTZ)
@@ -1799,7 +1799,7 @@ export default class Simulation extends Schema implements ISimulation {
 
         for (const y of rowRange) {
           for (let x = 0; x < this.board.columns; x++) {
-            const pokemonHit = this.board.getValue(x, y)
+            const pokemonHit = this.board.getEntityOnCell(x, y)
             this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
             if (pokemonHit) {
               if (pokemonHit.team === team) {
@@ -1824,14 +1824,14 @@ export default class Simulation extends Schema implements ISimulation {
                 if (isRed) {
                   while (
                     newY > 0 &&
-                    this.board.getValue(x, newY - 1) === undefined
+                    this.board.getEntityOnCell(x, newY - 1) === undefined
                   ) {
                     newY--
                   }
                 } else {
                   while (
                     newY < this.board.rows - 1 &&
-                    this.board.getValue(x, newY + 1) === undefined
+                    this.board.getEntityOnCell(x, newY + 1) === undefined
                   ) {
                     newY++
                   }

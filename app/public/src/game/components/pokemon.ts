@@ -134,6 +134,7 @@ export default class PokemonSprite extends DraggableObject {
   meal: Item | "" = ""
   mealSprite: GameObjects.Sprite | undefined
   inBattle: boolean = false
+  floatingTween?: Phaser.Tweens.Tween
 
   constructor(
     scene: GameScene | DebugScene,
@@ -269,6 +270,9 @@ export default class PokemonSprite extends DraggableObject {
     }
     if (pokemon.items.has(Item.BERSERK_GENE)) {
       this.addBerserkEffect()
+    }
+    if (pokemon.items.has(Item.AIR_BALLOON)) {
+      this.addFloatingAnimation()
     }
     this.add(this.itemsContainer)
 
@@ -1237,12 +1241,34 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.setTint(0xff0000)
   }
 
-  removeRageEffect() {
-    this.sprite.clearTint()
+  removeRageEffect(hasBerserkGene: boolean = false) {
+    if (hasBerserkGene) {
+      this.addBerserkEffect()
+    } else {
+      this.sprite.clearTint()
+    }
   }
 
   addBerserkEffect() {
     this.sprite.setTint(0x00ff00)
+  }
+
+  addFloatingAnimation() {
+    this.floatingTween = this.scene.tweens.add({
+      targets: this.sprite,
+      y: { from: this.sprite.y - 10, to: this.sprite.y - 20 },
+      duration: 500,
+      ease: "Sine.easeInOut",
+      yoyo: true,
+      repeat: -1
+    })
+  }
+
+  removeFloatingAnimation() {
+    if (this.floatingTween) {
+      this.floatingTween.stop()
+      this.floatingTween = undefined
+    }
   }
 
   addFlowerTrick() {
