@@ -21,6 +21,7 @@ import {
   TMs,
   WeatherRocks
 } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
@@ -56,7 +57,6 @@ import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
-import { Passive } from "../../types/enum/Passive"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string

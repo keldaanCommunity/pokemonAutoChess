@@ -205,7 +205,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const passiveEffects = PassiveEffects[this.passive]
     if (passiveEffects) {
       for (const effect of passiveEffects) {
-        this.effectsSet.add(effect)
+        this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
       }
     }
   }
@@ -1212,6 +1212,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.passive = Passive.MIMIKYU_BUSTED
       this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
+      if (this.player) {
+        this.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+      }
     }
 
     if (this.passive === Passive.DARMANITAN && this.life < 0.3 * this.hp) {

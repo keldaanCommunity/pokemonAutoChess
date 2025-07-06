@@ -12,7 +12,6 @@ import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { displayAbility } from "../components/abilities-animations"
-import { displayBoost } from "../components/boosts-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
 import { DEPTH } from "../depths"
@@ -332,22 +331,22 @@ export class DebugScene extends Phaser.Scene {
       }
 
       if (status === "BOOST/ATK") {
-        this.displayBoost(Stat.ATK)
+        this.pokemon.displayBoost(Stat.ATK, true)
       }
       if (status === "BOOST/AP") {
-        this.displayBoost(Stat.AP)
+        this.pokemon.displayBoost(Stat.AP, true)
       }
       if (status === "BOOST/DEF") {
-        this.displayBoost(Stat.DEF)
+        this.pokemon.displayBoost(Stat.DEF, true)
       }
       if (status === "BOOST/SPE_DEF") {
-        this.displayBoost(Stat.SPE_DEF)
+        this.pokemon.displayBoost(Stat.SPE_DEF, true)
       }
       if (status === "BOOST/SHIELD") {
-        this.displayBoost(Stat.SHIELD)
+        this.pokemon.displayBoost(Stat.SHIELD, true)
       }
       if (status === "BOOST/SPEED") {
-        this.displayBoost(Stat.SPEED)
+        this.pokemon.displayBoost(Stat.SPEED, true)
       }
     }
   }
@@ -401,15 +400,6 @@ export class DebugScene extends Phaser.Scene {
     }
     showAbilityAnim()
     this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
-  }
-
-  displayBoost(stat: Stat) {
-    const coords = transformEntityCoordinates(
-      this.pokemon!.positionX,
-      this.pokemon!.positionY,
-      false
-    )
-    displayBoost(this, coords[0], coords[1], stat)
   }
 
   shakeCamera(intensity: number, duration: number) {

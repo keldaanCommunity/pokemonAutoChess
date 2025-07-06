@@ -507,6 +507,7 @@ export enum Pkm {
   MEGANIUM = "MEGANIUM",
   MELMETAL = "MELMETAL",
   MELOETTA = "MELOETTA",
+  MELTAN = "MELTAN",
   MEOWSTIC_FEMALE = "MEOWSTIC_FEMALE",
   MEOWSTIC_MALE = "MEOWSTIC_MALE",
   MEOWTH = "MEOWTH",
@@ -671,6 +672,7 @@ export enum Pkm {
   REMORAID = "REMORAID",
   RESHIRAM = "RESHIRAM",
   REUNICLUS = "REUNICLUS",
+  REVAVROOM = "REVAVROOM",
   RHYDON = "RHYDON",
   RHYHORN = "RHYHORN",
   RHYPERIOR = "RHYPERIOR",
@@ -893,6 +895,7 @@ export enum Pkm {
   VANILLITE = "VANILLITE",
   VANILLUXE = "VANILLUXE",
   VAPOREON = "VAPOREON",
+  VAROOM = "VAROOM",
   VELUZA = "VELUZA",
   VENIPEDE = "VENIPEDE",
   VENOMOTH = "VENOMOTH",
@@ -1926,7 +1929,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.STAKATAKA]: "0805",
   [Pkm.BLACEPHALON]: "0806",
   [Pkm.ZERAORA]: "0807",
-  //[Pkm.MELTAN]: "0808",
+  [Pkm.MELTAN]: "0808",
   [Pkm.MELMETAL]: "0809",
 
   // Gen 8
@@ -2106,8 +2109,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.FINIZEN]: "0963",
   //[Pkm.PALAFIN]: "0964",
   //[Pkm.PALAFIN_HERO]: "0964-0001",
-  //[Pkm.VAROOM]: "0965",
-  //[Pkm.REVAVROOM]: "0966",
+  [Pkm.VAROOM]: "0965",
+  [Pkm.REVAVROOM]: "0966",
   [Pkm.CYCLIZAR]: "0967",
   //[Pkm.ORTHWOEM]: "0968",
   [Pkm.GLIMMET]: "0969",
@@ -2727,7 +2730,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MR_MIME]: Pkm.MIME_JR,
   [Pkm.ORIGIN_GIRATINA]: Pkm.GIRATINA,
   [Pkm.PIROUETTE_MELOETTA]: Pkm.MELOETTA,
-  [Pkm.MELMETAL]: Pkm.MELMETAL,
+  [Pkm.MELTAN]: Pkm.MELTAN,
+  [Pkm.MELMETAL]: Pkm.MELTAN,
   [Pkm.HOOPA]: Pkm.HOOPA,
   [Pkm.HOOPA_UNBOUND]: Pkm.HOOPA,
   [Pkm.SILVALLY]: Pkm.TYPE_NULL,
@@ -3150,7 +3154,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MASQUERAIN]: Pkm.SURSKIT,
   [Pkm.GOSSIFLEUR]: Pkm.GOSSIFLEUR,
   [Pkm.ELDEGOSS]: Pkm.GOSSIFLEUR,
-  [Pkm.FURFROU]: Pkm.FURFROU
+  [Pkm.FURFROU]: Pkm.FURFROU,
+  [Pkm.VAROOM]: Pkm.VAROOM,
+  [Pkm.REVAVROOM]: Pkm.VAROOM
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -6119,6 +6125,11 @@ export const AnimationConfig: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
+  [Pkm.MELTAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl
+  },
   [Pkm.MELMETAL]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Punch,
@@ -8280,6 +8291,16 @@ export const AnimationConfig: {
   [Pkm.FURFROU]: {
     attack: AnimationType.Attack,
     ability: AnimationType.TailWhip,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.VAROOM]:{
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.REVAVROOM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
     emote: AnimationType.Shoot
   }
 }

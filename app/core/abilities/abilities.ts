@@ -20,7 +20,6 @@ import { logger } from "../../utils/logger"
 import {
   calcAngleDegrees,
   clamp,
-  isBetween,
   max,
   min
 } from "../../utils/number"
@@ -39,6 +38,7 @@ import {
 import { values } from "../../utils/schemas"
 import Board, { Cell } from "../board"
 import { DarkHarvestEffect } from "../effects/effect"
+import { AccelerationEffect } from "../effects/passives"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
@@ -12763,6 +12763,79 @@ export class MindBendStrategy extends AbilityStrategy {
   }
 }
 
+export class MagnetPullStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const lockDuration = Math.round(3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    // grab an item from an enemy, if none, get a random item from the ground
+    board.getCellsInRadius(
+      pokemon.positionX,
+      pokemon.positionY,
+      3
+    ).filter(cell => cell.value && cell.value.team !== pokemon.team)
+      .forEach((cell) => {
+        cell.value!.status.triggerLocked(3000, cell.value!)
+      })
+    if (pokemon.player) {
+      const randomSteelPkm = pokemon.simulation.room.state.shop.magnetPull(pokemon, pokemon.player)
+      pokemon.simulation.room.spawnWanderingPokemon(
+        randomSteelPkm,
+        pokemon.player,
+        0
+      )
+    }
+  }
+}
+
+export class WildDriftStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = Math.round([0.25, 0.5, 1][pokemon.stars - 1] * pokemon.speed * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    target.status.triggerBlinded(1000, target)
+
+    // move back to your own backline
+    // move to backline
+    const corner = board.getTeleportationCell(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team
+    )
+    if (corner) {
+      pokemon.commands.push(new DelayedCommand(() => {
+        pokemon.moveTo(corner.x, corner.y, board)
+      }, 100))
+    }
+
+    const accelerationEffect = [...pokemon.effectsSet.values()].find(effect => effect instanceof AccelerationEffect)
+    if (accelerationEffect) {
+      pokemon.addSpeed(
+        -accelerationEffect.accelerationStacks * 20,
+        pokemon,
+        0,
+        false
+      )
+      accelerationEffect.accelerationStacks = 0
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13232,5 +13305,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STORED_POWER]: new StoredPowerStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
   [Ability.MIND_BEND]: new MindBendStrategy(),
-  [Ability.COTTON_GUARD]: new CottonGuardStrategy()
+  [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
+  [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
+  [Ability.WILD_DRIFT]: new WildDriftStrategy()
 }
