@@ -637,6 +637,9 @@ export default class BoardManager {
       if (item === Item.BERSERK_GENE) {
         pkm?.addBerserkEffect()
       }
+      if (item === Item.AIR_BALLOON) {
+        pkm?.addFloatingAnimation()
+      }
     }
   }
 

@@ -1,3 +1,4 @@
+import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
@@ -8,12 +9,11 @@ import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 import SynergyDetailComponent from "./synergy-detail-component"
-import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 
 export default function SynergyComponent(props: {
   type: Synergy
   value: number
-  index: number,
+  index: number
   tooltipPortal: boolean
 }) {
   const { t } = useTranslation()
@@ -26,7 +26,7 @@ export default function SynergyComponent(props: {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
-    if (!outline) return; // outline plugin doesnt work with canvas renderer
+    if (!outline) return // outline plugin doesnt work with canvas renderer
     currentPlayer?.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
@@ -44,7 +44,7 @@ export default function SynergyComponent(props: {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
-    if (!outline) return; // outline plugin doesnt work with canvas renderer
+    if (!outline) return // outline plugin doesnt work with canvas renderer
     currentPlayer?.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
@@ -55,14 +55,16 @@ export default function SynergyComponent(props: {
     })
   }
 
-  const tooltip = <Tooltip
-    id={"detail-" + props.type}
-    className="custom-theme-tooltip"
-    place="right"
-    data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
-  >
-    <SynergyDetailComponent type={props.type} value={props.value} />
-  </Tooltip>
+  const tooltip = (
+    <Tooltip
+      id={"detail-" + props.type}
+      className="custom-theme-tooltip"
+      place="right"
+      data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
+    >
+      <SynergyDetailComponent type={props.type} value={props.value} />
+    </Tooltip>
+  )
 
   return (
     <div
@@ -85,17 +87,24 @@ export default function SynergyComponent(props: {
         cursor: "var(--cursor-hover)"
       }}
       data-tooltip-id={"detail-" + props.type}
-      onMouseEnter={() => { hightlightSynergy(props.type) }}
-      onMouseLeave={() => { removeHightlightSynergy(props.type) }}
+      onMouseEnter={() => {
+        hightlightSynergy(props.type)
+      }}
+      onMouseLeave={() => {
+        removeHightlightSynergy(props.type)
+      }}
     >
-      {props.tooltipPortal ? ReactDOM.createPortal(tooltip, document.body) : tooltip}
+      {props.tooltipPortal
+        ? ReactDOM.createPortal(tooltip, document.body)
+        : tooltip}
 
       <SynergyIcon type={props.type} size="40px" />
       <span
         style={{
           fontSize: "32px",
           textShadow: "2px 2px 2px #00000080",
-          textAlign: "center"
+          textAlign: "center",
+          marginRight: "4px",
         }}
       >
         {props.value}

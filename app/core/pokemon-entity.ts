@@ -691,15 +691,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   moveTo(x: number, y: number, board: Board) {
     this.toMovingState()
-    const target = board.getValue(x, y)
+    const target = board.getEntityOnCell(x, y)
     if (target) target.toMovingState()
 
-    board.swapValue(this.positionX, this.positionY, x, y)
+    board.swapCells(this.positionX, this.positionY, x, y)
     this.cooldown = 100 // for faster retargeting
   }
 
   skydiveTo(x: number, y: number, board: Board) {
-    board.swapValue(this.positionX, this.positionY, x, y)
+    board.swapCells(this.positionX, this.positionY, x, y)
     this.status.skydiving = true
     this.toMovingState()
     this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
@@ -1168,7 +1168,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1
     ) {
-      const targetAtContact = board.getValue(this.targetX, this.targetY)
+      const targetAtContact = board.getEntityOnCell(this.targetX, this.targetY)
       const destination = this.state.getNearestAvailablePlaceCoordinates(
         this,
         board,
@@ -1231,9 +1231,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (destination) this.moveTo(destination.x, destination.y, board)
       this.status.tree = true
       this.toIdleState()
-      this.addAttack(-10, this, 0, false)
-      this.addDefense(5, this, 0, false)
-      this.addSpecialDefense(5, this, 0, false)
+      this.addAttack(-9, this, 0, false)
+      this.addDefense(10, this, 0, false)
+      this.addSpecialDefense(10, this, 0, false)
     }
 
     if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {

@@ -240,12 +240,14 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.SWIFT_WING]: [
+  [Item.AIR_BALLOON]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addDodgeChance(0.1, pokemon, 0, false)
+      pokemon.effects.add(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addDodgeChance(-0.1, pokemon, 0, false)
+      pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     })
   ],
 
