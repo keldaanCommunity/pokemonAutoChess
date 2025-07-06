@@ -1,0 +1,14 @@
+.events-menu {
+  container-type: inline-size;
+}
+
+@container (width < 420px) {
+  .events-menu .react-tabs__tab {
+    & img {
+      margin-right: 0;
+    }
+    & span {
+      display: none;
+    }
+  }
+}
