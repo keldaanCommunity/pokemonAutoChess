@@ -6,6 +6,8 @@
 
 # Changes to Pokemon & Abilities
 
+- Melmetal is no longer available in Legendary propositions. Instead, it evolves from Meltan.
+
 # Changes to Synergies
 
 # Changes to Items

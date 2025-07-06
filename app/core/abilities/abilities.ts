@@ -12,6 +12,7 @@ import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
 import { isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
@@ -12770,24 +12771,34 @@ export class MagnetPullStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
-    const lockDuration = Math.round(3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
-    // grab an item from an enemy, if none, get a random item from the ground
-    board.getCellsInRadius(
+    const farthestTarget =
+      pokemon.state.getFarthestTarget(pokemon, board) ?? target
+    super.process(pokemon, board, farthestTarget, crit, true)
+
+    const adjacentCells = board.getAdjacentCells(
       pokemon.positionX,
-      pokemon.positionY,
-      3
-    ).filter(cell => cell.value && cell.value.team !== pokemon.team)
-      .forEach((cell) => {
-        cell.value!.status.triggerLocked(3000, cell.value!)
-      })
+      pokemon.positionY
+    )
+    const emptyCellsAround = shuffleArray(
+      adjacentCells
+        .filter((v) => v.value === undefined)
+        .map((v) => ({ x: v.x, y: v.y }))
+    )
+    if (emptyCellsAround.length > 0) {
+      const destination = emptyCellsAround[0]
+      farthestTarget.moveTo(destination.x, destination.y, board)
+      const lockDuration = Math.round(3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+      farthestTarget.status.triggerLocked(lockDuration, farthestTarget)
+      farthestTarget.cooldown = min(750)(farthestTarget.cooldown)
+    }
+
     if (pokemon.player) {
       const randomSteelPkm = pokemon.simulation.room.state.shop.magnetPull(pokemon, pokemon.player)
-      pokemon.simulation.room.spawnWanderingPokemon(
-        randomSteelPkm,
-        pokemon.player,
-        0
-      )
+      pokemon.simulation.room.spawnWanderingPokemon({
+        pkm: randomSteelPkm,
+        behavior: WandererBehavior.SPECTATE,
+        type: WandererType.CATCHABLE
+      }, pokemon.player)
     }
   }
 }

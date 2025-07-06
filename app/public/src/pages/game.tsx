@@ -84,6 +84,7 @@ import { Item } from "../../../types/enum/Item"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { PVEStages } from "../../../models/pve-stages"
+import { Wanderer, WandererBehavior } from "../../../types/enum/Wanderer"
 
 let gameContainer: GameContainer
 
@@ -448,11 +449,11 @@ export default function Game() {
         )
       })
 
-      room.onMessage(Transfer.POKEMON_WANDERING, ({ id, pkm }: { id: string, pkm: Pkm }) => {
+      room.onMessage(Transfer.WANDERER, (wanderer: Wanderer) => {
         if (gameContainer.game) {
           const g = getGameScene()
           if (g && g.wandererManager) {
-            g.wandererManager.addWanderer(pkm, id)
+            g.wandererManager.addWanderer(wanderer)
           }
         }
       })
