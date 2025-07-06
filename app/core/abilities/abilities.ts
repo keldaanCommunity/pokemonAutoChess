@@ -12465,6 +12465,16 @@ export class DrumBeatingStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     switch (pokemon.count.ult % 3) {
       case 0: {
+        // give 10/20/40 speed to the entire team
+        const speed = [10, 20, 40][pokemon.stars - 1] ?? 40
+        board.forEach((x, y, entity) => {
+          if (entity && entity.team === pokemon.team) {
+            entity.addSpeed(speed, pokemon, 1, crit)
+          }
+        })
+        break
+      }
+      case 1: {
         // give 10/20/40 shield to the entire team
         const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
         board.forEach((x, y, entity) => {
@@ -12474,7 +12484,8 @@ export class DrumBeatingStrategy extends AbilityStrategy {
         })
         break
       }
-      case 1: {
+      case 2:
+      default: {
         // deal 10/20/40 special damage to the opponent team and flinch for 3 seconds
         const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
         board.forEach((x, y, entity) => {
@@ -12487,17 +12498,6 @@ export class DrumBeatingStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-          }
-        })
-        break
-      }
-      case 2:
-      default: {
-        // give 10/20/40 speed to the entire team
-        const speed = [10, 20, 40][pokemon.stars - 1] ?? 40
-        board.forEach((x, y, entity) => {
-          if (entity && entity.team === pokemon.team) {
-            entity.addSpeed(speed, pokemon, 1, crit)
           }
         })
         break
