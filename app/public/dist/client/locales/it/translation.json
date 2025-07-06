@@ -2236,7 +2236,7 @@
 		"SLOW_START": "Parti a -30 di SPEED. Dopo il primo utilizzo dell'abilità, ottieni in più il 30 di SPEED e 10 di ATK",
 		"STONJOURNER": "Non si muove o attacca finchè la barra PP è piena. La sua fonte energetica da 50 AP a tutti gli alleati adiacenti all'inizio del combattimento.",
 		"POISON_PIN": "Poipole si evolve in Naganadel dopo aver stackato 200 HP.",
-		"PYUKUMUKU": "Se il Pokèmon va KO, esplode infliggendo [100,SP] SPECIAL ai nemici adiacenti.",
+		"PYUKUMUKU": "Se il Pokèmon va KO, esplode infliggendo [50,SP]% max HP SPECIAL ai nemici adiacenti.",
 		"LUVDISC": "Gli alleati alla sua destra e sinistra si innamorano, e condividono tra loro il valore più alto del loro ATK, AP, DEF e SPE_DEF all'inizio del combattimento.",
 		"MANTYKE": "Quando Mantyke è sul terreno, ottieni il [33,LK]% di possibilità di pescare un Remoraid con il tuo amo. Si evolve in Mantine se un Remoraid è affianco.",
 		"MANTINE": "Se Mantine è sul terreno, ottieni il [33,LK]% di possibilità di pescare un Remoraid con il tuo amo.",

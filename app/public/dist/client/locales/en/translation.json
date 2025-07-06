@@ -2686,7 +2686,7 @@
 		"SLOW_START": "Starts with -30 SPEED. After first ability cast, gains 30 SPEED and 10 ATK",
 		"STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP to all adjacent allies at the start of the fight",
 		"POISON_PIN": "Poipole will evolve into Naganadel after stacking 200 HP",
-		"PYUKUMUKU": "When this Pokémon is KO, it explodes dealing [100,SP] SPECIAL to adjacent enemies.",
+		"PYUKUMUKU": "When this Pokémon is KO, it explodes dealing [50,SP]% max HP as SPECIAL to adjacent enemies.",
 		"LUVDISC": "The allies on its left and on its right fall in love, and share the best value of their respective ATK, AP, DEF and SPE_DEF at the start of the fight",
 		"MANTYKE": "When Mantyke is on board, gain [33,LK]% chance to fish a Remoraid with your fishing rod. Evolves into Mantine if a Remoraid is next to it.",
 		"MANTINE": "When Mantine is on board, gain [33,LK]% chance to fish a Remoraid with your fishing rod.",

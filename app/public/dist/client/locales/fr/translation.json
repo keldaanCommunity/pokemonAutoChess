@@ -2677,7 +2677,7 @@
 		"SLOW_START": "Démarre avec -30 SPEED. Après avoir lancé sa capacité la première fois, gagne 30 SPEED et 10 ATK.",
 		"STONJOURNER": "Ne bouge pas et n'attaque pas tant que sa barre de PP n'est pas pleine. Son cercle d'énergie octroie 50 AP à tous les alliés adjacents au début du combat.",
 		"POISON_PIN": "$t(pkm.POIPOLE) évoluera en $t(pkm.NAGANADEL) après avoir atteint 200 HP.",
-		"PYUKUMUKU": "Quand ce Pokémon est KO, il explose en infligeant [100,SP] SPECIAL aux ennemis adjacents.",
+		"PYUKUMUKU": "Quand ce Pokémon est KO, il explose en infligeant [50,SP]% des HP max en SPECIAL aux ennemis adjacents.",
 		"LUVDISC": "Les alliés à sa gauche et à sa droite tombent amoureux et partagent la meilleure valeur de leur ATK, AP, DEF et SPE_DEF respectifs au début du combat.",
 		"MANTYKE": "Lorsque $t(pkm.MANTYKE) est sur le plateau, vous gagnez [33,LK]% de chances de pêcher un $t(pkm.REMORAID) avec votre canne à pêche. Évolue en $t(pkm.MANTINE) si un $t(pkm.REMORAID) se trouve à côté de lui.",
 		"MANTINE": "Lorsque $t(pkm.MANTINE) est sur le plateau, vous gagnez [33,LK]% de chances de pêcher un $t(pkm.REMORAID) avec votre canne à pêche.",

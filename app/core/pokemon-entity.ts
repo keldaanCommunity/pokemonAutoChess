@@ -1562,10 +1562,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         positionY: this.positionY
       })
       const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
+      const damage = Math.round(0.5 * this.hp)
       adjcells.forEach((cell) => {
         if (cell.value && this.team != cell.value.team) {
           cell.value.handleSpecialDamage(
-            100,
+            damage,
             board,
             AttackType.SPECIAL,
             this,

@@ -2672,7 +2672,7 @@
 		"SLOW_START": "Comienza con -30 SPEED. Después de lanzar su habilidad por primera vez, obtiene 30 SPEED y 10 ATK",
 		"STONJOURNER": "No se mueve ni ataca hasta que la barra de PP esté llena. Su Fuente Energía le da 50 AP a todos los aliados adyacentes al comienzo de la pelea.",
 		"POISON_PIN": "Poipole evolucionará a Naganadel después de obtener 200 HP",
-		"PYUKUMUKU": "Cuando este pokémon es noqueado, explota, realizando [100,SP] SPECIAL a los enemigos adyacentes.",
+		"PYUKUMUKU": "Cuando este pokémon es noqueado, explota, realizando [50,SP]% max HP SPECIAL a los enemigos adyacentes.",
 		"LUVDISC": "Los aliados a su izquierda y a su derecha se enamoran, y comparten el mejor valor de su respectivo ATK, AP, DEF y SPE_DEF al inicio de la pelea",
 		"MANTYKE": "Cuando Mantyke está en el tablero, ganas un [33,LK]% de pescar un Remoraid con tu caña. Evoluciona a Mantine si tiene un Remoraid a su lado.",
 		"MANTINE": "Cuando Mantine está en el tablero, ganas un [33,LK]% de pescar un Remoraid con tu caña.",
