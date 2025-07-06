@@ -4269,7 +4269,7 @@ const UNOWNS_PER_ABILITY = new Map([
   ],
   [
     Ability.HIDDEN_POWER_S,
-    [Pkm.UNOWN_S, Pkm.UNOWN_T, Pkm.UNOWN_O, Pkm.UNOWN_P]
+    [Pkm.UNOWN_S, Pkm.UNOWN_U, Pkm.UNOWN_R, Pkm.UNOWN_F]
   ],
   [
     Ability.HIDDEN_POWER_T,
@@ -4297,7 +4297,7 @@ const UNOWNS_PER_ABILITY = new Map([
   ],
   [
     Ability.HIDDEN_POWER_Z,
-    [Pkm.UNOWN_Z, Pkm.UNOWN_Z, Pkm.UNOWN_Z, Pkm.UNOWN_Z]
+    [Pkm.UNOWN_Z, Pkm.UNOWN_E, Pkm.UNOWN_R, Pkm.UNOWN_O]
   ],
   [
     Ability.HIDDEN_POWER_EM,

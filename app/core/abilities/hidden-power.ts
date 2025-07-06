@@ -423,11 +423,7 @@ export class HiddenPowerSStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerFreeze(2000, enemy)
-      }
-    })
+    unown.simulation.triggerTidalWave(unown.team, 2, true)
   }
 }
 
@@ -579,19 +575,11 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const numberToSpawn = 2
-    for (let i = 0; i < numberToSpawn; i++) {
-      const coord =
-        unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
-      const meditite = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(Pkm.MEDITITE, unown.player),
-        coord.x,
-        coord.y,
-        unown.team,
-        true
-      )
-      meditite.addItem(Item.SOUL_DEW)
-    }
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && unown.team === ally.team) {
+        AbilityStrategies[Ability.MEDITATE].process(ally, board, ally, false)
+      }
+    })
   }
 }
 
@@ -605,7 +593,7 @@ export class HiddenPowerZStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerSleep(5000, enemy)
+        enemy.status.triggerFreeze(2000, enemy)
       }
     })
   }
