@@ -407,7 +407,7 @@ export const electricTripleAttackEffect = new OnAttackEffect(
           .getAdjacentCells(target.positionX, target.positionY, true)
           .forEach((cell) => {
             if (cell) {
-              const enemy = board.getValue(cell.x, cell.y)
+              const enemy = board.getEntityOnCell(cell.x, cell.y)
               if (enemy && pokemon.team !== enemy.team) {
                 enemy.handleSpecialDamage(
                   10,

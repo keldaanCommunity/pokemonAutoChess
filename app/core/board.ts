@@ -27,52 +27,52 @@ export default class Board {
     this.effects = new Array<EffectEnum | undefined>(this.rows * this.columns)
   }
 
-  getValue(x: number, y: number): PokemonEntity | undefined {
+  getEntityOnCell(x: number, y: number): PokemonEntity | undefined {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       return this.cells[this.columns * y + x]
     }
   }
 
-  setValue(x: number, y: number, value: PokemonEntity | undefined) {
+  setEntityOnCell(x: number, y: number, entity: PokemonEntity | undefined) {
     if (y >= 0 && y < this.rows && x >= 0 && x < this.columns) {
       const index = this.columns * y + x
-      this.cells[index] = value
-      if (value && !(value.positionX === x && value.positionY === y)) {
+      this.cells[index] = entity
+      if (entity && !(entity.positionX === x && entity.positionY === y)) {
         const effectOnPreviousCell =
-          this.effects[value.positionY * this.columns + value.positionX]
+          this.effects[entity.positionY * this.columns + entity.positionX]
         if (effectOnPreviousCell != null) {
           //logger.debug(`${value.name} lost effect ${effectOnPreviousCell} by moving out of board effect`)
-          value.effects.delete(effectOnPreviousCell)
+          entity.effects.delete(effectOnPreviousCell)
         }
 
-        if (value.passive === Passive.STENCH) {
-          this.effects[value.positionY * this.columns + value.positionX] =
+        if (entity.passive === Passive.STENCH) {
+          this.effects[entity.positionY * this.columns + entity.positionX] =
             EffectEnum.POISON_GAS
         }
 
-        value.positionX = x
-        value.positionY = y
+        entity.positionX = x
+        entity.positionY = y
 
         const effectOnNewCell = this.effects[index]
-        if (effectOnNewCell != null) {
+        if (effectOnNewCell != null && !entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
           //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
-          value.effects.add(effectOnNewCell)
+          entity.effects.add(effectOnNewCell)
         }
       }
     }
   }
 
-  moveValue(x0: number, y0: number, x1: number, y1: number) {
-    const value = this.getValue(x0, y0)
-    this.setValue(x1, y1, value)
-    this.setValue(x0, y0, undefined)
+  moveEntity(x0: number, y0: number, x1: number, y1: number) {
+    const value = this.getEntityOnCell(x0, y0)
+    this.setEntityOnCell(x1, y1, value)
+    this.setEntityOnCell(x0, y0, undefined)
   }
 
-  swapValue(x0: number, y0: number, x1: number, y1: number) {
-    const v0 = this.getValue(x0, y0)
-    const v1 = this.getValue(x1, y1)
-    this.setValue(x1, y1, v0)
-    this.setValue(x0, y0, v1)
+  swapCells(x0: number, y0: number, x1: number, y1: number) {
+    const entity0 = this.getEntityOnCell(x0, y0)
+    const entity1 = this.getEntityOnCell(x1, y1)
+    this.setEntityOnCell(x1, y1, entity0)
+    this.setEntityOnCell(x0, y0, entity1)
   }
 
   forEach(
@@ -300,7 +300,7 @@ export default class Board {
 
     let x = x0,
       y = y0
-    for (let ix = 0, iy = 0; ix < nx || iy < ny; ) {
+    for (let ix = 0, iy = 0; ix < nx || iy < ny;) {
       const decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
       if (decision === 0) {
         // next step is diagonal
@@ -362,7 +362,7 @@ export default class Board {
     const cx = Math.round((x + this.columns * 0.5) % this.columns)
     const cy = Math.round((y + this.rows * 0.5) % this.rows)
     let radius = 1
-    const candidates: Cell[] = [{ x: cx, y: cy, value: this.getValue(cx, cy) }]
+    const candidates: Cell[] = [{ x: cx, y: cy, value: this.getEntityOnCell(cx, cy) }]
     while (candidates[0].value !== undefined && radius < 5) {
       candidates.shift()
       if (candidates.length === 0) {
@@ -421,7 +421,7 @@ export default class Board {
         if (targetDistance > maxTargetDistance) {
           maxCellDistance = 0
           const freeCells = this.getAdjacentCells(x, y).filter(
-            (cell) => this.getValue(cell.x, cell.y) === undefined
+            (cell) => this.getEntityOnCell(cell.x, cell.y) === undefined
           )
           for (const cell of freeCells) {
             const cellDistance = distanceM(
@@ -456,7 +456,7 @@ export default class Board {
     simulation: Simulation
   ) {
     const previousEffect = this.effects[y * this.columns + x]
-    const entityOnCell = this.getValue(x, y)
+    const entityOnCell = this.getEntityOnCell(x, y)
     if (entityOnCell) {
       entityOnCell.effects.add(effect)
     }
@@ -475,7 +475,7 @@ export default class Board {
 
   clearBoardEffect(x: number, y: number, simulation: Simulation) {
     const effect = this.effects[y * this.columns + x]
-    const entityOnCell = this.getValue(x, y)
+    const entityOnCell = this.getEntityOnCell(x, y)
     if (effect && entityOnCell) {
       entityOnCell.effects.delete(effect)
     }
@@ -503,7 +503,7 @@ export default class Board {
       const newX = x + dx
       const newY = y + dy
       if (newX >= 0 && newX < this.columns && newY >= 0 && newY < this.rows) {
-        const cell = this.getValue(newX, newY)
+        const cell = this.getEntityOnCell(newX, newY)
         if (cell === undefined) {
           return { x: newX, y: newY }
         }

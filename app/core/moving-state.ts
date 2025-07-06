@@ -95,7 +95,7 @@ export default class MovingState extends PokemonState {
         }
 
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
         pokemon.orientation = board.orientation(
           x,
           y,
@@ -144,7 +144,7 @@ export default class MovingState extends PokemonState {
           undefined
         )
         // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
       }
     }
 
