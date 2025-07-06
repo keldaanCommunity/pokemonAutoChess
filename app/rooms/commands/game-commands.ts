@@ -321,6 +321,18 @@ export class OnDragDropPokemonCommand extends Command<
             this.swapPokemonPositions(player, pokemon, x, y)
             success = true
           }
+        } else if (pokemon.name === Pkm.MELTAN && player.getPokemonAt(x, y)?.name === Pkm.MELMETAL) {
+          // Meltan can merge with Melmetal
+          const melmetal = player.getPokemonAt(x, y)!
+          melmetal.hp += 50
+          if (melmetal.hp >= 1500 && player) {
+            player.titles.add(Title.GIANT)
+          }
+          pokemon.items.forEach((item) => {
+            player.items.push(item)
+          })
+          player.board.delete(pokemon.id)
+          success = true
         } else if (dropOnBench && dropFromBench) {
           // Drag and drop pokemons through bench has no limitation
           this.swapPokemonPositions(player, pokemon, x, y)

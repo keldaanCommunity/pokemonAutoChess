@@ -1948,7 +1948,7 @@
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
-		"MAGNET_PULL": "Pulls the farthest target to a free cell around the user, then inflict LOCKED for [3,SP] seconds. Also attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
+		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
 		"WILD_DRIFT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
 	},
 	"effect": {
@@ -2279,6 +2279,7 @@
 		"SURFBOARD": "Surf Board",
 		"COOKING_POT": "Cooking Pot",
 		"METEORITE": "Meteorite",
+		"MYSTERY_BOX": "Mystery Box",
 		"TRASH": "Trash",
 		"DYNAMAX_BAND": "Dynamax Band",
 		"OLD_ROD": "Old Rod",
@@ -2478,6 +2479,7 @@
 		"COOKING_POT": "Gives GOURMET synergy. When BURN, the COOKING_POT is heated little by little which gives 10 SPEED per second. Dropped when benching the unit.",
 		"MAX_ELIXIR": "Restores 100% of max PP 1 second after the first ability cast. Dropped when benching the unit.",
 		"METEORITE": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch.",
+		"MYSTERY_BOX": "A mysterious old box. All $t(pkm.DITTO) found in shops are replaced by $t(pkm.MELTAN).",
 		"TRASH": "The remains of an artificial item. No effect. Dropped when benching the unit.",
 		"OLD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch common and uncommon WATER Pokémon as well as $t(pkm.MAGIKARP).",
 		"GOOD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch rare WATER Pokémon as well as $t(pkm.FEEBAS).",
@@ -2737,7 +2739,7 @@
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
 		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)",
-		"MELTAN": "6 $t(pkm.MELTAN) evolve in $t(pkm.MELMETAL)"
+		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP"
 	},
 	"stat": {
 		"ATK": "Attack",

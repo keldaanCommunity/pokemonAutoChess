@@ -3803,19 +3803,24 @@ export function displayAbility(
       break
 
     case Ability.DOUBLE_IRON_BASH:
-      addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true)?.setScale(
-        2
-      )
+      addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true)
+        ?.setScale(2)
       break
 
     case Ability.STONE_EDGE:
-      addAbilitySprite(Ability.TORMENT, coordinates, true)?.setScale(2)
+      addAbilitySprite(Ability.TORMENT, coordinates, true)
+        ?.setScale(2)
       break
 
     case Ability.THUNDER_CAGE:
-      addAbilitySprite(Ability.THUNDER_CAGE, coordinatesTarget, true)?.setScale(
-        2
-      )
+      addAbilitySprite(Ability.THUNDER_CAGE, coordinatesTarget, true)
+        ?.setScale(2)
+      break
+
+    case Ability.MAGNET_PULL:
+      addAbilitySprite(Ability.THUNDER_CAGE, coordinates, true)
+        ?.setScale(2)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       break
 
     case Ability.BIDE:

@@ -694,6 +694,8 @@ export default class BoardManager {
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
           pokemonUI.hp = value as IPokemon["hp"]
+          if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
+            pokemonUI.displayBoost(Stat.HP)
           break
         }
 

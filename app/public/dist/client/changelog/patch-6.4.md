@@ -6,7 +6,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Melmetal is no longer available in Legendary propositions. Instead, it evolves from Meltan.
+- Melmetal now gives Mystery Box item on acquisition. Mystery Box replaces all Ditto in shops with Meltan.
 
 # Changes to Synergies
 

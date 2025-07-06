@@ -99,6 +99,8 @@ export function getSellPrice(
     price = pokemon.shiny ? 10 : 2
   } else if (name == Pkm.DITTO) {
     price = 5
+  } else if (name == Pkm.MELTAN) {
+    price = 0
   } else if (name === Pkm.MAGIKARP) {
     price = 0
   } else if (name === Pkm.FEEBAS) {
@@ -144,6 +146,8 @@ export function getBuyPrice(
 
   if (name === Pkm.DITTO) {
     price = 5
+  } else if (name === Pkm.MELTAN) {
+    price = 0
   } else if (Unowns.includes(name)) {
     price = 1
   } else {
@@ -446,7 +450,7 @@ export default class Shop {
       state.stageLevel >= 2 &&
       !noSpecial
     ) {
-      return Pkm.DITTO
+      return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
     if (
