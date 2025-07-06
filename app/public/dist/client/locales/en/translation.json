@@ -1948,7 +1948,7 @@
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
-		"MAGNET_PULL": "Enemies in 3 tile radius are LOCKED for [3,SP] seconds. Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
+		"MAGNET_PULL": "Pulls the farthest target to a free cell around the user, then inflict LOCKED for [3,SP] seconds. Also attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
 		"WILD_DRIFT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
 	},
 	"effect": {
@@ -2736,7 +2736,8 @@
 		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar.",
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
-		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)"
+		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)",
+		"MELTAN": "6 $t(pkm.MELTAN) evolve in $t(pkm.MELMETAL)"
 	},
 	"stat": {
 		"ATK": "Attack",

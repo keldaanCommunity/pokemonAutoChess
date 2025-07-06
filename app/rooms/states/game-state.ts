@@ -25,6 +25,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Weather } from "../../types/enum/Weather"
 import { TownEncounter } from "../../core/town-encounters"
 import { pickRandomIn, randomBetween } from "../../utils/random"
+import { Wanderer } from "../../types/enum/Wanderer"
 
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
@@ -64,7 +65,7 @@ export default class GameState extends Schema {
   pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null
   maxRank: EloRank | null = null
-  wanderers: Map<string, Pkm> = new Map<string, Pkm>()
+  wanderers: Map<string, Wanderer> = new Map<string, Wanderer>()
 
   constructor(
     preparationId: string,

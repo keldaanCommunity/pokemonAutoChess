@@ -67,6 +67,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
+import { Wanderer, WandererBehavior } from "../types/enum/Wanderer"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -455,7 +456,7 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.POKEMON_WANDERING, async (client, msg) => {
+    this.onMessage(Transfer.WANDERER_CAUGHT, async (client, msg: { id: string }) => {
       if (client.auth) {
         try {
           this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
@@ -1189,13 +1190,12 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  spawnWanderingPokemon(pkm: Pkm, player: Player, delay: number = 4000) {
+  spawnWanderingPokemon(wandererNoId: Omit<Wanderer, "id">, player: Player) {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    this.state.wanderers.set(id, pkm)
-    this.clock.setTimeout(() => {
-      client.send(Transfer.POKEMON_WANDERING, { id, pkm })
-    }, delay)
+    const wanderer: Wanderer = { ...wandererNoId, id }
+    this.state.wanderers.set(id, wanderer)
+    client.send(Transfer.WANDERER, wanderer)
   }
 }

@@ -5781,6 +5781,7 @@ export class Meltan extends Pokemon {
   maxPP = 110
   range = 1
   skill = Ability.MAGNET_PULL
+  passive = Passive.MELTAN
   attackSprite = AttackSprite.STEEL_MELEE
 }
 
