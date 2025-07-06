@@ -489,7 +489,7 @@
 		"MIND_BEND": "Mind Bend",
 		"CHAIN_CRAZED": "Chain Crazed",
 		"MAGNET_PULL": "Magnet Pull",
-		"WILD_DRIFT": "Wild Drift"
+		"SPIN_OUT": "Spin Out"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1949,7 +1949,7 @@
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
-		"WILD_DRIFT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
+		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

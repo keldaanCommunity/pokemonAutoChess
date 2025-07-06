@@ -19064,7 +19064,7 @@ export class Varoom extends Pokemon {
   speDef = 1
   maxPP = 80
   range = 1
-  skill = Ability.WILD_DRIFT
+  skill = Ability.SPIN_OUT
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
   passive = Passive.ACCELERATION
@@ -19085,7 +19085,7 @@ export class Revavroom extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 1
-  skill = Ability.WILD_DRIFT
+  skill = Ability.SPIN_OUT
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
   passive = Passive.ACCELERATION
