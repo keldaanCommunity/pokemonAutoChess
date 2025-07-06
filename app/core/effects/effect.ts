@@ -140,6 +140,26 @@ export class OnAbilityCastEffect extends Effect {
   }
 }
 
+export class OnMoveEffect extends Effect {
+  override apply(
+    pokemon: PokemonEntity,
+    board: Board,
+    x: number,
+    y: number
+  ) { }
+  constructor(
+    effect?: (
+      pokemon: PokemonEntity,
+      board: Board,
+      x: number,
+      y: number
+    ) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
 export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
   count: number = 0

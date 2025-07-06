@@ -1,25 +1,25 @@
+import { Transfer } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
+import { Item } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { chance } from "../../utils/random"
+import { values } from "../../utils/schemas"
+import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
 import Board from "../board"
+import { PokemonEntity } from "../pokemon-entity"
 import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnKillEffect,
+  OnMoveEffect,
   OnSpawnEffect
 } from "./effect"
 import { ItemEffects } from "./items"
-import { PokemonEntity } from "../pokemon-entity"
-import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
-import { Passive } from "../../types/enum/Passive"
-import { Synergy } from "../../types/enum/Synergy"
-import { Transfer } from "../../types"
-import { Ability } from "../../types/enum/Ability"
-import { Pkm } from "../../types/enum/Pokemon"
-import { chance } from "../../utils/random"
-import { values } from "../../utils/schemas"
-import { Item } from "../../types/enum/Item"
-import { Kubfu } from "../../models/colyseus-models/pokemon"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
@@ -213,7 +213,7 @@ const KubfuOnKillEffect = new OnKillEffect(
     const AP_BUFF_PER_KILL = 5
     const MAX_BUFFS = 10
     if (attackType === AttackType.PHYSICAL) {
-      const baseSpeed = new Kubfu().speed
+      const baseSpeed = 50
       const nbBuffs = Math.floor(
         (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
       )
@@ -261,11 +261,27 @@ export const SlowStartEffect = new OnAbilityCastEffect((pokemon, board) => {
   }
 })
 
-export const PassiveEffects: Partial<Record<Passive, Effect[]>> = {
+export class AccelerationEffect extends OnMoveEffect {
+  accelerationStacks = 0
+
+  constructor() {
+    super((pkm, board, x, y) => {
+      pkm.addSpeed(20, pkm, 0, false)
+      this.accelerationStacks += 1
+    })
+  }
+}
+
+export const PassiveEffects: Partial<Record<Passive, (Effect | (() => Effect))[]>> = {
   [Passive.DURANT]: [DurantBugBuffEffect],
   [Passive.SHARED_VISION]: [SharedVisionEffect],
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
   [Passive.KUBFU]: [KubfuOnKillEffect],
   [Passive.SLOW_START]: [SlowStartEffect],
-  [Passive.VIGOROTH]: [new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))]
+  [Passive.VIGOROTH]: [
+    new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
+  ],
+  [Passive.ACCELERATION]: [
+    () => new AccelerationEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ]
 }

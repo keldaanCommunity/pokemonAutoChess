@@ -16291,7 +16291,10 @@ export class HisuianLilligant extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return (!state || state.additionalPokemons.includes(Pkm.PETILIL)) && regionSynergies.includes(Synergy.FIGHTING)
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.PETILIL)) &&
+      regionSynergies.includes(Synergy.FIGHTING)
+    )
   }
 }
 
@@ -19012,6 +19015,49 @@ export class Furfrou extends Pokemon {
   passive = Passive.FUR_COAT
 }
 
+export class Varoom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.REVAVROOM
+  hp = 70
+  atk = 6
+  speed = 50
+  def = 3
+  speDef = 1
+  maxPP = 80
+  range = 1
+  skill = Ability.WILD_DRIFT
+  attackSprite = AttackSprite.STEEL_MELEE
+  regional = true
+  passive = Passive.ACCELERATION
+}
+
+export class Revavroom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 14
+  speed = 50
+  def = 7
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.WILD_DRIFT
+  attackSprite = AttackSprite.STEEL_MELEE
+  regional = true
+  passive = Passive.ACCELERATION
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20004,5 +20050,7 @@ export const PokemonClasses: Record<
   [Pkm.GOSSIFLEUR]: Gossifleur,
   [Pkm.ELDEGOSS]: Eldegoss,
   [Pkm.FURFROU]: Furfrou,
-  [Pkm.MELTAN]: Meltan
+  [Pkm.MELTAN]: Meltan,
+  [Pkm.VAROOM]: Varoom,
+  [Pkm.REVAVROOM]: Revavroom
 }

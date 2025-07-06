@@ -1,5 +1,9 @@
 # New Pokemons:
 
+- Meltan
+- Varoom
+- Revavroom
+
 # Changes to Pokemon & Abilities
 
 # Changes to Synergies
