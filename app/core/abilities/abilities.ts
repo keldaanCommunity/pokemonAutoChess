@@ -12783,7 +12783,7 @@ export class MagnetPullStrategy extends AbilityStrategy {
   }
 }
 
-export class WildDriftStrategy extends AbilityStrategy {
+export class SpinOutStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
