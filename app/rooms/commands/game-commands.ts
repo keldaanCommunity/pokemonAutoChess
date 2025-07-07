@@ -688,6 +688,7 @@ export class OnDragDropItemCommand extends Command<
     if (item === Item.FIRE_SHARD) {
       if (pokemon.types.has(Synergy.FIRE) && player.life > 3) {
         pokemon.atk += 3
+        pokemon.speed += 3
         player.life = min(1)(player.life - 3)
         removeInArray(player.items, item)
       }

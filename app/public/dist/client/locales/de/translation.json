@@ -2399,7 +2399,7 @@
 		"MIST_STONE": "Zählt +3 für MISTY. Unter MISTY erhält dein Team +3 SPE_DEF.",
 		"BLOOD_STONE": "zählt +3 für BLOODMOON. Unter BLOODMOON erhält dein Team 30% der eingehenden Heilung als SHIELD, wenn es WOUND hat und heilt sich um 20% des ausgeteilten Schadens, wenn ein Ziel WOUND hat.",
 		"SMELLY_CLAY": "Zählt +3 für SMOG. Unter SMOG erhält dein Team +5% Genauigkeit und hat eine 10% verringerte Chance, POISONNED zu erhalten.",
-		"FIRE_SHARD": "Opfere 3 Spieler HP, um einem FIRE Pokémon dauerhaft +3 ATK zu geben. Wird bei Gabe sofort verbraucht.",
+		"FIRE_SHARD": "Opfere 3 Spieler HP, um einem FIRE Pokémon dauerhaft +3 ATK und +3 SPEED zu geben. Wird bei Gabe sofort verbraucht.",
 		"TEAL_MASK": "Diese geschnitzte Holzmaske ist mit Kristallen geschmückt, gewährt 50 SHIELD und ermöglicht es Ogerpon, im Kampf den Typ FLORA zu tragen.",
 		"WELLSPRING_MASK": "Diese geschnitzte Holzmaske ist mit Kristallen geschmückt, gewährt 50 SHIELD und ermöglicht es Ogerpon, im Kampf den AQUATIC Typ zu tragen.",
 		"HEARTHFLAME_MASK": "Diese geschnitzte Holzmaske ist mit Kristallen geschmückt, gewährt 50 SHIELD und ermöglicht es Ogerpon, im Kampf den Typ FIRE einzusetzen.",

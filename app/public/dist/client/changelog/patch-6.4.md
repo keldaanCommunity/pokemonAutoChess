@@ -22,6 +22,8 @@
 
 # Changes to Items
 
+- Buff Fire Shard: now also gives +3 speed
+
 # Gameplay
 
 # UI
