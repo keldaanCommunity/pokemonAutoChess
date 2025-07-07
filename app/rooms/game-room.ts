@@ -8,6 +8,7 @@ import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/matter/mini-game"
 import {
   clearPendingGame,
+  clearPendingGamesOnRoomDispose,
   getPendingGame,
   givePlayerTimeout,
   setPendingGame
@@ -656,7 +657,11 @@ export default class GameRoom extends Room<GameState> {
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
     this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
-    const playersAlive = values(this.state.players).filter((p) => p.alive)
+    const players = values(this.state.players)
+    players.forEach((player) => {
+      clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
+    })
+    const playersAlive = players.filter((p) => p.alive)
     const humansAlive = playersAlive.filter((p) => !p.isBot)
 
     // we skip elo compute/game history if game is not finished

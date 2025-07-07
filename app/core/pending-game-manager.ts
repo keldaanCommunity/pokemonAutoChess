@@ -1,4 +1,5 @@
 import { type Presence } from "@colyseus/core"
+import { strnumOptions } from "fast-xml-parser"
 import { ALLOWED_GAME_RECONNECTION_TIME } from "../types/Config"
 import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"
@@ -87,4 +88,16 @@ export async function clearPendingGame(
 ): Promise<boolean> {
     //logger.debug(`Clearing pending game for player ${playerId}`);
     return presence.hdel(playerId, PENDING_GAME)
+}
+
+export async function clearPendingGamesOnRoomDispose(
+    presence: Presence,
+    playerId: string,
+    roomId: string
+): Promise<void> {
+    const pendingGame = await presence.hget(playerId, PENDING_GAME)
+    if (pendingGame && pendingGame.split(",")[0] === roomId) {
+        // clear pending game if it was set for this room
+        clearPendingGame(presence, playerId)
+    }
 }
