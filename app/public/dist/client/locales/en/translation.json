@@ -2622,7 +2622,7 @@
 		"TORNADUS": "Change weather to WINDY or SNOW based on your dominant synergy between FLYING and ICE",
 		"ENAMORUS": "Change weather to MISTY or WINDY based on your dominant synergy between FAIRY and FLYING",
 		"AIRLOCK": "Change weather to NEUTRAL",
-		"SHARED_VISION": "All Pokémon with $t(passive_description.SHARED_VISION) will attack the same target, if at range",
+		"SHARED_VISION": "Shared Vision: All Pokémon with Shared Vision will attack the same target, if at range",
 		"WATER_SPRING": "Whenever an enemy uses their ability, gain 5 PP",
 		"MAGIKARP": "8 Magikarp evolve in Gyarados",
 		"FEEBAS": "6 Feebas evolve in Milotic",
