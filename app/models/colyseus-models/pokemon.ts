@@ -5277,11 +5277,11 @@ export class PikachuSurfer extends Pokemon {
   ])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 260
-  atk = 20
-  speed = 51
-  def = 10
-  speDef = 10
+  hp = 120
+  atk = 8
+  speed = 54
+  def = 4
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.SURF
