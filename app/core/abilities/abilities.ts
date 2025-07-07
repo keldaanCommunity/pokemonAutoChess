@@ -7367,7 +7367,7 @@ export class BodySlamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.round(0.3 * pokemon.hp * (1 + pokemon.hp / 100))
+    const damage = Math.round(0.3 * pokemon.hp * (1 + pokemon.ap / 100))
     target.handleSpecialDamage(
       damage,
       board,
