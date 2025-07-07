@@ -3235,7 +3235,7 @@ export function displayAbility(
       break
     }
 
-    case Ability.WILD_DRIFT: {
+    case Ability.SPIN_OUT: {
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformEntityCoordinates(
         positionX + dx * 0.5,

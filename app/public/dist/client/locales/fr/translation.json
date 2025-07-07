@@ -2726,7 +2726,7 @@
 		"VIGOROTH": "$t(pkm.VIGOROTH) est immunisé contre le SLEEP.",
 		"SLAKING": "Lorsqu'il se réveille après avoir été en SLEEP, $t(pkm.SLAKING) devient RAGE pendant 3 secondes.",
 		"STANTLER": "Évolue en $t(pkm.WYRDEER) en changeant de région.",
-		"PIKACHU_SURFER": "Pour chaque vague qui approche, $t(pkm.PIKACHU_SURFER) se sent motivé, ce qui remplit sa barre de PP.",
+		"PIKACHU_SURFER": "La puissance de $t(pkm.PIKACHU_SURFER) dépend des vagues. Gagne 50 SHIELD et 3 ATK par niveau de synergie AQUATIC atteint, et remplit sa barre de PP lorsqu'une vague approche.",
 		"ESPURR": "Évolue en $t(MEOWSTIC) Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD.",
 		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être toiletté en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED."
 	},

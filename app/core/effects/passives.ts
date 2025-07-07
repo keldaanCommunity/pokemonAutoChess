@@ -281,6 +281,14 @@ export const PassiveEffects: Partial<Record<Passive, (Effect | (() => Effect))[]
   [Passive.VIGOROTH]: [
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
   ],
+  [Passive.PIKACHU_SURFER]: [
+    new OnSpawnEffect((pkm) => {
+      if (!pkm.player) return
+      const aquaticStepReached = pkm.player.synergies.getSynergyStep(Synergy.AQUATIC)
+      pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
+      pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
+    })
+  ],
   [Passive.ACCELERATION]: [
     () => new AccelerationEffect() // needs new instance of effect for each pokemon due to internal stack counter
   ]

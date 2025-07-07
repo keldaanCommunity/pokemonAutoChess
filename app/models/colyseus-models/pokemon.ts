@@ -5277,11 +5277,11 @@ export class PikachuSurfer extends Pokemon {
   ])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 260
-  atk = 20
-  speed = 51
-  def = 10
-  speDef = 10
+  hp = 120
+  atk = 8
+  speed = 54
+  def = 4
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.SURF
@@ -10143,12 +10143,15 @@ export class Silvally extends Pokemon {
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
     if (y === 0) {
-      SynergyItems.forEach((synergyItem) => {
-        if (this.items.has(synergyItem)) {
-          this.items.delete(synergyItem)
-          player.items.push(synergyItem)
-        }
-      })
+      values(this.items).filter(item => (SynergyItems as ReadonlyArray<Item>).forEach(synergyItem => {
+        this.removeItem(synergyItem, player)
+        player.items.push(synergyItem)
+      }))
+    }
+  }
+  onItemRemoved(item: Item, player: Player) {
+    if ((SynergyItems as ReadonlyArray<Item>).includes(item)
+      && values(this.items).filter(item => (SynergyItems as ReadonlyArray<Item>).includes(item)).length === 0) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
   }
@@ -15648,7 +15651,7 @@ export class Trubbish extends Pokemon {
     values(this.items).forEach((item) => {
       if (Berries.includes(item)) {
         this.hp += 10
-        this.items.delete(item)
+        this.removeItem(item, player)
       }
       if (ItemComponents.includes(item)) {
         this.hp += 25
@@ -15657,7 +15660,7 @@ export class Trubbish extends Pokemon {
             this.statIncreases[stat as Stat] += value
           }
         })
-        this.items.delete(item)
+        this.removeItem(item, player)
       }
       if (ArtificialItems.includes(item)) {
         this.hp += 50
@@ -15667,7 +15670,7 @@ export class Trubbish extends Pokemon {
           }
         })
 
-        this.items.delete(item)
+        this.removeItem(item, player)
 
         const itemIndex = player.artificialItems.indexOf(item)
         player.artificialItems[itemIndex] = Item.TRASH
@@ -19064,7 +19067,7 @@ export class Varoom extends Pokemon {
   speDef = 1
   maxPP = 80
   range = 1
-  skill = Ability.WILD_DRIFT
+  skill = Ability.SPIN_OUT
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
   passive = Passive.ACCELERATION
@@ -19085,7 +19088,7 @@ export class Revavroom extends Pokemon {
   speDef = 3
   maxPP = 80
   range = 1
-  skill = Ability.WILD_DRIFT
+  skill = Ability.SPIN_OUT
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
   passive = Passive.ACCELERATION

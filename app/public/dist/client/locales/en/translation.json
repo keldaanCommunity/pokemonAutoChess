@@ -489,7 +489,7 @@
 		"MIND_BEND": "Mind Bend",
 		"CHAIN_CRAZED": "Chain Crazed",
 		"MAGNET_PULL": "Magnet Pull",
-		"WILD_DRIFT": "Wild Drift"
+		"SPIN_OUT": "Spin Out"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1949,7 +1949,7 @@
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
-		"WILD_DRIFT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
+		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2735,7 +2735,7 @@
 		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",
 		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKING) gains RAGE for 3 seconds.",
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region.",
-		"PIKACHU_SURFER": "As each wave approaches, $t(pkm.PIKACHU_SURFER) feels motivated, which fills up his PP bar.",
+		"PIKACHU_SURFER": "Surfing Pikachu's power swells with the waves. Gain 50 SHIELD and 3 ATK for each AQUATIC synergy step reached, and fill PP bar when a wave approaches.",
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
 		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)",

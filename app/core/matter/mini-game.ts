@@ -546,12 +546,7 @@ export class MiniGame {
         const synergiesTriggerLevels: [Synergy, number][] = Array.from(
           player.synergies
         ).map(([type, value]) => {
-          const lastTrigger = SynergyTriggers[type]
-            .filter((n) => n <= value)
-            .at(-1)
-          let levelReached = lastTrigger
-            ? SynergyTriggers[type].indexOf(lastTrigger) + 1
-            : 0
+          let levelReached = player.synergies.getSynergyStep(type)
           // removing low triggers synergies
           if (type === Synergy.FLORA || type === Synergy.LIGHT)
             levelReached = min(0)(levelReached - 1)

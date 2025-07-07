@@ -12783,7 +12783,7 @@ export class MagnetPullStrategy extends AbilityStrategy {
   }
 }
 
-export class WildDriftStrategy extends AbilityStrategy {
+export class SpinOutStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -13298,5 +13298,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MIND_BEND]: new MindBendStrategy(),
   [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
   [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
-  [Ability.WILD_DRIFT]: new WildDriftStrategy()
+  [Ability.SPIN_OUT]: new SpinOutStrategy()
 }
