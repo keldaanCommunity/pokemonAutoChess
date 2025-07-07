@@ -3,16 +3,18 @@ import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
+import { CollectionFilterState } from "./pokemon-collection"
 import PokemonCollectionItem from "./pokemon-collection-item"
 import "./unown-panel.css"
 
 export default function UnownPanel(props: {
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
-  filter: string
-  sort: string
+  filterState: CollectionFilterState
 }) {
   const pokemonCollection = useAppSelector(
-    (state) => state.network.profile?.pokemonCollection ?? new Map<string, IPokemonCollectionItem>()
+    (state) =>
+      state.network.profile?.pokemonCollection ??
+      new Map<string, IPokemonCollectionItem>()
   )
   const secretMessage = `    
     To unleash ancient powers?
@@ -40,13 +42,13 @@ export default function UnownPanel(props: {
         const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
         return [{ pkm, config, isUnlocked }]
       }).sort((a, b) => {
-        if (props.sort === "index") {
+        if (props.filterState.sort === "index") {
           return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
         } else {
           return (b.config?.dust ?? 0) - (a.config?.dust ?? 0)
         }
       }),
-    [props.sort, pokemonCollection]
+    [props.filterState.sort, pokemonCollection]
   )
 
   return (
@@ -64,7 +66,7 @@ export default function UnownPanel(props: {
               index={PkmIndex[unown.pkm]}
               config={unown.config}
               setPokemon={props.setPokemon}
-              filter={props.filter}
+              filterState={props.filterState}
             />
           )
         })}

@@ -3307,6 +3307,7 @@
 	"sort_by_index": "Sort by index",
 	"sort_by_shards": "Sort by shards",
 	"sort_by_played": "Sort by played times",
+	"sort_by_emotes_unlocked": "Sort by emotes unlocked",
 	"normal_emotions": "Normal Emotions",
 	"shiny_emotions": "Shiny Emotions",
 	"reset_emotion": "Reset to default portrait",
