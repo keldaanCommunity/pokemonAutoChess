@@ -488,6 +488,7 @@
 		"STORED_POWER": "Stored Power",
 		"MIND_BEND": "Mind Bend",
 		"CHAIN_CRAZED": "Chain Crazed",
+		"STEAMROLLER": "Steamroller",
 		"MAGNET_PULL": "Magnet Pull",
 		"SPIN_OUT": "Spin Out"
 	},
@@ -1639,7 +1640,7 @@
 		"MAWASHI_GERI": "Deal [60,SP] SPECIAL to the target and push it away. The damage is doubled if the user has a higher ATK than the target.",
 		"FORECAST": "Grant [10,SP] SHIELD to all allied Pokémon, plus an additional bonus depending on the weather:\n SNOW: +[2,SP] DEF / SPE_DEF\n SUN: +[4,SP] ATK \n RAIN: +[8,SP] PP",
 		"X_SCISSOR": "Deal [10,20,40,60,SP] TRUE twice.",
-		"MANTIS_BLADES": "Unleash a trio of blades upon the target, each dealing [30,60,120,SP] with a distinct damage type: PHYSICAL, SPECIAL and TRUE.",
+		"MANTIS_BLADES": "Unleash a trio of blades upon the target, each dealing [10,20,40,SP] with a distinct damage type: PHYSICAL, SPECIAL and TRUE.",
 		"PLASMA_FIST": "Deal [120,SP] SPECIAL to the target and heal 25% of damage dealt.",
 		"SPECTRAL_THIEF": "Disappear and reappear, dealing [50,SP] SPECIAL and steal all stat boosts from the target.",
 		"GEOMANCY": "Gain [15,SP] ATK, [10,SP] SPE_DEF and 20 SPEED.",
@@ -1948,6 +1949,7 @@
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
+		"STEAMROLLER": "Rolls over the enemies to the farthest target, dealing [50,100,200,SP]% of SPEED as SPECIAL to all enemies in the path with [50,LK]% chance to apply FLINCH for 3 seconds.",
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
 		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
 	},

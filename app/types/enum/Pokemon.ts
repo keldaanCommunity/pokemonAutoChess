@@ -4912,17 +4912,17 @@ export const AnimationConfig: {
   },
   [Pkm.VENIPEDE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.TumbleBack,
     emote: AnimationType.Shoot
   },
   [Pkm.WHIRLIPEDE]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Strike,
     ability: AnimationType.Attack,
-    emote: AnimationType.Shoot
+    emote: AnimationType.SpAttack
   },
   [Pkm.SCOLIPEDE]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Attack,
+    ability: AnimationType.Strike,
     emote: AnimationType.Shoot
   },
   [Pkm.PORYGON]: {

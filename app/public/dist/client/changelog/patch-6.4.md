@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Venipede
+- Whirlipede
+- Scolipede
 - Meltan
 - Varoom
 - Revavroom
@@ -12,6 +15,8 @@
 - Change Unown Z (ZERO): Freeze all enemies for 2 seconds
 - Change Unown Y (YOGA): All allies cast Meditate, which increase their attack by 100%
 - Surfing Pikachu now has the same stats than Pikachu but gain 50 shield and 3 attack per aquatic synergy level
+- Sewaddle line is now Uncommon
+- Skorupi is now Dark/Bug/Poison type like its evolution Drapion.
 
 # Changes to Synergies
 

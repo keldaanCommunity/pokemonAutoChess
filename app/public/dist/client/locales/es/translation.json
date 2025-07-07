@@ -1634,7 +1634,7 @@
 		"MAWASHI_GERI": "Inflige [60,SP] de SPECIAL al objetivo y lo empuja. Causa el doble de daño si el atacante tiene más ATK que el objetivo",
 		"FORECAST": "Otorga [10,SP] SHIELD a tu equipo, además de una bonificación adicional según el clima:\n SNOW: también da [2,SP] de DEF / SPE_DEF\n SUN: también da [4,SP] de ATK\n RAIN: también da [8,SP] de PP",
 		"X_SCISSOR": "Inflige [10,20,40,60,SP] de TRUE dos veces",
-		"MANTIS_BLADES": "Desata un trío de espadas sobre el objetivo, cada espada inflige [30,60,120,SP] con un tipo de daño distinto: PHYSICAL, SPECIAL y TRUE.",
+		"MANTIS_BLADES": "Desata un trío de espadas sobre el objetivo, cada espada inflige [10,20,40,SP] con un tipo de daño distinto: PHYSICAL, SPECIAL y TRUE.",
 		"PLASMA_FIST": "Inflige [120,SP] de SPECIAL, recupera el 25% del daño infligido",
 		"SPECTRAL_THIEF": "Desaparece y reaparece infligiendo [50,SP] de SPECIAL y roba todos los aumentos de estadísticas del objetivo",
 		"GEOMANCY": "Gana [15,SP] de ATK, [10,SP] de SPE_DEF y 20 de SPEED",
