@@ -4,17 +4,17 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomp
 import { IPokemon, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
-import { ItemComponents, Berries, Item, Dishes } from "../../types/enum/Item"
-import { Pkm, getUnownsPoolPerStage } from "../../types/enum/Pokemon"
+import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
+import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { getFirstAvailablePositionInBench } from "../../utils/board"
+import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
 import Board from "../board"
+import { giveRandomEgg } from "../eggs"
 import { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategies } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
-import { getFirstAvailablePositionInBench } from "../../utils/board"
-import { giveRandomEgg } from "../eggs"
-import { clamp, min } from "../../utils/number"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   copyable = false
@@ -212,7 +212,8 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     const numberToSpawn = 2
     for (let i = 0; i < numberToSpawn; i++) {
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
+      const coord =
+        unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
       const sharpedo = unown.simulation.addPokemon(
         PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, unown.player),
         coord.x,
@@ -233,7 +234,8 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
+    const coord =
+      unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
     const hitmonlee = unown.simulation.addPokemon(
       PokemonFactory.createPokemonFromName(Pkm.HITMONLEE, unown.player),
       coord.x,
@@ -293,7 +295,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          const target = board.getValue(pokemon.targetX, pokemon.targetY)
+          const target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
           if (target) {
             pokemon.addShield(50, unown, 1, false)
             AbilityStrategies[Ability.EXPLOSION].process(
@@ -346,7 +348,9 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     const numberToSpawn = 5
     const bugs = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
-    const candidates = [...bugs.pokemons, ...bugs.additionalPokemons].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+    const candidates = [...bugs.pokemons, ...bugs.additionalPokemons].filter(
+      (p) => getPokemonData(p).stars === 1
+    ) as Pkm[]
     const stageLevel = unown.simulation.stageLevel
     const commonWeight = min(0)(2 - stageLevel / 10)
     const uncommonWeight = min(0)(2 - stageLevel / 20)
@@ -371,7 +375,8 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
 
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = randomWeighted(candidatesWeights) ?? Pkm.WEEDLE
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
+      const coord =
+        unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
       unown.simulation.addPokemon(
         PokemonFactory.createPokemonFromName(bug, unown.player),
         coord.x,
@@ -418,11 +423,7 @@ export class HiddenPowerSStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerFreeze(2000, enemy)
-      }
-    })
+    unown.simulation.triggerTidalWave(unown.team, 2, true)
   }
 }
 
@@ -451,7 +452,8 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
+    const coord =
+      unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
     const uxie = unown.simulation.addPokemon(
       PokemonFactory.createPokemonFromName(Pkm.UXIE, unown.player),
       coord.x,
@@ -507,11 +509,19 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== undefined) {
         const topSynergy = pickRandomIn(player.synergies.getTopSynergies())
-        const monsOfThatSynergy = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
-        const candidates = [...monsOfThatSynergy.pokemons, ...monsOfThatSynergy.additionalPokemons].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+        const monsOfThatSynergy =
+          PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
+        const candidates = [
+          ...monsOfThatSynergy.pokemons,
+          ...monsOfThatSynergy.additionalPokemons
+        ].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
         const stageLevel = unown.simulation.stageLevel
         const rareWeight = clamp(1.5 - stageLevel / 10, 0, 1)
-        const epicWeight = clamp(stageLevel < 10 ? stageLevel / 10 : 2 - stageLevel / 10, 0, 1)
+        const epicWeight = clamp(
+          stageLevel < 10 ? stageLevel / 10 : 2 - stageLevel / 10,
+          0,
+          1
+        )
         const ultraWeight = min(0)(-1 + stageLevel / 10)
         const candidatesWeights: { [pkm in Pkm]?: number } = {}
         candidates.forEach((p) => {
@@ -525,7 +535,10 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
           }
         })
 
-        const pkm = randomWeighted(candidatesWeights) ?? monsOfThatSynergy.pokemons[0] ?? Pkm.KECLEON
+        const pkm =
+          randomWeighted(candidatesWeights) ??
+          monsOfThatSynergy.pokemons[0] ??
+          Pkm.KECLEON
         const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
         pokemon.positionX = x
         pokemon.positionY = 0
@@ -562,18 +575,11 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const numberToSpawn = 2
-    for (let i = 0; i < numberToSpawn; i++) {
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
-      const meditite = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(Pkm.MEDITITE, unown.player),
-        coord.x,
-        coord.y,
-        unown.team,
-        true
-      )
-      meditite.addItem(Item.SOUL_DEW)
-    }
+    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+      if (ally && unown.team === ally.team) {
+        AbilityStrategies[Ability.MEDITATE].process(ally, board, ally, false)
+      }
+    })
   }
 }
 
@@ -587,7 +593,7 @@ export class HiddenPowerZStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerSleep(5000, enemy)
+        enemy.status.triggerFreeze(2000, enemy)
       }
     })
   }

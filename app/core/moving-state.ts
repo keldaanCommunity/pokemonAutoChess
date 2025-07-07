@@ -1,13 +1,17 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
+import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
-import Board from "./board"
-import { PokemonEntity, getMoveSpeed } from "./pokemon-entity"
-import PokemonState from "./pokemon-state"
 import { findPath } from "../utils/pathfind"
+import { values } from "../utils/schemas"
+import Board from "./board"
+import { OnMoveEffect } from "./effects/effect"
+import { ItemEffects } from "./effects/items"
 import { drumBeat, partingShot, stenchJump } from "./effects/passives"
+import { getMoveSpeed, PokemonEntity } from "./pokemon-entity"
+import PokemonState from "./pokemon-state"
 
 export default class MovingState extends PokemonState {
   name = "moving"
@@ -16,7 +20,7 @@ export default class MovingState extends PokemonState {
     super.update(pokemon, dt, board, player)
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = Math.round(500 / getMoveSpeed(pokemon)) // 500ms to move one cell at 50 speed in normal conditions
-      const targetAtRange = this.getNearestTargetAtRange(pokemon,board)
+      const targetAtRange = this.getNearestTargetAtRange(pokemon, board)
       if (pokemon.status.charm && pokemon.canMove) {
         if (
           pokemon.status.charmOrigin &&
@@ -91,7 +95,7 @@ export default class MovingState extends PokemonState {
         }
 
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
         pokemon.orientation = board.orientation(
           x,
           y,
@@ -140,9 +144,18 @@ export default class MovingState extends PokemonState {
           undefined
         )
         // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapValue(pokemon.positionX, pokemon.positionY, x, y)
+        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
       }
     }
+
+    const onMoveEffects = [
+      ...pokemon.effectsSet.values(),
+      ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
+    ].filter((effect) => effect instanceof OnMoveEffect)
+
+    onMoveEffects.forEach((effect) => {
+      effect.apply(pokemon, board, coordinates.x, coordinates.y)
+    })
   }
 
   onEnter(pokemon: PokemonEntity) {

@@ -83,6 +83,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
+import { Wanderer, WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
@@ -203,15 +204,17 @@ export class OnPokemonCatchCommand extends Command<
   async execute({ client, playerId, id }) {
     if (playerId === undefined || !this.state.players.has(playerId)) return
     const player = this.state.players.get(playerId)
-    const pkm = this.state.wanderers.get(id)
-    if (!player || !player.alive || !pkm) return
+    const wanderer = this.state.wanderers.get(id)
+
+    console.log(`Player ${playerId} caught wanderer ${wanderer?.pkm} (${wanderer?.type})`)
+    if (!player || !player.alive || !wanderer) return
     this.state.wanderers.delete(id)
 
-    if (pkm === Pkm.SABLEYE) {
+    if (wanderer.type === WandererType.SABLEYE) {
       // prevents sableye from stealing items and give 1 gold
       player.addMoney(1, true, null)
-    } else if (Unowns.includes(pkm)) {
-      const unownIndex = PkmIndex[pkm]
+    } else if (wanderer.type === WandererType.UNOWN) {
+      const unownIndex = PkmIndex[wanderer.pkm]
       if (client.auth) {
         const DUST_PER_ENCOUNTER = 50
         const u = await UserMetadata.findOne({ uid: client.auth.uid })
@@ -234,7 +237,7 @@ export class OnPokemonCatchCommand extends Command<
         }
       }
     } else {
-      const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+      const pokemon = PokemonFactory.createPokemonFromName(wanderer.pkm, player)
       const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
       const hasSpaceOnBench =
         freeSpaceOnBench > 0 ||
@@ -318,6 +321,18 @@ export class OnDragDropPokemonCommand extends Command<
             this.swapPokemonPositions(player, pokemon, x, y)
             success = true
           }
+        } else if (pokemon.name === Pkm.MELTAN && player.getPokemonAt(x, y)?.name === Pkm.MELMETAL) {
+          // Meltan can merge with Melmetal
+          const melmetal = player.getPokemonAt(x, y)!
+          melmetal.hp += 50
+          if (melmetal.hp >= 1500 && player) {
+            player.titles.add(Title.GIANT)
+          }
+          pokemon.items.forEach((item) => {
+            player.items.push(item)
+          })
+          player.board.delete(pokemon.id)
+          success = true
         } else if (dropOnBench && dropFromBench) {
           // Drag and drop pokemons through bench has no limitation
           this.swapPokemonPositions(player, pokemon, x, y)
@@ -1572,16 +1587,20 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
 
       // Passives updating every stage
-      board.filter(p => p.passive === Passive.FUR_COAT).forEach((pokemon) => {
-        if (isOnBench(pokemon)) {
-          const { speed: initialSpeed, def: initialDef } = new PokemonClasses[pokemon.name]()
-          pokemon.speed = initialSpeed
-          pokemon.def = initialDef
-        } else if (pokemon.speed >= 5) {
-          pokemon.speed -= 5
-          pokemon.def += 2
-        }
-      })
+      board
+        .filter((p) => p.passive === Passive.FUR_COAT)
+        .forEach((pokemon) => {
+          if (isOnBench(pokemon)) {
+            const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
+              pokemon.name
+            ]()
+            pokemon.speed = initialSpeed
+            pokemon.def = initialDef
+          } else if (pokemon.speed >= 5) {
+            pokemon.speed -= 5
+            pokemon.def += 2
+          }
+        })
     })
 
     this.spawnWanderingPokemons()
@@ -1908,10 +1927,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
           const pkm = pickRandomIn(Unowns)
           const id = nanoid()
-          this.state.wanderers.set(id, pkm)
+          const wanderer: Wanderer = {
+            id,
+            type: WandererType.UNOWN,
+            behavior: WandererBehavior.RUN_THROUGH,
+            pkm
+          }
+          this.state.wanderers.set(id, wanderer)
           this.clock.setTimeout(
             () => {
-              client.send(Transfer.POKEMON_WANDERING, { id, pkm })
+              client.send(Transfer.WANDERER, wanderer)
             },
             Math.round((5 + 15 * Math.random()) * 1000)
           )
@@ -1920,10 +1945,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (shouldSpawnSableye && player.items.length > 0) {
           const id = nanoid()
           let itemStolen
-          this.state.wanderers.set(id, Pkm.SABLEYE)
+          const wanderer: Wanderer = {
+            id,
+            type: WandererType.SABLEYE,
+            behavior: WandererBehavior.STEAL_ITEM,
+            pkm: Pkm.SABLEYE
+          }
+          this.state.wanderers.set(id, wanderer)
           this.clock.setTimeout(
             () => {
-              client.send(Transfer.POKEMON_WANDERING, { id, pkm: Pkm.SABLEYE })
+              client.send(Transfer.WANDERER, wanderer)
               this.clock.setTimeout(() => {
                 if (this.state.wanderers.has(id)) {
                   itemStolen = pickRandomIn(values(player.items))
@@ -1957,11 +1988,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               -1,
               true
             )
-            this.state.wanderers.set(id, pkm)
+            const wanderer: Wanderer = {
+              id,
+              type: WandererType.CATCHABLE,
+              behavior: WandererBehavior.RUN_THROUGH,
+              pkm
+            }
+            this.state.wanderers.set(id, wanderer)
             this.clock.setTimeout(
-              () => {
-                client.send(Transfer.POKEMON_WANDERING, { id, pkm })
-              },
+              () => { client.send(Transfer.WANDERER, wanderer) },
               4000 + i * 400
             )
           }
@@ -2003,12 +2038,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           nbEggsFound++
         }
         if (player.effects.has(EffectEnum.GOLDEN_EGGS) && !goldenEggFound) {
-          player.goldenEggChance += max(0.1)(Math.pow(GOLDEN_EGG_CHANCE, 1 - baby.luck / 200))
+          player.goldenEggChance += max(0.1)(
+            Math.pow(GOLDEN_EGG_CHANCE, 1 - baby.luck / 200)
+          )
         } else if (
           player.effects.has(EffectEnum.HATCHER) &&
           nbEggsFound === 0
         ) {
-          player.eggChance += max(0.2)(Math.pow(EGG_CHANCE, 1 - baby.luck / 100))
+          player.eggChance += max(0.2)(
+            Math.pow(EGG_CHANCE, 1 - baby.luck / 100)
+          )
         }
       }
 

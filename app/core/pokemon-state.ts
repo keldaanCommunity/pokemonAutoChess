@@ -627,7 +627,7 @@ export default abstract class PokemonState {
         const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
         pokemon.team = originalTeam
         pokemon.onDeath({ board })
-        board.setValue(pokemon.positionX, pokemon.positionY, undefined)
+        board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
         if (attacker && pokemon !== attacker) {
           attacker.onKill({ target: pokemon, board, attackType })
         }
@@ -920,9 +920,9 @@ export default abstract class PokemonState {
         pokemon.pp = 0
         pokemon.status.tree = false
         pokemon.toMovingState()
-        pokemon.addAttack(10, pokemon, 0, false)
-        pokemon.addDefense(-5, pokemon, 0, false)
-        pokemon.addSpecialDefense(-5, pokemon, 0, false)
+        pokemon.addAttack(9, pokemon, 0, false)
+        pokemon.addDefense(-10, pokemon, 0, false)
+        pokemon.addSpecialDefense(-10, pokemon, 0, false)
       }
     }
   }
@@ -943,7 +943,7 @@ export default abstract class PokemonState {
         y <= max(board.rows - 1)(pokemon.positionY + pokemon.range);
         y++
       ) {
-        const value = board.getValue(x, y)
+        const value = board.getEntityOnCell(x, y)
         if (value && value.isTargettableBy(pokemon)) {
           targets.push(value)
         }

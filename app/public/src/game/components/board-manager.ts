@@ -30,7 +30,6 @@ import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
-import { displayBoost } from "./boosts-animations"
 import { Item } from "../../../../types/enum/Item"
 import { playMusic } from "../../pages/utils/audio"
 import { DEPTH } from "../depths"
@@ -638,6 +637,9 @@ export default class BoardManager {
       if (item === Item.BERSERK_GENE) {
         pkm?.addBerserkEffect()
       }
+      if (item === Item.AIR_BALLOON) {
+        pkm?.addFloatingAnimation()
+      }
     }
   }
 
@@ -692,31 +694,33 @@ export default class BoardManager {
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
           pokemonUI.hp = value as IPokemon["hp"]
+          if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
+            pokemonUI.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
           pokemonUI.atk = value as IPokemon["atk"]
           if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
-            this.displayBoost(Stat.ATK, pokemonUI)
+            pokemonUI.displayBoost(Stat.ATK)
           break
 
         case "def":
           pokemonUI.def = value as IPokemon["def"]
           if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
-            this.displayBoost(Stat.DEF, pokemonUI)
+            pokemonUI.displayBoost(Stat.DEF)
           break
 
         case "speed":
           pokemonUI.speed = value as IPokemon["speed"]
           if ((value as IPokemon["speed"]) > (previousValue as IPokemon["speed"]))
-            this.displayBoost(Stat.SPEED, pokemonUI)
+            pokemonUI.displayBoost(Stat.SPEED)
           break
 
         case "ap":
           pokemonUI.ap = value as IPokemon["ap"]
           if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
-            this.displayBoost(Stat.AP, pokemonUI)
+            pokemonUI.displayBoost(Stat.AP)
           break
 
         case "shiny":
@@ -853,15 +857,6 @@ export default class BoardManager {
         })
       }
     })
-  }
-
-  displayBoost(stat: Stat, pokemon: PokemonSprite) {
-    pokemon.emoteAnimation()
-    const coords = transformBoardCoordinates(
-      pokemon.positionX,
-      pokemon.positionY
-    )
-    displayBoost(this.scene, coords[0], coords[1], stat)
   }
 
   addPortal() {

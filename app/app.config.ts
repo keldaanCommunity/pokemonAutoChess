@@ -92,9 +92,9 @@ if (process.env.NODE_APP_INSTANCE) {
   //gameOptions.presence?.setMaxListeners(100) // extend max listeners to avoid memory leak warning ; no longer available since reverting to colyseus 0.15
 }
 
-if (process.env.MODE === "dev") {
+/*if (process.env.MODE === "dev") {
   gameOptions.devMode = true
-}
+}*/
 
 export default config({
   options: gameOptions,

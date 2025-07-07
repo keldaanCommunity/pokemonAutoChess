@@ -21,6 +21,7 @@ import {
   TMs,
   WeatherRocks
 } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
@@ -56,7 +57,6 @@ import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
-import { Passive } from "../../types/enum/Passive"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -383,33 +383,15 @@ export default class Player extends Schema implements IPlayer {
         previousNbArtifItems
       )
 
-      // variables for managing number of "Trash" items
-      const lostTrash = lostArtificialItems.filter(
-        (item) => item === Item.TRASH
-      ).length
-
       const removeArtificialItem = (item: Item) => {
         // first check held items
         const pokemons = values(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
-            pokemon.items.delete(item)
+            pokemon.removeItem(item, this)
 
-            if (item in SynergyGivenByItem) {
-              const type = SynergyGivenByItem[item]
-              const nativeTypes = getPokemonData(pokemon.name).types
-              if (nativeTypes.includes(type) === false) {
-                pokemon.types.delete(type)
-                if (
-                  pokemon.name === Pkm.SILVALLY &&
-                  nativeTypes.length === pokemon.types.size
-                ) {
-                  this.transformPokemon(pokemon, Pkm.TYPE_NULL)
-                }
-                if (!isOnBench(pokemon)) {
-                  needsRecomputingSynergiesAgain = true
-                }
-              }
+            if (item in SynergyGivenByItem && !isOnBench(pokemon)) {
+              needsRecomputingSynergiesAgain = true
             }
             return // break for loop to remove only one
           }
@@ -512,7 +494,7 @@ export default class Player extends Schema implements IPlayer {
           removeInArray<Item>(this.items, Item.CHEF_HAT)
           currentNbHats--
         } else {
-          hatHolders.at(-1)?.items.delete(Item.CHEF_HAT)
+          hatHolders.at(-1)?.removeItem(Item.CHEF_HAT, this)
           hatHolders.pop()
           currentNbHats--
         }

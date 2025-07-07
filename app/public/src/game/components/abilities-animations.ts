@@ -24,7 +24,6 @@ import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { UNOWNS_PER_ABILITY } from "./wanderers-manager"
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -117,7 +116,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -130,7 +129,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -149,7 +148,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       addAbilitySprite("COSMIC_POWER", coordinates, true)
         ?.setTint(0xff5060)
@@ -184,7 +183,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -209,7 +208,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -551,7 +550,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -571,7 +570,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -589,7 +588,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -603,7 +602,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -755,7 +754,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformEntityCoordinates(
@@ -860,7 +859,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
       const [dx, dy] = OrientationVector[orientation]
       const finalCoordinates = transformEntityCoordinates(
@@ -1097,7 +1096,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -1109,7 +1108,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       addAbilitySprite(skill, coordinatesTarget, true)?.setScale(3)
       break
@@ -1679,7 +1678,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -1693,7 +1692,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -2256,7 +2255,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
 
@@ -2487,7 +2486,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -2513,7 +2512,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -2543,7 +2542,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -2612,7 +2611,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -2752,7 +2751,7 @@ export function displayAbility(
               finalCoordinates[1] - coordinates[1],
               finalCoordinates[0] - coordinates[0]
             ) -
-              Math.PI / 2
+            Math.PI / 2
           )
         scene.tweens.add({
           targets: projectile,
@@ -2784,7 +2783,7 @@ export function displayAbility(
             finalCoordinates[1] - coordinates[1],
             finalCoordinates[0] - coordinates[0]
           ) +
-            Math.PI / 2
+          Math.PI / 2
         )
         scene.tweens.add({
           targets: spike,
@@ -2997,7 +2996,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -3022,7 +3021,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -3049,7 +3048,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       break
     }
@@ -3082,7 +3081,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
 
       scene.tweens.add({
@@ -3233,6 +3232,22 @@ export function displayAbility(
           specialProjectile?.destroy()
         }
       })
+      break
+    }
+
+    case Ability.SPIN_OUT: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformEntityCoordinates(
+        positionX + dx * 0.5,
+        positionY + dy * 0.5,
+        flip
+      )
+      addAbilitySprite(skill, finalCoordinates, true)?.setScale(4).setRotation(
+        Math.atan2(
+          finalCoordinates[1] - coordinates[1],
+          finalCoordinates[0] - coordinates[0]
+        ) - Math.PI
+      )
       break
     }
 
@@ -3758,7 +3773,7 @@ export function displayAbility(
             coordinatesTarget[1] - coordinates[1],
             coordinatesTarget[0] - coordinates[0]
           ) -
-            Math.PI / 2
+          Math.PI / 2
         )
       scene.tweens.add({
         targets: specialProjectile,
@@ -3788,19 +3803,24 @@ export function displayAbility(
       break
 
     case Ability.DOUBLE_IRON_BASH:
-      addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true)?.setScale(
-        2
-      )
+      addAbilitySprite(Ability.DRAIN_PUNCH, coordinatesTarget, true)
+        ?.setScale(2)
       break
 
     case Ability.STONE_EDGE:
-      addAbilitySprite(Ability.TORMENT, coordinates, true)?.setScale(2)
+      addAbilitySprite(Ability.TORMENT, coordinates, true)
+        ?.setScale(2)
       break
 
     case Ability.THUNDER_CAGE:
-      addAbilitySprite(Ability.THUNDER_CAGE, coordinatesTarget, true)?.setScale(
-        2
-      )
+      addAbilitySprite(Ability.THUNDER_CAGE, coordinatesTarget, true)
+        ?.setScale(2)
+      break
+
+    case Ability.MAGNET_PULL:
+      addAbilitySprite(Ability.THUNDER_CAGE, coordinates, true)
+        ?.setScale(2)
+        .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       break
 
     case Ability.BIDE:
@@ -4172,6 +4192,133 @@ export function displayAbility(
       break
   }
 }
+
+
+const UNOWNS_PER_ABILITY = new Map([
+  [
+    Ability.HIDDEN_POWER_A,
+    [Pkm.UNOWN_A, Pkm.UNOWN_B, Pkm.UNOWN_R, Pkm.UNOWN_A]
+  ],
+  [
+    Ability.HIDDEN_POWER_B,
+    [Pkm.UNOWN_B, Pkm.UNOWN_U, Pkm.UNOWN_R, Pkm.UNOWN_N]
+  ],
+  [
+    Ability.HIDDEN_POWER_C,
+    [Pkm.UNOWN_C, Pkm.UNOWN_O, Pkm.UNOWN_I, Pkm.UNOWN_N]
+  ],
+  [
+    Ability.HIDDEN_POWER_D,
+    [Pkm.UNOWN_D, Pkm.UNOWN_I, Pkm.UNOWN_T, Pkm.UNOWN_O]
+  ],
+  [
+    Ability.HIDDEN_POWER_E,
+    [Pkm.UNOWN_E, Pkm.UNOWN_G, Pkm.UNOWN_G, Pkm.UNOWN_S]
+  ],
+  [
+    Ability.HIDDEN_POWER_F,
+    [Pkm.UNOWN_F, Pkm.UNOWN_I, Pkm.UNOWN_S, Pkm.UNOWN_H]
+  ],
+  [
+    Ability.HIDDEN_POWER_G,
+    [Pkm.UNOWN_G, Pkm.UNOWN_O, Pkm.UNOWN_L, Pkm.UNOWN_D]
+  ],
+  [
+    Ability.HIDDEN_POWER_H,
+    [Pkm.UNOWN_H, Pkm.UNOWN_E, Pkm.UNOWN_A, Pkm.UNOWN_L]
+  ],
+  [
+    Ability.HIDDEN_POWER_I,
+    [Pkm.UNOWN_I, Pkm.UNOWN_T, Pkm.UNOWN_E, Pkm.UNOWN_M]
+  ],
+  [
+    Ability.HIDDEN_POWER_J,
+    [Pkm.UNOWN_J, Pkm.UNOWN_A, Pkm.UNOWN_W, Pkm.UNOWN_S]
+  ],
+  [
+    Ability.HIDDEN_POWER_K,
+    [Pkm.UNOWN_K, Pkm.UNOWN_I, Pkm.UNOWN_C, Pkm.UNOWN_K]
+  ],
+  [
+    Ability.HIDDEN_POWER_L,
+    [Pkm.UNOWN_L, Pkm.UNOWN_O, Pkm.UNOWN_C, Pkm.UNOWN_K]
+  ],
+  [
+    Ability.HIDDEN_POWER_M,
+    [Pkm.UNOWN_M, Pkm.UNOWN_A, Pkm.UNOWN_N, Pkm.UNOWN_A]
+  ],
+  [
+    Ability.HIDDEN_POWER_N,
+    [Pkm.UNOWN_N, Pkm.UNOWN_U, Pkm.UNOWN_K, Pkm.UNOWN_E]
+  ],
+  [
+    Ability.HIDDEN_POWER_O,
+    [Pkm.UNOWN_O, Pkm.UNOWN_V, Pkm.UNOWN_E, Pkm.UNOWN_N]
+  ],
+  [
+    Ability.HIDDEN_POWER_P,
+    [Pkm.UNOWN_P, Pkm.UNOWN_E, Pkm.UNOWN_S, Pkm.UNOWN_T]
+  ],
+  [
+    Ability.HIDDEN_POWER_Q,
+    [Pkm.UNOWN_Q, Pkm.UNOWN_U, Pkm.UNOWN_I, Pkm.UNOWN_T]
+  ],
+  [
+    Ability.HIDDEN_POWER_R,
+    [Pkm.UNOWN_R, Pkm.UNOWN_O, Pkm.UNOWN_L, Pkm.UNOWN_L]
+  ],
+  [
+    Ability.HIDDEN_POWER_S,
+    [Pkm.UNOWN_S, Pkm.UNOWN_U, Pkm.UNOWN_R, Pkm.UNOWN_F]
+  ],
+  [
+    Ability.HIDDEN_POWER_T,
+    [Pkm.UNOWN_T, Pkm.UNOWN_R, Pkm.UNOWN_E, Pkm.UNOWN_E]
+  ],
+  [
+    Ability.HIDDEN_POWER_U,
+    [Pkm.UNOWN_U, Pkm.UNOWN_X, Pkm.UNOWN_I, Pkm.UNOWN_E]
+  ],
+  [
+    Ability.HIDDEN_POWER_V,
+    [Pkm.UNOWN_V, Pkm.UNOWN_O, Pkm.UNOWN_L, Pkm.UNOWN_T]
+  ],
+  [
+    Ability.HIDDEN_POWER_W,
+    [Pkm.UNOWN_W, Pkm.UNOWN_I, Pkm.UNOWN_S, Pkm.UNOWN_H]
+  ],
+  [
+    Ability.HIDDEN_POWER_X,
+    [Pkm.UNOWN_X, Pkm.UNOWN_R, Pkm.UNOWN_A, Pkm.UNOWN_Y]
+  ],
+  [
+    Ability.HIDDEN_POWER_Y,
+    [Pkm.UNOWN_Y, Pkm.UNOWN_O, Pkm.UNOWN_G, Pkm.UNOWN_A]
+  ],
+  [
+    Ability.HIDDEN_POWER_Z,
+    [Pkm.UNOWN_Z, Pkm.UNOWN_E, Pkm.UNOWN_R, Pkm.UNOWN_O]
+  ],
+  [
+    Ability.HIDDEN_POWER_EM,
+    [
+      Pkm.UNOWN_EXCLAMATION,
+      Pkm.UNOWN_EXCLAMATION,
+      Pkm.UNOWN_EXCLAMATION,
+      Pkm.UNOWN_EXCLAMATION
+    ]
+  ],
+  [
+    Ability.HIDDEN_POWER_QM,
+    [
+      Pkm.UNOWN_QUESTION,
+      Pkm.UNOWN_QUESTION,
+      Pkm.UNOWN_QUESTION,
+      Pkm.UNOWN_QUESTION
+    ]
+  ]
+])
+
 
 export function hiddenPowerAnimation(
   scene: GameScene | DebugScene,

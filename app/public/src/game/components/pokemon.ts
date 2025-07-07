@@ -24,6 +24,7 @@ import {
   PokemonTint,
   type Rarity,
   SpriteType,
+  Stat,
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -34,21 +35,21 @@ import {
   PkmByIndex
 } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
+import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
+import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
+import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import PokemonDetail from "./pokemon-detail"
-import type { GameDialog } from "./game-dialog"
-import { DEPTH } from "../depths"
-import { logger } from "../../../../utils/logger"
 
 const spriteCountPerPokemon = new Map<string, number>()
 
@@ -134,6 +135,7 @@ export default class PokemonSprite extends DraggableObject {
   meal: Item | "" = ""
   mealSprite: GameObjects.Sprite | undefined
   inBattle: boolean = false
+  floatingTween?: Phaser.Tweens.Tween
 
   constructor(
     scene: GameScene | DebugScene,
@@ -269,6 +271,9 @@ export default class PokemonSprite extends DraggableObject {
     }
     if (pokemon.items.has(Item.BERSERK_GENE)) {
       this.addBerserkEffect()
+    }
+    if (pokemon.items.has(Item.AIR_BALLOON)) {
+      this.addFloatingAnimation()
     }
     this.add(this.itemsContainer)
 
@@ -1237,12 +1242,34 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.setTint(0xff0000)
   }
 
-  removeRageEffect() {
-    this.sprite.clearTint()
+  removeRageEffect(hasBerserkGene: boolean = false) {
+    if (hasBerserkGene) {
+      this.addBerserkEffect()
+    } else {
+      this.sprite.clearTint()
+    }
   }
 
   addBerserkEffect() {
     this.sprite.setTint(0x00ff00)
+  }
+
+  addFloatingAnimation() {
+    this.floatingTween = this.scene.tweens.add({
+      targets: this.sprite,
+      y: { from: this.sprite.y - 10, to: this.sprite.y - 20 },
+      duration: 500,
+      ease: "Sine.easeInOut",
+      yoyo: true,
+      repeat: -1
+    })
+  }
+
+  removeFloatingAnimation() {
+    if (this.floatingTween) {
+      this.floatingTween.stop()
+      this.floatingTween = undefined
+    }
   }
 
   addFlowerTrick() {
@@ -1280,6 +1307,37 @@ export default class PokemonSprite extends DraggableObject {
       onComplete: function () {
         flowerTrick.destroy(true)
       }
+    })
+  }
+
+  displayBoost(stat: Stat, debug?: boolean) {
+    const tint =
+      {
+        [Stat.AP]: 0xff00aa,
+        [Stat.SPEED]: 0xffaa44,
+        [Stat.ATK]: 0xff6633,
+        [Stat.DEF]: 0xffaa66,
+        [Stat.SPE_DEF]: 0xff99cc,
+        [Stat.SHIELD]: 0xffcc99
+      }[stat] ?? 0xffffff
+
+    const boost = new GameObjects.Sprite(
+      this.scene,
+      0,
+      -20,
+      "abilities",
+      `BOOST/000.png`
+    ).setDepth(DEPTH.BOOST_BACK)
+      .setScale(2)
+      .setTint(tint)
+
+    this.add(boost)
+    boost.anims.play({
+      key: "BOOST",
+      repeat: debug ? 5 : 0
+    })
+    boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      boost.destroy()
     })
   }
 }

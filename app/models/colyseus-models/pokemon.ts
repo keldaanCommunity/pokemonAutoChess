@@ -5277,11 +5277,11 @@ export class PikachuSurfer extends Pokemon {
   ])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 260
-  atk = 20
-  speed = 51
-  def = 10
-  speDef = 10
+  hp = 120
+  atk = 8
+  speed = 54
+  def = 4
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.SURF
@@ -5767,6 +5767,22 @@ export class Palkia extends Pokemon {
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
+export class Meltan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.AMORPHOUS])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 50
+  atk = 5
+  speed = 40
+  def = 8
+  speDef = 2
+  maxPP = 80
+  range = 1
+  skill = Ability.MAGNET_PULL
+  passive = Passive.MELTAN
+  attackSprite = AttackSprite.STEEL_MELEE
+}
+
 export class Melmetal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.AMORPHOUS])
   rarity = Rarity.LEGENDARY
@@ -5781,6 +5797,14 @@ export class Melmetal extends Pokemon {
   skill = Ability.DOUBLE_IRON_BASH
   attackSprite = AttackSprite.DRAGON_MELEE
   passive = Passive.MELMETAL
+  onAcquired(player: Player) {
+    if (player.items.includes(Item.MYSTERY_BOX) === false) {
+      player.items.push(Item.MYSTERY_BOX)
+    }
+  }
+  afterSell(player: Player) {
+    removeInArray(player.items, Item.MYSTERY_BOX)
+  }
 }
 
 export class Suicune extends Pokemon {
@@ -7092,6 +7116,9 @@ export class Deoxys extends Pokemon {
       player.items.push(Item.METEORITE)
     }
   }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.METEORITE)
+  }
 }
 
 export class DeoxysDefense extends Pokemon {
@@ -7116,6 +7143,9 @@ export class DeoxysDefense extends Pokemon {
     if (player.items.includes(Item.METEORITE) === false) {
       player.items.push(Item.METEORITE)
     }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.METEORITE)
   }
 }
 
@@ -7142,6 +7172,9 @@ export class DeoxysAttack extends Pokemon {
       player.items.push(Item.METEORITE)
     }
   }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.METEORITE)
+  }
 }
 
 export class DeoxysSpeed extends Pokemon {
@@ -7166,6 +7199,9 @@ export class DeoxysSpeed extends Pokemon {
     if (player.items.includes(Item.METEORITE) === false) {
       player.items.push(Item.METEORITE)
     }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.METEORITE)
   }
 }
 
@@ -10107,12 +10143,15 @@ export class Silvally extends Pokemon {
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
     if (y === 0) {
-      SynergyItems.forEach((synergyItem) => {
-        if (this.items.has(synergyItem)) {
-          this.items.delete(synergyItem)
-          player.items.push(synergyItem)
-        }
-      })
+      values(this.items).filter(item => (SynergyItems as ReadonlyArray<Item>).forEach(synergyItem => {
+        this.removeItem(synergyItem, player)
+        player.items.push(synergyItem)
+      }))
+    }
+  }
+  onItemRemoved(item: Item, player: Player) {
+    if ((SynergyItems as ReadonlyArray<Item>).includes(item)
+      && values(this.items).filter(item => (SynergyItems as ReadonlyArray<Item>).includes(item)).length === 0) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
   }
@@ -11404,7 +11443,7 @@ export class UnownY extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 50
+  maxPP = 100
   range = 9
   skill = Ability.HIDDEN_POWER_Y
   passive = Passive.UNOWN
@@ -14050,7 +14089,7 @@ export class Comfey extends Pokemon {
 
       // delete comfey
       team.delete(entity.id)
-      simulation.board.setValue(entity.positionX, entity.positionY, undefined)
+      simulation.board.setEntityOnCell(entity.positionX, entity.positionY, undefined)
       if (simulation.blueDpsMeter.has(entity.id)) {
         simulation.blueDpsMeter.delete(entity.id)
       }
@@ -15612,7 +15651,7 @@ export class Trubbish extends Pokemon {
     values(this.items).forEach((item) => {
       if (Berries.includes(item)) {
         this.hp += 10
-        this.items.delete(item)
+        this.removeItem(item, player)
       }
       if (ItemComponents.includes(item)) {
         this.hp += 25
@@ -15621,7 +15660,7 @@ export class Trubbish extends Pokemon {
             this.statIncreases[stat as Stat] += value
           }
         })
-        this.items.delete(item)
+        this.removeItem(item, player)
       }
       if (ArtificialItems.includes(item)) {
         this.hp += 50
@@ -15631,7 +15670,7 @@ export class Trubbish extends Pokemon {
           }
         })
 
-        this.items.delete(item)
+        this.removeItem(item, player)
 
         const itemIndex = player.artificialItems.indexOf(item)
         player.artificialItems[itemIndex] = Item.TRASH
@@ -16274,7 +16313,10 @@ export class HisuianLilligant extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
-    return (!state || state.additionalPokemons.includes(Pkm.PETILIL)) && regionSynergies.includes(Synergy.FIGHTING)
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.PETILIL)) &&
+      regionSynergies.includes(Synergy.FIGHTING)
+    )
   }
 }
 
@@ -16610,6 +16652,12 @@ function ogerponOnAcquired(
   }
 }
 
+function ogerponOnSell(player: Player) {
+  OgerponMasks.forEach((mask) => {
+    removeInArray(player.items, mask)
+  })
+}
+
 export class OgerponTeal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.UNIQUE
@@ -16624,6 +16672,7 @@ export class OgerponTeal extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_TEAL
 }
 
@@ -16642,6 +16691,7 @@ export class OgerponTealMask extends Pokemon {
   attackSprite = AttackSprite.GRASS_MELEE
   shiny = false
   onAcquired = (player: Player) => ogerponOnAcquired(player, Item.TEAL_MASK)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_TEAL
 }
 
@@ -16659,6 +16709,7 @@ export class OgerponWellspring extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_WELLSPRING
 }
 
@@ -16678,6 +16729,7 @@ export class OgerponWellspringMask extends Pokemon {
   shiny = false
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.WELLSPRING_MASK)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_WELLSPRING
 }
 
@@ -16695,6 +16747,7 @@ export class OgerponHearthflame extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_HEARTHFLAME
 }
 
@@ -16714,6 +16767,7 @@ export class OgerponHearthflameMask extends Pokemon {
   shiny = false
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.HEARTHFLAME_MASK)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_HEARTHFLAME
 }
 
@@ -16731,6 +16785,7 @@ export class OgerponCornerstone extends Pokemon {
   skill = Ability.IVY_CUDGEL
   attackSprite = AttackSprite.GRASS_MELEE
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_CORNERSTONE
 }
 
@@ -16750,6 +16805,7 @@ export class OgerponCornerstoneMask extends Pokemon {
   shiny = false
   onAcquired = (player: Player) =>
     ogerponOnAcquired(player, Item.CORNERSTONE_MASK)
+  afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_CORNERSTONE
 }
 
@@ -18995,6 +19051,49 @@ export class Furfrou extends Pokemon {
   passive = Passive.FUR_COAT
 }
 
+export class Varoom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.REVAVROOM
+  hp = 70
+  atk = 6
+  speed = 50
+  def = 3
+  speDef = 1
+  maxPP = 80
+  range = 1
+  skill = Ability.SPIN_OUT
+  attackSprite = AttackSprite.STEEL_MELEE
+  regional = true
+  passive = Passive.ACCELERATION
+}
+
+export class Revavroom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.STEEL,
+    Synergy.ARTIFICIAL,
+    Synergy.POISON
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 150
+  atk = 14
+  speed = 50
+  def = 7
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.SPIN_OUT
+  attackSprite = AttackSprite.STEEL_MELEE
+  regional = true
+  passive = Passive.ACCELERATION
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19986,5 +20085,8 @@ export const PokemonClasses: Record<
   [Pkm.MASQUERAIN]: Masquerain,
   [Pkm.GOSSIFLEUR]: Gossifleur,
   [Pkm.ELDEGOSS]: Eldegoss,
-  [Pkm.FURFROU]: Furfrou
+  [Pkm.FURFROU]: Furfrou,
+  [Pkm.MELTAN]: Meltan,
+  [Pkm.VAROOM]: Varoom,
+  [Pkm.REVAVROOM]: Revavroom
 }

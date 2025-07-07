@@ -4,6 +4,7 @@ import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
+import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
@@ -20,18 +21,16 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { PkmByIndex } from "../../../../types/enum/Pokemon"
+import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { max } from "../../../../utils/number"
+import { pickRandomIn } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
+import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import PokemonDetail from "./pokemon-detail"
-import { pickRandomIn } from "../../../../utils/random"
-import { displayBoost } from "./boosts-animations"
-import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
-import { DEPTH } from "../depths"
-import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -357,7 +356,7 @@ export default class BattleManager {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
         } else if (previousValue === true) {
-          pkm.removeRageEffect()
+          pkm.removeRageEffect(pokemon.items.has(Item.BERSERK_GENE))
         }
       }
     }
@@ -541,7 +540,7 @@ export default class BattleManager {
           pkm.specialAttackAnimation(pokemon)
         } else if (!pokemon.status.skydiving) {
           pkm.moveManager.setSpeed(
-            3 *
+            2 *
             getMoveSpeed(pokemon) *
             Math.max(
               Math.abs(pkm.x - coordinates[0]),
@@ -574,7 +573,7 @@ export default class BattleManager {
         }
       } else if (field === "ap") {
         if (value && value > (previousValue || 0)) {
-          this.displayBoost(Stat.AP, pkm.positionX, pkm.positionY)
+          pkm.displayBoost(Stat.AP)
         }
         pkm.ap = pokemon.ap
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -603,7 +602,7 @@ export default class BattleManager {
         }
       } else if (field === "speed") {
         if (value && value > (previousValue || 0)) {
-          this.displayBoost(Stat.SPEED, pkm.positionX, pkm.positionY)
+          pkm.displayBoost(Stat.SPEED)
         }
         pkm.speed = pokemon.speed
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -623,7 +622,7 @@ export default class BattleManager {
       } else if (field === "shield") {
         if (pokemon.shield >= 0) {
           if (value && value > (previousValue || 0)) {
-            this.displayBoost(Stat.SHIELD, pkm.positionX, pkm.positionY)
+            pkm.displayBoost(Stat.SHIELD)
           }
           pkm.shield = pokemon.shield
           pkm.lifebar?.setShield(pkm.shield)
@@ -640,7 +639,7 @@ export default class BattleManager {
         }
       } else if (field === "atk") {
         if (value && value > (previousValue || 0)) {
-          this.displayBoost(Stat.ATK, pkm.positionX, pkm.positionY)
+          pkm.displayBoost(Stat.ATK)
         }
         pkm.atk = pokemon.atk
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -652,7 +651,7 @@ export default class BattleManager {
         }
       } else if (field === "def") {
         if (value && value > (previousValue || 0)) {
-          this.displayBoost(Stat.DEF, pkm.positionX, pkm.positionY)
+          pkm.displayBoost(Stat.DEF)
         }
         pkm.def = pokemon.def
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -664,7 +663,7 @@ export default class BattleManager {
         }
       } else if (field === "speDef") {
         if (value && value > (previousValue || 0)) {
-          this.displayBoost(Stat.SPE_DEF, pkm.positionX, pkm.positionY)
+          pkm.displayBoost(Stat.SPE_DEF)
         }
         pkm.speDef = pokemon.speDef
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
@@ -737,11 +736,6 @@ export default class BattleManager {
         }
       }
     }
-  }
-
-  displayBoost(stat: Stat, positionX: number, positionY: number) {
-    const coords = transformEntityCoordinates(positionX, positionY, this.flip)
-    displayBoost(this.scene, coords[0], coords[1], stat)
   }
 
   displayDodge(x: number, y: number) {

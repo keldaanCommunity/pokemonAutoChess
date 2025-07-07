@@ -205,7 +205,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const passiveEffects = PassiveEffects[this.passive]
     if (passiveEffects) {
       for (const effect of passiveEffects) {
-        this.effectsSet.add(effect)
+        this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
       }
     }
   }
@@ -691,15 +691,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   moveTo(x: number, y: number, board: Board) {
     this.toMovingState()
-    const target = board.getValue(x, y)
+    const target = board.getEntityOnCell(x, y)
     if (target) target.toMovingState()
 
-    board.swapValue(this.positionX, this.positionY, x, y)
+    board.swapCells(this.positionX, this.positionY, x, y)
     this.cooldown = 100 // for faster retargeting
   }
 
   skydiveTo(x: number, y: number, board: Board) {
-    board.swapValue(this.positionX, this.positionY, x, y)
+    board.swapCells(this.positionX, this.positionY, x, y)
     this.status.skydiving = true
     this.toMovingState()
     this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
@@ -1168,7 +1168,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1
     ) {
-      const targetAtContact = board.getValue(this.targetX, this.targetY)
+      const targetAtContact = board.getEntityOnCell(this.targetX, this.targetY)
       const destination = this.state.getNearestAvailablePlaceCoordinates(
         this,
         board,
@@ -1212,6 +1212,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.passive = Passive.MIMIKYU_BUSTED
       this.addAttack(10, this, 0, false)
       this.status.triggerProtect(2000)
+      if (this.player) {
+        this.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+      }
     }
 
     if (this.passive === Passive.DARMANITAN && this.life < 0.3 * this.hp) {
@@ -1228,9 +1231,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (destination) this.moveTo(destination.x, destination.y, board)
       this.status.tree = true
       this.toIdleState()
-      this.addAttack(-10, this, 0, false)
-      this.addDefense(5, this, 0, false)
-      this.addSpecialDefense(5, this, 0, false)
+      this.addAttack(-9, this, 0, false)
+      this.addDefense(10, this, 0, false)
+      this.addSpecialDefense(10, this, 0, false)
     }
 
     if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {
@@ -1559,10 +1562,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         positionY: this.positionY
       })
       const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
+      const damage = Math.round(0.5 * this.hp)
       adjcells.forEach((cell) => {
         if (cell.value && this.team != cell.value.team) {
           cell.value.handleSpecialDamage(
-            100,
+            damage,
             board,
             AttackType.SPECIAL,
             this,

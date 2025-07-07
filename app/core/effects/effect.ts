@@ -140,6 +140,26 @@ export class OnAbilityCastEffect extends Effect {
   }
 }
 
+export class OnMoveEffect extends Effect {
+  override apply(
+    pokemon: PokemonEntity,
+    board: Board,
+    x: number,
+    y: number
+  ) { }
+  constructor(
+    effect?: (
+      pokemon: PokemonEntity,
+      board: Board,
+      x: number,
+      y: number
+    ) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
 export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
   count: number = 0
@@ -387,7 +407,7 @@ export const electricTripleAttackEffect = new OnAttackEffect(
           .getAdjacentCells(target.positionX, target.positionY, true)
           .forEach((cell) => {
             if (cell) {
-              const enemy = board.getValue(cell.x, cell.y)
+              const enemy = board.getEntityOnCell(cell.x, cell.y)
               if (enemy && pokemon.team !== enemy.team) {
                 enemy.handleSpecialDamage(
                   10,

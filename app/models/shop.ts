@@ -19,14 +19,14 @@ import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import { FishingRod, Item } from "../types/enum/Item"
 import {
+  getUnownsPoolPerStage,
+  isRegionalVariant,
   Pkm,
   PkmDuos,
   PkmFamily,
   PkmProposition,
   PkmRegionalVariants,
-  Unowns,
-  getUnownsPoolPerStage,
-  isRegionalVariant
+  Unowns
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
@@ -41,7 +41,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
-import { PokemonClasses } from "./colyseus-models/pokemon"
+import { Meltan, PokemonClasses } from "./colyseus-models/pokemon"
 import PokemonFactory from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
@@ -99,6 +99,8 @@ export function getSellPrice(
     price = pokemon.shiny ? 10 : 2
   } else if (name == Pkm.DITTO) {
     price = 5
+  } else if (name == Pkm.MELTAN) {
+    price = 0
   } else if (name === Pkm.MAGIKARP) {
     price = 0
   } else if (name === Pkm.FEEBAS) {
@@ -144,6 +146,8 @@ export function getBuyPrice(
 
   if (name === Pkm.DITTO) {
     price = 5
+  } else if (name === Pkm.MELTAN) {
+    price = 0
   } else if (Unowns.includes(name)) {
     price = 1
   } else {
@@ -446,7 +450,7 @@ export default class Shop {
       state.stageLevel >= 2 &&
       !noSpecial
     ) {
-      return Pkm.DITTO
+      return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
     if (
@@ -602,5 +606,40 @@ export default class Shop {
     if (rod === Item.SUPER_ROD) return Pkm.WISHIWASHI
     if (rod === Item.GOOD_ROD) return Pkm.FEEBAS
     return Pkm.MAGIKARP
+  }
+
+  magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
+    const rarityProbability = {
+      [Rarity.SPECIAL]: 0.35,
+      [Rarity.COMMON]: 0.15,
+      [Rarity.UNCOMMON]: 0.3,
+      [Rarity.RARE]: 0.15,
+      [Rarity.EPIC]: 0.05
+    }
+    const rarity_seed = Math.random()
+    let threshold = 0
+    const finals = new Set(
+      values(player.board)
+        .filter((pokemon) => pokemon.final)
+        .map((pokemon) => PkmFamily[pokemon.name])
+    )
+
+    let rarity = Rarity.SPECIAL
+    for (const r in rarityProbability) {
+      threshold += rarityProbability[r]
+      if (rarity_seed < threshold) {
+        rarity = r as Rarity
+        break
+      }
+    }
+
+    if (rarity !== Rarity.SPECIAL) {
+      const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
+        Synergy.STEEL
+      ])
+      if (steelPkm !== Pkm.MAGIKARP) return steelPkm
+    }
+
+    return Pkm.MELTAN
   }
 }
