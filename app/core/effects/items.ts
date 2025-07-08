@@ -15,6 +15,7 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnDamageReceivedEffect,
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -185,6 +186,26 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
+const smokeBallEffect = new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
+  if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.hp) {
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
+        cell.value.status.triggerBlinded(4000, cell.value)
+      }
+    })
+    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+      id: pokemon.simulation.id,
+      skill: "SMOKE_BALL",
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY
+    })
+    pokemon.removeItem(Item.SMOKE_BALL)
+    pokemon.flyAway(board)
+  }
+})
+
 export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.RUSTED_SWORD]: [
     new OnItemGainedEffect((pokemon) => {
@@ -211,12 +232,12 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.PUNCHING_GLOVE]: [
-    new OnHitEffect((pokemon, target, board) => {
+    new OnHitEffect(({ attacker, target, board }) => {
       target.handleDamage({
         damage: Math.round(0.08 * target.hp),
         board,
         attackType: AttackType.PHYSICAL,
-        attacker: pokemon,
+        attacker,
         shouldTargetGainMana: true
       })
     })
@@ -397,6 +418,19 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.MUSCLE_BAND]: [
+    new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
+      if (
+        pokemon.count.defensiveRibbonCount < 20 &&
+        damage > 0
+      ) {
+        pokemon.count.defensiveRibbonCount++
+        if (pokemon.count.defensiveRibbonCount % 2 === 0) {
+          pokemon.addAttack(1, pokemon, 0, false)
+          pokemon.addDefense(2, pokemon, 0, false)
+          pokemon.addSpeed(5, pokemon, 0, false)
+        }
+      }
+    }),
     new OnItemRemovedEffect((pokemon) => {
       const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
@@ -421,6 +455,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       }
     })
   ],
+
+  [Item.SMOKE_BALL]: [smokeBallEffect],
 
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
@@ -457,8 +493,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.count.magmarizerCount++
     }),
-    new OnHitEffect((pokemon, target, board) => {
-      target.status.triggerBurn(2000, target, pokemon)
+    new OnHitEffect(({ attacker, target }) => {
+      target.status.triggerBurn(2000, target, attacker)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.count.magmarizerCount, pokemon, 0, false)
@@ -523,6 +559,33 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
             pokemon.removeItem(Item.MAX_ELIXIR, false)
           }, 1000)
         )
+      }
+    })
+  ],
+
+  [Item.ABSORB_BULB]: [
+    new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
+      if (pokemon.life < 0.5 * pokemon.hp) {
+        const damage = pokemon.physicalDamageReduced + pokemon.specialDamageReduced
+        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+          id: pokemon.simulation.id,
+          skill: Ability.EXPLOSION,
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY
+        })
+        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              false,
+              false
+            )
+          }
+        })
+        pokemon.removeItem(Item.ABSORB_BULB)
       }
     })
   ]

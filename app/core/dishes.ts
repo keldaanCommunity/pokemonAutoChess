@@ -80,10 +80,10 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.BINDING_MOCHI)
     }),
-    new OnHitEffect((entity, target, board) => {
-      if (entity.effects.has(EffectEnum.BINDING_MOCHI)) {
-        target.status.triggerPossessed(5000, target, entity)
-        entity.effects.delete(EffectEnum.BINDING_MOCHI)
+    new OnHitEffect(({ attacker, target }) => {
+      if (attacker.effects.has(EffectEnum.BINDING_MOCHI)) {
+        target.status.triggerPossessed(5000, target, attacker)
+        attacker.effects.delete(EffectEnum.BINDING_MOCHI)
       }
     })
   ],
@@ -108,10 +108,10 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.CASTELIACONE)
     }),
-    new OnHitEffect((entity, target, board) => {
-      if (entity.effects.has(EffectEnum.CASTELIACONE)) {
+    new OnHitEffect(({ attacker, target }) => {
+      if (attacker.effects.has(EffectEnum.CASTELIACONE)) {
         target.status.triggerFreeze(5000, target)
-        entity.effects.delete(EffectEnum.CASTELIACONE)
+        attacker.effects.delete(EffectEnum.CASTELIACONE)
       }
     })
   ],
@@ -277,20 +277,20 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     })
   ],
   SIRUPY_APPLE: [
-    new OnHitEffect((entity, target, board) => {
-      if (chance(0.3, entity)) {
-        target.status.triggerParalysis(3000, target, entity)
+    new OnHitEffect(({ attacker, target }) => {
+      if (chance(0.3, attacker)) {
+        target.status.triggerParalysis(3000, target, attacker)
       }
     })
   ],
   SWEET_APPLE: [
-    new OnHitEffect((entity, target, board) => {
-      target.addSpecialDefense(-2, entity, 0, false)
+    new OnHitEffect(({ attacker, target }) => {
+      target.addSpecialDefense(-2, attacker, 0, false)
     })
   ],
   TART_APPLE: [
-    new OnHitEffect((entity, target, board) => {
-      target.addDefense(-2, entity, 0, false)
+    new OnHitEffect(({ attacker, target }) => {
+      target.addDefense(-2, attacker, 0, false)
     })
   ],
   SWEET_HERB: [
@@ -307,10 +307,10 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.WHIPPED_DREAM)
     }),
-    new OnHitEffect((entity, target, board) => {
-      if (entity.effects.has(EffectEnum.WHIPPED_DREAM)) {
-        target.status.triggerCharm(5000, target, entity)
-        entity.effects.delete(EffectEnum.WHIPPED_DREAM)
+    new OnHitEffect(({ attacker, target }) => {
+      if (attacker.effects.has(EffectEnum.WHIPPED_DREAM)) {
+        target.status.triggerCharm(5000, target, attacker)
+        attacker.effects.delete(EffectEnum.WHIPPED_DREAM)
       }
     })
   ],

@@ -18,8 +18,6 @@ import {
 } from "../types"
 import {
   ARMOR_FACTOR,
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   ON_ATTACK_MANA
@@ -41,7 +39,7 @@ import {
   SynergyStones
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
@@ -52,13 +50,14 @@ import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
-import Board, { Cell } from "./board"
+import Board from "./board"
 import {
   Effect as EffectClass,
   FireHitEffect,
   GrowGroundEffect,
   MonsterKillEffect,
   OnAttackEffect,
+  OnDamageReceivedEffect,
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -182,7 +181,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.attackSprite = pokemon.attackSprite
     this.stars = pokemon.stars
     this.skill = pokemon.skill
-    this.passive = pokemon.passive
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
@@ -201,13 +199,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     pokemon.types.forEach((type) => {
       this.types.add(type)
     })
-
-    const passiveEffects = PassiveEffects[this.passive]
-    if (passiveEffects) {
-      for (const effect of passiveEffects) {
-        this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
-      }
-    }
+    
+    this.changePassive(pokemon.passive)
   }
 
   update(dt: number, board: Board, player: Player | undefined) {
@@ -842,19 +835,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    // Synergy effects on hit
-    this.effectsSet.forEach((effect) => {
-      if (effect instanceof OnHitEffect) {
-        effect.apply(this, target, board)
-      }
-    })
+    const onHitEffects = [
+      ...this.effectsSet.values(),
+      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
+    ].filter((effect) => effect instanceof OnHitEffect)
 
-    // Item effects on hit
-    const itemEffects: OnHitEffect[] = values(this.items)
-      .flatMap((item) => ItemEffects[item] ?? [])
-      .filter((effect) => effect instanceof OnHitEffect)
-    itemEffects.forEach((effect) => {
-      effect.apply(this, target, board)
+    onHitEffects.forEach((effect) => {
+      effect.apply({ attacker: this, target, board, totalTakenDamage, physicalDamage, specialDamage, trueDamage })
     })
 
     if (this.hasSynergyEffect(Synergy.ICE)) {
@@ -1027,65 +1014,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
     board: Board
   }) {
-    // Items effects
-    if (
-      this.items.has(Item.MUSCLE_BAND) &&
-      this.count.defensiveRibbonCount < 20 &&
-      damage > 0
-    ) {
-      this.count.defensiveRibbonCount++
-      if (this.count.defensiveRibbonCount % 2 === 0) {
-        this.addAttack(1, this, 0, false)
-        this.addDefense(2, this, 0, false)
-        this.addSpeed(5, this, 0, false)
-      }
-    }
-
-    if (
-      this.items.has(Item.SMOKE_BALL) &&
-      this.life > 0 &&
-      this.life < 0.4 * this.hp
-    ) {
-      const cells = board.getAdjacentCells(this.positionX, this.positionY)
-      cells.forEach((cell) => {
-        if (cell.value && cell.value.team !== this.team) {
-          cell.value.status.triggerParalysis(4000, cell.value, this)
-          cell.value.status.triggerBlinded(4000, cell.value)
-        }
-      })
-      this.simulation.room.broadcast(Transfer.ABILITY, {
-        id: this.simulation.id,
-        skill: "SMOKE_BALL",
-        positionX: this.positionX,
-        positionY: this.positionY
-      })
-      this.removeItem(Item.SMOKE_BALL)
-      this.flyAway(board)
-    }
-
-    if (this.items.has(Item.ABSORB_BULB) && this.life < 0.5 * this.hp) {
-      const damage = this.physicalDamageReduced + this.specialDamageReduced
-      this.simulation.room.broadcast(Transfer.ABILITY, {
-        id: this.simulation.id,
-        skill: Ability.EXPLOSION,
-        positionX: this.positionX,
-        positionY: this.positionY
-      })
-      board.getAdjacentCells(this.positionX, this.positionY).forEach((cell) => {
-        if (cell.value && cell.value.team !== this.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            this,
-            false,
-            false
-          )
-        }
-      })
-      this.removeItem(Item.ABSORB_BULB)
-    }
-
     // Flying protection
     if (
       this.flyingProtection > 0 &&
@@ -1188,9 +1116,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     // Berries trigger
-    const berry = values(this.items).find(
-      (item) => Berries.includes(item) || item === Item.BERRY_JUICE
-    )
+    const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
       this.eatBerry(berry)
     }
@@ -1206,98 +1132,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     // Other passives
-    if (this.passive === Passive.MIMIKYU && this.life / this.hp < 0.5) {
-      this.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
-      this.name = Pkm.MIMIKYU_BUSTED
-      this.passive = Passive.MIMIKYU_BUSTED
-      this.addAttack(10, this, 0, false)
-      this.status.triggerProtect(2000)
-      if (this.player) {
-        this.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
-      }
-    }
+    const onDamageReceivedEffects = [
+      ...this.effectsSet.values(),
+      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
+    ].filter((effect) => effect instanceof OnDamageReceivedEffect)
 
-    if (this.passive === Passive.DARMANITAN && this.life < 0.3 * this.hp) {
-      this.index = PkmIndex[Pkm.DARMANITAN_ZEN]
-      this.name = Pkm.DARMANITAN_ZEN
-      this.passive = Passive.DARMANITAN_ZEN
-      this.skill = Ability.TRANSE
-      this.pp = 0
-      this.effects.add(EffectEnum.ZEN_MODE)
-      const destination = board.getTeleportationCell(
-        this.positionX,
-        this.positionY
-      )
-      if (destination) this.moveTo(destination.x, destination.y, board)
-      this.status.tree = true
-      this.toIdleState()
-      this.addAttack(-9, this, 0, false)
-      this.addDefense(10, this, 0, false)
-      this.addSpecialDefense(10, this, 0, false)
-    }
-
-    if (this.passive === Passive.GLIMMORA && this.life < 0.5 * this.hp) {
-      this.passive = Passive.NONE
-
-      const cells = new Array<Cell>()
-
-      let startY = 1
-      let endY = 3
-      if (this.team === Team.RED_TEAM) {
-        startY = -2
-        endY = 0
-      }
-
-      for (let x = -1; x < 2; x++) {
-        for (let y = startY; y < endY; y++) {
-          if (
-            !(
-              this.positionX + x < 0 ||
-              this.positionX + x > BOARD_WIDTH ||
-              this.positionY + y < 0 ||
-              this.positionY + y > BOARD_HEIGHT
-            )
-          ) {
-            cells.push({
-              x: this.positionX + x,
-              y: this.positionY + y,
-              value:
-                board.cells[
-                board.columns * this.positionY + y + this.positionX + x
-                ]
-            })
-          }
-        }
-      }
-
-      cells.forEach((cell) => {
-        board.addBoardEffect(
-          cell.x,
-          cell.y,
-          EffectEnum.TOXIC_SPIKES,
-          this.simulation
-        )
-
-        this.simulation.room.broadcast(Transfer.ABILITY, {
-          id: this.simulation.id,
-          skill: "TOXIC_SPIKES",
-          positionX: this.positionX,
-          positionY: this.positionY,
-          targetX: cell.x,
-          targetY: cell.y
-        })
-
-        if (cell.value && cell.value.team !== this.team) {
-          cell.value.handleSpecialDamage(
-            20,
-            board,
-            AttackType.SPECIAL,
-            this,
-            false
-          )
-        }
-      })
-    }
+    onDamageReceivedEffects.forEach((effect) => {
+      effect.apply(this, attacker, board, damage)
+    })
   }
 
   onCriticalAttack({
@@ -1922,6 +1764,29 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       targetY: targetY,
       orientation: this.orientation
     })
+  }
+
+  changePassive(newPassive: Passive) {
+    if (this.passive === newPassive) {
+      return
+    }
+
+    // remove old passive effects
+    if (this.passive) {
+      const oldPassiveEffects = PassiveEffects[this.passive] ?? []
+      oldPassiveEffects.forEach((effect) => {
+        this.effectsSet.delete(effect)
+      })
+    }
+
+    // set new passive
+    this.passive = newPassive
+
+    // apply new passive effects    
+    const newPassiveEffects = PassiveEffects[newPassive] ?? []
+    for (const effect of newPassiveEffects) {
+        this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
+    }
   }
 }
 

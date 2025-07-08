@@ -17,6 +17,7 @@
 - Surfing Pikachu now has the same stats than Pikachu but gain 50 shield and 3 attack per aquatic synergy level
 - Sewaddle line is now Uncommon
 - Skorupi is now Dark/Bug/Poison type like its evolution Drapion.
+- Change Darmanitan Zen mode: now can attack at range, but with lower attack and speed. Attacks deal special damage, scale with AP and heal for 100% of damage dealt.
 
 # Changes to Synergies
 
