@@ -2449,7 +2449,7 @@ export class FireBlastStrategy extends AbilityStrategy {
     for (const cell of cellsHit) {
       const entityOnCell = board.getEntityOnCell(cell.x, cell.y)
       if (entityOnCell && entityOnCell.team !== pokemon.team) {
-        target.handleSpecialDamage(
+        entityOnCell.handleSpecialDamage(
           damage,
           board,
           AttackType.SPECIAL,
