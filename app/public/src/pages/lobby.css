@@ -11,13 +11,36 @@
   width: 100%;
 }
 
-#lobby-logo {
+.lobby-header {
   position: fixed;
   top: 0;
-  left: calc(50vw + 45px);
-  transform: translate(-50%);
+  left: 0;
+  right: 0;
   height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
+  gap: 1vw;
+}
+
+.lobby-header-left {
+  display: flex;
+  flex-flow: column;
+}
+
+.lobby-subtitle{
+  color: white;
+}
+
+#lobby-logo {
+  height: 90px;
+}
+
+.lobby-title {
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  font-size: 2.5vw;
+  color: white;
 }
 
 .lobby section {

@@ -120,7 +120,19 @@ function MainLobby() {
   const { t } = useTranslation()
   return (
     <div className="main-lobby">
-      <img src="/assets/ui/pac_fullwidth.svg" alt="Pokémon Auto Chess" id="lobby-logo" />
+      <div className="lobby-header">
+        <div className="lobby-header-left">
+          <span className="lobby-title">Pokemon Auto Chess</span>
+          <span className="lobby-subtitle">{t("nintendo_warning")}</span>
+        </div>
+
+        <img
+          src="/assets/ui/pokemon_autochess_final.png"
+          alt="Pokémon Auto Chess"
+          id="lobby-logo"
+        />
+      </div>
+
       <nav className="main-lobby-nav">
         <ul>
           <li
@@ -167,9 +179,7 @@ function MainLobby() {
       >
         <LeaderboardMenu />
       </section>
-      <section
-        className={cc("rooms", { active: activeSection === "rooms" })}
-      >
+      <section className={cc("rooms", { active: activeSection === "rooms" })}>
         <RoomMenu />
       </section>
       {/*<section
