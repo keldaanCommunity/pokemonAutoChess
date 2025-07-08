@@ -1,5 +1,6 @@
 # New Pokemons:
 
+- Celesteela
 - Venipede
 - Whirlipede
 - Scolipede

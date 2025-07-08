@@ -490,7 +490,8 @@
 		"CHAIN_CRAZED": "Chain Crazed",
 		"STEAMROLLER": "Steamroller",
 		"MAGNET_PULL": "Magnet Pull",
-		"SPIN_OUT": "Spin Out"
+		"SPIN_OUT": "Spin Out",
+		"ULTRA_THRUSTERS": "Ultra Thrusters"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1480,7 +1481,8 @@
 		"MUNKIDORI": "Munkidori",
 		"FEZANDIPITI": "Fezandipiti",
 		"VAROOM": "Varoom",
-		"REVAVROOM": "Revavroom"
+		"REVAVROOM": "Revavroom",
+		"CELESTEELA": "Celesteela"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1951,7 +1953,8 @@
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
 		"STEAMROLLER": "Rolls over the enemies to the farthest target, dealing [50,100,200,SP]% of SPEED as SPECIAL to all enemies in the path with [50,LK]% chance to apply FLINCH for 3 seconds.",
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
-		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
+		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration.",
+		"ULTRA_THRUSTERS": "Adjacent enemies take [50,100,200,SP] SPECIAL and get BURN for 3 seconds while user quickly moves backward to a safe spot."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

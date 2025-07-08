@@ -19094,6 +19094,21 @@ export class Revavroom extends Pokemon {
   passive = Passive.ACCELERATION
 }
 
+export class Celesteela extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING, Synergy.GRASS])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 30
+  speed = 40
+  def = 15
+  speDef = 15
+  maxPP = 100
+  range = 1
+  skill = Ability.ULTRA_THRUSTERS
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20088,5 +20103,6 @@ export const PokemonClasses: Record<
   [Pkm.FURFROU]: Furfrou,
   [Pkm.MELTAN]: Meltan,
   [Pkm.VAROOM]: Varoom,
-  [Pkm.REVAVROOM]: Revavroom
+  [Pkm.REVAVROOM]: Revavroom,
+  [Pkm.CELESTEELA]: Celesteela,
 }

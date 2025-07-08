@@ -114,6 +114,7 @@ export enum Pkm {
   CASTFORM_SUN = "CASTFORM_SUN",
   CATERPIE = "CATERPIE",
   CELEBI = "CELEBI",
+  CELESTEELA = "CELESTEELA",
   CENTISKORCH = "CENTISKORCH",
   CHANDELURE = "CHANDELURE",
   CHANSEY = "CHANSEY",
@@ -1917,7 +1918,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.BUZZWOLE]: "0794",
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.XURKITREE]: "0796",
-  //[Pkm.CELESTEELA]: "0797",
+  [Pkm.CELESTEELA]: "0797",
   [Pkm.KARTANA]: "0798",
   [Pkm.GUZZLORD]: "0799",
   [Pkm.NECROZMA]: "0800",
@@ -3156,7 +3157,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ELDEGOSS]: Pkm.GOSSIFLEUR,
   [Pkm.FURFROU]: Pkm.FURFROU,
   [Pkm.VAROOM]: Pkm.VAROOM,
-  [Pkm.REVAVROOM]: Pkm.VAROOM
+  [Pkm.REVAVROOM]: Pkm.VAROOM,
+  [Pkm.CELESTEELA]: Pkm.CELESTEELA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8293,7 +8295,7 @@ export const AnimationConfig: {
     ability: AnimationType.TailWhip,
     emote: AnimationType.Shoot
   },
-  [Pkm.VAROOM]:{
+  [Pkm.VAROOM]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot
@@ -8301,6 +8303,11 @@ export const AnimationConfig: {
   [Pkm.REVAVROOM]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swing,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.CELESTEELA]: {
+    attack: AnimationType.Slam,
+    ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   }
 }
