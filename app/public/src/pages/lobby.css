@@ -85,6 +85,10 @@
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
+  background-image: url("assets/ui/test.png");
+  background-size:  456px 912px;
+  background-position-x: 0;
+  background-position-y: 0;
 }
 
 .lobby h2 {
