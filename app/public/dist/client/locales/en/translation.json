@@ -1565,7 +1565,7 @@
 		"METEOR_MASH": "Deal [15,30,60,SP] SPECIAL 3 times to the target and increase the user's ATK by [2,SP].",
 		"HURRICANE": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target and inflict them with PARALYSIS for 3 seconds.",
 		"HEAL_BLOCK": "Deal [20,40,80,SP] SPECIAL and WOUND all adjacent enemy Pokémon for 5 seconds.",
-		"ROAR_OF_TIME": "Grant RESURECTION and [20,SP] SPEED to the strongest allied Pokémon (most items > most stars > most rare).",
+		"ROAR_OF_TIME": "Grant RESURECTION and [20,SP] SPEED to the STRONGEST allied Pokémon.",
 		"ROCK_TOMB": "Deal [30,60,120,SP] SPECIAL to the target and decrease their SPEED by [10,20,40].",
 		"ROCK_SMASH": "Deal [25,50,100,SP] SPECIAL and ARMOR_BREAK for [3,6,9] seconds to the target.",
 		"HEAD_SMASH": "Deal [40,80,150,SP] SPECIAL to the target and [10,20,40,SP] PHYSICAL to the user. Execute the target if they suffer from SLEEP or FREEZE.",
@@ -1911,7 +1911,7 @@
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
 		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second",
 		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
-		"DECORATE": "Decorates the nearest strongest ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
+		"DECORATE": "Decorates the nearest STRONGEST ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
 		"DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
 		"TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
 		"HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
@@ -1940,7 +1940,7 @@
 		"VICTORY_DANCE": "Performs a dance to usher in victory. Raise user's ATK and DEF by [3,SP] and SPEED by [10,SP].",
 		"BOOMBURST": "Deal [60,SP] SPECIAL to all adjacent units including allies, and causing FLINCH for 4 seconds.",
 		"FOLLOW_ME": "Jump to a free tile far away and gain [40,SP] SHIELD. Enemies that were targeting the user get CHARM for 3 seconds.",
-		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.",
+		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the STRONGEST closest ally.",
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
 		"COTTON_GUARD": "Wraps its body in soft cotton, gaining [15,30,60,SP] SHIELD and 3 DEF, then dropping cotton balls in the 3 tiles in front. Cotton balls stay on the ground, inflicting SLEEP for 1 second on any Pokémon that walk on it.",
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
@@ -2143,7 +2143,7 @@
 		"CURSE_OF_VULNERABILITY": "The enemy with the highest DEF + SPE_DEF lose 5 of it and is FLINCH",
 		"CURSE_OF_WEAKNESS": "Also, the enemy with the highest ATK lose 25% of it and is PARALYSIS",
 		"CURSE_OF_TORMENT": "Also, the enemy with the highest AP lose 50% of it and is FATIGUE",
-		"CURSE_OF_FATE": "Also, the strongest enemy is CURSE and will be KO after 7 seconds",
+		"CURSE_OF_FATE": "Also, the STRONGEST enemy is CURSE and will be KO after 7 seconds",
 		"AROMATIC_MIST": "20% additional SPECIAL to attacks and shocks",
 		"FAIRY_WIND": "40% additional SPECIAL to attacks and shocks",
 		"STRANGE_STEAM": "60% additional SPECIAL to attacks and shocks",
@@ -2180,8 +2180,8 @@
 		"FLUID": "Ally team gains 1 SPEED and 3 HP per unique active synergy",
 		"SHAPELESS": "Ally team gains 3 SPEED and 6 HP per unique active synergy",
 		"ETHEREAL": "Ally team gains 6 SPEED and 12 HP per unique active synergy",
-		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the strongest adjacent ally.",
-		"LUNCH_BREAK": "The Chef cook two dishes and feed the two strongest adjacent allies after every round.",
+		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the STRONGEST adjacent ally.",
+		"LUNCH_BREAK": "The Chef cook two dishes and feed the two STRONGEST adjacent allies after every round.",
 		"BANQUET": "Gain a second CHEF_HAT."
 	},
 	"item": {
@@ -2879,7 +2879,7 @@
 		"MONSTER": "MONSTER Pokémon can FLINCH their opponents for 3 seconds on attack. Every time they get a KO, they gain stats, heal and grow in size.",
 		"HUMAN": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs and HMs.",
 		"AQUATIC": "AQUATIC Pokémon reduce the duration of status afflictions for all your team. After 8 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies.",
-		"BUG": "At the start of combat, your strongest BUG Pokémon are cloned.",
+		"BUG": "At the start of combat, your STRONGEST BUG Pokémon are cloned.",
 		"FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",
 		"FLORA": "When the first FLORA Pokémon is KO'd, a flower blossoms. The new Pokémon receives one random item from each FLORA ally KO'd.",
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical damage, and can adapt to weather.",
@@ -3905,5 +3905,11 @@
 		"easy": "Easy",
 		"normal": "Normal",
 		"hard": "Ultra"
+	},
+	"technical_terms": {
+		"STRONGEST": "strongest"
+	},
+	"technical_terms_definitions": {
+		"STRONGEST": "Strongest is defined as, by order of priority: 1. Number of items held, 2. Unit tier, 3. Unit rarity"
 	}
 }

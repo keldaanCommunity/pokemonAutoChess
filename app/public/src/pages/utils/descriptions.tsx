@@ -15,6 +15,10 @@ const Statuses = Object.keys(Status)
 const Weathers = Object.keys(Weather)
 const Synergies = Object.keys(Synergy)
 const Items = Object.keys(Item)
+const TechnicalTerms = [
+  "STRONGEST"
+]
+
 
 export const iconRegExp = new RegExp(
   `(?<=\\W|^)(?:${[
@@ -24,6 +28,7 @@ export const iconRegExp = new RegExp(
     ...Weathers,
     ...Synergies,
     ...Items,
+    ...TechnicalTerms,
     "GOLD",
     "STAR"
   ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
@@ -111,6 +116,12 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
             <SynergyIcon type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
+        )
+      } else if (TechnicalTerms.includes(token)) {
+        d = (
+          <i title={t(`technical_terms_definitions.${token}`)} className="technical-term">
+            {t(`technical_terms.${token}`)}
+          </i>
         )
       } else if (/\[[^\]]+\]/.test(token)) {
         const array = token.slice(1, -1).split(",")
