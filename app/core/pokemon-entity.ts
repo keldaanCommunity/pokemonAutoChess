@@ -1787,64 +1787,64 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     switch (berry) {
       case Item.AGUAV_BERRY:
-        heal(min(20)(0.5 * this.hp))
+        heal(min(50)(0.5 * this.hp))
         this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
-        heal(20)
+        heal(50)
         this.addSpecialDefense(20, this, 0, false)
         break
       case Item.ASPEAR_BERRY:
         this.status.freeze = false
         this.status.freezeCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_FREEZE)
-        heal(20)
+        heal(50)
         this.addSpeed(15, this, 0, false)
         break
       case Item.CHERI_BERRY:
         this.status.healParalysis(this)
         this.effects.add(EffectEnum.IMMUNITY_PARALYSIS)
-        heal(20)
+        heal(50)
         this.addAttack(10, this, 0, false)
         break
       case Item.CHESTO_BERRY:
         this.status.sleep = false
         this.status.sleepCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_SLEEP)
-        heal(20)
+        heal(50)
         this.addAbilityPower(50, this, 0, false)
         break
       case Item.GANLON_BERRY:
-        heal(20)
+        heal(50)
         this.addDefense(20, this, 0, false)
         break
       case Item.JABOCA_BERRY:
-        heal(20)
+        heal(50)
         this.status.triggerSpikeArmor(10000)
         break
       case Item.LANSAT_BERRY:
-        heal(20)
+        heal(50)
         this.addCritChance(50, this, 0, false)
         break
       case Item.LEPPA_BERRY:
-        heal(20)
+        heal(50)
         this.addPP(50, this, 0, false)
         break
       case Item.LIECHI_BERRY:
-        heal(20)
+        heal(50)
         this.addAttack(15, this, 0, false)
         break
       case Item.LUM_BERRY:
-        heal(20)
+        heal(50)
         this.status.clearNegativeStatus()
         this.status.triggerRuneProtect(5000)
         break
       case Item.ORAN_BERRY:
-        heal(20)
+        heal(50)
         this.addShield(80, this, 0, false)
         break
       case Item.PECHA_BERRY:
-        heal(50)
+        heal(100)
         this.status.poisonOrigin = undefined
         this.status.poisonStacks = 0
         this.status.poisonDamageCooldown = 0
@@ -1854,36 +1854,36 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.confusion = false
         this.status.confusionCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_CONFUSION)
-        heal(20)
+        heal(50)
         this.addSpecialDefense(10, this, 0, false)
         break
       case Item.PETAYA_BERRY:
-        heal(20)
+        heal(50)
         this.addAbilityPower(80, this, 0, false)
         break
       case Item.ROWAP_BERRY:
-        heal(20)
+        heal(50)
         this.status.triggerMagicBounce(10000)
         break
       case Item.RAWST_BERRY:
         this.status.healBurn(this)
         this.effects.add(EffectEnum.IMMUNITY_BURN)
-        heal(20)
+        heal(50)
         this.addDefense(10, this, 0, false)
         break
       case Item.SALAC_BERRY:
-        heal(20)
+        heal(50)
         this.addSpeed(50, this, 0, false)
         break
       case Item.SITRUS_BERRY:
         this.effects.add(EffectEnum.BUFF_HEAL_RECEIVED)
-        heal(20)
+        heal(100)
         break
       case Item.BERRY_JUICE:
         heal(this.hp - this.life)
         break
       case Item.BABIRI_BERRY:
-        heal(20)
+        heal(50)
         this.status.triggerProtect(2000)
         break
     }
