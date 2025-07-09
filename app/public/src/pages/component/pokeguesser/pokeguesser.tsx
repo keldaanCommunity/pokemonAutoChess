@@ -28,7 +28,7 @@ const listPokemonsToGuess = precomputedPokemons
         (p) =>
             !(
                 PkmFamily[p.name] === Pkm.MILCERY &&
-                p.stars === 2 &&
+                p.stars === 3 &&
                 p.name !== Pkm.ALCREMIE_VANILLA
             )
     )
