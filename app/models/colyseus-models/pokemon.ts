@@ -40,13 +40,11 @@ import {
   AllItems,
   ArtificialItems,
   Berries,
-  CharcadetArmors,
   Flavors,
   Item,
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
-  SynergyFlavors,
   SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
@@ -18249,7 +18247,7 @@ export class Charcadet extends Pokemon {
   stars = 2
   evolutions = [Pkm.ARMAROUGE, Pkm.CERULEDGE]
   evolutionRule = new ItemEvolutionRule(
-    CharcadetArmors,
+    [Item.AUSPICIOUS_ARMOR, Item.MALICIOUS_ARMOR],
     (pokemon, player, item_) => {
       const item = item_ as Item
       if (item === Item.AUSPICIOUS_ARMOR) {

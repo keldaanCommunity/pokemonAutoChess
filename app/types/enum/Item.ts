@@ -491,23 +491,6 @@ export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
 
 export const LateGameItems: Item[] = CraftableNonSynergyItems.filter(item => item !== Item.AMULET_COIN)
 
-export const NonHoldableItems: Item[] = [
-  ...WeatherRocks,
-  ...FishingRods,
-  Item.METEORITE,
-  Item.MYSTERY_BOX,
-  Item.TREASURE_BOX,
-  Item.ZYGARDE_CUBE,
-  Item.SCROLL_OF_DARKNESS,
-  Item.SCROLL_OF_WATERS,
-  Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR,
-  Item.FIRE_SHARD,
-  Item.GIMMIGHOUL_COIN,
-  Item.EGG_FOR_SELL,
-  Item.EXCHANGE_TICKET
-]
-
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
@@ -664,5 +647,23 @@ export const Sweets = [
   Item.RIBBON_SWEET
 ]
 
-export const CharcadetArmors = [Item.AUSPICIOUS_ARMOR, Item.MALICIOUS_ARMOR]
-export const KubfuScrolls = [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS]
+export const NonHoldableItems: Item[] = [
+  ...WeatherRocks,
+  ...FishingRods,
+  ...TMs,
+  ...HMs,
+  ...Flavors,
+  ...Dishes,
+  Item.METEORITE,
+  Item.MYSTERY_BOX,
+  Item.TREASURE_BOX,
+  Item.ZYGARDE_CUBE,
+  Item.SCROLL_OF_DARKNESS,
+  Item.SCROLL_OF_WATERS,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.FIRE_SHARD,
+  Item.GIMMIGHOUL_COIN,
+  Item.EGG_FOR_SELL,
+  Item.EXCHANGE_TICKET
+]
