@@ -183,21 +183,13 @@ export class Pokemon extends Schema implements IPokemon {
         if (
           item === Item.CHEF_HAT ||
           item === Item.TRASH ||
-          ArtificialItems.includes(item)
+          ArtificialItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO && item !== Item.RARE_CANDY)
         ) {
           player.items.push(item)
           this.removeItem(item, player)
         }
       })
-
-      if (state?.specialGameRule === SpecialGameRule.SLAMINGO) {
-        this.items.forEach((item) => {
-          if (item !== Item.RARE_CANDY) {
-            player.items.push(item)
-            this.removeItem(item, player)
-          }
-        })
-      }
     }
   }
 
@@ -290,7 +282,7 @@ export class Pokemon extends Schema implements IPokemon {
     ) {
       this.types.delete(SynergyGivenByItem[item])
     }
-    this.onItemRemoved(item, player)
+    setTimeout(() => this.onItemRemoved(item, player), 0) // delay to ensure all other item manipulation is done before calling the effects
   }
 }
 
