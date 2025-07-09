@@ -488,8 +488,10 @@
 		"STORED_POWER": "Force Ajoutée",
 		"MIND_BEND": "Contrôleur d'esprit",
 		"CHAIN_CRAZED": "Chaîne Frénétique",
+		"STEAMROLLER": "Bulldoboule",
 		"MAGNET_PULL": "Magnépiège",
-		"SPIN_OUT": "Dérapage"
+		"SPIN_OUT": "Dérapage",
+		"ULTRA_THRUSTERS": "Ultra-Propulseurs"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1479,7 +1481,8 @@
 		"MUNKIDORI": "Fortusimia",
 		"FEZANDIPITI": "Favianos",
 		"VAROOM": "Vrombi",
-		"REVAVROOM": "Vrombotor"
+		"REVAVROOM": "Vrombotor",
+		"CELESTEELA": "Bamboiselle"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -1564,7 +1567,7 @@
 		"METEOR_MASH": "Inflige 3 fois [15,30,60,SP] SPECIAL à la cible et augmente l'ATK du lanceur de [2,SP].",
 		"HURRICANE": "Inflige [25,50,100,SP] SPECIAL à tous les ennemis derrière la cible (en ligne) et leur inflige PARALYSIS pendant 3 secondes.",
 		"HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL et WOUND pendant 5 secondes sur la cible et à tous les ennemis adjacents.",
-		"ROAR_OF_TIME": "Donne RESURECTION et [20,SP] SPEED à votre Pokémon allié le plus fort (le plus d'objets > le plus de STAR > le plus rare).",
+		"ROAR_OF_TIME": "Donne RESURECTION et [20,SP] SPEED à votre Pokémon allié le STRONGEST.",
 		"ROCK_TOMB": "Inflige [30,60,120,SP] SPECIAL à la cible et réduit sa SPEED de [10,20,40].",
 		"ROCK_SMASH": "Inflige [25,50,100,SP] SPECIAL à la cible et ARMOR_BREAK pendant [3,6,9] secondes.",
 		"HEAD_SMASH": "Le Pokémon se blesse en perdant [10,20,40,SP] PHYSICAL et inflige [40,80,150,SP] SPECIAL. Exécute la cible si elle a le statut SLEEP ou FREEZE.",
@@ -1747,7 +1750,7 @@
 		"CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 cibles adjacentes, infligeant [15,30,60,SP] SPECIAL à chacune.",
 		"POPULATION_BOMB": "Inflige [4,8,12,16,SP] fois 10 SPECIAL à la cible.",
 		"SCREECH": "Réduit la DEF de tous les ennemis dans un rayon de 2 cases de [2,4,8,SP].",
-		"SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE and PARALYSIS pendant [3,5,8] secondes.",
+		"SAND_TOMB": "Inflige [10,20,40,SP] SPECIAL ainsi que SILENCE et PARALYSIS pendant [3,5,8] secondes.",
 		"WHIRLWIND": "Inflige [40,80,120,SP] SPECIAL et envoie la cible voler au loin.",
 		"ACID_SPRAY": "Projette du poison sur l'ennemi, infligeant [33,SP] SPECIAL et réduisant sa SPE_DEF de 5. Le poison rebondit ensuite sur un autre ennemi adjacent (5 rebonds maximum).",
 		"UNBOUND": "Se libère de ses chaînes pour devenir la vraie forme de Hoopa et gagner une grande puissance.",
@@ -1910,7 +1913,7 @@
 		"SPICY_EXTRACT": "Provoque RAGE sur [1,2,3] alliés les plus proches pendant [2,SP] secondes.",
 		"SWEET_SCENT": "Les ennemis dans un rayon de 3 cases ne peuvent plus esquiver les attaques, perdent [6,SP] SPE_DEF et ont [30,LK]% de chances d'être CHARM pendant 1 seconde.",
 		"SWALLOW": "Accumule de la puissance et augmente sa DEF et sa SPE_DEF de 3 jusqu'à 3 fois. Si les HP du lanceur sont inférieurs à 25 %, le lanceur avale, ce qui soigne [20,SP]% de ses HP max par cumul. Au-delà de 3 cumuls, régurgite, infligeant [40,80,150,SP] SPECIAL à tous les ennemis en face.",
-		"DECORATE": "Décore l'allié le plus proche et le plus fort, augmentant son ATK de [1,2,3,SP] et sa AP de [10,20,30,SP].",
+		"DECORATE": "Décore l'allié le plus proche et le STRONGEST, augmentant son ATK de [1,2,3,SP] et sa AP de [10,20,30,SP].",
 		"DRAGON_CLAW": "Inflige [30,60,120,SP] SPECIAL à l'ennemi adjacent ayant les HP les plus faibles et WOUND pendant 4 secondes.",
 		"TAILWIND": "Augmente la SPEED de tous les alliés de [5,10,15,SP].",
 		"HORN_ATTACK": "Inflige [3,4,5,SP] x ATK en tant que SPECIAL à la cible et provoque ARMOR_BREAK pendant 8 secondes.",
@@ -1939,17 +1942,19 @@
 		"VICTORY_DANCE": "Fait une danse de la victoire, ce qui augmente l'ATK et la DEF du lanceur de [3,SP] et sa SPEED de [10,SP].",
 		"BOOMBURST": "Inflige [60,SP] SPECIAL à toutes les unités adjacentes au lanceur, alliés compris. Inflige FLINCH pendant 4 secondes.",
 		"FOLLOW_ME": "Saute vers une case libre éloignée et gagne [40,SP] SHIELD. Les ennemis qui ciblaient le lanceur deviennent CHARM pendant 3 secondes.",
-		"AFTER_YOU": "Donne [15,SP] PP et [10,SP] SPEED en bonus à l'allié le plus proche et le plus fort.",
+		"AFTER_YOU": "Donne [15,SP] PP et [10,SP] SPEED en bonus à l'allié le plus proche et le STRONGEST.",
 		"COTTON_SPORE": "Crée un nuage de spores de coton qui réduit la SPEED des 3 ennemis les plus proches de [10,20,30,SP]. Le coton reste sur le plateau, causant SLEEP pendant 1 seconde à tous les Pokémon qui marchent dessus.",
 		"COTTON_GUARD": "Enveloppe son corps dans du coton doux, gagne [15,30,60,SP] SHIELD et 3 DEF, puis laisse tomber des boules de coton sur les 3 cases devant lui. Les boules de coton restent au sol, infligeant SLEEP pendant 1 seconde à tous les Pokémon qui marchent dessus.",
 		"TWIN_BEAM": "Tire deux faisceaux qui atteignent les ennemis les plus éloignés, infligeant [30,60,100,SP] SPECIAL à tous les ennemis sur le chemin.",
 		"SWAGGER": "Rend RAGE et CONFUSION la cible pendant [3,SP] secondes.",
 		"ENCORE": "Lance la dernière capacité utilisée par un allié.",
 		"STORED_POWER": "Inflige 20 SPECIAL à la cible. Plus les stats du lanceur ont été augmentées, plus les dégats seront importants (ATK, SPEED, DEF, SPE_DEF, AP).",
+		"STEAMROLLER": "Roule sur les ennemis jusqu'à atteindre la cible la plus éloignée, infligeant [50,100,200,SP]% de SPEED comme SPECIAL à tous les ennemis sur son chemin avec [50,LK]% de chances de leur appliquer FLINCH pendant 3 secondes.",
 		"MIND_BEND": "La cible est POSSESSED pendant [2,SP,ND=1] secondes. Si RUNE_PROTECT ou déjà POSSESSED, inflige [100,SP] SPECIAL à la place.",
 		"CHAIN_CRAZED": "S'auto-inflige POISON pendant 3 secondes et gagne [15,SP] ATK, [10,SP] DEF et 20 SPEED.",
 		"MAGNET_PULL": "Attire un Pokémon STEEL aléatoire sur le champ de bataille. Cliquez dessus pour l'ajouter à votre banc.",
-		"SPIN_OUT": "Drift vers votre rangée arrière, infligeant [25,50,100,SP]% de la SPEED du lanceur en SPECIAL à la cible, la rendant BLINDED pendant 1 seconde. Le lanceur perd ensuite tous les bonus de SPEED liés à son passif Turbo."
+		"SPIN_OUT": "Drift vers votre rangée arrière, infligeant [25,50,100,SP]% de la SPEED du lanceur en SPECIAL à la cible, la rendant BLINDED pendant 1 seconde. Le lanceur perd ensuite tous les bonus de SPEED liés à son passif Turbo.",
+		"ULTRA_THRUSTERS": "Les ennemis adjacents subissent [50,100,200,SP] SPECIAL et BURN pendant 3 secondes tandis que le lanceur recule rapidement vers un emplacement sûr."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2141,7 +2146,7 @@
 		"CURSE_OF_VULNERABILITY": "L'unité adverse avec la DEF + SPE_DEF la plus élévée perd 5 de chaque et est FLINCH",
 		"CURSE_OF_WEAKNESS": "De plus, l'unité adverse avec l'ATK la plus élevée en perd 25% et est PARALYSIS",
 		"CURSE_OF_TORMENT": "De plus, l'unité adverse avec la AP la plus élevée en perd 50% et est FATIGUE",
-		"CURSE_OF_FATE": "De plus, l'unité adverse la plus forte est CURSE et sera KO au bout de 7 secondes",
+		"CURSE_OF_FATE": "De plus, l'unité adverse la STRONGESTe est CURSE et sera KO au bout de 7 secondes",
 		"AROMATIC_MIST": "20% de SPECIAL supplémentaires aux attaques et aux chocs",
 		"FAIRY_WIND": "40% de SPECIAL supplémentaires aux attaques et aux chocs",
 		"STRANGE_STEAM": "60% de SPECIAL supplémentaires aux attaques et aux chocs",
@@ -2178,8 +2183,8 @@
 		"FLUID": "L'équipe gagne 1 SPEED et 3 HP par synergie unique active",
 		"SHAPELESS": "L'équipe gagne 3 SPEED et 6 HP par synergie unique active",
 		"ETHEREAL": "L'équipe gagne 6 SPEED et 12 HP par synergie unique active",
-		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un Plat Signature après chaque manche et nourrissez l'allié adjacent le plus fort",
-		"LUNCH_BREAK": "Le Chef cuisine deux plats et nourrit les deux alliés adjacents les plus forts après chaque tour",
+		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un Plat Signature après chaque manche et nourrissez l'allié adjacent le STRONGEST",
+		"LUNCH_BREAK": "Le Chef cuisine deux plats et nourrit les deux alliés adjacents les STRONGESTs après chaque tour",
 		"BANQUET": "Gagnez une deuxième CHEF_HAT."
 	},
 	"item": {
@@ -2499,7 +2504,7 @@
 		"ICY_ROCK": "Compte pour 3 pour SNOW. Sous la SNOW, votre équipe est FREEZE 20% moins longtemps et a 5% de chance en plus de FREEZE les adversaires avec leurs attaques.",
 		"HEAT_ROCK": "Compte pour 3 pour SUN. Sous le SUN, votre équipe subit 20% moins de dégâts de BURN et a 5% de chance en plus de BURN les adversaires avec leurs attaques.",
 		"SMOOTH_ROCK": "Compte pour 3 pour SANDSTORM. Sous SANDSTORM, votre équipe subit 20% moins de dégâts de la tempête et gagne 1 SPEED chaque seconde.",
-		"BLACK_AUGURITE": "Compte pour 3 pour la NIGHT. Pendant la NIGHT, votre équipe gagne 5% CRIT_CHANCE and subit 5% de dégâts critiques en moins.",
+		"BLACK_AUGURITE": "Compte pour 3 pour la NIGHT. Pendant la NIGHT, votre équipe gagne 5% CRIT_CHANCE et subit 5% de dégâts critiques en moins.",
 		"ELECTRIC_QUARTZ": "Compte pour 3 pour la STORM. Sous la STORM, votre équipe gagne 50 SHIELD quand elle est frappée par la foudre et récupère de la PARALYSIS 20% plus vite.",
 		"FLOAT_STONE": "Compte pour 3 pour WINDY. Sous WINDY, votre équipe gagne 5 de SPEED.",
 		"MIST_STONE": "Compte pour 3 pour MISTY. Sous MISTY, votre équipe gagne 3 SPE_DEF.",
@@ -2590,7 +2595,7 @@
 		"PROTEAN3": "Le Pokémon acquiert le type des 3 synergies les plus élevées de votre équipe.",
 		"CASTFORM": "$t(pkm.CASTFORM) change de forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante entre FIRE WATER ICE.",
 		"PHIONE": "$t(pkm.PHIONE) cherche un AQUA_EGG.",
-		"SCYTHER": "$t(pkm.SCYTHER) cherche une METAL_COAT or a BLACK_AUGURITE.",
+		"SCYTHER": "$t(pkm.SCYTHER) cherche une METAL_COAT ou une BLACK_AUGURITE.",
 		"PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces Pokémon légendaires.",
 		"WONDER_GUARD": "Bloque 20 dégâts à chaque coup reçu.",
 		"ELECTRIC_TERRAIN": "Donne ELECTRIC_FIELD à vos Pokémon ELECTRIC, augmentant leurs dégâts de 20%.",
@@ -2877,7 +2882,7 @@
 		"MONSTER": "Les Pokémon MONSTER ont une chance de causer FLINCH sur leur cible. Chaque fois qu'ils mettent KO une unité adverse, ils gagnent en ATK, se soignent, augmentent leurs HP max et grossissent en taille.",
 		"HUMAN": "Les Pokémon HUMAN se soignent d'un pourcentage des dégâts qu'ils infligent avec les attaques et capacités, et ils peuvent apprendre une nouvelle capacité grâce aux CT et CS.",
 		"AQUATIC": "Les Pokémon AQUATIC réduisent la durée des statuts négatifs pour tous les membres de votre équipe. Après 8 secondes, une vague déferle sur le terrain, qui retire les pièges et statuts négatifs, soigne vos alliés AQUATIC, et repousse les ennemis en leur infligeant des dégâts.",
-		"BUG": "Au début du combat, vos Pokémon BUG les plus forts sont clonés.",
+		"BUG": "Au début du combat, vos Pokémon BUG les STRONGESTs sont clonés.",
 		"FLYING": "Les Pokémon FLYING s'envolent lorsqu'ils tombent sous une certaine quantité de HP, à moins qu'ils soient PARALYSIS, FREEZE, LOCKED ou SLEEP.",
 		"FLORA": "Quand le premier Pokémon FLORA est KO, une fleur éclot. Elle reçoit un objet aléatoire de chaque allié FLORA mis KO.",
 		"ROCK": "Les Pokémon ROCK gagnent en DEF, résistent mieux aux dégâts critiques et peuvent s'adapter à la météo.",
@@ -3302,8 +3307,9 @@
 	"show_evolutions": "Montrer évolutions",
 	"show_refundable": "Remboursable",
 	"show_only_available_picks": "Afficher uniquement les picks additionnels et régionaux disponibles",
-	"sort_by_index": "Tri par numéro",
-	"sort_by_shards": "Tri par fragments",
+	"sort_by_index": "Trier par numéro",
+	"sort_by_shards": "Trier par fragments",
+	"sort_by_emotes_unlocked": "Trier par emotes débloquées",
 	"sort_by_played": "Trier par nombre de fois joué",
 	"normal_emotions": "Emotes normales",
 	"shiny_emotions": "Emotes Shiny",
@@ -3902,5 +3908,11 @@
 		"easy": "Facile",
 		"normal": "Normal",
 		"hard": "Difficile"
+	},
+	"technical_terms": {
+		"STRONGEST": "plus fort"
+	},
+	"technical_terms_definitions": {
+		"STRONGEST": "Le plus fort est défini comme suit, par ordre de priorité : 1. Nombre d'objets tenus, 2. Tier de l'unité (STAR), 3. Rareté de l'unité"
 	}
 }
