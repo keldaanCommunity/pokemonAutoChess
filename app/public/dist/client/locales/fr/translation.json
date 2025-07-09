@@ -1636,7 +1636,7 @@
 		"SPIRIT_SHACKLE": "Tire une flèche perçante qui inflige [30,60,90,SP] SPECIAL en ligne derrière la cible et applique WOUND pendant 4 secondes à tous ceux qui sont touchés.",
 		"WATER_SHURIKEN": "Lance 3 shuriken dans 3 directions qui traversent les ennemis et infligent [20,40,60,SP] SPECIAL.",
 		"SHADOW_SNEAK": "Inflige [50,SP] SPECIAL. Si la cible est sous SILENCE, inflige des TRUE.",
-		"MACH_PUNCH": "Inflige [60,SP] SPECIAL à la cible et attaque immédiatement après.",
+		"MACH_PUNCH": "Inflige [25,50,100,SP] SPECIAL à la cible et attaque immédiatement après.",
 		"MEGA_PUNCH": "Inflige [60,SP] SPECIAL à la cible. Dégâts doublés si le lanceur a une DEF plus élevée que la cible.",
 		"TRIPLE_KICK": "Inflige [60,SP] SPECIAL à jusqu'à 3 ennemis adjacents.",
 		"MAWASHI_GERI": "Inflige [60,SP] SPECIAL à la cible et la projette au loin. Dégâts doublés si le lanceur a une ATK plus élevée que la cible.",
