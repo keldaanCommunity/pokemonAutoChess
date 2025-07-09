@@ -3,7 +3,7 @@
 }
 
 .game-pokeguesser-modal .modal-body {
-  min-height: 480px;
+  min-height: 640px;
   text-align: center;
 }
 
@@ -87,7 +87,7 @@
 }
 
 .game-pokeguesser-modal h2 {
-  margin: 0 0.25em;
+  margin: -1em 0 0.5em;
 }
 
 .game-pokeguesser-modal h2 + .pokemon-portrait {

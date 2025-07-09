@@ -3251,6 +3251,35 @@ export function displayAbility(
       break
     }
 
+    case Ability.ULTRA_THRUSTERS: {
+      addAbilitySprite(Ability.LANDS_WRATH, coordinates, true)
+        ?.setScale(2)
+
+      const [dx, dy] = OrientationVector[orientation]
+      const coordinatesThrusters = [
+        coordinates[0] + dx * 32,
+        coordinates[1] + dy * 32
+      ]
+
+      const thrusters = addAbilitySprite(Ability.MYSTICAL_FIRE, coordinatesThrusters, true)
+        ?.setScale(2)
+        .setOrigin(0.5, 1)
+        .setRotation(
+          Math.atan2(
+            coordinatesTarget[1] - coordinates[1],
+            coordinatesTarget[0] - coordinates[0]
+          ) -
+          Math.PI / 2
+        )
+      scene.tweens.add({
+        targets: thrusters,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: 750
+      })
+      break
+    }
+
     case Ability.FUTURE_SIGHT:
       addAbilitySprite(skill, coordinates, true)?.setScale(2)
       break

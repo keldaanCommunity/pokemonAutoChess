@@ -368,7 +368,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.IRON_VALIANT,
   Pkm.OKIDOGI,
   Pkm.MUNKIDORI,
-  Pkm.FEZANDIPITI
+  Pkm.FEZANDIPITI,
+  Pkm.CELESTEELA
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
