@@ -18979,6 +18979,22 @@ export class Eldegoss extends Pokemon {
   additional = true
 }
 
+export class Furfrou extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  speed = 65
+  def = 8
+  speDef = 10
+  maxPP = 90
+  range = 1
+  skill = Ability.COTTON_GUARD
+  attackSprite = AttackSprite.NORMAL_MELEE
+  passive = Passive.FUR_COAT
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19969,7 +19985,8 @@ export const PokemonClasses: Record<
   [Pkm.SURSKIT]: Surskit,
   [Pkm.MASQUERAIN]: Masquerain,
   [Pkm.GOSSIFLEUR]: Gossifleur,
-  [Pkm.ELDEGOSS]: Eldegoss
+  [Pkm.ELDEGOSS]: Eldegoss,
+  [Pkm.FURFROU]: Furfrou
 }
 
 // declare all the classes in colyseus schema TypeRegistry
