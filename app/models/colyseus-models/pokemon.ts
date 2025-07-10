@@ -18552,7 +18552,7 @@ export class Kubfu extends Pokemon {
   speed = 50
   def = 8
   speDef = 6
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.MACH_PUNCH
   passive = Passive.KUBFU
@@ -19105,6 +19105,39 @@ export class Celesteela extends Pokemon {
   range = 1
   skill = Ability.ULTRA_THRUSTERS
   attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Ledyba extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING, Synergy.FLYING])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.LEDIAN
+  hp = 60
+  atk = 5
+  speed = 55
+  def = 2
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.MACH_PUNCH
+  attackSprite = AttackSprite.BUG_MELEE
+  additional = true
+}
+
+export class Ledian extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING, Synergy.FLYING])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 130
+  atk = 9
+  speed = 55
+  def = 4
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.MACH_PUNCH
+  attackSprite = AttackSprite.BUG_MELEE
+  additional = true
 }
 
 export const PokemonClasses: Record<
@@ -20103,4 +20136,6 @@ export const PokemonClasses: Record<
   [Pkm.VAROOM]: Varoom,
   [Pkm.REVAVROOM]: Revavroom,
   [Pkm.CELESTEELA]: Celesteela,
+  [Pkm.LEDYBA]: Ledyba,
+  [Pkm.LEDIAN]: Ledian
 }

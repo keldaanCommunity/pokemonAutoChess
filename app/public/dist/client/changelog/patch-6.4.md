@@ -7,6 +7,8 @@
 - Meltan
 - Varoom
 - Revavroom
+- Ledyba
+- Ledian
 
 # Changes to Pokemon & Abilities
 
@@ -18,6 +20,8 @@
 - Surfing Pikachu now has the same stats than Pikachu but gain 50 shield and 3 attack per aquatic synergy level
 - Sewaddle line is now Uncommon
 - Skorupi is now Dark/Bug/Poison type like its evolution Drapion.
+- Change Mach Punch: damage 60 at all tiers → 25/50/100
+- Change Kubfu: PP 100 → 90
 
 # Changes to Synergies
 

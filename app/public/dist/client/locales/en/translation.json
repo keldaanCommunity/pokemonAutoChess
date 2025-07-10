@@ -1636,7 +1636,7 @@
 		"SPIRIT_SHACKLE": "Shoot a Piercing Arrow, dealing [30,60,90,SP] SPECIAL in a line behind the target and apply WOUND for 4 seconds.",
 		"WATER_SHURIKEN": "Throw 3 shuriken in 3 directions that pass through enemy Pokémon and deal [20,40,60,SP] SPECIAL.",
 		"SHADOW_SNEAK": "Deal [50,SP] SPECIAL to the target. If the target suffers from SILENCE, deal TRUE instead.",
-		"MACH_PUNCH": "Deal [60,SP] SPECIAL to the target and attack immediately after.",
+		"MACH_PUNCH": "Deal [25,50,100,SP] SPECIAL to the target and attack immediately after.",
 		"MEGA_PUNCH": "Deal [60,SP] SPECIAL to the target. The damage is doubled if the user has a higher DEF than the target.",
 		"TRIPLE_KICK": "Deal [60,SP] SPECIAL to up to 3 adjacent enemy Pokémon.",
 		"MAWASHI_GERI": "Deal [60,SP] SPECIAL to the target and push it away. The damage is doubled if the user has a higher ATK than the target.",

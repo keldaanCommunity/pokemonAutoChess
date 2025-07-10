@@ -439,6 +439,8 @@ export enum Pkm {
   LATIOS = "LATIOS",
   LEAFEON = "LEAFEON",
   LEAVANNY = "LEAVANNY",
+  LEDYBA = "LEDYBA",
+  LEDIAN = "LEDIAN",
   LICKILICKY = "LICKILICKY",
   LICKITUNG = "LICKITUNG",
   LIEPARD = "LIEPARD",
@@ -1194,8 +1196,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FURRET]: "0162",
   [Pkm.HOOTHOOT]: "0163",
   [Pkm.NOCTOWL]: "0164",
-  //[Pkm.LEDYBA]: "0165",
-  //[Pkm.LEDIAN]: "0166",
+  [Pkm.LEDYBA]: "0165",
+  [Pkm.LEDIAN]: "0166",
   [Pkm.SPINARAK]: "0167",
   [Pkm.ARIADOS]: "0168",
   [Pkm.CROBAT]: "0169",
@@ -3158,7 +3160,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FURFROU]: Pkm.FURFROU,
   [Pkm.VAROOM]: Pkm.VAROOM,
   [Pkm.REVAVROOM]: Pkm.VAROOM,
-  [Pkm.CELESTEELA]: Pkm.CELESTEELA
+  [Pkm.CELESTEELA]: Pkm.CELESTEELA,
+  [Pkm.LEDYBA]: Pkm.LEDYBA,
+  [Pkm.LEDIAN]: Pkm.LEDYBA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8308,6 +8312,16 @@ export const AnimationConfig: {
   [Pkm.CELESTEELA]: {
     attack: AnimationType.Slam,
     ability: AnimationType.Charge,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.LEDYBA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Pose
+  },
+  [Pkm.LEDIAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
     emote: AnimationType.Shoot
   }
 }

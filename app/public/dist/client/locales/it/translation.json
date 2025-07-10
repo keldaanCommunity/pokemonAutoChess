@@ -1415,7 +1415,7 @@
 		"SPIRIT_SHACKLE": "Scaglia una freccia perforante che infligge [30,60,90,SP] SPECIAL in linea retta dietro il bersaglio e infligge WOUND per 4 secondi a tutti quelli colpiti nella traiettoria.",
 		"WATER_SHURIKEN": "Lancia 3 shuriken in 3 direzioni che attraversano i nemici e infliggono [20,40,60,SP] SPECIAL",
 		"SHADOW_SNEAK": "Infliggi [50,SP] SPECIAL. Se il bersaglio ha lo status SILENCE, infliggi invece TRUE.",
-		"MACH_PUNCH": "Infliggi [60,SP] SPECIAL e attacca immediatamente.",
+		"MACH_PUNCH": "Infliggi [25,50,100,SP] SPECIAL e attacca immediatamente.",
 		"MEGA_PUNCH": "Infliggi [60,SP] SPECIAL. Il danno raddoppia se l'attaccante ha una DEF migliore del bersaglio.",
 		"TRIPLE_KICK": "Infliggi [60 SP] SPECIAL ad un massimo di 3 Pokèmon nemici adiacenti.",
 		"MAWASHI_GERI": "Infliggi [60,SP] SPECIAL. Il danno raddoppia se l'attaccante ha un ATK migliore del bersaglio.",

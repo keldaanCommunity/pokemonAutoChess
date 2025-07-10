@@ -4912,7 +4912,7 @@ export class MachPunchStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 50
+    const damage = [25,50,100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.cooldown = Math.round(100 * (50 / pokemon.speed))
   }
