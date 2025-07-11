@@ -199,7 +199,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     pokemon.types.forEach((type) => {
       this.types.add(type)
     })
-    
+
+    this.passive = Passive.NONE
     this.changePassive(pokemon.passive)
   }
 
@@ -1785,7 +1786,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // apply new passive effects    
     const newPassiveEffects = PassiveEffects[newPassive] ?? []
     for (const effect of newPassiveEffects) {
-        this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
+      this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
     }
   }
 }

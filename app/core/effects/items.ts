@@ -191,7 +191,6 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
-
 const smokeBallEffect = new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
   if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.hp) {
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -210,6 +209,7 @@ const smokeBallEffect = new OnDamageReceivedEffect((pokemon, attacker, board, da
     pokemon.removeItem(Item.SMOKE_BALL)
     pokemon.flyAway(board)
   }
+})
 
 const ogerponMaskEffect = new OnItemEquippedEffect(({ pokemon, player, item }) => {
   if (
