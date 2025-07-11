@@ -490,7 +490,8 @@
 		"CHAIN_CRAZED": "Chain Crazed",
 		"STEAMROLLER": "Steamroller",
 		"MAGNET_PULL": "Magnet Pull",
-		"SPIN_OUT": "Spin Out"
+		"SPIN_OUT": "Spin Out",
+		"ULTRA_THRUSTERS": "Ultra Thrusters"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1480,7 +1481,8 @@
 		"MUNKIDORI": "Munkidori",
 		"FEZANDIPITI": "Fezandipiti",
 		"VAROOM": "Varoom",
-		"REVAVROOM": "Revavroom"
+		"REVAVROOM": "Revavroom",
+		"CELESTEELA": "Celesteela"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1565,7 +1567,7 @@
 		"METEOR_MASH": "Deal [15,30,60,SP] SPECIAL 3 times to the target and increase the user's ATK by [2,SP].",
 		"HURRICANE": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target and inflict them with PARALYSIS for 3 seconds.",
 		"HEAL_BLOCK": "Deal [20,40,80,SP] SPECIAL and WOUND all adjacent enemy Pokémon for 5 seconds.",
-		"ROAR_OF_TIME": "Grant RESURECTION and [20,SP] SPEED to the strongest allied Pokémon (most items > most stars > most rare).",
+		"ROAR_OF_TIME": "Grant RESURECTION and [20,SP] SPEED to the STRONGEST allied Pokémon.",
 		"ROCK_TOMB": "Deal [30,60,120,SP] SPECIAL to the target and decrease their SPEED by [10,20,40].",
 		"ROCK_SMASH": "Deal [25,50,100,SP] SPECIAL and ARMOR_BREAK for [3,6,9] seconds to the target.",
 		"HEAD_SMASH": "Deal [40,80,150,SP] SPECIAL to the target and [10,20,40,SP] PHYSICAL to the user. Execute the target if they suffer from SLEEP or FREEZE.",
@@ -1634,7 +1636,7 @@
 		"SPIRIT_SHACKLE": "Shoot a Piercing Arrow, dealing [30,60,90,SP] SPECIAL in a line behind the target and apply WOUND for 4 seconds.",
 		"WATER_SHURIKEN": "Throw 3 shuriken in 3 directions that pass through enemy Pokémon and deal [20,40,60,SP] SPECIAL.",
 		"SHADOW_SNEAK": "Deal [50,SP] SPECIAL to the target. If the target suffers from SILENCE, deal TRUE instead.",
-		"MACH_PUNCH": "Deal [60,SP] SPECIAL to the target and attack immediately after.",
+		"MACH_PUNCH": "Deal [25,50,100,SP] SPECIAL to the target and attack immediately after.",
 		"MEGA_PUNCH": "Deal [60,SP] SPECIAL to the target. The damage is doubled if the user has a higher DEF than the target.",
 		"TRIPLE_KICK": "Deal [60,SP] SPECIAL to up to 3 adjacent enemy Pokémon.",
 		"MAWASHI_GERI": "Deal [60,SP] SPECIAL to the target and push it away. The damage is doubled if the user has a higher ATK than the target.",
@@ -1911,7 +1913,7 @@
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
 		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second",
 		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
-		"DECORATE": "Decorates the nearest strongest ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
+		"DECORATE": "Decorates the nearest STRONGEST ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
 		"DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
 		"TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
 		"HORN_ATTACK": "Deal [3,4,5,SP] x ATK as SPECIAL to the target and cause ARMOR_BREAK for 8 seconds.",
@@ -1940,7 +1942,7 @@
 		"VICTORY_DANCE": "Performs a dance to usher in victory. Raise user's ATK and DEF by [3,SP] and SPEED by [10,SP].",
 		"BOOMBURST": "Deal [60,SP] SPECIAL to all adjacent units including allies, and causing FLINCH for 4 seconds.",
 		"FOLLOW_ME": "Jump to a free tile far away and gain [40,SP] SHIELD. Enemies that were targeting the user get CHARM for 3 seconds.",
-		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the strongest closest ally.",
+		"AFTER_YOU": "Gives [15,SP] PP and [10,SP] SPEED buff to the STRONGEST closest ally.",
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
 		"COTTON_GUARD": "Wraps its body in soft cotton, gaining [15,30,60,SP] SHIELD and 3 DEF, then dropping cotton balls in the 3 tiles in front. Cotton balls stay on the ground, inflicting SLEEP for 1 second on any Pokémon that walk on it.",
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
@@ -1951,7 +1953,8 @@
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
 		"STEAMROLLER": "Rolls over the enemies to the farthest target, dealing [50,100,200,SP]% of SPEED as SPECIAL to all enemies in the path with [50,LK]% chance to apply FLINCH for 3 seconds.",
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
-		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration."
+		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration.",
+		"ULTRA_THRUSTERS": "Adjacent enemies take [50,100,200,SP] SPECIAL and get BURN for 3 seconds while user quickly moves backward to a safe spot."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2143,7 +2146,7 @@
 		"CURSE_OF_VULNERABILITY": "The enemy with the highest DEF + SPE_DEF lose 5 of it and is FLINCH",
 		"CURSE_OF_WEAKNESS": "Also, the enemy with the highest ATK lose 25% of it and is PARALYSIS",
 		"CURSE_OF_TORMENT": "Also, the enemy with the highest AP lose 50% of it and is FATIGUE",
-		"CURSE_OF_FATE": "Also, the strongest enemy is CURSE and will be KO after 7 seconds",
+		"CURSE_OF_FATE": "Also, the STRONGEST enemy is CURSE and will be KO after 7 seconds",
 		"AROMATIC_MIST": "20% additional SPECIAL to attacks and shocks",
 		"FAIRY_WIND": "40% additional SPECIAL to attacks and shocks",
 		"STRANGE_STEAM": "60% additional SPECIAL to attacks and shocks",
@@ -2180,8 +2183,8 @@
 		"FLUID": "Ally team gains 1 SPEED and 3 HP per unique active synergy",
 		"SHAPELESS": "Ally team gains 3 SPEED and 6 HP per unique active synergy",
 		"ETHEREAL": "Ally team gains 6 SPEED and 12 HP per unique active synergy",
-		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the strongest adjacent ally.",
-		"LUNCH_BREAK": "The Chef cook two dishes and feed the two strongest adjacent allies after every round.",
+		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the STRONGEST adjacent ally.",
+		"LUNCH_BREAK": "The Chef cook two dishes and feed the two STRONGEST adjacent allies after every round.",
 		"BANQUET": "Gain a second CHEF_HAT."
 	},
 	"item": {
@@ -2440,25 +2443,25 @@
 		"MAX_REVIVE": "Give RESURECTION, preventing the holder first KO and restoring to max HP",
 		"ROCKY_HELMET": "+25 DEF. Negates critical bonus damage from incoming critical hits.",
 		"AGUAV_BERRY": "Consumed once below 50% HP, restore 50% HP and get CONFUSION for 3 seconds",
-		"APICOT_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 20 SPE_DEF",
-		"ASPEAR_BERRY": "Consumed once below 50% HP or after being FREEZE, heal 20 HP and give +15 SPEED and immunity to FREEZE for the rest of the fight",
-		"BABIRI_BERRY": "Consumed once below 50% HP or after receiving a critical hit, heal 20 HP and gain PROTECT for 2 seconds",
-		"CHERI_BERRY": "Consumed once below 50% HP or after being PARALYSIS, heal 20 HP and give +10 ATK and immunity to PARALYSIS for the rest of the fight",
-		"CHESTO_BERRY": "Consumed once below 50% HP or after being SLEEP, heal 20 HP and give +50 AP and immunity to SLEEP for the rest of the fight",
-		"GANLON_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 20 DEF",
-		"JABOCA_BERRY": "Consumed once below 50% HP, heal 20 HP and cast $t(ability.SPIKY_SHIELD) for 10 seconds",
-		"LANSAT_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 50% CRIT_CHANCE",
-		"LEPPA_BERRY": "Consumed once below 50% HP or after casting ability, heal 20 HP and gain 50 PP once",
-		"LIECHI_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 15 ATK",
-		"LUM_BERRY": "Consumed once below 50% HP, heal 20 HP, clear negative status and get RUNE_PROTECT for 5 seconds",
-		"ORAN_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 80 SHIELD",
-		"PECHA_BERRY": "Consumed once below 50% HP or after being POISONNED, heal 50 HP and give immunity to POISONNED for the rest of the fight",
-		"PERSIM_BERRY": "Consumed once below 50% HP or after being CONFUSION, heal 20 HP and give 10 SPE_DEF and immunity to CONFUSION for the rest of the fight",
-		"PETAYA_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 80 AP",
-		"RAWST_BERRY": "Consumed once below 50% HP or after being BURN, heal 20 HP and give 10 DEF and immunity to BURN for the rest of the fight",
-		"ROWAP_BERRY": "Consumed once below 50% HP, heal 20 HP and cast $t(ability.MAGIC_BOUNCE) for 10 seconds",
-		"SALAC_BERRY": "Consumed once below 50% HP, heal 20 HP and gain 50 SPEED",
-		"SITRUS_BERRY": "Consumed once below 50% HP, heal 30 HP and increase all healing received by 30%",
+		"APICOT_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 20 SPE_DEF",
+		"ASPEAR_BERRY": "Consumed once below 50% HP or after being FREEZE, heal 50 HP and give +15 SPEED and immunity to FREEZE for the rest of the fight",
+		"BABIRI_BERRY": "Consumed once below 50% HP or after receiving a critical hit, heal 50 HP and gain PROTECT for 2 seconds",
+		"CHERI_BERRY": "Consumed once below 50% HP or after being PARALYSIS, heal 50 HP and give +10 ATK and immunity to PARALYSIS for the rest of the fight",
+		"CHESTO_BERRY": "Consumed once below 50% HP or after being SLEEP, heal 50 HP and give +50 AP and immunity to SLEEP for the rest of the fight",
+		"GANLON_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 20 DEF",
+		"JABOCA_BERRY": "Consumed once below 50% HP, heal 50 HP and cast $t(ability.SPIKY_SHIELD) for 10 seconds",
+		"LANSAT_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 50% CRIT_CHANCE",
+		"LEPPA_BERRY": "Consumed once below 50% HP or after casting ability, heal 50 HP and gain 50 PP once",
+		"LIECHI_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 15 ATK",
+		"LUM_BERRY": "Consumed once below 50% HP, heal 50 HP, clear negative status and get RUNE_PROTECT for 5 seconds",
+		"ORAN_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 80 SHIELD",
+		"PECHA_BERRY": "Consumed once below 50% HP or after being POISONNED, heal 100 HP and give immunity to POISONNED for the rest of the fight",
+		"PERSIM_BERRY": "Consumed once below 50% HP or after being CONFUSION, heal 50 HP and give 10 SPE_DEF and immunity to CONFUSION for the rest of the fight",
+		"PETAYA_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 80 AP",
+		"RAWST_BERRY": "Consumed once below 50% HP or after being BURN, heal 50 HP and give 10 DEF and immunity to BURN for the rest of the fight",
+		"ROWAP_BERRY": "Consumed once below 50% HP, heal 50 HP and cast $t(ability.MAGIC_BOUNCE) for 10 seconds",
+		"SALAC_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 50 SPEED",
+		"SITRUS_BERRY": "Consumed once below 50% HP, heal 100 HP and increase all healing received by 30%",
 		"COMFEY": "Wears $t(pkm.COMFEY) and get its ability and all its base stats",
 		"ELECTIRIZER": "Every third attack burns 15 PP of the target and inflicts PARALYSIS for 2 seconds. Dropped when benching the unit.",
 		"MAGMARIZER": "Every successful attack increase ATK by 1 and inflicts BURN for 2 seconds. Dropped when benching the unit.",
@@ -2879,7 +2882,7 @@
 		"MONSTER": "MONSTER Pokémon can FLINCH their opponents for 3 seconds on attack. Every time they get a KO, they gain stats, heal and grow in size.",
 		"HUMAN": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs and HMs.",
 		"AQUATIC": "AQUATIC Pokémon reduce the duration of status afflictions for all your team. After 8 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies.",
-		"BUG": "At the start of combat, your strongest BUG Pokémon are cloned.",
+		"BUG": "At the start of combat, your STRONGEST BUG Pokémon are cloned.",
 		"FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",
 		"FLORA": "When the first FLORA Pokémon is KO'd, a flower blossoms. The new Pokémon receives one random item from each FLORA ally KO'd.",
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical damage, and can adapt to weather.",
@@ -3905,5 +3908,11 @@
 		"easy": "Easy",
 		"normal": "Normal",
 		"hard": "Ultra"
+	},
+	"technical_terms": {
+		"STRONGEST": "strongest"
+	},
+	"technical_terms_definitions": {
+		"STRONGEST": "Strongest is defined as, by order of priority: 1. Number of items held, 2. Unit tier, 3. Unit rarity"
 	}
 }

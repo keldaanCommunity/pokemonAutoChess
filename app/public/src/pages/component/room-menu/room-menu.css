@@ -22,7 +22,7 @@
 }
 
 .room-menu .play-button {
-  margin: 0.5em 0 0 auto;
+  margin: 0.25em 0 0.25em auto;
 }
 
 .room-menu .rank.icon {
@@ -47,6 +47,8 @@ section.room-menu .room-menu > ul {
 .room-menu .room-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: 8px;
 }
 
 @container (width < 900px) {
@@ -54,7 +56,7 @@ section.room-menu .room-menu > ul {
     & img {
       margin-right: 0;
     }
-    & span{
+    & span {
       display: none;
     }
   }

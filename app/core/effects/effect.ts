@@ -1,4 +1,7 @@
+import Player from "../../models/colyseus-models/player"
+import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../../models/effects"
+import GameRoom from "../../rooms/game-room"
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -37,6 +40,26 @@ export class OnSpawnEffect extends Effect {
 export class OnItemGainedEffect extends Effect { }
 
 export class OnItemRemovedEffect extends Effect { }
+
+interface OnItemEquippedEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  item: Item
+  room: GameRoom
+}
+
+// applied when an item is dragged to a pokemon
+export class OnItemEquippedEffect extends Effect {
+  apply(args: OnItemEquippedEffectArgs): boolean {
+    return true
+  }
+  constructor(
+    effect?: (args: OnItemEquippedEffectArgs) => boolean,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
 
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {
@@ -95,6 +118,7 @@ interface OnHitEffectArgs {
   trueDamage: number
 }
 
+// applied after every successful basic attack (not dodged or protected)
 export class OnHitEffect extends Effect {
   apply(params: OnHitEffectArgs) { }
   constructor(effect?: (params: OnHitEffectArgs) => void, origin?: EffectOrigin) {

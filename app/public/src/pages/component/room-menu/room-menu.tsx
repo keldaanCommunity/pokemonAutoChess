@@ -13,9 +13,10 @@ import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { IngameRoomsList } from "./game-rooms-menu"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
-import { IngameRoomsList } from "./game-rooms-menu"
+//import { mockRooms } from "../../../../../models/mock-data/room-listing"
 import "./room-menu.css"
 
 export default function RoomMenu() {
@@ -85,11 +86,26 @@ export default function RoomMenu() {
       </p>
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
-        <Tab><img src="/assets/ui/quickplay.png" alt="" /><span>{t("quick_play")}</span></Tab>
-        <Tab><img src="/assets/ui/ranked.png" alt="" /><span>{t("ranked_match_short")}</span></Tab>
-        <Tab><img src="/assets/ui/scribble.png" alt="" /><span>{t("smeargle_scribble_short")}</span></Tab>
-        <Tab><img src="/assets/ui/custom.png" alt="" /><span>{t("custom_room_short")}</span></Tab>
-        <Tab><img src="/assets/ui/spectate.svg" alt="" /><span>{t("in_game")}</span></Tab>
+        <Tab>
+          <img src="/assets/ui/quickplay.png" alt="" />
+          <span>{t("quick_play")}</span>
+        </Tab>
+        <Tab>
+          <img src="/assets/ui/ranked.png" alt="" />
+          <span>{t("ranked_match_short")}</span>
+        </Tab>
+        <Tab>
+          <img src="/assets/ui/scribble.png" alt="" />
+          <span>{t("smeargle_scribble_short")}</span>
+        </Tab>
+        <Tab>
+          <img src="/assets/ui/custom.png" alt="" />
+          <span>{t("custom_room_short")}</span>
+        </Tab>
+        <Tab>
+          <img src="/assets/ui/spectate.svg" alt="" />
+          <span>{t("in_game")}</span>
+        </Tab>
       </TabList>
       <TabPanel>
         <RoomList onRoomAction={onRoomAction} />
@@ -104,7 +120,10 @@ export default function RoomMenu() {
         <RoomList gameMode={GameMode.SCRIBBLE} onRoomAction={onRoomAction} />
       </TabPanel>
       <TabPanel>
-        <RoomList gameMode={GameMode.CUSTOM_LOBBY} onRoomAction={onRoomAction} />
+        <RoomList
+          gameMode={GameMode.CUSTOM_LOBBY}
+          onRoomAction={onRoomAction}
+        />
       </TabPanel>
       <TabPanel>
         <IngameRoomsList />
@@ -126,20 +145,26 @@ export default function RoomMenu() {
   )
 }
 
-export function RoomList({ gameMode, onRoomAction }: { gameMode?: GameMode, onRoomAction: (room: RoomAvailable, action: string) => void }) {
+export function RoomList({
+  gameMode,
+  onRoomAction
+}: {
+  gameMode?: GameMode
+  onRoomAction: (room: RoomAvailable, action: string) => void
+}) {
   const { t } = useTranslation()
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
   )
+  //preparationRooms.push(...mockRooms)
 
   return (
-
     <ul className="room-list hidden-scrollable">
       {preparationRooms
         .filter((r) => !gameMode || r.metadata.gameMode === gameMode)
         .map((r) => (
           <li key={r.roomId}>
-            <RoomItem room={r} click={action => onRoomAction(r, action)} />
+            <RoomItem room={r} click={(action) => onRoomAction(r, action)} />
           </li>
         ))}
     </ul>

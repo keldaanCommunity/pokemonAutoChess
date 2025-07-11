@@ -40,13 +40,11 @@ import {
   AllItems,
   ArtificialItems,
   Berries,
-  CharcadetArmors,
   Flavors,
   Item,
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
-  SynergyFlavors,
   SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
@@ -18249,7 +18247,7 @@ export class Charcadet extends Pokemon {
   stars = 2
   evolutions = [Pkm.ARMAROUGE, Pkm.CERULEDGE]
   evolutionRule = new ItemEvolutionRule(
-    CharcadetArmors,
+    [Item.AUSPICIOUS_ARMOR, Item.MALICIOUS_ARMOR],
     (pokemon, player, item_) => {
       const item = item_ as Item
       if (item === Item.AUSPICIOUS_ARMOR) {
@@ -18554,7 +18552,7 @@ export class Kubfu extends Pokemon {
   speed = 50
   def = 8
   speDef = 6
-  maxPP = 100
+  maxPP = 90
   range = 1
   skill = Ability.MACH_PUNCH
   passive = Passive.KUBFU
@@ -19092,6 +19090,54 @@ export class Revavroom extends Pokemon {
   attackSprite = AttackSprite.STEEL_MELEE
   regional = true
   passive = Passive.ACCELERATION
+}
+
+export class Celesteela extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.FLYING, Synergy.GRASS])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 30
+  speed = 40
+  def = 15
+  speDef = 15
+  maxPP = 100
+  range = 1
+  skill = Ability.ULTRA_THRUSTERS
+  attackSprite = AttackSprite.NORMAL_MELEE
+}
+
+export class Ledyba extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING, Synergy.FLYING])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.LEDIAN
+  hp = 60
+  atk = 5
+  speed = 55
+  def = 2
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.MACH_PUNCH
+  attackSprite = AttackSprite.BUG_MELEE
+  additional = true
+}
+
+export class Ledian extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING, Synergy.FLYING])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 130
+  atk = 9
+  speed = 55
+  def = 4
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.MACH_PUNCH
+  attackSprite = AttackSprite.BUG_MELEE
+  additional = true
 }
 
 export const PokemonClasses: Record<
@@ -20088,5 +20134,8 @@ export const PokemonClasses: Record<
   [Pkm.FURFROU]: Furfrou,
   [Pkm.MELTAN]: Meltan,
   [Pkm.VAROOM]: Varoom,
-  [Pkm.REVAVROOM]: Revavroom
+  [Pkm.REVAVROOM]: Revavroom,
+  [Pkm.CELESTEELA]: Celesteela,
+  [Pkm.LEDYBA]: Ledyba,
+  [Pkm.LEDIAN]: Ledian
 }

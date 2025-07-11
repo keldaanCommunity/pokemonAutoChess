@@ -68,7 +68,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { Wanderer, WandererBehavior } from "../types/enum/Wanderer"
+import { Wanderer } from "../types/enum/Wanderer"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {

@@ -6,30 +6,11 @@
 
 .lobby-container {
   padding: 10px;
-  padding-top: 90px;
   padding-left: calc(var(--sidebar-width) + 10px);
   width: 100%;
 }
 
-.lobby-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  gap: 1vw;
-}
-
-.lobby-header-left {
-  display: flex;
-  flex-flow: column;
-}
-
-.lobby-subtitle{
+.lobby-subtitle {
   color: white;
 }
 
