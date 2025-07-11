@@ -3314,6 +3314,14 @@ export function getUnownsPoolPerStage(stageLevel: number) {
   else return UnownsStage3
 }
 
+export const NonPkm: Pkm[] = [
+  Pkm.SUBSTITUTE,
+  Pkm.PILLAR_WOOD,
+  Pkm.PILLAR_IRON,
+  Pkm.PILLAR_CONCRETE,
+  Pkm.DEFAULT
+]
+
 export const AnimationConfig: {
   [key in Pkm]: {
     attack: AnimationType

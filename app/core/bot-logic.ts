@@ -4,7 +4,7 @@ import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { CraftableItems, Item, ItemComponents } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { NonPkm, Pkm, PkmDuos, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
 
@@ -124,7 +124,7 @@ export function getPowerScore(board: IDetailledPokemon[]): number {
 }
 
 export function getUnitPowerScore(pkm: Pkm): number {
-  if ([Pkm.PILLAR_CONCRETE, Pkm.PILLAR_IRON, Pkm.PILLAR_WOOD].includes(pkm)) return 0
+  if (NonPkm.includes(pkm)) return 0
   return POWER_SCORE_BY_CATEGORY[getCategory(pkm)] ?? 1
 }
 

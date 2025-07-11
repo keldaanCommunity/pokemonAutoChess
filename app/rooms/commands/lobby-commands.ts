@@ -42,7 +42,7 @@ import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
-import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../../types/enum/Pokemon"
+import { NonPkm, Pkm, PkmByIndex, PkmIndex, Unowns } from "../../types/enum/Pokemon"
 import { StarterAvatars } from "../../types/enum/Starters"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { getPortraitSrc } from "../../utils/avatar"
@@ -624,7 +624,7 @@ export class BuyEmotionCommand extends Command<
       if (!mongoUser.titles.includes(Title.DUKE)) {
         if (
           Object.values(Pkm)
-            .filter((p) => p !== Pkm.DEFAULT)
+            .filter((p) => NonPkm.includes(p) === false)
             .every((pkm) => {
               const collectionItem = mongoUser.pokemonCollection.get(
                 PkmIndex[pkm]
