@@ -1106,7 +1106,8 @@ export class TwistingNetherStrategy extends AbilityStrategy {
         )
         const teleportationCell = board.getTeleportationCell(
           cell.value.positionX,
-          cell.value.positionY
+          cell.value.positionY,
+          cell.value.team
         )
         if (teleportationCell) {
           cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)
@@ -7642,7 +7643,19 @@ export class TranseStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     pokemon.skill = Ability.HEADBUTT
-    pokemon.effects.delete(EffectEnum.ZEN_MODE)
+    pokemon.index = PkmIndex[Pkm.DARMANITAN]
+    pokemon.name = Pkm.DARMANITAN
+    pokemon.changePassive(Passive.DARMANITAN)
+    pokemon.skill = Ability.HEADBUTT
+    pokemon.handleHeal(Math.round(0.3 * pokemon.hp), pokemon, 0, false)
+    pokemon.addAttack(10, pokemon, 0, false)
+    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addDefense(-10, pokemon, 0, false)
+    pokemon.addSpecialDefense(-10, pokemon, 0, false)
+    pokemon.range = min(1)(pokemon.range - 4)
+    pokemon.toMovingState()
+    pokemon.cooldown = 0
+    pokemon.attackType = AttackType.PHYSICAL
   }
 }
 
@@ -7849,7 +7862,7 @@ export class TransformStrategy extends AbilityStrategy {
       pokemon.rarity = target.rarity
       pokemon.stars = target.stars
       pokemon.skill = target.skill
-      pokemon.passive = target.passive
+      pokemon.changePassive(target.passive)
       pokemon.baseAtk = target.atk
       pokemon.baseDef = target.def
       pokemon.baseSpeDef = target.speDef
@@ -8787,7 +8800,8 @@ export class PsystrikeStrategy extends AbilityStrategy {
 
           const teleportationCell = board.getTeleportationCell(
             cell.value.positionX,
-            cell.value.positionY
+            cell.value.positionY,
+            cell.value.team
           )
           if (teleportationCell) {
             cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)

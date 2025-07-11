@@ -16986,7 +16986,7 @@ export class Darmanitan extends Pokemon {
   stars = 2
   hp = 220
   atk = 24
-  speed = 55
+  speed = 61
   def = 2
   speDef = 2
   maxPP = 100
@@ -17001,15 +17001,15 @@ export class DarmanitanZen extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 220
-  atk = 15
-  speed = 55
+  atk = 14
+  speed = 41
   def = 12
   speDef = 12
   maxPP = 100
-  range = 1
+  range = 5
   skill = Ability.TRANSE
   passive = Passive.DARMANITAN_ZEN
-  attackSprite = AttackSprite.FIRE_MELEE
+  attackSprite = AttackSprite.PSYCHIC_RANGE
 }
 
 export class Krabby extends Pokemon {

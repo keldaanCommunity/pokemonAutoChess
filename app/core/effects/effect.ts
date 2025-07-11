@@ -108,17 +108,20 @@ export class PeriodicEffect extends Effect {
   }
 }
 
+interface OnHitEffectArgs {
+  attacker: PokemonEntity,
+  target: PokemonEntity,
+  board: Board
+  totalTakenDamage: number
+  physicalDamage: number
+  specialDamage: number
+  trueDamage: number
+}
+
 // applied after every successful basic attack (not dodged or protected)
 export class OnHitEffect extends Effect {
-  apply(entity: PokemonEntity, target: PokemonEntity, board: Board) { }
-  constructor(
-    effect?: (
-      entity: PokemonEntity,
-      target: PokemonEntity,
-      board: Board
-    ) => void,
-    origin?: EffectOrigin
-  ) {
+  apply(params: OnHitEffectArgs) { }
+  constructor(effect?: (params: OnHitEffectArgs) => void, origin?: EffectOrigin) {
     super(effect, origin)
   }
 }
@@ -157,6 +160,22 @@ export class OnAbilityCastEffect extends Effect {
       board: Board,
       target: PokemonEntity,
       crit: boolean
+    ) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+// applied after having received damage and not being KO
+export class OnDamageReceivedEffect extends Effect {
+  apply(entity: PokemonEntity, attacker: PokemonEntity | null, board: Board, damage: number) { }
+  constructor(
+    effect?: (
+      entity: PokemonEntity,
+      attacker: PokemonEntity | null,
+      board: Board,
+      damage: number
     ) => void,
     origin?: EffectOrigin
   ) {
@@ -249,7 +268,7 @@ export class GrowGroundEffect extends PeriodicEffect {
 
           pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
           pokemon.name = Pkm.ZYGARDE_100
-          pokemon.passive = Passive.NONE
+          pokemon.changePassive(Passive.NONE)
           pokemon.skill = Ability.CORE_ENFORCER
           pokemon.pp = 0
           if (pokemon.player) {

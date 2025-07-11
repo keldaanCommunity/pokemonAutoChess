@@ -905,26 +905,7 @@ export default abstract class PokemonState {
         shouldTargetGainMana: true
       })
       pokemon.status.triggerBurn(1100, pokemon, undefined)
-    }
-
-    if (pokemon.effects.has(EffectEnum.ZEN_MODE)) {
-      const crit =
-        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(15, pokemon, 1, crit)
-      if (pokemon.life >= pokemon.hp) {
-        pokemon.index = PkmIndex[Pkm.DARMANITAN]
-        pokemon.name = Pkm.DARMANITAN
-        pokemon.passive = Passive.DARMANITAN
-        pokemon.skill = Ability.HEADBUTT
-        pokemon.pp = 0
-        pokemon.status.tree = false
-        pokemon.toMovingState()
-        pokemon.addAttack(9, pokemon, 0, false)
-        pokemon.addDefense(-10, pokemon, 0, false)
-        pokemon.addSpecialDefense(-10, pokemon, 0, false)
-      }
-    }
+    }    
   }
 
   onEnter(pokemon: PokemonEntity) { }

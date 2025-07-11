@@ -1,20 +1,23 @@
 import { Transfer } from "../../types"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
-import Board from "../board"
+import Board, { Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnDamageReceivedEffect,
+  OnHitEffect,
   OnKillEffect,
   OnMoveEffect,
   OnSpawnEffect
@@ -272,6 +275,118 @@ export class AccelerationEffect extends OnMoveEffect {
   }
 }
 
+const MimikuBustedTransformEffect = new OnDamageReceivedEffect((pokemon, attacker, board) => {
+  if (pokemon.life / pokemon.hp < 0.5) {
+    pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
+    pokemon.name = Pkm.MIMIKYU_BUSTED
+    pokemon.changePassive(Passive.MIMIKYU_BUSTED)
+    pokemon.addAttack(10, pokemon, 0, false)
+    pokemon.status.triggerProtect(2000)
+    if (pokemon.player) {
+      pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+    }
+  }
+})
+
+const DarmanitanZenTransformEffect = new OnDamageReceivedEffect((pokemon, attacker, board) => {
+  if (pokemon.life < 0.3 * pokemon.hp && pokemon.passive === Passive.DARMANITAN) {
+    pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
+    pokemon.name = Pkm.DARMANITAN_ZEN
+    pokemon.changePassive(Passive.DARMANITAN_ZEN)
+    pokemon.skill = Ability.TRANSE
+    pokemon.pp = 0
+    const destination = board.getTeleportationCell(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team
+    )
+    if (destination) pokemon.moveTo(destination.x, destination.y, board)
+    pokemon.toIdleState()
+    pokemon.addAttack(-10, pokemon, 0, false)
+    pokemon.addSpeed(-20, pokemon, 0, false)
+    pokemon.addDefense(10, pokemon, 0, false)
+    pokemon.addSpecialDefense(10, pokemon, 0, false)
+    pokemon.range += 4
+    pokemon.attackType = AttackType.SPECIAL
+  }
+})
+
+const DarmanitanZenOnHitEffect = new OnHitEffect(({ attacker, totalTakenDamage}) => {
+  attacker.handleHeal(totalTakenDamage, attacker, 0, false)
+})
+
+const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
+  if (!pkm.player) return
+  const aquaticStepReached = pkm.player.synergies.getSynergyStep(Synergy.AQUATIC)
+  pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
+  pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
+})
+
+const ToxicSpikesEffect = new OnDamageReceivedEffect((pokemon, attacker, board) => {
+  if (pokemon.passive === Passive.GLIMMORA && pokemon.life < 0.5 * pokemon.hp) {
+    pokemon.changePassive(Passive.NONE)
+
+    const cells = new Array<Cell>()
+
+    let startY = 1
+    let endY = 3
+    if (pokemon.team === Team.RED_TEAM) {
+      startY = -2
+      endY = 0
+    }
+
+    for (let x = -1; x < 2; x++) {
+      for (let y = startY; y < endY; y++) {
+        if (
+          !(
+            pokemon.positionX + x < 0 ||
+            pokemon.positionX + x > BOARD_WIDTH ||
+            pokemon.positionY + y < 0 ||
+            pokemon.positionY + y > BOARD_HEIGHT
+          )
+        ) {
+          cells.push({
+            x: pokemon.positionX + x,
+            y: pokemon.positionY + y,
+            value:
+              board.cells[
+              board.columns * pokemon.positionY + y + pokemon.positionX + x
+              ]
+          })
+        }
+      }
+    }
+
+    cells.forEach((cell) => {
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        EffectEnum.TOXIC_SPIKES,
+        pokemon.simulation
+      )
+
+      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
+        id: pokemon.simulation.id,
+        skill: "TOXIC_SPIKES",
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: cell.x,
+        targetY: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          20,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+      }
+    })
+  }
+})
+
 export const PassiveEffects: Partial<Record<Passive, (Effect | (() => Effect))[]>> = {
   [Passive.DURANT]: [DurantBugBuffEffect],
   [Passive.SHARED_VISION]: [SharedVisionEffect],
@@ -281,15 +396,12 @@ export const PassiveEffects: Partial<Record<Passive, (Effect | (() => Effect))[]
   [Passive.VIGOROTH]: [
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
   ],
-  [Passive.PIKACHU_SURFER]: [
-    new OnSpawnEffect((pkm) => {
-      if (!pkm.player) return
-      const aquaticStepReached = pkm.player.synergies.getSynergyStep(Synergy.AQUATIC)
-      pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
-      pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
-    })
-  ],
+  [Passive.PIKACHU_SURFER]: [PikachuSurferBuffEffect],
   [Passive.ACCELERATION]: [
     () => new AccelerationEffect() // needs new instance of effect for each pokemon due to internal stack counter
-  ]
+  ],
+  [Passive.MIMIKYU]: [MimikuBustedTransformEffect],
+  [Passive.DARMANITAN]: [DarmanitanZenTransformEffect],
+  [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
+  [Passive.GLIMMORA]: [ToxicSpikesEffect]
 }
