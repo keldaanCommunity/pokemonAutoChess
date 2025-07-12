@@ -48,6 +48,7 @@ import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
   EloRank,
+  EventPointsPerRank,
   ExpPlace,
   LegendaryPool,
   MAX_SIMULATION_DELTA_TIME,
@@ -77,6 +78,7 @@ import {
 } from "../utils/board"
 import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"
+import { clamp, min } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
@@ -457,19 +459,22 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.WANDERER_CAUGHT, async (client, msg: { id: string }) => {
-      if (client.auth) {
-        try {
-          this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
-            client,
-            playerId: client.auth.uid,
-            id: msg.id
-          })
-        } catch (e) {
-          logger.error("catch wandering error", e)
+    this.onMessage(
+      Transfer.WANDERER_CAUGHT,
+      async (client, msg: { id: string }) => {
+        if (client.auth) {
+          try {
+            this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+              client,
+              playerId: client.auth.uid,
+              id: msg.id
+            })
+          } catch (e) {
+            logger.error("catch wandering error", e)
+          }
         }
       }
-    })
+    )
 
     this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
@@ -868,6 +873,9 @@ export default class GameRoom extends Room<GameState> {
           synergies: synergiesMap,
           gameMode: this.state.gameMode
         })
+
+        const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+        usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
       }
 
       if (player.life >= 100 && rank === 1) {

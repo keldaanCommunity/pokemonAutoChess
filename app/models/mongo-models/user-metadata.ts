@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose"
 import { ArraySchema } from "@colyseus/schema"
+import { model, Schema } from "mongoose"
 import { Emotion, Role, Title } from "../../types"
 import { Language } from "../../types/enum/Language"
 
@@ -13,6 +13,7 @@ export interface IUserMetadata {
   exp: number
   level: number
   elo: number
+  eventPoints: number
   pokemonCollection: Map<string, IPokemonCollectionItem>
   booster: number
   titles: Title[]
@@ -65,6 +66,10 @@ const userMetadataSchema = new Schema({
   elo: {
     type: Number,
     default: 1000
+  },
+  eventPoints: {
+    type: Number,
+    default: 0
   },
   booster: {
     type: Number,

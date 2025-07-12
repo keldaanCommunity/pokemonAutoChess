@@ -84,6 +84,17 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   9: 255
 })
 
+export const EventPointsPerRank = [
+  +5, // 1st
+  +3, // 2nd
+  +2, // 3rd
+  +1, // 4th
+  -1, // 5th
+  -2, // 6th
+  -3, // 7th
+  -4 // 8th
+]
+
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
   [Synergy.GRASS]: [3, 5, 7],
