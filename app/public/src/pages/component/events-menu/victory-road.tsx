@@ -165,6 +165,7 @@ export function VictoryRoad() {
                             ))}
                         </dl>
                         <p>{t("victory_road.help2")}</p>
+                        <p>{t("victory_road.help3")}</p>
                     </div>
                 </div>
             )}

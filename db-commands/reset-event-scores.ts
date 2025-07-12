@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import { connect } from "mongoose"
-import userMetadata from "../app/models/mongo-models/user-metadata"
+import UserMetadata from "../app/models/mongo-models/user-metadata"
 import { logger } from "../app/utils/logger"
 
 async function main() {
@@ -13,7 +13,7 @@ async function main() {
         logger.info("Starting event scores reset...")
 
         // Reset event-related fields for all users in a single operation
-        const result = await userMetadata.updateMany(
+        const result = await UserMetadata.updateMany(
             {
                 $or: [
                     { eventPoints: { $gt: 0 } },
