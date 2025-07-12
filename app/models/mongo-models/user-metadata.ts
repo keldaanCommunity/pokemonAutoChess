@@ -16,6 +16,7 @@ export interface IUserMetadata {
   maxElo: number
   eventPoints: number
   maxEventPoints: number
+  eventFinishTime: Date | null
   pokemonCollection: Map<string, IPokemonCollectionItem>
   booster: number
   titles: Title[]
@@ -80,6 +81,9 @@ const userMetadataSchema = new Schema({
   maxEventPoints: {
     type: Number,
     default: 0
+  },
+  eventFinishTime: {
+    type: Date,
   },
   booster: {
     type: Number,

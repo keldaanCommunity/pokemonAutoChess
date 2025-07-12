@@ -876,9 +876,14 @@ export default class GameRoom extends Room<GameState> {
           gameMode: this.state.gameMode
         })
 
-        const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
-        usr.eventPoints = clamp(usr.eventPoints + eventPointsGained, 0, MAX_EVENT_POINTS)
-        usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+        if (usr.eventFinishTime == null) {
+          const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = clamp(usr.eventPoints + eventPointsGained, 0, MAX_EVENT_POINTS)
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
+            usr.eventFinishTime = new Date()
+          }
+        }
       }
 
       if (player.life >= 100 && rank === 1) {

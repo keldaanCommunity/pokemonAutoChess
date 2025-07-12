@@ -3916,10 +3916,12 @@
 	},
 	"victory_road": {	
 		"title": "Victory Road",	
-		"points": "Points: {{points}}",
+		"points": "{{points}} points",
 		"your_points": "Your points: {{points}}",
 		"instructions": "Race to the finish of Victory Road !",
 		"help1": "Playing Ranked games grants you points based on your final rank.",
-		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !"
+		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !",
+		"runners": "Runners",
+		"finishers": "Finishers"
 	}
 }

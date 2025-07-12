@@ -11,7 +11,7 @@
 
 .victory-road header {
   position: sticky;
-  top: 0;
+  top: -12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,6 +88,7 @@
   overflow-y: auto;
   position: sticky;
   top: 135px;
+  z-index: 20;
 }
 
 .victory-road-leaderboard-container h3,
@@ -106,6 +107,10 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
+}
+
+.leaderboard-item.me {
+  background-color: var(--color-bg-accent);
 }
 
 .leaderboard-item .rank {

@@ -16,6 +16,7 @@ export function VictoryRoad() {
     const eventLeaderboard = useAppSelector(
         (state) => state.lobby.eventLeaderboard
     )
+    console.log("Event Leaderboard:", eventLeaderboard)
 
     const [showLeaderboard, setShowLeaderboard] = useState(false)
     const [showHelp, setShowHelp] = useState(false)
@@ -110,15 +111,28 @@ export function VictoryRoad() {
 
             {showLeaderboard && (
                 <div className="victory-road-leaderboard-container my-container">
-                    <h3>{t("leaderboard")}</h3>
+                    <h3>{t("victory_road.finishers")}</h3>
                     <div className="leaderboard-list">
-                        {eventLeaderboard.map((player, index) => (
-                            <div key={player.id || index} className="leaderboard-item">
+                        {eventLeaderboard.filter(p => p.eventFinishTime != null).map((player, index) => (
+                            <div key={player.id || index} className={cc("leaderboard-item", { me: player.id === profile?.uid })}>
+                                <span className="rank">#{player.rank}</span>
+                                <PokemonPortrait avatar={player.avatar} />
+                                <span className="player-name">{player.name}</span>
+                            </div>
+                        ))}
+                        {eventLeaderboard.length === 0 && (
+                            <div className="no-data">{t("no_data_available")}</div>
+                        )}
+                    </div>
+                    <h3>{t("victory_road.runners")}</h3>
+                    <div className="leaderboard-list">
+                        {eventLeaderboard.filter(p => p.eventFinishTime == null).map((player, index) => (
+                            <div key={player.id || index} className={cc("leaderboard-item", { me: player.id === profile?.uid })}>
                                 <span className="rank">#{player.rank}</span>
                                 <PokemonPortrait avatar={player.avatar} />
                                 <span className="player-name">{player.name}</span>
                                 <span className="event-points">
-                                    {player.value} {t("points")}
+                                    {t("victory_road.points", { points: player.value })}
                                 </span>
                             </div>
                         ))}
@@ -145,7 +159,7 @@ export function VictoryRoad() {
                                         })}
                                     >
                                         {(EventPointsPerRank[rank - 1] > 0 ? "+" : "") +
-                                            EventPointsPerRank[rank - 1]}
+                                            t("victory_road.points", { points: EventPointsPerRank[rank - 1] })}
                                     </dd>
                                 </>
                             ))}

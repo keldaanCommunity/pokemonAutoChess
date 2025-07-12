@@ -80,8 +80,8 @@ export async function fetchBotsLeaderboard() {
 export async function fetchEventLeaderboard() {
   const users = await UserMetadata.find(
     { eventPoints: { $gt: 0 } },
-    ["displayName", "avatar", "eventPoints", "uid"],
-    { limit: 100, sort: { eventPoints: -1 } }
+    ["displayName", "avatar", "eventPoints", "eventFinishTime", "uid"],
+    { limit: 100, sort: { eventPoints: -1, eventFinishTime: 1 } }
   )
 
   if (users) {
@@ -90,6 +90,7 @@ export async function fetchEventLeaderboard() {
       rank: i + 1,
       avatar: user.avatar,
       value: user.eventPoints,
+      eventFinishTime: user.eventFinishTime,
       id: user.uid
     }))
   }
