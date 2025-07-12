@@ -235,6 +235,7 @@ export enum Pkm {
   ELEKID = "ELEKID",
   ELGYEM = "ELGYEM",
   EMBOAR = "EMBOAR",
+  EMOLGA = "EMOLGA",
   EMPOLEON = "EMPOLEON",
   ENAMORUS = "ENAMORUS",
   ENTEI = "ENTEI",
@@ -1693,7 +1694,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VANILLUXE]: "0584",
   [Pkm.DEERLING]: "0585",
   [Pkm.SAWSBUCK]: "0586",
-  //[Pkm.EMOLGA]: "0587",
+  [Pkm.EMOLGA]: "0587",
   //[Pkm.KARRABLAST]: "0588",
   //[Pkm.ESCAVALIER]: "0589",
   //[Pkm.FOONGUS]: "0590",
@@ -3162,7 +3163,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.REVAVROOM]: Pkm.VAROOM,
   [Pkm.CELESTEELA]: Pkm.CELESTEELA,
   [Pkm.LEDYBA]: Pkm.LEDYBA,
-  [Pkm.LEDIAN]: Pkm.LEDYBA
+  [Pkm.LEDIAN]: Pkm.LEDYBA,
+  [Pkm.EMOLGA]: Pkm.EMOLGA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -8331,5 +8333,10 @@ export const AnimationConfig: {
     attack: AnimationType.Attack,
     ability: AnimationType.Strike,
     emote: AnimationType.Shoot
+  },
+  [Pkm.EMOLGA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shock,
+    emote: AnimationType.DeepBreath
   }
 }
