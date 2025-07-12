@@ -13,4 +13,7 @@ export interface ILeaderboardBotInfo {
   value: number
   author: string
 }
-  
+
+export interface ILeaderboardEventInfo extends ILeaderboardInfo {
+  eventFinishTime: Date | null
+}

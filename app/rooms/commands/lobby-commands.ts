@@ -99,6 +99,7 @@ export class OnJoinCommand extends Command<
           displayName: client.auth.displayName,
           language: client.auth.metadata.language,
           avatar: starterAvatar,
+          games: 0,
           wins: 0,
           exp: 0,
           level: 0,
@@ -1412,7 +1413,7 @@ export class EndTournamentCommand extends Command<
 
       const winner = finalists.find((p) => p.ranks.at(-1) === 1)
       if (winner) {
-        this.room.presence.publish("tournament-winner", winner)
+        this.room.presence.publish("announcement", `${winner.name} won the tournament !`)
       }
 
       for (const player of finalists) {

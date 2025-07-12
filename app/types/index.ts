@@ -1,6 +1,7 @@
 import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
 import Board from "../core/board"
 import Dps from "../core/dps"
+import { Effect as EffectClass } from "../core/effects/effect"
 import { EvolutionRule } from "../core/evolution-rules"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
@@ -34,7 +35,6 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
-import { Effect as EffectClass } from "../core/effects/effect"
 
 export * from "./enum/Emotion"
 
@@ -801,7 +801,10 @@ export enum Title {
   PICNICKER = "PICNICKER",
   STARGAZER = "STARGAZER",
   BLOODY = "BLOODY",
-  ETERNAL = "ETERNAL"
+  ETERNAL = "ETERNAL",
+  RUNNER = "RUNNER",
+  FINISHER = "FINISHER",
+  VICTORIOUS = "VICTORIOUS"
 }
 
 export interface IBoardEvent {

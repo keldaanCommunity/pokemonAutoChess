@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose"
 import { ArraySchema } from "@colyseus/schema"
+import { model, Schema } from "mongoose"
 import { Emotion, Role, Title } from "../../types"
 import { Language } from "../../types/enum/Language"
 
@@ -8,10 +8,15 @@ export interface IUserMetadata {
   displayName: string
   language: Language | ""
   avatar: string
+  games: number
   wins: number
   exp: number
   level: number
   elo: number
+  maxElo: number
+  eventPoints: number
+  maxEventPoints: number
+  eventFinishTime: Date | null
   pokemonCollection: Map<string, IPokemonCollectionItem>
   booster: number
   titles: Title[]
@@ -49,6 +54,10 @@ const userMetadataSchema = new Schema({
     type: Number,
     default: 0
   },
+  games: {
+    type: Number,
+    default: 0
+  },
   exp: {
     type: Number,
     default: 0
@@ -60,6 +69,21 @@ const userMetadataSchema = new Schema({
   elo: {
     type: Number,
     default: 1000
+  },
+  maxElo: {
+    type: Number,
+    default: 1000
+  },
+  eventPoints: {
+    type: Number,
+    default: 0
+  },
+  maxEventPoints: {
+    type: Number,
+    default: 0
+  },
+  eventFinishTime: {
+    type: Date,
   },
   booster: {
     type: Number,

@@ -2982,7 +2982,10 @@
 		"STARGAZER": "Stargazer",
 		"BLOODY": "Bloody",
 		"ETERNAL": "Eternal",
-		"ANNIHILATOR": "Annihilator"
+		"ANNIHILATOR": "Annihilator",
+		"RUNNER": "Runner",
+		"FINISHER": "Finisher",
+		"VICTORIOUS": "Victorious"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3064,7 +3067,10 @@
 		"PICNICKER": "Make a picnic with 9 Pokémon",
 		"STARGAZER": "Get Solgaleo or Lunala",
 		"BLOODY": "Get Bloodmoon Ursaluna",
-		"ETERNAL": "Meet Arceus at stage 40"
+		"ETERNAL": "Meet Arceus at stage 40",
+		"RUNNER": "Reach 100 points on Victory Road",
+		"FINISHER": "Finish the Victory Road race",
+		"VICTORIOUS": "Finish first at the Victory Road race"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
@@ -3234,7 +3240,6 @@
 	"in_game": "In Game",
 	"tournament": "Tournament",
 	"events": "Events",
-	"victory_road": "Victory Road",
 	"custom_room": "Custom room",
 	"custom_room_short": "Custom",
 	"custom_room_description": "Create a private room with your own rules",
@@ -3914,5 +3919,16 @@
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "Strongest is defined as, by order of priority: 1. Number of items held, 2. Unit tier, 3. Unit rarity"
+	},
+	"victory_road": {	
+		"title": "Victory Road",	
+		"points": "{{points}} points",
+		"your_points": "Your points: {{points}}",
+		"instructions": "Race to the finish of Victory Road !",
+		"help1": "Playing Ranked games grants you points based on your final rank.",
+		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !",
+		"help3": "All scores will be reset at midnight UTC on the first day of each month.",
+		"runners": "Runners",
+		"finishers": "Finishers"
 	}
 }

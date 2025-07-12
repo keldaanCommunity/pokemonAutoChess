@@ -84,6 +84,19 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   9: 255
 })
 
+export const MAX_EVENT_POINTS = 500
+
+export const EventPointsPerRank = [
+  +10, // 1st
+  +5, // 2nd
+  +3, // 3rd
+  +1, // 4th
+  -1, // 5th
+  -3, // 6th
+  -5, // 7th
+  -8 // 8th
+]
+
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
   [Synergy.GRASS]: [3, 5, 7],

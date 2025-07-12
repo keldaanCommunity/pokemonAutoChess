@@ -18,6 +18,7 @@ import {
 import { Language } from "../../../types/enum/Language"
 import {
   ILeaderboardBotInfo,
+  ILeaderboardEventInfo,
   ILeaderboardInfo
 } from "../../../types/interfaces/LeaderboardInfo"
 import type { Booster } from "../../../types/Booster"
@@ -27,6 +28,7 @@ export interface IUserLobbyState {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
+  eventLeaderboard: ILeaderboardEventInfo[]
   user: IUserMetadata | undefined
   searchedUser: IUserMetadata | undefined
   tabIndex: number
@@ -49,6 +51,7 @@ const initialState: IUserLobbyState = {
   leaderboard: [],
   botLeaderboard: [],
   levelLeaderboard: [],
+  eventLeaderboard: [],
   user: undefined,
   tabIndex: 0,
   preparationRooms: [],
@@ -81,6 +84,9 @@ export const lobbySlice = createSlice({
     },
     setLevelLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
+    },
+    setEventLeaderboard: (state, action: PayloadAction<ILeaderboardEventInfo[]>) => {
+      state.eventLeaderboard = action.payload
     },
     changePokemonCollectionItem: (
       state,
@@ -246,6 +252,7 @@ export const {
   setLeaderboard,
   setBotLeaderboard,
   setLevelLeaderboard,
+  setEventLeaderboard,
   setTabIndex,
   addRoom,
   removeRoom,

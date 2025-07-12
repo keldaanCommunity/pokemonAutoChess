@@ -45,6 +45,12 @@ export function initCronJobs() {
     onTick: () => titleStats(),
     start: true
   })
+  CronJob.from({
+    cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
+    timeZone: "UTC",
+    onTick: () => resetEventScores(),
+    start: true
+  })
 }
 
 async function deleteOldAnonymousAccounts() {
@@ -160,4 +166,32 @@ async function deleteOldHistory() {
     startTime: { $lt: Date.now() - CRON_HISTORY_CLEANUP_DELAY }
   })
   logger.info(`${historyResults.deletedCount} game histories deleted`)
+}
+
+async function resetEventScores() {
+  try {
+    logger.info("[CRON] Starting event scores reset...")
+
+    // Reset event-related fields for all users in a single operation
+    const result = await UserMetadata.updateMany(
+      {
+        $or: [
+          { eventPoints: { $gt: 0 } },
+          { maxEventPoints: { $gt: 0 } },
+          { eventFinishTime: { $ne: null } }
+        ]
+      },
+      {
+        $set: {
+          eventPoints: 0,
+          maxEventPoints: 0,
+          eventFinishTime: null
+        }
+      }
+    )
+
+    logger.info(`Event reset completed! Reset event data for ${result.modifiedCount} users`)
+  } catch (e) {
+    logger.error("Error during event reset scores:", e)
+  }
 }
