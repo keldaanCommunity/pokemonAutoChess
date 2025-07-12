@@ -9846,12 +9846,12 @@ export class Chinchou extends Pokemon {
   evolution = Pkm.LANTURN
   hp = 60
   atk = 7
-  speed = 46
+  speed = 43
   def = 4
   speDef = 6
-  maxPP = 90
+  maxPP = 100
   range = 2
-  skill = Ability.THUNDER_SHOCK
+  skill = Ability.ELECTRO_BALL
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
@@ -9866,12 +9866,12 @@ export class Lanturn extends Pokemon {
   stars = 2
   hp = 130
   atk = 16
-  speed = 46
+  speed = 43
   def = 6
   speDef = 10
-  maxPP = 90
+  maxPP = 100
   range = 2
-  skill = Ability.THUNDER_SHOCK
+  skill = Ability.ELECTRO_BALL
   additional = true
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
@@ -19140,6 +19140,21 @@ export class Ledian extends Pokemon {
   additional = true
 }
 
+export class Emolga extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 150
+  atk = 20
+  speed = 66
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.ELECTRO_BALL
+  attackSprite = AttackSprite.ELECTRIC_RANGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20137,5 +20152,6 @@ export const PokemonClasses: Record<
   [Pkm.REVAVROOM]: Revavroom,
   [Pkm.CELESTEELA]: Celesteela,
   [Pkm.LEDYBA]: Ledyba,
-  [Pkm.LEDIAN]: Ledian
+  [Pkm.LEDIAN]: Ledian,
+  [Pkm.EMOLGA]: Emolga
 }

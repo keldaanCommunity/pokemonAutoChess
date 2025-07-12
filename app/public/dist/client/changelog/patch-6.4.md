@@ -9,6 +9,7 @@
 - Revavroom
 - Ledyba
 - Ledian
+- Emolga
 
 # Changes to Pokemon & Abilities
 
@@ -23,6 +24,7 @@
 - Change Darmanitan Zen mode: now can attack at range, but with lower attack and speed. Attacks deal special damage, scale with AP and heal for 100% of damage dealt.
 - Change Mach Punch: damage 60 at all tiers → 25/50/100
 - Change Kubfu: PP 100 → 90
+- New ability for Chinchou line: Electro ball ; PP 90 → 100, Speed 46 → 43
 
 # Changes to Synergies
 

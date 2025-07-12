@@ -4913,7 +4913,7 @@ export class MachPunchStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25,50,100][pokemon.stars - 1] ?? 100
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.cooldown = Math.round(100 * (50 / pokemon.speed))
   }
@@ -11970,6 +11970,65 @@ export class UltraThrustersStrategy extends AbilityStrategy {
   }
 }
 
+export class ElectroBallStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    let projectileSpeedRemaining = pokemon.speed
+    const delay = Math.round(200 * (50 / pokemon.speed))
+    const targetsHit = new Set<PokemonEntity>()
+    const bounce = (currentTarget: PokemonEntity, prevTarget: PokemonEntity) => {
+      const distance = distanceM(
+        prevTarget.positionX,
+        prevTarget.positionY,
+        currentTarget.positionX,
+        currentTarget.positionY
+      )
+      broadcastAbility(pokemon, {
+        positionX: prevTarget.positionX,
+        positionY: prevTarget.positionY,
+        targetX: currentTarget.positionX,
+        targetY: currentTarget.positionY,
+        delay: delay * distance
+      })
+
+      const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+      currentTarget.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+
+      targetsHit.add(currentTarget)
+      const possibleTargets = board.cells.filter<PokemonEntity>((cell): cell is PokemonEntity => cell !== undefined && cell.team !== pokemon.team && !targetsHit.has(cell))
+      if (possibleTargets.length === 0) return;
+      const distances = possibleTargets.map((cell) => distanceM(
+        cell.positionX,
+        cell.positionY,
+        currentTarget.positionX,
+        currentTarget.positionY
+      ))
+      const minDistance = Math.min(...distances)
+      const closestTarget = possibleTargets[distances.indexOf(minDistance)]
+
+      if (closestTarget && projectileSpeedRemaining > 0) {
+        const nextTarget = possibleTargets[0]
+        projectileSpeedRemaining -= 30
+        pokemon.commands.push(new DelayedCommand(() => bounce(nextTarget, currentTarget), delay * minDistance))
+      }
+    }
+
+    bounce(target, pokemon)
+  }
+}
+
 export class ElectroShotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13396,5 +13455,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STEAMROLLER]: new SteamrollerStrategy(),
   [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
   [Ability.SPIN_OUT]: new SpinOutStrategy(),
-  [Ability.ULTRA_THRUSTERS]: new UltraThrustersStrategy()
+  [Ability.ULTRA_THRUSTERS]: new UltraThrustersStrategy(),
+  [Ability.ELECTRO_BALL]: new ElectroBallStrategy(),
 }

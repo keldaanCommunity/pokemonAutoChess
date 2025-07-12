@@ -1187,6 +1187,21 @@ export function displayAbility(
       break
     }
 
+    case Ability.ELECTRO_BALL: {
+      const specialProjectile = addAbilitySprite(Ability.ZAP_CANNON, coordinates)
+        ?.setScale(2)
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: coordinatesTarget[0],
+        y: coordinatesTarget[1],
+        duration: delay ?? 300,
+        onComplete: () => {
+          specialProjectile?.destroy()
+        }
+      })
+      break
+    }
+
     case Ability.SPARKLING_ARIA: {
       const specialProjectile = addAbilitySprite(skill, coordinates)?.setScale(
         3
