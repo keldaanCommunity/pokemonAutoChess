@@ -8,6 +8,7 @@ export interface IUserMetadata {
   displayName: string
   language: Language | ""
   avatar: string
+  games: number
   wins: number
   exp: number
   level: number
@@ -46,6 +47,10 @@ const userMetadataSchema = new Schema({
     default: "0019/Normal"
   },
   wins: {
+    type: Number,
+    default: 0
+  },
+  games: {
     type: Number,
     default: 0
   },

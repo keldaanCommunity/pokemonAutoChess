@@ -99,6 +99,7 @@ export class OnJoinCommand extends Command<
           displayName: client.auth.displayName,
           language: client.auth.metadata.language,
           avatar: starterAvatar,
+          games: 0,
           wins: 0,
           exp: 0,
           level: 0,
