@@ -1,3 +1,168 @@
-.victory-road {
-    flex: 1;
+.victory-road.my-container {
+  flex: 1;
+  background-size: 600px 2640px;
+  background-position: top;
+  background-repeat: no-repeat;
+  min-height: 2640px;
+  height: 2640px;
+  padding: 0;
+  position: relative;
+}
+
+.victory-road header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5em;
+  z-index: 5;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.victory-road .button {
+  padding: 8px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 50%;
+  cursor: var(--cursor-hover);
+  border: 2px solid black;
+}
+
+.victory-road .button:hover {
+  background-color: var(--color-bg-accent);
+  border-color: white;
+}
+
+.victory-road .button img {
+  width: 32px;
+  height: 32px;
+}
+
+.victory-road h2 {
+  flex: 1;
+  text-shadow:
+    -1px 1px 2px black,
+    1px -1px 2px black,
+    1px 1px 2px black,
+    -1px -1px 2px black;
+}
+
+.victory-road-player-icon {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: var(--color-bg-secondary);
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    inset -1px -1px 2px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+
+.victory-road-player-icon:hover {
+  z-index: 10;
+}
+
+.victory-road-player-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.victory-road-player-detail img {
+  margin-right: 0.25em;
+}
+
+.victory-road-leaderboard-container,
+.victory-road-help-container {
+  margin: 1em;
+  background-color: var(--color-bg-primary);
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  position: sticky;
+  top: 135px;
+}
+
+.victory-road-leaderboard-container h3,
+.victory-road-help-container h3 {
+  margin: 0 0 1em 0;
+  text-align: center;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.leaderboard-item .rank {
+  font-weight: bold;
+  min-width: 2.5em;
+  text-align: left;
+}
+
+.leaderboard-item .player-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.leaderboard-item .event-points {
+  font-weight: bold;
+  min-width: 5em;
+  text-align: right;
+}
+
+.no-data {
+  text-align: center;
+  padding: 2em;
+  color: #aaa;
+  font-style: italic;
+}
+
+.help-content p {
+  margin-bottom: 1em;
+}
+
+.help-content dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em 1em;
+  padding: 1em;
+  background-color: var(--color-bg-secondary);
+}
+
+.help-content dt {
+  font-weight: bold;
+  padding: 0.25em 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.help-content dd {
+  margin: 0;
+  padding: 0.25em 0;
+  font-weight: bold;
+  text-align: right;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.help-content dd.positive {
+  color: var(--color-fg-green);
+}
+.help-content dd.negative {
+  color: var(--color-fg-red);
 }

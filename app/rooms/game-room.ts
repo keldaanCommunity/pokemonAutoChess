@@ -51,6 +51,7 @@ import {
   EventPointsPerRank,
   ExpPlace,
   LegendaryPool,
+  MAX_EVENT_POINTS,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PortalCarouselStages,
@@ -78,7 +79,7 @@ import {
 } from "../utils/board"
 import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"
-import { clamp, min } from "../utils/number"
+import { clamp } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
@@ -876,7 +877,7 @@ export default class GameRoom extends Room<GameState> {
         })
 
         const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
-        usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+        usr.eventPoints = clamp(usr.eventPoints + eventPointsGained, 0, MAX_EVENT_POINTS)
         usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
       }
 

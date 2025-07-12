@@ -3234,7 +3234,6 @@
 	"in_game": "In Game",
 	"tournament": "Tournament",
 	"events": "Events",
-	"victory_road": "Victory Road",
 	"custom_room": "Custom room",
 	"custom_room_short": "Custom",
 	"custom_room_description": "Create a private room with your own rules",
@@ -3914,5 +3913,13 @@
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "Strongest is defined as, by order of priority: 1. Number of items held, 2. Unit tier, 3. Unit rarity"
+	},
+	"victory_road": {	
+		"title": "Victory Road",	
+		"points": "Points: {{points}}",
+		"your_points": "Your points: {{points}}",
+		"instructions": "Race to the finish of Victory Road !",
+		"help1": "Playing Ranked games grants you points based on your final rank.",
+		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !"
 	}
 }

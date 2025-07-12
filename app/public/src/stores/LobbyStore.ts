@@ -27,6 +27,7 @@ export interface IUserLobbyState {
   leaderboard: ILeaderboardInfo[]
   botLeaderboard: ILeaderboardBotInfo[]
   levelLeaderboard: ILeaderboardInfo[]
+  eventLeaderboard: ILeaderboardInfo[]
   user: IUserMetadata | undefined
   searchedUser: IUserMetadata | undefined
   tabIndex: number
@@ -49,6 +50,7 @@ const initialState: IUserLobbyState = {
   leaderboard: [],
   botLeaderboard: [],
   levelLeaderboard: [],
+  eventLeaderboard: [],
   user: undefined,
   tabIndex: 0,
   preparationRooms: [],
@@ -81,6 +83,9 @@ export const lobbySlice = createSlice({
     },
     setLevelLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
       state.levelLeaderboard = action.payload
+    },
+    setEventLeaderboard: (state, action: PayloadAction<ILeaderboardInfo[]>) => {
+      state.eventLeaderboard = action.payload
     },
     changePokemonCollectionItem: (
       state,
@@ -246,6 +251,7 @@ export const {
   setLeaderboard,
   setBotLeaderboard,
   setLevelLeaderboard,
+  setEventLeaderboard,
   setTabIndex,
   addRoom,
   removeRoom,

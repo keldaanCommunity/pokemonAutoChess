@@ -89,7 +89,7 @@ export async function fetchEventLeaderboard() {
       name: user.displayName,
       rank: i + 1,
       avatar: user.avatar,
-      value: user.elo,
+      value: user.eventPoints,
       id: user.uid
     }))
   }
