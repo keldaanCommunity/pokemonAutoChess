@@ -12027,7 +12027,7 @@ export class Hitmonlee extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 33
+  atk = 28
   speed = 56
   def = 6
   speDef = 6

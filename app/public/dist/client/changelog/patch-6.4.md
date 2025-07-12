@@ -23,6 +23,7 @@
 - Change Darmanitan Zen mode: now can attack at range, but with lower attack and speed. Attacks deal special damage, scale with AP and heal for 100% of damage dealt.
 - Change Mach Punch: damage 60 at all tiers → 25/50/100
 - Change Kubfu: PP 100 → 90
+- Nerf Hitmonlee: Attack 33 → 28
 
 # Changes to Synergies
 
