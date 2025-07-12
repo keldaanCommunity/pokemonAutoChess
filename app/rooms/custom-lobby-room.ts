@@ -396,8 +396,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.state.addAnnouncement(`${player.name} won the ranked match !`)
     })*/
 
-    this.presence.subscribe("tournament-winner", (player: IPlayer) => {
-      this.state.addAnnouncement(`${player.name} won the tournament !`)
+    this.presence.subscribe("announcement", (message: string) => {
+      this.state.addAnnouncement(message)
     })
 
     this.presence.subscribe(

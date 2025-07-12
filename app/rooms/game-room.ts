@@ -882,6 +882,19 @@ export default class GameRoom extends Room<GameState> {
           usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
           if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
             usr.eventFinishTime = new Date()
+
+            const finisher = await UserMetadata.findOne({ eventFinishTime: { $ne: null } })
+            if (!finisher) {
+              player.titles.add(Title.VICTORIOUS)
+              this.presence.publish("announcement", `${player.name} won the Victory Road race !`)
+            } else {
+              this.presence.publish("announcement", `${player.name} finished the Victory Road !`)
+            }
+            player.titles.add(Title.FINISHER)
+          }
+
+          if (usr.maxEventPoints >= 100) {
+            player.titles.add(Title.RUNNER)
           }
         }
       }

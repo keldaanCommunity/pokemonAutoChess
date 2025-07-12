@@ -1413,7 +1413,7 @@ export class EndTournamentCommand extends Command<
 
       const winner = finalists.find((p) => p.ranks.at(-1) === 1)
       if (winner) {
-        this.room.presence.publish("tournament-winner", winner)
+        this.room.presence.publish("announcement", `${winner.name} won the tournament !`)
       }
 
       for (const player of finalists) {

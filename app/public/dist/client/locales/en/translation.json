@@ -2982,7 +2982,10 @@
 		"STARGAZER": "Stargazer",
 		"BLOODY": "Bloody",
 		"ETERNAL": "Eternal",
-		"ANNIHILATOR": "Annihilator"
+		"ANNIHILATOR": "Annihilator",
+		"RUNNER": "Runner",
+		"FINISHER": "Finisher",
+		"VICTORIOUS": "Victorious"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3064,7 +3067,10 @@
 		"PICNICKER": "Make a picnic with 9 Pokémon",
 		"STARGAZER": "Get Solgaleo or Lunala",
 		"BLOODY": "Get Bloodmoon Ursaluna",
-		"ETERNAL": "Meet Arceus at stage 40"
+		"ETERNAL": "Meet Arceus at stage 40",
+		"RUNNER": "Reach 100 points on Victory Road",
+		"FINISHER": "Finish the Victory Road race",
+		"VICTORIOUS": "Finish first at the Victory Road race"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
