@@ -854,6 +854,7 @@ export default class GameRoom extends Room<GameState> {
             player.titles.add(Title.GYM_LEADER)
           }
           usr.elo = elo
+          usr.maxElo = Math.max(usr.maxElo, elo)
         }
 
         const dbrecord = this.transformToSimplePlayer(player)
@@ -876,6 +877,7 @@ export default class GameRoom extends Room<GameState> {
 
         const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
         usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+        usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
       }
 
       if (player.life >= 100 && rank === 1) {

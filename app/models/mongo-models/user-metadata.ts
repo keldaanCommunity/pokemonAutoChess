@@ -13,7 +13,9 @@ export interface IUserMetadata {
   exp: number
   level: number
   elo: number
+  maxElo: number
   eventPoints: number
+  maxEventPoints: number
   pokemonCollection: Map<string, IPokemonCollectionItem>
   booster: number
   titles: Title[]
@@ -67,7 +69,15 @@ const userMetadataSchema = new Schema({
     type: Number,
     default: 1000
   },
+  maxElo: {
+    type: Number,
+    default: 1000
+  },
   eventPoints: {
+    type: Number,
+    default: 0
+  },
+  maxEventPoints: {
     type: Number,
     default: 0
   },
