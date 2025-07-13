@@ -3428,7 +3428,8 @@ export class SyrupBombStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)[0]
 
     if (highestSpeedEnemy) {
-      highestSpeedEnemy.addSpeed(-30, pokemon, 1, crit)
+      const speedDebuff = Math.round(30 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+      highestSpeedEnemy.addSpeed(-speedDebuff, pokemon, 1, crit)
       highestSpeedEnemy.handleSpecialDamage(
         damage,
         board,

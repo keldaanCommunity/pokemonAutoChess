@@ -10207,7 +10207,7 @@ export class Dipplin extends Pokemon {
   speed = 31
   def = 8
   speDef = 8
-  maxPP = 60
+  maxPP = 80
   range = 3
   skill = Ability.SYRUP_BOMB
   attackSprite = AttackSprite.GRASS_MELEE

@@ -26,6 +26,7 @@
 - Nerf Hitmonlee: Attack 33 → 28
 - Nerf Ghastly line: PP 80 → 90
 - Applin line is now Dragon/Gourmet/Grass instead of Dragon/Grass/Gourmet
+- Change Dipplin: PP 60 → 80 ; Syrup Bomb speed debuff now scales with AP
 - Buff Chimecho line: PP 80 → 70
 - Buff Scream Tail: PP 90 → 80
 - Buff Indeedee: Female HP 170 → 190, Def 3 → 4 ; Male HP 140 → 160

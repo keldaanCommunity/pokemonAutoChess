@@ -1596,7 +1596,7 @@
 		"STEAM_ERUPTION": "Inflige [80,SP] de SPECIAL al objetivo y a todos los enemigos adyacentes, y los deja BURN durante 3 segundos",
 		"APPLE_ACID": "Inflige [15,30,60,SP] de SPECIAL a 3 objetivos frente al usuario, y reduce su DEF y SPE_DEF en [5,SP]",
 		"NUTRIENTS": "Lanza una manzana al aliado con menor HP, curándolo [40,SP] HP e incrementando su DEF y SPE_DEF en [2,SP].",
-		"SYRUP_BOMB": "El usuario lanza una explosión de sirope de caramelo que recubre al enemigo con la SPEED más alta, infligiendo [50,SP] SPECIAL y reduciendo 30 puntos su SPEED.",
+		"SYRUP_BOMB": "El usuario lanza una explosión de sirope de caramelo que recubre al enemigo con la SPEED más alta, infligiendo [50,SP] SPECIAL y reduciendo [30,SP] puntos su SPEED.",
 		"FICKLE_BEAM": "Cada una de las 5 cabezas de la hidra tiene un [50,LK]% de probabilidad de infligir [50,SP] de SPECIAL y 2 segundos de PARALYSIS en los enemigos con la SPEED más alta.",
 		"GRAV_APPLE": "El usuario inflige [80,SP] PHYSICAL haciendo caer una manzana desde arriba. Inflige [160,SP] de PHYSICAL si la DEF del objetivo es 0.",
 		"SACRED_SWORD_IRON": "Inflige [80,SP] TRUE al objetivo + [15,SP] TRUE por aliado caído.",

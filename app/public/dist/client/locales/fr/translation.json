@@ -1604,7 +1604,7 @@
 		"STEAM_ERUPTION": "Inflige [80,SP] SPECIAL à la cible et à tous les ennemis adjacents, et leur inflige BURN pendant 3 secondes.",
 		"APPLE_ACID": "Inflige [50,SP] SPECIAL aux 3 ennemis qui font face au lanceur. Inflige [100,SP] SPECIAL si la SPE_DEF de la cible est à 0.",
 		"NUTRIENTS": "Lance une pomme sur l'allié avec le moins de HP, soignant de [40,SP] HP et augmentant sa DEF et SPE_DEF de [2,SP].",
-		"SYRUP_BOMB": "Déclenche une explosion de sirop collant qui recouvre l'ennemi à la SPEED la plus élevée, lui infligeant [50,SP] SPECIAL et réduisant sa SPEED de 30.",
+		"SYRUP_BOMB": "Déclenche une explosion de sirop collant qui recouvre l'ennemi à la SPEED la plus élevée, lui infligeant [50,SP] SPECIAL et réduisant sa SPEED de [30,SP].",
 		"FICKLE_BEAM": "Chacune des 5 têtes de l'hydre a [50,LK]% de chance d'infliger [50,SP] SPECIAL et PARALYSIS pendant 2 secondes aux ennemis ayant la SPEED la plus élevée.",
 		"GRAV_APPLE": "Le lanceur inflige [80,SP] PHYSICAL en laissant tomber une pomme de très haut. Inflige [160,SP] PHYSICAL si la DEF de la cible est à 0.",
 		"SACRED_SWORD_IRON": "Inflige [80,SP] TRUE à la cible + [15,SP] TRUE par allié KO.",

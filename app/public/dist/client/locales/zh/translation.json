@@ -1602,7 +1602,7 @@
 		"STEAM_ERUPTION": "对目标和所有相邻敌方宝可梦造成[80,SP]点SPECIAL，并使他们陷入BURN 3秒。",
 		"APPLE_ACID": "对前方的3只敌方宝可梦造成[50,SP]点SPECIAL。若目标的SPE_DEF为0，改为造成[100,SP]点SPECIAL。",
 		"NUTRIENTS": "朝HP最低的我方宝可梦投掷一个苹果，为其恢复[40,SP]点HP，并提升其[2,SP]点DEF和SPE_DEF。",
-		"SYRUP_BOMB": "使粘稠的麦芽糖浆爆炸，对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，并降低其30点SPEED。",
+		"SYRUP_BOMB": "使粘稠的麦芽糖浆爆炸，对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，并降低其[30,SP]点SPEED。",
 		"FICKLE_BEAM": "密集大蛇的5个头各自有[50,LK]%的概率对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，并使其陷入PARALYSIS 2秒。",
 		"GRAV_APPLE": "从高处落下苹果，对目标造成[80,SP]点PHYSICAL。若目标的DEF为0，改为造成[160,SP]点PHYSICAL。",
 		"SACRED_SWORD_IRON": "对目标造成[80,SP]点TRUE。每有一个倒下的我方宝可梦，该伤害提升[15,SP]。",
