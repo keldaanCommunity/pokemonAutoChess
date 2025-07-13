@@ -8601,7 +8601,7 @@ export class Stakataka extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
-  atk = 6
+  atk = 10
   speed = 29
   def = 30
   speDef = 30
@@ -18138,7 +18138,7 @@ export class Pecharunt extends Pokemon {
   speed = 55
   def = 12
   speDef = 6
-  maxPP = 100
+  maxPP = 120
   range = 3
   skill = Ability.MALIGNANT_CHAIN
   attackSprite = AttackSprite.POISON_RANGE

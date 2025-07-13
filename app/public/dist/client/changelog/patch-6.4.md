@@ -30,6 +30,8 @@
 - Buff Scream Tail: PP 90 → 80
 - Buff Indeedee: Female HP 170 → 190, Def 3 → 4 ; Male HP 140 → 160
 - Fezandipiti is now 1-range. Def 8 → 10
+- Nerf Pecharunt: PP 100 → 120
+- Buff Stakataka: Attack 6 → 10
 
 # Changes to Synergies
 
