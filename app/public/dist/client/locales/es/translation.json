@@ -2367,8 +2367,7 @@
 		"MALICIOUS_ARMOR": "Armadura Maldita",
 		"RUSTED_SWORD": "Espada Oxidada",
 		"SCROLL_OF_WATERS": "Manuscrito Aguas",
-		"SCROLL_OF_DARKNESS": "Manuscrito Sombras",
-		"Berries": "Bayas"
+		"SCROLL_OF_DARKNESS": "Manuscrito Sombras"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3863,6 +3862,5 @@
 		"attempts": "Intentos: {{count}}",
 		"guess": "Adivinar",
 		"reset": "Reiniciar"
-	},
-	"game-surrender-modal-lobby": "La partida todavía no ha terminado. Quieres rendirte?"
+	}
 }

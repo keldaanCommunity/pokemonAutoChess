@@ -1482,7 +1482,9 @@
 		"FEZANDIPITI": "Fezandipiti",
 		"VAROOM": "Varoom",
 		"REVAVROOM": "Revavroom",
-		"CELESTEELA": "Celesteela"
+		"CELESTEELA": "Celesteela",
+		"LEDYBA": "Ledyba",
+		"LEDIAN": "Ledian"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
