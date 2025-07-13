@@ -1668,7 +1668,7 @@
 		"ASSURANCE": "Verursacht [25,50,100,SP] SPECIAL. Verdoppelt sich, wenn der Zaubernde unter 50% HP ist.",
 		"BRAVE_BIRD": "Fliegt mit seinem Ziel weg und verursacht [30,60,90,SP] SPECIAL",
 		"MAGICAL_LEAF": "Der Anwender verstreut neugierige Blätter, die das am weitesten entfernte Ziel verfolgen und 3 Sekunden lang [10,20,40,SP] SPECIAL und ARMOR_BREAK auf alles in ihrem Weg verursachen",
-		"STEALTH_ROCKS": "Legt scharfe Steine in einem 2-Zellen-Radius vor sich, die [50,SP] SPECIAL verursachen. Die Steine bleiben auf dem Feld liegen und verursachen 10 PHYSICAL pro Sekunde und WOUND Gegner, die darauf laufen, wenn sie nicht ROCK.",
+		"STEALTH_ROCKS": "Legt scharfe Steine in einem [1,2,3]-Zellen-Radius vor sich, die [20,40,80,SP] SPECIAL verursachen. Die Steine bleiben auf dem Feld liegen und verursachen 10 PHYSICAL pro Sekunde und WOUND Gegner, die darauf laufen, wenn sie nicht ROCK.",
 		"TAIL_GLOW": "Verursacht [30,SP] SPECIAL an benachbarten Gegnern und erhöht die AP des Anwenders um 50%.",
 		"STRUGGLE_BUG": "Fügt benachbarten Feinden [30,SP] SPECIAL zu und reduziert ihre AP um 50%.",
 		"PRISMATIC_LASER": "Der Anwender schießt einen prismatischen Laser in einer großen geraden Linie, der [60,SP] SPECIAL verursacht und alle getroffenen Feinde vertreibt.",
