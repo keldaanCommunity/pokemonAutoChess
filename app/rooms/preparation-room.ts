@@ -97,7 +97,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.setMetadata(<IPreparationMetadata>{
       name: options.roomName.slice(0, 30),
       ownerName:
-        options.gameMode === GameMode.QUICKPLAY ? null : options.ownerId,
+        options.gameMode === GameMode.CLASSIC ? null : options.ownerId,
       minRank: options.minRank ?? null,
       maxRank: options.maxRank ?? null,
       noElo: options.noElo ?? false,

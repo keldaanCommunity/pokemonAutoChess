@@ -104,6 +104,10 @@ export class OnJoinCommand extends Command<
           exp: 0,
           level: 0,
           elo: 1000,
+          maxElo: 1000,
+          eventPoints: 0,
+          maxEventPoints: 0,
+          eventFinishTime: null,
           pokemonCollection: new Map<string, IPokemonCollectionItem>(),
           booster: starterBoosters,
           titles: [],
@@ -911,15 +915,15 @@ export class JoinOrOpenRoomCommand extends Command<
       case GameMode.CUSTOM_LOBBY:
         return [new OpenGameCommand().setPayload({ gameMode, client })]
 
-      case GameMode.QUICKPLAY: {
-        const existingQuickplay = this.room.rooms?.find(
+      case GameMode.CLASSIC: {
+        const existingClassicLobby = this.room.rooms?.find(
           (room) =>
             room.name === "preparation" &&
-            room.metadata?.gameMode === GameMode.QUICKPLAY &&
+            room.metadata?.gameMode === GameMode.CLASSIC &&
             room.clients < MAX_PLAYERS_PER_GAME
         )
-        if (existingQuickplay) {
-          client.send(Transfer.REQUEST_ROOM, existingQuickplay.roomId)
+        if (existingClassicLobby) {
+          client.send(Transfer.REQUEST_ROOM, existingClassicLobby.roomId)
         } else {
           return [new OpenGameCommand().setPayload({ gameMode, client })]
         }
@@ -1025,20 +1029,20 @@ export class OpenGameCommand extends Command<
     const user = this.room.users.get(client.auth.uid)
     if (!user) return
     let roomName = `${user.displayName}'${user.displayName.endsWith("s") ? "" : "s"} room`
-    let noElo: boolean = false
+    let noElo: boolean = true
     let password: string | null = null
     let ownerId: string | null = null
 
     if (gameMode === GameMode.RANKED) {
       roomName = "Ranked Match"
+      noElo = false
     } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
-      noElo = true
     } else if (gameMode === GameMode.CUSTOM_LOBBY) {
       ownerId = user.uid
       password = Math.random().toString(36).substring(2, 6).toUpperCase()
-    } else if (gameMode === GameMode.QUICKPLAY) {
-      roomName = "Quick play"
+    } else if (gameMode === GameMode.CLASSIC) {
+      roomName = "Classic"
     }
 
     const newRoom = await matchMaker.createRoom("preparation", {

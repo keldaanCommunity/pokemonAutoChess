@@ -12,7 +12,7 @@ export enum Rarity {
 
 export enum GameMode {
   CUSTOM_LOBBY = "CUSTOM_LOBBY",
-  QUICKPLAY = "QUICKPLAY",
+  CLASSIC = "CLASSIC",
   RANKED = "RANKED",
   SCRIBBLE = "SCRIBBLE",
   TOURNAMENT = "TOURNAMENT"

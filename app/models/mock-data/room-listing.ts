@@ -38,7 +38,7 @@ export const mockRooms: RoomAvailable[] = [
         metadata: {
             name: "Quick Battle Zone",
             ownerName: null,
-            gameMode: GameMode.QUICKPLAY,
+            gameMode: GameMode.CLASSIC,
             password: null,
             noElo: true,
             type: "preparation",
