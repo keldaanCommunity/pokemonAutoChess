@@ -18622,10 +18622,10 @@ export class IndeedeeFemale extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 170
+  hp = 190
   atk = 9
   speed = 61
-  def = 3
+  def = 4
   speDef = 6
   maxPP = 100
   range = 2
@@ -18637,7 +18637,7 @@ export class IndeedeeMale extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 140
+  hp = 160
   atk = 13
   speed = 61
   def = 2

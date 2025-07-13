@@ -28,6 +28,7 @@
 - Applin line is now Dragon/Gourmet/Grass instead of Dragon/Grass/Gourmet
 - Buff Chimecho line: PP 80 → 70
 - Buff Scream Tail: PP 90 → 80
+- Buff Indeedee: Female HP 170 → 190, Def 3 → 4 ; Male HP 140 → 160
 
 # Changes to Synergies
 
