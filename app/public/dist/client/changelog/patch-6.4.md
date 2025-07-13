@@ -41,6 +41,7 @@
 - Buff Fire Shard: now also gives +3 speed
 - Buff berries: berries that healed 20 HP now heal 50HP, Pecha and Sitrus berries now heal 100 HP
 - Buff Gold Bottle Cap: give base +30% crit chance
+- Removed TM Bide, replaced with TM Reflect
 
 # Gameplay
 
