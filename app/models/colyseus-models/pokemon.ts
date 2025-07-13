@@ -18959,12 +18959,12 @@ export class Fezandipiti extends Pokemon {
   hp = 250
   atk = 22
   speed = 63
-  def = 8
+  def = 10
   speDef = 14
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.DISARMING_VOICE
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Surskit extends Pokemon {

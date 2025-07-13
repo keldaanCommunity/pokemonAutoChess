@@ -29,6 +29,7 @@
 - Buff Chimecho line: PP 80 → 70
 - Buff Scream Tail: PP 90 → 80
 - Buff Indeedee: Female HP 170 → 190, Def 3 → 4 ; Male HP 140 → 160
+- Fezandipiti is now 1-range. Def 8 → 10
 
 # Changes to Synergies
 
