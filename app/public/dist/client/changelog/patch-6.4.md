@@ -46,3 +46,4 @@
 # Misc
 
 - Add 3 levels of difficulty to Pokeguesser game.
+- Boosters can no longer contain duplicates of the same Pokemon/emotion/shiny combination.
