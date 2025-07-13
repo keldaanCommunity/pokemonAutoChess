@@ -13711,7 +13711,7 @@ export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
     Synergy.ARTIFICIAL,
-    Synergy.HUMAN
+    Synergy.LIGHT
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
