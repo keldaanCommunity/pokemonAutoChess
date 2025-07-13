@@ -25,6 +25,7 @@
 - Change Kubfu: PP 100 → 90
 - Nerf Hitmonlee: Attack 33 → 28
 - Nerf Ghastly line: PP 80 → 90
+- Applin line is now Dragon/Gourmet/Grass instead of Dragon/Grass/Gourmet
 
 # Changes to Synergies
 

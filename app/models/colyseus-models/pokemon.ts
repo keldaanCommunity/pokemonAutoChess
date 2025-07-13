@@ -10158,8 +10158,8 @@ export class Silvally extends Pokemon {
 export class Applin extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 2
@@ -10195,8 +10195,8 @@ export class Applin extends Pokemon {
 export class Dipplin extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   evolution = Pkm.HYDRAPPLE
@@ -10222,8 +10222,8 @@ export class Dipplin extends Pokemon {
 export class Appletun extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -10246,8 +10246,8 @@ export class Appletun extends Pokemon {
 export class Flapple extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
+    Synergy.GOURMET,
     Synergy.GRASS,
-    Synergy.GOURMET
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -10270,8 +10270,8 @@ export class Flapple extends Pokemon {
 export class Hydrapple extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 4
