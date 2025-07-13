@@ -11941,7 +11941,7 @@ export class Chingling extends Pokemon {
   speed = 46
   def = 7
   speDef = 8
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHINGLING
@@ -11957,7 +11957,7 @@ export class Chimecho extends Pokemon {
   speed = 46
   def = 10
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -18612,7 +18612,7 @@ export class ScreamTail extends Pokemon {
   speed = 71
   def = 8
   speDef = 12
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.BOOMBURST
   attackSprite = AttackSprite.FAIRY_MELEE

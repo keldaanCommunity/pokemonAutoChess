@@ -26,6 +26,8 @@
 - Nerf Hitmonlee: Attack 33 → 28
 - Nerf Ghastly line: PP 80 → 90
 - Applin line is now Dragon/Gourmet/Grass instead of Dragon/Grass/Gourmet
+- Buff Chimecho line: PP 80 → 70
+- Buff Scream Tail: PP 90 → 80
 
 # Changes to Synergies
 
