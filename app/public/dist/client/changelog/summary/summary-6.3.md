@@ -1,4 +1,4 @@
-> May 21, 2025
+> June 29, 2025
 
 # Patch 6.3: V.I.P. (Very Important Pokémon)
 
