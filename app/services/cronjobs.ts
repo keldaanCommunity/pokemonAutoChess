@@ -11,6 +11,7 @@ import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
   CRON_HISTORY_CLEANUP_DELAY,
+  ELO_DECAY_LOST_PER_DAY,
   EloRank,
   EloRankThreshold
 } from "../types/Config"
@@ -129,7 +130,7 @@ async function eloDecay() {
         stats.length < 3 || Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
 
       if (shouldDecay) {
-        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(u.elo - 10)
+        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(u.elo - ELO_DECAY_LOST_PER_DAY)
         logger.info(
           `User ${u.displayName} (${u.elo}) will decay to ${eloAfterDecay}`
         )

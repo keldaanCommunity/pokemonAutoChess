@@ -33,6 +33,9 @@
 
 # Gameplay
 
+- Quick play game mode is now renamed to "Classic" and no longer counts for elo gain/loss. We didn't have a mode where you could play the classic experience of PAC without worrying about your rank, so Quick Play often was perceived as a worse version of the ranked mode, with more disparate levels of players and accusations of elositting and elofarming. Alongside with this change, we put emphasis on the Ranked mode through the new event introduced in this patch, Victory Road. We hope this event will be popular enough to become a permanent feature of the game, and will make Ranked mode a more attractive option to make the Classic mode more of a casual experience, and no longer the "quickest way to start a game of PAC".
+- Elo decay has been reduced: 10 → 5 elo lost per day of inactivity. Inactivity is now definedd as not playing any ranked game for 20 days instead of 15.
+
 # UI
 
 # Bugfix
