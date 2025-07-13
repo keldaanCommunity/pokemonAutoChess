@@ -24,6 +24,7 @@
 - Change Mach Punch: damage 60 at all tiers → 25/50/100
 - Change Kubfu: PP 100 → 90
 - Nerf Hitmonlee: Attack 33 → 28
+- Nerf Ghastly line: PP 80 → 90
 
 # Changes to Synergies
 
