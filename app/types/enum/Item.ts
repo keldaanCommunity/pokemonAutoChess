@@ -137,7 +137,7 @@ export enum Item {
   TM_BULK_UP = "TM_BULK_UP",
   TM_REFLECT = "TM_REFLECT",
   TM_PSYCH_UP = "TM_PSYCH_UP",
-  TM_RETALIATE = "TM_RETALIATE",
+  TM_COUNTER = "TM_COUNTER",
   TM_PAYDAY = "TM_PAYDAY",
   HM_CUT = "HM_CUT",
   HM_FLY = "HM_FLY",
@@ -145,7 +145,7 @@ export enum Item {
   HM_STRENGTH = "HM_STRENGTH",
   HM_FLASH = "HM_FLASH",
   HM_ROCK_SMASH = "HM_ROCK_SMASH",
-  HM_WHIRLPOOL = "HM_WHIRLPOOL",
+  HM_DIVE = "HM_DIVE",
   HM_WATERFALL = "HM_WATERFALL",
   CHEF_HAT = "CHEF_HAT",
   PICNIC_SET = "PICNIC_SET",
@@ -505,7 +505,7 @@ export const TMs = [
   Item.TM_BULK_UP,
   Item.TM_REFLECT,
   Item.TM_PSYCH_UP,
-  Item.TM_RETALIATE,
+  Item.TM_COUNTER,
   Item.TM_PAYDAY
 ]
 
@@ -517,7 +517,7 @@ export const HMs = [
   Item.HM_FLASH,
   Item.HM_ROCK_SMASH,
   Item.HM_WATERFALL,
-  Item.HM_WHIRLPOOL
+  Item.HM_DIVE
 ]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
@@ -527,7 +527,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_BULK_UP]: Ability.BULK_UP,
   [Item.TM_REFLECT]: Ability.REFLECT,
   [Item.TM_PSYCH_UP]: Ability.PSYCH_UP,
-  [Item.TM_RETALIATE]: Ability.RETALIATE,
+  [Item.TM_COUNTER]: Ability.COUNTER,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
   [Item.HM_CUT]: Ability.CUT,
   [Item.HM_FLY]: Ability.FLY,
@@ -536,7 +536,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.HM_FLASH]: Ability.FLASH,
   [Item.HM_ROCK_SMASH]: Ability.ROCK_SMASH,
   [Item.HM_WATERFALL]: Ability.WATERFALL,
-  [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL
+  [Item.HM_DIVE]: Ability.DIVE
 }
 
 export const Dishes = [
