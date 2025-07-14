@@ -2305,7 +2305,7 @@
 		"LEAF_STONE": "장착 시 타입에 GRASS 가 추가",
 		"ICE_STONE": "장착 시 타입에 ICE 가 추가",
 		"CHOICE_SPECS": "장착 시 AP +100",
-		"SOUL_DEW": "장착 시 전투 중 매 초마다 AP 10 획득 ",
+		"SOUL_DEW": "장착 시 전투 중 매 초마다 AP 5 PP 5 획득 ",
 		"UPGRADE": "장착 시 공격이 명중할때마다 SPEED 5씩 증가",
 		"REAPER_CLOTH": "장착 시 기술에도 치명타 가능",
 		"POKEMONOMICON": "장착한 포켓몬이 SPECIAL 을 가할 경우, 대상을 3초 동안 BURN 상태 만듬",

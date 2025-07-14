@@ -1682,7 +1682,7 @@
 		"LEAF_STONE": "O titular ganha o tipo grama",
 		"ICE_STONE": "O titular ganha o tipo de gelo",
 		"CHOICE_SPECS": "O titular ganha 100 de bônus AP",
-		"SOUL_DEW": "Durante o combate, o titular ganha 10 AP a cada segundo",
+		"SOUL_DEW": "Durante o combate, o titular ganha 5 AP 5 PP a cada segundo",
 		"UPGRADE": "Ataques bem-sucedidos concedem +5 de SPEED pelo resto do combate",
 		"REAPER_CLOTH": "Os feitiços do titular podem atingir criticamente",
 		"POKEMONOMICON": "Quando o titular dá SPECIAL, eles BURN o alvo por 3 segundos",

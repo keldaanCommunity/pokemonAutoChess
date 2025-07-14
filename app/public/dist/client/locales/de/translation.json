@@ -2298,7 +2298,7 @@
 		"LEAF_STONE": "Das Pokémon erhält den GRASS-Typ",
 		"ICE_STONE": "Das Pokémon erhält den ICE-Typ",
 		"CHOICE_SPECS": "Das Pokémon erhält 100 Bonus-AP",
-		"SOUL_DEW": "Während des Kampfes erhält das Pokémon jede Sekunde 10 AP",
+		"SOUL_DEW": "Während des Kampfes erhält das Pokémon jede Sekunde 5 AP 5 PP",
 		"UPGRADE": "Erfolgreiche Angriffe gewähren dem Pokémon +5 SPEED für den Rest des Kampfes ",
 		"REAPER_CLOTH": "Die Fähigkeiten dieses Pokémons können kritisch treffen.",
 		"POKEMONOMICON": "Wenn das Pokémon SPECIAL verursacht, fügt es dem Ziel 3 Sekunden lang BURN zu",

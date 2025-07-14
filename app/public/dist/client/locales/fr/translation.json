@@ -2409,7 +2409,7 @@
 		"LEAF_STONE": "Le porteur gagne le type GRASS",
 		"ICE_STONE": "Le porteur gagne le type ICE",
 		"CHOICE_SPECS": "Le porteur gagne 100 AP",
-		"SOUL_DEW": "Pendant le combat, le porteur gagne 10 AP à chaque seconde",
+		"SOUL_DEW": "Pendant le combat, le porteur gagne 5 AP et 5 PP à chaque seconde",
 		"UPGRADE": "Les attaques réussies confèrent +5 % de bonus en SPEED (cumulable pour le reste du combat)",
 		"REAPER_CLOTH": "Les capacités du détenteur peuvent infliger des coups critiques en se basant sur la CRIT_CHANCE.\n Si la capacité peut déjà infliger des coups critiques par défaut, augmente la CRIT_POWER de 50 % à la place",
 		"POKEMONOMICON": "Lorsque le porteur inflige des SPECIAL, il inflige également BURN à la cible pendant 3 secondes",

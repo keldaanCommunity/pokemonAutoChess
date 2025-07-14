@@ -37,7 +37,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.LEAF_STONE]: { [Stat.SHIELD]: 15 },
   [Item.ICE_STONE]: { [Stat.SPE_DEF]: 3 },
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
-  [Item.SOUL_DEW]: { [Stat.AP]: 10, [Stat.PP]: 15 },
+  [Item.SOUL_DEW]: {},
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.SPEED]: 10 },
   [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 20 },
   [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.SHIELD]: 15 },

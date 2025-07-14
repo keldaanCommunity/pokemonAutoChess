@@ -22,6 +22,7 @@
 - Regice is now Legendary Ice/Human/Fossil instead of Unique Ice/Human ; adjusted stats ; new ability: Hail
 - Registeel is now Legendary Steel/Human/Fossil instead of Unique Steel/Human ; adjusted stats ; new ability: Iron Head
 - Regidrago is now Legendary Dragon/Fossil/Monster instead of Unique Dragon/Human ; adjusted stats ; range 2 → 1
+- Regieleki is now Legendary Electric/Human/Fossil instead of Unique Electric/Human ; adjusted stats
 - Regigigas is now Normal/Human/Fossil instead of Normal/Monster/Human ; HP 350 → 400
 - Xurkitree is now Electric/Artificial/Light instead of Electric/Artificial/Human
 - Melmetal now gives Mystery Box item on acquisition. Mystery Box replaces all Ditto in shops with Meltan.
@@ -56,6 +57,7 @@
 - New shiny Charm base stats: 3 defense ; gives 50 PP on activation
 - Adjustments to Aqua egg rework: starting PP 50 → 30, regain 20 PP → 25% of max PP after casting + 2 PP per ability cast during the fight
 - Adjustments to Green orb: now heals 3 HP + 3% of max HP per second, and 30% of excess healing is converted to PP
+- Rework Soul Dew: now gives 5 AP and 5 PP per second
 - Mana Scarf renamed Deep sea tooth: Attack 3 → 7, PP on attack 8 → 5, if the attack KO the target, gain 15 additional PP
 - Buff Fire Shard: now also gives +3 speed
 - Buff berries: berries that healed 20 HP now heal 50HP, Pecha and Sitrus berries now heal 100 HP

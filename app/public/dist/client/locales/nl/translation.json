@@ -1349,7 +1349,7 @@
 		"LEAF_STONE": "De houder krijgt de grassoort",
 		"ICE_STONE": "De houder krijgt het ijstype",
 		"CHOICE_SPECS": "De houder krijgt 100 bonus AP",
-		"SOUL_DEW": "Tijdens gevechten krijgt de houder elke seconde 10 AP",
+		"SOUL_DEW": "Tijdens gevechten krijgt de houder elke seconde 5 AP 5 PP",
 		"UPGRADE": "Succesvolle aanvallen geven +5 SPEED voor de rest van het gevecht",
 		"REAPER_CLOTH": "De spreuken van de houder kunnen kritisch toeslaan",
 		"POKEMONOMICON": "Wanneer de houder SPECIAL uitdeelt, BURN hij het doelwit gedurende 3 seconden",

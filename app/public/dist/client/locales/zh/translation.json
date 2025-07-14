@@ -2403,7 +2403,7 @@
 		"LEAF_STONE": "携带者也被视作GRASS宝可梦",
 		"ICE_STONE": "携带者也被视作ICE宝可梦",
 		"CHOICE_SPECS": "携带者额外提升100点AP",
-		"SOUL_DEW": "在战斗中，携带者每秒提升10点AP",
+		"SOUL_DEW": "在战斗中，携带者每秒提升5点AP 5点PP",
 		"UPGRADE": "攻击使携带者提升5点SPEED（可以叠加）",
 		"REAPER_CLOTH": "携带者的招式也可以按CRIT_CHANCE的概率暴击。若招式已经可以暴击，则改为提升50%的CRIT_POWER。",
 		"POKEMONOMICON": "携带者造成SPECIAL时还会使目标陷入BURN 3秒",
