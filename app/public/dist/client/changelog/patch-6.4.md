@@ -9,6 +9,7 @@
 - Revavroom
 - Ledyba
 - Ledian
+- Emolga
 
 # Changes to game modes
 
@@ -35,6 +36,7 @@
 - Change Darmanitan Zen mode: now can attack at range, but with lower attack and speed. Attacks deal special damage, scale with AP and heal for 100% of damage dealt.
 - Change Mach Punch: damage 60 at all tiers → 25/50/100
 - Change Kubfu: PP 100 → 90
+- New ability for Chinchou line: Electro ball ; PP 90 → 100, Speed 46 → 43
 - Nerf Hitmonlee: Attack 33 → 28
 - Nerf Ghastly line: PP 80 → 90
 - Applin line is now Dragon/Gourmet/Grass instead of Dragon/Grass/Gourmet
