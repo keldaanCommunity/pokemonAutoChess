@@ -388,6 +388,7 @@ export default class BattleManager {
         if (value != 0) {
           pkm.specialAttackAnimation(pokemon)
         }
+        pkm.itemsContainer.updateCount(Item.AQUA_EGG, value)
       } else if (field === "fieldCount") {
         if (value != 0) {
           displayAbility(

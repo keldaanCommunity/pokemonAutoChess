@@ -597,7 +597,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
-      pokemon.addPP(20, pokemon, 0, false)
+      const ppRegained = Math.round(0.25 * pokemon.maxPP + 2 * pokemon.count.ult)
+      pokemon.addPP(ppRegained, pokemon, 0, false)
     })
   ],
 

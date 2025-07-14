@@ -44,7 +44,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 10 },
   [Item.SHELL_BELL]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
   [Item.LUCKY_EGG]: { [Stat.AP]: 50, [Stat.DEF]: 10, [Stat.LUCK]: 30 },
-  [Item.AQUA_EGG]: { [Stat.PP]: 50 },
+  [Item.AQUA_EGG]: { [Stat.PP]: 30 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
