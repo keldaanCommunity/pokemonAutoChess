@@ -2960,6 +2960,27 @@ export class DefenseCurlStrategy extends AbilityStrategy {
   }
 }
 
+export class IronHeadStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
+    pokemon.addDefense(buff, pokemon, 1, crit)
+    pokemon.addSpecialDefense(buff, pokemon, 1, crit)
+    target.handleSpecialDamage(
+      (pokemon.def + pokemon.speDef),
+      board,
+      AttackType.SPECIAL, 
+      pokemon,
+      crit
+    )
+  }
+}
+
 export class IronDefenseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -3428,7 +3449,8 @@ export class SyrupBombStrategy extends AbilityStrategy {
     ).sort((a, b) => b.speed - a.speed)[0]
 
     if (highestSpeedEnemy) {
-      highestSpeedEnemy.addSpeed(-30, pokemon, 1, crit)
+      const speedDebuff = Math.round(30 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+      highestSpeedEnemy.addSpeed(-speedDebuff, pokemon, 1, crit)
       highestSpeedEnemy.handleSpecialDamage(
         damage,
         board,
@@ -6752,8 +6774,8 @@ export class StealthRocksStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInFront(pokemon, target, 2)
-    const damage = 50
+    const cells = board.getCellsInFront(pokemon, target, pokemon.stars)
+    const damage = [20,40,80][pokemon.stars - 1] ?? 80
 
     cells.forEach((cell) => {
       board.addBoardEffect(
@@ -11885,7 +11907,6 @@ export class FilletAwayStrategy extends AbilityStrategy {
     )
     if (corner) {
       pokemon.moveTo(corner.x, corner.y, board)
-      pokemon.cooldown = 400
     }
   }
 }
@@ -13029,6 +13050,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MEDITATE]: new MeditateStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
   [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
+  [Ability.IRON_HEAD]: new IronHeadStrategy(),
   [Ability.METRONOME]: new MetronomeStrategy(),
   [Ability.SOAK]: new SoakStrategy(),
   [Ability.IRON_TAIL]: new IronTailStrategy(),

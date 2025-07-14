@@ -103,7 +103,7 @@ export function displayAbility(
       break
 
     case Ability.DRACO_ENERGY:
-      addAbilitySprite(skill, coordinatesTarget, true)?.setScale(2)
+      addAbilitySprite(skill, coordinatesTarget, true)?.setScale(2).setDepth(DEPTH.ABILITY_BELOW_POKEMON)
       break
 
     case Ability.DYNAMAX_CANNON:
@@ -2997,11 +2997,26 @@ export function displayAbility(
       break
     }
 
-    case Ability.STEALTH_ROCKS:
-      addAbilitySprite(skill, coordinates, true)
-        ?.setScale(2)
+    case Ability.STEALTH_ROCKS: {
+      const [dx, dy] = OrientationVector[orientation]
+      const finalCoordinates = transformEntityCoordinates(
+        positionX + dx,
+        positionY + dy,
+        flip
+      )
+      const specialProjectile = addAbilitySprite(skill, coordinates, true)
+        ?.setScale(3)
         .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+
+      scene.tweens.add({
+        targets: specialProjectile,
+        x: finalCoordinates[0],
+        y: finalCoordinates[1],
+        ease: "linear",
+        duration: 500
+      })
       break
+    }
 
     case Ability.SPIKES: {
       const specialProjectile = addAbilitySprite(skill, coordinates)

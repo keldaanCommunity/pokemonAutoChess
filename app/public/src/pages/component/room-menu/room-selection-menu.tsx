@@ -12,10 +12,10 @@ export function RoomSelectionMenu(props: { show: boolean, onClose: () => void, o
         className="room-selection-menu"
         header={t("new_game")}
         body={<ul>
-            <li className="my-box" onClick={() => props.onSelectMode(GameMode.QUICKPLAY)}>
-                <img src="assets/ui/game_modes/quickplay.png" alt="Quick Play" draggable="false" />
-                <h2>{t("quick_play")}</h2>
-                <p>{t("quick_play_description")}</p>
+            <li className="my-box" onClick={() => props.onSelectMode(GameMode.CLASSIC)}>
+                <img src="assets/ui/game_modes/classic.png" alt="Classic" draggable="false" />
+                <h2>{t("classic")}</h2>
+                <p>{t("classic_description")}</p>
             </li>
             <li className="my-box" onClick={() => props.onSelectMode(GameMode.RANKED)}>
                 <img src="assets/ui/game_modes/ranked.png" alt="Ranked match" draggable="false" />

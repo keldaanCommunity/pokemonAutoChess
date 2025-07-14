@@ -52,14 +52,14 @@ export default function AfterMenu() {
                 {t("smeargle_scribble")}
               </>}
               {gameMode === GameMode.CUSTOM_LOBBY && t("custom_room")}
-              {gameMode === GameMode.QUICKPLAY && <>
+              {gameMode === GameMode.CLASSIC && <>
                 <img
-                  alt={t("quick_play")}
-                  className="quickplay icon"
-                  src="/assets/ui/quickplay.png"
+                  alt={t("classic")}
+                  className="classic icon"
+                  src="/assets/ui/classic.png"
                   draggable="false"
                 />
-                {t("quick_play")}
+                {t("classic")}
               </>}
               {gameMode === GameMode.RANKED && <>
                 <img src="assets/ui/ranked.png" alt={t("ranked_match")} className="ranked icon" draggable="false" />

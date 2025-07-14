@@ -4301,9 +4301,9 @@ export const AnimationConfig: {
     emote: AnimationType.RearUp
   },
   [Pkm.REGISTEEL]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.RearUp
   },
   [Pkm.KYOGRE]: {
     attack: AnimationType.Shoot,
@@ -5227,8 +5227,8 @@ export const AnimationConfig: {
     emote: AnimationType.Attack
   },
   [Pkm.REGIDRAGO]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Attack,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
   },
   [Pkm.GUZZLORD]: {

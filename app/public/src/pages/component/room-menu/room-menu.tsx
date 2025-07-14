@@ -87,8 +87,8 @@ export default function RoomMenu() {
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
         <Tab>
-          <img src="/assets/ui/quickplay.png" alt="" />
-          <span>{t("quick_play")}</span>
+          <img src="/assets/ui/classic.png" alt="" />
+          <span>{t("classic")}</span>
         </Tab>
         <Tab>
           <img src="/assets/ui/ranked.png" alt="" />
@@ -111,7 +111,7 @@ export default function RoomMenu() {
         <RoomList onRoomAction={onRoomAction} />
       </TabPanel>
       <TabPanel>
-        <RoomList gameMode={GameMode.QUICKPLAY} onRoomAction={onRoomAction} />
+        <RoomList gameMode={GameMode.CLASSIC} onRoomAction={onRoomAction} />
       </TabPanel>
       <TabPanel>
         <RoomList gameMode={GameMode.RANKED} onRoomAction={onRoomAction} />

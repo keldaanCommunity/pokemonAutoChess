@@ -84,6 +84,19 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   9: 255
 })
 
+export const MAX_EVENT_POINTS = 500
+
+export const EventPointsPerRank = [
+  +10, // 1st
+  +5, // 2nd
+  +3, // 3rd
+  +1, // 4th
+  -1, // 5th
+  -3, // 6th
+  -5, // 7th
+  -8 // 8th
+]
+
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
   [Synergy.GRASS]: [3, 5, 7],
@@ -202,12 +215,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
 export const UniquePool = new Array<PkmProposition>(
   Pkm.AERODACTYL,
   Pkm.BLACEPHALON,
-  Pkm.REGIDRAGO,
-  Pkm.REGIELEKI,
   Pkm.CASTFORM,
-  Pkm.REGICE,
-  Pkm.REGISTEEL,
-  Pkm.REGIROCK,
   Pkm.UXIE,
   Pkm.MESPRIT,
   Pkm.AZELF,
@@ -318,6 +326,11 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.ENTEI,
   Pkm.SUICUNE,
   Pkm.RAIKOU,
+  Pkm.REGIDRAGO,
+  Pkm.REGIELEKI,
+  Pkm.REGICE,
+  Pkm.REGISTEEL,
+  Pkm.REGIROCK,
   Pkm.REGIGIGAS,
   Pkm.CELEBI,
   Pkm.VICTINI,
@@ -680,7 +693,8 @@ export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 
 export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
 
-export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 15 // 15 days
+export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 20 // 15 days
+export const ELO_DECAY_LOST_PER_DAY = 5
 export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
 export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days
 

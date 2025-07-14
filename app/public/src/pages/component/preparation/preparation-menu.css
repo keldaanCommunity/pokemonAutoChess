@@ -32,7 +32,7 @@
 
   &.noelo,
   &.scribble,
-  &.quickplay {
+  &.classic {
     border-radius: 50%;
   }
 }

@@ -20,10 +20,26 @@ import { chance, pickRandomIn, randomWeighted } from "../utils/random"
 export function createBooster(user: IUserMetadata): Booster {
     const NB_PER_BOOSTER = 10
     const boosterContent: BoosterCard[] = []
+    const alreadyTaken = new Set<string>()
 
     for (let i = 0; i < NB_PER_BOOSTER; i++) {
         const guaranteedUnique = i === NB_PER_BOOSTER - 1
-        boosterContent.push(pickRandomPokemonBooster(user, guaranteedUnique))
+        let card: BoosterCard
+        let attempts = 0
+        const maxAttempts = 50 // Prevent infinite loops
+
+        do {
+            card = pickRandomPokemonBooster(user, guaranteedUnique)
+            attempts++
+        } while (
+            attempts < maxAttempts &&
+            alreadyTaken.has(`${card.name}-${card.shiny}-${card.emotion}`)
+        )
+
+        // If we couldn't find a unique combination after maxAttempts, use the last generated card anyway
+        // This ensures the booster always has the expected number of cards
+        boosterContent.push(card)
+        alreadyTaken.add(`${card.name}-${card.shiny}-${card.emotion}`)
     }
     return boosterContent
 }

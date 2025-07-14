@@ -1735,7 +1735,7 @@ export class Gastly extends Pokemon {
   speed = 60
   def = 6
   speDef = 6
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -1755,7 +1755,7 @@ export class Haunter extends Pokemon {
   speed = 60
   def = 8
   speDef = 6
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -1774,7 +1774,7 @@ export class Gengar extends Pokemon {
   speed = 60
   def = 10
   speDef = 6
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.NIGHTMARE
   attackSprite = AttackSprite.GHOST_RANGE
@@ -5855,17 +5855,17 @@ export class Entei extends Pokemon {
 }
 
 export class Regice extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 21
+  hp = 300
+  atk = 25
   speed = 41
-  def = 12
-  speDef = 20
+  def = 15
+  speDef = 25
   maxPP = 100
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.HAIL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -5917,14 +5917,14 @@ export class Solrock extends Pokemon {
 }
 
 export class Regirock extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 21
+  hp = 300
+  atk = 25
   speed = 41
-  def = 20
-  speDef = 12
+  def = 25
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.STEALTH_ROCKS
@@ -5979,29 +5979,29 @@ export class Zangoose extends Pokemon {
 }
 
 export class Registeel extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 26
+  hp = 300
+  atk = 25
   speed = 41
-  def = 12
-  speDef = 12
+  def = 20
+  speDef = 20
   maxPP = 100
   range = 1
-  skill = Ability.DEFENSE_CURL
+  skill = Ability.IRON_HEAD
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Regigigas extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
-    Synergy.MONSTER,
-    Synergy.HUMAN
+    Synergy.HUMAN,
+    Synergy.FOSSIL
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 350
+  hp = 400
   atk = 30
   speed = 57
   def = 10
@@ -8335,11 +8335,11 @@ export class Delphox extends Pokemon {
 }
 
 export class Regieleki extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 14
+  hp = 250
+  atk = 20
   speed = 89
   def = 6
   speDef = 6
@@ -8349,18 +8349,18 @@ export class Regieleki extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FOSSIL, Synergy.MONSTER])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 350
+  atk = 25
   speed = 51
-  def = 6
-  speDef = 6
+  def = 10
+  speDef = 10
   maxPP = 100
-  range = 2
+  range = 1
   skill = Ability.DRACO_ENERGY
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.POISON_MELEE
 }
 export class Guzzlord extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -8601,7 +8601,7 @@ export class Stakataka extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
-  atk = 6
+  atk = 10
   speed = 29
   def = 30
   speDef = 30
@@ -10158,8 +10158,8 @@ export class Silvally extends Pokemon {
 export class Applin extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 2
@@ -10195,8 +10195,8 @@ export class Applin extends Pokemon {
 export class Dipplin extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   evolution = Pkm.HYDRAPPLE
@@ -10207,7 +10207,7 @@ export class Dipplin extends Pokemon {
   speed = 31
   def = 8
   speDef = 8
-  maxPP = 60
+  maxPP = 80
   range = 3
   skill = Ability.SYRUP_BOMB
   attackSprite = AttackSprite.GRASS_MELEE
@@ -10222,8 +10222,8 @@ export class Dipplin extends Pokemon {
 export class Appletun extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -10246,8 +10246,8 @@ export class Appletun extends Pokemon {
 export class Flapple extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
+    Synergy.GOURMET,
     Synergy.GRASS,
-    Synergy.GOURMET
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -10270,8 +10270,8 @@ export class Flapple extends Pokemon {
 export class Hydrapple extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
-    Synergy.GRASS,
-    Synergy.GOURMET
+    Synergy.GOURMET,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 4
@@ -11941,7 +11941,7 @@ export class Chingling extends Pokemon {
   speed = 46
   def = 7
   speDef = 8
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHINGLING
@@ -11957,7 +11957,7 @@ export class Chimecho extends Pokemon {
   speed = 46
   def = 10
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -12027,7 +12027,7 @@ export class Hitmonlee extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 33
+  atk = 28
   speed = 56
   def = 6
   speDef = 6
@@ -13711,7 +13711,7 @@ export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
     Synergy.ARTIFICIAL,
-    Synergy.HUMAN
+    Synergy.LIGHT
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
@@ -18138,7 +18138,7 @@ export class Pecharunt extends Pokemon {
   speed = 55
   def = 12
   speDef = 6
-  maxPP = 100
+  maxPP = 120
   range = 3
   skill = Ability.MALIGNANT_CHAIN
   attackSprite = AttackSprite.POISON_RANGE
@@ -18612,7 +18612,7 @@ export class ScreamTail extends Pokemon {
   speed = 71
   def = 8
   speDef = 12
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.BOOMBURST
   attackSprite = AttackSprite.FAIRY_MELEE
@@ -18622,10 +18622,10 @@ export class IndeedeeFemale extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 170
+  hp = 190
   atk = 9
   speed = 61
-  def = 3
+  def = 4
   speDef = 6
   maxPP = 100
   range = 2
@@ -18637,7 +18637,7 @@ export class IndeedeeMale extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 140
+  hp = 160
   atk = 13
   speed = 61
   def = 2
@@ -18959,12 +18959,12 @@ export class Fezandipiti extends Pokemon {
   hp = 250
   atk = 22
   speed = 63
-  def = 8
+  def = 10
   speDef = 14
   maxPP = 80
-  range = 2
+  range = 1
   skill = Ability.DISARMING_VOICE
-  attackSprite = AttackSprite.FAIRY_RANGE
+  attackSprite = AttackSprite.FLYING_MELEE
 }
 
 export class Surskit extends Pokemon {

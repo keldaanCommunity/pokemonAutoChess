@@ -5,6 +5,13 @@ import { logger } from "../app/utils/logger"
 import { mapToObj } from "../app/utils/map"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
+const NON_PMD_PKM_INDEXES = [
+  "0532-0002", // Pillar Wood
+  "0533-0002", // Pillar Iron
+  "0534-0002", // Pillar Concrete,
+  "0025-9999", // Pikachu Surfer
+]
+
 export function precomputeCredits() {
   console.time("precompute-credits")
 
@@ -21,7 +28,7 @@ export function precomputeCredits() {
         portrait_credit: metadata.portrait_credit,
         sprite_credit: metadata.sprite_credit
       })
-    } else {
+    } else if (NON_PMD_PKM_INDEXES.includes(pokemon.index) === false) {
       logger.warn(`No tracker information for ${pokemon.index}`)
     }
   })

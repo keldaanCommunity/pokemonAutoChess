@@ -25,8 +25,8 @@ import {
   changeRoomName,
   changeRoomPassword,
   gameStartRequest,
-  setSpecialRule,
   setNoElo,
+  setSpecialRule,
   toggleReady
 } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
@@ -92,7 +92,7 @@ export default function PreparationMenu() {
 
   const humans = users.filter((u) => !u.isBot)
   const isElligibleForELO =
-    gameMode === GameMode.QUICKPLAY || users.filter((u) => !u.isBot).length >= 2
+    gameMode === GameMode.CLASSIC || users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
   )
@@ -161,15 +161,15 @@ export default function PreparationMenu() {
         </p>
       )}
 
-      {gameMode === GameMode.QUICKPLAY && (
+      {gameMode === GameMode.CLASSIC && (
         <p>
           <img
-            alt={t("quick_play")}
-            title={t("quick_play_hint")}
-            className="quickplay icon"
-            src={"/assets/ui/quickplay.png"}
+            alt={t("classic")}
+            title={t("classic_hint")}
+            className="classic icon"
+            src={"/assets/ui/classic.png"}
           />
-          {t("quick_play_hint")}
+          {t("classic_hint")}
         </p>
       )}
 
@@ -216,33 +216,30 @@ export default function PreparationMenu() {
       </button>
     )
 
-  const roomEloButton = gameMode === GameMode.CUSTOM_LOBBY &&
-    (isOwner || isAdmin) && (
-      <button
-        className="bubbly blue"
-        onClick={toggleNoElo}
-        title={noElo ? t("enable_elo_hint") : t("disable_elo_hint")}
-      >
-        {noElo ? t("enable_elo") : t("disable_elo")}
-      </button>
-    )
+  const roomEloButton = gameMode === GameMode.CUSTOM_LOBBY && isAdmin && (
+    <button
+      className="bubbly blue"
+      onClick={toggleNoElo}
+      title={noElo ? t("enable_elo_hint") : t("disable_elo_hint")}
+    >
+      {noElo ? t("enable_elo") : t("disable_elo")}
+    </button>
+  )
 
-  const minMaxRanks = gameMode === GameMode.CUSTOM_LOBBY &&
-    isOwner &&
-    !noElo && (
-      <>
-        <RankSelect
-          label={t("minimum_rank")}
-          value={minRank ?? EloRank.LEVEL_BALL}
-          onChange={changeMinRank}
-        />
-        <RankSelect
-          label={t("maximum_rank")}
-          value={maxRank ?? EloRank.BEAST_BALL}
-          onChange={changeMaxRank}
-        />
-      </>
-    )
+  const minMaxRanks = gameMode === GameMode.CUSTOM_LOBBY && isOwner && (
+    <>
+      <RankSelect
+        label={t("minimum_rank")}
+        value={minRank ?? EloRank.LEVEL_BALL}
+        onChange={changeMinRank}
+      />
+      <RankSelect
+        label={t("maximum_rank")}
+        value={maxRank ?? EloRank.BEAST_BALL}
+        onChange={changeMaxRank}
+      />
+    </>
+  )
 
   const scribbleRule = gameMode === GameMode.CUSTOM_LOBBY &&
     isAdmin &&
@@ -250,9 +247,7 @@ export default function PreparationMenu() {
       <label>
         {t("smeargle_scribble")}
         <select
-          onChange={(e) =>
-            changeSpecialRule(e.target.value as SpecialGameRule)
-          }
+          onChange={(e) => changeSpecialRule(e.target.value as SpecialGameRule)}
           value={specialGameRule ?? "none"}
         >
           <option value="none">{t("no_rule")}</option>
@@ -380,6 +375,8 @@ export default function PreparationMenu() {
 
       <div className="actions">
         {roomNameInput}
+        <div className="spacer" />
+        {scribbleRule}
       </div>
 
       {(BOTS_ENABLED || isAdmin) && (
@@ -389,7 +386,6 @@ export default function PreparationMenu() {
       <div className="actions">
         {roomEloButton}
         {minMaxRanks}
-        {scribbleRule}
         <div className="spacer" />
       </div>
 
