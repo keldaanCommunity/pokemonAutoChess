@@ -12,11 +12,11 @@ import {
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
 import { preference } from "../../preferences"
+import { DEPTH } from "../depths"
+import type GameScene from "../scenes/game-scene"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
 import ItemsContainer from "./items-container"
-import { DEPTH } from "../depths"
-import type GameScene from "../scenes/game-scene"
 
 export default class ItemContainer extends DraggableObject {
   detail: ItemDetail | undefined
@@ -151,7 +151,7 @@ export default class ItemContainer extends DraggableObject {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      ;(this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
+      ; (this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)

@@ -3,8 +3,8 @@ import { GameObjects } from "phaser"
 import Player from "../../../../models/colyseus-models/player"
 import { Item } from "../../../../types/enum/Item"
 import { values } from "../../../../utils/schemas"
-import ItemContainer from "./item-container"
 import { DEPTH } from "../depths"
+import ItemContainer from "./item-container"
 
 export default class ItemsContainer extends GameObjects.Container {
   pokemonId: string | null
