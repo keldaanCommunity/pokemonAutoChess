@@ -48,8 +48,10 @@ import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
   EloRank,
+  EventPointsPerRank,
   ExpPlace,
   LegendaryPool,
+  MAX_EVENT_POINTS,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PortalCarouselStages,
@@ -77,6 +79,7 @@ import {
 } from "../utils/board"
 import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"
+import { clamp } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
@@ -457,19 +460,22 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.WANDERER_CAUGHT, async (client, msg: { id: string }) => {
-      if (client.auth) {
-        try {
-          this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
-            client,
-            playerId: client.auth.uid,
-            id: msg.id
-          })
-        } catch (e) {
-          logger.error("catch wandering error", e)
+    this.onMessage(
+      Transfer.WANDERER_CAUGHT,
+      async (client, msg: { id: string }) => {
+        if (client.auth) {
+          try {
+            this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+              client,
+              playerId: client.auth.uid,
+              id: msg.id
+            })
+          } catch (e) {
+            logger.error("catch wandering error", e)
+          }
         }
       }
-    })
+    )
 
     this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
@@ -787,6 +793,8 @@ export default class GameRoom extends Room<GameState> {
         usr.exp = !isNaN(usr.exp) ? usr.exp : 0
       }
 
+      usr.games += 1
+
       if (rank === 1) {
         usr.wins += 1
         if (this.state.gameMode === GameMode.RANKED) {
@@ -847,6 +855,7 @@ export default class GameRoom extends Room<GameState> {
             player.titles.add(Title.GYM_LEADER)
           }
           usr.elo = elo
+          usr.maxElo = Math.max(usr.maxElo, elo)
         }
 
         const dbrecord = this.transformToSimplePlayer(player)
@@ -866,6 +875,28 @@ export default class GameRoom extends Room<GameState> {
           synergies: synergiesMap,
           gameMode: this.state.gameMode
         })
+
+        if (usr.eventFinishTime == null) {
+          const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = clamp(usr.eventPoints + eventPointsGained, 0, MAX_EVENT_POINTS)
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
+            usr.eventFinishTime = new Date()
+
+            const finisher = await UserMetadata.findOne({ eventFinishTime: { $ne: null } })
+            if (!finisher) {
+              player.titles.add(Title.VICTORIOUS)
+              this.presence.publish("announcement", `${player.name} won the Victory Road race !`)
+            } else {
+              this.presence.publish("announcement", `${player.name} finished the Victory Road !`)
+            }
+            player.titles.add(Title.FINISHER)
+          }
+
+          if (usr.maxEventPoints >= 100) {
+            player.titles.add(Title.RUNNER)
+          }
+        }
       }
 
       if (player.life >= 100 && rank === 1) {

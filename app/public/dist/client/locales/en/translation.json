@@ -2984,7 +2984,10 @@
 		"STARGAZER": "Stargazer",
 		"BLOODY": "Bloody",
 		"ETERNAL": "Eternal",
-		"ANNIHILATOR": "Annihilator"
+		"ANNIHILATOR": "Annihilator",
+		"RUNNER": "Runner",
+		"FINISHER": "Finisher",
+		"VICTORIOUS": "Victorious"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3066,7 +3069,10 @@
 		"PICNICKER": "Make a picnic with 9 Pokémon",
 		"STARGAZER": "Get Solgaleo or Lunala",
 		"BLOODY": "Get Bloodmoon Ursaluna",
-		"ETERNAL": "Meet Arceus at stage 40"
+		"ETERNAL": "Meet Arceus at stage 40",
+		"RUNNER": "Reach 100 points on Victory Road",
+		"FINISHER": "Finish the Victory Road race",
+		"VICTORIOUS": "Finish first at the Victory Road race"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
@@ -3219,16 +3225,16 @@
 	"maximum_rank": "Maximum rank",
 	"ranked_match": "Ranked Match",
 	"ranked_match_short": "Ranked",
-	"ranked_match_description": "For competitors\n8 players, Elo enabled, restricted to players close to your current rank",
+	"ranked_match_description": "For competitors ! 8 players, Elo enabled\nRestricted to players close to your rank",
 	"ranked_game_hint": "This game is restricted to players close to your current rank",
 	"smeargle_scribble": "Smeargle's Scribble",
 	"smeargle_scribble_short": "Scribble",
-	"smeargle_scribble_description": "Play for fun, no Elo gain/loss !\nA new special rule is added for this game.",
+	"smeargle_scribble_description": "Play for fun ! 8 players, Elo disabled\nA new special rule is added for this game.",
 	"smeargle_scribble_hint": "Smeargle scribbles a new random rule applied during the entire game.",
 	"no_rule": "No special rule",
-	"quick_play": "Quick play",
-	"quick_play_description": "The classic PAC Experience !\n8 players, Elo enabled, open to everyone.",
-	"quick_play_hint": "The game will automatically start when 8 players joined",
+	"classic": "Classic",
+	"classic_description": "The casual PAC Experience !\n8 players, Elo disabled, open to everyone.",
+	"classic_hint": "The game will automatically start when 8 players joined",
 	"password_protected": "Private game (password protected)",
 	"private": "Private",
 	"available_rooms": "Open rooms",
@@ -3236,10 +3242,9 @@
 	"in_game": "In Game",
 	"tournament": "Tournament",
 	"events": "Events",
-	"victory_road": "Victory Road",
 	"custom_room": "Custom room",
 	"custom_room_short": "Custom",
-	"custom_room_description": "Create a private room with your own rules",
+	"custom_room_description": "Create a private room to play with your friends or with bots",
 	"loading": "Loading...",
 	"connecting": "Connecting...",
 	"no_data_available": "No data available",
@@ -3916,5 +3921,16 @@
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "Strongest is defined as, by order of priority: 1. Number of items held, 2. Unit tier, 3. Unit rarity"
+	},
+	"victory_road": {	
+		"title": "Victory Road",	
+		"points": "{{points}} points",
+		"your_points": "Your points: {{points}}",
+		"instructions": "Race to the finish of Victory Road !",
+		"help1": "Playing Ranked games grants you points based on your final rank.",
+		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !",
+		"help3": "All scores will be reset at midnight UTC on the first day of each month.",
+		"runners": "Runners",
+		"finishers": "Finishers"
 	}
 }

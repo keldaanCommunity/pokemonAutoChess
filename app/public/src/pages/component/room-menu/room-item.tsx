@@ -101,12 +101,12 @@ export default function RoomItem(props: {
             src="/assets/ui/noelo.png"
           />
         )}
-      {props.room.metadata?.gameMode === GameMode.QUICKPLAY && (
+      {props.room.metadata?.gameMode === GameMode.CLASSIC && (
         <img
-          alt={t("quick_play")}
-          title={t("quick_play_hint")}
-          className="quickplay gamemode icon"
-          src="/assets/ui/quickplay.png"
+          alt={t("classic")}
+          title={t("classic_hint")}
+          className="classic gamemode icon"
+          src="/assets/ui/classic.png"
         />
       )}
       {props.room.metadata?.minRank && (
