@@ -504,9 +504,13 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.MANA_SCARF]: [
-    new OnAttackEffect(({ pokemon, target, board }) => {
-      pokemon.addPP(8, pokemon, 0, false)
+  [Item.DEEP_SEA_TOOTH]: [
+    new OnAttackEffect(({ pokemon, target, board, hasAttackKilled }) => {
+      pokemon.addPP(5, pokemon, 0, false)
+      
+      if (hasAttackKilled) {
+        pokemon.addPP(15, pokemon, 0, false)
+      }
     })
   ],
 

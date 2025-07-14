@@ -56,6 +56,7 @@
 - New shiny Charm base stats: 3 defense ; gives 50 PP on activation
 - Adjustments to Aqua egg rework: starting PP 50 → 30, regain 20 PP → 25% of max PP after casting + 2 PP per ability cast during the fight
 - Adjustments to Green orb: now heals 3 HP + 3% of max HP per second, and 30% of excess healing is converted to PP
+- Mana Scarf renamed Deep sea tooth: Attack 3 → 7, PP on attack 8 → 5, if the attack KO the target, gain 15 additional PP
 - Buff Fire Shard: now also gives +3 speed
 - Buff berries: berries that healed 20 HP now heal 50HP, Pecha and Sitrus berries now heal 100 HP
 - Buff Gold Bottle Cap: give base +30% crit chance

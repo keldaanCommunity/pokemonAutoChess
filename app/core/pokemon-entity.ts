@@ -707,7 +707,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     specialDamage,
     trueDamage,
     totalDamage,
-    isTripleAttack
+    isTripleAttack,
+    hasAttackKilled
   }: {
     target: PokemonEntity
     board: Board
@@ -716,28 +717,50 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
     isTripleAttack: boolean
+    hasAttackKilled: boolean
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
 
-    this.effectsSet.forEach((effect) => {
-      if (effect instanceof OnAttackEffect) {
-        effect.apply({
-          pokemon: this,
-          target,
-          board,
-          physicalDamage,
-          specialDamage,
-          trueDamage,
-          totalDamage,
-          isTripleAttack
-        })
-      }
-    })
+    if (this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
+      const crit =
+        this.effects.has(EffectEnum.ABILITY_CRIT) &&
+        chance(this.critChance / 100, this)
+      const { death } = target.handleSpecialDamage(
+        [15, 30, 60][this.stars - 1],
+        board,
+        AttackType.SPECIAL,
+        this,
+        crit
+      )
+      this.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
+      if (death) hasAttackKilled = true
+    }
 
-    const itemEffects: OnAttackEffect[] = values(this.items)
-      .flatMap((item) => ItemEffects[item] ?? [])
-      .filter((effect) => effect instanceof OnAttackEffect)
-    itemEffects.forEach((effect) => {
+    if (this.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
+      const crit =
+        this.effects.has(EffectEnum.ABILITY_CRIT) &&
+        chance(this.critChance / 100, this)
+      const { death } = target.handleSpecialDamage(
+        [30, 60, 120][this.stars - 1],
+        board,
+        AttackType.SPECIAL,
+        this,
+        crit
+      )
+      this.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
+      if (death) hasAttackKilled = true
+    }
+
+    if (target.effects.has(EffectEnum.OBSTRUCT)) {
+      this.addDefense(-2, target, 0, false)
+    }
+
+        const onAttackEffects = [
+      ...this.effectsSet.values(),
+      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
+    ].filter((effect) => effect instanceof OnAttackEffect)
+
+    onAttackEffects.forEach((effect) => {
       effect.apply({
         pokemon: this,
         target,
@@ -746,41 +769,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage,
         trueDamage,
         totalDamage,
-        isTripleAttack
+        isTripleAttack,
+        hasAttackKilled
       })
     })
-
-    if (this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
-      const crit =
-        this.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(this.critChance / 100, this)
-      target.handleSpecialDamage(
-        [15, 30, 60][this.stars - 1],
-        board,
-        AttackType.SPECIAL,
-        this,
-        crit
-      )
-      this.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
-    }
-
-    if (this.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
-      const crit =
-        this.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(this.critChance / 100, this)
-      target.handleSpecialDamage(
-        [30, 60, 120][this.stars - 1],
-        board,
-        AttackType.SPECIAL,
-        this,
-        crit
-      )
-      this.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
-    }
-
-    if (target.effects.has(EffectEnum.OBSTRUCT)) {
-      this.addDefense(-2, target, 0, false)
-    }
   }
 
   // called after every successful basic attack (not dodged or protected)

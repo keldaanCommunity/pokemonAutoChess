@@ -135,6 +135,7 @@ interface OnAttackEffectArgs {
   trueDamage: number
   totalDamage: number
   isTripleAttack?: boolean
+  hasAttackKilled?: boolean
 }
 
 export class OnAttackEffect extends Effect {

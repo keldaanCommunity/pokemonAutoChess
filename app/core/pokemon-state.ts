@@ -84,6 +84,7 @@ export default abstract class PokemonState {
       }
 
       let isAttackSuccessful = true
+      let hasAttackKilled = false
       let dodgeChance = target.dodge
       if (pokemon.status.blinded) {
         dodgeChance += 0.5
@@ -143,7 +144,7 @@ export default abstract class PokemonState {
         trueDamage = Math.ceil(damage * trueDamagePart)
         damage = min(0)(damage * (1 - trueDamagePart))
 
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
@@ -151,6 +152,7 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+        if(death) hasAttackKilled = true
       }
 
       if (attackType === AttackType.SPECIAL) {
@@ -165,7 +167,7 @@ export default abstract class PokemonState {
 
       if (physicalDamage > 0) {
         // Apply attack physical damage
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: physicalDamage,
           board,
           attackType: AttackType.PHYSICAL,
@@ -173,11 +175,12 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+        if(death) hasAttackKilled = true
       }
 
       if (specialDamage > 0) {
         // Apply special damage
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: specialDamage,
           board,
           attackType: AttackType.SPECIAL,
@@ -198,6 +201,8 @@ export default abstract class PokemonState {
             shouldTargetGainMana: true
           })
         }
+
+        if(death) hasAttackKilled = true
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -208,7 +213,8 @@ export default abstract class PokemonState {
         specialDamage,
         trueDamage,
         totalDamage,
-        isTripleAttack
+        isTripleAttack,
+        hasAttackKilled
       })
       if (isAttackSuccessful) {
         pokemon.onHit({
