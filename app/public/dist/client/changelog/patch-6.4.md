@@ -18,6 +18,12 @@
 
 # Changes to Pokemon & Abilities
 
+- Regirock is now Legendary Rock/Human/Fossil instead of Unique Rock//Human ; adjusted stats ; Stealth Rocks changes: range 2 → 1/2/3, damage 50 → 20/40/80
+- Regice is now Legendary Ice/Human/Fossil instead of Unique Ice/Human ; adjusted stats ; new ability: Hail
+- Registeel is now Legendary Steel/Human/Fossil instead of Unique Steel/Human ; adjusted stats ; new ability: Iron Head
+- Regidrago is now Legendary Dragon/Fossil/Monster instead of Unique Dragon/Human ; adjusted stats ; range 2 → 1
+- Regigigas is now Normal/Human/Fossil instead of Normal/Monster/Human ; HP 350 → 400
+- Xurkitree is now Electric/Artificial/Light instead of Electric/Artificial/Human
 - Melmetal now gives Mystery Box item on acquisition. Mystery Box replaces all Ditto in shops with Meltan.
 - Pyukumuku passive: Explose when KO, dealing ~~100 special damage~~ 50% of max HP as special damage
 - Change Unown S (SURF): Summon a tidal wave at level 2 (10% damage, 20% heal). It heals all allies, not only Aquatic

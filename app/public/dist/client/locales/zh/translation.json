@@ -1739,7 +1739,7 @@
 		"ASSURANCE": "对目标造成[25,50,100,SP]点SPECIAL。若使用者的HP低于50%，造成的伤害翻倍。",
 		"BRAVE_BIRD": "与目标一同飞走，造成[30,60,90,SP]点SPECIAL。",
 		"MAGICAL_LEAF": "放出追逐最远目标的神奇叶片，对经过的所有目标造成[10,20,40,SP]点SPECIAL，并使他们陷入ARMOR_BREAK 3秒。",
-		"STEALTH_ROCKS": "在前方2格半径的区域内设下尖锐的岩石，对其中的目标造成[50,SP]点SPECIAL。这些岩石会留在场上，对在其中移动的非ROCK宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
+		"STEALTH_ROCKS": "在前方3格半径的区域内设下尖锐的岩石，对其中的目标造成[20,40,80,SP]点SPECIAL。这些岩石会留在场上，对在其中移动的非ROCK宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
 		"TAIL_GLOW": "对相邻敌方宝可梦造成[30,SP]点SPECIAL，并提升使用者50%的AP。",
 		"STRUGGLE_BUG": "对相邻敌方宝可梦造成[30,SP]点SPECIAL，并降低他们50%的AP。",
 		"PRISMATIC_LASER": "使用者发射一道直线传播的3格宽的棱镜光束，对击中的敌方宝可梦造成[60,SP]点SPECIAL并将他们击退。",

@@ -5855,17 +5855,17 @@ export class Entei extends Pokemon {
 }
 
 export class Regice extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 21
+  hp = 300
+  atk = 25
   speed = 41
-  def = 12
-  speDef = 20
+  def = 15
+  speDef = 25
   maxPP = 100
   range = 1
-  skill = Ability.ICICLE_CRASH
+  skill = Ability.HAIL
   attackSprite = AttackSprite.ICE_MELEE
 }
 
@@ -5917,14 +5917,14 @@ export class Solrock extends Pokemon {
 }
 
 export class Regirock extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 21
+  hp = 300
+  atk = 25
   speed = 41
-  def = 20
-  speDef = 12
+  def = 25
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.STEALTH_ROCKS
@@ -5979,29 +5979,29 @@ export class Zangoose extends Pokemon {
 }
 
 export class Registeel extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 26
+  hp = 300
+  atk = 25
   speed = 41
-  def = 12
-  speDef = 12
+  def = 20
+  speDef = 20
   maxPP = 100
   range = 1
-  skill = Ability.DEFENSE_CURL
+  skill = Ability.IRON_HEAD
   attackSprite = AttackSprite.DRAGON_MELEE
 }
 
 export class Regigigas extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
-    Synergy.MONSTER,
-    Synergy.HUMAN
+    Synergy.HUMAN,
+    Synergy.FOSSIL
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 350
+  hp = 400
   atk = 30
   speed = 57
   def = 10
@@ -8335,11 +8335,11 @@ export class Delphox extends Pokemon {
 }
 
 export class Regieleki extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN, Synergy.FOSSIL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 14
+  hp = 250
+  atk = 20
   speed = 89
   def = 6
   speDef = 6
@@ -8349,18 +8349,18 @@ export class Regieleki extends Pokemon {
   attackSprite = AttackSprite.ELECTRIC_RANGE
 }
 export class Regidrago extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.HUMAN])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FOSSIL, Synergy.MONSTER])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 20
+  hp = 350
+  atk = 25
   speed = 51
-  def = 6
-  speDef = 6
+  def = 10
+  speDef = 10
   maxPP = 100
-  range = 2
+  range = 1
   skill = Ability.DRACO_ENERGY
-  attackSprite = AttackSprite.FIRE_RANGE
+  attackSprite = AttackSprite.POISON_MELEE
 }
 export class Guzzlord extends Pokemon {
   types = new SetSchema<Synergy>([
@@ -13711,7 +13711,7 @@ export class Xurkitree extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
     Synergy.ARTIFICIAL,
-    Synergy.HUMAN
+    Synergy.LIGHT
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
