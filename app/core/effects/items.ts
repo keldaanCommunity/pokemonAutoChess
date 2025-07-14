@@ -207,6 +207,7 @@ const smokeBallEffect = new OnDamageReceivedEffect((pokemon, attacker, board, da
       positionY: pokemon.positionY
     })
     pokemon.removeItem(Item.SMOKE_BALL)
+    pokemon.addShield(50, pokemon, 0, false)
     pokemon.flyAway(board)
   }
 })

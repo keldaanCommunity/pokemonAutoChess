@@ -50,6 +50,10 @@
 
 # Changes to Items
 
+- Switch recipes of Smoke Ball, Cleanse Tag and Shiny Charm
+- New Smoke Ball base stats: 10% crit chance; now gain 50 shield when jumping away
+- New Cleanse Tag base stats: 15 shield, 3 special defense
+- New shiny Charm base stats: 3 defense ; gives 50 PP on activation
 - Buff Fire Shard: now also gives +3 speed
 - Buff berries: berries that healed 20 HP now heal 50HP, Pecha and Sitrus berries now heal 100 HP
 - Buff Gold Bottle Cap: give base +30% crit chance

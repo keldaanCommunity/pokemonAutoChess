@@ -528,6 +528,7 @@ export default abstract class PokemonState {
         death = false
         takenDamage = 0
         residualDamage = 0
+        pokemon.addPP(50, pokemon, 0, false)
         pokemon.status.triggerProtect(2000)
         pokemon.removeItem(Item.SHINY_CHARM)
       }
@@ -905,7 +906,7 @@ export default abstract class PokemonState {
         shouldTargetGainMana: true
       })
       pokemon.status.triggerBurn(1100, pokemon, undefined)
-    }    
+    }
   }
 
   onEnter(pokemon: PokemonEntity) { }
