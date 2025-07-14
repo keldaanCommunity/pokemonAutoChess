@@ -9309,7 +9309,7 @@ export class Naganadel extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 17
+  atk = 18
   speed = 64
   def = 6
   speDef = 6
@@ -9317,6 +9317,12 @@ export class Naganadel extends Pokemon {
   range = 1
   skill = Ability.FELL_STINGER
   attackSprite = AttackSprite.DRAGON_MELEE
+  onAcquired(player: Player) {
+    // cancel permanent stat buffs of Poipole
+    // this is not perfect: see https://discord.com/channels/737230355039387749/1336313038617182209/1394408583046889522
+    this.atk -= 8
+    this.hp -= 80
+  }
 }
 
 export class Growlithe extends Pokemon {
