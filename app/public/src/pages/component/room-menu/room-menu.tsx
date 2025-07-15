@@ -107,6 +107,8 @@ export default function RoomMenu() {
           <span>{t("in_game")}</span>
         </Tab>
       </TabList>
+      {!user && <p className="subtitle">{t("loading")}</p>}
+
       <TabPanel>
         <RoomList onRoomAction={onRoomAction} />
       </TabPanel>
@@ -128,7 +130,6 @@ export default function RoomMenu() {
       <TabPanel>
         <IngameRoomsList />
       </TabPanel>
-      {!user && <p className="subtitle">{t("loading")}</p>}
 
       <RoomSelectionMenu
         show={showRoomSelectionMenu}

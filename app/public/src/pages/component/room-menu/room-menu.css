@@ -22,7 +22,8 @@
 }
 
 .room-menu .play-button {
-  margin: 0.25em 0 0.25em auto;
+  margin: 0.5em auto;
+  min-width: 10em;
 }
 
 .room-menu .rank.icon {

@@ -38,6 +38,7 @@
 }
 
 .victory-road .button img {
+  display: block;
   width: 32px;
   height: 32px;
 }
@@ -54,6 +55,7 @@
 .victory-road-player-icon {
   width: 40px;
   height: 40px;
+  transform: translate(-50%, -50%);
   overflow: hidden;
   border-radius: 50%;
   border: 2px solid black;
@@ -64,6 +66,24 @@
     inset -1px -1px 2px rgba(0, 0, 0, 0.5),
     inset 1px 1px 2px rgba(255, 255, 255, 0.2);
   z-index: 1;
+}
+
+.victory-road-player-icon.me {
+  border-color: var(--color-bg-accent);
+}
+
+.victory-road-player-icon img.pokemon-portrait {
+  border: none;
+  box-shadow: none;
+}
+
+.victory-road-marker {
+  position: absolute;
+   text-shadow:
+    -1px 1px 2px black,
+    1px -1px 2px black,
+    1px 1px 2px black,
+    -1px -1px 2px black;
 }
 
 .victory-road-player-icon:hover {

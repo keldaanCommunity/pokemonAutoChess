@@ -16,13 +16,19 @@ export function VictoryRoad() {
     const eventLeaderboard = useAppSelector(
         (state) => state.lobby.eventLeaderboard
     )
-    console.log("Event Leaderboard:", eventLeaderboard)
 
     const [showLeaderboard, setShowLeaderboard] = useState(false)
     const [showHelp, setShowHelp] = useState(false)
     const [playerHovered, setPlayerHovered] = useState<ILeaderboardInfo | null>(
         null
     )
+
+    const markers = [
+        50, 100, 150, 200, 250, 300, 350, 400, 450
+    ].map((value, index) => ({
+        top: `${234 + clamp(500 - value, 0, 500) * (2400 / 500)}px`,
+        value
+    }))
 
     const handleLeaderboardClick = () => {
         if (showLeaderboard) {
@@ -47,7 +53,7 @@ export function VictoryRoad() {
         if (player.value >= 500) {
             x = 45.5 + ((index * 7) % 9)
         }
-        const y = 80 + clamp(500 - player.value, 0, 500) * (2560 / 500)
+        const y = 245 + clamp(500 - player.value, 0, 500) * (2400 / 500)
         return { left: `${x}%`, top: `${y}px` }
     }
 
@@ -75,11 +81,16 @@ export function VictoryRoad() {
             </header>
 
             <div>
+                {markers.map((marker, index) => (
+                    <div className="victory-road-marker" key={index} style={{ [index % 2 ? 'left' : 'right']: "5%", top: marker.top }}>
+                        <span>{marker.value}</span>
+                    </div>
+                ))}
                 {eventLeaderboard.map((player, index) => {
                     return (
                         <div
                             key={player.id || index}
-                            className="victory-road-player-icon"
+                            className={cc("victory-road-player-icon", { me: player.id === profile?.uid })}
                             data-tooltip-id="victory-road-player-detail"
                             onMouseOver={() => setPlayerHovered(player)}
                             style={{
