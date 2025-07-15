@@ -1618,7 +1618,7 @@
 		"FAKE_TEARS": "对所有敌方宝可梦造成[5,10,15,SP]点SPECIAL，并使他们陷入ARMOR_BREAK 3秒。",
 		"SPARKLING_ARIA": "对目标和相邻敌方宝可梦造成[15,30,60,SP]点SPECIAL。若有处于BURN的相邻我方宝可梦，解除其BURN。",
 		"DRAGON_DARTS": "向目标发射3枚造成[10,20,40,SP]点SPECIAL的龙箭。若目标因此倒下，恢复40点PP。",
-		"GRASSY_SURGE": "除使用者自身外，提升所有我方GRASS宝可梦[4,SP]点ATK。",
+		"GRASSY_SURGE": "除使用者自身外，提升所有我方GRASS宝可梦[5,SP]点ATK。",
 		"MISTY_SURGE": "除使用者自身外，所有我方FAIRY宝可梦恢复[25,SP]点HP和[25,SP]点PP。",
 		"SKY_ATTACK": "飞到空中，并在1秒后落到最远的目标处，造成[120,SP]点SPECIAL。",
 		"SKY_ATTACK_SHADOW": "飞到空中，并在1秒后落到最远的目标处，造成[120,SP]点SPECIAL。该招式可以暴击。",

@@ -1622,7 +1622,7 @@
 		"FAKE_TEARS": "Inflige [5,10,15,SP] SPECIAL et ARMOR_BREAK pendant 3 secondes à toute l'équipe ennemie.",
 		"SPARKLING_ARIA": "Inflige [15,30,60,SP] SPECIAL à la cible et aux ennemis adjacents. Soigne BURN chez tous les Pokémon alliés adjacents.",
 		"DRAGON_DARTS": "Lance 3 fléchettes qui infligent [10,20,40,SP] SPECIAL chacune à la cible. Si la cible est mise KO, le lanceur récupère 40 PP.",
-		"GRASSY_SURGE": "Augmente l'ATK de tous les alliés GRASS de [4,SP], excepté le lanceur.",
+		"GRASSY_SURGE": "Augmente l'ATK de tous les alliés GRASS de [5,SP], excepté le lanceur.",
 		"MISTY_SURGE": "Tous les alliés FAIRY récupèrent [25,SP] HP et [25,SP] PP, excepté le lanceur.",
 		"SKY_ATTACK": "S'élève dans les airs et plonge sur la cible la plus éloignée au bout d'une seconde, infligeant [120,SP] SPECIAL.",
 		"SKY_ATTACK_SHADOW": "S'élève dans les airs et plonge sur la cible la plus éloignée au bout d'une seconde, infligeant [120,SP] SPECIAL. Peut infliger un coup critique.",

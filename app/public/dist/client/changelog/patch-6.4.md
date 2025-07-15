@@ -47,6 +47,7 @@
 - Fezandipiti is now 1-range. Def 8 → 10
 - Nerf Pecharunt: PP 100 → 120
 - Buff Stakataka: Attack 6 → 10
+- Revert Tapu Bulu nerf from 5.8: Grassy Surge: 4 → 5 attack
 
 # Changes to Synergies
 

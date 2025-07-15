@@ -644,7 +644,7 @@ export class GrassySurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const buff = 4
+    const buff = 5
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -2974,7 +2974,7 @@ export class IronHeadStrategy extends AbilityStrategy {
     target.handleSpecialDamage(
       (pokemon.def + pokemon.speDef),
       board,
-      AttackType.SPECIAL, 
+      AttackType.SPECIAL,
       pokemon,
       crit
     )
@@ -6775,7 +6775,7 @@ export class StealthRocksStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const cells = board.getCellsInFront(pokemon, target, pokemon.stars)
-    const damage = [20,40,80][pokemon.stars - 1] ?? 80
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
 
     cells.forEach((cell) => {
       board.addBoardEffect(
