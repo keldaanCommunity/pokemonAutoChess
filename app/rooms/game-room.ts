@@ -562,7 +562,6 @@ export default class GameRoom extends Room<GameState> {
     if (userProfile?.banned) {
       throw "Account banned"
     }
-    client.send(Transfer.USER_PROFILE, userProfile)
     this.dispatcher.dispatch(new OnJoinCommand(), { client })
     const pendingGame = await getPendingGame(this.presence, client.auth.uid)
     if (pendingGame?.gameId === this.roomId) {
@@ -585,9 +584,8 @@ export default class GameRoom extends Room<GameState> {
       // allow disconnected client to reconnect into this room until 5 minutes
       setPendingGame(this.presence, client.auth.uid, this.roomId)
       await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+      // if the user reconnects, we clear the pending game and recall the OnJoinCommand
       clearPendingGame(this.presence, client.auth.uid)
-      const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
-      client.send(Transfer.USER_PROFILE, userProfile) // send profile info again after a /game page refresh
       this.dispatcher.dispatch(new OnJoinCommand(), { client })
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {

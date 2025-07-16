@@ -57,7 +57,6 @@ export default class AfterGameRoom extends Room<AfterGameState> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         throw "No display name"
