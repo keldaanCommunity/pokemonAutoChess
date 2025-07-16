@@ -84,6 +84,7 @@ export default abstract class PokemonState {
       }
 
       let isAttackSuccessful = true
+      let hasAttackKilled = false
       let dodgeChance = target.dodge
       if (pokemon.status.blinded) {
         dodgeChance += 0.5
@@ -143,7 +144,7 @@ export default abstract class PokemonState {
         trueDamage = Math.ceil(damage * trueDamagePart)
         damage = min(0)(damage * (1 - trueDamagePart))
 
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
@@ -151,6 +152,7 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+        if(death) hasAttackKilled = true
       }
 
       if (attackType === AttackType.SPECIAL) {
@@ -165,7 +167,7 @@ export default abstract class PokemonState {
 
       if (physicalDamage > 0) {
         // Apply attack physical damage
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: physicalDamage,
           board,
           attackType: AttackType.PHYSICAL,
@@ -173,11 +175,12 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+        if(death) hasAttackKilled = true
       }
 
       if (specialDamage > 0) {
         // Apply special damage
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: specialDamage,
           board,
           attackType: AttackType.SPECIAL,
@@ -198,6 +201,8 @@ export default abstract class PokemonState {
             shouldTargetGainMana: true
           })
         }
+
+        if(death) hasAttackKilled = true
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -208,7 +213,8 @@ export default abstract class PokemonState {
         specialDamage,
         trueDamage,
         totalDamage,
-        isTripleAttack
+        isTripleAttack,
+        hasAttackKilled
       })
       if (isAttackSuccessful) {
         pokemon.onHit({
@@ -229,7 +235,7 @@ export default abstract class PokemonState {
     caster: PokemonEntity,
     apBoost: number,
     crit: boolean
-  ): void {
+  ): { healReceived: number, overheal: number } {
     if (pokemon.status.wound) {
       if (
         pokemon.simulation.weather === Weather.BLOODMOON &&
@@ -246,7 +252,7 @@ export default abstract class PokemonState {
           )
         }
       }
-      return
+      return { healReceived: 0, overheal: 0 }
     }
     if (
       pokemon.life > 0 &&
@@ -270,24 +276,29 @@ export default abstract class PokemonState {
       }
 
       heal = Math.round(heal)
-      const healTaken = Math.min(pokemon.hp - pokemon.life, heal)
+      const healReceived = Math.min(pokemon.hp - pokemon.life, heal)
 
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
 
-      if (caster && healTaken > 0) {
+      const overheal = min(0)(pokemon.life + heal - pokemon.hp)
+
+      if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.HEAL,
-            amount: healTaken,
+            amount: healReceived,
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
           })
         }
-        caster.healDone += healTaken
+        caster.healDone += healReceived
       }
+
+      return { healReceived, overheal }
     }
+    return { healReceived: 0, overheal: 0 }
   }
 
   addShield(
@@ -528,6 +539,7 @@ export default abstract class PokemonState {
         death = false
         takenDamage = 0
         residualDamage = 0
+        pokemon.addPP(50, pokemon, 0, false)
         pokemon.status.triggerProtect(2000)
         pokemon.removeItem(Item.SHINY_CHARM)
       }
@@ -832,13 +844,17 @@ export default abstract class PokemonState {
     }
 
     if (pokemon.items.has(Item.GREEN_ORB)) {
-      for (const cell of board.getAdjacentCells(
+      const adjacentCells = board.getAdjacentCells(
         pokemon.positionX,
         pokemon.positionY,
         true
-      )) {
+      )
+      for (const cell of adjacentCells) {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.handleHeal(0.04 * cell.value.hp, pokemon, 0, false)
+          const { overheal } = cell.value.handleHeal(3 + 0.03 * cell.value.hp, pokemon, 0, false)
+          if (overheal > 0) {
+            cell.value.addPP(0.3 * overheal, pokemon, 0, false)
+          }
         }
       }
     }
@@ -905,7 +921,7 @@ export default abstract class PokemonState {
         shouldTargetGainMana: true
       })
       pokemon.status.triggerBurn(1100, pokemon, undefined)
-    }    
+    }
   }
 
   onEnter(pokemon: PokemonEntity) { }

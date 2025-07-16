@@ -182,7 +182,8 @@ export class SoulDewEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addAbilityPower(10, pokemon, 0, false)
+        pokemon.addAbilityPower(5, pokemon, 0, false)
+        pokemon.addPP(5, pokemon, 0, false)
         pokemon.count.soulDewCount++
       },
       Item.SOUL_DEW,
@@ -207,6 +208,7 @@ const smokeBallEffect = new OnDamageReceivedEffect((pokemon, attacker, board, da
       positionY: pokemon.positionY
     })
     pokemon.removeItem(Item.SMOKE_BALL)
+    pokemon.addShield(50, pokemon, 0, false)
     pokemon.flyAway(board)
   }
 })
@@ -285,7 +287,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnItemRemovedEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof SoulDewEffect) {
-          pokemon.addAbilityPower(-10 * effect.count, pokemon, 0, false)
+          pokemon.addAbilityPower(-5 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.soulDewCount = 0
           break
@@ -503,9 +505,13 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.MANA_SCARF]: [
-    new OnAttackEffect(({ pokemon, target, board }) => {
-      pokemon.addPP(8, pokemon, 0, false)
+  [Item.DEEP_SEA_TOOTH]: [
+    new OnAttackEffect(({ pokemon, target, board, hasAttackKilled }) => {
+      pokemon.addPP(5, pokemon, 0, false)
+
+      if (hasAttackKilled) {
+        pokemon.addPP(15, pokemon, 0, false)
+      }
     })
   ],
 
@@ -596,7 +602,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
-      pokemon.addPP(20, pokemon, 0, false)
+      const ppRegained = Math.round(0.25 * pokemon.maxPP + 2 * pokemon.count.ult)
+      pokemon.addPP(ppRegained, pokemon, 0, false)
     })
   ],
 

@@ -99,7 +99,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     marowakItems: [
       [Item.METAL_COAT, Item.LIGHT_BALL],
-      [Item.WIDE_LENS, Item.MANA_SCARF]
+      [Item.WIDE_LENS, Item.DEEP_SEA_TOOTH]
     ],
     getRewards(player: Player) {
       const rewards = [pickRandomIn(NonSpecialItemComponents)]

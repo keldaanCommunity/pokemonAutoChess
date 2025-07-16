@@ -221,7 +221,7 @@
     "pokemons": ["JOLTEON", "MESPRIT", "VOLCARONA"],
     "rank": 3.64,
     "count": 708,
-    "name": "MANA_SCARF"
+    "name": "DEEP_SEA_TOOTH"
   },
   {
     "_id": { "$oid": "64e7ef36c618ca548976705b" },
