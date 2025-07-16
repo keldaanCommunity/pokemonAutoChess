@@ -49,6 +49,7 @@
 - Nerf Pecharunt: PP 100 → 120
 - Buff Stakataka: Attack 6 → 10
 - Revert Tapu Bulu nerf from 5.8: Grassy Surge: 4 → 5 attack
+- Galarian Moltres is now 2-range
 
 # Changes to Synergies
 

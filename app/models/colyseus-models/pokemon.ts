@@ -5684,7 +5684,7 @@ export class GalarianMoltres extends Pokemon {
   def = 6
   speDef = 6
   maxPP = 100
-  range = 3
+  range = 2
   skill = Ability.FIERY_WRATH
   attackSprite = AttackSprite.FIRE_RANGE
 }
