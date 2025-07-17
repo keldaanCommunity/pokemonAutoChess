@@ -75,7 +75,6 @@ export class OnJoinCommand extends Command<
       if (user) {
         // load existing account
         this.room.users.set(client.auth.uid, user)
-        client.send(Transfer.USER_PROFILE, user)
         const pendingGame = await getPendingGame(
           this.room.presence,
           client.auth.uid
@@ -115,7 +114,6 @@ export class OnJoinCommand extends Command<
           role: Role.BASIC
         }
         this.room.users.set(client.auth.uid, newUser)
-        client.send(Transfer.USER_PROFILE, newUser)
       }
     } catch (error) {
       logger.error(error)

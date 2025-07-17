@@ -4,9 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
+import { PVEStages } from "../../../models/pve-stages"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
 import {
@@ -21,15 +20,26 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import { MinStageForGameToCount, PortalCarouselStages } from "../../../types/Config"
+import {
+  MinStageForGameToCount,
+  PortalCarouselStages
+} from "../../../types/Config"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
+import { Item } from "../../../types/enum/Item"
+import { Passive } from "../../../types/enum/Passive"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
+import { Wanderer } from "../../../types/enum/Wanderer"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
+import { authenticateUser } from "../network"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -41,7 +51,7 @@ import {
   removeDpsMeter,
   removePlayer,
   setAdditionalPokemons,
-  updateExperienceManager,
+  setEmotesUnlocked,
   setInterest,
   setItemsProposition,
   setLife,
@@ -49,20 +59,23 @@ import {
   setMoney,
   setNoELO,
   setPhase,
-  setEmotesUnlocked,
+  setPodium,
   setPokemonProposition,
   setRoundTime,
   setShopFreeRolls,
   setShopLocked,
+  setSpecialGameRule,
   setStageLevel,
   setStreak,
   setSynergies,
   setWeather,
-  setSpecialGameRule,
-  setPodium
+  updateExperienceManager
 } from "../stores/GameStore"
-import { joinGame, logIn, setConnectionStatus, setErrorAlertMessage, setProfile } from "../stores/NetworkStore"
-import { getAvatarString } from "../../../utils/avatar"
+import {
+  joinGame,
+  setConnectionStatus,
+  setErrorAlertMessage
+} from "../stores/NetworkStore"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameFinalRank from "./component/game/game-final-rank"
 import GameItemsProposition from "./component/game/game-items-proposition"
@@ -78,13 +91,6 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
-import { Passive } from "../../../types/enum/Passive"
-import { Item } from "../../../types/enum/Item"
-import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
-import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
-import { PVEStages } from "../../../models/pve-stages"
-import { Wanderer, WandererBehavior } from "../../../types/enum/Wanderer"
 
 let gameContainer: GameContainer
 
@@ -99,7 +105,9 @@ export default function Game() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const client: Client = useAppSelector((state) => state.network.client)
-  const connectionStatus = useAppSelector(state => state.network.connectionStatus)
+  const connectionStatus = useAppSelector(
+    (state) => state.network.connectionStatus
+  )
   const room: Room<GameState> | undefined = useAppSelector(
     (state) => state.network.game
   )
@@ -116,8 +124,13 @@ export default function Game() {
   const [loaded, setLoaded] = useState<boolean>(false)
   const [connectError, setConnectError] = useState<string>("")
   const [finalRank, setFinalRank] = useState<number>(0)
-  enum FinalRankVisibility { HIDDEN, VISIBLE, CLOSED }
-  const [finalRankVisibility, setFinalRankVisibility] = useState<FinalRankVisibility>(FinalRankVisibility.HIDDEN)
+  enum FinalRankVisibility {
+    HIDDEN,
+    VISIBLE,
+    CLOSED
+  }
+  const [finalRankVisibility, setFinalRankVisibility] =
+    useState<FinalRankVisibility>(FinalRankVisibility.HIDDEN)
   const container = useRef<HTMLDivElement>(null)
 
   const MAX_ATTEMPS_RECONNECT = 3
@@ -210,7 +223,8 @@ export default function Game() {
     }
 
     const nbPlayers = room?.state.players.size ?? 0
-    const hasLeftBeforeEnd = currentPlayer?.alive === true && room?.state?.gameFinished === false
+    const hasLeftBeforeEnd =
+      currentPlayer?.alive === true && room?.state?.gameFinished === false
 
     if (nbPlayers > 0) {
       room?.state.players.forEach((p) => {
@@ -239,9 +253,16 @@ export default function Game() {
 
         if (p.board && p.board.size > 0) {
           p.board.forEach((pokemon) => {
-            if (pokemon.positionY != 0 && pokemon.passive !== Passive.INANIMATE) {
+            if (
+              pokemon.positionY != 0 &&
+              pokemon.passive !== Passive.INANIMATE
+            ) {
               afterPlayer.pokemons.push({
-                avatar: getAvatarString(pokemon.index, pokemon.shiny, pokemon.emotion),
+                avatar: getAvatarString(
+                  pokemon.index,
+                  pokemon.shiny,
+                  pokemon.emotion
+                ),
                 items: pokemon.items.toArray(),
                 name: pokemon.name
               })
@@ -254,11 +275,11 @@ export default function Game() {
     }
 
     const elligibleToXP =
-      nbPlayers >= 2 &&
-      (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
+      nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
     const elligibleToELO =
       nbPlayers >= 2 &&
-      ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount || hasLeftBeforeEnd) &&
+      ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount ||
+        hasLeftBeforeEnd) &&
       !room?.state.noElo &&
       afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
     const gameMode = room?.state.gameMode
@@ -292,7 +313,9 @@ export default function Game() {
       gameContainer.gameScene.spectate = true
       // rerender to make items and units not dragable anymore
       gameContainer.gameScene?.board?.renderBoard(false)
-      gameContainer.gameScene?.itemsContainer?.render(gameContainer.player!.items)
+      gameContainer.gameScene?.itemsContainer?.render(
+        gameContainer.player!.items
+      )
     }
   }
 
@@ -329,14 +352,9 @@ export default function Game() {
   useEffect(() => {
     const connect = () => {
       logger.debug("connecting to game")
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-
-      firebase.auth().onAuthStateChanged(async (user) => {
+      authenticateUser().then(async (user) => {
         if (user && !connecting.current) {
           connecting.current = true
-          dispatch(logIn(user))
           await connectToGame()
         }
       })
@@ -387,7 +405,9 @@ export default function Game() {
           gameScene.load.once("complete", () => {
             if (!PortalCarouselStages.includes(room.state.stageLevel)) {
               // map loaded after the end of the portal carousel stage, we swap it now. better later than never
-              gameContainer && gameContainer.player && gameScene.setMap(gameContainer.player.map)
+              gameContainer &&
+                gameContainer.player &&
+                gameScene.setMap(gameContainer.player.map)
             }
           })
           gameScene.load.start()
@@ -407,15 +427,18 @@ export default function Game() {
           g.board.showEmote(message.id, message?.emote)
         }
       })
-      room.onMessage(Transfer.COOK, async (message: { pokemonId: string, dishes: Item[] }) => {
-        const g = getGameScene()
-        if (g && g.board) {
-          const pokemon = g.board.pokemons.get(message.pokemonId)
-          if (pokemon) {
-            pokemon.cookAnimation(message.dishes)
+      room.onMessage(
+        Transfer.COOK,
+        async (message: { pokemonId: string; dishes: Item[] }) => {
+          const g = getGameScene()
+          if (g && g.board) {
+            const pokemon = g.board.pokemons.get(message.pokemonId)
+            if (pokemon) {
+              pokemon.cookAnimation(message.dishes)
+            }
           }
         }
-      })
+      )
 
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
         gameContainer.handleDisplayDamage(message)
@@ -490,14 +513,10 @@ export default function Game() {
 
       room.onMessage(Transfer.GAME_END, leave)
 
-      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-        dispatch(setProfile(user))
-      })
-
       room.onLeave((code) => {
         const shouldGoToLobby = [
           CloseCodes.ROOM_DELETED,
-          CloseCodes.USER_BANNED,
+          CloseCodes.USER_BANNED
         ].includes(code)
         if (shouldGoToLobby) {
           const errorMessage = CloseCodesMessages[code]
@@ -528,7 +547,13 @@ export default function Game() {
       room.state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
         const stageLevel = room.state.stageLevel ?? 0
-        if (room.state.phase === GamePhaseState.PICK && stageLevel in PVEStages === false && value < 5 && gameContainer.gameScene?.board && !gameContainer.gameScene.board.portal) {
+        if (
+          room.state.phase === GamePhaseState.PICK &&
+          stageLevel in PVEStages === false &&
+          value < 5 &&
+          gameContainer.gameScene?.board &&
+          !gameContainer.gameScene.board.portal
+        ) {
           gameContainer.gameScene.board.addPortal()
         }
       })
@@ -556,7 +581,9 @@ export default function Game() {
       })
 
       room.state.additionalPokemons.onChange(() => {
-        dispatch(setAdditionalPokemons(Array.from(room.state.additionalPokemons)))
+        dispatch(
+          setAdditionalPokemons(Array.from(room.state.additionalPokemons))
+        )
       })
 
       room.state.simulations.onRemove(() => {
@@ -647,8 +674,8 @@ export default function Game() {
             value <= 0 &&
             value !== previousValue &&
             player.id === uid &&
-            !spectate
-            && finalRankVisibility === FinalRankVisibility.HIDDEN
+            !spectate &&
+            finalRankVisibility === FinalRankVisibility.HIDDEN
           ) {
             setFinalRankVisibility(FinalRankVisibility.VISIBLE)
             getGameScene()?.input.keyboard?.removeAllListeners()
@@ -675,10 +702,15 @@ export default function Game() {
           }
           experienceManager.listen("level", (value) => {
             if (value > 1) {
-              toast(<p>{t("level")} {value}</p>, {
-                containerId: player.rank.toString(),
-                className: "toast-level-up"
-              })
+              toast(
+                <p>
+                  {t("level")} {value}
+                </p>,
+                {
+                  containerId: player.rank.toString(),
+                  className: "toast-level-up"
+                }
+              )
             }
           })
         })
@@ -836,4 +868,3 @@ export default function Game() {
     </main>
   )
 }
-
