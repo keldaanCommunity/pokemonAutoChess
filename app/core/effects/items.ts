@@ -11,6 +11,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
+import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { PokemonEntity } from "../pokemon-entity"
@@ -192,7 +193,7 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
-const smokeBallEffect = new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
+const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.hp) {
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
@@ -483,7 +484,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.MUSCLE_BAND]: [
-    new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
+    new OnDamageReceivedEffect(({ pokemon, damage }) => {
       if (
         pokemon.count.defensiveRibbonCount < 20 &&
         damage > 0
@@ -600,6 +601,29 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
 
+  [Item.STICKY_BARB]: [
+    new OnDamageReceivedEffect(({ pokemon, attacker, attackType }) => {
+      if (attackType === AttackType.PHYSICAL && attacker && distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        attacker.positionX,
+        attacker.positionY
+      ) === 1) {
+        const damage = Math.round(0.3 * pokemon.def)
+        attacker.handleDamage({
+          damage,
+          board: pokemon.simulation.board,
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        if (chance(0.3, pokemon)) {
+          attacker.status.triggerWound(3000, attacker, pokemon)
+        }
+      }
+    })
+  ],
+
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
       const ppRegained = Math.round(0.25 * pokemon.maxPP + 2 * pokemon.count.ult)
@@ -634,7 +658,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.ABSORB_BULB]: [
-    new OnDamageReceivedEffect((pokemon, attacker, board, damage) => {
+    new OnDamageReceivedEffect(({ pokemon, board }) => {
       if (pokemon.life < 0.5 * pokemon.hp) {
         const damage = pokemon.physicalDamageReduced + pokemon.specialDamageReduced
         pokemon.simulation.room.broadcast(Transfer.ABILITY, {

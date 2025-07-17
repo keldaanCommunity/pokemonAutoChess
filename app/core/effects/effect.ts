@@ -169,15 +169,19 @@ export class OnAbilityCastEffect extends Effect {
 }
 
 // applied after having received damage and not being KO
+
+interface OnDamageReceivedEffectArgs {
+  pokemon: PokemonEntity
+  attacker: PokemonEntity | null
+  board: Board
+  damage: number
+  attackType?: AttackType
+}
+
 export class OnDamageReceivedEffect extends Effect {
-  apply(entity: PokemonEntity, attacker: PokemonEntity | null, board: Board, damage: number) { }
+  apply(args: OnDamageReceivedEffectArgs) { }
   constructor(
-    effect?: (
-      entity: PokemonEntity,
-      attacker: PokemonEntity | null,
-      board: Board,
-      damage: number
-    ) => void,
+    effect?: (args: OnDamageReceivedEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

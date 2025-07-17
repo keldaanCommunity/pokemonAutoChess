@@ -707,7 +707,7 @@ export default class Simulation extends Schema implements ISimulation {
     // SUPPORT ITEMS EFFECTS (exp share, gracidea etc)
     for (const team of [this.blueTeam, this.redTeam]) {
       team.forEach((pokemon) => {
-        if (pokemon.items.has(Item.CLEANSE_TAG)) {
+        if (pokemon.items.has(Item.ABILITY_SHIELD)) {
           ;[-1, 0, 1].forEach((offset) => {
             const ally = this.board.getEntityOnCell(
               pokemon.positionX + offset,

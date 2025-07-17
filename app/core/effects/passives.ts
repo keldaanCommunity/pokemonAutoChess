@@ -275,7 +275,7 @@ export class AccelerationEffect extends OnMoveEffect {
   }
 }
 
-const MimikuBustedTransformEffect = new OnDamageReceivedEffect((pokemon, attacker, board) => {
+const MimikuBustedTransformEffect = new OnDamageReceivedEffect(({ pokemon }) => {
   if (pokemon.life / pokemon.hp < 0.5) {
     pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
     pokemon.name = Pkm.MIMIKYU_BUSTED
@@ -288,7 +288,7 @@ const MimikuBustedTransformEffect = new OnDamageReceivedEffect((pokemon, attacke
   }
 })
 
-const DarmanitanZenTransformEffect = new OnDamageReceivedEffect((pokemon, attacker, board) => {
+const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (pokemon.life < 0.3 * pokemon.hp && pokemon.passive === Passive.DARMANITAN) {
     pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
     pokemon.name = Pkm.DARMANITAN_ZEN
@@ -322,7 +322,7 @@ const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
 })
 
-const ToxicSpikesEffect = new OnDamageReceivedEffect((pokemon, attacker, board) => {
+const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (pokemon.passive === Passive.GLIMMORA && pokemon.life < 0.5 * pokemon.hp) {
     pokemon.changePassive(Passive.NONE)
 
