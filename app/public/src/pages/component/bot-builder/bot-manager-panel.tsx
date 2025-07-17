@@ -1,12 +1,10 @@
 import firebase from "firebase/compat/app"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
-import { useAppDispatch } from "../../../hooks"
-import { logIn } from "../../../stores/NetworkStore"
+import { authenticateUser } from "../../../network"
 import { cc } from "../../utils/jsx"
-import { FIREBASE_CONFIG } from "../../utils/utils"
 import PokemonPortrait from "../pokemon-portrait"
 import "./bot-manager-panel.css"
 
@@ -57,22 +55,12 @@ export function BotManagerPanel() {
 function BotsList(props: { approved?: boolean }) {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
   const [bots, setBots] = useState<IBotLight[] | null>(null)
   const [sortColumn, setSortColumn] = useState<string>("")
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
 
   useEffect(() => {
-    // Initialize Firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(FIREBASE_CONFIG)
-    }
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        dispatch(logIn(user))
-      }
-    })
-
+    authenticateUser()
     fetch(`/bots?t=${Date.now()}`)
       .then((res) => res.json())
       .then((data) => {

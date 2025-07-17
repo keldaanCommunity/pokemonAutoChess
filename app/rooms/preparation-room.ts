@@ -340,7 +340,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       const user = await admin.auth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       const isAdmin = userProfile?.role === Role.ADMIN
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
       const numberOfHumanPlayers = values(this.state.users).filter(

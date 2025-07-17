@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth-types"
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Client, Room } from "colyseus.js"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
@@ -20,8 +20,8 @@ import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
 import { PkmProposition } from "../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
-import { logger } from "../../../utils/logger"
 import { getAvatarString } from "../../../utils/avatar"
+import { logger } from "../../../utils/logger"
 
 export interface INetwork {
   client: Client

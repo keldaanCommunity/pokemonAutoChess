@@ -15,8 +15,8 @@ import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
+import { authenticateUser } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
-import { FIREBASE_CONFIG } from "../pages/utils/utils"
 import store, { AppDispatch } from "../stores"
 import {
   addRoom,
@@ -38,7 +38,6 @@ import {
 } from "../stores/LobbyStore"
 import {
   joinLobby,
-  logIn,
   removeMessage,
   setConnectionStatus,
   setErrorAlertMessage,
@@ -60,14 +59,7 @@ export async function joinLobbyRoom(
         return resolve(lobby)
       }
 
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (!user) return reject(CloseCodes.USER_NOT_AUTHENTICATED)
-        dispatch(logIn(user))
-
+      authenticateUser().then(async (user) => {
         try {
           let room: Room<ICustomLobbyState> | undefined = undefined
 
