@@ -1453,7 +1453,7 @@
 	"leave_room": "Rời khỏi phòng",
 	"passive_income_hint": "Mỗi lượt, tăng 5 GOLD + thêm 1 GOLD nếu bạn thắng vòng đấu",
 	"victory_income_hint": "Tăng thêm 1 GOLD cho mỗi chuỗi thắng hoặc thua liên tiếp, nhiều nhất là thêm 5 GOLD",
-	"additional_income_hint": "Tăng thêm 1 GOLD mỗi 10 GOLD bạn hiện có, nhiều nhất là 5 GOLD với 50 GOLD bạn hiện có",
+	"additional_income_hint": "Tăng thêm 1 GOLD mỗi 10 GOLD bạn hiện có, nhiều nhất là {{maxInterest}} GOLD với {{maxInterestGolds}} GOLD bạn hiện có",
 	"sound": "Âm Thanh",
 	"hotkeys": "Phím tắt",
 	"game_files": "Thư mục Game",

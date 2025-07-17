@@ -79,6 +79,8 @@
 
 # UI
 
+- Max interest is now displayed in player money tooltip. Player money is now displayed in gold once you reach your max interest.
+
 # Bugfix
 
 - Pokemons meals are now consumed even if the Pokemon is on bench.
