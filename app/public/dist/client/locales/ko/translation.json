@@ -2473,7 +2473,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "DARK MONSTER DRAGON 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_CARAMEL_SWIRL) 로 진화. $t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "PSYCHIC AMORPHOUS BABY LIGHT 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RAINBOW_SWIRL) 로 진화. $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "럭키의 키우미집에서 판매하는 알",
-		"GIMMIGHOUL_COIN": "획득하며 최대 이자를 1 증가시킨다.",
+		"GIMMIGHOUL_COIN": "획득하며 최대 이자를 2 증가시킨다.",
 		"EXCHANGE_TICKET": "대기석에 있는 도구 재료 또는 완성 도구를 다른 무작위 도구로 바꾼다. 1회용",
 		"AUSPICIOUS_ARMOR": "특정 포켓몬 종을 진화시킬 수 있는 갑옷. 길조가 깃들어 있다.",
 		"MALICIOUS_ARMOR": "특정 포켓몬 종을 진화시킬 수 있는 갑옷. 흉조가 깃들어 있다.",

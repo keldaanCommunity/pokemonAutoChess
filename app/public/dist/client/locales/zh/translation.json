@@ -2575,7 +2575,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "与DARK、MONSTER、DRAGON宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_CARAMEL_SWIRL)。$t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "一枚吉利蛋育蛋铺出售的宝可梦的蛋",
-		"GIMMIGHOUL_COIN": "利息收入上限+1。",
+		"GIMMIGHOUL_COIN": "利息收入上限+2。",
 		"EXCHANGE_TICKET": "将备战区内的一个道具组件或一件合成道具交换为随机同类道具。一次性使用。",
 		"TREASURE_BOX": "里面有什么呢……？",
 		"AUSPICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着祝贺的感情。",

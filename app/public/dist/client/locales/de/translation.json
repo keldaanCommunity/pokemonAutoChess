@@ -2466,7 +2466,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "Gebacken mit DARK MONSTER DRAGON Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_CARAMEL_SWIRL) zu entwickeln. $t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "Gebacken mit PSYCHIC AMORPHOUS BABY LIGHT Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_RAINBOW_SWIRL) zu entwickeln. $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Ein Ei, welches bei Chansey's Daycare verkauft wurde",
-		"GIMMIGHOUL_COIN": "Erhöhe den maximalen Zinsen-Wert um 10 GOLD.",
+		"GIMMIGHOUL_COIN": "Erhöhe den maximalen Zinsen-Wert um 20 GOLD.",
 		"EXCHANGE_TICKET": "Tausche ein Item-Part oder ein fertiggestelltes Item auf der Bank für ein zufälliges aus. Einmalige Nutzung.",
 		"AUSPICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Glückverheißende Wünsche leben in ihm.",
 		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm."

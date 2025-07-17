@@ -1,5 +1,10 @@
 import { t } from "i18next"
 import {
+  TownEncounter,
+  TownEncounterSellPrice,
+  TownEncounters
+} from "../../../../core/town-encounters"
+import {
   Emotion,
   IFloatingItem,
   IPokemonAvatar,
@@ -9,6 +14,10 @@ import {
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
+import { getRankLabel } from "../../../../types/strings/Strings"
+import { getPokemonCustomFromAvatar } from "../../../../utils/avatar"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import {
@@ -16,22 +25,13 @@ import {
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
+import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import { FloatingItemContainer } from "./floating-item-container"
+import { GameDialog } from "./game-dialog"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal, SynergySymbol } from "./portal"
-import { DEPTH } from "../depths"
-import {
-  TownEncounter,
-  TownEncounters,
-  TownEncounterSellPrice
-} from "../../../../core/town-encounters"
-import { GameDialog } from "./game-dialog"
-import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
-import { getPokemonCustomFromAvatar } from "../../../../utils/avatar"
-import { getRankLabel } from "../../../../types/strings/Strings"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 
 export default class MinigameManager {
   pokemons: Map<string, PokemonAvatar>
@@ -81,20 +81,20 @@ export default class MinigameManager {
   update() {
     const interpolatePosition =
       (min = 0.2, max = min, acceleration = 100) =>
-      (item) => {
-        if (!item.data) return
-        const { serverX, serverY } = item.data.values
-        item.x = Phaser.Math.Linear(
-          item.x,
-          serverX,
-          clamp(acceleration / Math.abs(serverX - item.x), min, max)
-        )
-        item.y = Phaser.Math.Linear(
-          item.y,
-          serverY,
-          clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
-        )
-      }
+        (item) => {
+          if (!item.data) return
+          const { serverX, serverY } = item.data.values
+          item.x = Phaser.Math.Linear(
+            item.x,
+            serverX,
+            clamp(acceleration / Math.abs(serverX - item.x), min, max)
+          )
+          item.y = Phaser.Math.Linear(
+            item.y,
+            serverY,
+            clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
+          )
+        }
     this.pokemons.forEach(interpolatePosition(0.2))
     this.items.forEach(interpolatePosition(0.05, 0.25, 100))
     this.portals.forEach(interpolatePosition(0.05, 0.25, 100))
@@ -276,11 +276,7 @@ export default class MinigameManager {
 
     if (pokemonUI.isCurrentPlayerAvatar) {
       const arrowIndicator = this.scene.add
-        .sprite(
-          pokemonUI.x,
-          pokemonUI.y - 70,
-          "arrowDown"
-        )
+        .sprite(pokemonUI.x, pokemonUI.y - 70, "arrowDown")
         .setDepth(DEPTH.INDICATOR)
         .setScale(2)
       this.scene.tweens.add({
@@ -412,6 +408,13 @@ export default class MinigameManager {
       name: Pkm.DUSKULL
     })
 
+    const meowth = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.MEOWTH ? cx : 38 * 48,
+      y: encounter === TownEncounters.MEOWTH ? cy : 7 * 48,
+      name: Pkm.MEOWTH
+    })
+
     const regirock = new PokemonSpecial({
       scene: this.scene,
       x: encounter === TownEncounters.REGIROCK ? cx : 24 * 48,
@@ -519,6 +522,7 @@ export default class MinigameManager {
       spinda,
       sableye,
       munchlax,
+      meowth,
       ...podiumPokemons
     )
 
@@ -541,8 +545,8 @@ export default class MinigameManager {
       this.villagers.push(smeargle)
       this.showEncounterDescription(
         t(`scribble.${specialGameRule}`) +
-          " - " +
-          t(`scribble_description.${specialGameRule}`)
+        " - " +
+        t(`scribble_description.${specialGameRule}`)
       )
     }
   }
