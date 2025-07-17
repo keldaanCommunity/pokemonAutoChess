@@ -26,7 +26,7 @@ export function VictoryRoad() {
     const markers = [
         50, 100, 150, 200, 250, 300, 350, 400, 450
     ].map((value, index) => ({
-        top: `${234 + clamp(500 - value, 0, 500) * (2400 / 500)}px`,
+        top: `${230 + clamp(500 - value, 0, 500) * (2400 / 500)}px`,
         value
     }))
 
@@ -60,7 +60,7 @@ export function VictoryRoad() {
     return (
         <div
             className="my-container hidden-scrollable victory-road"
-            style={{ backgroundImage: "url(/assets/ui/victory-road.png)" }}
+            style={{ backgroundImage: "url(/assets/ui/victory-road.webp)" }}
         >
             <header>
                 <div className="leaderboard button" onClick={handleLeaderboardClick}>
@@ -83,7 +83,7 @@ export function VictoryRoad() {
             <div>
                 {markers.map((marker, index) => (
                     <div className="victory-road-marker" key={index} style={{ [index % 2 ? 'left' : 'right']: "5%", top: marker.top }}>
-                        <span>{marker.value}</span>
+                        <span>{index % 2 ? '' : '◄'}{marker.value}{index % 2 ? '►' : ''}</span>
                     </div>
                 ))}
                 {eventLeaderboard.map((player, index) => {
