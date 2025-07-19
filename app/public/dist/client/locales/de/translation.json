@@ -2614,7 +2614,7 @@
 		"CARAMEL_SWIRL_CREAM": "Nach Einsatz einer Fähigkeit, fügt der CARAMEL_FLAVOR [80,SP]% CRIT_POWER zum nächsten Verbündeten hinzu.",
 		"RAINBOW_SWIRL_CREAM": "Nach Einsatz einer Fähigkeit, fügt der RAINBOW_SWIRL_FLAVOR [60,SP] PP zum nächsten Verbündeten hinzu.",
 		"DURALUDON": "Duraludon sucht nach einem ARTIFICIAL Item.",
-		"CHARCADET": "Knarbon sucht nach einer AUSPICIOUS_ARMOR oder einer MALICIOUS_ARMOR"
+		"CHARCADET": "Das Besiegen des Mew-Duos verleiht Knarbon entweder AUSPICIOUS_ARMOR oder MALICIOUS_ARMOR, je nachdem, ob deine dominante Synergie PSYCHIC oder GHOST ist."
 	},
 	"stat": {
 		"ATK": "Angriff",
