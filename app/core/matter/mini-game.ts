@@ -506,6 +506,15 @@ export class MiniGame {
       )
     }
 
+    if (encounter === TownEncounters.MEOWTH) {
+      items.push(
+        Item.AMULET_COIN,
+        Item.AMULET_COIN,
+        Item.AMULET_COIN,
+        Item.AMULET_COIN
+      )
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
       let item,
         count,

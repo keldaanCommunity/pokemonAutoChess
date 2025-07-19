@@ -755,7 +755,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addDefense(-2, target, 0, false)
     }
 
-        const onAttackEffects = [
+    const onAttackEffects = [
       ...this.effectsSet.values(),
       ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
     ].filter((effect) => effect instanceof OnAttackEffect)
@@ -1001,11 +1001,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   onDamageReceived({
     attacker,
     damage,
-    board
+    board,
+    attackType
   }: {
     attacker: PokemonEntity | null
     damage: number
     board: Board
+    attackType: AttackType
   }) {
     // Flying protection
     if (
@@ -1131,7 +1133,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ].filter((effect) => effect instanceof OnDamageReceivedEffect)
 
     onDamageReceivedEffects.forEach((effect) => {
-      effect.apply(this, attacker, board, damage)
+      effect.apply({ pokemon: this, attacker, board, damage, attackType })
     })
   }
 

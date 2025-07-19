@@ -56,6 +56,7 @@ import {
   setItemsProposition,
   setLife,
   setLoadingProgress,
+  setMaxInterest,
   setMoney,
   setNoELO,
   setPhase,
@@ -644,6 +645,7 @@ export default function Game() {
 
         if (player.id == uid) {
           dispatch(setInterest(player.interest))
+          dispatch(setMaxInterest(player.maxInterest))
           dispatch(setStreak(player.streak))
           dispatch(setShopLocked(player.shopLocked))
           dispatch(setShopFreeRolls(player.shopFreeRolls))
@@ -651,6 +653,9 @@ export default function Game() {
 
           player.listen("interest", (value) => {
             dispatch(setInterest(value))
+          })
+          player.listen("maxInterest", (value) => {
+            dispatch(setMaxInterest(value))
           })
           player.shop.onChange((pkm: Pkm, index: number) => {
             dispatch(changeShop({ value: pkm, index }))

@@ -582,7 +582,7 @@ export default abstract class PokemonState {
       }
 
       if (takenDamage > 0) {
-        pokemon.onDamageReceived({ attacker, damage: takenDamage, board })
+        pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType })
         if (attacker) {
           attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
           if (pokemon !== attacker) {
