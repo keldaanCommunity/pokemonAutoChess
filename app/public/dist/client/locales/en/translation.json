@@ -2437,7 +2437,7 @@
 		"MUSCLE_BAND": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +2 DEF, +1 ATK and +5 SPEED (max 20 stacks)",
 		"WONDER_BOX": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary items (max 3 items held)",
 		"ABILITY_SHIELD": "When combat begins, the holder and adjacent allies on the same row receive 20% of their max HP as SHIELD and RUNE_PROTECT for 5 seconds",
-		"STICKY_BARB": "When struck by an attack at melee range, deal 30% of DEF as retaliation TRUE to the attacker, with [30,LK]% chance to inflict WOUND for 3 seconds.",
+		"STICKY_BARB": "When struck by an attack at melee range, deal 3 + 15% of DEF as retaliation TRUE to the attacker, with [30,LK]% chance to inflict WOUND for 3 seconds.",
 		"WIDE_LENS": "The holder gains +2 RANGE",
 		"RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
 		"FLUFFY_TAIL": "Holder is immune to all negative status effects",
