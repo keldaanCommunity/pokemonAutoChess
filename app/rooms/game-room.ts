@@ -19,9 +19,7 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import History from "../models/mongo-models/history"
-import UserMetadata, {
-  IPokemonCollectionItem
-} from "../models/mongo-models/user-metadata"
+import UserMetadata from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
   getPokemonData,
@@ -71,6 +69,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Wanderer } from "../types/enum/Wanderer"
+import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -207,7 +206,7 @@ export default class GameRoom extends Room<GameState> {
             user.avatar,
             true,
             this.state.players.size + 1,
-            new Map<string, IPokemonCollectionItem>(),
+            new Map<string, IPokemonCollectionItemMongo>(),
             "",
             Role.BOT,
             this.state
@@ -876,17 +875,29 @@ export default class GameRoom extends Room<GameState> {
 
         if (usr.eventFinishTime == null) {
           const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
-          usr.eventPoints = clamp(usr.eventPoints + eventPointsGained, 0, MAX_EVENT_POINTS)
+          usr.eventPoints = clamp(
+            usr.eventPoints + eventPointsGained,
+            0,
+            MAX_EVENT_POINTS
+          )
           usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
           if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
             usr.eventFinishTime = new Date()
 
-            const finisher = await UserMetadata.findOne({ eventFinishTime: { $ne: null } })
+            const finisher = await UserMetadata.findOne({
+              eventFinishTime: { $ne: null }
+            })
             if (!finisher) {
               player.titles.add(Title.VICTORIOUS)
-              this.presence.publish("announcement", `${player.name} won the Victory Road race !`)
+              this.presence.publish(
+                "announcement",
+                `${player.name} won the Victory Road race !`
+              )
             } else {
-              this.presence.publish("announcement", `${player.name} finished the Victory Road !`)
+              this.presence.publish(
+                "announcement",
+                `${player.name} finished the Victory Road !`
+              )
             }
             player.titles.add(Title.FINISHER)
           }
@@ -918,11 +929,10 @@ export default class GameRoom extends Room<GameState> {
           pokemonCollectionItem.played = pokemonCollectionItem.played + 1
           usr.markModified(`pokemonCollection.${index}.played`)
         } else {
-          const newConfig: IPokemonCollectionItem = {
+          const newConfig: IPokemonCollectionItemMongo = {
             dust: 0,
             id: index,
-            emotions: [],
-            shinyEmotions: [],
+            unlocked: Buffer.alloc(5, 0),
             selectedEmotion: null,
             selectedShiny: false,
             played: 1
