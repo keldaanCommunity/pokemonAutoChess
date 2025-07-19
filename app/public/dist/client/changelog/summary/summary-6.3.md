@@ -29,6 +29,7 @@
 ![Masquerain](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0284/Normal.png)
 ![Gossifleur](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0829/Normal.png)
 ![Eldegoss](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0830/Normal.png)
+![Furfrou](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0676/Normal.png)
 ![Surfing Pikachu](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0025/9999/Normal.png)
 
 ## New summer collection
