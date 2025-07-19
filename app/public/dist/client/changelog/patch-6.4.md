@@ -61,6 +61,8 @@
 - Smoke Ball new recipe: dark glasses + miracle seed ; new base stats: 10% crit chance; now gain 50 shield when jumping away
 - Cleanse Tag is renamed Ability Shield ; new recipe: miracle seed + twisted spoon ; new base stats: 15 shield, 10 AP
 - Shiny Charm new recipe: heart scale + mystic water ; new base stats: 3 defense ; now gives 50 PP on activation
+- Pokemonomicon new recipe: charcoal + twisted spoon ; new base stats: 10 AP, 3 attack ; new icon
+- Shell Bell new recipe: charcoal + never melting ice ; new base stats: 3 special defense, 3 attack
 - Adjustments to Aqua egg rework: starting PP 50 → 30, regain 20 PP → 25% of max PP after casting + 2 PP per ability cast during the fight
 - Adjustments to Green orb: now heals 3 HP + 3% of max HP per second, and 30% of excess healing is converted to PP
 - Rework Soul Dew: now gives 5 AP and 5 PP per second
