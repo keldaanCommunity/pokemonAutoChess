@@ -2589,7 +2589,7 @@
 		"SABLEYE": "깜까미는 RED_ORB 를 찾아 헤매고 있습니다.",
 		"MEGA_SABLEYE": "메가 깜까미는 전투 동안 RUNE_PROTECT 를 획득합니다.",
 		"MELMETAL": "멜메탈은 SPEED 를 얻지 못합니다. 추가 SPEED 는 ATK 으로 변환됩니다. (10 SPEED: 5 ATK)",
-		"SKARMORY": "전투 시작 시 무장조는 필드에 압정을 뿌립니다. 압정은 그 위를 걷는 FLYING 이 아닌 포켓몬에게 초당 10 TRUE 를 가하고 ARMOR_BREAK 를 적용합니다.",
+		"SKARMORY": "전투 시작 시 무장조는 필드에 압정을 뿌립니다. 압정은 그 위를 걷는 FLYING 또는 STEEL 이 아닌 포켓몬에게 초당 10 TRUE 를 가하고 ARMOR_BREAK 를 적용합니다.",
 		"DURANT": "아이앤트의 기본 공격은 필드 위의 BUG 아군 하나당 1 추가 TRUE 를 입힙니다.",
 		"OGERPON_TEAL": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 아군에게  [20,SP] HP 회복",
 		"OGERPON_WELLSPRING": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시, 주변 아군에게 [20,SP] PP 회복",

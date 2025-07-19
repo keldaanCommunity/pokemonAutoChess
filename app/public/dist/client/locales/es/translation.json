@@ -2675,7 +2675,7 @@
 		"SABLEYE": "Sableye está buscando un RED_ORB",
 		"MEGA_SABLEYE": "Mega Sableye obtiene RUNE_PROTECT por toda la pelea.",
 		"MELMETAL": "Melmetal no puede obtener SPEED. La SPEED adicional se convierte en ATK (10 SPEED: 5 ATK)",
-		"SKARMORY": "Al principio de la pelea, Skarmory deja púas por el campo. Las púas causan 10 TRUE por segundo y ARMOR_BREAK a Pokémon que caminen sobre ellas, si no son FLYING.",
+		"SKARMORY": "Al principio de la pelea, Skarmory deja púas por el campo. Las púas causan 10 TRUE por segundo y ARMOR_BREAK a Pokémon que caminen sobre ellas, si no son FLYING o STEEL.",
 		"DURANT": "Los ataques básicos de Durant causan 1 de TRUE extra por cada aliado BUG en tu tablero.",
 		"OGERPON_TEAL": "Ogerpon puede llevar TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK y CORNERSTONE_MASK para cambiar su apariencia. Tras usar su habilidad, restaura [20,SP] HP a aliados adyacentes.",
 		"OGERPON_WELLSPRING": "Ogerpon puede llevar TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK y CORNERSTONE_MASK para cambiar su apariencia. Tras usar su habilidad, otorga 20 PP a aliados adyacentes.",

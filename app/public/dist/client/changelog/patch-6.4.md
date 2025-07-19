@@ -50,6 +50,7 @@
 - Buff Stakataka: Attack 6 → 10
 - Revert Tapu Bulu nerf from 5.8: Grassy Surge: 4 → 5 attack
 - Galarian Moltres is now 2-range
+- Skarmory spikes no longer hurt Steel Pokémon
 
 # Changes to Synergies
 

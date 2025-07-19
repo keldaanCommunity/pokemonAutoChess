@@ -2705,7 +2705,7 @@
 		"SABLEYE": "勾魂眼似乎需要一枚RED_ORB……",
 		"MEGA_SABLEYE": "超级勾魂眼在战斗中全程处于RUNE_PROTECT。",
 		"MELMETAL": "美录梅塔无法提升SPEED。若其将要提升SPEED，则按比例改为提升ATK（比例为10点SPEED对应5点ATK）。",
-		"SKARMORY": "战斗开始前，盔甲鸟会在地图上洒下金属菱。菱刺会留在地上，对走到此处的非FLYING宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
+		"SKARMORY": "战斗开始前，盔甲鸟会在地图上洒下金属菱。菱刺会留在地上，对走到此处的非FLYING或STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
 		"DURANT": "我方场上每有1只BUG宝可梦，铁蚁的普通攻击额外造成1点TRUE。",
 		"OGERPON_TEAL": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，为相邻我方宝可梦恢复[20,SP]点HP。",
 		"OGERPON_WELLSPRING": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，为相邻我方宝可梦恢复[20,SP]点PP。",

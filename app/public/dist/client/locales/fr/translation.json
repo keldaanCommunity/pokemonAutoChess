@@ -2700,7 +2700,7 @@
 		"SABLEYE": "$t(pkm.SABLEYE) cherche un RED_ORB.",
 		"MEGA_SABLEYE": "$t(pkm.MEGA_SABLEYE) gagne RUNE_PROTECT pendant tout le combat.",
 		"MELMETAL": "$t(pkm.MELMETAL) ne peut pas gagner de SPEED. Sa SPEED bonus est convertie en ATK (10 SPEED = 5 ATK).",
-		"SKARMORY": "Au début du combat, $t(pkm.SKARMORY) disperse des piques sur le terrain. Les piques infligant 10 TRUE par seconde et ARMOR_BREAK aux Pokémon qui marchent dessus, s'ils ne sont pas de type FLYING.",
+		"SKARMORY": "Au début du combat, $t(pkm.SKARMORY) disperse des piques sur le terrain. Les piques infligant 10 TRUE par seconde et ARMOR_BREAK aux Pokémon qui marchent dessus, s'ils ne sont pas de type FLYING ou STEEL.",
 		"DURANT": "Les attaques de $t(pkm.DURANT) infligent 1 TRUE supplémentaire par allié BUG sur le plateau.",
 		"OGERPON_TEAL": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence. Quand il lance sa capacité, il restaure [20,SP] HP aux alliés adjacents.",
 		"OGERPON_WELLSPRING": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence. Quand il lance sa capacité, il donne [20,SP] PP aux alliés adjacents.",
