@@ -603,12 +603,15 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.STICKY_BARB]: [
     new OnDamageReceivedEffect(({ pokemon, attacker, attackType }) => {
-      if (attackType === AttackType.PHYSICAL && attacker && distanceC(
-        pokemon.positionX,
-        pokemon.positionY,
-        attacker.positionX,
-        attacker.positionY
-      ) === 1) {
+      if (attackType === AttackType.PHYSICAL
+        && attacker
+        && attacker.items.has(Item.PROTECTIVE_PADS) === false
+        && distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) === 1) {
         const damage = Math.round(0.3 * pokemon.def)
         attacker.handleDamage({
           damage,
