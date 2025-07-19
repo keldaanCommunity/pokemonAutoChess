@@ -2416,7 +2416,7 @@
 		"POWER_LENS": "Le montant de SPECIAL reçus bloqués par la SPE_DEF est renvoyé vers l'attaquant",
 		"SHELL_BELL": "Le porteur se soigne d'un montant équivalent à 33% de tous les dégâts infligés",
 		"LUCKY_EGG": "Augmente la LUCK du porteur de 30%",
-		"AQUA_EGG": "Le porteur regagne 25% de ses PP max après avoir lancé sa capacité, + 2 PP pour chaque capacité lancée pendant le combat",
+		"AQUA_EGG": "Le porteur regagne 20% de ses PP max après avoir lancé sa capacité, + 2 PP pour chaque capacité lancée pendant le combat",
 		"BLUE_ORB": "Toutes les 4 attaques, libère une chaîne d'éclairs qui rebondit sur les 2 ennemis les plus proches, infligeant 10 SPECIAL et retirant 20 PP",
 		"SCOPE_LENS": "Les coups critiques volent 10 PP à la cible.",
 		"STAR_DUST": "Après avoir lancé la capacité, gagne 50% des PP max en tant que SHIELD",
