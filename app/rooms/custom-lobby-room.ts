@@ -114,7 +114,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    this.setState(new LobbyState())
+    this.state = new LobbyState()
     this.autoDispose = false
     this.listing.unlisted = true
 
