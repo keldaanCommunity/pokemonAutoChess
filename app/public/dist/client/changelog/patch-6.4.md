@@ -15,7 +15,7 @@
 
 - Quick play game mode is now renamed to "Classic" and no longer counts for elo gain/loss. We didn't have a mode where you could play the classic experience of PAC without worrying about your rank, so Quick Play often was perceived as a worse version of the ranked mode, with more disparity between players level and accusations of elofarming. Alongside with this change, we put emphasis on the Ranked mode through the new event introduced in this patch, Victory Road. We hope this event will be popular enough to become a permanent feature of the game, and will make Ranked mode a more attractive option to make the Classic mode more of a casual experience, and no longer the "quickest way to start a game of PAC".
 - Custom rooms no longer have Elo gain/loss, again to avoid accusations of elofarming.
-- Elo decay has been reduced: 10 → 5 elo lost per day of inactivity. Inactivity is now defined as not playing any ranked game for 20 days instead of 15.
+- Elo decay has been reduced: 10 → 5 elo lost per day of inactivity. Inactivity is now defined as not playing at least 3 games for the last 20 days instead of 15. Starting from Ultra Ball rank, these 3 games must be played in Ranked mode.
 
 # Changes to Pokemon & Abilities
 
