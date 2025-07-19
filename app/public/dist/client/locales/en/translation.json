@@ -2740,7 +2740,7 @@
 		"CARAMEL_SWIRL_CREAM": "Upon casting, the CARAMEL_SWIRL_FLAVOR adds [80,SP] % CRIT_POWER to the decorated ally",
 		"RAINBOW_SWIRL_CREAM": "Upon casting, the RAINBOW_SWIRL_FLAVOR adds [60,SP] PP to the decorated ally",
 		"DURALUDON": "Duraludon is looking for an ARTIFICIAL item",
-		"CHARCADET": "Charcadet is looking for a AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR",
+		"CHARCADET": "Defeating the Mew duo will grant Charchadet with an AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR based on your dominant synergy between PSYCHIC or GHOST",
 		"ZACIAN": "Zacian seeks epic battle with legendary birds to reclaim his RUSTED_SWORD",
 		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK and AP by 20%",
 		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,4] bonus PP to user and adjacent allies. This counts as an attack.",

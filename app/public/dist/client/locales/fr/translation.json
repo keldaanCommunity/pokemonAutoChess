@@ -2733,7 +2733,7 @@
 		"CARAMEL_SWIRL_CREAM": "Au lancement de la capacité, la CARAMEL_SWIRL_FLAVOR ajoute [80,SP] % de CRIT_POWER à l'allié décoré.",
 		"RAINBOW_SWIRL_CREAM": "Au lancement de la capacité, la RAINBOW_SWIRL_FLAVOR ajoute [60,SP] PP à l'allié décoré.",
 		"DURALUDON": "$t(pkm.DURALUDON) cherche un objet ARTIFICIAL.",
-		"CHARCADET": "$t(pkm.CHARCADET) cherche une AUSPICIOUS_ARMOR ou une MALICIOUS_ARMOR.",
+		"CHARCADET": "Battre le duo Mew vous donnera une AUSPICIOUS_ARMOR ou une MALICIOUS_ARMOR selon la synergie dominante de votre équipe entre PSYCHIC et GHOST",
 		"ZACIAN": "Zacian recherche une bataille épique avec des Oiseaux légendaires pour réclamer son RUSTED_SWORD.",
 		"PARTING_SHOT": "Lorsque ce Pokémon cible un ennemi pour la première fois, il l'insulte, ce qui réduit son ATK et sa AP de 20%",
 		"DRUMMER": "S'il y a des alliés et aucun ennemi à portée, bat ses tambours au lieu d'attaquer, ce qui accorde un bonus de [2,3,4] PP au lanceur et aux alliés adjacents. Cela compte comme une attaque.",
