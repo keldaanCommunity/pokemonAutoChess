@@ -22,7 +22,7 @@ import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
-import UserMetadata from "./models/mongo-models/user-metadata"
+import UserMetadata, { toUserMetadataJSON } from "./models/mongo-models/user-metadata"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
@@ -98,7 +98,6 @@ if (process.env.NODE_APP_INSTANCE) {
 
 export default config({
   options: gameOptions,
-
 
   /* uWebSockets turned out to be unstable in production, so we are using the default transport
   2025-06-29T16:50:08: Error: Invalid access of closed uWS.WebSocket/SSLWebSocket.
@@ -373,9 +372,9 @@ export default config({
       try {
         const userAuth = await authUser(req, res)
         if (!userAuth) return
-        const user = await UserMetadata.findOne({ uid: userAuth.uid })
-        if (!user) return res.status(404).send("User not found")
-        res.send(user)
+        const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
+        if (!mongoUser) return res.status(404).send("User not found")
+        res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
         logger.error("Error fetching profile", error)
         res.status(500).send("Error fetching profile")

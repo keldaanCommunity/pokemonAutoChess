@@ -1,6 +1,6 @@
-import { WebhookClient, EmbedBuilder } from "discord.js"
+import { EmbedBuilder, WebhookClient } from "discord.js"
 import { IBot } from "../models/mongo-models/bot-v2"
-import { IUserMetadata } from "../models/mongo-models/user-metadata"
+import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { getAvatarSrc } from "../utils/avatar"
 import { logger } from "../utils/logger"
 
@@ -20,7 +20,7 @@ if (process.env.DISCORD_BAN_WEBHOOK_URL) {
 }
 
 export const discordService = {
-  announceBan(user: IUserMetadata, bannedUser: IUserMetadata, reason: string) {
+  announceBan(user: IUserMetadataMongo, bannedUser: IUserMetadataMongo, reason: string) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(`${user.displayName} banned the user ${bannedUser.displayName}`)
       .setAuthor({
@@ -40,7 +40,7 @@ export const discordService = {
     }
   },
 
-  announceUnban(user: IUserMetadata, name: string) {
+  announceUnban(user: IUserMetadataMongo, name: string) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(`${user.displayName} unbanned the user ${name}`)
       .setAuthor({
@@ -79,7 +79,7 @@ export const discordService = {
     }
   },
 
-  announceBotApproval(botData: IBot, approver: IUserMetadata) {
+  announceBotApproval(botData: IBot, approver: IUserMetadataMongo) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(
         `BOT ${botData.name} by @${botData.author} approved by ${approver.displayName}`

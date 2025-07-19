@@ -225,8 +225,7 @@ export class OnPokemonCatchCommand extends Command<
           } else {
             u.pokemonCollection.set(unownIndex, {
               id: unownIndex,
-              emotions: [],
-              shinyEmotions: [],
+              unlocked: Buffer.alloc(5, 0),
               dust: DUST_PER_ENCOUNTER,
               selectedEmotion: Emotion.NORMAL,
               selectedShiny: false,

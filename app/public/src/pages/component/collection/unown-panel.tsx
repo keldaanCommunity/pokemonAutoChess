@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useMemo } from "react"
-import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
+import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { useAppSelector } from "../../../hooks"
 import { CollectionFilterState } from "./pokemon-collection"
 import PokemonCollectionItem from "./pokemon-collection-item"
@@ -14,7 +14,7 @@ export default function UnownPanel(props: {
   const pokemonCollection = useAppSelector(
     (state) =>
       state.network.profile?.pokemonCollection ??
-      new Map<string, IPokemonCollectionItem>()
+      new Map<string, IPokemonCollectionItemUnpacked>()
   )
   const secretMessage = `    
     To unleash ancient powers?
@@ -29,7 +29,7 @@ export default function UnownPanel(props: {
   const unowns = useMemo(
     () =>
       Unowns.flatMap((pkm: Pkm) => {
-        const config = pokemonCollection.get(PkmIndex[pkm]) ?? {
+        const item = pokemonCollection.get(PkmIndex[pkm]) ?? {
           dust: 0,
           emotions: [] as Emotion[],
           shinyEmotions: [] as Emotion[],
@@ -38,14 +38,15 @@ export default function UnownPanel(props: {
           id: PkmIndex[pkm],
           played: 0
         }
-        const { emotions, shinyEmotions } = config
-        const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
-        return [{ pkm, config, isUnlocked }]
+        const isUnlocked =
+          item.emotions?.length > 0 ||
+          item.shinyEmotions?.length > 0
+        return [{ pkm, item: item, isUnlocked }]
       }).sort((a, b) => {
         if (props.filterState.sort === "index") {
           return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
         } else {
-          return (b.config?.dust ?? 0) - (a.config?.dust ?? 0)
+          return (b.item?.dust ?? 0) - (a.item?.dust ?? 0)
         }
       }),
     [props.filterState.sort, pokemonCollection]
@@ -64,7 +65,7 @@ export default function UnownPanel(props: {
               key={PkmIndex[unown.pkm]}
               name={unown.pkm}
               index={PkmIndex[unown.pkm]}
-              config={unown.config}
+              item={unown.item}
               setPokemon={props.setPokemon}
               filterState={props.filterState}
             />

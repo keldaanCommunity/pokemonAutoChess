@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
-import { IUserMetadata } from "../../../../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Role } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import {
+  IUserMetadataClient,
+  IUserMetadataUnpacked
+} from "../../../../../types/interfaces/UserMetadata"
 import { useAppSelector } from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonPortrait from "../pokemon-portrait"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
-import PokemonPortrait from "../pokemon-portrait"
 
-export default function PlayerBox(props: { user: IUserMetadata, history?: IGameRecord[] }) {
+export default function PlayerBox(props: {
+  user: IUserMetadataClient | IUserMetadataUnpacked
+  history?: IGameRecord[]
+}) {
   const { t } = useTranslation()
   const role = useAppSelector((state) => state.network.profile?.role)
 
@@ -61,7 +67,9 @@ export default function PlayerBox(props: { user: IUserMetadata, history?: IGameR
             <p className="player-title">{t(`title.${props.user.title}`)}</p>
           )}
           <RoleBadge role={props.user.role} />
-          {props.user.banned && <div className="badge banned">{t("banned")}</div>}
+          {props.user.banned && (
+            <div className="badge banned">{t("banned")}</div>
+          )}
           <p
             style={{
               overflow: "hidden",
@@ -105,10 +113,7 @@ export default function PlayerBox(props: { user: IUserMetadata, history?: IGameR
         </p>
         <p>
           {favoritePokemons.map((name) => (
-            <PokemonPortrait
-              key={name}
-              avatar={PkmIndex[name] + "/Normal"}
-            />
+            <PokemonPortrait key={name} avatar={PkmIndex[name] + "/Normal"} />
           ))}
         </p>
       </div>

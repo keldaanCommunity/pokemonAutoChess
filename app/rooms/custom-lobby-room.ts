@@ -12,10 +12,8 @@ import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata, {
-  IUserMetadata
-} from "../models/mongo-models/user-metadata"
-import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
+import UserMetadata from "../models/mongo-models/user-metadata"
+import { Emotion, Role, Title, Transfer } from "../types"
 import {
   INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
@@ -27,6 +25,7 @@ import { CloseCodes } from "../types/enum/CloseCodes"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { ITournament } from "../types/interfaces/Tournament"
+import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import {
   BanUserCommand,
@@ -68,7 +67,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   dispatcher: Dispatcher<this>
   tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
-  users: Map<string, IUserMetadata> = new Map<string, IUserMetadata>()
+  users: Map<string, IUserMetadataMongo> = new Map<string, IUserMetadataMongo>()
 
   constructor() {
     super()
