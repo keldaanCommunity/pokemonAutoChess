@@ -2257,7 +2257,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.NIDOKING]: Pkm.NIDORANM,
   [Pkm.PICHU]: Pkm.PICHU,
   [Pkm.PIKACHU]: Pkm.PICHU,
-  [Pkm.PIKACHU_SURFER]: Pkm.PIKACHU_SURFER,
+  [Pkm.PIKACHU_SURFER]: Pkm.PICHU,
   [Pkm.RAICHU]: Pkm.PICHU,
   [Pkm.MACHOP]: Pkm.MACHOP,
   [Pkm.MACHOKE]: Pkm.MACHOP,

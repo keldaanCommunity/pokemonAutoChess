@@ -481,7 +481,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.ELECTIVIRE) {
-      itemsSet = ArtificialItems
+      itemsSet = ArtificialItems.filter(i =>  i !== Item.SURFBOARD || stageLevel > 4)
       maxCopiesPerItem = 2
     }
 
