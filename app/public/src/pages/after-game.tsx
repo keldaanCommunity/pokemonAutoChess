@@ -1,4 +1,4 @@
-import { Client, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "colyseus.js"
 import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import AfterGameState from "../../../rooms/states/after-game-state"
@@ -78,8 +78,9 @@ export default function AfterGame() {
         { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
         30
       )
-
-      room.state.players.onAdd((player) => {
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
+      $state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
           playSound(
@@ -88,13 +89,13 @@ export default function AfterGame() {
           )
         }
       })
-      room.state.listen("elligibleToELO", (value, previousValue) => {
+      $state.listen("elligibleToELO", (value, previousValue) => {
         dispatch(setElligibilityToELO(value))
       })
-      room.state.listen("elligibleToXP", (value, previousValue) => {
+      $state.listen("elligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
       })
-      room.state.listen("gameMode", (value, previousValue) => {
+      $state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
       })
     }

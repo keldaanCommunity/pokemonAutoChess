@@ -1,10 +1,11 @@
-import { Room } from "colyseus.js"
-import { t } from "i18next"
+import { getStateCallbacks, Room } from "colyseus.js"
+import { SchemaCallbackProxy } from "@colyseus/schema"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -34,22 +35,23 @@ import {
   Rarity
 } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
-import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
-import { values } from "../../../utils/schemas"
-import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
-import { playSound, SOUNDS } from "../pages/utils/audio"
+import { SOUNDS, playSound } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { BoardMode } from "./components/board-manager"
-import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
+import { t } from "i18next"
+import { values } from "../../../utils/schemas"
+import { DEPTH } from "./depths"
+import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 
 class GameContainer {
   room: Room<GameState>
+  $: SchemaCallbackProxy<GameState>
   div: HTMLDivElement
   game: Phaser.Game | undefined
   player: Player | undefined
@@ -58,6 +60,7 @@ class GameContainer {
   spectate: boolean
   constructor(div: HTMLDivElement, uid: string, room: Room<GameState>) {
     this.room = room
+    this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
     this.spectate = false
@@ -77,17 +80,19 @@ class GameContainer {
       this.setSimulation(simulation)
     }
 
-    simulation.listen("winnerId", (winnerId) => {
+    const $simulation = this.$<Simulation>(simulation)
+
+    $simulation.listen("winnerId", (winnerId) => {
       if (this.gameScene?.board?.player.simulationId === simulation.id) {
         this.gameScene.board.victoryAnimation(winnerId)
       }
     })
 
-    simulation.listen("weather", (value, previousValue) => {
+    $simulation.listen("weather", (value, previousValue) => {
       this.handleWeatherChange(simulation, value)
     })
 
-    for (const team of [simulation.blueTeam, simulation.redTeam]) {
+    for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
       team.onAdd((p, key) =>
         this.initializePokemon(<PokemonEntity>p, simulation)
       )
@@ -97,7 +102,7 @@ class GameContainer {
       })
     }
 
-    simulation.listen("started", (value, previousValue) => {
+    $simulation.listen("started", (value, previousValue) => {
       if (
         this.gameScene?.board?.player.simulationId === simulation.id &&
         value === true &&
@@ -149,18 +154,15 @@ class GameContainer {
       "tree"
     ]
 
+    const $pokemon = this.$<PokemonEntity>(pokemon)
+
     fields.forEach((field) => {
-      pokemon.status.listen(field, (value, previousValue) => {
-        this.gameScene?.battle?.changeStatus(
-          simulation.id,
-          pokemon,
-          field,
-          previousValue
-        )
+      $pokemon.status.listen(field, (value, previousValue) => {
+        this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field, previousValue)
       })
     })
 
-    pokemon.onChange(() => {
+    $pokemon.onChange(() => {
       const fields: (NonFunctionPropNames<PokemonEntity> &
         keyof IPokemonEntity)[] = [
           "positionX",
@@ -191,7 +193,7 @@ class GameContainer {
         ]
 
       fields.forEach((field) => {
-        pokemon.listen(field, (value, previousValue) => {
+        $pokemon.listen(field, (value, previousValue) => {
           this.gameScene?.battle?.changePokemon(
             simulation.id,
             pokemon,
@@ -203,7 +205,7 @@ class GameContainer {
       })
     })
 
-    pokemon.items.onChange((value, key) => {
+    $pokemon.items.onChange((value, key) => {
       this.gameScene?.battle?.updatePokemonItems(simulation.id, pokemon)
     })
 
@@ -230,7 +232,7 @@ class GameContainer {
     ]
 
     fieldsCount.forEach((field) => {
-      pokemon.count.listen(field, (value, previousValue) => {
+      $pokemon.count.listen(field, (value, previousValue) => {
         this.gameScene?.battle?.changeCount(
           simulation.id,
           pokemon,
@@ -310,7 +312,9 @@ class GameContainer {
     this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) =>
       this.handleDragDropFailed(message)
     )
-    this.room.state.avatars.onAdd((avatar) => {
+    const $state = this.$<GameState>(this.room.state)
+    $state.avatars.onAdd((avatar) => {
+      const $avatar = this.$<PokemonAvatarModel>(avatar)
       this.gameScene?.minigameManager?.addPokemon(avatar)
       const fields: NonFunctionPropNames<PokemonAvatarModel>[] = [
         "x",
@@ -320,26 +324,26 @@ class GameContainer {
         "orientation"
       ]
       fields.forEach((field) => {
-        avatar.listen(field, (value, previousValue) => {
+        $avatar.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changePokemon(avatar, field, value)
         })
       })
     })
 
-    this.room.state.avatars.onRemove((avatar, key) => {
+    $state.avatars.onRemove((avatar, key) => {
       this.gameScene?.minigameManager?.removePokemon(avatar)
     })
 
-    this.room.state.floatingItems.onAdd((floatingItem) => {
+    $state.floatingItems.onAdd((floatingItem) => {
       this.gameScene?.minigameManager?.addItem(floatingItem)
       const fields: NonFunctionPropNames<FloatingItem>[] = [
         "x",
         "y",
         "avatarId"
       ]
-
+      const $floatingItem = this.$<FloatingItem>(floatingItem)
       fields.forEach((field) => {
-        floatingItem.listen(field, (value, previousValue) => {
+        $floatingItem.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changeItem(
             floatingItem,
             field,
@@ -349,27 +353,29 @@ class GameContainer {
       })
     })
 
-    this.room.state.floatingItems.onRemove((floatingItem, key) => {
+    $state.floatingItems.onRemove((floatingItem, key) => {
       this.gameScene?.minigameManager?.removeItem(floatingItem)
     })
 
-    this.room.state.portals.onAdd((portal) => {
+    $state.portals.onAdd((portal) => {
       this.gameScene?.minigameManager?.addPortal(portal)
+      const $portal = this.$<Portal>(portal)
       const fields: NonFunctionPropNames<Portal>[] = ["x", "y", "avatarId"]
 
       fields.forEach((field) => {
-        portal.listen(field, (value, previousValue) => {
+        $portal.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changePortal(portal, field, value)
         })
       })
     })
 
-    this.room.state.portals.onRemove((portal, key) => {
+    $state.portals.onRemove((portal, key) => {
       this.gameScene?.minigameManager?.removePortal(portal)
     })
 
-    this.room.state.symbols.onAdd((symbol) => {
+    $state.symbols.onAdd((symbol) => {
       this.gameScene?.minigameManager?.addSymbol(symbol)
+      const $symbol = this.$<SynergySymbol>(symbol)
       const fields: NonFunctionPropNames<SynergySymbol>[] = [
         "x",
         "y",
@@ -377,13 +383,13 @@ class GameContainer {
       ]
 
       fields.forEach((field) => {
-        symbol.listen(field, (value, previousValue) => {
+        $symbol.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changeSymbol(symbol, field, value)
         })
       })
     })
 
-    this.room.state.symbols.onRemove((symbol, key) => {
+    $state.symbols.onRemove((symbol, key) => {
       this.gameScene?.minigameManager?.removeSymbol(symbol)
     })
 
@@ -399,7 +405,8 @@ class GameContainer {
     }
 
     const listenForPokemonChanges = (pokemon: Pokemon) => {
-      pokemon.onChange(() => {
+      const $pokemon = this.$<Pokemon>(pokemon)
+      $pokemon.onChange(() => {
         const fields: NonFunctionPropNames<IPokemon>[] = [
           "positionX",
           "positionY",
@@ -414,7 +421,7 @@ class GameContainer {
           "meal"
         ]
         fields.forEach((field) => {
-          pokemon.listen(field, (value, previousValue) => {
+          $pokemon.listen(field, (value, previousValue) => {
             if (field && player.id === this.spectatedPlayerId) {
               this.gameScene?.board?.changePokemon(
                 pokemon,
@@ -426,7 +433,7 @@ class GameContainer {
           })
         })
 
-        pokemon.types.onChange((value, key) => {
+        $pokemon.types.onChange((value, key) => {
           if (player.id === this.spectatedPlayerId) {
             const pokemonUI = this.gameScene?.board?.pokemons.get(pokemon.id)
             if (pokemonUI) {
@@ -435,7 +442,7 @@ class GameContainer {
           }
         })
 
-        pokemon.items.onChange((value, key) => {
+        $pokemon.items.onChange((value, key) => {
           if (player.id === this.spectatedPlayerId) {
             this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
           }
@@ -443,7 +450,9 @@ class GameContainer {
       })
     }
 
-    player.board.onAdd((pokemon, key) => {
+    const $player = this.$<Player>(player)
+
+    $player.board.onAdd((pokemon, key) => {
       if (pokemon.stars > 1) {
         const i = React.createElement(
           "img",
@@ -463,13 +472,13 @@ class GameContainer {
       this.handleBoardPokemonAdd(player, pokemon)
     }, false)
 
-    player.board.onRemove((pokemon, key) => {
+    $player.board.onRemove((pokemon, key) => {
       if (player.id === this.spectatedPlayerId) {
         this.gameScene?.board?.removePokemon(pokemon)
       }
     })
 
-    player.board.onChange((pokemon, key) => {
+    $player.board.onChange((pokemon, key) => {
       store.dispatch(
         changePlayer({ id: player.id, field: "board", value: player.board })
       )
@@ -478,14 +487,14 @@ class GameContainer {
       }
     })
 
-    player.items.onChange((value, key) => {
+    $player.items.onChange((value, key) => {
       if (player.id === this.spectatedPlayerId) {
         //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })
 
-    player.synergies.onChange(() => {
+    $player.synergies.onChange(() => {
       if (player.id === this.spectatedPlayerId) {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.showBerryTrees()

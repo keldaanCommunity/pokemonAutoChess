@@ -63,7 +63,9 @@ if (process.env.NODE_APP_INSTANCE) {
   const processNumber = Number(process.env.NODE_APP_INSTANCE || "0")
   const port = (Number(process.env.PORT) || 2569) + processNumber
   gameOptions = {
-    presence: new RedisPresence(process.env.REDIS_URI),
+    presence: new RedisPresence(
+      process.env.REDIS_URI
+    ) as Presence /* TODO: type assertion shouldnt be required, need to report that bug to colyseus */,
     driver: new RedisDriver(process.env.REDIS_URI),
     publicAddress: `${port}.${process.env.SERVER_NAME}`,
     selectProcessIdToCreateRoom: async function (
@@ -89,7 +91,7 @@ if (process.env.NODE_APP_INSTANCE) {
       }
     }
   }
-  //gameOptions.presence?.setMaxListeners(100) // extend max listeners to avoid memory leak warning ; no longer available since reverting to colyseus 0.15
+  gameOptions.presence?.setMaxListeners(100) // extend max listeners to avoid memory leak warning
 }
 
 /*if (process.env.MODE === "dev") {
