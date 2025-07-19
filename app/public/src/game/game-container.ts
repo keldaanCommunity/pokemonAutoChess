@@ -1,11 +1,11 @@
-import { getStateCallbacks, Room } from "colyseus.js"
 import { SchemaCallbackProxy } from "@colyseus/schema"
+import { getStateCallbacks, Room } from "colyseus.js"
+import { t } from "i18next"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
-import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -35,19 +35,19 @@ import {
   Rarity
 } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
-import { SOUNDS, playSound } from "../pages/utils/audio"
+import { values } from "../../../utils/schemas"
+import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
+import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { BoardMode } from "./components/board-manager"
-import GameScene from "./scenes/game-scene"
-import { t } from "i18next"
-import { values } from "../../../utils/schemas"
 import { DEPTH } from "./depths"
-import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
+import GameScene from "./scenes/game-scene"
 
 class GameContainer {
   room: Room<GameState>
@@ -158,7 +158,12 @@ class GameContainer {
 
     fields.forEach((field) => {
       $pokemon.status.listen(field, (value, previousValue) => {
-        this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field, previousValue)
+        this.gameScene?.battle?.changeStatus(
+          simulation.id,
+          pokemon,
+          field,
+          previousValue
+        )
       })
     })
 
