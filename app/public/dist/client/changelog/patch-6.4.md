@@ -55,6 +55,8 @@
 
 # Changes to Synergies
 
+- Nerf Ghost: dodge chance 20% → 15% ; chance to silence on hit 20% → 15%
+
 # Changes to Items
 
 - Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 10 gold.
