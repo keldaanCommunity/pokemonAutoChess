@@ -1,5 +1,6 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { getUnitPowerScore } from "../../core/bot-logic"
+import { CollectionUtils } from "../../core/collection"
 import { createRandomEgg } from "../../core/eggs"
 import {
   ConditionBasedEvolutionRule,
@@ -33,6 +34,7 @@ import {
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
+import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
@@ -44,7 +46,6 @@ import {
 } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import type { IPokemonCollectionItem } from "../mongo-models/user-metadata"
 import PokemonFactory from "../pokemon-factory"
 import {
   getPokemonData,
@@ -138,7 +139,7 @@ export default class Player extends Schema implements IPlayer {
     avatar: string,
     isBot: boolean,
     rank: number,
-    pokemonCollection: Map<string, IPokemonCollectionItem>,
+    pokemonCollection: Map<string, IPokemonCollectionItemMongo>,
     title: Title | "",
     role: Role,
     state: GameState
@@ -158,10 +159,12 @@ export default class Player extends Schema implements IPlayer {
     const avatarInCollection = pokemonCollection.get(
       PkmIndex[avatarCustom.name]
     )
+    const emotesUnlocked =
+      CollectionUtils.getEmotionsUnlocked(avatarInCollection)
     this.emotesUnlocked = (
       (avatarCustom.shiny
-        ? avatarInCollection?.shinyEmotions
-        : avatarInCollection?.emotions) ?? []
+        ? emotesUnlocked.shinyEmotions
+        : emotesUnlocked.emotions) ?? []
     ).join(",")
 
     this.lightX = state.lightX

@@ -3,13 +3,13 @@ import "firebase/compat/auth"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { throttle } from "../../../../../utils/function"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
 import { FIREBASE_CONFIG } from "../../utils/utils"
 //import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
-import { throttle } from "../../../../../utils/function"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
@@ -19,7 +19,6 @@ export default function Login() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const uid = useAppSelector((state) => state.network.uid)
-  console.log("Login uid", uid)
   const displayName = useAppSelector((state) => state.network.displayName)
   const [prejoining, setPrejoining] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
