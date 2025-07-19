@@ -57,8 +57,7 @@
 
 # Changes to Items
 
-- Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 20 gold.
-- Gimmighoul coin now raise max interest by 20 gold instead of 10.
+- Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 10 gold.
 - New item: Sticky Barb, made with heart scale + miracle seed, 3 def 15 shield ; when struck by an attack at melee range, deal 3 + 15% of its defense as retaliation true damage to the attacker, with 130% chance to inflict WOUND for 3 seconds.
 - Smoke Ball new recipe: dark glasses + miracle seed ; new base stats: 10% crit chance; now gain 50 shield when jumping away
 - Cleanse Tag is renamed Ability Shield ; new recipe: miracle seed + twisted spoon ; new base stats: 15 shield, 10 AP

@@ -491,8 +491,6 @@ export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
   (item) => SynergyGivenByItem.hasOwnProperty(item) === false
 )
 
-export const LateGameItems: Item[] = CraftableNonSynergyItems.filter(item => item !== Item.AMULET_COIN)
-
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,

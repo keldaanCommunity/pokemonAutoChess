@@ -1130,7 +1130,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ).length
         const nbAmuletCoins = player.items.filter((item) => item === Item.AMULET_COIN).length
           + values(player.board).filter((pokemon) => pokemon.items.has(Item.AMULET_COIN)).length
-        player.maxInterest = 5 + nbGimmighoulCoins * 2 - nbAmuletCoins * 2
+        player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
           player.interest = max(player.maxInterest)(Math.floor(player.money / 10))
           income += player.interest

@@ -2557,7 +2557,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "Horneado con aliados de tipo DARK MONSTER DRAGON. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "Horneado con aliados de tipo PSYCHIC AMORPHOUS BABY LIGHT. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Un Huevo vendido en la guardería de Chansey",
-		"GIMMIGHOUL_COIN": "Incrementa el máximo de interés en 20 de GOLD.",
+		"GIMMIGHOUL_COIN": "Incrementa el máximo de interés en 10 de GOLD.",
 		"EXCHANGE_TICKET": "Intercambia un componente o un objeto completo del banquillo por otro aleatorio. Un único uso.",
 		"AUSPICIOUS_ARMOR": "Una peculiar armadura que permite evolucionar a una especie de Pokémon. Deseos auspiciosos residen en ella.",
 		"MALICIOUS_ARMOR": "Una peculiar armadura que permite evolucionar a una especie de Pokémon. Un ímpetu malicioso reside en ella.",
