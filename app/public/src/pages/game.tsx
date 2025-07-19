@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import { PVEStages } from "../../../models/pve-stages"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -33,13 +32,14 @@ import { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
-import { Wanderer, WandererBehavior } from "../../../types/enum/Wanderer"
+import { Wanderer } from "../../../types/enum/Wanderer"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
+import { authenticateUser } from "../network"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -74,10 +74,8 @@ import {
 } from "../stores/GameStore"
 import {
   joinGame,
-  logIn,
   setConnectionStatus,
-  setErrorAlertMessage,
-  setProfile
+  setErrorAlertMessage
 } from "../stores/NetworkStore"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameFinalRank from "./component/game/game-final-rank"
@@ -94,7 +92,6 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
 
 let gameContainer: GameContainer
 
@@ -356,14 +353,9 @@ export default function Game() {
   useEffect(() => {
     const connect = () => {
       logger.debug("connecting to game")
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-
-      firebase.auth().onAuthStateChanged(async (user) => {
+      authenticateUser().then(async (user) => {
         if (user && !connecting.current) {
           connecting.current = true
-          dispatch(logIn(user))
           await connectToGame()
         }
       })
@@ -521,10 +513,6 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.GAME_END, leave)
-
-      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-        dispatch(setProfile(user))
-      })
 
       room.onLeave((code) => {
         const shouldGoToLobby = [

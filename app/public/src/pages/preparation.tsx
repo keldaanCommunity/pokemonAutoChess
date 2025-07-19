@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { GameUser } from "../../../models/colyseus-models/game-user"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
@@ -14,12 +13,11 @@ import { GameMode } from "../../../types/enum/Game"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { authenticateUser } from "../network"
 import {
   joinPreparation,
-  logIn,
   setConnectionStatus,
   setErrorAlertMessage,
-  setProfile,
   toggleReady
 } from "../stores/NetworkStore"
 import {
@@ -49,7 +47,6 @@ import PreparationMenu from "./component/preparation/preparation-menu"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
 import "./preparation.css"
 
 export default function Preparation() {
@@ -66,13 +63,8 @@ export default function Preparation() {
 
   useEffect(() => {
     const reconnect = async () => {
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          dispatch(logIn(user))
+      authenticateUser()
+        .then(async (user) => {
           try {
             if (!initialized.current) {
               initialized.current = true
@@ -112,11 +104,11 @@ export default function Preparation() {
             dispatch(setErrorAlertMessage(t("errors.UNKNOWN_ERROR", { error })))
             navigate("/")
           }
-        } else {
+        })
+        .catch((err) => {
           dispatch(setErrorAlertMessage(t("errors.USER_NOT_AUTHENTICATED")))
           navigate("/")
-        }
-      })
+        })
     }
 
     const initialize = async (room: Room<PreparationState>, uid: string) => {
@@ -282,10 +274,6 @@ export default function Preparation() {
           dispatch(resetPreparation())
           navigate("/game")
         }
-      })
-
-      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-        dispatch(setProfile(user))
       })
     }
 

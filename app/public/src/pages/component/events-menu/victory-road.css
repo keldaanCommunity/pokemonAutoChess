@@ -79,11 +79,14 @@
 
 .victory-road-marker {
   position: absolute;
-   text-shadow:
+  text-shadow:
     -1px 1px 2px black,
     1px -1px 2px black,
     1px 1px 2px black,
     -1px -1px 2px black;
+  background-color: var(--color-bg-secondary);
+  border: 2px solid black;
+  padding: 2px 4px;
 }
 
 .victory-road-player-icon:hover {

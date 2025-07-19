@@ -369,6 +369,19 @@ export default config({
       }
     }
 
+    app.get("/profile", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const user = await UserMetadata.findOne({ uid: userAuth.uid })
+        if (!user) return res.status(404).send("User not found")
+        res.send(user)
+      } catch (error) {
+        logger.error("Error fetching profile", error)
+        res.status(500).send("Error fetching profile")
+      }
+    })
+
     app.post("/bots", async (req, res) => {
       try {
         const userAuth = await authUser(req, res)
