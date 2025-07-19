@@ -11898,7 +11898,7 @@ export class FilletAwayStrategy extends AbilityStrategy {
 
     pokemon.addAttack(10, pokemon, 1, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
-    pokemon.status.triggerProtect(500)
+    pokemon.status.triggerProtect(1000)
     // move to backline
     const corner = board.getTeleportationCell(
       pokemon.positionX,

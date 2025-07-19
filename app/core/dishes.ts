@@ -247,7 +247,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SMOKED_FILET: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(-10, entity, 0, false, true)
+      entity.addMaxHP(-5, entity, 0, false, true)
       entity.addAttack(5, entity, 0, false, true)
       entity.addAbilityPower(10, entity, 0, false, true)
     })

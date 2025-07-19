@@ -2447,7 +2447,7 @@
 		"LEEK": "Erhalte 50% CRIT_CHANCE und erlaube, dass die Fähigkeiten kritisch treffen im nächsten Kampf.",
 		"LARGE_LEEK": "Erhalte 100% CRIT_POWER und erlaube, dass die Fähigkeiten kritisch treffen im nächsten Kampf.",
 		"SPINDA_COCKTAIL": "Ein Cocktail mit [LK] zufälligen Effekten, die Statuswerte erhöhen oder dich schwindelig machen können.",
-		"SMOKED_FILET": "Verliere permanent 10 max HP um 5 ATK und 10 AP zu erhalten.",
+		"SMOKED_FILET": "Verliere permanent 5 max HP um 5 ATK und 10 AP zu erhalten.",
 		"SWEETS": "Eine zufälliges Süßigkeit, welche einen permanenten Status-Wert bonus gibt.",
 		"RIBBON_SWEET": "Erhalte permanent 3 SPE_DEF",
 		"STAR_SWEET": "Erhalte permanent 10 AP",

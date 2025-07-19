@@ -51,6 +51,7 @@
 - Revert Tapu Bulu nerf from 5.8: Grassy Surge: 4 → 5 attack
 - Galarian Moltres is now 2-range
 - Skarmory spikes no longer hurt Steel Pokémon
+- Buff Fillet Away (Veluza): protect duration 500ms → 1 second
 
 # Changes to Synergies
 
@@ -75,6 +76,7 @@
 - Removed TM Bide, replaced with TM Reflect
 - Removed TM Retaliate, replaced with TM Counter
 - Removed HM Whirlpool, replaced with HM Dive
+- Buff Smoked Fillet: HP reduction 10 → 5
 
 # Gameplay
 

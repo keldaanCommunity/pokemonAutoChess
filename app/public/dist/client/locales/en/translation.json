@@ -2569,7 +2569,7 @@
 		"LEEK": "Gain 50% CRIT_CHANCE and allow ability to critically strike in the next fight. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead.",
 		"LARGE_LEEK": "Gain 100% CRIT_POWER and allow ability to critically strike in the next fight. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead.",
 		"SPINDA_COCKTAIL": "A cocktail with [LK] random effects that can buff stats or make you dizzy.",
-		"SMOKED_FILET": "Permanently lose 10 max HP to gain 5 ATK and 10 AP.",
+		"SMOKED_FILET": "Permanently lose 5 max HP to gain 5 ATK and 10 AP.",
 		"SWEETS": "A random candy granting a permanent stats bonus",
 		"RIBBON_SWEET": "Gain 3 permanent SPE_DEF",
 		"STAR_SWEET": "Gain 10 permanent AP",

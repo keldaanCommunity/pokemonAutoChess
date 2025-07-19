@@ -2562,7 +2562,7 @@
 		"LEEK": "Gagne 50 % de CRIT_CHANCE au début du prochain combat, et permet à la capacité du porteur d'infliger un coup critique. Si la capacité peut déjà infliger un coup critique par défaut, auggmente la CRIT_POWER de 50% à la place.",
 		"LARGE_LEEK": "Gagne 100 % de CRIT_POWER au début du prochain combat, et permet à la capacité du porteur d'infliger un coup critique. Si la capacité peut déjà infliger un coup critique par défaut, auggmente la CRIT_POWER de 50% à la place.",
 		"SPINDA_COCKTAIL": "Un cocktail avec des effets aléatoires [LK] qui peuvent améliorer les statistiques ou donner le vertige.",
-		"SMOKED_FILET": "Fait perdre définitivement 10 HP max pour gagner 5 ATK et 10 AP.",
+		"SMOKED_FILET": "Fait perdre définitivement 5 HP max pour gagner 5 ATK et 10 AP.",
 		"SWEETS": "Un bonbon aléatoire accordant un bonus de statistiques permanent",
 		"RIBBON_SWEET": "Gagne 3 SPE_DEF de façon permanente",
 		"STAR_SWEET": "Gagne 10 AP de façon permanente",

@@ -2454,7 +2454,7 @@
 		"LEEK": "다음 전투에 50% CRIT_CHANCE 증가 및 스킬에 치명타 적용 가능",
 		"LARGE_LEEK": "다음 전투에 100% CRIT_POWER 증가 및 스킬에 치명타 적용 가능",
 		"SPINDA_COCKTAIL": "[LK] 무작위 효과",
-		"SMOKED_FILET": "영구적으로 10 최대 HP 를 잃고 3 ATK 과 5 AP 를 획득",
+		"SMOKED_FILET": "영구적으로 5 최대 HP 를 잃고 3 ATK 과 5 AP 를 획득",
 		"SWEETS": "영구적인 스탯 버프를 주는 사탕",
 		"RIBBON_SWEET": "영구적으로 SPE_DEF 3 증가",
 		"STAR_SWEET": "영구적으로 AP 10 증가",

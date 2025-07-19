@@ -2567,7 +2567,7 @@
 		"LEEK": "仅在下一轮战斗中，提升50%的CRIT_CHANCE，且招式能够暴击。若招式已经可以暴击，则改为额外提升50%的CRIT_POWER。",
 		"LARGE_LEEK": "仅在下一轮战斗中，提升100%的CRIT_POWER，且招式能够暴击。若招式已经可以暴击，则改为再提升50%的CRIT_POWER。",
 		"SPINDA_COCKTAIL": "一瓶神秘的混调，富含多种[LK]随机效果，例如提升属性或是令饮用者晕眩。",
-		"SMOKED_FILET": "永久降低10点最大HP，提升5点ATK和10点AP。",
+		"SMOKED_FILET": "永久降低5点最大HP，提升5点ATK和10点AP。",
 		"SWEETS": "一枚随机糖饰，能永久提升某一项能力",
 		"RIBBON_SWEET": "永久提升3点SPE_DEF",
 		"STAR_SWEET": "永久提升10点AP",
