@@ -2754,7 +2754,7 @@
 		"FLYING": "FLYING Pokémons fliegen weg, wenn sie unter eine bestimmte Menge an HP fallen, es sei denn, sie sind PARALYSIS, FREEZE oder SLEEP",
 		"FLORA": "Wenn das erste FLORA Pokemon KO ist, blüht eine Blume. Es erhält einen zufälligen Gegenstand von jedem FLORA Verbündeten, der KO geht.",
 		"ROCK": "ROCK Pokémon erhalten DEF und widerstehen kritischem Schaden besser",
-		"GHOST": "GHOST Pokémon haben eine [20,LK]% Chance, bei einem Treffer SILENCE auszulösen und Angriffen auszuweichen, und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
+		"GHOST": "GHOST Pokémon haben eine [15,LK]% Chance, bei einem Treffer SILENCE auszulösen und Angriffen auszuweichen, und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
 		"FAIRY": "FAIRY Pokémon verursachen mit ihren Angriffen zusätzliche SPECIAL und lösen Schocks aus, wenn sie einen kritischen Treffer erleiden.",
 		"ICE": "ICE Pokemon haben die Chance, den Gegner nach einem Treffer für 2 Sekunden zu FREEZE und dem gesamten Team SPE_DEF zu geben",
 		"FOSSIL": "Bei ihrem ersten KO erwachen FOSSIL Pokémon mit erhöhter ATK wieder zum Leben",

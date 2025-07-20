@@ -2895,7 +2895,7 @@
 		"FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",
 		"FLORA": "When the first FLORA Pokémon is KO'd, a flower blossoms. The new Pokémon receives one random item from each FLORA ally KO'd.",
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical damage, and can adapt to weather.",
-		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [20,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
+		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
 		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.",
 		"ICE": "ICE Pokémon have a chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team.",
 		"FOSSIL": "FOSSIL Pokémon survive the first hit that would knock them out, taking the damage into SHIELD instead and gaining ATK.",
