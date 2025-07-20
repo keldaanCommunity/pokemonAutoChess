@@ -7644,6 +7644,7 @@ export class Annihilape extends Pokemon {
   attackSprite = AttackSprite.FIGHTING_MELEE
   onAcquired(player: Player) {
     player.titles.add(Title.ANNIHILATOR)
+    this.atk -= (30 - 20) // revert permanent atk buff stacked for evolution
   }
 }
 
@@ -9283,12 +9284,11 @@ export class Snorlax extends Pokemon {
 }
 
 export class Poipole extends Pokemon {
-  baseHp = 120
   types = new SetSchema<Synergy>([Synergy.POISON, Synergy.BUG])
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.NAGANADEL
-  hp = this.baseHp
+  hp = 120
   atk = 10
   speed = 64
   def = 6
@@ -9320,8 +9320,8 @@ export class Naganadel extends Pokemon {
   onAcquired(player: Player) {
     // cancel permanent stat buffs of Poipole
     // this is not perfect: see https://discord.com/channels/737230355039387749/1336313038617182209/1394408583046889522
-    this.atk -= 8
-    this.hp -= 80
+    this.atk -= (18 - 10)
+    this.hp -= (200 - 120)
   }
 }
 
@@ -14943,7 +14943,7 @@ export class Cosmoem extends Pokemon {
     }
   )
   onAcquired(player: Player) {
-    this.hp = 200 // cancel hp buffs of cosmog
+    this.hp -= (200 - 100) // revert hp buffs of cosmog
   }
   hp = 200
   atk = 5
@@ -14975,7 +14975,7 @@ export class Solgaleo extends Pokemon {
   skill = Ability.SUNSTEEL_STRIKE
   attackSprite = AttackSprite.STEEL_MELEE
   onAcquired(player: Player) {
-    this.hp = 300 // cancel hp buffs of cosmoem
+    this.hp -= (300 - 200) // revert hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
   }
 }
@@ -14998,7 +14998,7 @@ export class Lunala extends Pokemon {
   skill = Ability.MOONGEIST_BEAM
   attackSprite = AttackSprite.STEEL_MELEE
   onAcquired(player: Player) {
-    this.hp = 300 // cancel hp buffs of cosmoem
+    this.hp -= (300 - 200) // revert hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
   }
 }
