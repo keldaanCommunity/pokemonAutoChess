@@ -818,19 +818,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.PUPITAR]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.TYRANITAR]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SLAKOTH]: {
         attack: AnimationType.Attack,
@@ -1107,7 +1110,8 @@ export const PokemonAnimations: {
         ability: AnimationType.Dance,
         emote: AnimationType.Charge,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FLYING_MELEE
+        attackSprite: AttackSprite.FLYING_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.GIRATINA]: {
         attack: AnimationType.Attack,
@@ -1143,7 +1147,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.FIRE_RANGE
+        attackSprite: AttackSprite.FIRE_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.GALARIAN_ARTICUNO]: {
         attack: AnimationType.Shoot,
@@ -1257,7 +1262,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.LEAFEON]: {
         attack: AnimationType.QuickStrike,
@@ -1306,7 +1312,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Sink,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_RANGE
+        attackSprite: AttackSprite.DARK_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.LITWICK]: {
         attack: AnimationType.Sink,
@@ -1537,13 +1544,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Withdraw,
-        attackSprite: AttackSprite.DARK_RANGE
+        attackSprite: AttackSprite.DARK_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.ABSOL]: {
         attack: AnimationType.QuickStrike,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.LAPRAS]: {
         attack: AnimationType.Attack,
@@ -1689,31 +1698,36 @@ export const PokemonAnimations: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Pose,
         emote: AnimationType.DeepBreath,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.ALOLAN_PERSIAN]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.DEINO]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_RANGE
+        attackSprite: AttackSprite.DARK_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.ZWEILOUS]: {
         attack: AnimationType.Jab,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_RANGE
+        attackSprite: AttackSprite.DARK_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.HYDREIGON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_RANGE
+        attackSprite: AttackSprite.DARK_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SANDILE]: {
         attack: AnimationType.Attack,
@@ -2336,7 +2350,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.ETERNATUS]: {
         attack: AnimationType.Attack,
@@ -2475,19 +2490,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIRE_MELEE
+        attackSprite: AttackSprite.FIRE_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.HOUNDOOM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIRE_MELEE
+        attackSprite: AttackSprite.FIRE_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.MEGA_HOUNDOOM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shake,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIRE_MELEE
+        attackSprite: AttackSprite.FIRE_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.CLAMPERL]: {
         attack: AnimationType.Attack,
@@ -2582,13 +2600,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.WEAVILE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.CROAGUNK]: {
         attack: AnimationType.Strike,
@@ -3254,13 +3274,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.ZOROARK]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.HISUI_ZORUA]: {
         attack: AnimationType.Attack,
@@ -3451,13 +3473,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Hop,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.HOOPA_UNBOUND]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Cringe,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SILVALLY]: {
         attack: AnimationType.Strike,
@@ -3486,7 +3510,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.MARSHADOW]: {
         attack: AnimationType.Attack,
@@ -3576,7 +3601,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_RANGE
+        attackSprite: AttackSprite.DARK_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SOLROCK]: {
         attack: AnimationType.Attack,
@@ -3947,13 +3973,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.LIEPARD]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.BARBOACH]: {
         attack: AnimationType.Attack,
@@ -4189,13 +4217,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Withdraw,
-        attackSprite: AttackSprite.POISON_MELEE
+        attackSprite: AttackSprite.POISON_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.OVERQWIL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.POISON_MELEE
+        attackSprite: AttackSprite.POISON_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.HISUIAN_TYPHLOSION]: {
         attack: AnimationType.Shoot,
@@ -4237,19 +4267,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.GALARIAN_LINOONE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.OBSTAGOON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Double,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.PHEROMOSA]: {
         attack: AnimationType.Kick,
@@ -4261,7 +4294,8 @@ export const PokemonAnimations: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.MEGA_SABLEYE]: {
         attack: AnimationType.Strike,
@@ -4592,13 +4626,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.MORGREM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.GRIMMSNARL]: {
         attack: AnimationType.Punch,
@@ -4660,13 +4696,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.THIEVUL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.DROWZEE]: {
         attack: AnimationType.Attack,
@@ -5253,13 +5291,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.HONCHKROW]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SANDYGAST]: {
         attack: AnimationType.Attack,
@@ -5395,25 +5435,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.MANDIBUZZ]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.INKAY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.MALAMAR]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.DARK_MELEE
+        attackSprite: AttackSprite.DARK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.TIMBURR]: {
         attack: AnimationType.Attack,
@@ -5746,7 +5790,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FIRE_RANGE
+        attackSprite: AttackSprite.FIRE_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.CHARCADET]: {
         attack: AnimationType.Strike,
