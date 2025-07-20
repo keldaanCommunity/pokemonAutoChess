@@ -45,19 +45,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.IVYSAUR]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.VENUSAUR]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.CHARMANDER]: {
         attack: AnimationType.Kick,
@@ -262,37 +265,43 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SKIPLOOM]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.JUMPLUFF]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SEEDOT]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.NUZLEAF]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SHIFTRY]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.STARLY]: {
         attack: AnimationType.Attack,
@@ -316,19 +325,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Slam,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.BAYLEEF]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.MEGANIUM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shake,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.CYNDAQUIL]: {
         attack: AnimationType.Shoot,
@@ -370,19 +382,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Pose,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.GROVYLE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Strike,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SCEPTILE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Strike,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.TORCHIC]: {
         attack: AnimationType.Attack,
@@ -1248,7 +1263,8 @@ export const PokemonAnimations: {
         attack: AnimationType.QuickStrike,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SYLVEON]: {
         attack: AnimationType.Shoot,
@@ -1332,19 +1348,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.WEEPINBELL]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.VICTREEBEL]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SWINUB]: {
         attack: AnimationType.Shoot,
@@ -1486,7 +1505,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.COBALION]: {
         attack: AnimationType.Attack,
@@ -1614,7 +1634,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Emit,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.CRESSELIA]: {
         attack: AnimationType.Shoot,
@@ -1746,25 +1767,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.GLOOM]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.VILEPLUME]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.BELLOSSOM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Twirl,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.AMAURA]: {
         attack: AnimationType.Attack,
@@ -1890,19 +1915,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.ROSELIA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.ROSERADE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.BUNEARY]: {
         attack: AnimationType.QuickStrike,
@@ -2385,13 +2413,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.CACTURNE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.TAUROS]: {
         attack: AnimationType.Stomp,
@@ -2624,13 +2654,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIGHTING_MELEE
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.BRELOOM]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIGHTING_MELEE
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.TENTACOOL]: {
         attack: AnimationType.Slam,
@@ -2770,19 +2802,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIGHTING_MELEE
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.STEENEE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIGHTING_MELEE
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.TSAREENA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Kick,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIGHTING_MELEE
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.VOLCANION]: {
         attack: AnimationType.Charge,
@@ -2885,19 +2920,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Appeal,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SERVINE]: {
         attack: AnimationType.Slice,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SERPERIOR]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SCORBUNNY]: {
         attack: AnimationType.Strike,
@@ -3167,7 +3205,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.DIGLETT]: {
         attack: AnimationType.Attack,
@@ -3197,19 +3236,19 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.FLYING_RANGE
     },
     [Pkm.DARTIX]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.FLYING_RANGE
     },
     [Pkm.DECIDUEYE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.FLYING_RANGE
     },
     [Pkm.ZORUA]: {
         attack: AnimationType.Attack,
@@ -3555,7 +3594,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.WURMPLE]: {
         attack: AnimationType.Attack,
@@ -3645,19 +3685,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIRE_RANGE
+        attackSprite: AttackSprite.FIRE_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SUNFLORA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Shoot,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.FIRE_RANGE
+        attackSprite: AttackSprite.FIRE_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.MARACTUS]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.PLUSLE]: {
         attack: AnimationType.Attack,
@@ -3779,7 +3822,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.KOFFING]: {
         attack: AnimationType.Attack,
@@ -4108,7 +4152,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.EXEGGCUTE]: {
         attack: AnimationType.Attack,
@@ -4137,7 +4182,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.HISUIAN_QWILFISH]: {
         attack: AnimationType.Attack,
@@ -4662,7 +4708,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Attack,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.BURMY_SANDY]: {
         attack: AnimationType.Shoot,
@@ -4746,13 +4793,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shake,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.TANGROWTH]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Emit,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.PSYDUCK]: {
         attack: AnimationType.MultiScratch,
@@ -5038,19 +5087,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Twirl,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.LILIGANT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.HISUIAN_LILLIGANT]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.MANTYKE]: {
         attack: AnimationType.Shoot,
@@ -5659,31 +5711,36 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Appeal,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.FLORAGATO]: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.MEOWSCARADA]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.FOMANTIS]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.LURANTIS]: {
         attack: AnimationType.MultiScratch,
         ability: AnimationType.Attack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GRASS_MELEE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.ROARING_MOON]: {
         attack: AnimationType.Attack,
@@ -5833,13 +5890,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Twirl,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.WHIMSICOTT]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.GIRAFARIG]: {
         attack: AnimationType.Stomp,
