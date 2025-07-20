@@ -1,10 +1,13 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { IPokemonCollectionItem } from "../../../../../models/mongo-models/user-metadata"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { BoosterPriceByRarity, getEmotionCost } from "../../../../../types/Config"
+import {
+  BoosterPriceByRarity,
+  getEmotionCost
+} from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { AnimationConfig, Pkm } from "../../../../../types/enum/Pokemon"
+import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -14,7 +17,7 @@ import "./pokemon-collection-item.css"
 export default function PokemonCollectionItem(props: {
   name: Pkm
   index: string
-  config: IPokemonCollectionItem | undefined
+  item: IPokemonCollectionItemUnpacked | undefined
   filterState: CollectionFilterState
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
@@ -25,31 +28,37 @@ export default function PokemonCollectionItem(props: {
     return null
   }
 
-  const { dust, emotions, shinyEmotions } = props.config ?? {
+  const { dust, emotions, shinyEmotions } = props.item ?? {
     dust: 0,
     emotions: [] as Emotion[],
     shinyEmotions: [] as Emotion[]
   }
   const isUnlocked =
-    props.filterState.mode === "pokedex" ? (props.config?.played ?? 0) > 0
-      : props.filterState.mode === "shiny" ? shinyEmotions?.length > 0
+    props.filterState.mode === "pokedex"
+      ? (props.item?.played ?? 0) > 0
+      : props.filterState.mode === "shiny"
+        ? shinyEmotions?.length > 0
         : emotions?.length > 0 || shinyEmotions?.length > 0
-
 
   const availableEmotions = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
   )
   const rarity = getPokemonData(props.name).rarity
   const boosterCost = BoosterPriceByRarity[rarity]
-  if (props.filterState.filter === "refundable" && dust < boosterCost) return null
+  if (props.filterState.filter === "refundable" && dust < boosterCost)
+    return null
 
-  const canUnlock = props.filterState.mode !== "pokedex" && availableEmotions.some(
-    (e) =>
-      (emotions.includes(e) === false &&
-        dust >= getEmotionCost(e, false) &&
-        props.filterState.mode !== "shiny") ||
-      (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true) && !AnimationConfig[props.name]?.shinyUnavailable)
-  )
+  const canUnlock =
+    props.filterState.mode !== "pokedex" &&
+    availableEmotions.some(
+      (e) =>
+        (emotions.includes(e) === false &&
+          dust >= getEmotionCost(e, false) &&
+          props.filterState.mode !== "shiny") ||
+        (shinyEmotions.includes(e) === false &&
+          dust >= getEmotionCost(e, true) &&
+          !AnimationConfig[props.name]?.shinyUnavailable)
+    )
 
   if (props.filterState.filter === "unlocked" && !isUnlocked) return null
   if (props.filterState.filter === "unlockable" && !canUnlock) return null
@@ -65,13 +74,21 @@ export default function PokemonCollectionItem(props: {
         props.setPokemon(props.name)
       }}
     >
-      <PokemonPortrait portrait={{ index: props.index, shiny: props.config?.selectedShiny ?? false, emotion: props.config?.selectedEmotion ?? Emotion.NORMAL }} />
-      {props.filterState.mode === "pokedex" ? <p>{props.config?.played ?? 0}</p> : <p className="dust">
-        <span>{props.config ? props.config.dust : 0}</span>
-        <img
-          src={getPortraitSrc(props.index)}
-        />
-      </p>}
+      <PokemonPortrait
+        portrait={{
+          index: props.index,
+          shiny: props.item?.selectedShiny ?? false,
+          emotion: props.item?.selectedEmotion ?? Emotion.NORMAL
+        }}
+      />
+      {props.filterState.mode === "pokedex" ? (
+        <p>{props.item?.played ?? 0}</p>
+      ) : (
+        <p className="dust">
+          <span>{props.item ? props.item.dust : 0}</span>
+          <img src={getPortraitSrc(props.index)} />
+        </p>
+      )}
     </div>
   )
 }

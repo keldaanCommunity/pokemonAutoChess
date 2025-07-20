@@ -114,9 +114,8 @@ async function eloDecay() {
       const stats = await DetailledStatistic.find(
         {
           playerId: u.uid,
-          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] &&
-            Date.now() > new Date("2025-05-05").getTime()
-            ? { gameMode: GameMode.RANKED } // TEMP: activate ranked mode decay after 15 days to let time to collect the new game mode info. Can be safely removed after that date
+          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] 
+            ? { gameMode: GameMode.RANKED }
             : {})
         },
         ["time"],

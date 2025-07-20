@@ -1937,7 +1937,7 @@ const conversionEffect = ({
 
   // when converting to ghost, get Dodge chance
   if (synergyCopied === Synergy.GHOST) {
-    entity.addDodgeChance(0.2, entity, 0, false)
+    entity.addDodgeChance(0.15, entity, 0, false)
   }
 
   // when converting to gourmet, get a Chef hat. Useless but funny

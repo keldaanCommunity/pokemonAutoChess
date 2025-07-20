@@ -603,13 +603,16 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.STICKY_BARB]: [
     new OnDamageReceivedEffect(({ pokemon, attacker, attackType }) => {
-      if (attackType === AttackType.PHYSICAL && attacker && distanceC(
-        pokemon.positionX,
-        pokemon.positionY,
-        attacker.positionX,
-        attacker.positionY
-      ) === 1) {
-        const damage = Math.round(0.3 * pokemon.def)
+      if (attackType === AttackType.PHYSICAL
+        && attacker
+        && attacker.items.has(Item.PROTECTIVE_PADS) === false
+        && distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) === 1) {
+        const damage = Math.round(3 + 0.15 * pokemon.def)
         attacker.handleDamage({
           damage,
           board: pokemon.simulation.board,
@@ -626,7 +629,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
-      const ppRegained = Math.round(0.25 * pokemon.maxPP + 2 * pokemon.count.ult)
+      const ppRegained = Math.round(0.2 * pokemon.maxPP + 2 * pokemon.count.ult)
       pokemon.addPP(ppRegained, pokemon, 0, false)
     })
   ],

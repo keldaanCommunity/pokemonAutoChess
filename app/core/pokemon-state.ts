@@ -152,7 +152,7 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
-        if(death) hasAttackKilled = true
+        if (death) hasAttackKilled = true
       }
 
       if (attackType === AttackType.SPECIAL) {
@@ -175,7 +175,7 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
-        if(death) hasAttackKilled = true
+        if (death) hasAttackKilled = true
       }
 
       if (specialDamage > 0) {
@@ -202,7 +202,7 @@ export default abstract class PokemonState {
           })
         }
 
-        if(death) hasAttackKilled = true
+        if (death) hasAttackKilled = true
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -875,7 +875,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
-      !pokemon.types.has(Synergy.FLYING)
+      !pokemon.types.has(Synergy.FLYING) &&
+      !pokemon.types.has(Synergy.STEEL)
     ) {
       pokemon.handleDamage({
         damage: 10,

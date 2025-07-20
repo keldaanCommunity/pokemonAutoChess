@@ -2447,7 +2447,7 @@
 		"LEEK": "Erhalte 50% CRIT_CHANCE und erlaube, dass die Fähigkeiten kritisch treffen im nächsten Kampf.",
 		"LARGE_LEEK": "Erhalte 100% CRIT_POWER und erlaube, dass die Fähigkeiten kritisch treffen im nächsten Kampf.",
 		"SPINDA_COCKTAIL": "Ein Cocktail mit [LK] zufälligen Effekten, die Statuswerte erhöhen oder dich schwindelig machen können.",
-		"SMOKED_FILET": "Verliere permanent 10 max HP um 5 ATK und 10 AP zu erhalten.",
+		"SMOKED_FILET": "Verliere permanent 5 max HP um 5 ATK und 10 AP zu erhalten.",
 		"SWEETS": "Eine zufälliges Süßigkeit, welche einen permanenten Status-Wert bonus gibt.",
 		"RIBBON_SWEET": "Erhalte permanent 3 SPE_DEF",
 		"STAR_SWEET": "Erhalte permanent 10 AP",
@@ -2466,7 +2466,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "Gebacken mit DARK MONSTER DRAGON Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_CARAMEL_SWIRL) zu entwickeln. $t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "Gebacken mit PSYCHIC AMORPHOUS BABY LIGHT Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_RAINBOW_SWIRL) zu entwickeln. $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Ein Ei, welches bei Chansey's Daycare verkauft wurde",
-		"GIMMIGHOUL_COIN": "Erhöhe den maximalen Zinsen-Wert um 20 GOLD.",
+		"GIMMIGHOUL_COIN": "Erhöhe den maximalen Zinsen-Wert um 10 GOLD.",
 		"EXCHANGE_TICKET": "Tausche ein Item-Part oder ein fertiggestelltes Item auf der Bank für ein zufälliges aus. Einmalige Nutzung.",
 		"AUSPICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Glückverheißende Wünsche leben in ihm.",
 		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm."
@@ -2581,7 +2581,7 @@
 		"SABLEYE": "Zobiris sucht nach einem RED_ORB",
 		"MEGA_SABLEYE": "Mega Zobiris erhält RUNE_PROTECT für den gesamten Kampf",
 		"MELMETAL": "Melmetal kann keine SPEED gewinnen. Bonus SPEED wird in ATK umgewandelt (10 SPEED: 5 ATK)",
-		"SKARMORY": "Zu Beginn des Kampfes verteilt Panzaeron Stacheln auf dem Feld. Die Stacheln verursachen 10 TRUE pro Sekunde und ARMOR_BREAK bei Pokémon, die darauf laufen, sofern sie nicht FLYING.",
+		"SKARMORY": "Zu Beginn des Kampfes verteilt Panzaeron Stacheln auf dem Feld. Die Stacheln verursachen 10 TRUE pro Sekunde und ARMOR_BREAK bei Pokémon, die darauf laufen, sofern sie nicht FLYING oder STEEL sind.",
 		"DURANT": "Durant-Basisangriffe verursachen 1 zusätzlichen TRUE für jeden BUG Verbündeten auf deinem Brett.",
 		"OGERPON_TEAL": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden werden [20,SP] HP bei benachbarten Verbündeten wiederhergestellt.",
 		"OGERPON_WELLSPRING": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nVerleiht beim Anwenden benachbarten Verbündeten [20,SP] PP.",
@@ -2614,7 +2614,7 @@
 		"CARAMEL_SWIRL_CREAM": "Nach Einsatz einer Fähigkeit, fügt der CARAMEL_FLAVOR [80,SP]% CRIT_POWER zum nächsten Verbündeten hinzu.",
 		"RAINBOW_SWIRL_CREAM": "Nach Einsatz einer Fähigkeit, fügt der RAINBOW_SWIRL_FLAVOR [60,SP] PP zum nächsten Verbündeten hinzu.",
 		"DURALUDON": "Duraludon sucht nach einem ARTIFICIAL Item.",
-		"CHARCADET": "Knarbon sucht nach einer AUSPICIOUS_ARMOR oder einer MALICIOUS_ARMOR"
+		"CHARCADET": "Das Besiegen des Mew-Duos verleiht Knarbon entweder AUSPICIOUS_ARMOR oder MALICIOUS_ARMOR, je nachdem, ob deine dominante Synergie PSYCHIC oder GHOST ist."
 	},
 	"stat": {
 		"ATK": "Angriff",

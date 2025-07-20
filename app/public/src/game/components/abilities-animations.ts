@@ -895,7 +895,7 @@ export function displayAbility(
       break
 
     case Ability.ICICLE_CRASH:
-      addAbilitySprite(skill, coordinatesTarget, true)?.setScale(3)
+      addAbilitySprite(skill, coordinatesTarget, true)?.setScale(2)
       break
 
     case Ability.INGRAIN:
@@ -3688,7 +3688,7 @@ export function displayAbility(
     case "FISHING":
       addAbilitySprite(Ability.DIVE, coordinates, true)
         ?.setScale(1)
-        .setOrigin(0.5, -2)
+        .setOrigin(0.5, -1)
         .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
       break
 

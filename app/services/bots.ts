@@ -2,7 +2,7 @@ import { logger } from "colyseus"
 import { mongo } from "mongoose"
 import { nanoid } from "nanoid"
 import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
-import { IUserMetadata } from "../models/mongo-models/user-metadata"
+import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { discordService } from "./discord"
 
 export type IBotListItem = Omit<IBot, "steps">
@@ -14,7 +14,7 @@ export async function fetchBotsList(
   const maxPages = 20 // Fail-safe: prevent infinite loops (max 2000 bots)
   const allBots: IBotListItem[] = []
 
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
   let page = 0
   let hasMoreData = true
@@ -107,7 +107,7 @@ export async function addBotToDatabase(bot: {
 
 export async function deleteBotFromDatabase(
   botId: string,
-  user: IUserMetadata
+  user: IUserMetadataMongo
 ): Promise<mongo.DeleteResult> {
   const resultDelete = await BotV2.deleteOne({ id: botId })
   if (resultDelete.deletedCount > 0) {
@@ -122,7 +122,7 @@ export async function deleteBotFromDatabase(
 export async function approveBot(
   botId: string,
   approved: boolean,
-  user: IUserMetadata
+  user: IUserMetadataMongo
 ): Promise<mongo.UpdateResult> {
   logger.debug(
     `${user.displayName} is ${approved ? "approving" : "disapproving"} bot ${botId}`

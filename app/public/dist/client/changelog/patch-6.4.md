@@ -15,7 +15,7 @@
 
 - Quick play game mode is now renamed to "Classic" and no longer counts for elo gain/loss. We didn't have a mode where you could play the classic experience of PAC without worrying about your rank, so Quick Play often was perceived as a worse version of the ranked mode, with more disparity between players level and accusations of elofarming. Alongside with this change, we put emphasis on the Ranked mode through the new event introduced in this patch, Victory Road. We hope this event will be popular enough to become a permanent feature of the game, and will make Ranked mode a more attractive option to make the Classic mode more of a casual experience, and no longer the "quickest way to start a game of PAC".
 - Custom rooms no longer have Elo gain/loss, again to avoid accusations of elofarming.
-- Elo decay has been reduced: 10 → 5 elo lost per day of inactivity. Inactivity is now defined as not playing any ranked game for 20 days instead of 15.
+- Elo decay has been reduced: 10 → 5 elo lost per day of inactivity. Inactivity is now defined as not playing at least 3 games for the last 20 days instead of 15. Starting from Ultra Ball rank, these 3 games must be played in Ranked mode.
 
 # Changes to Pokemon & Abilities
 
@@ -50,14 +50,17 @@
 - Buff Stakataka: Attack 6 → 10
 - Revert Tapu Bulu nerf from 5.8: Grassy Surge: 4 → 5 attack
 - Galarian Moltres is now 2-range
+- Skarmory spikes no longer hurt Steel Pokémon
+- Buff Fillet Away (Veluza): protect duration 500ms → 1 second
 
 # Changes to Synergies
 
+- Nerf Ghost: dodge chance 20% → 15% ; chance to silence on hit 20% → 15%
+
 # Changes to Items
 
-- Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 20 gold.
-- Gimmighoul coin now raise max interest by 20 gold instead of 10.
-- New item: Sticky Barb, made with heart scale + miracle seed, 6 attack 60 shield ; when struck by an attack at melee range, deal 30% of its defense as retaliation true damage to the attacker, with 30% chance to inflict WOUND for 3 seconds.
+- Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 10 gold.
+- New item: Sticky Barb, made with heart scale + miracle seed, 3 def 15 shield ; when struck by an attack at melee range, deal 3 + 15% of its defense as retaliation true damage to the attacker, with 130% chance to inflict WOUND for 3 seconds.
 - Smoke Ball new recipe: dark glasses + miracle seed ; new base stats: 10% crit chance; now gain 50 shield when jumping away
 - Cleanse Tag is renamed Ability Shield ; new recipe: miracle seed + twisted spoon ; new base stats: 15 shield, 10 AP
 - Shiny Charm new recipe: heart scale + mystic water ; new base stats: 3 defense ; now gives 50 PP on activation
@@ -74,6 +77,7 @@
 - Removed TM Bide, replaced with TM Reflect
 - Removed TM Retaliate, replaced with TM Counter
 - Removed HM Whirlpool, replaced with HM Dive
+- Buff Smoked Fillet: HP reduction 10 → 5
 
 # Gameplay
 

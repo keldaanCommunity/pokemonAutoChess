@@ -1,7 +1,7 @@
 import { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
-import { IUserMetadata } from "../../models/mongo-models/user-metadata"
 import { CloseCodes } from "../../types/enum/CloseCodes"
+import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { FIREBASE_CONFIG } from "./pages/utils/utils"
 import store from "./stores"
 import { logIn, setProfile } from "./stores/NetworkStore"
@@ -21,18 +21,21 @@ export function authenticateUser() {
     })
 }
 
-export async function fetchProfile(forceRefresh: boolean = false): Promise<IUserMetadata> {
-    const profile = store.getState().network.profile;
+export async function fetchProfile(
+    forceRefresh: boolean = false
+) {
+    const profile = store.getState().network.profile
     const token = await firebase.auth().currentUser?.getIdToken()
     if (!forceRefresh && profile) {
-        return Promise.resolve(profile);
+        return Promise.resolve(profile)
     }
     return fetch("/profile", {
         headers: {
             Authorization: `Bearer ${token}`
         }
-    }).then(res => res.json()).then((profile: IUserMetadata) => {
-        store.dispatch(setProfile(profile));
-        return profile;
-    });
+    })
+        .then((res) => res.json())
+        .then((profile: IUserMetadataJSON) => {
+            store.dispatch(setProfile(profile))
+        })
 }
