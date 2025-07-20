@@ -92,6 +92,7 @@
 # Bugfix
 
 - Pokemons meals are now consumed even if the Pokemon is on bench.
+- Pokemons now keep their meals when evolving no matter the evolution rule.
 
 # Misc
 
