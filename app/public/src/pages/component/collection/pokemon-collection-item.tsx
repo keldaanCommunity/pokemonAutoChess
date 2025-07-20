@@ -6,9 +6,10 @@ import {
   getEmotionCost
 } from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
-import { AnimationConfig, Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import { CollectionFilterState } from "./pokemon-collection"
@@ -57,7 +58,7 @@ export default function PokemonCollectionItem(props: {
           props.filterState.mode !== "shiny") ||
         (shinyEmotions.includes(e) === false &&
           dust >= getEmotionCost(e, true) &&
-          !AnimationConfig[props.name]?.shinyUnavailable)
+          !PokemonAnimations[props.name]?.shinyUnavailable)
     )
 
   if (props.filterState.filter === "unlocked" && !isUnlocked) return null

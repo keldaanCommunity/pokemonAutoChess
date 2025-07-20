@@ -1,4 +1,6 @@
+import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { AnimationComplete, AnimationType } from "../../../types/Animation"
+import delays from "../../../types/delays.json"
 import {
   Orientation,
   OrientationFlip,
@@ -7,15 +9,17 @@ import {
   SpriteType
 } from "../../../types/enum/Game"
 import { Berries } from "../../../types/enum/Item"
-import { AnimationConfig, PkmByIndex } from "../../../types/enum/Pokemon"
+import { Passive } from "../../../types/enum/Passive"
+import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
-import delays from "../../../types/delays.json"
 import durations from "../assets/pokemons/durations.json"
 import PokemonSprite from "./components/pokemon"
-import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
-import { Passive } from "../../../types/enum/Passive"
+import {
+  DEFAULT_POKEMON_ANIMATION_CONFIG,
+  PokemonAnimations
+} from "./components/pokemon-animations"
 
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
@@ -49,12 +53,12 @@ export default class AnimationManager {
   createPokemonAnimations(index: string, shiny: PokemonTint) {
     const pkm = PkmByIndex[index]
 
-    if (!pkm && !AnimationConfig[pkm]) {
-      logger.warn(`No animation config for ${pkm}`)
+    if (!pkm && !PokemonAnimations[pkm]) {
+      logger.warn(`No animation config declared for ${pkm}`)
       return
     }
     const pokemonData = getPokemonData(pkm)
-    const config = AnimationConfig[pkm]
+    const config = { ...DEFAULT_POKEMON_ANIMATION_CONFIG, ...(PokemonAnimations[pkm] ?? {}) }
 
     if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
 
@@ -62,13 +66,13 @@ export default class AnimationManager {
     actions.add(config.hurt ?? AnimationType.Hurt)
 
     if (pokemonData.passive !== Passive.INANIMATE) {
-      actions.add(AnimationType.Walk)
-      actions.add(config.sleep ?? AnimationType.Sleep)
-      actions.add(config.eat ?? AnimationType.Eat)
-      actions.add(config.hop ?? AnimationType.Hop)
-      actions.add(config.attack ?? AnimationType.Attack)
-      actions.add(config.ability ?? AnimationType.SpAttack)
-      actions.add(config.emote ?? AnimationType.Pose)
+      actions.add(config.walk)
+      actions.add(config.sleep)
+      actions.add(config.eat)
+      actions.add(config.hop)
+      actions.add(config.attack)
+      actions.add(config.ability)
+      actions.add(config.emote)
     }
 
     //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
@@ -131,27 +135,22 @@ export default class AnimationManager {
 
   unloadPokemonAnimations(index: string, shiny: PokemonTint) {
     const pkm = PkmByIndex[index]
-
-    if (!pkm && !AnimationConfig[pkm]) {
-      logger.warn(`No animation config for ${pkm}`)
-      return
-    }
     const pokemonData = getPokemonData(pkm)
-    const config = AnimationConfig[pkm]
+    const config = { ...DEFAULT_POKEMON_ANIMATION_CONFIG, ...(PokemonAnimations[pkm] ?? {}) }
 
     if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
 
     const actions: Set<AnimationType> = new Set([AnimationType.Idle])
-    actions.add(config.hurt ?? AnimationType.Hurt)
+    actions.add(config.hurt)
 
     if (pokemonData.passive !== Passive.INANIMATE) {
       actions.add(AnimationType.Walk)
-      actions.add(config.sleep ?? AnimationType.Sleep)
-      actions.add(config.eat ?? AnimationType.Eat)
-      actions.add(config.hop ?? AnimationType.Hop)
-      actions.add(config.attack ?? AnimationType.Attack)
-      actions.add(config.ability ?? AnimationType.SpAttack)
-      actions.add(config.emote ?? AnimationType.Pose)
+      actions.add(config.sleep)
+      actions.add(config.eat)
+      actions.add(config.hop)
+      actions.add(config.attack)
+      actions.add(config.ability)
+      actions.add(config.emote)
     }
 
     //logger.debug(`Remove animations: ${index} => ${actions.join(",")}`)
@@ -273,26 +272,29 @@ export default class AnimationManager {
     state: PokemonActionState,
     entity: PokemonSprite
   ): AnimationType {
-    const config = AnimationConfig[PkmByIndex[entity.index]]
+    const config = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[PkmByIndex[entity.index]] ?? {})
+    }
     switch (state) {
       case PokemonActionState.HOP:
       case PokemonActionState.FISH:
-        return config?.hop ?? AnimationType.Hop
+        return config.hop
       case PokemonActionState.HURT:
-        return config?.hurt ?? AnimationType.Hurt
+        return config.hurt
       case PokemonActionState.SLEEP:
-        return config?.sleep ?? AnimationType.Sleep
+        return config.sleep
       case PokemonActionState.EAT:
-        return config?.eat ?? AnimationType.Eat
+        return config.eat
       case PokemonActionState.WALK:
-        return AnimationType.Walk
+        return config.walk
       case PokemonActionState.ATTACK:
-        return config?.attack ?? AnimationType.Attack
+        return config.attack
       case PokemonActionState.EMOTE:
-        return config?.emote ?? AnimationType.Pose
+        return config.emote
       case PokemonActionState.IDLE:
       default:
-        return AnimationType.Idle
+        return config.idle
     }
   }
 
@@ -322,7 +324,9 @@ export default class AnimationManager {
       entity.targetY == null &&
       action === PokemonActionState.WALK
     ) {
-      animation = AnimationConfig[PkmByIndex[entity.index]].emote // use drumming animation instead of attack
+      animation =
+        PokemonAnimations[PkmByIndex[entity.index]].emote ??
+        DEFAULT_POKEMON_ANIMATION_CONFIG.emote // use drumming animation instead of attack
       entity.orientation = Orientation.DOWN
     }
 
@@ -363,7 +367,7 @@ export default class AnimationManager {
         : "0000"
     const tint =
       entity.shiny &&
-        !AnimationConfig[PkmByIndex[entity.index]].shinyUnavailable
+        !PokemonAnimations[PkmByIndex[entity.index]].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`

@@ -229,3 +229,63 @@ export const AnimationComplete: { [key in AnimationType]: boolean } = {
   [AnimationType.Special30]: false,
   [AnimationType.Special31]: false
 }
+
+export type PokemonAnimationConfig = {
+  idle?: AnimationType
+  walk?: AnimationType
+  attack?: AnimationType
+  ability?: AnimationType
+  emote?: AnimationType
+  hop?: AnimationType
+  hurt?: AnimationType
+  sleep?: AnimationType
+  eat?: AnimationType
+  shinyUnavailable?: boolean
+  noShadow?: boolean
+  attackSprite?: AttackSprite
+  hitSprite?: HitSprite
+}
+
+export enum AttackSprite {
+  BUG_MELEE = "BUG/melee",
+  BUG_RANGE = "BUG/range",
+  DARK_MELEE = "DARK/melee",
+  DARK_RANGE = "DARK/range",
+  DRAGON_MELEE = "DRAGON/melee",
+  DRAGON_RANGE = "DRAGON/range",
+  DRAGON_GREEN_RANGE = "DRAGON_GREEN/range",
+  ELECTRIC_MELEE = "ELECTRIC/melee",
+  ELECTRIC_RANGE = "ELECTRIC/range",
+  FAIRY_MELEE = "FAIRY/melee",
+  FAIRY_RANGE = "FAIRY/range",
+  FIGHTING_MELEE = "FIGHTING/melee",
+  FIGHTING_RANGE = "FIGHTING/range",
+  FIRE_MELEE = "FIRE/melee",
+  FIRE_RANGE = "FIRE/range",
+  FLYING_MELEE = "FLYING/melee",
+  FLYING_RANGE = "FLYING/range",
+  GHOST_MELEE = "GHOST/melee",
+  GHOST_RANGE = "GHOST/range",
+  GRASS_MELEE = "GRASS/melee",
+  GRASS_RANGE = "GRASS/range",
+  GROUND_MELEE = "GROUND/melee",
+  ICE_MELEE = "ICE/melee",
+  ICE_RANGE = "ICE/range",
+  NORMAL_MELEE = "NORMAL/melee",
+  POISON_MELEE = "POISON/melee",
+  POISON_RANGE = "POISON/range",
+  PSYCHIC_MELEE = "PSYCHIC/melee",
+  PSYCHIC_RANGE = "PSYCHIC/range",
+  WATER_MELEE = "WATER/melee",
+  WATER_RANGE = "WATER/range",
+  ROCK_MELEE = "ROCK/melee",
+  ROCK_RANGE = "ROCK/range",
+  SOUND_RANGE = "SOUND/range",
+  STEEL_MELEE = "STEEL/melee",
+  STEEL_RANGE = "STEEL/range",
+  WILD_MELEE = "WILD/melee"
+}
+
+export enum HitSprite {
+  NORMAL_HIT = "NORMAL/hit"
+}

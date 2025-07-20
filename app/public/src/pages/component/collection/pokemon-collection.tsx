@@ -9,17 +9,12 @@ import React, {
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
-import { CollectionUtils } from "../../../../../core/collection"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
-import {
-  AnimationConfig,
-  Pkm,
-  PkmFamily,
-  PkmIndex
-} from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import SynergyIcon from "../icons/synergy-icon"
@@ -68,17 +63,20 @@ export default function PokemonCollection() {
           setTotal(precomputedPokemons.length)
           break
         case "shiny":
-          setCount(collection.filter((item) => item.shinyEmotions.length > 0).length)
+          setCount(
+            collection.filter((item) => item.shinyEmotions.length > 0).length
+          )
           setTotal(
             precomputedPokemons.filter(
-              (p) => !AnimationConfig[p.name]?.shinyUnavailable
+              (p) => !PokemonAnimations[p.name]?.shinyUnavailable
             ).length
           )
           break
         default:
           setCount(
-            collection.filter((item) =>
-              item.emotions.length > 0 || item.shinyEmotions.length > 0
+            collection.filter(
+              (item) =>
+                item.emotions.length > 0 || item.shinyEmotions.length > 0
             ).length
           )
           setTotal(precomputedPokemons.length)
@@ -253,13 +251,14 @@ export function PokemonCollectionList(props: {
         const configA = getItem(PkmIndex[a])
         const configB = getItem(PkmIndex[b])
         return (
-          ((configB?.emotions.length ?? 0) + (configB?.shinyEmotions.length ?? 0)) -
-          ((configA?.emotions.length ?? 0) + (configA?.shinyEmotions.length ?? 0))
+          (configB?.emotions.length ?? 0) +
+          (configB?.shinyEmotions.length ?? 0) -
+          ((configA?.emotions.length ?? 0) +
+            (configA?.shinyEmotions.length ?? 0))
         )
       } else {
         return (
-          (getItem(PkmIndex[b])?.dust ?? 0) -
-          (getItem(PkmIndex[a])?.dust ?? 0)
+          (getItem(PkmIndex[b])?.dust ?? 0) - (getItem(PkmIndex[a])?.dust ?? 0)
         )
       }
     })
@@ -294,13 +293,7 @@ export function PokemonCollectionList(props: {
           />
         )
       }),
-    [
-      getItem,
-      pokemonsFiltered,
-      props.filterState,
-      props.setPokemon,
-      props.type
-    ]
+    [getItem, pokemonsFiltered, props.filterState, props.setPokemon, props.type]
   )
 
   return <div className="pokemon-collection-list">{elligiblePokemons}</div>

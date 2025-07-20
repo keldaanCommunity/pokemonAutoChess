@@ -1,14 +1,18 @@
 import { XMLParser } from "fast-xml-parser"
 import fs from "fs"
+import { ensureDir } from "fs-extra"
 import gracefulFs from "graceful-fs"
 import { Jimp } from "jimp"
+import * as os from "os"
+import * as pathlib from "path"
+import {
+  DEFAULT_POKEMON_ANIMATION_CONFIG,
+  PokemonAnimations
+} from "../app/public/src/game/components/pokemon-animations"
 import { AnimationType } from "../app/types/Animation"
 import { PokemonTint, SpriteType } from "../app/types/enum/Game"
-import { AnimationConfig, Pkm, PkmIndex } from "../app/types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
-import * as pathlib from "path"
-import * as os from "os"
-import { ensureDir } from "fs-extra"
 
 gracefulFs.gracefulify(fs)
 const args = process.argv.slice(2)
@@ -189,9 +193,15 @@ async function splitIndex(index: string) {
   const pathIndex = index.replaceAll("-", "/")
   const split = pathIndex.split("/")
 
-  const shinyPad = split.length === 1 ? `${pathIndex}/0000/0001` : split.length === 2 ? `${pathIndex}/0001` : pathIndex.split("/").with(2, "0001").join("/")
+  const shinyPad =
+    split.length === 1
+      ? `${pathIndex}/0000/0001`
+      : split.length === 2
+        ? `${pathIndex}/0001`
+        : pathIndex.split("/").with(2, "0001").join("/")
   const conf =
-    AnimationConfig[mapName.get(index) as Pkm] ?? AnimationConfig[Pkm.DEFAULT]
+    PokemonAnimations[mapName.get(index) as Pkm] ??
+    DEFAULT_POKEMON_ANIMATION_CONFIG
   const allPads = [pathIndex]
   if (!conf.shinyUnavailable) allPads.push(shinyPad)
 
