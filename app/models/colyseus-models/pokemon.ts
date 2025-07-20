@@ -3756,6 +3756,15 @@ export class NidoranF extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.POISON) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
+  }
 }
 
 export class Nidorina extends Pokemon {
@@ -3776,6 +3785,15 @@ export class Nidorina extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.POISON) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
+  }
 }
 
 export class Nidoqueen extends Pokemon {
@@ -3795,6 +3813,15 @@ export class Nidoqueen extends Pokemon {
   range = 1
   skill = Ability.VENOSHOCK
   attackSprite = AttackSprite.POISON_MELEE
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.POISON) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
+  }
 }
 
 export class NidoranM extends Pokemon {
@@ -3815,15 +3842,6 @@ export class NidoranM extends Pokemon {
   range = 1
   skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.POISON) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.FIELD)
-    )
-  }
 }
 
 export class Nidorino extends Pokemon {
@@ -3844,15 +3862,6 @@ export class Nidorino extends Pokemon {
   range = 1
   skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.POISON) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.FIELD)
-    )
-  }
 }
 
 export class Nidoking extends Pokemon {
@@ -3872,15 +3881,6 @@ export class Nidoking extends Pokemon {
   range = 1
   skill = Ability.HORN_ATTACK
   attackSprite = AttackSprite.POISON_MELEE
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = DungeonDetails[map]?.synergies
-    return (
-      regionSynergies.includes(Synergy.POISON) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.FIELD)
-    )
-  }
 }
 
 export class Machop extends Pokemon {

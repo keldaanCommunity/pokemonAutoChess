@@ -3175,7 +3175,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.DIGLETT]: [Pkm.ALOLAN_DIGLETT],
   [Pkm.ZORUA]: [Pkm.HISUI_ZORUA],
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
-  [Pkm.NIDORANF]: [Pkm.NIDORANM],
+  [Pkm.NIDORANM]: [Pkm.NIDORANF],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
   [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],

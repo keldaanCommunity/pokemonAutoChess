@@ -52,6 +52,7 @@
 - Galarian Moltres is now 2-range
 - Skarmory spikes no longer hurt Steel Pokémon
 - Buff Fillet Away (Veluza): protect duration 500ms → 1 second
+- Nidoran female is now regional, and Nidoran male is the regular one.
 
 # Changes to Synergies
 
