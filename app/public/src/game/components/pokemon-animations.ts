@@ -84,19 +84,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.WARTORTLE]: {
         attack: AnimationType.Ricochet,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.BLASTOISE]: {
         attack: AnimationType.Ricochet,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.GEODUDE]: {
         attack: AnimationType.Punch,
@@ -120,19 +123,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Appeal,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.MARILL]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Withdraw,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.AZUMARILL]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.ZUBAT]: {
         attack: AnimationType.Shoot,
@@ -567,19 +573,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SEADRA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.KINGDRA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.TRAPINCH]: {
         attack: AnimationType.Bite,
@@ -753,18 +762,21 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Appeal,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.POLIWHIRL]: {
         attack: AnimationType.RearUp,
         ability: AnimationType.Rotate,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.POLITOED]: {
         attack: AnimationType.RearUp,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.ABRA]: {
         attack: AnimationType.Shoot,
@@ -1061,7 +1073,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.RATTATA]: {
         attack: AnimationType.Attack,
@@ -1103,7 +1116,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.LUGIA]: {
         attack: AnimationType.Shoot,
@@ -1215,7 +1229,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swell,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.GROUDON]: {
         attack: AnimationType.Shoot,
@@ -1244,7 +1259,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.JOLTEON]: {
         attack: AnimationType.Shock,
@@ -1508,7 +1524,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Swing,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.TERRAKION]: {
         attack: AnimationType.Strike,
@@ -1533,7 +1550,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.ROTOM]: {
         attack: AnimationType.Emit,
@@ -1566,7 +1584,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.LATIAS]: {
         attack: AnimationType.Shoot,
@@ -1684,7 +1703,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swell,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.PRIMAL_GROUDON]: {
         attack: AnimationType.Attack,
@@ -1915,13 +1935,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Withdraw,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.OMASTAR]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Withdraw,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.TYRUNT]: {
         attack: AnimationType.Attack,
@@ -2254,7 +2276,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.CASTFORM_HAIL]: {
         attack: AnimationType.Shoot,
@@ -2708,13 +2731,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Slam,
         ability: AnimationType.Shoot,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.TENTACRUEL]: {
         attack: AnimationType.Slam,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SNUBULL]: {
         attack: AnimationType.Attack,
@@ -2766,13 +2791,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.FLOATZEL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.MAWILE]: {
         attack: AnimationType.Bite,
@@ -2900,13 +2927,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.DEWOTT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SAMUROTT]: {
         attack: AnimationType.Attack,
@@ -2932,13 +2961,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hurt,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.WAILORD]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hurt,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.DREEPY]: {
         attack: AnimationType.Attack,
@@ -3001,19 +3032,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.BRIONNE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.PRIMARINA]: {
         attack: AnimationType.Charge,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.GOTHITA]: {
         attack: AnimationType.Strike,
@@ -3323,19 +3357,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.FROGADIER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.GRENINJA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hurt,
         emote: AnimationType.Attack,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.TYROGUE]: {
         attack: AnimationType.Attack,
@@ -3573,7 +3610,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.COMBEE]: {
         attack: AnimationType.Attack,
@@ -3803,13 +3841,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Withdraw,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.CLOYSTER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Withdraw,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SENTRET]: {
         attack: AnimationType.Strike,
@@ -4015,12 +4055,16 @@ export const PokemonAnimations: {
     [Pkm.BARBOACH]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Dance
+        emote: AnimationType.Dance,
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.WHISCASH]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Dance
+        emote: AnimationType.Dance,
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SCRAGGY]: {
         attack: AnimationType.Attack,
@@ -4038,13 +4082,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.LUMINEON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.STUNKY]: {
         attack: AnimationType.Attack,
@@ -4190,20 +4236,23 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.DRIZZILE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.INTELEON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Strike,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.TROPIUS]: {
         attack: AnimationType.Attack,
@@ -4402,7 +4451,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Bite,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.SUBSTITUTE]: {
         attack: AnimationType.Attack,
@@ -4473,7 +4523,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Dance,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.MILOTIC]: {
         attack: AnimationType.Shoot,
@@ -4586,13 +4637,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.BUG_MELEE
+        attackSprite: AttackSprite.BUG_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.ARAQUANID]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.BUG_MELEE
+        attackSprite: AttackSprite.BUG_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.ROCKRUFF]: {
         attack: AnimationType.Attack,
@@ -4980,25 +5033,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.GASTRODON_WEST_SEA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SHELLOS_EAST_SEA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.GASTRODON_EAST_SEA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.MUNNA]: {
         attack: AnimationType.Attack,
@@ -5093,19 +5150,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.WISHIWASHI]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.WISHIWASHI_SCHOOL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.PAWMI]: {
         attack: AnimationType.Attack,
@@ -5135,19 +5195,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SEAKING]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.LUVDISC]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.AUDINO]: {
         attack: AnimationType.Shoot,
@@ -5179,24 +5242,30 @@ export const PokemonAnimations: {
     [Pkm.MANTYKE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hover,
-        emote: AnimationType.Strike
+        emote: AnimationType.Strike,
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.MANTINE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hover,
         emote: AnimationType.Strike,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.REMORAID]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
-        emote: AnimationType.RearUp
+        emote: AnimationType.RearUp,
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.OCTILLERY]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.WATER_RANGE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SIGILYPH]: {
         attack: AnimationType.Shoot,
@@ -5387,13 +5456,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Slam,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.KINGLER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Strike,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.ZYGARDE_10]: {
         attack: AnimationType.Attack,
@@ -5785,7 +5856,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.DURALUDON]: {
         attack: AnimationType.Attack,
