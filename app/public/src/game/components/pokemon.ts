@@ -600,6 +600,7 @@ export default class PokemonSprite extends DraggableObject {
 
   fishingAnimation() {
     this.displayAnimation("FISHING")
+    const g = <GameScene>this.scene
     g.animationManager?.animatePokemon(
       this,
       PokemonActionState.HOP,
