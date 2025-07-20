@@ -175,19 +175,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CLEFAIRY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rotate,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CLEFABLE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rotate,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.IGGLYBUFF]: {
         attack: AnimationType.Shoot,
@@ -675,19 +678,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Appeal,
         ability: AnimationType.Dance,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.TOGETIC]: {
         attack: AnimationType.Hover,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.TOGEKISS]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hover,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.DUSKULL]: {
         attack: AnimationType.Shoot,
@@ -1276,7 +1282,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.MEDITITE]: {
         attack: AnimationType.Shoot,
@@ -1494,7 +1501,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.KELDEO]: {
         attack: AnimationType.Swing,
@@ -1582,7 +1590,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.UXIE]: {
         attack: AnimationType.Hover,
@@ -1650,7 +1659,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.HEATRAN]: {
         attack: AnimationType.Shoot,
@@ -2172,19 +2182,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swell,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.FLOETTE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.FLORGES]: {
         attack: AnimationType.Appeal,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.JANGMO_O]: {
         attack: AnimationType.Strike,
@@ -2290,13 +2303,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.HATTREM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.HATTERENE]: {
         attack: AnimationType.Strike,
@@ -2375,13 +2390,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Walk,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.GALARIAN_RAPIDASH]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Walk,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.NINCADA]: {
         attack: AnimationType.MultiScratch,
@@ -2448,19 +2465,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shake,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CHANSEY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.BLISSEY]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.TAPU_KOKO]: {
         attack: AnimationType.Shoot,
@@ -2700,13 +2720,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.GRANBULL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.SEVIPER]: {
         attack: AnimationType.Bite,
@@ -3219,7 +3241,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.TAPU_BULU]: {
         attack: AnimationType.Attack,
@@ -3445,13 +3468,15 @@ export const PokemonAnimations: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.MR_MIME]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ORIGIN_GIRATINA]: {
         attack: AnimationType.Scratch,
@@ -3504,7 +3529,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.YVELTAL]: {
         attack: AnimationType.Attack,
@@ -3657,19 +3683,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Strike,
         emote: AnimationType.Strike,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.TINKATUFF]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Strike,
         emote: AnimationType.Strike,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.TINKATON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Cringe,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.PARAS]: {
         attack: AnimationType.Attack,
@@ -4204,7 +4233,9 @@ export const PokemonAnimations: {
     [Pkm.COMFEY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rotate,
-        emote: AnimationType.Hop
+        emote: AnimationType.Hop,
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CARNIVINE]: {
         attack: AnimationType.Attack,
@@ -4448,7 +4479,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.MORPEKO]: {
         attack: AnimationType.Attack,
@@ -4678,13 +4710,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.BUG_RANGE
+        attackSprite: AttackSprite.BUG_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.RIBOMBEE]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.BUG_RANGE
+        attackSprite: AttackSprite.BUG_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ZANGOOSE]: {
         attack: AnimationType.MultiScratch,
@@ -5625,13 +5659,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.SLURPUFF]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.GULPIN]: {
         attack: AnimationType.Attack,
@@ -5649,82 +5685,94 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.DACHSBUN]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.TailWhip,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.MILCERY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_VANILLA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_RUBY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_MATCHA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_MINT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_LEMON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_SALTED]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_RUBY_SWIRL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_CARAMEL_SWIRL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.ALCREMIE_RAINBOW_SWIRL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Rotate,
         shinyUnavailable: true,
-        attackSprite: AttackSprite.FAIRY_RANGE
+        attackSprite: AttackSprite.FAIRY_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.PECHARUNT]: {
         attack: AnimationType.Charge,
@@ -5961,13 +6009,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Appeal,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.DELCATTY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Appeal,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.GLAMEOW]: {
         attack: AnimationType.Attack,
