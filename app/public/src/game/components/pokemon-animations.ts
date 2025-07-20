@@ -585,19 +585,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.SEALEO]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.WALREIN]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.ARON]: {
         attack: AnimationType.Attack,
@@ -1112,7 +1115,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.SpAttack,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.GALARIAN_ZAPDOS]: {
         attack: AnimationType.Attack,
@@ -1166,7 +1170,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.REGIROCK]: {
         attack: AnimationType.Attack,
@@ -1363,31 +1368,36 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Strike,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GHOST_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.GLALIE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Bite,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GHOST_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.FROSLASS]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GHOST_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.SNOVER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.ABOMASNOW]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.MEGA_ABOMASNOW]: {
         attack: AnimationType.Attack,
@@ -1399,25 +1409,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.VANILLISH]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.VANILLUXE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.GLACEON]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Pose,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.LARVESTA]: {
         attack: AnimationType.Shoot,
@@ -1447,7 +1461,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.ENAMORUS]: {
         attack: AnimationType.Attack,
@@ -1556,7 +1571,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.RESHIRAM]: {
         attack: AnimationType.Attack,
@@ -2176,17 +2192,21 @@ export const PokemonAnimations: {
     [Pkm.CASTFORM_SUN]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.FIRE_RANGE
     },
     [Pkm.CASTFORM_RAIN]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hop,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.WATER_RANGE
     },
     [Pkm.CASTFORM_HAIL]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.CORPHISH]: {
         attack: AnimationType.Bite,
@@ -2658,13 +2678,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.ALOLAN_NINETALES]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.BUIZEL]: {
         attack: AnimationType.Attack,
@@ -2819,13 +2841,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.FROSMOTH]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.WAILMER]: {
         attack: AnimationType.Attack,
@@ -3316,13 +3340,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.DEWGONG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.ALOLAN_GEODUDE]: {
         attack: AnimationType.Punch,
@@ -3715,13 +3741,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.IRON_BUNDLE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.KARTANA]: {
         attack: AnimationType.Attack,
@@ -5424,13 +5452,15 @@ export const PokemonAnimations: {
         hop: AnimationType.Twirl,
         hurt: AnimationType.Idle,
         sleep: AnimationType.Idle,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.CRYOGONAL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.ICE_RANGE
+        attackSprite: AttackSprite.ICE_RANGE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.DRAMPA]: {
         attack: AnimationType.Shoot,
@@ -5454,13 +5484,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.BEARTIC]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ICE_MELEE
+        attackSprite: AttackSprite.ICE_MELEE,
+        hitSprite: HitSprite.ICE_HIT
     },
     [Pkm.NACLI]: {
         attack: AnimationType.Attack,

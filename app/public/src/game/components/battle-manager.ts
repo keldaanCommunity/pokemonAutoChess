@@ -7,7 +7,7 @@ import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
-import { HitSprite } from "../../../../types/Animation"
+import { AttackSpriteScale, HitSprite } from "../../../../types/Animation"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { EffectEnum } from "../../../../types/enum/Effect"
@@ -1164,7 +1164,7 @@ export default class BattleManager {
       `${hitSpriteType}/000.png`
     )
     hitSprite.setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
-    hitSprite.setScale(2, 2)
+    hitSprite.setScale(...(AttackSpriteScale[hitSpriteType] ?? [1, 1]))
     hitSprite.anims.play(hitSpriteType)
     hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       hitSprite.destroy()

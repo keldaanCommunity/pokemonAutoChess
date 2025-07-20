@@ -8,7 +8,7 @@ import {
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
-import { AttackSprite } from "../../../../types/Animation"
+import { AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
@@ -1346,44 +1346,4 @@ export default class PokemonSprite extends DraggableObject {
       boost.destroy()
     })
   }
-}
-
-const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } = {
-  "BUG/melee": [1.5, 1.5],
-  "BUG/range": [2, 2],
-  "DARK/melee": [1.5, 1.5],
-  "DARK/range": [1.5, 1.5],
-  "DRAGON/melee": [2, 2],
-  "DRAGON/range": [2, 2],
-  "DRAGON_GREEN/range": [2, 2],
-  "ELECTRIC/melee": [1, 1],
-  "ELECTRIC/range": [2, 2],
-  "FAIRY/melee": [2, 2],
-  "FAIRY/range": [2, 2],
-  "FIGHTING/melee": [2, 2],
-  "FIGHTING/range": [2, 2],
-  "FIRE/melee": [1.5, 1.5],
-  "FIRE/range": [2, 2],
-  "FLYING/melee": [1, 1],
-  "FLYING/range": [1.5, 1.5],
-  "GHOST/melee": [1, 1],
-  "GHOST/range": [2, 2],
-  "GRASS/melee": [1, 1],
-  "GRASS/range": [3, 3],
-  "GROUND/melee": [1, 1],
-  "ICE/melee": [1, 1],
-  "ICE/range": [2, 2],
-  "NORMAL/melee": [1.5, 1.5],
-  "POISON/melee": [2, 2],
-  "POISON/range": [1, 1],
-  "PSYCHIC/melee": [1.5, 1.5],
-  "PSYCHIC/range": [2, 2],
-  "ROCK/melee": [1.5, 1.5],
-  "ROCK/range": [2, 2],
-  "STEEL/melee": [1.5, 1.5],
-  "STEEL/range": [2, 2],
-  "SOUND/range": [2, 2],
-  "WATER/melee": [1.5, 1.5],
-  "WATER/range": [3, 3],
-  "WILD/melee": [2, 2]
 }
