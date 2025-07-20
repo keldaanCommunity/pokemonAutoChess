@@ -78,6 +78,7 @@
 - Removed TM Retaliate, replaced with TM Counter
 - Removed HM Whirlpool, replaced with HM Dive
 - Buff Smoked Fillet: HP reduction 10 → 5
+- Buff Berserk Gene: confusion duration is now 3 seconds instead of the whole fight
 
 # Gameplay
 

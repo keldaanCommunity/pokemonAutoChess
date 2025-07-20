@@ -2481,7 +2481,7 @@
 		"ROTOM_PHONE": "Le porteur gagne le type GHOST. Après 8 secondes, invoque $t(pkm.ROTOM_DRONE) près du porteur. Lâché quand son porteur est mis sur le banc.",
 		"SILK_SCARF": "Le porteur gagne le type NORMAL et augmente le SHIELD reçu de 50% toutes sources confondues. Lâché quand son porteur est mis sur le banc.",
 		"TINY_MUSHROOM": "Le porteur gagne le type BUG mais réduit les HP max du porteur de 50% lorsqu'il est clôné. Lâché quand son porteur est mis sur le banc.",
-		"BERSERK_GENE": "Le porteur gagne le type MONSTER. Le porteur devient CONFUSION pour tout le combat s'il cumule les KO via la synergie MONSTER. Lâché quand son porteur est mis sur le banc.",
+		"BERSERK_GENE": "Le porteur gagne le type MONSTER. Le porteur devient CONFUSION pendant 3 secondes s'il cumule des KO via la synergie MONSTER. Lâché quand son porteur est mis sur le banc.",
 		"SURFBOARD": "Le porteur gagne le type AQUATIC. Le porteur utilise la capacité $t(ability.SURF) à chaque nouvelle vague, dont le niveau de puissance des dégâts correspond au niveau actuel de la synergie AQUATIC. Lâché quand son porteur est mis sur le banc.",
 		"COOKING_POT": "Le porteur gagne le type GOURMET. Quand le porteur subit BURN, la COOKING_POT chauffe progressivement, ce qui lui confère 10 de SPEED par seconde. Lâché quand son porteur est mis sur le banc.",
 		"MAX_ELIXIR": "Restaure 100% des PP max 1 seconde après le premier lancement de capacité. Lâché quand son porteur est mis sur le banc.",
