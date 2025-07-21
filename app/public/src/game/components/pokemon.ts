@@ -476,7 +476,8 @@ export default class PokemonSprite extends DraggableObject {
     targetX: number,
     targetY: number,
     delayBeforeShoot: number,
-    travelTime: number
+    travelTime: number,
+    onComplete?: () => void
   ) {
     const isRange = this.attackSprite.endsWith("/range")
     const startX = isRange ? this.positionX : targetX
@@ -517,6 +518,7 @@ export default class PokemonSprite extends DraggableObject {
         projectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
           projectile.destroy()
         )
+        onComplete?.()
       } else {
         projectile.anims.play({ key: attackSprite })
         const coordinatesTarget = transformEntityCoordinates(
@@ -535,7 +537,10 @@ export default class PokemonSprite extends DraggableObject {
           ease: "Linear",
           duration: min(250)(travelTime),
           delay: delayBeforeShoot - LATENCY_COMPENSATION,
-          onComplete: () => projectile.destroy(),
+          onComplete: () => {
+            projectile.destroy()
+            onComplete?.()
+          },
           onStop: () => projectile.destroy(),
           onStart: () => projectile.setVisible(true)
         })

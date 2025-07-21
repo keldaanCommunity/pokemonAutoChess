@@ -3,7 +3,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
 import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
 import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
@@ -11,7 +11,7 @@ import { OrientationVector } from "../../../../utils/orientation"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
-import { displayAbility } from "../components/abilities-animations"
+import { displayAbility, displayHit } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
 import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "../components/pokemon-animations"
@@ -376,13 +376,25 @@ export class DebugScene extends Phaser.Scene {
   }
 
   addAttackAnim() {
-    const attack = () =>
-      this.pokemon?.attackAnimation(
+    const attack = () => {
+      if (!this.pokemon) return
+      this.pokemon.attackAnimation(
         this.pokemon.targetX || 0,
         this.pokemon.targetY || 0,
         0,
-        1000
+        1000,
+        () => {
+          if (!this.pokemon) return
+          displayHit(
+            this,
+            PokemonAnimations[PkmByIndex[this.pokemon.index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+            this.pokemon.targetX || 0,
+            this.pokemon.targetY || 0
+          )
+        }
       )
+    }
+    attack()
     this.attackAnimInterval = setInterval(attack, 2000)
   }
 
