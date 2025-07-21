@@ -76,10 +76,6 @@ export function displayAbility(
   }
 
   switch (skill) {
-    case Ability.AGILITY:
-      addAbilitySprite(skill, coordinatesTarget, true)?.setScale(3)
-      break
-
     case Ability.FIRE_BLAST:
       addAbilitySprite(skill, coordinatesTarget, true)?.setScale(3)
       break

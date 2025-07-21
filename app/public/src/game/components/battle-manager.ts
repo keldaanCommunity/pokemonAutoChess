@@ -30,7 +30,7 @@ import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import { displayAbility } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
-import { PokemonAnimations } from "./pokemon-animations"
+import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
 
 export default class BattleManager {
@@ -1156,16 +1156,17 @@ export default class BattleManager {
     })
   }
 
-  displayHit(x: number, y: number, hitSpriteType = HitSprite.NORMAL_HIT) {
+  displayHit(x: number, y: number, hitSpriteType: HitSprite | HitSprite[]) {
+    const spriteName = Array.isArray(hitSpriteType) ? pickRandomIn(hitSpriteType) : hitSpriteType
     const hitSprite = this.scene.add.sprite(
       x + (Math.random() - 0.5) * 30,
       y + (Math.random() - 0.5) * 30,
       "attacks",
-      `${hitSpriteType}/000.png`
+      `${spriteName}/000.png`
     )
     hitSprite.setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
-    hitSprite.setScale(...(AttackSpriteScale[hitSpriteType] ?? [1, 1]))
-    hitSprite.anims.play(hitSpriteType)
+    hitSprite.setScale(...(AttackSpriteScale[spriteName] ?? [1, 1]))
+    hitSprite.anims.play(spriteName)
     hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       hitSprite.destroy()
     })
@@ -1195,7 +1196,7 @@ export default class BattleManager {
       this.displayHit(
         coordinates[0],
         coordinates[1],
-        PokemonAnimations[PkmByIndex[index]]?.hitSprite
+        PokemonAnimations[PkmByIndex[index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite
       )
     }
   }

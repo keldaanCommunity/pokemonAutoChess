@@ -243,7 +243,7 @@ export type PokemonAnimationConfig = {
   shinyUnavailable?: boolean
   noShadow?: boolean
   attackSprite?: AttackSprite
-  hitSprite?: HitSprite
+  hitSprite?: HitSprite | HitSprite[]
 }
 
 export enum AttackSprite {
@@ -288,6 +288,9 @@ export enum AttackSprite {
 
 export enum HitSprite {
   NORMAL_HIT = "NORMAL/hit",
+  NORMAL_HIT2 = "NORMAL/hit2",
+  NORMAL_HIT3 = "NORMAL/hit3",
+  NORMAL_HIT4 = "NORMAL/hit4",
   ICE_HIT = "ICE/hit",
   GRASS_HIT = "GRASS/hit",
   DARK_HIT = "DARK/hit",
@@ -296,13 +299,20 @@ export enum HitSprite {
   FIRE_HIT = "FIRE/hit",
   GROUND_HIT = "GROUND/hit",
   ROCK_HIT = "ROCK/hit",
-  SOUND_HIT = "SOUND/hit"
+  SOUND_HIT = "SOUND/hit",
+  ELECTRIC_HIT = "ELECTRIC/hit",
+  STEEL_HIT = "STEEL/hit",
+  FIGHTING_HIT = "FIGHTING/hit",
+  FLYING_HIT = "FLYING/hit",
+  BUG_HIT = "BUG/hit",
+  POISON_HIT = "POISON/hit",
 }
 
 
 export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number, number] } = {
   "BUG/melee": [1.5, 1.5],
   "BUG/range": [2, 2],
+  "BUG/hit": [1.5, 1.5],
   "DARK/melee": [1.5, 1.5],
   "DARK/range": [1.5, 1.5],
   "DARK/hit": [2, 2],
@@ -311,16 +321,19 @@ export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number,
   "DRAGON_GREEN/range": [2, 2],
   "ELECTRIC/melee": [1, 1],
   "ELECTRIC/range": [2, 2],
+  "ELECTRIC/hit": [1, 1],
   "FAIRY/melee": [2, 2],
   "FAIRY/range": [2, 2],
   "FAIRY/hit": [1, 1],
   "FIGHTING/melee": [2, 2],
   "FIGHTING/range": [2, 2],
+  "FIGHTING/hit": [1, 1],
   "FIRE/melee": [1.5, 1.5],
   "FIRE/range": [2, 2],
   "FIRE/hit": [1, 1],
   "FLYING/melee": [1, 1],
   "FLYING/range": [1.5, 1.5],
+  "FLYING/hit": [1, 1],
   "GHOST/melee": [1, 1],
   "GHOST/range": [2, 2],
   "GRASS/melee": [1, 1],
@@ -333,8 +346,12 @@ export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number,
   "ICE/hit": [2, 2],
   "NORMAL/melee": [1.5, 1.5],
   "NORMAL/hit": [2, 2],
+  "NORMAL/hit2": [2, 2],
+  "NORMAL/hit3": [2, 2],
+  "NORMAL/hit4": [2, 2],
   "POISON/melee": [2, 2],
   "POISON/range": [1, 1],
+  "POISON/hit": [1.5, 1.5],
   "PSYCHIC/melee": [1.5, 1.5],
   "PSYCHIC/range": [2, 2],
   "ROCK/melee": [1.5, 1.5],
@@ -342,8 +359,9 @@ export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number,
   "ROCK/hit": [1, 1],
   "STEEL/melee": [1.5, 1.5],
   "STEEL/range": [2, 2],
+  "STEEL/hit": [1, 1],
   "SOUND/range": [2, 2],
-  "SOUND/hit": [2, 2],
+  "SOUND/hit": [1, 1],
   "WATER/melee": [1.5, 1.5],
   "WATER/range": [3, 3],
   "WATER/hit": [2, 2],
