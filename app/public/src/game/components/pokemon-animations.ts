@@ -439,37 +439,43 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Twirl,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.MARSHTOMP]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.SWAMPERT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.TURTWIG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rumble,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.GROTLE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rumble,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.TORTERRA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rumble,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.CHIMCHAR]: {
         attack: AnimationType.MultiStrike,
@@ -947,19 +953,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_MELEE
+        attackSprite: AttackSprite.DRAGON_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.GABITE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_MELEE
+        attackSprite: AttackSprite.DRAGON_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.GARCHOMP]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_MELEE
+        attackSprite: AttackSprite.DRAGON_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.ELEKID]: {
         attack: AnimationType.Punch,
@@ -1259,7 +1268,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Emit,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.RAYQUAZA]: {
         attack: AnimationType.Shoot,
@@ -1341,13 +1351,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.CAMERUPT]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.MEGA_CAMERUPT]: {
         attack: AnimationType.Attack,
@@ -1527,7 +1539,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.THUNDURUS]: {
         attack: AnimationType.Attack,
@@ -1799,19 +1812,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.KROKOROK]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.KROOKODILE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SOLOSIS]: {
         attack: AnimationType.Shoot,
@@ -2156,13 +2172,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.MAROWAK]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.ALOLAN_MAROWAK]: {
         attack: AnimationType.Strike,
@@ -2193,19 +2211,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.PALPITOAD]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SEISMITOAD]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SEWADDLE]: {
         attack: AnimationType.Attack,
@@ -3133,13 +3154,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Attack,
         emote: AnimationType.LostBalance,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.SANDSLASH]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Attack,
         emote: AnimationType.DeepBreath,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.ALOLAN_SANDSHREW]: {
         attack: AnimationType.Strike,
@@ -3351,25 +3374,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.DigIn,
         emote: AnimationType.Special0,
-        attackSprite: AttackSprite.GROUND_MELEE
-    },
-    [Pkm.ALOLAN_DIGLETT]: {
-        attack: AnimationType.Attack,
-        ability: AnimationType.DigIn,
-        emote: AnimationType.Special0,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.DUGTRIO]: {
         attack: AnimationType.Attack,
         ability: AnimationType.DigIn,
         emote: AnimationType.Special0,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
+    },
+    [Pkm.ALOLAN_DIGLETT]: {
+        attack: AnimationType.Attack,
+        ability: AnimationType.DigIn,
+        emote: AnimationType.Special0,
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.ALOLAN_DUGTRIO]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Walk,
         emote: AnimationType.Hop,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.ROWLET]: {
         attack: AnimationType.Attack,
@@ -3926,13 +3953,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.FURRET]: {
         attack: AnimationType.Strike,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.SPECTRIER]: {
         attack: AnimationType.Attack,
@@ -3944,7 +3973,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.DELIBIRD]: {
         attack: AnimationType.Attack,
@@ -4279,13 +4309,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.HIPPODOWN]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.GROUND_MELEE
+        attackSprite: AttackSprite.GROUND_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.WINGULL]: {
         attack: AnimationType.Attack,
@@ -4921,7 +4953,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Swing,
         emote: AnimationType.Attack,
-        attackSprite: AttackSprite.ROCK_RANGE
+        attackSprite: AttackSprite.ROCK_RANGE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.BURMY_TRASH]: {
         attack: AnimationType.Shoot,
@@ -4957,13 +4990,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.QUAGSIRE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.PALDEA_WOOPER]: {
         attack: AnimationType.Attack,
@@ -5075,13 +5110,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Tumble,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.GOLURK]: {
         attack: AnimationType.Strike,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.TRUBBISH]: {
         attack: AnimationType.Attack,
@@ -5566,12 +5603,13 @@ export const PokemonAnimations: {
     [Pkm.ZYGARDE_10]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.RearUp
+        emote: AnimationType.RearUp,
     },
     [Pkm.ZYGARDE_50]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
-        emote: AnimationType.Charge
+        emote: AnimationType.Charge,
+        attackSprite: AttackSprite.DRAGON_GREEN_RANGE
     },
     [Pkm.ZYGARDE_100]: {
         attack: AnimationType.Attack,
