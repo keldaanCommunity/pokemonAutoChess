@@ -306,6 +306,7 @@ export enum HitSprite {
   FLYING_HIT = "FLYING/hit",
   BUG_HIT = "BUG/hit",
   POISON_HIT = "POISON/hit",
+  WILD_HIT = "WILD/hit",
 }
 
 
@@ -365,5 +366,6 @@ export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number,
   "WATER/melee": [1.5, 1.5],
   "WATER/range": [3, 3],
   "WATER/hit": [2, 2],
-  "WILD/melee": [2, 2]
+  "WILD/melee": [2, 2],
+  "WILD/hit": [1, 1]
 }

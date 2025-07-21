@@ -1161,25 +1161,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.ALOLAN_RATTATA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.TailWhip,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.RATICATE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.ALOLAN_RATICATE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.TailWhip,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.DARK_HIT
     },
     [Pkm.SPEAROW]: {
         attack: AnimationType.Shoot,
@@ -2875,13 +2879,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.MIGHTYENA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.BRONZOR]: {
         attack: AnimationType.Attack,
@@ -4064,7 +4070,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Slice,
         ability: AnimationType.Attack,
         emote: AnimationType.Slice,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.BUG_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.NATU]: {
         attack: AnimationType.Jab,
@@ -4624,13 +4631,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.LINOONE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.GALARIAN_ZIGZAGOON]: {
         attack: AnimationType.Attack,
@@ -4860,53 +4869,64 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.MultiScratch,
         emote: AnimationType.Appeal,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.URSARING]: {
         attack: AnimationType.Attack,
         ability: AnimationType.MultiStrike,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.URSALUNA]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
-        emote: AnimationType.RearUp
+        emote: AnimationType.RearUp,
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.URSALUNA_BLOODMOON]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.AIPOM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Dance,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.AMBIPOM]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.DEERLING]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.SAWSBUCK]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.LICKITUNG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Lick,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.NORMAL_HIT
     },
     [Pkm.LICKILICKY]: {
         attack: AnimationType.Strike,
@@ -4918,13 +4938,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_RANGE
+        attackSprite: AttackSprite.ROCK_RANGE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.WATCHOG]: {
         attack: AnimationType.MultiScratch,
         ability: AnimationType.Rotate,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_RANGE
+        attackSprite: AttackSprite.ROCK_RANGE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.SPINARAK]: {
         attack: AnimationType.Shoot,
@@ -4958,31 +4980,36 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.DeepBreath,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.LYCANROC_DAY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.LYCANROC_DUSK]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.LYCANROC_NIGHT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.QuickStrike,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.DRUDDIGON]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE
+        attackSprite: AttackSprite.WILD_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.COSMOG]: {
         attack: AnimationType.Attack,
@@ -5087,7 +5114,8 @@ export const PokemonAnimations: {
         attack: AnimationType.MultiScratch,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.NICKIT]: {
         attack: AnimationType.Attack,
@@ -5803,13 +5831,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.FIRE_MELEE
+        attackSprite: AttackSprite.FIRE_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.DARMANITAN]: {
         attack: AnimationType.Attack,
         ability: AnimationType.QuickStrike,
         emote: AnimationType.Rumble,
-        attackSprite: AttackSprite.FIRE_MELEE
+        attackSprite: AttackSprite.FIRE_MELEE,
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.DARMANITAN_ZEN]: {
         attack: AnimationType.Attack,
@@ -6555,7 +6585,7 @@ export const PokemonAnimations: {
         emote: AnimationType.Shoot,
         shinyUnavailable: true,
         attackSprite: AttackSprite.POISON_MELEE,
-        hitSprite: HitSprite.FIGHTING_HIT
+        hitSprite: HitSprite.WILD_HIT
     },
     [Pkm.MUNKIDORI]: {
         attack: AnimationType.Attack,
