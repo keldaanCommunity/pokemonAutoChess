@@ -229,3 +229,117 @@ export const AnimationComplete: { [key in AnimationType]: boolean } = {
   [AnimationType.Special30]: false,
   [AnimationType.Special31]: false
 }
+
+export type PokemonAnimationConfig = {
+  idle?: AnimationType
+  walk?: AnimationType
+  attack?: AnimationType
+  ability?: AnimationType
+  emote?: AnimationType
+  hop?: AnimationType
+  hurt?: AnimationType
+  sleep?: AnimationType
+  eat?: AnimationType
+  shinyUnavailable?: boolean
+  noShadow?: boolean
+  attackSprite?: AttackSprite
+  hitSprite?: HitSprite
+}
+
+export enum AttackSprite {
+  BUG_MELEE = "BUG/melee",
+  BUG_RANGE = "BUG/range",
+  DARK_MELEE = "DARK/melee",
+  DARK_RANGE = "DARK/range",
+  DRAGON_MELEE = "DRAGON/melee",
+  DRAGON_RANGE = "DRAGON/range",
+  DRAGON_GREEN_RANGE = "DRAGON_GREEN/range",
+  ELECTRIC_MELEE = "ELECTRIC/melee",
+  ELECTRIC_RANGE = "ELECTRIC/range",
+  FAIRY_MELEE = "FAIRY/melee",
+  FAIRY_RANGE = "FAIRY/range",
+  FIGHTING_MELEE = "FIGHTING/melee",
+  FIGHTING_RANGE = "FIGHTING/range",
+  FIRE_MELEE = "FIRE/melee",
+  FIRE_RANGE = "FIRE/range",
+  FLYING_MELEE = "FLYING/melee",
+  FLYING_RANGE = "FLYING/range",
+  GHOST_MELEE = "GHOST/melee",
+  GHOST_RANGE = "GHOST/range",
+  GRASS_MELEE = "GRASS/melee",
+  GRASS_RANGE = "GRASS/range",
+  GROUND_MELEE = "GROUND/melee",
+  ICE_MELEE = "ICE/melee",
+  ICE_RANGE = "ICE/range",
+  NORMAL_MELEE = "NORMAL/melee",
+  POISON_MELEE = "POISON/melee",
+  POISON_RANGE = "POISON/range",
+  PSYCHIC_MELEE = "PSYCHIC/melee",
+  PSYCHIC_RANGE = "PSYCHIC/range",
+  WATER_MELEE = "WATER/melee",
+  WATER_RANGE = "WATER/range",
+  ROCK_MELEE = "ROCK/melee",
+  ROCK_RANGE = "ROCK/range",
+  SOUND_RANGE = "SOUND/range",
+  STEEL_MELEE = "STEEL/melee",
+  STEEL_RANGE = "STEEL/range",
+  WILD_MELEE = "WILD/melee"
+}
+
+export enum HitSprite {
+  NORMAL_HIT = "NORMAL/hit",
+  ICE_HIT = "ICE/hit",
+  GRASS_HIT = "GRASS/hit",
+  DARK_HIT = "DARK/hit",
+  FAIRY_HIT = "FAIRY/hit",
+  WATER_HIT = "WATER/hit",
+  FIRE_HIT = "FIRE/hit"
+}
+
+
+export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number, number] } = {
+  "BUG/melee": [1.5, 1.5],
+  "BUG/range": [2, 2],
+  "DARK/melee": [1.5, 1.5],
+  "DARK/range": [1.5, 1.5],
+  "DARK/hit": [2, 2],
+  "DRAGON/melee": [2, 2],
+  "DRAGON/range": [2, 2],
+  "DRAGON_GREEN/range": [2, 2],
+  "ELECTRIC/melee": [1, 1],
+  "ELECTRIC/range": [2, 2],
+  "FAIRY/melee": [2, 2],
+  "FAIRY/range": [2, 2],
+  "FAIRY/hit": [1, 1],
+  "FIGHTING/melee": [2, 2],
+  "FIGHTING/range": [2, 2],
+  "FIRE/melee": [1.5, 1.5],
+  "FIRE/range": [2, 2],
+  "FIRE/hit": [1, 1],
+  "FLYING/melee": [1, 1],
+  "FLYING/range": [1.5, 1.5],
+  "GHOST/melee": [1, 1],
+  "GHOST/range": [2, 2],
+  "GRASS/melee": [1, 1],
+  "GRASS/range": [3, 3],
+  "GRASS/hit": [1, 1],
+  "GROUND/melee": [1, 1],
+  "ICE/melee": [1, 1],
+  "ICE/range": [2, 2],
+  "ICE/hit": [2, 2],
+  "NORMAL/melee": [1.5, 1.5],
+  "NORMAL/hit": [2, 2],
+  "POISON/melee": [2, 2],
+  "POISON/range": [1, 1],
+  "PSYCHIC/melee": [1.5, 1.5],
+  "PSYCHIC/range": [2, 2],
+  "ROCK/melee": [1.5, 1.5],
+  "ROCK/range": [2, 2],
+  "STEEL/melee": [1.5, 1.5],
+  "STEEL/range": [2, 2],
+  "SOUND/range": [2, 2],
+  "WATER/melee": [1.5, 1.5],
+  "WATER/range": [3, 3],
+  "WATER/hit": [2, 2],
+  "WILD/melee": [2, 2]
+}

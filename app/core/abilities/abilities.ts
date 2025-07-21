@@ -7900,7 +7900,6 @@ export class TransformStrategy extends AbilityStrategy {
       pokemon.critChance = target.critChance
       pokemon.critPower = target.critPower
       pokemon.range = target.range
-      pokemon.attackSprite = target.attackSprite
       pokemon.shiny = target.shiny
       pokemon.emotion = target.emotion
       pokemon.dodge = target.dodge

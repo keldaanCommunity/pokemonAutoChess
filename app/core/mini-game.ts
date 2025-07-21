@@ -8,20 +8,19 @@ import {
   Events,
   Vector
 } from "matter-js"
-import { FloatingItem } from "../../models/colyseus-models/floating-item"
-import Player from "../../models/colyseus-models/player"
-import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
-import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
-import GameRoom from "../../rooms/game-room"
-import GameState from "../../rooms/states/game-state"
-import { Transfer } from "../../types"
+import { FloatingItem } from "../models/colyseus-models/floating-item"
+import Player from "../models/colyseus-models/player"
+import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
+import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
+import GameRoom from "../rooms/game-room"
+import GameState from "../rooms/states/game-state"
+import { Transfer } from "../types"
 import {
   ItemCarouselStages,
-  PortalCarouselStages,
-  SynergyTriggers
-} from "../../types/Config"
-import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { PokemonActionState } from "../../types/enum/Game"
+  PortalCarouselStages
+} from "../types/Config"
+import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
+import { PokemonActionState } from "../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -30,11 +29,11 @@ import {
   Item,
   ItemComponents,
   SynergyStones
-} from "../../types/enum/Item"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { Synergy } from "../../types/enum/Synergy"
-import { clamp, min } from "../../utils/number"
-import { getOrientation } from "../../utils/orientation"
+} from "../types/enum/Item"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
+import { Synergy } from "../types/enum/Synergy"
+import { clamp, min } from "../utils/number"
+import { getOrientation } from "../utils/orientation"
 import {
   chance,
   pickNRandomIn,
@@ -42,14 +41,14 @@ import {
   randomBetween,
   randomWeighted,
   shuffleArray
-} from "../../utils/random"
-import { keys, values } from "../../utils/schemas"
-import { giveRandomEgg } from "../eggs"
+} from "../utils/random"
+import { keys, values } from "../utils/schemas"
+import { giveRandomEgg } from "./eggs"
 import {
   TownEncounterSellPrice,
   TownEncounters,
   TownEncountersByStage
-} from "../town-encounters"
+} from "./town-encounters"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -732,7 +731,7 @@ export class MiniGame {
         if (item && player && !player.isBot) {
           if (item.name === Item.EGG_FOR_SELL) {
             giveRandomEgg(player, false)
-          } else if(item.name === Item.TREASURE_BOX){
+          } else if (item.name === Item.TREASURE_BOX) {
             player.items.push(...pickNRandomIn(ItemComponents, 2))
           } else {
             player.items.push(item.name)

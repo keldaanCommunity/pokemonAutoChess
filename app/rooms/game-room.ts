@@ -5,7 +5,7 @@ import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
-import { MiniGame } from "../core/matter/mini-game"
+import { MiniGame } from "../core/mini-game"
 import {
   clearPendingGame,
   clearPendingGamesOnRoomDispose,
