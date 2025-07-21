@@ -385,11 +385,17 @@ export class DebugScene extends Phaser.Scene {
         1000,
         () => {
           if (!this.pokemon) return
+          const [x, y] = transformEntityCoordinates(
+            this.pokemon.targetX || 0,
+            this.pokemon.targetY || 0,
+            false
+          )
           displayHit(
             this,
             PokemonAnimations[PkmByIndex[this.pokemon.index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
-            this.pokemon.targetX || 0,
-            this.pokemon.targetY || 0
+            x,
+            y,
+            false
           )
         }
       )

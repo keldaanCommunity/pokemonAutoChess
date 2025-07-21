@@ -967,7 +967,7 @@ export default class BattleManager {
 
       this.scene.tweens.add({
         targets: sprite,
-        alpha: 1,
+        alpha: 0.8,
         duration: 500
       })
     }
@@ -1182,6 +1182,7 @@ export default class BattleManager {
         PokemonAnimations[PkmByIndex[index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
         coordinates[0],
         coordinates[1],
+        this.flip
       )
     }
   }

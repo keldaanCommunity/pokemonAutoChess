@@ -29,8 +29,9 @@ import PokemonSprite from "./pokemon"
 export function displayHit(
   scene: GameScene | DebugScene,
   hitSpriteTypes: HitSprite | HitSprite[],
-  targetX: number,
-  targetY: number,
+  x: number,
+  y: number,
+  flip: boolean
 ) {
   const hitSpriteType = Array.isArray(hitSpriteTypes) ? pickRandomIn(hitSpriteTypes) : hitSpriteTypes
   const frame = `${hitSpriteType}/000.png`
@@ -48,15 +49,16 @@ export function displayHit(
     return null
   }
 
-  const [x, y] = transformEntityCoordinates(targetX, targetY, false)
   const hitSprite = scene.add.sprite(
     x + (Math.random() - 0.5) * 30,
     y + (Math.random() - 0.5) * 30,
     "attacks",
     `${hitSpriteType}/000.png`
   )
-  hitSprite.setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
-  hitSprite.setScale(...(AttackSpriteScale[hitSpriteType] ?? [1, 1]))
+  hitSprite
+    .setOrigin(0.5, 0.5)
+    .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+    .setScale(...(AttackSpriteScale[hitSpriteType] ?? [1, 1]))
   hitSprite.anims.play(hitSpriteType)
   hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
     hitSprite.destroy()

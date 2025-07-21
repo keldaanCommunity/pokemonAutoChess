@@ -1165,7 +1165,7 @@ export const PokemonAnimations: {
     },
     [Pkm.RATTATA]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Charge,
+        ability: AnimationType.TailWhip,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WILD_MELEE,
         hitSprite: HitSprite.WILD_HIT
