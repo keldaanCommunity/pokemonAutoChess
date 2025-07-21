@@ -151,19 +151,22 @@ export const PokemonAnimations: {
         ability: AnimationType.Attack,
         emote: AnimationType.Charge,
         eat: AnimationType.Sleep,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.GOLBAT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Hover,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CROBAT]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.MAREEP]: {
         attack: AnimationType.Emit,
@@ -208,19 +211,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Sing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.WIGGLYTUFF]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Sleep,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.JIGGLYPUFF]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.DeepBreath,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CATERPIE]: {
         attack: AnimationType.Attack,
@@ -1853,12 +1859,6 @@ export const PokemonAnimations: {
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.FIRE_RANGE
     },
-    [Pkm.SWABLU]: {
-        attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
-        emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_RANGE
-    },
     [Pkm.ODDISH]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
@@ -2193,19 +2193,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Appeal,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.LOUDRED]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Appeal,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.EXPLOUD]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.TYMPOLE]: {
         attack: AnimationType.Attack,
@@ -2306,24 +2309,37 @@ export const PokemonAnimations: {
     [Pkm.MELOETTA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.PIROUETTE_MELOETTA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
-        emote: AnimationType.Twirl
+        emote: AnimationType.Twirl,
+        attackSprite: AttackSprite.FIGHTING_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
+    },
+    [Pkm.SWABLU]: {
+        attack: AnimationType.Shoot,
+        ability: AnimationType.Hop,
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.DRAGON_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.ALTARIA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_RANGE
+        attackSprite: AttackSprite.DRAGON_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.MEGA_ALTARIA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_RANGE
+        attackSprite: AttackSprite.DRAGON_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CASTFORM]: {
         attack: AnimationType.Shoot,
@@ -2768,13 +2784,14 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE
     },
     [Pkm.BRONZONG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Emit,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.DRAGON_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.DRIFLOON]: {
         attack: AnimationType.Shoot,
@@ -2908,7 +2925,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Appeal,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.GOOMY]: {
         attack: AnimationType.Attack,
@@ -4000,13 +4018,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Emit,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CHIMECHO]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Twirl,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.ALOLAN_RAICHU]: {
         attack: AnimationType.Attack,
@@ -4063,25 +4083,29 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Hover,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.SWOOBAT]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
         emote: AnimationType.Hover,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CLAUNCHER]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Double,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CLAWITZER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Double,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.YANMA]: {
         attack: AnimationType.Attack,
@@ -4297,13 +4321,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Emit,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.BUG_MELEE
+        attackSprite: AttackSprite.BUG_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.KRICKETUNE]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.BUG_MELEE
+        attackSprite: AttackSprite.BUG_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.HIPPOPOTAS]: {
         attack: AnimationType.Attack,
@@ -4467,7 +4493,7 @@ export const PokemonAnimations: {
         ability: AnimationType.Double,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.DARK_MELEE,
-        hitSprite: HitSprite.DARK_HIT
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.PHEROMOSA]: {
         attack: AnimationType.Kick,
@@ -4553,7 +4579,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shock,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ELECTRIC_MELEE
+        attackSprite: AttackSprite.ELECTRIC_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.BRUXISH]: {
         attack: AnimationType.Bite,
@@ -5339,7 +5366,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Pose,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.SOUND_RANGE
+        attackSprite: AttackSprite.SOUND_RANGE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.PETILIL]: {
         attack: AnimationType.Attack,
@@ -6153,19 +6181,25 @@ export const PokemonAnimations: {
     [Pkm.GROOKEY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
-        emote: AnimationType.Strike
+        emote: AnimationType.Strike,
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.THWACKEY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Sing,
-        shinyUnavailable: true
+        shinyUnavailable: true,
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.RILLABOOM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Sing,
-        shinyUnavailable: true
+        shinyUnavailable: true,
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.KUBFU]: {
         attack: AnimationType.Attack,
@@ -6189,7 +6223,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Bite,
         ability: AnimationType.Shoot,
         emote: AnimationType.Withdraw,
-        attackSprite: AttackSprite.FAIRY_MELEE
+        attackSprite: AttackSprite.FAIRY_MELEE,
+        hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.INDEEDEE_MALE]: {
         attack: AnimationType.Attack,
