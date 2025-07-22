@@ -790,19 +790,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shake,
         ability: AnimationType.Double,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.LOMBRE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Double,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.LUDICOLO]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Emit,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.SHINX]: {
         attack: AnimationType.Attack,
@@ -849,19 +852,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.KADABRA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.SpAttack,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.ALAKAZAM]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.SpAttack,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GASTLY]: {
         attack: AnimationType.Shoot,
@@ -945,19 +951,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Appeal,
         ability: AnimationType.Pull,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.KIRLIA]: {
         attack: AnimationType.Twirl,
         ability: AnimationType.Pose,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GARDEVOIR]: {
         attack: AnimationType.Appeal,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GALLADE]: {
         attack: AnimationType.Strike,
@@ -989,19 +998,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.METANG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.MultiScratch,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.METAGROSS]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Ricochet,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GIBLE]: {
         attack: AnimationType.Attack,
@@ -1273,7 +1285,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FLYING_RANGE
+        attackSprite: AttackSprite.FLYING_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.DIALGA]: {
         attack: AnimationType.Scratch,
@@ -1384,7 +1397,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UMBREON]: {
         attack: AnimationType.Attack,
@@ -1411,13 +1425,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MEDICHAM]: {
         attack: AnimationType.Charge,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.NUMEL]: {
         attack: AnimationType.Shoot,
@@ -1471,19 +1487,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SLOWBRO]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shake,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.SLOWKING]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.WATER_MELEE
+        attackSprite: AttackSprite.WATER_MELEE,
+        hitSprite: HitSprite.WATER_HIT
     },
     [Pkm.BELLSPROUT]: {
         attack: AnimationType.Strike,
@@ -1709,19 +1728,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FIRE_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.LATIOS]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.FIRE_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MESPRIT]: {
         attack: AnimationType.Hover,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.AZELF]: {
         attack: AnimationType.Shoot,
@@ -1734,13 +1756,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Hover,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.MEWTWO]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Punch,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.KYUREM]: {
         attack: AnimationType.Shoot,
@@ -1767,7 +1791,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.VICTINI]: {
         attack: AnimationType.Shoot,
@@ -1780,7 +1805,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Pose,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.ARCEUS]: {
         attack: AnimationType.Attack,
@@ -1909,19 +1935,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.DeepBreath,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.DUOSION]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.SpAttack,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.REUNICLUS]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MEGA_RAYQUAZA]: {
         attack: AnimationType.Attack,
@@ -2710,7 +2739,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Hop,
         ability: AnimationType.Charge,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.STAKATAKA]: {
         attack: AnimationType.Strike,
@@ -3088,7 +3118,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.BOUNSWEET]: {
         attack: AnimationType.Attack,
@@ -3283,19 +3314,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Strike,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GOTHORITA]: {
         attack: AnimationType.Appeal,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GOTHITELLE]: {
         attack: AnimationType.Appeal,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.SANDSHREW]: {
         attack: AnimationType.Strike,
@@ -3341,169 +3375,197 @@ export const PokemonAnimations: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_B]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_C]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_D]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_E]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_F]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_G]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_H]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_I]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_J]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_K]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_L]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_M]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_N]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_O]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_P]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_Q]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_R]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_S]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_T]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_U]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_V]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_W]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_X]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_Y]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_Z]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_QUESTION]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.UNOWN_EXCLAMATION]: {
         attack: AnimationType.Rotate,
         ability: AnimationType.Rotate,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.TAPU_FINI]: {
         attack: AnimationType.Attack,
@@ -3922,13 +3984,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.FIGHTING_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.WOBBUFFET]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Withdraw,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.LUNATONE]: {
         attack: AnimationType.Attack,
@@ -4100,13 +4164,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Jab,
         ability: AnimationType.Charge,
         emote: AnimationType.Hover,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.XATU]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GLIGAR]: {
         attack: AnimationType.Strike,
@@ -4230,13 +4296,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.STARMIE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Attack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.NOSEPASS]: {
         attack: AnimationType.Attack,
@@ -4429,28 +4497,37 @@ export const PokemonAnimations: {
     [Pkm.NECROZMA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.ULTRA_NECROZMA]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.RearUp,
-        emote: AnimationType.Charge
+        emote: AnimationType.Charge,
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.CHERUBI]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shake,
-        attackSprite: AttackSprite.GRASS_RANGE
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.CHERRIM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Shake
+        emote: AnimationType.Shake,
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.CHERRIM_SUNLIGHT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Dance
+        emote: AnimationType.Dance,
+        attackSprite: AttackSprite.GRASS_RANGE,
+        hitSprite: HitSprite.GRASS_HIT
     },
     [Pkm.MISDREAVUS]: {
         attack: AnimationType.Shoot,
@@ -4470,15 +4547,13 @@ export const PokemonAnimations: {
         attack: AnimationType.Jab,
         ability: AnimationType.Charge,
         emote: AnimationType.MultiStrike,
-        attackSprite: AttackSprite.FLYING_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.FLYING_MELEE
     },
     [Pkm.DODRIO]: {
         attack: AnimationType.Jab,
         ability: AnimationType.Charge,
         emote: AnimationType.MultiStrike,
-        attackSprite: AttackSprite.FLYING_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.FLYING_MELEE
     },
     [Pkm.XURKITREE]: {
         attack: AnimationType.Shoot,
@@ -4784,7 +4859,7 @@ export const PokemonAnimations: {
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
         attackSprite: AttackSprite.WATER_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.SUBSTITUTE]: {
         attack: AnimationType.Attack,
@@ -4926,36 +5001,31 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Dance,
         emote: AnimationType.Dance,
-        attackSprite: AttackSprite.WILD_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.WILD_MELEE
     },
     [Pkm.AMBIPOM]: {
         attack: AnimationType.MultiStrike,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WILD_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.WILD_MELEE
     },
     [Pkm.DEERLING]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.NORMAL_MELEE
     },
     [Pkm.SAWSBUCK]: {
         attack: AnimationType.Attack,
         ability: AnimationType.RearUp,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.NORMAL_MELEE
     },
     [Pkm.LICKITUNG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Lick,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.NORMAL_MELEE
     },
     [Pkm.LICKILICKY]: {
         attack: AnimationType.Strike,
@@ -5044,13 +5114,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.COSMOEM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Rotate,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.SOLGALEO]: {
         attack: AnimationType.Attack,
@@ -5062,7 +5134,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.STEEL_MELEE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MAGEARNA]: {
         attack: AnimationType.Shoot,
@@ -5094,22 +5167,30 @@ export const PokemonAnimations: {
     [Pkm.DEOXYS]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
-        emote: AnimationType.Emit
+        emote: AnimationType.Emit,
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.DEOXYS_DEFENSE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Withdraw,
-        emote: AnimationType.Shoot
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.DEOXYS_ATTACK]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
-        emote: AnimationType.Charge
+        emote: AnimationType.Charge,
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.DEOXYS_SPEED]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
-        emote: AnimationType.Charge
+        emote: AnimationType.Charge,
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.CRABRAWLER]: {
         attack: AnimationType.Attack,
@@ -5164,13 +5245,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.HYPNO]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.WATTREL]: {
         attack: AnimationType.Attack,
@@ -5190,13 +5273,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.WYRDEER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.RearUp,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.BURMY_PLANT]: {
         attack: AnimationType.Shoot,
@@ -5309,13 +5394,15 @@ export const PokemonAnimations: {
         attack: AnimationType.MultiScratch,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GOLDUCK]: {
         attack: AnimationType.MultiScratch,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.NORMAL_MELEE
+        attackSprite: AttackSprite.NORMAL_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.PHANPY]: {
         attack: AnimationType.Attack,
@@ -5333,13 +5420,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hop,
         emote: AnimationType.Twirl,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.GRUMPIG]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hop,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.SINISTEA]: {
         attack: AnimationType.Shoot,
@@ -5448,13 +5537,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MUSHARNA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.KLEFKI]: {
         attack: AnimationType.Attack,
@@ -5676,7 +5767,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Charge,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.FRIGIBAX]: {
         attack: AnimationType.Attack,
@@ -6048,13 +6140,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Charge,
         emote: AnimationType.DeepBreath,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.BEHEEYEM]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.SpAttack,
         emote: AnimationType.SpAttack,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.LITTEN]: {
         attack: AnimationType.Attack,
@@ -6312,8 +6406,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Charge,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.WATER_MELEE,
-        hitSprite: HitSprite.NORMAL_HIT
+        attackSprite: AttackSprite.WATER_MELEE
     },
     [Pkm.DURALUDON]: {
         attack: AnimationType.Attack,
@@ -6519,13 +6612,15 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.INDEEDEE_FEMALE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.PSYCHIC_RANGE
+        attackSprite: AttackSprite.PSYCHIC_RANGE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.COTTONEE]: {
         attack: AnimationType.Strike,
@@ -6598,19 +6693,22 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MEOWSTIC_MALE]: {
         attack: AnimationType.Strike,
         ability: AnimationType.SpAttack,
         emote: AnimationType.Pose,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.MEOWSTIC_FEMALE]: {
         attack: AnimationType.Strike,
         ability: AnimationType.SpAttack,
         emote: AnimationType.SpAttack,
-        attackSprite: AttackSprite.PSYCHIC_MELEE
+        attackSprite: AttackSprite.PSYCHIC_MELEE,
+        hitSprite: HitSprite.PSYCHIC_HIT
     },
     [Pkm.OKIDOGI]: {
         attack: AnimationType.Attack,
