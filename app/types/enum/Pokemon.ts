@@ -802,10 +802,12 @@ export enum Pkm {
   SWADLOON = "SWADLOON",
   SWALOT = "SWALOT",
   SWAMPERT = "SWAMPERT",
+  SWELLOW = "SWELLOW",
   SWINUB = "SWINUB",
   SWIRLIX = "SWIRLIX",
   SWOOBAT = "SWOOBAT",
   SYLVEON = "SYLVEON",
+  TAILLOW = "TAILLOW",
   TALONFLAME = "TALONFLAME",
   TANDEMAUS = "TANDEMAUS",
   TANGELA = "TANGELA",
@@ -1346,8 +1348,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SEEDOT]: "0273",
   [Pkm.NUZLEAF]: "0274",
   [Pkm.SHIFTRY]: "0275",
-  //[Pkm.TAILLOW]: "0276",
-  //[Pkm.SWELLOW]: "0277",
+  [Pkm.TAILLOW]: "0276",
+  [Pkm.SWELLOW]: "0277",
   [Pkm.WINGULL]: "0278",
   [Pkm.PELIPPER]: "0279",
   [Pkm.RALTS]: "0280",
@@ -3164,7 +3166,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CELESTEELA]: Pkm.CELESTEELA,
   [Pkm.LEDYBA]: Pkm.LEDYBA,
   [Pkm.LEDIAN]: Pkm.LEDYBA,
-  [Pkm.EMOLGA]: Pkm.EMOLGA
+  [Pkm.EMOLGA]: Pkm.EMOLGA,
+  [Pkm.TAILLOW]: Pkm.TAILLOW,
+  [Pkm.SWELLOW]: Pkm.TAILLOW
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
