@@ -4,10 +4,10 @@ import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
-import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
+import { AttackSpriteScale, HitSprite } from "../../../../types/Animation"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { EffectEnum } from "../../../../types/enum/Effect"
@@ -28,8 +28,9 @@ import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
-import { displayAbility } from "./abilities-animations"
+import { displayAbility, displayHit } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
+import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
 
 export default class BattleManager {
@@ -704,7 +705,7 @@ export default class BattleManager {
           pkm.lazyloadAnimations(this.scene, true) // unload previous index animations
           pkm.index = value as IPokemonEntity["index"]
           pkm.attackSprite =
-            new PokemonClasses[PkmByIndex[value as string]]()?.attackSprite ??
+            PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
             pkm.attackSprite
           pkm.lazyloadAnimations(this.scene) // load the new ones
           pkm.displayAnimation("EVOLUTION")
@@ -966,7 +967,7 @@ export default class BattleManager {
 
       this.scene.tweens.add({
         targets: sprite,
-        alpha: 1,
+        alpha: 0.8,
         duration: 500
       })
     }
@@ -1155,21 +1156,6 @@ export default class BattleManager {
     })
   }
 
-  displayHit(x: number, y: number) {
-    const hitSprite = this.scene.add.sprite(
-      x + (Math.random() - 0.5) * 30,
-      y + (Math.random() - 0.5) * 30,
-      "attacks",
-      "NORMAL/hit/000.png"
-    )
-    hitSprite.setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
-    hitSprite.setScale(2, 2)
-    hitSprite.anims.play("NORMAL/hit")
-    hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      hitSprite.destroy()
-    })
-  }
-
   displayDamage(
     positionX: number,
     positionY: number,
@@ -1191,7 +1177,13 @@ export default class BattleManager {
             ? "#209cee"
             : "#f7d51d"
       this.displayTween(color, coordinates, index, damage)
-      this.displayHit(coordinates[0], coordinates[1])
+      displayHit(
+        this.scene,
+        PokemonAnimations[PkmByIndex[index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+        coordinates[0],
+        coordinates[1],
+        this.flip
+      )
     }
   }
 

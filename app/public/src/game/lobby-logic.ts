@@ -7,13 +7,13 @@ import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
 import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import { IUserMetadataClient, IUserMetadataJSON } from "../../../types/interfaces/UserMetadata"
 import { logger } from "../../../utils/logger"
 import { authenticateUser } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
@@ -247,7 +247,7 @@ export async function joinLobbyRoom(
             dispatch(removeRoom(roomId))
           )
 
-          room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
+          room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadataJSON) => {
             dispatch(setProfile(user))
           })
 
@@ -255,7 +255,7 @@ export async function joinLobbyRoom(
             dispatch(setPendingGameId(pendingGameId))
           })
 
-          room.onMessage(Transfer.USER, (user: IUserMetadata) =>
+          room.onMessage(Transfer.USER, (user: IUserMetadataClient) =>
             dispatch(setSearchedUser(user))
           )
 

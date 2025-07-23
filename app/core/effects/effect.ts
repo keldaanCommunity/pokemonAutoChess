@@ -228,7 +228,7 @@ export class MonsterKillEffect extends OnKillEffect {
     this.hpBoosted += lifeBoost
     this.count += 1
     if (pokemon.items.has(Item.BERSERK_GENE)) {
-      pokemon.status.triggerConfusion(30000, pokemon, pokemon)
+      pokemon.status.triggerConfusion(3000, pokemon, pokemon)
     }
   }
 }

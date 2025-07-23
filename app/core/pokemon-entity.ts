@@ -9,7 +9,6 @@ import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
 import {
-  AttackSprite,
   Emotion,
   IPokemon,
   IPokemonEntity,
@@ -99,7 +98,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") targetEntityId: string = ""
   @type("int8") targetX = -1
   @type("int8") targetY = -1
-  @type("string") attackSprite: AttackSprite
   @type("string") rarity: Rarity
   @type("string") name: Pkm
   @type({ set: "string" }) effects = new SetSchema<EffectEnum>()
@@ -178,7 +176,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.speed = pokemon.speed
     this.range = pokemon.range
     this.team = team
-    this.attackSprite = pokemon.attackSprite
     this.stars = pokemon.stars
     this.skill = pokemon.skill
     this.shiny = pokemon.shiny
@@ -880,7 +877,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      const silenceChance = 0.2
+      const silenceChance = 0.15
       if (chance(silenceChance, this)) {
         target.status.triggerSilence(2000, target, this)
       }

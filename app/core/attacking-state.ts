@@ -1,17 +1,17 @@
 import Player from "../models/colyseus-models/player"
+import { IPokemonEntity } from "../types"
+import { PROJECTILE_SPEED } from "../types/Config"
+import delays from "../types/delays.json"
+import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { distanceC } from "../utils/distance"
+import { max } from "../utils/number"
 import { chance } from "../utils/random"
 import { AbilityStrategies } from "./abilities/abilities"
 import Board from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { AttackCommand } from "./simulation-command"
-import delays from "../types/delays.json"
-import { IPokemonEntity } from "../types"
-import { PROJECTILE_SPEED } from "../types/Config"
-import { max } from "../utils/number"
-import { EffectEnum } from "../types/enum/Effect"
 
 export default class AttackingState extends PokemonState {
   name = "attacking"
@@ -39,13 +39,19 @@ export default class AttackingState extends PokemonState {
         target = this.getTargetWhenConfused(pokemon, board)
       } else if (!target || target.id !== pokemon.targetEntityId) {
         // previous target has moved, check if still at range
-        const previousTarget = pokemon.simulation.blueTeam.get(pokemon.targetEntityId) || pokemon.simulation.redTeam.get(pokemon.targetEntityId)
-        if (previousTarget && previousTarget.isTargettableBy(pokemon) && distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          previousTarget?.positionX,
-          previousTarget?.positionY
-        ) <= pokemon.range) {
+        const previousTarget =
+          pokemon.simulation.blueTeam.get(pokemon.targetEntityId) ||
+          pokemon.simulation.redTeam.get(pokemon.targetEntityId)
+        if (
+          previousTarget &&
+          previousTarget.isTargettableBy(pokemon) &&
+          distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            previousTarget?.positionX,
+            previousTarget?.positionY
+          ) <= pokemon.range
+        ) {
           // updating target coordinates
           target = previousTarget as PokemonEntity
         } else {
@@ -60,10 +66,7 @@ export default class AttackingState extends PokemonState {
         if (targetAtSight) {
           pokemon.toMovingState()
         }
-      } else if (
-        pokemon.pp >= pokemon.maxPP &&
-        !pokemon.status.silence
-      ) {
+      } else if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
         // CAST ABILITY
         let crit = false
         const ability = AbilityStrategies[pokemon.skill]
@@ -122,7 +125,7 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   attackDuration: number
 } {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
-  const attackDuration = 1000 / speed
+  const attackDuration = 1000 / (0.4 + speed * 0.007)
   const d = delays[pokemon.index]?.d || 18 // number of frames before hit
   const t = delays[pokemon.index]?.t || 36 // total number of frames in the animation
 

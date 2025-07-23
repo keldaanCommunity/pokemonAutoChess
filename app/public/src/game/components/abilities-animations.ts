@@ -1,7 +1,7 @@
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AttackSprite } from "../../../../types"
-import { AnimationType } from "../../../../types/Animation"
+import { AnimationType, AttackSpriteScale, HitSprite } from "../../../../types/Animation"
 import { BOARD_HEIGHT } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
@@ -18,12 +18,52 @@ import {
   OrientationArray,
   OrientationVector
 } from "../../../../utils/orientation"
-import { randomBetween } from "../../../../utils/random"
+import { pickRandomIn, randomBetween } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
+
+
+export function displayHit(
+  scene: GameScene | DebugScene,
+  hitSpriteTypes: HitSprite | HitSprite[],
+  x: number,
+  y: number,
+  flip: boolean
+) {
+  const hitSpriteType = Array.isArray(hitSpriteTypes) ? pickRandomIn(hitSpriteTypes) : hitSpriteTypes
+  const frame = `${hitSpriteType}/000.png`
+
+  if (
+    !scene.textures.exists("attacks") ||
+    !scene.textures.get("attacks").has(frame)
+  ) {
+    logger.warn(`Missing frame: ${frame} in attacks texture`)
+    return null
+  }
+
+  if (!scene.anims.exists(hitSpriteType)) {
+    logger.warn(`Missing animation: ${hitSpriteType}`)
+    return null
+  }
+
+  const hitSprite = scene.add.sprite(
+    x + (Math.random() - 0.5) * 30,
+    y + (Math.random() - 0.5) * 30,
+    "attacks",
+    `${hitSpriteType}/000.png`
+  )
+  hitSprite
+    .setOrigin(0.5, 0.5)
+    .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+    .setScale(...(AttackSpriteScale[hitSpriteType] ?? [1, 1]))
+  hitSprite.anims.play(hitSpriteType)
+  hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+    hitSprite.destroy()
+  })
+}
 
 export function displayAbility(
   scene: GameScene | DebugScene,
@@ -76,10 +116,6 @@ export function displayAbility(
   }
 
   switch (skill) {
-    case Ability.AGILITY:
-      addAbilitySprite(skill, coordinatesTarget, true)?.setScale(3)
-      break
-
     case Ability.FIRE_BLAST:
       addAbilitySprite(skill, coordinatesTarget, true)?.setScale(3)
       break

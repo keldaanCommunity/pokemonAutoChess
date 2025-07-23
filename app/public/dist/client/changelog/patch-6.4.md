@@ -52,14 +52,16 @@
 - Galarian Moltres is now 2-range
 - Skarmory spikes no longer hurt Steel Pokémon
 - Buff Fillet Away (Veluza): protect duration 500ms → 1 second
+- Nidoran female is now regional, and Nidoran male is the regular one.
 
 # Changes to Synergies
 
+- Nerf Ghost: dodge chance 20% → 15% ; chance to silence on hit 20% → 15%
+
 # Changes to Items
 
-- Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 20 gold.
-- Gimmighoul coin now raise max interest by 20 gold instead of 10.
-- New item: Sticky Barb, made with heart scale + miracle seed, 3 attack 15 shield ; when struck by an attack at melee range, deal 3 + 15% of its defense as retaliation true damage to the attacker, with 130% chance to inflict WOUND for 3 seconds.
+- Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 10 gold.
+- New item: Sticky Barb, made with heart scale + miracle seed, 3 def 15 shield ; when struck by an attack at melee range, deal 3 + 15% of its defense as retaliation true damage to the attacker, with 130% chance to inflict WOUND for 3 seconds.
 - Smoke Ball new recipe: dark glasses + miracle seed ; new base stats: 10% crit chance; now gain 50 shield when jumping away
 - Cleanse Tag is renamed Ability Shield ; new recipe: miracle seed + twisted spoon ; new base stats: 15 shield, 10 AP
 - Shiny Charm new recipe: heart scale + mystic water ; new base stats: 3 defense ; now gives 50 PP on activation
@@ -77,6 +79,7 @@
 - Removed TM Retaliate, replaced with TM Counter
 - Removed HM Whirlpool, replaced with HM Dive
 - Buff Smoked Fillet: HP reduction 10 → 5
+- Buff Berserk Gene: confusion duration is now 3 seconds instead of the whole fight
 
 # Gameplay
 
@@ -89,6 +92,7 @@
 # Bugfix
 
 - Pokemons meals are now consumed even if the Pokemon is on bench.
+- Pokemons now keep their meals when evolving no matter the evolution rule.
 
 # Misc
 

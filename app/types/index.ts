@@ -17,6 +17,7 @@ import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
 import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
+import { AttackSprite } from "./Animation"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
 import { BoardEffect, EffectEnum } from "./enum/Effect"
@@ -140,46 +141,6 @@ export enum Transfer {
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
   HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
   RECONNECT_PROMPT = "RECONNECT_PROMPT"
-}
-
-export enum AttackSprite {
-  BUG_MELEE = "BUG/melee",
-  BUG_RANGE = "BUG/range",
-  DARK_MELEE = "DARK/melee",
-  DARK_RANGE = "DARK/range",
-  DRAGON_MELEE = "DRAGON/melee",
-  DRAGON_RANGE = "DRAGON/range",
-  DRAGON_GREEN_RANGE = "DRAGON_GREEN/range",
-  ELECTRIC_MELEE = "ELECTRIC/melee",
-  ELECTRIC_RANGE = "ELECTRIC/range",
-  FAIRY_MELEE = "FAIRY/melee",
-  FAIRY_RANGE = "FAIRY/range",
-  FIGHTING_MELEE = "FIGHTING/melee",
-  FIGHTING_RANGE = "FIGHTING/range",
-  FIRE_MELEE = "FIRE/melee",
-  FIRE_RANGE = "FIRE/range",
-  FLYING_MELEE = "FLYING/melee",
-  FLYING_RANGE = "FLYING/range",
-  GHOST_MELEE = "GHOST/melee",
-  GHOST_RANGE = "GHOST/range",
-  GRASS_MELEE = "GRASS/melee",
-  GRASS_RANGE = "GRASS/range",
-  GROUND_MELEE = "GROUND/melee",
-  ICE_MELEE = "ICE/melee",
-  ICE_RANGE = "ICE/range",
-  NORMAL_MELEE = "NORMAL/melee",
-  POISON_MELEE = "POISON/melee",
-  POISON_RANGE = "POISON/range",
-  PSYCHIC_MELEE = "PSYCHIC/melee",
-  PSYCHIC_RANGE = "PSYCHIC/range",
-  WATER_MELEE = "WATER/melee",
-  WATER_RANGE = "WATER/range",
-  ROCK_MELEE = "ROCK/melee",
-  ROCK_RANGE = "ROCK/range",
-  SOUND_RANGE = "SOUND/range",
-  STEEL_MELEE = "STEEL/melee",
-  STEEL_RANGE = "STEEL/range",
-  WILD_MELEE = "WILD/melee"
 }
 
 export enum ReadWriteMode {
@@ -364,7 +325,6 @@ export interface IPokemon {
   evolutionRule: EvolutionRule
   positionX: number
   positionY: number
-  attackSprite: AttackSprite
   speed: number
   def: number
   speDef: number
@@ -575,7 +535,6 @@ export interface IPokemonEntity {
   targetX: number
   targetY: number
   targetEntityId: string
-  attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm
   effects: SetSchema<EffectEnum>
@@ -781,3 +740,5 @@ export interface IAttackEvent {
   travelTime: number
   delay: number
 }
+
+export { AttackSprite }

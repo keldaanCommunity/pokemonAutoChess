@@ -2466,7 +2466,7 @@
 		"CARAMEL_SWIRL_FLAVOR": "Gebacken mit DARK MONSTER DRAGON Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_CARAMEL_SWIRL) zu entwickeln. $t(passive_description.CARAMEL_SWIRL_CREAM)",
 		"RAINBOW_SWIRL_FLAVOR": "Gebacken mit PSYCHIC AMORPHOUS BABY LIGHT Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_RAINBOW_SWIRL) zu entwickeln. $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Ein Ei, welches bei Chansey's Daycare verkauft wurde",
-		"GIMMIGHOUL_COIN": "Erhöhe den maximalen Zinsen-Wert um 20 GOLD.",
+		"GIMMIGHOUL_COIN": "Erhöhe den maximalen Zinsen-Wert um 10 GOLD.",
 		"EXCHANGE_TICKET": "Tausche ein Item-Part oder ein fertiggestelltes Item auf der Bank für ein zufälliges aus. Einmalige Nutzung.",
 		"AUSPICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Glückverheißende Wünsche leben in ihm.",
 		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm."
@@ -2754,7 +2754,7 @@
 		"FLYING": "FLYING Pokémons fliegen weg, wenn sie unter eine bestimmte Menge an HP fallen, es sei denn, sie sind PARALYSIS, FREEZE oder SLEEP",
 		"FLORA": "Wenn das erste FLORA Pokemon KO ist, blüht eine Blume. Es erhält einen zufälligen Gegenstand von jedem FLORA Verbündeten, der KO geht.",
 		"ROCK": "ROCK Pokémon erhalten DEF und widerstehen kritischem Schaden besser",
-		"GHOST": "GHOST Pokémon haben eine [20,LK]% Chance, bei einem Treffer SILENCE auszulösen und Angriffen auszuweichen, und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
+		"GHOST": "GHOST Pokémon haben eine [15,LK]% Chance, bei einem Treffer SILENCE auszulösen und Angriffen auszuweichen, und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
 		"FAIRY": "FAIRY Pokémon verursachen mit ihren Angriffen zusätzliche SPECIAL und lösen Schocks aus, wenn sie einen kritischen Treffer erleiden.",
 		"ICE": "ICE Pokemon haben die Chance, den Gegner nach einem Treffer für 2 Sekunden zu FREEZE und dem gesamten Team SPE_DEF zu geben",
 		"FOSSIL": "Bei ihrem ersten KO erwachen FOSSIL Pokémon mit erhöhter ATK wieder zum Leben",

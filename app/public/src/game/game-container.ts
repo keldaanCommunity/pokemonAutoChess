@@ -565,6 +565,7 @@ class GameContainer {
     index: string
     amount: number
   }) {
+    if (document.hidden) return // do not display heal when the tab is not focused
     this.gameScene?.battle?.displayHeal(
       message.x,
       message.y,
@@ -583,6 +584,7 @@ class GameContainer {
     index: string
     amount: number
   }) {
+    if (document.hidden) return // do not display damage when the tab is not focused
     if (preference("showDamageNumbers")) {
       this.gameScene?.battle?.displayDamage(
         message.x,
@@ -605,6 +607,7 @@ class GameContainer {
     targetY?: number
     delay?: number
   }) {
+    if (document.hidden) return // do not display abilities when the tab is not focused
     this.gameScene?.battle?.displayAbility(
       message.id,
       message.skill,

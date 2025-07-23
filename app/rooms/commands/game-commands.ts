@@ -225,8 +225,7 @@ export class OnPokemonCatchCommand extends Command<
           } else {
             u.pokemonCollection.set(unownIndex, {
               id: unownIndex,
-              emotions: [],
-              shinyEmotions: [],
+              unlocked: Buffer.alloc(5, 0),
               dust: DUST_PER_ENCOUNTER,
               selectedEmotion: Emotion.NORMAL,
               selectedShiny: false,
@@ -1130,7 +1129,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ).length
         const nbAmuletCoins = player.items.filter((item) => item === Item.AMULET_COIN).length
           + values(player.board).filter((pokemon) => pokemon.items.has(Item.AMULET_COIN)).length
-        player.maxInterest = 5 + nbGimmighoulCoins * 2 - nbAmuletCoins * 2
+        player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
           player.interest = max(player.maxInterest)(Math.floor(player.money / 10))
           income += player.interest

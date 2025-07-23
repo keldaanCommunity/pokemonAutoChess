@@ -4,11 +4,11 @@ import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
-  AttackSprite,
   type Emotion,
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
+import { AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
@@ -28,11 +28,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import type { Passive } from "../../../../types/enum/Passive"
-import {
-  AnimationConfig,
-  Pkm,
-  PkmByIndex
-} from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
@@ -48,6 +44,10 @@ import DraggableObject from "./draggable-object"
 import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
+import {
+  DEFAULT_POKEMON_ANIMATION_CONFIG,
+  PokemonAnimations
+} from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
 
 const spriteCountPerPokemon = new Map<string, number>()
@@ -184,7 +184,7 @@ export default class PokemonSprite extends DraggableObject {
     this.passive = pokemon.passive
     this.positionX = pokemon.positionX
     this.positionY = pokemon.positionY
-    this.attackSprite = pokemon.attackSprite
+    this.attackSprite = PokemonAnimations[pokemon.name]?.attackSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
     this.ap = pokemon.ap
     this.luck = pokemon.luck
     this.inBattle = inBattle
@@ -239,7 +239,7 @@ export default class PokemonSprite extends DraggableObject {
       this.id,
       playerId
     )
-    const hasShadow = AnimationConfig[pokemon.name]?.noShadow !== true
+    const hasShadow = PokemonAnimations[pokemon.name]?.noShadow !== true
     if (hasShadow) {
       this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
       this.shadow.setScale(2, 2).setDepth(DEPTH.POKEMON_SHADOW)
@@ -476,7 +476,8 @@ export default class PokemonSprite extends DraggableObject {
     targetX: number,
     targetY: number,
     delayBeforeShoot: number,
-    travelTime: number
+    travelTime: number,
+    onComplete?: () => void
   ) {
     const isRange = this.attackSprite.endsWith("/range")
     const startX = isRange ? this.positionX : targetX
@@ -517,6 +518,7 @@ export default class PokemonSprite extends DraggableObject {
         projectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
           projectile.destroy()
         )
+        onComplete?.()
       } else {
         projectile.anims.play({ key: attackSprite })
         const coordinatesTarget = transformEntityCoordinates(
@@ -535,7 +537,10 @@ export default class PokemonSprite extends DraggableObject {
           ease: "Linear",
           duration: min(250)(travelTime),
           delay: delayBeforeShoot - LATENCY_COMPENSATION,
-          onComplete: () => projectile.destroy(),
+          onComplete: () => {
+            projectile.destroy()
+            onComplete?.()
+          },
           onStop: () => projectile.destroy(),
           onStart: () => projectile.setVisible(true)
         })
@@ -600,11 +605,8 @@ export default class PokemonSprite extends DraggableObject {
 
   fishingAnimation() {
     this.displayAnimation("FISHING")
-    g.animationManager?.animatePokemon(
-      this,
-      PokemonActionState.HOP,
-      this.flip
-    )
+    const g = <GameScene>this.scene
+    g.animationManager?.animatePokemon(this, PokemonActionState.HOP, this.flip)
     this.sprite.once(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
       const g = <GameScene>this.scene
       g.animationManager?.animatePokemon(
@@ -687,9 +689,13 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   specialAttackAnimation(pokemon: IPokemonEntity) {
-    let anim = AnimationConfig[PkmByIndex[pokemon.index]].ability
+    let anim =
+      PokemonAnimations[PkmByIndex[pokemon.index]].ability ??
+      DEFAULT_POKEMON_ANIMATION_CONFIG.ability
     if (pokemon.skill === Ability.LASER_BLADE && pokemon.count.ult % 2 === 0) {
-      anim = AnimationConfig[PkmByIndex[pokemon.index]].emote
+      anim =
+        PokemonAnimations[PkmByIndex[pokemon.index]].emote ??
+        DEFAULT_POKEMON_ANIMATION_CONFIG.emote
     }
     if (pokemon.skill === Ability.GROWTH) {
       this.sprite.setScale(2 + 0.5 * pokemon.count.ult)
@@ -1331,7 +1337,8 @@ export default class PokemonSprite extends DraggableObject {
       -20,
       "abilities",
       `BOOST/000.png`
-    ).setDepth(DEPTH.BOOST_BACK)
+    )
+      .setDepth(DEPTH.BOOST_BACK)
       .setScale(2)
       .setTint(tint)
 
@@ -1344,45 +1351,4 @@ export default class PokemonSprite extends DraggableObject {
       boost.destroy()
     })
   }
-}
-
-const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
-{
-  "BUG/melee": [1.5, 1.5],
-  "BUG/range": [2, 2],
-  "DARK/melee": [1.5, 1.5],
-  "DARK/range": [1.5, 1.5],
-  "DRAGON/melee": [2, 2],
-  "DRAGON/range": [2, 2],
-  "DRAGON_GREEN/range": [2, 2],
-  "ELECTRIC/melee": [1.5, 1.5],
-  "ELECTRIC/range": [2, 2],
-  "FAIRY/melee": [2, 2],
-  "FAIRY/range": [2, 2],
-  "FIGHTING/melee": [2, 2],
-  "FIGHTING/range": [2, 2],
-  "FIRE/melee": [1.5, 1.5],
-  "FIRE/range": [2, 2],
-  "FLYING/melee": [1, 1],
-  "FLYING/range": [1.5, 1.5],
-  "GHOST/melee": [1, 1],
-  "GHOST/range": [2, 2],
-  "GRASS/melee": [1, 1],
-  "GRASS/range": [3, 3],
-  "GROUND/melee": [1, 1],
-  "ICE/melee": [1, 1],
-  "ICE/range": [2, 2],
-  "NORMAL/melee": [1.5, 1.5],
-  "POISON/melee": [2, 2],
-  "POISON/range": [1, 1],
-  "PSYCHIC/melee": [1.5, 1.5],
-  "PSYCHIC/range": [2, 2],
-  "ROCK/melee": [1.5, 1.5],
-  "ROCK/range": [2, 2],
-  "STEEL/melee": [1.5, 1.5],
-  "STEEL/range": [2, 2],
-  "SOUND/range": [2, 2],
-  "WATER/melee": [1.5, 1.5],
-  "WATER/range": [3, 3],
-  "WILD/melee": [2, 2]
 }
