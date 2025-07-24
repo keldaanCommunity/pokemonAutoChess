@@ -3855,7 +3855,7 @@
 		"XATU": "$t(pkm.XATU) vend une TREASURE_BOX contenant deux composants aléatoires pour {{cost}} GOLD",
 		"KANGASKHAN": "$t(pkm.KANGASKHAN) vend des objets fabricables pour {{cost}} GOLD",
 		"DUSKULL": "$t(pkm.DUSKULL) offre des pièces qui augmentent votre revenu à long terme",
-		"MEOWTH": "Les AMULET_COIN de $t(pkm.MEOWTH) vous permettent de gagner de l'GOLD dans les combats mais réduisent le plafond d'intérêt maximum.",
+		"MEOWTH": "Les AMULET_COIN de $t(pkm.MEOWTH) vous permettent de gagner de l'GOLD pendant les combats mais réduisent le plafond d'intérêt maximum.",
 		"MAROWAK": "$t(pkm.MAROWAK) rend le prochain combat PvE plus difficile",
 		"WOBBUFFET": "$t(pkm.WOBBUFFET) vous propose de recycler un composant ou objet fabriqué",
 		"SPINDA": "$t(pkm.SPINDA) change le sens de rotation du carousel de façon aléatoire",
