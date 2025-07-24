@@ -3933,8 +3933,8 @@
 	"technical_terms_definitions": {
 		"STRONGEST": "Strongest is defined as, by order of priority: 1. Number of items held, 2. Unit tier, 3. Unit rarity"
 	},
-	"victory_road": {	
-		"title": "Victory Road",	
+	"victory_road": {
+		"title": "Victory Road",
 		"points": "{{points}} points",
 		"your_points": "Your points: {{points}}",
 		"instructions": "Race to the finish of Victory Road !",

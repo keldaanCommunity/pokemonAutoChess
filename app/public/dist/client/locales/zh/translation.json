@@ -3931,8 +3931,8 @@
 	"technical_terms_definitions": {
 		"STRONGEST": "按以下优先级判定“最强”：道具最多>星级最高>稀有度最高"
 	},
-	"victory_road": {	
-		"title": "胜利之路",	
+	"victory_road": {
+		"title": "胜利之路",
 		"points": "{{points}}分",
 		"your_points": "你的分数：{{points}}",
 		"instructions": "在胜利之路上竞速冲向终点！",
