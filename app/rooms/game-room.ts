@@ -150,16 +150,14 @@ export default class GameRoom extends Room<GameState> {
       bracketId: options.bracketId
     })
     // logger.debug(options);
-    this.setState(
-      new GameState(
-        options.preparationId,
-        options.name,
-        options.noElo,
-        options.gameMode,
-        options.minRank,
-        options.maxRank,
-        options.specialGameRule
-      )
+    this.state = new GameState(
+      options.preparationId,
+      options.name,
+      options.noElo,
+      options.gameMode,
+      options.minRank,
+      options.maxRank,
+      options.specialGameRule
     )
     this.miniGame.create(
       this.state.avatars,
