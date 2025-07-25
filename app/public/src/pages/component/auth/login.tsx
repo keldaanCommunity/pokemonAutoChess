@@ -7,12 +7,12 @@ import { throttle } from "../../../../../utils/function"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
-import { FIREBASE_CONFIG } from "../../utils/utils"
 //import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
+import { FIREBASE_CONFIG } from "../../../../../types/Config"
 
 export default function Login() {
   const { t } = useTranslation()

@@ -21,10 +21,16 @@ export async function fetchBotsList(
 
   while (hasMoreData && page < maxPages) {
     try {
+      // Build the query filter - apply approved filter at database level, not after
+      const queryFilter: any = {}
+      if (approved !== undefined) {
+        queryFilter.approved = approved
+      }
+
       const botsData = await BotV2.find(
-        {},
+        queryFilter, // Apply filter in the database query
         { steps: 0 }, // Exclude the 'steps' field
-        { sort: { elo: -1 }, limit: pageSize, skip: page * pageSize }
+        { sort: { elo: -1, id: 1 }, limit: pageSize, skip: page * pageSize } // Add secondary sort by id for stable pagination
       )
 
       if (!botsData || botsData.length === 0) {
@@ -32,17 +38,14 @@ export async function fetchBotsList(
         break
       }
 
-      // Process and filter bots immediately, then add to result array
-      const processedBots = botsData
-        .filter((bot) => approved === undefined || bot.approved === approved)
-        .map((bot) => ({
-          name: bot.name,
-          avatar: bot.avatar,
-          id: bot.id,
-          approved: bot.approved,
-          author: bot.author,
-          elo: bot.elo
-        }))
+      const processedBots = botsData.map((bot) => ({
+        name: bot.name,
+        avatar: bot.avatar,
+        id: bot.id,
+        approved: bot.approved,
+        author: bot.author,
+        elo: bot.elo
+      }))
 
       // Use push.apply to add elements without creating intermediate arrays
       allBots.push(...processedBots)
