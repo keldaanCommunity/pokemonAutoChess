@@ -1,8 +1,8 @@
 import { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
+import { FIREBASE_CONFIG } from "../../types/Config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
-import { FIREBASE_CONFIG } from "./pages/utils/utils"
 import store from "./stores"
 import { logIn, setProfile } from "./stores/NetworkStore"
 
@@ -21,9 +21,7 @@ export function authenticateUser() {
     })
 }
 
-export async function fetchProfile(
-    forceRefresh: boolean = false
-) {
+export async function fetchProfile(forceRefresh: boolean = false) {
     const profile = store.getState().network.profile
     const token = await firebase.auth().currentUser?.getIdToken()
     if (!forceRefresh && profile) {

@@ -2,7 +2,6 @@ import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
 import {
   matchMaker,
-  Presence,
   RedisDriver,
   RedisPresence,
   ServerOptions
