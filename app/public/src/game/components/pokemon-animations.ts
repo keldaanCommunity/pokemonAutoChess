@@ -3065,7 +3065,7 @@ export const PokemonAnimations: {
     },
     [Pkm.CARBINK]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Charge,
         emote: AnimationType.Rotate,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.ROCK_HIT

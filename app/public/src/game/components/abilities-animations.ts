@@ -536,6 +536,10 @@ const orientedProjectile: AbilityAnimationMaker<
     oy + dy * (options.distance ?? 8),
     args.flip
   )
+  if (options?.oriented) {
+    options.rotation = angleBetween([dx, -dy], [0, 0]) + (options.rotation ?? 0)
+    delete options.oriented
+  }
   return tweenAnimation({
     ...options,
     tweenProps: { x: finalCoordinates[0], y: finalCoordinates[1], ...(options.tweenProps ?? {}) },
@@ -607,7 +611,7 @@ export const AbilitiesAnimations: {
   [Ability.LIQUIDATION]: onTargetScale2,
   [Ability.AIR_SLASH]: onTargetScale2,
   [Ability.DREAM_EATER]: onTargetScale2,
-  [Ability.BURN_UP]: onTargetScale2,
+  [Ability.BURN_UP]: onTargetScale3,
   [Ability.ICE_HAMMER]: onTargetScale2,
   [Ability.MANTIS_BLADES]: onTargetScale2,
   [Ability.PSYCHIC_FANGS]: onTargetScale2,
@@ -725,16 +729,15 @@ export const AbilitiesAnimations: {
         args.flip
       )
       const [dx, dy] = OrientationVector[args.orientation]
-      const finalCoordinates = [
-        coordinates[0] + dx * 16,
-        coordinates[1] - dy * 16 - 24
-      ]
-      return addAbilitySprite(args.scene, Ability.DYNAMAX_CANNON, finalCoordinates, {
+      return staticAnimation({
+        ability: Ability.DYNAMAX_CANNON,
+        x: coordinates[0] + dx * 16,
+        y: coordinates[1] - dy * 16 - 24,
         tint: 0xff5060,
         origin: [0.5, 0],
         oriented: true,
         rotation: -Math.PI / 2,
-      })
+      })(args)
     }
   ],
   [Ability.PSYBEAM]: onCaster({
@@ -754,7 +757,7 @@ export const AbilitiesAnimations: {
     scale: 2,
     origin: [0.5, 1]
   }),
-  [Ability.HYDRO_PUMP]: onCaster({ rotation: Math.PI / 2 }),
+  [Ability.HYDRO_PUMP]: onCaster({ oriented: true, rotation: Math.PI / 2, origin: [0.5, 1] }),
   [Ability.SWALLOW]: onCaster({
     ability: Ability.HYDRO_PUMP,
     oriented: true,
@@ -1491,29 +1494,29 @@ export const AbilitiesAnimations: {
   [Ability.MIST_BALL]: orientedProjectile({ distance: 4, duration: 1000, scale: 1, ease: "Power2", tweenProps: { yoyo: true }, }),
   [Ability.LUSTER_PURGE]: orientedProjectile({ distance: 4, duration: 1000, scale: 1, ease: "Power2", tweenProps: { yoyo: true }, }),
   [Ability.STEALTH_ROCKS]: orientedProjectile({ distance: 1, scale: 3, depth: DEPTH.ABILITY_GROUND_LEVEL }),
-  [Ability.SPIKY_SHIELD]: OrientationArray.map(orientation => orientedProjectile({ orientation, distance: 8, ability: "SPIKE", oriented: true, rotation: Math.PI / 2, duration: 1000 })),
+  [Ability.SPIKY_SHIELD]: OrientationArray.map(orientation => orientedProjectile({ orientation, distance: 8, ability: "SPIKE", oriented: true, rotation: -Math.PI / 2, duration: 1000 })),
   [Ability.AURASPHERE]: orientedProjectile({ distance: 8, duration: 2000, oriented: true }),
   [Ability.ULTRA_THRUSTERS]: [
     onCaster({ ability: Ability.LANDS_WRATH }),
     args => {
       const [dx, dy] = OrientationVector[args.orientation]
-      const coordinates = transformEntityCoordinates(
-        args.positionX,
-        args.positionY,
+      // target is used to pass the new destination coordinates
+      const coordinatesTarget = transformEntityCoordinates(
+        args.targetX,
+        args.targetY,
         args.flip
       )
       return tweenAnimation({
         ability: Ability.MYSTICAL_FIRE,
-        startCoords: [
-          coordinates[0] + dx * 32,
-          coordinates[1] + dy * 32
-        ],
+        startCoords: [args.positionX, args.positionY, args.flip],
+        startPositionOffset: [dx * 32, dy * 32],
+        tweenProps: { x: coordinatesTarget[0], y: coordinatesTarget[1] },
         scale: 2,
         origin: [0.5, 1],
         duration: 750,
         oriented: true,
         rotation: -Math.PI / 2
-      })
+      })(args)
     }
   ],
   [Ability.BONE_ARMOR]: OrientationArray.map((orientation) => orientedProjectile({
