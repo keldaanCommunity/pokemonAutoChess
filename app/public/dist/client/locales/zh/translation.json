@@ -1487,7 +1487,9 @@
 		"CELESTEELA": "铁火辉夜",
 		"EMOLGA": "电飞鼠",
 		"LEDYBA": "芭瓢虫",
-		"LEDIAN": "安瓢虫"
+		"LEDIAN": "安瓢虫",
+		"TAILLOW": "傲骨燕",
+		"SWELLOW": "大王燕"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
