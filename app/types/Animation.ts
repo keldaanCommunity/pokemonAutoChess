@@ -1,3 +1,9 @@
+import PokemonSprite from "../public/src/game/components/pokemon"
+import { DebugScene } from "../public/src/game/scenes/debug-scene"
+import GameScene from "../public/src/game/scenes/game-scene"
+import { Ability } from "./enum/Ability"
+import { Orientation } from "./enum/Game"
+
 export enum AnimationType {
   Idle = "Idle",
   Walk = "Walk",
@@ -373,3 +379,37 @@ export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number,
   "WILD/melee": [2, 2],
   "WILD/hit": [1, 1]
 }
+
+export interface AbilityAnimationOptions {
+  textureKey?: string
+  ability?: Ability | string
+  position?: number[]
+  positionOffset?: [number, number]
+  scale?: number | [number, number]
+  oriented?: boolean /* apply the angle between position and target as base rotation */
+  rotation?: number
+  angle?: number
+  origin?: [number, number]
+  depth?: number
+  tint?: number
+  alpha?: number
+  destroyOnComplete?: boolean
+  animOptions?: Omit<Phaser.Types.Animations.PlayAnimationConfig, "key">
+  delay?: number
+}
+
+export type AbilityAnimationArgs = {
+  scene: GameScene | DebugScene,
+  pokemonsOnBoard: PokemonSprite[],
+  ability: Ability | string,
+  orientation: Orientation,
+  positionX: number,
+  positionY: number,
+  targetX: number,
+  targetY: number,
+  flip: boolean,
+  delay?: number
+}
+
+export type AbilityAnimation = (args: AbilityAnimationArgs) => any
+export type AbilityAnimationMaker<O = AbilityAnimationOptions> = (options: AbilityAnimationOptions & O) => AbilityAnimation

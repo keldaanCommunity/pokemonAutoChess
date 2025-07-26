@@ -7,7 +7,6 @@ import Player from "../../../../models/colyseus-models/player"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
-import { AttackSpriteScale, HitSprite } from "../../../../types/Animation"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { EffectEnum } from "../../../../types/enum/Effect"
@@ -392,73 +391,23 @@ export default class BattleManager {
         pkm.itemsContainer.updateCount(Item.AQUA_EGG, value)
       } else if (field === "fieldCount") {
         if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "FIELD_DEATH",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
+          this.displayAbilityOnPokemon("FIELD_DEATH", pkm)
         }
       } else if (field == "fightingBlockCount") {
         if (value > 0 && value % 10 === 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "FIGHTING_KNOCKBACK",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
+          this.displayAbilityOnPokemon("FIGHTING_KNOCKBACK", pkm)
         }
       } else if (field === "fairyCritCount") {
         if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "FAIRY_CRIT",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
+          this.displayAbilityOnPokemon("FAIRY_CRIT", pkm)
         }
       } else if (field === "powerLensCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "POWER_LENS",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
+        if (value !== 0){
+          this.displayAbilityOnPokemon("POWER_LENS", pkm)
         }
       } else if (field === "starDustCount") {
-        if (value != 0) {
-          displayAbility(
-            this.scene,
-            [],
-            "STAR_DUST",
-            pkm.orientation,
-            pkm.positionX,
-            pkm.positionY,
-            pkm.targetX ?? -1,
-            pkm.targetY ?? -1,
-            this.flip
-          )
+        if (value !== 0){
+          this.displayAbilityOnPokemon("STAR_DUST", pkm)
         }
       } else if (field === "spellBlockedCount") {
         if (value != 0) {
@@ -902,7 +851,7 @@ export default class BattleManager {
 
   displayAbility(
     id: string,
-    skill: Ability | string,
+    ability: Ability | string,
     orientation: Orientation,
     positionX: number,
     positionY: number,
@@ -910,20 +859,34 @@ export default class BattleManager {
     targetY?: number,
     delay?: number
   ) {
-    if (this.simulation?.id === id && skill) {
-      displayAbility(
-        this.scene,
-        this.group.getChildren() as PokemonSprite[],
-        skill,
+    if (this.simulation?.id === id && ability) {
+      displayAbility({
+        scene: this.scene,
+        pokemonsOnBoard: this.group.getChildren() as PokemonSprite[],
+        ability,
         orientation,
         positionX,
         positionY,
-        targetX ?? -1,
-        targetY ?? -1,
-        this.flip,
-        delay ?? -1
-      )
+        targetX: targetX ?? -1,
+        targetY: targetY ?? -1,
+        flip: this.flip,
+        delay: delay ?? -1
+      })
     }
+  }
+
+  displayAbilityOnPokemon(ability: Ability | string, pkm: PokemonSprite) {
+    displayAbility({
+      scene: this.scene,
+      pokemonsOnBoard: [],
+      ability,
+      orientation: pkm.orientation,
+      positionX: pkm.positionX,
+      positionY: pkm.positionY,
+      targetX: pkm.targetX ?? -1,
+      targetY: pkm.targetY ?? -1,
+      flip: this.flip
+    })
   }
 
   displayBoardEvent(event: IBoardEvent) {

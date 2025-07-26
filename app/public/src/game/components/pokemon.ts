@@ -586,21 +586,17 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   displayAnimation(anim: string) {
-    return displayAbility(
-      this.scene as GameScene,
-      [],
-      anim,
-      this.orientation,
-      this.positionX,
-      !this.inBattle
-        ? this.positionY - 1
-        : this.team === Team.RED_TEAM
-          ? 4 - this.positionY
-          : this.positionY,
-      this.targetX ?? -1,
-      this.targetY ?? -1,
-      this.flip
-    )
+    return displayAbility({
+      scene: this.scene as GameScene,
+      pokemonsOnBoard: [],
+      ability: anim,
+      orientation: this.orientation,
+      positionX: this.positionX,
+      positionY: !this.inBattle ? this.positionY - 1 : this.team === Team.RED_TEAM ? 4 - this.positionY : this.positionY,
+      targetX: this.targetX ?? -1,
+      targetY: this.targetY ?? -1,
+      flip: this.flip
+    })
   }
 
   fishingAnimation() {

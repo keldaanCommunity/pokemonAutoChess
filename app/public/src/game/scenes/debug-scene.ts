@@ -406,23 +406,23 @@ export class DebugScene extends Phaser.Scene {
 
   addAbilityAnim() {
     const showAbilityAnim = () => {
-      displayAbility(
-        this,
-        [this.target!],
-        this.pokemon!.skill,
-        this.pokemon!.orientation,
-        this.pokemon!.positionX,
-        this.pokemon!.positionY,
-        this.pokemon!.targetX ?? -1,
-        this.pokemon!.targetY ?? -1,
-        false
-      )
+      displayAbility({
+        scene: this,
+        pokemonsOnBoard: [this.target!],
+        ability: this.pokemon!.skill,
+        orientation: this.pokemon!.orientation,
+        positionX: this.pokemon!.positionX,
+        positionY: this.pokemon!.positionY,
+        targetX: this.pokemon!.targetX ?? -1,
+        targetY: this.pokemon!.targetY ?? -1,
+        flip: this.pokemon!.flip
+      })
     }
     showAbilityAnim()
     this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
   }
 
-  shakeCamera(intensity: number, duration: number) {
-    this.cameras.main.shake(duration, intensity)
+  shakeCamera(options?: { intensity?: number; duration?: number }) {
+    this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
   }
 }
