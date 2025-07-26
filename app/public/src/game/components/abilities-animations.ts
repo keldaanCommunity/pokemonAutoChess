@@ -320,7 +320,7 @@ function addAbilitySprite(
     rotation,
     angle,
     alpha,
-    destroyOnComplete,
+    destroyOnComplete = true,
     animOptions = {}
   } = options
   sprite.setOrigin(
@@ -354,17 +354,16 @@ function addAbilitySprite(
 
 const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> = options => args => {
   if (options?.oriented) {
-    options.rotation = angleBetween(
-      [args.positionX, args.positionY],
-      [args.targetX, args.targetY]
-    ) + (options.rotation ?? 0)
+    const coordinates = transformEntityCoordinates(args.positionX, args.positionY, args.flip)
+    const coordinatesTarget = transformEntityCoordinates(args.targetX, args.targetY, args.flip)
+    options.rotation = angleBetween(coordinates, coordinatesTarget) + (options.rotation ?? 0)
   }
 
   const delay = options.delay ?? args.delay ?? 0
   setTimeout(() => {
     addAbilitySprite(
       args.scene,
-      args.ability,
+      options.ability ?? args.ability,
       [
         options.x + (options?.positionOffset?.[0] ?? 0),
         options.y + (options?.positionOffset?.[1] ?? 0)
@@ -427,7 +426,7 @@ type TweenAnimationMakerOptions = {
 const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (options = {}) =>
     (args) => {
-      const { scene, ability, flip } = args
+      const { scene, flip } = args
       const [startRow, startCol, startFlip] =
         options.startCoords === "target"
           ? [args.targetY, args.targetX, args.flip]
@@ -442,7 +441,13 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
         startPosition[0] += options.startPositionOffset?.[0] ?? 0
         startPosition[1] += options.startPositionOffset?.[1] ?? 0
 
-        const sprite = addAbilitySprite(scene, ability, startPosition, {
+        if (options?.oriented) {
+          const coordinates = transformEntityCoordinates(args.positionX, args.positionY, args.flip)
+          const coordinatesTarget = transformEntityCoordinates(args.targetX, args.targetY, args.flip)
+          options.rotation = angleBetween(coordinates, coordinatesTarget) + (options.rotation ?? 0)
+        }
+
+        const sprite = addAbilitySprite(scene, options.ability ?? args.ability, startPosition, {
           destroyOnComplete: false,
           ...options
         })
@@ -469,7 +474,7 @@ const projectile: AbilityAnimationMaker<TweenAnimationMakerOptions> =
       const [endRow, endCol, endFlip] =
         options.endCoords === "caster"
           ? [args.positionY, args.positionX, args.flip]
-          : (options.endCoords ?? [args.targetY, args.targetX])
+          : (options.endCoords ?? [args.targetX, args.targetY])
       const endPosition = transformEntityCoordinates(
         endRow,
         endCol,
@@ -533,7 +538,7 @@ const orientedProjectile: AbilityAnimationMaker<
   )
   return tweenAnimation({
     ...options,
-    endCoords: finalCoordinates,
+    tweenProps: { x: finalCoordinates[0], y: finalCoordinates[1], ...(options.tweenProps ?? {}) },
   })(args)
 }
 
@@ -581,7 +586,7 @@ export const AbilitiesAnimations: {
   ["FOSSIL_RESURRECT"]: onCasterScale2,
   ["LANDS_WRATH/hit"]: onCasterScale2,
   [Ability.BUG_BUZZ]: onTargetScale2,
-  [Ability.VENOSHOCK]: onTargetScale2,
+  [Ability.VENOSHOCK]: onTarget({ scale: 2, origin: [0.5, 1] }),
   [Ability.LEECH_LIFE]: onTargetScale2,
   [Ability.THIEF]: onTargetScale2,
   [Ability.STUN_SPORE]: onTargetScale2,
@@ -846,7 +851,7 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.POWER_HUG]: onTarget({ ability: Ability.ANCHOR_SHOT }),
-  [Ability.HEAVY_SLAM]: [onTargetScale2, shakeCamera({})],
+  [Ability.HEAVY_SLAM]: [onCasterScale2, shakeCamera({})],
   [Ability.BODY_SLAM]: shakeCamera({}),
   [Ability.BULLDOZE]: [
     onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
@@ -1070,8 +1075,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.SHADOW_BALL]: projectile({ duration: 1000 }),
   [Ability.FUSION_BOLT]: projectile({ duration: 1000, scale: 3 }),
-  [Ability.SOLAR_BEAM]: (args) =>
-    projectile({ startCoords: [args.targetX, args.targetY - 3] })(args),
+  [Ability.SOLAR_BEAM]: projectile({ startCoords: "target", startPositionOffset: [0, -300], alpha: 0.5, tweenProps: { alpha: 1 } }),
   [Ability.ORIGIN_PULSE]: (args) =>
     projectile({
       startCoords: [0, args.targetY],
@@ -1137,19 +1141,19 @@ export const AbilitiesAnimations: {
     hitAnim: onTarget({ ability: "PUFF_RED" })
   }),
   [Ability.NUTRIENTS]: projectile({
-    scale: 3,
+    scale: 2,
     duration: 400,
     hitAnim: onTarget({ ability: "PUFF_GREEN" })
   }),
   [Ability.SYRUP_BOMB]: projectile({
     ability: Ability.NUTRIENTS,
-    scale: 3,
+    scale: 2,
     duration: 400,
     hitAnim: onTarget({ ability: "PUFF_RED" })
   }),
   [Ability.APPLE_ACID]: projectile({
     ability: Ability.NUTRIENTS,
-    scale: 3,
+    scale: 2,
     duration: 400,
     hitAnim: onTarget({ ability: "PUFF_RED" })
   }),
@@ -1360,7 +1364,7 @@ export const AbilitiesAnimations: {
       rotation: -Math.PI / 2,
       duration: 600,
       tweenProps: {
-        scaleY: distance / 80
+        scaleY: distance * 1.2
       }
     })(args)
   },
@@ -1521,9 +1525,9 @@ export const AbilitiesAnimations: {
     duration: 1000
   })),
   [Ability.CORE_ENFORCER]: [
-    onTarget({ positionOffset: [-96, +96], origin: [0, 0.5] }),
-    onTarget({ positionOffset: [+96, +96], origin: [0, 0.5], rotation: Math.PI * 3 / 4, delay: 100 }),
-    onTarget({ positionOffset: [-96, -96], origin: [0, 0.5], delay: 200 })
+    onTarget({ positionOffset: [-96, -96], origin: [0, 0.5] }),
+    onTarget({ positionOffset: [+100, -90], origin: [0, 0.5], rotation: Math.PI * 3 / 4, delay: 100 }),
+    onTarget({ positionOffset: [-96, +96], origin: [0, 0.5], delay: 200 })
   ],
   [Ability.FOLLOW_ME]: poppingIcon({ maxScale: 1, tweenProps: { yoyo: true } }),
   [Ability.AFTER_YOU]: poppingIcon({ maxScale: 1, tweenProps: { yoyo: true } }),
