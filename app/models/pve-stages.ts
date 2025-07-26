@@ -133,7 +133,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     getRewards(player: Player) {
       const items = values(player.board)
         .flatMap((p) => values(p.items))
-        .concat([...player.items])
+        .concat(values(player.items))
       const nbComponents = items.filter((i) =>
         ItemComponents.includes(i)
       ).length
