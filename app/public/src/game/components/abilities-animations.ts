@@ -984,22 +984,7 @@ export const AbilitiesAnimations: {
     })
   },
   [Ability.STRUGGLE_BUG]: onCaster({ ability: Ability.PSYCHIC }),
-  [Ability.SPIN_OUT]: (args) => {
-    const [dx, dy] = OrientationVector[args.orientation]
-    const coordinates = transformEntityCoordinates(
-      args.positionX,
-      args.positionY,
-      args.flip
-    )
-    const finalCoordinates = transformEntityCoordinates(
-      args.positionX + dx * 0.5,
-      args.positionY + dy * 0.5,
-      args.flip
-    )
-    return addAbilitySprite(args.scene, args.ability, finalCoordinates, {
-      rotation: angleBetween(coordinates, finalCoordinates) - Math.PI / 2
-    })
-  },
+  [Ability.SPIN_OUT]: orientedProjectile({ startCoords: "target", distance: 0.5, rotation: -Math.PI / 2 }),
   [Ability.SPACIAL_REND]: (args) =>
     addAbilitySprite(
       args.scene,
@@ -1009,7 +994,7 @@ export const AbilitiesAnimations: {
     ),
   [Ability.PETAL_BLIZZARD]: onCasterScale3,
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
-  [Ability.AQUA_TAIL]: onTarget({ ability: AttackSprite.WATER_MELEE }),
+  [Ability.AQUA_TAIL]: orientedProjectile({ ability: Ability.SPIN_OUT, tint: 0x80ddff, distance: 1, duration: 400, rotation: -Math.PI / 2, destroyOnComplete: true }),
   [Ability.RAPID_SPIN]: onTarget({ scale: 1.5 }),
   [Ability.COTTON_GUARD]: onCasterScale3,
   ["FLOWER_TRICK_EXPLOSION"]: onCaster({ ability: "PUFF_PINK", scale: 3 }),
