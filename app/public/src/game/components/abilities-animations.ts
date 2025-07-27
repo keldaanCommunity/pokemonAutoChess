@@ -877,11 +877,12 @@ export const AbilitiesAnimations: {
   }),
   [Ability.NIGHT_SLASH]: onTargetScale2,
   [Ability.KOWTOW_CLEAVE]: onTarget({ ability: Ability.NIGHT_SLASH, scale: 3 }),
-  [Ability.FELL_STINGER]: onTarget({ ability: Ability.VENOSHOCK, scale: 3 }),
+  [Ability.FELL_STINGER]: onTarget({ ability: Ability.VENOSHOCK, tint: 0xc0ffc0, origin: [0.5, 1] }),
   [Ability.NASTY_PLOT]: onCaster({ positionOffset: [0, -50] }),
   [Ability.ROCK_TOMB]: onTarget({ origin: [0.5, 0.9], scale: 1 }),
   [Ability.SLACK_OFF]: onCaster({ ability: Ability.ILLUSION, scale: 1 }),
   [Ability.FISHIOUS_REND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
   [Ability.CUT]: [
     onTargetScale3,
     onCaster({
@@ -1116,7 +1117,7 @@ export const AbilitiesAnimations: {
   [Ability.METAL_CLAW]: onTarget({ ability: Ability.CRUSH_CLAW, scale: 2 }),
   [Ability.DRAGON_CLAW]: onTargetScale1,
   [Ability.EARTHQUAKE]: [onCasterScale3, shakeCamera({ duration: 350 })],
-  [Ability.OCTAZOOKA]: onTarget({ ability: Ability.SMOKE_SCREEN, scale: 3 }),
+  [Ability.OCTAZOOKA]: projectile({ ability: Ability.ARMOR_CANNON, scale: 1, tint: 0x303030, hitAnim: onTarget({ ability: Ability.SMOKE_SCREEN, tint: 0x303030, scale: 3 }) }),
   [Ability.WOOD_HAMMER]: onTarget({ scale: 1, origin: [0.5, 1] }),
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
@@ -1489,6 +1490,7 @@ export const AbilitiesAnimations: {
     duration: 700,
     ease: "Power2"
   }),
+  [Ability.CHAIN_CRAZED]: onCaster({ ability: Ability.STUN_SPORE, tint: 0xff60ff, scale: 2 }),
   [Ability.MALIGNANT_CHAIN]: (args) => {
     const distance = distanceE(
       args.positionX,
