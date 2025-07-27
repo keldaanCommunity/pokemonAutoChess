@@ -683,6 +683,7 @@ export const AbilitiesAnimations: {
   [Ability.ANCHOR_SHOT]: onTargetScale1,
   [Ability.LEAF_BLADE]: onTargetScale2,
   [Ability.SLASHING_CLAW]: onTargetScale2,
+  [Ability.DIRE_CLAW]: onTarget({ ability: Ability.SLASHING_CLAW, scale: 3 }),
   [Ability.HEX]: onTargetScale2,
   [Ability.PLASMA_FIST]: onTargetScale2,
   [Ability.LEECH_SEED]: onTargetScale2,
@@ -858,6 +859,7 @@ export const AbilitiesAnimations: {
   [Ability.DISCHARGE]: onCasterScale3,
   [Ability.OVERDRIVE]: onCasterScale2,
   [Ability.SMOG]: onCaster({ scale: 4, depth: DEPTH.ABILITY_MINOR }),
+  [Ability.POISON_GAS]: onCaster({ ability: Ability.SMOG, scale: 3, tint: 0xa0f0f0, depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.SLUDGE]: onTarget({
     ability: Ability.SMOG,
     scale: 3,
@@ -908,7 +910,7 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0],
     oriented: true,
     rotation: -Math.PI / 2,
-    tint: 0x87ceeb
+    tint: 0xffc0ff
   }),
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: onTargetScale1,
@@ -946,8 +948,8 @@ export const AbilitiesAnimations: {
   }),
   [Ability.MAGMA_STORM]: onTargetScale1,
   [Ability.ABSORB]: onCaster({ depth: DEPTH.ABILITY_GROUND_LEVEL }),
-  [Ability.GIGATON_HAMMER]: [onTargetScale2, shakeCamera({})],
-  [Ability.COUNTER]: onCasterScale3,
+  [Ability.GIGATON_HAMMER]: [onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }), shakeCamera({})],
+  [Ability.COUNTER]: onCasterScale2,
   [Ability.SPECTRAL_THIEF]: [onTargetScale2, onCasterScale2],
   [Ability.SACRED_SWORD_IRON]: onTarget({
     ability: "SACRED_SWORD",
@@ -1000,6 +1002,10 @@ export const AbilitiesAnimations: {
     ability: Ability.FAIRY_WIND,
     tint: 0xc0c0ff
   }),
+  [Ability.GRASSY_SURGE]: onCaster({ ability: Ability.FAIRY_WIND, tint: 0x80ff80 }),
+  [Ability.ELECTRIC_SURGE]: onCaster({ ability: Ability.FAIRY_WIND, tint: 0xffff80 }),
+  [Ability.PSYCHIC_SURGE]: onCaster({ ability: Ability.FAIRY_WIND, tint: 0xc050ff }),
+  [Ability.MISTY_SURGE]: onCaster({ ability: Ability.FAIRY_WIND, tint: 0xffa0ff }),
   [Ability.RELIC_SONG]: onCasterScale2,
   [Ability.SING]: poppingIcon({ ability: Ability.RELIC_SONG, maxScale: 2 }),
   [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),
@@ -1183,7 +1189,7 @@ export const AbilitiesAnimations: {
     tweenProps: { yoyo: true }
   }),
   [Ability.SHADOW_BALL]: projectile({ duration: 1000 }),
-  [Ability.FUSION_BOLT]: projectile({ duration: 1000, scale: 3 }),
+  [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
   [Ability.SOLAR_BEAM]: projectile({
     startCoords: "target",
     startPositionOffset: [0, -300],
@@ -1231,7 +1237,7 @@ export const AbilitiesAnimations: {
   [Ability.FLYING_PRESS]: skyfall({
     hitAnim: onTarget({ ability: Ability.HEAVY_SLAM })
   }),
-  [Ability.SUNSTEEL_STRIKE]: skyfall({ hitAnim: shakeCamera({}) }),
+  [Ability.SUNSTEEL_STRIKE]: skyfall({ hitAnim: shakeCamera({}), scale: 1 }),
   ["COMET_CRASH"]: skyfall({
     ability: Ability.SUNSTEEL_STRIKE,
     scale: 0.5,
@@ -1453,8 +1459,8 @@ export const AbilitiesAnimations: {
     tweenProps: { scale: 2, alpha: 1 }
   }),
   [Ability.ENTANGLING_THREAD]: projectile({
+    ability: Ability.STICKY_WEB,
     duration: 1200,
-    tint: 0x80a080,
     ease: Phaser.Math.Easing.Cubic.Out,
     alpha: 0.5,
     scale: 0.25,
@@ -1493,13 +1499,25 @@ export const AbilitiesAnimations: {
   }),
   [Ability.GUNK_SHOT]: projectile({
     duration: 700,
-    ease: "Power2"
+    ease: "Power2",
+    hitAnim: onTarget({
+      ability: Ability.DIVE,
+      scale: 1.5,
+      tint: 0xf060a0,
+      depth: DEPTH.ABILITY_GROUND_LEVEL
+    })
   }),
   [Ability.TOXIC]: projectile({
     ability: Ability.GUNK_SHOT,
     scale: 1.5,
     duration: 500,
-    tint: 0xc0ffa0
+    tint: 0xc0ffa0,
+    hitAnim: onTarget({
+      ability: Ability.DIVE,
+      scale: 1.5,
+      tint: 0xc06080,
+      depth: DEPTH.ABILITY_GROUND_LEVEL
+    })
   }),
   [Ability.CHAIN_CRAZED]: onCaster({ ability: Ability.STUN_SPORE, tint: 0xff60ff, scale: 2 }),
   [Ability.MALIGNANT_CHAIN]: (args) => {
