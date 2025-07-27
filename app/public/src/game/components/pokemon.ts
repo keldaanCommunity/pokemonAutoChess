@@ -497,8 +497,8 @@ export default class PokemonSprite extends DraggableObject {
       }
 
       const projectile = this.scene.add.sprite(
-        coordinates[0] + randomBetween(-5, 5),
-        coordinates[1] + randomBetween(-5, 5),
+        coordinates[0],
+        coordinates[1] - 10,
         "attacks",
         `${attackSprite}/000.png`
       )
@@ -532,8 +532,8 @@ export default class PokemonSprite extends DraggableObject {
         )*/
         this.scene.tweens.add({
           targets: projectile,
-          x: coordinatesTarget[0],
-          y: coordinatesTarget[1],
+          x: coordinatesTarget[0] + randomBetween(-5, 5),
+          y: coordinatesTarget[1] + randomBetween(-5, 5),
           ease: "Linear",
           duration: min(250)(travelTime),
           delay: delayBeforeShoot - LATENCY_COMPENSATION,

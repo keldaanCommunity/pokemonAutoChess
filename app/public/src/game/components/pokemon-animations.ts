@@ -6265,14 +6265,14 @@ export const PokemonAnimations: {
     },
     [Pkm.CAPSAKID]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Double,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FIRE_MELEE,
         hitSprite: HitSprite.FIRE_HIT
     },
     [Pkm.SCOVILLAIN]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Double,
+        ability: AnimationType.Dance,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.FIRE_MELEE,
         hitSprite: HitSprite.FIRE_HIT
