@@ -984,7 +984,7 @@ export const AbilitiesAnimations: {
     })
   },
   [Ability.STRUGGLE_BUG]: onCaster({ ability: Ability.PSYCHIC }),
-  [Ability.SPIN_OUT]: orientedProjectile({ startCoords: "target", distance: 0.5, rotation: -Math.PI / 2 }),
+  [Ability.SPIN_OUT]: orientedProjectile({ distance: 1, duration: 400, rotation: -Math.PI / 2, destroyOnComplete: true }),
   [Ability.SPACIAL_REND]: (args) =>
     addAbilitySprite(
       args.scene,
@@ -1297,6 +1297,14 @@ export const AbilitiesAnimations: {
     alpha: 0.5,
     scale: 0.25,
     tweenProps: { scale: 2, alpha: 0.9 }
+  }),
+  [Ability.STICKY_WEB]: projectile({
+    duration: 1000,
+    ease: Phaser.Math.Easing.Cubic.Out,
+    alpha: 0.5,
+    scale: 0.25,
+    tint: 0xccffcc,
+    tweenProps: { scale: 2, alpha: 1 }
   }),
   [Ability.ENTANGLING_THREAD]: projectile({
     duration: 1200,
