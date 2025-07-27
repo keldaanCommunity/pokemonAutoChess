@@ -5407,12 +5407,12 @@ export const PokemonAnimations: {
     [Pkm.PHANPY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.TumbleBack,
-        emote: AnimationType.DeepBreath,
+        emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ROCK_MELEE
     },
     [Pkm.DONPHAN]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.TumbleBack,
+        ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ROCK_MELEE
     },
