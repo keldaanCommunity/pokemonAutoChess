@@ -469,14 +469,14 @@ export const PokemonAnimations: {
     },
     [Pkm.MARSHTOMP]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Swing,
+        ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE,
         hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.SWAMPERT]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Swing,
+        ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE,
         hitSprite: HitSprite.GROUND_HIT

@@ -1734,7 +1734,7 @@ export const AbilitiesAnimations: {
   [Ability.BONE_ARMOR]: OrientationArray.map((orientation) =>
     orientedProjectile({
       orientation,
-      distance: 1,
+      distance: 0.5,
       ability: Ability.BONEMERANG,
       startCoords: "target",
       endCoords: "caster",
