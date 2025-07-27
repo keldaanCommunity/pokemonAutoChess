@@ -1485,16 +1485,16 @@ export const AbilitiesAnimations: {
     endPositionOffset: [0, -80]
   }),
   [Ability.MAGNET_BOMB]: projectile({ duration: 400 }),
-  ["ELECTRO_SHOT_CHARGE"]: tweenAnimation({
-    duration: 2000,
+  ["ELECTRO_SHOT_CHARGE"]: onCaster({
     ability: Ability.MAGNET_BOMB,
-    animOptions: { repeat: -1, duration: 2000 }
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    animOptions: { repeat: 5 }
   }),
-  [Ability.ELECTRO_SHOT]: tweenAnimation({
+  [Ability.ELECTRO_SHOT]: onCaster({
     scale: 4,
     origin: [0, 0.5],
     oriented: true,
-    duration: 1000
+    animOptions: { repeat: 3 }
   }),
   [Ability.GUNK_SHOT]: projectile({
     duration: 700,
@@ -1827,8 +1827,9 @@ export const AbilitiesAnimations: {
       duration: 1000,
       rotation: targetAngle - Math.PI / 2,
       endCoords: [
-        coordinates[0] + Math.round(Math.cos(targetAngle) * 10),
-        coordinates[1] + Math.round(Math.sin(targetAngle) * 10)
+        args.positionX + Math.round(Math.cos(targetAngle) * 10),
+        args.positionY + Math.round(Math.sin(targetAngle) * 10),
+        args.flip
       ]
     })(args)
     staticAnimation({
@@ -1912,7 +1913,7 @@ export const AbilitiesAnimations: {
     })
   },
 
-  ["HAIL_PROJECTILE"]: tweenAnimation({
+  ["HAIL_PROJECTILE"]: projectile({
     startCoords: "target",
     startPositionOffset: [+60, -240],
     scale: 1,
