@@ -933,6 +933,7 @@ export const AbilitiesAnimations: {
   [Ability.SING]: poppingIcon({ ability: Ability.RELIC_SONG, maxScale: 2 }),
   [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),
   [Ability.LOVELY_KISS]: poppingIcon({ textureKey: "attacks", ability: AttackSprite.FAIRY_MELEE, maxScale: 2, startPositionOffset: [0, -50] }),
+  [Ability.CHARM]: poppingIcon({ textureKey: "attacks", ability: AttackSprite.FAIRY_MELEE, maxScale: 3, startPositionOffset: [0, -50] }),
   [Ability.HIGH_JUMP_KICK]: onTargetScale2,
   [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
   [Ability.TROP_KICK]: onTargetScale2,
