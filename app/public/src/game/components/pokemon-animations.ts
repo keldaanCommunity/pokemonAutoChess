@@ -191,21 +191,21 @@ export const PokemonAnimations: {
     },
     [Pkm.CLEFFA]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Rotate,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CLEFAIRY]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Rotate,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CLEFABLE]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Rotate,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.FAIRY_HIT
@@ -2905,15 +2905,15 @@ export const PokemonAnimations: {
         hitSprite: HitSprite.POISON_HIT
     },
     [Pkm.CHINCHOU]: {
-        attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
+        attack: AnimationType.Attack,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
     [Pkm.LANTURN]: {
-        attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
+        attack: AnimationType.Attack,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
@@ -4336,14 +4336,14 @@ export const PokemonAnimations: {
     },
     [Pkm.CLAUNCHER]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Double,
-        emote: AnimationType.Charge,
+        ability: AnimationType.Charge,
+        emote: AnimationType.Appeal,
         attackSprite: AttackSprite.PSYCHIC_RANGE,
         hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CLAWITZER]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Double,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.PSYCHIC_RANGE,
         hitSprite: HitSprite.SOUND_HIT

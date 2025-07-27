@@ -421,6 +421,7 @@ type TweenAnimationMakerOptions = {
   endCoords?: [number, number, boolean?] | "caster"
   startPositionOffset?: [number, number]
   endPositionOffset?: [number, number]
+  destroyOnTweenComplete?: boolean
 }
 
 const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
@@ -458,7 +459,7 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
           duration: options.duration || 500,
           ease: options.ease || "linear",
           onComplete: () => {
-            sprite?.destroy()
+            if (options.destroyOnTweenComplete !== false) sprite?.destroy()
             if (options.hitAnim) options.hitAnim(args)
           },
           ...(options.tweenProps ?? {})
@@ -631,7 +632,7 @@ export const AbilitiesAnimations: {
   [Ability.LOCK_ON]: onTargetScale2,
   [Ability.PSYCH_UP]: onTargetScale2,
   [Ability.ROCK_SMASH]: onTargetScale2,
-  [Ability.BLAZE_KICK]: onTargetScale2,
+  [Ability.BLAZE_KICK]: onTarget({ positionOffset: [0, -35] }),
   [Ability.BITE]: onTargetScale2,
   [Ability.DRAGON_TAIL]: onTargetScale2,
   [Ability.SOAK]: onTargetScale2,
@@ -672,11 +673,11 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: +Math.PI / 2
   }),
-  [Ability.MYSTICAL_FIRE]: onTarget({ positionOffset: [0, -25] }),
+  [Ability.MYSTICAL_FIRE]: onTarget({ positionOffset: [0, -50] }),
   [Ability.FLAME_CHARGE]: onCaster({
     oriented: true,
     rotation: +Math.PI / 2,
-    origin: [1, 1],
+    origin: [0.5, 1],
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.PASTEL_VEIL]: onCaster({
@@ -1031,6 +1032,7 @@ export const AbilitiesAnimations: {
   [Ability.WOOD_HAMMER]: onTarget({ scale: 1, origin: [0.5, 1] }),
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
+  [Ability.HEAD_SMASH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
   ["GROUND_GROW"]: onCaster({ scale: 1.5 }),
   ["FISHING"]: onCaster({
     ability: Ability.DIVE,
@@ -1107,10 +1109,11 @@ export const AbilitiesAnimations: {
   [Ability.MUD_SHOT]: projectile({ scale: 4, duration: 350 }),
   [Ability.POLTERGEIST]: projectile({ scale: 3, duration: 1000 }),
   [Ability.ZAP_CANNON]: projectile({ scale: 3, duration: 500 }),
-  [Ability.ELECTRO_BALL]: (args) =>
-    projectile({ ability: Ability.ZAP_CANNON, duration: args.delay ?? 300 })(
-      args
-    ),
+  [Ability.ELECTRO_BALL]: (args) => projectile({
+    ability: Ability.ZAP_CANNON,
+    duration: args.delay ?? 300,
+    hitAnim: onTarget({ ability: Ability.DISCHARGE, scale: 1 })
+  })(args),
   [Ability.SPARKLING_ARIA]: projectile({ scale: 3, duration: 1000 }),
   ["FLYING_SKYDIVE"]: skyfall({}),
   [Ability.SKY_ATTACK]: skyfall({ scale: 1.5, duration: 500 }),
@@ -1388,7 +1391,9 @@ export const AbilitiesAnimations: {
   }),
   [Ability.FREEZE_DRY]: projectile({
     duration: 250,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    destroyOnComplete: true,
+    destroyOnTweenComplete: false
   }),
   [Ability.BOLT_BEAK]: projectile({
     duration: 250,
@@ -1481,7 +1486,7 @@ export const AbilitiesAnimations: {
   [Ability.DRAGON_BREATH]: orientedProjectile({ distance: 1.5, oriented: true, rotation: -Math.PI / 2 }),
   [Ability.BONEMERANG]: orientedProjectile({ distance: 5, duration: 1000, ease: "Power2", tweenProps: { yoyo: true } }),
   [Ability.SHADOW_BONE]: orientedProjectile({ ability: Ability.BONEMERANG, distance: 5, duration: 1000, tint: 0x301030 }),
-  [Ability.AURORA_BEAM]: orientedProjectile({ distance: 8, duration: 1500, oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.AURORA_BEAM]: orientedProjectile({ oriented: true, origin: [0, 0.5], scale: [0.1, 2], duration: 1500, distance: 6, tweenProps: { scale: 2 }, animOptions: { repeat: -1 } }),
   [Ability.SPIRIT_SHACKLE]: orientedProjectile({ distance: 8, scale: 1, duration: 2000, oriented: true }),
   [Ability.RAZOR_LEAF]: orientedProjectile({ distance: 8, duration: 2000 }),
   [Ability.PSYCHO_CUT]: range(1, 3).map((i) => orientedProjectile({
