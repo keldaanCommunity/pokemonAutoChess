@@ -942,7 +942,7 @@ export const AbilitiesAnimations: {
     onCaster({ origin: [0.5, 0.8] }),
     onTarget({ ability: "MIND_BLOWN/hit", scale: 3 })
   ],
-  [Ability.FIRE_LASH]: onTargetScale4,
+  [Ability.FIRE_LASH]: onCaster({ ability: Ability.FISHIOUS_REND, tint: 0xff6000, oriented: true, rotation: -Math.PI / 2, scale: 3 }),
   [Ability.WONDER_GUARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.DEATH_WING]: onTargetScale2,
