@@ -616,6 +616,7 @@ export const AbilitiesAnimations: {
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
   [Ability.POWER_WHIP]: onCasterScale2,
+  [Ability.STORED_POWER]: onCaster({ ability: Ability.POWER_WHIP, tint: 0xff80ff }),
   [Ability.MEDITATE]: onCasterScale2,
   [Ability.MUD_BUBBLE]: onCasterScale2,
   [Ability.SOFT_BOILED]: onCasterScale2,
@@ -628,6 +629,7 @@ export const AbilitiesAnimations: {
   [Ability.BRICK_BREAK]: onCasterScale2,
   [Ability.BULK_UP]: onCasterScale2,
   [Ability.FLASH]: onCasterScale2,
+  [Ability.METEOR_MASH]: onTarget({ ability: Ability.FLASH }),
   [Ability.STEEL_WING]: onCasterScale2,
   [Ability.HYPNOSIS]: orientedProjectile({
     oriented: true,
