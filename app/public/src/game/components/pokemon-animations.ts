@@ -6812,6 +6812,20 @@ export const PokemonAnimations: {
         emote: AnimationType.DeepBreath,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.FLYING_HIT
-    }
+    },
+    [Pkm.TAILLOW]: {
+        attack: AnimationType.Attack,
+        ability: AnimationType.Shoot,
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.FLYING_MELEE,
+        hitSprite: HitSprite.FLYING_HIT
+    },
+    [Pkm.SWELLOW]: {
+        attack: AnimationType.Attack,
+        ability: AnimationType.Shoot,
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.FLYING_MELEE,
+        hitSprite: HitSprite.FLYING_HIT
+    },
 }
 

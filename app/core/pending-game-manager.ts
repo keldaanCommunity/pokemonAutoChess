@@ -1,5 +1,4 @@
 import { type Presence } from "@colyseus/core"
-import { strnumOptions } from "fast-xml-parser"
 import { ALLOWED_GAME_RECONNECTION_TIME } from "../types/Config"
 import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"

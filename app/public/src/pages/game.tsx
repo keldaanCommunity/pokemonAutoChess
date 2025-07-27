@@ -1,4 +1,4 @@
-import { Client, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -546,7 +546,10 @@ export default function Game() {
         }
       })
 
-      room.state.listen("roundTime", (value) => {
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
+
+      $state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
         const stageLevel = room.state.stageLevel ?? 0
         if (
@@ -560,7 +563,7 @@ export default function Game() {
         }
       })
 
-      room.state.listen("phase", (newPhase, previousPhase) => {
+      $state.listen("phase", (newPhase, previousPhase) => {
         if (gameContainer.game) {
           const g = getGameScene()
           if (g) {
@@ -570,41 +573,43 @@ export default function Game() {
         dispatch(setPhase(newPhase))
       })
 
-      room.state.listen("stageLevel", (value) => {
+      $state.listen("stageLevel", (value) => {
         dispatch(setStageLevel(value))
       })
 
-      room.state.listen("noElo", (value) => {
+      $state.listen("noElo", (value) => {
         dispatch(setNoELO(value))
       })
 
-      room.state.listen("specialGameRule", (value) => {
+      $state.listen("specialGameRule", (value) => {
         dispatch(setSpecialGameRule(value))
       })
 
-      room.state.additionalPokemons.onChange(() => {
+      $state.additionalPokemons.onChange(() => {
         dispatch(setAdditionalPokemons(values(room.state.additionalPokemons)))
       })
 
-      room.state.simulations.onRemove(() => {
+      $state.simulations.onRemove(() => {
         gameContainer.resetSimulation()
       })
 
-      room.state.simulations.onAdd((simulation) => {
+      $state.simulations.onAdd((simulation) => {
         gameContainer.initializeSimulation(simulation)
+        const $simulation = $(simulation)
 
-        simulation.listen("weather", (value) => {
+        $simulation.listen("weather", (value) => {
           dispatch(setWeather({ id: simulation.id, value: value }))
         })
 
         const teams = [Team.BLUE_TEAM, Team.RED_TEAM]
         teams.forEach((team) => {
-          const dpsMeter =
+          const $dpsMeter =
             team === Team.BLUE_TEAM
-              ? simulation.blueDpsMeter
-              : simulation.redDpsMeter
-          dpsMeter.onAdd((dps) => {
+              ? $simulation.blueDpsMeter
+              : $simulation.redDpsMeter
+          $dpsMeter.onAdd((dps) => {
             dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
+            const $dps = $(dps)
             const fields: NonFunctionPropNames<IDps>[] = [
               "id",
               "name",
@@ -618,7 +623,7 @@ export default function Game() {
               "shieldDamageTaken"
             ]
             fields.forEach((field) => {
-              dps.listen(field, (value) => {
+              $dps.listen(field, (value) => {
                 dispatch(
                   changeDpsMeter({
                     id: dps.id,
@@ -632,15 +637,16 @@ export default function Game() {
             })
           })
 
-          dpsMeter.onRemove(() => {
+          $dpsMeter.onRemove(() => {
             dispatch(removeDpsMeter({ simulationId: simulation.id, team }))
           })
         })
       })
 
-      room.state.players.onAdd((player) => {
+      $state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         gameContainer.initializePlayer(player)
+        const $player = $(player)
 
         if (player.id == uid) {
           dispatch(setInterest(player.interest))
@@ -650,29 +656,29 @@ export default function Game() {
           dispatch(setShopFreeRolls(player.shopFreeRolls))
           dispatch(setEmotesUnlocked(player.emotesUnlocked))
 
-          player.listen("interest", (value) => {
+          $player.listen("interest", (value) => {
             dispatch(setInterest(value))
           })
-          player.listen("maxInterest", (value) => {
+          $player.listen("maxInterest", (value) => {
             dispatch(setMaxInterest(value))
           })
-          player.shop.onChange((pkm: Pkm, index: number) => {
+          $player.shop.onChange((pkm: Pkm, index: number) => {
             dispatch(changeShop({ value: pkm, index }))
           })
-          player.listen("shopLocked", (value) => {
+          $player.listen("shopLocked", (value) => {
             dispatch(setShopLocked(value))
           })
-          player.listen("shopFreeRolls", (value) => {
+          $player.listen("shopFreeRolls", (value) => {
             dispatch(setShopFreeRolls(value))
           })
-          player.listen("money", (value) => {
+          $player.listen("money", (value) => {
             dispatch(setMoney(value))
           })
-          player.listen("streak", (value) => {
+          $player.listen("streak", (value) => {
             dispatch(setStreak(value))
           })
         }
-        player.listen("life", (value, previousValue) => {
+        $player.listen("life", (value, previousValue) => {
           dispatch(setLife({ id: player.id, value: value }))
           if (
             value <= 0 &&
@@ -685,7 +691,8 @@ export default function Game() {
             getGameScene()?.input.keyboard?.removeAllListeners()
           }
         })
-        player.listen("experienceManager", (experienceManager) => {
+        $player.listen("experienceManager", (experienceManager) => {
+          const $experienceManager = $(experienceManager)
           if (player.id === uid) {
             dispatch(updateExperienceManager(experienceManager))
             const fields: NonFunctionPropNames<IExperienceManager>[] = [
@@ -694,7 +701,7 @@ export default function Game() {
               "level"
             ]
             fields.forEach((field) => {
-              experienceManager.listen(field, (value) => {
+              $experienceManager.listen(field, (value) => {
                 dispatch(
                   updateExperienceManager({
                     ...experienceManager,
@@ -704,7 +711,7 @@ export default function Game() {
               })
             })
           }
-          experienceManager.listen("level", (value) => {
+          $experienceManager.listen("level", (value) => {
             if (value > 1) {
               toast(
                 <p>
@@ -718,10 +725,10 @@ export default function Game() {
             }
           })
         })
-        player.listen("loadingProgress", (value) => {
+        $player.listen("loadingProgress", (value) => {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
         })
-        player.listen("map", (newMap) => {
+        $player.listen("map", (newMap) => {
           if (player.id === store.getState().game.currentPlayerId) {
             const gameScene = getGameScene()
             if (gameScene) {
@@ -742,7 +749,7 @@ export default function Game() {
           dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))
         })
 
-        player.listen("spectatedPlayerId", (spectatedPlayerId) => {
+        $player.listen("spectatedPlayerId", (spectatedPlayerId) => {
           if (room?.state?.players) {
             const spectatedPlayer = room?.state?.players.get(spectatedPlayerId)
             if (spectatedPlayer && player.id === uid) {
@@ -785,45 +792,35 @@ export default function Game() {
         ]
 
         fields.forEach((field) => {
-          player.listen(field, (value) => {
+          $player.listen(field, (value) => {
             dispatch(
               changePlayer({ id: player.id, field: field, value: value })
             )
           })
         })
 
-        player.synergies.onChange(() => {
+        $player.synergies.onChange(() => {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
         })
 
-        player.itemsProposition.onAdd((value, index) => {
-          if (player.id == uid) {
-            dispatch(setItemsProposition(values(player.itemsProposition)))
-          }
-        })
-        player.itemsProposition.onRemove((value, index) => {
+        $player.itemsProposition.onChange((value, index) => {
           if (player.id == uid) {
             dispatch(setItemsProposition(values(player.itemsProposition)))
           }
         })
 
-        player.pokemonsProposition.onAdd((value, index) => {
-          if (player.id == uid) {
-            dispatch(setPokemonProposition(values(player.pokemonsProposition)))
-          }
-        })
-        player.pokemonsProposition.onRemove((value, index) => {
+        $player.pokemonsProposition.onChange((value, index) => {
           if (player.id == uid) {
             dispatch(setPokemonProposition(values(player.pokemonsProposition)))
           }
         })
       })
 
-      room.state.players.onRemove((player) => {
+      $state.players.onRemove((player) => {
         dispatch(removePlayer(player))
       })
 
-      room.state.spectators.onAdd((uid) => {
+      $state.spectators.onAdd((uid) => {
         gameContainer.initializeSpectactor(uid)
       })
     }

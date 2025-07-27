@@ -10,6 +10,8 @@
 - Ledyba
 - Ledian
 - Emolga
+- Taillow
+- Swellow
 
 # Changes to game modes
 
@@ -53,6 +55,7 @@
 - Skarmory spikes no longer hurt Steel Pokémon
 - Buff Fillet Away (Veluza): protect duration 500ms → 1 second
 - Nidoran female is now regional, and Nidoran male is the regular one.
+- Patrat line is now Normal/Light additional instead of Wild/Light
 
 # Changes to Synergies
 

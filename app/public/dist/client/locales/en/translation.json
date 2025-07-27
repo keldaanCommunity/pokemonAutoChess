@@ -1486,7 +1486,9 @@
 		"CELESTEELA": "Celesteela",
 		"EMOLGA": "Emolga",
 		"LEDYBA": "Ledyba",
-		"LEDIAN": "Ledian"
+		"LEDIAN": "Ledian",
+		"TAILLOW": "Tailow",
+		"SWELLOW": "Swellow"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",

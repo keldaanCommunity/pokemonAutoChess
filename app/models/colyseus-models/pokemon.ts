@@ -1,4 +1,4 @@
-﻿import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import { entity, MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   ClearWingEffect,
@@ -13960,32 +13960,63 @@ export class Sawsbuck extends Pokemon {
 }
 
 export class Patrat extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.LIGHT])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.WATCHOG
   hp = 80
   atk = 8
   speed = 50
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.DETECT
+  additional = true
 }
 
 export class Watchog extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.LIGHT])
   rarity = Rarity.RARE
   stars = 2
   hp = 170
   atk = 17
   speed = 50
-  def = 4
-  speDef = 4
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 2
   skill = Ability.DETECT
+  additional = true
+}
+
+export class Taillow extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.SWELLOW
+  hp = 70
+  atk = 7
+  speed = 80
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.BRAVE_BIRD
+}
+
+export class Swellow extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FLYING])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 170
+  atk = 16
+  speed = 80
+  def = 11
+  speDef = 9
+  maxPP = 100
+  range = 1
+  skill = Ability.BRAVE_BIRD
 }
 
 export class Spinarak extends Pokemon {
@@ -19169,5 +19200,12 @@ export const PokemonClasses: Record<
   [Pkm.CELESTEELA]: Celesteela,
   [Pkm.LEDYBA]: Ledyba,
   [Pkm.LEDIAN]: Ledian,
-  [Pkm.EMOLGA]: Emolga
+  [Pkm.EMOLGA]: Emolga,
+  [Pkm.TAILLOW]: Taillow,
+  [Pkm.SWELLOW]: Swellow
 }
+
+// declare all the classes in colyseus schema TypeRegistry
+// required if schema class doesnt have a @type decorator
+// see https://discord.com/channels/525739117951320081/1341559052299407412/1342631038152868072
+Object.values(PokemonClasses).forEach((pokemonClass) => entity(pokemonClass))
