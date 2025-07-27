@@ -402,6 +402,7 @@ const onTarget: AbilityAnimationMaker = (options) => (args) => {
   return staticAnimation({ x, y, ...options })(args)
 }
 
+const onCasterScale1 = onCaster({ scale: 1 })
 const onCasterScale2 = onCaster({ scale: 2 })
 const onCasterScale3 = onCaster({ scale: 3 })
 const onCasterScale4 = onCaster({ scale: 4 })
@@ -1020,7 +1021,7 @@ export const AbilitiesAnimations: {
   [Ability.SHELL_SMASH]: onCaster({ ability: Ability.COUNTER }),
   [Ability.SONG_OF_DESIRE]: onTarget({ positionOffset: [0, -60] }),
   [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
-  [Ability.DOUBLE_SHOCK]: [onTargetScale2, onCasterScale2],
+  [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
   [Ability.MIND_BLOWN]: [
     onCaster({ origin: [0.5, 0.8] }),
     onTarget({ ability: "MIND_BLOWN/hit", scale: 3 })
@@ -1211,7 +1212,7 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.MUD_SHOT]: projectile({ scale: 4, duration: 350 }),
-  [Ability.POLTERGEIST]: projectile({ scale: 3, duration: 1000 }),
+  [Ability.POLTERGEIST]: projectile({ scale: 3, duration: 750, animOptions: { repeat: -1 }, startPositionOffset: [0, -50] }),
   [Ability.ZAP_CANNON]: projectile({ scale: 3, duration: 500 }),
   [Ability.ELECTRO_BALL]: (args) =>
     projectile({
