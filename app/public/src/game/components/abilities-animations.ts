@@ -884,6 +884,7 @@ export const AbilitiesAnimations: {
   [Ability.SLACK_OFF]: onCaster({ ability: Ability.ILLUSION, scale: 1 }),
   [Ability.FISHIOUS_REND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
+  [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
   [Ability.CUT]: [
     onTargetScale3,
     onCaster({
@@ -1081,6 +1082,7 @@ export const AbilitiesAnimations: {
     distance: 1,
     duration: 400,
     rotation: -Math.PI / 2,
+    scale: 4,
     destroyOnComplete: true
   }),
   [Ability.SPACIAL_REND]: (args) =>
@@ -1098,6 +1100,7 @@ export const AbilitiesAnimations: {
     distance: 1,
     duration: 400,
     rotation: -Math.PI / 2,
+    scale: 3,
     destroyOnComplete: true
   }),
   [Ability.RAPID_SPIN]: onTarget({ scale: 1.5 }),
@@ -1122,7 +1125,8 @@ export const AbilitiesAnimations: {
   [Ability.WOOD_HAMMER]: onTarget({ scale: 1, origin: [0.5, 1] }),
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
-  [Ability.HEAD_SMASH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
+  [Ability.HEAD_SMASH]: onTarget({ ability: "FIGHTING_KNOCKBACK", tint: 0xffffa0 }),
+  [Ability.IRON_HEAD]: onTarget({ ability: "FIGHTING_KNOCKBACK", tint: 0x8090a0 }),
   [Ability.DOUBLE_EDGE]: onTarget({
     ability: "FIGHTING_KNOCKBACK",
     scale: 2,
@@ -1490,6 +1494,12 @@ export const AbilitiesAnimations: {
   [Ability.GUNK_SHOT]: projectile({
     duration: 700,
     ease: "Power2"
+  }),
+  [Ability.TOXIC]: projectile({
+    ability: Ability.GUNK_SHOT,
+    scale: 1.5,
+    duration: 500,
+    tint: 0xc0ffa0
   }),
   [Ability.CHAIN_CRAZED]: onCaster({ ability: Ability.STUN_SPORE, tint: 0xff60ff, scale: 2 }),
   [Ability.MALIGNANT_CHAIN]: (args) => {

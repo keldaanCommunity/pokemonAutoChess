@@ -2811,14 +2811,14 @@ export const PokemonAnimations: {
     },
     [Pkm.SALANDIT]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
-        emote: AnimationType.Shoot,
+        ability: AnimationType.Attack,
+        emote: AnimationType.Pose,
         attackSprite: AttackSprite.POISON_RANGE,
         hitSprite: HitSprite.POISON_HIT
     },
     [Pkm.SALAZZLE]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.POISON_RANGE,
         hitSprite: HitSprite.POISON_HIT
