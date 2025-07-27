@@ -623,7 +623,7 @@ export const AbilitiesAnimations: {
   [Ability.SCREECH]: onTargetScale2,
   [Ability.SAND_TOMB]: onTargetScale2,
   [Ability.PLAY_ROUGH]: onTargetScale2,
-  [Ability.ANCHOR_SHOT]: onTargetScale2,
+  [Ability.ANCHOR_SHOT]: onTargetScale1,
   [Ability.LEAF_BLADE]: onTargetScale2,
   [Ability.SLASHING_CLAW]: onTargetScale2,
   [Ability.HEX]: onTargetScale2,

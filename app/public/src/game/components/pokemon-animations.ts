@@ -3072,8 +3072,8 @@ export const PokemonAnimations: {
     },
     [Pkm.DIANCIE]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hurt,
-        emote: AnimationType.Shoot,
+        ability: AnimationType.DeepBreath,
+        emote: AnimationType.Pose,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.ROCK_HIT
     },
