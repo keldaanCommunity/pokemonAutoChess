@@ -1,6 +1,5 @@
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { AttackSprite } from "../../../../types"
 import {
   AbilityAnimation,
   AbilityAnimationArgs,
@@ -1021,6 +1020,7 @@ export const AbilitiesAnimations: {
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
   [Ability.HEAD_SMASH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
+  [Ability.DOUBLE_EDGE]: onTarget({ ability: "FIGHTING_KNOCKBACK", scale: 2, tint: 0x606060 }),
   ["GROUND_GROW"]: onCaster({ scale: 1.5 }),
   ["FISHING"]: onCaster({
     ability: Ability.DIVE,
@@ -1178,7 +1178,7 @@ export const AbilitiesAnimations: {
   ],
   [Ability.NATURAL_GIFT]: projectile({ duration: 1000 }),
   [Ability.NIGHT_SHADE]: projectile({ duration: 1000 }),
-  [Ability.PARABOLIC_CHARGE]: projectile({ duration: 1000 }),
+  [Ability.PARABOLIC_CHARGE]: projectile({ duration: 750 }),
   [Ability.ARMOR_CANNON]: (args) =>
     projectile({ duration: 400, scale: 2 - (args.delay ?? 0) * 0.5 })(args),
   [Ability.FISSURE]: [
@@ -1501,6 +1501,7 @@ export const AbilitiesAnimations: {
   [Ability.LUSTER_PURGE]: orientedProjectile({ distance: 4, duration: 1000, scale: 1, ease: "Power2", tweenProps: { yoyo: true }, }),
   [Ability.STEALTH_ROCKS]: orientedProjectile({ distance: 1, scale: 3, depth: DEPTH.ABILITY_GROUND_LEVEL }),
   [Ability.SPIKY_SHIELD]: OrientationArray.map(orientation => orientedProjectile({ orientation, distance: 8, ability: "SPIKE", oriented: true, rotation: -Math.PI / 2, duration: 1000 })),
+  [Ability.SHELTER]: onCaster({ ability: Ability.REFLECT, tint: 0xa080ff, positionOffset: [0, -15], scale: 2.5, animOptions: { repeat: 1 } }),
   [Ability.AURASPHERE]: orientedProjectile({ distance: 8, duration: 2000, oriented: true }),
   [Ability.ULTRA_THRUSTERS]: [
     onCaster({ ability: Ability.LANDS_WRATH }),

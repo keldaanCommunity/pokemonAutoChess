@@ -1141,10 +1141,10 @@ export default class PokemonSprite extends DraggableObject {
   addReflectShieldAnim(colorVariation = 0xffffff) {
     if (!this.reflectShield) {
       this.reflectShield = this.scene.add
-        .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)
+        .sprite(0, -5, "abilities", `${Ability.REFLECT}/000.png`)
         .setScale(2)
         .setTint(colorVariation)
-      this.reflectShield.anims.play(Ability.SPIKY_SHIELD)
+      this.reflectShield.anims.play(Ability.REFLECT)
       this.add(this.reflectShield)
     }
   }

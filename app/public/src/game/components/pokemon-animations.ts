@@ -19,7 +19,8 @@ export const DEFAULT_POKEMON_ANIMATION_CONFIG: Required<PokemonAnimationConfig> 
     shinyUnavailable: false,
     noShadow: false,
     attackSprite: AttackSprite.NORMAL_MELEE,
-    hitSprite: [HitSprite.NORMAL_HIT, HitSprite.NORMAL_HIT2, HitSprite.NORMAL_HIT3, HitSprite.NORMAL_HIT4]
+    hitSprite: [HitSprite.NORMAL_HIT, HitSprite.NORMAL_HIT2, HitSprite.NORMAL_HIT3, HitSprite.NORMAL_HIT4],
+    animationsOriented: []
 } as const
 
 export const PokemonAnimations: {
