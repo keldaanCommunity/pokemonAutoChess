@@ -516,7 +516,7 @@ const poppingIcon: AbilityAnimationMaker<
 > = (options) => (args) =>
   tweenAnimation({
     ...options,
-    startCoords: [args.targetX, args.targetY],
+    startCoords: options.startCoords === "target" ? [args.targetX, args.targetY] : [args.positionX, args.positionY],
     ease: Phaser.Math.Easing.Cubic.Out,
     scale: options.scale ?? 0.25,
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) },
@@ -929,7 +929,7 @@ export const AbilitiesAnimations: {
   [Ability.GROWL]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
   [Ability.FAIRY_WIND]: onCasterScale2,
   [Ability.RELIC_SONG]: onCasterScale2,
-  [Ability.SING]: onCasterScale2,
+  [Ability.SING]: poppingIcon({ ability: Ability.RELIC_SONG, maxScale: 2 }),
   [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),
   [Ability.HIGH_JUMP_KICK]: onTargetScale2,
   [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
@@ -1264,24 +1264,18 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI
   }),
-  [Ability.MACH_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 2 }),
-  [Ability.MEGA_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 3 }),
-  [Ability.MAWASHI_GERI]: poppingIcon({
-    ability: "FIGHTING/FOOT",
-    maxScale: 2
-  }),
-  [Ability.THUNDEROUS_KICK]: poppingIcon({
-    ability: "FIGHTING/FOOT",
-    maxScale: 3,
-    startPositionOffset: [0, -20]
-  }),
+  [Ability.MACH_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 2, startCoords: "target" }),
+  [Ability.MEGA_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 3, startCoords: "target" }),
+  [Ability.MAWASHI_GERI]: poppingIcon({ ability: "FIGHTING/FOOT", maxScale: 2, startCoords: "target" }),
+  [Ability.THUNDEROUS_KICK]: poppingIcon({ ability: "FIGHTING/FOOT", maxScale: 3, startPositionOffset: [0, -20], startCoords: "target" }),
   [Ability.TRIPLE_KICK]: [
     poppingIcon({
       ability: "FIGHTING/PAW",
       scale: 1.5,
       maxScale: 2,
       duration: 250,
-      startPositionOffset: [50, 0]
+      startPositionOffset: [50, 0],
+      startCoords: "target"
     }),
     poppingIcon({
       ability: "FIGHTING/PAW",
@@ -1289,7 +1283,8 @@ export const AbilitiesAnimations: {
       maxScale: 2,
       duration: 250,
       delay: 200,
-      startPositionOffset: [-25, 43]
+      startPositionOffset: [-25, 43],
+      startCoords: "target"
     }),
     poppingIcon({
       ability: "FIGHTING/PAW",
@@ -1297,7 +1292,8 @@ export const AbilitiesAnimations: {
       maxScale: 2,
       duration: 250,
       delay: 400,
-      startPositionOffset: [-25, -43]
+      startPositionOffset: [-25, -43],
+      startCoords: "target"
     })
   ],
   [Ability.STRING_SHOT]: projectile({
@@ -1437,8 +1433,10 @@ export const AbilitiesAnimations: {
   [Ability.WHIRLPOOL]: range(1, 3).map((i) =>
     projectile({
       duration: 1000,
-      tweenProps: { delay: i * 100 },
-      ease: "Power1"
+      delay: i * 100,
+      scale: 0.5,
+      ease: "Power1",
+      tweenProps: { scale: 2 }
     })
   ),
   [Ability.HEAT_CRASH]: projectile({
