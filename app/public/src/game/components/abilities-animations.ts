@@ -25,6 +25,7 @@ import { distanceE, distanceM } from "../../../../utils/distance"
 import { logger } from "../../../../utils/logger"
 import { angleBetween } from "../../../../utils/number"
 import {
+  OrientationAngle,
   OrientationArray,
   OrientationVector
 } from "../../../../utils/orientation"
@@ -931,6 +932,7 @@ export const AbilitiesAnimations: {
   [Ability.RELIC_SONG]: onCasterScale2,
   [Ability.SING]: poppingIcon({ ability: Ability.RELIC_SONG, maxScale: 2 }),
   [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),
+  [Ability.LOVELY_KISS]: poppingIcon({ textureKey: "attacks", ability: AttackSprite.FAIRY_MELEE, maxScale: 2, startPositionOffset: [0, -50] }),
   [Ability.HIGH_JUMP_KICK]: onTargetScale2,
   [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
   [Ability.TROP_KICK]: onTargetScale2,
@@ -1487,7 +1489,13 @@ export const AbilitiesAnimations: {
   [Ability.DRAGON_BREATH]: orientedProjectile({ distance: 1.5, oriented: true, rotation: -Math.PI / 2 }),
   [Ability.BONEMERANG]: orientedProjectile({ distance: 5, duration: 1000, ease: "Power2", tweenProps: { yoyo: true } }),
   [Ability.SHADOW_BONE]: orientedProjectile({ ability: Ability.BONEMERANG, distance: 5, duration: 1000, tint: 0x301030 }),
-  [Ability.AURORA_BEAM]: orientedProjectile({ oriented: true, origin: [0, 0.5], scale: [0.1, 2], duration: 1500, distance: 6, tweenProps: { scale: 2 }, animOptions: { repeat: -1 } }),
+  [Ability.AURORA_BEAM]: onCaster({
+    ability: Ability.MOONGEIST_BEAM,
+    origin: [0.5, 0],
+    scale: [1, 2],
+    oriented: true,
+    rotation: -Math.PI / 2
+  }),
   [Ability.SPIRIT_SHACKLE]: orientedProjectile({ distance: 8, scale: 1, duration: 2000, oriented: true }),
   [Ability.RAZOR_LEAF]: orientedProjectile({ distance: 8, duration: 2000 }),
   [Ability.PSYCHO_CUT]: range(1, 3).map((i) => orientedProjectile({
@@ -1567,7 +1575,8 @@ export const AbilitiesAnimations: {
   },
 
   [Ability.SNIPE_SHOT]: args => {
-    const targetAngle = angleBetween([args.targetX, args.targetY], [args.positionX, args.positionY])
+    const targetAngle = angleBetween([args.positionX, args.positionY], [args.targetX, args.targetY])
+    const orientationAngle = OrientationAngle[args.orientation] ?? 0
     const coordinates = transformEntityCoordinates(
       args.positionX,
       args.positionY,
@@ -1585,10 +1594,12 @@ export const AbilitiesAnimations: {
     })(args)
     staticAnimation({
       ability: "SNIPE_SHOT/shoot",
-      x: coordinates[0] + Math.round(Math.cos(targetAngle) * 50),
-      y: coordinates[1] + Math.round(Math.sin(targetAngle) * 50),
+      x: coordinates[0] + Math.round(Math.cos(orientationAngle) * 30),
+      y: coordinates[1] - Math.round(Math.sin(orientationAngle) * 50) - 10,
       scale: 1,
-      rotation: targetAngle + Math.PI / 2,
+      oriented: true,
+      rotation: Math.PI / 2,
+      origin: [0.5, 1],
     })(args)
   },
 
