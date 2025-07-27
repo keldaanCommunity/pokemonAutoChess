@@ -2493,26 +2493,26 @@ export const PokemonAnimations: {
     },
     [Pkm.CORPHISH]: {
         attack: AnimationType.Bite,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE
     },
     [Pkm.CRAWDAUNT]: {
         attack: AnimationType.Bite,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE
     },
     [Pkm.JOLTIK]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_MELEE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
     [Pkm.GALVANTULA]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_MELEE,
         hitSprite: HitSprite.ELECTRIC_HIT
@@ -3674,7 +3674,7 @@ export const PokemonAnimations: {
     },
     [Pkm.GRENINJA]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hurt,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Attack,
         attackSprite: AttackSprite.WATER_MELEE,
         hitSprite: HitSprite.WATER_HIT
@@ -5414,7 +5414,8 @@ export const PokemonAnimations: {
         attack: AnimationType.Attack,
         ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        animationsOriented: [AnimationType.Special0]
     },
     [Pkm.SPOINK]: {
         attack: AnimationType.Attack,

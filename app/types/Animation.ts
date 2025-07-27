@@ -120,7 +120,7 @@ export enum AnimationType {
   Special31 = "Special31"
 }
 
-export const AnimationComplete: { [key in AnimationType]: boolean } = {
+export const AnimationOriented: { [key in AnimationType]: boolean } = {
   [AnimationType.Idle]: true,
   [AnimationType.Walk]: true,
   [AnimationType.Sleep]: false,
@@ -250,6 +250,7 @@ export type PokemonAnimationConfig = {
   noShadow?: boolean
   attackSprite?: AttackSprite
   hitSprite?: HitSprite | HitSprite[]
+  animationsOriented?: AnimationType[]
 }
 
 export enum AttackSprite {
@@ -382,6 +383,7 @@ export const AttackSpriteScale: { [sprite in AttackSprite | HitSprite]: [number,
 
 export interface AbilityAnimationOptions {
   textureKey?: string
+  frame?: string
   ability?: Ability | string
   position?: number[]
   positionOffset?: [number, number]

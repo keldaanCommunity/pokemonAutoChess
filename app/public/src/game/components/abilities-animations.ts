@@ -294,7 +294,7 @@ function addAbilitySprite(
   position: number[],
   options: AbilityAnimationOptions = {}
 ) {
-  const frame = `${ability}/000.png`
+  const frame = options.frame ?? `${ability}/000.png`
   const textureKey = options.textureKey ?? "abilities"
 
   if (
@@ -520,7 +520,7 @@ const poppingIcon: AbilityAnimationMaker<
     ease: Phaser.Math.Easing.Cubic.Out,
     scale: options.scale ?? 0.25,
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) },
-  })
+  })(args)
 
 const orientedProjectile: AbilityAnimationMaker<
   TweenAnimationMakerOptions & { orientation?: Orientation, distance?: number }
@@ -553,6 +553,7 @@ export const AbilitiesAnimations: {
   [Ability.DIAMOND_STORM]: onCasterScale2,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
+  [Ability.ENCORE]: onCaster({ ability: Ability.HELPING_HAND }),
   [Ability.FLORAL_HEALING]: onCasterScale2,
   [Ability.ILLUSION]: onCasterScale2,
   [Ability.ROAR_OF_TIME]: onCasterScale2,
@@ -574,7 +575,7 @@ export const AbilitiesAnimations: {
   [Ability.SOFT_BOILED]: onCasterScale2,
   [Ability.FAKE_TEARS]: onCasterScale2,
   [Ability.TEA_TIME]: onCasterScale2,
-  [Ability.FUTURE_SIGHT]: onCasterScale2,
+  [Ability.FUTURE_SIGHT]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.PETAL_DANCE]: onCasterScale2,
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,
@@ -748,6 +749,7 @@ export const AbilitiesAnimations: {
     scale: [1, 2]
   }),
   [Ability.TWIN_BEAM]: onCaster({
+    ability: Ability.PSYBEAM,
     oriented: true,
     rotation: -Math.PI / 2,
     origin: [0.5, 0],
@@ -856,6 +858,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.POWER_HUG]: onTarget({ ability: Ability.ANCHOR_SHOT }),
   [Ability.HEAVY_SLAM]: [onCasterScale2, shakeCamera({})],
+  [Ability.MORTAL_SPIN]: onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5, tint: 0xa0ff90 }),
   [Ability.BODY_SLAM]: shakeCamera({}),
   [Ability.BULLDOZE]: [
     onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
@@ -871,7 +874,7 @@ export const AbilitiesAnimations: {
   [Ability.ATTRACT]: onCaster({ positionOffset: [0, -70] }),
   [Ability.MAGNET_RISE]: onCaster({ ability: Ability.ELECTRO_BOOST }),
   [Ability.FORCE_PALM]: onTarget({ ability: Ability.ANCHOR_SHOT }),
-  [Ability.WATERFALL]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.WATERFALL]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON, positionOffset: [0, -50] }),
   [Ability.MAGMA_STORM]: onTargetScale1,
   [Ability.ABSORB]: onCaster({ depth: DEPTH.ABILITY_GROUND_LEVEL }),
   [Ability.GIGATON_HAMMER]: [onTargetScale2, shakeCamera({})],
@@ -915,7 +918,7 @@ export const AbilitiesAnimations: {
   [Ability.ECHO]: onCaster({ origin: [0.5, 0.7] }),
   [Ability.EXPLOSION]: [
     onCasterScale2,
-    shakeCamera({ duration: 300, intensity: 0.015 })
+    shakeCamera({ duration: 400, intensity: 0.01 })
   ],
   [Ability.CHLOROBLAST]: [
     onCaster({ ability: Ability.EXPLOSION, tint: 0x90ffd0 }),
@@ -926,7 +929,7 @@ export const AbilitiesAnimations: {
   [Ability.FAIRY_WIND]: onCasterScale2,
   [Ability.RELIC_SONG]: onCasterScale2,
   [Ability.SING]: onCasterScale2,
-  [Ability.DISARMING_VOICE]: onCasterScale2,
+  [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),
   [Ability.HIGH_JUMP_KICK]: onTargetScale2,
   [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
   [Ability.TROP_KICK]: onTargetScale2,
@@ -996,7 +999,7 @@ export const AbilitiesAnimations: {
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
   [Ability.AQUA_TAIL]: orientedProjectile({ ability: Ability.SPIN_OUT, tint: 0x80ddff, distance: 1, duration: 400, rotation: -Math.PI / 2, destroyOnComplete: true }),
   [Ability.RAPID_SPIN]: onTarget({ scale: 1.5 }),
-  [Ability.COTTON_GUARD]: onCasterScale3,
+  [Ability.COTTON_GUARD]: onCaster({ ability: Ability.COTTON_SPORE, scale: 3 }),
   ["FLOWER_TRICK_EXPLOSION"]: onCaster({ ability: "PUFF_PINK", scale: 3 }),
   [Ability.FLOWER_TRICK]: onSprite(({ targetSprite }) =>
     targetSprite?.addFlowerTrick()
@@ -1051,7 +1054,7 @@ export const AbilitiesAnimations: {
   [Ability.TAUNT]: onCaster({ positionOffset: [0, -30] }),
   ["TAUNT_HIT"]: onTarget({ positionOffset: [0, -30] }),
   ["SMOKE_BALL"]: onCasterScale3,
-  [Ability.TAILWIND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.TAILWIND]: onCaster({ oriented: true, rotation: -Math.PI / 2, scale: 4, alpha: 0.5 }),
   [Ability.SILVER_WIND]: projectile({ ability: Ability.EXTREME_SPEED }),
   [Ability.INFERNAL_PARADE]: projectile({
     ease: "Power2",
@@ -1154,13 +1157,13 @@ export const AbilitiesAnimations: {
     duration: 1000
   }),
   [Ability.PSYSTRIKE]: projectile({ duration: 1000 }),
-  [Ability.EGG_BOMB]: projectile({ duration: 1000, scale: 3 }),
+  [Ability.EGG_BOMB]: projectile({ duration: 800, scale: 3 }),
   [Ability.SPARK]: (args) =>
     projectile({
       duration: 300,
       tweenProps: { delay: (args.delay || 0) * 400 }
     })(args),
-  [Ability.SUCTION_HEAL]: projectile({ scale: 3 }),
+  [Ability.SUCTION_HEAL]: projectile({ scale: 3, startCoords: "target", endCoords: "caster" }),
   [Ability.ANCIENT_POWER]: projectile({ duration: 1000 }),
   [Ability.MOON_DREAM]: projectile({
     startPositionOffset: [0, -100],
@@ -1249,7 +1252,10 @@ export const AbilitiesAnimations: {
   [Ability.DRAGON_DARTS]: projectile({
     scale: 1,
     oriented: true,
-    rotation: -Math.PI / 2
+    positionOffset: [0, -30],
+    duration: 400,
+    rotation: -Math.PI / 2,
+    hitAnim: onTarget({ ability: "PUFF_PINK", scale: 1 }),
   }),
   [Ability.ASTRAL_BARRAGE]: projectile({
     scale: 1,
@@ -1260,11 +1266,12 @@ export const AbilitiesAnimations: {
   [Ability.MEGA_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 4 }),
   [Ability.MAWASHI_GERI]: poppingIcon({
     ability: "FIGHTING/FOOT",
-    maxScale: 3
+    maxScale: 2
   }),
   [Ability.THUNDEROUS_KICK]: poppingIcon({
     ability: "FIGHTING/FOOT",
-    maxScale: 4
+    maxScale: 3,
+    startPositionOffset: [0, -20]
   }),
   [Ability.TRIPLE_KICK]: [
     poppingIcon({
@@ -1433,6 +1440,7 @@ export const AbilitiesAnimations: {
     })
   ),
   [Ability.HEAT_CRASH]: projectile({
+    ability: Ability.SUNSTEEL_STRIKE,
     oriented: true,
     rotation: -Math.PI / 2,
     scale: 0.5,
@@ -1469,13 +1477,13 @@ export const AbilitiesAnimations: {
   [Ability.HIDDEN_POWER_EM]: hiddenPowerAnimation,
   [Ability.ICY_WIND]: orientedProjectile({ duration: 2000 }),
   [Ability.HURRICANE]: orientedProjectile({ duration: 2000 }),
-  [Ability.ROAR]: orientedProjectile({ ability: Ability.WHIRLWIND, duration: 1000 }),
+  [Ability.ROAR]: orientedProjectile({ ability: Ability.WHIRLWIND, duration: 400, distance: 2 }),
   [Ability.FLEUR_CANNON]: orientedProjectile({ duration: 2000 }),
   [Ability.SANDSEAR_STORM]: orientedProjectile({ duration: 2000 }),
   [Ability.WILDBOLT_STORM]: orientedProjectile({ duration: 2000 }),
   [Ability.BLEAKWIND_STORM]: orientedProjectile({ duration: 2000 }),
   [Ability.SPRINGTIDE_STORM]: orientedProjectile({ duration: 2000 }),
-  [Ability.SOLAR_BLADE]: orientedProjectile({ distance: 1.5, scale: 3, oriented: true, rotation: Math.PI / 2 }),
+  [Ability.SOLAR_BLADE]: orientedProjectile({ distance: 1, scale: 2, oriented: true, rotation: -Math.PI / 2, duration: 400 }),
   [Ability.DRAGON_BREATH]: orientedProjectile({ distance: 1.5, oriented: true, rotation: -Math.PI / 2 }),
   [Ability.BONEMERANG]: orientedProjectile({ distance: 5, duration: 1000, ease: "Power2", tweenProps: { yoyo: true } }),
   [Ability.SHADOW_BONE]: orientedProjectile({ ability: Ability.BONEMERANG, distance: 5, duration: 1000, tint: 0x301030 }),
@@ -1486,7 +1494,7 @@ export const AbilitiesAnimations: {
     distance: 8,
     duration: 1000,
     oriented: true,
-    rotation: -Math.PI / 2,
+    rotation: +Math.PI / 2,
     tweenProps: { delay: i * 100 }
   })),
   [Ability.MIST_BALL]: orientedProjectile({ distance: 4, duration: 1000, scale: 1, ease: "Power2", tweenProps: { yoyo: true }, }),
@@ -1553,7 +1561,7 @@ export const AbilitiesAnimations: {
       OrientationArray[(OrientationArray.indexOf(args.orientation) + 7) % 8]
     ]
     orientations.forEach((orientation) => {
-      orientedProjectile({ orientation, distance: 8, duration: 2000 })(args)
+      orientedProjectile({ orientation, distance: 8, duration: 1000 })(args)
     })
   },
 
@@ -1679,7 +1687,8 @@ export const AbilitiesAnimations: {
     // orientation field is used to pass the type of the pillar
     const pillarType = [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][args.orientation] ?? Pkm.PILLAR_WOOD
     const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
-    return projectile({ ability: animKey, duration: distance / 50, tweenProps: { angle: 270 } })(args)
+    const frame = `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
+    return projectile({ textureKey: PkmIndex[pillarType], frame, ability: animKey, duration: distance / 50, tweenProps: { angle: 270 } })(args)
   },
 
   [Ability.ICICLE_MISSILE]: args => {
