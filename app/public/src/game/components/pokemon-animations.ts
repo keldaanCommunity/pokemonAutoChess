@@ -704,16 +704,16 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.ROCK_MELEE
     },
     [Pkm.MAGNEMITE]: {
-        attack: AnimationType.SpAttack,
-        ability: AnimationType.Double,
-        emote: AnimationType.Shoot,
+        attack: AnimationType.Shoot,
+        ability: AnimationType.SpAttack,
+        emote: AnimationType.Rotate,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
     [Pkm.MAGNETON]: {
-        attack: AnimationType.SpAttack,
-        ability: AnimationType.Double,
-        emote: AnimationType.Shoot,
+        attack: AnimationType.Shoot,
+        ability: AnimationType.SpAttack,
+        emote: AnimationType.Rotate,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
