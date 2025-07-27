@@ -6123,6 +6123,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Idle,
         ability: AnimationType.Idle,
         emote: AnimationType.Idle,
+        hop: AnimationType.Idle,
         shinyUnavailable: true,
         noShadow: true
     },
@@ -6130,6 +6131,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Idle,
         ability: AnimationType.Idle,
         emote: AnimationType.Idle,
+        hop: AnimationType.Idle,
         shinyUnavailable: true,
         noShadow: true
     },
@@ -6137,6 +6139,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Idle,
         ability: AnimationType.Idle,
         emote: AnimationType.Idle,
+        hop: AnimationType.Idle,
         shinyUnavailable: true,
         noShadow: true
     },

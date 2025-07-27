@@ -23,7 +23,7 @@ import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import { logger } from "../../../../utils/logger"
-import { angleBetween } from "../../../../utils/number"
+import { angleBetween, min } from "../../../../utils/number"
 import {
   OrientationAngle,
   OrientationArray,
@@ -450,8 +450,8 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
       const { scene, flip } = args
       const [startRow, startCol, startFlip] =
         options.startCoords === "target"
-          ? [args.targetY, args.targetX, args.flip]
-          : (options.startCoords ?? [args.positionY, args.positionX])
+          ? [args.targetX, args.targetY, args.flip]
+          : (options.startCoords ?? [args.positionX, args.positionY, args.flip])
       const delay = options.delay ?? args.delay ?? 0
       setTimeout(() => {
         const startPosition = transformEntityCoordinates(
@@ -508,8 +508,8 @@ const projectile: AbilityAnimationMaker<TweenAnimationMakerOptions> =
     (args) => {
       const [endRow, endCol, endFlip] =
         options.endCoords === "caster"
-          ? [args.positionY, args.positionX, args.flip]
-          : (options.endCoords ?? [args.targetX, args.targetY])
+          ? [args.positionX, args.positionY, args.flip]
+          : (options.endCoords ?? [args.targetX, args.targetY, args.flip])
       const endPosition = transformEntityCoordinates(
         endRow,
         endCol,
@@ -518,8 +518,7 @@ const projectile: AbilityAnimationMaker<TweenAnimationMakerOptions> =
       endPosition[0] += options.endPositionOffset?.[0] ?? 0
       endPosition[1] += options.endPositionOffset?.[1] ?? 0
       return tweenAnimation({
-        startCoords: [args.positionY, args.positionX],
-        endCoords: [args.targetY, args.targetX],
+        startCoords: [args.positionX, args.positionY, args.flip],
         ...options,
         tweenProps: {
           x: endPosition[0],
@@ -1935,12 +1934,12 @@ export const AbilitiesAnimations: {
   ["TIDAL_WAVE"]: tidalWaveAnimation,
 
   [Ability.COLUMN_CRUSH]: (args) => {
-    const distance = distanceE(
+    const distance = min(1)(distanceE(
       args.positionX,
       args.positionY,
       args.targetX,
       args.targetY
-    )
+    ))
     // orientation field is used to pass the type of the pillar
     const pillarType =
       [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
@@ -1952,7 +1951,7 @@ export const AbilitiesAnimations: {
       textureKey: PkmIndex[pillarType],
       frame,
       ability: animKey,
-      duration: distance / 50,
+      duration: distance * 200,
       tweenProps: { angle: 270 }
     })(args)
   },
