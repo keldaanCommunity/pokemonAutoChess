@@ -6,6 +6,7 @@ import {
   AbilityAnimationMaker,
   AbilityAnimationOptions,
   AnimationType,
+  AttackSprite,
   AttackSpriteScale,
   HitSprite
 } from "../../../../types/Animation"
@@ -582,6 +583,7 @@ export const AbilitiesAnimations: {
   [Ability.BULK_UP]: onCasterScale2,
   [Ability.FLASH]: onCasterScale2,
   [Ability.STEEL_WING]: onCasterScale2,
+  [Ability.HYPNOSIS]: orientedProjectile({ oriented: true, textureKey: "attacks", ability: AttackSprite.PSYCHIC_RANGE, scale: 2, distance: 1 }),
   ["FIELD_DEATH"]: onCasterScale2,
   ["FAIRY_CRIT"]: onCasterScale2,
   ["POWER_LENS"]: onCasterScale2,
@@ -1262,8 +1264,8 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI
   }),
-  [Ability.MACH_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 3 }),
-  [Ability.MEGA_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 4 }),
+  [Ability.MACH_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 2 }),
+  [Ability.MEGA_PUNCH]: poppingIcon({ ability: "FIGHTING/FIST", maxScale: 3 }),
   [Ability.MAWASHI_GERI]: poppingIcon({
     ability: "FIGHTING/FOOT",
     maxScale: 2
@@ -1278,24 +1280,24 @@ export const AbilitiesAnimations: {
       ability: "FIGHTING/PAW",
       scale: 1.5,
       maxScale: 2,
-      duration: 500,
+      duration: 250,
       startPositionOffset: [50, 0]
     }),
     poppingIcon({
       ability: "FIGHTING/PAW",
       scale: 1.5,
       maxScale: 2,
-      duration: 500,
-      tweenProps: { delay: 250 },
+      duration: 250,
+      delay: 200,
       startPositionOffset: [-25, 43]
     }),
     poppingIcon({
       ability: "FIGHTING/PAW",
       scale: 1.5,
       maxScale: 2,
-      duration: 500,
-      tweenProps: { delay: 500 },
-      startPositionOffset: [-25, 43]
+      duration: 250,
+      delay: 400,
+      startPositionOffset: [-25, -43]
     })
   ],
   [Ability.STRING_SHOT]: projectile({

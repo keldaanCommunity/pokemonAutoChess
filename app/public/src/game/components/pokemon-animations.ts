@@ -2260,16 +2260,16 @@ export const PokemonAnimations: {
         hitSprite: HitSprite.GHOST_HIT
     },
     [Pkm.HONEDGE]: {
-        attack: AnimationType.Attack,
-        ability: AnimationType.Head,
-        emote: AnimationType.Shoot,
+        attack: AnimationType.Slice,
+        ability: AnimationType.Swing,
+        emote: AnimationType.SpAttack,
         attackSprite: AttackSprite.STEEL_MELEE,
         hitSprite: HitSprite.STEEL_HIT
     },
     [Pkm.DOUBLADE]: {
         attack: AnimationType.Slice,
-        ability: AnimationType.SpAttack,
-        emote: AnimationType.Shoot,
+        ability: AnimationType.Swing,
+        emote: AnimationType.SpAttack,
         attackSprite: AttackSprite.STEEL_MELEE,
         hitSprite: HitSprite.STEEL_HIT
     },
@@ -2278,14 +2278,16 @@ export const PokemonAnimations: {
         ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.STEEL_MELEE,
-        hitSprite: HitSprite.STEEL_HIT
+        hitSprite: HitSprite.STEEL_HIT,
+        animationsOriented: [AnimationType.Special0]
     },
     [Pkm.AEGISLASH_BLADE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.STEEL_MELEE,
-        hitSprite: HitSprite.STEEL_HIT
+        hitSprite: HitSprite.STEEL_HIT,
+        animationsOriented: [AnimationType.Special0]
     },
     [Pkm.CUBONE]: {
         attack: AnimationType.Strike,
