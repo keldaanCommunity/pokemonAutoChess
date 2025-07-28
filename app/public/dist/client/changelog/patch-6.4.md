@@ -56,6 +56,7 @@
 - Buff Fillet Away (Veluza): protect duration 500ms → 1 second
 - Nidoran female is now regional, and Nidoran male is the regular one.
 - Patrat line is now Normal/Light additional instead of Wild/Light
+- Fix Shed Tail (Cyclizar): pokemons targeting Cyclizar now target the substitute instead of Cyclizar after its move
 
 # Changes to Synergies
 

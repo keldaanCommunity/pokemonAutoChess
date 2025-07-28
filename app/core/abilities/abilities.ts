@@ -7954,6 +7954,9 @@ export class ShedTailStrategy extends AbilityStrategy {
       const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(lowestHealthAlly)
       pokemon.moveTo(coord.x, coord.y, board)
       pokemon.simulation.addPokemon(substitute, x, y, pokemon.team, true)
+      for (const pokemonTargetingCaster of board.cells.filter(p => p?.targetEntityId === pokemon.id)) {
+        pokemonTargetingCaster!.targetEntityId = substitute.id
+      }
     }
   }
 }
