@@ -23,6 +23,7 @@ import {
   Emotion,
   IPlayer,
   ISuggestionUser,
+  PkmWithCustom,
   Role,
   Title,
   Transfer,
@@ -60,6 +61,7 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
+import { mongo } from "mongoose"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -424,6 +426,8 @@ export class OpenBoosterCommand extends Command<
         }
       })
 
+      checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
+      await mongoUser.save()
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
@@ -608,85 +612,81 @@ export class BuyEmotionCommand extends Command<
       // Deduct cost
       mongoItem.dust -= cost
 
-      // Save to database
-      await mongoUser.save()
-
       // Update in-memory user data
       CollectionUtils.unlockEmotion(pokemonCollectionItem.unlocked, emotion, shiny)
       pokemonCollectionItem.dust = mongoItem.dust
       pokemonCollectionItem.selectedEmotion = emotion
       pokemonCollectionItem.selectedShiny = shiny
 
-      if (!mongoUser.titles.includes(Title.SHINY_SEEKER)) {
-        // update titles
-        let numberOfShinies = 0
-        mongoUser.pokemonCollection.forEach((c) => {
-          const { shinyEmotions } = CollectionUtils.getEmotionsUnlocked(c)
-          numberOfShinies += shinyEmotions.length
-        })
-        if (numberOfShinies >= 30) {
-          mongoUser.titles.push(Title.SHINY_SEEKER)
-        }
-      }
-
-      if (!mongoUser.titles.includes(Title.DUKE)) {
-        if (
-          Object.values(Pkm)
-            .filter((p) => NonPkm.includes(p) === false)
-            .every((pkm) => {
-              const item = mongoUser.pokemonCollection.get(PkmIndex[pkm])
-              if (!item) return false
-              const { emotions, shinyEmotions } =
-                CollectionUtils.getEmotionsUnlocked(item)
-              return emotions.length > 0 || shinyEmotions.length > 0
-            })
-        ) {
-          mongoUser.titles.push(Title.DUKE)
-        }
-      }
-
-      if (
-        emotion === Emotion.ANGRY &&
-        index === PkmIndex[Pkm.ARBOK] &&
-        !mongoUser.titles.includes(Title.DENTIST)
-      ) {
-        mongoUser.titles.push(Title.DENTIST)
-      }
-
-      if (
-        !mongoUser.titles.includes(Title.ARCHEOLOGIST) &&
-        Unowns.some((unown) => index === PkmIndex[unown]) &&
-        Unowns.every((name) => {
-          const unownIndex = PkmIndex[name]
-          const item = mongoUser.pokemonCollection.get(unownIndex)
-          const isBeingUnlockedRightNow = unownIndex === index
-          let isAlreadyUnlocked = false
-          if (item) {
-            const { emotions, shinyEmotions } =
-              CollectionUtils.getEmotionsUnlocked(item)
-            isAlreadyUnlocked = emotions.length > 0 || shinyEmotions.length > 0
-          }
-          return isAlreadyUnlocked || isBeingUnlockedRightNow
-        })
-      ) {
-        mongoUser.titles.push(Title.ARCHEOLOGIST)
-      }
-
-      if (!mongoUser.titles.includes(Title.DUCHESS)) {
-        const { emotions, shinyEmotions } =
-          CollectionUtils.getEmotionsUnlocked(mongoItem)
-        if (
-          shinyEmotions.length >= CollectionEmotions.length &&
-          emotions.length >= CollectionEmotions.length
-        ) {
-          mongoUser.titles.push(Title.DUCHESS)
-        }
-      }
-
+      checkTitlesAfterEmotionUnlocked(mongoUser, [{ name: PkmByIndex[index], emotion, shiny }])
       await mongoUser.save()
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
       logger.error(error)
+    }
+  }
+}
+
+function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked: PkmWithCustom[]) {
+  if (!mongoUser.titles.includes(Title.SHINY_SEEKER)) {
+    // update titles
+    let numberOfShinies = 0
+    mongoUser.pokemonCollection.forEach((c) => {
+      const { shinyEmotions } = CollectionUtils.getEmotionsUnlocked(c)
+      numberOfShinies += shinyEmotions.length
+    })
+    if (numberOfShinies >= 30) {
+      mongoUser.titles.push(Title.SHINY_SEEKER)
+    }
+  }
+
+  if (!mongoUser.titles.includes(Title.DUKE)) {
+    if (
+      Object.values(Pkm)
+        .filter((p) => NonPkm.includes(p) === false)
+        .every((pkm) => {
+          const item = mongoUser.pokemonCollection.get(PkmIndex[pkm])
+          if (!item) return false
+          const { emotions, shinyEmotions } =
+            CollectionUtils.getEmotionsUnlocked(item)
+          return emotions.length > 0 || shinyEmotions.length > 0
+        })
+    ) {
+      mongoUser.titles.push(Title.DUKE)
+    }
+  }
+
+  if (unlocked.some(p => p.emotion === Emotion.ANGRY && p.name === Pkm.ARBOK) && !mongoUser.titles.includes(Title.DENTIST)) {
+    mongoUser.titles.push(Title.DENTIST)
+  }
+
+  if (
+    !mongoUser.titles.includes(Title.ARCHEOLOGIST) &&
+    Unowns.some((unown) => unlocked.map(p => p.name).includes(unown)) &&
+    Unowns.every((name) => {
+      const unownIndex = PkmIndex[name]
+      const item = mongoUser.pokemonCollection.get(unownIndex)
+      const isBeingUnlockedRightNow = unlocked.some(p => p.name === name)
+      let isAlreadyUnlocked = false
+      if (item) {
+        const { emotions, shinyEmotions } =
+          CollectionUtils.getEmotionsUnlocked(item)
+        isAlreadyUnlocked = emotions.length > 0 || shinyEmotions.length > 0
+      }
+      return isAlreadyUnlocked || isBeingUnlockedRightNow
+    })
+  ) {
+    mongoUser.titles.push(Title.ARCHEOLOGIST)
+  }
+
+  if (!mongoUser.titles.includes(Title.DUCHESS)) {
+    if (unlocked.some(p => {
+      const item = mongoUser.pokemonCollection.get(PkmIndex[p.name])
+      if (!item) return false
+      const { emotions, shinyEmotions } = CollectionUtils.getEmotionsUnlocked(item)
+      return shinyEmotions.length >= CollectionEmotions.length && emotions.length >= CollectionEmotions.length
+    })) {
+      mongoUser.titles.push(Title.DUCHESS)
     }
   }
 }
