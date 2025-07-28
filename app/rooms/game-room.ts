@@ -27,8 +27,8 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
+import { fetchEventLeaderboard } from "../services/leaderboard"
 import {
-  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -831,7 +831,7 @@ export default class GameRoom extends Room<GameState> {
       }
 
       if (usr.elo != null && elligibleToELO) {
-        const elo = computeElo(
+        let elo = computeElo(
           this.transformToSimplePlayer(player),
           rank,
           usr.elo,
@@ -839,19 +839,24 @@ export default class GameRoom extends Room<GameState> {
           this.state.gameMode,
           false
         )
-        if (elo) {
-          if (elo >= 1100) {
-            player.titles.add(Title.GYM_TRAINER)
-          }
-          if (elo >= 1200) {
-            player.titles.add(Title.GYM_CHALLENGER)
-          }
-          if (elo >= 1400) {
-            player.titles.add(Title.GYM_LEADER)
-          }
-          usr.elo = elo
-          usr.maxElo = Math.max(usr.maxElo, elo)
+
+        if (!elo || isNaN(elo)) {
+          logger.error(
+            `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
+          )
+          elo = usr.elo
         }
+        if (elo >= 1100) {
+          player.titles.add(Title.GYM_TRAINER)
+        }
+        if (elo >= 1200) {
+          player.titles.add(Title.GYM_CHALLENGER)
+        }
+        if (elo >= 1400) {
+          player.titles.add(Title.GYM_LEADER)
+        }
+        usr.elo = elo
+        usr.maxElo = Math.max(usr.maxElo, elo)
 
         const dbrecord = this.transformToSimplePlayer(player)
         const synergiesMap = new Map<Synergy, number>()
@@ -898,6 +903,7 @@ export default class GameRoom extends Room<GameState> {
               )
             }
             player.titles.add(Title.FINISHER)
+            fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
           }
 
           if (usr.maxEventPoints >= 100) {

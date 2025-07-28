@@ -134,6 +134,14 @@
 
 .leaderboard-item.me {
   background-color: var(--color-bg-accent);
+  box-shadow:
+    -10px 0 var(--color-bg-accent),
+    +10px 0 var(--color-bg-accent);
+}
+
+.leaderboard-item .finish-time {
+  font-size: 0.75em;
+  letter-spacing: -2px;
 }
 
 .leaderboard-item .rank {

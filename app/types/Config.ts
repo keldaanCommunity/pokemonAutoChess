@@ -87,9 +87,9 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
 export const MAX_EVENT_POINTS = 500
 
 export const EventPointsPerRank = [
-  +10, // 1st
-  +5, // 2nd
-  +3, // 3rd
+  +15, // 1st
+  +8, // 2nd
+  +5, // 3rd
   +1, // 4th
   -1, // 5th
   -3, // 6th

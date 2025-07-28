@@ -287,6 +287,26 @@ export default config({
       res.send(getLeaderboard())
     })
 
+    app.get("/leaderboards/bots", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.botLeaderboard)
+    })
+
+    app.get("/leaderboards/elo", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.leaderboard)
+    })
+
+    app.get("/leaderboards/level", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.levelLeaderboard)
+    })
+
+    app.get("/leaderboards/event", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.eventLeaderboard)
+    })
+
     app.get("/game-history/:playerUid", async (req, res) => {
       res.set("Cache-Control", "no-cache")
       const { playerUid } = req.params
