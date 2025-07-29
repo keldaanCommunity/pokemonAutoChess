@@ -36,6 +36,7 @@ import { Wanderer } from "../../../types/enum/Wanderer"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
+import { values } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
@@ -585,7 +586,7 @@ export default function Game() {
       })
 
       $state.additionalPokemons.onChange(() => {
-        dispatch(setAdditionalPokemons(Array.from(room.state.additionalPokemons)))
+        dispatch(setAdditionalPokemons(values(room.state.additionalPokemons)))
       })
 
       $state.simulations.onRemove(() => {
@@ -804,15 +805,13 @@ export default function Game() {
 
         $player.itemsProposition.onChange((value, index) => {
           if (player.id == uid) {
-            dispatch(setItemsProposition(Array.from(player.itemsProposition)))
+            dispatch(setItemsProposition(values(player.itemsProposition)))
           }
         })
 
         $player.pokemonsProposition.onChange((value, index) => {
           if (player.id == uid) {
-            dispatch(
-              setPokemonProposition(Array.from(player.pokemonsProposition))
-            )
+            dispatch(setPokemonProposition(values(player.pokemonsProposition)))
           }
         })
       })

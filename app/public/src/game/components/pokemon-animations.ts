@@ -19,7 +19,8 @@ export const DEFAULT_POKEMON_ANIMATION_CONFIG: Required<PokemonAnimationConfig> 
     shinyUnavailable: false,
     noShadow: false,
     attackSprite: AttackSprite.NORMAL_MELEE,
-    hitSprite: [HitSprite.NORMAL_HIT, HitSprite.NORMAL_HIT2, HitSprite.NORMAL_HIT3, HitSprite.NORMAL_HIT4]
+    hitSprite: [HitSprite.NORMAL_HIT, HitSprite.NORMAL_HIT2, HitSprite.NORMAL_HIT3, HitSprite.NORMAL_HIT4],
+    animationsOriented: []
 } as const
 
 export const PokemonAnimations: {
@@ -191,21 +192,21 @@ export const PokemonAnimations: {
     },
     [Pkm.CLEFFA]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Rotate,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CLEFAIRY]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Rotate,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.FAIRY_HIT
     },
     [Pkm.CLEFABLE]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Rotate,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.FAIRY_HIT
@@ -468,14 +469,14 @@ export const PokemonAnimations: {
     },
     [Pkm.MARSHTOMP]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Swing,
+        ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE,
         hitSprite: HitSprite.GROUND_HIT
     },
     [Pkm.SWAMPERT]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Swing,
+        ability: AnimationType.SpAttack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE,
         hitSprite: HitSprite.GROUND_HIT
@@ -703,16 +704,16 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.ROCK_MELEE
     },
     [Pkm.MAGNEMITE]: {
-        attack: AnimationType.SpAttack,
-        ability: AnimationType.Double,
-        emote: AnimationType.Shoot,
+        attack: AnimationType.Shoot,
+        ability: AnimationType.SpAttack,
+        emote: AnimationType.Rotate,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
     [Pkm.MAGNETON]: {
-        attack: AnimationType.SpAttack,
-        ability: AnimationType.Double,
-        emote: AnimationType.Shoot,
+        attack: AnimationType.Shoot,
+        ability: AnimationType.SpAttack,
+        emote: AnimationType.Rotate,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
@@ -2259,16 +2260,16 @@ export const PokemonAnimations: {
         hitSprite: HitSprite.GHOST_HIT
     },
     [Pkm.HONEDGE]: {
-        attack: AnimationType.Attack,
-        ability: AnimationType.Head,
-        emote: AnimationType.Shoot,
+        attack: AnimationType.Slice,
+        ability: AnimationType.Swing,
+        emote: AnimationType.SpAttack,
         attackSprite: AttackSprite.STEEL_MELEE,
         hitSprite: HitSprite.STEEL_HIT
     },
     [Pkm.DOUBLADE]: {
         attack: AnimationType.Slice,
-        ability: AnimationType.SpAttack,
-        emote: AnimationType.Shoot,
+        ability: AnimationType.Swing,
+        emote: AnimationType.SpAttack,
         attackSprite: AttackSprite.STEEL_MELEE,
         hitSprite: HitSprite.STEEL_HIT
     },
@@ -2277,14 +2278,16 @@ export const PokemonAnimations: {
         ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.STEEL_MELEE,
-        hitSprite: HitSprite.STEEL_HIT
+        hitSprite: HitSprite.STEEL_HIT,
+        animationsOriented: [AnimationType.Special0]
     },
     [Pkm.AEGISLASH_BLADE]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.STEEL_MELEE,
-        hitSprite: HitSprite.STEEL_HIT
+        hitSprite: HitSprite.STEEL_HIT,
+        animationsOriented: [AnimationType.Special0]
     },
     [Pkm.CUBONE]: {
         attack: AnimationType.Strike,
@@ -2493,26 +2496,26 @@ export const PokemonAnimations: {
     },
     [Pkm.CORPHISH]: {
         attack: AnimationType.Bite,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE
     },
     [Pkm.CRAWDAUNT]: {
         attack: AnimationType.Bite,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.WATER_MELEE
     },
     [Pkm.JOLTIK]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_MELEE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
     [Pkm.GALVANTULA]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_MELEE,
         hitSprite: HitSprite.ELECTRIC_HIT
@@ -2808,14 +2811,14 @@ export const PokemonAnimations: {
     },
     [Pkm.SALANDIT]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
-        emote: AnimationType.Shoot,
+        ability: AnimationType.Attack,
+        emote: AnimationType.Pose,
         attackSprite: AttackSprite.POISON_RANGE,
         hitSprite: HitSprite.POISON_HIT
     },
     [Pkm.SALAZZLE]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.POISON_RANGE,
         hitSprite: HitSprite.POISON_HIT
@@ -2905,15 +2908,15 @@ export const PokemonAnimations: {
         hitSprite: HitSprite.POISON_HIT
     },
     [Pkm.CHINCHOU]: {
-        attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
+        attack: AnimationType.Attack,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
     [Pkm.LANTURN]: {
-        attack: AnimationType.Shoot,
-        ability: AnimationType.Hop,
+        attack: AnimationType.Attack,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_RANGE,
         hitSprite: HitSprite.ELECTRIC_HIT
@@ -3065,15 +3068,15 @@ export const PokemonAnimations: {
     },
     [Pkm.CARBINK]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hop,
+        ability: AnimationType.Charge,
         emote: AnimationType.Rotate,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.ROCK_HIT
     },
     [Pkm.DIANCIE]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hurt,
-        emote: AnimationType.Shoot,
+        ability: AnimationType.DeepBreath,
+        emote: AnimationType.Pose,
         attackSprite: AttackSprite.FAIRY_MELEE,
         hitSprite: HitSprite.ROCK_HIT
     },
@@ -3674,7 +3677,7 @@ export const PokemonAnimations: {
     },
     [Pkm.GRENINJA]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Hurt,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Attack,
         attackSprite: AttackSprite.WATER_MELEE,
         hitSprite: HitSprite.WATER_HIT
@@ -4336,14 +4339,14 @@ export const PokemonAnimations: {
     },
     [Pkm.CLAUNCHER]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Double,
-        emote: AnimationType.Charge,
+        ability: AnimationType.Charge,
+        emote: AnimationType.Appeal,
         attackSprite: AttackSprite.PSYCHIC_RANGE,
         hitSprite: HitSprite.SOUND_HIT
     },
     [Pkm.CLAWITZER]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Double,
+        ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.PSYCHIC_RANGE,
         hitSprite: HitSprite.SOUND_HIT
@@ -5407,14 +5410,15 @@ export const PokemonAnimations: {
     [Pkm.PHANPY]: {
         attack: AnimationType.Attack,
         ability: AnimationType.TumbleBack,
-        emote: AnimationType.DeepBreath,
+        emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ROCK_MELEE
     },
     [Pkm.DONPHAN]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.TumbleBack,
+        ability: AnimationType.Special0,
         emote: AnimationType.Shoot,
-        attackSprite: AttackSprite.ROCK_MELEE
+        attackSprite: AttackSprite.ROCK_MELEE,
+        animationsOriented: [AnimationType.Special0]
     },
     [Pkm.SPOINK]: {
         attack: AnimationType.Attack,
@@ -6119,6 +6123,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Idle,
         ability: AnimationType.Idle,
         emote: AnimationType.Idle,
+        hop: AnimationType.Idle,
         shinyUnavailable: true,
         noShadow: true
     },
@@ -6126,6 +6131,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Idle,
         ability: AnimationType.Idle,
         emote: AnimationType.Idle,
+        hop: AnimationType.Idle,
         shinyUnavailable: true,
         noShadow: true
     },
@@ -6133,6 +6139,7 @@ export const PokemonAnimations: {
         attack: AnimationType.Idle,
         ability: AnimationType.Idle,
         emote: AnimationType.Idle,
+        hop: AnimationType.Idle,
         shinyUnavailable: true,
         noShadow: true
     },
@@ -6261,14 +6268,14 @@ export const PokemonAnimations: {
     },
     [Pkm.CAPSAKID]: {
         attack: AnimationType.Attack,
-        ability: AnimationType.Double,
+        ability: AnimationType.Dance,
         emote: AnimationType.Dance,
         attackSprite: AttackSprite.FIRE_MELEE,
         hitSprite: HitSprite.FIRE_HIT
     },
     [Pkm.SCOVILLAIN]: {
         attack: AnimationType.Shoot,
-        ability: AnimationType.Double,
+        ability: AnimationType.Dance,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.FIRE_MELEE,
         hitSprite: HitSprite.FIRE_HIT

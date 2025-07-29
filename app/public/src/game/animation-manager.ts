@@ -1,5 +1,5 @@
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
-import { AnimationComplete, AnimationType } from "../../../types/Animation"
+import { AnimationOriented, AnimationType } from "../../../types/Animation"
 import delays from "../../../types/delays.json"
 import {
   Orientation,
@@ -83,7 +83,7 @@ export default class AnimationManager {
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
         const directionArray =
-          AnimationComplete[action] === false
+          AnimationOriented[action] === false && PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(action) !== true
             ? [Orientation.DOWN]
             : Object.values(Orientation)
         directionArray.forEach((direction) => {
@@ -161,7 +161,7 @@ export default class AnimationManager {
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
         const directionArray =
-          AnimationComplete[action] === false
+          AnimationOriented[action] === false && PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(action) !== true
             ? [Orientation.DOWN]
             : Object.values(Orientation)
         directionArray.forEach((direction) => {
@@ -354,12 +354,13 @@ export default class AnimationManager {
   ) {
     if (entity.animationLocked || !entity.sprite?.anims) return
 
-    const orientation = config.flip
+    let orientation = config.flip
       ? OrientationFlip[entity.orientation]
       : entity.orientation
 
-    const orientationCorrected =
-      AnimationComplete[animation] === true ? orientation : Orientation.DOWN
+    if (AnimationOriented[animation] === false && PokemonAnimations[PkmByIndex[entity.index]]?.animationsOriented?.includes(animation) !== true) {
+      orientation = Orientation.DOWN
+    }
 
     const textureIndex =
       entity.scene && entity.scene.textures.exists(entity.index)
@@ -370,8 +371,8 @@ export default class AnimationManager {
         !PokemonAnimations[PkmByIndex[entity.index]].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
-    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
-    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
+    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
+    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
 
     if (
       entity.sprite.anims.currentAnim?.key === animKey &&

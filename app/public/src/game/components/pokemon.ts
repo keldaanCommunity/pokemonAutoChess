@@ -497,8 +497,8 @@ export default class PokemonSprite extends DraggableObject {
       }
 
       const projectile = this.scene.add.sprite(
-        coordinates[0] + randomBetween(-5, 5),
-        coordinates[1] + randomBetween(-5, 5),
+        coordinates[0],
+        coordinates[1] - 10,
         "attacks",
         `${attackSprite}/000.png`
       )
@@ -532,8 +532,8 @@ export default class PokemonSprite extends DraggableObject {
         )*/
         this.scene.tweens.add({
           targets: projectile,
-          x: coordinatesTarget[0],
-          y: coordinatesTarget[1],
+          x: coordinatesTarget[0] + randomBetween(-5, 5),
+          y: coordinatesTarget[1] + randomBetween(-5, 5),
           ease: "Linear",
           duration: min(250)(travelTime),
           delay: delayBeforeShoot - LATENCY_COMPENSATION,
@@ -586,21 +586,17 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   displayAnimation(anim: string) {
-    return displayAbility(
-      this.scene as GameScene,
-      [],
-      anim,
-      this.orientation,
-      this.positionX,
-      !this.inBattle
-        ? this.positionY - 1
-        : this.team === Team.RED_TEAM
-          ? 4 - this.positionY
-          : this.positionY,
-      this.targetX ?? -1,
-      this.targetY ?? -1,
-      this.flip
-    )
+    return displayAbility({
+      scene: this.scene as GameScene,
+      pokemonsOnBoard: [],
+      ability: anim,
+      orientation: this.orientation,
+      positionX: this.positionX,
+      positionY: !this.inBattle ? this.positionY - 1 : this.team === Team.RED_TEAM ? 4 - this.positionY : this.positionY,
+      targetX: this.targetX ?? -1,
+      targetY: this.targetY ?? -1,
+      flip: this.flip
+    })
   }
 
   fishingAnimation() {
@@ -1145,10 +1141,10 @@ export default class PokemonSprite extends DraggableObject {
   addReflectShieldAnim(colorVariation = 0xffffff) {
     if (!this.reflectShield) {
       this.reflectShield = this.scene.add
-        .sprite(0, -5, "abilities", `${Ability.SPIKY_SHIELD}/000.png`)
+        .sprite(0, -5, "abilities", `${Ability.REFLECT}/000.png`)
         .setScale(2)
         .setTint(colorVariation)
-      this.reflectShield.anims.play(Ability.SPIKY_SHIELD)
+      this.reflectShield.anims.play(Ability.REFLECT)
       this.add(this.reflectShield)
     }
   }

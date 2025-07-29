@@ -39,3 +39,7 @@ export function count<T>(arr: T[] | ArraySchema<T>, el: T): number {
 export function wrapInArray<T>(value: T | T[]): T[] {
   return Array.isArray(value) ? value : [value]
 }
+
+export function range(start: number, end: number): number[] {
+  return Array.from({ length: end - start + 1 }, (_, i) => i + start)
+}

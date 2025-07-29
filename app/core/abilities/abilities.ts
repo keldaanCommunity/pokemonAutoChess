@@ -1086,39 +1086,6 @@ export class RazorWindStrategy extends AbilityStrategy {
   }
 }
 
-export class TwistingNetherStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
-    super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInRadius(target.positionX, target.positionY, 2)
-    cells.forEach((cell) => {
-      if (cell && cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          80,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        const teleportationCell = board.getTeleportationCell(
-          cell.value.positionX,
-          cell.value.positionY,
-          cell.value.team
-        )
-        if (teleportationCell) {
-          cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)
-        } else {
-          logger.error("unable to teleport pokemon", cell.value)
-        }
-      }
-    })
-  }
-}
-
 export class DarkVoidStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13108,7 +13075,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LOCK_ON]: new LockOnStrategy(),
   [Ability.PSYCH_UP]: new PsychUpStrategy(),
   [Ability.RAZOR_WIND]: new RazorWindStrategy(),
-  [Ability.TWISTING_NETHER]: new TwistingNetherStrategy(),
   [Ability.EARTHQUAKE]: new EarthquakeStrategy(),
   [Ability.SOFT_BOILED]: new SoftBoiledStrategy(),
   [Ability.ELECTRIC_SURGE]: new ElectricSurgeStrategy(),
