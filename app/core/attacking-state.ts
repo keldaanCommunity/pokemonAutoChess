@@ -21,7 +21,7 @@ export default class AttackingState extends PokemonState {
 
     if (pokemon.cooldown <= 0) {
       const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
-      pokemon.cooldown = Math.round(1000 / (0.4 + speed * 0.007))
+      pokemon.resetCooldown(1000, speed)
 
       // first, try to hit the same target than previous attack
       let target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)

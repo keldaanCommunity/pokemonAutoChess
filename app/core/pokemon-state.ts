@@ -566,7 +566,7 @@ export default abstract class PokemonState {
         residualDamage = min(0)(residualDamage - shield)
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
-        pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
+        pokemon.resetCooldown(500)
         broadcastAbility(pokemon, { skill: "FOSSIL_RESURRECT" })
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)

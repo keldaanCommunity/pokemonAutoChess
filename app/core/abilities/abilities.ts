@@ -2923,7 +2923,7 @@ export class DefenseCurlStrategy extends AbilityStrategy {
     const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
     pokemon.addDefense(buff, pokemon, 1, crit)
     pokemon.addSpecialDefense(buff, pokemon, 1, crit)
-    pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
+    pokemon.resetCooldown(250)
   }
 }
 
@@ -3853,7 +3853,7 @@ export class TormentStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const boost = [20, 40, 60][pokemon.stars - 1] ?? 60
     pokemon.addSpeed(boost, pokemon, 1, crit)
-    pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
+    pokemon.resetCooldown(500)
   }
 }
 
@@ -4118,7 +4118,7 @@ export class NastyPlotStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, pokemon, 1, crit)
-    pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
+    pokemon.resetCooldown(250)
   }
 }
 
@@ -4133,7 +4133,7 @@ export class TakeHeartStrategy extends AbilityStrategy {
     pokemon.addAttack(8, pokemon, 1, crit)
     pokemon.addSpecialDefense(8, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
-    pokemon.cooldown = Math.round(100 * (50 / pokemon.speed))
+    pokemon.resetCooldown(100)
   }
 }
 
@@ -4904,7 +4904,7 @@ export class MachPunchStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    pokemon.cooldown = Math.round(100 * (50 / pokemon.speed))
+    pokemon.resetCooldown(100)
   }
 }
 
@@ -5076,7 +5076,7 @@ export class GrowthStrategy extends AbilityStrategy {
     }
     pokemon.addAttack(attackBuff, pokemon, 1, crit)
     pokemon.addMaxHP(hpBuff, pokemon, 1, crit)
-    pokemon.cooldown = Math.round(250 * (50 / pokemon.speed))
+    pokemon.resetCooldown(250)
   }
 }
 
@@ -7702,7 +7702,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
         }
       }, 2000)
     )
-    pokemon.cooldown = Math.round(200 * (50 / pokemon.speed))
+    pokemon.resetCooldown(200)
   }
 }
 
@@ -8172,7 +8172,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       true
     )
 
-    pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
+    pokemon.resetCooldown(500)
   }
 }
 
@@ -10300,7 +10300,7 @@ export class YawnStrategy extends AbilityStrategy {
 
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
     pokemon.addShield(shield, pokemon, 1, true)
-    pokemon.cooldown = Math.round(1500 * (50 / pokemon.speed))
+    pokemon.resetCooldown(1000)
   }
 }
 
@@ -11208,7 +11208,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       pillar.shield = 0
       pillar.handleSpecialDamage(9999, board, AttackType.TRUE, null, false)
       pokemon.moveTo(pillarX, pillarY, board)
-      pokemon.cooldown = 1000
+      pokemon.resetCooldown(800)
 
       pokemon.commands.push(
         new DelayedCommand(() => {
@@ -11372,7 +11372,7 @@ export class DarkLariatStrategy extends AbilityStrategy {
 
     if (freeCellBehind) {
       pokemon.moveTo(freeCellBehind.x, freeCellBehind.y, board)
-      pokemon.cooldown = 600
+      pokemon.resetCooldown(500)
     }
   }
 }
@@ -11955,7 +11955,7 @@ export class UltraThrustersStrategy extends AbilityStrategy {
         target
       )
       pokemon.moveTo(corner.x, corner.y, board)
-      pokemon.cooldown = 600
+      pokemon.resetCooldown(600)
     }
   }
 }

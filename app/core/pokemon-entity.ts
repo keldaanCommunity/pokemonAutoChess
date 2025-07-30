@@ -191,7 +191,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shieldDamageTaken = 0
     this.healDone = 0
     this.shieldDone = 0
-    this.cooldown = Math.round(500 * (50 / this.speed))
+    this.resetCooldown(500)
 
     pokemon.types.forEach((type) => {
       this.types.add(type)
@@ -264,6 +264,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   hasSynergyEffect(synergy: Synergy): boolean {
     return SynergyEffects[synergy].some((effect) => this.effects.has(effect))
+  }
+
+  resetCooldown(baseDuration: number, speed = this.speed) {
+    this.cooldown = Math.round(baseDuration / (0.4 + this.speed * 0.007))
   }
 
   setTarget(target: IPokemonEntity | null) {

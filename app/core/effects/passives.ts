@@ -26,7 +26,7 @@ import { ItemEffects } from "./items"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
-  pokemon.cooldown = Math.round(1000 / (0.4 + speed * 0.007)) // use attack state cooldown
+  pokemon.resetCooldown(1000, speed) // use attack state cooldown
   if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
     // CAST ABILITY
     let crit = false
