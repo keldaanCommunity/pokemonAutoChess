@@ -605,7 +605,7 @@ export default abstract class PokemonState {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
             index: attacker.index,
             type: attackType,
-            amount: takenDamage,
+            amount: Math.round(takenDamage),
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id

@@ -586,14 +586,7 @@ class GameContainer {
   }) {
     if (document.hidden) return // do not display damage when the tab is not focused
     if (preference("showDamageNumbers")) {
-      this.gameScene?.battle?.displayDamage(
-        message.x,
-        message.y,
-        message.amount,
-        message.type,
-        message.index,
-        message.id
-      )
+      this.gameScene?.battle?.displayDamage(message)
     }
   }
 

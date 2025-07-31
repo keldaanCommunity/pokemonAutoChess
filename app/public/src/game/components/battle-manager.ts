@@ -1122,27 +1122,23 @@ export default class BattleManager {
     })
   }
 
-  displayDamage(
-    positionX: number,
-    positionY: number,
-    damage: number,
+  displayDamage({ x, y, amount, type, index, id }: {
+    x: number,
+    y: number,
+    amount: number,
     type: AttackType,
     index: string,
     id: string
-  ) {
+  }) {
     if (this.simulation?.id === id) {
-      const coordinates = transformEntityCoordinates(
-        positionX,
-        positionY,
-        this.flip
-      )
+      const coordinates = transformEntityCoordinates(x, y, this.flip)
       const color =
         type === AttackType.PHYSICAL
           ? "#e76e55"
           : type === AttackType.SPECIAL
             ? "#209cee"
             : "#f7d51d"
-      this.displayTween(color, coordinates, index, damage)
+      this.displayTween(color, coordinates, index, amount)
       displayHit(
         this.scene,
         PokemonAnimations[PkmByIndex[index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
