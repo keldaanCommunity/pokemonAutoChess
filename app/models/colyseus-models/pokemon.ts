@@ -5933,7 +5933,7 @@ export class Volcanion extends Pokemon {
   speed = 47
   def = 8
   speDef = 6
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.STEAM_ERUPTION
 }
