@@ -12876,7 +12876,7 @@ export class SteamrollerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = ([0.5, 1, 2][pokemon.stars - 1] ?? 2) * pokemon.speed
+    const damage = Math.round(([0.4, 0.8, 1.5][pokemon.stars - 1] ?? 1.5) * pokemon.speed)
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
