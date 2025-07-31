@@ -557,13 +557,13 @@ export default abstract class PokemonState {
             : 0.4
         pokemon.addShield(shield, pokemon, 0, false)
 
-        const damageOnShield = max(shield)(residualDamage)
+        //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
+        const damageOnShield = max(0.5 * shield)(residualDamage)
 
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-
-        residualDamage = min(0)(residualDamage - shield)
+        residualDamage = 0
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
         pokemon.resetCooldown(500)
