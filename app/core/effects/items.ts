@@ -248,7 +248,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   ...Object.fromEntries(SynergyStones.map((stone) => [stone, [
     // prevent adding a synergy stone on a pokemon that already has this synergy
-    new OnItemEquippedEffect(({ pokemon, item }) => pokemon.types.has(SynergyGivenByItem[item]))
+    new OnItemEquippedEffect(({ pokemon, item }) => !pokemon.types.has(SynergyGivenByItem[item]))
   ]])),
 
   ...Object.fromEntries([...TMs, ...HMs].map(tm => [tm, [
