@@ -1,8 +1,5 @@
-import { ISimulationCommand, Transfer } from "../types"
-import { EffectEnum } from "../types/enum/Effect"
-import { AttackType } from "../types/enum/Game"
-import { Pkm } from "../types/enum/Pokemon"
-import Board from "./board"
+import { ISimulationCommand } from "../types"
+import type { Board } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 
 export abstract class SimulationCommand implements ISimulationCommand {
@@ -12,7 +9,7 @@ export abstract class SimulationCommand implements ISimulationCommand {
   constructor(delay: number) {
     this.delay = delay
   }
-  execute() {}
+  execute() { }
   update(dt: number) {
     this.delay -= dt
     if (this.delay < 0) {

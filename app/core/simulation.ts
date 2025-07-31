@@ -49,7 +49,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
-import Board from "./board"
+import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
 import {
@@ -153,7 +153,11 @@ export default class Simulation extends Schema implements ISimulation {
     this.winnerId = ""
     this.flowerSpawn = [false, false]
     this.stormLightningTimer = randomBetween(4000, 8000)
-    if (SynergyEffects[Synergy.AQUATIC].some((e) => this.blueEffects.has(e) || this.redEffects.has(e))) {
+    if (
+      SynergyEffects[Synergy.AQUATIC].some(
+        (e) => this.blueEffects.has(e) || this.redEffects.has(e)
+      )
+    ) {
       this.tidalWaveTimer = 8000
     }
 
@@ -381,14 +385,11 @@ export default class Simulation extends Schema implements ISimulation {
     team: Team
   ): { x: number; y: number } {
     const positionX = pokemon.positionX
-    const positionY = team === Team.BLUE_TEAM
-      ? pokemon.positionY - 1
-      : 5 - (pokemon.positionY - 1)
-    return this.getClosestAvailablePlaceOnBoardTo(
-      positionX,
-      positionY,
-      team
-    )
+    const positionY =
+      team === Team.BLUE_TEAM
+        ? pokemon.positionY - 1
+        : 5 - (pokemon.positionY - 1)
+    return this.getClosestAvailablePlaceOnBoardTo(positionX, positionY, team)
   }
 
   getClosestAvailablePlaceOnBoardToPokemonEntity(
@@ -749,7 +750,10 @@ export default class Simulation extends Schema implements ISimulation {
 
         if (pokemon.passive === Passive.LUVDISC) {
           const lovers = [-1, 1].map((offset) =>
-            this.board.getEntityOnCell(pokemon.positionX + offset, pokemon.positionY)
+            this.board.getEntityOnCell(
+              pokemon.positionX + offset,
+              pokemon.positionY
+            )
           )
           if (lovers[0] && lovers[1]) {
             const bestAtk = Math.max(lovers[0].atk, lovers[1].atk)
@@ -1756,8 +1760,7 @@ export default class Simulation extends Schema implements ISimulation {
     const effects = team === Team.RED_TEAM ? this.redEffects : this.blueEffects
 
     const tidalWaveLevel =
-      effects.has(EffectEnum.WATER_VEIL) ||
-        effects.has(EffectEnum.SURGE_SURFER)
+      effects.has(EffectEnum.WATER_VEIL) || effects.has(EffectEnum.SURGE_SURFER)
         ? 3
         : effects.has(EffectEnum.HYDRATION)
           ? 2
@@ -1772,16 +1775,17 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (shouldTrigger) {
       this.triggerTidalWave(team, tidalWaveLevel)
-      if (
-        effects.has(EffectEnum.SURGE_SURFER) &&
-        this.tidalWaveCounter === 1
-      ) {
+      if (effects.has(EffectEnum.SURGE_SURFER) && this.tidalWaveCounter === 1) {
         this.addPikachuSurferToBoard(team)
       }
     }
   }
 
-  triggerTidalWave(team: Team, tidalWaveLevel: number, healAll: boolean = false) {
+  triggerTidalWave(
+    team: Team,
+    tidalWaveLevel: number,
+    healAll: boolean = false
+  ) {
     const isRed = team === Team.RED_TEAM
     const orientation = isRed ? Orientation.DOWN : Orientation.UP
     this.room.broadcast(Transfer.ABILITY, {

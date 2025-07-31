@@ -2,7 +2,6 @@ import Player from "../../models/colyseus-models/player"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../../models/effects"
 import GameRoom from "../../rooms/game-room"
-import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
@@ -12,7 +11,7 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { min } from "../../utils/number"
 import { chance } from "../../utils/random"
-import Board from "../board"
+import type { Board } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
@@ -244,7 +243,7 @@ export class GrowGroundEffect extends PeriodicEffect {
         pokemon.addDefense(this.synergyLevel * 2, pokemon, 0, false)
         pokemon.addSpecialDefense(this.synergyLevel * 2, pokemon, 0, false)
         pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
-        pokemon.transferAbility("GROUND_GROW")
+        pokemon.broadcastAbility({ skill: "GROUND_GROW" })
         if (
           pokemon.items.has(Item.BIG_NUGGET) &&
           this.count === 5 &&
@@ -353,7 +352,7 @@ export class DarkHarvestEffect extends PeriodicEffect {
   constructor(duration: number, pokemon: PokemonEntity) {
     super(
       (pokemon) => {
-        pokemon.transferAbility(Ability.DARK_HARVEST)
+        pokemon.broadcastAbility({ skill: Ability.DARK_HARVEST })
         const board = pokemon.simulation.board
         const crit = pokemon.effects.has(EffectEnum.ABILITY_CRIT)
           ? chance(pokemon.critChance, pokemon)
@@ -466,11 +465,8 @@ export const electricTripleAttackEffect = new OnAttackEffect(
                   false
                 )
                 if (enemy !== target) {
-                  pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-                    id: pokemon.simulation.id,
+                  pokemon.broadcastAbility({
                     skill: "LINK_CABLE_link",
-                    positionX: target.positionX,
-                    positionY: target.positionY,
                     targetX: enemy.positionX,
                     targetY: enemy.positionY
                   })
@@ -494,7 +490,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
   }
 
   apply(pokemon, board, target, crit) {
-    pokemon.transferAbility(Ability.ECHO)
+    pokemon.broadcastAbility({ skill: Ability.ECHO })
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
     const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0
     const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0

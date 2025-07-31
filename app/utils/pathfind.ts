@@ -1,4 +1,5 @@
-import Board from "../core/board"
+import type { Board } from "../core/board"
+
 const defaultGrid: number[][] = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],

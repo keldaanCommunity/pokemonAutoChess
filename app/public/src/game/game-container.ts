@@ -606,18 +606,10 @@ class GameContainer {
     targetX?: number
     targetY?: number
     delay?: number
+    ap: number
   }) {
     if (document.hidden) return // do not display abilities when the tab is not focused
-    this.gameScene?.battle?.displayAbility(
-      message.id,
-      message.skill,
-      message.orientation,
-      message.positionX,
-      message.positionY,
-      message.targetX,
-      message.targetY,
-      message.delay
-    )
+    this.gameScene?.battle?.displayAbility(message)
   }
 
   /* Board pokemons */

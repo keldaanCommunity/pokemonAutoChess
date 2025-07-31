@@ -292,6 +292,7 @@ export function hiddenPowerAnimation(args: AbilityAnimationArgs) {
 function addAbilitySprite(
   scene: GameScene | DebugScene,
   ability: Ability | string,
+  ap: number,
   position: number[],
   options: AbilityAnimationOptions = {}
 ) {
@@ -331,13 +332,9 @@ function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
-  sprite.setScale(
-    ...(Array.isArray(scale)
-      ? scale
-      : scale !== undefined
-        ? [scale, scale]
-        : [2, 2])
-  )
+  const scaleX = (Array.isArray(scale) ? scale[0] : scale ?? 2) * (1 + ap / 200)
+  const scaleY = (Array.isArray(scale) ? scale[1] : scale ?? 2) * (1 + ap / 200)
+  sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
   if (rotation !== undefined) sprite.setRotation(rotation)
@@ -375,6 +372,7 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
       addAbilitySprite(
         args.scene,
         options.ability ?? args.ability,
+        args.ap,
         [
           options.x + (options?.positionOffset?.[0] ?? 0),
           options.y + (options?.positionOffset?.[1] ?? 0)
@@ -480,6 +478,7 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
         const sprite = addAbilitySprite(
           scene,
           options.ability ?? args.ability,
+          args.ap,
           startPosition,
           {
             destroyOnComplete: false,
@@ -1077,7 +1076,7 @@ export const AbilitiesAnimations: {
         pkmUI.positionY,
         args.flip
       )
-      addAbilitySprite(args.scene, Ability.TEETER_DANCE, coordinates, {
+      addAbilitySprite(args.scene, Ability.TEETER_DANCE, args.ap, coordinates, {
         depth: DEPTH.ABILITY_BELOW_POKEMON
       })
     })
@@ -1094,6 +1093,7 @@ export const AbilitiesAnimations: {
     addAbilitySprite(
       args.scene,
       args.ability,
+      args.ap,
       transformEntityCoordinates(4, args.targetY, args.flip),
       { scale: 4 }
     ),
@@ -1843,14 +1843,14 @@ export const AbilitiesAnimations: {
     })(args)
   },
 
-  [Ability.DARK_HARVEST]: ({ scene, positionX, positionY, flip }) => {
+  [Ability.DARK_HARVEST]: ({ scene, positionX, positionY, flip, ap }) => {
     const darkHarvestGroup = scene.add.group()
     const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
 
     for (let i = 0; i < 5; i++) {
       const darkHarvestSprite = scene.add
         .sprite(0, 0, "abilities", `${Ability.DARK_HARVEST}/000.png`)
-        ?.setScale(2)
+        ?.setScale(2 * (1 + ap / 200))
       darkHarvestSprite.anims.play({
         key: Ability.DARK_HARVEST,
         frameRate: 8
@@ -1880,14 +1880,14 @@ export const AbilitiesAnimations: {
     })
   },
 
-  [Ability.DECORATE]: ({ scene, targetX, targetY, flip }) => {
+  [Ability.DECORATE]: ({ scene, targetX, targetY, flip, ap }) => {
     const decorateGroup = scene.add.group()
     const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
 
     Sweets.forEach((sweet) => {
       const sweetSprite = scene.add
         .sprite(0, 0, "item", `${sweet}.png`)
-        ?.setScale(0.3)
+        ?.setScale(0.3 * (1 + ap / 200))
       decorateGroup.add(sweetSprite)
     })
 
@@ -1961,6 +1961,7 @@ export const AbilitiesAnimations: {
     const {
       scene,
       ability,
+      ap,
       delay,
       positionX,
       positionY,
@@ -1979,7 +1980,7 @@ export const AbilitiesAnimations: {
     const angle1 = angleBetween(coordinates, topCoords) - Math.PI / 2
     const angle2 = angleBetween(topCoords, coordinatesTarget) - Math.PI / 2
 
-    const missile = addAbilitySprite(scene, ability, coordinates, {
+    const missile = addAbilitySprite(scene, ability, ap, coordinates, {
       rotation: angle1
     })
 
@@ -2018,10 +2019,10 @@ export const AbilitiesAnimations: {
     }
   },
 
-  ["PARTING_SHOT"]: ({ scene, ability, positionX, positionY, flip }) => {
+  ["PARTING_SHOT"]: ({ scene, ability, ap, positionX, positionY, flip }) => {
     setTimeout(() => {
       const coordinates = transformEntityCoordinates(positionX, positionY, flip)
-      const anim = addAbilitySprite(scene, ability, coordinates)
+      const anim = addAbilitySprite(scene, ability, ap, coordinates)
       //add tween chain to make it bouncy (scale 120% with quad easing before scaling back to 100M) before fading out
       scene.tweens.chain({
         targets: anim,

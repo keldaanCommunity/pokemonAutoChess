@@ -1,11 +1,13 @@
-import { Transfer } from "../../types"
+import { IPokemonEntity, Transfer } from "../../types"
+import { Ability } from "../../types/enum/Ability"
+import { Orientation } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
-import Board from "../board"
-import { PokemonEntity } from "../pokemon-entity"
 import { min } from "../../utils/number"
-import { OnAbilityCastEffect } from "../effects/effect"
 import { values } from "../../utils/schemas"
+import type { Board } from "../board"
+import { OnAbilityCastEffect } from "../effects/effect"
 import { ItemEffects } from "../effects/items"
+import { PokemonEntity } from "../pokemon-entity"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome, encore...
@@ -21,14 +23,10 @@ export class AbilityStrategy {
     pokemon.count.ult += 1
 
     if (!preventDefaultAnim) {
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
-        skill: pokemon.skill,
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
+      pokemon.broadcastAbility({
         targetX: target.positionX,
         targetY: target.positionY,
-        orientation: pokemon.orientation
+        ap: pokemon.ap * (crit ? pokemon.critPower : 1),
       })
     }
 

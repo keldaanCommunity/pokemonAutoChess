@@ -402,11 +402,11 @@ export default class BattleManager {
           this.displayAbilityOnPokemon("FAIRY_CRIT", pkm)
         }
       } else if (field === "powerLensCount") {
-        if (value !== 0){
+        if (value !== 0) {
           this.displayAbilityOnPokemon("POWER_LENS", pkm)
         }
       } else if (field === "starDustCount") {
-        if (value !== 0){
+        if (value !== 0) {
           this.displayAbilityOnPokemon("STAR_DUST", pkm)
         }
       } else if (field === "spellBlockedCount") {
@@ -849,28 +849,30 @@ export default class BattleManager {
     })
   }
 
-  displayAbility(
+  displayAbility(args: {
     id: string,
-    ability: Ability | string,
+    skill: Ability | string,
+    ap: number,
     orientation: Orientation,
     positionX: number,
     positionY: number,
     targetX?: number,
     targetY?: number,
-    delay?: number
-  ) {
-    if (this.simulation?.id === id && ability) {
+    delay?: number,
+  }) {
+    if (this.simulation?.id === args.id && args.skill) {
       displayAbility({
         scene: this.scene,
         pokemonsOnBoard: this.group.getChildren() as PokemonSprite[],
-        ability,
-        orientation,
-        positionX,
-        positionY,
-        targetX: targetX ?? -1,
-        targetY: targetY ?? -1,
+        ability: args.skill,
+        ap: args.ap,
+        orientation: args.orientation,
+        positionX: args.positionX,
+        positionY: args.positionY,
+        targetX: args.targetX ?? -1,
+        targetY: args.targetY ?? -1,
         flip: this.flip,
-        delay: delay ?? -1
+        delay: args.delay ?? -1
       })
     }
   }
@@ -880,6 +882,7 @@ export default class BattleManager {
       scene: this.scene,
       pokemonsOnBoard: [],
       ability,
+      ap: pkm.ap,
       orientation: pkm.orientation,
       positionX: pkm.positionX,
       positionY: pkm.positionY,

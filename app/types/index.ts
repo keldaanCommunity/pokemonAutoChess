@@ -1,5 +1,5 @@
 import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
-import Board from "../core/board"
+import type { Board } from "../core/board"
 import Dps from "../core/dps"
 import { Effect as EffectClass } from "../core/effects/effect"
 import { EvolutionRule } from "../core/evolution-rules"
@@ -410,6 +410,7 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   get player(): IPlayer | undefined
+  broadcastAbility(options: any): void
   applyStat(stat: Stat, value: number): void
   addAbilityPower(
     value: number,

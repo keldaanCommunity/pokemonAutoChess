@@ -415,7 +415,8 @@ export class DebugScene extends Phaser.Scene {
         positionY: this.pokemon!.positionY,
         targetX: this.pokemon!.targetX ?? -1,
         targetY: this.pokemon!.targetY ?? -1,
-        flip: this.pokemon!.flip
+        flip: this.pokemon!.flip,
+        ap: 0
       })
     }
     showAbilityAnim()

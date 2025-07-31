@@ -7243,7 +7243,7 @@ export class Annihilape extends Pokemon {
   skill = Ability.THRASH
   onAcquired(player: Player) {
     player.titles.add(Title.ANNIHILATOR)
-    this.atk -= (30 - 20) // revert permanent atk buff stacked for evolution
+    this.atk -= 30 - 20 // revert permanent atk buff stacked for evolution
   }
 }
 
@@ -7897,7 +7897,11 @@ export class Delphox extends Pokemon {
 }
 
 export class Regieleki extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.HUMAN, Synergy.FOSSIL])
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.HUMAN,
+    Synergy.FOSSIL
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250
@@ -7910,7 +7914,11 @@ export class Regieleki extends Pokemon {
   skill = Ability.THUNDER_CAGE
 }
 export class Regidrago extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FOSSIL, Synergy.MONSTER])
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FOSSIL,
+    Synergy.MONSTER
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 350
@@ -8825,8 +8833,8 @@ export class Naganadel extends Pokemon {
   onAcquired(player: Player) {
     // cancel permanent stat buffs of Poipole
     // this is not perfect: see https://discord.com/channels/737230355039387749/1336313038617182209/1394408583046889522
-    this.atk -= (18 - 10)
-    this.hp -= (200 - 120)
+    this.atk -= 18 - 10
+    this.hp -= 200 - 120
   }
 }
 
@@ -9610,15 +9618,21 @@ export class Silvally extends Pokemon {
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
     if (y === 0) {
-      values(this.items).filter(item => (SynergyItems as ReadonlyArray<Item>).forEach(synergyItem => {
-        this.removeItem(synergyItem, player)
-        player.items.push(synergyItem)
-      }))
+      values(this.items).filter((item) =>
+        (SynergyItems as ReadonlyArray<Item>).forEach((synergyItem) => {
+          this.removeItem(synergyItem, player)
+          player.items.push(synergyItem)
+        })
+      )
     }
   }
   onItemRemoved(item: Item, player: Player) {
-    if ((SynergyItems as ReadonlyArray<Item>).includes(item)
-      && values(this.items).filter(item => (SynergyItems as ReadonlyArray<Item>).includes(item)).length === 0) {
+    if (
+      (SynergyItems as ReadonlyArray<Item>).includes(item) &&
+      values(this.items).filter((item) =>
+        (SynergyItems as ReadonlyArray<Item>).includes(item)
+      ).length === 0
+    ) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
   }
@@ -9713,7 +9727,7 @@ export class Flapple extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
     Synergy.GOURMET,
-    Synergy.GRASS,
+    Synergy.GRASS
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -13350,7 +13364,11 @@ export class Comfey extends Pokemon {
 
       // delete comfey
       team.delete(entity.id)
-      simulation.board.setEntityOnCell(entity.positionX, entity.positionY, undefined)
+      simulation.board.setEntityOnCell(
+        entity.positionX,
+        entity.positionY,
+        undefined
+      )
       if (simulation.blueDpsMeter.has(entity.id)) {
         simulation.blueDpsMeter.delete(entity.id)
       }
@@ -14187,7 +14205,7 @@ export class Cosmoem extends Pokemon {
     }
   )
   onAcquired(player: Player) {
-    this.hp -= (200 - 100) // revert hp buffs of cosmog
+    this.hp -= 200 - 100 // revert hp buffs of cosmog
   }
   hp = 200
   atk = 5
@@ -14217,7 +14235,7 @@ export class Solgaleo extends Pokemon {
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
-    this.hp -= (300 - 200) // revert hp buffs of cosmoem
+    this.hp -= 300 - 200 // revert hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
   }
 }
@@ -14239,7 +14257,7 @@ export class Lunala extends Pokemon {
   range = 4
   skill = Ability.MOONGEIST_BEAM
   onAcquired(player: Player) {
-    this.hp -= (300 - 200) // revert hp buffs of cosmoem
+    this.hp -= 300 - 200 // revert hp buffs of cosmoem
     player.titles.add(Title.STARGAZER)
   }
 }
@@ -15789,11 +15807,8 @@ export class Skarmory extends Pokemon {
           positions.add(`${x},${y}`)
 
           board.addBoardEffect(x, y, EffectEnum.SPIKES, simulation)
-          simulation.room.broadcast(Transfer.ABILITY, {
-            id: simulation.id,
+          entity.broadcastAbility({
             skill: Ability.SPIKES,
-            positionX: entity.positionX,
-            positionY: entity.positionY,
             targetX: x,
             targetY: y
           })
@@ -18158,7 +18173,11 @@ export class Celesteela extends Pokemon {
 }
 
 export class Ledyba extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING, Synergy.FLYING])
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.LEDIAN
@@ -18174,7 +18193,11 @@ export class Ledyba extends Pokemon {
 }
 
 export class Ledian extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING, Synergy.FLYING])
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 130

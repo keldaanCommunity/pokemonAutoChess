@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import Board from "../../core/board"
+import type { Board } from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
@@ -1093,7 +1093,10 @@ export default class Status extends Schema implements IStatus {
       duration = Math.round(duration * 0.7)
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
       duration = Math.round(duration * 0.4)
-    } else if (pkm.effects.has(EffectEnum.WATER_VEIL) || pkm.effects.has(EffectEnum.SURGE_SURFER)) {
+    } else if (
+      pkm.effects.has(EffectEnum.WATER_VEIL) ||
+      pkm.effects.has(EffectEnum.SURGE_SURFER)
+    ) {
       duration = Math.round(duration * 0.1)
     }
     return duration

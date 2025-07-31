@@ -2,7 +2,6 @@ import Player from "../models/colyseus-models/player"
 import { SynergyEffects } from "../models/effects"
 import { IPokemonEntity, Transfer } from "../types"
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
-import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
@@ -13,7 +12,6 @@ import {
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
@@ -21,8 +19,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
-import { broadcastAbility } from "./abilities/abilities"
-import Board, { Cell } from "./board"
+import type { Board, Cell } from "./board"
 import { PeriodicEffect } from "./effects/effect"
 import { PokemonEntity } from "./pokemon-entity"
 
@@ -567,7 +564,7 @@ export default abstract class PokemonState {
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
         pokemon.resetCooldown(500)
-        broadcastAbility(pokemon, { skill: "FOSSIL_RESURRECT" })
+        pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
@@ -741,12 +738,7 @@ export default abstract class PokemonState {
             : 5
         pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: "GRASS_HEAL",
-          positionX: pokemon.positionX,
-          positionY: pokemon.positionY
-        })
+        pokemon.broadcastAbility({ skill: "GRASS_HEAL" })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }

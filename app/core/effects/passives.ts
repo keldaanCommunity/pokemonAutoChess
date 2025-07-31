@@ -1,4 +1,3 @@
-import { Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -9,8 +8,8 @@ import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { AbilityStrategies, broadcastAbility } from "../abilities/abilities"
-import Board, { Cell } from "../board"
+import { AbilityStrategies } from "../abilities/abilities"
+import { Board, Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
 import {
   Effect,
@@ -107,7 +106,7 @@ export function partingShot(
 ) {
   target.addAbilityPower(-20, pokemon, 0, false)
   target.addAttack(-0.2 * target.baseAtk, pokemon, 0, false)
-  broadcastAbility(pokemon, {
+  pokemon.broadcastAbility({
     skill: "PARTING_SHOT",
     positionX: x,
     positionY: y
@@ -165,8 +164,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         .map((cell) => cell.value!)
         .concat(target)
       targets.forEach((t) => {
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
+        pokemon.broadcastAbility({
           skill: Ability.SHIELDS_DOWN,
           targetX: t.positionX,
           targetY: t.positionY
@@ -252,7 +250,7 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   board.forEach((x, y, pkm) => {
     if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
       pkm.addPP(5, pkm, 0, false)
-      pkm.transferAbility(pkm.skill)
+      pkm.broadcastAbility({ skill: pkm.skill })
     }
   })
 })
@@ -311,7 +309,7 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(({ pokemon, boar
   }
 })
 
-const DarmanitanZenOnHitEffect = new OnHitEffect(({ attacker, totalTakenDamage}) => {
+const DarmanitanZenOnHitEffect = new OnHitEffect(({ attacker, totalTakenDamage }) => {
   attacker.handleHeal(totalTakenDamage, attacker, 0, false)
 })
 
@@ -365,11 +363,8 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
         pokemon.simulation
       )
 
-      pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pokemon.simulation.id,
+      pokemon.broadcastAbility({
         skill: "TOXIC_SPIKES",
-        positionX: pokemon.positionX,
-        positionY: pokemon.positionY,
         targetX: cell.x,
         targetY: cell.y
       })

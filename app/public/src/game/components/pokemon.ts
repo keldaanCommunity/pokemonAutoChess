@@ -595,7 +595,8 @@ export default class PokemonSprite extends DraggableObject {
       positionY: !this.inBattle ? this.positionY - 1 : this.team === Team.RED_TEAM ? 4 - this.positionY : this.positionY,
       targetX: this.targetX ?? -1,
       targetY: this.targetY ?? -1,
-      flip: this.flip
+      flip: this.flip,
+      ap: this.ap
     })
   }
 

@@ -94,6 +94,7 @@
 
 - Max interest is now displayed in player money tooltip. Player money is now displayed in gold once you reach your max interest.
 - The ability animation code has been heavily refactored. Every ability animation has been reviewed and many have been improved.
+- Ability animations now scale in size with the AP of the Pokemon casting the ability, making them more impressive for high AP Pokemons.
 - Pokemons attacks now have different hit markers animations based on the synergy or unit. 20 different hit markers exist for now.
 
 # Bugfix

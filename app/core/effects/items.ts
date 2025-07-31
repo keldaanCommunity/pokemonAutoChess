@@ -1,5 +1,5 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { Title, Transfer } from "../../types"
+import { Title } from "../../types"
 import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -65,8 +65,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
       for (let i = 0; i < nbBounces; i++) {
         secondaryTargetHit = closestEnemies[i]
         if (secondaryTargetHit) {
-          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-            id: pokemon.simulation.id,
+          pokemon.broadcastAbility({
             skill: "LINK_CABLE_link",
             positionX: previousTg.positionX,
             positionY: previousTg.positionY,
@@ -202,12 +201,7 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
         cell.value.status.triggerBlinded(4000, cell.value)
       }
     })
-    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-      id: pokemon.simulation.id,
-      skill: "SMOKE_BALL",
-      positionX: pokemon.positionX,
-      positionY: pokemon.positionY
-    })
+    pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
     pokemon.removeItem(Item.SMOKE_BALL)
     pokemon.addShield(50, pokemon, 0, false)
     pokemon.flyAway(board)
@@ -664,12 +658,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnDamageReceivedEffect(({ pokemon, board }) => {
       if (pokemon.life < 0.5 * pokemon.hp) {
         const damage = pokemon.physicalDamageReduced + pokemon.specialDamageReduced
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: Ability.EXPLOSION,
-          positionX: pokemon.positionX,
-          positionY: pokemon.positionY
-        })
+        pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
         board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
             cell.value.handleSpecialDamage(

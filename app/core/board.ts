@@ -14,7 +14,7 @@ export type Cell = {
   y: number
   value: PokemonEntity | undefined
 }
-export default class Board {
+export class Board {
   rows: number
   columns: number
   cells: Array<PokemonEntity | undefined>

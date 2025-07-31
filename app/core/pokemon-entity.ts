@@ -8,13 +8,7 @@ import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
-import {
-  Emotion,
-  IPokemon,
-  IPokemonEntity,
-  Title,
-  Transfer
-} from "../types"
+import { Emotion, IPokemon, IPokemonEntity, Title, Transfer } from "../types"
 import {
   ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
@@ -49,7 +43,7 @@ import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
-import Board from "./board"
+import type { Board } from "./board"
 import {
   Effect as EffectClass,
   FireHitEffect,
@@ -820,12 +814,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
       alliesHit.forEach((ally) => {
         ally.addShield(10, ally, 1, false)
-        ally.simulation.room.broadcast(Transfer.ABILITY, {
-          id: ally.simulation.id,
-          skill: Ability.MOON_DREAM,
-          positionX: ally.positionX,
-          positionY: ally.positionY
-        })
+        ally.broadcastAbility({ skill: Ability.MOON_DREAM })
       })
     }
 
@@ -835,7 +824,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ].filter((effect) => effect instanceof OnHitEffect)
 
     onHitEffects.forEach((effect) => {
-      effect.apply({ attacker: this, target, board, totalTakenDamage, physicalDamage, specialDamage, trueDamage })
+      effect.apply({
+        attacker: this,
+        target,
+        board,
+        totalTakenDamage,
+        physicalDamage,
+        specialDamage,
+        trueDamage
+      })
     })
 
     if (this.hasSynergyEffect(Synergy.ICE)) {
@@ -946,13 +943,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
         chance(target.critChance, this)
       target.effects.delete(EffectEnum.SHELL_TRAP)
-      this.simulation.room.broadcast(Transfer.ABILITY, {
-        id: this.simulation.id,
-        skill: "SHELL_TRAP_trigger",
-        positionX: target.positionX,
-        positionY: target.positionY,
-        orientation: target.orientation
-      })
+      target.broadcastAbility({ skill: "SHELL_TRAP_trigger" })
       cells.forEach((cell) => {
         if (cell.value && cell.value.team !== target.team) {
           cell.value.handleSpecialDamage(
@@ -1044,11 +1035,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             board.getFarthestTargetCoordinateAvailablePlace(this)
           if (destination) {
             this.status.triggerProtect(2000)
-            this.simulation.room.broadcast(Transfer.ABILITY, {
-              id: this.simulation.id,
+            this.broadcastAbility({
               skill: "FLYING_TAKEOFF",
-              positionX: this.positionX,
-              positionY: this.positionY,
               targetX: destination.target.positionX,
               targetY: destination.target.positionY
             })
@@ -1057,8 +1045,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             this.flyingProtection--
             this.commands.push(
               new DelayedCommand(() => {
-                this.simulation.room.broadcast(Transfer.ABILITY, {
-                  id: this.simulation.id,
+                this.broadcastAbility({
                   skill: "FLYING_SKYDIVE",
                   positionX: destination.x,
                   positionY: destination.y,
@@ -1393,12 +1380,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.passive === Passive.PYUKUMUKU) {
-      this.simulation.room.broadcast(Transfer.ABILITY, {
-        id: this.simulation.id,
-        skill: Ability.EXPLOSION,
-        positionX: this.positionX,
-        positionY: this.positionY
-      })
+      this.broadcastAbility({ skill: Ability.EXPLOSION })
       const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
       const damage = Math.round(0.5 * this.hp)
       adjcells.forEach((cell) => {
@@ -1515,7 +1497,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             emotion: spawn.emotion,
             shiny: spawn.shiny
           })
-          const coord = this.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(this)
+          const coord =
+            this.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(this)
           const spawnedEntity = this.simulation.addPokemon(
             mon,
             coord.x,
@@ -1744,22 +1727,50 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  transferAbility(
-    name: Ability | string,
+  broadcastAbility({
+    skill = this.skill,
+    ap = this.ap,
     positionX = this.positionX,
     positionY = this.positionY,
+    orientation = this.orientation,
     targetX = this.targetX,
-    targetY = this.targetY
+    targetY = this.targetY,
+    delay
+  }: {
+    skill?: Ability | string
+    ap?: number
+    positionX?: number
+    positionY?: number
+    orientation?: Orientation | number
+    targetX?: number
+    targetY?: number
+    delay?: number
+  }
   ) {
-    this.simulation.room.broadcast(Transfer.ABILITY, {
-      id: this.simulation.id,
-      skill: name,
-      positionX: positionX,
-      positionY: positionY,
-      targetX: targetX,
-      targetY: targetY,
-      orientation: this.orientation
-    })
+    const room = this.simulation.room
+    const players = room.state.players
+    for (const client of room.clients) {
+      const player = players.get(client.auth.uid)
+      if (player && player.spectatedPlayerId) {
+        const spectatedPlayer = players.get(player.spectatedPlayerId)
+        if (
+          spectatedPlayer &&
+          spectatedPlayer.simulationId === this.simulation.id
+        ) {
+          client.send(Transfer.ABILITY, {
+            id: this.simulation.id,
+            skill,
+            ap,
+            positionX,
+            positionY,
+            orientation,
+            targetX,
+            targetY,
+            delay
+          })
+        }
+      }
+    }
   }
 
   changePassive(newPassive: Passive) {
@@ -1778,7 +1789,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // set new passive
     this.passive = newPassive
 
-    // apply new passive effects    
+    // apply new passive effects
     const newPassiveEffects = PassiveEffects[newPassive] ?? []
     for (const effect of newPassiveEffects) {
       this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
