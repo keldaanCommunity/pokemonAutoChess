@@ -913,7 +913,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: onTargetScale1,
-  [Ability.STEAM_ERUPTION]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.STEAM_ERUPTION]: onTargetScale3,
   [Ability.SEARING_SHOT]: onCaster({
     ability: Ability.STEAM_ERUPTION,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
