@@ -1957,7 +1957,7 @@
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
 		"CHAIN_CRAZED": "Self inflict POISON for 3 seconds and gain [15,SP] ATK, [10,SP] DEF and 20 SPEED",
-		"STEAMROLLER": "Rolls over the enemies to the farthest target, dealing [50,100,200,SP]% of SPEED as SPECIAL to all enemies in the path with [50,LK]% chance to apply FLINCH for 3 seconds.",
+		"STEAMROLLER": "Rolls over the enemies to the farthest target, dealing [40,80,150,SP]% of SPEED as SPECIAL to all enemies in the path with [50,LK]% chance to apply FLINCH for 3 seconds.",
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
 		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration.",
 		"ULTRA_THRUSTERS": "Adjacent enemies take [50,100,200,SP] SPECIAL and get BURN for 3 seconds while user quickly moves backward to a safe spot.",

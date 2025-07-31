@@ -1957,7 +1957,7 @@
 		"STORED_POWER": "对目标造成20点SPECIAL。使用者的各项数值（ATK，SPEED，DEF，SPE_DEF，AP）提升幅度越大，造成的伤害越高。",
 		"MIND_BEND": "使目标陷入POSSESSED [2,SP,ND=1]秒。若其处于RUNE_PROTECT或已经陷入POSSESSED，改为造成[100,SP]点SPECIAL。",
 		"CHAIN_CRAZED": "使用者自身陷入POISONNED 3秒，并提升[15,SP]点ATK，[10,SP]点DEF和20点SPEED。",
-		"STEAMROLLER": "一路碾压至最远的目标，对路径上的所有敌方宝可梦造成SPECIAL，数值相当于[50,100,200,SP]%的SPEED，并有[50,LK]%的概率使之陷入FLINCH 3秒。",
+		"STEAMROLLER": "一路碾压至最远的目标，对路径上的所有敌方宝可梦造成SPECIAL，数值相当于[40,80,150,SP]%的SPEED，并有[50,LK]%的概率使之陷入FLINCH 3秒。",
 		"MAGNET_PULL": "吸引一只随机STEEL宝可梦前来战场。在其离开前点击之以将其加入备战区。",
 		"SPIN_OUT": "漂移至我方后排，对目标造成SPECIAL，数值相当于自身[25,50,100,SP]%的SPEED，并使其陷入BLINDED 1秒。使用者失去所有来自加速的SPEED增幅。",
 		"ULTRA_THRUSTERS": "对相邻敌方宝可梦造成[50,100,200,SP]点SPECIAL，并使他们陷入BURN 3秒，同时使用者快速向后移动至安全的位置。",
