@@ -307,24 +307,33 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker &&
         !attacker.items.has(Item.PROTECTIVE_PADS)
       ) {
-        const bounceCrit =
-          crit ||
-          (this.effects.has(EffectEnum.ABILITY_CRIT) &&
-            chance(this.critChance, this))
-        const bounceDamage = Math.round(
-          ([0.5, 1][this.stars - 1] ?? 1) *
-          damage *
-          (1 + this.ap / 100) *
-          (bounceCrit ? this.critPower : 1)
-        )
-        // not handleSpecialDamage to not trigger infinite loop between two magic bounces
-        attacker.handleDamage({
-          damage: bounceDamage,
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: this,
-          shouldTargetGainMana: true
-        })
+        this.commands.push(new DelayedCommand(() => {
+          const bounceCrit =
+            crit ||
+            (this.effects.has(EffectEnum.ABILITY_CRIT) &&
+              chance(this.critChance, this))
+          const bounceDamage = Math.round(
+            ([0.5, 1][this.stars - 1] ?? 1) *
+            damage *
+            (1 + this.ap / 100) *
+            (bounceCrit ? this.critPower : 1)
+          )
+          this.broadcastAbility({
+            skill: attacker.skill,
+            positionX: this.positionX,
+            positionY: this.positionY,
+            targetX: attacker.positionX,
+            targetY: attacker.positionY
+          })
+          // not handleSpecialDamage to not trigger infinite loop between two magic bounces
+          attacker.handleDamage({
+            damage: bounceDamage,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: this,
+            shouldTargetGainMana: true
+          })
+        }, 500))
       }
       return { death: false, takenDamage: 0 }
     } else {

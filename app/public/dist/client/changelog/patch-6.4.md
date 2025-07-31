@@ -58,6 +58,7 @@
 - Nidoran female is now regional, and Nidoran male is the regular one.
 - Patrat line is now Normal/Light additional instead of Wild/Light
 - Fix Shed Tail (Cyclizar): pokemons targeting Cyclizar now target the substitute instead of Cyclizar after its move
+- Magic Bounce now has a 500ms delay before bouncing the ability back to the attacker, and show the visual effect of the ability being bounced back.
 
 # Changes to Synergies
 
