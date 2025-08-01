@@ -674,7 +674,7 @@ export default class BoardManager {
           store.dispatch(refreshShopUI())
           break
 
-        case "positionY":
+        case "positionY": {
           pokemonUI.positionY = value as IPokemon["positionY"]
           pokemonUI.positionX = pokemon.positionX
           coordinates = transformBoardCoordinates(
@@ -683,12 +683,20 @@ export default class BoardManager {
           )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
-          if (this.mode === BoardMode.BATTLE && !isOnBench(pokemonUI)) {
+          const simulation = this.scene?.room?.state.simulations.get(
+            this.player.simulationId
+          )
+          if (
+            this.mode === BoardMode.BATTLE &&
+            !isOnBench(pokemonUI) &&
+            simulation?.started
+          ) {
             pokemonUI.destroy()
             this.pokemons.delete(pokemonUI.id)
           }
           store.dispatch(refreshShopUI())
           break
+        }
 
         case "action":
           this.animationManager.animatePokemon(
