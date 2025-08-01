@@ -284,7 +284,7 @@ export default abstract class PokemonState {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.HEAL,
-            amount: healReceived,
+            amount: Math.round(healReceived),
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
@@ -318,7 +318,7 @@ export default abstract class PokemonState {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.SHIELD,
-            amount: shield,
+            amount: Math.round(shield),
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id

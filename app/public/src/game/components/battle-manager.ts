@@ -1149,20 +1149,16 @@ export default class BattleManager {
     }
   }
 
-  displayHeal(
-    positionX: number,
-    positionY: number,
-    amount: number,
-    type: HealType,
-    index: string,
+  displayHeal({ x, y, amount, type, index, id }: {
+    type: HealType
     id: string
-  ) {
+    x: number
+    y: number
+    index: string
+    amount: number
+  }) {
     if (this.simulation?.id === id) {
-      const coordinates = transformEntityCoordinates(
-        positionX,
-        positionY,
-        this.flip
-      )
+      const coordinates = transformEntityCoordinates(x, y, this.flip)
       const color = type === HealType.HEAL ? "#92cc41" : "#8d8d8d"
       this.displayTween(color, coordinates, index, amount)
     }

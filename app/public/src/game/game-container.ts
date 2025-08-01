@@ -566,14 +566,9 @@ class GameContainer {
     amount: number
   }) {
     if (document.hidden) return // do not display heal when the tab is not focused
-    this.gameScene?.battle?.displayHeal(
-      message.x,
-      message.y,
-      message.amount,
-      message.type,
-      message.index,
-      message.id
-    )
+    if (preference("showDamageNumbers")) {
+      this.gameScene?.battle?.displayHeal(message)
+    }
   }
 
   handleDisplayDamage(message: {
