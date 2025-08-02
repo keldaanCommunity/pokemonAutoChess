@@ -7,7 +7,7 @@ import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"
 import { useAppSelector } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
-import { formatDate } from "../../utils/date"
+import { formatDate, formatDuration } from "../../utils/date"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import "./victory-road.css"
@@ -71,6 +71,21 @@ export function VictoryRoad() {
         const y = 245 + clamp(500 - player.value, 0, 500) * (2400 / 500)
         return { left: `${x}%`, top: `${y}px` }
     }
+
+    // midnight UTC on the first day of each month
+    const now = new Date()
+    const resetDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 0, 0, 0, 0))
+    const [resetCountdown, setResetCountdown] = useState(
+        Math.round((resetDate.getTime() - now.getTime()) / 1000)
+    )
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            const now = new Date()
+            setResetCountdown(Math.round((resetDate.getTime() - now.getTime()) / 1000))
+        }, 1000)
+        return () => clearInterval(timer)
+    }, [resetDate])
 
     return (
         <div
@@ -221,7 +236,7 @@ export function VictoryRoad() {
                             ))}
                         </dl>
                         <p>{t("victory_road.help2")}</p>
-                        <p>{t("victory_road.help3")}</p>
+                        <p style={{ fontStyle: "italic" }}>{t("victory_road.reset_info", { resetCountdown: formatDuration(resetCountdown) })}</p>
                     </div>
                 </div>
             )}

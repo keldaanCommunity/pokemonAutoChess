@@ -3938,7 +3938,7 @@
 		"instructions": "Course vers la ligne d'arrivée de la Route Victoire !",
 		"help1": "Jouer à des Parties Classées vous rapporte des points en fonction de votre rang final.",
 		"help2": "Soyez le premier à atteindre 500 points pour remporter la course et obtenir un titre exclusif !",
-		"help3": "Tous les scores seront réinitialisés à minuit UTC le premier jour de chaque mois.",
+		"reset_info": "Tous les scores seront réinitialisés à minuit UTC le premier jour de chaque mois, c'est à dire dans {{resetCountdown}}. Le classement est actualisé toutes les 10 minutes.",
 		"runners": "Coureurs",
 		"finishers": "Finisseurs"
 	}

@@ -3938,7 +3938,7 @@
 		"instructions": "Race to the finish of Victory Road !",
 		"help1": "Playing Ranked games grants you points based on your final rank.",
 		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !",
-		"help3": "All scores will be reset at midnight UTC on the first day of each month. The event leaderboard is refreshed every 10 minutes.",
+		"reset_info": "All scores will be reset at midnight UTC on the first day of each month, that is in {{resetCountdown}}. The event leaderboard is refreshed every 10 minutes.",
 		"runners": "Runners",
 		"finishers": "Finishers"
 	}
