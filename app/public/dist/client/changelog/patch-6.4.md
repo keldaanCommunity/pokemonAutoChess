@@ -64,7 +64,7 @@
 
 # Changes to Synergies
 
-- Nerf Ghost: dodge chance 20% → 15% ; chance to silence on hit 20% → 15%
+- Nerf Ghost: dodge chance 20% → 15% ; chance to silence on hit 20% → 15% ; Ghost 8 curse duration 7 → 8 seconds
 - When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount. That means one-hit KO abilities and curse status can no longer execute a Fossil Pokémon without procing its shield.
 
 # Changes to Items

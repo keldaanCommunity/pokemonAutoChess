@@ -2155,7 +2155,7 @@
 		"CURSE_OF_VULNERABILITY": "The enemy with the highest DEF + SPE_DEF lose 5 of it and is FLINCH",
 		"CURSE_OF_WEAKNESS": "Also, the enemy with the highest ATK lose 25% of it and is PARALYSIS",
 		"CURSE_OF_TORMENT": "Also, the enemy with the highest AP lose 50% of it and is FATIGUE",
-		"CURSE_OF_FATE": "Also, the STRONGEST enemy is CURSE and will be KO after 7 seconds",
+		"CURSE_OF_FATE": "Also, the STRONGEST enemy is CURSE and will be KO after 8 seconds",
 		"AROMATIC_MIST": "20% additional SPECIAL to attacks and shocks",
 		"FAIRY_WIND": "40% additional SPECIAL to attacks and shocks",
 		"STRANGE_STEAM": "60% additional SPECIAL to attacks and shocks",

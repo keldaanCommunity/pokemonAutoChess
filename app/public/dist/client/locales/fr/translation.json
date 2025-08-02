@@ -2153,7 +2153,7 @@
 		"CURSE_OF_VULNERABILITY": "L'unité adverse avec la DEF + SPE_DEF la plus élévée perd 5 de chaque et subit FLINCH",
 		"CURSE_OF_WEAKNESS": "De plus, l'unité adverse avec l'ATK la plus élevée en perd 25% et subit PARALYSIS",
 		"CURSE_OF_TORMENT": "De plus, l'unité adverse avec la AP la plus élevée en perd 50% et subit FATIGUE",
-		"CURSE_OF_FATE": "De plus, l'unité adverse la STRONGESTe subit CURSE et sera KO au bout de 7 secondes",
+		"CURSE_OF_FATE": "De plus, l'unité adverse la STRONGESTe subit CURSE et sera KO au bout de 8 secondes",
 		"AROMATIC_MIST": "20% de SPECIAL supplémentaires aux attaques et aux chocs",
 		"FAIRY_WIND": "40% de SPECIAL supplémentaires aux attaques et aux chocs",
 		"STRANGE_STEAM": "60% de SPECIAL supplémentaires aux attaques et aux chocs",
