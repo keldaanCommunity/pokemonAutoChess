@@ -13959,7 +13959,7 @@ export class Deerling extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.AROMATHERAPY
+  skill = Ability.HORN_LEECH
 }
 
 export class Sawsbuck extends Pokemon {
@@ -13974,7 +13974,7 @@ export class Sawsbuck extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.AROMATHERAPY
+  skill = Ability.HORN_LEECH
 }
 
 export class Patrat extends Pokemon {

@@ -492,7 +492,8 @@
 		"MAGNET_PULL": "Magnet Pull",
 		"SPIN_OUT": "Spin Out",
 		"ULTRA_THRUSTERS": "Ultra Thrusters",
-		"ELECTRO_BALL": "Electro Ball"
+		"ELECTRO_BALL": "Electro Ball",
+		"HORN_LEECH": "Horn Leech"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1961,7 +1962,8 @@
 		"MAGNET_PULL": "Attracts a random STEEL Pokémon to the battlefield. Click on it to add it to your bench.",
 		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration.",
 		"ULTRA_THRUSTERS": "Adjacent enemies take [50,100,200,SP] SPECIAL and get BURN for 3 seconds while user quickly moves backward to a safe spot.",
-		"ELECTRO_BALL": "Launches an electric ball that bounces between enemies, inflicting [10,20,40,SP] SPECIAL on each. The number and speed of bounces depends on the user's SPEED."
+		"ELECTRO_BALL": "Launches an electric ball that bounces between enemies, inflicting [10,20,40,SP] SPECIAL on each. The number and speed of bounces depends on the user's SPEED.",
+		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

@@ -1295,6 +1295,13 @@ export const AbilitiesAnimations: {
     startCoords: "target",
     endCoords: "caster"
   }),
+  [Ability.HORN_LEECH]: [projectile({
+    ability: Ability.SUCTION_HEAL,
+    tint: 0x80ff90,
+    scale: 3,
+    startCoords: "target",
+    endCoords: "caster"
+  }), onTarget({ ability: "FIGHTING_KNOCKBACK", scale: 2, tint: 0x80ff90 })],
   [Ability.ANCIENT_POWER]: projectile({ duration: 1000 }),
   [Ability.MOON_DREAM]: projectile({
     startPositionOffset: [0, -100],

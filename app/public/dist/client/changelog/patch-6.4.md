@@ -40,6 +40,7 @@
 - Change Mach Punch: damage 60 at all tiers → 25/50/100
 - Change Kubfu: PP 100 → 90
 - New ability for Chinchou line: Electro ball ; PP 90 → 100, Speed 46 → 43
+- New ability for Deerling line: Horn Leech
 - Nerf Hitmonlee: Attack 33 → 28
 - Nerf Ghastly line: PP 80 → 90
 - Nerf Volcanion: PP 90 → 100

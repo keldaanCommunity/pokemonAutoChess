@@ -11787,6 +11787,26 @@ export class HornAttackStrategy extends AbilityStrategy {
   }
 }
 
+export class HornLeechStrategy extends AbilityStrategy {
+  process(
+     pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = 2 * pokemon.atk
+    const { takenDamage } = target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    // heal for 50% of the damage dealt
+    const heal = Math.round(takenDamage * 0.5)
+    const overheal = min(0)(heal - (pokemon.hp - pokemon.life))
+    pokemon.handleHeal(heal, pokemon, 1, crit)
+    if(overheal > 0) {
+      pokemon.addShield(Math.round(overheal * 0.5), pokemon, 0, crit)
+    }
+  }
+}
+
 export class MudShotStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13433,5 +13453,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
   [Ability.SPIN_OUT]: new SpinOutStrategy(),
   [Ability.ULTRA_THRUSTERS]: new UltraThrustersStrategy(),
-  [Ability.ELECTRO_BALL]: new ElectroBallStrategy()
+  [Ability.ELECTRO_BALL]: new ElectroBallStrategy(),
+  [Ability.HORN_LEECH]: new HornLeechStrategy()
 }
