@@ -44,7 +44,7 @@
 - Nerf Ghastly line: PP 80 → 90
 - Nerf Volcanion: PP 90 → 100
 - Applin line is now Dragon/Gourmet/Grass instead of Dragon/Grass/Gourmet
-- Change Dipplin: PP 60 → 80 ; Syrup Bomb speed debuff now scales with AP
+- Syrup Bomb (Dipplin) speed debuff now scales with AP
 - Buff Chimecho line: PP 80 → 70
 - Buff Scream Tail: PP 90 → 80
 - Buff Indeedee: Female HP 170 → 190, Def 3 → 4 ; Male HP 140 → 160
@@ -59,6 +59,7 @@
 - Patrat line is now Normal/Light additional instead of Wild/Light
 - Fix Shed Tail (Cyclizar): pokemons targeting Cyclizar now target the substitute instead of Cyclizar after its move
 - Magic Bounce now has a 500ms delay before bouncing the ability back to the attacker, and show the visual effect of the ability being bounced back.
+- Buff Cottonee defense 3 → 4 ; Whimsicott defense 7 → 9 HP 120 → 130
 
 # Changes to Synergies
 
