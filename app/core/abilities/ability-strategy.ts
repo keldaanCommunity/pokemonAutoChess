@@ -1,6 +1,3 @@
-import { IPokemonEntity, Transfer } from "../../types"
-import { Ability } from "../../types/enum/Ability"
-import { Orientation } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { min } from "../../utils/number"
 import { values } from "../../utils/schemas"

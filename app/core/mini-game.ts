@@ -733,6 +733,9 @@ export class MiniGame {
             giveRandomEgg(player, false)
           } else if (item.name === Item.TREASURE_BOX) {
             player.items.push(...pickNRandomIn(ItemComponents, 2))
+          } else if (item.name === Item.GIMMIGHOUL_COIN) {
+            player.items.push(item.name)
+            player.addMoney(3, true, null)
           } else {
             player.items.push(item.name)
           }
