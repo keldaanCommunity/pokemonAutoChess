@@ -35,7 +35,6 @@ export const TownEncountersByStage: {
     [Pkm.MEOWTH]: 1 / 10,
     [Pkm.CHANSEY]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.KECLEON]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.CELEBI]: 1 / 40
