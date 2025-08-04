@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import Board from "../../core/board"
+import type { Board } from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
@@ -255,7 +255,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
-      this.triggerCurse(6500) //Intentionally a bit less than 7 seconds to account for status update delay
+      this.triggerCurse(8000, pokemon)
     }
   }
 
@@ -911,12 +911,13 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerCurse(timer: number) {
+  triggerCurse(timer: number, pokemon: PokemonEntity) {
     if (!this.runeProtect) {
       if (this.curse) {
         this.curseCooldown = 0 // apply curse immediately if already cursed
       } else {
         this.curse = true
+        timer = this.applyAquaticReduction(timer, pokemon, true) // increase instead of decrease
         this.curseCooldown = timer
       }
     }
@@ -1088,13 +1089,16 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  private applyAquaticReduction(duration: number, pkm: IPokemonEntity): number {
+  private applyAquaticReduction(duration: number, pkm: IPokemonEntity, increaseInstead = false): number {
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(duration * 0.7)
+      duration = Math.round(duration * (increaseInstead ? 1.3 : 0.7))
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * 0.4)
-    } else if (pkm.effects.has(EffectEnum.WATER_VEIL) || pkm.effects.has(EffectEnum.SURGE_SURFER)) {
-      duration = Math.round(duration * 0.1)
+      duration = Math.round(duration * (increaseInstead ? 1.6 : 0.4))
+    } else if (
+      pkm.effects.has(EffectEnum.WATER_VEIL) ||
+      pkm.effects.has(EffectEnum.SURGE_SURFER)
+    ) {
+      duration = Math.round(duration * (increaseInstead ? 1.9 : 0.1))
     }
     return duration
   }

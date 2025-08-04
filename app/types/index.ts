@@ -1,6 +1,7 @@
 import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
-import Board from "../core/board"
+import type { Board } from "../core/board"
 import Dps from "../core/dps"
+import { Effect as EffectClass } from "../core/effects/effect"
 import { EvolutionRule } from "../core/evolution-rules"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
@@ -16,6 +17,7 @@ import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
 import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
+import { AttackSprite } from "./Animation"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
 import { BoardEffect, EffectEnum } from "./enum/Effect"
@@ -34,7 +36,6 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
-import { Effect as EffectClass } from "../core/effects/effect"
 
 export * from "./enum/Emotion"
 
@@ -140,87 +141,6 @@ export enum Transfer {
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
   HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
   RECONNECT_PROMPT = "RECONNECT_PROMPT"
-}
-
-export enum AttackSprite {
-  BUG_MELEE = "BUG/melee",
-  BUG_RANGE = "BUG/range",
-  DARK_MELEE = "DARK/melee",
-  DARK_RANGE = "DARK/range",
-  DRAGON_MELEE = "DRAGON/melee",
-  DRAGON_RANGE = "DRAGON/range",
-  DRAGON_GREEN_RANGE = "DRAGON_GREEN/range",
-  ELECTRIC_MELEE = "ELECTRIC/melee",
-  ELECTRIC_RANGE = "ELECTRIC/range",
-  FAIRY_MELEE = "FAIRY/melee",
-  FAIRY_RANGE = "FAIRY/range",
-  FIGHTING_MELEE = "FIGHTING/melee",
-  FIGHTING_RANGE = "FIGHTING/range",
-  FIRE_MELEE = "FIRE/melee",
-  FIRE_RANGE = "FIRE/range",
-  FLYING_MELEE = "FLYING/melee",
-  FLYING_RANGE = "FLYING/range",
-  GHOST_MELEE = "GHOST/melee",
-  GHOST_RANGE = "GHOST/range",
-  GRASS_MELEE = "GRASS/melee",
-  GRASS_RANGE = "GRASS/range",
-  GROUND_MELEE = "GROUND/melee",
-  ICE_MELEE = "ICE/melee",
-  ICE_RANGE = "ICE/range",
-  NORMAL_MELEE = "NORMAL/melee",
-  POISON_MELEE = "POISON/melee",
-  POISON_RANGE = "POISON/range",
-  PSYCHIC_MELEE = "PSYCHIC/melee",
-  PSYCHIC_RANGE = "PSYCHIC/range",
-  WATER_MELEE = "WATER/melee",
-  WATER_RANGE = "WATER/range",
-  ROCK_MELEE = "ROCK/melee",
-  ROCK_RANGE = "ROCK/range",
-  SOUND_RANGE = "SOUND/range",
-  STEEL_MELEE = "STEEL/melee",
-  STEEL_RANGE = "STEEL/range",
-  WILD_MELEE = "WILD/melee"
-}
-
-export const AttackSpriteScale: { [sprite in AttackSprite]: [number, number] } =
-{
-  "BUG/melee": [1.5, 1.5],
-  "BUG/range": [2, 2],
-  "DARK/melee": [1.5, 1.5],
-  "DARK/range": [1.5, 1.5],
-  "DRAGON/melee": [2, 2],
-  "DRAGON/range": [2, 2],
-  "DRAGON_GREEN/range": [2, 2],
-  "ELECTRIC/melee": [1.5, 1.5],
-  "ELECTRIC/range": [2, 2],
-  "FAIRY/melee": [2, 2],
-  "FAIRY/range": [2, 2],
-  "FIGHTING/melee": [2, 2],
-  "FIGHTING/range": [2, 2],
-  "FIRE/melee": [1.5, 1.5],
-  "FIRE/range": [2, 2],
-  "FLYING/melee": [1, 1],
-  "FLYING/range": [1.5, 1.5],
-  "GHOST/melee": [1, 1],
-  "GHOST/range": [2, 2],
-  "GRASS/melee": [1, 1],
-  "GRASS/range": [3, 3],
-  "GROUND/melee": [1, 1],
-  "ICE/melee": [2, 2],
-  "ICE/range": [2, 2],
-  "NORMAL/melee": [1.5, 1.5],
-  "POISON/melee": [2, 2],
-  "POISON/range": [1, 1],
-  "PSYCHIC/melee": [1.5, 1.5],
-  "PSYCHIC/range": [2, 2],
-  "ROCK/melee": [1.5, 1.5],
-  "ROCK/range": [2, 2],
-  "STEEL/melee": [1.5, 1.5],
-  "STEEL/range": [2, 2],
-  "SOUND/range": [2, 2],
-  "WATER/melee": [2, 2],
-  "WATER/range": [3, 3],
-  "WILD/melee": [2, 2]
 }
 
 export enum ReadWriteMode {
@@ -405,7 +325,6 @@ export interface IPokemon {
   evolutionRule: EvolutionRule
   positionX: number
   positionY: number
-  attackSprite: AttackSprite
   speed: number
   def: number
   speDef: number
@@ -491,6 +410,7 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   get player(): IPlayer | undefined
+  broadcastAbility(options: any): void
   applyStat(stat: Stat, value: number): void
   addAbilityPower(
     value: number,
@@ -616,7 +536,6 @@ export interface IPokemonEntity {
   targetX: number
   targetY: number
   targetEntityId: string
-  attackSprite: AttackSprite
   rarity: Rarity
   name: Pkm
   effects: SetSchema<EffectEnum>
@@ -801,7 +720,10 @@ export enum Title {
   PICNICKER = "PICNICKER",
   STARGAZER = "STARGAZER",
   BLOODY = "BLOODY",
-  ETERNAL = "ETERNAL"
+  ETERNAL = "ETERNAL",
+  RUNNER = "RUNNER",
+  FINISHER = "FINISHER",
+  VICTORIOUS = "VICTORIOUS"
 }
 
 export interface IBoardEvent {
@@ -819,3 +741,5 @@ export interface IAttackEvent {
   travelTime: number
   delay: number
 }
+
+export { AttackSprite }

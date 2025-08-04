@@ -2,7 +2,7 @@ import { logger } from "colyseus"
 import { mongo } from "mongoose"
 import { nanoid } from "nanoid"
 import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
-import { IUserMetadata } from "../models/mongo-models/user-metadata"
+import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { discordService } from "./discord"
 
 export type IBotListItem = Omit<IBot, "steps">
@@ -14,17 +14,23 @@ export async function fetchBotsList(
   const maxPages = 20 // Fail-safe: prevent infinite loops (max 2000 bots)
   const allBots: IBotListItem[] = []
 
-  const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
   let page = 0
   let hasMoreData = true
 
   while (hasMoreData && page < maxPages) {
     try {
+      // Build the query filter - apply approved filter at database level, not after
+      const queryFilter: any = {}
+      if (approved !== undefined) {
+        queryFilter.approved = approved
+      }
+
       const botsData = await BotV2.find(
-        {},
+        queryFilter, // Apply filter in the database query
         { steps: 0 }, // Exclude the 'steps' field
-        { sort: { elo: -1 }, limit: pageSize, skip: page * pageSize }
+        { sort: { elo: -1, id: 1 }, limit: pageSize, skip: page * pageSize } // Add secondary sort by id for stable pagination
       )
 
       if (!botsData || botsData.length === 0) {
@@ -32,17 +38,14 @@ export async function fetchBotsList(
         break
       }
 
-      // Process and filter bots immediately, then add to result array
-      const processedBots = botsData
-        .filter((bot) => approved === undefined || bot.approved === approved)
-        .map((bot) => ({
-          name: bot.name,
-          avatar: bot.avatar,
-          id: bot.id,
-          approved: bot.approved,
-          author: bot.author,
-          elo: bot.elo
-        }))
+      const processedBots = botsData.map((bot) => ({
+        name: bot.name,
+        avatar: bot.avatar,
+        id: bot.id,
+        approved: bot.approved,
+        author: bot.author,
+        elo: bot.elo
+      }))
 
       // Use push.apply to add elements without creating intermediate arrays
       allBots.push(...processedBots)
@@ -107,7 +110,7 @@ export async function addBotToDatabase(bot: {
 
 export async function deleteBotFromDatabase(
   botId: string,
-  user: IUserMetadata
+  user: IUserMetadataMongo
 ): Promise<mongo.DeleteResult> {
   const resultDelete = await BotV2.deleteOne({ id: botId })
   if (resultDelete.deletedCount > 0) {
@@ -122,7 +125,7 @@ export async function deleteBotFromDatabase(
 export async function approveBot(
   botId: string,
   approved: boolean,
-  user: IUserMetadata
+  user: IUserMetadataMongo
 ): Promise<mongo.UpdateResult> {
   logger.debug(
     `${user.displayName} is ${approved ? "approving" : "disapproving"} bot ${botId}`

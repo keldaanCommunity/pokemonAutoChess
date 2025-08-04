@@ -7,6 +7,7 @@ export const TownEncounters = {
   [Pkm.XATU]: Pkm.XATU,
   [Pkm.KANGASKHAN]: Pkm.KANGASKHAN,
   [Pkm.DUSKULL]: Pkm.DUSKULL,
+  [Pkm.MEOWTH]: Pkm.MEOWTH,
   [Pkm.MAROWAK]: Pkm.MAROWAK,
   [Pkm.WOBBUFFET]: Pkm.WOBBUFFET,
   [Pkm.SPINDA]: Pkm.SPINDA,
@@ -31,15 +32,16 @@ export const TownEncountersByStage: {
   [stageLevel: number]: { [encounter in TownEncounter]?: number }
 } = {
   4: {
+    [Pkm.MEOWTH]: 1 / 20,
+    [Pkm.DUSKULL]: 1 / 20,
     [Pkm.CHANSEY]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.KECLEON]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
-    [Pkm.CELEBI]: 1 / 40
+    [Pkm.SPINDA]: 1 / 20,
+    [Pkm.CELEBI]: 1 / 40,
   },
-  12: {
-    [Pkm.DUSKULL]: 1 / 20,
+  12: {    
     [Pkm.KANGASKHAN]: 1 / 20,
     [Pkm.WOBBUFFET]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,

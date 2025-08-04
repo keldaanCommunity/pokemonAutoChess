@@ -23,9 +23,10 @@ import { Item, ItemRecipe } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
+import { clamp } from "../../../../utils/number"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
-import { SOUNDS, playMusic, playSound } from "../../pages/utils/audio"
+import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
 import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import AnimationManager from "../animation-manager"
@@ -40,7 +41,6 @@ import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
-import { clamp } from "../../../../utils/number"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -589,7 +589,7 @@ export default class GameScene extends Scene {
           }
           // Item -> POKEMON(board zone) = EQUIP
           else if (
-            dropZone.name == "board-zone" &&
+            dropZone.name === "board-zone" &&
             !(
               this.room?.state.phase == GamePhaseState.FIGHT &&
               dropZone.getData("y") != 0
@@ -634,7 +634,7 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           dropZone instanceof ItemContainer
         ) {
-          // find the resulting item
+          // item dragged above another item: find the resulting item
           for (const [key, value] of Object.entries(ItemRecipe)) {
             if (
               (value[0] == gameObject.name && value[1] == dropZone.name) ||
@@ -651,13 +651,26 @@ export default class GameScene extends Scene {
           dropZone.name === "board-zone" &&
           gameObject instanceof PokemonSprite
         ) {
+          // pokemon dragged above board zone: highlight the cell
           dropZone.getData("sprite")?.setFrame(1)
+        }
+
+        if (gameObject instanceof ItemContainer && dropZone.name === "board-zone" && !(
+          this.room?.state.phase == GamePhaseState.FIGHT &&
+          dropZone.getData("y") != 0
+        ) && this.board?.pokemons) {
+          const pokemonOnCell = [...this.board.pokemons.values()].find(p => p.positionX === dropZone.getData("x") && p.positionY === dropZone.getData("y"))
+          if (pokemonOnCell) {
+            // item dragged over a pokemon, highlight the pokemon
+            this.setHovered(pokemonOnCell)
+          }
         }
 
         if (
           dropZone.name === "sell-zone" &&
           gameObject instanceof PokemonSprite
         ) {
+          // pokemon dragged above sell zone: highlight the sell zone
           this.sellZone?.onDragEnter()
         }
       },
@@ -686,6 +699,15 @@ export default class GameScene extends Scene {
           gameObject instanceof PokemonSprite
         ) {
           this.sellZone?.onDragLeave()
+        }
+
+        if (dropZone.name === "board-zone" &&
+          gameObject instanceof ItemContainer &&
+          this.board?.pokemons) {
+          const pokemonOnCell = [...this.board.pokemons.values()].find(p => p.positionX === dropZone.getData("x") && p.positionY === dropZone.getData("y"))
+          if (pokemonOnCell) {
+            this.clearHovered(pokemonOnCell)
+          }
         }
       },
       this
@@ -752,8 +774,8 @@ export default class GameScene extends Scene {
     })
   }
 
-  shakeCamera(intensity: number, duration: number) {
+  shakeCamera(options?: { intensity?: number; duration?: number }) {
     if (preference("disableCameraShake")) return
-    this.cameras.main.shake(duration, intensity)
+    this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
   }
 }

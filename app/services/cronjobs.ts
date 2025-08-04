@@ -11,6 +11,7 @@ import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
   CRON_HISTORY_CLEANUP_DELAY,
+  ELO_DECAY_LOST_PER_DAY,
   EloRank,
   EloRankThreshold
 } from "../types/Config"
@@ -43,6 +44,12 @@ export function initCronJobs() {
     cronTime: "45 8 * * *", // every day at 8:45am
     timeZone: "Europe/Paris",
     onTick: () => titleStats(),
+    start: true
+  })
+  CronJob.from({
+    cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
+    timeZone: "UTC",
+    onTick: () => resetEventScores(),
     start: true
   })
 }
@@ -107,9 +114,8 @@ async function eloDecay() {
       const stats = await DetailledStatistic.find(
         {
           playerId: u.uid,
-          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] &&
-            Date.now() > new Date("2025-05-05").getTime()
-            ? { gameMode: GameMode.RANKED } // TEMP: activate ranked mode decay after 15 days to let time to collect the new game mode info. Can be safely removed after that date
+          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] 
+            ? { gameMode: GameMode.RANKED }
             : {})
         },
         ["time"],
@@ -123,7 +129,7 @@ async function eloDecay() {
         stats.length < 3 || Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
 
       if (shouldDecay) {
-        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(u.elo - 10)
+        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(u.elo - ELO_DECAY_LOST_PER_DAY)
         logger.info(
           `User ${u.displayName} (${u.elo}) will decay to ${eloAfterDecay}`
         )
@@ -160,4 +166,32 @@ async function deleteOldHistory() {
     startTime: { $lt: Date.now() - CRON_HISTORY_CLEANUP_DELAY }
   })
   logger.info(`${historyResults.deletedCount} game histories deleted`)
+}
+
+async function resetEventScores() {
+  try {
+    logger.info("[CRON] Starting event scores reset...")
+
+    // Reset event-related fields for all users in a single operation
+    const result = await UserMetadata.updateMany(
+      {
+        $or: [
+          { eventPoints: { $gt: 0 } },
+          { maxEventPoints: { $gt: 0 } },
+          { eventFinishTime: { $ne: null } }
+        ]
+      },
+      {
+        $set: {
+          eventPoints: 0,
+          maxEventPoints: 0,
+          eventFinishTime: null
+        }
+      }
+    )
+
+    logger.info(`Event reset completed! Reset event data for ${result.modifiedCount} users`)
+  } catch (e) {
+    logger.error("Error during event reset scores:", e)
+  }
 }

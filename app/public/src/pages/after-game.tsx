@@ -1,9 +1,10 @@
-import { Client, Room } from "colyseus.js"
-import firebase from "firebase/compat/app"
+import { Client, getStateCallbacks, Room } from "colyseus.js"
 import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import AfterGameState from "../../../rooms/states/after-game-state"
+import { CloseCodes } from "../../../types/enum/CloseCodes"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { authenticateUser } from "../network"
 import { preference } from "../preferences"
 import {
   addPlayer,
@@ -12,11 +13,10 @@ import {
   setElligibilityToXP,
   setGameMode
 } from "../stores/AfterGameStore"
-import { joinAfter, logIn } from "../stores/NetworkStore"
+import { joinAfter } from "../stores/NetworkStore"
 import AfterMenu from "./component/after/after-menu"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
@@ -32,12 +32,8 @@ export default function AfterGame() {
   useEffect(() => {
     const reconnect = async () => {
       initialized.current = true
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          dispatch(logIn(user))
+      authenticateUser()
+        .then(async () => {
           try {
             const cachedReconnectionToken = localStore.get(
               LocalStoreKeys.RECONNECTION_AFTER_GAME
@@ -67,10 +63,12 @@ export default function AfterGame() {
               }
             }, 1000)
           }
-        } else {
-          setToAuth(true)
-        }
-      })
+        })
+        .catch((err) => {
+          if (err === CloseCodes.USER_NOT_AUTHENTICATED) {
+            setToAuth(true)
+          }
+        })
     }
 
     const initialize = async (room: Room<AfterGameState>) => {
@@ -80,8 +78,9 @@ export default function AfterGame() {
         { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
         30
       )
-
-      room.state.players.onAdd((player) => {
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
+      $state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
           playSound(
@@ -90,13 +89,13 @@ export default function AfterGame() {
           )
         }
       })
-      room.state.listen("elligibleToELO", (value, previousValue) => {
+      $state.listen("elligibleToELO", (value, previousValue) => {
         dispatch(setElligibilityToELO(value))
       })
-      room.state.listen("elligibleToXP", (value, previousValue) => {
+      $state.listen("elligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
       })
-      room.state.listen("gameMode", (value, previousValue) => {
+      $state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
       })
     }

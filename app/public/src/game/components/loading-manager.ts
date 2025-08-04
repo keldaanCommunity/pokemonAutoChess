@@ -2,19 +2,19 @@ import { t } from "i18next"
 import { GameObjects } from "phaser"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 import pkg from "../../../../../package.json"
+import type Player from "../../../../models/colyseus-models/player"
+import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import {
   DungeonDetails,
   DungeonMusic,
   DungeonPMDO
 } from "../../../../types/enum/Dungeon"
+import { getPortraitSrc } from "../../../../utils/avatar"
 import { values } from "../../../../utils/schemas"
 import indexList from "../../../src/assets/pokemons/indexList.json"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
-import { getPortraitSrc } from "../../../../utils/avatar"
 import GameScene from "../scenes/game-scene"
-import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
-import type Player from "../../../../models/colyseus-models/player"
 
 export default class LoadingManager {
   scene: Phaser.Scene

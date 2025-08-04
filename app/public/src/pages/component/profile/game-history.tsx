@@ -74,12 +74,12 @@ export default function GameHistory(props: { uid: string, onUpdate?: (history: I
           gameHistory.map((r) => (
             <div key={r.time} className="my-box game-history">
               <span className="top">
-                {r.gameMode === GameMode.QUICKPLAY && (
+                {r.gameMode === GameMode.CLASSIC && (
                   <img
-                    alt={t("quick_play")}
-                    title={t("quick_play")}
-                    className="quickplay gamemode icon"
-                    src="/assets/ui/quickplay.png"
+                    alt={t("classic")}
+                    title={t("classic")}
+                    className="classic gamemode icon"
+                    src="/assets/ui/classic.png"
                   />
                 )}
                 {r.gameMode === GameMode.RANKED && (

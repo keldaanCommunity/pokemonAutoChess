@@ -5,7 +5,7 @@ import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
-import { MiniGame } from "../core/matter/mini-game"
+import { MiniGame } from "../core/mini-game"
 import {
   clearPendingGame,
   clearPendingGamesOnRoomDispose,
@@ -19,9 +19,7 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import History from "../models/mongo-models/history"
-import UserMetadata, {
-  IPokemonCollectionItem
-} from "../models/mongo-models/user-metadata"
+import UserMetadata from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
   getPokemonData,
@@ -29,8 +27,8 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1 } from "../models/shop"
+import { fetchEventLeaderboard } from "../services/leaderboard"
 import {
-  Emotion,
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
@@ -48,8 +46,10 @@ import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
   EloRank,
+  EventPointsPerRank,
   ExpPlace,
   LegendaryPool,
+  MAX_EVENT_POINTS,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PortalCarouselStages,
@@ -68,7 +68,8 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { Wanderer, WandererBehavior } from "../types/enum/Wanderer"
+import { Wanderer } from "../types/enum/Wanderer"
+import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -77,6 +78,7 @@ import {
 } from "../utils/board"
 import { isValidDate } from "../utils/date"
 import { logger } from "../utils/logger"
+import { clamp } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
@@ -148,16 +150,14 @@ export default class GameRoom extends Room<GameState> {
       bracketId: options.bracketId
     })
     // logger.debug(options);
-    this.setState(
-      new GameState(
-        options.preparationId,
-        options.name,
-        options.noElo,
-        options.gameMode,
-        options.minRank,
-        options.maxRank,
-        options.specialGameRule
-      )
+    this.state = new GameState(
+      options.preparationId,
+      options.name,
+      options.noElo,
+      options.gameMode,
+      options.minRank,
+      options.maxRank,
+      options.specialGameRule
     )
     this.miniGame.create(
       this.state.avatars,
@@ -204,7 +204,7 @@ export default class GameRoom extends Room<GameState> {
             user.avatar,
             true,
             this.state.players.size + 1,
-            new Map<string, IPokemonCollectionItem>(),
+            new Map<string, IPokemonCollectionItemMongo>(),
             "",
             Role.BOT,
             this.state
@@ -457,19 +457,22 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.WANDERER_CAUGHT, async (client, msg: { id: string }) => {
-      if (client.auth) {
-        try {
-          this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
-            client,
-            playerId: client.auth.uid,
-            id: msg.id
-          })
-        } catch (e) {
-          logger.error("catch wandering error", e)
+    this.onMessage(
+      Transfer.WANDERER_CAUGHT,
+      async (client, msg: { id: string }) => {
+        if (client.auth) {
+          try {
+            this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+              client,
+              playerId: client.auth.uid,
+              id: msg.id
+            })
+          } catch (e) {
+            logger.error("catch wandering error", e)
+          }
         }
       }
-    })
+    )
 
     this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
@@ -556,7 +559,6 @@ export default class GameRoom extends Room<GameState> {
     if (userProfile?.banned) {
       throw "Account banned"
     }
-    client.send(Transfer.USER_PROFILE, userProfile)
     this.dispatcher.dispatch(new OnJoinCommand(), { client })
     const pendingGame = await getPendingGame(this.presence, client.auth.uid)
     if (pendingGame?.gameId === this.roomId) {
@@ -579,9 +581,8 @@ export default class GameRoom extends Room<GameState> {
       // allow disconnected client to reconnect into this room until 5 minutes
       setPendingGame(this.presence, client.auth.uid, this.roomId)
       await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+      // if the user reconnects, we clear the pending game and recall the OnJoinCommand
       clearPendingGame(this.presence, client.auth.uid)
-      const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
-      client.send(Transfer.USER_PROFILE, userProfile) // send profile info again after a /game page refresh
       this.dispatcher.dispatch(new OnJoinCommand(), { client })
     } catch (e) {
       if (client && client.auth && client.auth.displayName) {
@@ -787,6 +788,8 @@ export default class GameRoom extends Room<GameState> {
         usr.exp = !isNaN(usr.exp) ? usr.exp : 0
       }
 
+      usr.games += 1
+
       if (rank === 1) {
         usr.wins += 1
         if (this.state.gameMode === GameMode.RANKED) {
@@ -828,7 +831,7 @@ export default class GameRoom extends Room<GameState> {
       }
 
       if (usr.elo != null && elligibleToELO) {
-        const elo = computeElo(
+        let elo = computeElo(
           this.transformToSimplePlayer(player),
           rank,
           usr.elo,
@@ -836,18 +839,24 @@ export default class GameRoom extends Room<GameState> {
           this.state.gameMode,
           false
         )
-        if (elo) {
-          if (elo >= 1100) {
-            player.titles.add(Title.GYM_TRAINER)
-          }
-          if (elo >= 1200) {
-            player.titles.add(Title.GYM_CHALLENGER)
-          }
-          if (elo >= 1400) {
-            player.titles.add(Title.GYM_LEADER)
-          }
-          usr.elo = elo
+
+        if (!elo || isNaN(elo)) {
+          logger.error(
+            `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
+          )
+          elo = usr.elo
         }
+        if (elo >= 1100) {
+          player.titles.add(Title.GYM_TRAINER)
+        }
+        if (elo >= 1200) {
+          player.titles.add(Title.GYM_CHALLENGER)
+        }
+        if (elo >= 1400) {
+          player.titles.add(Title.GYM_LEADER)
+        }
+        usr.elo = elo
+        usr.maxElo = Math.max(usr.maxElo, elo)
 
         const dbrecord = this.transformToSimplePlayer(player)
         const synergiesMap = new Map<Synergy, number>()
@@ -866,6 +875,41 @@ export default class GameRoom extends Room<GameState> {
           synergies: synergiesMap,
           gameMode: this.state.gameMode
         })
+
+        if (usr.eventFinishTime == null) {
+          const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = clamp(
+            usr.eventPoints + eventPointsGained,
+            0,
+            MAX_EVENT_POINTS
+          )
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
+            usr.eventFinishTime = new Date()
+
+            const finisher = await UserMetadata.findOne({
+              eventFinishTime: { $ne: null }
+            })
+            if (!finisher) {
+              player.titles.add(Title.VICTORIOUS)
+              this.presence.publish(
+                "announcement",
+                `${player.name} won the Victory Road race !`
+              )
+            } else {
+              this.presence.publish(
+                "announcement",
+                `${player.name} finished the Victory Road !`
+              )
+            }
+            player.titles.add(Title.FINISHER)
+            fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
+          }
+
+          if (usr.maxEventPoints >= 100) {
+            player.titles.add(Title.RUNNER)
+          }
+        }
       }
 
       if (player.life >= 100 && rank === 1) {
@@ -889,11 +933,10 @@ export default class GameRoom extends Room<GameState> {
           pokemonCollectionItem.played = pokemonCollectionItem.played + 1
           usr.markModified(`pokemonCollection.${index}.played`)
         } else {
-          const newConfig: IPokemonCollectionItem = {
+          const newConfig: IPokemonCollectionItemMongo = {
             dust: 0,
             id: index,
-            emotions: [],
-            shinyEmotions: [],
+            unlocked: Buffer.alloc(5, 0),
             selectedEmotion: null,
             selectedShiny: false,
             played: 1
@@ -982,6 +1025,7 @@ export default class GameRoom extends Room<GameState> {
       pokemon.positionY = 0
       if (anim === "fishing") {
         pokemon.action = PokemonActionState.FISH
+        console.log(`Spawning ${pokemon.name} on bench with fishing animation`)
       }
 
       player.board.set(pokemon.id, pokemon)

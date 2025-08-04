@@ -16,12 +16,16 @@ export function formatDate(
   }
 }
 
-export function formatTimeout(s: number) {
-  const h = Math.floor(s / 3600)
-  s -= h * 3600
-  const m = Math.floor(s / 60)
-  s -= m * 60
-  return `${h > 0 ? h + "h" : ""}${("00" + m).slice(-2)}:${("00" + s).slice(
-    -2
-  )}`
+export function formatDuration(seconds: number) {
+
+  const days = Math.floor(seconds / 86400)
+  seconds -= days * 86400
+  const hours = Math.floor(seconds / 3600)
+  seconds -= hours * 3600
+  const minutes = Math.floor(seconds / 60)
+  seconds -= minutes * 60
+  if (Intl && Intl.DurationFormat) {
+    return new Intl.DurationFormat(i18n.language, { style: "long" }).format({ days, hours, minutes, seconds });
+  }
+  return `${days > 0 ? days + " days" : ""}${hours > 0 ? hours + " hours" : ""}${minutes > 0 ? minutes + " min" : ""}${seconds > 0 ? seconds + " s" : ""}`.trim()
 }

@@ -2,7 +2,6 @@ import Player from "../models/colyseus-models/player"
 import { SynergyEffects } from "../models/effects"
 import { IPokemonEntity, Transfer } from "../types"
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
-import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
@@ -13,7 +12,6 @@ import {
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
@@ -21,8 +19,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
-import { broadcastAbility } from "./abilities/abilities"
-import Board, { Cell } from "./board"
+import type { Board, Cell } from "./board"
 import { PeriodicEffect } from "./effects/effect"
 import { PokemonEntity } from "./pokemon-entity"
 
@@ -84,6 +81,7 @@ export default abstract class PokemonState {
       }
 
       let isAttackSuccessful = true
+      let hasAttackKilled = false
       let dodgeChance = target.dodge
       if (pokemon.status.blinded) {
         dodgeChance += 0.5
@@ -143,7 +141,7 @@ export default abstract class PokemonState {
         trueDamage = Math.ceil(damage * trueDamagePart)
         damage = min(0)(damage * (1 - trueDamagePart))
 
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: trueDamage,
           board,
           attackType: AttackType.TRUE,
@@ -151,6 +149,7 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+        if (death) hasAttackKilled = true
       }
 
       if (attackType === AttackType.SPECIAL) {
@@ -165,7 +164,7 @@ export default abstract class PokemonState {
 
       if (physicalDamage > 0) {
         // Apply attack physical damage
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: physicalDamage,
           board,
           attackType: AttackType.PHYSICAL,
@@ -173,11 +172,12 @@ export default abstract class PokemonState {
           shouldTargetGainMana: true
         })
         totalTakenDamage += takenDamage
+        if (death) hasAttackKilled = true
       }
 
       if (specialDamage > 0) {
         // Apply special damage
-        const { takenDamage } = target.handleDamage({
+        const { takenDamage, death } = target.handleDamage({
           damage: specialDamage,
           board,
           attackType: AttackType.SPECIAL,
@@ -198,6 +198,8 @@ export default abstract class PokemonState {
             shouldTargetGainMana: true
           })
         }
+
+        if (death) hasAttackKilled = true
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -208,7 +210,8 @@ export default abstract class PokemonState {
         specialDamage,
         trueDamage,
         totalDamage,
-        isTripleAttack
+        isTripleAttack,
+        hasAttackKilled
       })
       if (isAttackSuccessful) {
         pokemon.onHit({
@@ -229,7 +232,7 @@ export default abstract class PokemonState {
     caster: PokemonEntity,
     apBoost: number,
     crit: boolean
-  ): void {
+  ): { healReceived: number, overheal: number } {
     if (pokemon.status.wound) {
       if (
         pokemon.simulation.weather === Weather.BLOODMOON &&
@@ -246,7 +249,7 @@ export default abstract class PokemonState {
           )
         }
       }
-      return
+      return { healReceived: 0, overheal: 0 }
     }
     if (
       pokemon.life > 0 &&
@@ -270,24 +273,29 @@ export default abstract class PokemonState {
       }
 
       heal = Math.round(heal)
-      const healTaken = Math.min(pokemon.hp - pokemon.life, heal)
+      const healReceived = Math.min(pokemon.hp - pokemon.life, heal)
 
       pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
 
-      if (caster && healTaken > 0) {
+      const overheal = min(0)(pokemon.life + heal - pokemon.hp)
+
+      if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.HEAL,
-            amount: healTaken,
+            amount: Math.round(healReceived),
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
           })
         }
-        caster.healDone += healTaken
+        caster.healDone += healReceived
       }
+
+      return { healReceived, overheal }
     }
+    return { healReceived: 0, overheal: 0 }
   }
 
   addShield(
@@ -310,7 +318,7 @@ export default abstract class PokemonState {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.SHIELD,
-            amount: shield,
+            amount: Math.round(shield),
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
@@ -528,6 +536,7 @@ export default abstract class PokemonState {
         death = false
         takenDamage = 0
         residualDamage = 0
+        pokemon.addPP(50, pokemon, 0, false)
         pokemon.status.triggerProtect(2000)
         pokemon.removeItem(Item.SHINY_CHARM)
       }
@@ -545,17 +554,17 @@ export default abstract class PokemonState {
             : 0.4
         pokemon.addShield(shield, pokemon, 0, false)
 
-        const damageOnShield = max(shield)(residualDamage)
+        //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
+        const damageOnShield = max(0.5 * shield)(residualDamage)
 
         pokemon.shieldDamageTaken += damageOnShield
         takenDamage += damageOnShield
         pokemon.shield -= damageOnShield
-
-        residualDamage = min(0)(residualDamage - shield)
+        residualDamage = 0
 
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
-        pokemon.cooldown = Math.round(500 * (50 / pokemon.speed))
-        broadcastAbility(pokemon, { skill: "FOSSIL_RESURRECT" })
+        pokemon.resetCooldown(500)
+        pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
@@ -570,7 +579,7 @@ export default abstract class PokemonState {
       }
 
       if (takenDamage > 0) {
-        pokemon.onDamageReceived({ attacker, damage: takenDamage, board })
+        pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType })
         if (attacker) {
           attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
           if (pokemon !== attacker) {
@@ -596,7 +605,7 @@ export default abstract class PokemonState {
           pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
             index: attacker.index,
             type: attackType,
-            amount: takenDamage,
+            amount: Math.round(takenDamage),
             x: pokemon.positionX,
             y: pokemon.positionY,
             id: pokemon.simulation.id
@@ -729,12 +738,7 @@ export default abstract class PokemonState {
             : 5
         pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
-        pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-          id: pokemon.simulation.id,
-          skill: "GRASS_HEAL",
-          positionX: pokemon.positionX,
-          positionY: pokemon.positionY
-        })
+        pokemon.broadcastAbility({ skill: "GRASS_HEAL" })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
       }
@@ -832,13 +836,17 @@ export default abstract class PokemonState {
     }
 
     if (pokemon.items.has(Item.GREEN_ORB)) {
-      for (const cell of board.getAdjacentCells(
+      const adjacentCells = board.getAdjacentCells(
         pokemon.positionX,
         pokemon.positionY,
         true
-      )) {
+      )
+      for (const cell of adjacentCells) {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.handleHeal(0.04 * cell.value.hp, pokemon, 0, false)
+          const { overheal } = cell.value.handleHeal(3 + 0.03 * cell.value.hp, pokemon, 0, false)
+          if (overheal > 0) {
+            cell.value.addPP(0.3 * overheal, pokemon, 0, false)
+          }
         }
       }
     }
@@ -859,7 +867,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
-      !pokemon.types.has(Synergy.FLYING)
+      !pokemon.types.has(Synergy.FLYING) &&
+      !pokemon.types.has(Synergy.STEEL)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -905,25 +914,6 @@ export default abstract class PokemonState {
         shouldTargetGainMana: true
       })
       pokemon.status.triggerBurn(1100, pokemon, undefined)
-    }
-
-    if (pokemon.effects.has(EffectEnum.ZEN_MODE)) {
-      const crit =
-        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(15, pokemon, 1, crit)
-      if (pokemon.life >= pokemon.hp) {
-        pokemon.index = PkmIndex[Pkm.DARMANITAN]
-        pokemon.name = Pkm.DARMANITAN
-        pokemon.passive = Passive.DARMANITAN
-        pokemon.skill = Ability.HEADBUTT
-        pokemon.pp = 0
-        pokemon.status.tree = false
-        pokemon.toMovingState()
-        pokemon.addAttack(9, pokemon, 0, false)
-        pokemon.addDefense(-10, pokemon, 0, false)
-        pokemon.addSpecialDefense(-10, pokemon, 0, false)
-      }
     }
   }
 

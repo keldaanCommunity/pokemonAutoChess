@@ -1,8 +1,8 @@
 import { User } from "@firebase/auth-types"
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Client, Room } from "colyseus.js"
+import { CollectionUtils } from "../../../core/collection"
 import { IBot } from "../../../models/mongo-models/bot-v2"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
@@ -20,8 +20,13 @@ import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"
 import { PkmProposition } from "../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
-import { logger } from "../../../utils/logger"
+import {
+  IPokemonCollectionItemUnpacked,
+  IUserMetadataJSON,
+  IUserMetadataUnpacked
+} from "../../../types/interfaces/UserMetadata"
 import { getAvatarString } from "../../../utils/avatar"
+import { logger } from "../../../utils/logger"
 
 export interface INetwork {
   client: Client
@@ -31,7 +36,7 @@ export interface INetwork {
   after: Room<AfterGameState> | undefined
   uid: string
   displayName: string
-  profile: IUserMetadata | undefined
+  profile: IUserMetadataUnpacked | undefined
   pendingGameId: string | null
   connectionStatus: ConnectionStatus
   error: string | null
@@ -77,11 +82,17 @@ export const networkSlice = createSlice({
       state.after?.connection.isOpen && state.after?.leave(true)
       state.after = undefined
     },
-    setProfile: (state, action: PayloadAction<IUserMetadata>) => {
-      state.profile = action.payload
-      state.profile.pokemonCollection = new Map(
-        Object.entries(action.payload.pokemonCollection)
-      )
+    setProfile: (state, action: PayloadAction<IUserMetadataJSON>) => {
+      const unpackedCollection: Map<string, IPokemonCollectionItemUnpacked> = new Map()
+      for (const index in action.payload.pokemonCollection) {
+        const item = action.payload.pokemonCollection[index]
+        unpackedCollection.set(index, CollectionUtils.unpackCollectionItem(item))
+      }
+
+      state.profile = {
+        ...action.payload,
+        pokemonCollection: unpackedCollection
+      }
     },
     joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
       state.lobby = action.payload

@@ -1,21 +1,14 @@
 import { Dispatcher } from "@colyseus/command"
-import {
-  Client,
-  IRoomListingData,
-  matchMaker,
-  Room,
-  subscribeLobby
-} from "colyseus"
+import { Client, IRoomCache, matchMaker, Room, subscribeLobby } from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
+import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata, {
-  IUserMetadata
-} from "../models/mongo-models/user-metadata"
-import { Emotion, IPlayer, Role, Title, Transfer } from "../types"
+import UserMetadata from "../models/mongo-models/user-metadata"
+import { Emotion, Role, Title, Transfer } from "../types"
 import {
   INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
@@ -27,6 +20,7 @@ import { CloseCodes } from "../types/enum/CloseCodes"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { ITournament } from "../types/interfaces/Tournament"
+import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import {
   BanUserCommand,
@@ -64,11 +58,11 @@ import LobbyState from "./states/lobby-state"
 
 export default class CustomLobbyRoom extends Room<LobbyState> {
   unsubscribeLobby: (() => void) | undefined
-  rooms: IRoomListingData[] | undefined
+  rooms: IRoomCache[] | undefined
   dispatcher: Dispatcher<this>
   tournamentCronJobs: Map<string, CronJob> = new Map<string, CronJob>()
   cleanUpCronJobs: CronJob[] = []
-  users: Map<string, IUserMetadata> = new Map<string, IUserMetadata>()
+  users: Map<string, IUserMetadataMongo> = new Map<string, IUserMetadataMongo>()
 
   constructor() {
     super()
@@ -86,7 +80,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  addRoom(roomId: string, data: IRoomListingData) {
+  addRoom(roomId: string, data: IRoomCache) {
     // append room listing data
     this.rooms?.push(data)
 
@@ -95,7 +89,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     })
   }
 
-  changeRoom(index: number, roomId: string, data: IRoomListingData) {
+  changeRoom(index: number, roomId: string, data: IRoomCache) {
     if (this.rooms) {
       const previousData = this.rooms[index]
 
@@ -114,7 +108,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    this.setState(new LobbyState())
+    this.state = new LobbyState()
     this.autoDispose = false
     this.listing.unlisted = true
 
@@ -396,8 +390,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.state.addAnnouncement(`${player.name} won the ranked match !`)
     })*/
 
-    this.presence.subscribe("tournament-winner", (player: IPlayer) => {
-      this.state.addAnnouncement(`${player.name} won the tournament !`)
+    this.presence.subscribe("announcement", (message: string) => {
+      this.state.addAnnouncement(message)
     })
 
     this.presence.subscribe(

@@ -1,7 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
-import Board from "./board"
+import type { Board } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 

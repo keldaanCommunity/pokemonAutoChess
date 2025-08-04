@@ -1,34 +1,10 @@
-import { Schema, model } from "mongoose"
-import { ArraySchema } from "@colyseus/schema"
+import { model, Schema } from "mongoose"
+import { CollectionUtils } from "../../core/collection"
 import { Emotion, Role, Title } from "../../types"
-import { Language } from "../../types/enum/Language"
-
-export interface IUserMetadata {
-  uid: string
-  displayName: string
-  language: Language | ""
-  avatar: string
-  wins: number
-  exp: number
-  level: number
-  elo: number
-  pokemonCollection: Map<string, IPokemonCollectionItem>
-  booster: number
-  titles: Title[]
-  title: "" | Title
-  role: Role
-  banned?: boolean
-}
-
-export interface IPokemonCollectionItem {
-  dust: number
-  emotions: Emotion[] | ArraySchema<Emotion>
-  shinyEmotions: Emotion[] | ArraySchema<Emotion>
-  selectedEmotion: Emotion | null
-  selectedShiny: boolean
-  id: string
-  played: number
-}
+import {
+  IUserMetadataJSON,
+  IUserMetadataMongo
+} from "../../types/interfaces/UserMetadata"
 
 const userMetadataSchema = new Schema({
   uid: {
@@ -49,6 +25,10 @@ const userMetadataSchema = new Schema({
     type: Number,
     default: 0
   },
+  games: {
+    type: Number,
+    default: 0
+  },
   exp: {
     type: Number,
     default: 0
@@ -60,6 +40,21 @@ const userMetadataSchema = new Schema({
   elo: {
     type: Number,
     default: 1000
+  },
+  maxElo: {
+    type: Number,
+    default: 1000
+  },
+  eventPoints: {
+    type: Number,
+    default: 0
+  },
+  maxEventPoints: {
+    type: Number,
+    default: 0
+  },
+  eventFinishTime: {
+    type: Date
   },
   booster: {
     type: Number,
@@ -89,25 +84,41 @@ const userMetadataSchema = new Schema({
       dust: {
         type: Number
       },
+      // OPTIMIZED: Single 5-byte field instead of multiple arrays for emotions and shiny emotions unlocked
+      unlocked: {
+        type: Buffer,
+        default: () => Buffer.alloc(5, 0)
+      },
       selectedEmotion: {
         type: String,
         enum: Emotion
       },
-      emotions: [
-        {
-          type: String,
-          enum: Emotion
-        }
-      ],
-      shinyEmotions: [
-        {
-          type: String,
-          enum: Emotion
-        }
-      ],
       selectedShiny: {
         type: Boolean
       },
+      //LEGACY: Emotions and shinyEmotions are now stored in unlocked field
+      //TO BE REMOVED after migration
+      emotions: {
+        type: [
+          {
+            type: String,
+            enum: Emotion
+          }
+        ],
+        required: false,
+        default: () => { return undefined } // important otherwise mongoose will create empty array
+      },
+      shinyEmotions: {
+        type: [
+          {
+            type: String,
+            enum: Emotion
+          }
+        ],
+        required: false,
+        default: () => { return undefined } // important otherwise mongoose will create empty array
+      },
+      // END LEGACY
       id: {
         type: String
       },
@@ -119,4 +130,17 @@ const userMetadataSchema = new Schema({
   }
 })
 
-export default model<IUserMetadata>("UserMetadata", userMetadataSchema)
+export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
+
+export function toUserMetadataJSON(user): IUserMetadataJSON {
+  const pokemonCollection: {
+    [index: string]: IUserMetadataJSON["pokemonCollection"][string]
+  } = {}
+  user.pokemonCollection.forEach((item, index) => {
+    pokemonCollection[index] = CollectionUtils.toCollectionItemClient(item)
+  })
+  return {
+    ...user.toObject(),
+    pokemonCollection
+  }
+}

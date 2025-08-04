@@ -1,6 +1,7 @@
 import { Dispatcher } from "@colyseus/command"
 import { Client, ClientArray, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
+import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Role, Transfer } from "../types"
@@ -11,6 +12,7 @@ import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
 import {
   OnAddBotCommand,
+  OnChangeNoEloCommand,
   OnGameStartRequestCommand,
   OnJoinCommand,
   OnKickPlayerCommand,
@@ -21,12 +23,10 @@ import {
   OnRoomChangeSpecialRule,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
-  OnChangeNoEloCommand,
   OnToggleReadyCommand,
   RemoveMessageCommand
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
 
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
@@ -93,11 +93,10 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.clock.start()
 
     // logger.debug(defaultRoomName);
-    this.setState(new PreparationState(options))
+    this.state = new PreparationState(options)
     this.setMetadata(<IPreparationMetadata>{
       name: options.roomName.slice(0, 30),
-      ownerName:
-        options.gameMode === GameMode.QUICKPLAY ? null : options.ownerId,
+      ownerName: options.gameMode === GameMode.CLASSIC ? null : options.ownerId,
       minRank: options.minRank ?? null,
       maxRank: options.maxRank ?? null,
       noElo: options.noElo ?? false,
@@ -340,7 +339,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       const user = await admin.auth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       const isAdmin = userProfile?.role === Role.ADMIN
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
       const numberOfHumanPlayers = values(this.state.users).filter(
@@ -427,7 +425,10 @@ export default class PreparationRoom extends Room<PreparationState> {
   onGameStart({
     gameId,
     preparationId
-  }: { gameId: string; preparationId: string }) {
+  }: {
+    gameId: string
+    preparationId: string
+  }) {
     if (this.roomId === preparationId) {
       this.lock()
       this.setGameStarted(new Date().toISOString())

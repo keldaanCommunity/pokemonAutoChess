@@ -1,10 +1,9 @@
-import { Client, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { GameUser } from "../../../models/colyseus-models/game-user"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
 import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
@@ -14,12 +13,11 @@ import { GameMode } from "../../../types/enum/Game"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { authenticateUser } from "../network"
 import {
   joinPreparation,
-  logIn,
   setConnectionStatus,
   setErrorAlertMessage,
-  setProfile,
   toggleReady
 } from "../stores/NetworkStore"
 import {
@@ -49,7 +47,6 @@ import PreparationMenu from "./component/preparation/preparation-menu"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
 import "./preparation.css"
 
 export default function Preparation() {
@@ -66,13 +63,8 @@ export default function Preparation() {
 
   useEffect(() => {
     const reconnect = async () => {
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          dispatch(logIn(user))
+      authenticateUser()
+        .then(async (user) => {
           try {
             if (!initialized.current) {
               initialized.current = true
@@ -112,63 +104,66 @@ export default function Preparation() {
             dispatch(setErrorAlertMessage(t("errors.UNKNOWN_ERROR", { error })))
             navigate("/")
           }
-        } else {
+        })
+        .catch((err) => {
           dispatch(setErrorAlertMessage(t("errors.USER_NOT_AUTHENTICATED")))
           navigate("/")
-        }
-      })
+        })
     }
 
     const initialize = async (room: Room<PreparationState>, uid: string) => {
-      room.state.listen("gameStartedAt", (value, previousValue) => {
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
+
+      $state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
       })
 
-      room.state.listen("ownerId", (value, previousValue) => {
+      $state.listen("ownerId", (value, previousValue) => {
         dispatch(setOwnerId(value))
       })
 
-      room.state.listen("ownerName", (value, previousValue) => {
+      $state.listen("ownerName", (value, previousValue) => {
         dispatch(setOwnerName(value))
       })
 
-      room.state.listen("name", (value, previousValue) => {
+      $state.listen("name", (value, previousValue) => {
         dispatch(setName(value))
       })
 
-      room.state.listen("password", (value, previousValue) => {
+      $state.listen("password", (value, previousValue) => {
         dispatch(setPassword(value))
       })
 
-      room.state.listen("noElo", (value, previousValue) => {
+      $state.listen("noElo", (value, previousValue) => {
         dispatch(setNoELO(value))
       })
 
-      room.state.listen("minRank", (value, previousValue) => {
+      $state.listen("minRank", (value, previousValue) => {
         dispatch(setMinRank(value))
       })
 
-      room.state.listen("maxRank", (value, previousValue) => {
+      $state.listen("maxRank", (value, previousValue) => {
         dispatch(setMaxRank(value))
       })
 
-      room.state.listen("whitelist", (value, previousValue) => {
+      $state.listen("whitelist", (value, previousValue) => {
         dispatch(setWhiteList(value))
       })
 
-      room.state.listen("blacklist", (value, previousValue) => {
+      $state.listen("blacklist", (value, previousValue) => {
         dispatch(setBlackList(value))
       })
 
-      room.state.listen("gameMode", (value, previousValue) => {
+      $state.listen("gameMode", (value, previousValue) => {
         dispatch(setGameMode(value))
       })
 
-      room.state.listen("specialGameRule", (value, previousValue) => {
+      $state.listen("specialGameRule", (value, previousValue) => {
         dispatch(setSpecialGameRule(value))
       })
 
-      room.state.users.onAdd((user) => {
+      $state.users.onAdd((user) => {
         dispatch(addUser(user))
 
         if (user.uid === uid) {
@@ -179,6 +174,8 @@ export default function Preparation() {
         } else if (!user.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
         }
+
+        const $user = $(user)
 
         const fields: NonFunctionPropNames<GameUser>[] = [
           "anonymous",
@@ -193,7 +190,7 @@ export default function Preparation() {
         ]
 
         fields.forEach((field) => {
-          user.listen(field, (value, previousValue) => {
+          $user.listen(field, (value, previousValue) => {
             if (field === "ready" && value) {
               playSound(SOUNDS.SET_READY)
             }
@@ -201,17 +198,17 @@ export default function Preparation() {
           })
         })
       })
-      room.state.users.onRemove((u) => {
+      $state.users.onRemove((u) => {
         dispatch(removeUser(u.uid))
         if (!u.isBot && u.uid !== uid && !connectingToGame.current) {
           playSound(SOUNDS.LEAVE_ROOM)
         }
       })
 
-      room.state.messages.onAdd((m) => {
+      $state.messages.onAdd((m) => {
         dispatch(pushMessage(m))
       })
-      room.state.messages.onRemove((m) => {
+      $state.messages.onRemove((m) => {
         dispatch(removeMessage(m))
       })
 
@@ -282,10 +279,6 @@ export default function Preparation() {
           dispatch(resetPreparation())
           navigate("/game")
         }
-      })
-
-      room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-        dispatch(setProfile(user))
       })
     }
 

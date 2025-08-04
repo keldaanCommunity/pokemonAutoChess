@@ -20,6 +20,7 @@ export default function PokemonStatistic(props: {
   synergy: Synergy | "all"
   rarity: Rarity | "all"
   pool: string
+  tier: string
   selectedPkm: string
 }) {
   const { t } = useTranslation()
@@ -34,7 +35,10 @@ export default function PokemonStatistic(props: {
   const duos = Object.values(PkmDuos)
 
   const filteredPokemons = props.pokemons.filter(
-    (p) => hasType(p, props.synergy) && hasRarity(p, props.rarity) && isInPool(p, props.pool) &&
+    (p) => hasType(p, props.synergy) &&
+      hasRarity(p, props.rarity) &&
+      isInPool(p, props.pool) &&
+      (props.tier === "all" || getPokemonData(p.name).stars === +props.tier) &&
       (props.selectedPkm === "" || p.name === props.selectedPkm)
   )
 

@@ -27,6 +27,7 @@ export enum Item {
   UPGRADE = "UPGRADE",
   REAPER_CLOTH = "REAPER_CLOTH",
   POKEMONOMICON = "POKEMONOMICON",
+  ABILITY_SHIELD = "ABILITY_SHIELD",
   POWER_LENS = "POWER_LENS",
   SHELL_BELL = "SHELL_BELL",
   LUCKY_EGG = "LUCKY_EGG",
@@ -35,7 +36,7 @@ export enum Item {
   SCOPE_LENS = "SCOPE_LENS",
   STAR_DUST = "STAR_DUST",
   GREEN_ORB = "GREEN_ORB",
-  MANA_SCARF = "MANA_SCARF",
+  DEEP_SEA_TOOTH = "DEEP_SEA_TOOTH",
   SMOKE_BALL = "SMOKE_BALL",
   XRAY_VISION = "XRAY_VISION",
   RAZOR_FANG = "RAZOR_FANG",
@@ -44,7 +45,7 @@ export enum Item {
   PUNCHING_GLOVE = "PUNCHING_GLOVE",
   MUSCLE_BAND = "MUSCLE_BAND",
   WONDER_BOX = "WONDER_BOX",
-  CLEANSE_TAG = "CLEANSE_TAG",
+  STICKY_BARB = "STICKY_BARB",
   WIDE_LENS = "WIDE_LENS",
   RAZOR_CLAW = "RAZOR_CLAW",
   FLUFFY_TAIL = "FLUFFY_TAIL",
@@ -135,9 +136,9 @@ export enum Item {
   TM_BRICK_BREAK = "TM_BRICK_BREAK",
   TM_TAUNT = "TM_TAUNT",
   TM_BULK_UP = "TM_BULK_UP",
-  TM_BIDE = "TM_BIDE",
+  TM_REFLECT = "TM_REFLECT",
   TM_PSYCH_UP = "TM_PSYCH_UP",
-  TM_RETALIATE = "TM_RETALIATE",
+  TM_COUNTER = "TM_COUNTER",
   TM_PAYDAY = "TM_PAYDAY",
   HM_CUT = "HM_CUT",
   HM_FLY = "HM_FLY",
@@ -145,7 +146,7 @@ export enum Item {
   HM_STRENGTH = "HM_STRENGTH",
   HM_FLASH = "HM_FLASH",
   HM_ROCK_SMASH = "HM_ROCK_SMASH",
-  HM_WHIRLPOOL = "HM_WHIRLPOOL",
+  HM_DIVE = "HM_DIVE",
   HM_WATERFALL = "HM_WATERFALL",
   CHEF_HAT = "CHEF_HAT",
   PICNIC_SET = "PICNIC_SET",
@@ -209,6 +210,7 @@ export const AllItems: Item[] = Object.values(Item)
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,
+  Item.AMULET_COIN,
   Item.GIMMIGHOUL_COIN,
   Item.EXCHANGE_TICKET,
   Item.TREASURE_BOX,
@@ -277,17 +279,17 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.SOUL_DEW]: [Item.TWISTED_SPOON, Item.MYSTIC_WATER],
   [Item.UPGRADE]: [Item.TWISTED_SPOON, Item.MAGNET],
   [Item.REAPER_CLOTH]: [Item.TWISTED_SPOON, Item.BLACK_GLASSES],
-  [Item.POKEMONOMICON]: [Item.TWISTED_SPOON, Item.MIRACLE_SEED],
+  [Item.ABILITY_SHIELD]: [Item.TWISTED_SPOON, Item.MIRACLE_SEED],
   [Item.POWER_LENS]: [Item.TWISTED_SPOON, Item.NEVER_MELT_ICE],
-  [Item.SHELL_BELL]: [Item.TWISTED_SPOON, Item.CHARCOAL],
+  [Item.POKEMONOMICON]: [Item.TWISTED_SPOON, Item.CHARCOAL],
   [Item.LUCKY_EGG]: [Item.TWISTED_SPOON, Item.HEART_SCALE],
   [Item.AQUA_EGG]: [Item.MYSTIC_WATER, Item.MYSTIC_WATER],
   [Item.BLUE_ORB]: [Item.MYSTIC_WATER, Item.MAGNET],
   [Item.SCOPE_LENS]: [Item.MYSTIC_WATER, Item.BLACK_GLASSES],
   [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
   [Item.GREEN_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
-  [Item.MANA_SCARF]: [Item.MYSTIC_WATER, Item.CHARCOAL],
-  [Item.SMOKE_BALL]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
+  [Item.DEEP_SEA_TOOTH]: [Item.MYSTIC_WATER, Item.CHARCOAL],
+  [Item.SHINY_CHARM]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
   [Item.XRAY_VISION]: [Item.MAGNET, Item.MAGNET],
   [Item.RAZOR_FANG]: [Item.MAGNET, Item.BLACK_GLASSES],
   [Item.GRACIDEA_FLOWER]: [Item.MAGNET, Item.MIRACLE_SEED],
@@ -295,16 +297,16 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.PUNCHING_GLOVE]: [Item.MAGNET, Item.CHARCOAL],
   [Item.MUSCLE_BAND]: [Item.MAGNET, Item.HEART_SCALE],
   [Item.WONDER_BOX]: [Item.BLACK_GLASSES, Item.BLACK_GLASSES],
-  [Item.CLEANSE_TAG]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
+  [Item.SMOKE_BALL]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
   [Item.WIDE_LENS]: [Item.BLACK_GLASSES, Item.NEVER_MELT_ICE],
   [Item.RAZOR_CLAW]: [Item.BLACK_GLASSES, Item.CHARCOAL],
   [Item.FLUFFY_TAIL]: [Item.BLACK_GLASSES, Item.HEART_SCALE],
   [Item.KINGS_ROCK]: [Item.MIRACLE_SEED, Item.MIRACLE_SEED],
-  [Item.SHINY_CHARM]: [Item.MIRACLE_SEED, Item.NEVER_MELT_ICE],
+  [Item.STICKY_BARB]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
   [Item.PROTECTIVE_PADS]: [Item.MIRACLE_SEED, Item.CHARCOAL],
-  [Item.MAX_REVIVE]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
+  [Item.MAX_REVIVE]: [Item.MIRACLE_SEED, Item.NEVER_MELT_ICE],
   [Item.ASSAULT_VEST]: [Item.NEVER_MELT_ICE, Item.NEVER_MELT_ICE],
-  [Item.AMULET_COIN]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
+  [Item.SHELL_BELL]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
   [Item.POKE_DOLL]: [Item.NEVER_MELT_ICE, Item.HEART_SCALE],
   [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
   [Item.FLAME_ORB]: [Item.CHARCOAL, Item.HEART_SCALE],
@@ -489,25 +491,6 @@ export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
   (item) => SynergyGivenByItem.hasOwnProperty(item) === false
 )
 
-export const LateGameItems: Item[] = CraftableNonSynergyItems.filter(item => item !== Item.AMULET_COIN)
-
-export const NonHoldableItems: Item[] = [
-  ...WeatherRocks,
-  ...FishingRods,
-  Item.METEORITE,
-  Item.MYSTERY_BOX,
-  Item.TREASURE_BOX,
-  Item.ZYGARDE_CUBE,
-  Item.SCROLL_OF_DARKNESS,
-  Item.SCROLL_OF_WATERS,
-  Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR,
-  Item.FIRE_SHARD,
-  Item.GIMMIGHOUL_COIN,
-  Item.EGG_FOR_SELL,
-  Item.EXCHANGE_TICKET
-]
-
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
@@ -520,9 +503,9 @@ export const TMs = [
   Item.TM_BRICK_BREAK,
   Item.TM_TAUNT,
   Item.TM_BULK_UP,
-  Item.TM_BIDE,
+  Item.TM_REFLECT,
   Item.TM_PSYCH_UP,
-  Item.TM_RETALIATE,
+  Item.TM_COUNTER,
   Item.TM_PAYDAY
 ]
 
@@ -534,7 +517,7 @@ export const HMs = [
   Item.HM_FLASH,
   Item.HM_ROCK_SMASH,
   Item.HM_WATERFALL,
-  Item.HM_WHIRLPOOL
+  Item.HM_DIVE
 ]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
@@ -542,9 +525,9 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_BRICK_BREAK]: Ability.BRICK_BREAK,
   [Item.TM_TAUNT]: Ability.TAUNT,
   [Item.TM_BULK_UP]: Ability.BULK_UP,
-  [Item.TM_BIDE]: Ability.BIDE,
+  [Item.TM_REFLECT]: Ability.REFLECT,
   [Item.TM_PSYCH_UP]: Ability.PSYCH_UP,
-  [Item.TM_RETALIATE]: Ability.RETALIATE,
+  [Item.TM_COUNTER]: Ability.COUNTER,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
   [Item.HM_CUT]: Ability.CUT,
   [Item.HM_FLY]: Ability.FLY,
@@ -553,7 +536,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.HM_FLASH]: Ability.FLASH,
   [Item.HM_ROCK_SMASH]: Ability.ROCK_SMASH,
   [Item.HM_WATERFALL]: Ability.WATERFALL,
-  [Item.HM_WHIRLPOOL]: Ability.WHIRLPOOL
+  [Item.HM_DIVE]: Ability.DIVE
 }
 
 export const Dishes = [
@@ -664,5 +647,23 @@ export const Sweets = [
   Item.RIBBON_SWEET
 ]
 
-export const CharcadetArmors = [Item.AUSPICIOUS_ARMOR, Item.MALICIOUS_ARMOR]
-export const KubfuScrolls = [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS]
+export const NonHoldableItems: Item[] = [
+  ...WeatherRocks,
+  ...FishingRods,
+  ...TMs,
+  ...HMs,
+  ...Flavors,
+  ...Dishes,
+  Item.METEORITE,
+  Item.MYSTERY_BOX,
+  Item.TREASURE_BOX,
+  Item.ZYGARDE_CUBE,
+  Item.SCROLL_OF_DARKNESS,
+  Item.SCROLL_OF_WATERS,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.FIRE_SHARD,
+  Item.GIMMIGHOUL_COIN,
+  Item.EGG_FOR_SELL,
+  Item.EXCHANGE_TICKET
+]

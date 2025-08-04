@@ -6,6 +6,16 @@ import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
 
+export const FIREBASE_CONFIG = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID
+}
+
+
 export const ON_ATTACK_MANA = 5
 export const ARMOR_FACTOR = 0.05
 export const BOARD_WIDTH = 8
@@ -83,6 +93,19 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   8: 72,
   9: 255
 })
+
+export const MAX_EVENT_POINTS = 500
+
+export const EventPointsPerRank = [
+  +15, // 1st
+  +8, // 2nd
+  +5, // 3rd
+  +1, // 4th
+  -1, // 5th
+  -3, // 6th
+  -5, // 7th
+  -8 // 8th
+]
 
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
@@ -202,12 +225,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
 export const UniquePool = new Array<PkmProposition>(
   Pkm.AERODACTYL,
   Pkm.BLACEPHALON,
-  Pkm.REGIDRAGO,
-  Pkm.REGIELEKI,
   Pkm.CASTFORM,
-  Pkm.REGICE,
-  Pkm.REGISTEEL,
-  Pkm.REGIROCK,
   Pkm.UXIE,
   Pkm.MESPRIT,
   Pkm.AZELF,
@@ -300,7 +318,8 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.KUBFU,
   Pkm.SCREAM_TAIL,
   PkmDuo.INDEEDEE,
-  Pkm.FURFROU
+  Pkm.FURFROU,
+  Pkm.EMOLGA
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
@@ -317,6 +336,11 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.ENTEI,
   Pkm.SUICUNE,
   Pkm.RAIKOU,
+  Pkm.REGIDRAGO,
+  Pkm.REGIELEKI,
+  Pkm.REGICE,
+  Pkm.REGISTEEL,
+  Pkm.REGIROCK,
   Pkm.REGIGIGAS,
   Pkm.CELEBI,
   Pkm.VICTINI,
@@ -368,7 +392,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.IRON_VALIANT,
   Pkm.OKIDOGI,
   Pkm.MUNKIDORI,
-  Pkm.FEZANDIPITI
+  Pkm.FEZANDIPITI,
+  Pkm.CELESTEELA
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -678,7 +703,8 @@ export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 
 export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
 
-export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 15 // 15 days
+export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 20 // 15 days
+export const ELO_DECAY_LOST_PER_DAY = 5
 export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
 export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days
 

@@ -1,4 +1,4 @@
-> May 21, 2025
+> June 29, 2025
 
 # Patch 6.3: V.I.P. (Very Important Pokémon)
 
@@ -29,6 +29,7 @@
 ![Masquerain](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0284/Normal.png)
 ![Gossifleur](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0829/Normal.png)
 ![Eldegoss](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0830/Normal.png)
+![Furfrou](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0676/Normal.png)
 ![Surfing Pikachu](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0025/9999/Normal.png)
 
 ## New summer collection
@@ -45,4 +46,4 @@
 
 ---
 
-Check out the full changelog on Discord
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1388787103902597200)

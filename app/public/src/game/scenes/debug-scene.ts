@@ -3,7 +3,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
 import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
-import { AnimationConfig, Pkm } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
 import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
@@ -11,9 +11,10 @@ import { OrientationVector } from "../../../../utils/orientation"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
-import { displayAbility } from "../components/abilities-animations"
+import { displayAbility, displayHit } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
+import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 
 type Boost =
@@ -95,30 +96,31 @@ export class DebugScene extends Phaser.Scene {
     this.pokemon.positionX = 3
     this.pokemon.positionY = 3
     let animationName = AnimationType[animationType]
+    const anims = { ...DEFAULT_POKEMON_ANIMATION_CONFIG, ...(PokemonAnimations[pkm] ?? {}) }
     if (animationType === "Attack") {
-      animationName = AnimationConfig[pkm].attack
+      animationName = anims.attack
       this.showTarget()
       this.addAttackAnim()
     }
     if (animationType === "Ability") {
-      animationName = AnimationConfig[pkm].ability
+      animationName = anims.ability
       this.showTarget()
       this.addAbilityAnim()
     }
     if (animationType === "Emote") {
-      animationName = AnimationConfig[pkm].emote
+      animationName = anims.emote
     }
     if (animationType === "Hop") {
-      animationName = AnimationConfig[pkm].hop ?? AnimationType.Hop
+      animationName = anims.hop
     }
     if (animationType === "Hurt") {
-      animationName = AnimationConfig[pkm].hurt ?? AnimationType.Hurt
+      animationName = anims.hurt
     }
     if (animationType === "Sleep") {
-      animationName = AnimationConfig[pkm].sleep ?? AnimationType.Sleep
+      animationName = anims.sleep
     }
     if (animationType === "Eat") {
-      animationName = AnimationConfig[pkm].eat ?? AnimationType.Eat
+      animationName = anims.eat
     }
 
     try {
@@ -374,35 +376,54 @@ export class DebugScene extends Phaser.Scene {
   }
 
   addAttackAnim() {
-    const attack = () =>
-      this.pokemon?.attackAnimation(
+    const attack = () => {
+      if (!this.pokemon) return
+      this.pokemon.attackAnimation(
         this.pokemon.targetX || 0,
         this.pokemon.targetY || 0,
         0,
-        1000
+        1000,
+        () => {
+          if (!this.pokemon) return
+          const [x, y] = transformEntityCoordinates(
+            this.pokemon.targetX || 0,
+            this.pokemon.targetY || 0,
+            false
+          )
+          displayHit(
+            this,
+            PokemonAnimations[PkmByIndex[this.pokemon.index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+            x,
+            y,
+            false
+          )
+        }
       )
+    }
+    attack()
     this.attackAnimInterval = setInterval(attack, 2000)
   }
 
   addAbilityAnim() {
     const showAbilityAnim = () => {
-      displayAbility(
-        this,
-        [this.target!],
-        this.pokemon!.skill,
-        this.pokemon!.orientation,
-        this.pokemon!.positionX,
-        this.pokemon!.positionY,
-        this.pokemon!.targetX ?? -1,
-        this.pokemon!.targetY ?? -1,
-        false
-      )
+      displayAbility({
+        scene: this,
+        pokemonsOnBoard: [this.target!],
+        ability: this.pokemon!.skill,
+        orientation: this.pokemon!.orientation,
+        positionX: this.pokemon!.positionX,
+        positionY: this.pokemon!.positionY,
+        targetX: this.pokemon!.targetX ?? -1,
+        targetY: this.pokemon!.targetY ?? -1,
+        flip: this.pokemon!.flip,
+        ap: 0
+      })
     }
     showAbilityAnim()
     this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
   }
 
-  shakeCamera(intensity: number, duration: number) {
-    this.cameras.main.shake(duration, intensity)
+  shakeCamera(options?: { intensity?: number; duration?: number }) {
+    this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
   }
 }

@@ -1,13 +1,18 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { Title, Transfer } from "../../types"
+import { Title } from "../../types"
 import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { AttackType, PokemonActionState } from "../../types/enum/Game"
+import { AbilityPerTM, Flavors, HMs, Item, OgerponMasks, SynergyGivenByItem, SynergyStones, TMs } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { removeInArray } from "../../utils/array"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
+import { chance } from "../../utils/random"
+import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -15,7 +20,9 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnDamageReceivedEffect,
   OnHitEffect,
+  OnItemEquippedEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
@@ -58,8 +65,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
       for (let i = 0; i < nbBounces; i++) {
         secondaryTargetHit = closestEnemies[i]
         if (secondaryTargetHit) {
-          pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-            id: pokemon.simulation.id,
+          pokemon.broadcastAbility({
             skill: "LINK_CABLE_link",
             positionX: previousTg.positionX,
             positionY: previousTg.positionY,
@@ -176,7 +182,8 @@ export class SoulDewEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addAbilityPower(10, pokemon, 0, false)
+        pokemon.addAbilityPower(5, pokemon, 0, false)
+        pokemon.addPP(5, pokemon, 0, false)
         pokemon.count.soulDewCount++
       },
       Item.SOUL_DEW,
@@ -185,7 +192,81 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
+const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
+  if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.hp) {
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
+        cell.value.status.triggerBlinded(4000, cell.value)
+      }
+    })
+    pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
+    pokemon.removeItem(Item.SMOKE_BALL)
+    pokemon.addShield(50, pokemon, 0, false)
+    pokemon.flyAway(board)
+  }
+})
+
+const ogerponMaskEffect = new OnItemEquippedEffect(({ pokemon, player, item }) => {
+  if (
+    pokemon.passive === Passive.OGERPON_TEAL ||
+    pokemon.passive === Passive.OGERPON_WELLSPRING ||
+    pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
+    pokemon.passive === Passive.OGERPON_CORNERSTONE
+  ) {
+    const currentMask = values(pokemon.items).find((i) =>
+      OgerponMasks.includes(i)
+    )
+    if (currentMask) {
+      pokemon.items.delete(currentMask)
+    } else if (pokemon.items.size >= 3) {
+      // full, can't hold mask
+      return false
+    }
+
+    if (item === Item.TEAL_MASK) {
+      pokemon.items.add(Item.TEAL_MASK)
+      player.transformPokemon(pokemon, Pkm.OGERPON_TEAL_MASK)
+    } else if (item === Item.WELLSPRING_MASK) {
+      pokemon.items.add(Item.WELLSPRING_MASK)
+      player.transformPokemon(pokemon, Pkm.OGERPON_WELLSPRING_MASK)
+    } else if (item === Item.HEARTHFLAME_MASK) {
+      pokemon.items.add(Item.HEARTHFLAME_MASK)
+      player.transformPokemon(pokemon, Pkm.OGERPON_HEARTHFLAME_MASK)
+    } else if (item === Item.CORNERSTONE_MASK) {
+      pokemon.items.add(Item.CORNERSTONE_MASK)
+      player.transformPokemon(pokemon, Pkm.OGERPON_CORNERSTONE_MASK)
+    }
+    return true
+  }
+
+  return false // prevent item from being equipped
+})
+
 export const ItemEffects: { [i in Item]?: Effect[] } = {
+
+  ...Object.fromEntries(SynergyStones.map((stone) => [stone, [
+    // prevent adding a synergy stone on a pokemon that already has this synergy
+    new OnItemEquippedEffect(({ pokemon, item }) => !pokemon.types.has(SynergyGivenByItem[item]))
+  ]])),
+
+  ...Object.fromEntries([...TMs, ...HMs].map(tm => [tm, [
+    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+      const ability = AbilityPerTM[item]
+      if (!ability || pokemon.types.has(Synergy.HUMAN) === false) return false // prevent equipping TMs/HMs on non-human pokemon
+      pokemon.tm = ability
+      pokemon.skill = ability
+      pokemon.maxPP = 100
+      removeInArray(player.items, item)
+      const tmIndex = player.tms.findIndex((tm) => tm === item)
+      if (tmIndex !== -1) {
+        player.tms[tmIndex] = null
+      }
+      return true
+    })
+  ]])),
+
   [Item.RUSTED_SWORD]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.addAttack(pokemon.baseAtk * 0.5, pokemon, 0, false)
@@ -201,7 +282,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnItemRemovedEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof SoulDewEffect) {
-          pokemon.addAbilityPower(-10 * effect.count, pokemon, 0, false)
+          pokemon.addAbilityPower(-5 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.soulDewCount = 0
           break
@@ -211,12 +292,12 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.PUNCHING_GLOVE]: [
-    new OnHitEffect((pokemon, target, board) => {
+    new OnHitEffect(({ attacker, target, board }) => {
       target.handleDamage({
         damage: Math.round(0.08 * target.hp),
         board,
         attackType: AttackType.PHYSICAL,
-        attacker: pokemon,
+        attacker,
         shouldTargetGainMana: true
       })
     })
@@ -397,6 +478,19 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.MUSCLE_BAND]: [
+    new OnDamageReceivedEffect(({ pokemon, damage }) => {
+      if (
+        pokemon.count.defensiveRibbonCount < 20 &&
+        damage > 0
+      ) {
+        pokemon.count.defensiveRibbonCount++
+        if (pokemon.count.defensiveRibbonCount % 2 === 0) {
+          pokemon.addAttack(1, pokemon, 0, false)
+          pokemon.addDefense(2, pokemon, 0, false)
+          pokemon.addSpeed(5, pokemon, 0, false)
+        }
+      }
+    }),
     new OnItemRemovedEffect((pokemon) => {
       const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
@@ -406,9 +500,13 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  [Item.MANA_SCARF]: [
-    new OnAttackEffect(({ pokemon, target, board }) => {
-      pokemon.addPP(8, pokemon, 0, false)
+  [Item.DEEP_SEA_TOOTH]: [
+    new OnAttackEffect(({ pokemon, target, board, hasAttackKilled }) => {
+      pokemon.addPP(5, pokemon, 0, false)
+
+      if (hasAttackKilled) {
+        pokemon.addPP(15, pokemon, 0, false)
+      }
     })
   ],
 
@@ -421,6 +519,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       }
     })
   ],
+
+  [Item.SMOKE_BALL]: [smokeBallEffect],
 
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
@@ -457,8 +557,8 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addAttack(1, pokemon, 0, false)
       pokemon.count.magmarizerCount++
     }),
-    new OnHitEffect((pokemon, target, board) => {
-      target.status.triggerBurn(2000, target, pokemon)
+    new OnHitEffect(({ attacker, target }) => {
+      target.status.triggerBurn(2000, target, attacker)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.count.magmarizerCount, pokemon, 0, false)
@@ -495,9 +595,36 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
 
+  [Item.STICKY_BARB]: [
+    new OnDamageReceivedEffect(({ pokemon, attacker, attackType }) => {
+      if (attackType === AttackType.PHYSICAL
+        && attacker
+        && attacker.items.has(Item.PROTECTIVE_PADS) === false
+        && distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) === 1) {
+        const damage = Math.round(3 + 0.15 * pokemon.def)
+        attacker.handleDamage({
+          damage,
+          board: pokemon.simulation.board,
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        if (chance(0.3, pokemon)) {
+          attacker.status.triggerWound(3000, attacker, pokemon)
+        }
+      }
+    })
+  ],
+
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
-      pokemon.addPP(20, pokemon, 0, false)
+      const ppRegained = Math.round(0.2 * pokemon.maxPP + 2 * pokemon.count.ult)
+      pokemon.addPP(ppRegained, pokemon, 0, false)
     })
   ],
 
@@ -524,6 +651,182 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
           }, 1000)
         )
       }
+    })
+  ],
+
+  [Item.ABSORB_BULB]: [
+    new OnDamageReceivedEffect(({ pokemon, board }) => {
+      if (pokemon.life < 0.5 * pokemon.hp) {
+        const damage = pokemon.physicalDamageReduced + pokemon.specialDamageReduced
+        pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
+        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              false,
+              false
+            )
+          }
+        })
+        pokemon.removeItem(Item.ABSORB_BULB)
+      }
+    })
+  ],
+
+  [Item.METEORITE]: [
+    new OnItemEquippedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.ALIEN_DNA) {
+        if (pokemon.name === Pkm.DEOXYS) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_ATTACK)
+        } else if (pokemon.name === Pkm.DEOXYS_ATTACK) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_DEFENSE)
+        } else if (pokemon.name === Pkm.DEOXYS_DEFENSE) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS_SPEED)
+        } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
+          player.transformPokemon(pokemon, Pkm.DEOXYS)
+        }
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.ZYGARDE_CUBE]: [
+    new OnItemEquippedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.ZYGARDE) {
+        if (pokemon.name === Pkm.ZYGARDE_10) {
+          player.transformPokemon(pokemon, Pkm.ZYGARDE_50)
+        } else if (pokemon.name === Pkm.ZYGARDE_50) {
+          player.transformPokemon(pokemon, Pkm.ZYGARDE_10)
+        }
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.TEAL_MASK]: [ogerponMaskEffect],
+  [Item.WELLSPRING_MASK]: [ogerponMaskEffect],
+  [Item.CORNERSTONE_MASK]: [ogerponMaskEffect],
+  [Item.HEARTHFLAME_MASK]: [ogerponMaskEffect],
+
+  [Item.FIRE_SHARD]: [
+    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+      if (pokemon.types.has(Synergy.FIRE) && player.life > 3) {
+        pokemon.atk += 3
+        pokemon.speed += 3
+        player.life = min(1)(player.life - 3)
+        removeInArray(player.items, item)
+      }
+
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.CHEF_HAT]: [
+    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+      return pokemon.types.has(Synergy.GOURMET)
+    })
+  ],
+
+  [Item.EVIOLITE]: [
+    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+      return pokemon.hasEvolution
+    })
+  ],
+
+  [Item.PICNIC_SET]: [
+    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+      if (pokemon.meal == "") {
+        let nbSandwiches = 0
+        values(player.board).forEach((pkm) => {
+          if (
+            pkm.meal === "" &&
+            pkm.canEat &&
+            pokemon &&
+            distanceC(
+              pkm.positionX,
+              pkm.positionY,
+              pokemon.positionX,
+              pokemon.positionY
+            ) <= 1
+          ) {
+            pkm.meal = Item.SANDWICH
+            pkm.action = PokemonActionState.EAT
+            nbSandwiches++
+          }
+        })
+        removeInArray(player.items, item)
+        if (nbSandwiches >= 9) {
+          player.titles.add(Title.PICNICKER)
+        }
+      }
+
+      return false // prevent item from being equipped
+    })
+  ],
+
+  ...Object.fromEntries(Flavors.map((flavor) => [flavor, [
+    new OnItemEquippedEffect(({ pokemon }) => pokemon.skill === Ability.DECORATE) // is then consummed by ItemEvolutionRule
+  ]])),
+
+  [Item.BLACK_AUGURITE]: [
+    new OnItemEquippedEffect(({ pokemon, player, item, room }) => {
+      return pokemon.passive === Passive.SCYTHER // is then consummed by ItemEvolutionRule
+    })
+  ],
+
+  [Item.MALICIOUS_ARMOR]: [
+    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+      return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
+    })
+  ],
+
+  [Item.AUSPICIOUS_ARMOR]: [
+    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+      return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
+    })
+  ],
+
+  [Item.SCROLL_OF_DARKNESS]: [
+    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+      return pokemon.passive === Passive.KUBFU // is then consummed by ItemEvolutionRule
+    })
+  ],
+
+  [Item.SCROLL_OF_WATERS]: [
+    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+      return pokemon.passive === Passive.KUBFU // is then consummed by ItemEvolutionRule
+    })
+  ],
+
+  [Item.RARE_CANDY]: [
+    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
+      if (
+        !evolution ||
+        evolution === Pkm.DEFAULT ||
+        pokemon.items.has(Item.EVIOLITE)
+      ) {
+        return false // prevent item from being equipped
+      }
+      const pokemonEvolved = player.transformPokemon(pokemon, evolution)
+      pokemon.afterEvolve({
+        pokemonEvolved,
+        pokemonsBeforeEvolution: [pokemon],
+        player
+      })
+
+      pokemonEvolved.items.add(item)
+      removeInArray(player.items, item)
+      if (pokemonEvolved.items.has(Item.SHINY_CHARM)) {
+        pokemonEvolved.shiny = true
+      }
+
+      room.checkEvolutionsAfterItemAcquired(player.id, pokemon)
+      player.updateSynergies()
+      return false // prevent default logic after item equipped due to pokemon having evolved
     })
   ]
 }

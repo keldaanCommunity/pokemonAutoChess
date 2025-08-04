@@ -32,3 +32,31 @@ export const AvatarEmotions: Emotion[] = [
   Emotion.STUNNED,
   Emotion.DIZZY
 ]
+
+/*
+IMPORTANT: 
+This list of emotions is used in UserMetadata pokemonCollection unlocked as byte array mask.
+It is important to not edit it to keep the order consistent with the CollectionUtils.
+*/
+export const CollectionEmotions: Emotion[] = [
+  Emotion.NORMAL,
+  Emotion.HAPPY,
+  Emotion.PAIN,
+  Emotion.ANGRY,
+  Emotion.WORRIED,
+  Emotion.SAD,
+  Emotion.CRYING,
+  Emotion.SHOUTING,
+  Emotion.TEARY_EYED,
+  Emotion.DETERMINED,
+  Emotion.JOYOUS,
+  Emotion.INSPIRED,
+  Emotion.SURPRISED,
+  Emotion.DIZZY,
+  Emotion.SIGH,
+  Emotion.STUNNED,
+  Emotion.SPECIAL0,
+  Emotion.SPECIAL1,
+  Emotion.SPECIAL2,
+  Emotion.SPECIAL3
+]

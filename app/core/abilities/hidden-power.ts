@@ -1,7 +1,7 @@
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
-import { IPokemon, Transfer } from "../../types"
+import { IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
 import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
@@ -10,7 +10,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
-import Board from "../board"
+import type { Board } from "../board"
 import { giveRandomEgg } from "../eggs"
 import { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategies } from "./abilities"
@@ -304,14 +304,10 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
               target,
               false
             )
-            pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-              id: pokemon.simulation.id,
+            pokemon.broadcastAbility({
               skill: Ability.EXPLOSION,
-              positionX: pokemon.positionX,
-              positionY: pokemon.positionY,
               targetX: target.positionX,
-              targetY: target.positionY,
-              orientation: pokemon.orientation
+              targetY: target.positionY
             })
           }
         }
@@ -482,14 +478,10 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
           enemy,
           false
         )
-        unown.simulation.room.broadcast(Transfer.ABILITY, {
-          id: unown.simulation.id,
+        unown.broadcastAbility({
           skill: Ability.THUNDER_SHOCK,
-          positionX: unown.positionX,
-          positionY: unown.positionY,
           targetX: enemy.positionX,
-          targetY: enemy.positionY,
-          orientation: unown.orientation
+          targetY: enemy.positionY
         })
       }
     })

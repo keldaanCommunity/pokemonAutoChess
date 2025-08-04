@@ -2,7 +2,6 @@ import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
 import {
   matchMaker,
-  Presence,
   RedisDriver,
   RedisPresence,
   ServerOptions
@@ -22,7 +21,7 @@ import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
-import UserMetadata from "./models/mongo-models/user-metadata"
+import UserMetadata, { toUserMetadataJSON } from "./models/mongo-models/user-metadata"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
@@ -89,7 +88,7 @@ if (process.env.NODE_APP_INSTANCE) {
       }
     }
   }
-  //gameOptions.presence?.setMaxListeners(100) // extend max listeners to avoid memory leak warning ; no longer available since reverting to colyseus 0.15
+  gameOptions.presence?.setMaxListeners(100) // extend max listeners to avoid memory leak warning
 }
 
 /*if (process.env.MODE === "dev") {
@@ -98,7 +97,6 @@ if (process.env.NODE_APP_INSTANCE) {
 
 export default config({
   options: gameOptions,
-
 
   /* uWebSockets turned out to be unstable in production, so we are using the default transport
   2025-06-29T16:50:08: Error: Invalid access of closed uWS.WebSocket/SSLWebSocket.
@@ -289,6 +287,26 @@ export default config({
       res.send(getLeaderboard())
     })
 
+    app.get("/leaderboards/bots", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.botLeaderboard)
+    })
+
+    app.get("/leaderboards/elo", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.leaderboard)
+    })
+
+    app.get("/leaderboards/level", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.levelLeaderboard)
+    })
+
+    app.get("/leaderboards/event", async (req, res) => {
+      res.set("Cache-Control", "no-cache")
+      res.send(getLeaderboard()?.eventLeaderboard)
+    })
+
     app.get("/game-history/:playerUid", async (req, res) => {
       res.set("Cache-Control", "no-cache")
       const { playerUid } = req.params
@@ -368,6 +386,19 @@ export default config({
         return null
       }
     }
+
+    app.get("/profile", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
+        if (!mongoUser) return res.status(404).send("User not found")
+        res.send(toUserMetadataJSON(mongoUser))
+      } catch (error) {
+        logger.error("Error fetching profile", error)
+        res.status(500).send("Error fetching profile")
+      }
+    })
 
     app.post("/bots", async (req, res) => {
       try {

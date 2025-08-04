@@ -2,8 +2,8 @@ import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import {
-  IPokemonsStatisticV2,
-  fetchMetaPokemons
+  fetchMetaPokemons,
+  IPokemonsStatisticV2
 } from "../../../../../models/mongo-models/pokemons-statistic-v2"
 import { EloRankThreshold } from "../../../../../types/Config"
 import { EloRank } from "../../../../../types/enum/EloRank"
@@ -19,6 +19,7 @@ export function PokemonReport() {
   const [synergy, setSynergy] = useState<Synergy | "all">("all")
   const [rarity, setRarity] = useState<Rarity | "all">("all")
   const [pool, setPool] = useState<string>("all")
+  const [tier, setTier] = useState<string>("all")
   const [loading, setLoading] = useState<boolean>(true)
   const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
@@ -91,10 +92,7 @@ export function PokemonReport() {
               </option>
             ))}
           </select>
-          <select
-            value={pool}
-            onChange={(e) => setPool(e.target.value)}
-          >
+          <select value={pool} onChange={(e) => setPool(e.target.value)}>
             <option value={"all"}>
               {t("pool_label")}: {t("all")}
             </option>
@@ -106,6 +104,16 @@ export function PokemonReport() {
             <option value={"special"} key={"special"}>
               {t(`rarity.SPECIAL`)}
             </option>
+          </select>
+          <select value={tier} onChange={(e) => setTier(e.target.value)}>
+            <option value={"all"}>
+              {t("tier")}: {t("all")}
+            </option>
+            {[1, 2, 3, 4].map((p) => (
+              <option value={p} key={p}>
+                {`⭐`.repeat(p)}
+              </option>
+            ))}
           </select>
           <select
             value={eloThreshold}
@@ -134,6 +142,7 @@ export function PokemonReport() {
           synergy={synergy}
           rarity={rarity}
           pool={pool}
+          tier={tier}
           selectedPkm={selectedPkm}
         />
       )}
