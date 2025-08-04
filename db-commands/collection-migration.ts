@@ -153,136 +153,136 @@ export class Collection {
 
         console.log(`Cleaned up legacy fields from ${updated} users`)
     }
-}
+
 
 
     /**
      * Verify migration integrity by comparing old and new formats
      */
     static verifyMigration(userDoc: any): { success: boolean; errors: string[] } {
-    const errors: string[] = []
+        const errors: string[] = []
 
-    if (!userDoc.pokemonCollection) {
-        return { success: true, errors: [] }
+        if (!userDoc.pokemonCollection) {
+            return { success: true, errors: [] }
+        }
+
+        for (const [index, pokemon] of userDoc.pokemonCollection.entries()) {
+            if (!pokemon.unlocked) {
+                errors.push(`Pokemon ${index}: Missing unlocked`)
+                continue
+            }
+
+            // Compare legacy data with optimized data
+            const legacy = {
+                emotions: pokemon.emotions || [],
+                shinyEmotions: pokemon.shinyEmotions || []
+            }
+
+            const { emotions, shinyEmotions } = CollectionUtils.getEmotionsUnlocked(pokemon.unlocked)
+
+            // Check emotions arrays
+            const legacyEmotions = legacy.emotions as Emotion[]
+            const optimizedEmotions = emotions
+            const legacyEmotionsSet = new Set(legacyEmotions)
+            const optimizedEmotionsSet = new Set(optimizedEmotions)
+
+            if (
+                legacyEmotionsSet.size !== optimizedEmotionsSet.size ||
+                !legacyEmotions.every((e) => optimizedEmotionsSet.has(e))
+            ) {
+                errors.push(`Pokemon ${index}: Emotions mismatch`)
+            }
+
+            // Check shiny emotions arrays
+            const legacyShinyEmotions = legacy.shinyEmotions as Emotion[]
+            const optimizedShinyEmotions = shinyEmotions
+            const legacyShinySet = new Set(legacyShinyEmotions)
+            const optimizedShinySet = new Set(optimizedShinyEmotions)
+
+            if (
+                legacyShinySet.size !== optimizedShinySet.size ||
+                !legacyShinyEmotions.every((e) => optimizedShinySet.has(e))
+            ) {
+                errors.push(`Pokemon ${index}: Shiny emotions mismatch`)
+            }
+        }
+
+        return { success: errors.length === 0, errors }
     }
-
-    for (const [index, pokemon] of userDoc.pokemonCollection.entries()) {
-        if (!pokemon.unlocked) {
-            errors.push(`Pokemon ${index}: Missing unlocked`)
-            continue
-        }
-
-        // Compare legacy data with optimized data
-        const legacy = {
-            emotions: pokemon.emotions || [],
-            shinyEmotions: pokemon.shinyEmotions || []
-        }
-
-        const { emotions, shinyEmotions } = CollectionUtils.getEmotionsUnlocked(pokemon.unlocked)
-
-        // Check emotions arrays
-        const legacyEmotions = legacy.emotions as Emotion[]
-        const optimizedEmotions = emotions
-        const legacyEmotionsSet = new Set(legacyEmotions)
-        const optimizedEmotionsSet = new Set(optimizedEmotions)
-
-        if (
-            legacyEmotionsSet.size !== optimizedEmotionsSet.size ||
-            !legacyEmotions.every((e) => optimizedEmotionsSet.has(e))
-        ) {
-            errors.push(`Pokemon ${index}: Emotions mismatch`)
-        }
-
-        // Check shiny emotions arrays
-        const legacyShinyEmotions = legacy.shinyEmotions as Emotion[]
-        const optimizedShinyEmotions = shinyEmotions
-        const legacyShinySet = new Set(legacyShinyEmotions)
-        const optimizedShinySet = new Set(optimizedShinyEmotions)
-
-        if (
-            legacyShinySet.size !== optimizedShinySet.size ||
-            !legacyShinyEmotions.every((e) => optimizedShinySet.has(e))
-        ) {
-            errors.push(`Pokemon ${index}: Shiny emotions mismatch`)
-        }
-    }
-
-    return { success: errors.length === 0, errors }
-}
 
     /**
      * Calculate space savings for a user's collection
      */
     static calculateUserSpaceSavings(userDoc: any): {
-    pokemonCount: number
-    oldSize: number
-    newSize: number
-    savings: number
-    savingsPercent: number
-} {
-    let pokemonCount = 0
-    let totalOldSize = 0
-    let totalNewSize = 0
-
-    function calculateSpaceSavings(avgEmotionsPerPokemon: number = 5): {
+        pokemonCount: number
         oldSize: number
         newSize: number
         savings: number
         savingsPercent: number
     } {
-        const oldNormalSize = avgEmotionsPerPokemon * 8 + 24
-        const oldShinySize = avgEmotionsPerPokemon * 8 + 24
-        const oldSelectedSize = 8 + 1
-        const oldSize = oldNormalSize + oldShinySize + oldSelectedSize
+        let pokemonCount = 0
+        let totalOldSize = 0
+        let totalNewSize = 0
 
-        const newSize = 5
+        function calculateSpaceSavings(avgEmotionsPerPokemon: number = 5): {
+            oldSize: number
+            newSize: number
+            savings: number
+            savingsPercent: number
+        } {
+            const oldNormalSize = avgEmotionsPerPokemon * 8 + 24
+            const oldShinySize = avgEmotionsPerPokemon * 8 + 24
+            const oldSelectedSize = 8 + 1
+            const oldSize = oldNormalSize + oldShinySize + oldSelectedSize
 
-        const savings = oldSize - newSize
-        const savingsPercent = (savings / oldSize) * 100
+            const newSize = 5
 
-        return { oldSize, newSize, savings, savingsPercent }
-    }
+            const savings = oldSize - newSize
+            const savingsPercent = (savings / oldSize) * 100
 
-    if (!userDoc.pokemonCollection) {
+            return { oldSize, newSize, savings, savingsPercent }
+        }
+
+        if (!userDoc.pokemonCollection) {
+            return {
+                pokemonCount: 0,
+                oldSize: 0,
+                newSize: 0,
+                savings: 0,
+                savingsPercent: 0
+            }
+        }
+
+        for (const [_, pokemon] of userDoc.pokemonCollection.entries()) {
+            pokemonCount++
+
+            const emotionCount = (pokemon.emotions || []).length
+            const shinyEmotionCount = (pokemon.shinyEmotions || []).length
+            const avgEmotions = (emotionCount + shinyEmotionCount) / 2
+
+            const savings = calculateSpaceSavings(avgEmotions)
+            totalOldSize += savings.oldSize
+            totalNewSize += savings.newSize
+        }
+
+        const totalSavings = totalOldSize - totalNewSize
+        const savingsPercent =
+            totalOldSize > 0 ? (totalSavings / totalOldSize) * 100 : 0
+
         return {
-            pokemonCount: 0,
-            oldSize: 0,
-            newSize: 0,
-            savings: 0,
-            savingsPercent: 0
+            pokemonCount,
+            oldSize: totalOldSize,
+            newSize: totalNewSize,
+            savings: totalSavings,
+            savingsPercent
         }
     }
-
-    for (const [_, pokemon] of userDoc.pokemonCollection.entries()) {
-        pokemonCount++
-
-        const emotionCount = (pokemon.emotions || []).length
-        const shinyEmotionCount = (pokemon.shinyEmotions || []).length
-        const avgEmotions = (emotionCount + shinyEmotionCount) / 2
-
-        const savings = calculateSpaceSavings(avgEmotions)
-        totalOldSize += savings.oldSize
-        totalNewSize += savings.newSize
-    }
-
-    const totalSavings = totalOldSize - totalNewSize
-    const savingsPercent =
-        totalOldSize > 0 ? (totalSavings / totalOldSize) * 100 : 0
-
-    return {
-        pokemonCount,
-        oldSize: totalOldSize,
-        newSize: totalNewSize,
-        savings: totalSavings,
-        savingsPercent
-    }
-}
 
     /**
      * Generate migration report
      */
-    static async generateMigrationReport(): Promise < void> {
-    console.log("Generating migration report...")
+    static async generateMigrationReport(): Promise<void> {
+        console.log("Generating migration report...")
 
         const sampleSize = 100
         const users = await UserMetadata.find().limit(sampleSize).exec()
@@ -293,23 +293,23 @@ export class Collection {
         let totalNewSize = 0
         let usersNeedingMigration = 0
 
-        for(const user of users) {
-        totalUsers++
+        for (const user of users) {
+            totalUsers++
 
-        const needsMigration = this.userNeedsMigration(user)
-        if (needsMigration) {
-            usersNeedingMigration++
+            const needsMigration = this.userNeedsMigration(user)
+            if (needsMigration) {
+                usersNeedingMigration++
+            }
+
+            const savings = this.calculateUserSpaceSavings(user)
+            totalPokemon += savings.pokemonCount
+            totalOldSize += savings.oldSize
+            totalNewSize += savings.newSize
         }
-
-        const savings = this.calculateUserSpaceSavings(user)
-        totalPokemon += savings.pokemonCount
-        totalOldSize += savings.oldSize
-        totalNewSize += savings.newSize
-    }
 
         const totalSavings = totalOldSize - totalNewSize
         const savingsPercent =
-        totalOldSize > 0 ? (totalSavings / totalOldSize) * 100 : 0
+            totalOldSize > 0 ? (totalSavings / totalOldSize) * 100 : 0
 
         console.log("\n=== EMOTION OPTIMIZATION MIGRATION REPORT ===")
         console.log(`Sample size: ${totalUsers} users`)
@@ -330,19 +330,19 @@ export class Collection {
             `\nFor full database, estimated savings: ${((totalSavings / sampleSize) * (await UserMetadata.countDocuments())).toFixed(0)} bytes`
         )
         console.log("============================================\n")
-}
-
-    private static userNeedsMigration(userDoc: any): boolean {
-    if (!userDoc.pokemonCollection) return false
-
-    for (const [_, pokemon] of userDoc.pokemonCollection.entries()) {
-        if (!pokemon.unlocked || pokemon.unlocked.length !== 3) {
-            return true
-        }
     }
 
-    return false
-}
+    private static userNeedsMigration(userDoc: any): boolean {
+        if (!userDoc.pokemonCollection) return false
+
+        for (const [_, pokemon] of userDoc.pokemonCollection.entries()) {
+            if (!pokemon.unlocked || pokemon.unlocked.length !== 3) {
+                return true
+            }
+        }
+
+        return false
+    }
 }
 
 // CLI interface for running migrations
