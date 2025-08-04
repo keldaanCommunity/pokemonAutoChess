@@ -1016,7 +1016,6 @@ export default class GameRoom extends Room<GameState> {
       pokemon.positionY = 0
       if (anim === "fishing") {
         pokemon.action = PokemonActionState.FISH
-        console.log(`Spawning ${pokemon.name} on bench with fishing animation`)
       }
 
       player.board.set(pokemon.id, pokemon)
