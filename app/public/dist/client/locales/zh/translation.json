@@ -2153,7 +2153,7 @@
 		"CURSE_OF_VULNERABILITY": "DEF与SPE_DEF之和最高的敌方宝可梦降低这两项数值各5点，并陷入FLINCH。",
 		"CURSE_OF_WEAKNESS": "除之前等级的效果外，ATK最高的敌方宝可梦也降低25%的ATK，并陷入PARALYSIS。",
 		"CURSE_OF_TORMENT": "除之前等级的效果外，AP最高的敌方宝可梦也降低50%的AP，并陷入FATIGUE。",
-		"CURSE_OF_FATE": "除之前等级的效果外，STRONGEST敌方宝可梦陷入CURSE，将在7秒后直接倒下。",
+		"CURSE_OF_FATE": "除之前等级的效果外，STRONGEST敌方宝可梦陷入CURSE，将在8秒后直接倒下。",
 		"AROMATIC_MIST": "追加伤害和反震伤害为20%的SPECIAL。",
 		"FAIRY_WIND": "追加伤害和反震伤害为40%的SPECIAL。",
 		"STRANGE_STEAM": "追加伤害和反震伤害为60%的SPECIAL。",

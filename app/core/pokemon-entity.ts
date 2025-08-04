@@ -1071,7 +1071,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
                     board,
                     AttackType.PHYSICAL,
                     this,
-                    chance(this.critChance, this)
+                    chance(this.critChance, this),
+                    false
                   )
                 }
               }, 1000)

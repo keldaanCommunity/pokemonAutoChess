@@ -1539,7 +1539,7 @@
 		"CURSE_OF_VULNERABILITY": "A unidade adversária com maior DEF + SPE_DEF perde 5 e é FLINCH",
 		"CURSE_OF_WEAKNESS": "Além disso, a unidade adversária com o maior ATK perde 25% dele e fica PARALYSIS",
 		"CURSE_OF_TORMENT": "Além disso, a unidade adversária com o maior AP perde 50% dele e é FATIGUE",
-		"CURSE_OF_FATE": "Além disso, a unidade adversária mais forte é CURSE e será KO após 7 segundos",
+		"CURSE_OF_FATE": "Além disso, a unidade adversária mais forte é CURSE e será KO após 8 segundos",
 		"AROMATIC_MIST": "20% SPECIAL adicional para ataques e choques",
 		"FAIRY_WIND": "40% SPECIAL adicional para ataques e choques",
 		"STRANGE_STEAM": "60% SPECIAL adicional para ataques e choques",

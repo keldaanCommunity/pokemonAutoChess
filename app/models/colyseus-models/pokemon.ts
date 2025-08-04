@@ -9689,7 +9689,7 @@ export class Dipplin extends Pokemon {
   speed = 31
   def = 8
   speDef = 8
-  maxPP = 80
+  maxPP = 60
   range = 3
   skill = Ability.SYRUP_BOMB
   passive = Passive.DIPPLIN
@@ -13959,7 +13959,7 @@ export class Deerling extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.AROMATHERAPY
+  skill = Ability.HORN_LEECH
 }
 
 export class Sawsbuck extends Pokemon {
@@ -13974,7 +13974,7 @@ export class Sawsbuck extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.AROMATHERAPY
+  skill = Ability.HORN_LEECH
 }
 
 export class Patrat extends Pokemon {
@@ -17745,7 +17745,7 @@ export class Cottonee extends Pokemon {
   hp = 60
   atk = 5
   speed = 74
-  def = 3
+  def = 4
   speDef = 1
   maxPP = 80
   range = 2
@@ -17757,10 +17757,10 @@ export class Whimsicott extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FAIRY])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 120
+  hp = 130
   atk = 11
   speed = 74
-  def = 7
+  def = 9
   speDef = 5
   maxPP = 80
   range = 2

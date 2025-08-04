@@ -1247,7 +1247,7 @@
 		"CURSE_OF_VULNERABILITY": "De vijand met de hoogste DEF + SPE_DEF verliest er 5 en is FLINCH",
 		"CURSE_OF_WEAKNESS": "Ook verliest de vijand met de hoogste ATK 25% ervan en is PARALYSIS",
 		"CURSE_OF_TORMENT": "Ook verliest de vijand met de hoogste AP 50% ervan en is FATIGUE",
-		"CURSE_OF_FATE": "De sterkste eenheid van de tegenstander is CURSE en wordt KO na 7 seconden.",
+		"CURSE_OF_FATE": "De sterkste eenheid van de tegenstander is CURSE en wordt KO na 8 seconden.",
 		"AROMATIC_MIST": "20% extra SPECIAL voor aanvallen en schokken",
 		"FAIRY_WIND": "40% extra SPECIAL voor aanvallen en schokken",
 		"STRANGE_STEAM": "60% extra SPECIAL voor aanvallen en schokken",
