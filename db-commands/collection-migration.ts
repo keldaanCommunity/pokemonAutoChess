@@ -132,7 +132,6 @@ export class Collection {
                     }
 
                     if (hasLegacyFields) {
-                        console.log("unsetOperations:", unsetOperations)
                         await UserMetadata.updateOne(
                             { _id: user._id },
                             { $unset: unsetOperations }
