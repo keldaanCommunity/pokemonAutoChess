@@ -492,7 +492,8 @@
 		"MAGNET_PULL": "磁力",
 		"SPIN_OUT": "疾速转轮",
 		"ULTRA_THRUSTERS": "究极推进器",
-		"ELECTRO_BALL": "电球"
+		"ELECTRO_BALL": "电球",
+		"HORN_LEECH": "木角"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1961,7 +1962,8 @@
 		"MAGNET_PULL": "吸引一只随机STEEL宝可梦前来战场。在其离开前点击之以将其加入备战区。",
 		"SPIN_OUT": "漂移至我方后排，对目标造成SPECIAL，数值相当于自身[25,50,100,SP]%的SPEED，并使其陷入BLINDED 1秒。使用者失去所有来自加速的SPEED增幅。",
 		"ULTRA_THRUSTERS": "对相邻敌方宝可梦造成[50,100,200,SP]点SPECIAL，并使他们陷入BURN 3秒，同时使用者快速向后移动至安全的位置。",
-		"ELECTRO_BALL": "发射一枚在敌方宝可梦之间弹射的电球，每次弹射造成[10,20,40,SP]点SPECIAL。使用者的SPEED决定电球的飞行速度和弹射次数。"
+		"ELECTRO_BALL": "发射一枚在敌方宝可梦之间弹射的电球，每次弹射造成[10,20,40,SP]点SPECIAL。使用者的SPEED决定电球的飞行速度和弹射次数。",
+		"HORN_LEECH": "吸取目标的养分，对其造成SPECIAL，数值相当于使用者[200,SP]%的ATK使用者自身恢复造成伤害量的50%。溢出治疗量的50%转化为SHIELD。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2147,9 +2149,9 @@
 		"GLOOM_FLOWER": "召唤臭臭花。",
 		"VILE_FLOWER": "召唤霸王花。",
 		"SUN_FLOWER": "召唤美丽花。",
-		"BATTLE_ARMOR": "提升10点DEF，降低30%所受的CRIT_POWER。天气变化时，收集一块天气岩石。",
-		"MOUTAIN_RESISTANCE": "提升30点DEF，降低50%所受的CRIT_POWER。天气变化时能够收集的天气岩石上限增加至2。",
-		"DIAMOND_STORM": "提升60点DEF，降低70%所受的CRIT_POWER。天气变化时能够收集的天气岩石上限增加至3。",
+		"BATTLE_ARMOR": "提升10点DEF，降低30%所受的物理CRIT_POWER。天气变化时，收集一块天气岩石。",
+		"MOUTAIN_RESISTANCE": "提升30点DEF，降低50%所受的物理CRIT_POWER。天气变化时能够收集的天气岩石上限增加至2。",
+		"DIAMOND_STORM": "提升60点DEF，降低70%所受的物理CRIT_POWER。天气变化时能够收集的天气岩石上限增加至3。",
 		"CURSE_OF_VULNERABILITY": "DEF与SPE_DEF之和最高的敌方宝可梦降低这两项数值各5点，并陷入FLINCH。",
 		"CURSE_OF_WEAKNESS": "除之前等级的效果外，ATK最高的敌方宝可梦也降低25%的ATK，并陷入PARALYSIS。",
 		"CURSE_OF_TORMENT": "除之前等级的效果外，AP最高的敌方宝可梦也降低50%的AP，并陷入FATIGUE。",
@@ -2449,7 +2451,7 @@
 		"POKE_DOLL": "所有受到的PHYSICAL或SPECIAL减免30%",
 		"RED_ORB": "攻击伤害的25%改为TRUE",
 		"MAX_REVIVE": "携带者获得RESURECTION，免疫第一次击倒并会恢复至最大HP",
-		"ROCKY_HELMET": "提升25点DEF，且被暴击时不会受到额外的暴击伤害。",
+		"ROCKY_HELMET": "提升25点DEF，且被暴击时不会受到任何形式的额外的暴击伤害。",
 		"AGUAV_BERRY": "HP低于50%时消耗此道具，恢复50% HP，但陷入CONFUSION 3秒",
 		"APICOT_BERRY": "HP低于50%时消耗此道具，恢复50点HP，并提升20点SPE_DEF",
 		"ASPEAR_BERRY": "HP低于50%或陷入FREEZE时消耗此道具，恢复50点HP，提升15点SPEED，且在本场战斗剩余时间中免疫FREEZE",
@@ -2588,7 +2590,7 @@
 		"RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "一枚吉利蛋育蛋铺出售的宝可梦的蛋",
 		"AMULET_COIN": "携带者每次击倒敌方宝可梦，玩家获得1 GOLD。利息收入上限-1。",
-		"GIMMIGHOUL_COIN": "利息收入上限+1。",
+		"GIMMIGHOUL_COIN": "拾取时立即获得3 GOLD。利息收入上限+1。",
 		"EXCHANGE_TICKET": "将备战区内的一个道具组件或一件合成道具交换为随机同类道具。一次性使用。",
 		"TREASURE_BOX": "里面有什么呢……？",
 		"AUSPICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着祝贺的感情。",
@@ -2831,7 +2833,7 @@
 		"ARMOR_BREAK": "降低50%的有效DEF和SPE_DEF。",
 		"CHARM": "无法攻击目标，且会强制朝其移动。",
 		"FLINCH": "所受伤害的50%无视SHIELD。",
-		"CURSE": "在一段时间后，直接击倒被诅咒的宝可梦。",
+		"CURSE": "在一段时间后，直接击倒被诅咒的宝可梦。该延迟时间可以因对方的AQUATIC共鸣而延长。",
 		"RUNE_PROTECT": "防止状态变化。",
 		"POSSESSED": "暂时为对方队伍战斗。若目标为唯一剩余的敌方宝可梦，则变为CHARM。",
 		"LOCKED": "无法移动，且RANGE被设置为1。",
@@ -2894,7 +2896,7 @@
 		"BUG": "战斗开始时，复制我方STRONGEST BUG宝可梦。",
 		"FLYING": "FLYING宝可梦在HP低于阈值时会飞离，除非他们处于PARALYSIS，FREEZE，LOCKED或SLEEP。",
 		"FLORA": "当第一只FLORA宝可梦倒下时，根据共鸣等级召唤对应的特殊FLORA宝可梦。其会随后从每个倒下的我方FLORA宝可梦处各获得一个随机道具。",
-		"ROCK": "ROCK宝可梦能提升DEF，抵抗暴击以及适应天气。",
+		"ROCK": "ROCK宝可梦能提升DEF，抵抗暴击普攻以及适应天气。",
 		"GHOST": "GHOST宝可梦能向敌方宝可梦施加多种多样的诅咒。GHOST共鸣存在时，GHOST宝可梦有[15,LK]%的概率闪避攻击，且击中目标时有相同概率使其陷入SILENCE。",
 		"FAIRY": "FAIRY宝可梦的攻击能额外造成SPECIAL，且受到暴击时会触发反震，反击30%所受的伤害。",
 		"ICE": "ICE宝可梦击中目标后有概率使敌方宝可梦陷入FREEZE 2秒，并为全队提升SPE_DEF。",
@@ -3938,7 +3940,7 @@
 		"instructions": "在胜利之路上竞速冲向终点！",
 		"help1": "玩排位赛会基于最终名次获得胜利之路分数。",
 		"help2": "第一个集满500分的玩家会赢得竞速，首次获胜还有专属头衔解锁！",
-		"reset_info": "每月第一天的午夜12点（UTC）重置所有分数。",
+		"reset_info": "每月第一天的午夜12点（UTC）重置所有分数，当前距离重置还有{{resetCountdown}}。活动排行榜每10分钟刷新一次。",
 		"runners": "参赛选手",
 		"finishers": "已完赛选手"
 	}
