@@ -1612,7 +1612,6 @@
 		"GRACIDEA_FLOWER": "グラシデアの花",
 		"FLAME_ORB": "かえんだま",
 		"ASSAULT_VEST": "とつげきチョッキ",
-		"AMULET_COIN": "おまもりこばん",
 		"POKE_DOLL": "ピッピにんぎょう",
 		"RED_ORB": "べにいろのたま",
 		"MAX_REVIVE": "げんきのかたまり",
@@ -1677,7 +1676,8 @@
 		"WELLSPRING_MASK": "いどのめん",
 		"CORNERSTONE_MASK": "いしずえのめん",
 		"HEARTHFLAME_MASK": "かまどのめん",
-		"BERRY_JUICE": "きのみジュース"
+		"BERRY_JUICE": "きのみジュース",
+		"AMULET_COIN": "おまもりこばん"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "先史時代に生きていたポケモンの化石",
@@ -1727,11 +1727,11 @@
 		"GRACIDEA_FLOWER": "戦闘が始まると、所有者と同じ列の隣接する味方のSPEEDが+20%増加します",
 		"FLAME_ORB": "ホルダーは火傷しますが、攻撃力が100％増加します",
 		"ASSAULT_VEST": "+40 SPE_DEF。 BURN と POISONNED のダメージを50%軽減",
-		"AMULET_COIN": "ホルダーが敵を倒すたびに +1 ゴールド",
 		"POKE_DOLL": "入ってくるすべてのPHYSICALとSPECIALを30%削減",
 		"RED_ORB": "+10攻撃力。攻撃ダメージの25%がTRUEとして与えられる",
 		"MAX_REVIVE": "RESURECTIONを与え、ホルダーの最初のKOを防ぎ、最大HPまで回復します",
-		"ROCKY_HELMET": "防御力+25クリティカルヒットによるクリティカルボーナスダメージを無効化します。"
+		"ROCKY_HELMET": "防御力+25クリティカルヒットによるクリティカルボーナスダメージを無効化します。",
+		"AMULET_COIN": "ホルダーが敵を倒すたびに +1 ゴールド"
 	},
 	"passive_description": {
 		"NONE": "パッシブなし",

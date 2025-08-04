@@ -1,4 +1,4 @@
-> June 29, 2025
+> August 4, 2025
 
 # Patch 6.4: Victory Road
 
