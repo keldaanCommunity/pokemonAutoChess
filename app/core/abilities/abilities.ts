@@ -12820,9 +12820,9 @@ export class EncoreStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const abilitiesCasted = (
-      pokemon.refToBoardPokemon as IPokemon & { abilitiesCasted: Ability[] }
+      pokemon.refToBoardPokemon as IPokemon & { abilitiesCasted?: Ability[] }
     ).abilitiesCasted
-    const lastAbilityUsed = abilitiesCasted.findLast(
+    const lastAbilityUsed = abilitiesCasted?.findLast(
       (ability) =>
         ability !== Ability.ENCORE && AbilityStrategies[ability]?.copyable
     )
