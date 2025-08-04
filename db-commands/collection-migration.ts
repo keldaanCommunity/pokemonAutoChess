@@ -103,54 +103,57 @@ export class Collection {
     ): Promise<void> {
         console.log(`Starting legacy field cleanup (dryRun: ${dryRun})`)
 
-        if (!dryRun) {
-            // Since pokemonCollection is a Map (object), we need to process each user individually
-            let processed = 0
-            let updated = 0
-            const batchSize = 100
-            const totalUsers = await UserMetadata.countDocuments()
+        // Since pokemonCollection is a Map (object), we need to process each user individually
+        let processed = 0
+        let updated = 0
+        const batchSize = 100
+        const totalUsers = await UserMetadata.countDocuments()
 
-            for (let skip = 0; skip < totalUsers; skip += batchSize) {
-                const users = await UserMetadata.find({}).skip(skip).limit(batchSize).exec()
+        for (let skip = 0; skip < totalUsers; skip += batchSize) {
+            const users = await UserMetadata.find({}).skip(skip).limit(batchSize).exec()
 
-                for (const user of users) {
-                    processed++
-                    let hasLegacyFields = false
+            for (const user of users) {
+                processed++
+                let hasLegacyFields = false
 
-                    const unsetOperations = {}
+                const unsetOperations = {}
 
-                    // Check if any pokemon in the collection has legacy fields
-                    for (const [pokemonId, pokemon] of user.pokemonCollection) {
-                        const pokemonDoc = pokemon as any // Cast to any to access legacy fields
-                        if (pokemonDoc.get("emotions") || pokemonDoc.get("shinyEmotions")) {
-                            hasLegacyFields = true
+                // Check if any pokemon in the collection has legacy fields
+                for (const [pokemonId, pokemon] of user.pokemonCollection) {
+                    const pokemonDoc = pokemon as any // Cast to any to access legacy fields
+                    if (pokemonDoc.get("emotions") || pokemonDoc.get("shinyEmotions")) {
+                        hasLegacyFields = true
 
-                            // Remove legacy fields from this pokemon
-                            unsetOperations[`pokemonCollection.${pokemonId}.emotions`] = ""
-                            unsetOperations[`pokemonCollection.${pokemonId}.shinyEmotions`] = ""
-                        }
+                        // Remove legacy fields from this pokemon
+                        unsetOperations[`pokemonCollection.${pokemonId}.emotions`] = ""
+                        unsetOperations[`pokemonCollection.${pokemonId}.shinyEmotions`] = ""
                     }
+                }
 
-                    if (hasLegacyFields) {
+                if (hasLegacyFields) {
+                    if (!dryRun) {
                         await UserMetadata.updateOne(
                             { _id: user._id },
                             { $unset: unsetOperations }
                         )
-                        updated++
-                        console.log(`✅ Cleaned legacy fields from user ${user.uid}`)
+                    } else {
+                        console.log(
+                            `🔍 Would clean legacy fields from user ${user.uid} (${user.displayName})`
+                        )
                     }
+                    updated++
+                    console.log(`✅ Cleaned legacy fields from user ${user.uid}`)
+                }
 
-                    if (processed % 100 === 0) {
-                        console.log(`Progress: ${processed}/${totalUsers} users processed, ${updated} updated`)
-                    }
+                if (processed % 100 === 0) {
+                    console.log(`Progress: ${processed}/${totalUsers} users processed, ${updated} updated`)
                 }
             }
-
-            console.log(`Cleaned up legacy fields from ${updated} users`)
-        } else {
-            console.log("Would clean up legacy fields from all users")
         }
+
+        console.log(`Cleaned up legacy fields from ${updated} users`)
     }
+
 
     /**
      * Verify migration integrity by comparing old and new formats
