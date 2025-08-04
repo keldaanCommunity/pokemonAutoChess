@@ -18,7 +18,6 @@ import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import History from "../models/mongo-models/history"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
@@ -696,14 +695,6 @@ export default class GameRoom extends Room<GameState> {
       const players: ISimplePlayer[] = [...humans, ...bots].map((p) =>
         this.transformToSimplePlayer(p)
       )
-
-      History.create({
-        id: this.state.preparationId,
-        name: this.state.name,
-        startTime: this.state.startTime,
-        endTime: this.state.endTime,
-        players: humans.map((p) => this.transformToSimplePlayer(p))
-      })
 
       if (this.state.stageLevel >= MinStageForGameToCount) {
         const elligibleToXP = this.state.players.size >= 2

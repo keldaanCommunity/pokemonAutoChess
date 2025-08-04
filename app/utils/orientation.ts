@@ -1,4 +1,4 @@
-import Board, { Cell } from "../core/board"
+import { Board, Cell } from "../core/board"
 import { PokemonEntity } from "../core/pokemon-entity"
 import { Orientation } from "../types/enum/Game"
 
