@@ -67,7 +67,7 @@ const initialState: GameStateStore = {
   currentTeam: Team.BLUE_TEAM,
   money: 5,
   interest: 0,
-  maxInterest: 50,
+  maxInterest: 5,
   streak: 0,
   shopFreeRolls: 0,
   shopLocked: false,
