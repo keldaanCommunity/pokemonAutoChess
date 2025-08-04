@@ -48,7 +48,8 @@ export class Collection {
      */
     static async migrateAllUsers(
         batchSize: number = 100,
-        dryRun: boolean = true
+        dryRun: boolean = true,
+        sampleSize?: number
     ): Promise<void> {
         console.log(`Starting emotion migration (dryRun: ${dryRun})`)
 
@@ -57,9 +58,15 @@ export class Collection {
         let skip = 0
 
         const totalUsers = await UserMetadata.countDocuments()
-        console.log(`Total users to process: ${totalUsers}`)
+        const maxUsers = sampleSize || totalUsers
+        if (sampleSize) {
+            console.log(`Sample size set to: ${sampleSize} ; Total users to process: ${totalUsers}`)
+            batchSize = Math.min(batchSize, sampleSize)
+        } else {
+            console.log(`Total users to process: ${totalUsers}`)
+        }
 
-        while (skip < totalUsers) {
+        while (skip < maxUsers) {
             const users = await UserMetadata.find({}).skip(skip).limit(batchSize).exec()
 
             for (const user of users) {
@@ -103,55 +110,58 @@ export class Collection {
     ): Promise<void> {
         console.log(`Starting legacy field cleanup (dryRun: ${dryRun})`)
 
-        if (!dryRun) {
-            // Since pokemonCollection is a Map (object), we need to process each user individually
-            let processed = 0
-            let updated = 0
-            const batchSize = 100
-            const totalUsers = await UserMetadata.countDocuments()
+        // Since pokemonCollection is a Map (object), we need to process each user individually
+        let processed = 0
+        let updated = 0
+        const batchSize = 100
+        const totalUsers = await UserMetadata.countDocuments()
 
-            for (let skip = 0; skip < totalUsers; skip += batchSize) {
-                const users = await UserMetadata.find({}).skip(skip).limit(batchSize).exec()
+        for (let skip = 0; skip < totalUsers; skip += batchSize) {
+            const users = await UserMetadata.find({}).skip(skip).limit(batchSize).exec()
 
-                for (const user of users) {
-                    processed++
-                    let hasLegacyFields = false
+            for (const user of users) {
+                processed++
+                let hasLegacyFields = false
 
-                    const unsetOperations = {}
+                const unsetOperations = {}
 
-                    // Check if any pokemon in the collection has legacy fields
-                    for (const [pokemonId, pokemon] of user.pokemonCollection) {
-                        const pokemonDoc = pokemon as any // Cast to any to access legacy fields
-                        if (pokemonDoc.get("emotions") || pokemonDoc.get("shinyEmotions")) {
-                            hasLegacyFields = true
+                // Check if any pokemon in the collection has legacy fields
+                for (const [pokemonId, pokemon] of user.pokemonCollection) {
+                    const pokemonDoc = pokemon as any // Cast to any to access legacy fields
+                    if (pokemonDoc.get("emotions") || pokemonDoc.get("shinyEmotions")) {
+                        hasLegacyFields = true
 
-                            // Remove legacy fields from this pokemon
-                            unsetOperations[`pokemonCollection.${pokemonId}.emotions`] = ""
-                            unsetOperations[`pokemonCollection.${pokemonId}.shinyEmotions`] = ""
-                        }
+                        // Remove legacy fields from this pokemon
+                        unsetOperations[`pokemonCollection.${pokemonId}.emotions`] = ""
+                        unsetOperations[`pokemonCollection.${pokemonId}.shinyEmotions`] = ""
                     }
+                }
 
-                    if (hasLegacyFields) {
-                        console.log("unsetOperations:", unsetOperations)
+                if (hasLegacyFields) {
+                    if (!dryRun) {
                         await UserMetadata.updateOne(
                             { _id: user._id },
                             { $unset: unsetOperations }
                         )
-                        updated++
-                        console.log(`✅ Cleaned legacy fields from user ${user.uid}`)
+                    } else {
+                        console.log(
+                            `🔍 Would clean legacy fields from user ${user.uid} (${user.displayName})`
+                        )
                     }
+                    updated++
+                    console.log(`✅ Cleaned legacy fields from user ${user.uid}`)
+                }
 
-                    if (processed % 100 === 0) {
-                        console.log(`Progress: ${processed}/${totalUsers} users processed, ${updated} updated`)
-                    }
+                if (processed % 100 === 0) {
+                    console.log(`Progress: ${processed}/${totalUsers} users processed, ${updated} updated`)
                 }
             }
-
-            console.log(`Cleaned up legacy fields from ${updated} users`)
-        } else {
-            console.log("Would clean up legacy fields from all users")
         }
+
+        console.log(`Cleaned up legacy fields from ${updated} users`)
     }
+
+
 
     /**
      * Verify migration integrity by comparing old and new formats
@@ -346,20 +356,23 @@ export class Collection {
 if (require.main === module) {
     const command = process.argv[2]
     const dryRun = process.argv.includes("--dry-run")
+    // Retrieve sample size from command line args: --limit=500
+    const limitArg = process.argv.find(arg => arg.startsWith("--limit="))
+    const sampleSize = limitArg ? parseInt(limitArg.split("=")[1], 10) : undefined
 
     connect(process.env.MONGO_URI!)
 
     switch (command) {
         case "report":
-            Collection.generateMigrationReport()
+            Collection.generateMigrationReport().then(() => process.exit(0))
             break
 
         case "migrate":
-            Collection.migrateAllUsers(100, dryRun)
+            Collection.migrateAllUsers(100, dryRun, sampleSize).then(() => process.exit(0))
             break
 
         case "cleanup":
-            Collection.cleanupLegacyFields(dryRun)
+            Collection.cleanupLegacyFields(dryRun).then(() => process.exit(0))
             break
 
         default:
@@ -368,7 +381,8 @@ if (require.main === module) {
                 "  npm run collection-migration report    - Generate migration report"
             )
             console.log(
-                "  npm run collection-migration migrate [--dry-run] - Migrate users"
+                "  npm run collection-migration migrate [--dry-run] - Migrate users",
+                "  npm run collection-migration migrate --limit=100 [--dry-run] - Migrate 100 users"
             )
             console.log(
                 "  npm run collection-migration cleanup [--dry-run] - Remove legacy fields"

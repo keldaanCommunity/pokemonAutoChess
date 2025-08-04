@@ -95,6 +95,7 @@
 
 - New town encounter: Meowth, which propose amulet coins in carousel at stage 4. Amulet coins now reduce max interest by 20 gold.
 - Duskull can now be encountered at stage 4 in town instead of stage 12. Gimmighoul coins now give 3 gold when obtained.
+- Aquatic now increases Curse delay by 30%/60%/90%/90%.
 
 # UI
 
