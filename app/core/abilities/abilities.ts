@@ -7631,7 +7631,7 @@ export class CurseStrategy extends AbilityStrategy {
         (1 - (factor * pokemon.ap) / 100) *
         (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
       )
-      cursedEnemy.status.triggerCurse(curseDelay)
+      cursedEnemy.status.triggerCurse(curseDelay, cursedEnemy)
     }
   }
 }
