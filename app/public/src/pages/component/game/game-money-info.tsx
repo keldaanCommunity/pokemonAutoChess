@@ -22,7 +22,7 @@ export function GameMoneyInfo() {
         </Tooltip>
         <Money
           value={currentPlayer.money}
-          className={cc({ "is-max": currentPlayer.money >= maxInterest })}
+          className={cc({ "is-max": currentPlayer.money >= maxInterest * 10 })}
         />
       </div>
     </div>
