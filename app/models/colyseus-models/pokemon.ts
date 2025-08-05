@@ -9618,20 +9618,16 @@ export class Silvally extends Pokemon {
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
     if (y === 0) {
-      values(this.items).filter((item) =>
-        (SynergyItems as ReadonlyArray<Item>).forEach((synergyItem) => {
-          this.removeItem(synergyItem, player)
-          player.items.push(synergyItem)
-        })
-      )
+      values(this.items).filter((item) => (SynergyItems as ReadonlyArray<Item>).includes(item)).forEach((synergyItem) => {
+        this.removeItem(synergyItem, player)
+        player.items.push(synergyItem)
+      })
     }
   }
   onItemRemoved(item: Item, player: Player) {
     if (
       (SynergyItems as ReadonlyArray<Item>).includes(item) &&
-      values(this.items).filter((item) =>
-        (SynergyItems as ReadonlyArray<Item>).includes(item)
-      ).length === 0
+      values(this.items).filter((item) => (SynergyItems as ReadonlyArray<Item>).includes(item)).length === 0
     ) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
