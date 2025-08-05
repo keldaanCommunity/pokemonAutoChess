@@ -252,6 +252,10 @@ export default class Design {
 }
 
 export function initTilemap(mapName: DungeonPMDO): DesignTiled {
+  if (!mapName) {
+    logger.error("Invalid map name provided to initTilemap", { mapName });
+    throw new Error("Invalid map name provided to initTilemap");
+  }
   const design = new Design(mapName, 5, 0.1)
   design.create()
   const tilemap = design.exportToTiled()

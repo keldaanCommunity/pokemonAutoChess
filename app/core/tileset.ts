@@ -58,6 +58,10 @@ export default class Tileset {
 
   constructor(id: DungeonPMDO) {
     this.id = id
+    if (!id) {
+      logger.error("Invalid dungeon ID provided to Tileset constructor", { id });
+      throw new Error("Invalid dungeon ID provided to Tileset constructor");
+    }
     this.metadata = readJsonSync(`${src}/${this.id}/metadata.json`)
   }
 
