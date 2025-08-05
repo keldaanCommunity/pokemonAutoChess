@@ -393,6 +393,7 @@ export default config({
         if (!userAuth) return
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
+        res.set("Cache-Control", "no-cache")
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
         logger.error("Error fetching profile", error)
