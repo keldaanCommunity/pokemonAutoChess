@@ -693,10 +693,11 @@ export class OnDragDropItemCommand extends Command<
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
-    if (NonHoldableItems.includes(item)) {
+    if (pokemon.items.has(item) && NonHoldableItems.includes(item)) {
       // if the item is not holdable, we immediately remove it from the pokemon items
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
+      player.items.push(item)
     }
 
     player.updateSynergies()
