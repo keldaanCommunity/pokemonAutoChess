@@ -10,7 +10,7 @@ import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { distanceC } from "../../utils/distance"
-import { min } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
@@ -623,7 +623,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
-      const ppRegained = Math.round(0.2 * pokemon.maxPP + 2 * pokemon.count.ult)
+      const ppRegained = max(pokemon.maxPP - 10)(Math.round(0.2 * pokemon.maxPP + 2 * pokemon.count.ult))
       pokemon.addPP(ppRegained, pokemon, 0, false)
     })
   ],
