@@ -3875,7 +3875,7 @@
 		"berry_tree": "Vous jouez Plante ? N'oubliez pas de prendre soin de vos arbres à baies près de votre personnage.",
 		"spriters": "Beaucoup d'animations du jeu sont l'œuvre d'artistes indépendants. Certains travaillent sur commande, vous pouvez donc les sponsoriser. Plus d'infos sur Discord.",
 		"wiki": "Ce jeu dispose d'un wiki complet accessible depuis le menu latéral, ne passez pas à côté !",
-		"avatar": "Pour changer votre avatar de joueur, jouez quelques parties pour gagner de l'XP et monter en niveau. Chaque niveau vous fait gagner un booster qui une fois ouvert vous donne des fragments de Pokémon qui peuvent être dépensés dans le menu Collection pour acheter de nouveaux avatars."
+		"avatar": "Pour changer votre avatar de joueur, jouez quelques parties pour gagner de l'XP et monter en niveau. Chaque niveau vous fait gagner un booster qui une fois ouvert vous donne des avatars de Pokémon que vous pouvez choisir dans le menu Collection."
 	},
 	"wiki": {
 		"data_description": "Diverses données autour du jeu pour les geeks",
