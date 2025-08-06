@@ -2581,7 +2581,7 @@
 		"WorldAbyss2": "Abismo do Mundo",
 		"WyvernHill": "Colina Wyvern"
 	},
-	"held_items": "Objetos Equipados",
+	"held_items": "Itens segurados",
 	"by_average_held_items": "pela média de itens segurados",
 	"role": {
 		"ADMIN": "Criador",
@@ -2598,7 +2598,7 @@
 		"PREMIER_BALL": "Premier Ball",
 		"QUICK_BALL": "Quick Ball",
 		"POKE_BALL": "Poké Ball",
-		"SUPER_BALL": "Super Ball",
+		"SUPER_BALL": "Great Ball",
 		"ULTRA_BALL": "Ultra Ball",
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
@@ -2613,15 +2613,15 @@
 	"blacklisted": "Você foi expulso desta partida",
 	"npc_dialog": {
 		"welcome": "Bem-vindo !",
-		"tell_price": "{{price}} GOLD para cada !",
-		"thank_you": "OBRIGADO !"
+		"tell_price": "{{price}} de OURO para cada!",
+		"thank_you": "OBRIGADO!"
 	},
 	"scribble": {
-		"EVERYONE_IS_HERE": "Todos estão presentes !",
+		"EVERYONE_IS_HERE": "Todos estão presentes!",
 		"UNIQUE_STARTER": "Inicial Único",
-		"OMELETTE_COOK": "Cozinheiro de Omeletes",
-		"DITTO_PARTY": "Festa dos Dittos",
-		"GOTTA_CATCH_EM_ALL": "Temos que pegar !",
+		"OMELETTE_COOK": "Cozinheiro de Omelete",
+		"DITTO_PARTY": "Festa dos Ditto",
+		"GOTTA_CATCH_EM_ALL": "Temos que pegar!",
 		"BUYER_FEVER": "Febre de compras",
 		"TECHNOLOGIC": "Tecnológico",
 		"CROWDED": "Tabuleiro Cheio",
@@ -2663,7 +2663,7 @@
 		"MAROWAK": "Marowak torna a próxima luta PvE mais difícil",
 		"WOBBUFFET": "O Wobbuffet permite que você recicle um componente de item não equipado ou um item criado",
 		"SPINDA": "Spinda muda a direção de rotação do carrossel aleatoriamente",
-		"REGIROCK": "Regirock concede a todos os jogadores 15 Pontos de Vida adicionais",
+		"REGIROCK": "Regirock concede a todos os jogadores 15 pontos de HP adicionais",
 		"MUNCHLAX": "Munchlax trouxe um PICNIC_SET para todo mundo",
 		"SABLEYE": "Sableye pode vir e tentar roubar um dos seus itens não equipados",
 		"CELEBI": "Celebi prevê que a próxima luta PvE será shiny"
@@ -2710,7 +2710,7 @@
 		"USER_RANK_TOO_LOW": "Seu ranque não é suficiente para participar nessa sala",
 		"USER_NOT_AUTHENTICATED": "Por favor, faça login novamente",
 		"USER_TIMEOUT": "Você recentemente deixou um jogo antes do fim, então é necessário aguardar 5 minutos antes de entrar em um novo jogo.",
-		"USER_IN_ANOTHER_GAME": "Você já esta jogando outro partida, volte a pagina inicial e reconecte",
+		"USER_IN_ANOTHER_GAME": "Você já esta jogando outro partida, volte a página inicial e reconecte",
 		"ROOM_FULL": "Sala cheia",
 		"ROOM_EMPTY": "Esta sala foi removida devido a falta de jogadores",
 		"ROOM_DELETED": "Esta sala foi excluída",
@@ -2721,7 +2721,7 @@
 		"CONNECTION_FAILED": "Reconexão falhou. Tente atualizar a página. "
 	},
 	"pokeguessr": {
-		"whosthatpokemon": "Qual é esse pokemon ?",
+		"whosthatpokemon": "Quem é esse Pokémon?",
 		"itssolution": "É um $t(pkm.{{pokemon}}) !",
 		"attempts": "Tentativas: {{count}}",
 		"guess": "Adivinhar",
