@@ -174,26 +174,14 @@ export class Pokemon extends Schema implements IPokemon {
   onChangePosition(x: number, y: number, player: Player, state?: GameState) {
     // called after manually changing position of the pokemon on board
     if (y === 0) {
-      // moved to bench
-      this.items.forEach((item) => {
-        if (
-          item === Item.CHEF_HAT ||
+      const itemsToRemove = values(this.items).filter(item => {
+        return item === Item.CHEF_HAT ||
           item === Item.TRASH ||
-          ArtificialItems.includes(item)
-        ) {
-          player.items.push(item)
-          this.removeItem(item, player)
-        }
+          ArtificialItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO && item !== Item.RARE_CANDY)
       })
-
-      if (state?.specialGameRule === SpecialGameRule.SLAMINGO) {
-        this.items.forEach((item) => {
-          if (item !== Item.RARE_CANDY) {
-            player.items.push(item)
-            this.removeItem(item, player)
-          }
-        })
-      }
+      this.removeItems(itemsToRemove, player)
+      player.items.push(...itemsToRemove)
     }
   }
 
@@ -278,15 +266,33 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   removeItem(item: Item, player: Player) {
-    this.items.delete(item)
-    if (
-      item in SynergyGivenByItem &&
-      new PokemonClasses[this.name]().types.has(SynergyGivenByItem[item]) ===
-      false
-    ) {
-      this.types.delete(SynergyGivenByItem[item])
+    this.removeItems([item], player)
+  }
+
+  removeItems(items: Item[], player: Player) {
+    /* onItemRemoved effects need to be called after removing all items in case they trigger transformations (Pikachu Surfer, etc.)
+     in order:
+     1) remove items from the pokemon
+     2) check if any synergy should be removed
+     3) call onItemRemoved effects for each item removed
+    */
+    for (const item of items) {
+      this.items.delete(item)
     }
-    this.onItemRemoved(item, player)
+
+    const nativeTypes = new PokemonClasses[this.name]().types
+    for (const item of items) {
+      const synergyRemoved = SynergyGivenByItem[item]
+      const otherSynergyItemsHeld = values(this.items).filter(i => SynergyGivenByItem[i] === synergyRemoved)
+
+      if (synergyRemoved && nativeTypes.has(synergyRemoved) === false && otherSynergyItemsHeld.length === 0) {
+        this.types.delete(synergyRemoved)
+      }
+    }
+
+    for (const item of items) {
+      this.onItemRemoved(item, player)
+    }
   }
 }
 
