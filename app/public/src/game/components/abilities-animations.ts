@@ -1794,7 +1794,10 @@ export const AbilitiesAnimations: {
   [Ability.AFTER_YOU]: poppingIcon({ maxScale: 1, tweenProps: { yoyo: true } }),
 
   [Ability.HYPERSPACE_FURY]: (args) => {
-    const nbHits = Number(args.orientation) // orientation field is used to pass the number of hits for hyperspace fury
+    let nbHits = Number(args.orientation)
+    if (isNaN(nbHits) || nbHits < 1 || nbHits > 12) {
+      nbHits = 4 // default to 4 hits if orientation is not a valid number
+    }
     for (let i = 0; i < nbHits; i++) {
       onTarget({
         scale: 1,

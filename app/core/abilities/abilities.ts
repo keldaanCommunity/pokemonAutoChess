@@ -7201,7 +7201,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const nbHits = 4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    const nbHits = Math.round(4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
     for (let i = 0; i < nbHits; i++) {
       target.addDefense(-1, pokemon, 0, false)
       target.addSpecialDefense(-1, pokemon, 0, false)
@@ -11789,7 +11789,7 @@ export class HornAttackStrategy extends AbilityStrategy {
 
 export class HornLeechStrategy extends AbilityStrategy {
   process(
-     pokemon: PokemonEntity,
+    pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
@@ -11801,7 +11801,7 @@ export class HornLeechStrategy extends AbilityStrategy {
     const heal = Math.round(takenDamage * 0.5)
     const overheal = min(0)(heal - (pokemon.hp - pokemon.life))
     pokemon.handleHeal(heal, pokemon, 1, crit)
-    if(overheal > 0) {
+    if (overheal > 0) {
       pokemon.addShield(Math.round(overheal * 0.5), pokemon, 0, crit)
     }
   }
