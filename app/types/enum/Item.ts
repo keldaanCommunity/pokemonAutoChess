@@ -591,16 +591,7 @@ export const Flavors = [
 ] as const
 
 export const SynergyFlavors: {
-  [key in Synergy]:
-  | Item.VANILLA_FLAVOR
-  | Item.RUBY_FLAVOR
-  | Item.MATCHA_FLAVOR
-  | Item.MINT_FLAVOR
-  | Item.LEMON_FLAVOR
-  | Item.SALTED_FLAVOR
-  | Item.RUBY_SWIRL_FLAVOR
-  | Item.CARAMEL_SWIRL_FLAVOR
-  | Item.RAINBOW_SWIRL_FLAVOR
+  [key in Synergy]: typeof Flavors[number]
 } = {
   [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
   [Synergy.GRASS]: Item.MATCHA_FLAVOR,
@@ -635,7 +626,7 @@ export const SynergyFlavors: {
   [Synergy.GOURMET]: Item.VANILLA_FLAVOR
 }
 
-export const Sweets = [
+export const Sweets: Item[] = [
   Item.STRAWBERRY_SWEET,
   Item.LOVE_SWEET,
   Item.FLOWER_SWEET,
@@ -666,4 +657,13 @@ export const NonHoldableItems: Item[] = [
   Item.GIMMIGHOUL_COIN,
   Item.EGG_FOR_SELL,
   Item.EXCHANGE_TICKET
+]
+
+export const ConsummableItems: Item[] = [
+  ...TMs,
+  ...HMs,
+  ...Dishes,
+  ...Flavors,
+  ...Sweets,
+  Item.FIRE_SHARD
 ]
