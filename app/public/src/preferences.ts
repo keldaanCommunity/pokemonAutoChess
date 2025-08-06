@@ -37,7 +37,7 @@ const defaultPreferences: IPreferencesState = {
   showEvolutions: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
-  disableCameraShake: false,
+  disableCameraShake: true,
   renderer: Phaser.AUTO,
   antialiasing: true,
   keybindings: {
