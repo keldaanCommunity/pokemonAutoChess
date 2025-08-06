@@ -59,6 +59,7 @@ import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
+  NonPkm,
   Pkm,
   PkmDuos,
   PkmIndex,
@@ -938,10 +939,12 @@ export default class GameRoom extends Room<GameState> {
 
       if (
         player.titles.has(Title.COLLECTOR) === false &&
-        Object.values(PkmIndex).every((pkmIndex) => {
-          const pokemonCollectionItem = usr.pokemonCollection.get(pkmIndex)
-          return pokemonCollectionItem && pokemonCollectionItem.played > 0
-        })
+        Object.values(Pkm)
+          .filter((p) => NonPkm.includes(p) === false)
+          .every((pkm) => {
+            const pokemonCollectionItem = usr.pokemonCollection.get(PkmIndex[pkm])
+            return pokemonCollectionItem && pokemonCollectionItem.played > 0
+          })
       ) {
         player.titles.add(Title.COLLECTOR)
       }
