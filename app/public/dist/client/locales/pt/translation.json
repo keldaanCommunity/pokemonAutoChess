@@ -456,7 +456,10 @@
 		"HORN_ATTACK": "Ataque de Chifre",
 		"RAZOR_LEAF": "Folha Navalha",
 		"MUD_SHOT": "Tiro de Lama",
-		"MALIGNANT_CHAIN": "Corrente Maligna"
+		"MALIGNANT_CHAIN": "Corrente Maligna",
+		"FILLET_AWAY": "Filetar",
+		"ELECTRO_SHOT": "Eletrotiro",
+		"FLOWER_TRICK": "Truque da Flor"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2561,9 +2564,25 @@
 		"MagmaCavern2": "Caverna de Magma 2 ",
 		"MagmaCavern3": "Caverna de Magma 2",
 		"MeteorCave": "Caverna do Meteoro",
-		"MiracleSea": "Mar Milagroso"
+		"MiracleSea": "Mar Milagroso",
+		"UnusedBrineCave": "Caverna da Salmoura 2",
+		"UnusedSteamCave": "Caverna do Vapor 2",
+		"UnusedWaterfallPond": "Lagoa da Cachoeira 2",
+		"UproarForest": "Floresta do Alvoroço",
+		"VastIceMountain": "Grande Montanha de Gelo",
+		"VastIceMountainPeak": "Pico da Grande Montanha de Gelo",
+		"WaterfallCave": "Caverna da Cachoeira",
+		"WaterfallPond": "Lagoa da Cachoeira",
+		"WaterMaze": "Labirinto Aquático",
+		"WesternCave1": "Caverna Oeste 1",
+		"WesternCave2": "Caverna Oeste 2",
+		"WishCave1": "Caverna dos Desejos 1",
+		"WishCave2": "Caverna dos Desejos 2",
+		"WorldAbyss2": "Abismo do Mundo",
+		"WyvernHill": "Colina Wyvern"
 	},
 	"held_items": "Objetos Equipados",
+	"by_average_held_items": "pela média de itens segurados",
 	"role": {
 		"ADMIN": "Criador",
 		"MODERATOR": "Mod",
@@ -2584,10 +2603,14 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
+	"room_is_private": "Esta sala é privada. Digite a senha.",
+	"wrong_password": "Senha errada!",
 	"game_full": "Esta sala está completa",
 	"game_already_started": "O jogo já foi iniciado",
 	"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
+	"max_rank_not_reached": "Sua classificação é muito alta para jogar esta partida ranqueada",
 	"not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
+	"blacklisted": "Você foi expulso desta partida",
 	"npc_dialog": {
 		"welcome": "Bem-vindo !",
 		"tell_price": "{{price}} GOLD para cada !",
@@ -2595,22 +2618,62 @@
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Todos estão presentes !",
+		"UNIQUE_STARTER": "Inicial Único",
 		"OMELETTE_COOK": "Cozinheiro de Omeletes",
 		"DITTO_PARTY": "Festa dos Dittos",
 		"GOTTA_CATCH_EM_ALL": "Temos que pegar !",
 		"BUYER_FEVER": "Febre de compras",
 		"TECHNOLOGIC": "Tecnológico",
-		"CROWDED": "Tabuleiro Cheio"
+		"CROWDED": "Tabuleiro Cheio",
+		"FREE_MARKET": "Mercado livre",
+		"SHINY_HUNTER": "Caçador de Shiny",
+		"DO_IT_ALL_YOURSELF": "Faça tudo você mesmo!",
+		"FIRST_PARTNER": "Primeiro Parceiro",
+		"SLAMINGO": "Slamingo",
+		"BLOOD_MONEY": "Dinheiro Sangrento",
+		"TOWN_FESTIVAL": "Festival da Cidade",
+		"HIGH_ROLLER": "Grande Apostador",
+		"REGIONAL_SPECIALTIES": "Especialidades Regionais"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Todas as opções adicionais estão disponíveis imediatamente",
 		"UNIQUE_STARTER": "Adquire um Pokémon de rango único na primeira ronda",
 		"OMELETTE_COOK": "Consegue um Ovo Pokémon tras as rondas 1, 2 e 3",
+		"DITTO_PARTY": "Comece com 5 Ditto no seu banco. Ditto não pode ser encontrado na loja e não pode ser vendido.",
 		"GOTTA_CATCH_EM_ALL": "Alguns pokémon podem ser capturados antes de cada ronda PvE",
 		"BUYER_FEVER": "A loja de evoluções é grátis",
-		"CROWDED": "+3 unidades máximas no tabuleiro"
+		"TECHNOLOGIC": "Escolha entre 3 artefatos nas fases 3 e 15",
+		"CROWDED": "+3 unidades máximas no tabuleiro",
+		"FREE_MARKET": "Pokémon são comprados e vendidos por 0 de OURO",
+		"SHINY_HUNTER": "Encontros PvE selvagens na fase 1, 9 e 19 são shiny",
+		"DO_IT_ALL_YOURSELF": "Comece com uma cópia do avatar que estiver usando. Avatares de raridade menor iniciam com mais PV máximo e ouro.",
+		"FIRST_PARTNER": "Escolha seu Pokémon inicial. Você receberá uma cópia desta unidade a cada fase, durando até a fase 10.",
+		"SLAMINGO": "Todos os itens são desequipados quando um Pokémon é colocado no banco. Começa com 4 componentes aleatórios.",
+		"TOWN_FESTIVAL": "Você sempre tem um encontro na cidade e todos os itens do carrossel são gratuitos.",
+		"HIGH_ROLLER": "As lojas têm a chance de conter um Chocado nas fases de 0-10, Único nas fases de 10-20 e Lendário após a fase 20.",
+		"REGIONAL_SPECIALTIES": "Seus tipos de região atuais contam para suas sinergias. Após mudar de região, sua equipe experimenta um prato local."
+	},
+	"town_encounter_description": {
+		"KECLEON": "Kecleon vende Pedras Sinérgicas por {{cost}} de OURO",
+		"CHANSEY": "Chansey vende EGG_FOR_SELL por {{cost}} de OURO",
+		"ELECTIVIRE": "Electivire vende Itens Artificiais por {{cost}} de OURO",
+		"XATU": "Xatu vende uma TREASURE_BOX contendo 2 componentes de itens aleatórios por {{cost}} de OURO",
+		"KANGASKHAN": "Kangashkhan vende itens criados completos pelo {{cost}} de OURO",
+		"DUSKULL": "As moedas Duskull aumentam sua renda a longo prazo",
+		"MAROWAK": "Marowak torna a próxima luta PvE mais difícil",
+		"WOBBUFFET": "O Wobbuffet permite que você recicle um componente de item não equipado ou um item criado",
+		"SPINDA": "Spinda muda a direção de rotação do carrossel aleatoriamente",
+		"REGIROCK": "Regirock concede a todos os jogadores 15 Pontos de Vida adicionais",
+		"MUNCHLAX": "Munchlax trouxe um PICNIC_SET para todo mundo",
+		"SABLEYE": "Sableye pode vir e tentar roubar um dos seus itens não equipados",
+		"CELEBI": "Celebi prevê que a próxima luta PvE será shiny"
 	},
 	"loading_hints": {
+		"tab_out": "Não saia da tela! O carregamento é pausado quando esta janela do navegador está inativa.",
+		"max_loading_time": "O jogo começará após, no máximo, 5 minutos de carregamento, não importa o que...",
+		"disconnection_time": "Jogadores ausentes do jogo por mais de 3 minutos são expulsos do jogo. Se isso acontecer antes da fase 6, eles não perderão Elo.",
+		"translation_project": "As traduções são gerenciadas pela comunidade. Se você quiser traduzir ou ajudar a melhorar uma tradução, acesse o Discord.",
+		"discord": "Junte-se ao nosso Discord para conhecer a comunidade! Link no menu lateral",
 		"bug_report": "Achou algum bug? Vá no Discord e reporta no canal #bug-report",
 		"moderation": "Se você presenciar um comportamento antiesportivo no jogo, tire um print e reporte a algum moderador no Discord.",
 		"berry_tree": "Jogando com grama? Não se esqueça de cuidar das árvores de frutas perto do seu personagem.",
@@ -2619,8 +2682,17 @@
 		"avatar": "Para mudar o seu avatar de jogador, jogue partidas  para ganhar XP e subir de nível. Cada nível garante à você um pacote que quando aberto lhe da fragmentos para gastar no menu Coleção e comprar novos avatares."
 	},
 	"wiki": {
+		"data_description": "Vários dados sobre o jogo para os nerds",
+		"tiers_by_level_title": "Tiers por nível",
+		"tiers_by_level_description": "As chances de obter uma determinada raridade de Pokémon na sua loja variam de acordo com o seu nível de jogador. Quanto maior o nível, maior a raridade e o custo na loja.",
 		"experience_by_rank": "Experiência por ranque",
 		"experience_by_rank_description": "Você ganha pontos de experiência no final de cada jogo baseado no seu ranque final. A cada 1000 XP, você sobe de nível e ganha um pacote.",
+		"booster_rarity_probability": "Probabilidade da raridade do booster",
+		"booster_rarity_probability_description": "As chances de encontrar um Pokémon em um booster depende da sua raridade.",
+		"special_pokemons_rate": "Pokémon especial",
+		"ditto_rate": "Chance de encontrar Ditto na loja:",
+		"kecleon_rate": "Chance de encontrar Kecleon na fase 10 determinadas partidas:",
+		"arceus_rate": "Chance de encontrar Arceus na fase 20 determinadas partidas:",
 		"fishing_rarity_rate": "Raridade da pesca pela qualidade da vara de pescar",
 		"fishing_rarity_rate_description": "A qualidade da vara de pesca influencia na raridade dos Pokémon que podem ser pescados.",
 		"defense_calculation": "Como a defesa funciona?",
@@ -2653,13 +2725,27 @@
 		"itssolution": "É um $t(pkm.{{pokemon}}) !",
 		"attempts": "Tentativas: {{count}}",
 		"guess": "Adivinhar",
-		"reset": "Resetar"
+		"reset": "Resetar",
+		"difficulty": "Difícil",
+		"easy": "Fácil",
+		"normal": "Normal",
+		"hard": "Ultra"
+	},
+	"technical_terms": {
+		"STRONGEST": "Mais forte"
+	},
+	"technical_terms_definitions": {
+		"STRONGEST": "O mais forte é definido como, por ordem de prioridade: 1. Número de itens segurados, 2. Nível da unidade, 3. Raridade da unidade."
 	},
 	"victory_road": {
 		"title": "Victory Road",
 		"points": "{{points}} pontos",
 		"your_points": "Seus pontos: {{points}}",
 		"instructions": "Corrida até a chegada da Victory Road!",
+		"help1": "Jogar partidas ranqueadas lhe concede pontos com base na sua classificação final.",
+		"help2": "Seja o primeiro a atingir 500 pontos para vencer a corrida e ganhar um título exclusivo!",
+		"reset_info": "Todas as pontuações serão zeradas à meia-noite (UTC) do primeiro dia de cada mês, ou seja, no {{resetCountdown}}. A tabela de classificação do evento é atualizada a cada 10 minutos.",
+		"runners": "Corredores",
 		"finishers": "Finalistas"
 	}
 }
