@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next"
 import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Title } from "../../../../../types"
+import { NonPkm } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"
 import "./progress-tab.css"
 
@@ -13,9 +14,15 @@ export function ProgressTab() {
         ...(state.network.profile?.pokemonCollection?.values() ?? [])
     ])
     const user = useAppSelector((state) => state.network.profile)
-    const nbAvatarsUnlocked = pokemonCollection.filter((item) => item.emotions.length > 0 || item.shinyEmotions.length > 0).length
-    const nbPokemonsPlayed = pokemonCollection.filter((item) => item.played > 0).length
-    const nbPokemonsTotal = precomputedPokemons.length
+    const nbAvatarsUnlocked = pokemonCollection.filter(
+        (item) => item.emotions.length > 0 || item.shinyEmotions.length > 0
+    ).length
+    const nbPokemonsPlayed = pokemonCollection.filter(
+        (item) => item.played > 0
+    ).length
+    const nbPokemonsTotal = precomputedPokemons.filter(
+        (p) => NonPkm.includes(p.name) === false
+    ).length
     const nbTitlesUnlocked = user?.titles.length ?? 0
     const nbTitlesTotal = Object.keys(Title).length
     const level = user?.level ?? 0
