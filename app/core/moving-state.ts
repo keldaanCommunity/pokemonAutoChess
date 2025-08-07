@@ -96,14 +96,7 @@ export default class MovingState extends PokemonState {
 
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
         board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
-        pokemon.orientation = board.orientation(
-          x,
-          y,
-          pokemon.targetX,
-          pokemon.targetY,
-          pokemon,
-          undefined
-        )
+        this.onMove(pokemon, board, x, y)
       }
     } else {
       // Using pathfinding to get optimal path
@@ -135,18 +128,23 @@ export default class MovingState extends PokemonState {
         }
       })
       if (x !== undefined && y !== undefined) {
-        pokemon.orientation = board.orientation(
-          pokemon.positionX,
-          pokemon.positionY,
-          x,
-          y,
-          pokemon,
-          undefined
-        )
         // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
         board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
+        this.onMove(pokemon, board, x, y)
       }
     }
+  }
+
+  onMove(pokemon: PokemonEntity, board: Board, x: number, y: number) {
+    //update orientation
+    pokemon.orientation = board.orientation(
+      x,
+      y,
+      pokemon.targetX,
+      pokemon.targetY,
+      pokemon,
+      undefined
+    )
 
     const onMoveEffects = [
       ...pokemon.effectsSet.values(),
@@ -154,7 +152,7 @@ export default class MovingState extends PokemonState {
     ].filter((effect) => effect instanceof OnMoveEffect)
 
     onMoveEffects.forEach((effect) => {
-      effect.apply(pokemon, board, coordinates.x, coordinates.y)
+      effect.apply(pokemon, board, x, y)
     })
   }
 
