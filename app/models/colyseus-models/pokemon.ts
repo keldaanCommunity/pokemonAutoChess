@@ -171,17 +171,26 @@ export class Pokemon extends Schema implements IPokemon {
     this.permanentLuck = value
   }
 
-  onChangePosition(x: number, y: number, player: Player, state?: GameState) {
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    state?: GameState,
+    doNotRemoveItems: boolean = false
+  ) {
     // called after manually changing position of the pokemon on board
-    if (y === 0) {
-      const itemsToRemove = values(this.items).filter(item => {
-        return item === Item.CHEF_HAT ||
+    if (y === 0 && !doNotRemoveItems) {
+      const itemsToRemove = values(this.items).filter((item) => {
+        return (
+          item === Item.CHEF_HAT ||
           item === Item.TRASH ||
           ArtificialItems.includes(item) ||
-          (state?.specialGameRule === SpecialGameRule.SLAMINGO && item !== Item.RARE_CANDY)
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+            item !== Item.RARE_CANDY)
+        )
       })
-      this.removeItems(itemsToRemove, player)
       player.items.push(...itemsToRemove)
+      this.removeItems(itemsToRemove, player)
     }
   }
 
@@ -283,9 +292,15 @@ export class Pokemon extends Schema implements IPokemon {
     const nativeTypes = new PokemonClasses[this.name]().types
     for (const item of items) {
       const synergyRemoved = SynergyGivenByItem[item]
-      const otherSynergyItemsHeld = values(this.items).filter(i => SynergyGivenByItem[i] === synergyRemoved)
+      const otherSynergyItemsHeld = values(this.items).filter(
+        (i) => SynergyGivenByItem[i] === synergyRemoved
+      )
 
-      if (synergyRemoved && nativeTypes.has(synergyRemoved) === false && otherSynergyItemsHeld.length === 0) {
+      if (
+        synergyRemoved &&
+        nativeTypes.has(synergyRemoved) === false &&
+        otherSynergyItemsHeld.length === 0
+      ) {
         this.types.delete(synergyRemoved)
       }
     }
@@ -9622,18 +9637,29 @@ export class Silvally extends Pokemon {
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
+    super.onChangePosition(x, y, player, state, true)
     if (y === 0) {
-      values(this.items).filter((item) => (SynergyItems as ReadonlyArray<Item>).includes(item)).forEach((synergyItem) => {
-        this.removeItem(synergyItem, player)
-        player.items.push(synergyItem)
+      const itemsToRemove = values(this.items).filter((item) => {
+        return (
+          item === Item.CHEF_HAT ||
+          item === Item.TRASH ||
+          ArtificialItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+            item !== Item.RARE_CANDY) ||
+          (SynergyItems as ReadonlyArray<Item>).includes(item)
+        )
       })
+      player.items.push(...itemsToRemove)
+      this.removeItems(itemsToRemove, player)
     }
   }
   onItemRemoved(item: Item, player: Player) {
     if (
       (SynergyItems as ReadonlyArray<Item>).includes(item) &&
-      values(this.items).filter((item) => (SynergyItems as ReadonlyArray<Item>).includes(item)).length === 0
+      values(this.items).filter((item) =>
+        (SynergyItems as ReadonlyArray<Item>).includes(item)
+      ).length === 0 &&
+      player.getPokemonAt(this.positionX, this.positionY)?.name === Pkm.SILVALLY
     ) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
@@ -16500,36 +16526,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
