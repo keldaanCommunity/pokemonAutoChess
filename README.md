@@ -12,6 +12,8 @@ Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
 
 Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.com/keldaanCommunity/pokemonAutoChess)
 
+## Objective of this fork
+i'm trying to make an installer of the game as an exe file, after that intellingent CPU players against the player and some sort of tournament mode
 ## Getting started
 
 Install [Node LTS](https://nodejs.org/en). (It's recommended to use [nvm](https://github.com/nvm-sh/nvm) to install Node with the proper version)
