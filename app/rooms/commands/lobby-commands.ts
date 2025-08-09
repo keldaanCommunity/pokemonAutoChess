@@ -958,7 +958,7 @@ export class JoinOrOpenRoomCommand extends Command<
           case EloRank.ULTRA_BALL:
           case EloRank.MASTER_BALL:
           case EloRank.BEAST_BALL:
-            minRank = EloRank.POKE_BALL
+            minRank = EloRank.SUPER_BALL
             maxRank = EloRank.BEAST_BALL
             break
         }
