@@ -3511,7 +3511,7 @@
 	"extreme_bot": "Extrême (>1400)",
 	"custom_bot": "Personnalisé",
 	"room_leader": "Chef de salon",
-	"room_password": "Mot de passe du salon :",
+	"room_password": "Mot de passe du salon",
 	"ready": "Prêt",
 	"start_game": "Go !",
 	"select_bots_for_this_game": "Sélectionnez des bots pour ce jeu",
