@@ -282,6 +282,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
     attacker: PokemonEntity | null
     shouldTargetGainMana: boolean
+    isRetaliation?: boolean
   }) {
     return this.state.handleDamage({ target: this, ...params })
   }
@@ -325,13 +326,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             targetX: attacker.positionX,
             targetY: attacker.positionY
           })
-          // not handleSpecialDamage to not trigger infinite loop between two magic bounces
           attacker.handleDamage({
             damage: bounceDamage,
             board,
             attackType: AttackType.SPECIAL,
             attacker: this,
-            shouldTargetGainMana: true
+            shouldTargetGainMana: true,
+            isRetaliation: true // important to not trigger infinite loop between two magic bounces
           })
         }, 500))
       }
@@ -383,7 +384,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
-          shouldTargetGainMana: true
+          shouldTargetGainMana: true,
+          isRetaliation: true // important to not trigger infinite loop between two power lenses
         })
       }
       return damageResult
@@ -1003,12 +1005,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attacker,
     damage,
     board,
-    attackType
+    attackType,
+    isRetaliation
   }: {
     attacker: PokemonEntity | null
     damage: number
     board: Board
     attackType: AttackType
+    isRetaliation: boolean
   }) {
     // Flying protection
     if (
@@ -1086,6 +1090,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       this.count.fightingBlockCount > 0 &&
       this.count.fightingBlockCount % 10 === 0 &&
+      !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1
     ) {
@@ -1102,7 +1107,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           board,
           attackType: AttackType.PHYSICAL,
           attacker: this,
-          shouldTargetGainMana: true
+          shouldTargetGainMana: true,
+          isRetaliation: true
         })
         targetAtContact.moveTo(destination.x, destination.y, board)
       }
@@ -1131,7 +1137,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ].filter((effect) => effect instanceof OnDamageReceivedEffect)
 
     onDamageReceivedEffects.forEach((effect) => {
-      effect.apply({ pokemon: this, attacker, board, damage, attackType })
+      effect.apply({ pokemon: this, attacker, board, damage, attackType, isRetaliation })
     })
   }
 

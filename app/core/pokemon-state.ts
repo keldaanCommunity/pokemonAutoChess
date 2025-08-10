@@ -195,7 +195,8 @@ export default abstract class PokemonState {
             board,
             attackType: AttackType.SPECIAL,
             attacker: target,
-            shouldTargetGainMana: true
+            shouldTargetGainMana: true,
+            isRetaliation: true // important to not trigger infinite loop between two power lenses
           })
         }
 
@@ -335,7 +336,8 @@ export default abstract class PokemonState {
     board,
     attackType,
     attacker,
-    shouldTargetGainMana
+    shouldTargetGainMana,
+    isRetaliation = false
   }: {
     target: PokemonEntity
     damage: number
@@ -343,6 +345,7 @@ export default abstract class PokemonState {
     attackType: AttackType
     attacker: PokemonEntity | null
     shouldTargetGainMana: boolean
+    isRetaliation?: boolean
   }): { death: boolean; takenDamage: number } {
     let death = false
     let takenDamage = 0
@@ -427,7 +430,7 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.status.reflect && attackType === AttackType.PHYSICAL) {
-        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS) === false) {
+        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS) === false && !isRetaliation) {
           const crit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
             chance(pokemon.critChance, pokemon)
@@ -435,9 +438,10 @@ export default abstract class PokemonState {
           attacker.handleDamage({
             damage: reflectDamage,
             board,
-            attackType: AttackType.SPECIAL, // it's important that it deals special damage to avoid an infinite loop when two reflects are attacking each other
+            attackType: AttackType.SPECIAL,
             attacker: pokemon,
-            shouldTargetGainMana: true
+            shouldTargetGainMana: true,
+            isRetaliation: true // important to avoid infinite loops between two units reflecting
           })
         }
         return { death: false, takenDamage: 0 }
@@ -579,7 +583,7 @@ export default abstract class PokemonState {
       }
 
       if (takenDamage > 0) {
-        pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType })
+        pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType, isRetaliation })
         if (attacker) {
           attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
           if (pokemon !== attacker) {
