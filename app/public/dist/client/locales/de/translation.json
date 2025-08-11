@@ -477,7 +477,15 @@
 		"WICKED_BLOW": "Finstertreffer",
 		"SURGING_STRIKES": "Trefferschwall",
 		"VICTORY_DANCE": "Siegestanz",
-		"BOOMBURST": "Überschallknall"
+		"BOOMBURST": "Überschallknall",
+		"FOLLOW_ME": "Spotlight",
+		"AFTER_YOU": "Galanterie",
+		"COTTON_SPORE": "Baumwollsaat",
+		"COTTON_GUARD": "Watteschild",
+		"TWIN_BEAM": "Doppelstrahl",
+		"SWAGGER": "Angeberei",
+		"ENCORE": "Zugabe",
+		"STORED_POWER": "Kraftvorrat"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
