@@ -933,18 +933,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) === 1 &&
       !this.items.has(Item.PROTECTIVE_PADS)
     ) {
-      const damage = Math.round(target.def * (1 + target.ap / 100))
-      const crit =
-        target.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(target.critChance, this)
+      const crit = target.effects.has(EffectEnum.ABILITY_CRIT) && chance(target.critChance, this)
+      const damage = Math.round(target.def * (1 + target.ap / 100) * (crit ? target.critPower : 1))
       this.status.triggerWound(2000, this, target)
-      this.handleSpecialDamage(
+      this.handleDamage({
         damage,
         board,
-        AttackType.SPECIAL,
-        target,
-        crit,
-        true
+        attackType: AttackType.SPECIAL,
+        attacker: target,
+        isRetaliation: true,
+        shouldTargetGainMana: true
       )
     }
 
@@ -1176,13 +1174,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
       if (distance <= 1 && this.items.has(Item.PROTECTIVE_PADS) === false) {
         // melee range
-        this.handleSpecialDamage(
-          shockDamage,
+        this.handleDamage({
+          damage: shockDamage,
           board,
-          AttackType.SPECIAL,
-          target,
-          false
-        )
+          attackType: AttackType.SPECIAL,
+          attacker: target,
+          isRetaliation: true,
+          shouldTargetGainMana: true
+        })
       }
     }
 
