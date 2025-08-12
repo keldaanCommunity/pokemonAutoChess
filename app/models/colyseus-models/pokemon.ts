@@ -18230,8 +18230,8 @@ export class Drilbur extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   hp = 80
-  atk = 11
-  speed = 60
+  atk = 8
+  speed = 56
   def = 4
   speDef = 4
   maxPP = 100
@@ -18245,8 +18245,8 @@ export class Excadrill extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 180
-  atk = 22
-  speed = 88
+  atk = 19
+  speed = 56
   def = 8
   speDef = 8
   maxPP = 100
