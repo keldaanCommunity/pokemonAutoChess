@@ -3509,6 +3509,7 @@
 	"team_builder": "Teamplaner",
 	"titles_unlocked": "{{count}}/{{total}} Titel freigeschaltet",
 	"avatars_unlocked": "{{count}}/{{total}} Avatare freigeschalten.",
+	"pokemons_played": "{{count}}/{{total}} Pokémon gespielt",
 	"overlaps": "Überschneidungen",
 	"game-reconnect-modal-title": "Stelle die Verbindung zum Spiel wieder her",
 	"game-reconnect-modal-body": "Du hast ein laufendes Spiel verlassen. Möchtest du die Verbindung zu deinem vorherigen Spiel wiederherstellen?",
@@ -3776,11 +3777,14 @@
 		"XATU": "Xatu verkauft TREASURE_BOX für {{cost}} GOLD",
 		"KANGASKHAN": "Kangama verkauft komplette, herstellbare Items für {{cost}} GOLD",
 		"DUSKULL": "Zwirrlicht Münze erhöht dein Langzeiteinkommen",
+		"MEOWTH": "Mauzis Münzamulett lässt dich GOLD in Kämpfen gewinnen, reduziert aber deine maximalen Zinsen",
 		"MAROWAK": "Knogga macht den nächsten PvE-Kampf schwieriger",
 		"WOBBUFFET": "Woingenau lässt sich eine ungenutzte Komponente oder ein hergestelltes Item recyceln.",
 		"SPINDA": "Spinda wechselt zufällig die Richtung der Rotation des Karusells.",
 		"REGIROCK": "Regirock gibt allen Spielern 15 zusätzliche HP",
-		"MUNCHLAX": "Mampfaxo gibt allen Spielern PICNIC_SET"
+		"MUNCHLAX": "Mampfaxo gibt allen Spielern PICNIC_SET",
+		"SABLEYE": "Zobiris könnte versuchen eins deiner unbenutzten Items zu klauen",
+		"CELEBI": "Celebi sagt vorher das der nächte PvE Kampf gegen Schillernde Pokémon sein wird"
 	},
 	"loading_hints": {
 		"tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",
@@ -3846,6 +3850,13 @@
 		"hard": "Ultra"
 	},
 	"victory_road": {
-		"title": "Siegesstraße"
+		"title": "Siegesstraße",
+		"points": "{{points}} Punkte",
+		"your_points": "Deine Punkte: {{points}}",
+		"instructions": "Rase zum Ende der Siegesstraße",
+		"help1": "Ranglistenspiele gewährt dir Punkte basierend auf deiner Platzierung.",
+		"help2": "Sei der Erste der 500 Punkte erreicht um das Rennen zu gewinnen und einen exclusiven Titel zu erhalten!",
+		"runners": "Teilnehmer",
+		"finishers": "Finisher"
 	}
 }
