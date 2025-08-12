@@ -3286,6 +3286,8 @@
 	"show_only_available_picks": "Zeige nur verfügbare Zusatzwahlen / Regionale Pokémon",
 	"sort_by_index": "Sortieren nach Index",
 	"sort_by_shards": "Nach Scherben sortieren",
+	"sort_by_played": "Nach gespielten Runden sortieren",
+	"sort_by_emotes_unlocked": "Nach freigeschaltenen Emotionen sortieren",
 	"normal_emotions": "Normale Emotionen",
 	"shiny_emotions": "Schillernde Emotionen",
 	"reset_emotion": "Zu Standardporträt zurücksetzen",
