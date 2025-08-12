@@ -206,6 +206,7 @@ export interface IGameState extends Schema {
 
 export interface ISimplePlayer {
   elo: number
+  games: number
   name: string
   id: string
   rank: number

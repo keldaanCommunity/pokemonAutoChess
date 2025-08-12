@@ -38,6 +38,7 @@ export default class AfterGameRoom extends Room<AfterGameState> {
           plyr.role,
           plyr.synergies,
           plyr.elo,
+          plyr.games,
           plyr.moneyEarned,
           plyr.playerDamageDealt,
           plyr.rerollCount
