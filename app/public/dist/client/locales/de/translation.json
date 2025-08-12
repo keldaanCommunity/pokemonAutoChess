@@ -1932,7 +1932,8 @@
 		"ARMOR_CANNON": "Der Nutzer schießt ein brennendes Projektil, verursacht [50,SP] SPECIAL an dem Ziel bevor es zu den 2 nächsten Gegnern springt und jeweils [30,SP] SPECIAL verursacht. Die Projektile kommen dann zum originalen Ziel zurück und verursachen jeweils extra [15,SP] SPECIAL.",
 		"BITTER_BLADE": "Der Nutzer fokussiert seine bitteren Gefühle in eine Schlitz-Attacke, verursacht [70,SP] SPECIAL zu jedem benachbarten Gegner. Der Nutzer heilt sich um 10% seiner HP für jeden getroffenen Gegner.",
 		"SUCTION_HEAL": "Saugt die Energy von seinen Zielen, verursacht [15,30,60,SP] SPECIAL in einem 2-Feld-Kegel vor dem Nutzer und heilt HP um 50% des verursachten Schadens.",
-		"ROOST": "Fliegt davon und landet in der hinteren Reihe, SLEEP für 2 Sekunden und heilt für [20,40,80,SP] HP."
+		"ROOST": "Fliegt davon und landet in der hinteren Reihe, SLEEP für 2 Sekunden und heilt für [20,40,80,SP] HP.",
+		"WICKED_BLOW": "Füge dem Ziel [60,SP] TRUE zu. Zählt immer als Kritischer Treffer"
 	},
 	"effect": {
 		"STAMINA": "Zähigkeit",
@@ -2205,6 +2206,7 @@
 		"MUSCLE_BAND": "Muskelband",
 		"WONDER_BOX": "Wunderbox",
 		"ABILITY_SHIELD": "Fähigkeitenschild",
+		"STICKY_BARB": "Klettdorn",
 		"WIDE_LENS": "Großlinse",
 		"RAZOR_CLAW": "Scharfklaue",
 		"FLUFFY_TAIL": "Eneco-Rute",
@@ -2255,6 +2257,7 @@
 		"ROTOM_PHONE": "Smart-Rotom",
 		"SILK_SCARF": "Seidenschal",
 		"TINY_MUSHROOM": "Minipilz",
+		"SURFBOARD": "Surfbrett",
 		"COOKING_POT": "Kochtopf",
 		"METEORITE": "Meteorit",
 		"TRASH": "Müll",
@@ -2353,8 +2356,10 @@
 		"AMULET_COIN": "Münzamulett",
 		"GIMMIGHOUL_COIN": "Gierspenst-Münze",
 		"EXCHANGE_TICKET": "Einlösbares Ticket",
+		"TREASURE_BOX": "Schatztruhe",
 		"AUSPICIOUS_ARMOR": "Glorienrüstung",
-		"MALICIOUS_ARMOR": "Fluchrüstung"
+		"MALICIOUS_ARMOR": "Fluchrüstung",
+		"RUSTED_SWORD": "Rostiges Schwert"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Ein Fossil eines Pokémon, das in prähistorischen Zeiten lebte",
@@ -2546,6 +2551,7 @@
 		"AMULET_COIN": "+1 Gold jedes Mal, wenn der Besitzer einen Gegner niederschlägt.\nReduziert die maximale Zinsen-Wert um 10 GOLD.",
 		"GIMMIGHOUL_COIN": "+3 Gold wenn erhalten.\nErhöhe den maximalen Zinsen-Wert um 10 GOLD.",
 		"EXCHANGE_TICKET": "Tausche ein Item-Part oder ein fertiggestelltes Item auf der Bank für ein zufälliges aus. Einmalige Nutzung.",
+		"TREASURE_BOX": "Du wunderst dich was drinsteckt.",
 		"AUSPICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Glückverheißende Wünsche leben in ihm.",
 		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm."
 	},
@@ -2692,7 +2698,9 @@
 		"CARAMEL_SWIRL_CREAM": "Nach Einsatz einer Fähigkeit, fügt der CARAMEL_FLAVOR [80,SP]% CRIT_POWER zum nächsten Verbündeten hinzu.",
 		"RAINBOW_SWIRL_CREAM": "Nach Einsatz einer Fähigkeit, fügt der RAINBOW_SWIRL_FLAVOR [60,SP] PP zum nächsten Verbündeten hinzu.",
 		"DURALUDON": "Duraludon sucht nach einem ARTIFICIAL Item.",
-		"CHARCADET": "Das Besiegen des Mew-Duos verleiht Knarbon entweder AUSPICIOUS_ARMOR oder MALICIOUS_ARMOR, je nachdem, ob deine dominante Synergie PSYCHIC oder GHOST ist."
+		"CHARCADET": "Das Besiegen des Mew-Duos verleiht Knarbon entweder AUSPICIOUS_ARMOR oder MALICIOUS_ARMOR, je nachdem, ob deine dominante Synergie PSYCHIC oder GHOST ist.",
+		"VIGOROTH": "$t(pkm.VIGOROTH) ist immun zu SLEEP",
+		"STANTLER": "Entwickelt sich zu $t(pkm.WYRDEER) wenn die Region gewechselt wird."
 	},
 	"stat": {
 		"ATK": "Angriff",
@@ -2887,6 +2895,7 @@
 		"STRATEGIST": "Stratege",
 		"NURSE": "Krankenschwester",
 		"GARDIAN": "Wächter",
+		"COLLECTOR": "Sammler",
 		"DUKE": "Herzog",
 		"DUCHESS": "Herzogin",
 		"CHAMPION": "Champion",
@@ -2914,15 +2923,21 @@
 		"SIREN": "Sirene",
 		"FEARSOME": "Furchterregender",
 		"GOLDEN": "Goldener",
+		"LUCKY": "Lucky",
+		"GIANT": "Gigant",
+		"LEGEND": "Legende",
+		"DECURION": "Decurio",
 		"CHOSEN_ONE": "Auserwählter",
 		"VANQUISHER": "Eroberer",
 		"OUTSIDER": "Außenseiter",
 		"WILD": "Wild",
 		"GLUTTON": "Vielfraß",
+		"PICNICKER": "Picknicker",
 		"STARGAZER": "Sterngucker",
 		"BLOODY": "Blutig",
 		"ETERNAL": "Ewig",
-		"ANNIHILATOR": "Vernichter"
+		"ANNIHILATOR": "Vernichter",
+		"RUNNER": "Sprinter"
 	},
 	"title_description": {
 		"NOVICE": "Spielen Sie Ihr erstes Spiel",
@@ -2991,13 +3006,18 @@
 		"FEARSOME": "Holen Sie sich ein Lusardin in Schwarmform",
 		"GOLDEN": "Hole ein Monetigo",
 		"ANNIHILATOR": "Erhalte ein Epitaff.",
+		"GIANT": "Hab ein Pokémon über 1500 HP",
 		"CHOSEN_ONE": "Maximale Synergie mit Licht in einem Spiel",
 		"VANQUISHER": "Gewinne ein Rangmatch",
 		"OUTSIDER": "Habe die kleinste Elo und gewinne einen Rangmatch mit 8 Spielern",
 		"GLUTTON": "Erhalte ein Relaxo mit mehr als 750 base HP",
+		"PICNICKER": "Mache ein Picknick mit 9 Pokémon",
 		"STARGAZER": "Erhalte ein Solgaleo oder Lunala",
 		"BLOODY": "Erhalte Ursaluna (Butmond)",
-		"ETERNAL": "Treffe Arceus auf Ebene 40"
+		"ETERNAL": "Treffe Arceus auf Ebene 40",
+		"RUNNER": "Erreiche 100 Punkte auf der Siegesstraße",
+		"FINISHER": "Schließe eine Siegesstraßen Rennen ab",
+		"VICTORIOUS": "Schließe ein Siegesstraßen Rennen als Erster ab"
 	},
 	"weather": {
 		"NEUTRAL": "Bewölkt",
@@ -3219,6 +3239,7 @@
 	"type_here": "Gebe hier ein ...",
 	"send_message": "Nachricht senden",
 	"shiny_hunter": "Shiny Hunter",
+	"pokedex": "Pokédex",
 	"show_all": "Zeige alles",
 	"show_locked": "Show gesperrt",
 	"show_unlockable": "Freischaltbares anzeigen",
@@ -3253,6 +3274,7 @@
 	"lose_game_hint": "Du verlierst das Spiel, wenn du keine Gesundheitspunkte mehr haben",
 	"unlock": "Freischalten",
 	"lock": "Sperren",
+	"new": "NEU !",
 	"current_shop_for_next_turn": "Aktueller Shop für die nächste Runde",
 	"leave_game": "Spiel verlassen",
 	"leave_room": "Raum verlassen",
@@ -3282,6 +3304,7 @@
 	"show_details_on_hover": "Die Details werden angezeigt, wenn du mit der Maus darüber fährst, anstatt mit der rechten Maustaste zu klicken",
 	"show_damage_numbers": "Zeige Schadens Nummern an",
 	"disable_animated_tilemap": "Deaktiviere Hintergrund Animationen",
+	"disable_camera_shake": "Kein Kameraruckeln",
 	"antialiasing": "Aktiviere anti-aliasing",
 	"save": "Speichern",
 	"reset": "Zurücksetzen",
@@ -3297,6 +3320,7 @@
 	"pool_label": "Pool",
 	"tier": "Stufe",
 	"rate": "Rate",
+	"next_level": "Nächstes Level",
 	"increase_level_hint": "Erhöhe dein Level, um die Chancen auf höherstufige Pokémon zu erhöhen.",
 	"refresh_gold_hint": "Shop auffrischen für 1 Gold (Tastenkürzel: D)",
 	"refresh": "Erneuern",
@@ -3324,6 +3348,7 @@
 	"user_id_hint1": "Deine Nutzer-ID ist:",
 	"user_id_hint2": "Nutze es um  mit Moderatoren oder Administratoren zu kommunizieren. Im Gegensatz zu Namen ist jede ID einzigartig und kann nicht geändert werden.",
 	"name": "Name",
+	"progress": "Fortschritt",
 	"account": "Konto",
 	"delete_account": "Lösche Konto",
 	"delete_account_hint": "Wenn du dein Konto permanent gelöscht haben willst, klicke hierunter und tippe \"$t(delete_account_passphrase)\"",
@@ -3513,7 +3538,8 @@
 		"jukebox": "Jukebox",
 		"jukebox_desc": "Wähle deine Musik im Spiel",
 		"gameboy": "Gameboy",
-		"gameboy_desc": "Spiele den Gameboy-Prototypen des Spiels."
+		"gameboy_desc": "Spiele den Gameboy-Prototypen des Spiels.",
+		"pokeguesser": "PokéGuessr"
 	},
 	"level_required": "Level erforderlich",
 	"map": {
@@ -3797,6 +3823,20 @@
 		"ROOM_EMPTY": "Dieser Raum wurde aufgrund von Spielermangel entfernt",
 		"ROOM_DELETED": "Dieser Raum wurde gelöscht",
 		"UNKNOWN_ERROR": "Ein unerwarteter Fehler ist aufgetreten: {{error}}"
+	},
+	"connection_status": {
+		"CONNECTION_LOST": "Verbindung verloren. Versuche Verbindung wiederherzustellen...",
+		"CONNECTION_FAILED": "Verbindung abgebrochen. Versuch die Seite neu zu laden."
+	},
+	"pokeguessr": {
+		"whosthatpokemon": "Welches Pokémon ist es?",
+		"itssolution": "Es ist $t(pkm.{{pokemon}}) !",
+		"attempts": "Versuche: {{count}}",
+		"guess": "Raten",
+		"difficulty": "Schwierigkeit",
+		"easy": "Einfach",
+		"normal": "Normal",
+		"hard": "Ultra"
 	},
 	"victory_road": {
 		"title": "Siegesstraße"
