@@ -302,6 +302,7 @@ export const networkSlice = createSlice({
       state.lobby?.send(Transfer.UNBAN, action.payload)
     },
     selectLanguage: (state, action: PayloadAction<Language>) => {
+      if(state.profile) state.profile.language = action.payload
       state.lobby?.send(Transfer.SELECT_LANGUAGE, action.payload)
     },
     createTournament: (
