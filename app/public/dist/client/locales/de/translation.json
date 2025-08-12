@@ -1933,7 +1933,9 @@
 		"BITTER_BLADE": "Der Nutzer fokussiert seine bitteren Gefühle in eine Schlitz-Attacke, verursacht [70,SP] SPECIAL zu jedem benachbarten Gegner. Der Nutzer heilt sich um 10% seiner HP für jeden getroffenen Gegner.",
 		"SUCTION_HEAL": "Saugt die Energy von seinen Zielen, verursacht [15,30,60,SP] SPECIAL in einem 2-Feld-Kegel vor dem Nutzer und heilt HP um 50% des verursachten Schadens.",
 		"ROOST": "Fliegt davon und landet in der hinteren Reihe, SLEEP für 2 Sekunden und heilt für [20,40,80,SP] HP.",
-		"WICKED_BLOW": "Füge dem Ziel [60,SP] TRUE zu. Zählt immer als Kritischer Treffer"
+		"WICKED_BLOW": "Füge dem Ziel [60,SP] TRUE zu. Zählt immer als Kritischer Treffer.",
+		"BOOMBURST": "Füge [60,SP] SPECIAL zu allen benachbarten Pokémon inklusive Verbündete und lässt sie für 4 Sekunden FLINCH.",
+		"FOLLOW_ME": "Spirnge zu einem weit entfernten freien Feld und erhalte [40,SP] SHIELD. Gegner die den Benutzer anvisieren werden für 3 Sekunden CHARM."
 	},
 	"effect": {
 		"STAMINA": "Zähigkeit",
