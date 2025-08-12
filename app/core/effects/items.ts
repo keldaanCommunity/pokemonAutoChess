@@ -596,8 +596,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
 
   [Item.STICKY_BARB]: [
-    new OnDamageReceivedEffect(({ pokemon, attacker, attackType }) => {
+    new OnDamageReceivedEffect(({ pokemon, attacker, attackType, isRetaliation }) => {
       if (attackType === AttackType.PHYSICAL
+        && !isRetaliation
         && attacker
         && attacker.items.has(Item.PROTECTIVE_PADS) === false
         && distanceC(
