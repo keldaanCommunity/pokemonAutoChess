@@ -24,7 +24,7 @@ export default function GameRoomItem(props: {
       <span className="room-name" title={title}>
         {props.room.metadata?.name}
       </span>
-      <span>
+      <span className="room-info">
         {playerIds.length} {t("player")}
         {playerIds.length !== 1 ? "s" : ""}, {t("stage")}{" "}
         {props.room.metadata?.stageLevel}

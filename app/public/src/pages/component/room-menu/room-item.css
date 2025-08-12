@@ -5,8 +5,13 @@
   gap: 0.5em;
 }
 
-.room-item .room-name {
+.room-item .room-name,
+.room-item .room-info {
   flex: 1;
+  
+}
+
+.room-item .room-name {
   word-break: break-word;
 }
 
