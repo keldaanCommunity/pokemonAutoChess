@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -11095,11 +11096,7 @@ export class SurfStrategy extends AbilityStrategy {
             (surfAngle > 180 ? -1 : 1) * (targetAngle < surfAngle ? +1 : -1)
 
           const newX = cell.x + dx
-          if (
-            newX >= 0 &&
-            newX < BOARD_WIDTH &&
-            board.getEntityOnCell(newX, cell.y) === undefined
-          ) {
+          if (board.isOnBoard(newX, cell.y) && board.getEntityOnCell(newX, cell.y) === undefined) {
             cell.value.moveTo(newX, cell.y, board)
             cell.value.cooldown = 500
           }
@@ -11546,6 +11543,42 @@ export class FrostBreathStrategy extends AbilityStrategy {
     })
   }
 }
+
+export class DrillRunStrategy extends AbilityStrategy {
+  canCritByDefault = true
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [15,30,60][pokemon.stars - 1] ?? 60
+
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const [dx, dy] = OrientationVector[pokemon.orientation]
+
+    let nextX = pokemon.targetX + dx
+    let nextY = pokemon.targetY + dy
+
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    pokemon.moveTo(target.positionX, target.positionY, board)
+
+    if (board.isOnBoard(nextX, nextY) && board.getEntityOnCell(nextX, nextY)?.team === target.team) {
+      pokemon.targetX = nextX
+      pokemon.targetY = nextY
+      pokemon.pp = pokemon.maxPP
+    }
+  }
+}
+
 
 export class SaltCureStrategy extends AbilityStrategy {
   process(

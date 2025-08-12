@@ -493,7 +493,8 @@
 		"SPIN_OUT": "Spin Out",
 		"ULTRA_THRUSTERS": "Ultra Thrusters",
 		"ELECTRO_BALL": "Electro Ball",
-		"HORN_LEECH": "Horn Leech"
+		"HORN_LEECH": "Horn Leech",
+		"DRILL_RUN": "Drill Run"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1489,7 +1490,9 @@
 		"LEDYBA": "Ledyba",
 		"LEDIAN": "Ledian",
 		"TAILLOW": "Tailow",
-		"SWELLOW": "Swellow"
+		"SWELLOW": "Swellow",
+		"DRILBUR": "Drilbur",
+		"EXCADRILL": "Excadrill"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1963,7 +1966,8 @@
 		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration.",
 		"ULTRA_THRUSTERS": "Adjacent enemies take [50,100,200,SP] SPECIAL and get BURN for 3 seconds while user quickly moves backward to a safe spot.",
 		"ELECTRO_BALL": "Launches an electric ball that bounces between enemies, inflicting [10,20,40,SP] SPECIAL on each. The number and speed of bounces depends on the user's SPEED.",
-		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD."
+		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD.",
+		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

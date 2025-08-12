@@ -18225,6 +18225,36 @@ export class Emolga extends Pokemon {
   skill = Ability.ELECTRO_BALL
 }
 
+export class Drilbur extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.RARE
+  stars = 1
+  hp = 80
+  atk = 11
+  speed = 60
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.DRILL_RUN
+  additional = true
+}
+
+export class Excadrill extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 22
+  speed = 88
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.DRILL_RUN
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19225,7 +19255,9 @@ export const PokemonClasses: Record<
   [Pkm.LEDIAN]: Ledian,
   [Pkm.EMOLGA]: Emolga,
   [Pkm.TAILLOW]: Taillow,
-  [Pkm.SWELLOW]: Swellow
+  [Pkm.SWELLOW]: Swellow,
+  [Pkm.DRILBUR]: Drilbur,
+  [Pkm.EXCADRILL]: Excadrill
 }
 
 // declare all the classes in colyseus schema TypeRegistry

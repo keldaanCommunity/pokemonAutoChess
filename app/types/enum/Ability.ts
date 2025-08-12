@@ -158,6 +158,7 @@ export enum Ability {
   HEAL_ORDER = "HEAL_ORDER",
   SHELL_TRAP = "SHELL_TRAP",
   DIG = "DIG",
+  DRILL_RUN = "DRILL_RUN",
   FIRE_SPIN = "FIRE_SPIN",
   SEARING_SHOT = "SEARING_SHOT",
   PECK = "PECK",
