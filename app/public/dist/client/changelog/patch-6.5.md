@@ -21,6 +21,8 @@
 
 # UI
 
+- Added a tab in wiki for town encounters
+
 # Bugfix
 
 # Misc

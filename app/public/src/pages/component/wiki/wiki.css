@@ -152,8 +152,8 @@
 }
 
 #wiki-page .wiki-tutorials ul {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
   gap: 0.5em;
   padding: 0;
 }
@@ -163,8 +163,8 @@
 }
 
 #wiki-page .wiki-tutorials iframe {
-  width: 560px;
-  height: 315px;
+  width: 100%;
+  aspect-ratio: 16/9;
   max-width: 100%;
 }
 
@@ -186,13 +186,15 @@
   flex-wrap: wrap;
 }
 
-#wiki-weather > ul {
+#wiki-weather > ul,
+#wiki-town > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
   gap: 0.5em;
 }
 
-#wiki-weather > ul > .my-box {
+#wiki-weather > ul > .my-box,
+#wiki-town > ul > .my-box {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -253,13 +255,15 @@
   flex-wrap: wrap;
 }
 
-#wiki-weather .my-box header {
+#wiki-weather .my-box header,
+#wiki-town .my-box header {
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 
-#wiki-weather .my-box h2 {
+#wiki-weather .my-box h2,
+#wiki-town .my-box h2 {
   flex: 1;
   margin: 0;
   font-size: 2rem;
@@ -270,7 +274,8 @@
   height: 40px;
 }
 
-#wiki-weather .my-box p {
+#wiki-weather .my-box p,
+#wiki-town .my-box p {
   margin: 0;
   white-space: pre-line;
 }
