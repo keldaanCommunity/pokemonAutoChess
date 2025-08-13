@@ -493,7 +493,8 @@
 		"SPIN_OUT": "Spin Out",
 		"ULTRA_THRUSTERS": "Ultra Thrusters",
 		"ELECTRO_BALL": "Electro Ball",
-		"HORN_LEECH": "Horn Leech"
+		"HORN_LEECH": "Horn Leech",
+		"DRILL_RUN": "Drill Run"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1489,7 +1490,9 @@
 		"LEDYBA": "Ledyba",
 		"LEDIAN": "Ledian",
 		"TAILLOW": "Tailow",
-		"SWELLOW": "Swellow"
+		"SWELLOW": "Swellow",
+		"DRILBUR": "Drilbur",
+		"EXCADRILL": "Excadrill"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1963,7 +1966,8 @@
 		"SPIN_OUT": "Drifts to your backline, dealing [25,50,100,SP]% of user's SPEED as SPECIAL to target, and causing BLINDED for 1 second. Then user lose all the SPEED buffs from acceleration.",
 		"ULTRA_THRUSTERS": "Adjacent enemies take [50,100,200,SP] SPECIAL and get BURN for 3 seconds while user quickly moves backward to a safe spot.",
 		"ELECTRO_BALL": "Launches an electric ball that bounces between enemies, inflicting [10,20,40,SP] SPECIAL on each. The number and speed of bounces depends on the user's SPEED.",
-		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD."
+		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD.",
+		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2428,7 +2432,7 @@
 		"BLUE_ORB": "Every 4 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 20 PP",
 		"SCOPE_LENS": "Critical attacks steal 10 PP from the target.",
 		"STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
-		"GREEN_ORB": "Holder and adjacent allies regain 3 HP + 3% of their max HP every second. 30% of excess healing is converted to PP.",
+		"GREEN_ORB": "Holder and adjacent allies regain 3% of their max HP every second. 30% of excess healing is converted to PP.",
 		"DEEP_SEA_TOOTH": "The holder attacks restore 5 additional PP. If the attack knocks out the target, restore 15 additional PP.",
 		"SMOKE_BALL": "Once below 40% max HP, drop the smoke ball, gain 50 SHIELD and jump to a tile away. Every adjacent enemy is PARALYSIS and BLINDED for 4 seconds.",
 		"XRAY_VISION": "+50 SPEED. The holder attacks can no longer miss.",

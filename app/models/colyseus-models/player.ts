@@ -85,6 +85,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
+  @type("uint16") games: number // number of games played on this account
   @type("boolean") alive = true
   @type([HistoryItem]) history = new ArraySchema<HistoryItem>()
   @type({ map: "uint8" }) pokemonCustoms: PokemonCustoms =
@@ -137,6 +138,7 @@ export default class Player extends Schema implements IPlayer {
     id: string,
     name: string,
     elo: number,
+    games: number,
     avatar: string,
     isBot: boolean,
     rank: number,
@@ -150,6 +152,7 @@ export default class Player extends Schema implements IPlayer {
     this.spectatedPlayerId = id
     this.name = name
     this.elo = elo
+    this.games = games
     this.avatar = avatar
     this.isBot = isBot
     this.rank = rank

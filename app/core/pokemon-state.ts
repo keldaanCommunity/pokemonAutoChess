@@ -843,7 +843,7 @@ export default abstract class PokemonState {
       )
       for (const cell of adjacentCells) {
         if (cell.value && cell.value.team === pokemon.team) {
-          const { overheal } = cell.value.handleHeal(3 + 0.03 * cell.value.hp, pokemon, 0, false)
+          const { overheal } = cell.value.handleHeal(0.03 * cell.value.hp, pokemon, 0, false)
           if (overheal > 0) {
             cell.value.addPP(0.3 * overheal, pokemon, 0, false)
           }

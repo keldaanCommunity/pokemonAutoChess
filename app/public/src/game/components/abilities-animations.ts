@@ -1648,7 +1648,8 @@ export const AbilitiesAnimations: {
   [Ability.HIDDEN_POWER_QM]: hiddenPowerAnimation,
   [Ability.HIDDEN_POWER_EM]: hiddenPowerAnimation,
   [Ability.ICY_WIND]: orientedProjectile({ duration: 2000 }),
-  [Ability.HURRICANE]: orientedProjectile({ duration: 2000 }),
+  [Ability.HURRICANE]: orientedProjectile({ duration: 1000, distance: 4 }),
+  [Ability.DRILL_RUN]: orientedProjectile({ ability: Ability.HURRICANE, duration: 500, distance: 1, oriented: true, rotation: -Math.PI/2 }),
   [Ability.ROAR]: orientedProjectile({
     ability: Ability.WHIRLWIND,
     duration: 400,
