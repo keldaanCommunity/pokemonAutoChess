@@ -2302,7 +2302,7 @@
 		"RARE_CANDY": "Sonderbonbon",
 		"EVIOLITE": "Evolit",
 		"WHITE_FLUTE": "Weiße Flöte",
-		"GOLD_BOTTLE_CAP": "Goldkronkorken",
+		"GOLD_BOTTLE_CAP": "Goldener Kronkorken",
 		"ABSORB_BULB": "Knolle",
 		"SACRED_ASH": "Zauberasche",
 		"COMET_SHARD": "Kometstück",
@@ -2743,6 +2743,7 @@
 		"VIGOROTH": "$t(pkm.VIGOROTH) ist immun zu SLEEP",
 		"SLAKING": "Wenn $t(pkm.SLAKING) von SLEEP aufwacht, erhält es RAGE für 3 Sekunden.",
 		"STANTLER": "Entwickelt sich zu $t(pkm.WYRDEER) wenn die Region gewechselt wird.",
+		"FUR_COAT": "$t(pkm.FURFROU)s Fell wächst, was pro Runde +2 DEF und -5 SPEED gibt. Kann geschoren werden wenn es eine Runde auf der Bank sitzt was DEF und SPEED zurücksetzt.",
 		"ACCELERATION": "Beschleunigung: erhält 20 SPEED für jedes Feld was es sich fortbewegt (Sprünge und ähnliches zählt als eine Fortbewegung)",
 		"MELTAN": "Wenn es auf $t(pkm.MELMETAL) benutzt wird, verschmelze und gib $t(pkm.MELMETAL) 50 max HP"
 	},
@@ -3056,6 +3057,7 @@
 		"FEARSOME": "Holen Sie sich ein Lusardin in Schwarmform",
 		"GOLDEN": "Hole ein Monetigo",
 		"ANNIHILATOR": "Erhalte ein Epitaff.",
+		"LUCKY": "Erhalten einen Jackpot mit 10 oder mehr Gold mit dem Goldenen Kronkorken",
 		"GIANT": "Hab ein Pokémon über 1500 HP",
 		"LEGEND": "Spiele mit 3 oder mehr Legendären Pokémon in deinem Team",
 		"DECURION": "Spiele mit 10 Pokémon in deinem Team, Klone und herbeigerufene Pokémon zählen nicht",
@@ -3264,11 +3266,15 @@
 	"chat": "Chat",
 	"edit": "Bearbeiten",
 	"delete": "Löschen",
+	"approve": "Zustimmen",
+	"disapprove": "Ablehnen",
 	"load": "Belastung",
 	"url_created": "URL erstellt",
 	"bot_ready_submission": "Wenn Sie der Meinung sind, dass Ihr Bot bereit ist, können Sie ihn bei der Discord-Community einreichen. Ihr Bot wird im Discord-Kanal #bot-creation überprüft.",
 	"cancel": "Abbrechen",
 	"submit_your_bot": "Senden Sie Ihren Bot",
+	"bot_submitted_success": "Dein Bot wurde erfolgreich eingreicht. Du kannst Fragen und den Status im Discord Channel #bot-creation einsehen.",
+	"bot_submission_failed": "Ein Fehler ist während deim einreichen deines Bots aufgetreten: {{error}}.\nBit versuche es später erneut, und wenn der Fehler wieder auftritt, poste einen #bug-report auf Discord.",
 	"import": "Importieren",
 	"import_bot": "Beginnen Sie mit einem vorhandenen BOT oder fügen Sie Ihre eigenen BOT-Daten ein",
 	"existing_bot": "Vorhandener BOT",
@@ -3276,6 +3282,7 @@
 	"by": "von",
 	"shiny": "Schillernd",
 	"emotion_label": "Emotion",
+	"submit": "Einreichen",
 	"help_create_bot": "Um einen Bot zu erstellen, müssen Sie eine bestimmte Anzahl von Schritten ausführen. Jeder Schritt stellt den Status Ihres Bots zu einem bestimmten Zeitpunkt im Spiel dar. Der Bot beginnt mit dem Team, das in Schritt 1 definiert wurde. Dann geht es zu Schritt 2 und so weiter. Das Team von Schritt 2 sollte immer stärker sein als das Team von Schritt 2 1 Team Da der Spieler nicht mehr als 10 Pokémon pro Schritt bekommen kann, ist auch Ihr Bot nicht erlaubt.",
 	"item_components": "Item Komponente",
 	"board_power": "Macht der Tafel",
@@ -3602,7 +3609,8 @@
 		"jukebox_desc": "Wähle deine Musik im Spiel",
 		"gameboy": "Gameboy",
 		"gameboy_desc": "Spiele den Gameboy-Prototypen des Spiels.",
-		"pokeguesser": "PokéGuessr"
+		"pokeguesser": "PokéGuessr",
+		"pokeguesser_desc": "Beantworte Fragen im Pokémon Rate-Spiel während du wartest das die Lobby startet."
 	},
 	"level_required": "Level erforderlich",
 	"map": {
@@ -3904,6 +3912,12 @@
 		"easy": "Einfach",
 		"normal": "Normal",
 		"hard": "Ultra"
+	},
+	"technical_terms": {
+		"STRONGEST": "stärksten"
+	},
+	"technical_terms_definitions": {
+		"STRONGEST": "Stärksten wird in einer absteigenden Priorität definiert: 1. Die Anzahl der getragenen Items, 2. Einheits-Stufe, 3. Einheits-Seltenheit"
 	},
 	"victory_road": {
 		"title": "Siegesstraße",
