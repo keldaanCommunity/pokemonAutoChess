@@ -2423,6 +2423,7 @@
 		"POWER_LENS": "Der durch SPE_DEF reduzierte SPECIAL Wert wird dem Angreifer wieder zugefügt.",
 		"SHELL_BELL": "Das Pokémon heilt sich um 33% des verursachten Schadens",
 		"LUCKY_EGG": "Erhöhen Sie das LUCK des Inhabers um 30 %",
+		"AQUA_EGG": "Das tragende Pokémon erhält 20% seiner max PP zurück nach Verwendung der Fähigkeit, pro Anwendung +2 PP mehr für diesen Kampf",
 		"BLUE_ORB": "Jeder vierten Angriff des Pokémons löst einen Kettenblitz aus, der auf die 2 sich nähernden Feinde überspringt und 10 SPECIAL verursacht und 20 PP verbrennt.",
 		"SCOPE_LENS": "Kritische Treffer stehlen dem Ziel 10 PP.",
 		"STAR_DUST": "Nach Einsatz der Fähigkeit, erhält das Pokémon 50% der max. PP als SHIELD",
@@ -2437,6 +2438,7 @@
 		"MUSCLE_BAND": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +2 DEF, +1 ATK und +5 SPEED (maximal 20 Stapel).",
 		"WONDER_BOX": "Zu Beginn jeder Schlacht wird die Wunderkiste durch 2 temporäre Gegenstände ersetzt (maximal 3 Gegenstände enthalten).",
 		"ABILITY_SHIELD": "Wenn der Kampf beginnt, erhalten der Träger und alle benachbarten Verbündeten in derselben Reihe 20 % HP als SHIELD und 5 Sekunden lang RUNE_PROTECT",
+		"STICKY_BARB": "Wenn das Pokémon von einem Angriff in Nahkampfreichweite getroffen wird, reflektiere 3 + 15% der DEF als TRUE zum Angreifer zurück, hat eine [30,LK]% Chance WOUND für 3 Sekunden zu verursachen.",
 		"WIDE_LENS": "Der Besitzer erhält +2 RANGE",
 		"RAZOR_CLAW": "Der Inhaber erhält +50 % CRIT_CHANCE",
 		"FLUFFY_TAIL": "Der Inhaber ist gegen alle Statusänderungen immun",
@@ -2588,7 +2590,9 @@
 		"EXCHANGE_TICKET": "Tausche ein Item-Part oder ein fertiggestelltes Item auf der Bank für ein zufälliges aus. Einmalige Nutzung.",
 		"TREASURE_BOX": "Du wunderst dich was drinsteckt.",
 		"AUSPICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Glückverheißende Wünsche leben in ihm.",
-		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm."
+		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm.",
+		"SCROLL_OF_WATERS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Wassers. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_RAPID) weiter.",
+		"SCROLL_OF_DARKNESS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Unlichts. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_SINGLE) weiter."
 	},
 	"passive_description": {
 		"NONE": "Keine Passive",
@@ -2735,7 +2739,9 @@
 		"DURALUDON": "Duraludon sucht nach einem ARTIFICIAL Item.",
 		"CHARCADET": "Das Besiegen des Mew-Duos verleiht Knarbon entweder AUSPICIOUS_ARMOR oder MALICIOUS_ARMOR, je nachdem, ob deine dominante Synergie PSYCHIC oder GHOST ist.",
 		"ZACIAN": "Zacian sucht den Kampf mit den Legendären Vögeln um sich sein RUSTED_SWORD zurückzuerobern",
+		"PARTING_SHOT": "Schüchtert das Ziel ein wenn es zum ersten mal Angegriffen wird, was ATK und AP um 20% reduziert.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) ist immun zu SLEEP",
+		"SLAKING": "Wenn $t(pkm.SLAKING) von SLEEP aufwacht, erhält es RAGE für 3 Sekunden.",
 		"STANTLER": "Entwickelt sich zu $t(pkm.WYRDEER) wenn die Region gewechselt wird.",
 		"ACCELERATION": "Beschleunigung: erhält 20 SPEED für jedes Feld was es sich fortbewegt (Sprünge und ähnliches zählt als eine Fortbewegung)",
 		"MELTAN": "Wenn es auf $t(pkm.MELMETAL) benutzt wird, verschmelze und gib $t(pkm.MELMETAL) 50 max HP"
