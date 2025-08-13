@@ -5,6 +5,8 @@
 
 # Changes to Pokemon & Abilities
 
+- Meltan: PP 80 → 50
+
 # Changes to Synergies
 
 - Weather rocks are no longer collected during PVE rounds
