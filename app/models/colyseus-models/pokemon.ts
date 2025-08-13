@@ -5475,7 +5475,7 @@ export class Meltan extends Pokemon {
   speed = 40
   def = 8
   speDef = 2
-  maxPP = 80
+  maxPP = 50
   range = 1
   skill = Ability.MAGNET_PULL
   passive = Passive.MELTAN
