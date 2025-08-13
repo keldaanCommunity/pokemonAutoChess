@@ -48,7 +48,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
-  [Item.GREEN_ORB]: { [Stat.PP]: 15, [Stat.SPE_DEF]: 3 },
+  [Item.GREEN_ORB]: { [Stat.SPE_DEF]: 3 },
   [Item.DEEP_SEA_TOOTH]: { [Stat.PP]: 15, [Stat.ATK]: 7 },
   [Item.SMOKE_BALL]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.XRAY_VISION]: { [Stat.SPEED]: 50 },
