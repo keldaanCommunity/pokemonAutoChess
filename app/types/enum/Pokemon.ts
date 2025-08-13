@@ -1,5 +1,3 @@
-import { AnimationType } from "../Animation"
-
 export enum Pkm {
   ABOMASNOW = "ABOMASNOW",
   ABRA = "ABRA",
@@ -214,6 +212,7 @@ export enum Pkm {
   DREEPY = "DREEPY",
   DRIFBLIM = "DRIFBLIM",
   DRIFLOON = "DRIFLOON",
+  DRILBUR = "DRILBUR",
   DRIZZILE = "DRIZZILE",
   DROWZEE = "DROWZEE",
   DRUDDIGON = "DRUDDIGON",
@@ -242,6 +241,7 @@ export enum Pkm {
   ESPEON = "ESPEON",
   ESPURR = "ESPURR",
   ETERNATUS = "ETERNATUS",
+  EXCADRILL = "EXCADRILL",
   EXEGGCUTE = "EXEGGCUTE",
   EXEGGUTOR = "EXEGGUTOR",
   EXPLOUD = "EXPLOUD",
@@ -1631,8 +1631,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.GIGALITH]: "0526",
   [Pkm.WOOBAT]: "0527",
   [Pkm.SWOOBAT]: "0528",
-  //[Pkm.DRILBUR]: "0529",
-  //[Pkm.EXCADRILL]: "0530",
+  [Pkm.DRILBUR]: "0529",
+  [Pkm.EXCADRILL]: "0530",
   [Pkm.AUDINO]: "0531",
   [Pkm.TIMBURR]: "0532",
   [Pkm.PILLAR_WOOD]: "0532-0002",
@@ -3168,7 +3168,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LEDIAN]: Pkm.LEDYBA,
   [Pkm.EMOLGA]: Pkm.EMOLGA,
   [Pkm.TAILLOW]: Pkm.TAILLOW,
-  [Pkm.SWELLOW]: Pkm.TAILLOW
+  [Pkm.SWELLOW]: Pkm.TAILLOW,
+  [Pkm.DRILBUR]: Pkm.DRILBUR,
+  [Pkm.EXCADRILL]: Pkm.DRILBUR
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

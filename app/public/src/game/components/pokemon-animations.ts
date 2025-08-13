@@ -6827,5 +6827,19 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.FLYING_MELEE,
         hitSprite: HitSprite.FLYING_HIT
     },
+    [Pkm.DRILBUR]: {
+        attack: AnimationType.Attack,
+        ability: AnimationType.MultiScratch,
+        emote: AnimationType.Emit,
+        attackSprite: AttackSprite.STEEL_MELEE,
+        hitSprite: HitSprite.STEEL_HIT
+    },
+    [Pkm.EXCADRILL]: {
+        attack: AnimationType.Strike,
+        ability: AnimationType.Attack,
+        emote: AnimationType.Shoot,
+        attackSprite: AttackSprite.STEEL_MELEE,
+        hitSprite: HitSprite.STEEL_HIT
+    }
 }
 

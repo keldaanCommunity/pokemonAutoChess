@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Drilbur
+- Excadrill
+
 # Changes to Pokemon & Abilities
 
 # Changes to Synergies
