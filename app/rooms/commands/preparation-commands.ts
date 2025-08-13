@@ -111,6 +111,7 @@ export class OnJoinCommand extends Command<
             u.uid,
             u.displayName,
             u.elo,
+            u.games,
             u.avatar,
             false,
             false,
@@ -689,6 +690,7 @@ export class InitializeBotsCommand extends Command<
                 bot.id,
                 bot.name,
                 bot.elo,
+                99, // arbitrary number of games played
                 bot.avatar,
                 true,
                 true,
@@ -787,6 +789,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             bot.id,
             bot.name,
             bot.elo,
+            99, // arbitrary number of games played
             bot.avatar,
             true,
             true,

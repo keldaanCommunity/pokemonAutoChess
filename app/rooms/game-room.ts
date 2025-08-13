@@ -201,6 +201,7 @@ export default class GameRoom extends Room<GameState> {
             user.uid,
             user.name,
             user.elo,
+            user.games + 1, // already counting this new game
             user.avatar,
             true,
             this.state.players.size + 1,
@@ -219,6 +220,7 @@ export default class GameRoom extends Room<GameState> {
               user.uid,
               user.displayName,
               user.elo,
+              user.games + 1, // already counting this new game
               user.avatar,
               false,
               this.state.players.size + 1,
@@ -985,6 +987,7 @@ export default class GameRoom extends Room<GameState> {
         inventory: Item[]
       }>(),
       elo: player.elo,
+      games: player.games,
       synergies: [],
       title: player.title,
       role: player.role

@@ -232,6 +232,7 @@ export default function Game() {
       room?.state.players.forEach((p) => {
         const afterPlayer: IAfterGamePlayer = {
           elo: p.elo,
+          games: p.games,
           name: p.name,
           id: p.id,
           rank: p.rank,

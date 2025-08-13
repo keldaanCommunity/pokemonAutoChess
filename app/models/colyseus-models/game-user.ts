@@ -8,6 +8,7 @@ export interface IGameUser {
   ready: boolean
   isBot: boolean
   elo: number
+  games: number
   title: string
   role: Role
   anonymous: boolean
@@ -19,6 +20,7 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") ready: boolean
   @type("boolean") isBot: boolean
   @type("uint16") elo: number
+  @type("uint16") games: number
   @type("string") title: string
   @type("string") role: Role
   @type("boolean") anonymous: boolean
@@ -27,6 +29,7 @@ export class GameUser extends Schema implements IGameUser {
     uid: string,
     name: string,
     elo: number,
+    games: number,
     avatar: string,
     isBot: boolean,
     ready: boolean,
@@ -41,6 +44,7 @@ export class GameUser extends Schema implements IGameUser {
     this.ready = ready
     this.isBot = isBot
     this.elo = elo
+    this.games = games
     this.title = title
     this.role = role
     this.anonymous = anonymous

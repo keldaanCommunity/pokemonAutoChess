@@ -20,9 +20,9 @@ export function computeElo(
       const expectedScore = eloEngine.getExpected(previousElo, plyr.elo)
       //logger.debug("against ", plyr.name, "expected", expectedScoreA)
       if (rank < plyr.rank) {
-        eloGains.push(eloEngine.updateRating(expectedScore, 1, previousElo))
+        eloGains.push(eloEngine.updateRating(expectedScore, 1, previousElo, player.games))
       } else {
-        eloGains.push(eloEngine.updateRating(expectedScore, 0, previousElo))
+        eloGains.push(eloEngine.updateRating(expectedScore, 0, previousElo, player.games))
       }
     }
   })

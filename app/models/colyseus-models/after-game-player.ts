@@ -24,6 +24,7 @@ export default class AfterGamePlayer
   @type("uint8") rank: number
   @type([PokemonRecord]) pokemons = new ArraySchema<IPokemonRecord>()
   @type("uint16") elo: number
+  @type("uint16") games: number
   @type("string") title: string
   @type("string") role: Role
   @type([SampleSynergy]) synergies = new ArraySchema<{
@@ -46,6 +47,7 @@ export default class AfterGamePlayer
       | Array<{ name: Synergy; value: number }>
       | ArraySchema<{ name: Synergy; value: number }>,
     elo: number,
+    games: number,
     moneyEarned: number,
     playerDamageDealt: number,
     rerollCount: number
@@ -58,6 +60,7 @@ export default class AfterGamePlayer
     this.title = title
     this.role = role
     this.elo = elo
+    this.games = games
     this.moneyEarned = moneyEarned
     this.playerDamageDealt = playerDamageDealt
     this.rerollCount = rerollCount
