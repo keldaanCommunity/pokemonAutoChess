@@ -493,7 +493,8 @@
 		"SPIN_OUT": "Reifendrehung",
 		"ULTRA_THRUSTERS": "Ultradüsen",
 		"ELECTRO_BALL": "Elektroball",
-		"HORN_LEECH": "Holzgeweih"
+		"HORN_LEECH": "Holzgeweih",
+		"DRILL_RUN": "Schlagborer"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1489,7 +1490,9 @@
 		"LEDYBA": "Ledyba",
 		"LEDIAN": "Ledian",
 		"TAILLOW": "Schwalbini",
-		"SWELLOW": "Schwalboss"
+		"SWELLOW": "Schwalboss",
+		"DRILBUR": "Rotomurf",
+		"EXCADRILL": "Stalobor"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
@@ -1711,6 +1714,7 @@
 		"HIDDEN_POWER_P": "Bringe 5 zufällige BUG STAR Pokémon",
 		"HIDDEN_POWER_Q": "Beendet den Kampf sofort mit einem Unentschieden",
 		"HIDDEN_POWER_R": "Erhalte 6 kostenlose Shop-Rerolls",
+		"HIDDEN_POWER_S": "Eine Flutwelle entfernt alle Feld- und Status-Effekte, heilt dein Team um 20% HP und stößt Gegner zurück die 10% ihrer HP als TRUE erleiden.",
 		"HIDDEN_POWER_T": "Erhalte 3 zufällige Beeren",
 		"HIDDEN_POWER_U": "Bringe Selfe mit Manaphy-Ei und maximalem PP hervor",
 		"HIDDEN_POWER_V": "Wirke $t(ability.THUNDER_SHOCK) auf das gesamte gegnerische Team",
@@ -1944,9 +1948,11 @@
 		"PSYCHO_CUT": "Drei Psychoklingen schneiden durch die Gegner in einer Linie durchs Ziel, jede Klinge verursacht [10,20,40,SP] SPECIAL an jedem getroffenen Pokémon. Kann kritisch treffen.",
 		"WICKED_BLOW": "Füge dem Ziel [60,SP] TRUE zu. Zählt immer als Kritischer Treffer.",
 		"SURGING_STRIKES": "Greift das Ziel 3 mal mit einer fließenden Bewegung an, was [100,SP]% der ATK als SPECIAL per Treffer verursacht. Immer ein kritischer Treffer",
+		"VICTORY_DANCE": "Tanzt um den Sieg einzuläuten. Erhöht die ATK und DEF um [3,SP] und SPEED um [10,SP].",
 		"BOOMBURST": "Füge [60,SP] SPECIAL zu allen benachbarten Pokémon inklusive Verbündete und lässt sie für 4 Sekunden FLINCH.",
 		"FOLLOW_ME": "Spirnge zu einem weit entfernten freien Feld und erhalte [40,SP] SHIELD. Gegner die den Benutzer anvisieren werden für 3 Sekunden CHARM.",
 		"AFTER_YOU": "Gebe dem nächsten STRONGEST Verbündeten [15,SP] PP und [10,SP] SPEED.",
+		"COTTON_GUARD": "Hüllt den Körper in Watte um [15,30,60,SP] SHIELD und 3 DEF zu erhalten, lässt danach 3 Wattekugeln vor sich Fallen. Wattekugeln bleiben auf dem Boden liegen und verursacehn SLEEP für 1 Sekunden wenn ein Pokémon drauftritt.",
 		"TWIN_BEAM": "Schießt zwei Laser auf das entfernteste Pokémon, was [30,60,100,SP] SPECIAL an allen Gegnern in einer Linie anrichtet.",
 		"SWAGGER": "Füge dem Ziel RAGE und CONFUSION für [3,SP] Sekunden zu.",
 		"ENCORE": "Benutze die zuletzt verwendete Fähigkeit eines Verbündeten",
