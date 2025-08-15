@@ -61,7 +61,6 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
-import { mongo } from "mongoose"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -939,26 +938,35 @@ export class JoinOrOpenRoomCommand extends Command<
         let maxRank = EloRank.BEAST_BALL
         switch (userRank) {
           case EloRank.LEVEL_BALL:
-          case EloRank.NET_BALL:
+            // 0- 1100
             minRank = EloRank.LEVEL_BALL
             maxRank = EloRank.NET_BALL
             break
+          case EloRank.NET_BALL:
+            // 1050-1150
+            minRank = EloRank.NET_BALL
+            maxRank = EloRank.SAFARI_BALL
+            break
           case EloRank.SAFARI_BALL:
           case EloRank.LOVE_BALL:
-          case EloRank.PREMIER_BALL:
-            minRank = EloRank.NET_BALL
+            // 1100-1250
+            minRank = EloRank.SAFARI_BALL
             maxRank = EloRank.PREMIER_BALL
             break
+          case EloRank.PREMIER_BALL:
           case EloRank.QUICK_BALL:
+            // 1200-1350
+            minRank = EloRank.PREMIER_BALL
+            maxRank = EloRank.POKE_BALL
+            break
+
           case EloRank.POKE_BALL:
           case EloRank.SUPER_BALL:
-            minRank = EloRank.PREMIER_BALL
-            maxRank = EloRank.SUPER_BALL
-            break
           case EloRank.ULTRA_BALL:
           case EloRank.MASTER_BALL:
           case EloRank.BEAST_BALL:
-            minRank = EloRank.SUPER_BALL
+            // 1300+
+            minRank = EloRank.POKE_BALL
             maxRank = EloRank.BEAST_BALL
             break
         }

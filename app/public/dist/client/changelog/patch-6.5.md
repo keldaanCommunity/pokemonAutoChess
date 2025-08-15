@@ -17,7 +17,7 @@
 
 # Gameplay
 
-- Ranked matches created by Ultra ball rank and above are now open with a min elo requirement of Super ball rank instead of Pokeball rank. The previous overlap was too large and ended up counter-productive.
+- Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
 
 # UI
 
