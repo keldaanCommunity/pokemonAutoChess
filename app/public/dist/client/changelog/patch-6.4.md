@@ -78,7 +78,7 @@
 - Pokemonomicon new recipe: charcoal + twisted spoon ; new base stats: 10 AP, 3 attack ; new icon
 - Shell Bell new recipe: charcoal + never melting ice ; new base stats: 3 special defense, 3 attack
 - Adjustments to Aqua egg rework: starting PP 50 → 30, regain 20 PP → 25% of max PP after casting + 2 PP per ability cast during the fight
-- Adjustments to Green orb: now heals 3 HP + 3% of max HP per second, and 30% of excess healing is converted to PP
+- Adjustments to Green orb: now heals 3% of max HP per second, and 30% of excess healing is converted to PP
 - Rework Soul Dew: now gives 5 AP and 5 PP per second
 - Mana Scarf renamed Deep sea tooth: Attack 3 → 7, PP on attack 8 → 5, if the attack KO the target, gain 15 additional PP
 - Swift Wing renamed to Air Balloon: now makes the holder levitate, which gives immunity to board effects
