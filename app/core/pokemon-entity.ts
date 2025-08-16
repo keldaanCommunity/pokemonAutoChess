@@ -943,7 +943,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker: target,
         isRetaliation: true,
         shouldTargetGainMana: true
-      )
+      })
     }
 
     if (target.effects.has(EffectEnum.SHELL_TRAP) && physicalDamage > 0) {
