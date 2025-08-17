@@ -638,7 +638,7 @@ export const Sweets: Item[] = [
   Item.RIBBON_SWEET
 ]
 
-export const NonHoldableItems: Item[] = [
+export const UnholdableItems: Item[] = [
   ...WeatherRocks,
   ...FishingRods,
   ...TMs,
@@ -659,12 +659,13 @@ export const NonHoldableItems: Item[] = [
   Item.EXCHANGE_TICKET
 ]
 
-export const ConsummableItems: Item[] = [
+export const ConsumableItems: Item[] = [
   ...TMs,
   ...HMs,
   ...Dishes,
   ...Flavors,
   ...Sweets,
+  Item.PICNIC_SET,
   Item.FIRE_SHARD,
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,

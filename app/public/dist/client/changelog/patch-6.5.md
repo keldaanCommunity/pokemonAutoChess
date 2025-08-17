@@ -21,6 +21,8 @@
 
 # UI
 
+- Added "Unholdable" and "Consumable" labels in item descriptions
+
 # Bugfix
 
 # Misc

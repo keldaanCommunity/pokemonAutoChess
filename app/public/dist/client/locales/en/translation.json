@@ -3472,6 +3472,8 @@
 	"popular_items": "Popular items",
 	"components": "Components",
 	"craftable_items": "Craftable",
+	"consumable_item": "Consumable",
+	"unholdable_item": "Unholdable",
 	"food": "Food",
 	"berries": "Berries",
 	"dishes": "Dishes",
