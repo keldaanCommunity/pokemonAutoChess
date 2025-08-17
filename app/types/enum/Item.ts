@@ -667,5 +667,7 @@ export const ConsummableItems: Item[] = [
   ...Sweets,
   Item.FIRE_SHARD,
   Item.SCROLL_OF_DARKNESS,
-  Item.SCROLL_OF_WATERS
+  Item.SCROLL_OF_WATERS,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR
 ]
