@@ -241,6 +241,13 @@ export default class BoardManager {
         this.addPvePokemons(PVEStages[this.state.stageLevel], true)
       }
     }
+
+    const [x,y] = transformBoardCoordinates(1,1)
+    this.scene.add.sprite(x, y+10, "abilities", "GROUND_HOLE/000.png").setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+    this.scene.add.sprite(x+96*1, y+10, "abilities", "GROUND_HOLE/001.png").setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+    this.scene.add.sprite(x+96*2, y+10, "abilities", "GROUND_HOLE/002.png").setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+    this.scene.add.sprite(x+96*3, y+10, "abilities", "GROUND_HOLE/003.png").setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+    this.scene.add.sprite(x+96*4, y+10, "abilities", "GROUND_HOLE/004.png").setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
   }
 
   showLightCell() {
