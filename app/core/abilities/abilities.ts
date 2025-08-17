@@ -7202,7 +7202,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const nbHits = 4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    const nbHits = Math.round(4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
     for (let i = 0; i < nbHits; i++) {
       target.addDefense(-1, pokemon, 0, false)
       target.addSpecialDefense(-1, pokemon, 0, false)

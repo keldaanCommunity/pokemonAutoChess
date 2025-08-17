@@ -19,9 +19,9 @@ export const OrientationAngle: Record<Orientation, number> = {
   [Orientation.RIGHT]: 0,
   [Orientation.DOWNRIGHT]: -Math.PI / 4,
   [Orientation.DOWN]: -Math.PI / 2,
-  [Orientation.DOWNLEFT]: -3 * Math.PI / 4,
+  [Orientation.DOWNLEFT]: (-3 * Math.PI) / 4,
   [Orientation.LEFT]: Math.PI,
-  [Orientation.UPLEFT]: 3 * Math.PI / 4
+  [Orientation.UPLEFT]: (3 * Math.PI) / 4
 }
 
 export const OrientationArray: Orientation[] = [
@@ -44,13 +44,13 @@ export function effectInLine(
   const orientation: Orientation =
     target instanceof PokemonEntity
       ? board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-      )
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY,
+          pokemon,
+          target
+        )
       : target
 
   const targetsHit = new Set()

@@ -52,14 +52,13 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  AbilityPerTM,
   ArtificialItems,
   Berries,
+  ConsummableItems,
   CraftableItems,
   Dishes,
   FishingRods,
   Flavors,
-  HMs,
   Item,
   ItemComponents,
   ItemRecipe,
@@ -68,8 +67,7 @@ import {
   Sweets,
   SynergyFlavors,
   SynergyGivenByItem,
-  SynergyStones,
-  TMs
+  SynergyStones
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -693,10 +691,14 @@ export class OnDragDropItemCommand extends Command<
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
-    if (NonHoldableItems.includes(item)) {
+    if (pokemon.items.has(item) && NonHoldableItems.includes(item)) {
       // if the item is not holdable, we immediately remove it from the pokemon items
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
+      if (ConsummableItems.includes(item) === false) {
+        // item is not holdable and has not been consumed, so we add it back to player items
+        player.items.push(item)
+      }
     }
 
     player.updateSynergies()

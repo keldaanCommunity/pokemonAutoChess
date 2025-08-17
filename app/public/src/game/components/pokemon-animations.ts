@@ -1131,13 +1131,13 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.ROCK_MELEE,
         hitSprite: HitSprite.ROCK_HIT
     },
-    [Pkm.MEGA_STEELIX]: {
+    /*[Pkm.MEGA_STEELIX]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shoot,
         emote: AnimationType.Shoot,
         shinyUnavailable: true,
         attackSprite: AttackSprite.ROCK_MELEE
-    },
+    },*/
     [Pkm.SCYTHER]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Slice,
@@ -1450,12 +1450,12 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.GROUND_MELEE,
         hitSprite: HitSprite.GROUND_HIT
     },
-    [Pkm.MEGA_CAMERUPT]: {
+    /*[Pkm.MEGA_CAMERUPT]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.GROUND_MELEE
-    },
+    },*/
     [Pkm.DARKRAI]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Sink,
@@ -1579,12 +1579,12 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.ICE_MELEE,
         hitSprite: HitSprite.ICE_HIT
     },
-    [Pkm.MEGA_ABOMASNOW]: {
+    /*[Pkm.MEGA_ABOMASNOW]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ICE_MELEE
-    },
+    },*/
     [Pkm.VANILLITE]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.DeepBreath,
@@ -2153,13 +2153,13 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.FIGHTING_MELEE,
         hitSprite: HitSprite.FIGHTING_HIT
     },
-    [Pkm.MEGA_LOPUNNY]: {
+    /*[Pkm.MEGA_LOPUNNY]: {
         attack: AnimationType.QuickStrike,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.FIGHTING_MELEE,
         hitSprite: HitSprite.FIGHTING_HIT
-    },
+    },*/
     [Pkm.AXEW]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Swing,
@@ -2231,13 +2231,13 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.ELECTRIC_MELEE,
         hitSprite: HitSprite.ELECTRIC_HIT
     },
-    [Pkm.MEGA_MANECTRIC]: {
+    /*[Pkm.MEGA_MANECTRIC]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shock,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.ELECTRIC_MELEE,
         hitSprite: HitSprite.ELECTRIC_HIT
-    },
+    },*/
     [Pkm.SHUPPET]: {
         attack: AnimationType.SpAttack,
         ability: AnimationType.Double,
@@ -2252,13 +2252,13 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.GHOST_MELEE,
         hitSprite: HitSprite.GHOST_HIT
     },
-    [Pkm.MEGA_BANETTE]: {
+    /*[Pkm.MEGA_BANETTE]: {
         attack: AnimationType.Strike,
         ability: AnimationType.Double,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.GHOST_MELEE,
         hitSprite: HitSprite.GHOST_HIT
-    },
+    },*/
     [Pkm.HONEDGE]: {
         attack: AnimationType.Slice,
         ability: AnimationType.Swing,
@@ -2461,13 +2461,13 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.DRAGON_RANGE,
         hitSprite: HitSprite.SOUND_HIT
     },
-    [Pkm.MEGA_ALTARIA]: {
+    /*[Pkm.MEGA_ALTARIA]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Attack,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.DRAGON_RANGE,
         hitSprite: HitSprite.SOUND_HIT
-    },
+    },*/
     [Pkm.CASTFORM]: {
         attack: AnimationType.Shoot,
         ability: AnimationType.Rotate,
@@ -2773,13 +2773,13 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.FIRE_MELEE,
         hitSprite: HitSprite.DARK_HIT
     },
-    [Pkm.MEGA_HOUNDOOM]: {
+    /*[Pkm.MEGA_HOUNDOOM]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Shake,
         emote: AnimationType.Shoot,
         attackSprite: AttackSprite.FIRE_MELEE,
         hitSprite: HitSprite.DARK_HIT
-    },
+    },*/
     [Pkm.CLAMPERL]: {
         attack: AnimationType.Attack,
         ability: AnimationType.Hop,

@@ -27,7 +27,7 @@ export async function fetchProfile(forceRefresh: boolean = false) {
     if (!forceRefresh && profile) {
         return Promise.resolve(profile)
     }
-    return fetch("/profile", {
+    return fetch(`/profile?t=${Date.now()}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

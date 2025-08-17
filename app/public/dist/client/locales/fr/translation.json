@@ -1964,7 +1964,7 @@
 		"STEAMROLLER": "Roule sur les ennemis jusqu'à atteindre la cible la plus éloignée, infligeant [40,80,150,SP]% de SPEED comme SPECIAL à tous les ennemis sur son chemin avec [50,LK]% de chance de leur appliquer FLINCH pendant 3 secondes.",
 		"MAGNET_PULL": "Attire un Pokémon STEEL aléatoire sur le champ de bataille. Cliquez dessus pour l'ajouter à votre banc.",
 		"SPIN_OUT": "Drift vers votre rangée arrière, infligeant [25,50,100,SP]% de la SPEED du lanceur en SPECIAL à la cible, la rendant BLINDED pendant 1 seconde. Le lanceur perd ensuite tous les bonus de SPEED liés à son passif Turbo.",
-		"ULTRA_THRUSTERS": "Les ennemis adjacents subissent [50,100,200,SP] SPECIAL et BURN pendant 3 secondes tandis que le lanceur recule rapidement vers un emplacement sûr.",
+		"ULTRA_THRUSTERS": "Les ennemis adjacents subissent [20,40,80,SP] SPECIAL et BURN pendant 2 secondes tandis que le lanceur recule rapidement vers un emplacement sûr.",
 		"ELECTRO_BALL": "Lance une boule électrique qui rebondit entre les ennemis, infligeant [10,20,40,SP] SPECIAL à chacun. Le nombre et la vitesse des rebonds dépendent de la SPEED du lanceur.",
 		"HORN_LEECH": "Un coup de corne qui draine l'énergie de l'ennemi, infligeant [200,SP]% de l'ATK du lanceur en SPECIAL et soignant le lanceur de 50% des dégâts infligés. 50% du surplus de soin est converti en SHIELD.",
 		"DRILL_RUN": "Charge à travers la cible comme une perceuse, infligeant [15,30,SP] TRUE et échangeant leur position. S'il y a une autre cible derrière dans la même direction, lance immédiatement à nouveau la capacité sur cette cible.. Peut infliger un coup critique par défaut."

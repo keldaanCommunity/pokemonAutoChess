@@ -18,7 +18,6 @@ import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import History from "../models/mongo-models/history"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
@@ -60,6 +59,7 @@ import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
+  NonPkm,
   Pkm,
   PkmDuos,
   PkmIndex,
@@ -718,14 +718,6 @@ export default class GameRoom extends Room<GameState> {
         this.transformToSimplePlayer(p)
       )
 
-      History.create({
-        id: this.state.preparationId,
-        name: this.state.name,
-        startTime: this.state.startTime,
-        endTime: this.state.endTime,
-        players: humans.map((p) => this.transformToSimplePlayer(p))
-      })
-
       if (this.state.stageLevel >= MinStageForGameToCount) {
         const elligibleToXP = this.state.players.size >= 2
         if (elligibleToXP) {
@@ -968,10 +960,12 @@ export default class GameRoom extends Room<GameState> {
 
       if (
         player.titles.has(Title.COLLECTOR) === false &&
-        Object.values(PkmIndex).every((pkmIndex) => {
-          const pokemonCollectionItem = usr.pokemonCollection.get(pkmIndex)
-          return pokemonCollectionItem && pokemonCollectionItem.played > 0
-        })
+        Object.values(Pkm)
+          .filter((p) => NonPkm.includes(p) === false)
+          .every((pkm) => {
+            const pokemonCollectionItem = usr.pokemonCollection.get(PkmIndex[pkm])
+            return pokemonCollectionItem && pokemonCollectionItem.played > 0
+          })
       ) {
         player.titles.add(Title.COLLECTOR)
       }
@@ -1047,7 +1041,6 @@ export default class GameRoom extends Room<GameState> {
       pokemon.positionY = 0
       if (anim === "fishing") {
         pokemon.action = PokemonActionState.FISH
-        console.log(`Spawning ${pokemon.name} on bench with fishing animation`)
       }
 
       player.board.set(pokemon.id, pokemon)

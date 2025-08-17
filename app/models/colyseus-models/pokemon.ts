@@ -171,29 +171,26 @@ export class Pokemon extends Schema implements IPokemon {
     this.permanentLuck = value
   }
 
-  onChangePosition(x: number, y: number, player: Player, state?: GameState) {
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    state?: GameState,
+    doNotRemoveItems: boolean = false
+  ) {
     // called after manually changing position of the pokemon on board
-    if (y === 0) {
-      // moved to bench
-      this.items.forEach((item) => {
-        if (
+    if (y === 0 && !doNotRemoveItems) {
+      const itemsToRemove = values(this.items).filter((item) => {
+        return (
           item === Item.CHEF_HAT ||
           item === Item.TRASH ||
-          ArtificialItems.includes(item)
-        ) {
-          player.items.push(item)
-          this.removeItem(item, player)
-        }
+          ArtificialItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+            item !== Item.RARE_CANDY)
+        )
       })
-
-      if (state?.specialGameRule === SpecialGameRule.SLAMINGO) {
-        this.items.forEach((item) => {
-          if (item !== Item.RARE_CANDY) {
-            player.items.push(item)
-            this.removeItem(item, player)
-          }
-        })
-      }
+      player.items.push(...itemsToRemove)
+      this.removeItems(itemsToRemove, player)
     }
   }
 
@@ -278,15 +275,39 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   removeItem(item: Item, player: Player) {
-    this.items.delete(item)
-    if (
-      item in SynergyGivenByItem &&
-      new PokemonClasses[this.name]().types.has(SynergyGivenByItem[item]) ===
-      false
-    ) {
-      this.types.delete(SynergyGivenByItem[item])
+    this.removeItems([item], player)
+  }
+
+  removeItems(items: Item[], player: Player) {
+    /* onItemRemoved effects need to be called after removing all items in case they trigger transformations (Pikachu Surfer, etc.)
+     in order:
+     1) remove items from the pokemon
+     2) check if any synergy should be removed
+     3) call onItemRemoved effects for each item removed
+    */
+    for (const item of items) {
+      this.items.delete(item)
     }
-    this.onItemRemoved(item, player)
+
+    const nativeTypes = new PokemonClasses[this.name]().types
+    for (const item of items) {
+      const synergyRemoved = SynergyGivenByItem[item]
+      const otherSynergyItemsHeld = values(this.items).filter(
+        (i) => SynergyGivenByItem[i] === synergyRemoved
+      )
+
+      if (
+        synergyRemoved &&
+        nativeTypes.has(synergyRemoved) === false &&
+        otherSynergyItemsHeld.length === 0
+      ) {
+        this.types.delete(synergyRemoved)
+      }
+    }
+
+    for (const item of items) {
+      this.onItemRemoved(item, player)
+    }
   }
 }
 
@@ -9616,14 +9637,20 @@ export class Silvally extends Pokemon {
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
+    super.onChangePosition(x, y, player, state, true)
     if (y === 0) {
-      values(this.items).filter((item) =>
-        (SynergyItems as ReadonlyArray<Item>).forEach((synergyItem) => {
-          this.removeItem(synergyItem, player)
-          player.items.push(synergyItem)
-        })
-      )
+      const itemsToRemove = values(this.items).filter((item) => {
+        return (
+          item === Item.CHEF_HAT ||
+          item === Item.TRASH ||
+          ArtificialItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+            item !== Item.RARE_CANDY) ||
+          (SynergyItems as ReadonlyArray<Item>).includes(item)
+        )
+      })
+      player.items.push(...itemsToRemove)
+      this.removeItems(itemsToRemove, player)
     }
   }
   onItemRemoved(item: Item, player: Player) {
@@ -9631,7 +9658,8 @@ export class Silvally extends Pokemon {
       (SynergyItems as ReadonlyArray<Item>).includes(item) &&
       values(this.items).filter((item) =>
         (SynergyItems as ReadonlyArray<Item>).includes(item)
-      ).length === 0
+      ).length === 0 &&
+      player.getPokemonAt(this.positionX, this.positionY)?.name === Pkm.SILVALLY
     ) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
@@ -16498,36 +16526,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -18425,7 +18453,7 @@ export const PokemonClasses: Record<
   [Pkm.HISUI_ARCANINE]: HisuiArcanine,
   [Pkm.ONIX]: Onix,
   [Pkm.STEELIX]: Steelix,
-  [Pkm.MEGA_STEELIX]: MegaSteelix,
+  //[Pkm.MEGA_STEELIX]: MegaSteelix,
   [Pkm.SCYTHER]: Scyther,
   [Pkm.SCIZOR]: Scizor,
   [Pkm.KLEAVOR]: Kleavor,
@@ -18474,7 +18502,7 @@ export const PokemonClasses: Record<
   [Pkm.MEDICHAM]: Medicham,
   [Pkm.NUMEL]: Numel,
   [Pkm.CAMERUPT]: Camerupt,
-  [Pkm.MEGA_CAMERUPT]: MegaCamerupt,
+  //[Pkm.MEGA_CAMERUPT]: MegaCamerupt,
   [Pkm.DARKRAI]: Darkrai,
   [Pkm.LITWICK]: Litwick,
   [Pkm.LAMPENT]: Lampent,
@@ -18490,7 +18518,7 @@ export const PokemonClasses: Record<
   [Pkm.FROSLASS]: Froslass,
   [Pkm.SNOVER]: Snover,
   [Pkm.ABOMASNOW]: Abomasnow,
-  [Pkm.MEGA_ABOMASNOW]: MegaAbomasnow,
+  //[Pkm.MEGA_ABOMASNOW]: MegaAbomasnow,
   [Pkm.VANILLITE]: Vanillite,
   [Pkm.VANILLISH]: Vanillish,
   [Pkm.VANILLUXE]: Vanilluxe,
@@ -18576,7 +18604,7 @@ export const PokemonClasses: Record<
   [Pkm.ROSERADE]: Roserade,
   [Pkm.BUNEARY]: Buneary,
   [Pkm.LOPUNNY]: Lopunny,
-  [Pkm.MEGA_LOPUNNY]: MegaLopunny,
+  //[Pkm.MEGA_LOPUNNY]: MegaLopunny,
   [Pkm.AXEW]: Axew,
   [Pkm.FRAXURE]: Fraxure,
   [Pkm.HAXORUS]: Haxorus,
@@ -18588,10 +18616,10 @@ export const PokemonClasses: Record<
   [Pkm.PORYGON_Z]: PorygonZ,
   [Pkm.ELECTRIKE]: Electrike,
   [Pkm.MANECTRIC]: Manectric,
-  [Pkm.MEGA_MANECTRIC]: MegaManectric,
+  //[Pkm.MEGA_MANECTRIC]: MegaManectric,
   [Pkm.SHUPPET]: Shuppet,
   [Pkm.BANETTE]: Banette,
-  [Pkm.MEGA_BANETTE]: MegaBanette,
+  //[Pkm.MEGA_BANETTE]: MegaBanette,
   [Pkm.HONEDGE]: Honedge,
   [Pkm.DOUBLADE]: Doublade,
   [Pkm.AEGISLASH]: Aegislash,
@@ -18620,7 +18648,7 @@ export const PokemonClasses: Record<
   [Pkm.MELOETTA]: Meloetta,
   [Pkm.PIROUETTE_MELOETTA]: PirouetteMeloetta,
   [Pkm.ALTARIA]: Altaria,
-  [Pkm.MEGA_ALTARIA]: MegaAltaria,
+  //[Pkm.MEGA_ALTARIA]: MegaAltaria,
   [Pkm.CASTFORM]: Castform,
   [Pkm.CASTFORM_SUN]: CastformSun,
   [Pkm.CASTFORM_RAIN]: CastformRain,
@@ -18667,7 +18695,7 @@ export const PokemonClasses: Record<
   [Pkm.BLACEPHALON]: Blacephalon,
   [Pkm.HOUNDOUR]: Houndour,
   [Pkm.HOUNDOOM]: Houndoom,
-  [Pkm.MEGA_HOUNDOOM]: MegaHoundoom,
+  //[Pkm.MEGA_HOUNDOOM]: MegaHoundoom,
   [Pkm.CLAMPERL]: Clamperl,
   [Pkm.HUNTAIL]: Huntail,
   [Pkm.GOREBYSS]: Gorebyss,

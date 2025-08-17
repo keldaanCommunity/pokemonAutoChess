@@ -71,14 +71,14 @@
 # Changes to Items
 
 - Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on Meowth town encounter. Now reduce max interest by 10 gold.
-- New item: Sticky Barb, made with heart scale + miracle seed, 3 def 15 shield ; when struck by an attack at melee range, deal 3 + 15% of its defense as retaliation true damage to the attacker, with 130% chance to inflict WOUND for 3 seconds.
+- New item: Sticky Barb, made with heart scale + miracle seed, 3 def 15 shield ; when struck by an attack at melee range, deal 3 + 15% of its defense as retaliation true damage to the attacker, with 30% chance to inflict WOUND for 3 seconds.
 - Smoke Ball new recipe: dark glasses + miracle seed ; new base stats: 10% crit chance; now gain 50 shield when jumping away
 - Cleanse Tag is renamed Ability Shield ; new recipe: miracle seed + twisted spoon ; new base stats: 15 shield, 10 AP
 - Shiny Charm new recipe: heart scale + mystic water ; new base stats: 3 defense ; now gives 50 PP on activation
 - Pokemonomicon new recipe: charcoal + twisted spoon ; new base stats: 10 AP, 3 attack ; new icon
 - Shell Bell new recipe: charcoal + never melting ice ; new base stats: 3 special defense, 3 attack
 - Adjustments to Aqua egg rework: starting PP 50 → 30, regain 20 PP → 25% of max PP after casting + 2 PP per ability cast during the fight
-- Adjustments to Green orb: now heals 3 HP + 3% of max HP per second, and 30% of excess healing is converted to PP
+- Adjustments to Green orb: now heals 3% of max HP per second, and 30% of excess healing is converted to PP
 - Rework Soul Dew: now gives 5 AP and 5 PP per second
 - Mana Scarf renamed Deep sea tooth: Attack 3 → 7, PP on attack 8 → 5, if the attack KO the target, gain 15 additional PP
 - Swift Wing renamed to Air Balloon: now makes the holder levitate, which gives immunity to board effects
@@ -93,7 +93,7 @@
 
 # Gameplay
 
-- New town encounter: Meowth, which propose amulet coins in carousel at stage 4. Amulet coins now reduce max interest by 20 gold.
+- New town encounter: Meowth, which propose amulet coins in carousel at stage 4. Amulet coins now reduce max interest by 10 gold.
 - Duskull can now be encountered at stage 4 in town instead of stage 12. Gimmighoul coins now give 3 gold when obtained.
 - Aquatic now increases Curse delay by 30%/60%/90%/90%.
 
