@@ -320,6 +320,8 @@ export default class GameScene extends Scene {
   }
 
   async setMap(mapName: DungeonPMDO | "town") {
+    this.board?.hideGroundHoles()
+
     if (mapName === "town") {
       this.map = this.add.tilemap("town")
       const tileset = this.map.addTilesetImage("town_tileset", "town_tileset")!
@@ -329,7 +331,7 @@ export default class GameScene extends Scene {
       const sys = this.sys as any
       if (sys.animatedTiles) {
         sys.animatedTiles.pause()
-      }
+      }      
       return
     }
 

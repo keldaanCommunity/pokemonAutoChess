@@ -35,6 +35,7 @@ import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
+import { on } from "node:events"
 
 export function displayHit(
   scene: GameScene | DebugScene,
@@ -322,6 +323,8 @@ function addAbilitySprite(
     rotation,
     angle,
     alpha,
+    flipX,
+    flipY,
     destroyOnComplete = true,
     animOptions = {}
   } = options
@@ -340,6 +343,8 @@ function addAbilitySprite(
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
+  if (flipX) sprite.flipX = true
+  if (flipY) sprite.flipY = true
   if (destroyOnComplete) {
     sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       sprite.destroy()
@@ -1152,6 +1157,10 @@ export const AbilitiesAnimations: {
     depth: DEPTH.BOOST_BACK
   }),
   ["FLYING_TAKEOFF"]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  ["DIG"]: [
+    onCaster({ ability: "DIG", origin: [0, 1], scale: [1, 2], depth: DEPTH.ABILITY_BELOW_POKEMON }),
+    onCaster({ ability: "DIG", origin: [1, 1], flipX: true, delay: 250, scale: [1, 2], depth: DEPTH.ABILITY_BELOW_POKEMON })
+  ],
   [Ability.PURIFY]: [
     onTarget({ ability: Ability.SMOG, scale: 1 }),
     onCaster({ ability: Ability.MUD_BUBBLE, scale: 1 })
@@ -1649,7 +1658,7 @@ export const AbilitiesAnimations: {
   [Ability.HIDDEN_POWER_EM]: hiddenPowerAnimation,
   [Ability.ICY_WIND]: orientedProjectile({ duration: 2000 }),
   [Ability.HURRICANE]: orientedProjectile({ duration: 1000, distance: 4 }),
-  [Ability.DRILL_RUN]: orientedProjectile({ ability: Ability.HURRICANE, duration: 500, distance: 1, oriented: true, rotation: -Math.PI/2 }),
+  [Ability.DRILL_RUN]: orientedProjectile({ ability: Ability.HURRICANE, duration: 500, distance: 1, oriented: true, rotation: -Math.PI / 2 }),
   [Ability.ROAR]: orientedProjectile({
     ability: Ability.WHIRLWIND,
     duration: 400,

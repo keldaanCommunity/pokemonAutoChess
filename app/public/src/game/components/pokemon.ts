@@ -648,16 +648,16 @@ export default class PokemonSprite extends DraggableObject {
   cookAnimation(dishes: Item[]) {
     this.emoteAnimation()
     dishes.forEach((item, i) => {
+      const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
+      shinyEffect.setScale(2).setDepth(DEPTH.ITEM_FOUND)
+      shinyEffect.play("shine")
       const itemSprite = this.scene.add.sprite(
         this.x,
         this.y,
         "item",
         item + ".png"
       )
-      itemSprite.setScale(0.5)
-      const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
-      shinyEffect.setScale(2)
-      shinyEffect.play("shine")
+      itemSprite.setScale(0.5).setDepth(DEPTH.ITEM_FOUND)
       this.scene.tweens.add({
         targets: [itemSprite, shinyEffect],
         ease: Phaser.Math.Easing.Quadratic.Out,
@@ -672,6 +672,45 @@ export default class PokemonSprite extends DraggableObject {
         }
       })
     })
+  }
+
+  digAnimation(buriedItem: Item | null) {
+    this.orientation = Orientation.UP
+    const g = <GameScene>this.scene
+    g.animationManager?.animatePokemon(this, PokemonActionState.WALK, false, true)
+    this.displayAnimation("DIG")
+    setTimeout(() => {
+      this.orientation = Orientation.DOWNLEFT
+      this.animationLocked = false
+      g.animationManager?.animatePokemon(this, PokemonActionState.IDLE, false)
+      if (buriedItem) {
+        this.emoteAnimation()
+        const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
+        shinyEffect.setScale(2).setDepth(DEPTH.ITEM_FOUND)
+        shinyEffect.play("shine")
+        const itemSprite = this.scene.add.sprite(
+          this.x,
+          this.y,
+          "item",
+          buriedItem + ".png"
+        )
+        itemSprite.setScale(0.5).setDepth(DEPTH.ITEM_FOUND)
+
+        this.scene.tweens.add({
+          targets: [itemSprite, shinyEffect],
+          ease: Phaser.Math.Easing.Quadratic.Out,
+          duration: 1000,
+          y: this.y - 70,
+          x: this.x,
+          onComplete: () => {
+            setTimeout(() => {
+              itemSprite.destroy()
+              shinyEffect.destroy()
+            }, 1000)
+          }
+        })
+      }
+    }, 1000)
   }
 
   updateMeal(meal: Item | "") {

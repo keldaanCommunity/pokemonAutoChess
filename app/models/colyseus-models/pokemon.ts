@@ -1,11 +1,6 @@
 import { entity, MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import {
-  ClearWingEffect,
-  DrySkinEffect,
-  OnAbilityCastEffect,
-  SynchroEffect
-} from "../../core/effects/effect"
+import { OnAbilityCastEffect, PeriodicEffect } from "../../core/effects/effect"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -22,8 +17,7 @@ import {
   IPlayer,
   IPokemon,
   IPokemonEntity,
-  Title,
-  Transfer
+  Title
 } from "../../types"
 import { DEFAULT_SPEED, SynergyTriggers } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
@@ -6562,10 +6556,6 @@ export class Mew extends Pokemon {
   range = 4
   skill = Ability.TELEPORT
   passive = Passive.SYNCHRO
-
-  onSpawn({ entity }: { entity: IPokemonEntity }): void {
-    entity.effectsSet.add(new SynchroEffect())
-  }
 }
 
 export class Mewtwo extends Pokemon {
@@ -11983,9 +11973,6 @@ export class Yanma extends Pokemon {
   skill = Ability.AERIAL_ACE
   passive = Passive.CLEAR_WING
   additional = true
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.effectsSet.add(new ClearWingEffect())
-  }
 }
 
 export class Yanmega extends Pokemon {
@@ -12002,8 +11989,17 @@ export class Yanmega extends Pokemon {
   skill = Ability.AERIAL_ACE
   passive = Passive.CLEAR_WING
   additional = true
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.effectsSet.add(new ClearWingEffect())
+}
+
+class DrySkinEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.handleHeal(8, pokemon, 0, false)
+      },
+      Passive.DRY_SKIN,
+      1000
+    )
   }
 }
 

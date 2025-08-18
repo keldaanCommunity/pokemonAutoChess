@@ -86,6 +86,7 @@ export enum Transfer {
   SHOP = "SHOP",
   ITEM = "ITEM",
   COOK = "COOK",
+  DIG = "DIG",
   GAME_START = "GAME_START",
   GAME_START_REQUEST = "GAME_START_REQUEST",
   GAME_END = "GAME_END",

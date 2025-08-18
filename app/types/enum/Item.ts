@@ -194,6 +194,7 @@ export enum Item {
   CARAMEL_SWIRL_FLAVOR = "CARAMEL_SWIRL_FLAVOR",
   RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR",
   EGG_FOR_SELL = "EGG_FOR_SELL",
+  COIN = "COIN",
   GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
   EXCHANGE_TICKET = "EXCHANGE_TICKET",
   TREASURE_BOX = "TREASURE_BOX",
@@ -210,6 +211,7 @@ export const AllItems: Item[] = Object.values(Item)
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,
+  Item.COIN,
   Item.AMULET_COIN,
   Item.GIMMIGHOUL_COIN,
   Item.EXCHANGE_TICKET,
@@ -665,5 +667,6 @@ export const NonHoldableItems: Item[] = [
   Item.FIRE_SHARD,
   Item.GIMMIGHOUL_COIN,
   Item.EGG_FOR_SELL,
-  Item.EXCHANGE_TICKET
+  Item.EXCHANGE_TICKET,
+  Item.COIN
 ]

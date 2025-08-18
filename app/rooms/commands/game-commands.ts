@@ -2,8 +2,12 @@ import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 import { DishByPkm } from "../../core/dishes"
-import { OnItemEquippedEffect } from "../../core/effects/effect"
+import {
+  OnItemEquippedEffect,
+  OnStageStartEffect
+} from "../../core/effects/effect"
 import { ItemEffects } from "../../core/effects/items"
+import { PassiveEffects } from "../../core/effects/passives"
 import { giveRandomEgg } from "../../core/eggs"
 import {
   ConditionBasedEvolutionRule,
@@ -52,24 +56,19 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  AbilityPerTM,
   ArtificialItems,
   Berries,
   CraftableItems,
   Dishes,
   FishingRods,
-  Flavors,
-  HMs,
   Item,
   ItemComponents,
   ItemRecipe,
   NonHoldableItems,
   ShinyItems,
   Sweets,
-  SynergyFlavors,
   SynergyGivenByItem,
-  SynergyStones,
-  TMs
+  SynergyStones
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -583,8 +582,10 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    const onItemEquippedEffects: OnItemEquippedEffect[] = ItemEffects[item]
-      ?.filter(effect => effect instanceof OnItemEquippedEffect) ?? []
+    const onItemEquippedEffects: OnItemEquippedEffect[] =
+      ItemEffects[item]?.filter(
+        (effect) => effect instanceof OnItemEquippedEffect
+      ) ?? []
     for (const onItemEquippedEffect of onItemEquippedEffects) {
       const shouldEquipItem = onItemEquippedEffect.apply({
         pokemon,
@@ -622,7 +623,10 @@ export class OnDragDropItemCommand extends Command<
       }
     }
 
-    if (pokemon.canHoldItems === false && NonHoldableItems.includes(item) === false) {
+    if (
+      pokemon.canHoldItems === false &&
+      NonHoldableItems.includes(item) === false
+    ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
@@ -1127,11 +1131,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const nbGimmighoulCoins = player.items.filter(
           (item) => item === Item.GIMMIGHOUL_COIN
         ).length
-        const nbAmuletCoins = player.items.filter((item) => item === Item.AMULET_COIN).length
-          + values(player.board).filter((pokemon) => pokemon.items.has(Item.AMULET_COIN)).length
+        const nbAmuletCoins =
+          player.items.filter((item) => item === Item.AMULET_COIN).length +
+          values(player.board).filter((pokemon) =>
+            pokemon.items.has(Item.AMULET_COIN)
+          ).length
         player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
-          player.interest = max(player.maxInterest)(Math.floor(player.money / 10))
+          player.interest = max(player.maxInterest)(
+            Math.floor(player.money / 10)
+          )
           income += player.interest
         }
         if (!isPVE) {
@@ -1237,185 +1246,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
     }
 
-    const isAfterPVE = this.state.stageLevel - 1 in PVEStages
     const commands = new Array<Command>()
 
-    this.state.players.forEach((player: Player) => {
-      const board = values(player.board)
-      if (
-        player.synergies.getSynergyStep(Synergy.FIRE) === 4 &&
-        player.items.includes(Item.FIRE_SHARD) === false &&
-        player.life > 2
-      ) {
-        player.items.push(Item.FIRE_SHARD)
-      }
-
-      const bestRod = FishingRods.find((rod) => player.items.includes(rod))
-
-      if (
-        bestRod &&
-        getFreeSpaceOnBench(player.board) > 0 &&
-        !isAfterPVE &&
-        !player.isBot
-      ) {
-        const fish = this.state.shop.pickFish(player, bestRod)
-        this.room.spawnOnBench(player, fish, "fishing")
-      }
-
-      const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
-      for (let i = 0; i < nbTrees; i++) {
-        player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
-      }
-
-      const chefs = board.filter((p) => p.items.has(Item.CHEF_HAT))
-      if (chefs.length > 0) {
-        const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
-        const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
-        for (const chef of chefs) {
-          let dish = DishByPkm[chef.name]
-          if (chef.items.has(Item.COOKING_POT)) {
-            dish = Item.HEARTY_STEW
-          } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
-            dish = Item.SANDWICH
-          }
-
-          if (chef.passive === Passive.GLUTTON) {
-            chef.hp += 30
-            if (chef.hp > 750) {
-              player.titles.add(Title.GLUTTON)
-            }
-          }
-
-          if (dish && nbDishes > 0) {
-            let dishes = Array.from({ length: nbDishes }, () => dish!)
-            if (dish === Item.BERRIES) {
-              dishes = pickNRandomIn(Berries, 3 * nbDishes)
-            }
-            if (dish === Item.SWEETS) {
-              dishes = pickNRandomIn(Sweets, nbDishes)
-            }
-            this.clock.setTimeout(async () => {
-              this.room.broadcast(Transfer.COOK, {
-                pokemonId: chef.id,
-                dishes
-              })
-              this.clock.setTimeout(() => {
-                const candidates = board.filter(
-                  (p) =>
-                    p.meal === "" &&
-                    p.canEat &&
-                    !isOnBench(p) &&
-                    distanceC(
-                      chef.positionX,
-                      chef.positionY,
-                      p.positionX,
-                      p.positionY
-                    ) === 1
-                )
-                candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-                dishes.forEach((meal, i) => {
-                  if (
-                    [
-                      Item.TART_APPLE,
-                      Item.SWEET_APPLE,
-                      Item.SIRUPY_APPLE,
-                      ...Berries
-                    ].includes(meal)
-                  ) {
-                    player.items.push(meal)
-                  } else {
-                    const pokemon = candidates[i] ?? chef
-                    pokemon.meal = meal
-                    pokemon.action = PokemonActionState.EAT
-                  }
-                })
-              }, 2000)
-            }, 1000)
-          }
-        }
-      }
-
-      const rottingItems: Map<Item, Item> = new Map([
-        // order matters to not convert several times in a row
-        [Item.SIRUPY_APPLE, Item.LEFTOVERS],
-        [Item.SWEET_APPLE, Item.SIRUPY_APPLE],
-        [Item.TART_APPLE, Item.SWEET_APPLE]
-      ])
-
-      for (const rottingItem of rottingItems.keys()) {
-        while (player.items.includes(rottingItem as Item)) {
-          const index = player.items.indexOf(rottingItem)
-          const newItem = rottingItems.get(rottingItem)
-          if (index >= 0 && newItem) {
-            // SEE https://github.com/colyseus/schema/issues/192
-            player.items.splice(index, 1)
-            player.items.push(newItem)
-          }
-        }
-      }
-
-      if (
-        this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
-        this.state.stageLevel > 1 &&
-        this.state.stageLevel < 10 &&
-        player.firstPartner
-      ) {
-        this.room.spawnOnBench(player, player.firstPartner, "spawn")
-      }
-
-      // Milcery flavors check
-      const milcery = board.find((p) => p.name === Pkm.MILCERY)
-      if (milcery) {
-        const surroundingSynergies = new Map<Synergy, number>()
-        Object.values(Synergy).forEach((synergy) => {
-          surroundingSynergies.set(synergy, 0)
-        })
-        const adjacentAllies = values(player.board).filter(
-          (p) =>
-            distanceC(
-              milcery.positionX,
-              milcery.positionY,
-              p.positionX,
-              p.positionY
-            ) <= 1
-        )
-        adjacentAllies.forEach((ally) => {
-          ally.types.forEach((synergy) => {
-            surroundingSynergies.set(
-              synergy,
-              surroundingSynergies.get(synergy)! + 1
-            )
-          })
-        })
-        let maxSynergy = Synergy.NORMAL
-        surroundingSynergies.forEach((value, key) => {
-          if (value > surroundingSynergies.get(maxSynergy)!) {
-            maxSynergy = key
-          }
-        })
-        const flavor = SynergyFlavors[maxSynergy]
-        Flavors.forEach((f) => {
-          removeInArray(player.items, f)
-        })
-        player.items.push(flavor)
-      }
-
-      // Passives updating every stage
-      board
-        .filter((p) => p.passive === Passive.FUR_COAT)
-        .forEach((pokemon) => {
-          if (isOnBench(pokemon)) {
-            const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
-              pokemon.name
-            ]()
-            pokemon.speed = initialSpeed
-            pokemon.def = initialDef
-          } else if (pokemon.speed >= 5) {
-            pokemon.speed -= 5
-            pokemon.def += 2
-          }
-        })
-    })
+    this.state.players.forEach((p) => this.updatePlayerBetweenStages(p))
 
     this.spawnWanderingPokemons()
 
@@ -1430,6 +1263,103 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
 
     return commands
+  }
+
+  updatePlayerBetweenStages(player: Player) {
+    const board = values(player.board)
+
+    if (
+      player.synergies.getSynergyStep(Synergy.FIRE) === 4 &&
+      player.items.includes(Item.FIRE_SHARD) === false &&
+      player.life > 2
+    ) {
+      player.items.push(Item.FIRE_SHARD)
+    }
+
+    const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
+    for (let i = 0; i < nbTrees; i++) {
+      player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
+    }
+
+    this.room.clock.setTimeout(() => {
+      if (player.synergies.getSynergyStep(Synergy.GROUND) > 0) {
+        player.board.forEach((pokemon, pokemonId) => {
+          if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon)) {
+            const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
+            const buriedItem = (player.groundHoles[index] + 1) === 5 ? player.buriedItems[index] : null
+            this.room.broadcast(Transfer.DIG, {
+              pokemonId,
+              buriedItem
+            })
+            this.room.clock.setTimeout(() => {
+              player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+            }, 500)
+            if (buriedItem) {
+              this.room.clock.setTimeout(() => {
+                if (buriedItem === Item.COIN) {
+                  player.addMoney(1, true, null)
+                } else {
+                  player.items.push(buriedItem)
+                }
+              }, 3000)
+            }
+          }
+        })
+      }
+    }, 1000)
+
+    const rottingItems: Map<Item, Item> = new Map([
+      // order matters to not convert several times in a row
+      [Item.SIRUPY_APPLE, Item.LEFTOVERS],
+      [Item.SWEET_APPLE, Item.SIRUPY_APPLE],
+      [Item.TART_APPLE, Item.SWEET_APPLE]
+    ])
+
+    for (const rottingItem of rottingItems.keys()) {
+      while (player.items.includes(rottingItem as Item)) {
+        const index = player.items.indexOf(rottingItem)
+        const newItem = rottingItems.get(rottingItem)
+        if (index >= 0 && newItem) {
+          // SEE https://github.com/colyseus/schema/issues/192
+          player.items.splice(index, 1)
+          player.items.push(newItem)
+        }
+      }
+    }
+
+    if (
+      this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
+      this.state.stageLevel > 1 &&
+      this.state.stageLevel < 10 &&
+      player.firstPartner
+    ) {
+      this.room.spawnOnBench(player, player.firstPartner, "spawn")
+    }
+
+    board.forEach((pokemon) => {
+      // Passives updating every stage
+      const passiveEffects =
+        PassiveEffects[pokemon.passive]?.filter(
+          (p) => p instanceof OnStageStartEffect
+        ) ?? []
+      passiveEffects.forEach((effect) => effect.apply({ pokemon, player, room: this.room }))
+
+      // Held item effects on stage start
+      const itemEffects =
+        ItemEffects[pokemon.items[0]]?.filter(
+          (p) => p instanceof OnStageStartEffect
+        ) ?? []
+      itemEffects.forEach((effect) => effect.apply({ pokemon, player, room: this.room }))
+    })
+
+    // Unholdable item effects on stage start
+    player.items.forEach((item) => {
+      const itemEffects =
+        ItemEffects[item]?.filter(
+          (p) => p instanceof OnStageStartEffect
+        ) ?? []
+      itemEffects.forEach((effect) => effect.apply({ player, room: this.room }))
+    })
   }
 
   checkForLazyTeam() {
@@ -1809,9 +1739,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               pkm
             }
             this.state.wanderers.set(id, wanderer)
-            this.clock.setTimeout(() => {
-              client.send(Transfer.WANDERER, wanderer)
-            }, 4000 + i * 400)
+            this.clock.setTimeout(
+              () => {
+                client.send(Transfer.WANDERER, wanderer)
+              },
+              4000 + i * 400
+            )
           }
         }
       }

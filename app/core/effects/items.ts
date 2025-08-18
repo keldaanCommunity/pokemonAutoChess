@@ -1,20 +1,23 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { Title } from "../../types"
+import { PVEStages } from "../../models/pve-stages"
+import { Title, Transfer } from "../../types"
 import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState } from "../../types/enum/Game"
-import { AbilityPerTM, Flavors, HMs, Item, OgerponMasks, SynergyGivenByItem, SynergyStones, TMs } from "../../types/enum/Item"
+import { AbilityPerTM, Berries, FishingRod, Flavors, HMs, Item, OgerponMasks, Sweets, SynergyGivenByItem, SynergyStones, TMs } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
+import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
-import { chance } from "../../utils/random"
+import { chance, pickNRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
-import { PokemonEntity } from "../pokemon-entity"
+import { DishByPkm } from "../dishes"
+import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
   Effect,
@@ -26,6 +29,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
+  OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
 
@@ -243,6 +247,91 @@ const ogerponMaskEffect = new OnItemEquippedEffect(({ pokemon, player, item }) =
 
   return false // prevent item from being equipped
 })
+
+const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
+  if (!pokemon) return
+  const chef = pokemon
+
+  const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
+  const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
+  let dish = DishByPkm[chef.name]
+  if (chef.items.has(Item.COOKING_POT)) {
+    dish = Item.HEARTY_STEW
+  } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+    dish = Item.SANDWICH
+  }
+
+  if (chef.passive === Passive.GLUTTON) {
+    chef.hp += 30
+    if (chef.hp > 750) {
+      player.titles.add(Title.GLUTTON)
+    }
+  }
+
+  if (dish && nbDishes > 0) {
+    let dishes = Array.from({ length: nbDishes }, () => dish!)
+    if (dish === Item.BERRIES) {
+      dishes = pickNRandomIn(Berries, 3 * nbDishes)
+    }
+    if (dish === Item.SWEETS) {
+      dishes = pickNRandomIn(Sweets, nbDishes)
+    }
+    room.clock.setTimeout(async () => {
+      room.broadcast(Transfer.COOK, {
+        pokemonId: chef.id,
+        dishes
+      })
+      room.clock.setTimeout(() => {
+        const candidates = values(player.board).filter(
+          (p) =>
+            p.meal === "" &&
+            p.canEat &&
+            !isOnBench(p) &&
+            distanceC(
+              chef.positionX,
+              chef.positionY,
+              p.positionX,
+              p.positionY
+            ) === 1
+        )
+        candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+        dishes.forEach((meal, i) => {
+          if (
+            [
+              Item.TART_APPLE,
+              Item.SWEET_APPLE,
+              Item.SIRUPY_APPLE,
+              ...Berries
+            ].includes(meal)
+          ) {
+            player.items.push(meal)
+          } else {
+            const pokemon = candidates[i] ?? chef
+            pokemon.meal = meal
+            pokemon.action = PokemonActionState.EAT
+          }
+        })
+      }, 2000)
+    }, 1000)
+  }
+})
+
+export class FishingRodEffect extends OnStageStartEffect {
+  constructor(rod: FishingRod) {
+    super(({ player, room }) => {
+      const isAfterPVE = room.state.stageLevel - 1 in PVEStages
+      if (
+        rod &&
+        getFreeSpaceOnBench(player.board) > 0 &&
+        !isAfterPVE &&
+        !player.isBot
+      ) {
+        const fish = room.state.shop.pickFish(player, rod)
+        room.spawnOnBench(player, fish, "fishing")
+      }
+    })
+  }
+}
 
 export const ItemEffects: { [i in Item]?: Effect[] } = {
 
@@ -725,6 +814,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.CHEF_HAT]: [
+    chefCookEffect,
     new OnItemEquippedEffect(({ pokemon, player, item }) => {
       return pokemon.types.has(Synergy.GOURMET)
     })
@@ -828,5 +918,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
     })
-  ]
+  ],
+
+  [Item.OLD_ROD]: [new FishingRodEffect(Item.OLD_ROD)],
+  [Item.GOOD_ROD]: [new FishingRodEffect(Item.GOOD_ROD)],
+  [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)]
 }

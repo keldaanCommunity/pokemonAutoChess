@@ -52,17 +52,10 @@ import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
 import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
-import {
-  electricTripleAttackEffect,
-  FireHitEffect,
-  GrowGroundEffect,
-  MonsterKillEffect,
-  OnItemGainedEffect,
-  OnSpawnEffect,
-  SoundCryEffect
-} from "./effects/effect"
+import { OnItemGainedEffect, OnSpawnEffect } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
+import { electricTripleAttackEffect, FireHitEffect, GrowGroundEffect, MonsterKillEffect, SoundCryEffect } from "./effects/synergies"
 import { getWonderboxItems, ItemStats } from "./items"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"

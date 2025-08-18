@@ -1,11 +1,15 @@
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Team } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { Flavors, Item, SynergyFlavors } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { removeInArray } from "../../utils/array"
+import { isOnBench } from "../../utils/board"
+import { distanceC } from "../../utils/distance"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
@@ -19,7 +23,9 @@ import {
   OnHitEffect,
   OnKillEffect,
   OnMoveEffect,
-  OnSpawnEffect
+  OnSpawnEffect,
+  OnStageStartEffect,
+  PeriodicEffect
 } from "./effect"
 import { ItemEffects } from "./items"
 
@@ -273,49 +279,60 @@ export class AccelerationEffect extends OnMoveEffect {
   }
 }
 
-const MimikuBustedTransformEffect = new OnDamageReceivedEffect(({ pokemon }) => {
-  if (pokemon.life / pokemon.hp < 0.5) {
-    pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
-    pokemon.name = Pkm.MIMIKYU_BUSTED
-    pokemon.changePassive(Passive.MIMIKYU_BUSTED)
-    pokemon.addAttack(10, pokemon, 0, false)
-    pokemon.status.triggerProtect(2000)
-    if (pokemon.player) {
-      pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
+  ({ pokemon }) => {
+    if (pokemon.life / pokemon.hp < 0.5) {
+      pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
+      pokemon.name = Pkm.MIMIKYU_BUSTED
+      pokemon.changePassive(Passive.MIMIKYU_BUSTED)
+      pokemon.addAttack(10, pokemon, 0, false)
+      pokemon.status.triggerProtect(2000)
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+      }
     }
   }
-})
+)
 
-const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.life < 0.3 * pokemon.hp && pokemon.passive === Passive.DARMANITAN) {
-    pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
-    pokemon.name = Pkm.DARMANITAN_ZEN
-    pokemon.changePassive(Passive.DARMANITAN_ZEN)
-    pokemon.skill = Ability.TRANSE
-    pokemon.pp = 0
-    const destination = board.getTeleportationCell(
-      pokemon.positionX,
-      pokemon.positionY,
-      pokemon.team
-    )
-    if (destination) pokemon.moveTo(destination.x, destination.y, board)
-    pokemon.toIdleState()
-    pokemon.addAttack(-10, pokemon, 0, false)
-    pokemon.addSpeed(-20, pokemon, 0, false)
-    pokemon.addDefense(10, pokemon, 0, false)
-    pokemon.addSpecialDefense(10, pokemon, 0, false)
-    pokemon.range += 4
-    pokemon.attackType = AttackType.SPECIAL
+const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
+  ({ pokemon, board }) => {
+    if (
+      pokemon.life < 0.3 * pokemon.hp &&
+      pokemon.passive === Passive.DARMANITAN
+    ) {
+      pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
+      pokemon.name = Pkm.DARMANITAN_ZEN
+      pokemon.changePassive(Passive.DARMANITAN_ZEN)
+      pokemon.skill = Ability.TRANSE
+      pokemon.pp = 0
+      const destination = board.getTeleportationCell(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.team
+      )
+      if (destination) pokemon.moveTo(destination.x, destination.y, board)
+      pokemon.toIdleState()
+      pokemon.addAttack(-10, pokemon, 0, false)
+      pokemon.addSpeed(-20, pokemon, 0, false)
+      pokemon.addDefense(10, pokemon, 0, false)
+      pokemon.addSpecialDefense(10, pokemon, 0, false)
+      pokemon.range += 4
+      pokemon.attackType = AttackType.SPECIAL
+    }
   }
-})
+)
 
-const DarmanitanZenOnHitEffect = new OnHitEffect(({ attacker, totalTakenDamage }) => {
-  attacker.handleHeal(totalTakenDamage, attacker, 0, false)
-})
+const DarmanitanZenOnHitEffect = new OnHitEffect(
+  ({ attacker, totalTakenDamage }) => {
+    attacker.handleHeal(totalTakenDamage, attacker, 0, false)
+  }
+)
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   if (!pkm.player) return
-  const aquaticStepReached = pkm.player.synergies.getSynergyStep(Synergy.AQUATIC)
+  const aquaticStepReached = pkm.player.synergies.getSynergyStep(
+    Synergy.AQUATIC
+  )
   pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
   pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
 })
@@ -382,7 +399,109 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   }
 })
 
-export const PassiveEffects: Partial<Record<Passive, (Effect | (() => Effect))[]>> = {
+const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
+  if (!pokemon) return
+  if (isOnBench(pokemon)) {
+    const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
+      pokemon.name
+    ]()
+    pokemon.speed = initialSpeed
+    pokemon.def = initialDef
+  } else if (pokemon.speed >= 5) {
+    pokemon.speed -= 5
+    pokemon.def += 2
+  }
+})
+
+const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
+  const milcery = pokemon
+  if (!milcery) return
+  const surroundingSynergies = new Map<Synergy, number>()
+  Object.values(Synergy).forEach((synergy) => {
+    surroundingSynergies.set(synergy, 0)
+  })
+  const adjacentAllies = values(player.board).filter(
+    (p) =>
+      distanceC(
+        milcery.positionX,
+        milcery.positionY,
+        p.positionX,
+        p.positionY
+      ) <= 1
+  )
+  adjacentAllies.forEach((ally) => {
+    ally.types.forEach((synergy) => {
+      surroundingSynergies.set(
+        synergy,
+        surroundingSynergies.get(synergy)! + 1
+      )
+    })
+  })
+  let maxSynergy = Synergy.NORMAL
+  surroundingSynergies.forEach((value, key) => {
+    if (value > surroundingSynergies.get(maxSynergy)!) {
+      maxSynergy = key
+    }
+  })
+  const flavor = SynergyFlavors[maxSynergy]
+  Flavors.forEach((f) => {
+    removeInArray(player.items, f)
+  })
+  player.items.push(flavor)
+})
+
+class ClearWingEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.addSpeed(1, pokemon, 0, false)
+      },
+      Passive.CLEAR_WING,
+      1000
+    )
+  }
+}
+
+class SynchroEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        const status = pokemon.status
+        if (status.burn && status.burnOrigin) {
+          status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
+        }
+        if (status.poisonStacks && status.poisonOrigin) {
+          status.poisonOrigin.status.triggerPoison(
+            3000,
+            status.poisonOrigin,
+            pokemon
+          )
+        }
+        if (status.wound && status.woundOrigin) {
+          status.woundOrigin.status.triggerWound(
+            3000,
+            status.woundOrigin,
+            pokemon
+          )
+        }
+        if (status.silence && status.silenceOrigin) {
+          status.silenceOrigin.status.triggerSilence(
+            3000,
+            status.silenceOrigin,
+            pokemon
+          )
+        }
+      },
+      Passive.SYNCHRO,
+      3000
+    )
+  }
+}
+
+
+export const PassiveEffects: Partial<
+  Record<Passive, (Effect | (() => Effect))[]>
+> = {
   [Passive.DURANT]: [DurantBugBuffEffect],
   [Passive.SHARED_VISION]: [SharedVisionEffect],
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
@@ -398,5 +517,13 @@ export const PassiveEffects: Partial<Record<Passive, (Effect | (() => Effect))[]
   [Passive.MIMIKYU]: [MimikuBustedTransformEffect],
   [Passive.DARMANITAN]: [DarmanitanZenTransformEffect],
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
-  [Passive.GLIMMORA]: [ToxicSpikesEffect]
+  [Passive.GLIMMORA]: [ToxicSpikesEffect],
+  [Passive.FUR_COAT]: [FurCoatEffect],
+  [Passive.CREAM]: [MilceryFlavorEffect],
+  [Passive.CLEAR_WING]: [
+    () => new ClearWingEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.SYNCHRO]: [
+    () => new SynchroEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ]
 }
