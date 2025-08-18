@@ -9,6 +9,7 @@ import WikiFaq from "./wiki-faq"
 import WikiItems from "./wiki-items"
 import WikiStatistic from "./wiki-statistic"
 import WikiStatus from "./wiki-status"
+import WikiTown from "./wiki-town"
 import WikiTutorials from "./wiki-tutorials"
 import WikiTypes from "./wiki-types"
 import WikiWeather from "./wiki-weather"
@@ -33,6 +34,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
           <Tab key="title-statistic">{t("statistics_label")}</Tab>
           <Tab key="title-status">{t("status_label")}</Tab>
           <Tab key="title-weather">{t("weather_label")}</Tab>
+          <Tab key="title-town">{t("town_label")}</Tab>
           <Tab key="title-dungeon">{t("dungeon_label")}</Tab>
           <Tab key="title-data">{t("data_label")}</Tab>
         </TabList>
@@ -67,6 +69,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
         </TabPanel>
         <TabPanel key="weather">
           <WikiWeather />
+        </TabPanel>
+        <TabPanel key="town">
+          <WikiTown />
         </TabPanel>
         <TabPanel key="dungeon">
           <WikiRegions />
