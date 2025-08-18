@@ -21,6 +21,7 @@
 
 # UI
 
+- Added "Unholdable" and "Consumable" labels in item descriptions
 - Added a tab in wiki for town encounters
 
 # Bugfix

@@ -5,7 +5,14 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../core/items"
 import { Stat } from "../../../../types/enum/Game"
-import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
+import {
+  ConsumableItems,
+  HMs,
+  Item,
+  ItemRecipe,
+  TMs,
+  UnholdableItems
+} from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
 
@@ -35,8 +42,12 @@ export function ItemDetailTooltip({
   }
 
   const getImageFilename = () => {
-    if (TMs.includes(item)) { return "TM" }
-    if (HMs.includes(item)) { return "HM" }
+    if (TMs.includes(item)) {
+      return "TM"
+    }
+    if (HMs.includes(item)) {
+      return "HM"
+    }
     return item
   }
 
@@ -64,6 +75,11 @@ export function ItemDetailTooltip({
         {t(`item.${item}`)}
       </div>
       <div className="game-item-detail-stats">
+        {ConsumableItems.includes(item)
+          ? <i>{t("consumable_item")}</i>
+          : UnholdableItems.includes(item)
+            ? <i>{t("unholdable_item")}</i>
+            : null}
         {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>
             <img
