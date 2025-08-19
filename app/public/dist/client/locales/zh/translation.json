@@ -3472,6 +3472,8 @@
 	"popular_items": "常见携带道具",
 	"components": "组件",
 	"craftable_items": "可合成",
+	"consumable_item": "消耗品",
+	"unholdable_item": "非携带道具",
 	"food": "食品",
 	"berries": "树果",
 	"dishes": "料理",
