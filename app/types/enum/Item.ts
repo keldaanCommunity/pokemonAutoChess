@@ -705,6 +705,7 @@ export const NonHoldableItems: Item[] = [
   ...HMs,
   ...Flavors,
   ...Dishes,
+  ...SynergyGems,
   Item.METEORITE,
   Item.MYSTERY_BOX,
   Item.TREASURE_BOX,
@@ -717,5 +718,7 @@ export const NonHoldableItems: Item[] = [
   Item.GIMMIGHOUL_COIN,
   Item.EGG_FOR_SELL,
   Item.EXCHANGE_TICKET,
-  Item.COIN
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET
 ]

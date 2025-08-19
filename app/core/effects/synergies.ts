@@ -39,7 +39,7 @@ export class GroundHoleEffect extends OnSpawnEffect {
     constructor(effect: EffectEnum) {
         const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
         super((pokemon, player) => {
-            const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
+            const index = pokemon.positionY * BOARD_WIDTH + pokemon.positionX
             const holeLevel = player?.groundHoles[index] ?? 0
             const atkBuff = holeLevel * max(3)(synergyLevel)
             pokemon.addAttack(atkBuff, pokemon, 0, false)
@@ -55,15 +55,6 @@ export class GroundHoleEffect extends OnSpawnEffect {
             pokemon.broadcastAbility({ skill: "GROUND_GROW" })
 
             /*
-            if (
-                pokemon.items.has(Item.BIG_NUGGET) &&
-                this.count === 5 &&
-                pokemon.player
-            ) {
-                pokemon.player.addMoney(2, true, pokemon)
-                pokemon.count.moneyCount += 2
-            }
-
             if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {
                 pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
                 if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {

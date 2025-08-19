@@ -2501,7 +2501,7 @@
 		"METAL_COAT": "Gives STEEL synergy. Dropped when benching the unit.",
 		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects. Dropped when benching the unit.",
 		"HARD_STONE": "Gives ROCK synergy. Dropped when benching the unit.",
-		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground.",
+		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground. Dropped when benching the unit.",
 		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder. Dropped when benching the unit.",
 		"EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of adjacent allies in the same row. Dropped when benching the unit.",
 		"POKERUS_VIAL": "Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2.5 seconds and transmitting to allies. Dropped when benching the unit.",

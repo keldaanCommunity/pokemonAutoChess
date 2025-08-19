@@ -1323,6 +1323,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   const type = SynergyGivenByGem[buriedItem]
                   player.bonusSynergies.set(type, (player.bonusSynergies.get(type) ?? 0) + 1)
                   player.items.push(buriedItem)
+                  player.updateSynergies()
                 } else {
                   player.items.push(buriedItem)
                 }
