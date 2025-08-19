@@ -281,6 +281,7 @@ export default class Player extends Schema implements IPlayer {
 
   transformPokemon(pokemon: Pokemon, newEntry: Pkm): Pokemon {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
+    carryOverPermanentStats(newPokemon, [pokemon])
     pokemon.items.forEach((item) => {
       newPokemon.items.add(item)
       if (item === Item.SHINY_CHARM) {
@@ -294,7 +295,6 @@ export default class Player extends Schema implements IPlayer {
     this.board.set(newPokemon.id, newPokemon)
     newPokemon.onAcquired(this)
     this.updateSynergies()
-    carryOverPermanentStats(newPokemon, [pokemon])
     this.pokemonsPlayed.add(newPokemon.name)
     return newPokemon
   }

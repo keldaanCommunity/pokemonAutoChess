@@ -59,7 +59,6 @@ export abstract class EvolutionRule {
   }
 
   afterEvolve(pokemonEvolved: Pokemon, player: Player, stageLevel: number) {
-    pokemonEvolved.onAcquired(player)
     player.updateSynergies()
     player.board.forEach((pokemon) => {
       if (
@@ -194,6 +193,7 @@ export class CountEvolutionRule extends EvolutionRule {
       pokemon.afterEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
 
+    pokemonEvolved.onAcquired(player)
     return pokemonEvolved
   }
 }
