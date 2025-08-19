@@ -1286,9 +1286,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.room.clock.setTimeout(() => {
       if (player.synergies.getSynergyStep(Synergy.GROUND) > 0) {
         player.board.forEach((pokemon, pokemonId) => {
-          if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon)) {
+          if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon) && pokemon.items.has(Item.CHEF_HAT) === false) {
             const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
-            const buriedItem = (player.groundHoles[index] + 1) === 5 ? player.buriedItems[index] : null
+            const hasReachedMaxDepth = player.groundHoles[index] + 1 === 5
+            let buriedItem = hasReachedMaxDepth ? player.buriedItems[index] : null
             this.room.broadcast(Transfer.DIG, {
               pokemonId,
               buriedItem
@@ -1296,10 +1297,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.room.clock.setTimeout(() => {
               player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
             }, 500)
+
+
+            if (pokemon.items.has(Item.EXPLORER_KIT) && hasReachedMaxDepth && !buriedItem) {
+              if (chance(0.1, pokemon)) {
+                buriedItem = Item.BIG_NUGGET
+              } else if (chance(0.5, pokemon)) {
+                player.items.push(Item.NUGGET)
+              } else {
+                player.items.push(Item.COIN)
+              }
+            }
+
             if (buriedItem) {
               this.room.clock.setTimeout(() => {
                 if (buriedItem === Item.COIN) {
                   player.addMoney(1, true, null)
+                } else if (buriedItem === Item.NUGGET) {
+                  player.addMoney(3, true, null)
+                } else if (buriedItem === Item.BIG_NUGGET) {
+                  player.addMoney(10, true, null)
                 } else if (buriedItem === Item.TREASURE_BOX) {
                   player.items.push(...pickNRandomIn(ItemComponents, 2))
                 } else if (isIn(SynergyGems, buriedItem)) {

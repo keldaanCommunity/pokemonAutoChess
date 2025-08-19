@@ -2482,7 +2482,7 @@
 		"METAL_COAT": "Le porteur gagne le type STEEL. Lâché quand son porteur est mis sur le banc.",
 		"AIR_BALLOON": "Le porteur gagne le type FLYING et 10% de chance d'esquiver les attaques. Il est aussi immunisé contre les effets de terrain. Lâché quand son porteur est mis sur le banc.",
 		"HARD_STONE": "Le porteur gagne le type ROCK. Lâché quand son porteur est mis sur le banc.",
-		"BIG_NUGGET": "Le porteur gagne le type GROUND. Si le porteur est toujours en vit après 15 secondes et a cumulé 5 effets de GROUND, vous gagnez 2 GOLD. Lâché quand son porteur est mis sur le banc.",
+		"EXPLORER_KIT": "Le porteur gagne le type GROUND, et a plus de LUCK chance de trouver de l'or enfoui dans le sol.",
 		"INCENSE": "Chaque Pokémon du magasin a 5% de chance en plus de partager une synergie commune avec le porteur. Lâché quand son porteur est mis sur le banc.",
 		"EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés adjacents sur la même rangée. Lâché quand son porteur est mis sur le banc.",
 		"POKERUS_VIAL": "Infecte le porteur avec le POKERUS, qui fait gagner 1 ATK et 10 AP toutes les 2,5 secondes et infecte les alliés. Lâché quand son porteur est mis sur le banc.",

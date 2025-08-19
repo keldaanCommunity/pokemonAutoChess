@@ -626,12 +626,12 @@ function initBuriedItems() {
     buriedItems[i] = pickRandomIn(SynergyGems)
   }
 
-  // 4 trash (Trash, Leftovers, Coin)
+  // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
   for (let i = 3; i < 7; i++) {
-    buriedItems[i] = pickRandomIn([Item.TRASH, Item.LEFTOVERS, Item.COIN, Item.COIN, Item.FOSSIL_STONE])
+    buriedItems[i] = pickRandomIn([Item.TRASH, Item.LEFTOVERS, Item.COIN, Item.NUGGET, Item.FOSSIL_STONE])
   }
 
-  // 1 precious (artificial item, treasure box)
+  // 1 precious (artificial item, treasure box, big nugget)
   buriedItems[7] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : Item.TREASURE_BOX
 
   shuffleArray(buriedItems)

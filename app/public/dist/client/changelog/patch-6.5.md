@@ -9,11 +9,14 @@
 
 # Changes to Synergies
 
+- Ground rework: Ground Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages).
 - Weather rocks are no longer collected during PVE rounds
 
 # Changes to Items
 
-- Nerf Green Orb: removed flat part of the healing, removed base 15 PP
+- Big Nugget is replaced by Explorer Kit. Explorer Kit increases the chances of finding gold buried in the ground.
+- New Items: Rusty Coin, Nugget, Big Nugget
+- New items: Synergy gems ; synergy gems increase the level of a synergy but are unholdable
 
 # Gameplay
 
