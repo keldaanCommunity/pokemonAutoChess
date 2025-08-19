@@ -67,6 +67,8 @@ import {
   NonHoldableItems,
   ShinyItems,
   Sweets,
+  SynergyGems,
+  SynergyGivenByGem,
   SynergyGivenByItem,
   SynergyStones
 } from "../../types/enum/Item"
@@ -84,7 +86,7 @@ import {
   WandererBehavior,
   WandererType
 } from "../../types/enum/Wanderer"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -1298,6 +1300,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               this.room.clock.setTimeout(() => {
                 if (buriedItem === Item.COIN) {
                   player.addMoney(1, true, null)
+                } else if (buriedItem === Item.TREASURE_BOX) {
+                  player.items.push(...pickNRandomIn(ItemComponents, 2))
+                } else if (isIn(SynergyGems, buriedItem)) {
+                  const type = SynergyGivenByGem[buriedItem]
+                  player.bonusSynergies.set(type, (player.bonusSynergies.get(type) ?? 0) + 1)
+                  player.items.push(buriedItem)
                 } else {
                   player.items.push(buriedItem)
                 }

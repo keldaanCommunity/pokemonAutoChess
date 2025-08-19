@@ -1,13 +1,14 @@
 import { SynergyEffects } from "../../models/effects"
+import { BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { min } from "../../utils/number"
-import { OnAbilityCastEffect, OnAttackEffect, OnKillEffect, PeriodicEffect } from "./effect"
+import { max } from "../../utils/number"
+import { OnAbilityCastEffect, OnAttackEffect, OnKillEffect, OnSpawnEffect } from "./effect"
 
 export class MonsterKillEffect extends OnKillEffect {
     hpBoosted: number = 0
@@ -34,58 +35,63 @@ export class MonsterKillEffect extends OnKillEffect {
     }
 }
 
-export class GrowGroundEffect extends PeriodicEffect {
-    synergyLevel: number
+export class GroundHoleEffect extends OnSpawnEffect {
     constructor(effect: EffectEnum) {
-        super(
-            (pokemon) => {
-                if (this.count > 5) {
-                    return
-                }
-                pokemon.addDefense(this.synergyLevel * 2, pokemon, 0, false)
-                pokemon.addSpecialDefense(this.synergyLevel * 2, pokemon, 0, false)
-                pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
-                pokemon.broadcastAbility({ skill: "GROUND_GROW" })
-                if (
-                    pokemon.items.has(Item.BIG_NUGGET) &&
-                    this.count === 5 &&
-                    pokemon.player
-                ) {
-                    pokemon.player.addMoney(2, true, pokemon)
-                    pokemon.count.moneyCount += 2
+        const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
+        super((pokemon, player) => {
+            const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
+            const holeLevel = player?.groundHoles[index] ?? 0
+            const atkBuff = holeLevel * max(3)(synergyLevel)
+            pokemon.addAttack(atkBuff, pokemon, 0, false)
+
+            let defBuff = holeLevel * max(3)(synergyLevel)
+            if (synergyLevel === 4) {
+                const nbFullyDugHoles = player?.groundHoles.filter(hole => hole === 4).length ?? 0
+                defBuff += nbFullyDugHoles
+            }
+
+            pokemon.addDefense(defBuff, pokemon, 0, false)
+            pokemon.addSpecialDefense(defBuff, pokemon, 0, false)
+            pokemon.broadcastAbility({ skill: "GROUND_GROW" })
+
+            /*
+            if (
+                pokemon.items.has(Item.BIG_NUGGET) &&
+                this.count === 5 &&
+                pokemon.player
+            ) {
+                pokemon.player.addMoney(2, true, pokemon)
+                pokemon.count.moneyCount += 2
+            }
+
+            if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {
+                pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
+                if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
+                    pokemon.addDefense(2, pokemon, 0, false)
+                    pokemon.addSpecialDefense(2, pokemon, 0, false)
+                    pokemon.addMaxHP(50, pokemon, 0, false)
+                    pokemon.addSpeed(-12, pokemon, 0, false)
+                    pokemon.range = min(1)(pokemon.range + 1)
+                } else {
+                    pokemon.addAttack(5, pokemon, 0, false)
+                    pokemon.addDefense(5, pokemon, 0, false)
+                    pokemon.addSpecialDefense(5, pokemon, 0, false)
+                    pokemon.addMaxHP(80, pokemon, 0, false)
+                    pokemon.addSpeed(-5, pokemon, 0, false)
+                    pokemon.range = min(1)(pokemon.range - 1)
                 }
 
-                if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {
-                    pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
-                    if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
-                        pokemon.addDefense(2, pokemon, 0, false)
-                        pokemon.addSpecialDefense(2, pokemon, 0, false)
-                        pokemon.addMaxHP(50, pokemon, 0, false)
-                        pokemon.addSpeed(-12, pokemon, 0, false)
-                        pokemon.range = min(1)(pokemon.range + 1)
-                    } else {
-                        pokemon.addAttack(5, pokemon, 0, false)
-                        pokemon.addDefense(5, pokemon, 0, false)
-                        pokemon.addSpecialDefense(5, pokemon, 0, false)
-                        pokemon.addMaxHP(80, pokemon, 0, false)
-                        pokemon.addSpeed(-5, pokemon, 0, false)
-                        pokemon.range = min(1)(pokemon.range - 1)
-                    }
-
-                    pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
-                    pokemon.name = Pkm.ZYGARDE_100
-                    pokemon.changePassive(Passive.NONE)
-                    pokemon.skill = Ability.CORE_ENFORCER
-                    pokemon.pp = 0
-                    if (pokemon.player) {
-                        pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
-                    }
+                pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
+                pokemon.name = Pkm.ZYGARDE_100
+                pokemon.changePassive(Passive.NONE)
+                pokemon.skill = Ability.CORE_ENFORCER
+                pokemon.pp = 0
+                if (pokemon.player) {
+                    pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
                 }
-            },
-            effect,
-            3000
-        )
-        this.synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
+            }
+            */
+        })
     }
 }
 

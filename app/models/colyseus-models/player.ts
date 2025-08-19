@@ -18,8 +18,8 @@ import {
   HMs,
   Item,
   ItemComponents,
+  SynergyGems,
   SynergyGivenByItem,
-  SynergyStones,
   TMs,
   WeatherRocks
 } from "../../types/enum/Item"
@@ -623,19 +623,16 @@ function initBuriedItems() {
 
   // 3 synergy gems
   for (let i = 0; i < 3; i++) {
-    buriedItems[i] = pickRandomIn(SynergyStones)
+    buriedItems[i] = pickRandomIn(SynergyGems)
   }
 
-  // 3 trash (Trash, Leftovers, Coin)
-  for (let i = 3; i < 6; i++) {
-    buriedItems[i] = pickRandomIn([Item.TRASH, Item.LEFTOVERS, Item.COIN, Item.FOSSIL_STONE])
+  // 4 trash (Trash, Leftovers, Coin)
+  for (let i = 3; i < 7; i++) {
+    buriedItems[i] = pickRandomIn([Item.TRASH, Item.LEFTOVERS, Item.COIN, Item.COIN, Item.FOSSIL_STONE])
   }
 
-  // 1 precious (artificial item, treasure box, ghimighoul coin)
-  buriedItems[6] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : pickRandomIn([
-    Item.TREASURE_BOX,
-    Item.GIMMIGHOUL_COIN
-  ])
+  // 1 precious (artificial item, treasure box)
+  buriedItems[7] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : Item.TREASURE_BOX
 
   shuffleArray(buriedItems)
   return buriedItems

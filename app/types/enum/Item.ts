@@ -126,6 +126,18 @@ export enum Item {
   ELECTRIC_QUARTZ = "ELECTRIC_QUARTZ",
   BLOOD_STONE = "BLOOD_STONE",
   SMELLY_CLAY = "SMELLY_CLAY",
+  FIRE_GEM = "FIRE_GEM",
+  NORMAL_GEM = "NORMAL_GEM",
+  ROCK_GEM = "ROCK_GEM",
+  WATER_GEM = "WATER_GEM",
+  POISON_GEM = "POISON_GEM",
+  FLYING_GEM = "FLYING_GEM",
+  ICE_GEM = "ICE_GEM",
+  GHOST_GEM = "GHOST_GEM",
+  DRAGON_GEM = "DRAGON_GEM",
+  BUG_GEM = "BUG_GEM",
+  DARK_GEM = "DARK_GEM",
+  STEEL_GEM = "STEEL_GEM",
   FIRE_SHARD = "FIRE_SHARD",
   TEAL_MASK = "TEAL_MASK",
   WELLSPRING_MASK = "WELLSPRING_MASK",
@@ -421,6 +433,21 @@ export const SynergyStones = [
   Item.ICE_STONE
 ]
 
+export const SynergyGems = [
+  Item.FIRE_GEM,
+  Item.NORMAL_GEM,
+  Item.ROCK_GEM,
+  Item.WATER_GEM,
+  Item.POISON_GEM,
+  Item.FLYING_GEM,
+  Item.ICE_GEM,
+  Item.GHOST_GEM,
+  Item.DRAGON_GEM,
+  Item.BUG_GEM,
+  Item.DARK_GEM,
+  Item.STEEL_GEM
+] as const
+
 export const SynergyItems = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
@@ -476,6 +503,24 @@ export const SynergyGivenByItem: Record<
   [Item.COOKING_POT]: Synergy.GOURMET,
   [Item.BERSERK_GENE]: Synergy.MONSTER,
   [Item.SURFBOARD]: Synergy.AQUATIC
+}
+
+export const SynergyGivenByGem: Record<
+  (typeof SynergyGems)[number],
+  Synergy
+> = {
+  [Item.FIRE_GEM]: Synergy.FIRE,
+  [Item.NORMAL_GEM]: Synergy.NORMAL,
+  [Item.ROCK_GEM]: Synergy.ROCK,
+  [Item.WATER_GEM]: Synergy.WATER,
+  [Item.POISON_GEM]: Synergy.POISON,
+  [Item.FLYING_GEM]: Synergy.FLYING,
+  [Item.ICE_GEM]: Synergy.ICE,
+  [Item.GHOST_GEM]: Synergy.GHOST,
+  [Item.DRAGON_GEM]: Synergy.DRAGON,
+  [Item.BUG_GEM]: Synergy.BUG,
+  [Item.DARK_GEM]: Synergy.DARK,
+  [Item.STEEL_GEM]: Synergy.STEEL
 }
 
 export const NonSpecialItemComponents: Item[] = [

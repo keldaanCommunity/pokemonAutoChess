@@ -55,7 +55,7 @@ import Dps from "./dps"
 import { OnItemGainedEffect, OnSpawnEffect } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
-import { electricTripleAttackEffect, FireHitEffect, GrowGroundEffect, MonsterKillEffect, SoundCryEffect } from "./effects/synergies"
+import { electricTripleAttackEffect, FireHitEffect, GroundHoleEffect, MonsterKillEffect, SoundCryEffect } from "./effects/synergies"
 import { getWonderboxItems, ItemStats } from "./items"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
@@ -245,6 +245,7 @@ export default class Simulation extends Schema implements ISimulation {
     team: Team,
     isSpawn = false
   ) {
+    const player = team === Team.BLUE_TEAM ? this.bluePlayer : this.redPlayer
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isSpawn = isSpawn
     pokemonEntity.orientation =
@@ -281,7 +282,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
     pokemonEntity.effectsSet.forEach((effect) => {
-      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity)
+      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity, player)
     })
 
     return pokemonEntity
@@ -1181,7 +1182,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.DEEP_MINER:
         if (types.has(Synergy.GROUND)) {
           pokemon.effects.add(effect)
-          pokemon.effectsSet.add(new GrowGroundEffect(effect))
+          pokemon.effectsSet.add(new GroundHoleEffect(effect))
         }
         break
 
