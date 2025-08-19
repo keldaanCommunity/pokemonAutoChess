@@ -1288,46 +1288,48 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.board.forEach((pokemon, pokemonId) => {
           if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon) && pokemon.items.has(Item.CHEF_HAT) === false) {
             const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
-            const hasReachedMaxDepth = player.groundHoles[index] + 1 === 5
-            let buriedItem = hasReachedMaxDepth ? player.buriedItems[index] : null
-            this.room.broadcast(Transfer.DIG, {
-              pokemonId,
-              buriedItem
-            })
-            this.room.clock.setTimeout(() => {
-              player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
-            }, 500)
-
-
-            if (pokemon.items.has(Item.EXPLORER_KIT) && hasReachedMaxDepth && !buriedItem) {
-              if (chance(0.1, pokemon)) {
-                buriedItem = Item.BIG_NUGGET
-              } else if (chance(0.5, pokemon)) {
-                player.items.push(Item.NUGGET)
-              } else {
-                player.items.push(Item.COIN)
-              }
-            }
-
-            if (buriedItem) {
+            const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
+            const isReachingMaxDepth = player.groundHoles[index] === 4
+            if (!hasAlreadyReachedMaxDepth) {
+              let buriedItem = isReachingMaxDepth ? player.buriedItems[index] : null
+              this.room.broadcast(Transfer.DIG, {
+                pokemonId,
+                buriedItem
+              })
               this.room.clock.setTimeout(() => {
-                if (buriedItem === Item.COIN) {
-                  player.addMoney(1, true, null)
-                } else if (buriedItem === Item.NUGGET) {
-                  player.addMoney(3, true, null)
-                } else if (buriedItem === Item.BIG_NUGGET) {
-                  player.addMoney(10, true, null)
-                } else if (buriedItem === Item.TREASURE_BOX) {
-                  player.items.push(...pickNRandomIn(ItemComponents, 2))
-                } else if (isIn(SynergyGems, buriedItem)) {
-                  const type = SynergyGivenByGem[buriedItem]
-                  player.bonusSynergies.set(type, (player.bonusSynergies.get(type) ?? 0) + 1)
-                  player.items.push(buriedItem)
-                  player.updateSynergies()
+                player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+              }, 500)
+
+              if (pokemon.items.has(Item.EXPLORER_KIT) && isReachingMaxDepth && !buriedItem) {
+                if (chance(0.1, pokemon)) {
+                  buriedItem = Item.BIG_NUGGET
+                } else if (chance(0.5, pokemon)) {
+                  buriedItem = Item.NUGGET
                 } else {
-                  player.items.push(buriedItem)
+                  buriedItem = Item.COIN
                 }
-              }, 3000)
+              }
+
+              if (buriedItem) {
+                this.room.clock.setTimeout(() => {
+                  if (buriedItem === Item.COIN) {
+                    player.addMoney(1, true, null)
+                  } else if (buriedItem === Item.NUGGET) {
+                    player.addMoney(3, true, null)
+                  } else if (buriedItem === Item.BIG_NUGGET) {
+                    player.addMoney(10, true, null)
+                  } else if (buriedItem === Item.TREASURE_BOX) {
+                    player.items.push(...pickNRandomIn(ItemComponents, 2))
+                  } else if (isIn(SynergyGems, buriedItem)) {
+                    const type = SynergyGivenByGem[buriedItem]
+                    player.bonusSynergies.set(type, (player.bonusSynergies.get(type) ?? 0) + 1)
+                    player.items.push(buriedItem)
+                    player.updateSynergies()
+                  } else {
+                    player.items.push(buriedItem)
+                  }
+                }, 3000)
+              }
             }
           }
         })

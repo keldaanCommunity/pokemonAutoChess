@@ -832,7 +832,7 @@ export default function Game() {
         $player.groundHoles.onChange((value) => {
           if (player.id === store.getState().game.currentPlayerId) {
             const gameScene = getGameScene()
-            if (gameScene?.board) {
+            if (gameScene?.board && room.state.phase === GamePhaseState.PICK) {
               gameScene.board.renderGroundHoles()
             }
           }
