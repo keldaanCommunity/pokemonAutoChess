@@ -2,6 +2,9 @@
 
 - Drilbur
 - Excadrill
+- Roggenrola
+- Boldore
+- Gigalith
 
 # Changes to Pokemon & Abilities
 
