@@ -1,4 +1,3 @@
-import { on } from "node:events"
 import { Geom } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
@@ -15,6 +14,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
   Orientation,
+  OrientationFlip,
   PokemonActionState,
   PokemonTint,
   SpriteType
@@ -2047,23 +2047,28 @@ export const AbilitiesAnimations: {
   },
 
   ["ZYGARDE_CELL"]: (args) => {
-    const orientation = getOrientation(
-      args.positionX,
-      args.positionY,
+    let orientation = getOrientation(
       args.targetX,
-      args.targetY
+      args.targetY,
+      args.positionX,
+      args.positionY
     )
+    if (!args.flip) orientation = OrientationFlip[orientation]
     const distance = min(1)(
       distanceE(args.positionX, args.positionY, args.targetX, args.targetY)
     )
     const animName = `ZYGARDE_CELL/${orientation}`
-    const duration = max(1000)(distance * 200)
+    const duration = max(2000)(Math.round(distance * 400))
     return projectile({
-      frame: `${animName}/0000`,
+      frame: `${animName}/000.png`,
       ability: animName,
       duration,
-      delay: randomBetween(0, max(300)(1000 - duration))
-    })
+      delay: randomBetween(0, max(500)(2000 - duration)),
+      depth: DEPTH.ABILITY_BELOW_POKEMON,
+      startCoords: "target",
+      endCoords: "caster",
+      scale: 1
+    })(args)
   },
 
   [Ability.ICICLE_MISSILE]: (args) => {

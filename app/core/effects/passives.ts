@@ -470,11 +470,14 @@ class ZygardeCellsEffect extends PeriodicEffect {
     super(
       (pokemon) => {
         if (!pokemon.player) return
-        const fullyDugHoles = Object.entries(pokemon.player.groundHoles).filter(([index, holeDepth]) => holeDepth === 5)
-        let cellsSpawned = 0
-        const delay = 800
 
-        for (const [index, hole] of fullyDugHoles) {
+        const fullyDugHolesIndexes: number[] = []
+        let cellsSpawned = 0
+        const delay = 1800
+
+        for (let i = 0; i < 24; i++) if (pokemon.player.groundHoles[i] === 5) fullyDugHolesIndexes.push(i)
+
+        for (const index of fullyDugHolesIndexes) {
           if (this.cellsCount < 95) {
             this.cellsCount++
             cellsSpawned++
@@ -510,6 +513,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
             pokemon.changePassive(Passive.NONE)
             pokemon.skill = Ability.CORE_ENFORCER
             pokemon.pp = 0
+            pokemon.effectsSet.delete(this)
             if (pokemon.player) {
               pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
             }
