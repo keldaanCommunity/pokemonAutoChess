@@ -16250,7 +16250,7 @@ export class Zygarde100 extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GROUND])
   rarity = Rarity.LEGENDARY
   stars = 4
-  hp = 300
+  hp = 350
   atk = 28
   speed = 50
   def = 10

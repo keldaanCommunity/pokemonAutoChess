@@ -2722,7 +2722,7 @@
 		"BAD_LUCK": "Réduit la LUCK de toute l'équipe adverse de 20%.",
 		"GOOD_LUCK": "Augmente la LUCK de toute l'équipe de 20%.",
 		"PRIMEAPE": "A chaque KO subi, Colossinge se met encore plus en colère et gagne 1 ATK de façon permanente. Après 10 KO, évolue en Courroussinge.",
-		"ZYGARDE": "Après avoir gagné 5 cumuls d'effet de GROUND, Zygarde absorbe toutes ses cellules et prend sa forme complète.",
+		"ZYGARDE": "Les cellules Zygarde sortent des trous totalement creusés toutes les secondes pour rejoindre Zygarde, lui donnant 1 HP max chacune. Lorsque 95 cellules sont collectées, il prend sa forme complète.",
 		"GLIMMORA": "Une fois sous les 50% de ses HP max, lance des piques toxiques dans une zone de 2x3 devant elle, infligeant 20 SPECIAL. Les piques toxiques appliquent le statut POISONNED aux Pokémon, sauf s'ils sont de type POISON.",
 		"PILLAR": "Construit [1,1,2] piliers pouvant être placés sur le plateau et qui bloquent le chemin des ennemis, avec des HP, DEF et SPE_DEF augmentés en fonction des STAR de l'unité.",
 		"INANIMATE": "Les objets inanimés ne peuvent pas être copiés, mis sur le banc ou vendus. Ils ne peuvent pas se déplacer ni attaquer, et sont immunisés contre les effets de statut.",

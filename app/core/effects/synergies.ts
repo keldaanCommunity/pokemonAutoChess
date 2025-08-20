@@ -53,35 +53,6 @@ export class GroundHoleEffect extends OnSpawnEffect {
             pokemon.addDefense(defBuff, pokemon, 0, false)
             pokemon.addSpecialDefense(defBuff, pokemon, 0, false)
             pokemon.broadcastAbility({ skill: "GROUND_GROW" })
-
-            /*
-            if (pokemon.passive === Passive.ZYGARDE && this.count === 5) {
-                pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
-                if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
-                    pokemon.addDefense(2, pokemon, 0, false)
-                    pokemon.addSpecialDefense(2, pokemon, 0, false)
-                    pokemon.addMaxHP(50, pokemon, 0, false)
-                    pokemon.addSpeed(-12, pokemon, 0, false)
-                    pokemon.range = min(1)(pokemon.range + 1)
-                } else {
-                    pokemon.addAttack(5, pokemon, 0, false)
-                    pokemon.addDefense(5, pokemon, 0, false)
-                    pokemon.addSpecialDefense(5, pokemon, 0, false)
-                    pokemon.addMaxHP(80, pokemon, 0, false)
-                    pokemon.addSpeed(-5, pokemon, 0, false)
-                    pokemon.range = min(1)(pokemon.range - 1)
-                }
-
-                pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
-                pokemon.name = Pkm.ZYGARDE_100
-                pokemon.changePassive(Passive.NONE)
-                pokemon.skill = Ability.CORE_ENFORCER
-                pokemon.pp = 0
-                if (pokemon.player) {
-                    pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
-                }
-            }
-            */
         })
     }
 }

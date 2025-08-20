@@ -10,11 +10,13 @@ import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
+import { min } from "../../utils/number"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { Board, Cell } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
 import {
   Effect,
   OnAbilityCastEffect,
@@ -462,6 +464,64 @@ class ClearWingEffect extends PeriodicEffect {
   }
 }
 
+class ZygardeCellsEffect extends PeriodicEffect {
+  cellsCount = 0
+  constructor() {
+    super(
+      (pokemon) => {
+        if (!pokemon.player) return
+        const fullyDugHoles = Object.entries(pokemon.player.groundHoles).filter(([index, holeDepth]) => holeDepth === 5)
+        let cellsSpawned = 0
+        const delay = 800
+
+        for (const [index, hole] of fullyDugHoles) {
+          if (this.cellsCount < 95) {
+            this.cellsCount++
+            cellsSpawned++
+            const x = +index % 8
+            const y = Math.floor(+index / 8)
+            if (x !== pokemon.positionX || y !== pokemon.positionY) {
+              pokemon.broadcastAbility({ targetX: x, targetY: y, skill: "ZYGARDE_CELL" })
+            }
+          }
+        }
+
+        pokemon.commands.push(new DelayedCommand(() => {
+          pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
+          if (this.cellsCount >= 95) {
+            pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
+            if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
+              pokemon.addDefense(2, pokemon, 0, false)
+              pokemon.addSpecialDefense(2, pokemon, 0, false)
+              pokemon.addMaxHP(5, pokemon, 0, false)
+              pokemon.addSpeed(-12, pokemon, 0, false)
+              pokemon.range = min(1)(pokemon.range + 1)
+            } else {
+              pokemon.addAttack(5, pokemon, 0, false)
+              pokemon.addDefense(5, pokemon, 0, false)
+              pokemon.addSpecialDefense(5, pokemon, 0, false)
+              pokemon.addMaxHP(35, pokemon, 0, false)
+              pokemon.addSpeed(-5, pokemon, 0, false)
+              pokemon.range = min(1)(pokemon.range - 1)
+            }
+
+            pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
+            pokemon.name = Pkm.ZYGARDE_100
+            pokemon.changePassive(Passive.NONE)
+            pokemon.skill = Ability.CORE_ENFORCER
+            pokemon.pp = 0
+            if (pokemon.player) {
+              pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
+            }
+          }
+        }, delay))
+      },
+      Passive.ZYGARDE,
+      1000
+    )
+  }
+}
+
 class SynchroEffect extends PeriodicEffect {
   constructor() {
     super(
@@ -525,5 +585,8 @@ export const PassiveEffects: Partial<
   ],
   [Passive.SYNCHRO]: [
     () => new SynchroEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.ZYGARDE]: [
+    () => new ZygardeCellsEffect() // needs new instance of effect for each pokemon due to internal stack counter
   ]
 }

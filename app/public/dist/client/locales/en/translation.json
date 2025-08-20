@@ -2756,7 +2756,7 @@
 		"BAD_LUCK": "Reduce all opponents LUCK by 20%",
 		"GOOD_LUCK": "Increase the LUCK of all allies by 20%",
 		"PRIMEAPE": "Primeape becomes angrier when knocked out, gaining 1 permanent ATK. After Primeape is knocked out 10 times, it evolves into Annihilape.",
-		"ZYGARDE": "After getting 5 stacks of GROUND effect, Zygarde absorbs all of its cells, taking its complete form.",
+		"ZYGARDE": "Zygarde cells emerge from fully dug holes every second to join Zygarde, giving it 1 max HP each. When 95 cells have been collected, transforms into its complete form.",
 		"GLIMMORA": "Once below 50% max HP, throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 SPECIAL. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
 		"PILLAR": "Builds [1,1,2] movable pillars that block the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
 		"INANIMATE": "Inanimate objects cannot be copied, benched or sold. They cannot move or attack, and are immune to status effects.",
