@@ -2678,7 +2678,7 @@
 		"PICKUP": "Le Pokémon commence le combat avec un objet aléatoire s'il ne tient aucun objet.",
 		"CORSOLA": "$t(pkm.CORSOLA) évolue en $t(pkm.GALAR_CORSOLA) après avoir été mis KO la première fois.",
 		"CELEBI": "Le joueur regagne 1 HP à chaque fois que $t(pkm.CELEBI) utilise $t(ability.TIME_TRAVEL).",
-		"GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) cherche 99 GOLD.",
+		"GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) cherche 99 GOLD en banque.",
 		"GHOLDENGO": "Au début de chaque combat, si le joueur a 50 GOLD ou plus, $t(pkm.GHOLDENGO) gagne RUNE_PROTECT pendant tout le combat.",
 		"METEOR": "$t(pkm.MINIOR) alterne entre sa forme Météore et ses formes Noyau. La forme Météore octroie [5,SP] SPEED par attaque.\nLes attaques en forme Noyau infligent des effets supplémentaires à la cible et aux ennemis adjacents :\nRouge: Inflige [150,SP]% PHYSICAL\nBleu: inflige [100,SP]% SPECIAL\nOrange: inflige [50,SP]% TRUE\nVert: soigne les alliés adjacents de [100,SP]% des dégâts infligés.",
 		"MIMIKYU": "Sous les 50% de HP, $t(pkm.MIMIKYU) bascule dans sa forme Démasquée, gagnant 10 ATK et PROTECT pendant 2 secondes.",
