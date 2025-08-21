@@ -38,6 +38,7 @@ import {
   ItemComponents,
   ItemRecipe,
   OgerponMasks,
+  RemovableItems,
   SynergyGivenByItem,
   SynergyItems
 } from "../../types/enum/Item"
@@ -165,29 +166,24 @@ export class Pokemon extends Schema implements IPokemon {
     this.permanentLuck = value
   }
 
-  onChangePosition(x: number, y: number, player: Player, state?: GameState) {
+  onChangePosition(
+    x: number,
+    y: number,
+    player: Player,
+    state?: GameState,
+    doNotRemoveItems: boolean = false
+  ) {
     // called after manually changing position of the pokemon on board
-    if (y === 0) {
-      // moved to bench
-      this.items.forEach((item) => {
-        if (
-          item === Item.CHEF_HAT ||
-          item === Item.TRASH ||
-          ArtificialItems.includes(item)
-        ) {
-          player.items.push(item)
-          this.removeItem(item, player)
-        }
+    if (y === 0 && !doNotRemoveItems) {
+      const itemsToRemove = values(this.items).filter((item) => {
+        return (
+          RemovableItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+            item !== Item.RARE_CANDY)
+        )
       })
-
-      if (state?.specialGameRule === SpecialGameRule.SLAMINGO) {
-        this.items.forEach((item) => {
-          if (item !== Item.RARE_CANDY) {
-            player.items.push(item)
-            this.removeItem(item, player)
-          }
-        })
-      }
+      player.items.push(...itemsToRemove)
+      this.removeItems(itemsToRemove, player)
     }
   }
 
@@ -272,15 +268,39 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   removeItem(item: Item, player: Player) {
-    this.items.delete(item)
-    if (
-      item in SynergyGivenByItem &&
-      new PokemonClasses[this.name]().types.has(SynergyGivenByItem[item]) ===
-      false
-    ) {
-      this.types.delete(SynergyGivenByItem[item])
+    this.removeItems([item], player)
+  }
+
+  removeItems(items: Item[], player: Player) {
+    /* onItemRemoved effects need to be called after removing all items in case they trigger transformations (Pikachu Surfer, etc.)
+     in order:
+     1) remove items from the pokemon
+     2) check if any synergy should be removed
+     3) call onItemRemoved effects for each item removed
+    */
+    for (const item of items) {
+      this.items.delete(item)
     }
-    this.onItemRemoved(item, player)
+
+    const nativeTypes = new PokemonClasses[this.name]().types
+    for (const item of items) {
+      const synergyRemoved = SynergyGivenByItem[item]
+      const otherSynergyItemsHeld = values(this.items).filter(
+        (i) => SynergyGivenByItem[i] === synergyRemoved
+      )
+
+      if (
+        synergyRemoved &&
+        nativeTypes.has(synergyRemoved) === false &&
+        otherSynergyItemsHeld.length === 0
+      ) {
+        this.types.delete(synergyRemoved)
+      }
+    }
+
+    for (const item of items) {
+      this.onItemRemoved(item, player)
+    }
   }
 }
 
@@ -1015,8 +1035,52 @@ export class Garchomp extends Pokemon {
   def = 12
   speDef = 12
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.DRAGON_BREATH
+}
+
+export class Roggenrola extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.LIGHT])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.BOLDORE
+  hp = 90
+  atk = 4
+  speed = 37
+  def = 8
+  speDef = 6
+  maxPP = 110
+  range = 2
+  skill = Ability.ROCK_ARTILLERY
+}
+
+export class Boldore extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.LIGHT])
+  rarity = Rarity.EPIC
+  stars = 2
+  evolution = Pkm.GIGALITH
+  hp = 170
+  atk = 7
+  speed = 37
+  def = 12
+  speDef = 10
+  maxPP = 110
+  range = 2
+  skill = Ability.ROCK_ARTILLERY
+}
+
+export class Gigalith extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.LIGHT])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 280
+  atk = 17
+  speed = 37
+  def = 16
+  speDef = 14
+  maxPP = 110
+  range = 2
+  skill = Ability.ROCK_ARTILLERY
 }
 
 export class Beldum extends Pokemon {
@@ -9606,14 +9670,17 @@ export class Silvally extends Pokemon {
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
+    super.onChangePosition(x, y, player, state, true)
     if (y === 0) {
-      values(this.items).filter((item) =>
-        (SynergyItems as ReadonlyArray<Item>).forEach((synergyItem) => {
-          this.removeItem(synergyItem, player)
-          player.items.push(synergyItem)
-        })
-      )
+      const itemsToRemove = values(this.items).filter((item) => {
+        return (RemovableItems.includes(item) ||
+          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+            item !== Item.RARE_CANDY) ||
+          (SynergyItems as ReadonlyArray<Item>).includes(item)
+        )
+      })
+      player.items.push(...itemsToRemove)
+      this.removeItems(itemsToRemove, player)
     }
   }
   onItemRemoved(item: Item, player: Player) {
@@ -9621,7 +9688,8 @@ export class Silvally extends Pokemon {
       (SynergyItems as ReadonlyArray<Item>).includes(item) &&
       values(this.items).filter((item) =>
         (SynergyItems as ReadonlyArray<Item>).includes(item)
-      ).length === 0
+      ).length === 0 &&
+      player.getPokemonAt(this.positionX, this.positionY)?.name === Pkm.SILVALLY
     ) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
@@ -18421,7 +18489,7 @@ export const PokemonClasses: Record<
   [Pkm.HISUI_ARCANINE]: HisuiArcanine,
   [Pkm.ONIX]: Onix,
   [Pkm.STEELIX]: Steelix,
-  [Pkm.MEGA_STEELIX]: MegaSteelix,
+  //[Pkm.MEGA_STEELIX]: MegaSteelix,
   [Pkm.SCYTHER]: Scyther,
   [Pkm.SCIZOR]: Scizor,
   [Pkm.KLEAVOR]: Kleavor,
@@ -18470,7 +18538,7 @@ export const PokemonClasses: Record<
   [Pkm.MEDICHAM]: Medicham,
   [Pkm.NUMEL]: Numel,
   [Pkm.CAMERUPT]: Camerupt,
-  [Pkm.MEGA_CAMERUPT]: MegaCamerupt,
+  //[Pkm.MEGA_CAMERUPT]: MegaCamerupt,
   [Pkm.DARKRAI]: Darkrai,
   [Pkm.LITWICK]: Litwick,
   [Pkm.LAMPENT]: Lampent,
@@ -18486,7 +18554,7 @@ export const PokemonClasses: Record<
   [Pkm.FROSLASS]: Froslass,
   [Pkm.SNOVER]: Snover,
   [Pkm.ABOMASNOW]: Abomasnow,
-  [Pkm.MEGA_ABOMASNOW]: MegaAbomasnow,
+  //[Pkm.MEGA_ABOMASNOW]: MegaAbomasnow,
   [Pkm.VANILLITE]: Vanillite,
   [Pkm.VANILLISH]: Vanillish,
   [Pkm.VANILLUXE]: Vanilluxe,
@@ -18572,7 +18640,7 @@ export const PokemonClasses: Record<
   [Pkm.ROSERADE]: Roserade,
   [Pkm.BUNEARY]: Buneary,
   [Pkm.LOPUNNY]: Lopunny,
-  [Pkm.MEGA_LOPUNNY]: MegaLopunny,
+  //[Pkm.MEGA_LOPUNNY]: MegaLopunny,
   [Pkm.AXEW]: Axew,
   [Pkm.FRAXURE]: Fraxure,
   [Pkm.HAXORUS]: Haxorus,
@@ -18584,10 +18652,10 @@ export const PokemonClasses: Record<
   [Pkm.PORYGON_Z]: PorygonZ,
   [Pkm.ELECTRIKE]: Electrike,
   [Pkm.MANECTRIC]: Manectric,
-  [Pkm.MEGA_MANECTRIC]: MegaManectric,
+  //[Pkm.MEGA_MANECTRIC]: MegaManectric,
   [Pkm.SHUPPET]: Shuppet,
   [Pkm.BANETTE]: Banette,
-  [Pkm.MEGA_BANETTE]: MegaBanette,
+  //[Pkm.MEGA_BANETTE]: MegaBanette,
   [Pkm.HONEDGE]: Honedge,
   [Pkm.DOUBLADE]: Doublade,
   [Pkm.AEGISLASH]: Aegislash,
@@ -18616,7 +18684,7 @@ export const PokemonClasses: Record<
   [Pkm.MELOETTA]: Meloetta,
   [Pkm.PIROUETTE_MELOETTA]: PirouetteMeloetta,
   [Pkm.ALTARIA]: Altaria,
-  [Pkm.MEGA_ALTARIA]: MegaAltaria,
+  //[Pkm.MEGA_ALTARIA]: MegaAltaria,
   [Pkm.CASTFORM]: Castform,
   [Pkm.CASTFORM_SUN]: CastformSun,
   [Pkm.CASTFORM_RAIN]: CastformRain,
@@ -18663,7 +18731,7 @@ export const PokemonClasses: Record<
   [Pkm.BLACEPHALON]: Blacephalon,
   [Pkm.HOUNDOUR]: Houndour,
   [Pkm.HOUNDOOM]: Houndoom,
-  [Pkm.MEGA_HOUNDOOM]: MegaHoundoom,
+  //[Pkm.MEGA_HOUNDOOM]: MegaHoundoom,
   [Pkm.CLAMPERL]: Clamperl,
   [Pkm.HUNTAIL]: Huntail,
   [Pkm.GOREBYSS]: Gorebyss,
@@ -19253,7 +19321,10 @@ export const PokemonClasses: Record<
   [Pkm.TAILLOW]: Taillow,
   [Pkm.SWELLOW]: Swellow,
   [Pkm.DRILBUR]: Drilbur,
-  [Pkm.EXCADRILL]: Excadrill
+  [Pkm.EXCADRILL]: Excadrill,
+  [Pkm.ROGGENROLA]: Roggenrola,
+  [Pkm.BOLDORE]: Boldore,
+  [Pkm.GIGALITH]: Gigalith
 }
 
 // declare all the classes in colyseus schema TypeRegistry

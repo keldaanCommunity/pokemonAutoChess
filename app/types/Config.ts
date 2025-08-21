@@ -476,7 +476,7 @@ export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.SUPER_BALL]: 1350,
   [EloRank.ULTRA_BALL]: 1400,
   [EloRank.MASTER_BALL]: 1500,
-  [EloRank.BEAST_BALL]: 1700
+  [EloRank.BEAST_BALL]: 1600
 }
 
 export const WeatherThreshold: { [weather in Weather]: number } = {

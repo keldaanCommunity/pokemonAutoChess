@@ -2,6 +2,9 @@
 
 - Drilbur
 - Excadrill
+- Roggenrola
+- Boldore
+- Gigalith
 
 # Changes to Pokemon & Abilities
 
@@ -21,13 +24,17 @@
 
 # Gameplay
 
-- Ranked matches created by Ultra ball rank and above are now open with a min elo requirement of Super ball rank instead of Pokeball rank. The previous overlap was too large and ended up counter-productive.
+- Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
 
 # UI
+
+- Added "Unholdable", "Consumable" and "Removable" labels in item descriptions
+- Added a tab in wiki for town encounters
 
 # Bugfix
 
 # Misc
 
-- The amount of elo gained or loss on the first games of a fresh new account is increased, and progressively decrease down to the standard K=32 factor after 20 games played. [More details here](https://discord.com/channels/737230355039387749/1404514365406969868)
+- The amount of elo gained on the first games of a fresh new account is increased, and progressively decrease down to the standard K=32 factor after 20 games played. [More details here](https://discord.com/channels/737230355039387749/1404514365406969868)
 - New title: Mole
+

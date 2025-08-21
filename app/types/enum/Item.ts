@@ -642,16 +642,7 @@ export const Flavors = [
 ] as const
 
 export const SynergyFlavors: {
-  [key in Synergy]:
-  | Item.VANILLA_FLAVOR
-  | Item.RUBY_FLAVOR
-  | Item.MATCHA_FLAVOR
-  | Item.MINT_FLAVOR
-  | Item.LEMON_FLAVOR
-  | Item.SALTED_FLAVOR
-  | Item.RUBY_SWIRL_FLAVOR
-  | Item.CARAMEL_SWIRL_FLAVOR
-  | Item.RAINBOW_SWIRL_FLAVOR
+  [key in Synergy]: typeof Flavors[number]
 } = {
   [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
   [Synergy.GRASS]: Item.MATCHA_FLAVOR,
@@ -686,7 +677,7 @@ export const SynergyFlavors: {
   [Synergy.GOURMET]: Item.VANILLA_FLAVOR
 }
 
-export const Sweets = [
+export const Sweets: Item[] = [
   Item.STRAWBERRY_SWEET,
   Item.LOVE_SWEET,
   Item.FLOWER_SWEET,
@@ -698,7 +689,7 @@ export const Sweets = [
   Item.RIBBON_SWEET
 ]
 
-export const NonHoldableItems: Item[] = [
+export const UnholdableItems: Item[] = [
   ...WeatherRocks,
   ...FishingRods,
   ...TMs,
@@ -721,4 +712,24 @@ export const NonHoldableItems: Item[] = [
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET
+]
+
+export const ConsumableItems: Item[] = [
+  ...TMs,
+  ...HMs,
+  ...Dishes,
+  ...Flavors,
+  ...Sweets,
+  Item.PICNIC_SET,
+  Item.FIRE_SHARD,
+  Item.SCROLL_OF_DARKNESS,
+  Item.SCROLL_OF_WATERS,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR
+]
+
+export const RemovableItems: Item[] = [
+  Item.CHEF_HAT,
+  Item.TRASH,
+  ...ArtificialItems
 ]

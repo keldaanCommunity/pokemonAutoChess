@@ -278,8 +278,16 @@ export default config({
     })
 
     app.get("/tilemap/:map", async (req, res) => {
-      const tilemap = initTilemap(req.params.map as DungeonPMDO)
-      res.send(tilemap)
+      try {
+        if (!req.params.map || !Object.values(DungeonPMDO).includes(req.params.map as DungeonPMDO)) {
+          return res.status(400).send({ error: "Invalid map parameter" });
+        }
+        const tilemap = initTilemap(req.params.map as DungeonPMDO);
+        res.send(tilemap);
+      } catch (error) {
+        logger.error("Error generating tilemap", { error, map: req.params.map });
+        res.status(500).send({ error: "Error generating tilemap" });
+      }
     })
 
     app.get("/leaderboards", async (req, res) => {
@@ -393,6 +401,7 @@ export default config({
         if (!userAuth) return
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
+        res.set("Cache-Control", "no-cache")
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
         logger.error("Error fetching profile", error)

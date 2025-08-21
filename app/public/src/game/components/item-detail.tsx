@@ -5,7 +5,15 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../core/items"
 import { Stat } from "../../../../types/enum/Game"
-import { HMs, Item, ItemRecipe, TMs } from "../../../../types/enum/Item"
+import {
+  ConsumableItems,
+  HMs,
+  Item,
+  ItemRecipe,
+  RemovableItems,
+  TMs,
+  UnholdableItems
+} from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
 
@@ -35,10 +43,22 @@ export function ItemDetailTooltip({
   }
 
   const getImageFilename = () => {
-    if (TMs.includes(item)) { return "TM" }
-    if (HMs.includes(item)) { return "HM" }
+    if (TMs.includes(item)) {
+      return "TM"
+    }
+    if (HMs.includes(item)) {
+      return "HM"
+    }
     return item
   }
+
+  const itemCategoryLabel = ConsumableItems.includes(item)
+    ? t("consumable_item")
+    : UnholdableItems.includes(item)
+      ? t("unholdable_item")
+      : RemovableItems.includes(item)
+      ? t("removable_item")
+      : null
 
   return (
     <div className="game-item-detail">
@@ -64,6 +84,7 @@ export function ItemDetailTooltip({
         {t(`item.${item}`)}
       </div>
       <div className="game-item-detail-stats">
+        {itemCategoryLabel && <i>{itemCategoryLabel}</i>}
         {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>
             <img

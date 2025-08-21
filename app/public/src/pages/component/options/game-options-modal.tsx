@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
-import { useAppDispatch } from "../../../hooks"
-import { IPreferencesState, usePreferences } from "../../../preferences"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { usePreferences } from "../../../preferences"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
@@ -23,7 +23,7 @@ export default function GameOptionsModal(props: {
   const [preferences, setPreferences] = usePreferences()
   const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
-  const language = i18n.language
+  const language = useAppSelector((state) => state.network.profile?.language ?? i18n.language)
 
   const renderers = {
     [Phaser.AUTO]: "Auto",

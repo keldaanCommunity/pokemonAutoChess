@@ -3,7 +3,6 @@ import dayjs from "dayjs"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import History from "../models/mongo-models/history"
 import TitleStatistic from "../models/mongo-models/title-statistic"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { Title } from "../types"
@@ -161,11 +160,6 @@ async function deleteOldHistory() {
     time: { $lt: Date.now() - CRON_HISTORY_CLEANUP_DELAY }
   })
   logger.info(`${deleteResults.deletedCount} detailed statistics deleted`)
-
-  const historyResults = await History.deleteMany({
-    startTime: { $lt: Date.now() - CRON_HISTORY_CLEANUP_DELAY }
-  })
-  logger.info(`${historyResults.deletedCount} game histories deleted`)
 }
 
 async function resetEventScores() {

@@ -185,6 +185,7 @@ interface OnDamageReceivedEffectArgs {
   board: Board
   damage: number
   attackType?: AttackType
+  isRetaliation: boolean
 }
 
 export class OnDamageReceivedEffect extends Effect {

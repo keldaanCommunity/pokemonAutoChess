@@ -59,7 +59,6 @@ export abstract class EvolutionRule {
   }
 
   afterEvolve(pokemonEvolved: Pokemon, player: Player, stageLevel: number) {
-    pokemonEvolved.onAcquired(player)
     player.updateSynergies()
     player.board.forEach((pokemon) => {
       if (
@@ -194,6 +193,7 @@ export class CountEvolutionRule extends EvolutionRule {
       pokemon.afterEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
     }
 
+    pokemonEvolved.onAcquired(player)
     return pokemonEvolved
   }
 }
@@ -238,8 +238,6 @@ export class ItemEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
-    carryOverPermanentStats(pokemonEvolved, [pokemon])
-    pokemonEvolved.meal = pokemon.meal
     return pokemonEvolved
   }
 }
@@ -296,8 +294,6 @@ export class HatchEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
-    carryOverPermanentStats(pokemonEvolved, [pokemon])
-    pokemonEvolved.meal = pokemon.meal
     return pokemonEvolved
   }
 }
@@ -329,8 +325,6 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
       pokemon,
       pokemonEvolutionName
     )
-    carryOverPermanentStats(pokemonEvolved, [pokemon])
-    pokemonEvolved.meal = pokemon.meal
     return pokemonEvolved
   }
 }

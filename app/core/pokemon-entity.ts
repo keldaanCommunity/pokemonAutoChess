@@ -284,6 +284,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
     attacker: PokemonEntity | null
     shouldTargetGainMana: boolean
+    isRetaliation?: boolean
   }) {
     return this.state.handleDamage({ target: this, ...params })
   }
@@ -309,35 +310,33 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker &&
         !attacker.items.has(Item.PROTECTIVE_PADS)
       ) {
-        this.commands.push(
-          new DelayedCommand(() => {
-            const bounceCrit =
-              crit ||
-              (this.effects.has(EffectEnum.ABILITY_CRIT) &&
-                chance(this.critChance, this))
-            const bounceDamage = Math.round(
-              ([0.5, 1][this.stars - 1] ?? 1) *
-              damage *
-              (1 + this.ap / 100) *
-              (bounceCrit ? this.critPower : 1)
-            )
-            this.broadcastAbility({
-              skill: attacker.skill,
-              positionX: this.positionX,
-              positionY: this.positionY,
-              targetX: attacker.positionX,
-              targetY: attacker.positionY
-            })
-            // not handleSpecialDamage to not trigger infinite loop between two magic bounces
-            attacker.handleDamage({
-              damage: bounceDamage,
-              board,
-              attackType: AttackType.SPECIAL,
-              attacker: this,
-              shouldTargetGainMana: true
-            })
-          }, 500)
-        )
+        this.commands.push(new DelayedCommand(() => {
+          const bounceCrit =
+            crit ||
+            (this.effects.has(EffectEnum.ABILITY_CRIT) &&
+              chance(this.critChance, this))
+          const bounceDamage = Math.round(
+            ([0.5, 1][this.stars - 1] ?? 1) *
+            damage *
+            (1 + this.ap / 100) *
+            (bounceCrit ? this.critPower : 1)
+          )
+          this.broadcastAbility({
+            skill: attacker.skill,
+            positionX: this.positionX,
+            positionY: this.positionY,
+            targetX: attacker.positionX,
+            targetY: attacker.positionY
+          })
+          attacker.handleDamage({
+            damage: bounceDamage,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: this,
+            shouldTargetGainMana: true,
+            isRetaliation: true // important to not trigger infinite loop between two magic bounces
+          })
+        }, 500))
       }
       return { death: false, takenDamage: 0 }
     } else {
@@ -387,7 +386,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           board,
           attackType: AttackType.SPECIAL,
           attacker: this,
-          shouldTargetGainMana: true
+          shouldTargetGainMana: true,
+          isRetaliation: true // important to not trigger infinite loop between two power lenses
         })
       }
       return damageResult
@@ -935,19 +935,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) === 1 &&
       !this.items.has(Item.PROTECTIVE_PADS)
     ) {
-      const damage = Math.round(target.def * (1 + target.ap / 100))
-      const crit =
-        target.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(target.critChance, this)
+      const crit = target.effects.has(EffectEnum.ABILITY_CRIT) && chance(target.critChance, this)
+      const damage = Math.round(target.def * (1 + target.ap / 100) * (crit ? target.critPower : 1))
       this.status.triggerWound(2000, this, target)
-      this.handleSpecialDamage(
+      this.handleDamage({
         damage,
         board,
-        AttackType.SPECIAL,
-        target,
-        crit,
-        true
-      )
+        attackType: AttackType.SPECIAL,
+        attacker: target,
+        isRetaliation: true,
+        shouldTargetGainMana: true
+      })
     }
 
     if (target.effects.has(EffectEnum.SHELL_TRAP) && physicalDamage > 0) {
@@ -1007,12 +1005,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attacker,
     damage,
     board,
-    attackType
+    attackType,
+    isRetaliation
   }: {
     attacker: PokemonEntity | null
     damage: number
     board: Board
     attackType: AttackType
+    isRetaliation: boolean
   }) {
     // Flying protection
     if (
@@ -1090,6 +1090,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       this.count.fightingBlockCount > 0 &&
       this.count.fightingBlockCount % 10 === 0 &&
+      !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1
     ) {
@@ -1106,7 +1107,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           board,
           attackType: AttackType.PHYSICAL,
           attacker: this,
-          shouldTargetGainMana: true
+          shouldTargetGainMana: true,
+          isRetaliation: true
         })
         targetAtContact.moveTo(destination.x, destination.y, board)
       }
@@ -1135,7 +1137,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ].filter((effect) => effect instanceof OnDamageReceivedEffect)
 
     onDamageReceivedEffects.forEach((effect) => {
-      effect.apply({ pokemon: this, attacker, board, damage, attackType })
+      effect.apply({ pokemon: this, attacker, board, damage, attackType, isRetaliation })
     })
   }
 
@@ -1174,13 +1176,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
       if (distance <= 1 && this.items.has(Item.PROTECTIVE_PADS) === false) {
         // melee range
-        this.handleSpecialDamage(
-          shockDamage,
+        this.handleDamage({
+          damage: shockDamage,
           board,
-          AttackType.SPECIAL,
-          target,
-          false
-        )
+          attackType: AttackType.SPECIAL,
+          attacker: target,
+          isRetaliation: true,
+          shouldTargetGainMana: true
+        })
       }
     }
 

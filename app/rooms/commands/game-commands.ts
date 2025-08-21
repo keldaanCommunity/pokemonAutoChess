@@ -1,7 +1,6 @@
 import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
-import { DishByPkm } from "../../core/dishes"
 import {
   OnItemEquippedEffect,
   OnStageStartEffect
@@ -15,7 +14,7 @@ import {
   HatchEvolutionRule
 } from "../../core/evolution-rules"
 import { selectMatchups } from "../../core/matchmaking"
-import { canSell, getUnitScore } from "../../core/pokemon-entity"
+import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { TownEncounters } from "../../core/town-encounters"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
@@ -58,19 +57,20 @@ import {
 import {
   ArtificialItems,
   Berries,
+  ConsumableItems,
   CraftableItems,
   Dishes,
   FishingRods,
   Item,
   ItemComponents,
   ItemRecipe,
-  NonHoldableItems,
   ShinyItems,
   Sweets,
   SynergyGems,
   SynergyGivenByGem,
   SynergyGivenByItem,
-  SynergyStones
+  SynergyStones,
+  UnholdableItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -627,7 +627,7 @@ export class OnDragDropItemCommand extends Command<
 
     if (
       pokemon.canHoldItems === false &&
-      NonHoldableItems.includes(item) === false
+      UnholdableItems.includes(item) === false
     ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -642,7 +642,7 @@ export class OnDragDropItemCommand extends Command<
     if (
       pokemon.items.size >= 3 &&
       !(isBasicItem && existingBasicItemToCombine) &&
-      NonHoldableItems.includes(item) === false
+      UnholdableItems.includes(item) === false
     ) {
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
@@ -699,10 +699,14 @@ export class OnDragDropItemCommand extends Command<
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
-    if (NonHoldableItems.includes(item)) {
+    if (pokemon.items.has(item) && UnholdableItems.includes(item)) {
       // if the item is not holdable, we immediately remove it from the pokemon items
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
+      if (ConsumableItems.includes(item) === false) {
+        // item is not holdable and has not been consumed, so we add it back to player items
+        player.items.push(item)
+      }
     }
 
     player.updateSynergies()

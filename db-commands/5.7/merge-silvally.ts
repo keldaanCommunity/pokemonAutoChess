@@ -2,7 +2,6 @@ import dotenv from "dotenv"
 import { connect } from "mongoose"
 import { BotV2 } from "../../app/models/mongo-models/bot-v2"
 import DetailledStatistic from "../../app/models/mongo-models/detailled-statistic-v2"
-import History from "../../app/models/mongo-models/history"
 import Meta from "../../app/models/mongo-models/meta"
 import { Pkm } from "../../app/types/enum/Pokemon"
 import { logger } from "../../app/utils/logger"
@@ -124,42 +123,6 @@ async function removePokemonFromGame(
           `DetailedStatistic has been modified to replace ${pokemonNameToRemove} by ${pokemonNameToReplace}`
         )
         await record.save()
-      }
-    }
-
-    // Histories
-    console.log(
-      `Replacing ${pokemonNameToRemove} by ${pokemonNameToReplace} in game histories`
-    )
-    const histories = await History.find({}, ["pokemons"])
-    for (let i = 0; i < histories.length; i++) {
-      const history = histories[i]
-      let modified = false
-      if (history.players) {
-        history.players.forEach((player) => {
-          if (player.pokemons) {
-            player.pokemons.forEach((p) => {
-              if (p.name === (pokemonNameToRemove as Pkm)) {
-                p.name = pokemonNameToReplace
-                if (p.avatar) {
-                  p.avatar = p.avatar.replace(
-                    pokemonIndexToRemove,
-                    pokemonIndexToReplace
-                  )
-                }
-                history.markModified("players.pokemons")
-                modified = true
-              }
-            })
-          }
-        })
-      }
-
-      if (modified) {
-        console.log(
-          `Game history has been modified to replace ${pokemonNameToRemove} by ${pokemonIndexToReplace}`
-        )
-        await history.save()
       }
     }
 
