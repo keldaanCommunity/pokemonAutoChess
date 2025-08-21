@@ -494,7 +494,8 @@
 		"ULTRA_THRUSTERS": "Ultra Thrusters",
 		"ELECTRO_BALL": "Electro Ball",
 		"HORN_LEECH": "Horn Leech",
-		"DRILL_RUN": "Drill Run"
+		"DRILL_RUN": "Drill Run",
+		"ROCK_ARTILLERY": "Rock Artillery"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1492,7 +1493,10 @@
 		"TAILLOW": "Tailow",
 		"SWELLOW": "Swellow",
 		"DRILBUR": "Drilbur",
-		"EXCADRILL": "Excadrill"
+		"EXCADRILL": "Excadrill",
+		"ROGGENROLA": "Roggenrola",
+		"BOLDORE": "Boldore",
+		"GIGALITH": "Gigalith"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1967,7 +1971,8 @@
 		"ULTRA_THRUSTERS": "Adjacent enemies take [20,40,80,SP] SPECIAL and get BURN for 2 seconds while user quickly moves backward to a safe spot.",
 		"ELECTRO_BALL": "Launches an electric ball that bounces between enemies, inflicting [10,20,40,SP] SPECIAL on each. The number and speed of bounces depends on the user's SPEED.",
 		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD.",
-		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default."
+		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default.",
+		"ROCK_ARTILLERY": "Throws [10,15,25] rocks near random enemies, each dealing [20,30,40,SP] SPECIAL"
 	},
 	"effect": {
 		"STAMINA": "Stamina",

@@ -994,7 +994,10 @@ export enum Pkm {
   EELEKTRIK = "EELEKTRIK",
   EELEKTROSS = "EELEKTROSS",
   ZACIAN = "ZACIAN",
-  ZACIAN_CROWNED = "ZACIAN_CROWNED"
+  ZACIAN_CROWNED = "ZACIAN_CROWNED",
+  ROGGENROLA = "ROGGENROLA",
+  BOLDORE = "BOLDORE",
+  GIGALITH = "GIGALITH"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1398,7 +1401,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WAILORD]: "0321",
   [Pkm.NUMEL]: "0322",
   [Pkm.CAMERUPT]: "0323",
- //[Pkm.MEGA_CAMERUPT]: "0323-0001",
+  //[Pkm.MEGA_CAMERUPT]: "0323-0001",
   [Pkm.TORKOAL]: "0324",
   [Pkm.SPOINK]: "0325",
   [Pkm.GRUMPIG]: "0326",
@@ -1626,9 +1629,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.UNFEZANT]: "0521",
   //[Pkm.BLITZLE]: "0522",
   //[Pkm.ZEBSTRIKA]: "0523",
-  //[Pkm.ROGGENROLA]: "0524",
-  //[Pkm.BOLDORE]: "0525",
-  //[Pkm.GIGALITH]: "0526",
+  [Pkm.ROGGENROLA]: "0524",
+  [Pkm.BOLDORE]: "0525",
+  [Pkm.GIGALITH]: "0526",
   [Pkm.WOOBAT]: "0527",
   [Pkm.SWOOBAT]: "0528",
   [Pkm.DRILBUR]: "0529",
@@ -3170,7 +3173,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TAILLOW]: Pkm.TAILLOW,
   [Pkm.SWELLOW]: Pkm.TAILLOW,
   [Pkm.DRILBUR]: Pkm.DRILBUR,
-  [Pkm.EXCADRILL]: Pkm.DRILBUR
+  [Pkm.EXCADRILL]: Pkm.DRILBUR,
+  [Pkm.ROGGENROLA]: Pkm.ROGGENROLA,
+  [Pkm.BOLDORE]: Pkm.ROGGENROLA,
+  [Pkm.GIGALITH]: Pkm.ROGGENROLA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

@@ -7202,7 +7202,9 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const nbHits = Math.round(4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    const nbHits = Math.round(
+      4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
     for (let i = 0; i < nbHits; i++) {
       target.addDefense(-1, pokemon, 0, false)
       target.addSpecialDefense(-1, pokemon, 0, false)
@@ -13024,6 +13026,53 @@ export class SpinOutStrategy extends AbilityStrategy {
   }
 }
 
+export class RockArtilleryStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const numberOfRocks = [10, 15, 25][pokemon.stars - 1] ?? 25
+    const damage = [20, 30, 40][pokemon.stars - 1] ?? 40
+
+    const enemies = board.cells.filter(
+      (cell) => cell && cell.team !== pokemon.team
+    ) as PokemonEntity[]
+
+    for (let i = 0; i < numberOfRocks; i++) {
+      const randomEnemy = pickRandomIn(enemies)
+      if (randomEnemy) {
+        const adjacentCells = board.getAdjacentCells(
+          randomEnemy.positionX,
+          randomEnemy.positionY,
+          true
+        )
+        const targetCell = pickRandomIn(adjacentCells)
+
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            pokemon.broadcastAbility({
+              targetX: targetCell.x,
+              targetY: targetCell.y
+            })
+            if (targetCell.value && targetCell.value.team !== pokemon.team) {
+              targetCell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          }, i * 100)
+        )
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13500,5 +13549,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ULTRA_THRUSTERS]: new UltraThrustersStrategy(),
   [Ability.ELECTRO_BALL]: new ElectroBallStrategy(),
   [Ability.HORN_LEECH]: new HornLeechStrategy(),
-  [Ability.DRILL_RUN]: new DrillRunStrategy()
+  [Ability.DRILL_RUN]: new DrillRunStrategy(),
+  [Ability.ROCK_ARTILLERY]: new RockArtilleryStrategy()
 }
