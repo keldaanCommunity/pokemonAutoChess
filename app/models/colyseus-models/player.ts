@@ -614,11 +614,6 @@ function pickRandomTMs() {
 }
 
 function initBuriedItems() {
-  /*
-  3 synergy gems
-  3 trash (Trash, Leftovers, Coin)
-  1 precious (artificial item, treasure box, ghimighoul coin)
-  */
   const buriedItems: (Item | null)[] = new Array(24).fill(null)
 
   // 3 synergy gems
