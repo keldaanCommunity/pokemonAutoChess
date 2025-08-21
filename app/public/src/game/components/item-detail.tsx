@@ -10,6 +10,7 @@ import {
   HMs,
   Item,
   ItemRecipe,
+  RemovableItems,
   TMs,
   UnholdableItems
 } from "../../../../types/enum/Item"
@@ -51,6 +52,14 @@ export function ItemDetailTooltip({
     return item
   }
 
+  const itemCategoryLabel = ConsumableItems.includes(item)
+    ? t("consumable_item")
+    : UnholdableItems.includes(item)
+      ? t("unholdable_item")
+      : RemovableItems.includes(item)
+      ? t("removable_item")
+      : null
+
   return (
     <div className="game-item-detail">
       <img
@@ -75,11 +84,7 @@ export function ItemDetailTooltip({
         {t(`item.${item}`)}
       </div>
       <div className="game-item-detail-stats">
-        {ConsumableItems.includes(item)
-          ? <i>{t("consumable_item")}</i>
-          : UnholdableItems.includes(item)
-            ? <i>{t("unholdable_item")}</i>
-            : null}
+        {itemCategoryLabel && <i>{itemCategoryLabel}</i>}
         {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>
             <img

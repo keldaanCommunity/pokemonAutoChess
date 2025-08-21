@@ -3479,6 +3479,7 @@
 	"craftable_items": "Craftable",
 	"consumable_item": "Consumable",
 	"unholdable_item": "Unholdable",
+	"removable_item": "Removable",
 	"food": "Food",
 	"berries": "Berries",
 	"dishes": "Dishes",

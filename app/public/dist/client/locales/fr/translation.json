@@ -3474,6 +3474,7 @@
 	"craftable_items": "Fabriquables",
 	"consumable_item": "Consommable",
 	"unholdable_item": "Objet non porté",
+	"removable_item": "Objet retirable",
 	"food": "Nourriture",
 	"berries": "Baies",
 	"dishes": "Plats",

@@ -24,7 +24,7 @@
 
 # UI
 
-- Added "Unholdable" and "Consumable" labels in item descriptions
+- Added "Unholdable", "Consumable" and "Removable" labels in item descriptions
 - Added a tab in wiki for town encounters
 
 # Bugfix

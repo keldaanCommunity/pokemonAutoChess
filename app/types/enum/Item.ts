@@ -672,3 +672,9 @@ export const ConsumableItems: Item[] = [
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR
 ]
+
+export const RemovableItems: Item[] = [
+  Item.CHEF_HAT,
+  Item.TRASH,
+  ...ArtificialItems
+]
