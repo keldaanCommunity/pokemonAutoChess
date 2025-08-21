@@ -1377,10 +1377,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       passiveEffects.forEach((effect) => effect.apply({ pokemon, player, room: this.room }))
 
       // Held item effects on stage start
-      const itemEffects =
-        ItemEffects[pokemon.items[0]]?.filter(
-          (p) => p instanceof OnStageStartEffect
-        ) ?? []
+      const itemEffects = values(pokemon.items).flatMap(item => ItemEffects[item])?.filter(
+        (p) => p instanceof OnStageStartEffect
+      ) ?? []
       itemEffects.forEach((effect) => effect.apply({ pokemon, player, room: this.room }))
     })
 
