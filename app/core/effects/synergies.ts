@@ -1,4 +1,5 @@
 import { SynergyEffects } from "../../models/effects"
+import { Title } from "../../types"
 import { BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -7,7 +8,6 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { max } from "../../utils/number"
 import { OnAbilityCastEffect, OnAttackEffect, OnKillEffect, OnSpawnEffect } from "./effect"
 
 export class MonsterKillEffect extends OnKillEffect {
@@ -48,6 +48,7 @@ export class GroundHoleEffect extends OnSpawnEffect {
                 defBuff += nbFullyDugHoles
                 if (nbFullyDugHoles === 3 * 8) {
                     atkBuff += 12
+                    player?.titles.add(Title.MOLE)
                 }
             }
 
