@@ -627,7 +627,7 @@ function initBuriedItems() {
   }
 
   // 1 precious (artificial item, treasure box, big nugget)
-  buriedItems[7] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : Item.TREASURE_BOX
+  buriedItems[7] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
 
   shuffleArray(buriedItems)
   return buriedItems
