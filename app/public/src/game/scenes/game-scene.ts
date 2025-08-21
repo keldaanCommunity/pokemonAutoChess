@@ -331,7 +331,7 @@ export default class GameScene extends Scene {
       const sys = this.sys as any
       if (sys.animatedTiles) {
         sys.animatedTiles.pause()
-      }      
+      }
       return
     }
 
