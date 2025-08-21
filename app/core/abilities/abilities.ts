@@ -13034,10 +13034,8 @@ export class RockArtilleryStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const numberOfRocks = Math.round(
-      ([10, 20, 30][pokemon.stars - 1] ?? 30) * (1 + pokemon.ap / 100)
-    )
-    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const numberOfRocks = [10, 15, 25][pokemon.stars - 1] ?? 25
+    const damage = [20, 30, 40][pokemon.stars - 1] ?? 40
 
     const enemies = board.cells.filter(
       (cell) => cell && cell.team !== pokemon.team
