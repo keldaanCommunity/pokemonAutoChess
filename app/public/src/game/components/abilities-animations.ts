@@ -2173,6 +2173,10 @@ export const AbilitiesAnimations: {
     duration: 200,
     scale: 0.75,
     hitAnim: onTarget({ ability: "ROCK_ARTILLERY", scale: 0.75 })
+  }),
+  [Ability.ZING_ZAP]: onCaster({
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    ability: Ability.DISCHARGE
   })
 }
 

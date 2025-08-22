@@ -5,6 +5,7 @@
 - Roggenrola
 - Boldore
 - Gigalith
+- Togedemaru
 
 # Changes to Pokemon & Abilities
 

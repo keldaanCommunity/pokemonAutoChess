@@ -12,13 +12,7 @@ import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
 import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
-import {
-  Emotion,
-  IPlayer,
-  IPokemon,
-  IPokemonEntity,
-  Title
-} from "../../types"
+import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
 import { DEFAULT_SPEED, SynergyTriggers } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
@@ -9673,7 +9667,8 @@ export class Silvally extends Pokemon {
     super.onChangePosition(x, y, player, state, true)
     if (y === 0) {
       const itemsToRemove = values(this.items).filter((item) => {
-        return (RemovableItems.includes(item) ||
+        return (
+          RemovableItems.includes(item) ||
           (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
             item !== Item.RARE_CANDY) ||
           (SynergyItems as ReadonlyArray<Item>).includes(item)
@@ -16562,36 +16557,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -18319,6 +18314,20 @@ export class Excadrill extends Pokemon {
   additional = true
 }
 
+export class Togedemaru extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 17
+  speed = 50
+  def = 12
+  speDef = 8
+  maxPP = 90
+  range = 1
+  skill = Ability.ZING_ZAP
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19324,7 +19333,8 @@ export const PokemonClasses: Record<
   [Pkm.EXCADRILL]: Excadrill,
   [Pkm.ROGGENROLA]: Roggenrola,
   [Pkm.BOLDORE]: Boldore,
-  [Pkm.GIGALITH]: Gigalith
+  [Pkm.GIGALITH]: Gigalith,
+  [Pkm.TOGEDEMARU]: Togedemaru
 }
 
 // declare all the classes in colyseus schema TypeRegistry

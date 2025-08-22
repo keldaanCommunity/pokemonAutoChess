@@ -495,7 +495,8 @@
 		"ELECTRO_BALL": "Electro Ball",
 		"HORN_LEECH": "Horn Leech",
 		"DRILL_RUN": "Drill Run",
-		"ROCK_ARTILLERY": "Rock Artillery"
+		"ROCK_ARTILLERY": "Rock Artillery",
+		"ZING_ZAP": "Zing Zap"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1496,7 +1497,8 @@
 		"EXCADRILL": "Excadrill",
 		"ROGGENROLA": "Roggenrola",
 		"BOLDORE": "Boldore",
-		"GIGALITH": "Gigalith"
+		"GIGALITH": "Gigalith",
+		"TOGEDEMARU": "Togedemaru"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1972,7 +1974,8 @@
 		"ELECTRO_BALL": "Launches an electric ball that bounces between enemies, inflicting [10,20,40,SP] SPECIAL on each. The number and speed of bounces depends on the user's SPEED.",
 		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD.",
 		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default.",
-		"ROCK_ARTILLERY": "Throws [10,15,25] rocks near random enemies, each dealing [20,30,40,SP] SPECIAL"
+		"ROCK_ARTILLERY": "Throws [10,15,25] rocks near random enemies, each dealing [20,30,40,SP] SPECIAL",
+		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL damage and inflicting FLINCH for 3 seconds. If the target suffers PARALYSIS, gain [40,SP] SHIELD."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
