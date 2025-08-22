@@ -28,6 +28,7 @@ import {
   CraftableNonSynergyItems,
   Item,
   ItemComponents,
+  SynergyGems,
   SynergyStones
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -512,6 +513,10 @@ export class MiniGame {
         Item.AMULET_COIN,
         Item.AMULET_COIN
       )
+    }
+
+    if (encounter === TownEncounters.SABLEYE) {
+      items.push(...pickNRandomIn(SynergyGems, 4))
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {

@@ -2,8 +2,7 @@ import { Pkm } from "./Pokemon";
 
 export enum WandererBehavior {
     RUN_THROUGH = "RUN_THROUGH",
-    SPECTATE = "SPECTATE",
-    STEAL_ITEM = "STEAL_ITEM"
+    SPECTATE = "SPECTATE"
 }
 
 export enum WandererType {
