@@ -6867,5 +6867,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.ROCK_RANGE,
     hitSprite: HitSprite.ROCK_HIT
+  },
+  [Pkm.TOGEDEMARU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    hitSprite: HitSprite.STEEL_HIT
   }
 }

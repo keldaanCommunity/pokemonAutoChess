@@ -15,13 +15,12 @@ export const FIREBASE_CONFIG = {
   appId: process.env.FIREBASE_APP_ID
 }
 
-
 export const ON_ATTACK_MANA = 5
 export const ARMOR_FACTOR = 0.05
 export const BOARD_WIDTH = 8
 export const BOARD_HEIGHT = 6
 export const BOARD_SIDE_HEIGHT = 4 // 0 = bench
-export const BOARD_X_START = 672  // 28 * 24
+export const BOARD_X_START = 672 // 28 * 24
 export const BOARD_Y_START = 808
 export const CELL_WIDTH = 96
 export const CELL_HEIGHT = 96
@@ -319,7 +318,8 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.SCREAM_TAIL,
   PkmDuo.INDEEDEE,
   Pkm.FURFROU,
-  Pkm.EMOLGA
+  Pkm.EMOLGA,
+  Pkm.TOGEDEMARU
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
