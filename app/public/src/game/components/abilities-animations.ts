@@ -79,7 +79,7 @@ export function displayHit(
 
 function tidalWaveAnimation(args: AbilityAnimationArgs) {
   const { scene, targetY, orientation, flip } = args
-  const down = orientation === (flip ? Orientation.UP : Orientation.DOWN)
+  const down = orientation === Orientation.DOWN
   const startCoords = transformEntityCoordinates(3.6, -4, flip)
   const endCoords = transformEntityCoordinates(3.6, 10, flip)
   const wave = scene.add
