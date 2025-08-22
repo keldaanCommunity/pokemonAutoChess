@@ -16557,36 +16557,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-  (params: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-    player: Player
-  }) => {
-    const pkmOnBoard = values(params.player.board).filter(
-      (p) =>
-        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-    )
-    const pillars = values(params.player.board).filter(
-      (p) => p.name === pillarToRemove
-    )
-    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-      params.player.board.delete(pillars[i].id)
-    }
-    const coords =
-      pillars.length > 0
-        ? [pillars[0].positionX, pillars[0].positionY]
-        : getFirstAvailablePositionOnBoard(params.player.board)
-    if (coords && params.pokemonEvolved.positionY > 0) {
-      const pillar = PokemonFactory.createPokemonFromName(
-        pillarEvolution,
-        params.player
+    (params: {
+      pokemonEvolved: Pokemon
+      pokemonsBeforeEvolution: Pokemon[]
+      player: Player
+    }) => {
+      const pkmOnBoard = values(params.player.board).filter(
+        (p) =>
+          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
       )
-      pillar.positionX = coords[0]
-      pillar.positionY = coords[1]
-      params.player.board.set(pillar.id, pillar)
+      const pillars = values(params.player.board).filter(
+        (p) => p.name === pillarToRemove
+      )
+      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+        params.player.board.delete(pillars[i].id)
+      }
+      const coords =
+        pillars.length > 0
+          ? [pillars[0].positionX, pillars[0].positionY]
+          : getFirstAvailablePositionOnBoard(params.player.board)
+      if (coords && params.pokemonEvolved.positionY > 0) {
+        const pillar = PokemonFactory.createPokemonFromName(
+          pillarEvolution,
+          params.player
+        )
+        pillar.positionX = coords[0]
+        pillar.positionY = coords[1]
+        params.player.board.set(pillar.id, pillar)
+      }
+      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
     }
-    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
-  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -17541,7 +17541,7 @@ export class Pidove extends Pokemon {
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.TRANQUILL
-  hp = 50
+  hp = 60
   atk = 5
   speed = 64
   def = 3
@@ -17560,7 +17560,7 @@ export class Tranquill extends Pokemon {
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.UNFEZANT
-  hp = 100
+  hp = 110
   atk = 9
   speed = 64
   def = 5
@@ -17578,7 +17578,7 @@ export class Unfezant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLYING])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 170
+  hp = 180
   atk = 19
   speed = 64
   def = 7

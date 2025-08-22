@@ -1945,7 +1945,7 @@
 		"ARMOR_CANNON": "Shoots out a blazing projectile, dealing [50,SP] SPECIAL to the target before bouncing to the 2 closest enemies, dealing [30,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [15,SP] SPECIAL each.",
 		"BITTER_BLADE": "Focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every adjacent enemy. User heals 10% of its max HP for each enemy hit.",
 		"SUCTION_HEAL": "Drains the energy from its targets, dealing [15,30,60,SP] SPECIAL in a 2-tile cone in front of the user and heals HP for 50% of the damage dealt.",
-		"ROOST": "Flies away and lands in the back line, SLEEP for 2 seconds and heals for [20,40,80,SP] HP.",
+		"ROOST": "Flies away and lands in the back line, SLEEP for 1 second and heals for [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Dash behind the target and deliver a powerful slash, dealing [100,SP] + 1x ATK as SPECIAL",
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
 		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [25,SP] SHIELD and dealing [25,SP] SPECIAL to target and adjacent enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [25,SP] + ATK as SPECIAL.",
