@@ -2507,7 +2507,7 @@
 		"TOXIC_ORB": "Gives POISON synergy. Holder suffers from POISONNED but increase its ATK by 100%.",
 		"METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP.",
 		"METAL_COAT": "Gives STEEL synergy.",
-		"&_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects.",
+		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects.",
 		"HARD_STONE": "Gives ROCK synergy.",
 		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground.",
 		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
