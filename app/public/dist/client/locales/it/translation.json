@@ -1337,7 +1337,7 @@
 		"DRAGON_BREATH": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici dietro il bersaglio.",
 		"ICICLE_CRASH": "Infligge [20,40,80,SP] SPECIAL in un'area attorno al bersaglio.",
 		"INGRAIN": "Tutti i nemici adiacenti subiscono LOCKED per 4 secondi e gli vengono inflitti [15,30,60,SP] SPECIAL ogni volta che l'utilizzatore e gli alleati adiacenti vengono curati di [15,30,60,SP] HP",
-		"TORMENT": "Potenzia l' SPEED del [20,40,60,SP].",
+		"TORMENT": "Potenzia l' SPEED del [20,35,50,SP].",
 		"STOMP": "Infligge SPECIAL uguale a [3,4,5,SP] moltiplicato per l' ATK  dell'utilizzatore.",
 		"SHADOW_BALL": "Infligge [30,60,100,SP] SPECIAL. Diminuisce la SPE_DEF di tutti i Pokèmon nemici di 2.",
 		"BUG_BUZZ": "Infliggi [20,40,80,SP] SPECIAL. Il danno raddoppia se il bersaglio ha lo status PARALYSIS.",

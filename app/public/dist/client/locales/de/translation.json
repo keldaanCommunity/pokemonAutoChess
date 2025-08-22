@@ -1561,7 +1561,7 @@
 		"DRAGON_BREATH": "Fügt dem Ziel und einem Gegnern dahinter [25,50,100,SP] SPECIAL zu.",
 		"ICICLE_CRASH": "Flächenangriff, der [20,40,80,SP] SPECIAL um das Ziel herum verursacht",
 		"INGRAIN": "Alle benachbarten Feinde werden für 4 Sekunden LOCKED und erhalten [15,30,60,SP] SPECIAL, während der Benutzer und benachbarte Verbündete um [15,30,60,SP] HP geheilt werden.",
-		"TORMENT": "Erhöhe SPEED um [20,40,60,SP]",
+		"TORMENT": "Erhöhe SPEED um [20,35,50,SP]",
 		"STOMP": "Attacke, die [3,4,5,SP] x ATK SPECIAL am Ziel verursacht",
 		"HORN_DRILL": "Verursacht [3,4,5,SP] x ATK als SPECIAL, mit einer Trefferchance von [30,LK]%. Je mehr ATK der Anwender als das Ziel hat, desto höher die Chance.",
 		"SHADOW_BALL": "Attacke, die [30,60,100,SP] SPECIAL am Ziel verursacht. Verringert die SPE_DEF aller Feinde um 2 Punkt",

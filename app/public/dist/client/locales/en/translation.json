@@ -1567,7 +1567,7 @@
 		"DRAGON_BREATH": "Deal [25,50,100,SP] SPECIAL to the target and an enemy directly behind it.",
 		"ICICLE_CRASH": "Deal [20,40,80,SP] SPECIAL to the target and enemy Pokémon adjacent to it.",
 		"INGRAIN": "Deal [15,30,60,SP] SPECIAL to all adjacent enemy Pokémon and make them LOCKED for 4 seconds. Heal the user and adjacent allied Pokémon for [15,30,60,SP] HP.",
-		"TORMENT": "Increase the user's SPEED by [20,40,60,SP].",
+		"TORMENT": "Increase the user's SPEED by [20,35,50,SP].",
 		"STOMP": "Deal SPECIAL equal to [3,4,5,SP] x ATK to the target.",
 		"HORN_DRILL": "Deal [3,4,5,SP] x ATK as SPECIAL to the target, with [30,LK]% chance to execute it. The more ATK the user has relative to the target, the higher the chance.",
 		"SHADOW_BALL": "Deal [30,60,100,SP] SPECIAL to the target and decrease the SPE_DEF of all enemy Pokémon by 2.",

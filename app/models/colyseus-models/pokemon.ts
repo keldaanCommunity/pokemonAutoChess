@@ -2634,8 +2634,8 @@ export class HisuiGoodra extends Pokemon {
 export class Lotad extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GRASS,
-    Synergy.WATER,
-    Synergy.AQUATIC
+    Synergy.AQUATIC,
+    Synergy.SOUND
   ])
   rarity = Rarity.RARE
   stars = 1
@@ -2645,7 +2645,7 @@ export class Lotad extends Pokemon {
   speed = 47
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.TORMENT
   regional = true
@@ -2654,8 +2654,8 @@ export class Lotad extends Pokemon {
 export class Lombre extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GRASS,
-    Synergy.WATER,
-    Synergy.AQUATIC
+    Synergy.AQUATIC,
+    Synergy.SOUND
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -2665,7 +2665,7 @@ export class Lombre extends Pokemon {
   speed = 47
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.TORMENT
   regional = true
@@ -2674,8 +2674,8 @@ export class Lombre extends Pokemon {
 export class Ludicolo extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.GRASS,
-    Synergy.WATER,
-    Synergy.AQUATIC
+    Synergy.AQUATIC,
+    Synergy.SOUND
   ])
   rarity = Rarity.RARE
   stars = 3
@@ -2684,7 +2684,7 @@ export class Ludicolo extends Pokemon {
   speed = 47
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 3
   skill = Ability.TORMENT
   regional = true

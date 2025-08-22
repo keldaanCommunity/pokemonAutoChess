@@ -1228,7 +1228,7 @@
 		"DRAGON_TAIL": "[30,60,100,SP]のSPECIALを与え、DEFとSPE_DEFを[2,4,6,SP]バフする単一ターゲット攻撃",
 		"DRAGON_BREATH": "対象の後方一列に[25,50,100,SP]SPECIALの範囲攻撃",
 		"ICICLE_CRASH": "対象を中心に[20,40,80,SP]のSPECIALを与える範囲攻撃",
-		"TORMENT": "SPEEDが[20,40,60,SP]%増加",
+		"TORMENT": "SPEEDが[20,35,50,SP]%増加",
 		"STOMP": "[3,4,5,SP]×ATK SPECIALを与える単対象",
 		"SHADOW_BALL": "[30,60,100,SP]SPECIALを行う単体攻撃。敵全体のSPE_DEFを2ポイントダウン",
 		"BUG_BUZZ": "[20,40,80,SP]SPECIALを行う単対象攻撃。ターゲットが麻痺の場合、ダメージが2倍になる",

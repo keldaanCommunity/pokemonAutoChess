@@ -3808,7 +3808,7 @@ export class TormentStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const boost = [20, 40, 60][pokemon.stars - 1] ?? 60
+    const boost = [20, 35, 50][pokemon.stars - 1] ?? 60
     pokemon.addSpeed(boost, pokemon, 1, crit)
     pokemon.resetCooldown(500)
   }

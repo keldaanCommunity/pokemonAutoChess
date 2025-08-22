@@ -1282,7 +1282,7 @@
 		"DRAGON_TAIL": "Ataque de alvo mono que causa [30,60,100,SP] SPECIAL e buff DEF e SPE_DEF em [2,4,6,SP]",
 		"DRAGON_BREATH": "Área de ataque de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo",
 		"ICICLE_CRASH": "Ataque de área de efeito que causa [20,40,80,SP] SPECIAL ao redor do alvo",
-		"TORMENT": "Aumente SPEED em [20,40,60,SP]",
+		"TORMENT": "Aumente SPEED em [20,35,50,SP]",
 		"STOMP": "Alvo mono que lida [3,4,5,SP] x ATK SPECIAL",
 		"SHADOW_BALL": "Ataque de alvo único que faz [30,60,100,SP] SPECIAL. Diminui a SPE_DEF de todos os inimigos em 2 ponto",
 		"BUG_BUZZ": "Ataque de alvo mono que faz [20,40,80,SP] SPECIAL. Dano dobrado se o alvo estiver PARALYSIS",
