@@ -1642,7 +1642,6 @@
 		"METAL_COAT": "メタルコート",
 		"AIR_BALLOON": "ふうせん",
 		"HARD_STONE": "かたいいし",
-		"BIG_NUGGET": "でかいきんのたま",
 		"INCENSE": "おこう",
 		"EXP_SHARE": "がくしゅうそうち",
 		"ROTOM_PHONE": "スマホロトム",
@@ -1673,7 +1672,8 @@
 		"CORNERSTONE_MASK": "いしずえのめん",
 		"HEARTHFLAME_MASK": "かまどのめん",
 		"BERRY_JUICE": "きのみジュース",
-		"AMULET_COIN": "おまもりこばん"
+		"AMULET_COIN": "おまもりこばん",
+		"BIG_NUGGET": "でかいきんのたま"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "先史時代に生きていたポケモンの化石",

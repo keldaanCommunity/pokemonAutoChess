@@ -1615,7 +1615,7 @@
 		"GLACIATE": "Deal [50,SP] SPECIAL + 10 per level of ICE synergy to the target and adjacent enemy Pokémon.",
 		"AURORA_VEIL": "All allied Pokémon receive [5,10,15,SP] SHIELD and RUNE_PROTECT for 1 second.",
 		"AQUA_JET": "Dash to the farthest reachable enemy Pokémon and deal [20,40,80,SP] SPECIAL to all enemy Pokémon in the path.",
-		"JUDGEMENT": "Deal [10,SP] special damage to the target, multiplied by the sum of Arceus' synergy levels.",
+		"JUDGEMENT": "Deal [10,SP] SPECIAL to the target, multiplied by the sum of Arceus' synergy levels.",
 		"CHATTER": "Deal [20,SP] SPECIAL to all enemy Pokémon. Every enemy has [50,LK]% chance to be inflicted with CONFUSION for 1 second.",
 		"STEAM_ERUPTION": "Deals [80,SP] SPECIAL to the target and all adjacent enemy Pokémon and BURN them for 3 seconds.",
 		"APPLE_ACID": "Deal [50,SP] SPECIAL to the 3 enemy Pokémon in front. Deals [100,SP] SPECIAL if target SPE_DEF is 0.",
@@ -1746,7 +1746,7 @@
 		"WATER_PULSE": "Deal [75,150,SP] SPECIAL to the target and adjacent enemy Pokémon and inflict them with CONFUSION for 2 seconds.",
 		"PLAY_ROUGH": "Deal [30,60,120,SP] SPECIAL to the target and inflict it with CHARM for 2.5 seconds.",
 		"AERIAL_ACE": "Deal [25,50,100,SP] TRUE to the target.",
-		"PARABOLIC_CHARGE": "Heal the user for [25,50] HP and deal [25,50,100,SP] SPECIAL damage to the target. Excess HP is converted into SPECIAL.",
+		"PARABOLIC_CHARGE": "Heal the user for [25,50] HP and deal [25,50,100,SP] SPECIAL to the target. Excess HP is converted into SPECIAL.",
 		"SUPER_FANG": "Deal [25,SP=0.5]% of target's max HP as TRUE.",
 		"TEETER_DANCE": "Gain [20,SP] SPEED. All Pokémon, allies and enemies alike, get CONFUSION for 3 seconds.",
 		"CLOSE_COMBAT": "Deal [130,SP] SPECIAL to the target and reduce the user's DEF and SPE_DEF by 2.",
@@ -1889,7 +1889,7 @@
 		"STEEL_WING": "Dash to the farthest reachable enemy Pokémon, dealing [10,20,40,SP] SPECIAL + 2x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon in the path.",
 		"YAWN": "Gain [10,20,40,SP] SHIELD. Enemy Pokémon targeting the user are inflicted with FATIGUE for 3 seconds and lose 20% AP.",
 		"FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target and raises their own AP by 30.",
-		"BIDE": "After 3 seconds, deal SPECIAL damage to adjacent enemy Pokémon equal to [200,SP]% of the damage received during this period.",
+		"BIDE": "After 3 seconds, deal SPECIAL to adjacent enemy Pokémon equal to [200,SP]% of the damage received during this period.",
 		"SHORE_UP": "Heal for [20,25,SP]% HP, +10% if the weather is SANDSTORM.",
 		"POISON_STING": "Inflict the target with [2,3,4] stacks of POISONNED. Every stack over the max immediately deals [25,50,100,SP] SPECIAL.",
 		"TRANSE": "Comes out of his meditation, healing 30% of its max HP and returns to normal form.",
@@ -1975,7 +1975,7 @@
 		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD.",
 		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default.",
 		"ROCK_ARTILLERY": "Throws [10,15,25] rocks near random enemies, each dealing [20,30,40,SP] SPECIAL",
-		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL damage and inflicting FLINCH for 3 seconds. If the target suffers PARALYSIS, gain [40,SP] SHIELD."
+		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL and inflicting FLINCH for 3 seconds. If the target suffers from PARALYSIS, gain [40,SP] SHIELD."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2507,7 +2507,6 @@
 		"TOXIC_ORB": "Gives POISON synergy. Holder suffers from POISONNED but increase its ATK by 100%.",
 		"METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP.",
 		"METAL_COAT": "Gives STEEL synergy.",
-		"&_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects.",
 		"HARD_STONE": "Gives ROCK synergy.",
 		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground.",
 		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
@@ -2639,7 +2638,8 @@
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
 		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
 		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
-		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)"
+		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)",
+		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects."
 	},
 	"passive_description": {
 		"NONE": "No passive",

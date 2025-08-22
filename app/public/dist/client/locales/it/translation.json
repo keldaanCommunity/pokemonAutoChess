@@ -1961,7 +1961,6 @@
 		"METAL_COAT": "Metalcoperta",
 		"AIR_BALLOON": "Palloncino",
 		"HARD_STONE": "Pietradura",
-		"BIG_NUGGET": "Granpepita",
 		"INCENSE": "Incenso",
 		"EXP_SHARE": "Condividi Esperienza",
 		"POKERUS_VIAL": "Fiala di Pokèrus",
@@ -2000,7 +1999,8 @@
 		"HEARTHFLAME_MASK": "Maschera Fondamenta",
 		"ZYGARDE_CUBE": "Teca Zygarde",
 		"BERRY_JUICE": "Succo di Bacca",
-		"AMULET_COIN": "Monetamuleto"
+		"AMULET_COIN": "Monetamuleto",
+		"BIG_NUGGET": "Granpepita"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile di un Pokémon vissuto in epoca preistorica",
@@ -2083,7 +2083,6 @@
 		"TOXIC_ORB": "Il possessore riceve la sinergia POISON e lo status POISONNED, però il suo ATK aumenta del 100%",
 		"METRONOME": "Il possessore riceve la sinergia SOUND ed ogni secondo guadagna 5 PP",
 		"METAL_COAT": "Il possessore riceve la sinergia STEEL",
-		"AIR_BALLOON": "Il possessore riceve la sinergia FLYING e la possibilità del 10% di schivare attacchi",
 		"HARD_STONE": "Il possessore riceve la sinergia ROCK",
 		"INCENSE": "Ogni Pokèmon nel negozio ha un probabilità del 5% di avere in comune una sinergia del possessore.",
 		"EXP_SHARE": "Ottieni i migliori valori di ATK, AP, DEF e SPE_DEF dagli alleati adiacenti nella stessa riga",
@@ -2122,7 +2121,8 @@
 		"HEARTHFLAME_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia FIRE durante il combattimento.",
 		"CORNERSTONE_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 50 di SHIELD e permetti ad Ogerpon di avere la sinergia ROCK durante il combattimento.",
 		"ZYGARDE_CUBE": "Contiene cellule del Pokèmon Equilibrio, Zygarde. Causa la trasformazione in una delle sue forme alternative.",
-		"AMULET_COIN": "+1 GOLD ogni volta che il possessore mette KO un avversario"
+		"AMULET_COIN": "+1 GOLD ogni volta che il possessore mette KO un avversario",
+		"AIR_BALLOON": "Il possessore riceve la sinergia FLYING e la possibilità del 10% di schivare attacchi"
 	},
 	"passive_description": {
 		"NONE": "Nessuna passiva",
