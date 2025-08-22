@@ -376,7 +376,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
           if (tmIndex !== -1) {
             player.tms[tmIndex] = null
           }
-          return true
+          return false
         })
       ]
     ])
