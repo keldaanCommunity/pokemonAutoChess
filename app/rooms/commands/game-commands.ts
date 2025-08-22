@@ -1685,12 +1685,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   spawnWanderingPokemons() {
     const isPVE = this.state.stageLevel in PVEStages
 
-    const shouldSpawnSableye =
-      this.state.townEncounter === TownEncounters.SABLEYE && chance(0.15)
-    if (shouldSpawnSableye) {
-      this.state.townEncounter = null // reset sableye encounter after spawning
-    }
-
     this.state.players.forEach((player: Player) => {
       if (player.alive && !player.isBot) {
         const client = this.room.clients.find(
@@ -1715,39 +1709,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             },
             Math.round((5 + 15 * Math.random()) * 1000)
           )
-        }
-
-        if (shouldSpawnSableye && player.items.length > 0) {
-          const id = nanoid()
-          let itemStolen
-          const wanderer: Wanderer = {
-            id,
-            type: WandererType.SABLEYE,
-            behavior: WandererBehavior.STEAL_ITEM,
-            pkm: Pkm.SABLEYE
-          }
-          this.state.wanderers.set(id, wanderer)
-          this.clock.setTimeout(
-            () => {
-              client.send(Transfer.WANDERER, wanderer)
-              this.clock.setTimeout(() => {
-                if (this.state.wanderers.has(id)) {
-                  itemStolen = pickRandomIn(values(player.items))
-                  if (itemStolen) {
-                    const index = player.items.indexOf(itemStolen)
-                    player.items.splice(index, 1)
-                  }
-                  this.clock.setTimeout(() => {
-                    if (itemStolen && this.state.wanderers.has(id) === false) {
-                      player.items.push(itemStolen) // give back the item if sableye has been caught
-                    }
-                  }, 2000)
-                }
-              }, 6000)
-            },
-            Math.round((5 + 12 * Math.random()) * 1000)
-          )
-          //TODO: steal an item after 5 seconds
         }
 
         if (

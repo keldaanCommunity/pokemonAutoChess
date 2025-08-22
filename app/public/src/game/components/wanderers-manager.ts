@@ -116,14 +116,6 @@ export default class WanderersManager {
     const tweens: Phaser.Tweens.Tween[] = []
 
     switch (wanderer.behavior) {
-      case WandererBehavior.STEAL_ITEM:
-        startX = -100
-        startY = 700
-        endX = 484
-        endY = 686
-        duration = 6000
-        break
-
       case WandererBehavior.SPECTATE: {
         startX = -100
         startY = 100 + Math.round(Math.random() * 500)
@@ -167,28 +159,7 @@ export default class WanderersManager {
       ease: "Linear",
       duration,
       onComplete: () => {
-        if (wanderer.behavior === WandererBehavior.STEAL_ITEM) {
-          if (!clicked) {
-            sprite.orientation = Orientation.LEFT
-            this.scene.animationManager?.animatePokemon(
-              sprite,
-              PokemonActionState.WALK,
-              false
-            )
-            tweens.push(
-              this.scene.add.tween({
-                targets: [sprite],
-                ease: "linear",
-                duration: 2000,
-                x: -100,
-                y: 700,
-                onComplete: () => {
-                  sprite.destroy()
-                }
-              })
-            )
-          }
-        } else if (wanderer.behavior === WandererBehavior.SPECTATE) {
+        if (wanderer.behavior === WandererBehavior.SPECTATE) {
           this.scene.animationManager?.animatePokemon(
             sprite,
             PokemonActionState.IDLE,

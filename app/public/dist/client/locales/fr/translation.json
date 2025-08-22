@@ -3913,7 +3913,7 @@
 		"SPINDA": "$t(pkm.SPINDA) change le sens de rotation du carousel de façon aléatoire",
 		"REGIROCK": "$t(pkm.REGIROCK) offre 15 HP supplémentaires à tous les joueurs",
 		"MUNCHLAX": "$t(pkm.MUNCHLAX) a apporté un PICNIC_SET pour tout le monde",
-		"SABLEYE": "$t(pkm.SABLEYE) pourrait venir et essayer de voler l'un de vos objets inutilisés",
+		"SABLEYE": "$t(pkm.SABLEYE) propose des gemmes synergies qui augmentent les niveaux de vos synergies",
 		"CELEBI": "$t(pkm.CELEBI) prédit que les prochains Pokémon sauvages seront Shiny"
 	},
 	"loading_hints": {

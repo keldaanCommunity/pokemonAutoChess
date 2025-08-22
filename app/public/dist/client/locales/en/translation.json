@@ -2507,6 +2507,7 @@
 		"TOXIC_ORB": "Gives POISON synergy. Holder suffers from POISONNED but increase its ATK by 100%.",
 		"METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP.",
 		"METAL_COAT": "Gives STEEL synergy.",
+		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects.",
 		"HARD_STONE": "Gives ROCK synergy.",
 		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground.",
 		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
@@ -2639,7 +2640,6 @@
 		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
 		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
 		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)",
-		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3913,7 +3913,7 @@
 		"SPINDA": "Spinda changes the direction of rotation of the carousel randomly",
 		"REGIROCK": "Regirock grants all players 15 additional HP",
 		"MUNCHLAX": "Munchlax brought a PICNIC_SET for everyone",
-		"SABLEYE": "Sableye might come and try to steal one of your unused items",
+		"SABLEYE": "Sableye proposes synergy gems that increase your synergies levels",
 		"CELEBI": "Celebi predicts the next PvE fight will be shiny"
 	},
 	"loading_hints": {
