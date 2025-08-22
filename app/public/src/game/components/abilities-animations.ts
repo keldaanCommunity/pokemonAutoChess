@@ -14,6 +14,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
   Orientation,
+  OrientationFlip,
   PokemonActionState,
   PokemonTint,
   SpriteType
@@ -23,8 +24,9 @@ import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import { logger } from "../../../../utils/logger"
-import { angleBetween, min } from "../../../../utils/number"
+import { angleBetween, max, min } from "../../../../utils/number"
 import {
+  getOrientation,
   OrientationAngle,
   OrientationArray,
   OrientationVector
@@ -322,6 +324,8 @@ function addAbilitySprite(
     rotation,
     angle,
     alpha,
+    flipX,
+    flipY,
     destroyOnComplete = true,
     animOptions = {}
   } = options
@@ -342,6 +346,8 @@ function addAbilitySprite(
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
+  if (flipX) sprite.flipX = true
+  if (flipY) sprite.flipY = true
   if (destroyOnComplete) {
     sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       sprite.destroy()
@@ -1196,6 +1202,22 @@ export const AbilitiesAnimations: {
     depth: DEPTH.BOOST_BACK
   }),
   ["FLYING_TAKEOFF"]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  ["DIG"]: [
+    onCaster({
+      ability: "DIG",
+      origin: [0, 1],
+      scale: [1, 2],
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    onCaster({
+      ability: "DIG",
+      origin: [1, 1],
+      flipX: true,
+      delay: 250,
+      scale: [1, 2],
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
+  ],
   [Ability.PURIFY]: [
     onTarget({ ability: Ability.SMOG, scale: 1 }),
     onCaster({ ability: Ability.MUD_BUBBLE, scale: 1 })
@@ -2025,6 +2047,31 @@ export const AbilitiesAnimations: {
       ability: animKey,
       duration: distance * 200,
       tweenProps: { angle: 270 }
+    })(args)
+  },
+
+  ["ZYGARDE_CELL"]: (args) => {
+    let orientation = getOrientation(
+      args.targetX,
+      args.targetY,
+      args.positionX,
+      args.positionY
+    )
+    if (!args.flip) orientation = OrientationFlip[orientation]
+    const distance = min(1)(
+      distanceE(args.positionX, args.positionY, args.targetX, args.targetY)
+    )
+    const animName = `ZYGARDE_CELL/${orientation}`
+    const duration = max(2000)(Math.round(distance * 400))
+    return projectile({
+      frame: `${animName}/000.png`,
+      ability: animName,
+      duration,
+      delay: randomBetween(0, max(500)(2000 - duration)),
+      depth: DEPTH.ABILITY_BELOW_POKEMON,
+      startCoords: "target",
+      endCoords: "caster",
+      scale: 1
     })(args)
   },
 

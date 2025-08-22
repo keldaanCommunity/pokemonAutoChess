@@ -9,7 +9,7 @@ import {
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import { SynergyTriggers, UniquePool } from "../../types/Config"
+import { BOARD_HEIGHT, BOARD_WIDTH, SynergyTriggers, UniquePool } from "../../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { BattleResult, Rarity, Team } from "../../types/enum/Game"
 import {
@@ -18,6 +18,7 @@ import {
   HMs,
   Item,
   ItemComponents,
+  SynergyGems,
   SynergyGivenByItem,
   TMs,
   WeatherRocks
@@ -40,8 +41,10 @@ import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { max, min } from "../../utils/number"
 import {
+  chance,
   pickNRandomIn,
   pickRandomIn,
+  shuffleArray,
   simpleHashSeededCoinFlip
 } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
@@ -104,6 +107,7 @@ export default class Player extends Schema implements IPlayer {
     pickRandomIn(Berries)
   ]
   @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
+  @type(["uint8"]) groundHoles: number[] = new Array(BOARD_WIDTH * BOARD_HEIGHT / 2).fill(0)
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
@@ -122,6 +126,7 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  buriedItems: (Item | null)[] = initBuriedItems()
   tms: (Item | null)[] = pickRandomTMs()
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
@@ -606,6 +611,26 @@ function pickRandomTMs() {
   const secondTM = pickRandomIn(TMs.filter((tm) => tm !== firstTM))
   const hm = pickRandomIn(HMs)
   return [firstTM, secondTM, hm]
+}
+
+function initBuriedItems() {
+  const buriedItems: (Item | null)[] = new Array(24).fill(null)
+
+  // 3 synergy gems
+  for (let i = 0; i < 3; i++) {
+    buriedItems[i] = pickRandomIn(SynergyGems)
+  }
+
+  // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
+  for (let i = 3; i < 7; i++) {
+    buriedItems[i] = pickRandomIn([Item.TRASH, Item.LEFTOVERS, Item.COIN, Item.NUGGET, Item.FOSSIL_STONE])
+  }
+
+  // 1 precious (artificial item, treasure box, big nugget)
+  buriedItems[7] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
+
+  shuffleArray(buriedItems)
+  return buriedItems
 }
 
 function spawnDIAYAvatar(player: Player): Pokemon {

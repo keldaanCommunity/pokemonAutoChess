@@ -7,7 +7,7 @@ import { getPokemonData } from "../../../../models/precomputed/precomputed-pokem
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
-import { PortalCarouselStages, SynergyTriggers } from "../../../../types/Config"
+import { BOARD_WIDTH, PortalCarouselStages, SynergyTriggers } from "../../../../types/Config"
 import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
@@ -60,6 +60,7 @@ export default class BoardManager {
   playerAvatar: PokemonAvatar | null
   opponentAvatar: PokemonAvatar | null
   scoutingAvatars: PokemonAvatar[] = []
+  groundHoles: Phaser.GameObjects.Sprite[]
   pveChestGroup: Phaser.GameObjects.Group | null
   pveChest: Phaser.GameObjects.Sprite | null
   lightX: number
@@ -93,6 +94,7 @@ export default class BoardManager {
     this.lightCell = null
     this.pveChest = null
     this.pveChestGroup = null
+    this.groundHoles = []
 
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode(false)
@@ -209,7 +211,8 @@ export default class BoardManager {
   }
 
   renderBoard(phaseChanged: boolean) {
-    this.showBerryTrees()
+    this.renderBerryTrees()
+    this.renderGroundHoles()
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
     if (this.mode === BoardMode.PICK) {
@@ -265,7 +268,7 @@ export default class BoardManager {
     this.lightCell = null
   }
 
-  showBerryTrees() {
+  renderBerryTrees() {
     this.berryTrees.forEach((tree) => tree.destroy())
     this.berryTrees = []
     const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
@@ -314,6 +317,24 @@ export default class BoardManager {
 
   hideBerryTrees() {
     this.berryTrees.forEach((tree) => tree.destroy())
+    this.berryTrees = []
+  }
+
+  renderGroundHoles() {
+    this.groundHoles.forEach((hole) => hole.destroy())
+    this.groundHoles = []
+    this.player.groundHoles.forEach((hole, index) => {
+      const [x, y] = transformBoardCoordinates(index % BOARD_WIDTH, Math.floor(index / BOARD_WIDTH) + 1)
+      if (hole > 0) {
+        const groundHole = this.scene.add.sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`).setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        this.groundHoles.push(groundHole)
+      }
+    })
+  }
+
+  hideGroundHoles() {
+    this.groundHoles.forEach((hole) => hole.destroy())
+    this.groundHoles = []
   }
 
   displayText(x: number, y: number, label: string) {
@@ -605,6 +626,7 @@ export default class BoardManager {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
     this.hideLightCell()
     this.hideBerryTrees()
+    this.hideGroundHoles()
     this.removePokemonsOnBoard()
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)

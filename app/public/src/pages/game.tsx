@@ -443,6 +443,19 @@ export default function Game() {
         }
       )
 
+      room.onMessage(
+        Transfer.DIG,
+        async (message: { pokemonId: string; buriedItem: Item | null }) => {
+          const g = getGameScene()
+          if (g && g.board) {
+            const pokemon = g.board.pokemons.get(message.pokemonId)
+            if (pokemon) {
+              pokemon.digAnimation(message.buriedItem)
+            }
+          }
+        }
+      )
+
       room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
         gameContainer.handleDisplayDamage(message)
       })
@@ -815,6 +828,16 @@ export default function Game() {
             dispatch(setPokemonProposition(values(player.pokemonsProposition)))
           }
         })
+
+        $player.groundHoles.onChange((value) => {
+          if (player.id === store.getState().game.currentPlayerId) {
+            const gameScene = getGameScene()
+            if (gameScene?.board && room.state.phase === GamePhaseState.PICK) {
+              gameScene.board.renderGroundHoles()
+            }
+          }
+        })
+
       })
 
       $state.players.onRemove((player) => {

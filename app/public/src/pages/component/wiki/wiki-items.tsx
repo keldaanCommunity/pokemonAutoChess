@@ -3,16 +3,17 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import {
   ArtificialItems,
-  ItemComponents,
   Berries,
   Dishes,
+  HMs,
   Item,
+  ItemComponents,
   ItemRecipe,
-  SpecialItems,
   ShinyItems,
-  WeatherRocks,
+  SpecialItems,
+  SynergyGems,
   TMs,
-  HMs
+  WeatherRocks
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -146,6 +147,24 @@ export default function WikiItems() {
         </ul>
       </article>
 
+      <article className="gems">
+        <h2>
+          <SynergyIcon type={Synergy.GROUND} /> {t("gems")}
+        </h2>
+        <p>{addIconsToDescription(t("gems_description"))}</p>
+        <ul>
+          {SynergyGems.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="item-detail"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+      </article>
+
       <article className="weather-rocks">
         <h2>
           <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
@@ -232,14 +251,14 @@ export default function WikiItems() {
         </ul>
       </article>
 
-      {
-        itemHovered && <Tooltip
+      {itemHovered && (
+        <Tooltip
           id="item-detail"
           className="custom-theme-tooltip item-detail-tooltip"
         >
           <ItemDetailTooltip item={itemHovered} />
         </Tooltip>
-      }
-    </div >
+      )}
+    </div>
   )
 }

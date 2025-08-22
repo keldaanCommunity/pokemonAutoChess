@@ -86,10 +86,10 @@ export enum Item {
   LIGHT_BALL = "LIGHT_BALL",
   TOXIC_ORB = "TOXIC_ORB",
   METRONOME = "METRONOME",
+  EXPLORER_KIT = "EXPLORER_KIT",
   METAL_COAT = "METAL_COAT",
   AIR_BALLOON = "AIR_BALLOON",
   HARD_STONE = "HARD_STONE",
-  BIG_NUGGET = "BIG_NUGGET",
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
   POKERUS_VIAL = "POKERUS_VIAL",
@@ -126,6 +126,18 @@ export enum Item {
   ELECTRIC_QUARTZ = "ELECTRIC_QUARTZ",
   BLOOD_STONE = "BLOOD_STONE",
   SMELLY_CLAY = "SMELLY_CLAY",
+  FIRE_GEM = "FIRE_GEM",
+  NORMAL_GEM = "NORMAL_GEM",
+  ROCK_GEM = "ROCK_GEM",
+  WATER_GEM = "WATER_GEM",
+  POISON_GEM = "POISON_GEM",
+  FLYING_GEM = "FLYING_GEM",
+  ICE_GEM = "ICE_GEM",
+  GHOST_GEM = "GHOST_GEM",
+  DRAGON_GEM = "DRAGON_GEM",
+  BUG_GEM = "BUG_GEM",
+  DARK_GEM = "DARK_GEM",
+  STEEL_GEM = "STEEL_GEM",
   FIRE_SHARD = "FIRE_SHARD",
   TEAL_MASK = "TEAL_MASK",
   WELLSPRING_MASK = "WELLSPRING_MASK",
@@ -194,6 +206,9 @@ export enum Item {
   CARAMEL_SWIRL_FLAVOR = "CARAMEL_SWIRL_FLAVOR",
   RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR",
   EGG_FOR_SELL = "EGG_FOR_SELL",
+  COIN = "COIN",
+  NUGGET = "NUGGET",
+  BIG_NUGGET = "BIG_NUGGET",
   GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
   EXCHANGE_TICKET = "EXCHANGE_TICKET",
   TREASURE_BOX = "TREASURE_BOX",
@@ -210,6 +225,9 @@ export const AllItems: Item[] = Object.values(Item)
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
   Item.AMULET_COIN,
   Item.GIMMIGHOUL_COIN,
   Item.EXCHANGE_TICKET,
@@ -344,7 +362,7 @@ export const ArtificialItems: Item[] = [
   Item.AIR_BALLOON,
   Item.MACHO_BRACE,
   Item.METRONOME,
-  Item.BIG_NUGGET,
+  Item.EXPLORER_KIT,
   Item.ROTOM_PHONE,
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
@@ -419,6 +437,21 @@ export const SynergyStones = [
   Item.ICE_STONE
 ]
 
+export const SynergyGems = [
+  Item.FIRE_GEM,
+  Item.NORMAL_GEM,
+  Item.ROCK_GEM,
+  Item.WATER_GEM,
+  Item.POISON_GEM,
+  Item.FLYING_GEM,
+  Item.ICE_GEM,
+  Item.GHOST_GEM,
+  Item.DRAGON_GEM,
+  Item.BUG_GEM,
+  Item.DARK_GEM,
+  Item.STEEL_GEM
+] as const
+
 export const SynergyItems = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
@@ -436,7 +469,7 @@ export const SynergyItems = [
   Item.METAL_COAT,
   Item.AIR_BALLOON,
   Item.HARD_STONE,
-  Item.BIG_NUGGET,
+  Item.EXPLORER_KIT,
   Item.ROTOM_PHONE,
   Item.SHINY_STONE,
   Item.SILK_SCARF,
@@ -466,7 +499,7 @@ export const SynergyGivenByItem: Record<
   [Item.METAL_COAT]: Synergy.STEEL,
   [Item.AIR_BALLOON]: Synergy.FLYING,
   [Item.HARD_STONE]: Synergy.ROCK,
-  [Item.BIG_NUGGET]: Synergy.GROUND,
+  [Item.EXPLORER_KIT]: Synergy.GROUND,
   [Item.ROTOM_PHONE]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.SILK_SCARF]: Synergy.NORMAL,
@@ -474,6 +507,24 @@ export const SynergyGivenByItem: Record<
   [Item.COOKING_POT]: Synergy.GOURMET,
   [Item.BERSERK_GENE]: Synergy.MONSTER,
   [Item.SURFBOARD]: Synergy.AQUATIC
+}
+
+export const SynergyGivenByGem: Record<
+  (typeof SynergyGems)[number],
+  Synergy
+> = {
+  [Item.FIRE_GEM]: Synergy.FIRE,
+  [Item.NORMAL_GEM]: Synergy.NORMAL,
+  [Item.ROCK_GEM]: Synergy.ROCK,
+  [Item.WATER_GEM]: Synergy.WATER,
+  [Item.POISON_GEM]: Synergy.POISON,
+  [Item.FLYING_GEM]: Synergy.FLYING,
+  [Item.ICE_GEM]: Synergy.ICE,
+  [Item.GHOST_GEM]: Synergy.GHOST,
+  [Item.DRAGON_GEM]: Synergy.DRAGON,
+  [Item.BUG_GEM]: Synergy.BUG,
+  [Item.DARK_GEM]: Synergy.DARK,
+  [Item.STEEL_GEM]: Synergy.STEEL
 }
 
 export const NonSpecialItemComponents: Item[] = [
@@ -645,6 +696,7 @@ export const UnholdableItems: Item[] = [
   ...HMs,
   ...Flavors,
   ...Dishes,
+  ...SynergyGems,
   Item.METEORITE,
   Item.MYSTERY_BOX,
   Item.TREASURE_BOX,
@@ -656,7 +708,10 @@ export const UnholdableItems: Item[] = [
   Item.FIRE_SHARD,
   Item.GIMMIGHOUL_COIN,
   Item.EGG_FOR_SELL,
-  Item.EXCHANGE_TICKET
+  Item.EXCHANGE_TICKET,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET
 ]
 
 export const ConsumableItems: Item[] = [

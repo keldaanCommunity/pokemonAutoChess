@@ -1,20 +1,35 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import { Title } from "../../types"
+import { PVEStages } from "../../models/pve-stages"
+import { Title, Transfer } from "../../types"
 import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState } from "../../types/enum/Game"
-import { AbilityPerTM, Flavors, HMs, Item, OgerponMasks, SynergyGivenByItem, SynergyStones, TMs } from "../../types/enum/Item"
+import {
+  AbilityPerTM,
+  Berries,
+  FishingRod,
+  Flavors,
+  HMs,
+  Item,
+  OgerponMasks,
+  Sweets,
+  SynergyGivenByItem,
+  SynergyStones,
+  TMs
+} from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
+import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
-import { chance } from "../../utils/random"
+import { chance, pickNRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
-import { PokemonEntity } from "../pokemon-entity"
+import { DishByPkm } from "../dishes"
+import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
   Effect,
@@ -26,6 +41,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
+  OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
 
@@ -208,64 +224,163 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   }
 })
 
-const ogerponMaskEffect = new OnItemEquippedEffect(({ pokemon, player, item }) => {
-  if (
-    pokemon.passive === Passive.OGERPON_TEAL ||
-    pokemon.passive === Passive.OGERPON_WELLSPRING ||
-    pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
-    pokemon.passive === Passive.OGERPON_CORNERSTONE
-  ) {
-    const currentMask = values(pokemon.items).find((i) =>
-      OgerponMasks.includes(i)
-    )
-    if (currentMask) {
-      pokemon.items.delete(currentMask)
-    } else if (pokemon.items.size >= 3) {
-      // full, can't hold mask
-      return false
-    }
+const ogerponMaskEffect = new OnItemEquippedEffect(
+  ({ pokemon, player, item }) => {
+    if (
+      pokemon.passive === Passive.OGERPON_TEAL ||
+      pokemon.passive === Passive.OGERPON_WELLSPRING ||
+      pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
+      pokemon.passive === Passive.OGERPON_CORNERSTONE
+    ) {
+      const currentMask = values(pokemon.items).find((i) =>
+        OgerponMasks.includes(i)
+      )
+      if (currentMask) {
+        pokemon.items.delete(currentMask)
+      } else if (pokemon.items.size >= 3) {
+        // full, can't hold mask
+        return false
+      }
 
-    if (item === Item.TEAL_MASK) {
-      pokemon.items.add(Item.TEAL_MASK)
-      player.transformPokemon(pokemon, Pkm.OGERPON_TEAL_MASK)
-    } else if (item === Item.WELLSPRING_MASK) {
-      pokemon.items.add(Item.WELLSPRING_MASK)
-      player.transformPokemon(pokemon, Pkm.OGERPON_WELLSPRING_MASK)
-    } else if (item === Item.HEARTHFLAME_MASK) {
-      pokemon.items.add(Item.HEARTHFLAME_MASK)
-      player.transformPokemon(pokemon, Pkm.OGERPON_HEARTHFLAME_MASK)
-    } else if (item === Item.CORNERSTONE_MASK) {
-      pokemon.items.add(Item.CORNERSTONE_MASK)
-      player.transformPokemon(pokemon, Pkm.OGERPON_CORNERSTONE_MASK)
-    }
-    return true
-  }
-
-  return false // prevent item from being equipped
-})
-
-export const ItemEffects: { [i in Item]?: Effect[] } = {
-
-  ...Object.fromEntries(SynergyStones.map((stone) => [stone, [
-    // prevent adding a synergy stone on a pokemon that already has this synergy
-    new OnItemEquippedEffect(({ pokemon, item }) => !pokemon.types.has(SynergyGivenByItem[item]))
-  ]])),
-
-  ...Object.fromEntries([...TMs, ...HMs].map(tm => [tm, [
-    new OnItemEquippedEffect(({ pokemon, player, item }) => {
-      const ability = AbilityPerTM[item]
-      if (!ability || pokemon.types.has(Synergy.HUMAN) === false) return false // prevent equipping TMs/HMs on non-human pokemon
-      pokemon.tm = ability
-      pokemon.skill = ability
-      pokemon.maxPP = 100
-      removeInArray(player.items, item)
-      const tmIndex = player.tms.findIndex((tm) => tm === item)
-      if (tmIndex !== -1) {
-        player.tms[tmIndex] = null
+      if (item === Item.TEAL_MASK) {
+        pokemon.items.add(Item.TEAL_MASK)
+        player.transformPokemon(pokemon, Pkm.OGERPON_TEAL_MASK)
+      } else if (item === Item.WELLSPRING_MASK) {
+        pokemon.items.add(Item.WELLSPRING_MASK)
+        player.transformPokemon(pokemon, Pkm.OGERPON_WELLSPRING_MASK)
+      } else if (item === Item.HEARTHFLAME_MASK) {
+        pokemon.items.add(Item.HEARTHFLAME_MASK)
+        player.transformPokemon(pokemon, Pkm.OGERPON_HEARTHFLAME_MASK)
+      } else if (item === Item.CORNERSTONE_MASK) {
+        pokemon.items.add(Item.CORNERSTONE_MASK)
+        player.transformPokemon(pokemon, Pkm.OGERPON_CORNERSTONE_MASK)
       }
       return true
+    }
+
+    return false // prevent item from being equipped
+  }
+)
+
+const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
+  if (!pokemon) return
+  const chef = pokemon
+
+  const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
+  const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
+  let dish = DishByPkm[chef.name]
+  if (chef.items.has(Item.COOKING_POT)) {
+    dish = Item.HEARTY_STEW
+  } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+    dish = Item.SANDWICH
+  }
+
+  if (chef.passive === Passive.GLUTTON) {
+    chef.hp += 30
+    if (chef.hp > 750) {
+      player.titles.add(Title.GLUTTON)
+    }
+  }
+
+  if (dish && nbDishes > 0) {
+    let dishes = Array.from({ length: nbDishes }, () => dish!)
+    if (dish === Item.BERRIES) {
+      dishes = pickNRandomIn(Berries, 3 * nbDishes)
+    }
+    if (dish === Item.SWEETS) {
+      dishes = pickNRandomIn(Sweets, nbDishes)
+    }
+    room.clock.setTimeout(async () => {
+      room.broadcast(Transfer.COOK, {
+        pokemonId: chef.id,
+        dishes
+      })
+      room.clock.setTimeout(() => {
+        const candidates = values(player.board).filter(
+          (p) =>
+            p.meal === "" &&
+            p.canEat &&
+            !isOnBench(p) &&
+            distanceC(
+              chef.positionX,
+              chef.positionY,
+              p.positionX,
+              p.positionY
+            ) === 1
+        )
+        candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+        dishes.forEach((meal, i) => {
+          if (
+            [
+              Item.TART_APPLE,
+              Item.SWEET_APPLE,
+              Item.SIRUPY_APPLE,
+              ...Berries
+            ].includes(meal)
+          ) {
+            player.items.push(meal)
+          } else {
+            const pokemon = candidates[i] ?? chef
+            pokemon.meal = meal
+            pokemon.action = PokemonActionState.EAT
+          }
+        })
+      }, 2000)
+    }, 1000)
+  }
+})
+
+export class FishingRodEffect extends OnStageStartEffect {
+  constructor(rod: FishingRod) {
+    super(({ player, room }) => {
+      const isAfterPVE = room.state.stageLevel - 1 in PVEStages
+      if (
+        rod &&
+        getFreeSpaceOnBench(player.board) > 0 &&
+        !isAfterPVE &&
+        !player.isBot
+      ) {
+        const fish = room.state.shop.pickFish(player, rod)
+        room.spawnOnBench(player, fish, "fishing")
+      }
     })
-  ]])),
+  }
+}
+
+export const ItemEffects: { [i in Item]?: Effect[] } = {
+  ...Object.fromEntries(
+    SynergyStones.map((stone) => [
+      stone,
+      [
+        // prevent adding a synergy stone on a pokemon that already has this synergy
+        new OnItemEquippedEffect(
+          ({ pokemon, item }) => !pokemon.types.has(SynergyGivenByItem[item])
+        )
+      ]
+    ])
+  ),
+
+  ...Object.fromEntries(
+    [...TMs, ...HMs].map((tm) => [
+      tm,
+      [
+        new OnItemEquippedEffect(({ pokemon, player, item }) => {
+          const ability = AbilityPerTM[item]
+          if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
+            return false // prevent equipping TMs/HMs on non-human pokemon
+          pokemon.tm = ability
+          pokemon.skill = ability
+          pokemon.maxPP = 100
+          removeInArray(player.items, item)
+          const tmIndex = player.tms.findIndex((tm) => tm === item)
+          if (tmIndex !== -1) {
+            player.tms[tmIndex] = null
+          }
+          return true
+        })
+      ]
+    ])
+  ),
 
   [Item.RUSTED_SWORD]: [
     new OnItemGainedEffect((pokemon) => {
@@ -479,10 +594,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.MUSCLE_BAND]: [
     new OnDamageReceivedEffect(({ pokemon, damage }) => {
-      if (
-        pokemon.count.defensiveRibbonCount < 20 &&
-        damage > 0
-      ) {
+      if (pokemon.count.defensiveRibbonCount < 20 && damage > 0) {
         pokemon.count.defensiveRibbonCount++
         if (pokemon.count.defensiveRibbonCount % 2 === 0) {
           pokemon.addAttack(1, pokemon, 0, false)
@@ -596,35 +708,41 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
 
   [Item.STICKY_BARB]: [
-    new OnDamageReceivedEffect(({ pokemon, attacker, attackType, isRetaliation }) => {
-      if (attackType === AttackType.PHYSICAL
-        && !isRetaliation
-        && attacker
-        && attacker.items.has(Item.PROTECTIVE_PADS) === false
-        && distanceC(
-          pokemon.positionX,
-          pokemon.positionY,
-          attacker.positionX,
-          attacker.positionY
-        ) === 1) {
-        const damage = Math.round(3 + 0.15 * pokemon.def)
-        attacker.handleDamage({
-          damage,
-          board: pokemon.simulation.board,
-          attackType: AttackType.TRUE,
-          attacker: pokemon,
-          shouldTargetGainMana: true
-        })
-        if (chance(0.3, pokemon)) {
-          attacker.status.triggerWound(3000, attacker, pokemon)
+    new OnDamageReceivedEffect(
+      ({ pokemon, attacker, attackType, isRetaliation }) => {
+        if (
+          attackType === AttackType.PHYSICAL &&
+          !isRetaliation &&
+          attacker &&
+          attacker.items.has(Item.PROTECTIVE_PADS) === false &&
+          distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            attacker.positionX,
+            attacker.positionY
+          ) === 1
+        ) {
+          const damage = Math.round(3 + 0.15 * pokemon.def)
+          attacker.handleDamage({
+            damage,
+            board: pokemon.simulation.board,
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          if (chance(0.3, pokemon)) {
+            attacker.status.triggerWound(3000, attacker, pokemon)
+          }
         }
       }
-    })
+    )
   ],
 
   [Item.AQUA_EGG]: [
     new OnAbilityCastEffect((pokemon) => {
-      const ppRegained = max(pokemon.maxPP - 10)(Math.round(0.2 * pokemon.maxPP + 2 * pokemon.count.ult))
+      const ppRegained = max(pokemon.maxPP - 10)(
+        Math.round(0.2 * pokemon.maxPP + 2 * pokemon.count.ult)
+      )
       pokemon.addPP(ppRegained, pokemon, 0, false)
     })
   ],
@@ -658,20 +776,23 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.ABSORB_BULB]: [
     new OnDamageReceivedEffect(({ pokemon, board }) => {
       if (pokemon.life < 0.5 * pokemon.hp) {
-        const damage = pokemon.physicalDamageReduced + pokemon.specialDamageReduced
+        const damage =
+          pokemon.physicalDamageReduced + pokemon.specialDamageReduced
         pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
-        board.getAdjacentCells(pokemon.positionX, pokemon.positionY).forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              false,
-              false
-            )
-          }
-        })
+        board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                false,
+                false
+              )
+            }
+          })
         pokemon.removeItem(Item.ABSORB_BULB)
       }
     })
@@ -726,6 +847,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.CHEF_HAT]: [
+    chefCookEffect,
     new OnItemEquippedEffect(({ pokemon, player, item }) => {
       return pokemon.types.has(Synergy.GOURMET)
     })
@@ -768,9 +890,16 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
-  ...Object.fromEntries(Flavors.map((flavor) => [flavor, [
-    new OnItemEquippedEffect(({ pokemon }) => pokemon.skill === Ability.DECORATE) // is then consummed by ItemEvolutionRule
-  ]])),
+  ...Object.fromEntries(
+    Flavors.map((flavor) => [
+      flavor,
+      [
+        new OnItemEquippedEffect(
+          ({ pokemon }) => pokemon.skill === Ability.DECORATE
+        ) // is then consummed by ItemEvolutionRule
+      ]
+    ])
+  ),
 
   [Item.BLACK_AUGURITE]: [
     new OnItemEquippedEffect(({ pokemon, player, item, room }) => {
@@ -829,5 +958,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
     })
-  ]
+  ],
+
+  [Item.OLD_ROD]: [new FishingRodEffect(Item.OLD_ROD)],
+  [Item.GOOD_ROD]: [new FishingRodEffect(Item.GOOD_ROD)],
+  [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)]
 }
