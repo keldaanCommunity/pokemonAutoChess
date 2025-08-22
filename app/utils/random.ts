@@ -37,7 +37,7 @@ export function pickRandomIn<T>(list: T[] | readonly T[] | Record<string, T>): T
   return list[Math.floor(Math.random() * list.length)]
 }
 
-export function pickNRandomIn<T>(array: T[], number: number): T[] {
+export function pickNRandomIn<T>(array: T[] | readonly T[], number: number): T[] {
   const selection: T[] = [],
     options = [...array]
   shuffleArray(options)

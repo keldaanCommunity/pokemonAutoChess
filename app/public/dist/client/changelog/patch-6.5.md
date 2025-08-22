@@ -23,6 +23,10 @@
 - New Items: Rusty Coin, Nugget, Big Nugget
 - New items: Synergy gems ; synergy gems increase the level of a synergy but are unholdable
 
+# Changes to Town Encounters
+
+- Sableye encounter changed: now propose synergy gems in carousel
+
 # Gameplay
 
 - Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
