@@ -734,18 +734,17 @@ export class OnSellPokemonCommand extends Command<
     }
 
     if (pokemon) {
-      this.state.shop.releasePokemon(pokemon.name, player, this.state)
-      const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-      player.addMoney(sellPrice, false, null)
       pokemon.items.forEach((it) => {
         player.items.push(it)
       })
 
       player.board.delete(pokemonId)
-
+      const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+      player.addMoney(sellPrice, false, null)
       player.updateSynergies()
       player.boardSize = this.room.getTeamSize(player.board)
       pokemon.afterSell(player)
+      this.state.shop.releasePokemon(pokemon.name, player, this.state)
     }
   }
 }
