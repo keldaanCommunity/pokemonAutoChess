@@ -61,7 +61,6 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
-import { mongo } from "mongoose"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,

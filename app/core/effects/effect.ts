@@ -218,6 +218,7 @@ export class MonsterKillEffect extends OnKillEffect {
   }
 
   apply(pokemon, target, board, attackType) {
+    if (pokemon.life <= 0) return
     const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
     const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
     const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
