@@ -95,8 +95,10 @@ export default class MovingState extends PokemonState {
         }
 
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
-        this.onMove(pokemon, board, x, y)
+        const oldX = pokemon.positionX
+        const oldY = pokemon.positionY
+        board.swapCells(oldX, oldY, x, y)
+        this.onMove(pokemon, board, oldX, oldY, x, y)
       }
     } else {
       // Using pathfinding to get optimal path
@@ -129,19 +131,21 @@ export default class MovingState extends PokemonState {
       })
       if (x !== undefined && y !== undefined) {
         // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
-        board.swapCells(pokemon.positionX, pokemon.positionY, x, y)
-        this.onMove(pokemon, board, x, y)
+        const oldX = pokemon.positionX
+        const oldY = pokemon.positionY
+        board.swapCells(oldX, oldY, x, y)
+        this.onMove(pokemon, board, oldX, oldY, x, y)
       }
     }
   }
 
-  onMove(pokemon: PokemonEntity, board: Board, x: number, y: number) {
+  onMove(pokemon: PokemonEntity, board: Board, oldX: number, oldY: number, newX: number, newY: number) {
     //update orientation
     pokemon.orientation = board.orientation(
-      x,
-      y,
-      pokemon.targetX,
-      pokemon.targetY,
+      oldX,
+      oldY,
+      newX,
+      newY,
       pokemon,
       undefined
     )
@@ -152,7 +156,7 @@ export default class MovingState extends PokemonState {
     ].filter((effect) => effect instanceof OnMoveEffect)
 
     onMoveEffects.forEach((effect) => {
-      effect.apply(pokemon, board, x, y)
+      effect.apply(pokemon, board, oldX, oldY, newX, newY)
     })
   }
 
