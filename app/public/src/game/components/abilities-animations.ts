@@ -1921,7 +1921,7 @@ export const AbilitiesAnimations: {
       ability: "SNIPE_SHOT/projectile",
       scale: 3,
       duration: 1000,
-      rotation: targetAngle - Math.PI / 2,
+      rotation: targetAngle + Math.PI,
       endCoords: [
         args.positionX + Math.round(Math.cos(targetAngle) * 10),
         args.positionY + Math.round(Math.sin(targetAngle) * 10),
