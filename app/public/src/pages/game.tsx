@@ -139,13 +139,11 @@ export default function Game() {
 
   const connectToGame = useCallback(
     async (attempts = 1) => {
-      logger.debug(
-        `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT}`
-      )
-      const cachedReconnectionToken = localStore.get(
-        LocalStoreKeys.RECONNECTION_GAME
-      )?.reconnectionToken
+      const cachedReconnectionToken = localStore.get(LocalStoreKeys.RECONNECTION_GAME)
       if (cachedReconnectionToken) {
+        logger.debug(
+          `connectToGame attempt ${attempts} / ${MAX_ATTEMPS_RECONNECT} with reconnect token ${cachedReconnectionToken}`
+        )
         connecting.current = true
         const statusMessage = document.querySelector("#status-message")
         if (statusMessage) {
@@ -156,14 +154,7 @@ export default function Game() {
           .reconnect(cachedReconnectionToken)
           .then((room: Room) => {
             // store game token for 1 hour
-            localStore.set(
-              LocalStoreKeys.RECONNECTION_GAME,
-              {
-                reconnectionToken: room.reconnectionToken,
-                roomId: room.roomId
-              },
-              60 * 60
-            )
+            localStore.set(LocalStoreKeys.RECONNECTION_GAME, room.reconnectionToken, 60 * 60)
             dispatch(joinGame(room))
             connected.current = true
             connecting.current = false
@@ -293,11 +284,7 @@ export default function Game() {
       elligibleToELO,
       gameMode
     })
-    localStore.set(
-      LocalStoreKeys.RECONNECTION_AFTER_GAME,
-      { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
-      30
-    )
+    localStore.set(LocalStoreKeys.RECONNECTION_AFTER_GAME, r.reconnectionToken, 30)
     if (r.connection.isOpen) {
       await r.leave(false)
     }

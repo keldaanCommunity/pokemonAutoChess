@@ -63,9 +63,7 @@ export async function joinLobbyRoom(
         try {
           let room: Room<ICustomLobbyState> | undefined = undefined
 
-          const reconnectToken: string = localStore.get(
-            LocalStoreKeys.RECONNECTION_LOBBY
-          )?.reconnectionToken
+          const reconnectToken: string = localStore.get(LocalStoreKeys.RECONNECTION_LOBBY)
           if (reconnectToken) {
             try {
               // if a reconnect token is found, try to reconnect to the lobby room
@@ -83,11 +81,7 @@ export async function joinLobbyRoom(
 
           // store reconnection token for 5 minutes ; server may kick the inactive users before that
           dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
-          localStore.set(
-            LocalStoreKeys.RECONNECTION_LOBBY,
-            { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
-            60 * 5
-          )
+          localStore.set(LocalStoreKeys.RECONNECTION_LOBBY, room.reconnectionToken, 60 * 5)
 
           // setup event listeners for the lobby room
           const $ = getStateCallbacks(room)
@@ -314,14 +308,7 @@ export async function joinExistingPreparationRoom(
           `Expected to join a preparation room but joined ${room.name} instead`
         )
       }
-      localStore.set(
-        LocalStoreKeys.RECONNECTION_PREPARATION,
-        {
-          reconnectionToken: room.reconnectionToken,
-          roomId: room.roomId
-        },
-        30
-      )
+      localStore.set(LocalStoreKeys.RECONNECTION_PREPARATION, room.reconnectionToken, 30)
       await Promise.allSettled([
         lobby?.connection.isOpen && lobby.leave(false),
         room.connection.isOpen && room.leave(false)
