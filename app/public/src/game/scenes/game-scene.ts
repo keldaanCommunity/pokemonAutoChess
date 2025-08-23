@@ -81,7 +81,7 @@ export default class GameScene extends Scene {
     this.room = data.room
     this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
-    this.started = false
+    this.started = false    
   }
 
   preload() {
@@ -122,8 +122,7 @@ export default class GameScene extends Scene {
         this,
         this.animationManager,
         this.uid,
-        this.room.state.avatars,
-        this.room.state.floatingItems
+        this.room.state
       )
 
       this.itemsContainer = new ItemsContainer(

@@ -19,23 +19,23 @@ export class Portal extends GameObjects.Container {
   }
 }
 
-export class SynergySymbol
-  extends GameObjects.Sprite
-  implements ISynergySymbol
-{
+export class SynergySymbol extends GameObjects.Sprite implements ISynergySymbol {
   id: string
   synergy: Synergy
+  portalId: string
 
   constructor(
     scene: Phaser.Scene,
     id: string,
     x: number,
     y: number,
-    synergy: Synergy
+    synergy: Synergy,
+    portalId: string
   ) {
     super(scene, x, y, "types", synergy + ".png")
     this.id = id
     this.synergy = synergy
+    this.portalId = portalId
     this.setDepth(DEPTH.INANIMATE_OBJECTS)
     this.scene.add.existing(this)
   }
