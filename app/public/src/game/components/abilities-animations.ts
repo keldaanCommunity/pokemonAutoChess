@@ -343,6 +343,7 @@ function addAbilitySprite(
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
+  console.log("rotation " + ability, rotation)
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
@@ -1917,11 +1918,12 @@ export const AbilitiesAnimations: {
       args.positionY,
       args.flip
     )
+    console.log("snipe shot", { orientationAngle, targetAngle })
     projectile({
       ability: "SNIPE_SHOT/projectile",
       scale: 3,
       duration: 1000,
-      rotation: targetAngle + Math.PI,
+      rotation: -targetAngle,
       endCoords: [
         args.positionX + Math.round(Math.cos(targetAngle) * 10),
         args.positionY + Math.round(Math.sin(targetAngle) * 10),
