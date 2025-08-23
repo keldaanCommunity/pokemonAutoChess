@@ -1868,7 +1868,7 @@
 		"GRAVITY": "L'équipe ennemie est LOCKED pendant [2,SP] secondes.",
 		"FAKE_OUT": "Inflige [40,80,150,SP] SPECIAL à la cible, puis réduit la AP du lanceur de 30. Inflige FLINCH pendant 3 secondes à la cible sauf si la AP du lanceur était négative.",
 		"FELL_STINGER": "Inflige [25,50,100,SP] SPECIAL à la cible. SI la cible est mise KO, gagne de façon permanente +1 ATK et +10 HP.",
-		"GULP_MISSILE": "Recrache un $t(pkm.ARROKUDA) avec ses PP au max sur la cible, infligeant [55,SP] SPECIAL à la cible et aux ennemis adjacents. Il y a [33,LK]% de chance qu'un $t(pkm.PIKACHU) soit recraché à la place.",
+		"GULP_MISSILE": "Recrache un $t(pkm.ARROKUDA) avec ses PP au max sur la cible, infligeant [50,SP] SPECIAL à la cible. Il y a [20,LK]% de chance qu'un $t(pkm.PIKACHU) soit recraché à la place.",
 		"SCHOOLING": "Inflige [10,SP]% des HP max du lanceur en SPECIAL à la cible et aux ennemis adjacents. Si un Froussardine est seul sur le banc, il rejoint le $t(pkm.WISHIWASHI_SCHOOL) et lui fait gagner 50 HP permanents.",
 		"DOUBLE_SHOCK": "Emet un choc électrique puissant infligeant [50,100,200,SP] SPECIAL à la cible. Inflige PARALYSIS au lanceur pendant 3 secondes.",
 		"PURIFY": "Guérit les altérations de statut et soigne le lanceur de [15,30,60,SP] HP.",

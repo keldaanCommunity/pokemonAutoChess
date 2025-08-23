@@ -1868,7 +1868,7 @@
 		"GRAVITY": "All enemy Pokémon are LOCKED for [2,SP] seconds.",
 		"FAKE_OUT": "Deal [40,80,150,SP] SPECIAL to the target and reduce the user's AP by 30. Inflict the target with FLINCH for 3 seconds unless the user's AP was negative.",
 		"FELL_STINGER": "Deal [25,50,100,SP] SPECIAL to the target. If it knocks out the target, permanently gain 1 ATK and 10 HP.",
-		"GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [55,SP] SPECIAL to the target and adjacent enemy Pokémon. There is a [33,LK]% chance a $t(pkm.PIKACHU) will be fired instead.",
+		"GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [50,SP] SPECIAL to the target. There is a [20,LK]% chance a $t(pkm.PIKACHU) will be fired instead.",
 		"SCHOOLING": "Deal [10,SP]% of the user's max HP as SPECIAL to the target and adjacent enemy Pokémon. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent max HP to the user.",
 		"DOUBLE_SHOCK": "Emit a powerful electric shock, dealing [50,100,200,SP] SPECIAL to the target and inflict the user with PARALYSIS for 3 seconds.",
 		"PURIFY": "Cure negative status conditions and heal the user for [15,30,60,SP] HP.",

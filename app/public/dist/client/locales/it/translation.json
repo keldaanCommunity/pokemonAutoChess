@@ -1622,7 +1622,7 @@
 		"GRAVITY": "La squadra nemica subisce lo status LOCKED per [2,SP] secondi.",
 		"FAKE_OUT": "Infliggi [40,80,150,SP] SPECIAL, l'utilizzatore perde 30 AP. Il bersaglio subisce FLINCH per 3 secondi a meno che i AP dell'utilizzatore erano negativi.",
 		"FELL_STINGER": "Infliggi [25,50,100,SP] SPECIAL. Se il bersaglio viene ucciso, l'utilizzatore ottiene permanentemente in più 1 ATK e 10 HP.",
-		"GULP_MISSILE": "Scaglia un $t(pkm.ARROKUDA) con PP al massimo verso il bersaglio, infliggendo [55,SP] SPECIAL al bersaglio e ai nemici adiacenti. C'è [33,LK]% possibilità che venga scaglia invece un $t(pkm.PIKACHU).",
+		"GULP_MISSILE": "Scaglia un $t(pkm.ARROKUDA) con PP al massimo verso il bersaglio, infliggendo [50,SP] SPECIAL al bersaglio. C'è [20,LK]% possibilità che venga scaglia invece un $t(pkm.PIKACHU).",
 		"SCHOOLING": "Infliggi il [10,SP]% dei HP massimo come SPECIAL al bersaglio ed ai nemici adiacenti. Se un Wishiwashi è nella panchina, esso si aggiunge al banco e l'utilizzatore ottiene permanentemente 50 HP.",
 		"DOUBLE_SHOCK": "L'utilizzatore emette un forte scossa elettrica, infliggendo [50,100,200,SP] SPECIAL. L'utilizzatore subisce PARALYSIS per 3 secondi.",
 		"PURIFY": "Cura l'utilizzatore degli status alterati e di [15,30,60,SP] HP.",

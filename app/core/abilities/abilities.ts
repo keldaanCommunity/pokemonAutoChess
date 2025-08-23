@@ -9767,9 +9767,9 @@ export class GulpMissileStrategy extends AbilityStrategy {
     let missilePkm = Pkm.ARROKUDA
     let missilePkmString = "arrokuda"
 
-    const damage = 55
+    const damage = 50
 
-    if (chance(0.33, pokemon)) {
+    if (chance(0.2, pokemon)) {
       missilePkm = Pkm.PIKACHU
       missilePkmString = "pikachu"
     }
@@ -9802,23 +9802,13 @@ export class GulpMissileStrategy extends AbilityStrategy {
 
             entity.pp = entity.maxPP
 
-            const cells = board.getAdjacentCells(
-              target.positionX,
-              target.positionY,
-              true
+            target.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
             )
-
-            cells.forEach((cell) => {
-              if (cell.value && cell.value.team !== pokemon.team) {
-                cell.value.handleSpecialDamage(
-                  damage,
-                  board,
-                  AttackType.SPECIAL,
-                  pokemon,
-                  crit
-                )
-              }
-            })
           }
         },
         distanceM(
