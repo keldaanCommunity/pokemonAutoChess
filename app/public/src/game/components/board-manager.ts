@@ -235,10 +235,7 @@ export default class BoardManager {
 
     if (this.state.stageLevel in PVEStages) {
       if (phaseChanged) {
-        setTimeout(
-          () => this.addPvePokemons(PVEStages[this.state.stageLevel], false),
-          1500
-        )
+        this.addPvePokemons(PVEStages[this.state.stageLevel], false)
       } else if (this.mode === BoardMode.PICK) {
         // immediately add PVE pokemons
         this.addPvePokemons(PVEStages[this.state.stageLevel], true)
