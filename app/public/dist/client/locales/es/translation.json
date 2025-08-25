@@ -1822,7 +1822,7 @@
 		"PSYSHOCK": "Quema [20,40,80,SP] PP del objetivo y lo obtiene como SHIELD. Si el objetivo no tiene suficientes PP, el resto se inflige como SPECIAL.",
 		"HEAVY_SLAM": "Golpea el suelo causando [15,30,60,SP] de SPECIAL y otorgándose [15,30,60] de SHIELD. Cuanto más supere el usuario al objetivo en HP máximo, mayor será el poder del movimiento.",
 		"RAPID_SPIN": "Este Pokémon inflige [20,50] de SPECIAL y luego gana [50,SP]% de ATK como DEF y SPE_DEF",
-		"BOUNCE": "Rebota [1,2,3] veces hacia el objetivo más lejano, causando [10,20,40,SP] de SPECIAL a todos los enemigos adyacentes por cada rebote",
+		"BOUNCE": "Rebota [1,2,3] veces hacia el objetivo más lejano, causando [10,20,30,SP] de SPECIAL a todos los enemigos adyacentes por cada rebote",
 		"BLOOD_MOON": "Concentra toda su energía en la luna roja sangrienta en su frente y la proyecta en una línea, causando [200,SP]% de ATK como SPECIAL y dejando WOUND por 3 segundos a todos los enemigos golpeados",
 		"TEA_TIME": "Cura a los aliados [15,30,60,SP] HP. Todos los Pokémon que tengan una baya se la comen inmediatamente.",
 		"SPIKES": "Lanza hasta [6, SP] púas de metal dentro de un radio de 3 celdas por delante, causando [25,50,100,SP] de SPECIAL. Los púas permanecen en el campo, causando 10 de TRUE por segundo y ARMOR_BREAK a los oponentes que caminan sobre ellos, si no son FLYING / STEEL",

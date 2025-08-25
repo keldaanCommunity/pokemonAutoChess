@@ -1604,7 +1604,7 @@
 		"PSYSHOCK": "Sottrai [20,40,80,SP] PP dal bersaglio e guadagnali come SHIELD. Se il bersaglio non ha abbastanza PP, i rimanenti vengono inflitti come SPECIAL.",
 		"HEAVY_SLAM": "L'utilizzatore si butta sul bersaglio, infliggendo [15,30,60,SP] SPECIAL e ottenendo [15,30,60] SHIELD. Più l'utilizzatore supera il bersaglio in HP massimi, maggiore è la potenza della mossa.",
 		"RAPID_SPIN": "Infliggi [20,50,SP] SPECIAL e guadagna il [50,SP]% dell'ATK come DEF e SPE_DEF.",
-		"BOUNCE": "Rimbalza [1,2,3] volte verso il bersaglio più lontano, infliggendo [10,20,40,SP] SPECIAL a tutti i nemici adiacenti ad ogni rimbalzo.",
+		"BOUNCE": "Rimbalza [1,2,3] volte verso il bersaglio più lontano, infliggendo [10,20,30,SP] SPECIAL a tutti i nemici adiacenti ad ogni rimbalzo.",
 		"BLOOD_MOON": "Concentra tutta la sua energia nella luna cremisi sulla sua fronte e la proietta in una linea retta, infliggendo il [200,SP]% dell'ATK come SPECIAL e causa WOUND a tutti i nemici colpiti per 3 secondi.",
 		"TEA_TIME": "Cura gli alleati di [15,30,60,SP] HP. Tutti i Pokèmon che hanno equipaggiata una bacca la mangiano immediatamente.",
 		"SPIKES": "Lancia fino a [6, SP] punte metalliche dentro in raggio di 3 celle di fronte all'utilizzatore, infliggendo [25,50,100,SP] SPECIAL. Le punti rimangono sul terreno, infliggendo 10 TRUE al secondo e causando ARMOR_BREAK a tutti i Pokèmon che ci camminano sopra, tranne se sono del tipo FLYING / STEEL.",

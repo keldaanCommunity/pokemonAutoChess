@@ -9398,7 +9398,7 @@ export class BounceStrategy extends AbilityStrategy {
             )
             adjacentCells.forEach((cell) => {
               if (cell.value && cell.value.team !== pokemon.team) {
-                const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+                const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
                 cell.value.handleSpecialDamage(
                   damage,
                   board,
