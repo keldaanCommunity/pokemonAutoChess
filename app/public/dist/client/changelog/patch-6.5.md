@@ -14,7 +14,8 @@
 - Buff Pidove line: HP 50/100/170 → 60/110/180, Roost sleep duration 2 → 1 second
 - Nerf Torment (Chimchar, Lotad): Speed buff 20/40/60 → 20/35/50
 - Change Lotad types: Grass/Water/Aquatic → Grass/Aquatic/Sound ; PP 100 → 80
-- Nerf Gulp Missile (Cramorant): 55 special damage on target and adjacent enemies → 50 special damage on target only ; Chance of pikachu: 33 → 20%
+- Nerf Gulp Missile (Cramorant): 55 special damage on target and adjacent enemies → 55 special damage on target only ; Chance of pikachu: 33 → 20%
+- Nerf Hitmonchan: PP 100 → 120
 
 # Changes to Synergies
 

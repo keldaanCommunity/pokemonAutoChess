@@ -11481,7 +11481,7 @@ export class Hitmonchan extends Pokemon {
   speed = 49
   def = 14
   speDef = 14
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.MEGA_PUNCH
 }

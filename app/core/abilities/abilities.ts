@@ -9767,7 +9767,7 @@ export class GulpMissileStrategy extends AbilityStrategy {
     let missilePkm = Pkm.ARROKUDA
     let missilePkmString = "arrokuda"
 
-    const damage = 50
+    const damage = 55
 
     if (chance(0.2, pokemon)) {
       missilePkm = Pkm.PIKACHU
