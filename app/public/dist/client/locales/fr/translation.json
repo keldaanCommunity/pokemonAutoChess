@@ -2875,7 +2875,7 @@
 		"ARMOR_BREAK": "Réduit l'efficacité de la DEF et SPE_DEF de 50 %",
 		"CHARM": "Empêche d'attaquer la cible et oblige à s'en rapprocher",
 		"FLINCH": "50% des dégâts reçus passent à travers le SHIELD",
-		"CURSE": "Met KO le Pokémon maudit à la fin du compte à rebours. Le délai est prolongé avec AQUATIC.",
+		"CURSE": "Met KO le Pokémon maudit à la fin du compte à rebours",
 		"RUNE_PROTECT": "Protège des altérations de statut",
 		"POSSESSED": "Combat temporairement pour l'équipe adverse. Devient CHARM si la cible est le seul ennemi restant",
 		"LOCKED": "Empêche de bouger et réduit la RANGE à 1",

@@ -2875,7 +2875,7 @@
 		"ARMOR_BREAK": "Reduce the effectiveness of DEF & SPE_DEF by 50%",
 		"CHARM": "Prevents attacking the target and forces to get closer to it",
 		"FLINCH": "50% of incoming damage bypass SHIELD",
-		"CURSE": "KOs the cursed Pokémon after some time. The delay is increased with AQUATIC.",
+		"CURSE": "KOs the cursed Pokémon after some time",
 		"RUNE_PROTECT": "Protects from status alterations",
 		"POSSESSED": "Fight for the other team temporarily. Becomes CHARM if the target is the only enemy remaining",
 		"LOCKED": "Prevents moving and sets RANGE to 1",
