@@ -12742,7 +12742,7 @@ export class Doduo extends Pokemon {
   speed = 60
   def = 6
   speDef = 4
-  maxPP = 80
+  maxPP = 85
   range = 1
   skill = Ability.AGILITY
   regional = true
@@ -12757,7 +12757,7 @@ export class Dodrio extends Pokemon {
   speed = 60
   def = 10
   speDef = 6
-  maxPP = 80
+  maxPP = 85
   range = 1
   skill = Ability.AGILITY
   regional = true

@@ -16,6 +16,7 @@
 - Change Lotad types: Grass/Water/Aquatic → Grass/Aquatic/Sound ; PP 100 → 80
 - Nerf Gulp Missile (Cramorant): 55 special damage on target and adjacent enemies → 55 special damage on target only ; Chance of pikachu: 33 → 20%
 - Nerf Hitmonchan: PP 100 → 120
+- Nerf Doduo line: PP 80 → 85
 
 # Changes to Synergies
 
