@@ -6,7 +6,7 @@ import { AttackType, Team } from "../../types/enum/Game"
 import { Flavors, Item, SynergyFlavors } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
@@ -419,7 +419,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   const milcery = pokemon
   if (!milcery) return
   const surroundingSynergies = new Map<Synergy, number>()
-  Object.values(Synergy).forEach((synergy) => {
+  SynergyArray.forEach((synergy) => {
     surroundingSynergies.set(synergy, 0)
   })
   const adjacentAllies = values(player.board).filter(

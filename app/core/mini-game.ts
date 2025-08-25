@@ -32,7 +32,7 @@ import {
   SynergyStones
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { clamp, min } from "../utils/number"
 import { getOrientation } from "../utils/orientation"
 import {
@@ -546,7 +546,7 @@ export class MiniGame {
   pickRandomSynergySymbols(stageLevel: number, room: GameRoom) {
     if (stageLevel === 0) {
       const symbols = pickNRandomIn(
-        Object.values(Synergy),
+        SynergyArray,
         3 * ((this.avatars?.size ?? 8) + 1)
       )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)

@@ -99,6 +99,8 @@ export function getSellPrice(
     price = pokemon.shiny ? 10 : 2
   } else if (name == Pkm.DITTO) {
     price = 5
+  } else if (name == Pkm.FALINKS_TROOPER) {
+    price = 5
   } else if (name == Pkm.MELTAN) {
     price = 0
   } else if (name === Pkm.MAGIKARP) {
@@ -146,6 +148,8 @@ export function getBuyPrice(
 
   if (name === Pkm.DITTO) {
     price = 5
+  } else if (name === Pkm.FALINKS_TROOPER) {
+    price = 5
   } else if (name === Pkm.MELTAN) {
     price = 0
   } else if (Unowns.includes(name)) {
@@ -158,6 +162,7 @@ export function getBuyPrice(
 }
 
 const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
+CommonShop.push(Pkm.FALINKS_BRASS)
 const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
@@ -461,6 +466,10 @@ export default class Shop {
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
+    }
+
+    if (player.effects.has(EffectEnum.FALINKS_BRASS) && chance(4 / 100)) {
+      return Pkm.FALINKS_TROOPER
     }
 
     const isPVE = state.stageLevel in PVEStages

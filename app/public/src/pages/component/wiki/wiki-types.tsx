@@ -11,7 +11,7 @@ import { RarityColor, SynergyTriggers } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -88,7 +88,7 @@ export function WikiType(props: { type: Synergy }) {
   }
 
   const overlapsMap = new Map(
-    Object.values(Synergy)
+    SynergyArray
       .filter(type => type !== props.type)
       .map(type => [type, pokemons.filter((p, i, list) => p.types.includes(type) &&
         list.findIndex((q) => q.types.includes(type) && PkmFamily[p.name] === PkmFamily[q.name]) === i
@@ -190,7 +190,7 @@ export function WikiAllTypes() {
       return true
     })
 
-  const pokemonsPerType = Object.fromEntries(Object.values(Synergy).map(type => [type as Synergy, [] as IPokemonData[]]))
+  const pokemonsPerType = Object.fromEntries(SynergyArray.map(type => [type as Synergy, [] as IPokemonData[]]))
   for (const p of pokemons) {
     for (const type of p.types) {
       pokemonsPerType[type].push(p)
@@ -207,7 +207,7 @@ export function WikiAllTypes() {
   return (
     <>
       <div id="wiki-types-all">
-        {(Object.values(Synergy) as Synergy[]).map((type) => {
+        {SynergyArray.map((type) => {
           return (
             <section key={type}>
               <h2>

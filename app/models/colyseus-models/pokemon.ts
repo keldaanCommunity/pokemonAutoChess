@@ -18341,8 +18341,13 @@ export class FalinksBrass extends Pokemon {
   range = 1
   skill = Ability.NO_RETREAT
   passive = Passive.FALINKS
+  onAcquired(player: Player): void {
+    player.effects.update(player.synergies, player.board)
+  }
+  afterSell(player: Player): void {
+    player.effects.delete(EffectEnum.FALINKS_BRASS)
+  }
 }
-
 
 export class FalinksTrooper extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.STEEL])
@@ -18356,6 +18361,12 @@ export class FalinksTrooper extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.TACKLE
+  onAcquired(player: Player): void {
+    player.effects.update(player.synergies, player.board)
+  }
+  afterSell(player: Player): void {
+    player.effects.update(player.synergies, player.board)
+  }
 }
 
 export const PokemonClasses: Record<
