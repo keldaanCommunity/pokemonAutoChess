@@ -4,6 +4,7 @@ import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
+import { FalinksTrooper } from "../../../../models/colyseus-models/pokemon"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
@@ -19,9 +20,11 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
-import { PkmByIndex } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
+import { isOnBench } from "../../../../utils/board"
 import { max } from "../../../../utils/number"
+import { OrientationVector } from "../../../../utils/orientation"
 import { pickRandomIn } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
@@ -29,7 +32,10 @@ import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import { displayAbility, displayHit } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
-import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "./pokemon-animations"
+import {
+  DEFAULT_POKEMON_ANIMATION_CONFIG,
+  PokemonAnimations
+} from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
 
 export default class BattleManager {
@@ -100,6 +106,9 @@ export default class BattleManager {
       )
       this.group.add(pokemonUI)
       this.pokemonSprites.set(pokemon.id, pokemonUI)
+      if (pokemon.name === Pkm.FALINKS_BRASS) {
+        this.addTroopers(pokemon, pokemonUI, simulationId)
+      }
     }
   }
 
@@ -490,15 +499,25 @@ export default class BattleManager {
           pkm.y = coordinates[1]
           pkm.specialAttackAnimation(pokemon)
         } else if (!pokemon.status.skydiving) {
-          pkm.moveManager.setSpeed(
+          const walkingSpeed =
             2 *
             getMoveSpeed(pokemon) *
             Math.max(
               Math.abs(pkm.x - coordinates[0]),
               Math.abs(pkm.y - coordinates[1])
             )
-          )
+          pkm.moveManager.setSpeed(walkingSpeed)
           pkm.moveManager.moveTo(coordinates[0], coordinates[1])
+          if (pkm.troopers) {
+            const [dx, dy] = OrientationVector[pkm.orientation]
+            pkm.troopers.forEach((trooper, i) => {
+              trooper.moveManager.setSpeed(walkingSpeed)
+              trooper.moveManager.moveTo(
+                coordinates[0] - dx * (i + 1) * 20,
+                coordinates[1] - dy * (i + 1) * 20
+              )
+            })
+          }
         }
       } else if (
         field === "orientation" &&
@@ -507,6 +526,21 @@ export default class BattleManager {
         pkm.orientation = pokemon.orientation
         if (pokemon.action !== PokemonActionState.SLEEP) {
           this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
+        }
+        if (pkm.troopers) {
+          const [dx, dy] = OrientationVector[pkm.orientation]
+          const coordinates = transformEntityCoordinates(
+            pokemon.positionX,
+            pokemon.positionY,
+            this.flip
+          )
+          pkm.troopers.forEach((trooper, i) => {
+            trooper.moveManager.setSpeed(5)
+            trooper.moveManager.moveTo(
+              coordinates[0] - dx * (i + 1) * 20,
+              coordinates[1] - dy * (i + 1) * 20
+            )
+          })
         }
       } else if (field === "action" && pkm.action !== pokemon.action) {
         pkm.action = pokemon.action
@@ -558,6 +592,11 @@ export default class BattleManager {
         pkm.speed = pokemon.speed
         if (pkm.detail && pkm.detail instanceof PokemonDetail) {
           pkm.detail.speed.textContent = pokemon.speed.toString()
+        }
+        if (pkm.troopers) {
+          pkm.troopers.forEach((trooper) => {
+            trooper.speed = pokemon.speed
+          })
         }
       } else if (field === "hp") {
         const baseHP = getPokemonData(pokemon.name).hp
@@ -850,15 +889,15 @@ export default class BattleManager {
   }
 
   displayAbility(args: {
-    id: string,
-    skill: Ability | string,
-    ap: number,
-    orientation: Orientation,
-    positionX: number,
-    positionY: number,
-    targetX?: number,
-    targetY?: number,
-    delay?: number,
+    id: string
+    skill: Ability | string
+    ap: number
+    orientation: Orientation
+    positionX: number
+    positionY: number
+    targetX?: number
+    targetY?: number
+    delay?: number
   }) {
     if (this.simulation?.id === args.id && args.skill) {
       displayAbility({
@@ -1122,12 +1161,19 @@ export default class BattleManager {
     })
   }
 
-  displayDamage({ x, y, amount, type, index, id }: {
-    x: number,
-    y: number,
-    amount: number,
-    type: AttackType,
-    index: string,
+  displayDamage({
+    x,
+    y,
+    amount,
+    type,
+    index,
+    id
+  }: {
+    x: number
+    y: number
+    amount: number
+    type: AttackType
+    index: string
     id: string
   }) {
     if (this.simulation?.id === id) {
@@ -1141,7 +1187,8 @@ export default class BattleManager {
       this.displayTween(color, coordinates, index, amount)
       displayHit(
         this.scene,
-        PokemonAnimations[PkmByIndex[index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+        PokemonAnimations[PkmByIndex[index]]?.hitSprite ??
+        DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
         coordinates[0],
         coordinates[1],
         this.flip
@@ -1149,7 +1196,14 @@ export default class BattleManager {
     }
   }
 
-  displayHeal({ x, y, amount, type, index, id }: {
+  displayHeal({
+    x,
+    y,
+    amount,
+    type,
+    index,
+    id
+  }: {
     type: HealType
     id: string
     x: number
@@ -1253,5 +1307,59 @@ export default class BattleManager {
 
   setPlayer(player: Player) {
     this.player = player
+  }
+
+  addTroopers(
+    trooperBrass: IPokemonEntity,
+    trooperBrassSprite: PokemonSprite,
+    simulationId: string
+  ) {
+    const troopersBenchSprites = [
+      ...this.scene.board!.pokemons.values()
+    ].filter((p) => p.name === Pkm.FALINKS_TROOPER && isOnBench(p))
+
+    if (trooperBrassSprite.troopers) {
+      trooperBrassSprite.troopers?.forEach((s) => s.destroy())
+    }
+    trooperBrassSprite.troopers = []
+    troopersBenchSprites.forEach((sprite, i) => {
+      sprite.setAlpha(0.5)
+
+      const coordinates = transformEntityCoordinates(
+        trooperBrass.positionX,
+        trooperBrass.positionY,
+        this.flip
+      )
+      const trooperInBattle = new FalinksTrooper(
+        trooperBrass.shiny,
+        trooperBrass.emotion
+      )
+      const trooperSprite = new PokemonSprite(
+        this.scene,
+        coordinates[0] + (i + 1) * 20,
+        coordinates[1],
+        trooperInBattle,
+        simulationId,
+        true,
+        this.flip
+      )
+      trooperSprite.setDepth(DEPTH.POKEMON_TROOPER)
+      trooperBrassSprite.troopers?.push(trooperSprite)
+      trooperSprite.setScale(0)
+      this.scene.tweens.add({
+        targets: trooperSprite,
+        scale: 1,
+        duration: 500,
+        ease: "Power2"
+      })
+
+      this.scene.animationManager?.animatePokemon(
+        trooperSprite,
+        PokemonActionState.IDLE,
+        this.flip
+      )
+      this.group.add(trooperSprite)
+      this.pokemonSprites.set(trooperInBattle.id, trooperSprite)
+    })
   }
 }

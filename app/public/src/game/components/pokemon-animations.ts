@@ -6874,5 +6874,19 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.STEEL_MELEE,
     hitSprite: HitSprite.STEEL_HIT
+  },
+  [Pkm.FALINKS_BRASS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    hitSprite: HitSprite.STEEL_HIT
+  },
+  [Pkm.FALINKS_TROOPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    hitSprite: HitSprite.STEEL_HIT
   }
 }

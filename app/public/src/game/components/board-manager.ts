@@ -625,6 +625,7 @@ export default class BoardManager {
     this.hideBerryTrees()
     this.hideGroundHoles()
     this.removePokemonsOnBoard()
+    this.scene.board?.pokemons.forEach(p => p.setAlpha(1))
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
