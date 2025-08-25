@@ -11463,7 +11463,7 @@ export class Hitmonlee extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 28
+  atk = 26
   speed = 56
   def = 6
   speDef = 6
@@ -11479,8 +11479,8 @@ export class Hitmonchan extends Pokemon {
   hp = 200
   atk = 22
   speed = 49
-  def = 14
-  speDef = 14
+  def = 12
+  speDef = 12
   maxPP = 100
   range = 1
   skill = Ability.MEGA_PUNCH
@@ -12742,7 +12742,7 @@ export class Doduo extends Pokemon {
   speed = 60
   def = 6
   speDef = 4
-  maxPP = 80
+  maxPP = 85
   range = 1
   skill = Ability.AGILITY
   regional = true
@@ -12757,7 +12757,7 @@ export class Dodrio extends Pokemon {
   speed = 60
   def = 10
   speDef = 6
-  maxPP = 80
+  maxPP = 85
   range = 1
   skill = Ability.AGILITY
   regional = true

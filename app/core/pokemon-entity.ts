@@ -910,7 +910,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
-        poisonChance -= nbSmellyClays * 0.1
+        poisonChance -= nbSmellyClays * 0.15
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
         target.status.triggerPoison(4000, target, this)

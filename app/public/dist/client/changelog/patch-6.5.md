@@ -14,6 +14,11 @@
 - Buff Pidove line: HP 50/100/170 → 60/110/180, Roost sleep duration 2 → 1 second
 - Nerf Torment (Chimchar, Lotad): Speed buff 20/40/60 → 20/35/50
 - Change Lotad types: Grass/Water/Aquatic → Grass/Aquatic/Sound ; PP 100 → 80
+- Nerf Gulp Missile (Cramorant): 55 special damage on target and adjacent enemies → 55 special damage on target only ; Chance of pikachu: 33 → 20%
+- Nerf Hitmonchan: Def/Spe.def 14 → 12
+- Nerf Hitmonlee: Attack 28 → 26
+- Nerf Doduo line: PP 80 → 85
+- Nerf Bounce (Mantyke): damage 10/20/40 → 10/20/30
 
 # Changes to Synergies
 
@@ -25,6 +30,9 @@
 - Big Nugget is replaced by Explorer Kit. Explorer Kit increases the chances of finding gold buried in the ground.
 - New Items: Rusty Coin, Nugget, Big Nugget
 - New items: Synergy gems ; synergy gems increase the level of a synergy but are unholdable
+- Buff Float Stone: 5 → 10 speed
+- Buff Black Augurite: 5 → 10% less critical damage
+- Buff Smelly Clay: 10 → 15% less chance to be poisonned
 
 # Changes to Town Encounters
 
@@ -33,6 +41,7 @@
 # Gameplay
 
 - Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
+- Aquatic no longer increase Curse delay ; instead, when curse status is cleared, the remaining time + 1 second is stored in memory, and will be used if Curse status is reapplied again
 
 # UI
 

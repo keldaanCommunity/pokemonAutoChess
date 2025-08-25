@@ -241,6 +241,8 @@ export interface IPokemonAvatar {
   x: number
   y: number
   action: PokemonActionState
+  portalId: string
+  itemId: string
 }
 
 export interface IFloatingItem {
@@ -261,6 +263,7 @@ export interface ISynergySymbol {
   x: number
   y: number
   synergy: Synergy
+  portalId: string
 }
 
 export interface IPlayer {

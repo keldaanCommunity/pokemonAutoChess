@@ -254,6 +254,7 @@ export class MiniGame {
   initialize(state: GameState, room: GameRoom) {
     const { players, stageLevel } = state
     this.timeElapsed = 0
+    this.rotationDirection = 1
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {

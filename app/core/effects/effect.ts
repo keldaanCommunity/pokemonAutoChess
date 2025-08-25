@@ -202,15 +202,19 @@ export class OnMoveEffect extends Effect {
   override apply(
     pokemon: PokemonEntity,
     board: Board,
-    x: number,
-    y: number
+    oldX: number,
+    oldY: number,
+    newX: number,
+    newY: number
   ) { }
   constructor(
     effect?: (
       pokemon: PokemonEntity,
       board: Board,
-      x: number,
-      y: number
+      oldX: number,
+      oldY: number,
+      newX: number,
+      newY: number
     ) => void,
     origin?: EffectOrigin
   ) {
