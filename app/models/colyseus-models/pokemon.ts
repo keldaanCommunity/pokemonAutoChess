@@ -18342,7 +18342,7 @@ export class FalinksBrass extends Pokemon {
   skill = Ability.NO_RETREAT
   passive = Passive.FALINKS
   onAcquired(player: Player): void {
-    player.effects.update(player.synergies, player.board)
+    player.effects.add(EffectEnum.FALINKS_BRASS)
   }
   afterSell(player: Player): void {
     player.effects.delete(EffectEnum.FALINKS_BRASS)
