@@ -30,6 +30,9 @@
 - Big Nugget is replaced by Explorer Kit. Explorer Kit increases the chances of finding gold buried in the ground.
 - New Items: Rusty Coin, Nugget, Big Nugget
 - New items: Synergy gems ; synergy gems increase the level of a synergy but are unholdable
+- Buff Float Stone: 5 → 10 speed
+- Buff Black Augurite: 5 → 10% less critical damage
+- Buff Smelly Clay: 10 → 15% less chance to be poisonned
 
 # Changes to Town Encounters
 

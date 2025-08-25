@@ -1376,7 +1376,7 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         pokemon.addSpeed(
-          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 5,
+          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 10,
           pokemon,
           0,
           false
