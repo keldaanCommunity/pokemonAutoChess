@@ -5431,6 +5431,7 @@ export class Moltres extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.OVERHEAT
+  passive = Passive.SUN
 }
 
 export class GalarianMoltres extends Pokemon {
