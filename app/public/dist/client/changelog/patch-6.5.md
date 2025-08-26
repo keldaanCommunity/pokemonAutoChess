@@ -20,6 +20,7 @@
 - Nerf Doduo line: PP 80 → 85
 - Nerf Bounce (Mantyke): damage 10/20/40 → 10/20/30
 - Half-revert 6.1 nerf for Nuzzle (Pichu line): damage 20/40/80 → 25/50/100
+- Moltres new passive: change weather to Zenith
 
 # Changes to Synergies
 

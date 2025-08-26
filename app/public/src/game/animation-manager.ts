@@ -299,14 +299,14 @@ export default class AnimationManager {
   }
 
   animatePokemon(
-    entity: PokemonSprite,
+    pokemonSprite: PokemonSprite,
     action: PokemonActionState,
     flip: boolean,
     loop: boolean = true
   ) {
     let animation = this.convertPokemonActionStateToAnimationType(
       action,
-      entity
+      pokemonSprite
     )
 
     const shouldLock =
@@ -316,29 +316,36 @@ export default class AnimationManager {
 
     const timeScale =
       action === PokemonActionState.ATTACK
-        ? getAttackAnimTimeScale(entity.index, entity.speed)
+        ? getAttackAnimTimeScale(pokemonSprite.index, pokemonSprite.speed)
         : 1
 
     if (
-      entity.passive === Passive.DRUMMER &&
-      entity.targetY == null &&
+      pokemonSprite.passive === Passive.DRUMMER &&
+      pokemonSprite.targetY == null &&
       action === PokemonActionState.WALK
     ) {
       animation =
-        PokemonAnimations[PkmByIndex[entity.index]].emote ??
+        PokemonAnimations[PkmByIndex[pokemonSprite.index]].emote ??
         DEFAULT_POKEMON_ANIMATION_CONFIG.emote // use drumming animation instead of attack
-      entity.orientation = Orientation.DOWN
+      pokemonSprite.orientation = Orientation.DOWN
     }
 
     try {
-      this.play(entity, animation, {
+      this.play(pokemonSprite, animation, {
         flip,
         lock: shouldLock,
         repeat: loop ? -1 : 0,
         timeScale
       })
     } catch (err) {
-      logger.warn(`Can't play animation ${animation} for ${entity?.name}`, err)
+      logger.warn(`Can't play animation ${animation} for ${pokemonSprite?.name}`, err)
+    }
+
+    if (pokemonSprite.troopers) {
+      pokemonSprite.troopers.forEach((trooper) => {
+        trooper.orientation = pokemonSprite.orientation
+        this.animatePokemon(trooper, action, flip, loop)
+      })
     }
   }
 

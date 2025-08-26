@@ -57,7 +57,6 @@ import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
 import {
   FireHitEffect,
-  GroundHoleEffect,
   MonsterKillEffect
 } from "./effects/synergies"
 import { IdleState } from "./idle-state"

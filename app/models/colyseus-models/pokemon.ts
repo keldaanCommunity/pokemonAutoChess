@@ -5431,6 +5431,7 @@ export class Moltres extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.OVERHEAT
+  passive = Passive.SUN
 }
 
 export class GalarianMoltres extends Pokemon {
@@ -18328,6 +18329,47 @@ export class Togedemaru extends Pokemon {
   skill = Ability.ZING_ZAP
 }
 
+export class FalinksBrass extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.STEEL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 150
+  atk = 12
+  speed = 50
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.NO_RETREAT
+  passive = Passive.FALINKS
+  onAcquired(player: Player): void {
+    player.effects.add(EffectEnum.FALINKS_BRASS)
+  }
+  afterSell(player: Player): void {
+    player.effects.delete(EffectEnum.FALINKS_BRASS)
+  }
+}
+
+export class FalinksTrooper extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.STEEL])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 30
+  atk = 1
+  speed = 50
+  def = 1
+  speDef = 1
+  maxPP = 100
+  range = 1
+  skill = Ability.TACKLE
+  onAcquired(player: Player): void {
+    player.effects.update(player.synergies, player.board)
+  }
+  afterSell(player: Player): void {
+    player.effects.update(player.synergies, player.board)
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19334,7 +19376,9 @@ export const PokemonClasses: Record<
   [Pkm.ROGGENROLA]: Roggenrola,
   [Pkm.BOLDORE]: Boldore,
   [Pkm.GIGALITH]: Gigalith,
-  [Pkm.TOGEDEMARU]: Togedemaru
+  [Pkm.TOGEDEMARU]: Togedemaru,
+  [Pkm.FALINKS_BRASS]: FalinksBrass,
+  [Pkm.FALINKS_TROOPER]: FalinksTrooper
 }
 
 // declare all the classes in colyseus schema TypeRegistry

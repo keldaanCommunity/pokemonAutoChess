@@ -36,7 +36,7 @@ import { values } from "../../utils/schemas"
 
 import type { Board, Cell } from "../board"
 import { PeriodicEffect } from "../effects/effect"
-import { AccelerationEffect } from "../effects/passives"
+import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
@@ -13161,6 +13161,46 @@ export class ZingZapStrategy extends AbilityStrategy {
   }
 }
 
+export class TackleStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class NoRetreatStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const nbFalinks = [...pokemon.effectsSet.values()].find(e => e instanceof FalinksFormationEffect)?.stacks ?? 0
+    if (nbFalinks > 0) {
+      //Gain 1 ATK, 1 DEF, 1 SPE_DEF and 5 SPEED per Falinks on your team. Troopers tackle target for [20,SP] SPECIAL each.
+      pokemon.addAttack(nbFalinks, pokemon, 0, false)
+      pokemon.addDefense(nbFalinks, pokemon, 0, false)
+      pokemon.addSpecialDefense(nbFalinks, pokemon, 0, false)
+      pokemon.addSpeed(nbFalinks * 5, pokemon, 0, false)
+
+      for (let i = 0; i < nbFalinks; i++) {
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            target.handleSpecialDamage(20, board, AttackType.SPECIAL, pokemon, crit)
+          }, i * 100)
+        )
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13639,5 +13679,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HORN_LEECH]: new HornLeechStrategy(),
   [Ability.DRILL_RUN]: new DrillRunStrategy(),
   [Ability.ROCK_ARTILLERY]: new RockArtilleryStrategy(),
-  [Ability.ZING_ZAP]: new ZingZapStrategy()
+  [Ability.ZING_ZAP]: new ZingZapStrategy(),
+  [Ability.NO_RETREAT]: new NoRetreatStrategy(),
+  [Ability.TACKLE]: new TackleStrategy()
 }

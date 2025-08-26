@@ -32,6 +32,7 @@ import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
+import { OrientationArray, OrientationVector } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
@@ -135,6 +136,7 @@ export default class PokemonSprite extends DraggableObject {
   mealSprite: GameObjects.Sprite | undefined
   inBattle: boolean = false
   floatingTween?: Phaser.Tweens.Tween
+  troopers?: PokemonSprite[]
 
   constructor(
     scene: GameScene | DebugScene,
@@ -184,7 +186,9 @@ export default class PokemonSprite extends DraggableObject {
     this.passive = pokemon.passive
     this.positionX = pokemon.positionX
     this.positionY = pokemon.positionY
-    this.attackSprite = PokemonAnimations[pokemon.name]?.attackSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
+    this.attackSprite =
+      PokemonAnimations[pokemon.name]?.attackSprite ??
+      DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
     this.ap = pokemon.ap
     this.luck = pokemon.luck
     this.inBattle = inBattle
@@ -204,7 +208,7 @@ export default class PokemonSprite extends DraggableObject {
     const isEntity = (
       pokemon: IPokemon | IPokemonEntity
     ): pokemon is IPokemonEntity => {
-      return inBattle
+      return inBattle && "status" in pokemon
     }
 
     if (isEntity(pokemon)) {
@@ -567,6 +571,37 @@ export default class PokemonSprite extends DraggableObject {
         this.destroy()
       }
     })
+
+    if (this.troopers) {
+      this.troopers.forEach((trooper, i) => {
+        // all troopers run away when leader dies
+        trooper.addFlinch()
+        trooper.orientation = OrientationArray[(i + 6) % 8]
+        const [dx, dy] = OrientationVector[(i + 5) % 8]
+        const endX = trooper.x + 1000 * dx
+        const endY = trooper.y + 1000 * dy
+
+        this.scene.tweens.add({
+          targets: trooper,
+          x: endX,
+          y: endY,
+          ease: "Linear",
+          duration: 5000,
+          delay: 500,
+          onStart: () => {
+            trooper.animationLocked = false
+            this.scene.animationManager?.animatePokemon(
+              trooper,
+              PokemonActionState.WALK,
+              false
+            )
+          },
+          onComplete: () => {
+            trooper.destroy()
+          }
+        })
+      })
+    }
   }
 
   resurectAnimation() {
@@ -592,7 +627,11 @@ export default class PokemonSprite extends DraggableObject {
       ability: anim,
       orientation: this.orientation,
       positionX: this.positionX,
-      positionY: !this.inBattle ? this.positionY - 1 : this.team === Team.RED_TEAM ? 4 - this.positionY : this.positionY,
+      positionY: !this.inBattle
+        ? this.positionY - 1
+        : this.team === Team.RED_TEAM
+          ? 4 - this.positionY
+          : this.positionY,
       targetX: this.targetX ?? -1,
       targetY: this.targetY ?? -1,
       flip: this.flip,
@@ -677,7 +716,12 @@ export default class PokemonSprite extends DraggableObject {
   digAnimation(buriedItem: Item | null) {
     this.orientation = Orientation.UP
     const g = <GameScene>this.scene
-    g.animationManager?.animatePokemon(this, PokemonActionState.WALK, false, true)
+    g.animationManager?.animatePokemon(
+      this,
+      PokemonActionState.WALK,
+      false,
+      true
+    )
     this.displayAnimation("DIG")
     setTimeout(() => {
       this.orientation = Orientation.DOWNLEFT

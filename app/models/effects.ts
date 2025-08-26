@@ -3,23 +3,25 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyTriggers } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { isOnBench } from "../utils/board"
 import Synergies from "./colyseus-models/synergies"
+import { Pkm } from "../types/enum/Pokemon"
+import { values } from "../utils/schemas"
 
 export class Effects extends SetSchema<EffectEnum> {
   update(synergies: Synergies, board: MapSchema<Pokemon>) {
     this.clear()
-    ;(Object.values(Synergy) as Synergy[]).forEach((synergy) => {
-      for (let i = SynergyTriggers[synergy].length; i >= 0; i--) {
-        const v = SynergyTriggers[synergy][i]
-        const s = synergies.get(synergy)
-        if (s && s >= v) {
-          this.add(SynergyEffects[synergy][i])
-          break
+      SynergyArray.forEach((synergy) => {
+        for (let i = SynergyTriggers[synergy].length; i >= 0; i--) {
+          const v = SynergyTriggers[synergy][i]
+          const s = synergies.get(synergy)
+          if (s && s >= v) {
+            this.add(SynergyEffects[synergy][i])
+            break
+          }
         }
-      }
-    })
+      })
 
     board.forEach((p) => {
       if (!isOnBench(p)) {
@@ -35,6 +37,12 @@ export class Effects extends SetSchema<EffectEnum> {
         if (p.skill === Ability.PSYCHIC_SURGE) {
           this.add(EffectEnum.PSYCHIC_TERRAIN)
         }
+      }
+
+      if (p.name === Pkm.FALINKS_BRASS) {
+        const nbTroopers = values(board).filter((p) => p.name === Pkm.FALINKS_TROOPER).length
+        if (nbTroopers < 6) this.add(EffectEnum.FALINKS_BRASS)
+        else this.delete(EffectEnum.FALINKS_BRASS)
       }
     })
   }

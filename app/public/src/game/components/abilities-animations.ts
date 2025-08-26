@@ -1,4 +1,4 @@
-import { Geom } from "phaser"
+import Phaser from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AbilityAnimation,
@@ -343,7 +343,6 @@ function addAbilitySprite(
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
-  console.log("rotation " + ability, rotation)
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
@@ -1956,7 +1955,7 @@ export const AbilitiesAnimations: {
       darkHarvestGroup.add(darkHarvestSprite)
     }
 
-    const circle = new Geom.Circle(x, y, 48)
+    const circle = new Phaser.Geom.Circle(x, y, 48)
     Phaser.Actions.PlaceOnCircle(darkHarvestGroup.getChildren(), circle)
 
     scene.tweens.add({
@@ -1989,7 +1988,7 @@ export const AbilitiesAnimations: {
       decorateGroup.add(sweetSprite)
     })
 
-    const circle = new Geom.Circle(x, y, 30)
+    const circle = new Phaser.Geom.Circle(x, y, 30)
     Phaser.Actions.PlaceOnCircle(decorateGroup.getChildren(), circle)
 
     scene.tweens.add({
