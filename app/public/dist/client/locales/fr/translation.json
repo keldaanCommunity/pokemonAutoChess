@@ -1527,7 +1527,7 @@
 		"HYPER_VOICE": "Inflige [25,50,100,SP] SPECIAL à tous les ennemis sur la même rangée que la cible et a [30,LK@]% de chance de les rendre CONFUSION pendant [1,2,3] secondes.",
 		"SHADOW_CLONE": "Invoque un clone avec [50,SP]% de HP max. Ce clone vole un objet aléatoire de votre cible actuelle.",
 		"VOLT_SWITCH": "Fonce vers l'ennemi le plus éloigné et inflige [30,60,120,SP] SPECIAL à tous les Pokémon ennemis sur le chemin.",
-		"NUZZLE": "Fonce vers l'ennemi le plus éloigné et lui inflige [20,40,80,SP] SPECIAL ainsi que PARALYSIS pendant 3 secondes.",
+		"NUZZLE": "Fonce vers l'ennemi le plus éloigné et lui inflige [25,50,100,SP] SPECIAL ainsi que PARALYSIS pendant 3 secondes.",
 		"LIQUIDATION": "Inflige [20,40,80,SP] SPECIAL et retire [4,8,16,SP] DEF de la cible.",
 		"TOXIC": "Inflige POISONNED aux [1,2,3] adversaires les plus proches pendant [3,6,9,SP=0.5] secondes.",
 		"SING": "Inflige SLEEP aux [1,2,3] Pokémon ennemis de la rangée arrière pendant [2,SP] secondes.",

@@ -1302,7 +1302,7 @@
 		"HYPER_VOICE": "Infligge [25,50,100,SP] SPECIAL a tutti i Pokémon nemici nella fila del bersaglio e infliggili [30,LK@]% CONFUSION per [1,2,3] secondi",
 		"SHADOW_CLONE": "Crea un clone con il [50,SP]% degli HP massimi. Il clone ruba un oggetto a caso al bersaglio attuale.",
 		"VOLT_SWITCH": "Scatta nelle retrovie nemiche, infliggendo [25,50,100,SP] SPECIAL a tutti i Pokèmon nemici colpiti",
-		"NUZZLE": "Scatta verso il Pokèmon nemico più lontano, infliggendo [20,40,80,SP] SPECIAL e infliggili PARALYSIS per 3 secondi.",
+		"NUZZLE": "Scatta verso il Pokèmon nemico più lontano, infliggendo [25,50,100,SP] SPECIAL e infliggili PARALYSIS per 3 secondi.",
 		"LIQUIDATION": "Infligge [20,40,80,SP] SPECIAL e riduce di [4,8,16,SP] la DEF dal bersaglio.",
 		"TOXIC": "Infligge POISONNED a [1,2,3] Pokèmon nemici più vicini per [3,6,9,SP=0.5] secondi.",
 		"SING": "Infligge SLEEP a [1,2,3] Pokémon nemici nelle retrovie per [2,SP] secondi",
