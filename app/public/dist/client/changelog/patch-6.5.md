@@ -19,6 +19,7 @@
 - Nerf Hitmonlee: Attack 28 → 26
 - Nerf Doduo line: PP 80 → 85
 - Nerf Bounce (Mantyke): damage 10/20/40 → 10/20/30
+- Moltres new passive: change weather to Zenith
 
 # Changes to Synergies
 
