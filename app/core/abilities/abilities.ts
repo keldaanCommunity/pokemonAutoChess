@@ -7943,6 +7943,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const centerDamage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const lockDuration = 1500
 
     target.handleSpecialDamage(
       centerDamage,
@@ -7951,6 +7952,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
+    target.status.triggerLocked(lockDuration, pokemon)
 
     const cells = board.getAdjacentCells(
       target.positionX,
@@ -7966,6 +7968,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+        cell.value.status.triggerLocked(lockDuration, pokemon)
       }
     })
 
@@ -8031,6 +8034,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
       ) {
         const attractedEnemy = pickRandomIn(attractedEnemies)!
         attractedEnemy.moveTo(destX, destY, board)
+        attractedEnemy.status.triggerLocked(lockDuration, pokemon)
       }
     })
   }

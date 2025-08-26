@@ -1859,7 +1859,7 @@
 		"SPIKES": "Throw up to [6, SP] metal spikes within a 3 tile sector in front of the user, dealing [25,50,100,SP] SPECIAL to any enemy Pokémon in the area. The spikes remain on the battlefield, dealing 10 TRUE per second and and inflicting ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it.",
 		"SHADOW_PUNCH": "Fly towards the target with the lowest HP. The next attack deals additional [30,60,120,SP] SPECIAL.",
 		"GUNK_SHOT": "Deal [50,100,SP] SPECIAL to the target and inflict POISONNED for [2,4,SP] seconds.",
-		"MAGNET_BOMB": "Launch a magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemy Pokémon and attracting distant enemy Pokémon.",
+		"MAGNET_BOMB": "Launch a magnetic bomb dealing [20,40,80,SP] SPECIAL to target, [10,20,40,SP] SPECIAL to adjacent enemy Pokémon and attracting distant enemy Pokémon. All enemies affected are LOCKED for 1.5 second.",
 		"MUDDY_WATER": "Spurt muddy water at up to 3 enemy Pokémon in front of the user, dealing [40,80,SP] SPECIAL and applying WOUND and ARMOR_BREAK for 4 seconds.",
 		"ANCIENT_POWER": "Launch rocks at the target, dealing [40,80,120,SP] SPECIAL. Raise the user's AP by 25%.",
 		"MOON_DREAM": "Put the target to SLEEP for [3,6,9] seconds and grant [10,20,30,SP] SHIELD to the 3 allied Pokémon closest to the target.",
