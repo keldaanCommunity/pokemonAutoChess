@@ -618,13 +618,14 @@ export default class Shop {
 
   magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
     const rarityProbability = {
-      [Rarity.SPECIAL]: 0.35,
       [Rarity.COMMON]: 0.15,
-      [Rarity.UNCOMMON]: 0.3,
+      [Rarity.UNCOMMON]: 0.28,
       [Rarity.RARE]: 0.15,
-      [Rarity.EPIC]: 0.05
+      [Rarity.SPECIAL]: 0.35,
+      [Rarity.EPIC]: 0.05,
+      [Rarity.ULTRA]: 0.02
     }
-    const rarity_seed = Math.random()
+    const rarity_seed = Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
     let threshold = 0
     const finals = new Set(
       values(player.board)
@@ -635,8 +636,8 @@ export default class Shop {
     let rarity = Rarity.SPECIAL
     for (const r in rarityProbability) {
       threshold += rarityProbability[r]
+      rarity = r as Rarity
       if (rarity_seed < threshold) {
-        rarity = r as Rarity
         break
       }
     }

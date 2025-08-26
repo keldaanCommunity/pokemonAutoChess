@@ -9,7 +9,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Meltan: PP 80 → 50
+- Magnet Pull (Meltan) now will bring more rare Pokémon based on Ability Power and Luck.
 - Zygarde new passive: Zygarde cells emerge from fully dug holes every second to join Zygarde, giving it 1 max HP each. When 95 cells have been collected, transform into Zygarde Complete. Zygarde 100% HP: 300 → 350
 - Buff Pidove line: HP 50/100/170 → 60/110/180, Roost sleep duration 2 → 1 second
 - Nerf Torment (Chimchar, Lotad): Speed buff 20/40/60 → 20/35/50

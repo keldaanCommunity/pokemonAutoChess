@@ -2639,7 +2639,7 @@
 		"MALICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着诅咒的感情。",
 		"RUSTED_SWORD": "据说很久以前，英雄就是拿着这把剑驱走了灾厄。携带者提升50%的基础ATK。携带者倒下时，ATK最低的我方宝可梦获得此道具。",
 		"SCROLL_OF_WATERS": "上面写着水之奥秘。对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_RAPID)。",
-		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。",
+		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
