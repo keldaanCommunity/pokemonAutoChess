@@ -3959,9 +3959,12 @@
 		"USER_NOT_AUTHENTICATED": "Please authenticate again",
 		"USER_TIMEOUT": "You recently left a game before its end, so you have to wait 5 minutes before joining another one.",
 		"USER_IN_ANOTHER_GAME": "You are already playing in another game, go back to lobby and reconnect to this one.",
+		"USER_ALREADY_JOINED": "You are already in this lobby",
 		"ROOM_FULL": "This room is full",
 		"ROOM_EMPTY": "This room has been removed due to lack of players",
 		"ROOM_DELETED": "This room has been deleted",
+		"GAME_ALREADY_STARTED": "This game has already started",
+		"INVALID_PASSWORD": "Wrong password",
 		"UNKNOWN_ERROR": "An unexpected error occurred: {{error}}"
 	},
 	"connection_status": {

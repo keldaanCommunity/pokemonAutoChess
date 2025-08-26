@@ -610,7 +610,7 @@ export interface ICount {
 export interface IPreparationMetadata {
   name: string
   ownerName: string
-  password: string | null
+  passwordProtected: boolean
   noElo: boolean
   type: "preparation"
   gameStartedAt: string | null

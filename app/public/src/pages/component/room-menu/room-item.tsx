@@ -76,7 +76,7 @@ export default function RoomItem(props: {
         {formatMinMaxRanks(props.room.metadata?.minRank as EloRank | null, props.room.metadata?.maxRank as EloRank | null) + " "}
         {props.room.metadata?.name}
       </span>
-      {props.room.metadata?.password && (
+      {props.room.metadata?.passwordProtected && (
         <img
           alt={t("private")}
           title={t("password_protected")}
@@ -131,7 +131,7 @@ export default function RoomItem(props: {
         className={cc(
           "bubbly",
           joining ? "loading" : "",
-          props.room.metadata?.password ? "orange" : "green"
+          props.room.metadata?.passwordProtected ? "orange" : "green"
         )}
         onClick={() => {
           if (canJoin && !joining) {
