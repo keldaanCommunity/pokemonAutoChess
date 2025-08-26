@@ -245,6 +245,8 @@ export enum Pkm {
   EXEGGCUTE = "EXEGGCUTE",
   EXEGGUTOR = "EXEGGUTOR",
   EXPLOUD = "EXPLOUD",
+  FALINKS_BRASS = "FALINKS_BRASS",
+  FALINKS_TROOPER = "FALINKS_TROOPER",
   FARFETCH_D = "FARFETCH_D",
   FARIGIRAF = "FARIGIRAF",
   FEAROW = "FEAROW",
@@ -2011,7 +2013,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ALCREMIE_RUBY_SWIRL]: "0869-0042",
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: "0869-0049",
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: "0869-0056",
-  //[Pkm.FALINKS]: "0870",
+  [Pkm.FALINKS_BRASS]: "0870-0001",
+  [Pkm.FALINKS_TROOPER]: "0870-0002",
   //[Pkm.PINCURCHIN]: "0871",
   [Pkm.SNOM]: "0872",
   [Pkm.FROSMOTH]: "0873",
@@ -3178,7 +3181,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ROGGENROLA]: Pkm.ROGGENROLA,
   [Pkm.BOLDORE]: Pkm.ROGGENROLA,
   [Pkm.GIGALITH]: Pkm.ROGGENROLA,
-  [Pkm.TOGEDEMARU]: Pkm.TOGEDEMARU
+  [Pkm.TOGEDEMARU]: Pkm.TOGEDEMARU,
+  [Pkm.FALINKS_BRASS]: Pkm.FALINKS_BRASS,
+  [Pkm.FALINKS_TROOPER]: Pkm.FALINKS_TROOPER
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

@@ -31,3 +31,5 @@ export enum Synergy {
   AMORPHOUS = "AMORPHOUS",
   GOURMET = "GOURMET"
 }
+
+export const SynergyArray = Object.values(Synergy)

@@ -18,7 +18,7 @@ import {
   PkmRegionalVariants
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -147,7 +147,7 @@ function PokemonPickerTab(props: {
   }
 
   const overlapsMap = new Map(
-    Object.values(Synergy)
+    SynergyArray
       .filter((type) => type !== props.type)
       .map((type) => [
         type,

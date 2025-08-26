@@ -496,7 +496,9 @@
 		"HORN_LEECH": "Horn Leech",
 		"DRILL_RUN": "Drill Run",
 		"ROCK_ARTILLERY": "Rock Artillery",
-		"ZING_ZAP": "Zing Zap"
+		"ZING_ZAP": "Zing Zap",
+		"NO_RETREAT": "No Retreat",
+		"TACKLE": "Tackle"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1498,7 +1500,9 @@
 		"ROGGENROLA": "Roggenrola",
 		"BOLDORE": "Boldore",
 		"GIGALITH": "Gigalith",
-		"TOGEDEMARU": "Togedemaru"
+		"TOGEDEMARU": "Togedemaru",
+		"FALINKS_BRASS": "Falinks (Brass)",
+		"FALINKS_TROOPER": "Falinks (Trooper)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1975,7 +1979,9 @@
 		"HORN_LEECH": "Drains the target's energy, dealing [200,SP]% of user ATK as SPECIAL and healing for 50% of the damage dealt. 50% of the overheal is converted to SHIELD.",
 		"DRILL_RUN": "Charges through the target like a drill, dealing [15,30,SP] TRUE and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target. Can crit by default.",
 		"ROCK_ARTILLERY": "Throws [10,15,25] rocks near random enemies, each dealing [20,30,40,SP] SPECIAL",
-		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL and inflicting FLINCH for 3 seconds. If the target suffers from PARALYSIS, gain [40,SP] SHIELD."
+		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL and inflicting FLINCH for 3 seconds. If the target suffers from PARALYSIS, gain [40,SP] SHIELD.",
+		"NO_RETREAT": "Gain 1 ATK, 1 DEF, 1 SPE_DEF and 5 SPEED per Falinks on your team. Troopers tackle target for [20,SP] SPECIAL each.",
+		"TACKLE": "Deal [20,40,60,SP] SPECIAL to the target."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2797,7 +2803,8 @@
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
 		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)",
-		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP"
+		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP",
+		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each."
 	},
 	"stat": {
 		"ATK": "Attack",
