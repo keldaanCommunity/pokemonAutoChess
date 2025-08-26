@@ -3622,9 +3622,7 @@ export class NidoranF extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.POISON) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.FIELD)
+      regionSynergies.includes(Synergy.POISON)
     )
   }
 }
@@ -3650,9 +3648,7 @@ export class Nidorina extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.POISON) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.FIELD)
+      regionSynergies.includes(Synergy.POISON)
     )
   }
 }
@@ -3677,9 +3673,7 @@ export class Nidoqueen extends Pokemon {
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
-      regionSynergies.includes(Synergy.POISON) ||
-      regionSynergies.includes(Synergy.GROUND) ||
-      regionSynergies.includes(Synergy.FIELD)
+      regionSynergies.includes(Synergy.POISON)
     )
   }
 }

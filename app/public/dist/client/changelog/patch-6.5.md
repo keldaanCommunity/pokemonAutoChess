@@ -23,6 +23,7 @@
 - Moltres new passive: change weather to Zenith
 - Change Magnet Bomb (Magnemite line): all enemies affected are also locked for 1.5 second.
 - Revert Capsakid nerf from 6.3:  PP 110 → 100
+- Nidoran Female now only show up in Poison regions
 
 # Changes to Synergies
 
