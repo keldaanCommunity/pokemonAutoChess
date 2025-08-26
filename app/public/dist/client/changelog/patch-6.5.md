@@ -22,6 +22,7 @@
 - Half-revert 6.1 nerf for Nuzzle (Pichu line): damage 20/40/80 → 25/50/100
 - Moltres new passive: change weather to Zenith
 - Change Magnet Bomb (Magnemite line): all enemies affected are also locked for 1.5 second.
+- Revert Capsakid nerf from 6.3:  PP 110 → 100
 
 # Changes to Synergies
 

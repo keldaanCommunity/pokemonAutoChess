@@ -16935,7 +16935,7 @@ export class Capsakid extends Pokemon {
   speed = 49
   def = 2
   speDef = 2
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.SPICY_EXTRACT
   additional = true
@@ -16950,7 +16950,7 @@ export class Scovillain extends Pokemon {
   speed = 49
   def = 2
   speDef = 2
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.SPICY_EXTRACT
   additional = true
