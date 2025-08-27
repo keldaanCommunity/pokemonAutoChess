@@ -498,7 +498,8 @@
 		"ROCK_ARTILLERY": "Rock Artillery",
 		"ZING_ZAP": "Zing Zap",
 		"NO_RETREAT": "No Retreat",
-		"TACKLE": "Tackle"
+		"TACKLE": "Tackle",
+		"STATIC_SHOCK": "Static Shock"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1502,7 +1503,8 @@
 		"GIGALITH": "Gigalith",
 		"TOGEDEMARU": "Togedemaru",
 		"FALINKS_BRASS": "Falinks (Brass)",
-		"FALINKS_TROOPER": "Falinks (Trooper)"
+		"FALINKS_TROOPER": "Falinks (Trooper)",
+		"DEDENNE": "Dedenne"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1981,7 +1983,8 @@
 		"ROCK_ARTILLERY": "Throws [10,15,25] rocks near random enemies, each dealing [20,30,40,SP] SPECIAL",
 		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL and inflicting FLINCH for 3 seconds. If the target suffers from PARALYSIS, gain [40,SP] SHIELD.",
 		"NO_RETREAT": "Gain 1 ATK, 1 DEF, 1 SPE_DEF and 5 SPEED per Falinks on your team. Troopers tackle target for [20,SP] SPECIAL each.",
-		"TACKLE": "Deal [20,40,60,SP] SPECIAL to the target."
+		"TACKLE": "Deal [20,40,60,SP] SPECIAL to the target.",
+		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [40,SP] SHIELD per adjacent ELECTRIC Pokémon."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

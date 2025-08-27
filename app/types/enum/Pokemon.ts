@@ -1000,7 +1000,8 @@ export enum Pkm {
   ROGGENROLA = "ROGGENROLA",
   BOLDORE = "BOLDORE",
   GIGALITH = "GIGALITH",
-  TOGEDEMARU = "TOGEDEMARU"
+  TOGEDEMARU = "TOGEDEMARU",
+  DEDENNE = "DEDENNE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1821,7 +1822,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.AURORUS]: "0699",
   [Pkm.SYLVEON]: "0700",
   [Pkm.HAWLUCHA]: "0701",
-  //[Pkm.DEDENNE]: "0702",
+  [Pkm.DEDENNE]: "0702",
   [Pkm.CARBINK]: "0703",
   [Pkm.GOOMY]: "0704",
   [Pkm.SLIGOO]: "0705",
@@ -3183,7 +3184,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GIGALITH]: Pkm.ROGGENROLA,
   [Pkm.TOGEDEMARU]: Pkm.TOGEDEMARU,
   [Pkm.FALINKS_BRASS]: Pkm.FALINKS_BRASS,
-  [Pkm.FALINKS_TROOPER]: Pkm.FALINKS_TROOPER
+  [Pkm.FALINKS_TROOPER]: Pkm.FALINKS_TROOPER,
+  [Pkm.DEDENNE]: Pkm.DEDENNE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

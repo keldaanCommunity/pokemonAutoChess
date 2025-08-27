@@ -6888,5 +6888,14 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_MELEE,
     hitSprite: HitSprite.STEEL_HIT
+  },
+  [Pkm.DEDENNE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    hitSprite: HitSprite.FAIRY_HIT,
+    hurt: AnimationType.Charge,
+    eat: AnimationType.Sleep
   }
 }
