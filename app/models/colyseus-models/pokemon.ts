@@ -11796,7 +11796,7 @@ export class Maractus extends Pokemon {
 }
 
 export class Plusle extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 140
@@ -11810,7 +11810,7 @@ export class Plusle extends Pokemon {
 }
 
 export class Minun extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 140
@@ -16546,36 +16546,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -18318,7 +18318,7 @@ export class Togedemaru extends Pokemon {
 }
 
 export class Dedenne extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FAIRY])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200

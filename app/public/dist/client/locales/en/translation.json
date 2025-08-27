@@ -1984,7 +1984,7 @@
 		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL and inflicting FLINCH for 3 seconds. If the target suffers from PARALYSIS, gain [40,SP] SHIELD.",
 		"NO_RETREAT": "Gain 1 ATK, 1 DEF, 1 SPE_DEF and 5 SPEED per Falinks on your team. Troopers tackle target for [20,SP] SPECIAL each.",
 		"TACKLE": "Deal [20,40,60,SP] SPECIAL to the target.",
-		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [40,SP] SHIELD per adjacent ELECTRIC Pokémon."
+		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [30,SP] SHIELD per adjacent ELECTRIC Pokémon, heals [30,SP] HP per adjacent FAIRY Pokémon."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

@@ -13223,18 +13223,29 @@ export class StaticShockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 70
+    const heal = 30
+    const shield = 30
+
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     const adjacentCells = board.getAdjacentCells(
       pokemon.positionX,
       pokemon.positionY
     )
+    const fairyCount = adjacentCells.filter(
+      (cell) => cell.value && cell.value.types.has(Synergy.FAIRY)
+    ).length
+
+    if (fairyCount > 0) {
+      pokemon.handleHeal(heal * fairyCount, pokemon, 1, crit)
+    }
+
     const electricCount = adjacentCells.filter(
       (cell) => cell.value && cell.value.types.has(Synergy.ELECTRIC)
     ).length
 
     if (electricCount > 0) {
-      pokemon.addShield(40 * electricCount, pokemon, 1, crit)
+      pokemon.addShield(shield * electricCount, pokemon, 1, crit)
     }
   }
 }

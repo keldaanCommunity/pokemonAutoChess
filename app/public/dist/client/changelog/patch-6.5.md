@@ -25,6 +25,7 @@
 - Change Magnet Bomb (Magnemite line): all enemies affected are also locked for 1.5 second.
 - Revert Capsakid nerf from 6.3:  PP 110 → 100
 - Nidoran Female now only show up in Poison regions
+- Change Plusle/Minum types: Electric/Fairy -> Electric/Field
 
 # Changes to Synergies
 
