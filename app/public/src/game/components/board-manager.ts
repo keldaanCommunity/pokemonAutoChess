@@ -444,8 +444,8 @@ export default class BoardManager {
 
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
-      fontSize: "25px",
-      fontFamily: "Verdana",
+      fontSize: "24px",
+      fontFamily: "Jost",
       color: "#fff",
       align: "center",
       strokeThickness: 2,
