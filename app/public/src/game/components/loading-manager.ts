@@ -140,16 +140,16 @@ export default class LoadingManager {
     preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
     preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
 
-    scene.load.image("rain", "/assets/ui/rain.png")
-    scene.load.image("sand", "/assets/ui/sand.png")
-    scene.load.image("wind", "/assets/ui/wind.png")
-    scene.load.image("smog", "/assets/ui/smog.png")
-    scene.load.image("sun", "/assets/ui/sun.png")
-    scene.load.image("clouds", "/assets/ui/clouds.png")
+    scene.load.image("rain", "/assets/environment/rain.png")
+    scene.load.image("sand", "/assets/environment/sand.png")
+    scene.load.image("wind", "/assets/environment/wind.png")
+    scene.load.image("smog", "/assets/environment/smog.png")
+    scene.load.image("sun", "/assets/environment/sun.png")
+    scene.load.image("clouds", "/assets/environment/clouds.png")
     scene.load.multiatlas(
       "snowflakes",
-      "/assets/ui/snowflakes.json",
-      "/assets/ui/"
+      "/assets/environment/snowflakes.json",
+      "/assets/environment/"
     )
 
     scene.load.image("money", "/assets/icons/money.svg")
