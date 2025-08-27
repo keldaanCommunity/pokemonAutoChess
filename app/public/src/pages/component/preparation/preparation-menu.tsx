@@ -16,7 +16,6 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { formatMinMaxRanks } from "../../../../../utils/elo"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
-import { pickRandomIn } from "../../../../../utils/random"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
@@ -97,7 +96,7 @@ export default function PreparationMenu() {
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
   )
 
-  function makePrivate() {
+  function togglePrivate() {
     if (password === null || password === undefined) {
       // generate a random password made of 4 characters
       const newPassword = Math.random()
@@ -207,7 +206,7 @@ export default function PreparationMenu() {
     (isOwner || isAdmin) && (
       <button
         className="bubbly blue"
-        onClick={makePrivate}
+        onClick={togglePrivate}
         title={
           password ? t("make_room_public_hint") : t("make_room_private_hint")
         }

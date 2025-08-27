@@ -13,9 +13,12 @@ export enum CloseCodes {
   USER_TIMEOUT = 4007,
   USER_DELETED = 4008,
   USER_IN_ANOTHER_GAME = 4009,
-  ROOM_FULL = 4010,
-  ROOM_EMPTY = 4011,
-  ROOM_DELETED = 4012
+  USER_ALREADY_JOINED = 4010,
+  ROOM_FULL = 4020,
+  ROOM_EMPTY = 4021,
+  ROOM_DELETED = 4022,
+  INVALID_PASSWORD = 4023,
+  GAME_ALREADY_STARTED = 4030
 }
 
 export const CloseCodesMessages: { [code in CloseCodes]?: string } = {
@@ -29,5 +32,8 @@ export const CloseCodesMessages: { [code in CloseCodes]?: string } = {
   [CloseCodes.ROOM_FULL]: "ROOM_FULL",
   [CloseCodes.ROOM_EMPTY]: "ROOM_EMPTY",
   [CloseCodes.ROOM_DELETED]: "ROOM_DELETED",
-  [CloseCodes.USER_IN_ANOTHER_GAME]: "USER_IN_ANOTHER_GAME"
+  [CloseCodes.USER_IN_ANOTHER_GAME]: "USER_IN_ANOTHER_GAME",
+  [CloseCodes.USER_ALREADY_JOINED]: "USER_ALREADY_JOINED",
+  [CloseCodes.GAME_ALREADY_STARTED]: "GAME_ALREADY_STARTED",
+  [CloseCodes.INVALID_PASSWORD]: "INVALID_PASSWORD"
 }

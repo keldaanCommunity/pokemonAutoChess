@@ -71,7 +71,7 @@ export default function WikiWeather() {
 }
 
 const pokemonsInfluencingWeather = new Map([
-  [Weather.SUN, [Pkm.HO_OH, Pkm.SOLROCK, Pkm.CASTFORM_SUN]],
+  [Weather.SUN, [Pkm.HO_OH, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]],
   [Weather.NIGHT, [Pkm.LUNATONE, Pkm.SHADOW_LUGIA]],
   [Weather.WINDY, [Pkm.LUGIA, Pkm.LANDORUS, Pkm.THUNDURUS, Pkm.TORNADUS, Pkm.ENAMORUS]],
   [Weather.MISTY, [Pkm.ENAMORUS, Pkm.XERNEAS]],

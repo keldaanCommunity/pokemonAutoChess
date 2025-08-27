@@ -1,12 +1,12 @@
-import { IPokemonData } from "../../types/interfaces/PokemonData"
-import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
-import { mapToObj } from "../../utils/map"
-import { values } from "../../utils/schemas"
 import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
 import { Ability } from "../../types/enum/Ability"
 import { Rarity } from "../../types/enum/Game"
 import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
+import { Synergy } from "../../types/enum/Synergy"
+import { IPokemonData } from "../../types/interfaces/PokemonData"
+import { mapToObj } from "../../utils/map"
+import { values } from "../../utils/schemas"
 
 console.time("precompute-pokemon-data")
 

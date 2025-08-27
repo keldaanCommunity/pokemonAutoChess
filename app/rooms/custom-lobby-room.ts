@@ -442,7 +442,7 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     }
   }
 
-  async onJoin(client: Client, options: any, auth: any) {
+  async onJoin(client: Client) {
     const user = await UserMetadata.findOne({ uid: client.auth.uid })
     try {
       if (user?.banned) {
@@ -472,9 +472,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
         throw new Error("consented leave")
       }
       await this.allowReconnection(client, 30)
-      // if reconnected, dispatch the same event as if the user had joined to send them the initial data
-      const user = this.users.get(client.auth.uid) ?? null
-      this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
+      // if reconnected, trigger the onJoin logic again to send them the initial data
+      this.onJoin(client)
     } catch (error) {
       this.dispatcher.dispatch(new OnLeaveCommand(), { client })
     }

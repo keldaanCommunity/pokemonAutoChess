@@ -28,10 +28,11 @@ import {
   CraftableNonSynergyItems,
   Item,
   ItemComponents,
+  SynergyGems,
   SynergyStones
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { Synergy } from "../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { clamp, min } from "../utils/number"
 import { getOrientation } from "../utils/orientation"
 import {
@@ -253,6 +254,7 @@ export class MiniGame {
   initialize(state: GameState, room: GameRoom) {
     const { players, stageLevel } = state
     this.timeElapsed = 0
+    this.rotationDirection = 1
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -514,6 +516,10 @@ export class MiniGame {
       )
     }
 
+    if (encounter === TownEncounters.SABLEYE) {
+      items.push(...pickNRandomIn(SynergyGems, 4))
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
       let item,
         count,
@@ -540,7 +546,7 @@ export class MiniGame {
   pickRandomSynergySymbols(stageLevel: number, room: GameRoom) {
     if (stageLevel === 0) {
       const symbols = pickNRandomIn(
-        Object.values(Synergy),
+        SynergyArray,
         3 * ((this.avatars?.size ?? 8) + 1)
       )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)

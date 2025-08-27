@@ -46,9 +46,6 @@ import AttackingState from "./attacking-state"
 import type { Board } from "./board"
 import {
   Effect as EffectClass,
-  FireHitEffect,
-  GrowGroundEffect,
-  MonsterKillEffect,
   OnAttackEffect,
   OnDamageReceivedEffect,
   OnHitEffect,
@@ -58,6 +55,10 @@ import {
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
+import {
+  FireHitEffect,
+  MonsterKillEffect
+} from "./effects/synergies"
 import { IdleState } from "./idle-state"
 import { ItemStats } from "./items"
 import MovingState from "./moving-state"
@@ -908,7 +909,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
-        poisonChance -= nbSmellyClays * 0.1
+        poisonChance -= nbSmellyClays * 0.15
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
         target.status.triggerPoison(4000, target, this)
@@ -1556,14 +1557,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     })
 
-    const resetGroundStacks = (effect: GrowGroundEffect) => {
-      const removalAmount = -effect.synergyLevel * effect.count
-      this.addDefense(removalAmount, this, 0, false)
-      this.addSpecialDefense(removalAmount, this, 0, false)
-      this.addAttack(removalAmount, this, 0, false)
-      effect.count = 0
-    }
-
     const resetMonsterStacks = (effect: MonsterKillEffect) => {
       const attackBoost = [3, 6, 10, 10][effect.synergyLevel] ?? 10
       const apBoost = [10, 20, 30, 30][effect.synergyLevel] ?? 30
@@ -1595,9 +1588,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     this.effectsSet.forEach((effect) => {
-      if (effect instanceof GrowGroundEffect) {
-        resetGroundStacks(effect)
-      } else if (effect instanceof MonsterKillEffect) {
+      if (effect instanceof MonsterKillEffect) {
         resetMonsterStacks(effect)
       } else if (effect instanceof FireHitEffect) {
         resetFireStacks(effect)
@@ -1760,8 +1751,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetX?: number
     targetY?: number
     delay?: number
-  }
-  ) {
+  }) {
     const room = this.simulation.room
     const players = room.state.players
     for (const client of room.clients) {

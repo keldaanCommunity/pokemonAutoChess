@@ -31,11 +31,13 @@ import PreparationState from "./states/preparation-state"
 export default class PreparationRoom extends Room<PreparationState> {
   dispatcher: Dispatcher<this>
   clients!: ClientArray<undefined, UserRecord>
+  private roomPassword: string | null
 
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
     this.maxClients = MAX_PLAYERS_PER_GAME
+    this.roomPassword = null
   }
 
   async setName(name: string) {
@@ -46,11 +48,13 @@ export default class PreparationRoom extends Room<PreparationState> {
     updateLobby(this)
   }
 
-  async setPassword(password: string) {
+  async setPassword(password: string | null) {
+    const hasPassword = password && password.trim().length > 0
     await this.setMetadata(<IPreparationMetadata>{
-      password: password,
+      passwordProtected: hasPassword,
       type: "preparation"
     })
+    this.roomPassword = hasPassword ? password : null
     updateLobby(this)
   }
 
@@ -94,6 +98,7 @@ export default class PreparationRoom extends Room<PreparationState> {
 
     // logger.debug(defaultRoomName);
     this.state = new PreparationState(options)
+    this.setPassword(options.password ?? null)
     this.setMetadata(<IPreparationMetadata>{
       name: options.roomName.slice(0, 30),
       ownerName: options.gameMode === GameMode.CLASSIC ? null : options.ownerId,
@@ -107,7 +112,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null,
       gameStartedAt: null,
-      password: options.password ?? null,
+      passwordProtected: !!(options.password && options.password.trim().length > 0),
       type: "preparation"
     })
     this.maxClients = 8
@@ -340,28 +345,41 @@ export default class PreparationRoom extends Room<PreparationState> {
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       const isAdmin = userProfile?.role === Role.ADMIN
 
+      // Check password protection - admins and moderators bypass password protection
+      if (this.state.password && userProfile?.role === Role.BASIC) {
+        if (!options.password || options.password !== this.roomPassword) {
+          console.log("password entered", options.password, "room password", this.roomPassword)
+          client.leave(CloseCodes.INVALID_PASSWORD)
+          return
+        }
+      }
+
       const isAlreadyInRoom = this.state.users.has(user.uid)
       const numberOfHumanPlayers = values(this.state.users).filter(
         (u) => !u.isBot
       ).length
 
       if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
-        throw "Room is full"
+        client.leave(CloseCodes.ROOM_FULL)
+        return
       } else if (isAlreadyInRoom) {
-        throw "Already joined"
+        client.leave(CloseCodes.USER_ALREADY_JOINED)
+        return
       } else if (this.state.gameStartedAt != null) {
-        throw "Game already started"
-      } else if (!user.displayName) {
-        throw "No display name"
+        client.leave(CloseCodes.GAME_ALREADY_STARTED)
+        return
       } else if (userProfile?.banned) {
-        throw "User banned"
+        client.leave(CloseCodes.USER_BANNED)
+        return
       } else if (this.metadata.blacklist.includes(user.uid)) {
-        throw "User previously kicked"
+        client.leave(CloseCodes.USER_KICKED)
+        return
       } else {
         return user
       }
     } catch (error) {
       logger.error(error)
+      client.leave(CloseCodes.ABNORMAL_CLOSURE)
     }
   }
 

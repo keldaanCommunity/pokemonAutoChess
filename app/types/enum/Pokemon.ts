@@ -245,6 +245,8 @@ export enum Pkm {
   EXEGGCUTE = "EXEGGCUTE",
   EXEGGUTOR = "EXEGGUTOR",
   EXPLOUD = "EXPLOUD",
+  FALINKS_BRASS = "FALINKS_BRASS",
+  FALINKS_TROOPER = "FALINKS_TROOPER",
   FARFETCH_D = "FARFETCH_D",
   FARIGIRAF = "FARIGIRAF",
   FEAROW = "FEAROW",
@@ -994,7 +996,12 @@ export enum Pkm {
   EELEKTRIK = "EELEKTRIK",
   EELEKTROSS = "EELEKTROSS",
   ZACIAN = "ZACIAN",
-  ZACIAN_CROWNED = "ZACIAN_CROWNED"
+  ZACIAN_CROWNED = "ZACIAN_CROWNED",
+  ROGGENROLA = "ROGGENROLA",
+  BOLDORE = "BOLDORE",
+  GIGALITH = "GIGALITH",
+  TOGEDEMARU = "TOGEDEMARU",
+  DEDENNE = "DEDENNE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1398,7 +1405,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WAILORD]: "0321",
   [Pkm.NUMEL]: "0322",
   [Pkm.CAMERUPT]: "0323",
- //[Pkm.MEGA_CAMERUPT]: "0323-0001",
+  //[Pkm.MEGA_CAMERUPT]: "0323-0001",
   [Pkm.TORKOAL]: "0324",
   [Pkm.SPOINK]: "0325",
   [Pkm.GRUMPIG]: "0326",
@@ -1626,9 +1633,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.UNFEZANT]: "0521",
   //[Pkm.BLITZLE]: "0522",
   //[Pkm.ZEBSTRIKA]: "0523",
-  //[Pkm.ROGGENROLA]: "0524",
-  //[Pkm.BOLDORE]: "0525",
-  //[Pkm.GIGALITH]: "0526",
+  [Pkm.ROGGENROLA]: "0524",
+  [Pkm.BOLDORE]: "0525",
+  [Pkm.GIGALITH]: "0526",
   [Pkm.WOOBAT]: "0527",
   [Pkm.SWOOBAT]: "0528",
   [Pkm.DRILBUR]: "0529",
@@ -1815,7 +1822,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.AURORUS]: "0699",
   [Pkm.SYLVEON]: "0700",
   [Pkm.HAWLUCHA]: "0701",
-  //[Pkm.DEDENNE]: "0702",
+  [Pkm.DEDENNE]: "0702",
   [Pkm.CARBINK]: "0703",
   [Pkm.GOOMY]: "0704",
   [Pkm.SLIGOO]: "0705",
@@ -1902,7 +1909,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MINIOR_KERNEL_GREEN]: "0774-0004",
   //[Pkm.KOMALA]: "0775",
   [Pkm.TURTONATOR]: "0776",
-  //[Pkm.TOGEDAMARU]: "0777",
+  [Pkm.TOGEDEMARU]: "0777",
   [Pkm.MIMIKYU]: "0778",
   [Pkm.MIMIKYU_BUSTED]: "0778-0001",
   [Pkm.BRUXISH]: "0779",
@@ -2007,7 +2014,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ALCREMIE_RUBY_SWIRL]: "0869-0042",
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: "0869-0049",
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: "0869-0056",
-  //[Pkm.FALINKS]: "0870",
+  [Pkm.FALINKS_BRASS]: "0870-0001",
+  [Pkm.FALINKS_TROOPER]: "0870-0002",
   //[Pkm.PINCURCHIN]: "0871",
   [Pkm.SNOM]: "0872",
   [Pkm.FROSMOTH]: "0873",
@@ -3170,7 +3178,14 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TAILLOW]: Pkm.TAILLOW,
   [Pkm.SWELLOW]: Pkm.TAILLOW,
   [Pkm.DRILBUR]: Pkm.DRILBUR,
-  [Pkm.EXCADRILL]: Pkm.DRILBUR
+  [Pkm.EXCADRILL]: Pkm.DRILBUR,
+  [Pkm.ROGGENROLA]: Pkm.ROGGENROLA,
+  [Pkm.BOLDORE]: Pkm.ROGGENROLA,
+  [Pkm.GIGALITH]: Pkm.ROGGENROLA,
+  [Pkm.TOGEDEMARU]: Pkm.TOGEDEMARU,
+  [Pkm.FALINKS_BRASS]: Pkm.FALINKS_BRASS,
+  [Pkm.FALINKS_TROOPER]: Pkm.FALINKS_TROOPER,
+  [Pkm.DEDENNE]: Pkm.DEDENNE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

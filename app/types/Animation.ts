@@ -398,6 +398,8 @@ export interface AbilityAnimationOptions {
   destroyOnComplete?: boolean
   animOptions?: Omit<Phaser.Types.Animations.PlayAnimationConfig, "key">
   delay?: number
+  flipX?: boolean
+  flipY?: boolean
 }
 
 export type AbilityAnimationArgs = {

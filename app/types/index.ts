@@ -86,6 +86,7 @@ export enum Transfer {
   SHOP = "SHOP",
   ITEM = "ITEM",
   COOK = "COOK",
+  DIG = "DIG",
   GAME_START = "GAME_START",
   GAME_START_REQUEST = "GAME_START_REQUEST",
   GAME_END = "GAME_END",
@@ -240,6 +241,8 @@ export interface IPokemonAvatar {
   x: number
   y: number
   action: PokemonActionState
+  portalId: string
+  itemId: string
 }
 
 export interface IFloatingItem {
@@ -260,6 +263,7 @@ export interface ISynergySymbol {
   x: number
   y: number
   synergy: Synergy
+  portalId: string
 }
 
 export interface IPlayer {
@@ -606,7 +610,7 @@ export interface ICount {
 export interface IPreparationMetadata {
   name: string
   ownerName: string
-  password: string | null
+  passwordProtected: boolean
   noElo: boolean
   type: "preparation"
   gameStartedAt: string | null
@@ -706,6 +710,7 @@ export enum Title {
   PRIMAL = "PRIMAL",
   DENTIST = "DENTIST",
   FISHERMAN = "FISHERMAN",
+  MOLE = "MOLE",
   SIREN = "SIREN",
   FEARSOME = "FEARSOME",
   GOLDEN = "GOLDEN",

@@ -18,8 +18,9 @@ export const DEPTH = {
   INANIMATE_OBJECTS: 19,
 
   // 21-30: pokemon level
-  POKEMON: 20,
-  POKEMON_ITEM: 21,
+  POKEMON_TROOPER: 20,
+  POKEMON: 21,
+  POKEMON_ITEM: 22,
   BOARD_EFFECT_POKEMON_LEVEL: 23,
   PROJECTILE: 24,
   HIT_FX_ABOVE_POKEMON: 25,
@@ -38,7 +39,7 @@ export const DEPTH = {
   // 51-60: Ingame texts/indicators
   DAMAGE_PORTRAIT: 51,
   DAMAGE_TEXT: 52,
-
+  ITEM_FOUND: 53,
   TEXT_MINOR: 54,
   TEXT: 55,
   TEXT_MAJOR: 56,

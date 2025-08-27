@@ -101,8 +101,10 @@ export default class Status extends Schema implements IStatus {
     this.paralysisCooldown = 0
     this.charmCooldown = 0
     this.flinchCooldown = 0
-    this.armorReductionCooldown = 0
-    this.curseCooldown = 0
+    this.armorReductionCooldown = 0    
+    if(this.curse && this.curseCooldown > 0){
+      this.curseCooldown += 1000 // do not clear curseCooldown on purpose
+    }
     this.curse = false
     this.possessedCooldown = 0
     this.lockedCooldown = 0
@@ -255,7 +257,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
-      this.triggerCurse(8000, pokemon)
+      this.triggerCurse(8100, pokemon) // +100 ms to trigger just after tidal wave
     }
   }
 
@@ -917,7 +919,10 @@ export default class Status extends Schema implements IStatus {
         this.curseCooldown = 0 // apply curse immediately if already cursed
       } else {
         this.curse = true
-        timer = this.applyAquaticReduction(timer, pokemon, true) // increase instead of decrease
+        if(this.curseCooldown > 0){ // if status has been cleared, take the remaining time
+          timer = Math.min(this.curseCooldown, timer)
+        }
+        
         this.curseCooldown = timer
       }
     }
@@ -1089,16 +1094,16 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  private applyAquaticReduction(duration: number, pkm: IPokemonEntity, increaseInstead = false): number {
+  private applyAquaticReduction(duration: number, pkm: IPokemonEntity): number {
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(duration * (increaseInstead ? 1.3 : 0.7))
+      duration = Math.round(duration * 0.7)
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * (increaseInstead ? 1.6 : 0.4))
+      duration = Math.round(duration * 0.4)
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(duration * (increaseInstead ? 1.9 : 0.1))
+      duration = Math.round(duration * 0.1)
     }
     return duration
   }

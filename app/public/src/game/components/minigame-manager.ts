@@ -4,6 +4,7 @@ import {
   TownEncounterSellPrice,
   TownEncounters
 } from "../../../../core/town-encounters"
+import GameState from "../../../../rooms/states/game-state"
 import {
   Emotion,
   IFloatingItem,
@@ -49,8 +50,7 @@ export default class MinigameManager {
     scene: GameScene,
     animationManager: AnimationManager,
     uid: string,
-    avatars: Map<string, IPokemonAvatar>,
-    items: Map<string, IFloatingItem>
+    existingState: GameState
   ) {
     this.pokemons = new Map<string, PokemonAvatar>()
     this.items = new Map<string, FloatingItemContainer>()
@@ -60,8 +60,14 @@ export default class MinigameManager {
     this.scene = scene
     this.display = false
     this.animationManager = animationManager
-    this.buildPokemons(avatars)
-    this.buildItems(items)
+    this.buildPokemons(existingState.avatars)
+    this.buildItems(existingState.floatingItems)
+    this.buildPortals(
+      existingState.portals,
+      existingState.symbols,
+      existingState.avatars
+    )
+
     this.scene.room?.onMessage(
       Transfer.NPC_DIALOG,
       (message: { npc: Pkm; dialog: string }) => this.onNpcDialog(message)
@@ -103,13 +109,39 @@ export default class MinigameManager {
 
   buildPokemons(avatars: Map<string, IPokemonAvatar>) {
     avatars.forEach((pkm) => {
-      this.addPokemon(pkm)
+      if (pkm.portalId === "") {
+        // we dont show pokemon if it has already taken a portal
+        this.addPokemon(pkm)
+      }
     })
   }
 
   buildItems(items: Map<string, IFloatingItem>) {
     items.forEach((item) => {
       this.addItem(item)
+    })
+  }
+
+  buildPortals(
+    portals: Map<string, IPortal>,
+    symbols: Map<string, ISynergySymbol>,
+    avatars: Map<string, IPokemonAvatar>
+  ) {
+    const portalsTaken = new Set<string>()
+    avatars.forEach((avatar) => {
+      if (avatar.portalId) {
+        portalsTaken.add(avatar.portalId)
+      }
+    })
+    portals.forEach((portal) => {
+      if (portalsTaken.has(portal.id) === false) {
+        this.addPortal(portal)
+      }
+    })
+    symbols.forEach((symbol) => {
+      if (portalsTaken.has(symbol.portalId) === false) {
+        this.addSymbol(symbol)
+      }
     })
   }
 
@@ -227,7 +259,8 @@ export default class MinigameManager {
       symbol.id,
       transformMiniGameXCoordinate(symbol.x),
       transformMiniGameYCoordinate(symbol.y),
-      symbol.synergy
+      symbol.synergy,
+      symbol.portalId
     )
     this.symbols.set(s.id, s)
   }
@@ -339,21 +372,6 @@ export default class MinigameManager {
     } else {
       logger.warn("cant find pokemon for id", pokemon.id)
     }
-  }
-
-  addKecleon() {
-    this.villagers.push(
-      new PokemonSpecial({
-        scene: this.scene,
-        x: 1000,
-        y: 408,
-        name: Pkm.KECLEON,
-        orientation: Orientation.DOWN,
-        animation: PokemonActionState.IDLE,
-        dialog: t("npc_dialog.tell_price"),
-        dialogTitle: t("npc_dialog.welcome")
-      })
-    )
   }
 
   addVillagers(encounter: TownEncounter | null, podium: ILeaderboardInfo[]) {

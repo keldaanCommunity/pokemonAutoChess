@@ -69,6 +69,7 @@ export default function ImportBotModal(props: {
         <details>
           <summary>Bot code</summary>
           <textarea
+            readOnly={true}
             rows={10}
             value={textArea}
             onChange={(e) => handleTextAreaChange(e.target.value)}

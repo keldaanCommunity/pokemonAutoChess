@@ -38,13 +38,13 @@ export enum PokemonActionState {
 
 export enum Orientation {
   DOWN = "0",
-  DOWNLEFT = "7",
-  LEFT = "6",
-  UPLEFT = "5",
-  UP = "4",
-  UPRIGHT = "3",
+  DOWNRIGHT = "1",
   RIGHT = "2",
-  DOWNRIGHT = "1"
+  UPRIGHT = "3",
+  UP = "4",
+  UPLEFT = "5",
+  LEFT = "6",
+  DOWNLEFT = "7"
 }
 
 export const OrientationFlip: { [key in Orientation]: Orientation } = {

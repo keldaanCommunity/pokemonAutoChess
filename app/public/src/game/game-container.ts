@@ -502,7 +502,7 @@ class GameContainer {
     $player.synergies.onChange(() => {
       if (player.id === this.spectatedPlayerId) {
         this.gameScene?.board?.showLightCell()
-        this.gameScene?.board?.showBerryTrees()
+        this.gameScene?.board?.renderBerryTrees()
       }
     })
   }
