@@ -46,14 +46,14 @@ export default function RoomMenu() {
   const requestJoiningExistingRoom = block(async function join(
     selectedRoom: RoomAvailable<IPreparationMetadata>
   ) {
-    const password = selectedRoom.metadata?.password
+    const passwordProtected = selectedRoom.metadata?.passwordProtected
 
     if (lobby) {
-      if (password && user?.role === Role.BASIC) {
-        const password = prompt(t("room_is_private"))
-        if (password && selectedRoom.metadata?.password != password)
-          return alert(t("wrong_password"))
-        else if (!password) return
+      let password: string | undefined
+      if (passwordProtected && user?.role !== Role.ADMIN && user?.role !== Role.MODERATOR) {
+        const inputPassword = prompt(t("room_is_private"))
+        if (!inputPassword) return
+        password = inputPassword
       }
 
       await joinExistingPreparationRoom(
@@ -61,7 +61,8 @@ export default function RoomMenu() {
         client,
         lobby,
         dispatch,
-        navigate
+        navigate,
+        password
       )
     }
   })

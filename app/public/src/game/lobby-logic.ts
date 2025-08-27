@@ -299,14 +299,16 @@ export async function joinExistingPreparationRoom(
   client: Client,
   lobby: Room<ICustomLobbyState> | undefined,
   dispatch: AppDispatch,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  password?: string
 ) {
   try {
     const token = await firebase.auth().currentUser?.getIdToken()
     if (token) {
       dispatch(resetPreparation())
       const room: Room<PreparationState> = await client.joinById(roomId, {
-        idToken: token
+        idToken: token,
+        password
       })
       if (room.name !== "preparation") {
         room.connection.isOpen && room.leave(false)
