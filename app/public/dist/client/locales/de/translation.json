@@ -2128,7 +2128,7 @@
 		"MAX_MELTDOWN": "Handle 120 % der ATK als TRUE",
 		"POISONOUS": "Angriffe haben 30% Chance auf POISONNED",
 		"VENOMOUS": "Angriffe haben 60% Chance auf POISONNED. Max. Stapel von POISONNED +1",
-		"TOXIC": "Angriffe haben 100%Chance auf POISONNED. Max. Stapel von POISONNED +2",
+		"TOXIC": "Angriffe haben 100% Chance auf POISONNED. Max. Stapel von POISONNED +2",
 		"DRAGON_ENERGY": "Der zweite Typ der Drachen-Pokémon zählt doppelt (nicht die dritte)",
 		"DRAGON_SCALES": "Drachen-Pokémon erhalten 5 SHIELD für jeden STAR aller deiner DRAGON Einheiten an Bord",
 		"DRAGON_DANCE": "Drachen-Pokémon erhalten 1 SPEED und 1 AP für jeden STAR aller deiner DRAGON Einheiten an Bord",
@@ -2543,6 +2543,18 @@
 		"MIST_STONE": "Zählt +3 für MISTY. Unter MISTY erhält dein Team +3 SPE_DEF.",
 		"BLOOD_STONE": "zählt +3 für BLOODMOON. Unter BLOODMOON erhält dein Team 30% der eingehenden Heilung als SHIELD, wenn es WOUND hat und heilt sich um 20% des ausgeteilten Schadens, wenn ein Ziel WOUND hat.",
 		"SMELLY_CLAY": "Zählt +3 für SMOG. Unter SMOG erhält dein Team +5% Genauigkeit und hat eine 15% verringerte Chance, POISONNED zu erhalten.",
+		"FIRE_GEM": "+1 zu FIRE Synergie",
+		"NORMAL_GEM": "+1 zu NORMAL Synergie",
+		"ROCK_GEM": "+1 zu ROCK Synergie",
+		"WATER_GEM": "+1 zu WATER Synergie",
+		"POISON_GEM": "+1 zu POISON Synergie",
+		"FLYING_GEM": "+1 to FLYING Synergie",
+		"ICE_GEM": "+1 zu ICE Synergie",
+		"GHOST_GEM": "+1 zu GHOST Synergie",
+		"DRAGON_GEM": "+1 zu DRAGON Synergie",
+		"BUG_GEM": "+1 zu BUG Synergie",
+		"DARK_GEM": "+1 zu DARK Synergie",
+		"STEEL_GEM": "+1 zu STEEL Synergie",
 		"FIRE_SHARD": "Opfere 3 Spieler HP, um einem FIRE Pokémon dauerhaft +3 ATK und +3 SPEED zu geben. Wird bei Gabe sofort verbraucht.",
 		"TEAL_MASK": "Diese geschnitzte Holzmaske ist mit Kristallen geschmückt, gewährt 50 SHIELD und ermöglicht es Ogerpon, im Kampf den Typ FLORA zu tragen.",
 		"WELLSPRING_MASK": "Diese geschnitzte Holzmaske ist mit Kristallen geschmückt, gewährt 50 SHIELD und ermöglicht es Ogerpon, im Kampf den AQUATIC Typ zu tragen.",
@@ -2614,6 +2626,9 @@
 		"EGG_FOR_SELL": "Ein Ei, welches bei Chansey's Daycare verkauft wurde",
 		"AMULET_COIN": "+1 Gold jedes Mal, wenn der Besitzer einen Gegner niederschlägt.\nReduziert die maximale Zinsen-Wert um 10 GOLD.",
 		"GIMMIGHOUL_COIN": "+3 Gold wenn erhalten.\nErhöhe den maximalen Zinsen-Wert um 10 GOLD.",
+		"COIN": "Eine alte rostige Münze. +1 GOLD beim ausgraben.",
+		"NUGGET": "Ein kleines Goldnugget. +3 GOLD beim ausgraben.",
+		"BIG_NUGGET": "Ein großes Goldnugget. +10 GOLD beim ausgraben.",
 		"EXCHANGE_TICKET": "Tausche ein Item-Part oder ein fertiggestelltes Item auf der Bank für ein zufälliges aus. Einmalige Nutzung.",
 		"TREASURE_BOX": "Du wunderst dich was drinsteckt.",
 		"AUSPICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Glückverheißende Wünsche leben in ihm.",
@@ -3104,7 +3119,8 @@
 		"ETERNAL": "Treffe Arceus auf Ebene 40",
 		"RUNNER": "Erreiche 100 Punkte auf der Siegesstraße",
 		"FINISHER": "Schließe eine Siegesstraßen Rennen ab",
-		"VICTORIOUS": "Schließe ein Siegesstraßen Rennen als Erster ab"
+		"VICTORIOUS": "Schließe ein Siegesstraßen Rennen als Erster ab",
+		"MOLE": "Grabe dein gesamtes Feld komplett aus."
 	},
 	"weather": {
 		"NEUTRAL": "Bewölkt",
@@ -3892,6 +3908,7 @@
 		"SPINDA": "Spinda wechselt zufällig die Richtung der Rotation des Karusells.",
 		"REGIROCK": "Regirock gibt allen Spielern 15 zusätzliche HP",
 		"MUNCHLAX": "Mampfaxo gibt allen Spielern PICNIC_SET",
+		"SABLEYE": "Zobiris bietet Juwelen and die die Synergie Stufe erhöhen.",
 		"CELEBI": "Celebi sagt vorher das der nächte PvE Kampf gegen Schillernde Pokémon sein wird"
 	},
 	"loading_hints": {
@@ -3941,6 +3958,7 @@
 		"ROOM_FULL": "Dieser Raum ist voll",
 		"ROOM_EMPTY": "Dieser Raum wurde aufgrund von Spielermangel entfernt",
 		"ROOM_DELETED": "Dieser Raum wurde gelöscht",
+		"GAME_ALREADY_STARTED": "Die Lobby hat bereits angefangen.",
 		"INVALID_PASSWORD": "Falsches Passwort",
 		"UNKNOWN_ERROR": "Ein unerwarteter Fehler ist aufgetreten: {{error}}"
 	},
