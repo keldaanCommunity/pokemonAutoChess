@@ -494,7 +494,10 @@
 		"ULTRA_THRUSTERS": "Ultradüsen",
 		"ELECTRO_BALL": "Elektroball",
 		"HORN_LEECH": "Holzgeweih",
-		"DRILL_RUN": "Schlagborer"
+		"DRILL_RUN": "Schlagborer",
+		"ZING_ZAP": "Elektropikser",
+		"NO_RETREAT": "Finalformation",
+		"TACKLE": "Tackle"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1492,7 +1495,12 @@
 		"TAILLOW": "Schwalbini",
 		"SWELLOW": "Schwalboss",
 		"DRILBUR": "Rotomurf",
-		"EXCADRILL": "Stalobor"
+		"EXCADRILL": "Stalobor",
+		"ROGGENROLA": "Kiesling",
+		"BOLDORE": "Sedimantur",
+		"GIGALITH": "Brockoloss",
+		"TOGEDEMARU": "Togedemaru",
+		"DEDENNE": "Dedenne"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
@@ -1967,7 +1975,8 @@
 		"ULTRA_THRUSTERS": "Benachbarte Gegner erleiden [20,40,80 SP] SPECIAL und BURN für 3 Sekunden während der Anwender sich schnell Rückwärts zurückzieht.",
 		"ELECTRO_BALL": "Wirft einen Elektro Ball der zwischen den Gegnern abprallt der mit jedem Abpraller [10,20,40,SP] SPECIAL anrichtet. Die Zahl und Geschwindigkeit der Abpraller hängt vom SPEED des Pokémon ab.",
 		"HORN_LEECH": "Entzieht dem Ziel Energie, verursacht [200,SP] % des ATK des Benutzers als SPECIAL und heilt 50 % des verursachten Schadens. 50 % der Überheilung werden in SHIELDumgewandelt.",
-		"DRILL_RUN": "Stürmt wie ein Bohrer durch das Ziel, verursacht [15,30,SP] TRUE und tauscht die Position. Befindet sich dahinter in derselben Richtung ein weiteres Ziel, wird die Fähigkeit sofort erneut auf dieses Ziel angewendet. Kann standardmäßig kritisch treffen."
+		"DRILL_RUN": "Stürmt wie ein Bohrer durch das Ziel, verursacht [15,30,SP] TRUE und tauscht die Position. Befindet sich dahinter in derselben Richtung ein weiteres Ziel, wird die Fähigkeit sofort erneut auf dieses Ziel angewendet. Kann standardmäßig kritisch treffen.",
+		"TACKLE": "Füge dem Ziel [20,40,60,SP] SPECIAL zu"
 	},
 	"effect": {
 		"STAMINA": "Zähigkeit",
@@ -2130,8 +2139,8 @@
 		"BRUTAL_SWING": "Wenn du sein Ziel niederschlägst, erhältst du 6 ATK, 20 AP und 40 % ihrer maximalen HP",
 		"POWER_TRIP": "Wenn du sein Ziel niederschlägst, erhältst du 10 ATK, 30 AP und 60 % ihrer maximalen HP",
 		"MERCILESS": "MONSTER können Verbündete mit weniger als 10% ihrer MAX HP anvisieren.",
-		"MEDITATE": "Heile dich um 15 % HP des Schadens",
-		"FOCUS_ENERGY": "Heile dich um 30 % HP des Schadens",
+		"MEDITATE": "Heile dich um 25 % HP des Schadens",
+		"FOCUS_ENERGY": "Heile dich um 40 % HP des Schadens",
 		"CALM_MIND": "Heile dich um 60 % HP des Schadens",
 		"SWIFT_SWIM": "-30% negative Statusdauer. Die Welle heilt 10 % HP und verursacht 5 % TRUE.",
 		"HYDRATION": "-60% negative Statusdauer. Die Welle heilt 20 % HP und verursacht 10 % TRUE.",
@@ -2480,6 +2489,7 @@
 		"TOXIC_ORB": "Das Pokémon erhält den POISON-Typ und ist POISONNED  aber erhält +100% ATK.",
 		"METRONOME": "Das Pokémon erhält den SOUND-Typ. Das Pokémon erhält jede Sekunde 5 PP.",
 		"METAL_COAT": "Das Pokémon erhält den STEEL-Typ.",
+		"AIR_BALLOON": "Das Pokémon erhält den FLUG-Typ und +10% Chance Angriffen auszuweichen.",
 		"HARD_STONE": "Das Pokémon erhält den ROCK-Typ",
 		"INCENSE": "Jedes Pokémon im Shop hat eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
 		"EXP_SHARE": "Ermittelt die besten ATK, AP, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
@@ -2595,8 +2605,7 @@
 		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm.",
 		"RUSTED_SWORD": "Man sagt, dass ein Held dieses Schwert in der Antike benutzte, um eine schreckliche Katastrophe abzuwenden. Verleiht dem Träger +50 % Basis-ATK. Wird auf den Verbündeten mit dem schwächsten ATK übertragen, wenn der Träger ohnmächtig wird.",
 		"SCROLL_OF_WATERS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Wassers. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_RAPID) weiter.",
-		"SCROLL_OF_DARKNESS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Unlichts. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_SINGLE) weiter.",
-		"AIR_BALLOON": "Das Pokémon erhält den FLUG-Typ und +10% Chance Angriffen auszuweichen."
+		"SCROLL_OF_DARKNESS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Unlichts. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_SINGLE) weiter."
 	},
 	"passive_description": {
 		"NONE": "Keine Passive",
