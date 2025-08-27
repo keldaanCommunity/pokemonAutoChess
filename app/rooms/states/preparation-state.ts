@@ -2,10 +2,10 @@ import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
+import chatV2 from "../../models/mongo-models/chat-v2"
 import { EloRank } from "../../types/Config"
 import { GameMode } from "../../types/enum/Game"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import chatV2 from "../../models/mongo-models/chat-v2"
 
 export interface IPreparationState {
   users: MapSchema<GameUser>
@@ -20,8 +20,7 @@ export interface IPreparationState {
 
 export default class PreparationState
   extends Schema
-  implements IPreparationState
-{
+  implements IPreparationState {
   @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: GameUser }) users = new MapSchema<GameUser>()
   @type("string") gameStartedAt: string | null

@@ -149,16 +149,19 @@ export default class Design {
     this.terrain[14][7] = TerrainType.GROUND
     this.terrain[14][6] = TerrainType.GROUND
 
+    // flower pots slots
+    this.drawGroundRect(5, 11, 5, 4, false)
+
     // smeargle slot
     this.terrain[8][31] = TerrainType.GROUND
   }
 
-  drawGroundRect(x: number, y: number, width: number, height: number) {
+  drawGroundRect(x: number, y: number, width: number, height: number, addWalls = true) {
     for (let i = x; i < x + width; i++) {
       for (let j = y; j < y + height; j++) {
         if (j in this.terrain && i in this.terrain[j]) {
           this.terrain[j][i] =
-            i === x || i === x + width - 1 || j === y || j === y + height - 1
+            addWalls && (i === x || i === x + width - 1 || j === y || j === y + height - 1)
               ? TerrainType.WALL
               : TerrainType.GROUND
         }

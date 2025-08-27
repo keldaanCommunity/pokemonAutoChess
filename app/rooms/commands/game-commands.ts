@@ -832,8 +832,8 @@ export class OnPickBerryCommand extends Command<
   execute({ playerId, berryIndex }) {
     const player = this.state.players.get(playerId)
     if (!player || !player.alive) return
-    if (player.berryTreesStage[berryIndex] >= 3) {
-      player.berryTreesStage[berryIndex] = 0
+    if (player.berryTreesStages[berryIndex] >= 3) {
+      player.berryTreesStages[berryIndex] = 0
       player.items.push(player.berryTreesType[berryIndex])
     }
   }
@@ -1284,7 +1284,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
     for (let i = 0; i < nbTrees; i++) {
-      player.berryTreesStage[i] = max(3)(player.berryTreesStage[i] + 1)
+      player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
     }
 
     this.room.clock.setTimeout(() => {

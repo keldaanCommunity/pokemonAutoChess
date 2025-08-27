@@ -503,6 +503,7 @@ class GameContainer {
       if (player.id === this.spectatedPlayerId) {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.renderBerryTrees()
+        this.gameScene?.board?.renderFlowerPots()
       }
     })
   }

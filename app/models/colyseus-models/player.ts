@@ -106,7 +106,8 @@ export default class Player extends Schema implements IPlayer {
     pickRandomIn(Berries),
     pickRandomIn(Berries)
   ]
-  @type(["uint8"]) berryTreesStage: number[] = [1, 1, 1]
+  @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
+  @type(["uint8"]) flowerPotsStages: number[] = [1, 1, 1, 1, 1]
   @type(["uint8"]) groundHoles: number[] = new Array(BOARD_WIDTH * BOARD_HEIGHT / 2).fill(0)
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()

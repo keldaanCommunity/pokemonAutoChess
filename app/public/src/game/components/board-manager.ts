@@ -7,7 +7,11 @@ import { getPokemonData } from "../../../../models/precomputed/precomputed-pokem
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
-import { BOARD_WIDTH, PortalCarouselStages, SynergyTriggers } from "../../../../types/Config"
+import {
+  BOARD_WIDTH,
+  PortalCarouselStages,
+  SynergyTriggers
+} from "../../../../types/Config"
 import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
@@ -60,13 +64,16 @@ export default class BoardManager {
   playerAvatar: PokemonAvatar | null
   opponentAvatar: PokemonAvatar | null
   scoutingAvatars: PokemonAvatar[] = []
-  groundHoles: Phaser.GameObjects.Sprite[]
   pveChestGroup: Phaser.GameObjects.Group | null
   pveChest: Phaser.GameObjects.Sprite | null
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
   berryTrees: Phaser.GameObjects.Sprite[] = []
+  flowerPots: Phaser.GameObjects.Sprite[] = []
+  flowerPokemonsInPots: PokemonSprite[] = []
+  munchAmountText: Phaser.GameObjects.Text | null = null
+  groundHoles: Phaser.GameObjects.Sprite[]
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
@@ -95,6 +102,9 @@ export default class BoardManager {
     this.pveChest = null
     this.pveChestGroup = null
     this.groundHoles = []
+    this.berryTrees = []
+    this.flowerPots = []
+    this.flowerPokemonsInPots = []
 
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode(false)
@@ -211,8 +221,11 @@ export default class BoardManager {
   }
 
   renderBoard(phaseChanged: boolean) {
-    this.renderBerryTrees()
-    this.renderGroundHoles()
+    if (this.mode !== BoardMode.TOWN) {
+      this.renderBerryTrees()
+      this.renderFlowerPots()
+      this.renderGroundHoles()
+    }
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
     if (this.mode === BoardMode.PICK) {
@@ -288,23 +301,23 @@ export default class BoardManager {
       )
 
       tree.setDepth(DEPTH.INANIMATE_OBJECTS).setScale(2, 2).setOrigin(0.5, 1)
-      if (this.player.berryTreesStage[i] === 0) {
+      if (this.player.berryTreesStages[i] === 0) {
         tree.anims.play("CROP")
       } else {
         tree.anims.play(
-          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStage[i]}`
+          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStages[i]}`
         )
       }
 
       tree.setInteractive()
       tree.on("pointerdown", (pointer) => {
         if (this.player.id !== this.scene.uid) return
-        if (this.scene.room && this.player.berryTreesStage[i] >= 3) {
+        if (this.scene.room && this.player.berryTreesStages[i] >= 3) {
           this.scene.room.send(Transfer.PICK_BERRY, i)
-          this.displayText(pointer.x, pointer.y, t("berry_gained"))
+          this.displayText(pointer.x, pointer.y, t("berry_gained"), true)
           tree.play("CROP")
         } else {
-          this.displayText(pointer.x, pointer.y, t("berry_unripe"))
+          this.displayText(pointer.x, pointer.y, t("berry_unripe"), true)
         }
       })
 
@@ -317,13 +330,108 @@ export default class BoardManager {
     this.berryTrees = []
   }
 
+  renderFlowerPots() {
+    this.flowerPots.forEach((pot) => pot.destroy())
+    this.flowerPokemonsInPots.forEach((p) => p.destroy())
+    this.flowerPots = []
+    this.flowerPokemonsInPots = []
+
+    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
+    const nbPots = SynergyTriggers[Synergy.FLORA].filter(
+      (n) => n <= floraLevel
+    ).length
+
+    const potPositions = [
+      [432, 614],
+      [400, 566],
+      [368, 614],
+      [336, 566],
+      [304, 614]
+    ]
+
+    const FlowerPots = ["pink", "yellow", "white", "blue", "orange"] as const
+    type FlowerPot = (typeof FlowerPots)[number]
+    const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
+      pink: [Pkm.HOPPIP, Pkm.SKIPLOOM, Pkm.JUMPLUFF],
+      yellow: [Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL],
+      white: [Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM],
+      blue: [Pkm.ODDISH, Pkm.GLOOM, Pkm.VILEPLUME],
+      orange: [Pkm.BELLOSSOM]
+    }
+
+    for (let i = 0; i < nbPots; i++) {
+      const pot = FlowerPots[i]
+      const potSprite = this.scene.add.sprite(
+        potPositions[i][0],
+        potPositions[i][1],
+        "flower_pots",
+        FlowerPots[i] + ".png"
+      )
+
+      potSprite
+        .setDepth(i % 2 ? DEPTH.INANIMATE_OBJECTS : DEPTH.INANIMATE_OBJECTS + 0.1)
+        .setScale(2, 2)
+        .setOrigin(0.5, 0.5)
+      const stage = this.player.flowerPotsStages[i]
+
+      if (stage > 0) {
+        const pkmInPot: Pkm =
+          FlowerMonByPot[pot][stage - 1] ?? FlowerMonByPot[pot].at(-1)
+        const pokemonInPot = PokemonFactory.createPokemonFromName(
+          pkmInPot,
+          this.player
+        )
+        const flowerInPot = new PokemonSprite(
+          this.scene,
+          potPositions[i][0],
+          potPositions[i][1] - 24,
+          pokemonInPot,
+          this.player.id,
+          false,
+          false
+        )
+        this.animationManager.animatePokemon(
+          flowerInPot,
+          PokemonActionState.SLEEP,
+          false,
+          true
+        )
+        this.flowerPokemonsInPots.push(flowerInPot)
+      }
+
+      this.flowerPots.push(potSprite)
+
+      if (this.munchAmountText === null) {
+        this.munchAmountText = this.displayText(368, 506, "25/50").setOrigin(0.5, 0.5)
+      }
+      this.flowerPots.push(potSprite)
+    }
+  }
+
+  hideFlowerPots() {
+    this.flowerPots.forEach((pot) => pot.destroy())
+    this.flowerPokemonsInPots.forEach((p) => p.destroy())
+    this.flowerPots = []
+    this.flowerPokemonsInPots = []
+    if (this.munchAmountText) {
+      this.munchAmountText.destroy()
+      this.munchAmountText = null
+    }
+  }
+
   renderGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
     this.player.groundHoles.forEach((hole, index) => {
-      const [x, y] = transformBoardCoordinates(index % BOARD_WIDTH, Math.floor(index / BOARD_WIDTH) + 1)
+      const [x, y] = transformBoardCoordinates(
+        index % BOARD_WIDTH,
+        Math.floor(index / BOARD_WIDTH) + 1
+      )
       if (hole > 0) {
-        const groundHole = this.scene.add.sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`).setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        const groundHole = this.scene.add
+          .sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`)
+          .setScale(2)
+          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         this.groundHoles.push(groundHole)
       }
     })
@@ -334,7 +442,7 @@ export default class BoardManager {
     this.groundHoles = []
   }
 
-  displayText(x: number, y: number, label: string) {
+  displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
       fontSize: "25px",
       fontFamily: "Verdana",
@@ -352,23 +460,27 @@ export default class BoardManager {
     )
     text.setDepth(DEPTH.TEXT)
 
-    this.scene.add.tween({
-      targets: [text],
-      ease: "linear",
-      duration: 1500,
-      delay: 0,
-      alpha: {
-        getStart: () => 1,
-        getEnd: () => 0
-      },
-      y: {
-        getStart: () => y - 50,
-        getEnd: () => y - 110
-      },
-      onComplete: () => {
-        text.destroy()
-      }
-    })
+    if (tweenOut) {
+      this.scene.add.tween({
+        targets: [text],
+        ease: "linear",
+        duration: 1500,
+        delay: 0,
+        alpha: {
+          getStart: () => 1,
+          getEnd: () => 0
+        },
+        y: {
+          getStart: () => y - 50,
+          getEnd: () => y - 110
+        },
+        onComplete: () => {
+          text.destroy()
+        }
+      })
+    }
+
+    return text
   }
 
   updatePlayerAvatar() {
@@ -623,9 +735,10 @@ export default class BoardManager {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
     this.hideLightCell()
     this.hideBerryTrees()
+    this.hideFlowerPots()
     this.hideGroundHoles()
     this.removePokemonsOnBoard()
-    this.scene.board?.pokemons.forEach(p => p.setAlpha(1))
+    this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
