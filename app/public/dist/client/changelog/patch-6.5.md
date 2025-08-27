@@ -26,6 +26,9 @@
 - Revert Capsakid nerf from 6.3:  PP 110 → 100
 - Nidoran Female now only show up in Poison regions
 - Change Plusle/Minum types: Electric/Fairy -> Electric/Field
+- Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
+- Seedot line is now regional
+- Bellsprout line, Chikorita line and Hoppip line are now in special category
 
 # Changes to Synergies
 
