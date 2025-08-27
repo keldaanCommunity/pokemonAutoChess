@@ -1502,6 +1502,8 @@
 		"BOLDORE": "Sedimantur",
 		"GIGALITH": "Brockoloss",
 		"TOGEDEMARU": "Togedemaru",
+		"FALINKS_BRASS": "Legios (Anführer)",
+		"FALINKS_TROOPER": "Legios (Untergebener)",
 		"DEDENNE": "Dedenne"
 	},
 	"ability_description": {
@@ -1978,8 +1980,11 @@
 		"ELECTRO_BALL": "Wirft einen Elektro Ball der zwischen den Gegnern abprallt der mit jedem Abpraller [10,20,40,SP] SPECIAL anrichtet. Die Zahl und Geschwindigkeit der Abpraller hängt vom SPEED des Pokémon ab.",
 		"HORN_LEECH": "Entzieht dem Ziel Energie, verursacht [200,SP] % des ATK des Benutzers als SPECIAL und heilt 50 % des verursachten Schadens. 50 % der Überheilung werden in SHIELDumgewandelt.",
 		"DRILL_RUN": "Stürmt wie ein Bohrer durch das Ziel, verursacht [15,30,SP] TRUE und tauscht die Position. Befindet sich dahinter in derselben Richtung ein weiteres Ziel, wird die Fähigkeit sofort erneut auf dieses Ziel angewendet. Kann standardmäßig kritisch treffen.",
+		"ROCK_ARTILLERY": "Wirft [10,15,25] Steine nahe zufälligem Gegnern, die beim drauftreten [20,30,40,SP] SPECIAL zufügen.",
 		"ZING_ZAP": "Roll hinter das Ziel und verursacht [90,SP] SPECIAL und FLINCH für 3 Sekunden. Wenn das Ziel unter PARALYSIS leidet, erzeugt es zusätlich [40,SP] SHIELD",
-		"TACKLE": "Füge dem Ziel [20,40,60,SP] SPECIAL zu"
+		"NO_RETREAT": "Erhalte 1 ATK, 1 DEF, 1 SPE_DEF und 5 SPEED pro Legios auf deinem team. Untergebene tacklen das Ziel jeweils für [20,SP] SPECIAL.",
+		"TACKLE": "Füge dem Ziel [20,40,60,SP] SPECIAL zu",
+		"STATIC_SHOCK": "Füge dem Ziel [70,SP] SPECIAL zu und erhalte [40,SP] SHIELD pro benachbartes ELECTRIC Pokémon."
 	},
 	"effect": {
 		"STAMINA": "Zähigkeit",
@@ -2129,6 +2134,10 @@
 		"STEEL_SPIKE": "Handle 66 % der ATK als TRUE",
 		"CORKSCREW_CRASH": "Handle 100 % der ATK als TRUE",
 		"MAX_MELTDOWN": "Handle 120 % der ATK als TRUE",
+		"TILLER": "Erhalte von +1 zu +5 DEF und SPE_DEF je nach Tiefe des gegrabenen Lochs. +3 ATK wenn das Loch komplett ausgegraben ist.",
+		"DIGGER": "Erhalte von +2 zu +10 DEF und SPE_DEF je nach Tiefe des gegrabenen Lochs. +5 ATK wenn das Loch komplett ausgegraben ist.",
+		"DRILLER": "Erhalte von +3 zu +15 DEF und SPE_DEF je nach Tiefe des gegrabenen Lochs. +8 ATK wenn das Loch komplett ausgegraben ist.",
+		"DEEP_MINER": "Erhalte +1 extra DEF und SPE_DEF für jedes komplett ausgegrabene Loch auf deinem Feld und +12 ATK wenn das gesamt Feld komplett ausgegraben ist.",
 		"POISONOUS": "Angriffe haben 30% Chance auf POISONNED",
 		"VENOMOUS": "Angriffe haben 60% Chance auf POISONNED. Max. Stapel von POISONNED +1",
 		"TOXIC": "Angriffe haben 100% Chance auf POISONNED. Max. Stapel von POISONNED +2",
@@ -2509,6 +2518,7 @@
 		"METAL_COAT": "Das Pokémon erhält den STEEL-Typ.",
 		"AIR_BALLOON": "Das Pokémon erhält den FLUG-Typ und +10% Chance Angriffen auszuweichen.",
 		"HARD_STONE": "Das Pokémon erhält den ROCK-Typ",
+		"EXPLORER_KIT": "Gibt GROUND Synergie. Erhöht die [LK] Chance um vergrabenes Gold im Boden zu finden.",
 		"INCENSE": "Jedes Pokémon im Shop hat eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
 		"EXP_SHARE": "Ermittelt die besten ATK, AP, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
 		"POKERUS_VIAL": "Infiziert den Träger mit POKERUS, gewinnt alle 2.5 Sekunden 1 ATK und 10 AP und überträgt sich auf Verbündete",
@@ -2796,7 +2806,8 @@
 		"ESPURR": "Entwickelt sich zu Psiaugon Männlich oder Weiblich weiter abhängig davon, ob PSYCHIC oder FIELD dominanter ist.",
 		"FUR_COAT": "$t(pkm.FURFROU)s Fell wächst, was pro Runde +2 DEF und -5 SPEED gibt. Kann geschoren werden wenn es eine Runde auf der Bank sitzt was DEF und SPEED zurücksetzt.",
 		"ACCELERATION": "Beschleunigung: erhält 20 SPEED für jedes Feld was es sich fortbewegt (Sprünge und ähnliches zählt als eine Fortbewegung)",
-		"MELTAN": "Wenn es auf $t(pkm.MELMETAL) benutzt wird, verschmelze und gib $t(pkm.MELMETAL) 50 max HP"
+		"MELTAN": "Wenn es auf $t(pkm.MELMETAL) benutzt wird, verschmelze und gib $t(pkm.MELMETAL) 50 max HP",
+		"FALINKS": "Legios Untergebene haben nun eine [4,LK]% Chance im Shop aufzutauchen. Die Untergebenen kosten 5 GOLD und bis zu 6 mal gekauft werden. Am Start des Kampfes treten sie dem Legios Anführer an und geben jeweils 30 SHIELD, 1 ATK und 1 DEF"
 	},
 	"stat": {
 		"ATK": "Angriff",
