@@ -495,9 +495,11 @@
 		"ELECTRO_BALL": "Elektroball",
 		"HORN_LEECH": "Holzgeweih",
 		"DRILL_RUN": "Schlagborer",
+		"ROCK_ARTILLERY": "Gesteins-Artillerie",
 		"ZING_ZAP": "Elektropikser",
 		"NO_RETREAT": "Finalformation",
-		"TACKLE": "Tackle"
+		"TACKLE": "Tackle",
+		"STATIC_SHOCK": "Staikschock"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1976,6 +1978,7 @@
 		"ELECTRO_BALL": "Wirft einen Elektro Ball der zwischen den Gegnern abprallt der mit jedem Abpraller [10,20,40,SP] SPECIAL anrichtet. Die Zahl und Geschwindigkeit der Abpraller hängt vom SPEED des Pokémon ab.",
 		"HORN_LEECH": "Entzieht dem Ziel Energie, verursacht [200,SP] % des ATK des Benutzers als SPECIAL und heilt 50 % des verursachten Schadens. 50 % der Überheilung werden in SHIELDumgewandelt.",
 		"DRILL_RUN": "Stürmt wie ein Bohrer durch das Ziel, verursacht [15,30,SP] TRUE und tauscht die Position. Befindet sich dahinter in derselben Richtung ein weiteres Ziel, wird die Fähigkeit sofort erneut auf dieses Ziel angewendet. Kann standardmäßig kritisch treffen.",
+		"ZING_ZAP": "Roll hinter das Ziel und verursacht [90,SP] SPECIAL und FLINCH für 3 Sekunden. Wenn das Ziel unter PARALYSIS leidet, erzeugt es zusätlich [40,SP] SHIELD",
 		"TACKLE": "Füge dem Ziel [20,40,60,SP] SPECIAL zu"
 	},
 	"effect": {
@@ -2760,6 +2763,7 @@
 		"BAD_LUCK": "Verringert das LUCK aller Gegner um 20%",
 		"GOOD_LUCK": "Erhöht das LUCK aller Verbündeten um 20%",
 		"PRIMEAPE": "Rasaff wird wütender, wenn er ausgeknockt wird und erhält ein permanentes ATK. Nachdem Rasaff 10 Mal ausgeknockt war, entwickelt es sich zu Epitaff.",
+		"ZYGARDE": "Zygarde Zellen kriechen jede Sekunde aus komplett ausgegrabenen Löchern hervor und verbinden sich mit Zygarde, was jedes mal die max HP um 1 erhöht. Wenn sich 95 Zellend angesammelt haben, transformiert sich Zygarde in seine Optimumform.",
 		"GLIMMORA": "Unter 50% max HP, werden giftige Stacheln in einem 2x3 Rechteck vor dem Nutzer geworfen, welche 20 SPECIAL verursachen. Giftige Stacheln verursachen POISONNED an Pokémon, außer sie sind vom Typ POISON.",
 		"PILLAR": "Baut [1,1,2] bewegliche Säulen, welche den Pfad der Gegner blockiert. HP, DEF und SPE_DEF erhöhen sich basierend auf STAR der Unit.",
 		"INANIMATE": "Unbewegliche Objekte können nicht kopiert, auf die Bank geschoben oder verkauft werden. Sie können sich nicht bewegen oder attackieren und sind immun gegenüber Statuseffekten.",
