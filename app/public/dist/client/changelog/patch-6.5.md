@@ -6,6 +6,7 @@
 - Boldore
 - Gigalith
 - Togedemaru
+- Dedenne
 
 # Changes to Pokemon & Abilities
 
