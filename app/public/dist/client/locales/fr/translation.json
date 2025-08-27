@@ -2507,6 +2507,7 @@
 		"TOXIC_ORB": "Le porteur gagne le type POISON, subit POISONNED pendant tout le combat mais augmente son ATK de 100%. Lâché quand son porteur est mis sur le banc.",
 		"METRONOME": "Le porteur gagne le type SOUND. Chaque seconde, il gagne 5 PP. Lâché quand son porteur est mis sur le banc.",
 		"METAL_COAT": "Le porteur gagne le type STEEL. Lâché quand son porteur est mis sur le banc.",
+		"AIR_BALLOON": "Le porteur gagne le type FLYING et 10% de chance d'esquiver les attaques. Il est aussi immunisé contre les effets de terrain. Lâché quand son porteur est mis sur le banc.",
 		"HARD_STONE": "Le porteur gagne le type ROCK. Lâché quand son porteur est mis sur le banc.",
 		"EXPLORER_KIT": "Le porteur gagne le type GROUND, et augmente sa LUCK de trouver de l'or enfoui dans le sol.",
 		"INCENSE": "Chaque Pokémon du magasin a 5% de chance en plus de partager une synergie commune avec le porteur. Lâché quand son porteur est mis sur le banc.",
@@ -2638,8 +2639,7 @@
 		"MALICIOUS_ARMOR": "Une armure mystérieuse pouvant faire évoluer un certain Pokémon. Une grande rancune y est enfermée.",
 		"RUSTED_SWORD": "Il est dit qu'un héros a utilisé cette épée pour arrêter un terrible désastre dans les temps anciens. Confère à son détenteur +50% d'ATK de base. Se transfère à l'allié avec l'ATK la plus faible lorsque le porteur est mis KO.",
 		"SCROLL_OF_WATERS": "Les véritables secrets de la voie de l'eau y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_RAPID).",
-		"SCROLL_OF_DARKNESS": "Les véritables secrets de la voie des ténèbres y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_SINGLE).",
-		"AIR_BALLOON": "Le porteur gagne le type FLYING et 10% de chance d'esquiver les attaques. Il est aussi immunisé contre les effets de terrain. Lâché quand son porteur est mis sur le banc."
+		"SCROLL_OF_DARKNESS": "Les véritables secrets de la voie des ténèbres y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_SINGLE)."
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
