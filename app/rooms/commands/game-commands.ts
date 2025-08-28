@@ -30,6 +30,7 @@ import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
   IDragDropMessage,
+  Role,
   Title,
   Transfer
 } from "../../types"
@@ -105,6 +106,7 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
+import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -583,7 +585,12 @@ export class OnDragDropItemCommand extends Command<
     console.log("OnDragDropItemCommand", detail)
     if (zone === "flower-pot-zone") {
       pokemon = player.flowerPots[index]
-      if (!pokemon || Mulches.includes(item) === false) {
+      if (!pokemon || Mulches.includes(item) === false) return
+      if (item === Item.RICH_MULCH) {
+        if (!pokemon.evolution) {
+          client.send(Transfer.DRAG_DROP_CANCEL, "FULLY GROWN!")
+          return
+        }
         const potEvolution = PokemonFactory.createPokemonFromName(pokemon.evolution, player)
         player.flowerPots[index] = potEvolution
         client.send(Transfer.DRAG_DROP_CANCEL, message)
@@ -1847,5 +1854,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.goldenEggChance = 0 // getting a golden egg resets the stacked egg chance
       }
     }
+  }
+}
+
+export class OnOverwriteBoardCommand extends Command<GameRoom> {
+  execute({ playerId, board }: { playerId: string; board: IDetailledPokemon[] }) {
+    const player = this.room.state.players.get(playerId)
+    if (!player || player.role !== Role.ADMIN) return
+    player.board.clear()
+    board.forEach((p) => {
+      const pokemon = PokemonFactory.createPokemonFromName(p.name, p)
+      pokemon.positionX = p.x
+      pokemon.positionY = p.y
+      p.items.forEach(item => pokemon.items.add(item))
+      player.board.set(pokemon.id, pokemon)
+    })
+    player.updateSynergies()
+    player.boardSize = this.room.getTeamSize(player.board)
   }
 }

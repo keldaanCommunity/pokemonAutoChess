@@ -5,7 +5,7 @@ import {
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Emotion, PkmWithCustom } from "../../../../../types"
+import { Emotion, PkmWithCustom, Role, Transfer } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -21,6 +21,8 @@ import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { values } from "../../../../../utils/schemas"
 import { isOnBench } from "../../../../../utils/board"
 import "./team-builder.css"
+import GameState from "../../../../../rooms/states/game-state"
+import { Room } from "colyseus.js"
 
 export default function TeamBuilder(props: {
   bot?: IBot
@@ -40,7 +42,10 @@ export default function TeamBuilder(props: {
   const inBotBuilder = useLocation().pathname.startsWith("/bot-builder")
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
-
+  const isAdmin = useAppSelector((state) => state.network.profile?.role === Role.ADMIN)
+  const room: Room<GameState> | undefined = useAppSelector(
+    (state) => state.network.game
+  )
 
   useEffect(() => {
     if (props.board) setBoard(props.board) // keep local state in sync with parent prop
@@ -261,10 +266,18 @@ export default function TeamBuilder(props: {
     input.click()
   }
 
+  function overwriteBoard() {
+    room?.send(Transfer.OVERWRITE_BOARD, board)
+  }
+
   return (
     <div id="team-builder">
       <Synergies synergies={synergies} tooltipPortal={false} />
       <div className="actions">
+        {ingame && isAdmin && <details>
+          <summary>Admin</summary>
+          {room && <button className="bubbly blue" onClick={overwriteBoard}>Overwrite game board</button>}
+        </details>}
         {ingame && <button className="bubbly blue" onClick={snapshot}><img src="assets/ui/photo.svg" /> {t("snapshot")}</button>}
         {!inBotBuilder && <button className="bubbly dark" onClick={saveFile}><img src="assets/ui/save.svg" /> {t("save")}</button>}
         {!inBotBuilder && <button className="bubbly dark" onClick={loadFile}><img src="assets/ui/load.svg" /> {t("load")}</button>}

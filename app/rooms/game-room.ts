@@ -16,7 +16,7 @@ import {
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { BotV2 } from "../models/mongo-models/bot-v2"
+import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
@@ -89,6 +89,7 @@ import {
   OnJoinCommand,
   OnLevelUpCommand,
   OnLockCommand,
+  OnOverwriteBoardCommand,
   OnPickBerryCommand,
   OnPokemonCatchCommand,
   OnRemoveFromShopCommand,
@@ -532,6 +533,22 @@ export default class GameRoom extends Room<GameState> {
         ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
+        }
+      }
+    })
+
+    this.onMessage(Transfer.OVERWRITE_BOARD, (client, board: IDetailledPokemon[]) => {
+      if (client.auth) {
+        const player = this.state.players.get(client.auth.uid)
+        if (player?.role !== Role.ADMIN) return;
+
+        try {
+          this.dispatcher.dispatch(new OnOverwriteBoardCommand(), {
+            playerId: client.auth.uid,
+            board
+          })
+        } catch (error) {
+          logger.error("overwrite board error", error)
         }
       }
     })
