@@ -4247,7 +4247,6 @@ export class Bellsprout extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WEEPINBELL
-  evolutionRule = new HatchEvolutionRule()
   hp = 70
   atk = 6
   speed = 47
@@ -4256,7 +4255,6 @@ export class Bellsprout extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.INGRAIN
-  passive = Passive.HATCH
 }
 
 export class Weepinbell extends Pokemon {
@@ -4264,7 +4262,6 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VICTREEBEL
-  evolutionRule = new HatchEvolutionRule()
   hp = 160
   atk = 12
   speed = 47
@@ -4273,7 +4270,6 @@ export class Weepinbell extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.INGRAIN
-  passive = Passive.HATCH
 }
 
 export class Victreebel extends Pokemon {
@@ -7110,7 +7106,6 @@ export class Vileplume extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 3
-  evolution = Pkm.BELLOSSOM
   hp = 260
   atk = 25
   speed = 41

@@ -50,6 +50,7 @@ import {
   PokemonAnimations
 } from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
+import { FlowerPotMons } from "../../../../core/flower-pots"
 
 const spriteCountPerPokemon = new Map<string, number>()
 
@@ -665,7 +666,7 @@ export default class PokemonSprite extends DraggableObject {
 
   evolutionAnimation() {
     this.displayAnimation("EVOLUTION")
-    this.emoteAnimation()
+    if (FlowerPotMons.includes(PkmByIndex[this.index]) === false) this.emoteAnimation()
   }
 
   spawnAnimation() {

@@ -147,7 +147,7 @@ export default class GameRoom extends Room<GameState> {
     this.onRoomDeleted = this.onRoomDeleted.bind(this)
     this.presence.subscribe("room-deleted", this.onRoomDeleted)
 
-    if(gameMode === GameMode.RANKED){
+    if (gameMode === GameMode.RANKED) {
       // add the elo range in the game room name
       // see https://discord.com/channels/737230355039387749/1019939174691905556/threads/1404518859184013422
       name = `${formatMinMaxRanks(minRank, maxRank)} ${name}`
@@ -336,7 +336,7 @@ export default class GameRoom extends Room<GameState> {
             updateBoard: true,
             updateItems: true
           }
-          client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+          client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
           logger.error("drag drop error", error)
         }
       }
@@ -356,7 +356,7 @@ export default class GameRoom extends Room<GameState> {
               updateBoard: true,
               updateItems: true
             }
-            client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+            client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
             logger.error("drag drop error", error)
           }
         }
@@ -377,7 +377,7 @@ export default class GameRoom extends Room<GameState> {
               updateBoard: true,
               updateItems: true
             }
-            client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+            client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
             logger.error("drag drop error", error)
           }
         }

@@ -108,7 +108,7 @@ class GameContainer {
         value === true &&
         value !== previousValue
       ) {
-        this.gameScene?.board?.removePokemonsOnBoard(false)
+        this.gameScene?.board?.removePokemonsOnBoard()
         this.gameScene?.battle?.onSimulationStart()
       }
     })
@@ -314,8 +314,8 @@ class GameContainer {
   }
 
   initializeEvents() {
-    this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) =>
-      this.handleDragDropFailed(message)
+    this.room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
+      this.handleDragDropCancel(message)
     )
     const $state = this.$<GameState>(this.room.state)
     $state.avatars.onAdd((avatar) => {
@@ -473,7 +473,6 @@ class GameContainer {
       }
 
       listenForPokemonChanges(pokemon)
-
       this.handleBoardPokemonAdd(player, pokemon)
     }, false)
 
@@ -504,6 +503,26 @@ class GameContainer {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.renderBerryTrees()
         this.gameScene?.board?.renderFlowerPots()
+      }
+    })
+
+    $player.flowerPots.onAdd((pokemon, key) => {
+      listenForPokemonChanges(pokemon)
+      this.handleBoardPokemonAdd(player, pokemon)
+    }, true)
+
+    $player.flowerPots.onRemove((pokemon, key) => {
+      if (player.id === this.spectatedPlayerId) {
+        this.gameScene?.board?.removePokemon(pokemon)
+      }
+    })
+
+    $player.flowerPots.onChange((pokemon, key) => {
+      store.dispatch(
+        changePlayer({ id: player.id, field: "flowerPots", value: player.flowerPots })
+      )
+      if (pokemon) {
+        listenForPokemonChanges(pokemon)
       }
     })
   }
@@ -626,7 +645,7 @@ class GameContainer {
     }
   }
 
-  handleDragDropFailed(message: {
+  handleDragDropCancel(message: {
     updateBoard: boolean
     updateItems: boolean
     text?: string

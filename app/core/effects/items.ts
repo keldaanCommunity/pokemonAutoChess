@@ -29,6 +29,7 @@ import { chance, pickNRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
+import { FlowerPotMons } from "../flower-pots"
 import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
@@ -962,5 +963,15 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.OLD_ROD]: [new FishingRodEffect(Item.OLD_ROD)],
   [Item.GOOD_ROD]: [new FishingRodEffect(Item.GOOD_ROD)],
-  [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)]
+  [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)],
+
+  [Item.AMAZE_MULCH]: [
+    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+      if (pokemon.name === Pkm.BELLOSSOM) {
+        pokemon.hp += 30
+        pokemon.ap += 30
+      }
+      return false
+    })
+  ]
 }

@@ -2471,7 +2471,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ODDISH]: Pkm.ODDISH,
   [Pkm.GLOOM]: Pkm.ODDISH,
   [Pkm.VILEPLUME]: Pkm.ODDISH,
-  [Pkm.BELLOSSOM]: Pkm.ODDISH,
+  [Pkm.BELLOSSOM]: Pkm.BELLOSSOM,
   [Pkm.AMAURA]: Pkm.AMAURA,
   [Pkm.AURORUS]: Pkm.AMAURA,
   [Pkm.ANORITH]: Pkm.ANORITH,

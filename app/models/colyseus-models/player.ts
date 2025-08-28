@@ -85,7 +85,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>()
+  @type(["string"]) items = new ArraySchema<Item>(Item.RICH_MULCH, Item.AMAZE_MULCH)
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -107,7 +107,7 @@ export default class Player extends Schema implements IPlayer {
     pickRandomIn(Berries)
   ]
   @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
-  @type(["uint8"]) flowerPotsStages: number[] = [1, 1, 1, 1, 1]
+  @type([Pokemon]) flowerPots: Pokemon[] = []
   @type(["uint8"]) groundHoles: number[] = new Array(BOARD_WIDTH * BOARD_HEIGHT / 2).fill(0)
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
@@ -165,6 +165,7 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCustoms = new PokemonCustoms(pokemonCollection)
+    this.flowerPots = initFlowerPots(this)
     const avatarCustom = getPokemonCustomFromAvatar(avatar)
     const avatarInCollection = pokemonCollection.get(
       PkmIndex[avatarCustom.name]
@@ -632,6 +633,16 @@ function initBuriedItems() {
 
   shuffleArray(buriedItems)
   return buriedItems
+}
+
+function initFlowerPots(player: Player) {
+  return [
+    PokemonFactory.createPokemonFromName(Pkm.HOPPIP, player),
+    PokemonFactory.createPokemonFromName(Pkm.BELLSPROUT, player),
+    PokemonFactory.createPokemonFromName(Pkm.CHIKORITA, player),
+    PokemonFactory.createPokemonFromName(Pkm.ODDISH, player),
+    PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM, player)
+  ]
 }
 
 function spawnDIAYAvatar(player: Player): Pokemon {

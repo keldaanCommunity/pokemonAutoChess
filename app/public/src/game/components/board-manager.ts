@@ -22,7 +22,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
@@ -45,6 +45,7 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
+import { FlowerPots, FLOWER_POTS_POSITIONS, FlowerPotMons } from "../../../../core/flower-pots"
 
 export enum BoardMode {
   PICK = "pick",
@@ -72,7 +73,7 @@ export default class BoardManager {
   berryTrees: Phaser.GameObjects.Sprite[] = []
   flowerPots: Phaser.GameObjects.Sprite[] = []
   flowerPokemonsInPots: PokemonSprite[] = []
-  munchAmountText: Phaser.GameObjects.Text | null = null
+  mulchAmountText: Phaser.GameObjects.Text | null = null
   groundHoles: Phaser.GameObjects.Sprite[]
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
@@ -221,13 +222,15 @@ export default class BoardManager {
   }
 
   renderBoard(phaseChanged: boolean) {
+    this.pokemons.forEach((p) => p.destroy())
+    this.pokemons.clear()
+
     if (this.mode !== BoardMode.TOWN) {
       this.renderBerryTrees()
       this.renderFlowerPots()
       this.renderGroundHoles()
     }
-    this.pokemons.forEach((p) => p.destroy())
-    this.pokemons.clear()
+
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
     }
@@ -341,29 +344,10 @@ export default class BoardManager {
       (n) => n <= floraLevel
     ).length
 
-    const potPositions = [
-      [432, 614],
-      [400, 566],
-      [368, 614],
-      [336, 566],
-      [304, 614]
-    ]
-
-    const FlowerPots = ["pink", "yellow", "white", "blue", "orange"] as const
-    type FlowerPot = (typeof FlowerPots)[number]
-    const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
-      pink: [Pkm.HOPPIP, Pkm.SKIPLOOM, Pkm.JUMPLUFF],
-      yellow: [Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL],
-      white: [Pkm.CHIKORITA, Pkm.BAYLEEF, Pkm.MEGANIUM],
-      blue: [Pkm.ODDISH, Pkm.GLOOM, Pkm.VILEPLUME],
-      orange: [Pkm.BELLOSSOM]
-    }
-
     for (let i = 0; i < nbPots; i++) {
-      const pot = FlowerPots[i]
       const potSprite = this.scene.add.sprite(
-        potPositions[i][0],
-        potPositions[i][1],
+        FLOWER_POTS_POSITIONS[i][0],
+        FLOWER_POTS_POSITIONS[i][1],
         "flower_pots",
         FlowerPots[i] + ".png"
       )
@@ -372,20 +356,14 @@ export default class BoardManager {
         .setDepth(i % 2 ? DEPTH.INANIMATE_OBJECTS : DEPTH.INANIMATE_OBJECTS + 0.1)
         .setScale(2, 2)
         .setOrigin(0.5, 0.5)
-      const stage = this.player.flowerPotsStages[i]
+      const potPokemon = this.player.flowerPots[i]
 
-      if (stage > 0) {
-        const pkmInPot: Pkm =
-          FlowerMonByPot[pot][stage - 1] ?? FlowerMonByPot[pot].at(-1)
-        const pokemonInPot = PokemonFactory.createPokemonFromName(
-          pkmInPot,
-          this.player
-        )
+      if (potPokemon) {
         const flowerInPot = new PokemonSprite(
           this.scene,
-          potPositions[i][0],
-          potPositions[i][1] - 24,
-          pokemonInPot,
+          FLOWER_POTS_POSITIONS[i][0],
+          FLOWER_POTS_POSITIONS[i][1] - 24,
+          potPokemon,
           this.player.id,
           false,
           false
@@ -397,12 +375,13 @@ export default class BoardManager {
           true
         )
         this.flowerPokemonsInPots.push(flowerInPot)
+        this.pokemons.set(flowerInPot.id, flowerInPot)
       }
 
       this.flowerPots.push(potSprite)
 
-      if (this.munchAmountText === null) {
-        this.munchAmountText = this.displayText(368, 506, "25/50").setOrigin(0.5, 0.5)
+      if (this.mulchAmountText === null) {
+        this.mulchAmountText = this.displayText(348, 622, "25/50").setOrigin(0, 0)
       }
       this.flowerPots.push(potSprite)
     }
@@ -410,12 +389,15 @@ export default class BoardManager {
 
   hideFlowerPots() {
     this.flowerPots.forEach((pot) => pot.destroy())
-    this.flowerPokemonsInPots.forEach((p) => p.destroy())
+    this.flowerPokemonsInPots.forEach((p) => {
+      p.destroy()
+      this.pokemons.delete(p.id)
+    })
     this.flowerPots = []
     this.flowerPokemonsInPots = []
-    if (this.munchAmountText) {
-      this.munchAmountText.destroy()
-      this.munchAmountText = null
+    if (this.mulchAmountText) {
+      this.mulchAmountText.destroy()
+      this.mulchAmountText = null
     }
   }
 
@@ -673,7 +655,7 @@ export default class BoardManager {
     // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
-    if (!phaseChanged) this.removePokemonsOnBoard(false) // remove immediately board sprites if arriving in battle mode
+    if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
@@ -696,9 +678,9 @@ export default class BoardManager {
     }, 0) // need to wait for next event loop for state to be up to date
   }
 
-  removePokemonsOnBoard(includingBench: boolean = false) {
+  removePokemonsOnBoard() {
     this.pokemons.forEach((pokemon) => {
-      if (includingBench === true || !isOnBench(pokemon)) {
+      if (!isOnBench(pokemon) && FlowerPotMons.includes(PkmByIndex[pokemon.index]) === false) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -1045,7 +1027,7 @@ export default class BoardManager {
       })
 
       // move board pokemons into the portal
-      const pokemonsToTeleport = [...this.pokemons.values()]
+      const pokemonsToTeleport = [...this.pokemons.values()].filter(p => FlowerPotMons.includes(PkmByIndex[p.index]) === false)
       for (const pokemon of pokemonsToTeleport) {
         const delay = randomBetween(0, 300)
         this.scene.tweens.add({

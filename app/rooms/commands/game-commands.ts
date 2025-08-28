@@ -64,6 +64,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  Mulches,
   ShinyItems,
   Sweets,
   SynergyGems,
@@ -385,7 +386,7 @@ export class OnDragDropPokemonCommand extends Command<
       }
 
       if (!success && client.send) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
       }
       if (dittoReplaced) {
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
@@ -496,7 +497,7 @@ export class OnDragDropCombineCommand extends Command<
 
     //verify player has both items
     if (!player.items.includes(itemA) || !player.items.includes(itemB)) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
     // check for two if both items are same
@@ -509,7 +510,7 @@ export class OnDragDropCombineCommand extends Command<
       })
 
       if (count < 2) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
     }
@@ -523,7 +524,7 @@ export class OnDragDropCombineCommand extends Command<
       } else if (CraftableItems.includes(exchangedItem)) {
         result = pickRandomIn(CraftableItems.filter((i) => i !== exchangedItem))
       } else {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
     } else {
@@ -541,7 +542,7 @@ export class OnDragDropCombineCommand extends Command<
     }
 
     if (!result) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     } else {
       player.items.push(result)
@@ -559,7 +560,7 @@ export class OnDragDropItemCommand extends Command<
     detail: IDragDropItemMessage
   }
 > {
-  execute({ client, detail }) {
+  execute({ client, detail }: { client: Client; detail: IDragDropItemMessage }) {
     const playerId = client.auth.uid
     const message = {
       updateBoard: true,
@@ -571,16 +572,31 @@ export class OnDragDropItemCommand extends Command<
     message.updateBoard = false
     message.updateItems = true
 
-    const { x, y, id: item } = detail
+    const { zone, index, id: item } = detail
 
     if (!player.items.includes(item)) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
 
-    const pokemon = player.getPokemonAt(x, y)
-    if (pokemon === undefined) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+    let pokemon: Pokemon | undefined
+    console.log("OnDragDropItemCommand", detail)
+    if (zone === "flower-pot-zone") {
+      pokemon = player.flowerPots[index]
+      if (!pokemon || Mulches.includes(item) === false) {
+        const potEvolution = PokemonFactory.createPokemonFromName(pokemon.evolution, player)
+        player.flowerPots[index] = potEvolution
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
+    } else {
+      const x = index % BOARD_WIDTH
+      const y = Math.floor(index / BOARD_WIDTH)
+      pokemon = player.getPokemonAt(x, y)
+    }
+
+    if (!pokemon) {
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
 
@@ -596,17 +612,17 @@ export class OnDragDropItemCommand extends Command<
         room: this.room
       })
       if (shouldEquipItem === false) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
     }
 
-    if (Dishes.includes(item)) {
+    if (isIn(Dishes, item)) {
       if (pokemon.meal === "" && pokemon.canEat) {
         pokemon.meal = item
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
         pokemon.items.add(item) // add the item just in time for the evolution
         const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
           playerId,
@@ -616,7 +632,7 @@ export class OnDragDropItemCommand extends Command<
         else pokemon.items.delete(item)
         return
       } else {
-        client.send(Transfer.DRAG_DROP_FAILED, {
+        client.send(Transfer.DRAG_DROP_CANCEL, {
           ...message,
           text: pokemon.canEat ? "belly_full" : "not_hungry",
           pokemonId: pokemon.id
@@ -629,7 +645,7 @@ export class OnDragDropItemCommand extends Command<
       pokemon.canHoldItems === false &&
       UnholdableItems.includes(item) === false
     ) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
 
@@ -644,13 +660,13 @@ export class OnDragDropItemCommand extends Command<
       !(isBasicItem && existingBasicItemToCombine) &&
       UnholdableItems.includes(item) === false
     ) {
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
 
     if (!isBasicItem && pokemon.items.has(item)) {
       // prevent adding twitce the same item
-      client.send(Transfer.DRAG_DROP_FAILED, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
 
@@ -662,7 +678,7 @@ export class OnDragDropItemCommand extends Command<
       )
 
       if (!recipe) {
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
 
@@ -673,7 +689,7 @@ export class OnDragDropItemCommand extends Command<
         pokemon.types.has(SynergyGivenByItem[itemCombined])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
-        client.send(Transfer.DRAG_DROP_FAILED, message)
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
 

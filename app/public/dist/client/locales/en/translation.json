@@ -2431,7 +2431,9 @@
 		"MALICIOUS_ARMOR": "Malicious Armor",
 		"RUSTED_SWORD": "Rusted Sword",
 		"SCROLL_OF_WATERS": "Scroll of Waters",
-		"SCROLL_OF_DARKNESS": "Scroll of Darkness"
+		"SCROLL_OF_DARKNESS": "Scroll of Darkness",
+		"RICH_MULCH": "Rich Mulch",
+		"AMAZE_MULCH": "Amaze Mulch"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2648,7 +2650,9 @@
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
 		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
 		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
-		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)"
+		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)",
+		"RICH_MULCH": "Use it on a flower pot to evolve the Pokémon inside.",
+		"AMAZE_MULCH": "Use it on a flower pot to permanently give 30 max HP and 30 AP to the Pokémon inside."
 	},
 	"passive_description": {
 		"NONE": "No passive",
