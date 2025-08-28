@@ -48,6 +48,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
+import { FLOWER_POTS_POSITIONS } from "../../../core/flower-pots"
 
 class GameContainer {
   room: Room<GameState>
@@ -409,22 +410,21 @@ class GameContainer {
       this.initializeGame()
     }
 
-    const listenForPokemonChanges = (pokemon: Pokemon) => {
+    const listenForPokemonChanges = (pokemon: Pokemon, fields: NonFunctionPropNames<IPokemon>[] = [
+      "positionX",
+      "positionY",
+      "action",
+      "hp",
+      "atk",
+      "ap",
+      "def",
+      "speed",
+      "shiny",
+      "skill",
+      "meal"
+    ]) => {
       const $pokemon = this.$<Pokemon>(pokemon)
       $pokemon.onChange(() => {
-        const fields: NonFunctionPropNames<IPokemon>[] = [
-          "positionX",
-          "positionY",
-          "action",
-          "hp",
-          "atk",
-          "ap",
-          "def",
-          "speed",
-          "shiny",
-          "skill",
-          "meal"
-        ]
         fields.forEach((field) => {
           $pokemon.listen(field, (value, previousValue) => {
             if (field && player.id === this.spectatedPlayerId) {
@@ -499,30 +499,31 @@ class GameContainer {
     })
 
     $player.synergies.onChange(() => {
-      if (player.id === this.spectatedPlayerId) {
+      if (player.id === this.spectatedPlayerId && this.gameScene?.board?.mode === BoardMode.PICK) {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.renderBerryTrees()
         this.gameScene?.board?.renderFlowerPots()
       }
     })
 
-    $player.flowerPots.onAdd((pokemon, key) => {
-      listenForPokemonChanges(pokemon)
-      this.handleBoardPokemonAdd(player, pokemon)
-    }, true)
-
-    $player.flowerPots.onRemove((pokemon, key) => {
-      if (player.id === this.spectatedPlayerId) {
-        this.gameScene?.board?.removePokemon(pokemon)
+    $player.flowerPots.onAdd((pokemon, index) => {
+      listenForPokemonChanges(pokemon, ["hp", "ap"])
+      const board = this.gameScene?.board
+      if (board && player.id === this.spectatedPlayerId && this.gameScene?.board?.mode !== BoardMode.TOWN) {
+        board.renderFlowerPots()
+        const [x, y] = FLOWER_POTS_POSITIONS[index]
+        const evolutionAnim = this.gameScene.add.sprite(x, y - 24, "abilities", "EVOLUTION/000.png")
+        evolutionAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => evolutionAnim.destroy())
+        evolutionAnim.setScale(2).setDepth(DEPTH.BOOST_BACK).play("EVOLUTION")
       }
-    })
+    }, false)
 
     $player.flowerPots.onChange((pokemon, key) => {
       store.dispatch(
         changePlayer({ id: player.id, field: "flowerPots", value: player.flowerPots })
       )
       if (pokemon) {
-        listenForPokemonChanges(pokemon)
+        listenForPokemonChanges(pokemon, ["hp", "ap"])
       }
     })
   }
@@ -664,13 +665,9 @@ class GameContainer {
     }
 
     if (message.text && message.pokemonId) {
-      const pokemon = this.player?.board.get(message.pokemonId)
+      const pokemon = this.gameScene?.board?.pokemons.get(message.pokemonId)
       if (pokemon) {
-        const [x, y] = transformBoardCoordinates(
-          pokemon.positionX,
-          pokemon.positionY
-        )
-        gameScene?.board?.displayText(x, y, t(message.text))
+        gameScene?.board?.displayText(pokemon.x, pokemon.y, t(message.text), true)
       }
     }
   }

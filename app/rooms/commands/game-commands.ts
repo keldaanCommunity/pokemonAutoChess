@@ -586,12 +586,14 @@ export class OnDragDropItemCommand extends Command<
       pokemon = player.flowerPots[index]
       if (!pokemon || Mulches.includes(item) === false) return
       if (item === Item.RICH_MULCH) {
-        if (!pokemon.evolution) {
-          client.send(Transfer.DRAG_DROP_CANCEL, "FULLY GROWN!")
+        if (pokemon.evolution === Pkm.DEFAULT) {
+          client.send(Transfer.DRAG_DROP_CANCEL, { ...message, text: "FULLY GROWN!", pokemonId: pokemon.id })
           return
         }
         const potEvolution = PokemonFactory.createPokemonFromName(pokemon.evolution, player)
+        potEvolution.action = PokemonActionState.SLEEP
         player.flowerPots[index] = potEvolution
+        removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }

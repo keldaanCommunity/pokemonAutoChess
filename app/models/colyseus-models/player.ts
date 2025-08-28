@@ -11,7 +11,7 @@ import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, SynergyTriggers, UniquePool } from "../../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { BattleResult, Rarity, Team } from "../../types/enum/Game"
+import { BattleResult, PokemonActionState, Rarity, Team } from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -85,7 +85,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>(Item.RICH_MULCH, Item.AMAZE_MULCH)
+  @type(["string"]) items = new ArraySchema<Item>(Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.AMAZE_MULCH)
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -642,7 +642,10 @@ function initFlowerPots(player: Player) {
     PokemonFactory.createPokemonFromName(Pkm.CHIKORITA, player),
     PokemonFactory.createPokemonFromName(Pkm.ODDISH, player),
     PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM, player)
-  ]
+  ].map((pokemon) => {
+    pokemon.action = PokemonActionState.SLEEP
+    return pokemon
+  })
 }
 
 function spawnDIAYAvatar(player: Player): Pokemon {

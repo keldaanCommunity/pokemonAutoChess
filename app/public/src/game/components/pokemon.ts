@@ -666,7 +666,7 @@ export default class PokemonSprite extends DraggableObject {
 
   evolutionAnimation() {
     this.displayAnimation("EVOLUTION")
-    if (FlowerPotMons.includes(PkmByIndex[this.index]) === false) this.emoteAnimation()
+    this.emoteAnimation()
   }
 
   spawnAnimation() {
