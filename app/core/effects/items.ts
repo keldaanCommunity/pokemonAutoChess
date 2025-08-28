@@ -29,7 +29,6 @@ import { chance, pickNRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
-import { FlowerPotMons } from "../flower-pots"
 import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {

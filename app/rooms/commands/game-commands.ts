@@ -582,7 +582,6 @@ export class OnDragDropItemCommand extends Command<
     }
 
     let pokemon: Pokemon | undefined
-    console.log("OnDragDropItemCommand", detail)
     if (zone === "flower-pot-zone") {
       pokemon = player.flowerPots[index]
       if (!pokemon || Mulches.includes(item) === false) return
