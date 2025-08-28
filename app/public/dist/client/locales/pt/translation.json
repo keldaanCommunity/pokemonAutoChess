@@ -1805,6 +1805,7 @@
 		"TOXIC_ORB": "Dá sinergia ao POISON. Quem segura fica ENVENENADO, mas aumenta seu ATK em 100%",
 		"METRONOME": "Dá sinergia ao SOM. A cada segundo, quem segura ganha 5 PP",
 		"METAL_COAT": "Dá sinergia ao STEEL.",
+		"AIR_BALLOON": "Dá sinergia ao FLYING. Ganha 10% de chance de esquivar ataques.",
 		"HARD_STONE": "Dá sinergia ao ROCK",
 		"INCENSE": "Cada Pokémon na loja tem 5% de chance adicional de compartilhar uma sinergia comum com o quem segura.",
 		"EXP_SHARE": "Obtenha os melhores valores de ATK, AP, DEF e SPE_DEF de aliados adjacentes na mesma linha",
@@ -1822,8 +1823,7 @@
 		"GOLD_BOTTLE_CAP": "+1% de CRIT_POWER por GOLD que você possui. Ganhe 1 GOLD por nocaute. Se eliminar o último inimigo, ganhe um Jackpot que dobra o valor ganho durante a rodada.",
 		"SACRED_ASH": "Dá RESSURREIÇÃO. Após a ressurreição, até 3 aliados nocauteados também são ressuscitados, mas sem itens.",
 		"COMET_SHARD": "Começa a rodada mergulhando como um cometa em um inimigo no lado oposto do tabuleiro, causando 300% de ATK como SPECIAL ao alvo e aos inimigos adjacentes, e ganhando PROTECT por 2 segundos.",
-		"AMULET_COIN": "+1 de ouro cada vez que o titular derrubar um oponente",
-		"AIR_BALLOON": "Dá sinergia ao FLYING. Ganha 10% de chance de esquivar ataques."
+		"AMULET_COIN": "+1 de ouro cada vez que o titular derrubar um oponente"
 	},
 	"passive_description": {
 		"NONE": "sem passivo",
