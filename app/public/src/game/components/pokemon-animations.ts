@@ -4671,7 +4671,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Twirl,
-    attackSprite: AttackSprite.GRASS_MELEE
+    attackSprite: AttackSprite.GRASS_RANGE
   },
   [Pkm.EXEGGUTOR]: {
     attack: AnimationType.Attack,
