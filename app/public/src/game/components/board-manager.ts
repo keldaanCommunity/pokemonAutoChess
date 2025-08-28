@@ -74,6 +74,7 @@ export default class BoardManager {
   flowerPots: Phaser.GameObjects.Sprite[] = []
   flowerPokemonsInPots: PokemonSprite[] = []
   mulchAmountText: Phaser.GameObjects.Text | null = null
+  mulchIcon: Phaser.GameObjects.Image | null = null
   groundHoles: Phaser.GameObjects.Sprite[]
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
@@ -383,6 +384,10 @@ export default class BoardManager {
       if (this.mulchAmountText === null) {
         this.mulchAmountText = this.displayText(348, 622, "25/50").setOrigin(0, 0)
       }
+      if (this.mulchIcon === null) {
+        this.mulchIcon = this.scene.add.image(332, 636, "item", `${Item.RICH_MULCH}.png`)
+        this.mulchIcon.setScale(0.25).setDepth(DEPTH.TEXT)
+      }
       this.flowerPots.push(potSprite)
     }
   }
@@ -398,6 +403,10 @@ export default class BoardManager {
     if (this.mulchAmountText) {
       this.mulchAmountText.destroy()
       this.mulchAmountText = null
+    }
+    if (this.mulchIcon) {
+      this.mulchIcon?.destroy()
+      this.mulchIcon = null
     }
   }
 
