@@ -2214,7 +2214,7 @@
 		"SHAPELESS": "L'équipe gagne 3 SPEED et 6 HP par synergie unique active",
 		"ETHEREAL": "L'équipe gagne 6 SPEED et 12 HP par synergie unique active",
 		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un Plat Signature après chaque manche et nourrissez l'allié adjacent le STRONGEST",
-		"LUNCH_BREAK": "Le Chef cuisine deux plats et nourrit les deux alliés adjacents les STRONGESTs après chaque tour",
+		"LUNCH_BREAK": "Le Chef cuisine deux plats et nourrit les deux alliés adjacents les STRONGEST après chaque tour",
 		"BANQUET": "Gagnez une deuxième CHEF_HAT."
 	},
 	"item": {
@@ -2945,7 +2945,7 @@
 		"MONSTER": "Les Pokémon MONSTER ont une chance d'infliger FLINCH sur leur cible. Chaque fois qu'ils mettent KO une unité adverse, ils gagnent en ATK, se soignent, augmentent leurs HP max et grossissent en taille.",
 		"HUMAN": "Les Pokémon HUMAN se soignent d'un pourcentage des dégâts qu'ils infligent avec les attaques et capacités, et ils peuvent apprendre une nouvelle capacité grâce aux CT et CS.",
 		"AQUATIC": "Les Pokémon AQUATIC réduisent la durée des statuts négatifs pour tous les membres de votre équipe. Après 8 secondes, une vague déferle sur le terrain, qui retire les pièges et statuts négatifs, soigne vos alliés AQUATIC, et repousse les ennemis en leur infligeant des dégâts.",
-		"BUG": "Au début du combat, vos Pokémon BUG les STRONGESTs sont clonés.",
+		"BUG": "Au début du combat, vos Pokémon BUG les STRONGEST sont clonés.",
 		"FLYING": "Les Pokémon FLYING s'envolent lorsqu'ils tombent sous une certaine quantité de HP, à moins qu'ils subissent PARALYSIS, FREEZE, LOCKED ou SLEEP.",
 		"FLORA": "Quand le premier Pokémon FLORA est KO, une fleur éclot. Elle reçoit un objet aléatoire de chaque allié FLORA mis KO.",
 		"ROCK": "Les Pokémon ROCK gagnent en DEF, résistent mieux aux attaques critiques et peuvent s'adapter à la météo.",
