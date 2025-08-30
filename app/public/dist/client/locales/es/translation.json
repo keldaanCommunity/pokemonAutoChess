@@ -2444,6 +2444,7 @@
 		"TOXIC_ORB": "El portador gana el tipo POISON. Sufre POISONNED durante toda la pelea pero aumenta su ATK en un 100%. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"METRONOME": "El usuario obtiene el tipo SOUND. Cada segundo, el portador gana 5 PP. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"METAL_COAT": "El portador gana el tipo STEEL. Este objeto se suelta al colocar a la unidad en el banquillo.",
+		"AIR_BALLOON": "El portador gana el tipo FLYING. Gana un 10% de probabilidad de esquivar ataques. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"HARD_STONE": "El portador gana la sinergia ROCK. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"INCENSE": "Cada Pokémon en la tienda tiene un 5% adicional de posibilidades de compartir una sinergia común con su poseedor. Este objeto se suelta al colocar a la unidad en el banquillo.",
 		"EXP_SHARE": "Obtén los mejores valores de ATK, AP, DEF y SPE_DEF de los aliados adyacentes en la misma fila. Este objeto se suelta al colocar a la unidad en el banquillo.",
@@ -2555,8 +2556,7 @@
 		"MALICIOUS_ARMOR": "Una peculiar armadura que permite evolucionar a una especie de Pokémon. Un ímpetu malicioso reside en ella.",
 		"RUSTED_SWORD": "Cuenta la leyenda que un héroe utilizó esta espada para poner fin a un terrible desaste en el pasado. Otorga +50% de ATK al portador. Se transfiere al aliado con menor ATK cuando el portador cae debilitado.",
 		"SCROLL_OF_WATERS": "Los secretos de la senda del agua están escritos en este pergamino. Cuando se utiliza en $t(pkm.KUBFU), hará que evolucione a $t(pkm.URSHIFU_RAPID).",
-		"SCROLL_OF_DARKNESS": "Los secretos de la senda de las sombras están escritos en este pergamino. Cuando se utiliza en $t(pkm.KUBFU), hará que evolucione a $t(pkm.URSHIFU_SINGLE)",
-		"AIR_BALLOON": "El portador gana el tipo FLYING. Gana un 10% de probabilidad de esquivar ataques. Este objeto se suelta al colocar a la unidad en el banquillo."
+		"SCROLL_OF_DARKNESS": "Los secretos de la senda de las sombras están escritos en este pergamino. Cuando se utiliza en $t(pkm.KUBFU), hará que evolucione a $t(pkm.URSHIFU_SINGLE)"
 	},
 	"passive_description": {
 		"NONE": "sin pasivo",
