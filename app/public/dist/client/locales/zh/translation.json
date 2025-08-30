@@ -496,7 +496,10 @@
 		"HORN_LEECH": "木角",
 		"DRILL_RUN": "直冲钻",
 		"ROCK_ARTILLERY": "岩石加农炮",
-		"ZING_ZAP": "麻麻刺刺"
+		"ZING_ZAP": "麻麻刺刺",
+		"NO_RETREAT": "背水一战",
+		"TACKLE": "撞击",
+		"STATIC_SHOCK": "霹雳啪啦"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1498,7 +1501,10 @@
 		"ROGGENROLA": "石丸子",
 		"BOLDORE": "地幔岩",
 		"GIGALITH": "庞岩怪",
-		"TOGEDEMARU": "托戈德玛尔"
+		"TOGEDEMARU": "托戈德玛尔",
+		"FALINKS_BRASS": "列阵兵（头头）",
+		"FALINKS_TROOPER": "列阵兵（跟班）",
+		"DEDENNE": "咚咚鼠"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1975,7 +1981,10 @@
 		"HORN_LEECH": "吸取目标的养分，对其造成SPECIAL，数值相当于使用者[200,SP]%的ATK，使用者自身恢复造成伤害量的50%。溢出治疗量的50%转化为SHIELD。",
 		"DRILL_RUN": "像钢钻一样冲过目标，对其造成[15,30,SP]点TRUE并与之交换位置。若相同方向上存在下一目标，立即对其重复此招式。该招式可以暴击。",
 		"ROCK_ARTILLERY": "朝随机敌方宝可梦的周围投掷总计[10,15,25]块岩石，每块对命中的敌方宝可梦造成[20,30,40,SP]点SPECIAL。",
-		"ZING_ZAP": "滚动至目标身后，对其造成[90,SP]点SPECIAL，并使其陷入FLINCH 3秒。若目标处于PARALYSIS，获得[40,SP]点SHIELD。"
+		"ZING_ZAP": "滚动至目标身后，对其造成[90,SP]点SPECIAL，并使其陷入FLINCH 3秒。若目标处于PARALYSIS，获得[40,SP]点SHIELD。",
+		"NO_RETREAT": "队伍中每有一只列阵兵，便提升1点ATK，1点DEF，1点SPE_DEF和5点SPEED。每只跟班撞击目标，造成[20,SP]点SPECIAL。",
+		"TACKLE": "对目标造成[20,40,60,SP]点SPECIAL。",
+		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2797,7 +2806,8 @@
 		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。",
 		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。",
 		"ACCELERATION": "加速：每移动1格，提升20点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
-		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。"
+		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
+		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为5 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。"
 	},
 	"stat": {
 		"ATK": "攻击",
