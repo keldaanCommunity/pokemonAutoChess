@@ -1038,7 +1038,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case EffectEnum.SKYDIVE:
             player.titles.add(Title.BIRD_KEEPER)
             break
-          case EffectEnum.SUN_FLOWER:
+          case EffectEnum.FLOWER_POWER:
             player.titles.add(Title.GARDENER)
             break
           case EffectEnum.GOOGLE_SPECS:
