@@ -291,7 +291,7 @@ export function hiddenPowerAnimation(args: AbilityAnimationArgs) {
   })
 }
 
-function addAbilitySprite(
+export function addAbilitySprite(
   scene: GameScene | DebugScene,
   ability: Ability | string,
   ap: number,

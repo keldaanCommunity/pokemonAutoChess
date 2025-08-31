@@ -14,7 +14,7 @@ import {
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
-import { AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
+import { AbilityAnimationArgs, AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
@@ -49,7 +49,7 @@ import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import { displayAbility } from "./abilities-animations"
+import { addAbilitySprite, displayAbility } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
 import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
@@ -629,7 +629,7 @@ export default class PokemonSprite extends DraggableObject {
     this.add(resurectAnim)
   }
 
-  displayAnimation(anim: string) {
+  displayAnimation(anim: string, args: Partial<AbilityAnimationArgs> = {}) {
     return displayAbility({
       scene: this.scene as GameScene,
       pokemonsOnBoard: [],
@@ -644,7 +644,8 @@ export default class PokemonSprite extends DraggableObject {
       targetX: this.targetX ?? -1,
       targetY: this.targetY ?? -1,
       flip: this.flip,
-      ap: this.ap
+      ap: this.ap,
+      ...args
     })
   }
 
@@ -663,16 +664,17 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   blossomAnimation() {
-    const g = <GameScene>this.scene
+    const scene = <GameScene>this.scene
     const flowerPot = FlowerPots.find((pot) =>
       FlowerMonByPot[pot].includes(PkmByIndex[this.index])
     )
     if (flowerPot) {
-      g.board?.flowerPokemonsInPots
+      scene.board?.flowerPokemonsInPots
         .find((p) => p.index === this.index)
         ?.destroy()
       const [startX, startY] =
         FLOWER_POTS_POSITIONS[FlowerPots.indexOf(flowerPot)]
+      addAbilitySprite(scene, Ability.PETAL_BLIZZARD, 0, [startX, startY - 24])
       this.moveManager.setEnable(false)
       this.setPosition(startX, startY)
       const [x, y] = transformEntityCoordinates(
@@ -681,13 +683,13 @@ export default class PokemonSprite extends DraggableObject {
         this.flip
       )
 
-      g.animationManager?.animatePokemon(
+      scene.animationManager?.animatePokemon(
         this,
         PokemonActionState.HOP,
         this.flip,
         false
       )
-      g.tweens.add({
+      scene.tweens.add({
         targets: this,
         x,
         y,
