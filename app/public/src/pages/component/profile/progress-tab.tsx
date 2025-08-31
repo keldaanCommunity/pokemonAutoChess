@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
+import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Title } from "../../../../../types"
 import { NonPkm } from "../../../../../types/enum/Pokemon"
@@ -20,7 +20,7 @@ export function ProgressTab() {
     const nbPokemonsPlayed = pokemonCollection.filter(
         (item) => item.played > 0
     ).length
-    const nbPokemonsTotal = precomputedPokemons.filter(
+    const nbPokemonsTotal = precomputedPokemonsImplemented.filter(
         (p) => NonPkm.includes(p.name) === false
     ).length
     const nbTitlesUnlocked = user?.titles.length ?? 0

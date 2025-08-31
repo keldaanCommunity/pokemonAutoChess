@@ -1,10 +1,7 @@
-import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
-import { Ability } from "../../types/enum/Ability"
-import { Passive } from "../../types/enum/Passive"
+import { precomputedPokemonsImplemented } from "../../../gen/precomputed-pokemons"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Pokemon } from "../colyseus-models/pokemon"
-import { PkmColorVariants } from "../pokemon-factory"
 
 console.time("precompute-types")
 
@@ -13,12 +10,7 @@ const dataAll = Object.fromEntries<Pokemon[]>(
   synergies.map((s) => [s, []])
 ) as { [s in Synergy]: Pokemon[] }
 
-precomputedPokemons
-  .filter(
-    (pokemon) =>
-      (pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE)
-      && PkmColorVariants.includes(pokemon.name as Pkm) === false
-  )
+precomputedPokemonsImplemented
   .forEach((pokemon) => {
     pokemon.types.forEach((type) => {
       dataAll[type].push(pokemon)
