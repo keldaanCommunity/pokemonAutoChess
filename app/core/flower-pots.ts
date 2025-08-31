@@ -37,7 +37,7 @@ export const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
 
 export function getFlowerPotsUnlocked(player: Player): FlowerPot[] {
     const hasAllEvolutions = player.flowerPots.every(pot => pot.evolution === Pkm.DEFAULT)
-    if (hasAllEvolutions) player.titles.add(Title.BLOSSOM)
+    if (hasAllEvolutions) player.titles.add(Title.BLOSSOMED)
     return player.flowerPotsSpawnOrder.filter(pot => {
         if (player.effects.has(EffectEnum.COTTONWEED)) return pot === FlowerPot.PINK
         if (player.effects.has(EffectEnum.FLYCATCHER)) return [FlowerPot.PINK, FlowerPot.YELLOW].includes(pot)

@@ -3067,7 +3067,7 @@
 		"FINISHER": "Finisher",
 		"VICTORIOUS": "Victorious",
 		"MOLE": "Mole",
-		"BLOSSOM": "Blossom"
+		"BLOSSOMED": "Blossomed"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3154,7 +3154,7 @@
 		"FINISHER": "Finish the Victory Road race",
 		"VICTORIOUS": "Finish first at the Victory Road race",
 		"MOLE": "Dig out your entire board completely",
-		"BLOSSOM": "Get 5 fully grown flower pots"
+		"BLOSSOMED": "Get 5 fully grown flower pots"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
