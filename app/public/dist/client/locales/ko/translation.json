@@ -1839,7 +1839,7 @@
 		"FROST_BREATH": "전방 2칸의 원뿔 범위 적들에게 [30,60,120,SP] SPECIAL 를 가한다. [50,LK]% 확률로 2초간 FREEZE 을 가한다. 치명타가 터질 수 있다.",
 		"SALT_CURE": "인접한 아군들은 [10,20,40,SP] SHIELD 을 얻고 부정적인 효과를 제거한다. 인접한 WATER, STEEL, GHOST 적들에게 5초간 BURN 을 가한다.",
 		"SPICY_EXTRACT": "가장 가까운 1/2/3 아군들을 [2,SP] 초간 RAGE 상태로 만든다.",
-		"SWEET_SCENT": "3칸 내 적들은 더 이상 회피를 할 수 없고, [6,SP] SPE_DEF 이 감소하며, [30,LK]% 확률로 1초간 CHARM 상태가 된다.",
+		"SWEET_SCENT": "3칸 내 적들은 더 이상 회피를 할 수 없고, [6,SP] SPE_DEF [12,SP] SPEED 이 감소하며, [30,LK]% 확률로 1초간 CHARM 상태가 된다.",
 		"SWALLOW": "최대 3중첩까지 DEF 과 SPE_DEF 을 3씩 증가시킨다. HP 이 25% 미만이면 중첩당 최대 HP 의 [20,SP]% 회복한다. 3중첩 초과 시, 전방 모든 적들에게 [40,80,150,SP] SPECIAL 를 가한다.",
 		"DECORATE": "가장 가까운 아군을 치장하여 ATK 을 [1,2,3,SP] , AP 을 [10,20,30,SP] 증가시킨다.",
 		"DRAGON_CLAW": "가장 체력이 적은 인접한 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 WOUND 를 가한다.",

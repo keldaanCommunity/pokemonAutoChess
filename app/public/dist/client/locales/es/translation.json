@@ -1899,7 +1899,7 @@
 		"FROST_BREATH": "Exhala un aliento gélido, infligiendo [30,60,120,SP] SPECIAL a todos los enemigos que estén frente al usuario y a 2 o menos casillas de distancia (el área de efecto tiene forma de cono), con una probabilidad del [50,LK]% de quedar FREEZE durante 2 segundos. Puede ser crítico por defecto.",
 		"SALT_CURE": "Otorga [10,20,40,SP] de SHIELD y cura los problemas de estado de los aliados adyacentes. Los enemigos adyacentes de tipo WATER, STEEL o GHOST pasan a estar BURN durante 5 segundos.",
 		"SPICY_EXTRACT": "Provoca RAGE durante [2,SP] segundos a los [1,2,3] aliados más cercanos.",
-		"SWEET_SCENT": "Los enemigos en un radio de 3 casillas no pueden esquivar ataques, pierden [6,SP] SPE_DEF y tienen un [30,LK]% de posibilidades de quedar CHARM durante 1 segundo.",
+		"SWEET_SCENT": "Los enemigos en un radio de 3 casillas no pueden esquivar ataques, pierden [6,SP] SPE_DEF y [12,SP] SPEED y tienen un [30,LK]% de posibilidades de quedar CHARM durante 1 segundo.",
 		"SWALLOW": "Almacena poder y mejora su DEF y SPE_DEF en 3 puntos hasta 3 veces. Si está por debajo del 25% de sus HP, se traga el poder almacenado, recuperando un [20,SP]% de sus HP máximos por acumulación. Si tiene más de 3 acumulaciones, las escupe, infligiendo [40,80,150,SP] de SPECIAL a todos los enemigos que tenga delante.",
 		"DECORATE": "Decora al aliado cercano más fuerte, incrementando su ATK en [1,2,3,SP] y su AP en [10,20,30,SP]",
 		"DRAGON_CLAW": "Inflige [30,60,120,SP] de SPECIAL al enemigo adyacente con la salud más baja y le causa WOUND durante 4 segundos.",

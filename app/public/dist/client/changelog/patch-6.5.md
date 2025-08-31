@@ -31,6 +31,7 @@
 - Seedot line is now regional
 - Gossifleur line is now regional
 - Bellsprout line, Chikorita line and Hoppip line are now in Special category
+- New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
 
 # Changes to Synergies
 

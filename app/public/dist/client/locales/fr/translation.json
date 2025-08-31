@@ -1927,7 +1927,7 @@
 		"FROST_BREATH": "Souffle glacial infligeant [30,60,120,SP] SPECIAL aux ennemis à deux cases de distance dans un cône devant le lanceur, avec [50,LK]% de chance de geler pendant 2 secondes. Peut infliger un coup critique par défaut.",
 		"SALT_CURE": "Les alliés adjacents gagnent [10,20,40,SP] de SHIELD et leurs conditions de statut négatives sont soignées. Les ennemis adjacents de type WATER, STEEL ou GHOST subissent BURN pendant 5 secondes.",
 		"SPICY_EXTRACT": "Rend RAGE [1,2,3] alliés les plus proches pendant [2,SP] secondes.",
-		"SWEET_SCENT": "Les ennemis dans un rayon de 3 cases ne peuvent plus esquiver les attaques, perdent [6,SP] SPE_DEF et ont [30,LK]% de chance d'être CHARM pendant 1 seconde.",
+		"SWEET_SCENT": "Les ennemis dans un rayon de 3 cases ne peuvent plus esquiver les attaques, perdent [6,SP] SPE_DEF et [12,SP] SPEED et ont [30,LK]% de chance d'être CHARM pendant 1 seconde.",
 		"SWALLOW": "Accumule de la puissance et augmente sa DEF et sa SPE_DEF de 3 jusqu'à 3 fois. Si les HP du lanceur sont inférieurs à 25 %, le lanceur avale, ce qui soigne [20,SP]% de ses HP max par cumul. Au-delà de 3 cumuls, régurgite, infligeant [40,80,150,SP] SPECIAL à tous les ennemis en face.",
 		"DECORATE": "Décore l'allié le plus proche et le STRONGEST, augmentant son ATK de [1,2,3,SP] et sa AP de [10,20,30,SP].",
 		"DRAGON_CLAW": "Inflige [30,60,120,SP] SPECIAL à l'ennemi adjacent ayant les HP les plus faibles et WOUND pendant 4 secondes.",

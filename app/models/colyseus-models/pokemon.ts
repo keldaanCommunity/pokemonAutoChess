@@ -3481,7 +3481,7 @@ export class Chikorita extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.STUN_SPORE // need to find another ability inflatuate, speed/atk debuff
+  skill = Ability.SWEET_SCENT
 }
 
 export class Bayleef extends Pokemon {
@@ -3496,7 +3496,7 @@ export class Bayleef extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 2
-  skill = Ability.STUN_SPORE
+  skill = Ability.SWEET_SCENT
 }
 
 export class Meganium extends Pokemon {
@@ -3510,7 +3510,7 @@ export class Meganium extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 2
-  skill = Ability.STUN_SPORE
+  skill = Ability.SWEET_SCENT
 }
 
 export class Venipede extends Pokemon {
