@@ -299,6 +299,10 @@ export interface IPlayer {
   itemsProposition: ArraySchema<Item>
   pokemonsProposition: ArraySchema<PkmProposition>
   loadingProgress: number
+  berryTreesStages: number[]
+  flowerPots: Pokemon[]
+  mulch: number
+  mulchCap: number
   effects: Effects
   isBot: boolean
   map: DungeonPMDO | "town"

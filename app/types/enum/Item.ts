@@ -706,6 +706,7 @@ export const UnholdableItems: Item[] = [
   ...Flavors,
   ...Dishes,
   ...SynergyGems,
+  ...Mulches,
   Item.METEORITE,
   Item.MYSTERY_BOX,
   Item.TREASURE_BOX,

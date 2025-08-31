@@ -6,12 +6,23 @@ import {
   ConditionBasedEvolutionRule,
   carryOverPermanentStats
 } from "../../core/evolution-rules"
+import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import { BOARD_HEIGHT, BOARD_WIDTH, SynergyTriggers, UniquePool } from "../../types/Config"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  SynergyTriggers,
+  UniquePool
+} from "../../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
-import { BattleResult, PokemonActionState, Rarity, Team } from "../../types/enum/Game"
+import {
+  BattleResult,
+  PokemonActionState,
+  Rarity,
+  Team
+} from "../../types/enum/Game"
 import {
   ArtificialItems,
   Berries,
@@ -85,7 +96,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>(Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.RICH_MULCH, Item.AMAZE_MULCH)
+  @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -108,7 +119,11 @@ export default class Player extends Schema implements IPlayer {
   ]
   @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
   @type([Pokemon]) flowerPots: Pokemon[] = []
-  @type(["uint8"]) groundHoles: number[] = new Array(BOARD_WIDTH * BOARD_HEIGHT / 2).fill(0)
+  @type("uint8") mulch: number = 0
+  @type("uint8") mulchCap: number = MulchStockCaps[0]
+  @type(["uint8"]) groundHoles: number[] = new Array(
+    (BOARD_WIDTH * BOARD_HEIGHT) / 2
+  ).fill(0)
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
@@ -132,6 +147,7 @@ export default class Player extends Schema implements IPlayer {
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
+  flowerPotsSpawnOrder: FlowerPot[] = shuffleArray([...FlowerPots])
   lightX: number
   lightY: number
   ghost: boolean = false
@@ -606,6 +622,17 @@ export default class Player extends Schema implements IPlayer {
       this.titles.add(Title.DECURION)
     }
   }
+
+  collectMulch(amount: number) {
+    this.mulch += amount
+    if (this.mulch >= this.mulchCap) {
+      this.mulch = this.mulch % this.mulchCap
+      const index = MulchStockCaps.indexOf(this.mulchCap)
+      this.mulchCap = MulchStockCaps[index + 1] ?? MulchStockCaps.at(-1)
+      const mulchCollected = this.items.filter(i => i === Item.RICH_MULCH).length + this.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) - 8
+      this.items.push(mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH)
+    }
+  }
 }
 
 function pickRandomTMs() {
@@ -625,11 +652,19 @@ function initBuriedItems() {
 
   // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
   for (let i = 3; i < 7; i++) {
-    buriedItems[i] = pickRandomIn([Item.TRASH, Item.LEFTOVERS, Item.COIN, Item.NUGGET, Item.FOSSIL_STONE])
+    buriedItems[i] = pickRandomIn([
+      Item.TRASH,
+      Item.LEFTOVERS,
+      Item.COIN,
+      Item.NUGGET,
+      Item.FOSSIL_STONE
+    ])
   }
 
   // 1 precious (artificial item, treasure box, big nugget)
-  buriedItems[7] = chance(1 / 2) ? pickRandomIn(ArtificialItems) : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
+  buriedItems[7] = chance(1 / 2)
+    ? pickRandomIn(ArtificialItems)
+    : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
 
   shuffleArray(buriedItems)
   return buriedItems

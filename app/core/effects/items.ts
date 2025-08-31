@@ -29,6 +29,7 @@ import { chance, pickNRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
+import { FlowerPotMons } from "../flower-pots"
 import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
@@ -966,11 +967,12 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.AMAZE_MULCH]: [
     new OnItemEquippedEffect(({ pokemon, player, item }) => {
-      if (pokemon.name === Pkm.BELLOSSOM) {
-        pokemon.hp += 30
+      if (FlowerPotMons.includes(pokemon.name)) {
+        pokemon.hp += 50
         pokemon.ap += 30
+        removeInArray(player.items, item)
       }
-      return false
+      return false // prevent item from being equipped      
     })
   ]
 }

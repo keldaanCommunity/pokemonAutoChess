@@ -77,7 +77,8 @@ export default class Simulation extends Schema implements ISimulation {
   redEffects = new Set<EffectEnum>()
   board: Board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
   finished = false
-  flowerSpawn: boolean[] = [false, false]
+  blueFlowerSpawn: number = 0
+  redFlowerSpawn: number = 0
   stageLevel = 0
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
@@ -144,7 +145,6 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.finished = false
     this.winnerId = ""
-    this.flowerSpawn = [false, false]
     this.stormLightningTimer = randomBetween(4000, 8000)
     if (
       SynergyEffects[Synergy.AQUATIC].some(
@@ -1083,10 +1083,10 @@ export default class Simulation extends Schema implements ISimulation {
         pokemon.effects.add(effect)
         break
 
-      case EffectEnum.ODD_FLOWER:
-      case EffectEnum.GLOOM_FLOWER:
-      case EffectEnum.VILE_FLOWER:
-      case EffectEnum.SUN_FLOWER:
+      case EffectEnum.COTTONWEED:
+      case EffectEnum.FLYCATCHER:
+      case EffectEnum.FRAGRANT:
+      case EffectEnum.FLOWER_POWER:
         if (types.has(Synergy.FLORA)) {
           pokemon.effects.add(effect)
         }

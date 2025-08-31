@@ -3481,7 +3481,7 @@ export class Chikorita extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.STUN_SPORE
+  skill = Ability.STUN_SPORE // need to find another ability inflatuate, speed/atk debuff
 }
 
 export class Bayleef extends Pokemon {
@@ -3490,10 +3490,10 @@ export class Bayleef extends Pokemon {
   stars = 2
   evolution = Pkm.MEGANIUM
   hp = 140
-  atk = 11
+  atk = 10
   speed = 51
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
@@ -3504,10 +3504,10 @@ export class Meganium extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 3
   hp = 250
-  atk = 26
+  atk = 22
   speed = 51
-  def = 2
-  speDef = 2
+  def = 6
+  speDef = 6
   maxPP = 90
   range = 2
   skill = Ability.STUN_SPORE
@@ -4250,8 +4250,8 @@ export class Bellsprout extends Pokemon {
   hp = 70
   atk = 6
   speed = 47
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.INGRAIN
@@ -4262,11 +4262,11 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VICTREEBEL
-  hp = 160
+  hp = 150
   atk = 12
   speed = 47
-  def = 6
-  speDef = 6
+  def = 5
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.INGRAIN
@@ -4276,11 +4276,11 @@ export class Victreebel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 240
+  hp = 230
   atk = 20
   speed = 47
-  def = 8
-  speDef = 8
+  def = 7
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.INGRAIN
@@ -4834,11 +4834,11 @@ export class Skiploom extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.JUMPLUFF
-  hp = 110
+  hp = 100
   atk = 8
   speed = 60
-  def = 2
-  speDef = 2
+  def = 3
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.ACROBATICS
@@ -4848,11 +4848,11 @@ export class Jumpluff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 220
-  atk = 16
+  hp = 150
+  atk = 12
   speed = 60
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.ACROBATICS
@@ -7077,7 +7077,7 @@ export class Oddish extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.GLOOM
-  hp = 90
+  hp = 80
   atk = 8
   speed = 41
   def = 4
@@ -7092,8 +7092,8 @@ export class Gloom extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VILEPLUME
-  hp = 160
-  atk = 18
+  hp = 140
+  atk = 16
   speed = 41
   def = 6
   speDef = 6
@@ -7106,8 +7106,8 @@ export class Vileplume extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 260
-  atk = 25
+  hp = 200
+  atk = 24
   speed = 41
   def = 8
   speDef = 8

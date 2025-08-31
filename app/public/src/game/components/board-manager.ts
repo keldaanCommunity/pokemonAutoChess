@@ -1,5 +1,10 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import {
+  FLOWER_POTS_POSITIONS,
+  FlowerPotMons,
+  FlowerPots
+} from "../../../../core/flower-pots"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -45,7 +50,6 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
-import { FlowerPots, FLOWER_POTS_POSITIONS, FlowerPotMons } from "../../../../core/flower-pots"
 
 export enum BoardMode {
   PICK = "pick",
@@ -335,15 +339,14 @@ export default class BoardManager {
   }
 
   renderFlowerPots() {
-    this.flowerPots.forEach((pot) => pot.destroy())
-    this.flowerPokemonsInPots.forEach((p) => p.destroy())
-    this.flowerPots = []
-    this.flowerPokemonsInPots = []
-
+    this.hideFlowerPots()
     const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
-    const nbPots = SynergyTriggers[Synergy.FLORA].filter(
+    let nbPots = SynergyTriggers[Synergy.FLORA].filter(
       (n) => n <= floraLevel
     ).length
+    if (this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
+      nbPots = 5
+    }
 
     for (let i = 0; i < nbPots; i++) {
       const potSprite = this.scene.add.sprite(
@@ -354,7 +357,9 @@ export default class BoardManager {
       )
 
       potSprite
-        .setDepth(i % 2 ? DEPTH.INANIMATE_OBJECTS : DEPTH.INANIMATE_OBJECTS + 0.1)
+        .setDepth(
+          i % 2 ? DEPTH.INANIMATE_OBJECTS : DEPTH.INANIMATE_OBJECTS + 0.1
+        )
         .setScale(2, 2)
         .setOrigin(0.5, 0.5)
       const potPokemon = this.player.flowerPots[i]
@@ -380,15 +385,37 @@ export default class BoardManager {
       }
 
       this.flowerPots.push(potSprite)
+    }
 
-      if (this.mulchAmountText === null) {
-        this.mulchAmountText = this.displayText(348, 622, "25/50").setOrigin(0, 0)
-      }
-      if (this.mulchIcon === null) {
-        this.mulchIcon = this.scene.add.image(332, 636, "item", `${Item.RICH_MULCH}.png`)
-        this.mulchIcon.setScale(0.25).setDepth(DEPTH.TEXT)
-      }
-      this.flowerPots.push(potSprite)
+    this.updateMulchCount()
+  }
+
+  updateMulchCount() {
+    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
+    const nbPots = SynergyTriggers[Synergy.FLORA].filter(
+      (n) => n <= floraLevel
+    ).length
+    if (nbPots === 0) {
+      this.mulchAmountText?.destroy()
+      this.mulchAmountText = null
+      this.mulchIcon?.destroy()
+      this.mulchIcon = null
+      return
+    }
+
+    if (this.mulchAmountText === null) {
+      this.mulchAmountText = this.displayText(348, 622, "").setOrigin(0, 0)
+    }
+    this.mulchAmountText.setText(`${this.player.mulch}/${this.player.mulchCap}`)
+    if (this.mulchIcon === null) {
+      const mulchCollected = this.player.items.filter(i => i === Item.RICH_MULCH).length + this.player.flowerPots.reduce((acc, pot) => acc + pot.stars - 1, 0)
+      this.mulchIcon = this.scene.add.image(
+        332,
+        636,
+        "item",
+        `${mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH}.png`
+      )
+      this.mulchIcon.setScale(0.25).setDepth(DEPTH.TEXT)
     }
   }
 
@@ -689,7 +716,10 @@ export default class BoardManager {
 
   removePokemonsOnBoard() {
     this.pokemons.forEach((pokemon) => {
-      if (!isOnBench(pokemon) && FlowerPotMons.includes(PkmByIndex[pokemon.index]) === false) {
+      if (
+        !isOnBench(pokemon) &&
+        !(FlowerPotMons.includes(PkmByIndex[pokemon.index]) && pokemon.positionY === -1)
+      ) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -1036,7 +1066,9 @@ export default class BoardManager {
       })
 
       // move board pokemons into the portal
-      const pokemonsToTeleport = [...this.pokemons.values()].filter(p => FlowerPotMons.includes(PkmByIndex[p.index]) === false)
+      const pokemonsToTeleport = [...this.pokemons.values()].filter(
+        (p) => FlowerPotMons.includes(PkmByIndex[p.index]) === false
+      )
       for (const pokemon of pokemonsToTeleport) {
         const delay = randomBetween(0, 300)
         this.scene.tweens.add({

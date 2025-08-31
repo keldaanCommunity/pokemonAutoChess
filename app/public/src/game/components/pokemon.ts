@@ -1,7 +1,13 @@
 import { SetSchema } from "@colyseus/schema"
+import { get } from "http"
 import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import {
+  FLOWER_POTS_POSITIONS,
+  FlowerMonByPot,
+  FlowerPots
+} from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
   type Emotion,
@@ -32,7 +38,10 @@ import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
-import { OrientationArray, OrientationVector } from "../../../../utils/orientation"
+import {
+  OrientationArray,
+  OrientationVector
+} from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
@@ -50,7 +59,6 @@ import {
   PokemonAnimations
 } from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
-import { FlowerPotMons } from "../../../../core/flower-pots"
 
 const spriteCountPerPokemon = new Map<string, number>()
 
@@ -652,6 +660,43 @@ export default class PokemonSprite extends DraggableObject {
         this.flip
       )
     })
+  }
+
+  blossomAnimation() {
+    const g = <GameScene>this.scene
+    const flowerPot = FlowerPots.find((pot) =>
+      FlowerMonByPot[pot].includes(PkmByIndex[this.index])
+    )
+    if (flowerPot) {
+      g.board?.flowerPokemonsInPots
+        .find((p) => p.index === this.index)
+        ?.destroy()
+      const [startX, startY] =
+        FLOWER_POTS_POSITIONS[FlowerPots.indexOf(flowerPot)]
+      this.moveManager.setEnable(false)
+      this.setPosition(startX, startY)
+      const [x, y] = transformEntityCoordinates(
+        this.positionX,
+        this.positionY,
+        this.flip
+      )
+
+      g.animationManager?.animatePokemon(
+        this,
+        PokemonActionState.HOP,
+        this.flip,
+        false
+      )
+      g.tweens.add({
+        targets: this,
+        x,
+        y,
+        duration: 1000,
+        onComplete: () => {
+          this.moveManager.setEnable(true)
+        }
+      })
+    }
   }
 
   emoteAnimation() {

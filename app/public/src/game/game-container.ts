@@ -6,6 +6,10 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
+import {
+  FLOWER_POTS_POSITIONS,
+  FlowerPotMons
+} from "../../../core/flower-pots"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -48,7 +52,6 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
-import { FLOWER_POTS_POSITIONS } from "../../../core/flower-pots"
 
 class GameContainer {
   room: Room<GameState>
@@ -410,19 +413,22 @@ class GameContainer {
       this.initializeGame()
     }
 
-    const listenForPokemonChanges = (pokemon: Pokemon, fields: NonFunctionPropNames<IPokemon>[] = [
-      "positionX",
-      "positionY",
-      "action",
-      "hp",
-      "atk",
-      "ap",
-      "def",
-      "speed",
-      "shiny",
-      "skill",
-      "meal"
-    ]) => {
+    const listenForPokemonChanges = (
+      pokemon: Pokemon,
+      fields: NonFunctionPropNames<IPokemon>[] = [
+        "positionX",
+        "positionY",
+        "action",
+        "hp",
+        "atk",
+        "ap",
+        "def",
+        "speed",
+        "shiny",
+        "skill",
+        "meal"
+      ]
+    ) => {
       const $pokemon = this.$<Pokemon>(pokemon)
       $pokemon.onChange(() => {
         fields.forEach((field) => {
@@ -499,7 +505,10 @@ class GameContainer {
     })
 
     $player.synergies.onChange(() => {
-      if (player.id === this.spectatedPlayerId && this.gameScene?.board?.mode === BoardMode.PICK) {
+      if (
+        player.id === this.spectatedPlayerId &&
+        this.gameScene?.board?.mode === BoardMode.PICK
+      ) {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.renderBerryTrees()
         this.gameScene?.board?.renderFlowerPots()
@@ -509,18 +518,33 @@ class GameContainer {
     $player.flowerPots.onAdd((pokemon, index) => {
       listenForPokemonChanges(pokemon, ["hp", "ap"])
       const board = this.gameScene?.board
-      if (board && player.id === this.spectatedPlayerId && this.gameScene?.board?.mode !== BoardMode.TOWN) {
+      if (
+        board &&
+        player.id === this.spectatedPlayerId &&
+        this.gameScene?.board?.mode !== BoardMode.TOWN
+      ) {
         board.renderFlowerPots()
         const [x, y] = FLOWER_POTS_POSITIONS[index]
-        const evolutionAnim = this.gameScene.add.sprite(x, y - 24, "abilities", "EVOLUTION/000.png")
-        evolutionAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => evolutionAnim.destroy())
+        const evolutionAnim = this.gameScene.add.sprite(
+          x,
+          y - 24,
+          "abilities",
+          "EVOLUTION/000.png"
+        )
+        evolutionAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
+          evolutionAnim.destroy()
+        )
         evolutionAnim.setScale(2).setDepth(DEPTH.BOOST_BACK).play("EVOLUTION")
       }
     }, false)
 
     $player.flowerPots.onChange((pokemon, key) => {
       store.dispatch(
-        changePlayer({ id: player.id, field: "flowerPots", value: player.flowerPots })
+        changePlayer({
+          id: player.id,
+          field: "flowerPots",
+          value: player.flowerPots
+        })
       )
       if (pokemon) {
         listenForPokemonChanges(pokemon, ["hp", "ap"])
@@ -631,16 +655,17 @@ class GameContainer {
       (board.mode === BoardMode.PICK || pokemon.positionY === 0)
     ) {
       const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)
-      if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
+      if (!pokemonUI) return
+      if (pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
-      } else if (pokemonUI && pokemon.stars > 1) {
+      } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
         playSound(
           pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3
         )
-      } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
+      } else if (pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
-      } else if (pokemonUI) {
+      } else {
         pokemonUI.spawnAnimation()
       }
     }
@@ -667,7 +692,12 @@ class GameContainer {
     if (message.text && message.pokemonId) {
       const pokemon = this.gameScene?.board?.pokemons.get(message.pokemonId)
       if (pokemon) {
-        gameScene?.board?.displayText(pokemon.x, pokemon.y, t(message.text), true)
+        gameScene?.board?.displayText(
+          pokemon.x,
+          pokemon.y,
+          t(message.text),
+          true
+        )
       }
     }
   }

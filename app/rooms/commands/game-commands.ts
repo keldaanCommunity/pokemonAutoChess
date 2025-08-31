@@ -20,6 +20,7 @@ import { TownEncounters } from "../../core/town-encounters"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -106,7 +107,6 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
-import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -562,7 +562,13 @@ export class OnDragDropItemCommand extends Command<
     detail: IDragDropItemMessage
   }
 > {
-  execute({ client, detail }: { client: Client; detail: IDragDropItemMessage }) {
+  execute({
+    client,
+    detail
+  }: {
+    client: Client
+    detail: IDragDropItemMessage
+  }) {
     const playerId = client.auth.uid
     const message = {
       updateBoard: true,
@@ -584,13 +590,23 @@ export class OnDragDropItemCommand extends Command<
     let pokemon: Pokemon | undefined
     if (zone === "flower-pot-zone") {
       pokemon = player.flowerPots[index]
-      if (!pokemon || Mulches.includes(item) === false) return
+      if (!pokemon || Mulches.includes(item) === false) {
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
       if (item === Item.RICH_MULCH) {
         if (pokemon.evolution === Pkm.DEFAULT) {
-          client.send(Transfer.DRAG_DROP_CANCEL, { ...message, text: "FULLY GROWN!", pokemonId: pokemon.id })
+          client.send(Transfer.DRAG_DROP_CANCEL, {
+            ...message,
+            text: "FULLY GROWN!",
+            pokemonId: pokemon.id
+          })
           return
         }
-        const potEvolution = PokemonFactory.createPokemonFromName(pokemon.evolution, player)
+        const potEvolution = PokemonFactory.createPokemonFromName(
+          pokemon.evolution,
+          player
+        )
         potEvolution.action = PokemonActionState.SLEEP
         player.flowerPots[index] = potEvolution
         removeInArray(player.items, item)
@@ -1314,21 +1330,34 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.room.clock.setTimeout(() => {
       if (player.synergies.getSynergyStep(Synergy.GROUND) > 0) {
         player.board.forEach((pokemon, pokemonId) => {
-          if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon) && pokemon.items.has(Item.CHEF_HAT) === false) {
-            const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
+          if (
+            pokemon.types.has(Synergy.GROUND) &&
+            !isOnBench(pokemon) &&
+            pokemon.items.has(Item.CHEF_HAT) === false
+          ) {
+            const index =
+              (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
             const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
             const isReachingMaxDepth = player.groundHoles[index] === 4
             if (!hasAlreadyReachedMaxDepth) {
-              let buriedItem = isReachingMaxDepth ? player.buriedItems[index] : null
+              let buriedItem = isReachingMaxDepth
+                ? player.buriedItems[index]
+                : null
               this.room.broadcast(Transfer.DIG, {
                 pokemonId,
                 buriedItem
               })
               this.room.clock.setTimeout(() => {
-                player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+                player.groundHoles[index] = max(5)(
+                  player.groundHoles[index] + 1
+                )
               }, 500)
 
-              if (pokemon.items.has(Item.EXPLORER_KIT) && isReachingMaxDepth && !buriedItem) {
+              if (
+                pokemon.items.has(Item.EXPLORER_KIT) &&
+                isReachingMaxDepth &&
+                !buriedItem
+              ) {
                 if (chance(0.1, pokemon)) {
                   buriedItem = Item.BIG_NUGGET
                 } else if (chance(0.5, pokemon)) {
@@ -1350,7 +1379,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                     player.items.push(...pickNRandomIn(ItemComponents, 2))
                   } else if (isIn(SynergyGems, buriedItem)) {
                     const type = SynergyGivenByGem[buriedItem]
-                    player.bonusSynergies.set(type, (player.bonusSynergies.get(type) ?? 0) + 1)
+                    player.bonusSynergies.set(
+                      type,
+                      (player.bonusSynergies.get(type) ?? 0) + 1
+                    )
                     player.items.push(buriedItem)
                     player.updateSynergies()
                   } else {
@@ -1398,21 +1430,24 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         PassiveEffects[pokemon.passive]?.filter(
           (p) => p instanceof OnStageStartEffect
         ) ?? []
-      passiveEffects.forEach((effect) => effect.apply({ pokemon, player, room: this.room }))
+      passiveEffects.forEach((effect) =>
+        effect.apply({ pokemon, player, room: this.room })
+      )
 
       // Held item effects on stage start
-      const itemEffects = values(pokemon.items).flatMap(item => ItemEffects[item])?.filter(
-        (p) => p instanceof OnStageStartEffect
-      ) ?? []
-      itemEffects.forEach((effect) => effect.apply({ pokemon, player, room: this.room }))
+      const itemEffects =
+        values(pokemon.items)
+          .flatMap((item) => ItemEffects[item])
+          ?.filter((p) => p instanceof OnStageStartEffect) ?? []
+      itemEffects.forEach((effect) =>
+        effect.apply({ pokemon, player, room: this.room })
+      )
     })
 
     // Unholdable item effects on stage start
     player.items.forEach((item) => {
       const itemEffects =
-        ItemEffects[item]?.filter(
-          (p) => p instanceof OnStageStartEffect
-        ) ?? []
+        ItemEffects[item]?.filter((p) => p instanceof OnStageStartEffect) ?? []
       itemEffects.forEach((effect) => effect.apply({ player, room: this.room }))
     })
   }
@@ -1859,7 +1894,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 }
 
 export class OnOverwriteBoardCommand extends Command<GameRoom> {
-  execute({ playerId, board }: { playerId: string; board: IDetailledPokemon[] }) {
+  execute({
+    playerId,
+    board
+  }: {
+    playerId: string
+    board: IDetailledPokemon[]
+  }) {
     const player = this.room.state.players.get(playerId)
     if (!player || player.role !== Role.ADMIN) return
     player.board.clear()
@@ -1867,7 +1908,7 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
       const pokemon = PokemonFactory.createPokemonFromName(p.name, p)
       pokemon.positionX = p.x
       pokemon.positionY = p.y
-      p.items.forEach(item => pokemon.items.add(item))
+      p.items.forEach((item) => pokemon.items.add(item))
       player.board.set(pokemon.id, pokemon)
     })
     player.updateSynergies()
