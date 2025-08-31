@@ -1,12 +1,13 @@
 import { MapSchema } from "@colyseus/schema"
+import { FlowerPot } from "../core/flower-pots"
+import { TownEncounter, TownEncounters } from "../core/town-encounters"
 import { Emotion, IPlayer, PkmCustom } from "../types"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
-import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import { PVEStage } from "./pve-stages"
-import { TownEncounter, TownEncounters } from "../core/town-encounters"
-import { getPkmWithCustom } from "./colyseus-models/pokemon-customs"
 import Player from "./colyseus-models/player"
+import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { getPkmWithCustom } from "./colyseus-models/pokemon-customs"
+import { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
   static makePveBoard(
@@ -80,10 +81,67 @@ export default class PokemonFactory {
     }
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
-      return new PokemonClass(shiny, emotion)
+      return new PokemonClass(name, shiny, emotion)
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
-      return new Pokemon(shiny, emotion)
+      return new Pokemon(Pkm.DEFAULT, shiny, emotion)
     }
   }
 }
+
+export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } = {
+  [Pkm.FLABEBE]: (player) => {
+    switch (player.flowerPotsSpawnOrder[0]) {
+      case FlowerPot.YELLOW:
+        return Pkm.FLABEBE_YELLOW
+      case FlowerPot.ORANGE:
+        return Pkm.FLABEBE_ORANGE
+      case FlowerPot.BLUE:
+        return Pkm.FLABEBE_BLUE
+      case FlowerPot.WHITE:
+        return Pkm.FLABEBE_WHITE
+    }
+    return Pkm.FLABEBE
+  },
+  [Pkm.FLOETTE]: (player) => {
+    switch (player.flowerPotsSpawnOrder[0]) {
+      case FlowerPot.YELLOW:
+        return Pkm.FLOETTE_YELLOW
+      case FlowerPot.ORANGE:
+        return Pkm.FLOETTE_ORANGE
+      case FlowerPot.BLUE:
+        return Pkm.FLOETTE_BLUE
+      case FlowerPot.WHITE:
+        return Pkm.FLOETTE_WHITE
+    }
+    return Pkm.FLOETTE
+  },
+  [Pkm.FLORGES]: (player) => {
+    switch (player.flowerPotsSpawnOrder[0]) {
+      case FlowerPot.YELLOW:
+        return Pkm.FLORGES_YELLOW
+      case FlowerPot.ORANGE:
+        return Pkm.FLORGES_ORANGE
+      case FlowerPot.BLUE:
+        return Pkm.FLORGES_BLUE
+      case FlowerPot.WHITE:
+        return Pkm.FLORGES_WHITE
+    }
+    return Pkm.FLORGES
+  }
+}
+
+export const PkmColorVariants: readonly Pkm[] = [
+  Pkm.FLABEBE_YELLOW,
+  Pkm.FLABEBE_ORANGE,
+  Pkm.FLABEBE_BLUE,
+  Pkm.FLABEBE_WHITE,
+  Pkm.FLOETTE_YELLOW,
+  Pkm.FLOETTE_ORANGE,
+  Pkm.FLOETTE_BLUE,
+  Pkm.FLOETTE_WHITE,
+  Pkm.FLORGES_YELLOW,
+  Pkm.FLORGES_ORANGE,
+  Pkm.FLORGES_BLUE,
+  Pkm.FLORGES_WHITE
+]

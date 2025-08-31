@@ -4119,7 +4119,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       const PkmClass = PokemonClasses[PkmByIndex[target.index]]
-      const baseSpeed = PkmClass ? new PkmClass().speed : DEFAULT_SPEED
+      const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - baseSpeed)
       const boostDef = min(0)(target.def - target.baseDef)
@@ -4149,7 +4149,7 @@ export class StoredPowerStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const PkmClass = PokemonClasses[PkmByIndex[target.index]]
-    const baseSpeed = PkmClass ? new PkmClass().speed : DEFAULT_SPEED
+    const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
     const boostSpeed = pokemon.speed / baseSpeed
     const boostAtk = pokemon.atk / pokemon.baseAtk
     const boostDef = pokemon.def / pokemon.baseDef

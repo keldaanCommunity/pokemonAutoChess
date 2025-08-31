@@ -1,11 +1,23 @@
 import { CDN_PORTRAIT_URL, Emotion, PkmWithCustom } from "../types"
 import { Pkm, PkmByIndex, PkmIndex } from "../types/enum/Pokemon"
 
+const PORTRAITS_FALLBACKS = {
+  "0669-0001": "0669",
+  "0669-0002": "0669",
+  "0669-0003": "0669",
+  "0669-0004": "0669",
+  "0670-0001": "0670",
+  "0670-0002": "0670",
+  "0670-0003": "0670",
+  "0670-0004": "0670"
+}
+
 export function getPortraitSrc(
-  index?: string,
+  index: string,
   shiny?: boolean,
   emotion?: Emotion
 ) {
+  if (index in PORTRAITS_FALLBACKS) index = PORTRAITS_FALLBACKS[index]
   return getAvatarSrc(getAvatarString(index, shiny, emotion))
 }
 

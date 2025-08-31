@@ -2418,6 +2418,90 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.FAIRY_RANGE,
     hitSprite: HitSprite.FAIRY_HIT
   },
+  [Pkm.FLABEBE_BLUE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_BLUE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_BLUE]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLABEBE_ORANGE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_ORANGE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_ORANGE]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLABEBE_YELLOW]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_YELLOW]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_YELLOW]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLABEBE_WHITE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_WHITE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_WHITE]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
   [Pkm.JANGMO_O]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Charge,

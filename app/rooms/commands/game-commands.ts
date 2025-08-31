@@ -1264,7 +1264,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               // Base form will still be added to the pool for all players
               const regionalVariants = (PkmRegionalVariants[p] ?? []).filter(
                 (pkm) =>
-                  new PokemonClasses[pkm]().isInRegion(
+                  new PokemonClasses[pkm](pkm).isInRegion(
                     player.map === "town" ? DungeonPMDO.AmpPlains : player.map
                   )
               )

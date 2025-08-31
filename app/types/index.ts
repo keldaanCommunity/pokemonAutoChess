@@ -3,6 +3,7 @@ import type { Board } from "../core/board"
 import Dps from "../core/dps"
 import { Effect as EffectClass } from "../core/effects/effect"
 import { EvolutionRule } from "../core/evolution-rules"
+import { FlowerPot } from "../core/flower-pots"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
@@ -301,6 +302,7 @@ export interface IPlayer {
   loadingProgress: number
   berryTreesStages: number[]
   flowerPots: Pokemon[]
+  flowerPotsSpawnOrder: FlowerPot[]
   mulch: number
   mulchCap: number
   effects: Effects

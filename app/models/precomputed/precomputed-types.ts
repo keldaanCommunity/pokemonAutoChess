@@ -4,6 +4,7 @@ import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Pokemon } from "../colyseus-models/pokemon"
+import { PkmColorVariants } from "../pokemon-factory"
 
 console.time("precompute-types")
 
@@ -15,7 +16,8 @@ const dataAll = Object.fromEntries<Pokemon[]>(
 precomputedPokemons
   .filter(
     (pokemon) =>
-      pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE
+      (pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE)
+      && PkmColorVariants.includes(pokemon.name as Pkm) === false
   )
   .forEach((pokemon) => {
     pokemon.types.forEach((type) => {

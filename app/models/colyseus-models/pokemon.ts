@@ -98,11 +98,8 @@ export class Pokemon extends Schema implements IPokemon {
   stages?: number
   tm: Ability | null = null
 
-  constructor(shiny = false, emotion = Emotion.NORMAL) {
+  constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()
-    const name = Object.entries(PokemonClasses).find(
-      ([name, pokemonClass]) => pokemonClass === this.constructor
-    )?.[0] as Pkm
     this.id = nanoid()
     this.name = name
     this.index = PkmIndex[name]
@@ -239,7 +236,7 @@ export class Pokemon extends Schema implements IPokemon {
 
     let originalVariant: Pokemon | null = null
     if (originalVariantPkm) {
-      originalVariant = new PokemonClasses[originalVariantPkm]()
+      originalVariant = new PokemonClasses[originalVariantPkm](originalVariantPkm)
       if (
         originalVariant?.additional === true &&
         state &&
@@ -276,7 +273,7 @@ export class Pokemon extends Schema implements IPokemon {
       this.items.delete(item)
     }
 
-    const nativeTypes = new PokemonClasses[this.name]().types
+    const nativeTypes = new PokemonClasses[this.name](this.name).types
     for (const item of items) {
       const synergyRemoved = SynergyGivenByItem[item]
       const otherSynergyItemsHeld = values(this.items).filter(
@@ -3430,7 +3427,14 @@ export class Flabebe extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.FLOETTE
+  evolutions = [Pkm.FLOETTE, Pkm.FLOETTE_YELLOW, Pkm.FLOETTE_ORANGE, Pkm.FLOETTE_BLUE, Pkm.FLOETTE_WHITE]
+  evolutionRule = new CountEvolutionRule(3, (pokemon: Pokemon, player: IPlayer) => {
+    if (pokemon.name === Pkm.FLABEBE_YELLOW) return Pkm.FLOETTE_YELLOW
+    if (pokemon.name === Pkm.FLABEBE_ORANGE) return Pkm.FLOETTE_ORANGE
+    if (pokemon.name === Pkm.FLABEBE_BLUE) return Pkm.FLOETTE_BLUE
+    if (pokemon.name === Pkm.FLABEBE_WHITE) return Pkm.FLOETTE_WHITE
+    return Pkm.FLOETTE
+  })
   hp = 60
   atk = 6
   speed = 49
@@ -3439,13 +3443,21 @@ export class Flabebe extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
+  passive = Passive.FLABEBE_COLOR
 }
 
 export class Floette extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.FLORGES
+  evolutions = [Pkm.FLORGES, Pkm.FLORGES_YELLOW, Pkm.FLORGES_ORANGE, Pkm.FLORGES_BLUE, Pkm.FLORGES_WHITE]
+  evolutionRule = new CountEvolutionRule(3, (pokemon: Pokemon, player: IPlayer) => {
+    if (pokemon.name === Pkm.FLOETTE_YELLOW) return Pkm.FLORGES_YELLOW
+    if (pokemon.name === Pkm.FLOETTE_ORANGE) return Pkm.FLORGES_ORANGE
+    if (pokemon.name === Pkm.FLOETTE_BLUE) return Pkm.FLORGES_BLUE
+    if (pokemon.name === Pkm.FLOETTE_WHITE) return Pkm.FLORGES_WHITE
+    return Pkm.FLORGES
+  })
   hp = 120
   atk = 10
   speed = 49
@@ -3454,6 +3466,7 @@ export class Floette extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
+  passive = Passive.FLABEBE_COLOR
 }
 export class Florges extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FLORA])
@@ -3467,6 +3480,7 @@ export class Florges extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.FAIRY_WIND
+  passive = Passive.FLABEBE_COLOR
 }
 
 export class Chikorita extends Pokemon {
@@ -18370,6 +18384,7 @@ export class FalinksTrooper extends Pokemon {
 export const PokemonClasses: Record<
   Pkm,
   new (
+    name: Pkm,
     shiny?: boolean,
     emotion?: Emotion
   ) => Pokemon
@@ -18724,8 +18739,20 @@ export const PokemonClasses: Record<
   //[Pkm.TRUMBEAK]: Trumbeak,
   //[Pkm.TOUCANNON]: Toucannon,
   [Pkm.FLABEBE]: Flabebe,
+  [Pkm.FLABEBE_BLUE]: Flabebe,
+  [Pkm.FLABEBE_ORANGE]: Flabebe,
+  [Pkm.FLABEBE_WHITE]: Flabebe,
+  [Pkm.FLABEBE_YELLOW]: Flabebe,
   [Pkm.FLOETTE]: Floette,
+  [Pkm.FLOETTE_BLUE]: Floette,
+  [Pkm.FLOETTE_ORANGE]: Floette,
+  [Pkm.FLOETTE_WHITE]: Floette,
+  [Pkm.FLOETTE_YELLOW]: Floette,
   [Pkm.FLORGES]: Florges,
+  [Pkm.FLORGES_BLUE]: Florges,
+  [Pkm.FLORGES_ORANGE]: Florges,
+  [Pkm.FLORGES_WHITE]: Florges,
+  [Pkm.FLORGES_YELLOW]: Florges,
   [Pkm.JANGMO_O]: JangmoO,
   [Pkm.HAKAMO_O]: HakamoO,
   [Pkm.KOMMO_O]: KommoO,
