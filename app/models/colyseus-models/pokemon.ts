@@ -18127,7 +18127,7 @@ export class Gossifleur extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.COTTON_GUARD
-  additional = true
+  regional = true
 }
 
 export class Eldegoss extends Pokemon {
@@ -18142,7 +18142,7 @@ export class Eldegoss extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.COTTON_GUARD
-  additional = true
+  regional = true
 }
 
 export class Furfrou extends Pokemon {

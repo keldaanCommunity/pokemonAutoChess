@@ -28,11 +28,13 @@
 - Change Plusle/Minum types: Electric/Fairy -> Electric/Field
 - Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
 - Seedot line is now regional
-- Bellsprout line, Chikorita line and Hoppip line are now in special category
+- Gossifleur line is now regional
+- Bellsprout line, Chikorita line and Hoppip line are now in Special category
 
 # Changes to Synergies
 
 - Ground rework: Ground Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages).
+- Flora rework: When a Flora Pokémon is KO'd, a Flower Pot blossoms and you collect mulch. Higher ⭐ units give more mulch, which can be used to evolve your Flower Pots.
 - Weather rocks are no longer collected during PVE rounds
 
 # Changes to Items
