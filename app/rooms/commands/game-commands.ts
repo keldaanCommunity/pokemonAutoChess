@@ -2,7 +2,7 @@ import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 import {
-  OnItemEquippedEffect,
+  OnItemDroppedEffect,
   OnStageStartEffect
 } from "../../core/effects/effect"
 import { ItemEffects } from "../../core/effects/items"
@@ -584,12 +584,12 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    const onItemEquippedEffects: OnItemEquippedEffect[] =
+    const onItemDroppedEffects: OnItemDroppedEffect[] =
       ItemEffects[item]?.filter(
-        (effect) => effect instanceof OnItemEquippedEffect
+        (effect) => effect instanceof OnItemDroppedEffect
       ) ?? []
-    for (const onItemEquippedEffect of onItemEquippedEffects) {
-      const shouldEquipItem = onItemEquippedEffect.apply({
+    for (const onItemDroppedEffect of onItemDroppedEffects) {
+      const shouldEquipItem = onItemDroppedEffect.apply({
         pokemon,
         player,
         item,
@@ -649,7 +649,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (!isBasicItem && pokemon.items.has(item)) {
-      // prevent adding twitce the same item
+      // prevent adding twice the same item
       client.send(Transfer.DRAG_DROP_FAILED, message)
       return
     }
