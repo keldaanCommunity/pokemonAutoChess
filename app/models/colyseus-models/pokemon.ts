@@ -17357,7 +17357,7 @@ export class Archaludon extends Pokemon {
 
 export class Fomantis extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.GRASS,
+    Synergy.FLORA,
     Synergy.LIGHT,
     Synergy.FIGHTING
   ])
@@ -17377,7 +17377,7 @@ export class Fomantis extends Pokemon {
 
 export class Lurantis extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.GRASS,
+    Synergy.FLORA,
     Synergy.LIGHT,
     Synergy.FIGHTING
   ])

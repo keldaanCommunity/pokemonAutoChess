@@ -27,6 +27,7 @@
 - Nidoran Female now only show up in Poison regions
 - Change Plusle/Minum types: Electric/Fairy -> Electric/Field
 - Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
+- Change Fomantis line types: Grass/Light/Fighting → Flora/Light/Fighting
 - Seedot line is now regional
 - Gossifleur line is now regional
 - Bellsprout line, Chikorita line and Hoppip line are now in Special category
