@@ -1,4 +1,5 @@
 import Player from "../models/colyseus-models/player"
+import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Pkm } from "../types/enum/Pokemon"
 
@@ -35,13 +36,16 @@ export const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
 }
 
 export function getFlowerPotsUnlocked(player: Player): FlowerPot[] {
+    const hasAllEvolutions = player.flowerPots.every(pot => pot.evolution === Pkm.DEFAULT)
+    if (hasAllEvolutions) player.titles.add(Title.BLOSSOM)
     return player.flowerPotsSpawnOrder.filter(pot => {
         if (player.effects.has(EffectEnum.COTTONWEED)) return pot === FlowerPot.PINK
         if (player.effects.has(EffectEnum.FLYCATCHER)) return [FlowerPot.PINK, FlowerPot.YELLOW].includes(pot)
         if (player.effects.has(EffectEnum.FRAGRANT)) return [FlowerPot.PINK, FlowerPot.YELLOW, FlowerPot.WHITE].includes(pot)
-        if (player.effects.has(EffectEnum.FLOWER_POWER)) return [FlowerPot.PINK, FlowerPot.YELLOW, FlowerPot.WHITE, FlowerPot.BLUE].includes(pot) || (
-            player.flowerPots.every(pot => pot.evolution === Pkm.DEFAULT) && pot === FlowerPot.ORANGE
-        )
+        if (player.effects.has(EffectEnum.FLOWER_POWER)) {
+            return [FlowerPot.PINK, FlowerPot.YELLOW, FlowerPot.WHITE, FlowerPot.BLUE].includes(pot) ||
+                (hasAllEvolutions && pot === FlowerPot.ORANGE)
+        }
     })
 }
 

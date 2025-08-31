@@ -716,6 +716,7 @@ export enum Title {
   DENTIST = "DENTIST",
   FISHERMAN = "FISHERMAN",
   MOLE = "MOLE",
+  BLOSSOM = "BLOSSOM",
   SIREN = "SIREN",
   FEARSOME = "FEARSOME",
   GOLDEN = "GOLDEN",
