@@ -671,16 +671,12 @@ function initBuriedItems() {
 }
 
 function initFlowerPots(player: Player) {
-  return [
-    PokemonFactory.createPokemonFromName(Pkm.HOPPIP, player),
-    PokemonFactory.createPokemonFromName(Pkm.BELLSPROUT, player),
-    PokemonFactory.createPokemonFromName(Pkm.CHIKORITA, player),
-    PokemonFactory.createPokemonFromName(Pkm.ODDISH, player),
-    PokemonFactory.createPokemonFromName(Pkm.BELLOSSOM, player)
-  ].map((pokemon) => {
-    pokemon.action = PokemonActionState.SLEEP
-    return pokemon
-  })
+  return [Pkm.HOPPIP, Pkm.BELLSPROUT, Pkm.CHIKORITA, Pkm.ODDISH, Pkm.BELLOSSOM]
+    .map((pkm) => {
+      const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+      pokemon.action = PokemonActionState.SLEEP
+      return pokemon
+    })
 }
 
 function spawnDIAYAvatar(player: Player): Pokemon {
