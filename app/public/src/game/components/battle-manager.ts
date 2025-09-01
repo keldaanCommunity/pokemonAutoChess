@@ -1,5 +1,6 @@
 import { GameObjects } from "phaser"
 import { getAttackTimings } from "../../../../core/attacking-state"
+import { FlowerPotMons } from "../../../../core/flower-pots"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
@@ -99,15 +100,22 @@ export default class BattleManager {
         this.flip
       )
       pokemonUI.setVisible(this.simulation?.started ?? false)
-      this.animationManager.animatePokemon(
-        pokemonUI,
-        pokemon.status.tree ? PokemonActionState.IDLE : PokemonActionState.WALK,
-        this.flip
-      )
+
       this.group.add(pokemonUI)
       this.pokemonSprites.set(pokemon.id, pokemonUI)
       if (pokemon.name === Pkm.FALINKS_BRASS) {
         this.addTroopers(pokemon, pokemonUI, simulationId)
+      }
+      if (pokemon.action === PokemonActionState.BLOSSOM) {
+        pokemonUI.blossomAnimation()
+      } else {
+        this.animationManager.animatePokemon(
+          pokemonUI,
+          pokemon.status.tree
+            ? PokemonActionState.IDLE
+            : PokemonActionState.WALK,
+          this.flip
+        )
       }
     }
   }

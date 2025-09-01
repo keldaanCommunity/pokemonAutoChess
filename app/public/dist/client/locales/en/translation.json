@@ -856,9 +856,21 @@
 		"PIKIPEK": "Pikipek",
 		"TRUMBEAK": "Trumbeak",
 		"TOUCANNON": "Toucannon",
-		"FLABEBE": "Flabébé",
-		"FLOETTE": "Floette",
-		"FLORGES": "Florges",
+		"FLABEBE": "Flabébé (Pink)",
+		"FLABEBE_WHITE": "Flabébé (White)",
+		"FLABEBE_YELLOW": "Flabébé (Yellow)",
+		"FLABEBE_BLUE": "Flabébé (Blue)",
+		"FLABEBE_ORANGE": "Flabébé (Orange)",
+		"FLOETTE": "Floette (Pink)",
+		"FLOETTE_WHITE": "Floette (White)",
+		"FLOETTE_YELLOW": "Floette (Yellow)",
+		"FLOETTE_BLUE": "Floette (Blue)",
+		"FLOETTE_ORANGE": "Floette (Orange)",
+		"FLORGES": "Florges (Pink)",
+		"FLORGES_WHITE": "Florges (White)",
+		"FLORGES_YELLOW": "Florges (Yellow)",
+		"FLORGES_BLUE": "Florges (Blue)",
+		"FLORGES_ORANGE": "Florges (Orange)",
 		"JANGMO_O": "Jangmo-o",
 		"HAKAMO_O": "Hakamo-o",
 		"KOMMO_O": "Kommo-o",
@@ -1933,7 +1945,7 @@
 		"FROST_BREATH": "Blows a cold breath, dealing [30,60,120,SP] SPECIAL to enemies in a 2-tiles range in a cone in front of the user, with [50,LK]% chance to FREEZE for 2 seconds. Can crit by default.",
 		"SALT_CURE": "Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
-		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and have [30,LK]% chance to be CHARM for 1 second",
+		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and [12,SP] SPEED and have [30,LK]% chance to be CHARM for 1 second",
 		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
 		"DECORATE": "Decorates the nearest STRONGEST ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
 		"DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health adjacent enemy and WOUND them for 4 seconds.",
@@ -2050,10 +2062,10 @@
 		"FEATHER_DANCE": "Feather Dance",
 		"MAX_AIRSTREAM": "Max Airstream",
 		"SKYDIVE": "Sky Dive",
-		"ODD_FLOWER": "Odd Flower",
-		"GLOOM_FLOWER": "Gloom Flower",
-		"VILE_FLOWER": "Vile Flower",
-		"SUN_FLOWER": "Sun Flower",
+		"COTTONWEED": "Cottonweed",
+		"FLYCATCHER": "Flycatcher",
+		"FRAGRANT": "Fragrant",
+		"FLOWER_POWER": "Flower Power",
 		"BATTLE_ARMOR": "Battle Armor",
 		"MOUTAIN_RESISTANCE": "Mountain Resistance",
 		"DIAMOND_STORM": "Diamond Storm",
@@ -2166,10 +2178,10 @@
 		"FEATHER_DANCE": "Get PROTECT for 2 seconds after flying away",
 		"MAX_AIRSTREAM": "Fly away twice when under 50% HP and 20% HP",
 		"SKYDIVE": "Now perform skydive attacks, dealing 150% PHYSICAL ATK on landing on their target",
-		"ODD_FLOWER": "Summon Oddish",
-		"GLOOM_FLOWER": "Summon Gloom",
-		"VILE_FLOWER": "Summon Vileplume",
-		"SUN_FLOWER": "Summon Bellossom",
+		"COTTONWEED": "Get an Hoppip Flower Pot",
+		"FLYCATCHER": "Get a Bellsprout Flower Pot",
+		"FRAGRANT": "Get a Chikorita Flower Pot",
+		"FLOWER_POWER": "Get an Oddish Flower Pot. If all your pots are fully grown, get a Bellossom Flower Pot and receive AMAZE_MULCH instead.",
 		"BATTLE_ARMOR": "Gain 10 DEF, receive -30% critical damage. Collect one weather rock when the weather changes.",
 		"MOUTAIN_RESISTANCE": "Gain 30 DEF, receive -50% critical damage. Collect up to 2 weather rocks.",
 		"DIAMOND_STORM": "Gain 60 DEF, receive -70% critical damage. Collect up to 3 weather rocks.",
@@ -2431,7 +2443,9 @@
 		"MALICIOUS_ARMOR": "Malicious Armor",
 		"RUSTED_SWORD": "Rusted Sword",
 		"SCROLL_OF_WATERS": "Scroll of Waters",
-		"SCROLL_OF_DARKNESS": "Scroll of Darkness"
+		"SCROLL_OF_DARKNESS": "Scroll of Darkness",
+		"RICH_MULCH": "Rich Mulch",
+		"AMAZE_MULCH": "Amaze Mulch"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2648,7 +2662,9 @@
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
 		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
 		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
-		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)"
+		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)",
+		"RICH_MULCH": "Use it on a flower pot to evolve the Pokémon inside.",
+		"AMAZE_MULCH": "Use it on a flower pot to permanently give 50 max HP and 30 AP to the Pokémon inside."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -2807,7 +2823,8 @@
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
 		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)",
 		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP",
-		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each."
+		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each.",
+		"FLABEBE_COLOR": "Their color is said to indicate the first bud to blossom"
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -2947,7 +2964,7 @@
 		"AQUATIC": "AQUATIC Pokémon reduce the duration of status afflictions for all your team. After 8 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies.",
 		"BUG": "At the start of combat, your STRONGEST BUG Pokémon are cloned.",
 		"FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",
-		"FLORA": "When the first FLORA Pokémon is KO'd, a flower blossoms. The new Pokémon receives one random item from each FLORA ally KO'd.",
+		"FLORA": "When a FLORA Pokémon is KO'd, a Flower Pot blossoms and you collect RICH_MULCH. Higher STAR units give more mulch, which can be used to evolve your Flower Pots.",
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical attacks, and can adapt to weather.",
 		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
 		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.",
@@ -3049,7 +3066,8 @@
 		"RUNNER": "Runner",
 		"FINISHER": "Finisher",
 		"VICTORIOUS": "Victorious",
-		"MOLE": "Mole"
+		"MOLE": "Mole",
+		"BLOSSOMED": "Blossomed"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3135,7 +3153,8 @@
 		"RUNNER": "Reach 100 points on Victory Road",
 		"FINISHER": "Finish the Victory Road race",
 		"VICTORIOUS": "Finish first at the Victory Road race",
-		"MOLE": "Dig out your entire board completely"
+		"MOLE": "Dig out your entire board completely",
+		"BLOSSOMED": "Get 5 fully grown flower pots"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",

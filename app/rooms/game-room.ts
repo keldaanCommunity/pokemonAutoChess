@@ -16,7 +16,7 @@ import {
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { BotV2 } from "../models/mongo-models/bot-v2"
+import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
@@ -89,6 +89,7 @@ import {
   OnJoinCommand,
   OnLevelUpCommand,
   OnLockCommand,
+  OnOverwriteBoardCommand,
   OnPickBerryCommand,
   OnPokemonCatchCommand,
   OnRemoveFromShopCommand,
@@ -147,7 +148,7 @@ export default class GameRoom extends Room<GameState> {
     this.onRoomDeleted = this.onRoomDeleted.bind(this)
     this.presence.subscribe("room-deleted", this.onRoomDeleted)
 
-    if(gameMode === GameMode.RANKED){
+    if (gameMode === GameMode.RANKED) {
       // add the elo range in the game room name
       // see https://discord.com/channels/737230355039387749/1019939174691905556/threads/1404518859184013422
       name = `${formatMinMaxRanks(minRank, maxRank)} ${name}`
@@ -336,7 +337,7 @@ export default class GameRoom extends Room<GameState> {
             updateBoard: true,
             updateItems: true
           }
-          client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+          client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
           logger.error("drag drop error", error)
         }
       }
@@ -356,7 +357,7 @@ export default class GameRoom extends Room<GameState> {
               updateBoard: true,
               updateItems: true
             }
-            client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+            client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
             logger.error("drag drop error", error)
           }
         }
@@ -377,7 +378,7 @@ export default class GameRoom extends Room<GameState> {
               updateBoard: true,
               updateItems: true
             }
-            client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+            client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
             logger.error("drag drop error", error)
           }
         }
@@ -532,6 +533,22 @@ export default class GameRoom extends Room<GameState> {
         ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
+        }
+      }
+    })
+
+    this.onMessage(Transfer.OVERWRITE_BOARD, (client, board: IDetailledPokemon[]) => {
+      if (client.auth) {
+        const player = this.state.players.get(client.auth.uid)
+        if (player?.role !== Role.ADMIN) return;
+
+        try {
+          this.dispatcher.dispatch(new OnOverwriteBoardCommand(), {
+            playerId: client.auth.uid,
+            board
+          })
+        } catch (error) {
+          logger.error("overwrite board error", error)
         }
       }
     })

@@ -3,6 +3,7 @@ import type { Board } from "../core/board"
 import Dps from "../core/dps"
 import { Effect as EffectClass } from "../core/effects/effect"
 import { EvolutionRule } from "../core/evolution-rules"
+import { FlowerPot } from "../core/flower-pots"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
@@ -97,7 +98,7 @@ export enum Transfer {
   BUY_EMOTION = "BUY_EMOTION",
   BOOSTER_CONTENT = "BOOSTER_CONTENT",
   USER = "USER",
-  DRAG_DROP_FAILED = "DRAG_DROP_FAILED",
+  DRAG_DROP_CANCEL = "DRAG_DROP_CANCEL",
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
   SEARCH_BY_ID = "SEARCH_BY_ID",
@@ -141,7 +142,8 @@ export enum Transfer {
   NPC_DIALOG = "NPC_DIALOG",
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
   HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
-  RECONNECT_PROMPT = "RECONNECT_PROMPT"
+  RECONNECT_PROMPT = "RECONNECT_PROMPT",
+  OVERWRITE_BOARD = "OVERWRITE_BOARD"
 }
 
 export enum ReadWriteMode {
@@ -177,8 +179,8 @@ export interface IDragDropMessage {
 }
 
 export interface IDragDropItemMessage {
-  x: number
-  y: number
+  zone: string
+  index: number
   id: Item
 }
 
@@ -298,6 +300,11 @@ export interface IPlayer {
   itemsProposition: ArraySchema<Item>
   pokemonsProposition: ArraySchema<PkmProposition>
   loadingProgress: number
+  berryTreesStages: number[]
+  flowerPots: Pokemon[]
+  flowerPotsSpawnOrder: FlowerPot[]
+  mulch: number
+  mulchCap: number
   effects: Effects
   isBot: boolean
   map: DungeonPMDO | "town"
@@ -711,6 +718,7 @@ export enum Title {
   DENTIST = "DENTIST",
   FISHERMAN = "FISHERMAN",
   MOLE = "MOLE",
+  BLOSSOMED = "BLOSSOMED",
   SIREN = "SIREN",
   FEARSOME = "FEARSOME",
   GOLDEN = "GOLDEN",

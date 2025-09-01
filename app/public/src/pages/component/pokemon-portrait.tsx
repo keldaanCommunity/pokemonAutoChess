@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react"
-
+import { Emotion } from "../../../../types"
 import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
 import { cc } from "../utils/jsx"
-import { Emotion } from "../../../../types"
 
 interface PortraitOptions {
-  index?: string
+  index: string
   shiny?: boolean
   emotion?: Emotion
 }
 
 type Props = (
   | { avatar: string }
-  | { portrait: string | PortraitOptions | undefined }
+  | { portrait: string | PortraitOptions }
 ) &
   React.ImgHTMLAttributes<HTMLImageElement>
 
@@ -49,10 +48,7 @@ export default function PokemonPortrait(props: Props) {
     <img
       src={imgSrc}
       loading="lazy"
-      className={cc(
-        "pokemon-portrait",
-        className || ""
-      )}
+      className={cc("pokemon-portrait", className || "")}
       onError={handleError}
       {...rest}
     />

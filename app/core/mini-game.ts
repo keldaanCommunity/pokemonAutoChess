@@ -756,7 +756,7 @@ export class MiniGame {
             player.updateRegionalPool(state, true)
             for (let i = 0; i < player.berryTreesType.length; i++) {
               player.berryTreesType[i] = pickRandomIn(Berries)
-              player.berryTreesStage[i] = 0
+              player.berryTreesStages[i] = 0
             }
           }
         }

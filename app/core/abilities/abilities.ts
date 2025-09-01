@@ -4119,7 +4119,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       const PkmClass = PokemonClasses[PkmByIndex[target.index]]
-      const baseSpeed = PkmClass ? new PkmClass().speed : DEFAULT_SPEED
+      const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - baseSpeed)
       const boostDef = min(0)(target.def - target.baseDef)
@@ -4149,7 +4149,7 @@ export class StoredPowerStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const PkmClass = PokemonClasses[PkmByIndex[target.index]]
-    const baseSpeed = PkmClass ? new PkmClass().speed : DEFAULT_SPEED
+    const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
     const boostSpeed = pokemon.speed / baseSpeed
     const boostAtk = pokemon.atk / pokemon.baseAtk
     const boostDef = pokemon.def / pokemon.baseDef
@@ -11741,6 +11741,7 @@ export class SweetScentStrategy extends AbilityStrategy {
           cell.value.status.triggerCharm(1000, cell.value, pokemon, false)
         }
         cell.value.addSpecialDefense(-6, pokemon, 1, crit)
+        cell.value.addSpeed(-12, pokemon, 1, crit)
         cell.value.addDodgeChance(-cell.value.dodge, pokemon, 0, false)
       }
     })

@@ -1,18 +1,18 @@
 import fs from "fs"
 import fse from "fs-extra"
+import * as os from "os"
+import * as pathlib from "path"
 import { PkmIndex } from "../app/types/enum/Pokemon"
-import * as pathlib from 'path'
-import * as os from 'os'
 
 const args = process.argv.slice(2)
 const path = args[0]
 const pkmIndex = args[1]
 
 function expandHomeDir(filePath: string): string {
-  if (filePath.startsWith('~')) {
-    return pathlib.join(os.homedir(), filePath.slice(1));
+  if (filePath.startsWith("~")) {
+    return pathlib.join(os.homedir(), filePath.slice(1))
   }
-  return filePath;
+  return filePath
 }
 
 const creditsName = fs.readFileSync(expandHomeDir(`${path}/credit_names.txt`))

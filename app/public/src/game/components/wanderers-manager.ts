@@ -33,7 +33,6 @@ export default class WanderersManager {
   }
 
   addWanderer(wanderer: Wanderer) {
-    console.log(`Adding wanderer`, wanderer)
     if (wanderer.type === WandererType.SABLEYE) {
       this.addSableye(wanderer)
     } else if (wanderer.type === WandererType.UNOWN) {
@@ -63,12 +62,11 @@ export default class WanderersManager {
           this.scene.board &&
           getFreeSpaceOnBench(this.scene.board.player.board) > 0
         ) {
-          console.log(`clicked wanderer`, wanderer)
           this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
           sprite.destroy()
           tween.destroy()
         } else if (this.scene.board) {
-          this.scene.board.displayText(pointer.x, pointer.y, t("full"))
+          this.scene.board.displayText(pointer.x, pointer.y, t("full"), true)
         }
       }
     })

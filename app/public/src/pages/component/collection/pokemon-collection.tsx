@@ -8,7 +8,7 @@ import React, {
 } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
+import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
@@ -60,14 +60,14 @@ export default function PokemonCollection() {
       switch (filterState.mode) {
         case "pokedex":
           setCount(collection.filter((item) => item.played > 0).length)
-          setTotal(precomputedPokemons.length)
+          setTotal(precomputedPokemonsImplemented.length)
           break
         case "shiny":
           setCount(
             collection.filter((item) => item.shinyEmotions.length > 0).length
           )
           setTotal(
-            precomputedPokemons.filter(
+            precomputedPokemonsImplemented.filter(
               (p) => !PokemonAnimations[p.name]?.shinyUnavailable
             ).length
           )
@@ -79,7 +79,7 @@ export default function PokemonCollection() {
                 item.emotions.length > 0 || item.shinyEmotions.length > 0
             ).length
           )
-          setTotal(precomputedPokemons.length)
+          setTotal(precomputedPokemonsImplemented.length)
           break
       }
     },

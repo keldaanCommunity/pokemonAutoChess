@@ -590,7 +590,8 @@ export default class MinigameManager {
         this.scene.board?.displayText(
           villager.x,
           villager.y - 10,
-          t(dialog, otherArgs)
+          t(dialog, otherArgs),
+          true
         )
       } else {
         villager.emoteAnimation()
