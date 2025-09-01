@@ -969,7 +969,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)],
 
   [Item.AMAZE_MULCH]: [
-    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (FlowerPotMons.includes(pokemon.name)) {
         pokemon.hp += 50
         pokemon.ap += 30

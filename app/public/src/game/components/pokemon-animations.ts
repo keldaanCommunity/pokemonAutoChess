@@ -6521,21 +6521,21 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Appeal,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.FLORAGATO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.MEOWSCARADA]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.FOMANTIS]: {
