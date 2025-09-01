@@ -2352,6 +2352,7 @@
 		"TOXIC_ORB": "POISON 시너지를 부여. 소지자는 POISONNED 상태가 되는 대신 ATK 100% 증가",
 		"METRONOME": "SOUND 시너지를 부여. 매 초마다 5 PP 획득",
 		"METAL_COAT": "STEEL 시너지 부여",
+		"AIR_BALLOON": "FLYING 시너지 부여 및 회피율 10% 상승",
 		"HARD_STONE": "ROCK 시너지 부여",
 		"INCENSE": "상점에 있는 포켓몬은 각각 주인과 공통된 시너지를 공유할 확률이 5% 증가합니다",
 		"EXP_SHARE": "같은 열 근접한 포켓몬의 가장 높은 ATK, AP, DEF, 그리고 SPE_DEF를 획득 ",
@@ -2461,8 +2462,7 @@
 		"EXCHANGE_TICKET": "대기석에 있는 도구 재료 또는 완성 도구를 다른 무작위 도구로 바꾼다. 1회용",
 		"AUSPICIOUS_ARMOR": "특정 포켓몬 종을 진화시킬 수 있는 갑옷. 길조가 깃들어 있다.",
 		"MALICIOUS_ARMOR": "특정 포켓몬 종을 진화시킬 수 있는 갑옷. 흉조가 깃들어 있다.",
-		"RUSTED_SWORD": "이 검은 고대에 재앙을 막기 위해 영웅이 사용했다고 알려져 있다. 착용 시 +50% ATK. 소지자가 전투불능이 되면 가장 ATK 이 낮은 아군에게 옮겨간다.",
-		"AIR_BALLOON": "FLYING 시너지 부여 및 회피율 10% 상승"
+		"RUSTED_SWORD": "이 검은 고대에 재앙을 막기 위해 영웅이 사용했다고 알려져 있다. 착용 시 +50% ATK. 소지자가 전투불능이 되면 가장 ATK 이 낮은 아군에게 옮겨간다."
 	},
 	"passive_description": {
 		"NONE": "아무런 효과가 없습니다.",

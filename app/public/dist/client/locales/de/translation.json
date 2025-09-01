@@ -2472,6 +2472,7 @@
 		"TOXIC_ORB": "Das Pokémon erhält den POISON-Typ und ist POISONNED  aber erhält +100% ATK.",
 		"METRONOME": "Das Pokémon erhält den SOUND-Typ. Das Pokémon erhält jede Sekunde 5 PP.",
 		"METAL_COAT": "Das Pokémon erhält den STEEL-Typ.",
+		"AIR_BALLOON": "Das Pokémon erhält den FLYING-Typ und +10% Chance Angriffen auszuweichen.",
 		"HARD_STONE": "Das Pokémon erhält den ROCK-Typ",
 		"INCENSE": "Jedes Pokémon im Shop hat eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
 		"EXP_SHARE": "Ermittelt die besten ATK, AP, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
@@ -2587,8 +2588,7 @@
 		"MALICIOUS_ARMOR": "Ein eigenartiges Rüstungsset, dass ein bestimmtes Pokémon entwickeln lässt. Bösartiger Willen lauert in ihm.",
 		"RUSTED_SWORD": "Man sagt, dass ein Held dieses Schwert in der Antike benutzte, um eine schreckliche Katastrophe abzuwenden. Verleiht dem Träger +50 % Basis-ATK. Wird auf den Verbündeten mit dem schwächsten ATK übertragen, wenn der Träger ohnmächtig wird.",
 		"SCROLL_OF_WATERS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Wassers. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_RAPID) weiter.",
-		"SCROLL_OF_DARKNESS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Unlichts. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_SINGLE) weiter.",
-		"AIR_BALLOON": "Das Pokémon erhält den FLUG-Typ und +10% Chance Angriffen auszuweichen."
+		"SCROLL_OF_DARKNESS": "Auf ihr stehen die verborgenen Geheimnisse der Künste des Unlichts. Wenn es auf $t(pkm.KUBFU) benutzt wird, entwickelt es sich zu $t(pkm.URSHIFU_SINGLE) weiter."
 	},
 	"passive_description": {
 		"NONE": "Keine Passive",

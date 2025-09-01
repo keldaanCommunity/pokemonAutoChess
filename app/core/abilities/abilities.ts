@@ -8101,6 +8101,9 @@ export class ShieldsDownStrategy extends AbilityStrategy {
     pokemon.index = PkmIndex[pkm]
     pokemon.name = pkm
     pokemon.skill = Ability.SHIELDS_UP
+    if (pokemon.player) {
+      pokemon.player.pokemonsPlayed.add(pkm)
+    }
   }
 }
 

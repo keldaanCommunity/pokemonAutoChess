@@ -38,7 +38,7 @@ import {
   OnAttackEffect,
   OnDamageReceivedEffect,
   OnHitEffect,
-  OnItemEquippedEffect,
+  OnItemDroppedEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
@@ -225,7 +225,7 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   }
 })
 
-const ogerponMaskEffect = new OnItemEquippedEffect(
+const ogerponMaskEffect = new OnItemDroppedEffect(
   ({ pokemon, player, item }) => {
     if (
       pokemon.passive === Passive.OGERPON_TEAL ||
@@ -354,7 +354,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       stone,
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
-        new OnItemEquippedEffect(
+        new OnItemDroppedEffect(
           ({ pokemon, item }) => !pokemon.types.has(SynergyGivenByItem[item])
         )
       ]
@@ -365,7 +365,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     [...TMs, ...HMs].map((tm) => [
       tm,
       [
-        new OnItemEquippedEffect(({ pokemon, player, item }) => {
+        new OnItemDroppedEffect(({ pokemon, player, item }) => {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
             return false // prevent equipping TMs/HMs on non-human pokemon
@@ -800,7 +800,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.METEORITE]: [
-    new OnItemEquippedEffect(({ pokemon, player }) => {
+    new OnItemDroppedEffect(({ pokemon, player }) => {
       if (pokemon?.passive === Passive.ALIEN_DNA) {
         if (pokemon.name === Pkm.DEOXYS) {
           player.transformPokemon(pokemon, Pkm.DEOXYS_ATTACK)
@@ -817,7 +817,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.ZYGARDE_CUBE]: [
-    new OnItemEquippedEffect(({ pokemon, player }) => {
+    new OnItemDroppedEffect(({ pokemon, player }) => {
       if (pokemon?.passive === Passive.ZYGARDE) {
         if (pokemon.name === Pkm.ZYGARDE_10) {
           player.transformPokemon(pokemon, Pkm.ZYGARDE_50)
@@ -835,7 +835,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.HEARTHFLAME_MASK]: [ogerponMaskEffect],
 
   [Item.FIRE_SHARD]: [
-    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.types.has(Synergy.FIRE) && player.life > 3) {
         pokemon.atk += 3
         pokemon.speed += 3
@@ -849,19 +849,21 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.CHEF_HAT]: [
     chefCookEffect,
-    new OnItemEquippedEffect(({ pokemon, player, item }) => {
-      return pokemon.types.has(Synergy.GOURMET)
+    new OnItemDroppedEffect(({ pokemon }) => {
+      const canEquip = pokemon.types.has(Synergy.GOURMET)
+      return canEquip
     })
   ],
 
   [Item.EVIOLITE]: [
-    new OnItemEquippedEffect(({ pokemon, player, item }) => {
-      return pokemon.hasEvolution
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
+      const canEquip = pokemon.hasEvolution
+      return canEquip
     })
   ],
 
   [Item.PICNIC_SET]: [
-    new OnItemEquippedEffect(({ pokemon, player, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.meal == "") {
         let nbSandwiches = 0
         values(player.board).forEach((pkm) => {
@@ -895,7 +897,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     Flavors.map((flavor) => [
       flavor,
       [
-        new OnItemEquippedEffect(
+        new OnItemDroppedEffect(
           ({ pokemon }) => pokemon.skill === Ability.DECORATE
         ) // is then consummed by ItemEvolutionRule
       ]
@@ -903,42 +905,43 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ),
 
   [Item.BLACK_AUGURITE]: [
-    new OnItemEquippedEffect(({ pokemon, player, item, room }) => {
+    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
       return pokemon.passive === Passive.SCYTHER // is then consummed by ItemEvolutionRule
     })
   ],
 
   [Item.MALICIOUS_ARMOR]: [
-    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
     })
   ],
 
   [Item.AUSPICIOUS_ARMOR]: [
-    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
     })
   ],
 
   [Item.SCROLL_OF_DARKNESS]: [
-    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.KUBFU // is then consummed by ItemEvolutionRule
     })
   ],
 
   [Item.SCROLL_OF_WATERS]: [
-    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.KUBFU // is then consummed by ItemEvolutionRule
     })
   ],
 
   [Item.RARE_CANDY]: [
-    new OnItemEquippedEffect(({ pokemon, player, room, item }) => {
+    new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||
-        pokemon.items.has(Item.EVIOLITE)
+        pokemon.items.has(Item.EVIOLITE) ||
+        pokemon.items.size >= 3
       ) {
         return false // prevent item from being equipped
       }
