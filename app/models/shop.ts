@@ -41,8 +41,8 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
-import { Meltan, PokemonClasses } from "./colyseus-models/pokemon"
-import PokemonFactory from "./pokemon-factory"
+import { PokemonClasses } from "./colyseus-models/pokemon"
+import PokemonFactory, { PkmColorVariantsByPkm } from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 import { PVEStages } from "./pve-stages"
@@ -277,7 +277,7 @@ export default class Shop {
 
     if (
       regional &&
-      new PokemonClasses[pkm]().isInRegion(player.map, state) === false
+      new PokemonClasses[pkm](pkm).isInRegion(player.map, state) === false
     ) {
       return // regional pokemons sold in a region other than their original region are not added back to the pool
     }
@@ -403,6 +403,9 @@ export default class Shop {
             player.regionalPokemons.includes(p)
           )
           if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+        }
+        if (pkm in PkmColorVariantsByPkm) {
+          pkm = PkmColorVariantsByPkm[pkm]!(player)
         }
         return pkm
       })

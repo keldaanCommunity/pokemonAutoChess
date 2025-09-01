@@ -348,7 +348,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       // Check password protection - admins and moderators bypass password protection
       if (this.state.password && userProfile?.role === Role.BASIC) {
         if (!options.password || options.password !== this.roomPassword) {
-          console.log("password entered", options.password, "room password", this.roomPassword)
           client.leave(CloseCodes.INVALID_PASSWORD)
           return
         }

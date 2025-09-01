@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next"
 import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Ability } from "../../../../../types/enum/Ability"
+import { Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -20,7 +21,6 @@ import SynergyIcon from "../icons/synergy-icon"
 import { Modal } from "../modal/modal"
 import PokemonPortrait from "../pokemon-portrait"
 import "./pokeguesser.css"
-import { Stat } from "../../../../../types/enum/Game"
 
 const listPokemonsToGuess = precomputedPokemons
     .filter((p) => p.passive !== Passive.INANIMATE && p.skill !== Ability.DEFAULT)
@@ -49,7 +49,9 @@ export default function Pokeguesser(props: {
     const [attempts, setAttempts] = useState<Pokemon[]>([])
     const [value, setValue] = useState<Pkm | "">("")
     const [found, setFound] = useState(false)
-    const [difficulty, setDifficulty] = useState<"easy" | "normal" | "hard">("normal")
+    const [difficulty, setDifficulty] = useState<"easy" | "normal" | "hard">(
+        "normal"
+    )
 
     const submitGuess = (pokemonName: Pkm) => {
         const pokemon = listPokemonsToGuess.find((p) => p.name === pokemonName)
@@ -87,7 +89,9 @@ export default function Pokeguesser(props: {
                     id="difficulty-select"
                     style={{ marginRight: 16 }}
                     value={difficulty}
-                    onChange={e => setDifficulty(e.target.value as "easy" | "normal" | "hard")}
+                    onChange={(e) =>
+                        setDifficulty(e.target.value as "easy" | "normal" | "hard")
+                    }
                 >
                     <option value="easy">{t("pokeguessr.easy")}</option>
                     <option value="normal">{t("pokeguessr.normal")}</option>
@@ -99,19 +103,25 @@ export default function Pokeguesser(props: {
                     ? t("pokeguessr.itssolution", { pokemon: pokemonToGuess.name })
                     : t("pokeguessr.whosthatpokemon")}
             </h2>
-            {difficulty === "hard" && !found
-                ? <img src="assets/ui/missing-portrait.png" className="pokemon-portrait" />
-                : <PokemonPortrait
+            {difficulty === "hard" && !found ? (
+                <img
+                    src="assets/ui/missing-portrait.png"
+                    className="pokemon-portrait"
+                />
+            ) : (
+                <PokemonPortrait
                     portrait={{ index: pokemonToGuess.index }}
                     draggable="false"
                     onDragStart={(e) => e.preventDefault()}
                     style={{
-                        filter: found ? "" :
-                            difficulty === "easy" ? `blur(${16 - clamp(attempts.length, 0, 15)}px)`
+                        filter: found
+                            ? ""
+                            : difficulty === "easy"
+                                ? `blur(${16 - clamp(attempts.length, 0, 15)}px)`
                                 : `blur(${16 - clamp(attempts.length, 0, 15)}px) grayscale(${100 - clamp(attempts.length, 0, 10) * 10}%)`
                     }}
                 />
-            }
+            )}
 
             {found ? (
                 <p>
@@ -279,9 +289,17 @@ export function PokemonAttempt({
     difficulty: "easy" | "normal" | "hard"
 }) {
     const { t } = useTranslation()
-    const statsHints = [Stat.HP, Stat.ATK, Stat.DEF, Stat.SPEED, Stat.SPE_DEF, Stat.RANGE, Stat.PP] as const
+    const statsHints = [
+        Stat.HP,
+        Stat.ATK,
+        Stat.DEF,
+        Stat.SPEED,
+        Stat.SPE_DEF,
+        Stat.RANGE,
+        Stat.PP
+    ] as const
     const randomStat = statsHints[(index + parseInt(solution.index)) % 7]
-    const statMapping: Record<typeof statsHints[number], string> = {
+    const statMapping: Record<(typeof statsHints)[number], string> = {
         [Stat.HP]: "hp",
         [Stat.ATK]: "atk",
         [Stat.DEF]: "def",
@@ -343,9 +361,18 @@ export function PokemonAttempt({
                 </span>
             ))}
             <span className={cc("stat", { valid: pokemonStat === solutionStat })}>
-                <img src={`assets/icons/${randomStat.toUpperCase()}.png`} alt={t(`stat.${randomStat}`)} title={t(`stat.${randomStat}`)} height="32" />
-                {" "}{pokemonStat}
-                {solutionStat > pokemonStat ? " ⏶" : solutionStat < pokemonStat ? " ⏷" : ""}
+                <img
+                    src={`assets/icons/${randomStat.toUpperCase()}.png`}
+                    alt={t(`stat.${randomStat}`)}
+                    title={t(`stat.${randomStat}`)}
+                    height="32"
+                />{" "}
+                {pokemonStat}
+                {solutionStat > pokemonStat
+                    ? " ⏶"
+                    : solutionStat < pokemonStat
+                        ? " ⏷"
+                        : ""}
             </span>
         </li>
     )

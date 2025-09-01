@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
+import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import { Pkm, PkmByIndex, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -26,7 +26,7 @@ export function AvatarTab() {
     (item) => item.emotions.length > 0 || item.shinyEmotions.length > 0
   )
   const nbUnlocked = unlocked.length
-  const nbTotal = precomputedPokemons.length
+  const nbTotal = precomputedPokemonsImplemented.length
 
   return (
     <div>

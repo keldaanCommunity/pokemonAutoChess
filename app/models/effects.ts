@@ -145,10 +145,10 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
     EffectEnum.SKYDIVE
   ],
   [Synergy.FLORA]: [
-    EffectEnum.ODD_FLOWER,
-    EffectEnum.GLOOM_FLOWER,
-    EffectEnum.VILE_FLOWER,
-    EffectEnum.SUN_FLOWER
+    EffectEnum.COTTONWEED,
+    EffectEnum.FLYCATCHER,
+    EffectEnum.FRAGRANT,
+    EffectEnum.FLOWER_POWER
   ],
   [Synergy.ROCK]: [
     EffectEnum.BATTLE_ARMOR,

@@ -26,10 +26,18 @@
 - Revert Capsakid nerf from 6.3:  PP 110 → 100
 - Nidoran Female now only show up in Poison regions
 - Change Plusle/Minum types: Electric/Fairy -> Electric/Field
+- Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
+- Change Fomantis line types: Grass/Light/Fighting → Flora/Light/Fighting
+- Seedot line is now regional
+- Gossifleur line is now regional
+- Bellsprout line, Chikorita line and Hoppip line are now in Special category
+- New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
+- Flabébé line now has 5 color variations. Their color is said to indicate the first bud to blossom.
 
 # Changes to Synergies
 
 - Ground rework: Ground Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages).
+- Flora rework: When a Flora Pokémon is KO'd, a Flower Pot blossoms and you collect mulch. Higher ⭐ units give more mulch, which can be used to evolve your Flower Pots.
 - Weather rocks are no longer collected during PVE rounds
 
 # Changes to Items
@@ -60,5 +68,5 @@
 # Misc
 
 - The amount of elo gained on the first games of a fresh new account is increased, and progressively decrease down to the standard K=32 factor after 20 games played. [More details here](https://discord.com/channels/737230355039387749/1404514365406969868)
-- New title: Mole
+- New titles: Mole, Blossomed
 

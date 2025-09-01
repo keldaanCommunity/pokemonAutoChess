@@ -1,9 +1,7 @@
-import { Ability } from "../../types/enum/Ability"
+import { precomputedPokemonsImplemented } from "../../../gen/precomputed-pokemons"
 import { Rarity } from "../../types/enum/Game"
-import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { precomputedPokemons } from "../../../gen/precomputed-pokemons"
 
 console.time("precompute-types-and-categories")
 
@@ -20,11 +18,7 @@ const data: Partial<
   >
 > = {}
 
-precomputedPokemons
-  .filter(
-    (pokemon) =>
-      pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE
-  )
+precomputedPokemonsImplemented
   .forEach((pokemon) => {
     pokemon.types.forEach((type: Synergy) => {
       if (type in data === false) {

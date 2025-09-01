@@ -6,6 +6,10 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
+import {
+  FLOWER_POTS_POSITIONS,
+  FlowerPotMons
+} from "../../../core/flower-pots"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -108,7 +112,7 @@ class GameContainer {
         value === true &&
         value !== previousValue
       ) {
-        this.gameScene?.board?.removePokemonsOnBoard(false)
+        this.gameScene?.board?.removePokemonsOnBoard()
         this.gameScene?.battle?.onSimulationStart()
       }
     })
@@ -314,8 +318,8 @@ class GameContainer {
   }
 
   initializeEvents() {
-    this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) =>
-      this.handleDragDropFailed(message)
+    this.room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
+      this.handleDragDropCancel(message)
     )
     const $state = this.$<GameState>(this.room.state)
     $state.avatars.onAdd((avatar) => {
@@ -409,22 +413,24 @@ class GameContainer {
       this.initializeGame()
     }
 
-    const listenForPokemonChanges = (pokemon: Pokemon) => {
+    const listenForPokemonChanges = (
+      pokemon: Pokemon,
+      fields: NonFunctionPropNames<IPokemon>[] = [
+        "positionX",
+        "positionY",
+        "action",
+        "hp",
+        "atk",
+        "ap",
+        "def",
+        "speed",
+        "shiny",
+        "skill",
+        "meal"
+      ]
+    ) => {
       const $pokemon = this.$<Pokemon>(pokemon)
       $pokemon.onChange(() => {
-        const fields: NonFunctionPropNames<IPokemon>[] = [
-          "positionX",
-          "positionY",
-          "action",
-          "hp",
-          "atk",
-          "ap",
-          "def",
-          "speed",
-          "shiny",
-          "skill",
-          "meal"
-        ]
         fields.forEach((field) => {
           $pokemon.listen(field, (value, previousValue) => {
             if (field && player.id === this.spectatedPlayerId) {
@@ -473,7 +479,6 @@ class GameContainer {
       }
 
       listenForPokemonChanges(pokemon)
-
       this.handleBoardPokemonAdd(player, pokemon)
     }, false)
 
@@ -500,9 +505,49 @@ class GameContainer {
     })
 
     $player.synergies.onChange(() => {
-      if (player.id === this.spectatedPlayerId) {
+      if (
+        player.id === this.spectatedPlayerId &&
+        this.gameScene?.board?.mode === BoardMode.PICK
+      ) {
         this.gameScene?.board?.showLightCell()
         this.gameScene?.board?.renderBerryTrees()
+        this.gameScene?.board?.renderFlowerPots()
+      }
+    })
+
+    $player.flowerPots.onAdd((pokemon, index) => {
+      listenForPokemonChanges(pokemon, ["hp", "ap"])
+      const board = this.gameScene?.board
+      if (
+        board &&
+        player.id === this.spectatedPlayerId &&
+        this.gameScene?.board?.mode !== BoardMode.TOWN
+      ) {
+        board.renderFlowerPots()
+        const [x, y] = FLOWER_POTS_POSITIONS[index]
+        const evolutionAnim = this.gameScene.add.sprite(
+          x,
+          y - 24,
+          "abilities",
+          "EVOLUTION/000.png"
+        )
+        evolutionAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
+          evolutionAnim.destroy()
+        )
+        evolutionAnim.setScale(2).setDepth(DEPTH.BOOST_BACK).play("EVOLUTION")
+      }
+    }, false)
+
+    $player.flowerPots.onChange((pokemon, key) => {
+      store.dispatch(
+        changePlayer({
+          id: player.id,
+          field: "flowerPots",
+          value: player.flowerPots
+        })
+      )
+      if (pokemon) {
+        listenForPokemonChanges(pokemon, ["hp", "ap"])
       }
     })
   }
@@ -610,22 +655,23 @@ class GameContainer {
       (board.mode === BoardMode.PICK || pokemon.positionY === 0)
     ) {
       const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)
-      if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
+      if (!pokemonUI) return
+      if (pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
-      } else if (pokemonUI && pokemon.stars > 1) {
+      } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
         playSound(
           pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3
         )
-      } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
+      } else if (pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
-      } else if (pokemonUI) {
+      } else {
         pokemonUI.spawnAnimation()
       }
     }
   }
 
-  handleDragDropFailed(message: {
+  handleDragDropCancel(message: {
     updateBoard: boolean
     updateItems: boolean
     text?: string
@@ -644,13 +690,14 @@ class GameContainer {
     }
 
     if (message.text && message.pokemonId) {
-      const pokemon = this.player?.board.get(message.pokemonId)
+      const pokemon = this.gameScene?.board?.pokemons.get(message.pokemonId)
       if (pokemon) {
-        const [x, y] = transformBoardCoordinates(
-          pokemon.positionX,
-          pokemon.positionY
+        gameScene?.board?.displayText(
+          pokemon.x,
+          pokemon.y,
+          t(message.text),
+          true
         )
-        gameScene?.board?.displayText(x, y, t(message.text))
       }
     }
   }
