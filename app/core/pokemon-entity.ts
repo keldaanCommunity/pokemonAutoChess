@@ -1150,7 +1150,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
   }) {
     // proc fairy splash damage for both the attacker and the target
-    if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
+    if (target.fairySplashCooldown === 0 && target.hasSynergyEffect(Synergy.FAIRY)) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
         shockDamageFactor += 0.2
