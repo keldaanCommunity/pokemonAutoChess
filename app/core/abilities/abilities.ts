@@ -1970,7 +1970,7 @@ export class RoarOfTimeStrategy extends AbilityStrategy {
     const strongest = getStrongestUnit(candidates)
     if (strongest) {
       strongest.status.addResurrection(strongest)
-      strongest.addSpeed(speedBuff, pokemon, 1, true)
+      strongest.addSpeed(speedBuff, pokemon, 1, crit)
     }
   }
 }
@@ -8226,8 +8226,8 @@ export class TickleStrategy extends AbilityStrategy {
           nbEnemiesHit < nbMaxEnemiesHit
         ) {
           nbEnemiesHit++
-          cell.value.addAttack(-attackLost, pokemon, 1, true)
-          cell.value.addDefense(-defLost, pokemon, 1, true)
+          cell.value.addAttack(-attackLost, pokemon, 1, crit)
+          cell.value.addDefense(-defLost, pokemon, 1, crit)
         }
       })
   }
@@ -9377,8 +9377,8 @@ export class RapidSpinStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
-    pokemon.addDefense(buffAmount, pokemon, 1, true)
-    pokemon.addSpecialDefense(buffAmount, pokemon, 1, true)
+    pokemon.addDefense(buffAmount, pokemon, 1, crit)
+    pokemon.addSpecialDefense(buffAmount, pokemon, 1, crit)
   }
 }
 
@@ -10325,7 +10325,7 @@ export class YawnStrategy extends AbilityStrategy {
     })
 
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
-    pokemon.addShield(shield, pokemon, 1, true)
+    pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.resetCooldown(1000)
   }
 }
@@ -10975,7 +10975,7 @@ export class RageStrategy extends AbilityStrategy {
     const missingHp = pokemon.hp - pokemon.life
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
-    pokemon.addAttack(atkBoost, pokemon, 1, true)
+    pokemon.addAttack(atkBoost, pokemon, 1, crit)
   }
 }
 
