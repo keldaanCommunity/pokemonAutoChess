@@ -17,7 +17,7 @@ export default function WikiRegions() {
     const timer = setTimeout(() => {
       setPokemonsPerRegion(Object.keys(DungeonPMDO).reduce((o, region) => {
         const regionalMons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-          new PokemonClasses[p]().isInRegion(region as DungeonPMDO)
+          new PokemonClasses[p](p).isInRegion(region as DungeonPMDO)
         ).filter(
           (p, index, array) => {
             const evolution = getPokemonData(PkmFamily[p]).evolution

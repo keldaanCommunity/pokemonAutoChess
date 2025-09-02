@@ -406,7 +406,7 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
   if (isOnBench(pokemon)) {
     const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
       pokemon.name
-    ]()
+    ](pokemon.name)
     pokemon.speed = initialSpeed
     pokemon.def = initialDef
   } else if (pokemon.speed >= 5) {

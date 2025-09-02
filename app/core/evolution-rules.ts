@@ -341,7 +341,8 @@ export function carryOverPermanentStats(
     "speed",
     "ap"
   ] as const
-  const baseData = new PokemonClasses[pokemonsBeforeEvolution[0].name]()
+  const pkm = pokemonsBeforeEvolution[0].name
+  const baseData = new PokemonClasses[pkm](pkm)
   for (const stat of permanentBuffStats) {
     const sumOfPermaStatsModifier = sum(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])

@@ -1339,6 +1339,7 @@ export default class BattleManager {
         this.flip
       )
       const trooperInBattle = new FalinksTrooper(
+        Pkm.FALINKS_TROOPER,
         trooperBrass.shiny,
         trooperBrass.emotion
       )

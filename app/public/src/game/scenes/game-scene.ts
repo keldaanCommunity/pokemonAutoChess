@@ -513,7 +513,8 @@ export default class GameScene extends Scene {
         g.x = dragX
         g.y = dragY
         if (g && this.pokemonDragged != null) {
-          const pokemon = new PokemonClasses[this.pokemonDragged!.name as Pkm]()
+          const pkm = <Pkm>this.pokemonDragged!.name
+          const pokemon = new PokemonClasses[pkm](pkm)
 
           this.dropSpots.forEach((spot) => {
             const inBench = spot.getData("y") === 0

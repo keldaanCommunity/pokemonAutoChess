@@ -1837,7 +1837,7 @@ export function canSell(
     return false
   }
 
-  return new PokemonClasses[pkm]().canBeSold
+  return new PokemonClasses[pkm](pkm).canBeSold
 }
 
 export function getMoveSpeed(pokemon: IPokemonEntity): number {
