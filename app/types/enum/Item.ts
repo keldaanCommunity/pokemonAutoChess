@@ -452,7 +452,7 @@ export const SynergyGems = [
   Item.GHOST_GEM,
   Item.DRAGON_GEM,
   Item.BUG_GEM,
-  Item.DARK_GEM,
+  //Item.DARK_GEM,
   Item.STEEL_GEM
 ] as const
 
@@ -527,7 +527,7 @@ export const SynergyGivenByGem: Record<
   [Item.GHOST_GEM]: Synergy.GHOST,
   [Item.DRAGON_GEM]: Synergy.DRAGON,
   [Item.BUG_GEM]: Synergy.BUG,
-  [Item.DARK_GEM]: Synergy.DARK,
+  //[Item.DARK_GEM]: Synergy.DARK,
   [Item.STEEL_GEM]: Synergy.STEEL
 }
 
