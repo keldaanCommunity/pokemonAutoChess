@@ -1,9 +1,8 @@
-import { IPokemon, IPokemonEntity } from "../types"
 import { max } from "./number"
 
 export function chance(
   probability: number,
-  pokemon?: IPokemonEntity | IPokemon,
+  pokemon?: { luck: number },
   cap = 1
 ): boolean {
   return (
