@@ -7212,7 +7212,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
         board,
         AttackType.SPECIAL,
         pokemon,
-        crit,
+        false,
         false
       )
     }
@@ -8199,7 +8199,8 @@ export class FurySwipesStrategy extends AbilityStrategy {
         board,
         AttackType.PHYSICAL,
         pokemon,
-        crit
+        false,
+        false
       )
     }
   }
@@ -9091,7 +9092,7 @@ export class TorchSongStrategy extends AbilityStrategy {
               board,
               AttackType.SPECIAL,
               pokemon,
-              crit,
+              false,
               false
             )
             if (chance(0.3, pokemon)) {
