@@ -539,7 +539,7 @@ export default class Player extends Schema implements IPlayer {
     }
 
     const newRegionalPokemons = PRECOMPUTED_REGIONAL_MONS.filter((p) =>
-      new PokemonClasses[p]().isInRegion(this.map, state)
+      new PokemonClasses[p](p).isInRegion(this.map, state)
     )
 
     if (mapChanged) {
