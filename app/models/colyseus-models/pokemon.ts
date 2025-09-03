@@ -18386,11 +18386,11 @@ export class Silicobra extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.SANDACONDA
-  hp = 100
+  hp = 80
   atk = 10
-  speed = 50
-  def = 5
-  speDef = 5
+  speed = 48
+  def = 7
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.SAND_SPIT
@@ -18401,11 +18401,11 @@ export class Sandaconda extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.AMORPHOUS])
   rarity = Rarity.RARE
   stars = 2
-  hp = 150
-  atk = 15
-  speed = 50
-  def = 10
-  speDef = 10
+  hp = 180
+  atk = 21
+  speed = 48
+  def = 12
+  speDef = 8
   maxPP = 80
   range = 1
   skill = Ability.SAND_SPIT
@@ -18421,12 +18421,12 @@ export class Dunsparce extends Pokemon {
       return player.groundHoles.filter(hole => hole === 5).length >= 10
     }
   )
-  stars = 2
-  hp = 100
-  atk = 10
-  speed = 50
-  def = 5
-  speDef = 5
+  stars = 3
+  hp = 220
+  atk = 15
+  speed = 35
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.HYPER_DRILL
@@ -18436,12 +18436,12 @@ export class Dunsparce extends Pokemon {
 export class Dudunsparse extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND, Synergy.FLYING])
   rarity = Rarity.UNIQUE
-  stars = 3
-  hp = 200
-  atk = 18
-  speed = 50
-  def = 10
-  speDef = 12
+  stars = 4
+  hp = 260
+  atk = 20
+  speed = 35
+  def = 7
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.HYPER_DRILL
