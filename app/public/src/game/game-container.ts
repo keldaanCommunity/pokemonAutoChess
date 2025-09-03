@@ -52,6 +52,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
+import { clearAbilityAnimations } from "./components/abilities-animations"
 
 class GameContainer {
   room: Room<GameState>
@@ -710,6 +711,7 @@ class GameContainer {
     this.gameScene?.battle?.setPlayer(player)
     this.gameScene?.board?.setPlayer(player)
     this.gameScene?.itemsContainer?.setPlayer(player)
+    this.gameScene && clearAbilityAnimations(this.gameScene)
     store.dispatch(setPlayer(player))
   }
 

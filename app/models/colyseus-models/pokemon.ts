@@ -18381,6 +18381,72 @@ export class FalinksTrooper extends Pokemon {
   }
 }
 
+export class Silicobra extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.AMORPHOUS])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.SANDACONDA
+  hp = 100
+  atk = 10
+  speed = 50
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.SAND_SPIT
+  additional = true
+}
+
+export class Sandaconda extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.AMORPHOUS])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 150
+  atk = 15
+  speed = 50
+  def = 10
+  speDef = 10
+  maxPP = 80
+  range = 1
+  skill = Ability.SAND_SPIT
+  additional = true
+}
+
+export class Dunsparce extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  evolution = Pkm.DUDUNSPARCE
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon: Pokemon, player: Player) => {
+      return player.groundHoles.filter(hole => hole === 5).length >= 10
+    }
+  )
+  stars = 2
+  hp = 100
+  atk = 10
+  speed = 50
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.HYPER_DRILL
+  passive = Passive.DUNSPARCE
+}
+
+export class Dudunsparse extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND, Synergy.FLYING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 18
+  speed = 50
+  def = 10
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.HYPER_DRILL
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19403,7 +19469,11 @@ export const PokemonClasses: Record<
   [Pkm.TOGEDEMARU]: Togedemaru,
   [Pkm.FALINKS_BRASS]: FalinksBrass,
   [Pkm.FALINKS_TROOPER]: FalinksTrooper,
-  [Pkm.DEDENNE]: Dedenne
+  [Pkm.DEDENNE]: Dedenne,
+  [Pkm.SILICOBRA]: Silicobra,
+  [Pkm.SANDACONDA]: Sandaconda,
+  [Pkm.DUNSPARCE]: Dunsparce,
+  [Pkm.DUDUNSPARCE]: Dudunsparse
 }
 
 // declare all the classes in colyseus schema TypeRegistry

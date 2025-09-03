@@ -499,7 +499,9 @@
 		"ZING_ZAP": "Zing Zap",
 		"NO_RETREAT": "No Retreat",
 		"TACKLE": "Tackle",
-		"STATIC_SHOCK": "Static Shock"
+		"STATIC_SHOCK": "Static Shock",
+		"SAND_SPIT": "Sand Spit",
+		"HYPER_DRILL": "Hyper Drill"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1516,7 +1518,11 @@
 		"TOGEDEMARU": "Togedemaru",
 		"FALINKS_BRASS": "Falinks (Brass)",
 		"FALINKS_TROOPER": "Falinks (Trooper)",
-		"DEDENNE": "Dedenne"
+		"DEDENNE": "Dedenne",
+		"SILICOBRA": "Silicobra",
+		"SANDACONDA": "Sandaconda",
+		"DUNSPARCE": "Dunsparce",
+		"DUDUNSPARCE": "Dudunsparce"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1996,7 +2002,9 @@
 		"ZING_ZAP": "Rolls behind the target, dealing [90,SP] SPECIAL and inflicting FLINCH for 3 seconds. If the target suffers from PARALYSIS, gain [40,SP] SHIELD.",
 		"NO_RETREAT": "Gain 1 ATK, 1 DEF, 1 SPE_DEF and 5 SPEED per Falinks on your team. Troopers tackle target for [20,SP] SPECIAL each.",
 		"TACKLE": "Deal [20,40,60,SP] SPECIAL to the target.",
-		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [30,SP] SHIELD per adjacent ELECTRIC Pokémon, heals [30,SP] HP per adjacent FAIRY Pokémon."
+		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [30,SP] SHIELD per adjacent ELECTRIC Pokémon, heals [30,SP] HP per adjacent FAIRY Pokémon.",
+		"SAND_SPIT": "Spits sand at the 3 enemy Pokémon in front of the user, dealing [30,60,120,SP] SPECIAL and inflicting BLINDED for 2 seconds.",
+		"HYPER_DRILL": "Deals [10,30,50,SP] TRUE that can break PROTECT, and dig deeper into the ground under the target, destroying any eventual buried items in the process. Double damage if target is already on a fully dug hole."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2149,7 +2157,7 @@
 		"TILLER": "Gain from +1 to + 5 DEF and SPE_DEF and +3 ATK at max depth",
 		"DIGGER": "Gain from +2 to +10 DEF and SPE_DEF and +5 ATK at max depth",
 		"DRILLER": "Gain from +3 to +15 DEF and SPE_DEF and +8 ATK at max depth",
-		"DEEP_MINER": "Gain 1 extra DEF and SPE_DEF for each fully dug hole on your board and +12 ATK when the whole board is fully dug",
+		"DEEP_MINER": "Gain 1 extra DEF and SPE_DEF for each fully dug hole on your half of the board and +12 ATK when your half of the board is fully dug",
 		"POISONOUS": "[30,LK]% chance to POISONNED",
 		"VENOMOUS": "[60,LK]% chance to POISONNED. Max stacks of POISONNED +1",
 		"TOXIC": "[100,LK]% chance to POISONNED. Max stacks of POISONNED +2",
@@ -2824,7 +2832,8 @@
 		"ACCELERATION": "Acceleration: gain 20 SPEED every tile you move (jumps and dashes count for one)",
 		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP",
 		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each.",
-		"FLABEBE_COLOR": "Their color indicates the first bud to blossom"
+		"FLABEBE_COLOR": "Their color indicates the first bud to blossom",
+		"DUNSPARCE": "Dunsparce will evolve when at least 10 ground holes are fully dug on board"
 	},
 	"stat": {
 		"ATK": "Attack",

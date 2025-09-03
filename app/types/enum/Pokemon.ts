@@ -1013,7 +1013,11 @@ export enum Pkm {
   BOLDORE = "BOLDORE",
   GIGALITH = "GIGALITH",
   TOGEDEMARU = "TOGEDEMARU",
-  DEDENNE = "DEDENNE"
+  DEDENNE = "DEDENNE",
+  SILICOBRA = "SILICOBRA",
+  SANDACONDA = "SANDACONDA",
+  DUNSPARCE = "DUNSPARCE",
+  DUDUNSPARCE = "DUDUNSPARCE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1287,7 +1291,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GIRAFARIG]: "0203",
   [Pkm.PINECO]: "0204",
   [Pkm.FORRETRESS]: "0205",
-  //[Pkm.DUNSPARCE]: "0206",
+  [Pkm.DUNSPARCE]: "0206",
   [Pkm.GLIGAR]: "0207",
   [Pkm.STEELIX]: "0208",
   //[Pkm.MEGA_STEELIX]: "0208-0001",
@@ -2003,8 +2007,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.APPLIN]: "0840",
   [Pkm.FLAPPLE]: "0841",
   [Pkm.APPLETUN]: "0842",
-  //[Pkm.SILICOBRA]: "0843",
-  //[Pkm.SANDACONDA]: "0844",
+  [Pkm.SILICOBRA]: "0843",
+  [Pkm.SANDACONDA]: "0844",
   [Pkm.CRAMORANT]: "0845",
   [Pkm.ARROKUDA]: "0846",
   //[Pkm.BARRASKEWDA]: "0847",
@@ -2164,7 +2168,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ANNIHILAPE]: "0979",
   [Pkm.CLODSIRE]: "0980",
   [Pkm.FARIGIRAF]: "0981",
-  //[Pkm.DUDUNSPARCE]: "0982",
+  [Pkm.DUDUNSPARCE]: "0982",
   [Pkm.KINGAMBIT]: "0983",
   //[Pkm.GREAT_TUSK]: "0984",
   [Pkm.SCREAM_TAIL]: "0985",
@@ -3221,7 +3225,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TOGEDEMARU]: Pkm.TOGEDEMARU,
   [Pkm.FALINKS_BRASS]: Pkm.FALINKS_BRASS,
   [Pkm.FALINKS_TROOPER]: Pkm.FALINKS_TROOPER,
-  [Pkm.DEDENNE]: Pkm.DEDENNE
+  [Pkm.DEDENNE]: Pkm.DEDENNE,
+  [Pkm.SILICOBRA]: Pkm.SILICOBRA,
+  [Pkm.SANDACONDA]: Pkm.SILICOBRA,
+  [Pkm.DUNSPARCE]: Pkm.DUNSPARCE,
+  [Pkm.DUDUNSPARCE]: Pkm.DUNSPARCE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
