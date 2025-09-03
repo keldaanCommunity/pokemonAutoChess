@@ -2845,7 +2845,7 @@
 	},
 	"stat_description": {
 		"ATK": "Damage inflicted on each basic attack",
-		"SPEED": "Frequency of attacks, movement speed and cooldown times. Maximum 300.",
+		"SPEED": "Influences the frequency of attacks, projectiles travel time, movement speed and cooldown times. Maximum 300.",
 		"CRIT_CHANCE": "Critical hits deal 2x more damage. Abilities cannot crit by default. Crit chance over 100% is converted to Crit power.",
 		"CRIT_POWER": "Multiplier for critical hits damage, healing and buffs",
 		"DEF": "Reduces PHYSICAL received",

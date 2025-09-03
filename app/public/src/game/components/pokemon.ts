@@ -90,7 +90,6 @@ export default class PokemonSprite extends DraggableObject {
   ap: number
   life: number | undefined
   shield: number | undefined
-  projectile: GameObjects.Sprite | undefined
   itemsContainer: ItemsContainer
   orientation: Orientation
   action: PokemonActionState
