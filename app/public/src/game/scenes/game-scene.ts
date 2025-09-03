@@ -43,6 +43,7 @@ import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
 import { FLOWER_POTS_POSITIONS } from "../../../../core/flower-pots"
 import { BOARD_WIDTH } from "../../../../types/Config"
+import { clearAbilityAnimations } from "../components/abilities-animations"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -50,6 +51,7 @@ export default class GameScene extends Scene {
   uid: string | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
   battleGroup: GameObjects.Group | undefined
+  abilitiesVfxGroup: GameObjects.Group | undefined
   animationManager: AnimationManager | undefined
   itemsContainer: ItemsContainer | undefined
   board: BoardManager | undefined
@@ -119,6 +121,7 @@ export default class GameScene extends Scene {
       this.setMap(player.map)
       this.setupMouseEvents()
       this.battleGroup = this.add.group()
+      this.abilitiesVfxGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
       this.minigameManager = new MinigameManager(
         this,
@@ -284,6 +287,7 @@ export default class GameScene extends Scene {
 
   updatePhase(newPhase: GamePhaseState, previousPhase: GamePhaseState) {
     this.weatherManager?.clearWeather()
+    clearAbilityAnimations(this)
     this.resetDragState()
 
     if (previousPhase === GamePhaseState.TOWN) {

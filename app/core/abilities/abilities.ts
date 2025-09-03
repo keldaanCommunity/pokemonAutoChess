@@ -13255,6 +13255,59 @@ export class StaticShockStrategy extends AbilityStrategy {
   }
 }
 
+export class SandSpitStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const cellsHit = board.getCellsInFront(pokemon, target, 1)
+
+    for (const cell of cellsHit) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        cell.value.status.triggerBlinded(2000, cell.value)
+      }
+    }
+  }
+}
+
+export class HyperDrillStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [10, 30, 50][pokemon.stars - 1] ?? 50
+    const boardPlayer = target.simulation.bluePlayer
+    let doubleDamage = false
+    if (boardPlayer) {
+      const index = target.positionY * BOARD_WIDTH + target.positionX
+      if (boardPlayer.groundHoles[index] === 5) {
+        doubleDamage = true
+      } else {
+        boardPlayer.groundHoles[index] = (boardPlayer.groundHoles[index] ?? 0) + 1
+      }
+      pokemon.broadcastAbility({
+        targetX: target.positionX,
+        targetY: target.positionY,
+        delay: boardPlayer.groundHoles[index] // delay will hold the ground hole depth info
+      })
+    }
+
+    if (target.status.protect) {
+      target.status.protect = false
+      target.status.protectCooldown = 0
+    }
+    target.handleSpecialDamage(damage * (doubleDamage ? 2 : 1), board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13736,5 +13789,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.NO_RETREAT]: new NoRetreatStrategy(),
   [Ability.TACKLE]: new TackleStrategy(),
-  [Ability.STATIC_SHOCK]: new StaticShockStrategy()
+  [Ability.STATIC_SHOCK]: new StaticShockStrategy(),
+  [Ability.SAND_SPIT]: new SandSpitStrategy(),
+  [Ability.HYPER_DRILL]: new HyperDrillStrategy()
 }

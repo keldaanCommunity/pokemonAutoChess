@@ -121,9 +121,7 @@ export default class Player extends Schema implements IPlayer {
   @type([Pokemon]) flowerPots: Pokemon[] = []
   @type("uint8") mulch: number = 0
   @type("uint8") mulchCap: number = MulchStockCaps[0]
-  @type(["uint8"]) groundHoles: number[] = new Array(
-    (BOARD_WIDTH * BOARD_HEIGHT) / 2
-  ).fill(0)
+  @type(["uint8"]) groundHoles: number[] = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(0)
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()

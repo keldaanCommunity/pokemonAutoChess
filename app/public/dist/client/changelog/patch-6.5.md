@@ -7,6 +7,10 @@
 - Gigalith
 - Togedemaru
 - Dedenne
+- Silicobra
+- Sandaconda
+- Dunsparce
+- Dudunsparce
 
 # Changes to Pokemon & Abilities
 
