@@ -48,6 +48,11 @@
 - Buff Float Stone: 5 → 10 speed
 - Buff Black Augurite: 5 → 10% less critical damage
 - Buff Smelly Clay: 10 → 15% less chance to be poisonned
+- Buff Kings Rock: 100 + ~~30~~ 35 % of max HP as shield
+- Buff Star Dust: base shield 15 → 50
+- Nerf Shiny Charm: protect duration 2 → 1.5 second
+- Nerf Ability Shield: removed 15 base shield
+- Nerf Razor Fang: Armor break duration 4 → 2 seconds
 
 # Changes to Town Encounters
 

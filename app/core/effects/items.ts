@@ -496,7 +496,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.KINGS_ROCK]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(0.3 * pokemon.baseHP, pokemon, 0, false)
+      pokemon.addShield(0.35 * pokemon.baseHP, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addShield(-0.3 * pokemon.baseHP, pokemon, 0, false)

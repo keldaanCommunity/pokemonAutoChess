@@ -858,7 +858,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.player && this.simulation.weather === Weather.SNOW
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
-      
+
       let freezeChance = 0
       if (this.effects.has(EffectEnum.CHILLY)) {
         freezeChance = 0.2
@@ -1210,7 +1210,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(4000, target)
+      target.status.triggerArmorReduction(2000, target)
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {

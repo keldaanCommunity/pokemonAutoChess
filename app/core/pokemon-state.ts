@@ -541,7 +541,7 @@ export default abstract class PokemonState {
         takenDamage = 0
         residualDamage = 0
         pokemon.addPP(50, pokemon, 0, false)
-        pokemon.status.triggerProtect(2000)
+        pokemon.status.triggerProtect(1500)
         pokemon.removeItem(Item.SHINY_CHARM)
       }
 
@@ -583,7 +583,7 @@ export default abstract class PokemonState {
       }
 
       if (takenDamage > 0) {
-        if(pokemon.life > 0) {
+        if (pokemon.life > 0) {
           pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType, isRetaliation })
         }
         if (attacker) {
