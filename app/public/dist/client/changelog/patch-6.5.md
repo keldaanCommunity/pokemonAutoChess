@@ -37,6 +37,7 @@
 - Bellsprout line, Chikorita line and Hoppip line are now in Special category
 - New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
 - Flabébé line now has 5 color variations. Their color indicates the first bud to blossom.
+- Change sell price of Remoraid: 3 → 2 gold and Octillery 10 → 7 gold
 
 # Changes to Synergies
 
