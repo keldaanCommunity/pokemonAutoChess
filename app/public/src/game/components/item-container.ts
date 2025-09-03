@@ -8,7 +8,6 @@ import {
   ShinyItems,
   SpecialItems,
   TMs,
-  UnholdableItems,
   WeatherRocks
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
@@ -50,8 +49,7 @@ export default class ItemContainer extends DraggableObject {
     this.circle = scene.add.image(0, 0, "cell", this.cellIndex * 3)
     this.draggable = this.pokemonId === null &&
       playerId === currentPlayerUid &&
-      (scene as GameScene).spectate === false &&
-      UnholdableItems.includes(item) === false
+      (scene as GameScene).spectate === false
     if (pokemonId) {
       this.circle.setFrame(this.cellIndex * 3 + 2).setScale(0.45)
     } else {

@@ -76,6 +76,7 @@
 # Bugfix
 
 - Fix fairy splash enabled even when fairy synergy is inactive
+- Hidden power abilities now truly make the user vanish, and no longer procs items like shiny charm or max revive
 
 # Misc
 
