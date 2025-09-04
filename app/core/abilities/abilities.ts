@@ -2759,20 +2759,17 @@ export class WishStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const heal = 50
-    let count = pokemon.stars
+    const count = pokemon.stars
 
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (
-        ally &&
-        pokemon.team == ally.team &&
-        count > 0 &&
-        ally.life < ally.hp
-      ) {
-        ally.handleHeal(heal, pokemon, 1, crit)
-        ally.addLuck(20, pokemon, 1, crit)
-        count -= 1
-      }
-    })
+    const allies = board.cells
+      .filter((cell): cell is PokemonEntity => cell != null && cell.team === pokemon.team)
+      .sort((a, b) => (b.hp - b.life) - (a.hp - a.life))
+      .slice(0, count)
+
+    for (const ally of allies) {
+      ally.handleHeal(heal, pokemon, 1, crit)
+      ally.addLuck(20, pokemon, 1, crit)
+    }
   }
 }
 
