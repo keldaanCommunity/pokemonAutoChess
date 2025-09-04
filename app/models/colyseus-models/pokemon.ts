@@ -15902,13 +15902,13 @@ function ogerponOnSell(player: Player) {
 
 export class OgerponTeal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 17
-  speed = 60
-  def = 4
-  speDef = 4
+  atk = 27
+  speed = 70
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -15919,11 +15919,11 @@ export class OgerponTeal extends Pokemon {
 
 export class OgerponTealMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 17
-  speed = 60
+  atk = 27
+  speed = 70
   def = 8
   speDef = 8
   maxPP = 100
@@ -15937,13 +15937,13 @@ export class OgerponTealMask extends Pokemon {
 
 export class OgerponWellspring extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 17
-  speed = 60
-  def = 4
-  speDef = 4
+  atk = 27
+  speed = 70
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -15954,13 +15954,13 @@ export class OgerponWellspring extends Pokemon {
 
 export class OgerponWellspringMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 17
-  speed = 60
+  atk = 27
+  speed = 70
   def = 8
-  speDef = 16
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -15973,13 +15973,13 @@ export class OgerponWellspringMask extends Pokemon {
 
 export class OgerponHearthflame extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 21
-  speed = 60
-  def = 4
-  speDef = 4
+  atk = 27
+  speed = 70
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -15990,11 +15990,11 @@ export class OgerponHearthflame extends Pokemon {
 
 export class OgerponHearthflameMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 21
-  speed = 60
+  atk = 27
+  speed = 70
   def = 8
   speDef = 8
   maxPP = 100
@@ -16009,13 +16009,13 @@ export class OgerponHearthflameMask extends Pokemon {
 
 export class OgerponCornerstone extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 17
-  speed = 60
-  def = 4
-  speDef = 4
+  atk = 27
+  speed = 70
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16026,12 +16026,12 @@ export class OgerponCornerstone extends Pokemon {
 
 export class OgerponCornerstoneMask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 17
-  speed = 60
-  def = 16
+  atk = 27
+  speed = 70
+  def = 8
   speDef = 8
   maxPP = 100
   range = 1

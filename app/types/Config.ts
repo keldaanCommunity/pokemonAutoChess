@@ -301,10 +301,6 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.DURANT,
   Pkm.SKARMORY,
   Pkm.SIGILYPH,
-  Pkm.OGERPON_TEAL,
-  Pkm.OGERPON_WELLSPRING,
-  Pkm.OGERPON_HEARTHFLAME,
-  Pkm.OGERPON_CORNERSTONE,
   Pkm.IRON_HANDS,
   Pkm.TURTONATOR,
   Pkm.CRYOGONAL,
@@ -396,7 +392,11 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.OKIDOGI,
   Pkm.MUNKIDORI,
   Pkm.FEZANDIPITI,
-  Pkm.CELESTEELA
+  Pkm.CELESTEELA,
+  Pkm.OGERPON_TEAL,
+  Pkm.OGERPON_WELLSPRING,
+  Pkm.OGERPON_HEARTHFLAME,
+  Pkm.OGERPON_CORNERSTONE,
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6

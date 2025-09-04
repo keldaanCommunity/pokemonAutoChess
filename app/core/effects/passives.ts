@@ -3,7 +3,12 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Team } from "../../types/enum/Game"
-import { Flavors, Item, SynergyFlavors } from "../../types/enum/Item"
+import {
+  Flavors,
+  Item,
+  OgerponMasks,
+  SynergyFlavors
+} from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
@@ -25,6 +30,7 @@ import {
   OnHitEffect,
   OnKillEffect,
   OnMoveEffect,
+  OnShieldDepletedEffect,
   OnSpawnEffect,
   OnStageStartEffect,
   PeriodicEffect
@@ -433,10 +439,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   )
   adjacentAllies.forEach((ally) => {
     ally.types.forEach((synergy) => {
-      surroundingSynergies.set(
-        synergy,
-        surroundingSynergies.get(synergy)! + 1
-      )
+      surroundingSynergies.set(synergy, surroundingSynergies.get(synergy)! + 1)
     })
   })
   let maxSynergy = Synergy.NORMAL
@@ -475,7 +478,8 @@ class ZygardeCellsEffect extends PeriodicEffect {
         let cellsSpawned = 0
         const delay = 1800
 
-        for (let i = 0; i < 24; i++) if (pokemon.player.groundHoles[i] === 5) fullyDugHolesIndexes.push(i)
+        for (let i = 0; i < 24; i++)
+          if (pokemon.player.groundHoles[i] === 5) fullyDugHolesIndexes.push(i)
 
         for (const index of fullyDugHolesIndexes) {
           if (this.cellsCount < 95) {
@@ -484,41 +488,47 @@ class ZygardeCellsEffect extends PeriodicEffect {
             const x = +index % 8
             const y = Math.floor(+index / 8)
             if (x !== pokemon.positionX || y !== pokemon.positionY) {
-              pokemon.broadcastAbility({ targetX: x, targetY: y, skill: "ZYGARDE_CELL" })
+              pokemon.broadcastAbility({
+                targetX: x,
+                targetY: y,
+                skill: "ZYGARDE_CELL"
+              })
             }
           }
         }
 
-        pokemon.commands.push(new DelayedCommand(() => {
-          pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
-          if (this.cellsCount >= 95) {
-            pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
-            if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
-              pokemon.addDefense(2, pokemon, 0, false)
-              pokemon.addSpecialDefense(2, pokemon, 0, false)
-              pokemon.addMaxHP(5, pokemon, 0, false)
-              pokemon.addSpeed(-12, pokemon, 0, false)
-              pokemon.range = min(1)(pokemon.range + 1)
-            } else {
-              pokemon.addAttack(5, pokemon, 0, false)
-              pokemon.addDefense(5, pokemon, 0, false)
-              pokemon.addSpecialDefense(5, pokemon, 0, false)
-              pokemon.addMaxHP(35, pokemon, 0, false)
-              pokemon.addSpeed(-5, pokemon, 0, false)
-              pokemon.range = min(1)(pokemon.range - 1)
-            }
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
+            if (this.cellsCount >= 95) {
+              pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
+              if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
+                pokemon.addDefense(2, pokemon, 0, false)
+                pokemon.addSpecialDefense(2, pokemon, 0, false)
+                pokemon.addMaxHP(5, pokemon, 0, false)
+                pokemon.addSpeed(-12, pokemon, 0, false)
+                pokemon.range = min(1)(pokemon.range + 1)
+              } else {
+                pokemon.addAttack(5, pokemon, 0, false)
+                pokemon.addDefense(5, pokemon, 0, false)
+                pokemon.addSpecialDefense(5, pokemon, 0, false)
+                pokemon.addMaxHP(35, pokemon, 0, false)
+                pokemon.addSpeed(-5, pokemon, 0, false)
+                pokemon.range = min(1)(pokemon.range - 1)
+              }
 
-            pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
-            pokemon.name = Pkm.ZYGARDE_100
-            pokemon.changePassive(Passive.NONE)
-            pokemon.skill = Ability.CORE_ENFORCER
-            pokemon.pp = 0
-            pokemon.effectsSet.delete(this)
-            if (pokemon.player) {
-              pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
+              pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
+              pokemon.name = Pkm.ZYGARDE_100
+              pokemon.changePassive(Passive.NONE)
+              pokemon.skill = Ability.CORE_ENFORCER
+              pokemon.pp = 0
+              pokemon.effectsSet.delete(this)
+              if (pokemon.player) {
+                pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
+              }
             }
-          }
-        }, delay))
+          }, delay)
+        )
       },
       Passive.ZYGARDE,
       1000
@@ -570,9 +580,7 @@ export class FalinksFormationEffect extends OnSpawnEffect {
       if (!pkm.player) return
       const troopers = values(pkm.player.board).filter(
         (p) =>
-          p.name === Pkm.FALINKS_TROOPER &&
-          p.positionY === 0 &&
-          p.id !== pkm.id
+          p.name === Pkm.FALINKS_TROOPER && p.positionY === 0 && p.id !== pkm.id
       )
       this.stacks = troopers.length
       if (this.stacks > 0) {
@@ -584,6 +592,17 @@ export class FalinksFormationEffect extends OnSpawnEffect {
   }
 }
 
+const ogerponMaskDropEffect = (
+  mask: typeof OgerponMasks[number],
+  from: Pkm,
+  to: Pkm
+) =>
+  new OnShieldDepletedEffect(({ pokemon }) => {
+    if (pokemon.name === from && pokemon.items.has(mask)) {
+      pokemon.index = PkmIndex[to]
+      pokemon.removeItem(mask)
+    }
+  }, mask)
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
@@ -617,5 +636,33 @@ export const PassiveEffects: Partial<
   ],
   [Passive.FALINKS]: [
     () => new FalinksFormationEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.OGERPON_CORNERSTONE]: [
+    ogerponMaskDropEffect(
+      Item.CORNERSTONE_MASK,
+      Pkm.OGERPON_CORNERSTONE_MASK,
+      Pkm.OGERPON_CORNERSTONE
+    )
+  ],
+  [Passive.OGERPON_HEARTHFLAME]: [
+    ogerponMaskDropEffect(
+      Item.HEARTHFLAME_MASK,
+      Pkm.OGERPON_HEARTHFLAME_MASK,
+      Pkm.OGERPON_HEARTHFLAME
+    )
+  ],
+  [Passive.OGERPON_TEAL]: [
+    ogerponMaskDropEffect(
+      Item.TEAL_MASK,
+      Pkm.OGERPON_TEAL_MASK,
+      Pkm.OGERPON_TEAL
+    )
+  ],
+  [Passive.OGERPON_WELLSPRING]: [
+    ogerponMaskDropEffect(
+      Item.WELLSPRING_MASK,
+      Pkm.OGERPON_WELLSPRING_MASK,
+      Pkm.OGERPON_WELLSPRING
+    )
   ]
 }

@@ -19,8 +19,10 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
+import { values } from "../utils/schemas"
 import type { Board, Cell } from "./board"
-import { PeriodicEffect } from "./effects/effect"
+import { OnShieldDepletedEffect, PeriodicEffect } from "./effects/effect"
+import { ItemEffects } from "./effects/items"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default abstract class PokemonState {
@@ -524,6 +526,14 @@ export default abstract class PokemonState {
         if (damageOnShield > pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
+          const onShieldDepletedEffects = [
+            ...pokemon.effectsSet.values(),
+            ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
+          ].filter((effect) => effect instanceof OnShieldDepletedEffect)
+      
+          onShieldDepletedEffects.forEach((effect) => {
+            effect.apply({ pokemon, board, attacker })
+          })
         }
 
         pokemon.shieldDamageTaken += damageOnShield
