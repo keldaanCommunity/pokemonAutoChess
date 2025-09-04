@@ -6521,21 +6521,21 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Appeal,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.FLORAGATO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.MEOWSCARADA]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.FOMANTIS]: {
@@ -6981,5 +6981,33 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.FAIRY_HIT,
     hurt: AnimationType.Charge,
     eat: AnimationType.Sleep
+  },
+  [Pkm.SILICOBRA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.SANDACONDA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.DUNSPARCE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.DeepBreath,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.DUDUNSPARCE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
   }
 }

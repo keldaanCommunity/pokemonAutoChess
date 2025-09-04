@@ -853,26 +853,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     })
 
-    if (this.hasSynergyEffect(Synergy.ICE)) {
+    if (this.hasSynergyEffect(Synergy.ICE) && this.types.has(Synergy.ICE)) {
       const nbIcyRocks =
         this.player && this.simulation.weather === Weather.SNOW
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
-      if (this.types.has(Synergy.ICE) || nbIcyRocks > 0) {
-        let freezeChance = 0
-        if (this.effects.has(EffectEnum.CHILLY)) {
-          freezeChance = 0.2
-        } else if (this.effects.has(EffectEnum.FROSTY)) {
-          freezeChance = 0.3
-        } else if (this.effects.has(EffectEnum.FREEZING)) {
-          freezeChance = 0.4
-        } else if (this.effects.has(EffectEnum.SHEER_COLD)) {
-          freezeChance = 0.4
-        }
-        freezeChance += nbIcyRocks * 0.05
-        if (chance(freezeChance, this)) {
-          target.status.triggerFreeze(2000, target)
-        }
+
+      let freezeChance = 0
+      if (this.effects.has(EffectEnum.CHILLY)) {
+        freezeChance = 0.2
+      } else if (this.effects.has(EffectEnum.FROSTY)) {
+        freezeChance = 0.3
+      } else if (this.effects.has(EffectEnum.FREEZING)) {
+        freezeChance = 0.4
+      } else if (this.effects.has(EffectEnum.SHEER_COLD)) {
+        freezeChance = 0.4
+      }
+      freezeChance += nbIcyRocks * 0.05
+      if (chance(freezeChance, this)) {
+        target.status.triggerFreeze(2000, target)
       }
     }
 
@@ -1167,7 +1166,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
   }) {
     // proc fairy splash damage for both the attacker and the target
-    if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
+    if (target.fairySplashCooldown === 0 && target.hasSynergyEffect(Synergy.FAIRY)) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
         shockDamageFactor += 0.2
@@ -1211,7 +1210,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(4000, target)
+      target.status.triggerArmorReduction(2000, target)
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {
@@ -1837,7 +1836,7 @@ export function canSell(
     return false
   }
 
-  return new PokemonClasses[pkm]().canBeSold
+  return new PokemonClasses[pkm](pkm).canBeSold
 }
 
 export function getMoveSpeed(pokemon: IPokemonEntity): number {

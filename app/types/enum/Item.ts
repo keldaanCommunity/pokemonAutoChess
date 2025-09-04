@@ -443,17 +443,17 @@ export const SynergyStones = [
 
 export const SynergyGems = [
   Item.FIRE_GEM,
-  Item.NORMAL_GEM,
   Item.ROCK_GEM,
-  Item.WATER_GEM,
-  Item.POISON_GEM,
+  Item.NORMAL_GEM,
+  Item.BUG_GEM,
   Item.FLYING_GEM,
   Item.ICE_GEM,
-  Item.GHOST_GEM,
+  Item.WATER_GEM,
+  Item.STEEL_GEM,
   Item.DRAGON_GEM,
-  Item.BUG_GEM,
-  Item.DARK_GEM,
-  Item.STEEL_GEM
+  Item.POISON_GEM,
+  Item.GHOST_GEM,
+  //Item.DARK_GEM,
 ] as const
 
 export const SynergyItems = [
@@ -527,7 +527,7 @@ export const SynergyGivenByGem: Record<
   [Item.GHOST_GEM]: Synergy.GHOST,
   [Item.DRAGON_GEM]: Synergy.DRAGON,
   [Item.BUG_GEM]: Synergy.BUG,
-  [Item.DARK_GEM]: Synergy.DARK,
+  //[Item.DARK_GEM]: Synergy.DARK,
   [Item.STEEL_GEM]: Synergy.STEEL
 }
 

@@ -77,6 +77,7 @@ export function displayHit(
   hitSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
     hitSprite.destroy()
   })
+  scene.abilitiesVfxGroup?.add(hitSprite)
 }
 
 function tidalWaveAnimation(args: AbilityAnimationArgs) {
@@ -113,6 +114,7 @@ function tidalWaveAnimation(args: AbilityAnimationArgs) {
       }
     }
   })
+  scene.abilitiesVfxGroup?.add(wave)
 }
 
 const UNOWNS_PER_ABILITY = new Map([
@@ -315,6 +317,7 @@ export function addAbilitySprite(
   }
 
   const sprite = scene.add.sprite(position[0], position[1], textureKey, frame)
+  scene.abilitiesVfxGroup?.add(sprite)
 
   const {
     origin,
@@ -1220,6 +1223,47 @@ export const AbilitiesAnimations: {
       depth: DEPTH.ABILITY_BELOW_POKEMON
     })
   ],
+  [Ability.SAND_SPIT]: [
+    onCaster({ ability: "DIG", oriented: true, origin: [0, 1], scale: [3, 3] }),
+    onCaster({ ability: "DIG", oriented: true, origin: [0, 1], scale: [3, -3] })
+  ],
+  [Ability.HYPER_DRILL]: [
+    projectile({ startCoords: "target", startPositionOffset: [0, -40], duration: 1000, scale: 2, rotation: Math.PI / 2, depth: DEPTH.ABILITY_BELOW_POKEMON }),
+    onTarget({
+      ability: "DIG",
+      origin: [0, 1],
+      scale: [1, 2],
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    onTarget({
+      ability: "DIG",
+      origin: [1, 1],
+      flipX: true,
+      scale: [1, 2],
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    args => {
+      const [x, y] = transformEntityCoordinates(args.targetX, args.targetY, args.flip)
+      const hole = args.delay ?? 0
+      if (hole > 0) {
+        const groundHole = args.scene.add
+          .sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`)
+          .setScale(2)
+          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        args.scene.abilitiesVfxGroup?.add(groundHole)
+        args.scene.tweens.add({
+          alpha: 0,
+          delay: 15000,
+          duration: 2000,
+          targets: groundHole,
+          onComplete() {
+            groundHole.destroy()
+          }
+        })
+        args.scene.abilitiesVfxGroup?.add(groundHole)
+      }
+    }
+  ],
   [Ability.PURIFY]: [
     onTarget({ ability: Ability.SMOG, scale: 1 }),
     onCaster({ ability: Ability.MUD_BUBBLE, scale: 1 })
@@ -1954,6 +1998,7 @@ export const AbilitiesAnimations: {
         frameRate: 8
       })
       darkHarvestGroup.add(darkHarvestSprite)
+      scene.abilitiesVfxGroup?.add(darkHarvestSprite)
     }
 
     const circle = new Phaser.Geom.Circle(x, y, 48)
@@ -2193,4 +2238,9 @@ export function displayAbility(args: AbilityAnimationArgs) {
   } else if (anims) {
     anims(args)
   }
+}
+
+
+export function clearAbilityAnimations(scene: GameScene | DebugScene) {
+  scene.abilitiesVfxGroup?.clear(true, true);
 }

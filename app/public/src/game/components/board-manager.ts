@@ -213,6 +213,7 @@ export default class BoardManager {
     )
 
     this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
+    this.pokemons.get(pokemonUI.id)?.destroy()
     this.pokemons.set(pokemonUI.id, pokemonUI)
 
     return pokemonUI
@@ -1120,6 +1121,7 @@ export default class BoardManager {
               PokemonActionState.IDLE,
               false
             )
+            this.pokemons.get(pokemonSprite.id)?.destroy()
             this.pokemons.set(pokemonSprite.id, pokemonSprite)
           })
 
@@ -1237,6 +1239,7 @@ export default class BoardManager {
             false
           )
           pokemonSprite.setScale(0)
+          this.pokemons.get(pokemonSprite.id)?.destroy()
           this.pokemons.set(pokemonSprite.id, pokemonSprite)
 
           const [originalX, originalY] = transformEntityCoordinates(

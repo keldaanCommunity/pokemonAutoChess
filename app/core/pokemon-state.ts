@@ -541,7 +541,7 @@ export default abstract class PokemonState {
         takenDamage = 0
         residualDamage = 0
         pokemon.addPP(50, pokemon, 0, false)
-        pokemon.status.triggerProtect(2000)
+        pokemon.status.triggerProtect(1500)
         pokemon.removeItem(Item.SHINY_CHARM)
       }
 
@@ -583,7 +583,7 @@ export default abstract class PokemonState {
       }
 
       if (takenDamage > 0) {
-        if(pokemon.life > 0) {
+        if (pokemon.life > 0) {
           pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType, isRetaliation })
         }
         if (attacker) {
@@ -639,67 +639,71 @@ export default abstract class PokemonState {
       }
 
       if (death) {
-        const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
-        pokemon.team = originalTeam
-        pokemon.onDeath({ board })
-        board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
-        if (attacker && pokemon !== attacker) {
-          attacker.onKill({ target: pokemon, board, attackType })
-        }
-        const effectsRemovedList: EffectEnum[] = []
-
-        // Remove field effects on death
-        if (pokemon.passive === Passive.ELECTRIC_TERRAIN) {
-          board.forEach((x, y, pkm) => {
-            if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
-              pkm.status.removeElectricField(pkm)
-            }
-          })
-          effectsRemovedList.push(EffectEnum.ELECTRIC_TERRAIN)
-        } else if (pokemon.passive === Passive.PSYCHIC_TERRAIN) {
-          board.forEach((x, y, pkm) => {
-            if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
-              pkm.status.removePsychicField(pkm)
-            }
-          })
-          effectsRemovedList.push(EffectEnum.PSYCHIC_TERRAIN)
-        } else if (pokemon.passive === Passive.GRASSY_TERRAIN) {
-          board.forEach((x, y, pkm) => {
-            if (pkm && pkm.team == pokemon.team && pkm.status.grassField) {
-              pkm.status.grassField = false
-            }
-          })
-          effectsRemovedList.push(EffectEnum.GRASSY_TERRAIN)
-        } else if (pokemon.passive === Passive.MISTY_TERRAIN) {
-          board.forEach((x, y, pkm) => {
-            if (pkm && pkm.team == pokemon.team && pkm.status.fairyField) {
-              pkm.status.fairyField = false
-            }
-          })
-          effectsRemovedList.push(EffectEnum.MISTY_TERRAIN)
-        }
-
-        if (originalTeam == Team.BLUE_TEAM) {
-          effectsRemovedList.forEach((x) =>
-            pokemon.simulation.blueEffects.delete(x)
-          )
-        } else {
-          effectsRemovedList.forEach((x) =>
-            pokemon.simulation.redEffects.delete(x)
-          )
-        }
-
-        if (pokemon.simulation.redTeam.has(pokemon.id)) {
-          pokemon.simulation.redTeam.delete(pokemon.id)
-        }
-        if (pokemon.simulation.blueTeam.has(pokemon.id)) {
-          pokemon.simulation.blueTeam.delete(pokemon.id)
-        }
+        this.triggerDeath(pokemon, attacker, board, attackType)
       }
     }
 
     takenDamage = Math.round(takenDamage)
     return { death, takenDamage }
+  }
+
+  triggerDeath(pokemon: PokemonEntity, attacker: PokemonEntity | null, board: Board, attackType: AttackType) {
+    const originalTeam = pokemon.status.possessed ? (pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM) : pokemon.team
+    pokemon.team = originalTeam
+    pokemon.onDeath({ board })
+    board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
+    if (attacker && pokemon !== attacker) {
+      attacker.onKill({ target: pokemon, board, attackType })
+    }
+    const effectsRemovedList: EffectEnum[] = []
+
+    // Remove field effects on death
+    if (pokemon.passive === Passive.ELECTRIC_TERRAIN) {
+      board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team == pokemon.team && pkm.status.electricField) {
+          pkm.status.removeElectricField(pkm)
+        }
+      })
+      effectsRemovedList.push(EffectEnum.ELECTRIC_TERRAIN)
+    } else if (pokemon.passive === Passive.PSYCHIC_TERRAIN) {
+      board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team == pokemon.team && pkm.status.psychicField) {
+          pkm.status.removePsychicField(pkm)
+        }
+      })
+      effectsRemovedList.push(EffectEnum.PSYCHIC_TERRAIN)
+    } else if (pokemon.passive === Passive.GRASSY_TERRAIN) {
+      board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team == pokemon.team && pkm.status.grassField) {
+          pkm.status.grassField = false
+        }
+      })
+      effectsRemovedList.push(EffectEnum.GRASSY_TERRAIN)
+    } else if (pokemon.passive === Passive.MISTY_TERRAIN) {
+      board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team == pokemon.team && pkm.status.fairyField) {
+          pkm.status.fairyField = false
+        }
+      })
+      effectsRemovedList.push(EffectEnum.MISTY_TERRAIN)
+    }
+
+    if (originalTeam == Team.BLUE_TEAM) {
+      effectsRemovedList.forEach((x) =>
+        pokemon.simulation.blueEffects.delete(x)
+      )
+    } else {
+      effectsRemovedList.forEach((x) =>
+        pokemon.simulation.redEffects.delete(x)
+      )
+    }
+
+    if (pokemon.simulation.redTeam.has(pokemon.id)) {
+      pokemon.simulation.redTeam.delete(pokemon.id)
+    }
+    if (pokemon.simulation.blueTeam.has(pokemon.id)) {
+      pokemon.simulation.blueTeam.delete(pokemon.id)
+    }
   }
 
   updateCommands(pokemon: PokemonEntity, dt: number) {

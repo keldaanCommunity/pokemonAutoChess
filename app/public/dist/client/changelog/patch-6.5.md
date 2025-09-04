@@ -7,6 +7,10 @@
 - Gigalith
 - Togedemaru
 - Dedenne
+- Silicobra
+- Sandaconda
+- Dunsparce
+- Dudunsparce
 
 # Changes to Pokemon & Abilities
 
@@ -32,7 +36,8 @@
 - Gossifleur line is now regional
 - Bellsprout line, Chikorita line and Hoppip line are now in Special category
 - New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
-- Flabébé line now has 5 color variations. Their color is said to indicate the first bud to blossom.
+- Flabébé line now has 5 color variations. Their color indicates the first bud to blossom.
+- Change sell price of Remoraid: 3 → 2 gold and Octillery 10 → 7 gold
 
 # Changes to Synergies
 
@@ -48,6 +53,11 @@
 - Buff Float Stone: 5 → 10 speed
 - Buff Black Augurite: 5 → 10% less critical damage
 - Buff Smelly Clay: 10 → 15% less chance to be poisonned
+- Buff Kings Rock: 100 + ~~30~~ 35 % of max HP as shield
+- Buff Star Dust: base shield 15 → 50
+- Nerf Shiny Charm: protect duration 2 → 1.5 second
+- Nerf Ability Shield: removed 15 base shield
+- Nerf Razor Fang: Armor break duration 4 → 2 seconds
 
 # Changes to Town Encounters
 
@@ -64,6 +74,9 @@
 - Added a tab in wiki for town encounters
 
 # Bugfix
+
+- Fix fairy splash enabled even when fairy synergy is inactive
+- Hidden power abilities now truly make the user vanish, and no longer procs items like shiny charm or max revive
 
 # Misc
 

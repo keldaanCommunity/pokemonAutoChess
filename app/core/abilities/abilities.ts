@@ -1970,7 +1970,7 @@ export class RoarOfTimeStrategy extends AbilityStrategy {
     const strongest = getStrongestUnit(candidates)
     if (strongest) {
       strongest.status.addResurrection(strongest)
-      strongest.addSpeed(speedBuff, pokemon, 1, true)
+      strongest.addSpeed(speedBuff, pokemon, 1, crit)
     }
   }
 }
@@ -7212,7 +7212,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
         board,
         AttackType.SPECIAL,
         pokemon,
-        crit,
+        false,
         false
       )
     }
@@ -8199,7 +8199,8 @@ export class FurySwipesStrategy extends AbilityStrategy {
         board,
         AttackType.PHYSICAL,
         pokemon,
-        crit
+        false,
+        false
       )
     }
   }
@@ -8226,8 +8227,8 @@ export class TickleStrategy extends AbilityStrategy {
           nbEnemiesHit < nbMaxEnemiesHit
         ) {
           nbEnemiesHit++
-          cell.value.addAttack(-attackLost, pokemon, 1, true)
-          cell.value.addDefense(-defLost, pokemon, 1, true)
+          cell.value.addAttack(-attackLost, pokemon, 1, crit)
+          cell.value.addDefense(-defLost, pokemon, 1, crit)
         }
       })
   }
@@ -9091,7 +9092,7 @@ export class TorchSongStrategy extends AbilityStrategy {
               board,
               AttackType.SPECIAL,
               pokemon,
-              crit,
+              false,
               false
             )
             if (chance(0.3, pokemon)) {
@@ -9377,8 +9378,8 @@ export class RapidSpinStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
-    pokemon.addDefense(buffAmount, pokemon, 1, true)
-    pokemon.addSpecialDefense(buffAmount, pokemon, 1, true)
+    pokemon.addDefense(buffAmount, pokemon, 1, crit)
+    pokemon.addSpecialDefense(buffAmount, pokemon, 1, crit)
   }
 }
 
@@ -10325,7 +10326,7 @@ export class YawnStrategy extends AbilityStrategy {
     })
 
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
-    pokemon.addShield(shield, pokemon, 1, true)
+    pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.resetCooldown(1000)
   }
 }
@@ -10975,7 +10976,7 @@ export class RageStrategy extends AbilityStrategy {
     const missingHp = pokemon.hp - pokemon.life
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
-    pokemon.addAttack(atkBoost, pokemon, 1, true)
+    pokemon.addAttack(atkBoost, pokemon, 1, crit)
   }
 }
 
@@ -13254,6 +13255,59 @@ export class StaticShockStrategy extends AbilityStrategy {
   }
 }
 
+export class SandSpitStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const cellsHit = board.getCellsInFront(pokemon, target, 1)
+
+    for (const cell of cellsHit) {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        cell.value.status.triggerBlinded(2000, cell.value)
+      }
+    }
+  }
+}
+
+export class HyperDrillStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [10, 30, 50][pokemon.stars - 1] ?? 50
+    const boardPlayer = target.simulation.bluePlayer
+    let doubleDamage = false
+    if (boardPlayer) {
+      const index = target.positionY * BOARD_WIDTH + target.positionX
+      if (boardPlayer.groundHoles[index] === 5) {
+        doubleDamage = true
+      } else {
+        boardPlayer.groundHoles[index] = (boardPlayer.groundHoles[index] ?? 0) + 1
+      }
+      pokemon.broadcastAbility({
+        targetX: target.positionX,
+        targetY: target.positionY,
+        delay: boardPlayer.groundHoles[index] // delay will hold the ground hole depth info
+      })
+    }
+
+    if (target.status.protect) {
+      target.status.protect = false
+      target.status.protectCooldown = 0
+    }
+    target.handleSpecialDamage(damage * (doubleDamage ? 2 : 1), board, AttackType.TRUE, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13735,5 +13789,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.NO_RETREAT]: new NoRetreatStrategy(),
   [Ability.TACKLE]: new TackleStrategy(),
-  [Ability.STATIC_SHOCK]: new StaticShockStrategy()
+  [Ability.STATIC_SHOCK]: new StaticShockStrategy(),
+  [Ability.SAND_SPIT]: new SandSpitStrategy(),
+  [Ability.HYPER_DRILL]: new HyperDrillStrategy()
 }

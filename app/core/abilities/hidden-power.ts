@@ -25,13 +25,7 @@ export class HiddenPowerStrategy extends AbilityStrategy {
     crit: boolean
   ): void {
     super.process(unown, board, target, crit)
-    unown.handleDamage({
-      damage: unown.life + unown.shield,
-      board,
-      attackType: AttackType.TRUE,
-      attacker: null,
-      shouldTargetGainMana: false
-    })
+    unown.state.triggerDeath(unown, null, board, AttackType.TRUE)
   }
 }
 

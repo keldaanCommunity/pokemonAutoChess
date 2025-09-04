@@ -798,6 +798,13 @@ export default class PokemonSprite extends DraggableObject {
             setTimeout(() => {
               itemSprite.destroy()
               shinyEffect.destroy()
+              if (buriedItem === Item.COIN) {
+                g.displayMoneyGain(this.x, this.y - 70, 1)
+              } else if (buriedItem === Item.NUGGET) {
+                g.displayMoneyGain(this.x, this.y - 70, 3)
+              } else if (buriedItem === Item.BIG_NUGGET) {
+                g.displayMoneyGain(this.x, this.y - 70, 10)
+              }
             }, 1000)
           }
         })
