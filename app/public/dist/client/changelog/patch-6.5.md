@@ -43,6 +43,7 @@
 
 - Ground rework: Ground Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages).
 - Flora rework: When a Flora Pokémon is KO'd, a Flower Pot blossoms and you collect mulch. Higher ⭐ units give more mulch, which can be used to evolve your Flower Pots.
+- Nerf Aquatic: status duration -30/60/90% → -30/50/70%
 - Weather rocks are no longer collected during PVE rounds
 
 # Changes to Items

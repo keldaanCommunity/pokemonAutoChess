@@ -101,8 +101,8 @@ export default class Status extends Schema implements IStatus {
     this.paralysisCooldown = 0
     this.charmCooldown = 0
     this.flinchCooldown = 0
-    this.armorReductionCooldown = 0    
-    if(this.curse && this.curseCooldown > 0){
+    this.armorReductionCooldown = 0
+    if (this.curse && this.curseCooldown > 0) {
       this.curseCooldown += 1000 // do not clear curseCooldown on purpose
     }
     this.curse = false
@@ -919,10 +919,10 @@ export default class Status extends Schema implements IStatus {
         this.curseCooldown = 0 // apply curse immediately if already cursed
       } else {
         this.curse = true
-        if(this.curseCooldown > 0){ // if status has been cleared, take the remaining time
+        if (this.curseCooldown > 0) { // if status has been cleared, take the remaining time
           timer = Math.min(this.curseCooldown, timer)
         }
-        
+
         this.curseCooldown = timer
       }
     }
@@ -1098,12 +1098,12 @@ export default class Status extends Schema implements IStatus {
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
       duration = Math.round(duration * 0.7)
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * 0.4)
+      duration = Math.round(duration * 0.5)
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(duration * 0.1)
+      duration = Math.round(duration * 0.3)
     }
     return duration
   }
