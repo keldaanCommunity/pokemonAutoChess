@@ -1823,7 +1823,7 @@
 		"PROTEAN2": "O pokémon adquire a tipagem das 2 maiores sinergias do time",
 		"PROTEAN3": "O pokémon adquire a tipagem das 3 maiores sinergias do time",
 		"CASTFORM": "Castform muda sua forma e o clima para SUN, RAIN ou SNOW, dependendo da sua sinergia dominante entre FIRE WATER ICE",
-		"PHIONE": "Phione está procurando por um AQUA_EGG",
+		"MANAPHY": "$t(pkm.MANAPHY) está procurando por um AQUA_EGG",
 		"SCYTHER": "$t(pkm.SCYTHER) está procurando por um METAL_COAT ou um BLACK_AUGURITE",
 		"PRIMAL": "Diz a lenda que você poderia liberar os antigos poderes desses pokémons",
 		"WONDER_GUARD": "Bloqueia 20 danos",

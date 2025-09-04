@@ -4097,6 +4097,27 @@ export class TakeHeartStrategy extends AbilityStrategy {
   }
 }
 
+export class HeartSwapStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
+    const boostAP = target.ap
+    target.speDef = target.baseSpeDef
+    target.ap = 0
+    pokemon.addSpecialDefense(boostSpeDef, pokemon, 0, false)
+    pokemon.addAbilityPower(boostAP, pokemon, 0, false)
+    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+
+    pokemon.status.transferNegativeStatus(pokemon, target)
+    pokemon.status.clearNegativeStatus()
+  }
+}
+
 export class SpectralThiefStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -13661,6 +13682,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLASH]: new FlashStrategy(),
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
+  [Ability.HEART_SWAP]: new HeartSwapStrategy(),
   [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
   [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
