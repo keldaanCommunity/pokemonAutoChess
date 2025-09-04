@@ -499,7 +499,9 @@
 		"ZING_ZAP": "麻麻刺刺",
 		"NO_RETREAT": "背水一战",
 		"TACKLE": "撞击",
-		"STATIC_SHOCK": "霹雳啪啦"
+		"STATIC_SHOCK": "霹雳啪啦",
+		"SAND_SPIT": "吐沙",
+		"HYPER_DRILL": "强力钻"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1516,7 +1518,11 @@
 		"TOGEDEMARU": "托戈德玛尔",
 		"FALINKS_BRASS": "列阵兵（头头）",
 		"FALINKS_TROOPER": "列阵兵（跟班）",
-		"DEDENNE": "咚咚鼠"
+		"DEDENNE": "咚咚鼠",
+		"SILICOBRA": "沙包蛇",
+		"SANDACONDA": "沙螺蟒",
+		"DUNSPARCE": "土龙弟弟",
+		"DUDUNSPARCE": "土龙节节"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1996,7 +2002,9 @@
 		"ZING_ZAP": "滚动至目标身后，对其造成[90,SP]点SPECIAL，并使其陷入FLINCH 3秒。若目标处于PARALYSIS，获得[40,SP]点SHIELD。",
 		"NO_RETREAT": "队伍中每有一只列阵兵，便提升1点ATK，1点DEF，1点SPE_DEF和5点SPEED。每只跟班撞击目标，造成[20,SP]点SPECIAL。",
 		"TACKLE": "对目标造成[20,40,60,SP]点SPECIAL。",
-		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。"
+		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。",
+		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
+		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，此伤害无视PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2824,7 +2832,8 @@
 		"ACCELERATION": "加速：每移动1格，提升20点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
 		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
 		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为5 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
-		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的花有关……"
+		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的花有关……",
+		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -2845,7 +2854,7 @@
 	},
 	"stat_description": {
 		"ATK": "每次普通攻击造成的伤害值。",
-		"SPEED": "影响攻击频率，移动速度和冷却时间。该数值上限为300。",
+		"SPEED": "影响攻击频率，弹道速度，移动速度和冷却时间。该数值上限为300。",
 		"CRIT_CHANCE": "攻击造成暴击，从而追加两倍伤害的概率。如无特别说明，招式无法暴击。超过100%的暴击率转化为CRIT_POWER。",
 		"CRIT_POWER": "进一步增强暴击提升的伤害，治疗和增幅的倍率。",
 		"DEF": "降低所受的PHYSICAL。",
