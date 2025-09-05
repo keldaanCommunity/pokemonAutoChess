@@ -2425,7 +2425,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TERRAKION]: Pkm.TERRAKION,
   [Pkm.VIRIZION]: Pkm.VIRIZION,
   [Pkm.COBALION]: Pkm.COBALION,
-  [Pkm.MANAPHY]: Pkm.PHIONE,
+  [Pkm.MANAPHY]: Pkm.MANAPHY,
   [Pkm.ROTOM]: Pkm.ROTOM,
   [Pkm.ROTOM_DRONE]: Pkm.ROTOM_DRONE,
   [Pkm.SPIRITOMB]: Pkm.SPIRITOMB,

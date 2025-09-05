@@ -121,12 +121,6 @@ export default class BattleManager {
   }
 
   clear() {
-    this.group.getChildren().forEach((p) => {
-      const pkm = p as PokemonSprite
-      if (pkm.projectile) {
-        pkm.projectile.destroy()
-      }
-    })
     this.group.clear(true, true)
     this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
     this.pokemonSprites.clear()

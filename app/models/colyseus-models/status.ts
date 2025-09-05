@@ -101,8 +101,8 @@ export default class Status extends Schema implements IStatus {
     this.paralysisCooldown = 0
     this.charmCooldown = 0
     this.flinchCooldown = 0
-    this.armorReductionCooldown = 0    
-    if(this.curse && this.curseCooldown > 0){
+    this.armorReductionCooldown = 0
+    if (this.curse && this.curseCooldown > 0) {
       this.curseCooldown += 1000 // do not clear curseCooldown on purpose
     }
     this.curse = false
@@ -130,6 +130,25 @@ export default class Status extends Schema implements IStatus {
       this.blinded ||
       this.possessed
     )
+  }
+
+  transferNegativeStatus(from: PokemonEntity, to: PokemonEntity) {
+    if(this.burn) to.status.triggerBurn(this.burnCooldown, to, from)
+    if(this.silence) to.status.triggerSilence(this.silenceCooldown, to, from)
+    if(this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to)
+    if(this.poisonStacks > 0) to.status.triggerPoison(this.poisonCooldown, to, from)
+    if(this.freeze) to.status.triggerFreeze(this.freezeCooldown, to)
+    if(this.sleep) to.status.triggerSleep(this.sleepCooldown, to)
+    if(this.confusion) to.status.triggerConfusion(this.confusionCooldown, to, from)
+    if(this.wound) to.status.triggerWound(this.woundCooldown, to, from)
+    if(this.paralysis) to.status.triggerParalysis(this.paralysisCooldown, to, from)
+    if(this.charm) to.status.triggerCharm(this.charmCooldown, to, from)
+    if(this.flinch) to.status.triggerFlinch(this.flinchCooldown, to, from)
+    if(this.armorReduction) to.status.triggerArmorReduction(this.armorReductionCooldown, to)
+    if(this.curse) to.status.triggerCurse(this.curseCooldown, to)
+    if(this.locked) to.status.triggerLocked(this.lockedCooldown, to)
+    if(this.blinded) to.status.triggerBlinded(this.blindCooldown, to)
+    if(this.possessed) to.status.triggerPossessed(this.possessedCooldown, to, from) 
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
@@ -919,10 +938,10 @@ export default class Status extends Schema implements IStatus {
         this.curseCooldown = 0 // apply curse immediately if already cursed
       } else {
         this.curse = true
-        if(this.curseCooldown > 0){ // if status has been cleared, take the remaining time
+        if (this.curseCooldown > 0) { // if status has been cleared, take the remaining time
           timer = Math.min(this.curseCooldown, timer)
         }
-        
+
         this.curseCooldown = timer
       }
     }
@@ -1098,12 +1117,12 @@ export default class Status extends Schema implements IStatus {
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
       duration = Math.round(duration * 0.7)
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * 0.4)
+      duration = Math.round(duration * 0.5)
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(duration * 0.1)
+      duration = Math.round(duration * 0.3)
     }
     return duration
   }

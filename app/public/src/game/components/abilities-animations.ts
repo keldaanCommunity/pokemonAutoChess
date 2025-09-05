@@ -1026,6 +1026,16 @@ export const AbilitiesAnimations: {
     ability: Ability.FAIRY_WIND,
     tint: 0xc0c0ff
   }),
+  [Ability.HEART_SWAP]: [
+    onCaster({
+      ability: Ability.FAIRY_WIND,
+      tint: 0xc0c0ff
+    }),
+    onTarget({
+      ability: Ability.FAIRY_WIND,
+      tint: 0xc0c0ff
+    })
+  ],
   [Ability.GRASSY_SURGE]: onCaster({
     ability: Ability.FAIRY_WIND,
     tint: 0x80ff80
