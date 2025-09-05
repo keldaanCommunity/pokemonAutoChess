@@ -99,6 +99,7 @@
 		"HAPPY_HOUR": "欢乐时光",
 		"TELEPORT": "瞬间移动",
 		"NASTY_PLOT": "诡计",
+		"HEART_SWAP": "心灵互换",
 		"TAKE_HEART": "勇气填充",
 		"THIEF": "小偷",
 		"STUN_SPORE": "麻痹粉",
@@ -499,7 +500,9 @@
 		"ZING_ZAP": "麻麻刺刺",
 		"NO_RETREAT": "背水一战",
 		"TACKLE": "撞击",
-		"STATIC_SHOCK": "霹雳啪啦"
+		"STATIC_SHOCK": "霹雳啪啦",
+		"SAND_SPIT": "吐沙",
+		"HYPER_DRILL": "强力钻"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -856,9 +859,21 @@
 		"PIKIPEK": "小笃儿",
 		"TRUMBEAK": "喇叭啄鸟",
 		"TOUCANNON": "铳嘴大鸟",
-		"FLABEBE": "花蓓蓓",
-		"FLOETTE": "花叶蒂",
-		"FLORGES": "花洁夫人",
+		"FLABEBE": "花蓓蓓（红花）",
+		"FLABEBE_WHITE": "花蓓蓓（白花）",
+		"FLABEBE_YELLOW": "花蓓蓓（黄花）",
+		"FLABEBE_BLUE": "花蓓蓓（蓝花）",
+		"FLABEBE_ORANGE": "花蓓蓓（橙花）",
+		"FLOETTE": "花叶蒂（红花）",
+		"FLOETTE_WHITE": "花叶蒂（白花）",
+		"FLOETTE_YELLOW": "花叶蒂（黄花）",
+		"FLOETTE_BLUE": "花叶蒂（蓝花）",
+		"FLOETTE_ORANGE": "花叶蒂（橙花）",
+		"FLORGES": "花洁夫人（红花）",
+		"FLORGES_WHITE": "花洁夫人（白花）",
+		"FLORGES_YELLOW": "花洁夫人（黄花）",
+		"FLORGES_BLUE": "花洁夫人（蓝花）",
+		"FLORGES_ORANGE": "花洁夫人（橙花）",
 		"JANGMO_O": "心鳞宝",
 		"HAKAMO_O": "鳞甲龙",
 		"KOMMO_O": "杖尾鳞甲龙",
@@ -1504,7 +1519,11 @@
 		"TOGEDEMARU": "托戈德玛尔",
 		"FALINKS_BRASS": "列阵兵（头头）",
 		"FALINKS_TROOPER": "列阵兵（跟班）",
-		"DEDENNE": "咚咚鼠"
+		"DEDENNE": "咚咚鼠",
+		"SILICOBRA": "沙包蛇",
+		"SANDACONDA": "沙螺蟒",
+		"DUNSPARCE": "土龙弟弟",
+		"DUDUNSPARCE": "土龙节节"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1585,6 +1604,7 @@
 		"TELEPORT": "将使用者传送至战场的一个角落。使用者下一次攻击额外造成[15,30,60,SP]点SPECIAL。",
 		"NASTY_PLOT": "提升使用者[10,SP]点ATK。",
 		"TAKE_HEART": "使用者以勇气治疗自身的异常状态，并提升[8,SP]点ATK以及[8,SP]点SPE_DEF。",
+		"HEART_SWAP": "使用者从目标处偷取其AP和SPE_DEF增幅，随后对其造成[100,SP]点SPECIAL。使用者将自身所受的异常状态转移至目标身上。",
 		"THIEF": "尽可能多的偷取目标的道具（至使用者拿不下为止），并对其造成[15,30,60,SP]点SPECIAL。",
 		"STUN_SPORE": "对目标和其相邻敌方宝可梦造成[15,30,60,SP]点SPECIAL，并使他们陷入PARALYSIS 5秒。",
 		"METEOR_MASH": "对目标造成3次[15,30,60,SP]点SPECIAL，并提升使用者[2,SP]点ATK。",
@@ -1629,9 +1649,9 @@
 		"SYRUP_BOMB": "使粘稠的麦芽糖浆爆炸，对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，并降低其[30,SP]点SPEED。",
 		"FICKLE_BEAM": "密集大蛇的5个头各自有[50,LK]%的概率对SPEED最高的敌方宝可梦造成[50,SP]点SPECIAL，并使其陷入PARALYSIS 2秒。",
 		"GRAV_APPLE": "从高处落下苹果，对目标造成[80,SP]点PHYSICAL。若目标的DEF为0，改为造成[160,SP]点PHYSICAL。",
-		"SACRED_SWORD_IRON": "对目标造成[80,SP]点TRUE。每有一个倒下的我方宝可梦，该伤害提升[15,SP]。",
-		"SACRED_SWORD_GRASS": "对目标造成[80,SP]点TRUE。每有一个存活的我方宝可梦，该伤害提升[10,SP]。",
-		"SACRED_SWORD_CAVERN": "对目标造成[80,SP]点TRUE。每有一个位于我方半场的敌方宝可梦，该伤害提升[20,SP]。",
+		"SACRED_SWORD_IRON": "对目标造成[80,SP]点TRUE。每有一只倒下的我方宝可梦，该伤害提升[15,SP]。",
+		"SACRED_SWORD_GRASS": "对目标造成[80,SP]点TRUE。每有一只存活的我方宝可梦，该伤害提升[10,SP]。",
+		"SACRED_SWORD_CAVERN": "对目标造成[80,SP]点TRUE。每有一只位于我方半场的敌方宝可梦，该伤害提升[20,SP]。",
 		"SECRET_SWORD": "对目标造成[150,SP]点SPECIAL。通过FIGHTING共鸣格挡20次伤害后，改为造成TRUE。",
 		"METAL_BURST": "对目标造成[30, SP]点TRUE。使用者每通过FIGHTING共鸣格挡一次伤害，本招式造成的伤害提升10%。",
 		"PSYCHIC": "对目标和相邻敌方宝可梦造成[40,80,160,SP]点SPECIAL，并移除他们15点PP。",
@@ -1808,7 +1828,7 @@
 		"PSYCHIC_FANGS": "对目标造成[80,SP]点SPECIAL，并移除其ATK，DEF和SPE_DEF增幅。",
 		"SHED_TAIL": "创建一个替身，并突进至HP最低的我方宝可梦处，使其获得[80, SP]点SHIELD。",
 		"NIGHT_SLASH": "对目标造成[15,30,60,SP]点SPECIAL。该招式可以暴击。",
-		"KOWTOW_CLEAVE": "对目标造成TRUE，数值相当于150%的ATK，每有一个倒下的我方宝可梦使该倍率提升[20,SP]%。该招式可以暴击。",
+		"KOWTOW_CLEAVE": "对目标造成TRUE，数值相当于150%的ATK，每有一只倒下的我方宝可梦使该倍率提升[20,SP]%。该招式可以暴击。",
 		"SHIELDS_DOWN": "将小陨星变形为随机颜色的核心。",
 		"SHIELDS_UP": "将小陨星变回流星的样子。",
 		"SANDSEAR_STORM": "用灼热的沙子攻击一条直线上的敌方宝可梦，对他们造成[80,SP]点SPECIAL并使他们陷入BURN 2秒。",
@@ -1984,7 +2004,9 @@
 		"ZING_ZAP": "滚动至目标身后，对其造成[90,SP]点SPECIAL，并使其陷入FLINCH 3秒。若目标处于PARALYSIS，获得[40,SP]点SHIELD。",
 		"NO_RETREAT": "队伍中每有一只列阵兵，便提升1点ATK，1点DEF，1点SPE_DEF和5点SPEED。每只跟班撞击目标，造成[20,SP]点SPECIAL。",
 		"TACKLE": "对目标造成[20,40,60,SP]点SPECIAL。",
-		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。"
+		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。",
+		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
+		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，此伤害无视PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2050,6 +2072,10 @@
 		"FEATHER_DANCE": "羽毛舞",
 		"MAX_AIRSTREAM": "极巨飞冲",
 		"SKYDIVE": "高空俯冲",
+		"COTTONWEED": "棉絮草",
+		"FLYCATCHER": "捕蝇草",
+		"FRAGRANT": "芳香草",
+		"FLOWER_POWER": "花之力量",
 		"BATTLE_ARMOR": "战斗盔甲",
 		"MOUTAIN_RESISTANCE": "山之抗性",
 		"DIAMOND_STORM": "钻石风暴",
@@ -2162,6 +2188,10 @@
 		"FEATHER_DANCE": "飞离后，获得PROTECT 2秒。",
 		"MAX_AIRSTREAM": "在HP低于50%或20%时会各飞离一次。",
 		"SKYDIVE": "改为发动俯冲攻击，落地时对目标造成PHYSICAL，数值相当于150%的ATK。",
+		"COTTONWEED": "获得一个毽子草花盆。",
+		"FLYCATCHER": "获得一个喇叭芽花盆。",
+		"FRAGRANT": "获得一个菊草叶花盆。",
+		"FLOWER_POWER": "获得一个走路草花盆。若4个花盆中的宝可梦均已完全长成，再获得一个美丽花花盆，且后续获取的肥料会改为AMAZE_MULCH。",
 		"BATTLE_ARMOR": "提升10点DEF，降低30%所受的物理CRIT_POWER。天气变化时，收集一块天气岩石。",
 		"MOUTAIN_RESISTANCE": "提升30点DEF，降低50%所受的物理CRIT_POWER。天气变化时能够收集的天气岩石上限增加至2。",
 		"DIAMOND_STORM": "提升60点DEF，降低70%所受的物理CRIT_POWER。天气变化时能够收集的天气岩石上限增加至3。",
@@ -2423,7 +2453,9 @@
 		"MALICIOUS_ARMOR": "咒术之铠",
 		"RUSTED_SWORD": "腐朽的剑",
 		"SCROLL_OF_WATERS": "水之挂轴",
-		"SCROLL_OF_DARKNESS": "恶之挂轴"
+		"SCROLL_OF_DARKNESS": "恶之挂轴",
+		"RICH_MULCH": "硕果肥",
+		"AMAZE_MULCH": "超效肥"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2561,10 +2593,10 @@
 		"DARK_GEM": "计为1只DARK宝可梦",
 		"STEEL_GEM": "计为1只STEEL宝可梦",
 		"FIRE_SHARD": "扣除3点玩家HP，使一只FIRE宝可梦永久提升3点ATK和3点SPEED。携带后立即消耗。",
-		"TEAL_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FLORA宝可梦，且获得100点SHIELD。",
-		"WELLSPRING_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作AQUATIC宝可梦，且获得100点SHIELD。",
-		"HEARTHFLAME_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作FIRE宝可梦，且获得100点SHIELD。",
-		"CORNERSTONE_MASK": "用结晶装饰的木雕面具。使厄鬼椪视作ROCK宝可梦，且获得100点SHIELD。",
+		"TEAL_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作FLORA宝可梦。护盾被击破后厄鬼椪会失去面具。",
+		"WELLSPRING_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作AQUATIC宝可梦。护盾被击破后厄鬼椪会失去面具。",
+		"HEARTHFLAME_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作FIRE宝可梦。护盾被击破后厄鬼椪会失去面具。",
+		"CORNERSTONE_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作ROCK宝可梦。护盾被击破后厄鬼椪会失去面具。",
 		"ZYGARDE_CUBE": "这个道具中存放着秩序宝可梦基格尔德的细胞。可以改变基格尔德的样子。",
 		"TM": "使一只HUMAN宝可梦学会一个新的招式，将其最大PP设置为100。招式学习器只能使用一次。",
 		"TM_RAGE": "$t(item_description.TM)\n$t(ability.RAGE)：$t(ability_description.RAGE)",
@@ -2640,7 +2672,9 @@
 		"MALICIOUS_ARMOR": "能让某些特定宝可梦进化的神奇铠甲。蕴含着诅咒的感情。",
 		"RUSTED_SWORD": "据说很久以前，英雄就是拿着这把剑驱走了灾厄。携带者提升50%的基础ATK。携带者倒下时，ATK最低的我方宝可梦获得此道具。",
 		"SCROLL_OF_WATERS": "上面写着水之奥秘。对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_RAPID)。",
-		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。"
+		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。",
+		"RICH_MULCH": "对一个花盆使用，使其中的宝可梦进化。",
+		"AMAZE_MULCH": "对一个花盆使用，使其中的宝可梦永久提升50点最大HP和30点AP。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -2754,10 +2788,10 @@
 		"MELMETAL": "美录梅塔无法提升SPEED。若其将要提升SPEED，则按比例改为提升ATK（比例为10点SPEED对应5点ATK）。",
 		"SKARMORY": "战斗开始前，盔甲鸟会在地图上洒下金属菱。菱刺会留在地上，对走到此处的非FLYING、非STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
 		"DURANT": "我方场上每有1只BUG宝可梦，铁蚁的普通攻击额外造成1点TRUE。",
-		"OGERPON_TEAL": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，每相邻一个敌人，获得 [6,SP] 点 ATK。",
-		"OGERPON_WELLSPRING": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，为相邻盟友提供 [40,SP] 点 XHP 和 [20,SP] 点 PP。",
-		"OGERPON_HEARTHFLAME": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，对相邻敌人造成 [20,SP] 点 SPECIAL 和 BURN 伤害，持续 5 秒。",
-		"OGERPON_CORNERSTONE": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。在此形态下释放招式时，施法时，获得 [2,SP=0.5] 秒的 PROTECT 效果，并对相邻敌人造成 5 秒的 FLINCH 效果。",
+		"OGERPON_TEAL": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。\n在此形态下释放招式时，每有一只相邻敌方宝可梦，便获得[6,SP]点ATK。",
+		"OGERPON_WELLSPRING": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。\n在此形态下释放招式时，为相邻我方宝可梦恢复[40,SP]点HP和[20,SP]点PP。",
+		"OGERPON_HEARTHFLAME": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。\n在此形态下释放招式时，对相邻敌方宝可梦造成[20,SP]点SPECIAL，并使其陷入BURN 5秒。",
+		"OGERPON_CORNERSTONE": "厄鬼椪可以佩戴TEAL_MASK、HEARTHFLAME_MASK，WELLSPRING_MASK或CORNERSTONE_MASK来改变其外貌。\n在此形态下释放招式时，获得PROTECT [2,SP=0.5]秒，并使相邻敌方宝可梦陷入FLINCH 5秒。",
 		"VICTINI": "提升所有我方宝可梦的命中率。我方宝可梦的攻击不会打空。",
 		"AEGISLASH": "释放招式时会在盾牌形态和刀剑形态之间切换。",
 		"DARMANITAN": "HP低于30%时，跳至一个安全的位置，并进入达摩模式。",
@@ -2799,7 +2833,9 @@
 		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。",
 		"ACCELERATION": "加速：每移动1格，提升20点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
 		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
-		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为5 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。"
+		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为5 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
+		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的花有关……",
+		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -2820,7 +2856,7 @@
 	},
 	"stat_description": {
 		"ATK": "每次普通攻击造成的伤害值。",
-		"SPEED": "影响攻击频率，移动速度和冷却时间。该数值上限为300。",
+		"SPEED": "影响攻击频率，弹道速度，移动速度和冷却时间。该数值上限为300。",
 		"CRIT_CHANCE": "攻击造成暴击，从而追加两倍伤害的概率。如无特别说明，招式无法暴击。超过100%的暴击率转化为CRIT_POWER。",
 		"CRIT_POWER": "进一步增强暴击提升的伤害，治疗和增幅的倍率。",
 		"DEF": "降低所受的PHYSICAL。",
@@ -2939,7 +2975,7 @@
 		"AQUATIC": "AQUATIC宝可梦能降低所有我方宝可梦受到状态异常影响的时间。开战8秒后，会有一道席卷全场的海浪清除负面状态和场地效果，治疗我方AQUATIC宝可梦，并击退敌方宝可梦且对他们造成伤害。",
 		"BUG": "战斗开始时，复制我方STRONGEST BUG宝可梦。",
 		"FLYING": "FLYING宝可梦在HP低于阈值时会飞离，除非他们处于PARALYSIS，FREEZE，LOCKED或SLEEP。",
-		"FLORA": "当第一只FLORA宝可梦倒下时，根据共鸣等级召唤对应的特殊FLORA宝可梦。其会随后从每个倒下的我方FLORA宝可梦处各获得一个随机道具。",
+		"FLORA": "当我方FLORA宝可梦倒下时，花盆中的花朵会开放，同时玩家能收集RICH_MULCH。STAR较多的宝可梦能提供更多肥料，肥料可以用来进化花盆中的宝可梦。",
 		"ROCK": "ROCK宝可梦能提升DEF，抵抗暴击普攻以及适应天气。",
 		"GHOST": "GHOST宝可梦能向敌方宝可梦施加多种多样的诅咒。GHOST共鸣存在时，GHOST宝可梦有[15,LK]%的概率闪避攻击，且击中目标时有相同概率使其陷入SILENCE。",
 		"FAIRY": "FAIRY宝可梦的攻击能额外造成SPECIAL，且受到暴击时会触发反震，反击30%所受的伤害。",
@@ -3041,7 +3077,8 @@
 		"RUNNER": "参赛者",
 		"FINISHER": "冲线者",
 		"VICTORIOUS": "胜利者",
-		"MOLE": "鼹鼠"
+		"MOLE": "鼹鼠",
+		"BLOSSOMED": "怒放之花"
 	},
 	"title_description": {
 		"NOVICE": "玩一局游戏",
@@ -3127,7 +3164,8 @@
 		"RUNNER": "在胜利之路上达到100分",
 		"FINISHER": "完成一轮胜利之路比赛",
 		"VICTORIOUS": "以第一名完成一轮胜利之路比赛",
-		"MOLE": "完全挖穿整个己方半场"
+		"MOLE": "完全挖穿整个己方半场",
+		"BLOSSOMED": "将5个花盆中的宝可梦均培养至最终进化"
 	},
 	"weather": {
 		"NEUTRAL": "无天气",
