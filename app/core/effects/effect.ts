@@ -222,3 +222,20 @@ export class OnMoveEffect extends Effect {
   }
 }
 
+
+// applied after taking a hit that removed all the remaining shield
+interface OnShieldDepletedEffectArgs {
+  pokemon: PokemonEntity
+  attacker: PokemonEntity | null
+  board: Board
+}
+
+export class OnShieldDepletedEffect extends Effect {
+  override apply(args: OnShieldDepletedEffectArgs) { }
+  constructor(
+    effect?: (args: OnShieldDepletedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}

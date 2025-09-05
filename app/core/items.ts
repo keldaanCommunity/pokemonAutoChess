@@ -104,8 +104,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.COMET_SHARD]: { [Stat.ATK]: 15 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
-  [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 }
+  [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },
+  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 100, [Stat.SPE_DEF]: 10 },
+  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 100, [Stat.DEF]: 10 },
+  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 }
 }

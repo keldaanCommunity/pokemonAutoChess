@@ -38,6 +38,7 @@
 - New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
 - Flabébé line now has 5 color variations. Their color indicates the first bud to blossom.
 - Change sell price of Remoraid: 3 → 2 gold and Octillery 10 → 7 gold
+- Rework Ogerpon ; now legendary. Masks have new effects and higher base stats. Ogerpon loses its mask when its shield is depleted.
 - Rework Manaphy: now Legendary, new ability: Heart Swap ; now spawns Phione if holding an Aqua Egg
 
 # Changes to Synergies

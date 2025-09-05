@@ -10184,19 +10184,19 @@ export class IvyCudgelStrategy extends AbilityStrategy {
     const damage = 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     if (pokemon.passive === Passive.OGERPON_TEAL) {
-      board
-        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
-        .forEach((cell) => {
-          if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.handleHeal(20, pokemon, 1, crit)
-          }
-        })
+      const nbAdjacentEnemies =
+        board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+          .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+          .length
+      pokemon.addAttack(6 * nbAdjacentEnemies, pokemon, 1, crit)
     } else if (pokemon.passive === Passive.OGERPON_WELLSPRING) {
       board
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
             cell.value.addPP(20, pokemon, 1, crit)
+            cell.value.handleHeal(40, pokemon, 1, crit)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {
@@ -10204,6 +10204,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(20, board, AttackType.SPECIAL, pokemon, crit)
             cell.value.status.triggerBurn(5000, pokemon, cell.value)
           }
         })
@@ -10215,6 +10216,13 @@ export class IvyCudgelStrategy extends AbilityStrategy {
             cell.value.status.triggerFlinch(5000, pokemon, cell.value)
           }
         })
+      const factor = 0.5
+      const protectDuration = Math.round(
+        2000 *
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      )
+      pokemon.status.triggerProtect(protectDuration)
     }
   }
 }
