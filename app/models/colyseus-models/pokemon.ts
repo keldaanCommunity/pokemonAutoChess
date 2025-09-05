@@ -6385,19 +6385,16 @@ export class Phione extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.SPECIAL
   stars = 3
-  evolution = Pkm.MANAPHY
-  evolutionRule = new ItemEvolutionRule([Item.AQUA_EGG])
-  hp = 190
-  atk = 13
+  hp = 125
+  atk = 10
   speed = 57
   def = 4
   speDef = 4
   maxPP = 80
   range = 3
   skill = Ability.TAKE_HEART
-  passive = Passive.PHIONE
 }
 
 export class Manaphy extends Pokemon {
@@ -6406,16 +6403,17 @@ export class Manaphy extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.UNIQUE
-  stars = 4
-  hp = 240
-  atk = 15
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 20
   speed = 57
-  def = 8
-  speDef = 8
-  maxPP = 80
+  def = 10
+  speDef = 10
+  maxPP = 100
   range = 3
-  skill = Ability.TAKE_HEART
+  skill = Ability.HEART_SWAP
+  passive = Passive.MANAPHY
 }
 
 export class Rotom extends Pokemon {

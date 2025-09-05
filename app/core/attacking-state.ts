@@ -1,6 +1,6 @@
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity } from "../types"
-import { PROJECTILE_SPEED } from "../types/Config"
+import { BASE_PROJECTILE_SPEED } from "../types/Config"
 import delays from "../types/delays.json"
 import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
@@ -136,6 +136,6 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
     pokemon.positionX,
     pokemon.positionY
   )
-  const travelTime = (distance * 1000) / PROJECTILE_SPEED
+  const travelTime = (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
   return { delayBeforeShoot, travelTime, attackDuration }
 }

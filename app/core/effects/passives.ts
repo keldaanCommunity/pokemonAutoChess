@@ -1,4 +1,5 @@
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import PokemonFactory from "../../models/pokemon-factory"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -592,6 +593,7 @@ export class FalinksFormationEffect extends OnSpawnEffect {
   }
 }
 
+
 const ogerponMaskDropEffect = (
   mask: typeof OgerponMasks[number],
   from: Pkm,
@@ -603,6 +605,21 @@ const ogerponMaskDropEffect = (
       pokemon.removeItem(mask)
     }
   }, mask)
+
+const PhioneSpawnEffect = new OnSpawnEffect((pkm) => {
+  if (pkm.name === Pkm.MANAPHY && pkm.items.has(Item.AQUA_EGG)) {
+    pkm.items.delete(Item.AQUA_EGG)
+    const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, pkm.player)
+    const coord = pkm.simulation.getClosestAvailablePlaceOnBoardToPokemon(phione, pkm.team)
+    pkm.simulation.addPokemon(
+      phione,
+      coord.x,
+      coord.y,
+      pkm.team,
+      true
+    )
+  }
+})
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
@@ -664,5 +681,6 @@ export const PassiveEffects: Partial<
       Pkm.OGERPON_WELLSPRING_MASK,
       Pkm.OGERPON_WELLSPRING
     )
-  ]
+  ],
+  [Passive.MANAPHY]: [PhioneSpawnEffect]
 }

@@ -2759,20 +2759,17 @@ export class WishStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const heal = 50
-    let count = pokemon.stars
+    const count = pokemon.stars
 
-    board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (
-        ally &&
-        pokemon.team == ally.team &&
-        count > 0 &&
-        ally.life < ally.hp
-      ) {
-        ally.handleHeal(heal, pokemon, 1, crit)
-        ally.addLuck(20, pokemon, 1, crit)
-        count -= 1
-      }
-    })
+    const allies = board.cells
+      .filter((cell): cell is PokemonEntity => cell != null && cell.team === pokemon.team)
+      .sort((a, b) => (b.hp - b.life) - (a.hp - a.life))
+      .slice(0, count)
+
+    for (const ally of allies) {
+      ally.handleHeal(heal, pokemon, 1, crit)
+      ally.addLuck(20, pokemon, 1, crit)
+    }
   }
 }
 
@@ -4094,6 +4091,27 @@ export class TakeHeartStrategy extends AbilityStrategy {
     pokemon.addSpecialDefense(8, pokemon, 1, crit)
     pokemon.status.clearNegativeStatus()
     pokemon.resetCooldown(100)
+  }
+}
+
+export class HeartSwapStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
+    const boostAP = target.ap
+    target.speDef = target.baseSpeDef
+    target.ap = 0
+    pokemon.addSpecialDefense(boostSpeDef, pokemon, 0, false)
+    pokemon.addAbilityPower(boostAP, pokemon, 0, false)
+    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+
+    pokemon.status.transferNegativeStatus(pokemon, target)
+    pokemon.status.clearNegativeStatus()
   }
 }
 
@@ -13669,6 +13687,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLASH]: new FlashStrategy(),
   [Ability.ROCK_HEAD]: new RockHeadStrategy(),
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
+  [Ability.HEART_SWAP]: new HeartSwapStrategy(),
   [Ability.CRUSH_CLAW]: new CrushClawStrategy(),
   [Ability.FIRE_LASH]: new FireLashStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),

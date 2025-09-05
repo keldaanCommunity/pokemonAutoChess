@@ -39,6 +39,7 @@
 - Flabébé line now has 5 color variations. Their color indicates the first bud to blossom.
 - Change sell price of Remoraid: 3 → 2 gold and Octillery 10 → 7 gold
 - Rework Ogerpon ; now legendary. Masks have new effects and higher base stats. Ogerpon loses its mask when its shield is depleted.
+- Rework Manaphy: now Legendary, new ability: Heart Swap ; now spawns Phione if holding an Aqua Egg
 
 # Changes to Synergies
 
@@ -67,6 +68,7 @@
 
 # Gameplay
 
+- Speed stat now also influences projectile travel time for ranged attackers, from 3 tiles per second at 0 speed to 12 tiles per second at 300 speed.
 - Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
 - Aquatic no longer increase Curse delay ; instead, when curse status is cleared, the remaining time + 1 second is stored in memory, and will be used if Curse status is reapplied again
 

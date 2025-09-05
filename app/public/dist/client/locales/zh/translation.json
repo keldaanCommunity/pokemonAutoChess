@@ -2648,7 +2648,7 @@
 		"PROTEAN2": "此宝可梦参与的共鸣为当前队伍中宝可梦数量最多的2个共鸣。",
 		"PROTEAN3": "此宝可梦参与的共鸣为当前队伍中宝可梦数量最多的3个共鸣。",
 		"CASTFORM": "飘浮泡泡的形态会根据当前最高共鸣是FIRE，WATER还是ICE切换自身形态，并将天气设置为SUN，RAIN或SNOW。",
-		"PHIONE": "霏欧纳似乎需要一颗AQUA_EGG……",
+		"MANAPHY": "$t(pkm.MANAPHY)似乎需要一颗AQUA_EGG……",
 		"SCYTHER": "$t(pkm.SCYTHER)似乎需要一片METAL_COAT或是BLACK_AUGURITE……",
 		"PRIMAL": "传说，有什么道具可以解放这些宝可梦的原始力量……",
 		"WONDER_GUARD": "受到的任何伤害被格挡20点。",

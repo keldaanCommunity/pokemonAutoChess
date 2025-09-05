@@ -1374,7 +1374,7 @@
 		"PROTEAN2": "De pokemon verwerft het type van de 2 hoogste synergieën in het team",
 		"PROTEAN3": "De pokemon verwerft het type van de 3 hoogste synergieën in het team",
 		"CASTFORM": "Castform verandert van vorm en het weer in SUN, RAIN of SNOW, afhankelijk van je dominante synergie tussen FIRE WATER ICE",
-		"PHIONE": "Phione is op zoek naar een Aqua Egg",
+		"MANAPHY": "$t(pkm.MANAPHY) is op zoek naar een Aqua Egg",
 		"PRIMAL": "Volgens de legende zou je de oude krachten van deze pokemons kunnen ontketenen",
 		"WONDER_GUARD": "Blokkeert 20 schade",
 		"ELECTRIC_TERRAIN": "Geef ELECTRIC_FIELD aan je ELECTRIC Pokemon en verhoog hun schade met 20%",
