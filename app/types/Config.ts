@@ -442,7 +442,7 @@ export const INACTIVITY_TIMEOUT = 60 * 1000 * 30 // 30 minutes
 export const DEFAULT_SPEED = 50
 export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_POWER = 2
-export const PROJECTILE_SPEED = 4
+export const BASE_PROJECTILE_SPEED = 3
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 23, // adjusted for treasure town theme
