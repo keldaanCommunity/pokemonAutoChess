@@ -2074,7 +2074,7 @@
 		"SKYDIVE": "Piqué Céleste",
 		"COTTONWEED": "Pissenlit",
 		"FLYCATCHER": "Tue-Mouches",
-		"FRAGRANT": "Parfumé",
+		"FRAGRANT": "Doux Parfum",
 		"FLOWER_POWER": "Flower Power",
 		"BATTLE_ARMOR": "Armurbaston",
 		"MOUTAIN_RESISTANCE": "Montagnard",
@@ -2122,8 +2122,7 @@
 		"ETHEREAL": "Ethéré",
 		"APPETIZER": "Apéritif",
 		"LUNCH_BREAK": "Pause déjeuner",
-		"BANQUET": "Festin",
-		"FLAGRANT": "Doux Parfum"
+		"BANQUET": "Festin"
 	},
 	"effect_description": {
 		"STAMINA": "Gagne 15 SHIELD",
