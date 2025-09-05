@@ -132,6 +132,25 @@ export default class Status extends Schema implements IStatus {
     )
   }
 
+  transferNegativeStatus(from: PokemonEntity, to: PokemonEntity) {
+    if(this.burn) to.status.triggerBurn(this.burnCooldown, to, from)
+    if(this.silence) to.status.triggerSilence(this.silenceCooldown, to, from)
+    if(this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to)
+    if(this.poisonStacks > 0) to.status.triggerPoison(this.poisonCooldown, to, from)
+    if(this.freeze) to.status.triggerFreeze(this.freezeCooldown, to)
+    if(this.sleep) to.status.triggerSleep(this.sleepCooldown, to)
+    if(this.confusion) to.status.triggerConfusion(this.confusionCooldown, to, from)
+    if(this.wound) to.status.triggerWound(this.woundCooldown, to, from)
+    if(this.paralysis) to.status.triggerParalysis(this.paralysisCooldown, to, from)
+    if(this.charm) to.status.triggerCharm(this.charmCooldown, to, from)
+    if(this.flinch) to.status.triggerFlinch(this.flinchCooldown, to, from)
+    if(this.armorReduction) to.status.triggerArmorReduction(this.armorReductionCooldown, to)
+    if(this.curse) to.status.triggerCurse(this.curseCooldown, to)
+    if(this.locked) to.status.triggerLocked(this.lockedCooldown, to)
+    if(this.blinded) to.status.triggerBlinded(this.blindCooldown, to)
+    if(this.possessed) to.status.triggerPossessed(this.possessedCooldown, to, from) 
+  }
+
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (pokemon.effects.has(EffectEnum.POISON_GAS) && this.poisonStacks === 0) {
       this.triggerPoison(1500, pokemon, undefined)
