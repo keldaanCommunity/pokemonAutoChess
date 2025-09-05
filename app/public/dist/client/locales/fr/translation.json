@@ -99,8 +99,8 @@
 		"HAPPY_HOUR": "Étrennes",
 		"TELEPORT": "Téléport",
 		"NASTY_PLOT": "Machination",
-		"TAKE_HEART": "Extravaillance",
 		"HEART_SWAP": "Permucœur",
+		"TAKE_HEART": "Extravaillance",
 		"THIEF": "Larcin",
 		"STUN_SPORE": "Para-Spore",
 		"METEOR_MASH": "Poing Météore",
@@ -500,7 +500,9 @@
 		"ZING_ZAP": "Électrikipik",
 		"NO_RETREAT": "Ultime Bastion",
 		"TACKLE": "Charge",
-		"STATIC_SHOCK": "Choc Statique"
+		"STATIC_SHOCK": "Choc Statique",
+		"SAND_SPIT": "Expul'Sable",
+		"HYPER_DRILL": "Hyperceuse"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -858,8 +860,20 @@
 		"TRUMBEAK": "Piclairon",
 		"TOUCANNON": "Bazoucan",
 		"FLABEBE": "Flabébé",
+		"FLABEBE_WHITE": "Flabébé (Fleur Blanche)",
+		"FLABEBE_YELLOW": "Flabébé (Fleur Jaune)",
+		"FLABEBE_BLUE": "Flabébé (Fleur Bleue)",
+		"FLABEBE_ORANGE": "Flabébé (Fleur Orange)",
 		"FLOETTE": "Floette",
+		"FLOETTE_WHITE": "Floette (Fleur Blanche)",
+		"FLOETTE_YELLOW": "Floette (Fleur Jaune)",
+		"FLOETTE_BLUE": "Floette (Fleur Bleue)",
+		"FLOETTE_ORANGE": "Floette (Fleur Orange)",
 		"FLORGES": "Florges",
+		"FLORGES_WHITE": "Florges (Fleur Blanche)",
+		"FLORGES_YELLOW": "Florges (Fleur Jaune)",
+		"FLORGES_BLUE": "Florges (Fleur Bleue)",
+		"FLORGES_ORANGE": "Florges (Fleur Orange)",
 		"JANGMO_O": "Bébécaille",
 		"HAKAMO_O": "Écaïd",
 		"KOMMO_O": "Ékaïser",
@@ -1505,7 +1519,11 @@
 		"TOGEDEMARU": "Togedemaru",
 		"FALINKS_BRASS": "Hexadron (Chef)",
 		"FALINKS_TROOPER": "Hexadron (Cadet)",
-		"DEDENNE": "Dedenne"
+		"DEDENNE": "Dedenne",
+		"SILICOBRA": "Dunaja",
+		"SANDACONDA": "Dunaconda",
+		"DUNSPARCE": "Insolourdo",
+		"DUDUNSPARCE": "Deusolourdo"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -1986,7 +2004,9 @@
 		"ZING_ZAP": "Roule derrière la cible, infligeant [90,PS] SPECIAL et FLINCH pendant 3 secondes. Si la cible subit PARALYSIS, le lanceur gagne [40,PS] SHIELD.",
 		"NO_RETREAT": "Gagnez 1 ATK, 1 DEF, 1 SPE_DEF et 5 SPEED par Hexadron dans votre équipe. Les cadets charge la cible pour [20,SP] SPECIAL chacun.",
 		"TACKLE": "Inflige [20,40,60,SP] SPECIAL à la cible.",
-		"STATIC_SHOCK": "Inflige [70,SP] SPECIAL à la cible et gagne [30,SP] SHIELD par Pokémon ELECTRIC adjacent, soigne [30,SP] HP par Pokémon FAIRY adjacent."
+		"STATIC_SHOCK": "Inflige [70,SP] SPECIAL à la cible et gagne [30,SP] SHIELD par Pokémon ELECTRIC adjacent, soigne [30,SP] HP par Pokémon FAIRY adjacent.",
+		"SAND_SPIT": "Crache du sable sur les 3 Pokémon ennemis qui font face au lanceur, infligeant [30,60,120,SP] SPECIAL et BLINDED pendant 2 secondes.",
+		"HYPER_DRILL": "Inflige [10,30,50,SP] TRUE qui peuvent briser la PROTECT et creuser plus profondément le sol sous la cible, détruisant ainsi tout objet potentiellement enterré. Les dégâts sont doublés si la cible est déjà dans un trou entièrement creusé."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2054,7 +2074,7 @@
 		"SKYDIVE": "Piqué Céleste",
 		"COTTONWEED": "Pissenlit",
 		"FLYCATCHER": "Tue-Mouches",
-		"FLAGRANT": "Doux Parfum",
+		"FRAGRANT": "Parfumé",
 		"FLOWER_POWER": "Flower Power",
 		"BATTLE_ARMOR": "Armurbaston",
 		"MOUTAIN_RESISTANCE": "Montagnard",
@@ -2102,7 +2122,8 @@
 		"ETHEREAL": "Ethéré",
 		"APPETIZER": "Apéritif",
 		"LUNCH_BREAK": "Pause déjeuner",
-		"BANQUET": "Festin"
+		"BANQUET": "Festin",
+		"FLAGRANT": "Doux Parfum"
 	},
 	"effect_description": {
 		"STAMINA": "Gagne 15 SHIELD",
@@ -2168,10 +2189,10 @@
 		"FEATHER_DANCE": "Gagne PROTECT pendant 2 secondes après s'être envolé",
 		"MAX_AIRSTREAM": "S'envole deux fois sous les 50% de HP puis 20% de HP",
 		"SKYDIVE": "Effectue désormais des attaques en piqué, infligeant 150% d'ATK en PHYSICAL à l'atterrissage sur leur cible",
-		"COTTONWEED": "Obtenez un Pot Granivol",
-		"FLYCATCHER": "Obtenez un Pot Chetiflor",
-		"FLAGRANT": "Obtenez un Pot Germignon",
-		"FLOWER_POWER": "Obtenez un Pot Mystherbe. Une fois tous les pots totalement fleuris, obtenez un Pot Joliflor et recevez du AMAZE_MULCH à la place.",
+		"COTTONWEED": "Obtenez un Pot $t(pkm.HOPPIP)",
+		"FLYCATCHER": "Obtenez un Pot $t(pkm.BELLSPROUT)",
+		"FRAGRANT": "Obtenez un Pot $t(pkm.CHIKORITA)",
+		"FLOWER_POWER": "Obtenez un Pot $t(pkm.ODDISH). Une fois tous les pots totalement fleuris, obtenez un Pot $t(pkm.BELLOSSOM) et recevez du AMAZE_MULCH à la place.",
 		"BATTLE_ARMOR": "Gagne +10 DEF et -30% de dégâts critiques reçus. Collectez une pierre Météo quand le temps change",
 		"MOUTAIN_RESISTANCE": "Gagne +30 DEF et -50% de dégâts critiques reçus. Collectez jusqu'à 2 pierres Météo",
 		"DIAMOND_STORM": "Gagne +60 DEF et -70% de dégâts critiques reçus. Collectez jusqu'à 3 pierres Météo",
@@ -2433,7 +2454,9 @@
 		"MALICIOUS_ARMOR": "Armure de la Rancune",
 		"RUSTED_SWORD": "Épée Rouillée",
 		"SCROLL_OF_WATERS": "Rouleau de l'Eau",
-		"SCROLL_OF_DARKNESS": "Rouleau des Ténèbres"
+		"SCROLL_OF_DARKNESS": "Rouleau des Ténèbres",
+		"RICH_MULCH": "Fertibondance",
+		"AMAZE_MULCH": "Fertiprodige"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -2481,7 +2504,7 @@
 		"WIDE_LENS": "Le porteur gagne +2 RANGE",
 		"RAZOR_CLAW": "Le porteur gagne +50% CRIT_CHANCE",
 		"FLUFFY_TAIL": "Le porteur est immunisé contre toutes les altérations de statut",
-		"KINGS_ROCK": "Octroie un SHIELD au début du combat à hauteur de 100 + 35% des HP",
+		"KINGS_ROCK": "+100 SHIELD + 35% des HP comme SHIELD au début du combat",
 		"SHINY_CHARM": "Annule les dégats et donne PROTECT pendant 1.5 secondes et 50 PP la première fois que le porteur tombe sous les 30% de HP",
 		"GRACIDEA_FLOWER": "Lorsque le combat commence, le porteur et tous les alliés adjacents dans la même rangée gagnent +20 SPEED",
 		"FLAME_ORB": "Le porteur subit BURN pendant tout le combat mais son ATK de base augmente de 100%",
@@ -2650,7 +2673,9 @@
 		"MALICIOUS_ARMOR": "Une armure mystérieuse pouvant faire évoluer un certain Pokémon. Une grande rancune y est enfermée.",
 		"RUSTED_SWORD": "Il est dit qu'un héros a utilisé cette épée pour arrêter un terrible désastre dans les temps anciens. Confère à son détenteur +50% d'ATK de base. Se transfère à l'allié avec l'ATK la plus faible lorsque le porteur est mis KO.",
 		"SCROLL_OF_WATERS": "Les véritables secrets de la voie de l'eau y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_RAPID).",
-		"SCROLL_OF_DARKNESS": "Les véritables secrets de la voie des ténèbres y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_SINGLE)."
+		"SCROLL_OF_DARKNESS": "Les véritables secrets de la voie des ténèbres y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_SINGLE).",
+		"RICH_MULCH": "Utilisez-le sur un Pot de Fleurs pour faire évoluer le Pokémon à l'intérieur.",
+		"AMAZE_MULCH": "Utilisez-le sur un Pot de Fleurs pour donner de façon permanente 50 HP max et 30 AP au Pokémon à l'intérieur."
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -2809,7 +2834,9 @@
 		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être toiletté en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED.",
 		"ACCELERATION": "Turbo : gagne 20 SPEED pour chaque case sur laquelle le Pokémon se déplace (les sauts et les sprints comptent pour une case)",
 		"MELTAN": "Lorsqu'il est utilisé sur $t(pkm.MELMETAL), fusionne avec lui pour lui donner 50 HP max permanents",
-		"FALINKS": "Des cadets Hexadron ont désormais [4,LK]% de chances d'apparaître dans votre boutique, coûtant 5 GOLD chacun, jusqu'à 6 cadets. Au début du combat, tous les cadets de votre banc rejoignent le chef Hexadron, lui offrant 30 SHIELD, 1 ATK et 1 DEF chacun."
+		"FALINKS": "Des cadets Hexadron ont désormais [4,LK]% de chances d'apparaître dans votre boutique, coûtant 5 GOLD chacun, jusqu'à 6 cadets. Au début du combat, tous les cadets de votre banc rejoignent le chef Hexadron, lui offrant 30 SHIELD, 1 ATK et 1 DEF chacun.",
+		"FLABEBE_COLOR": "Leur couleur indique le premier bourgeon à fleurir",
+		"DUNSPARCE": "$t(pkm.DUNSPARCE) évoluera lorsqu'au moins 10 trous dans le sol seront entièrement creusés sur le plateau"
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -2830,7 +2857,7 @@
 	},
 	"stat_description": {
 		"ATK": "Dégâts infligés par chaque attaque de base",
-		"SPEED": "Fréquence des attaques, vitesse de déplacement et temps de rechargement. Maximum 300.",
+		"SPEED": "Influence la fréquence des attaques, le temps de vol des projectiles, la vitesse de déplacement et le temps de rechargement. Maximum 300.",
 		"CRIT_CHANCE": "Les coups critiques infligent 2 fois plus de dégâts. Les capacités ne peuvent pas faire de dégats critiques par défaut. La chance de critique au delà de 100% est convertie en dégâts critiques additionnels.",
 		"CRIT_POWER": "Multiplicateur pour les dégâts, soins et bonus des coups critiques",
 		"DEF": "Réduit les PHYSICAL reçus",
@@ -2949,7 +2976,7 @@
 		"AQUATIC": "Les Pokémon AQUATIC réduisent la durée des statuts négatifs pour tous les membres de votre équipe. Après 8 secondes, une vague déferle sur le terrain, qui retire les pièges et statuts négatifs, soigne vos alliés AQUATIC, et repousse les ennemis en leur infligeant des dégâts.",
 		"BUG": "Au début du combat, vos Pokémon BUG les STRONGEST sont clonés.",
 		"FLYING": "Les Pokémon FLYING s'envolent lorsqu'ils tombent sous une certaine quantité de HP, à moins qu'ils subissent PARALYSIS, FREEZE, LOCKED ou SLEEP.",
-		"FLORA": "Quand le premier Pokémon FLORA est KO, une fleur éclot. Elle reçoit un objet aléatoire de chaque allié FLORA mis KO.",
+		"FLORA": "Lorsqu'un Pokémon FLORA est mis KO, un Pot de Fleurs fleurit et vous collectez de l'engrais RICH_MULCH. Les unités aux STAR supérieures donnent plus d'engrais, ce qui peut être utilisé pour faire évoluer vos Pots de Fleurs.",
 		"ROCK": "Les Pokémon ROCK gagnent en DEF, résistent mieux aux attaques critiques et peuvent s'adapter à la météo.",
 		"GHOST": "Les Pokémon GHOST appliquent diverses malédictions aux unités adverses. Ils ont [15,LK]% de chance d'esquiver les attaques et de mettre sous SILENCE leur cible avec leurs attaques si la synergie est active.",
 		"FAIRY": "Les Pokémon FAIRY infligent des SPECIAL supplémentaires avec leurs attaques et libèrent des chocs lorsqu'ils reçoivent un coup critique, ripostant à hauteur de 30 % des dégâts subis.",
@@ -3051,7 +3078,8 @@
 		"RUNNER": "Coureur",
 		"FINISHER": "Finisseur",
 		"VICTORIOUS": "Victorieux",
-		"MOLE": "Taupe"
+		"MOLE": "Taupe",
+		"BLOSSOMED": "Fleuri"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -3137,7 +3165,8 @@
 		"RUNNER": "Atteignez 100 points sur la Route Victoire",
 		"FINISHER": "Terminez la course sur la Route Victoire",
 		"VICTORIOUS": "Terminez premier à la course sur la Route Victoire",
-		"MOLE": "Creusez entièrement votre plateau"
+		"MOLE": "Creusez entièrement votre plateau",
+		"BLOSSOMED": "Obtenez 5 Pots de Fleurs entièrement fleuris"
 	},
 	"weather": {
 		"NEUTRAL": "Temps calme",
