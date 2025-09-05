@@ -502,7 +502,8 @@
 		"TACKLE": "Tackle",
 		"STATIC_SHOCK": "Static Shock",
 		"SAND_SPIT": "Sand Spit",
-		"HYPER_DRILL": "Hyper Drill"
+		"HYPER_DRILL": "Hyper Drill",
+		"TERRAIN_PULSE": "Terrain Pulse"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1523,7 +1524,10 @@
 		"SILICOBRA": "Silicobra",
 		"SANDACONDA": "Sandaconda",
 		"DUNSPARCE": "Dunsparce",
-		"DUDUNSPARCE": "Dudunsparce"
+		"DUDUNSPARCE": "Dudunsparce",
+		"SMOLIV": "Smoliv",
+		"DOLLIV": "Dolliv",
+		"ARBOLIVA": "Arboliva"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2006,7 +2010,8 @@
 		"TACKLE": "Deal [20,40,60,SP] SPECIAL to the target.",
 		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [30,SP] SHIELD per adjacent ELECTRIC Pokémon, heals [30,SP] HP per adjacent FAIRY Pokémon.",
 		"SAND_SPIT": "Spits sand at the 3 enemy Pokémon in front of the user, dealing [30,60,120,SP] SPECIAL and inflicting BLINDED for 2 seconds.",
-		"HYPER_DRILL": "Deals [10,30,50,SP] TRUE that can break PROTECT, and dig deeper into the ground under the target, destroying any eventual buried items in the process. Double damage if target is already on a fully dug hole."
+		"HYPER_DRILL": "Deals [10,30,50,SP] TRUE that can break PROTECT, and dig deeper into the ground under the target, destroying any eventual buried items in the process. Double damage if target is already on a fully dug hole.",
+		"TERRAIN_PULSE": "If user has no field, gets GRASS_FIELD.\nField effects in your team propagate to adjacent allies, then trigger an effect:\nGRASS_FIELD: heal [5,SP]% of max HP\nELECTRIC_FIELD: gain [10,SP] SPEED\nPSYCHIC_FIELD: gain [10,SP] PP\nFAIRY_FIELD: gain [5,SP]% of max HP as SHIELD"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2409,7 +2414,13 @@
 		"TART_APPLE": "Tart Apple",
 		"SWEET_APPLE": "Sweet Apple",
 		"SIRUPY_APPLE": "Syrupy Apple",
-		"SWEET_HERB": "Sweet Herb",
+		"HERBA_MYSTICA": "Herba Mystica",
+		"HERBA_MYSTICA_BITTER": "Herba Mystica (Bitter)",
+		"HERBA_MYSTICA_SALTY": "Herba Mystica (Salty)",
+		"HERBA_MYSTICA_SWEET": "Herba Mystica (Sweet)",
+		"HERBA_MYSTICA_SPICY": "Herba Mystica (Spicy)",
+		"HERBA_MYSTICA_SOUR": "Herba Mystica (Sour)",
+		"OLIVE_OIL": "Olive Oil",
 		"MOOMOO_MILK": "Moomoo Milk",
 		"BERRIES": "Berries",
 		"HONEY": "Honey",
@@ -2628,12 +2639,18 @@
 		"TART_APPLE": "In the next fight, each attack by this Pokémon will remove 2 DEF from the target. Will turn into a SWEET_APPLE after one round.",
 		"SWEET_APPLE": "In the next fight, each attack by this Pokémon will remove 2 SPE_DEF from the target. Will turn into a SIRUPY_APPLE after one round.",
 		"SIRUPY_APPLE": "In the next fight, each attack by this Pokémon has [30,LK]% chance to inflict PARALYSIS for 1 second. Will turn into LEFTOVERS after one round.",
-		"SWEET_HERB": "Gain 80 AP in the next fight.",
+		"HERBA_MYSTICA": "Gain a field effect based on its flavor. The flavor will be determined by the type of the Pokémon eating it:\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\nOthers: HERBA_MYSTICA_SALTY",
+		"HERBA_MYSTICA_BITTER": "Get GRASS_FIELD during the next fight",
+		"HERBA_MYSTICA_SALTY": "Get RUNE_PROTECT during the next fight",
+		"HERBA_MYSTICA_SWEET": "Get FAIRY_FIELD during the next fight",
+		"HERBA_MYSTICA_SPICY": "Get PSYCHIC_FIELD during the next fight",
+		"HERBA_MYSTICA_SOUR": "Get ELECTRIC_FIELD during the next fight",
+		"OLIVE_OIL": "Gain 20% dodge chance in the next fight.",
 		"MOOMOO_MILK": "Gain 15 permanent max HP.",
 		"BERRIES": "Get 3 random berries",
 		"POFFIN": "Gain 100 SHIELD. All held berries are added to the poffin. Their effects are applied immediately, with healed HP turned into SHIELD.",
 		"HONEY": "Each Pokémon in the next shop rerolls this round has an additional 5% chance to share a common synergy with a Pokémon eating HONEY.",
-		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 10 seconds.",
+		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 10 seconds and 15% of max HP as SHIELD.",
 		"NUTRITIOUS_EGG": "Start the next fight with +30% base ATK, DEF and SPE_DEF.",
 		"LEFTOVERS": "No effect. There is not much left to eat.",
 		"BLACK_SLUDGE": "POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead.",
@@ -2918,10 +2935,10 @@
 		"POSSESSED": "Fight for the other team temporarily. Becomes CHARM if the target is the only enemy remaining",
 		"LOCKED": "Prevents moving and sets RANGE to 1",
 		"BLINDED": "Reduce accuracy of attacks by 50%",
-		"ELECTRIC_FIELD": "Increase damage dealt by 20% (ELECTRIC only)",
-		"PSYCHIC_FIELD": "Increase damage dealt by 20% (PSYCHIC only)",
-		"GRASS_FIELD": "Increase damage dealt by 20% (GRASS only)",
-		"FAIRY_FIELD": "Increase damage dealt by 20% (FAIRY only)"
+		"ELECTRIC_FIELD": "Increase damage dealt by ELECTRIC Pokémon by 20%",
+		"PSYCHIC_FIELD": "Increase damage dealt by PSYCHIC Pokémon by 20%",
+		"GRASS_FIELD": "Increase damage dealt by GRASS Pokémon by 20%",
+		"FAIRY_FIELD": "Increase damage dealt by FAIRY Pokémon by 20%"
 	},
 	"synergy": {
 		"NORMAL": "Normal",

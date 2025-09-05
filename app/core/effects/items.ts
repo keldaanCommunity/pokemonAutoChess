@@ -8,6 +8,7 @@ import { AttackType, PokemonActionState } from "../../types/enum/Game"
 import {
   AbilityPerTM,
   Berries,
+  Dish,
   FishingRod,
   Flavors,
   HMs,
@@ -25,7 +26,7 @@ import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
-import { chance, pickNRandomIn } from "../../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
@@ -322,6 +323,15 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             player.items.push(meal)
           } else {
             const pokemon = candidates[i] ?? chef
+            if (dish === Item.HERBA_MYSTICA) {
+              const flavors: Dish[] = []
+              if (pokemon.types.has(Synergy.FAIRY)) flavors.push(Item.HERBA_MYSTICA_SWEET)
+              if (pokemon.types.has(Synergy.PSYCHIC)) flavors.push(Item.HERBA_MYSTICA_SPICY)
+              if (pokemon.types.has(Synergy.ELECTRIC)) flavors.push(Item.HERBA_MYSTICA_SOUR)
+              if (pokemon.types.has(Synergy.GRASS)) flavors.push(Item.HERBA_MYSTICA_BITTER)
+              if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
+              meal = pickRandomIn(flavors)
+            }
             pokemon.meal = meal
             pokemon.action = PokemonActionState.EAT
           }

@@ -4,7 +4,7 @@ import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { IPokemon } from "../../types"
+import { IPokemon, IStatus } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -2762,8 +2762,11 @@ export class WishStrategy extends AbilityStrategy {
     const count = pokemon.stars
 
     const allies = board.cells
-      .filter((cell): cell is PokemonEntity => cell != null && cell.team === pokemon.team)
-      .sort((a, b) => (b.hp - b.life) - (a.hp - a.life))
+      .filter(
+        (cell): cell is PokemonEntity =>
+          cell != null && cell.team === pokemon.team
+      )
+      .sort((a, b) => b.hp - b.life - (a.hp - a.life))
       .slice(0, count)
 
     for (const ally of allies) {
@@ -4137,7 +4140,9 @@ export class SpectralThiefStrategy extends AbilityStrategy {
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
       const PkmClass = PokemonClasses[PkmByIndex[target.index]]
-      const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
+      const baseSpeed = PkmClass
+        ? new PkmClass(target.name).speed
+        : DEFAULT_SPEED
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - baseSpeed)
       const boostDef = min(0)(target.def - target.baseDef)
@@ -10184,11 +10189,9 @@ export class IvyCudgelStrategy extends AbilityStrategy {
     const damage = 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     if (pokemon.passive === Passive.OGERPON_TEAL) {
-      const nbAdjacentEnemies =
-        board
-          .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
-          .filter((cell) => cell.value && cell.value.team !== pokemon.team)
-          .length
+      const nbAdjacentEnemies = board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+        .filter((cell) => cell.value && cell.value.team !== pokemon.team).length
       pokemon.addAttack(6 * nbAdjacentEnemies, pokemon, 1, crit)
     } else if (pokemon.passive === Passive.OGERPON_WELLSPRING) {
       board
@@ -10204,7 +10207,13 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(20, board, AttackType.SPECIAL, pokemon, crit)
+            cell.value.handleSpecialDamage(
+              20,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
             cell.value.status.triggerBurn(5000, pokemon, cell.value)
           }
         })
@@ -13294,7 +13303,13 @@ export class SandSpitStrategy extends AbilityStrategy {
 
     for (const cell of cellsHit) {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
         cell.value.status.triggerBlinded(2000, cell.value)
       }
     }
@@ -13317,7 +13332,8 @@ export class HyperDrillStrategy extends AbilityStrategy {
       if (boardPlayer.groundHoles[index] === 5) {
         doubleDamage = true
       } else {
-        boardPlayer.groundHoles[index] = (boardPlayer.groundHoles[index] ?? 0) + 1
+        boardPlayer.groundHoles[index] =
+          (boardPlayer.groundHoles[index] ?? 0) + 1
       }
       pokemon.broadcastAbility({
         targetX: target.positionX,
@@ -13330,7 +13346,97 @@ export class HyperDrillStrategy extends AbilityStrategy {
       target.status.protect = false
       target.status.protectCooldown = 0
     }
-    target.handleSpecialDamage(damage * (doubleDamage ? 2 : 1), board, AttackType.TRUE, pokemon, crit)
+    target.handleSpecialDamage(
+      damage * (doubleDamage ? 2 : 1),
+      board,
+      AttackType.TRUE,
+      pokemon,
+      crit
+    )
+  }
+}
+
+export class TerrainPulseStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const fieldEffects: (keyof IStatus)[] = [
+      "fairyField",
+      "electricField",
+      "grassField",
+      "psychicField"
+    ] as const
+    type FieldEffect = (typeof fieldEffects)[number]
+    const getFieldEffect = (pkm: PokemonEntity): FieldEffect | null =>
+      fieldEffects.find((field) => pkm.status[field] === true) ?? null
+
+    const userField = getFieldEffect(pokemon)
+    if (userField === null) pokemon.status.grassField = true
+
+    const adjacentFieldsByPkm: Map<PokemonEntity, Set<FieldEffect>> = new Map()
+    const pokemonsWithField: Map<PokemonEntity, FieldEffect> = new Map()
+
+    // 1. collect adjacent fields
+    board.forEach((x, y, entity) => {
+      if (!entity) return
+      const activeField = getFieldEffect(entity)
+      if (activeField) {
+        pokemonsWithField.set(entity, activeField)
+        const adjacentAlliesWithoutField = board
+          .getAdjacentCells(x, y)
+          .map((cell) => cell.value)
+          .filter(
+            (e): e is PokemonEntity =>
+              e != null && e.team === entity.team && getFieldEffect(e) === null
+          )
+        for (const ally of adjacentAlliesWithoutField) {
+          const adjacentFields =
+            adjacentFieldsByPkm.get(ally) ?? new Set<FieldEffect>()
+          adjacentFields.add(activeField)
+          adjacentFieldsByPkm.set(ally, adjacentFields)
+        }
+      }
+    })
+
+    // 2. propagate fields
+    adjacentFieldsByPkm.forEach((fields, pkm) => {
+      const field = pickRandomIn([...fields])
+      switch (field) {
+        case "fairyField": pkm.status.fairyField = true; break
+        case "electricField": pkm.status.electricField = true; break
+        case "grassField": pkm.status.grassField = true; break
+        case "psychicField": pkm.status.psychicField = true; break
+      }
+      pokemonsWithField.set(pkm, getFieldEffect(pkm)!)
+    })
+
+    // 3. trigger additional field effects
+    /*
+    Grass field: heal 5% of max HP
+    Electric Field: gain 10 Speed
+    Psychic Field: gain 10 PP
+    Fairy Field: gain 5% of max HP as Shield
+    */
+    pokemonsWithField.forEach((field, pkm) => {
+      switch (field) {
+        case "grassField":
+          pkm.handleHeal(0.05 * pkm.hp, pokemon, 1, crit)
+          break
+        case "electricField":
+          pkm.addSpeed(10, pokemon, 1, crit)
+          break
+        case "psychicField":
+          pkm.addPP(10, pokemon, 1, crit)
+          break
+        case "fairyField":
+          pkm.addShield(0.05 * pkm.hp, pokemon, 1, crit)
+          break
+      }
+    })
   }
 }
 
@@ -13818,5 +13924,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TACKLE]: new TackleStrategy(),
   [Ability.STATIC_SHOCK]: new StaticShockStrategy(),
   [Ability.SAND_SPIT]: new SandSpitStrategy(),
-  [Ability.HYPER_DRILL]: new HyperDrillStrategy()
+  [Ability.HYPER_DRILL]: new HyperDrillStrategy(),
+  [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy()
 }

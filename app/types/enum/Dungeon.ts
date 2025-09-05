@@ -342,7 +342,7 @@ export const DungeonDetails: {
   [DungeonPMDO.BuriedRelic2]: {
     synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.LIGHT],
     music: DungeonMusic.TIME_GEAR_REMIX,
-    regionalSpeciality: Item.SWEET_HERB
+    regionalSpeciality: Item.HERBA_MYSTICA_SALTY
   },
   [DungeonPMDO.BuriedRelic3]: {
     synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.HUMAN],
@@ -577,7 +577,7 @@ export const DungeonDetails: {
   [DungeonPMDO.LushPrairie]: {
     synergies: [Synergy.GOURMET, Synergy.LIGHT, Synergy.FLORA],
     music: DungeonMusic.WELCOME_TO_THE_WORLD_OF_POKEMON,
-    regionalSpeciality: Item.FLOWER_SWEET
+    regionalSpeciality: Item.OLIVE_OIL
   },
   [DungeonPMDO.MagmaCavern2]: {
     synergies: [Synergy.FIRE, Synergy.FIGHTING, Synergy.MONSTER],
@@ -682,7 +682,7 @@ export const DungeonDetails: {
   [DungeonPMDO.MystifyingForest]: {
     synergies: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
     music: DungeonMusic.MYSTIFYING_FOREST,
-    regionalSpeciality: Item.SWEET_HERB
+    regionalSpeciality: Item.HERBA_MYSTICA_SWEET
   },
   [DungeonPMDO.NorthernDesert1]: {
     synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.LIGHT],
@@ -727,7 +727,7 @@ export const DungeonDetails: {
   [DungeonPMDO.PurityForest4]: {
     synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FAIRY],
     music: DungeonMusic.POKEMON_SQUARE,
-    regionalSpeciality: Item.SWEET_HERB
+    regionalSpeciality: Item.HERBA_MYSTICA_SWEET
   },
   [DungeonPMDO.PurityForest6]: {
     synergies: [Synergy.NORMAL, Synergy.GRASS, Synergy.BABY],
@@ -797,7 +797,7 @@ export const DungeonDetails: {
   [DungeonPMDO.SkyPeak4thPass]: {
     synergies: [Synergy.GOURMET, Synergy.FLORA, Synergy.BABY],
     music: DungeonMusic.SKY_PEAK_COAST,
-    regionalSpeciality: Item.FLOWER_SWEET
+    regionalSpeciality: Item.OLIVE_OIL
   },
   [DungeonPMDO.SkyPeak7thPass]: {
     synergies: [Synergy.ICE, Synergy.DRAGON, Synergy.FAIRY],
@@ -867,7 +867,7 @@ export const DungeonDetails: {
   [DungeonPMDO.StormySea1]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.ELECTRIC],
     music: DungeonMusic.STORMY_SEA,
-    regionalSpeciality: Item.SMOKED_FILET
+    regionalSpeciality: Item.HERBA_MYSTICA_SOUR
   },
   [DungeonPMDO.StormySea2]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.SOUND],
@@ -897,7 +897,7 @@ export const DungeonDetails: {
   [DungeonPMDO.TestDungeon]: {
     synergies: [Synergy.ARTIFICIAL, Synergy.ELECTRIC, Synergy.PSYCHIC],
     music: DungeonMusic.FRIEND_AREA_LAB,
-    regionalSpeciality: Item.SPINDA_COCKTAIL
+    regionalSpeciality: Item.HERBA_MYSTICA_SPICY
   },
   [DungeonPMDO.TheNightmare]: {
     synergies: [Synergy.GHOST, Synergy.DARK, Synergy.PSYCHIC],

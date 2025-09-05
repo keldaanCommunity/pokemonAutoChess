@@ -7009,5 +7009,26 @@ export const PokemonAnimations: {
     emote: AnimationType.Shake,
     attackSprite: AttackSprite.GROUND_MELEE,
     hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.SMOLIV]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shake,
+    attackSprite: AttackSprite.GRASS_RANGE,
+    hitSprite: HitSprite.GRASS_HIT
+  },
+  [Pkm.DOLLIV]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GRASS_RANGE,
+    hitSprite: HitSprite.GRASS_HIT
+  },
+  [Pkm.ARBOLIVA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GRASS_RANGE,
+    hitSprite: HitSprite.GRASS_HIT
   }
 }
