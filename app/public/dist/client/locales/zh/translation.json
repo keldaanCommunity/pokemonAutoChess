@@ -502,7 +502,8 @@
 		"TACKLE": "撞击",
 		"STATIC_SHOCK": "霹雳啪啦",
 		"SAND_SPIT": "吐沙",
-		"HYPER_DRILL": "强力钻"
+		"HYPER_DRILL": "强力钻",
+		"TERRAIN_PULSE": "大地波动"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1523,7 +1524,10 @@
 		"SILICOBRA": "沙包蛇",
 		"SANDACONDA": "沙螺蟒",
 		"DUNSPARCE": "土龙弟弟",
-		"DUDUNSPARCE": "土龙节节"
+		"DUDUNSPARCE": "土龙节节",
+		"SMOLIV": "迷你芙",
+		"DOLLIV": "奥利纽",
+		"ARBOLIVA": "奥利瓦"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1682,7 +1686,7 @@
 		"MEGA_PUNCH": "对目标造成[60,SP]点SPECIAL。若使用者的DEF高于目标，造成的伤害翻倍。",
 		"TRIPLE_KICK": "对至多3个相邻的敌方宝可梦造成[60,SP]点SPECIAL。",
 		"MAWASHI_GERI": "对目标造成[60,SP]点SPECIAL，并将其击退。若使用者的ATK高于目标，造成的伤害翻倍。",
-		"FORECAST": "全体我方宝可梦获得[10,SP]点SHIELD，并根据当前天气，再提升——\n SUN：[4,SP]点ATK\n RAIN：[8,SP]点PP\n SNOW：[2,SP]点DEF与SPE_DEF",
+		"FORECAST": "全体我方宝可梦获得[10,SP]点SHIELD，并根据当前天气，再提升——\nSUN：[4,SP]点ATK\nRAIN：[8,SP]点PP\nSNOW：[2,SP]点DEF与SPE_DEF",
 		"X_SCISSOR": "对目标造成两次[10,20,40,60,SP]点TRUE。",
 		"MANTIS_BLADES": "对目标连斩三刀，每刀均造成[10,20,40,SP]点伤害。三刀的伤害类型分别为PHYSICAL，SPECIAL和TRUE。",
 		"PLASMA_FIST": "对目标造成[120,SP]点SPECIAL。使用者自身恢复造成伤害的25%。",
@@ -2006,7 +2010,8 @@
 		"TACKLE": "对目标造成[20,40,60,SP]点SPECIAL。",
 		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。",
 		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
-		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，此伤害无视PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。"
+		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
+		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将场地传播至相邻我方宝可梦，随后根据场地类型为我方宝可梦——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2409,7 +2414,13 @@
 		"TART_APPLE": "酸酸苹果",
 		"SWEET_APPLE": "甜甜苹果",
 		"SIRUPY_APPLE": "蜜汁苹果",
-		"HERBA_MYSTICA": "甜味香料",
+		"HERBA_MYSTICA": "秘传调味料",
+		"HERBA_MYSTICA_BITTER": "秘传苦味料",
+		"HERBA_MYSTICA_SALTY": "秘传咸味料",
+		"HERBA_MYSTICA_SWEET": "秘传甜味料",
+		"HERBA_MYSTICA_SPICY": "秘传辣味料",
+		"HERBA_MYSTICA_SOUR": "秘传酸味料",
+		"OLIVE_OIL": "橄榄油",
 		"MOOMOO_MILK": "哞哞鲜奶",
 		"BERRIES": "热带龙的果实",
 		"HONEY": "甜甜蜜",
@@ -2628,11 +2639,18 @@
 		"TART_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标2点DEF。一轮结束后，会变为SWEET_APPLE。",
 		"SWEET_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标2点SPE_DEF。一轮结束后，会变为SIRUPY_APPLE。",
 		"SIRUPY_APPLE": "仅在下一轮战斗中，食用者的每次攻击有[30,LK]%的概率使目标陷入PARALYSIS 1秒。一轮结束后，会变为LEFTOVERS。",
+		"HERBA_MYSTICA": "根据调料风味获得对应的状态效果。食用者的共鸣决定其获取的调料风味——\nFAIRY：HERBA_MYSTICA_SWEET\nGRASS：HERBA_MYSTICA_BITTER\nELECTRIC：HERBA_MYSTICA_SOUR\nPSYCHIC：HERBA_MYSTICA_SPICY\n其他：HERBA_MYSTICA_SALTY",
+		"HERBA_MYSTICA_BITTER": "仅在下一轮战斗中，获得GRASS_FIELD",
+		"HERBA_MYSTICA_SALTY": "仅在下一轮战斗中，获得RUNE_PROTECT",
+		"HERBA_MYSTICA_SWEET": "仅在下一轮战斗中，获得FAIRY_FIELD",
+		"HERBA_MYSTICA_SPICY": "仅在下一轮战斗中，获得PSYCHIC_FIELD",
+		"HERBA_MYSTICA_SOUR": "仅在下一轮战斗中，获得ELECTRIC_FIELD",
+		"OLIVE_OIL": "仅在下一轮战斗中，提升20%的闪避率。",
 		"MOOMOO_MILK": "永久提升15点最大HP。",
-		"BERRIES": "获得 3 个随机浆果。",
+		"BERRIES": "获得3枚随机树果",
 		"POFFIN": "在下一轮战斗开始时，获得100点SHIELD。所有持有的树果作为宝芬的材料被立即食用并生效，其治疗效果改为获得等量SHIELD。",
 		"HONEY": "本轮之内接下来的商店刷新中，所有商店中宝可梦与食用HONEY的宝可梦至少一项共鸣相同的概率均提升5%。",
-		"ROCK_SALT": "在下一轮战斗开始时，获得RUNE_PROTECT 10秒，15% HP SHIELD。",
+		"ROCK_SALT": "在下一轮战斗开始时，获得RUNE_PROTECT 10秒，以及SHIELD，数值相当于15%的HP。",
 		"NUTRITIOUS_EGG": "仅在下一轮战斗中，提升30%的基础ATK，DEF和SPE_DEF。",
 		"LEFTOVERS": "没有效果。剩下的可食用部分不多了。",
 		"BLACK_SLUDGE": "食用的宝可梦陷入POISONNED。若为POISON，改为每2秒恢复5%的最大HP。",
@@ -2677,7 +2695,7 @@
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
-		"TYROGUE": "根据第一件携带道具决定进化路线——\n CHARCOAL或MAGNET：$t(pkm.HITMONLEE)\n HEART_SCALE或NEVER_MELT_ICE：$t(pkm.HITMONCHAN)\n 其他：$t(pkm.HITMONTOP)",
+		"TYROGUE": "根据第一件携带道具决定进化路线——\nCHARCOAL或MAGNET：$t(pkm.HITMONLEE)\nHEART_SCALE或NEVER_MELT_ICE：$t(pkm.HITMONCHAN)\n其他：$t(pkm.HITMONTOP)",
 		"PROTEAN2": "此宝可梦参与的共鸣为当前队伍中宝可梦数量最多的2个共鸣。",
 		"PROTEAN3": "此宝可梦参与的共鸣为当前队伍中宝可梦数量最多的3个共鸣。",
 		"CASTFORM": "飘浮泡泡的形态会根据当前最高共鸣是FIRE，WATER还是ICE切换自身形态，并将天气设置为SUN，RAIN或SNOW。",
@@ -2917,10 +2935,10 @@
 		"POSSESSED": "暂时为对方队伍战斗。若目标为唯一剩余的敌方宝可梦，则变为CHARM。",
 		"LOCKED": "无法移动，且RANGE被设置为1。",
 		"BLINDED": "攻击的命中率降低50%。",
-		"ELECTRIC_FIELD": "提升20%造成的伤害（只对ELECTRIC有效）。",
-		"PSYCHIC_FIELD": "提升20%造成的伤害（只对PSYCHIC有效）。",
-		"GRASS_FIELD": "提升20%造成的伤害（只对GRASS有效）。",
-		"FAIRY_FIELD": "提升20%造成的伤害（只对FAIRY有效）。"
+		"ELECTRIC_FIELD": "ELECTRIC宝可梦造成的伤害增加20%。",
+		"PSYCHIC_FIELD": "PSYCHIC宝可梦造成的伤害增加20%。",
+		"GRASS_FIELD": "GRASS宝可梦造成的伤害增加20%。",
+		"FAIRY_FIELD": "FAIRY宝可梦造成的伤害增加20%。"
 	},
 	"synergy": {
 		"NORMAL": "一般属性",
