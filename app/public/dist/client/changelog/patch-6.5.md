@@ -41,6 +41,7 @@
 - Rework Ogerpon ; now legendary. Masks have new effects and higher base stats. Ogerpon loses its mask when its shield is depleted.
 - Rework Manaphy: now Legendary, new ability: Heart Swap ; now spawns Phione if holding an Aqua Egg
 - Nerf Galarian Zigzagoon PP 50 → 80 ; Galarian Linoone: PP 50 → 80; HP 180 → 170; Def 14 → 12 ; Obstagoon HP 280 → 250, Def 16 → 14
+- Buff Duraludon line: PP 110 → 100
 
 # Changes to Synergies
 

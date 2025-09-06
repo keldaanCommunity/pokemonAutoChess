@@ -17343,7 +17343,7 @@ export class Duraludon extends Pokemon {
   speed = 52
   def = 6
   speDef = 6
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.ELECTRO_SHOT
   passive = Passive.DURALUDON
@@ -17362,7 +17362,7 @@ export class Archaludon extends Pokemon {
   speed = 52
   def = 10
   speDef = 10
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.ELECTRO_SHOT
 }
