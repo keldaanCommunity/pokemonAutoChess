@@ -1527,7 +1527,10 @@
 		"DUDUNSPARCE": "Dudunsparce",
 		"SMOLIV": "Smoliv",
 		"DOLLIV": "Dolliv",
-		"ARBOLIVA": "Arboliva"
+		"ARBOLIVA": "Arboliva",
+		"CHESPIN": "Chespin",
+		"QUILLADIN": "Quilladin",
+		"CHESNAUGHT": "Chesnaught"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2147,10 +2150,10 @@
 		"RISING_VOLTAGE": "Every fourth attack is a triple attack",
 		"OVERDRIVE": "Every third attack is a triple attack",
 		"POWER_SURGE": "Triple attacks also deal 10 SPECIAL to target and enemies adjacent to it",
-		"GUTS": "Blocks 4 damage",
-		"STURDY": "Blocks 7 damage",
-		"DEFIANT": "Blocks 10 damage",
-		"JUSTIFIED": "Blocks 13 damage",
+		"GUTS": "Blocks 3 damage",
+		"STURDY": "Blocks 6 damage",
+		"DEFIANT": "Blocks 9 damage",
+		"JUSTIFIED": "Blocks 12 damage. Throws the target after 8 hits blocked.",
 		"AMNESIA": "+50 AP",
 		"LIGHT_SCREEN": "+100 AP. A Unown appears every 3 shops.",
 		"EERIE_SPELL": "+150 AP. After a fight, get an Unown shop.",
