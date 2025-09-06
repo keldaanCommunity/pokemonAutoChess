@@ -4886,6 +4886,10 @@ export class Seedot extends Pokemon {
   range = 1
   skill = Ability.RAZOR_LEAF
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies ?? []
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Nuzleaf extends Pokemon {
@@ -4902,6 +4906,10 @@ export class Nuzleaf extends Pokemon {
   range = 1
   skill = Ability.RAZOR_LEAF
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies ?? []
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Shiftry extends Pokemon {
@@ -4917,6 +4925,10 @@ export class Shiftry extends Pokemon {
   range = 1
   skill = Ability.RAZOR_LEAF
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies ?? []
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Sprigatito extends Pokemon {
@@ -18445,6 +18457,53 @@ export class Dudunsparse extends Pokemon {
   skill = Ability.HYPER_DRILL
 }
 
+export class Smoliv extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.DOLLIV
+  hp = 60
+  atk = 5
+  speed = 25
+  def = 2
+  speDef = 3
+  maxPP = 100
+  range = 2
+  skill = Ability.TERRAIN_PULSE
+  regional = true
+}
+
+export class Dolliv extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.ARBOLIVA
+  hp = 110
+  atk = 10
+  speed = 25
+  def = 3
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.TERRAIN_PULSE
+  regional = true
+}
+
+export class Arboliva extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 200
+  atk = 16
+  speed = 25
+  def = 6
+  speDef = 8
+  maxPP = 100
+  range = 2
+  skill = Ability.TERRAIN_PULSE
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19471,7 +19530,10 @@ export const PokemonClasses: Record<
   [Pkm.SILICOBRA]: Silicobra,
   [Pkm.SANDACONDA]: Sandaconda,
   [Pkm.DUNSPARCE]: Dunsparce,
-  [Pkm.DUDUNSPARCE]: Dudunsparse
+  [Pkm.DUDUNSPARCE]: Dudunsparse,
+  [Pkm.SMOLIV]: Smoliv,
+  [Pkm.DOLLIV]: Dolliv,
+  [Pkm.ARBOLIVA]: Arboliva
 }
 
 // declare all the classes in colyseus schema TypeRegistry

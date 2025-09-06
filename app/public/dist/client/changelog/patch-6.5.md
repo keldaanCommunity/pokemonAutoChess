@@ -11,6 +11,9 @@
 - Sandaconda
 - Dunsparce
 - Dudunsparce
+- Smoliv
+- Dolliv
+- Arboliva
 
 # Changes to Pokemon & Abilities
 
@@ -32,7 +35,7 @@
 - Change Plusle/Minum types: Electric/Fairy -> Electric/Field
 - Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
 - Change Fomantis line types: Grass/Light/Fighting → Flora/Light/Fighting
-- Seedot line is now regional
+- Seedot line is now regional, reserved to Dark regions
 - Gossifleur line is now regional
 - Bellsprout line, Chikorita line and Hoppip line are now in Special category
 - New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
@@ -63,6 +66,8 @@
 - Nerf Shiny Charm: protect duration 2 → 1.5 second
 - Nerf Ability Shield: removed 15 base shield
 - Nerf Razor Fang: Armor break duration 4 → 2 seconds
+- Buff Rock Salt: also gives 15% of max HP as SHIELD
+- Sweet Herb is replaced by Herba Mystica, which comes in 5 flavors and gives Field effects or Rune Protect
 
 # Changes to Town Encounters
 

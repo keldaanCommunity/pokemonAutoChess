@@ -131,6 +131,10 @@
   height: 45px;
 }
 
+.game-pokemon-detail-dish > p {
+  white-space: pre-wrap;
+}
+
 .game-pokemon-detail-ult {
   grid-column: span 3;
 }

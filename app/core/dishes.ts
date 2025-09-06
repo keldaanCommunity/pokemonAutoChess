@@ -29,9 +29,9 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.APPLETUN]: Item.SWEET_APPLE,
   [Pkm.DIPPLIN]: Item.SIRUPY_APPLE,
   [Pkm.HYDRAPPLE]: Item.SIRUPY_APPLE,
-  [Pkm.CHERUBI]: Item.SWEET_HERB,
-  [Pkm.CHERRIM]: Item.SWEET_HERB,
-  [Pkm.CHERRIM_SUNLIGHT]: Item.SWEET_HERB,
+  [Pkm.CHERUBI]: Item.HERBA_MYSTICA,
+  [Pkm.CHERRIM]: Item.HERBA_MYSTICA,
+  [Pkm.CHERRIM_SUNLIGHT]: Item.HERBA_MYSTICA,
   [Pkm.TROPIUS]: Item.BERRIES,
   [Pkm.SHUCKLE]: Item.BERRY_JUICE,
   [Pkm.COMBEE]: Item.HONEY,
@@ -65,7 +65,10 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: Item.SWEETS,
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: Item.SWEETS,
   [Pkm.PECHARUNT]: Item.BINDING_MOCHI,
-  [Pkm.VELUZA]: Item.SMOKED_FILET
+  [Pkm.VELUZA]: Item.SMOKED_FILET,
+  [Pkm.SMOLIV]: Item.OLIVE_OIL,
+  [Pkm.DOLLIV]: Item.OLIVE_OIL,
+  [Pkm.ARBOLIVA]: Item.OLIVE_OIL
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -95,7 +98,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
             (entity) => {
               entity.handleHeal(0.05 * entity.hp, entity, 0, false)
             },
-            Item.SWEET_HERB,
+            Item.BLACK_SLUDGE,
             2000
           )
         )
@@ -133,6 +136,22 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       }
     })
   ],
+  HERBA_MYSTICA: [],
+  HERBA_MYSTICA_SWEET: [new OnSpawnEffect((entity) => {
+    entity.status.fairyField = true
+  })],
+  HERBA_MYSTICA_SPICY: [new OnSpawnEffect((entity) => {
+    entity.status.psychicField = true
+  })],
+  HERBA_MYSTICA_SOUR: [new OnSpawnEffect((entity) => {
+    entity.status.electricField = true
+  })],
+  HERBA_MYSTICA_BITTER: [new OnSpawnEffect((entity) => {
+    entity.status.grassField = true
+  })],
+  HERBA_MYSTICA_SALTY: [new OnSpawnEffect((entity) => {
+    entity.status.triggerRuneProtect(40000)
+  })],
   HONEY: [],
   LARGE_LEEK: [
     new OnSpawnEffect((entity) => {
@@ -166,6 +185,11 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
     })
   ],
+  OLIVE_OIL: [
+    new OnSpawnEffect((entity) => {
+      entity.addDodgeChance(0.2, entity, 0, false)
+    })
+  ],
   POFFIN: [
     new OnSpawnEffect((entity) => {
       entity.addShield(100, entity, 0, false)
@@ -184,6 +208,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ROCK_SALT: [
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(10000)
+      entity.addShield(0.15 * entity.hp, entity, 0, false)
     })
   ],
   SANDWICH: [
@@ -291,11 +316,6 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   TART_APPLE: [
     new OnHitEffect(({ attacker, target }) => {
       target.addDefense(-2, attacker, 0, false)
-    })
-  ],
-  SWEET_HERB: [
-    new OnSpawnEffect((entity) => {
-      entity.addAbilityPower(80, entity, 0, false)
     })
   ],
   TEA: [
