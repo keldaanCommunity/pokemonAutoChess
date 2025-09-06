@@ -161,13 +161,13 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
             {array.slice(0, stats?.stages).map((v, j) => {
               const separator = j < Math.min(stats?.stages ?? 4, array.length) - 1 ? "/" : ""
               let value = roundToNDigits(Number(v), nbDigits)
-              if (scaleType === "AP"){
+              if (scaleType === "AP") {
                 value = roundToNDigits(Number(v) * (1 + (stats?.ap ?? 0) * scaleFactor / 100), nbDigits)
               }
-              if (scaleType === "LUCK"){
-                value = roundToNDigits(max(1)(Math.pow(Number(v), (1 - (stats?.luck ?? 0) / 100))) * 100, nbDigits)
+              if (scaleType === "LUCK") {
+                value = roundToNDigits(max(100)(Math.pow(Number(v), (1 - (stats?.luck ?? 0) / 100))), nbDigits)
               }
-              
+
               const tier = stats?.stars
               const active =
                 tier === undefined ||
