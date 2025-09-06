@@ -3903,6 +3903,7 @@ export class Mudkip extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
+  regional = true
 
   beforeSimulationStart({
     opponentEffects
@@ -3927,6 +3928,7 @@ export class Marshtomp extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
+  regional = true
 
   beforeSimulationStart({
     opponentEffects
@@ -3950,6 +3952,7 @@ export class Swampert extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
+  regional = true
 
   beforeSimulationStart({
     opponentEffects
