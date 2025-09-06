@@ -12944,7 +12944,7 @@ export class GalarianZigzagoon extends Pokemon {
   speed = 55
   def = 10
   speDef = 4
-  maxPP = 50
+  maxPP = 80
   range = 1
   skill = Ability.SLASH
   regional = true
@@ -12955,12 +12955,12 @@ export class GalarianLinoone extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.OBSTAGOON
-  hp = 180
+  hp = 170
   atk = 16
   speed = 55
-  def = 14
+  def = 12
   speDef = 8
-  maxPP = 50
+  maxPP = 80
   range = 1
   skill = Ability.SLASH
   regional = true
@@ -12970,10 +12970,10 @@ export class Obstagoon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.DARK, Synergy.SOUND])
   rarity = Rarity.RARE
   stars = 3
-  hp = 280
+  hp = 250
   atk = 22
   speed = 55
-  def = 16
+  def = 14
   speDef = 10
   maxPP = 100
   range = 1
