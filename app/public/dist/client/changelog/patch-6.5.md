@@ -17,6 +17,8 @@
 - Chespin
 - Quilladin
 - Chesnaught
+- Nymble
+- Lokix
 
 # Changes to Pokemon & Abilities
 

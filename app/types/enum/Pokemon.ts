@@ -469,6 +469,7 @@ export enum Pkm {
   LINOONE = "LINOONE",
   LITTEN = "LITTEN",
   LITWICK = "LITWICK",
+  LOKIX = "LOKIX",
   LOMBRE = "LOMBRE",
   LOPUNNY = "LOPUNNY",
   LOTAD = "LOTAD",
@@ -592,6 +593,7 @@ export enum Pkm {
   NOSEPASS = "NOSEPASS",
   NUMEL = "NUMEL",
   NUZLEAF = "NUZLEAF",
+  NYMBLE = "NYMBLE",
   OBSTAGOON = "OBSTAGOON",
   OCTILLERY = "OCTILLERY",
   ODDISH = "ODDISH",
@@ -2109,8 +2111,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.OINKOLOGNE]: "0916",
   //[Pkm.TAROUNTULA]: "0917",
   //[Pkm.SPIDOPS]: "0918",
-  //[Pkm.NYMBLE]: "0919",
-  //[Pkm.LOKIX]: "0920",
+  [Pkm.NYMBLE]: "0919",
+  [Pkm.LOKIX]: "0920",
   [Pkm.PAWMI]: "0921",
   [Pkm.PAWMO]: "0922",
   [Pkm.PAWMOT]: "0923",
@@ -3241,7 +3243,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ARBOLIVA]: Pkm.SMOLIV,
   [Pkm.CHESPIN]: Pkm.CHESPIN,
   [Pkm.QUILLADIN]: Pkm.CHESPIN,
-  [Pkm.CHESNAUGHT]: Pkm.CHESPIN
+  [Pkm.CHESNAUGHT]: Pkm.CHESPIN,
+  [Pkm.NYMBLE]: Pkm.NYMBLE,
+  [Pkm.LOKIX]: Pkm.NYMBLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

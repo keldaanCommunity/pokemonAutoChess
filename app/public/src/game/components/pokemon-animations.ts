@@ -7051,5 +7051,19 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FIGHTING_MELEE,
     hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.NYMBLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.DARK_HIT
+  },
+  [Pkm.LOKIX]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.DARK_HIT
   }
 }

@@ -503,7 +503,8 @@
 		"STATIC_SHOCK": "Static Shock",
 		"SAND_SPIT": "Sand Spit",
 		"HYPER_DRILL": "Hyper Drill",
-		"TERRAIN_PULSE": "Terrain Pulse"
+		"TERRAIN_PULSE": "Terrain Pulse",
+		"AXE_KICK": "Axe Kick"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1530,7 +1531,9 @@
 		"ARBOLIVA": "Arboliva",
 		"CHESPIN": "Chespin",
 		"QUILLADIN": "Quilladin",
-		"CHESNAUGHT": "Chesnaught"
+		"CHESNAUGHT": "Chesnaught",
+		"NYMBLE": "Nymble",
+		"LOKIX": "Lokix"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2014,7 +2017,8 @@
 		"STATIC_SHOCK": "Deals [70,SP] SPECIAL to the target and gains [30,SP] SHIELD per adjacent ELECTRIC Pokémon, heals [30,SP] HP per adjacent FAIRY Pokémon.",
 		"SAND_SPIT": "Spits sand at the 3 enemy Pokémon in front of the user, dealing [30,60,120,SP] SPECIAL and inflicting BLINDED for 2 seconds.",
 		"HYPER_DRILL": "Deals [10,30,50,SP] TRUE that can break PROTECT, and dig deeper into the ground under the target, destroying any eventual buried items in the process. Double damage if target is already on a fully dug hole.",
-		"TERRAIN_PULSE": "If user has no field, gets GRASS_FIELD.\nField effects in your team propagate to adjacent allies, then trigger an effect:\nGRASS_FIELD: heal [5,SP]% of max HP\nELECTRIC_FIELD: gain [10,SP] SPEED\nPSYCHIC_FIELD: gain [10,SP] PP\nFAIRY_FIELD: gain [5,SP]% of max HP as SHIELD"
+		"TERRAIN_PULSE": "If user has no field, gets GRASS_FIELD.\nField effects in your team propagate to adjacent allies, then trigger an effect:\nGRASS_FIELD: heal [5,SP]% of max HP\nELECTRIC_FIELD: gain [10,SP] SPEED\nPSYCHIC_FIELD: gain [10,SP] PP\nFAIRY_FIELD: gain [5,SP]% of max HP as SHIELD",
+		"AXE_KICK": "Leap to the enemy with the highest PP then deal [25,50,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

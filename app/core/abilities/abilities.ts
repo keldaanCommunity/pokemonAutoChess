@@ -13440,6 +13440,46 @@ export class TerrainPulseStrategy extends AbilityStrategy {
   }
 }
 
+export class AxeKickStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Leap to the enemy with the highest PP then deal [30,60,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds
+    const highestPPEnemies = board.cells.filter(
+      (e): e is PokemonEntity => e !== undefined && e.team !== pokemon.team
+    ).sort((a, b) => (b!.pp - a!.pp))
+    let highestPPEnemy: PokemonEntity | null = null
+    let freeSpot: { x: number; y: number } | null = null
+    do {
+      highestPPEnemy = highestPPEnemies.shift() ?? null
+      freeSpot = highestPPEnemy ? board.getClosestAvailablePlace(
+        highestPPEnemy.positionX,
+        highestPPEnemy.positionY
+      ) : null
+    } while (highestPPEnemies.length > 0 && (!highestPPEnemy || !freeSpot));
+
+    if (highestPPEnemy && freeSpot) {
+      pokemon.moveTo(freeSpot.x, freeSpot.y, board)
+      const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+      highestPPEnemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      highestPPEnemy.addPP(-15, pokemon, 1, crit)
+      if (chance(0.3, pokemon)) {
+        highestPPEnemy.status.triggerConfusion(3000, highestPPEnemy, pokemon)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13925,5 +13965,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STATIC_SHOCK]: new StaticShockStrategy(),
   [Ability.SAND_SPIT]: new SandSpitStrategy(),
   [Ability.HYPER_DRILL]: new HyperDrillStrategy(),
-  [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy()
+  [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy(),
+  [Ability.AXE_KICK]: new AxeKickStrategy()
 }

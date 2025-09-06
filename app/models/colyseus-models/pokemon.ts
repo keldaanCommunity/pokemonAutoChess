@@ -18551,6 +18551,37 @@ export class Chesnaught extends Pokemon {
   skill = Ability.SPIKY_SHIELD
 }
 
+export class Nymble extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LOKIX
+  hp = 80
+  atk = 8
+  speed = 60
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.AXE_KICK
+  additional = true
+}
+
+export class Lokix extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 18
+  speed = 60
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.AXE_KICK
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19583,7 +19614,9 @@ export const PokemonClasses: Record<
   [Pkm.ARBOLIVA]: Arboliva,
   [Pkm.CHESPIN]: Chespin,
   [Pkm.QUILLADIN]: Quilladin,
-  [Pkm.CHESNAUGHT]: Chesnaught
+  [Pkm.CHESNAUGHT]: Chesnaught,
+  [Pkm.NYMBLE]: Nymble,
+  [Pkm.LOKIX]: Lokix
 }
 
 // declare all the classes in colyseus schema TypeRegistry
