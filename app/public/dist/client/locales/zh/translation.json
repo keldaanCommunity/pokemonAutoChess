@@ -2011,7 +2011,7 @@
 		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。",
 		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
 		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
-		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将场地传播至相邻我方宝可梦，随后根据场地类型为我方宝可梦——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP"
+		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至相邻我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP"
 	},
 	"effect": {
 		"STAMINA": "持久力",
