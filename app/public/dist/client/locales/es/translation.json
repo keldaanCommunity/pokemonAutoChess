@@ -1664,7 +1664,6 @@
 		"ROLLOUT": "Mejora la DEF en [2,5,10,SP] e inflige 2 veces la DEF como SPECIAL",
 		"ICE_BALL": "Incrementa la SPE_DEF del usuario en 10 e inflige SPECIAL igual a [10,20,30,SP] + [50,100,150,SP]% de la SPE_DEF del usuario.",
 		"THRASH": "Mejora el ATK en un [100,SP]% y se queda CONFUSION por 3 segundos",
-		"SOLAR_BEAM": "Inflige [30,60,120,SP] de SPECIAL en línea recta detrás del objetivo. Si el clima es SUN, los objetivos quedan BURN durante 3 segundos y recupera 40 PP",
 		"MAGMA_STORM": "El objetivo queda atrapado en una vorágine de fuego que inflige [80,SP] de SPECIAL antes de moverse a un objetivo adyacente",
 		"DIRE_CLAW": "Hace [15,30,60,SP] al objetivo. Inflige aleatoriamente POISON, SLEEP o PARALYSIS por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo deja WOUND por 5 segundos. Si el objetivo ya está WOUND, otorga un 30% de bonificación de SPECIAL",
