@@ -1097,7 +1097,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Fighting knockback
     if (
       this.count.fightingBlockCount > 0 &&
-      this.count.fightingBlockCount % 10 === 0 &&
+      this.count.fightingBlockCount % (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) === 0 &&
       !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1

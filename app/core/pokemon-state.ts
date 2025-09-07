@@ -471,12 +471,12 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.JUSTIFIED)
         ) {
           const damageBlocked = pokemon.effects.has(EffectEnum.JUSTIFIED)
-            ? 13
+            ? 12
             : pokemon.effects.has(EffectEnum.DEFIANT)
-              ? 10
+              ? 9
               : pokemon.effects.has(EffectEnum.STURDY)
-                ? 7
-                : 4
+                ? 6
+                : 3
           reducedDamage = reducedDamage - damageBlocked
           pokemon.count.fightingBlockCount++
         }

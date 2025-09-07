@@ -3903,6 +3903,7 @@ export class Mudkip extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
+  regional = true
 
   beforeSimulationStart({
     opponentEffects
@@ -3927,6 +3928,7 @@ export class Marshtomp extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
+  regional = true
 
   beforeSimulationStart({
     opponentEffects
@@ -3950,6 +3952,7 @@ export class Swampert extends Pokemon {
   range = 1
   skill = Ability.MUD_BUBBLE
   passive = Passive.WATER_SPRING
+  regional = true
 
   beforeSimulationStart({
     opponentEffects
@@ -18504,6 +18507,81 @@ export class Arboliva extends Pokemon {
   regional = true
 }
 
+export class Chespin extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.QUILLADIN
+  hp = 60
+  atk = 7
+  speed = 41
+  def = 5
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKY_SHIELD
+}
+
+export class Quilladin extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.CHESNAUGHT
+  hp = 120
+  atk = 12
+  speed = 41
+  def = 9
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKY_SHIELD
+}
+
+export class Chesnaught extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIGHTING])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 200
+  atk = 23
+  speed = 41
+  def = 15
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.SPIKY_SHIELD
+}
+
+export class Nymble extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.LOKIX
+  hp = 80
+  atk = 8
+  speed = 60
+  def = 3
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.AXE_KICK
+  additional = true
+}
+
+export class Lokix extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.DARK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 18
+  speed = 60
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.AXE_KICK
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19533,7 +19611,12 @@ export const PokemonClasses: Record<
   [Pkm.DUDUNSPARCE]: Dudunsparse,
   [Pkm.SMOLIV]: Smoliv,
   [Pkm.DOLLIV]: Dolliv,
-  [Pkm.ARBOLIVA]: Arboliva
+  [Pkm.ARBOLIVA]: Arboliva,
+  [Pkm.CHESPIN]: Chespin,
+  [Pkm.QUILLADIN]: Quilladin,
+  [Pkm.CHESNAUGHT]: Chesnaught,
+  [Pkm.NYMBLE]: Nymble,
+  [Pkm.LOKIX]: Lokix
 }
 
 // declare all the classes in colyseus schema TypeRegistry

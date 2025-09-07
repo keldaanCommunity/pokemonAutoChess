@@ -14,6 +14,11 @@
 - Smoliv
 - Dolliv
 - Arboliva
+- Chespin
+- Quilladin
+- Chesnaught
+- Nymble
+- Lokix
 
 # Changes to Pokemon & Abilities
 
@@ -36,6 +41,7 @@
 - Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
 - Change Fomantis line types: Grass/Light/Fighting → Flora/Light/Fighting
 - Seedot line is now regional, reserved to Dark regions
+- Mudkip line is now regional
 - Gossifleur line is now regional
 - Bellsprout line, Chikorita line and Hoppip line are now in Special category
 - New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
@@ -51,6 +57,7 @@
 - Ground rework: Ground Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages).
 - Flora rework: When a Flora Pokémon is KO'd, a Flower Pot blossoms and you collect mulch. Higher ⭐ units give more mulch, which can be used to evolve your Flower Pots.
 - Nerf Aquatic: status duration -30/60/90% → -30/50/70%
+- Nerf Fighting: damage reduction 4/7/10/13 → 3/6/9/12. New effect at Fighting 8: throw target after 8 hits instead of 10
 - Weather rocks are no longer collected during PVE rounds
 
 # Changes to Items

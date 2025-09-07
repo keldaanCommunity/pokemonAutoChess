@@ -122,6 +122,8 @@ export enum Pkm {
   CHERRIM = "CHERRIM",
   CHERRIM_SUNLIGHT = "CHERRIM_SUNLIGHT",
   CHERUBI = "CHERUBI",
+  CHESPIN = "CHESPIN",
+  CHESNAUGHT = "CHESNAUGHT",
   CHIKORITA = "CHIKORITA",
   CHIMCHAR = "CHIMCHAR",
   CHIMECHO = "CHIMECHO",
@@ -467,6 +469,7 @@ export enum Pkm {
   LINOONE = "LINOONE",
   LITTEN = "LITTEN",
   LITWICK = "LITWICK",
+  LOKIX = "LOKIX",
   LOMBRE = "LOMBRE",
   LOPUNNY = "LOPUNNY",
   LOTAD = "LOTAD",
@@ -590,6 +593,7 @@ export enum Pkm {
   NOSEPASS = "NOSEPASS",
   NUMEL = "NUMEL",
   NUZLEAF = "NUZLEAF",
+  NYMBLE = "NYMBLE",
   OBSTAGOON = "OBSTAGOON",
   OCTILLERY = "OCTILLERY",
   ODDISH = "ODDISH",
@@ -673,6 +677,7 @@ export enum Pkm {
   PYUKUMUKU = "PYUKUMUKU",
   QUAGSIRE = "QUAGSIRE",
   QUILAVA = "QUILAVA",
+  QUILLADIN = "QUILLADIN",
   RABOOT = "RABOOT",
   RAICHU = "RAICHU",
   RAIKOU = "RAIKOU",
@@ -1787,9 +1792,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GENESECT]: "0649",
 
   // Gen 6
-  //[Pkm.CHESTPIN]: "0650",
-  //[Pkm.QUILLADIN]: "0651",
-  //[Pkm.CHESNAUGHT]: "0652",
+  [Pkm.CHESPIN]: "0650",
+  [Pkm.QUILLADIN]: "0651",
+  [Pkm.CHESNAUGHT]: "0652",
   [Pkm.FENNEKIN]: "0653",
   [Pkm.BRAIXEN]: "0654",
   [Pkm.DELPHOX]: "0655",
@@ -2106,8 +2111,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.OINKOLOGNE]: "0916",
   //[Pkm.TAROUNTULA]: "0917",
   //[Pkm.SPIDOPS]: "0918",
-  //[Pkm.NYMBLE]: "0919",
-  //[Pkm.LOKIX]: "0920",
+  [Pkm.NYMBLE]: "0919",
+  [Pkm.LOKIX]: "0920",
   [Pkm.PAWMI]: "0921",
   [Pkm.PAWMO]: "0922",
   [Pkm.PAWMOT]: "0923",
@@ -3235,7 +3240,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DUDUNSPARCE]: Pkm.DUNSPARCE,
   [Pkm.SMOLIV]: Pkm.SMOLIV,
   [Pkm.DOLLIV]: Pkm.SMOLIV,
-  [Pkm.ARBOLIVA]: Pkm.SMOLIV
+  [Pkm.ARBOLIVA]: Pkm.SMOLIV,
+  [Pkm.CHESPIN]: Pkm.CHESPIN,
+  [Pkm.QUILLADIN]: Pkm.CHESPIN,
+  [Pkm.CHESNAUGHT]: Pkm.CHESPIN,
+  [Pkm.NYMBLE]: Pkm.NYMBLE,
+  [Pkm.LOKIX]: Pkm.NYMBLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
