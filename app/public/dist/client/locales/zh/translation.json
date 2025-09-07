@@ -1527,7 +1527,12 @@
 		"DUDUNSPARCE": "土龙节节",
 		"SMOLIV": "迷你芙",
 		"DOLLIV": "奥利纽",
-		"ARBOLIVA": "奥利瓦"
+		"ARBOLIVA": "奥利瓦",
+		"CHESPIN": "哈力栗",
+		"QUILLADIN": "胖胖哈力",
+		"CHESNAUGHT": "布里卡隆",
+		"NYMBLE": "豆蟋蟀",
+		"LOKIX": "烈腿蝗"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1813,7 +1818,7 @@
 		"RETALIATE": "对目标造成SPECIAL，数值相当于[150,SP]%的ATK。每有一只倒下的我方宝可梦，额外攻击一次。",
 		"SLASH": "对目标造成[10,20,40,SP]点SPECIAL。该招式可以暴击，且CRIT_CHANCE额外提升[30,60,90]%。",
 		"OUTRAGE": "使用者陷入CONFUSION 2秒，并对目标和相邻敌方宝可梦造成SPECIAL，数值相当于自身ATK的[150,200,250,SP]%。",
-		"LUNGE": "跳向ATK最高的敌方宝可梦，对其造成[50,SP]点SPECIAL并降低其[5,SP]点ATK。",
+		"LUNGE": "跳至ATK最高的敌方宝可梦身边，对其造成[50,SP]点SPECIAL并降低其[5,SP]点ATK。",
 		"KNOCK_OFF": "对目标造成[90,SP]点SPECIAL。若其有携带道具，将所有道具移除，且每个道具使此招式伤害增加[30,SP]。",
 		"FISHIOUS_REND": "对目标造成[80,SP]点SPECIAL。若使用者的SPEED高于目标，造成的伤害翻倍。",
 		"RECOVER": "恢复最大HP的[25,SP]%。",
@@ -2011,7 +2016,8 @@
 		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只相邻的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只相邻的FAIRY宝可梦，便恢复[30,SP]点HP。",
 		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
 		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
-		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至相邻我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP"
+		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至相邻我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP",
+		"AXE_KICK": "跳至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,SP]点SPECIAL，并移除其[15,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2150,7 +2156,7 @@
 		"GUTS": "格挡减免3点伤害。",
 		"STURDY": "格挡减免6点伤害。",
 		"DEFIANT": "格挡减免9点伤害。",
-		"JUSTIFIED": "格挡减免12点伤害。",
+		"JUSTIFIED": "格挡减免12点伤害。格挡8次即触发击退。",
 		"AMNESIA": "提升50点AP。",
 		"LIGHT_SCREEN": "提升100点AP。每3轮商店必然刷出一只未知图腾。",
 		"EERIE_SPELL": "提升150点AP。每场战斗后，进入一次未知图腾商店。",
