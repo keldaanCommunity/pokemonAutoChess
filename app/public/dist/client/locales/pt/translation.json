@@ -1388,7 +1388,7 @@
 		"ABSORB": "Oferece [30,60,120,SP] SPECIAL e cura [3,6,12,SP] para aliados adjacentes",
 		"ROLLOUT": "Aumenta a DEF em [2,5,10,SP] e trata 2x a DEF como SPECIAL",
 		"THRASH": "Aumente o ATK em [100,SP]% e torne-se CONFUSION por 3s",
-		"SOLAR_BEAM": "Distribui [30,60,120,SP] SPECIAL em linha reta atrás do alvo. Se o tempo estiver ensolarado, os alvos são BURN por 3s e restauram 40 PP",
+		"SOLAR_BEAM": "Cause [25,50,100,SP] de dano SPECIAL a todos os Pokémon inimigos em uma linha atrás do alvo e cause BURN neles por 3 segundos. Se o Pokémon estiver no holofote ou se o tempo estiver SUN, dobre o dano e restaure 40 PP.",
 		"MAGMA_STORM": "O alvo fica preso em um redemoinho de fogo que causa [80,SP] SPECIAL antes de se mover para um alvo adjacente",
 		"DIRE_CLAW": "Causa [15,30,60,SP] SPECIAL no alvo. Inflige VENENO, SONO ou PARALISIA por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] ao alvo e o WOUND por 5 segundos. Se o alvo já estiver FERIDO, concede 30% de bônus SPECIAL",

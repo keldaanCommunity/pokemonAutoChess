@@ -1324,7 +1324,7 @@
 		"ABSORB": "Gây [30,60,120,SP] SPECIAL và hồi [3,6,12,SP] cho đồng minh ở gần",
 		"ROLLOUT": "Tăng [2,5,10,SP] DEF và gây SPECIAL bằng 2 lần chỉ số DEF",
 		"THRASH": "Tăng [100,SP]% ATK nhưng bị CONFUSION trong 3 giây",
-		"SOLAR_BEAM": "Gây [30,60,120,SP] SPECIAL thẳng hàng sau mục tiêu. Nếu thời tiết là SUN, mục tiêu bị BURN trong 3 giây và hồi phục 40 PP",
+		"SOLAR_BEAM": "Gây [25,50,100,SP] ĐẶC BIỆT lên tất cả Pokémon địch đứng thành hàng phía sau mục tiêu và BURN chúng trong 3 giây. Nếu Pokémon đang ở trong tầm ngắm hoặc thời tiết xấu, tăng gấp đôi sát thương và hồi 40 PP.",
 		"MAGMA_STORM": "Mục tiêu bị nhốt trong lốc xoáy lửa. Lốc xoáy lửa gây [80,SP] SPECIAL trước khi di chuyển đến một mục tiêu gần nó",
 		"DIRE_CLAW": "Gây [15,30,60,SP] SPECIAL lên mục tiêu. Gây ra hiệu ứng POISON, SLEEP hoặc PARALYSIS trong 3 giây",
 		"SLASHING_CLAW": "Gây [15,30,60,SP] lên mục tiêu và gây hiệu ứng WOUND trong 5 giây. Nếu mục tiêu đã bị WOUND, gây thêm 30% SPECIAL",

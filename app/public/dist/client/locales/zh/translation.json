@@ -1716,7 +1716,7 @@
 		"ROLLOUT": "提升[2,5,10,SP]点DEF，随后对目标造成SPECIAL，数值相当于DEF乘以2。",
 		"ICE_BALL": "提升使用者10点SPE_DEF，随后对目标造成SPECIAL，数值相当于[50,100,150,SP]%的SPE_DEF加[10,20,30,SP]。",
 		"THRASH": "提升[100,SP]%的ATK，但陷入CONFUSION 3秒。",
-		"SOLAR_BEAM": "对目标身后的一条直线上的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL。若天气为SUN，造成的伤害翻倍，还会恢复40点PP并使击中的宝可梦陷入BURN 3秒。",
+		"SOLAR_BEAM": "对目标后方直线上的所有敌方宝可梦造成 [25,50,100,SP] 点特殊伤害，并使其 BURN 持续 3 秒。如果宝可梦位于聚光灯下或天气为 SUN，则伤害加倍并恢复 40 点能量。",
 		"MAGMA_STORM": "用火焰漩涡困住目标，对其造成[80,SP]点SPECIAL。这个漩涡随后会传递到相邻的目标身上。",
 		"DIRE_CLAW": "对目标造成[15,30,60,SP]点SPECIAL。目标可能陷入POISONNED，SLEEP或PARALYSIS之一3秒。",
 		"SLASHING_CLAW": "对目标造成[15,30,60,SP]点伤害，并使其陷入WOUND 5秒。若目标已经处于WOUND，造成的伤害增加30%。",

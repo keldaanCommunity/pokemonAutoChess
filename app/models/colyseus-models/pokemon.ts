@@ -7220,8 +7220,8 @@ export class Diancie extends Pokemon {
 }
 
 export class Sunkern extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.FLORA])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.LIGHT, Synergy.FLORA])
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.SUNFLORA
   hp = 80
@@ -7236,8 +7236,8 @@ export class Sunkern extends Pokemon {
 }
 
 export class Sunflora extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE, Synergy.FLORA])
-  rarity = Rarity.EPIC
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.LIGHT, Synergy.FLORA])
+  rarity = Rarity.RARE
   stars = 2
   hp = 160
   atk = 20
