@@ -598,7 +598,7 @@ export class OnDragDropItemCommand extends Command<
         if (pokemon.evolution === Pkm.DEFAULT) {
           client.send(Transfer.DRAG_DROP_CANCEL, {
             ...message,
-            text: "FULLY GROWN!",
+            text: "fully_grown",
             pokemonId: pokemon.id
           })
           return
@@ -684,13 +684,13 @@ export class OnDragDropItemCommand extends Command<
       !(isBasicItem && existingBasicItemToCombine) &&
       UnholdableItems.includes(item) === false
     ) {
-      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      client.send(Transfer.DRAG_DROP_CANCEL, { ...message, text: "full", pokemonId: pokemon.id })
       return
     }
 
     if (!isBasicItem && pokemon.items.has(item)) {
-      // prevent adding twitce the same item
-      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      // prevent adding twice the same item
+      client.send(Transfer.DRAG_DROP_CANCEL, { ...message, text: "already_held", pokemonId: pokemon.id })
       return
     }
 
@@ -744,7 +744,7 @@ export class OnDragDropItemCommand extends Command<
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
       if (ConsumableItems.includes(item) === false) {
-        // item is not holdable and has not been consumed, so we add it back to player items
+        // item is not holdable and has not been consumed, so we add it back to player items        
         player.items.push(item)
       }
     }

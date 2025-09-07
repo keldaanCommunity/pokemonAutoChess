@@ -743,8 +743,6 @@ export const ConsumableItems: Item[] = [
   ...Flavors,
   ...Sweets,
   Item.PICNIC_SET,
-  Item.RICH_MULCH,
-  Item.AMAZE_MULCH,
   Item.FIRE_SHARD,
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,
