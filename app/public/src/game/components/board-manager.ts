@@ -1,5 +1,10 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import {
+  FLOWER_POTS_POSITIONS,
+  FlowerPotMons,
+  FlowerPots
+} from "../../../../core/flower-pots"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -7,7 +12,11 @@ import { getPokemonData } from "../../../../models/precomputed/precomputed-pokem
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
-import { BOARD_WIDTH, PortalCarouselStages, SynergyTriggers } from "../../../../types/Config"
+import {
+  BOARD_WIDTH,
+  PortalCarouselStages,
+  SynergyTriggers
+} from "../../../../types/Config"
 import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
@@ -18,7 +27,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
@@ -60,13 +69,17 @@ export default class BoardManager {
   playerAvatar: PokemonAvatar | null
   opponentAvatar: PokemonAvatar | null
   scoutingAvatars: PokemonAvatar[] = []
-  groundHoles: Phaser.GameObjects.Sprite[]
   pveChestGroup: Phaser.GameObjects.Group | null
   pveChest: Phaser.GameObjects.Sprite | null
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
   berryTrees: Phaser.GameObjects.Sprite[] = []
+  flowerPots: Phaser.GameObjects.Sprite[] = []
+  flowerPokemonsInPots: PokemonSprite[] = []
+  mulchAmountText: Phaser.GameObjects.Text | null = null
+  mulchIcon: Phaser.GameObjects.Image | null = null
+  groundHoles: Phaser.GameObjects.Sprite[]
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
@@ -95,6 +108,9 @@ export default class BoardManager {
     this.pveChest = null
     this.pveChestGroup = null
     this.groundHoles = []
+    this.berryTrees = []
+    this.flowerPots = []
+    this.flowerPokemonsInPots = []
 
     if (state.phase == GamePhaseState.FIGHT) {
       this.battleMode(false)
@@ -197,6 +213,7 @@ export default class BoardManager {
     )
 
     this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
+    this.pokemons.get(pokemonUI.id)?.destroy()
     this.pokemons.set(pokemonUI.id, pokemonUI)
 
     return pokemonUI
@@ -211,10 +228,15 @@ export default class BoardManager {
   }
 
   renderBoard(phaseChanged: boolean) {
-    this.renderBerryTrees()
-    this.renderGroundHoles()
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
+
+    if (this.mode !== BoardMode.TOWN) {
+      this.renderBerryTrees()
+      this.renderFlowerPots()
+      this.renderGroundHoles()
+    }
+
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
     }
@@ -288,23 +310,23 @@ export default class BoardManager {
       )
 
       tree.setDepth(DEPTH.INANIMATE_OBJECTS).setScale(2, 2).setOrigin(0.5, 1)
-      if (this.player.berryTreesStage[i] === 0) {
+      if (this.player.berryTreesStages[i] === 0) {
         tree.anims.play("CROP")
       } else {
         tree.anims.play(
-          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStage[i]}`
+          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStages[i]}`
         )
       }
 
       tree.setInteractive()
       tree.on("pointerdown", (pointer) => {
         if (this.player.id !== this.scene.uid) return
-        if (this.scene.room && this.player.berryTreesStage[i] >= 3) {
+        if (this.scene.room && this.player.berryTreesStages[i] >= 3) {
           this.scene.room.send(Transfer.PICK_BERRY, i)
-          this.displayText(pointer.x, pointer.y, t("berry_gained"))
+          this.displayText(pointer.x, pointer.y, t("berry_gained"), true)
           tree.play("CROP")
         } else {
-          this.displayText(pointer.x, pointer.y, t("berry_unripe"))
+          this.displayText(pointer.x, pointer.y, t("berry_unripe"), true)
         }
       })
 
@@ -317,13 +339,118 @@ export default class BoardManager {
     this.berryTrees = []
   }
 
+  renderFlowerPots() {
+    this.hideFlowerPots()
+    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
+    let nbPots = SynergyTriggers[Synergy.FLORA].filter(
+      (n) => n <= floraLevel
+    ).length
+    if (this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
+      nbPots = 5
+    }
+
+    for (let i = 0; i < nbPots; i++) {
+      const potSprite = this.scene.add.sprite(
+        FLOWER_POTS_POSITIONS[i][0],
+        FLOWER_POTS_POSITIONS[i][1],
+        "flower_pots",
+        FlowerPots[i] + ".png"
+      )
+
+      potSprite
+        .setDepth(
+          i % 2 ? DEPTH.INANIMATE_OBJECTS : DEPTH.INANIMATE_OBJECTS + 0.1
+        )
+        .setScale(2, 2)
+        .setOrigin(0.5, 0.5)
+      const potPokemon = this.player.flowerPots[i]
+
+      if (potPokemon) {
+        const flowerInPot = new PokemonSprite(
+          this.scene,
+          FLOWER_POTS_POSITIONS[i][0],
+          FLOWER_POTS_POSITIONS[i][1] - 24,
+          potPokemon,
+          this.player.id,
+          false,
+          false
+        )
+        this.animationManager.animatePokemon(
+          flowerInPot,
+          PokemonActionState.SLEEP,
+          false,
+          true
+        )
+        this.flowerPokemonsInPots.push(flowerInPot)
+        this.pokemons.set(flowerInPot.id, flowerInPot)
+      }
+
+      this.flowerPots.push(potSprite)
+    }
+
+    this.updateMulchCount()
+  }
+
+  updateMulchCount() {
+    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
+    const nbPots = SynergyTriggers[Synergy.FLORA].filter(
+      (n) => n <= floraLevel
+    ).length
+    if (nbPots === 0) {
+      this.mulchAmountText?.destroy()
+      this.mulchAmountText = null
+      this.mulchIcon?.destroy()
+      this.mulchIcon = null
+      return
+    }
+
+    if (this.mulchAmountText === null) {
+      this.mulchAmountText = this.displayText(348, 622, "").setOrigin(0, 0)
+    }
+    this.mulchAmountText.setText(`${this.player.mulch}/${this.player.mulchCap}`)
+    if (this.mulchIcon === null) {
+      const mulchCollected = this.player.items.filter(i => i === Item.RICH_MULCH).length + this.player.flowerPots.reduce((acc, pot) => acc + pot.stars - 1, 0)
+      this.mulchIcon = this.scene.add.image(
+        332,
+        636,
+        "item",
+        `${mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH}.png`
+      )
+      this.mulchIcon.setScale(0.25).setDepth(DEPTH.TEXT)
+    }
+  }
+
+  hideFlowerPots() {
+    this.flowerPots.forEach((pot) => pot.destroy())
+    this.flowerPokemonsInPots.forEach((p) => {
+      p.destroy()
+      this.pokemons.delete(p.id)
+    })
+    this.flowerPots = []
+    this.flowerPokemonsInPots = []
+    if (this.mulchAmountText) {
+      this.mulchAmountText.destroy()
+      this.mulchAmountText = null
+    }
+    if (this.mulchIcon) {
+      this.mulchIcon?.destroy()
+      this.mulchIcon = null
+    }
+  }
+
   renderGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
     this.player.groundHoles.forEach((hole, index) => {
-      const [x, y] = transformBoardCoordinates(index % BOARD_WIDTH, Math.floor(index / BOARD_WIDTH) + 1)
+      const [x, y] = transformBoardCoordinates(
+        index % BOARD_WIDTH,
+        Math.floor(index / BOARD_WIDTH) + 1
+      )
       if (hole > 0) {
-        const groundHole = this.scene.add.sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`).setScale(2).setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        const groundHole = this.scene.add
+          .sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`)
+          .setScale(2)
+          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         this.groundHoles.push(groundHole)
       }
     })
@@ -334,10 +461,10 @@ export default class BoardManager {
     this.groundHoles = []
   }
 
-  displayText(x: number, y: number, label: string) {
+  displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
-      fontSize: "25px",
-      fontFamily: "Verdana",
+      fontSize: "24px",
+      fontFamily: "Jost",
       color: "#fff",
       align: "center",
       strokeThickness: 2,
@@ -352,23 +479,27 @@ export default class BoardManager {
     )
     text.setDepth(DEPTH.TEXT)
 
-    this.scene.add.tween({
-      targets: [text],
-      ease: "linear",
-      duration: 1500,
-      delay: 0,
-      alpha: {
-        getStart: () => 1,
-        getEnd: () => 0
-      },
-      y: {
-        getStart: () => y - 50,
-        getEnd: () => y - 110
-      },
-      onComplete: () => {
-        text.destroy()
-      }
-    })
+    if (tweenOut) {
+      this.scene.add.tween({
+        targets: [text],
+        ease: "linear",
+        duration: 1500,
+        delay: 0,
+        alpha: {
+          getStart: () => 1,
+          getEnd: () => 0
+        },
+        y: {
+          getStart: () => y - 50,
+          getEnd: () => y - 110
+        },
+        onComplete: () => {
+          text.destroy()
+        }
+      })
+    }
+
+    return text
   }
 
   updatePlayerAvatar() {
@@ -561,7 +692,7 @@ export default class BoardManager {
     // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
-    if (!phaseChanged) this.removePokemonsOnBoard(false) // remove immediately board sprites if arriving in battle mode
+    if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
@@ -584,9 +715,12 @@ export default class BoardManager {
     }, 0) // need to wait for next event loop for state to be up to date
   }
 
-  removePokemonsOnBoard(includingBench: boolean = false) {
+  removePokemonsOnBoard() {
     this.pokemons.forEach((pokemon) => {
-      if (includingBench === true || !isOnBench(pokemon)) {
+      if (
+        !isOnBench(pokemon) &&
+        !(FlowerPotMons.includes(PkmByIndex[pokemon.index]) && pokemon.positionY === -1)
+      ) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)
       }
@@ -623,9 +757,10 @@ export default class BoardManager {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
     this.hideLightCell()
     this.hideBerryTrees()
+    this.hideFlowerPots()
     this.hideGroundHoles()
     this.removePokemonsOnBoard()
-    this.scene.board?.pokemons.forEach(p => p.setAlpha(1))
+    this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
@@ -932,7 +1067,9 @@ export default class BoardManager {
       })
 
       // move board pokemons into the portal
-      const pokemonsToTeleport = [...this.pokemons.values()]
+      const pokemonsToTeleport = [...this.pokemons.values()].filter(
+        (p) => FlowerPotMons.includes(PkmByIndex[p.index]) === false
+      )
       for (const pokemon of pokemonsToTeleport) {
         const delay = randomBetween(0, 300)
         this.scene.tweens.add({
@@ -984,6 +1121,7 @@ export default class BoardManager {
               PokemonActionState.IDLE,
               false
             )
+            this.pokemons.get(pokemonSprite.id)?.destroy()
             this.pokemons.set(pokemonSprite.id, pokemonSprite)
           })
 
@@ -1101,6 +1239,7 @@ export default class BoardManager {
             false
           )
           pokemonSprite.setScale(0)
+          this.pokemons.get(pokemonSprite.id)?.destroy()
           this.pokemons.set(pokemonSprite.id, pokemonSprite)
 
           const [originalX, originalY] = transformEntityCoordinates(

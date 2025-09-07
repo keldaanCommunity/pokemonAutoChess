@@ -42,9 +42,9 @@ export class GroundHoleEffect extends OnSpawnEffect {
             const index = pokemon.positionY * BOARD_WIDTH + pokemon.positionX
             const holeLevel = player?.groundHoles[index] ?? 0
             let defBuff = holeLevel * [0, 1, 2, 3, 3][synergyLevel]
-            let atkBuff = holeLevel === 5 ? [0, 3, 5, 8][synergyLevel] : 0
+            let atkBuff = holeLevel === 5 ? [0, 3, 5, 8, 8][synergyLevel] : 0
             if (synergyLevel === 4) {
-                const nbFullyDugHoles = player?.groundHoles.filter(hole => hole === 4).length ?? 0
+                const nbFullyDugHoles = player?.groundHoles.slice(0, 24).filter(hole => hole === 5).length ?? 0
                 defBuff += nbFullyDugHoles
                 if (nbFullyDugHoles === 3 * 8) {
                     atkBuff += 12

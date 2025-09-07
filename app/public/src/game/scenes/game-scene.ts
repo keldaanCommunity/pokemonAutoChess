@@ -19,7 +19,7 @@ import {
   DungeonPMDO
 } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { Item, ItemRecipe } from "../../../../types/enum/Item"
+import { Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
@@ -41,6 +41,9 @@ import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
+import { FLOWER_POTS_POSITIONS } from "../../../../core/flower-pots"
+import { BOARD_WIDTH } from "../../../../types/Config"
+import { clearAbilityAnimations } from "../components/abilities-animations"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -48,6 +51,7 @@ export default class GameScene extends Scene {
   uid: string | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
   battleGroup: GameObjects.Group | undefined
+  abilitiesVfxGroup: GameObjects.Group | undefined
   animationManager: AnimationManager | undefined
   itemsContainer: ItemsContainer | undefined
   board: BoardManager | undefined
@@ -81,7 +85,7 @@ export default class GameScene extends Scene {
     this.room = data.room
     this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
-    this.started = false    
+    this.started = false
   }
 
   preload() {
@@ -117,6 +121,7 @@ export default class GameScene extends Scene {
       this.setMap(player.map)
       this.setupMouseEvents()
       this.battleGroup = this.add.group()
+      this.abilitiesVfxGroup = this.add.group()
       this.animationManager = new AnimationManager(this)
       this.minigameManager = new MinigameManager(
         this,
@@ -282,6 +287,7 @@ export default class GameScene extends Scene {
 
   updatePhase(newPhase: GamePhaseState, previousPhase: GamePhaseState) {
     this.weatherManager?.clearWeather()
+    clearAbilityAnimations(this)
     this.resetDragState()
 
     if (previousPhase === GamePhaseState.TOWN) {
@@ -400,6 +406,14 @@ export default class GameScene extends Scene {
       }
     }
 
+    for (let i = 0; i < FLOWER_POTS_POSITIONS.length; i++) {
+      const [x, y] = FLOWER_POTS_POSITIONS[i]
+      const zone = this.add.zone(x, y, 48, 48)
+      zone.setRectangleDropZone(48, 48)
+      zone.setName("flower-pot-zone")
+      zone.setData({ x, y, index: i })
+    }
+
     this.input.on("pointerdown", (pointer) => {
       if (
         pointer.leftButtonDown() &&
@@ -503,7 +517,8 @@ export default class GameScene extends Scene {
         g.x = dragX
         g.y = dragY
         if (g && this.pokemonDragged != null) {
-          const pokemon = new PokemonClasses[this.pokemonDragged!.name as Pkm]()
+          const pkm = <Pkm>this.pokemonDragged!.name
+          const pokemon = new PokemonClasses[pkm](pkm)
 
           this.dropSpots.forEach((spot) => {
             const inBench = spot.getData("y") === 0
@@ -543,11 +558,7 @@ export default class GameScene extends Scene {
           if (dropZone.name == "board-zone") {
             const [x, y] = [dropZone.getData("x"), dropZone.getData("y")]
             if (gameObject.positionX !== x || gameObject.positionY !== y) {
-              document.getElementById("game")?.dispatchEvent(
-                new CustomEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
-                  detail: { x, y, id: gameObject.id }
-                })
-              )
+              this.dispatchEvent<IDragDropMessage>(Transfer.DRAG_DROP, { x, y, id: gameObject.id })
               this.lastDragDropPokemon = gameObject
             } else {
               // RETURN TO ORIGINAL SPOT
@@ -576,17 +587,10 @@ export default class GameScene extends Scene {
         ) {
           // Item -> Item = COMBINE
           if (dropZone instanceof ItemContainer) {
-            document.getElementById("game")?.dispatchEvent(
-              new CustomEvent<IDragDropCombineMessage>(
-                Transfer.DRAG_DROP_COMBINE,
-                {
-                  detail: {
-                    itemA: dropZone.name,
-                    itemB: gameObject.name
-                  }
-                }
-              )
-            )
+            this.dispatchEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
+              itemA: dropZone.name,
+              itemB: gameObject.name
+            })
           }
           // Item -> POKEMON(board zone) = EQUIP
           else if (
@@ -596,15 +600,19 @@ export default class GameScene extends Scene {
               dropZone.getData("y") != 0
             )
           ) {
-            document.getElementById("game")?.dispatchEvent(
-              new CustomEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
-                detail: {
-                  x: dropZone.getData("x"),
-                  y: dropZone.getData("y"),
-                  id: gameObject.name
-                }
-              })
-            )
+            this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
+              zone: dropZone.name,
+              index: dropZone.getData("x") + dropZone.getData("y") * BOARD_WIDTH,
+              id: gameObject.name
+            })
+          }
+          // Item -> POKEMON(flower pot zone) = EQUIP OR MULCH
+          else if (dropZone.name === "flower-pot-zone") {
+            this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
+              zone: dropZone.name,
+              index: dropZone.getData("index"),
+              id: gameObject.name
+            })
           }
           // RETURN TO ORIGINAL SPOT
           else {
@@ -664,6 +672,13 @@ export default class GameScene extends Scene {
           if (pokemonOnCell) {
             // item dragged over a pokemon, highlight the pokemon
             this.setHovered(pokemonOnCell)
+          }
+        }
+
+        if (gameObject instanceof ItemContainer && dropZone.name === "flower-pot-zone" && Mulches.includes(gameObject.name)) {
+          const flowerMonSprite = this.board?.flowerPokemonsInPots[dropZone.getData("index")]
+          if (flowerMonSprite) {
+            this.setHovered(flowerMonSprite)
           }
         }
 
@@ -778,5 +793,13 @@ export default class GameScene extends Scene {
   shakeCamera(options?: { intensity?: number; duration?: number }) {
     if (preference("disableCameraShake")) return
     this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
+  }
+
+  dispatchEvent<T>(eventName: string, detail: T) {
+    document.getElementById("game")?.dispatchEvent(
+      new CustomEvent<T>(eventName, {
+        detail
+      })
+    )
   }
 }

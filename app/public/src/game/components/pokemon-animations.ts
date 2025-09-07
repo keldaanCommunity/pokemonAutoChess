@@ -2418,6 +2418,90 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.FAIRY_RANGE,
     hitSprite: HitSprite.FAIRY_HIT
   },
+  [Pkm.FLABEBE_BLUE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_BLUE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_BLUE]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLABEBE_ORANGE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_ORANGE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_ORANGE]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLABEBE_YELLOW]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_YELLOW]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_YELLOW]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLABEBE_WHITE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLOETTE_WHITE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
+  [Pkm.FLORGES_WHITE]: {
+    attack: AnimationType.Appeal,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FAIRY_RANGE,
+    hitSprite: HitSprite.FAIRY_HIT
+  },
   [Pkm.JANGMO_O]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Charge,
@@ -4671,7 +4755,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Twirl,
-    attackSprite: AttackSprite.GRASS_MELEE
+    attackSprite: AttackSprite.GRASS_RANGE
   },
   [Pkm.EXEGGUTOR]: {
     attack: AnimationType.Attack,
@@ -6437,21 +6521,21 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Appeal,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.FLORAGATO]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.MEOWSCARADA]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.FOMANTIS]: {
@@ -6897,5 +6981,89 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.FAIRY_HIT,
     hurt: AnimationType.Charge,
     eat: AnimationType.Sleep
+  },
+  [Pkm.SILICOBRA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.SANDACONDA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.DUNSPARCE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.DeepBreath,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.DUDUNSPARCE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hitSprite: HitSprite.GROUND_HIT
+  },
+  [Pkm.SMOLIV]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shake,
+    attackSprite: AttackSprite.GRASS_RANGE,
+    hitSprite: HitSprite.GRASS_HIT
+  },
+  [Pkm.DOLLIV]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GRASS_RANGE,
+    hitSprite: HitSprite.GRASS_HIT
+  },
+  [Pkm.ARBOLIVA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GRASS_RANGE,
+    hitSprite: HitSprite.GRASS_HIT
+  },
+  [Pkm.CHESPIN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.QUILLADIN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.CHESNAUGHT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Rumble,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.NYMBLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.DARK_HIT
+  },
+  [Pkm.LOKIX]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.DARK_HIT
   }
 }

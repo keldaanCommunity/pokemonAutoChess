@@ -11,7 +11,7 @@ import { OrientationVector } from "../../../../utils/orientation"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
-import { displayAbility, displayHit } from "../components/abilities-animations"
+import { clearAbilityAnimations, displayAbility, displayHit } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
 import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "../components/pokemon-animations"
@@ -40,6 +40,7 @@ export class DebugScene extends Phaser.Scene {
   colorFilter: Phaser.GameObjects.Rectangle | null = null
   music: Phaser.Sound.WebAudioSound | null = null
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
+  abilitiesVfxGroup: Phaser.GameObjects.Group | undefined
 
   constructor(
     height: number,
@@ -66,7 +67,9 @@ export class DebugScene extends Phaser.Scene {
     })
   }
 
-  create() { }
+  create() {
+    this.abilitiesVfxGroup = this.add.group()
+  }
 
   updateSprite(
     pkm: Pkm,
@@ -78,6 +81,7 @@ export class DebugScene extends Phaser.Scene {
     if (this.pokemon) {
       this.pokemon.destroy()
     }
+    clearAbilityAnimations(this)
     if (this.target) {
       this.target.destroy()
       clearInterval(this.attackAnimInterval)

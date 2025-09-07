@@ -47,7 +47,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.AQUA_EGG]: { [Stat.PP]: 30 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
-  [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 15 },
+  [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 50 },
   [Item.GREEN_ORB]: { [Stat.SPE_DEF]: 3 },
   [Item.DEEP_SEA_TOOTH]: { [Stat.PP]: 15, [Stat.ATK]: 7 },
   [Item.SMOKE_BALL]: { [Stat.CRIT_CHANCE]: 10 },
@@ -63,7 +63,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
   [Item.WONDER_BOX]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.STICKY_BARB]: { [Stat.DEF]: 3, [Stat.SHIELD]: 15 },
-  [Item.ABILITY_SHIELD]: { [Stat.SHIELD]: 15, [Stat.AP]: 10 },
+  [Item.ABILITY_SHIELD]: { [Stat.AP]: 10 },
   [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 10, [Stat.SPE_DEF]: 3 },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },
@@ -104,8 +104,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.COMET_SHARD]: { [Stat.ATK]: 15 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
-  [Item.TEAL_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 50 },
-  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 50 }
+  [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },
+  [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 100, [Stat.SPE_DEF]: 10 },
+  [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 100, [Stat.DEF]: 10 },
+  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 }
 }

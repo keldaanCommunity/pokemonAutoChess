@@ -170,10 +170,16 @@ export enum Item {
   CASTELIACONE = "CASTELIACONE",
   WHIPPED_DREAM = "WHIPPED_DREAM",
   BERRY_JUICE = "BERRY_JUICE",
+  OLIVE_OIL = "OLIVE_OIL",
   TART_APPLE = "TART_APPLE",
   SWEET_APPLE = "SWEET_APPLE",
   SIRUPY_APPLE = "SIRUPY_APPLE",
-  SWEET_HERB = "SWEET_HERB",
+  HERBA_MYSTICA = "HERBA_MYSTICA",
+  HERBA_MYSTICA_SWEET = "HERBA_MYSTICA_SWEET",
+  HERBA_MYSTICA_SPICY = "HERBA_MYSTICA_SPICY",
+  HERBA_MYSTICA_SOUR = "HERBA_MYSTICA_SOUR",
+  HERBA_MYSTICA_BITTER = "HERBA_MYSTICA_BITTER",
+  HERBA_MYSTICA_SALTY = "HERBA_MYSTICA_SALTY",
   MOOMOO_MILK = "MOOMOO_MILK",
   BERRIES = "BERRIES",
   HONEY = "HONEY",
@@ -217,7 +223,9 @@ export enum Item {
   RUSTED_SWORD = "RUSTED_SWORD",
   SCROLL_OF_WATERS = "SCROLL_OF_WATERS",
   SCROLL_OF_DARKNESS = "SCROLL_OF_DARKNESS",
-  MYSTERY_BOX = "MYSTERY_BOX"
+  MYSTERY_BOX = "MYSTERY_BOX",
+  RICH_MULCH = "RICH_MULCH",
+  AMAZE_MULCH = "AMAZE_MULCH",
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -225,18 +233,18 @@ export const AllItems: Item[] = Object.values(Item)
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,
-  Item.COIN,
-  Item.NUGGET,
-  Item.BIG_NUGGET,
   Item.AMULET_COIN,
   Item.GIMMIGHOUL_COIN,
   Item.EXCHANGE_TICKET,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
   Item.TREASURE_BOX,
+  Item.TRASH,
   Item.FIRE_SHARD,
   Item.OLD_ROD,
   Item.GOOD_ROD,
   Item.SUPER_ROD,
-  Item.TRASH,
   Item.CHEF_HAT,
   Item.PICNIC_SET,
   Item.VANILLA_FLAVOR,
@@ -248,6 +256,8 @@ export const SpecialItems: Item[] = [
   Item.RUBY_SWIRL_FLAVOR,
   Item.CARAMEL_SWIRL_FLAVOR,
   Item.RAINBOW_SWIRL_FLAVOR,
+  Item.RICH_MULCH,
+  Item.AMAZE_MULCH,
   Item.COMFEY,
   Item.METEORITE,
   Item.TEAL_MASK,
@@ -439,17 +449,17 @@ export const SynergyStones = [
 
 export const SynergyGems = [
   Item.FIRE_GEM,
-  Item.NORMAL_GEM,
   Item.ROCK_GEM,
-  Item.WATER_GEM,
-  Item.POISON_GEM,
+  Item.NORMAL_GEM,
+  Item.BUG_GEM,
   Item.FLYING_GEM,
   Item.ICE_GEM,
-  Item.GHOST_GEM,
+  Item.WATER_GEM,
+  Item.STEEL_GEM,
   Item.DRAGON_GEM,
-  Item.BUG_GEM,
-  Item.DARK_GEM,
-  Item.STEEL_GEM
+  Item.POISON_GEM,
+  Item.GHOST_GEM,
+  //Item.DARK_GEM,
 ] as const
 
 export const SynergyItems = [
@@ -523,7 +533,7 @@ export const SynergyGivenByGem: Record<
   [Item.GHOST_GEM]: Synergy.GHOST,
   [Item.DRAGON_GEM]: Synergy.DRAGON,
   [Item.BUG_GEM]: Synergy.BUG,
-  [Item.DARK_GEM]: Synergy.DARK,
+  //[Item.DARK_GEM]: Synergy.DARK,
   [Item.STEEL_GEM]: Synergy.STEEL
 }
 
@@ -591,6 +601,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
 }
 
 export const Dishes = [
+  Item.OLIVE_OIL,
   Item.RAGE_CANDY_BAR,
   Item.ROCK_SALT,
   Item.TEA,
@@ -602,7 +613,12 @@ export const Dishes = [
   Item.SWEET_APPLE,
   Item.SIRUPY_APPLE,
   Item.LEFTOVERS,
-  Item.SWEET_HERB,
+  Item.HERBA_MYSTICA,
+  Item.HERBA_MYSTICA_SWEET,
+  Item.HERBA_MYSTICA_SPICY,
+  Item.HERBA_MYSTICA_SOUR,
+  Item.HERBA_MYSTICA_BITTER,
+  Item.HERBA_MYSTICA_SALTY,
   Item.HONEY,
   Item.BLACK_SLUDGE,
   Item.FRUIT_JUICE,
@@ -689,6 +705,11 @@ export const Sweets: Item[] = [
   Item.RIBBON_SWEET
 ]
 
+export const Mulches: Item[] = [
+  Item.RICH_MULCH,
+  Item.AMAZE_MULCH
+]
+
 export const UnholdableItems: Item[] = [
   ...WeatherRocks,
   ...FishingRods,
@@ -697,6 +718,7 @@ export const UnholdableItems: Item[] = [
   ...Flavors,
   ...Dishes,
   ...SynergyGems,
+  ...Mulches,
   Item.METEORITE,
   Item.MYSTERY_BOX,
   Item.TREASURE_BOX,

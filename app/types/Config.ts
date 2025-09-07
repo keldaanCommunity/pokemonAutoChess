@@ -233,7 +233,6 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.ABSOL,
   Pkm.SPIRITOMB,
   Pkm.ROTOM,
-  Pkm.PHIONE,
   Pkm.TAPU_KOKO,
   Pkm.TAPU_LELE,
   Pkm.SEVIPER,
@@ -301,10 +300,6 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.DURANT,
   Pkm.SKARMORY,
   Pkm.SIGILYPH,
-  Pkm.OGERPON_TEAL,
-  Pkm.OGERPON_WELLSPRING,
-  Pkm.OGERPON_HEARTHFLAME,
-  Pkm.OGERPON_CORNERSTONE,
   Pkm.IRON_HANDS,
   Pkm.TURTONATOR,
   Pkm.CRYOGONAL,
@@ -321,7 +316,8 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.EMOLGA,
   Pkm.TOGEDEMARU,
   Pkm.FALINKS_BRASS,
-  Pkm.DEDENNE
+  Pkm.DEDENNE,
+  Pkm.DUNSPARCE
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
@@ -395,7 +391,12 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.OKIDOGI,
   Pkm.MUNKIDORI,
   Pkm.FEZANDIPITI,
-  Pkm.CELESTEELA
+  Pkm.CELESTEELA,
+  Pkm.OGERPON_TEAL,
+  Pkm.OGERPON_WELLSPRING,
+  Pkm.OGERPON_HEARTHFLAME,
+  Pkm.OGERPON_CORNERSTONE,
+  Pkm.MANAPHY
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -441,7 +442,7 @@ export const INACTIVITY_TIMEOUT = 60 * 1000 * 30 // 30 minutes
 export const DEFAULT_SPEED = 50
 export const DEFAULT_CRIT_CHANCE = 10
 export const DEFAULT_CRIT_POWER = 2
-export const PROJECTILE_SPEED = 4
+export const BASE_PROJECTILE_SPEED = 3
 
 export const StageDuration: Record<number | "DEFAULT", number> = {
   0: 23, // adjusted for treasure town theme

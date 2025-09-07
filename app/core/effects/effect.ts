@@ -50,20 +50,20 @@ export class OnStageStartEffect extends Effect {
   apply(args: OnStageStartEffectArgs) { }
 }
 
-interface OnItemEquippedEffectArgs {
+interface OnItemDroppedEffectArgs {
   pokemon: Pokemon
   player: Player
   item: Item
   room: GameRoom
 }
 
-// applied when an item is dragged to a pokemon
-export class OnItemEquippedEffect extends Effect {
-  apply(args: OnItemEquippedEffectArgs): boolean {
+// called when an item is dragged to a pokemon ; return false to prevent equipping the item
+export class OnItemDroppedEffect extends Effect {
+  apply(args: OnItemDroppedEffectArgs): boolean {
     return true
   }
   constructor(
-    effect?: (args: OnItemEquippedEffectArgs) => boolean,
+    effect?: (args: OnItemDroppedEffectArgs) => boolean,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -222,3 +222,20 @@ export class OnMoveEffect extends Effect {
   }
 }
 
+
+// applied after taking a hit that removed all the remaining shield
+interface OnShieldDepletedEffectArgs {
+  pokemon: PokemonEntity
+  attacker: PokemonEntity | null
+  board: Board
+}
+
+export class OnShieldDepletedEffect extends Effect {
+  override apply(args: OnShieldDepletedEffectArgs) { }
+  constructor(
+    effect?: (args: OnShieldDepletedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}

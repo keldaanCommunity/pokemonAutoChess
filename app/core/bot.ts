@@ -2,6 +2,7 @@ import Player from "../models/colyseus-models/player"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
 import { Emotion } from "../types"
+import { PokemonActionState } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 
 export default class Bot {
@@ -40,6 +41,7 @@ export default class Bot {
       this.step += 1
       this.progress -= this.scenario.steps[this.step].roundsRequired
       this.updatePlayerTeam()
+      this.updateFlowerPots()
     }
   }
 
@@ -73,6 +75,22 @@ export default class Bot {
       }
 
       this.player.updateSynergies()
+    }
+  }
+
+  updateFlowerPots() {
+    if (this.step % 3 === 0 && this.step >= 6 && this.step <= 30) {
+      const mulchIndex = Math.floor(this.step / 3) - 2
+      const potIndex = mulchIndex % 4
+      const flowerPot = this.player.flowerPots[potIndex]
+      if (flowerPot && flowerPot.evolution) {
+        const potEvolution = PokemonFactory.createPokemonFromName(
+          flowerPot.evolution,
+          this.player
+        )
+        potEvolution.action = PokemonActionState.SLEEP
+        this.player.flowerPots[potIndex] = potEvolution
+      }
     }
   }
 }

@@ -1,14 +1,20 @@
 import { SetSchema } from "@colyseus/schema"
+import { get } from "http"
 import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import {
+  FLOWER_POTS_POSITIONS,
+  FlowerMonByPot,
+  FlowerPots
+} from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import {
   type Emotion,
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
-import { AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
+import { AbilityAnimationArgs, AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
@@ -32,7 +38,10 @@ import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { logger } from "../../../../utils/logger"
 import { clamp, min } from "../../../../utils/number"
-import { OrientationArray, OrientationVector } from "../../../../utils/orientation"
+import {
+  OrientationArray,
+  OrientationVector
+} from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
@@ -40,7 +49,7 @@ import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import { displayAbility } from "./abilities-animations"
+import { addAbilitySprite, displayAbility } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
 import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
@@ -81,7 +90,6 @@ export default class PokemonSprite extends DraggableObject {
   ap: number
   life: number | undefined
   shield: number | undefined
-  projectile: GameObjects.Sprite | undefined
   itemsContainer: ItemsContainer
   orientation: Orientation
   action: PokemonActionState
@@ -620,7 +628,7 @@ export default class PokemonSprite extends DraggableObject {
     this.add(resurectAnim)
   }
 
-  displayAnimation(anim: string) {
+  displayAnimation(anim: string, args: Partial<AbilityAnimationArgs> = {}) {
     return displayAbility({
       scene: this.scene as GameScene,
       pokemonsOnBoard: [],
@@ -635,7 +643,8 @@ export default class PokemonSprite extends DraggableObject {
       targetX: this.targetX ?? -1,
       targetY: this.targetY ?? -1,
       flip: this.flip,
-      ap: this.ap
+      ap: this.ap,
+      ...args
     })
   }
 
@@ -651,6 +660,44 @@ export default class PokemonSprite extends DraggableObject {
         this.flip
       )
     })
+  }
+
+  blossomAnimation() {
+    const scene = <GameScene>this.scene
+    const flowerPot = FlowerPots.find((pot) =>
+      FlowerMonByPot[pot].includes(PkmByIndex[this.index])
+    )
+    if (flowerPot) {
+      scene.board?.flowerPokemonsInPots
+        .find((p) => p.index === this.index)
+        ?.destroy()
+      const [startX, startY] =
+        FLOWER_POTS_POSITIONS[FlowerPots.indexOf(flowerPot)]
+      addAbilitySprite(scene, Ability.PETAL_BLIZZARD, 0, [startX, startY - 24])
+      this.moveManager.setEnable(false)
+      this.setPosition(startX, startY)
+      const [x, y] = transformEntityCoordinates(
+        this.positionX,
+        this.positionY,
+        this.flip
+      )
+
+      scene.animationManager?.animatePokemon(
+        this,
+        PokemonActionState.HOP,
+        this.flip,
+        false
+      )
+      scene.tweens.add({
+        targets: this,
+        x,
+        y,
+        duration: 1000,
+        onComplete: () => {
+          this.moveManager.setEnable(true)
+        }
+      })
+    }
   }
 
   emoteAnimation() {
@@ -750,6 +797,13 @@ export default class PokemonSprite extends DraggableObject {
             setTimeout(() => {
               itemSprite.destroy()
               shinyEffect.destroy()
+              if (buriedItem === Item.COIN) {
+                g.displayMoneyGain(this.x, this.y - 70, 1)
+              } else if (buriedItem === Item.NUGGET) {
+                g.displayMoneyGain(this.x, this.y - 70, 3)
+              } else if (buriedItem === Item.BIG_NUGGET) {
+                g.displayMoneyGain(this.x, this.y - 70, 10)
+              }
             }, 1000)
           }
         })

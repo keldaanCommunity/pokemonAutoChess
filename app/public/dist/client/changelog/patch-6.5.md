@@ -7,6 +7,18 @@
 - Gigalith
 - Togedemaru
 - Dedenne
+- Silicobra
+- Sandaconda
+- Dunsparce
+- Dudunsparce
+- Smoliv
+- Dolliv
+- Arboliva
+- Chespin
+- Quilladin
+- Chesnaught
+- Nymble
+- Lokix
 
 # Changes to Pokemon & Abilities
 
@@ -25,10 +37,28 @@
 - Change Magnet Bomb (Magnemite line): all enemies affected are also locked for 1.5 second.
 - Revert Capsakid nerf from 6.3:  PP 110 → 100
 - Nidoran Female now only show up in Poison regions
+- Change Plusle/Minum types: Electric/Fairy -> Electric/Field
+- Change Sprigatito line types: Grass/Field/Dark -> Grass/Flora/Dark ; Sprigatito line is no longer regional
+- Change Fomantis line types: Grass/Light/Fighting → Flora/Light/Fighting
+- Seedot line is now regional, reserved to Dark regions
+- Mudkip line is now regional
+- Gossifleur line is now regional
+- Bellsprout line, Chikorita line and Hoppip line are now in Special category
+- New ability for Chikorita line: Sweet Scent ; buffed Sweet Scent: now also reduce speed by 12
+- Flabébé line now has 5 color variations. Their color indicates the first bud to blossom.
+- Change sell price of Remoraid: 3 → 2 gold and Octillery 10 → 7 gold
+- Rework Ogerpon ; now legendary. Masks have new effects and higher base stats. Ogerpon loses its mask when its shield is depleted.
+- Rework Manaphy: now Legendary, new ability: Heart Swap ; now spawns Phione if holding an Aqua Egg
+- Nerf Galarian Zigzagoon PP 50 → 80 ; Galarian Linoone: PP 50 → 80; HP 180 → 170; Def 14 → 12 ; Obstagoon HP 280 → 250, Def 16 → 14
+- Buff Duraludon line: PP 110 → 100
+- Sunkern line is Rare Grass/Light/Flora ; Solar beam change: Deal 25/50/100 special damage to all enemy Pokémon in a line behind the target, and BURN them for 3 seconds. If user is in the spotlight or if the weather is SUN, deals double damage and restore 40 PP.
 
 # Changes to Synergies
 
 - Ground rework: Ground Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages).
+- Flora rework: When a Flora Pokémon is KO'd, a Flower Pot blossoms and you collect mulch. Higher ⭐ units give more mulch, which can be used to evolve your Flower Pots.
+- Nerf Aquatic: status duration -30/60/90% → -30/50/70%
+- Nerf Fighting: damage reduction 4/7/10/13 → 3/6/9/12. New effect at Fighting 8: throw target after 8 hits instead of 10
 - Weather rocks are no longer collected during PVE rounds
 
 # Changes to Items
@@ -39,6 +69,13 @@
 - Buff Float Stone: 5 → 10 speed
 - Buff Black Augurite: 5 → 10% less critical damage
 - Buff Smelly Clay: 10 → 15% less chance to be poisonned
+- Buff Kings Rock: 100 + ~~30~~ 35 % of max HP as shield
+- Buff Star Dust: base shield 15 → 50
+- Nerf Shiny Charm: protect duration 2 → 1.5 second
+- Nerf Ability Shield: removed 15 base shield
+- Nerf Razor Fang: Armor break duration 4 → 2 seconds
+- Buff Rock Salt: also gives 15% of max HP as SHIELD
+- Sweet Herb is replaced by Herba Mystica, which comes in 5 flavors and gives Field effects or Rune Protect
 
 # Changes to Town Encounters
 
@@ -46,6 +83,7 @@
 
 # Gameplay
 
+- Speed stat now also influences projectile travel time for ranged attackers, from 3 tiles per second at 0 speed to 12 tiles per second at 300 speed.
 - Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
 - Aquatic no longer increase Curse delay ; instead, when curse status is cleared, the remaining time + 1 second is stored in memory, and will be used if Curse status is reapplied again
 
@@ -56,8 +94,11 @@
 
 # Bugfix
 
+- Fix fairy splash enabled even when fairy synergy is inactive
+- Hidden power abilities now truly make the user vanish, and no longer procs items like shiny charm or max revive
+
 # Misc
 
 - The amount of elo gained on the first games of a fresh new account is increased, and progressively decrease down to the standard K=32 factor after 20 games played. [More details here](https://discord.com/channels/737230355039387749/1404514365406969868)
-- New title: Mole
+- New titles: Mole, Blossomed
 

@@ -1,4 +1,5 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
+import { t } from "i18next"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
@@ -55,10 +56,13 @@ import {
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
+import { FireHitEffect, MonsterKillEffect } from "./effects/synergies"
 import {
-  FireHitEffect,
-  MonsterKillEffect
-} from "./effects/synergies"
+  FlowerMonByPot,
+  FlowerPot,
+  FlowerPots,
+  getFlowerPotsUnlocked
+} from "./flower-pots"
 import { IdleState } from "./idle-state"
 import { ItemStats } from "./items"
 import MovingState from "./moving-state"
@@ -309,33 +313,35 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker &&
         !attacker.items.has(Item.PROTECTIVE_PADS)
       ) {
-        this.commands.push(new DelayedCommand(() => {
-          const bounceCrit =
-            crit ||
-            (this.effects.has(EffectEnum.ABILITY_CRIT) &&
-              chance(this.critChance, this))
-          const bounceDamage = Math.round(
-            ([0.5, 1][this.stars - 1] ?? 1) *
-            damage *
-            (1 + this.ap / 100) *
-            (bounceCrit ? this.critPower : 1)
-          )
-          this.broadcastAbility({
-            skill: attacker.skill,
-            positionX: this.positionX,
-            positionY: this.positionY,
-            targetX: attacker.positionX,
-            targetY: attacker.positionY
-          })
-          attacker.handleDamage({
-            damage: bounceDamage,
-            board,
-            attackType: AttackType.SPECIAL,
-            attacker: this,
-            shouldTargetGainMana: true,
-            isRetaliation: true // important to not trigger infinite loop between two magic bounces
-          })
-        }, 500))
+        this.commands.push(
+          new DelayedCommand(() => {
+            const bounceCrit =
+              crit ||
+              (this.effects.has(EffectEnum.ABILITY_CRIT) &&
+                chance(this.critChance, this))
+            const bounceDamage = Math.round(
+              ([0.5, 1][this.stars - 1] ?? 1) *
+              damage *
+              (1 + this.ap / 100) *
+              (bounceCrit ? this.critPower : 1)
+            )
+            this.broadcastAbility({
+              skill: attacker.skill,
+              positionX: this.positionX,
+              positionY: this.positionY,
+              targetX: attacker.positionX,
+              targetY: attacker.positionY
+            })
+            attacker.handleDamage({
+              damage: bounceDamage,
+              board,
+              attackType: AttackType.SPECIAL,
+              attacker: this,
+              shouldTargetGainMana: true,
+              isRetaliation: true // important to not trigger infinite loop between two magic bounces
+            })
+          }, 500)
+        )
       }
       return { death: false, takenDamage: 0 }
     } else {
@@ -847,26 +853,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     })
 
-    if (this.hasSynergyEffect(Synergy.ICE)) {
+    if (this.hasSynergyEffect(Synergy.ICE) && this.types.has(Synergy.ICE)) {
       const nbIcyRocks =
         this.player && this.simulation.weather === Weather.SNOW
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
-      if (this.types.has(Synergy.ICE) || nbIcyRocks > 0) {
-        let freezeChance = 0
-        if (this.effects.has(EffectEnum.CHILLY)) {
-          freezeChance = 0.2
-        } else if (this.effects.has(EffectEnum.FROSTY)) {
-          freezeChance = 0.3
-        } else if (this.effects.has(EffectEnum.FREEZING)) {
-          freezeChance = 0.4
-        } else if (this.effects.has(EffectEnum.SHEER_COLD)) {
-          freezeChance = 0.4
-        }
-        freezeChance += nbIcyRocks * 0.05
-        if (chance(freezeChance, this)) {
-          target.status.triggerFreeze(2000, target)
-        }
+
+      let freezeChance = 0
+      if (this.effects.has(EffectEnum.CHILLY)) {
+        freezeChance = 0.2
+      } else if (this.effects.has(EffectEnum.FROSTY)) {
+        freezeChance = 0.3
+      } else if (this.effects.has(EffectEnum.FREEZING)) {
+        freezeChance = 0.4
+      } else if (this.effects.has(EffectEnum.SHEER_COLD)) {
+        freezeChance = 0.4
+      }
+      freezeChance += nbIcyRocks * 0.05
+      if (chance(freezeChance, this)) {
+        target.status.triggerFreeze(2000, target)
       }
     }
 
@@ -934,8 +939,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) === 1 &&
       !this.items.has(Item.PROTECTIVE_PADS)
     ) {
-      const crit = target.effects.has(EffectEnum.ABILITY_CRIT) && chance(target.critChance, this)
-      const damage = Math.round(target.def * (1 + target.ap / 100) * (crit ? target.critPower : 1))
+      const crit =
+        target.effects.has(EffectEnum.ABILITY_CRIT) &&
+        chance(target.critChance, this)
+      const damage = Math.round(
+        target.def * (1 + target.ap / 100) * (crit ? target.critPower : 1)
+      )
       this.status.triggerWound(2000, this, target)
       this.handleDamage({
         damage,
@@ -1088,7 +1097,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Fighting knockback
     if (
       this.count.fightingBlockCount > 0 &&
-      this.count.fightingBlockCount % 10 === 0 &&
+      this.count.fightingBlockCount % (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) === 0 &&
       !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1
@@ -1136,7 +1145,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ].filter((effect) => effect instanceof OnDamageReceivedEffect)
 
     onDamageReceivedEffects.forEach((effect) => {
-      effect.apply({ pokemon: this, attacker, board, damage, attackType, isRetaliation })
+      effect.apply({
+        pokemon: this,
+        attacker,
+        board,
+        damage,
+        attackType,
+        isRetaliation
+      })
     })
   }
 
@@ -1150,7 +1166,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
   }) {
     // proc fairy splash damage for both the attacker and the target
-    if (target.fairySplashCooldown === 0 && target.types.has(Synergy.FAIRY)) {
+    if (target.fairySplashCooldown === 0 && target.hasSynergyEffect(Synergy.FAIRY)) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
         shockDamageFactor += 0.2
@@ -1194,7 +1210,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(4000, target)
+      target.status.triggerArmorReduction(2000, target)
     }
 
     if (target.items.has(Item.BABIRI_BERRY)) {
@@ -1246,57 +1262,45 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
 
     if (
-      target.effects.has(EffectEnum.ODD_FLOWER) ||
-      target.effects.has(EffectEnum.GLOOM_FLOWER) ||
-      target.effects.has(EffectEnum.VILE_FLOWER) ||
-      target.effects.has(EffectEnum.SUN_FLOWER)
+      target.player &&
+      (target.effects.has(EffectEnum.COTTONWEED) ||
+        target.effects.has(EffectEnum.FLYCATCHER) ||
+        target.effects.has(EffectEnum.FRAGRANT) ||
+        target.effects.has(EffectEnum.FLOWER_POWER))
     ) {
-      if (!target.simulation.flowerSpawn[target.team]) {
-        target.simulation.flowerSpawn[target.team] = true
+      target.player.collectMulch(target.stars)
+
+      const potsAvailable = getFlowerPotsUnlocked(target.player)
+      let nextPot: FlowerPot | undefined
+      if (target.team === Team.RED_TEAM) {
+        nextPot = potsAvailable[target.simulation.redFlowerSpawn]
+        target.simulation.redFlowerSpawn++
+      } else {
+        nextPot = potsAvailable[target.simulation.blueFlowerSpawn]
+        target.simulation.blueFlowerSpawn++
+      }
+
+      if (nextPot) {
         const spawnSpot =
           board.getFarthestTargetCoordinateAvailablePlace(target)
         if (spawnSpot) {
-          let flowerSpawnName = Pkm.ODDISH
-          if (target.effects.has(EffectEnum.GLOOM_FLOWER)) {
-            flowerSpawnName = Pkm.GLOOM
-          } else if (target.effects.has(EffectEnum.VILE_FLOWER)) {
-            flowerSpawnName = Pkm.VILEPLUME
-          } else if (target.effects.has(EffectEnum.SUN_FLOWER)) {
-            flowerSpawnName = Pkm.BELLOSSOM
+          const flowerToSpawn = target.player.flowerPots.find((p) =>
+            FlowerMonByPot[nextPot].includes(p.name)
+          )
+          if (!flowerToSpawn) {
+            return console.error("No flower found to spawn for pot ", nextPot)
           }
-
-          target.simulation.addPokemon(
-            PokemonFactory.createPokemonFromName(
-              flowerSpawnName,
-              target.player
-            ),
+          const entity = target.simulation.addPokemon(
+            flowerToSpawn,
             spawnSpot.x,
             spawnSpot.y,
             target.team,
             true
           )
-          if (target.player) {
-            target.player.pokemonsPlayed.add(flowerSpawnName)
-          }
+          entity.action = PokemonActionState.BLOSSOM
+          entity.cooldown = 1000
+          target.player.pokemonsPlayed.add(flowerToSpawn.name)
         }
-      }
-
-      const floraSpawn = board.cells.find(
-        (entity) =>
-          entity &&
-          entity.team === target.team &&
-          [Pkm.ODDISH, Pkm.GLOOM, Pkm.VILEPLUME, Pkm.BELLOSSOM].includes(
-            entity.name
-          )
-      )
-      const randomItem = pickRandomIn(
-        values(target.items).filter(
-          (item) => item !== Item.COMFEY && item !== Item.LEAF_STONE
-        )
-      )
-      if (floraSpawn && randomItem && floraSpawn.items.size < 3) {
-        floraSpawn.addItem(randomItem)
-        target.removeItem(randomItem)
       }
     }
 
@@ -1832,7 +1836,7 @@ export function canSell(
     return false
   }
 
-  return new PokemonClasses[pkm]().canBeSold
+  return new PokemonClasses[pkm](pkm).canBeSold
 }
 
 export function getMoveSpeed(pokemon: IPokemonEntity): number {
