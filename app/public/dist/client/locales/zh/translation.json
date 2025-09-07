@@ -503,7 +503,8 @@
 		"STATIC_SHOCK": "霹雳啪啦",
 		"SAND_SPIT": "吐沙",
 		"HYPER_DRILL": "强力钻",
-		"TERRAIN_PULSE": "大地波动"
+		"TERRAIN_PULSE": "大地波动",
+		"AXE_KICK": "下压踢"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
