@@ -13477,6 +13477,59 @@ export class AxeKickStrategy extends AbilityStrategy {
   }
 }
 
+export class ExpandingForceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // User gains PSYCHIC_FIELD, or spreads it to a nearby ally.
+    if (!pokemon.status.psychicField) {
+      pokemon.status.psychicField = true
+    } else {
+      // Find nearby ally without PSYCHIC_FIELD and give it to them
+      const nearbyAllies = board
+        .cells        
+        .filter(
+          (ally): ally is PokemonEntity =>
+            !!ally && ally.team === pokemon.team && !ally.status.psychicField
+        )
+        .sort((a, b) => distanceM(a.positionX, a.positionY, pokemon.positionX, pokemon.positionY) - distanceM(b.positionX, b.positionY, pokemon.positionX, pokemon.positionY))
+
+      if (nearbyAllies.length > 0) {
+        const chosen = nearbyAllies[0]
+        chosen.status.psychicField = true
+      }
+    }
+
+    // All allies in a PSYCHIC_FIELD: deal [10,20,40,SP] SPECIAL to adjacent enemies
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    board.cells
+      .filter(
+        (ally): ally is PokemonEntity =>
+          !!ally && ally.team === pokemon.team && ally.status.psychicField
+      )
+      .forEach(ally => {
+        ally.broadcastAbility({ skill: Ability.EXPANDING_FORCE })
+        board
+          .getAdjacentCells(ally.positionX, ally.positionY)
+          .forEach(cell => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -13963,5 +14016,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SAND_SPIT]: new SandSpitStrategy(),
   [Ability.HYPER_DRILL]: new HyperDrillStrategy(),
   [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy(),
-  [Ability.AXE_KICK]: new AxeKickStrategy()
+  [Ability.AXE_KICK]: new AxeKickStrategy(),
+  [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy()
 }

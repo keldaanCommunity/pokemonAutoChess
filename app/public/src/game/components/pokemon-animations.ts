@@ -7065,5 +7065,26 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE,
     hitSprite: HitSprite.DARK_HIT
+  },
+  [Pkm.BLIPBUG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.PSYCHIC_HIT
+  },
+  [Pkm.DOTTLER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shake,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.PSYCHIC_HIT
+  },
+  [Pkm.ORBEETLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    hitSprite: HitSprite.PSYCHIC_HIT
   }
 }
