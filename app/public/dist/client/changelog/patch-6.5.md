@@ -19,6 +19,9 @@
 - Chesnaught
 - Nymble
 - Lokix
+- Blipbug
+- Dottler
+- Orbeetle
 
 # Changes to Pokemon & Abilities
 

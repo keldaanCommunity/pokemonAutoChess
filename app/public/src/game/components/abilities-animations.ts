@@ -1292,6 +1292,7 @@ export const AbilitiesAnimations: {
   [Ability.TAUNT]: onCaster({ positionOffset: [0, -30] }),
   ["TAUNT_HIT"]: onTarget({ positionOffset: [0, -30] }),
   ["SMOKE_BALL"]: onCasterScale3,
+  [Ability.EXPANDING_FORCE]: onCaster({ ability: Ability.PSYCHIC, tint: 0xff90d0, scale: 3, depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.TAILWIND]: onCaster({
     oriented: true,
     rotation: -Math.PI / 2,
