@@ -18574,8 +18574,8 @@ export class Lokix extends Pokemon {
   hp = 180
   atk = 18
   speed = 60
-  def = 4
-  speDef = 3
+  def = 6
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.AXE_KICK
