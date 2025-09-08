@@ -1,6 +1,6 @@
 import { createObjectCsvWriter } from "csv-writer"
 import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
-import PokemonFactory from "../app/models/pokemon-factory"
+import PokemonFactory, { PkmColorVariants } from "../app/models/pokemon-factory"
 import { Ability } from "../app/types/enum/Ability"
 import { logger } from "../app/utils/logger"
 import { Synergy } from "../app/types/enum/Synergy"
@@ -33,7 +33,8 @@ const csvWriter = createObjectCsvWriter({
     { id: "familyType4", title: "Family Type 4" },
     { id: "duo", title: "Duo" },
     { id: "regional", title: "Regional" },
-    { id: "stages", title: "Nb stages" }
+    { id: "stages", title: "Nb stages" },
+    { id: "variant", title: "Variant" }
   ]
 })
 
@@ -45,6 +46,7 @@ interface PokemonData {
   stages: number
   additional: boolean
   regional: boolean
+  variant: boolean
   type1: string
   type2: string
   type3: string
@@ -97,6 +99,7 @@ export function csvExport() {
             Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
           additional: pokemonData.additional,
           regional: pokemonData.regional,
+          variant: PkmColorVariants.includes(pkm),
           duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
           type1: types[0] ?? "",
           type2: types[1] ?? "",
