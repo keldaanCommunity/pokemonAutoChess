@@ -504,7 +504,8 @@
 		"SAND_SPIT": "吐沙",
 		"HYPER_DRILL": "强力钻",
 		"TERRAIN_PULSE": "大地波动",
-		"AXE_KICK": "下压踢"
+		"AXE_KICK": "下压踢",
+		"EXPANDING_FORCE": "广域战力"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1533,7 +1534,10 @@
 		"QUILLADIN": "胖胖哈力",
 		"CHESNAUGHT": "布里卡隆",
 		"NYMBLE": "豆蟋蟀",
-		"LOKIX": "烈腿蝗"
+		"LOKIX": "烈腿蝗",
+		"BLIPBUG": "索侦虫",
+		"DOTTLER": "天罩虫",
+		"ORBEETLE": "以欧路普"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1891,7 +1895,7 @@
 		"SPIKES": "对前方3格半径内的区域投掷至多[6, SP]枚金属菱，对击中的目标造成[25,50,100,SP]点SPECIAL。菱刺会留在地上，对走到此处的非FLYING、非STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
 		"SHADOW_PUNCH": "飞向HP最低的目标。下一次攻击额外造成[30,60,120,SP]点SPECIAL。",
 		"GUNK_SHOT": "对目标造成[50,100,SP]点SPECIAL，并使其陷入POISONNED [2,4,SP]秒。",
-		"MAGNET_BOMB": "发射一枚磁铁炸弹，对目标造成[20,40,80,SP]点SPECIAL，对相邻的敌方宝可梦造成[10,20,40,SP]点SPECIAL，并将更远的敌方宝可梦拉过来。",
+		"MAGNET_BOMB": "发射一枚磁铁炸弹，对目标造成[20,40,80,SP]点SPECIAL，对相邻的敌方宝可梦造成[10,20,40,SP]点SPECIAL，并将更远的敌方宝可梦拉过来。所有受到此招式影响的敌方宝可梦陷入LOCKED 1.5秒。",
 		"MUDDY_WATER": "对前方至多3个目标喷射污浊的水，对他们造成[40,80,SP]点SPECIAL，并使他们陷入WOUND和ARMOR_BREAK 4秒。",
 		"ANCIENT_POWER": "朝目标发射石块，造成[40,80,120,SP]点SPECIAL，并提升使用者25%的AP。",
 		"MOON_DREAM": "使目标陷入SLEEP [3,6,9]秒，并使离其最近的3个我方宝可梦获得[10,20,30,SP]点SHIELD。",
@@ -1904,7 +1908,7 @@
 		"GRAVITY": "使所有敌方宝可梦陷入LOCKED [2,SP]秒。",
 		"FAKE_OUT": "对目标造成[40,80,150,SP]点SPECIAL，随后使用者降低30点AP。除非使用者的AP为负，否则使目标陷入FLINCH 3秒。",
 		"FELL_STINGER": "对目标造成[25,50,100,SP]点SPECIAL。若目标因此倒下，使用者永久提升1点ATK和10点HP。",
-		"GULP_MISSILE": "朝目标发射一只PP已满的$t(pkm.ARROKUDA)，造成[50,SP]点SPECIAL。有[20,LK]%的概率改为发射$t(pkm.PIKACHU)。",
+		"GULP_MISSILE": "朝目标发射一只PP已满的$t(pkm.ARROKUDA)，造成[55,SP]点SPECIAL。有[20,LK]%的概率改为发射$t(pkm.PIKACHU)。",
 		"SCHOOLING": "对目标和相邻敌方宝可梦造成SPECIAL，数值相当于使用者[10,SP]%的最大HP。若备战区有弱丁鱼，其将加入鱼群并永久提升使用者50点HP。",
 		"DOUBLE_SHOCK": "使用者放出强力的电击，对目标造成[50,100,200,SP]点SPECIAL，并使自身陷入PARALYSIS 3秒。",
 		"PURIFY": "移除使用者身上的负面状态，并恢复[15,30,60,SP]点HP。",
@@ -1963,7 +1967,7 @@
 		"FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对前方2格半径的锥形区域内的敌方宝可梦造成[30,60,120,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。",
 		"SALT_CURE": "相邻我方宝可梦获得[10,20,40,SP]点SHIELD，并移除他们的异常状态。相邻的WATER，STEEL或GHOST敌方宝可梦陷入BURN 5秒。",
 		"SPICY_EXTRACT": "最近的[1,2,3]只我方宝可梦陷入RAGE [2,SP]秒。",
-		"SWEET_SCENT": "3格半径范围内的敌方宝可梦失去闪避能力，且降低[6,SP]点SPE_DEF，[12,SP]点SPEED，还有[30,LK]%的概率陷入CHARM 1秒。",
+		"SWEET_SCENT": "3格半径范围内的敌方宝可梦失去闪避能力，且降低[6,SP]点SPE_DEF和[12,SP]点SPEED，还有[30,LK]%的概率陷入CHARM 1秒。",
 		"SWALLOW": "积蓄力量，使自身提升3点DEF和SPE_DEF，至多叠加3次。若HP低于25%，则将积蓄的力量吞下，每层蓄力恢复[20,SP]%的最大HP。若叠加层数已满，则将积蓄的力量撞向前方所有敌方宝可梦，造成[40,80,150,SP]点SPECIAL。",
 		"DECORATE": "通过装饰，为最近的我方宝可梦中STRONGEST那只提升[1,2,3,SP]点ATK和[10,20,30,SP]点AP，并根据进化时使用的调味料追加额外效果。",
 		"DRAGON_CLAW": "对生命值最低的相邻敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使其陷入WOUND 4秒。",
@@ -2004,7 +2008,7 @@
 		"MIND_BEND": "使目标陷入POSSESSED [2,SP,ND=1]秒。若其处于RUNE_PROTECT或已经陷入POSSESSED，改为造成[100,SP]点SPECIAL。",
 		"CHAIN_CRAZED": "使用者自身陷入POISONNED 3秒，并提升[15,SP]点ATK，[10,SP]点DEF和20点SPEED。",
 		"STEAMROLLER": "一路碾压至最远的目标，对路径上的所有敌方宝可梦造成SPECIAL，数值相当于[40,80,150,SP]%的SPEED，并有[50,LK]%的概率使之陷入FLINCH 3秒。",
-		"MAGNET_PULL": "吸引一只随机STEEL宝可梦前来战场。在其离开前点击之以将其加入备战区。",
+		"MAGNET_PULL": "吸引一只随机STEEL宝可梦前来战场。在其离开前点击之以将其加入备战区。使用者的AP和LUCK能提升吸引到稀有宝可梦的概率。",
 		"SPIN_OUT": "漂移至我方后排，对目标造成SPECIAL，数值相当于自身[25,50,100,SP]%的SPEED，并使其陷入BLINDED 1秒。使用者失去所有来自加速的SPEED增幅。",
 		"ULTRA_THRUSTERS": "对相邻敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入BURN 2秒，同时使用者快速向后移动至安全的位置。",
 		"ELECTRO_BALL": "发射一枚在敌方宝可梦之间弹射的电球，每次弹射造成[10,20,40,SP]点SPECIAL。使用者的SPEED决定电球的飞行速度和弹射次数。",
@@ -2018,7 +2022,8 @@
 		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
 		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
 		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至相邻我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP",
-		"AXE_KICK": "跳至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,SP]点SPECIAL，并移除其[15,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。"
+		"AXE_KICK": "跳至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,SP]点SPECIAL，并移除其[15,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。",
+		"EXPANDING_FORCE": "获得PSYCHIC_FIELD，若已处于此场地下则改为使最近的不处于此场地的我方宝可梦获得之。随后所有处于PSYCHIC_FIELD的我方宝可梦对与之相邻的敌方宝可梦造成[10,20,40,SP]点SPECIAL。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2567,7 +2572,7 @@
 		"ROTOM_PHONE": "携带者也被视作GHOST宝可梦。战斗开始8秒后，在携带者附近召唤空拍洛托姆。",
 		"SILK_SCARF": "携带者也被视作NORMAL宝可梦。携带者获得的任何SHIELD提升50%。",
 		"TINY_MUSHROOM": "携带者也被视作BUG宝可梦。若携带者被复制，携带者降低50%的最大HP。",
-		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则在本轮对战的剩余时间中处于CONFUSION。",
+		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则陷入CONFUSION 3秒。",
 		"SURFBOARD": "携带者也被视作AQUATIC宝可梦。每当海浪冲刷战场时，携带者会释放$t(ability.SURF)，招式等级为当前AQUATIC的共鸣等级。",
 		"COOKING_POT": "携带者也被视作GOURMET宝可梦。处于BURN时，COOKING_POT会缓慢加热，每秒提升携带者10点SPEED。",
 		"MAX_ELIXIR": "首次释放招式1秒后，恢复最大PP的100%。",
