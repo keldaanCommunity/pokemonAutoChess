@@ -91,6 +91,7 @@
 
 - Added "Unholdable", "Consumable" and "Removable" labels in item descriptions
 - Added a tab in wiki for town encounters
+- Added filters for Additional picks, regional pokemons and evolutions in the Wiki Pokemons section
 
 # Bugfix
 

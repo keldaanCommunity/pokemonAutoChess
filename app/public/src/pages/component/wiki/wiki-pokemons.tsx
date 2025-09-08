@@ -9,7 +9,7 @@ import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomput
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { NonPkm, Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -18,12 +18,17 @@ import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
 import PokemonPortrait from "../pokemon-portrait"
+import { Checkbox } from "../checkbox/checkbox"
 
 export default function WikiPokemons() {
   const { t } = useTranslation()
   const tabs = Object.values(Rarity) as Rarity[]
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
   const [tabIndex, setTabIndex] = useState(0)
+  const [showEvolutions, setShowEvolutions] = useState(true)
+  const [showAdditional, setShowAdditional] = useState(true)
+  const [showRegional, setShowRegional] = useState(true)
+
   useEffect(() => {
     if (selectedPkm) {
       setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
@@ -39,10 +44,30 @@ export default function WikiPokemons() {
         setTabIndex(index)
       }}
     >
-      <PokemonTypeahead
-        value={selectedPkm}
-        onChange={(pkm) => setSelectedPkm(pkm)}
-      />
+      <div className="filters">
+        <Checkbox
+          checked={showEvolutions}
+          onToggle={setShowEvolutions}
+          label={t("show_evolutions")}
+          isDark
+        />
+        <Checkbox
+          checked={showAdditional}
+          onToggle={setShowAdditional}
+          label={t("pool.additional")}
+          isDark
+        />
+        <Checkbox
+          checked={showRegional}
+          onToggle={setShowRegional}
+          label={t("pool.regional")}
+          isDark
+        />
+        <PokemonTypeahead
+          value={selectedPkm}
+          onChange={(pkm) => setSelectedPkm(pkm)}
+        />
+      </div>
       <TabList>
         {tabs.map((r) => {
           return (
@@ -61,6 +86,9 @@ export default function WikiPokemons() {
               rarity={r}
               selected={selectedPkm}
               onSelect={setSelectedPkm}
+              showEvolutions={showEvolutions}
+              showAdditional={showAdditional}
+              showRegional={showRegional}
             />
           </TabPanel>
         )
@@ -75,18 +103,32 @@ export default function WikiPokemons() {
 export function WikiPokemon(props: {
   rarity: Rarity
   selected: Pkm | ""
+  showEvolutions: boolean
+  showAdditional: boolean
+  showRegional: boolean
   onSelect: (pkm: Pkm) => void
 }) {
   const pokemons = useMemo(
     () =>
       (PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity])
-        .filter((p) => p !== Pkm.DEFAULT)
+        .filter((p, index, list) => {
+          if (NonPkm.includes(p)) return false
+          const { additional, regional } = getPokemonData(p)
+          if (!props.showAdditional && additional) return false
+          if (!props.showRegional && regional) return false
+          if (props.showEvolutions) return true
+
+          // remove if already one member of family in the list
+          else return (
+            list.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index
+          )
+        })
         .sort((a: Pkm, b: Pkm) => {
           return PkmFamily[a] === PkmFamily[b]
             ? getPokemonData(a).stars - getPokemonData(b).stars
             : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
         }),
-    [props.rarity]
+    [props.rarity, props.showAdditional, props.showRegional, props.showEvolutions]
   ) as Pkm[]
 
   return (

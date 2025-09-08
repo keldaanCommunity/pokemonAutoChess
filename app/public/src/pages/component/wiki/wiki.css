@@ -81,10 +81,11 @@
   border-radius: 2px;
 }
 
-#wiki-page .pokemon-typeahead {
+#wiki-page .filters {
   float: right;
-  font-size: 80%;
-  padding: 0px 16px 0px 8px;
+  display: flex;
+  gap: 0.5em;
+  font-size: 90%;
 }
 
 #wiki-page p.description {
