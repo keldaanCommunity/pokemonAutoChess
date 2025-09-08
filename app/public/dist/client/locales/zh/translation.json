@@ -504,7 +504,8 @@
 		"SAND_SPIT": "吐沙",
 		"HYPER_DRILL": "强力钻",
 		"TERRAIN_PULSE": "大地波动",
-		"AXE_KICK": "下压踢"
+		"AXE_KICK": "下压踢",
+		"EXPANDING_FORCE": "广域战力"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1533,7 +1534,10 @@
 		"QUILLADIN": "胖胖哈力",
 		"CHESNAUGHT": "布里卡隆",
 		"NYMBLE": "豆蟋蟀",
-		"LOKIX": "烈腿蝗"
+		"LOKIX": "烈腿蝗",
+		"BLIPBUG": "索侦虫",
+		"DOTTLER": "天罩虫",
+		"ORBEETLE": "以欧路普"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2018,7 +2022,8 @@
 		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,SP]点SPECIAL并使之陷入BLINDED 2秒。",
 		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
 		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至相邻我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP",
-		"AXE_KICK": "跳至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,SP]点SPECIAL，并移除其[15,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。"
+		"AXE_KICK": "跳至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,SP]点SPECIAL，并移除其[15,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。",
+		"EXPANDING_FORCE": "获得PSYCHIC_FIELD，若已处于此场地下则改为使最近的不处于此场地的我方宝可梦获得之。随后所有处于PSYCHIC_FIELD的我方宝可梦对与之相邻的敌方宝可梦造成[10,20,40,SP]点SPECIAL。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2567,7 +2572,7 @@
 		"ROTOM_PHONE": "携带者也被视作GHOST宝可梦。战斗开始8秒后，在携带者附近召唤空拍洛托姆。",
 		"SILK_SCARF": "携带者也被视作NORMAL宝可梦。携带者获得的任何SHIELD提升50%。",
 		"TINY_MUSHROOM": "携带者也被视作BUG宝可梦。若携带者被复制，携带者降低50%的最大HP。",
-		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则在本轮对战的剩余时间中处于CONFUSION。",
+		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则陷入CONFUSION 3秒。",
 		"SURFBOARD": "携带者也被视作AQUATIC宝可梦。每当海浪冲刷战场时，携带者会释放$t(ability.SURF)，招式等级为当前AQUATIC的共鸣等级。",
 		"COOKING_POT": "携带者也被视作GOURMET宝可梦。处于BURN时，COOKING_POT会缓慢加热，每秒提升携带者10点SPEED。",
 		"MAX_ELIXIR": "首次释放招式1秒后，恢复最大PP的100%。",
