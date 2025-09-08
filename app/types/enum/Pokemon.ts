@@ -77,6 +77,7 @@ export enum Pkm {
   BLACEPHALON = "BLACEPHALON",
   BLASTOISE = "BLASTOISE",
   BLAZIKEN = "BLAZIKEN",
+  BLIPBUG = "BLIPBUG",
   BLISSEY = "BLISSEY",
   BONSLEY = "BONSLEY",
   BOUNSWEET = "BOUNSWEET",
@@ -200,6 +201,7 @@ export enum Pkm {
   DODUO = "DODUO",
   DOLLIV = "DOLLIV",
   DONPHAN = "DONPHAN",
+  DOTTLER = "DOTTLER",
   DOUBLADE = "DOUBLADE",
   DRACOVISH = "DRACOVISH",
   DRACOZOLT = "DRACOZOLT",
@@ -609,6 +611,7 @@ export enum Pkm {
   OMANYTE = "OMANYTE",
   OMASTAR = "OMASTAR",
   ONIX = "ONIX",
+  ORBEETLE = "ORBEETLE",
   ORIGIN_GIRATINA = "ORIGIN_GIRATINA",
   OSHAWOTT = "OSHAWOTT",
   OVERQWIL = "OVERQWIL",
@@ -1996,9 +1999,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ROOKIDEE]: "0821",
   [Pkm.CORVISQUIRE]: "0822",
   [Pkm.CORVIKNIGHT]: "0823",
-  //[Pkm.BLIPBUG]: "0824",
-  //[Pkm.DOTTLE]: "0825",
-  //[Pkm.ORBEETLE]: "0826",
+  [Pkm.BLIPBUG]: "0824",
+  [Pkm.DOTTLER]: "0825",
+  [Pkm.ORBEETLE]: "0826",
   [Pkm.NICKIT]: "0827",
   [Pkm.THIEVUL]: "0828",
   [Pkm.GOSSIFLEUR]: "0829",
@@ -3245,7 +3248,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.QUILLADIN]: Pkm.CHESPIN,
   [Pkm.CHESNAUGHT]: Pkm.CHESPIN,
   [Pkm.NYMBLE]: Pkm.NYMBLE,
-  [Pkm.LOKIX]: Pkm.NYMBLE
+  [Pkm.LOKIX]: Pkm.NYMBLE,
+  [Pkm.BLIPBUG]: Pkm.BLIPBUG,
+  [Pkm.DOTTLER]: Pkm.BLIPBUG,
+  [Pkm.ORBEETLE]: Pkm.BLIPBUG
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

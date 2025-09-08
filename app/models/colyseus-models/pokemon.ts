@@ -18574,12 +18574,59 @@ export class Lokix extends Pokemon {
   hp = 180
   atk = 18
   speed = 60
-  def = 4
-  speDef = 3
+  def = 6
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.AXE_KICK
   additional = true
+}
+
+export class Blipbug extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.PSYCHIC])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.DOTTLER
+  hp = 60
+  atk = 4
+  speed = 58
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.EXPANDING_FORCE
+  regional = true
+}
+
+export class Dottler extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.PSYCHIC])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.ORBEETLE
+  hp = 110
+  atk = 8
+  speed = 58
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.EXPANDING_FORCE
+  regional = true
+}
+
+export class Orbeetle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.PSYCHIC, Synergy.FLYING])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 170
+  atk = 15
+  speed = 58
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.EXPANDING_FORCE
+  regional = true
 }
 
 export const PokemonClasses: Record<
@@ -19616,7 +19663,10 @@ export const PokemonClasses: Record<
   [Pkm.QUILLADIN]: Quilladin,
   [Pkm.CHESNAUGHT]: Chesnaught,
   [Pkm.NYMBLE]: Nymble,
-  [Pkm.LOKIX]: Lokix
+  [Pkm.LOKIX]: Lokix,
+  [Pkm.BLIPBUG]: Blipbug,
+  [Pkm.DOTTLER]: Dottler,
+  [Pkm.ORBEETLE]: Orbeetle
 }
 
 // declare all the classes in colyseus schema TypeRegistry
