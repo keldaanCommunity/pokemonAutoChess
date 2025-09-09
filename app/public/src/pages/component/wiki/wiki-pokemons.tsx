@@ -116,12 +116,8 @@ export function WikiPokemon(props: {
           const { additional, regional } = getPokemonData(p)
           if (!props.showAdditional && additional) return false
           if (!props.showRegional && regional) return false
-          if (props.showEvolutions) return true
-
-          // remove if already one member of family in the list
-          else return (
-            list.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index
-          )
+          if (!props.showEvolutions && PkmFamily[p] !== p && getPokemonData(PkmFamily[p]).stars !== getPokemonData(p).stars) return false
+          return true
         })
         .sort((a: Pkm, b: Pkm) => {
           return PkmFamily[a] === PkmFamily[b]

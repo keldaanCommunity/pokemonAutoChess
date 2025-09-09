@@ -62,12 +62,8 @@ export function WikiType(props: { type: Synergy }) {
     .filter((p, index, list) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-      if (showEvolutions) return true
-
-      // remove if already one member of family in the list
-      else return (
-        list.findIndex((p2) => PkmFamily[p.name] === PkmFamily[p2.name]) === index
-      )
+      if (!showEvolutions && PkmFamily[p.name] !== p.name) return false
+      return true
     })
 
   const filteredPokemons = pokemons
