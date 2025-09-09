@@ -979,8 +979,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called whenever the unit deals damage, by basic attack or ability
-  onDamageDealt({ target, damage }: { target: PokemonEntity; damage: number }) {
-    if (this.hasSynergyEffect(Synergy.HUMAN)) {
+  onDamageDealt({ target, damage, isRetaliation }: { target: PokemonEntity; damage: number; isRetaliation: boolean }) {
+    if (this.hasSynergyEffect(Synergy.HUMAN) && !isRetaliation) {
       let lifesteal = 0
       if (this.effects.has(EffectEnum.MEDITATE)) {
         lifesteal = 0.25

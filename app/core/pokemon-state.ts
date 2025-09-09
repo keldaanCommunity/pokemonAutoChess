@@ -597,7 +597,7 @@ export default abstract class PokemonState {
           pokemon.onDamageReceived({ attacker, damage: takenDamage, board, attackType, isRetaliation })
         }
         if (attacker) {
-          attacker.onDamageDealt({ target: pokemon, damage: takenDamage })
+          attacker.onDamageDealt({ target: pokemon, damage: takenDamage, isRetaliation })
           if (pokemon !== attacker) {
             // do not count self damage
             switch (attackType) {
