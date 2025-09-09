@@ -1537,7 +1537,8 @@
 		"LOKIX": "Lokix",
 		"BLIPBUG": "Blipbug",
 		"DOTTLER": "Dottler",
-		"ORBEETLE": "Orbeetle"
+		"ORBEETLE": "Orbeetle",
+		"PACHIRISU": "Pachirisu"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2864,7 +2865,8 @@
 		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP",
 		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each.",
 		"FLABEBE_COLOR": "Their color indicates the first bud to blossom",
-		"DUNSPARCE": "Dunsparce will evolve when at least 10 ground holes are fully dug on board"
+		"DUNSPARCE": "Dunsparce will evolve when at least 10 ground holes are fully dug on board",
+		"PACHIRISU": "Has [30,LK]% chance to find a buried SITRUS_BERRY after each fight"
 	},
 	"stat": {
 		"ATK": "Attack",

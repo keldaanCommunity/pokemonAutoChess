@@ -1,5 +1,6 @@
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
+import { Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -456,6 +457,21 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   player.items.push(flavor)
 })
 
+const PachirisuBerryEffect = new OnStageStartEffect(({ pokemon, room, player }) => {
+  if (!pokemon || !player) return
+  room.clock.setTimeout(() => {
+    if (chance(0.3, pokemon)) {
+      room.broadcast(Transfer.DIG, {
+        pokemonId: pokemon.id,
+        buriedItem: Item.SITRUS_BERRY
+      })
+      room.clock.setTimeout(() => {
+        player.items.push(Item.SITRUS_BERRY)
+      }, 3000)
+    }
+  }, 1000)
+})
+
 class ClearWingEffect extends PeriodicEffect {
   constructor() {
     super(
@@ -682,5 +698,6 @@ export const PassiveEffects: Partial<
       Pkm.OGERPON_WELLSPRING
     )
   ],
-  [Passive.MANAPHY]: [PhioneSpawnEffect]
+  [Passive.MANAPHY]: [PhioneSpawnEffect],
+  [Passive.PACHIRISU]: [PachirisuBerryEffect]
 }

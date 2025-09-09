@@ -615,6 +615,7 @@ export enum Pkm {
   ORIGIN_GIRATINA = "ORIGIN_GIRATINA",
   OSHAWOTT = "OSHAWOTT",
   OVERQWIL = "OVERQWIL",
+  PACHIRISU = "PACHIRISU",
   PALDEA_WOOPER = "PALDEA_WOOPER",
   PALKIA = "PALKIA",
   PALOSSAND = "PALOSSAND",
@@ -1543,7 +1544,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MOTHIM]: "0414",
   [Pkm.COMBEE]: "0415",
   [Pkm.VESPIQUEEN]: "0416",
-  //[Pkm.PACHIRISU]: "0417",
+  [Pkm.PACHIRISU]: "0417",
   [Pkm.BUIZEL]: "0418",
   [Pkm.FLOATZEL]: "0419",
   [Pkm.CHERUBI]: "0420",
@@ -3251,7 +3252,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.LOKIX]: Pkm.NYMBLE,
   [Pkm.BLIPBUG]: Pkm.BLIPBUG,
   [Pkm.DOTTLER]: Pkm.BLIPBUG,
-  [Pkm.ORBEETLE]: Pkm.BLIPBUG
+  [Pkm.ORBEETLE]: Pkm.BLIPBUG,
+  [Pkm.PACHIRISU]: Pkm.PACHIRISU
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

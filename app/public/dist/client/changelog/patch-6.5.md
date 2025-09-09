@@ -22,6 +22,7 @@
 - Blipbug
 - Dottler
 - Orbeetle
+- Pachirisu
 
 # Changes to Pokemon & Abilities
 
