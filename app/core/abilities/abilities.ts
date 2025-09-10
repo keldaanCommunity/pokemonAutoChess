@@ -9171,7 +9171,7 @@ class DarkHarvestEffect extends PeriodicEffect {
         pokemon.broadcastAbility({ skill: Ability.DARK_HARVEST })
         const board = pokemon.simulation.board
         const crit = pokemon.effects.has(EffectEnum.ABILITY_CRIT)
-          ? chance(pokemon.critChance, pokemon)
+          ? chance(pokemon.critChance / 100, pokemon)
           : false
         const darkHarvestDamage = [5, 10, 20][pokemon.stars - 1] ?? 20
         const healFactor = 0.3
@@ -12688,7 +12688,7 @@ export class ArmThrustStrategy extends AbilityStrategy {
         board,
         AttackType.PHYSICAL,
         pokemon,
-        chance(pokemon.critChance, pokemon)
+        chance(pokemon.critChance / 100, pokemon)
       )
     }
   }

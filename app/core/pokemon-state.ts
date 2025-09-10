@@ -435,7 +435,7 @@ export default abstract class PokemonState {
         if (attacker && attacker.items.has(Item.PROTECTIVE_PADS) === false && !isRetaliation) {
           const crit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
-            chance(pokemon.critChance, pokemon)
+            chance(pokemon.critChance / 100, pokemon)
           const reflectDamage = Math.round(0.5 * damage * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
           attacker.handleDamage({
             damage: reflectDamage,

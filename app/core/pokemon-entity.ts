@@ -318,7 +318,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             const bounceCrit =
               crit ||
               (this.effects.has(EffectEnum.ABILITY_CRIT) &&
-                chance(this.critChance, this))
+                chance(this.critChance / 100, this))
             const bounceDamage = Math.round(
               ([0.5, 1][this.stars - 1] ?? 1) *
               damage *
@@ -941,7 +941,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(target.critChance, this)
+        chance(target.critChance / 100, this)
       const damage = Math.round(
         target.def * (1 + target.ap / 100) * (crit ? target.critPower : 1)
       )
@@ -960,7 +960,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(target.critChance, this)
+        chance(target.critChance / 100, this)
       target.effects.delete(EffectEnum.SHELL_TRAP)
       target.broadcastAbility({ skill: "SHELL_TRAP_trigger" })
       cells.forEach((cell) => {
@@ -1083,7 +1083,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
                     board,
                     AttackType.PHYSICAL,
                     this,
-                    chance(this.critChance, this),
+                    chance(this.critChance / 100, this),
                     false
                   )
                 }
