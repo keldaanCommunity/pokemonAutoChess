@@ -222,7 +222,7 @@ export class Pokemon extends Schema implements IPokemon {
     // called at simulation start after entities are generated
   }
 
-  onSpawn(params: { entity: IPokemonEntity; simulation: Simulation }) {
+  onSpawn(params: { entity: IPokemonEntity; simulation: Simulation; isSpawn: boolean }) {
     // called after entity is added, either at simulation start or when cloned/spawned
   }
 
@@ -13661,7 +13661,7 @@ export class Smeargle extends Pokemon {
   range = 3
   skill = Ability.SKETCH
 
-  afterSimulationStart({ entity }) {
+  onSpawn({ entity }) {
     if (entity.player) {
       const allyOnTheLeft = entity.player.getPokemonAt(
         this.positionX - 1,

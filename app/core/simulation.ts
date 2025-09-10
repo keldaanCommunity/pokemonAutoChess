@@ -280,9 +280,9 @@ export default class Simulation extends Schema implements ISimulation {
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
 
-    pokemon.onSpawn({ entity: pokemonEntity, simulation: this })
+    pokemon.onSpawn({ entity: pokemonEntity, simulation: this, isSpawn })
     pokemonEntity.effectsSet.forEach((effect) => {
-      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity, player)
+      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity, player, isSpawn)
     })
 
     return pokemonEntity
