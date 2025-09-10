@@ -18629,6 +18629,21 @@ export class Orbeetle extends Pokemon {
   regional = true
 }
 
+export class Pachirisu extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.NORMAL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 14
+  speed = 61
+  def = 7
+  speDef = 10
+  maxPP = 90
+  range = 1
+  skill = Ability.NUZZLE
+  passive = Passive.PACHIRISU
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19666,7 +19681,8 @@ export const PokemonClasses: Record<
   [Pkm.LOKIX]: Lokix,
   [Pkm.BLIPBUG]: Blipbug,
   [Pkm.DOTTLER]: Dottler,
-  [Pkm.ORBEETLE]: Orbeetle
+  [Pkm.ORBEETLE]: Orbeetle,
+  [Pkm.PACHIRISU]: Pachirisu
 }
 
 // declare all the classes in colyseus schema TypeRegistry

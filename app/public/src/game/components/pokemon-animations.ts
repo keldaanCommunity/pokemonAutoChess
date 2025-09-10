@@ -7086,5 +7086,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE,
     hitSprite: HitSprite.PSYCHIC_HIT
+  },
+  [Pkm.PACHIRISU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Appeal,
+    emote: AnimationType.Pose,
+    attackSprite: AttackSprite.ELECTRIC_MELEE,
+    hitSprite: HitSprite.ELECTRIC_HIT
   }
 }
