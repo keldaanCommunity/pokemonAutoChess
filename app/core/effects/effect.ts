@@ -30,6 +30,20 @@ export class OnSpawnEffect extends Effect {
   override apply(entity: PokemonEntity, player?: Player, isSpawn?: boolean) { }
 }
 
+// effect applied when consuming a dish, either at the start of the fight or when eating a dish on the bench
+interface OnDishConsumedEffectArgs {
+  pokemon: Pokemon
+  dish: Item
+  entity?: PokemonEntity
+  isGhostOpponent: boolean
+}
+export class OnDishConsumedEffect extends Effect {
+  constructor(effect?: (args: OnDishConsumedEffectArgs) => void) {
+    super(effect)
+  }
+  override apply(args: OnDishConsumedEffectArgs) { }
+}
+
 // item effect applied on fight start of after stealing/obtaining an item
 export class OnItemGainedEffect extends Effect { }
 

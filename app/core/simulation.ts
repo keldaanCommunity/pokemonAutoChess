@@ -52,7 +52,7 @@ import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
 import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
-import { OnItemGainedEffect, OnSpawnEffect } from "./effects/effect"
+import { OnDishConsumedEffect, OnItemGainedEffect, OnSpawnEffect } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
 import { electricTripleAttackEffect, FireHitEffect, GroundHoleEffect, MonsterKillEffect, SoundCryEffect } from "./effects/synergies"
@@ -185,10 +185,14 @@ export default class Simulation extends Schema implements ISimulation {
     ]) {
       if (player) {
         player.board.forEach((pokemon) => {
-          pokemon.meal = "" // consume all meals
           const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
-          )
+          ) as PokemonEntity | undefined
+          if (pokemon.meal !== "") {
+            this.applyDishEffects(pokemon.meal, pokemon, entity, player)
+            pokemon.action = PokemonActionState.IDLE
+            pokemon.meal = "" // consume all meals
+          }
           if (entity) {
             pokemon.afterSimulationStart({
               simulation: this,
@@ -252,10 +256,6 @@ export default class Simulation extends Schema implements ISimulation {
       team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
-    if (pokemon.meal) {
-      this.applyDishEffects(pokemonEntity, pokemon.meal)
-      pokemon.action = PokemonActionState.IDLE
-    }
 
     this.board.setEntityOnCell(
       pokemonEntity.positionX,
@@ -462,15 +462,19 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyDishEffects(pokemon: PokemonEntity, dish: Item) {
+  applyDishEffects(dish: Item, pokemon: Pokemon, entity: PokemonEntity | undefined, player: Player) {
     const dishEffects = DishEffects[dish]
     if (!dishEffects) return
-    dishEffects.forEach((effect) => pokemon.effectsSet.add(effect))
+    dishEffects.forEach((effect) => {
+      entity?.effectsSet.add(effect)
+      if (effect instanceof OnDishConsumedEffect) effect.apply({ pokemon, dish, entity, isGhostOpponent: player.ghost })
+    })
 
     if (pokemon.passive === Passive.GLUTTON) {
-      pokemon.addMaxHP(20, pokemon, 0, false, true)
-      if (pokemon.player && pokemon.hp > 750) {
-        pokemon.player.titles.add(Title.GLUTTON)
+      pokemon.hp += 20
+      entity?.addMaxHP(20, entity, 0, false)
+      if (pokemon.hp > 750) {
+        player.titles.add(Title.GLUTTON)
       }
     }
   }
