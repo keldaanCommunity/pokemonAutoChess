@@ -186,12 +186,6 @@ export const DITTO_RATE = 0.005
 export const KECLEON_RATE = 1 / 150
 export const ARCEUS_RATE = 1 / 150
 
-export const AttackTypeColor: { [key in AttackType] } = {
-  [AttackType.PHYSICAL]: "#FF6E55",
-  [AttackType.SPECIAL]: "#7FC9FF",
-  [AttackType.TRUE]: "#FFD800"
-}
-
 export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
