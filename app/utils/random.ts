@@ -5,6 +5,7 @@ export function chance(
   pokemon?: { luck: number },
   cap = 1
 ): boolean {
+  if (probability === 0) return false // prevent return true if 100% luck and 0 probability
   return (
     Math.random() < max(cap)(Math.pow(probability, (1 - (pokemon?.luck ?? 0) / 100)))
   )
