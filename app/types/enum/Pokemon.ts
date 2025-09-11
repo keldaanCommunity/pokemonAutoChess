@@ -96,6 +96,7 @@ export enum Pkm {
   BURMY_SANDY = "BURMY_SANDY",
   BURMY_TRASH = "BURMY_TRASH",
   BUTTERFREE = "BUTTERFREE",
+  BUZZWOLE = "BUZZWOLE",
   CACNEA = "CACNEA",
   CACTURNE = "CACTURNE",
   CAMERUPT = "CAMERUPT",
@@ -1967,7 +1968,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SOLGALEO]: "0791",
   [Pkm.LUNALA]: "0792",
   [Pkm.NIHILEGO]: "0793",
-  //[Pkm.BUZZWOLE]: "0794",
+  [Pkm.BUZZWOLE]: "0794",
   [Pkm.PHEROMOSA]: "0795",
   [Pkm.XURKITREE]: "0796",
   [Pkm.CELESTEELA]: "0797",
@@ -3253,7 +3254,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BLIPBUG]: Pkm.BLIPBUG,
   [Pkm.DOTTLER]: Pkm.BLIPBUG,
   [Pkm.ORBEETLE]: Pkm.BLIPBUG,
-  [Pkm.PACHIRISU]: Pkm.PACHIRISU
+  [Pkm.PACHIRISU]: Pkm.PACHIRISU,
+  [Pkm.BUZZWOLE]: Pkm.BUZZWOLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
