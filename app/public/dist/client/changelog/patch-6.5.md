@@ -101,7 +101,7 @@
 
 - Fix fairy splash enabled even when fairy synergy is inactive
 - Hidden power abilities now truly make the user vanish, and no longer procs items like shiny charm or max revive
-- Human synergy no longer heals on retaliation damage
+- Human synergy no longer heals on retaliation damage provided by items
 
 # Misc
 
