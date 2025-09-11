@@ -7628,7 +7628,7 @@ export class TranseStrategy extends AbilityStrategy {
     pokemon.range = min(1)(pokemon.range - 4)
     pokemon.toMovingState()
     pokemon.cooldown = 0
-    pokemon.attackType = AttackType.PHYSICAL
+    pokemon.effects.delete(EffectEnum.SPECIAL_ATTACKS)
   }
 }
 
@@ -7844,7 +7844,6 @@ export class TransformStrategy extends AbilityStrategy {
       pokemon.speed = target.speed
       pokemon.def = target.def
       pokemon.speDef = target.speDef
-      pokemon.attackType = target.attackType
       pokemon.ap = target.ap
       pokemon.maxPP = target.maxPP
       pokemon.speed = target.speed
@@ -13491,7 +13490,7 @@ export class ExpandingForceStrategy extends AbilityStrategy {
     } else {
       // Find nearby ally without PSYCHIC_FIELD and give it to them
       const nearbyAllies = board
-        .cells        
+        .cells
         .filter(
           (ally): ally is PokemonEntity =>
             !!ally && ally.team === pokemon.team && !ally.status.psychicField

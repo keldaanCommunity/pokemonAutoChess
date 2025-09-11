@@ -40,7 +40,7 @@ export default abstract class PokemonState {
       let specialDamage = 0
       let trueDamage = 0
       let totalTakenDamage = 0
-      let attackType = pokemon.attackType
+      let attackType = pokemon.effects.has(EffectEnum.SPECIAL_ATTACKS) ? AttackType.SPECIAL : AttackType.PHYSICAL
 
       if (chance(pokemon.critChance / 100, pokemon)) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
@@ -62,7 +62,11 @@ export default abstract class PokemonState {
         pokemon.onCriticalAttack({ target, board, damage })
       }
 
-      if (pokemon.attackType === AttackType.SPECIAL) {
+      if (target.effects.has(EffectEnum.WONDER_ROOM)) {
+        attackType = AttackType.SPECIAL
+      }
+
+      if (attackType === AttackType.SPECIAL) {
         damage = Math.ceil(damage * (1 + pokemon.ap / 100))
       }
 
@@ -113,11 +117,6 @@ export default abstract class PokemonState {
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
         specialDamage += 1 * damage * (1 + pokemon.ap / 100)
-      }
-
-      if (target.effects.has(EffectEnum.WONDER_ROOM)) {
-        damage = Math.ceil(damage * (1 + pokemon.ap / 100))
-        attackType = AttackType.SPECIAL
       }
 
       let trueDamagePart = 0
@@ -530,7 +529,7 @@ export default abstract class PokemonState {
             ...pokemon.effectsSet.values(),
             ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
           ].filter((effect) => effect instanceof OnShieldDepletedEffect)
-      
+
           onShieldDepletedEffects.forEach((effect) => {
             effect.apply({ pokemon, board, attacker })
           })

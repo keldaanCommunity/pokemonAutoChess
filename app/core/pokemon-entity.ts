@@ -88,7 +88,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("int16") luck = 0
   @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("float32") critPower = DEFAULT_CRIT_POWER
-  @type("uint8") attackType: AttackType
   @type("uint16") life: number
   @type("uint16") shield = 0
   @type("uint8") team: Team
@@ -168,7 +167,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.atk = pokemon.atk
     this.def = pokemon.def
     this.speDef = pokemon.speDef
-    this.attackType = pokemon.attackType
     this.hp = pokemon.hp
     this.maxPP = pokemon.maxPP
     this.life = pokemon.hp

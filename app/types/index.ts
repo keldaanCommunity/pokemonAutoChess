@@ -340,7 +340,6 @@ export interface IPokemon {
   speed: number
   def: number
   speDef: number
-  attackType: AttackType
   atk: number
   hp: number
   range: number
@@ -539,7 +538,6 @@ export interface IPokemonEntity {
   baseAtk: number
   baseDef: number
   baseSpeDef: number
-  attackType: AttackType
   life: number
   shield: number
   team: number

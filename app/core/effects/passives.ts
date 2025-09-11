@@ -327,7 +327,7 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
       pokemon.addDefense(10, pokemon, 0, false)
       pokemon.addSpecialDefense(10, pokemon, 0, false)
       pokemon.range += 4
-      pokemon.attackType = AttackType.SPECIAL
+      pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
       if (pokemon.player) {
         pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
       }

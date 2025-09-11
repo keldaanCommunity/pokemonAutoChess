@@ -76,7 +76,6 @@ export default class PokemonSprite extends DraggableObject {
   atk: number
   def: number
   speDef: number
-  attackType: AttackType
   speed: number
   targetX: number | null
   targetY: number | null
@@ -184,7 +183,6 @@ export default class PokemonSprite extends DraggableObject {
     this.atk = pokemon.atk
     this.def = pokemon.def
     this.speDef = pokemon.speDef
-    this.attackType = pokemon.attackType
     this.types = new Set(values(pokemon.types))
     this.maxPP = pokemon.maxPP
     this.speed = pokemon.speed

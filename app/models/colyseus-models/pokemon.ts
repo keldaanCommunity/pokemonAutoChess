@@ -72,7 +72,6 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") speed = DEFAULT_SPEED
   @type("uint8") def: number = 1
   @type("uint8") speDef: number = 1
-  @type("uint8") attackType: AttackType = AttackType.PHYSICAL
   @type("uint16") atk: number = 1
   @type("uint16") hp: number = 10
   @type("uint8") range: number = 1
@@ -3905,11 +3904,7 @@ export class Mudkip extends Pokemon {
   passive = Passive.WATER_SPRING
   regional = true
 
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }): void {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<EffectEnum> }) {
     opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
@@ -3930,11 +3925,7 @@ export class Marshtomp extends Pokemon {
   passive = Passive.WATER_SPRING
   regional = true
 
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }): void {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<EffectEnum> }) {
     opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
@@ -3954,11 +3945,7 @@ export class Swampert extends Pokemon {
   passive = Passive.WATER_SPRING
   regional = true
 
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }): void {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<EffectEnum> }) {
     opponentEffects.add(EffectEnum.WATER_SPRING)
   }
 }
@@ -6734,11 +6721,7 @@ export class Victini extends Pokemon {
   range = 1
   skill = Ability.SEARING_SHOT
   passive = Passive.VICTINI
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<EffectEnum> }) {
     opponentEffects.add(EffectEnum.VICTINI_PASSIVE)
   }
 }
@@ -12886,11 +12869,7 @@ export class Murkrow extends Pokemon {
   skill = Ability.FOUL_PLAY
   passive = Passive.BAD_LUCK
   additional = true
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<EffectEnum> }) {
     opponentEffects.add(EffectEnum.BAD_LUCK)
   }
 }
@@ -12909,11 +12888,7 @@ export class Honchkrow extends Pokemon {
   skill = Ability.FOUL_PLAY
   passive = Passive.BAD_LUCK
   additional = true
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }) {
+  beforeSimulationStart({ opponentEffects }: { opponentEffects: Set<EffectEnum> }) {
     opponentEffects.add(EffectEnum.BAD_LUCK)
   }
 }
@@ -13091,7 +13066,9 @@ export class Xurkitree extends Pokemon {
   range = 2
   skill = Ability.CHARGE_BEAM
   passive = Passive.SPECIAL_ATTACK
-  attackType = AttackType.SPECIAL
+  onSpawn({ entity }: { entity: IPokemonEntity }) {
+    entity.effects.add(EffectEnum.SPECIAL_ATTACKS)
+  }
 }
 
 export class Nihilego extends Pokemon {
