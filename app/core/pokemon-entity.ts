@@ -50,6 +50,7 @@ import {
   OnAttackEffect,
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
+  OnDeathEffect,
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -1295,43 +1296,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  // called after death (does not proc if resurection)
+  // called after KO (does not proc if resurection)
   onDeath({ board }: { board: Board }) {
     if (!this.isGhostOpponent) {
       this.refToBoardPokemon.deathCount++
     }
-    const isWorkUp = this.effects.has(EffectEnum.BULK_UP)
-    const isRage = this.effects.has(EffectEnum.RAGE)
-    const isAngerPoint = this.effects.has(EffectEnum.ANGER_POINT)
-
-    if (isWorkUp || isRage || isAngerPoint) {
-      let heal = 0
-      let speedBoost = 0
-      if (isWorkUp) {
-        heal = 30
-        speedBoost = 15
-      } else if (isRage) {
-        heal = 35
-        speedBoost = 20
-      } else if (isAngerPoint) {
-        heal = 40
-        speedBoost = 25
-      }
-      const _pokemon = this // beware of closure vars
-      this.simulation.room.clock.setTimeout(() => {
-        board.forEach((x, y, value) => {
-          if (
-            value &&
-            value.team == _pokemon.team &&
-            value.types.has(Synergy.FIELD)
-          ) {
-            value.count.fieldCount++
-            value.handleHeal(heal, _pokemon, 0, false)
-            value.addSpeed(speedBoost, value, 0, false)
-          }
-        })
-      }, 16) // delay to next tick, targeting 60 ticks per second
-    }
+    this.getEffects(OnDeathEffect).forEach(effect => effect.apply({ pokemon: this, board }))
 
     if (this.status.curseVulnerability) {
       this.simulation.applyCurse(EffectEnum.CURSE_OF_VULNERABILITY, this.team)
@@ -1344,38 +1314,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (this.status.curseFate) {
       this.simulation.applyCurse(EffectEnum.CURSE_OF_FATE, this.team)
-    }
-
-    if (this.passive === Passive.PYUKUMUKU) {
-      this.broadcastAbility({ skill: Ability.EXPLOSION })
-      const adjcells = board.getAdjacentCells(this.positionX, this.positionY)
-      const damage = Math.round(0.5 * this.hp)
-      adjcells.forEach((cell) => {
-        if (cell.value && this.team != cell.value.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            this,
-            false
-          )
-        }
-      })
-    }
-
-    if (this.items.has(Item.RUSTED_SWORD)) {
-      this.items.delete(Item.RUSTED_SWORD)
-      const alliesSortByLowestAtk = (
-        board.cells.filter(
-          (p) =>
-            p && p.team === this.team && p.id !== this.id && p.items.size < 3
-        ) as PokemonEntity[]
-      ).sort((a, b) => a.atk - b.atk)
-
-      const target = alliesSortByLowestAtk[0]
-      if (target) {
-        target.addItem(Item.RUSTED_SWORD)
-      }
     }
   }
 

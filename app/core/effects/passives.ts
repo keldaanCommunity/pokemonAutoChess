@@ -29,6 +29,7 @@ import {
   OnAbilityCastEffect,
   OnAttackEffect,
   OnDamageReceivedEffect,
+  OnDeathEffect,
   OnHitEffect,
   OnKillEffect,
   OnMoveEffect,
@@ -718,6 +719,24 @@ export const PassiveEffects: Partial<
   [Passive.STENCH]: [
     new OnMoveEffect((pokemon, board, oldX, oldY, newX, newY) => {
       board.effects[oldY * board.columns + oldX] = EffectEnum.POISON_GAS
+    })
+  ],
+  [Passive.PYUKUMUKU]: [
+    new OnDeathEffect(({ pokemon, board }) => {
+      pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
+      const adjcells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      const damage = Math.round(0.5 * pokemon.hp)
+      adjcells.forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            false
+          )
+        }
+      })
     })
   ]
 }

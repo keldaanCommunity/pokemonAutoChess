@@ -55,7 +55,7 @@ import Dps from "./dps"
 import { OnDishConsumedEffect, OnItemGainedEffect, OnSpawnEffect } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
-import { electricTripleAttackEffect, FireHitEffect, GroundHoleEffect, humanHealEffect, MonsterKillEffect, SoundCryEffect } from "./effects/synergies"
+import { electricTripleAttackEffect, FireHitEffect, GroundHoleEffect, humanHealEffect, MonsterKillEffect, OnFieldDeathEffect, SoundCryEffect } from "./effects/synergies"
 import { getWonderboxItems, ItemStats } from "./items"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
@@ -1010,6 +1010,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.ANGER_POINT:
         if (types.has(Synergy.FIELD)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new OnFieldDeathEffect(effect))
         }
         break
 

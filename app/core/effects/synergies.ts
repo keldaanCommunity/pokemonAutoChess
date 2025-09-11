@@ -8,7 +8,7 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { OnAbilityCastEffect, OnAttackEffect, OnDamageDealtEffect, OnDamageDealtEffectArgs, OnKillEffect, OnSpawnEffect } from "./effect"
+import { OnAbilityCastEffect, OnAttackEffect, OnDamageDealtEffect, OnDamageDealtEffectArgs, OnDeathEffect, OnKillEffect, OnSpawnEffect } from "./effect"
 
 export class MonsterKillEffect extends OnKillEffect {
     hpBoosted: number = 0
@@ -177,3 +177,35 @@ export const humanHealEffect = new OnDamageDealtEffect(({ pokemon, damage, attac
     }
     pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
 }, EffectEnum.MEDITATE)
+
+export class OnFieldDeathEffect extends OnDeathEffect {
+    constructor(effect: EffectEnum) {
+        super(({ pokemon, board }) => {
+            let heal = 0
+            let speedBoost = 0
+            if (effect === EffectEnum.BULK_UP) {
+                heal = 30
+                speedBoost = 15
+            } else if (effect === EffectEnum.RAGE) {
+                heal = 35
+                speedBoost = 20
+            } else if (effect === EffectEnum.ANGER_POINT) {
+                heal = 40
+                speedBoost = 25
+            }
+            pokemon.simulation.room.clock.setTimeout(() => {
+                board.forEach((x, y, value) => {
+                    if (
+                        value &&
+                        value.team == pokemon.team &&
+                        value.types.has(Synergy.FIELD)
+                    ) {
+                        value.count.fieldCount++
+                        value.handleHeal(heal, pokemon, 0, false)
+                        value.addSpeed(speedBoost, value, 0, false)
+                    }
+                })
+            }, 16) // delay to next tick, targeting 60 ticks per second                
+        }, effect)
+    }
+}

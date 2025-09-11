@@ -39,6 +39,7 @@ import {
   OnAttackEffect,
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
+  OnDeathEffect,
   OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
@@ -400,6 +401,20 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.baseAtk * 0.5, pokemon, 0, false)
+    }),
+    new OnDeathEffect(({ pokemon, board }) => {
+      pokemon.items.delete(Item.RUSTED_SWORD)
+      const alliesSortByLowestAtk = (
+        board.cells.filter(
+          (p) =>
+            p && p.team === pokemon.team && p.id !== pokemon.id && p.items.size < 3
+        ) as PokemonEntity[]
+      ).sort((a, b) => a.atk - b.atk)
+
+      const swordReceiver = alliesSortByLowestAtk[0]
+      if (swordReceiver) {
+        swordReceiver.addItem(Item.RUSTED_SWORD)
+      }
     })
   ],
   [Item.SOUL_DEW]: [

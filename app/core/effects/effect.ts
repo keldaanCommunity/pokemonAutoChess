@@ -105,6 +105,22 @@ export class OnKillEffect extends Effect {
   }
 }
 
+// applied on KO (does not proc if resurection)
+interface OnDeathEffectArgs {
+  board: Board
+  pokemon: PokemonEntity
+}
+
+export class OnDeathEffect extends Effect {
+  apply(args: OnDeathEffectArgs) { }
+  constructor(
+    effect?: (args: OnDeathEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
 export class PeriodicEffect extends Effect {
   intervalMs: number
   timer: number
