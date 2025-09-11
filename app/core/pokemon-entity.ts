@@ -1210,18 +1210,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       effect.apply(this, target, board, attackType)
     })
 
-    if (this.passive === Passive.SOUL_HEART) {
-      this.addPP(10, this, 0, false)
-      this.addAbilityPower(10, this, 0, false)
-    }
-
-    if (this.passive === Passive.BEAST_BOOST_ATK) {
-      this.addAttack(5, this, 0, false)
-    }
-    if (this.passive === Passive.BEAST_BOOST_AP) {
-      this.addAbilityPower(10, this, 0, false)
-    }
-
     board.forEach(
       (x, y, v) =>
         v &&
@@ -1287,19 +1275,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.passive === Passive.GRIM_NEIGH) {
-      this.addAbilityPower(30, this, 0, false)
-    }
-
-    if (this.passive === Passive.GUZZLORD && this.items.has(Item.CHEF_HAT)) {
-      this.addAbilityPower(5, this, 0, false, true)
-      this.addMaxHP(10, this, 0, false, true)
-    }
-
     if (
       this.player &&
-      this.simulation.room.state.specialGameRule ===
-      SpecialGameRule.BLOOD_MONEY &&
+      this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY &&
       !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)

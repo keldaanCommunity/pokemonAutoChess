@@ -37,7 +37,6 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
-import { ItemEffects } from "./items"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
@@ -686,5 +685,39 @@ export const PassiveEffects: Partial<
     )
   ],
   [Passive.MANAPHY]: [PhioneSpawnEffect],
-  [Passive.PACHIRISU]: [PachirisuBerryEffect]
+  [Passive.PACHIRISU]: [PachirisuBerryEffect],
+  [Passive.SOUL_HEART]: [
+    new OnKillEffect((pokemon) => {
+      pokemon.addPP(10, pokemon, 0, false)
+      pokemon.addAbilityPower(10, pokemon, 0, false)
+    })
+  ],
+  [Passive.BEAST_BOOST_ATK]: [
+    new OnKillEffect((pokemon) => {
+      pokemon.addAttack(5, pokemon, 0, false)
+    })
+  ],
+  [Passive.BEAST_BOOST_AP]: [
+    new OnKillEffect((pokemon) => {
+      pokemon.addAbilityPower(10, pokemon, 0, false)
+    })
+  ],
+  [Passive.GRIM_NEIGH]: [
+    new OnKillEffect((pokemon) => {
+      pokemon.addAbilityPower(30, pokemon, 0, false)
+    })
+  ],
+  [Passive.GUZZLORD]: [
+    new OnKillEffect((pokemon) => {
+      if (pokemon.items.has(Item.CHEF_HAT)) {
+        pokemon.addAbilityPower(5, pokemon, 0, false, true)
+        pokemon.addMaxHP(10, pokemon, 0, false, true)
+      }
+    })
+  ],
+  [Passive.STENCH]: [
+    new OnMoveEffect((pokemon, board, oldX, oldY, newX, newY) => {
+      board.effects[oldY * board.columns + oldX] = EffectEnum.POISON_GAS
+    })
+  ]
 }

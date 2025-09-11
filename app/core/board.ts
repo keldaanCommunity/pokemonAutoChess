@@ -45,11 +45,6 @@ export class Board {
           entity.effects.delete(effectOnPreviousCell)
         }
 
-        if (entity.passive === Passive.STENCH) {
-          this.effects[entity.positionY * this.columns + entity.positionX] =
-            EffectEnum.POISON_GAS
-        }
-
         entity.positionX = x
         entity.positionY = y
 
@@ -60,12 +55,6 @@ export class Board {
         }
       }
     }
-  }
-
-  moveEntity(x0: number, y0: number, x1: number, y1: number) {
-    const value = this.getEntityOnCell(x0, y0)
-    this.setEntityOnCell(x1, y1, value)
-    this.setEntityOnCell(x0, y0, undefined)
   }
 
   swapCells(x0: number, y0: number, x1: number, y1: number) {
