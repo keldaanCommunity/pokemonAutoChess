@@ -37,6 +37,7 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnHitEffect,
   OnItemDroppedEffect,
@@ -426,6 +427,12 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         attacker,
         shouldTargetGainMana: true
       })
+    })
+  ],
+
+  [Item.SHELL_BELL]: [
+    new OnDamageDealtEffect(({ pokemon, damage }) => {
+      pokemon.handleHeal(Math.ceil(0.33 * damage), pokemon, 0, false)
     })
   ],
 

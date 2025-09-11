@@ -150,12 +150,7 @@ export default class MovingState extends PokemonState {
       undefined
     )
 
-    const onMoveEffects = [
-      ...pokemon.effectsSet.values(),
-      ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect) => effect instanceof OnMoveEffect)
-
-    onMoveEffects.forEach((effect) => {
+    pokemon.getEffects(OnMoveEffect).forEach((effect) => {
       effect.apply(pokemon, board, oldX, oldY, newX, newY)
     })
   }

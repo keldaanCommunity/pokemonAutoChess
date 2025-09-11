@@ -48,6 +48,7 @@ import type { Board } from "./board"
 import {
   Effect as EffectClass,
   OnAttackEffect,
+  OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnHitEffect,
   OnItemGainedEffect,
@@ -766,12 +767,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addDefense(-2, target, 0, false)
     }
 
-    const onAttackEffects = [
-      ...this.effectsSet.values(),
-      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect) => effect instanceof OnAttackEffect)
-
-    onAttackEffects.forEach((effect) => {
+    this.getEffects(OnAttackEffect).forEach((effect) => {
       effect.apply({
         pokemon: this,
         target,
@@ -834,12 +830,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    const onHitEffects = [
-      ...this.effectsSet.values(),
-      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect) => effect instanceof OnHitEffect)
-
-    onHitEffects.forEach((effect) => {
+    this.getEffects(OnHitEffect).forEach((effect) => {
       effect.apply({
         attacker: this,
         target,
@@ -978,21 +969,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   // called whenever the unit deals damage, by basic attack or ability
   onDamageDealt({ target, damage, attackType, isRetaliation }: { target: PokemonEntity; damage: number; attackType: AttackType; isRetaliation: boolean }) {
-    if (this.hasSynergyEffect(Synergy.HUMAN) && !(isRetaliation && attackType !== AttackType.SPECIAL)) {
-      let lifesteal = 0
-      if (this.effects.has(EffectEnum.MEDITATE)) {
-        lifesteal = 0.25
-      } else if (this.effects.has(EffectEnum.FOCUS_ENERGY)) {
-        lifesteal = 0.4
-      } else if (this.effects.has(EffectEnum.CALM_MIND)) {
-        lifesteal = 0.6
-      }
-      this.handleHeal(Math.ceil(lifesteal * damage), this, 0, false)
-    }
-
-    if (this.items.has(Item.SHELL_BELL)) {
-      this.handleHeal(Math.ceil(0.33 * damage), this, 0, false)
-    }
+    this.getEffects(OnDamageDealtEffect).forEach((effect) => {
+      effect.apply({
+        pokemon: this,
+        target,
+        damage,
+        attackType,
+        isRetaliation
+      })
+    })
 
     if (
       this.simulation.weather === Weather.BLOODMOON &&
@@ -1136,13 +1121,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.status.charmCooldown -= 500
     }
 
-    // Other passives
-    const onDamageReceivedEffects = [
-      ...this.effectsSet.values(),
-      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect) => effect instanceof OnDamageReceivedEffect)
-
-    onDamageReceivedEffects.forEach((effect) => {
+    // Other effects
+    this.getEffects(OnDamageReceivedEffect).forEach((effect) => {
       effect.apply({
         pokemon: this,
         attacker,
@@ -1226,17 +1206,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board
     attackType: AttackType
   }) {
-    const itemEffects: OnKillEffect[] = values(this.items)
-      .flatMap((item) => ItemEffects[item] ?? [])
-      .filter((effect) => effect instanceof OnKillEffect)
-    itemEffects.forEach((effect) => {
+    this.getEffects(OnKillEffect).forEach((effect) => {
       effect.apply(this, target, board, attackType)
-    })
-
-    this.effectsSet.forEach((effect) => {
-      if (effect instanceof OnKillEffect) {
-        effect.apply(this, target, board, attackType)
-      }
     })
 
     if (this.passive === Passive.SOUL_HEART) {
@@ -1801,6 +1772,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     for (const effect of newPassiveEffects) {
       this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
     }
+  }
+
+  getEffects<T extends typeof EffectClass>(effectClass: T): InstanceType<T>[] {
+    return [
+      ...this.effectsSet.values(),
+      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
+    ].filter((effect): effect is InstanceType<T> => effect instanceof effectClass)
   }
 }
 

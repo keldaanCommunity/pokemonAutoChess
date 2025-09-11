@@ -27,12 +27,7 @@ export class AbilityStrategy {
       })
     }
 
-    const onAbilityCastEffects = [
-      ...pokemon.effectsSet.values(),
-      ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect) => effect instanceof OnAbilityCastEffect)
-
-    onAbilityCastEffects.forEach((effect) => {
+    pokemon.getEffects(OnAbilityCastEffect).forEach((effect) => {
       effect.apply(pokemon, board, target, crit)
     })
   }

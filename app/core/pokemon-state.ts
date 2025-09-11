@@ -525,12 +525,7 @@ export default abstract class PokemonState {
         if (damageOnShield > pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
-          const onShieldDepletedEffects = [
-            ...pokemon.effectsSet.values(),
-            ...values<Item>(pokemon.items).flatMap((item) => ItemEffects[item] ?? [])
-          ].filter((effect) => effect instanceof OnShieldDepletedEffect)
-
-          onShieldDepletedEffects.forEach((effect) => {
+          pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
             effect.apply({ pokemon, board, attacker })
           })
         }

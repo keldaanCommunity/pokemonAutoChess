@@ -8,7 +8,7 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { OnAbilityCastEffect, OnAttackEffect, OnKillEffect, OnSpawnEffect } from "./effect"
+import { OnAbilityCastEffect, OnAttackEffect, OnDamageDealtEffect, OnDamageDealtEffectArgs, OnKillEffect, OnSpawnEffect } from "./effect"
 
 export class MonsterKillEffect extends OnKillEffect {
     hpBoosted: number = 0
@@ -164,3 +164,16 @@ export class SoundCryEffect extends OnAbilityCastEffect {
         })
     }
 }
+
+export const humanHealEffect = new OnDamageDealtEffect(({ pokemon, damage, attackType, isRetaliation }: OnDamageDealtEffectArgs) => {
+    if (isRetaliation && attackType !== AttackType.SPECIAL) return // don't lifesteal on retaliation dammage from items
+    let lifesteal = 0
+    if (pokemon.effects.has(EffectEnum.MEDITATE)) {
+        lifesteal = 0.25
+    } else if (pokemon.effects.has(EffectEnum.FOCUS_ENERGY)) {
+        lifesteal = 0.4
+    } else if (pokemon.effects.has(EffectEnum.CALM_MIND)) {
+        lifesteal = 0.6
+    }
+    pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
+}, EffectEnum.MEDITATE)

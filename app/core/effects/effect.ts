@@ -212,6 +212,25 @@ export class OnDamageReceivedEffect extends Effect {
   }
 }
 
+// applied after dealing damage
+export interface OnDamageDealtEffectArgs {
+  pokemon: PokemonEntity
+  target: PokemonEntity
+  damage: number
+  attackType?: AttackType
+  isRetaliation: boolean
+}
+
+export class OnDamageDealtEffect extends Effect {
+  apply(args: OnDamageDealtEffectArgs) { }
+  constructor(
+    effect?: (args: OnDamageDealtEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
 export class OnMoveEffect extends Effect {
   override apply(
     pokemon: PokemonEntity,

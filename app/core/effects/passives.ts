@@ -65,23 +65,7 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
         cell.value.addPP(ppGained, pokemon, 0, false)
       }
     })
-  pokemon.effectsSet.forEach((effect) => {
-    if (effect instanceof OnAttackEffect) {
-      effect.apply({
-        pokemon,
-        target: null,
-        board,
-        physicalDamage: 0,
-        specialDamage: 0,
-        trueDamage: 0,
-        totalDamage: 0
-      })
-    }
-  })
-  const itemEffects: OnAttackEffect[] = values(pokemon.items)
-    .flatMap((item) => ItemEffects[item] ?? [])
-    .filter((effect) => effect instanceof OnAttackEffect)
-  itemEffects.forEach((effect) => {
+  pokemon.getEffects(OnAttackEffect).forEach((effect) => {
     effect.apply({
       pokemon,
       target: null,
