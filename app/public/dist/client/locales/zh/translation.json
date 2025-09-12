@@ -1224,6 +1224,7 @@
 		"GALARIAN_LINOONE": "伽勒尔直冲熊",
 		"OBSTAGOON": "堵拦熊",
 		"PHEROMOSA": "费洛美螂",
+		"BUZZWOLE": "爆肌蚊",
 		"SABLEYE": "勾魂眼",
 		"MEGA_SABLEYE": "超级勾魂眼",
 		"DRACOVISH": "鳃鱼龙",
@@ -1537,7 +1538,8 @@
 		"LOKIX": "烈腿蝗",
 		"BLIPBUG": "索侦虫",
 		"DOTTLER": "天罩虫",
-		"ORBEETLE": "以欧路普"
+		"ORBEETLE": "以欧路普",
+		"PACHIRISU": "帕奇利兹"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2597,7 +2599,7 @@
 		"ICY_ROCK": "计为3只生成SNOW所需的宝可梦。在SNOW中，我方所有宝可梦解除FREEZE耗时减少20%，且攻击使敌方宝可梦陷入FREEZE的概率提升[5,LK]%。",
 		"HEAT_ROCK": "计为3只生成SUN所需的宝可梦。在SUN中，我方所有宝可梦因BURN受到的伤害减少20%，且攻击使敌方宝可梦陷入BURN的概率提升[5,LK]%。",
 		"SMOOTH_ROCK": "计为3只生成SANDSTORM所需的宝可梦。在SANDSTORM中，我方所有宝可梦受到的沙暴伤害减少20%，且每秒提升1点SPEED。",
-		"BLACK_AUGURITE": "计为3只生成NIGHT所需的宝可梦。在NIGHT中，我方所有宝可梦提升5%的CRIT_CHANCE，受到的CRIT_POWER减少5%。",
+		"BLACK_AUGURITE": "计为3只生成NIGHT所需的宝可梦。在NIGHT中，我方所有宝可梦提升5%的CRIT_CHANCE，受到的CRIT_POWER减少10%。",
 		"ELECTRIC_QUARTZ": "计为3只生成STORM所需的宝可梦。在STORM中，我方所有宝可梦被雷击时获得50点SHIELD，且解除PARALYSIS耗时减少20%。",
 		"FLOAT_STONE": "计为3只生成WINDY所需的宝可梦。在WINDY中，我方所有宝可梦提升10点SPEED。",
 		"MIST_STONE": "计为3只生成MISTY所需的宝可梦。在MISTY中，我方所有宝可梦提升3点SPE_DEF。",
@@ -2864,7 +2866,8 @@
 		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
 		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为5 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
 		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的花有关……",
-		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。"
+		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。",
+		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。"
 	},
 	"stat": {
 		"ATK": "攻击",
