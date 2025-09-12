@@ -19,10 +19,9 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
-import { values } from "../utils/schemas"
 import type { Board, Cell } from "./board"
 import { OnShieldDepletedEffect, PeriodicEffect } from "./effects/effect"
-import { ItemEffects } from "./effects/items"
+import { humanHealEffect } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
 
 export default abstract class PokemonState {
@@ -444,6 +443,9 @@ export default abstract class PokemonState {
             shouldTargetGainMana: true,
             isRetaliation: true // important to avoid infinite loops between two units reflecting
           })
+          
+          // we allow human healing from retaliation abilities, but by default it doesnt apply for retaliation damage so we force it here
+          if (pokemon.hasSynergyEffect(Synergy.HUMAN)) humanHealEffect.apply({ pokemon, target: attacker, damage: reflectDamage, isRetaliation: false })
         }
         return { death: false, takenDamage: 0 }
       }
