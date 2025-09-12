@@ -24,16 +24,18 @@ export default function Credits(props: {
     let contact = ""
     let name = ""
     if (creditsNames) {
-      const user = creditsNames.find((user) => user.Discord === id)
+      const user = creditsNames.find((user) => user.discord === id)
       if (user != null) {
-        contact = user.Contact
-        name = user.Name
+        contact = user.contact
+        name = user.name
       }
     }
-    return (
+    return (contact ?
       <a style={{ marginRight: "0.5em" }} key={id} href={contact}>
         {name}
       </a>
+      : name ? <span style={{ marginRight: "0.5em" }} key={id}>{name}</span>
+        : null
     )
   }
 

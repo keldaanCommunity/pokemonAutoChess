@@ -43,8 +43,17 @@ function fetchCreditsNames() {
       .then((text) => text.split("\n"))
       .then((lines: string[]) =>
         lines.slice(1).map((line) => {
-          const [Name, Discord, Contact] = line.split("\t")
-          const credit: ICreditName = { Name, Discord, Contact }
+          let [name, discord, contact] = line.split("\t")
+          if (contact && contact.startsWith("<@") && contact.endsWith(">")) {
+            // Discord mention format
+            const id = contact.slice(2, -1)
+            contact = `https://discord.com/users/${id}`
+          }
+          else if (contact && contact.toLowerCase().startsWith("dc:<@") && contact.endsWith(">")) {
+            // Discord mention format with DC: prefix
+            contact = `https://discord.com/users/${contact.slice(5, -1)}`
+          }
+          const credit: ICreditName = { name, discord, contact }
           return credit
         })
       )
