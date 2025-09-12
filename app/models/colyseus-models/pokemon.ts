@@ -18621,6 +18621,20 @@ export class Pachirisu extends Pokemon {
   passive = Passive.PACHIRISU
 }
 
+export class Buzzwole extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FIGHTING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 250
+  atk = 30
+  speed = 50
+  def = 15
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.BULK_UP
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19659,7 +19673,8 @@ export const PokemonClasses: Record<
   [Pkm.BLIPBUG]: Blipbug,
   [Pkm.DOTTLER]: Dottler,
   [Pkm.ORBEETLE]: Orbeetle,
-  [Pkm.PACHIRISU]: Pachirisu
+  [Pkm.PACHIRISU]: Pachirisu,
+  [Pkm.BUZZWOLE]: Buzzwole
 }
 
 // declare all the classes in colyseus schema TypeRegistry

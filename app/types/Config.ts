@@ -368,6 +368,7 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.XURKITREE,
   Pkm.NIHILEGO,
   Pkm.PHEROMOSA,
+  Pkm.BUZZWOLE,
   Pkm.TORNADUS,
   Pkm.THUNDURUS,
   Pkm.LANDORUS,

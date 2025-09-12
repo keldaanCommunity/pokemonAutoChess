@@ -23,6 +23,7 @@
 - Dottler
 - Orbeetle
 - Pachirisu
+- Buzzwole
 
 # Changes to Pokemon & Abilities
 

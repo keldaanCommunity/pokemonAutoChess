@@ -7093,5 +7093,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Pose,
     attackSprite: AttackSprite.ELECTRIC_MELEE,
     hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.BUZZWOLE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Swell,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
   }
 }
