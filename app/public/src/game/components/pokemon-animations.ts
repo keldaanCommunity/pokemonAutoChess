@@ -7022,14 +7022,16 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.GRASS_RANGE,
-    hitSprite: HitSprite.GRASS_HIT
+    hitSprite: HitSprite.GRASS_HIT,
+    shinyUnavailable: true
   },
   [Pkm.ARBOLIVA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.GRASS_RANGE,
-    hitSprite: HitSprite.GRASS_HIT
+    hitSprite: HitSprite.GRASS_HIT,
+    shinyUnavailable: true
   },
   [Pkm.CHESPIN]: {
     attack: AnimationType.Attack,

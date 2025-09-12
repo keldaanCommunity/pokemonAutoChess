@@ -1,11 +1,11 @@
 import fs from "fs"
-import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
 import { Emotion } from "../app/types/enum/Emotion"
 import { mapToObj } from "../app/utils/map"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
-export function precomputeEmotions() {
+export async function precomputeEmotions() {
   console.time("precompute-emotions")
+  const tracker = await import("../app/models/precomputed/tracker.json")
 
   const data = new Map<string, number[]>()
   const emotions = Object.values(Emotion)

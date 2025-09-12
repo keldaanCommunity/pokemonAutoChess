@@ -1,6 +1,5 @@
 import fs from "fs"
 import { PokemonCredits } from "../app/core/credits"
-import tracker from "../app/public/dist/client/assets/pokemons/tracker.json"
 import { logger } from "../app/utils/logger"
 import { mapToObj } from "../app/utils/map"
 import { precomputedPokemons } from "./precomputed-pokemons"
@@ -12,8 +11,9 @@ const NON_PMD_PKM_INDEXES = [
   "0025-9999", // Pikachu Surfer
 ]
 
-export function precomputeCredits() {
+export async function precomputeCredits() {
   console.time("precompute-credits")
+  const tracker = await import("../app/models/precomputed/tracker.json")
 
   const data = new Map<string, PokemonCredits>()
 

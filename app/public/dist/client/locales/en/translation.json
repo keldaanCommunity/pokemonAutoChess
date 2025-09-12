@@ -3005,7 +3005,7 @@
 		"MONSTER": "MONSTER Pokémon can FLINCH their opponents for 3 seconds on attack. Every time they get a KO, they gain stats, heal and grow in size.",
 		"HUMAN": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs and HMs.",
 		"AQUATIC": "AQUATIC Pokémon reduce the duration of status afflictions for all your team. After 8 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies.",
-		"BUG": "At the start of combat, your STRONGEST BUG Pokémon are cloned.",
+		"BUG": "At the start of combat spawns a copy of your STRONGEST BUG Pokémon.",
 		"FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",
 		"FLORA": "When a FLORA Pokémon is KO'd, a Flower Pot blossoms and you collect RICH_MULCH. Higher STAR units give more mulch, which can be used to evolve your Flower Pots.",
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical attacks, and can adapt to weather.",

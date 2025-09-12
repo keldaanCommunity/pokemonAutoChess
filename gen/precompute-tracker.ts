@@ -4,10 +4,10 @@ import { CDN_URL } from "../app/types"
 
 export async function precomputeTracker() {
   console.time("precompute-tracker")
-  const response = await fetch(`${CDN_URL}/tracker.json`)
+  const response = await fetch(`${CDN_URL}/tracker.json?cb=${Date.now()}`)
   const tracker = await response.json()
   fs.writeFileSync(
-    "../app/public/dist/client/assets/pokemons/tracker.json",
+    "../app/models/precomputed/tracker.json",
     JSON.stringify(tracker)
   )
   console.timeEnd("precompute-tracker")

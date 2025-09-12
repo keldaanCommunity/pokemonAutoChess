@@ -24,7 +24,6 @@ import { DungeonPMDO } from "./enum/Dungeon"
 import { BoardEffect, EffectEnum } from "./enum/Effect"
 import { Emotion } from "./enum/Emotion"
 import {
-  AttackType,
   GameMode,
   Orientation,
   PokemonActionState,
@@ -152,9 +151,9 @@ export enum ReadWriteMode {
 }
 
 export interface ICreditName {
-  Contact: string
-  Discord: string
-  Name: string
+  contact: string
+  discord: string
+  name: string
 }
 
 export interface IChatV2 {

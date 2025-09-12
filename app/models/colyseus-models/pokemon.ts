@@ -17581,7 +17581,7 @@ export class Unfezant extends Pokemon {
 }
 
 export class Zacian extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FAIRY])
   rarity = Rarity.LEGENDARY
   evolution = Pkm.ZACIAN_CROWNED
   evolutionRule = new ItemEvolutionRule([Item.RUSTED_SWORD])
@@ -18039,9 +18039,9 @@ export class MeowsticFemale extends Pokemon {
 
 export class Okidogi extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.POISON,
+    Synergy.WILD,
     Synergy.FIGHTING,
-    Synergy.WILD
+    Synergy.POISON
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
