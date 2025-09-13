@@ -89,7 +89,7 @@
 # Gameplay
 
 - Speed stat now also influences projectile travel time for ranged attackers, from 3 tiles per second at 0 speed to 12 tiles per second at 300 speed.
-- Ranked matches elo ranges updated: 0-1100, 1050-1150, 1100-1250, 1200-1350, 1300+
+- Ranked matches elo ranges have been reduced to 3 ranges to reduce waiting times: 0-1099, 1050-1299, 1250+ ; for the overlaps, the lower range is chosen by default, but player can choose to join a lobby of the higher range if they want to. This is likely a temporary measure that may be revisited in the future.
 - Aquatic no longer increase Curse delay ; instead, when curse status is cleared, the remaining time + 1 second is stored in memory, and will be used if Curse status is reapplied again
 
 # UI

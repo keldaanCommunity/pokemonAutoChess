@@ -938,35 +938,26 @@ export class JoinOrOpenRoomCommand extends Command<
         let maxRank = EloRank.BEAST_BALL
         switch (userRank) {
           case EloRank.LEVEL_BALL:
-            // 0- 1100
+          case EloRank.NET_BALL:
+            // 0- 1099
             minRank = EloRank.LEVEL_BALL
             maxRank = EloRank.NET_BALL
             break
-          case EloRank.NET_BALL:
-            // 1050-1150
-            minRank = EloRank.NET_BALL
-            maxRank = EloRank.SAFARI_BALL
-            break
           case EloRank.SAFARI_BALL:
           case EloRank.LOVE_BALL:
-            // 1100-1250
-            minRank = EloRank.SAFARI_BALL
-            maxRank = EloRank.PREMIER_BALL
-            break
           case EloRank.PREMIER_BALL:
           case EloRank.QUICK_BALL:
-            // 1200-1350
-            minRank = EloRank.PREMIER_BALL
-            maxRank = EloRank.POKE_BALL
+            // 1050-1299
+            minRank = EloRank.NET_BALL
+            maxRank = EloRank.QUICK_BALL
             break
-
           case EloRank.POKE_BALL:
           case EloRank.SUPER_BALL:
           case EloRank.ULTRA_BALL:
           case EloRank.MASTER_BALL:
           case EloRank.BEAST_BALL:
-            // 1300+
-            minRank = EloRank.POKE_BALL
+            // 1250+
+            minRank = EloRank.QUICK_BALL
             maxRank = EloRank.BEAST_BALL
             break
         }
