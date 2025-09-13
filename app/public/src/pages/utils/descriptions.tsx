@@ -16,7 +16,9 @@ const Weathers = Object.keys(Weather)
 const Synergies = Object.keys(Synergy)
 const Items = Object.keys(Item)
 const TechnicalTerms = [
-  "STRONGEST"
+  "STRONGEST",
+  "ADJACENT",
+  "ADJACENT_IN_THE_SAME_ROW"
 ]
 
 
@@ -119,9 +121,13 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
         )
       } else if (TechnicalTerms.includes(token)) {
         d = (
-          <i title={t(`technical_terms_definitions.${token}`)} className="technical-term">
-            {t(`technical_terms.${token}`)}
-          </i>
+          <span
+            className="description-icon technical-term"
+            title={t(`technical_terms_definitions.${token}`)}
+          >
+            <img src={`assets/ui/${token.toLowerCase()}.svg`} />
+            <i className="technical-term-label">{t(`technical_terms.${token}`)}</i>
+          </span>
         )
       } else if (/\[[^\]]+\]/.test(token)) {
         const array = token.slice(1, -1).split(",")

@@ -35,6 +35,10 @@ h2 .description-icon > img {
   vertical-align: -0.25em;
 }
 
+.technical-term {
+  cursor: help
+}
+
 .ability-description {
   white-space: pre-line;
 }
