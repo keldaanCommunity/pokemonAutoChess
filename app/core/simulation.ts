@@ -468,6 +468,8 @@ export default class Simulation extends Schema implements ISimulation {
     dishEffects.forEach((effect) => {
       entity?.effectsSet.add(effect)
       if (effect instanceof OnDishConsumedEffect) effect.apply({ pokemon, dish, entity, isGhostOpponent: player.ghost })
+      if (effect instanceof OnSpawnEffect && entity) effect.apply(entity, player, true)
+
     })
 
     if (pokemon.passive === Passive.GLUTTON) {
