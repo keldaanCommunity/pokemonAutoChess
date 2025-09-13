@@ -1865,7 +1865,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.STEALTH_ROCKS]: orientedProjectile({
     distance: 1,
-    scale: 3,
+    scale: 2,
     depth: DEPTH.ABILITY_GROUND_LEVEL
   }),
   [Ability.SPIKY_SHIELD]: OrientationArray.map((orientation) =>

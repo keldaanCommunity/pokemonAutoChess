@@ -221,15 +221,6 @@ export class Board {
       }
     })
 
-    console.log("cells in front of", {
-      userX: pokemon.positionX,
-      userY: pokemon.positionY,
-      targetX: target.positionX,
-      targetY: target.positionY,
-      range,
-      cells
-    })
-
     return cells
   }
 
