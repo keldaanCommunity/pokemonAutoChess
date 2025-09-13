@@ -1861,7 +1861,7 @@
 		"MULTI_ATTACK": "Deal [15,SP] SPECIAL to ADJACENT enemy Pokémon, multiplied by the sum of levels of all $t(pkm.SILVALLY) additional synergies.",
 		"STICKY_WEB": "Deal [20,35,70,SP] SPECIAL to the target and project a web around them. Pokémon walking on the web are inflicted with PARALYSIS for 2 seconds.",
 		"ACCELEROCK": "Jump next to the farthest enemy and deal [100,SP]% of ATK as SPECIAL to them. Reduce the user's DEF by 2 and increase their SPEED by 5 up to [5,SP] times.",
-		"PETAL_BLIZZARD": "Deal [30,SP] SPECIAL to all enemy Pokémon in RANGE and gain 10 AP.",
+		"PETAL_BLIZZARD": "Deal [30,SP] SPECIAL to all ADJACENT enemy Pokémon and gain 10 AP.",
 		"SUNSTEEL_STRIKE": "Jump and land in the middle of the enemy team with the power of a meteor, Dealing [80,SP] SPECIAL to all ADJACENT enemy Pokémon.",
 		"MOONGEIST_BEAM": "Deal [100,SP] SPECIAL to all enemy Pokémon in a line behind the target and inflict them with PARALYSIS for 3 seconds. Allied Pokémon in the beam gain [100,SP] SHIELD.",
 		"FLEUR_CANNON": "Launch a devastating laser beam, dealing [120,SP] SPECIAL to all enemy Pokémon in the path and reduce the user's AP by 20.",
