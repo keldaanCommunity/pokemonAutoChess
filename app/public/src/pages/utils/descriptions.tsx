@@ -18,7 +18,8 @@ const Items = Object.keys(Item)
 const TechnicalTerms = [
   "STRONGEST",
   "ADJACENT",
-  "ADJACENT_IN_THE_SAME_ROW"
+  "ADJACENT_IN_THE_SAME_ROW",
+  "CONE"
 ]
 
 

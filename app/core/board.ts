@@ -34,7 +34,7 @@ export class Board {
   }
 
   setEntityOnCell(x: number, y: number, entity: PokemonEntity | undefined) {
-    if (this.isOnBoard(x,y)) {
+    if (this.isOnBoard(x, y)) {
       const index = this.columns * y + x
       this.cells[index] = entity
       if (entity && !(entity.positionX === x && entity.positionY === y)) {
@@ -182,7 +182,7 @@ export class Board {
     target: PokemonEntity,
     range: number = 1
   ) {
-    const cells = new Array<Cell>()
+    const cellsXY = new Set<string>()
 
     pokemon.orientation = this.orientation(
       pokemon.positionX,
@@ -199,15 +199,36 @@ export class Board {
       OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
     ]
 
+    let prevCells: Array<[number, number]> = [[pokemon.positionX, pokemon.positionY]]
     for (let r = 1; r <= range; r++) {
+      let nextCells = new Array<[number, number]>()
       orientations.forEach((orientation) => {
-        const x = pokemon.positionX + OrientationVector[orientation][0] * r
-        const y = pokemon.positionY + OrientationVector[orientation][1] * r
-        if (this.isOnBoard(x, y)) {
-          cells.push({ x, y, value: this.cells[this.columns * y + x] })
-        }
+        prevCells.forEach((cell) => {
+          const x = cell[0] + OrientationVector[orientation][0]
+          const y = cell[1] + OrientationVector[orientation][1]
+          cellsXY.add(`${x},${y}`)
+          nextCells.push([x, y])
+        })
       })
+      prevCells = nextCells
     }
+
+    const cells: Cell[] = []
+    cellsXY.forEach((xy) => {
+      const [x, y] = xy.split(",").map(Number)
+      if (this.isOnBoard(x, y)) {
+        cells.push({ x, y, value: this.cells[this.columns * y + x] })
+      }
+    })
+
+    console.log("cells in front of", {
+      userX: pokemon.positionX,
+      userY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY,
+      range,
+      cells
+    })
 
     return cells
   }
