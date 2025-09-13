@@ -1,10 +1,10 @@
 import { SetSchema } from "@colyseus/schema"
-import { get } from "http"
 import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import {
-  FLOWER_POTS_POSITIONS,
+  FLOWER_POTS_POSITIONS_BLUE,
+  FLOWER_POTS_POSITIONS_RED,
   FlowerMonByPot,
   FlowerPots
 } from "../../../../core/flower-pots"
@@ -23,7 +23,6 @@ import {
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
-  type AttackType,
   Orientation,
   PokemonActionState,
   PokemonTint,
@@ -669,8 +668,8 @@ export default class PokemonSprite extends DraggableObject {
       scene.board?.flowerPokemonsInPots
         .find((p) => p.index === this.index)
         ?.destroy()
-      const [startX, startY] =
-        FLOWER_POTS_POSITIONS[FlowerPots.indexOf(flowerPot)]
+      const positions = this.team === Team.RED_TEAM ? FLOWER_POTS_POSITIONS_RED : FLOWER_POTS_POSITIONS_BLUE
+      const [startX, startY] = positions[FlowerPots.indexOf(flowerPot)]
       addAbilitySprite(scene, Ability.PETAL_BLIZZARD, 0, [startX, startY - 24])
       this.moveManager.setEnable(false)
       this.setPosition(startX, startY)

@@ -3,13 +3,22 @@ import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Pkm } from "../types/enum/Pokemon"
 
-export const FLOWER_POTS_POSITIONS = [
+export const FLOWER_POTS_POSITIONS_BLUE = [
     [432, 614],
     [400, 566],
     [368, 614],
     [336, 566],
     [304, 614]
 ]
+
+export const FLOWER_POTS_POSITIONS_RED = [
+    [1576, 186],
+    [1544, 234],
+    [1512, 186],
+    [1480, 234],
+    [1448, 186]
+]
+
 
 export enum FlowerPot {
     PINK = "PINK",

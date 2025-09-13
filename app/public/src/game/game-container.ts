@@ -6,10 +6,7 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
-import {
-  FLOWER_POTS_POSITIONS,
-  FlowerPotMons
-} from "../../../core/flower-pots"
+import { FLOWER_POTS_POSITIONS_BLUE } from "../../../core/flower-pots"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
 import Count from "../../../models/colyseus-models/count"
@@ -525,7 +522,7 @@ class GameContainer {
         this.gameScene?.board?.mode !== BoardMode.TOWN
       ) {
         board.renderFlowerPots()
-        const [x, y] = FLOWER_POTS_POSITIONS[index]
+        const [x, y] = FLOWER_POTS_POSITIONS_BLUE[index]
         const evolutionAnim = this.gameScene.add.sprite(
           x,
           y - 24,

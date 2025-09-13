@@ -41,7 +41,7 @@ import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
-import { FLOWER_POTS_POSITIONS } from "../../../../core/flower-pots"
+import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { BOARD_WIDTH } from "../../../../types/Config"
 import { clearAbilityAnimations } from "../components/abilities-animations"
 
@@ -406,8 +406,8 @@ export default class GameScene extends Scene {
       }
     }
 
-    for (let i = 0; i < FLOWER_POTS_POSITIONS.length; i++) {
-      const [x, y] = FLOWER_POTS_POSITIONS[i]
+    for (let i = 0; i < FLOWER_POTS_POSITIONS_BLUE.length; i++) {
+      const [x, y] = FLOWER_POTS_POSITIONS_BLUE[i]
       const zone = this.add.zone(x, y, 48, 48)
       zone.setRectangleDropZone(48, 48)
       zone.setName("flower-pot-zone")

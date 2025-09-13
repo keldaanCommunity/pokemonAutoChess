@@ -1,7 +1,7 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import {
-  FLOWER_POTS_POSITIONS,
+  FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
@@ -351,8 +351,8 @@ export default class BoardManager {
 
     for (let i = 0; i < nbPots; i++) {
       const potSprite = this.scene.add.sprite(
-        FLOWER_POTS_POSITIONS[i][0],
-        FLOWER_POTS_POSITIONS[i][1],
+        FLOWER_POTS_POSITIONS_BLUE[i][0],
+        FLOWER_POTS_POSITIONS_BLUE[i][1],
         "flower_pots",
         FlowerPots[i] + ".png"
       )
@@ -368,8 +368,8 @@ export default class BoardManager {
       if (potPokemon) {
         const flowerInPot = new PokemonSprite(
           this.scene,
-          FLOWER_POTS_POSITIONS[i][0],
-          FLOWER_POTS_POSITIONS[i][1] - 24,
+          FLOWER_POTS_POSITIONS_BLUE[i][0],
+          FLOWER_POTS_POSITIONS_BLUE[i][1] - 24,
           potPokemon,
           this.player.id,
           false,
