@@ -3924,7 +3924,6 @@
 		"BEAST_BALL": "究极球"
 	},
 	"room_is_private": "此房间为私人房间，请输入密码：",
-	"wrong_password": "密码错误！",
 	"game_full": "本房间已满员",
 	"game_already_started": "游戏已经开始",
 	"min_rank_not_reached": "你的段位过低，无法参与这场排位赛",

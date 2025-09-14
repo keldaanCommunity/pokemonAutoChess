@@ -3924,7 +3924,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "This room is private. Enter password",
-	"wrong_password": "Wrong password !",
 	"game_full": "This group is full",
 	"game_already_started": "Game has already started",
 	"min_rank_not_reached": "Your rank is not high enough to play this ranked match",
