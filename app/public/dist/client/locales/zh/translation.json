@@ -419,7 +419,7 @@
 		"TRICK_OR_TREAT": "万圣夜",
 		"FREEZING_GLARE": "冰冷凝视",
 		"THUNDEROUS_KICK": "雷电踢",
-		"FIERY_WRATH": "火之怒",
+		"FIERY_WRATH": "怒火中烧",
 		"VISE_GRIP": "夹住",
 		"BURN_UP": "燃尽",
 		"LANDS_WRATH": "大地神力",
@@ -4057,7 +4057,7 @@
 		"hard": "究极"
 	},
 	"technical_terms": {
-		"STRONGEST": "最强的"
+		"STRONGEST": "最强的",
 		"ADJACENT": "相邻",
 		"ADJACENT_IN_THE_SAME_ROW": "同行相邻",
 		"CONE": "锥形区域"
