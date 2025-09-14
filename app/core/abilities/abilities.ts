@@ -7973,7 +7973,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    target.status.triggerLocked(lockDuration, pokemon)
+    target.status.triggerLocked(lockDuration, target)
 
     const cells = board.getAdjacentCells(
       target.positionX,
@@ -7989,7 +7989,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerLocked(lockDuration, pokemon)
+        cell.value.status.triggerLocked(lockDuration, cell.value)
       }
     })
 
@@ -8055,7 +8055,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
       ) {
         const attractedEnemy = pickRandomIn(attractedEnemies)!
         attractedEnemy.moveTo(destX, destY, board)
-        attractedEnemy.status.triggerLocked(lockDuration, pokemon)
+        attractedEnemy.status.triggerLocked(lockDuration, attractedEnemy)
       }
     })
   }
@@ -9720,7 +9720,7 @@ export class GravityStrategy extends AbilityStrategy {
     )
     board.forEach((x, y, unitOnCell) => {
       if (unitOnCell && unitOnCell.team !== pokemon.team) {
-        unitOnCell.status.triggerLocked(lockDuration, target)
+        unitOnCell.status.triggerLocked(lockDuration, unitOnCell)
       }
     })
   }
@@ -10613,7 +10613,7 @@ export class ViseGripStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
-    target.status.triggerLocked(4000, pokemon)
+    target.status.triggerLocked(4000, target)
     pokemon.status.triggerLocked(4000, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     const defGain = target.def * 1
