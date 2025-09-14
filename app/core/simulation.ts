@@ -281,8 +281,8 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this, isSpawn })
-    pokemonEntity.effectsSet.forEach((effect) => {
-      if (effect instanceof OnSpawnEffect) effect.apply(pokemonEntity, player, isSpawn)
+    pokemonEntity.getEffects(OnSpawnEffect).forEach((effect) => {
+      effect.apply(pokemonEntity, player, isSpawn)
     })
 
     return pokemonEntity
