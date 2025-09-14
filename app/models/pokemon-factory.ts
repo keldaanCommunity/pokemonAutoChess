@@ -35,7 +35,7 @@ export default class PokemonFactory {
     return pokemons
   }
 
-  static getPokemonBaseEvolution(name: Pkm) {
+  static getPokemonBaseline(name: Pkm) {
     switch (name) {
       case Pkm.VAPOREON:
       case Pkm.JOLTEON:
@@ -54,6 +54,20 @@ export default class PokemonFactory {
         return Pkm.BURMY_SANDY
       case Pkm.WORMADAM_TRASH:
         return Pkm.BURMY_TRASH
+      case Pkm.FLABEBE_BLUE:
+      case Pkm.FLABEBE_ORANGE:
+      case Pkm.FLABEBE_YELLOW:
+      case Pkm.FLABEBE_WHITE:
+      case Pkm.FLOETTE_BLUE:
+      case Pkm.FLOETTE_ORANGE:
+      case Pkm.FLOETTE_YELLOW:
+      case Pkm.FLOETTE_WHITE:
+      case Pkm.FLORGES_BLUE:
+      case Pkm.FLORGES_ORANGE:
+      case Pkm.FLORGES_YELLOW:
+      case Pkm.FLORGES_WHITE:
+        return Pkm.FLABEBE
+
       default:
         if (PkmFamily[name] == Pkm.UNOWN_A) {
           return name

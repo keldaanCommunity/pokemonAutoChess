@@ -127,7 +127,7 @@ export function getSellPrice(
     price = duo ? 6 : 10
   } else if (pokemon.rarity === Rarity.LEGENDARY) {
     price = duo ? 10 : 20
-  } else if (PokemonFactory.getPokemonBaseEvolution(name) === Pkm.EEVEE) {
+  } else if (PokemonFactory.getPokemonBaseline(name) === Pkm.EEVEE) {
     price = RarityCost[pokemon.rarity]
   } else if (duo) {
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
@@ -266,7 +266,7 @@ export default class Shop {
 
   releasePokemon(pkm: Pkm, player: Player, state: GameState) {
     const { stars, rarity, regional } = getPokemonData(pkm)
-    const baseEvolution = PokemonFactory.getPokemonBaseEvolution(pkm)
+    const baseEvolution = PokemonFactory.getPokemonBaseline(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
     const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
     if (duo) {
