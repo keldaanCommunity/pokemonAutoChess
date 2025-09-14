@@ -22,7 +22,7 @@ import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
-import PokemonFactory from "../../models/pokemon-factory"
+import PokemonFactory, { PkmColorVariantsByPkm } from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import {
@@ -304,8 +304,12 @@ export class OnDragDropPokemonCommand extends Command<
           const pokemonToClone = player.getPokemonAt(x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
+            let pkm = PokemonFactory.getPokemonBaseline(pokemonToClone.name)
+            if (pkm in PkmColorVariantsByPkm) {
+              pkm = PkmColorVariantsByPkm[pkm]!(player)
+            }
             const replaceDitto = PokemonFactory.createPokemonFromName(
-              PokemonFactory.getPokemonBaseline(pokemonToClone.name),
+              pkm,
               player
             )
             pokemon.items.forEach((item) => {
