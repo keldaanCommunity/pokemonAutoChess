@@ -3922,7 +3922,6 @@
 		"BEAST_BALL": "Ultra Ball"
 	},
 	"room_is_private": "Ce salon est privé. Saisissez le mot de passe",
-	"wrong_password": "Mot de passe incorrect !",
 	"game_full": "Ce groupe est complet",
 	"game_already_started": "La partie a déjà commencé",
 	"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
@@ -4036,7 +4035,7 @@
 		"ROOM_EMPTY": "Ce salon a été supprimé faute de manque de joueurs",
 		"ROOM_DELETED": "Ce salon a été supprimé",
 		"GAME_ALREADY_STARTED": "Cette partie a déjà commencé",
-		"INVALID_PASSWORD": "Mauvais mot de passe",
+		"INVALID_PASSWORD": "Mot de passe incorrect !",
 		"UNKNOWN_ERROR": "Une erreur inconnue est survenue: {{error}}"
 	},
 	"connection_status": {

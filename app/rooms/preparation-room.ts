@@ -345,8 +345,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
       const isAdmin = userProfile?.role === Role.ADMIN
 
-      // Check password protection - admins and moderators bypass password protection
-      if (this.state.password && userProfile?.role === Role.BASIC) {
+      // Check password protection - room owner, admins and moderators bypass password protection
+      if (this.state.password && userProfile?.role === Role.BASIC && this.state.ownerId !== user.uid) {
         if (!options.password || options.password !== this.roomPassword) {
           client.leave(CloseCodes.INVALID_PASSWORD)
           return

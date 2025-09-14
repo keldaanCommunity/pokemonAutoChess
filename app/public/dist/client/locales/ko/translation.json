@@ -3599,7 +3599,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "이 방은 사설입니다. 비밀번호를 입력하십시오.",
-	"wrong_password": "비밀번호가 틀렸습니다!",
 	"game_full": "방이 가득 찼습니다.",
 	"game_already_started": "게임이 이미 시작했습니다.",
 	"min_rank_not_reached": "이 랭크매치를 하기 위해선 랭크가 더 높아야 합니다.",
@@ -3708,7 +3707,8 @@
 		"ROOM_FULL": "방이 꽉 찼습니다",
 		"ROOM_EMPTY": "플레이어 수가 부족으로 삭제된 방입니다",
 		"ROOM_DELETED": "삭제된 방입니다",
-		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}"
+		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}",
+		"INVALID_PASSWORD": "비밀번호가 틀렸습니다!"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",

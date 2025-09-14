@@ -3735,7 +3735,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "Esta sala es privada. Introduce la contraseña",
-	"wrong_password": "Contraseña incorrecta!",
 	"game_full": "El grupo esta completo",
 	"game_already_started": "El juego ya empezó",
 	"min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
@@ -3845,7 +3844,8 @@
 		"ROOM_FULL": "Esta sala está llena",
 		"ROOM_EMPTY": "Esta sala fue removida por falta de jugadores",
 		"ROOM_DELETED": "Esta sala fue borrada",
-		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
+		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:",
+		"INVALID_PASSWORD": "Contraseña incorrecta!"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Intentando volver a conectar...",

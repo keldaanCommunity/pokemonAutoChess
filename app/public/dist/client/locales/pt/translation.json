@@ -2589,7 +2589,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "Esta sala é privada. Digite a senha.",
-	"wrong_password": "Senha errada!",
 	"game_full": "Esta sala está completa",
 	"game_already_started": "O jogo já foi iniciado",
 	"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
@@ -2699,7 +2698,8 @@
 		"ROOM_FULL": "Sala cheia",
 		"ROOM_EMPTY": "Esta sala foi removida devido a falta de jogadores",
 		"ROOM_DELETED": "Esta sala foi excluída",
-		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}"
+		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}",
+		"INVALID_PASSWORD": "Senha errada!"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexão perdida. Tentando reconectar...",
