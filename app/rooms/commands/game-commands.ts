@@ -305,7 +305,7 @@ export class OnDragDropPokemonCommand extends Command<
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             const replaceDitto = PokemonFactory.createPokemonFromName(
-              PokemonFactory.getPokemonBaseEvolution(pokemonToClone.name),
+              PokemonFactory.getPokemonBaseline(pokemonToClone.name),
               player
             )
             pokemon.items.forEach((item) => {
