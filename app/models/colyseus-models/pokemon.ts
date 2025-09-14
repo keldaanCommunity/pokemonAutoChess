@@ -18304,6 +18304,7 @@ export class Emolga extends Pokemon {
 export class Drilbur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
   rarity = Rarity.RARE
+  evolution = Pkm.EXCADRILL
   stars = 1
   hp = 80
   atk = 8
