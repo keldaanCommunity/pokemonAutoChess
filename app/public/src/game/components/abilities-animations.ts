@@ -589,7 +589,7 @@ const orientedProjectile: AbilityAnimationMaker<
     oy + dy * (options.distance ?? 8),
     args.flip
   )
-  if (options?.oriented) {
+  if (options?.oriented && options.orientation) {
     options.rotation = angleBetween([dx, -dy], [0, 0]) + (options.rotation ?? 0)
     delete options.oriented
   }
@@ -1133,7 +1133,8 @@ export const AbilitiesAnimations: {
   [Ability.SPIN_OUT]: orientedProjectile({
     distance: 1,
     duration: 400,
-    rotation: -Math.PI / 2,
+    rotation: Math.PI,
+    oriented: true,
     scale: 4,
     destroyOnComplete: true
   }),
@@ -1154,7 +1155,8 @@ export const AbilitiesAnimations: {
     tint: 0x80ddff,
     distance: 1,
     duration: 400,
-    rotation: -Math.PI / 2,
+    rotation: Math.PI,
+    oriented: true,
     scale: 3,
     destroyOnComplete: true
   }),
@@ -1790,7 +1792,7 @@ export const AbilitiesAnimations: {
     duration: 500,
     distance: 1,
     oriented: true,
-    rotation: -Math.PI / 2
+    rotation: Math.PI / 2
   }),
   [Ability.ROAR]: orientedProjectile({
     ability: Ability.WHIRLWIND,
@@ -1806,7 +1808,7 @@ export const AbilitiesAnimations: {
     distance: 1,
     scale: 2,
     oriented: true,
-    rotation: -Math.PI / 2,
+    rotation: Math.PI / 2,
     duration: 400
   }),
   [Ability.DRAGON_BREATH]: orientedProjectile({
@@ -1845,7 +1847,7 @@ export const AbilitiesAnimations: {
       distance: 8,
       duration: 1000,
       oriented: true,
-      rotation: +Math.PI / 2,
+      rotation: -Math.PI / 2,
       tweenProps: { delay: i * 100 }
     })
   ),
@@ -1866,6 +1868,8 @@ export const AbilitiesAnimations: {
   [Ability.STEALTH_ROCKS]: orientedProjectile({
     distance: 1,
     scale: 2,
+    oriented: true,
+    rotation: Math.PI/2,
     depth: DEPTH.ABILITY_GROUND_LEVEL
   }),
   [Ability.SPIKY_SHIELD]: OrientationArray.map((orientation) =>
@@ -1920,6 +1924,7 @@ export const AbilitiesAnimations: {
       ability: Ability.BONEMERANG,
       startCoords: "target",
       endCoords: "caster",
+      oriented: true,
       duration: 1000
     })
   ),
