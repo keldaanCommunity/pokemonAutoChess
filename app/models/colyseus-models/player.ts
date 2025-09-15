@@ -640,7 +640,6 @@ export default class Player extends Schema implements IPlayer {
     )
     // special case for burmy line because of the exclusive convergent evolution rule
     if (finals.has(Pkm.BURMY_PLANT)) {
-      finals.add(Pkm.BURMY_PLANT)
       finals.add(Pkm.BURMY_TRASH)
       finals.add(Pkm.BURMY_SANDY)
     }
