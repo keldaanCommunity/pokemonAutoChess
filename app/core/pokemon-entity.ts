@@ -1240,7 +1240,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
       if (nextPot) {
         const spawnSpot =
-          board.getFarthestTargetCoordinateAvailablePlace(target)
+          board.getFarthestTargetCoordinateAvailablePlace(target, true)
         if (spawnSpot) {
           const flowerToSpawn = target.player.flowerPots.find((p) =>
             FlowerMonByPot[nextPot].includes(p.name)
