@@ -1730,7 +1730,7 @@
 		"ROLLOUT": "Augmente la DEF du lanceur de [2,5,10,SP] et inflige des SPECIAL à hauteur de 2 fois sa DEF.",
 		"ICE_BALL": "Augmente la SPE_DEF du lanceur de 10 puis inflige des SPECIAL à hauteur de [10,20,30,SP] + [50,100,150,SP]% de la SPE_DEF du lanceur.",
 		"THRASH": "Augmente l'ATK de [100,SP]% et rend le lanceur CONFUSION pendant 3 secondes.",
-		"SOLAR_BEAM": "Inflige [25,50,100,SP] SPECIAL en ligne droite derrière la cible et BURN pendant 3 secondes. Si le lanceur est sous le spot lumineux et si le temps est SUN, les dégâts sont doublés et 40 PP sont restaurés au lanceur.",
+		"SOLAR_BEAM": "Inflige [25,50,100,SP] SPECIAL en ligne droite derrière la cible et BURN pendant 3 secondes. Si le lanceur est sous le spot lumineux et si le temps est SUN, les dégâts sont doublés et 20 PP sont restaurés au lanceur.",
 		"MAGMA_STORM": "La cible est piégée dans un maelström de feu qui inflige [80,SP] SPECIAL avant de se propager vers une cible adjacente.",
 		"DIRE_CLAW": "Inflige [15,30,60,SP] SPECIAL à la cible, ainsi qu'une condition de statut aléatoire parmi POISON, SLEEP et PARALYSIS pendant 3 secondes.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] et WOUND pendant 5 secondes à la cible. Si elle subit déjà WOUND, inflige 30 % de bonus SPECIAL.",

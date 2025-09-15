@@ -1035,7 +1035,7 @@
 		"ABSORB": "Biedt [30,60,120,SP] SPECIAL en geneest [3,6,12,SP] aan aangrenzende bondgenoten",
 		"ROLLOUT": "Buff de DEF met [2,5,10,SP] en deelt 2x de DEF uit als SPECIAL",
 		"THRASH": "Verbeter ATK met [100,SP]% en word CONFUSION voor 3s",
-		"SOLAR_BEAM": "Deel [25,50,100,SP] SPECIAL uit aan alle vijandelijke Pokémon in een rij achter het doelwit en geef ze 3 seconden lang een BURN. Als de Pokémon in de schijnwerpers staat of als het weer SUN is, verdubbel je de schade en herstel je 40 PP.",
+		"SOLAR_BEAM": "Deel [25,50,100,SP] SPECIAL uit aan alle vijandelijke Pokémon in een rij achter het doelwit en geef ze 3 seconden lang een BURN. Als de Pokémon in de schijnwerpers staat of als het weer SUN is, verdubbel je de schade en herstel je 20 PP.",
 		"MAGMA_STORM": "Het doelwit komt vast te zitten in een maalstroom van vuur die [80,SP] SPECIAL uitdeelt voordat het naar een aangrenzend doelwit gaat",
 		"SLASHING_CLAW": "Deelt [15,30,60,SP] uit aan het doelwit en VERWOND het gedurende 5 seconden. Als het doelwit al WOUND is, wordt er 30% bonus SPECIAL uitgedeeld",
 		"ERUPTION": "Vuurt [20,30,45] projectielen af in de lucht. Elk projectiel behandelt [30,50,70,SP] SPECIAL en BURN gedurende 5 seconden",
