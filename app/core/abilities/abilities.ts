@@ -2646,7 +2646,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
     let damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     if (pokemon.simulation.weather === Weather.SUN || pokemon.status.light) {
       damage = damage * 2
-      pokemon.addPP(40, pokemon, 0, false)
+      pokemon.addPP(20, pokemon, 0, false)
     }
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
