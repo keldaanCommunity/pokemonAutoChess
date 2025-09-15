@@ -339,8 +339,7 @@ export default class BoardManager {
     this.berryTrees = []
   }
 
-  renderFlowerPots() {
-    this.hideFlowerPots()
+  getNbFlowerPots(): number {
     const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
     let nbPots = SynergyTriggers[Synergy.FLORA].filter(
       (n) => n <= floraLevel
@@ -348,6 +347,12 @@ export default class BoardManager {
     if (this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
       nbPots = 5
     }
+    return nbPots
+  }
+
+  renderFlowerPots() {
+    this.hideFlowerPots()
+    const nbPots = this.getNbFlowerPots()
 
     for (let i = 0; i < nbPots; i++) {
       const potSprite = this.scene.add.sprite(
@@ -392,10 +397,7 @@ export default class BoardManager {
   }
 
   updateMulchCount() {
-    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
-    const nbPots = SynergyTriggers[Synergy.FLORA].filter(
-      (n) => n <= floraLevel
-    ).length
+    const nbPots = this.getNbFlowerPots()
     if (nbPots === 0) {
       this.mulchAmountText?.destroy()
       this.mulchAmountText = null

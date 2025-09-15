@@ -65,7 +65,6 @@ export default class GameScene extends Scene {
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Image[] = []
   sellZone: SellZone | undefined
-  zones: Phaser.GameObjects.Zone[] = []
   lastDragDropPokemon: PokemonSprite | undefined
   lastPokemonDetail: PokemonSprite | null = null
   minigameManager: MinigameManager | null = null
