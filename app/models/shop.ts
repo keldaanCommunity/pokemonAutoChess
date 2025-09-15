@@ -478,12 +478,7 @@ export default class Shop {
     const wildChance =
       player.wildChance + (isPVE || state.stageLevel === 0 ? 0.05 : 0)
 
-    const finals = new Set(
-      values(player.board)
-        .filter((pokemon) => pokemon.final)
-        .map((pokemon) => PkmFamily[pokemon.name])
-    )
-
+    const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
     const attractors = values(player.board).filter(
@@ -592,11 +587,7 @@ export default class Shop {
     const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()
     let threshold = 0
-    const finals = new Set(
-      values(player.board)
-        .filter((pokemon) => pokemon.final)
-        .map((pokemon) => PkmFamily[pokemon.name])
-    )
+    const finals = player.getFinalizedLines()
 
     let rarity = Rarity.SPECIAL
     for (const r in rarityProbability) {
@@ -630,11 +621,7 @@ export default class Shop {
     }
     const rarity_seed = Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
     let threshold = 0
-    const finals = new Set(
-      values(player.board)
-        .filter((pokemon) => pokemon.final)
-        .map((pokemon) => PkmFamily[pokemon.name])
-    )
+    const finals = player.getFinalizedLines()
 
     let rarity = Rarity.SPECIAL
     for (const r in rarityProbability) {

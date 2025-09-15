@@ -60,7 +60,7 @@ import {
 } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import PokemonFactory from "../pokemon-factory"
+import PokemonFactory, { getPokemonBaseline } from "../pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -630,6 +630,21 @@ export default class Player extends Schema implements IPlayer {
       const mulchCollected = this.items.filter(i => i === Item.RICH_MULCH).length + this.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) - 8
       this.items.push(mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH)
     }
+  }
+
+  getFinalizedLines(): Set<Pkm> {
+    const finals = new Set(
+      values(this.board)
+        .filter((pokemon) => pokemon.final)
+        .map((pokemon) => getPokemonBaseline(pokemon.name))
+    )
+    // special case for burmy line because of the exclusive convergent evolution rule
+    if (finals.has(Pkm.BURMY_PLANT)) {
+      finals.add(Pkm.BURMY_PLANT)
+      finals.add(Pkm.BURMY_TRASH)
+      finals.add(Pkm.BURMY_SANDY)
+    }
+    return finals
   }
 }
 
