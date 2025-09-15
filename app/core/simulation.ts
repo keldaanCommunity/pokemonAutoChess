@@ -375,7 +375,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getClosestAvailablePlaceOnBoardToPokemon(
-    pokemon: IPokemon,
+    pokemon: IPokemon | IPokemonEntity,
     team: Team
   ): { x: number; y: number } {
     const positionX = pokemon.positionX

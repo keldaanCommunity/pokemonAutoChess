@@ -613,7 +613,7 @@ const PhioneSpawnEffect = new OnSpawnEffect((pkm) => {
   if (pkm.name === Pkm.MANAPHY && pkm.items.has(Item.AQUA_EGG)) {
     pkm.items.delete(Item.AQUA_EGG)
     const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, pkm.player)
-    const coord = pkm.simulation.getClosestAvailablePlaceOnBoardToPokemon(phione, pkm.team)
+    const coord = pkm.simulation.getClosestAvailablePlaceOnBoardToPokemon(pkm, pkm.team)
     pkm.simulation.addPokemon(
       phione,
       coord.x,
