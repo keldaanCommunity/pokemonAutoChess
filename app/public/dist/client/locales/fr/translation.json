@@ -2016,7 +2016,7 @@
 		"ELECTRO_BALL": "Lance une boule électrique qui rebondit entre les ennemis, infligeant [10,20,40,SP] SPECIAL à chacun. Le nombre et la vitesse des rebonds dépendent de la SPEED du lanceur.",
 		"HORN_LEECH": "Un coup de corne qui draine l'énergie de l'ennemi, infligeant [200,SP]% de l'ATK du lanceur en SPECIAL et soignant le lanceur de 50% des dégâts infligés. 50% du surplus de soin est converti en SHIELD.",
 		"DRILL_RUN": "Charge à travers la cible comme une perceuse, infligeant [15,30,SP] TRUE et échangeant leur position. S'il y a une autre cible derrière dans la même direction, lance immédiatement à nouveau la capacité sur cette cible.. Peut infliger un coup critique par défaut.",
-		"ROCK_ARTILLERY": "Jette [10,15,25] rochers près d'ennemis aléatoires, chacun infligeant [20,30,40,SP] SPECIAL",
+		"ROCK_ARTILLERY": "Jette [10,15,25] rochers sur des ennemis aléatoires, qui atterrissent au hasard sur leur cible ou sur une case ADJACENT en infligeant [20,30,40,SP] SPECIAL",
 		"ZING_ZAP": "Roule derrière la cible, infligeant [90,PS] SPECIAL et FLINCH pendant 3 secondes. Si la cible subit PARALYSIS, le lanceur gagne [40,SP] SHIELD.",
 		"NO_RETREAT": "Gagnez 1 ATK, 1 DEF, 1 SPE_DEF et 5 SPEED par Hexadron dans votre équipe. Les cadets charge la cible pour [20,SP] SPECIAL chacun.",
 		"TACKLE": "Inflige [20,40,60,SP] SPECIAL à la cible.",
