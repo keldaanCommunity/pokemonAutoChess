@@ -2393,7 +2393,7 @@ export class FieryDanceStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
-    pokemon.addAbilityPower(30, pokemon, 0, crit)
+    pokemon.addAbilityPower(30, pokemon, 0, false)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -8925,7 +8925,7 @@ export class CrunchStrategy extends AbilityStrategy {
       true
     )
     if (death) {
-      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0, crit)
+      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0, false)
     }
   }
 }
@@ -9286,8 +9286,8 @@ export class PsyShockStrategy extends AbilityStrategy {
     const ppStolen = max(target.pp)(ppBurn)
     const extraPP = ppBurn - ppStolen
 
-    target.addPP(-ppStolen, pokemon, 0, crit)
-    pokemon.addShield(ppBurn, pokemon, 0, crit)
+    target.addPP(-ppStolen, pokemon, 0, false)
+    pokemon.addShield(ppBurn, pokemon, 0, false)
     if (extraPP > 0) {
       target.handleSpecialDamage(
         extraPP,
@@ -9370,7 +9370,7 @@ export class BulldozeStrategy extends AbilityStrategy {
           cell.value.cooldown = 500
         }
 
-        cell.value.addSpeed(-speedReduction, pokemon, 0, crit)
+        cell.value.addSpeed(-speedReduction, pokemon, 0, false)
 
         cell.value.handleSpecialDamage(
           damage,
@@ -11696,7 +11696,7 @@ export class SaltCureStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value) {
         if (cell.value.team === pokemon.team) {
-          cell.value.addShield(shield, pokemon, 0, crit)
+          cell.value.addShield(shield, pokemon, 0, false)
           cell.value.status.clearNegativeStatus()
         } else {
           if (
@@ -11847,13 +11847,13 @@ export class DecorateStrategy extends AbilityStrategy {
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
         strongestNearestAlly.addMaxHP(40, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
-        strongestNearestAlly.handleHeal(40, pokemon, 0, crit)
-        strongestNearestAlly.addSpecialDefense(15, pokemon, 0, crit)
+        strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
+        strongestNearestAlly.addSpecialDefense(15, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
-        strongestNearestAlly.addCritChance(40, pokemon, 0, crit)
+        strongestNearestAlly.addCritChance(40, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
         strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
-        strongestNearestAlly.addDefense(15, pokemon, 0, crit)
+        strongestNearestAlly.addDefense(15, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
         strongestNearestAlly.addAttack(10, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
@@ -11938,9 +11938,9 @@ export class HornLeechStrategy extends AbilityStrategy {
     // heal for 50% of the damage dealt
     const heal = Math.round(takenDamage * 0.5)
     const overheal = min(0)(heal - (pokemon.hp - pokemon.life))
-    pokemon.handleHeal(heal, pokemon, 1, crit)
+    pokemon.handleHeal(heal, pokemon, 0, false)
     if (overheal > 0) {
-      pokemon.addShield(Math.round(overheal * 0.5), pokemon, 0, crit)
+      pokemon.addShield(Math.round(overheal * 0.5), pokemon, 0, false)
     }
   }
 }
@@ -12182,7 +12182,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
         () => {
           const damage = [80, 100, 120][pokemon.stars - 1] ?? 120
           const apBoost = 40
-          pokemon.addAbilityPower(apBoost, pokemon, 0, crit)
+          pokemon.addAbilityPower(apBoost, pokemon, 0, false)
           pokemon.broadcastAbility({
             skill: Ability.ELECTRO_SHOT,
             targetX: target.positionX,
