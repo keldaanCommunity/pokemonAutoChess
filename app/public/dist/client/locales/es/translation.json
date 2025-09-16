@@ -1665,7 +1665,7 @@
 		"ICE_BALL": "Incrementa la SPE_DEF del usuario en 10 e inflige SPECIAL igual a [10,20,30,SP] + [50,100,150,SP]% de la SPE_DEF del usuario.",
 		"THRASH": "Mejora el ATK en un [100,SP]% y se queda CONFUSION por 3 segundos",
 		"MAGMA_STORM": "El objetivo queda atrapado en una vorágine de fuego que inflige [80,SP] de SPECIAL antes de moverse a un objetivo adyacente",
-		"DIRE_CLAW": "Hace [15,30,60,SP] al objetivo. Inflige aleatoriamente POISON, SLEEP o PARALYSIS por 3 segundos.",
+		"DIRE_CLAW": "Hace [15,30,60,SP] al objetivo. Inflige aleatoriamente POISONNED, SLEEP o PARALYSIS por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo deja WOUND por 5 segundos. Si el objetivo ya está WOUND, otorga un 30% de bonificación de SPECIAL",
 		"ERUPTION": "Dispara [20,30,45] proyectiles en el aire. Cada proyectil inflige [30,50,70,SP] de SPECIAL y causa BURN por 5 segundos",
 		"HAIL": "Una tormenta de granizo golpea [10,20,30] celdas aleatorias en el tablero, causando [50,SP] de SPECIAL. El granizo permanece en el suelo causando 10 SPECIAL y FREEZE por 1 segundo a los Pokémon que no son ICE que caminan sobre él.",
@@ -1937,7 +1937,7 @@
 		"ENCORE": "Lanza la última habilidad utilizada por un aliado.",
 		"STORED_POWER": "Causa 20 de SPECIAL al objetivo. Cuanto más hayan aumentado las estadísticas del usuario, más fuerte será el ataque. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "El objetivo queda POSSESSED durante [2,SP,ND=1] segundos. Si tiene RUNE_PROTECT o ya estaba POSSESSED, inflige [100,SP] de SPECIAL en su lugar.",
-		"CHAIN_CRAZED": "El usuario se inflige a sí mismo POISON durante 3 segundos y gana [15,SP] de ATK, [10,SP] de DEF y 20 de SPEED."
+		"CHAIN_CRAZED": "El usuario se inflige a sí mismo POISONNED durante 3 segundos y gana [15,SP] de ATK, [10,SP] de DEF y 20 de SPEED."
 	},
 	"effect": {
 		"STAMINA": "Firmeza",
