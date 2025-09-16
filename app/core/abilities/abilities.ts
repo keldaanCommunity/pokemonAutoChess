@@ -9316,7 +9316,7 @@ export class HeavySlamStrategy extends AbilityStrategy {
         damage * (1 + (0.5 * (pokemon.hp - target.hp)) / target.hp)
       )
     }
-    pokemon.addShield(shield, pokemon, 0, crit)
+    pokemon.addShield(shield, pokemon, 0, false)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
       .forEach((cell) => {
