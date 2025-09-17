@@ -1326,7 +1326,7 @@
 		"THRASH": "Tăng [100,SP]% ATK nhưng bị CONFUSION trong 3 giây",
 		"SOLAR_BEAM": "Gây [25,50,100,SP] ĐẶC BIỆT lên tất cả Pokémon địch đứng thành hàng phía sau mục tiêu và BURN chúng trong 3 giây. Nếu Pokémon đang ở trong tầm ngắm hoặc thời tiết xấu, tăng gấp đôi sát thương và hồi 40 PP.",
 		"MAGMA_STORM": "Mục tiêu bị nhốt trong lốc xoáy lửa. Lốc xoáy lửa gây [80,SP] SPECIAL trước khi di chuyển đến một mục tiêu gần nó",
-		"DIRE_CLAW": "Gây [15,30,60,SP] SPECIAL lên mục tiêu. Gây ra hiệu ứng POISON, SLEEP hoặc PARALYSIS trong 3 giây",
+		"DIRE_CLAW": "Gây [15,30,60,SP] SPECIAL lên mục tiêu. Gây ra hiệu ứng POISONNED, SLEEP hoặc PARALYSIS trong 3 giây",
 		"SLASHING_CLAW": "Gây [15,30,60,SP] lên mục tiêu và gây hiệu ứng WOUND trong 5 giây. Nếu mục tiêu đã bị WOUND, gây thêm 30% SPECIAL",
 		"MUD_BUBBLE": "Hồi phục [10,20,40,SP] HP cho Pokémon thi triển",
 		"HIDDEN_POWER_A": "Tạo ra 4 con Abra ở tất cả các góc của bàn cờ",
