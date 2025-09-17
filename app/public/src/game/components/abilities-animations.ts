@@ -363,6 +363,7 @@ export function addAbilitySprite(
 
 const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
   (options) => (args) => {
+    let rotation = options.rotation
     if (options?.oriented) {
       const coordinates = transformEntityCoordinates(
         args.positionX,
@@ -374,8 +375,7 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
         args.targetY,
         args.flip
       )
-      options.rotation =
-        angleBetween(coordinates, coordinatesTarget) + (options.rotation ?? 0)
+      rotation = angleBetween(coordinates, coordinatesTarget) + (rotation ?? 0)
     }
 
     const delay = options.delay ?? args.delay ?? 0
@@ -457,6 +457,7 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (options = {}) =>
     (args) => {
       const { scene, flip } = args
+      let { rotation } = options
       const [startRow, startCol, startFlip] =
         options.startCoords === "target"
           ? [args.targetX, args.targetY, args.flip]
@@ -482,8 +483,7 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
             args.targetY,
             args.flip
           )
-          options.rotation =
-            angleBetween(coordinates, coordinatesTarget) + (options.rotation ?? 0)
+          rotation = angleBetween(coordinates, coordinatesTarget) + (rotation ?? 0)
         }
 
         const sprite = addAbilitySprite(
@@ -493,7 +493,8 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
           startPosition,
           {
             destroyOnComplete: false,
-            ...options
+            ...options,
+            rotation
           }
         )
         if (!sprite) return null
@@ -573,28 +574,33 @@ const orientedProjectile: AbilityAnimationMaker<
 > = (options) => (args) => {
   const [dx, dy] = OrientationVector[options.orientation ?? args.orientation]
   let ox: number, oy: number
-  if (options.endCoords !== undefined) {
+  let { startCoords, endCoords, oriented, rotation } = options
+  if (endCoords !== undefined) {
     ;[ox, oy] =
-      options.endCoords === "caster"
+      endCoords === "caster"
         ? [args.positionX, args.positionY]
-        : options.endCoords
+        : endCoords
   } else {
     ;[ox, oy] =
-      options.startCoords === "target"
+      startCoords === "target"
         ? [args.targetX, args.targetY]
-        : (options.startCoords ?? [args.positionX, args.positionY])
+        : (startCoords ?? [args.positionX, args.positionY])
   }
   const finalCoordinates = transformEntityCoordinates(
     ox + dx * (options.distance ?? 8),
     oy + dy * (options.distance ?? 8),
     args.flip
   )
-  if (options?.oriented) {
-    options.rotation = angleBetween([dx, -dy], [0, 0]) + (options.rotation ?? 0)
-    delete options.oriented
+  if (oriented) {
+    rotation = angleBetween([dx, -dy], [0, 0]) + (rotation ?? 0)
+    oriented = false // rotation is already set, prevent computation from tweenAnimation
   }
   return tweenAnimation({
     ...options,
+    oriented,
+    rotation,
+    startCoords,
+    endCoords,
     tweenProps: {
       x: finalCoordinates[0],
       y: finalCoordinates[1],
@@ -1133,7 +1139,8 @@ export const AbilitiesAnimations: {
   [Ability.SPIN_OUT]: orientedProjectile({
     distance: 1,
     duration: 400,
-    rotation: -Math.PI / 2,
+    oriented: true,
+    rotation: 0,
     scale: 4,
     destroyOnComplete: true
   }),
@@ -1151,10 +1158,11 @@ export const AbilitiesAnimations: {
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
   [Ability.AQUA_TAIL]: orientedProjectile({
     ability: Ability.SPIN_OUT,
-    tint: 0x80ddff,
+    tint: 0x80eeff,
     distance: 1,
     duration: 400,
-    rotation: -Math.PI / 2,
+    oriented: true,
+    rotation: 0,
     scale: 3,
     destroyOnComplete: true
   }),
@@ -1794,6 +1802,8 @@ export const AbilitiesAnimations: {
   }),
   [Ability.ROAR]: orientedProjectile({
     ability: Ability.WHIRLWIND,
+    oriented: true,
+    rotation: Math.PI / 2,
     duration: 400,
     distance: 2
   }),

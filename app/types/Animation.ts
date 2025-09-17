@@ -417,4 +417,4 @@ export type AbilityAnimationArgs = {
 }
 
 export type AbilityAnimation = (args: AbilityAnimationArgs) => any
-export type AbilityAnimationMaker<O = AbilityAnimationOptions> = (options: AbilityAnimationOptions & O) => AbilityAnimation
+export type AbilityAnimationMaker<O = AbilityAnimationOptions> = (options: Readonly<AbilityAnimationOptions & O>) => AbilityAnimation
