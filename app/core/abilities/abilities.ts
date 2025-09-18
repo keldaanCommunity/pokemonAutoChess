@@ -1,4 +1,3 @@
-import { t } from "i18next"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -184,20 +183,19 @@ export class BeatUpStrategy extends AbilityStrategy {
         Pkm.HOUNDOUR,
         pokemon.player
       )
-      const coord =
-        pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
-          pokemon
+      const coord = pokemon.simulation.getClosestFreeCellToPokemonEntity(pokemon)
+      if (coord) {
+        const entity = pokemon.simulation.addPokemon(
+          houndour,
+          coord.x,
+          coord.y,
+          pokemon.team,
+          true
         )
-      const entity = pokemon.simulation.addPokemon(
-        houndour,
-        coord.x,
-        coord.y,
-        pokemon.team,
-        true
-      )
-      const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-      entity.hp = min(1)(Math.round(houndour.hp * scale))
-      entity.life = entity.hp
+        const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+        entity.hp = min(1)(Math.round(houndour.hp * scale))
+        entity.life = entity.hp
+      }
     }
   }
 }
@@ -7899,20 +7897,19 @@ export class ShedTailStrategy extends AbilityStrategy {
 
     if (lowestHealthAlly) {
       lowestHealthAlly.addShield(80, pokemon, 1, crit)
-      const substitute = PokemonFactory.createPokemonFromName(
-        Pkm.SUBSTITUTE,
-        pokemon.player
-      )
-      const coord =
-        pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
-          lowestHealthAlly
+      const coord = pokemon.simulation.getClosestFreeCellToPokemonEntity(lowestHealthAlly)
+      if (coord) {
+        const substitute = PokemonFactory.createPokemonFromName(
+          Pkm.SUBSTITUTE,
+          pokemon.player
         )
-      pokemon.moveTo(coord.x, coord.y, board)
-      pokemon.simulation.addPokemon(substitute, x, y, pokemon.team, true)
-      for (const pokemonTargetingCaster of board.cells.filter(
-        (p) => p?.targetEntityId === pokemon.id
-      )) {
-        pokemonTargetingCaster!.targetEntityId = substitute.id
+        pokemon.moveTo(coord.x, coord.y, board)
+        pokemon.simulation.addPokemon(substitute, x, y, pokemon.team, true)
+        for (const pokemonTargetingCaster of board.cells.filter(
+          (p) => p?.targetEntityId === pokemon.id
+        )) {
+          pokemonTargetingCaster!.targetEntityId = substitute.id
+        }
       }
     }
   }
@@ -7936,19 +7933,21 @@ export class ShadowPunchStrategy extends AbilityStrategy {
 
     if (lowestHealthEnemy) {
       const coord =
-        pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
+        pokemon.simulation.getClosestFreeCellToPokemonEntity(
           lowestHealthEnemy,
           (lowestHealthEnemy.team + 1) % 2
         )
-      pokemon.orientation = board.orientation(
-        coord.x,
-        coord.y,
-        pokemon.positionX,
-        pokemon.positionY,
-        pokemon,
-        lowestHealthEnemy
-      )
-      pokemon.moveTo(coord.x, coord.y, board)
+      if (coord) {
+        pokemon.orientation = board.orientation(
+          coord.x,
+          coord.y,
+          pokemon.positionX,
+          pokemon.positionY,
+          pokemon,
+          lowestHealthEnemy
+        )
+        pokemon.moveTo(coord.x, coord.y, board)
+      }
       pokemon.effects.add(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
     }
   }
@@ -10932,11 +10931,13 @@ export class BoneArmorStrategy extends AbilityStrategy {
 
     if (lowestHealthEnemy) {
       const coord =
-        pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
+        pokemon.simulation.getClosestFreeCellToPokemonEntity(
           lowestHealthEnemy,
           (lowestHealthEnemy.team + 1) % 2
         )
-      pokemon.moveTo(coord.x, coord.y, board)
+      if (coord) {
+        pokemon.moveTo(coord.x, coord.y, board)
+      }
       const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
       const defBuff = [4, 8, 12][pokemon.stars - 1] ?? 6
       const attack = target.handleSpecialDamage(
@@ -11339,6 +11340,8 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       )
     } else {
       //Builds a pillar of 100/200/300 HP and 1/3/5 DEF and SPE_DEF on the closest empty spot.
+      const coord = pokemon.simulation.getClosestFreeCellToPokemonEntity(pokemon)
+      if (!coord) return
       const pillarType =
         [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
         pokemon.stars - 1
@@ -11347,10 +11350,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
         pillarType,
         pokemon.player
       )
-      const coord =
-        pokemon.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
-          pokemon
-        )
+
       pokemon.simulation.addPokemon(
         pillar,
         coord.x,
