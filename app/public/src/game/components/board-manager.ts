@@ -344,7 +344,7 @@ export default class BoardManager {
     let nbPots = SynergyTriggers[Synergy.FLORA].filter(
       (n) => n <= floraLevel
     ).length
-    if (this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
+    if (floraLevel >= 6 && this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
       nbPots = 5
     }
     return nbPots
