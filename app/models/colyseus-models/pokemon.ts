@@ -6308,7 +6308,7 @@ export class Enamorus extends Pokemon {
 }
 
 export class Keldeo extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
