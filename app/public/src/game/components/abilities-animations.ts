@@ -1183,7 +1183,7 @@ export const AbilitiesAnimations: {
   [Ability.CRUSH_CLAW]: onTargetScale2,
   [Ability.METAL_CLAW]: onTarget({ ability: Ability.CRUSH_CLAW, scale: 2 }),
   [Ability.DRAGON_CLAW]: onTargetScale1,
-  [Ability.EARTHQUAKE]: [onCasterScale3, shakeCamera({ duration: 350 })],
+  [Ability.PRECIPICE_BLADES]: [onCasterScale3, shakeCamera({ duration: 350 })],
   [Ability.OCTAZOOKA]: projectile({
     ability: Ability.ARMOR_CANNON,
     scale: 1,
@@ -1295,7 +1295,7 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.BIDE]: onCaster({ ability: Ability.COUNTER, scale: 3 }),
-  [Ability.SHORE_UP]: onCaster({ ability: Ability.EARTHQUAKE }),
+  [Ability.SHORE_UP]: onCaster({ ability: Ability.PRECIPICE_BLADES }),
   [Ability.DRUM_BEATING]: onCaster({ positionOffset: [-20, -40], angle: -45 }),
   [Ability.TAUNT]: onCaster({ positionOffset: [0, -30] }),
   ["TAUNT_HIT"]: onTarget({ positionOffset: [0, -30] }),

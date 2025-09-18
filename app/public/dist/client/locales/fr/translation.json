@@ -23,7 +23,7 @@
 	},
 	"ability": {
 		"SOFT_BOILED": "E-Coque",
-		"EARTHQUAKE": "Séisme",
+		"PRECIPICE_BLADES": "Lame Pangéenne",
 		"SONG_OF_DESIRE": "Chant du Désir",
 		"CONFUSING_MIND": "Pensées Confuses",
 		"KNOWLEDGE_THIEF": "Vol-Savoir",
@@ -1543,7 +1543,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
-		"EARTHQUAKE": "Inflige [100,SP] SPECIAL à tous les ennemis présents sur la même rangée ou colonne que le lanceur.",
+		"PRECIPICE_BLADES": "Inflige [100,SP] SPECIAL à tous les ennemis présents sur la même rangée ou colonne que le lanceur.",
 		"SONG_OF_DESIRE": "Rend CHARM 2 cibles dans la rangée arrière pendant 3 secondes, et réduit leur ATK de [3,SP].",
 		"CONFUSING_MIND": "Rend CONFUSION 2 ennemis dans la rangée arrière pendant 3 secondes.",
 		"KNOWLEDGE_THIEF": "Utilise la capacité de la cible. Le joueur gagne 1 XP.",

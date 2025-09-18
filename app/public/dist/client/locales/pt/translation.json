@@ -23,7 +23,6 @@
 	},
 	"ability": {
 		"SOFT_BOILED": "Cozido",
-		"EARTHQUAKE": "Terremoto",
 		"SONG_OF_DESIRE": "Canção Sedutora",
 		"CONFUSING_MIND": "Mente Confusa",
 		"KNOWLEDGE_THIEF": "Ladrão de Conhecimento",
@@ -1230,7 +1229,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",
-		"EARTHQUAKE": "Inflige dano [100,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
+		"PRECIPICE_BLADES": "Inflige dano [100,SP] SPECIAL a todas as unidades inimigas na mesma coluna/linha do atacante",
 		"SONG_OF_DESIRE": "CHARM 2 oponentes na linha de fundo por 3 segundos e reduza seu ATK em [3,SP]",
 		"CONFUSING_MIND": "CONFUSION 2 oponentes na linha de fundo por [3,SP] segundos",
 		"KNOWLEDGE_THIEF": "Lançar o máximo do alvo. O jogador ganha 1 XP.",

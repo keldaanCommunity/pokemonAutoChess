@@ -319,7 +319,7 @@ export class TeaTimeStrategy extends AbilityStrategy {
   }
 }
 
-export class EarthquakeStrategy extends AbilityStrategy {
+export class PrecipiceBladesStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -13632,7 +13632,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LOCK_ON]: new LockOnStrategy(),
   [Ability.PSYCH_UP]: new PsychUpStrategy(),
   [Ability.RAZOR_WIND]: new RazorWindStrategy(),
-  [Ability.EARTHQUAKE]: new EarthquakeStrategy(),
+  [Ability.PRECIPICE_BLADES]: new PrecipiceBladesStrategy(),
   [Ability.SOFT_BOILED]: new SoftBoiledStrategy(),
   [Ability.ELECTRIC_SURGE]: new ElectricSurgeStrategy(),
   [Ability.PSYCHIC_SURGE]: new PsychicSurgeStrategy(),

@@ -2,6 +2,8 @@
 
 # Changes to Pokemon & Abilities
 
+- Earthquake has been renamed Precipice Blades for Groudon.
+
 # Changes to Synergies
 
 # Changes to Items

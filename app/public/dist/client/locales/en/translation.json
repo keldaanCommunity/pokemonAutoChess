@@ -23,7 +23,7 @@
 	},
 	"ability": {
 		"SOFT_BOILED": "Soft-Boiled",
-		"EARTHQUAKE": "Earthquake",
+		"PRECIPICE_BLADES": "Precipice Blades",
 		"SONG_OF_DESIRE": "Song of Desire",
 		"CONFUSING_MIND": "Confusing Mind",
 		"KNOWLEDGE_THIEF": "Knowledge Thief",
@@ -1543,7 +1543,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
-		"EARTHQUAKE": "Deal [100,SP] SPECIAL to all enemy Pokémon in the same row or column as the user.",
+		"PRECIPICE_BLADES": "Deal [100,SP] SPECIAL to all enemy Pokémon in the same row or column as the user.",
 		"SONG_OF_DESIRE": "Inflict 2 targets on the back line with CHARM for 3 seconds and reduce their ATK by [3,SP].",
 		"CONFUSING_MIND": "Inflict 2 opponents on the back line with CONFUSION for [3,SP] seconds.",
 		"KNOWLEDGE_THIEF": "Use the target's ability. The allied player gains 1 XP.",

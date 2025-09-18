@@ -23,7 +23,6 @@
 	},
 	"ability": {
 		"SOFT_BOILED": "Trứng Lòng Đào",
-		"EARTHQUAKE": "Động Đất",
 		"SONG_OF_DESIRE": "Bài Ca Khát Vọng",
 		"CONFUSING_MIND": "Tâm Trí Rối Bời",
 		"KNOWLEDGE_THIEF": "Kẻ Trộm Kiến Thức",
@@ -1176,7 +1175,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Giải trừ hiệu ứng và nhận [20,40,80,SP] SHIELD cho Pokemon đồng minh",
-		"EARTHQUAKE": "Gây [100,SP] SPECIAL cho tất cả Pokemon đối thủ ở cùng cột với bản thân",
+		"PRECIPICE_BLADES": "Gây [100,SP] SPECIAL cho tất cả Pokemon đối thủ ở cùng cột với bản thân",
 		"SONG_OF_DESIRE": "Khiến 2 đối thủ ở hậu tuyến bị CHARM trong 3 s, và làm giảm [3,SP] chỉ số ATK",
 		"CONFUSING_MIND": "Làm 2 đối thủ ở hậu tuyến CONFUSION trong [3,SP] giây",
 		"KNOWLEDGE_THIEF": "Sử dụng khả năng của mục tiêu. Người chơi nhận 1 XP",

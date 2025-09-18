@@ -5786,7 +5786,7 @@ export class Groudon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.EARTHQUAKE
+  skill = Ability.PRECIPICE_BLADES
   passive = Passive.PRIMAL
 }
 
@@ -7035,7 +7035,7 @@ export class PrimalGroudon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.EARTHQUAKE
+  skill = Ability.PRECIPICE_BLADES
   passive = Passive.SANDSTORM
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)

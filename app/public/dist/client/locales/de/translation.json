@@ -23,7 +23,6 @@
 	},
 	"ability": {
 		"SOFT_BOILED": "Weichei",
-		"EARTHQUAKE": "Erdbeben",
 		"SONG_OF_DESIRE": "Lied der Sehnsucht",
 		"CONFUSING_MIND": "Verwirrender Geist",
 		"KNOWLEDGE_THIEF": "Wissensdieb",
@@ -1508,7 +1507,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",
-		"EARTHQUAKE": "Fügt allen Gegnern in derselben Reihe und Spalte [100,SP] SPECIAL zu.",
+		"PRECIPICE_BLADES": "Fügt allen Gegnern in derselben Reihe und Spalte [100,SP] SPECIAL zu.",
 		"SONG_OF_DESIRE": "2 Pokémon in der Rücklinie des Gegners werden für [3,SP] Sekunden CHARM und reduziert ihren ATK um [3,SP]",
 		"CONFUSING_MIND": "Verursacht für [3,SP] Sekunden bei 2 Gegnern in der Rücklinie CONFUSION.",
 		"KNOWLEDGE_THIEF": "Setzt die Fähigkeit des Ziels ein. Der Spieler erhält 1 XP.",
