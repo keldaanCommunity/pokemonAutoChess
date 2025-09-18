@@ -1704,7 +1704,7 @@
 		"PLASMA_FIST": "Deal [120,SP] SPECIAL to the target and heal 25% of damage dealt.",
 		"SPECTRAL_THIEF": "Disappear and reappear, dealing [50,SP] SPECIAL and steal all stat boosts from the target.",
 		"GEOMANCY": "Gain [15,SP] ATK, [10,SP] SPE_DEF and 20 SPEED.",
-		"DEATH_WING": "Deal [150,SP] SPECIAL and heal for 75% of the damage taken.",
+		"DEATH_WING": "Deal [150,SP] SPECIAL and heal for 75% of the damage dealt.",
 		"SLACK_OFF": "Cure all negative status conditions, heal [30,SP]% of max HP and put the user to SLEEP for 3 seconds.",
 		"DARK_VOID": "Deal [30,SP] SPECIAL to all enemy Pokémon. All enemy Pokémon that suffer from SILENCE are put to SLEEP for 2 seconds.",
 		"OVERHEAT": "Deal [40,SP] SPECIAL to all enemy Pokémon, +30% if they suffer from BURN.",
