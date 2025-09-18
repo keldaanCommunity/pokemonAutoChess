@@ -82,6 +82,11 @@ export default function KeybindInfo() {
         <dd>{t("key_desc_lock")}</dd>
 
         <dt>
+          <RemappableKey keyId="camera_lock" />
+        </dt>
+        <dd>{t("key_desc_camera_lock")}</dd>
+
+        <dt>
           <RemappableKey keyId="switch" />
         </dt>
         <dd>{t("key_desc_switch")}</dd>
