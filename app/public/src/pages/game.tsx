@@ -446,13 +446,15 @@ export default function Game() {
       room.onMessage(
         Transfer.DIG,
         async (message: { pokemonId: string; buriedItem: Item | null }) => {
-          const g = getGameScene()
-          if (g && g.board) {
-            const pokemon = g.board.pokemons.get(message.pokemonId)
-            if (pokemon) {
-              pokemon.digAnimation(message.buriedItem)
+          setTimeout(() => {
+            const g = getGameScene()
+            if (g && g.board) {
+              const pokemon = g.board.pokemons.get(message.pokemonId)
+              if (pokemon) {
+                pokemon.digAnimation(message.buriedItem)
+              }
             }
-          }
+          }, 500)
         }
       )
 

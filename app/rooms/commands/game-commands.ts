@@ -13,6 +13,7 @@ import {
   CountEvolutionRule,
   HatchEvolutionRule
 } from "../../core/evolution-rules"
+import { getFlowerPotsUnlocked } from "../../core/flower-pots"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
@@ -22,7 +23,10 @@ import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
-import PokemonFactory, { getPokemonBaseline, PkmColorVariantsByPkm } from "../../models/pokemon-factory"
+import PokemonFactory, {
+  getPokemonBaseline,
+  PkmColorVariantsByPkm
+} from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import {
@@ -103,7 +107,6 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
-import { getFlowerPotsUnlocked } from "../../core/flower-pots"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -691,13 +694,21 @@ export class OnDragDropItemCommand extends Command<
       !(isBasicItem && existingBasicItemToCombine) &&
       UnholdableItems.includes(item) === false
     ) {
-      client.send(Transfer.DRAG_DROP_CANCEL, { ...message, text: "full", pokemonId: pokemon.id })
+      client.send(Transfer.DRAG_DROP_CANCEL, {
+        ...message,
+        text: "full",
+        pokemonId: pokemon.id
+      })
       return
     }
 
     if (!isBasicItem && pokemon.items.has(item)) {
       // prevent adding twice the same item
-      client.send(Transfer.DRAG_DROP_CANCEL, { ...message, text: "already_held", pokemonId: pokemon.id })
+      client.send(Transfer.DRAG_DROP_CANCEL, {
+        ...message,
+        text: "already_held",
+        pokemonId: pokemon.id
+      })
       return
     }
 
@@ -751,7 +762,7 @@ export class OnDragDropItemCommand extends Command<
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
       if (ConsumableItems.includes(item) === false) {
-        // item is not holdable and has not been consumed, so we add it back to player items        
+        // item is not holdable and has not been consumed, so we add it back to player items
         player.items.push(item)
       }
     }
@@ -1334,74 +1345,70 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
     }
 
-    this.room.clock.setTimeout(() => {
-      if (player.synergies.getSynergyStep(Synergy.GROUND) > 0) {
-        player.board.forEach((pokemon, pokemonId) => {
-          if (
-            pokemon.types.has(Synergy.GROUND) &&
-            !isOnBench(pokemon) &&
-            pokemon.items.has(Item.CHEF_HAT) === false
-          ) {
-            const index =
-              (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
-            const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
-            const isReachingMaxDepth = player.groundHoles[index] === 4
-            if (!hasAlreadyReachedMaxDepth) {
-              let buriedItem = isReachingMaxDepth
-                ? player.buriedItems[index]
-                : null
-              this.room.broadcast(Transfer.DIG, {
-                pokemonId,
-                buriedItem
-              })
-              this.room.clock.setTimeout(() => {
-                player.groundHoles[index] = max(5)(
-                  player.groundHoles[index] + 1
-                )
-              }, 500)
+    if (player.synergies.getSynergyStep(Synergy.GROUND) > 0) {
+      player.board.forEach((pokemon, pokemonId) => {
+        if (
+          pokemon.types.has(Synergy.GROUND) &&
+          !isOnBench(pokemon) &&
+          pokemon.items.has(Item.CHEF_HAT) === false
+        ) {
+          const index =
+            (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
+          const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
+          const isReachingMaxDepth = player.groundHoles[index] === 4
+          if (!hasAlreadyReachedMaxDepth) {
+            let buriedItem = isReachingMaxDepth
+              ? player.buriedItems[index]
+              : null
+            this.room.broadcast(Transfer.DIG, {
+              pokemonId,
+              buriedItem
+            })
+            this.room.clock.setTimeout(() => {
+              player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+            }, 1000)
 
-              if (
-                pokemon.items.has(Item.EXPLORER_KIT) &&
-                isReachingMaxDepth &&
-                !buriedItem
-              ) {
-                if (chance(0.1, pokemon)) {
-                  buriedItem = Item.BIG_NUGGET
-                } else if (chance(0.5, pokemon)) {
-                  buriedItem = Item.NUGGET
-                } else {
-                  buriedItem = Item.COIN
-                }
-              }
-
-              if (buriedItem) {
-                this.room.clock.setTimeout(() => {
-                  if (buriedItem === Item.COIN) {
-                    player.addMoney(1, true, null)
-                  } else if (buriedItem === Item.NUGGET) {
-                    player.addMoney(3, true, null)
-                  } else if (buriedItem === Item.BIG_NUGGET) {
-                    player.addMoney(10, true, null)
-                  } else if (buriedItem === Item.TREASURE_BOX) {
-                    player.items.push(...pickNRandomIn(ItemComponents, 2))
-                  } else if (isIn(SynergyGems, buriedItem)) {
-                    const type = SynergyGivenByGem[buriedItem]
-                    player.bonusSynergies.set(
-                      type,
-                      (player.bonusSynergies.get(type) ?? 0) + 1
-                    )
-                    player.items.push(buriedItem)
-                    player.updateSynergies()
-                  } else {
-                    player.items.push(buriedItem)
-                  }
-                }, 3000)
+            if (
+              pokemon.items.has(Item.EXPLORER_KIT) &&
+              isReachingMaxDepth &&
+              !buriedItem
+            ) {
+              if (chance(0.1, pokemon)) {
+                buriedItem = Item.BIG_NUGGET
+              } else if (chance(0.5, pokemon)) {
+                buriedItem = Item.NUGGET
+              } else {
+                buriedItem = Item.COIN
               }
             }
+
+            if (buriedItem) {
+              this.room.clock.setTimeout(() => {
+                if (buriedItem === Item.COIN) {
+                  player.addMoney(1, true, null)
+                } else if (buriedItem === Item.NUGGET) {
+                  player.addMoney(3, true, null)
+                } else if (buriedItem === Item.BIG_NUGGET) {
+                  player.addMoney(10, true, null)
+                } else if (buriedItem === Item.TREASURE_BOX) {
+                  player.items.push(...pickNRandomIn(ItemComponents, 2))
+                } else if (isIn(SynergyGems, buriedItem)) {
+                  const type = SynergyGivenByGem[buriedItem]
+                  player.bonusSynergies.set(
+                    type,
+                    (player.bonusSynergies.get(type) ?? 0) + 1
+                  )
+                  player.items.push(buriedItem)
+                  player.updateSynergies()
+                } else {
+                  player.items.push(buriedItem)
+                }
+              }, 2500)
+            }
           }
-        })
-      }
-    }, 1000)
+        }
+      })
+    }
 
     const rottingItems: Map<Item, Item> = new Map([
       // order matters to not convert several times in a row
