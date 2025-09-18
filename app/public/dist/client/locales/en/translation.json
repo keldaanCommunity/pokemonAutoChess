@@ -2713,7 +2713,7 @@
 		"PROTEAN2": "The Pokémon acquires the typing of the 2 highest synergies on the team",
 		"PROTEAN3": "The Pokémon acquires the typing of the 3 highest synergies on the team",
 		"CASTFORM": "Castform changes its form and the weather to SUN, RAIN or SNOW depending on your dominant synergy between FIRE WATER ICE",
-		"MANAPHY": "$t(pkm.MANAPHY) is looking for an AQUA_EGG",
+		"MANAPHY": "When given an AQUA_EGG, $t(pkm.MANAPHY) will spawn $t(pkm.PHIONE) on your board at the start of the fight",
 		"SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT or a BLACK_AUGURITE",
 		"PRIMAL": "Legend has it that you could unleash the ancient powers of these Pokémon",
 		"WONDER_GUARD": "Blocks 20 damage on every hit received",
