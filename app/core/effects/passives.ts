@@ -612,15 +612,17 @@ const ogerponMaskDropEffect = (
 const PhioneSpawnEffect = new OnSpawnEffect((pkm) => {
   if (pkm.name === Pkm.MANAPHY && pkm.items.has(Item.AQUA_EGG)) {
     pkm.items.delete(Item.AQUA_EGG)
-    const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, pkm.player)
-    const coord = pkm.simulation.getClosestAvailablePlaceOnBoardToPokemon(pkm, pkm.team)
-    pkm.simulation.addPokemon(
-      phione,
-      coord.x,
-      coord.y,
-      pkm.team,
-      true
-    )
+    const coord = pkm.simulation.getClosestFreeCellToPokemonEntity(pkm, pkm.team)
+    if (coord) {
+      const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, pkm.player)
+      pkm.simulation.addPokemon(
+        phione,
+        coord.x,
+        coord.y,
+        pkm.team,
+        true
+      )
+    }
   }
 })
 

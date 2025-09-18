@@ -1372,52 +1372,51 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.team === Team.BLUE_TEAM
           ? this.simulation.blueTeam
           : this.simulation.redTeam
-      if (team) {
-        const alliesAlive: IPokemonEntity[] = values(team).filter(
-          (e) => e.life > 0
+      if (!team) return
+      const alliesAlive: IPokemonEntity[] = values(team).filter(
+        (e) => e.life > 0
+      )
+      let koAllies: Pokemon[] = []
+      if (this.player) {
+        koAllies = values(this.player.board).filter(
+          (p) =>
+            p.id !== this.refToBoardPokemon.id &&
+            !isOnBench(p) &&
+            !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id)
         )
-        let koAllies: Pokemon[] = []
-        if (this.player) {
-          koAllies = values(this.player.board).filter(
-            (p) =>
-              p.id !== this.refToBoardPokemon.id &&
-              !isOnBench(p) &&
-              !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id)
-          )
-        } else if (this.name === Pkm.HO_OH) {
-          // HoOh marowak pve round
-          koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
-            ? []
-            : [
-              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                shiny: this.shiny,
-                emotion: Emotion.ANGRY
-              })
-            ]
-        }
-
-        const spawns = pickNRandomIn(koAllies, 3)
-        spawns.forEach((spawn) => {
-          const mon = PokemonFactory.createPokemonFromName(spawn.name, {
-            emotion: spawn.emotion,
-            shiny: spawn.shiny
-          })
-          const coord =
-            this.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(this)
-          const spawnedEntity = this.simulation.addPokemon(
-            mon,
-            coord.x,
-            coord.y,
-            this.team,
-            true
-          )
-          spawnedEntity.shield = 0 // remove existing shield
-          spawnedEntity.flyingProtection = 0 // prevent flying effects twice
-          SynergyEffects[Synergy.FOSSIL].forEach((e) =>
-            spawnedEntity.effects.delete(e)
-          )
-        })
+      } else if (this.name === Pkm.HO_OH) {
+        // HoOh marowak pve round
+        koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
+          ? []
+          : [
+            PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+              shiny: this.shiny,
+              emotion: Emotion.ANGRY
+            })
+          ]
       }
+
+      const spawns = pickNRandomIn(koAllies, 3)
+      spawns.forEach((spawn) => {
+        const coord = this.simulation.getClosestFreeCellToPokemonEntity(this)
+        if (!coord) return
+        const mon = PokemonFactory.createPokemonFromName(spawn.name, {
+          emotion: spawn.emotion,
+          shiny: spawn.shiny
+        })
+        const spawnedEntity = this.simulation.addPokemon(
+          mon,
+          coord.x,
+          coord.y,
+          this.team,
+          true
+        )
+        spawnedEntity.shield = 0 // remove existing shield
+        spawnedEntity.flyingProtection = 0 // prevent flying effects twice
+        SynergyEffects[Synergy.FOSSIL].forEach((e) =>
+          spawnedEntity.effects.delete(e)
+        )
+      })
     }
 
     const stackingItems = [

@@ -1,7 +1,6 @@
 import { IPokemonEntity, Transfer } from "../types"
 import { BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
-import { Passive } from "../types/enum/Passive"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"

@@ -1864,15 +1864,17 @@ const conversionEffect = ({
 
   // when converting to bug, get a clone
   if (synergyCopied === Synergy.BUG) {
-    const bug = PokemonFactory.createPokemonFromName(
-      entity.name,
-      player as Player
-    )
-    const coord = simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(
+    const coord = simulation.getClosestFreeCellToPokemonEntity(
       entity,
       player.team
     )
-    simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
+    if (coord) {
+      const bug = PokemonFactory.createPokemonFromName(
+        entity.name,
+        player as Player
+      )
+      simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
+    }
   }
 
   // when converting to dragon, no double synergy but gains the AP/AS/SHIELD based on opponent team
