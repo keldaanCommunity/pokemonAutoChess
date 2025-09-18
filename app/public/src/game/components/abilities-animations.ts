@@ -1320,12 +1320,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.SHADOW_BALL]: projectile({ duration: 1000 }),
   [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
-  [Ability.SOLAR_BEAM]: projectile({
-    startCoords: "target",
-    startPositionOffset: [0, -300],
-    alpha: 0.5,
-    tweenProps: { alpha: 1 }
-  }),
+  [Ability.SOLAR_BEAM]: projectile({ oriented: true, rotation: Math.PI / 2, origin: [0.5, 1] }),
   [Ability.ORIGIN_PULSE]: (args) =>
     projectile({
       startCoords: [0, args.targetY],
