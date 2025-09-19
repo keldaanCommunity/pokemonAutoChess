@@ -566,6 +566,26 @@ export default class Player extends Schema implements IPlayer {
           })
         }
       }
+
+      // Cannot be a ConditionBasedEvolutionRule because it has another CountEvolutionRule for Wormadam
+      const burmys = values(this.board).filter((p) => p.passive === Passive.BURMY)
+      if (burmys.length > 0 && state.stageLevel >= 20) {
+        const cloakTypesByBurmy = new Map<Pkm, Synergy>([
+          [Pkm.BURMY_PLANT, Synergy.GRASS],
+          [Pkm.BURMY_SANDY, Synergy.GROUND],
+          [Pkm.BURMY_TRASH, Synergy.ARTIFICIAL]
+        ])
+        const cloakTypes = burmys.map(burmy => cloakTypesByBurmy.get(burmy.name)).filter((s): s is Synergy => s != null)
+        if (cloakTypes.some(type => DungeonDetails[this.map]?.synergies.includes(type) === false)) {
+          const burmyEvolving = burmys[0]
+          burmyEvolving.evolutionRule = new ConditionBasedEvolutionRule(() => true, () => Pkm.MOTHIM)
+          burmyEvolving.evolutionRule.tryEvolve(burmyEvolving, this, state.stageLevel)
+          burmys.slice(1).forEach(burmyToRemove => {
+            this.board.delete(burmyToRemove.id)
+          })
+          this.updateSynergies()
+        }
+      }
     }
 
     newRegionalPokemons.sort(

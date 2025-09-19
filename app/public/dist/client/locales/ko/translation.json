@@ -2555,8 +2555,6 @@
 		"BERRY_EATER": "나무열매를 지닌 대상 공격시 빼앗아 먹습니다.",
 		"TOXIC_BOOST": "독 대미지를 50% 적게 받으며 POISONNED 동안 10ATK 증가합니다.",
 		"GUZZLORD": "악식킹은 타인을 위해 요리하기엔 너무 무겁고 게으릅니다. CHEF_HAT 착용 시 적을 전투불능으로 만들 때마다 영구적으로 10 최대 HP , 5 AP 증가",
-		"ENVIRONMENTAL_ADAPTATION": "이 포켓몬은 지역에 따라 각기 다른 시너지로 적응했습니다.",
-		"MOTHIM": "나메일은 도롱충이의 지역별 시너지를 따릅니다.",
 		"PSYDUCK": "피격시 [10,LK]% 확률로 CONFUSION 상태가 됩니다. CONFUSION 상태가 될시 100 AP 증가합니다.",
 		"BLOODMOON": "BLOODMOON 상태일때 폼이 변합니다.",
 		"RECYCLE": "나무열매를 보유할 경우 10HP를, 기본 조합템을 얻을 경우 25HP 및 아이템의 능력치 증가를, 인공아이템을 얻을 경우 50HP 및 아이템의 능력치 증가를 얻으며 TRASH를 받습니다.",

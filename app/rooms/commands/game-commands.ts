@@ -1574,7 +1574,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   player,
                   this.state.stageLevel
                 )
-              }
+              }              
             }
             if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
               // remove after one fight

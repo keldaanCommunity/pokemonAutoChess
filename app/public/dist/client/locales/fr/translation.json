@@ -2801,8 +2801,6 @@
 		"BERRY_EATER": "Quand le Pokémon attaque une cible, il lui vole toutes ses baies et les mange.",
 		"TOXIC_BOOST": "Ce Pokémon subit 50% de dégats en moins du poison et gagne 10 ATK tant qu'il est POISONNED.",
 		"GUZZLORD": "$t(pkm.GUZZLORD) est trop lourd pour sauter en rangée arrière et trop glouton pour cuisiner pour les autres. Quand il porte un CHEF_HAT, gagne 10 HP max et 5 AP permanents pour chaque KO infligé.",
-		"ENVIRONMENTAL_ADAPTATION": "Ce Pokémon adapte ses synergies à sa région.",
-		"MOTHIM": "$t(pkm.MOTHIM) prend les synergies de la cape régionale du Cheniselle rencontrée par le joueur.",
 		"PSYDUCK": "A [10,LK]% de chance de devenir CONFUSION à chaque coup reçu. Chaque fois que ce Pokémon devient CONFUSION, il gagne 100 AP.",
 		"BLOODMOON": "Change de forme pendant la BLOODMOON.",
 		"RECYCLE": "Nourrissez-le avec des Baies pour gagner 10HP, ou des composants pour gagner 25HP + les stats du composant, ou des objets artificiels pour gagner 50 HP + les stats de l'objet, et obtenez un TRASH en retour.",
