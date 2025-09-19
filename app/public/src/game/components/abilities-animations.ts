@@ -388,7 +388,7 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
           options.x + (options?.positionOffset?.[0] ?? 0),
           options.y + (options?.positionOffset?.[1] ?? 0)
         ],
-        options
+        {... options, rotation}
       )
     }, delay)
   }
