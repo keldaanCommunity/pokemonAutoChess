@@ -530,7 +530,7 @@ export default class Player extends Schema implements IPlayer {
     } while (newNbHats !== currentNbHats)
   }
 
-  updateRegionalPool(state: GameState, mapChanged: boolean) {
+  updateRegionalPool(state: GameState, mapChanged: boolean, previousMap?: string) {
     if (this.map === "town") {
       resetArraySchema(this.regionalPokemons, [])
       return
@@ -552,10 +552,16 @@ export default class Player extends Schema implements IPlayer {
       })
 
       if (state.specialGameRule === SpecialGameRule.REGIONAL_SPECIALTIES) {
-        this.bonusSynergies.clear()
+        if (previousMap) {
+          const { synergies: previousSynergies } = DungeonDetails[previousMap]
+          previousSynergies.forEach((synergy) => {
+            this.bonusSynergies.set(synergy, min(0)((this.bonusSynergies.get(synergy) ?? 0) - 1))
+          })
+        }
+
         const { synergies, regionalSpeciality } = DungeonDetails[this.map]
         synergies.forEach((synergy) => {
-          this.bonusSynergies.set(synergy, 1)
+          this.bonusSynergies.set(synergy, (this.bonusSynergies.get(synergy) ?? 0) + 1)
         })
         this.updateSynergies()
         if (regionalSpeciality) {

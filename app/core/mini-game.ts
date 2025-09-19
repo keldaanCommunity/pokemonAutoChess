@@ -762,8 +762,9 @@ export class MiniGame {
         if (avatar.portalId && this.portals?.has(avatar.portalId)) {
           const portal = this.portals.get(avatar.portalId)!
           if (portal.map !== player.map) {
+            const previousMap = player.map
             player.map = portal.map
-            player.updateRegionalPool(state, true)
+            player.updateRegionalPool(state, true, previousMap)
             for (let i = 0; i < player.berryTreesType.length; i++) {
               player.berryTreesType[i] = pickRandomIn(Berries)
               player.berryTreesStages[i] = 0
