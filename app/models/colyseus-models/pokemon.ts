@@ -651,8 +651,8 @@ export class Scizor extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 170
-  atk = 22
-  speed = 59
+  atk = 30
+  speed = 42
   def = 14
   speDef = 10
   maxPP = 80
@@ -665,8 +665,8 @@ export class Kleavor extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 170
-  atk = 22
-  speed = 59
+  atk = 25
+  speed = 55
   def = 14
   speDef = 10
   maxPP = 80
@@ -6308,7 +6308,7 @@ export class Enamorus extends Pokemon {
 }
 
 export class Keldeo extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIGHTING])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
