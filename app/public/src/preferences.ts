@@ -1,13 +1,14 @@
 import Phaser from "phaser"
-import { localStore, LocalStoreKeys } from "./pages/utils/store"
 import { useCallback, useEffect, useState } from "react"
 import { removeInArray } from "../../utils/array"
+import { LocalStoreKeys, localStore } from "./pages/utils/store"
 
 export type Keybindings = {
   sell: string
   buy_xp: string
   refresh: string
   lock: string
+  camera_lock: string
   switch: string
   emote: string
 }
@@ -22,6 +23,7 @@ export interface IPreferencesState {
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   disableCameraShake: boolean
+  cameraLocked: boolean
   keybindings: Keybindings
   renderer: number
   antialiasing: boolean
@@ -38,6 +40,7 @@ const defaultPreferences: IPreferencesState = {
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   disableCameraShake: true,
+  cameraLocked: false,
   renderer: Phaser.AUTO,
   antialiasing: true,
   keybindings: {
@@ -45,6 +48,7 @@ const defaultPreferences: IPreferencesState = {
     buy_xp: "F",
     refresh: "D",
     lock: "R",
+    camera_lock: "L",
     switch: "SPACE",
     emote: "A"
   }

@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app"
 import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import { DesignTiled } from "../../../../core/design"
+import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { canSell } from "../../../../core/pokemon-entity"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
@@ -13,6 +14,7 @@ import {
   IDragDropMessage,
   Transfer
 } from "../../../../types"
+import { BOARD_WIDTH } from "../../../../types/Config"
 import {
   DungeonDetails,
   DungeonMusic,
@@ -28,8 +30,9 @@ import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
 import { transformBoardCoordinates } from "../../pages/utils/utils"
-import { preference } from "../../preferences"
+import { preference, savePreferences } from "../../preferences"
 import AnimationManager from "../animation-manager"
+import { clearAbilityAnimations } from "../components/abilities-animations"
 import BattleManager from "../components/battle-manager"
 import BoardManager from "../components/board-manager"
 import ItemContainer from "../components/item-container"
@@ -41,9 +44,6 @@ import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
-import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
-import { BOARD_WIDTH } from "../../../../types/Config"
-import { clearAbilityAnimations } from "../components/abilities-animations"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -206,7 +206,7 @@ export default class GameScene extends Scene {
     this.input.on("pointermove", (pointer) => {
       if (!pointer.isDown || this.itemDragged || this.pokemonDragged) return
       const cam = this.cameras.main
-      if (cam.zoom === 1) return
+      if (cam.zoom === 1 || preference("cameraLocked")) return
       cam.scrollX -= (pointer.x - pointer.prevPosition.x) / cam.zoom
       cam.scrollY -= (pointer.y - pointer.prevPosition.y) / cam.zoom
     })
@@ -254,6 +254,11 @@ export default class GameScene extends Scene {
       if (this.pokemonHovered) {
         this.switchBetweenBenchAndBoard(this.pokemonHovered)
       }
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
+      console.log("toggle camera input")
+      savePreferences({ cameraLocked: !preference("cameraLocked") })
     })
   }
 
@@ -558,7 +563,11 @@ export default class GameScene extends Scene {
           if (dropZone.name == "board-zone") {
             const [x, y] = [dropZone.getData("x"), dropZone.getData("y")]
             if (gameObject.positionX !== x || gameObject.positionY !== y) {
-              this.dispatchEvent<IDragDropMessage>(Transfer.DRAG_DROP, { x, y, id: gameObject.id })
+              this.dispatchEvent<IDragDropMessage>(Transfer.DRAG_DROP, {
+                x,
+                y,
+                id: gameObject.id
+              })
               this.lastDragDropPokemon = gameObject
             } else {
               // RETURN TO ORIGINAL SPOT
@@ -587,10 +596,13 @@ export default class GameScene extends Scene {
         ) {
           // Item -> Item = COMBINE
           if (dropZone instanceof ItemContainer) {
-            this.dispatchEvent<IDragDropCombineMessage>(Transfer.DRAG_DROP_COMBINE, {
-              itemA: dropZone.name,
-              itemB: gameObject.name
-            })
+            this.dispatchEvent<IDragDropCombineMessage>(
+              Transfer.DRAG_DROP_COMBINE,
+              {
+                itemA: dropZone.name,
+                itemB: gameObject.name
+              }
+            )
           }
           // Item -> POKEMON(board zone) = EQUIP
           else if (
@@ -602,7 +614,8 @@ export default class GameScene extends Scene {
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               zone: dropZone.name,
-              index: dropZone.getData("x") + dropZone.getData("y") * BOARD_WIDTH,
+              index:
+                dropZone.getData("x") + dropZone.getData("y") * BOARD_WIDTH,
               id: gameObject.name
             })
           }
@@ -664,19 +677,33 @@ export default class GameScene extends Scene {
           dropZone.getData("sprite")?.setFrame(1)
         }
 
-        if (gameObject instanceof ItemContainer && dropZone.name === "board-zone" && !(
-          this.room?.state.phase == GamePhaseState.FIGHT &&
-          dropZone.getData("y") != 0
-        ) && this.board?.pokemons) {
-          const pokemonOnCell = [...this.board.pokemons.values()].find(p => p.positionX === dropZone.getData("x") && p.positionY === dropZone.getData("y"))
+        if (
+          gameObject instanceof ItemContainer &&
+          dropZone.name === "board-zone" &&
+          !(
+            this.room?.state.phase == GamePhaseState.FIGHT &&
+            dropZone.getData("y") != 0
+          ) &&
+          this.board?.pokemons
+        ) {
+          const pokemonOnCell = [...this.board.pokemons.values()].find(
+            (p) =>
+              p.positionX === dropZone.getData("x") &&
+              p.positionY === dropZone.getData("y")
+          )
           if (pokemonOnCell) {
             // item dragged over a pokemon, highlight the pokemon
             this.setHovered(pokemonOnCell)
           }
         }
 
-        if (gameObject instanceof ItemContainer && dropZone.name === "flower-pot-zone" && Mulches.includes(gameObject.name)) {
-          const flowerMonSprite = this.board?.flowerPokemonsInPots[dropZone.getData("index")]
+        if (
+          gameObject instanceof ItemContainer &&
+          dropZone.name === "flower-pot-zone" &&
+          Mulches.includes(gameObject.name)
+        ) {
+          const flowerMonSprite =
+            this.board?.flowerPokemonsInPots[dropZone.getData("index")]
           if (flowerMonSprite) {
             this.setHovered(flowerMonSprite)
           }
@@ -717,10 +744,16 @@ export default class GameScene extends Scene {
           this.sellZone?.onDragLeave()
         }
 
-        if (dropZone.name === "board-zone" &&
+        if (
+          dropZone.name === "board-zone" &&
           gameObject instanceof ItemContainer &&
-          this.board?.pokemons) {
-          const pokemonOnCell = [...this.board.pokemons.values()].find(p => p.positionX === dropZone.getData("x") && p.positionY === dropZone.getData("y"))
+          this.board?.pokemons
+        ) {
+          const pokemonOnCell = [...this.board.pokemons.values()].find(
+            (p) =>
+              p.positionX === dropZone.getData("x") &&
+              p.positionY === dropZone.getData("y")
+          )
           if (pokemonOnCell) {
             this.clearHovered(pokemonOnCell)
           }
@@ -792,7 +825,10 @@ export default class GameScene extends Scene {
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {
     if (preference("disableCameraShake")) return
-    this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
+    this.cameras.main.shake(
+      options?.duration ?? 250,
+      options?.intensity ?? 0.01
+    )
   }
 
   dispatchEvent<T>(eventName: string, detail: T) {
