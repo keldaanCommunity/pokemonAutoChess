@@ -427,7 +427,7 @@ export default class Shop {
           )
           : types.includes(Synergy.WILD) === false
 
-        return isOfTypeWanted && !finals.has(pkm)
+        return isOfTypeWanted && !finals.has(getPokemonBaseline(pkm))
       })
 
     if (candidates.length > 0) {
