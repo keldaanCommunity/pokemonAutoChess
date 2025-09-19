@@ -1647,7 +1647,7 @@
 		"RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target. Can crit by default.",
 		"WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with PARALYSIS for 3 seconds.",
 		"ELECTRIC_SURGE": "Increase the SPEED of all ELECTRIC allies by [10,SP] except the user.",
-		"PSYCHIC_SURGE": "Increase the AP of all PSYCHIC allies other than the user by [20,SP] except the user.",
+		"PSYCHIC_SURGE": "Increase the AP of all PSYCHIC allies by [20,SP] except the user.",
 		"MIND_BLOWN": "Deal [50,SP]% of the target's current HP as SPECIAL.",
 		"PAYDAY": "Deals [30,60,90,SP] SPECIAL. If the target is KO'd, the allied player receives [1,2,3] GOLD.",
 		"PICKUP": "Deals [30,60,120,SP] SPECIAL and steal one item from the target if possible, otherwise steal [1,2,3] GOLD from its owner.",
