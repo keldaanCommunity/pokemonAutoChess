@@ -642,23 +642,6 @@ const ogerponMaskDropEffect = (
     }
   }, mask)
 
-const PhioneSpawnEffect = new OnSpawnEffect((pkm) => {
-  if (pkm.name === Pkm.MANAPHY && pkm.items.has(Item.AQUA_EGG)) {
-    pkm.items.delete(Item.AQUA_EGG)
-    const coord = pkm.simulation.getClosestFreeCellToPokemonEntity(pkm, pkm.team)
-    if (coord) {
-      const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, pkm.player)
-      pkm.simulation.addPokemon(
-        phione,
-        coord.x,
-        coord.y,
-        pkm.team,
-        true
-      )
-    }
-  }
-})
-
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -722,7 +705,6 @@ export const PassiveEffects: Partial<
       Pkm.OGERPON_WELLSPRING
     )
   ],
-  [Passive.MANAPHY]: [PhioneSpawnEffect],
   [Passive.PACHIRISU]: [PachirisuBerryEffect],
   [Passive.SOUL_HEART]: [
     new OnKillEffect((pokemon) => {

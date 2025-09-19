@@ -6432,6 +6432,22 @@ export class Manaphy extends Pokemon {
   range = 3
   skill = Ability.HEART_SWAP
   passive = Passive.MANAPHY
+  afterSimulationStart({ entity, simulation, player }) {
+    if (entity.items.has(Item.AQUA_EGG)) {
+      entity.items.delete(Item.AQUA_EGG)
+      const coord = simulation.getClosestFreeCellToPokemonEntity(entity, entity.team)
+      if (coord) {
+        const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
+        simulation.addPokemon(
+          phione,
+          coord.x,
+          coord.y,
+          entity.team,
+          true
+        )
+      }
+    }
+  }
 }
 
 export class Rotom extends Pokemon {

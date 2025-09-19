@@ -200,7 +200,7 @@ export class Board {
 
     let prevCells: Array<[number, number]> = [[pokemon.positionX, pokemon.positionY]]
     for (let r = 1; r <= range; r++) {
-      let nextCells = new Array<[number, number]>()
+      const nextCells = new Array<[number, number]>()
       orientations.forEach((orientation) => {
         prevCells.forEach((cell) => {
           const x = cell[0] + OrientationVector[orientation][0]
