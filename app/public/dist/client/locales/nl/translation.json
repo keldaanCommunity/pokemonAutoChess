@@ -1723,7 +1723,7 @@
 		"create_bot": "Kan ik mijn eigen bot maken?",
 		"create_bot_answer": "Veilig. Je moet minimaal niveau 20 zijn om de Bot Builder-gadget te ontgrendelen. Je kunt het gebruiken om je bot te maken en in te dienen. Deze wordt verzonden naar het #bot-creation-kanaal op Discord voor beoordeling door het botreviewersteam.",
 		"elo": "Hoe werkt het elo-systeem?",
-		"elo_answer": "Het elo-systeem in Pokemon Auto Chess werkt hetzelfde als in andere op elo gebaseerde spellen zoals Chess, Lol, Starcraft enz... Om elo-punten te verdienen, moet je andere spelers verslaan. Hoe hoger de elo van je tegenstander, hoe meer elo je krijgt door hem te verslaan, en vice versa. Als je 15 dagen niet speelt, begint je elo af te nemen (-10 elo/dag).",
+		"elo_answer": "Het elo-systeem in Pokemon Auto Chess werkt hetzelfde als in andere op elo gebaseerde spellen zoals Chess, Lol, Starcraft enz... Om elo-punten te verdienen, moet je andere spelers verslaan. Hoe hoger de elo van je tegenstander, hoe meer elo je krijgt door hem te verslaan, en vice versa. Als je 20 dagen niet speelt, begint je elo af te nemen (-5 elo/dag).",
 		"missing_points": "Ik heb geen elo-punten gekregen in mijn laatste spel, waarom?",
 		"missing_points_answer": "Bots geven geen elo, alleen menselijke spelers tellen mee voor de elo-rating. Het is ook mogelijk dat de game elo had uitgeschakeld (\"Just for fun\"-modus)",
 		"damage": "Wat zijn de speciale schade en fysieke schade?",
