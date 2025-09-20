@@ -446,7 +446,7 @@ export default class Shop {
       ? this.getRegionalPool(rarity, player)
       : this.getPool(rarity)
     if (pool) {
-      const index = pool.indexOf(pkm)
+      const index = pool.indexOf(getPokemonBaseline(pkm))
       if (index >= 0) {
         pool.splice(index, 1)
       }

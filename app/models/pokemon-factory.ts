@@ -153,7 +153,7 @@ export function getPokemonBaseline(name: Pkm) {
       return Pkm.FLABEBE
 
     default:
-      if (PkmFamily[name] == Pkm.UNOWN_A) {
+      if (PkmFamily[name] === Pkm.UNOWN_A) {
         return name
       }
       return PkmFamily[name]
