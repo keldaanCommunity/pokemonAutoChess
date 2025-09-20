@@ -2646,8 +2646,6 @@
 		"BERRY_EATER": "Cuando el Pokémon ataca a un objetivo, le roba todas sus bayas y se las come.",
 		"TOXIC_BOOST": "El pokémon recibe un 50% menos de daño de veneno y gana 10 ATK mientras esté POISONNED",
 		"GUZZLORD": "Guzzlord pesa demasiado como para saltar y demasiado glotón como para cocinar para los demás. Cuando lleva un CHEF_HAT, gana de manera permanente 10 HP máximos y 5 de AP permanente por cada KO.",
-		"ENVIRONMENTAL_ADAPTATION": "Este Pokémon adapta sus sinergias a la región.",
-		"MOTHIM": "$t(pkm.MOTHIM) toma sinergias de la forma regional de $t(pkm.BURMY) encontradas por el jugador.",
 		"PSYDUCK": "Tiene un [10,LK]% de posibilidades de sufrir CONFUSION al recibir un golpe. Cada vez que entra en CONFUSION, gana 100 AP",
 		"BLOODMOON": "Cambia de forma durante BLOODMOON",
 		"RECYCLE": "Aliméntelo con bayas para ganar 10 HP, con componentes básicos para obtener 25 HP + estadísticas de objetos o aliméntelo con objetos artificiales para obtener 50 HP + estadísticas de objetos y obtenga TRASH a cambio.",
