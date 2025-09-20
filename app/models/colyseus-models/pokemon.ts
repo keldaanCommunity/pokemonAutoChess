@@ -2753,7 +2753,7 @@ export class Rhyhorn extends Pokemon {
   speed = 38
   def = 12
   speDef = 4
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HORN_DRILL
 }
@@ -2772,7 +2772,7 @@ export class Rhydon extends Pokemon {
   speed = 38
   def = 20
   speDef = 6
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HORN_DRILL
 }
@@ -2790,7 +2790,7 @@ export class Rhyperior extends Pokemon {
   speed = 38
   def = 30
   speDef = 8
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.HORN_DRILL
 }
