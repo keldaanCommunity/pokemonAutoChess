@@ -45,10 +45,14 @@ export class GroundHoleEffect extends OnSpawnEffect {
             let defBuff = holeLevel * [0, 1, 2, 3, 3][synergyLevel]
             let atkBuff = holeLevel === 5 ? [0, 3, 5, 8, 8][synergyLevel] : 0
             if (synergyLevel === 4) {
-                const nbFullyDugHoles = player?.groundHoles.slice(0, 24).filter(hole => hole === 5).length ?? 0
-                defBuff += nbFullyDugHoles
-                if (nbFullyDugHoles === 3 * 8) {
-                    atkBuff += 12
+                const nbFullyDugRows =
+                    [0, 8, 16].reduce((count, startIdx) => {
+                        const row = player?.groundHoles.slice(startIdx, startIdx + 8) ?? [];
+                        return count + (row.every(hole => hole === 5) ? 1 : 0);
+                    }, 0);
+                defBuff += nbFullyDugRows * 5
+                if (nbFullyDugRows === 3) {
+                    atkBuff += 5
                     player?.titles.add(Title.MOLE)
                 }
             }

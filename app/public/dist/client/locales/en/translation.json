@@ -2178,7 +2178,7 @@
 		"TILLER": "Gain from +1 to + 5 DEF and SPE_DEF and +3 ATK at max depth",
 		"DIGGER": "Gain from +2 to +10 DEF and SPE_DEF and +5 ATK at max depth",
 		"DRILLER": "Gain from +3 to +15 DEF and SPE_DEF and +8 ATK at max depth",
-		"DEEP_MINER": "Gain 1 extra DEF and SPE_DEF for each fully dug hole on your half of the board and +12 ATK when your half of the board is fully dug",
+		"DEEP_MINER": "Gain 5 extra DEF and SPE_DEF for each fully dug row and +5 ATK when your half of the board is fully dug",
 		"POISONOUS": "[30,LK]% chance to POISONNED",
 		"VENOMOUS": "[60,LK]% chance to POISONNED. Max stacks of POISONNED +1",
 		"TOXIC": "[100,LK]% chance to POISONNED. Max stacks of POISONNED +2",
