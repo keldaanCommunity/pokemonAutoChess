@@ -8987,6 +8987,7 @@ export class IceFangStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const freezeDuration = [1000, 1500, 2000][pokemon.stars - 1] ?? 2000
     target.handleSpecialDamage(
       damage,
       board,
@@ -8995,7 +8996,7 @@ export class IceFangStrategy extends AbilityStrategy {
       crit,
       true
     )
-    target.status.triggerFreeze(1000, target)
+    target.status.triggerFreeze(freezeDuration, target)
   }
 }
 

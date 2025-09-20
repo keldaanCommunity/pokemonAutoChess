@@ -1843,7 +1843,7 @@
 		"CROSS_POISON": "Verursacht [30,60,120,SP] SPECIAL an Ziel und benachbarten Gegnern und POISONNED sie 2 Sekunden lang",
 		"DOUBLE_EDGE": "Fügt dem Ziel [55,110,220,SP] PHYSICAL zu. Der Anwender verletzt sich selbst für [20,40,60,SP] PHYSICAL.",
 		"FIRE_FANG": "Verursacht [30,60,120,SP] SPECIAL und fügt 2 Sekunden lang BURN zu",
-		"ICE_FANG": "Verursacht [30,60,120,SP] SPECIAL und verursacht 1 Sekunde lang FREEZE",
+		"ICE_FANG": "Verursacht [30,60,120,SP] SPECIAL und verursacht [1,1.5,2,ND=1] Sekunden lang FREEZE",
 		"THUNDER_FANG": "Verursacht [30,60,120,SP] SPECIAL und fügt 3 Sekunden lang PARALYSIS zu",
 		"TAIL_WHIP": "Verringert die DEF des Ziels um [30,SP] %.",
 		"PSYSHIELD_BASH": "Rennt in den Rücken des Feindes und fügt allen Gegnern im Weg [30,40,50,60,SP] SPECIAL zu und PROTECT den Zaubernden 1 Sekunde lang",

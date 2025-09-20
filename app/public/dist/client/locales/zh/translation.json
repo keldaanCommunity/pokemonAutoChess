@@ -1879,7 +1879,7 @@
 		"CROSS_POISON": "对目标及其ADJACENT敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入POISONNED 2秒  。",
 		"DOUBLE_EDGE": "对目标造成[55,110,220,SP]点PHYSICAL，使用者自己受到[20,40,60,SP]点PHYSICAL。",
 		"FIRE_FANG": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入BURN 2秒。",
-		"ICE_FANG": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入FREEZE 1秒。",
+		"ICE_FANG": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入FREEZE [1,1.5,2,ND=1]秒。",
 		"THUNDER_FANG": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入PARALYSIS 3秒。",
 		"TAIL_WHIP": "降低目标[30,SP]%的DEF。",
 		"PSYSHIELD_BASH": "突进至最远的可触及敌方宝可梦的邻位，对经过的所有敌方宝可梦造成[30,40,50,60,SP]点SPECIAL，并使使用者获得PROTECT 1秒。",

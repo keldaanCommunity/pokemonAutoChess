@@ -1880,7 +1880,7 @@
 		"CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon ADJACENT to them and inflict them with POISONNED for 2 seconds.",
 		"DOUBLE_EDGE": "Deal [55,110,220,SP] PHYSICAL to target. The user hurts itself for [20,40,60,SP] PHYSICAL.",
 		"FIRE_FANG": "Deal [30,60,120,SP] SPECIAL to the target and apply BURN for 2 seconds.",
-		"ICE_FANG": "Deal [30,60,120,SP] SPECIAL and apply FREEZE for 1 second.",
+		"ICE_FANG": "Deal [30,60,120,SP] SPECIAL and apply FREEZE for [1,1.5,2,ND=1] seconds.",
 		"THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflict PARALYSIS for 3 seconds.",
 		"TAIL_WHIP": "Reduce the target's DEF by [30,SP]%.",
 		"PSYSHIELD_BASH": "Dash to the farthest reachable enemy Pokémon, dealing [30,40,50,60,SP] SPECIAL to all enemy Pokémon in the path and PROTECT the user for 1 second.",

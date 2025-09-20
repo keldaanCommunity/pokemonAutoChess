@@ -1880,7 +1880,7 @@
 		"CROSS_POISON": "Inflige [30,60,120,SP] SPECIAL et POISONNED pendant 2 secondes à la cible et aux ennemis ADJACENT.",
 		"DOUBLE_EDGE": "Inflige [55,110,220,SP] PHYSICAL à la cible. Le lanceur se blesse lui-même et subit [20,40,60,SP] PHYSICAL.",
 		"FIRE_FANG": "Inflige [30,60,120,SP] SPECIAL et BURN pendant 2 secondes.",
-		"ICE_FANG": "Inflige [30,60,120,SP] SPECIAL et FREEZE pendant 1 seconde.",
+		"ICE_FANG": "Inflige [30,60,120,SP] SPECIAL et FREEZE pendant [1,1.5,2,ND=1] secondes.",
 		"THUNDER_FANG": "Inflige [30,60,120,SP] SPECIAL et PARALYSIS pendant 3 secondes.",
 		"TAIL_WHIP": "Réduit la DEF de la cible de [30,SP]%.",
 		"PSYSHIELD_BASH": "Fonce vers l'ennemi le plus éloigné, en infligeant [30,40,50,60,SP] SPECIAL à tous les ennemis sur son chemin. Le lanceur reçoit PROTECT pendant 1 seconde.",

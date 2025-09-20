@@ -6515,15 +6515,15 @@ export class IronBundle extends Pokemon {
 }
 
 export class Lapras extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.ICE])
+  types = new SetSchema<Synergy>([Synergy.AQUATIC, Synergy.ICE, Synergy.SOUND])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 225
   atk = 12
   speed = 44
   def = 10
   speDef = 12
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.DIVE
 }
@@ -13541,7 +13541,7 @@ export class Arctozolt extends Pokemon {
 }
 
 export class Arctovish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.WATER, Synergy.FOSSIL])
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.AQUATIC, Synergy.FOSSIL])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
