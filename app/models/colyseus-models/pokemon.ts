@@ -1024,7 +1024,7 @@ export class Garchomp extends Pokemon {
   def = 12
   speDef = 12
   maxPP = 100
-  range = 2
+  range = 1
   skill = Ability.DRAGON_BREATH
 }
 
