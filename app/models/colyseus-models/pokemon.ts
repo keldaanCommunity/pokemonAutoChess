@@ -13027,19 +13027,20 @@ export class Trevenant extends Pokemon {
 
 export class Qwilfish extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.WATER,
     Synergy.POISON,
     Synergy.AQUATIC
   ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 175
-  atk = 20
+  atk = 13
   speed = 52
   def = 15
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 1
-  skill = Ability.BARB_BARRAGE
+  skill = Ability.STOCKPILE
   passive = Passive.QWILFISH
 }
 
@@ -13071,12 +13072,12 @@ export class Overqwil extends Pokemon {
     Synergy.POISON,
     Synergy.AQUATIC
   ])
-  rarity = Rarity.EPIC
+  rarity = Rarity.UNIQUE
   stars = 4
-  hp = 230
+  hp = 250
   atk = 18
   speed = 52
-  def = 12
+  def = 18
   speDef = 8
   maxPP = 100
   range = 1

@@ -1,5 +1,7 @@
 # New Pokemons:
 
+- Qwilfish
+
 # Changes to Pokemon & Abilities
 
 - Earthquake has been renamed Precipice Blades for Groudon.
@@ -11,6 +13,7 @@
 - Galarian Zapdos is now a regional variant of Zapdos in Fighting regions
 - Galarian Articuno is now a regional variant of Articuno in Psychic regions ; Range 2 → 3
 - Galarian Moltres is now a regional variant of Moltres in Dark regions
+- Hisuian Qwilfish is now Unique regional variant ; new passive: gains 1 AP permanently after every cast ; evolves into Overqwil after 20 casts;  Barb Barrage damage: 15/30/60 → 20/40/60/80
 
 # Changes to Synergies
 

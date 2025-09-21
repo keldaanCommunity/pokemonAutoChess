@@ -763,6 +763,7 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.AQUA_JET]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.STOCKPILE]: onCaster({ oriented: true, rotation: -Math.PI / 2, ability: Ability.AQUA_JET }),
   [Ability.EXTREME_SPEED]: [onCaster({}), onTarget({})],
   ["POWER_WHIP/hit"]: onCasterScale3,
   [Ability.SALT_CURE]: onCaster({

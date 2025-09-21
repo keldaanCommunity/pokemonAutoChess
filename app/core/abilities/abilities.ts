@@ -7401,15 +7401,17 @@ export class BarbBarrageStrategy extends AbilityStrategy {
               orientation: v.orientation
             })
           }
-        })
-      target.handleSpecialDamage(
-        pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15,
+        })      
+    }
+
+    const damage = [20,40,60,80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(
+        damage,
         board,
         AttackType.SPECIAL,
         pokemon,
         crit
       )
-    }
   }
 }
 
@@ -11821,6 +11823,47 @@ export class SwallowStrategy extends AbilityStrategy {
   }
 }
 
+export class StockpileStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    if (pokemon.count.ult % 4 === 0) {
+      // If over 3 stacks, spit up, propelling the user to the backline and dealing 50% of max HP as SPECIAL to the target
+      const damage = Math.ceil(0.5 * pokemon.hp)
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      // move to backline
+      const corner = board.getTeleportationCell(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.team
+      )
+      if (corner) {
+        pokemon.broadcastAbility({ skill: Ability.STOCKPILE, targetX: corner.x, targetY: corner.y })
+        pokemon.moveTo(corner.x, corner.y, board)
+      }
+      // retrieve base stats
+      pokemon.hp = pokemon.baseHP
+      pokemon.life = Math.min(pokemon.life, pokemon.hp)
+      pokemon.addSpeed(30, pokemon, 0, false)
+
+    } else {
+      pokemon.addMaxHP(50, pokemon, 1, crit)
+      pokemon.addSpeed(-10, pokemon, 0, false)
+    }
+  }
+}
+
 export class DecorateStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -14017,5 +14060,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HYPER_DRILL]: new HyperDrillStrategy(),
   [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy(),
   [Ability.AXE_KICK]: new AxeKickStrategy(),
-  [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy()
+  [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy(),
+  [Ability.STOCKPILE]: new StockpileStrategy()
 }

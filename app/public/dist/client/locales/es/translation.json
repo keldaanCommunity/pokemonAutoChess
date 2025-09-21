@@ -1748,7 +1748,7 @@
 		"FLORAL_HEALING": "Cura HP equivalente al PP máximo que posea el portador de Comfey o del propio Comfey si no es llevado por nadie",
 		"VINE_WHIP": "Causa [100,SP] de SPECIAL, causando FLINCH a todos los pokémon adyacentes por 3 segundos",
 		"BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuaio como SPECIAL",
-		"BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,60,SP] de SPECIAL y dejando POISONNED a todos los pokémon adyacentes por 3 segundos",
+		"BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [20,40,60,80,SP] de SPECIAL y dejando POISONNED a todos los pokémon adyacentes por 3 segundos",
 		"MAGIC_POWDER": "Gana [10,20,40,SP] de SHIELD y deja SILENCE a los enemigos adyacentes por [2,3,4] segundos",
 		"INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con [50,LK]% chance de dejar BURN por 3 segundos y causando [30, SP] de SPECIAL 2 veces a los Pokémon con los que choca",
 		"RETALIATE": "Inflige [150,SP]% del ATK como SPECIAL al objetivo + 1 ataque adicional por aliado caido",
