@@ -5332,6 +5332,11 @@ export class GalarianZapdos extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.THUNDEROUS_KICK
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.FIGHTING)
+  }
 }
 
 export class Zeraora extends Pokemon {
@@ -5446,6 +5451,11 @@ export class GalarianMoltres extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIERY_WRATH
+  regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Pinsir extends Pokemon {
@@ -5487,8 +5497,13 @@ export class GalarianArticuno extends Pokemon {
   def = 6
   speDef = 6
   maxPP = 80
-  range = 2
+  range = 3
   skill = Ability.FREEZING_GLARE
+  regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.PSYCHIC)
+  }
 }
 
 export class Dialga extends Pokemon {
@@ -13010,23 +13025,43 @@ export class Trevenant extends Pokemon {
   additional = true
 }
 
+export class Qwilfish extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 20
+  speed = 52
+  def = 15
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.BARB_BARRAGE
+  passive = Passive.QWILFISH
+}
+
 export class HisuianQwilfish extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DARK,
     Synergy.POISON,
     Synergy.AQUATIC
   ])
-  rarity = Rarity.EPIC
-  stars = 1
+  rarity = Rarity.UNIQUE
+  stars = 3
   evolution = Pkm.OVERQWIL
-  hp = 95
-  atk = 7
+  evolutionRule = new ConditionBasedEvolutionRule(pokemon => pokemon.ap >= 20)
+  hp = 175
+  atk = 13
   speed = 52
-  def = 8
-  speDef = 4
+  def = 15
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.BARB_BARRAGE
+  passive = Passive.HISUIAN_QWILFISH
   regional = true
 }
 
@@ -13037,7 +13072,7 @@ export class Overqwil extends Pokemon {
     Synergy.AQUATIC
   ])
   rarity = Rarity.EPIC
-  stars = 2
+  stars = 4
   hp = 230
   atk = 18
   speed = 52
@@ -19334,6 +19369,7 @@ export const PokemonClasses: Record<
   [Pkm.ALOLAN_EXEGGUTOR]: AlolanExeggutor,
   [Pkm.COMFEY]: Comfey,
   [Pkm.CARNIVINE]: Carnivine,
+  [Pkm.QWILFISH]: Qwilfish,
   [Pkm.HISUIAN_QWILFISH]: HisuianQwilfish,
   [Pkm.OVERQWIL]: Overqwil,
   [Pkm.HISUIAN_TYPHLOSION]: HisuianTyphlosion,

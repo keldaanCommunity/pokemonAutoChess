@@ -8,6 +8,9 @@
 - Keldeo: Fighting/Water → Fighting/Aquatic
 - Lapras: Water/Ice → Aquatic/Ice/Sound ; PP 120 → 100, HP 250 → 225
 - Arctovish: Ice/Water/Fossil → Ice/Aquatic/Fossil ; buff Ice Fang: freeze duration 1 second → 1/1.5/2 seconds
+- Galarian Zapdos is now a regional variant of Zapdos in Fighting regions
+- Galarian Articuno is now a regional variant of Articuno in Psychic regions ; Range 2 → 3
+- Galarian Moltres is now a regional variant of Moltres in Dark regions
 
 # Changes to Synergies
 

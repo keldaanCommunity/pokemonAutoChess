@@ -1,4 +1,4 @@
-import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { PokemonClasses, Qwilfish } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
@@ -245,6 +245,10 @@ const KubfuOnKillEffect = new OnKillEffect(
     }
   }
 )
+
+const QwilfishOnCastEffect = new OnAbilityCastEffect((pokemon, board) => {
+  pokemon.addAbilityPower(1, pokemon, 0, false, true)
+})
 
 export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   board.forEach((x, y, pkm) => {
@@ -631,6 +635,7 @@ export const PassiveEffects: Partial<
   [Passive.SHARED_VISION]: [SharedVisionEffect],
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
   [Passive.KUBFU]: [KubfuOnKillEffect],
+  [Passive.HISUIAN_QWILFISH]: [QwilfishOnCastEffect],
   [Passive.SLOW_START]: [SlowStartEffect],
   [Passive.VIGOROTH]: [
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))

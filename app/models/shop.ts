@@ -365,6 +365,17 @@ export default class Shop {
             return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
           })
         )
+      }).map((pkm) => {
+        if (pkm in PkmRegionalVariants) {
+          const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
+            player.regionalPokemons.includes(p)
+          )
+          if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+        }
+        if (pkm in PkmColorVariantsByPkm) {
+          pkm = PkmColorVariantsByPkm[pkm]!(player)
+        }
+        return pkm
       })
 
       if (candidates.length === 0) candidates = allCandidates
