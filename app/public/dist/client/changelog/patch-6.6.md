@@ -14,6 +14,12 @@
 - Galarian Articuno is now a regional variant of Articuno in Psychic regions ; Range 2 → 3
 - Galarian Moltres is now a regional variant of Moltres in Dark regions
 - Hisuian Qwilfish is now Unique regional variant ; new passive: gains 1 AP permanently after every cast ; evolves into Overqwil after 20 casts;  Barb Barrage damage: 15/30/60 → 20/40/60/80
+- Mothim is now the evolution of Burmy ; evolves at stage 20 when player moves to a region without burmy cloak's type ; Tier 3 → Tier 2, HP 200 → 150, Attack 20 → 13, Def 6 → 5, Spe def 6 → 5, PP 80 → 100
+- Burmy Plant: Spe. def 2 → 6
+- Burmy Trash: Spe. def 6 → 2
+- Wormadam Plant: Def 2 → 3, Spe def 4 → 9
+- Wormadam Sandy: Def 4 → 6
+- Wormadam Trash: Def 6 → 9, Spe def 6 → 3
 
 # Changes to Synergies
 

@@ -2207,8 +2207,6 @@
 		"ALIEN_DNA": "$t(pkm.DEOXYS) reagisce al METEORITE cambiando forma.",
 		"BERRY_EATER": "Quando il Pokèmon attacca, ruba tutte le bacche equipaggiate al bersaglio e le mangia",
 		"TOXIC_BOOST": "Il Pokèmon prende il 50% in meno di danni da veleno e guadagna 10 di ATK finchè è sotto POISONNED",
-		"ENVIRONMENTAL_ADAPTATION": "Questo Pokèmon adatta le sue sinergia in base alla regione",
-		"MOTHIM": "Mothim riceve le sinergia della forma regionale di Burmy",
 		"PSYDUCK": "Ha il [10,LK]% di possibilità di subire CONFUSION quando viene colpito. Ogni volta che subisce CONFUSION, ottiene 100 AP.",
 		"BLOODMOON": "Cambia forma durante la BLOODMOON",
 		"RECYCLE": "Dai da mangiare delle bacche per ottenere 10 HP, o oggetti base per 25 HP + le statistiche dell'oggetto. Dai da mangiare un oggetto artificiale per ottenere 50 HP + le statistiche dell'oggetto e ottieni TRASH in cambio.",

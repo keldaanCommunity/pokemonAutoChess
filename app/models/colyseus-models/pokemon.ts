@@ -94,7 +94,6 @@ export class Pokemon extends Schema implements IPokemon {
   canHoldItems = true
   canBeBenched = true
   canBeSold = true
-  stages?: number
   tm: Ability | null = null
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
@@ -9626,22 +9625,6 @@ export class Granbull extends Pokemon {
   additional = true
 }
 
-const evolveMothim = function (params: {
-  this: Pokemon
-  pokemonEvolved: Pokemon
-  pokemonsBeforeEvolution: Pokemon[]
-  player: Player
-}) {
-  const preEvolve = params.pokemonsBeforeEvolution.at(-1)
-  if (preEvolve instanceof WormadamTrash) {
-    params.pokemonEvolved.types.add(Synergy.ARTIFICIAL)
-  } else if (preEvolve instanceof WormadamSandy) {
-    params.pokemonEvolved.types.add(Synergy.GROUND)
-  } else if (preEvolve instanceof WormadamPlant) {
-    params.pokemonEvolved.types.add(Synergy.GRASS)
-  }
-}
-
 export class TypeNull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
   rarity = Rarity.UNIQUE
@@ -14483,21 +14466,38 @@ export class Kilowattrel extends Pokemon {
   passive = Passive.WIND_POWER
 }
 
+export const burmyDivergentEvolutionRule = (cloakType: Synergy, wormadam: Pkm) => new ConditionBasedEvolutionRule(
+  (pokemon: Pokemon, player: Player, stageLevel: number) => {
+    const copies = values(player.board).filter(
+      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+    )
+    if (copies.length >= 3) return true;
+    return DungeonDetails[player.map]?.synergies.includes(cloakType) === false && stageLevel >= 20
+  },
+  (pokemon, player) => {
+    const copies = values(player.board).filter(
+      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+    )
+    if (copies.length >= 3) return wormadam;
+    return Pkm.MOTHIM
+  }
+)
+
 export class BurmyPlant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GRASS])
   rarity = Rarity.RARE
   stars = 1
-  evolution = Pkm.WORMADAM_PLANT
+  evolutions = [Pkm.WORMADAM_PLANT, Pkm.MOTHIM]
+  evolutionRule = new CountEvolutionRule(3, () => Pkm.WORMADAM_PLANT)
   hp = 70
   atk = 7
   speed = 46
   def = 2
-  speDef = 2
+  speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.ENVIRONMENTAL_ADAPTATION
-  stages = 3
+  passive = Passive.BURMY
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -14509,7 +14509,8 @@ export class BurmySandy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 1
-  evolution = Pkm.WORMADAM_SANDY
+  evolutions = [Pkm.WORMADAM_SANDY, Pkm.MOTHIM]
+  evolutionRule = new CountEvolutionRule(3, () => Pkm.WORMADAM_SANDY)
   hp = 70
   atk = 7
   speed = 46
@@ -14518,10 +14519,9 @@ export class BurmySandy extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.ENVIRONMENTAL_ADAPTATION
-  stages = 3
+  passive = Passive.BURMY
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.GROUND) &&
@@ -14534,19 +14534,19 @@ export class BurmyTrash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ARTIFICIAL])
   rarity = Rarity.RARE
   stars = 1
-  evolution = Pkm.WORMADAM_TRASH
+  evolutions = [Pkm.WORMADAM_TRASH, Pkm.MOTHIM]
+  evolutionRule = new CountEvolutionRule(3, () => Pkm.WORMADAM_TRASH)
   hp = 70
   atk = 7
   speed = 46
   def = 6
-  speDef = 6
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.ENVIRONMENTAL_ADAPTATION
-  stages = 3
+  passive = Passive.BURMY
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ARTIFICIAL) &&
@@ -14560,20 +14560,16 @@ export class WormadamPlant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GRASS])
   rarity = Rarity.RARE
   stars = 2
-  evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
   speed = 46
-  def = 2
-  speDef = 4
+  def = 3
+  speDef = 9
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.ENVIRONMENTAL_ADAPTATION
-  stages = 3
   regional = true
-  afterEvolve = evolveMothim
-  isInRegion(map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return regionSynergies.includes(Synergy.GRASS)
   }
@@ -14583,20 +14579,16 @@ export class WormadamSandy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 2
-  evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
   speed = 46
-  def = 4
+  def = 6
   speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.ENVIRONMENTAL_ADAPTATION
-  stages = 3
   regional = true
-  afterEvolve = evolveMothim
-  isInRegion(map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.GROUND) &&
@@ -14609,20 +14601,16 @@ export class WormadamTrash extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ARTIFICIAL])
   rarity = Rarity.RARE
   stars = 2
-  evolution = Pkm.MOTHIM
   hp = 150
   atk = 13
   speed = 46
-  def = 6
-  speDef = 6
+  def = 9
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.ENVIRONMENTAL_ADAPTATION
-  stages = 3
   regional = true
-  afterEvolve = evolveMothim
-  isInRegion(map: DungeonPMDO, state?: GameState) {
+  isInRegion(map: DungeonPMDO) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ARTIFICIAL) &&
@@ -14635,21 +14623,18 @@ export class WormadamTrash extends Pokemon {
 export class Mothim extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLYING])
   rarity = Rarity.RARE
-  stars = 3
-  hp = 200
-  atk = 20
+  stars = 2
+  hp = 150
+  atk = 13
   speed = 46
-  def = 6
-  speDef = 6
-  maxPP = 80
+  def = 5
+  speDef = 5
+  maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
-  passive = Passive.MOTHIM
-  stages = 3
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     // always hide mothim to avoid showing duplicated with other burmy forms
-    // this does not impact the evolution of wormadam
     return false
   }
 }
