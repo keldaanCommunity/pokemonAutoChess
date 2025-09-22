@@ -595,8 +595,11 @@ export default class Player extends Schema implements IPlayer {
     resetArraySchema(
       this.regionalPokemons,
       newRegionalPokemons.filter((p, index, array) => {
-        const evolution = getPokemonData(PkmFamily[p]).evolution
+        const pkm = getPokemonData(PkmFamily[p])
+        const evolution = pkm.evolution
         return (
+          pkm.rarity !== Rarity.UNIQUE && // do not show uniques in regional pokemons
+          pkm.rarity !== Rarity.LEGENDARY && // do not show legendaries in regional pokemons
           array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
           !(
             evolution === p ||
