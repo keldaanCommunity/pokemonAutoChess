@@ -13047,6 +13047,10 @@ export class HisuianQwilfish extends Pokemon {
   skill = Ability.BARB_BARRAGE
   passive = Passive.HISUIAN_QWILFISH
   regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Overqwil extends Pokemon {
@@ -13066,6 +13070,10 @@ export class Overqwil extends Pokemon {
   range = 1
   skill = Ability.BARB_BARRAGE
   regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.DARK)
+  }
 }
 
 export class Xurkitree extends Pokemon {
