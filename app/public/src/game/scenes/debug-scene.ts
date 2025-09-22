@@ -32,7 +32,7 @@ export class DebugScene extends Phaser.Scene {
   width: number
   animationManager: AnimationManager | null = null
   loadingManager: LoadingManager | null = null
-  weatherManager: WeatherManager
+  weatherManager: WeatherManager | undefined
   onProgress: (value: number) => void
   onComplete: () => void
   pokemon?: PokemonSprite
@@ -436,6 +436,7 @@ export class DebugScene extends Phaser.Scene {
   }
 
   setWeather(weather: Weather | "dawn" | "sunset" | "nighttime") {
+    if (!this.weatherManager) return
     this.weatherManager.clearWeather()
     if (weather === Weather.RAIN) {
       this.weatherManager.addRain()

@@ -1416,6 +1416,16 @@ export default class Simulation extends Schema implements ISimulation {
         break
       }
 
+      case EffectEnum.MURKY: {
+        const player = pokemon.player
+        const nbOddStones = player
+          ? count(player.items, Item.ODD_KEYSTONE)
+          : 0
+
+        pokemon.addLuck(10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 30 : 0), pokemon, 0, false)
+        break
+      }
+
       case EffectEnum.MISTY: {
         const player = pokemon.player
         const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0

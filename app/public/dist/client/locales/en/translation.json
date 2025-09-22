@@ -3227,7 +3227,7 @@
 		"SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration",
 		"BLOODMOON": "+20% PHYSICAL\n+30% WOUND duration",
 		"SMOG": "-15% accuracy\n+30% POISONNED duration",
-		"MURKY": "-30 LUCK (GHOST are immune)\n+30% SILENCE duration"
+		"MURKY": "-30% LUCK (GHOST are immune)\n+30% SILENCE duration"
 	},
 	"emotion": {
 		"Normal": "Normal",
