@@ -102,6 +102,7 @@ export enum EffectEnum {
   RAIN = "RAIN",
   SANDSTORM = "SANDSTORM",
   MISTY = "MISTY",
+  MURKY = "MURKY",
   SNOW = "SNOW",
   STORM = "STORM",
   NIGHT = "NIGHT",

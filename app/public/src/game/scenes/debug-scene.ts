@@ -5,6 +5,7 @@ import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
+import { Weather } from "../../../../types/enum/Weather"
 import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
@@ -15,6 +16,7 @@ import { clearAbilityAnimations, displayAbility, displayHit } from "../component
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
 import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "../components/pokemon-animations"
+import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
 
 type Boost =
@@ -30,6 +32,7 @@ export class DebugScene extends Phaser.Scene {
   width: number
   animationManager: AnimationManager | null = null
   loadingManager: LoadingManager | null = null
+  weatherManager: WeatherManager
   onProgress: (value: number) => void
   onComplete: () => void
   pokemon?: PokemonSprite
@@ -69,6 +72,7 @@ export class DebugScene extends Phaser.Scene {
 
   create() {
     this.abilitiesVfxGroup = this.add.group()
+    this.weatherManager = new WeatherManager(this)
   }
 
   updateSprite(
@@ -429,5 +433,38 @@ export class DebugScene extends Phaser.Scene {
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {
     this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
+  }
+
+  setWeather(weather: Weather | "dawn" | "sunset" | "nighttime") {
+    this.weatherManager.clearWeather()
+    if (weather === Weather.RAIN) {
+      this.weatherManager.addRain()
+    } else if (weather === Weather.SUN) {
+      this.weatherManager.addSun()
+    } else if (weather === Weather.SANDSTORM) {
+      this.weatherManager.addSandstorm()
+    } else if (weather === Weather.SNOW) {
+      this.weatherManager.addSnow()
+    } else if (weather === Weather.NIGHT) {
+      this.weatherManager.addNight()
+    } else if (weather === Weather.BLOODMOON) {
+      this.weatherManager.addBloodMoon()
+    } else if (weather === Weather.WINDY) {
+      this.weatherManager.addWind()
+    } else if (weather === Weather.STORM) {
+      this.weatherManager.addStorm()
+    } else if (weather === Weather.MISTY) {
+      this.weatherManager.addMist()
+    } else if (weather === Weather.SMOG) {
+      this.weatherManager.addSmog()
+    } else if (weather === Weather.MURKY) {
+      this.weatherManager.addMurky()
+    } else if (weather === "dawn") {
+      this.weatherManager.setTownDaytime(0)
+    } else if (weather === "sunset") {
+      this.weatherManager.setTownDaytime(20)
+    } else if (weather === "nighttime") {
+      this.weatherManager.setTownDaytime(30)
+    }
   }
 }
