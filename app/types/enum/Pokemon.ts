@@ -1031,7 +1031,9 @@ export enum Pkm {
   SILICOBRA = "SILICOBRA",
   SANDACONDA = "SANDACONDA",
   DUNSPARCE = "DUNSPARCE",
-  DUDUNSPARCE = "DUDUNSPARCE"
+  DUDUNSPARCE = "DUDUNSPARCE",
+  YAMASK = "YAMASK",
+  COFAGRIGUS = "COFAGRIGUS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1706,8 +1708,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SCRAGGY]: "0559",
   [Pkm.SCRAFTY]: "0560",
   [Pkm.SIGILYPH]: "0561",
-  //[Pkm.YAMASK]: "0562",
-  //[Pkm.COFAGRIGUS]: "0563",
+  [Pkm.YAMASK]: "0562",
+  [Pkm.COFAGRIGUS]: "0563",
   //[Pkm.TIRTOUGA]: "0564",
   //[Pkm.CARRACOSTA]: "0565",
   [Pkm.ARCHEN]: "0566",
@@ -3257,7 +3259,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DOTTLER]: Pkm.BLIPBUG,
   [Pkm.ORBEETLE]: Pkm.BLIPBUG,
   [Pkm.PACHIRISU]: Pkm.PACHIRISU,
-  [Pkm.BUZZWOLE]: Pkm.BUZZWOLE
+  [Pkm.BUZZWOLE]: Pkm.BUZZWOLE,
+  [Pkm.YAMASK]: Pkm.YAMASK,
+  [Pkm.COFAGRIGUS]: Pkm.YAMASK
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
