@@ -13630,7 +13630,7 @@ export class SpiteStrategy extends AbilityStrategy {
             targetX: ally.positionX,
             targetY: ally.positionY
           })
-          ally.addPP(drainedPP, pokemon, 0, crit)
+          ally.addPP(ppDrain, pokemon, 0, crit)
         }
       }
     }
