@@ -7109,5 +7109,19 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FIGHTING_MELEE,
     hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.YAMASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_MELEE,
+    hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.COFAGRIGUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_MELEE,
+    hitSprite: HitSprite.GHOST_HIT
   }
 }

@@ -1,6 +1,8 @@
 # New Pokemons:
 
 - Qwilfish
+- Yamask
+- Cofagrigus
 
 # Changes to Pokemon & Abilities
 

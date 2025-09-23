@@ -506,7 +506,8 @@
 		"HYPER_DRILL": "Hyper Drill",
 		"TERRAIN_PULSE": "Terrain Pulse",
 		"AXE_KICK": "Axe Kick",
-		"EXPANDING_FORCE": "Expanding Force"
+		"EXPANDING_FORCE": "Expanding Force",
+		"SPITE": "Spite"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1541,7 +1542,9 @@
 		"BLIPBUG": "Blipbug",
 		"DOTTLER": "Dottler",
 		"ORBEETLE": "Orbeetle",
-		"PACHIRISU": "Pachirisu"
+		"PACHIRISU": "Pachirisu",
+		"YAMASK": "Yamask",
+		"COFAGRIGUS": "Cofagrigus"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2028,7 +2031,8 @@
 		"HYPER_DRILL": "Deals [10,30,50,SP] TRUE that can break PROTECT, and dig deeper into the ground under the target, destroying any eventual buried items in the process. Double damage if target is already on a fully dug hole.",
 		"TERRAIN_PULSE": "If user has no field, gets GRASS_FIELD.\nField effects in your team propagate to ADJACENT allies, then trigger an effect:\nGRASS_FIELD: heal [5,SP]% of max HP\nELECTRIC_FIELD: gain [10,SP] SPEED\nPSYCHIC_FIELD: gain [10,SP] PP\nFAIRY_FIELD: gain [5,SP]% of max HP as SHIELD",
 		"AXE_KICK": "Leap to the enemy with the highest PP then deal [25,50,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds.",
-		"EXPANDING_FORCE": "The user gains PSYCHIC_FIELD, or spreads it to a nearby ally. Then its psychic energy reverbates on all allies in a PSYCHIC_FIELD, dealing [10,20,40,SP] SPECIAL to ADJACENT enemies."
+		"EXPANDING_FORCE": "The user gains PSYCHIC_FIELD, or spreads it to a nearby ally. Then its psychic energy reverbates on all allies in a PSYCHIC_FIELD, dealing [10,20,40,SP] SPECIAL to ADJACENT enemies.",
+		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
