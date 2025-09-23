@@ -683,6 +683,7 @@ export enum Pkm {
   QUAGSIRE = "QUAGSIRE",
   QUILAVA = "QUILAVA",
   QUILLADIN = "QUILLADIN",
+  QWILFISH = "QWILFISH",
   RABOOT = "RABOOT",
   RAICHU = "RAICHU",
   RAIKOU = "RAIKOU",
@@ -1310,7 +1311,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.MEGA_STEELIX]: "0208-0001",
   [Pkm.SNUBULL]: "0209",
   [Pkm.GRANBULL]: "0210",
-  //[Pkm.QWILFISH]: "0211",
+  [Pkm.QWILFISH]: "0211",
   [Pkm.HISUIAN_QWILFISH]: "0211-0001",
   [Pkm.SCIZOR]: "0212",
   [Pkm.SHUCKLE]: "0213",
@@ -2922,6 +2923,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALOLAN_EXEGGUTOR]: Pkm.EXEGGCUTE,
   [Pkm.COMFEY]: Pkm.COMFEY,
   [Pkm.CARNIVINE]: Pkm.CARNIVINE,
+  [Pkm.QWILFISH]: Pkm.QWILFISH,
   [Pkm.HISUIAN_QWILFISH]: Pkm.HISUIAN_QWILFISH,
   [Pkm.OVERQWIL]: Pkm.HISUIAN_QWILFISH,
   [Pkm.HISUIAN_TYPHLOSION]: Pkm.CYNDAQUIL,
@@ -3277,7 +3279,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.ZIGZAGOON]: [Pkm.GALARIAN_ZIGZAGOON],
   [Pkm.ARTICUNO]: [Pkm.GALARIAN_ARTICUNO],
   [Pkm.ZAPDOS]: [Pkm.GALARIAN_ZAPDOS],
-  [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES]
+  [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES],
+  [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {

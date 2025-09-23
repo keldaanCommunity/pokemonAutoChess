@@ -246,6 +246,39 @@ const KubfuOnKillEffect = new OnKillEffect(
   }
 )
 
+const HisuianQwilfishOnCastEffect = new OnAbilityCastEffect((pokemon, board) => {
+  pokemon.addAbilityPower(1, pokemon, 0, false, true)
+})
+
+const QwilfishPassiveEffect = new OnDamageReceivedEffect(
+  ({ pokemon, attacker, attackType, isRetaliation }) => {
+    if (
+      attackType === AttackType.PHYSICAL &&
+      !isRetaliation &&
+      attacker &&
+      attacker.items.has(Item.PROTECTIVE_PADS) === false &&
+      distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        attacker.positionX,
+        attacker.positionY
+      ) === 1
+    ) {
+      const damage = 5
+      attacker.handleDamage({
+        damage,
+        board: pokemon.simulation.board,
+        attackType: AttackType.TRUE,
+        attacker: pokemon,
+        shouldTargetGainMana: true
+      })
+      if (chance(0.3, pokemon)) {
+        attacker.status.triggerPoison(3000, attacker, pokemon)
+      }
+    }
+  }
+)
+
 export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   board.forEach((x, y, pkm) => {
     if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
@@ -631,6 +664,8 @@ export const PassiveEffects: Partial<
   [Passive.SHARED_VISION]: [SharedVisionEffect],
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
   [Passive.KUBFU]: [KubfuOnKillEffect],
+  [Passive.QWILFISH]: [QwilfishPassiveEffect],
+  [Passive.HISUIAN_QWILFISH]: [HisuianQwilfishOnCastEffect],
   [Passive.SLOW_START]: [SlowStartEffect],
   [Passive.VIGOROTH]: [
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))

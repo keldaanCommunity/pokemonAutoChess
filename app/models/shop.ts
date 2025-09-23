@@ -351,16 +351,26 @@ export default class Shop {
           [Pkm.OGERPON_HEARTHFLAME, Synergy.FIRE],
           [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC]
         ])
+        const { types, regional } = getPokemonData(pkm)
+        if (
+          regional &&
+          new PokemonClasses[pkm](pkm).isInRegion(player.map) === false
+        ) {
+          // skip regional pokemons not in their region
+          return false
+        }
+
         const hasSynergyWanted =
           synergyWanted === undefined
             ? true
             : specialSynergies.has(pkm)
               ? specialSynergies.get(pkm) === synergyWanted
-              : getPokemonData(pkm).types.includes(synergyWanted)
+              : types.includes(synergyWanted)
 
         return (
           hasSynergyWanted &&
           !player.pokemonsProposition.some((prop) => {
+            // avoid proposing two pokemons of the same family or regional variants
             const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
             return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
           })

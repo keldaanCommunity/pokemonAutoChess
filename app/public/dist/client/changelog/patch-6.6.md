@@ -1,11 +1,19 @@
 # New Pokemons:
 
+- Qwilfish
+
 # Changes to Pokemon & Abilities
 
 - Earthquake has been renamed Precipice Blades for Groudon.
 - Kleavor: Speed 59 → 55, Attack 22 → 25
 - Scizor: Speed 59 → 42, Attack 22 → 30
 - Keldeo: Fighting/Water → Fighting/Aquatic
+- Lapras: Water/Ice → Aquatic/Ice/Sound ; PP 120 → 100, HP 250 → 225
+- Arctovish: Ice/Water/Fossil → Ice/Aquatic/Fossil ; buff Ice Fang: freeze duration 1 second → 1/1.5/2 seconds
+- Galarian Zapdos is now regional in Fighting regions
+- Galarian Articuno is now regional in Psychic regions ; Range 2 → 3
+- Galarian Moltres is now regional in Dark regions
+- Hisuian Qwilfish is now Unique regional in Dark regions ; new passive: gains 1 AP permanently after every cast ; evolves into Overqwil after 20 casts;  Barb Barrage damage: 15/30/60 → 20/40/60/80
 - Mothim is now the evolution of Burmy ; evolves at stage 20 when player moves to a region without burmy cloak's type ; Tier 3 → Tier 2, HP 200 → 150, Attack 20 → 13, Def 6 → 5, Spe def 6 → 5, PP 80 → 100
 - Burmy Plant: Spe. def 2 → 6
 - Burmy Trash: Spe. def 6 → 2

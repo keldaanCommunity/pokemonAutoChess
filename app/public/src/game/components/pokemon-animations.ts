@@ -4783,10 +4783,17 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
+  [Pkm.QWILFISH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE,
+    hitSprite: HitSprite.POISON_HIT
+  },
   [Pkm.HISUIAN_QWILFISH]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Withdraw,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.POISON_MELEE,
     hitSprite: HitSprite.DARK_HIT
   },
