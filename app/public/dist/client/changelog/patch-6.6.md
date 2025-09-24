@@ -29,7 +29,11 @@
 
 # Changes to Items
 
+- New weather rock Odd Stone: counts for 3 towards Murky weather. Under Murky weather, your team gains 10 Luck and -10% negative status duration, and resist to Curse 1 second longer.
+
 # Gameplay
+
+- New weather Murky: reduce Luck by 30% (Ghost are immune), silence duration +30%. Triggered when 8 Ghost Pokémon are on board.
 
 # UI
 

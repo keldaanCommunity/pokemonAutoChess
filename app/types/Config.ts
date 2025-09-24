@@ -491,7 +491,8 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.STORM]: 8,
   [Weather.SUN]: 8,
   [Weather.WINDY]: 8,
-  [Weather.SMOG]: 8
+  [Weather.SMOG]: 8,
+  [Weather.MURKY]: 8
 }
 
 // 4  A  1
