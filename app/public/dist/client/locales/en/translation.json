@@ -507,7 +507,8 @@
 		"TERRAIN_PULSE": "Terrain Pulse",
 		"AXE_KICK": "Axe Kick",
 		"EXPANDING_FORCE": "Expanding Force",
-		"SPITE": "Spite"
+		"SPITE": "Spite",
+		"GRUDGE": "Grudge"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1544,7 +1545,9 @@
 		"ORBEETLE": "Orbeetle",
 		"PACHIRISU": "Pachirisu",
 		"YAMASK": "Yamask",
-		"COFAGRIGUS": "Cofagrigus"
+		"COFAGRIGUS": "Cofagrigus",
+		"GALARIAN_YAMASK": "Galarian Yamask",
+		"RUNERIGUS": "Runerigus"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2032,7 +2035,8 @@
 		"TERRAIN_PULSE": "If user has no field, gets GRASS_FIELD.\nField effects in your team propagate to ADJACENT allies, then trigger an effect:\nGRASS_FIELD: heal [5,SP]% of max HP\nELECTRIC_FIELD: gain [10,SP] SPEED\nPSYCHIC_FIELD: gain [10,SP] PP\nFAIRY_FIELD: gain [5,SP]% of max HP as SHIELD",
 		"AXE_KICK": "Leap to the enemy with the highest PP then deal [25,50,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds.",
 		"EXPANDING_FORCE": "The user gains PSYCHIC_FIELD, or spreads it to a nearby ally. Then its psychic energy reverbates on all allies in a PSYCHIC_FIELD, dealing [10,20,40,SP] SPECIAL to ADJACENT enemies.",
-		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies"
+		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies",
+		"GRUDGE": "Deals [18,36,52,SP] SPECIAL to all enemies affected by SILENCE"
 	},
 	"effect": {
 		"STAMINA": "Stamina",

@@ -1033,7 +1033,9 @@ export enum Pkm {
   DUNSPARCE = "DUNSPARCE",
   DUDUNSPARCE = "DUDUNSPARCE",
   YAMASK = "YAMASK",
-  COFAGRIGUS = "COFAGRIGUS"
+  COFAGRIGUS = "COFAGRIGUS",
+  GALARIAN_YAMASK = "GALARIAN_YAMASK",
+  RUNERIGUS = "RUNERIGUS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1709,6 +1711,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SCRAFTY]: "0560",
   [Pkm.SIGILYPH]: "0561",
   [Pkm.YAMASK]: "0562",
+  [Pkm.GALARIAN_YAMASK]: "0562-0001",
   [Pkm.COFAGRIGUS]: "0563",
   //[Pkm.TIRTOUGA]: "0564",
   //[Pkm.CARRACOSTA]: "0565",
@@ -2047,7 +2050,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CURSOLA]: "0864",
   //[Pkm.SIRFETCHD]: "0865",
   //[Pkm.MR_RIME]: "0866",
-  //[Pkm.RUNERIGUS]: "0867",
+  [Pkm.RUNERIGUS]: "0867",
   [Pkm.MILCERY]: "0868",
   [Pkm.ALCREMIE_VANILLA]: "0869",
   [Pkm.ALCREMIE_RUBY]: "0869-0007",
@@ -3261,7 +3264,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PACHIRISU]: Pkm.PACHIRISU,
   [Pkm.BUZZWOLE]: Pkm.BUZZWOLE,
   [Pkm.YAMASK]: Pkm.YAMASK,
-  [Pkm.COFAGRIGUS]: Pkm.YAMASK
+  [Pkm.COFAGRIGUS]: Pkm.YAMASK,
+  [Pkm.GALARIAN_YAMASK]: Pkm.GALARIAN_YAMASK,
+  [Pkm.RUNERIGUS]: Pkm.GALARIAN_YAMASK
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

@@ -1340,6 +1340,11 @@ export const AbilitiesAnimations: {
     tweenProps: { yoyo: true }
   }),
   [Ability.SHADOW_BALL]: projectile({ duration: 1000 }),
+  [Ability.GRUDGE]: projectile({
+    duration: 750,
+    scale: 2,
+    ability: Ability.DARK_HARVEST
+  }),
   [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
   [Ability.SOLAR_BEAM]: projectile({
     oriented: true,
