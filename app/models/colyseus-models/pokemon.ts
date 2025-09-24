@@ -18768,7 +18768,7 @@ export class Yamask extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SPITE
-  regional = true
+  additional = true
 }
 
 export class Cofagrigus extends Pokemon {
@@ -18783,7 +18783,7 @@ export class Cofagrigus extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SPITE
-  regional = true
+  additional = true
 }
 
 export class GalarianYamask extends Pokemon {
