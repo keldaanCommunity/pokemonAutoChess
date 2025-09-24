@@ -1387,7 +1387,7 @@
 		"ABSORB": "Oferece [30,60,120,SP] SPECIAL e cura [3,6,12,SP] para aliados adjacentes",
 		"ROLLOUT": "Aumenta a DEF em [2,5,10,SP] e trata 2x a DEF como SPECIAL",
 		"THRASH": "Aumente o ATK em [100,SP]% e torne-se CONFUSION por 3s",
-		"SOLAR_BEAM": "Cause [25,50,100,SP] de dano SPECIAL a todos os Pokémon inimigos em uma linha atrás do alvo e cause BURN neles por 3 segundos. Se o Pokémon estiver no holofote ou se o tempo estiver SUN, dobre o dano e restaure 40 PP.",
+		"SOLAR_BEAM": "Cause [25,50,100,SP] de dano SPECIAL a todos os Pokémon inimigos em uma linha atrás do alvo e cause BURN neles por 3 segundos. Se o Pokémon estiver no holofote ou se o tempo estiver SUN, dobre o dano e restaure 20 PP.",
 		"MAGMA_STORM": "O alvo fica preso em um redemoinho de fogo que causa [80,SP] SPECIAL antes de se mover para um alvo adjacente",
 		"DIRE_CLAW": "Causa [15,30,60,SP] SPECIAL no alvo. Inflige VENENO, SONO ou PARALISIA por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] ao alvo e o WOUND por 5 segundos. Se o alvo já estiver FERIDO, concede 30% de bônus SPECIAL",
@@ -2218,7 +2218,7 @@
 		"create_bot": "Posso criar meu próprio bot?",
 		"create_bot_answer": "Seguro. Você precisará ter pelo menos nível 20 para desbloquear o gadget Bot Builder. Você pode usá-lo para criar e enviar seu bot, ele será enviado no canal #bot-creation no Discord para revisão pela equipe de revisores de bot.",
 		"elo": "Como funciona o sistema elo?",
-		"elo_answer": "O sistema elo em Pokemon Auto Chess funciona da mesma forma que em outros jogos baseados em elo como Chess, Lol, Starcraft etc... Para ganhar pontos elo, você precisa vencer outros jogadores. Quanto maior o elo do seu oponente, mais elo você ganhará ao derrotá-lo e vice-versa. Se você não jogar por 15 dias, seu elo começará a decair (-10 elo/dia).",
+		"elo_answer": "O sistema elo em Pokemon Auto Chess funciona da mesma forma que em outros jogos baseados em elo como Chess, Lol, Starcraft etc... Para ganhar pontos elo, você precisa vencer outros jogadores. Quanto maior o elo do seu oponente, mais elo você ganhará ao derrotá-lo e vice-versa. Se você não jogar por 20 dias, seu elo começará a decair (-5 elo/dia).",
 		"missing_points": "Não ganhei pontos elo no meu último jogo, por quê?",
 		"missing_points_answer": "Bots não dão elo, apenas jogadores humanos são contabilizados para classificação elo. Também é possível que o jogo tenha elo desativado (modo \"Só por diversão\")",
 		"damage": "Quais são os danos especiais e danos físicos?",
@@ -2589,7 +2589,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "Esta sala é privada. Digite a senha.",
-	"wrong_password": "Senha errada!",
 	"game_full": "Esta sala está completa",
 	"game_already_started": "O jogo já foi iniciado",
 	"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
@@ -2699,7 +2698,8 @@
 		"ROOM_FULL": "Sala cheia",
 		"ROOM_EMPTY": "Esta sala foi removida devido a falta de jogadores",
 		"ROOM_DELETED": "Esta sala foi excluída",
-		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}"
+		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}",
+		"INVALID_PASSWORD": "Senha errada!"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexão perdida. Tentando reconectar...",

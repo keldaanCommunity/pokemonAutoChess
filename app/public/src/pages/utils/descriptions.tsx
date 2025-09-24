@@ -172,7 +172,7 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
                 value = roundToNDigits(Number(v) * (1 + (stats?.ap ?? 0) * scaleFactor / 100), nbDigits)
               }
               if (scaleType === "LUCK") {
-                value = roundToNDigits(max(100)(Math.pow(Number(v), (1 - (stats?.luck ?? 0) / 100))), nbDigits)
+                value = roundToNDigits(max(100)(Math.pow(Number(v) / 100, (1 - (stats?.luck ?? 0) / 100)) * 100), nbDigits)
               }
 
               const tier = stats?.stars

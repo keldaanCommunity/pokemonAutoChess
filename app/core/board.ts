@@ -1,7 +1,6 @@
 import { IPokemonEntity, Transfer } from "../types"
 import { BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
-import { Passive } from "../types/enum/Passive"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
@@ -201,7 +200,7 @@ export class Board {
 
     let prevCells: Array<[number, number]> = [[pokemon.positionX, pokemon.positionY]]
     for (let r = 1; r <= range; r++) {
-      let nextCells = new Array<[number, number]>()
+      const nextCells = new Array<[number, number]>()
       orientations.forEach((orientation) => {
         prevCells.forEach((cell) => {
           const x = cell[0] + OrientationVector[orientation][0]

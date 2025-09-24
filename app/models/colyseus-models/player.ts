@@ -60,7 +60,7 @@ import {
 } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import PokemonFactory from "../pokemon-factory"
+import PokemonFactory, { getPokemonBaseline } from "../pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -530,7 +530,7 @@ export default class Player extends Schema implements IPlayer {
     } while (newNbHats !== currentNbHats)
   }
 
-  updateRegionalPool(state: GameState, mapChanged: boolean) {
+  updateRegionalPool(state: GameState, mapChanged: boolean, previousMap?: string) {
     if (this.map === "town") {
       resetArraySchema(this.regionalPokemons, [])
       return
@@ -552,10 +552,16 @@ export default class Player extends Schema implements IPlayer {
       })
 
       if (state.specialGameRule === SpecialGameRule.REGIONAL_SPECIALTIES) {
-        this.bonusSynergies.clear()
+        if (previousMap) {
+          const { synergies: previousSynergies } = DungeonDetails[previousMap]
+          previousSynergies.forEach((synergy) => {
+            this.bonusSynergies.set(synergy, min(0)((this.bonusSynergies.get(synergy) ?? 0) - 1))
+          })
+        }
+
         const { synergies, regionalSpeciality } = DungeonDetails[this.map]
         synergies.forEach((synergy) => {
-          this.bonusSynergies.set(synergy, 1)
+          this.bonusSynergies.set(synergy, (this.bonusSynergies.get(synergy) ?? 0) + 1)
         })
         this.updateSynergies()
         if (regionalSpeciality) {
@@ -595,8 +601,11 @@ export default class Player extends Schema implements IPlayer {
     resetArraySchema(
       this.regionalPokemons,
       newRegionalPokemons.filter((p, index, array) => {
-        const evolution = getPokemonData(PkmFamily[p]).evolution
+        const pkm = getPokemonData(PkmFamily[p])
+        const evolution = pkm.evolution
         return (
+          pkm.rarity !== Rarity.UNIQUE && // do not show uniques in regional pokemons
+          pkm.rarity !== Rarity.LEGENDARY && // do not show legendaries in regional pokemons
           array.findIndex((p2) => PkmFamily[p] === PkmFamily[p2]) === index && // dedup same family
           !(
             evolution === p ||
@@ -650,6 +659,20 @@ export default class Player extends Schema implements IPlayer {
       const mulchCollected = this.items.filter(i => i === Item.RICH_MULCH).length + this.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) - 8
       this.items.push(mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH)
     }
+  }
+
+  getFinalizedLines(): Set<Pkm> {
+    const finals = new Set(
+      values(this.board)
+        .filter((pokemon) => pokemon.final)
+        .map((pokemon) => getPokemonBaseline(pokemon.name))
+    )
+    // special case for burmy line because of the exclusive convergent evolution rule
+    if (finals.has(Pkm.BURMY_PLANT)) {
+      finals.add(Pkm.BURMY_TRASH)
+      finals.add(Pkm.BURMY_SANDY)
+    }
+    return finals
   }
 }
 

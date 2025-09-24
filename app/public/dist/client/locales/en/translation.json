@@ -297,6 +297,7 @@
 		"BODY_SLAM": "Body Slam",
 		"FLORAL_HEALING": "Floral Healing",
 		"VINE_WHIP": "Vine Whip",
+		"STOCKPILE": "Stockpile",
 		"BARB_BARRAGE": "Barb Barrage",
 		"INFERNAL_PARADE": "Infernal Parade",
 		"MAGIC_POWDER": "Magic Powder",
@@ -505,7 +506,9 @@
 		"HYPER_DRILL": "Hyper Drill",
 		"TERRAIN_PULSE": "Terrain Pulse",
 		"AXE_KICK": "Axe Kick",
-		"EXPANDING_FORCE": "Expanding Force"
+		"EXPANDING_FORCE": "Expanding Force",
+		"SPITE": "Spite",
+		"GRUDGE": "Grudge"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1212,6 +1215,7 @@
 		"ALOLAN_EXEGGUTOR": "Alolan Exeggutor",
 		"COMFEY": "Comfey",
 		"CARNIVINE": "Carnivine",
+		"QWILFISH": "Qwilfish",
 		"HISUIAN_QWILFISH": "Hisuian Qwilfish",
 		"OVERQWIL": "Overqwil",
 		"HISUIAN_TYPHLOSION": "Hisuian Typhlosion",
@@ -1539,7 +1543,11 @@
 		"BLIPBUG": "Blipbug",
 		"DOTTLER": "Dottler",
 		"ORBEETLE": "Orbeetle",
-		"PACHIRISU": "Pachirisu"
+		"PACHIRISU": "Pachirisu",
+		"YAMASK": "Yamask",
+		"COFAGRIGUS": "Cofagrigus",
+		"GALARIAN_YAMASK": "Galarian Yamask",
+		"RUNERIGUS": "Runerigus"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1682,7 +1690,7 @@
 		"MISTY_SURGE": "Restore [25,SP] HP and [25,SP] PP to all FAIRY allies except the user.",
 		"SKY_ATTACK": "Rise in the air and fall on the farthest target after 1 second, dealing [120,SP] SPECIAL.",
 		"SKY_ATTACK_SHADOW": "Rise in the air and fall on the farthest target after 1 second, dealing [120,SP] SPECIAL. Can crit by default.",
-		"FLYING_PRESS": "Dived down onto the farthest target from the sky, dealing [50,SP]% of the user's max HP as SPECIAL.",
+		"FLYING_PRESS": "Dives down onto the farthest target from the sky, dealing [50,SP]% of the user's max HP as SPECIAL.",
 		"ILLUSION": "The user recovers [30,50,70,SP=0.5] HP and copies the appearance, ATK, DEF, SPE_DEF and RANGE of the target.",
 		"SLUDGE": "Throw trash at the 3 enemy Pokémon in front of the user to inflict [2,3,4] stacks of POISONNED for [3,SP] seconds.",
 		"SLUDGE_WAVE": "Throw a spray of waste on the target and ADJACENT enemy Pokémon, dealing [10,20,40,SP] SPECIAL and inflict POISONNED for [2,3,4,SP] seconds.",
@@ -1732,7 +1740,7 @@
 		"ROLLOUT": "Increase the user's DEF by [2,5,10,SP] then deal SPECIAL equal to 2x the user's DEF.",
 		"ICE_BALL": "Increase the user's SPE_DEF by 10 then deal SPECIAL equal to [10,20,30,SP] + [50,100,150,SP]% of the user's SPE_DEF.",
 		"THRASH": "Increase ATK by [100,SP]% and inflict the user with CONFUSION for 3 seconds.",
-		"SOLAR_BEAM": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon in a line behind the target and BURN them for 3 seconds. If Pokémon is in the spotlight or if the weather is SUN, double the damage and restore 40 PP.",
+		"SOLAR_BEAM": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon in a line behind the target and BURN them for 3 seconds. If Pokémon is in the spotlight or if the weather is SUN, double the damage and restore 20 PP.",
 		"MAGMA_STORM": "A maelstrom of fire traps the target, dealing [80,SP] SPECIAL before propagating to ADJACENT enemies.",
 		"DIRE_CLAW": "Deal [15,30,60,SP] SPECIAL to the target and inflict either POISONNED, SLEEP or PARALYSIS for 3 seconds.",
 		"SLASHING_CLAW": "Deal [15,30,60,SP] SPECIAL to the target and WOUND them for 5 seconds, +30% if the target already suffers from WOUND.",
@@ -1819,7 +1827,8 @@
 		"FLORAL_HEALING": "Heal HP equal to max PP of Comfey's holder or Comfey itself if not held.",
 		"VINE_WHIP": "Deal [100,SP] SPECIAL to the target and cause them and all ADJACENT enemy Pokémon to PARALYSIS for 3 seconds.",
 		"BODY_SLAM": "Deal [30,SP]% of the user's max HP as SPECIAL to the target.",
-		"BARB_BARRAGE": "Dive into the middle of the enemy team, dealing [15,30,60,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with POISONNED for 3 seconds.",
+		"STOCKPILE": "The user inflates itself, gaining [50,SP] max HP and losing 10 SPEED. After 3 casts, spit up, dealing [50,SP] % of max HP as SPECIAL to the target and propelling the user to the backline while retrieving its base max HP and SPEED.",
+		"BARB_BARRAGE": "Dive into the middle of the enemy team, dealing [20,40,60,80,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with POISONNED for 3 seconds.",
 		"MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE ADJACENT enemy Pokémon for [2,3,4] seconds.",
 		"INFERNAL_PARADE": "Shoot a returning Flame Wheel at farthest enemy, dealing [30, SP] SPECIAL twice to all enemy Pokémon in its path with a [50,LK]% chance to apply BURN for 3s.",
 		"RETALIATE": "Deal [150,SP]% of ATK as SPECIAL to the target + 1 additional attack for each fallen allied Pokémon.",
@@ -1880,7 +1889,7 @@
 		"CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon ADJACENT to them and inflict them with POISONNED for 2 seconds.",
 		"DOUBLE_EDGE": "Deal [55,110,220,SP] PHYSICAL to target. The user hurts itself for [20,40,60,SP] PHYSICAL.",
 		"FIRE_FANG": "Deal [30,60,120,SP] SPECIAL to the target and apply BURN for 2 seconds.",
-		"ICE_FANG": "Deal [30,60,120,SP] SPECIAL and apply FREEZE for 1 second.",
+		"ICE_FANG": "Deal [30,60,120,SP] SPECIAL and apply FREEZE for [1,1.5,2,ND=1] seconds.",
 		"THUNDER_FANG": "Deal [30,60,120,SP] SPECIAL and inflict PARALYSIS for 3 seconds.",
 		"TAIL_WHIP": "Reduce the target's DEF by [30,SP]%.",
 		"PSYSHIELD_BASH": "Dash to the farthest reachable enemy Pokémon, dealing [30,40,50,60,SP] SPECIAL to all enemy Pokémon in the path and PROTECT the user for 1 second.",
@@ -1923,7 +1932,7 @@
 		"DOUBLE_IRON_BASH": "The user rotates, centering the hex nut in its chest, striking with its arms twice in a row for [150,SP]% of its ATK as PHYSICAL for each hit. This causes the target to FLINCH for 3 seconds.",
 		"STONE_EDGE": "For [5,8] seconds, inflict the user with SILENCE, gain 2 RANGE, [20,SP] CRIT_CHANCE and apply [100,SP]% of its DEF as PHYSICAL on attacks.",
 		"ROAR": "Blow away the target. If they hit a wall, deal [20,40,80,SP] SPECIAL. If they hit another Pokémon, both are dealt SPECIAL.",
-		"INFESTATION": "Deal [10,SP] SPECIAL to the target for each allied BUG Pokémon on the battlefield. Once per combat, move the most powerful BUG Pokémon on the allied player's bench to the battlefield.",
+		"INFESTATION": "Deal [10,SP] SPECIAL to the target for each allied BUG Pokémon on the battlefield. Once per combat, move the STRONGEST BUG Pokémon on the allied player's bench to the battlefield.",
 		"IVY_CUDGEL": "Deal [100,SP] SPECIAL to the target.",
 		"FORCE_PALM": "Deal [60,SP] + [10,SP]% of the target's max HP as SPECIAL to the target and inflict them with PARALYSIS for 6 seconds, +[40,SP] SPECIAL and push the target away if they were already suffering from PARALYSIS.",
 		"THUNDER_CAGE": "Trap the target and ADJACENT enemy Pokémon in an electric prison, dealing [60,SP] SPECIAL and inflicting LOCKED and PARALYSIS for 3 seconds.",
@@ -2025,7 +2034,9 @@
 		"HYPER_DRILL": "Deals [10,30,50,SP] TRUE that can break PROTECT, and dig deeper into the ground under the target, destroying any eventual buried items in the process. Double damage if target is already on a fully dug hole.",
 		"TERRAIN_PULSE": "If user has no field, gets GRASS_FIELD.\nField effects in your team propagate to ADJACENT allies, then trigger an effect:\nGRASS_FIELD: heal [5,SP]% of max HP\nELECTRIC_FIELD: gain [10,SP] SPEED\nPSYCHIC_FIELD: gain [10,SP] PP\nFAIRY_FIELD: gain [5,SP]% of max HP as SHIELD",
 		"AXE_KICK": "Leap to the enemy with the highest PP then deal [25,50,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds.",
-		"EXPANDING_FORCE": "The user gains PSYCHIC_FIELD, or spreads it to a nearby ally. Then its psychic energy reverbates on all allies in a PSYCHIC_FIELD, dealing [10,20,40,SP] SPECIAL to ADJACENT enemies."
+		"EXPANDING_FORCE": "The user gains PSYCHIC_FIELD, or spreads it to a nearby ally. Then its psychic energy reverbates on all allies in a PSYCHIC_FIELD, dealing [10,20,40,SP] SPECIAL to ADJACENT enemies.",
+		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies",
+		"GRUDGE": "Deals [18,36,52,SP] SPECIAL to all enemies affected by SILENCE"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2178,7 +2189,7 @@
 		"TILLER": "Gain from +1 to +5 DEF and SPE_DEF and +3 ATK at max depth",
 		"DIGGER": "Gain from +2 to +10 DEF and SPE_DEF and +5 ATK at max depth",
 		"DRILLER": "Gain from +3 to +15 DEF and SPE_DEF and +8 ATK at max depth",
-		"DEEP_MINER": "Gain 1 extra DEF and SPE_DEF for each fully dug hole on your half of the board and +12 ATK when your half of the board is fully dug",
+		"DEEP_MINER": "Gain 5 extra DEF and SPE_DEF for each fully dug row and +5 ATK when your half of the board is fully dug",
 		"POISONOUS": "[30,LK]% chance to POISONNED",
 		"VENOMOUS": "[60,LK]% chance to POISONNED. Max stacks of POISONNED +1",
 		"TOXIC": "[100,LK]% chance to POISONNED. Max stacks of POISONNED +2",
@@ -2868,7 +2879,9 @@
 		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each.",
 		"FLABEBE_COLOR": "Their color indicates the first FLORA bud to blossom",
 		"DUNSPARCE": "Dunsparce will evolve when at least 10 ground holes are fully dug on board",
-		"PACHIRISU": "Has [30,LK]% chance to find a buried SITRUS_BERRY after each fight"
+		"PACHIRISU": "Has [30,LK]% chance to find a buried SITRUS_BERRY after each fight",
+		"QWILFISH": "When struck by an attack at melee range, deal 5 TRUE to the attacker, with [30,LK]% chance to inflict POISON for 3 seconds",
+		"HISUIAN_QWILFISH": "Gain 1 AP permanently when casting its ability. After casting 20 times, Qwilfish will evolve into Overqwil."
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -3277,7 +3290,7 @@
 		"create_bot": "Can i create my own bot ?",
 		"create_bot_answer": "Sure. You'll need to be at least level 20 to unlock the Bot Builder gadget. You can use it to create and submit your bot, it will be sent in the #bot-creation channel on Discord for a review by the bot reviewers team.",
 		"elo": "How does the elo system work ?",
-		"elo_answer": "The elo system in Pokemon Auto Chess works the same as in other elo based games like Chess, Lol, Starcraft etc... To gain elo points, you need to beat other players. The higher your opponent's elo, the more elo you will gain by defeating him, and vice versa. If you don't play for 15 days, your elo will start to decay (-5 elo/day).",
+		"elo_answer": "The elo system in Pokemon Auto Chess works the same as in other elo based games like Chess, Lol, Starcraft etc... To gain elo points, you need to beat other players. The higher your opponent's elo, the more elo you will gain by defeating him, and vice versa. If you don't play for 20 days, your elo will start to decay (-5 elo/day).",
 		"missing_points": "I didn't get elo points in my last game, why ?",
 		"missing_points_answer": "Only Ranked game mode enables elo gains and losses.",
 		"damage": "What are the special damages and physical damages ?",
@@ -3929,7 +3942,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "This room is private. Enter password",
-	"wrong_password": "Wrong password !",
 	"game_full": "This group is full",
 	"game_already_started": "Game has already started",
 	"min_rank_not_reached": "Your rank is not high enough to play this ranked match",

@@ -683,6 +683,7 @@ export enum Pkm {
   QUAGSIRE = "QUAGSIRE",
   QUILAVA = "QUILAVA",
   QUILLADIN = "QUILLADIN",
+  QWILFISH = "QWILFISH",
   RABOOT = "RABOOT",
   RAICHU = "RAICHU",
   RAIKOU = "RAIKOU",
@@ -1030,7 +1031,11 @@ export enum Pkm {
   SILICOBRA = "SILICOBRA",
   SANDACONDA = "SANDACONDA",
   DUNSPARCE = "DUNSPARCE",
-  DUDUNSPARCE = "DUDUNSPARCE"
+  DUDUNSPARCE = "DUDUNSPARCE",
+  YAMASK = "YAMASK",
+  COFAGRIGUS = "COFAGRIGUS",
+  GALARIAN_YAMASK = "GALARIAN_YAMASK",
+  RUNERIGUS = "RUNERIGUS"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1310,7 +1315,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.MEGA_STEELIX]: "0208-0001",
   [Pkm.SNUBULL]: "0209",
   [Pkm.GRANBULL]: "0210",
-  //[Pkm.QWILFISH]: "0211",
+  [Pkm.QWILFISH]: "0211",
   [Pkm.HISUIAN_QWILFISH]: "0211-0001",
   [Pkm.SCIZOR]: "0212",
   [Pkm.SHUCKLE]: "0213",
@@ -1705,8 +1710,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SCRAGGY]: "0559",
   [Pkm.SCRAFTY]: "0560",
   [Pkm.SIGILYPH]: "0561",
-  //[Pkm.YAMASK]: "0562",
-  //[Pkm.COFAGRIGUS]: "0563",
+  [Pkm.YAMASK]: "0562",
+  [Pkm.GALARIAN_YAMASK]: "0562-0001",
+  [Pkm.COFAGRIGUS]: "0563",
   //[Pkm.TIRTOUGA]: "0564",
   //[Pkm.CARRACOSTA]: "0565",
   [Pkm.ARCHEN]: "0566",
@@ -2044,7 +2050,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CURSOLA]: "0864",
   //[Pkm.SIRFETCHD]: "0865",
   //[Pkm.MR_RIME]: "0866",
-  //[Pkm.RUNERIGUS]: "0867",
+  [Pkm.RUNERIGUS]: "0867",
   [Pkm.MILCERY]: "0868",
   [Pkm.ALCREMIE_VANILLA]: "0869",
   [Pkm.ALCREMIE_RUBY]: "0869-0007",
@@ -2922,6 +2928,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ALOLAN_EXEGGUTOR]: Pkm.EXEGGCUTE,
   [Pkm.COMFEY]: Pkm.COMFEY,
   [Pkm.CARNIVINE]: Pkm.CARNIVINE,
+  [Pkm.QWILFISH]: Pkm.QWILFISH,
   [Pkm.HISUIAN_QWILFISH]: Pkm.HISUIAN_QWILFISH,
   [Pkm.OVERQWIL]: Pkm.HISUIAN_QWILFISH,
   [Pkm.HISUIAN_TYPHLOSION]: Pkm.CYNDAQUIL,
@@ -3255,7 +3262,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DOTTLER]: Pkm.BLIPBUG,
   [Pkm.ORBEETLE]: Pkm.BLIPBUG,
   [Pkm.PACHIRISU]: Pkm.PACHIRISU,
-  [Pkm.BUZZWOLE]: Pkm.BUZZWOLE
+  [Pkm.BUZZWOLE]: Pkm.BUZZWOLE,
+  [Pkm.YAMASK]: Pkm.YAMASK,
+  [Pkm.COFAGRIGUS]: Pkm.YAMASK,
+  [Pkm.GALARIAN_YAMASK]: Pkm.GALARIAN_YAMASK,
+  [Pkm.RUNERIGUS]: Pkm.GALARIAN_YAMASK
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3277,7 +3288,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.ZIGZAGOON]: [Pkm.GALARIAN_ZIGZAGOON],
   [Pkm.ARTICUNO]: [Pkm.GALARIAN_ARTICUNO],
   [Pkm.ZAPDOS]: [Pkm.GALARIAN_ZAPDOS],
-  [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES]
+  [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES],
+  [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {

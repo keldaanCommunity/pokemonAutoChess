@@ -79,7 +79,7 @@ export default class Bot {
   }
 
   updateFlowerPots() {
-    if (this.step % 3 === 0 && this.step >= 6 && this.step <= 30) {
+    if (this.step % 3 === 0 && this.step >= 6 && this.step < 30) {
       const mulchIndex = Math.floor(this.step / 3) - 2
       const potIndex = mulchIndex % 4
       const flowerPot = this.player.flowerPots[potIndex]

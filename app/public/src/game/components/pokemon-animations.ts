@@ -4783,10 +4783,17 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
+  [Pkm.QWILFISH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE,
+    hitSprite: HitSprite.POISON_HIT
+  },
   [Pkm.HISUIAN_QWILFISH]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Withdraw,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.POISON_MELEE,
     hitSprite: HitSprite.DARK_HIT
   },
@@ -7102,5 +7109,33 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FIGHTING_MELEE,
     hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.YAMASK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_MELEE,
+    hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.COFAGRIGUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_MELEE,
+    hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.GALARIAN_YAMASK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_RANGE,
+    hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.RUNERIGUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_RANGE,
+    hitSprite: HitSprite.GHOST_HIT
   }
 }

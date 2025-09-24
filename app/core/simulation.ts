@@ -288,38 +288,32 @@ export default class Simulation extends Schema implements ISimulation {
     return pokemonEntity
   }
 
-  getFirstAvailablePlaceOnBoard(team: Team): { x: number; y: number } {
-    let candidateX = 0,
-      candidateY = 0
+  getFirstFreeCell(team: Team): { x: number; y: number } | null {
     if (team === Team.BLUE_TEAM) {
-      outerloop: for (let y = 0; y < this.board.rows; y++) {
+      for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
           if (this.board.getEntityOnCell(x, y) === undefined) {
-            candidateX = x
-            candidateY = y
-            break outerloop
+            return { x, y }
           }
         }
       }
     } else {
-      outerloop: for (let y = 0; y < this.board.rows; y++) {
+      for (let y = 0; y < this.board.rows; y++) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
           if (this.board.getEntityOnCell(x, y) === undefined) {
-            candidateX = x
-            candidateY = y
-            break outerloop
+            return { x, y }
           }
         }
       }
     }
-    return { x: candidateX, y: candidateY }
+    return null
   }
 
-  getClosestAvailablePlaceOnBoardTo(
+  getClosestFreeCellTo(
     positionX: number,
     positionY: number,
     team: Team
-  ): { x: number; y: number } {
+  ): { x: number; y: number } | null {
     const placesToConsiderByOrderOfPriority = [
       [0, 0],
       [-1, 0],
@@ -371,26 +365,26 @@ export default class Simulation extends Schema implements ISimulation {
         return { x, y }
       }
     }
-    return this.getFirstAvailablePlaceOnBoard(team)
+    return this.getFirstFreeCell(team)
   }
 
-  getClosestAvailablePlaceOnBoardToPokemon(
+  getClosestFreeCellToPokemon(
     pokemon: IPokemon,
     team: Team
-  ): { x: number; y: number } {
+  ): { x: number; y: number } | null {
     const positionX = pokemon.positionX
     const positionY =
       team === Team.BLUE_TEAM
         ? pokemon.positionY - 1
         : 5 - (pokemon.positionY - 1)
-    return this.getClosestAvailablePlaceOnBoardTo(positionX, positionY, team)
+    return this.getClosestFreeCellTo(positionX, positionY, team)
   }
 
-  getClosestAvailablePlaceOnBoardToPokemonEntity(
+  getClosestFreeCellToPokemonEntity(
     pokemon: IPokemonEntity,
     team: Team = pokemon.team
-  ): { x: number; y: number } {
-    return this.getClosestAvailablePlaceOnBoardTo(
+  ): { x: number; y: number } | null {
+    return this.getClosestFreeCellTo(
       pokemon.positionX,
       pokemon.positionY,
       team
@@ -537,33 +531,35 @@ export default class Simulation extends Schema implements ISimulation {
             player
           )
 
-          const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+          const coord = this.getClosestFreeCellToPokemon(
             pokemonCloned,
             teamIndex
           )
-          const cloneEntity = this.addPokemon(
-            bug,
-            coord.x,
-            coord.y,
-            teamIndex,
-            true
-          )
-          if (pokemonCloned.items.has(Item.TINY_MUSHROOM)) {
-            const team =
-              teamIndex === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
-            const clonedEntity = values(team).find(
-              (p) => p.refToBoardPokemon.id === pokemonCloned.id
+          if (coord) {
+            const cloneEntity = this.addPokemon(
+              bug,
+              coord.x,
+              coord.y,
+              teamIndex,
+              true
             )
-            if (clonedEntity) {
-              clonedEntity.addMaxHP(
-                -0.5 * pokemonCloned.hp,
-                clonedEntity,
-                0,
-                false
+            if (pokemonCloned.items.has(Item.TINY_MUSHROOM)) {
+              const team =
+                teamIndex === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
+              const clonedEntity = values(team).find(
+                (p) => p.refToBoardPokemon.id === pokemonCloned.id
               )
-            }
+              if (clonedEntity) {
+                clonedEntity.addMaxHP(
+                  -0.5 * pokemonCloned.hp,
+                  clonedEntity,
+                  0,
+                  false
+                )
+              }
 
-            cloneEntity.addMaxHP(-0.5 * bug.hp, cloneEntity, 0, false)
+              cloneEntity.addMaxHP(-0.5 * bug.hp, cloneEntity, 0, false)
+            }
           }
         }
       }
@@ -578,15 +574,16 @@ export default class Simulation extends Schema implements ISimulation {
           if (entity) {
             entity.commands.push(
               new DelayedCommand(() => {
+                const coord = this.getClosestFreeCellToPokemon(
+                  pokemon,
+                  teamIndex
+                )
+                if (!coord) return
                 const rotomDrone = PokemonFactory.createPokemonFromName(
                   Pkm.ROTOM_DRONE,
                   player
                 )
                 player?.pokemonsPlayed.add(Pkm.ROTOM_DRONE)
-                const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
-                  pokemon,
-                  teamIndex
-                )
                 this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
               }, 8000)
             )
@@ -644,11 +641,12 @@ export default class Simulation extends Schema implements ISimulation {
           }
 
           spawns.forEach((spawn) => {
-            const mon = PokemonFactory.createPokemonFromName(spawn.name)
-            const coord = this.getClosestAvailablePlaceOnBoardToPokemon(
+            const coord = this.getClosestFreeCellToPokemon(
               pokemon,
               teamIndex
             )
+            if (!coord) return
+            const mon = PokemonFactory.createPokemonFromName(spawn.name)
             this.addPokemon(mon, coord.x, coord.y, teamIndex, true)
           })
         }
@@ -1763,7 +1761,7 @@ export default class Simulation extends Schema implements ISimulation {
       Pkm.PIKACHU_SURFER,
       team === Team.RED_TEAM ? this.redPlayer : this.bluePlayer
     )
-    const coord = this.getFirstAvailablePlaceOnBoard(team)
+    const coord = this.getFirstFreeCell(team)
     if (coord) {
       this.addPokemon(pikachuSurfer, coord.x, coord.y, team, true)
     }

@@ -1751,7 +1751,7 @@
 		"FLORAL_HEALING": "Cura HP equivalente al PP máximo que posea el portador de Comfey o del propio Comfey si no es llevado por nadie",
 		"VINE_WHIP": "Causa [100,SP] de SPECIAL, causando FLINCH a todos los pokémon adyacentes por 3 segundos",
 		"BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuaio como SPECIAL",
-		"BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,60,SP] de SPECIAL y dejando POISONNED a todos los pokémon adyacentes por 3 segundos",
+		"BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [20,40,60,80,SP] de SPECIAL y dejando POISONNED a todos los pokémon adyacentes por 3 segundos",
 		"MAGIC_POWDER": "Gana [10,20,40,SP] de SHIELD y deja SILENCE a los enemigos adyacentes por [2,3,4] segundos",
 		"INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con [50,LK]% chance de dejar BURN por 3 segundos y causando [30, SP] de SPECIAL 2 veces a los Pokémon con los que choca",
 		"RETALIATE": "Inflige [150,SP]% del ATK como SPECIAL al objetivo + 1 ataque adicional por aliado caido",
@@ -1812,7 +1812,7 @@
 		"CROSS_POISON": "Inflige [30,60,120,SP] de SPECIAL al objetivo y a enemigos adyacentes a este, los deja POISONNED por 2 segundos",
 		"DOUBLE_EDGE": "Inflige [55,110,220,SP] de PHYSICAL al objetivo. El usuario se autoinflige [20,40,60,SP] de PHYSICAL.",
 		"FIRE_FANG": "Inflige [30,60,120,SP] de SPECIAL y BURN por 2 segundos",
-		"ICE_FANG": "Inflige [30,60,120,SP] de SPECIAL y FREEZE por 1 segundo",
+		"ICE_FANG": "Inflige [30,60,120,SP] de SPECIAL y FREEZE por [1,1.5,2,ND=1] segundos",
 		"THUNDER_FANG": "Inflige [30,60,120,SP] de SPECIAL y PARALYSIS por 3 segundos",
 		"TAIL_WHIP": "Reduce la DEF del objetivo en un [30,SP] %",
 		"PSYSHIELD_BASH": "Se cuela en la retaguardia enemiga, inflige [30,40,50,60,SP] de SPECIAL a todos los enemigos en el camino y da PROTECT al usuario por 1 segundo.",
@@ -3102,7 +3102,7 @@
 		"create_bot": "¿Puedo crear mi propio bot?",
 		"create_bot_answer": "Seguro. Deberás tener al menos el nivel 20 para desbloquear el dispositivo Bot Builder. Puede usarlo para crear y enviar su bot; se enviará al canal #bot-creation en Discord para que el equipo de revisores de bot lo revise.",
 		"elo": "¿Cómo funciona el sistema elo?",
-		"elo_answer": "El sistema elo en Pokemon Auto Chess funciona igual que en otros juegos basados en elo como Chess, Lol, Starcraft, etc. Para ganar puntos elo, debes vencer a otros jugadores. Cuanto mayor sea el elo de tu oponente, más elo ganarás al derrotarlo, y viceversa. Si no juegas durante 15 días, tu elo comenzará a decaer (-10 elo/día).",
+		"elo_answer": "El sistema elo en Pokemon Auto Chess funciona igual que en otros juegos basados en elo como Chess, Lol, Starcraft, etc. Para ganar puntos elo, debes vencer a otros jugadores. Cuanto mayor sea el elo de tu oponente, más elo ganarás al derrotarlo, y viceversa. Si no juegas durante 20 días, tu elo comenzará a decaer (-5 elo/día).",
 		"missing_points": "No obtuve puntos elo en mi último juego, ¿por qué?",
 		"missing_points_answer": "Los bots no otorgan elo, solo los jugadores humanos tienen en cuenta la calificación de elo. También es posible que el juego tuviera elo desactivado (modo \"Solo por diversión\")",
 		"damage": "¿Qué es el daño especial y el daño físico?",
@@ -3735,7 +3735,6 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "Esta sala es privada. Introduce la contraseña",
-	"wrong_password": "Contraseña incorrecta!",
 	"game_full": "El grupo esta completo",
 	"game_already_started": "El juego ya empezó",
 	"min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
@@ -3845,7 +3844,8 @@
 		"ROOM_FULL": "Esta sala está llena",
 		"ROOM_EMPTY": "Esta sala fue removida por falta de jugadores",
 		"ROOM_DELETED": "Esta sala fue borrada",
-		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
+		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:",
+		"INVALID_PASSWORD": "Contraseña incorrecta!"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Intentando volver a conectar...",
