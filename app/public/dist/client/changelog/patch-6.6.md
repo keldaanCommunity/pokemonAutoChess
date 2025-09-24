@@ -3,6 +3,8 @@
 - Qwilfish
 - Yamask
 - Cofagrigus
+- Galarian Yamask
+- Runerigus
 
 # Changes to Pokemon & Abilities
 

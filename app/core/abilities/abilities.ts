@@ -13637,6 +13637,39 @@ export class SpiteStrategy extends AbilityStrategy {
   }
 }
 
+export class GrudgeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = ([18, 36, 52][pokemon.stars - 1] ?? 52) + pokemon.ap
+
+    board.cells
+      .filter(
+        (enemy): enemy is PokemonEntity =>
+          !!enemy && enemy.team !== pokemon.team && enemy.status.silence
+      )
+      .forEach((enemy) => {
+        pokemon.broadcastAbility({
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: enemy.positionX,
+          targetY: enemy.positionY
+        })
+        enemy.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14126,5 +14159,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AXE_KICK]: new AxeKickStrategy(),
   [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy(),
   [Ability.STOCKPILE]: new StockpileStrategy(),
-  [Ability.SPITE]: new SpiteStrategy()
+  [Ability.SPITE]: new SpiteStrategy(),
+  [Ability.GRUDGE]: new GrudgeStrategy()
 }

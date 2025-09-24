@@ -18786,6 +18786,37 @@ export class Cofagrigus extends Pokemon {
   additional = true
 }
 
+export class GalarianYamask extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.RUNERIGUS
+  hp = 65
+  atk = 5
+  speed = 45
+  def = 7
+  speDef = 5
+  maxPP = 95
+  range = 2
+  skill = Ability.GRUDGE
+  additional = true
+}
+
+export class Runerigus extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.MONSTER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 14
+  speed = 45
+  def = 9
+  speDef = 7
+  maxPP = 95
+  range = 2
+  skill = Ability.GRUDGE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19828,7 +19859,9 @@ export const PokemonClasses: Record<
   [Pkm.PACHIRISU]: Pachirisu,
   [Pkm.BUZZWOLE]: Buzzwole,
   [Pkm.YAMASK]: Yamask,
-  [Pkm.COFAGRIGUS]: Cofagrigus
+  [Pkm.COFAGRIGUS]: Cofagrigus,
+  [Pkm.GALARIAN_YAMASK]: GalarianYamask,
+  [Pkm.RUNERIGUS]: Runerigus
 }
 
 // declare all the classes in colyseus schema TypeRegistry

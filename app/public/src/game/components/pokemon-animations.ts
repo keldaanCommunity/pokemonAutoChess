@@ -7123,5 +7123,19 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.GHOST_MELEE,
     hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.GALARIAN_YAMASK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_RANGE,
+    hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.RUNERIGUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_RANGE,
+    hitSprite: HitSprite.GHOST_HIT
   }
 }
