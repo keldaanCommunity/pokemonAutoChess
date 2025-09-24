@@ -18768,7 +18768,7 @@ export class Yamask extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SPITE
-  additional = true
+  regional = true
 }
 
 export class Cofagrigus extends Pokemon {
@@ -18783,12 +18783,12 @@ export class Cofagrigus extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.SPITE
-  additional = true
+  regional = true
 }
 
 export class GalarianYamask extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.MONSTER])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.RUNERIGUS
   hp = 65
@@ -18799,12 +18799,12 @@ export class GalarianYamask extends Pokemon {
   maxPP = 95
   range = 2
   skill = Ability.GRUDGE
-  additional = true
+  regional = true
 }
 
 export class Runerigus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.MONSTER])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 2
   hp = 140
   atk = 14
@@ -18814,7 +18814,7 @@ export class Runerigus extends Pokemon {
   maxPP = 95
   range = 2
   skill = Ability.GRUDGE
-  additional = true
+  regional = true
 }
 
 export const PokemonClasses: Record<
