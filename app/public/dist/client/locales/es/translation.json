@@ -3844,8 +3844,8 @@
 		"ROOM_FULL": "Esta sala está llena",
 		"ROOM_EMPTY": "Esta sala fue removida por falta de jugadores",
 		"ROOM_DELETED": "Esta sala fue borrada",
-		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:",
-		"INVALID_PASSWORD": "Contraseña incorrecta!"
+		"INVALID_PASSWORD": "Contraseña incorrecta!",
+		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Intentando volver a conectar...",

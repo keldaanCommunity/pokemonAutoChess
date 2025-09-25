@@ -3707,8 +3707,8 @@
 		"ROOM_FULL": "방이 꽉 찼습니다",
 		"ROOM_EMPTY": "플레이어 수가 부족으로 삭제된 방입니다",
 		"ROOM_DELETED": "삭제된 방입니다",
-		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}",
-		"INVALID_PASSWORD": "비밀번호가 틀렸습니다!"
+		"INVALID_PASSWORD": "비밀번호가 틀렸습니다!",
+		"UNKNOWN_ERROR": "예기치 못한 에러 발생: {{error}}"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
