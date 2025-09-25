@@ -676,7 +676,7 @@ export class CrabHammerStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     let attackType = AttackType.SPECIAL
     if (target.life / target.hp < 0.3) {
-      damage = target.life
+      damage = 9999
       attackType = AttackType.TRUE
     }
     target.handleSpecialDamage(damage, board, attackType, pokemon, crit)
@@ -1863,8 +1863,10 @@ export class HeadSmashStrategy extends AbilityStrategy {
     }
 
     if (target.status.sleep || target.status.freeze) {
+      damage = 9999
+      
       target.handleSpecialDamage(
-        target.life,
+        damage,
         board,
         AttackType.TRUE,
         pokemon,
