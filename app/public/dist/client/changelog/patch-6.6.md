@@ -49,5 +49,6 @@
 
 - Fix blue orb damage scaling with AP by mistake
 - Fix Comfey being resurrected through Sacred Ash when an ally alive holds it
+- Fix Slaking not enraging after waking up through Sound cry or Chesto Berry
 
 # Misc

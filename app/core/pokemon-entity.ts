@@ -1555,8 +1555,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(50)
         this.addAttack(10, this, 0, false)
         break
-      case Item.CHESTO_BERRY:
-        this.status.sleep = false
+      case Item.CHESTO_BERRY:        
         this.status.sleepCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_SLEEP)
         heal(50)
