@@ -508,7 +508,8 @@
 		"AXE_KICK": "Axe Kick",
 		"EXPANDING_FORCE": "Expanding Force",
 		"SPITE": "Spite",
-		"GRUDGE": "Grudge"
+		"GRUDGE": "Grudge",
+		"JAW_LOCK": "Jaw Lock"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1547,7 +1548,9 @@
 		"YAMASK": "Yamask",
 		"COFAGRIGUS": "Cofagrigus",
 		"GALARIAN_YAMASK": "Galarian Yamask",
-		"RUNERIGUS": "Runerigus"
+		"RUNERIGUS": "Runerigus",
+		"CHEWTLE": "Chewtle",
+		"DREDNAW": "Drednaw"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2036,7 +2039,8 @@
 		"AXE_KICK": "Leap to the enemy with the highest PP then deal [25,50,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds.",
 		"EXPANDING_FORCE": "The user gains PSYCHIC_FIELD, or spreads it to a nearby ally. Then its psychic energy reverbates on all allies in a PSYCHIC_FIELD, dealing [10,20,40,SP] SPECIAL to ADJACENT enemies.",
 		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies",
-		"GRUDGE": "Deals [18,36,52,SP] SPECIAL to all enemies affected by SILENCE"
+		"GRUDGE": "Deals [18,36,52,SP] SPECIAL to all enemies affected by SILENCE",
+		"JAW_LOCK": "Bites the target, inflicting LOCKED for 3s and dealing 125% ATK + [10,15,20,SP] SPECIAL. If target is already bitten, also heals [25,50,100,SP] HP."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

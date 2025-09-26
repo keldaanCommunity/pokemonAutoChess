@@ -5,6 +5,8 @@
 - Cofagrigus
 - Galarian Yamask
 - Runerigus
+- Chewtle
+- Drednaw
 
 # Changes to Pokemon & Abilities
 

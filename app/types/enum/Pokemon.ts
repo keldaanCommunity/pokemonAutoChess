@@ -1035,7 +1035,9 @@ export enum Pkm {
   YAMASK = "YAMASK",
   COFAGRIGUS = "COFAGRIGUS",
   GALARIAN_YAMASK = "GALARIAN_YAMASK",
-  RUNERIGUS = "RUNERIGUS"
+  RUNERIGUS = "RUNERIGUS",
+  CHEWTLE = "CHEWTLE",
+  DREDNAW = "DREDNAW"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -2016,8 +2018,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ELDEGOSS]: "0830",
   //[Pkm.WOOLOO]: "0831",
   //[Pkm.DUBWOOL]: "0832",
-  //[Pkm.CHEWTLE]: "0833",
-  //[Pkm.DREDNAW]: "0834",
+  [Pkm.CHEWTLE]: "0833",
+  [Pkm.DREDNAW]: "0834",
   //[Pkm.YAMPER]: "0835",
   //[Pkm.BOLTUND]: "0836",
   //[Pkm.ROLYCOLY]: "0837",
@@ -3266,7 +3268,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.YAMASK]: Pkm.YAMASK,
   [Pkm.COFAGRIGUS]: Pkm.YAMASK,
   [Pkm.GALARIAN_YAMASK]: Pkm.GALARIAN_YAMASK,
-  [Pkm.RUNERIGUS]: Pkm.GALARIAN_YAMASK
+  [Pkm.RUNERIGUS]: Pkm.GALARIAN_YAMASK,
+  [Pkm.CHEWTLE]: Pkm.CHEWTLE,
+  [Pkm.DREDNAW]: Pkm.CHEWTLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

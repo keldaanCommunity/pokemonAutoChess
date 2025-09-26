@@ -1,5 +1,9 @@
 import { giveRandomEgg } from "../../core/eggs"
-import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import {
+  Chewtle,
+  Drednaw,
+  PokemonClasses
+} from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
@@ -1864,14 +1868,8 @@ export class HeadSmashStrategy extends AbilityStrategy {
 
     if (target.status.sleep || target.status.freeze) {
       damage = 9999
-      
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.TRUE,
-        pokemon,
-        crit
-      )
+
+      target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
     } else {
       target.handleSpecialDamage(
         damage,
@@ -13672,6 +13670,47 @@ export class GrudgeStrategy extends AbilityStrategy {
   }
 }
 
+export class JawLockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const baseDamage = Math.round(pokemon.atk * 1.25)
+    const bonusDamage = [10, 15, 20][pokemon.stars - 1] ?? 20
+    const totalDamage = baseDamage + bonusDamage
+    const heal = [25, 50, 100][pokemon.stars - 1] ?? 100
+
+    // Check if target is already locked (already bitten)
+    const alreadyBitten =
+      (pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
+      pokemon.jawLockTargets.includes(target.id)
+
+    // Apply LOCKED status for 3 seconds
+    target.status.triggerLocked(3000, target)
+
+    // Deal damage
+    target.handleSpecialDamage(
+      totalDamage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    // Add the target id to the jawLockTargets
+    ;(pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
+      pokemon.jawLockTargets.push(target.id)
+
+    // If target was already bitten, heal the user
+    if (alreadyBitten) {
+      pokemon.handleHeal(heal, pokemon, 1, crit)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14162,5 +14201,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy(),
   [Ability.STOCKPILE]: new StockpileStrategy(),
   [Ability.SPITE]: new SpiteStrategy(),
-  [Ability.GRUDGE]: new GrudgeStrategy()
+  [Ability.GRUDGE]: new GrudgeStrategy(),
+  [Ability.JAW_LOCK]: new JawLockStrategy()
 }

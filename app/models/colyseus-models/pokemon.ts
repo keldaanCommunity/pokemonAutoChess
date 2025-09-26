@@ -18817,6 +18817,47 @@ export class Runerigus extends Pokemon {
   regional = true
 }
 
+export class Chewtle extends Pokemon {
+  jawLockTargets: string[] = []
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.ROCK,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DREDNAW
+  hp = 80
+  atk = 9
+  speed = 49
+  def = 6
+  speDef = 4
+  maxPP = 50
+  range = 1
+  skill = Ability.JAW_LOCK
+  additional = true
+}
+
+export class Drednaw extends Pokemon {
+  jawLockTargets: string[] = []
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.ROCK,
+    Synergy.MONSTER
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 180
+  atk = 20
+  speed = 45
+  def = 10
+  speDef = 6
+  maxPP = 50
+  range = 1
+  skill = Ability.JAW_LOCK
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19861,7 +19902,9 @@ export const PokemonClasses: Record<
   [Pkm.YAMASK]: Yamask,
   [Pkm.COFAGRIGUS]: Cofagrigus,
   [Pkm.GALARIAN_YAMASK]: GalarianYamask,
-  [Pkm.RUNERIGUS]: Runerigus
+  [Pkm.RUNERIGUS]: Runerigus,
+  [Pkm.CHEWTLE]: Chewtle,
+  [Pkm.DREDNAW]: Drednaw
 }
 
 // declare all the classes in colyseus schema TypeRegistry

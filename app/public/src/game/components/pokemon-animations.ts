@@ -7137,5 +7137,17 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.GHOST_RANGE,
     hitSprite: HitSprite.GHOST_HIT
+  },
+  [Pkm.CHEWTLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.DREDNAW]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Bite,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
   }
 }
