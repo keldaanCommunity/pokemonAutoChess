@@ -638,6 +638,7 @@ const ogerponMaskDropEffect = (
   new OnShieldDepletedEffect(({ pokemon }) => {
     if (pokemon.name === from && pokemon.items.has(mask)) {
       pokemon.index = PkmIndex[to]
+      pokemon.name = to
       pokemon.removeItem(mask)
     }
   }, mask)
