@@ -13604,12 +13604,7 @@ export class SpiteStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const ppDrain =
-      ([20, 40, 60][pokemon.stars - 1] ?? 60) *
-      (1 + pokemon.ap / 100) *
-      (crit ? pokemon.critPower : 1)
-
-    const drainedPP = Math.min(ppDrain, target.pp)
+    const ppDrain = ([20, 40, 60][pokemon.stars - 1] ?? 60)
 
     pokemon.broadcastAbility({
       targetX: target.positionX,
@@ -13618,7 +13613,7 @@ export class SpiteStrategy extends AbilityStrategy {
     })
 
     // Drain PP from target
-    target.addPP(-drainedPP, pokemon, 1, crit)
+    target.addPP(-ppDrain, pokemon, 1, crit) //addPP handles pp underflow, ap, crit
 
     const adjacentAllies = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -13633,7 +13628,7 @@ export class SpiteStrategy extends AbilityStrategy {
             targetX: ally.positionX,
             targetY: ally.positionY
           })
-          ally.addPP(ppDrain, pokemon, 0, crit)
+          ally.addPP(ppDrain/(adjacentAllies.length), pokemon, 1, crit) //divide by number of allies to redistribute
         }
       }
     }
@@ -13649,7 +13644,7 @@ export class GrudgeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const duration = 3000
-    const damage = ([18, 36, 52][pokemon.stars - 1] ?? 52) + pokemon.ap
+    const damage = ([18, 36, 52][pokemon.stars - 1] ?? 52)
 
     // Apply SILENCE status to the target
     target.status.triggerSilence(duration, target, pokemon)
