@@ -1420,7 +1420,7 @@ export default class Simulation extends Schema implements ISimulation {
           ? count(player.items, Item.ODD_KEYSTONE)
           : 0
 
-        pokemon.addLuck(10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 30 : 0), pokemon, 0, false)
+        pokemon.addLuck(10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30), pokemon, 0, false)
         break
       }
 
