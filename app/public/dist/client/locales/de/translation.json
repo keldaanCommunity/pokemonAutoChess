@@ -3849,7 +3849,6 @@
 		"BEAST_BALL": "Ultraball"
 	},
 	"room_is_private": "Dieser Raum ist privat. Gib Passwort ein",
-	"wrong_password": "Falsches Passwort !",
 	"game_full": "Raum ist voll",
 	"game_already_started": "Spiel hat bereits begonnen",
 	"min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",

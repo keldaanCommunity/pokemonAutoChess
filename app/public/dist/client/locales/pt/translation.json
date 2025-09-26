@@ -2698,8 +2698,8 @@
 		"ROOM_FULL": "Sala cheia",
 		"ROOM_EMPTY": "Esta sala foi removida devido a falta de jogadores",
 		"ROOM_DELETED": "Esta sala foi excluída",
-		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}",
-		"INVALID_PASSWORD": "Senha errada!"
+		"INVALID_PASSWORD": "Senha errada!",
+		"UNKNOWN_ERROR": "Ocorreu um erro inesperado: {{error}}"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexão perdida. Tentando reconectar...",
