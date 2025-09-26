@@ -18849,7 +18849,7 @@ export class Drednaw extends Pokemon {
   stars = 2
   hp = 180
   atk = 20
-  speed = 45
+  speed = 49
   def = 10
   speDef = 6
   maxPP = 50

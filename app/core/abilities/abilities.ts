@@ -13616,6 +13616,8 @@ export class SpiteStrategy extends AbilityStrategy {
       targetY: target.positionY,
       skill: Ability.PSYCHIC_FANGS
     })
+    
+    // Drain PP from target
     target.addPP(-drainedPP, pokemon, 1, crit)
 
     const adjacentAllies = board
@@ -13623,6 +13625,7 @@ export class SpiteStrategy extends AbilityStrategy {
       .filter((cell) => cell.value && cell.value.team === pokemon.team)
       .map((cell) => cell.value)
 
+    // Redistribute PP to adjacent allies
     if (adjacentAllies.length > 0) {
       for (const ally of adjacentAllies) {
         if (ally) {
@@ -13645,8 +13648,13 @@ export class GrudgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
+    const duration = 3000
     const damage = ([18, 36, 52][pokemon.stars - 1] ?? 52) + pokemon.ap
-
+    
+    // Apply SILENCE status to the target
+    target.status.triggerSilence(duration, target, pokemon)
+    
+    // Deal damage to all enemies affected by SILENCE
     board.cells
       .filter(
         (enemy): enemy is PokemonEntity =>
