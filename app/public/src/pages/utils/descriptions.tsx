@@ -132,10 +132,11 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
         )
       } else if (/\[[^\]]+\]/.test(token)) {
         const array = token.slice(1, -1).split(",")
-        let scaleType: "AP" | "LUCK" | null = null
+        let scaleType: "ND" | "AP" | "LUCK" | null = null
         let scaleFactor = 1
         let nbDigits = 0
         if (array.at(-1)?.includes("ND")) {
+          scaleType = "ND"
           nbDigits = Number(array.pop()?.replace("ND=", "")) || 0
         }
         if (array.at(-1)?.includes("SP")) {
@@ -149,8 +150,15 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
 
         d = (
           <span
-            className={cc("description-icon", { "scales-ap": scaleType === "AP", "scales-luck": scaleType === "LUCK" })}
+            className={cc("description-icon", { "scales-nd": scaleType === "ND", "scales-ap": scaleType === "AP", "scales-luck": scaleType === "LUCK" })}
           >
+            {scaleType === "ND" && (
+              <img
+                src="assets/icons/ND.png"
+                alt="Duration"
+                title="Scales with Duration"
+              ></img>
+            )}
             {scaleType === "AP" && (
               <img
                 src="assets/icons/AP.png"
