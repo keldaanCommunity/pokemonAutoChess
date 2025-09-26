@@ -45,4 +45,6 @@
 
 # Bugfix
 
+- Fix blue orb damage scaling with AP by mistake
+
 # Misc
