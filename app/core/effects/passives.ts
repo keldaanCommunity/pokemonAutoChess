@@ -568,7 +568,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
         )
       },
       Passive.ZYGARDE,
-      1000
+      1800 // match frequency of the DelayedCommand
     )
   }
 }
