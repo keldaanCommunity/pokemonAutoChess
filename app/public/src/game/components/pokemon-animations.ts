@@ -7149,5 +7149,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Bite,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.GREAVARD]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_MELEE
+  },
+  [Pkm.HOUNDSTONE]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_MELEE
   }
 }

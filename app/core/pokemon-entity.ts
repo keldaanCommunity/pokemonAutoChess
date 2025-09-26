@@ -321,9 +321,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
                 chance(this.critChance / 100, this))
             const bounceDamage = Math.round(
               ([0.5, 1][this.stars - 1] ?? 1) *
-              damage *
-              (1 + this.ap / 100) *
-              (bounceCrit ? this.critPower : 1)
+                damage *
+                (1 + this.ap / 100) *
+                (bounceCrit ? this.critPower : 1)
             )
             this.broadcastAbility({
               skill: attacker.skill,
@@ -440,9 +440,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
       value *
-      (1 + (apBoost * caster.ap) / 100) *
-      (crit ? caster.critPower : 1) *
-      (this.status.fatigue && value > 0 ? 0.5 : 1)
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1) *
+        (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -969,7 +969,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called whenever the unit deals damage, by basic attack or ability
-  onDamageDealt({ target, damage, attackType, isRetaliation }: { target: PokemonEntity; damage: number; attackType: AttackType; isRetaliation: boolean }) {
+  onDamageDealt({
+    target,
+    damage,
+    attackType,
+    isRetaliation
+  }: {
+    target: PokemonEntity
+    damage: number
+    attackType: AttackType
+    isRetaliation: boolean
+  }) {
     this.getEffects(OnDamageDealtEffect).forEach((effect) => {
       effect.apply({
         pokemon: this,
@@ -1081,10 +1091,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Fighting knockback
     if (
       this.count.fightingBlockCount > 0 &&
-      this.count.fightingBlockCount % (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) === 0 &&
+      this.count.fightingBlockCount %
+        (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) ===
+        0 &&
       !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
-      1
+        1
     ) {
       const targetAtContact = board.getEntityOnCell(this.targetX, this.targetY)
       const destination = this.state.getNearestAvailablePlaceCoordinates(
@@ -1145,7 +1157,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
   }) {
     // proc fairy splash damage for both the attacker and the target
-    if (target.fairySplashCooldown === 0 && target.hasSynergyEffect(Synergy.FAIRY)) {
+    if (
+      target.fairySplashCooldown === 0 &&
+      target.hasSynergyEffect(Synergy.FAIRY)
+    ) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
         shockDamageFactor += 0.2
@@ -1239,8 +1254,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
 
       if (nextPot) {
-        const spawnSpot =
-          board.getFarthestTargetCoordinateAvailablePlace(target, true)
+        const spawnSpot = board.getFarthestTargetCoordinateAvailablePlace(
+          target,
+          true
+        )
         if (spawnSpot) {
           const flowerToSpawn = target.player.flowerPots.find((p) =>
             FlowerMonByPot[nextPot].includes(p.name)
@@ -1278,7 +1295,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       this.player &&
-      this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY &&
+      this.simulation.room.state.specialGameRule ===
+        SpecialGameRule.BLOOD_MONEY &&
       !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)
@@ -1296,12 +1314,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  // called after KO (does not proc if resurection)
   onDeath({ board }: { board: Board }) {
     if (!this.isGhostOpponent) {
       this.refToBoardPokemon.deathCount++
     }
-    this.getEffects(OnDeathEffect).forEach(effect => effect.apply({ pokemon: this, board }))
+    this.getEffects(OnDeathEffect).forEach((effect) =>
+      effect.apply({ pokemon: this, board })
+    )
 
     if (this.status.curseVulnerability) {
       this.simulation.applyCurse(EffectEnum.CURSE_OF_VULNERABILITY, this.team)
@@ -1315,6 +1334,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.status.curseFate) {
       this.simulation.applyCurse(EffectEnum.CURSE_OF_FATE, this.team)
     }
+
+    // Trigger Last Respects ability for adjacent allies
+    // When this Pokemon dies, any adjacent ally with Last Respects ability
+    // immediately gains full PP to cast their ability
+    board
+      .getAdjacentCells(this.positionX, this.positionY)
+      .filter(
+        (c) =>
+          c.value?.skill === Ability.LAST_RESPECTS &&
+          c.value?.team === this.team
+      )
+      .map((c) => c.value)
+      .forEach((p) => p?.addPP(p.maxPP - p.pp, p, 0, false))
   }
 
   flyAway(board: Board) {
@@ -1389,11 +1421,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
           ? []
           : [
-            PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-              shiny: this.shiny,
-              emotion: Emotion.ANGRY
-            })
-          ]
+              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+                shiny: this.shiny,
+                emotion: Emotion.ANGRY
+              })
+            ]
       }
 
       const spawns = pickNRandomIn(koAllies, 3)
@@ -1693,7 +1725,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return [
       ...this.effectsSet.values(),
       ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect): effect is InstanceType<T> => effect instanceof effectClass)
+    ].filter(
+      (effect): effect is InstanceType<T> => effect instanceof effectClass
+    )
   }
 }
 

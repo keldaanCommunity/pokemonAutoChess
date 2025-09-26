@@ -18858,6 +18858,37 @@ export class Drednaw extends Pokemon {
   additional = true
 }
 
+export class Greavard extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.HOUNDSTONE
+  hp = 70
+  atk = 6
+  speed = 55
+  def = 6
+  speDef = 4
+  maxPP = 135
+  range = 1
+  skill = Ability.LAST_RESPECTS
+  additional = true
+}
+
+export class Houndstone extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 140
+  atk = 12
+  speed = 55
+  def = 12
+  speDef = 8
+  maxPP = 135
+  range = 1
+  skill = Ability.LAST_RESPECTS
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19904,7 +19935,9 @@ export const PokemonClasses: Record<
   [Pkm.GALARIAN_YAMASK]: GalarianYamask,
   [Pkm.RUNERIGUS]: Runerigus,
   [Pkm.CHEWTLE]: Chewtle,
-  [Pkm.DREDNAW]: Drednaw
+  [Pkm.DREDNAW]: Drednaw,
+  [Pkm.GREAVARD]: Greavard,
+  [Pkm.HOUNDSTONE]: Houndstone
 }
 
 // declare all the classes in colyseus schema TypeRegistry
