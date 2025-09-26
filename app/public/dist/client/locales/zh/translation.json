@@ -297,6 +297,7 @@
 		"BODY_SLAM": "泰山压顶",
 		"FLORAL_HEALING": "花疗",
 		"VINE_WHIP": "藤鞭",
+		"STOCKPILE": "蓄力",
 		"BARB_BARRAGE": "毒千针",
 		"INFERNAL_PARADE": "群魔乱舞",
 		"MAGIC_POWDER": "魔法粉",
@@ -505,7 +506,11 @@
 		"HYPER_DRILL": "强力钻",
 		"TERRAIN_PULSE": "大地波动",
 		"AXE_KICK": "下压踢",
-		"EXPANDING_FORCE": "广域战力"
+		"EXPANDING_FORCE": "广域战力",
+		"SPITE": "怨恨",
+		"GRUDGE": "怨念",
+		"JAW_LOCK": "紧咬不放",
+		"LAST_RESPECTS": "扫墓"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1212,6 +1217,7 @@
 		"ALOLAN_EXEGGUTOR": "阿罗拉椰蛋树",
 		"COMFEY": "花疗环环",
 		"CARNIVINE": "尖牙笼",
+		"QWILFISH": "千针鱼",
 		"HISUIAN_QWILFISH": "冼翠千针鱼",
 		"OVERQWIL": "万针鱼",
 		"HISUIAN_TYPHLOSION": "冼翠火暴兽",
@@ -1539,7 +1545,15 @@
 		"BLIPBUG": "索侦虫",
 		"DOTTLER": "天罩虫",
 		"ORBEETLE": "以欧路普",
-		"PACHIRISU": "帕奇利兹"
+		"PACHIRISU": "帕奇利兹",
+		"YAMASK": "哭哭面具",
+		"COFAGRIGUS": "死神棺",
+		"GALARIAN_YAMASK": "伽勒尔哭哭面具",
+		"RUNERIGUS": "死神板",
+		"CHEWTLE": "咬咬龟",
+		"DREDNAW": "暴噬龟",
+		"GREAVARD": "墓仔狗",
+		"HOUNDSTONE": "墓扬犬"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1739,7 +1753,7 @@
 		"ERUPTION": "向空中发射[20,30,45]枚火焰弹。每枚火焰弹对击中的目标造成[30,50,70,SP]点SPECIAL，并使其陷入BURN 5秒。",
 		"HAIL": "一阵冰雹攻击目标所在半场的随机[10,20,30]个格子，对其中的宝可梦造成[50,SP]点SPECIAL。落地的冰雹会在此格内形成冰面，使走到此处的非ICE宝可梦受到10点SPECIAL，并陷入FREEZE 1秒。",
 		"LUSTER_PURGE": "发射一个直线飞行至多4格的光球，对击中的敌方宝可梦造成两次[25,SP]点SPECIAL并降低他们5点SPE_DEF两次。",
-		"MIST_BALL": "发射一个直线飞行的迷雾泡，对击中的敌方宝可梦造成两次[25,SP]点SPECIAL并降低他们30的AP。",
+		"MIST_BALL": "发射一个直线飞行的迷雾泡，对击中的敌方宝可梦造成两次[25,SP]点SPECIAL并降低他们30点AP。",
 		"MUD_BUBBLE": "使用者恢复[10,20,40,SP]点HP。",
 		"LINK_CABLE": "突进至最远的可触及敌方宝可梦的邻位，随后在正电拍拍和负电拍拍之间创造一道电弧，对击中的敌方宝可梦造成[50,SP]点SPECIAL。若正电拍拍或负电拍拍单独在场，改为对ADJACENT敌方宝可梦造成伤害。",
 		"MAGIC_BOUNCE": "在接下来的5秒内，每当使用者被招式击中时，格挡此伤害并将[50,100,SP]%的SPECIAL反弹给招式的使用者。",
@@ -1800,8 +1814,8 @@
 		"BRAVE_BIRD": "与目标一同飞走，造成[30,60,90,SP]点SPECIAL。",
 		"MAGICAL_LEAF": "放出追逐最远目标的神奇叶片，对经过的所有目标造成[10,20,40,SP]点SPECIAL，并使他们陷入ARMOR_BREAK 3秒。",
 		"STEALTH_ROCKS": "在前方[1,2,3]格半径的CONE内设下尖锐的岩石，对其中的目标造成[20,40,80,SP]点SPECIAL。这些岩石会留在场上，对在其中移动的非ROCK宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
-		"TAIL_GLOW": "对ADJACENT敌方宝可梦造成[30,SP]点SPECIAL，并提升使用者50的AP。",
-		"STRUGGLE_BUG": "对ADJACENT敌方宝可梦造成[30,SP]点SPECIAL，并降低他们50的AP。",
+		"TAIL_GLOW": "对ADJACENT敌方宝可梦造成[30,SP]点SPECIAL，并提升使用者50点AP。",
+		"STRUGGLE_BUG": "对ADJACENT敌方宝可梦造成[30,SP]点SPECIAL，并降低他们50点AP。",
 		"PRISMATIC_LASER": "使用者发射一道直线传播的3格宽的棱镜光束，对击中的敌方宝可梦造成[60,SP]点SPECIAL并将他们击退。",
 		"NATURAL_GIFT": "为受伤最严重的我方宝可梦恢复[30,60,120,SP]点HP，并使其获得RUNE_PROTECT [1,2,3]秒。",
 		"NIGHT_SHADE": "对目标造成TRUE，数值相当于其最大HP的[25,33,50,SP=0.5]%。",
@@ -1819,6 +1833,7 @@
 		"FLORAL_HEALING": "为花疗环环的携带者（若未被携带，改为为花疗环环自己）恢复HP，数值相当于目标的最大PP。",
 		"VINE_WHIP": "对目标造成[100,SP]点SPECIAL，并使其和所有ADJACENT敌方宝可梦陷入PARALYSIS 3秒。",
 		"BODY_SLAM": "对目标造成SPECIAL，数值相当于使用者[30,SP]%的最大HP。",
+		"STOCKPILE": "使用者使自身充气，提升[50,SP]点最大HP但降低10点SPEED。叠加3次后，将积蓄的力量喷出，对目标造成SPECIAL，数值相当于[50,SP]%的最大HP，并将使用者推回后排，同时自身的最大HP和SPEED恢复至基础值。",
 		"BARB_BARRAGE": "潜水至敌方阵型中间，随后对所有ADJACENT敌方宝可梦造成[20,40,60,80,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
 		"MAGIC_POWDER": "获得[10,20,40,SP]点SHIELD，并使ADJACENT敌方宝可梦陷入SILENCE [2,3,4]秒。",
 		"INFERNAL_PARADE": "对最远的敌方宝可梦发射一个会飞回的火焰轮，对所有击中的敌方宝可梦造成两次[30,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入BURN 3秒。",
@@ -1929,7 +1944,7 @@
 		"THUNDER_CAGE": "将目标和ADJACENT敌方宝可梦困在雷电囚笼中，对他们造成[60,SP]点SPECIAL，并使他们陷入LOCKED和PARALYSIS 3秒。",
 		"HEADBUTT": "对目标造成[20,40,80,SP]点SPECIAL，并使其陷入FLINCH 5秒。若目标有SHIELD，造成的伤害翻倍。",
 		"STEEL_WING": "突进至最远的可触及敌方宝可梦的邻位，对所有经过的敌方宝可梦造成SPECIAL，数值相当于[10,20,40,SP]加使用者的DEF的2倍。从每只经过的敌方宝可梦身上偷取1点DEF。",
-		"YAWN": "获得[10,20,40,SP]点SHIELD。以使用者为目标的敌方宝可梦会陷入FATIGUE 3秒，并被扣除20的AP。",
+		"YAWN": "获得[10,20,40,SP]点SHIELD。以使用者为目标的敌方宝可梦会陷入FATIGUE 3秒，并被扣除20点AP。",
 		"FIERY_DANCE": "让火焰覆盖全身，振翅攻击目标，对其造成[25,50,100,SP]点SPECIAL，然后提升使用者30点AP。",
 		"BIDE": "3秒后，对ADJACENT敌方宝可梦造成SPECIAL，数值相当于在此期间所受伤害的[200,SP]%。",
 		"SHORE_UP": "使用者恢复[20,25,SP]%的HP。若天气为SANDSTORM，额外恢复10%。",
@@ -2025,7 +2040,11 @@
 		"HYPER_DRILL": "对目标造成[10,30,50,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
 		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至ADJACENT我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,SP]%的最大HP\nELECTRIC_FIELD:提升[10,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,SP]%的最大HP",
 		"AXE_KICK": "跳至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,SP]点SPECIAL，并移除其[15,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。",
-		"EXPANDING_FORCE": "获得PSYCHIC_FIELD，若已处于此场地下则改为使最近的不处于此场地的我方宝可梦获得之。随后所有处于PSYCHIC_FIELD的我方宝可梦对与之ADJACENT的敌方宝可梦造成[10,20,40,SP]点SPECIAL。"
+		"EXPANDING_FORCE": "获得PSYCHIC_FIELD，若已处于此场地下则改为使最近的不处于此场地的我方宝可梦获得之。随后所有处于PSYCHIC_FIELD的我方宝可梦对与之ADJACENT的敌方宝可梦造成[10,20,40,SP]点SPECIAL。",
+		"SPITE": "从目标偷取[20,40,60,SP]点PP，并将[20,40,60,SP]点PP分配给ADJACENT我方宝可梦。",
+		"GRUDGE": "使目标陷入SILENCE 3秒，并对所有处于SILENCE的敌方宝可梦造成[18,36,52,SP]点SPECIAL。",
+		"JAW_LOCK": "咬住目标，使其陷入LOCKED 3秒，并对其造成SPECIAL，数值相当于125%的ATK加[10,15,20,SP]。若目标当前正被咬住，还会恢复[25,50,100,SP]点HP。", 
+		"LAST_RESPECTS": "对目标造成[30,60,90,SP]点SPECIAL，并使其陷入CURSE，其将在[10,8,6,SP=-0.2]秒后倒下。每当ADJACENT我方宝可梦倒下时，恢复PP至满。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2381,6 +2400,7 @@
 		"MIST_STONE": "薄雾岩石",
 		"BLOOD_STONE": "血红岩石",
 		"SMELLY_CLAY": "异臭黏土",
+		"ODD_KEYSTONE": "诡异楔石",
 		"FIRE_GEM": "火之宝石",
 		"NORMAL_GEM": "一般宝石",
 		"ROCK_GEM": "岩石宝石",
@@ -2508,7 +2528,7 @@
 		"POKEMONOMICON": "携带者造成SPECIAL时还会使目标陷入BURN 3秒",
 		"POWER_LENS": "由SPE_DEF减免的SPECIAL改为反弹至进攻方",
 		"SHELL_BELL": "携带者造成任意伤害时，恢复伤害额的33%",
-		"LUCKY_EGG": "携带者提升30的LUCK",
+		"LUCKY_EGG": "携带者提升30点LUCK",
 		"AQUA_EGG": "携带者每次释放招式后恢复20%的PP，本轮战斗中每释放过一次招式再额外恢复2点",
 		"BLUE_ORB": "每4次攻击会额外释放一道链状闪电，弹射至2个最近的敌方宝可梦，对他们造成10点SPECIAL并移除他们20点PP",
 		"SCOPE_LENS": "造成暴击时会偷取目标10点PP。",
@@ -2605,6 +2625,7 @@
 		"MIST_STONE": "计为3只生成MISTY所需的宝可梦。在MISTY中，我方所有宝可梦提升3点SPE_DEF。",
 		"BLOOD_STONE": "计为3只生成BLOODMOON所需的宝可梦。在BLOODMOON中，我方所有宝可梦在WOUND下本应受到的治疗的30%会转化为SHIELD，且攻击处于WOUND的敌方宝可梦时恢复所造成伤害额的20%。",
 		"SMELLY_CLAY": "计为3只生成SMOG所需的宝可梦。在SMOG中，我方所有宝可梦提升5%的命中率且陷入POISONNED的概率降低15%。",
+		"ODD_KEYSTONE": "计为3只生成MURKY所需的宝可梦。在MURKY中我方所有宝可梦提升10点LUCK，陷入异常状态的时间减少10%，且可以使CURSE延迟1秒生效。",
 		"FIRE_GEM": "计为1只FIRE宝可梦",
 		"NORMAL_GEM": "计为1只NORMAL宝可梦",
 		"ROCK_GEM": "计为1只ROCK宝可梦",
@@ -2678,7 +2699,7 @@
 		"RIBBON_SWEET": "永久提升3点SPE_DEF",
 		"STAR_SWEET": "永久提升10点AP",
 		"FLOWER_SWEET": "永久提升5点SPEED",
-		"CLOVER_SWEET": "永久提升10的LUCK",
+		"CLOVER_SWEET": "永久提升10点LUCK",
 		"BERRY_SWEET": "永久提升15点HP",
 		"LOVE_SWEET": "永久提升3点DEF",
 		"STRAWBERRY_SWEET": "永久提升3点ATK",
@@ -2801,6 +2822,7 @@
 		"BERRY_EATER": "每当此宝可梦攻击目标时，偷取目标所有树果并食用之。",
 		"TOXIC_BOOST": "此宝可梦受到的中毒伤害降低50%，且处于POISONNED时提升10点ATK。",
 		"GUZZLORD": "恶食大王太重又太贪吃了，无法像其他DARK宝可梦一样跳远，也不会在携带CHEF_HAT时为其他宝可梦制作料理。若携带CHEF_HAT，则击倒宝可梦时永久提升10点最大HP和5点AP。",
+		"BURMY": "需要3只相同蓑衣的结草儿才能进化为结草贵妇。若在第20轮移动到了一个没有对应蓑衣的地区，结草儿会进化为绅士蛾。",
 		"PSYDUCK": "受到攻击时有[10,LK]%的概率陷入CONFUSION。此宝可梦每次陷入CONFUSION时，提升100点AP。",
 		"BLOODMOON": "在BLOODMOON中切换形态。",
 		"RECYCLE": "向此宝可梦喂食树果可提升其10点HP，喂食基础道具组件提升25点HP和道具提供的数值。喂食人造道具提升50点HP和道具提供的数值，并获得一袋TRASH。",
@@ -2825,8 +2847,8 @@
 		"AEGISLASH": "释放招式时会在盾牌形态和刀剑形态之间切换。",
 		"DARMANITAN": "HP低于30%时，跳至一个安全的位置，并进入达摩模式。",
 		"DARMANITAN_ZEN": "达摩模式下的普通攻击造成能被AP提升的SPECIAL，且自身回复所造成伤害的100%。HP恢复至满后会变回普通模式。",
-		"BAD_LUCK": "降低所有敌方宝可梦20的LUCK。",
-		"GOOD_LUCK": "提升所有我方宝可梦20的LUCK。",
+		"BAD_LUCK": "降低所有敌方宝可梦20点LUCK。",
+		"GOOD_LUCK": "提升所有我方宝可梦20点LUCK。",
 		"PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。",
 		"ZYGARDE": "每个最大深度的坑洞中每秒都会涌出一个供基格尔德吸收的基格尔德细胞，使其提升1点最大HP。吸收总计95个细胞后，基格尔德会变形为完全体形态。",
 		"GLIMMORA": "HP首次低于最大值的50%时，此宝可梦会向前方2x3的矩形投放毒菱，造成20点伤害。毒菱使走到其上的非POISON宝可梦陷入POISONNED。",
@@ -2865,7 +2887,9 @@
 		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为5 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
 		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的FLORA花朵有关……",
 		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。",
-		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。"
+		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。",
+		"QWILFISH": "受到近战攻击时，对攻击者造成5点TRUE，并有[30,LK]%的概率使其陷入POISON 3秒。",
+		"HISUIAN_QWILFISH": "每次释放招式时，永久提升1点AP。释放招式20次后，进化为万针鱼。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3209,7 +3233,8 @@
 		"SNOW": "下雪",
 		"SANDSTORM": "沙暴",
 		"BLOODMOON": "血月",
-		"SMOG": "毒雾"
+		"SMOG": "毒雾",
+		"MURKY": "幽暗"
 	},
 	"weather_description": {
 		"NEUTRAL": "一般的天气。没有额外效果。",
@@ -3222,7 +3247,8 @@
 		"SNOW": "-20 SPEED\n+30% FREEZE持续时间",
 		"SANDSTORM": "每秒对所有宝可梦造成5点SPECIAL（GROUND免疫此伤害）\n+30% CONFUSION持续时间",
 		"BLOODMOON": "+20% PHYSICAL\n+30% WOUND持续时间",
-		"SMOG": "-15% 命中率\n+30% POISONNED持续时间"
+		"SMOG": "-15% 命中率\n+30% POISONNED持续时间",
+		"MURKY": "-30 LUCK （GHOST免疫此减益）\n+30% SILENCE持续时间"
 	},
 	"emotion": {
 		"Normal": "平常",
