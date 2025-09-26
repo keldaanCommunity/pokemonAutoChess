@@ -670,6 +670,11 @@ export const AbilitiesAnimations: {
   [Ability.THIEF]: onTargetScale2,
   [Ability.STUN_SPORE]: onTargetScale2,
   [Ability.CRABHAMMER]: onTargetScale2,
+  [Ability.JAW_LOCK]: onTarget({
+    ability: Ability.ICE_FANG,
+    scale: 2,
+    tint: 0x798f8d
+  }),
   [Ability.RAZOR_WIND]: onTargetScale2,
   [Ability.SEISMIC_TOSS]: onTargetScale2,
   [Ability.ASSURANCE]: onTargetScale2,
