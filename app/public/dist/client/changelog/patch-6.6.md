@@ -48,5 +48,6 @@
 # Bugfix
 
 - Fix blue orb damage scaling with AP by mistake
+- Fix Comfey being resurrected through Sacred Ash when an ally alive holds it
 
 # Misc

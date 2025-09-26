@@ -321,9 +321,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
                 chance(this.critChance / 100, this))
             const bounceDamage = Math.round(
               ([0.5, 1][this.stars - 1] ?? 1) *
-                damage *
-                (1 + this.ap / 100) *
-                (bounceCrit ? this.critPower : 1)
+              damage *
+              (1 + this.ap / 100) *
+              (bounceCrit ? this.critPower : 1)
             )
             this.broadcastAbility({
               skill: attacker.skill,
@@ -440,9 +440,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
       value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1) *
-        (this.status.fatigue && value > 0 ? 0.5 : 1)
+      (1 + (apBoost * caster.ap) / 100) *
+      (crit ? caster.critPower : 1) *
+      (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -1092,11 +1092,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       this.count.fightingBlockCount > 0 &&
       this.count.fightingBlockCount %
-        (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) ===
-        0 &&
+      (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) ===
+      0 &&
       !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
-        1
+      1
     ) {
       const targetAtContact = board.getEntityOnCell(this.targetX, this.targetY)
       const destination = this.state.getNearestAvailablePlaceCoordinates(
@@ -1296,7 +1296,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       this.player &&
       this.simulation.room.state.specialGameRule ===
-        SpecialGameRule.BLOOD_MONEY &&
+      SpecialGameRule.BLOOD_MONEY &&
       !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)
@@ -1414,18 +1414,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
             !isOnBench(p) &&
-            !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id)
+            !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id) &&
+            !(p.name === Pkm.COMFEY && alliesAlive.some((ally) => ally.items.has(Item.COMFEY))) // don't respawn comfey if an ally has it
         )
       } else if (this.name === Pkm.HO_OH) {
         // HoOh marowak pve round
         koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
           ? []
           : [
-              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                shiny: this.shiny,
-                emotion: Emotion.ANGRY
-              })
-            ]
+            PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+              shiny: this.shiny,
+              emotion: Emotion.ANGRY
+            })
+          ]
       }
 
       const spawns = pickNRandomIn(koAllies, 3)
