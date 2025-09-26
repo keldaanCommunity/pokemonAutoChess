@@ -7,6 +7,8 @@
 - Runerigus
 - Chewtle
 - Drednaw
+- Greavard
+- Houndstone
 
 # Changes to Pokemon & Abilities
 

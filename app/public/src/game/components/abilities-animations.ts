@@ -1369,6 +1369,11 @@ export const AbilitiesAnimations: {
       animOptions: { repeat: -1, duration: 300 }
     })(args),
   [Ability.SCALE_SHOT]: projectile({ duration: 400 }),
+  [Ability.LAST_RESPECTS]: projectile({
+    duration: 800,
+    ability: "SMOKE_PURPLE",
+    scale: 3
+  }),
   ["SOLAR_BLADE_CHARGE"]: projectile({
     ability: Ability.RECOVER,
     animOptions: { repeat: -1, duration: 500 },

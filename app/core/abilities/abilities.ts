@@ -13616,7 +13616,7 @@ export class SpiteStrategy extends AbilityStrategy {
       targetY: target.positionY,
       skill: Ability.PSYCHIC_FANGS
     })
-    
+
     // Drain PP from target
     target.addPP(-drainedPP, pokemon, 1, crit)
 
@@ -13650,10 +13650,10 @@ export class GrudgeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     const duration = 3000
     const damage = ([18, 36, 52][pokemon.stars - 1] ?? 52) + pokemon.ap
-    
+
     // Apply SILENCE status to the target
     target.status.triggerSilence(duration, target, pokemon)
-    
+
     // Deal damage to all enemies affected by SILENCE
     board.cells
       .filter(
@@ -13719,6 +13719,60 @@ export class JawLockStrategy extends AbilityStrategy {
   }
 }
 
+export class LastRespectsStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    // Reduction factor for curse delay based on AP and crit
+    const factor = 0.2
+
+    // Base damage scales with star level: 1★=30, 2★=60, 3★=90
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
+
+    // Calculate curse delay with AP and crit scaling
+    // Base delays: 1★=8s, 2★=5s, 3★=3s, reduced by AP and crit power
+    const curseDelay = min(0)(
+      ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
+        (1 - (factor * pokemon.ap) / 100) *
+        (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
+    )
+
+    // Find all adjacent enemies that aren't already cursed
+    const cells = board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      .filter((c) => c.value?.team === target.team && !c.value?.status.curse)
+      .map((c) => c.value)
+
+    // Pick a random uncursed ally to curse, fallback to original target
+    const curseTarget = pickRandomIn(cells)
+    const damageTarget = curseTarget || target
+
+    // Broadcast ability animation
+    pokemon.broadcastAbility({
+      targetX: damageTarget.positionX,
+      targetY: damageTarget.positionY,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY
+    })
+
+    // Deal immediate damage to the target
+    damageTarget.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    // Apply curse status that will KO after the calculated delay
+    curseTarget?.status.triggerCurse(curseDelay, curseTarget)
+  }
+}
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14210,5 +14264,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STOCKPILE]: new StockpileStrategy(),
   [Ability.SPITE]: new SpiteStrategy(),
   [Ability.GRUDGE]: new GrudgeStrategy(),
-  [Ability.JAW_LOCK]: new JawLockStrategy()
+  [Ability.JAW_LOCK]: new JawLockStrategy(),
+  [Ability.LAST_RESPECTS]: new LastRespectsStrategy()
 }
