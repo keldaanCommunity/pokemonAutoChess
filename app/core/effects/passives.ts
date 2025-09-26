@@ -509,7 +509,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        if (!pokemon.player) return
+        if (!pokemon.player || this.cellsCount >= 95) return
 
         const fullyDugHolesIndexes: number[] = []
         let cellsSpawned = 0
@@ -536,6 +536,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
 
         pokemon.commands.push(
           new DelayedCommand(() => {
+            if (pokemon.name === Pkm.ZYGARDE_100) return
             pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
             if (this.cellsCount >= 95) {
               pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
@@ -545,7 +546,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
                 pokemon.addMaxHP(5, pokemon, 0, false)
                 pokemon.addSpeed(-12, pokemon, 0, false)
                 pokemon.range = min(1)(pokemon.range + 1)
-              } else {
+              } else if (pokemon.index === PkmIndex[Pkm.ZYGARDE_50]) {
                 pokemon.addAttack(5, pokemon, 0, false)
                 pokemon.addDefense(5, pokemon, 0, false)
                 pokemon.addSpecialDefense(5, pokemon, 0, false)
