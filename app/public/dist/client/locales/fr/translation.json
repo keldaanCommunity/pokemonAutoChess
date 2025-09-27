@@ -508,7 +508,9 @@
 		"AXE_KICK": "Talon-Marteau",
 		"EXPANDING_FORCE": "Vaste Pouvoir",
 		"SPITE": "Dépit",
-		"GRUDGE": "Rancune"
+		"GRUDGE": "Rancune",
+		"JAW_LOCK": "Croque Fort",
+		"LAST_RESPECTS": "Hommage Posthume"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1547,7 +1549,11 @@
 		"YAMASK": "Tutafeh",
 		"COFAGRIGUS": "Tutankafer",
 		"GALARIAN_YAMASK": "Tutafeh de Galar",
-		"RUNERIGUS": "Tutétékri"
+		"RUNERIGUS": "Tutétékri",
+		"CHEWTLE": "Khélocrok",
+		"DREDNAW": "Torgamord",
+		"GREAVARD": "Toutombe",
+		"HOUNDSTONE": "Tomberro"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2036,7 +2042,9 @@
 		"AXE_KICK": "Bondit sur l'ennemi avec le plus de PP, lui inflige [25,50,100,SP] SPECIAL et lui retire [15,SP] PP. A [30,LK]% de chances d'infliger CONFUSION pendant 3 secondes.",
 		"EXPANDING_FORCE": "Le lanceur obtient un PSYCHIC_FIELD, ou le propage à un allié proche. Son énergie psychique se répercute alors sur tous les alliés dans un PSYCHIC_FIELD, infligeant [10,20,40,SP] SPECIAL aux ennemis ADJACENT.",
 		"SPITE": "Draine [20,40,60,SP] PP de la cible et redistribue [20,40,60,SP] PP aux alliés ADJACENT",
-		"GRUDGE": "Inflige [18,36,52,SP] SPECIAL à tous les ennemis affectés par SILENCE"
+		"GRUDGE": "Inflige [18,36,52,SP] SPECIAL à tous les ennemis affectés par SILENCE",
+		"JAW_LOCK": "Mord la cible, lui infligeant LOCKED pendant 3 secondes et 125% d'ATK + [10,15,20,SP] SPECIAL. Si la cible a déjà été mordue, soigne également [25,50,100,SP] PVHP",
+		"LAST_RESPECTS": "Inflige [30,60,90,SP] SPECIAL et CURSE qui mettent KO après [10,8,6,SP=-0.2] secondes. Se lance immédiatement lorsqu'un allié ADJACENT est mis KO."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -3240,7 +3248,7 @@
 		"SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n Durée CONFUSION +30%",
 		"BLOODMOON": "+20% PHYSICAL\n+30% durée de WOUND",
 		"SMOG": "-15% de précision\n+30% de durée de POISONNED",
-		"MURKY": "-30% de LUCK (les types GHOST sont immunisés)\n+30% de durée de SILENCE"
+		"MURKY": "-30 de LUCK (les types GHOST sont immunisés)\n+30% de durée de SILENCE"
 	},
 	"emotion": {
 		"Normal": "Normal",
