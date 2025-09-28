@@ -2044,7 +2044,7 @@
 		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies",
 		"GRUDGE": "SILENCE the target for 3 seconds, then deals [18,36,52,SP] SPECIAL to all enemies affected by SILENCE",
 		"JAW_LOCK": "Bites the target, inflicting LOCKED for 3 seconds and dealing 125% ATK + [10,15,20,SP] SPECIAL. If target is already bitten, also heals [25,50,100,SP] HP.",
-		"LAST_RESPECTS": "Deals [30,60,90,SP] SPECIAL and CURSE that will KO after [10,8,6,SP=-0.2] seconds. Casts immediatly when an ADJACENT ally is KO."
+		"LAST_RESPECTS": "Deals [30,60,90,SP] SPECIAL and CURSE that will KO after [10,8,6,SP=-0.2] seconds. If the target has already CURSE, targets another ADJACENT enemy instead."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2889,7 +2889,8 @@
 		"DUNSPARCE": "Dunsparce will evolve when at least 10 ground holes are fully dug on board",
 		"PACHIRISU": "Has [30,LK]% chance to find a buried SITRUS_BERRY after each fight",
 		"QWILFISH": "When struck by an attack at melee range, deal 5 TRUE to the attacker, with [30,LK]% chance to inflict POISONNED for 3 seconds",
-		"HISUIAN_QWILFISH": "Gain 1 AP permanently when casting its ability. After casting 20 times, Qwilfish will evolve into Overqwil."
+		"HISUIAN_QWILFISH": "Gain 1 AP permanently when casting its ability. After casting 20 times, Qwilfish will evolve into Overqwil.",
+		"LAST_RESPECTS": "Gains maximum PP when an ADJACENT ally is KO."
 	},
 	"stat": {
 		"ATK": "Attack",
