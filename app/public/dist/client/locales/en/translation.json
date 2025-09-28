@@ -510,7 +510,8 @@
 		"SPITE": "Spite",
 		"GRUDGE": "Grudge",
 		"JAW_LOCK": "Jaw Lock",
-		"LAST_RESPECTS": "Last Respects"
+		"LAST_RESPECTS": "Last Respects",
+		"OCTOLOCK": "Octolock"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1553,7 +1554,9 @@
 		"CHEWTLE": "Chewtle",
 		"DREDNAW": "Drednaw",
 		"GREAVARD": "Greavard",
-		"HOUNDSTONE": "Houndstone"
+		"HOUNDSTONE": "Houndstone",
+		"CLOBBOPUS": "Clobbopus",
+		"GRAPPLOCT": "Grapploct"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2044,7 +2047,8 @@
 		"SPITE": "Drains [20,40,60,SP] PP from target and redistributes [20,40,60,SP] PP to ADJACENT allies",
 		"GRUDGE": "SILENCE the target for 3 seconds, then deals [18,36,52,SP] SPECIAL to all enemies affected by SILENCE",
 		"JAW_LOCK": "Bites the target, inflicting LOCKED for 3 seconds and dealing 125% ATK + [10,15,20,SP] SPECIAL. If target is already bitten, also heals [25,50,100,SP] HP.",
-		"LAST_RESPECTS": "Deals [30,60,90,SP] SPECIAL and CURSE that will KO after [10,8,6,SP=-0.2] seconds. If the target has already CURSE, targets another ADJACENT enemy instead."
+		"LAST_RESPECTS": "Deals [30,60,90,SP] SPECIAL and CURSE that will KO after [10,8,6,SP=-0.2] seconds. If the target has already CURSE, targets another ADJACENT enemy instead.",
+		"OCTOLOCK": "Deals [30,60,90,SP] SPECIAL. Inflict LOCKED and ARMOR_BREAK for 3 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

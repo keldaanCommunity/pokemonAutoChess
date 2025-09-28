@@ -1039,7 +1039,9 @@ export enum Pkm {
   CHEWTLE = "CHEWTLE",
   DREDNAW = "DREDNAW",
   GREAVARD = "GREAVARD",
-  HOUNDSTONE = "HOUNDSTONE"
+  HOUNDSTONE = "HOUNDSTONE",
+  CLOBBOPUS = "CLOBBOPUS",
+  GRAPPLOCT = "GRAPPLOCT"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -2039,8 +2041,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TOXTRICITY]: "0849",
   [Pkm.SIZZLIPEDE]: "0850",
   [Pkm.CENTISKORCH]: "0851",
-  //[Pkm.CLOBBOPUS]: "0852",
-  //[Pkm.GRAPPLOCT]: "0853",
+  [Pkm.CLOBBOPUS]: "0852",
+  [Pkm.GRAPPLOCT]: "0853",
   [Pkm.SINISTEA]: "0854",
   [Pkm.POLTEAGEIST]: "0855",
   [Pkm.HATENNA]: "0856",
@@ -3274,7 +3276,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CHEWTLE]: Pkm.CHEWTLE,
   [Pkm.DREDNAW]: Pkm.CHEWTLE,
   [Pkm.GREAVARD]: Pkm.GREAVARD,
-  [Pkm.HOUNDSTONE]: Pkm.GREAVARD
+  [Pkm.HOUNDSTONE]: Pkm.GREAVARD,
+  [Pkm.CLOBBOPUS]: Pkm.CLOBBOPUS,
+  [Pkm.GRAPPLOCT]: Pkm.CLOBBOPUS
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
