@@ -18891,6 +18891,45 @@ export class Houndstone extends Pokemon {
   passive = Passive.LAST_RESPECTS
 }
 
+export class Clobbopus extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.AMORPHOUS,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.GRAPPLOCT
+  hp = 70
+  atk = 6
+  speed = 39
+  def = 5
+  speDef = 5
+  maxPP = 65
+  range = 1
+  skill = Ability.OCTOLOCK
+  additional = true
+}
+
+export class Grapploct extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.AMORPHOUS,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 180
+  atk = 12
+  speed = 39
+  def = 9
+  speDef = 9
+  maxPP = 65
+  range = 1
+  skill = Ability.OCTOLOCK
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19939,7 +19978,9 @@ export const PokemonClasses: Record<
   [Pkm.CHEWTLE]: Chewtle,
   [Pkm.DREDNAW]: Drednaw,
   [Pkm.GREAVARD]: Greavard,
-  [Pkm.HOUNDSTONE]: Houndstone
+  [Pkm.HOUNDSTONE]: Houndstone,
+  [Pkm.CLOBBOPUS]: Clobbopus,
+  [Pkm.GRAPPLOCT]: Grapploct
 }
 
 // declare all the classes in colyseus schema TypeRegistry

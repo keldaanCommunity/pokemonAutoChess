@@ -720,6 +720,7 @@ export const AbilitiesAnimations: {
   [Ability.ICICLE_CRASH]: onTargetScale2,
   [Ability.DRAIN_PUNCH]: onTargetScale2,
   [Ability.LICK]: onTargetScale2,
+  [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
   [Ability.SPIRIT_BREAK]: onTargetScale2,
   [Ability.PSYSHOCK]: onTargetScale2,

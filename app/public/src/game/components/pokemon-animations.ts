@@ -7161,5 +7161,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.GHOST_MELEE
+  },
+  [Pkm.CLOBBOPUS]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.MultiStrike,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FIGHTING_MELEE
+  },
+  [Pkm.GRAPPLOCT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FIGHTING_MELEE
   }
 }

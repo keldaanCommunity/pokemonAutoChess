@@ -9,6 +9,8 @@
 - Drednaw
 - Greavard
 - Houndstone
+- Clobbopus
+- Grapploct
 
 # Changes to Pokemon & Abilities
 

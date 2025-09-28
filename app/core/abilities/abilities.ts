@@ -13604,7 +13604,7 @@ export class SpiteStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const ppDrain = ([20, 40, 60][pokemon.stars - 1] ?? 60)
+    const ppDrain = [20, 40, 60][pokemon.stars - 1] ?? 60
 
     pokemon.broadcastAbility({
       targetX: target.positionX,
@@ -13628,7 +13628,7 @@ export class SpiteStrategy extends AbilityStrategy {
             targetX: ally.positionX,
             targetY: ally.positionY
           })
-          ally.addPP(ppDrain/(adjacentAllies.length), pokemon, 1, crit) //divide by number of allies to redistribute
+          ally.addPP(ppDrain / adjacentAllies.length, pokemon, 1, crit) //divide by number of allies to redistribute
         }
       }
     }
@@ -13644,7 +13644,7 @@ export class GrudgeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const duration = 3000
-    const damage = ([18, 36, 52][pokemon.stars - 1] ?? 52)
+    const damage = [18, 36, 52][pokemon.stars - 1] ?? 52
 
     // Apply SILENCE status to the target
     target.status.triggerSilence(duration, target, pokemon)
@@ -13670,6 +13670,28 @@ export class GrudgeStrategy extends AbilityStrategy {
           crit
         )
       })
+  }
+}
+
+export class OctolockStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
+    const duration = 3000
+
+    // Deal SPECIAL damage
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+
+    // Apply LOCKED status for 3 seconds
+    target.status.triggerLocked(duration, target)
+
+    // Apply ARMOR_BREAK status for 3 seconds
+    target.status.triggerArmorReduction(duration, target)
   }
 }
 
@@ -14260,5 +14282,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SPITE]: new SpiteStrategy(),
   [Ability.GRUDGE]: new GrudgeStrategy(),
   [Ability.JAW_LOCK]: new JawLockStrategy(),
-  [Ability.LAST_RESPECTS]: new LastRespectsStrategy()
+  [Ability.LAST_RESPECTS]: new LastRespectsStrategy(),
+  [Ability.OCTOLOCK]: new OctolockStrategy()
 }
