@@ -2043,7 +2043,7 @@
 		"EXPANDING_FORCE": "获得PSYCHIC_FIELD，若已处于此场地下则改为使最近的不处于此场地的我方宝可梦获得之。随后所有处于PSYCHIC_FIELD的我方宝可梦对与之ADJACENT的敌方宝可梦造成[10,20,40,SP]点SPECIAL。",
 		"SPITE": "从目标偷取[20,40,60,SP]点PP，并将[20,40,60,SP]点PP分配给ADJACENT我方宝可梦。",
 		"GRUDGE": "使目标陷入SILENCE 3秒，并对所有处于SILENCE的敌方宝可梦造成[18,36,52,SP]点SPECIAL。",
-		"JAW_LOCK": "咬住目标，使其陷入LOCKED 3秒，并对其造成SPECIAL，数值相当于125%的ATK加[10,15,20,SP]。若目标当前正被咬住，还会恢复[25,50,100,SP]点HP。", 
+		"JAW_LOCK": "咬住目标，使其陷入LOCKED 3秒，并对其造成SPECIAL，数值相当于125%的ATK加[10,15,20,SP]。若目标当前正被咬住，还会恢复[25,50,100,SP]点HP。",
 		"LAST_RESPECTS": "对目标造成[30,60,90,SP]点SPECIAL，并使其陷入CURSE，其将在[10,8,6,SP=-0.2]秒后倒下。每当ADJACENT我方宝可梦倒下时，恢复PP至满。"
 	},
 	"effect": {
