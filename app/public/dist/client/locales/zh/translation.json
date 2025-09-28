@@ -510,7 +510,8 @@
 		"SPITE": "怨恨",
 		"GRUDGE": "怨念",
 		"JAW_LOCK": "紧咬不放",
-		"LAST_RESPECTS": "扫墓"
+		"LAST_RESPECTS": "扫墓",
+		"OCTOLOCK": "蛸固"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1553,7 +1554,9 @@
 		"CHEWTLE": "咬咬龟",
 		"DREDNAW": "暴噬龟",
 		"GREAVARD": "墓仔狗",
-		"HOUNDSTONE": "墓扬犬"
+		"HOUNDSTONE": "墓扬犬",
+		"CLOBBOPUS": "拳拳蛸",
+		"GRAPPLOCT": "八爪武师"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2044,7 +2047,8 @@
 		"SPITE": "从目标偷取[20,40,60,SP]点PP，并将[20,40,60,SP]点PP分配给ADJACENT我方宝可梦。",
 		"GRUDGE": "使目标陷入SILENCE 3秒，并对所有处于SILENCE的敌方宝可梦造成[18,36,52,SP]点SPECIAL。",
 		"JAW_LOCK": "咬住目标，使其陷入LOCKED 3秒，并对其造成SPECIAL，数值相当于125%的ATK加[10,15,20,SP]。若目标当前正被咬住，还会恢复[25,50,100,SP]点HP。", 
-		"LAST_RESPECTS": "对目标造成[30,60,90,SP]点SPECIAL，并使其陷入CURSE，其将在[10,8,6,SP=-0.2]秒后倒下。每当ADJACENT我方宝可梦倒下时，恢复PP至满。"
+		"LAST_RESPECTS": "对目标造成[30,60,90,SP]点SPECIAL，并使其陷入CURSE，其将在[10,8,6,SP=-0.2]秒后倒下。若目标已经处于CURSE，改为使另一随机ADJACENT敌方宝可梦陷入CURSE。",
+		"OCTOLOCK": "对目标造成[30,60,90,SP]点SPECIAL，并使其陷入LOCKED和ARMOR_BREAK 3秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2889,7 +2893,8 @@
 		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。",
 		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。",
 		"QWILFISH": "受到近战攻击时，对攻击者造成5点TRUE，并有[30,LK]%的概率使其陷入POISON 3秒。",
-		"HISUIAN_QWILFISH": "每次释放招式时，永久提升1点AP。释放招式20次后，进化为万针鱼。"
+		"HISUIAN_QWILFISH": "每次释放招式时，永久提升1点AP。释放招式20次后，进化为万针鱼。",
+		"LAST_RESPECTS": "每当ADJACENT我方宝可梦倒下时，恢复PP至满。"
 	},
 	"stat": {
 		"ATK": "攻击",
