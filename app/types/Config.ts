@@ -394,7 +394,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.OGERPON_WELLSPRING,
   Pkm.OGERPON_HEARTHFLAME,
   Pkm.OGERPON_CORNERSTONE,
-  Pkm.MANAPHY
+  Pkm.MANAPHY,
+  Pkm.CHI_YU
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6

@@ -18930,6 +18930,21 @@ export class Grapploct extends Pokemon {
   additional = true
 }
 
+export class ChiYu extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.DARK])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 200
+  atk = 28
+  speed = 57
+  def = 6
+  speDef = 10
+  maxPP = 90
+  range = 2
+  skill = Ability.BURNING_JEALOUSY
+  passive = Passive.BEADS_OF_RUIN
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19980,7 +19995,8 @@ export const PokemonClasses: Record<
   [Pkm.GREAVARD]: Greavard,
   [Pkm.HOUNDSTONE]: Houndstone,
   [Pkm.CLOBBOPUS]: Clobbopus,
-  [Pkm.GRAPPLOCT]: Grapploct
+  [Pkm.GRAPPLOCT]: Grapploct,
+  [Pkm.CHI_YU]: ChiYu
 }
 
 // declare all the classes in colyseus schema TypeRegistry

@@ -11,6 +11,7 @@
 - Houndstone
 - Clobbopus
 - Grapploct
+- Chi-Yu
 
 # Changes to Pokemon & Abilities
 

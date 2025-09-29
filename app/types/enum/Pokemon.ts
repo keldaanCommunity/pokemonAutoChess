@@ -1041,7 +1041,8 @@ export enum Pkm {
   GREAVARD = "GREAVARD",
   HOUNDSTONE = "HOUNDSTONE",
   CLOBBOPUS = "CLOBBOPUS",
-  GRAPPLOCT = "GRAPPLOCT"
+  GRAPPLOCT = "GRAPPLOCT",
+  CHI_YU = "CHI_YU"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -2212,6 +2213,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BAXCALIBUR]: "0998",
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
+  [Pkm.CHI_YU]: "1004",
   [Pkm.ROARING_MOON]: "1005",
   [Pkm.IRON_VALIANT]: "1006",
   [Pkm.DIPPLIN]: "1011",
@@ -3278,7 +3280,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GREAVARD]: Pkm.GREAVARD,
   [Pkm.HOUNDSTONE]: Pkm.GREAVARD,
   [Pkm.CLOBBOPUS]: Pkm.CLOBBOPUS,
-  [Pkm.GRAPPLOCT]: Pkm.CLOBBOPUS
+  [Pkm.GRAPPLOCT]: Pkm.CLOBBOPUS,
+  [Pkm.CHI_YU]: Pkm.CHI_YU
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

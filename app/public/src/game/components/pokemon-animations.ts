@@ -7173,5 +7173,11 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.FIGHTING_MELEE
+  },
+  [Pkm.CHI_YU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FIRE_RANGE
   }
 }
