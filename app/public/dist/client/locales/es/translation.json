@@ -2537,7 +2537,7 @@
 		"BERRY_SWEET": "Gana 15 HP máximos de forma permanente.",
 		"LOVE_SWEET": "Gana 3 de DEF de forma permanente.",
 		"STRAWBERRY_SWEET": "Gana 3 de ATK de forma permanente.",
-		"VANILLA_FLAVOR": "Horneado con aliados de tipo NORMAL FLYING ARTIFICIAL. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)",
+		"VANILLA_FLAVOR": "Horneado con aliados de tipo NORMAL FLYING ARTIFICIAL GOURMET. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)",
 		"RUBY_FLAVOR": "Horneado con aliados de tipo FIGHTING HUMAN STEEL. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_RUBY). $t(passive_description.RUBY_CREAM)",
 		"MATCHA_FLAVOR": "Horneado con aliados de tipo GRASS FLORA POISON GHOST. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_MATCHA). $t(passive_description.MATCHA_CREAM)",
 		"MINT_FLAVOR": "Horneado con aliados de tipo WATER AQUATIC ICE. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_MINT). $t(passive_description.MINT_CREAM)",

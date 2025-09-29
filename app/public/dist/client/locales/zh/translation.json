@@ -2707,7 +2707,7 @@
 		"BERRY_SWEET": "永久提升15点HP",
 		"LOVE_SWEET": "永久提升3点DEF",
 		"STRAWBERRY_SWEET": "永久提升3点ATK",
-		"VANILLA_FLAVOR": "与NORMAL、FLYING、ARTIFICIAL宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_VANILLA)。$t(passive_description.VANILLA_CREAM)",
+		"VANILLA_FLAVOR": "与NORMAL、FLYING、ARTIFICIAL、GOURMET宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_VANILLA)。$t(passive_description.VANILLA_CREAM)",
 		"RUBY_FLAVOR": "与FIGHTING、HUMAN、STEEL宝可梦一同制作的的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RUBY)。$t(passive_description.RUBY_CREAM)",
 		"MATCHA_FLAVOR": "与GRASS、FLORA、POISON、GHOST宝可梦一同制作的的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_MATCHA)。$t(passive_description.MATCHA_CREAM)",
 		"MINT_FLAVOR": "与WATER、AQUATIC、ICE宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_MINT)。$t(passive_description.MINT_CREAM)",

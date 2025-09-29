@@ -2710,7 +2710,7 @@
 		"BERRY_SWEET": "Gain 15 permanent HP",
 		"LOVE_SWEET": "Gain 3 permanent DEF",
 		"STRAWBERRY_SWEET": "Gain 3 permanent ATK",
-		"VANILLA_FLAVOR": "Baked with NORMAL FLYING ARTIFICIAL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)",
+		"VANILLA_FLAVOR": "Baked with NORMAL FLYING ARTIFICIAL GOURMET allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)",
 		"RUBY_FLAVOR": "Baked with FIGHTING HUMAN STEEL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY). $t(passive_description.RUBY_CREAM)",
 		"MATCHA_FLAVOR": "Baked with GRASS FLORA POISON GHOST allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MATCHA). $t(passive_description.MATCHA_CREAM)",
 		"MINT_FLAVOR": "Baked with WATER AQUATIC ICE allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MINT). $t(passive_description.MINT_CREAM)",

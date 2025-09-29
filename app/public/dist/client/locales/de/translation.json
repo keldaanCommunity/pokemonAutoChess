@@ -2618,7 +2618,7 @@
 		"BERRY_SWEET": "Erhalte permanent 15 HP",
 		"LOVE_SWEET": "Erhalte permanent 3 DEF",
 		"STRAWBERRY_SWEET": "Erhalte permanent 3 ATK",
-		"VANILLA_FLAVOR": "Gebacken mit NORMAL FLYING ARTIFICIAL Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_VANILLA) zu entwickeln. $t(passive_description.VANILLA_CREAM)",
+		"VANILLA_FLAVOR": "Gebacken mit NORMAL FLYING ARTIFICIAL GOURMET Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_VANILLA) zu entwickeln. $t(passive_description.VANILLA_CREAM)",
 		"RUBY_FLAVOR": "Gebacken mit FIGHTING HUMAN STEEL Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_RUBY) zu entwickeln. $t(passive_description.RUBY_CREAM)",
 		"MATCHA_FLAVOR": "Gebacken mit GRASS FLORA POISON GHOST Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_MATCHA) zu entwickeln. $t(passive_description.MATCHA_CREAM)",
 		"MINT_FLAVOR": "Gebacken mit WATER AQUATIC ICE Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_MINT) zu entwickeln. $t(passive_description.MINT_CREAM)",
