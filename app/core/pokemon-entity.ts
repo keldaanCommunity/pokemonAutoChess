@@ -1237,6 +1237,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       target.player &&
+      !target.isGhostOpponent &&
       (target.effects.has(EffectEnum.COTTONWEED) ||
         target.effects.has(EffectEnum.FLYCATCHER) ||
         target.effects.has(EffectEnum.FRAGRANT) ||
