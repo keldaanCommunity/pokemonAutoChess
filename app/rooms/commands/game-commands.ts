@@ -784,35 +784,27 @@ export class OnSellPokemonCommand extends Command<
     if (!player || !player.alive) return
 
     const pokemon = player.board.get(pokemonId)
-    if (
-      pokemon &&
-      !isOnBench(pokemon) &&
-      this.state.phase === GamePhaseState.FIGHT
-    ) {
+    if (!pokemon) return
+    if (!isOnBench(pokemon) && this.state.phase === GamePhaseState.FIGHT) {
       return // can't sell a pokemon currently fighting
     }
 
-    if (
-      pokemon &&
-      canSell(pokemon.name, this.state.specialGameRule) === false
-    ) {
+    if (canSell(pokemon.name, this.state.specialGameRule) === false) {
       return
     }
 
-    if (pokemon) {
-      this.state.shop.releasePokemon(pokemon.name, player, this.state)
-      const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-      player.addMoney(sellPrice, false, null)
-      pokemon.items.forEach((it) => {
-        player.items.push(it)
-      })
+    player.board.delete(pokemonId)
+    this.state.shop.releasePokemon(pokemon.name, player, this.state)
 
-      player.board.delete(pokemonId)
+    const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+    player.addMoney(sellPrice, false, null)
+    pokemon.items.forEach((it) => {
+      player.items.push(it)
+    })
 
-      player.updateSynergies()
-      player.boardSize = this.room.getTeamSize(player.board)
-      pokemon.afterSell(player)
-    }
+    player.updateSynergies()
+    player.boardSize = this.room.getTeamSize(player.board)
+    pokemon.afterSell(player)
   }
 }
 
@@ -1588,7 +1580,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   player,
                   this.state.stageLevel
                 )
-              }              
+              }
             }
             if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
               // remove after one fight
