@@ -5823,7 +5823,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-            cell.value.addSpecialDefense(-3, pokemon, 0, false)
+            cell.value.addSpecialDefense(-5, pokemon, 0, false)
           }
         })
       }, 1000)
@@ -13121,10 +13121,7 @@ export class SpinOutStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = Math.round(
-      [0.25, 0.5, 1][pokemon.stars - 1] *
-        pokemon.speed *
-        (1 + pokemon.ap / 100) *
-        (crit ? pokemon.critPower : 1)
+      [0.25, 0.5, 1][pokemon.stars - 1] * pokemon.speed
     )
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerBlinded(1000, target)
