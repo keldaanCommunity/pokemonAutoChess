@@ -50,6 +50,7 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
+import { TownEncounters } from "../../../../core/town-encounters"
 
 export enum BoardMode {
   PICK = "pick",
@@ -984,13 +985,22 @@ export default class BoardManager {
       const [x, y] = transformEntityCoordinates(boardX, boardY - 1, true)
       const id = `pve_${this.state.stageLevel}_${i}`
 
+      const pokemon = PokemonFactory.createPokemonFromName(pkm, {
+        shiny: this.state.shinyEncounter
+      })
+      if (
+        this.state.townEncounter === TownEncounters.MAROWAK &&
+        pveStage.marowakItems &&
+        i in pveStage.marowakItems
+      ) {
+        pveStage.marowakItems[i]!.forEach((item) => pokemon.items.add(item))
+      }
+
       const pkmSprite = new PokemonSprite(
         this.scene,
         x,
         y,
-        PokemonFactory.createPokemonFromName(pkm, {
-          shiny: this.state.shinyEncounter
-        }),
+        pokemon,
         id,
         false,
         true
