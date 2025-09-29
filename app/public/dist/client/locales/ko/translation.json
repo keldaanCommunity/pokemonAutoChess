@@ -1547,7 +1547,7 @@
 		"PSYCHIC": "대상 및 인접한 적들에게 [40,80,160,SP] 의 SPECIAL 을 가하며 15 PP 를 소멸시킨다.",
 		"PSYBEAM": "대상 뒤에 있는 모든 적포켓몬들에게 [25,50,100,SP] 의 SPECIAL 을 가하며 [50,LK]%확률로 4초간 CONFUSION 상태로 만든다.",
 		"DIVE": "물속으로 다이빙해서 [15,30,60]의 SHIELD 를 얻는다. 그후 적팀의 한복판에 재등장하며 인접한 적들에게 [10,20,40,SP] 의 SPECIAL 를 가하며 1초간 FREEZE 상태로 만든다.",
-		"SPIKY_SHIELD": "[3,5,10]초간 시전자에게 근접공격을 하는 대상은 WOUND 상태가 되며 현재 DEF 의 [100,SP]% 의 SPECIAL 을 입는다.",
+		"SPIKY_SHIELD": "[3,5,10]초간 시전자에게 근접공격을 하는 대상은 WOUND 상태가 되며 현재 DEF 의 [60,80,100,SP]% 의 SPECIAL 을 입는다.",
 		"FUTURE_SIGHT": "적 5마리에게 [15,30,60,SP] 의 SPECIAL 을 가한다.",
 		"FAKE_TEARS": "모든 적 포켓몬들에 [5,10,15,SP] 의 SPECIAL 을 가하며 3초간 ARMOR_BREAK 을 발동시킨다.",
 		"SPARKLING_ARIA": "대상 및 인접한 적들에 [15,30,60,SP] 의 SPECIAL 을 가한다. BURN 상태가 된 아군이 있을 경우, 해당 아군의 화상 상태가 치유된다.",

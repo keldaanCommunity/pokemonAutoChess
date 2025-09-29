@@ -30,6 +30,7 @@
 - Wormadam Plant: Def 2 → 3, Spe def 4 → 9
 - Wormadam Sandy: Def 4 → 6
 - Wormadam Trash: Def 6 → 9, Spe def 6 → 3
+- Nerf Spiky Shield (Chespin, Cascoon): take special damage equal to ~~100%~~ 60/80/100% of the user's Defense
 
 # Changes to Synergies
 

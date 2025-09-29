@@ -1607,7 +1607,7 @@
 		"PSYCHIC": "Inflige [40,80,160,SP] de SPECIAL y consume 15 PP al objetivo y enemigos adyacentes",
 		"PSYBEAM": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos detrás del objetivo con un [50,LK]% de probabilidad de dejarlos CONFUSION por 4 segundos",
 		"DIVE": "Se sumerge bajo el agua y gana [15,30,60] de SHIELD, luego reaparece en medio del equipo enemigo, infligiendo [10,20,40,SP] de SPECIAL y dejando FREEZE a todas las unidades adyacentes por 1 segundos.",
-		"SPIKY_SHIELD": "Durante [3,5,10] segundos, los objetivos que atacan cuerpo a cuerpo a este Pokémon quedan WOUND y reciben SPECIAL equivalente al [100,SP]% de la DEF actual",
+		"SPIKY_SHIELD": "Durante [3,5,10] segundos, los objetivos que atacan cuerpo a cuerpo a este Pokémon quedan WOUND y reciben SPECIAL equivalente al [60,80,100,SP]% de la DEF actual",
 		"FUTURE_SIGHT": "Inflige [15,30,60,SP] de SPECIAL a 5 enemigos",
 		"FAKE_TEARS": "Inflige [5,10,15,SP] de SPECIAL a todo el equipo enemigo y activa ARMOR_BREAK por 3 segundos",
 		"SPARKLING_ARIA": "Inflige [15,30,60,SP] de SPECIAL al objetivo y a los enemigos adyacentes. Si los aliados adyacentes están BURN, cura las quemaduras",
