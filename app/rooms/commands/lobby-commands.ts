@@ -425,8 +425,7 @@ export class OpenBoosterCommand extends Command<
         }
       })
 
-      checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
-      await mongoUser.save()
+      await checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
@@ -617,8 +616,7 @@ export class BuyEmotionCommand extends Command<
       pokemonCollectionItem.selectedEmotion = emotion
       pokemonCollectionItem.selectedShiny = shiny
 
-      checkTitlesAfterEmotionUnlocked(mongoUser, [{ name: PkmByIndex[index], emotion, shiny }])
-      await mongoUser.save()
+      await checkTitlesAfterEmotionUnlocked(mongoUser, [{ name: PkmByIndex[index], emotion, shiny }])
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
       logger.error(error)
@@ -626,7 +624,8 @@ export class BuyEmotionCommand extends Command<
   }
 }
 
-function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked: PkmWithCustom[]) {
+async function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked: PkmWithCustom[]) {
+  const newTitles: Title[] = []
   if (!mongoUser.titles.includes(Title.SHINY_SEEKER)) {
     // update titles
     let numberOfShinies = 0
@@ -635,7 +634,7 @@ function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked
       numberOfShinies += shinyEmotions.length
     })
     if (numberOfShinies >= 30) {
-      mongoUser.titles.push(Title.SHINY_SEEKER)
+      newTitles.push(Title.SHINY_SEEKER)
     }
   }
 
@@ -651,12 +650,12 @@ function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked
           return emotions.length > 0 || shinyEmotions.length > 0
         })
     ) {
-      mongoUser.titles.push(Title.DUKE)
+      newTitles.push(Title.DUKE)
     }
   }
 
   if (unlocked.some(p => p.emotion === Emotion.ANGRY && p.name === Pkm.ARBOK) && !mongoUser.titles.includes(Title.DENTIST)) {
-    mongoUser.titles.push(Title.DENTIST)
+    newTitles.push(Title.DENTIST)
   }
 
   if (
@@ -675,7 +674,7 @@ function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked
       return isAlreadyUnlocked || isBeingUnlockedRightNow
     })
   ) {
-    mongoUser.titles.push(Title.ARCHEOLOGIST)
+    newTitles.push(Title.ARCHEOLOGIST)
   }
 
   if (!mongoUser.titles.includes(Title.DUCHESS)) {
@@ -685,8 +684,13 @@ function checkTitlesAfterEmotionUnlocked(mongoUser: IUserMetadataMongo, unlocked
       const { emotions, shinyEmotions } = CollectionUtils.getEmotionsUnlocked(item)
       return shinyEmotions.length >= CollectionEmotions.length && emotions.length >= CollectionEmotions.length
     })) {
-      mongoUser.titles.push(Title.DUCHESS)
+      newTitles.push(Title.DUCHESS)
     }
+  }
+
+  if(newTitles.length > 0) {
+    mongoUser.titles.push(...newTitles)
+    await UserMetadata.updateOne({ uid: mongoUser.uid }, { titles: mongoUser.titles })
   }
 }
 
