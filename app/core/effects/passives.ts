@@ -246,9 +246,11 @@ const KubfuOnKillEffect = new OnKillEffect(
   }
 )
 
-const HisuianQwilfishOnCastEffect = new OnAbilityCastEffect((pokemon, board) => {
-  pokemon.addAbilityPower(1, pokemon, 0, false, true)
-})
+const HisuianQwilfishOnCastEffect = new OnAbilityCastEffect(
+  (pokemon, board) => {
+    pokemon.addAbilityPower(1, pokemon, 0, false, true)
+  }
+)
 
 const QwilfishPassiveEffect = new OnDamageReceivedEffect(
   ({ pokemon, attacker, attackType, isRetaliation }) => {
@@ -395,7 +397,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-              board.columns * pokemon.positionY + y + pokemon.positionX + x
+                board.columns * pokemon.positionY + y + pokemon.positionX + x
               ]
           })
         }
@@ -477,20 +479,22 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   player.items.push(flavor)
 })
 
-const PachirisuBerryEffect = new OnStageStartEffect(({ pokemon, room, player }) => {
-  if (!pokemon || !player) return
-  room.clock.setTimeout(() => {
-    if (chance(0.3, pokemon)) {
-      room.broadcast(Transfer.DIG, {
-        pokemonId: pokemon.id,
-        buriedItem: Item.SITRUS_BERRY
-      })
-      room.clock.setTimeout(() => {
-        player.items.push(Item.SITRUS_BERRY)
-      }, 3000)
-    }
-  }, 1000)
-})
+const PachirisuBerryEffect = new OnStageStartEffect(
+  ({ pokemon, room, player }) => {
+    if (!pokemon || !player) return
+    room.clock.setTimeout(() => {
+      if (chance(0.3, pokemon)) {
+        room.broadcast(Transfer.DIG, {
+          pokemonId: pokemon.id,
+          buriedItem: Item.SITRUS_BERRY
+        })
+        room.clock.setTimeout(() => {
+          player.items.push(Item.SITRUS_BERRY)
+        }, 3000)
+      }
+    }, 1000)
+  }
+)
 
 class ClearWingEffect extends PeriodicEffect {
   constructor() {
@@ -630,9 +634,8 @@ export class FalinksFormationEffect extends OnSpawnEffect {
   }
 }
 
-
 const ogerponMaskDropEffect = (
-  mask: typeof OgerponMasks[number],
+  mask: (typeof OgerponMasks)[number],
   from: Pkm,
   to: Pkm
 ) =>
@@ -745,7 +748,10 @@ export const PassiveEffects: Partial<
   [Passive.PYUKUMUKU]: [
     new OnDeathEffect(({ pokemon, board }) => {
       pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
-      const adjcells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+      const adjcells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY
+      )
       const damage = Math.round(0.5 * pokemon.hp)
       adjcells.forEach((cell) => {
         if (cell.value && pokemon.team != cell.value.team) {
@@ -758,6 +764,11 @@ export const PassiveEffects: Partial<
           )
         }
       })
+    })
+  ],
+  [Passive.BEADS_OF_RUIN]: [
+    new OnHitEffect(({ attacker, target }) => {
+      target.addSpecialDefense(-1, attacker, 0, false)
     })
   ]
 }

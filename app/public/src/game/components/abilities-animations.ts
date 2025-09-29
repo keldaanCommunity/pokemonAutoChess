@@ -1729,6 +1729,9 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -(3 / 4) * Math.PI
   }),
+  [Ability.BURNING_JEALOUSY]: projectile({
+    duration: 400
+  }),
   [Ability.STRENGTH]: projectile({
     duration: 450,
     startCoords: "target",

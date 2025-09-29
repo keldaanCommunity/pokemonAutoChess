@@ -13790,6 +13790,53 @@ export class LastRespectsStrategy extends AbilityStrategy {
     curseTarget?.status.triggerCurse(curseDelay, curseTarget)
   }
 }
+
+export class BurningJealousyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = 70
+    const burnDuration = 5000
+
+    // Get target and adjacent enemies
+    const targets = board
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map((cell) => cell.value!)
+
+    targets.forEach((enemy) => {
+      // Deal SPECIAL damage to all targets
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+
+      pokemon.broadcastAbility({
+        targetX: enemy.positionX,
+        targetY: enemy.positionY,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY
+      })
+
+      // Only enemies with ATK buffs lose them and get burned
+      if (enemy.atk > enemy.baseAtk) {
+        // Remove ATK buffs (subtract the buff amount)
+        enemy.addAttack(-(enemy.atk - enemy.baseAtk), enemy, 0, false)
+
+        // Inflict BURN for 5 seconds
+        enemy.status.triggerBurn(burnDuration, enemy, pokemon)
+      }
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14283,5 +14330,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRUDGE]: new GrudgeStrategy(),
   [Ability.JAW_LOCK]: new JawLockStrategy(),
   [Ability.LAST_RESPECTS]: new LastRespectsStrategy(),
-  [Ability.OCTOLOCK]: new OctolockStrategy()
+  [Ability.OCTOLOCK]: new OctolockStrategy(),
+  [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy()
 }
