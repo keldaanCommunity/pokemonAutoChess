@@ -18945,6 +18945,39 @@ export class ChiYu extends Pokemon {
   passive = Passive.BEADS_OF_RUIN
 }
 
+export class Wimpod extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.WATER, Synergy.MONSTER])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GOLISOPOD
+  hp = 90
+  atk = 8
+  speed = 38
+  def = 7
+  speDef = 4
+  maxPP = 140
+  range = 1
+  skill = Ability.FIRST_IMPRESSION
+  additional = true
+  passive = Passive.EMERGENCY_EXIT
+}
+
+export class Golisopod extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.WATER, Synergy.MONSTER])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 180
+  atk = 20
+  speed = 38
+  def = 14
+  speDef = 8
+  maxPP = 140
+  range = 1
+  skill = Ability.FIRST_IMPRESSION
+  additional = true
+  passive = Passive.EMERGENCY_EXIT
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19996,7 +20029,9 @@ export const PokemonClasses: Record<
   [Pkm.HOUNDSTONE]: Houndstone,
   [Pkm.CLOBBOPUS]: Clobbopus,
   [Pkm.GRAPPLOCT]: Grapploct,
-  [Pkm.CHI_YU]: ChiYu
+  [Pkm.CHI_YU]: ChiYu,
+  [Pkm.WIMPOD]: Wimpod,
+  [Pkm.GOLISOPOD]: Golisopod
 }
 
 // declare all the classes in colyseus schema TypeRegistry

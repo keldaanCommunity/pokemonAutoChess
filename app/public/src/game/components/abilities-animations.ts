@@ -701,6 +701,7 @@ export const AbilitiesAnimations: {
   [Ability.POPULATION_BOMB]: onTargetScale2,
   [Ability.SCREECH]: onTargetScale2,
   [Ability.SAND_TOMB]: onTargetScale2,
+  [Ability.FIRST_IMPRESSION]: onTarget({ ability: "PUFF_BROWN", scale: 3 }),
   [Ability.PLAY_ROUGH]: onTargetScale2,
   [Ability.ANCHOR_SHOT]: onTargetScale1,
   [Ability.LEAF_BLADE]: onTargetScale2,

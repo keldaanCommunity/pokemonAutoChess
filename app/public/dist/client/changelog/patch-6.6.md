@@ -12,6 +12,8 @@
 - Clobbopus
 - Grapploct
 - Chi-Yu
+- Wimpod
+- Golisopod
 
 # Changes to Pokemon & Abilities
 

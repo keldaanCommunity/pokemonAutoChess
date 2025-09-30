@@ -512,7 +512,8 @@
 		"JAW_LOCK": "Jaw Lock",
 		"LAST_RESPECTS": "Last Respects",
 		"OCTOLOCK": "Octolock",
-		"BURNING_JEALOUSY": "Burning Jealousy"
+		"BURNING_JEALOUSY": "Burning Jealousy",
+		"FIRST_IMPRESSION": "First Impression"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1558,7 +1559,9 @@
 		"HOUNDSTONE": "Houndstone",
 		"CLOBBOPUS": "Clobbopus",
 		"GRAPPLOCT": "Grapploct",
-		"CHI_YU": "Chi-Yu"
+		"CHI_YU": "Chi-Yu",
+		"WIMPOD": "Wimpod",
+		"GOLISOPOD": "Golisopod"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2051,7 +2054,8 @@
 		"JAW_LOCK": "Bites the target, inflicting LOCKED for 3 seconds and dealing 125% ATK + [10,15,20,SP] SPECIAL. If target is already bitten, also heals [25,50,100,SP] HP.",
 		"LAST_RESPECTS": "Deals [30,60,90,SP] SPECIAL and CURSE that will KO after [10,8,6,SP=-0.2] seconds. If the target has already CURSE, targets another ADJACENT enemy instead.",
 		"OCTOLOCK": "Deals [30,60,90,SP] SPECIAL. Inflict LOCKED and ARMOR_BREAK for 3 seconds.",
-		"BURNING_JEALOUSY": "Deals [30,50,70,SP] SPECIAL to the target and ADJACENT enemies. Enemies with ATK buffs lose them and suffer BURN for 5 seconds."
+		"BURNING_JEALOUSY": "Deals [30,50,70,SP] SPECIAL to the target and ADJACENT enemies. Enemies with ATK buffs lose them and suffer BURN for 5 seconds.",
+		"FIRST_IMPRESSION": "The pokémon, sensing danger, flies away spawning a random 1 STAR common or uncommon BUG behind, inflicting FLINCH for [3,5,SP] seconds and dealing [45,90,SP] SPECIAL to the target."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2898,7 +2902,8 @@
 		"QWILFISH": "When struck by an attack at melee range, deal 5 TRUE to the attacker, with [30,LK]% chance to inflict POISONNED for 3 seconds",
 		"HISUIAN_QWILFISH": "Gain 1 AP permanently when casting its ability. After casting 20 times, Qwilfish will evolve into Overqwil.",
 		"LAST_RESPECTS": "Gains maximum PP when an ADJACENT ally is KO.",
-		"BEADS_OF_RUIN": "The envy accumulated within its curved beads radiates a curse. Each hit reduces the target's SPE_DEF by 1."
+		"BEADS_OF_RUIN": "The envy accumulated within its curved beads radiates a curse. Each hit reduces the target's SPE_DEF by 1.",
+		"EMERGENCY_EXIT": "Starts with full PP"
 	},
 	"stat": {
 		"ATK": "Attack",
