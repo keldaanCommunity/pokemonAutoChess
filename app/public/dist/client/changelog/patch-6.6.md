@@ -66,5 +66,6 @@
 - Fix Comfey being resurrected through Sacred Ash when an ally alive holds it
 - Fix Slaking not enraging after waking up through Sound cry or Chesto Berry
 - Fix mulch being collected when playing as ghost opponent
+- Fix Meltan magnet pull not pulling steel pokemon when steel pool is empty
 
 # Misc
