@@ -2851,7 +2851,7 @@
 		"SKARMORY": "At the start of the fight, Skarmory scatters spikes around the field. The spikes deal 10 TRUE per second and ARMOR_BREAK to Pokémon that walk on it, if not FLYING or STEEL.",
 		"DURANT": "Durant basic attacks deals 1 extra TRUE for each BUG ally on your board",
 		"OGERPON_TEAL": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance.\nUpon casting, gain [6,SP] ATK for each ADJACENT enemy.",
-		"OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance.\nUpon casting, gives [40,SP] HP and [20,SP] PP to ADJACENT allies.",
+		"OGERPON_WELLSPRING": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance.\nUpon casting, gives [50,SP] HP and [25,SP] PP to ADJACENT allies.",
 		"OGERPON_HEARTHFLAME": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance.\nUpon casting, deals [20,SP] SPECIAL and BURN ADJACENT enemies for 5 seconds.",
 		"OGERPON_CORNERSTONE": "Ogerpon can wear TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK and CORNERSTONE_MASK to change its appearance.\nUpon casting, gain PROTECT for [2,SP=0.5] seconds and FLINCH ADJACENT enemies for 5 seconds.",
 		"VICTINI": "Increases the accuracy of the team. Allies can no longer miss their attacks.",

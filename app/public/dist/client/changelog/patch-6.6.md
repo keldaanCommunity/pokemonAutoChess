@@ -40,7 +40,8 @@
 - New ability for Taillow line: Air slash
 - Buff Munchlax line: PP 120 → 100
 - Indeedee Male & Female now have Human synergy
- 
+- Buff Ogerpon WellSpring mask: upon casting, heal ~~40~~ 50 HP and restore ~~20~~ 25 PP to adjacent allies
+
 # Changes to Synergies
 
 # Changes to Items

@@ -690,7 +690,7 @@
 		"SKARMORY": "เมื่อเริ่มการต่อสู้, Skarmory สลัดหนามเหล็กออกมายังบนสนาม. หนามจะสร้างความเสียหาย 10 เป็น TRUE ต่อวินาที และมอบสถานะ ARMOR_BREAK แก่โปเกมอนที่อยู่บนพื้นที่นั้นหากไม่ใช่ประเภท FLYING หรือ STEEL.",
 		"DURANT": "การโจมตีปกติของ Durant จะสร้างความเสียหายเพิ่มเติม 1 เป็น TRUE ต่อจำนวนโปเกมอนที่มีประเภท BUG ของเราบนกระดาน",
 		"OGERPON_TEAL": "Ogerpon สามารถสวมใส่ TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK และ CORNERSTONE_MASK เพื่อเปลี่ยนรูปลักษณ์ \\n เมื่อร่าย ได้รับ [6,SP] ATK ต่อศัตรูที่อยู่ติดกันแต่ละตัว",
-		"OGERPON_WELLSPRING": "Ogerpon สามารถสวมใส่ TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK และ CORNERSTONE_MASK เพื่อเปลี่ยนรูปลักษณ์ \\n เมื่อร่าย ได้รับ [40,SP] HP และ [20,SP] PP แก่พันธมิตรที่อยู่ติดกัน",
+		"OGERPON_WELLSPRING": "Ogerpon สามารถสวมใส่ TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK และ CORNERSTONE_MASK เพื่อเปลี่ยนรูปลักษณ์ \\n เมื่อร่าย ได้รับ [50,SP] HP และ [25,SP] PP แก่พันธมิตรที่อยู่ติดกัน",
 		"OGERPON_HEARTHFLAME": "Ogerpon สามารถสวมใส่ TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK และ CORNERSTONE_MASK เพื่อเปลี่ยนรูปลักษณ์ \\n เมื่อร่าย สร้าง [20,SP] SPECIAL และ BURN แก่ศัตรูที่อยู่ติดกันเป็นเวลา 5 วินาที",
 		"OGERPON_CORNERSTONE": "Ogerpon สามารถสวมใส่ TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK และ CORNERSTONE_MASK เพื่อเปลี่ยนรูปลักษณ์ \\n เมื่อร่าย ได้รับ PROTECT เป็นเวลา [2,SP=0.5] วินาที และ FLINCH ศัตรูที่อยู่ติดกันเป็นเวลา 5 วินาที"
 	},

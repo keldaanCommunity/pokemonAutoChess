@@ -2572,7 +2572,7 @@
 		"SKARMORY": "전투 시작 시 무장조는 필드에 압정을 뿌립니다. 압정은 그 위를 걷는 FLYING 또는 STEEL 이 아닌 포켓몬에게 초당 10 TRUE 를 가하고 ARMOR_BREAK 를 적용합니다.",
 		"DURANT": "아이앤트의 기본 공격은 필드 위의 BUG 아군 하나당 1 추가 TRUE 를 입힙니다.",
 		"OGERPON_TEAL": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시 인접한 적 하나당 [6,SP]의 ATK를 얻습니다.",
-		"OGERPON_WELLSPRING": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시 인접한 아군에게 [40,SP]의 HP와 [20,SP]의 PP를 부여합니다.",
+		"OGERPON_WELLSPRING": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시 인접한 아군에게 [50,SP]의 HP와 [25,SP]의 PP를 부여합니다.",
 		"OGERPON_HEARTHFLAME": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n시전 시 인접한 적에게 [20,SP]의 SPECIAL을 부여하고 5초 동안 BURN 효과를 부여합니다.",
 		"OGERPON_CORNERSTONE": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n시전 시 인접한 적에게 [2,SP=0.5]의 PROTECT 효과를 부여하고 5초 동안 FLINCH 효과를 부여합니다.",
 		"VICTINI": "팀의 명중률을 올린다. 아군의 공격은 더이상 빗나가지 않는다.",

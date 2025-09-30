@@ -10195,8 +10195,8 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.addPP(20, pokemon, 1, crit)
-            cell.value.handleHeal(40, pokemon, 1, crit)
+            cell.value.addPP(25, pokemon, 1, crit)
+            cell.value.handleHeal(50, pokemon, 1, crit)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {

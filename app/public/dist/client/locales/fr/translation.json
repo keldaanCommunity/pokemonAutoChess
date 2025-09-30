@@ -2844,7 +2844,7 @@
 		"SKARMORY": "Au début du combat, $t(pkm.SKARMORY) disperse des piques sur le terrain. Les piques infligant 10 TRUE par seconde et ARMOR_BREAK aux Pokémon qui marchent dessus, s'ils ne sont pas de type FLYING ou STEEL.",
 		"DURANT": "Les attaques de $t(pkm.DURANT) infligent 1 TRUE supplémentaire par allié BUG sur le plateau.",
 		"OGERPON_TEAL": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence.\nQuand il lance sa capacité, gagne [6,SP] ATK pour chaque ennemi ADJACENT.",
-		"OGERPON_WELLSPRING": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence.\nQuand il lance sa capacité, rend [40,SP] HP et [20,SP] PP aux alliés ADJACENT.",
+		"OGERPON_WELLSPRING": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence.\nQuand il lance sa capacité, rend [50,SP] HP et [25,SP] PP aux alliés ADJACENT.",
 		"OGERPON_HEARTHFLAME": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence.\nQuand il lance sa capacité, il inflige [20,SP] SPECIAL et BURN aux ennemis ADJACENT pendant 5 secondes.",
 		"OGERPON_CORNERSTONE": "Ogerpon peut porter TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK et CORNERSTONE_MASK pour changer son apparence.\nQuand il lance sa capacité, il gagne PROTECT pendant [2,SP=0.5] secondes et inflige FLINCH aux ennemis ADJACENT pendant 5 secondes.",
 		"VICTINI": "Augmente la précision de l'équipe. Les alliés ne peuvent plus rater leurs attaques.",
