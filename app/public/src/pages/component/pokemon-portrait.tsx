@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Emotion } from "../../../../types"
 import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
 import { cc } from "../utils/jsx"
+import {  PkmByIndex } from "../../../../types/enum/Pokemon"
+import { useTranslation } from "react-i18next"
 
 interface PortraitOptions {
   index: string
@@ -16,7 +18,8 @@ type Props = (
   React.ImgHTMLAttributes<HTMLImageElement>
 
 export default function PokemonPortrait(props: Props) {
-  let src
+  const { t } = useTranslation()
+  let src: string
   if ("avatar" in props) {
     src = getAvatarSrc(props.avatar)
   } else {
@@ -44,9 +47,21 @@ export default function PokemonPortrait(props: Props) {
     }
   }
 
+  const pokemonName = () => {
+    if ("avatar" in props) {
+      return PkmByIndex[props.avatar]
+    }
+    const portrait = props.portrait
+    if (typeof portrait === "object") {
+      return PkmByIndex[portrait.index]
+    }
+    return PkmByIndex[portrait]
+  }
+  
   return (
     <img
       src={imgSrc}
+      title={t(`pkm.${pokemonName}`)}
       loading="lazy"
       className={cc("pokemon-portrait", className || "")}
       onError={handleError}
