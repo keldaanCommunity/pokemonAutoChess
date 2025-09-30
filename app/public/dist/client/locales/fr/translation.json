@@ -1728,7 +1728,7 @@
 		"HYPNOSIS": "Inflige SLEEP à 1 ennemi dans les rangées arrière pendant [2,3.5,6,SP=0.5] secondes.",
 		"MIMIC": "Copie la capacité de la cible.",
 		"HEX": "Inflige [20,40,80,SP] SPECIAL à la cible. Dégâts doublés si la cible souffre d'une altération de statut négative.",
-		"GROWTH": "Augmente les HP max du lanceur de [10,20,30,SP] et son ATK de [3,4,5,SP]. Ces effets sont doublés si la météo est SUN.",
+		"GROWTH": "Augmente les HP max du lanceur de [10,20,40,SP] et son ATK de [3,5,7,SP]. Ces effets sont doublés si la météo est SUN.",
 		"HEAL_ORDER": "Inflige [25,45,65,SP] SPECIAL aux ennemis ADJACENT et soigne [25,45,65,SP] HP aux alliés ADJACENT.",
 		"SHELL_TRAP": "Le SHIELD du lanceur explose, infligeant [50,SP] SPECIAL + son SHIELD actuel à tous les ennemis ADJACENT. Si le lanceur n'a pas de SHIELD, il obtient [75,SP] de SHIELD à la place.",
 		"DIG": "Creuse sous terre et réapparaît à côté de l'ennemi le plus éloigné, infligeant [10,20,40,SP] SPECIAL à tous les ennemis sur son chemin.",

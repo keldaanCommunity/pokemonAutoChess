@@ -36,6 +36,8 @@
 - Nerf Spiky Shield (Chespin, Cascoon): take special damage equal to ~~100%~~ 60/80/100% of the user's Defense
 - Change Sparkling Aria (Primarina): damage 15/30/60 → 15/25/50 ; now gives burn immunity to allies for 3 seconds
 - Nerf Torkoal: HP 220 → 200
+- New ability for Tropius: Growth
+- New ability for Taillow line: Air slash
  
 # Changes to Synergies
 

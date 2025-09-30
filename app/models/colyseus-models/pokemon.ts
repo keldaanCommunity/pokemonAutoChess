@@ -11940,7 +11940,7 @@ export class Tropius extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.AIR_SLASH
+  skill = Ability.GROWTH
 }
 
 export class Carnivine extends Pokemon {
@@ -14157,7 +14157,7 @@ export class Taillow extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.BRAVE_BIRD
+  skill = Ability.AIR_SLASH
 }
 
 export class Swellow extends Pokemon {
@@ -14171,7 +14171,7 @@ export class Swellow extends Pokemon {
   speDef = 9
   maxPP = 100
   range = 1
-  skill = Ability.BRAVE_BIRD
+  skill = Ability.AIR_SLASH
 }
 
 export class Spinarak extends Pokemon {

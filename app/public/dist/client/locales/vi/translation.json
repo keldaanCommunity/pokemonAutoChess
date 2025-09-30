@@ -1308,7 +1308,7 @@
 		"HYPNOSIS": "Khiến 1 đối thủ ở hậu tuyến SLEEP trong [2,4,6,SP=0.5] giây",
 		"MIMIC": "Sao chép chiêu thức của mục tiêu hiện tại",
 		"HEX": "Gây [20,40,80,SP] SPECIAL cho mục tiêu. Gây gấp đôi sát thương nếu mục tiêu chịu trạng thái tiêu cực.",
-		"GROWTH": "Tăng HP tối đa thêm [30,40,50,SP] và ATK thêm [3,4,5,SP]. Tăng gấp đôi nếu thời tiết là SUN",
+		"GROWTH": "Tăng HP tối đa thêm [10,20,40,SP] và ATK thêm [3,5,7,SP]. Tăng gấp đôi nếu thời tiết là SUN",
 		"HEAL_ORDER": "Gây [25,45,65,SP] SPECIAL lên đối thủ ở gần và hồi [25,45,65,SP] cho đồng minh ở gần",
 		"DIG": "Đào dưới đất và xuất hiện ở vị trí kẻ thù xa nhất, gây [10,20,40,SP] SPECIAL lên toàn bộ đối thủ trên đường đi",
 		"PECK": "Gây [10,30,50,SP] SPECIAL lên mục tiêu",
