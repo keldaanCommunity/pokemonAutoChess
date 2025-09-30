@@ -13120,9 +13120,7 @@ export class SpinOutStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.round(
-      [0.25, 0.5, 1][pokemon.stars - 1] * pokemon.speed
-    )
+    const damage = Math.round([0.25, 0.5, 1][pokemon.stars - 1] * pokemon.speed)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerBlinded(1000, target)
 
@@ -13834,6 +13832,73 @@ export class BurningJealousyStrategy extends AbilityStrategy {
   }
 }
 
+export class FirstImpressionStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    
+    // Base damage: 1★=45, 2★=90
+    const damage = [45, 90][pokemon.stars - 1] ?? 90
+    
+    // Base flinch duration: 1★=3s, 2★=5s, scaled by AP and crit
+    let duration = [3000, 5000][pokemon.stars - 1] ?? 5000
+    duration = Math.round(
+      duration * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
+    
+    // Deal damage and apply flinch status
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerFlinch(duration, target, pokemon)
+    
+    // Find a cell to fly away to after the attack
+    const flyAwayCell = board.getFlyAwayCell(
+      pokemon.positionX,
+      pokemon.positionY
+    )
+    
+    // Store original position before moving
+    const x = pokemon.positionX
+    const y = pokemon.positionY
+
+    if (flyAwayCell) {
+      // Move pokemon to the fly away position
+      pokemon.moveTo(flyAwayCell.x, flyAwayCell.y, board)
+
+      // If original position is now empty, spawn a random bug pokemon
+      if (board.getEntityOnCell(x, y) === undefined) {
+        // Get all 1-star bug pokemon from common/uncommon rarities with abilities
+        const possibleBugsPkm = [
+          ...PRECOMPUTED_POKEMONS_PER_RARITY.COMMON,
+          ...PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON
+        ].filter((pkm) => {
+          const data = getPokemonData(pkm)
+          return (
+            data.stars === 1 &&
+            data.skill !== Ability.DEFAULT &&
+            data.types.includes(Synergy.BUG)
+          )
+        })
+
+        // Pick a random bug pokemon from the filtered list
+        const randomBugPkm = pickRandomIn<Pkm>(possibleBugsPkm)
+
+        // Create the bug pokemon instance
+        const randomBug = PokemonFactory.createPokemonFromName(
+          randomBugPkm,
+          pokemon.player
+        )
+
+        // Add the bug pokemon to the original position
+        pokemon.simulation.addPokemon(randomBug, x, y, pokemon.team, true)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14328,5 +14393,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.JAW_LOCK]: new JawLockStrategy(),
   [Ability.LAST_RESPECTS]: new LastRespectsStrategy(),
   [Ability.OCTOLOCK]: new OctolockStrategy(),
-  [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy()
+  [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
+  [Ability.FIRST_IMPRESSION]: new FirstImpressionStrategy()
 }

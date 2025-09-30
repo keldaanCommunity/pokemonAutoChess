@@ -770,5 +770,8 @@ export const PassiveEffects: Partial<
     new OnHitEffect(({ attacker, target }) => {
       target.addSpecialDefense(-1, attacker, 0, false)
     })
+  ],
+  [Passive.EMERGENCY_EXIT]: [
+    new OnSpawnEffect((pkm) => pkm.addPP(pkm.maxPP, pkm, 0, false))
   ]
 }
