@@ -17856,7 +17856,7 @@ export class ScreamTail extends Pokemon {
 }
 
 export class IndeedeeFemale extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
@@ -17870,7 +17870,7 @@ export class IndeedeeFemale extends Pokemon {
 }
 
 export class IndeedeeMale extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 160

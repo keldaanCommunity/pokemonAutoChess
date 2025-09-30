@@ -39,6 +39,7 @@
 - New ability for Tropius: Growth
 - New ability for Taillow line: Air slash
 - Buff Munchlax line: PP 120 → 100
+- Indeedee Male & Female now have Human synergy
  
 # Changes to Synergies
 
