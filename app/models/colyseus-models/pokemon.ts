@@ -8882,7 +8882,7 @@ export class Munchlax extends Pokemon {
   speed = 35
   def = 4
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.BODY_SLAM
   passive = Passive.GLUTTON
@@ -8902,7 +8902,7 @@ export class Snorlax extends Pokemon {
   speed = 35
   def = 6
   speDef = 6
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.BODY_SLAM
   passive = Passive.GLUTTON

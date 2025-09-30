@@ -38,6 +38,7 @@
 - Nerf Torkoal: HP 220 → 200
 - New ability for Tropius: Growth
 - New ability for Taillow line: Air slash
+- Buff Munchlax line: PP 120 → 100
  
 # Changes to Synergies
 
