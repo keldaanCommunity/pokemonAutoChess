@@ -1805,7 +1805,7 @@
 		"PRESENT": "Either deal [80,SP], [150,SP] or [300,SP] SPECIAL to the target, or heal them for 50 HP, based on your LUCK.",
 		"LEAF_BLADE": "The user's next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE.",
 		"ANCHOR_SHOT": "Grab the farthest enemy Pokémon and deal [20,40,80,SP] SPECIAL.",
-		"MAGNET_RISE": "Grant PROTECT for 2 seconds and [10,SP]% dodge chance to the user to the [2,4,6] ADJACENT allied Pokémon with the lowest health.",
+		"MAGNET_RISE": "Grant PROTECT for 2 seconds and [10,SP]% dodge chance to the user and to the [2,4,6] ADJACENT allied Pokémon with the lowest health.",
 		"ATTRACT": "Inflict [1,2,3] random enemy Pokémon with CHARM for [1,SP] seconds.",
 		"WATER_PULSE": "Deal [75,150,SP] SPECIAL to the target and ADJACENT enemy Pokémon and inflict them with CONFUSION for 2 seconds.",
 		"PLAY_ROUGH": "Deal [30,60,120,SP] SPECIAL to the target and inflict it with CHARM for 2.5 seconds.",
