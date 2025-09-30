@@ -7303,14 +7303,14 @@ export class EggBombStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .map((v) => v.value)
       .filter((v) => v?.team === target.team)
       .forEach((v) => {
         if (v) {
-          const kill = target.handleSpecialDamage(
+          const kill = v.handleSpecialDamage(
             damage,
             board,
             AttackType.SPECIAL,
