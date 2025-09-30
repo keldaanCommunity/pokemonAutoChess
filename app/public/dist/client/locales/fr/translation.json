@@ -1693,7 +1693,7 @@
 		"SPIKY_SHIELD": "Pendant [3,5,10] secondes, les Pokémon qui attaquent le lanceur au corps à corps subissent WOUND pendant 2 secondes et des SPECIAL égaux à [60,80,100,SP]% de la DEF du lanceur. Si lancé à nouveau avant la fin de l'effet, projette des piques dans toutes les directions, infligeant [30,SP] SPECIAL à tous les ennemis touchés.",
 		"FUTURE_SIGHT": "Inflige [15,30,60,SP] SPECIAL à 5 ennemis après 2 secondes d'attente.",
 		"FAKE_TEARS": "Inflige [5,10,15,SP] SPECIAL et ARMOR_BREAK pendant 3 secondes à toute l'équipe adverse.",
-		"SPARKLING_ARIA": "Inflige [15,30,60,SP] SPECIAL à la cible et aux ennemis ADJACENT. Soigne BURN pour tous les alliés ADJACENT.",
+		"SPARKLING_ARIA": "Inflige [15,25,50,SP] SPECIAL à la cible et aux ennemis ADJACENT. Soigne BURN pour tous les alliés ADJACENT.",
 		"DRAGON_DARTS": "Lance 3 fléchettes qui infligent [10,20,40,SP] SPECIAL chacune à la cible. Si la cible est mise KO, le lanceur récupère 40 PP.",
 		"GRASSY_SURGE": "Augmente l'ATK de tous les alliés GRASS de [5,SP], excepté le lanceur.",
 		"MISTY_SURGE": "Tous les alliés FAIRY récupèrent [25,SP] HP et [25,SP] PP, excepté le lanceur.",

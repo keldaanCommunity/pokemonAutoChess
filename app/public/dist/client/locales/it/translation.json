@@ -1394,7 +1394,7 @@
 		"SPIKY_SHIELD": "Per [3,5,10] secondi, i Pokèmon che attaccano in mischia l'utilizzatore ricevono WOUND e gli viene inflitto SPECIAL pari al [60,80,100,SP]% della DEF attuale dell'utilizzatore.",
 		"FUTURE_SIGHT": "Infliggi [15,30,60,SP] SPECIAL a 5 Pokèmon nemici.",
 		"FAKE_TEARS": "Infligge [5,10,15,SP] SPECIAL all'intera squadra nemica e causa ARMOR_BREAK per 3 secondi.",
-		"SPARKLING_ARIA": "Infliggi [15,30,60,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono sotto lo status BURN, lo status viene curato.",
+		"SPARKLING_ARIA": "Infliggi [15,25,50,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono sotto lo status BURN, lo status viene curato.",
 		"DRAGON_DARTS": "Lancia 3 freccette che infliggono [10,20,40,SP] SPECIAL al bersaglio. Se il bersaglio muore, recupera 40 PP.",
 		"GRASSY_SURGE": "Potenzia l'ATK di tutti i Pokémon GRASS di [5,SP].",
 		"MISTY_SURGE": "Tutti gli alleati FAIRY recuperano [25,SP] HP e [25,SP] PP.",

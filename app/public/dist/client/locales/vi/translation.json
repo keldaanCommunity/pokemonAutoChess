@@ -1278,7 +1278,7 @@
 		"SPIKY_SHIELD": "Trong [3,5,10] giây, mục tiêu tấn công cận chiến Pokémon này nhận WOUND và SPECIAL một lượng tương đương với [60,80,100,SP]% of DEF hiện có",
 		"FUTURE_SIGHT": "Gây [15,30,60,SP] SPECIAL lên 5 đối thủ",
 		"FAKE_TEARS": "Gây [5,10,15,SP] SPECIAL lên toàn bộ team địch và làm ARMOR_BREAK trong 3 giây",
-		"SPARKLING_ARIA": "Gây [15,30,60,SP] SPECIAL lên mục tiêu và kẻ thù gần đó",
+		"SPARKLING_ARIA": "Gây [15,25,50,SP] SPECIAL lên mục tiêu và kẻ thù gần đó",
 		"DRAGON_DARTS": "Ném ra 3 phi tiêu gây [10,20,40,SP] SPECIAL cho từng mục tiêu. Nếu mục tiêu bị hạ gục, hồi lập tức 40 PP",
 		"GRASSY_SURGE": "Tăng [5,SP] chỉ số ATK của toàn bộ Pokémon hệ GRASS",
 		"MISTY_SURGE": "Toàn bộ đồng minh hệ FAIRY hồi phục [25,SP] HP và [25,SP] PP",

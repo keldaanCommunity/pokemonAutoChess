@@ -34,7 +34,8 @@
 - Wormadam Sandy: Def 4 → 6
 - Wormadam Trash: Def 6 → 9, Spe def 6 → 3
 - Nerf Spiky Shield (Chespin, Cascoon): take special damage equal to ~~100%~~ 60/80/100% of the user's Defense
-
+- Change Sparkling Aria (Primarina): damage 15/30/60 → 15/25/50 ; now gives burn immunity to allies for 3 seconds
+ 
 # Changes to Synergies
 
 # Changes to Items

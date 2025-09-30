@@ -1698,7 +1698,7 @@
 		"SPIKY_SHIELD": "For [3,5,10] seconds, units that melee attack the user get WOUND for 2 seconds and take SPECIAL equal to [60,80,100,SP]% of the user's DEF. When casting again before the end of the effect, throw spikes in all directions, dealing [30,SP] SPECIAL to all enemies hit.",
 		"FUTURE_SIGHT": "Deal [15,30,60,SP] SPECIAL to 5 enemy Pokémon after 2 seconds.",
 		"FAKE_TEARS": "Deal [5,10,15,SP] SPECIAL to all enemy Pokémon and inflict them with ARMOR_BREAK for 3 seconds.",
-		"SPARKLING_ARIA": "Deal [15,30,60,SP] SPECIAL to the target and ADJACENT enemy Pokémon. Cure BURN from all ADJACENT allied Pokémon.",
+		"SPARKLING_ARIA": "Deal [15,25,50,SP] SPECIAL to the target and ADJACENT enemy Pokémon. Cure BURN from all ADJACENT allied Pokémon.",
 		"DRAGON_DARTS": "Throw 3 darts that deals [10,20,40,SP] SPECIAL each to the target. If the target is KO'd, restore 40 PP.",
 		"GRASSY_SURGE": "Increase ATK of all GRASS allies by [5,SP] except the user.",
 		"MISTY_SURGE": "Restore [25,SP] HP and [25,SP] PP to all FAIRY allies except the user.",

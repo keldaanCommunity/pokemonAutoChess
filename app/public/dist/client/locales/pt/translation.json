@@ -1335,7 +1335,7 @@
 		"SPIKY_SHIELD": "Por [3,5,10] segundos, alvos que atacam corpo a corpo este Pokémon recebem WOUND e recebem SPECIAL igual a [60,80,100,SP]% da DEF atual",
 		"FUTURE_SIGHT": "Oferece [15,30,60,SP] SPECIAL a 5 inimigos",
 		"FAKE_TEARS": "Distribui [5,10,15,SP] SPECIAL para toda a equipe inimiga e ativa ARMOR_BREAK por 3s",
-		"SPARKLING_ARIA": "Inflige [15,30,60,SP] SPECIAL ao alvo e aos inimigos adjacentes. Se aliados adjacentes forem BURN, a queimadura é curada.",
+		"SPARKLING_ARIA": "Inflige [15,25,50,SP] SPECIAL ao alvo e aos inimigos adjacentes. Se aliados adjacentes forem BURN, a queimadura é curada.",
 		"DRAGON_DARTS": "Lança 3 dardos que causam [10,20,40,SP] SPECIAL cada para o alvo. Se o alvo morrer, recupere 40 PP.",
 		"GRASSY_SURGE": "Aumente o ATK de todos os pokémons GRASS em [5,SP]",
 		"MISTY_SURGE": "Todos os aliados FAIRY recuperam [25,SP] HP e [25,SP] PP.",

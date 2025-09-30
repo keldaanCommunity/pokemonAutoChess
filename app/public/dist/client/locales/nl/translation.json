@@ -988,7 +988,7 @@
 		"SPIKY_SHIELD": "Gedurende [3,5,10] seconden krijgen doelwitten die melee aanvallen deze Pokémon WOUND en SPECIAL gelijk aan [60,80,100,SP]% van de huidige DEF",
 		"FUTURE_SIGHT": "Geeft [15,30,60,SP] SPECIAL aan 5 vijanden",
 		"FAKE_TEARS": "Deelt [5,10,15,SP] SPECIAL uit voor het hele vijandelijke team en activeer ARMOR_BREAK voor 3s",
-		"SPARKLING_ARIA": "Geeft [15,30,60,SP] SPECIAL aan het doelwit en aangrenzende vijanden. Als aangrenzende bondgenoten BURN zijn, is de brandwond genezen.",
+		"SPARKLING_ARIA": "Geeft [15,25,50,SP] SPECIAL aan het doelwit en aangrenzende vijanden. Als aangrenzende bondgenoten BURN zijn, is de brandwond genezen.",
 		"DRAGON_DARTS": "Gooit 3 darts die elk [10,20,40,SP] SPECIAL naar het doel verdelen. Als het doelwit sterft, krijg je 40 PP terug.",
 		"GRASSY_SURGE": "Verhoog ATK van alle GRASS pokemons met [5,SP]",
 		"MISTY_SURGE": "Alle FAIRY bondgenoten herstellen [25,SP] HP en [25,SP] PP.",

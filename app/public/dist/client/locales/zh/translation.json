@@ -1693,7 +1693,7 @@
 		"SPIKY_SHIELD": "在接下来的[3,5,10]秒内，近战攻击使用者的宝可梦会陷入WOUND 2秒，并受到SPECIAL，数值相当于使用者[60,80,100,SP]%的DEF。若效果结束前再次释放该招式，则朝周围发射尖刺，对击中的敌方宝可梦造成[30,SP]点SPECIAL。",
 		"FUTURE_SIGHT": "2秒后，对5只敌方宝可梦造成[15,30,60,SP]点SPECIAL。",
 		"FAKE_TEARS": "对所有敌方宝可梦造成[5,10,15,SP]点SPECIAL，并使他们陷入ARMOR_BREAK 3秒。",
-		"SPARKLING_ARIA": "对目标和ADJACENT敌方宝可梦造成[15,30,60,SP]点SPECIAL。若有处于BURN的ADJACENT我方宝可梦，解除其BURN。",
+		"SPARKLING_ARIA": "对目标和ADJACENT敌方宝可梦造成[15,25,50,SP]点SPECIAL。若有处于BURN的ADJACENT我方宝可梦，解除其BURN。",
 		"DRAGON_DARTS": "向目标发射3枚造成[10,20,40,SP]点SPECIAL的龙箭。若目标因此倒下，恢复40点PP。",
 		"GRASSY_SURGE": "除使用者自身外，提升所有我方GRASS宝可梦[5,SP]点ATK。",
 		"MISTY_SURGE": "除使用者自身外，所有我方FAIRY宝可梦恢复[25,SP]点HP和[25,SP]点PP。",

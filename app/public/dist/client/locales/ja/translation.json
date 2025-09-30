@@ -1278,7 +1278,7 @@
 		"SPIKY_SHIELD": "[3,5,10]秒間、このポケモンを近接攻撃したターゲットは傷を受け、現在のDEFの[100,SP]%に等しいSPECIALを受ける。",
 		"FUTURE_SIGHT": "敵5体に[15,30,60,SP]SPECIALを与える",
 		"FAKE_TEARS": "敵チーム全体に[5,10,15,SP] SPECIALを与え、3秒間ARMOR_BREAKをトリガーします",
-		"SPARKLING_ARIA": "ターゲットと隣接する敵に[15,30,60,SP]SPECIALを与える。隣接する味方が火傷している場合、火傷は回復します。",
+		"SPARKLING_ARIA": "ターゲットと隣接する敵に[15,25,50,SP]SPECIALを与える。隣接する味方が火傷している場合、火傷は回復します。",
 		"DRAGON_DARTS": "ターゲットにそれぞれ[10,20,40,SP]SPECIALを与えるダーツを3本投げます。ターゲットが死亡した場合、40 PP を回復します。",
 		"GRASSY_SURGE": "すべての草ポケモンの攻撃力[5,SP]アップ",
 		"MISTY_SURGE": "FAIRYの味方全員のHPとPPを[25,SP]回復する。",
