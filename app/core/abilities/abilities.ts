@@ -1939,7 +1939,7 @@ export class RockSmashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const armorBreakDuration = [3000, 6000, 9000][pokemon.stars - 1] ?? 9000
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
