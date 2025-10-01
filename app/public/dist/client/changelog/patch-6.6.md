@@ -70,5 +70,6 @@
 - Fix Meltan magnet pull not pulling steel pokemon when steel pool is empty
 - Fix Grav Apple dealing special damage instead of physical damage
 - Fix Syrup Bomb AP scaling being applied twice
+- Fix Entangling thread targeting
 
 # Misc

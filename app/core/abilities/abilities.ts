@@ -3944,25 +3944,11 @@ export class EntanglingThreadStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 10
-        break
-      case 2:
-        damage = 20
-        break
-      case 3:
-        damage = 40
-        break
-      default:
-        break
-    }
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
 
     const cells = board.getAdjacentCells(
-      pokemon.positionX,
-      pokemon.positionY,
+      target.positionX,
+      target.positionY,
       true
     )
     cells.forEach((cell) => {
