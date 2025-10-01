@@ -43,6 +43,7 @@
 - Buff Ogerpon WellSpring mask: upon casting, heal ~~40~~ 50 HP and restore ~~20~~ 25 PP to adjacent allies
 - Fix Egg Bomb damaging the same target instead of AoE ; damage 30/60/120 → 25/50/100
 - Teleport (Abra) and Shadow Punch (Golett) special damage is now properly considered as part of the attack damage, which better interacts with Choice Scarf
+- Comfey is now always held by the strongest ally among the nearest allies with a free item slot
 
 # Changes to Synergies
 

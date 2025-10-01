@@ -1,6 +1,5 @@
-import { entity, MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import { entity, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
-import { OnAbilityCastEffect, PeriodicEffect } from "../../core/effects/effect"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -10,19 +9,13 @@ import {
 } from "../../core/evolution-rules"
 import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
-import { DelayedCommand } from "../../core/simulation-command"
 import GameState from "../../rooms/states/game-state"
 import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
 import { DEFAULT_SPEED, SynergyTriggers } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
-import {
-  AttackType,
-  PokemonActionState,
-  Rarity,
-  Stat
-} from "../../types/enum/Game"
+import { PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
 import {
   AllItems,
   ArtificialItems,
@@ -53,8 +46,7 @@ import {
   getFirstAvailablePositionOnBoard,
   isOnBench
 } from "../../utils/board"
-import { distanceC, distanceE } from "../../utils/distance"
-import { pickRandomIn } from "../../utils/random"
+import { distanceC } from "../../utils/distance"
 import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
@@ -209,15 +201,6 @@ export class Pokemon extends Schema implements IPokemon {
     opponentEffects: Set<EffectEnum>
   }) {
     // called at simulation start before entities are generated
-  }
-
-  afterSimulationStart(params: {
-    player: IPlayer
-    simulation: Simulation
-    team: MapSchema<IPokemonEntity>
-    entity: IPokemonEntity
-  }) {
-    // called at simulation start after entities are generated
   }
 
   onSpawn(params: {
@@ -1838,80 +1821,6 @@ export class Chandelure extends Pokemon {
   skill = Ability.HEX
 }
 
-const conversionEffect = ({
-  simulation,
-  player,
-  entity
-}: {
-  simulation: Simulation
-  player: IPlayer
-  entity: IPokemonEntity
-}) => {
-  const opponent =
-    simulation.bluePlayerId === player.id
-      ? simulation.redPlayer
-      : simulation.bluePlayer
-  if (!opponent) return
-  const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies())
-  if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
-  entity.types.add(synergyCopied)
-  const effect =
-    SynergyEffects[synergyCopied].find((effect) =>
-      opponent.effects.has(effect)
-    ) ?? SynergyEffects[synergyCopied][0]!
-
-  simulation.applyEffect(
-    entity,
-    entity.types,
-    effect,
-    player?.synergies.countActiveSynergies() || 0
-  )
-
-  // when converting to bug, get a clone
-  if (synergyCopied === Synergy.BUG) {
-    const coord = simulation.getClosestFreeCellToPokemonEntity(
-      entity,
-      player.team
-    )
-    if (coord) {
-      const bug = PokemonFactory.createPokemonFromName(
-        entity.name,
-        player as Player
-      )
-      simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
-    }
-  }
-
-  // when converting to dragon, no double synergy but gains the AP/AS/SHIELD based on opponent team
-  if (synergyCopied === Synergy.DRAGON) {
-    const opponentTeam = simulation.getOpponentTeam(player.id)!
-    const dragonLevel = values(opponentTeam).reduce(
-      (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
-      0
-    )
-    if (
-      effect === EffectEnum.DRAGON_SCALES ||
-      effect === EffectEnum.DRAGON_DANCE
-    ) {
-      entity.addShield(dragonLevel * 5, entity, 0, false)
-    }
-    if (effect === EffectEnum.DRAGON_DANCE) {
-      entity.addAbilityPower(dragonLevel, entity, 0, false)
-      entity.addSpeed(dragonLevel, entity, 0, false)
-    }
-  }
-
-  // when converting to ghost, get Dodge chance
-  if (synergyCopied === Synergy.GHOST) {
-    entity.addDodgeChance(0.15, entity, 0, false)
-  }
-
-  // when converting to gourmet, get a Chef hat. Useless but funny
-  if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
-    entity.items.add(Item.CHEF_HAT)
-  }
-}
-
 export class Porygon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
   rarity = Rarity.ULTRA
@@ -1926,7 +1835,6 @@ export class Porygon extends Pokemon {
   range = 2
   skill = Ability.TRI_ATTACK
   passive = Passive.CONVERSION
-  afterSimulationStart = conversionEffect
 }
 
 export class Porygon2 extends Pokemon {
@@ -1943,7 +1851,6 @@ export class Porygon2 extends Pokemon {
   range = 2
   skill = Ability.TRI_ATTACK
   passive = Passive.CONVERSION
-  afterSimulationStart = conversionEffect
 }
 
 export class PorygonZ extends Pokemon {
@@ -1959,7 +1866,6 @@ export class PorygonZ extends Pokemon {
   range = 2
   skill = Ability.TRI_ATTACK
   passive = Passive.CONVERSION
-  afterSimulationStart = conversionEffect
 }
 
 export class Sewaddle extends Pokemon {
@@ -6468,19 +6374,6 @@ export class Manaphy extends Pokemon {
   range = 3
   skill = Ability.HEART_SWAP
   passive = Passive.MANAPHY
-  afterSimulationStart({ entity, simulation, player }) {
-    if (entity.items.has(Item.AQUA_EGG)) {
-      entity.items.delete(Item.AQUA_EGG)
-      const coord = simulation.getClosestFreeCellToPokemonEntity(
-        entity,
-        entity.team
-      )
-      if (coord) {
-        const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
-        simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
-      }
-    }
-  }
 }
 
 export class Rotom extends Pokemon {
@@ -7408,10 +7301,6 @@ export class Wynaut extends Pokemon {
   skill = Ability.COUNTER
   passive = Passive.WOBBUFFET
   additional = true
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
-  }
 }
 
 export class Wobbuffet extends Pokemon {
@@ -7428,10 +7317,6 @@ export class Wobbuffet extends Pokemon {
   skill = Ability.COUNTER
   passive = Passive.WOBBUFFET
   additional = true
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
-  }
 }
 
 export class Munna extends Pokemon {
@@ -11586,10 +11471,6 @@ export class Bonsley extends Pokemon {
   skill = Ability.WOOD_HAMMER
   passive = Passive.SUDOWOODO
   additional = true
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
-  }
 }
 
 export class Sudowoodo extends Pokemon {
@@ -11606,10 +11487,6 @@ export class Sudowoodo extends Pokemon {
   skill = Ability.WOOD_HAMMER
   passive = Passive.SUDOWOODO
   additional = true
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
-  }
 }
 
 export class Combee extends Pokemon {
@@ -12101,18 +11978,6 @@ export class Yanmega extends Pokemon {
   additional = true
 }
 
-class DrySkinEffect extends PeriodicEffect {
-  constructor() {
-    super(
-      (pokemon) => {
-        pokemon.handleHeal(8, pokemon, 0, false)
-      },
-      Passive.DRY_SKIN,
-      1000
-    )
-  }
-}
-
 export class Helioptile extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
@@ -12132,21 +11997,6 @@ export class Helioptile extends Pokemon {
   skill = Ability.PARABOLIC_CHARGE
   passive = Passive.DRY_SKIN
   additional = true
-  onSpawn({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    if (simulation.weather === Weather.RAIN) {
-      entity.effectsSet.add(new DrySkinEffect())
-    } else if (simulation.weather === Weather.SANDSTORM) {
-      entity.addDodgeChance(0.25, entity, 0, false)
-    } else if (simulation.weather === Weather.SUN) {
-      entity.addAbilityPower(50, entity, 0, false)
-    }
-  }
 }
 
 export class Heliolisk extends Pokemon {
@@ -12167,21 +12017,6 @@ export class Heliolisk extends Pokemon {
   skill = Ability.PARABOLIC_CHARGE
   passive = Passive.DRY_SKIN
   additional = true
-  onSpawn({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    if (simulation.weather === Weather.RAIN) {
-      entity.effectsSet.add(new DrySkinEffect())
-    } else if (simulation.weather === Weather.SANDSTORM) {
-      entity.addDodgeChance(0.25, entity, 0, false)
-    } else if (simulation.weather === Weather.SUN) {
-      entity.addAbilityPower(50, entity, 0, false)
-    }
-  }
 }
 
 export class Exeggcute extends Pokemon {
@@ -13465,57 +13300,6 @@ export class Comfey extends Pokemon {
   skill = Ability.FLORAL_HEALING
   passive = Passive.COMFEY
   canHoldItems = false
-  afterSimulationStart({
-    simulation,
-    team,
-    entity
-  }: {
-    simulation: Simulation
-    team: MapSchema<IPokemonEntity>
-    entity: IPokemonEntity
-  }) {
-    const alliesWithFreeSlots = values(team).filter(
-      (p) =>
-        p.name !== Pkm.COMFEY &&
-        p.items.size < 3 &&
-        p.refToBoardPokemon.canHoldItems
-    )
-
-    if (alliesWithFreeSlots.length > 0) {
-      alliesWithFreeSlots.sort(
-        (a, b) =>
-          distanceE(
-            a.positionX,
-            a.positionY,
-            entity.positionX,
-            entity.positionY
-          ) -
-          distanceE(
-            b.positionX,
-            b.positionY,
-            entity.positionX,
-            entity.positionY
-          )
-      )
-      const nearestAllyWithFreeItemSlot = alliesWithFreeSlots[0]
-
-      // delete comfey
-      team.delete(entity.id)
-      simulation.board.setEntityOnCell(
-        entity.positionX,
-        entity.positionY,
-        undefined
-      )
-      if (simulation.blueDpsMeter.has(entity.id)) {
-        simulation.blueDpsMeter.delete(entity.id)
-      }
-      if (simulation.redDpsMeter.has(entity.id)) {
-        simulation.redDpsMeter.delete(entity.id)
-      }
-
-      nearestAllyWithFreeItemSlot.addItem(Item.COMFEY)
-    }
-  }
 }
 
 export class Lillipup extends Pokemon {
@@ -15376,25 +15160,6 @@ export class Stonjourner extends Pokemon {
   range = 1
   skill = Ability.GRAVITY
   passive = Passive.STONJOURNER
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.toIdleState()
-  }
-  afterSimulationStart({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    simulation.board
-      .getAdjacentCells(entity.positionX, entity.positionY)
-      .forEach((cell) => {
-        if (cell.value && cell.value.team === entity.team) {
-          cell.value.addAbilityPower(50, cell.value, 0, false)
-        }
-      })
-  }
 }
 
 export class Cramorant extends Pokemon {
@@ -15928,40 +15693,6 @@ export class Skarmory extends Pokemon {
   range = 1
   skill = Ability.ROAR
   passive = Passive.SKARMORY
-
-  afterSimulationStart(params: {
-    player: IPlayer
-    simulation: Simulation
-    entity: IPokemonEntity
-  }) {
-    params.entity.commands.push(
-      new DelayedCommand(() => {
-        const board = params.simulation.board
-        const simulation = params.simulation
-        const entity = params.entity
-
-        const nbSpikes = 12
-        const positions = new Set<string>()
-        for (let i = 0; i < nbSpikes; i++) {
-          let x, y
-          do {
-            x = Math.floor(Math.random() * board.columns)
-            y =
-              Math.floor((Math.random() * board.rows) / 2) +
-              (entity.positionY < 3 ? 3 : 0)
-          } while (positions.has(`${x},${y}`))
-          positions.add(`${x},${y}`)
-
-          board.addBoardEffect(x, y, EffectEnum.SPIKES, simulation)
-          entity.broadcastAbility({
-            skill: Ability.SPIKES,
-            targetX: x,
-            targetY: y
-          })
-        }
-      }, 300)
-    )
-  }
 }
 
 function ogerponOnAcquired(
@@ -16761,11 +16492,6 @@ export class PillarWood extends Pokemon {
   canHoldItems = false
   canBeBenched = false
   canBeSold = false
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.status.triggerRuneProtect(30000)
-    entity.toIdleState()
-  }
 }
 
 export class PillarIron extends Pokemon {
@@ -16784,11 +16510,6 @@ export class PillarIron extends Pokemon {
   canHoldItems = false
   canBeBenched = false
   canBeSold = false
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.status.triggerRuneProtect(30000)
-    entity.toIdleState()
-  }
 }
 
 export class PillarConcrete extends Pokemon {
@@ -16807,11 +16528,6 @@ export class PillarConcrete extends Pokemon {
   canHoldItems = false
   canBeBenched = false
   canBeSold = false
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.tree = true
-    entity.status.triggerRuneProtect(30000)
-    entity.toIdleState()
-  }
 }
 
 export class Elgyem extends Pokemon {
@@ -17856,7 +17572,11 @@ export class ScreamTail extends Pokemon {
 }
 
 export class IndeedeeFemale extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC, Synergy.HUMAN])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.HUMAN
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
@@ -17870,7 +17590,11 @@ export class IndeedeeFemale extends Pokemon {
 }
 
 export class IndeedeeMale extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC, Synergy.HUMAN])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.PSYCHIC,
+    Synergy.HUMAN
+  ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 160
@@ -18029,24 +17753,6 @@ export class Minccino extends Pokemon {
   range = 1
   skill = Ability.ENCORE
   additional = true
-  abilitiesCasted: Ability[] = []
-  afterSimulationStart(params: {
-    player: IPlayer
-    simulation: Simulation
-    team: MapSchema<IPokemonEntity>
-    entity: IPokemonEntity
-  }) {
-    this.abilitiesCasted = []
-    params.team.forEach((pokemon) => {
-      if (pokemon.refToBoardPokemon.id !== this.id) {
-        pokemon.effectsSet.add(
-          new OnAbilityCastEffect(() => {
-            this.abilitiesCasted.push(pokemon.skill)
-          })
-        )
-      }
-    })
-  }
 }
 
 export class Cinccino extends Pokemon {
@@ -18062,24 +17768,6 @@ export class Cinccino extends Pokemon {
   range = 1
   skill = Ability.ENCORE
   additional = true
-  abilitiesCasted: Ability[] = []
-  afterSimulationStart(params: {
-    player: IPlayer
-    simulation: Simulation
-    team: MapSchema<IPokemonEntity>
-    entity: IPokemonEntity
-  }) {
-    this.abilitiesCasted = []
-    params.team.forEach((pokemon) => {
-      if (pokemon.refToBoardPokemon.id !== this.id) {
-        pokemon.effectsSet.add(
-          new OnAbilityCastEffect(() => {
-            this.abilitiesCasted.push(pokemon.skill)
-          })
-        )
-      }
-    })
-  }
 }
 
 export class Espurr extends Pokemon {
