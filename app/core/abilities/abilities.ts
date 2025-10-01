@@ -1342,14 +1342,24 @@ export class ShadowBoneStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
 
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team && x == target.positionX) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (chance(0.5, pokemon)) {
-          tg.addDefense(-6, pokemon, 1, crit)
+    const hit = () =>
+      effectInLine(board, pokemon, target, (cell) => {
+        if (cell.value != null && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+
+          if (chance(0.5, pokemon)) {
+            cell.value.addDefense(-6, pokemon, 1, crit)
+          }
         }
-      }
-    })
+      })
+
+    hit()
   }
 }
 
