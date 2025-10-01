@@ -3323,7 +3323,7 @@ export class GravAppleStrategy extends AbilityStrategy {
     target.handleSpecialDamage(
       target.def === 0 ? damage * 2 : damage,
       board,
-      AttackType.SPECIAL,
+      AttackType.PHYSICAL,
       pokemon,
       crit
     )
