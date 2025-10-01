@@ -374,8 +374,11 @@ export interface IExperienceManager {
 
 export interface ISimulation {
   room: GameRoom
+  board: Board
   id: string
   weather: Weather
+  bluePlayer: IPlayer | undefined
+  redPlayer: IPlayer | undefined
   blueEffects: Set<EffectEnum>
   redEffects: Set<EffectEnum>
   blueTeam: MapSchema<IPokemonEntity>

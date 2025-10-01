@@ -52,10 +52,23 @@ import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
 import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
-import { OnDishConsumedEffect, OnItemGainedEffect, OnSpawnEffect } from "./effects/effect"
+import {
+  OnDishConsumedEffect,
+  OnItemGainedEffect,
+  OnSimulationStartEffect,
+  OnSpawnEffect
+} from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
-import { electricTripleAttackEffect, FireHitEffect, GroundHoleEffect, humanHealEffect, MonsterKillEffect, OnFieldDeathEffect, SoundCryEffect } from "./effects/synergies"
+import {
+  electricTripleAttackEffect,
+  FireHitEffect,
+  GroundHoleEffect,
+  humanHealEffect,
+  MonsterKillEffect,
+  OnFieldDeathEffect,
+  SoundCryEffect
+} from "./effects/synergies"
 import { getWonderboxItems, ItemStats } from "./items"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
@@ -82,6 +95,8 @@ export default class Simulation extends Schema implements ISimulation {
   stageLevel = 0
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
+  blueAbilitiesCasted: Ability[] = []
+  redAbilitiesCasted: Ability[] = []
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
@@ -178,7 +193,7 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.applyPostEffects(blueBoard, redBoard)
 
-    // afterSimulationStart hooks
+    // post simulation start hooks
     for (const [player, team] of [
       [this.bluePlayer, this.blueTeam] as const,
       [this.redPlayer, this.redTeam] as const
@@ -194,11 +209,8 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.meal = "" // consume all meals
           }
           if (entity) {
-            pokemon.afterSimulationStart({
-              simulation: this,
-              player,
-              team,
-              entity
+            entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
+              effect.apply({ simulation: this, player, team, entity })
             })
           }
         })
@@ -384,11 +396,7 @@ export default class Simulation extends Schema implements ISimulation {
     pokemon: IPokemonEntity,
     team: Team = pokemon.team
   ): { x: number; y: number } | null {
-    return this.getClosestFreeCellTo(
-      pokemon.positionX,
-      pokemon.positionY,
-      team
-    )
+    return this.getClosestFreeCellTo(pokemon.positionX, pokemon.positionY, team)
   }
 
   applyItemsEffects(pokemon: PokemonEntity) {
@@ -456,14 +464,20 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyDishEffects(dish: Item, pokemon: Pokemon, entity: PokemonEntity | undefined, player: Player) {
+  applyDishEffects(
+    dish: Item,
+    pokemon: Pokemon,
+    entity: PokemonEntity | undefined,
+    player: Player
+  ) {
     const dishEffects = DishEffects[dish]
     if (!dishEffects) return
     dishEffects.forEach((effect) => {
       entity?.effectsSet.add(effect)
-      if (effect instanceof OnDishConsumedEffect) effect.apply({ pokemon, dish, entity, isGhostOpponent: player.ghost })
-      if (effect instanceof OnSpawnEffect && entity) effect.apply(entity, player, true)
-
+      if (effect instanceof OnDishConsumedEffect)
+        effect.apply({ pokemon, dish, entity, isGhostOpponent: player.ghost })
+      if (effect instanceof OnSpawnEffect && entity)
+        effect.apply(entity, player, true)
     })
 
     if (pokemon.passive === Passive.GLUTTON) {
@@ -641,10 +655,7 @@ export default class Simulation extends Schema implements ISimulation {
           }
 
           spawns.forEach((spawn) => {
-            const coord = this.getClosestFreeCellToPokemon(
-              pokemon,
-              teamIndex
-            )
+            const coord = this.getClosestFreeCellToPokemon(pokemon, teamIndex)
             if (!coord) return
             const mon = PokemonFactory.createPokemonFromName(spawn.name)
             this.addPokemon(mon, coord.x, coord.y, teamIndex, true)
@@ -1416,11 +1427,9 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.MURKY: {
         const player = pokemon.player
-        const nbOddStones = player
-          ? count(player.items, Item.ODD_KEYSTONE)
-          : 0
-
-        pokemon.addLuck(10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30), pokemon, 0, false)
+        const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
+        const luckDebuff = 10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
+        pokemon.addLuck(luckDebuff, pokemon, 0, false)
         break
       }
 

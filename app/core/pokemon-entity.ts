@@ -1707,7 +1707,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 }
 
-export function getStrongestUnit<T extends Pokemon | PokemonEntity>(
+export function getStrongestUnit<T extends Pokemon | IPokemonEntity>(
   pokemons: T[]
 ): T {
   /*

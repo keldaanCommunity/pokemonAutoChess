@@ -2813,7 +2813,7 @@
 		"DRIZZLE": "The Pokémon count as 3 for RAIN",
 		"WIND_POWER": "The Pokémon count as 3 for STORM",
 		"GLUTTON": "Permanently gains max HP when eating: 10 HP for each berry, 20 HP for each dish, 30 HP when cooking as a Chef",
-		"COMFEY": "Comfey cannot hold items. At the start of the fight, the nearest ally with a free item slot wears Comfey and gains all its base stats. Comfey casts it's ability at the same time as it's holder. When its holder is KO, Comfey fights on its own.",
+		"COMFEY": "Comfey cannot hold items. At the start of the fight, the STRONGEST nearest ally with a free item slot wears Comfey and gains all its base stats. Comfey casts its ability at the same time as its holder. When its holder is KO, Comfey fights on its own.",
 		"HISUIAN_TYPHLOSION": "The Pokémon inflicts 20% extra damage on a BURN or SILENCE target",
 		"PICKUP": "The Pokémon will start with a random item if it's not holding anything",
 		"CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
