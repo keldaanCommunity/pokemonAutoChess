@@ -388,7 +388,7 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
           options.x + (options?.positionOffset?.[0] ?? 0),
           options.y + (options?.positionOffset?.[1] ?? 0)
         ],
-        {... options, rotation}
+        { ...options, rotation }
       )
     }, delay)
   }
@@ -429,17 +429,17 @@ const onSprite =
       }
     ) => void
   ) =>
-    (args) => {
-      const casterSprite = args.pokemonsOnBoard.find(
-        (pkmUI) =>
-          pkmUI.positionX === args.positionX && pkmUI.positionY === args.positionY
-      )
-      const targetSprite = args.pokemonsOnBoard.find(
-        (pkmUI) =>
-          pkmUI.positionX === args.targetX && pkmUI.positionY === args.targetY
-      )
-      handler({ casterSprite, targetSprite, ...args })
-    }
+  (args) => {
+    const casterSprite = args.pokemonsOnBoard.find(
+      (pkmUI) =>
+        pkmUI.positionX === args.positionX && pkmUI.positionY === args.positionY
+    )
+    const targetSprite = args.pokemonsOnBoard.find(
+      (pkmUI) =>
+        pkmUI.positionX === args.targetX && pkmUI.positionY === args.targetY
+    )
+    handler({ casterSprite, targetSprite, ...args })
+  }
 
 type TweenAnimationMakerOptions = {
   duration?: number
@@ -455,89 +455,90 @@ type TweenAnimationMakerOptions = {
 
 const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (options = {}) =>
-    (args) => {
-      const { scene, flip } = args
-      let { rotation } = options
-      const [startRow, startCol, startFlip] =
-        options.startCoords === "target"
-          ? [args.targetX, args.targetY, args.flip]
-          : (options.startCoords ?? [args.positionX, args.positionY, args.flip])
-      const delay = options.delay ?? args.delay ?? 0
-      setTimeout(() => {
-        const startPosition = transformEntityCoordinates(
-          startRow,
-          startCol,
-          startFlip ?? flip
+  (args) => {
+    const { scene, flip } = args
+    let { rotation } = options
+    const [startRow, startCol, startFlip] =
+      options.startCoords === "target"
+        ? [args.targetX, args.targetY, args.flip]
+        : (options.startCoords ?? [args.positionX, args.positionY, args.flip])
+    const delay = options.delay ?? args.delay ?? 0
+    setTimeout(() => {
+      const startPosition = transformEntityCoordinates(
+        startRow,
+        startCol,
+        startFlip ?? flip
+      )
+      startPosition[0] += options.startPositionOffset?.[0] ?? 0
+      startPosition[1] += options.startPositionOffset?.[1] ?? 0
+
+      if (options?.oriented) {
+        const coordinates = transformEntityCoordinates(
+          args.positionX,
+          args.positionY,
+          args.flip
         )
-        startPosition[0] += options.startPositionOffset?.[0] ?? 0
-        startPosition[1] += options.startPositionOffset?.[1] ?? 0
-
-        if (options?.oriented) {
-          const coordinates = transformEntityCoordinates(
-            args.positionX,
-            args.positionY,
-            args.flip
-          )
-          const coordinatesTarget = transformEntityCoordinates(
-            args.targetX,
-            args.targetY,
-            args.flip
-          )
-          rotation = angleBetween(coordinates, coordinatesTarget) + (rotation ?? 0)
-        }
-
-        const sprite = addAbilitySprite(
-          scene,
-          options.ability ?? args.ability,
-          args.ap,
-          startPosition,
-          {
-            destroyOnComplete: false,
-            ...options,
-            rotation
-          }
+        const coordinatesTarget = transformEntityCoordinates(
+          args.targetX,
+          args.targetY,
+          args.flip
         )
-        if (!sprite) return null
+        rotation =
+          angleBetween(coordinates, coordinatesTarget) + (rotation ?? 0)
+      }
 
-        const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
-          targets: sprite,
-          duration: options.duration || 500,
-          ease: options.ease || "linear",
-          onComplete: () => {
-            if (options.destroyOnTweenComplete !== false) sprite?.destroy()
-            if (options.hitAnim) options.hitAnim(args)
-          },
-          ...(options.tweenProps ?? {})
+      const sprite = addAbilitySprite(
+        scene,
+        options.ability ?? args.ability,
+        args.ap,
+        startPosition,
+        {
+          destroyOnComplete: false,
+          ...options,
+          rotation
         }
+      )
+      if (!sprite) return null
 
-        scene.tweens.add(tweenConfig)
-      }, delay)
-    }
+      const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
+        targets: sprite,
+        duration: options.duration || 500,
+        ease: options.ease || "linear",
+        onComplete: () => {
+          if (options.destroyOnTweenComplete !== false) sprite?.destroy()
+          if (options.hitAnim) options.hitAnim(args)
+        },
+        ...(options.tweenProps ?? {})
+      }
+
+      scene.tweens.add(tweenConfig)
+    }, delay)
+  }
 
 const projectile: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (options = {}) =>
-    (args) => {
-      const [endRow, endCol, endFlip] =
-        options.endCoords === "caster"
-          ? [args.positionX, args.positionY, args.flip]
-          : (options.endCoords ?? [args.targetX, args.targetY, args.flip])
-      const endPosition = transformEntityCoordinates(
-        endRow,
-        endCol,
-        endFlip ?? args.flip
-      )
-      endPosition[0] += options.endPositionOffset?.[0] ?? 0
-      endPosition[1] += options.endPositionOffset?.[1] ?? 0
-      return tweenAnimation({
-        startCoords: [args.positionX, args.positionY, args.flip],
-        ...options,
-        tweenProps: {
-          x: endPosition[0],
-          y: endPosition[1],
-          ...(options.tweenProps ?? {})
-        }
-      })(args)
-    }
+  (args) => {
+    const [endRow, endCol, endFlip] =
+      options.endCoords === "caster"
+        ? [args.positionX, args.positionY, args.flip]
+        : (options.endCoords ?? [args.targetX, args.targetY, args.flip])
+    const endPosition = transformEntityCoordinates(
+      endRow,
+      endCol,
+      endFlip ?? args.flip
+    )
+    endPosition[0] += options.endPositionOffset?.[0] ?? 0
+    endPosition[1] += options.endPositionOffset?.[1] ?? 0
+    return tweenAnimation({
+      startCoords: [args.positionX, args.positionY, args.flip],
+      ...options,
+      tweenProps: {
+        x: endPosition[0],
+        y: endPosition[1],
+        ...(options.tweenProps ?? {})
+      }
+    })(args)
+  }
 
 const skyfall: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (options) => (args) => {
@@ -552,8 +553,8 @@ const shakeCamera: AbilityAnimationMaker<{
   intensity?: number
 }> =
   (options) =>
-    ({ scene }) =>
-      scene.shakeCamera(options)
+  ({ scene }) =>
+    scene.shakeCamera(options)
 
 const poppingIcon: AbilityAnimationMaker<
   TweenAnimationMakerOptions & { maxScale: number }
@@ -577,9 +578,7 @@ const orientedProjectile: AbilityAnimationMaker<
   let { startCoords, endCoords, oriented, rotation } = options
   if (endCoords !== undefined) {
     ;[ox, oy] =
-      endCoords === "caster"
-        ? [args.positionX, args.positionY]
-        : endCoords
+      endCoords === "caster" ? [args.positionX, args.positionY] : endCoords
   } else {
     ;[ox, oy] =
       startCoords === "target"
@@ -671,6 +670,11 @@ export const AbilitiesAnimations: {
   [Ability.THIEF]: onTargetScale2,
   [Ability.STUN_SPORE]: onTargetScale2,
   [Ability.CRABHAMMER]: onTargetScale2,
+  [Ability.JAW_LOCK]: onTarget({
+    ability: Ability.ICE_FANG,
+    scale: 2,
+    tint: 0x798f8d
+  }),
   [Ability.RAZOR_WIND]: onTargetScale2,
   [Ability.SEISMIC_TOSS]: onTargetScale2,
   [Ability.ASSURANCE]: onTargetScale2,
@@ -697,6 +701,7 @@ export const AbilitiesAnimations: {
   [Ability.POPULATION_BOMB]: onTargetScale2,
   [Ability.SCREECH]: onTargetScale2,
   [Ability.SAND_TOMB]: onTargetScale2,
+  [Ability.FIRST_IMPRESSION]: onTarget({ ability: "PUFF_BROWN", scale: 3 }),
   [Ability.PLAY_ROUGH]: onTargetScale2,
   [Ability.ANCHOR_SHOT]: onTargetScale1,
   [Ability.LEAF_BLADE]: onTargetScale2,
@@ -716,6 +721,8 @@ export const AbilitiesAnimations: {
   [Ability.ICICLE_CRASH]: onTargetScale2,
   [Ability.DRAIN_PUNCH]: onTargetScale2,
   [Ability.LICK]: onTargetScale2,
+  [Ability.OCTOLOCK]: onTargetScale2,
+  [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
   [Ability.SPIRIT_BREAK]: onTargetScale2,
   [Ability.PSYSHOCK]: onTargetScale2,
   [Ability.SHEER_COLD]: onTargetScale2,
@@ -763,6 +770,11 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.AQUA_JET]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.STOCKPILE]: onCaster({
+    oriented: true,
+    rotation: -Math.PI / 2,
+    ability: Ability.AQUA_JET
+  }),
   [Ability.EXTREME_SPEED]: [onCaster({}), onTarget({})],
   ["POWER_WHIP/hit"]: onCasterScale3,
   [Ability.SALT_CURE]: onCaster({
@@ -1246,7 +1258,14 @@ export const AbilitiesAnimations: {
     onCaster({ ability: "DIG", oriented: true, origin: [0, 1], scale: [3, -3] })
   ],
   [Ability.HYPER_DRILL]: [
-    projectile({ startCoords: "target", startPositionOffset: [0, -40], duration: 1000, scale: 2, rotation: Math.PI / 2, depth: DEPTH.ABILITY_BELOW_POKEMON }),
+    projectile({
+      startCoords: "target",
+      startPositionOffset: [0, -40],
+      duration: 1000,
+      scale: 2,
+      rotation: Math.PI / 2,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
     onTarget({
       ability: "DIG",
       origin: [0, 1],
@@ -1260,8 +1279,12 @@ export const AbilitiesAnimations: {
       scale: [1, 2],
       depth: DEPTH.ABILITY_BELOW_POKEMON
     }),
-    args => {
-      const [x, y] = transformEntityCoordinates(args.targetX, args.targetY, args.flip)
+    (args) => {
+      const [x, y] = transformEntityCoordinates(
+        args.targetX,
+        args.targetY,
+        args.flip
+      )
       const hole = args.delay ?? 0
       if (hole > 0) {
         const groundHole = args.scene.add
@@ -1300,7 +1323,12 @@ export const AbilitiesAnimations: {
   [Ability.TAUNT]: onCaster({ positionOffset: [0, -30] }),
   ["TAUNT_HIT"]: onTarget({ positionOffset: [0, -30] }),
   ["SMOKE_BALL"]: onCasterScale3,
-  [Ability.EXPANDING_FORCE]: onCaster({ ability: Ability.PSYCHIC, tint: 0xff90d0, scale: 3, depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.EXPANDING_FORCE]: onCaster({
+    ability: Ability.PSYCHIC,
+    tint: 0xff90d0,
+    scale: 3,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
   [Ability.TAILWIND]: onCaster({
     oriented: true,
     rotation: -Math.PI / 2,
@@ -1319,8 +1347,17 @@ export const AbilitiesAnimations: {
     tweenProps: { yoyo: true }
   }),
   [Ability.SHADOW_BALL]: projectile({ duration: 1000 }),
+  [Ability.GRUDGE]: projectile({
+    duration: 750,
+    scale: 2,
+    ability: Ability.DARK_HARVEST
+  }),
   [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
-  [Ability.SOLAR_BEAM]: projectile({ oriented: true, rotation: Math.PI / 2, origin: [0.5, 1] }),
+  [Ability.SOLAR_BEAM]: projectile({
+    oriented: true,
+    rotation: Math.PI / 2,
+    origin: [0.5, 1]
+  }),
   [Ability.ORIGIN_PULSE]: (args) =>
     projectile({
       startCoords: [0, args.targetY],
@@ -1334,6 +1371,11 @@ export const AbilitiesAnimations: {
       animOptions: { repeat: -1, duration: 300 }
     })(args),
   [Ability.SCALE_SHOT]: projectile({ duration: 400 }),
+  [Ability.LAST_RESPECTS]: projectile({
+    duration: 800,
+    ability: "SMOKE_PURPLE",
+    scale: 3
+  }),
   ["SOLAR_BLADE_CHARGE"]: projectile({
     ability: Ability.RECOVER,
     animOptions: { repeat: -1, duration: 500 },
@@ -1687,6 +1729,9 @@ export const AbilitiesAnimations: {
     duration: 600,
     oriented: true,
     rotation: -(3 / 4) * Math.PI
+  }),
+  [Ability.BURNING_JEALOUSY]: projectile({
+    duration: 400
   }),
   [Ability.STRENGTH]: projectile({
     duration: 450,
@@ -2100,7 +2145,7 @@ export const AbilitiesAnimations: {
     // orientation field is used to pass the type of the pillar
     const pillarType =
       [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
-      args.orientation
+        args.orientation
       ] ?? Pkm.PILLAR_WOOD
     const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
     const frame = `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
@@ -2256,7 +2301,6 @@ export function displayAbility(args: AbilityAnimationArgs) {
   }
 }
 
-
 export function clearAbilityAnimations(scene: GameScene | DebugScene) {
-  scene.abilitiesVfxGroup?.clear(true, true);
+  scene.abilitiesVfxGroup?.clear(true, true)
 }

@@ -126,6 +126,7 @@ export enum Item {
   ELECTRIC_QUARTZ = "ELECTRIC_QUARTZ",
   BLOOD_STONE = "BLOOD_STONE",
   SMELLY_CLAY = "SMELLY_CLAY",
+  ODD_KEYSTONE = "ODD_KEYSTONE",
   FIRE_GEM = "FIRE_GEM",
   NORMAL_GEM = "NORMAL_GEM",
   ROCK_GEM = "ROCK_GEM",
@@ -411,7 +412,8 @@ export const WeatherRocks: Item[] = [
   Item.ELECTRIC_QUARTZ,
   Item.MIST_STONE,
   Item.BLOOD_STONE,
-  Item.SMELLY_CLAY
+  Item.SMELLY_CLAY,
+  Item.ODD_KEYSTONE
 ]
 
 export const WeatherRocksByWeather: Map<
@@ -426,8 +428,9 @@ export const WeatherRocksByWeather: Map<
   [Weather.MISTY, Item.MIST_STONE],
   [Weather.WINDY, Item.FLOAT_STONE],
   [Weather.SMOG, Item.SMELLY_CLAY],
+  [Weather.MURKY, Item.ODD_KEYSTONE],
   [Weather.NIGHT, Item.BLACK_AUGURITE],
-  [Weather.BLOODMOON, Item.BLOOD_STONE],
+  [Weather.BLOODMOON, Item.BLOOD_STONE],  
   [Weather.NEUTRAL, null]
 ])
 

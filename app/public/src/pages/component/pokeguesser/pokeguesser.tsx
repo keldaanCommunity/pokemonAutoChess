@@ -342,9 +342,7 @@ export function PokemonAttempt({
             {(difficulty === "easy" || index >= 8) && (
                 <span
                     className={cc("pool", {
-                        valid:
-                            pokemon.regional === solution.regional &&
-                            pokemon.additional === solution.additional
+                        valid: pokemon.regional ? pokemon.regional === solution.regional : pokemon.additional === solution.additional
                     })}
                 >
                     {t(

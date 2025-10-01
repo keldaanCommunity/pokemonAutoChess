@@ -76,8 +76,8 @@ export function csvExport() {
       const pokemon = PokemonFactory.createPokemonFromName(pkm)
       const pokemonData = getPokemonData(pkm)
       if (pokemon.skill != Ability.DEFAULT) {
-        const family = Object.keys(PkmFamily).filter(
-          (p) => PkmFamily[p] === PkmFamily[pkm]
+        const family = (Object.keys(PkmFamily) as Pkm[]).filter(
+          p => PkmFamily[p] === PkmFamily[pkm]
         )
         const types: Synergy[] = pokemonData.types
         const familyTypes = [
@@ -94,9 +94,7 @@ export function csvExport() {
           name: pkm,
           category: pokemon.rarity,
           tier: pokemon.stars,
-          stages:
-            pokemon.stages ??
-            Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
+          stages: Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
           additional: pokemonData.additional,
           regional: pokemonData.regional,
           variant: PkmColorVariants.includes(pkm),

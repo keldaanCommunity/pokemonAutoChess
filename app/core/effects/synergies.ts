@@ -1,9 +1,9 @@
 import { SynergyEffects } from "../../models/effects"
 import { Title } from "../../types"
-import { BOARD_WIDTH } from "../../types/Config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
@@ -39,15 +39,20 @@ export class GroundHoleEffect extends OnSpawnEffect {
     constructor(effect: EffectEnum) {
         const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
         super((pokemon, player) => {
-            const index = pokemon.positionY * BOARD_WIDTH + pokemon.positionX
+            const y = player?.team === Team.RED_TEAM ? BOARD_HEIGHT - 1 - pokemon.positionY : pokemon.positionY
+            const index = y * BOARD_WIDTH + pokemon.positionX
             const holeLevel = player?.groundHoles[index] ?? 0
             let defBuff = holeLevel * [0, 1, 2, 3, 3][synergyLevel]
             let atkBuff = holeLevel === 5 ? [0, 3, 5, 8, 8][synergyLevel] : 0
             if (synergyLevel === 4) {
-                const nbFullyDugHoles = player?.groundHoles.slice(0, 24).filter(hole => hole === 5).length ?? 0
-                defBuff += nbFullyDugHoles
-                if (nbFullyDugHoles === 3 * 8) {
-                    atkBuff += 12
+                const nbFullyDugRows =
+                    [0, 8, 16].reduce((count, startIdx) => {
+                        const row = player?.groundHoles.slice(startIdx, startIdx + 8) ?? [];
+                        return count + (row.every(hole => hole === 5) ? 1 : 0);
+                    }, 0);
+                defBuff += nbFullyDugRows * 5
+                if (nbFullyDugRows === 3) {
+                    atkBuff += 5
                     player?.titles.add(Title.MOLE)
                 }
             }
@@ -155,7 +160,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 
         board.cells.forEach((ally) => {
             if (ally?.team === pokemon.team) {
-                ally.status.sleep = false
+                ally.status.sleepCooldown = 0
                 ally.addAttack(attackBoost * scale, pokemon, 0, false)
                 ally.addSpeed(speedBoost * scale, pokemon, 0, false)
                 ally.addPP(manaBoost * scale, pokemon, 0, false)

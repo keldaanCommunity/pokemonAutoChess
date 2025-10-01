@@ -57,7 +57,7 @@
 - Rework Manaphy: now Legendary, new ability: Heart Swap ; now spawns Phione if holding an Aqua Egg
 - Nerf Galarian Zigzagoon PP 50 → 80 ; Galarian Linoone: PP 50 → 80; HP 180 → 170; Def 14 → 12 ; Obstagoon HP 280 → 250, Def 16 → 14
 - Buff Duraludon line: PP 110 → 100
-- Sunkern line is Rare Grass/Light/Flora ; Solar beam change: Deal 25/50/100 special damage to all enemy Pokémon in a line behind the target, and BURN them for 3 seconds. If user is in the spotlight or if the weather is SUN, deals double damage and restore 40 PP.
+- Sunkern line is Rare Grass/Light/Flora ; Solar beam change: Deal 25/50/100 special damage to all enemy Pokémon in a line behind the target, and BURN them for 3 seconds. If user is in the spotlight or if the weather is SUN, deals double damage and restore 20 PP.
 
 # Changes to Synergies
 

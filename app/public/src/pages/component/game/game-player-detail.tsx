@@ -13,6 +13,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
     () =>
       [...props.player.synergies.entries()]
         .filter(([syn, val]) => val >= SynergyTriggers[syn]?.[0])
+        .sort((a, b) => b[1] - a[1])
         .map(([syn]) => syn),
     [props.player.synergies]
   )

@@ -706,6 +706,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   skydiveTo(x: number, y: number, board: Board) {
+    this.toIdleState()
     board.swapCells(this.positionX, this.positionY, x, y)
     this.status.skydiving = true
     this.toMovingState()
@@ -733,36 +734,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     hasAttackKilled: boolean
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
-
-    if (this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
-      const crit =
-        this.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(this.critChance / 100, this)
-      const { death } = target.handleSpecialDamage(
-        [15, 30, 60][this.stars - 1],
-        board,
-        AttackType.SPECIAL,
-        this,
-        crit
-      )
-      this.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
-      if (death) hasAttackKilled = true
-    }
-
-    if (this.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
-      const crit =
-        this.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(this.critChance / 100, this)
-      const { death } = target.handleSpecialDamage(
-        [30, 60, 120][this.stars - 1],
-        board,
-        AttackType.SPECIAL,
-        this,
-        crit
-      )
-      this.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
-      if (death) hasAttackKilled = true
-    }
 
     if (target.effects.has(EffectEnum.OBSTRUCT)) {
       this.addDefense(-2, target, 0, false)
@@ -932,8 +903,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
         chance(target.critChance / 100, this)
+      const defFactor = [0.6, 0.8, 1][target.stars - 1] ?? 1
       const damage = Math.round(
-        target.def * (1 + target.ap / 100) * (crit ? target.critPower : 1)
+        target.def * defFactor * (1 + target.ap / 100) * (crit ? target.critPower : 1)
       )
       this.status.triggerWound(2000, this, target)
       this.handleDamage({
@@ -969,7 +941,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   // called whenever the unit deals damage, by basic attack or ability
-  onDamageDealt({ target, damage, attackType, isRetaliation }: { target: PokemonEntity; damage: number; attackType: AttackType; isRetaliation: boolean }) {
+  onDamageDealt({
+    target,
+    damage,
+    attackType,
+    isRetaliation
+  }: {
+    target: PokemonEntity
+    damage: number
+    attackType: AttackType
+    isRetaliation: boolean
+  }) {
     this.getEffects(OnDamageDealtEffect).forEach((effect) => {
       effect.apply({
         pokemon: this,
@@ -1081,7 +1063,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Fighting knockback
     if (
       this.count.fightingBlockCount > 0 &&
-      this.count.fightingBlockCount % (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) === 0 &&
+      this.count.fightingBlockCount %
+      (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) ===
+      0 &&
       !isRetaliation &&
       distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
       1
@@ -1145,7 +1129,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
   }) {
     // proc fairy splash damage for both the attacker and the target
-    if (target.fairySplashCooldown === 0 && target.hasSynergyEffect(Synergy.FAIRY)) {
+    if (
+      target.fairySplashCooldown === 0 &&
+      target.hasSynergyEffect(Synergy.FAIRY)
+    ) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
         shockDamageFactor += 0.2
@@ -1221,6 +1208,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       target.player &&
+      !target.isGhostOpponent &&
       (target.effects.has(EffectEnum.COTTONWEED) ||
         target.effects.has(EffectEnum.FLYCATCHER) ||
         target.effects.has(EffectEnum.FRAGRANT) ||
@@ -1239,8 +1227,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
 
       if (nextPot) {
-        const spawnSpot =
-          board.getFarthestTargetCoordinateAvailablePlace(target)
+        const spawnSpot = board.getFarthestTargetCoordinateAvailablePlace(
+          target,
+          true
+        )
         if (spawnSpot) {
           const flowerToSpawn = target.player.flowerPots.find((p) =>
             FlowerMonByPot[nextPot].includes(p.name)
@@ -1278,7 +1268,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       this.player &&
-      this.simulation.room.state.specialGameRule === SpecialGameRule.BLOOD_MONEY &&
+      this.simulation.room.state.specialGameRule ===
+      SpecialGameRule.BLOOD_MONEY &&
       !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)
@@ -1296,12 +1287,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  // called after KO (does not proc if resurection)
   onDeath({ board }: { board: Board }) {
     if (!this.isGhostOpponent) {
       this.refToBoardPokemon.deathCount++
     }
-    this.getEffects(OnDeathEffect).forEach(effect => effect.apply({ pokemon: this, board }))
+    this.getEffects(OnDeathEffect).forEach((effect) =>
+      effect.apply({ pokemon: this, board })
+    )
 
     if (this.status.curseVulnerability) {
       this.simulation.applyCurse(EffectEnum.CURSE_OF_VULNERABILITY, this.team)
@@ -1315,6 +1307,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.status.curseFate) {
       this.simulation.applyCurse(EffectEnum.CURSE_OF_FATE, this.team)
     }
+
+    // Trigger Last Respects ability for adjacent allies
+    // When this Pokemon dies, any adjacent ally with Last Respects ability
+    // immediately gains full PP to cast their ability
+    board
+      .getAdjacentCells(this.positionX, this.positionY)
+      .filter(
+        (c) =>
+          c.value?.passive === Passive.LAST_RESPECTS &&
+          c.value?.team === this.team
+      )
+      .map((c) => c.value)
+      .forEach((p) => p?.addPP(p.maxPP - p.pp, p, 0, false))
   }
 
   flyAway(board: Board) {
@@ -1372,52 +1377,55 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.team === Team.BLUE_TEAM
           ? this.simulation.blueTeam
           : this.simulation.redTeam
-      if (team) {
-        const alliesAlive: IPokemonEntity[] = values(team).filter(
-          (e) => e.life > 0
+      if (!team) return
+      const alliesAlive: IPokemonEntity[] = values(team).filter(
+        (e) => e.life > 0
+      )
+      let koAllies: Pokemon[] = []
+      if (this.player) {
+        koAllies = values(this.player.board).filter(
+          (p) =>
+            p.id !== this.refToBoardPokemon.id &&
+            !isOnBench(p) &&
+            !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id) &&
+            !(
+              p.name === Pkm.COMFEY &&
+              alliesAlive.some((ally) => ally.items.has(Item.COMFEY))
+            ) // don't respawn comfey if an ally has it
         )
-        let koAllies: Pokemon[] = []
-        if (this.player) {
-          koAllies = values(this.player.board).filter(
-            (p) =>
-              p.id !== this.refToBoardPokemon.id &&
-              !isOnBench(p) &&
-              !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id)
-          )
-        } else if (this.name === Pkm.HO_OH) {
-          // HoOh marowak pve round
-          koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
-            ? []
-            : [
-              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                shiny: this.shiny,
-                emotion: Emotion.ANGRY
-              })
-            ]
-        }
-
-        const spawns = pickNRandomIn(koAllies, 3)
-        spawns.forEach((spawn) => {
-          const mon = PokemonFactory.createPokemonFromName(spawn.name, {
-            emotion: spawn.emotion,
-            shiny: spawn.shiny
-          })
-          const coord =
-            this.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(this)
-          const spawnedEntity = this.simulation.addPokemon(
-            mon,
-            coord.x,
-            coord.y,
-            this.team,
-            true
-          )
-          spawnedEntity.shield = 0 // remove existing shield
-          spawnedEntity.flyingProtection = 0 // prevent flying effects twice
-          SynergyEffects[Synergy.FOSSIL].forEach((e) =>
-            spawnedEntity.effects.delete(e)
-          )
-        })
+      } else if (this.name === Pkm.HO_OH) {
+        // HoOh marowak pve round
+        koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
+          ? []
+          : [
+            PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+              shiny: this.shiny,
+              emotion: Emotion.ANGRY
+            })
+          ]
       }
+
+      const spawns = pickNRandomIn(koAllies, 3)
+      spawns.forEach((spawn) => {
+        const coord = this.simulation.getClosestFreeCellToPokemonEntity(this)
+        if (!coord) return
+        const mon = PokemonFactory.createPokemonFromName(spawn.name, {
+          emotion: spawn.emotion,
+          shiny: spawn.shiny
+        })
+        const spawnedEntity = this.simulation.addPokemon(
+          mon,
+          coord.x,
+          coord.y,
+          this.team,
+          true
+        )
+        spawnedEntity.shield = 0 // remove existing shield
+        spawnedEntity.flyingProtection = 0 // prevent flying effects twice
+        SynergyEffects[Synergy.FOSSIL].forEach((e) =>
+          spawnedEntity.effects.delete(e)
+        )
+      })
     }
 
     const stackingItems = [
@@ -1524,7 +1532,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.addAttack(10, this, 0, false)
         break
       case Item.CHESTO_BERRY:
-        this.status.sleep = false
         this.status.sleepCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_SLEEP)
         heal(50)
@@ -1694,11 +1701,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return [
       ...this.effectsSet.values(),
       ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter((effect): effect is InstanceType<T> => effect instanceof effectClass)
+    ].filter(
+      (effect): effect is InstanceType<T> => effect instanceof effectClass
+    )
   }
 }
 
-export function getStrongestUnit<T extends Pokemon | PokemonEntity>(
+export function getStrongestUnit<T extends Pokemon | IPokemonEntity>(
   pokemons: T[]
 ): T {
   /*

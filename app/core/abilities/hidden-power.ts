@@ -44,12 +44,13 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
       [board.columns - 1, board.rows - 1]
     ]
     corners.forEach(([x, y]) => {
-      const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, unown.player)
-      const coord = unown.simulation.getClosestAvailablePlaceOnBoardTo(
+      const coord = unown.simulation.getClosestFreeCellTo(
         x,
         y,
         unown.team
       )
+      if (!coord) return
+      const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, unown.player)
       unown.simulation.addPokemon(abra, coord.x, coord.y, unown.team, true)
     })
   }
@@ -206,16 +207,17 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     const numberToSpawn = 2
     for (let i = 0; i < numberToSpawn; i++) {
-      const coord =
-        unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
-      const sharpedo = unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, unown.player),
-        coord.x,
-        coord.y,
-        unown.team,
-        true
-      )
-      sharpedo.addItem(Item.RAZOR_CLAW)
+      const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
+      if (coord) {
+        const sharpedo = unown.simulation.addPokemon(
+          PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, unown.player),
+          coord.x,
+          coord.y,
+          unown.team,
+          true
+        )
+        sharpedo.addItem(Item.RAZOR_CLAW)
+      }
     }
   }
 }
@@ -228,8 +230,8 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const coord =
-      unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
+    const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
+    if (!coord) return
     const hitmonlee = unown.simulation.addPokemon(
       PokemonFactory.createPokemonFromName(Pkm.HITMONLEE, unown.player),
       coord.x,
@@ -365,15 +367,16 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
 
     for (let i = 0; i < numberToSpawn; i++) {
       const bug = randomWeighted(candidatesWeights) ?? Pkm.WEEDLE
-      const coord =
-        unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
-      unown.simulation.addPokemon(
-        PokemonFactory.createPokemonFromName(bug, unown.player),
-        coord.x,
-        coord.y,
-        unown.team,
-        true
-      )
+      const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
+      if (coord) {
+        unown.simulation.addPokemon(
+          PokemonFactory.createPokemonFromName(bug, unown.player),
+          coord.x,
+          coord.y,
+          unown.team,
+          true
+        )
+      }
     }
   }
 }
@@ -442,8 +445,8 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
-    const coord =
-      unown.simulation.getClosestAvailablePlaceOnBoardToPokemonEntity(unown)
+    const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
+    if (!coord) return
     const uxie = unown.simulation.addPokemon(
       PokemonFactory.createPokemonFromName(Pkm.UXIE, unown.player),
       coord.x,
@@ -633,15 +636,12 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
       (u) => u !== Pkm.UNOWN_EXCLAMATION
     )
     corners.forEach(([x, y]) => {
+      const coord = pokemon.simulation.getClosestFreeCellTo(x, y, pokemon.team)
+      if (!coord) return
       const unownName = pickRandomIn(candidates)
       const unown = PokemonFactory.createPokemonFromName(
         unownName,
         pokemon.player
-      )
-      const coord = pokemon.simulation.getClosestAvailablePlaceOnBoardTo(
-        x,
-        y,
-        pokemon.team
       )
       pokemon.simulation.addPokemon(unown, coord.x, coord.y, pokemon.team, true)
     })

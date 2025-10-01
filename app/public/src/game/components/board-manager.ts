@@ -50,6 +50,7 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
+import { TownEncounters } from "../../../../core/town-encounters"
 
 export enum BoardMode {
   PICK = "pick",
@@ -339,15 +340,20 @@ export default class BoardManager {
     this.berryTrees = []
   }
 
-  renderFlowerPots() {
-    this.hideFlowerPots()
+  getNbFlowerPots(): number {
     const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
     let nbPots = SynergyTriggers[Synergy.FLORA].filter(
       (n) => n <= floraLevel
     ).length
-    if (this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
+    if (floraLevel >= 6 && this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
       nbPots = 5
     }
+    return nbPots
+  }
+
+  renderFlowerPots() {
+    this.hideFlowerPots()
+    const nbPots = this.getNbFlowerPots()
 
     for (let i = 0; i < nbPots; i++) {
       const potSprite = this.scene.add.sprite(
@@ -392,10 +398,7 @@ export default class BoardManager {
   }
 
   updateMulchCount() {
-    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
-    const nbPots = SynergyTriggers[Synergy.FLORA].filter(
-      (n) => n <= floraLevel
-    ).length
+    const nbPots = this.getNbFlowerPots()
     if (nbPots === 0) {
       this.mulchAmountText?.destroy()
       this.mulchAmountText = null
@@ -409,7 +412,7 @@ export default class BoardManager {
     }
     this.mulchAmountText.setText(`${this.player.mulch}/${this.player.mulchCap}`)
     if (this.mulchIcon === null) {
-      const mulchCollected = this.player.items.filter(i => i === Item.RICH_MULCH).length + this.player.flowerPots.reduce((acc, pot) => acc + pot.stars - 1, 0)
+      const mulchCollected = this.player.items.filter(i => i === Item.RICH_MULCH).length + this.player.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) - 8
       this.mulchIcon = this.scene.add.image(
         332,
         636,
@@ -982,13 +985,22 @@ export default class BoardManager {
       const [x, y] = transformEntityCoordinates(boardX, boardY - 1, true)
       const id = `pve_${this.state.stageLevel}_${i}`
 
+      const pokemon = PokemonFactory.createPokemonFromName(pkm, {
+        shiny: this.state.shinyEncounter
+      })
+      if (
+        this.state.townEncounter === TownEncounters.MAROWAK &&
+        pveStage.marowakItems &&
+        i in pveStage.marowakItems
+      ) {
+        pveStage.marowakItems[i]!.forEach((item) => pokemon.items.add(item))
+      }
+
       const pkmSprite = new PokemonSprite(
         this.scene,
         x,
         y,
-        PokemonFactory.createPokemonFromName(pkm, {
-          shiny: this.state.shinyEncounter
-        }),
+        pokemon,
         id,
         false,
         true

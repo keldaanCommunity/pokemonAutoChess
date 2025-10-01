@@ -1,6 +1,8 @@
+import { MapSchema } from "@colyseus/schema"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon } from "../../models/colyseus-models/pokemon"
 import GameRoom from "../../rooms/game-room"
+import { IPokemonEntity } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
@@ -8,6 +10,7 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import type { Board } from "../board"
 import { PokemonEntity } from "../pokemon-entity"
+import Simulation from "../simulation"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
@@ -24,7 +27,9 @@ export abstract class Effect {
 
 // applied on fight start or when spawning
 export class OnSpawnEffect extends Effect {
-  constructor(effect?: (entity: PokemonEntity, player?: Player, isSpawn?: boolean) => void) {
+  constructor(
+    effect?: (entity: PokemonEntity, player?: Player, isSpawn?: boolean) => void
+  ) {
     super(effect)
   }
   override apply(entity: PokemonEntity, player?: Player, isSpawn?: boolean) { }
@@ -49,7 +54,6 @@ export class OnItemGainedEffect extends Effect { }
 
 export class OnItemRemovedEffect extends Effect { }
 
-
 interface OnStageStartEffectArgs {
   player: Player
   pokemon?: Pokemon
@@ -62,6 +66,21 @@ export class OnStageStartEffect extends Effect {
     super(effect)
   }
   apply(args: OnStageStartEffectArgs) { }
+}
+
+interface OnSimulationStartEffectArgs {
+  simulation: Simulation
+  player: Player
+  team: MapSchema<IPokemonEntity>
+  entity: IPokemonEntity
+}
+
+// applied after simulation started, when the board is fully set up
+export class OnSimulationStartEffect extends Effect {
+  constructor(effect?: (args: OnSimulationStartEffectArgs) => void) {
+    super(effect)
+  }
+  apply(args: OnSimulationStartEffectArgs) { }
 }
 
 interface OnItemDroppedEffectArgs {
@@ -148,8 +167,8 @@ export class PeriodicEffect extends Effect {
 }
 
 interface OnHitEffectArgs {
-  attacker: PokemonEntity,
-  target: PokemonEntity,
+  attacker: PokemonEntity
+  target: PokemonEntity
   board: Board
   totalTakenDamage: number
   physicalDamage: number
@@ -160,7 +179,10 @@ interface OnHitEffectArgs {
 // applied after every successful basic attack (not dodged or protected)
 export class OnHitEffect extends Effect {
   apply(params: OnHitEffectArgs) { }
-  constructor(effect?: (params: OnHitEffectArgs) => void, origin?: EffectOrigin) {
+  constructor(
+    effect?: (params: OnHitEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
     super(effect, origin)
   }
 }
@@ -270,7 +292,6 @@ export class OnMoveEffect extends Effect {
     super(effect, origin)
   }
 }
-
 
 // applied after taking a hit that removed all the remaining shield
 interface OnShieldDepletedEffectArgs {

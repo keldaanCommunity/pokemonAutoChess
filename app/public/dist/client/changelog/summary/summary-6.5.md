@@ -32,6 +32,7 @@
 ![Orbeetle](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0826/Normal.png)
 ![Pachirisu](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0417/Normal.png)
 ![Buzzwole](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0794/Normal.png)
+![Falinks](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0870/Normal.png)
 
 
 ## Adjustments for ranked matches

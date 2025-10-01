@@ -595,6 +595,8 @@ class GameContainer {
           this.gameScene.weatherManager.addMist()
         } else if (value === Weather.SMOG) {
           this.gameScene.weatherManager.addSmog()
+        } else if (value === Weather.MURKY) {
+          this.gameScene.weatherManager.addMurky()
         }
       }
     }
@@ -637,7 +639,7 @@ class GameContainer {
     targetX?: number
     targetY?: number
     delay?: number
-    ap: number
+    ap?: number
   }) {
     if (document.hidden) return // do not display abilities when the tab is not focused
     this.gameScene?.battle?.displayAbility(message)

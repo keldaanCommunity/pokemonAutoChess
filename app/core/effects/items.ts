@@ -97,6 +97,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
             board,
             AttackType.SPECIAL,
             pokemon,
+            false,
             false
           )
           secondaryTargetHit.addPP(-20, pokemon, 0, false)

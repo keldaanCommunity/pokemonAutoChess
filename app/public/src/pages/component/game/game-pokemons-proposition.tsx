@@ -3,8 +3,14 @@ import { useTranslation } from "react-i18next"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { AdditionalPicksStages } from "../../../../../types/Config"
 import { ShinyItems } from "../../../../../types/enum/Item"
-import { Pkm, PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmDuo,
+  PkmDuos,
+  PkmFamily
+} from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import { DEPTH } from "../../../game/depths"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
@@ -14,7 +20,6 @@ import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import "./game-pokemon-propositions.css"
-import { DEPTH } from "../../../game/depths"
 
 export default function GamePokemonsPropositions() {
   const { t } = useTranslation()
@@ -104,8 +109,13 @@ export default function GamePokemonsPropositions() {
                       index={index}
                       pokemon={proposition as Pkm}
                       inPlanner={
-                        teamPlanner?.some((p) => p.name === proposition) ??
-                        false
+                        teamPlanner?.some((p) => {
+                          if (proposition in PkmDuos) {
+                            return PkmDuos[proposition].includes(p.name)
+                          } else {
+                            return PkmFamily[p.name] === proposition
+                          }
+                        }) ?? false
                       }
                     />
                   )}

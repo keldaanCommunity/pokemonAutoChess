@@ -6,6 +6,7 @@ import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
   FlowerMonByPot,
+  FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
@@ -297,7 +298,8 @@ export default class PokemonSprite extends DraggableObject {
     this.draggable =
       playerId === scene.uid &&
       !inBattle &&
-      (scene as GameScene).spectate === false
+      (scene as GameScene).spectate === false &&
+      FlowerPotMons.includes(pokemon.name) === false
     if (isEntity(pokemon)) {
       this.pp = pokemon.pp
       this.team = pokemon.team
@@ -1212,7 +1214,7 @@ export default class PokemonSprite extends DraggableObject {
     if (!this.skydiving) {
       // animation where pokemon is flying up out of the screen for a screen dive animation. Should take <= 500 milliseconds
       this.skydiving = true
-      this.moveManager.setSpeed(800)
+      this.moveManager.setSpeed(1000)
       this.moveManager.moveTo(this.x, -100)
     }
   }

@@ -312,7 +312,9 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.FALINKS_BRASS,
   Pkm.DEDENNE,
   Pkm.DUNSPARCE,
-  Pkm.PACHIRISU
+  Pkm.PACHIRISU,
+  Pkm.QWILFISH,
+  Pkm.HISUIAN_QWILFISH
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
@@ -392,7 +394,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.OGERPON_WELLSPRING,
   Pkm.OGERPON_HEARTHFLAME,
   Pkm.OGERPON_CORNERSTONE,
-  Pkm.MANAPHY
+  Pkm.MANAPHY,
+  Pkm.CHI_YU
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6
@@ -489,7 +492,8 @@ export const WeatherThreshold: { [weather in Weather]: number } = {
   [Weather.STORM]: 8,
   [Weather.SUN]: 8,
   [Weather.WINDY]: 8,
-  [Weather.SMOG]: 8
+  [Weather.SMOG]: 8,
+  [Weather.MURKY]: 8
 }
 
 // 4  A  1
@@ -702,7 +706,7 @@ export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 
 export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
 
-export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 20 // 15 days
+export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 20 // 20 days
 export const ELO_DECAY_LOST_PER_DAY = 5
 export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
 export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days

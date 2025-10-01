@@ -1,9 +1,7 @@
-import { Item } from "../../types/enum/Item"
+import { Team } from "../../types/enum/Game"
 import { min } from "../../utils/number"
-import { values } from "../../utils/schemas"
 import type { Board } from "../board"
 import { OnAbilityCastEffect } from "../effects/effect"
-import { ItemEffects } from "../effects/items"
 import { PokemonEntity } from "../pokemon-entity"
 
 export class AbilityStrategy {
@@ -30,5 +28,11 @@ export class AbilityStrategy {
     pokemon.getEffects(OnAbilityCastEffect).forEach((effect) => {
       effect.apply(pokemon, board, target, crit)
     })
+
+    if (pokemon.team === Team.BLUE_TEAM) {
+      pokemon.simulation.blueAbilitiesCasted.push(pokemon.skill)
+    } else if (pokemon.team === Team.RED_TEAM) {
+      pokemon.simulation.redAbilitiesCasted.push(pokemon.skill)
+    }
   }
 }

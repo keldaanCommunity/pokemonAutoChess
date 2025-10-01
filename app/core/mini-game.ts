@@ -29,6 +29,7 @@ import {
   Item,
   ItemComponents,
   SynergyGems,
+  SynergyGivenByGem,
   SynergyStones
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
@@ -50,6 +51,7 @@ import {
   TownEncounters,
   TownEncountersByStage
 } from "./town-encounters"
+import { isIn } from "../utils/array"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -742,6 +744,14 @@ export class MiniGame {
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
             player.addMoney(3, true, null)
+          } else if (isIn(SynergyGems, item.name)) {
+            const type = SynergyGivenByGem[item.name]
+            player.bonusSynergies.set(
+              type,
+              (player.bonusSynergies.get(type) ?? 0) + 1
+            )
+            player.items.push(item.name)
+            player.updateSynergies()
           } else {
             player.items.push(item.name)
           }
@@ -752,8 +762,9 @@ export class MiniGame {
         if (avatar.portalId && this.portals?.has(avatar.portalId)) {
           const portal = this.portals.get(avatar.portalId)!
           if (portal.map !== player.map) {
+            const previousMap = player.map
             player.map = portal.map
-            player.updateRegionalPool(state, true)
+            player.updateRegionalPool(state, true, previousMap)
             for (let i = 0; i < player.berryTreesType.length; i++) {
               player.berryTreesType[i] = pickRandomIn(Berries)
               player.berryTreesStages[i] = 0
