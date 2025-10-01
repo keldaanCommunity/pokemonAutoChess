@@ -735,36 +735,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
 
-    if (this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
-      const crit =
-        this.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(this.critChance / 100, this)
-      const { death } = target.handleSpecialDamage(
-        [15, 30, 60][this.stars - 1],
-        board,
-        AttackType.SPECIAL,
-        this,
-        crit
-      )
-      this.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
-      if (death) hasAttackKilled = true
-    }
-
-    if (this.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
-      const crit =
-        this.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(this.critChance / 100, this)
-      const { death } = target.handleSpecialDamage(
-        [30, 60, 120][this.stars - 1],
-        board,
-        AttackType.SPECIAL,
-        this,
-        crit
-      )
-      this.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
-      if (death) hasAttackKilled = true
-    }
-
     if (target.effects.has(EffectEnum.OBSTRUCT)) {
       this.addDefense(-2, target, 0, false)
     }

@@ -40,8 +40,9 @@ export default abstract class PokemonState {
       let trueDamage = 0
       let totalTakenDamage = 0
       let attackType = pokemon.effects.has(EffectEnum.SPECIAL_ATTACKS) ? AttackType.SPECIAL : AttackType.PHYSICAL
+      const crit = chance(pokemon.critChance / 100, pokemon)
 
-      if (chance(pokemon.critChance / 100, pokemon)) {
+      if (crit) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
           let opponentCritPower = pokemon.critPower
           if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
@@ -134,6 +135,18 @@ export default abstract class PokemonState {
       if (pokemon.effects.has(EffectEnum.LOCK_ON) && target) {
         trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
+      }
+
+      if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
+        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
+        specialDamage += Math.ceil([15, 30, 60][pokemon.stars - 1] * (1 + pokemon.ap / 100) * (abilityCrit ? pokemon.critPower : 1))
+        pokemon.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
+      }
+
+      if (pokemon.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
+        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
+        specialDamage += Math.ceil([30, 60, 120][pokemon.stars - 1] * (1 + pokemon.ap / 100) * (abilityCrit ? pokemon.critPower : 1))
+        pokemon.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
       }
 
       if (trueDamagePart > 0) {
