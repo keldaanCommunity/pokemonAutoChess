@@ -68,5 +68,6 @@
 - Fix Slaking not enraging after waking up through Sound cry or Chesto Berry
 - Fix mulch being collected when playing as ghost opponent
 - Fix Meltan magnet pull not pulling steel pokemon when steel pool is empty
+- Fix Grav Apple dealing special damage instead of physical damage
 
 # Misc
