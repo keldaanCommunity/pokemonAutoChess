@@ -1098,8 +1098,8 @@ export class HypnosisStrategy extends AbilityStrategy {
       const factor = 0.5
       const duration = Math.round(
         ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
       )
       farthestTarget.status.triggerSleep(duration, farthestTarget)
     }
@@ -1421,8 +1421,8 @@ export class RelicSongStrategy extends AbilityStrategy {
       const factor = 0.5
       const duration = Math.round(
         2000 *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
       )
       board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
         if (tg && pokemon.team != tg.team) {
@@ -1735,9 +1735,9 @@ export class ShadowCloneStrategy extends AbilityStrategy {
       clone.hp = min(1)(
         Math.ceil(
           0.5 *
-            pokemon.hp *
-            (1 + pokemon.ap / 100) *
-            (crit ? pokemon.critPower : 1)
+          pokemon.hp *
+          (1 + pokemon.ap / 100) *
+          (crit ? pokemon.critPower : 1)
         )
       )
       clone.life = clone.hp
@@ -2122,9 +2122,9 @@ export class ToxicStrategy extends AbilityStrategy {
     const factor = 0.5
     const duration = Math.round(
       [3000, 6000, 9000][pokemon.stars] ??
-        9000 *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      9000 *
+      (1 + (pokemon.ap / 100) * factor) *
+      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     const count = pokemon.stars
 
@@ -2195,8 +2195,8 @@ export class ProtectStrategy extends AbilityStrategy {
     const factor = 0.5
     const duration = Math.round(
       ([1000, 3000, 5000][pokemon.stars - 1] ?? 5000) *
-        (1 + (pokemon.ap / 100) * factor) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      (1 + (pokemon.ap / 100) * factor) *
+      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     pokemon.status.triggerProtect(duration)
   }
@@ -2213,8 +2213,8 @@ export class ObstructStrategy extends AbilityStrategy {
     const factor = 0.5
     const duration = Math.round(
       2000 *
-        (1 + (pokemon.ap / 100) * factor) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      (1 + (pokemon.ap / 100) * factor) *
+      (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     pokemon.status.triggerProtect(duration)
     pokemon.effects.add(EffectEnum.OBSTRUCT)
@@ -3080,8 +3080,8 @@ export class SludgeWaveStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const duration = Math.round(
       ([2000, 3000, 4000][pokemon.stars - 1] ?? 4000) *
-        (1 + pokemon.ap / 100) *
-        (crit ? pokemon.critPower : 1)
+      (1 + pokemon.ap / 100) *
+      (crit ? pokemon.critPower : 1)
     )
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 60
     board
@@ -3685,7 +3685,7 @@ export class DragonBreathStrategy extends AbilityStrategy {
         cell.value != null &&
         cell.value.team !== pokemon.team &&
         distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) <=
-          maxRange
+        maxRange
       ) {
         cell.value.handleSpecialDamage(
           damage,
@@ -4457,13 +4457,13 @@ export class SparklingAriaStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = pokemon.stars === 3 ? 60 : pokemon.stars === 2 ? 30 : 15
-
+    const damage = [15, 25, 50][pokemon.stars - 1] ?? 15
     const cells = board.getAdjacentCells(target.positionX, target.positionY)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
+      const entity = cell.value
+      if (entity && entity.team !== pokemon.team) {
+        entity.handleSpecialDamage(
           damage,
           board,
           AttackType.SPECIAL,
@@ -4471,11 +4471,15 @@ export class SparklingAriaStrategy extends AbilityStrategy {
           crit
         )
       } else if (
-        cell.value &&
-        cell.value.team === pokemon.team &&
-        cell.value.status.burn
+        entity &&
+        entity.team === pokemon.team &&
+        entity.status.burn
       ) {
-        cell.value.status.healBurn(cell.value)
+        entity.status.healBurn(entity)
+        entity.effects.add(EffectEnum.IMMUNITY_BURN)
+        entity.commands.push(new DelayedCommand(() => {
+          entity.effects.delete(EffectEnum.IMMUNITY_BURN)
+        }, 3000))
       }
     })
   }
@@ -5047,8 +5051,8 @@ export class GrowthStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
 
-    let attackBuff = [3, 4, 5][pokemon.stars - 1] ?? 5
-    let hpBuff = [10, 20, 30][pokemon.stars - 1] ?? 30
+    let attackBuff = [3, 5, 7][pokemon.stars - 1] ?? 7
+    let hpBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
     if (pokemon.simulation.weather === Weather.SUN) {
       attackBuff *= 2 // grows twice as fast if sunny weather
       hpBuff *= 2
@@ -5420,11 +5424,11 @@ export class AcrobaticsStrategy extends AbilityStrategy {
         (a, b) =>
           Math.abs(
             travelDistance -
-              distanceM(a.x, a.y, pokemon.positionX, pokemon.positionY)
+            distanceM(a.x, a.y, pokemon.positionX, pokemon.positionY)
           ) -
           Math.abs(
             travelDistance -
-              distanceM(b.x, b.y, pokemon.positionX, pokemon.positionY)
+            distanceM(b.x, b.y, pokemon.positionX, pokemon.positionY)
           )
       )
     if (candidateDestinationCells.length > 0) {
@@ -6977,8 +6981,8 @@ export class NightShadeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = Math.ceil(
       ([0.25, 0.33, 0.5][pokemon.stars - 1] ?? 0.5) *
-        target.hp *
-        (1 + (0.5 * pokemon.ap) / 100)
+      target.hp *
+      (1 + (0.5 * pokemon.ap) / 100)
     )
     target.handleSpecialDamage(
       damage,
@@ -7299,14 +7303,14 @@ export class EggBombStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .map((v) => v.value)
       .filter((v) => v?.team === target.team)
       .forEach((v) => {
         if (v) {
-          const kill = target.handleSpecialDamage(
+          const kill = v.handleSpecialDamage(
             damage,
             board,
             AttackType.SPECIAL,
@@ -7645,8 +7649,8 @@ export class CurseStrategy extends AbilityStrategy {
       const factor = 0.2
       const curseDelay = min(0)(
         ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
-          (1 - (factor * pokemon.ap) / 100) *
-          (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
+        (1 - (factor * pokemon.ap) / 100) *
+        (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
       )
       cursedEnemy.status.triggerCurse(curseDelay, cursedEnemy)
     }
@@ -7778,8 +7782,8 @@ export class LovelyKissStrategy extends AbilityStrategy {
     } else {
       const duration = Math.round(
         ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) *
-          (1 + pokemon.ap / 100) *
-          (crit ? pokemon.critPower : 1)
+        (1 + pokemon.ap / 100) *
+        (crit ? pokemon.critPower : 1)
       )
       target.status.triggerSleep(duration, target)
     }
@@ -8290,9 +8294,9 @@ export class DetectStrategy extends AbilityStrategy {
 
     const protectDuration = Math.round(
       500 *
-        nbEnemiesDetected *
-        (1 + pokemon.ap / 100) *
-        (crit ? pokemon.critPower : 1)
+      nbEnemiesDetected *
+      (1 + pokemon.ap / 100) *
+      (crit ? pokemon.critPower : 1)
     )
     adjacentAllies.forEach((ally) => {
       ally.status.triggerProtect(protectDuration)
@@ -9770,8 +9774,8 @@ export class InfestationStrategy extends AbilityStrategy {
               mostPowerfulBug.positionX,
               mostPowerfulBug.positionY
             ) *
-              150 -
-              30
+            150 -
+            30
           )
         )
       }
@@ -9841,8 +9845,8 @@ export class GulpMissileStrategy extends AbilityStrategy {
           pokemon.positionX,
           pokemon.positionY
         ) *
-          150 -
-          30
+        150 -
+        30
       )
     )
   }
@@ -10191,8 +10195,8 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
-            cell.value.addPP(20, pokemon, 1, crit)
-            cell.value.handleHeal(40, pokemon, 1, crit)
+            cell.value.addPP(25, pokemon, 1, crit)
+            cell.value.handleHeal(50, pokemon, 1, crit)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_HEARTHFLAME) {
@@ -10221,8 +10225,8 @@ export class IvyCudgelStrategy extends AbilityStrategy {
       const factor = 0.5
       const protectDuration = Math.round(
         2000 *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
       )
       pokemon.status.triggerProtect(protectDuration)
     }
@@ -10396,7 +10400,7 @@ export class PoisonStingStrategy extends AbilityStrategy {
     const extraDamage =
       currentStacks + nbStacksToApply > maxStacks
         ? (currentStacks + nbStacksToApply - maxStacks) *
-          ([25, 50, 100][pokemon.stars - 1] ?? 100)
+        ([25, 50, 100][pokemon.stars - 1] ?? 100)
         : 0
     for (let i = 0; i < nbStacksToApply; i++) {
       target.status.triggerPoison(4000, target, pokemon)
@@ -11339,7 +11343,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       if (!coord) return
       const pillarType =
         [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
-          pokemon.stars - 1
+        pokemon.stars - 1
         ] ?? Pkm.PILLAR_CONCRETE
       const pillar = PokemonFactory.createPokemonFromName(
         pillarType,
@@ -13501,9 +13505,9 @@ export class AxeKickStrategy extends AbilityStrategy {
       highestPPEnemy = highestPPEnemies.shift() ?? null
       freeSpot = highestPPEnemy
         ? board.getClosestAvailablePlace(
-            highestPPEnemy.positionX,
-            highestPPEnemy.positionY
-          )
+          highestPPEnemy.positionX,
+          highestPPEnemy.positionY
+        )
         : null
     } while (highestPPEnemies.length > 0 && (!highestPPEnemy || !freeSpot))
 
@@ -13720,9 +13724,9 @@ export class JawLockStrategy extends AbilityStrategy {
       crit
     )
 
-    // Add the target id to the jawLockTargets
-    ;(pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
-      pokemon.jawLockTargets.push(target.id)
+      // Add the target id to the jawLockTargets
+      ; (pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
+        pokemon.jawLockTargets.push(target.id)
 
     // If target was already bitten, heal the user
     if (alreadyBitten) {
@@ -13750,8 +13754,8 @@ export class LastRespectsStrategy extends AbilityStrategy {
     // Base delays: 1★=8s, 2★=5s, 3★=3s, reduced by AP and crit power
     const curseDelay = min(0)(
       ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
-        (1 - (factor * pokemon.ap) / 100) *
-        (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
+      (1 - (factor * pokemon.ap) / 100) *
+      (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
     )
 
     // Find all adjacent enemies that aren't already cursed
@@ -13840,26 +13844,26 @@ export class FirstImpressionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    
+
     // Base damage: 1★=45, 2★=90
     const damage = [45, 90][pokemon.stars - 1] ?? 90
-    
+
     // Base flinch duration: 1★=3s, 2★=5s, scaled by AP and crit
     let duration = [3000, 5000][pokemon.stars - 1] ?? 5000
     duration = Math.round(
       duration * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
-    
+
     // Deal damage and apply flinch status
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerFlinch(duration, target, pokemon)
-    
+
     // Find a cell to fly away to after the attack
     const flyAwayCell = board.getFlyAwayCell(
       pokemon.positionX,
       pokemon.positionY
     )
-    
+
     // Store original position before moving
     const x = pokemon.positionX
     const y = pokemon.positionY

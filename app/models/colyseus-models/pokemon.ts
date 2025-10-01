@@ -7036,7 +7036,7 @@ export class Torkoal extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GROUND])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 220
+  hp = 200
   atk = 17
   speed = 31
   def = 16
@@ -8882,7 +8882,7 @@ export class Munchlax extends Pokemon {
   speed = 35
   def = 4
   speDef = 4
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.BODY_SLAM
   passive = Passive.GLUTTON
@@ -8902,7 +8902,7 @@ export class Snorlax extends Pokemon {
   speed = 35
   def = 6
   speDef = 6
-  maxPP = 120
+  maxPP = 100
   range = 1
   skill = Ability.BODY_SLAM
   passive = Passive.GLUTTON
@@ -11940,7 +11940,7 @@ export class Tropius extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.AIR_SLASH
+  skill = Ability.GROWTH
 }
 
 export class Carnivine extends Pokemon {
@@ -14157,7 +14157,7 @@ export class Taillow extends Pokemon {
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.BRAVE_BIRD
+  skill = Ability.AIR_SLASH
 }
 
 export class Swellow extends Pokemon {
@@ -14171,7 +14171,7 @@ export class Swellow extends Pokemon {
   speDef = 9
   maxPP = 100
   range = 1
-  skill = Ability.BRAVE_BIRD
+  skill = Ability.AIR_SLASH
 }
 
 export class Spinarak extends Pokemon {
@@ -16644,36 +16644,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-  (params: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-    player: Player
-  }) => {
-    const pkmOnBoard = values(params.player.board).filter(
-      (p) =>
-        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-    )
-    const pillars = values(params.player.board).filter(
-      (p) => p.name === pillarToRemove
-    )
-    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-      params.player.board.delete(pillars[i].id)
-    }
-    const coords =
-      pillars.length > 0
-        ? [pillars[0].positionX, pillars[0].positionY]
-        : getFirstAvailablePositionOnBoard(params.player.board)
-    if (coords && params.pokemonEvolved.positionY > 0) {
-      const pillar = PokemonFactory.createPokemonFromName(
-        pillarEvolution,
-        params.player
+    (params: {
+      pokemonEvolved: Pokemon
+      pokemonsBeforeEvolution: Pokemon[]
+      player: Player
+    }) => {
+      const pkmOnBoard = values(params.player.board).filter(
+        (p) =>
+          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
       )
-      pillar.positionX = coords[0]
-      pillar.positionY = coords[1]
-      params.player.board.set(pillar.id, pillar)
+      const pillars = values(params.player.board).filter(
+        (p) => p.name === pillarToRemove
+      )
+      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+        params.player.board.delete(pillars[i].id)
+      }
+      const coords =
+        pillars.length > 0
+          ? [pillars[0].positionX, pillars[0].positionY]
+          : getFirstAvailablePositionOnBoard(params.player.board)
+      if (coords && params.pokemonEvolved.positionY > 0) {
+        const pillar = PokemonFactory.createPokemonFromName(
+          pillarEvolution,
+          params.player
+        )
+        pillar.positionX = coords[0]
+        pillar.positionY = coords[1]
+        params.player.board.set(pillar.id, pillar)
+      }
+      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
     }
-    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
-  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -17856,7 +17856,7 @@ export class ScreamTail extends Pokemon {
 }
 
 export class IndeedeeFemale extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 190
@@ -17870,7 +17870,7 @@ export class IndeedeeFemale extends Pokemon {
 }
 
 export class IndeedeeMale extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 160

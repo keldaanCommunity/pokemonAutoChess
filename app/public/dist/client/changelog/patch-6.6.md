@@ -34,6 +34,15 @@
 - Wormadam Sandy: Def 4 → 6
 - Wormadam Trash: Def 6 → 9, Spe def 6 → 3
 - Nerf Spiky Shield (Chespin, Cascoon): take special damage equal to ~~100%~~ 60/80/100% of the user's Defense
+- Change Sparkling Aria (Primarina): damage 15/30/60 → 15/25/50 ; now gives burn immunity to allies for 3 seconds
+- Nerf Torkoal: HP 220 → 200
+- New ability for Tropius: Growth
+- New ability for Taillow line: Air slash
+- Buff Munchlax line: PP 120 → 100
+- Indeedee Male & Female now have Human synergy
+- Buff Ogerpon WellSpring mask: upon casting, heal ~~40~~ 50 HP and restore ~~20~~ 25 PP to adjacent allies
+- Fix Egg Bomb damaging the same target instead of AoE ; damage 30/60/120 → 25/50/100
+
 
 # Changes to Synergies
 
@@ -57,5 +66,6 @@
 - Fix Comfey being resurrected through Sacred Ash when an ally alive holds it
 - Fix Slaking not enraging after waking up through Sound cry or Chesto Berry
 - Fix mulch being collected when playing as ghost opponent
+- Fix Meltan magnet pull not pulling steel pokemon when steel pool is empty
 
 # Misc

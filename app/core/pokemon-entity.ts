@@ -706,6 +706,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   skydiveTo(x: number, y: number, board: Board) {
+    this.toIdleState()
     board.swapCells(this.positionX, this.positionY, x, y)
     this.status.skydiving = true
     this.toMovingState()

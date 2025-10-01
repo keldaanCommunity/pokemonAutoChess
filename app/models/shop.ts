@@ -646,7 +646,7 @@ export default class Shop {
       const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
         Synergy.STEEL
       ])
-      if (steelPkm !== Pkm.MAGIKARP) return steelPkm
+      if (getPokemonData(steelPkm).types.includes(Synergy.STEEL)) return steelPkm
     }
 
     return Pkm.MELTAN

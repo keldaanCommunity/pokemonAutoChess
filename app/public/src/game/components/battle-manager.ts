@@ -893,7 +893,7 @@ export default class BattleManager {
   displayAbility(args: {
     id: string
     skill: Ability | string
-    ap: number
+    ap?: number
     orientation: Orientation
     positionX: number
     positionY: number
@@ -906,7 +906,7 @@ export default class BattleManager {
         scene: this.scene,
         pokemonsOnBoard: this.group.getChildren() as PokemonSprite[],
         ability: args.skill,
-        ap: args.ap,
+        ap: args.ap ?? 0,
         orientation: args.orientation,
         positionX: args.positionX,
         positionY: args.positionY,
