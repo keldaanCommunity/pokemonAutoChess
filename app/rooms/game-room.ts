@@ -77,6 +77,7 @@ import {
   getFreeSpaceOnBench
 } from "../utils/board"
 import { isValidDate } from "../utils/date"
+import { formatMinMaxRanks } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
 import { shuffleArray } from "../utils/random"
@@ -100,7 +101,6 @@ import {
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
-import { formatMinMaxRanks } from "../utils/elo"
 
 export default class GameRoom extends Room<GameState> {
   dispatcher: Dispatcher<this>
@@ -158,9 +158,7 @@ export default class GameRoom extends Room<GameState> {
       name,
       ownerName,
       gameMode,
-      playerIds: Object.keys(users).filter(
-        (id) => users[id].isBot === false
-      ),
+      playerIds: Object.keys(users).filter((id) => users[id].isBot === false),
       playersInfo: Object.keys(users).map(
         (u) => `${users[u].name} [${users[u].elo}]`
       ),
@@ -537,21 +535,24 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.OVERWRITE_BOARD, (client, board: IDetailledPokemon[]) => {
-      if (client.auth) {
-        const player = this.state.players.get(client.auth.uid)
-        if (player?.role !== Role.ADMIN) return;
+    this.onMessage(
+      Transfer.OVERWRITE_BOARD,
+      (client, board: IDetailledPokemon[]) => {
+        if (client.auth) {
+          const player = this.state.players.get(client.auth.uid)
+          if (player?.role !== Role.ADMIN) return
 
-        try {
-          this.dispatcher.dispatch(new OnOverwriteBoardCommand(), {
-            playerId: client.auth.uid,
-            board
-          })
-        } catch (error) {
-          logger.error("overwrite board error", error)
+          try {
+            this.dispatcher.dispatch(new OnOverwriteBoardCommand(), {
+              playerId: client.auth.uid,
+              board
+            })
+          } catch (error) {
+            logger.error("overwrite board error", error)
+          }
         }
       }
-    })
+    )
   }
 
   startGame() {
@@ -736,8 +737,8 @@ export default class GameRoom extends Room<GameState> {
       )
 
       if (this.state.stageLevel >= MinStageForGameToCount) {
-        const elligibleToXP = this.state.players.size >= 2
-        if (elligibleToXP) {
+        const eligibleToXP = this.state.players.size >= 2
+        if (eligibleToXP) {
           for (let i = 0; i < bots.length; i++) {
             const botPlayer = bots[i]
             const bot = await BotV2.findOne({ id: botPlayer.id })
@@ -781,7 +782,7 @@ export default class GameRoom extends Room<GameState> {
   // when a player leaves the game
   async updatePlayerAfterGame(player: Player, hasLeftBeforeEnd: boolean) {
     // if player left before stage 10, they do not earn experience to prevent xp farming abuse
-    const elligibleToXP =
+    const eligibleToXP =
       this.state.players.size >= 2 &&
       this.state.stageLevel >= MinStageForGameToCount
 
@@ -796,7 +797,7 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    const elligibleToELO =
+    const eligibleToELO =
       !this.state.noElo &&
       (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
       humans.length >= 2
@@ -806,7 +807,7 @@ export default class GameRoom extends Room<GameState> {
 
     const usr = await UserMetadata.findOne({ uid: player.id })
     if (usr) {
-      if (elligibleToXP) {
+      if (eligibleToXP) {
         const expThreshold = 1000
         if (usr.exp + exp >= expThreshold) {
           usr.level += 1
@@ -860,7 +861,7 @@ export default class GameRoom extends Room<GameState> {
         player.titles.add(Title.GRAND_MASTER)
       }
 
-      if (usr.elo != null && elligibleToELO) {
+      if (usr.elo != null && eligibleToELO) {
         let elo = computeElo(
           this.transformToSimplePlayer(player),
           rank,
@@ -980,7 +981,9 @@ export default class GameRoom extends Room<GameState> {
         Object.values(Pkm)
           .filter((p) => NonPkm.includes(p) === false)
           .every((pkm) => {
-            const pokemonCollectionItem = usr.pokemonCollection.get(PkmIndex[pkm])
+            const pokemonCollectionItem = usr.pokemonCollection.get(
+              PkmIndex[pkm]
+            )
             return pokemonCollectionItem && pokemonCollectionItem.played > 0
           })
       ) {

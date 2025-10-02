@@ -1,18 +1,18 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IAfterGamePlayer } from "../../../types"
 import { GameMode } from "../../../types/enum/Game"
 
 export interface IUserAfterState {
   players: IAfterGamePlayer[]
-  elligibleToXP: boolean
-  elligibleToELO: boolean
+  eligibleToXP: boolean
+  eligibleToELO: boolean
   gameMode: GameMode
 }
 
 const initialState: IUserAfterState = {
   players: new Array<IAfterGamePlayer>(),
-  elligibleToXP: false,
-  elligibleToELO: false,
+  eligibleToXP: false,
+  eligibleToELO: false,
   gameMode: GameMode.CUSTOM_LOBBY
 }
 
@@ -25,10 +25,10 @@ export const afterSlice = createSlice({
     },
     leaveAfter: () => initialState,
     setElligibilityToXP: (state, action: PayloadAction<boolean>) => {
-      state.elligibleToXP = action.payload
+      state.eligibleToXP = action.payload
     },
     setElligibilityToELO: (state, action: PayloadAction<boolean>) => {
-      state.elligibleToELO = action.payload
+      state.eligibleToELO = action.payload
     },
     setGameMode: (state, action: PayloadAction<GameMode>) => {
       state.gameMode = action.payload

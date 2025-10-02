@@ -277,9 +277,9 @@ export default function Game() {
       })
     }
 
-    const elligibleToXP =
+    const eligibleToXP =
       nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
-    const elligibleToELO =
+    const eligibleToELO =
       nbPlayers >= 2 &&
       ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount ||
         hasLeftBeforeEnd) &&
@@ -290,8 +290,8 @@ export default function Game() {
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: afterPlayers,
       idToken: token,
-      elligibleToXP,
-      elligibleToELO,
+      eligibleToXP,
+      eligibleToELO,
       gameMode
     })
     localStore.set(

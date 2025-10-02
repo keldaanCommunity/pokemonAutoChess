@@ -18,8 +18,8 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   onCreate(options: {
     players: IAfterGamePlayer[]
     idToken: string
-    elligibleToXP: boolean
-    elligibleToELO: boolean
+    eligibleToXP: boolean
+    eligibleToELO: boolean
     gameMode: GameMode
   }) {
     logger.info("Create AfterGame ", this.roomId)

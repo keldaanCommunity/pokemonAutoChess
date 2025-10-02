@@ -89,10 +89,10 @@ export default function AfterGame() {
           )
         }
       })
-      $state.listen("elligibleToELO", (value, previousValue) => {
+      $state.listen("eligibleToELO", (value, previousValue) => {
         dispatch(setElligibilityToELO(value))
       })
-      $state.listen("elligibleToXP", (value, previousValue) => {
+      $state.listen("eligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
       })
       $state.listen("gameMode", (value, previousValue) => {
