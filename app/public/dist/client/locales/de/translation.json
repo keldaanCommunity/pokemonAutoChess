@@ -1904,7 +1904,7 @@
 		"FREEZING_GLARE": "Fügt getroffenen Gegnern [20,40,80,SP] SPECIAL zu, mit einer Chance von [50,LK]% 3 Sekunden FREEZE zuzufügen.",
 		"THUNDEROUS_KICK": "Der Gegner wird weggetreten. Fügt diesem und allen Gegnern auf dem Weg [20,40,60,SP] PHYSICAL und für 4 Sekunden FLINCH zu und reduziert ihre DEF um [10,SP].",
 		"FIERY_WRATH": "Fügt allen Gegnern [30,SP] SPECIAL zu, mit einer Chance von [50,LK]% FLINCH für 4 Sekunden zuzufügen.",
-		"VISE_GRIP": "Umklammert den Gegner mit seinen Scheren und fügt ihm [30,60,100,SP] SPECIAL zu. Erhalte für 4 Sekunden [50,SP]% der gegnerischen DEF und SPE_DEF. Beide werden über die Dauer LOCKED.",
+		"VISE_GRIP": "Umklammert den Gegner mit seinen Scheren und fügt ihm [30,60,100,SP] SPECIAL zu. Erhalte für 4 Sekunden [100,SP]% der gegnerischen DEF und SPE_DEF. Beide werden über die Dauer LOCKED.",
 		"BURN_UP": "Fügt sich selbst für 3 Sekunden BURN zu und verursacht [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "Der Boden bebt Fügt dem Ziel und benachbarten Gegnern 40 + [100,SP]% ATK als SPECIAL zu und reduziert ihre DEF und SPE_DEF um [5,SP].",
 		"THOUSAND_ARROWS": "33 energiegeladene Pfeile fallen zufällig auf das Spielfeld herab und verursachen je [60,SP] SPECIAL. Getroffene Gegner werden für 1 Sekunde LOCKED.",
