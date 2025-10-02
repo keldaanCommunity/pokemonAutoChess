@@ -10548,9 +10548,10 @@ export class ThunderousKickStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
+    const defenseDebuff = 10
 
     target.status.triggerFlinch(4000, pokemon)
-    target.addDefense(-10, pokemon, 1, crit)
+    target.addDefense(-defenseDebuff, pokemon, 1, crit)
     target.handleSpecialDamage(
       damage,
       board,
@@ -10563,7 +10564,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
       if (cell.value != null && target.id !== cell.value.id) {
         if (cell.value.team !== pokemon.team) {
           cell.value.status.triggerFlinch(4000, pokemon)
-          cell.value.addDefense(-5, pokemon, 1, crit)
+          cell.value.addDefense(-defenseDebuff, pokemon, 1, crit)
           cell.value.handleSpecialDamage(
             damage,
             board,
