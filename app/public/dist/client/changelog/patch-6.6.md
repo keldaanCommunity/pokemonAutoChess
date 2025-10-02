@@ -71,5 +71,6 @@
 - Fix Grav Apple dealing special damage instead of physical damage
 - Fix Syrup Bomb AP scaling being applied twice
 - Fix Entangling thread targeting
+- Fix Sand Tomb damage not scaling on AP
 
 # Misc
