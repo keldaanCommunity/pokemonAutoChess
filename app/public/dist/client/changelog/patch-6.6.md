@@ -77,5 +77,6 @@
 - Fix unlocking in Pokédex for Hoopa unbound, Aegislash Blade form and unmasked forms of Ogerpon
 - Bide (Shuckle) now has proper targeting and no longer ignore damage healed
 - Fix Octazooka being unable to crit with reaper's cloth
+- Fix Thunderous Kick reducing half the intended defense of enemies in the path
 
 # Misc
