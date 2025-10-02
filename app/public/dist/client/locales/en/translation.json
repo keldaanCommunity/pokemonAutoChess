@@ -1963,7 +1963,7 @@
 		"FREEZING_GLARE": "Deal [20,40,80,SP] SPECIAL to all enemies in a line, with a [50,LK]% chance to FREEZE for 3 seconds",
 		"THUNDEROUS_KICK": "Target is pushed away. It and all enemies on the path are FLINCH for 4 seconds, lose [10,SP] DEF and take [20,40,60,SP] PHYSICAL.",
 		"FIERY_WRATH": "Deal [30,SP] SPECIAL to all enemy Pokémon, with [50,LK]% chance to apply FLINCH for 4 seconds.",
-		"VISE_GRIP": "Grip the target with powerful pincers, dealing [30,60,100,SP] SPECIAL to the target. For 4 seconds, user gains [50,SP]% of target DEF and SPE_DEF, and both are LOCKED.",
+		"VISE_GRIP": "Grip the target with powerful pincers, dealing [30,60,100,SP] SPECIAL to the target. For 4 seconds, user gains [100,SP]% of target DEF and SPE_DEF, and both are LOCKED.",
 		"BURN_UP": "BURN itself for 3 seconds to inflict [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "The ground erupts, dealing 40 + [100,SP]% ATK as SPECIAL to the target and ADJACENT enemies, then lower their DEF and SPE_DEF by [5,SP].",
 		"THOUSAND_ARROWS": "33 energy arrows rain down on random tiles, dealing [60,SP] SPECIAL each. All enemies hit are LOCKED for 1 second.",

@@ -79,5 +79,6 @@
 - Fix Octazooka being unable to crit with reaper's cloth
 - Fix Thunderous Kick reducing half the intended defense of enemies in the path
 - Fix Force Palm always dealing the extra paralyze damage
+- Fix Vise Grip incorrect description
 
 # Misc
