@@ -5708,10 +5708,6 @@ export class Regigigas extends Pokemon {
   range = 1
   skill = Ability.CRUSH_GRIP
   passive = Passive.SLOW_START
-
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.addSpeed(-30, entity, 0, false)
-  }
 }
 
 export class Kyogre extends Pokemon {
@@ -11868,9 +11864,6 @@ export class MegaSableye extends Pokemon {
   range = 1
   skill = Ability.KNOCK_OFF
   passive = Passive.MEGA_SABLEYE
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.status.triggerRuneProtect(60000)
-  }
 }
 
 export class Koffing extends Pokemon {
@@ -12129,9 +12122,6 @@ export class Spinda extends Pokemon {
   range = 1
   skill = Ability.TEETER_DANCE
   passive = Passive.SPOT_PANDA
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
-  }
 }
 
 export class Baltoy extends Pokemon {
@@ -12252,17 +12242,6 @@ export class Barboach extends Pokemon {
   skill = Ability.FISSURE
   passive = Passive.AQUA_VEIL
   additional = true
-  onSpawn({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerRuneProtect(60000)
-    }
-  }
 }
 
 export class Whiscash extends Pokemon {
@@ -12279,17 +12258,6 @@ export class Whiscash extends Pokemon {
   skill = Ability.FISSURE
   passive = Passive.AQUA_VEIL
   additional = true
-  onSpawn({
-    entity,
-    simulation
-  }: {
-    entity: IPokemonEntity
-    simulation: Simulation
-  }) {
-    if (simulation.weather === Weather.RAIN) {
-      entity.status.triggerRuneProtect(60000)
-    }
-  }
 }
 
 export class Scraggy extends Pokemon {
@@ -12991,9 +12959,6 @@ export class Xurkitree extends Pokemon {
   range = 2
   skill = Ability.CHARGE_BEAM
   passive = Passive.SPECIAL_ATTACK
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    entity.effects.add(EffectEnum.SPECIAL_ATTACKS)
-  }
 }
 
 export class Nihilego extends Pokemon {
@@ -13232,11 +13197,6 @@ export class Gholdengo extends Pokemon {
   range = 1
   skill = Ability.MAKE_IT_RAIN
   passive = Passive.GHOLDENGO
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    if (entity.player && entity.player.money >= 50) {
-      entity.status.triggerRuneProtect(60000)
-    }
-  }
   onAcquired(player: Player) {
     player.titles.add(Title.GOLDEN)
   }

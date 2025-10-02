@@ -45,6 +45,7 @@
 - Teleport (Abra) and Shadow Punch (Golett) special damage is now properly considered as part of the attack damage, which better interacts with Choice Scarf
 - Comfey is now always held by the strongest ally among the nearest allies with a free item slot
 - Change Plasma Fist: 25% heal from damage before armor reduction -> 30% heal from damage dealt after armor reduction
+- Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 
 # Changes to Synergies
 
