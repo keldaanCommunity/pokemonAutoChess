@@ -16358,7 +16358,7 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
   const nbPillars = pkmOnBoard.length * (pkm === Pkm.CONKELDURR ? 2 : 1)
   if (pillars.length < nbPillars) {
     for (let i = 0; i < nbPillars - pillars.length; i++) {
-      const freeSpace = getFirstAvailablePositionOnBoard(player.board)
+      const freeSpace = getFirstAvailablePositionOnBoard(player.board, 1)
       if (freeSpace) {
         const pillar = PokemonFactory.createPokemonFromName(pillarPkm, player)
         pillar.positionX = freeSpace[0]
@@ -16393,7 +16393,7 @@ const pillarEvolve =
       const coords =
         pillars.length > 0
           ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board)
+          : getFirstAvailablePositionOnBoard(params.player.board, 1)
       if (coords && params.pokemonEvolved.positionY > 0) {
         const pillar = PokemonFactory.createPokemonFromName(
           pillarEvolution,
