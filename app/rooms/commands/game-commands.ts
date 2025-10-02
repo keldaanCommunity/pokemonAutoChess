@@ -1471,17 +1471,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (teamSize < maxTeamSize) {
         const numberOfPokemonsToMove = maxTeamSize - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
-          const validPokemon = values(player.board).filter(
+          const pokemon = values(player.board).filter(
             (p) => isOnBench(p) && p.canBePlaced
-          ).sort((a, b) => a.positionX - b.positionX)
-          const coordinate = getFirstAvailablePositionOnBoard(player.board)
-          if (coordinate && validPokemon) {
-            const pokemon = validPokemon[0]
-            pokemon.positionX = coordinate[0]
-            pokemon.positionY = coordinate[1]
+          ).sort((a, b) => a.positionX - b.positionX)[0]
+          const coordinates = getFirstAvailablePositionOnBoard(player.board)
+          if (coordinates && pokemon) {
+            pokemon.positionX = coordinates[0]
+            pokemon.positionY = coordinates[1]
             pokemon.onChangePosition(
-              coordinate[0],
-              coordinate[1],
+              coordinates[0],
+              coordinates[1],
               player,
               this.state
             )
