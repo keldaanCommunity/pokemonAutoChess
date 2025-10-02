@@ -1723,7 +1723,7 @@
 		"FORECAST": "Grant [10,SP] SHIELD to all allied Pokémon, plus an additional bonus depending on the weather:\n SNOW: +[2,SP] DEF / SPE_DEF\n SUN: +[4,SP] ATK \n RAIN: +[8,SP] PP",
 		"X_SCISSOR": "Deal [10,20,40,60,SP] TRUE twice.",
 		"MANTIS_BLADES": "Unleash a trio of blades upon the target, each dealing [10,20,40,SP] with a distinct damage type: PHYSICAL, SPECIAL and TRUE.",
-		"PLASMA_FIST": "Deal [120,SP] SPECIAL to the target and heal 25% of damage dealt.",
+		"PLASMA_FIST": "Deal [120,SP] SPECIAL to the target and heal 30% of damage dealt.",
 		"SPECTRAL_THIEF": "Disappear and reappear, dealing [50,SP] SPECIAL and steal all stat boosts from the target.",
 		"GEOMANCY": "Gain [15,SP] ATK, [10,SP] SPE_DEF and 20 SPEED.",
 		"DEATH_WING": "Deal [150,SP] SPECIAL and heal for 75% of the damage dealt.",
