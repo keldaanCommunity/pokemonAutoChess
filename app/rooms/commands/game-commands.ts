@@ -452,7 +452,7 @@ export class OnSwitchBenchAndBoardCommand extends Command<
           player.experienceManager.level,
           this.room.state.specialGameRule
         )
-      const destination = getFirstAvailablePositionOnBoard(player.board)
+      const destination = getFirstAvailablePositionOnBoard(player.board, pokemon.range)
       if (
         pokemon.canBePlaced &&
         destination &&
@@ -1474,16 +1474,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const pokemon = values(player.board).filter(
             (p) => isOnBench(p) && p.canBePlaced
           ).sort((a, b) => a.positionX - b.positionX)[0]
-          const coordinates = getFirstAvailablePositionOnBoard(player.board)
-          if (coordinates && pokemon) {
-            pokemon.positionX = coordinates[0]
-            pokemon.positionY = coordinates[1]
-            pokemon.onChangePosition(
-              coordinates[0],
-              coordinates[1],
-              player,
-              this.state
-            )
+          if (pokemon) {
+            const coordinates = getFirstAvailablePositionOnBoard(player.board, pokemon.range)
+
+            if (coordinates) {
+              pokemon.positionX = coordinates[0]
+              pokemon.positionY = coordinates[1]
+              pokemon.onChangePosition(
+                coordinates[0],
+                coordinates[1],
+                player,
+                this.state
+              )
+            }
           }
         }
         if (numberOfPokemonsToMove > 0) {

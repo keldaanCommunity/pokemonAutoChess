@@ -30,12 +30,28 @@ export function getFirstAvailablePositionInBench(
 }
 
 export function getFirstAvailablePositionOnBoard(
-  board: MapSchema<Pokemon, string>
+  board: MapSchema<Pokemon, string>,
+  range: number
 ) {
-  for (let x = 0; x < 8; x++) {
-    for (let y = 1; y < 4; y++) {
-      if (isPositionEmpty(x, y, board)) {
-        return [x, y]
+  let rowsOrder: number[];
+  switch (Math.min(range, 3)){
+    case 2:
+      rowsOrder = [2,1,3]
+      break;
+      
+    case 3:
+      rowsOrder = [1,2,3]
+      break;
+
+    case 1:
+    default:
+      rowsOrder = [3,2,1]
+      break;
+  }
+  for (let y = 0; y < rowsOrder.length; y++){
+    for (let x = 0; x < 8; x++) {
+      if (isPositionEmpty(x, rowsOrder[y], board)) {
+        return [x, rowsOrder[y]]
       }
     }
   }
