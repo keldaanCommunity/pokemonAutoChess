@@ -1583,9 +1583,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               }
             }
             if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
-              // remove after one fight
+              // remove after one fight              
               player.board.delete(key)
-              player.board.delete(pokemon.id)
             }
           })
 
