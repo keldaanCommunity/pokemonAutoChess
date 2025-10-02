@@ -10959,7 +10959,7 @@ export class BoneArmorStrategy extends AbilityStrategy {
         pokemon.moveTo(coord.x, coord.y, board)
       }
       const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
-      const defBuff = [4, 8, 12][pokemon.stars - 1] ?? 6
+      const defBuff = [4, 8, 12][pokemon.stars - 1] ?? 12
       const attack = target.handleSpecialDamage(
         damage,
         board,
