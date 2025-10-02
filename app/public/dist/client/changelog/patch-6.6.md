@@ -71,5 +71,6 @@
 - Fix Grav Apple dealing special damage instead of physical damage
 - Fix Syrup Bomb AP scaling being applied twice
 - Fix Entangling thread targeting
+- Fix unlocking in Pokédex for Hoopa unbound, Aegislash Blade form and unmasked forms of Ogerpon
 
 # Misc
