@@ -2819,7 +2819,7 @@
 		"CORSOLA": "$t(pkm.CORSOLA) evolves into $t(pkm.GALAR_CORSOLA) after being KO once",
 		"CELEBI": "The player regains 1 HP every time $t(pkm.CELEBI) casts $t(ability.TIME_TRAVEL).",
 		"GIMMIGHOUL": "$t(pkm.GIMMIGHOUL) is looking for 99 GOLD in bank",
-		"GHOLDENGO": "At the start of each fight, if the player has 50 GOLD or more, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
+		"GHOLDENGO": "At the start of each fight, if the player has reached max GOLD interests, $t(pkm.GHOLDENGO) gains RUNE_PROTECT for the entire fight",
 		"METEOR": "$t(pkm.MINIOR) alternates between its meteor and core forms. The meteor form grants [5,SP] SPEED per attack.\n Core form attacks apply additional effects on target and ADJACENT enemies:\n Red: Deals [150,SP]% PHYSICAL\n Blue: Deals [100,SP]% SPECIAL\n Orange: Deals [50,SP]% TRUE\n Green: heals ADJACENT allies for [100,SP]% of damage dealt",
 		"MIMIKYU": "When hit under 50% HP, Mimikyu changes into its Busted Form, gaining 10 ATK and PROTECT for 2 seconds",
 		"MIMIKYU_BUSTED": "Its neck is broken. Mimikyu will never forget the person who damaged its rag for as long as it is still alive.",

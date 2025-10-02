@@ -293,13 +293,6 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   })
 })
 
-export const SlowStartEffect = new OnAbilityCastEffect((pokemon, board) => {
-  if (pokemon.count.ult === 1) {
-    pokemon.addSpeed(30, pokemon, 0, false)
-    pokemon.addAttack(10, pokemon, 0, false)
-  }
-})
-
 export class AccelerationEffect extends OnMoveEffect {
   accelerationStacks = 0
 
@@ -889,9 +882,20 @@ export const PassiveEffects: Partial<
   [Passive.KUBFU]: [KubfuOnKillEffect],
   [Passive.QWILFISH]: [QwilfishPassiveEffect],
   [Passive.HISUIAN_QWILFISH]: [HisuianQwilfishOnCastEffect],
-  [Passive.SLOW_START]: [SlowStartEffect],
+  [Passive.SLOW_START]: [
+    new OnSpawnEffect((pokemon) => pokemon.addSpeed(-30, pokemon, 0, false)),
+    new OnAbilityCastEffect((pokemon) => {
+      if (pokemon.count.ult === 1) {
+        pokemon.addSpeed(30, pokemon, 0, false)
+        pokemon.addAttack(10, pokemon, 0, false)
+      }
+    })
+  ],
   [Passive.VIGOROTH]: [
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
+  ],
+  [Passive.MEGA_SABLEYE]: [
+    new OnSpawnEffect((entity) => entity.status.triggerRuneProtect(60000))
   ],
   [Passive.PIKACHU_SURFER]: [PikachuSurferBuffEffect],
   [Passive.ACCELERATION]: [
@@ -995,5 +999,29 @@ export const PassiveEffects: Partial<
   [Passive.SUDOWOODO]: [treeEffect],
   [Passive.INANIMATE]: [inanimateObjectEffect],
   [Passive.SKARMORY]: [skarmorySpikesOnSimulationStartEffect],
-  [Passive.DRY_SKIN]: [drySkinOnSpawnEffect]
+  [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],
+  [Passive.SPOT_PANDA]: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
+    })
+  ],
+  [Passive.AQUA_VEIL]: [
+    new OnSpawnEffect((entity) => {
+      if (entity.simulation.weather === Weather.RAIN) {
+        entity.status.triggerRuneProtect(60000)
+      }
+    })
+  ],
+  [Passive.SPECIAL_ATTACK]: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.SPECIAL_ATTACKS)
+    })
+  ],
+  [Passive.GHOLDENGO]: [
+    new OnSpawnEffect((entity) => {
+      if (entity.player && entity.player.money >= entity.player.maxInterest * 10) {
+        entity.status.triggerRuneProtect(60000)
+      }
+    })
+  ]
 }
