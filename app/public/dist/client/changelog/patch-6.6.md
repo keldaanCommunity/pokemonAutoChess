@@ -78,5 +78,6 @@
 - Bide (Shuckle) now has proper targeting and no longer ignore damage healed
 - Fix Octazooka being unable to crit with reaper's cloth
 - Fix Thunderous Kick reducing half the intended defense of enemies in the path
+- Fix Force Palm always dealing the extra paralyze damage
 
 # Misc

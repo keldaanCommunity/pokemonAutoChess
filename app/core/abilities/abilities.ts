@@ -10249,6 +10249,8 @@ export class ForcePalmStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const additionalDamage = target.status.paralysis ? 40 : 0
+    const damage = Math.round(60 + target.hp * 0.1 + additionalDamage)
     if (target.status.paralysis) {
       let farthestEmptyCell: Cell | null = null
       effectInLine(board, pokemon, target, (cell) => {
@@ -10263,8 +10265,6 @@ export class ForcePalmStrategy extends AbilityStrategy {
     } else {
       target.status.triggerParalysis(6000, target, pokemon)
     }
-    const additionalDamage = target.status.paralysis ? 40 : 0
-    const damage = Math.round(60 + target.hp * 0.1 + additionalDamage)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
