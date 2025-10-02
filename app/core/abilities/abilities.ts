@@ -38,7 +38,7 @@ import {
 import { values } from "../../utils/schemas"
 
 import type { Board, Cell } from "../board"
-import { PeriodicEffect } from "../effects/effect"
+import { OnDamageReceivedEffect, PeriodicEffect } from "../effects/effect"
 import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -4843,7 +4843,7 @@ export class PlasmaFistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 120
-    const {takenDamage} = target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const { takenDamage } = target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     if (takenDamage > 0) {
       pokemon.handleHeal(Math.round(takenDamage * 0.3), pokemon, 0, crit)
     }
@@ -7123,8 +7123,8 @@ export class SandTombStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
 
     const statusDuration = [3000, 5000, 8000][pokemon.stars - 1] ?? 8000
-    const damage = [10, 20, 40][pokemon.stars -1] ?? 40
-    
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+
     target.status.triggerParalysis(
       statusDuration,
       target,
@@ -10308,6 +10308,44 @@ export class SteelWingStrategy extends AbilityStrategy {
   }
 }
 
+class BideEffect extends PeriodicEffect {
+  duration: number
+  damageReceived: number = 0
+  constructor(pokemon: PokemonEntity, duration: number, board: Board, crit: boolean) {
+    super((pokemon) => {
+      if (this.duration <= 0) {
+        this.procDamage(pokemon, board, crit)
+        pokemon.effectsSet.delete(this)
+        pokemon.effectsSet.delete(damageMonitor)
+      } else {
+        this.duration -= this.intervalMs
+      }
+    }, Ability.BIDE, 1000)
+    this.duration = duration
+    const damageMonitor = new OnDamageReceivedEffect(({ damage }) => {
+      this.damageReceived += damage
+    }, Ability.BIDE)
+    pokemon.effectsSet.add(damageMonitor)
+  }
+  procDamage(pokemon: PokemonEntity, board: Board, crit: boolean) {
+    pokemon.broadcastAbility({ skill: Ability.BIDE })
+    const damage = 2 * this.damageReceived
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
+  }
+}
+
 export class BideStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -10315,33 +10353,8 @@ export class BideStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
-    const startingHealth = pokemon.life + pokemon.shield
-
-    pokemon.commands.push(
-      new DelayedCommand(() => {
-        pokemon.broadcastAbility({
-          targetX: target.positionX,
-          targetY: target.positionY
-        })
-        const multiplier = 2
-        const currentHealth = pokemon.life + pokemon.shield
-        const damage = (startingHealth - currentHealth) * multiplier
-        board
-          .getAdjacentCells(target.positionX, target.positionY, true)
-          .forEach((cell) => {
-            if (cell.value && pokemon.team != cell.value.team) {
-              cell.value.handleSpecialDamage(
-                damage,
-                board,
-                AttackType.SPECIAL,
-                pokemon,
-                crit
-              )
-            }
-          })
-      }, 3000)
-    )
+    super.process(pokemon, board, target, crit, true)
+    pokemon.effectsSet.add(new BideEffect(pokemon, 3000, board, crit))
   }
 }
 
