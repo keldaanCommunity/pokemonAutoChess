@@ -9631,8 +9631,8 @@ export class CrushClawStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const defLoss = [-5, -10][pokemon.stars - 1] ?? -6
-    target.addDefense(defLoss, pokemon, 0, false)
+    const defLoss = [5, 10][pokemon.stars - 1] ?? 10
+    target.addDefense(-defLoss, pokemon, 0, false)
     for (let i = 0; i < 2; i++) {
       target.handleSpecialDamage(
         pokemon.atk,
