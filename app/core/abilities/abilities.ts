@@ -1130,6 +1130,9 @@ export class KingShieldStrategy extends AbilityStrategy {
           pokemon.addSpecialDefense(-5, pokemon, 1, crit)
           pokemon.name = Pkm.AEGISLASH_BLADE
           pokemon.index = PkmIndex[Pkm.AEGISLASH_BLADE]
+          if (pokemon.player) {
+            pokemon.player.pokemonsPlayed.add(Pkm.AEGISLASH_BLADE)
+          }
         }, 1500)
       )
     } else if (pokemon.name === Pkm.AEGISLASH_BLADE) {
@@ -7118,23 +7121,26 @@ export class SandTombStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+
+    const statusDuration = [3000, 5000, 8000][pokemon.stars - 1] ?? 8000
+    const damage = [10, 20, 40][pokemon.stars -1] ?? 40
+    
     target.status.triggerParalysis(
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      statusDuration,
       target,
       pokemon
     )
     target.status.triggerSilence(
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      statusDuration,
       target,
       pokemon
     )
     target.handleSpecialDamage(
-      pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10,
+      damage,
       board,
       AttackType.SPECIAL,
       pokemon,
-      crit,
-      false
+      crit
     )
   }
 }
@@ -7209,6 +7215,9 @@ export class UnboundStrategy extends AbilityStrategy {
     pokemon.addAttack(10, pokemon, 0, false)
     pokemon.addMaxHP(100, pokemon, 0, false)
     pokemon.toMovingState()
+    if (pokemon.player) {
+      pokemon.player.pokemonsPlayed.add(Pkm.HOOPA_UNBOUND)
+    }
   }
 }
 
@@ -8149,6 +8158,9 @@ export class AuraWheelStrategy extends AbilityStrategy {
     if (pokemon.name === Pkm.MORPEKO) {
       pokemon.name = Pkm.MORPEKO_HANGRY
       pokemon.index = PkmIndex[Pkm.MORPEKO_HANGRY]
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.MORPEKO_HANGRY)
+      }
     } else {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]

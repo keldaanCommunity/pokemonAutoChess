@@ -647,6 +647,9 @@ const ogerponMaskDropEffect = (
       pokemon.index = PkmIndex[to]
       pokemon.name = to
       pokemon.removeItem(mask)
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(to)
+      }
     }
   }, mask)
 
