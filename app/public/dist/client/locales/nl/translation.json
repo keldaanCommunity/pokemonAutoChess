@@ -1005,7 +1005,7 @@
 		"MAWASHI_GERI": "Aanbiedingen [60,SP] SPECIAL. Dubbele schade als de aanvaller een betere ATK heeft dan het doelwit",
 		"FORECAST": "Geeft [10,SP] SHIELD aan je team, plus extra bonus afhankelijk van het weer:\n Zon: geeft ook [4,SP] ATK\n Regen: geeft ook [8,SP] PP\n Sneeuw: geeft ook [2,SP] DEF / SPE_DEF",
 		"X_SCISSOR": "Deals [10,20,40,60,SP] tweemaal TRUE",
-		"PLASMA_FIST": "Deals [120,SP] SPECIAL met 25% lifesteal",
+		"PLASMA_FIST": "Deals [120,SP] SPECIAL met 30% lifesteal",
 		"SPECTRAL_THIEF": "Verdwijnt en verschijnt weer bij het delen van [50,SP] SPECIAL, waarbij alle statistische boost van het doelwit wordt gestolen",
 		"GEOMANCY": "Krijg [15,SP] ATK, [10,SP] SPE_DEF en 20 SPEED",
 		"DEATH_WING": "Doet SPECIAL [150,SP] en geneest 75% van de schade die het doelwit heeft opgelopen",

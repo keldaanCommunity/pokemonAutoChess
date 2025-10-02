@@ -1358,7 +1358,7 @@
 		"FORECAST": "Dá [10,SP] SHIELD ao seu time, além de bônus adicional dependendo do clima:\n SNOW: também dá [2,SP] DEF / SPE_DEF\n SUN: também dá [4,SP] ATK\n RAIN: também dá [8,SP] PP",
 		"X_SCISSOR": "Negócios [10,20,40,60,SP] TRUE duas vezes",
 		"MANTIS_BLADES": "Lança um trio de lâminas sobre o alvo, cada uma infligindo [10,20,40,SP] com um tipo de dano diferente: FÍSICO, SPECIAL e VERDADEIRO",
-		"PLASMA_FIST": "Inflige [120,SP] SPECIAL com 25% de roubo de vida",
+		"PLASMA_FIST": "Inflige [120,SP] SPECIAL com 30% de roubo de vida",
 		"SPECTRAL_THIEF": "Desaparece e reaparece distribuindo [50,SP] SPECIAL, roubando todo o boost estatístico do alvo",
 		"GEOMANCY": "Ganhe [15,SP] ATK, [10,SP] SPE_DEF e 20 SPEED",
 		"DEATH_WING": "Inflige [150,SP] SPECIAL e cura 75% do dano sofrido pelo alvo",

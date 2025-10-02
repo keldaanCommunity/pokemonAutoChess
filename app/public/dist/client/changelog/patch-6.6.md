@@ -44,6 +44,7 @@
 - Fix Egg Bomb damaging the same target instead of AoE ; damage 30/60/120 → 25/50/100
 - Teleport (Abra) and Shadow Punch (Golett) special damage is now properly considered as part of the attack damage, which better interacts with Choice Scarf
 - Comfey is now always held by the strongest ally among the nearest allies with a free item slot
+- Buff Plasma Fist: 25% heal from damage dealt -> 30% heal from damage dealt
 
 # Changes to Synergies
 
@@ -71,5 +72,6 @@
 - Fix Grav Apple dealing special damage instead of physical damage
 - Fix Syrup Bomb AP scaling being applied twice
 - Fix Entangling thread targeting
+- Fix Plasma Fist healing before considering targets defense reduction
 
 # Misc
