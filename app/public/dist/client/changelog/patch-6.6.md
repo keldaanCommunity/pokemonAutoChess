@@ -75,5 +75,6 @@
 - Fix Sand Tomb damage not scaling on AP
 - Fix unlocking in Pokédex for Hoopa unbound, Aegislash Blade form and unmasked forms of Ogerpon
 - Bide (Shuckle) now has proper targeting and no longer ignore damage healed
+- Fix Octazooka being unable to crit with reaper's cloth
 
 # Misc
