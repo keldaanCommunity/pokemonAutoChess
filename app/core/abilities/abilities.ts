@@ -7116,23 +7116,26 @@ export class SandTombStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+
+    const statusDuration = [3000, 5000, 8000][pokemon.stars - 1] ?? 8000
+    const damage = [10, 20, 40][pokemon.stars -1] ?? 40
+    
     target.status.triggerParalysis(
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      statusDuration,
       target,
       pokemon
     )
     target.status.triggerSilence(
-      pokemon.stars === 3 ? 8000 : pokemon.stars === 2 ? 5000 : 3000,
+      statusDuration,
       target,
       pokemon
     )
     target.handleSpecialDamage(
-      pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10,
+      damage,
       board,
       AttackType.SPECIAL,
       pokemon,
-      crit,
-      false
+      crit
     )
   }
 }
