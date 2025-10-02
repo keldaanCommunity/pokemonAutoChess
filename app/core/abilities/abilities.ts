@@ -4842,7 +4842,7 @@ export class PlasmaFistStrategy extends AbilityStrategy {
     const damage = 120
     const {takenDamage} = target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     if (takenDamage > 0) {
-      pokemon.handleHeal(takenDamage * 0.25, pokemon, 1, crit)
+      pokemon.handleHeal(Math.round(takenDamage * 0.25), pokemon, 0, crit)
     }
   }
 }
