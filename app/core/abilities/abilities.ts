@@ -9989,7 +9989,7 @@ export class OctazookaStrategy extends AbilityStrategy {
       board,
       AttackType.SPECIAL,
       pokemon,
-      false
+      crit
     )
 
     target.status.triggerBlinded(4000, target)
