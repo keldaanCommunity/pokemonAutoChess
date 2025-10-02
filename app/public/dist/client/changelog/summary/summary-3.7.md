@@ -15,7 +15,7 @@ New fighting animations for almost all Pokemon, and a brand new HUD redesign !
 
 ## Human after all
 
-Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don't need 8 players any more to be elligible for ELO, but need at least 2 human players.
+Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don't need 8 players any more to be eligible for ELO, but need at least 2 human players.
 
 ## Getting sweaty
 

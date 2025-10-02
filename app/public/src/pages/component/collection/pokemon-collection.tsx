@@ -278,7 +278,7 @@ export function PokemonCollectionList(props: {
     })
   }, [pokemonsSorted, props.type])
 
-  const elligiblePokemons: (React.JSX.Element | null)[] = useMemo(
+  const eligiblePokemons: (React.JSX.Element | null)[] = useMemo(
     () =>
       pokemonsFiltered.map((pkm) => {
         const pokemonData = getPokemonData(pkm)
@@ -296,5 +296,5 @@ export function PokemonCollectionList(props: {
     [getItem, pokemonsFiltered, props.filterState, props.setPokemon, props.type]
   )
 
-  return <div className="pokemon-collection-list">{elligiblePokemons}</div>
+  return <div className="pokemon-collection-list">{eligiblePokemons}</div>
 }

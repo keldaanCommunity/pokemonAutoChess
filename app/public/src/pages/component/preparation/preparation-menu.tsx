@@ -90,7 +90,7 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length, allUsersReady])
 
   const humans = users.filter((u) => !u.isBot)
-  const isElligibleForELO =
+  const iseligibleForELO =
     gameMode === GameMode.CLASSIC || users.filter((u) => !u.isBot).length >= 2
   const averageElo = Math.round(
     humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
@@ -182,14 +182,14 @@ export default function PreparationMenu() {
           />
           {t("no_elo_hint")}
         </p>
-      ) : isElligibleForELO ? (
+      ) : iseligibleForELO ? (
         <p>
-          {t("elligible_elo_hint")} {t("average_elo")}: {averageElo} ;{" "}
+          {t("eligible_elo_hint")} {t("average_elo")}: {averageElo} ;{" "}
           {t("GLHF")}
           {" !"}
         </p>
       ) : users.length > 1 ? (
-        <p>{t("not_elligible_elo_hint")}</p>
+        <p>{t("not_eligible_elo_hint")}</p>
       ) : null}
 
       {gameMode === GameMode.CUSTOM_LOBBY && users.length === 1 && (

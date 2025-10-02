@@ -1318,7 +1318,7 @@
 	"kick_user": "เตะผู้เล่น",
 	"delete_room": "ลบห้อง",
 	"no_elo_hint": "เกมนี่ไม่มีการเสีย Elo ขอให้เล่นให้สนุก!",
-	"elligible_elo_hint": "✔ เกมนี้จะมีการเก็บแต้ม Elo ขอให้โชคดี.",
+	"eligible_elo_hint": "✔ เกมนี้จะมีการเก็บแต้ม Elo ขอให้โชคดี.",
 	"average_elo": "Elo เฉลี่ย",
 	"GLHF": "GLHF",
 	"add_bot_or_wait_hint": "❌เกมที่มีบอทอย่างเดียวจะไม่มีการเก็บ Elo.",

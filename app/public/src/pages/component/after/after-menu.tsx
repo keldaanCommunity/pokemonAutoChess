@@ -18,8 +18,8 @@ export default function AfterMenu() {
     .slice()
     .sort((a, b) => a.rank - b.rank)
 
-  const elligibleToXP = useAppSelector((state) => state.after.elligibleToXP)
-  const elligibleToELO = useAppSelector((state) => state.after.elligibleToELO)
+  const eligibleToXP = useAppSelector((state) => state.after.eligibleToXP)
+  const eligibleToELO = useAppSelector((state) => state.after.eligibleToELO)
   const gameMode = useAppSelector((state) => state.after.gameMode)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
@@ -28,7 +28,7 @@ export default function AfterMenu() {
   const newElo = currentPlayer
     ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans, gameMode, false)
     : null
-  const shouldShowElo = elligibleToELO && currentPlayer && newElo
+  const shouldShowElo = eligibleToELO && currentPlayer && newElo
 
   return (
     <div className="after-menu">
@@ -75,7 +75,7 @@ export default function AfterMenu() {
                   )
                 </p>
               )}
-              {elligibleToXP && (
+              {eligibleToXP && (
                 <p className="player-exp">EXP + {ExpPlace[playerRank - 1]}</p>
               )}
             </div>

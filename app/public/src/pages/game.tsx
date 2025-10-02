@@ -176,7 +176,7 @@ export default function Game() {
               let connectError = error.message
               if (error.code === 4212) {
                 // room disposed
-                connectError = "This game does no longer exist"
+                connectError = "This game does no longer exists"
               }
               //TODO: handle more known error codes with informative messages
               setConnectError(connectError)
@@ -277,9 +277,9 @@ export default function Game() {
       })
     }
 
-    const elligibleToXP =
+    const eligibleToXP =
       nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
-    const elligibleToELO =
+    const eligibleToELO =
       nbPlayers >= 2 &&
       ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount ||
         hasLeftBeforeEnd) &&
@@ -290,8 +290,8 @@ export default function Game() {
     const r: Room<AfterGameState> = await client.create("after-game", {
       players: afterPlayers,
       idToken: token,
-      elligibleToXP,
-      elligibleToELO,
+      eligibleToXP,
+      eligibleToELO,
       gameMode
     })
     localStore.set(

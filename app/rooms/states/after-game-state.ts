@@ -4,22 +4,22 @@ import { GameMode } from "../../types/enum/Game"
 
 export default class AfterGameState extends Schema {
   @type({ map: AfterGamePlayer }) players = new MapSchema<AfterGamePlayer>()
-  @type("boolean") elligibleToELO = false
-  @type("boolean") elligibleToXP = false
+  @type("boolean") eligibleToELO = false
+  @type("boolean") eligibleToXP = false
   @type("string") gameMode = GameMode.CUSTOM_LOBBY
 
   constructor({
-    elligibleToELO,
-    elligibleToXP,
+    eligibleToELO,
+    eligibleToXP,
     gameMode
   }: {
-    elligibleToELO: boolean
-    elligibleToXP: boolean
+    eligibleToELO: boolean
+    eligibleToXP: boolean
     gameMode: GameMode
   }) {
     super()
-    this.elligibleToXP = elligibleToXP
-    this.elligibleToELO = elligibleToELO
+    this.eligibleToXP = eligibleToXP
+    this.eligibleToELO = eligibleToELO
     this.gameMode = gameMode
   }
 }
