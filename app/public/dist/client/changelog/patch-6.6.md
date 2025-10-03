@@ -86,6 +86,7 @@
 - Fix Vise Grip incorrect description
 - Fix Bone Armor heal scaling on AP twice
 - Fix HM Cut dealing reduced damage
+- Fix Column Crush dealing damage on Pillar max hp instead of remaining hp
 - Fix Brick Break description incorrectly not showing the ability inflicts Armor Break
 - Fix Metal Claw description not showing attack buff scaling on AP
 
