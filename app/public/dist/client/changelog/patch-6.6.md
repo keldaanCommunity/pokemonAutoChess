@@ -80,6 +80,7 @@
 - Fix Thunderous Kick reducing half the intended defense of enemies in the path
 - Fix Force Palm always dealing the extra paralyze damage
 - Fix Vise Grip incorrect description
+- Fix Bone Armor heal scaling on AP twice
 - Fix HM Cut dealing reduced damage
 
 # Misc
