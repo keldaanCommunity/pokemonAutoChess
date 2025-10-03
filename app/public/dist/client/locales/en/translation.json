@@ -2034,7 +2034,7 @@
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,SP]. The cotton remains on the battlefield, causing SLEEP for 1 second to any Pokémon that walk on it.",
 		"COTTON_GUARD": "Wraps its body in soft cotton, gaining [15,30,60,SP] SHIELD and 3 DEF, then dropping cotton balls in the 3 tiles in front. Cotton balls stay on the ground, inflicting SLEEP for 1 second on any Pokémon that walk on it.",
 		"TWIN_BEAM": "Fires out two beams that hit the furthest enemies, dealing [30,60,100,SP] SPECIAL to all enemies in a line.",
-		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [3,SP] seconds.",
+		"SWAGGER": "Inflict the target with RAGE and CONFUSION for [2,SP] seconds.",
 		"ENCORE": "Casts the last ability used by an ally",
 		"STORED_POWER": "Deal 20 SPECIAL to the target. The more the user's stats are raised, the greater the damage. (ATK, SPEED, DEF, SPE_DEF, AP)",
 		"MIND_BEND": "Target is POSSESSED for [2,SP,ND=1] seconds. If RUNE_PROTECT or already POSSESSED, deals [100,SP] SPECIAL instead.",
