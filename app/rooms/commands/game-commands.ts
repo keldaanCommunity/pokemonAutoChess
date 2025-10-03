@@ -1445,6 +1445,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         p.pokemon.positionY = substitute.positionY
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
+        this.room.checkEvolutionsAfterPokemonAcquired(player.id)
         player.pokemonsTrainingInDojo.splice(player.pokemonsTrainingInDojo.indexOf(p), 1)
       })
     }
