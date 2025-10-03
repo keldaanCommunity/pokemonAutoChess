@@ -2018,7 +2018,7 @@
 		"BITTER_BLADE": "Focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every ADJACENT enemy. User heals 10% of its max HP for each enemy hit.",
 		"SUCTION_HEAL": "Drains the energy from its targets, dealing [15,30,60,SP] SPECIAL in a 2 tiles range CONE and heals HP for 50% of the damage dealt.",
 		"ROOST": "Flies away and lands in the back line, SLEEP for 1 second and heals for [20,40,80,SP] HP.",
-		"BEHEMOTH_BLADE": "Dash behind the target and deliver a powerful slash, dealing [100,SP] + 1x ATK as SPECIAL",
+		"BEHEMOTH_BLADE": "Dash behind the target and deliver a powerful slash, dealing [100,SP] + [100,SP]% ATK as SPECIAL",
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
 		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [25,SP] SHIELD and dealing [25,SP] SPECIAL to target and ADJACENT enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [25,SP] + ATK as SPECIAL.",
 		"ICICLE_MISSILE": "Launches [1,2,3] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for 3 seconds.",
