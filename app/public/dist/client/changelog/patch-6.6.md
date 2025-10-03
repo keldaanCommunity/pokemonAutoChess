@@ -93,4 +93,4 @@
 
 # Misc
 
-- New title Aquarist: Have Basculin Red, Blue and White in the same team
+- New title Aquariophile: Have Basculin Red, Blue and White in the same team

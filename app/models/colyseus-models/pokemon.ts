@@ -18629,7 +18629,7 @@ export class Golisopod extends Pokemon {
 const basculinOnAcquired = (player: Player) => {
   ;[Pkm.BASCULIN_BLUE, Pkm.BASCULIN_RED, Pkm.BASCULIN_WHITE].every((basculin) =>
     values(player.board).find((e) => e.name === basculin)
-  ) && player.titles.add(Title.AQUARIST)
+  ) && player.titles.add(Title.AQUARIOPHILE)
 }
 
 export class BasculinRed extends Pokemon {

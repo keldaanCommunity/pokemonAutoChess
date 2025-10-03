@@ -738,7 +738,7 @@ export enum Title {
   RUNNER = "RUNNER",
   FINISHER = "FINISHER",
   VICTORIOUS = "VICTORIOUS",
-  AQUARIST = "AQUARIST"
+  AQUARIOPHILE = "AQUARIOPHILE"
 }
 
 export interface IBoardEvent {
