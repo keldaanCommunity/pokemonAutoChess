@@ -11687,7 +11687,7 @@ export class SaltCureStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value) {
         if (cell.value.team === pokemon.team) {
-          cell.value.addShield(shield, pokemon, 0, false)
+          cell.value.addShield(shield, pokemon, 1, crit)
           cell.value.status.clearNegativeStatus()
         } else {
           if (
