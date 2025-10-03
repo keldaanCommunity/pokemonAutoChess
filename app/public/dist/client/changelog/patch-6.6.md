@@ -85,6 +85,7 @@
 - Fix Vise Grip incorrect description
 - Fix Bone Armor heal scaling on AP twice
 - Fix HM Cut dealing reduced damage
+- Fix Metal Claw description not showing attack buff scaling on AP
 
 # Misc
 
