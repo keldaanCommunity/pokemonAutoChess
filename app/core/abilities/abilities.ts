@@ -11591,7 +11591,7 @@ export class FrostBreathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [35, 70, 120][pokemon.stars - 1] ?? 120
+    const damage = [35, 70, 140][pokemon.stars - 1] ?? 140
 
     pokemon.orientation = board.orientation(
       pokemon.positionX,

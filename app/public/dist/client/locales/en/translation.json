@@ -1996,7 +1996,7 @@
 		"BOLT_BEAK": "Deal [80,SP] SPECIAL, [160,SP] SPECIAL if the target has more than 40 PP.",
 		"FREEZE_DRY": "Deals [70,SP] + 100% of the user's SPE_DEF as SPECIAL to the target. If target is KO, it explodes, and throws sharp ice at ADJACENT enemies dealing [30,SP] + 50% of the user's SPE_DEF as SPECIAL.",
 		"DRAGON_PULSE": "A shockwave from the user's gaping mouth deals [20,SP] SPECIAL to the target and ADJACENT enemies. The shockwave then reverberates through the enemies.",
-		"FROST_BREATH": "Blows a cold breath, dealing [30,60,120,SP] SPECIAL to enemies in a 2-tiles range CONE, with [50,LK]% chance to FREEZE for 2 seconds. Can crit by default.",
+		"FROST_BREATH": "Blows a cold breath, dealing [35,70,140,SP] SPECIAL to enemies in a 2-tiles range CONE, with [50,LK]% chance to FREEZE for 2 seconds. Can crit by default.",
 		"SALT_CURE": "ADJACENT allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
 		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and [12,SP] SPEED and have [30,LK]% chance to be CHARM for 1 second",

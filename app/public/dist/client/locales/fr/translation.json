@@ -1984,7 +1984,7 @@
 		"BOLT_BEAK": "Inflige [80,SP] SPECIAL, ou [160,SP] SPECIAL si la cible a plus de 40 PP.",
 		"FREEZE_DRY": "Inflige [70,SP] + 100% de la SPE_DEF du lanceur en SPECIAL à la cible. Si la cible est mise KO, elle explose et lance des éclats de glace tranchants sur les ennemis ADJACENT, infligeant [30,SP] + 50% de la SPE_DEF du lanceur en tant que SPECIAL.",
 		"DRAGON_PULSE": "Une onde de choc venant de la bouche béante du lanceur inflige [20,SP] SPECIAL à la cible et aux ennemis ADJACENT. L'onde de choc se réverbère ensuite sur les ennemis.",
-		"FROST_BREATH": "Souffle glacial infligeant [30,60,120,SP] SPECIAL aux ennemis dans un CONE de 2 cases, avec [50,LK]% de chance de geler pendant 2 secondes. Peut infliger un coup critique par défaut.",
+		"FROST_BREATH": "Souffle glacial infligeant [35,70,140,SP] SPECIAL aux ennemis dans un CONE de 2 cases, avec [50,LK]% de chance de geler pendant 2 secondes. Peut infliger un coup critique par défaut.",
 		"SALT_CURE": "Les alliés ADJACENT gagnent [10,20,40,SP] de SHIELD et leurs conditions de statut négatives sont soignées. Les ennemis ADJACENT de type WATER, STEEL ou GHOST subissent BURN pendant 5 secondes.",
 		"SPICY_EXTRACT": "Rend RAGE [1,2,3] alliés les plus proches pendant [2,SP] secondes.",
 		"SWEET_SCENT": "Les ennemis dans un rayon de 3 cases ne peuvent plus esquiver les attaques, perdent [6,SP] SPE_DEF et [12,SP] SPEED et ont [30,LK]% de chance d'être CHARM pendant 1 seconde.",

@@ -1989,7 +1989,7 @@
 		"BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。",
 		"FREEZE_DRY": "对目标造成SPECIAL，数值相当于100%的SPE_DEF加[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对ADJACENT的敌方宝可梦造成SPECIAL，数值相当于50%的SPE_DEF加[30,SP]。",
 		"DRAGON_PULSE": "从大大的口中掀起冲击波，对目标和ADJACENT敌方宝可梦造成[20,SP]点SPECIAL。冲击波会在敌方宝可梦之间回荡。",
-		"FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对前方2格半径的CONE内的敌方宝可梦造成[30,60,120,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。",
+		"FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对前方2格半径的CONE内的敌方宝可梦造成[35,70,140,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。",
 		"SALT_CURE": "ADJACENT我方宝可梦获得[10,20,40,SP]点SHIELD，并移除他们的异常状态。ADJACENT的WATER，STEEL或GHOST敌方宝可梦陷入BURN 5秒。",
 		"SPICY_EXTRACT": "最近的[1,2,3]只我方宝可梦陷入RAGE [2,SP]秒。",
 		"SWEET_SCENT": "3格半径范围内的敌方宝可梦失去闪避能力，且降低[6,SP]点SPE_DEF和[12,SP]点SPEED，还有[30,LK]%的概率陷入CHARM 1秒。",
