@@ -1852,7 +1852,7 @@
 		"BARB_BARRAGE": "Dive into the middle of the enemy team, dealing [20,40,60,80,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with POISONNED for 3 seconds.",
 		"MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE ADJACENT enemy Pokémon for [2,3,4] seconds.",
 		"INFERNAL_PARADE": "Shoot a returning Flame Wheel at farthest enemy, dealing [30, SP] SPECIAL twice to all enemy Pokémon in its path with a [50,LK]% chance to apply BURN for 3s.",
-		"RETALIATE": "Deal [150,SP]% of ATK as SPECIAL to the target + 1 additional attack for each fallen allied Pokémon.",
+		"RETALIATE": "Deal [150,SP]% of ATK as SPECIAL to the target, + 1 additional hit for each fallen allied Pokémon.",
 		"SLASH": "Deal [10,20,40,SP] SPECIAL to the target with a [30,60,90]% increased CRIT_CHANCE ratio. Can crit by default.",
 		"OUTRAGE": "Deal [150,200,250,SP]% ATK as SPECIAL to the target and ADJACENT enemy Pokémon and inflict the user with CONFUSION for 2 seconds.",
 		"LUNGE": "Jump to the enemy Pokémon with the highest ATK, dealing [50,SP] SPECIAL and reducing its ATK by [5,SP].",
