@@ -11253,7 +11253,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       // If a pillar is already on the board, jumps to it and throw the pillar at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL
       const pillarX = pillar.positionX
       const pillarY = pillar.positionY
-      const remainingHp = pillar.hp
+      const remainingHp = pillar.life
       const pillarType = pillar.name
       const team =
         pillar.team === Team.BLUE_TEAM

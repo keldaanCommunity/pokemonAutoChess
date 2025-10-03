@@ -85,6 +85,7 @@
 - Fix Vise Grip incorrect description
 - Fix Bone Armor heal scaling on AP twice
 - Fix HM Cut dealing reduced damage
+- Fix Column Crush dealing damage on Pillar max hp instead of remaining hp
 
 # Misc
 
