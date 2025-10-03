@@ -90,6 +90,7 @@
 - Fix Brick Break description incorrectly not showing the ability inflicts Armor Break
 - Fix Metal Claw description not showing attack buff scaling on AP
 - Fix Salt Cure not scaling on AP
+- Fix Spicy Extract not scaling on AP
 
 # Misc
 
