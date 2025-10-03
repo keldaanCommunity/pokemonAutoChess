@@ -1878,7 +1878,7 @@
 		"CORE_ENFORCER": "Golpea en un área en forma de Z alrededor del objetivo, infligiendo [80,SP] de SPECIAL y SILENCE durante 3 segundos.",
 		"POWER_HUG": "Inflige [40,80,SP] SPECIAL al objetivo. Causa LOCKED y PARALYSIS por 3 segundos.",
 		"MORTAL_SPIN": "Empuja a cualquier Pokémon que tenga de objetivo al usuario a rango cercano. Inflige [20,30,40,SP] SPECIAL a cualquier enemigo golpeado, y aplica POISONNED por 4 segundos",
-		"METAL_CLAW": "Inflige [10,20,40,SP] TRUE al objetivo y sube su ATK en [2,4,6].",
+		"METAL_CLAW": "Inflige [10,20,40,SP] TRUE al objetivo y sube su ATK en [2,4,6,SP].",
 		"FIRESTARTER": "Obtiene [10,20,40,SP] SPEED y vuela al enemigo más lejano, dejando caer brasas en las casillas entremedio. Las brasas causan [20,40,80,SP] SPECIAL y se quedan en el suelo, cualquier Pokémon que las pise es BURN y recibe 10 SPECIAL por segundo si no es FLYING o FIRE.",
 		"BONE_ARMOR": "Vuela al enemigo más débil infligiendo [20,40,80] SPECIAL, y curando a si mismo el daño hecho. Si el objetivo queda KO, recupera sus huesos para crear armadura, obteniendo [4,8,12] DEF y SPE_DEF.",
 		"RAGE": "Obtiene el estado de RAGE por 3 segundos y gana [10,SP]% ATK por cada 10% de sus HP máximos faltantes",

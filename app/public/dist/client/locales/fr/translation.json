@@ -1965,7 +1965,7 @@
 		"CORE_ENFORCER": "Attaque à zone d'effet en forme de Z autour de la cible, infligeant [80,SP] SPECIAL et SILENCE pendant 3 secondes.",
 		"POWER_HUG": "Inflige [40,80,SP] SPECIAL à la cible. La cible subit PARALYSIS et est LOCKED pendant 3 secondes.",
 		"MORTAL_SPIN": "Repousse tous les Pokémon ciblant le lanceur à portée de corps à corps. Inflige [20,30,40,SP] SPECIAL à tous les ennemis touchés et applique POISONNED pendant 4 secondes.",
-		"METAL_CLAW": "Inflige [10,20,40,SP] TRUE à la cible et augmente l'ATK du lanceur de [2,4,6].",
+		"METAL_CLAW": "Inflige [10,20,40,SP] TRUE à la cible et augmente l'ATK du lanceur de [2,4,6,SP].",
 		"FIRESTARTER": "Gagne [10,20,40,SP] SPEED et vole vers l'ennemi le plus éloigné, en laissant tomber des braises sur son chemin. Les braises infligent [20,40,80,SP] SPECIAL et restent au sol. Tout Pokémon qui marche dessus subit 10 SPECIAL par seconde et BURN sauf si le Pokémon est de type FLYING ou FIRE.",
 		"BONE_ARMOR": "Vole vers l'ennemi le plus faible et lui inflige [20,40,80,SP] SPECIAL, se soignant à hauteur des dégâts infligés. Si la cible est mise KO, le lanceur récupère ses os pour fabriquer une armure, gagnant [4,8,12] DEF et SPE_DEF.",
 		"RAGE": "Gagne le statut RAGE pendant 3 secondes et [10,SP]% d'ATK de base pour chaque tranche de 10% des HP max perdus.",
