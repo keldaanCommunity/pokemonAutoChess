@@ -1977,7 +1977,7 @@
 		"CORE_ENFORCER": "Hits in a Z-shape area around the target, dealing [80,SP] SPECIAL and inflicting SILENCE for 3 seconds.",
 		"POWER_HUG": "Deal [40,80,SP] SPECIAL to the target. The target is LOCKED and PARALYSIS for 3 seconds.",
 		"MORTAL_SPIN": "Knock back any Pokémon targeting the user in melee range. Deal [20,30,40,SP] SPECIAL to any enemies hit, and apply POISONNED for 4 seconds",
-		"METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6].",
+		"METAL_CLAW": "Deal [10,20,40,SP] TRUE to the target and raise the user's ATK by [2,4,6,SP].",
 		"FIRESTARTER": "Gains [10,20,40,SP] SPEED and flies to the furthest enemy, dropping embers on the tiles in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE.",
 		"BONE_ARMOR": "Flies to the weakest enemy inflicting [20,40,80,SP] SPECIAL, healing for the damage dealt. If the target is KO'd, recover its bones to make armor, gaining [4,8,12] DEF and SPE_DEF.",
 		"RAGE": "Get RAGE status for 3 seconds and gain [10,SP]% base ATK for each 10% of max HP missing",
