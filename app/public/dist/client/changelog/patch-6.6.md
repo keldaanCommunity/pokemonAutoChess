@@ -55,7 +55,7 @@
 
 # Gameplay
 
-- New weather Murky: reduce Luck by 30% (Ghost are immune), silence duration +30%. Triggered when 8 Ghost Pokémon are on board.
+- New weather Murky: reduce Luck by 30 (Ghost are immune), silence duration +30%. Triggered when 8 Ghost Pokémon are on board.
 
 # UI
 
@@ -81,5 +81,6 @@
 - Fix Force Palm always dealing the extra paralyze damage
 - Fix Vise Grip incorrect description
 - Fix Bone Armor heal scaling on AP twice
+- Fix HM Cut dealing reduced damage
 
 # Misc
