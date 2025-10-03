@@ -13743,7 +13743,7 @@ export class LastRespectsStrategy extends AbilityStrategy {
     // Calculate curse delay with AP and crit scaling
     // Base delays: 1★=8s, 2★=5s, 3★=3s, reduced by AP and crit power
     const curseDelay = min(0)(
-      ([8000, 5000, 3000][pokemon.stars - 1] ?? 3000) *
+      ([10000, 8000, 5000][pokemon.stars - 1] ?? 5000) *
         (1 - (factor * pokemon.ap) / 100) *
         (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
     )
