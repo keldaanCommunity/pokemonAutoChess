@@ -2520,7 +2520,10 @@
 		"SCROLL_OF_WATERS": "Scroll of Waters",
 		"SCROLL_OF_DARKNESS": "Scroll of Darkness",
 		"RICH_MULCH": "Rich Mulch",
-		"AMAZE_MULCH": "Amaze Mulch"
+		"AMAZE_MULCH": "Amaze Mulch",
+		"BRONZE_DOJO_TICKET": "Bronze Dojo Ticket",
+		"SILVER_DOJO_TICKET": "Silver Dojo Ticket",
+		"GOLD_DOJO_TICKET": "Gold Dojo Ticket"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2746,7 +2749,10 @@
 		"SCROLL_OF_WATERS": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID).",
 		"SCROLL_OF_DARKNESS": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)",
 		"RICH_MULCH": "Use it on a flower pot to evolve the Pokémon inside.",
-		"AMAZE_MULCH": "Use it on a flower pot to permanently give 50 max HP and 30 AP to the Pokémon inside."
+		"AMAZE_MULCH": "Use it on a flower pot to permanently give 50 max HP and 30 AP to the Pokémon inside.",
+		"BRONZE_DOJO_TICKET": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +50 max HP, +5 ATK and +15 AP. A substitute takes their place in the meantime.",
+		"SILVER_DOJO_TICKET": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +100 max HP, +10 ATK and +30 AP. A substitute takes their place in the meantime.",
+		"GOLD_DOJO_TICKET": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +150 max HP, +15 ATK and +45 AP. A substitute takes their place in the meantime."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -4040,7 +4046,8 @@
 		"REGIROCK": "Regirock grants all players 15 additional HP",
 		"MUNCHLAX": "Munchlax brought a PICNIC_SET for everyone",
 		"SABLEYE": "Sableye proposes synergy gems that increase your synergies levels",
-		"CELEBI": "Celebi predicts the next PvE fight will be shiny"
+		"CELEBI": "Celebi predicts the next PvE fight will be shiny",
+		"MAKUHITA": "Makuhita trains one of your Pokémon for 5 stages to improve their stats"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

@@ -267,6 +267,26 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
   }
 )
 
+export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
+  constructor(ticketLevel: number) {
+    super(({ pokemon, player, room, item }) => {
+      const substitute = PokemonFactory.createPokemonFromName(Pkm.SUBSTITUTE, player)
+      player.board.delete(pokemon.id)
+      substitute.id = pokemon.id
+      substitute.positionX = pokemon.positionX
+      substitute.positionY = pokemon.positionY
+      player.board.set(substitute.id, substitute)
+      player.pokemonsTrainingInDojo.push({
+        pokemon,
+        ticketLevel,
+        returnStage: room.state.stageLevel + 5
+      })
+      removeInArray(player.items, item)
+      return false // prevent item from being equipped
+    })
+  }
+}
+
 const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (!pokemon) return
   const chef = pokemon
@@ -584,7 +604,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addShield(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-            2
+          2
         ) * 2,
         pokemon,
         0,
@@ -593,7 +613,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addSpeed(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-            2
+          2
         ),
         pokemon,
         0,
@@ -604,7 +624,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addAbilityPower(
         -Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-            2
+          2
         ),
         pokemon,
         0,
@@ -1017,5 +1037,9 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       }
       return false // prevent item from being equipped
     })
-  ]
+  ],
+
+  [Item.BRONZE_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(1)],
+  [Item.SILVER_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(2)],
+  [Item.GOLD_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(3)]
 }

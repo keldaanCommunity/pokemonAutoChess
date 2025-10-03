@@ -226,7 +226,10 @@ export enum Item {
   SCROLL_OF_DARKNESS = "SCROLL_OF_DARKNESS",
   MYSTERY_BOX = "MYSTERY_BOX",
   RICH_MULCH = "RICH_MULCH",
-  AMAZE_MULCH = "AMAZE_MULCH"
+  AMAZE_MULCH = "AMAZE_MULCH",
+  BRONZE_DOJO_TICKET = "BRONZE_DOJO_TICKET",
+  SILVER_DOJO_TICKET = "SILVER_DOJO_TICKET",
+  GOLD_DOJO_TICKET = "GOLD_DOJO_TICKET"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -271,7 +274,10 @@ export const SpecialItems: Item[] = [
   Item.MYSTERY_BOX,
   Item.RUSTED_SWORD,
   Item.SCROLL_OF_WATERS,
-  Item.SCROLL_OF_DARKNESS
+  Item.SCROLL_OF_DARKNESS,
+  Item.BRONZE_DOJO_TICKET,
+  Item.SILVER_DOJO_TICKET,
+  Item.GOLD_DOJO_TICKET
 ]
 
 export const FishingRods = [
@@ -523,20 +529,20 @@ export const SynergyGivenByItem: Record<
 }
 
 export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
-  {
-    [Item.FIRE_GEM]: Synergy.FIRE,
-    [Item.NORMAL_GEM]: Synergy.NORMAL,
-    [Item.ROCK_GEM]: Synergy.ROCK,
-    [Item.WATER_GEM]: Synergy.WATER,
-    [Item.POISON_GEM]: Synergy.POISON,
-    [Item.FLYING_GEM]: Synergy.FLYING,
-    [Item.ICE_GEM]: Synergy.ICE,
-    [Item.GHOST_GEM]: Synergy.GHOST,
-    [Item.DRAGON_GEM]: Synergy.DRAGON,
-    [Item.BUG_GEM]: Synergy.BUG,
-    //[Item.DARK_GEM]: Synergy.DARK,
-    [Item.STEEL_GEM]: Synergy.STEEL
-  }
+{
+  [Item.FIRE_GEM]: Synergy.FIRE,
+  [Item.NORMAL_GEM]: Synergy.NORMAL,
+  [Item.ROCK_GEM]: Synergy.ROCK,
+  [Item.WATER_GEM]: Synergy.WATER,
+  [Item.POISON_GEM]: Synergy.POISON,
+  [Item.FLYING_GEM]: Synergy.FLYING,
+  [Item.ICE_GEM]: Synergy.ICE,
+  [Item.GHOST_GEM]: Synergy.GHOST,
+  [Item.DRAGON_GEM]: Synergy.DRAGON,
+  [Item.BUG_GEM]: Synergy.BUG,
+  //[Item.DARK_GEM]: Synergy.DARK,
+  [Item.STEEL_GEM]: Synergy.STEEL
+}
 
 export const NonSpecialItemComponents: Item[] = [
   Item.TWISTED_SPOON,
@@ -708,6 +714,12 @@ export const Sweets: Item[] = [
 
 export const Mulches: Item[] = [Item.RICH_MULCH, Item.AMAZE_MULCH]
 
+export const DojoTickets: Item[] = [
+  Item.BRONZE_DOJO_TICKET,
+  Item.SILVER_DOJO_TICKET,
+  Item.GOLD_DOJO_TICKET
+]
+
 export const UnholdableItems: Item[] = [
   ...WeatherRocks,
   ...FishingRods,
@@ -740,6 +752,7 @@ export const ConsumableItems: Item[] = [
   ...Dishes,
   ...Flavors,
   ...Sweets,
+  ...DojoTickets,
   Item.PICNIC_SET,
   Item.FIRE_SHARD,
   Item.SCROLL_OF_DARKNESS,
