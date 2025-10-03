@@ -1981,7 +1981,7 @@
 		"FIRESTARTER": "Gains [10,20,40,SP] SPEED and flies to the furthest enemy, dropping embers on the tiles in between. The embers inflict [20,40,80,SP] SPECIAL and remain on the ground, so any Pokémon that steps on them BURN and take 10 SPECIAL per second if not FLYING or FIRE.",
 		"BONE_ARMOR": "Flies to the weakest enemy inflicting [20,40,80,SP] SPECIAL, healing for the damage dealt. If the target is KO'd, recover its bones to make armor, gaining [4,8,12] DEF and SPE_DEF.",
 		"RAGE": "Get RAGE status for 3 seconds and gain [10,SP]% base ATK for each 10% of max HP missing",
-		"BRICK_BREAK": "Deal [150,SP]% of ATK as TRUE. Breaks target's PROTECT and Magic Bounce.",
+		"BRICK_BREAK": "Deal [150,SP]% of ATK as TRUE. Breaks target's PROTECT and Magic Bounce. Inflict ARMOR_BREAK on the target for 4 seconds.",
 		"TAUNT": "Gain [25,SP=0.5]% of max HP as SHIELD, and force enemies within a 2-tile radius to choose you as target",
 		"BULK_UP": "Increase base ATK and base DEF by [50,SP]%",
 		"CUT": "Deal [40,SP]% of target max HP as SPECIAL. Inflicts WOUND for 5 seconds.",
