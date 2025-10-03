@@ -92,6 +92,7 @@
 - Fix Salt Cure not scaling on AP
 - Fix Spicy Extract not scaling on AP
 - Fix Drum Beating accidentally flinching on Drum Roll
+- Fix Swagger description showing 3 seconds of confusion instead of 2
 
 # Misc
 
