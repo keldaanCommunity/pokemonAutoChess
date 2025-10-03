@@ -12760,11 +12760,10 @@ export class DrumBeatingStrategy extends AbilityStrategy {
       }
       case 2:
       default: {
-        // deal 10/20/40 special damage to the opponent team and flinch for 3 seconds
+        // deal 10/20/40 special damage to the opponent team
         const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
         board.forEach((x, y, entity) => {
           if (entity && entity.team !== pokemon.team) {
-            entity.status.triggerFlinch(3000, entity, pokemon)
             entity.handleSpecialDamage(
               damage,
               board,

@@ -91,6 +91,7 @@
 - Fix Metal Claw description not showing attack buff scaling on AP
 - Fix Salt Cure not scaling on AP
 - Fix Spicy Extract not scaling on AP
+- Fix Drum Beating accidentally flinching on Drum Roll
 
 # Misc
 
