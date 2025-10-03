@@ -217,8 +217,8 @@ export interface ISimplePlayer {
   role: Role
   pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
   synergies:
-  | Array<{ name: Synergy; value: number }>
-  | ArraySchema<{ name: Synergy; value: number }>
+    | Array<{ name: Synergy; value: number }>
+    | ArraySchema<{ name: Synergy; value: number }>
 }
 
 export interface IAfterGamePlayer extends ISimplePlayer {
@@ -737,7 +737,8 @@ export enum Title {
   ETERNAL = "ETERNAL",
   RUNNER = "RUNNER",
   FINISHER = "FINISHER",
-  VICTORIOUS = "VICTORIOUS"
+  VICTORIOUS = "VICTORIOUS",
+  AQUARIST = "AQUARIST"
 }
 
 export interface IBoardEvent {

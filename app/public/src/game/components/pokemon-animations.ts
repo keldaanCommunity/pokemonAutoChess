@@ -7191,5 +7191,35 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.BASCULIN_RED]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.BASCULIN_BLUE]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.BASCULIN_WHITE]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.BASCULEGION_MALE]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.BASCULEGION_FEMALE]: {
+    attack: AnimationType.Bite,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
   }
 }

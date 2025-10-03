@@ -14,6 +14,9 @@
 - Chi-Yu
 - Wimpod
 - Golisopod
+- Basculin Red/Blue
+- Basculin White
+- Basculegion Female/Male
 
 # Changes to Pokemon & Abilities
 
@@ -84,3 +87,5 @@
 - Fix HM Cut dealing reduced damage
 
 # Misc
+
+- New title Aquarist: Have Basculin Red, Blue and White in the same team

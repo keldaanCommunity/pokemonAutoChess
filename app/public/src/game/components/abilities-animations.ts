@@ -675,6 +675,11 @@ export const AbilitiesAnimations: {
     scale: 2,
     tint: 0x798f8d
   }),
+  [Ability.BARED_FANGS]: onTarget({
+    ability: Ability.ICE_FANG,
+    scale: 2,
+    tint: 0x8b0000
+  }),
   [Ability.RAZOR_WIND]: onTargetScale2,
   [Ability.SEISMIC_TOSS]: onTargetScale2,
   [Ability.ASSURANCE]: onTargetScale2,
@@ -740,6 +745,10 @@ export const AbilitiesAnimations: {
   [Ability.FIERY_DANCE]: onTarget({ ability: Ability.FIRE_BLAST, scale: 2 }),
   [Ability.FIRE_SPIN]: onTarget({ ability: Ability.MAGMA_STORM, scale: 2 }),
   [Ability.DRACO_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.GRUDGE_DIVE]: projectile({
+    ability: Ability.DRACO_ENERGY,
+    tint: 0xcbc3e3
+  }),
   [Ability.DYNAMAX_CANNON]: onCaster({
     origin: [0.5, 0],
     oriented: true,

@@ -500,6 +500,15 @@ export class Board {
     return null
   }
 
+  getFallenAlliesCount(pokemon: PokemonEntity): number {
+    const nbAlliesAlive = this.cells.filter(
+      (p) => p && p.team === pokemon.team
+    ).length
+    const meter =
+      pokemon.team === Team.BLUE_TEAM ? "blueDpsMeter" : "redDpsMeter"
+    return pokemon.simulation[meter].size - nbAlliesAlive
+  }
+
   isOnBoard(x: number, y: number): boolean {
     return x >= 0 && x < this.columns && y >= 0 && y < this.rows
   }

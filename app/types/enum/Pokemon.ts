@@ -1044,7 +1044,12 @@ export enum Pkm {
   GRAPPLOCT = "GRAPPLOCT",
   CHI_YU = "CHI_YU",
   WIMPOD = "WIMPOD",
-  GOLISOPOD = "GOLISOPOD"
+  GOLISOPOD = "GOLISOPOD",
+  BASCULIN_RED = "BASCULIN_RED",
+  BASCULIN_BLUE = "BASCULIN_BLUE",
+  BASCULIN_WHITE = "BASCULIN_WHITE",
+  BASCULEGION_MALE = "BASCULEGION_MALE",
+  BASCULEGION_FEMALE = "BASCULEGION_FEMALE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1706,7 +1711,11 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PETILIL]: "0548",
   [Pkm.LILIGANT]: "0549",
   [Pkm.HISUIAN_LILLIGANT]: "0549-0001",
-  //[Pkm.BASCULIN]: "0550",
+  [Pkm.BASCULIN_RED]: "0550",
+  [Pkm.BASCULIN_BLUE]: "0550-0001",
+  [Pkm.BASCULIN_WHITE]: "0550-0002",
+  [Pkm.BASCULEGION_MALE]: "0902",
+  [Pkm.BASCULEGION_FEMALE]: "0902-0000-0000-0002",
   [Pkm.SANDILE]: "0551",
   [Pkm.KROKOROK]: "0552",
   [Pkm.KROOKODILE]: "0553",
@@ -3285,7 +3294,12 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GRAPPLOCT]: Pkm.CLOBBOPUS,
   [Pkm.CHI_YU]: Pkm.CHI_YU,
   [Pkm.WIMPOD]: Pkm.WIMPOD,
-  [Pkm.GOLISOPOD]: Pkm.WIMPOD
+  [Pkm.GOLISOPOD]: Pkm.WIMPOD,
+  [Pkm.BASCULIN_RED]: Pkm.BASCULIN_RED,
+  [Pkm.BASCULIN_BLUE]: Pkm.BASCULIN_BLUE,
+  [Pkm.BASCULIN_WHITE]: Pkm.BASCULIN_WHITE,
+  [Pkm.BASCULEGION_MALE]: Pkm.BASCULIN_WHITE,
+  [Pkm.BASCULEGION_FEMALE]: Pkm.BASCULIN_WHITE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3323,7 +3337,8 @@ export enum PkmDuo {
   PLUSLE_MINUN = "PLUSLE_MINUN",
   ILLUMISE_VOLBEAT = "ILLUMISE_VOLBEAT",
   NINJASK_SHEDINJA = "NINJASK_SHEDINJA",
-  INDEEDEE = "INDEEDEE"
+  INDEEDEE = "INDEEDEE",
+  BASCULIN_RED_BLUE = "BASCULIN_RED_BLUE"
 }
 
 export type PkmProposition = Pkm | PkmDuo
@@ -3333,7 +3348,8 @@ export const PkmDuos = {
   [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN],
   [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT],
   [PkmDuo.NINJASK_SHEDINJA]: [Pkm.NINJASK, Pkm.SHEDINJA],
-  [PkmDuo.INDEEDEE]: [Pkm.INDEEDEE_FEMALE, Pkm.INDEEDEE_MALE]
+  [PkmDuo.INDEEDEE]: [Pkm.INDEEDEE_FEMALE, Pkm.INDEEDEE_MALE],
+  [PkmDuo.BASCULIN_RED_BLUE]: [Pkm.BASCULIN_RED, Pkm.BASCULIN_BLUE]
 }
 
 export const Unowns: Pkm[] = [

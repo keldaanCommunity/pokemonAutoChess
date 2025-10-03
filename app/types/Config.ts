@@ -314,7 +314,9 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.DUNSPARCE,
   Pkm.PACHIRISU,
   Pkm.QWILFISH,
-  Pkm.HISUIAN_QWILFISH
+  Pkm.HISUIAN_QWILFISH,
+  PkmDuo.BASCULIN_RED_BLUE,
+  Pkm.BASCULIN_WHITE
 )
 
 export const LegendaryPool = new Array<PkmProposition>(
