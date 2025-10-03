@@ -226,7 +226,7 @@ export enum Item {
   SCROLL_OF_DARKNESS = "SCROLL_OF_DARKNESS",
   MYSTERY_BOX = "MYSTERY_BOX",
   RICH_MULCH = "RICH_MULCH",
-  AMAZE_MULCH = "AMAZE_MULCH",
+  AMAZE_MULCH = "AMAZE_MULCH"
 }
 
 export const AllItems: Item[] = Object.values(Item)
@@ -385,7 +385,7 @@ export const ArtificialItems: Item[] = [
   Item.MAGMARIZER,
   Item.POKERUS_VIAL,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE,
+  Item.EXP_SHARE
 ]
 
 export const ShinyItems: Item[] = [
@@ -430,7 +430,7 @@ export const WeatherRocksByWeather: Map<
   [Weather.SMOG, Item.SMELLY_CLAY],
   [Weather.MURKY, Item.ODD_KEYSTONE],
   [Weather.NIGHT, Item.BLACK_AUGURITE],
-  [Weather.BLOODMOON, Item.BLOOD_STONE],  
+  [Weather.BLOODMOON, Item.BLOOD_STONE],
   [Weather.NEUTRAL, null]
 ])
 
@@ -461,7 +461,7 @@ export const SynergyGems = [
   Item.STEEL_GEM,
   Item.DRAGON_GEM,
   Item.POISON_GEM,
-  Item.GHOST_GEM,
+  Item.GHOST_GEM
   //Item.DARK_GEM,
 ] as const
 
@@ -522,23 +522,21 @@ export const SynergyGivenByItem: Record<
   [Item.SURFBOARD]: Synergy.AQUATIC
 }
 
-export const SynergyGivenByGem: Record<
-  (typeof SynergyGems)[number],
-  Synergy
-> = {
-  [Item.FIRE_GEM]: Synergy.FIRE,
-  [Item.NORMAL_GEM]: Synergy.NORMAL,
-  [Item.ROCK_GEM]: Synergy.ROCK,
-  [Item.WATER_GEM]: Synergy.WATER,
-  [Item.POISON_GEM]: Synergy.POISON,
-  [Item.FLYING_GEM]: Synergy.FLYING,
-  [Item.ICE_GEM]: Synergy.ICE,
-  [Item.GHOST_GEM]: Synergy.GHOST,
-  [Item.DRAGON_GEM]: Synergy.DRAGON,
-  [Item.BUG_GEM]: Synergy.BUG,
-  //[Item.DARK_GEM]: Synergy.DARK,
-  [Item.STEEL_GEM]: Synergy.STEEL
-}
+export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
+  {
+    [Item.FIRE_GEM]: Synergy.FIRE,
+    [Item.NORMAL_GEM]: Synergy.NORMAL,
+    [Item.ROCK_GEM]: Synergy.ROCK,
+    [Item.WATER_GEM]: Synergy.WATER,
+    [Item.POISON_GEM]: Synergy.POISON,
+    [Item.FLYING_GEM]: Synergy.FLYING,
+    [Item.ICE_GEM]: Synergy.ICE,
+    [Item.GHOST_GEM]: Synergy.GHOST,
+    [Item.DRAGON_GEM]: Synergy.DRAGON,
+    [Item.BUG_GEM]: Synergy.BUG,
+    //[Item.DARK_GEM]: Synergy.DARK,
+    [Item.STEEL_GEM]: Synergy.STEEL
+  }
 
 export const NonSpecialItemComponents: Item[] = [
   Item.TWISTED_SPOON,
@@ -661,7 +659,7 @@ export const Flavors = [
 ] as const
 
 export const SynergyFlavors: {
-  [key in Synergy]: typeof Flavors[number]
+  [key in Synergy]: (typeof Flavors)[number]
 } = {
   [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
   [Synergy.GRASS]: Item.MATCHA_FLAVOR,
@@ -708,10 +706,7 @@ export const Sweets: Item[] = [
   Item.RIBBON_SWEET
 ]
 
-export const Mulches: Item[] = [
-  Item.RICH_MULCH,
-  Item.AMAZE_MULCH
-]
+export const Mulches: Item[] = [Item.RICH_MULCH, Item.AMAZE_MULCH]
 
 export const UnholdableItems: Item[] = [
   ...WeatherRocks,

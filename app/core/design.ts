@@ -156,12 +156,19 @@ export default class Design {
     this.terrain[8][31] = TerrainType.GROUND
   }
 
-  drawGroundRect(x: number, y: number, width: number, height: number, addWalls = true) {
+  drawGroundRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    addWalls = true
+  ) {
     for (let i = x; i < x + width; i++) {
       for (let j = y; j < y + height; j++) {
         if (j in this.terrain && i in this.terrain[j]) {
           this.terrain[j][i] =
-            addWalls && (i === x || i === x + width - 1 || j === y || j === y + height - 1)
+            addWalls &&
+            (i === x || i === x + width - 1 || j === y || j === y + height - 1)
               ? TerrainType.WALL
               : TerrainType.GROUND
         }
@@ -256,8 +263,8 @@ export default class Design {
 
 export function initTilemap(mapName: DungeonPMDO): DesignTiled {
   if (!mapName) {
-    logger.error("Invalid map name provided to initTilemap", { mapName });
-    throw new Error("Invalid map name provided to initTilemap");
+    logger.error("Invalid map name provided to initTilemap", { mapName })
+    throw new Error("Invalid map name provided to initTilemap")
   }
   const design = new Design(mapName, 5, 0.1)
   design.create()

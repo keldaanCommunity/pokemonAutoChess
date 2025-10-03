@@ -49,6 +49,7 @@
 - Comfey is now always held by the strongest ally among the nearest allies with a free item slot
 - Change Plasma Fist: 25% heal from damage before armor reduction -> 30% heal from damage dealt after armor reduction
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
+- Change Frost Breath: Now deals [35, 70, 140] Special Damage
 
 # Changes to Synergies
 
@@ -86,6 +87,8 @@
 - Fix Bone Armor heal scaling on AP twice
 - Fix HM Cut dealing reduced damage
 - Fix Column Crush dealing damage on Pillar max hp instead of remaining hp
+- Fix Brick Break description incorrectly not showing the ability inflicts Armor Break
+- Fix Metal Claw description not showing attack buff scaling on AP
 
 # Misc
 

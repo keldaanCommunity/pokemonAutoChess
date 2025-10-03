@@ -57,5 +57,5 @@ export const DEPTH = {
   TOOLTIP_FRONT: 68,
 
   // 71-80: Draggedd elements
-  DRAGGED_POKEMON: 70,
+  DRAGGED_POKEMON: 70
 }

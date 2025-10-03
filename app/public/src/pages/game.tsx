@@ -848,7 +848,6 @@ export default function Game() {
           dispatch(changePlayer({ id: player.id, field: "mulchCap", value }))
           getGameScene()?.board?.updateMulchCount()
         })
-
       })
 
       $state.players.onRemove((player) => {

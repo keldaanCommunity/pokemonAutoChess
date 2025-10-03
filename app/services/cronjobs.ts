@@ -113,7 +113,7 @@ async function eloDecay() {
       const stats = await DetailledStatistic.find(
         {
           playerId: u.uid,
-          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL] 
+          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL]
             ? { gameMode: GameMode.RANKED }
             : {})
         },
@@ -128,7 +128,9 @@ async function eloDecay() {
         stats.length < 3 || Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
 
       if (shouldDecay) {
-        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(u.elo - ELO_DECAY_LOST_PER_DAY)
+        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(
+          u.elo - ELO_DECAY_LOST_PER_DAY
+        )
         logger.info(
           `User ${u.displayName} (${u.elo}) will decay to ${eloAfterDecay}`
         )
@@ -184,7 +186,9 @@ async function resetEventScores() {
       }
     )
 
-    logger.info(`Event reset completed! Reset event data for ${result.modifiedCount} users`)
+    logger.info(
+      `Event reset completed! Reset event data for ${result.modifiedCount} users`
+    )
   } catch (e) {
     logger.error("Error during event reset scores:", e)
   }

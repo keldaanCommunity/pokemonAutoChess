@@ -23,7 +23,6 @@
   color: white;
 }
 
-
 .game-loading-screen .loading-bar p {
   text-align: center;
   font-size: 28pt;
@@ -58,23 +57,23 @@
 }
 
 .speech-bubble {
-	position: relative;
-	background: #ffffff;
-	border-radius: .4em;
+  position: relative;
+  background: #ffffff;
+  border-radius: 0.4em;
   padding: 0.5em 0.25em;
 }
 
 .speech-bubble:after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-top-color: #ffffff;
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -10px;
-	margin-bottom: -19px;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-top-color: #ffffff;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -10px;
+  margin-bottom: -19px;
 }

@@ -104,7 +104,10 @@ export function GamePokemonDetail(props: {
 
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value }) => (
-          <div key={stat} className={"game-pokemon-detail-stat-" + stat.toLowerCase()}>
+          <div
+            key={stat}
+            className={"game-pokemon-detail-stat-" + stat.toLowerCase()}
+          >
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
@@ -118,7 +121,8 @@ export function GamePokemonDetail(props: {
       {dish && (
         <div className="game-pokemon-detail-dish">
           <div className="game-pokemon-detail-dish-name">
-            <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
+            <img src="assets/ui/dish.svg" />
+            <i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
           </div>
           <img
             src={`assets/item/${dish}.png`}
@@ -126,9 +130,7 @@ export function GamePokemonDetail(props: {
             alt={dish}
             title={t(`item.${dish}`)}
           />
-          <p>
-            {addIconsToDescription(t(`item_description.${dish}`))}
-          </p>
+          <p>{addIconsToDescription(t(`item_description.${dish}`))}</p>
         </div>
       )}
 
@@ -146,7 +148,12 @@ export function GamePokemonDetail(props: {
           <div>
             <AbilityTooltip
               ability={pokemon.skill}
-              stats={{ ap: pokemon.ap, luck: pokemon.luck, stars: pokemon.stars, stages: getPokemonData(pokemon.name).stages }}
+              stats={{
+                ap: pokemon.ap,
+                luck: pokemon.luck,
+                stars: pokemon.stars,
+                stages: getPokemonData(pokemon.name).stages
+              }}
               key={pokemon.id}
             />
           </div>

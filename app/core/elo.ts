@@ -20,9 +20,13 @@ export function computeElo(
       const expectedScore = eloEngine.getExpected(previousElo, plyr.elo)
       //logger.debug("against ", plyr.name, "expected", expectedScoreA)
       if (rank < plyr.rank) {
-        eloGains.push(eloEngine.updateRating(expectedScore, 1, previousElo, player.games))
+        eloGains.push(
+          eloEngine.updateRating(expectedScore, 1, previousElo, player.games)
+        )
       } else {
-        eloGains.push(eloEngine.updateRating(expectedScore, 0, previousElo, player.games))
+        eloGains.push(
+          eloEngine.updateRating(expectedScore, 0, previousElo, player.games)
+        )
       }
     }
   })
@@ -30,7 +34,11 @@ export function computeElo(
 
   let newElo = min(0)(Math.floor(average(...eloGains)))
   //logger.debug("mean gain", meanGain)
-  if (rank <= Math.floor(players.length / 2) && newElo < previousElo && !isBot) {
+  if (
+    rank <= Math.floor(players.length / 2) &&
+    newElo < previousElo &&
+    !isBot
+  ) {
     newElo = previousElo // ensure to not lose ELO if you're on the upper part of the ranking
   }
   if (rank === 1 && gameMode === GameMode.RANKED) {

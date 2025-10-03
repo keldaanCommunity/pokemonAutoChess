@@ -31,9 +31,16 @@ export function GameRegionalPokemonsIcon() {
 export function GameRegionalPokemons() {
   const { t } = useTranslation()
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const regionalPokemons: Pkm[] = (currentPlayer?.regionalPokemons ?? new Array<Pkm>()).slice().sort((a, b) => {
-    return RarityCost[getPokemonData(a).rarity] - RarityCost[getPokemonData(b).rarity]
-  })
+  const regionalPokemons: Pkm[] = (
+    currentPlayer?.regionalPokemons ?? new Array<Pkm>()
+  )
+    .slice()
+    .sort((a, b) => {
+      return (
+        RarityCost[getPokemonData(a).rarity] -
+        RarityCost[getPokemonData(b).rarity]
+      )
+    })
 
   if (!regionalPokemons || regionalPokemons.length === 0) {
     return (

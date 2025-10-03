@@ -4,10 +4,16 @@
     "includes": [
       "**",
       "!**/node_modules/**/*",
+      "!**/src/assets/**/*",
       "!**/app/public/dist/server/**/*",
+      "!**/app/public/dist/client/index*.js",
       "!**/app/public/dist/client/pokechess",
       "!**/app/public/dist/client/assets",
-      "!**/app/public/dist/client/locales/**/translation.json"
+      "!**/app/public/dist/client/locales/**/translation.json",
+      "!**/app/public/dist/client/esbuild.meta.json",
+      "!**/app/public/dist/client/sw.js",
+      "!**/app/models/precomputed/*.json",
+      "!**/app/types/delays.json"
     ],
     "maxSize": 10000000
   },

@@ -9,10 +9,7 @@ interface PortraitOptions {
   emotion?: Emotion
 }
 
-type Props = (
-  | { avatar: string }
-  | { portrait: string | PortraitOptions }
-) &
+type Props = ({ avatar: string } | { portrait: string | PortraitOptions }) &
   React.ImgHTMLAttributes<HTMLImageElement>
 
 export default function PokemonPortrait(props: Props) {
@@ -23,10 +20,10 @@ export default function PokemonPortrait(props: Props) {
     src =
       typeof props.portrait === "object"
         ? getPortraitSrc(
-          props.portrait.index,
-          props.portrait.shiny,
-          props.portrait.emotion
-        )
+            props.portrait.index,
+            props.portrait.shiny,
+            props.portrait.emotion
+          )
         : getPortraitSrc(props.portrait)
   }
   const { className, ...rest } = props

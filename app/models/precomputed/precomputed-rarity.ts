@@ -10,10 +10,9 @@ const data = Object.fromEntries<Pokemon[]>(rarities.map((r) => [r, []])) as {
   [r in Rarity]: Pokemon[]
 }
 
-precomputedPokemonsImplemented
-  .forEach((pokemon) => {
-    data[pokemon.rarity].push(pokemon)
-  })
+precomputedPokemonsImplemented.forEach((pokemon) => {
+  data[pokemon.rarity].push(pokemon)
+})
 
 //logger.debug(data)
 

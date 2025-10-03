@@ -171,11 +171,11 @@ export default function PokemonEmotionsModal(props: {
               (item.emotions.length === 0 && item.shinyEmotions.length === 0) ||
               (user &&
                 getAvatarSrc(user?.avatar) ===
-                getPortraitSrc(
-                  index,
-                  item.selectedShiny,
-                  item.selectedEmotion ?? Emotion.NORMAL
-                ))
+                  getPortraitSrc(
+                    index,
+                    item.selectedShiny,
+                    item.selectedEmotion ?? Emotion.NORMAL
+                  ))
             }
             onClick={() =>
               dispatch(

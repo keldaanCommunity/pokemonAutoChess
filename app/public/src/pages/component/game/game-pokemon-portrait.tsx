@@ -13,17 +13,22 @@ import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import { getPkmWithCustom, PokemonCustoms } from "../../../../../models/colyseus-models/pokemon-customs"
+import {
+  getPkmWithCustom,
+  PokemonCustoms
+} from "../../../../../models/colyseus-models/pokemon-customs"
 import { getGameScene } from "../../game"
 import "./game-pokemon-portrait.css"
 
-export function getCachedPortrait(index: string, customs?: PokemonCustoms): string {
+export function getCachedPortrait(
+  index: string,
+  customs?: PokemonCustoms
+): string {
   const scene = getGameScene()
   const pokemonCustom = getPkmWithCustom(index, customs)
-  return scene?.textures.getBase64(`portrait-${index}`) ?? getPortraitSrc(
-    index,
-    pokemonCustom.shiny,
-    pokemonCustom.emotion
+  return (
+    scene?.textures.getBase64(`portrait-${index}`) ??
+    getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
   )
 }
 
@@ -33,7 +38,7 @@ export default function GamePokemonPortrait(props: {
   pokemon: Pokemon | Pkm | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
-  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>,
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
   inPlanner?: boolean
 }) {
   const pokemon = useMemo(
@@ -76,9 +81,7 @@ export default function GamePokemonPortrait(props: {
       board.forEach((p) => {
         if (p.name === pokemon.name) {
           _count++
-        } else if (
-          PkmFamily[p.name] === pokemon.name
-        ) {
+        } else if (PkmFamily[p.name] === pokemon.name) {
           _countEvol++
         }
       })
@@ -98,7 +101,7 @@ export default function GamePokemonPortrait(props: {
 
   const evolutionName = currentPlayer
     ? pokemon.evolutionRule.getEvolution(pokemon, currentPlayer)
-    : pokemon.evolutions[0] ?? pokemon.evolution
+    : (pokemon.evolutions[0] ?? pokemon.evolution)
   let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
   const willEvolve =
@@ -117,15 +120,17 @@ export default function GamePokemonPortrait(props: {
     pokemonEvolution.hasEvolution
   ) {
     const evolutionName2 = currentPlayer
-      ? pokemonEvolution.evolutionRule.getEvolution(pokemonEvolution, currentPlayer, stageLevel)
-      : pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution
+      ? pokemonEvolution.evolutionRule.getEvolution(
+          pokemonEvolution,
+          currentPlayer,
+          stageLevel
+        )
+      : (pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution)
     pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
   }
 
   const pokemonInPortrait =
-    willEvolve && pokemonEvolution
-      ? pokemonEvolution
-      : pokemon
+    willEvolve && pokemonEvolution ? pokemonEvolution : pokemon
 
   let cost = getBuyPrice(pokemon.name, specialGameRule)
 

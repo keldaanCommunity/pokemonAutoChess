@@ -47,15 +47,14 @@ export default class ItemContainer extends DraggableObject {
     this.pokemonId = pokemonId
     this.playerId = playerId
     this.circle = scene.add.image(0, 0, "cell", this.cellIndex * 3)
-    this.draggable = this.pokemonId === null &&
+    this.draggable =
+      this.pokemonId === null &&
       playerId === currentPlayerUid &&
       (scene as GameScene).spectate === false
     if (pokemonId) {
       this.circle.setFrame(this.cellIndex * 3 + 2).setScale(0.45)
     } else {
-      this.circle.setFrame(
-        this.cellIndex * 3 + (this.draggable ? 0 : 2)
-      )
+      this.circle.setFrame(this.cellIndex * 3 + (this.draggable ? 0 : 2))
     }
     this.add(this.circle)
     const spriteName = TMs.includes(item)
@@ -150,7 +149,7 @@ export default class ItemContainer extends DraggableObject {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      ; (this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
+      ;(this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)

@@ -1,11 +1,16 @@
-import { BOARD_X_START, BOARD_Y_START, CELL_HEIGHT, CELL_WIDTH } from "../../../../types/Config"
+import {
+  BOARD_X_START,
+  BOARD_Y_START,
+  CELL_HEIGHT,
+  CELL_WIDTH
+} from "../../../../types/Config"
 
-export function transformBoardCoordinates(x: number, y: number): [number, number] {
+export function transformBoardCoordinates(
+  x: number,
+  y: number
+): [number, number] {
   if (y === 0) {
-    return [
-      BOARD_X_START + CELL_WIDTH * x,
-      BOARD_Y_START
-    ]
+    return [BOARD_X_START + CELL_WIDTH * x, BOARD_Y_START]
   } else {
     return [
       BOARD_X_START + CELL_WIDTH * x,
@@ -21,10 +26,10 @@ export function transformEntityCoordinates(
 ): [number, number] {
   return [
     BOARD_X_START + CELL_WIDTH * x,
-    CELL_HEIGHT / 2 + (flip ?
-      BOARD_Y_START + CELL_HEIGHT * (y - 7) :
-      BOARD_Y_START - CELL_HEIGHT * (y + 2)
-    )
+    CELL_HEIGHT / 2 +
+      (flip
+        ? BOARD_Y_START + CELL_HEIGHT * (y - 7)
+        : BOARD_Y_START - CELL_HEIGHT * (y + 2))
   ]
 }
 

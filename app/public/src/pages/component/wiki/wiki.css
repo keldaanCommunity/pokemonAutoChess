@@ -165,7 +165,7 @@
 
 #wiki-page .wiki-tutorials iframe {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
   max-width: 100%;
 }
 

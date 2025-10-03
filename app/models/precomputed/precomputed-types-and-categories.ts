@@ -18,42 +18,41 @@ const data: Partial<
   >
 > = {}
 
-precomputedPokemonsImplemented
-  .forEach((pokemon) => {
-    pokemon.types.forEach((type: Synergy) => {
-      if (type in data === false) {
-        data[type] = {
-          pokemons: [],
-          uniquePokemons: [],
-          legendaryPokemons: [],
-          additionalPokemons: [],
-          specialPokemons: []
-        }
+precomputedPokemonsImplemented.forEach((pokemon) => {
+  pokemon.types.forEach((type: Synergy) => {
+    if (type in data === false) {
+      data[type] = {
+        pokemons: [],
+        uniquePokemons: [],
+        legendaryPokemons: [],
+        additionalPokemons: [],
+        specialPokemons: []
       }
+    }
 
-      if (pokemon.rarity === Rarity.UNIQUE) {
-        data[type]!.uniquePokemons.push(pokemon.name)
-      } else if (pokemon.rarity === Rarity.LEGENDARY) {
-        data[type]!.legendaryPokemons.push(pokemon.name)
-      } else if (pokemon.rarity === Rarity.SPECIAL) {
-        data[type]!.specialPokemons.push(pokemon.name)
-      } else if (pokemon.additional) {
-        if (
-          !data[type]!.additionalPokemons.some(
-            (p) => PkmFamily[p] === PkmFamily[pokemon.name]
-          )
-        ) {
-          data[type]!.additionalPokemons.push(pokemon.name)
-        }
-      } else if (
-        !data[type]!.pokemons.some(
+    if (pokemon.rarity === Rarity.UNIQUE) {
+      data[type]!.uniquePokemons.push(pokemon.name)
+    } else if (pokemon.rarity === Rarity.LEGENDARY) {
+      data[type]!.legendaryPokemons.push(pokemon.name)
+    } else if (pokemon.rarity === Rarity.SPECIAL) {
+      data[type]!.specialPokemons.push(pokemon.name)
+    } else if (pokemon.additional) {
+      if (
+        !data[type]!.additionalPokemons.some(
           (p) => PkmFamily[p] === PkmFamily[pokemon.name]
         )
       ) {
-        data[type]!.pokemons.push(pokemon.name)
+        data[type]!.additionalPokemons.push(pokemon.name)
       }
-    })
+    } else if (
+      !data[type]!.pokemons.some(
+        (p) => PkmFamily[p] === PkmFamily[pokemon.name]
+      )
+    ) {
+      data[type]!.pokemons.push(pokemon.name)
+    }
   })
+})
 
 export const PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY = data as {
   [key in Synergy]: {

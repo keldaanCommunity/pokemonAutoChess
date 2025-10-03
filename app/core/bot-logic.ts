@@ -4,7 +4,13 @@ import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { CraftableItems, Item, ItemComponents } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { NonPkm, Pkm, PkmDuos, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import {
+  NonPkm,
+  Pkm,
+  PkmDuos,
+  PkmFamily,
+  PkmIndex
+} from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
 
@@ -100,7 +106,7 @@ export function getCategory(pkm: Pkm): string {
   let category = p.rarity.toUpperCase()
   if (
     [Rarity.UNIQUE, Rarity.LEGENDARY, Rarity.SPECIAL].includes(p.rarity) ===
-    false &&
+      false &&
     p.stars > 1
   ) {
     category += p.stages === 2 ? " 2S" : " 3S"
@@ -205,15 +211,17 @@ export function validateBot(bot: IBot): string[] {
 }
 
 export function validateBoard(board: IDetailledPokemon[], stage: number) {
-  const team = board.map((p) => getPokemonData(p.name)).filter(p => p.passive !== Passive.INANIMATE)
+  const team = board
+    .map((p) => getPokemonData(p.name))
+    .filter((p) => p.passive !== Passive.INANIMATE)
   const items = getNbComponentsOnBoard(board)
   const maxItems = getMaxItemComponents(stage)
 
   const duos = Object.values(PkmDuos)
 
-  const numberOfGoldBows = board.flatMap((p) => p.items).filter(
-    (item) => item === Item.GOLD_BOW
-  ).length
+  const numberOfGoldBows = board
+    .flatMap((p) => p.items)
+    .filter((item) => item === Item.GOLD_BOW).length
   const maxTeamSize = 9 + numberOfGoldBows
 
   function removeDuoPartner(p, index, arr) {
@@ -229,7 +237,10 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   }
 
   function removeUniqueThatEvolveToLegendary(p) {
-    if (getPokemonData(PkmFamily[p.name]).rarity === Rarity.UNIQUE && getPokemonData(p.name).rarity === Rarity.LEGENDARY) {
+    if (
+      getPokemonData(PkmFamily[p.name]).rarity === Rarity.UNIQUE &&
+      getPokemonData(p.name).rarity === Rarity.LEGENDARY
+    ) {
       return false // remove unique that evolves to legendary
     }
     return true

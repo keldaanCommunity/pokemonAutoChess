@@ -2,7 +2,7 @@
   display: flex;
   height: 1rem;
   overflow: hidden;
-  font-size: .75rem;
+  font-size: 0.75rem;
   background-color: #e9ecef;
 }
 
@@ -10,7 +10,7 @@
 .progress-stacked {
   display: flex;
   height: 16px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .progress-bar {
@@ -20,7 +20,7 @@
   color: #fff;
   text-align: center;
   background-color: #007bff;
-  transition: width .6s ease;
+  transition: width 0.6s ease;
 }
 
 .progress-stacked > .progress {

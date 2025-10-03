@@ -26,7 +26,14 @@ export default function AfterMenu() {
   const playerRank = currentPlayer ? currentPlayer.rank : null
   const humans = players.filter((p) => p.role !== Role.BOT)
   const newElo = currentPlayer
-    ? computeElo(currentPlayer, currentPlayer.rank, currentPlayer.elo, humans, gameMode, false)
+    ? computeElo(
+        currentPlayer,
+        currentPlayer.rank,
+        currentPlayer.elo,
+        humans,
+        gameMode,
+        false
+      )
     : null
   const shouldShowElo = eligibleToELO && currentPlayer && newElo
 
@@ -42,29 +49,40 @@ export default function AfterMenu() {
               <span>{getRankLabel(playerRank)}</span>
             </div>
             <p className="gamemode">
-              {gameMode === GameMode.SCRIBBLE && <>
-                <img
-                  alt={t("smeargle_scribble")}
-                  className="scribble icon"
-                  src="/assets/ui/scribble.png"
-                  draggable="false"
-                />
-                {t("smeargle_scribble")}
-              </>}
+              {gameMode === GameMode.SCRIBBLE && (
+                <>
+                  <img
+                    alt={t("smeargle_scribble")}
+                    className="scribble icon"
+                    src="/assets/ui/scribble.png"
+                    draggable="false"
+                  />
+                  {t("smeargle_scribble")}
+                </>
+              )}
               {gameMode === GameMode.CUSTOM_LOBBY && t("custom_room")}
-              {gameMode === GameMode.CLASSIC && <>
-                <img
-                  alt={t("classic")}
-                  className="classic icon"
-                  src="/assets/ui/classic.png"
-                  draggable="false"
-                />
-                {t("classic")}
-              </>}
-              {gameMode === GameMode.RANKED && <>
-                <img src="assets/ui/ranked.png" alt={t("ranked_match")} className="ranked icon" draggable="false" />
-                {t("ranked_match")}
-              </>}
+              {gameMode === GameMode.CLASSIC && (
+                <>
+                  <img
+                    alt={t("classic")}
+                    className="classic icon"
+                    src="/assets/ui/classic.png"
+                    draggable="false"
+                  />
+                  {t("classic")}
+                </>
+              )}
+              {gameMode === GameMode.RANKED && (
+                <>
+                  <img
+                    src="assets/ui/ranked.png"
+                    alt={t("ranked_match")}
+                    className="ranked icon"
+                    draggable="false"
+                  />
+                  {t("ranked_match")}
+                </>
+              )}
             </p>
             <div className="player-gains">
               {shouldShowElo && (
@@ -107,9 +125,30 @@ export default function AfterMenu() {
                     />
                   </td>
                   <td>
-                    <p title={t("total_money_earned")}><img src="assets/icons/money_total.svg" alt="$" style={{ width: "24px", height: "24px" }} /> {v.moneyEarned}</p>
-                    <p title={t("total_player_damage_dealt")}><img src="assets/icons/ATK.png" alt="✊" style={{ width: "24px", height: "24px" }} />{v.playerDamageDealt}</p>
-                    <p title={t("total_reroll_count")}><img src="assets/ui/refresh.svg" alt="↻" style={{ width: "24px", height: "24px" }} /> {v.rerollCount}</p>
+                    <p title={t("total_money_earned")}>
+                      <img
+                        src="assets/icons/money_total.svg"
+                        alt="$"
+                        style={{ width: "24px", height: "24px" }}
+                      />{" "}
+                      {v.moneyEarned}
+                    </p>
+                    <p title={t("total_player_damage_dealt")}>
+                      <img
+                        src="assets/icons/ATK.png"
+                        alt="✊"
+                        style={{ width: "24px", height: "24px" }}
+                      />
+                      {v.playerDamageDealt}
+                    </p>
+                    <p title={t("total_reroll_count")}>
+                      <img
+                        src="assets/ui/refresh.svg"
+                        alt="↻"
+                        style={{ width: "24px", height: "24px" }}
+                      />{" "}
+                      {v.rerollCount}
+                    </p>
                   </td>
                   <td>
                     <Team team={v.pokemons} />

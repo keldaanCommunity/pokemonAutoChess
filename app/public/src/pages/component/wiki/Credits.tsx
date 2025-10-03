@@ -30,13 +30,15 @@ export default function Credits(props: {
         name = user.name
       }
     }
-    return (contact ?
+    return contact ? (
       <a style={{ marginRight: "0.5em" }} key={id} href={contact}>
         {name}
       </a>
-      : name ? <span style={{ marginRight: "0.5em" }} key={id}>{name}</span>
-        : null
-    )
+    ) : name ? (
+      <span style={{ marginRight: "0.5em" }} key={id}>
+        {name}
+      </span>
+    ) : null
   }
 
   return (

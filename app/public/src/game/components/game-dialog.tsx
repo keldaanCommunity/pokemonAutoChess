@@ -6,7 +6,12 @@ import { addIconsToDescription } from "../../pages/utils/descriptions"
 export class GameDialog extends GameObjects.DOMElement {
   dom: HTMLDivElement
 
-  constructor(scene: Phaser.Scene, dialog: string, dialogTitle?: string, extraClass?: string) {
+  constructor(
+    scene: Phaser.Scene,
+    dialog: string,
+    dialogTitle?: string,
+    extraClass?: string
+  ) {
     super(scene, 0, 0)
 
     this.dom = document.createElement("div")
@@ -20,9 +25,7 @@ export class GameDialog extends GameObjects.DOMElement {
             <p>{dialogTitle}</p>
           </div>
         )}
-        <div className="game-dialog-text">
-          {addIconsToDescription(dialog)}
-        </div>
+        <div className="game-dialog-text">{addIconsToDescription(dialog)}</div>
       </>
     )
   }

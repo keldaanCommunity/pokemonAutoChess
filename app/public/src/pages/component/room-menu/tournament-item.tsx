@@ -41,7 +41,10 @@ export default function TournamentItem(props: {
         return b.ranks.length - a.ranks.length
       if (tournamentFinished && a.ranks.length === nbStages) {
         // sort finalists by last rank
-        return (a.ranks[a.ranks.length - 1] ?? 8) - (b.ranks[b.ranks.length - 1] ?? 8)
+        return (
+          (a.ranks[a.ranks.length - 1] ?? 8) -
+          (b.ranks[b.ranks.length - 1] ?? 8)
+        )
       }
       return average(...values(a.ranks)) - average(...values(b.ranks))
     }

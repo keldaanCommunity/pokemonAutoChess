@@ -32,23 +32,21 @@ export default function ChatMessage(props: { message: IChatV2 }) {
             <span className="chat-message-author">{props.message.author}</span>
             <span className="chat-message-time">{time}</span>
           </div>
-          {role &&
-            (role === Role.MODERATOR || role === Role.ADMIN) &&
-            (
-              <button
-                className="remove-chat bubbly red"
-                title="Remove message"
-                onClick={() =>
-                  dispatch(
-                    removeMessage({
-                      id: props.message.id
-                    })
-                  )
-                }
-              >
-                <p style={{ fontSize: "0.5em", margin: "0" }}>X</p>
-              </button>
-            )}
+          {role && (role === Role.MODERATOR || role === Role.ADMIN) && (
+            <button
+              className="remove-chat bubbly red"
+              title="Remove message"
+              onClick={() =>
+                dispatch(
+                  removeMessage({
+                    id: props.message.id
+                  })
+                )
+              }
+            >
+              <p style={{ fontSize: "0.5em", margin: "0" }}>X</p>
+            </button>
+          )}
         </div>
       )}
       <p className="chat-message">{props.message.payload}</p>

@@ -172,32 +172,32 @@ class GameContainer {
     $pokemon.onChange(() => {
       const fields: (NonFunctionPropNames<PokemonEntity> &
         keyof IPokemonEntity)[] = [
-          "positionX",
-          "positionY",
-          "orientation",
-          "action",
-          "critChance",
-          "critPower",
-          "ap",
-          "luck",
-          "speed",
-          "life",
-          "hp",
-          "shield",
-          "pp",
-          "atk",
-          "def",
-          "speDef",
-          "range",
-          "targetX",
-          "targetY",
-          "team",
-          "index",
-          "shiny",
-          "skill",
-          "stars",
-          "types"
-        ]
+        "positionX",
+        "positionY",
+        "orientation",
+        "action",
+        "critChance",
+        "critPower",
+        "ap",
+        "luck",
+        "speed",
+        "life",
+        "hp",
+        "shield",
+        "pp",
+        "atk",
+        "def",
+        "speDef",
+        "range",
+        "targetX",
+        "targetY",
+        "team",
+        "index",
+        "shiny",
+        "skill",
+        "stars",
+        "types"
+      ]
 
       fields.forEach((field) => {
         $pokemon.listen(field, (value, previousValue) => {

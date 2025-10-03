@@ -48,7 +48,10 @@ export class Board {
         entity.positionY = y
 
         const effectOnNewCell = this.effects[index]
-        if (effectOnNewCell != null && !entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
+        if (
+          effectOnNewCell != null &&
+          !entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+        ) {
           //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
           entity.effects.add(effectOnNewCell)
         }
@@ -198,7 +201,9 @@ export class Board {
       OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
     ]
 
-    let prevCells: Array<[number, number]> = [[pokemon.positionX, pokemon.positionY]]
+    let prevCells: Array<[number, number]> = [
+      [pokemon.positionX, pokemon.positionY]
+    ]
     for (let r = 1; r <= range; r++) {
       const nextCells = new Array<[number, number]>()
       orientations.forEach((orientation) => {
@@ -288,7 +293,7 @@ export class Board {
 
     let x = x0,
       y = y0
-    for (let ix = 0, iy = 0; ix < nx || iy < ny;) {
+    for (let ix = 0, iy = 0; ix < nx || iy < ny; ) {
       const decision = (1 + 2 * ix) * ny - (1 + 2 * iy) * nx
       if (decision === 0) {
         // next step is diagonal
@@ -350,7 +355,9 @@ export class Board {
     const cx = Math.round((x + this.columns * 0.5) % this.columns)
     const cy = Math.round((y + this.rows * 0.5) % this.rows)
     let radius = 1
-    const candidates: Cell[] = [{ x: cx, y: cy, value: this.getEntityOnCell(cx, cy) }]
+    const candidates: Cell[] = [
+      { x: cx, y: cy, value: this.getEntityOnCell(cx, cy) }
+    ]
     while (candidates[0].value !== undefined && radius < 5) {
       candidates.shift()
       if (candidates.length === 0) {

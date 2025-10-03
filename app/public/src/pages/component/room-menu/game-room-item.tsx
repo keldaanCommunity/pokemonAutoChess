@@ -29,7 +29,16 @@ export default function GameRoomItem(props: {
         {playerIds.length !== 1 ? "s" : ""}, {t("stage")}{" "}
         {props.room.metadata?.stageLevel}
       </span>
-      {isAdmin && <button title={t("delete_room")} onClick={() => { props.click("delete") }}>X</button>}
+      {isAdmin && (
+        <button
+          title={t("delete_room")}
+          onClick={() => {
+            props.click("delete")
+          }}
+        >
+          X
+        </button>
+      )}
       <button
         className={cc("bubbly", spectate ? "blue" : "green")}
         onClick={() => props.click(spectate ? "spectate" : "join")}

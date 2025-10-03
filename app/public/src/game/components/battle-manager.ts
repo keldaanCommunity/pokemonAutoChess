@@ -1190,7 +1190,7 @@ export default class BattleManager {
       displayHit(
         this.scene,
         PokemonAnimations[PkmByIndex[index]]?.hitSprite ??
-        DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+          DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
         coordinates[0],
         coordinates[1],
         this.flip

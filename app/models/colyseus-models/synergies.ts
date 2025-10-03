@@ -13,7 +13,8 @@ import { values } from "../../utils/schemas"
 
 export default class Synergies
   extends MapSchema<number, Synergy>
-  implements Map<Synergy, number> {
+  implements Map<Synergy, number>
+{
   constructor() {
     super()
     Object.keys(Synergy).forEach((key) => {
@@ -97,9 +98,14 @@ export function computeSynergies(
   function applyDragonDoubleTypes() {
     const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
     board.forEach((pkm: IPokemon) => {
-      if (pkm.positionY != 0 && pkm.types.has(Synergy.DRAGON) && pkm.types.size > 1) {
+      if (
+        pkm.positionY != 0 &&
+        pkm.types.has(Synergy.DRAGON) &&
+        pkm.types.size > 1
+      ) {
         const family = PkmFamily[pkm.name]
-        if (!dragonDoubleTypes.has(family)) dragonDoubleTypes.set(family, new Set())
+        if (!dragonDoubleTypes.has(family))
+          dragonDoubleTypes.set(family, new Set())
         dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])
       }
     })
@@ -110,7 +116,9 @@ export function computeSynergies(
     })
   }
 
-  if ((synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]) {
+  if (
+    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
+  ) {
     applyDragonDoubleTypes()
   }
 
@@ -121,9 +129,13 @@ export function computeSynergies(
       (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3)
     ) {
       const nbDynamicSynergies = pkm.passive === Passive.PROTEAN3 ? 3 : 2
-      const synergiesSorted = [...synergies.keys()].sort((a, b) => +synergies.get(b)! - +synergies.get(a)!)
+      const synergiesSorted = [...synergies.keys()].sort(
+        (a, b) => +synergies.get(b)! - +synergies.get(a)!
+      )
 
-      if (synergiesSorted.slice(0, nbDynamicSynergies).includes(Synergy.DRAGON)) {
+      if (
+        synergiesSorted.slice(0, nbDynamicSynergies).includes(Synergy.DRAGON)
+      ) {
         // if dragon is in the top synergies, we need to ensure it is the first one
         const dragonIndex = synergiesSorted.indexOf(Synergy.DRAGON)
         if (dragonIndex > 0) {
@@ -140,10 +152,16 @@ export function computeSynergies(
           synergies.set(type, (synergies.get(type) ?? 0) + 1)
           //apply dragon double synergies just for Arceus & Kecleon if Dragon
           if (type === Synergy.DRAGON) {
-            if (synergies.get(Synergy.DRAGON) === SynergyTriggers[Synergy.DRAGON][0]) {
+            if (
+              synergies.get(Synergy.DRAGON) ===
+              SynergyTriggers[Synergy.DRAGON][0]
+            ) {
               // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
               shouldComputeDragonDoubleTypeAgain = true
-            } else if (synergies.get(Synergy.DRAGON)! > SynergyTriggers[Synergy.DRAGON][0]) {
+            } else if (
+              synergies.get(Synergy.DRAGON)! >
+              SynergyTriggers[Synergy.DRAGON][0]
+            ) {
               // Dragon 3 was already activated, so we just need to double the synergy of Arceus/Kecleon
               const doubledType = synergiesSorted[1]
               synergies.set(doubledType, (synergies.get(doubledType) ?? 0) + 1)

@@ -139,11 +139,15 @@ export class CollectionUtils {
       played: item.played,
       selectedShiny: item.selectedShiny,
       selectedEmotion: item.selectedEmotion,
-      unlockedb64: item.unlocked ? CollectionUtils.encodeBase64(item.unlocked) : ""
+      unlockedb64: item.unlocked
+        ? CollectionUtils.encodeBase64(item.unlocked)
+        : ""
     }
   }
 
-  static unpackCollectionItem(item: IPokemonCollectionItemClient): IPokemonCollectionItemUnpacked {
+  static unpackCollectionItem(
+    item: IPokemonCollectionItemClient
+  ): IPokemonCollectionItemUnpacked {
     const { emotions, shinyEmotions } =
       CollectionUtils.getEmotionsUnlocked(item)
     const { unlockedb64, ...rest } = item
@@ -183,17 +187,19 @@ export class CollectionUtils {
   }
 
   static encodeBase64(buffer: Buffer): string {
-    return buffer.toString('base64')
+    return buffer.toString("base64")
   }
 
   static decodeBase64(base64: string): Buffer {
-    return Buffer.from(base64, 'base64');
+    return Buffer.from(base64, "base64")
   }
 
   /**
    * Get list of emotions from emotion 5 bytes mask on MongoDB
    */
-  static getEmotionsUnlocked(item?: IPokemonCollectionItemMongo | IPokemonCollectionItemClient): {
+  static getEmotionsUnlocked(
+    item?: IPokemonCollectionItemMongo | IPokemonCollectionItemClient
+  ): {
     emotions: Emotion[]
     shinyEmotions: Emotion[]
   } {
@@ -202,9 +208,10 @@ export class CollectionUtils {
 
     if (!item) return { emotions, shinyEmotions }
 
-    const mask = "unlockedb64" in item
-      ? CollectionUtils.decodeBase64(item.unlockedb64)
-      : item.unlocked
+    const mask =
+      "unlockedb64" in item
+        ? CollectionUtils.decodeBase64(item.unlockedb64)
+        : item.unlocked
 
     // Extract normal emotions (bits 0-19)
     for (let i = 0; i < 20; i++) {
@@ -256,11 +263,7 @@ export class CollectionUtils {
     this.setBit(mask, bitIndex, true)
   }
 
-  private static setBit(
-    mask: Buffer,
-    bitIndex: number,
-    value: boolean
-  ): void {
+  private static setBit(mask: Buffer, bitIndex: number, value: boolean): void {
     const byteIndex = Math.floor(bitIndex / 8)
     const bitPosition = bitIndex % 8
 

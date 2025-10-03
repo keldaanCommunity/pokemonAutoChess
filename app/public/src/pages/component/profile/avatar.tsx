@@ -6,7 +6,6 @@ import { RoleBadge } from "./role-badge"
 import PokemonPortrait from "../pokemon-portrait"
 import "./avatar.css"
 
-
 export function Avatar(props: {
   name: string
   avatar: string

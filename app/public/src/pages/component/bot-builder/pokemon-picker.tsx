@@ -38,12 +38,12 @@ export default function PokemonPicker(props: {
   const pokemonsPerTab: IPokemonData[][] = tabs.map((t) =>
     (t === "none"
       ? [
-        Pkm.KECLEON,
-        Pkm.ARCEUS,
-        Pkm.PILLAR_WOOD,
-        Pkm.PILLAR_IRON,
-        Pkm.PILLAR_CONCRETE
-      ]
+          Pkm.KECLEON,
+          Pkm.ARCEUS,
+          Pkm.PILLAR_WOOD,
+          Pkm.PILLAR_IRON,
+          Pkm.PILLAR_CONCRETE
+        ]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
     ).map((p) => getPokemonData(p))
   )
@@ -109,30 +109,33 @@ function PokemonPickerTab(props: {
     ) ?? pkm
 
   const filteredPokemons = props.pokemons
-    .filter(p => overlap ? p.types.includes(overlap) : true)
+    .filter((p) => (overlap ? p.types.includes(overlap) : true))
     .filter((p) => {
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (preferences.showEvolutions) return true
       else return p.name === PkmFamily[p.name]
     })
-    .filter(
-      (p) => {
-        const family = PkmFamily[p.name]
-        const baseVariantName = baseVariant(family)
-        const regionalVariants = PkmRegionalVariants[family]
-        const isInAddPicks = additionalPokemons.includes(baseVariantName)
-        const isInRegion = p.regional && regionalPokemons.includes(family)
-        const hasVariantInRegion = regionalVariants?.some((variant) => regionalPokemons.includes(variant))
-        const isAvailable = (!p.regional || isInRegion) && (!p.additional || isInAddPicks) && !hasVariantInRegion
-        return (
-          !ingame ||
-          !preferences.filterAvailableAddsAndRegionals ||
-          isAvailable ||
-          specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
-        )
-      }
-    )
+    .filter((p) => {
+      const family = PkmFamily[p.name]
+      const baseVariantName = baseVariant(family)
+      const regionalVariants = PkmRegionalVariants[family]
+      const isInAddPicks = additionalPokemons.includes(baseVariantName)
+      const isInRegion = p.regional && regionalPokemons.includes(family)
+      const hasVariantInRegion = regionalVariants?.some((variant) =>
+        regionalPokemons.includes(variant)
+      )
+      const isAvailable =
+        (!p.regional || isInRegion) &&
+        (!p.additional || isInAddPicks) &&
+        !hasVariantInRegion
+      return (
+        !ingame ||
+        !preferences.filterAvailableAddsAndRegionals ||
+        isAvailable ||
+        specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
+      )
+    })
 
   const pokemonsPerRarity = groupBy(filteredPokemons, (p) => p.rarity)
   for (const rarity in pokemonsPerRarity) {
@@ -147,16 +150,14 @@ function PokemonPickerTab(props: {
   }
 
   const overlapsMap = new Map(
-    SynergyArray
-      .filter((type) => type !== props.type)
-      .map((type) => [
-        type,
-        filteredPokemons.filter(
-          (p, i, list) =>
-            p.types.includes(type) &&
-            list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
-        ).length
-      ])
+    SynergyArray.filter((type) => type !== props.type).map((type) => [
+      type,
+      filteredPokemons.filter(
+        (p, i, list) =>
+          p.types.includes(type) &&
+          list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
+      ).length
+    ])
   )
 
   const overlaps = [...overlapsMap.entries()]

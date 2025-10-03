@@ -42,8 +42,9 @@ export interface INetwork {
   error: string | null
 }
 
-const endpoint = `${window.location.protocol.replace("http", "ws")}//${window.location.host
-  }`
+const endpoint = `${window.location.protocol.replace("http", "ws")}//${
+  window.location.host
+}`
 logger.info(endpoint)
 
 const initalState: INetwork = {
@@ -83,10 +84,14 @@ export const networkSlice = createSlice({
       state.after = undefined
     },
     setProfile: (state, action: PayloadAction<IUserMetadataJSON>) => {
-      const unpackedCollection: Map<string, IPokemonCollectionItemUnpacked> = new Map()
+      const unpackedCollection: Map<string, IPokemonCollectionItemUnpacked> =
+        new Map()
       for (const index in action.payload.pokemonCollection) {
         const item = action.payload.pokemonCollection[index]
-        unpackedCollection.set(index, CollectionUtils.unpackCollectionItem(item))
+        unpackedCollection.set(
+          index,
+          CollectionUtils.unpackCollectionItem(item)
+        )
       }
 
       state.profile = {
@@ -302,7 +307,7 @@ export const networkSlice = createSlice({
       state.lobby?.send(Transfer.UNBAN, action.payload)
     },
     selectLanguage: (state, action: PayloadAction<Language>) => {
-      if(state.profile) state.profile.language = action.payload
+      if (state.profile) state.profile.language = action.payload
       state.lobby?.send(Transfer.SELECT_LANGUAGE, action.payload)
     },
     createTournament: (

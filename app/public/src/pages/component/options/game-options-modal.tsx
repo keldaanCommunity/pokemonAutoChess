@@ -23,7 +23,9 @@ export default function GameOptionsModal(props: {
   const [preferences, setPreferences] = usePreferences()
   const { t, i18n } = useTranslation()
   const dispatch = useAppDispatch()
-  const language = useAppSelector((state) => state.network.profile?.language ?? i18n.language)
+  const language = useAppSelector(
+    (state) => state.network.profile?.language ?? i18n.language
+  )
 
   const renderers = {
     [Phaser.AUTO]: "Auto",
@@ -36,7 +38,8 @@ export default function GameOptionsModal(props: {
       show={props.show}
       onClose={props.hideModal}
       header={t("options")}
-      className="game-options-modal anchor-top">
+      className="game-options-modal anchor-top"
+    >
       <Tabs>
         <TabList>
           <Tab key="sound">{t("sound")}</Tab>

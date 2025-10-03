@@ -50,7 +50,11 @@ export default function RoomMenu() {
 
     if (lobby) {
       let password: string | undefined
-      if (passwordProtected && user?.role !== Role.ADMIN && user?.role !== Role.MODERATOR) {
+      if (
+        passwordProtected &&
+        user?.role !== Role.ADMIN &&
+        user?.role !== Role.MODERATOR
+      ) {
         const inputPassword = prompt(t("room_is_private"))
         if (!inputPassword) return
         password = inputPassword

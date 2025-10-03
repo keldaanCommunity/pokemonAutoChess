@@ -1911,7 +1911,7 @@
 		"CORE_ENFORCER": "Trifft Z-förmig um sein Ziel herum was [80,SP] SPECIAL und SILENCE für 3 Sekunden verursacht.",
 		"POWER_HUG": "Fügt dem Gegner [40,80,SP] SPECIAL zu. Gegner erhält für 3 Sekunden PARALYSIS und wird LOCKED.",
 		"MORTAL_SPIN": "Wirf alle Gegner zurück, die den Anwender in Nahkampfreichweite angreifen. Verursache [20,30,40,SP] SPECIAL und POISONNED für 4 Sekunden.",
-		"METAL_CLAW": "Verursacht [10,20,40,SP] TRUE am Ziel und erhöht dem ATK des Anwenders um [2,4,6].",
+		"METAL_CLAW": "Verursacht [10,20,40,SP] TRUE am Ziel und erhöht dem ATK des Anwenders um [2,4,6,SP].",
 		"FIRESTARTER": "Erhöht das SPEED des Anwenders um [10,20,40,SP], fliegt zum entferntesten Gegner und hinterlässt eine Gutspur, die [20,40,80,SP] SPECIAL verursacht. Die Glut verbleibt und fügt Pokémon (außer FLYING oder FIRE) bei Kontakt 10 SPECIAL und BURN zu.",
 		"BONE_ARMOR": "Fliegt zum schwächsten Gegner und fügt ihm [20,40,80,SP] SPECIAL zu und heilt sich um den verursachten Schaden. Geht das Ziel dabei K.O., sammelt es die Knochen für eine Knochenrüstung und erhält [4,8,12] DEF und SPE_DEF.",
 		"RAGE": "Anwender verfällt für 3 Sekunden in RAGE und erhöht seinen ATK für jede 10% seiner fehlenden MAX HP.",

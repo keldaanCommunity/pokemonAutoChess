@@ -58,14 +58,16 @@ function checkLobby() {
     onTick: async () => {
       const lobbies = await matchMaker.query({ name: "lobby" })
       if (lobbies.length === 0) {
-        logger.warn(`Lobby room has not been found, retrying 2 times before recreating...`)
+        logger.warn(
+          `Lobby room has not been found, retrying 2 times before recreating...`
+        )
 
         // Retry 2 times with 10 second wait between attempts
         let retryCount = 0
         const maxRetries = 2
 
         while (retryCount < maxRetries) {
-          await new Promise(resolve => setTimeout(resolve, 10000)) // Wait 10 seconds
+          await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait 10 seconds
           retryCount++
 
           const retriedLobbies = await matchMaker.query({ name: "lobby" })
@@ -73,10 +75,14 @@ function checkLobby() {
             logger.info(`Lobby room found on retry attempt ${retryCount}`)
             return
           }
-          logger.warn(`Retry attempt ${retryCount}/${maxRetries} failed, lobby still not found`)
+          logger.warn(
+            `Retry attempt ${retryCount}/${maxRetries} failed, lobby still not found`
+          )
         }
 
-        logger.warn(`All retry attempts failed, automatically remaking lobby room`)
+        logger.warn(
+          `All retry attempts failed, automatically remaking lobby room`
+        )
         matchMaker.createRoom("lobby", {})
       }
     },

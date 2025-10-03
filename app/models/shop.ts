@@ -423,8 +423,8 @@ export default class Shop {
         const types = getPokemonData(pkm).types
         const isOfTypeWanted = specificTypesWanted
           ? specificTypesWanted.some((specificTypeWanted) =>
-            types.includes(specificTypeWanted)
-          )
+              types.includes(specificTypeWanted)
+            )
           : types.includes(Synergy.WILD) === false
 
         return isOfTypeWanted && !finals.has(getPokemonBaseline(pkm))
@@ -629,7 +629,8 @@ export default class Shop {
       [Rarity.EPIC]: 0.05,
       [Rarity.ULTRA]: 0.02
     }
-    const rarity_seed = Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
+    const rarity_seed =
+      Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
     let threshold = 0
     const finals = player.getFinalizedLines()
 
@@ -646,7 +647,8 @@ export default class Shop {
       const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
         Synergy.STEEL
       ])
-      if (getPokemonData(steelPkm).types.includes(Synergy.STEEL)) return steelPkm
+      if (getPokemonData(steelPkm).types.includes(Synergy.STEEL))
+        return steelPkm
     }
 
     return Pkm.MELTAN

@@ -6,7 +6,10 @@ import SynergyComponent from "./synergy-component"
 
 import "./synergies.css"
 
-export default function Synergies(props: { synergies: [string, number][], tooltipPortal: boolean }) {
+export default function Synergies(props: {
+  synergies: [string, number][]
+  tooltipPortal: boolean
+}) {
   const { t } = useTranslation()
   const synergies = Object.keys(Synergy)
     .sort((a, b) => {

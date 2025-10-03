@@ -108,7 +108,10 @@ export default class WanderersManager {
       tween: Phaser.Tweens.Tween
     ) => void
   }): PokemonSprite {
-    let startX = -100, startY = 350, endX = window.innerWidth + 100, endY = 350
+    let startX = -100,
+      startY = 350,
+      endX = window.innerWidth + 100,
+      endY = 350
     let duration = clamp(window.innerWidth / DEFAULT_WANDERER_SPEED, 4000, 6000)
     let clicked = false
     const tweens: Phaser.Tweens.Tween[] = []
@@ -126,9 +129,9 @@ export default class WanderersManager {
       case WandererBehavior.RUN_THROUGH:
       default: {
         const fromLeft = chance(1 / 2)
-        startX = (fromLeft ? -100 : +window.innerWidth + 100)
+        startX = fromLeft ? -100 : +window.innerWidth + 100
         startY = 100 + Math.round(Math.random() * 500)
-        endX = (fromLeft ? +window.innerWidth + 100 : -100)
+        endX = fromLeft ? +window.innerWidth + 100 : -100
         endY = 100 + Math.round(Math.random() * 500)
         break
       }

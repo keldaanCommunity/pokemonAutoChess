@@ -9,7 +9,7 @@ export abstract class SimulationCommand implements ISimulationCommand {
   constructor(delay: number) {
     this.delay = delay
   }
-  execute() { }
+  execute() {}
   update(dt: number) {
     this.delay -= dt
     if (this.delay < 0) {

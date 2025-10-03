@@ -5,7 +5,9 @@ import GameDpsTaken from "./game-dps-taken"
 
 export default function GamePlayerDpsTakenMeter({
   dpsMeter = []
-}: { dpsMeter: IDps[] }) {
+}: {
+  dpsMeter: IDps[]
+}) {
   const { t } = useTranslation()
   const sortedDamageTaken = useMemo(
     () =>
