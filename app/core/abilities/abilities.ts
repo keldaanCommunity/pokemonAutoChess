@@ -11713,7 +11713,8 @@ export class SpicyExtractStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     //Make 1/2/3 closest allies RAGE for [2,SP] seconds
     const nbAllies = [1, 2, 3][pokemon.stars - 1] ?? 3
-    const rageDuration = 2000
+    const rageDuration = 2000 * (1 + pokemon.ap / 100) *
+          (crit ? 1 + (pokemon.critPower - 1) : 1)
     const allies = board.cells
       .filter<PokemonEntity>(
         (cell): cell is PokemonEntity =>
