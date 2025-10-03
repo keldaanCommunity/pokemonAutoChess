@@ -12,10 +12,17 @@ import { OrientationVector } from "../../../../utils/orientation"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
-import { clearAbilityAnimations, displayAbility, displayHit } from "../components/abilities-animations"
+import {
+  clearAbilityAnimations,
+  displayAbility,
+  displayHit
+} from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
 import PokemonSprite from "../components/pokemon"
-import { DEFAULT_POKEMON_ANIMATION_CONFIG, PokemonAnimations } from "../components/pokemon-animations"
+import {
+  DEFAULT_POKEMON_ANIMATION_CONFIG,
+  PokemonAnimations
+} from "../components/pokemon-animations"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
 
@@ -104,7 +111,10 @@ export class DebugScene extends Phaser.Scene {
     this.pokemon.positionX = 3
     this.pokemon.positionY = 3
     let animationName = AnimationType[animationType]
-    const anims = { ...DEFAULT_POKEMON_ANIMATION_CONFIG, ...(PokemonAnimations[pkm] ?? {}) }
+    const anims = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[pkm] ?? {})
+    }
     if (animationType === "Attack") {
       animationName = anims.attack
       this.showTarget()
@@ -193,7 +203,7 @@ export class DebugScene extends Phaser.Scene {
           )!
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
-          ; (this.sys as any).animatedTiles.init(map)
+        ;(this.sys as any).animatedTiles.init(map)
         playMusic(this as any, DungeonDetails[mapName].music)
       })
   }
@@ -400,7 +410,8 @@ export class DebugScene extends Phaser.Scene {
           )
           displayHit(
             this,
-            PokemonAnimations[PkmByIndex[this.pokemon.index]]?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+            PokemonAnimations[PkmByIndex[this.pokemon.index]]?.hitSprite ??
+              DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
             x,
             y,
             false
@@ -432,7 +443,10 @@ export class DebugScene extends Phaser.Scene {
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {
-    this.cameras.main.shake(options?.duration ?? 250, options?.intensity ?? 0.01)
+    this.cameras.main.shake(
+      options?.duration ?? 250,
+      options?.intensity ?? 0.01
+    )
   }
 
   setWeather(weather: Weather | "dawn" | "sunset" | "nighttime") {

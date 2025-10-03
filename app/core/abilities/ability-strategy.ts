@@ -21,7 +21,7 @@ export class AbilityStrategy {
       pokemon.broadcastAbility({
         targetX: target.positionX,
         targetY: target.positionY,
-        ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+        ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
       })
     }
 

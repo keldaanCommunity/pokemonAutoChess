@@ -21,11 +21,16 @@ export default function GamePokemonDuoPortrait(props: {
   const duo = PkmDuos[props.duo].map((p) => getPokemonData(p))
   const rarityColor = RarityColor[duo[0].rarity]
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const duoCustom = duo.map((p) => getPkmWithCustom(p.index, currentPlayer?.pokemonCustoms))
+  const duoCustom = duo.map((p) =>
+    getPkmWithCustom(p.index, currentPlayer?.pokemonCustoms)
+  )
 
   return (
     <div
-      className={cc(`my-container game-pokemon-portrait game-pokemon-portrait-duo`, { planned: props.inPlanner ?? false })}
+      className={cc(
+        `my-container game-pokemon-portrait game-pokemon-portrait-duo`,
+        { planned: props.inPlanner ?? false }
+      )}
       style={{
         backgroundColor: rarityColor,
         borderColor: rarityColor

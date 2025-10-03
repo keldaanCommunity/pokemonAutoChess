@@ -15,10 +15,7 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
 import { Transfer } from "../types"
-import {
-  ItemCarouselStages,
-  PortalCarouselStages
-} from "../types/Config"
+import { ItemCarouselStages, PortalCarouselStages } from "../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -121,11 +118,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * item.index) / this.items!.size) *
-              CAROUSEL_RADIUS_X
+                CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * item.index) / this.items!.size) *
-              CAROUSEL_RADIUS_Y
+                CAROUSEL_RADIUS_Y
             Body.setPosition(itemBody, { x, y })
           }
         }
@@ -139,11 +136,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-              CAROUSEL_RADIUS_X
+                CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-              CAROUSEL_RADIUS_Y
+                CAROUSEL_RADIUS_Y
             Body.setPosition(portalBody, { x, y })
           }
         }
@@ -297,11 +294,11 @@ export class MiniGame {
         avatar.targetX =
           this.centerX +
           Math.cos((2 * Math.PI * i) / this.alivePlayers.length) *
-          CAROUSEL_RADIUS_X
+            CAROUSEL_RADIUS_X
         avatar.targetY =
           this.centerY +
           Math.sin((2 * Math.PI * i) / this.alivePlayers.length) *
-          CAROUSEL_RADIUS_Y
+            CAROUSEL_RADIUS_Y
       }
 
       this.avatars!.set(avatar.id, avatar)
@@ -442,16 +439,16 @@ export class MiniGame {
             portal.x +
             Math.cos(
               this.timeElapsed * SYMBOL_ROTATION_SPEED +
-              (Math.PI * 2 * symbol.index) / symbols.length
+                (Math.PI * 2 * symbol.index) / symbols.length
             ) *
-            25
+              25
           symbol.y =
             portal.y +
             Math.sin(
               this.timeElapsed * SYMBOL_ROTATION_SPEED +
-              (Math.PI * 2 * symbol.index) / symbols.length
+                (Math.PI * 2 * symbol.index) / symbols.length
             ) *
-            25
+              25
         })
       }
     })

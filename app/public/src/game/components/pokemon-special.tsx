@@ -14,14 +14,24 @@ export default class PokemonSpecial extends PokemonSprite {
   dialog?: string
   dialogTitle?: string
 
-  constructor({ scene, x, y, name, orientation = Orientation.DOWN, animation = PokemonActionState.IDLE, dialog, dialogTitle, shiny }: {
-    scene: GameScene,
-    x: number,
-    y: number,
-    name: Pkm,
-    orientation?: Orientation,
-    animation?: PokemonActionState,
-    dialog?: string,
+  constructor({
+    scene,
+    x,
+    y,
+    name,
+    orientation = Orientation.DOWN,
+    animation = PokemonActionState.IDLE,
+    dialog,
+    dialogTitle,
+    shiny
+  }: {
+    scene: GameScene
+    x: number
+    y: number
+    name: Pkm
+    orientation?: Orientation
+    animation?: PokemonActionState
+    dialog?: string
     dialogTitle?: string
     shiny?: boolean
   }) {
@@ -46,7 +56,12 @@ export default class PokemonSpecial extends PokemonSprite {
   onPointerDown(pointer, event) {
     super.onPointerDown(pointer, event)
     event.stopPropagation()
-    this.scene.animationManager?.animatePokemon(this, PokemonActionState.EMOTE, false, false)
+    this.scene.animationManager?.animatePokemon(
+      this,
+      PokemonActionState.EMOTE,
+      false,
+      false
+    )
   }
 
   openDetail() {
@@ -57,11 +72,7 @@ export default class PokemonSpecial extends PokemonSprite {
         s.lastPokemonDetail = null
       }
 
-      this.detail = new GameDialog(
-        this.scene,
-        this.dialog,
-        this.dialogTitle
-      )
+      this.detail = new GameDialog(this.scene, this.dialog, this.dialogTitle)
       this.detail.setPosition(
         this.detail.width / 2 + 40,
         min(0)(-this.detail.height / 2 - 40)

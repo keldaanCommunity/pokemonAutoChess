@@ -48,8 +48,11 @@ function fetchCreditsNames() {
             // Discord mention format
             const id = contact.slice(2, -1)
             contact = `https://discord.com/users/${id}`
-          }
-          else if (contact && contact.toLowerCase().startsWith("dc:<@") && contact.endsWith(">")) {
+          } else if (
+            contact &&
+            contact.toLowerCase().startsWith("dc:<@") &&
+            contact.endsWith(">")
+          ) {
             // Discord mention format with DC: prefix
             contact = `https://discord.com/users/${contact.slice(5, -1)}`
           }

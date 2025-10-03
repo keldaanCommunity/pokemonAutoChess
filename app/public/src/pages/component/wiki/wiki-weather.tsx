@@ -31,7 +31,9 @@ export default function WikiWeather() {
                 src={`/assets/icons/weather/${weather.toLowerCase()}.svg`}
               />
               <h2>{t(`weather.${weather}`)}</h2>
-              <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "4px" }}
+              >
                 {WeatherThreshold[weather]}
                 <SynergyIcon type={SynergyAssociatedToWeather.get(weather)!} />
               </span>
@@ -41,7 +43,7 @@ export default function WikiWeather() {
             </p>
             <ul>
               {(pokemonsInfluencingWeather.get(weather) ?? [])
-                .map(p => getPokemonData(p))
+                .map((p) => getPokemonData(p))
                 .map((p) => (
                   <li key={p.index}>
                     <div
@@ -73,11 +75,14 @@ export default function WikiWeather() {
 const pokemonsInfluencingWeather = new Map([
   [Weather.SUN, [Pkm.HO_OH, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]],
   [Weather.NIGHT, [Pkm.LUNATONE, Pkm.SHADOW_LUGIA]],
-  [Weather.WINDY, [Pkm.LUGIA, Pkm.LANDORUS, Pkm.THUNDURUS, Pkm.TORNADUS, Pkm.ENAMORUS]],
+  [
+    Weather.WINDY,
+    [Pkm.LUGIA, Pkm.LANDORUS, Pkm.THUNDURUS, Pkm.TORNADUS, Pkm.ENAMORUS]
+  ],
   [Weather.MISTY, [Pkm.ENAMORUS, Pkm.XERNEAS]],
-  [Weather.RAIN, [Pkm.PRIMAL_KYOGRE, Pkm.CASTFORM_RAIN,]],
+  [Weather.RAIN, [Pkm.PRIMAL_KYOGRE, Pkm.CASTFORM_RAIN]],
   [Weather.SNOW, [Pkm.ARTICUNO, Pkm.CASTFORM_HAIL, Pkm.TORNADUS]],
   [Weather.STORM, [Pkm.ZAPDOS, Pkm.THUNDURUS]],
   [Weather.SANDSTORM, [Pkm.LANDORUS, Pkm.PRIMAL_GROUDON]],
-  [Weather.NEUTRAL, [Pkm.MEGA_RAYQUAZA]],
+  [Weather.NEUTRAL, [Pkm.MEGA_RAYQUAZA]]
 ])

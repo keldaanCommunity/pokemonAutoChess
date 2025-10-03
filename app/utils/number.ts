@@ -1,11 +1,11 @@
 export const min =
   (minimum: number) =>
-    (value: number): number =>
-      Math.max(minimum, value)
+  (value: number): number =>
+    Math.max(minimum, value)
 export const max =
   (maximum: number) =>
-    (value: number): number =>
-      Math.min(maximum, value)
+  (value: number): number =>
+    Math.min(maximum, value)
 
 export const clamp = (num: number, min: number, max: number): number =>
   Math.min(Math.max(num, min), max)
@@ -29,7 +29,10 @@ export function calcAngleDegrees(x: number, y: number) {
   return (Math.atan2(y, x) * 180) / Math.PI
 }
 
-export function angleBetween(pointA: [number, number], pointB: [number, number]): number {
+export function angleBetween(
+  pointA: [number, number],
+  pointB: [number, number]
+): number {
   const dx = pointB[0] - pointA[0]
   const dy = pointB[1] - pointA[1]
   return Math.atan2(dy, dx)

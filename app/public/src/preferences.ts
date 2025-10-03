@@ -116,13 +116,13 @@ export function usePreferences(): [IPreferencesState, typeof savePreferences] {
 export function usePreference<T extends keyof IPreferencesState>(
   key: T
 ): [
-    IPreferencesState[T],
-    (
-      set:
-        | IPreferencesState[T]
-        | ((old: IPreferencesState[T]) => IPreferencesState[T])
-    ) => void
-  ] {
+  IPreferencesState[T],
+  (
+    set:
+      | IPreferencesState[T]
+      | ((old: IPreferencesState[T]) => IPreferencesState[T])
+  ) => void
+] {
   const [preferenceState, setPreferenceState] = useState<IPreferencesState[T]>(
     preferences[key]
   )

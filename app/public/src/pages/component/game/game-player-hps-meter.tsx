@@ -5,7 +5,9 @@ import GameDpsHeal from "./game-dps-heal"
 
 export default function GamePlayerHpsMeter({
   dpsMeter = []
-}: { dpsMeter: IDps[] }) {
+}: {
+  dpsMeter: IDps[]
+}) {
   const { t } = useTranslation()
   const sortedHps = useMemo(
     () =>

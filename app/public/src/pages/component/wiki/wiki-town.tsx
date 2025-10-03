@@ -2,7 +2,12 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { TownEncounter, TownEncounters, TownEncountersByStage, TownEncounterSellPrice } from "../../../../../core/town-encounters"
+import {
+  TownEncounter,
+  TownEncounters,
+  TownEncountersByStage,
+  TownEncounterSellPrice
+} from "../../../../../core/town-encounters"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function WikiTown() {
@@ -17,13 +22,31 @@ export default function WikiTown() {
         {Object.values(TownEncounters).map((encounter: TownEncounter) => (
           <li key={encounter} className="my-box">
             <header>
-              <h2><PokemonPortrait portrait={{ index: PkmIndex[encounter]}} /> {t(`pkm.${encounter}`)}</h2>
-               <span style={{ display: "flex", alignItems: "center", gap: "4px", textAlign: "end" }}>
-                               {t("stages")}:<br/>{Object.keys(TownEncountersByStage).filter(s => encounter in TownEncountersByStage[s]).map(s => s).join(", ")}
-                </span>
+              <h2>
+                <PokemonPortrait portrait={{ index: PkmIndex[encounter] }} />{" "}
+                {t(`pkm.${encounter}`)}
+              </h2>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                  textAlign: "end"
+                }}
+              >
+                {t("stages")}:<br />
+                {Object.keys(TownEncountersByStage)
+                  .filter((s) => encounter in TownEncountersByStage[s])
+                  .map((s) => s)
+                  .join(", ")}
+              </span>
             </header>
             <p className="description">
-              {addIconsToDescription(t(`town_encounter_description.${encounter}`, { cost: TownEncounterSellPrice[encounter] ?? 0 }))}
+              {addIconsToDescription(
+                t(`town_encounter_description.${encounter}`, {
+                  cost: TownEncounterSellPrice[encounter] ?? 0
+                })
+              )}
             </p>
           </li>
         ))}

@@ -20,7 +20,8 @@ export interface IPreparationState {
 
 export default class PreparationState
   extends Schema
-  implements IPreparationState {
+  implements IPreparationState
+{
   @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: GameUser }) users = new MapSchema<GameUser>()
   @type("string") gameStartedAt: string | null

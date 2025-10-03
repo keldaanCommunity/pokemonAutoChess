@@ -16,7 +16,7 @@ type EffectOrigin = EffectEnum | Item | Passive | Ability
 
 export abstract class Effect {
   origin?: EffectOrigin
-  apply(...args: any[]) { }
+  apply(...args: any[]) {}
   constructor(effect?: (...args: any[]) => void, origin?: EffectOrigin) {
     if (effect) {
       this.apply = effect
@@ -32,7 +32,7 @@ export class OnSpawnEffect extends Effect {
   ) {
     super(effect)
   }
-  override apply(entity: PokemonEntity, player?: Player, isSpawn?: boolean) { }
+  override apply(entity: PokemonEntity, player?: Player, isSpawn?: boolean) {}
 }
 
 // effect applied when consuming a dish, either at the start of the fight or when eating a dish on the bench
@@ -46,13 +46,13 @@ export class OnDishConsumedEffect extends Effect {
   constructor(effect?: (args: OnDishConsumedEffectArgs) => void) {
     super(effect)
   }
-  override apply(args: OnDishConsumedEffectArgs) { }
+  override apply(args: OnDishConsumedEffectArgs) {}
 }
 
 // item effect applied on fight start of after stealing/obtaining an item
-export class OnItemGainedEffect extends Effect { }
+export class OnItemGainedEffect extends Effect {}
 
-export class OnItemRemovedEffect extends Effect { }
+export class OnItemRemovedEffect extends Effect {}
 
 interface OnStageStartEffectArgs {
   player: Player
@@ -65,7 +65,7 @@ export class OnStageStartEffect extends Effect {
   constructor(effect?: (args: OnStageStartEffectArgs) => void) {
     super(effect)
   }
-  apply(args: OnStageStartEffectArgs) { }
+  apply(args: OnStageStartEffectArgs) {}
 }
 
 interface OnSimulationStartEffectArgs {
@@ -80,7 +80,7 @@ export class OnSimulationStartEffect extends Effect {
   constructor(effect?: (args: OnSimulationStartEffectArgs) => void) {
     super(effect)
   }
-  apply(args: OnSimulationStartEffectArgs) { }
+  apply(args: OnSimulationStartEffectArgs) {}
 }
 
 interface OnItemDroppedEffectArgs {
@@ -110,7 +110,7 @@ export class OnKillEffect extends Effect {
     target: PokemonEntity,
     board: Board,
     attackType: AttackType
-  ) { }
+  ) {}
   constructor(
     effect?: (
       entity: PokemonEntity,
@@ -131,7 +131,7 @@ interface OnDeathEffectArgs {
 }
 
 export class OnDeathEffect extends Effect {
-  apply(args: OnDeathEffectArgs) { }
+  apply(args: OnDeathEffectArgs) {}
   constructor(
     effect?: (args: OnDeathEffectArgs) => void,
     origin?: EffectOrigin
@@ -178,7 +178,7 @@ interface OnHitEffectArgs {
 
 // applied after every successful basic attack (not dodged or protected)
 export class OnHitEffect extends Effect {
-  apply(params: OnHitEffectArgs) { }
+  apply(params: OnHitEffectArgs) {}
   constructor(
     effect?: (params: OnHitEffectArgs) => void,
     origin?: EffectOrigin
@@ -200,7 +200,7 @@ interface OnAttackEffectArgs {
 }
 
 export class OnAttackEffect extends Effect {
-  override apply(args: OnAttackEffectArgs) { }
+  override apply(args: OnAttackEffectArgs) {}
   constructor(
     effect?: (args: OnAttackEffectArgs) => void,
     origin?: EffectOrigin
@@ -215,7 +215,7 @@ export class OnAbilityCastEffect extends Effect {
     board: Board,
     target: PokemonEntity,
     crit: boolean
-  ) { }
+  ) {}
   constructor(
     effect?: (
       pokemon: PokemonEntity,
@@ -241,7 +241,7 @@ interface OnDamageReceivedEffectArgs {
 }
 
 export class OnDamageReceivedEffect extends Effect {
-  apply(args: OnDamageReceivedEffectArgs) { }
+  apply(args: OnDamageReceivedEffectArgs) {}
   constructor(
     effect?: (args: OnDamageReceivedEffectArgs) => void,
     origin?: EffectOrigin
@@ -260,7 +260,7 @@ export interface OnDamageDealtEffectArgs {
 }
 
 export class OnDamageDealtEffect extends Effect {
-  apply(args: OnDamageDealtEffectArgs) { }
+  apply(args: OnDamageDealtEffectArgs) {}
   constructor(
     effect?: (args: OnDamageDealtEffectArgs) => void,
     origin?: EffectOrigin
@@ -277,7 +277,7 @@ export class OnMoveEffect extends Effect {
     oldY: number,
     newX: number,
     newY: number
-  ) { }
+  ) {}
   constructor(
     effect?: (
       pokemon: PokemonEntity,
@@ -301,7 +301,7 @@ interface OnShieldDepletedEffectArgs {
 }
 
 export class OnShieldDepletedEffect extends Effect {
-  override apply(args: OnShieldDepletedEffectArgs) { }
+  override apply(args: OnShieldDepletedEffectArgs) {}
   constructor(
     effect?: (args: OnShieldDepletedEffectArgs) => void,
     origin?: EffectOrigin

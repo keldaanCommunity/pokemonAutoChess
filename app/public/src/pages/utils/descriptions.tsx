@@ -22,7 +22,6 @@ const TechnicalTerms = [
   "CONE"
 ]
 
-
 export const iconRegExp = new RegExp(
   `(?<=\\W|^)(?:${[
     ...DamageTypes,
@@ -38,7 +37,10 @@ export const iconRegExp = new RegExp(
   "g"
 )
 
-export function addIconsToDescription(description: string, stats?: { ap: number, luck: number, stars: number, stages?: number }) {
+export function addIconsToDescription(
+  description: string,
+  stats?: { ap: number; luck: number; stars: number; stages?: number }
+) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
@@ -90,7 +92,13 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
             title={t(`status_description.${token}`)}
           >
             <img src={`assets/icons/${token}.svg`} />
-            <span className={cc("status-label", { positive: PositiveStatuses.includes(token as Status) })}>{t(`status.${token}`)}</span>
+            <span
+              className={cc("status-label", {
+                positive: PositiveStatuses.includes(token as Status)
+              })}
+            >
+              {t(`status.${token}`)}
+            </span>
           </span>
         )
       } else if (Weathers.includes(token as Weather)) {
@@ -127,7 +135,9 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
             title={t(`technical_terms_definitions.${token}`)}
           >
             <img src={`assets/ui/${token.toLowerCase()}.svg`} />
-            <i className="technical-term-label">{t(`technical_terms.${token}`)}</i>
+            <i className="technical-term-label">
+              {t(`technical_terms.${token}`)}
+            </i>
           </span>
         )
       } else if (/\[[^\]]+\]/.test(token)) {
@@ -149,7 +159,10 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
 
         d = (
           <span
-            className={cc("description-icon", { "scales-ap": scaleType === "AP", "scales-luck": scaleType === "LUCK" })}
+            className={cc("description-icon", {
+              "scales-ap": scaleType === "AP",
+              "scales-luck": scaleType === "LUCK"
+            })}
           >
             {scaleType === "AP" && (
               <img
@@ -166,13 +179,23 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
               ></img>
             )}
             {array.slice(0, stats?.stages).map((v, j) => {
-              const separator = j < Math.min(stats?.stages ?? 4, array.length) - 1 ? "/" : ""
+              const separator =
+                j < Math.min(stats?.stages ?? 4, array.length) - 1 ? "/" : ""
               let value = roundToNDigits(Number(v), nbDigits)
               if (scaleType === "AP") {
-                value = roundToNDigits(Number(v) * (1 + (stats?.ap ?? 0) * scaleFactor / 100), nbDigits)
+                value = roundToNDigits(
+                  Number(v) * (1 + ((stats?.ap ?? 0) * scaleFactor) / 100),
+                  nbDigits
+                )
               }
               if (scaleType === "LUCK") {
-                value = roundToNDigits(max(100)(Math.pow(Number(v) / 100, (1 - (stats?.luck ?? 0) / 100)) * 100), nbDigits)
+                value = roundToNDigits(
+                  max(100)(
+                    Math.pow(Number(v) / 100, 1 - (stats?.luck ?? 0) / 100) *
+                      100
+                  ),
+                  nbDigits
+                )
               }
 
               const tier = stats?.stars
@@ -194,7 +217,10 @@ export function addIconsToDescription(description: string, stats?: { ap: number,
     }
 
     return (
-      <React.Fragment key={i}>{d}{f}</React.Fragment>
+      <React.Fragment key={i}>
+        {d}
+        {f}
+      </React.Fragment>
     )
   })
 }

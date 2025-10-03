@@ -22,7 +22,7 @@
 .game-final-rank .rank {
   font-size: 3em;
   font-weight: 700;
-  text-shadow: .05em .05em .1em black;
+  text-shadow: 0.05em 0.05em 0.1em black;
 }
 
 .game-final-rank .waiting {

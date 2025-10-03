@@ -161,26 +161,28 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     })
     wrap.appendChild(typesList)
 
-    let stats = inBattle ? [
-      { stat: Stat.HP, elm: this.hp },
-      { stat: Stat.DEF, elm: this.def },
-      { stat: Stat.ATK, elm: this.atk },
-      { stat: Stat.AP, elm: this.ap },
-      { stat: Stat.CRIT_POWER, elm: this.critPower },
-      { stat: Stat.PP, elm: this.pp },
-      { stat: Stat.SPE_DEF, elm: this.speDef },
-      { stat: Stat.SPEED, elm: this.speed },
-      { stat: Stat.LUCK, elm: this.luck },
-      { stat: Stat.CRIT_CHANCE, elm: this.critChance }
-    ] : [
-      { stat: Stat.HP, elm: this.hp },
-      { stat: Stat.DEF, elm: this.def },
-      { stat: Stat.ATK, elm: this.atk },
-      { stat: Stat.RANGE, elm: this.range },
-      { stat: Stat.PP, elm: this.pp },
-      { stat: Stat.SPE_DEF, elm: this.speDef },
-      { stat: Stat.SPEED, elm: this.speed },
-    ]
+    let stats = inBattle
+      ? [
+          { stat: Stat.HP, elm: this.hp },
+          { stat: Stat.DEF, elm: this.def },
+          { stat: Stat.ATK, elm: this.atk },
+          { stat: Stat.AP, elm: this.ap },
+          { stat: Stat.CRIT_POWER, elm: this.critPower },
+          { stat: Stat.PP, elm: this.pp },
+          { stat: Stat.SPE_DEF, elm: this.speDef },
+          { stat: Stat.SPEED, elm: this.speed },
+          { stat: Stat.LUCK, elm: this.luck },
+          { stat: Stat.CRIT_CHANCE, elm: this.critChance }
+        ]
+      : [
+          { stat: Stat.HP, elm: this.hp },
+          { stat: Stat.DEF, elm: this.def },
+          { stat: Stat.ATK, elm: this.atk },
+          { stat: Stat.RANGE, elm: this.range },
+          { stat: Stat.PP, elm: this.pp },
+          { stat: Stat.SPE_DEF, elm: this.speDef },
+          { stat: Stat.SPEED, elm: this.speed }
+        ]
 
     if (passive === Passive.INANIMATE) {
       stats = [
@@ -217,20 +219,21 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     if (dish) {
       const pokemonDish = document.createElement("div")
       pokemonDish.className = "game-pokemon-detail-dish"
-      ReactDOM.createRoot(pokemonDish).render(<>
-        <div className="game-pokemon-detail-dish-name">
-          <img src="assets/ui/dish.svg" /><i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
-        </div>
-        <img
-          src={`assets/item/${dish}.png`}
-          className="game-pokemon-detail-dish-icon"
-          alt={dish}
-          title={t(`item.${dish}`)}
-        />
-        <p>
-          {addIconsToDescription(t(`item_description.${dish}`))}
-        </p>
-      </>)
+      ReactDOM.createRoot(pokemonDish).render(
+        <>
+          <div className="game-pokemon-detail-dish-name">
+            <img src="assets/ui/dish.svg" />
+            <i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
+          </div>
+          <img
+            src={`assets/item/${dish}.png`}
+            className="game-pokemon-detail-dish-icon"
+            alt={dish}
+            title={t(`item.${dish}`)}
+          />
+          <p>{addIconsToDescription(t(`item_description.${dish}`))}</p>
+        </>
+      )
       wrap.appendChild(pokemonDish)
     }
 
@@ -259,7 +262,19 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     el.classList.toggle("negative", value < 0)
   }
 
-  updateAbilityDescription({ skill, stars, stages, ap, luck }: { skill: Ability, stars: number, stages: number, ap: number, luck: number }) {
+  updateAbilityDescription({
+    skill,
+    stars,
+    stages,
+    ap,
+    luck
+  }: {
+    skill: Ability
+    stars: number
+    stages: number
+    ap: number
+    luck: number
+  }) {
     this.abilityRoot?.render(
       <>
         <div className="ability-name">{t(`ability.${skill}`)}</div>
@@ -268,11 +283,24 @@ export default class PokemonDetail extends GameObjects.DOMElement {
     )
   }
 
-  updatePassiveDescription({ passive, stars, ap, luck }: { passive: Passive, stars: number, ap: number, luck: number }) {
+  updatePassiveDescription({
+    passive,
+    stars,
+    ap,
+    luck
+  }: {
+    passive: Passive
+    stars: number
+    ap: number
+    luck: number
+  }) {
     this.passiveDescriptionRoot?.render(
       <p>
-        {addIconsToDescription(
-          t(`passive_description.${passive}`), { stars, ap, luck })}
+        {addIconsToDescription(t(`passive_description.${passive}`), {
+          stars,
+          ap,
+          luck
+        })}
       </p>
     )
   }

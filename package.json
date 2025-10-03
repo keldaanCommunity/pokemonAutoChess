@@ -27,6 +27,7 @@
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx @biomejs/biome lint app/",
+    "format": "npx @biomejs/biome format app/ --write",
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "download-music": "degit --force https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",

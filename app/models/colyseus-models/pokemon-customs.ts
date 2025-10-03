@@ -12,7 +12,9 @@ export class PokemonCustoms extends MapSchema<number> {
     super()
     pokemonCollection.forEach((item, index) => {
       const shiny = item.selectedShiny ? 1 : 0
-      let emotionIndex = CollectionEmotions.indexOf(item.selectedEmotion ?? Emotion.NORMAL)
+      let emotionIndex = CollectionEmotions.indexOf(
+        item.selectedEmotion ?? Emotion.NORMAL
+      )
       if (emotionIndex === -1) emotionIndex = 0
       this.set(index, (shiny ? 0b10000000 : 0) | emotionIndex)
     })

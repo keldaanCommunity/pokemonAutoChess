@@ -19,7 +19,10 @@ export class Portal extends GameObjects.Container {
   }
 }
 
-export class SynergySymbol extends GameObjects.Sprite implements ISynergySymbol {
+export class SynergySymbol
+  extends GameObjects.Sprite
+  implements ISynergySymbol
+{
   id: string
   synergy: Synergy
   portalId: string

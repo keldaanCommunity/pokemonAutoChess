@@ -61,12 +61,15 @@ export function GameMoneyDetail() {
       {specialGameRule !== SpecialGameRule.BLOOD_MONEY && (
         <>
           <p style={{ marginTop: "0.5em" }}>
-            <Money value={t("interest", { interest })} />
-            ({addIconsToDescription(t("max_interest", { maxInterest }))})
+            <Money value={t("interest", { interest })} />(
+            {addIconsToDescription(t("max_interest", { maxInterest }))})
           </p>
           <p className="help">
             {addIconsToDescription(
-              t("additional_income_hint", { maxInterest, maxInterestGolds: maxInterest * 10 })
+              t("additional_income_hint", {
+                maxInterest,
+                maxInterestGolds: maxInterest * 10
+              })
             )}
           </p>
         </>

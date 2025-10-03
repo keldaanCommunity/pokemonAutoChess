@@ -39,8 +39,7 @@ export default function UnownPanel(props: {
           played: 0
         }
         const isUnlocked =
-          item.emotions?.length > 0 ||
-          item.shinyEmotions?.length > 0
+          item.emotions?.length > 0 || item.shinyEmotions?.length > 0
         return [{ pkm, item: item, isUnlocked }]
       }).sort((a, b) => {
         if (props.filterState.sort === "index") {

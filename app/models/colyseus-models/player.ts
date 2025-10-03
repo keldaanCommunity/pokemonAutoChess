@@ -121,7 +121,9 @@ export default class Player extends Schema implements IPlayer {
   @type([Pokemon]) flowerPots: Pokemon[] = []
   @type("uint8") mulch: number = 0
   @type("uint8") mulchCap: number = MulchStockCaps[0]
-  @type(["uint8"]) groundHoles: number[] = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(0)
+  @type(["uint8"]) groundHoles: number[] = new Array(
+    BOARD_WIDTH * BOARD_HEIGHT
+  ).fill(0)
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
@@ -530,7 +532,11 @@ export default class Player extends Schema implements IPlayer {
     } while (newNbHats !== currentNbHats)
   }
 
-  updateRegionalPool(state: GameState, mapChanged: boolean, previousMap?: string) {
+  updateRegionalPool(
+    state: GameState,
+    mapChanged: boolean,
+    previousMap?: string
+  ) {
     if (this.map === "town") {
       resetArraySchema(this.regionalPokemons, [])
       return
@@ -555,13 +561,19 @@ export default class Player extends Schema implements IPlayer {
         if (previousMap) {
           const { synergies: previousSynergies } = DungeonDetails[previousMap]
           previousSynergies.forEach((synergy) => {
-            this.bonusSynergies.set(synergy, min(0)((this.bonusSynergies.get(synergy) ?? 0) - 1))
+            this.bonusSynergies.set(
+              synergy,
+              min(0)((this.bonusSynergies.get(synergy) ?? 0) - 1)
+            )
           })
         }
 
         const { synergies, regionalSpeciality } = DungeonDetails[this.map]
         synergies.forEach((synergy) => {
-          this.bonusSynergies.set(synergy, (this.bonusSynergies.get(synergy) ?? 0) + 1)
+          this.bonusSynergies.set(
+            synergy,
+            (this.bonusSynergies.get(synergy) ?? 0) + 1
+          )
         })
         this.updateSynergies()
         if (regionalSpeciality) {
@@ -574,19 +586,35 @@ export default class Player extends Schema implements IPlayer {
       }
 
       // Cannot be a ConditionBasedEvolutionRule because it has another CountEvolutionRule for Wormadam
-      const burmys = values(this.board).filter((p) => p.passive === Passive.BURMY)
+      const burmys = values(this.board).filter(
+        (p) => p.passive === Passive.BURMY
+      )
       if (burmys.length > 0 && state.stageLevel >= 20) {
         const cloakTypesByBurmy = new Map<Pkm, Synergy>([
           [Pkm.BURMY_PLANT, Synergy.GRASS],
           [Pkm.BURMY_SANDY, Synergy.GROUND],
           [Pkm.BURMY_TRASH, Synergy.ARTIFICIAL]
         ])
-        const cloakTypes = burmys.map(burmy => cloakTypesByBurmy.get(burmy.name)).filter((s): s is Synergy => s != null)
-        if (cloakTypes.some(type => DungeonDetails[this.map]?.synergies.includes(type) === false)) {
+        const cloakTypes = burmys
+          .map((burmy) => cloakTypesByBurmy.get(burmy.name))
+          .filter((s): s is Synergy => s != null)
+        if (
+          cloakTypes.some(
+            (type) =>
+              DungeonDetails[this.map]?.synergies.includes(type) === false
+          )
+        ) {
           const burmyEvolving = burmys[0]
-          burmyEvolving.evolutionRule = new ConditionBasedEvolutionRule(() => true, () => Pkm.MOTHIM)
-          burmyEvolving.evolutionRule.tryEvolve(burmyEvolving, this, state.stageLevel)
-          burmys.slice(1).forEach(burmyToRemove => {
+          burmyEvolving.evolutionRule = new ConditionBasedEvolutionRule(
+            () => true,
+            () => Pkm.MOTHIM
+          )
+          burmyEvolving.evolutionRule.tryEvolve(
+            burmyEvolving,
+            this,
+            state.stageLevel
+          )
+          burmys.slice(1).forEach((burmyToRemove) => {
             this.board.delete(burmyToRemove.id)
           })
           this.updateSynergies()
@@ -656,7 +684,10 @@ export default class Player extends Schema implements IPlayer {
       this.mulch = this.mulch % this.mulchCap
       const index = MulchStockCaps.indexOf(this.mulchCap)
       this.mulchCap = MulchStockCaps[index + 1] ?? MulchStockCaps.at(-1)
-      const mulchCollected = this.items.filter(i => i === Item.RICH_MULCH).length + this.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) - 8
+      const mulchCollected =
+        this.items.filter((i) => i === Item.RICH_MULCH).length +
+        this.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) -
+        8
       this.items.push(mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH)
     }
   }
@@ -712,12 +743,17 @@ function initBuriedItems() {
 }
 
 function initFlowerPots(player: Player) {
-  return [Pkm.HOPPIP, Pkm.BELLSPROUT, Pkm.CHIKORITA, Pkm.ODDISH, Pkm.BELLOSSOM]
-    .map((pkm) => {
-      const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
-      pokemon.action = PokemonActionState.SLEEP
-      return pokemon
-    })
+  return [
+    Pkm.HOPPIP,
+    Pkm.BELLSPROUT,
+    Pkm.CHIKORITA,
+    Pkm.ODDISH,
+    Pkm.BELLOSSOM
+  ].map((pkm) => {
+    const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+    pokemon.action = PokemonActionState.SLEEP
+    return pokemon
+  })
 }
 
 function spawnDIAYAvatar(player: Player): Pokemon {

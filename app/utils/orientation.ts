@@ -44,13 +44,13 @@ export function effectInLine(
   const orientation: Orientation =
     target instanceof PokemonEntity
       ? board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-      )
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY,
+          pokemon,
+          target
+        )
       : target
 
   const targetsHit = new Set()

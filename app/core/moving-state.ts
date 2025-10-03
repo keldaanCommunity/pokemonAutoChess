@@ -136,7 +136,14 @@ export default class MovingState extends PokemonState {
     }
   }
 
-  onMove(pokemon: PokemonEntity, board: Board, oldX: number, oldY: number, newX: number, newY: number) {
+  onMove(
+    pokemon: PokemonEntity,
+    board: Board,
+    oldX: number,
+    oldY: number,
+    newX: number,
+    newY: number
+  ) {
     // update orientation
     pokemon.orientation = board.orientation(
       oldX,

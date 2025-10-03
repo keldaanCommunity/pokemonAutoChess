@@ -64,7 +64,9 @@ export default function Jukebox(props: {
   }
 
   return (
-    <Modal show={props.show} onClose={props.handleClose}
+    <Modal
+      show={props.show}
+      onClose={props.handleClose}
       className="game-jukebox-modal"
       header={t("gadget.jukebox")}
     >

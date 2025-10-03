@@ -58,7 +58,9 @@ export default function RoomItem(props: {
     disabledReason = t("min_rank_not_reached")
   } else if (
     props.room.metadata?.maxRank != null &&
-    (user?.elo && EloRankThreshold[getRank(user.elo)] > EloRankThreshold[props.room.metadata?.maxRank])
+    user?.elo &&
+    EloRankThreshold[getRank(user.elo)] >
+      EloRankThreshold[props.room.metadata?.maxRank]
   ) {
     canJoin = false
     disabledReason = t("max_rank_not_reached")
@@ -73,7 +75,10 @@ export default function RoomItem(props: {
   return (
     <div className="room-item my-box">
       <span className="room-name" title={title}>
-        {formatMinMaxRanks(props.room.metadata?.minRank as EloRank | null, props.room.metadata?.maxRank as EloRank | null) + " "}
+        {formatMinMaxRanks(
+          props.room.metadata?.minRank as EloRank | null,
+          props.room.metadata?.maxRank as EloRank | null
+        ) + " "}
         {props.room.metadata?.name}
       </span>
       {props.room.metadata?.passwordProtected && (
@@ -124,7 +129,16 @@ export default function RoomItem(props: {
       <span>
         {props.room.clients}/{nbPlayersExpected}
       </span>
-      {isAdmin && <button title={t("delete_room")} onClick={() => { props.click("delete") }}>X</button>}
+      {isAdmin && (
+        <button
+          title={t("delete_room")}
+          onClick={() => {
+            props.click("delete")
+          }}
+        >
+          X
+        </button>
+      )}
       <button
         title={disabledReason ?? t("join")}
         disabled={!canJoin || joining}
@@ -143,6 +157,6 @@ export default function RoomItem(props: {
       >
         {t("join")}
       </button>
-    </div >
+    </div>
   )
 }

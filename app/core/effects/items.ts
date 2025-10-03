@@ -328,10 +328,14 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             const pokemon = candidates[i] ?? chef
             if (dish === Item.HERBA_MYSTICA) {
               const flavors: Dish[] = []
-              if (pokemon.types.has(Synergy.FAIRY)) flavors.push(Item.HERBA_MYSTICA_SWEET)
-              if (pokemon.types.has(Synergy.PSYCHIC)) flavors.push(Item.HERBA_MYSTICA_SPICY)
-              if (pokemon.types.has(Synergy.ELECTRIC)) flavors.push(Item.HERBA_MYSTICA_SOUR)
-              if (pokemon.types.has(Synergy.GRASS)) flavors.push(Item.HERBA_MYSTICA_BITTER)
+              if (pokemon.types.has(Synergy.FAIRY))
+                flavors.push(Item.HERBA_MYSTICA_SWEET)
+              if (pokemon.types.has(Synergy.PSYCHIC))
+                flavors.push(Item.HERBA_MYSTICA_SPICY)
+              if (pokemon.types.has(Synergy.ELECTRIC))
+                flavors.push(Item.HERBA_MYSTICA_SOUR)
+              if (pokemon.types.has(Synergy.GRASS))
+                flavors.push(Item.HERBA_MYSTICA_BITTER)
               if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
               meal = pickRandomIn(flavors)
             }
@@ -408,7 +412,10 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       const alliesSortByLowestAtk = (
         board.cells.filter(
           (p) =>
-            p && p.team === pokemon.team && p.id !== pokemon.id && p.items.size < 3
+            p &&
+            p.team === pokemon.team &&
+            p.id !== pokemon.id &&
+            p.items.size < 3
         ) as PokemonEntity[]
       ).sort((a, b) => a.atk - b.atk)
 
@@ -577,7 +584,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addShield(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-          2
+            2
         ) * 2,
         pokemon,
         0,
@@ -586,7 +593,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addSpeed(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-          2
+            2
         ),
         pokemon,
         0,
@@ -597,7 +604,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addAbilityPower(
         -Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-          2
+            2
         ),
         pokemon,
         0,
@@ -1008,7 +1015,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         pokemon.ap += 30
         removeInArray(player.items, item)
       }
-      return false // prevent item from being equipped      
+      return false // prevent item from being equipped
     })
   ]
 }

@@ -42,7 +42,9 @@ export default function TeamBuilder(props: {
   const inBotBuilder = useLocation().pathname.startsWith("/bot-builder")
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
-  const isAdmin = useAppSelector((state) => state.network.profile?.role === Role.ADMIN)
+  const isAdmin = useAppSelector(
+    (state) => state.network.profile?.role === Role.ADMIN
+  )
   const room: Room<GameState> | undefined = useAppSelector(
     (state) => state.network.game
   )
@@ -172,7 +174,7 @@ export default function TeamBuilder(props: {
   function getFirstEmptyCell(): { x: number; y: number } | null {
     for (let y = 1; y <= 3; y++) {
       for (let x = 0; x < 8; x++) {
-        if (board.find(p => p.x === x && p.y === y) === undefined) {
+        if (board.find((p) => p.x === x && p.y === y) === undefined) {
           return { x, y }
         }
       }
@@ -208,17 +210,21 @@ export default function TeamBuilder(props: {
 
   function snapshot() {
     try {
-      if (!currentPlayer) return;
-      updateBoard(values(currentPlayer.board).filter(pokemon => !isOnBench(pokemon)).map(p => {
-        return {
-          name: p.name,
-          emotion: p.emotion,
-          shiny: p.shiny,
-          items: values(p.items),
-          x: p.positionX,
-          y: p.positionY
-        }
-      }))
+      if (!currentPlayer) return
+      updateBoard(
+        values(currentPlayer.board)
+          .filter((pokemon) => !isOnBench(pokemon))
+          .map((p) => {
+            return {
+              name: p.name,
+              emotion: p.emotion,
+              shiny: p.shiny,
+              items: values(p.items),
+              x: p.positionX,
+              y: p.positionY
+            }
+          })
+      )
     } catch (e) {
       console.error("Failed to snapshot board:", e)
     }
@@ -229,7 +235,7 @@ export default function TeamBuilder(props: {
   }
 
   function saveFile() {
-    // save board to local JSON file    
+    // save board to local JSON file
     const blob = new Blob([JSON.stringify(board)], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
@@ -274,14 +280,34 @@ export default function TeamBuilder(props: {
     <div id="team-builder">
       <Synergies synergies={synergies} tooltipPortal={false} />
       <div className="actions">
-        {ingame && isAdmin && <details>
-          <summary>Admin</summary>
-          {room && <button className="bubbly blue" onClick={overwriteBoard}>Overwrite game board</button>}
-        </details>}
-        {ingame && <button className="bubbly blue" onClick={snapshot}><img src="assets/ui/photo.svg" /> {t("snapshot")}</button>}
-        {!inBotBuilder && <button className="bubbly dark" onClick={saveFile}><img src="assets/ui/save.svg" /> {t("save")}</button>}
-        {!inBotBuilder && <button className="bubbly dark" onClick={loadFile}><img src="assets/ui/load.svg" /> {t("load")}</button>}
-        <button className="bubbly red" onClick={reset}><img src="assets/ui/trash.svg" /> {t("reset")}</button>
+        {ingame && isAdmin && (
+          <details>
+            <summary>Admin</summary>
+            {room && (
+              <button className="bubbly blue" onClick={overwriteBoard}>
+                Overwrite game board
+              </button>
+            )}
+          </details>
+        )}
+        {ingame && (
+          <button className="bubbly blue" onClick={snapshot}>
+            <img src="assets/ui/photo.svg" /> {t("snapshot")}
+          </button>
+        )}
+        {!inBotBuilder && (
+          <button className="bubbly dark" onClick={saveFile}>
+            <img src="assets/ui/save.svg" /> {t("save")}
+          </button>
+        )}
+        {!inBotBuilder && (
+          <button className="bubbly dark" onClick={loadFile}>
+            <img src="assets/ui/load.svg" /> {t("load")}
+          </button>
+        )}
+        <button className="bubbly red" onClick={reset}>
+          <img src="assets/ui/trash.svg" /> {t("reset")}
+        </button>
       </div>
       <TeamEditor
         board={board}
@@ -290,7 +316,11 @@ export default function TeamBuilder(props: {
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
       <ItemPicker selectEntity={setSelection} selected={selection} />
-      <PokemonPicker selectEntity={e => setSelection(e as PkmWithCustom | Item)} addEntity={addPokemonOnFirstEmptyCell} selected={selection} />
+      <PokemonPicker
+        selectEntity={(e) => setSelection(e as PkmWithCustom | Item)}
+        addEntity={addPokemonOnFirstEmptyCell}
+        selected={selection}
+      />
       {props.bot && props.onChangeAvatar && (
         <BotAvatar
           bot={props.bot}

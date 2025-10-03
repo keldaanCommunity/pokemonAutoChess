@@ -62,27 +62,37 @@ export default function TeamEditor(props: {
                       onDragLeave={handleOnDragEnd}
                       onDrop={(e) => handleDrop(x, y, e)}
                     >
-                      {p && <div draggable onDragStart={(e) => handleOnDragStart(e, p)}>
-                        <PokemonPortrait
-                          portrait={{ index: PkmIndex[p.name], shiny: p.shiny, emotion: p.emotion }}
-
-                        />
-                        {p.items && <div className="pokemon-items">
-                          {p.items.map((it, j) => {
-                            return (
-                              <img
-                                key={j}
-                                src={"assets/item/" + it + ".png"}
-                                onContextMenu={(e) => {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  props.handleEditorClick(x, y, true, j)
-                                }}
-                              />
-                            )
-                          })}
-                        </div>}
-                      </div>}
+                      {p && (
+                        <div
+                          draggable
+                          onDragStart={(e) => handleOnDragStart(e, p)}
+                        >
+                          <PokemonPortrait
+                            portrait={{
+                              index: PkmIndex[p.name],
+                              shiny: p.shiny,
+                              emotion: p.emotion
+                            }}
+                          />
+                          {p.items && (
+                            <div className="pokemon-items">
+                              {p.items.map((it, j) => {
+                                return (
+                                  <img
+                                    key={j}
+                                    src={"assets/item/" + it + ".png"}
+                                    onContextMenu={(e) => {
+                                      e.preventDefault()
+                                      e.stopPropagation()
+                                      props.handleEditorClick(x, y, true, j)
+                                    }}
+                                  />
+                                )
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </td>
                   )
                 })}

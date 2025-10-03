@@ -2,7 +2,7 @@ import { ArraySchema } from "@colyseus/schema"
 
 // see https://stackoverflow.com/questions/56565528/typescript-const-assertions-how-to-use-array-prototype-includes
 export function isIn<T>(values: readonly T[], x: any): x is T {
-  return values.includes(x);
+  return values.includes(x)
 }
 
 export const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>

@@ -35,7 +35,8 @@ export default function PokemonStatistic(props: {
   const duos = Object.values(PkmDuos)
 
   const filteredPokemons = props.pokemons.filter(
-    (p) => hasType(p, props.synergy) &&
+    (p) =>
+      hasType(p, props.synergy) &&
       hasRarity(p, props.rarity) &&
       isInPool(p, props.pool) &&
       (props.tier === "all" || getPokemonData(p.name).stars === +props.tier) &&
@@ -102,18 +103,25 @@ export default function PokemonStatistic(props: {
           </ul>
 
           <span>
-            <label>{t("average_place")}:</label><br />
-            <span style={{ fontSize: "140%" }}>{family.averageRank ? family.averageRank.toFixed(1) : "???"}</span>
+            <label>{t("average_place")}:</label>
+            <br />
+            <span style={{ fontSize: "140%" }}>
+              {family.averageRank ? family.averageRank.toFixed(1) : "???"}
+            </span>
           </span>
 
           <span>
-            <label>{t("count")}:</label><br />
+            <label>{t("count")}:</label>
+            <br />
             <span style={{ fontSize: "140%" }}>{family.totalCount}</span>
           </span>
 
           <span>
-            <label>{t("held_items")}:</label><br />
-            <span style={{ fontSize: "140%" }}>{family.averageItemHeld?.toFixed(2)}</span>
+            <label>{t("held_items")}:</label>
+            <br />
+            <span style={{ fontSize: "140%" }}>
+              {family.averageItemHeld?.toFixed(2)}
+            </span>
           </span>
 
           <ul
@@ -186,16 +194,14 @@ function computeAverageItemHeld(pokemons: IPokemonsStatistic[]): number | null {
   )
 }
 
-function isInPool(
-  pokemon: IPokemonsStatistic,
-  pool: string
-): boolean {
+function isInPool(pokemon: IPokemonsStatistic, pool: string): boolean {
   if (pool === "all") return true
   const data = getPokemonData(pokemon.name)
   if (pool === "special") return data.rarity === Rarity.SPECIAL
   if (pool === "additional") return data.additional
   if (pool === "regional") return data.regional
-  if (pool === "regular") return !data.additional && !data.regional && data.rarity !== Rarity.SPECIAL
+  if (pool === "regular")
+    return !data.additional && !data.regional && data.rarity !== Rarity.SPECIAL
   return false
 }
 

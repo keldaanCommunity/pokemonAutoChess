@@ -36,8 +36,9 @@ export function getAvatarString(
       ? "/0000/0001"
       : "/0001"
     : ""
-  return `${defaultIndex.replace("-", "/")}${shinyPad}/${emotion || Emotion.NORMAL
-    }`
+  return `${defaultIndex.replace("-", "/")}${shinyPad}/${
+    emotion || Emotion.NORMAL
+  }`
 }
 
 export function getPokemonCustomFromAvatar(avatar: string): PkmWithCustom {

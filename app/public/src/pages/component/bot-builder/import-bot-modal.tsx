@@ -13,11 +13,12 @@ export default function ImportBotModal(props: {
 
   const [botList, setBotList] = useState<IBot[]>([])
   useEffect(() => {
-    fetch("/bots").then((res) => res.json()).then((data) => {
-      setBotList(data.sort((a, b) => a.name.localeCompare(b.name)))
-    })
+    fetch("/bots")
+      .then((res) => res.json())
+      .then((data) => {
+        setBotList(data.sort((a, b) => a.name.localeCompare(b.name)))
+      })
   }, [])
-
 
   const [textArea, setTextArea] = useState<string>("")
   const [jsonError, setJsonError] = useState<string>("")
@@ -41,52 +42,65 @@ export default function ImportBotModal(props: {
       onClose={props.hideModal}
       className="bot-import-modal"
       header={t("import")}
-      body={<>
-        <p>{t("import_bot")}</p>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5em", marginBottom: "0.5em" }}>
-          <label htmlFor="bot_select">{t("existing_bot")}</label>
-          <select
-            id="bot_select"
-            defaultValue=""
-            onChange={(e) => {
-              if (e.target.value.length != 0) {
-                fetch(`/bots/${e.target.value}`).then(r => r.json()).then(bot => {
-                  setTextArea(JSON.stringify(bot, null, 2))
-                })
-              }
+      body={
+        <>
+          <p>{t("import_bot")}</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5em",
+              marginBottom: "0.5em"
             }}
           >
-            <option value="" hidden>
-              {t("select")}
-            </option>
-            {botList.map((bot) => (
-              <option key={bot.id} value={bot.id}>
-                {bot.name} {t("by")} {bot.author}
+            <label htmlFor="bot_select">{t("existing_bot")}</label>
+            <select
+              id="bot_select"
+              defaultValue=""
+              onChange={(e) => {
+                if (e.target.value.length != 0) {
+                  fetch(`/bots/${e.target.value}`)
+                    .then((r) => r.json())
+                    .then((bot) => {
+                      setTextArea(JSON.stringify(bot, null, 2))
+                    })
+                }
+              }}
+            >
+              <option value="" hidden>
+                {t("select")}
               </option>
-            ))}
-          </select>
-        </div>
-        <details>
-          <summary>Bot code</summary>
-          <textarea
-            readOnly={true}
-            rows={10}
-            value={textArea}
-            onChange={(e) => handleTextAreaChange(e.target.value)}
-          ></textarea>
-          {jsonError && <p className="error">{jsonError}</p>}
-        </details>
-      </>}
-      footer={<>
-        <button
-          className="bubbly green"
-          onClick={() => {
-            props.importBot(textArea)
-          }}
-        >
-          {t("import")}
-        </button>
-      </>}
+              {botList.map((bot) => (
+                <option key={bot.id} value={bot.id}>
+                  {bot.name} {t("by")} {bot.author}
+                </option>
+              ))}
+            </select>
+          </div>
+          <details>
+            <summary>Bot code</summary>
+            <textarea
+              readOnly={true}
+              rows={10}
+              value={textArea}
+              onChange={(e) => handleTextAreaChange(e.target.value)}
+            ></textarea>
+            {jsonError && <p className="error">{jsonError}</p>}
+          </details>
+        </>
+      }
+      footer={
+        <>
+          <button
+            className="bubbly green"
+            onClick={() => {
+              props.importBot(textArea)
+            }}
+          >
+            {t("import")}
+          </button>
+        </>
+      }
     />
   )
 }

@@ -65,7 +65,8 @@ export function WikiType(props: { type: Synergy }) {
       if (showEvolutions) return true
       // remove if already one member of family in the list
       return (
-        list.findIndex((p2) => PkmFamily[p.name] === PkmFamily[p2.name]) === index
+        list.findIndex((p2) => PkmFamily[p.name] === PkmFamily[p2.name]) ===
+        index
       )
     })
 

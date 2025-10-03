@@ -37,7 +37,7 @@ export default function GamePokemonsPropositions() {
   const isBenchFull =
     board &&
     board.getBenchSize() >=
-    (pokemonsProposition.some((p) => p in PkmDuo) ? 7 : 8)
+      (pokemonsProposition.some((p) => p in PkmDuo) ? 7 : 8)
   const life = useAppSelector(
     (state) =>
       state.game.players.find((p) => p.id === state.network.uid)?.life ?? 0

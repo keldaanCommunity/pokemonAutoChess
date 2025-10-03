@@ -19,36 +19,63 @@ export default function WikiAbility() {
   const [itemHovered, setItemHovered] = useState<Item>()
 
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const pokemonsPerAbility = useMemo(() => Object.keys(Ability).reduce((o, ability) => {
-    o[ability] = PRECOMPUTED_POKEMONS_PER_ABILITY[ability].map((p) => getPokemonData(p)).sort((a, b) => {
-      if (a.additional !== b.additional) return +a.additional - +b.additional
-      // sort by PkmFamily
-      const familyA = PkmFamily[a.name], familyB = PkmFamily[b.name]
-      if (familyA !== familyB) return PkmIndex[familyA].localeCompare(PkmIndex[familyB])
-      return 0
-    }).sort((a, b) => {
-      // then by stars
-      const familyA = PkmFamily[a.name], familyB = PkmFamily[b.name]
-      if (familyA === familyB && a.stars !== b.stars) return a.stars - b.stars
-      return 0
-    })
-    return o
-  }, {}), [])
+  const pokemonsPerAbility = useMemo(
+    () =>
+      Object.keys(Ability).reduce((o, ability) => {
+        o[ability] = PRECOMPUTED_POKEMONS_PER_ABILITY[ability]
+          .map((p) => getPokemonData(p))
+          .sort((a, b) => {
+            if (a.additional !== b.additional)
+              return +a.additional - +b.additional
+            // sort by PkmFamily
+            const familyA = PkmFamily[a.name],
+              familyB = PkmFamily[b.name]
+            if (familyA !== familyB)
+              return PkmIndex[familyA].localeCompare(PkmIndex[familyB])
+            return 0
+          })
+          .sort((a, b) => {
+            // then by stars
+            const familyA = PkmFamily[a.name],
+              familyB = PkmFamily[b.name]
+            if (familyA === familyB && a.stars !== b.stars)
+              return a.stars - b.stars
+            return 0
+          })
+        return o
+      }, {}),
+    []
+  )
 
-
-  const tmPerAbility = useMemo<Partial<Record<Ability, Item>>>(() => Object.fromEntries(Object.entries(AbilityPerTM).map(([tm, ability]) => [ability, tm])), [])
+  const tmPerAbility = useMemo<Partial<Record<Ability, Item>>>(
+    () =>
+      Object.fromEntries(
+        Object.entries(AbilityPerTM).map(([tm, ability]) => [ability, tm])
+      ),
+    []
+  )
 
   const filteredAbilities = (Object.keys(Ability) as Ability[])
-    .filter((a) => a !== Ability.DEFAULT && (
-      !searchQuery.trim() ||
-      `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`.toLowerCase().includes(searchQuery.trim().toLowerCase())
-    ))
+    .filter(
+      (a) =>
+        a !== Ability.DEFAULT &&
+        (!searchQuery.trim() ||
+          `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+            .toLowerCase()
+            .includes(searchQuery.trim().toLowerCase()))
+    )
     .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
 
   return (
     <div id="wiki-ability">
       <div className="actions">
-        <input type="search" placeholder={t("search")} onInput={event => setSearchQuery((event.target as HTMLInputElement).value)} />
+        <input
+          type="search"
+          placeholder={t("search")}
+          onInput={(event) =>
+            setSearchQuery((event.target as HTMLInputElement).value)
+          }
+        />
       </div>
       <ul>
         {filteredAbilities.map((ability) => {
@@ -79,8 +106,14 @@ export default function WikiAbility() {
                     </li>
                   ))}
                   {tmPerAbility[ability] && (
-                    <li data-tooltip-id="item-detail" onMouseOver={() => setItemHovered(tmPerAbility[ability])} >
-                      <img src={`assets/item/${TMs.includes(tmPerAbility[ability]) ? "TM" : "HM"}.png`} className="item" />
+                    <li
+                      data-tooltip-id="item-detail"
+                      onMouseOver={() => setItemHovered(tmPerAbility[ability])}
+                    >
+                      <img
+                        src={`assets/item/${TMs.includes(tmPerAbility[ability]) ? "TM" : "HM"}.png`}
+                        className="item"
+                      />
                     </li>
                   )}
                 </ul>
@@ -89,19 +122,23 @@ export default function WikiAbility() {
           )
         })}
       </ul>
-      {hoveredPokemon && <Tooltip
-        id="pokemon-detail"
-        className="custom-theme-tooltip game-pokemon-detail-tooltip"
-        float
-      >
-        <GamePokemonDetail pokemon={hoveredPokemon} />
-      </Tooltip>}
-      {itemHovered && <Tooltip
-        id="item-detail"
-        className="custom-theme-tooltip item-detail-tooltip"
-      >
-        <ItemDetailTooltip item={itemHovered} />
-      </Tooltip>}
+      {hoveredPokemon && (
+        <Tooltip
+          id="pokemon-detail"
+          className="custom-theme-tooltip game-pokemon-detail-tooltip"
+          float
+        >
+          <GamePokemonDetail pokemon={hoveredPokemon} />
+        </Tooltip>
+      )}
+      {itemHovered && (
+        <Tooltip
+          id="item-detail"
+          className="custom-theme-tooltip item-detail-tooltip"
+        >
+          <ItemDetailTooltip item={itemHovered} />
+        </Tooltip>
+      )}
     </div>
   )
 }
