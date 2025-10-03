@@ -16,11 +16,14 @@ import { EloBadge } from "./elo-badge"
 import { GameMode } from "../../../../../types/enum/Game"
 import "./game-history.css"
 
-export default function GameHistory(props: { uid: string, onUpdate?: (history: IGameRecord[]) => void }) {
-  const { t } = useTranslation();
-  const [gameHistory, setGameHistory] = useState<IGameRecord[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+export default function GameHistory(props: {
+  uid: string
+  onUpdate?: (history: IGameRecord[]) => void
+}) {
+  const { t } = useTranslation()
+  const [gameHistory, setGameHistory] = useState<IGameRecord[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [hasMore, setHasMore] = useState<boolean>(true)
 
   useEffect(() => {
     if (props.onUpdate) {
@@ -33,15 +36,22 @@ export default function GameHistory(props: { uid: string, onUpdate?: (history: I
     try {
       setLoading(true)
 
-      const response = await fetch(`/game-history/${uid}?page=${page}&t=${Date.now()}`)
+      const response = await fetch(
+        `/game-history/${uid}?page=${page}&t=${Date.now()}`
+      )
       const data: IGameRecord[] = await response.json()
       if (props.uid !== uid) return // ignore response if uid changed in the meantime
 
       if (data.length < pageSize) {
-        setHasMore(false); // No more data to load
+        setHasMore(false) // No more data to load
       }
 
-      setGameHistory((prevHistory) => [...prevHistory, ...data.filter(h => prevHistory.some(p => p.time == h.time) == false)])
+      setGameHistory((prevHistory) => [
+        ...prevHistory,
+        ...data.filter(
+          (h) => prevHistory.some((p) => p.time == h.time) == false
+        )
+      ])
     } catch (error) {
       console.error("Failed to load history:", error)
     } finally {
@@ -54,7 +64,7 @@ export default function GameHistory(props: { uid: string, onUpdate?: (history: I
     const skip = gameHistory.length
     const page = Math.floor(skip / pageSize + 1)
     loadHistory(props.uid, page)
-  };
+  }
 
   useEffect(() => {
     // reset history on uid change
@@ -114,16 +124,22 @@ export default function GameHistory(props: { uid: string, onUpdate?: (history: I
             </div>
           ))}
         {hasMore && (
-          <button onClick={loadMore} className="bubbly green" disabled={loading}>
+          <button
+            onClick={loadMore}
+            className="bubbly green"
+            disabled={loading}
+          >
             {loading ? t("loading") : t("load_more")}
           </button>
         )}
       </div>
     </article>
-  );
+  )
 }
 
-function getTopSynergies(team: IPokemonRecord[] | ArraySchema<IPokemonRecord>): [Synergy, number][] {
+function getTopSynergies(
+  team: IPokemonRecord[] | ArraySchema<IPokemonRecord>
+): [Synergy, number][] {
   const synergies = computeSynergies(
     team.map((pkmRecord) => {
       const pkm = PokemonFactory.createPokemonFromName(pkmRecord.name)

@@ -46,10 +46,13 @@ export default function Profile() {
     }
   }
 
-  const resetSearch = useCallback((user = searchedUser) => {
-    dispatch(setSearchedUser(user))
-    dispatch(setSuggestions([]))
-  }, [dispatch])
+  const resetSearch = useCallback(
+    (user = searchedUser) => {
+      dispatch(setSearchedUser(user))
+      dispatch(setSuggestions([]))
+    },
+    [dispatch]
+  )
 
   return (
     <div className="profile-modal">
@@ -66,14 +69,21 @@ export default function Profile() {
         {suggestions.length > 0 ? (
           <SearchResults />
         ) : searchedUser ? (
-          <OtherProfileActions rightPanel={rightPanel} setRightPanel={setRightPanel} />
+          <OtherProfileActions
+            rightPanel={rightPanel}
+            setRightPanel={setRightPanel}
+          />
         ) : (
           <MyProfileMenu />
         )}
       </div>
 
-      {rightPanel === "game" && profile && <GameHistory uid={profile.uid} onUpdate={setGameHistory} />}
-      {rightPanel === "chat" && profile && <ProfileChatHistory uid={profile.uid} />}
+      {rightPanel === "game" && profile && (
+        <GameHistory uid={profile.uid} onUpdate={setGameHistory} />
+      )}
+      {rightPanel === "chat" && profile && (
+        <ProfileChatHistory uid={profile.uid} />
+      )}
     </div>
   )
 }
@@ -110,7 +120,7 @@ function MyProfileMenu() {
 }
 
 function OtherProfileActions(props: {
-  rightPanel: "game" | "chat",
+  rightPanel: "game" | "chat"
   setRightPanel: React.Dispatch<React.SetStateAction<"game" | "chat">>
 }) {
   const { t } = useTranslation()
@@ -133,7 +143,8 @@ function OtherProfileActions(props: {
             })
           )
         }}
-      >{t("give_boosters")}
+      >
+        {t("give_boosters")}
       </button>
     ) : null
 
@@ -260,9 +271,14 @@ function OtherProfileActions(props: {
       {titleButton}
       {user?.banned ? unbanButton : banButton}
       {props.rightPanel === "game" ? chatHistoryButton : gameHistoryButton}
-      {currentUid && user && user.uid !== currentUid && <button className="bubbly blue" onClick={() => dispatch(searchById(currentUid))}>
-        {t("back_to_my_profile")}
-      </button>}
+      {currentUid && user && user.uid !== currentUid && (
+        <button
+          className="bubbly blue"
+          onClick={() => dispatch(searchById(currentUid))}
+        >
+          {t("back_to_my_profile")}
+        </button>
+      )}
     </>
   ) : null
 }

@@ -44,11 +44,7 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
       [board.columns - 1, board.rows - 1]
     ]
     corners.forEach(([x, y]) => {
-      const coord = unown.simulation.getClosestFreeCellTo(
-        x,
-        y,
-        unown.team
-      )
+      const coord = unown.simulation.getClosestFreeCellTo(x, y, unown.team)
       if (!coord) return
       const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, unown.player)
       unown.simulation.addPokemon(abra, coord.x, coord.y, unown.team, true)

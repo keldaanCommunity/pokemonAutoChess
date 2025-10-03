@@ -20,7 +20,11 @@ if (process.env.DISCORD_BAN_WEBHOOK_URL) {
 }
 
 export const discordService = {
-  announceBan(user: IUserMetadataMongo, bannedUser: IUserMetadataMongo, reason: string) {
+  announceBan(
+    user: IUserMetadataMongo,
+    bannedUser: IUserMetadataMongo,
+    reason: string
+  ) {
     const dsEmbed = new EmbedBuilder()
       .setTitle(`${user.displayName} banned the user ${bannedUser.displayName}`)
       .setAuthor({

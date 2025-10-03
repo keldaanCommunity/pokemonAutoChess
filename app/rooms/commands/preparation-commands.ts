@@ -98,7 +98,7 @@ export class OnJoinCommand extends Command<
           this.state.maxRank != null &&
           u.elo &&
           EloRankThreshold[getRank(u.elo)] >
-          EloRankThreshold[this.state.maxRank] &&
+            EloRankThreshold[this.state.maxRank] &&
           !isAdmin
         ) {
           client.leave(CloseCodes.USER_RANK_TOO_HIGH)
@@ -443,8 +443,9 @@ export class OnRoomChangeSpecialRule extends Command<
         this.room.state.addMessage({
           author: "Server",
           authorId: "server",
-          payload: `Smeargle's Scribble mode has been ${specialRule ? "enabled" : "disabled"
-            } for this game. Players need to ready again.`,
+          payload: `Smeargle's Scribble mode has been ${
+            specialRule ? "enabled" : "disabled"
+          } for this game. Players need to ready again.`,
           avatar: leader?.avatar
         })
 
@@ -480,8 +481,9 @@ export class OnChangeNoEloCommand extends Command<
         this.room.state.addMessage({
           author: "Server",
           authorId: "server",
-          payload: `Elo gain has been ${noElo ? "disabled" : "enabled"
-            } for this game. Players need to ready again.`,
+          payload: `Elo gain has been ${
+            noElo ? "disabled" : "enabled"
+          } for this game. Players need to ready again.`,
           avatar: leader?.avatar
         })
 
@@ -569,7 +571,8 @@ export class OnLeaveCommand extends Command<
               this.state.ownerName = newOwner.name
               this.room.setMetadata({ ownerName: this.state.ownerName })
               this.room.setName(
-                `${newOwner.name}'${newOwner.name.endsWith("s") ? "" : "s"
+                `${newOwner.name}'${
+                  newOwner.name.endsWith("s") ? "" : "s"
                 } room`
               )
               this.room.state.addMessage({
@@ -608,7 +611,7 @@ export class OnToggleReadyCommand extends Command<
 
       const nbExpectedPlayers =
         this.room.metadata?.whitelist &&
-          this.room.metadata?.whitelist.length > 0
+        this.room.metadata?.whitelist.length > 0
           ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
           : MAX_PLAYERS_PER_GAME
 

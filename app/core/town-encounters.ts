@@ -20,13 +20,13 @@ export const TownEncounters = {
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
-{
-  [Pkm.KECLEON]: 10,
-  [Pkm.KANGASKHAN]: 10,
-  [Pkm.CHANSEY]: 10,
-  [Pkm.ELECTIVIRE]: 10,
-  [Pkm.XATU]: 10
-}
+  {
+    [Pkm.KECLEON]: 10,
+    [Pkm.KANGASKHAN]: 10,
+    [Pkm.CHANSEY]: 10,
+    [Pkm.ELECTIVIRE]: 10,
+    [Pkm.XATU]: 10
+  }
 
 export const TownEncountersByStage: {
   [stageLevel: number]: { [encounter in TownEncounter]?: number }
@@ -39,9 +39,9 @@ export const TownEncountersByStage: {
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
-    [Pkm.CELEBI]: 1 / 40,
+    [Pkm.CELEBI]: 1 / 40
   },
-  12: {    
+  12: {
     [Pkm.KANGASKHAN]: 1 / 20,
     [Pkm.WOBBUFFET]: 1 / 20,
     [Pkm.KECLEON]: 1 / 20,

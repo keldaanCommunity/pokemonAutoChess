@@ -46,7 +46,7 @@
   grid-area: top;
   display: flex;
   align-items: center;
-  gap: .25em;
+  gap: 0.25em;
 }
 .game-history .elo {
   grid-area: elo;

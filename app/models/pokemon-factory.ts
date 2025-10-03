@@ -62,47 +62,48 @@ export default class PokemonFactory {
   }
 }
 
-export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } = {
-  [Pkm.FLABEBE]: (player) => {
-    switch (player.flowerPotsSpawnOrder[0]) {
-      case FlowerPot.YELLOW:
-        return Pkm.FLABEBE_YELLOW
-      case FlowerPot.ORANGE:
-        return Pkm.FLABEBE_ORANGE
-      case FlowerPot.BLUE:
-        return Pkm.FLABEBE_BLUE
-      case FlowerPot.WHITE:
-        return Pkm.FLABEBE_WHITE
+export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } =
+  {
+    [Pkm.FLABEBE]: (player) => {
+      switch (player.flowerPotsSpawnOrder[0]) {
+        case FlowerPot.YELLOW:
+          return Pkm.FLABEBE_YELLOW
+        case FlowerPot.ORANGE:
+          return Pkm.FLABEBE_ORANGE
+        case FlowerPot.BLUE:
+          return Pkm.FLABEBE_BLUE
+        case FlowerPot.WHITE:
+          return Pkm.FLABEBE_WHITE
+      }
+      return Pkm.FLABEBE
+    },
+    [Pkm.FLOETTE]: (player) => {
+      switch (player.flowerPotsSpawnOrder[0]) {
+        case FlowerPot.YELLOW:
+          return Pkm.FLOETTE_YELLOW
+        case FlowerPot.ORANGE:
+          return Pkm.FLOETTE_ORANGE
+        case FlowerPot.BLUE:
+          return Pkm.FLOETTE_BLUE
+        case FlowerPot.WHITE:
+          return Pkm.FLOETTE_WHITE
+      }
+      return Pkm.FLOETTE
+    },
+    [Pkm.FLORGES]: (player) => {
+      switch (player.flowerPotsSpawnOrder[0]) {
+        case FlowerPot.YELLOW:
+          return Pkm.FLORGES_YELLOW
+        case FlowerPot.ORANGE:
+          return Pkm.FLORGES_ORANGE
+        case FlowerPot.BLUE:
+          return Pkm.FLORGES_BLUE
+        case FlowerPot.WHITE:
+          return Pkm.FLORGES_WHITE
+      }
+      return Pkm.FLORGES
     }
-    return Pkm.FLABEBE
-  },
-  [Pkm.FLOETTE]: (player) => {
-    switch (player.flowerPotsSpawnOrder[0]) {
-      case FlowerPot.YELLOW:
-        return Pkm.FLOETTE_YELLOW
-      case FlowerPot.ORANGE:
-        return Pkm.FLOETTE_ORANGE
-      case FlowerPot.BLUE:
-        return Pkm.FLOETTE_BLUE
-      case FlowerPot.WHITE:
-        return Pkm.FLOETTE_WHITE
-    }
-    return Pkm.FLOETTE
-  },
-  [Pkm.FLORGES]: (player) => {
-    switch (player.flowerPotsSpawnOrder[0]) {
-      case FlowerPot.YELLOW:
-        return Pkm.FLORGES_YELLOW
-      case FlowerPot.ORANGE:
-        return Pkm.FLORGES_ORANGE
-      case FlowerPot.BLUE:
-        return Pkm.FLORGES_BLUE
-      case FlowerPot.WHITE:
-        return Pkm.FLORGES_WHITE
-    }
-    return Pkm.FLORGES
   }
-}
 
 export const PkmColorVariants: readonly Pkm[] = [
   Pkm.FLABEBE_YELLOW,

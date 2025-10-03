@@ -56,66 +56,67 @@ export default function GameDpsMeter() {
       >
         <img src="/assets/ui/dpsmeter.svg" />
       </div>
-      {isOpen && <div
-        className="my-container hidden-scrollable game-dps-meter"
-        style={{ zIndex: DEPTH.DPS_METER }}
-      >
-        <header>
-          <div>
-            <PokemonPortrait avatar={avatar} />
-            <p>{name}</p>
-          </div>
-          <h2>vs</h2>
-          <div>
-            <PokemonPortrait avatar={opponentAvatar} />
-            <p>{isPVE ? t(opponentName) : opponentName}</p>
-          </div>
-        </header>
-        <Tabs>
-          <TabList>
-            <Tab key="damage_dealt">
-              <img
-                src="assets/icons/ATK.png"
-                title={t("damage_dealt")}
-                alt={t("damage_dealt")}
-              ></img>
-            </Tab>
-            <Tab key="damage_blocked">
-              <img
-                src="assets/icons/SHIELD.png"
-                title={t("damage_blocked")}
-                alt={t("damage_blocked")}
-              ></img>
-            </Tab>
-            <Tab key="heal">
-              <img
-                src="assets/icons/HP.png"
-                title={t("heal_shield")}
-                alt={t("heal_shield")}
-              ></img>
-            </Tab>
-          </TabList>
+      {isOpen && (
+        <div
+          className="my-container hidden-scrollable game-dps-meter"
+          style={{ zIndex: DEPTH.DPS_METER }}
+        >
+          <header>
+            <div>
+              <PokemonPortrait avatar={avatar} />
+              <p>{name}</p>
+            </div>
+            <h2>vs</h2>
+            <div>
+              <PokemonPortrait avatar={opponentAvatar} />
+              <p>{isPVE ? t(opponentName) : opponentName}</p>
+            </div>
+          </header>
+          <Tabs>
+            <TabList>
+              <Tab key="damage_dealt">
+                <img
+                  src="assets/icons/ATK.png"
+                  title={t("damage_dealt")}
+                  alt={t("damage_dealt")}
+                ></img>
+              </Tab>
+              <Tab key="damage_blocked">
+                <img
+                  src="assets/icons/SHIELD.png"
+                  title={t("damage_blocked")}
+                  alt={t("damage_blocked")}
+                ></img>
+              </Tab>
+              <Tab key="heal">
+                <img
+                  src="assets/icons/HP.png"
+                  title={t("heal_shield")}
+                  alt={t("heal_shield")}
+                ></img>
+              </Tab>
+            </TabList>
 
-          <TabPanel>
-            <p>{t("damage_dealt")}</p>
-            <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
-            <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
-          </TabPanel>
+            <TabPanel>
+              <p>{t("damage_dealt")}</p>
+              <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
+              <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
+            </TabPanel>
 
-          <TabPanel>
-            <p>{t("damage_blocked")}</p>
-            <GamePlayerDpsTakenMeter dpsMeter={myDpsMeter} />
-            <GamePlayerDpsTakenMeter dpsMeter={opponentDpsMeter} />
-          </TabPanel>
+            <TabPanel>
+              <p>{t("damage_blocked")}</p>
+              <GamePlayerDpsTakenMeter dpsMeter={myDpsMeter} />
+              <GamePlayerDpsTakenMeter dpsMeter={opponentDpsMeter} />
+            </TabPanel>
 
-          <TabPanel>
-            <p>{t("heal_shield")}</p>
-            <GamePlayerHpsMeter dpsMeter={myDpsMeter} />
-            <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
-          </TabPanel>
-        </Tabs>
-      </div>
-      }
+            <TabPanel>
+              <p>{t("heal_shield")}</p>
+              <GamePlayerHpsMeter dpsMeter={myDpsMeter} />
+              <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
+            </TabPanel>
+          </Tabs>
+        </div>
+      )}
     </>
   )
 }

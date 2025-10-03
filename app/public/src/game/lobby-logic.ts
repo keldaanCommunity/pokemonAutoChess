@@ -13,7 +13,10 @@ import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
-import { IUserMetadataClient, IUserMetadataJSON } from "../../../types/interfaces/UserMetadata"
+import {
+  IUserMetadataClient,
+  IUserMetadataJSON
+} from "../../../types/interfaces/UserMetadata"
 import { logger } from "../../../utils/logger"
 import { authenticateUser } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"

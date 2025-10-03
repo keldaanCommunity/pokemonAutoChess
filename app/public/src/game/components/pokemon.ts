@@ -15,7 +15,11 @@ import {
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
-import { AbilityAnimationArgs, AttackSprite, AttackSpriteScale } from "../../../../types/Animation"
+import {
+  AbilityAnimationArgs,
+  AttackSprite,
+  AttackSpriteScale
+} from "../../../../types/Animation"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
@@ -670,7 +674,10 @@ export default class PokemonSprite extends DraggableObject {
       scene.board?.flowerPokemonsInPots
         .find((p) => p.index === this.index)
         ?.destroy()
-      const positions = this.team === Team.RED_TEAM ? FLOWER_POTS_POSITIONS_RED : FLOWER_POTS_POSITIONS_BLUE
+      const positions =
+        this.team === Team.RED_TEAM
+          ? FLOWER_POTS_POSITIONS_RED
+          : FLOWER_POTS_POSITIONS_BLUE
       const [startX, startY] = positions[FlowerPots.indexOf(flowerPot)]
       addAbilitySprite(scene, Ability.PETAL_BLIZZARD, 0, [startX, startY - 24])
       this.moveManager.setEnable(false)

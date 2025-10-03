@@ -1,11 +1,6 @@
 import { monitor } from "@colyseus/monitor"
 import config from "@colyseus/tools"
-import {
-  matchMaker,
-  RedisDriver,
-  RedisPresence,
-  ServerOptions
-} from "colyseus"
+import { matchMaker, RedisDriver, RedisPresence, ServerOptions } from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -21,7 +16,9 @@ import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
 import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
-import UserMetadata, { toUserMetadataJSON } from "./models/mongo-models/user-metadata"
+import UserMetadata, {
+  toUserMetadataJSON
+} from "./models/mongo-models/user-metadata"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed/precomputed-types"
 import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
@@ -279,14 +276,17 @@ export default config({
 
     app.get("/tilemap/:map", async (req, res) => {
       try {
-        if (!req.params.map || !Object.values(DungeonPMDO).includes(req.params.map as DungeonPMDO)) {
-          return res.status(400).send({ error: "Invalid map parameter" });
+        if (
+          !req.params.map ||
+          !Object.values(DungeonPMDO).includes(req.params.map as DungeonPMDO)
+        ) {
+          return res.status(400).send({ error: "Invalid map parameter" })
         }
-        const tilemap = initTilemap(req.params.map as DungeonPMDO);
-        res.send(tilemap);
+        const tilemap = initTilemap(req.params.map as DungeonPMDO)
+        res.send(tilemap)
       } catch (error) {
-        logger.error("Error generating tilemap", { error, map: req.params.map });
-        res.status(500).send({ error: "Error generating tilemap" });
+        logger.error("Error generating tilemap", { error, map: req.params.map })
+        res.status(500).send({ error: "Error generating tilemap" })
       }
     })
 

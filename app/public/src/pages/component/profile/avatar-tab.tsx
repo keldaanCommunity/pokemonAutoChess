@@ -15,10 +15,10 @@ export function AvatarTab() {
     (state) => state.network.profile?.pokemonCollection
   )
 
-  const pokemonCollection = useMemo(() => pokemonCollectionMap
-    ? [...pokemonCollectionMap.values()]
-    : []
-    , [pokemonCollectionMap])
+  const pokemonCollection = useMemo(
+    () => (pokemonCollectionMap ? [...pokemonCollectionMap.values()] : []),
+    [pokemonCollectionMap]
+  )
 
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
 

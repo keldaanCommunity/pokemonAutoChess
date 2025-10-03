@@ -15,10 +15,7 @@ export default function Team(props: {
             <PokemonPortrait avatar={p.avatar} />
             <div className="pokemon-items">
               {p.items.map((item, i) => (
-                <img
-                  key={i}
-                  src={"/assets/item/" + item + ".png"}
-                />
+                <img key={i} src={"/assets/item/" + item + ".png"} />
               ))}
             </div>
           </li>

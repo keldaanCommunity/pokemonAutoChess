@@ -57,8 +57,8 @@ export function ItemDetailTooltip({
     : UnholdableItems.includes(item)
       ? t("unholdable_item")
       : RemovableItems.includes(item)
-      ? t("removable_item")
-      : null
+        ? t("removable_item")
+        : null
 
   return (
     <div className="game-item-detail">

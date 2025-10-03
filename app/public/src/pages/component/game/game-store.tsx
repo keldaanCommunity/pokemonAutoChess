@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
-import PokemonFactory, { isSameFamily } from "../../../../../models/pokemon-factory"
+import PokemonFactory, {
+  isSameFamily
+} from "../../../../../models/pokemon-factory"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { shopClick } from "../../../stores/NetworkStore"
@@ -42,7 +44,9 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={pokemon}
-              inPlanner={teamPlanner?.some((p) => isSameFamily(p.name, pokemon))}
+              inPlanner={teamPlanner?.some((p) =>
+                isSameFamily(p.name, pokemon)
+              )}
               onMouseEnter={() => {
                 if (scene) {
                   if (scene.pokemonHovered)

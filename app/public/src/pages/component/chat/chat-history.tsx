@@ -17,7 +17,7 @@ export default function ChatHistory(props: { messages: IChatV2[] }) {
       domRef.current &&
       (domRef.current.scrollTop === 0 ||
         domRef.current.scrollTop + domRef.current.clientHeight >=
-        domRef.current.scrollHeight - 200) // autoscroll only if not already scrolled up by a 200px margin
+          domRef.current.scrollHeight - 200) // autoscroll only if not already scrolled up by a 200px margin
     ) {
       domRef.current.scrollTop = domRef.current.scrollHeight
     }

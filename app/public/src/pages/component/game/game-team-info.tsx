@@ -11,7 +11,10 @@ export function GameTeamInfo() {
 
   if (!currentPlayer) return null
 
-  const maxTeamSize = getMaxTeamSize(currentPlayer.experienceManager.level, specialGameRule)
+  const maxTeamSize = getMaxTeamSize(
+    currentPlayer.experienceManager.level,
+    specialGameRule
+  )
 
   return (
     <div id="game-team-info" className="my-container team-size information">

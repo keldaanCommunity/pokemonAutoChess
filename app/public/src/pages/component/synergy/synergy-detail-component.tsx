@@ -129,7 +129,9 @@ export default function SynergyDetailComponent(props: {
           : 0),
       0
     )
-    additionalInfo = t('synergy_description.DRAGON_STARS', { totalStars: dragonLevel })
+    additionalInfo = t("synergy_description.DRAGON_STARS", {
+      totalStars: dragonLevel
+    })
   }
 
   return (

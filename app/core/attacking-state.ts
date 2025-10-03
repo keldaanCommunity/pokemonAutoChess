@@ -136,6 +136,7 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
     pokemon.positionX,
     pokemon.positionY
   )
-  const travelTime = (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
+  const travelTime =
+    (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
   return { delayBeforeShoot, travelTime, attackDuration }
 }

@@ -1,4 +1,4 @@
- #modal-root {
+#modal-root {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,15 +8,15 @@
   place-content: center center;
   z-index: 100;
   pointer-events: none;
- }
+}
 
- dialog::backdrop {
+dialog::backdrop {
   background-color: #00000080;
- }
+}
 
 .modal {
   position: relative;
-  max-width: 95vw;  
+  max-width: 95vw;
   width: fit-content;
   background: transparent;
   border: none;
@@ -56,7 +56,7 @@
 
 .modal > header .close-btn {
   float: right;
-  padding: 0.5em;    
+  padding: 0.5em;
   margin: -0.5em 0;
   cursor: var(--cursor-hover);
   appearance: none;

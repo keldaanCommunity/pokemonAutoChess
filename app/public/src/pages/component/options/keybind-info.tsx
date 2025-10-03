@@ -41,7 +41,13 @@ export default function KeybindInfo() {
   }, [currentlyRemapping])
 
   const keys = Object.keys(preferences.keybindings)
-  const conflictingKeys = keys.filter((key, i) => keys.some((otherKey, otherIndex) => i !== otherIndex && preferences.keybindings[key] === preferences.keybindings[otherKey]))
+  const conflictingKeys = keys.filter((key, i) =>
+    keys.some(
+      (otherKey, otherIndex) =>
+        i !== otherIndex &&
+        preferences.keybindings[key] === preferences.keybindings[otherKey]
+    )
+  )
 
   const RemappableKey = ({ keyId }: { keyId: string }) => {
     return (

@@ -31,8 +31,7 @@ export default function Booster() {
   function onClickOpenBooster() {
     if (flippedStates.some((flipped) => !flipped)) {
       setFlippedStates(new Array(boosterContent.length).fill(true))
-    }
-    else if (numberOfBooster > 0) {
+    } else if (numberOfBooster > 0) {
       dispatch(setBoosterContent([]))
       dispatch(openBooster())
     }

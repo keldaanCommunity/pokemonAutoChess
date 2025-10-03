@@ -131,9 +131,9 @@ export default class Simulation extends Schema implements ISimulation {
       Set<EffectEnum>,
       Set<EffectEnum>
     ][] = [
-        [this.bluePlayer, this.blueEffects, this.redEffects],
-        [this.redPlayer, this.redEffects, this.blueEffects]
-      ]
+      [this.bluePlayer, this.blueEffects, this.redEffects],
+      [this.redPlayer, this.redEffects, this.blueEffects]
+    ]
     for (const [player, teamEffects, opponentEffects] of playerEffects) {
       if (player) {
         player.board.forEach((pokemon, id) => {
@@ -1428,7 +1428,8 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MURKY: {
         const player = pokemon.player
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
-        const luckDebuff = 10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
+        const luckDebuff =
+          10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
         pokemon.addLuck(luckDebuff, pokemon, 0, false)
         break
       }

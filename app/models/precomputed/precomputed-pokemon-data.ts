@@ -27,7 +27,11 @@ precomputedPokemons.forEach((pokemon) => {
     evolutions: pokemon.evolutions,
     stages: Math.max(
       ...precomputedPokemons
-        .filter((p) => PkmFamily[p.name] === PkmFamily[pokemon.name] && p.skill !== Ability.DEFAULT)
+        .filter(
+          (p) =>
+            PkmFamily[p.name] === PkmFamily[pokemon.name] &&
+            p.skill !== Ability.DEFAULT
+        )
         .map((p) => p.stars)
     )
   })

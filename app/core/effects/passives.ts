@@ -1028,7 +1028,10 @@ export const PassiveEffects: Partial<
   ],
   [Passive.GHOLDENGO]: [
     new OnSpawnEffect((entity) => {
-      if (entity.player && entity.player.money >= entity.player.maxInterest * 10) {
+      if (
+        entity.player &&
+        entity.player.money >= entity.player.maxInterest * 10
+      ) {
         entity.status.triggerRuneProtect(60000)
       }
     })

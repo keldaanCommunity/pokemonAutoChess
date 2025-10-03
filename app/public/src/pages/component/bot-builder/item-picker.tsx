@@ -28,7 +28,17 @@ export default function ItemPicker(props: {
   const tabs = [
     { label: t("components"), key: "components", items: ItemComponents },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
-    { label: t("food"), key: "food", items: [...Berries, Item.TART_APPLE, Item.SWEET_APPLE, Item.SIRUPY_APPLE, Item.CHEF_HAT] },
+    {
+      label: t("food"),
+      key: "food",
+      items: [
+        ...Berries,
+        Item.TART_APPLE,
+        Item.SWEET_APPLE,
+        Item.SIRUPY_APPLE,
+        Item.CHEF_HAT
+      ]
+    },
 
     { label: t("artificial_items"), key: "artificial", items: ArtificialItems },
     {
@@ -39,7 +49,13 @@ export default function ItemPicker(props: {
     {
       label: t("special_items"),
       key: "special_items",
-      items: [Item.RUSTED_SWORD, Item.TEAL_MASK, Item.WELLSPRING_MASK, Item.CORNERSTONE_MASK, Item.HEARTHFLAME_MASK]
+      items: [
+        Item.RUSTED_SWORD,
+        Item.TEAL_MASK,
+        Item.WELLSPRING_MASK,
+        Item.CORNERSTONE_MASK,
+        Item.HEARTHFLAME_MASK
+      ]
     }
   ]
 
@@ -68,13 +84,15 @@ export default function ItemPicker(props: {
           ))}
         </TabPanel>
       ))}
-      {itemHovered && <Tooltip
-        id="item-detail"
-        className="custom-theme-tooltip item-detail-tooltip"
-        float
-      >
-        <ItemDetailTooltip item={itemHovered} />
-      </Tooltip>}
+      {itemHovered && (
+        <Tooltip
+          id="item-detail"
+          className="custom-theme-tooltip item-detail-tooltip"
+          float
+        >
+          <ItemDetailTooltip item={itemHovered} />
+        </Tooltip>
+      )}
     </Tabs>
   )
 }

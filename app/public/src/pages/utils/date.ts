@@ -17,7 +17,6 @@ export function formatDate(
 }
 
 export function formatDuration(seconds: number) {
-
   const days = Math.floor(seconds / 86400)
   seconds -= days * 86400
   const hours = Math.floor(seconds / 3600)
@@ -27,7 +26,12 @@ export function formatDuration(seconds: number) {
   //@ts-ignore: https://github.com/microsoft/TypeScript/issues/60608
   if (Intl && Intl.DurationFormat) {
     //@ts-ignore: https://github.com/microsoft/TypeScript/issues/60608
-    return new Intl.DurationFormat(i18n.language, { style: "long" }).format({ days, hours, minutes, seconds });
+    return new Intl.DurationFormat(i18n.language, { style: "long" }).format({
+      days,
+      hours,
+      minutes,
+      seconds
+    })
   }
   return `${days > 0 ? days + " days" : ""}${hours > 0 ? hours + " hours" : ""}${minutes > 0 ? minutes + " min" : ""}${seconds > 0 ? seconds + " s" : ""}`.trim()
 }

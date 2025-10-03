@@ -19,12 +19,12 @@ import "./style/index.css"
 
 // Redirect top window if running in an iframe
 if (window.top && window !== window.top) {
-  window.top.location.replace(window.location.href);
+  window.top.location.replace(window.location.href)
 }
 
 // Prevent the website to be opened from window.open()
 if (window.opener) {
-  window.opener.location.replace(window.location.href);
+  window.opener.location.replace(window.location.href)
 }
 
 const container = document.getElementById("root")
@@ -34,10 +34,12 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <Suspense fallback="loading">
-        <BrowserRouter future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true,
-        }}>
+        <BrowserRouter
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true
+          }}
+        >
           <Routes>
             <Route path="/" element={<Auth />} />
             <Route path="/lobby" element={<Lobby />} />

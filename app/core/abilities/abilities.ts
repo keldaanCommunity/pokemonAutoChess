@@ -4825,7 +4825,13 @@ export class PlasmaFistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 120
-    const { takenDamage } = target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const { takenDamage } = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
     if (takenDamage > 0) {
       pokemon.handleHeal(Math.round(takenDamage * 0.3), pokemon, 0, crit)
     }
@@ -7107,23 +7113,9 @@ export class SandTombStrategy extends AbilityStrategy {
     const statusDuration = [3000, 5000, 8000][pokemon.stars - 1] ?? 8000
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
 
-    target.status.triggerParalysis(
-      statusDuration,
-      target,
-      pokemon
-    )
-    target.status.triggerSilence(
-      statusDuration,
-      target,
-      pokemon
-    )
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
+    target.status.triggerParalysis(statusDuration, target, pokemon)
+    target.status.triggerSilence(statusDuration, target, pokemon)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -9956,13 +9948,7 @@ export class OctazookaStrategy extends AbilityStrategy {
     const damage = Math.ceil(pokemon.atk * 3)
 
     pokemon.count.attackCount++ // trigger attack animation
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.SPECIAL,
-      pokemon,
-      crit
-    )
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     target.status.triggerBlinded(4000, target)
   }
@@ -10283,16 +10269,25 @@ export class SteelWingStrategy extends AbilityStrategy {
 class BideEffect extends PeriodicEffect {
   duration: number
   damageReceived: number = 0
-  constructor(pokemon: PokemonEntity, duration: number, board: Board, crit: boolean) {
-    super((pokemon) => {
-      if (this.duration <= 0) {
-        this.procDamage(pokemon, board, crit)
-        pokemon.effectsSet.delete(this)
-        pokemon.effectsSet.delete(damageMonitor)
-      } else {
-        this.duration -= this.intervalMs
-      }
-    }, Ability.BIDE, 1000)
+  constructor(
+    pokemon: PokemonEntity,
+    duration: number,
+    board: Board,
+    crit: boolean
+  ) {
+    super(
+      (pokemon) => {
+        if (this.duration <= 0) {
+          this.procDamage(pokemon, board, crit)
+          pokemon.effectsSet.delete(this)
+          pokemon.effectsSet.delete(damageMonitor)
+        } else {
+          this.duration -= this.intervalMs
+        }
+      },
+      Ability.BIDE,
+      1000
+    )
     this.duration = duration
     const damageMonitor = new OnDamageReceivedEffect(({ damage }) => {
       this.damageReceived += damage
@@ -13927,13 +13922,13 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    
+
     // Base damage scales with stars: 1★=30, 2★=60, 3★=90, 4★=120
     const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 120
-    
+
     // Recoil damage is 20% of base HP
     const recoil = Math.round(pokemon.baseHP * 0.2)
-    
+
     // Bonus damage per fallen ally scales with stars: 1★=5, 2★=10, 3★=15, 4★=20
     const damagePerFallenAlly = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
     const nbFallenAllies = board.getFallenAlliesCount(pokemon)
@@ -13953,7 +13948,7 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    
+
     // Take recoil damage unless protected by Protective Pads
     if (!pokemon.items.has(Item.PROTECTIVE_PADS)) {
       pokemon.handleSpecialDamage(

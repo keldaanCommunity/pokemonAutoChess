@@ -99,13 +99,17 @@ export default function MapViewerContainer() {
           ))}
         </select>
 
-        <select onChange={(e) => {
-          debugScene.current?.setWeather(e.target.value as Weather | "dawn" | "sunset" | "nighttime")
-        }}>
+        <select
+          onChange={(e) => {
+            debugScene.current?.setWeather(
+              e.target.value as Weather | "dawn" | "sunset" | "nighttime"
+            )
+          }}
+        >
           <option value="dawn">Dawn (Stage 0)</option>
           <option value="sunset">Sunset (Stage 20)</option>
           <option value="nighttime">Town at Night (Stage 21+)</option>
-          {Object.values(Weather).map((weather) => (            
+          {Object.values(Weather).map((weather) => (
             <option key={weather} value={weather}>
               {t(`weather.${weather}`)}
             </option>

@@ -12,7 +12,9 @@ button {
   font-size: 120%;
   border: var(--border-thin);
   text-shadow: 2px 2px 2px #00000040;
-  box-shadow: inset -6px -6px 0px 0px #cfcfcf, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #cfcfcf,
+    var(--shadow-clickable);
   text-decoration: none;
 }
 
@@ -23,11 +25,15 @@ button {
 
 .bubbly:not([disabled]):active {
   background: #e7e7e7;
-  box-shadow: inset 6px 6px 0px 0px #cfcfcf, var(--shadow-clickable);
+  box-shadow:
+    inset 6px 6px 0px 0px #cfcfcf,
+    var(--shadow-clickable);
 }
 
 .bubbly.green {
-  box-shadow: inset -6px -6px 0px 0px #65a013, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #65a013,
+    var(--shadow-clickable);
   background: #92cc41;
   color: white;
 }
@@ -38,12 +44,16 @@ button {
 
 .bubbly.green:not([disabled]):active {
   background: #92cc41;
-  box-shadow: inset 6px 6px 0px 0px #65a013, var(--shadow-clickable);
+  box-shadow:
+    inset 6px 6px 0px 0px #65a013,
+    var(--shadow-clickable);
 }
 
 .bubbly.orange {
   background: #f7d51d;
-  box-shadow: inset -6px -6px 0px 0px #c9ae17, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #c9ae17,
+    var(--shadow-clickable);
   color: black;
 }
 
@@ -53,12 +63,16 @@ button {
 
 .bubbly.orange:not([disabled]):active {
   background: #f7d51d;
-  box-shadow: inset 6px 6px 0px 0px #c9ae17, var(--shadow-clickable);
+  box-shadow:
+    inset 6px 6px 0px 0px #c9ae17,
+    var(--shadow-clickable);
 }
 
 .bubbly.red {
   background: #e76e55;
-  box-shadow: inset -6px -6px 0px 0px #bf3d41, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #bf3d41,
+    var(--shadow-clickable);
   color: white;
 }
 
@@ -68,12 +82,16 @@ button {
 
 .bubbly.red:not([disabled]):active {
   background: #761c1e;
-  box-shadow: inset 6px 6px 0px 0px #bf3d41, var(--shadow-clickable);
+  box-shadow:
+    inset 6px 6px 0px 0px #bf3d41,
+    var(--shadow-clickable);
 }
 
 .bubbly.blue {
   background: #109fff;
-  box-shadow: inset -6px -6px 0px 0px #006bb3, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #006bb3,
+    var(--shadow-clickable);
   color: white;
 }
 
@@ -83,13 +101,17 @@ button {
 
 .bubbly.blue:not([disabled]):active {
   background: #109fff;
-  box-shadow: inset 6px 6px 0px 0px #108de0, var(--shadow-clickable);
+  box-shadow:
+    inset 6px 6px 0px 0px #108de0,
+    var(--shadow-clickable);
 }
 
 .bubbly.pink {
   background: #ee2097;
   color: white;
-  box-shadow: inset -6px -6px 0px 0px #902c74, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #902c74,
+    var(--shadow-clickable);
 }
 
 .bubbly.pink:not([disabled]):hover {
@@ -104,7 +126,9 @@ button {
 .bubbly.dark {
   background: #444;
   color: white;
-  box-shadow: inset -6px -6px 0px 0px #333, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #333,
+    var(--shadow-clickable);
 }
 
 .bubbly.dark:not([disabled]):hover {
@@ -119,7 +143,9 @@ button {
 .bubbly.discord {
   background: #444ebe;
   color: white;
-  box-shadow: inset -6px -6px 0px 0px #2d347e, var(--shadow-clickable);
+  box-shadow:
+    inset -6px -6px 0px 0px #2d347e,
+    var(--shadow-clickable);
 }
 .bubbly.discord:not([disabled]):hover {
   background: #4a54bf;
@@ -127,7 +153,9 @@ button {
 
 .bubbly.discord:not([disabled]):active {
   background: #444ebe;
-  box-shadow: inset 6px 6px 0px 0px #2d347e, var(--shadow-clickable);
+  box-shadow:
+    inset 6px 6px 0px 0px #2d347e,
+    var(--shadow-clickable);
 }
 
 .bubbly[disabled] {

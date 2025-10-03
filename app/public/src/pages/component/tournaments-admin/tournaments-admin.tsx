@@ -8,7 +8,10 @@ import {
   deleteTournament
 } from "../../../stores/NetworkStore"
 import { formatDate } from "../../utils/date"
-import { ITournament, ITournamentBracket } from "../../../../../types/interfaces/Tournament"
+import {
+  ITournament,
+  ITournamentBracket
+} from "../../../../../types/interfaces/Tournament"
 import { entries } from "../../../../../utils/schemas"
 import "./tournament-admin.css"
 
@@ -92,7 +95,9 @@ function TournamentAdminItem(props: { tournament: ITournament }) {
     <div className="my-box tournament-admin-item">
       <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
         <p className="name">{props.tournament.name}</p>
-        <p className="date">{formatDate(new Date(props.tournament.startDate))}</p>
+        <p className="date">
+          {formatDate(new Date(props.tournament.startDate))}
+        </p>
         <div className="spacer"></div>
         <div className="actions">
           <button
@@ -113,7 +118,12 @@ function TournamentAdminItem(props: { tournament: ITournament }) {
                   "Remake tournament lobbies ? Previous lobbies won't be deleted so do this only after a server reboot if lobbies have been lost"
                 )
               ) {
-                dispatch(remakeTournamentLobby({ tournamentId: props.tournament.id!, bracketId: "all" }))
+                dispatch(
+                  remakeTournamentLobby({
+                    tournamentId: props.tournament.id!,
+                    bracketId: "all"
+                  })
+                )
               }
             }}
           >
@@ -121,12 +131,20 @@ function TournamentAdminItem(props: { tournament: ITournament }) {
           </button>
         </div>
       </div>
-      {brackets.length > 0 && <TournamentBrackets tournamentId={props.tournament.id} brackets={brackets} />}
+      {brackets.length > 0 && (
+        <TournamentBrackets
+          tournamentId={props.tournament.id}
+          brackets={brackets}
+        />
+      )}
     </div>
   )
 }
 
-function TournamentBrackets(props: { tournamentId: string, brackets: [string, ITournamentBracket][] }) {
+function TournamentBrackets(props: {
+  tournamentId: string
+  brackets: [string, ITournamentBracket][]
+}) {
   const dispatch = useAppDispatch()
   return (
     <div>
@@ -148,15 +166,25 @@ function TournamentBrackets(props: { tournamentId: string, brackets: [string, IT
               <td>{bracket.playersId.length}</td>
               <td>{bracket.finished ? "Finished" : "In progress"}</td>
               <td>
-                <button className="bubbly orange" onClick={() => {
-                  if (
-                    confirm(
-                      "Remake this tournament lobby ? Ongoing game will be deleted as well"
-                    )
-                  ) {
-                    dispatch(remakeTournamentLobby({ tournamentId: props.tournamentId, bracketId }))
-                  }
-                }}>Remake</button>
+                <button
+                  className="bubbly orange"
+                  onClick={() => {
+                    if (
+                      confirm(
+                        "Remake this tournament lobby ? Ongoing game will be deleted as well"
+                      )
+                    ) {
+                      dispatch(
+                        remakeTournamentLobby({
+                          tournamentId: props.tournamentId,
+                          bracketId
+                        })
+                      )
+                    }
+                  }}
+                >
+                  Remake
+                </button>
               </td>
             </tr>
           ))}

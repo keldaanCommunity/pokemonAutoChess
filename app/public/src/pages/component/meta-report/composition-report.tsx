@@ -39,10 +39,7 @@ export function CompositionReport() {
     <div id="meta-report-compo">
       <header>
         <h2>{t("best_team_compositions")}</h2>
-        <select
-          value={rankingBy}
-          onChange={(e) => setRanking(e.target.value)}
-        >
+        <select value={rankingBy} onChange={(e) => setRanking(e.target.value)}>
           <option value="count">
             {t("rank")} {t("by_poularity")}
           </option>

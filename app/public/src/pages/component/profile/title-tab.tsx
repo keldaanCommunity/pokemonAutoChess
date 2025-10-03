@@ -38,7 +38,10 @@ export function TitleTab() {
           isDark
         />
         <p>
-          {t("titles_unlocked", { count: user.titles.length, total: Object.keys(Title).length })}
+          {t("titles_unlocked", {
+            count: user.titles.length,
+            total: Object.keys(Title).length
+          })}
         </p>
       </div>
       <ul className="titles">
@@ -46,7 +49,7 @@ export function TitleTab() {
           key="no-title"
           className={cc("clickable", "my-box", {
             unlocked: true,
-            selected: user.title === "",
+            selected: user.title === ""
           })}
           onClick={() => dispatch(setTitle(""))}
         >
@@ -59,8 +62,9 @@ export function TitleTab() {
             <li
               key={k.name}
               style={{
-                background: `linear-gradient(to right, var(--color-bg-primary) 0% ${k.rarity * 100
-                  }%, var(--color-bg-secondary) ${k.rarity * 100}% 100%)`
+                background: `linear-gradient(to right, var(--color-bg-primary) 0% ${
+                  k.rarity * 100
+                }%, var(--color-bg-secondary) ${k.rarity * 100}% 100%)`
               }}
               className={cc("clickable", "my-box", {
                 unlocked: user.titles.includes(k.name),

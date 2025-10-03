@@ -31,13 +31,13 @@ export default function TeamComp(props: { team: IMeta; rank: number }) {
   const { t } = useTranslation()
   const sortedTypes = props.team.types
     ? (Object.keys(props.team.types) as Synergy[]).sort((a, b) => {
-      return rankType(a, b, props.team.types)
-    })
+        return rankType(a, b, props.team.types)
+      })
     : new Array<Synergy>()
   const sortedPokemons = props.team.pokemons
     ? (Object.keys(props.team.pokemons) as Pkm[]).sort((a, b) => {
-      return rankPokemon(a, b, props.team.pokemons)
-    })
+        return rankPokemon(a, b, props.team.pokemons)
+      })
     : new Array<Pkm>()
 
   return (

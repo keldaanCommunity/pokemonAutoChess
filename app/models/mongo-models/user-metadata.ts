@@ -106,7 +106,9 @@ const userMetadataSchema = new Schema({
           }
         ],
         required: false,
-        default: () => { return undefined } // important otherwise mongoose will create empty array
+        default: () => {
+          return undefined
+        } // important otherwise mongoose will create empty array
       },
       shinyEmotions: {
         type: [
@@ -116,7 +118,9 @@ const userMetadataSchema = new Schema({
           }
         ],
         required: false,
-        default: () => { return undefined } // important otherwise mongoose will create empty array
+        default: () => {
+          return undefined
+        } // important otherwise mongoose will create empty array
       },
       // END LEGACY
       id: {

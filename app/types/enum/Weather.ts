@@ -24,8 +24,7 @@ export const WeatherEffects: ReadonlyMap<Weather, EffectEnum> = new Map([
   [Weather.SMOG, EffectEnum.SMOG],
   [Weather.NIGHT, EffectEnum.NIGHT],
   [Weather.MISTY, EffectEnum.MISTY],
-  [Weather.MURKY, EffectEnum.MURKY],
-
+  [Weather.MURKY, EffectEnum.MURKY]
 ])
 
 export const PassivesAssociatedToWeather: Map<Weather, Passive[]> = new Map([

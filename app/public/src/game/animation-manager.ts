@@ -58,7 +58,10 @@ export default class AnimationManager {
       return
     }
     const pokemonData = getPokemonData(pkm)
-    const config = { ...DEFAULT_POKEMON_ANIMATION_CONFIG, ...(PokemonAnimations[pkm] ?? {}) }
+    const config = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[pkm] ?? {})
+    }
 
     if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
 
@@ -83,7 +86,10 @@ export default class AnimationManager {
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
         const directionArray =
-          AnimationOriented[action] === false && PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(action) !== true
+          AnimationOriented[action] === false &&
+          PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(
+            action
+          ) !== true
             ? [Orientation.DOWN]
             : Object.values(Orientation)
         directionArray.forEach((direction) => {
@@ -136,7 +142,10 @@ export default class AnimationManager {
   unloadPokemonAnimations(index: string, shiny: PokemonTint) {
     const pkm = PkmByIndex[index]
     const pokemonData = getPokemonData(pkm)
-    const config = { ...DEFAULT_POKEMON_ANIMATION_CONFIG, ...(PokemonAnimations[pkm] ?? {}) }
+    const config = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[pkm] ?? {})
+    }
 
     if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
 
@@ -161,7 +170,10 @@ export default class AnimationManager {
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
         const directionArray =
-          AnimationOriented[action] === false && PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(action) !== true
+          AnimationOriented[action] === false &&
+          PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(
+            action
+          ) !== true
             ? [Orientation.DOWN]
             : Object.values(Orientation)
         directionArray.forEach((direction) => {
@@ -339,7 +351,10 @@ export default class AnimationManager {
         timeScale
       })
     } catch (err) {
-      logger.warn(`Can't play animation ${animation} for ${pokemonSprite?.name}`, err)
+      logger.warn(
+        `Can't play animation ${animation} for ${pokemonSprite?.name}`,
+        err
+      )
     }
 
     if (pokemonSprite.troopers) {
@@ -366,7 +381,12 @@ export default class AnimationManager {
       ? OrientationFlip[entity.orientation]
       : entity.orientation
 
-    if (AnimationOriented[animation] === false && PokemonAnimations[PkmByIndex[entity.index]]?.animationsOriented?.includes(animation) !== true) {
+    if (
+      AnimationOriented[animation] === false &&
+      PokemonAnimations[PkmByIndex[entity.index]]?.animationsOriented?.includes(
+        animation
+      ) !== true
+    ) {
       orientation = Orientation.DOWN
     }
 
@@ -376,7 +396,7 @@ export default class AnimationManager {
         : "0000"
     const tint =
       entity.shiny &&
-        !PokemonAnimations[PkmByIndex[entity.index]].shinyUnavailable
+      !PokemonAnimations[PkmByIndex[entity.index]].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
     const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`

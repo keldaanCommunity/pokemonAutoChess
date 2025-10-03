@@ -139,21 +139,31 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     })
   ],
   HERBA_MYSTICA: [],
-  HERBA_MYSTICA_SWEET: [new OnSpawnEffect((entity) => {
-    entity.status.fairyField = true
-  })],
-  HERBA_MYSTICA_SPICY: [new OnSpawnEffect((entity) => {
-    entity.status.psychicField = true
-  })],
-  HERBA_MYSTICA_SOUR: [new OnSpawnEffect((entity) => {
-    entity.status.electricField = true
-  })],
-  HERBA_MYSTICA_BITTER: [new OnSpawnEffect((entity) => {
-    entity.status.grassField = true
-  })],
-  HERBA_MYSTICA_SALTY: [new OnSpawnEffect((entity) => {
-    entity.status.triggerRuneProtect(40000)
-  })],
+  HERBA_MYSTICA_SWEET: [
+    new OnSpawnEffect((entity) => {
+      entity.status.fairyField = true
+    })
+  ],
+  HERBA_MYSTICA_SPICY: [
+    new OnSpawnEffect((entity) => {
+      entity.status.psychicField = true
+    })
+  ],
+  HERBA_MYSTICA_SOUR: [
+    new OnSpawnEffect((entity) => {
+      entity.status.electricField = true
+    })
+  ],
+  HERBA_MYSTICA_BITTER: [
+    new OnSpawnEffect((entity) => {
+      entity.status.grassField = true
+    })
+  ],
+  HERBA_MYSTICA_SALTY: [
+    new OnSpawnEffect((entity) => {
+      entity.status.triggerRuneProtect(40000)
+    })
+  ],
   HONEY: [],
   LARGE_LEEK: [
     new OnSpawnEffect((entity) => {

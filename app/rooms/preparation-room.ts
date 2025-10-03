@@ -112,7 +112,9 @@ export default class PreparationRoom extends Room<PreparationState> {
       tournamentId: options.tournamentId ?? null,
       bracketId: options.bracketId ?? null,
       gameStartedAt: null,
-      passwordProtected: !!(options.password && options.password.trim().length > 0),
+      passwordProtected: !!(
+        options.password && options.password.trim().length > 0
+      ),
       type: "preparation"
     })
     this.maxClients = 8
@@ -173,8 +175,9 @@ export default class PreparationRoom extends Room<PreparationState> {
                 this.state.addMessage({
                   author: "Server",
                   authorId: "server",
-                  payload: `Game will start automatically in ${10 - t} minute${t !== 9 ? "s" : ""
-                    }`,
+                  payload: `Game will start automatically in ${10 - t} minute${
+                    t !== 9 ? "s" : ""
+                  }`,
                   avatar: "0340/Special1"
                 })
               },
@@ -346,7 +349,11 @@ export default class PreparationRoom extends Room<PreparationState> {
       const isAdmin = userProfile?.role === Role.ADMIN
 
       // Check password protection - room owner, admins and moderators bypass password protection
-      if (this.state.password && userProfile?.role === Role.BASIC && this.state.ownerId !== user.uid) {
+      if (
+        this.state.password &&
+        userProfile?.role === Role.BASIC &&
+        this.state.ownerId !== user.uid
+      ) {
         if (!options.password || options.password !== this.roomPassword) {
           client.leave(CloseCodes.INVALID_PASSWORD)
           return

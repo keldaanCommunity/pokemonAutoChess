@@ -97,9 +97,30 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
       </div>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
         <span>{t("total")}</span>
-        <span title={t("total_money_earned")}><img src="assets/icons/money_total.svg" alt="$" style={{ width: "24px", height: "24px" }} /> {props.player.totalMoneyEarned}</span>
-        <span title={t("total_player_damage_dealt")}><img src="assets/icons/ATK.png" alt="✊" style={{ width: "24px", height: "24px" }} />{props.player.totalPlayerDamageDealt}</span>
-        <span title={t("total_reroll_count")}><img src="assets/ui/refresh.svg" alt="↻" style={{ width: "24px", height: "24px" }} /> {props.player.rerollCount}</span>
+        <span title={t("total_money_earned")}>
+          <img
+            src="assets/icons/money_total.svg"
+            alt="$"
+            style={{ width: "24px", height: "24px" }}
+          />{" "}
+          {props.player.totalMoneyEarned}
+        </span>
+        <span title={t("total_player_damage_dealt")}>
+          <img
+            src="assets/icons/ATK.png"
+            alt="✊"
+            style={{ width: "24px", height: "24px" }}
+          />
+          {props.player.totalPlayerDamageDealt}
+        </span>
+        <span title={t("total_reroll_count")}>
+          <img
+            src="assets/ui/refresh.svg"
+            alt="↻"
+            style={{ width: "24px", height: "24px" }}
+          />{" "}
+          {props.player.rerollCount}
+        </span>
       </div>
     </div>
   )

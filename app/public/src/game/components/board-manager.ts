@@ -345,7 +345,10 @@ export default class BoardManager {
     let nbPots = SynergyTriggers[Synergy.FLORA].filter(
       (n) => n <= floraLevel
     ).length
-    if (floraLevel >= 6 && this.player.flowerPots.every(p => p.evolution === Pkm.DEFAULT)) {
+    if (
+      floraLevel >= 6 &&
+      this.player.flowerPots.every((p) => p.evolution === Pkm.DEFAULT)
+    ) {
       nbPots = 5
     }
     return nbPots
@@ -412,7 +415,10 @@ export default class BoardManager {
     }
     this.mulchAmountText.setText(`${this.player.mulch}/${this.player.mulchCap}`)
     if (this.mulchIcon === null) {
-      const mulchCollected = this.player.items.filter(i => i === Item.RICH_MULCH).length + this.player.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) - 8
+      const mulchCollected =
+        this.player.items.filter((i) => i === Item.RICH_MULCH).length +
+        this.player.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) -
+        8
       this.mulchIcon = this.scene.add.image(
         332,
         636,
@@ -722,7 +728,10 @@ export default class BoardManager {
     this.pokemons.forEach((pokemon) => {
       if (
         !isOnBench(pokemon) &&
-        !(FlowerPotMons.includes(PkmByIndex[pokemon.index]) && pokemon.positionY === -1)
+        !(
+          FlowerPotMons.includes(PkmByIndex[pokemon.index]) &&
+          pokemon.positionY === -1
+        )
       ) {
         pokemon.destroy()
         this.pokemons.delete(pokemon.id)

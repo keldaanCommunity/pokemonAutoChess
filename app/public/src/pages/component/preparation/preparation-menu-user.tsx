@@ -41,8 +41,9 @@ export default function PreparationMenuUser(props: {
 
   return (
     <div
-      className={`my-container player my-box preparation-menu-user ${props.user.ready ? "ready" : "not-ready"
-        }`}
+      className={`my-container player my-box preparation-menu-user ${
+        props.user.ready ? "ready" : "not-ready"
+      }`}
     >
       <EloBadge elo={props.user?.elo} />
       <InlineAvatar
