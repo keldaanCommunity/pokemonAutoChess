@@ -1,4 +1,8 @@
-import { PokemonClasses } from "../../models/colyseus-models/pokemon"
+import {
+  BasculinWhite,
+  Pokemon,
+  PokemonClasses
+} from "../../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../../models/effects"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Transfer } from "../../types"
@@ -393,7 +397,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-              board.columns * pokemon.positionY + y + pokemon.positionX + x
+                board.columns * pokemon.positionY + y + pokemon.positionX + x
               ]
           })
         }
@@ -646,25 +650,27 @@ const ogerponMaskDropEffect = (
     }
   }, mask)
 
-const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(({ pokemon, board }) => {
-  pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
-  const adjcells = board.getAdjacentCells(
-    pokemon.positionX,
-    pokemon.positionY
-  )
-  const damage = Math.round(0.5 * pokemon.hp)
-  adjcells.forEach((cell) => {
-    if (cell.value && pokemon.team != cell.value.team) {
-      cell.value.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        false
-      )
-    }
-  })
-})
+const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
+  ({ pokemon, board }) => {
+    pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
+    const adjcells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY
+    )
+    const damage = Math.round(0.5 * pokemon.hp)
+    adjcells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+      }
+    })
+  }
+)
 
 const comfeyEquipOnSimulationStartEffect = new OnSimulationStartEffect(
   ({ simulation, team, entity }) => {
@@ -748,10 +754,7 @@ const conversionEffect = new OnSimulationStartEffect(
         player.team
       )
       if (coord) {
-        const bug = PokemonFactory.createPokemonFromName(
-          entity.name,
-          player
-        )
+        const bug = PokemonFactory.createPokemonFromName(entity.name, player)
         simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
       }
     }
@@ -787,8 +790,8 @@ const conversionEffect = new OnSimulationStartEffect(
   }
 )
 
-const spawnPhioneFromAquaEggOnSimulationStartEffect = new OnSimulationStartEffect(
-  ({ entity, simulation, player }) => {
+const spawnPhioneFromAquaEggOnSimulationStartEffect =
+  new OnSimulationStartEffect(({ entity, simulation, player }) => {
     if (entity.items.has(Item.AQUA_EGG)) {
       entity.items.delete(Item.AQUA_EGG)
       const coord = simulation.getClosestFreeCellToPokemonEntity(
@@ -800,18 +803,19 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect = new OnSimulationStartEffec
         simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
       }
     }
+  })
+
+const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    simulation.board
+      .getAdjacentCells(entity.positionX, entity.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team === entity.team) {
+          cell.value.addAbilityPower(50, cell.value, 0, false)
+        }
+      })
   }
 )
-
-const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(({ entity, simulation }) => {
-  simulation.board
-    .getAdjacentCells(entity.positionX, entity.positionY)
-    .forEach((cell) => {
-      if (cell.value && cell.value.team === entity.team) {
-        cell.value.addAbilityPower(50, cell.value, 0, false)
-      }
-    })
-})
 
 const treeEffect = new OnSpawnEffect((entity) => {
   entity.status.tree = true
@@ -824,32 +828,34 @@ const inanimateObjectEffect = new OnSpawnEffect((entity) => {
   entity.toIdleState()
 })
 
-const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(({ simulation, entity }) => {
-  entity.commands.push(
-    new DelayedCommand(() => {
-      const board = simulation.board
-      const nbSpikes = 12
-      const positions = new Set<string>()
-      for (let i = 0; i < nbSpikes; i++) {
-        let x, y
-        do {
-          x = Math.floor(Math.random() * board.columns)
-          y =
-            Math.floor((Math.random() * board.rows) / 2) +
-            (entity.positionY < 3 ? 3 : 0)
-        } while (positions.has(`${x},${y}`))
-        positions.add(`${x},${y}`)
+const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
+  ({ simulation, entity }) => {
+    entity.commands.push(
+      new DelayedCommand(() => {
+        const board = simulation.board
+        const nbSpikes = 12
+        const positions = new Set<string>()
+        for (let i = 0; i < nbSpikes; i++) {
+          let x, y
+          do {
+            x = Math.floor(Math.random() * board.columns)
+            y =
+              Math.floor((Math.random() * board.rows) / 2) +
+              (entity.positionY < 3 ? 3 : 0)
+          } while (positions.has(`${x},${y}`))
+          positions.add(`${x},${y}`)
 
-        board.addBoardEffect(x, y, EffectEnum.SPIKES, simulation)
-        entity.broadcastAbility({
-          skill: Ability.SPIKES,
-          targetX: x,
-          targetY: y
-        })
-      }
-    }, 300)
-  )
-})
+          board.addBoardEffect(x, y, EffectEnum.SPIKES, simulation)
+          entity.broadcastAbility({
+            skill: Ability.SPIKES,
+            targetX: x,
+            targetY: y
+          })
+        }
+      }, 300)
+    )
+  }
+)
 
 class DrySkinPeriodicEffect extends PeriodicEffect {
   constructor() {
@@ -994,7 +1000,10 @@ export const PassiveEffects: Partial<
   [Passive.COMFEY]: [comfeyEquipOnSimulationStartEffect],
   [Passive.CONVERSION]: [conversionEffect],
   [Passive.MANAPHY]: [spawnPhioneFromAquaEggOnSimulationStartEffect],
-  [Passive.STONJOURNER]: [stonjournerPowerSpotOnSimulationStartEffect, treeEffect],
+  [Passive.STONJOURNER]: [
+    stonjournerPowerSpotOnSimulationStartEffect,
+    treeEffect
+  ],
   [Passive.WOBBUFFET]: [treeEffect],
   [Passive.SUDOWOODO]: [treeEffect],
   [Passive.INANIMATE]: [inanimateObjectEffect],
@@ -1021,6 +1030,28 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((entity) => {
       if (entity.player && entity.player.money >= entity.player.maxInterest * 10) {
         entity.status.triggerRuneProtect(60000)
+      }
+    })
+  ],
+  [Passive.BASCULIN_WHITE]: [
+    new OnKillEffect(
+      (pokemon) => pokemon instanceof BasculinWhite && pokemon.killCount++
+    )
+  ],
+  [Passive.BASCULIN_RED_BLUE]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      const basculins: PokemonEntity[] = board.cells.filter(
+        (p) =>
+          p !== undefined &&
+          p.team === pokemon.team &&
+          p.passive === Passive.BASCULIN_RED_BLUE
+      ) as PokemonEntity[]
+
+      const basculinWithMostAttack = basculins.sort((a, b) => b.atk - a.atk)[0]
+
+      if (basculinWithMostAttack && pokemon.atk < basculinWithMostAttack.atk) {
+        const delta = basculinWithMostAttack.atk - pokemon.atk
+        pokemon.addAttack(delta, pokemon, 0, false)
       }
     })
   ]

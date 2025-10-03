@@ -16335,36 +16335,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board, 1)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board, 1)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -18626,6 +18626,97 @@ export class Golisopod extends Pokemon {
   passive = Passive.EMERGENCY_EXIT
 }
 
+const basculinOnAcquired = (player: Player) => {
+  ;[Pkm.BASCULIN_BLUE, Pkm.BASCULIN_RED, Pkm.BASCULIN_WHITE].every((basculin) =>
+    values(player.board).find((e) => e.name === basculin)
+  ) && player.titles.add(Title.AQUARIST)
+}
+
+export class BasculinRed extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 140
+  atk = 15
+  speed = 56
+  def = 4
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.BARED_FANGS
+  passive = Passive.BASCULIN_RED_BLUE
+  onAcquired = basculinOnAcquired
+}
+
+export class BasculinBlue extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 140
+  atk = 15
+  speed = 56
+  def = 4
+  speDef = 3
+  maxPP = 80
+  range = 1
+  skill = Ability.BARED_FANGS
+  passive = Passive.BASCULIN_RED_BLUE
+  onAcquired = basculinOnAcquired
+}
+
+export class BasculinWhite extends Pokemon {
+  killCount = 0
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 160
+  atk = 15
+  speed = 56
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.GRUDGE_DIVE
+  passive = Passive.BASCULIN_WHITE
+  evolutions = [Pkm.BASCULEGION_MALE, Pkm.BASCULEGION_FEMALE]
+  evolutionRule = new ConditionBasedEvolutionRule(
+    (pokemon) =>
+      pokemon instanceof BasculinWhite &&
+      (pokemon.killCount >= 5 || pokemon.deathCount >= 5),
+    (pokemon) =>
+      pokemon.deathCount >= 5 ? Pkm.BASCULEGION_FEMALE : Pkm.BASCULEGION_MALE
+  )
+  onAcquired = basculinOnAcquired
+}
+
+export class BasculegionMale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 210
+  atk = 25
+  speed = 56
+  def = 8
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.GRUDGE_DIVE
+}
+
+export class BasculegionFemale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 4
+  hp = 190
+  atk = 19
+  speed = 56
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.GRUDGE_DIVE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19679,7 +19770,12 @@ export const PokemonClasses: Record<
   [Pkm.GRAPPLOCT]: Grapploct,
   [Pkm.CHI_YU]: ChiYu,
   [Pkm.WIMPOD]: Wimpod,
-  [Pkm.GOLISOPOD]: Golisopod
+  [Pkm.GOLISOPOD]: Golisopod,
+  [Pkm.BASCULIN_RED]: BasculinRed,
+  [Pkm.BASCULIN_BLUE]: BasculinBlue,
+  [Pkm.BASCULIN_WHITE]: BasculinWhite,
+  [Pkm.BASCULEGION_FEMALE]: BasculegionFemale,
+  [Pkm.BASCULEGION_MALE]: BasculegionMale
 }
 
 // declare all the classes in colyseus schema TypeRegistry
