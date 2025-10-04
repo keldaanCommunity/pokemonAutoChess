@@ -50,6 +50,7 @@
 - Change Plasma Fist: 25% heal from damage before armor reduction -> 30% heal from damage dealt after armor reduction
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
+- Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
 
 # Changes to Synergies
 
@@ -61,6 +62,7 @@
 
 - New weather Murky: reduce Luck by 30 (Ghost are immune), silence duration +30%. Triggered when 8 Ghost Pokémon are on board.
 - New town encounter: Makuhita
+- Pokémons are now automatically placed from the bench onto the board when free spots are available, with smarter positioning: melee Pokémons are placed in the front row, while ranged Pokémons are placed in the back row based on their attack range.
 
 # UI
 
