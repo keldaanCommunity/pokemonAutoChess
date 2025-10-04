@@ -3496,6 +3496,7 @@
 	"show_unlocked": "Show unlocked",
 	"show_evolutions": "Show evolutions",
 	"show_refundable": "Show refundable",
+	"show_newly_obtained": "Show newly obtained",
 	"show_only_available_picks": "Show only available add picks / regionals",
 	"sort_by_index": "Sort by index",
 	"sort_by_shards": "Sort by shards",
