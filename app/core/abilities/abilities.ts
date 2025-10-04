@@ -10432,7 +10432,8 @@ export class WoodHammerStrategy extends AbilityStrategy {
             board,
             AttackType.PHYSICAL,
             pokemon,
-            crit
+            crit,
+            false
           )
         }
       }, 500)
