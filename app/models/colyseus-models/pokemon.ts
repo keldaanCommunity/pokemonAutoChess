@@ -6407,20 +6407,21 @@ export class RotomDrone extends Pokemon {
 
 export class Spiritomb extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.DARK,
+    Synergy.ROCK,
     Synergy.GHOST,
     Synergy.AMORPHOUS
   ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 22
+  atk = 15
   speed = 36
-  def = 4
-  speDef = 4
-  maxPP = 80
-  range = 2
-  skill = Ability.SHADOW_BALL
+  def = 8
+  speDef = 8
+  maxPP = 108
+  range = 1
+  skill = Ability.SOUL_TRAP
+  passive = Passive.SPIRITOMB
 }
 
 export class Absol extends Pokemon {

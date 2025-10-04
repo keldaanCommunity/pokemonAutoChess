@@ -515,7 +515,8 @@
 		"BURNING_JEALOUSY": "Burning Jealousy",
 		"FIRST_IMPRESSION": "First Impression",
 		"GRUDGE_DIVE": "Grudge Dive",
-		"BARED_FANGS": "Bared Fangs"
+		"BARED_FANGS": "Bared Fangs",
+		"SOUL_TRAP": "Soul Trap"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2064,7 +2065,8 @@
 		"BURNING_JEALOUSY": "Deals [30,50,70,SP] SPECIAL to the target and ADJACENT enemies. Enemies with ATK buffs lose them and suffer BURN for 5 seconds.",
 		"FIRST_IMPRESSION": "The pokémon, sensing danger, deals [45,90,SP] SPECIAL and inflicts FLINCH for [3,5,SP] seconds before flying away, leaving a random 1 STAR common or uncommon BUG spawn behind.",
 		"GRUDGE_DIVE": "The user takes 10% of its Max HP as SPECIAL and deals [30,60,90,120,SP] SPECIAL to the target + [5,10,15,20,SP] additional SPECIAL per fallen ally.",
-		"BARED_FANGS": "Bites the target dealing [160,SP] % of his ATK as SPECIAL and stealing [10,SP] of the target's SPEED"
+		"BARED_FANGS": "Bites the target dealing [160,SP] % of his ATK as SPECIAL and stealing [10,SP] of the target's SPEED",
+		"SOUL_TRAP": "Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2920,7 +2922,8 @@
 		"BEADS_OF_RUIN": "The envy accumulated within its curved beads radiates a curse. Each hit reduces the target's SPE_DEF by 1.",
 		"EMERGENCY_EXIT": "Starts with full PP",
 		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED) and $t(pkm.BASCULIN_BLUE) fiercely compete with one another. Each time they cast their ability, the weaker Basculin will copy the stronger ATK stat.",
-		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies \nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times."
+		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies \nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times.",
+		"SPIRITOMB": "For each ODD_KEYSTONE you have, every time a Pokémon is KO, a wisp spawns and move to $t(pkm.SPIRITOMB) to give it 10 SHIELD"
 	},
 	"stat": {
 		"ATK": "Attack",

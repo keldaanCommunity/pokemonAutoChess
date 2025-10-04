@@ -50,6 +50,7 @@
 - Change Plasma Fist: 25% heal from damage before armor reduction -> 30% heal from damage dealt after armor reduction
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
+- Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
 
 # Changes to Synergies
 
