@@ -53,6 +53,8 @@
 
 # Changes to Synergies
 
+- Psychic 6 QoL: Unown shops now always offer 5 different types of Unown
+
 # Changes to Items
 
 - New weather rock Odd Stone: counts for 3 towards Murky weather. Under Murky weather, your team gains 10 Luck and -10% negative status duration, and resist to Curse 1 second longer.
