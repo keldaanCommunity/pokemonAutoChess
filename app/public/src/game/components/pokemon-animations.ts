@@ -7221,5 +7221,12 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.KLINK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.STEEL_HIT
   }
 }

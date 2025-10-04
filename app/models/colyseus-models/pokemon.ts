@@ -18718,6 +18718,23 @@ export class BasculegionFemale extends Pokemon {
   skill = Ability.GRUDGE_DIVE
 }
 
+export class Klink extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
+  rarity = Rarity.COMMON
+  stars = 1
+  //evolution = Pkm.KLANG
+  hp = 60
+  atk = 5
+  speed = 30
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.GEOMANCY
+  //skill = Ability.GEAR_GRIND
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19776,7 +19793,8 @@ export const PokemonClasses: Record<
   [Pkm.BASCULIN_BLUE]: BasculinBlue,
   [Pkm.BASCULIN_WHITE]: BasculinWhite,
   [Pkm.BASCULEGION_FEMALE]: BasculegionFemale,
-  [Pkm.BASCULEGION_MALE]: BasculegionMale
+  [Pkm.BASCULEGION_MALE]: BasculegionMale,
+  [Pkm.KLINK]: Klink
 }
 
 // declare all the classes in colyseus schema TypeRegistry

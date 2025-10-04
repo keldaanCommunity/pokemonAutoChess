@@ -440,6 +440,7 @@ export enum Pkm {
   KIRLIA = "KIRLIA",
   KLEAVOR = "KLEAVOR",
   KLEFKI = "KLEFKI",
+  KLINK = "KLINK",
   KOFFING = "KOFFING",
   KOMMO_O = "KOMMO_O",
   KRABBY = "KRABBY",
@@ -1768,7 +1769,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GALVANTULA]: "0596",
   [Pkm.FERROSEED]: "0597",
   [Pkm.FERROTHORN]: "0598",
-  //[Pkm.KLINK]: "0599",
+  [Pkm.KLINK]: "0599",
   //[Pkm.KLANG]: "0600",
   //[Pkm.KLINKLANG]: "0601",
   [Pkm.TYNAMO]: "0602",
@@ -3299,7 +3300,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BASCULIN_BLUE]: Pkm.BASCULIN_BLUE,
   [Pkm.BASCULIN_WHITE]: Pkm.BASCULIN_WHITE,
   [Pkm.BASCULEGION_MALE]: Pkm.BASCULIN_WHITE,
-  [Pkm.BASCULEGION_FEMALE]: Pkm.BASCULIN_WHITE
+  [Pkm.BASCULEGION_FEMALE]: Pkm.BASCULIN_WHITE,
+  [Pkm.KLINK]: Pkm.KLINK
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
