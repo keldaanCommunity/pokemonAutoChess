@@ -68,6 +68,7 @@
 - Adding a new keybinding to lock/unlock camera movement (default: L)
 - Added current amount of dragon stars in dragon synergy description
 - Removed announcements for Victory Road finishers except for the first finisher
+- Clicking on a player in Victory Road leaderboard will now redirect to that player profile
 
 # Bugfix
 
