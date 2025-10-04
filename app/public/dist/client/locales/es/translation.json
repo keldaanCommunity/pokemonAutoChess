@@ -3849,9 +3849,9 @@
 		"USER_IN_ANOTHER_GAME": "Ya estás jugando en otra partida, vuelve al vestíbulo y reconéctate.",
 		"USER_ALREADY_JOINED": "Ya te has unido a esta partida",
 		"ROOM_FULL": "Esta sala está llena",
-		"GAME_ALREADY_STARTED": "Esta partida ya ha empezado",
 		"ROOM_EMPTY": "Esta sala fue removida por falta de jugadores",
 		"ROOM_DELETED": "Esta sala fue borrada",
+		"GAME_ALREADY_STARTED": "Esta partida ya ha empezado",
 		"INVALID_PASSWORD": "Contraseña incorrecta!",
 		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
 	},
