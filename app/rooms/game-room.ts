@@ -194,6 +194,47 @@ export default class GameRoom extends Room<GameState> {
       PRECOMPUTED_POKEMONS_PER_RARITY.EPIC
     )
 
+    /* based on the season, we remove the Deerling seasonal forms to only keep the current season's form */
+    // Determine season based on precise date, not just month
+    const now = new Date()
+    const year = now.getFullYear()
+    const date = new Date(year, now.getMonth(), now.getDate())
+
+    // seasons (Northern Hemisphere)
+    // Spring: Mar 20 - June 21
+    // Summer: Jun 22 - Sep 22
+    // Autumn: Sep 23 - Dec 20
+    // Winter: Dec 21 - Mar 19
+
+    let season: "spring" | "summer" | "autumn" | "winter"
+    const springStart = new Date(year, 2, 20) // Mar 20
+    const summerStart = new Date(year, 5, 22) // Jun 22
+    const autumnStart = new Date(year, 8, 23) // Sep 23
+    const winterStart = new Date(year, 11, 21) // Dec 21
+
+    if (date >= springStart && date < summerStart) {
+      season = "spring"
+    } else if (date >= summerStart && date < autumnStart) {
+      season = "summer"
+    } else if (date >= autumnStart && date < winterStart) {
+      season = "autumn"
+    } else {
+      season = "winter"
+    }
+
+    // Remove all Deerling forms except the current season's
+    this.additionalRarePool = this.additionalRarePool.filter((p) => {
+      if (
+        p === Pkm.DEERLING_SPRING && season !== "spring" ||
+        p === Pkm.DEERLING_SUMMER && season !== "summer" ||
+        p === Pkm.DEERLING_AUTUMN && season !== "autumn" ||
+        p === Pkm.DEERLING_WINTER && season !== "winter"
+      ) {
+        return false
+      }
+      return true
+    })
+
     shuffleArray(this.additionalUncommonPool)
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)

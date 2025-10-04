@@ -70,7 +70,9 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.VELUZA]: Item.SMOKED_FILET,
   [Pkm.SMOLIV]: Item.OLIVE_OIL,
   [Pkm.DOLLIV]: Item.OLIVE_OIL,
-  [Pkm.ARBOLIVA]: Item.OLIVE_OIL
+  [Pkm.ARBOLIVA]: Item.OLIVE_OIL,
+  [Pkm.DEERLING_SUMMER]: Item.TEA,
+  [Pkm.SAWSBUCK_SUMMER]: Item.TEA
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
