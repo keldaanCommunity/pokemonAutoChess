@@ -13903,7 +13903,7 @@ export class BaredFangsStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
 
     // Deal 140% of ATK as SPECIAL damage
-    const damage = Math.round(pokemon.atk * 1.4)
+    const damage = Math.round(pokemon.atk * 1.6)
     const speedSteal = 10
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -13927,7 +13927,7 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
     const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 120
 
     // Recoil damage is 20% of base HP
-    const recoil = Math.round(pokemon.baseHP * 0.2)
+    const recoil = Math.round(pokemon.hp * 0.1)
 
     // Bonus damage per fallen ally scales with stars: 1★=5, 2★=10, 3★=15, 4★=20
     const damagePerFallenAlly = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
