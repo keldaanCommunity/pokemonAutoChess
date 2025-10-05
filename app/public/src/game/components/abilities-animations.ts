@@ -1297,7 +1297,7 @@ export const AbilitiesAnimations: {
       const hole = args.delay ?? 0
       if (hole > 0) {
         const groundHole = args.scene.add
-          .sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`)
+          .sprite(x, y + 10, "ground_holes", `00${hole - 1}.png`)
           .setScale(2)
           .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         args.scene.abilitiesVfxGroup?.add(groundHole)
