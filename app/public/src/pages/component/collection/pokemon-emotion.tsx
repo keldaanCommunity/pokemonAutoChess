@@ -2,7 +2,9 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { AvatarEmotions, Emotion } from "../../../../../types"
 import { getEmotionCost } from "../../../../../types/Config"
+import { PkmByIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import "./pokemon-emotion.css"
@@ -18,15 +20,29 @@ export default function PokemonEmotion(props: {
   onClick: () => void
 }) {
   const { t } = useTranslation()
+  const lastBoostersOpened = useAppSelector(
+    (state) => state.lobby.lastBoostersOpened
+  )
   const cost = getEmotionCost(props.emotion, props.shiny)
   const canUnlock = !props.unlocked && cost <= props.dust
+  const isNew = lastBoostersOpened.some((booster) =>
+    booster.some(
+      (card) =>
+        card.name === PkmByIndex[props.index] &&
+        card.shiny === props.shiny &&
+        card.emotion === props.emotion &&
+        card.new
+    )
+  )
 
   return (
     <div
       className={cc("my-box", "clickable", "pokemon-emotion", {
         unlocked: !!props.unlocked,
         unlockable: canUnlock,
-        selected: !!props.selected
+        selected: !!props.selected,
+        new: isNew,
+        shimmer: isNew
       })}
       onClick={props.onClick}
     >

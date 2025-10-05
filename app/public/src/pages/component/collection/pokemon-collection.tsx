@@ -26,7 +26,7 @@ import "./pokemon-collection.css"
 
 export type CollectionFilterState = {
   mode: "collection" | "shiny" | "pokedex"
-  filter: "all" | "unlockable" | "locked" | "unlocked" | "refundable"
+  filter: "all" | "unlockable" | "locked" | "unlocked" | "refundable" | "new"
   sort: "index" | "shards" | "played" | "unlocked"
 }
 
@@ -94,8 +94,7 @@ export default function PokemonCollection() {
   useEffect(() => {
     if (
       filterState.mode === "pokedex" &&
-      (filterState.filter === "unlockable" ||
-        filterState.filter === "refundable")
+      ["unlockable", "refundable", "new"].includes(filterState.filter)
     ) {
       setFilterState({
         ...filterState,
@@ -141,6 +140,7 @@ export default function PokemonCollection() {
                 | "locked"
                 | "unlocked"
                 | "refundable"
+                | "new"
             })
           }
         >
@@ -150,9 +150,11 @@ export default function PokemonCollection() {
           )}
           <option value={"locked"}>{t("show_locked")}</option>
           <option value={"unlocked"}>{t("show_unlocked")}</option>
-          {filterState.mode !== "pokedex" && (
+          {filterState.mode !== "pokedex" && <>
             <option value={"refundable"}>{t("show_refundable")}</option>
-          )}
+            <option value={"new"}>{t("show_newly_obtained")}</option>
+          </>}
+
         </select>
 
         <select

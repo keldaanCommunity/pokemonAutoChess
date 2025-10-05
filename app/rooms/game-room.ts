@@ -970,11 +970,6 @@ export default class GameRoom extends Room<GameState> {
                 "announcement",
                 `${player.name} won the Victory Road race !`
               )
-            } else {
-              this.presence.publish(
-                "announcement",
-                `${player.name} finished the Victory Road !`
-              )
             }
             player.titles.add(Title.FINISHER)
             fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
