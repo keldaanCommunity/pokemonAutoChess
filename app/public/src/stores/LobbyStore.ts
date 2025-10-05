@@ -32,6 +32,7 @@ export interface IUserLobbyState {
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
   boosterContent: Booster
+  lastBoostersOpened: Booster[]
   suggestions: ISuggestionUser[]
   language: Language
   tournaments: TournamentSchema[]
@@ -42,6 +43,7 @@ const initialState: IUserLobbyState = {
   language: Language.en,
   suggestions: [],
   boosterContent: [],
+  lastBoostersOpened: [],
   messages: [],
   leaderboard: [],
   botLeaderboard: [],
@@ -127,6 +129,10 @@ export const lobbySlice = createSlice({
     },
     setBoosterContent: (state, action: PayloadAction<Booster>) => {
       state.boosterContent = action.payload
+      state.lastBoostersOpened.push([...action.payload])
+    },
+    resetLastBoostersOpened: (state) => {
+      state.lastBoostersOpened = []
     },
     setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {
       state.suggestions = action.payload
@@ -232,6 +238,7 @@ export const lobbySlice = createSlice({
 export const {
   removeMessage,
   setBoosterContent,
+  resetLastBoostersOpened,
   pushMessage,
   setLeaderboard,
   setBotLeaderboard,
