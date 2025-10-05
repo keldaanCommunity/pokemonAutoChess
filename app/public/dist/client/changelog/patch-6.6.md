@@ -51,18 +51,25 @@
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 - Fixed Frost Breath damage: now deals [35, 70, 140] special damage as originally intended
 - Nerf Stealth Rocks (Regirock): special damage 20/40/80 → 50 at all tiers
+- Change Frost Breath: Now deals [35, 70, 140] Special Damage
+- Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
+- Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
 - Change Wood Hammer: Recoil no longer scales on AP
 
 # Changes to Synergies
 
+- Psychic 6 QoL: Unown shops now always offer 5 different types of Unown
+
 # Changes to Items
 
 - New weather rock Odd Stone: counts for 3 towards Murky weather. Under Murky weather, your team gains 10 Luck and -10% negative status duration, and resist to Curse 1 second longer.
+- Nerf Shiny Stone: no longer gives +1 to Light synergy level
 
 # Gameplay
 
 - New weather Murky: reduce Luck by 30 (Ghost are immune), silence duration +30%. Triggered when 8 Ghost Pokémon are on board.
 - New town encounter: Makuhita
+- Pokémons are now automatically placed from the bench onto the board when free spots are available, with smarter positioning: melee Pokémons are placed in the front row, while ranged Pokémons are placed in the back row based on their attack range.
 
 # UI
 
@@ -72,6 +79,7 @@
 - Removed announcements for Victory Road finishers except for the first finisher
 - Clicking on a player in Victory Road leaderboard will now redirect to that player profile
 - Added a "Newly obtained" filter to the Pokémon collection to highlight the Pokémon obtained in the recently opened boosters
+- Added a randomize music button in jukebox
 
 # Bugfix
 
@@ -99,6 +107,8 @@
 - Fix Spicy Extract not scaling on AP
 - Fix Drum Beating accidentally flinching on Drum Roll
 - Fix Swagger description showing 3 seconds of confusion instead of 2
+
+Special thanks to salamander for reporting and working on many of these fixes! 
 
 # Misc
 

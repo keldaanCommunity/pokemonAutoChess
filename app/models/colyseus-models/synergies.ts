@@ -83,9 +83,6 @@ export function computeSynergies(
       if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
       const types: Set<Synergy> = typesPerFamily.get(family)!
       pkm.types.forEach((type) => types.add(type))
-      if (pkm.items.has(Item.SHINY_STONE)) {
-        synergies.set(Synergy.LIGHT, (synergies.get(Synergy.LIGHT) ?? 0) + 1)
-      }
     }
   })
 

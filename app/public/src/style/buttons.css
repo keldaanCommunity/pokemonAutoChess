@@ -173,6 +173,10 @@ button {
   margin-right: 0.25em;
 }
 
+.bubbly > img:first-child:only-child {
+  margin-right: 0;
+}
+
 .bubbly.loading::after {
   content: "";
   position: absolute;

@@ -13963,6 +13963,28 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
   }
 }
 
+export class SoulTrapStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target.
+    const shieldAmount = [25, 50, 108][pokemon.stars - 1] ?? 108
+    const fatigueDuration = Math.round(2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    pokemon.addShield(shieldAmount, pokemon, 0, false)
+    const enemies = board.getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+      .filter(cell => cell.value && cell.value.team !== pokemon.team)
+    enemies.forEach(cell => {
+      const enemy = cell.value!
+      enemy.addPP(-10, pokemon, 1, crit)
+      enemy.status.triggerFatigue(fatigueDuration, enemy)
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14460,5 +14482,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
   [Ability.FIRST_IMPRESSION]: new FirstImpressionStrategy(),
   [Ability.BARED_FANGS]: new BaredFangsStrategy(),
-  [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy()
+  [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy(),
+  [Ability.SOUL_TRAP]: new SoulTrapStrategy()
 }

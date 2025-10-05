@@ -6407,20 +6407,21 @@ export class RotomDrone extends Pokemon {
 
 export class Spiritomb extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.DARK,
+    Synergy.ROCK,
     Synergy.GHOST,
     Synergy.AMORPHOUS
   ])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 22
+  atk = 15
   speed = 36
-  def = 4
-  speDef = 4
-  maxPP = 80
-  range = 2
-  skill = Ability.SHADOW_BALL
+  def = 8
+  speDef = 8
+  maxPP = 108
+  range = 1
+  skill = Ability.SOUL_TRAP
+  passive = Passive.SPIRITOMB
 }
 
 export class Absol extends Pokemon {
@@ -13828,12 +13829,12 @@ export class Ambipom extends Pokemon {
   skill = Ability.TICKLE
 }
 
-export class Deerling extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
+export class DeerlingSpring extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLORA])
   rarity = Rarity.RARE
   additional = true
   stars = 1
-  evolution = Pkm.SAWSBUCK
+  evolution = Pkm.SAWSBUCK_SPRING
   hp = 80
   atk = 8
   speed = 55
@@ -13842,10 +13843,62 @@ export class Deerling extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
 }
 
-export class Sawsbuck extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS])
+export class DeerlingSummer extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.RARE
+  additional = true
+  stars = 1
+  evolution = Pkm.SAWSBUCK_SUMMER
+  hp = 80
+  atk = 8
+  speed = 55
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
+}
+
+export class DeerlingAutumn extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  rarity = Rarity.RARE
+  additional = true
+  stars = 1
+  evolution = Pkm.SAWSBUCK_AUTUMN
+  hp = 80
+  atk = 8
+  speed = 55
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
+}
+
+export class DeerlingWinter extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ICE])
+  rarity = Rarity.RARE
+  additional = true
+  stars = 1
+  evolution = Pkm.SAWSBUCK_WINTER
+  hp = 80
+  atk = 8
+  speed = 55
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
+}
+
+export class SawsbuckSpring extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLORA])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -13857,6 +13910,55 @@ export class Sawsbuck extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
+}
+
+export class SawsbuckSummer extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.RARE
+  additional = true
+  stars = 2
+  hp = 180
+  atk = 22
+  speed = 55
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
+}
+
+export class SawsbuckAutumn extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  rarity = Rarity.RARE
+  additional = true
+  stars = 2
+  hp = 180
+  atk = 22
+  speed = 55
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
+}
+
+export class SawsbuckWinter extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ICE])
+  rarity = Rarity.RARE
+  additional = true
+  stars = 2
+  hp = 180
+  atk = 22
+  speed = 55
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.HORN_LEECH
+  passive = Passive.SEASONAL
 }
 
 export class Patrat extends Pokemon {
@@ -19468,8 +19570,14 @@ export const PokemonClasses: Record<
   [Pkm.URSALUNA_BLOODMOON]: UrsalunaBloodmoon,
   [Pkm.AIPOM]: Aipom,
   [Pkm.AMBIPOM]: Ambipom,
-  [Pkm.DEERLING]: Deerling,
-  [Pkm.SAWSBUCK]: Sawsbuck,
+  [Pkm.DEERLING_SPRING]: DeerlingSpring,
+  [Pkm.DEERLING_SUMMER]: DeerlingSummer,
+  [Pkm.DEERLING_AUTUMN]: DeerlingAutumn,
+  [Pkm.DEERLING_WINTER]: DeerlingWinter,
+  [Pkm.SAWSBUCK_SPRING]: SawsbuckSpring,
+  [Pkm.SAWSBUCK_SUMMER]: SawsbuckSummer,
+  [Pkm.SAWSBUCK_AUTUMN]: SawsbuckAutumn,
+  [Pkm.SAWSBUCK_WINTER]: SawsbuckWinter,
   [Pkm.LICKITUNG]: Lickitung,
   [Pkm.LICKILICKY]: Lickilicky,
   [Pkm.PATRAT]: Patrat,
