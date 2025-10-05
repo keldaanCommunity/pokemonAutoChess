@@ -45,11 +45,10 @@ export default class WanderersManager {
   addWanderingUnown(wanderer: Wanderer) {
     this.addWandererPokemonSprite({
       wanderer,
-      onClick: (wanderer, unownSprite, pointer, tweens) => {
+      onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
         this.displayShardGain([pointer.x, pointer.y], unownSprite.index)
         unownSprite.destroy()
-        tweens.forEach((tween) => tween.destroy())
         return true
       }
     })
@@ -58,19 +57,18 @@ export default class WanderersManager {
   addCatchableWanderer(wanderer: Wanderer) {
     this.addWandererPokemonSprite({
       wanderer,
-      onClick: (wanderer, sprite, pointer, tweens) => {
-        let clicked = false
+      onClick: (wanderer, sprite, pointer) => {
+        let intercepted = false
         if (this.scene.board) {
           if (getFreeSpaceOnBench(this.scene.board.player.board) > 0) {
             this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
             sprite.destroy()
-            tweens.forEach((tween) => tween.destroy())
-            clicked = true
           } else {
             this.scene.board.displayText(pointer.x, pointer.y, t("full"), true)
+            intercepted = true
           }
         }
-        return clicked
+        return !intercepted
       }
     })
   }
@@ -78,7 +76,7 @@ export default class WanderersManager {
   addSableye(wanderer: Wanderer) {
     this.addWandererPokemonSprite({
       wanderer,
-      onClick: (wanderer, sprite, pointer, tweens) => {
+      onClick: (wanderer, sprite) => {
         this.scene.displayMoneyGain(sprite.x, sprite.y, 1)
         this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
         this.scene.animationManager?.animatePokemon(
@@ -86,7 +84,6 @@ export default class WanderersManager {
           PokemonActionState.HURT,
           false
         )
-        tweens.forEach((tween) => tween.destroy())
         this.scene.add.tween({
           targets: [sprite],
           ease: "linear",
@@ -109,8 +106,7 @@ export default class WanderersManager {
     onClick: (
       wanderer: Wanderer,
       pokemon: PokemonSprite,
-      pointer: Phaser.Input.Pointer,
-      tweens: Phaser.Tweens.Tween[]
+      pointer: Phaser.Input.Pointer
     ) => boolean
   }): PokemonSprite {
     let startX = -100,
@@ -203,8 +199,8 @@ export default class WanderersManager {
     sprite.sprite.setInteractive()
     sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       if (clicked) return
-      if ((clicked = onClick(wanderer, sprite, pointer, tweens)))
-        tweens.forEach((tween) => tween.destroy())
+      clicked = onClick(wanderer, sprite, pointer)
+      if (clicked) tweens.forEach((tween) => tween.destroy())
     })
 
     return sprite
