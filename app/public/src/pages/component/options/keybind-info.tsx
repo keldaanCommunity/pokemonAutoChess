@@ -112,6 +112,7 @@ export default function KeybindInfo() {
         </dt>
         <dd>{t("key_desc_avatar_show_emote")} 1..9</dd>
       </dl>
+      <p>{t("click_on_keybind_to_change_it")}</p>
     </div>
   )
 }

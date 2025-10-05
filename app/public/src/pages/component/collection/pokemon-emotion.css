@@ -28,6 +28,20 @@
   filter: grayscale(0) contrast(0.8);
 }
 
+.pokemon-emotion.new::before {
+  content: "NEW";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  padding: 0px 4px;
+  border-radius: 8px;
+  font-size: 0.5em;
+  z-index: 1;
+}
+
 .pokemon-emotion.selected.my-box {
   background-color: var(--color-bg-accent);
 }

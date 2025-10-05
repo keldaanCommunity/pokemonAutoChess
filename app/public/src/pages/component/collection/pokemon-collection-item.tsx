@@ -10,6 +10,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
+import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import { CollectionFilterState } from "./pokemon-collection"
@@ -22,6 +23,10 @@ export default function PokemonCollectionItem(props: {
   filterState: CollectionFilterState
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
+  const lastBoostersOpened = useAppSelector(
+    (state) => state.lobby.lastBoostersOpened
+  )
+
   if (
     props.index in PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX === false ||
     PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index].includes(1) === false
@@ -41,6 +46,10 @@ export default function PokemonCollectionItem(props: {
         ? shinyEmotions?.length > 0
         : emotions?.length > 0 || shinyEmotions?.length > 0
 
+  const isNew = lastBoostersOpened.some((booster) =>
+    booster.some((card) => card.name === props.name && card.new)
+  )
+
   const availableEmotions = Object.values(Emotion).filter(
     (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
   )
@@ -48,6 +57,8 @@ export default function PokemonCollectionItem(props: {
   const boosterCost = BoosterPriceByRarity[rarity]
   if (props.filterState.filter === "refundable" && dust < boosterCost)
     return null
+
+  if (props.filterState.filter === "new" && !isNew) return null
 
   const canUnlock =
     props.filterState.mode !== "pokedex" &&
@@ -69,7 +80,9 @@ export default function PokemonCollectionItem(props: {
     <div
       className={cc("my-box", "clickable", "pokemon-collection-item", {
         unlocked: isUnlocked,
-        unlockable: canUnlock
+        unlockable: canUnlock,
+        new: isNew,
+        shimmer: isNew
       })}
       onClick={() => {
         props.setPokemon(props.name)
