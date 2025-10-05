@@ -49,6 +49,8 @@
 - Comfey is now always held by the strongest ally among the nearest allies with a free item slot
 - Change Plasma Fist: 25% heal from damage before armor reduction -> 30% heal from damage dealt after armor reduction
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
+- Fixed Frost Breath damage: now deals [35, 70, 140] special damage as originally intended
+- Nerf Stealth Rocks (Regirock): special damage 20/40/80 → 50 at all tiers
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
 - Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
 - Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)

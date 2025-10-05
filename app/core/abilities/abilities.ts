@@ -6710,7 +6710,7 @@ export class StealthRocksStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const cells = board.getCellsInFront(pokemon, target, pokemon.stars)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = 50
 
     cells.forEach((cell) => {
       board.addBoardEffect(

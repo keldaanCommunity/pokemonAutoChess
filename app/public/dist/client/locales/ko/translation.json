@@ -1670,7 +1670,7 @@
 		"ASSURANCE": "[25,50,100,SP] SPECIAL를 가한다. 자신의 현재 HP가 50% 미만이면 데미지가 두 배가 된다.",
 		"BRAVE_BIRD": "대상과 함께 날며 [30,60,90,SP] SPECIAL을 입힌다.",
 		"MAGICAL_LEAF": "사용자는 가장 먼 대상을 쫓는 잎사귀를 뿌려 경로에 있는 모든 적에게  [10,20,40,SP] SPECIAL 과 3초 동안 ARMOR_BREAK을 부여한다.",
-		"STEALTH_ROCKS": "전방 [1,2,3]칸 반경 내에 날카로운 돌을 놓아 [20,40,80,SP] SPECIAL를 입힌다. 돌은 필드에 남아 초당 10의 PHYSICAL 를 입히고 WOUND 를 부여한다. 단, ROCK 은 데미지를 입지 않는다.",
+		"STEALTH_ROCKS": "전방 [1,2,3]칸 반경 내에 날카로운 돌을 놓아 [50,SP] SPECIAL를 입힌다. 돌은 필드에 남아 초당 10의 PHYSICAL 를 입히고 WOUND 를 부여한다. 단, ROCK 은 데미지를 입지 않는다.",
 		"TAIL_GLOW": "적에게 [30,SP] SPECIAL 를 부여하고 자신의 AP를 50 증가시킨다.",
 		"STRUGGLE_BUG": "적에게 [30,SP] SPECIAL 를 부여하고 AP를 50 감소시킨다.",
 		"PRISMATIC_LASER": "사용자는 직선으로 큰 플라즈마를 발사하여 [60,SP]의 SPECIAL 을 입히고 적중한 적을 밀어낸다.",
