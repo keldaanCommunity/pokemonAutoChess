@@ -81,6 +81,7 @@
 - Clicking on a player in Victory Road leaderboard will now redirect to that player profile
 - Added a "Newly obtained" filter to the Pokémon collection to highlight the Pokémon obtained in the recently opened boosters
 - Added a randomize music button in jukebox
+- Added filtering and searching to game rooms list. Gamemode tabs now show games in progress instead of open rooms.
 
 # Bugfix
 

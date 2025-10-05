@@ -3433,6 +3433,8 @@
 	"available_rooms": "Open rooms",
 	"new_game": "New Game",
 	"in_game": "In Game",
+	"games_in_progress_one": "{{count}} game in progress",
+	"games_in_progress_other": "{{count}} games in progress",
 	"tournament": "Tournament",
 	"events": "Events",
 	"custom_room": "Custom room",
