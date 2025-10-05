@@ -2634,7 +2634,7 @@
 		"GOOD_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémon WATER rares ainsi que des $t(pkm.FEEBAS).",
 		"SUPER_ROD": "Après chaque tour PvP, pêche un Pokémon qui est ajouté à un emplacement libre de votre banc. Peut attraper des Pokémon WATER épiques ainsi que des $t(pkm.WISHIWASHI).",
 		"DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 200%.",
-		"SHINY_STONE": "Le porteur gagne le type LIGHT et augmente de +1 la synergie LIGHT. Invoque un second spot de lumière sur la case du porteur.",
+		"SHINY_STONE": "Le porteur gagne le type LIGHT. Un second spot de lumière est projeté sur la case du porteur au début du combat.",
 		"RARE_CANDY": "Fait évoluer immédiatement un Pokémon. Ne peut être donné qu'à un Pokémon pouvant encore évoluer, et ramène son prix de vente au tier précédent.",
 		"EVIOLITE": "Le porteur gagne beaucoup de bonus statistiques mais son espèce ne peut plus évoluer. Ne peut être donné qu'à un Pokémon pouvant encore évoluer.",
 		"WHITE_FLUTE": "Invoque 3 Pokémon WILD autour du porteur au début du combat. La rareté et le tier augmentent de tour en tour.",
