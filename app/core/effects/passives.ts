@@ -23,7 +23,7 @@ import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
-import { min } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
@@ -397,7 +397,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-                board.columns * pokemon.positionY + y + pokemon.positionX + x
+              board.columns * pokemon.positionY + y + pokemon.positionX + x
               ]
           })
         }
@@ -1056,6 +1056,25 @@ export const PassiveEffects: Partial<
         const delta = basculinWithMostAttack.atk - pokemon.atk
         pokemon.addAttack(delta, pokemon, 0, false)
       }
+    })
+  ],
+  [Passive.SPIRITOMB]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      if (!entity.player) return
+      const nbOddKeystones = max(3)(entity.player.items.filter(i => i === Item.ODD_KEYSTONE).length)
+      if (nbOddKeystones === 0) return
+      const shieldAmount = nbOddKeystones * 10
+      const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+        entity.broadcastAbility({ skill: "WISP", positionX: entity.positionX, positionY: entity.positionY, targetX: pokemon.positionX, targetY: pokemon.positionY })
+        entity.commands.push(new DelayedCommand(() => {
+          entity.addShield(shieldAmount, entity, 0, false)
+        }, 1000))
+      })
+      simulation.board.cells.forEach((pkm) => {
+        if (pkm && pkm !== entity) {
+          pkm.effectsSet.add(onKOEffect)
+        }
+      })
     })
   ]
 }
