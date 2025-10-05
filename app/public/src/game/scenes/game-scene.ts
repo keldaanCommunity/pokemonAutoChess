@@ -44,6 +44,7 @@ import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
+import { cyclePlayers, playerClick } from "../../pages/game"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
@@ -259,6 +260,18 @@ export default class GameScene extends Scene {
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
       console.log("toggle camera input")
       savePreferences({ cameraLocked: !preference("cameraLocked") })
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.prev_player, () => {
+      cyclePlayers(-1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
+      cyclePlayers(1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+      playerClick(this.uid!)
     })
   }
 
