@@ -106,18 +106,15 @@ export function getGameScene(): GameScene | undefined {
 }
 
 export function cyclePlayers(amt: number) {
-  logger.info(`cycling players by ${amt}`)
   const players = values(gameContainer.room?.state.players)
-  logger.info(values(gameContainer.room?.state.players))
-  let nextPlayer = players.findIndex((p) => p === gameContainer.player) + amt
-  logger.info(nextPlayer)
-  while (nextPlayer >= players.length) {
-    nextPlayer -= players.length
-  }
-  while (nextPlayer < 0) {
-    nextPlayer += players.length
-  }
-  playerClick(players[nextPlayer].id)
+  playerClick(
+    players[
+      (players.findIndex((p) => p === gameContainer.player) +
+        amt +
+        players.length) %
+        players.length
+    ].id
+  )
 }
 
 export function playerClick(id: string) {
