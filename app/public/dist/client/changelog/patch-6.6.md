@@ -65,7 +65,8 @@
 # UI
 
 - Gems icons have been reworked to be more clear about their synergy. Thanks to Nitpicky
-- Added a new keybinding to lock/unlock camera movement (default: L)
+- Ground fully dug holes in a row are nos displayed as trenches instead of individual holes
+- Added a new keybindings to lock/unlock camera movement (default: L)
 - Added current amount of dragon stars in dragon synergy description
 - Removed announcements for Victory Road finishers except for the first finisher
 - Clicking on a player in Victory Road leaderboard will now redirect to that player profile
