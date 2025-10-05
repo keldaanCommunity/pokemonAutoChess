@@ -313,9 +313,9 @@ export default class Shop {
       // Unown shop
       player.shopFreeRolls += 1
       const unowns = getUnownsPoolPerStage(state.stageLevel)
-      let chosenUnowns : Pkm[] = []
+      const chosenUnowns: Pkm[] = []
       for (let i = 0; i < SHOP_SIZE; i++) {
-        let availableUnowns = unowns.filter(u => !chosenUnowns.includes(u))
+        const availableUnowns = unowns.filter((u) => !chosenUnowns.includes(u))
         const randomUnown = pickRandomIn(availableUnowns)
         chosenUnowns.push(randomUnown)
         player.shop[i] = randomUnown

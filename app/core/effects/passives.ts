@@ -397,7 +397,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-              board.columns * pokemon.positionY + y + pokemon.positionX + x
+                board.columns * pokemon.positionY + y + pokemon.positionX + x
               ]
           })
         }
@@ -1061,14 +1061,24 @@ export const PassiveEffects: Partial<
   [Passive.SPIRITOMB]: [
     new OnSimulationStartEffect(({ entity, simulation }) => {
       if (!entity.player) return
-      const nbOddKeystones = max(3)(entity.player.items.filter(i => i === Item.ODD_KEYSTONE).length)
+      const nbOddKeystones = max(3)(
+        entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
+      )
       if (nbOddKeystones === 0) return
       const shieldAmount = nbOddKeystones * 10
       const onKOEffect = new OnDeathEffect(({ pokemon }) => {
-        entity.broadcastAbility({ skill: "WISP", positionX: entity.positionX, positionY: entity.positionY, targetX: pokemon.positionX, targetY: pokemon.positionY })
-        entity.commands.push(new DelayedCommand(() => {
-          entity.addShield(shieldAmount, entity, 0, false)
-        }, 1000))
+        entity.broadcastAbility({
+          skill: "WISP",
+          positionX: entity.positionX,
+          positionY: entity.positionY,
+          targetX: pokemon.positionX,
+          targetY: pokemon.positionY
+        })
+        entity.commands.push(
+          new DelayedCommand(() => {
+            entity.addShield(shieldAmount, entity, 0, false)
+          }, 1000)
+        )
       })
       simulation.board.cells.forEach((pkm) => {
         if (pkm && pkm !== entity) {

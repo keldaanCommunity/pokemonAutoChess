@@ -150,11 +150,12 @@ export default function PokemonCollection() {
           )}
           <option value={"locked"}>{t("show_locked")}</option>
           <option value={"unlocked"}>{t("show_unlocked")}</option>
-          {filterState.mode !== "pokedex" && <>
-            <option value={"refundable"}>{t("show_refundable")}</option>
-            <option value={"new"}>{t("show_newly_obtained")}</option>
-          </>}
-
+          {filterState.mode !== "pokedex" && (
+            <>
+              <option value={"refundable"}>{t("show_refundable")}</option>
+              <option value={"new"}>{t("show_newly_obtained")}</option>
+            </>
+          )}
         </select>
 
         <select

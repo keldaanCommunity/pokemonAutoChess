@@ -155,7 +155,11 @@ export default class Player extends Schema implements IPlayer {
   hasLeftGame: boolean = false
   bonusSynergies: Map<Synergy, number> = new Map<Synergy, number>()
   pokemonsPlayed: Set<Pkm> = new Set<Pkm>()
-  pokemonsTrainingInDojo: { pokemon: Pokemon; returnStage: number; ticketLevel: number }[] = []
+  pokemonsTrainingInDojo: {
+    pokemon: Pokemon
+    returnStage: number
+    ticketLevel: number
+  }[] = []
 
   constructor(
     id: string,
