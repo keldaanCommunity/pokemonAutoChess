@@ -3793,6 +3793,7 @@
 	"key_desc_avatar_anim": "Play avatar animation",
 	"key_desc_avatar_emotes": "Toggle emote menu",
 	"key_desc_avatar_show_emote": "Trigger emote",
+	"click_on_keybind_to_change_it": "Click on a keybinding if you want to reassign it",
 	"gadgets": "Gadgets",
 	"gadgets_unlocked": "{{count}}/{{total}} gadgets unlocked",
 	"gadget": {
