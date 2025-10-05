@@ -53,6 +53,9 @@
 
 # Changes to Synergies
 
+- Buff Ground 8: +5 → +8 Attack when your half of the board is fully dug
+- Pokerus Vial can no longer be found buried in the ground
+
 # Changes to Items
 
 - New weather rock Odd Stone: counts for 3 towards Murky weather. Under Murky weather, your team gains 10 Luck and -10% negative status duration, and resist to Curse 1 second longer.

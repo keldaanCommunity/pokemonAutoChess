@@ -2201,7 +2201,7 @@
 		"TILLER": "Gagne de +1 à +5 DEF et SPE_DEF et +3 ATK à profondeur max",
 		"DIGGER": "Gagne de +2 à +10 DEF et SPE_DEF et +5 ATK à profondeur max",
 		"DRILLER": "Gagne de +3 à +15 DEF et SPE_DEF et +8 ATK à profondeur max",
-		"DEEP_MINER": "Gagne +5 DEF et SPE_DEF pour chaque rangée totalement creusée sur votre terrain et +5 ATK lorsque tout le plateau est entièrement creusé",
+		"DEEP_MINER": "Gagne +5 DEF et SPE_DEF pour chaque rangée totalement creusée sur votre terrain et +8 ATK lorsque tout le plateau est entièrement creusé",
 		"POISONOUS": "[30,LK]% de chance d'infliger POISONNED",
 		"VENOMOUS": "[60,LK]% de chance d'infliger POISONNED. Cumuls max de POISONNED +1",
 		"TOXIC": "[100,LK]% de chance d'infliger POISONNED. Cumuls max de POISONNED +2",

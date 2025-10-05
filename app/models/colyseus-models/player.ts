@@ -736,7 +736,7 @@ function initBuriedItems() {
 
   // 1 precious (artificial item, treasure box, big nugget)
   buriedItems[7] = chance(1 / 2)
-    ? pickRandomIn(ArtificialItems)
+    ? pickRandomIn(ArtificialItems.filter((i) => i !== Item.POKERUS_VIAL))
     : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
 
   shuffleArray(buriedItems)

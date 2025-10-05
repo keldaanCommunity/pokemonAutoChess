@@ -2133,7 +2133,7 @@
 		"TILLER": "Erhalte von +1 zu +5 DEF und SPE_DEF, zusätzlich +3 ATK bei maximaler Tiefe.",
 		"DIGGER": "Erhalte von +2 zu +10 DEF und SPE_DEF, zusätzlich +5 ATK bei maximaler Tiefe.",
 		"DRILLER": "Erhalte von +3 zu +15 DEF und SPE_DEF, zusätlich +8 ATK bei maximaler Tiefe.",
-		"DEEP_MINER": "Erhalte +5 extra DEF und SPE_DEF für jede komplett ausgegrabene Reihe auf deinem Feld und +5 ATK wenn deine Hälte des Feldes komplett ausgegraben ist.",
+		"DEEP_MINER": "Erhalte +5 extra DEF und SPE_DEF für jede komplett ausgegrabene Reihe auf deinem Feld und +8 ATK wenn deine Hälte des Feldes komplett ausgegraben ist.",
 		"POISONOUS": "Angriffe haben 30% Chance auf POISONNED",
 		"VENOMOUS": "Angriffe haben 60% Chance auf POISONNED. Max. Stapel von POISONNED +1",
 		"TOXIC": "Angriffe haben 100% Chance auf POISONNED. Max. Stapel von POISONNED +2",
