@@ -73,6 +73,7 @@
 - Removed announcements for Victory Road finishers except for the first finisher
 - Clicking on a player in Victory Road leaderboard will now redirect to that player profile
 - Added a "Newly obtained" filter to the Pokémon collection to highlight the Pokémon obtained in the recently opened boosters
+- Added a randomize music button in jukebox
 
 # Bugfix
 
@@ -100,6 +101,8 @@
 - Fix Spicy Extract not scaling on AP
 - Fix Drum Beating accidentally flinching on Drum Roll
 - Fix Swagger description showing 3 seconds of confusion instead of 2
+
+Special thanks to salamander for reporting and working on many of these fixes! 
 
 # Misc
 
