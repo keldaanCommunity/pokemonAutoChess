@@ -1828,7 +1828,7 @@
 		"ASSURANCE": "Deal [25,50,100,SP] SPECIAL to the target. The damage is doubled if the user has less than 50% HP.",
 		"BRAVE_BIRD": "Fly away with the target dealing [30,60,90,SP] SPECIAL.",
 		"MAGICAL_LEAF": "The user scatters curious leaves that chase the farthest target, dealing [10,20,40,SP] SPECIAL and inflicting ARMOR_BREAK for 3 seconds to all enemy Pokémon in its path.",
-		"STEALTH_ROCKS": "Lay sharp stones within a [1,2,3] tile CONE, dealing [20,40,80,SP] SPECIAL to any enemy Pokémon in the area. The stones remain on the battlefield, dealing 10 PHYSICAL per second and WOUND non ROCK enemy Pokémon that walk on it.",
+		"STEALTH_ROCKS": "Lay sharp stones within a [1,2,3] tile CONE, dealing [50,SP] SPECIAL to any enemy Pokémon in the area. The stones remain on the battlefield, dealing 10 PHYSICAL per second and WOUND non ROCK enemy Pokémon that walk on it.",
 		"TAIL_GLOW": "Deal [30,SP] SPECIAL to ADJACENT enemy Pokémon and increase the user's AP by 50.",
 		"STRUGGLE_BUG": "Deal [30,SP] SPECIAL to ADJACENT enemy Pokémon and reduce their AP by 50.",
 		"PRISMATIC_LASER": "The user shoots a 3-tile wide prismatic laser in a vertical straight line, dealing [60,SP] SPECIAL and pushing any enemy in its path.",

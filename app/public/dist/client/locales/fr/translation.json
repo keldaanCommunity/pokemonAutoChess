@@ -1816,7 +1816,7 @@
 		"ASSURANCE": "Inflige [25,50,100,SP] SPECIAL à la cible. Dégâts doublés si le lanceur a moins de 50% de ses HP.",
 		"BRAVE_BIRD": "S'envole au loin en emportant sa cible avec lui et lui infligeant [30,60,90,SP] SPECIAL.",
 		"MAGICAL_LEAF": "Disperse des feuilles magiques qui poursuivent la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et ARMOR_BREAK pendant 3 secondes à tous les ennemis sur leur chemin.",
-		"STEALTH_ROCKS": "Lance des pierres pointues dans un CONE de [1,2,3] cases, infligeant [20,40,80,SP] SPECIAL. Les pierres restent sur le champ de bataille et infligent 10 PHYSICAL par seconde et WOUND aux ennemis qui marchent dessus, excepté les Pokémon ROCK.",
+		"STEALTH_ROCKS": "Lance des pierres pointues dans un CONE de [1,2,3] cases, infligeant [50,SP] SPECIAL. Les pierres restent sur le champ de bataille et infligent 10 PHYSICAL par seconde et WOUND aux ennemis qui marchent dessus, excepté les Pokémon ROCK.",
 		"TAIL_GLOW": "Inflige [30,SP] SPECIAL aux ennemis ADJACENT et augmente la AP du lanceur de 50.",
 		"STRUGGLE_BUG": "Inflige [30,SP] SPECIAL aux ennemis ADJACENT et réduit leur AP de 50.",
 		"PRISMATIC_LASER": "Envoie un laser prismatique dans une large ligne droite, infligeant [60,SP] SPECIAL et déplaçant tous les ennemis touchés.",

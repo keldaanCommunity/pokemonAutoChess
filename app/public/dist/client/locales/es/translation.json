@@ -1731,7 +1731,7 @@
 		"ASSURANCE": "Inflige [25,50,100,SP] de SPECIAL. Hace el doble de daño y el usuario esta por debajo de 50% HP",
 		"BRAVE_BIRD": "Vuela en el aire con su objetivo causándole [30,60,90,SP] de SPECIAL",
 		"MAGICAL_LEAF": "El usuario lanza una extrañas hojas al enemigo mas lejano, infligiendo [10,20,40,SP] de SPECIAL y ARMOR_BREAK por 3 segundos a los Pokémon que estén en su camino",
-		"STEALTH_ROCKS": "Despliega una capa de rocas afiladas alrededor, causando [20,40,80,SP] de SPECIAL. Las rocas se mantienen en el campo, causando 10 de PHYSICAL por segundo y dejando WOUND a los oponentes que caminen sobre ellas si no son ROCK.",
+		"STEALTH_ROCKS": "Despliega una capa de rocas afiladas alrededor, causando [50,SP] de SPECIAL. Las rocas se mantienen en el campo, causando 10 de PHYSICAL por segundo y dejando WOUND a los oponentes que caminen sobre ellas si no son ROCK.",
 		"TAIL_GLOW": "Inflige [30,SP] de SPECIAL a enemigos adyacentes y aumenta el AP del usuario en 50",
 		"STRUGGLE_BUG": "Inflige [30,SP] de SPECIAL a enemigos adyacentes y reduce sus AP en 50",
 		"PRISMATIC_LASER": "El usuario lanza un láser prismático en una gran linea recta, causando [60,SP] de SPECIAL y desplazando a los enemigos que golpea.",
