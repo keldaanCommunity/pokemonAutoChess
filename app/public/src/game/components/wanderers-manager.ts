@@ -21,7 +21,6 @@ const DEFAULT_WANDERER_SPEED = 0.25
 /*
 List of wanderers:
 - Unowns: give shard when caught
-- Sableye: from town encounter, steal an item
 - Others: from Gotta catch em all scribble, added to bench when caught
 */
 
