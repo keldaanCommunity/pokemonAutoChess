@@ -452,22 +452,29 @@ export default class BoardManager {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
     for (let row = 0; row < BOARD_HEIGHT / 2; row++) {
-      const rowFullyDug = this.player.groundHoles.slice(row * BOARD_WIDTH, (row + 1) * BOARD_WIDTH).every((depth) => depth === 5)
-      if (rowFullyDug) {
-        const [x, y] = transformBoardCoordinates(3.5, row + 1)
-        const trench = this.scene.add.sprite(x, y + 10, "ground_holes", "trench.png")
-          .setScale(2)
-          .setAlpha(0.9)
-          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        this.groundHoles.push(trench)
-      } else {
-        for (let col = 0; col < BOARD_WIDTH; col++) {
-          const index = col + row * BOARD_WIDTH
+      for (let col = 0; col < BOARD_WIDTH; col++) {
+        let trenchWidth = 0
+        const index = col + row * BOARD_WIDTH
+        while (col + trenchWidth < BOARD_WIDTH && this.player.groundHoles[index + trenchWidth] === 5) {
+          trenchWidth++
+        }
+        if (trenchWidth >= 2) {
+          // trench
+          const [x, y] = transformBoardCoordinates(col, row + 1)
+          const trench = this.scene.add.sprite(x - 44, y + 10, "ground_holes", `trench${trenchWidth}.png`)
+            .setOrigin(0, 0.5)
+            .setScale(2)
+            .setAlpha(0.9)
+            .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+          this.groundHoles.push(trench)
+          col += trenchWidth - 1
+        } else {
+          // single hole          
           const hole = this.player.groundHoles[index]
           if (hole > 0) {
             const [x, y] = transformBoardCoordinates(col, row + 1)
             const groundHole = this.scene.add
-              .sprite(x, y + 10, "ground_holes", `00${hole - 1}.png`)
+              .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
               .setScale(2)
               .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
             this.groundHoles.push(groundHole)

@@ -4,13 +4,13 @@
 			"image": "ground_holes.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 561,
+				"w": 1823,
 				"h": 32
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "trench.png",
+					"filename": "trench8.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,28 +31,133 @@
 					}
 				},
 				{
-					"filename": "003.png",
+					"filename": "trench7.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 40,
+						"w": 332,
 						"h": 30
 					},
 					"spriteSourceSize": {
 						"x": 1,
 						"y": 0,
-						"w": 38,
-						"h": 29
+						"w": 330,
+						"h": 30
 					},
 					"frame": {
 						"x": 382,
 						"y": 1,
-						"w": 38,
-						"h": 29
+						"w": 330,
+						"h": 30
 					}
 				},
 				{
-					"filename": "004.png",
+					"filename": "trench6.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 282,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 281,
+						"h": 30
+					},
+					"frame": {
+						"x": 714,
+						"y": 1,
+						"w": 281,
+						"h": 30
+					}
+				},
+				{
+					"filename": "trench5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 233,
+						"h": 30
+					},
+					"frame": {
+						"x": 997,
+						"y": 1,
+						"w": 233,
+						"h": 30
+					}
+				},
+				{
+					"filename": "trench4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 186,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 185,
+						"h": 30
+					},
+					"frame": {
+						"x": 1232,
+						"y": 1,
+						"w": 185,
+						"h": 30
+					}
+				},
+				{
+					"filename": "trench3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 138,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 136,
+						"h": 30
+					},
+					"frame": {
+						"x": 1419,
+						"y": 1,
+						"w": 136,
+						"h": 30
+					}
+				},
+				{
+					"filename": "trench2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 90,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 87,
+						"h": 30
+					},
+					"frame": {
+						"x": 1557,
+						"y": 1,
+						"w": 87,
+						"h": 30
+					}
+				},
+				{
+					"filename": "hole5.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -66,14 +171,35 @@
 						"h": 28
 					},
 					"frame": {
-						"x": 422,
+						"x": 1646,
 						"y": 1,
 						"w": 38,
 						"h": 28
 					}
 				},
 				{
-					"filename": "002.png",
+					"filename": "hole4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 40,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 1,
+						"w": 36,
+						"h": 28
+					},
+					"frame": {
+						"x": 1686,
+						"y": 1,
+						"w": 36,
+						"h": 28
+					}
+				},
+				{
+					"filename": "hole3.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -87,14 +213,14 @@
 						"h": 24
 					},
 					"frame": {
-						"x": 462,
+						"x": 1724,
 						"y": 1,
 						"w": 36,
 						"h": 24
 					}
 				},
 				{
-					"filename": "001.png",
+					"filename": "hole2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -108,14 +234,14 @@
 						"h": 20
 					},
 					"frame": {
-						"x": 500,
+						"x": 1762,
 						"y": 1,
 						"w": 32,
 						"h": 20
 					}
 				},
 				{
-					"filename": "000.png",
+					"filename": "hole1.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -129,7 +255,7 @@
 						"h": 15
 					},
 					"frame": {
-						"x": 534,
+						"x": 1796,
 						"y": 1,
 						"w": 26,
 						"h": 15
@@ -141,6 +267,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:79c89d0aa83da139a3c340f637c3729c:4ee9f0e91cd411f235d88cbf1b8801ef:3ce547705b45e76808128d752f1cf5cd$"
+		"smartupdate": "$TexturePacker:SmartUpdate:97d04cd08f427cc8dd15b0aa1accc217:b7cfd74d48665b2a41e8005583f4be54:3ce547705b45e76808128d752f1cf5cd$"
 	}
 }
