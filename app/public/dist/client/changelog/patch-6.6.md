@@ -50,6 +50,7 @@
 - Change Plasma Fist: 25% heal from damage before armor reduction -> 30% heal from damage dealt after armor reduction
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
+- Change Wood Hammer: Recoil no longer scales on AP
 
 # Changes to Synergies
 
@@ -67,8 +68,11 @@
 # UI
 
 - Gems icons have been reworked to be more clear about their synergy. Thanks to Nitpicky
-- Adding a new keybinding to lock/unlock camera movement (default: L)
+- Added a new keybinding to lock/unlock camera movement (default: L)
 - Added current amount of dragon stars in dragon synergy description
+- Removed announcements for Victory Road finishers except for the first finisher
+- Clicking on a player in Victory Road leaderboard will now redirect to that player profile
+- Added a "Newly obtained" filter to the Pokémon collection to highlight the Pokémon obtained in the recently opened boosters
 
 # Bugfix
 
