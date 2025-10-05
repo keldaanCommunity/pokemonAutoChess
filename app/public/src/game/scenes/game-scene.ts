@@ -28,6 +28,7 @@ import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
+import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
 import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { preference, savePreferences } from "../../preferences"
@@ -44,7 +45,6 @@ import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
-import { cyclePlayers, playerClick } from "../../pages/game"
 
 export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()

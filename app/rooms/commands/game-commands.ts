@@ -214,10 +214,7 @@ export class OnPokemonCatchCommand extends Command<
     if (!player || !player.alive || !wanderer) return
     this.state.wanderers.delete(id)
 
-    if (wanderer.type === WandererType.SABLEYE) {
-      // prevents sableye from stealing items and give 1 gold
-      player.addMoney(1, true, null)
-    } else if (wanderer.type === WandererType.UNOWN) {
+    if (wanderer.type === WandererType.UNOWN) {
       const unownIndex = PkmIndex[wanderer.pkm]
       if (client.auth) {
         const DUST_PER_ENCOUNTER = 50
