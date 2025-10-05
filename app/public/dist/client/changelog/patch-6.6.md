@@ -59,6 +59,7 @@
 # Changes to Items
 
 - New weather rock Odd Stone: counts for 3 towards Murky weather. Under Murky weather, your team gains 10 Luck and -10% negative status duration, and resist to Curse 1 second longer.
+- Nerf Shiny Stone: no longer gives +1 to Light synergy level
 
 # Gameplay
 

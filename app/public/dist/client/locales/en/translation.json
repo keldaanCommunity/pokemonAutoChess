@@ -2628,7 +2628,7 @@
 		"GOOD_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch rare WATER Pokémon as well as $t(pkm.FEEBAS).",
 		"SUPER_ROD": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémon as well as $t(pkm.WISHIWASHI).",
 		"DYNAMAX_BAND": "At the start of the fight, raise max HP by 200%.",
-		"SHINY_STONE": "Gives LIGHT synergy and +1 to LIGHT synergy level. Spawn a second light spot on the holder's tile.",
+		"SHINY_STONE": "Gives LIGHT synergy. A second spotlight is projected onto the holder's tile at the start of the fight.",
 		"RARE_CANDY": "Immediately make a Pokémon evolve. Can only be given to Pokémon that can evolve, and reduce its sell price to its previous tier.",
 		"EVIOLITE": "Holder gets a bunch of stats, but can no longer evolve. Can only be given to non-fully evolved Pokémon.",
 		"WHITE_FLUTE": "Spawn 3 WILD Pokémon around the holder at the start of the fight. Rarity and tier increase with stage level.",
