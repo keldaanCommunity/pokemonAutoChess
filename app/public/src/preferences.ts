@@ -11,6 +11,9 @@ export type Keybindings = {
   camera_lock: string
   switch: string
   emote: string
+  prev_player: string
+  next_player: string
+  board_return: string
 }
 export interface IPreferencesState {
   musicVolume: number
@@ -50,7 +53,10 @@ const defaultPreferences: IPreferencesState = {
     lock: "R",
     camera_lock: "L",
     switch: "SPACE",
-    emote: "A"
+    emote: "A",
+    prev_player: "PAGEUP",
+    next_player: "PAGEDOWN",
+    board_return: "HOME"
   }
 }
 

@@ -5109,15 +5109,51 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.WILD_MELEE
   },
-  [Pkm.DEERLING]: {
+  [Pkm.DEERLING_SPRING]: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE
   },
-  [Pkm.SAWSBUCK]: {
+  [Pkm.DEERLING_SUMMER]: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.DEERLING_AUTUMN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.DEERLING_WINTER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.RearUp,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.SAWSBUCK_SPRING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.SAWSBUCK_SUMMER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.SAWSBUCK_AUTUMN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.SAWSBUCK_WINTER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE
   },
