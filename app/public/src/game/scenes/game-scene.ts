@@ -189,6 +189,7 @@ export default class GameScene extends Scene {
     )
 
     this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+      if (preference("cameraLocked")) return
       this.cameras.main.zoom = clamp(
         this.cameras.main.zoom - Math.sign(deltaY) * 0.1,
         1,
