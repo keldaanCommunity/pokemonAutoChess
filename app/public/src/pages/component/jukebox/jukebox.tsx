@@ -102,7 +102,7 @@ export default function Jukebox(props: {
           ))}
         </select>
         <button className="bubbly blue" onClick={() => randomizeMusic()} title={t("random_music")}>
-          <img src="/assets/ui/randomize.svg" />
+          <img src="/assets/ui/randomize.svg" style={{ marginRight: 0 }} />
         </button>
       </div>
 
