@@ -45,11 +45,11 @@ export default class WanderersManager {
   addWanderingUnown(wanderer: Wanderer) {
     this.addWandererPokemonSprite({
       wanderer,
-      onClick: (wanderer, unownSprite, pointer, tween) => {
+      onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
         this.displayShardGain([pointer.x, pointer.y], unownSprite.index)
         unownSprite.destroy()
-        tween.destroy()
+        return true
       }
     })
   }
@@ -57,17 +57,18 @@ export default class WanderersManager {
   addCatchableWanderer(wanderer: Wanderer) {
     this.addWandererPokemonSprite({
       wanderer,
-      onClick: (wanderer, sprite, pointer, tween) => {
-        if (
-          this.scene.board &&
-          getFreeSpaceOnBench(this.scene.board.player.board) > 0
-        ) {
-          this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
-          sprite.destroy()
-          tween.destroy()
-        } else if (this.scene.board) {
-          this.scene.board.displayText(pointer.x, pointer.y, t("full"), true)
+      onClick: (wanderer, sprite, pointer) => {
+        let intercepted = false
+        if (this.scene.board) {
+          if (getFreeSpaceOnBench(this.scene.board.player.board) > 0) {
+            this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
+            sprite.destroy()
+          } else {
+            this.scene.board.displayText(pointer.x, pointer.y, t("full"), true)
+            intercepted = true
+          }
         }
+        return !intercepted
       }
     })
   }
@@ -75,7 +76,7 @@ export default class WanderersManager {
   addSableye(wanderer: Wanderer) {
     this.addWandererPokemonSprite({
       wanderer,
-      onClick: (wanderer, sprite, pointer) => {
+      onClick: (wanderer, sprite) => {
         this.scene.displayMoneyGain(sprite.x, sprite.y, 1)
         this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
         this.scene.animationManager?.animatePokemon(
@@ -92,6 +93,7 @@ export default class WanderersManager {
             sprite.destroy()
           }
         })
+        return true
       }
     })
   }
@@ -104,9 +106,8 @@ export default class WanderersManager {
     onClick: (
       wanderer: Wanderer,
       pokemon: PokemonSprite,
-      pointer: Phaser.Input.Pointer,
-      tween: Phaser.Tweens.Tween
-    ) => void
+      pointer: Phaser.Input.Pointer
+    ) => boolean
   }): PokemonSprite {
     let startX = -100,
       startY = 350,
@@ -198,9 +199,8 @@ export default class WanderersManager {
     sprite.sprite.setInteractive()
     sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       if (clicked) return
-      clicked = true
-      tweens.forEach((tween) => tween.destroy())
-      onClick(wanderer, sprite, pointer, tween)
+      clicked = onClick(wanderer, sprite, pointer)
+      if (clicked) tweens.forEach((tween) => tween.destroy())
     })
 
     return sprite

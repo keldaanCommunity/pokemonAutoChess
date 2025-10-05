@@ -20,7 +20,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Earthquake has been renamed Precipice Blades for Groudon.
+- Earthquake has been renamed to Precipice Blades for Groudon.
 - Kleavor: Speed 59 → 55, Attack 22 → 25
 - Scizor: Speed 59 → 42, Attack 22 → 30
 - Keldeo: Fighting/Water → Fighting/Aquatic
@@ -43,7 +43,7 @@
 - New ability for Taillow line: Air slash
 - Buff Munchlax line: PP 120 → 100
 - Indeedee Male & Female now have Human synergy
-- Buff Ogerpon WellSpring mask: upon casting, heal ~~40~~ 50 HP and restore ~~20~~ 25 PP to adjacent allies
+- Buff Ogerpon Wellspring mask: upon casting, heal ~~40~~ 50 HP and restore ~~20~~ 25 PP to adjacent allies
 - Fix Egg Bomb damaging the same target instead of AoE ; damage 30/60/120 → 25/50/100
 - Teleport (Abra) and Shadow Punch (Golett) special damage is now properly considered as part of the attack damage, which better interacts with Choice Scarf
 - Comfey is now always held by the strongest ally among the nearest allies with a free item slot
@@ -75,7 +75,8 @@
 
 - Gems icons have been reworked to be more clear about their synergy. Thanks to Nitpicky
 - Added a new keybinding to lock/unlock camera movement (default: L)
-- Added current amount of dragon stars in dragon synergy description
+- Added new keybindings to cycle through players' boards (default: PAGEUP/PAGEDOWN/HOME)
+- Added current amount of Dragon stars in dragon synergy description
 - Removed announcements for Victory Road finishers except for the first finisher
 - Clicking on a player in Victory Road leaderboard will now redirect to that player profile
 - Added a "Newly obtained" filter to the Pokémon collection to highlight the Pokémon obtained in the recently opened boosters
@@ -83,7 +84,7 @@
 
 # Bugfix
 
-- Fix blue orb damage scaling with AP by mistake
+- Fix Blue Orb damage scaling with AP by mistake
 - Fix Comfey being resurrected through Sacred Ash when an ally alive holds it
 - Fix Slaking not enraging after waking up through Sound cry or Chesto Berry
 - Fix mulch being collected when playing as ghost opponent
@@ -92,7 +93,7 @@
 - Fix Syrup Bomb AP scaling being applied twice
 - Fix Entangling thread targeting
 - Fix Sand Tomb damage not scaling on AP
-- Fix unlocking in Pokédex for Hoopa unbound, Aegislash Blade form and unmasked forms of Ogerpon
+- Fix unlocking in Pokédex for Hoopa Unbound, Aegislash Blade Forme and unmasked forms of Ogerpon
 - Bide (Shuckle) now has proper targeting and no longer ignore damage healed
 - Fix Octazooka being unable to crit with reaper's cloth
 - Fix Thunderous Kick reducing half the intended defense of enemies in the path
@@ -107,6 +108,8 @@
 - Fix Spicy Extract not scaling on AP
 - Fix Drum Beating accidentally flinching on Drum Roll
 - Fix Swagger description showing 3 seconds of confusion instead of 2
+- Fix many typos and grammatical errors, including the names of jukebox music
+- Fix "Gotta Catch 'em All" wanderers getting stuck when caught with a full bench
 
 Special thanks to salamander for reporting and working on many of these fixes! 
 
