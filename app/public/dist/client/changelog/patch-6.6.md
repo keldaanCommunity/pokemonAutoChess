@@ -51,6 +51,7 @@
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 - Fixed Frost Breath damage: now deals [35, 70, 140] special damage as originally intended
 - Nerf Stealth Rocks (Regirock): special damage 20/40/80 → 50 at all tiers
+- Change Wood Hammer: Recoil no longer scales on AP
 
 # Changes to Synergies
 
