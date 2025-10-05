@@ -1276,8 +1276,14 @@
 		"URSALUNA_BLOODMOON": "Blood moon Ursaluna",
 		"AIPOM": "Aipom",
 		"AMBIPOM": "Ambipom",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck",
+		"DEERLING_SPRING": "Deerling (Spring)",
+		"DEERLING_SUMMER": "Deerling (Summer)",
+		"DEERLING_AUTUMN": "Deerling (Autumn)",
+		"DEERLING_WINTER": "Deerling (Winter)",
+		"SAWSBUCK_SPRING": "Sawsbuck (Spring)",
+		"SAWSBUCK_SUMMER": "Sawsbuck (Summer)",
+		"SAWSBUCK_AUTUMN": "Sawsbuck (Autumn)",
+		"SAWSBUCK_WINTER": "Sawsbuck (Winter)",
 		"PATRAT": "Patrat",
 		"WATCHOG": "Watchog",
 		"SPINARAK": "Spinarak",
@@ -2920,7 +2926,8 @@
 		"BEADS_OF_RUIN": "The envy accumulated within its curved beads radiates a curse. Each hit reduces the target's SPE_DEF by 1.",
 		"EMERGENCY_EXIT": "Starts with full PP.",
 		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED) and $t(pkm.BASCULIN_BLUE) fiercely compete with one another. Each time they cast their ability, the weaker Basculin will copy the stronger ATK stat.",
-		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies.\nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times."
+		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies \nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times.",
+		"SEASONAL": "Seasonal Pokémon change their appearance and types based on the current season (in Northern Hemisphere)."		
 	},
 	"stat": {
 		"ATK": "Attack",
