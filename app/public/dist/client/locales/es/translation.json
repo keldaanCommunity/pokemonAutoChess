@@ -1473,9 +1473,7 @@
 		"WYRDEER": "Wyrdeer",
 		"OKIDOGI": "Okidogi",
 		"MUNKIDORI": "Munkidori",
-		"FEZANDIPITI": "Fezandipiti",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck"
+		"FEZANDIPITI": "Fezandipiti"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD a cada aliado",

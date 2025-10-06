@@ -739,9 +739,7 @@
 		"MAGEARNA": "Magearna",
 		"IMPIDIMP": "Impidimp",
 		"MORGREM": "Morgrem",
-		"GRIMMSNARL": "Grimmsnarl",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck"
+		"GRIMMSNARL": "Grimmsnarl"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Leczy wszystkie efekty statusu i zapewnia [20,40,80,SP] SHIELD każdemu sojuszniczemu Pokémonowi",

@@ -1223,9 +1223,7 @@
 		"SHELLOS_WEST_SEA": "Shellos (Mar Oeste)",
 		"GASTRODON_WEST_SEA": "Gastrodon (Mar Oeste)",
 		"SHELLOS_EAST_SEA": "Shellos (Mar Leste)",
-		"GASTRODON_EAST_SEA": "Gastrodon (Mar Leste)",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck"
+		"GASTRODON_EAST_SEA": "Gastrodon (Mar Leste)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,SP] SHIELD para cada aliado",

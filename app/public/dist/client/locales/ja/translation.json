@@ -1174,9 +1174,7 @@
 		"DRAPION": "ドラピオン",
 		"DARUMAKA": "ダルマッカ",
 		"DARMANITAN": "ヒヒダルマ",
-		"TURTONATOR": "バクガメス",
-		"DEERLING": "シキジカ",
-		"SAWSBUCK": "メブキジカ"
+		"TURTONATOR": "バクガメス"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "すべての状態異常を治し、味方全員に[20,40,80,SP]のSHIELDを与える",

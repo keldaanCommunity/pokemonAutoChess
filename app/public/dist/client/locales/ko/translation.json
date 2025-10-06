@@ -1413,9 +1413,7 @@
 		"TRANQUILL": "유토브",
 		"UNFEZANT": "켄호로우",
 		"ZACIAN": "자시안",
-		"ZACIAN_CROWNED": "자시안 (검왕)",
-		"DEERLING": "사철록",
-		"SAWSBUCK": "바라철록"
+		"ZACIAN_CROWNED": "자시안 (검왕)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",

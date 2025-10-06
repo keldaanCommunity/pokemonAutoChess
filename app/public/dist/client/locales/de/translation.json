@@ -1502,9 +1502,7 @@
 		"TOGEDEMARU": "Togedemaru",
 		"FALINKS_BRASS": "Legios (Anführer)",
 		"FALINKS_TROOPER": "Legios (Untergebener)",
-		"DEDENNE": "Dedenne",
-		"DEERLING": "Sesokitz",
-		"SAWSBUCK": "Kronjuwild"
+		"DEDENNE": "Dedenne"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",

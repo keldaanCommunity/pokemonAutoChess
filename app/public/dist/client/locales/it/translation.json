@@ -1273,9 +1273,7 @@
 		"STUFFUL": "Stufful",
 		"BEWEAR": "Bewear",
 		"GLIMMET": "Glimmet",
-		"GLIMMORA": "Glimmora",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck"
+		"GLIMMORA": "Glimmora"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
