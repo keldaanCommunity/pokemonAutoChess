@@ -28,6 +28,7 @@ import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
+import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
 import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { preference, savePreferences } from "../../preferences"
@@ -259,6 +260,18 @@ export default class GameScene extends Scene {
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
       console.log("toggle camera input")
       savePreferences({ cameraLocked: !preference("cameraLocked") })
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.prev_player, () => {
+      cyclePlayers(-1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
+      cyclePlayers(1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+      playerClick(this.uid!)
     })
   }
 

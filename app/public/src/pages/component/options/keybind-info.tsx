@@ -103,6 +103,21 @@ export default function KeybindInfo() {
         <dd>{t("key_desc_avatar_anim")}</dd>
 
         <dt>
+          <RemappableKey keyId="prev_player" />
+        </dt>
+        <dd>{t("key_desc_prev_player")}</dd>
+
+        <dt>
+          <RemappableKey keyId="next_player" />
+        </dt>
+        <dd>{t("key_desc_next_player")}</dd>
+
+        <dt>
+          <RemappableKey keyId="board_return" />
+        </dt>
+        <dd>{t("key_desc_board_return")}</dd>
+
+        <dt>
           <kbd>Ctrl</kbd>
         </dt>
         <dd>{t("key_desc_avatar_emotes")}</dd>

@@ -353,24 +353,36 @@ export default class PokemonSprite extends DraggableObject {
 
   updateTooltipPosition() {
     if (this.detail) {
-      if (this.input && preference("showDetailsOnHover")) {
-        this.detail.setPosition(
-          this.input.localX + 200,
-          min(0)(this.input.localY - 175)
-        )
-        return
+      const pkmCenter = this.sprite.getCenter(undefined, true)
+      const boundsScene = this.scene.cameras.main.worldView
+
+      let x = +40
+      let y = -175
+      const tooltipWidth = this.detail.dom.clientWidth
+      const tooltipHeight = this.detail.dom.clientHeight
+      const showDetailsOnHover = preference("showDetailsOnHover")
+
+      if (this.input && showDetailsOnHover) {
+        x += this.input.localX
+        y += this.input.localY
+      }
+      if (pkmCenter.x + x + tooltipWidth > boundsScene.right) {
+        // show to the left instead
+        x = -80 - tooltipWidth
+        if (this.input && showDetailsOnHover) {
+          x += this.input.localX
+        }
       }
 
-      const absX = this.x + this.detail.width / 2 + 60
-      const minX = this.detail.width / 2
-      const maxX = window.innerWidth - this.detail.width / 2
-      const absY = this.y - this.detail.height / 2 - 40
-      const minY = this.detail.height / 2
-      const maxY = window.innerHeight - this.detail.height / 2
-      const [x, y] = [
-        clamp(absX, minX, maxX) - this.x,
-        clamp(absY, minY, maxY) - this.y
-      ]
+      const tooltipBottom = pkmCenter.y + y + tooltipHeight
+
+      if (pkmCenter.y + y < boundsScene.top) {
+        // exceeds the top edge of the camera, adjusts
+        y = boundsScene.top - pkmCenter.y + 10
+      } else if (tooltipBottom > boundsScene.bottom) {
+        // exceeds the bottom edge of the camera, adjusts
+        y -= tooltipBottom - boundsScene.bottom + 10
+      }
       this.detail.setPosition(x, y)
     }
   }
@@ -426,13 +438,8 @@ export default class PokemonSprite extends DraggableObject {
       this.itemsContainer.items,
       this.inBattle
     )
-    this.detail
-      .setPosition(
-        this.detail.width / 2 + 60,
-        min(0)(-this.detail.height / 2 - 40)
-      )
-      .setDepth(DEPTH.TOOLTIP)
-
+    this.detail.setDepth(DEPTH.TOOLTIP).setOrigin(0, 0)
+    this.updateTooltipPosition()
     this.detail.removeInteractive()
     this.add(this.detail)
     s.lastPokemonDetail = this

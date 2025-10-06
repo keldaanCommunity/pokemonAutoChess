@@ -7,8 +7,7 @@ export enum WandererBehavior {
 
 export enum WandererType {
   CATCHABLE = "CATCHABLE",
-  UNOWN = "UNOWN",
-  SABLEYE = "SABLEYE"
+  UNOWN = "UNOWN"
 }
 
 export interface Wanderer {

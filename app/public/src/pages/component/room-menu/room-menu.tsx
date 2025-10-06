@@ -92,6 +92,9 @@ export default function RoomMenu() {
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
         <Tab>
+          <span>{t("in_game")}</span>
+        </Tab>
+        <Tab>
           <img src="/assets/ui/classic.png" alt="" />
           <span>{t("classic")}</span>
         </Tab>
@@ -107,10 +110,6 @@ export default function RoomMenu() {
           <img src="/assets/ui/custom.png" alt="" />
           <span>{t("custom_room_short")}</span>
         </Tab>
-        <Tab>
-          <img src="/assets/ui/spectate.svg" alt="" />
-          <span>{t("in_game")}</span>
-        </Tab>
       </TabList>
       {!user && <p className="subtitle">{t("loading")}</p>}
 
@@ -118,22 +117,19 @@ export default function RoomMenu() {
         <RoomList onRoomAction={onRoomAction} />
       </TabPanel>
       <TabPanel>
-        <RoomList gameMode={GameMode.CLASSIC} onRoomAction={onRoomAction} />
-      </TabPanel>
-      <TabPanel>
-        <RoomList gameMode={GameMode.RANKED} onRoomAction={onRoomAction} />
-      </TabPanel>
-      <TabPanel>
-        <RoomList gameMode={GameMode.SCRIBBLE} onRoomAction={onRoomAction} />
-      </TabPanel>
-      <TabPanel>
-        <RoomList
-          gameMode={GameMode.CUSTOM_LOBBY}
-          onRoomAction={onRoomAction}
-        />
-      </TabPanel>
-      <TabPanel>
         <IngameRoomsList />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.CLASSIC} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.RANKED} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.SCRIBBLE} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.CUSTOM_LOBBY} />
       </TabPanel>
 
       <RoomSelectionMenu

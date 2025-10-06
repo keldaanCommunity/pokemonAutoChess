@@ -214,10 +214,7 @@ export class OnPokemonCatchCommand extends Command<
     if (!player || !player.alive || !wanderer) return
     this.state.wanderers.delete(id)
 
-    if (wanderer.type === WandererType.SABLEYE) {
-      // prevents sableye from stealing items and give 1 gold
-      player.addMoney(1, true, null)
-    } else if (wanderer.type === WandererType.UNOWN) {
+    if (wanderer.type === WandererType.UNOWN) {
       const unownIndex = PkmIndex[wanderer.pkm]
       if (client.auth) {
         const DUST_PER_ENCOUNTER = 50
@@ -1433,10 +1430,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.room.spawnOnBench(player, player.firstPartner, "spawn")
     }
 
-    if (player.pokemonsTrainingInDojo.some(p => p.returnStage === this.state.stageLevel)) {
-      const returningPokemons = player.pokemonsTrainingInDojo.filter(p => p.returnStage === this.state.stageLevel)
-      returningPokemons.forEach(p => {
-        const substitute = values(player.board).find(s => s.name === Pkm.SUBSTITUTE && s.id === p.pokemon.id)
+    if (
+      player.pokemonsTrainingInDojo.some(
+        (p) => p.returnStage === this.state.stageLevel
+      )
+    ) {
+      const returningPokemons = player.pokemonsTrainingInDojo.filter(
+        (p) => p.returnStage === this.state.stageLevel
+      )
+      returningPokemons.forEach((p) => {
+        const substitute = values(player.board).find(
+          (s) => s.name === Pkm.SUBSTITUTE && s.id === p.pokemon.id
+        )
         if (!substitute) return
         p.pokemon.hp += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.atk += [5, 10, 15][p.ticketLevel - 1] ?? 0
@@ -1446,7 +1451,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
-        player.pokemonsTrainingInDojo.splice(player.pokemonsTrainingInDojo.indexOf(p), 1)
+        player.pokemonsTrainingInDojo.splice(
+          player.pokemonsTrainingInDojo.indexOf(p),
+          1
+        )
       })
     }
 

@@ -87,20 +87,20 @@ export default class MinigameManager {
   update() {
     const interpolatePosition =
       (min = 0.2, max = min, acceleration = 100) =>
-        (item) => {
-          if (!item.data) return
-          const { serverX, serverY } = item.data.values
-          item.x = Phaser.Math.Linear(
-            item.x,
-            serverX,
-            clamp(acceleration / Math.abs(serverX - item.x), min, max)
-          )
-          item.y = Phaser.Math.Linear(
-            item.y,
-            serverY,
-            clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
-          )
-        }
+      (item) => {
+        if (!item.data) return
+        const { serverX, serverY } = item.data.values
+        item.x = Phaser.Math.Linear(
+          item.x,
+          serverX,
+          clamp(acceleration / Math.abs(serverX - item.x), min, max)
+        )
+        item.y = Phaser.Math.Linear(
+          item.y,
+          serverY,
+          clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
+        )
+      }
     this.pokemons.forEach(interpolatePosition(0.2))
     this.items.forEach(interpolatePosition(0.05, 0.25, 100))
     this.portals.forEach(interpolatePosition(0.05, 0.25, 100))
@@ -571,8 +571,8 @@ export default class MinigameManager {
       this.villagers.push(smeargle)
       this.showEncounterDescription(
         t(`scribble.${specialGameRule}`) +
-        " - " +
-        t(`scribble_description.${specialGameRule}`)
+          " - " +
+          t(`scribble_description.${specialGameRule}`)
       )
     }
   }
