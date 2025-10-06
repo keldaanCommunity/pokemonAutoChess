@@ -514,9 +514,9 @@
 		"OCTOLOCK": "蛸固",
 		"BURNING_JEALOUSY": "妒火",
 		"FIRST_IMPRESSION": "迎头一击",
-		"GRUDGE_DIVE": "Grudge Dive",
-		"BARED_FANGS": "Bared Fangs",
-		"SOUL_TRAP": "Soul Trap"
+		"GRUDGE_DIVE": "怨恨奇袭",
+		"BARED_FANGS": "群体狂咬",
+		"SOUL_TRAP": "灵魂囚笼"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1277,14 +1277,14 @@
 		"URSALUNA_BLOODMOON": "赫月月月熊",
 		"AIPOM": "长尾怪手",
 		"AMBIPOM": "双尾怪手",
-		"DEERLING_SPRING": "Deerling (Spring)",
-		"DEERLING_SUMMER": "Deerling (Summer)",
-		"DEERLING_AUTUMN": "Deerling (Autumn)",
-		"DEERLING_WINTER": "Deerling (Winter)",
-		"SAWSBUCK_SPRING": "Sawsbuck (Spring)",
-		"SAWSBUCK_SUMMER": "Sawsbuck (Summer)",
-		"SAWSBUCK_AUTUMN": "Sawsbuck (Autumn)",
-		"SAWSBUCK_WINTER": "Sawsbuck (Winter)",
+		"DEERLING_SPRING": "四季鹿（春天的样子）",
+		"DEERLING_SUMMER": "四季鹿（夏天的样子）",
+		"DEERLING_AUTUMN": "四季鹿（秋天的样子）",
+		"DEERLING_WINTER": "四季鹿（冬天的样子）",
+		"SAWSBUCK_SPRING": "萌芽鹿（春天的样子）",
+		"SAWSBUCK_SUMMER": "萌芽鹿（夏天的样子）",
+		"SAWSBUCK_AUTUMN": "萌芽鹿（秋天的样子）",
+		"SAWSBUCK_WINTER": "萌芽鹿（冬天的样子）",
 		"PATRAT": "探探鼠",
 		"WATCHOG": "步哨鼠",
 		"SPINARAK": "圆丝蛛",
@@ -1571,11 +1571,11 @@
 		"CHI_YU": "古玉鱼",
 		"WIMPOD": "胆小虫",
 		"GOLISOPOD": "具甲武者",
-		"BASCULIN_RED": "Basculin (Red Stripes)",
-		"BASCULIN_BLUE": "Basculin (Blue Stripes)",
-		"BASCULIN_WHITE": "Basculin (White Stripes)",
-		"BASCULEGION_MALE": "Basculegion (♂)",
-		"BASCULEGION_FEMALE": "Basculegion (♀)"
+		"BASCULIN_RED": "野蛮鲈鱼（红条纹的样子）",
+		"BASCULIN_BLUE": "野蛮鲈鱼（蓝条纹的样子）",
+		"BASCULIN_WHITE": "野蛮鲈鱼（白条纹的样子）",
+		"BASCULEGION_MALE": "幽尾玄鱼（♂）",
+		"BASCULEGION_FEMALE": "幽尾玄鱼（♀）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1881,7 +1881,7 @@
 		"PSYCHIC_FANGS": "对目标造成[80,SP]点SPECIAL，并移除其ATK，DEF和SPE_DEF增幅。",
 		"SHED_TAIL": "创建一个替身，并突进至HP最低的我方宝可梦处，使其获得[80, SP]点SHIELD。",
 		"NIGHT_SLASH": "对目标造成[15,30,60,SP]点SPECIAL。该招式可以暴击。",
-		"KOWTOW_CLEAVE": "对目标造成TRUE，数值相当于150%的ATK，每有一只倒下的我方宝可梦使该倍率提升[20,SP]%。该招式可以暴击。",
+		"KOWTOW_CLEAVE": "对目标造成TRUE，数值相当于150%的ATK，每有一只倒下的我方宝可梦，倍率的百分点增加[20,SP]。该招式可以暴击。",
 		"SHIELDS_DOWN": "将小陨星变形为随机颜色的核心。",
 		"SHIELDS_UP": "将小陨星变回流星的样子。",
 		"SANDSEAR_STORM": "用灼热的沙子攻击一条直线上的敌方宝可梦，对他们造成[80,SP]点SPECIAL并使他们陷入BURN 2秒。",
@@ -2070,9 +2070,9 @@
 		"OCTOLOCK": "对目标造成[30,60,90,SP]点SPECIAL，并使其陷入LOCKED和ARMOR_BREAK 3秒。",
 		"BURNING_JEALOUSY": "对目标和ADJACENT敌方宝可梦造成[30,50,70,SP]点SPECIAL。具有ATK增幅的敌方宝可梦失去其增幅，并陷入BURN 5秒。",
 		"FIRST_IMPRESSION": "为了回避危险，对目标造成[45,90,SP]点SPECIAL，并使其陷入FLINCH [3,5,SP]秒，随后飞离并在原地召唤一只随机的STAR常见或罕见BUG宝可梦。",
-		"GRUDGE_DIVE": "The user takes 10% of its Max HP as SPECIAL and deals [30,60,90,120,SP] SPECIAL to the target + [5,10,15,20,SP] additional SPECIAL per fallen ally.",
-		"BARED_FANGS": "Bites the target dealing [160,SP] % of his ATK as SPECIAL and stealing [10,SP] of the target's SPEED",
-		"SOUL_TRAP": "Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target."
+		"GRUDGE_DIVE": "使用者受到SPECIAL，数值相当于自身最大HP的10%，并对目标造成[30,60,90,120,SP]点SPECIAL。每有一只倒下的我方宝可梦，额外造成[5,10,15,20,SP]点SPECIAL。",
+		"BARED_FANGS": "啃咬目标，对其造成SPECIAL，数值相当于ATK的[160,SP]%，并偷取目标[10,SP]点SPEED。",
+		"SOUL_TRAP": "获得[25,50,108]点SHIELD，随后使2格半径内的敌方宝可梦失去[10,SP]点PP，并陷入FATIGUE [2,SP,ND=1]秒。此外，这些敌方宝可梦会将攻击目标更改为使用者。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2927,10 +2927,10 @@
 		"LAST_RESPECTS": "每当ADJACENT我方宝可梦倒下时，恢复PP至满。",
 		"BEADS_OF_RUIN": "聚集了嫉妒之情的勾玉散发着诅咒的力量。命中的攻击降低目标1点SPE_DEF。",
 		"EMERGENCY_EXIT": "战斗开始时立即恢复PP至满。",
-		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED) and $t(pkm.BASCULIN_BLUE) fiercely compete with one another. Each time they cast their ability, the weaker Basculin will copy the stronger ATK stat.",
-		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies \nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times.",
-		"SPIRITOMB": "For each ODD_KEYSTONE you have, every time a Pokémon is KO, a wisp spawns and move to $t(pkm.SPIRITOMB) to give it 10 SHIELD",
-		"SEASONAL": "Seasonal Pokémon change their appearance and types based on the current season (in Northern Hemisphere)."
+		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED)和$t(pkm.BASCULIN_BLUE)一直都在争斗。每当这两只宝可梦释放招式时，ATK较低的那只会复制较高者的该项数值。",
+		"BASCULIN_WHITE": "击倒5只敌方宝可梦后，进化为$t(pkm.BASCULEGION_MALE)。\n被击倒5次后，进化为$t(pkm.BASCULEGION_FEMALE)。",
+		"SPIRITOMB": "每当有宝可梦倒下时，玩家每持有一枚ODD_KEYSTONE，便会生成一团朝$t(pkm.SPIRITOMB)移动的鬼火，使其获得10点SHIELD。",
+		"SEASONAL": "季节性宝可梦会根据当前季节（以北半球为准）更改其外观和共鸣。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3175,7 +3175,7 @@
 		"VICTORIOUS": "胜利者",
 		"MOLE": "鼹鼠",
 		"BLOSSOMED": "怒放之花",
-		"AQUARIOPHILE": "Aquariophile"
+		"AQUARIOPHILE": "水生生物学家"
 	},
 	"title_description": {
 		"NOVICE": "玩一局游戏",
@@ -3263,7 +3263,7 @@
 		"VICTORIOUS": "以第一名完成一轮胜利之路比赛",
 		"MOLE": "完全挖穿整个己方半场",
 		"BLOSSOMED": "将5个花盆中的宝可梦均培养至最终进化",
-		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team"
+		"AQUARIOPHILE": "同时派出$t(pkm.BASCULIN_RED)，$t(pkm.BASCULIN_BLUE)和$t(pkm.BASCULIN_WHITE)出战"
 	},
 	"weather": {
 		"NEUTRAL": "无天气",
