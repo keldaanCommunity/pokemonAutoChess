@@ -1124,8 +1124,6 @@
 		"URSALUNA_BLOODMOON": "ガチクマ　アカツキ",
 		"AIPOM": "エイパム",
 		"AMBIPOM": "エテボース",
-		"DEERLING": "シキジカ",
-		"SAWSBUCK": "メブキジカ",
 		"PATRAT": "ミネズミ",
 		"WATCHOG": "ミルホッグ",
 		"SPINARAK": "イトマル",
@@ -1176,7 +1174,9 @@
 		"DRAPION": "ドラピオン",
 		"DARUMAKA": "ダルマッカ",
 		"DARMANITAN": "ヒヒダルマ",
-		"TURTONATOR": "バクガメス"
+		"TURTONATOR": "バクガメス",
+		"DEERLING": "シキジカ",
+		"SAWSBUCK": "メブキジカ"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "すべての状態異常を治し、味方全員に[20,40,80,SP]のSHIELDを与える",

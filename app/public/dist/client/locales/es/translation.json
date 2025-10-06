@@ -1234,8 +1234,6 @@
 		"URSALUNA_BLOODMOON": "Ursaluna Luna Carmesí",
 		"AIPOM": "Aipom",
 		"AMBIPOM": "Ambipom",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck",
 		"PATRAT": "Patrat",
 		"WATCHOG": "Watchog",
 		"SPINARAK": "Spinarak",
@@ -1475,7 +1473,9 @@
 		"WYRDEER": "Wyrdeer",
 		"OKIDOGI": "Okidogi",
 		"MUNKIDORI": "Munkidori",
-		"FEZANDIPITI": "Fezandipiti"
+		"FEZANDIPITI": "Fezandipiti",
+		"DEERLING": "Deerling",
+		"SAWSBUCK": "Sawsbuck"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD a cada aliado",

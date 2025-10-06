@@ -1246,8 +1246,6 @@
 		"URSALUNA_BLOODMOON": "Ursaluna Blutmond",
 		"AIPOM": "Griffel",
 		"AMBIPOM": "Ambidiffel",
-		"DEERLING": "Sesokitz",
-		"SAWSBUCK": "Kronjuwild",
 		"PATRAT": "Nagelotz",
 		"WATCHOG": "Kukmarda",
 		"SPINARAK": "Webarak",
@@ -1504,7 +1502,9 @@
 		"TOGEDEMARU": "Togedemaru",
 		"FALINKS_BRASS": "Legios (Anführer)",
 		"FALINKS_TROOPER": "Legios (Untergebener)",
-		"DEDENNE": "Dedenne"
+		"DEDENNE": "Dedenne",
+		"DEERLING": "Sesokitz",
+		"SAWSBUCK": "Kronjuwild"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Heilt alle Statuseffekte und gewährt jedem Verbündeten [20,40,80,SP] SHIELD.",

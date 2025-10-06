@@ -1084,8 +1084,6 @@
 		"URSALUNA_BLOODMOON": "Blood moon Ursaluna",
 		"AIPOM": "Aipom",
 		"AMBIPOM": "Ambipom",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck",
 		"PATRAT": "Patrat",
 		"WATCHOG": "Watchog",
 		"SPINARAK": "Spinarak",
@@ -1171,7 +1169,9 @@
 		"WISHIWASHI_SCHOOL": "Wishiwashi (School)",
 		"PAWMI": "Pawmi",
 		"PAWMO": "Pawmo",
-		"PAWMOT": "Pawmot"
+		"PAWMOT": "Pawmot",
+		"DEERLING": "Deerling",
+		"SAWSBUCK": "Sawsbuck"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Giải trừ hiệu ứng và nhận [20,40,80,SP] SHIELD cho Pokemon đồng minh",

@@ -2929,8 +2929,8 @@
 		"EMERGENCY_EXIT": "Starts with full PP.",
 		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED) and $t(pkm.BASCULIN_BLUE) fiercely compete with one another. Each time they cast their ability, the weaker Basculin will copy the stronger ATK stat.",
 		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies \nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times.",
-		"SPIRITOMB": "For each ODD_KEYSTONE you have, every time a Pokémon is KO, a wisp spawns and move to $t(pkm.SPIRITOMB) to give it 10 SHIELD",
-		"SEASONAL": "Seasonal Pokémon change their appearance and types based on the current season (in Northern Hemisphere)."		
+		"SPIRITOMB": "For each ODD_KEYSTONE you have, every time a Pokémon is KO, a wisp spawns and move to $t(pkm.SPIRITOMB) to give it 10 SHIELD.",
+		"SEASONAL": "Seasonal Pokémon change their appearance and types based on the current season (in Northern Hemisphere)."
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -3690,7 +3690,7 @@
 	"eligible_elo_hint": "✔ This game is eligible for Elo gain/loss.",
 	"average_elo": "Average Elo",
 	"GLHF": "GLHF",
-	"not_eligible_elo_hint": "❌Games with bots only are not eligible for Elo gain/loss.",
+	"not_eligible_elo_hint": "❌ Games with bots only are not eligible for Elo gain/loss.",
 	"add_bot_or_wait_hint": "Add bots or wait for more players to join your room",
 	"wait_for_players_hint": "Wait for more players to join your room",
 	"private_game": "Private game",

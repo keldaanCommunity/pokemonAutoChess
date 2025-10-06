@@ -1209,8 +1209,6 @@
 		"URSALUNA_BLOODMOON": "다투곰(붉은달)",
 		"AIPOM": "에이팜",
 		"AMBIPOM": "겟핸보숭",
-		"DEERLING": "사철록",
-		"SAWSBUCK": "바라철록",
 		"PATRAT": "보르쥐",
 		"WATCHOG": "보르그",
 		"SPINARAK": "페이검",
@@ -1415,7 +1413,9 @@
 		"TRANQUILL": "유토브",
 		"UNFEZANT": "켄호로우",
 		"ZACIAN": "자시안",
-		"ZACIAN_CROWNED": "자시안 (검왕)"
+		"ZACIAN_CROWNED": "자시안 (검왕)",
+		"DEERLING": "사철록",
+		"SAWSBUCK": "바라철록"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "모든 아군 포켓몬의 상태이상효과를 회복하며 [20,40,80,SP] 만큼의 SHIELD를 부여한다.",

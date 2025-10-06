@@ -1137,8 +1137,6 @@
 		"URSALUNA_BLOODMOON": "Ursaluna Luna Cremisi",
 		"AIPOM": "Aipom",
 		"AMBIPOM": "Ambipom",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck",
 		"PATRAT": "Patrat",
 		"WATCHOG": "Watchog",
 		"SPINARAK": "Spinarak",
@@ -1275,7 +1273,9 @@
 		"STUFFUL": "Stufful",
 		"BEWEAR": "Bewear",
 		"GLIMMET": "Glimmet",
-		"GLIMMORA": "Glimmora"
+		"GLIMMORA": "Glimmora",
+		"DEERLING": "Deerling",
+		"SAWSBUCK": "Sawsbuck"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura tutti gli effetti di stato e garantisce [20,40,80,SP] SHIELD ad ogni Pokèmon alleato",
