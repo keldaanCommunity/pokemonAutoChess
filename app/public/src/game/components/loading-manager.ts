@@ -216,6 +216,11 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
     "/assets/environment/flower_pots.json",
     "/assets/environment/"
   )
+  scene.load.multiatlas(
+    "ground_holes",
+    "/assets/environment/ground_holes.json",
+    "/assets/environment/"
+  )
 }
 
 export function preloadPortraits(scene: Phaser.Scene, player: Player) {

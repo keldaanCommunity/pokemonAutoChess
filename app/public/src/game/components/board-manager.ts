@@ -5,6 +5,7 @@ import {
   FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
+import { TownEncounters } from "../../../../core/town-encounters"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -13,6 +14,7 @@ import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon, Transfer } from "../../../../types"
 import {
+  BOARD_HEIGHT,
   BOARD_WIDTH,
   PortalCarouselStages,
   SynergyTriggers
@@ -50,7 +52,6 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
-import { TownEncounters } from "../../../../core/town-encounters"
 
 export enum BoardMode {
   PICK = "pick",
@@ -450,19 +451,37 @@ export default class BoardManager {
   renderGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
-    this.player.groundHoles.forEach((hole, index) => {
-      const [x, y] = transformBoardCoordinates(
-        index % BOARD_WIDTH,
-        Math.floor(index / BOARD_WIDTH) + 1
-      )
-      if (hole > 0) {
-        const groundHole = this.scene.add
-          .sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`)
-          .setScale(2)
-          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        this.groundHoles.push(groundHole)
+    for (let row = 0; row < BOARD_HEIGHT / 2; row++) {
+      for (let col = 0; col < BOARD_WIDTH; col++) {
+        let trenchWidth = 0
+        const index = col + row * BOARD_WIDTH
+        while (col + trenchWidth < BOARD_WIDTH && this.player.groundHoles[index + trenchWidth] === 5) {
+          trenchWidth++
+        }
+        if (trenchWidth >= 2) {
+          // trench
+          const [x, y] = transformBoardCoordinates(col, row + 1)
+          const trench = this.scene.add.sprite(x - 44, y + 10, "ground_holes", `trench${trenchWidth}.png`)
+            .setOrigin(0, 0.5)
+            .setScale(2)
+            .setAlpha(0.9)
+            .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+          this.groundHoles.push(trench)
+          col += trenchWidth - 1
+        } else {
+          // single hole          
+          const hole = this.player.groundHoles[index]
+          if (hole > 0) {
+            const [x, y] = transformBoardCoordinates(col, row + 1)
+            const groundHole = this.scene.add
+              .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
+              .setScale(2)
+              .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+            this.groundHoles.push(groundHole)
+          }
+        }
       }
-    })
+    }
   }
 
   hideGroundHoles() {
@@ -628,7 +647,7 @@ export default class BoardManager {
         .map((p) => `${p.name} (${p.id}) is watching ${p.spectatedPlayerId}`)
         .join("\n")
     )
-
+ 
     logger.debug(
       "scouting now",
       scoutingPlayers.map((p) => `${p.name} (${p.id})`).join("\n")

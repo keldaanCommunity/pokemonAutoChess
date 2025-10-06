@@ -76,6 +76,7 @@
 # UI
 
 - Gems icons have been reworked to be more clear about their synergy. Thanks to Nitpicky
+- Ground fully dug holes in a row are now displayed as trenches instead of individual holes
 - Added a new keybinding to lock/unlock camera movement (default: L)
 - Added new keybindings to cycle through players' boards (default: PAGEUP/PAGEDOWN/HOME)
 - Added current amount of Dragon stars in dragon synergy description
