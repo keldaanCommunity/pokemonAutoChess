@@ -114,6 +114,7 @@
 - Fix Swagger description showing 3 seconds of confusion instead of 2
 - Fix many typos and grammatical errors, including the names of jukebox music
 - Fix "Gotta Catch 'em All" wanderers getting stuck when caught with a full bench
+- Fix Petal Blizzard still dealing damage based on attack range
 - Fix Swallow heal never triggering
 
 Special thanks to salamander for reporting and working on many of these fixes! 
