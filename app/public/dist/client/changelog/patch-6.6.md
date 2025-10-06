@@ -17,6 +17,9 @@
 - Basculin Red/Blue
 - Basculin White
 - Basculegion Female/Male
+- Galarian Slowpoke
+- Galarian Slowbro
+- Galarian Slowking
 
 # Changes to Pokemon & Abilities
 
@@ -55,6 +58,7 @@
 - Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
 - Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
 - Change Wood Hammer: Recoil no longer scales on AP
+- Change Slowpoke/Slowbro/Slowking: now additional with split evolution method base on dominant water/psychic synergy.
 
 # Changes to Synergies
 
