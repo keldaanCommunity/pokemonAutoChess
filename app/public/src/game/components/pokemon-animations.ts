@@ -7257,5 +7257,23 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.GALARIAN_SLOWPOKE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.PSYCHIC_MELEE
+  },
+  [Pkm.GALARIAN_SLOWBRO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.PSYCHIC_MELEE
+  },
+  [Pkm.GALARIAN_SLOWKING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.POISON_RANGE
   }
 }

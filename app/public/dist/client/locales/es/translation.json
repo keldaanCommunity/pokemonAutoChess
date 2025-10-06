@@ -1859,7 +1859,7 @@
 		"THUNDER_CAGE": "Atrapa al objetivo y a Pokémon enemigos adyacentes en una prisión eléctrica, infligiendo [60,SP] SPECIAL y causando LOCKED y PARALYSIS por 3 segundos.",
 		"HEADBUTT": "Inflige [20,40,80,SP] SPECIAL al objetivo causandole FLINCH por 5 segundos. El daño se duplica si el objetivo tiene SHIELD",
 		"STEEL_WING": "Corre hacia la retaguardia enemiga, infligiendo [10,20,40,SP] SPECIAL + 2x DEF como SPECIAL y robando 1 DEF a todos los Pokémon enemigos en su camino.",
-		"YAWN": "Obtiene [10,20,40,SP] SHIELD. Los Pokémon enemigos que tengan como objetivo al usuario sufren de FATIGUE por 3 segundos y pierden un 20 de AP",
+		"YAWN": "Obtiene [15,30,60,SP] SHIELD. Los Pokémon enemigos que tengan como objetivo al usuario sufren de FATIGUE por 3 segundos y pierden un 20 de AP",
 		"FIERY_DANCE": "Sumergido en llamas, el usuario baila y agita sus alas infligiendo [25,50,100,SP] SPECIAL al objetivo y subiendo su propio AP en 30.",
 		"BIDE": "Inflige daño SPECIAL a Pokémon enemigos adyacentes igual al [200,SP]% del daño recibido durante 3 segundos.",
 		"SHORE_UP": "Se cura un [20,25,SP]% de sus HP, +10% si el clima es SANDSTORM.",

@@ -4070,7 +4070,15 @@ export class Slowpoke extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.SLOWBRO
+  evolutions = [Pkm.SLOWBRO, Pkm.SLOWKING]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon, player, stageLevel: number) => {
+      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
+      const waterCount = player.synergies.get(Synergy.WATER) ?? 0
+      return psychicCount >= waterCount ? Pkm.SLOWKING : Pkm.SLOWBRO
+    }
+  )
   hp = 80
   atk = 7
   speed = 35
@@ -4079,11 +4087,76 @@ export class Slowpoke extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.YAWN
-  regional = true
+  additional = true
+  passive = Passive.SLOWPOKE
 }
 
 export class Slowbro extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 160
+  atk = 12
+  speed = 35
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.YAWN
+  additional = true
+}
+
+export class Slowking extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 160
+  atk = 11
+  speed = 35
+  def = 8
+  speDef = 6
+  maxPP = 110
+  range = 3
+  skill = Ability.WISE_YAWN
+  additional = true
+}
+
+export class GalarianSlowpoke extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.POISON])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolutions = [Pkm.GALARIAN_SLOWBRO, Pkm.GALARIAN_SLOWKING]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon, player, stageLevel: number) => {
+      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
+      const waterCount = player.synergies.get(Synergy.POISON) ?? 0
+      return psychicCount >= waterCount
+        ? Pkm.GALARIAN_SLOWKING
+        : Pkm.GALARIAN_SLOWBRO
+    }
+  )
+  hp = 80
+  atk = 7
+  speed = 35
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.EERIE_SPELL
+  regional = true
+  passive = Passive.GALARIAN_SLOWPOKE
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SLOWPOKE)) &&
+      regionSynergies.includes(Synergy.PSYCHIC)
+    )
+  }
+}
+
+export class GalarianSlowbro extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.POISON])
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.SLOWKING
@@ -4094,23 +4167,37 @@ export class Slowbro extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.YAWN
+  skill = Ability.SHELL_SIDE_ARM
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SLOWPOKE)) &&
+      regionSynergies.includes(Synergy.PSYCHIC)
+    )
+  }
 }
 
-export class Slowking extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.WATER])
+export class GalarianSlowking extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.POISON])
   rarity = Rarity.UNCOMMON
-  stars = 3
-  hp = 260
-  atk = 27
+  stars = 2
+  hp = 160
+  atk = 11
   speed = 35
-  def = 14
-  speDef = 8
-  maxPP = 100
-  range = 1
-  skill = Ability.YAWN
+  def = 8
+  speDef = 6
+  maxPP = 110
+  range = 3
+  skill = Ability.EERIE_SPELL
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.SLOWPOKE)) &&
+      regionSynergies.includes(Synergy.PSYCHIC)
+    )
+  }
 }
 
 export class Psyduck extends Pokemon {
@@ -18551,6 +18638,13 @@ export class GalarianYamask extends Pokemon {
   range = 2
   skill = Ability.GRUDGE
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.YAMASK)) &&
+      regionSynergies.includes(Synergy.GHOST)
+    )
+  }
 }
 
 export class Runerigus extends Pokemon {
@@ -18566,6 +18660,13 @@ export class Runerigus extends Pokemon {
   range = 2
   skill = Ability.GRUDGE
   regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      (!state || state.additionalPokemons.includes(Pkm.YAMASK)) &&
+      regionSynergies.includes(Synergy.GHOST)
+    )
+  }
 }
 
 export class Chewtle extends Pokemon {
@@ -19884,7 +19985,10 @@ export const PokemonClasses: Record<
   [Pkm.BASCULIN_BLUE]: BasculinBlue,
   [Pkm.BASCULIN_WHITE]: BasculinWhite,
   [Pkm.BASCULEGION_FEMALE]: BasculegionFemale,
-  [Pkm.BASCULEGION_MALE]: BasculegionMale
+  [Pkm.BASCULEGION_MALE]: BasculegionMale,
+  [Pkm.GALARIAN_SLOWPOKE]: GalarianSlowpoke,
+  [Pkm.GALARIAN_SLOWBRO]: GalarianSlowbro,
+  [Pkm.GALARIAN_SLOWKING]: GalarianSlowking
 }
 
 // declare all the classes in colyseus schema TypeRegistry

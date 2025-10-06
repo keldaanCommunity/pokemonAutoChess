@@ -10344,9 +10344,54 @@ export class YawnStrategy extends AbilityStrategy {
       opponent.addAbilityPower(-20, pokemon, 0, false)
     })
 
-    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     pokemon.addShield(shield, pokemon, 1, crit)
     pokemon.resetCooldown(1000)
+  }
+}
+
+export class WiseYawnStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    // Find ally with lowest current health
+    const lowestHealthAlly = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.life - b.life)[0]
+
+    if (lowestHealthAlly) {
+      // Find enemies targeting the lowest health ally
+      const opponentsTargetingLowestHealthAlly =
+        board.cells.filter<PokemonEntity>(
+          (entity): entity is PokemonEntity =>
+            entity != null &&
+            entity.team !== lowestHealthAlly.team &&
+            entity.targetEntityId === lowestHealthAlly.id
+        )
+
+      // Apply fatigue and AP reduction to attackers
+      opponentsTargetingLowestHealthAlly.forEach((opponent) => {
+        opponent.status.triggerFatigue(3000, pokemon)
+        opponent.addAbilityPower(-20, pokemon, 0, false)
+      })
+
+      // Shield the lowest health ally
+      const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
+      lowestHealthAlly.addShield(shield, pokemon, 1, crit)
+      pokemon.broadcastAbility({
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
+        targetX: lowestHealthAlly.positionX,
+        targetY: lowestHealthAlly.positionY
+      })
+    }
   }
 }
 
@@ -13987,6 +14032,112 @@ export class SoulTrapStrategy extends AbilityStrategy {
   }
 }
 
+export class EerieSpellStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 45
+    const healAmount = [15, 30, 45][pokemon.stars - 1] ?? 60
+    const visited = new Set<string>()
+    let currentTarget: PokemonEntity | undefined = target
+    let lastTarget: PokemonEntity = pokemon
+
+    // Queue 4 bounces with 300ms delays
+    for (let i = 0; i < 4; i++) {
+      if (currentTarget) {
+        visited.add(currentTarget.id)
+
+        // Animate wave from last position to current target
+        pokemon.broadcastAbility({
+          positionX: lastTarget.positionX,
+          positionY: lastTarget.positionY,
+          targetX: currentTarget.positionX,
+          targetY: currentTarget.positionY,
+          delay: 300 * i
+        })
+
+        lastTarget = currentTarget
+
+        // Heal allies, damage enemies
+        if (currentTarget.team === pokemon.team) {
+          currentTarget.handleHeal(healAmount, pokemon, 1, crit)
+        } else {
+          currentTarget.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      }
+
+      // Find next target with lowest HP
+      currentTarget = board.cells
+        .filter((c) => c instanceof PokemonEntity)
+        .filter((c) => !visited.has(c.id))
+        .sort((a, b) => a.life - b.life)[0]
+    }
+  }
+}
+
+export class ShellSideArmStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const poisonDuration = [2000, 3000][pokemon.stars - 1] ?? 3000
+    const apBoost = [10, 20][pokemon.stars - 1] ?? 20
+    const visited = new Set<string>()
+    let currentTarget: PokemonEntity | undefined = target
+    let lastTarget: PokemonEntity = pokemon
+
+    // Queue 4 bounces with 300ms delays, prioritizing high HP targets
+    for (let i = 0; i < 4; i++) {
+      if (currentTarget) {
+        visited.add(currentTarget.id)
+
+        // Animate wave from last position to current target
+        pokemon.broadcastAbility({
+          positionX: lastTarget.positionX,
+          positionY: lastTarget.positionY,
+          targetX: currentTarget.positionX,
+          targetY: currentTarget.positionY,
+          delay: 300 * i,
+          orientation: lastTarget.orientation
+        })
+
+        lastTarget = currentTarget
+
+        // Poison enemies, boost allies' AP
+        if (currentTarget.team === pokemon.team) {
+          currentTarget.addAbilityPower(apBoost, pokemon, 1, crit)
+        } else {
+          currentTarget.status.triggerPoison(
+            poisonDuration,
+            currentTarget,
+            pokemon
+          )
+        }
+      }
+
+      // Find next target with highest HP
+      currentTarget = board.cells
+        .filter((c) => c instanceof PokemonEntity)
+        .filter((c) => !visited.has(c.id))
+        .sort((a, b) => b.life - a.life)[0]
+    }
+  }
+}
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14485,5 +14636,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIRST_IMPRESSION]: new FirstImpressionStrategy(),
   [Ability.BARED_FANGS]: new BaredFangsStrategy(),
   [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy(),
-  [Ability.SOUL_TRAP]: new SoulTrapStrategy()
+  [Ability.SOUL_TRAP]: new SoulTrapStrategy(),
+  [Ability.WISE_YAWN]: new WiseYawnStrategy(),
+  [Ability.EERIE_SPELL]: new EerieSpellStrategy(),
+  [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy()
 }

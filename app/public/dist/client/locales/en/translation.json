@@ -410,6 +410,7 @@
 		"HEADBUTT": "Headbutt",
 		"STEEL_WING": "Steel Wing",
 		"YAWN": "Yawn",
+		"WISE_YAWN": "Wise Yawn",
 		"FIERY_DANCE": "Fiery Dance",
 		"BIDE": "Bide",
 		"SHORE_UP": "Shore Up",
@@ -516,7 +517,9 @@
 		"FIRST_IMPRESSION": "First Impression",
 		"GRUDGE_DIVE": "Grudge Dive",
 		"BARED_FANGS": "Bared Fangs",
-		"SOUL_TRAP": "Soul Trap"
+		"SOUL_TRAP": "Soul Trap",
+		"EERIE_SPELL": "Eerie Spell",
+		"SHELL_SIDE_ARM": "Shell Side Arm"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -736,8 +739,11 @@
 		"LAMPENT": "Lampent",
 		"CHANDELURE": "Chandelure",
 		"SLOWPOKE": "Slowpoke",
+		"GALARIAN_SLOWPOKE": "Galarian Slowpoke",
 		"SLOWBRO": "Slowbro",
+		"GALARIAN_SLOWBRO": "Galarian Slowbro",
 		"SLOWKING": "Slowking",
+		"GALARIAN_SLOWKING": "Galarian Slowking",
 		"BELLSPROUT": "Bellsprout",
 		"WEEPINBELL": "Weepinbell",
 		"VICTREEBEL": "Victreebel",
@@ -1966,7 +1972,8 @@
 		"THUNDER_CAGE": "Trap the target and ADJACENT enemy Pokémon in an electric prison, dealing [60,SP] SPECIAL and inflicting LOCKED and PARALYSIS for 3 seconds.",
 		"HEADBUTT": "Deal [20,40,80,SP] SPECIAL to the target and inflict them with FLINCH for 5 seconds. The damage is doubled if the target has a SHIELD.",
 		"STEEL_WING": "Dash to the farthest reachable enemy Pokémon, dealing [10,20,40,SP] SPECIAL + 2x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon in the path.",
-		"YAWN": "Gain [10,20,40,SP] SHIELD. Enemy Pokémon targeting the user are inflicted with FATIGUE for 3 seconds and lose 20 AP.",
+		"YAWN": "Gain [15,30,60,SP] SHIELD. Enemy Pokémon targeting the user are inflicted with FATIGUE for 3 seconds and lose 20 AP.",
+		"WISE_YAWN": "Grant the lowest HP ally [15,30,60,SP] SHIELD. Enemies attacking that ally suffer FATIGUE for 3 seconds and lose 20 AP.",
 		"FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,SP] SPECIAL to the target and raises their own AP by 30.",
 		"BIDE": "After 3 seconds, deal SPECIAL to ADJACENT enemy Pokémon equal to [200,SP]% of the damage received during this period.",
 		"SHORE_UP": "Heal for [20,25,SP]% HP, +10% if the weather is SANDSTORM.",
@@ -2072,7 +2079,9 @@
 		"FIRST_IMPRESSION": "The Pokémon, sensing danger, deals [45,90,SP] SPECIAL and inflicts FLINCH for [3,5,SP] seconds before flying away, leaving a random 1 STAR common or uncommon BUG spawn behind.",
 		"GRUDGE_DIVE": "The user takes 10% of its Max HP as SPECIAL and deals [30,60,90,120,SP] SPECIAL to the target + [5,10,15,20,SP] additional SPECIAL per fallen ally.",
 		"BARED_FANGS": "Bites the target dealing [160,SP] % of his ATK as SPECIAL and stealing [10,SP] of the target's SPEED",
-		"SOUL_TRAP": "Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target."
+		"SOUL_TRAP": "Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target.",
+		"EERIE_SPELL": "Launches a wave that bounces to 3 additional targets, prioritizing low HP Pokémons. Deals [10,20,40,SP] SPECIAL to enemies and heals allies for [15,30,45,SP] HP.",
+		"SHELL_SIDE_ARM": "Launches a wave that bounces to 3 additional targets, prioritizing high HP Pokémons. Enemies becomes POISONNED for [2,3,SP] seconds, allies gain [10,20] AP."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2930,7 +2939,9 @@
 		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED) and $t(pkm.BASCULIN_BLUE) fiercely compete with one another. Each time they cast their ability, the weaker Basculin will copy the stronger ATK stat.",
 		"BASCULIN_WHITE": "Evolve into $t(pkm.BASCULEGION_MALE) after defeating 5 enemies \nEvolve into $t(pkm.BASCULEGION_FEMALE) after being defeated 5 times.",
 		"SPIRITOMB": "For each ODD_KEYSTONE you have, every time a Pokémon is KO, a wisp spawns and move to $t(pkm.SPIRITOMB) to give it 10 SHIELD.",
-		"SEASONAL": "Seasonal Pokémon change their appearance and types based on the current season (in Northern Hemisphere)."
+		"SEASONAL": "Seasonal Pokémon change their appearance and types based on the current season (in Northern Hemisphere).",
+		"SLOWPOKE": "Will evolve into $t(pkm.SLOWBRO) or $t(pkm.SLOWKING) based on the dominant synergy between WATER and PSYCHIC.",
+		"GALARIAN_SLOWPOKE": "Will evolve into $t(pkm.GALARIAN_SLOWBRO) or $t(pkm.GALARIAN_SLOWKING) based on the dominant synergy between POISON and PSYCHIC."
 	},
 	"stat": {
 		"ATK": "Attack",

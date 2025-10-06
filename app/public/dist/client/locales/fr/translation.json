@@ -1966,7 +1966,7 @@
 		"THUNDER_CAGE": "Piège la cible et les ennemis ADJACENT dans une prison électrique, infligeant [60,SP] SPECIAL, PARALYSIS et deviennent LOCKED pendant 3 secondes.",
 		"HEADBUTT": "Inflige [20,40,80,SP] SPECIAL à la cible et lui inflige FLINCH pendant 5 secondes. Dégâts doublés si la cible a un SHIELD.",
 		"STEEL_WING": "Fonce vers l'ennemi le plus éloigné, infligeant [10,20,40,SP] SPECIAL + 2x DEF en SPECIAL en volant 1 DEF à tous les ennemis touchés sur le chemin.",
-		"YAWN": "Gagne [10,20,40,SP] SHIELD. Les ennemis qui ciblent le lanceur subissent FATIGUE pendant 3 secondes et perdent 20 AP.",
+		"YAWN": "Gagne [15,30,60,SP] SHIELD. Les ennemis qui ciblent le lanceur subissent FATIGUE pendant 3 secondes et perdent 20 AP.",
 		"FIERY_DANCE": "Enveloppé de flammes, le lanceur danse et bat des ailes, infligeant [25,50,100,SP] SPECIAL à la cible. Augmente ensuite la AP du lanceur de 30.",
 		"BIDE": "Après 3 secondes, inflige [200,SP]% des dégâts reçus pendant ce délai en SPECIAL aux ennemis ADJACENT.",
 		"SHORE_UP": "Soigne le lanceur de [20,25,SP]% des HP max. Si la météo est SANDSTORM, le soin augmente à [30,35,SP]% des HP max.",
