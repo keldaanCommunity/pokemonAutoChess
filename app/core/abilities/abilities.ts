@@ -6710,7 +6710,7 @@ export class StealthRocksStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const cells = board.getCellsInFront(pokemon, target, pokemon.stars)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = 50
 
     cells.forEach((cell) => {
       board.addBoardEffect(
@@ -10432,7 +10432,8 @@ export class WoodHammerStrategy extends AbilityStrategy {
             board,
             AttackType.PHYSICAL,
             pokemon,
-            crit
+            crit,
+            false
           )
         }
       }, 500)
@@ -11713,8 +11714,8 @@ export class SpicyExtractStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     //Make 1/2/3 closest allies RAGE for [2,SP] seconds
     const nbAllies = [1, 2, 3][pokemon.stars - 1] ?? 3
-    const rageDuration = 2000 * (1 + pokemon.ap / 100) *
-          (crit ? 1 + (pokemon.critPower - 1) : 1)
+    const rageDuration =
+      2000 * (1 + pokemon.ap / 100) * (crit ? 1 + (pokemon.critPower - 1) : 1)
     const allies = board.cells
       .filter<PokemonEntity>(
         (cell): cell is PokemonEntity =>
@@ -11783,7 +11784,7 @@ export class SwallowStrategy extends AbilityStrategy {
     // Store power and boosts its DEF and SPE_DEF by 1 up to 3 times.
     // If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack.
     // If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to the 3 cells in front
-    if (pokemon.hp < pokemon.hp * 0.25) {
+    if (pokemon.life < pokemon.hp * 0.25 && pokemon.count.ult > 0) {
       const heal =
         (([0, 20, 40, 60][pokemon.count.ult] ?? 60) * pokemon.hp) / 100
       pokemon.handleHeal(heal, pokemon, 1, crit)
@@ -13903,7 +13904,7 @@ export class BaredFangsStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
 
     // Deal 140% of ATK as SPECIAL damage
-    const damage = Math.round(pokemon.atk * 1.4)
+    const damage = Math.round(pokemon.atk * 1.6)
     const speedSteal = 10
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -13927,7 +13928,7 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
     const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 120
 
     // Recoil damage is 20% of base HP
-    const recoil = Math.round(pokemon.baseHP * 0.2)
+    const recoil = Math.round(pokemon.hp * 0.1)
 
     // Bonus damage per fallen ally scales with stars: 1★=5, 2★=10, 3★=15, 4★=20
     const damagePerFallenAlly = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
@@ -13959,6 +13960,31 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
         crit
       )
     }
+  }
+}
+
+export class SoulTrapStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target.
+    const shieldAmount = [25, 50, 108][pokemon.stars - 1] ?? 108
+    const fatigueDuration = Math.round(
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
+    pokemon.addShield(shieldAmount, pokemon, 0, false)
+    const enemies = board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+    enemies.forEach((cell) => {
+      const enemy = cell.value!
+      enemy.addPP(-10, pokemon, 1, crit)
+      enemy.status.triggerFatigue(fatigueDuration, enemy)
+    })
   }
 }
 
@@ -14459,5 +14485,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
   [Ability.FIRST_IMPRESSION]: new FirstImpressionStrategy(),
   [Ability.BARED_FANGS]: new BaredFangsStrategy(),
-  [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy()
+  [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy(),
+  [Ability.SOUL_TRAP]: new SoulTrapStrategy()
 }

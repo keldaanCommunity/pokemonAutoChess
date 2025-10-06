@@ -76,6 +76,10 @@
   flex: 0 0 auto;
 }
 
+.main-lobby .react-tabs__tab {
+  font-size: 1rem;
+}
+
 .lobby .current-users-menu {
   height: 100%;
 }

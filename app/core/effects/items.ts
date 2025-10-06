@@ -270,7 +270,10 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
 export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
   constructor(ticketLevel: number) {
     super(({ pokemon, player, room, item }) => {
-      const substitute = PokemonFactory.createPokemonFromName(Pkm.SUBSTITUTE, player)
+      const substitute = PokemonFactory.createPokemonFromName(
+        Pkm.SUBSTITUTE,
+        player
+      )
       player.board.delete(pokemon.id)
       substitute.id = pokemon.id
       substitute.positionX = pokemon.positionX
@@ -604,7 +607,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addShield(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-          2
+            2
         ) * 2,
         pokemon,
         0,
@@ -613,7 +616,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addSpeed(
         Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-          2
+            2
         ),
         pokemon,
         0,
@@ -624,7 +627,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
       pokemon.addAbilityPower(
         -Math.floor(
           ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
-          2
+            2
         ),
         pokemon,
         0,

@@ -18,7 +18,6 @@ export function EventsMenu() {
       <h2>{t("events")}</h2>
       <TabList>
         <Tab>
-          <img src="/assets/ui/megaphone.svg" alt="" />
           <span>{t("announcements")}</span>
         </Tab>
         {tournaments.length > 0 && (
@@ -28,7 +27,6 @@ export function EventsMenu() {
           </Tab>
         )}
         <Tab>
-          <img src="/assets/ui/leaderboard.svg" alt="" />
           <span>{t("victory_road.title")}</span>
         </Tab>
       </TabList>

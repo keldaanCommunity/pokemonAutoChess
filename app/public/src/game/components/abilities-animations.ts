@@ -37,6 +37,7 @@ import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
+import { on } from "events"
 
 export function displayHit(
   scene: GameScene | DebugScene,
@@ -2298,6 +2299,25 @@ export const AbilitiesAnimations: {
   [Ability.STATIC_SHOCK]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
+  }),
+  [Ability.SOUL_TRAP]: onCaster({
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    ability: Ability.DARK_VOID,
+    scale: 2
+  }),
+  ["WISP"]: projectile({
+    duration: 1000,
+    rotation: Math.PI / 2,
+    ability: "WISP",
+    oriented: true,
+    scale: 1,
+    startCoords: "target",
+    endCoords: "caster",
+    hitAnim: onCaster({
+      ability: "BARB_BARRAGE",
+      scale: 2,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
   })
 }
 
