@@ -2529,9 +2529,9 @@
 		"SCROLL_OF_DARKNESS": "恶之挂轴",
 		"RICH_MULCH": "硕果肥",
 		"AMAZE_MULCH": "超效肥",
-		"BRONZE_DOJO_TICKET": "Bronze Dojo Ticket",
-		"SILVER_DOJO_TICKET": "Silver Dojo Ticket",
-		"GOLD_DOJO_TICKET": "Gold Dojo Ticket"
+		"BRONZE_DOJO_TICKET": "训练券",
+		"SILVER_DOJO_TICKET": "训练券A",
+		"GOLD_DOJO_TICKET": "训练券S"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2758,9 +2758,9 @@
 		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。",
 		"RICH_MULCH": "对一个花盆使用，使其中的宝可梦进化。",
 		"AMAZE_MULCH": "对一个花盆使用，使其中的宝可梦永久提升50点最大HP和30点AP。",
-		"BRONZE_DOJO_TICKET": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +50 max HP, +5 ATK and +15 AP. A substitute takes their place in the meantime.",
-		"SILVER_DOJO_TICKET": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +100 max HP, +10 ATK and +30 AP. A substitute takes their place in the meantime.",
-		"GOLD_DOJO_TICKET": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +150 max HP, +15 ATK and +45 AP. A substitute takes their place in the meantime."
+		"BRONZE_DOJO_TICKET": "对一只宝可梦使用，使其前往训练所进行用时5轮的特训，该宝可梦返回时提升50点最大HP，5点ATK和15点AP。在此期间，会有替身占据其原本在的位置。",
+		"SILVER_DOJO_TICKET": "对一只宝可梦使用，使其前往训练所进行用时5轮的特训，该宝可梦返回时提升100点最大HP，10点ATK和30点AP。在此期间，会有替身占据其原本在的位置。",
+		"GOLD_DOJO_TICKET": "对一只宝可梦使用，使其前往训练所进行用时5轮的特训，该宝可梦返回时提升150点最大HP，15点ATK和45点AP。在此期间，会有替身占据其原本在的位置。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3433,6 +3433,8 @@
 	"available_rooms": "游戏大厅",
 	"new_game": "建立房间",
 	"in_game": "游戏中",
+	"games_in_progress_one": "{{count}}场进行中的游戏",
+	"games_in_progress_other": "{{count}}场进行中的游戏",
 	"tournament": "锦标赛",
 	"events": "活动",
 	"custom_room": "自定义房间",
@@ -4065,7 +4067,7 @@
 		"MUNCHLAX": "小卡比兽给大家带来了PICNIC_SET。",
 		"SABLEYE": "勾魂眼提供能够提升共鸣等级的共鸣宝石。",
 		"CELEBI": "时拉比预见到下一轮野生对战必定出现闪光的对手。",
-		"MAKUHITA": "Makuhita trains one of your Pokémon for 5 stages to improve their stats"
+		"MAKUHITA": "幕下力士为你的一只宝可梦提供特训，用5轮时间提升其属性值。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
