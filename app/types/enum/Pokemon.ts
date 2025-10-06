@@ -1055,7 +1055,10 @@ export enum Pkm {
   BASCULIN_BLUE = "BASCULIN_BLUE",
   BASCULIN_WHITE = "BASCULIN_WHITE",
   BASCULEGION_MALE = "BASCULEGION_MALE",
-  BASCULEGION_FEMALE = "BASCULEGION_FEMALE"
+  BASCULEGION_FEMALE = "BASCULEGION_FEMALE",
+  GALARIAN_SLOWPOKE = "GALARIAN_SLOWPOKE",
+  GALARIAN_SLOWBRO = "GALARIAN_SLOWBRO",
+  GALARIAN_SLOWKING = "GALARIAN_SLOWKING"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1162,7 +1165,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GALARIAN_PONYTA]: "0077-0001",
   [Pkm.GALARIAN_RAPIDASH]: "0078-0001",
   [Pkm.SLOWPOKE]: "0079",
+  [Pkm.GALARIAN_SLOWPOKE]: "0079-0001",
   [Pkm.SLOWBRO]: "0080",
+  [Pkm.GALARIAN_SLOWBRO]: "0080-0001",
   [Pkm.MAGNEMITE]: "0081",
   [Pkm.MAGNETON]: "0082",
   [Pkm.FARFETCH_D]: "0083",
@@ -1296,6 +1301,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.UMBREON]: "0197",
   [Pkm.MURKROW]: "0198",
   [Pkm.SLOWKING]: "0199",
+  [Pkm.GALARIAN_SLOWKING]: "0199-0001",
   [Pkm.MISDREAVUS]: "0200",
   [Pkm.UNOWN_A]: "0201",
   [Pkm.UNOWN_B]: "0201-0001",
@@ -3317,7 +3323,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BASCULIN_BLUE]: Pkm.BASCULIN_BLUE,
   [Pkm.BASCULIN_WHITE]: Pkm.BASCULIN_WHITE,
   [Pkm.BASCULEGION_MALE]: Pkm.BASCULIN_WHITE,
-  [Pkm.BASCULEGION_FEMALE]: Pkm.BASCULIN_WHITE
+  [Pkm.BASCULEGION_FEMALE]: Pkm.BASCULIN_WHITE,
+  [Pkm.GALARIAN_SLOWPOKE]: Pkm.GALARIAN_SLOWPOKE,
+  [Pkm.GALARIAN_SLOWBRO]: Pkm.GALARIAN_SLOWPOKE,
+  [Pkm.GALARIAN_SLOWKING]: Pkm.GALARIAN_SLOWPOKE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3340,7 +3349,9 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.ARTICUNO]: [Pkm.GALARIAN_ARTICUNO],
   [Pkm.ZAPDOS]: [Pkm.GALARIAN_ZAPDOS],
   [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES],
-  [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH]
+  [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
+  [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
+  [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {

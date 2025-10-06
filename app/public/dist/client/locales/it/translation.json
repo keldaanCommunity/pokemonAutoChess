@@ -1640,7 +1640,7 @@
 		"THUNDER_CAGE": "Intrappola il bersaglio e i nemici adiacenti in una gabbia elettrica che infligge [60,SP] SPECIAL e causa LOCKED e PARALYSIS per 3 secondi.",
 		"HEADBUTT": "Infliggi [20,40,80,SP] SPECIAL al bersaglio e causa FLINCH per 5 secondi. Raddoppia il danno se il bersaglio ha uno SHIELD.",
 		"STEEL_WING": "Scatta verso le retrovie nemiche, infliggendo [10,20,40,SP] SPECIAL + 2 volte la DEF come SPECIAL e ruba 1 di DEF a tutti i Pokèmon nemici colpiti nella traiettoria.",
-		"YAWN": "Ottieni [10,20,40,SP] SHIELD. Gli avversari che bersagliano questa unità subiscono FATIGUE per 3 secondi e perdono il 20 di AP.",
+		"YAWN": "Ottieni [15,30,60,SP] SHIELD. Gli avversari che bersagliano questa unità subiscono FATIGUE per 3 secondi e perdono il 20 di AP.",
 		"FIERY_DANCE": "Avvolto dalle fiamme, l'utilizzatore danza e muove le sue ali infliggendo [25,50,100,SP] SPECIAL to the target. Aumenta gli AP dell'utilizzatore di 30.",
 		"BIDE": "Pazienza farà SPECIAL ai nemici attorno all'utilizzatore pari [200,SP]% del danno subito durante 3 secondi.",
 		"SHORE_UP": "Cura l'utilizzatore del [20,25,SP] % dei HP. Se il meteo è SANDSTORM, aumenta la cura al [30,35,SP] % dei HP.",
