@@ -14058,8 +14058,7 @@ export class EerieSpellStrategy extends AbilityStrategy {
           positionY: lastTarget.positionY,
           targetX: currentTarget.positionX,
           targetY: currentTarget.positionY,
-          delay: 300 * i,
-          orientation: lastTarget.orientation
+          delay: 300 * i
         })
 
         lastTarget = currentTarget
@@ -14087,6 +14086,58 @@ export class EerieSpellStrategy extends AbilityStrategy {
   }
 }
 
+export class ShellSideArmStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const poisonDuration = [2000, 3000][pokemon.stars - 1] ?? 3000
+    const apBoost = [10, 20][pokemon.stars - 1] ?? 20
+    const visited = new Set<string>()
+    let currentTarget: PokemonEntity | undefined = target
+    let lastTarget: PokemonEntity = pokemon
+
+    // Queue 4 bounces with 300ms delays, prioritizing high HP targets
+    for (let i = 0; i < 4; i++) {
+      if (currentTarget) {
+        visited.add(currentTarget.id)
+
+        // Animate wave from last position to current target
+        pokemon.broadcastAbility({
+          positionX: lastTarget.positionX,
+          positionY: lastTarget.positionY,
+          targetX: currentTarget.positionX,
+          targetY: currentTarget.positionY,
+          delay: 300 * i,
+          orientation: lastTarget.orientation
+        })
+
+        lastTarget = currentTarget
+
+        // Poison enemies, boost allies' AP
+        if (currentTarget.team === pokemon.team) {
+          currentTarget.addAbilityPower(apBoost, pokemon, 1, crit)
+        } else {
+          currentTarget.status.triggerPoison(
+            poisonDuration,
+            currentTarget,
+            pokemon
+          )
+        }
+      }
+
+      // Find next target with highest HP
+      currentTarget = board.cells
+        .filter((c) => c instanceof PokemonEntity)
+        .filter((c) => !visited.has(c.id))
+        .sort((a, b) => b.life - a.life)[0]
+    }
+  }
+}
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14587,5 +14638,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy(),
   [Ability.SOUL_TRAP]: new SoulTrapStrategy(),
   [Ability.WISE_YAWN]: new WiseYawnStrategy(),
-  [Ability.EERIE_SPELL]: new EerieSpellStrategy()
+  [Ability.EERIE_SPELL]: new EerieSpellStrategy(),
+  [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy()
 }

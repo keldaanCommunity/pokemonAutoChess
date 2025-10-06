@@ -4167,7 +4167,7 @@ export class GalarianSlowbro extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.EERIE_SPELL
+  skill = Ability.SHELL_SIDE_ARM
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
