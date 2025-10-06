@@ -8361,7 +8361,7 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     board
-      .getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -8369,8 +8369,7 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit,
-            true
+            crit
           )
         }
       })
