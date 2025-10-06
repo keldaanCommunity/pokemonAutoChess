@@ -2178,6 +2178,12 @@ export const AbilitiesAnimations: {
     })(args)
   },
 
+  [Ability.SHELL_SIDE_ARM]: projectile({
+    duration: 400,
+    ability: Ability.FISSURE,
+    tint: 0xff00bf
+  }),
+
   ["ZYGARDE_CELL"]: (args) => {
     let orientation = getOrientation(
       args.targetX,
