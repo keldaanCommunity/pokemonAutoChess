@@ -58,6 +58,8 @@
 
 # Changes to Synergies
 
+- Buff Ground 8: +5 → +8 Attack when your half of the board is fully dug
+- Artificial items that can be found buried in the ground are now limited to: Toxic Orb, Hard Stone, Metal Coat, Explorer Kit, Rotom Phone, Silk Scarf, Tiny Mushroom, Incense, Electirizer, Magmarizer, Max Elixir and Exp Share.
 - Psychic 6 QoL: Unown shops now always offer 5 different types of Unown
 
 # Changes to Items
