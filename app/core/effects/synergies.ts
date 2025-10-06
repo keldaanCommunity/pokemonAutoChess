@@ -62,7 +62,7 @@ export class GroundHoleEffect extends OnSpawnEffect {
         }, 0)
         defBuff += nbFullyDugRows * 5
         if (nbFullyDugRows === 3) {
-          atkBuff += 5
+          atkBuff += 8
           player?.titles.add(Title.MOLE)
         }
       }

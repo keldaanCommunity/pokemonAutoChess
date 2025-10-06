@@ -11784,7 +11784,7 @@ export class SwallowStrategy extends AbilityStrategy {
     // Store power and boosts its DEF and SPE_DEF by 1 up to 3 times.
     // If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack.
     // If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to the 3 cells in front
-    if (pokemon.hp < pokemon.hp * 0.25) {
+    if (pokemon.life < pokemon.hp * 0.25 && pokemon.count.ult > 0) {
       const heal =
         (([0, 20, 40, 60][pokemon.count.ult] ?? 60) * pokemon.hp) / 100
       pokemon.handleHeal(heal, pokemon, 1, crit)

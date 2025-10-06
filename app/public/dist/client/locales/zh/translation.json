@@ -2225,7 +2225,7 @@
 		"TILLER": "根据坑洞深度提升1至5点DEF和SPE_DEF，深度最大时额外提升3点ATK。",
 		"DIGGER": "根据坑洞深度提升2至10点DEF和SPE_DEF，深度最大时额外提升5点ATK。",
 		"DRILLER": "根据坑洞深度提升3至15点DEF和SPE_DEF，深度最大时额外提升8点ATK。",
-		"DEEP_MINER": "此外，我方半场每有一行最大深度的坑洞便额外提升5点DEF和SPE_DEF，且若整个半场均已被完全发掘，则再提升5点ATK。",
+		"DEEP_MINER": "此外，我方半场每有一行最大深度的坑洞便额外提升5点DEF和SPE_DEF，且若整个半场均已被完全发掘，则再提升8点ATK。",
 		"POISONOUS": "[30,LK]%使目标陷入POISONNED。",
 		"VENOMOUS": "[60,LK]%使目标陷入POISONNED。POISONNED的最大层数增加1层。",
 		"TOXIC": "[100,LK]%使目标陷入POISONNED。POISONNED的最大层数增加2层。",
