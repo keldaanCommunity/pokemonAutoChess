@@ -2007,7 +2007,7 @@
 		"SALT_CURE": "ADJACENT allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
 		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and [12,SP] SPEED and have [30,LK]% chance to be CHARM for 1 second",
-		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front.",
+		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack and consuming all stacks. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front and consuming all stacks.",
 		"DECORATE": "Decorates the nearest STRONGEST ally, increasing its ATK by [1,2,3,SP] and AP by [10,20,30,SP]",
 		"DRAGON_CLAW": "Deal [30,60,120,SP] SPECIAL to the lowest health ADJACENT enemy and WOUND them for 4 seconds.",
 		"TAILWIND": "Increase the SPEED of all allies by [5,10,15,SP]",
