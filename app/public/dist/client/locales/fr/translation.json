@@ -410,6 +410,7 @@
 		"HEADBUTT": "Coup d'Boule",
 		"STEEL_WING": "Ailes d'acier",
 		"YAWN": "Bâillement",
+		"WISE_YAWN": "Sage Bâillement",
 		"FIERY_DANCE": "Danse du Feu",
 		"BIDE": "Patience",
 		"SHORE_UP": "Amass'Sable",
@@ -516,7 +517,11 @@
 		"FIRST_IMPRESSION": "Escarmouche",
 		"GRUDGE_DIVE": "Plongée Rancunière",
 		"BARED_FANGS": "Crocs à Vif",
-		"SOUL_TRAP": "Piège d'Âme"
+		"SOUL_TRAP": "Piège d'Âme",
+		"EERIE_SPELL": "Sort Sinistre",
+		"SHELL_SIDE_ARM": "Kokiyarme",
+		"TRIPLE_DIVE": "Triple Plongeon",
+		"MOONBLAST": "Pouvoir Lunaire"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -736,8 +741,11 @@
 		"LAMPENT": "Mélancolux",
 		"CHANDELURE": "Lugulabre",
 		"SLOWPOKE": "Ramoloss",
+		"GALARIAN_SLOWPOKE": "Ramoloss de Galar",
 		"SLOWBRO": "Flagadoss",
+		"GALARIAN_SLOWBRO": "Flagadoss de Galar",
 		"SLOWKING": "Roigada",
+		"GALARIAN_SLOWKING": "Roigada de Galar",
 		"BELLSPROUT": "Chétiflor",
 		"WEEPINBELL": "Boustiflor",
 		"VICTREEBEL": "Empiflor",
@@ -1575,7 +1583,10 @@
 		"BASCULIN_BLUE": "Bargantua (Motif Bleu)",
 		"BASCULIN_WHITE": "Bargantua (Motif Blanc)",
 		"BASCULEGION_MALE": "Paragruel (♂)",
-		"BASCULEGION_FEMALE": "Paragruel (♀)"
+		"BASCULEGION_FEMALE": "Paragruel (♀)",
+		"WIGLETT": "Taupikeau",
+		"WUGTRIO": "Triopikeau",
+		"FLUTTER_MANE": "Flotte-Mèche"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -1967,6 +1978,7 @@
 		"HEADBUTT": "Inflige [20,40,80,SP] SPECIAL à la cible et lui inflige FLINCH pendant 5 secondes. Dégâts doublés si la cible a un SHIELD.",
 		"STEEL_WING": "Fonce vers l'ennemi le plus éloigné, infligeant [10,20,40,SP] SPECIAL + 2x DEF en SPECIAL en volant 1 DEF à tous les ennemis touchés sur le chemin.",
 		"YAWN": "Gagne [15,30,60,SP] SHIELD. Les ennemis qui ciblent le lanceur subissent FATIGUE pendant 3 secondes et perdent 20 AP.",
+		"WISE_YAWN": "Confère à l'allié ayant le moins de HP [15,30,60,SP] de SHIELD. Les ennemis qui attaquent cet allié subissent FATIGUE pendant 3 secondes et perdent 20 AP.",
 		"FIERY_DANCE": "Enveloppé de flammes, le lanceur danse et bat des ailes, infligeant [25,50,100,SP] SPECIAL à la cible. Augmente ensuite la AP du lanceur de 30.",
 		"BIDE": "Après 3 secondes, inflige [200,SP]% des dégâts reçus pendant ce délai en SPECIAL aux ennemis ADJACENT.",
 		"SHORE_UP": "Soigne le lanceur de [20,25,SP]% des HP max. Si la météo est SANDSTORM, le soin augmente à [30,35,SP]% des HP max.",
@@ -2072,7 +2084,11 @@
 		"FIRST_IMPRESSION": "Le Pokémon, sentant le danger, inflige [45,90,SP] SPECIAL et inflige FLINCH pendant [3,5,SP] secondes avant de s'envoler, invoquant derrière lui un Pokémon BUG 1 STAR commun ou peu commun aléatoire.",
 		"GRUDGE_DIVE": "Le lanceur prend 10% de ses HP max en SPECIAL et inflige [30,60,90,120,SP] SPECIAL à la cible + [5,10,15,20,SP] SPECIAL supplémentaires par allié KO.",
 		"BARED_FANGS": "Mord la cible en lui infligeant [160,SP] % de son ATK en tant que SPECIAL et en volant [10,SP] de SPEED à la cible",
-		"SOUL_TRAP": "Gagne [25,50,108] SHIELD, puis les ennemis dans un rayon de 2 cases perdent [10,SP] PP, subissent FATIGUE pendant [2,SP,ND=1] secondes et choisissent le lanceur comme cible."
+		"SOUL_TRAP": "Gagne [25,50,108] SHIELD, puis les ennemis dans un rayon de 2 cases perdent [10,SP] PP, subissent FATIGUE pendant [2,SP,ND=1] secondes et choisissent le lanceur comme cible.",
+		"EERIE_SPELL": "Lance une vague qui rebondit sur 3 cibles supplémentaires, en privilégiant les Pokémon avec le moins de HP. Inflige [10,20,40,SP] SPECIAL aux ennemis et soigne les alliés de [15,30,45,SP] HP.",
+		"SHELL_SIDE_ARM": "Lance une vague qui rebondit sur 3 cibles supplémentaires, en privilégiant les Pokémon avec le plus de HP. Les ennemis deviennent POISONNED pendant [2,3,SP] secondes et les alliés gagnent [10,20] AP.",
+		"TRIPLE_DIVE": "Le lanceur effectue un triple plongeon parfaitement synchronisé, frappant 3 cibles différentes à faible HP avec les éclaboussures d'eau infligeant [15,30,45,SP] SPECIAL.",
+		"MOONBLAST": "Tire 6 lunes infligeant [20,SP] SPECIAL chacune. Mettre KO un Pokémon redirige les lunes restantes vers l'ennemi le plus proche et accorde 1 lune bonus."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2914,7 +2930,7 @@
 		"SLAKING": "Lorsqu'il se réveille après avoir été en SLEEP, $t(pkm.SLAKING) devient RAGE pendant 3 secondes.",
 		"STANTLER": "Évolue en $t(pkm.WYRDEER) en changeant de région.",
 		"PIKACHU_SURFER": "La puissance de $t(pkm.PIKACHU_SURFER) dépend des vagues. Gagne 50 SHIELD et 3 ATK par niveau de synergie AQUATIC atteint, et remplit sa barre de PP lorsqu'une vague approche.",
-		"ESPURR": "Évolue en Mistigrix Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD.",
+		"ESPURR": "Évoluera en Mistigrix Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD.",
 		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être toiletté en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED.",
 		"ACCELERATION": "Turbo : gagne 20 SPEED pour chaque case sur laquelle le Pokémon se déplace (les sauts et les sprints comptent pour une case)",
 		"MELTAN": "Lorsqu'il est utilisé sur $t(pkm.MELMETAL), fusionne avec lui pour lui donner 50 HP max permanents",
@@ -2923,14 +2939,16 @@
 		"DUNSPARCE": "$t(pkm.DUNSPARCE) évoluera lorsqu'au moins 10 trous dans le sol seront entièrement creusés sur le plateau",
 		"PACHIRISU": "A [30,LK]% de chances de trouver un SITRUS_BERRY enterrée après chaque combat",
 		"QWILFISH": "Lorsqu'il est touché par une attaque au corps à corps, inflige 5 TRUE à l'attaquant, avec [30,LK]% de chances d'infliger POISONNED pendant 3 secondes",
-		"HISUIAN_QWILFISH": "Gagne 1 AP de façon permanente en lançant sa capacité. Après 20 lancers, Qwilfish évolue en Qwilpik.",
+		"HISUIAN_QWILFISH": "Gagne 1 AP de façon permanente en lançant sa capacité. Après 20 lancers, $t(pkm.HISUIAN_QWILFISH) évoluera en $t(pkm.OVERQWIL).",
 		"LAST_RESPECTS": "Récupère le maximum de ses PP lorsqu'un allié ADJACENT est mis KO.",
 		"BEADS_OF_RUIN": "L'envie accumulée dans ses Perles du Fléau irradie une malédiction. Chaque coup réduit la SPE_DEF de la cible de 1.",
 		"EMERGENCY_EXIT": "Commence avec ses PP au max.",
 		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED) et $t(pkm.BASCULIN_BLUE) rivalisent férocement. À chaque fois qu'ils lancent leur attaque, le plus faible des Bargantua copie la statistique d'ATK la plus forte.",
 		"BASCULIN_WHITE": "Évolue en $t(pkm.BASCULEGION_MALE) après avoir vaincu 5 ennemis.\nÉvolue en $t(pkm.BASCULEGION_FEMALE) après avoir été vaincu 5 fois.",
 		"SPIRITOMB": "Pour chaque ODD_KEYSTONE que vous avez, chaque fois qu'un Pokémon est mis KO, un feu follet apparaît et se déplace vers $t(pkm.SPIRITOMB) pour lui donner 10 SHIELD.",
-		"SEASONAL": "Les Pokémon saisonniers changent d'apparence et de types en fonction de la saison en cours (dans l'Hémisphère Nord)."
+		"SEASONAL": "Les Pokémon saisonniers changent d'apparence et de types en fonction de la saison en cours (dans l'Hémisphère Nord).",
+		"SLOWPOKE": "Évoluera en $t(pkm.SLOWBRO) ou $t(pkm.SLOWKING) en fonction de la synergie dominante entre WATER et PSYCHIC.",
+		"GALARIAN_SLOWPOKE": "Évoluera en $t(pkm.GALARIAN_SLOWBRO) ou $t(pkm.GALARIAN_SLOWKING) en fonction de la synergie dominante entre POISON et PSYCHIC."
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -3741,6 +3759,7 @@
 	"help": "Aider",
 	"index": "Indice",
 	"evolution": "Évolution",
+	"evolves_from": "Évolue à partir de",
 	"portrait_credit": "Crédit Portrait",
 	"sprite_credit": "Crédit Sprite",
 	"bot_admin": "Bot Admin",
