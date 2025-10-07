@@ -22,6 +22,7 @@
 - Galarian Slowking
 - Wiglett
 - Wugtrio
+- Flutter Mane
 
 # Changes to Pokemon & Abilities
 

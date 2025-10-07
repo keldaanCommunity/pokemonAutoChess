@@ -520,7 +520,8 @@
 		"SOUL_TRAP": "Soul Trap",
 		"EERIE_SPELL": "Eerie Spell",
 		"SHELL_SIDE_ARM": "Shell Side Arm",
-		"TRIPLE_DIVE": "Triple Dive"
+		"TRIPLE_DIVE": "Triple Dive",
+		"MOONBLAST": "Moonblast"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1584,7 +1585,8 @@
 		"BASCULEGION_MALE": "Basculegion (♂)",
 		"BASCULEGION_FEMALE": "Basculegion (♀)",
 		"WIGLETT": "Wiglett",
-		"WUGTRIO": "Wugtrio"
+		"WUGTRIO": "Wugtrio",
+		"FLUTTER_MANE": "Flutter Mane"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2085,7 +2087,8 @@
 		"SOUL_TRAP": "Gain [25,50,108] SHIELD, then enemies within a 2-tile radius lose [10,SP] PP and get FATIGUE for [2,SP,ND=1] seconds and choose the user as the target.",
 		"EERIE_SPELL": "Launches a wave that bounces to 3 additional targets, prioritizing low HP Pokémons. Deals [10,20,40,SP] SPECIAL to enemies and heals allies for [15,30,45,SP] HP.",
 		"SHELL_SIDE_ARM": "Launches a wave that bounces to 3 additional targets, prioritizing high HP Pokémons. Enemies becomes POISONNED for [2,3,SP] seconds, allies gain [10,20] AP.",
-		"TRIPLE_DIVE": "The user performs a perfectly timed triple dive, hitting 3 different low HP targets with splashes of water dealing [15,30,45,SP] SPECIAL"
+		"TRIPLE_DIVE": "The user performs a perfectly timed triple dive, hitting 3 different low HP targets with splashes of water dealing [15,30,45,SP] SPECIAL",
+		"MOONBLAST": "Fires 6 moons dealing [20,SP] SPECIAL each. KO'ing a Pokémon retargets remaining moons to the nearest enemy and grants 1 bonus moon."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

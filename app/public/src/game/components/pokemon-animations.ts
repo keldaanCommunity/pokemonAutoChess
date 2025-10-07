@@ -7287,5 +7287,11 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.FLUTTER_MANE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GHOST_RANGE
   }
 }

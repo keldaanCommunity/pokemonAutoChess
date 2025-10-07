@@ -18957,6 +18957,20 @@ export class BasculegionFemale extends Pokemon {
   skill = Ability.GRUDGE_DIVE
 }
 
+export class FlutterMane extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY, Synergy.FOSSIL])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 150
+  atk = 20
+  speed = 59
+  def = 4
+  speDef = 8
+  maxPP = 100
+  range = 3
+  skill = Ability.MOONBLAST
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20026,7 +20040,8 @@ export const PokemonClasses: Record<
   [Pkm.GALARIAN_SLOWBRO]: GalarianSlowbro,
   [Pkm.GALARIAN_SLOWKING]: GalarianSlowking,
   [Pkm.WIGLETT]: Wiglett,
-  [Pkm.WUGTRIO]: Wugtrio
+  [Pkm.WUGTRIO]: Wugtrio,
+  [Pkm.FLUTTER_MANE]: FlutterMane
 }
 
 // declare all the classes in colyseus schema TypeRegistry
