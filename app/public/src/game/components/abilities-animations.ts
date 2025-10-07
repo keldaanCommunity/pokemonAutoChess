@@ -1405,6 +1405,13 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.MUD_SHOT]: projectile({ scale: 4, duration: 350 }),
+  [Ability.MOONBLAST]: (args) =>
+    projectile({
+      scale: 2,
+      duration: 200,
+      delay: args.delay,
+      tweenProps: { scale: 0.5 }
+    })(args),
   [Ability.POLTERGEIST]: projectile({
     scale: 3,
     duration: 750,
