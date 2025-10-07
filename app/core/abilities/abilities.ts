@@ -14198,6 +14198,80 @@ export class TripleDiveStrategy extends AbilityStrategy {
   }
 }
 
+export class MoonblastStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const damage = 20
+    let lastTarget: PokemonEntity | undefined = pokemon
+    let currentTarget: PokemonEntity | undefined = target
+    let moonsRemaining = 6
+    let moonIndex = 0
+
+    // Launch 6 moons instantly, gaining extra moons when targets die
+    while (moonsRemaining > 0 && currentTarget) {
+      pokemon.broadcastAbility({
+        positionX: lastTarget.positionX,
+        positionY: lastTarget.positionY,
+        targetX: currentTarget.positionX,
+        targetY: currentTarget.positionY,
+        delay: moonIndex * 200
+      })
+
+      moonIndex++
+
+      const { death } = currentTarget.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+
+      moonsRemaining--
+
+      // If target died, find closest enemy and gain bonus moon
+      if (death) {
+        const closestEnemy = board.cells
+          .filter(
+            (entity): entity is PokemonEntity =>
+              entity instanceof PokemonEntity &&
+              entity.team !== pokemon.team &&
+              entity.life > 0
+          )
+          .sort(
+            (a, b) =>
+              distanceC(
+                a.positionX,
+                a.positionY,
+                (currentTarget || pokemon).positionX,
+                (currentTarget || pokemon).positionY
+              ) -
+              distanceC(
+                b.positionX,
+                b.positionY,
+                (currentTarget || pokemon).positionX,
+                (currentTarget || pokemon).positionY
+              )
+          )[0]
+
+        if (closestEnemy) {
+          lastTarget = currentTarget
+          currentTarget = closestEnemy
+          moonsRemaining++ // Gain 1 additional moon when switching targets
+        } else {
+          currentTarget = undefined
+        }
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14700,5 +14774,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.WISE_YAWN]: new WiseYawnStrategy(),
   [Ability.EERIE_SPELL]: new EerieSpellStrategy(),
   [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy(),
-  [Ability.TRIPLE_DIVE]: new TripleDiveStrategy()
+  [Ability.TRIPLE_DIVE]: new TripleDiveStrategy(),
+  [Ability.MOONBLAST]: new MoonblastStrategy()
 }
