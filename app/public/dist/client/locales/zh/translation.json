@@ -2940,8 +2940,8 @@
 		"BASCULIN_WHITE": "击倒5只敌方宝可梦后，进化为$t(pkm.BASCULEGION_MALE)。\n被击倒5次后，进化为$t(pkm.BASCULEGION_FEMALE)。",
 		"SPIRITOMB": "每当有宝可梦倒下时，玩家每持有一枚ODD_KEYSTONE，便会生成一团朝$t(pkm.SPIRITOMB)移动的鬼火，使其获得10点SHIELD。",
 		"SEASONAL": "季节性宝可梦会根据当前季节（以北半球为准）更改其外观和共鸣。",
-		"SLOWPOKE": "Will evolve into $t(pkm.SLOWBRO) or $t(pkm.SLOWKING) based on the dominant synergy between WATER and PSYCHIC.",
-		"GALARIAN_SLOWPOKE": "Will evolve into $t(pkm.GALARIAN_SLOWBRO) or $t(pkm.GALARIAN_SLOWKING) based on the dominant synergy between POISON and PSYCHIC."
+		"SLOWPOKE": "呆呆兽会根据WATER和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.SLOWBRO)或$t(pkm.SLOWKING)。",
+		"GALARIAN_SLOWPOKE": "伽勒尔呆呆兽会根据POISON和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.GALARIAN_SLOWBRO)或$t(pkm.GALARIAN_SLOWKING)。"
 	},
 	"stat": {
 		"ATK": "攻击",
