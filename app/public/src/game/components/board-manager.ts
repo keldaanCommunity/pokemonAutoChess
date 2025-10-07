@@ -311,7 +311,11 @@ export default class BoardManager {
         this.player.berryTreesType[i] + "_1"
       )
 
-      tree.setDepth(DEPTH.INANIMATE_OBJECTS).setScale(2, 2).setOrigin(0.5, 1)
+      tree
+        .setDepth(DEPTH.INANIMATE_OBJECTS)
+        .setScale(2, 2)
+        .setOrigin(0.5, 1)
+        .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
       if (this.player.berryTreesStages[i] === 0) {
         tree.anims.play("CROP")
       } else {
@@ -373,6 +377,7 @@ export default class BoardManager {
         )
         .setScale(2, 2)
         .setOrigin(0.5, 0.5)
+        .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
       const potPokemon = this.player.flowerPots[i]
 
       if (potPokemon) {
@@ -455,21 +460,26 @@ export default class BoardManager {
       for (let col = 0; col < BOARD_WIDTH; col++) {
         let trenchWidth = 0
         const index = col + row * BOARD_WIDTH
-        while (col + trenchWidth < BOARD_WIDTH && this.player.groundHoles[index + trenchWidth] === 5) {
+        while (
+          col + trenchWidth < BOARD_WIDTH &&
+          this.player.groundHoles[index + trenchWidth] === 5
+        ) {
           trenchWidth++
         }
         if (trenchWidth >= 2) {
           // trench
           const [x, y] = transformBoardCoordinates(col, row + 1)
-          const trench = this.scene.add.sprite(x - 44, y + 10, "ground_holes", `trench${trenchWidth}.png`)
+          const trench = this.scene.add
+            .sprite(x - 44, y + 10, "ground_holes", `trench${trenchWidth}.png`)
             .setOrigin(0, 0.5)
             .setScale(2)
             .setAlpha(0.9)
             .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+            .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
           this.groundHoles.push(trench)
           col += trenchWidth - 1
         } else {
-          // single hole          
+          // single hole
           const hole = this.player.groundHoles[index]
           if (hole > 0) {
             const [x, y] = transformBoardCoordinates(col, row + 1)
@@ -477,6 +487,7 @@ export default class BoardManager {
               .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
               .setScale(2)
               .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+              .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
             this.groundHoles.push(groundHole)
           }
         }
@@ -576,7 +587,9 @@ export default class BoardManager {
     if (this.mode === BoardMode.BATTLE && opponentId === "pve") {
       this.pveChestGroup = this.scene.add.group()
       this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
-      this.pveChest.setScale(2)
+      this.pveChest
+        .setScale(2)
+        .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
       this.pveChestGroup.add(this.pveChest)
     } else if (
       this.mode === BoardMode.BATTLE &&

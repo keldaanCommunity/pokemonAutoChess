@@ -45,12 +45,14 @@ export class DebugScene extends Phaser.Scene {
   pokemon?: PokemonSprite
   target?: PokemonSprite
   uid = "debug"
+  mapName: DungeonPMDO | "town" = "town"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
   colorFilter: Phaser.GameObjects.Rectangle | null = null
   music: Phaser.Sound.WebAudioSound | null = null
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
   abilitiesVfxGroup: Phaser.GameObjects.Group | undefined
+  landscape: Phaser.GameObjects.Sprite[] = []
 
   constructor(
     height: number,
@@ -110,6 +112,9 @@ export class DebugScene extends Phaser.Scene {
     this.pokemon.orientation = orientation
     this.pokemon.positionX = 3
     this.pokemon.positionY = 3
+
+    this.pokemon.sprite.setTint(DungeonDetails[this.mapName].tint ?? 0xffffff)
+
     let animationName = AnimationType[animationType]
     const anims = {
       ...DEFAULT_POKEMON_ANIMATION_CONFIG,
@@ -155,6 +160,7 @@ export class DebugScene extends Phaser.Scene {
   updateMap(mapName: DungeonPMDO | "town"): Promise<void> {
     if (this.map) this.map.destroy()
 
+    this.mapName = mapName
     if (mapName === "town") {
       return new Promise((resolve) => {
         this.map = this.add.tilemap("town")
@@ -206,6 +212,10 @@ export class DebugScene extends Phaser.Scene {
         ;(this.sys as any).animatedTiles.init(map)
         playMusic(this as any, DungeonDetails[mapName].music)
       })
+      .then(() => {
+        this.updateSprite(Pkm.SMEARGLE, Orientation.DOWNLEFT, "Idle", "", false)
+        this.updateLandscape()
+      })
   }
 
   updateColorFilter({
@@ -233,9 +243,25 @@ export class DebugScene extends Phaser.Scene {
     )
   }
 
+  updateLandscape() {
+    if (!this.map) return
+    const tint = DungeonDetails[this.mapName].tint ?? 0xffffff
+    this.landscape.forEach((sprite) => sprite.destroy())
+    this.landscape = [
+      this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
+      this.scene.scene.add.sprite(1200, 600, "ground_holes", `hole5.png`),
+      this.scene.scene.add.sprite(420, 660, "berry_trees", "ASPEAR_BERRY_4"),
+      this.scene.scene.add.sprite(360, 660, "berry_trees", "BABIRI_BERRY_6"),
+      this.scene.scene.add.sprite(300, 660, "berry_trees", "LIECHI_BERRY_3"),
+      this.scene.scene.add.sprite(320, 580, "flower_pots", "BLUE.png"),
+      this.scene.scene.add.sprite(420, 580, "flower_pots", "PINK.png")
+    ]
+    this.landscape.forEach((sprite) => sprite.setScale(2).setTint(tint))
+  }
+
   applyStatusAnimation(status: Status | Boost | "") {
     if (this.pokemon) {
-      this.pokemon.sprite.setTint(0xffffff)
+      this.pokemon.sprite.setTint(DungeonDetails[this.mapName].tint ?? 0xffffff)
       this.pokemon.removePoison()
       this.pokemon.removeSleep()
       this.pokemon.removeBurn()

@@ -4145,6 +4145,7 @@ export class GalarianSlowpoke extends Pokemon {
   range = 1
   skill = Ability.EERIE_SPELL
   regional = true
+  additional = true
   passive = Passive.GALARIAN_SLOWPOKE
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
@@ -4169,6 +4170,7 @@ export class GalarianSlowbro extends Pokemon {
   range = 1
   skill = Ability.SHELL_SIDE_ARM
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -4191,6 +4193,7 @@ export class GalarianSlowking extends Pokemon {
   range = 3
   skill = Ability.EERIE_SPELL
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -18638,6 +18641,7 @@ export class GalarianYamask extends Pokemon {
   range = 2
   skill = Ability.GRUDGE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
@@ -18660,6 +18664,7 @@ export class Runerigus extends Pokemon {
   range = 2
   skill = Ability.GRUDGE
   regional = true
+  additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (

@@ -410,6 +410,7 @@
 		"HEADBUTT": "头锤",
 		"STEEL_WING": "钢翼",
 		"YAWN": "哈欠",
+		"WISE_YAWN": "智慧的哈欠",
 		"FIERY_DANCE": "火之舞",
 		"BIDE": "忍耐",
 		"SHORE_UP": "集沙",
@@ -516,7 +517,9 @@
 		"FIRST_IMPRESSION": "迎头一击",
 		"GRUDGE_DIVE": "怨恨奇袭",
 		"BARED_FANGS": "群体狂咬",
-		"SOUL_TRAP": "灵魂囚笼"
+		"SOUL_TRAP": "灵魂囚笼",
+		"EERIE_SPELL": "诡异咒语",
+		"SHELL_SIDE_ARM": "臂贝武器"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -736,8 +739,11 @@
 		"LAMPENT": "灯火幽灵",
 		"CHANDELURE": "水晶灯火灵",
 		"SLOWPOKE": "呆呆兽",
+		"GALARIAN_SLOWPOKE": "伽勒尔呆呆兽",
 		"SLOWBRO": "呆壳兽",
+		"GALARIAN_SLOWBRO": "伽勒尔呆壳兽",
 		"SLOWKING": "呆呆王",
+		"GALARIAN_SLOWKING": "伽勒尔呆呆王",
 		"BELLSPROUT": "喇叭芽",
 		"WEEPINBELL": "口呆花",
 		"VICTREEBEL": "大食花",
@@ -1967,6 +1973,7 @@
 		"HEADBUTT": "对目标造成[20,40,80,SP]点SPECIAL，并使其陷入FLINCH 5秒。若目标有SHIELD，造成的伤害翻倍。",
 		"STEEL_WING": "突进至最远的可触及敌方宝可梦的邻位，对所有经过的敌方宝可梦造成SPECIAL，数值相当于[10,20,40,SP]加使用者的DEF的2倍。从每只经过的敌方宝可梦身上偷取1点DEF。",
 		"YAWN": "获得[15,30,60,SP]点SHIELD。以使用者为目标的敌方宝可梦会陷入FATIGUE 3秒，并被扣除20点AP。",
+		"WISE_YAWN": "使HP最低的我方宝可梦获得[15,30,60,SP]点SHIELD。以那只宝可梦为目标的敌方宝可梦会陷入FATIGUE 3秒，并被扣除20点AP。",
 		"FIERY_DANCE": "让火焰覆盖全身，振翅攻击目标，对其造成[25,50,100,SP]点SPECIAL，然后提升使用者30点AP。",
 		"BIDE": "3秒后，对ADJACENT敌方宝可梦造成SPECIAL，数值相当于在此期间所受伤害的[200,SP]%。",
 		"SHORE_UP": "使用者恢复[20,25,SP]%的HP。若天气为SANDSTORM，额外恢复10%。",
@@ -2072,7 +2079,9 @@
 		"FIRST_IMPRESSION": "为了回避危险，对目标造成[45,90,SP]点SPECIAL，并使其陷入FLINCH [3,5,SP]秒，随后飞离并在原地召唤一只随机的STAR常见或罕见BUG宝可梦。",
 		"GRUDGE_DIVE": "使用者受到SPECIAL，数值相当于自身最大HP的10%，并对目标造成[30,60,90,120,SP]点SPECIAL。每有一只倒下的我方宝可梦，额外造成[5,10,15,20,SP]点SPECIAL。",
 		"BARED_FANGS": "啃咬目标，对其造成SPECIAL，数值相当于ATK的[160,SP]%，并偷取目标[10,SP]点SPEED。",
-		"SOUL_TRAP": "获得[25,50,108]点SHIELD，随后使2格半径内的敌方宝可梦失去[10,SP]点PP，并陷入FATIGUE [2,SP,ND=1]秒。此外，这些敌方宝可梦会将攻击目标更改为使用者。"
+		"SOUL_TRAP": "获得[25,50,108]点SHIELD，随后使2格半径内的敌方宝可梦失去[10,SP]点PP，并陷入FATIGUE [2,SP,ND=1]秒。此外，强迫这些敌方宝可梦以使用者为目标。",
+		"EERIE_SPELL": "发射一道命中目标后会弹射至3只任意宝可梦的波动，优先弹射HP最低的目标。命中的敌方宝可梦受到[10,20,40,SP]点SPECIAL，我方宝可梦恢复[15,30,45,SP]点HP。",
+		"SHELL_SIDE_ARM": "发射一道命中目标后会弹射至3只任意宝可梦的波动，优先弹射HP最高的目标。命中的敌方宝可梦陷入POISONNED [2,3,SP]秒，我方宝可梦提升[10,20]点AP。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2930,7 +2939,9 @@
 		"BASCULIN_RED_BLUE": "$t(pkm.BASCULIN_RED)和$t(pkm.BASCULIN_BLUE)一直都在争斗。每当这两只宝可梦释放招式时，ATK较低的那只会复制较高者的该项数值。",
 		"BASCULIN_WHITE": "击倒5只敌方宝可梦后，进化为$t(pkm.BASCULEGION_MALE)。\n被击倒5次后，进化为$t(pkm.BASCULEGION_FEMALE)。",
 		"SPIRITOMB": "每当有宝可梦倒下时，玩家每持有一枚ODD_KEYSTONE，便会生成一团朝$t(pkm.SPIRITOMB)移动的鬼火，使其获得10点SHIELD。",
-		"SEASONAL": "季节性宝可梦会根据当前季节（以北半球为准）更改其外观和共鸣。"
+		"SEASONAL": "季节性宝可梦会根据当前季节（以北半球为准）更改其外观和共鸣。",
+		"SLOWPOKE": "呆呆兽会根据WATER和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.SLOWBRO)或$t(pkm.SLOWKING)。",
+		"GALARIAN_SLOWPOKE": "伽勒尔呆呆兽会根据POISON和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.GALARIAN_SLOWBRO)或$t(pkm.GALARIAN_SLOWKING)。"
 	},
 	"stat": {
 		"ATK": "攻击",
