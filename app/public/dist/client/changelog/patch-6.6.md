@@ -69,6 +69,7 @@
 - Psychic 6 QoL: Unown shops now always offer 5 different types of Unown
 - Ogerpon forms are now regional in their respective types regions (Teal: Flora, Hearthflame: Fire, Cornerstone: Rock, Wellspring: Aquatic)
 - Tapus are now regional in their respective types regions (Koko: Electric, Lele: Psychic, Bulu: Grass, Fini: Fairy)
+- On stage 20, Gourmet and Normal are now limited to 2 symbols per player, and Baby symbols can't appear anymore
 
 # Changes to Items
 
