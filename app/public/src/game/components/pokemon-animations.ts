@@ -7275,5 +7275,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.POISON_RANGE
+  },
+  [Pkm.WIGLETT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.WUGTRIO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.WATER_MELEE
   }
 }

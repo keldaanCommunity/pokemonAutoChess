@@ -20,6 +20,8 @@
 - Galarian Slowpoke
 - Galarian Slowbro
 - Galarian Slowking
+- Wiglett
+- Wugtrio
 
 # Changes to Pokemon & Abilities
 

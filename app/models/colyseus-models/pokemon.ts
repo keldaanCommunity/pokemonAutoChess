@@ -11033,6 +11033,37 @@ export class Dugtrio extends Pokemon {
   additional = true
 }
 
+export class Wiglett extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.WUGTRIO
+  hp = 80
+  atk = 5
+  speed = 55
+  def = 6
+  speDef = 4
+  maxPP = 80
+  range = 1
+  skill = Ability.TRIPLE_DIVE
+  additional = true
+}
+
+export class Wugtrio extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.WATER])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 165
+  atk = 12
+  speed = 55
+  def = 8
+  speDef = 8
+  maxPP = 80
+  range = 1
+  skill = Ability.TRIPLE_DIVE
+  additional = true
+}
+
 export class AlolanDiglett extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.STEEL])
   rarity = Rarity.UNCOMMON
@@ -20053,7 +20084,9 @@ export const PokemonClasses: Record<
   [Pkm.BASCULEGION_MALE]: BasculegionMale,
   [Pkm.GALARIAN_SLOWPOKE]: GalarianSlowpoke,
   [Pkm.GALARIAN_SLOWBRO]: GalarianSlowbro,
-  [Pkm.GALARIAN_SLOWKING]: GalarianSlowking
+  [Pkm.GALARIAN_SLOWKING]: GalarianSlowking,
+  [Pkm.WIGLETT]: Wiglett,
+  [Pkm.WUGTRIO]: Wugtrio
 }
 
 // declare all the classes in colyseus schema TypeRegistry
