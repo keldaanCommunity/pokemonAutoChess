@@ -63,6 +63,7 @@ import {
   PokemonAnimations
 } from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
+import { DungeonDetails } from "../../../../types/enum/Dungeon"
 
 const spriteCountPerPokemon = new Map<string, number>()
 
@@ -239,7 +240,7 @@ export default class PokemonSprite extends DraggableObject {
     )
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.hp - baseHP) / baseHP
-    this.sprite.setScale(2 + sizeBuff).setDepth(DEPTH.POKEMON)
+    this.sprite.setScale(2 + sizeBuff).setDepth(DEPTH.POKEMON).setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       this.animationLocked = false
       // go back to idle anim if no more animation in queue

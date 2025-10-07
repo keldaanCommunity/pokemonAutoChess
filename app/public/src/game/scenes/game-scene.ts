@@ -50,6 +50,7 @@ export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
   room: Room<GameState> | undefined
   uid: string | undefined
+  mapName: DungeonPMDO | "town" = "town"
   map: Phaser.Tilemaps.Tilemap | undefined
   battleGroup: GameObjects.Group | undefined
   abilitiesVfxGroup: GameObjects.Group | undefined
@@ -344,6 +345,7 @@ export default class GameScene extends Scene {
 
   async setMap(mapName: DungeonPMDO | "town") {
     this.board?.hideGroundHoles()
+    this.mapName = mapName
 
     if (mapName === "town") {
       this.map = this.add.tilemap("town")
