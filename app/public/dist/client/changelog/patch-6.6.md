@@ -62,6 +62,7 @@
 - Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
 - Change Wood Hammer: Recoil no longer scales on AP
 - Change Slowpoke/Slowbro/Slowking: now additional with split evolution method base on dominant water/psychic synergy.
+- Type Null and Silvally are now Normal/Artificial Legendary ; Silvally passive RKS system reworked: all synergy items held are removable and give Memory discs of those synergies when removed ; Changed Multi-Attack: also count levels of Silvally native synergies
 
 # Changes to Synergies
 

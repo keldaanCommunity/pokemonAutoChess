@@ -8328,9 +8328,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
     const synergies = pokemon.player?.synergies
     if (synergies) {
       pokemon.types.forEach((type) => {
-        if (type !== Synergy.ARTIFICIAL) {
-          synergyLevelsCount += synergies.get(type) ?? 0
-        }
+        synergyLevelsCount += synergies.get(type) ?? 0        
       })
     }
 

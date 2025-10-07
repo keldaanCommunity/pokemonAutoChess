@@ -1788,7 +1788,7 @@
 		"AROMATHERAPY": "Elimina los cambios de estado negativos y cura [20,40,80,SP] HP a los aliados adyacentes",
 		"DETECT": "PROTECT a los aliados adyacentes durante [500,SP] milisegundos multiplicados por el número de oponentes detectados en un radio de 2 celdas",
 		"SPACIAL_REND": "Invierte la posición del equipo enemigo y luego inflige [100,SP] de SPECIAL a todos los enemigos en la fila del objetivo",
-		"MULTI_ATTACK": "Inflige [15,SP] de SPECIAL a los enemigos que lo rodeen, multiplicado por la suma de los niveles de sinergia adicionales de $t(pkm.SILVALLY)",
+		"MULTI_ATTACK": "Inflige [15,SP] de SPECIAL a los enemigos que lo rodeen, multiplicado por la suma de los niveles de sinergia de $t(pkm.SILVALLY)",
 		"STICKY_WEB": "Inflige [20,35,70,SP] de SPECIAL al objetivo y proyecta una red a su alrededor. Pokémon que caminen en la red quedan PARALYSIS por 2 segundos.",
 		"ACCELEROCK": "Salta al enemigo más lejano y lo ataca inmediatamente, infligiendo [100,SP]% de ATK como SPECIAL. Reduce la DEF del usuario en 2 y aumenta su SPEED en un 5 hasta [5,SP] veces.",
 		"PETAL_BLIZZARD": "Hace [30,SP] de SPECIAL a los enemigos que lo rodeen y gana 10 AP",
