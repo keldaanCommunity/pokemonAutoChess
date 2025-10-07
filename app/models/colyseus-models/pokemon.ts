@@ -8080,7 +8080,7 @@ export class Ninjask extends Pokemon {
   onAcquired(player: Player) {
     // also gain sheninja if free space on bench
     const x = getFirstAvailablePositionInBench(player.board)
-    if (x !== undefined) {
+    if (x !== null) {
       const pokemon = PokemonFactory.createPokemonFromName(Pkm.SHEDINJA, player)
       pokemon.positionX = x
       pokemon.positionY = 0

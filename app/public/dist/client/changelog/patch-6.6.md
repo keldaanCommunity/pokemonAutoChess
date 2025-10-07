@@ -76,6 +76,7 @@
 - New weather Murky: reduce Luck by 30 (Ghost are immune), silence duration +30%. Triggered when 8 Ghost Pokémon are on board.
 - New town encounter: Makuhita
 - Pokémons are now automatically placed from the bench onto the board when free spots are available, with smarter positioning: melee Pokémons are placed in the front row, while ranged Pokémons are placed in the back row based on their attack range.
+- Not picking an add pick or Unique or Legendary at the end of the picking phase with no free space on the bench will now automatically sell the random Pokémon picked instead of doing nothing.
 
 # UI
 

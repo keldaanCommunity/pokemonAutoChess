@@ -35,7 +35,7 @@ export function giveRandomEgg(player: Player, shiny = false): Egg | undefined {
   const egg = createRandomEgg(player, shiny)
 
   const x = getFirstAvailablePositionInBench(player.board)
-  if (x !== undefined) {
+  if (x !== null) {
     egg.positionX = x
     egg.positionY = 0
     player.board.set(egg.id, egg)

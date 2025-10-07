@@ -25,7 +25,7 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
-import { getAdditionalsTier1 } from "../models/shop"
+import { getAdditionalsTier1, getSellPrice } from "../models/shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import {
   IDragDropCombineMessage,
@@ -1094,7 +1094,7 @@ export default class GameRoom extends Room<GameState> {
   spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
-    if (x !== undefined) {
+    if (x !== null) {
       pokemon.positionX = x
       pokemon.positionY = 0
       if (anim === "fishing") {
@@ -1239,11 +1239,15 @@ export default class GameRoom extends Room<GameState> {
 
     pokemonsObtained.forEach((pokemon) => {
       const freeCellX = getFirstAvailablePositionInBench(player.board)
-      if (freeCellX !== undefined) {
+      if (freeCellX !== null) {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
+      } else {
+        // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
+        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+        player.addMoney(sellPrice, true, null)
       }
     })
   }

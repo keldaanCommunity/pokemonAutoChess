@@ -97,7 +97,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
     const player = unown.player
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== undefined) {
+      if (x !== null) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
         ditto.positionX = x
         ditto.positionY = 0
@@ -492,7 +492,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     const player = unown.player
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== undefined) {
+      if (x !== null) {
         const topSynergy = pickRandomIn(player.synergies.getTopSynergies())
         const monsOfThatSynergy =
           PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
@@ -602,7 +602,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
       for (let i = 0; i < nbUnownsObtained; i++) {
         const pkm = pickRandomIn(candidates)
         const x = getFirstAvailablePositionInBench(player.board)
-        if (x !== undefined) {
+        if (x !== null) {
           const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
           pokemon.positionX = x
           pokemon.positionY = 0

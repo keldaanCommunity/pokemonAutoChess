@@ -149,7 +149,7 @@ export class OnBuyPokemonCommand extends Command<
     player.money -= cost
 
     const x = getFirstAvailablePositionInBench(player.board)
-    pokemon.positionX = x !== undefined ? x : -1
+    pokemon.positionX = x !== null ? x : -1
     pokemon.positionY = 0
     player.board.set(pokemon.id, pokemon)
     if (pokemon.types.has(Synergy.WILD)) player.updateWildChance()
@@ -247,7 +247,7 @@ export class OnPokemonCatchCommand extends Command<
 
       if (hasSpaceOnBench) {
         const x = getFirstAvailablePositionInBench(player.board)
-        pokemon.positionX = x !== undefined ? x : -1
+        pokemon.positionX = x !== null ? x : -1
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
@@ -314,7 +314,7 @@ export class OnDragDropPokemonCommand extends Command<
             })
             player.board.delete(detail.id)
             const position = getFirstAvailablePositionInBench(player.board)
-            if (position !== undefined) {
+            if (position !== null) {
               replaceDitto.positionX = position
               replaceDitto.positionY = 0
               player.board.set(replaceDitto.id, replaceDitto)
@@ -466,7 +466,7 @@ export class OnSwitchBenchAndBoardCommand extends Command<
     } else {
       // pokemon is on board, switch to bench
       const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== undefined) {
+      if (x !== null) {
         pokemon.positionX = x
         pokemon.positionY = 0
         pokemon.onChangePosition(x, 0, player, this.state)
