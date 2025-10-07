@@ -1058,7 +1058,9 @@ export enum Pkm {
   BASCULEGION_FEMALE = "BASCULEGION_FEMALE",
   GALARIAN_SLOWPOKE = "GALARIAN_SLOWPOKE",
   GALARIAN_SLOWBRO = "GALARIAN_SLOWBRO",
-  GALARIAN_SLOWKING = "GALARIAN_SLOWKING"
+  GALARIAN_SLOWKING = "GALARIAN_SLOWKING",
+  WIGLETT = "WIGLETT",
+  WUGTRIO = "WUGTRIO"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -2200,8 +2202,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TINKATINK]: "0957",
   [Pkm.TINKATUFF]: "0958",
   [Pkm.TINKATON]: "0959",
-  //[Pkm.WIGLETT]: "0960",
-  //[Pkm.WUGTRIO]: "0961",
+  [Pkm.WIGLETT]: "0960",
+  [Pkm.WUGTRIO]: "0961",
   //[Pkm.BOMBIRDIER]: "0962",
   //[Pkm.FINIZEN]: "0963",
   //[Pkm.PALAFIN]: "0964",
@@ -3326,7 +3328,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.BASCULEGION_FEMALE]: Pkm.BASCULIN_WHITE,
   [Pkm.GALARIAN_SLOWPOKE]: Pkm.GALARIAN_SLOWPOKE,
   [Pkm.GALARIAN_SLOWBRO]: Pkm.GALARIAN_SLOWPOKE,
-  [Pkm.GALARIAN_SLOWKING]: Pkm.GALARIAN_SLOWPOKE
+  [Pkm.GALARIAN_SLOWKING]: Pkm.GALARIAN_SLOWPOKE,
+  [Pkm.WIGLETT]: Pkm.WIGLETT,
+  [Pkm.WUGTRIO]: Pkm.WIGLETT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

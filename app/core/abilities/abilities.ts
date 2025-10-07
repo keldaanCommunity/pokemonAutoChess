@@ -14138,6 +14138,66 @@ export class ShellSideArmStrategy extends AbilityStrategy {
     }
   }
 }
+
+export class TripleDiveStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+
+    const damage = [15, 30, 45][pokemon.stars - 1] ?? 45
+
+    // Find 3 lowest HP enemies
+    const enemies = board.cells
+      .filter(
+        (entity): entity is PokemonEntity =>
+          entity instanceof PokemonEntity && entity.team !== pokemon.team
+      )
+      .sort((a, b) => a.life - b.life)
+      .slice(0, 3)
+
+    // Perform triple dive with 400ms delays
+    enemies.forEach((enemy, i) => {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          if (enemy) {
+            const availableAdjacentPlace = board.getClosestAvailablePlace(
+              enemy.positionX,
+              enemy.positionY
+            )
+
+            if (availableAdjacentPlace) {
+              pokemon.moveTo(
+                availableAdjacentPlace.x,
+                availableAdjacentPlace.y,
+                board
+              )
+            }
+
+            pokemon.broadcastAbility({
+              positionX: pokemon.positionX,
+              positionY: pokemon.positionY,
+              targetX: enemy.positionX,
+              targetY: enemy.positionY
+            })
+
+            enemy.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        }, 400 * i)
+      )
+    })
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14639,5 +14699,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SOUL_TRAP]: new SoulTrapStrategy(),
   [Ability.WISE_YAWN]: new WiseYawnStrategy(),
   [Ability.EERIE_SPELL]: new EerieSpellStrategy(),
-  [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy()
+  [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy(),
+  [Ability.TRIPLE_DIVE]: new TripleDiveStrategy()
 }
