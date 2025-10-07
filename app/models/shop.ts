@@ -346,15 +346,6 @@ export default class Shop {
       const synergyWanted: Synergy | undefined = portalSynergies[i]
       let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-        const specialSynergies: ReadonlyMap<Pkm, Synergy> = new Map([
-          [Pkm.TAPU_BULU, Synergy.GRASS],
-          [Pkm.TAPU_FINI, Synergy.FAIRY],
-          [Pkm.TAPU_KOKO, Synergy.ELECTRIC],
-          [Pkm.TAPU_LELE, Synergy.PSYCHIC],
-          [Pkm.OGERPON_CORNERSTONE, Synergy.ROCK],
-          [Pkm.OGERPON_HEARTHFLAME, Synergy.FIRE],
-          [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC]
-        ])
         const { types, regional } = getPokemonData(pkm)
         if (
           regional &&
@@ -364,12 +355,7 @@ export default class Shop {
           return false
         }
 
-        const hasSynergyWanted =
-          synergyWanted === undefined
-            ? true
-            : specialSynergies.has(pkm)
-              ? specialSynergies.get(pkm) === synergyWanted
-              : types.includes(synergyWanted)
+        const hasSynergyWanted = synergyWanted === undefined || types.includes(synergyWanted)
 
         return (
           hasSynergyWanted &&

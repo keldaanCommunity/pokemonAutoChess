@@ -8173,6 +8173,11 @@ export class TapuKoko extends Pokemon {
   range = 2
   skill = Ability.ELECTRIC_SURGE
   passive = Passive.ELECTRIC_TERRAIN
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ELECTRIC) ?? false
+  }
 }
 
 export class TapuLele extends Pokemon {
@@ -8188,6 +8193,11 @@ export class TapuLele extends Pokemon {
   range = 3
   skill = Ability.PSYCHIC_SURGE
   passive = Passive.PSYCHIC_TERRAIN
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.PSYCHIC) ?? false
+  }
 }
 
 export class Xerneas extends Pokemon {
@@ -8206,7 +8216,7 @@ export class Xerneas extends Pokemon {
 }
 
 export class TapuFini extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.WATER])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -8218,6 +8228,11 @@ export class TapuFini extends Pokemon {
   range = 3
   skill = Ability.MISTY_SURGE
   passive = Passive.MISTY_TERRAIN
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FAIRY) ?? false
+  }
 }
 
 export class TapuBulu extends Pokemon {
@@ -8233,6 +8248,11 @@ export class TapuBulu extends Pokemon {
   range = 1
   skill = Ability.GRASSY_SURGE
   passive = Passive.GRASSY_TERRAIN
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.GRASS) ?? false
+  }
 }
 
 export class Stakataka extends Pokemon {
@@ -15888,6 +15908,11 @@ export class OgerponTeal extends Pokemon {
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_TEAL
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FLORA)
+  }
 }
 
 export class OgerponTealMask extends Pokemon {
@@ -15906,6 +15931,11 @@ export class OgerponTealMask extends Pokemon {
   onAcquired = (player: Player) => ogerponOnAcquired(player, Item.TEAL_MASK)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_TEAL
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FLORA)
+  }
 }
 
 export class OgerponWellspring extends Pokemon {
@@ -15923,6 +15953,11 @@ export class OgerponWellspring extends Pokemon {
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_WELLSPRING
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.AQUATIC)
+  }
 }
 
 export class OgerponWellspringMask extends Pokemon {
@@ -15942,6 +15977,11 @@ export class OgerponWellspringMask extends Pokemon {
     ogerponOnAcquired(player, Item.WELLSPRING_MASK)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_WELLSPRING
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.AQUATIC)
+  }
 }
 
 export class OgerponHearthflame extends Pokemon {
@@ -15959,6 +15999,11 @@ export class OgerponHearthflame extends Pokemon {
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_HEARTHFLAME
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FIRE)
+  }
 }
 
 export class OgerponHearthflameMask extends Pokemon {
@@ -15978,6 +16023,11 @@ export class OgerponHearthflameMask extends Pokemon {
     ogerponOnAcquired(player, Item.HEARTHFLAME_MASK)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_HEARTHFLAME
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FIRE)
+  }
 }
 
 export class OgerponCornerstone extends Pokemon {
@@ -15995,6 +16045,11 @@ export class OgerponCornerstone extends Pokemon {
   onAcquired = (player: Player) => ogerponOnAcquired(player, null)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_CORNERSTONE
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ROCK)
+  }
 }
 
 export class OgerponCornerstoneMask extends Pokemon {
@@ -16014,6 +16069,11 @@ export class OgerponCornerstoneMask extends Pokemon {
     ogerponOnAcquired(player, Item.CORNERSTONE_MASK)
   afterSell = (player: Player) => ogerponOnSell(player)
   passive = Passive.OGERPON_CORNERSTONE
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ROCK)
+  }
 }
 
 export class IronHands extends Pokemon {
