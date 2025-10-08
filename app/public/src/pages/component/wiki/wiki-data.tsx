@@ -221,6 +221,10 @@ export default function WikiData() {
       <p>
         {t("wiki.arceus_rate")}: {percentage.format(ARCEUS_RATE)}
       </p>
+
+      <h2>{t("wiki.luck_title")}</h2>
+      <p>{addIconsToDescription(t("wiki.luck_description"))}</p>
+      <p>{addIconsToDescription(t("wiki.luck_formula"))}</p>
     </div>
   )
 }
