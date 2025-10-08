@@ -273,7 +273,6 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.CYCLIZAR,
   Pkm.MINIOR,
   Pkm.MORPEKO,
-  Pkm.TYPE_NULL,
   Pkm.KANGASKHAN,
   Pkm.DRUDDIGON,
   Pkm.COSMOG,
@@ -398,7 +397,8 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.OGERPON_HEARTHFLAME,
   Pkm.OGERPON_CORNERSTONE,
   Pkm.MANAPHY,
-  Pkm.CHI_YU
+  Pkm.CHI_YU,
+  Pkm.TYPE_NULL
 )
 
 export const NB_UNIQUE_PROPOSITIONS = 6

@@ -1569,7 +1569,7 @@
 		"AROMATHERAPY": "Rimuovi gli status alterati degli alleati vicini, e curagli [20,40,80,SP] HP.",
 		"DETECT": "Causa PROTECT agli alleati adiacenti per [500,SP] millisecondi, moltiplicati per il numero di avversari rilevati in un raggio di 2 celle.",
 		"SPACIAL_REND": "Inverti la posizione della squadra nemica, ed infliggi a tutti i nemici nella riga di fronte all'utilizzatore [100,SP] SPECIAL.",
-		"MULTI_ATTACK": "Infliggi [15,SP] SPECIAL a tutti i nemici adiacenti, moltiplicato per la somma dei livelli di sinergia aggiuntivi di $t(pkm.SILVALLY)",
+		"MULTI_ATTACK": "Infliggi [15,SP] SPECIAL a tutti i nemici adiacenti, moltiplicato per la somma dei livelli di sinergia di $t(pkm.SILVALLY)",
 		"STICKY_WEB": "Infliggi [20,35,70,SP] SPECIAL e proietta una ragnatela attorno al bersaglio. I Pokèmon che ci camminano sopra sono sotto PARALYSIS per 2 secondi.",
 		"ACCELEROCK": "Salta verso il nemico più lontano ed attaccalo immediatamente, infliggendogli [100,SP]% dell'ATK come SPECIAL. Riduce la DEF dell'utente di 2 e aumenta la sua SPEED del 5 fino a [5,SP] volte.",
 		"PETAL_BLIZZARD": "Infliggi [30,SP] SPECIAL ai nemici adiacenti e guadagna 10 AP",

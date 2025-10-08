@@ -13,6 +13,7 @@ import {
   Flavors,
   HMs,
   Item,
+  MemoryDiscs,
   OgerponMasks,
   Sweets,
   SynergyGivenByItem,
@@ -20,7 +21,7 @@ import {
   TMs
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
@@ -1044,5 +1045,16 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
 
   [Item.BRONZE_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(1)],
   [Item.SILVER_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(2)],
-  [Item.GOLD_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(3)]
+  [Item.GOLD_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(3)],
+
+  ...Object.fromEntries(
+    MemoryDiscs.map((memory) => [
+      memory,
+      [
+        new OnItemDroppedEffect(
+          ({ pokemon }) => PkmFamily[pokemon.name] === Pkm.TYPE_NULL
+        )
+      ]
+    ])
+  )
 }
