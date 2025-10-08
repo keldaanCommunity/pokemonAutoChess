@@ -1,9 +1,10 @@
 import i18n from "i18next"
-import { initReactI18next } from "react-i18next"
-
 import LanguageDetector from "i18next-browser-languagedetector"
 import Backend from "i18next-http-backend"
+import { initReactI18next } from "react-i18next"
 import pkg from "../../../package.json"
+import { Language } from "../../types/enum/Language"
+
 // don't want to use this?
 // have a look at the Quick start guide
 // for passing in lng and translations on init
@@ -22,6 +23,7 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     fallbackLng: "en",
+    supportedLngs: Object.values(Language),
     debug: process.env.NODE_ENV !== "production",
     backend: {
       loadPath(lngs, namespaces) {
