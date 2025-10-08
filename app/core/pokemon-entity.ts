@@ -1,5 +1,4 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
-import { t } from "i18next"
 import { nanoid } from "nanoid"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
@@ -59,12 +58,7 @@ import {
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
 import { FireHitEffect, MonsterKillEffect } from "./effects/synergies"
-import {
-  FlowerMonByPot,
-  FlowerPot,
-  FlowerPots,
-  getFlowerPotsUnlocked
-} from "./flower-pots"
+import { FlowerMonByPot, FlowerPot, getFlowerPotsUnlocked } from "./flower-pots"
 import { IdleState } from "./idle-state"
 import { ItemStats } from "./items"
 import MovingState from "./moving-state"
@@ -1198,7 +1192,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
   }) {
     this.getEffects(OnKillEffect).forEach((effect) => {
-      effect.apply(this, target, board, attackType)
+      effect.apply({ attacker: this, target, board, attackType })
     })
 
     board.forEach(

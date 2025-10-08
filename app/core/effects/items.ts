@@ -583,21 +583,21 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
     }),
-    new OnKillEffect((pokemon, target, board, attackType) => {
-      if (pokemon.player) {
+    new OnKillEffect(({ attacker, board }) => {
+      if (attacker.player) {
         const isLastEnemy =
           board.cells.some(
             (p) =>
               p &&
-              p.team !== pokemon.team &&
+              p.team !== attacker.team &&
               (p.life > 0 || p.status.resurecting)
           ) === false
-        pokemon.count.bottleCapCount++
-        const moneyGained = isLastEnemy ? pokemon.count.bottleCapCount + 1 : 1
-        pokemon.player.addMoney(moneyGained, true, pokemon)
-        pokemon.count.moneyCount += moneyGained
-        if (isLastEnemy && pokemon.count.bottleCapCount >= 10) {
-          pokemon.player.titles.add(Title.LUCKY)
+        attacker.count.bottleCapCount++
+        const moneyGained = isLastEnemy ? attacker.count.bottleCapCount + 1 : 1
+        attacker.player.addMoney(moneyGained, true, attacker)
+        attacker.count.moneyCount += moneyGained
+        if (isLastEnemy && attacker.count.bottleCapCount >= 10) {
+          attacker.player.titles.add(Title.LUCKY)
         }
       }
     })
@@ -688,11 +688,11 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   ],
 
   [Item.AMULET_COIN]: [
-    new OnKillEffect((pokemon) => {
-      if (pokemon.player) {
-        pokemon.player.addMoney(1, true, pokemon)
-        pokemon.count.moneyCount += 1
-        pokemon.count.amuletCoinCount += 1
+    new OnKillEffect(({ attacker }) => {
+      if (attacker.player) {
+        attacker.player.addMoney(1, true, attacker)
+        attacker.count.moneyCount += 1
+        attacker.count.amuletCoinCount += 1
       }
     })
   ],

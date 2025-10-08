@@ -160,6 +160,7 @@ export default class Player extends Schema implements IPlayer {
     returnStage: number
     ticketLevel: number
   }[] = []
+  specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
 
   constructor(
     id: string,
@@ -186,6 +187,7 @@ export default class Player extends Schema implements IPlayer {
     this.title = title
     this.role = role
     this.pokemonCustoms = new PokemonCustoms(pokemonCollection)
+    this.specialGameRule = state.specialGameRule
     this.flowerPots = initFlowerPots(this)
     const avatarCustom = getPokemonCustomFromAvatar(avatar)
     const avatarInCollection = pokemonCollection.get(
@@ -330,7 +332,11 @@ export default class Player extends Schema implements IPlayer {
   updateSynergies() {
     const pokemons: Pokemon[] = values(this.board)
     const previousSynergies = this.synergies.toMap()
-    let updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
+    let updatedSynergies = computeSynergies(
+      pokemons,
+      this.bonusSynergies,
+      this.specialGameRule
+    )
 
     const artifNeedsRecomputing = this.updateArtificialItems(
       previousSynergies,

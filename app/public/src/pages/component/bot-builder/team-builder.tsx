@@ -1,28 +1,28 @@
+import { Room } from "colyseus.js"
 import React, { useEffect, useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { useLocation } from "react-router-dom"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import GameState from "../../../../../rooms/states/game-state"
 import { Emotion, PkmWithCustom, Role, Transfer } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { isOnBench } from "../../../../../utils/board"
+import { values } from "../../../../../utils/schemas"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
 import ItemPicker from "./item-picker"
 import PokemonPicker from "./pokemon-picker"
 import SelectedEntity from "./selected-entity"
 import TeamEditor from "./team-editor"
-import { useTranslation } from "react-i18next"
-import { useLocation } from "react-router-dom"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { values } from "../../../../../utils/schemas"
-import { isOnBench } from "../../../../../utils/board"
 import "./team-builder.css"
-import GameState from "../../../../../rooms/states/game-state"
-import { Room } from "colyseus.js"
 
 export default function TeamBuilder(props: {
   bot?: IBot

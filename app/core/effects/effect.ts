@@ -103,21 +103,18 @@ export class OnItemDroppedEffect extends Effect {
   }
 }
 
+interface OnKillEffectArgs {
+  attacker: PokemonEntity
+  target: PokemonEntity
+  board: Board
+  attackType: AttackType
+}
+
 // applied after knocking out an enemy
 export class OnKillEffect extends Effect {
-  apply(
-    attacker: PokemonEntity,
-    target: PokemonEntity,
-    board: Board,
-    attackType: AttackType
-  ) {}
+  apply(args: OnKillEffectArgs) {}
   constructor(
-    effect?: (
-      entity: PokemonEntity,
-      target: PokemonEntity,
-      board: Board,
-      attackType: AttackType
-    ) => void,
+    effect?: (args: OnKillEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

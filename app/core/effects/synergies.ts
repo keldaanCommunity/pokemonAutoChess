@@ -27,18 +27,18 @@ export class MonsterKillEffect extends OnKillEffect {
     this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
   }
 
-  apply(pokemon, target, board, attackType) {
+  apply({ attacker, target }) {
     const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
     const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
     const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
     const lifeBoost = hpGain * target.hp
-    pokemon.addAttack(attackBoost, pokemon, 0, false)
-    pokemon.addAbilityPower(apBoost, pokemon, 0, false)
-    pokemon.addMaxHP(lifeBoost, pokemon, 0, false)
+    attacker.addAttack(attackBoost, attacker, 0, false)
+    attacker.addAbilityPower(apBoost, attacker, 0, false)
+    attacker.addMaxHP(lifeBoost, attacker, 0, false)
     this.hpBoosted += lifeBoost
     this.count += 1
-    if (pokemon.items.has(Item.BERSERK_GENE)) {
-      pokemon.status.triggerConfusion(3000, pokemon, pokemon)
+    if (attacker.items.has(Item.BERSERK_GENE)) {
+      attacker.status.triggerConfusion(3000, attacker, attacker)
     }
   }
 }

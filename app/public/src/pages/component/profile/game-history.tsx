@@ -1,6 +1,6 @@
+import { ArraySchema } from "@colyseus/schema"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { ArraySchema } from "@colyseus/schema"
 import {
   IGameRecord,
   IPokemonRecord
@@ -8,12 +8,12 @@ import {
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { SynergyTriggers } from "../../../../../types/Config"
+import { GameMode } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
-import { GameMode } from "../../../../../types/enum/Game"
 import "./game-history.css"
 
 export default function GameHistory(props: {

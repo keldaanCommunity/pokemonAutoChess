@@ -216,7 +216,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
 )
 
 const KubfuOnKillEffect = new OnKillEffect(
-  (pokemon, target, board, attackType) => {
+  ({ attacker: pokemon, attackType }) => {
     const SPEED_BUFF_PER_KILL = 3
     const AP_BUFF_PER_KILL = 5
     const MAX_BUFFS = 10
@@ -955,31 +955,31 @@ export const PassiveEffects: Partial<
   ],
   [Passive.PACHIRISU]: [PachirisuBerryEffect],
   [Passive.SOUL_HEART]: [
-    new OnKillEffect((pokemon) => {
-      pokemon.addPP(10, pokemon, 0, false)
-      pokemon.addAbilityPower(10, pokemon, 0, false)
+    new OnKillEffect(({ attacker }) => {
+      attacker.addPP(10, attacker, 0, false)
+      attacker.addAbilityPower(10, attacker, 0, false)
     })
   ],
   [Passive.BEAST_BOOST_ATK]: [
-    new OnKillEffect((pokemon) => {
-      pokemon.addAttack(5, pokemon, 0, false)
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAttack(5, attacker, 0, false)
     })
   ],
   [Passive.BEAST_BOOST_AP]: [
-    new OnKillEffect((pokemon) => {
-      pokemon.addAbilityPower(10, pokemon, 0, false)
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAbilityPower(10, attacker, 0, false)
     })
   ],
   [Passive.GRIM_NEIGH]: [
-    new OnKillEffect((pokemon) => {
-      pokemon.addAbilityPower(30, pokemon, 0, false)
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAbilityPower(30, attacker, 0, false)
     })
   ],
   [Passive.GUZZLORD]: [
-    new OnKillEffect((pokemon) => {
-      if (pokemon.items.has(Item.CHEF_HAT)) {
-        pokemon.addAbilityPower(5, pokemon, 0, false, true)
-        pokemon.addMaxHP(10, pokemon, 0, false, true)
+    new OnKillEffect(({ attacker }) => {
+      if (attacker.items.has(Item.CHEF_HAT)) {
+        attacker.addAbilityPower(5, attacker, 0, false, true)
+        attacker.addMaxHP(10, attacker, 0, false, true)
       }
     })
   ],
@@ -1037,9 +1037,9 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.BASCULIN_WHITE]: [
-    new OnKillEffect(
-      (pokemon) => pokemon instanceof BasculinWhite && pokemon.killCount++
-    )
+    new OnKillEffect(({ attacker }) => {
+      if (attacker instanceof BasculinWhite) attacker.killCount++
+    })
   ],
   [Passive.BASCULIN_RED_BLUE]: [
     new OnAbilityCastEffect((pokemon, board) => {

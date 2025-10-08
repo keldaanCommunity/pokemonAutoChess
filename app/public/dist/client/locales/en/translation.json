@@ -4098,7 +4098,9 @@
 		"BLOOD_MONEY": "Blood Money",
 		"TOWN_FESTIVAL": "Town Festival",
 		"HIGH_ROLLER": "High Roller",
-		"REGIONAL_SPECIALTIES": "Regional Specialties"
+		"REGIONAL_SPECIALTIES": "Regional Specialties",
+		"GO_BIG_OR_GO_HOME": "Go big or go home",
+		"FAMILY_OUTING": "Family Outing"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -4117,7 +4119,9 @@
 		"BLOOD_MONEY": "Every KO gives 1 GOLD (excluding clones and spawns). No extra income from interests.",
 		"TOWN_FESTIVAL": "You always get an encounter in town and all the carousel items are free.",
 		"HIGH_ROLLER": "Shops have a chance to contain Hatch at stages 0-10, Unique at stages 10-20 and Legendary after stage 20.",
-		"REGIONAL_SPECIALTIES": "Your current region types count towards your synergies. After changing region, your team tastes a local dish."
+		"REGIONAL_SPECIALTIES": "Your current region types count towards your synergies. After changing region, your team tastes a local dish.",
+		"GO_BIG_OR_GO_HOME": "Units gain 5 max HP and grow in size at every stage.",
+		"FAMILY_OUTING": "Pokémon from the same family all count towards synergy levels. "
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
