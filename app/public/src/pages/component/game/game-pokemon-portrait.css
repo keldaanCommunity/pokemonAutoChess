@@ -58,6 +58,7 @@
   top: 0;
   right: 0;
   height: 100%;
+  box-shadow: inset 8px 0 8px -8px #00000080;
 }
 
 .game-pokemon-portrait-types img {

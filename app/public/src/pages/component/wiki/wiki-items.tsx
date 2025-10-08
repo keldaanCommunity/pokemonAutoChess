@@ -9,6 +9,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  MemoryDiscs,
   ShinyItems,
   SpecialItems,
   SynergyGems,
@@ -23,6 +24,7 @@ import SynergyIcon from "../icons/synergy-icon"
 export default function WikiItems() {
   const [itemHovered, setItemHovered] = useState<Item>()
   const { t } = useTranslation()
+  const specialItems = SpecialItems.filter((i) => !(MemoryDiscs as readonly Item[]).includes(i)) // too many memory discs to display
   return (
     <div id="wiki-items">
       <article className="craftable">
@@ -117,7 +119,7 @@ export default function WikiItems() {
         <h2>{t("special_items")}</h2>
         <p>{t("special_items_description")}</p>
         <ul className="special">
-          {SpecialItems.map((i) => (
+          {specialItems.map((i) => (
             <li
               key={i}
               data-tooltip-id="item-detail"

@@ -24,6 +24,7 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
+  MemoryDiscsBySynergy,
   OgerponMasks,
   RemovableItems,
   SynergyGivenByItem,
@@ -273,6 +274,13 @@ export class Pokemon extends Schema implements IPokemon {
         otherSynergyItemsHeld.length === 0
       ) {
         this.types.delete(synergyRemoved)
+        if (this.passive === Passive.RKS_SYSTEM) {
+          const memory = MemoryDiscsBySynergy[synergyRemoved]
+          console.log("Synergy removed", synergyRemoved, memory)
+          if (player.items.includes(memory) === false && memory) {
+            player.items.push(memory)
+          }
+        }
       }
     }
 
@@ -9674,16 +9682,16 @@ export class Granbull extends Pokemon {
 }
 
 export class TypeNull extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
+  rarity = Rarity.LEGENDARY
   stars = 2
   evolution = Pkm.SILVALLY
   evolutionRule = new ItemEvolutionRule([...SynergyItems])
-  hp = 200
-  atk = 15
+  hp = 260
+  atk = 20
   speed = 55
-  def = 6
-  speDef = 6
+  def = 12
+  speDef = 12
   maxPP = 100
   range = 1
   skill = Ability.HEAD_SMASH
@@ -9691,14 +9699,14 @@ export class TypeNull extends Pokemon {
 }
 
 export class Silvally extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ARTIFICIAL])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ARTIFICIAL])
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 260
-  atk = 18
+  hp = 300
+  atk = 25
   speed = 55
-  def = 12
-  speDef = 12
+  def = 15
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.MULTI_ATTACK
