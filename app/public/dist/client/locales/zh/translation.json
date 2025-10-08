@@ -3807,6 +3807,7 @@
 	"help": "帮助",
 	"index": "序号",
 	"evolution": "进化为",
+	"evolves_from": "进化前为",
 	"portrait_credit": "头像画师",
 	"sprite_credit": "精灵图画师",
 	"bot_admin": "机器人管理员",
