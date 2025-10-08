@@ -129,6 +129,7 @@
 - Fix "Gotta Catch 'em All" wanderers getting stuck when caught with a full bench
 - Fix Petal Blizzard still dealing damage based on attack range
 - Fix Swallow heal never triggering
+- Fix Bitter Blade heal not accounting for factors that increase base hp
 
 Special thanks to salamander for reporting and working on many of these fixes! 
 
