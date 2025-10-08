@@ -10474,7 +10474,7 @@ export class WoodHammerStrategy extends AbilityStrategy {
             board,
             AttackType.PHYSICAL,
             pokemon,
-            crit,
+            false,
             false
           )
         }
@@ -14093,7 +14093,9 @@ export class ShellSideArmStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
 
-    const poisonDuration = [2000, 3000][pokemon.stars - 1] ?? 3000
+    const poisonDuration = ([2000, 3000][pokemon.stars - 1] ?? 3000) * 
+    (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    
     const apBoost = [10, 20][pokemon.stars - 1] ?? 20
     const visited = new Set<string>()
     let currentTarget: PokemonEntity | undefined = target
@@ -14118,7 +14120,7 @@ export class ShellSideArmStrategy extends AbilityStrategy {
 
         // Poison enemies, boost allies' AP
         if (currentTarget.team === pokemon.team) {
-          currentTarget.addAbilityPower(apBoost, pokemon, 1, crit)
+          currentTarget.addAbilityPower(apBoost, pokemon, 0, false)
         } else {
           currentTarget.status.triggerPoison(
             poisonDuration,
