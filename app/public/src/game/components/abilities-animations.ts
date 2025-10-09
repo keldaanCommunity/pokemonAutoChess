@@ -723,7 +723,7 @@ export const AbilitiesAnimations: {
   [Ability.LEECH_SEED]: onTargetScale2,
   [Ability.TRIPLE_DIVE]: onTarget({ ability: Ability.WATERFALL, scale: 2 }),
   [Ability.LOCK_ON]: onTargetScale2,
-  [Ability.PSYCH_UP]: onTargetScale2,
+  [Ability.DISABLE]: onTargetScale2,
   [Ability.ROCK_SMASH]: onTargetScale2,
   [Ability.BLAZE_KICK]: onTarget({ positionOffset: [0, -35] }),
   [Ability.BITE]: onTargetScale2,
