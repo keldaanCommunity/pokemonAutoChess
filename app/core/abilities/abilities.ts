@@ -8328,7 +8328,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
     const synergies = pokemon.player?.synergies
     if (synergies) {
       pokemon.types.forEach((type) => {
-        synergyLevelsCount += synergies.get(type) ?? 0        
+        synergyLevelsCount += synergies.get(type) ?? 0
       })
     }
 
@@ -12487,7 +12487,7 @@ export class BitterBladeStrategy extends AbilityStrategy {
         )
       }
     }
-    pokemon.handleHeal(pokemon.baseHP * 0.1 * nbEnemiesHit, pokemon, 0, false)
+    pokemon.handleHeal(pokemon.hp * 0.1 * nbEnemiesHit, pokemon, 0, false)
   }
 }
 
@@ -14093,9 +14093,11 @@ export class ShellSideArmStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
 
-    const poisonDuration = ([2000, 3000][pokemon.stars - 1] ?? 3000) * 
-    (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    
+    const poisonDuration =
+      ([2000, 3000][pokemon.stars - 1] ?? 3000) *
+      (1 + pokemon.ap / 100) *
+      (crit ? pokemon.critPower : 1)
+
     const apBoost = [10, 20][pokemon.stars - 1] ?? 20
     const visited = new Set<string>()
     let currentTarget: PokemonEntity | undefined = target
