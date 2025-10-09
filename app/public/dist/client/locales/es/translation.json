@@ -1780,7 +1780,7 @@
 		"WILDBOLT_STORM": "Tempestad atronadora que golpea a todos los enemigos en línea recta, causando [80,SP] de SPECIAL y PARALYSIS por 4 segundos",
 		"BLEAKWIND_STORM": "Vientos salvajemente fríos que golpean a todos los enemigos en línea recta, causando [80,SP] de SPECIAL y FREEZE por 2 segundos",
 		"SPRINGTIDE_STORM": "Feroces vientos mezclados de amor y odio golpean a todos los enemigos en línea recta, causando [80,SP] de SPECIAL y CHARM por 2 segundos",
-		"AURA_WHEEL": "Inflige [60,SP] de SPECIAL, gana [10,SP] de SPEED y cambia entre su forma Saciada y Voraz",
+		"AURA_WHEEL": "Inflige [60,SP] de SPECIAL, gana 10 de SPEED y cambia entre su forma Saciada y Voraz",
 		"LICK": "Inflige [30,60,120,SP] de SPECIAL. Deja al objetivo CONFUSION y PARALYSIS por 3 segundos",
 		"FURY_SWIPES": "Inflige de [2,SP] a [5,SP] ataques como PHYSICAL",
 		"TICKLE": "Reduce el ATK y DEF de [1,2] enemigos más cercanos en [3,SP]",

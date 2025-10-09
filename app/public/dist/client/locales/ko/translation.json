@@ -1719,7 +1719,7 @@
 		"WILDBOLT_STORM": "직선상의 모든 적에게 [80,SP] SPECIAL 과 4초간 PARALYSIS 를 입히는 폭풍우를 부른다.",
 		"BLEAKWIND_STORM": "직선상의 모든 적에게 [80,SP] SPECIAL 를 입히고 2초간 FREEZE 를 부여하는 차가운 바람을 날린다.",
 		"SPRINGTIDE_STORM": "사랑과 증오로 가득 찬 맹렬한 바람이 직선상의 모든 적에게 강타를 하며  [80,SP] SPECIAL을 입히고 과 2초 동안 CHARM 을 부여한다.",
-		"AURA_WHEEL": "[60,SP] SPECIAL을 입히고, [10,SP]%의 SPEED를 얻고, 배부른 모양과 배고픈 모양 사이를 전환한다.",
+		"AURA_WHEEL": "[60,SP] SPECIAL을 입히고, 10의 SPEED를 얻고, 배부른 모양과 배고픈 모양 사이를 전환한다.",
 		"LICK": "[30,60,120,SP] SPECIAL 을 입힌다. 대상은 3초 동안 CONFUSION 과 PARALYSIS에 빠진다.",
 		"FURY_SWIPES": "대상에 [2,SP] ~ [5,SP] 회만큼의 공격을 PHYSICAL로 가한다.",
 		"TICKLE": "가장 가까운 [1,2] 대상의 ATK 과 DEF 를 [3,SP]만큼 감소시킨다.",

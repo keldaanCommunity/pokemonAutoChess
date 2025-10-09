@@ -1898,7 +1898,7 @@
 		"WILDBOLT_STORM": "用雷与风激烈的攻击一条直线上的敌方宝可梦，对他们造成[80,SP]点SPECIAL并使他们陷入PARALYSIS 4秒。",
 		"BLEAKWIND_STORM": "用冰冷狂风攻击一条直线上的敌方宝可梦，对他们造成[80,SP]点SPECIAL并使他们陷入FREEZE 2秒。",
 		"SPRINGTIDE_STORM": "用交织着爱与恨的烈风攻击一条直线上的敌方宝可梦，对他们造成[80,SP]点SPECIAL并使他们陷入CHARM 2秒。",
-		"AURA_WHEEL": "对目标造成[60,SP]点SPECIAL，并提升使用者[10,SP]点SPEED，且在满腹和空腹状态之间切换。",
+		"AURA_WHEEL": "对目标造成[60,SP]点SPECIAL，并提升使用者10点SPEED，且在满腹和空腹状态之间切换。",
 		"LICK": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入CONFUSION和PARALYSIS 3秒。",
 		"FURY_SWIPES": "连续进行[2,SP]到[5,SP]次普通攻击。攻击次数同时受到LUCK加成。",
 		"TICKLE": "降低最近的[1,2]个目标[3,SP]点ATK和DEF。",

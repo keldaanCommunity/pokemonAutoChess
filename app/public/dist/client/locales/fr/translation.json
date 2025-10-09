@@ -1899,7 +1899,7 @@
 		"WILDBOLT_STORM": "Un violent typhon orageux dont les rafales et la foudre s'abattent sur tous les ennemis en ligne droite, infligeant [80,SP] SPECIAL et PARALYSIS pendant 4 secondes.",
 		"BLEAKWIND_STORM": "Un typhon froid et brutal fait trembler le cœur et le corps de tous les ennemis en ligne droite, infligeant [80,SP] SPECIAL et FREEZE pendant 2 secondes.",
 		"SPRINGTIDE_STORM": "Un violent typhon mêlé de haine et d'amour s'abat sur tous les ennemis en ligne droite, infligeant [80,SP] SPECIAL et rend CHARM pendant 2 secondes.",
-		"AURA_WHEEL": "Inflige [60,SP] SPECIAL, gagne [10,SP] SPEED et bascule entre les formes Affamé et Rassasié.",
+		"AURA_WHEEL": "Inflige [60,SP] SPECIAL, gagne 10 SPEED et bascule entre les formes Affamé et Rassasié.",
 		"LICK": "Un grand coup de langue qui inflige [30,60,120,SP] SPECIAL, PARALYSIS et rend CONFUSION pendant 3 secondes.",
 		"FURY_SWIPES": "L'ennemi est lacéré par des faux ou des griffes, causant [2,SP] à [5,SP] attaques basiques d'affilée. Le nombre de coups augmente avec la LUCK",
 		"TICKLE": "Réduit l'ATK et la DEF des [1,2] ennemis les plus proches de [3,SP].",

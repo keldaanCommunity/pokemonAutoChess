@@ -64,6 +64,7 @@
 - Change Slowpoke/Slowbro/Slowking: now additional with split evolution method base on dominant water/psychic synergy.
 - Type Null and Silvally are now Normal/Artificial Legendary ; Silvally passive RKS system reworked: all synergy items held are removable and give Memory discs of those synergies when removed ; Changed Multi-Attack: also count levels of Silvally native synergies
 - Psych Up has been renamed Disable
+- Removed AP scaling from speed gain on Aura Wheel (Morpeko)
 
 # Changes to Synergies
 

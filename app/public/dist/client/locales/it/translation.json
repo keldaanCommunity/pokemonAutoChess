@@ -1561,7 +1561,7 @@
 		"WILDBOLT_STORM": "Evoca una tempesta fragorosa che colpisce tutti i nemici in una linea retta, infliggendogli [80,SP] SPECIAL e causando PARALYSIS per 4 secondi.",
 		"BLEAKWIND_STORM": "Scatena un selvaggio vento freddo che colpisce tutti i nemici in una linea retta, infliggendogli [80,SP] SPECIAL e causando FREEZE per 2 secondi.",
 		"SPRINGTIDE_STORM": "Crea dei forti venti pieni d'amore ed odio che colpiscono tutti i nemici in una linea retta, infliggendogli [80,SP] SPECIAL e causando CHARM per 2 secondi.",
-		"AURA_WHEEL": "Infliggi [60,SP] SPECIAL, potenzia la SPEED del [10,SP] e cambia fra la forma Panciapiena e la forma Panciavuota.",
+		"AURA_WHEEL": "Infliggi [60,SP] SPECIAL, potenzia la SPEED del 10 e cambia fra la forma Panciapiena e la forma Panciavuota.",
 		"LICK": "Infliggi [30,60,120,SP] SPECIAL e causa al bersaglio CONFUSION e PARALYSIS per 3 secondi.",
 		"FURY_SWIPES": "Attacca [5,SP] ed infliggi [2,SP] come PHYSICAL.",
 		"TICKLE": "Riduci l'ATK e la DEF dei [1,2] bersagli più vicini di [3,SP].",

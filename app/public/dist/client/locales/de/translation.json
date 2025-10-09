@@ -1812,7 +1812,7 @@
 		"WILDBOLT_STORM": "Donnernder Sturm, der alle Feinde in einer geraden Linie trifft und 4 Sekunden lang [80,SP] SPECIAL und PARALYSIS verursacht",
 		"BLEAKWIND_STORM": "Wilde kalte Winde, die alle Feinde in einer geraden Linie treffen und [80,SP] SPECIAL und 2 Sekunden lang FREEZE verursachen",
 		"SPRINGTIDE_STORM": "Wilde Winde voller Liebe und Hass treffen alle Feinde in einer geraden Linie und verursachen 2 Sekunden lang [80,SP] SPECIAL und CHARM",
-		"AURA_WHEEL": "Verursacht [60,SP] SPECIAL, erhält [10,SP] SPEED und wechselt zwischen Normal- und Hangry-Form",
+		"AURA_WHEEL": "Verursacht [60,SP] SPECIAL, erhält 10 SPEED und wechselt zwischen Normal- und Hangry-Form",
 		"LICK": "Verursacht [30,60,120,SP] SPECIAL. Das Ziel ist 3 Sekunden lang CONFUSION und PARALYSIS",
 		"FURY_SWIPES": "Verursacht [2,SP] bis [5,SP] Angriffe als PHYSICAL",
 		"TICKLE": "Reduziert ATK und DEF der [1,2] nächstgelegenen Ziele um [3,SP]",

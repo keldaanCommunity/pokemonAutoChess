@@ -8129,7 +8129,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]
     }
-    pokemon.addSpeed(10, pokemon, 1, crit)
+    pokemon.addSpeed(10, pokemon, 0, false)
 
     target.handleSpecialDamage(
       60,
