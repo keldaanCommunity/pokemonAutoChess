@@ -1430,6 +1430,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.room.spawnOnBench(player, player.firstPartner, "spawn")
     }
 
+    if(this.state.specialGameRule === SpecialGameRule.GO_BIG_OR_GO_HOME) {
+      board.forEach((pokemon) => {
+        pokemon.hp += 5
+        if (pokemon.hp >= 1500 && player) {
+          player.titles.add(Title.GIANT)
+        }
+      })
+    }
+
     if (
       player.pokemonsTrainingInDojo.some(
         (p) => p.returnStage === this.state.stageLevel

@@ -1,13 +1,10 @@
 import { MapSchema } from "@colyseus/schema"
 import { IPokemon } from "../../types"
 import { SynergyTriggers } from "../../types/Config"
-import {
-  ArtificialItems,
-  Item,
-  SynergyGivenByItem
-} from "../../types/enum/Item"
+import { ArtificialItems, SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
 
@@ -61,16 +58,17 @@ export default class Synergies
 
 export function computeSynergies(
   board: IPokemon[],
-  bonusSynergies?: Map<Synergy, number>
+  bonusSynergies?: Map<Synergy, number>,
+  specialGameRule?: SpecialGameRule | null
 ): Map<Synergy, number> {
   const synergies = new Map<Synergy, number>()
   Object.keys(Synergy).forEach((key) => {
     synergies.set(key as Synergy, bonusSynergies?.get(key as Synergy) ?? 0)
   })
 
-  const typesPerFamily = new Map<Pkm, Set<Synergy>>()
+  const typesPerFamily = new Map<string, Set<Synergy>>()
 
-  board.forEach((pkm: IPokemon) => {
+  board.forEach((pkm: IPokemon, index) => {
     // reset dynamic synergies
     if (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3) {
       //pkm.types.clear()
@@ -79,7 +77,10 @@ export function computeSynergies(
 
     addSynergiesGivenByItems(pkm)
     if (pkm.positionY != 0) {
-      const family = PkmFamily[pkm.name]
+      const family =
+        specialGameRule === SpecialGameRule.FAMILY_OUTING
+          ? `pkm${index}`
+          : PkmFamily[pkm.name]
       if (!typesPerFamily.has(family)) typesPerFamily.set(family, new Set())
       const types: Set<Synergy> = typesPerFamily.get(family)!
       pkm.types.forEach((type) => types.add(type))
