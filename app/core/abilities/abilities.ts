@@ -9265,7 +9265,7 @@ export class PsyShockStrategy extends AbilityStrategy {
         AttackType.SPECIAL,
         pokemon,
         crit,
-        true
+        false
       )
     }
   }
