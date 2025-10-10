@@ -704,6 +704,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getFinalizedLines(): Set<Pkm> {
+    if (this.specialGameRule === SpecialGameRule.FAMILY_OUTING) return new Set() // in family outing mode, do not remove finished lines from shop
     const finals = new Set(
       values(this.board)
         .filter((pokemon) => pokemon.final)
