@@ -65,7 +65,7 @@
 - Type Null and Silvally are now Normal/Artificial Legendary ; Silvally passive RKS system reworked: all synergy items held are removable and give Memory discs of those synergies when removed ; Changed Multi-Attack: also count levels of Silvally native synergies
 - Psych Up has been renamed Disable
 - Removed AP scaling from speed gain on Aura Wheel (Morpeko)
-- Changed Chingling evolution rule: now evolves into Chimecho after 30 abilities have been casted by your team
+- Changed Chingling evolution rule: now evolves into Chimecho after 30 abilities have been cast by your team
 
 # Changes to Synergies
 
