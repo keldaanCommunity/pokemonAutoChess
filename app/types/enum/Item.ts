@@ -150,7 +150,7 @@ export enum Item {
   TM_TAUNT = "TM_TAUNT",
   TM_BULK_UP = "TM_BULK_UP",
   TM_REFLECT = "TM_REFLECT",
-  TM_PSYCH_UP = "TM_PSYCH_UP",
+  TM_DISABLE = "TM_DISABLE",
   TM_COUNTER = "TM_COUNTER",
   TM_PAYDAY = "TM_PAYDAY",
   HM_CUT = "HM_CUT",
@@ -696,7 +696,7 @@ export const TMs = [
   Item.TM_TAUNT,
   Item.TM_BULK_UP,
   Item.TM_REFLECT,
-  Item.TM_PSYCH_UP,
+  Item.TM_DISABLE,
   Item.TM_COUNTER,
   Item.TM_PAYDAY
 ]
@@ -718,7 +718,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_TAUNT]: Ability.TAUNT,
   [Item.TM_BULK_UP]: Ability.BULK_UP,
   [Item.TM_REFLECT]: Ability.REFLECT,
-  [Item.TM_PSYCH_UP]: Ability.PSYCH_UP,
+  [Item.TM_DISABLE]: Ability.DISABLE,
   [Item.TM_COUNTER]: Ability.COUNTER,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
   [Item.HM_CUT]: Ability.CUT,

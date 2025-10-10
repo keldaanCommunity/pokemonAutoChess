@@ -1006,7 +1006,7 @@ export class LockOnStrategy extends AbilityStrategy {
   }
 }
 
-export class PsychUpStrategy extends AbilityStrategy {
+export class DisableStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -8129,7 +8129,7 @@ export class AuraWheelStrategy extends AbilityStrategy {
       pokemon.name = Pkm.MORPEKO
       pokemon.index = PkmIndex[Pkm.MORPEKO]
     }
-    pokemon.addSpeed(10, pokemon, 1, crit)
+    pokemon.addSpeed(10, pokemon, 0, false)
 
     target.handleSpecialDamage(
       60,
@@ -14375,7 +14375,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLAME_CHARGE]: new FlameChargeStrategy(),
   [Ability.LEECH_SEED]: new LeechSeedStrategy(),
   [Ability.LOCK_ON]: new LockOnStrategy(),
-  [Ability.PSYCH_UP]: new PsychUpStrategy(),
+  [Ability.DISABLE]: new DisableStrategy(),
   [Ability.RAZOR_WIND]: new RazorWindStrategy(),
   [Ability.PRECIPICE_BLADES]: new PrecipiceBladesStrategy(),
   [Ability.SOFT_BOILED]: new SoftBoiledStrategy(),
