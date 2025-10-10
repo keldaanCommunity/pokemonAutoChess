@@ -2774,8 +2774,8 @@
 		"SCROLL_OF_DARKNESS": "Les véritables secrets de la voie des ténèbres y sont inscrits. Lorsqu'il est utilisé sur un $t(pkm.KUBFU), il évolue en $t(pkm.URSHIFU_SINGLE).",
 		"RICH_MULCH": "Utilisez-le sur un Pot de Fleurs pour faire évoluer le Pokémon à l'intérieur.",
 		"AMAZE_MULCH": "Utilisez-le sur un Pot de Fleurs pour donner de façon permanente 50 HP max et 30 AP au Pokémon à l'intérieur.",
-		"BRONZE_DOJO_TICKET": "Utilisez-le sur un Pokémon pour l'envoyer au Dojo pendant 5 tours, il reviendra avec +50 HP max, +5 ATK et +15 AP. Un clone prendra sa place pendant son entraînement.",
-		"SILVER_DOJO_TICKET": "Utilisez-le sur un Pokémon pour l'envoyer au Dojo pendant 5 tours, il reviendra avec +100 HP max, +10 ATK et +30 AP. Un clone prendra sa place pendant son entraînement.",
+		"BRONZE_DOJO_TICKET": "Utilisez-le sur un Pokémon pour l'envoyer au Dojo pendant 3 tours, il reviendra avec +50 HP max, +5 ATK et +15 AP. Un clone prendra sa place pendant son entraînement.",
+		"SILVER_DOJO_TICKET": "Utilisez-le sur un Pokémon pour l'envoyer au Dojo pendant 4 tours, il reviendra avec +100 HP max, +10 ATK et +30 AP. Un clone prendra sa place pendant son entraînement.",
 		"GOLD_DOJO_TICKET": "Utilisez-le sur un Pokémon pour l'envoyer au Dojo pendant 5 tours, il reviendra avec +150 HP max, +15 ATK et +45 AP. Un clone prendra sa place pendant son entraînement."
 	},
 	"passive_description": {
