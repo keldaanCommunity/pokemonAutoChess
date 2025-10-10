@@ -60,7 +60,10 @@ import {
 } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import PokemonFactory, { getPokemonBaseline } from "../pokemon-factory"
+import PokemonFactory, {
+  getPokemonBaseline,
+  PkmColorVariantsByPkm
+} from "../pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -246,7 +249,18 @@ export default class Player extends Schema implements IPlayer {
           (p) => getPokemonData(p).stages === 3
         ),
         3
-      )
+      ).map((pkm) => {
+        if (pkm in PkmRegionalVariants) {
+          const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
+            this.regionalPokemons.includes(p)
+          )
+          if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
+        }
+        if (pkm in PkmColorVariantsByPkm) {
+          pkm = PkmColorVariantsByPkm[pkm]!(this)
+        }
+        return pkm
+      })
       this.pokemonsProposition.push(...partnersPropositions)
     } else {
       this.firstPartner = state.shop.getRandomPokemonFromPool(
