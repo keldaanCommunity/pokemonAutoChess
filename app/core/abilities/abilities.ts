@@ -9554,7 +9554,8 @@ export class FlashStrategy extends AbilityStrategy {
 
     const duration =
       [2000, 4000, 6000][pokemon.stars - 1] ??
-      6000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+     ( [2000, 4000, 6000][pokemon.stars - 1] ?? 6000)
+ * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3)
       .forEach((cell) => {
