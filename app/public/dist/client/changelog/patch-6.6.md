@@ -135,6 +135,7 @@
 - Fix Bitter Blade heal not accounting for factors that increase base hp
 - Fix Psyshock damage scaling on AP twice
 - Fix Shore Up sandstorm heal not showing AP scaling in the description
+- Fix Flash not scaling on AP
 
 Special thanks to salamander for reporting and working on many of these fixes! 
 
