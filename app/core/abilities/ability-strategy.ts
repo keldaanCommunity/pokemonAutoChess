@@ -30,9 +30,9 @@ export class AbilityStrategy {
     })
 
     if (pokemon.team === Team.BLUE_TEAM) {
-      pokemon.simulation.blueAbilitiesCasted.push(pokemon.skill)
+      pokemon.simulation.blueAbilitiesCast.push(pokemon.skill)
     } else if (pokemon.team === Team.RED_TEAM) {
-      pokemon.simulation.redAbilitiesCasted.push(pokemon.skill)
+      pokemon.simulation.redAbilitiesCast.push(pokemon.skill)
     }
   }
 }

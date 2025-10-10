@@ -95,8 +95,8 @@ export default class Simulation extends Schema implements ISimulation {
   stageLevel = 0
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
-  blueAbilitiesCasted: Ability[] = []
-  redAbilitiesCasted: Ability[] = []
+  blueAbilitiesCast: Ability[] = []
+  redAbilitiesCast: Ability[] = []
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
