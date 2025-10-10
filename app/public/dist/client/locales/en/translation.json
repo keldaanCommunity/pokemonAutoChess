@@ -1936,7 +1936,7 @@
 		"TORCH_SONG": "Blow out [4,SP] raging flames to random opponents. Each flame deals 50% of ATK as SPECIAL, with [30,LK]% chance to BURN for 2 seconds, and buff the user AP by [1,2,3].",
 		"POWER_WHIP": "Unleash a giant vine toward the farthest enemy Pokémon, dealing [30,60,SP] SPECIAL to any enemy Pokémon in the path.",
 		"DARK_HARVEST": "Teleport into the largest group of enemy Pokémon. Inflict the user with SILENCE for 3 seconds and drain the HP of ADJACENT enemy Pokémon, dealing [5,10,20,SP] SPECIAL per second and heal for 30% of the damage dealt.",
-		"PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. Excess PP is dealt as SPECIAL.",
+		"PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. If target has no more PP, the amount of unburned PP is dealt as SPECIAL.",
 		"HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to ADJACENT opponents and gain [15,30,60] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
 		"RAPID_SPIN": "Deal [20,50,SP] SPECIAL and gain [50,SP]% of ATK as DEF and SPE_DEF",
 		"BOUNCE": "Bounce [1,2,3] times to the farthest enemy Pokémon, dealing [10,20,30,SP] SPECIAL to all ADJACENT enemy Pokémon each time.",
