@@ -4170,8 +4170,8 @@
 		"pool_size_per_category": "Pool size per category",
 		"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
 		"luck_title": "How Luck works",
-		"luck_description": "LUCK is a stat all pokemon have that starts at 0. It can affect a variety of effects and triggers within the game. These triggers can be given by abilities, synergies, or items. Often, LUCK determines if these effects occur or not, though sometimes LUCK can impact the potency of already guaranteed effects. Effects which are impacted by LUCK will display this with the [LK] symbol.",
-		"luck_formula": "The formula for an effect to trigger that is effected by LUCK is : base chance^(1 - ( LUCK / 100))"
+		"luck_description": "Luck increases your chances in all draws, whether for critical hits, dodges, status on hit or any other effect mentioned with the [LK] symbol.",
+		"luck_formula": "Luck affects probabilities with this formula: P = baseP ^ (1 - luck/100) ; for example, a Pokémon with 10% crit chance and 50 luck will actually have 0.1^(1-50/100) = ~31.62 % crit chance"
 	
 	},
 	"errors": {
