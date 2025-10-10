@@ -2879,7 +2879,7 @@
 		"SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER",
 		"BEAST_BOOST_ATK": "Upon inflicting a KO, this Pokémon gains 5 ATK",
 		"BEAST_BOOST_AP": "Upon inflicting a KO, this Pokémon gains 10 AP",
-		"CHINGLING": "$t(pkm.CHINGLING) will evolve into $t(pkm.CHIMECHO) after 30 abilities have been casted by your team",
+		"CHINGLING": "$t(pkm.CHINGLING) will evolve into $t(pkm.CHIMECHO) after 30 abilities have been casted by your team with it on the board",
 		"CHIMECHO": "Resonates to the sounds of ADJACENT allies, which doubles their cry while Chimecho is alive",
 		"SURGE_SURFER": "The surge surfer gets +30 SPEED in ELECTRIC_FIELD or PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "This Pokémon ability emits 3 SOUND cries instead of one",
