@@ -17746,14 +17746,14 @@ export class Kubfu extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolutions = [Pkm.URSHIFU_RAPID, Pkm.URSHIFU_SINGLE]
-  evolutionRule = new ItemEvolutionRule(
+  evolutionRule = Object.assign(new ItemEvolutionRule(
     [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS],
     (pokemon, player, item: Item) => {
       return item === Item.SCROLL_OF_WATERS
         ? Pkm.URSHIFU_RAPID
         : Pkm.URSHIFU_SINGLE
     }
-  )
+  ), { maxStacks: 10 })
   hp = 150
   atk = 15
   speed = 50

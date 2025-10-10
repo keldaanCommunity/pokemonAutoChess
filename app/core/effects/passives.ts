@@ -221,29 +221,33 @@ const KubfuOnKillEffect = new OnKillEffect(
     const SPEED_BUFF_PER_KILL = 3
     const AP_BUFF_PER_KILL = 5
     const MAX_BUFFS = 10
+
+    const baseSpeed = 50
+    let nbBuffsSpeed = Math.floor(
+      (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
+    )
+    let nbBuffsAP = Math.floor(
+      pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL
+    )
+
     if (attackType === AttackType.PHYSICAL) {
-      const baseSpeed = 50
-      const nbBuffs = Math.floor(
-        (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
-      )
-      if (nbBuffs < MAX_BUFFS) {
+      if (nbBuffsSpeed < MAX_BUFFS) {
         pokemon.addSpeed(SPEED_BUFF_PER_KILL, pokemon, 0, false, true)
+        nbBuffsSpeed++
         if (
-          nbBuffs + 1 === MAX_BUFFS &&
+          nbBuffsSpeed === MAX_BUFFS &&
           pokemon.player &&
           pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
         ) {
           pokemon.player.items.push(Item.SCROLL_OF_WATERS)
         }
       }
-    } else {
-      const nbBuffs = Math.floor(
-        pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL
-      )
-      if (nbBuffs < MAX_BUFFS) {
+    } else {      
+      if (nbBuffsAP < MAX_BUFFS) {
         pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
+        nbBuffsAP++
         if (
-          nbBuffs + 1 === MAX_BUFFS &&
+          nbBuffsAP === MAX_BUFFS &&
           pokemon.player &&
           pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
         ) {
@@ -251,6 +255,8 @@ const KubfuOnKillEffect = new OnKillEffect(
         }
       }
     }
+
+    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(Math.max(nbBuffsAP, nbBuffsSpeed))
   }
 )
 
