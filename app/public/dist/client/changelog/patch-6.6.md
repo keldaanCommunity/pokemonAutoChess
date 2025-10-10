@@ -132,6 +132,7 @@
 - Fix Petal Blizzard still dealing damage based on attack range
 - Fix Swallow heal never triggering
 - Fix Bitter Blade heal not accounting for factors that increase base hp
+- Fix Shore Up sandstorm heal not showing AP scaling in the description
 
 Special thanks to salamander for reporting and working on many of these fixes! 
 
