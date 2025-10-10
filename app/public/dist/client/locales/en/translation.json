@@ -2831,7 +2831,7 @@
 		"TYROGUE": "Will choose a combat discipline based on the first item given:\nCHARCOAL MAGNET: $t(pkm.HITMONLEE)\nHEART_SCALE NEVER_MELT_ICE: $t(pkm.HITMONCHAN)\nOthers: $t(pkm.HITMONTOP)",
 		"PROTEAN2": "The Pokémon acquires the typing of the 2 highest synergies on the team",
 		"PROTEAN3": "The Pokémon acquires the typing of the 3 highest synergies on the team",
-		"CASTFORM": "Castform changes its form and the weather to SUN, RAIN or SNOW depending on your dominant synergy between FIRE WATER ICE",
+		"CASTFORM": "Castform changes its form and the weather to SUN, RAIN or SNOW depending on your dominant synergy on board between FIRE WATER ICE",
 		"MANAPHY": "When given an AQUA_EGG, $t(pkm.MANAPHY) will spawn $t(pkm.PHIONE) on your board at the start of the fight",
 		"SCYTHER": "$t(pkm.SCYTHER) is looking for a METAL_COAT or a BLACK_AUGURITE",
 		"PRIMAL": "Legend has it that you could unleash the ancient powers of these Pokémon",
