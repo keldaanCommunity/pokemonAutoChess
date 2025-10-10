@@ -5,7 +5,8 @@ import {
   CountEvolutionRule,
   EvolutionRule,
   HatchEvolutionRule,
-  ItemEvolutionRule
+  ItemEvolutionRule,
+  StackBasedEvolutionRule
 } from "../../core/evolution-rules"
 import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
@@ -11454,7 +11455,7 @@ export class Chingling extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.CHIMECHO
-  evolutionRule = new ItemEvolutionRule([Item.STAR_DUST])
+  evolutionRule = new StackBasedEvolutionRule(30)
   hp = 150
   atk = 10
   speed = 46

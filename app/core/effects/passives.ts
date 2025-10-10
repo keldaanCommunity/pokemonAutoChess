@@ -1,3 +1,4 @@
+import Player from "../../models/colyseus-models/player"
 import {
   BasculinWhite,
   Pokemon,
@@ -879,6 +880,49 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
   }
 })
 
+const spiritombWispEffect = new OnSimulationStartEffect(({ entity, simulation }) => {
+      if (!entity.player) return
+      const nbOddKeystones = max(3)(
+        entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
+      )
+      if (nbOddKeystones === 0) return
+      const shieldAmount = nbOddKeystones * 10
+      const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+        entity.broadcastAbility({
+          skill: "WISP",
+          positionX: entity.positionX,
+          positionY: entity.positionY,
+          targetX: pokemon.positionX,
+          targetY: pokemon.positionY
+        })
+        entity.commands.push(
+          new DelayedCommand(() => {
+            entity.addShield(shieldAmount, entity, 0, false)
+          }, 1000)
+        )
+      })
+      simulation.board.cells.forEach((pkm) => {
+        if (pkm && pkm !== entity) {
+          pkm.effectsSet.add(onKOEffect)
+        }
+      })
+    })
+
+const chinglingCountCastsEffect = new OnSimulationStartEffect(({ team, entity, simulation }) => {
+  if(!entity.player) return
+  team.forEach((pkm) => {
+    pkm.effectsSet.add(
+      new OnAbilityCastEffect(() => {
+        const pokemonEvolved = entity.refToBoardPokemon.evolutionRule.addStack(entity.refToBoardPokemon as Pokemon, entity.player as Player, simulation.stageLevel)
+        if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
+          entity.index = PkmIndex[Pkm.CHIMECHO]
+          entity.name = Pkm.CHIMECHO
+        }
+      })
+    )
+  })
+})
+
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -1058,33 +1102,6 @@ export const PassiveEffects: Partial<
       }
     })
   ],
-  [Passive.SPIRITOMB]: [
-    new OnSimulationStartEffect(({ entity, simulation }) => {
-      if (!entity.player) return
-      const nbOddKeystones = max(3)(
-        entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
-      )
-      if (nbOddKeystones === 0) return
-      const shieldAmount = nbOddKeystones * 10
-      const onKOEffect = new OnDeathEffect(({ pokemon }) => {
-        entity.broadcastAbility({
-          skill: "WISP",
-          positionX: entity.positionX,
-          positionY: entity.positionY,
-          targetX: pokemon.positionX,
-          targetY: pokemon.positionY
-        })
-        entity.commands.push(
-          new DelayedCommand(() => {
-            entity.addShield(shieldAmount, entity, 0, false)
-          }, 1000)
-        )
-      })
-      simulation.board.cells.forEach((pkm) => {
-        if (pkm && pkm !== entity) {
-          pkm.effectsSet.add(onKOEffect)
-        }
-      })
-    })
-  ]
+  [Passive.SPIRITOMB]: [spiritombWispEffect],
+  [Passive.CHINGLING]: [chinglingCountCastsEffect]
 }
