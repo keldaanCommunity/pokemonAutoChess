@@ -11461,7 +11461,7 @@ export class Chingling extends Pokemon {
   speed = 46
   def = 7
   speDef = 8
-  maxPP = 70
+  maxPP = 80
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHINGLING
@@ -11476,7 +11476,7 @@ export class Chimecho extends Pokemon {
   speed = 46
   def = 10
   speDef = 12
-  maxPP = 70
+  maxPP = 80
   range = 3
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
