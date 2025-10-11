@@ -2831,7 +2831,7 @@
 		"SHAYMIN": "$t(pkm.SHAYMIN) recherche une GRACIDEA_FLOWER.",
 		"BEAST_BOOST_ATK": "Lorsqu'il inflige un KO, ce Pokémon gagne 5 ATK.",
 		"BEAST_BOOST_AP": "Lorsqu'il inflige un KO, ce Pokémon gagne 10 AP.",
-		"CHINGLING": "$t(pkm.CHINGLING) cherche une STAR_DUST.",
+		"CHINGLING": "$t(pkm.CHINGLING) évolue en $t(pkm.CHIMECHO) après 30 capacités lancées par votre équipe.",
 		"CHIMECHO": "Résonne aux sons des alliés ADJACENT, ce qui double leur cri tant que $t(pkm.CHIMECHO) est en vie.",
 		"SURGE_SURFER": "Le surfeur gagne +30 SPEED lorsqu'il est dans un ELECTRIC_FIELD ou un PSYCHIC_FIELD.",
 		"MEGA_LAUNCHER": "Emet 3 cris SOUND au lieu d'un au lancement de la capacité spéciale.",

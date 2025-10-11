@@ -5,7 +5,8 @@ import {
   CountEvolutionRule,
   EvolutionRule,
   HatchEvolutionRule,
-  ItemEvolutionRule
+  ItemEvolutionRule,
+  StackBasedEvolutionRule
 } from "../../core/evolution-rules"
 import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
@@ -11454,7 +11455,7 @@ export class Chingling extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.CHIMECHO
-  evolutionRule = new ItemEvolutionRule([Item.STAR_DUST])
+  evolutionRule = new StackBasedEvolutionRule(30)
   hp = 150
   atk = 10
   speed = 46
@@ -14305,9 +14306,7 @@ export class Cosmog extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   evolution = Pkm.COSMOEM
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.evolutionRule.stacks >= 10
-  )
+  evolutionRule = new StackBasedEvolutionRule(10)
   stars = 1
   hp = 100
   atk = 5
@@ -14325,8 +14324,7 @@ export class Cosmoem extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolutions = [Pkm.SOLGALEO, Pkm.LUNALA]
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.evolutionRule.stacks >= 10,
+  evolutionRule = new StackBasedEvolutionRule(10,
     (pokemon, player) => {
       if (
         pokemon.positionX === player.lightX &&
@@ -17748,14 +17746,14 @@ export class Kubfu extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolutions = [Pkm.URSHIFU_RAPID, Pkm.URSHIFU_SINGLE]
-  evolutionRule = new ItemEvolutionRule(
+  evolutionRule = Object.assign(new ItemEvolutionRule(
     [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS],
     (pokemon, player, item: Item) => {
       return item === Item.SCROLL_OF_WATERS
         ? Pkm.URSHIFU_RAPID
         : Pkm.URSHIFU_SINGLE
     }
-  )
+  ), { maxStacks: 10 })
   hp = 150
   atk = 15
   speed = 50
