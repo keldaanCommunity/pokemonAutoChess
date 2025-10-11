@@ -306,7 +306,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   }
 
   if (chef.passive === Passive.GLUTTON) {
-    chef.hp += 30
+    chef.addMaxHP(30, player)
     if (chef.hp > 750) {
       player.titles.add(Title.GLUTTON)
     }
@@ -1036,7 +1036,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.AMAZE_MULCH]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (FlowerPotMons.includes(pokemon.name)) {
-        pokemon.hp += 50
+        pokemon.addMaxHP(50, player)
         pokemon.ap += 30
         removeInArray(player.items, item)
       }

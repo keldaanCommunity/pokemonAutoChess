@@ -545,7 +545,9 @@ export const MemoryDiscs = [
   Item.AQUATIC_MEMORY
 ] as const
 
-export const MemoryDiscsBySynergy: { [s in Synergy]?: (typeof MemoryDiscs)[number] } = {
+export const MemoryDiscsBySynergy: {
+  [s in Synergy]?: (typeof MemoryDiscs)[number]
+} = {
   [Synergy.FIRE]: Item.FIRE_MEMORY,
   [Synergy.FOSSIL]: Item.FOSSIL_MEMORY,
   [Synergy.PSYCHIC]: Item.PSYCHIC_MEMORY,
@@ -874,6 +876,7 @@ export const ConsumableItems: Item[] = [
   ...TMs,
   ...HMs,
   ...Dishes,
+  ...Mulches,
   ...Flavors,
   ...Sweets,
   ...DojoTickets,

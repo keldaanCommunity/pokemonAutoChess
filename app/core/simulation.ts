@@ -475,13 +475,13 @@ export default class Simulation extends Schema implements ISimulation {
     dishEffects.forEach((effect) => {
       entity?.effectsSet.add(effect)
       if (effect instanceof OnDishConsumedEffect)
-        effect.apply({ pokemon, dish, entity, isGhostOpponent: player.ghost })
+        effect.apply({ pokemon, dish, entity, player })
       if (effect instanceof OnSpawnEffect && entity)
         effect.apply(entity, player, true)
     })
 
     if (pokemon.passive === Passive.GLUTTON) {
-      pokemon.hp += 20
+      pokemon.addMaxHP(20, player)
       entity?.addMaxHP(20, entity, 0, false)
       if (pokemon.hp > 750) {
         player.titles.add(Title.GLUTTON)

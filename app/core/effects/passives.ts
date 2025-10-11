@@ -12,6 +12,8 @@ import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Team } from "../../types/enum/Game"
 import {
+  Berries,
+  ConsumableItems,
   Flavors,
   Item,
   OgerponMasks,
@@ -38,6 +40,7 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   OnHitEffect,
+  OnItemDroppedEffect,
   OnKillEffect,
   OnMoveEffect,
   OnShieldDepletedEffect,
@@ -226,9 +229,7 @@ const KubfuOnKillEffect = new OnKillEffect(
     let nbBuffsSpeed = Math.floor(
       (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
     )
-    let nbBuffsAP = Math.floor(
-      pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL
-    )
+    let nbBuffsAP = Math.floor(pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL)
 
     if (attackType === AttackType.PHYSICAL) {
       if (nbBuffsSpeed < MAX_BUFFS) {
@@ -242,7 +243,7 @@ const KubfuOnKillEffect = new OnKillEffect(
           pokemon.player.items.push(Item.SCROLL_OF_WATERS)
         }
       }
-    } else {      
+    } else {
       if (nbBuffsAP < MAX_BUFFS) {
         pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
         nbBuffsAP++
@@ -256,7 +257,9 @@ const KubfuOnKillEffect = new OnKillEffect(
       }
     }
 
-    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(Math.max(nbBuffsAP, nbBuffsSpeed))
+    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(
+      Math.max(nbBuffsAP, nbBuffsSpeed)
+    )
   }
 )
 
@@ -886,48 +889,57 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
   }
 })
 
-const spiritombWispEffect = new OnSimulationStartEffect(({ entity, simulation }) => {
-      if (!entity.player) return
-      const nbOddKeystones = max(3)(
-        entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
-      )
-      if (nbOddKeystones === 0) return
-      const shieldAmount = nbOddKeystones * 10
-      const onKOEffect = new OnDeathEffect(({ pokemon }) => {
-        entity.broadcastAbility({
-          skill: "WISP",
-          positionX: entity.positionX,
-          positionY: entity.positionY,
-          targetX: pokemon.positionX,
-          targetY: pokemon.positionY
-        })
-        entity.commands.push(
-          new DelayedCommand(() => {
-            entity.addShield(shieldAmount, entity, 0, false)
-          }, 1000)
-        )
-      })
-      simulation.board.cells.forEach((pkm) => {
-        if (pkm && pkm !== entity) {
-          pkm.effectsSet.add(onKOEffect)
-        }
-      })
-    })
-
-const chinglingCountCastsEffect = new OnSimulationStartEffect(({ team, entity, simulation }) => {
-  if(!entity.player) return
-  team.forEach((pkm) => {
-    pkm.effectsSet.add(
-      new OnAbilityCastEffect(() => {
-        const pokemonEvolved = entity.refToBoardPokemon.evolutionRule.addStack(entity.refToBoardPokemon as Pokemon, entity.player as Player, simulation.stageLevel)
-        if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
-          entity.index = PkmIndex[Pkm.CHIMECHO]
-          entity.name = Pkm.CHIMECHO
-        }
-      })
+const spiritombWispEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    if (!entity.player) return
+    const nbOddKeystones = max(3)(
+      entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
     )
-  })
-})
+    if (nbOddKeystones === 0) return
+    const shieldAmount = nbOddKeystones * 10
+    const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+      entity.broadcastAbility({
+        skill: "WISP",
+        positionX: entity.positionX,
+        positionY: entity.positionY,
+        targetX: pokemon.positionX,
+        targetY: pokemon.positionY
+      })
+      entity.commands.push(
+        new DelayedCommand(() => {
+          entity.addShield(shieldAmount, entity, 0, false)
+        }, 1000)
+      )
+    })
+    simulation.board.cells.forEach((pkm) => {
+      if (pkm && pkm !== entity) {
+        pkm.effectsSet.add(onKOEffect)
+      }
+    })
+  }
+)
+
+const chinglingCountCastsEffect = new OnSimulationStartEffect(
+  ({ team, entity, simulation }) => {
+    if (!entity.player) return
+    team.forEach((pkm) => {
+      pkm.effectsSet.add(
+        new OnAbilityCastEffect(() => {
+          const pokemonEvolved =
+            entity.refToBoardPokemon.evolutionRule.addStack(
+              entity.refToBoardPokemon as Pokemon,
+              entity.player as Player,
+              simulation.stageLevel
+            )
+          if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
+            entity.index = PkmIndex[Pkm.CHIMECHO]
+            entity.name = Pkm.CHIMECHO
+          }
+        })
+      )
+    })
+  }
+)
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
@@ -1109,5 +1121,21 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.SPIRITOMB]: [spiritombWispEffect],
-  [Passive.CHINGLING]: [chinglingCountCastsEffect]
+  [Passive.CHINGLING]: [chinglingCountCastsEffect],
+  [Passive.RECYCLE]: [
+    new OnItemDroppedEffect(({ pokemon, item, player }) => {
+      if (Berries.includes(item)) {
+        pokemon.addMaxHP(15, player)
+        removeInArray(player.items, item)
+        return false
+      }
+      if (ConsumableItems.includes(item)) {
+        pokemon.addMaxHP(30, player)
+        player.items.push(Item.TRASH)
+        removeInArray(player.items, item)
+        return false
+      }
+      return true
+    })
+  ]
 }
