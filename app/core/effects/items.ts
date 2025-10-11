@@ -165,6 +165,7 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
               const damageBlocked = min(0)(
                 scarfSpecialDamage - damageAfterReduction
               )
+              pokemon.broadcastAbility({ skill: "POWER_LENS" })
               pokemon.handleDamage({
                 damage: Math.round(damageBlocked),
                 board,
