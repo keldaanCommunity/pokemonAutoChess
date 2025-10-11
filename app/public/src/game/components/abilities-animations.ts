@@ -37,7 +37,6 @@ import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { on } from "events"
 
 export function displayHit(
   scene: GameScene | DebugScene,
@@ -1540,7 +1539,7 @@ export const AbilitiesAnimations: {
     })(args),
   [Ability.TRI_ATTACK]: projectile({}),
   [Ability.AURA_WHEEL]: projectile({ scale: 1 }),
-  [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 3 }),
+  [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 2 }),
   [Ability.PYRO_BALL]: projectile({
     scale: 1,
     tweenProps: { scale: 2 },
