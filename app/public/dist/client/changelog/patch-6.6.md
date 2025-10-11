@@ -102,6 +102,7 @@
 - Added filtering and searching to game rooms list. Gamemode tabs now show games in progress instead of open rooms.
 - Added pre-evolution on wiki pokemons details
 - Added the luck formula to the data section of the wiki
+- Added tooltips to berry trees
 
 # Bugfix
 

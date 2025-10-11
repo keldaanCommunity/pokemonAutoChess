@@ -12,7 +12,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
-import { IPokemon, Transfer } from "../../../../types"
+import { IPokemon } from "../../../../types"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -48,6 +48,7 @@ import AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
+import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
@@ -76,7 +77,7 @@ export default class BoardManager {
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
-  berryTrees: Phaser.GameObjects.Sprite[] = []
+  berryTrees: BerryTree[] = []
   flowerPots: Phaser.GameObjects.Sprite[] = []
   flowerPokemonsInPots: PokemonSprite[] = []
   mulchAmountText: Phaser.GameObjects.Text | null = null
@@ -304,38 +305,12 @@ export default class BoardManager {
     ]
 
     for (let i = 0; i < nbTrees; i++) {
-      const tree = this.scene.add.sprite(
+      const tree = new BerryTree(
+        this,
         treePositions[i][0],
         treePositions[i][1],
-        "berry_trees",
-        this.player.berryTreesType[i] + "_1"
+        i
       )
-
-      tree
-        .setDepth(DEPTH.INANIMATE_OBJECTS)
-        .setScale(2, 2)
-        .setOrigin(0.5, 1)
-        .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
-      if (this.player.berryTreesStages[i] === 0) {
-        tree.anims.play("CROP")
-      } else {
-        tree.anims.play(
-          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStages[i]}`
-        )
-      }
-
-      tree.setInteractive()
-      tree.on("pointerdown", (pointer) => {
-        if (this.player.id !== this.scene.uid) return
-        if (this.scene.room && this.player.berryTreesStages[i] >= 3) {
-          this.scene.room.send(Transfer.PICK_BERRY, i)
-          this.displayText(pointer.x, pointer.y, t("berry_gained"), true)
-          tree.play("CROP")
-        } else {
-          this.displayText(pointer.x, pointer.y, t("berry_unripe"), true)
-        }
-      })
-
       this.berryTrees.push(tree)
     }
   }
@@ -734,7 +709,7 @@ export default class BoardManager {
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
     if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
-    this.closeTooltips()
+    this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
       const gameState = store.getState().game
@@ -805,7 +780,7 @@ export default class BoardManager {
     this.hideGroundHoles()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
-    this.closeTooltips()
+    this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
     if (this.playerAvatar) {
@@ -976,7 +951,15 @@ export default class BoardManager {
         pokemon.closeDetail()
       }
       if (pokemon.itemsContainer) {
-        pokemon.itemsContainer.closeDetails()
+        pokemon.itemsContainer.closeTooltips()
+      }
+    })
+    for (const tree of this.berryTrees.values()) {
+      tree.closeDetail()
+    }
+    this.flowerPokemonsInPots.forEach((pokemon) => {
+      if (pokemon.detail) {
+        pokemon.closeDetail()
       }
     })
   }

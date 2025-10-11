@@ -622,7 +622,7 @@ export default class MinigameManager {
     this.scene.add.existing(this.encounterDescription)
   }
 
-  closeDetails() {
+  closeTooltips() {
     for (const it of this.items.values()) {
       it.closeDetail()
     }

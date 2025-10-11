@@ -1,57 +1,54 @@
+import { t } from "i18next"
 import { GameObjects } from "phaser"
-import { Item } from "../../../../types/enum/Item"
+import Player from "../../../../models/colyseus-models/player"
+import { Transfer } from "../../../../types"
+import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
+import BoardManager from "./board-manager"
 import ItemDetail from "./item-detail"
-import MinigameManager from "./minigame-manager"
 
-export class FloatingItemContainer extends GameObjects.Container {
+export class BerryTree extends GameObjects.Container {
   scene: GameScene
-  manager: MinigameManager
-  name: Item
-  circle: GameObjects.Ellipse
-  sprite: GameObjects.Image
-  id: string
+  manager: BoardManager
+  index: number
+  sprite: GameObjects.Sprite
   detail: ItemDetail | undefined
   mouseoutTimeout: NodeJS.Timeout | null = null
+  player: Player
 
-  constructor(
-    manager: MinigameManager,
-    id: string,
-    x: number,
-    y: number,
-    item: Item
-  ) {
+  constructor(manager: BoardManager, x: number, y: number, i: number) {
     super(manager.scene, x, y)
     this.scene = manager.scene
     this.manager = manager
-    this.name = item
-    this.id = id
-    this.circle = new GameObjects.Ellipse(
-      manager.scene,
-      0,
-      0,
-      40,
-      40,
-      0x61738a,
-      1
-    )
-    this.circle.setStrokeStyle(1, 0xffffff, 0.7)
-    this.add(this.circle)
-    this.sprite = new GameObjects.Image(
-      manager.scene,
-      0,
-      0,
-      "item",
-      this.name + ".png"
-    )
-    this.sprite.setScale(0.32)
-    this.add(this.sprite)
-    this.setDepth(DEPTH.INANIMATE_OBJECTS)
+    this.index = i
+    this.player = manager.player
+    const stage = this.player.berryTreesStages[i]
+    const type = this.player.berryTreesType[i]
 
-    this.setSize(40, 40)
-    this.setInteractive()
+    this.sprite = new Phaser.GameObjects.Sprite(
+      this.scene,
+      0,
+      0,
+      "berry_trees",
+      type + "_1"
+    )
+    this.add(this.sprite)
+    this.setSize(72, 72)
+    this.sprite
+      .setDepth(DEPTH.INANIMATE_OBJECTS)
+      .setScale(2, 2)
+      .setOrigin(0.5, 1)
+      .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
+    if (stage === 0) {
+      this.sprite.anims.play("CROP")
+    } else {
+      this.sprite.anims.play(`${type}_TREE_STEP_${stage}`)
+    }
+
+    this.sprite
+      .setInteractive()
       .on("pointerover", (pointer: Phaser.Input.Pointer) => {
         this.onPointerOver(pointer)
       })
@@ -71,25 +68,12 @@ export class FloatingItemContainer extends GameObjects.Container {
     this.scene.add.existing(this)
   }
 
-  onGrab(playerId) {
-    const currentPlayerId: string = (this.scene as GameScene).uid!
-    if (playerId === currentPlayerId) {
-      this.circle.setStrokeStyle(2, 0x4cff00, 1)
-      this.circle.setFillStyle(0x61738a, 1)
-    } else if (playerId == "") {
-      this.circle.setStrokeStyle(1, 0xffffff, 0.7)
-      this.circle.setFillStyle(0x61738a, 1)
-    } else {
-      this.circle.setStrokeStyle(2, 0xcf0000, 0.7)
-      this.circle.setFillStyle(0x61738a, 0.7)
-    }
-  }
-
   openDetail() {
-    this.scene.closeTooltips() // close other open item tooltips
+    this.scene.closeTooltips() // close other open tooltips
 
     if (this.detail === undefined) {
-      this.detail = new ItemDetail(this.scene, 0, 0, this.name)
+      const type = this.player.berryTreesType[this.index]
+      this.detail = new ItemDetail(this.scene, 0, 0, type)
       this.detail.setDepth(DEPTH.TOOLTIP)
       this.detail.setPosition(
         this.detail.width * 0.5 + 40,
@@ -119,7 +103,7 @@ export class FloatingItemContainer extends GameObjects.Container {
     this.detail?.setVisible(false)
   }
 
-  onPointerOver(pointer) {
+  onPointerOver(pointer: Phaser.Input.Pointer) {
     if (preference("showDetailsOnHover") && !this.detail?.visible) {
       this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
       this.openDetail()
@@ -147,6 +131,16 @@ export class FloatingItemContainer extends GameObjects.Container {
         this.openDetail()
       } else {
         this.closeDetail()
+      }
+    } else {
+      if (this.player.id !== this.scene.uid) return
+      const stage = this.player.berryTreesStages[this.index]
+      if (this.scene.room && stage >= 3) {
+        this.scene.room.send(Transfer.PICK_BERRY, this.index)
+        this.manager.displayText(pointer.x, pointer.y, t("berry_gained"), true)
+        this.sprite.play("CROP")
+      } else {
+        this.manager.displayText(pointer.x, pointer.y, t("berry_unripe"), true)
       }
     }
   }
