@@ -50,9 +50,19 @@ export class OnDishConsumedEffect extends Effect {
 }
 
 // item effect applied on fight start of after stealing/obtaining an item
-export class OnItemGainedEffect extends Effect {}
+export class OnItemGainedEffect extends Effect {
+  constructor(effect?: (pokemon: PokemonEntity) => void) {
+    super(effect)
+  }
+  override apply(pokemon: PokemonEntity) {}
+}
 
-export class OnItemRemovedEffect extends Effect {}
+export class OnItemRemovedEffect extends Effect {
+  constructor(effect?: (pokemon: PokemonEntity) => void) {
+    super(effect)
+  }
+  override apply(pokemon: PokemonEntity) {}
+}
 
 interface OnStageStartEffectArgs {
   player: Player

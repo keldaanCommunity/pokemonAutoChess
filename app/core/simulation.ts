@@ -53,6 +53,7 @@ import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
 import {
+  Effect,
   OnDishConsumedEffect,
   OnItemGainedEffect,
   OnSimulationStartEffect,
@@ -424,9 +425,13 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.applyStat(stat as Stat, value)
     })
 
-    ItemEffects[item]
-      ?.filter((effect) => effect instanceof OnItemGainedEffect)
-      ?.forEach((effect) => effect.apply(pokemon))
+    ItemEffects[item]?.forEach((effect) => {
+      pokemon.effectsSet.add(effect instanceof Effect ? effect : effect())
+    })
+
+    pokemon.getEffects(OnItemGainedEffect).forEach((effect) => {
+      effect.apply(pokemon)
+    })
   }
 
   applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {

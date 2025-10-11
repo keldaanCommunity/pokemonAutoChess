@@ -1695,10 +1695,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   getEffects<T extends typeof EffectClass>(effectClass: T): InstanceType<T>[] {
-    return [
-      ...this.effectsSet.values(),
-      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter(
+    return [...this.effectsSet.values()].filter(
       (effect): effect is InstanceType<T> => effect instanceof effectClass
     )
   }
