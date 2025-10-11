@@ -39,6 +39,7 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
+import { isPlainFunction } from "../utils/function"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
 import {
@@ -426,7 +427,8 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     ItemEffects[item]?.forEach((effect) => {
-      pokemon.effectsSet.add(effect instanceof Effect ? effect : effect())
+      if (effect instanceof Effect) pokemon.effectsSet.add(effect)
+      else if (isPlainFunction(effect)) pokemon.effectsSet.add(effect())
     })
 
     pokemon.getEffects(OnItemGainedEffect).forEach((effect) => {
