@@ -3453,6 +3453,56 @@ export class PsybeamStrategy extends AbilityStrategy {
   }
 }
 
+export class HydroSteamStrategy extends AbilityStrategy {
+   process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [35, 70, 140][pokemon.stars - 1] ?? 140
+
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const [dx, dy] = OrientationVector[pokemon.orientation]
+
+    const orientations = [
+      pokemon.orientation,
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 1) % 8],
+      OrientationArray[(OrientationArray.indexOf(pokemon.orientation) + 7) % 8]
+    ]
+
+    const cellsHit = [[pokemon.positionX + dx, pokemon.positionY + dy]]
+    for (const o of orientations) {
+      cellsHit.push([
+        pokemon.positionX + dx + OrientationVector[o][0],
+        pokemon.positionY + dy + +OrientationVector[o][1]
+      ])
+    }
+
+    cellsHit.forEach((cell) => {
+      const value = board.getEntityOnCell(cell[0], cell[1])
+      if (value && value.team !== pokemon.team) {
+        value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        value.status.triggerBurn(4000, value, pokemon)
+      }
+    })
+  }
+}
+
 export class PresentStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -14780,5 +14830,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.EERIE_SPELL]: new EerieSpellStrategy(),
   [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy(),
   [Ability.TRIPLE_DIVE]: new TripleDiveStrategy(),
-  [Ability.MOONBLAST]: new MoonblastStrategy()
+  [Ability.MOONBLAST]: new MoonblastStrategy(),
+  [Ability.HYDRO_STEAM]: new HydroSteamStrategy()
 }
