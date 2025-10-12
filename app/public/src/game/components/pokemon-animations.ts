@@ -7293,5 +7293,12 @@ export const PokemonAnimations: {
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.GHOST_RANGE
+  },
+  [Pkm.WALKING_WAKE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.DRAGON_MELEE,
+    hitSprite: HitSprite.WILD_HIT
   }
 }

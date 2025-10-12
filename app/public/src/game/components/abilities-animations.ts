@@ -1373,6 +1373,16 @@ export const AbilitiesAnimations: {
     rotation: Math.PI / 2,
     origin: [0.5, 1]
   }),
+  [Ability.HYDRO_STEAM]: onCaster({
+    ability: Ability.SOLAR_BEAM,
+    oriented: true,
+    rotation: Math.PI / 2,
+    origin: [0.5, 1],
+    alpha: 0.8,
+    tint: 0xa0c0ff,
+    positionOffset: [0, -36],
+    scale: [4, 2]
+  }),
   [Ability.ORIGIN_PULSE]: (args) =>
     projectile({
       startCoords: [0, args.targetY],

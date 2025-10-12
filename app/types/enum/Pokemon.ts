@@ -956,6 +956,7 @@ export enum Pkm {
   VULPIX = "VULPIX",
   WAILMER = "WAILMER",
   WAILORD = "WAILORD",
+  WALKING_WAKE = "WALKING_WAKE",
   WALREIN = "WALREIN",
   WARTORTLE = "WARTORTLE",
   WATCHOG = "WATCHOG",
@@ -2245,9 +2246,16 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.BAXCALIBUR]: "0998",
   [Pkm.GIMMIGHOUL]: "0999-0001",
   [Pkm.GHOLDENGO]: "1000",
+  //[Pkm.WO_CHIEN]: "1001",
+  //[Pkm.CHIEN_PAO]: "1002",
+  //[Pkm.TING_LU]: "1003",
   [Pkm.CHI_YU]: "1004",
   [Pkm.ROARING_MOON]: "1005",
   [Pkm.IRON_VALIANT]: "1006",
+  //[Pkm.KORAIDON]: "1007",
+  //[Pkm.MIRAIDON]: "1008",
+  [Pkm.WALKING_WAKE]: "1009",
+  //[Pkm.IRON_LEAVES]: "1010",
   [Pkm.DIPPLIN]: "1011",
   [Pkm.OKIDOGI]: "1014",
   [Pkm.MUNKIDORI]: "1015",
@@ -3332,7 +3340,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GALARIAN_SLOWKING]: Pkm.GALARIAN_SLOWPOKE,
   [Pkm.WIGLETT]: Pkm.WIGLETT,
   [Pkm.WUGTRIO]: Pkm.WIGLETT,
-  [Pkm.FLUTTER_MANE]: Pkm.FLUTTER_MANE
+  [Pkm.FLUTTER_MANE]: Pkm.FLUTTER_MANE,
+  [Pkm.WALKING_WAKE]: Pkm.WALKING_WAKE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3357,7 +3366,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.MOLTRES]: [Pkm.GALARIAN_MOLTRES],
   [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
-  [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE]
+  [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
+  [Pkm.SUICUNE]: [Pkm.WALKING_WAKE]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {

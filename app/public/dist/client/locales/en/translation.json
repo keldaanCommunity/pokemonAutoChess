@@ -521,7 +521,8 @@
 		"EERIE_SPELL": "Eerie Spell",
 		"SHELL_SIDE_ARM": "Shell Side Arm",
 		"TRIPLE_DIVE": "Triple Dive",
-		"MOONBLAST": "Moonblast"
+		"MOONBLAST": "Moonblast",
+		"HYDRO_STEAM": "Hydro Steam"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1586,7 +1587,8 @@
 		"BASCULEGION_FEMALE": "Basculegion (♀)",
 		"WIGLETT": "Wiglett",
 		"WUGTRIO": "Wugtrio",
-		"FLUTTER_MANE": "Flutter Mane"
+		"FLUTTER_MANE": "Flutter Mane",
+		"WALKING_WAKE": "Walking Wake"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2088,7 +2090,8 @@
 		"EERIE_SPELL": "Launches a wave that bounces to 3 additional targets, prioritizing low HP Pokémon. Deals [10,20,40,SP] SPECIAL to enemies and heals allies for [15,30,45,SP] HP.",
 		"SHELL_SIDE_ARM": "Launches a wave that bounces to 3 additional targets, prioritizing high HP Pokémon. Enemies becomes POISONNED for [2,3,SP] seconds, allies gain [10,20] AP.",
 		"TRIPLE_DIVE": "The user performs a perfectly timed triple dive, hitting 3 different low HP targets with splashes of water dealing [15,30,45,SP] SPECIAL.",
-		"MOONBLAST": "Fires 6 moons dealing [20,SP] SPECIAL each. KO'ing a Pokémon retargets remaining moons to the nearest enemy and grants 1 bonus moon."
+		"MOONBLAST": "Fires 6 moons dealing [20,SP] SPECIAL each. KO'ing a Pokémon retargets remaining moons to the nearest enemy and grants 1 bonus moon.",
+		"HYDRO_STEAM": "Sprays a powerful jet of boiling water, dealing [35,70,140,SP] SPECIAL to enemies in a 2-tiles range CONE, and inflicting BURN for 4 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
