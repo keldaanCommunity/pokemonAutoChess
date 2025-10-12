@@ -46,6 +46,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
+  OnMoveEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -215,6 +216,17 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
+export class RunningShoesOnMoveEffect extends OnMoveEffect {
+  stacks = 0
+
+  constructor() {
+    super((pkm) => {
+      pkm.addSpeed(5, pkm, 0, false)
+      this.stacks += 1
+    })
+  }
+}
+
 const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.hp) {
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -284,7 +296,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       player.pokemonsTrainingInDojo.push({
         pokemon,
         ticketLevel,
-        returnStage: room.state.stageLevel + ([3,4,5][ticketLevel - 1] ?? 5)
+        returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
       })
       removeInArray(player.items, item)
       return false // prevent item from being equipped
@@ -306,7 +318,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   }
 
   if (chef.passive === Passive.GLUTTON) {
-    chef.hp += 30
+    chef.addMaxHP(30, player)
     if (chef.hp > 750) {
       player.titles.add(Title.GLUTTON)
     }
@@ -390,7 +402,7 @@ export class FishingRodEffect extends OnStageStartEffect {
   }
 }
 
-export const ItemEffects: { [i in Item]?: Effect[] } = {
+export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
     SynergyStones.map((stone) => [
       stone,
@@ -754,6 +766,17 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
     })
   ],
 
+  [Item.RUNNING_SHOES]: [
+    () => new RunningShoesOnMoveEffect(), // needs new instance of effect for each pokemon due to internal stack counter
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks =
+        Object.values(pokemon.effectsSet).find(
+          (effect) => effect instanceof RunningShoesOnMoveEffect
+        )?.stacks ?? 0
+      pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
+    })
+  ],
+
   [Item.REAPER_CLOTH]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effects.add(EffectEnum.ABILITY_CRIT)
@@ -1036,7 +1059,7 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
   [Item.AMAZE_MULCH]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (FlowerPotMons.includes(pokemon.name)) {
-        pokemon.hp += 50
+        pokemon.addMaxHP(50, player)
         pokemon.ap += 30
         removeInArray(player.items, item)
       }

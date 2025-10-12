@@ -357,10 +357,6 @@ export class Pokemon extends Schema implements IPokemon {
     this.shield = min(0)(this.shield + value)
   }
 
-  addMaxHP(value: number) {
-    this.hp = min(1)(this.hp + value)
-  }
-
   addDodgeChance(value: number) {
     this.dodge = clamp(this.dodge + value, 0, 0.9)
   }
@@ -387,6 +383,13 @@ export class Pokemon extends Schema implements IPokemon {
 
   addSpeed(value: number) {
     this.speed = clamp(this.speed + value, 0, 300)
+  }
+
+  addMaxHP(amount: number, player: Player) {
+    this.hp = min(1)(this.hp + amount)
+    if (this.hp >= 1500 && player) {
+      player.titles.add(Title.GIANT)
+    }
   }
 }
 
@@ -10011,7 +10014,7 @@ export class Vulpix extends Pokemon {
   speed = 57
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.FIRE_SPIN
   additional = true
@@ -10026,7 +10029,7 @@ export class Ninetales extends Pokemon {
   speed = 57
   def = 6
   speDef = 10
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.FIRE_SPIN
   additional = true
@@ -15103,89 +15106,6 @@ export class Trubbish extends Pokemon {
   skill = Ability.GUNK_SHOT
   passive = Passive.RECYCLE
   additional = true
-
-  statIncreases = {
-    [Stat.SPEED]: 0,
-    [Stat.AP]: 0,
-    [Stat.CRIT_CHANCE]: 0,
-    [Stat.PP]: 0,
-    [Stat.SHIELD]: 0,
-    [Stat.ATK]: 0,
-    [Stat.SPE_DEF]: 0,
-    [Stat.DEF]: 0
-  }
-
-  beforeSimulationStart({ player }: { player: Player }) {
-    values(this.items).forEach((item) => {
-      if (Berries.includes(item)) {
-        this.hp += 10
-        this.removeItem(item, player)
-      }
-      if (ItemComponents.includes(item)) {
-        this.hp += 25
-        Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
-          if (stat in this.statIncreases) {
-            this.statIncreases[stat as Stat] += value
-          }
-        })
-        this.removeItem(item, player)
-      }
-      if (ArtificialItems.includes(item)) {
-        this.hp += 50
-        Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
-          if (stat in this.statIncreases) {
-            this.statIncreases[stat as Stat] += value
-          }
-        })
-
-        this.removeItem(item, player)
-
-        const itemIndex = player.artificialItems.indexOf(item)
-        player.artificialItems[itemIndex] = Item.TRASH
-        player.items.push(player.artificialItems[itemIndex])
-      }
-    })
-  }
-
-  onSpawn({ entity }: { entity: IPokemonEntity }) {
-    // Add non-permanent stats to Trubbish
-    entity.addAbilityPower(this.statIncreases[Stat.AP], entity, 0, false)
-    entity.addShield(this.statIncreases[Stat.SHIELD], entity, 0, false)
-    entity.addCritChance(this.statIncreases[Stat.CRIT_CHANCE], entity, 0, false)
-    entity.addPP(this.statIncreases[Stat.PP], entity, 0, false)
-    entity.addSpeed(this.statIncreases[Stat.SPEED], entity, 0, false)
-    entity.addAttack(this.statIncreases[Stat.ATK], entity, 0, false)
-    entity.addSpecialDefense(this.statIncreases[Stat.SPE_DEF], entity, 0, false)
-    entity.addDefense(this.statIncreases[Stat.DEF], entity, 0, false)
-  }
-
-  afterEvolve({
-    pokemonEvolved: garbodorObj,
-    pokemonsBeforeEvolution: trubbishes
-  }: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-  }) {
-    // Carry over the stats gained with passive
-    const garbodor = garbodorObj as Garbodor
-    garbodor.statIncreases = {
-      [Stat.SPEED]: 0,
-      [Stat.AP]: 0,
-      [Stat.CRIT_CHANCE]: 0,
-      [Stat.PP]: 0,
-      [Stat.SHIELD]: 0,
-      [Stat.ATK]: 0,
-      [Stat.SPE_DEF]: 0,
-      [Stat.DEF]: 0
-    }
-
-    trubbishes.forEach((trubbishObj) => {
-      const trubbish = trubbishObj as unknown as Trubbish
-      for (const key in garbodor.statIncreases) {
-        garbodor.statIncreases[key] += trubbish.statIncreases[key]
-      }
-    })
-  }
 }
 
 export class Garbodor extends Pokemon {
@@ -15202,27 +15122,6 @@ export class Garbodor extends Pokemon {
   skill = Ability.GUNK_SHOT
   passive = Passive.RECYCLE
   additional = true
-
-  statIncreases = {
-    [Stat.SPEED]: 0,
-    [Stat.AP]: 0,
-    [Stat.CRIT_CHANCE]: 0,
-    [Stat.PP]: 0,
-    [Stat.SHIELD]: 0,
-    [Stat.ATK]: 0,
-    [Stat.SPE_DEF]: 0,
-    [Stat.DEF]: 0
-  }
-
-  defaultValues = {
-    [Stat.HP]: this.hp,
-    [Stat.ATK]: this.atk,
-    [Stat.DEF]: this.def,
-    [Stat.SPE_DEF]: this.speDef
-  }
-
-  beforeSimulationStart = Trubbish.prototype.beforeSimulationStart
-  onSpawn = Trubbish.prototype.onSpawn
 }
 
 export class Grubbin extends Pokemon {

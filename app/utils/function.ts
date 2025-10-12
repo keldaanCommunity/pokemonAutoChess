@@ -64,3 +64,5 @@ export const repeat = (n: number) => (cb: (i: number) => void) => {
     cb(i)
   }
 }
+
+export const isPlainFunction = (fn: any): fn is () => any => Object.getPrototypeOf(fn) === Function.prototype
