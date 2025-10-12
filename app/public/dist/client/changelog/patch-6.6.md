@@ -44,7 +44,7 @@
 - Wormadam Trash: Def 6 → 9, Spe def 6 → 3
 - Nerf Spiky Shield (Chespin, Cascoon): take special damage equal to ~~100%~~ 60/80/100% of the user's Defense
 - Change Sparkling Aria (Primarina): damage 15/30/60 → 15/25/50 ; now gives burn immunity to allies for 3 seconds
-- Nerf Torkoal: HP 220 → 200
+- Nerf Torkoal: HP 220 → 200; PP 100 → 110
 - New ability for Tropius: Growth
 - New ability for Taillow line: Air slash
 - Buff Munchlax line: PP 120 → 100
@@ -69,6 +69,7 @@
 - Trubbish passive simplified: no longer gains item stats, no longer can be fed with item components or artificial items ; New passive: when fed with a berry, gain 10 permanent max HP ; when fed with a consummable item (Mulch, TM, Dish...), gain 25 max HP permanently and gain TRASH in exchange
 - Updated Porygon passive Conversion: when copying Ground, after the fight, fully digs a hole at their position ; when copying Flora, when Porygon is KO, a special flora mon spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
 - Nerf Vulpix line: PP 80 → 90
+- Reduce Arceus and Kecleon rate: 1/150 → 1/200
 
 # Changes to Synergies
 

@@ -12,7 +12,12 @@ import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
 import GameState from "../../rooms/states/game-state"
 import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
-import { DEFAULT_CRIT_CHANCE, DEFAULT_CRIT_POWER, DEFAULT_SPEED, SynergyTriggers } from "../../types/Config"
+import {
+  DEFAULT_CRIT_CHANCE,
+  DEFAULT_CRIT_POWER,
+  DEFAULT_SPEED,
+  SynergyTriggers
+} from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -7133,7 +7138,7 @@ export class Torkoal extends Pokemon {
   speed = 31
   def = 16
   speDef = 4
-  maxPP = 100
+  maxPP = 110
   range = 1
   skill = Ability.SMOKE_SCREEN
 }
