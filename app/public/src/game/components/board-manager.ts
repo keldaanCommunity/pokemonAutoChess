@@ -1013,7 +1013,7 @@ export default class BoardManager {
         shiny: this.state.shinyEncounter
       })
       for (const stat in pveStage.statBoosts) {
-        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat], undefined)
       }
       if (
         this.state.townEncounter === TownEncounters.MAROWAK &&
