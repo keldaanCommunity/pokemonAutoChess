@@ -9912,7 +9912,7 @@ export class Vulpix extends Pokemon {
   speed = 57
   def = 4
   speDef = 4
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.FIRE_SPIN
   additional = true
@@ -9927,7 +9927,7 @@ export class Ninetales extends Pokemon {
   speed = 57
   def = 6
   speDef = 10
-  maxPP = 80
+  maxPP = 90
   range = 2
   skill = Ability.FIRE_SPIN
   additional = true
@@ -14324,17 +14324,15 @@ export class Cosmoem extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolutions = [Pkm.SOLGALEO, Pkm.LUNALA]
-  evolutionRule = new StackBasedEvolutionRule(10,
-    (pokemon, player) => {
-      if (
-        pokemon.positionX === player.lightX &&
-        pokemon.positionY === player.lightY &&
-        SynergyEffects[Synergy.LIGHT].some((e) => player.effects.has(e))
-      )
-        return Pkm.SOLGALEO
-      else return Pkm.LUNALA
-    }
-  )
+  evolutionRule = new StackBasedEvolutionRule(10, (pokemon, player) => {
+    if (
+      pokemon.positionX === player.lightX &&
+      pokemon.positionY === player.lightY &&
+      SynergyEffects[Synergy.LIGHT].some((e) => player.effects.has(e))
+    )
+      return Pkm.SOLGALEO
+    else return Pkm.LUNALA
+  })
   onAcquired(player: Player) {
     this.hp -= 200 - 100 // revert hp buffs of cosmog
   }
@@ -17746,14 +17744,17 @@ export class Kubfu extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolutions = [Pkm.URSHIFU_RAPID, Pkm.URSHIFU_SINGLE]
-  evolutionRule = Object.assign(new ItemEvolutionRule(
-    [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS],
-    (pokemon, player, item: Item) => {
-      return item === Item.SCROLL_OF_WATERS
-        ? Pkm.URSHIFU_RAPID
-        : Pkm.URSHIFU_SINGLE
-    }
-  ), { maxStacks: 10 })
+  evolutionRule = Object.assign(
+    new ItemEvolutionRule(
+      [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS],
+      (pokemon, player, item: Item) => {
+        return item === Item.SCROLL_OF_WATERS
+          ? Pkm.URSHIFU_RAPID
+          : Pkm.URSHIFU_SINGLE
+      }
+    ),
+    { maxStacks: 10 }
+  )
   hp = 150
   atk = 15
   speed = 50
