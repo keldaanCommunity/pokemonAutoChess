@@ -21,7 +21,7 @@
 }
 
 .game-pokemon-portrait .game-pokemon-portrait-types .gained img {
-  filter: drop-shadow(0 0 6px lime);
+  filter: drop-shadow(0 0 6px white);
 }
 
 .game-pokemon-portrait .game-pokemon-portrait-types .lost::after {
