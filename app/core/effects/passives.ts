@@ -10,7 +10,7 @@ import { Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Team } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Flavors,
   Item,
@@ -226,9 +226,7 @@ const KubfuOnKillEffect = new OnKillEffect(
     let nbBuffsSpeed = Math.floor(
       (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
     )
-    let nbBuffsAP = Math.floor(
-      pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL
-    )
+    let nbBuffsAP = Math.floor(pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL)
 
     if (attackType === AttackType.PHYSICAL) {
       if (nbBuffsSpeed < MAX_BUFFS) {
@@ -242,7 +240,7 @@ const KubfuOnKillEffect = new OnKillEffect(
           pokemon.player.items.push(Item.SCROLL_OF_WATERS)
         }
       }
-    } else {      
+    } else {
       if (nbBuffsAP < MAX_BUFFS) {
         pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
         nbBuffsAP++
@@ -256,7 +254,9 @@ const KubfuOnKillEffect = new OnKillEffect(
       }
     }
 
-    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(Math.max(nbBuffsAP, nbBuffsSpeed))
+    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(
+      Math.max(nbBuffsAP, nbBuffsSpeed)
+    )
   }
 )
 
@@ -794,6 +794,48 @@ const conversionEffect = new OnSimulationStartEffect(
     if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
       entity.items.add(Item.CHEF_HAT)
     }
+
+    // when converting to ground, fully dig a hole at their position
+    if (synergyCopied === Synergy.GROUND) {
+      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
+    }
+
+    // when convertig to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+    if (synergyCopied === Synergy.FLORA) {
+      const floraLevel = opponent.synergies.getSynergyStep(Synergy.FLORA)
+      entity.effectsSet.add(
+        new OnDeathEffect(({ pokemon }) => {
+          let flowerToSpawn: Pkm | null = null
+          if (floraLevel === 1) flowerToSpawn = Pkm.JUMPLUFF
+          else if (floraLevel === 2) flowerToSpawn = Pkm.VICTREEBEL
+          else if (floraLevel === 3) flowerToSpawn = Pkm.MEGANIUM
+          else if (floraLevel === 4) flowerToSpawn = Pkm.VILEPLUME
+          if (flowerToSpawn) {
+            const spawnSpot =
+              simulation.board.getFarthestTargetCoordinateAvailablePlace(
+                pokemon,
+                true
+              )
+            if (spawnSpot) {
+              const spawnedPokemon = PokemonFactory.createPokemonFromName(
+                flowerToSpawn,
+                player
+              )
+              const entity = pokemon.simulation.addPokemon(
+                spawnedPokemon,
+                spawnSpot.x,
+                spawnSpot.y,
+                player.team,
+                true
+              )
+              entity.action = PokemonActionState.BLOSSOM
+              entity.cooldown = 1000
+              player.pokemonsPlayed.add(flowerToSpawn)
+            }
+          }
+        })
+      )
+    }
   }
 )
 
@@ -886,48 +928,57 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
   }
 })
 
-const spiritombWispEffect = new OnSimulationStartEffect(({ entity, simulation }) => {
-      if (!entity.player) return
-      const nbOddKeystones = max(3)(
-        entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
-      )
-      if (nbOddKeystones === 0) return
-      const shieldAmount = nbOddKeystones * 10
-      const onKOEffect = new OnDeathEffect(({ pokemon }) => {
-        entity.broadcastAbility({
-          skill: "WISP",
-          positionX: entity.positionX,
-          positionY: entity.positionY,
-          targetX: pokemon.positionX,
-          targetY: pokemon.positionY
-        })
-        entity.commands.push(
-          new DelayedCommand(() => {
-            entity.addShield(shieldAmount, entity, 0, false)
-          }, 1000)
-        )
-      })
-      simulation.board.cells.forEach((pkm) => {
-        if (pkm && pkm !== entity) {
-          pkm.effectsSet.add(onKOEffect)
-        }
-      })
-    })
-
-const chinglingCountCastsEffect = new OnSimulationStartEffect(({ team, entity, simulation }) => {
-  if(!entity.player) return
-  team.forEach((pkm) => {
-    pkm.effectsSet.add(
-      new OnAbilityCastEffect(() => {
-        const pokemonEvolved = entity.refToBoardPokemon.evolutionRule.addStack(entity.refToBoardPokemon as Pokemon, entity.player as Player, simulation.stageLevel)
-        if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
-          entity.index = PkmIndex[Pkm.CHIMECHO]
-          entity.name = Pkm.CHIMECHO
-        }
-      })
+const spiritombWispEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    if (!entity.player) return
+    const nbOddKeystones = max(3)(
+      entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
     )
-  })
-})
+    if (nbOddKeystones === 0) return
+    const shieldAmount = nbOddKeystones * 10
+    const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+      entity.broadcastAbility({
+        skill: "WISP",
+        positionX: entity.positionX,
+        positionY: entity.positionY,
+        targetX: pokemon.positionX,
+        targetY: pokemon.positionY
+      })
+      entity.commands.push(
+        new DelayedCommand(() => {
+          entity.addShield(shieldAmount, entity, 0, false)
+        }, 1000)
+      )
+    })
+    simulation.board.cells.forEach((pkm) => {
+      if (pkm && pkm !== entity) {
+        pkm.effectsSet.add(onKOEffect)
+      }
+    })
+  }
+)
+
+const chinglingCountCastsEffect = new OnSimulationStartEffect(
+  ({ team, entity, simulation }) => {
+    if (!entity.player) return
+    team.forEach((pkm) => {
+      pkm.effectsSet.add(
+        new OnAbilityCastEffect(() => {
+          const pokemonEvolved =
+            entity.refToBoardPokemon.evolutionRule.addStack(
+              entity.refToBoardPokemon as Pokemon,
+              entity.player as Player,
+              simulation.stageLevel
+            )
+          if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
+            entity.index = PkmIndex[Pkm.CHIMECHO]
+            entity.name = Pkm.CHIMECHO
+          }
+        })
+      )
+    })
+  }
+)
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
