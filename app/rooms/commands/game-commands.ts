@@ -331,10 +331,7 @@ export class OnDragDropPokemonCommand extends Command<
         ) {
           // Meltan can merge with Melmetal
           const melmetal = player.getPokemonAt(x, y)!
-          melmetal.hp += 50
-          if (melmetal.hp >= 1500 && player) {
-            player.titles.add(Title.GIANT)
-          }
+          melmetal.addMaxHP(50, player)
           pokemon.items.forEach((item) => {
             player.items.push(item)
           })
@@ -634,10 +631,14 @@ export class OnDragDropItemCommand extends Command<
       return
     }
 
-    const onItemDroppedEffects: OnItemDroppedEffect[] =
-      ItemEffects[item]?.filter(
+    const onItemDroppedEffects: OnItemDroppedEffect[] = [
+      ...(ItemEffects[item]?.filter(
         (effect) => effect instanceof OnItemDroppedEffect
-      ) ?? []
+      ) ?? []),
+      ...(PassiveEffects[pokemon.passive]?.filter(
+        (effect) => effect instanceof OnItemDroppedEffect
+      ) ?? [])
+    ]
     for (const onItemDroppedEffect of onItemDroppedEffects) {
       const shouldEquipItem = onItemDroppedEffect.apply({
         pokemon,
@@ -761,7 +762,10 @@ export class OnDragDropItemCommand extends Command<
       // if the item is not holdable, we immediately remove it from the pokemon items
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
-      if (ConsumableItems.includes(item) === false) {
+      if (
+        ConsumableItems.includes(item) === false &&
+        Mulches.includes(item) === false
+      ) {
         // item is not holdable and has not been consumed, so we add it back to player items
         player.items.push(item)
       }
@@ -1430,12 +1434,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.room.spawnOnBench(player, player.firstPartner, "spawn")
     }
 
-    if(this.state.specialGameRule === SpecialGameRule.GO_BIG_OR_GO_HOME) {
+    if (this.state.specialGameRule === SpecialGameRule.GO_BIG_OR_GO_HOME) {
       board.forEach((pokemon) => {
-        pokemon.hp += 5
-        if (pokemon.hp >= 1500 && player) {
-          player.titles.add(Title.GIANT)
-        }
+        pokemon.addMaxHP(5, player)
       })
     }
 

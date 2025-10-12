@@ -250,7 +250,7 @@ export default class PokemonSprite extends DraggableObject {
       scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
     })
     this.itemsContainer = new ItemsContainer(
-      scene,
+      scene as GameScene,
       pokemon.items ?? new SetSchema(),
       this.sprite.width / 2 + 25,
       -35,
@@ -464,6 +464,9 @@ export default class PokemonSprite extends DraggableObject {
       this.openDetail()
     } else {
       this.closeDetail()
+    }
+    if (pointer.leftButtonDown() && !this.inBattle) {
+      this.emoteAnimation()
     }
   }
 

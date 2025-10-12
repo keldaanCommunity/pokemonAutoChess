@@ -68,7 +68,7 @@ export abstract class EvolutionRule {
         pokemonEvolved.passive !== Passive.COSMOG &&
         pokemonEvolved.passive !== Passive.COSMOEM
       ) {
-        pokemon.hp += 10
+        pokemon.addMaxHP(10, player)
         pokemon.evolutionRule.addStack(pokemon, player, stageLevel)
       } else {
         // check evolutions again if it can evolve twice in a row
