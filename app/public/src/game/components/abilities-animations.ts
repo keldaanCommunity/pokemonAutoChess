@@ -1382,7 +1382,9 @@ export const AbilitiesAnimations: {
     })(args),
   ["SCALE_SHOT_CHARGE"]: (args) =>
     projectile({
+      ability: Ability.SCALE_SHOT,
       duration: args.delay,
+      delay: 0,
       animOptions: { repeat: -1, duration: 300 }
     })(args),
   [Ability.SCALE_SHOT]: projectile({ duration: 400 }),
