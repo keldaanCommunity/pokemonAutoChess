@@ -39,6 +39,7 @@ import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
+import { isPlainFunction } from "../utils/function"
 import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -685,9 +686,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    ItemEffects[item]
-      ?.filter((effect) => effect instanceof OnItemRemovedEffect)
-      ?.forEach((effect) => effect.apply(this))
+    ItemEffects[item]?.forEach((effect) => {
+      if (effect instanceof OnItemRemovedEffect) effect.apply(this)
+      if (effect instanceof EffectClass) this.effectsSet.delete(effect)
+      else if (isPlainFunction(effect)) {
+        const ef = effect()
+        this.effectsSet.forEach((e) => {
+          /* delete all effects of the same class
+             NOTE: all item effects declared as functions should have their own class, which should be the case because the only reason to use a function to create a new instance of effect
+             instead of linking directly to an effect instance is to be able to store internal state for this effect, like stacks, which are stored as private fields of a specific class
+           */
+          if (e.constructor === ef.constructor) this.effectsSet.delete(e)
+        })
+      }
+    })
   }
 
   moveTo(x: number, y: number, board: Board) {
@@ -1690,15 +1702,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // apply new passive effects
     const newPassiveEffects = PassiveEffects[newPassive] ?? []
     for (const effect of newPassiveEffects) {
-      this.effectsSet.add(effect instanceof EffectClass ? effect : effect())
+      if (isPlainFunction(effect)) this.effectsSet.add(effect())
+      else if (effect instanceof EffectClass) this.effectsSet.add(effect)
     }
   }
 
   getEffects<T extends typeof EffectClass>(effectClass: T): InstanceType<T>[] {
-    return [
-      ...this.effectsSet.values(),
-      ...values<Item>(this.items).flatMap((item) => ItemEffects[item] ?? [])
-    ].filter(
+    return [...this.effectsSet.values()].filter(
       (effect): effect is InstanceType<T> => effect instanceof effectClass
     )
   }

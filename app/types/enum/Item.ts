@@ -99,6 +99,7 @@ export enum Item {
   BERSERK_GENE = "BERSERK_GENE",
   SURFBOARD = "SURFBOARD",
   COOKING_POT = "COOKING_POT",
+  RUNNING_SHOES = "RUNNING_SHOES",
   METEORITE = "METEORITE",
   TRASH = "TRASH",
   DYNAMAX_BAND = "DYNAMAX_BAND",
@@ -434,6 +435,7 @@ export const ArtificialItems: Item[] = [
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.COOKING_POT,
+  Item.RUNNING_SHOES,
   Item.INCENSE,
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
@@ -545,7 +547,9 @@ export const MemoryDiscs = [
   Item.AQUATIC_MEMORY
 ] as const
 
-export const MemoryDiscsBySynergy: { [s in Synergy]?: (typeof MemoryDiscs)[number] } = {
+export const MemoryDiscsBySynergy: {
+  [s in Synergy]?: (typeof MemoryDiscs)[number]
+} = {
   [Synergy.FIRE]: Item.FIRE_MEMORY,
   [Synergy.FOSSIL]: Item.FOSSIL_MEMORY,
   [Synergy.PSYCHIC]: Item.PSYCHIC_MEMORY,
@@ -594,6 +598,7 @@ export const SynergyItems = [
   Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
   Item.COOKING_POT,
+  Item.RUNNING_SHOES,
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   ...MemoryDiscs
@@ -625,6 +630,7 @@ export const SynergyGivenByItem: Record<
   [Item.SILK_SCARF]: Synergy.NORMAL,
   [Item.TINY_MUSHROOM]: Synergy.BUG,
   [Item.COOKING_POT]: Synergy.GOURMET,
+  [Item.RUNNING_SHOES]: Synergy.FIELD,
   [Item.BERSERK_GENE]: Synergy.MONSTER,
   [Item.SURFBOARD]: Synergy.AQUATIC,
   [Item.FIRE_MEMORY]: Synergy.FIRE,
