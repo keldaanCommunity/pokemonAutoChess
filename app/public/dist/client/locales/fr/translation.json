@@ -521,7 +521,8 @@
 		"EERIE_SPELL": "Sort Sinistre",
 		"SHELL_SIDE_ARM": "Kokiyarme",
 		"TRIPLE_DIVE": "Triple Plongeon",
-		"MOONBLAST": "Pouvoir Lunaire"
+		"MOONBLAST": "Pouvoir Lunaire",
+		"HYDRO_STEAM": "Hydrovapeur"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1586,7 +1587,8 @@
 		"BASCULEGION_FEMALE": "Paragruel (♀)",
 		"WIGLETT": "Taupikeau",
 		"WUGTRIO": "Triopikeau",
-		"FLUTTER_MANE": "Flotte-Mèche"
+		"FLUTTER_MANE": "Flotte-Mèche",
+		"WALKING_WAKE": "Serpente-Eau"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2035,7 +2037,7 @@
 		"BULLDOZE": "Piétine le sol et inflige [25,45,85,SP] SPECIAL aux ennemis ADJACENT. Les Pokémon touchés sont repoussés et perdent 10 de SPEED.",
 		"ARMOR_CANNON": "Tire un projectile ardent, infligeant [50,SP] SPECIAL à la cible avant de rebondir sur les 2 ennemis les plus proches, infligeant [30,SP] SPECIAL à chacun. Les projectiles reviennent ensuite sur leur cible initiale, infligeant [15,SP] SPECIAL supplémentaires chacun.",
 		"BITTER_BLADE": "Concentre son amertume dans une attaque tranchante, infligeant [70,SP] SPECIAL à tous les ennemi ADJACENT. Se soigne à hauteur de 10% de ses HP max pour chaque ennemi touché.",
-		"SUCTION_HEAL": "Draine l'énergie de ses cibles, infligeant [15,30,60,SP] SPECIAL dans un CONE de 2 case et se soigne à hauteur de 50% des dégâts infligés.",
+		"SUCTION_HEAL": "Draine l'énergie de ses cibles, infligeant [15,30,60,SP] SPECIAL dans un CONE de 2 cases et se soigne à hauteur de 50% des dégâts infligés.",
 		"ROOST": "S'envole et atterrit dans la rangée arrière, puis entre en SLEEP pendant 1 seconde et se soigne de [20,40,80,SP] HP.",
 		"BEHEMOTH_BLADE": "Fonce derrière la cible et délivre un puissant coup d'estoc, infligeant [100,SP] + [100,SP]% de son ATK comme SPECIAL.",
 		"HEAT_CRASH": "S'écrase sur la cible, la fait reculer et lui inflige [40,60,80,SP] SPECIAL. Plus le lanceur a d'ATK par rapport à la cible, plus les dégâts seront importants.",
@@ -2088,7 +2090,8 @@
 		"EERIE_SPELL": "Lance une vague qui rebondit sur 3 cibles supplémentaires, en privilégiant les Pokémon avec le moins de HP. Inflige [10,20,40,SP] SPECIAL aux ennemis et soigne les alliés de [15,30,45,SP] HP.",
 		"SHELL_SIDE_ARM": "Lance une vague qui rebondit sur 3 cibles supplémentaires, en privilégiant les Pokémon avec le plus de HP. Les ennemis deviennent POISONNED pendant [2,3,SP] secondes et les alliés gagnent [10,20] AP.",
 		"TRIPLE_DIVE": "Le lanceur effectue un triple plongeon parfaitement synchronisé, frappant 3 cibles différentes à faible HP avec les éclaboussures d'eau infligeant [15,30,45,SP] SPECIAL.",
-		"MOONBLAST": "Tire 6 lunes infligeant [20,SP] SPECIAL chacune. Mettre KO un Pokémon redirige les lunes restantes vers l'ennemi le plus proche et accorde 1 lune bonus."
+		"MOONBLAST": "Tire 6 lunes infligeant [20,SP] SPECIAL chacune. Mettre KO un Pokémon redirige les lunes restantes vers l'ennemi le plus proche et accorde 1 lune bonus.",
+		"HYDRO_STEAM": "Asperge avec un puissant jet d'eau bouillante, infligeant [35,70,140,SP] SPECIAL aux ennemis dans un CONE de 2 cases et infligeant BURN pendant 4 secondes."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
