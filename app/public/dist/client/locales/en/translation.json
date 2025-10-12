@@ -4172,16 +4172,15 @@
 		"arceus_rate": "Chance to find Arceus in stage 20 propositions",
 		"fishing_rarity_rate": "Fishing rarity by rod quality",
 		"fishing_rarity_rate_description": "The quality of the rod you use to fish influences the rarity of the Pokémon you can catch.",
-		"defense_calculation": "How defense works?",
+		"defense_calculation": "How Defense works?",
 		"defense_calculation_description": "Same system as League of Legends: Damage = ATK / (1+(0.05*DEF)), rounded up. DEF works for PHYSICAL, SPE_DEF for SPECIAL.",
 		"round_damage_calculation": "Round damage calculation",
 		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponents alive) ; rounded up, clones/spawns do not count",
 		"pool_size_per_category": "Pool size per category",
 		"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
-		"luck_title": "How Luck works",
+		"luck_title": "How Luck works?",
 		"luck_description": "Luck increases your chances in all draws, whether for critical hits, dodges, status on hit or any other effect mentioned with the [LK] symbol.",
 		"luck_formula": "Luck affects probabilities with this formula: P = baseP ^ (1 - luck/100) ; for example, a Pokémon with 10% crit chance and 50 luck will actually have 0.1^(1-50/100) = ~31.62 % crit chance"
-	
 	},
 	"errors": {
 		"USER_INACTIVE": "You have been kicked for inactivity to save server resources",
