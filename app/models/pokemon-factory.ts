@@ -2,6 +2,7 @@ import { MapSchema } from "@colyseus/schema"
 import { FlowerPot } from "../core/flower-pots"
 import { TownEncounter, TownEncounters } from "../core/town-encounters"
 import { Emotion, IPlayer, PkmCustom } from "../types"
+import { Stat } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 import { logger } from "../utils/logger"
 import Player from "./colyseus-models/player"
@@ -23,6 +24,9 @@ export default class PokemonFactory {
       })
       pokemon.positionX = x
       pokemon.positionY = y
+      for (const stat in pveStage.statBoosts) {
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
+      }
       if (
         townEncounter === TownEncounters.MAROWAK &&
         pveStage.marowakItems &&

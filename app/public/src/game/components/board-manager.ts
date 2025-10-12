@@ -1012,6 +1012,9 @@ export default class BoardManager {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, {
         shiny: this.state.shinyEncounter
       })
+      for (const stat in pveStage.statBoosts) {
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
+      }
       if (
         this.state.townEncounter === TownEncounters.MAROWAK &&
         pveStage.marowakItems &&

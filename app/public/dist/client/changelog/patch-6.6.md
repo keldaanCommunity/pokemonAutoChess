@@ -151,4 +151,5 @@ Special thanks to salamander for reporting and working on many of these fixes!
 - New title Aquariophile: Have Basculin Red, Blue and White in the same team
 - Added ambient light tint on pokemons and environment based on the current map lighting
 - 2 new scribbles rules
+- PvE stages from stage 19 are stronger with boosted stats and new items on Marowak encounter
 - All Pokémon outside of battles now perform their emote animation when left-clicked
