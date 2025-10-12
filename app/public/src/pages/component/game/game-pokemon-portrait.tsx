@@ -2,22 +2,23 @@ import React, { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import {
+  getPkmWithCustom,
+  PokemonCustoms
+} from "../../../../../models/colyseus-models/pokemon-customs"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
 import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { values } from "../../../../../utils/schemas"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import {
-  getPkmWithCustom,
-  PokemonCustoms
-} from "../../../../../models/colyseus-models/pokemon-customs"
-import { getGameScene } from "../../game"
 import "./game-pokemon-portrait.css"
 
 export function getCachedPortrait(
@@ -142,6 +143,19 @@ export default function GamePokemonPortrait(props: {
     cost = 0
   }
 
+  const gainedSynergies =
+    pokemonEvolution && willEvolve
+      ? values(pokemonEvolution.types).filter(
+          (type) => !pokemon.types.has(type)
+        )
+      : []
+  const lostSynergies =
+    pokemonEvolution && willEvolve
+      ? values(pokemon.types).filter(
+          (type) => !pokemonEvolution.types.has(type)
+        )
+      : []
+
   const canBuy = currentPlayer?.alive && currentPlayer?.money >= cost
 
   return (
@@ -203,11 +217,19 @@ export default function GamePokemonPortrait(props: {
       <ul className="game-pokemon-portrait-types">
         {Array.from(pokemonInPortrait.types.values()).map((type) => {
           return (
-            <li key={type}>
+            <li
+              key={type}
+              className={cc({ gained: gainedSynergies.includes(type) })}
+            >
               <SynergyIcon type={type} />
             </li>
           )
         })}
+        {lostSynergies.map((type) => (
+          <li key={type} className="lost">
+            <SynergyIcon type={type} />
+          </li>
+        ))}
       </ul>
     </div>
   )

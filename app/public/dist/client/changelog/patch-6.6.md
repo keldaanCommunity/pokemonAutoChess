@@ -103,6 +103,7 @@
 - Added pre-evolution on wiki pokemons details
 - Added the luck formula to the data section of the wiki
 - Added tooltips to berry trees
+- On shop portraits when buying an evolution, the gained and lost synergies on evolution are highlighted
 
 # Bugfix
 
