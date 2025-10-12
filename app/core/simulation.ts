@@ -39,6 +39,7 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
+import { isPlainFunction } from "../utils/function"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
 import {
@@ -53,6 +54,7 @@ import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
 import {
+  Effect,
   OnDishConsumedEffect,
   OnItemGainedEffect,
   OnSimulationStartEffect,
@@ -95,8 +97,8 @@ export default class Simulation extends Schema implements ISimulation {
   stageLevel = 0
   bluePlayer: Player | undefined
   redPlayer: Player | undefined
-  blueAbilitiesCasted: Ability[] = []
-  redAbilitiesCasted: Ability[] = []
+  blueAbilitiesCast: Ability[] = []
+  redAbilitiesCast: Ability[] = []
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
@@ -424,9 +426,14 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.applyStat(stat as Stat, value)
     })
 
-    ItemEffects[item]
-      ?.filter((effect) => effect instanceof OnItemGainedEffect)
-      ?.forEach((effect) => effect.apply(pokemon))
+    ItemEffects[item]?.forEach((effect) => {
+      if (effect instanceof Effect) pokemon.effectsSet.add(effect)
+      else if (isPlainFunction(effect)) pokemon.effectsSet.add(effect())
+    })
+
+    pokemon.getEffects(OnItemGainedEffect).forEach((effect) => {
+      effect.apply(pokemon)
+    })
   }
 
   applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {
@@ -475,13 +482,13 @@ export default class Simulation extends Schema implements ISimulation {
     dishEffects.forEach((effect) => {
       entity?.effectsSet.add(effect)
       if (effect instanceof OnDishConsumedEffect)
-        effect.apply({ pokemon, dish, entity, isGhostOpponent: player.ghost })
+        effect.apply({ pokemon, dish, entity, player })
       if (effect instanceof OnSpawnEffect && entity)
         effect.apply(entity, player, true)
     })
 
     if (pokemon.passive === Passive.GLUTTON) {
-      pokemon.hp += 20
+      pokemon.addMaxHP(20, player)
       entity?.addMaxHP(20, entity, 0, false)
       if (pokemon.hp > 750) {
         player.titles.add(Title.GLUTTON)

@@ -1,3 +1,4 @@
+import Player from "../../models/colyseus-models/player"
 import {
   BasculinWhite,
   Pokemon,
@@ -9,8 +10,10 @@ import { Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Team } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
+  Berries,
+  ConsumableItems,
   Flavors,
   Item,
   OgerponMasks,
@@ -37,6 +40,7 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   OnHitEffect,
+  OnItemDroppedEffect,
   OnKillEffect,
   OnMoveEffect,
   OnShieldDepletedEffect,
@@ -220,15 +224,19 @@ const KubfuOnKillEffect = new OnKillEffect(
     const SPEED_BUFF_PER_KILL = 3
     const AP_BUFF_PER_KILL = 5
     const MAX_BUFFS = 10
+
+    const baseSpeed = 50
+    let nbBuffsSpeed = Math.floor(
+      (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
+    )
+    let nbBuffsAP = Math.floor(pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL)
+
     if (attackType === AttackType.PHYSICAL) {
-      const baseSpeed = 50
-      const nbBuffs = Math.floor(
-        (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
-      )
-      if (nbBuffs < MAX_BUFFS) {
+      if (nbBuffsSpeed < MAX_BUFFS) {
         pokemon.addSpeed(SPEED_BUFF_PER_KILL, pokemon, 0, false, true)
+        nbBuffsSpeed++
         if (
-          nbBuffs + 1 === MAX_BUFFS &&
+          nbBuffsSpeed === MAX_BUFFS &&
           pokemon.player &&
           pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
         ) {
@@ -236,13 +244,11 @@ const KubfuOnKillEffect = new OnKillEffect(
         }
       }
     } else {
-      const nbBuffs = Math.floor(
-        pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL
-      )
-      if (nbBuffs < MAX_BUFFS) {
+      if (nbBuffsAP < MAX_BUFFS) {
         pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
+        nbBuffsAP++
         if (
-          nbBuffs + 1 === MAX_BUFFS &&
+          nbBuffsAP === MAX_BUFFS &&
           pokemon.player &&
           pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
         ) {
@@ -250,6 +256,10 @@ const KubfuOnKillEffect = new OnKillEffect(
         }
       }
     }
+
+    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(
+      Math.max(nbBuffsAP, nbBuffsSpeed)
+    )
   }
 )
 
@@ -787,6 +797,48 @@ const conversionEffect = new OnSimulationStartEffect(
     if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
       entity.items.add(Item.CHEF_HAT)
     }
+
+    // when converting to ground, fully dig a hole at their position
+    if (synergyCopied === Synergy.GROUND) {
+      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
+    }
+
+    // when convertig to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+    if (synergyCopied === Synergy.FLORA) {
+      const floraLevel = opponent.synergies.getSynergyStep(Synergy.FLORA)
+      entity.effectsSet.add(
+        new OnDeathEffect(({ pokemon }) => {
+          let flowerToSpawn: Pkm | null = null
+          if (floraLevel === 1) flowerToSpawn = Pkm.JUMPLUFF
+          else if (floraLevel === 2) flowerToSpawn = Pkm.VICTREEBEL
+          else if (floraLevel === 3) flowerToSpawn = Pkm.MEGANIUM
+          else if (floraLevel === 4) flowerToSpawn = Pkm.VILEPLUME
+          if (flowerToSpawn) {
+            const spawnSpot =
+              simulation.board.getFarthestTargetCoordinateAvailablePlace(
+                pokemon,
+                true
+              )
+            if (spawnSpot) {
+              const spawnedPokemon = PokemonFactory.createPokemonFromName(
+                flowerToSpawn,
+                player
+              )
+              const entity = pokemon.simulation.addPokemon(
+                spawnedPokemon,
+                spawnSpot.x,
+                spawnSpot.y,
+                player.team,
+                true
+              )
+              entity.action = PokemonActionState.BLOSSOM
+              entity.cooldown = 1000
+              player.pokemonsPlayed.add(flowerToSpawn)
+            }
+          }
+        })
+      )
+    }
   }
 )
 
@@ -878,6 +930,58 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
     entity.addAbilityPower(50, entity, 0, false)
   }
 })
+
+const spiritombWispEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    if (!entity.player) return
+    const nbOddKeystones = max(3)(
+      entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
+    )
+    if (nbOddKeystones === 0) return
+    const shieldAmount = nbOddKeystones * 10
+    const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+      entity.broadcastAbility({
+        skill: "WISP",
+        positionX: entity.positionX,
+        positionY: entity.positionY,
+        targetX: pokemon.positionX,
+        targetY: pokemon.positionY
+      })
+      entity.commands.push(
+        new DelayedCommand(() => {
+          entity.addShield(shieldAmount, entity, 0, false)
+        }, 1000)
+      )
+    })
+    simulation.board.cells.forEach((pkm) => {
+      if (pkm && pkm !== entity) {
+        pkm.effectsSet.add(onKOEffect)
+      }
+    })
+  }
+)
+
+const chinglingCountCastsEffect = new OnSimulationStartEffect(
+  ({ team, entity, simulation }) => {
+    if (!entity.player) return
+    team.forEach((pkm) => {
+      pkm.effectsSet.add(
+        new OnAbilityCastEffect(() => {
+          const pokemonEvolved =
+            entity.refToBoardPokemon.evolutionRule.addStack(
+              entity.refToBoardPokemon as Pokemon,
+              entity.player as Player,
+              simulation.stageLevel
+            )
+          if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
+            entity.index = PkmIndex[Pkm.CHIMECHO]
+            entity.name = Pkm.CHIMECHO
+          }
+        })
+      )
+    })
+  }
+)
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
@@ -1058,33 +1162,22 @@ export const PassiveEffects: Partial<
       }
     })
   ],
-  [Passive.SPIRITOMB]: [
-    new OnSimulationStartEffect(({ entity, simulation }) => {
-      if (!entity.player) return
-      const nbOddKeystones = max(3)(
-        entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
-      )
-      if (nbOddKeystones === 0) return
-      const shieldAmount = nbOddKeystones * 10
-      const onKOEffect = new OnDeathEffect(({ pokemon }) => {
-        entity.broadcastAbility({
-          skill: "WISP",
-          positionX: entity.positionX,
-          positionY: entity.positionY,
-          targetX: pokemon.positionX,
-          targetY: pokemon.positionY
-        })
-        entity.commands.push(
-          new DelayedCommand(() => {
-            entity.addShield(shieldAmount, entity, 0, false)
-          }, 1000)
-        )
-      })
-      simulation.board.cells.forEach((pkm) => {
-        if (pkm && pkm !== entity) {
-          pkm.effectsSet.add(onKOEffect)
-        }
-      })
+  [Passive.SPIRITOMB]: [spiritombWispEffect],
+  [Passive.CHINGLING]: [chinglingCountCastsEffect],
+  [Passive.RECYCLE]: [
+    new OnItemDroppedEffect(({ pokemon, item, player }) => {
+      if (Berries.includes(item)) {
+        pokemon.addMaxHP(15, player)
+        removeInArray(player.items, item)
+        return false
+      }
+      if (ConsumableItems.includes(item)) {
+        pokemon.addMaxHP(30, player)
+        player.items.push(Item.TRASH)
+        removeInArray(player.items, item)
+        return false
+      }
+      return true
     })
   ]
 }

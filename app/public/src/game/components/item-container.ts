@@ -16,9 +16,9 @@ import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
-import ItemsContainer from "./items-container"
 
 export default class ItemContainer extends DraggableObject {
+  scene: GameScene
   detail: ItemDetail | undefined
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
@@ -26,13 +26,12 @@ export default class ItemContainer extends DraggableObject {
   countText: GameObjects.Text | undefined
   circle?: GameObjects.Image
   name: Item
-  scene: Phaser.Scene
   pokemonId: string | null
   playerId: string
   mouseoutTimeout: NodeJS.Timeout | null = null
 
   constructor(
-    scene: Phaser.Scene,
+    scene: GameScene,
     x: number,
     y: number,
     item: Item,
@@ -149,7 +148,7 @@ export default class ItemContainer extends DraggableObject {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      ;(this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
+      this.scene.closeTooltips() // close other open tooltips
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)

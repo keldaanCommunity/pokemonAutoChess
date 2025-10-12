@@ -363,6 +363,7 @@ export interface IPokemon {
   canEat: boolean
   deathCount: number
   readonly hasEvolution: boolean
+  addMaxHP(amount: number, player: Player | undefined): void
 }
 
 export interface IExperienceManager {
@@ -603,7 +604,6 @@ export interface ICount {
   attackCount: number
   fightingBlockCount: number
   dodgeCount: number
-  powerLensCount: number
   starDustCount: number
   tripleAttackCount: number
   staticHolderCount: number

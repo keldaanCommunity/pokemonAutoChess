@@ -9552,7 +9552,10 @@ export class FlashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
 
-    const duration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
+    const duration =
+      ([2000, 4000, 6000][pokemon.stars - 1] ?? 6000) *
+      (1 + pokemon.ap / 100) *
+      (crit ? pokemon.critPower : 1)
     board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3)
       .forEach((cell) => {
@@ -13035,11 +13038,11 @@ export class EncoreStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const abilitiesCasted =
+    const abilitiesCast =
       pokemon.team === Team.BLUE_TEAM
-        ? pokemon.simulation.blueAbilitiesCasted
-        : pokemon.simulation.redAbilitiesCasted
-    const lastAbilityUsed = abilitiesCasted?.findLast(
+        ? pokemon.simulation.blueAbilitiesCast
+        : pokemon.simulation.redAbilitiesCast
+    const lastAbilityUsed = abilitiesCast?.findLast(
       (ability) =>
         ability !== Ability.ENCORE && AbilityStrategies[ability]?.copyable
     )

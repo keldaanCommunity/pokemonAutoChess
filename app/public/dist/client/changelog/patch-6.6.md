@@ -65,6 +65,10 @@
 - Type Null and Silvally are now Normal/Artificial Legendary ; Silvally passive RKS system reworked: all synergy items held are removable and give Memory discs of those synergies when removed ; Changed Multi-Attack: also count levels of Silvally native synergies
 - Psych Up has been renamed Disable
 - Removed AP scaling from speed gain on Aura Wheel (Morpeko)
+- Changed Chingling evolution rule: now evolves into Chimecho after 30 abilities have been cast by your team ; Revert Chimecho PP buff from 6.4: PP 70 → 80
+- Trubbish passive simplified: no longer gains item stats, no longer can be fed with item components or artificial items ; New passive: when fed with a berry, gain 10 permanent max HP ; when fed with a consummable item (Mulch, TM, Dish...), gain 25 max HP permanently and gain TRASH in exchange
+- Updated Porygon passive Conversion: when copying Ground, after the fight, fully digs a hole at their position ; when copying Flora, when Porygon is KO, a special flora mon spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+- Nerf Vulpix line: PP 80 → 90
 
 # Changes to Synergies
 
@@ -79,6 +83,7 @@
 
 - New weather rock Odd Stone: counts for 3 towards Murky weather. Under Murky weather, your team gains 10 Luck and -10% negative status duration, and resist to Curse 1 second longer.
 - Nerf Shiny Stone: no longer gives +1 to Light synergy level
+- New articial item Running Shoes: gives Field synergy. The holder gains 5 Speed every tile they move (Jumps and dashes count for one tile).
 
 # Gameplay
 
@@ -101,6 +106,8 @@
 - Added filtering and searching to game rooms list. Gamemode tabs now show games in progress instead of open rooms.
 - Added pre-evolution on wiki pokemons details
 - Added the luck formula to the data section of the wiki
+- Added tooltips to berry trees
+- On shop portraits when buying an evolution, the gained and lost synergies on evolution are highlighted
 
 # Bugfix
 
@@ -135,6 +142,7 @@
 - Fix Bitter Blade heal not accounting for factors that increase base hp
 - Fix Psyshock damage scaling on AP twice
 - Fix Shore Up sandstorm heal not showing AP scaling in the description
+- Fix Flash not scaling on AP
 
 Special thanks to salamander for reporting and working on many of these fixes! 
 
@@ -143,3 +151,4 @@ Special thanks to salamander for reporting and working on many of these fixes!
 - New title Aquariophile: Have Basculin Red, Blue and White in the same team
 - Added ambient light tint on pokemons and environment based on the current map lighting
 - 2 new scribbles rules
+- All Pokémon outside of battles now perform their emote animation when left-clicked

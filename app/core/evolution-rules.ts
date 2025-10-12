@@ -29,6 +29,7 @@ export abstract class EvolutionRule {
   abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
   divergentEvolution?: DivergentEvolution
   stacks: number
+  stacksRequired?: number
 
   constructor(divergentEvolution?: DivergentEvolution) {
     if (divergentEvolution) this.divergentEvolution = divergentEvolution
@@ -67,12 +68,23 @@ export abstract class EvolutionRule {
         pokemonEvolved.passive !== Passive.COSMOG &&
         pokemonEvolved.passive !== Passive.COSMOEM
       ) {
-        pokemon.hp += 10
-        pokemon.evolutionRule.stacks++
+        pokemon.addMaxHP(10, player)
+        pokemon.evolutionRule.addStack(pokemon, player, stageLevel)
+      } else {
+        // check evolutions again if it can evolve twice in a row
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
       }
-      // check evolutions again if it can evolve twice in a row
-      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
     })
+  }
+
+  addStack( 
+    pokemon: Pokemon,
+    player: Player,
+    stageLevel: number
+  ) {
+    this.stacks++
+    //logger.debug(`${pokemon.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
+    return this.tryEvolve(pokemon, player, stageLevel)
   }
 }
 
@@ -319,7 +331,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
+    if (pokemon.items.has(Item.EVIOLITE)) return false    
     return this.condition(pokemon, player, stageLevel)
   }
 
@@ -362,5 +374,30 @@ export function carryOverPermanentStats(
     pokemonEvolved.tm = pickRandomIn(existingTms)
     pokemonEvolved.skill = pokemonEvolved.tm
     pokemonEvolved.maxPP = 100
+  }
+}
+
+export class StackBasedEvolutionRule extends EvolutionRule {
+  stacksRequired: number
+  constructor(
+    stacksRequired: number,
+    divergentEvolution?: DivergentEvolution
+  ) {
+    super(divergentEvolution)
+    this.stacksRequired = stacksRequired
+  }
+
+  canEvolve(pokemon: Pokemon): boolean {
+    if (pokemon.items.has(Item.EVIOLITE)) return false    
+    return this.stacks >= this.stacksRequired
+  }
+
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
+    const pokemonEvolved = player.transformPokemon(
+      pokemon,
+      pokemonEvolutionName
+    )
+    return pokemonEvolved
   }
 }

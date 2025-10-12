@@ -412,10 +412,6 @@ export default class BattleManager {
         if (value != 0) {
           this.displayAbilityOnPokemon("FAIRY_CRIT", pkm)
         }
-      } else if (field === "powerLensCount") {
-        if (value !== 0) {
-          this.displayAbilityOnPokemon("POWER_LENS", pkm)
-        }
       } else if (field === "starDustCount") {
         if (value !== 0) {
           this.displayAbilityOnPokemon("STAR_DUST", pkm)

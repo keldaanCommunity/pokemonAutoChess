@@ -123,6 +123,7 @@
 		"PASTEL_VEIL": "粉彩护幕",
 		"LEECH_SEED": "寄生种子",
 		"LOCK_ON": "锁定",
+		"DISABLE": "定身法",
 		"RAZOR_WIND": "旋风刀",
 		"WONDER_GUARD": "神奇守护",
 		"ELECTRIC_SURGE": "电气制造者",
@@ -1980,7 +1981,7 @@
 		"WISE_YAWN": "使HP最低的我方宝可梦获得[15,30,60,SP]点SHIELD。以那只宝可梦为目标的敌方宝可梦会陷入FATIGUE 3秒，并被扣除20点AP。",
 		"FIERY_DANCE": "让火焰覆盖全身，振翅攻击目标，对其造成[25,50,100,SP]点SPECIAL，然后提升使用者30点AP。",
 		"BIDE": "3秒后，对ADJACENT敌方宝可梦造成SPECIAL，数值相当于在此期间所受伤害的[200,SP]%。",
-		"SHORE_UP": "使用者恢复[20,25,SP]%的HP。若天气为SANDSTORM，额外恢复10%。",
+		"SHORE_UP": "使用者恢复[20,25,SP]%的HP。若天气为SANDSTORM，额外恢复[10,SP]%。",
 		"POISON_STING": "使目标陷入[2,3,4]层的POISONNED。溢出的层数改为立刻对目标造成[25,50,100,SP]点SPECIAL。",
 		"TRANSE": "结束冥想，恢复30%的最大HP，并变回普通模式。",
 		"WOOD_HAMMER": "对目标造成SPECIAL，数值相当于使用者[400,SP]%的ATK。使用者受到PHYSICAL，数值相当于100%的ATK。",
@@ -2416,6 +2417,7 @@
 		"BERSERK_GENE": "破坏基因",
 		"SURFBOARD": "冲浪板",
 		"COOKING_POT": "烹饪锅",
+		"RUNNING_SHOES": "跑步鞋",
 		"METEORITE": "陨石",
 		"MYSTERY_BOX": "神秘盒子",
 		"TRASH": "废料",
@@ -2667,6 +2669,7 @@
 		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则陷入CONFUSION 3秒。",
 		"SURFBOARD": "携带者也被视作AQUATIC宝可梦。每当海浪冲刷战场时，携带者会释放$t(ability.SURF)，招式等级为当前AQUATIC的共鸣等级。",
 		"COOKING_POT": "携带者也被视作GOURMET宝可梦。处于BURN时，COOKING_POT会缓慢加热，每秒提升携带者10点SPEED。",
+		"RUNNING_SHOES": "携带者也被视作FIELD宝可梦。携带者每移动1格，提升5点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
 		"MAX_ELIXIR": "首次释放招式1秒后，恢复最大PP的100%。",
 		"METEORITE": "能和代欧奇希斯产生反应的陨石。摸上去隐约有点暖暖的。",
 		"MYSTERY_BOX": "一个神秘的古老盒子。持有此道具时，商店中所有$t(pkm.DITTO)将被替换为$t(pkm.MELTAN)。",
@@ -2878,7 +2881,7 @@
 		"SHAYMIN": "谢米似乎需要一朵GRACIDEA_FLOWER……",
 		"BEAST_BOOST_ATK": "击倒敌方宝可梦时，提升此宝可梦5点ATK。",
 		"BEAST_BOOST_AP": "击倒敌方宝可梦时，提升此宝可梦10点AP。",
-		"CHINGLING": "铃铛响似乎需要一捧STAR_DUST……",
+		"CHINGLING": "在$t(pkm.CHINGLING)出战期间，我方全队总计释放30次招式后，其会进化为$t(pkm.CHIMECHO)。",
 		"CHIMECHO": "只要风铃铃仍然存活，它就能和ADJACENT我方宝可梦的叫声共鸣，使其效果翻倍。",
 		"SURGE_SURFER": "电泳冲浪者在处于ELECTRIC_FIELD或PSYCHIC_FIELD下时提升30%的SPEED。",
 		"MEGA_LAUNCHER": "此宝可梦发出SOUND共鸣的叫声时，连续发出3次。",
@@ -2922,7 +2925,6 @@
 		"BURMY": "需要3只相同蓑衣的结草儿才能进化为结草贵妇。若在第20轮移动到了一个没有对应蓑衣的地区，结草儿会进化为绅士蛾。",
 		"PSYDUCK": "受到攻击时有[10,LK]%的概率陷入CONFUSION。此宝可梦每次陷入CONFUSION时，提升100点AP。",
 		"BLOODMOON": "在BLOODMOON中切换形态。",
-		"RECYCLE": "向此宝可梦喂食树果可提升其10点HP，喂食基础道具组件提升25点HP和道具提供的数值。喂食人造道具提升50点HP和道具提供的数值，并获得一袋TRASH。",
 		"DREAM_CATCHER": "若目标处于SLEEP，攻击额外使3只最近的我方宝可梦获得10点SHIELD。",
 		"SLOW_START": "对战开始时降低30点SPEED。在初次释放招式后，提升30点SPEED和10点ATK。",
 		"STONJOURNER": "PP槽恢复至满时开始移动和发起攻击。此宝可梦的能量点使战斗开始时的ADJACENT宝可梦提升50点AP。",
@@ -4097,7 +4099,9 @@
 		"BLOOD_MONEY": "重 武 轻 商",
 		"TOWN_FESTIVAL": "欢 庆 节 日",
 		"HIGH_ROLLER": "幸 运 之 星",
-		"REGIONAL_SPECIALTIES": "本 地 特 产"
+		"REGIONAL_SPECIALTIES": "本 地 特 产",
+		"GO_BIG_OR_GO_HOME": "坚 持 锻 炼",
+		"FAMILY_OUTING": "全 家 出 动"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "所有附加宝可梦在游戏开始时立即可选。",
@@ -4116,7 +4120,9 @@
 		"BLOOD_MONEY": "击倒宝可梦时获得1 GOLD，但积攒GOLD不提供利息收入。",
 		"TOWN_FESTIVAL": "必定能在轮盘轮次遭遇宝藏镇NPC，且所有轮盘道具免费。",
 		"HIGH_ROLLER": "在第0-9轮，商店有概率刷出孵化宝可梦；第10-19轮，独特宝可梦；第20轮起，传说宝可梦。",
-		"REGIONAL_SPECIALTIES": "当前所在地区的共鸣类型也会计入你的共鸣等级。穿过传送门后，所有我方宝可梦食用一道本地特色料理。"
+		"REGIONAL_SPECIALTIES": "当前所在地区的共鸣类型也会计入你的共鸣等级。穿过传送门后，所有我方宝可梦食用一道本地特色料理。",
+		"GO_BIG_OR_GO_HOME": "所有宝可梦每轮提升5点最大HP，体型也会相应变大。",
+		"FAMILY_OUTING": "同一进化线上的宝可梦可以同时参与共鸣计数。"
 	},
 	"town_encounter_description": {
 		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",
@@ -4163,11 +4169,14 @@
 		"fishing_rarity_rate": "鱼竿对应的钓鱼出率",
 		"fishing_rarity_rate_description": "所用鱼竿的品质决定了你能钓起的宝可梦的稀有度",
 		"defense_calculation": "防御的减伤计算",
-		"defense_calculation_description": "和英雄联盟一致，伤害等于攻击除以（1+0.05×防御力）。防御对物理伤害生效，特防对特殊伤害生效。",
+		"defense_calculation_description": "和英雄联盟一致，伤害等于攻击除以(1+0.05×防御力)。防御对物理伤害生效，特防对特殊伤害生效。",
 		"round_damage_calculation": "对玩家伤害计算",
 		"round_damage_calculation_description": "每轮结束时，战败玩家受到的伤害等于当前轮次序数除以2加存活的敌方宝可梦数量，向上取整。复制体和召唤物不计数。",
 		"pool_size_per_category": "每类的精灵池大小",
-		"pool_size_per_category_description": "商店中刷出的宝可梦均来自全体玩家共享的精灵池。精灵池中单种宝可梦的数量由其稀有度和进化段数决定。"
+		"pool_size_per_category_description": "商店中刷出的宝可梦均来自全体玩家共享的精灵池。精灵池中单种宝可梦的数量由其稀有度和进化段数决定。",
+		"luck_title": "幸运的机制",
+		"luck_description": "幸运能提升任何概率触发事件的触发成功率，包括暴击、闪避、攻击时触发效果或是有[LK]标志的数字",
+		"luck_formula": "实际的触发概率等于基础概率的(1-幸运÷100)次方。例如，若某只宝可梦具有10%的暴击率和50点幸运，其实际暴击率为0.1^(1-50/100)≈0.3162，即约为31.62%。"
 	},
 	"errors": {
 		"USER_INACTIVE": "由于你长时间挂机，系统已将你踢出来节约服务器资源。",

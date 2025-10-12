@@ -37,7 +37,6 @@ import { DEPTH } from "../depths"
 import { DebugScene } from "../scenes/debug-scene"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
-import { on } from "events"
 
 export function displayHit(
   scene: GameScene | DebugScene,
@@ -1383,7 +1382,9 @@ export const AbilitiesAnimations: {
     })(args),
   ["SCALE_SHOT_CHARGE"]: (args) =>
     projectile({
+      ability: Ability.SCALE_SHOT,
       duration: args.delay,
+      delay: 0,
       animOptions: { repeat: -1, duration: 300 }
     })(args),
   [Ability.SCALE_SHOT]: projectile({ duration: 400 }),
@@ -1540,7 +1541,7 @@ export const AbilitiesAnimations: {
     })(args),
   [Ability.TRI_ATTACK]: projectile({}),
   [Ability.AURA_WHEEL]: projectile({ scale: 1 }),
-  [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 3 }),
+  [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 2 }),
   [Ability.PYRO_BALL]: projectile({
     scale: 1,
     tweenProps: { scale: 2 },

@@ -800,6 +800,12 @@ export default class GameScene extends Scene {
     outline.remove(gameObject.sprite)
   }
 
+  closeTooltips() {
+    this.board?.closeTooltips()
+    this.minigameManager?.closeTooltips()
+    this.itemsContainer?.closeTooltips()
+  }
+
   displayMoneyGain(x: number, y: number, gain: number) {
     const textStyle = {
       fontSize: "25px",

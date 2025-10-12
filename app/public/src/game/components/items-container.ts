@@ -4,6 +4,7 @@ import Player from "../../../../models/colyseus-models/player"
 import { Item } from "../../../../types/enum/Item"
 import { values } from "../../../../utils/schemas"
 import { DEPTH } from "../depths"
+import GameScene from "../scenes/game-scene"
 import ItemContainer from "./item-container"
 
 export default class ItemsContainer extends GameObjects.Container {
@@ -12,7 +13,7 @@ export default class ItemsContainer extends GameObjects.Container {
   items: Item[] = []
 
   constructor(
-    scene: Phaser.Scene,
+    scene: GameScene,
     inventory: SetSchema<Item> | ArraySchema<Item>,
     x: number,
     y: number,
@@ -46,7 +47,7 @@ export default class ItemsContainer extends GameObjects.Container {
     })
   }
 
-  closeDetails() {
+  closeTooltips() {
     for (let i = 0; i < this.list.length; i++) {
       const it = <ItemContainer>this.list[i]
       it.closeDetail()

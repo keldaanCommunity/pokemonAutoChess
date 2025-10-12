@@ -27,6 +27,7 @@ import {
   DEFAULT_CRIT_POWER
 } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
+import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import {
   Orientation,
   PokemonActionState,
@@ -41,7 +42,7 @@ import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../types/enum/Synergy"
 import { logger } from "../../../../utils/logger"
-import { clamp, min } from "../../../../utils/number"
+import { min } from "../../../../utils/number"
 import {
   OrientationArray,
   OrientationVector
@@ -63,7 +64,6 @@ import {
   PokemonAnimations
 } from "./pokemon-animations"
 import PokemonDetail from "./pokemon-detail"
-import { DungeonDetails } from "../../../../types/enum/Dungeon"
 
 const spriteCountPerPokemon = new Map<string, number>()
 
@@ -240,14 +240,17 @@ export default class PokemonSprite extends DraggableObject {
     )
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.hp - baseHP) / baseHP
-    this.sprite.setScale(2 + sizeBuff).setDepth(DEPTH.POKEMON).setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
+    this.sprite
+      .setScale(2 + sizeBuff)
+      .setDepth(DEPTH.POKEMON)
+      .setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
     this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
       this.animationLocked = false
       // go back to idle anim if no more animation in queue
       scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
     })
     this.itemsContainer = new ItemsContainer(
-      scene,
+      scene as GameScene,
       pokemon.items ?? new SetSchema(),
       this.sprite.width / 2 + 25,
       -35,
@@ -405,8 +408,8 @@ export default class PokemonSprite extends DraggableObject {
 
   openDetail() {
     const s = <GameScene>this.scene
+    s.closeTooltips()
     if (s.lastPokemonDetail && s.lastPokemonDetail !== this) {
-      s.lastPokemonDetail.closeDetail()
       s.lastPokemonDetail = null
     }
 
@@ -461,6 +464,9 @@ export default class PokemonSprite extends DraggableObject {
       this.openDetail()
     } else {
       this.closeDetail()
+    }
+    if (pointer.leftButtonDown() && !this.inBattle) {
+      this.emoteAnimation()
     }
   }
 

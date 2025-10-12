@@ -215,7 +215,7 @@ export class OnFieldDeathEffect extends OnDeathEffect {
         board.forEach((x, y, value) => {
           if (
             value &&
-            value.team == pokemon.team &&
+            value.team === pokemon.team &&
             value.types.has(Synergy.FIELD)
           ) {
             value.count.fieldCount++
