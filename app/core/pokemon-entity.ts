@@ -493,16 +493,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.life <= 0) return
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    const update = (target: { hp: number }) => {
-      target.hp = min(1)(target.hp + value)
-    }
-    update(this)
+    this.hp = min(1)(this.hp + value)
     this.life = clamp(this.life + value, 1, this.hp)
     if (permanent && !this.isGhostOpponent) {
-      update(this.refToBoardPokemon)
-    }
-    if (this.hp >= 1500 && this.player) {
-      this.player.titles.add(Title.GIANT)
+      this.refToBoardPokemon.addMaxHP(value, this.player)
     }
   }
 

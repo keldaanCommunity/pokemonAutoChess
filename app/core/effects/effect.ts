@@ -39,8 +39,8 @@ export class OnSpawnEffect extends Effect {
 interface OnDishConsumedEffectArgs {
   pokemon: Pokemon
   dish: Item
+  player: Player
   entity?: PokemonEntity
-  isGhostOpponent: boolean
 }
 export class OnDishConsumedEffect extends Effect {
   constructor(effect?: (args: OnDishConsumedEffectArgs) => void) {

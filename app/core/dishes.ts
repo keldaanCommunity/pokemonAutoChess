@@ -187,8 +187,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   LEFTOVERS: [],
   MOOMOO_MILK: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.hp += 15
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.addMaxHP(15, player)
       entity?.addMaxHP(15, entity, 0, false)
     })
   ],
@@ -286,9 +286,9 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     })
   ],
   SMOKED_FILET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) {
-        pokemon.hp = min(1)(pokemon.hp - 5)
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) {
+        pokemon.addMaxHP(-5, player)
         pokemon.atk += 5
         pokemon.ap += 10
       }
@@ -358,44 +358,44 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   SWEETS: [],
   STRAWBERRY_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.atk += 3
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.atk += 3
       entity?.addAttack(3, entity, 0, false)
     })
   ],
   LOVE_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.def += 3
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.def += 3
       entity?.addDefense(3, entity, 0, false)
     })
   ],
   BERRY_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.hp += 15
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.addMaxHP(15, player)
       entity?.addMaxHP(15, entity, 0, false)
     })
   ],
   CLOVER_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.luck = max(100)(pokemon.luck + 10)
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.luck = max(100)(pokemon.luck + 10)
       entity?.addLuck(10, entity, 0, false)
     })
   ],
   FLOWER_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.speed = max(300)(pokemon.speed + 5)
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.speed = max(300)(pokemon.speed + 5)
       entity?.addSpeed(5, entity, 0, false)
     })
   ],
   STAR_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.ap += 10
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.ap += 10
       entity?.addAbilityPower(10, entity, 0, false)
     })
   ],
   RIBBON_SWEET: [
-    new OnDishConsumedEffect(({ pokemon, entity, isGhostOpponent }) => {
-      if (!isGhostOpponent) pokemon.speDef += 3
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      if (!player.ghost) pokemon.speDef += 3
       entity?.addSpecialDefense(3, entity, 0, false)
     })
   ]

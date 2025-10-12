@@ -66,6 +66,7 @@
 - Psych Up has been renamed Disable
 - Removed AP scaling from speed gain on Aura Wheel (Morpeko)
 - Changed Chingling evolution rule: now evolves into Chimecho after 30 abilities have been cast by your team ; Revert Chimecho PP buff from 6.4: PP 70 → 80
+- Trubbish passive simplified: no longer gains item stats, no longer can be fed with item components or artificial items ; New passive: when fed with a berry, gain 10 permanent max HP ; when fed with a consummable item (Mulch, TM, Dish...), gain 25 max HP permanently and gain TRASH in exchange
 - Updated Porygon passive Conversion: when copying Ground, after the fight, fully digs a hole at their position ; when copying Flora, when Porygon is KO, a special flora mon spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
 - Nerf Vulpix line: PP 80 → 90
 

@@ -12,6 +12,8 @@ import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
+  Berries,
+  ConsumableItems,
   Flavors,
   Item,
   OgerponMasks,
@@ -38,6 +40,7 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   OnHitEffect,
+  OnItemDroppedEffect,
   OnKillEffect,
   OnMoveEffect,
   OnShieldDepletedEffect,
@@ -1160,5 +1163,21 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.SPIRITOMB]: [spiritombWispEffect],
-  [Passive.CHINGLING]: [chinglingCountCastsEffect]
+  [Passive.CHINGLING]: [chinglingCountCastsEffect],
+  [Passive.RECYCLE]: [
+    new OnItemDroppedEffect(({ pokemon, item, player }) => {
+      if (Berries.includes(item)) {
+        pokemon.addMaxHP(15, player)
+        removeInArray(player.items, item)
+        return false
+      }
+      if (ConsumableItems.includes(item)) {
+        pokemon.addMaxHP(30, player)
+        player.items.push(Item.TRASH)
+        removeInArray(player.items, item)
+        return false
+      }
+      return true
+    })
+  ]
 }
