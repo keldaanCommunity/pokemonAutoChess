@@ -1211,13 +1211,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       target.player &&
-      !target.isGhostOpponent &&
       (target.effects.has(EffectEnum.COTTONWEED) ||
         target.effects.has(EffectEnum.FLYCATCHER) ||
         target.effects.has(EffectEnum.FRAGRANT) ||
         target.effects.has(EffectEnum.FLOWER_POWER))
     ) {
-      target.player.collectMulch(target.stars)
+      if (!target.isGhostOpponent) {
+        target.player.collectMulch(target.stars)
+      }
 
       const potsAvailable = getFlowerPotsUnlocked(target.player)
       let nextPot: FlowerPot | undefined
