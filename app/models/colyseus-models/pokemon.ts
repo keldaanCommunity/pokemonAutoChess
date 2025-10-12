@@ -19041,6 +19041,32 @@ export class FlutterMane extends Pokemon {
   skill = Ability.MOONBLAST
 }
 
+export class WalkingWake extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.WATER,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 25
+  speed = 70
+  def = 8
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.HYDRO_STEAM
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = DungeonDetails[map]?.synergies
+    return (
+      regionSynergies.includes(Synergy.DRAGON) ||
+      regionSynergies.includes(Synergy.FOSSIL)
+    )
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20111,7 +20137,8 @@ export const PokemonClasses: Record<
   [Pkm.GALARIAN_SLOWKING]: GalarianSlowking,
   [Pkm.WIGLETT]: Wiglett,
   [Pkm.WUGTRIO]: Wugtrio,
-  [Pkm.FLUTTER_MANE]: FlutterMane
+  [Pkm.FLUTTER_MANE]: FlutterMane,
+  [Pkm.WALKING_WAKE]: WalkingWake
 }
 
 // declare all the classes in colyseus schema TypeRegistry

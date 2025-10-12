@@ -521,7 +521,8 @@
 		"EERIE_SPELL": "Eerie Spell",
 		"SHELL_SIDE_ARM": "Shell Side Arm",
 		"TRIPLE_DIVE": "Triple Dive",
-		"MOONBLAST": "Moonblast"
+		"MOONBLAST": "Moonblast",
+		"HYDRO_STEAM": "Hydro Steam"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1586,7 +1587,8 @@
 		"BASCULEGION_FEMALE": "Basculegion (♀)",
 		"WIGLETT": "Wiglett",
 		"WUGTRIO": "Wugtrio",
-		"FLUTTER_MANE": "Flutter Mane"
+		"FLUTTER_MANE": "Flutter Mane",
+		"WALKING_WAKE": "Walking Wake"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2088,7 +2090,8 @@
 		"EERIE_SPELL": "Launches a wave that bounces to 3 additional targets, prioritizing low HP Pokémon. Deals [10,20,40,SP] SPECIAL to enemies and heals allies for [15,30,45,SP] HP.",
 		"SHELL_SIDE_ARM": "Launches a wave that bounces to 3 additional targets, prioritizing high HP Pokémon. Enemies becomes POISONNED for [2,3,SP] seconds, allies gain [10,20] AP.",
 		"TRIPLE_DIVE": "The user performs a perfectly timed triple dive, hitting 3 different low HP targets with splashes of water dealing [15,30,45,SP] SPECIAL.",
-		"MOONBLAST": "Fires 6 moons dealing [20,SP] SPECIAL each. KO'ing a Pokémon retargets remaining moons to the nearest enemy and grants 1 bonus moon."
+		"MOONBLAST": "Fires 6 moons dealing [20,SP] SPECIAL each. KO'ing a Pokémon retargets remaining moons to the nearest enemy and grants 1 bonus moon.",
+		"HYDRO_STEAM": "Sprays a powerful jet of boiling water, dealing [35,70,140,SP] SPECIAL to enemies in a 2-tiles range CONE, and inflicting BURN for 4 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -4169,16 +4172,15 @@
 		"arceus_rate": "Chance to find Arceus in stage 20 propositions",
 		"fishing_rarity_rate": "Fishing rarity by rod quality",
 		"fishing_rarity_rate_description": "The quality of the rod you use to fish influences the rarity of the Pokémon you can catch.",
-		"defense_calculation": "How defense works?",
+		"defense_calculation": "How Defense works?",
 		"defense_calculation_description": "Same system as League of Legends: Damage = ATK / (1+(0.05*DEF)), rounded up. DEF works for PHYSICAL, SPE_DEF for SPECIAL.",
 		"round_damage_calculation": "Round damage calculation",
 		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponents alive) ; rounded up, clones/spawns do not count",
 		"pool_size_per_category": "Pool size per category",
 		"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
-		"luck_title": "How Luck works",
+		"luck_title": "How Luck works?",
 		"luck_description": "Luck increases your chances in all draws, whether for critical hits, dodges, status on hit or any other effect mentioned with the [LK] symbol.",
 		"luck_formula": "Luck affects probabilities with this formula: P = baseP ^ (1 - luck/100) ; for example, a Pokémon with 10% crit chance and 50 luck will actually have 0.1^(1-50/100) = ~31.62 % crit chance"
-	
 	},
 	"errors": {
 		"USER_INACTIVE": "You have been kicked for inactivity to save server resources",
