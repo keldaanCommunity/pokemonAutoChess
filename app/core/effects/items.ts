@@ -46,6 +46,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
+  OnMoveEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -215,6 +216,17 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
+export class RunningShoesOnMoveEffect extends OnMoveEffect {
+  stacks = 0
+
+  constructor() {
+    super((pkm) => {
+      pkm.addSpeed(5, pkm, 0, false)
+      this.stacks += 1
+    })
+  }
+}
+
 const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.hp) {
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -284,7 +296,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       player.pokemonsTrainingInDojo.push({
         pokemon,
         ticketLevel,
-        returnStage: room.state.stageLevel + ([3,4,5][ticketLevel - 1] ?? 5)
+        returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
       })
       removeInArray(player.items, item)
       return false // prevent item from being equipped
@@ -390,7 +402,7 @@ export class FishingRodEffect extends OnStageStartEffect {
   }
 }
 
-export const ItemEffects: { [i in Item]?: Effect[] } = {
+export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
     SynergyStones.map((stone) => [
       stone,
@@ -751,6 +763,17 @@ export const ItemEffects: { [i in Item]?: Effect[] } = {
         target.count.manaBurnCount++
         target.status.triggerParalysis(2000, target, pokemon)
       }
+    })
+  ],
+
+  [Item.RUNNING_SHOES]: [
+    () => new RunningShoesOnMoveEffect(), // needs new instance of effect for each pokemon due to internal stack counter
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks =
+        Object.values(pokemon.effectsSet).find(
+          (effect) => effect instanceof RunningShoesOnMoveEffect
+        )?.stacks ?? 0
+      pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
     })
   ],
 

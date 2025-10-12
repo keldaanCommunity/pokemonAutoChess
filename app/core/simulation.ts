@@ -39,6 +39,7 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
+import { isPlainFunction } from "../utils/function"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
 import {
@@ -53,6 +54,7 @@ import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
 import {
+  Effect,
   OnDishConsumedEffect,
   OnItemGainedEffect,
   OnSimulationStartEffect,
@@ -424,9 +426,14 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.applyStat(stat as Stat, value)
     })
 
-    ItemEffects[item]
-      ?.filter((effect) => effect instanceof OnItemGainedEffect)
-      ?.forEach((effect) => effect.apply(pokemon))
+    ItemEffects[item]?.forEach((effect) => {
+      if (effect instanceof Effect) pokemon.effectsSet.add(effect)
+      else if (isPlainFunction(effect)) pokemon.effectsSet.add(effect())
+    })
+
+    pokemon.getEffects(OnItemGainedEffect).forEach((effect) => {
+      effect.apply(pokemon)
+    })
   }
 
   applySynergyEffects(pokemon: PokemonEntity, singleType?: Synergy) {

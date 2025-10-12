@@ -465,6 +465,9 @@ export default class PokemonSprite extends DraggableObject {
     } else {
       this.closeDetail()
     }
+    if (pointer.leftButtonDown() && !this.inBattle) {
+      this.emoteAnimation()
+    }
   }
 
   onPointerUp(): void {

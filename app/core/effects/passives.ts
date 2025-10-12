@@ -10,7 +10,7 @@ import { Transfer } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Team } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Berries,
   ConsumableItems,
@@ -796,6 +796,48 @@ const conversionEffect = new OnSimulationStartEffect(
     // when converting to gourmet, get a Chef hat. Useless but funny
     if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
       entity.items.add(Item.CHEF_HAT)
+    }
+
+    // when converting to ground, fully dig a hole at their position
+    if (synergyCopied === Synergy.GROUND) {
+      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
+    }
+
+    // when convertig to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+    if (synergyCopied === Synergy.FLORA) {
+      const floraLevel = opponent.synergies.getSynergyStep(Synergy.FLORA)
+      entity.effectsSet.add(
+        new OnDeathEffect(({ pokemon }) => {
+          let flowerToSpawn: Pkm | null = null
+          if (floraLevel === 1) flowerToSpawn = Pkm.JUMPLUFF
+          else if (floraLevel === 2) flowerToSpawn = Pkm.VICTREEBEL
+          else if (floraLevel === 3) flowerToSpawn = Pkm.MEGANIUM
+          else if (floraLevel === 4) flowerToSpawn = Pkm.VILEPLUME
+          if (flowerToSpawn) {
+            const spawnSpot =
+              simulation.board.getFarthestTargetCoordinateAvailablePlace(
+                pokemon,
+                true
+              )
+            if (spawnSpot) {
+              const spawnedPokemon = PokemonFactory.createPokemonFromName(
+                flowerToSpawn,
+                player
+              )
+              const entity = pokemon.simulation.addPokemon(
+                spawnedPokemon,
+                spawnSpot.x,
+                spawnSpot.y,
+                player.team,
+                true
+              )
+              entity.action = PokemonActionState.BLOSSOM
+              entity.cooldown = 1000
+              player.pokemonsPlayed.add(flowerToSpawn)
+            }
+          }
+        })
+      )
     }
   }
 )
