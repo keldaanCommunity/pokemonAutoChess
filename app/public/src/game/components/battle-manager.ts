@@ -581,6 +581,9 @@ export default class BattleManager {
         const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
         pkmSprite.sprite.setScale(2 + sizeBuff)
         pkmSprite.lifebar?.setMaxHp(pokemon.maxHP)
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
+        }
       } else if (field == "hp") {
         pkmSprite.lifebar?.setHp(Number(value))
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {

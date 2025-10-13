@@ -1,7 +1,6 @@
 import React from "react"
-import "./game-tooltip-bar.css"
-import { max } from "d3"
 import { clamp } from "../../../../../utils/number"
+import "./game-tooltip-bar.css"
 
 interface GameTooltipBarProps {
   value: number
@@ -47,7 +46,7 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
             background: BAR_COLORS[type]
           }}
         />
-        {extraValue && (
+        {extraValue != null && (
           <div
             className="game-tooltip-bar-inner extra"
             style={{

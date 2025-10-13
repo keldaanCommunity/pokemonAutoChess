@@ -184,7 +184,6 @@ export default class PokemonSprite extends DraggableObject {
     )
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
-    console.log("size buff", sizeBuff, pokemon.maxHP, baseHP)
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)

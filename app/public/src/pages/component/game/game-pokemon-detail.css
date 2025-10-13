@@ -71,7 +71,6 @@
   grid-column: span 3;
   display: grid;
   grid-template: 32px 32px / repeat(5, 1fr);
-  justify-self: center;
   gap: 4px;
 }
 

@@ -42,13 +42,14 @@ export default function GamePokemonPortrait(props: {
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
   inPlanner?: boolean
 }) {
-  const pokemon = useMemo(
-    () =>
-      typeof props.pokemon === "string"
-        ? PokemonFactory.createPokemonFromName(props.pokemon)
-        : props.pokemon,
-    [props.pokemon]
-  )
+  const pokemon = useMemo(() => {
+    if (typeof props.pokemon === "string") {
+      const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
+      pokemon.pp = pokemon.maxPP
+      return pokemon
+    }
+    return props.pokemon
+  }, [props.pokemon])
 
   const uid: string = useAppSelector((state) => state.network.uid)
   const currentPlayerId: string = useAppSelector(

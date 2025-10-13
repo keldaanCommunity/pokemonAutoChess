@@ -20,7 +20,6 @@
   height: 18px;
   background: var(--color-bg-secondary);
   overflow: hidden;
-  border: var(--border-extra-thin);
   display: flex;
 }
 

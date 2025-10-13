@@ -26,13 +26,14 @@ export function GamePokemonDetail(props: {
   emotion?: Emotion
 }) {
   const { t } = useTranslation()
-  const pokemon: IPokemon | IPokemonEntity = useMemo(
-    () =>
-      typeof props.pokemon === "string"
-        ? PokemonFactory.createPokemonFromName(props.pokemon)
-        : props.pokemon,
-    [props.pokemon]
-  )
+  const pokemon: IPokemon | IPokemonEntity = useMemo(() => {
+    if (typeof props.pokemon === "string") {
+      const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
+      pokemon.pp = pokemon.maxPP
+      return pokemon
+    }
+    return props.pokemon
+  }, [props.pokemon])
 
   const pokemonStats = useMemo(
     () => [

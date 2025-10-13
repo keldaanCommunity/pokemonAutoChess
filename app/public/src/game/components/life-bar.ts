@@ -15,16 +15,16 @@ export default class LifeBar extends GameObjects.Graphics {
     scene: Phaser.Scene,
     x: number,
     y: number,
-    maxLife: number,
-    life: number,
+    maxHP: number,
+    hp: number,
     shield: number,
     team: Team,
     flip: boolean
   ) {
     super(scene, { x: x, y: y })
 
-    this.maxHp = maxLife
-    this.hp = life
+    this.maxHp = maxHP
+    this.hp = hp
     this.shield = shield
     this.team = team
     this.flip = flip
@@ -48,13 +48,13 @@ export default class LifeBar extends GameObjects.Graphics {
 
     this.translateCanvas(-barWidth / 2, 0)
 
-    // life bar
+    // hp bar
     this.fillStyle(0x000000)
     this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
 
-    // life and shield amount
+    // hp and shield amount
     if (this.hp > 0) {
-      const totalLife = Math.max(this.maxHp, this.hp + this.shield) // if life + shield exceeds maxLife, the amount of segments should expand accordingly
+      const totalLife = Math.max(this.maxHp, this.hp + this.shield) // if hp + shield exceeds maxHP, the amount of segments should expand accordingly
       const lifePercentage = this.hp / totalLife
       const shieldPercentage = this.shield / totalLife
 
@@ -108,7 +108,7 @@ export default class LifeBar extends GameObjects.Graphics {
   setHp(value: number) {
     this.scene.tweens.add({
       targets: this,
-      life: value,
+      hp: value,
       duration: 150,
       onUpdate: this.draw.bind(this),
       ease: "Sine.easeOut"
