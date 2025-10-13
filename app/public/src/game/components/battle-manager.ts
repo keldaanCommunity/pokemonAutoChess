@@ -1,6 +1,5 @@
 import { GameObjects } from "phaser"
 import { getAttackTimings } from "../../../../core/attacking-state"
-import { FlowerPotMons } from "../../../../core/flower-pots"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
@@ -37,7 +36,6 @@ import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "./pokemon-animations"
-import PokemonDetail from "./pokemon-detail"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -479,13 +477,13 @@ export default class BattleManager {
       this.simulation?.id == simulationId &&
       this.pokemonSprites.has(pokemon.id)
     ) {
-      const pkm = this.pokemonSprites.get(pokemon.id)!
+      const pkmSprite = this.pokemonSprites.get(pokemon.id)!
       if (field === "positionX" || field === "positionY") {
         // logger.debug(pokemon.positionX, pokemon.positionY);
         if (field === "positionX") {
-          pkm.positionX = pokemon.positionX
+          pkmSprite.positionX = pokemon.positionX
         } else if (field == "positionY") {
-          pkm.positionY = pokemon.positionY
+          pkmSprite.positionY = pokemon.positionY
         }
         const coordinates = transformEntityCoordinates(
           pokemon.positionX,
@@ -493,22 +491,22 @@ export default class BattleManager {
           this.flip
         )
         if (pokemon.skill == Ability.TELEPORT) {
-          pkm.x = coordinates[0]
-          pkm.y = coordinates[1]
-          pkm.specialAttackAnimation(pokemon)
+          pkmSprite.x = coordinates[0]
+          pkmSprite.y = coordinates[1]
+          pkmSprite.specialAttackAnimation(pokemon)
         } else if (!pokemon.status.skydiving) {
           const walkingSpeed =
             2 *
             getMoveSpeed(pokemon) *
             Math.max(
-              Math.abs(pkm.x - coordinates[0]),
-              Math.abs(pkm.y - coordinates[1])
+              Math.abs(pkmSprite.x - coordinates[0]),
+              Math.abs(pkmSprite.y - coordinates[1])
             )
-          pkm.moveManager.setSpeed(walkingSpeed)
-          pkm.moveManager.moveTo(coordinates[0], coordinates[1])
-          if (pkm.troopers) {
-            const [dx, dy] = OrientationVector[pkm.orientation]
-            pkm.troopers.forEach((trooper, i) => {
+          pkmSprite.moveManager.setSpeed(walkingSpeed)
+          pkmSprite.moveManager.moveTo(coordinates[0], coordinates[1])
+          if (pkmSprite.troopers) {
+            const [dx, dy] = OrientationVector[pkmSprite.orientation]
+            pkmSprite.troopers.forEach((trooper, i) => {
               trooper.moveManager.setSpeed(walkingSpeed)
               trooper.moveManager.moveTo(
                 coordinates[0] - dx * (i + 1) * 20,
@@ -519,20 +517,24 @@ export default class BattleManager {
         }
       } else if (
         field === "orientation" &&
-        pkm.orientation !== pokemon.orientation
+        pkmSprite.orientation !== pokemon.orientation
       ) {
-        pkm.orientation = pokemon.orientation
+        pkmSprite.orientation = pokemon.orientation
         if (pokemon.action !== PokemonActionState.SLEEP) {
-          this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
+          this.animationManager.animatePokemon(
+            pkmSprite,
+            pokemon.action,
+            this.flip
+          )
         }
-        if (pkm.troopers) {
-          const [dx, dy] = OrientationVector[pkm.orientation]
+        if (pkmSprite.troopers) {
+          const [dx, dy] = OrientationVector[pkmSprite.orientation]
           const coordinates = transformEntityCoordinates(
             pokemon.positionX,
             pokemon.positionY,
             this.flip
           )
-          pkm.troopers.forEach((trooper, i) => {
+          pkmSprite.troopers.forEach((trooper, i) => {
             trooper.moveManager.setSpeed(5)
             trooper.moveManager.moveTo(
               coordinates[0] - dx * (i + 1) * 20,
@@ -540,187 +542,138 @@ export default class BattleManager {
             )
           })
         }
-      } else if (field === "action" && pkm.action !== pokemon.action) {
-        pkm.action = pokemon.action
-        this.animationManager.animatePokemon(pkm, pokemon.action, this.flip)
+      } else if (field === "action" && pkmSprite.action !== pokemon.action) {
+        pkmSprite.action = pokemon.action
+        this.animationManager.animatePokemon(
+          pkmSprite,
+          pokemon.action,
+          this.flip
+        )
       } else if (field == "critChance") {
-        pkm.critChance = pokemon.critChance
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.critChance.textContent =
-            pokemon.critChance.toString() + "%"
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "critPower") {
-        pkm.critPower = parseFloat(pokemon.critPower.toFixed(2))
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.critPower.textContent = pokemon.critPower.toFixed(2)
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "ap") {
         if (value && value > (previousValue || 0)) {
-          pkm.displayBoost(Stat.AP)
+          pkmSprite.displayBoost(Stat.AP)
         }
-        pkm.ap = pokemon.ap
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.ap,
-            previousValue as IPokemonEntity["ap"],
-            value as IPokemonEntity["ap"]
-          )
-          pkm.detail.updateAbilityDescription(pkm)
-          if (pokemon.passive != Passive.NONE) {
-            pkm.detail.updatePassiveDescription(pokemon)
-          }
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "luck") {
-        pkm.luck = pokemon.luck
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.luck,
-            previousValue as IPokemonEntity["luck"],
-            value as IPokemonEntity["luck"]
-          )
-          pkm.detail.updateAbilityDescription(pkm)
-          if (pokemon.passive != Passive.NONE) {
-            pkm.detail.updatePassiveDescription(pokemon)
-          }
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "speed") {
         if (value && value > (previousValue || 0)) {
-          pkm.displayBoost(Stat.SPEED)
+          pkmSprite.displayBoost(Stat.SPEED)
         }
-        pkm.speed = pokemon.speed
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.speed.textContent = pokemon.speed.toString()
-        }
-        if (pkm.troopers) {
-          pkm.troopers.forEach((trooper) => {
-            trooper.speed = pokemon.speed
-          })
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "maxHP") {
         const baseHP = getPokemonData(pokemon.name).hp
         const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
-        pkm.sprite.setScale(2 + sizeBuff)
-        pkm.lifebar?.setMaxLife(pokemon.maxHP)
+        pkmSprite.sprite.setScale(2 + sizeBuff)
+        pkmSprite.lifebar?.setMaxLife(pokemon.maxHP)
       } else if (field == "life") {
-        pkm.life = pokemon.life
-        pkm.lifebar?.setLife(pkm.life)
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.hp.textContent = pokemon.life.toString()
+        pkmSprite.lifebar?.setLife(Number(value))
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "shield") {
         if (pokemon.shield >= 0) {
           if (value && value > (previousValue || 0)) {
-            pkm.displayBoost(Stat.SHIELD)
+            pkmSprite.displayBoost(Stat.SHIELD)
           }
-          pkm.shield = pokemon.shield
-          pkm.lifebar?.setShield(pkm.shield)
+          pkmSprite.lifebar?.setShield(Number(value))
+          if (pkmSprite.detail) {
+            pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
+          }
         }
       } else if (field === "pp") {
-        pkm.pp = pokemon.pp
-        pkm.lifebar?.setPP(max(pkm.maxPP)(pkm.pp))
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.pp,
-            previousValue as IPokemonEntity["pp"],
-            value as IPokemonEntity["pp"]
-          )
+        pkmSprite.lifebar?.setPP(
+          max(pokemon.maxPP)(value as IPokemonEntity["pp"])
+        )
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "atk") {
         if (value && value > (previousValue || 0)) {
-          pkm.displayBoost(Stat.ATK)
+          pkmSprite.displayBoost(Stat.ATK)
         }
-        pkm.atk = pokemon.atk
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.atk,
-            previousValue as IPokemonEntity["atk"],
-            value as IPokemonEntity["atk"]
-          )
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "def") {
         if (value && value > (previousValue || 0)) {
-          pkm.displayBoost(Stat.DEF)
+          pkmSprite.displayBoost(Stat.DEF)
         }
-        pkm.def = pokemon.def
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.def,
-            previousValue as IPokemonEntity["def"],
-            value as IPokemonEntity["def"]
-          )
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "speDef") {
         if (value && value > (previousValue || 0)) {
-          pkm.displayBoost(Stat.SPE_DEF)
+          pkmSprite.displayBoost(Stat.SPE_DEF)
         }
-        pkm.speDef = pokemon.speDef
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.speDef,
-            previousValue as IPokemonEntity["speDef"],
-            value as IPokemonEntity["speDef"]
-          )
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "range") {
-        pkm.range = pokemon.range
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateValue(
-            pkm.detail.range,
-            previousValue as IPokemonEntity["range"],
-            value as IPokemonEntity["range"]
-          )
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "targetX") {
         if (pokemon.targetX >= 0) {
-          pkm.targetX = pokemon.targetX
+          pkmSprite.targetX = pokemon.targetX
         } else {
-          pkm.targetX = null
+          pkmSprite.targetX = null
         }
       } else if (field === "targetY") {
         if (pokemon.targetY >= 0) {
-          pkm.targetY = pokemon.targetY
+          pkmSprite.targetY = pokemon.targetY
         } else {
-          pkm.targetY = null
+          pkmSprite.targetY = null
         }
       } else if (field === "team") {
-        if (pkm.lifebar) {
-          pkm.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
+        if (pkmSprite.lifebar) {
+          pkmSprite.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
         }
       } else if (field === "index") {
-        if (pkm.index !== value) {
-          pkm.lazyloadAnimations(this.scene, true) // unload previous index animations
-          pkm.index = value as IPokemonEntity["index"]
-          pkm.attackSprite =
+        if (pkmSprite.pokemon.index !== value) {
+          pkmSprite.lazyloadAnimations(this.scene, true) // unload previous index animations
+          pkmSprite.attackSprite =
             PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
-            pkm.attackSprite
-          pkm.lazyloadAnimations(this.scene) // load the new ones
-          pkm.displayAnimation("EVOLUTION")
+            pkmSprite.attackSprite
+          pkmSprite.lazyloadAnimations(this.scene) // load the new ones
+          pkmSprite.displayAnimation("EVOLUTION")
           this.animationManager.animatePokemon(
-            pkm,
+            pkmSprite,
             PokemonActionState.IDLE,
             this.flip,
             false
           )
         }
       } else if (field === "shiny") {
-        if (pkm.shiny !== value) {
-          pkm.shiny = value as IPokemonEntity["shiny"]
+        if (pkmSprite.pokemon.shiny !== value) {
           this.animationManager.animatePokemon(
-            pkm,
+            pkmSprite,
             PokemonActionState.IDLE,
             this.flip,
             false
           )
         }
       } else if (field === "skill") {
-        pkm.skill = value as IPokemonEntity["skill"]
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateAbilityDescription(pkm)
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "stars") {
-        pkm.stars = value as IPokemonEntity["stars"]
-        if (pkm.detail && pkm.detail instanceof PokemonDetail) {
-          pkm.detail.updateAbilityDescription(pkm)
+        if (pkmSprite.detail) {
+          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       }
     }
@@ -914,17 +867,17 @@ export default class BattleManager {
     }
   }
 
-  displayAbilityOnPokemon(ability: Ability | string, pkm: PokemonSprite) {
+  displayAbilityOnPokemon(ability: Ability | string, pkmSprite: PokemonSprite) {
     displayAbility({
       scene: this.scene,
       pokemonsOnBoard: [],
       ability,
-      ap: pkm.ap,
-      orientation: pkm.orientation,
-      positionX: pkm.positionX,
-      positionY: pkm.positionY,
-      targetX: pkm.targetX ?? -1,
-      targetY: pkm.targetY ?? -1,
+      ap: pkmSprite.pokemon.ap,
+      orientation: pkmSprite.orientation,
+      positionX: pkmSprite.positionX,
+      positionY: pkmSprite.positionY,
+      targetX: pkmSprite.targetX ?? -1,
+      targetY: pkmSprite.targetY ?? -1,
       flip: this.flip
     })
   }

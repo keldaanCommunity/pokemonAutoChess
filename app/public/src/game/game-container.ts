@@ -441,15 +441,6 @@ class GameContainer {
           })
         })
 
-        $pokemon.types.onChange((value, key) => {
-          if (player.id === this.spectatedPlayerId) {
-            const pokemonUI = this.gameScene?.board?.pokemons.get(pokemon.id)
-            if (pokemonUI) {
-              pokemonUI.types = new Set(values(pokemon.types))
-            }
-          }
-        })
-
         $pokemon.items.onChange((value, key) => {
           if (player.id === this.spectatedPlayerId) {
             this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)

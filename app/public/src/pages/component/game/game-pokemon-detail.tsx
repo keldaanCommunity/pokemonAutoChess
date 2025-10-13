@@ -3,11 +3,9 @@ import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { DishByPkm } from "../../../../../core/dishes"
-import { PokemonEntity } from "../../../../../core/pokemon-entity"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { Emotion } from "../../../../../types"
+import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -23,12 +21,12 @@ import { GameTooltipBar } from "./game-tooltip-bar"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
-  pokemon: Pkm | Pokemon | PokemonEntity
+  pokemon: Pkm | IPokemon | IPokemonEntity
   shiny?: boolean
   emotion?: Emotion
 }) {
   const { t } = useTranslation()
-  const pokemon: Pokemon | PokemonEntity = useMemo(
+  const pokemon: IPokemon | IPokemonEntity = useMemo(
     () =>
       typeof props.pokemon === "string"
         ? PokemonFactory.createPokemonFromName(props.pokemon)
@@ -176,20 +174,53 @@ export function GamePokemonDetail(props: {
 
 export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
   dom: HTMLDivElement
+  private root: ReactDOM.Root
+  private pokemon: Pkm | IPokemon | IPokemonEntity
+  private shiny?: boolean
+  private emotion?: Emotion
+
   constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
-    pokemon: Pkm | Pokemon | PokemonEntity,
+    pokemon: Pkm | IPokemon | IPokemonEntity,
     shiny?: boolean,
     emotion?: Emotion
   ) {
     super(scene, x, y)
     this.dom = document.createElement("div")
+    this.dom.className = "my-container game-pokemon-detail-tooltip"
     this.setElement(this.dom)
-    const root = ReactDOM.createRoot(this.dom)
-    root.render(
-      <GamePokemonDetail pokemon={pokemon} shiny={shiny} emotion={emotion} />
+    this.root = ReactDOM.createRoot(this.dom)
+    this.pokemon = pokemon
+    this.shiny = shiny
+    this.emotion = emotion
+    this.render()
+  }
+
+  private render() {
+    this.root.render(
+      <GamePokemonDetail
+        pokemon={this.pokemon}
+        shiny={this.shiny}
+        emotion={this.emotion}
+      />
     )
+  }
+
+  public updatePokemon(
+    pokemon: Pkm | IPokemon | IPokemonEntity,
+    shiny?: boolean,
+    emotion?: Emotion
+  ) {
+    this.pokemon = pokemon
+    if (shiny !== undefined) this.shiny = shiny
+    if (emotion !== undefined) this.emotion = emotion
+    this.render()
+  }
+
+  public destroy() {
+    this.root.unmount()
+    super.destroy()
   }
 }

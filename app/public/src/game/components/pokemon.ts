@@ -10,37 +10,25 @@ import {
   FlowerPots
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import {
-  type Emotion,
-  type IPokemon,
-  type IPokemonEntity
-} from "../../../../types"
+import { type IPokemon, type IPokemonEntity } from "../../../../types"
 import {
   AbilityAnimationArgs,
   AttackSprite,
   AttackSpriteScale
 } from "../../../../types/Animation"
-import {
-  CELL_VISUAL_HEIGHT,
-  CELL_VISUAL_WIDTH,
-  DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_POWER
-} from "../../../../types/Config"
+import { CELL_VISUAL_HEIGHT, CELL_VISUAL_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import {
   Orientation,
   PokemonActionState,
   PokemonTint,
-  type Rarity,
   SpriteType,
   Stat,
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
-import type { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
-import type { Synergy } from "../../../../types/enum/Synergy"
 import { logger } from "../../../../utils/logger"
 import { min } from "../../../../utils/number"
 import {
@@ -48,7 +36,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
-import { values } from "../../../../utils/schemas"
+import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
@@ -56,55 +44,32 @@ import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import { addAbilitySprite, displayAbility } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
-import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "./pokemon-animations"
-import PokemonDetail from "./pokemon-detail"
 
 const spriteCountPerPokemon = new Map<string, number>()
 
 export default class PokemonSprite extends DraggableObject {
   scene: GameScene | DebugScene
   evolution: Pkm
-  rarity: Rarity
-  emotion: Emotion
-  shiny: boolean
-  index: string
+  pokemon: IPokemon | IPokemonEntity
+  stages: number
   id: string
-  hp: number
-  range: number
-  critChance: number
-  atk: number
-  def: number
-  speDef: number
-  speed: number
   targetX: number | null
   targetY: number | null
-  skill: Ability
-  passive: Passive
   positionX: number
   positionY: number
   attackSprite: AttackSprite
-  team: number | undefined
-  critPower: number
-  ap: number
-  life: number | undefined
-  shield: number | undefined
   itemsContainer: ItemsContainer
   orientation: Orientation
   action: PokemonActionState
   moveManager: MoveTo
-  rangeType: string
-  types = new Set<Synergy>()
   lifebar: Lifebar | undefined
-  detail: PokemonDetail | GameDialog | null = null
-  pp: number | undefined
-  maxPP: number
-  luck: number
+  detail: GamePokemonDetailDOMWrapper | null = null
   sprite: GameObjects.Sprite
   shadow?: GameObjects.Sprite
   wound: GameObjects.Sprite | undefined
@@ -137,8 +102,6 @@ export default class PokemonSprite extends DraggableObject {
   curseTorment: GameObjects.Sprite | undefined
   curseFate: GameObjects.Sprite | undefined
   light: GameObjects.Sprite | undefined
-  stars: number
-  stages: number
   playerId: string
   shouldShowTooltip: boolean
   flip: boolean
@@ -171,43 +134,21 @@ export default class PokemonSprite extends DraggableObject {
     this.flip = flip
     this.playerId = playerId
     this.shouldShowTooltip = true
-    this.stars = pokemon.stars
+    this.pokemon = pokemon
     this.stages = getPokemonData(pokemon.name).stages
     this.evolution = inBattle ? Pkm.DEFAULT : (pokemon as IPokemon).evolution
-    this.emotion = pokemon.emotion
-    this.shiny = pokemon.shiny
     this.width = CELL_VISUAL_WIDTH
     this.height = CELL_VISUAL_HEIGHT
-    this.index = pokemon.index
     this.name = pokemon.name
-    this.rarity = pokemon.rarity
     this.id = pokemon.id
-    this.hp = pokemon.maxHP
-    this.range = pokemon.range
-    this.critChance = DEFAULT_CRIT_CHANCE
-    this.atk = pokemon.atk
-    this.def = pokemon.def
-    this.speDef = pokemon.speDef
-    this.types = new Set(values(pokemon.types))
-    this.maxPP = pokemon.maxPP
-    this.speed = pokemon.speed
     this.targetX = null
     this.targetY = null
-    this.skill = pokemon.skill
-    this.passive = pokemon.passive
     this.positionX = pokemon.positionX
     this.positionY = pokemon.positionY
     this.attackSprite =
       PokemonAnimations[pokemon.name]?.attackSprite ??
       DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
-    this.ap = pokemon.ap
-    this.luck = pokemon.luck
     this.inBattle = inBattle
-    if (this.range > 1) {
-      this.rangeType = "range"
-    } else {
-      this.rangeType = "melee"
-    }
     const m = <MoveToPlugin>scene.plugins.get("rexMoveTo")
     this.moveManager = m.add(this, {
       speed: 300,
@@ -230,7 +171,9 @@ export default class PokemonSprite extends DraggableObject {
       this.action = PokemonActionState.IDLE
     }
 
-    const textureIndex = scene.textures.exists(this.index) ? this.index : "0000"
+    const textureIndex = scene.textures.exists(this.pokemon.index)
+      ? this.pokemon.index
+      : "0000"
     this.sprite = new GameObjects.Sprite(
       scene,
       0,
@@ -308,17 +251,6 @@ export default class PokemonSprite extends DraggableObject {
       !inBattle &&
       (scene as GameScene).spectate === false &&
       FlowerPotMons.includes(pokemon.name) === false
-    if (isEntity(pokemon)) {
-      this.pp = pokemon.pp
-      this.team = pokemon.team
-      this.shield = pokemon.shield
-      this.life = pokemon.life
-      this.critPower = pokemon.critPower
-      this.critChance = pokemon.critChance
-    } else {
-      this.critPower = DEFAULT_CRIT_POWER
-      this.critChance = DEFAULT_CRIT_CHANCE
-    }
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
@@ -334,20 +266,26 @@ export default class PokemonSprite extends DraggableObject {
     scene: GameScene | DebugScene | undefined,
     unload: boolean = false
   ) {
-    const tint = this.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const pokemonSpriteKey = `${this.index}/${tint}`
+    const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
     let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
     if (unload) {
       spriteCount = min(0)(spriteCount - 1)
       if (spriteCount === 0 && scene?.animationManager) {
         //logger.debug("unloading anims for", this.index)
-        scene.animationManager?.unloadPokemonAnimations(this.index, tint)
+        scene.animationManager?.unloadPokemonAnimations(
+          this.pokemon.index,
+          tint
+        )
       }
     } else {
       scene?.animationManager
       if (spriteCount === 0 && scene?.animationManager) {
         //logger.debug("loading anims for", this.index)
-        scene.animationManager?.createPokemonAnimations(this.index, tint)
+        scene.animationManager?.createPokemonAnimations(
+          this.pokemon.index,
+          tint
+        )
       }
       spriteCount++
     }
@@ -413,34 +351,11 @@ export default class PokemonSprite extends DraggableObject {
       s.lastPokemonDetail = null
     }
 
-    this.detail = new PokemonDetail(
+    this.detail = new GamePokemonDetailDOMWrapper(
       this.scene,
       0,
       0,
-      this.name as Pkm,
-      this.rarity,
-      this.life || this.hp,
-      this.atk,
-      this.def,
-      this.speDef,
-      this.range,
-      this.speed,
-      this.critChance,
-      this.critPower,
-      this.ap,
-      this.pp || this.maxPP,
-      this.luck,
-      this.types,
-      this.skill,
-      this.passive,
-      this.emotion,
-      this.shiny,
-      this.index,
-      this.stars,
-      getPokemonData(this.name as Pkm).stages,
-      this.evolution,
-      this.itemsContainer.items,
-      this.inBattle
+      this.pokemon
     )
     this.detail.setDepth(DEPTH.TOOLTIP).setOrigin(0, 0)
     this.updateTooltipPosition()
@@ -578,9 +493,8 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   deathAnimation() {
-    this.life = 0
     if (this.lifebar) {
-      this.lifebar.setLife(this.life)
+      this.lifebar.setLife(0)
     }
 
     this.scene.add.tween({
@@ -654,13 +568,13 @@ export default class PokemonSprite extends DraggableObject {
       positionX: this.positionX,
       positionY: !this.inBattle
         ? this.positionY - 1
-        : this.team === Team.RED_TEAM
+        : "team" in this.pokemon && this.pokemon.team === Team.RED_TEAM
           ? 4 - this.positionY
           : this.positionY,
       targetX: this.targetX ?? -1,
       targetY: this.targetY ?? -1,
       flip: this.flip,
-      ap: this.ap,
+      ap: this.pokemon.ap,
       ...args
     })
   }
@@ -682,14 +596,14 @@ export default class PokemonSprite extends DraggableObject {
   blossomAnimation() {
     const scene = <GameScene>this.scene
     const flowerPot = FlowerPots.find((pot) =>
-      FlowerMonByPot[pot].includes(PkmByIndex[this.index])
+      FlowerMonByPot[pot].includes(PkmByIndex[this.pokemon.index])
     )
     if (flowerPot) {
       scene.board?.flowerPokemonsInPots
-        .find((p) => p.index === this.index)
+        .find((p) => p.pokemon.index === this.pokemon.index)
         ?.destroy()
       const positions =
-        this.team === Team.RED_TEAM
+        "team" in this.pokemon && this.pokemon.team === Team.RED_TEAM
           ? FLOWER_POTS_POSITIONS_RED
           : FLOWER_POTS_POSITIONS_BLUE
       const [startX, startY] = positions[FlowerPots.indexOf(flowerPot)]
