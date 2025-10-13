@@ -8,4 +8,9 @@
   --color-fg-red: #e81212;
   --color-fg-gold: #ffc107;
   --color-shadow: #2d334b;
+
+  --color-physical: #e76e55;
+  --color-special: #5f9ff9;
+  --color-true: #f7d51d;
+  --color-shield: #8d8d8d;
 }

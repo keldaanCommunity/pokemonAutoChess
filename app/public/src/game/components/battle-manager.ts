@@ -550,22 +550,10 @@ export default class BattleManager {
           pokemon.action,
           this.flip
         )
-      } else if (field == "critChance") {
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "critPower") {
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
       } else if (field === "ap") {
         if (value && value > (previousValue || 0)) {
           pkmSprite.displayBoost(Stat.AP)
         }
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "luck") {
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
@@ -627,10 +615,6 @@ export default class BattleManager {
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
-      } else if (field === "range") {
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
       } else if (field === "targetX") {
         if (pokemon.targetX >= 0) {
           pkmSprite.targetX = pokemon.targetX
@@ -671,11 +655,14 @@ export default class BattleManager {
             false
           )
         }
-      } else if (field === "skill") {
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "stars") {
+      } else if (
+        field === "skill" ||
+        field === "stars" ||
+        field === "critChance" ||
+        field === "critPower" ||
+        field === "luck" ||
+        field === "range"
+      ) {
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
@@ -1135,10 +1122,10 @@ export default class BattleManager {
       const coordinates = transformEntityCoordinates(x, y, this.flip)
       const color =
         type === AttackType.PHYSICAL
-          ? "#e76e55"
+          ? "var(--color-physical)"
           : type === AttackType.SPECIAL
-            ? "#209cee"
-            : "#f7d51d"
+            ? "var(--color-special)"
+            : "var(--color-true)"
       this.displayTween(color, coordinates, index, amount)
       displayHit(
         this.scene,

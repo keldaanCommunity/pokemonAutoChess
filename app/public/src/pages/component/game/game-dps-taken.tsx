@@ -1,8 +1,8 @@
 import React from "react"
-import { IDps } from "../../../../../types"
 import { useTranslation } from "react-i18next"
-import ProgressBar from "../progress-bar/progress-bar"
+import { IDps } from "../../../../../types"
 import PokemonPortrait from "../pokemon-portrait"
+import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDpsTaken(props: {
   maxDamageTaken: number
@@ -20,21 +20,21 @@ export default function GameDpsTaken(props: {
         </p>
         <ProgressBar className="my-progress is-primary">
           <ProgressBar
-            style={{ backgroundColor: "#e76e55" }}
+            style={{ backgroundColor: "var(--color-physical)" }}
             max={props.maxDamageTaken}
             now={props.dps.physicalDamageReduced}
             key="hp"
             title={`${t("physical_damage_reduced")}: ${props.dps.physicalDamageReduced}`}
           />
           <ProgressBar
-            style={{ backgroundColor: "#209cee" }}
+            style={{ backgroundColor: "var(--color-special)" }}
             max={props.maxDamageTaken}
             now={props.dps.specialDamageReduced}
             key="hp"
             title={`${t("special_damage_reduced")}: ${props.dps.specialDamageReduced}`}
           />
           <ProgressBar
-            style={{ backgroundColor: "#8d8d8d" }}
+            style={{ backgroundColor: "var(--color-shield)" }}
             max={props.maxDamageTaken}
             now={props.dps.shieldDamageTaken}
             key="shield"
