@@ -9023,7 +9023,8 @@ export class Poipole extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.NAGANADEL
-  hp = 120
+  evolutionRule = new StackBasedEvolutionRule(30)
+  hp = 160
   atk = 10
   speed = 64
   def = 6
@@ -9031,30 +9032,25 @@ export class Poipole extends Pokemon {
   maxPP = 75
   range = 1
   skill = Ability.FELL_STINGER
-  passive = Passive.POISON_PIN
-
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.hp >= 200
-  )
+  passive = Passive.POIPOLE
 }
 
 export class Naganadel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.POISON, Synergy.BUG])
-  rarity = Rarity.UNIQUE
+  rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
-  atk = 18
+  hp = 280
+  atk = 20
   speed = 64
   def = 6
   speDef = 6
   maxPP = 75
   range = 1
   skill = Ability.FELL_STINGER
+  passive = Passive.NAGANADEL
   onAcquired(player: Player) {
-    // cancel permanent stat buffs of Poipole
-    // this is not perfect: see https://discord.com/channels/737230355039387749/1336313038617182209/1394408583046889522
-    this.atk -= 18 - 10
-    this.hp -= 200 - 120
+    // cancel permanent atk buff of Poipole
+    this.atk -= 10
   }
 }
 
