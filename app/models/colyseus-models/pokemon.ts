@@ -74,6 +74,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") speDef: number = 1
   @type("uint16") atk: number = 1
   @type("uint16") hp: number = 10
+  @type("uint16") maxHP: number = 10
   @type("uint16") shield = 0
   @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("float32") critPower = DEFAULT_CRIT_POWER
@@ -100,7 +101,6 @@ export class Pokemon extends Schema implements IPokemon {
   canBeBenched = true
   canBeSold = true
   tm: Ability | null = null
-  maxHP: number = 10
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()

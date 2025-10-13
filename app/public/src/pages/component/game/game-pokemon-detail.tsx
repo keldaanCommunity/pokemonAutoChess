@@ -39,16 +39,18 @@ export function GamePokemonDetail(props: {
       { stat: Stat.DEF, value: pokemon.def },
       { stat: Stat.ATK, value: pokemon.atk },
       { stat: Stat.CRIT_CHANCE, value: pokemon.critChance },
-      { stat: Stat.LUCK, value: pokemon.luck },
+      { stat: Stat.AP, value: pokemon.ap },
+      { stat: Stat.RANGE, value: pokemon.range },
       { stat: Stat.SPE_DEF, value: pokemon.speDef },
       { stat: Stat.SPEED, value: pokemon.speed },
       { stat: Stat.CRIT_POWER, value: pokemon.critPower },
-      { stat: Stat.RANGE, value: pokemon.range }
+      { stat: Stat.LUCK, value: pokemon.luck }
     ],
     [
       pokemon.atk,
       pokemon.def,
       pokemon.range,
+      pokemon.ap,
       pokemon.speed,
       pokemon.speDef,
       pokemon.critChance,
@@ -67,7 +69,7 @@ export function GamePokemonDetail(props: {
   }
 
   return (
-    <div className="game-pokemon-detail in-shop">
+    <div className="game-pokemon-detail">
       <PokemonPortrait
         className="game-pokemon-detail-portrait"
         style={{ borderColor: RarityColor[pokemon.rarity] }}
@@ -107,7 +109,12 @@ export function GamePokemonDetail(props: {
       </div>
 
       <div className="game-pokemon-detail-bars">
-        <GameTooltipBar type="HP" value={77} maxValue={pokemon.maxHP} />
+        <GameTooltipBar
+          type="HP"
+          value={pokemon.hp}
+          maxValue={pokemon.maxHP}
+          graduationStep={10}
+        />
         <GameTooltipBar type="PP" value={pokemon.pp} maxValue={pokemon.maxPP} />
       </div>
 

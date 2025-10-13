@@ -44,6 +44,7 @@ import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import { addAbilitySprite, displayAbility } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
+import { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import {
@@ -69,7 +70,7 @@ export default class PokemonSprite extends DraggableObject {
   action: PokemonActionState
   moveManager: MoveTo
   lifebar: Lifebar | undefined
-  detail: GamePokemonDetailDOMWrapper | null = null
+  detail: GamePokemonDetailDOMWrapper | GameDialog | null = null
   sprite: GameObjects.Sprite
   shadow?: GameObjects.Sprite
   wound: GameObjects.Sprite | undefined
@@ -183,6 +184,7 @@ export default class PokemonSprite extends DraggableObject {
     )
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
+    console.log("size buff", sizeBuff, pokemon.maxHP, baseHP)
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)

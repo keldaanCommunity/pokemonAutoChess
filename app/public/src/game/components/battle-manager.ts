@@ -26,6 +26,7 @@ import { isOnBench } from "../../../../utils/board"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
 import { pickRandomIn } from "../../../../utils/random"
+import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
@@ -550,29 +551,29 @@ export default class BattleManager {
           this.flip
         )
       } else if (field == "critChance") {
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "critPower") {
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "ap") {
         if (value && value > (previousValue || 0)) {
           pkmSprite.displayBoost(Stat.AP)
         }
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "luck") {
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "speed") {
         if (value && value > (previousValue || 0)) {
           pkmSprite.displayBoost(Stat.SPEED)
         }
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "maxHP") {
@@ -582,7 +583,7 @@ export default class BattleManager {
         pkmSprite.lifebar?.setMaxLife(pokemon.maxHP)
       } else if (field == "life") {
         pkmSprite.lifebar?.setLife(Number(value))
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "shield") {
@@ -591,7 +592,7 @@ export default class BattleManager {
             pkmSprite.displayBoost(Stat.SHIELD)
           }
           pkmSprite.lifebar?.setShield(Number(value))
-          if (pkmSprite.detail) {
+          if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
             pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
           }
         }
@@ -599,32 +600,32 @@ export default class BattleManager {
         pkmSprite.lifebar?.setPP(
           max(pokemon.maxPP)(value as IPokemonEntity["pp"])
         )
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "atk") {
         if (value && value > (previousValue || 0)) {
           pkmSprite.displayBoost(Stat.ATK)
         }
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "def") {
         if (value && value > (previousValue || 0)) {
           pkmSprite.displayBoost(Stat.DEF)
         }
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "speDef") {
         if (value && value > (previousValue || 0)) {
           pkmSprite.displayBoost(Stat.SPE_DEF)
         }
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "range") {
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "targetX") {
@@ -668,11 +669,11 @@ export default class BattleManager {
           )
         }
       } else if (field === "skill") {
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "stars") {
-        if (pkmSprite.detail) {
+        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       }

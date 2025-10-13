@@ -207,8 +207,8 @@ export default class PokemonAvatar extends PokemonSprite {
     if (this.isCurrentPlayerAvatar && !this.emoteMenu) {
       this.emoteMenu = new EmoteMenu(
         this.scene as GameScene,
-        this.index,
-        this.shiny,
+        this.pokemon.index,
+        this.pokemon.shiny,
         this.sendEmote
       )
       this.add(this.emoteMenu)
@@ -231,7 +231,7 @@ export default class PokemonAvatar extends PokemonSprite {
     const state = store.getState()
     if (state.game.emotesUnlocked.includes(emotion)) {
       store.dispatch(
-        showEmote(getAvatarString(this.index, this.shiny, emotion))
+        showEmote(getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion))
       )
       this.hideEmoteMenu()
     }
