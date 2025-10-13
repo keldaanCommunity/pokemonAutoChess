@@ -75,7 +75,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") index: string
   @type("string") id: string
   @type("string") orientation = Orientation.DOWNLEFT
-  @type("uint16") hp: number
+  @type("uint16") maxHP: number
   @type("uint8") pp = 0
   @type("uint8") maxPP: number
   @type("uint16") atk: number
@@ -164,7 +164,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.atk = pokemon.atk
     this.def = pokemon.def
     this.speDef = pokemon.speDef
-    this.hp = pokemon.hp
+    this.maxHP = pokemon.hp
     this.maxPP = pokemon.maxPP
     this.life = pokemon.hp
     this.speed = pokemon.speed
@@ -227,7 +227,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
           attacker.id !== this.id &&
-          this.life <= 0.1 * this.hp))
+          this.life <= 0.1 * this.maxHP))
     )
   }
 
@@ -493,8 +493,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.life <= 0) return
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    this.hp = min(1)(this.hp + value)
-    this.life = clamp(this.life + value, 1, this.hp)
+    this.maxHP = min(1)(this.maxHP + value)
+    this.life = clamp(this.life + value, 1, this.maxHP)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.addMaxHP(value, this.player)
     }
@@ -998,7 +998,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.canMove &&
       !this.status.paralysis
     ) {
-      const pcLife = this.life / this.hp
+      const pcLife = this.life / this.maxHP
 
       if (this.effects.has(EffectEnum.TAILWIND) && pcLife < 0.2) {
         this.flyAway(board)
@@ -1046,7 +1046,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             )
             this.commands.push(
               new DelayedCommand(() => {
-                if (destination.target?.hp > 0) {
+                if (destination.target?.maxHP > 0) {
                   destination.target.handleSpecialDamage(
                     1.5 * this.atk,
                     board,
@@ -1095,7 +1095,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
-    if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
+    if (berry && this.life > 0 && this.life < 0.5 * this.maxHP) {
       this.eatBerry(berry)
     }
 
@@ -1372,7 +1372,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
-    this.life = this.hp
+    this.life = this.maxHP
     this.pp = 0
     this.status.clearNegativeStatus()
 
@@ -1515,7 +1515,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     switch (berry) {
       case Item.AGUAV_BERRY:
-        heal(min(50)(0.5 * this.hp))
+        heal(min(50)(0.5 * this.maxHP))
         this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
@@ -1607,7 +1607,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(100)
         break
       case Item.BERRY_JUICE:
-        heal(this.hp - this.life)
+        heal(this.maxHP - this.life)
         break
       case Item.BABIRI_BERRY:
         heal(50)

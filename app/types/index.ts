@@ -341,6 +341,7 @@ export interface IPokemon {
   speDef: number
   atk: number
   hp: number
+  maxHP: number
   range: number
   stars: number
   maxPP: number
@@ -531,7 +532,7 @@ export interface IPokemonEntity {
   id: string
   orientation: Orientation
   critChance: number
-  hp: number
+  maxHP: number
   pp: number
   maxPP: number
   atk: number

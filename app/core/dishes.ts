@@ -100,7 +100,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
         entity.effectsSet.add(
           new PeriodicEffect(
             (entity) => {
-              entity.handleHeal(0.05 * entity.hp, entity, 0, false)
+              entity.handleHeal(0.05 * entity.maxHP, entity, 0, false)
             },
             Item.BLACK_SLUDGE,
             2000
@@ -223,7 +223,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ROCK_SALT: [
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(10000)
-      entity.addShield(0.15 * entity.hp, entity, 0, false)
+      entity.addShield(0.15 * entity.maxHP, entity, 0, false)
     })
   ],
   SANDWICH: [

@@ -596,11 +596,11 @@ export default class BattleManager {
             trooper.speed = pokemon.speed
           })
         }
-      } else if (field === "hp") {
+      } else if (field === "maxHP") {
         const baseHP = getPokemonData(pokemon.name).hp
-        const sizeBuff = (pokemon.hp - baseHP) / baseHP
+        const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
         pkm.sprite.setScale(2 + sizeBuff)
-        pkm.lifebar?.setMaxLife(pokemon.hp)
+        pkm.lifebar?.setMaxLife(pokemon.maxHP)
       } else if (field == "life") {
         pkm.life = pokemon.life
         pkm.lifebar?.setLife(pkm.life)

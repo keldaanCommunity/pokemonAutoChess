@@ -46,10 +46,10 @@ import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
+import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
-import { clearAbilityAnimations } from "./components/abilities-animations"
 
 class GameContainer {
   room: Room<GameState>
@@ -182,7 +182,7 @@ class GameContainer {
         "luck",
         "speed",
         "life",
-        "hp",
+        "maxHP",
         "shield",
         "pp",
         "atk",

@@ -283,7 +283,7 @@ export default abstract class PokemonState {
     }
     if (
       pokemon.life > 0 &&
-      pokemon.life < pokemon.hp &&
+      pokemon.life < pokemon.maxHP &&
       !pokemon.status.protect
     ) {
       if (apBoost > 0) {
@@ -303,11 +303,11 @@ export default abstract class PokemonState {
       }
 
       heal = Math.round(heal)
-      const healReceived = Math.min(pokemon.hp - pokemon.life, heal)
+      const healReceived = Math.min(pokemon.maxHP - pokemon.life, heal)
 
-      pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
+      pokemon.life = Math.min(pokemon.maxHP, pokemon.life + heal)
 
-      const overheal = min(0)(pokemon.life + heal - pokemon.hp)
+      const overheal = min(0)(pokemon.life + heal - pokemon.maxHP)
 
       if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
@@ -588,7 +588,7 @@ export default abstract class PokemonState {
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
-        pokemon.life - residualDamage < 0.3 * pokemon.hp
+        pokemon.life - residualDamage < 0.3 * pokemon.maxHP
       ) {
         death = false
         takenDamage = 0
@@ -603,7 +603,7 @@ export default abstract class PokemonState {
         pokemon.life - residualDamage <= 0
       ) {
         const shield = Math.round(
-          pokemon.hp *
+          pokemon.maxHP *
             (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
               ? 1
               : pokemon.effects.has(EffectEnum.ELDER_POWER)
@@ -931,7 +931,7 @@ export default abstract class PokemonState {
       for (const cell of adjacentCells) {
         if (cell.value && cell.value.team === pokemon.team) {
           const { overheal } = cell.value.handleHeal(
-            0.03 * cell.value.hp,
+            0.03 * cell.value.maxHP,
             pokemon,
             0,
             false

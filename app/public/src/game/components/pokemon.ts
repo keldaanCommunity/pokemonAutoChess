@@ -182,7 +182,7 @@ export default class PokemonSprite extends DraggableObject {
     this.name = pokemon.name
     this.rarity = pokemon.rarity
     this.id = pokemon.id
-    this.hp = pokemon.hp
+    this.hp = pokemon.maxHP
     this.range = pokemon.range
     this.critChance = DEFAULT_CRIT_CHANCE
     this.atk = pokemon.atk
@@ -239,7 +239,7 @@ export default class PokemonSprite extends DraggableObject {
       `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     )
     const baseHP = getPokemonData(pokemon.name).hp
-    const sizeBuff = (pokemon.hp - baseHP) / baseHP
+    const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)

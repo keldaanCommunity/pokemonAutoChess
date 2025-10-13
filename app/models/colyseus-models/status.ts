@@ -383,7 +383,7 @@ export default class Status extends Schema implements IStatus {
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
-        let burnDamage = pkm.hp * 0.05
+        let burnDamage = pkm.maxHP * 0.05
         if (pkm.simulation.weather === Weather.SUN) {
           burnDamage *= 1.3
           const nbHeatRocks = pkm.player
@@ -536,10 +536,10 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = pkm.hp * 0.05 * this.poisonStacks
+      let poisonDamage = pkm.maxHP * 0.05 * this.poisonStacks
 
       if (pkm.passive === Passive.GLISCOR || pkm.passive === Passive.GLIGAR) {
-        poisonDamage = pkm.hp * 0.05 * (this.poisonStacks - 2)
+        poisonDamage = pkm.maxHP * 0.05 * (this.poisonStacks - 2)
       }
 
       if (pkm.simulation.weather === Weather.RAIN) {

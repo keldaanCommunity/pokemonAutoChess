@@ -8,6 +8,7 @@ import GameScene from "../scenes/game-scene"
 import ItemContainer from "./item-container"
 
 export default class ItemsContainer extends GameObjects.Container {
+  scene: GameScene
   pokemonId: string | null
   playerId: string
   items: Item[] = []
@@ -21,7 +22,7 @@ export default class ItemsContainer extends GameObjects.Container {
     playerId: string
   ) {
     super(scene, x, y)
-
+    this.scene = scene
     this.pokemonId = pokemonId
     this.playerId = playerId
     this.setDepth(DEPTH.POKEMON_ITEM)

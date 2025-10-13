@@ -1,30 +1,34 @@
+import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
+import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
+import { DishByPkm } from "../../../../../core/dishes"
+import { PokemonEntity } from "../../../../../core/pokemon-entity"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { DishByPkm } from "../../../../../core/dishes"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
 import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
+import { Item } from "../../../../../types/enum/Item"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
-import { Item } from "../../../../../types/enum/Item"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonPortrait from "../pokemon-portrait"
+import { GameTooltipBar } from "./game-tooltip-bar"
 import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
-  pokemon: Pkm | Pokemon
+  pokemon: Pkm | Pokemon | PokemonEntity
   shiny?: boolean
   emotion?: Emotion
 }) {
   const { t } = useTranslation()
-  const pokemon: Pokemon = useMemo(
+  const pokemon: Pokemon | PokemonEntity = useMemo(
     () =>
       typeof props.pokemon === "string"
         ? PokemonFactory.createPokemonFromName(props.pokemon)
@@ -34,22 +38,24 @@ export function GamePokemonDetail(props: {
 
   const pokemonStats = useMemo(
     () => [
-      { stat: Stat.HP, value: pokemon.hp },
       { stat: Stat.DEF, value: pokemon.def },
       { stat: Stat.ATK, value: pokemon.atk },
-      { stat: Stat.RANGE, value: pokemon.range },
-      { stat: Stat.PP, value: pokemon.maxPP },
+      { stat: Stat.CRIT_CHANCE, value: pokemon.critChance },
+      { stat: Stat.LUCK, value: pokemon.luck },
       { stat: Stat.SPE_DEF, value: pokemon.speDef },
-      { stat: Stat.SPEED, value: pokemon.speed }
+      { stat: Stat.SPEED, value: pokemon.speed },
+      { stat: Stat.CRIT_POWER, value: pokemon.critPower },
+      { stat: Stat.RANGE, value: pokemon.range }
     ],
     [
       pokemon.atk,
       pokemon.def,
-      pokemon.hp,
-      pokemon.maxPP,
       pokemon.range,
       pokemon.speed,
-      pokemon.speDef
+      pokemon.speDef,
+      pokemon.critChance,
+      pokemon.critPower,
+      pokemon.luck
     ]
   )
 
@@ -100,6 +106,11 @@ export function GamePokemonDetail(props: {
         {Array.from(pokemon.types.values()).map((type) => (
           <SynergyIcon type={type} key={type} />
         ))}
+      </div>
+
+      <div className="game-pokemon-detail-bars">
+        <GameTooltipBar type="HP" value={77} maxValue={pokemon.maxHP} />
+        <GameTooltipBar type="PP" value={pokemon.pp} maxValue={pokemon.maxPP} />
       </div>
 
       <div className="game-pokemon-detail-stats">
@@ -161,4 +172,24 @@ export function GamePokemonDetail(props: {
       )}
     </div>
   )
+}
+
+export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
+  dom: HTMLDivElement
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    pokemon: Pkm | Pokemon | PokemonEntity,
+    shiny?: boolean,
+    emotion?: Emotion
+  ) {
+    super(scene, x, y)
+    this.dom = document.createElement("div")
+    this.setElement(this.dom)
+    const root = ReactDOM.createRoot(this.dom)
+    root.render(
+      <GamePokemonDetail pokemon={pokemon} shiny={shiny} emotion={emotion} />
+    )
+  }
 }
