@@ -20,12 +20,14 @@
   height: 18px;
   background: var(--color-bg-secondary);
   overflow: hidden;
-  box-shadow: 1px 1px 1px #0008;
+  border: var(--border-extra-thin);
+  display: flex;
 }
 
 .game-tooltip-bar-inner {
   height: 100%;
   transition: width 0.3s;
+  flex: 0 0 auto;
 }
 
 .game-tooltip-bar-graduation {

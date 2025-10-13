@@ -1,25 +1,32 @@
 import React from "react"
 import "./game-tooltip-bar.css"
+import { max } from "d3"
+import { clamp } from "../../../../../utils/number"
 
 interface GameTooltipBarProps {
   value: number
   maxValue: number
+  extraValue?: number
   type: "HP" | "PP"
   graduationStep?: number
 }
 
 const BAR_COLORS = {
-  HP: "#e76e55",
-  PP: "#209cee"
+  HP: "linear-gradient(to bottom, #e76e55, #b84731)",
+  PP: "linear-gradient(to bottom, #7fd6ff, #36a5ef)",
+  SHIELD: "linear-gradient(to bottom, #ffffff, #c0c0c0)"
 }
 
 export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
   value,
   maxValue,
+  extraValue,
   type,
   graduationStep
 }) => {
-  const percent = Math.max(0, Math.min(1, value / maxValue))
+  const total = maxValue + (extraValue ?? 0)
+  const percent = clamp(value / total, 0, 1)
+  const extraPercent = extraValue ? clamp(extraValue / total, 0, 1) : 0
   const graduations: number[] = []
   if (graduationStep) {
     for (let i = graduationStep; i < maxValue; i += graduationStep) {
@@ -30,7 +37,7 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
   return (
     <div className="game-tooltip-bar">
       <div className="game-tooltip-bar-text">
-        {type}: {value} / {maxValue}
+        {type}: {value} / {maxValue} {extraValue ? `(+${extraValue})` : ""}
       </div>
       <div className="game-tooltip-bar-outer">
         <div
@@ -40,6 +47,15 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
             background: BAR_COLORS[type]
           }}
         />
+        {extraValue && (
+          <div
+            className="game-tooltip-bar-inner extra"
+            style={{
+              width: `${extraPercent * 100}%`,
+              background: BAR_COLORS.SHIELD
+            }}
+          />
+        )}
         {graduations.map((g) => (
           <div
             key={g}

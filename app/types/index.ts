@@ -342,6 +342,7 @@ export interface IPokemon {
   atk: number
   hp: number
   maxHP: number
+  shield: number
   range: number
   stars: number
   pp: number
@@ -545,7 +546,7 @@ export interface IPokemonEntity {
   baseAtk: number
   baseDef: number
   baseSpeDef: number
-  life: number
+  hp: number
   shield: number
   team: number
   range: number

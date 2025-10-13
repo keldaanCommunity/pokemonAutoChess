@@ -112,6 +112,7 @@ export function GamePokemonDetail(props: {
         <GameTooltipBar
           type="HP"
           value={pokemon.hp}
+          extraValue={pokemon.shield}
           maxValue={pokemon.maxHP}
           graduationStep={10}
         />
