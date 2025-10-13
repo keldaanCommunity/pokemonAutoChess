@@ -3454,7 +3454,7 @@ export class PsybeamStrategy extends AbilityStrategy {
 }
 
 export class HydroSteamStrategy extends AbilityStrategy {
-   process(
+  process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
@@ -5681,17 +5681,16 @@ export class FellStingerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25, 50, 100][pokemon.stars - 1] ?? 70
-    const victim = target.handleSpecialDamage(
+    const damage = 4 * pokemon.baseAtk
+    const { death } = target.handleSpecialDamage(
       damage,
       board,
       AttackType.SPECIAL,
       pokemon,
       crit
     )
-    if (victim.death && !pokemon.isSpawn) {
-      pokemon.addAttack(1, pokemon, 0, false, true)
-      pokemon.addMaxHP(10, pokemon, 0, false, true)
+    if (death && !pokemon.isSpawn) {
+      pokemon.addAttack(0.3 * pokemon.baseAtk, pokemon, 0, false)
     }
   }
 }

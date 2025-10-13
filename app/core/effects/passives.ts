@@ -20,7 +20,7 @@ import {
   SynergyFlavors
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { removeInArray } from "../../utils/array"
@@ -983,6 +983,29 @@ const chinglingCountCastsEffect = new OnSimulationStartEffect(
   }
 )
 
+const PoipoleOnKillEffect = new OnKillEffect(
+  ({ attacker, board }) => {
+    const familyMembers: PokemonEntity[] =
+      board.cells.filter<PokemonEntity>(
+        (entity): entity is PokemonEntity =>
+          entity != null &&
+          entity.team === attacker.team &&
+          PkmFamily[entity.name] === PkmFamily[attacker.name]
+      )
+    familyMembers.forEach((entity) => {
+      if(!attacker.player) return
+      entity.refToBoardPokemon.evolutionRule.addStack(
+        entity.refToBoardPokemon as Pokemon,
+        attacker.player,
+        attacker.simulation.stageLevel
+      )
+      if(entity.refToBoardPokemon.evolutionRule.stacks % 3 === 0){
+        entity.addAttack(1, entity, 0, false, true)
+      }
+    })
+  }
+)
+
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -1179,5 +1202,7 @@ export const PassiveEffects: Partial<
       }
       return true
     })
-  ]
+  ],
+  [Passive.POIPOLE]: [PoipoleOnKillEffect],
+  [Passive.NAGANADEL]: [PoipoleOnKillEffect]
 }
