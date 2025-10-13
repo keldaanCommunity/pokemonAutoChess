@@ -521,7 +521,8 @@
 		"EERIE_SPELL": "Conjuro Funesto",
 		"SHELL_SIDE_ARM": "Moluscañón",
 		"TRIPLE_DIVE": "Triple Inmersión",
-		"MOONBLAST": "Fuerza Lunar"
+		"MOONBLAST": "Fuerza Lunar",
+		"HYDRO_STEAM": "Hidrovapor"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1586,7 +1587,8 @@
 		"BASCULEGION_FEMALE": "Basculegion (♀)",
 		"WIGLETT": "Wiglett",
 		"WUGTRIO": "Wugtrio",
-		"FLUTTER_MANE": "Melenaleteo"
+		"FLUTTER_MANE": "Melenaleteo",
+		"WALKING_WAKE": "Ondulagua"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,SP] SHIELD a todos los aliados.",
@@ -2088,7 +2090,8 @@
 		"EERIE_SPELL": "Lanza una onda que rebota entre 3 Pokémon adicionales, priorizando a aquellos con los HP más bajos. Inflige [10,20,40,SP] de SPECIAL a los enemigos y cura [15,30,45,SP] HP a los aliados.",
 		"SHELL_SIDE_ARM": "Lanza una onda que rebota entre 3 Pokémon adicionales, priorizando a aquellos con los HP más altos. Deja POISONNED durante [2,3,SP] segundos a los enemigos y otorga [10,20] AP a los aliados.",
 		"TRIPLE_DIVE": "El usuario realiza una zambullida triple perfectamente coordinada, golpeando a 3 enemigos diferentes con HP bajos. Cada zambullida inflige [15,30,45,SP] de SPECIAL.",
-		"MOONBLAST": "Lanza 6 lunas que infligen [20,SP] de SPECIAL cada una. Derrotar a un Pokémon hace que las lunas restantes vayan a por otro objetivo y otorga 1 luna adicional."
+		"MOONBLAST": "Lanza 6 lunas que infligen [20,SP] de SPECIAL cada una. Derrotar a un Pokémon hace que las lunas restantes vayan a por otro objetivo y otorga 1 luna adicional.",
+		"HYDRO_STEAM": "Dispara un poderoso chorro de agua hirviendo, infligiendo [35,70,140,SP] de SPECIAL a los enemigos en un CONE de 2 casillas, además de dejarlos BURN durante 4 segundos."
 	},
 	"effect": {
 		"STAMINA": "Firmeza",
@@ -2929,6 +2932,8 @@
 		"DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos a él.",
 		"SLOW_START": "Comienza con -30 SPEED. Después de lanzar su habilidad por primera vez, obtiene 30 SPEED y 10 ATK",
 		"STONJOURNER": "No se mueve ni ataca hasta que la barra de PP esté llena. Su Fuente Energía le da 50 AP a todos los aliados adyacentes al comienzo de la pelea.",
+		"POIPOLE": "Cuando el usuario u otra unidad de la misma familia derrota a un enemigo, consigue 1 acumulación. Cada 3 acumulaciones, gana 1 de ATK permanente. Evoluciona al conseguir 30 acumulaciones.",
+		"NAGANADEL": "Cuando el usuario u otra unidad de la misma familia derrota a un enemigo, consigue 1 acumulación. Cada 3 acumulaciones, gana 1 de ATK permanente.",
 		"PYUKUMUKU": "Cuando este pokémon es noqueado, explota, realizando [50,SP]% max HP SPECIAL a los enemigos adyacentes.",
 		"LUVDISC": "Los aliados a su izquierda y a su derecha se enamoran, y comparten el mejor valor de su respectivo ATK, AP, DEF y SPE_DEF al inicio de la pelea",
 		"MANTYKE": "Cuando Mantyke está en el tablero, ganas un [33,LK]% de pescar un Remoraid con tu caña. Evoluciona a Mantine si tiene un Remoraid a su lado.",
@@ -3059,26 +3064,26 @@
 		"FAIRY_FIELD": "Campo de hadas"
 	},
 	"status_description": {
-		"BURN": "Reparte el 5 % del HP máximo como TRUE cada segundo. Reduce la curación en un 50%.",
-		"SILENCE": "Evita lanzar habilidades y ganar PP",
+		"BURN": "Inflige el 5 % de los HP máximos como TRUE cada segundo. Reduce la curación en un 50%.",
+		"SILENCE": "Impide lanzar habilidades y ganar PP",
 		"FATIGUE": "Reduce los PP obtenidos de todas las fuentes en un 50%",
-		"POISONNED": "Reparte el 5 % del HP máximo por acumulación como TRUE cada segundo. Se puede apilar hasta 3 veces por defecto.",
-		"FREEZE": "Evita moverse o atacar",
-		"PROTECT": "Protege de cualquier fuente de daño, pero evita la ganancia de PP",
-		"SLEEP": "Evita moverse o atacar. Recibir ataques reduce la duración del efecto.",
+		"POISONNED": "Inflige el 5 % de los HP máximos por acumulación como TRUE cada segundo. Se puede acumular hasta 3 veces por defecto.",
+		"FREEZE": "Impide moverse, esquivar o atacar",
+		"PROTECT": "Protege de cualquier fuente de daño, pero evita curarse y ganar PP. Los enemigos evitarán tener como objetivo a una unidad protegida.",
+		"SLEEP": "Impide moverse, esquivar o atacar. Recibir ataques reduce la duración del efecto.",
 		"CONFUSION": "Fuerza a cambiar de objetivo todo el tiempo y, a veces, infligirse daño a sí mismo.",
-		"WOUND": "Previene la curación de cualquier fuente",
-		"RAGE": "Doble daño y velocidad. El escudo, la curación, y la duración de FREEZE y SLEEP se reducen a la mitad. pierde PROTECT. Todas las unidades se vuelven RAGE después de 35 segundos de pelea.",
-		"RESURECTION": "Previene KO una vez, restaurando al máximo HP",
-		"PARALYSIS": "Reduce el SPEED un 50, impide esquivar ataques",
-		"POKERUS": "Cada 2.5 segundos, obtiene 1 ATK y 10 AP antes de infectar a 2 aliados adyacentes con POKERUS",
-		"ARMOR_BREAK": "Reduce la DEF y la SPE_DEF en un 50%",
+		"WOUND": "Impide la curación de cualquier fuente",
+		"RAGE": "Duplica el daño y otorga +80 de SPEED. El escudo, la curación, y la duración de FREEZE y SLEEP se reducen a la mitad. Pierde PROTECT. Todas las unidades se vuelven RAGE después de 35 segundos de batalla.",
+		"RESURECTION": "Previene KO una vez, restaurando al máximo HP. Las mejoras de estadísticas, las acumulaciones y los estados se reestablecen al revivir.",
+		"PARALYSIS": "Reduce la SPEED en un 50% e impide esquivar ataques",
+		"POKERUS": "Cada 2.5 segundos, obtiene 1 ATK y 10 AP e infecta a 2 aliados ADJACENT con POKERUS",
+		"ARMOR_BREAK": "Reduce la eficacia de la DEF y la SPE_DEF en un 50%",
 		"CHARM": "Impide atacar al objetivo y obliga a acercarse a él.",
-		"FLINCH": "El 50% del daño entrante atraviesa SHIELD",
-		"CURSE": "KO al Pokémon maldito después de un tiempo",
+		"FLINCH": "El 50% del daño entrante ignora el SHIELD",
+		"CURSE": "Derrota al Pokémon maldito después de un tiempo",
 		"RUNE_PROTECT": "Protege de alteraciones de estado",
 		"POSSESSED": "Lucha para el equipo contrario temporalmente. Se vuelve CHARM si el objetivo es el único enemigo restante.",
-		"LOCKED": "Previene el movimiento y fija el RANGE a 1",
+		"LOCKED": "Impide moverse y fija el RANGE a 1",
 		"BLINDED": "Reduce la precisión de los ataques en un 50%",
 		"ELECTRIC_FIELD": "Aumenta el daño infligido en un 20% (solo ELECTRIC)",
 		"PSYCHIC_FIELD": "Aumenta el daño infligido en un 20% (solo PSYCHIC)",
