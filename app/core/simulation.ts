@@ -821,7 +821,7 @@ export default class Simulation extends Schema implements ISimulation {
 
                 pokemon.commands.push(
                   new DelayedCommand(() => {
-                    if (target?.life > 0) {
+                    if (target?.hp > 0) {
                       const crit = chance(pokemon.critChance / 100, pokemon)
                       target.handleSpecialDamage(
                         3 * pokemon.atk,
@@ -1709,7 +1709,7 @@ export default class Simulation extends Schema implements ISimulation {
     const opponentTeam =
       opponentTeamNumber === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
     const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
-      (p) => p.life > 0
+      (p) => p.hp > 0
     ) as PokemonEntity[]
 
     if (effect === EffectEnum.CURSE_OF_VULNERABILITY) {

@@ -128,7 +128,7 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
       const candidateTargets = cells
         .filter((cell) => cell.value && pokemon.team != cell.value.team)
         .map((cell) => cell.value!)
-      candidateTargets.sort((a, b) => a.life - b.life) // target lowest life first
+      candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
       let targetCount = 1
       candidateTargets.forEach((target) => {
@@ -228,7 +228,7 @@ export class RunningShoesOnMoveEffect extends OnMoveEffect {
 }
 
 const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.life > 0 && pokemon.life < 0.4 * pokemon.maxHP) {
+  if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -603,7 +603,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
             (p) =>
               p &&
               p.team !== attacker.team &&
-              (p.life > 0 || p.status.resurecting)
+              (p.hp > 0 || p.status.resurecting)
           ) === false
         attacker.count.bottleCapCount++
         const moneyGained = isLastEnemy ? attacker.count.bottleCapCount + 1 : 1
@@ -864,7 +864,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.ABSORB_BULB]: [
     new OnDamageReceivedEffect(({ pokemon, board }) => {
-      if (pokemon.life < 0.5 * pokemon.maxHP) {
+      if (pokemon.hp < 0.5 * pokemon.maxHP) {
         const damage =
           pokemon.physicalDamageReduced + pokemon.specialDamageReduced
         pokemon.broadcastAbility({ skill: Ability.EXPLOSION })

@@ -131,7 +131,7 @@ export default class BattleManager {
       this.pokemonSprites.has(pokemon.id)
     ) {
       const pokemonSprite = this.pokemonSprites.get(pokemon.id)!
-      if (pokemon.passive === Passive.INANIMATE && pokemon.life > 0) {
+      if (pokemon.passive === Passive.INANIMATE && pokemon.hp > 0) {
         // pillar is thrown, skip death animation
         setTimeout(() => pokemonSprite.destroy(), 500)
       } else {
@@ -580,9 +580,9 @@ export default class BattleManager {
         const baseHP = getPokemonData(pokemon.name).hp
         const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
         pkmSprite.sprite.setScale(2 + sizeBuff)
-        pkmSprite.lifebar?.setMaxLife(pokemon.maxHP)
-      } else if (field == "life") {
-        pkmSprite.lifebar?.setLife(Number(value))
+        pkmSprite.lifebar?.setMaxHp(pokemon.maxHP)
+      } else if (field == "hp") {
+        pkmSprite.lifebar?.setHp(Number(value))
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }

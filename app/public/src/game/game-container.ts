@@ -181,7 +181,7 @@ class GameContainer {
         "ap",
         "luck",
         "speed",
-        "life",
+        "hp",
         "maxHP",
         "shield",
         "pp",

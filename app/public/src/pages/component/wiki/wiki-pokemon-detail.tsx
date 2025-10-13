@@ -23,7 +23,6 @@ export default function WikiPokemonDetail(props: {
   const pokemon = useMemo(() => {
     const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
     pokemon.pp = pokemon.maxPP
-    pokemon.shield = 50
     return pokemon
   }, [props.pokemon])
   const pokemonData = useMemo(

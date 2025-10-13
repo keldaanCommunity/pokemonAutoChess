@@ -165,7 +165,7 @@ export default class PokemonAvatar extends PokemonSprite {
   }
 
   updateLife(life: number) {
-    this.lifebar?.setLife(life)
+    this.lifebar?.setHp(life)
   }
 
   drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
@@ -231,7 +231,9 @@ export default class PokemonAvatar extends PokemonSprite {
     const state = store.getState()
     if (state.game.emotesUnlocked.includes(emotion)) {
       store.dispatch(
-        showEmote(getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion))
+        showEmote(
+          getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
+        )
       )
       this.hideEmoteMenu()
     }

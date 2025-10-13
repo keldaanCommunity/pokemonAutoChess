@@ -33,7 +33,7 @@ export default abstract class PokemonState {
     target: PokemonEntity | null,
     isTripleAttack = false
   ) {
-    if (target && target.life > 0) {
+    if (target && target.hp > 0) {
       let damage = pokemon.atk
       let physicalDamage = 0
       let specialDamage = 0
@@ -282,8 +282,8 @@ export default abstract class PokemonState {
       return { healReceived: 0, overheal: 0 }
     }
     if (
-      pokemon.life > 0 &&
-      pokemon.life < pokemon.maxHP &&
+      pokemon.hp > 0 &&
+      pokemon.hp < pokemon.maxHP &&
       !pokemon.status.protect
     ) {
       if (apBoost > 0) {
@@ -303,11 +303,11 @@ export default abstract class PokemonState {
       }
 
       heal = Math.round(heal)
-      const healReceived = Math.min(pokemon.maxHP - pokemon.life, heal)
+      const healReceived = Math.min(pokemon.maxHP - pokemon.hp, heal)
 
-      pokemon.life = Math.min(pokemon.maxHP, pokemon.life + heal)
+      pokemon.hp = Math.min(pokemon.maxHP, pokemon.hp + heal)
 
-      const overheal = min(0)(pokemon.life + heal - pokemon.maxHP)
+      const overheal = min(0)(pokemon.hp + heal - pokemon.maxHP)
 
       if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
@@ -335,7 +335,7 @@ export default abstract class PokemonState {
     apBoost: number,
     crit: boolean
   ) {
-    if (pokemon.life > 0) {
+    if (pokemon.hp > 0) {
       if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
       if (crit) shield *= caster.critPower
       if (pokemon.status.enraged && shield > 0) shield *= 0.5
@@ -386,7 +386,7 @@ export default abstract class PokemonState {
       return { death: false, takenDamage: 0 }
     }
 
-    if (pokemon.life <= 0 || pokemon.status.resurecting) {
+    if (pokemon.hp <= 0 || pokemon.status.resurecting) {
       pokemon.status.possessedCooldown = 0
       return { death: false, takenDamage: 0 }
     }
@@ -553,7 +553,7 @@ export default abstract class PokemonState {
             attacker ? attacker.name : "Environment"
           }, attack type: ${attackType}, defense : ${
             pokemon.def
-          }, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
+          }, spedefense: ${pokemon.speDef}, life: ${pokemon.hp}`
         )
       }
 
@@ -584,11 +584,11 @@ export default abstract class PokemonState {
         pokemon.shield = min(0)(pokemon.shield - damageOnShield)
       }
 
-      takenDamage += Math.min(residualDamage, pokemon.life)
+      takenDamage += Math.min(residualDamage, pokemon.hp)
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
-        pokemon.life - residualDamage < 0.3 * pokemon.maxHP
+        pokemon.hp - residualDamage < 0.3 * pokemon.maxHP
       ) {
         death = false
         takenDamage = 0
@@ -600,7 +600,7 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.life - residualDamage <= 0
+        pokemon.hp - residualDamage <= 0
       ) {
         const shield = Math.round(
           pokemon.maxHP *
@@ -633,16 +633,16 @@ export default abstract class PokemonState {
         })
       }
 
-      pokemon.life = Math.max(0, pokemon.life - residualDamage)
+      pokemon.hp = Math.max(0, pokemon.hp - residualDamage)
 
-      // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
+      // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.hp} life shield ${pokemon.shield}`);
 
       if (shouldTargetGainMana) {
         pokemon.addPP(Math.ceil(residualDamage / 10), pokemon, 0, false)
       }
 
       if (takenDamage > 0) {
-        if (pokemon.life > 0) {
+        if (pokemon.hp > 0) {
           pokemon.onDamageReceived({
             attacker,
             damage: takenDamage,
@@ -689,7 +689,7 @@ export default abstract class PokemonState {
         }
       }
 
-      if (pokemon.life <= 0) {
+      if (pokemon.hp <= 0) {
         if (pokemon.status.resurection) {
           pokemon.status.triggerResurection(pokemon)
           board.forEach((x, y, entity: PokemonEntity | undefined) => {

@@ -1,10 +1,10 @@
 import { GameObjects } from "phaser"
-import { DEPTH } from "../depths"
 import { Team } from "../../../../types/enum/Game"
+import { DEPTH } from "../depths"
 
 export default class LifeBar extends GameObjects.Graphics {
-  maxLife: number
-  life: number
+  maxHp: number
+  hp: number
   shield: number
   PP?: number
   maxPP?: number
@@ -23,8 +23,8 @@ export default class LifeBar extends GameObjects.Graphics {
   ) {
     super(scene, { x: x, y: y })
 
-    this.maxLife = maxLife
-    this.life = life
+    this.maxHp = maxLife
+    this.hp = life
     this.shield = shield
     this.team = team
     this.flip = flip
@@ -53,9 +53,9 @@ export default class LifeBar extends GameObjects.Graphics {
     this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
 
     // life and shield amount
-    if (this.life > 0) {
-      const totalLife = Math.max(this.maxLife, this.life + this.shield) // if life + shield exceeds maxLife, the amount of segments should expand accordingly
-      const lifePercentage = this.life / totalLife
+    if (this.hp > 0) {
+      const totalLife = Math.max(this.maxHp, this.hp + this.shield) // if life + shield exceeds maxLife, the amount of segments should expand accordingly
+      const lifePercentage = this.hp / totalLife
       const shieldPercentage = this.shield / totalLife
 
       this.save()
@@ -105,7 +105,7 @@ export default class LifeBar extends GameObjects.Graphics {
     }
   }
 
-  setLife(value: number) {
+  setHp(value: number) {
     this.scene.tweens.add({
       targets: this,
       life: value,
@@ -125,8 +125,8 @@ export default class LifeBar extends GameObjects.Graphics {
     })
   }
 
-  setMaxLife(value: number) {
-    this.maxLife = value
+  setMaxHp(value: number) {
+    this.maxHp = value
   }
 
   setPP(value: number) {

@@ -320,7 +320,7 @@ export class AccelerationEffect extends OnMoveEffect {
 
 const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
   ({ pokemon }) => {
-    if (pokemon.life / pokemon.maxHP < 0.5) {
+    if (pokemon.hp / pokemon.maxHP < 0.5) {
       pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       pokemon.name = Pkm.MIMIKYU_BUSTED
       pokemon.changePassive(Passive.MIMIKYU_BUSTED)
@@ -336,7 +336,7 @@ const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
 const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
   ({ pokemon, board }) => {
     if (
-      pokemon.life < 0.3 * pokemon.maxHP &&
+      pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.DARMANITAN
     ) {
       pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
@@ -380,7 +380,10 @@ const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
 })
 
 const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.passive === Passive.GLIMMORA && pokemon.life < 0.5 * pokemon.maxHP) {
+  if (
+    pokemon.passive === Passive.GLIMMORA &&
+    pokemon.hp < 0.5 * pokemon.maxHP
+  ) {
     pokemon.changePassive(Passive.NONE)
 
     const cells = new Array<Cell>()

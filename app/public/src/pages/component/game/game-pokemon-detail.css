@@ -72,12 +72,15 @@
   display: grid;
   grid-template: 32px 32px / repeat(5, 1fr);
   justify-self: center;
+  gap: 4px;
 }
 
 .game-pokemon-detail-stats > div {
   white-space: nowrap;
   overflow: visible;
-  min-width: 64px;
+  min-width: 60px;
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
 }
 
 .game-pokemon-detail-stats img {
@@ -100,7 +103,7 @@
 
 .game-pokemon-detail-stats .game-pokemon-detail-stat-range img + span {
   display: inline-block;
-  margin: 0.25em;
+  margin-left: 0.25em;
   font-size: 150%;
 }
 
