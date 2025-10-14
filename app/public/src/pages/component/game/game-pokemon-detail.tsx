@@ -3,6 +3,7 @@ import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { DishByPkm } from "../../../../../core/dishes"
+import { ItemStats } from "../../../../../core/items"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
@@ -13,16 +14,18 @@ import { Item } from "../../../../../types/enum/Item"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { values } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
+import { cc } from "../../utils/jsx"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import { GameTooltipBar } from "./game-tooltip-bar"
 import "./game-pokemon-detail.css"
-import { cc } from "../../utils/jsx"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | IPokemon | IPokemonEntity
+  origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki"
   shiny?: boolean
   emotion?: Emotion
 }) {
@@ -36,21 +39,54 @@ export function GamePokemonDetail(props: {
     return props.pokemon
   }, [props.pokemon])
 
-  const pokemonStats = useMemo(
-    () => {
-      const baseStats = PokemonFactory.createPokemonFromName(pokemon.name)
-      return [
+  const pokemonStats = useMemo(() => {
+    const baseStats = PokemonFactory.createPokemonFromName(pokemon.name)
+    return [
       { stat: Stat.DEF, value: pokemon.def, baseValue: baseStats.def },
       { stat: Stat.ATK, value: pokemon.atk, baseValue: baseStats.atk },
-      { stat: Stat.CRIT_CHANCE, value: pokemon.critChance, baseValue: baseStats.critChance },
+      {
+        stat: Stat.CRIT_CHANCE,
+        value: pokemon.critChance,
+        baseValue: baseStats.critChance
+      },
       { stat: Stat.AP, value: pokemon.ap, baseValue: baseStats.ap },
       { stat: Stat.RANGE, value: pokemon.range, baseValue: baseStats.range },
-      { stat: Stat.SPE_DEF, value: pokemon.speDef, baseValue: baseStats.speDef },
+      {
+        stat: Stat.SPE_DEF,
+        value: pokemon.speDef,
+        baseValue: baseStats.speDef
+      },
       { stat: Stat.SPEED, value: pokemon.speed, baseValue: baseStats.speed },
-      { stat: Stat.CRIT_POWER, value: pokemon.critPower, baseValue: baseStats.critPower },
+      {
+        stat: Stat.CRIT_POWER,
+        value: pokemon.critPower,
+        baseValue: baseStats.critPower
+      },
       { stat: Stat.LUCK, value: pokemon.luck, baseValue: baseStats.luck }
-    ]
-  }, [pokemon])
+    ].map((s) => {
+      if (props.origin === "team") {
+        // count item stats as well
+        s.value = values(pokemon.items).reduce(
+          (acc, item) => acc + (ItemStats[item]?.[s.stat] ?? 0),
+          s.value
+        )
+      }
+      return s
+    })
+  }, [
+    pokemon.name,
+    pokemon.items,
+    pokemon.def,
+    pokemon.atk,
+    pokemon.critChance,
+    pokemon.ap,
+    pokemon.range,
+    pokemon.speDef,
+    pokemon.speed,
+    pokemon.critPower,
+    pokemon.luck,
+    props.origin
+  ])
 
   let dish = DishByPkm[pokemon.name]
   if (!dish && pokemon.types.has(Synergy.GOURMET)) {
@@ -60,6 +96,40 @@ export function GamePokemonDetail(props: {
       dish = Item.SANDWICH
     }
   }
+
+  const hp = useMemo(() => {
+    if (props.origin === "battle") return pokemon.hp
+    if (props.origin === "team") {
+      return values(pokemon.items).reduce(
+        (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
+        pokemon.hp
+      )
+    }
+
+    return undefined // only show max HP in shop/planner/wiki
+  }, [pokemon.hp, pokemon.items, props.origin])
+
+  const pp = useMemo(() => {
+    if (props.origin === "battle") return pokemon.pp
+    if (props.origin === "team") {
+      return values(pokemon.items).reduce(
+        (acc, item) => acc + (ItemStats[item]?.[Stat.PP] ?? 0),
+        pokemon.pp
+      )
+    }
+    return undefined // only show max PP in shop/planner/wiki
+  }, [pokemon.pp, pokemon.items, props.origin])
+
+  const shield = useMemo(() => {
+    if (props.origin === "battle") return pokemon.shield
+    if (props.origin === "team") {
+      return values(pokemon.items).reduce(
+        (acc, item) => acc + (ItemStats[item]?.[Stat.SHIELD] ?? 0),
+        0
+      )
+    }
+    return undefined
+  }, [pokemon.items, props.origin, pokemon.shield])
 
   return (
     <div className="game-pokemon-detail">
@@ -104,12 +174,12 @@ export function GamePokemonDetail(props: {
       <div className="game-pokemon-detail-bars">
         <GameTooltipBar
           type="HP"
-          value={pokemon.hp}
-          extraValue={pokemon.shield}
+          value={hp}
+          extraValue={shield}
           maxValue={pokemon.maxHP}
           graduationStep={10}
         />
-        <GameTooltipBar type="PP" value={pokemon.pp} maxValue={pokemon.maxPP} />
+        <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
       </div>
 
       <div className="game-pokemon-detail-stats">
@@ -123,7 +193,14 @@ export function GamePokemonDetail(props: {
               alt={stat}
               title={t(`stat.${stat}`)}
             />
-            <span className={cc({ buffed: value > baseValue, nerfed: value < baseValue })}>{value}</span>
+            <span
+              className={cc({
+                buffed: value > baseValue,
+                nerfed: value < baseValue
+              })}
+            >
+              {value}
+            </span>
           </div>
         ))}
       </div>
@@ -179,6 +256,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
   private pokemon: Pkm | IPokemon | IPokemonEntity
   private shiny?: boolean
   private emotion?: Emotion
+  private origin: "shop" | "team" | "planner" | "battle" | "wiki"
 
   constructor(
     scene: Phaser.Scene,
@@ -186,7 +264,8 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
     y: number,
     pokemon: Pkm | IPokemon | IPokemonEntity,
     shiny?: boolean,
-    emotion?: Emotion
+    emotion?: Emotion,
+    origin: "shop" | "team" | "planner" | "battle" | "wiki" = "wiki"
   ) {
     super(scene, x, y)
     this.dom = document.createElement("div")
@@ -196,6 +275,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
     this.pokemon = pokemon
     this.shiny = shiny
     this.emotion = emotion
+    this.origin = origin
     this.render()
   }
 
@@ -205,6 +285,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
         pokemon={this.pokemon}
         shiny={this.shiny}
         emotion={this.emotion}
+        origin={this.origin}
       />
     )
   }

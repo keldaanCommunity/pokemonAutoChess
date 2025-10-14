@@ -299,7 +299,7 @@ export default class PokemonSprite extends DraggableObject {
       const pkmCenter = this.sprite.getCenter(undefined, true)
       const boundsScene = this.scene.cameras.main.worldView
 
-      let x = +40
+      let x = +60
       let y = -175
       const tooltipWidth = this.detail.dom.clientWidth
       const tooltipHeight = this.detail.dom.clientHeight
@@ -356,7 +356,10 @@ export default class PokemonSprite extends DraggableObject {
       this.scene,
       0,
       0,
-      this.pokemon
+      this.pokemon,
+      undefined,
+      undefined,
+      this.inBattle ? "battle" : "team"
     )
     this.detail.setDepth(DEPTH.TOOLTIP).setOrigin(0, 0)
     this.updateTooltipPosition()

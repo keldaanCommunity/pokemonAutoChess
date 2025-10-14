@@ -66,6 +66,7 @@ export default function SelectedEntity(props: {
           pokemon={detailledPkm.name}
           emotion={detailledPkm.emotion}
           shiny={detailledPkm.shiny}
+          origin="planner"
         />
       </div>
     )

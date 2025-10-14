@@ -8,7 +8,6 @@ import {
   ItemEvolutionRule,
   StackBasedEvolutionRule
 } from "../../core/evolution-rules"
-import { ItemStats } from "../../core/items"
 import Simulation from "../../core/simulation"
 import GameState from "../../rooms/states/game-state"
 import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
@@ -83,6 +82,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") pp = 0
   @type("uint8") maxPP: number = 100
   @type("uint16") ap: number = 0
+  @type("uint8") luck: number = 0
   @type("string") skill: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
@@ -91,7 +91,6 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   dodge: number = 0
-  permanentLuck: number = 0
   deathCount: number = 0
   evolutions: Pkm[] = []
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
@@ -147,18 +146,6 @@ export class Pokemon extends Schema implements IPokemon {
       this.passive !== Passive.INANIMATE &&
       this.items.has(Item.GOLD_BOW) === false
     )
-  }
-
-  get luck(): number {
-    let luck = this.permanentLuck
-    this.items.forEach((item) => {
-      luck += ItemStats[item]?.[Stat.LUCK] ?? 0
-    })
-    return luck
-  }
-
-  set luck(value: number) {
-    this.permanentLuck = value
   }
 
   onChangePosition(

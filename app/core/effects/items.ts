@@ -496,15 +496,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.WIDE_LENS]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.range += 2
-    }),
-    new OnItemRemovedEffect((pokemon) => {
-      pokemon.range = min(1)(pokemon.range - 2)
-    })
-  ],
-
   [Item.MAX_REVIVE]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.addResurrection(pokemon)

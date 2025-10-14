@@ -64,7 +64,11 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.WONDER_BOX]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.STICKY_BARB]: { [Stat.DEF]: 3, [Stat.SHIELD]: 15 },
   [Item.ABILITY_SHIELD]: { [Stat.AP]: 10 },
-  [Item.WIDE_LENS]: { [Stat.CRIT_CHANCE]: 10, [Stat.SPE_DEF]: 3 },
+  [Item.WIDE_LENS]: {
+    [Stat.RANGE]: 2,
+    [Stat.CRIT_CHANCE]: 10,
+    [Stat.SPE_DEF]: 3
+  },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },
   [Item.KINGS_ROCK]: { [Stat.SHIELD]: 100 },

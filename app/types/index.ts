@@ -348,7 +348,6 @@ export interface IPokemon {
   pp: number
   maxPP: number
   luck: number
-  permanentLuck: number
   ap: number
   critChance: number
   critPower: number

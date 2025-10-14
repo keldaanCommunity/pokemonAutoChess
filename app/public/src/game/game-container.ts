@@ -421,6 +421,7 @@ class GameContainer {
         "ap",
         "def",
         "speed",
+        "luck",
         "shiny",
         "skill",
         "meal"

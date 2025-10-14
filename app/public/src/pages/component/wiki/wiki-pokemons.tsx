@@ -227,7 +227,7 @@ export function WikiAllPokemons() {
           className="custom-theme-tooltip game-pokemon-detail-tooltip"
           float
         >
-          <GamePokemonDetail pokemon={hoveredPokemon} />
+          <GamePokemonDetail pokemon={hoveredPokemon} origin="wiki" />
         </Tooltip>
       )}
     </>

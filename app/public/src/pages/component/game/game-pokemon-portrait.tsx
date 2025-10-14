@@ -35,7 +35,7 @@ export function getCachedPortrait(
 
 export default function GamePokemonPortrait(props: {
   index: number
-  origin: string
+  origin: "wiki" | "shop" | "proposition" | "team" | "planner" | "battle"
   pokemon: Pokemon | Pkm | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
@@ -188,6 +188,7 @@ export default function GamePokemonPortrait(props: {
           pokemon={pokemonInPortrait}
           emotion={pokemonCustom.emotion}
           shiny={pokemonCustom.shiny}
+          origin={props.origin}
         />
       </Tooltip>
       {willEvolve && pokemonEvolution && (

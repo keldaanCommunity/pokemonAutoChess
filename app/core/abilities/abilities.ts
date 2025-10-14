@@ -499,7 +499,7 @@ export class IllusionStrategy extends AbilityStrategy {
     if (target && target.canBeCopied) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
-      pokemon.range = target.range + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
+      pokemon.range = target.range
       pokemon.def = Math.max(pokemon.def, target.def)
       pokemon.speDef = Math.max(pokemon.speDef, target.speDef)
     }

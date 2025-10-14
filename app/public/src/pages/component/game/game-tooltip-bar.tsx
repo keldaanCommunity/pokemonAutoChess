@@ -3,7 +3,7 @@ import { clamp } from "../../../../../utils/number"
 import "./game-tooltip-bar.css"
 
 interface GameTooltipBarProps {
-  value: number
+  value: number | undefined
   maxValue: number
   extraValue?: number
   type: "HP" | "PP"
@@ -24,11 +24,11 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
   graduationStep
 }) => {
   const total = maxValue + (extraValue ?? 0)
-  const percent = clamp(value / total, 0, 1)
+  const percent = value === undefined ? 100 : clamp(value / total, 0, 1)
   const extraPercent = extraValue ? clamp(extraValue / total, 0, 1) : 0
   const graduations: number[] = []
   if (graduationStep) {
-    for (let i = graduationStep; i < maxValue; i += graduationStep) {
+    for (let i = graduationStep; i < total; i += graduationStep) {
       graduations.push(i)
     }
   }
@@ -36,7 +36,8 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
   return (
     <div className="game-tooltip-bar">
       <div className="game-tooltip-bar-text">
-        {type}: {value} / {maxValue} {extraValue ? `(+${extraValue})` : ""}
+        {type}: {value === undefined ? maxValue : `${value} / ${maxValue}`}{" "}
+        {extraValue ? `(+${extraValue})` : ""}
       </div>
       <div className="game-tooltip-bar-outer">
         <div
@@ -59,7 +60,7 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
           <div
             key={g}
             className="game-tooltip-bar-graduation"
-            style={{ left: `${(g / maxValue) * 100}%` }}
+            style={{ left: `${(g / total) * 100}%` }}
           />
         ))}
       </div>

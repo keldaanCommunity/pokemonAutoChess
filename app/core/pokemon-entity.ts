@@ -175,7 +175,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
-    this.luck = pokemon.permanentLuck
+    this.luck = pokemon.luck
     this.dodge = 0
     this.physicalDamage = 0
     this.specialDamage = 0
@@ -1368,6 +1368,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Stat.LUCK:
         this.addLuck(value, this, 0, false, permanent)
         break
+      case Stat.RANGE:
+        this.range = min(1)(this.range + value)
     }
   }
 
