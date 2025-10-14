@@ -95,6 +95,7 @@
 
 # UI
 
+- Pokemon tooltips have been redesigned to show shield, max HP and max PP, share a common layout inside and outside battle, and compute item statistics immediately on picking phase
 - Gems icons have been reworked to be more clear about their synergy. Thanks to Nitpicky
 - Ground fully dug holes in a row are now displayed as trenches instead of individual holes
 - Added a new keybinding to lock/unlock camera movement (default: L)
@@ -102,6 +103,7 @@
 - Added current amount of Dragon stars in dragon synergy description
 - Removed announcements for Victory Road finishers except for the first finisher
 - Clicking on a player in Victory Road leaderboard will now redirect to that player profile
+- Added tooltips for Pokémon and items in the after game screen
 - Added a "Newly obtained" filter to the Pokémon collection to highlight the Pokémon obtained in the recently opened boosters
 - Added a randomize music button in jukebox
 - Added filtering and searching to game rooms list. Gamemode tabs now show games in progress instead of open rooms.
