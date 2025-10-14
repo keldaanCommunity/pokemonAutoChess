@@ -87,6 +87,16 @@
   height: 32px;
 }
 
+.game-pokemon-detail-stats .buffed {
+  color: var(--color-fg-green);
+  font-weight: 600;
+}
+
+.game-pokemon-detail-stats .nerfed {
+  color: var(--color-fg-red);
+  font-weight: 600;
+}
+
 .game-pokemon-detail-stats img + span {
   display: inline-block;
   vertical-align: middle;

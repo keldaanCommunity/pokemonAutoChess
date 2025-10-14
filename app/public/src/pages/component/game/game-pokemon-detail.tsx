@@ -19,6 +19,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import { GameTooltipBar } from "./game-tooltip-bar"
 import "./game-pokemon-detail.css"
+import { cc } from "../../utils/jsx"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | IPokemon | IPokemonEntity
@@ -36,29 +37,20 @@ export function GamePokemonDetail(props: {
   }, [props.pokemon])
 
   const pokemonStats = useMemo(
-    () => [
-      { stat: Stat.DEF, value: pokemon.def },
-      { stat: Stat.ATK, value: pokemon.atk },
-      { stat: Stat.CRIT_CHANCE, value: pokemon.critChance },
-      { stat: Stat.AP, value: pokemon.ap },
-      { stat: Stat.RANGE, value: pokemon.range },
-      { stat: Stat.SPE_DEF, value: pokemon.speDef },
-      { stat: Stat.SPEED, value: pokemon.speed },
-      { stat: Stat.CRIT_POWER, value: pokemon.critPower },
-      { stat: Stat.LUCK, value: pokemon.luck }
-    ],
-    [
-      pokemon.atk,
-      pokemon.def,
-      pokemon.range,
-      pokemon.ap,
-      pokemon.speed,
-      pokemon.speDef,
-      pokemon.critChance,
-      pokemon.critPower,
-      pokemon.luck
+    () => {
+      const baseStats = PokemonFactory.createPokemonFromName(pokemon.name)
+      return [
+      { stat: Stat.DEF, value: pokemon.def, baseValue: baseStats.def },
+      { stat: Stat.ATK, value: pokemon.atk, baseValue: baseStats.atk },
+      { stat: Stat.CRIT_CHANCE, value: pokemon.critChance, baseValue: baseStats.critChance },
+      { stat: Stat.AP, value: pokemon.ap, baseValue: baseStats.ap },
+      { stat: Stat.RANGE, value: pokemon.range, baseValue: baseStats.range },
+      { stat: Stat.SPE_DEF, value: pokemon.speDef, baseValue: baseStats.speDef },
+      { stat: Stat.SPEED, value: pokemon.speed, baseValue: baseStats.speed },
+      { stat: Stat.CRIT_POWER, value: pokemon.critPower, baseValue: baseStats.critPower },
+      { stat: Stat.LUCK, value: pokemon.luck, baseValue: baseStats.luck }
     ]
-  )
+  }, [pokemon])
 
   let dish = DishByPkm[pokemon.name]
   if (!dish && pokemon.types.has(Synergy.GOURMET)) {
@@ -121,7 +113,7 @@ export function GamePokemonDetail(props: {
       </div>
 
       <div className="game-pokemon-detail-stats">
-        {pokemonStats.map(({ stat, value }) => (
+        {pokemonStats.map(({ stat, value, baseValue }) => (
           <div
             key={stat}
             className={"game-pokemon-detail-stat-" + stat.toLowerCase()}
@@ -131,7 +123,7 @@ export function GamePokemonDetail(props: {
               alt={stat}
               title={t(`stat.${stat}`)}
             />
-            <span>{value}</span>
+            <span className={cc({ buffed: value > baseValue, nerfed: value < baseValue })}>{value}</span>
           </div>
         ))}
       </div>

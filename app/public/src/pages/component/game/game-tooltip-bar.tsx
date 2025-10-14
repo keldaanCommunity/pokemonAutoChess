@@ -12,7 +12,7 @@ interface GameTooltipBarProps {
 
 const BAR_COLORS = {
   HP: "linear-gradient(to bottom, #e76e55, #b84731)",
-  PP: "linear-gradient(to bottom, #7fd6ff, #36a5ef)",
+  PP: "linear-gradient(to bottom, #5f9ff9, #2e8fd0)",
   SHIELD: "linear-gradient(to bottom, #ffffff, #c0c0c0)"
 }
 
