@@ -21,7 +21,7 @@ export default class LifeBar extends GameObjects.Graphics {
     team: Team,
     flip: boolean
   ) {
-    super(scene, { x: x, y: y })
+    super(scene, { x, y })
 
     this.maxHp = maxHP
     this.hp = hp

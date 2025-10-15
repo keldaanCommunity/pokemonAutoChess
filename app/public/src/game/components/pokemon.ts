@@ -1423,5 +1423,5 @@ export default class PokemonSprite extends DraggableObject {
 export const isEntity = (
   pokemon: IPokemon | IPokemonEntity
 ): pokemon is IPokemonEntity => {
-  return "refToBoardPokemon" in pokemon
+  return "status" in pokemon
 }
