@@ -521,7 +521,8 @@
 		"EERIE_SPELL": "诡异咒语",
 		"SHELL_SIDE_ARM": "臂贝武器",
 		"TRIPLE_DIVE": "三连钻",
-		"MOONBLAST": "月亮之力"
+		"MOONBLAST": "月亮之力",
+		"HYDRO_STEAM": "水蒸气"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1586,7 +1587,8 @@
 		"BASCULEGION_FEMALE": "幽尾玄鱼（♀）",
 		"WIGLETT": "海地鼠",
 		"WUGTRIO": "三海地鼠",
-		"FLUTTER_MANE": "振翼发"
+		"FLUTTER_MANE": "振翼发",
+		"WALKING_WAKE": "波荡水"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1957,6 +1959,7 @@
 		"DRAIN_PUNCH": "对目标造成SPECIAL，数值相当于ATK的[200,SP]%，使用者自身恢复造成伤害量的200%。",
 		"GRAVITY": "使所有敌方宝可梦陷入LOCKED [2,SP]秒。",
 		"FAKE_OUT": "对目标造成[40,80,150,SP]点SPECIAL，随后使用者降低30点AP。除非使用者的AP为负，否则使目标陷入FLINCH 3秒。",
+		"FELL_STINGER": "对目标造成SPECIAL，数值相当于[400,SP]%的ATK。若目标因此倒下，提升30%的基础ATK。",
 		"GULP_MISSILE": "朝目标发射一只PP已满的$t(pkm.ARROKUDA)，造成[55,SP]点SPECIAL。有[20,LK]%的概率改为发射$t(pkm.PIKACHU)。",
 		"SCHOOLING": "对目标和ADJACENT敌方宝可梦造成SPECIAL，数值相当于使用者[10,SP]%的最大HP。若备战区有弱丁鱼，其将加入鱼群并永久提升使用者50点HP。",
 		"DOUBLE_SHOCK": "使用者放出强力的电击，对目标造成[50,100,200,SP]点SPECIAL，并使自身陷入PARALYSIS 3秒。",
@@ -2014,7 +2017,7 @@
 		"BOLT_BEAK": "对目标造成[80,SP]点SPECIAL。若目标当前的PP高于40，改为造成[160,SP]点SPECIAL。",
 		"FREEZE_DRY": "对目标造成SPECIAL，数值相当于100%的SPE_DEF加[70,SP]。若目标因此倒下，其会爆炸并射出冰刺，对ADJACENT的敌方宝可梦造成SPECIAL，数值相当于50%的SPE_DEF加[30,SP]。",
 		"DRAGON_PULSE": "从大大的口中掀起冲击波，对目标和ADJACENT敌方宝可梦造成[20,SP]点SPECIAL。冲击波会在敌方宝可梦之间回荡。",
-		"FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对前方2格半径的CONE内的敌方宝可梦造成[35,70,140,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。",
+		"FROST_BREATH": "将冰冷的气息吹向敌方宝可梦，对2格半径的CONE内的敌方宝可梦造成[35,70,140,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入FREEZE 2秒。该招式可以暴击。",
 		"SALT_CURE": "ADJACENT我方宝可梦获得[10,20,40,SP]点SHIELD，并移除他们的异常状态。ADJACENT的WATER，STEEL或GHOST敌方宝可梦陷入BURN 5秒。",
 		"SPICY_EXTRACT": "最近的[1,2,3]只我方宝可梦陷入RAGE [2,SP]秒。",
 		"SWEET_SCENT": "3格半径范围内的敌方宝可梦失去闪避能力，且降低[6,SP]点SPE_DEF和[12,SP]点SPEED，还有[30,LK]%的概率陷入CHARM 1秒。",
@@ -2034,7 +2037,7 @@
 		"BULLDOZE": "用力踩踏地面，对ADJACENT敌方宝可梦造成[25,45,85,SP]点SPECIAL。击中的宝可梦被击退，并降低他们10点SPEED。",
 		"ARMOR_CANNON": "发射熊熊燃烧的炮弹，对目标造成[50,SP]点SPECIAL，随后弹射至最近的[2,SP]名敌方宝可梦，对他们也各造成[30,SP]点SPECIAL，最后弹射回到初始目标再造成[15,SP]点SPECIAL。",
 		"BITTER_BLADE": "将对世间的留恋聚集于剑尖，并斩击所有ADJACENT敌方宝可梦，造成[70,SP]点SPECIAL。每击中一只敌方宝可梦，使用者自身恢复10%的HP。",
-		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的CONE内所有敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害量50%的HP。",
+		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的CONE内的敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害量50%的HP。",
 		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 1秒，并恢复[20,40,80,SP]点HP。",
 		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成SPECIAL，数值相当于[100,SP]%的ATK加[100,SP]。",
 		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL。使用者的ATK比目标的越高，造成的伤害越高。",
@@ -2087,7 +2090,8 @@
 		"EERIE_SPELL": "发射一道命中目标后会弹射至3只任意宝可梦的波动，优先弹射HP最低的目标。命中的敌方宝可梦受到[10,20,40,SP]点SPECIAL，我方宝可梦恢复[15,30,45,SP]点HP。",
 		"SHELL_SIDE_ARM": "发射一道命中目标后会弹射至3只任意宝可梦的波动，优先弹射HP最高的目标。命中的敌方宝可梦陷入POISONNED [2,3,SP]秒，我方宝可梦提升[10,20]点AP。",
 		"TRIPLE_DIVE": "以默契的跳跃溅起水花，对3个不同的HP较低的目标分别造成[15,30,45,SP]点SPECIAL。",
-		"MOONBLAST": "发射6轮月亮，每轮对目标造成[20,SP]点SPECIAL。击倒目标时，剩余的月亮会转而攻击最近的敌方宝可梦，同时额外增加1轮月亮。"
+		"MOONBLAST": "发射6轮月亮，每轮对目标造成[20,SP]点SPECIAL。击倒目标时，剩余的月亮会转而攻击最近的敌方宝可梦，同时额外增加1轮月亮。",
+		"HYDRO_STEAM": "将煮得翻滚的开水猛烈地喷向对手，对2格半径的CONE内的敌方宝可梦造成[35,70,140,SP]点SPECIAL，并使他们陷入BURN 4秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2672,7 +2676,7 @@
 		"MAX_ELIXIR": "首次释放招式1秒后，恢复最大PP的100%。",
 		"METEORITE": "能和代欧奇希斯产生反应的陨石。摸上去隐约有点暖暖的。",
 		"MYSTERY_BOX": "一个神秘的古老盒子。持有此道具时，商店中所有$t(pkm.DITTO)将被替换为$t(pkm.MELTAN)。",
-		"TRASH": "一件人造道具的残骸。没有任何作用。返回备战区时卸下。",
+		"TRASH": "虽然没有任何作用，但是可以占用一个携带物位置。返回备战区时卸下。",
 		"OLD_ROD": "每轮玩家对战结束后，钓起一只宝可梦，将其加入你的备战区。能够获得常见和罕见WATER宝可梦，以及鲤鱼王。",
 		"GOOD_ROD": "每轮玩家对战结束后，钓起一只宝可梦，将其加入你的备战区。能够获得稀有WATER宝可梦，以及丑丑鱼。",
 		"SUPER_ROD": "每轮玩家对战结束后，钓起一只宝可梦，将其加入你的备战区。能够获得史诗WATER宝可梦，以及弱丁鱼。",
@@ -2924,9 +2928,12 @@
 		"BURMY": "需要3只相同蓑衣的结草儿才能进化为结草贵妇。若在第20轮移动到了一个没有对应蓑衣的地区，结草儿会进化为绅士蛾。",
 		"PSYDUCK": "受到攻击时有[10,LK]%的概率陷入CONFUSION。此宝可梦每次陷入CONFUSION时，提升100点AP。",
 		"BLOODMOON": "在BLOODMOON中切换形态。",
+		"RECYCLE": "向此宝可梦喂食树果可永久提升其15点最大HP。\n喂食消耗品可永久提升其30点最大HP，并获得一袋TRASH。",
 		"DREAM_CATCHER": "若目标处于SLEEP，攻击额外使3只最近的我方宝可梦获得10点SHIELD。",
 		"SLOW_START": "对战开始时降低30点SPEED。在初次释放招式后，提升30点SPEED和10点ATK。",
 		"STONJOURNER": "PP槽恢复至满时开始移动和发起攻击。此宝可梦的能量点使战斗开始时的ADJACENT宝可梦提升50点AP。",
+		"POIPOLE": "此宝可梦或同一进化线上的宝可梦击倒目标时，获得一层“汲取”。每3层“汲取”使此宝可梦永久提升1点ATK。达到30层“汲取”时，此宝可梦进化。",
+		"NAGANADEL": "此宝可梦或同一进化线上的宝可梦击倒目标时，获得一层“汲取”。每3层“汲取”使此宝可梦永久提升1点ATK。",
 		"PYUKUMUKU": "此宝可梦倒下时，会爆炸对ADJACENT敌方宝可梦造成SPECIAL，数值相当于[50,SP]%的最大HP。",
 		"LUVDISC": "对战开始时，此宝可梦左侧和右侧的我方宝可梦会坠入爱河，互相分享两者中较高的ATK、AP，DEF和SPE_DEF。",
 		"MANTYKE": "小球飞鱼在场时，钓鱼有[33,LK]%的概率钓到铁炮鱼。若有铁炮鱼与此宝可梦相邻，进化为巨翅飞鱼。",
