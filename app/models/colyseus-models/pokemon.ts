@@ -11550,7 +11550,7 @@ export class Chingling extends Pokemon {
   stars = 2
   evolution = Pkm.CHIMECHO
   evolutionRule = new StackBasedEvolutionRule()
-  stacksRequired = 10
+  stacksRequired = 30
   hp = 150
   atk = 10
   speed = 46
