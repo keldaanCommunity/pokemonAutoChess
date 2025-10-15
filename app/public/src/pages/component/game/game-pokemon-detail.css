@@ -115,7 +115,6 @@
 
 .game-pokemon-detail-stats .game-pokemon-detail-stat-range img + span {
   display: inline-block;
-  margin-left: 0.25em;
   font-size: 150%;
 }
 
