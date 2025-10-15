@@ -95,7 +95,7 @@
 
 # UI
 
-- Pokemon tooltips have been redesigned to show shield, max HP and max PP, share a common layout inside and outside battle, and compute item statistics immediately on picking phase
+- Pokemon tooltips have been redesigned to show shield, max HP, max PP, passive stacks, share a common layout inside and outside battle, and compute item statistics immediately on picking phase
 - Gems icons have been reworked to be more clear about their synergy. Thanks to Nitpicky
 - Ground fully dug holes in a row are now displayed as trenches instead of individual holes
 - Added a new keybinding to lock/unlock camera movement (default: L)
