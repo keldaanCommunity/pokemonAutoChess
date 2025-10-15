@@ -8,8 +8,8 @@ import "./team.css"
 
 export default function Team(props: {
   team: IPokemonRecord[] | ArraySchema<IPokemonRecord>
-  setHoveredPokemon: (p: Pkm) => void
-  setItemHovered: (i: Item) => void
+  setHoveredPokemon?: (p: Pkm) => void
+  setItemHovered?: (i: Item) => void
 }) {
   return (
     <ul className="player-team-pokemons">
@@ -19,7 +19,7 @@ export default function Team(props: {
             <PokemonPortrait
               avatar={p.avatar}
               onMouseOver={() => {
-                props.setHoveredPokemon(p.name)
+                props.setHoveredPokemon?.(p.name)
               }}
               data-tooltip-id="pokemon-detail"
             />
@@ -29,7 +29,7 @@ export default function Team(props: {
                   key={i}
                   src={"/assets/item/" + item + ".png"}
                   data-tooltip-id="item-detail"
-                  onMouseOver={() => props.setItemHovered(item)}
+                  onMouseOver={() => props.setItemHovered?.(item)}
                 />
               ))}
             </div>

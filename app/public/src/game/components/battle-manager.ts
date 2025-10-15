@@ -79,7 +79,11 @@ export default class BattleManager {
 
     this.simulation?.redTeam.forEach((pkm, key) => {
       this.simulation?.id &&
-        this.addPokemonEntitySprite(this.simulation.id, pkm)
+        this.addPokemonEntitySprite(
+          this.simulation.id,
+          pkm,
+          this.simulation.redPlayerId
+        )
     })
   }
 

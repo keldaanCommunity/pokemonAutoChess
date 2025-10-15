@@ -158,12 +158,6 @@ export default class PokemonSprite extends DraggableObject {
 
     this.lazyloadAnimations(scene)
 
-    const isEntity = (
-      pokemon: IPokemon | IPokemonEntity
-    ): pokemon is IPokemonEntity => {
-      return inBattle && "status" in pokemon
-    }
-
     if (isEntity(pokemon)) {
       this.orientation = pokemon.orientation
       this.action = pokemon.action
@@ -1424,4 +1418,10 @@ export default class PokemonSprite extends DraggableObject {
       boost.destroy()
     })
   }
+}
+
+export const isEntity = (
+  pokemon: IPokemon | IPokemonEntity
+): pokemon is IPokemonEntity => {
+  return "refToBoardPokemon" in pokemon
 }

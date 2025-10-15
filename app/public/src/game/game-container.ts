@@ -96,7 +96,7 @@ class GameContainer {
 
     for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
       team.onAdd((p, key) =>
-        this.initializePokemon(<PokemonEntity>p, simulation, team === $simulation.blueTeam ? $simulation.bluePlayerId : $simulation.redPlayerId)
+        this.initializePokemon(<PokemonEntity>p, simulation, team === $simulation.blueTeam ? simulation.bluePlayerId : simulation.redPlayerId)
       )
       team.onRemove((pokemon, key) => {
         // logger.debug('remove pokemon');
