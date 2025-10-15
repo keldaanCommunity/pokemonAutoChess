@@ -266,6 +266,7 @@ const KubfuOnKillEffect = new OnKillEffect(
 const HisuianQwilfishOnCastEffect = new OnAbilityCastEffect(
   (pokemon, board) => {
     pokemon.addAbilityPower(1, pokemon, 0, false, true)
+    pokemon.addStack()
   }
 )
 
@@ -965,22 +966,11 @@ const spiritombWispEffect = new OnSimulationStartEffect(
 )
 
 const chinglingCountCastsEffect = new OnSimulationStartEffect(
-  ({ team, entity, simulation }) => {
+  ({ team, entity }) => {
     if (!entity.player) return
     team.forEach((pkm) => {
       pkm.effectsSet.add(
-        new OnAbilityCastEffect(() => {
-          const pokemonEvolved =
-            entity.refToBoardPokemon.evolutionRule.addStack(
-              entity.refToBoardPokemon as Pokemon,
-              entity.player as Player,
-              simulation.stageLevel
-            )
-          if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
-            entity.index = PkmIndex[Pkm.CHIMECHO]
-            entity.name = Pkm.CHIMECHO
-          }
-        })
+        new OnAbilityCastEffect(() => (entity as PokemonEntity).addStack())
       )
     })
   }
@@ -995,11 +985,7 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   )
   familyMembers.forEach((entity) => {
     if (!attacker.player) return
-    entity.refToBoardPokemon.evolutionRule.addStack(
-      entity.refToBoardPokemon as Pokemon,
-      attacker.player,
-      attacker.simulation.stageLevel
-    )
+    entity.addStack()
     if (entity.refToBoardPokemon.stacks % 3 === 0) {
       entity.addAttack(1, entity, 0, false, true)
     }

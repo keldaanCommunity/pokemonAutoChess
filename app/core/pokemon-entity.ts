@@ -1711,6 +1711,24 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (effect): effect is InstanceType<T> => effect instanceof effectClass
     )
   }
+
+  addStack() {
+    if (!this.player) return
+    this.refToBoardPokemon.stacks++
+    this.stacks = this.refToBoardPokemon.stacks
+    //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
+    const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
+      this.refToBoardPokemon as Pokemon,
+      this.player,
+      this.simulation.stageLevel
+    )
+    if (pokemonEvolved) {
+      // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
+      this.index = pokemonEvolved.index
+      this.name = pokemonEvolved.name
+    }
+    return
+  }
 }
 
 export function getStrongestUnit<T extends Pokemon | IPokemonEntity>(

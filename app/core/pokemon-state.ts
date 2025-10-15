@@ -707,16 +707,7 @@ export default abstract class PokemonState {
 
         if (pokemon.passive === Passive.PRIMEAPE) {
           pokemon.applyStat(Stat.ATK, 1, true)
-          const pokemonEvolved =
-            pokemon.refToBoardPokemon.evolutionRule.addStack(
-              pokemon.refToBoardPokemon as Pokemon,
-              pokemon.player as Player,
-              pokemon.simulation.stageLevel
-            )
-          if (pokemonEvolved && pokemon.name === Pkm.PRIMEAPE) {
-            pokemon.index = PkmIndex[Pkm.ANNIHILAPE]
-            pokemon.name = Pkm.ANNIHILAPE
-          }
+          pokemon.addStack()
         }
       }
 

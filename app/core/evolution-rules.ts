@@ -27,7 +27,7 @@ export abstract class EvolutionRule {
     stageLevel: number
   ): boolean
   abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
-  divergentEvolution?: DivergentEvolution  
+  divergentEvolution?: DivergentEvolution
 
   constructor(divergentEvolution?: DivergentEvolution) {
     if (divergentEvolution) this.divergentEvolution = divergentEvolution
@@ -66,22 +66,11 @@ export abstract class EvolutionRule {
         pokemonEvolved.passive !== Passive.COSMOEM
       ) {
         pokemon.addMaxHP(10, player)
-        pokemon.evolutionRule.addStack(pokemon, player, stageLevel)
-      } else {
-        // check evolutions again if it can evolve twice in a row
-        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
+        pokemon.stacks++
       }
+      // check evolutions again if it can evolve twice in a row
+      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
     })
-  }
-
-  addStack( 
-    pokemon: Pokemon,
-    player: Player,
-    stageLevel: number
-  ) {
-    pokemon.stacks++
-    //logger.debug(`${pokemon.name} gained a stack (${pokemon.stacks}/${pokemon.stacksRequired})`)
-    return this.tryEvolve(pokemon, player, stageLevel)
   }
 }
 
@@ -327,7 +316,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false    
+    if (pokemon.items.has(Item.EVIOLITE)) return false
     return this.condition(pokemon, player, stageLevel)
   }
 
@@ -375,11 +364,8 @@ export function carryOverPermanentStats(
 
 export class StackBasedEvolutionRule extends ConditionBasedEvolutionRule {
   constructor(divergentEvolution?: DivergentEvolution) {
-    super(
-      (pokemon: Pokemon) => {
-        return pokemon.stacks >= pokemon.stacksRequired
-      },
-      divergentEvolution
-    )
+    super((pokemon: Pokemon) => {
+      return pokemon.stacks >= pokemon.stacksRequired
+    }, divergentEvolution)
   }
 }

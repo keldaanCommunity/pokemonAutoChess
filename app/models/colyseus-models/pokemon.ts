@@ -13149,7 +13149,8 @@ export class HisuianQwilfish extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   evolution = Pkm.OVERQWIL
-  evolutionRule = new ConditionBasedEvolutionRule((pokemon) => pokemon.ap >= 20)
+  evolutionRule = new StackBasedEvolutionRule()
+  stacksRequired = 20
   hp = 175
   atk = 13
   speed = 52
@@ -18444,9 +18445,12 @@ export class Dunsparce extends Pokemon {
   evolution = Pkm.DUDUNSPARCE
   evolutionRule = new ConditionBasedEvolutionRule(
     (pokemon: Pokemon, player: Player) => {
-      return player.groundHoles.filter((hole) => hole === 5).length >= 10
+      const nbHoles = player.groundHoles.filter((hole) => hole === 5).length
+      pokemon.stacks = nbHoles
+      return nbHoles >= 10
     }
   )
+  stacksRequired: number = 10
   stars = 3
   hp = 220
   atk = 15
