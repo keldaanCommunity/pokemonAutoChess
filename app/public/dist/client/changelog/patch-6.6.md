@@ -70,6 +70,8 @@
 - Updated Porygon passive Conversion: when copying Ground, after the fight, fully digs a hole at their position ; when copying Flora, when Porygon is KO, a special flora mon spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
 - Nerf Vulpix line: PP 80 → 90
 - Reduce Arceus and Kecleon rate: 1/150 → 1/200
+- Poipole rework: New passive: When user or another unit of the same family gets a KO, gain 1 stack. Every 3 stacks, gain 1 Attack permanently. At 30 stacks, evolves to Naganadel. Poipole base HP: 120 → 160 ; Naganadel base HP: 200 → 280 ; Fell Stinger: Deal ~~25/50/100~~ 400% (AP scaled) of Attack as special damage to the target. If it knocks out the target, permanently gain 1 Attack and 10 HP gain 30% of base Attack ; Naganadel is now in Legendary rarity group (Poipole stays Unique)
+
 
 # Changes to Synergies
 
