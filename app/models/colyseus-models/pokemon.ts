@@ -9013,7 +9013,8 @@ export class Poipole extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.NAGANADEL
-  evolutionRule = new StackBasedEvolutionRule(30)
+  evolutionRule = new StackBasedEvolutionRule()
+  stacksRequired: number = 30
   hp = 160
   atk = 10
   speed = 64
@@ -9023,8 +9024,6 @@ export class Poipole extends Pokemon {
   range = 1
   skill = Ability.FELL_STINGER
   passive = Passive.POIPOLE
-  evolutionRule = new StackBasedEvolutionRule()
-  stacksRequired: number = 10
 }
 
 export class Naganadel extends Pokemon {
