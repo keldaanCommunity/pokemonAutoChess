@@ -28,6 +28,7 @@ export function GamePokemonDetail(props: {
   origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki"
   shiny?: boolean
   emotion?: Emotion
+  isAlly?: boolean
 }) {
   const { t } = useTranslation()
   const pokemon: IPokemon | IPokemonEntity = useMemo(() => {
@@ -164,16 +165,14 @@ export function GamePokemonDetail(props: {
           )}
         </p>
       </div>
-
       <div className="game-pokemon-detail-types">
         {Array.from(pokemon.types.values()).map((type) => (
           <SynergyIcon type={type} key={type} />
         ))}
       </div>
-
       <div className="game-pokemon-detail-bars">
         <GameTooltipBar
-          type="HP"
+          type={props.isAlly === false ? "HP_ENEMY" : "HP_ALLY"}
           value={hp}
           extraValue={shield}
           maxValue={pokemon.maxHP}
@@ -181,7 +180,6 @@ export function GamePokemonDetail(props: {
         />
         <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
       </div>
-
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value, baseValue }) => (
           <div
@@ -204,7 +202,6 @@ export function GamePokemonDetail(props: {
           </div>
         ))}
       </div>
-
       {dish && (
         <div className="game-pokemon-detail-dish">
           <div className="game-pokemon-detail-dish-name">
@@ -220,15 +217,24 @@ export function GamePokemonDetail(props: {
           <p>{addIconsToDescription(t(`item_description.${dish}`))}</p>
         </div>
       )}
-
       {pokemon.passive !== Passive.NONE && (
         <div className="game-pokemon-detail-passive">
           <p>
             {addIconsToDescription(t(`passive_description.${pokemon.passive}`))}
           </p>
+           {pokemon.stacksRequired > 0 && (
+        <div className="game-pokemon-detail-passive-bar">
+          <GameTooltipBar
+            type="XP"
+            value={pokemon.stacks}
+            maxValue={pokemon.stacksRequired!}
+            graduationStep={1}
+          />
         </div>
       )}
-
+        </div>
+      )}
+     
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
           <div className="ability-name">{t(`ability.${pokemon.skill}`)}</div>
@@ -257,6 +263,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
   private shiny?: boolean
   private emotion?: Emotion
   private origin: "shop" | "team" | "planner" | "battle" | "wiki"
+  isAlly: boolean
 
   constructor(
     scene: Phaser.Scene,
@@ -265,7 +272,8 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
     pokemon: Pkm | IPokemon | IPokemonEntity,
     shiny?: boolean,
     emotion?: Emotion,
-    origin: "shop" | "team" | "planner" | "battle" | "wiki" = "wiki"
+    origin: "shop" | "team" | "planner" | "battle" | "wiki" = "wiki",
+    isAlly: boolean = true
   ) {
     super(scene, x, y)
     this.dom = document.createElement("div")
@@ -276,6 +284,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
     this.shiny = shiny
     this.emotion = emotion
     this.origin = origin
+    this.isAlly = isAlly
     this.render()
   }
 
@@ -286,6 +295,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
         shiny={this.shiny}
         emotion={this.emotion}
         origin={this.origin}
+        isAlly={this.isAlly}
       />
     )
   }

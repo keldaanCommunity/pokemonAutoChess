@@ -105,6 +105,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Count) count: Count
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
+  @type("uint8") stacks: number = 0
+  @type("uint8") stacksRequired: number = 0
   cooldown = 500
   oneSecondCooldown = 1000
   state: PokemonState
@@ -176,6 +178,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
     this.luck = pokemon.luck
+    this.stacks = pokemon.stacks
+    this.stacksRequired = pokemon.stacksRequired
     this.dodge = 0
     this.physicalDamage = 0
     this.specialDamage = 0
@@ -496,7 +500,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.maxHP = min(1)(this.maxHP + value)
     this.hp = clamp(this.hp + value, 1, this.maxHP)
     if (permanent && !this.isGhostOpponent) {
-      this.refToBoardPokemon.addMaxHP(value, this.player)
+      ;(this.refToBoardPokemon as Pokemon).addMaxHP(value, this.player)
     }
   }
 

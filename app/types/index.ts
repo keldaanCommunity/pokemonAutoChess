@@ -351,6 +351,8 @@ export interface IPokemon {
   ap: number
   critChance: number
   critPower: number
+  stacks: number
+  stacksRequired: number
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
@@ -367,7 +369,6 @@ export interface IPokemon {
   canEat: boolean
   deathCount: number
   readonly hasEvolution: boolean
-  addMaxHP(amount: number, player: Player | undefined): void
 }
 
 export interface IExperienceManager {
@@ -568,6 +569,8 @@ export interface IPokemonEntity {
   healDone: number
   shiny: boolean
   emotion: Emotion
+  stacks: number
+  stacksRequired: number
   isSpawn: boolean
   commands: ISimulationCommand[]
   effectsSet: Set<EffectClass>

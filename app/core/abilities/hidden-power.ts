@@ -118,8 +118,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     if (!unown.isGhostOpponent && unown.player) {
       const egg = giveRandomEgg(unown.player, false)
       if (!egg) return
-      egg.evolutionRule.evolutionTimer =
-        egg.evolutionRule.getHatchTime(egg, unown.player) - 1
+      egg.stacksRequired = egg.evolutionRule.getHatchTime(egg, unown.player) - 1
     }
   }
 }

@@ -70,7 +70,11 @@ export default class BattleManager {
   buildPokemons() {
     this.simulation?.blueTeam.forEach((pkm, key) => {
       this.simulation?.id &&
-        this.addPokemonEntitySprite(this.simulation.id, pkm)
+        this.addPokemonEntitySprite(
+          this.simulation.id,
+          pkm,
+          this.simulation.bluePlayerId
+        )
     })
 
     this.simulation?.redTeam.forEach((pkm, key) => {
@@ -79,7 +83,11 @@ export default class BattleManager {
     })
   }
 
-  addPokemonEntitySprite(simulationId: string, pokemon: IPokemonEntity) {
+  addPokemonEntitySprite(
+    simulationId: string,
+    pokemon: IPokemonEntity,
+    playerId: string
+  ) {
     if (
       this.simulation?.id === simulationId &&
       this.pokemonSprites.has(pokemon.id) === false
@@ -94,7 +102,7 @@ export default class BattleManager {
         coordinates[0],
         coordinates[1],
         pokemon,
-        simulationId,
+        playerId,
         true,
         this.flip
       )
@@ -661,7 +669,9 @@ export default class BattleManager {
         field === "critChance" ||
         field === "critPower" ||
         field === "luck" ||
-        field === "range"
+        field === "range" ||
+        field === "stacks" ||
+        field === "stacksRequired"
       ) {
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)

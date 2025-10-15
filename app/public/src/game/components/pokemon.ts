@@ -359,7 +359,8 @@ export default class PokemonSprite extends DraggableObject {
       this.pokemon,
       undefined,
       undefined,
-      this.inBattle ? "battle" : "team"
+      this.inBattle ? "battle" : "team",
+      this.playerId === s.uid
     )
     this.detail.setDepth(DEPTH.TOOLTIP).setOrigin(0, 0)
     this.updateTooltipPosition()

@@ -1,19 +1,31 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { clamp } from "../../../../../utils/number"
 import "./game-tooltip-bar.css"
+
+type BarType = "HP_ALLY" | "HP_ENEMY" | "PP" | "XP"
 
 interface GameTooltipBarProps {
   value: number | undefined
   maxValue: number
   extraValue?: number
-  type: "HP" | "PP"
+  type: BarType
   graduationStep?: number
 }
 
-const BAR_COLORS = {
-  HP: "linear-gradient(to bottom, #e76e55, #b84731)",
-  PP: "linear-gradient(to bottom, #5f9ff9, #2e8fd0)",
+const BAR_COLORS: Record<BarType | "SHIELD", string> = {
+  HP_ALLY: "#97db4a",
+  HP_ENEMY: "#e76e55",
+  PP: "#5f9ff9",
+  XP: "#eeeeee",
   SHIELD: "linear-gradient(to bottom, #ffffff, #c0c0c0)"
+}
+
+const BAR_LABELS: Record<BarType, string> = {
+  HP_ALLY: "stat.HP",
+  HP_ENEMY: "stat.HP",
+  PP: "stat.PP",
+  XP: ""
 }
 
 export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
@@ -23,6 +35,7 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
   type,
   graduationStep
 }) => {
+  const { t } = useTranslation()
   const total = maxValue + (extraValue ?? 0)
   const percent = value === undefined ? 100 : clamp(value / total, 0, 1)
   const extraPercent = extraValue ? clamp(extraValue / total, 0, 1) : 0
@@ -36,7 +49,9 @@ export const GameTooltipBar: React.FC<GameTooltipBarProps> = ({
   return (
     <div className="game-tooltip-bar">
       <div className="game-tooltip-bar-text">
-        {type}: {value === undefined ? maxValue : `${value} / ${maxValue}`}{" "}
+        {BAR_LABELS[type] ? t(BAR_LABELS[type]) : ""}
+        {BAR_LABELS[type] ? ": " : ""}
+        {value === undefined ? maxValue : `${value} / ${maxValue}`}{" "}
         {extraValue ? `(+${extraValue})` : ""}
       </div>
       <div className="game-tooltip-bar-outer">

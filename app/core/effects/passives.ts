@@ -257,7 +257,7 @@ const KubfuOnKillEffect = new OnKillEffect(
       }
     }
 
-    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(
+    pokemon.refToBoardPokemon.stacks = max(MAX_BUFFS)(
       Math.max(nbBuffsAP, nbBuffsSpeed)
     )
   }

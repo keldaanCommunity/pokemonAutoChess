@@ -1,7 +1,7 @@
 .game-tooltip-bar-text {
   font-size: 14px;
   font-weight: bold;
-  line-height: 18px;
+  line-height: 16px;
   position: absolute;
   z-index: 2;
   left: 50%;
@@ -17,10 +17,11 @@
 
 .game-tooltip-bar-outer {
   position: relative;
-  height: 18px;
+  height: 16px;
   background: var(--color-bg-secondary);
   overflow: hidden;
   display: flex;
+  border: 1px solid #00000080;
 }
 
 .game-tooltip-bar-inner {

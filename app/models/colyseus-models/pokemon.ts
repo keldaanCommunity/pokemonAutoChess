@@ -90,6 +90,8 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
+  @type("uint8") stacks: number = 0
+  @type("uint8") stacksRequired: number = 0
   dodge: number = 0
   deathCount: number = 0
   evolutions: Pkm[] = []
@@ -380,6 +382,7 @@ export class Pokemon extends Schema implements IPokemon {
 
   addMaxHP(amount: number, player: Player | undefined) {
     this.hp = min(1)(this.hp + amount)
+    this.maxHP = this.hp
     if (this.hp >= 1500 && player) {
       player.titles.add(Title.GIANT)
     }
@@ -7407,9 +7410,8 @@ export class Primeape extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.ANNIHILAPE
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.atk >= 30
-  )
+  evolutionRule = new StackBasedEvolutionRule()
+  stacksRequired = 10
   hp = 240
   atk = 20
   speed = 54
@@ -9020,10 +9022,8 @@ export class Poipole extends Pokemon {
   range = 1
   skill = Ability.FELL_STINGER
   passive = Passive.POISON_PIN
-
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) => pokemon.hp >= 200
-  )
+  evolutionRule = new StackBasedEvolutionRule()
+  stacksRequired: number = 10
 }
 
 export class Naganadel extends Pokemon {
@@ -11550,7 +11550,8 @@ export class Chingling extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.CHIMECHO
-  evolutionRule = new StackBasedEvolutionRule(30)
+  evolutionRule = new StackBasedEvolutionRule()
+  stacksRequired = 10
   hp = 150
   atk = 10
   speed = 46
@@ -14401,7 +14402,8 @@ export class Cosmog extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.LIGHT])
   rarity = Rarity.UNIQUE
   evolution = Pkm.COSMOEM
-  evolutionRule = new StackBasedEvolutionRule(10)
+  evolutionRule = new StackBasedEvolutionRule()
+  stacksRequired = 10
   stars = 1
   hp = 100
   atk = 5
@@ -14419,7 +14421,7 @@ export class Cosmoem extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolutions = [Pkm.SOLGALEO, Pkm.LUNALA]
-  evolutionRule = new StackBasedEvolutionRule(10, (pokemon, player) => {
+  evolutionRule = new StackBasedEvolutionRule((pokemon, player) => {
     if (
       pokemon.positionX === player.lightX &&
       pokemon.positionY === player.lightY &&
@@ -14428,6 +14430,7 @@ export class Cosmoem extends Pokemon {
       return Pkm.SOLGALEO
     else return Pkm.LUNALA
   })
+  stacksRequired = 10
   onAcquired(player: Player) {
     this.hp -= 200 - 100 // revert hp buffs of cosmog
   }

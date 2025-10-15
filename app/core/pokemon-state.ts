@@ -1,4 +1,5 @@
 import Player from "../models/colyseus-models/player"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../models/effects"
 import { IPokemonEntity, Transfer } from "../types"
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
@@ -12,6 +13,7 @@ import {
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
+import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
@@ -705,6 +707,16 @@ export default abstract class PokemonState {
 
         if (pokemon.passive === Passive.PRIMEAPE) {
           pokemon.applyStat(Stat.ATK, 1, true)
+          const pokemonEvolved =
+            pokemon.refToBoardPokemon.evolutionRule.addStack(
+              pokemon.refToBoardPokemon as Pokemon,
+              pokemon.player as Player,
+              pokemon.simulation.stageLevel
+            )
+          if (pokemonEvolved && pokemon.name === Pkm.PRIMEAPE) {
+            pokemon.index = PkmIndex[Pkm.ANNIHILAPE]
+            pokemon.name = Pkm.ANNIHILAPE
+          }
         }
       }
 

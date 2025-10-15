@@ -27,13 +27,10 @@ export abstract class EvolutionRule {
     stageLevel: number
   ): boolean
   abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
-  divergentEvolution?: DivergentEvolution
-  stacks: number
-  stacksRequired?: number
+  divergentEvolution?: DivergentEvolution  
 
   constructor(divergentEvolution?: DivergentEvolution) {
     if (divergentEvolution) this.divergentEvolution = divergentEvolution
-    this.stacks = 0
   }
 
   getEvolution(
@@ -82,8 +79,8 @@ export abstract class EvolutionRule {
     player: Player,
     stageLevel: number
   ) {
-    this.stacks++
-    //logger.debug(`${pokemon.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
+    pokemon.stacks++
+    //logger.debug(`${pokemon.name} gained a stack (${pokemon.stacks}/${pokemon.stacksRequired})`)
     return this.tryEvolve(pokemon, player, stageLevel)
   }
 }
@@ -259,10 +256,8 @@ export class ItemEvolutionRule extends EvolutionRule {
 }
 
 export class HatchEvolutionRule extends EvolutionRule {
-  evolutionTimer: number
   constructor(divergentEvolution?: DivergentEvolution) {
     super(divergentEvolution)
-    this.evolutionTimer = 0
   }
 
   getHatchTime(pokemon: Pokemon, player: Player): number {
@@ -276,7 +271,7 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 
   updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
-    this.evolutionTimer += 1
+    pokemon.stacks++
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
@@ -288,9 +283,9 @@ export class HatchEvolutionRule extends EvolutionRule {
       }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
       const hatchTime = this.getHatchTime(pokemon, player)
-      if (this.evolutionTimer >= hatchTime) {
+      if (pokemon.stacks >= hatchTime) {
         pokemon.action = PokemonActionState.HOP
-      } else if (this.evolutionTimer >= hatchTime - 1) {
+      } else if (pokemon.stacks >= hatchTime - 1) {
         pokemon.action = PokemonActionState.EMOTE
       } else {
         pokemon.action = PokemonActionState.IDLE
@@ -300,11 +295,12 @@ export class HatchEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
-    return this.evolutionTimer >= this.getHatchTime(pokemon, player)
+    pokemon.stacksRequired = this.getHatchTime(pokemon, player)
+    return pokemon.stacks >= pokemon.stacksRequired
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    this.evolutionTimer = 0 // prevent trying to evolve twice in a row
+    pokemon.stacks = 0 // prevent trying to evolve twice in a row
     const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
@@ -377,27 +373,13 @@ export function carryOverPermanentStats(
   }
 }
 
-export class StackBasedEvolutionRule extends EvolutionRule {
-  stacksRequired: number
-  constructor(
-    stacksRequired: number,
-    divergentEvolution?: DivergentEvolution
-  ) {
-    super(divergentEvolution)
-    this.stacksRequired = stacksRequired
-  }
-
-  canEvolve(pokemon: Pokemon): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false    
-    return this.stacks >= this.stacksRequired
-  }
-
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
-    const pokemonEvolved = player.transformPokemon(
-      pokemon,
-      pokemonEvolutionName
+export class StackBasedEvolutionRule extends ConditionBasedEvolutionRule {
+  constructor(divergentEvolution?: DivergentEvolution) {
+    super(
+      (pokemon: Pokemon) => {
+        return pokemon.stacks >= pokemon.stacksRequired
+      },
+      divergentEvolution
     )
-    return pokemonEvolved
   }
 }

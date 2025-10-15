@@ -880,7 +880,8 @@ export default class BoardManager {
           )
           break
 
-        case "hp": {
+        case "hp":
+        case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
@@ -1085,14 +1086,16 @@ export default class BoardManager {
 
     if (isRedPlayer) {
       // avatar goes first in the portal
-      this.scene.tweens.add({
-        targets: this.playerAvatar,
-        ease: Phaser.Math.Easing.Quadratic.In,
-        duration: 700,
-        scale: 0,
-        x: portalX,
-        y: portalY
-      })
+      if (this.playerAvatar != null) {
+        this.scene.tweens.add({
+          targets: this.playerAvatar,
+          ease: Phaser.Math.Easing.Quadratic.In,
+          duration: 700,
+          scale: 0,
+          x: portalX,
+          y: portalY
+        })
+      }
 
       // move board pokemons into the portal
       const pokemonsToTeleport = [...this.pokemons.values()].filter(
