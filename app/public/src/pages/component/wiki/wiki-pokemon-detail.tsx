@@ -20,10 +20,11 @@ export default function WikiPokemonDetail(props: {
   selectPkm: (pkm: Pkm) => void
 }) {
   const { t } = useTranslation()
-  const pokemon = useMemo(
-    () => PokemonFactory.createPokemonFromName(props.pokemon),
-    [props.pokemon]
-  )
+  const pokemon = useMemo(() => {
+    const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
+    pokemon.pp = pokemon.maxPP
+    return pokemon
+  }, [props.pokemon])
   const pokemonData = useMemo(
     () => getPokemonData(props.pokemon),
     [props.pokemon]
@@ -61,7 +62,7 @@ export default function WikiPokemonDetail(props: {
   return (
     <div className="wiki-pokemon-detail">
       <div className="game-pokemon-detail-tooltip my-box">
-        <GamePokemonDetail pokemon={pokemon} />
+        <GamePokemonDetail pokemon={pokemon} origin="wiki" />
       </div>
       <dl>
         <dt>{t("name")}</dt>
@@ -90,38 +91,40 @@ export default function WikiPokemonDetail(props: {
             <SynergyIcon key={"img" + type} type={type} />
           ))}
         </dd>
-        {prevolution && <>
-          <dt>{t("evolves_from")}</dt>
-          <dd>
-            <div
-              onClick={() => props.selectPkm(prevolution)}
-              style={{ cursor: "pointer" }}
-            >
-              <img
-                src={getPortraitSrc(PkmIndex[prevolution])}
-                style={{ marginRight: "0.5em" }}
-              />
-              <span className="pokemon-name">{t(`pkm.${prevolution}`)}</span>
-            </div>
-          </dd>
-        </>}
+        {prevolution && (
+          <>
+            <dt>{t("evolves_from")}</dt>
+            <dd>
+              <div
+                onClick={() => props.selectPkm(prevolution)}
+                style={{ cursor: "pointer" }}
+              >
+                <img
+                  src={getPortraitSrc(PkmIndex[prevolution])}
+                  style={{ marginRight: "0.5em" }}
+                />
+                <span className="pokemon-name">{t(`pkm.${prevolution}`)}</span>
+              </div>
+            </dd>
+          </>
+        )}
         <dt>{t("evolution")}</dt>
         <dd>
           {evolutions.length === 0
             ? "No evolution"
             : evolutions.map((evolution) => (
-              <div
-                key={evolution}
-                onClick={() => props.selectPkm(evolution)}
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  src={getPortraitSrc(PkmIndex[evolution])}
-                  style={{ marginRight: "0.5em" }}
-                />
-                <span className="pokemon-name">{t(`pkm.${evolution}`)}</span>
-              </div>
-            ))}
+                <div
+                  key={evolution}
+                  onClick={() => props.selectPkm(evolution)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img
+                    src={getPortraitSrc(PkmIndex[evolution])}
+                    style={{ marginRight: "0.5em" }}
+                  />
+                  <span className="pokemon-name">{t(`pkm.${evolution}`)}</span>
+                </div>
+              ))}
         </dd>
         <dt>{t("portrait_credit")}</dt>
         <Credits for="portrait" index={pokemonData.index} />

@@ -192,7 +192,7 @@ export function WikiType(props: { type: Synergy }) {
                             id={`pokemon-detail-${p.index}`}
                             className="custom-theme-tooltip game-pokemon-detail-tooltip"
                           >
-                            <GamePokemonDetail pokemon={p.name} />
+                            <GamePokemonDetail pokemon={p.name} origin="wiki" />
                           </Tooltip>,
                           document.querySelector(".wiki-modal")!
                         )}
@@ -291,7 +291,7 @@ export function WikiAllTypes() {
             className="custom-theme-tooltip game-pokemon-detail-tooltip"
             float
           >
-            <GamePokemonDetail pokemon={hoveredPokemon} />
+            <GamePokemonDetail pokemon={hoveredPokemon} origin="wiki" />
           </Tooltip>,
           document.querySelector(".wiki-modal")!
         )}

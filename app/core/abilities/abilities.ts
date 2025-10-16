@@ -7,7 +7,7 @@ import {
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { IPokemon, IStatus } from "../../types"
+import { IStatus } from "../../types"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -198,8 +198,8 @@ export class BeatUpStrategy extends AbilityStrategy {
           true
         )
         const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-        entity.hp = min(1)(Math.round(houndour.hp * scale))
-        entity.life = entity.hp
+        entity.maxHP = min(1)(Math.round(houndour.maxHP * scale))
+        entity.hp = entity.maxHP
       }
     }
   }
@@ -272,7 +272,7 @@ export class MindBlownStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     target.handleSpecialDamage(
-      pokemon.life / 2,
+      pokemon.hp / 2,
       board,
       AttackType.SPECIAL,
       pokemon,
@@ -393,7 +393,7 @@ export class SlackOffStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.status.clearNegativeStatus()
     const healFactor = 0.3
-    pokemon.handleHeal(pokemon.hp * healFactor, pokemon, 1, crit)
+    pokemon.handleHeal(pokemon.maxHP * healFactor, pokemon, 1, crit)
     pokemon.status.triggerSleep(3000, pokemon)
   }
 }
@@ -499,7 +499,7 @@ export class IllusionStrategy extends AbilityStrategy {
     if (target && target.canBeCopied) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
-      pokemon.range = target.range + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
+      pokemon.range = target.range
       pokemon.def = Math.max(pokemon.def, target.def)
       pokemon.speDef = Math.max(pokemon.speDef, target.speDef)
     }
@@ -679,7 +679,7 @@ export class CrabHammerStrategy extends AbilityStrategy {
     crit = chance((pokemon.critChance + 30) / 100, pokemon) // can crit by default with a 30% increased crit chance
     super.process(pokemon, board, target, crit)
     let attackType = AttackType.SPECIAL
-    if (target.life / target.hp < 0.3) {
+    if (target.hp / target.maxHP < 0.3) {
       damage = 9999
       attackType = AttackType.TRUE
     }
@@ -720,7 +720,7 @@ export class DracoEnergyStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     target.handleSpecialDamage(
-      pokemon.life,
+      pokemon.hp,
       board,
       AttackType.SPECIAL,
       pokemon,
@@ -741,7 +741,7 @@ export class DynamaxCannonStrategy extends AbilityStrategy {
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
-          Math.ceil(cell.value.hp * 0.5),
+          Math.ceil(cell.value.maxHP * 0.5),
           board,
           AttackType.SPECIAL,
           pokemon,
@@ -871,7 +871,7 @@ export class SchoolingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 0.1 * pokemon.hp
+    const damage = 0.1 * pokemon.maxHP
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
@@ -1240,7 +1240,7 @@ export class ChloroblastStrategy extends AbilityStrategy {
 
     if (!pokemon.items.has(Item.PROTECTIVE_PADS)) {
       pokemon.handleSpecialDamage(
-        0.5 * pokemon.hp,
+        0.5 * pokemon.maxHP,
         board,
         AttackType.TRUE,
         pokemon,
@@ -1628,7 +1628,7 @@ export class FutureSightStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(() => {
         for (const tg of targets) {
-          if (tg.life > 0) {
+          if (tg.hp > 0) {
             tg.handleSpecialDamage(
               damage,
               board,
@@ -1745,15 +1745,15 @@ export class ShadowCloneStrategy extends AbilityStrategy {
         pokemon.team,
         true
       )
-      clone.hp = min(1)(
+      clone.maxHP = min(1)(
         Math.ceil(
           0.5 *
-            pokemon.hp *
+            pokemon.maxHP *
             (1 + pokemon.ap / 100) *
             (crit ? pokemon.critPower : 1)
         )
       )
-      clone.life = clone.hp
+      clone.hp = clone.maxHP
       if (itemStolen) clone.addItem(itemStolen)
     }
   }
@@ -2764,7 +2764,7 @@ export class WishStrategy extends AbilityStrategy {
         (cell): cell is PokemonEntity =>
           cell != null && cell.team === pokemon.team
       )
-      .sort((a, b) => b.hp - b.life - (a.hp - a.life))
+      .sort((a, b) => b.maxHP - b.hp - (a.maxHP - a.hp))
       .slice(0, count)
 
     for (const ally of allies) {
@@ -2783,8 +2783,8 @@ export class LunarBlessingStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
-      if (ally && pokemon.team == ally.team && ally.life < ally.hp) {
-        ally.handleHeal(0.25 * ally.hp, pokemon, 1, crit)
+      if (ally && pokemon.team == ally.team && ally.hp < ally.maxHP) {
+        ally.handleHeal(0.25 * ally.maxHP, pokemon, 1, crit)
         ally.status.clearNegativeStatus()
       }
     })
@@ -2804,7 +2804,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
     const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
 
     if (lowestHealthAlly) {
@@ -3336,7 +3336,7 @@ export class NutrientsStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
@@ -4533,7 +4533,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
         crit
       )
     }
-    if (target.life <= 0) {
+    if (target.hp <= 0) {
       pokemon.addPP(40, pokemon, 0, false)
     }
   }
@@ -4610,7 +4610,7 @@ export class SkyAttackStrategy extends AbilityStrategy {
 
       pokemon.commands.push(
         new DelayedCommand(() => {
-          if (destination.target?.life > 0) {
+          if (destination.target?.hp > 0) {
             const damage = 120
             destination.target.handleSpecialDamage(
               damage,
@@ -4652,7 +4652,7 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
 
       pokemon.commands.push(
         new DelayedCommand(() => {
-          if (destination.target?.life > 0) {
+          if (destination.target?.hp > 0) {
             const damage = 120
             destination.target.handleSpecialDamage(
               damage,
@@ -4692,8 +4692,8 @@ export class FlyingPressStrategy extends AbilityStrategy {
 
       pokemon.commands.push(
         new DelayedCommand(() => {
-          if (destination.target && destination.target.life > 0) {
-            const damage = 0.5 * pokemon.hp
+          if (destination.target && destination.target.hp > 0) {
+            const damage = 0.5 * pokemon.maxHP
             destination.target.handleSpecialDamage(
               damage,
               board,
@@ -5298,7 +5298,7 @@ export class CounterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.max(1, Math.round((pokemon.hp - pokemon.life) * 0.5))
+    const damage = Math.max(1, Math.round((pokemon.maxHP - pokemon.hp) * 0.5))
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
@@ -5602,7 +5602,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
           if (
             enemy &&
             enemy.value &&
-            enemy.value.life > 0 &&
+            enemy.value.hp > 0 &&
             !pokemon.simulation.finished
           ) {
             propagate(enemy.value)
@@ -5903,7 +5903,7 @@ export class LinkCableStrategy extends AbilityStrategy {
 
     pokemon.commands.push(
       new DelayedCommand(() => {
-        if (pokemon.life <= 0) return
+        if (pokemon.hp <= 0) return
         const partner = board.find(
           (x, y, entity) =>
             entity.skill === Ability.LINK_CABLE &&
@@ -6099,7 +6099,7 @@ export class AstralBarrageStrategy extends AbilityStrategy {
             targetX: randomTarget.positionX,
             targetY: randomTarget.positionY
           })
-          if (randomTarget?.life > 0) {
+          if (randomTarget?.hp > 0) {
             randomTarget.handleSpecialDamage(
               damagePerGhost,
               board,
@@ -6339,7 +6339,7 @@ export class MagnetRiseStrategy extends AbilityStrategy {
         .map((cell) => cell.value)
         .filter((mon) => mon && mon.team === pokemon.team) as PokemonEntity[]
     )
-      .sort((a, b) => a.life - b.life)
+      .sort((a, b) => a.hp - b.hp)
       .slice(0, nbAlliesBuffed)
 
     alliesBuffed.push(pokemon)
@@ -6448,7 +6448,7 @@ export class ParabolicChargeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const heal = pokemon.stars > 1 ? 50 : 25
-    const overHeal = Math.max(0, heal + pokemon.life - pokemon.hp)
+    const overHeal = Math.max(0, heal + pokemon.hp - pokemon.maxHP)
     pokemon.handleHeal(heal, pokemon, 0, false)
     target.handleSpecialDamage(
       (pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25) + overHeal,
@@ -6558,7 +6558,7 @@ export class AssuranceStrategy extends AbilityStrategy {
     const damage = pokemon.stars === 3 ? 100 : pokemon.stars === 2 ? 50 : 25
 
     target.handleSpecialDamage(
-      pokemon.life / pokemon.hp < 0.5 ? damage * 2 : damage,
+      pokemon.hp / pokemon.maxHP < 0.5 ? damage * 2 : damage,
       board,
       AttackType.SPECIAL,
       pokemon,
@@ -7017,7 +7017,7 @@ export class NightShadeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = Math.ceil(
       ([0.25, 0.33, 0.5][pokemon.stars - 1] ?? 0.5) *
-        target.hp *
+        target.maxHP *
         (1 + (0.5 * pokemon.ap) / 100)
     )
     target.handleSpecialDamage(
@@ -7039,7 +7039,7 @@ export class SuperFangStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.ceil(0.25 * target.hp * (1 + (0.5 * pokemon.ap) / 100))
+    const damage = Math.ceil(0.25 * target.maxHP * (1 + (0.5 * pokemon.ap) / 100))
     target.handleSpecialDamage(
       damage,
       board,
@@ -7367,7 +7367,7 @@ export class BodySlamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.round(0.3 * pokemon.hp * (1 + pokemon.ap / 100))
+    const damage = Math.round(0.3 * pokemon.maxHP * (1 + pokemon.ap / 100))
     target.handleSpecialDamage(
       damage,
       board,
@@ -7625,7 +7625,7 @@ export class RecoverStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.handleHeal(0.25 * pokemon.hp, pokemon, 1, crit)
+    pokemon.handleHeal(0.25 * pokemon.maxHP, pokemon, 1, crit)
   }
 }
 
@@ -7642,7 +7642,7 @@ export class TranseStrategy extends AbilityStrategy {
     pokemon.name = Pkm.DARMANITAN
     pokemon.changePassive(Passive.DARMANITAN)
     pokemon.skill = Ability.HEADBUTT
-    pokemon.handleHeal(Math.round(0.3 * pokemon.hp), pokemon, 0, false)
+    pokemon.handleHeal(Math.round(0.3 * pokemon.maxHP), pokemon, 0, false)
     pokemon.addAttack(10, pokemon, 0, false)
     pokemon.addSpeed(20, pokemon, 0, false)
     pokemon.addDefense(-10, pokemon, 0, false)
@@ -7665,8 +7665,8 @@ export class CurseStrategy extends AbilityStrategy {
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
     ) as PokemonEntity[]
-    const highestHp = Math.max(...enemies.map((p) => p.hp))
-    const enemiesWithHighestHP = enemies.filter((p) => p.hp === highestHp)
+    const highestHp = Math.max(...enemies.map((p) => p.maxHP))
+    const enemiesWithHighestHP = enemies.filter((p) => p.maxHP === highestHp)
     const cursedEnemy = pickRandomIn(enemiesWithHighestHP)
     if (cursedEnemy) {
       const factor = 0.2
@@ -7690,7 +7690,7 @@ export class DoomDesireStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     pokemon.commands.push(
       new DelayedCommand(() => {
-        if (target && target.life > 0) {
+        if (target && target.hp > 0) {
           pokemon.broadcastAbility({
             targetX: target.positionX,
             targetY: target.positionY
@@ -7736,7 +7736,7 @@ export class CrushGripStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.round(50 + (target.life / target.hp) * 200)
+    const damage = Math.round(50 + (target.hp / target.maxHP) * 200)
     target.handleSpecialDamage(
       damage,
       board,
@@ -7915,7 +7915,7 @@ export class ShedTailStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
 
     if (lowestHealthAlly) {
       lowestHealthAlly.addShield(80, pokemon, 1, crit)
@@ -7952,7 +7952,7 @@ export class ShadowPunchStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team !== pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
 
     if (lowestHealthEnemy) {
       const coord = pokemon.simulation.getClosestFreeCellToPokemonEntity(
@@ -8586,7 +8586,7 @@ export class SheerColdStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     let executeChance =
       ([0.1, 0.2, 0.3][pokemon.stars - 1] ?? 0.3) *
-      (1 + min(0)((pokemon.life - target.life) / target.life))
+      (1 + min(0)((pokemon.hp - target.hp) / target.hp))
     if (target.types.has(Synergy.ICE)) executeChance = 0
     else if (target.status.freeze) executeChance = 1
 
@@ -8758,7 +8758,7 @@ export class PollenPuffStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life - b.life)[0]
+    ).sort((a, b) => a.hp - b.hp)[0]
 
     if (lowestHealthAlly) {
       const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
@@ -8943,7 +8943,7 @@ export class CrunchStrategy extends AbilityStrategy {
       true
     )
     if (death) {
-      pokemon.handleHeal(Math.ceil(0.5 * target.hp), pokemon, 0, false)
+      pokemon.handleHeal(Math.ceil(0.5 * target.maxHP), pokemon, 0, false)
     }
   }
 }
@@ -9124,7 +9124,7 @@ export class TorchSongStrategy extends AbilityStrategy {
             targetY: randomTarget.positionY
           })
           pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
-          if (randomTarget?.life > 0) {
+          if (randomTarget?.hp > 0) {
             randomTarget.handleSpecialDamage(
               damagePerFlame,
               board,
@@ -9330,9 +9330,9 @@ export class HeavySlamStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     let damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
-    if (pokemon.hp > target.hp) {
+    if (pokemon.maxHP > target.maxHP) {
       damage = Math.round(
-        damage * (1 + (0.5 * (pokemon.hp - target.hp)) / target.hp)
+        damage * (1 + (0.5 * (pokemon.maxHP - target.maxHP)) / target.maxHP)
       )
     }
     pokemon.addShield(shield, pokemon, 0, false)
@@ -9435,7 +9435,7 @@ export class BounceStrategy extends AbilityStrategy {
         new DelayedCommand(() => {
           const destination =
             board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-          if (destination && pokemon.hp > 0) {
+          if (destination && pokemon.maxHP > 0) {
             pokemon.broadcastAbility({})
             pokemon.moveTo(destination.x, destination.y, board)
             const adjacentCells = board.getAdjacentCells(
@@ -9969,7 +9969,7 @@ export class EntrainmentStrategy extends AbilityStrategy {
         []
       board.forEach(
         (x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && value.team !== pokemon.team && value.life > 0) {
+          if (value && value.team !== pokemon.team && value.hp > 0) {
             potentialTargets.push({ x, y, value })
           }
         }
@@ -10257,7 +10257,7 @@ export class ForcePalmStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const additionalDamage = target.status.paralysis ? 40 : 0
-    const damage = Math.round(60 + target.hp * 0.1 + additionalDamage)
+    const damage = Math.round(60 + target.maxHP * 0.1 + additionalDamage)
     if (target.status.paralysis) {
       let farthestEmptyCell: Cell | null = null
       effectInLine(board, pokemon, target, (cell) => {
@@ -10414,7 +10414,7 @@ export class WiseYawnStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life - b.life)[0]
+    ).sort((a, b) => a.hp - b.hp)[0]
 
     if (lowestHealthAlly) {
       // Find enemies targeting the lowest health ally
@@ -10457,7 +10457,7 @@ export class ShoreUpStrategy extends AbilityStrategy {
     if (pokemon.simulation.weather === Weather.SANDSTORM) {
       healFactor += 0.1
     }
-    pokemon.handleHeal(healFactor * pokemon.hp, pokemon, 1, crit)
+    pokemon.handleHeal(healFactor * pokemon.maxHP, pokemon, 1, crit)
   }
 }
 
@@ -11010,7 +11010,7 @@ export class BoneArmorStrategy extends AbilityStrategy {
       board.cells.filter(
         (cell) => cell && cell.team !== pokemon.team
       ) as PokemonEntity[]
-    ).sort((a, b) => a.life / a.hp - b.life / b.hp)[0]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
 
     if (lowestHealthEnemy) {
       const coord = pokemon.simulation.getClosestFreeCellToPokemonEntity(
@@ -11090,9 +11090,9 @@ export class RageStrategy extends AbilityStrategy {
     pokemon.status.triggerRage(rageDuration, pokemon)
 
     //gain 1 attack for each 10% of max HP missing
-    const missingHp = pokemon.hp - pokemon.life
+    const missingHp = pokemon.maxHP - pokemon.hp
     const atkBoost =
-      pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.hp / 10))
+      pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.maxHP / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
   }
 }
@@ -11132,7 +11132,7 @@ export class TauntStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     // Gain 25% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
-    const shield = 0.25 * pokemon.hp
+    const shield = 0.25 * pokemon.maxHP
     pokemon.addShield(shield, pokemon, 0.5, crit)
     const enemiesTaunted = board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
@@ -11174,7 +11174,7 @@ export class CutStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     //Deal [40,SP]% of target max HP as special damage. Inflicts WOUND for 5 seconds
-    const damage = 0.4 * target.hp
+    const damage = 0.4 * target.maxHP
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     target.status.triggerWound(5000, target, pokemon)
   }
@@ -11211,7 +11211,7 @@ export class FlyStrategy extends AbilityStrategy {
 
       pokemon.commands.push(
         new DelayedCommand(() => {
-          if (destination.target && destination.target.life > 0) {
+          if (destination.target && destination.target.hp > 0) {
             const damage = 4 * pokemon.atk
             destination.target.handleSpecialDamage(
               damage,
@@ -11343,7 +11343,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       // If a pillar is already on the board, jumps to it and throw the pillar at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL
       const pillarX = pillar.positionX
       const pillarY = pillar.positionY
-      const remainingHp = pillar.life
+      const remainingHp = pillar.hp
       const pillarType = pillar.name
       const team =
         pillar.team === Team.BLUE_TEAM
@@ -11406,7 +11406,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
                   targetY: landingY
                 })
 
-                if (enemyHit && enemyHit.life > 0) {
+                if (enemyHit && enemyHit.hp > 0) {
                   enemyHit.handleSpecialDamage(
                     damage,
                     board,
@@ -11484,7 +11484,7 @@ export class DarkLariatStrategy extends AbilityStrategy {
       pokemon.commands.push(
         new DelayedCommand(
           () => {
-            if (target.life > 0) {
+            if (target.hp > 0) {
               const damage = 1 * pokemon.atk
               target.handleSpecialDamage(
                 damage,
@@ -11534,7 +11534,7 @@ export class BoltBeakStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.commands.push(
       new DelayedCommand(() => {
-        if (target && target.life > 0) {
+        if (target && target.hp > 0) {
           target.handleSpecialDamage(
             target.pp > 40 ? 160 : 80,
             board,
@@ -11558,7 +11558,7 @@ export class FreezeDryStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.commands.push(
       new DelayedCommand(() => {
-        if (target && target.life > 0) {
+        if (target && target.hp > 0) {
           const damage = 70 * (1 + pokemon.ap / 100) + pokemon.speDef
           const killDamage = 30 * (1 + pokemon.ap / 100) + pokemon.speDef * 0.5
           const x = target.positionX
@@ -11610,7 +11610,7 @@ export class DragonPulseStrategy extends AbilityStrategy {
 
     pokemon.commands.push(
       new DelayedCommand(() => {
-        if (target && target.life > 0) {
+        if (target && target.hp > 0) {
           target.handleSpecialDamage(
             damage,
             board,
@@ -11816,7 +11816,7 @@ export class SpicyExtractStrategy extends AbilityStrategy {
           cell !== undefined &&
           cell !== pokemon &&
           cell.team === pokemon.team &&
-          cell.life > 0
+          cell.hp > 0
       )
       .sort(
         (a, b) =>
@@ -11878,9 +11878,9 @@ export class SwallowStrategy extends AbilityStrategy {
     // Store power and boosts its DEF and SPE_DEF by 1 up to 3 times.
     // If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack.
     // If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to the 3 cells in front
-    if (pokemon.life < pokemon.hp * 0.25 && pokemon.count.ult > 0) {
+    if (pokemon.hp < pokemon.maxHP * 0.25 && pokemon.count.ult > 0) {
       const heal =
-        (([0, 20, 40, 60][pokemon.count.ult] ?? 60) * pokemon.hp) / 100
+        (([0, 20, 40, 60][pokemon.count.ult] ?? 60) * pokemon.maxHP) / 100
       pokemon.handleHeal(heal, pokemon, 1, crit)
       pokemon.count.ult = 0
       pokemon.broadcastAbility({ skill: Ability.RECOVER })
@@ -11918,7 +11918,7 @@ export class StockpileStrategy extends AbilityStrategy {
 
     if (pokemon.count.ult % 4 === 0) {
       // If over 3 stacks, spit up, propelling the user to the backline and dealing 50% of max HP as SPECIAL to the target
-      const damage = Math.ceil(0.5 * pokemon.hp)
+      const damage = Math.ceil(0.5 * pokemon.maxHP)
       target.handleSpecialDamage(
         damage,
         board,
@@ -11941,8 +11941,8 @@ export class StockpileStrategy extends AbilityStrategy {
         pokemon.moveTo(corner.x, corner.y, board)
       }
       // retrieve base stats
-      pokemon.hp = pokemon.baseHP
-      pokemon.life = Math.min(pokemon.life, pokemon.hp)
+      pokemon.maxHP = pokemon.baseHP
+      pokemon.hp = Math.min(pokemon.hp, pokemon.maxHP)
       pokemon.addSpeed(30, pokemon, 0, false)
     } else {
       pokemon.addMaxHP(50, pokemon, 1, crit)
@@ -12015,8 +12015,8 @@ export class DragonClawStrategy extends AbilityStrategy {
     let lowestHpTarget: PokemonEntity | undefined
     for (const cell of cells) {
       if (cell.value && cell.value.team !== pokemon.team) {
-        if (cell.value.hp < lowestHp) {
-          lowestHp = cell.value.hp
+        if (cell.value.maxHP < lowestHp) {
+          lowestHp = cell.value.maxHP
           lowestHpTarget = cell.value
         }
       }
@@ -12068,7 +12068,7 @@ export class HornLeechStrategy extends AbilityStrategy {
     )
     // heal for 50% of the damage dealt
     const heal = Math.round(takenDamage * 0.5)
-    const overheal = min(0)(heal - (pokemon.hp - pokemon.life))
+    const overheal = min(0)(heal - (pokemon.maxHP - pokemon.hp))
     pokemon.handleHeal(heal, pokemon, 0, false)
     if (overheal > 0) {
       pokemon.addShield(Math.round(overheal * 0.5), pokemon, 0, false)
@@ -12120,7 +12120,7 @@ export class FilletAwayStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     // lose 50% of max HP and gain 10 attack and 20 speed
-    const lostMaxHP = Math.floor(pokemon.hp * 0.3)
+    const lostMaxHP = Math.floor(pokemon.maxHP * 0.3)
     pokemon.addMaxHP(-lostMaxHP, pokemon, 0, false)
 
     pokemon.addAttack(10, pokemon, 1, crit)
@@ -12539,7 +12539,7 @@ export class BitterBladeStrategy extends AbilityStrategy {
         )
       }
     }
-    pokemon.handleHeal(pokemon.hp * 0.1 * nbEnemiesHit, pokemon, 0, false)
+    pokemon.handleHeal(pokemon.maxHP * 0.1 * nbEnemiesHit, pokemon, 0, false)
   }
 }
 
@@ -13554,7 +13554,7 @@ export class TerrainPulseStrategy extends AbilityStrategy {
     pokemonsWithField.forEach((field, pkm) => {
       switch (field) {
         case "grassField":
-          pkm.handleHeal(0.05 * pkm.hp, pokemon, 1, crit)
+          pkm.handleHeal(0.05 * pkm.maxHP, pokemon, 1, crit)
           break
         case "electricField":
           pkm.addSpeed(10, pokemon, 1, crit)
@@ -13563,7 +13563,7 @@ export class TerrainPulseStrategy extends AbilityStrategy {
           pkm.addPP(10, pokemon, 1, crit)
           break
         case "fairyField":
-          pkm.addShield(0.05 * pkm.hp, pokemon, 1, crit)
+          pkm.addShield(0.05 * pkm.maxHP, pokemon, 1, crit)
           break
       }
     })
@@ -14022,7 +14022,7 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
     const damage = [30, 60, 90, 120][pokemon.stars - 1] ?? 120
 
     // Recoil damage is 20% of base HP
-    const recoil = Math.round(pokemon.hp * 0.1)
+    const recoil = Math.round(pokemon.maxHP * 0.1)
 
     // Bonus damage per fallen ally scales with stars: 1★=5, 2★=10, 3★=15, 4★=20
     const damagePerFallenAlly = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
@@ -14131,7 +14131,7 @@ export class EerieSpellStrategy extends AbilityStrategy {
       currentTarget = board.cells
         .filter((c) => c instanceof PokemonEntity)
         .filter((c) => !visited.has(c.id))
-        .sort((a, b) => a.life - b.life)[0]
+        .sort((a, b) => a.hp - b.hp)[0]
     }
   }
 }
@@ -14188,7 +14188,7 @@ export class ShellSideArmStrategy extends AbilityStrategy {
       currentTarget = board.cells
         .filter((c) => c instanceof PokemonEntity)
         .filter((c) => !visited.has(c.id))
-        .sort((a, b) => b.life - a.life)[0]
+        .sort((a, b) => b.hp - a.hp)[0]
     }
   }
 }
@@ -14210,7 +14210,7 @@ export class TripleDiveStrategy extends AbilityStrategy {
         (entity): entity is PokemonEntity =>
           entity instanceof PokemonEntity && entity.team !== pokemon.team
       )
-      .sort((a, b) => a.life - b.life)
+      .sort((a, b) => a.hp - b.hp)
       .slice(0, 3)
 
     // Perform triple dive with 400ms delays
@@ -14296,7 +14296,7 @@ export class MoonblastStrategy extends AbilityStrategy {
             (entity): entity is PokemonEntity =>
               entity instanceof PokemonEntity &&
               entity.team !== pokemon.team &&
-              entity.life > 0
+              entity.hp > 0
           )
           .sort(
             (a, b) =>

@@ -74,3 +74,34 @@
 .after-menu .player-team-synergies img:not(:first-of-type) {
   margin-left: 0.5em;
 }
+
+.player-team-pokemons {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 8px;
+  margin: 0;
+}
+
+.player-team-pokemons li {
+  position: relative;
+}
+
+.player-team-pokemons .pokemon-portrait {
+  width: 60px;
+  height: 60px;
+  margin: 10px 0;
+}
+
+.player-team-pokemons .pokemon-items {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  display: flex;
+}
+
+.player-team-pokemons .pokemon-items img {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+}

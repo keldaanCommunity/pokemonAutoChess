@@ -1362,6 +1362,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             })
             this.room.clock.setTimeout(() => {
               player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+              player.board.forEach((pokemon) => {
+                if (
+                  pokemon.evolutionRule instanceof ConditionBasedEvolutionRule
+                ) {
+                  pokemon.evolutionRule.tryEvolve(
+                    pokemon,
+                    player,
+                    this.state.stageLevel
+                  )
+                }
+              })
             }, 1000)
 
             if (

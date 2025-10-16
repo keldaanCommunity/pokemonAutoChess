@@ -1,0 +1,39 @@
+.game-tooltip-bar-text {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  filter: drop-shadow(0 0 2px black);
+  color: #fff;
+}
+
+.game-tooltip-bar-outer {
+  position: relative;
+  height: 16px;
+  background: var(--color-bg-secondary);
+  overflow: hidden;
+  display: flex;
+  border: 1px solid #00000080;
+}
+
+.game-tooltip-bar-inner {
+  height: 100%;
+  transition: width 0.3s;
+  flex: 0 0 auto;
+}
+
+.game-tooltip-bar-graduation {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #0004;
+}

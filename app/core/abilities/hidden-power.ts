@@ -118,8 +118,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     if (!unown.isGhostOpponent && unown.player) {
       const egg = giveRandomEgg(unown.player, false)
       if (!egg) return
-      egg.evolutionRule.evolutionTimer =
-        egg.evolutionRule.getHatchTime(egg, unown.player) - 1
+      egg.stacksRequired = egg.evolutionRule.getHatchTime(egg, unown.player) - 1
     }
   }
 }
@@ -172,7 +171,7 @@ export class HiddenPowerHStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          pokemon.handleHeal(pokemon.hp - pokemon.life, unown, 1, crit)
+          pokemon.handleHeal(pokemon.maxHP - pokemon.hp, unown, 1, crit)
         }
       }
     )

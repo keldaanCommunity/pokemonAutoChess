@@ -5,8 +5,8 @@ import { Pkm } from "../../../../types/enum/Pokemon"
 import { clamp, min } from "../../../../utils/number"
 import { preference } from "../../preferences"
 import GameScene from "../scenes/game-scene"
-import PokemonSprite from "./pokemon"
 import { GameDialog } from "./game-dialog"
+import PokemonSprite from "./pokemon"
 
 export default class PokemonSpecial extends PokemonSprite {
   detail: GameDialog | null = null

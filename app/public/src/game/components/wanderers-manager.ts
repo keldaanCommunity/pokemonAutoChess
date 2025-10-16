@@ -44,7 +44,7 @@ export default class WanderersManager {
       wanderer,
       onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CAUGHT, { id: wanderer.id })
-        this.displayShardGain([pointer.x, pointer.y], unownSprite.index)
+        this.displayShardGain([pointer.x, pointer.y], unownSprite.pokemon.index)
         unownSprite.destroy()
         return true
       }

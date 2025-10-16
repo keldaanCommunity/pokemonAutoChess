@@ -257,7 +257,7 @@ const KubfuOnKillEffect = new OnKillEffect(
       }
     }
 
-    pokemon.refToBoardPokemon.evolutionRule.stacks = max(MAX_BUFFS)(
+    pokemon.refToBoardPokemon.stacks = max(MAX_BUFFS)(
       Math.max(nbBuffsAP, nbBuffsSpeed)
     )
   }
@@ -266,6 +266,7 @@ const KubfuOnKillEffect = new OnKillEffect(
 const HisuianQwilfishOnCastEffect = new OnAbilityCastEffect(
   (pokemon, board) => {
     pokemon.addAbilityPower(1, pokemon, 0, false, true)
+    pokemon.addStack()
   }
 )
 
@@ -320,7 +321,7 @@ export class AccelerationEffect extends OnMoveEffect {
 
 const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
   ({ pokemon }) => {
-    if (pokemon.life / pokemon.hp < 0.5) {
+    if (pokemon.hp / pokemon.maxHP < 0.5) {
       pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       pokemon.name = Pkm.MIMIKYU_BUSTED
       pokemon.changePassive(Passive.MIMIKYU_BUSTED)
@@ -336,7 +337,7 @@ const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
 const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
   ({ pokemon, board }) => {
     if (
-      pokemon.life < 0.3 * pokemon.hp &&
+      pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.DARMANITAN
     ) {
       pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
@@ -380,7 +381,10 @@ const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
 })
 
 const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.passive === Passive.GLIMMORA && pokemon.life < 0.5 * pokemon.hp) {
+  if (
+    pokemon.passive === Passive.GLIMMORA &&
+    pokemon.hp < 0.5 * pokemon.maxHP
+  ) {
     pokemon.changePassive(Passive.NONE)
 
     const cells = new Array<Cell>()
@@ -553,7 +557,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
             if (pokemon.name === Pkm.ZYGARDE_100) return
             pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
             if (this.cellsCount >= 95) {
-              pokemon.handleHeal(0.2 * pokemon.hp, pokemon, 0, false)
+              pokemon.handleHeal(0.2 * pokemon.maxHP, pokemon, 0, false)
               if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
                 pokemon.addDefense(2, pokemon, 0, false)
                 pokemon.addSpecialDefense(2, pokemon, 0, false)
@@ -667,7 +671,7 @@ const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
       pokemon.positionX,
       pokemon.positionY
     )
-    const damage = Math.round(0.5 * pokemon.hp)
+    const damage = Math.round(0.5 * pokemon.maxHP)
     adjcells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -962,49 +966,31 @@ const spiritombWispEffect = new OnSimulationStartEffect(
 )
 
 const chinglingCountCastsEffect = new OnSimulationStartEffect(
-  ({ team, entity, simulation }) => {
+  ({ team, entity }) => {
     if (!entity.player) return
     team.forEach((pkm) => {
       pkm.effectsSet.add(
-        new OnAbilityCastEffect(() => {
-          const pokemonEvolved =
-            entity.refToBoardPokemon.evolutionRule.addStack(
-              entity.refToBoardPokemon as Pokemon,
-              entity.player as Player,
-              simulation.stageLevel
-            )
-          if (pokemonEvolved && entity.name === Pkm.CHINGLING) {
-            entity.index = PkmIndex[Pkm.CHIMECHO]
-            entity.name = Pkm.CHIMECHO
-          }
-        })
+        new OnAbilityCastEffect(() => (entity as PokemonEntity).addStack())
       )
     })
   }
 )
 
-const PoipoleOnKillEffect = new OnKillEffect(
-  ({ attacker, board }) => {
-    const familyMembers: PokemonEntity[] =
-      board.cells.filter<PokemonEntity>(
-        (entity): entity is PokemonEntity =>
-          entity != null &&
-          entity.team === attacker.team &&
-          PkmFamily[entity.name] === PkmFamily[attacker.name]
-      )
-    familyMembers.forEach((entity) => {
-      if(!attacker.player) return
-      entity.refToBoardPokemon.evolutionRule.addStack(
-        entity.refToBoardPokemon as Pokemon,
-        attacker.player,
-        attacker.simulation.stageLevel
-      )
-      if(entity.refToBoardPokemon.evolutionRule.stacks % 3 === 0){
-        entity.addAttack(1, entity, 0, false, true)
-      }
-    })
-  }
-)
+const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
+  const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
+    (entity): entity is PokemonEntity =>
+      entity != null &&
+      entity.team === attacker.team &&
+      PkmFamily[entity.name] === PkmFamily[attacker.name]
+  )
+  familyMembers.forEach((entity) => {
+    if (!attacker.player) return
+    entity.addStack()
+    if (entity.refToBoardPokemon.stacks % 3 === 0) {
+      entity.addAttack(1, entity, 0, false, true)
+    }
+  })
+})
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>

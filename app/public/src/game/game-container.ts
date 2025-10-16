@@ -46,10 +46,10 @@ import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
+import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
-import { clearAbilityAnimations } from "./components/abilities-animations"
 
 class GameContainer {
   room: Room<GameState>
@@ -96,7 +96,7 @@ class GameContainer {
 
     for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
       team.onAdd((p, key) =>
-        this.initializePokemon(<PokemonEntity>p, simulation)
+        this.initializePokemon(<PokemonEntity>p, simulation, team === $simulation.blueTeam ? simulation.bluePlayerId : simulation.redPlayerId)
       )
       team.onRemove((pokemon, key) => {
         // logger.debug('remove pokemon');
@@ -116,8 +116,8 @@ class GameContainer {
     })
   }
 
-  initializePokemon(pokemon: PokemonEntity, simulation: Simulation) {
-    this.gameScene?.battle?.addPokemonEntitySprite(simulation.id, pokemon)
+  initializePokemon(pokemon: PokemonEntity, simulation: Simulation, playerId: string) {
+    this.gameScene?.battle?.addPokemonEntitySprite(simulation.id, pokemon, playerId)
     const fields: NonFunctionPropNames<Status>[] = [
       "armorReduction",
       "burn",
@@ -181,8 +181,8 @@ class GameContainer {
         "ap",
         "luck",
         "speed",
-        "life",
         "hp",
+        "maxHP",
         "shield",
         "pp",
         "atk",
@@ -196,7 +196,9 @@ class GameContainer {
         "shiny",
         "skill",
         "stars",
-        "types"
+        "types",
+        "stacks",
+        "stacksRequired"
       ]
 
       fields.forEach((field) => {
@@ -417,10 +419,12 @@ class GameContainer {
         "positionY",
         "action",
         "hp",
+        "maxHP",
         "atk",
         "ap",
         "def",
         "speed",
+        "luck",
         "shiny",
         "skill",
         "meal"
@@ -439,15 +443,6 @@ class GameContainer {
               )
             }
           })
-        })
-
-        $pokemon.types.onChange((value, key) => {
-          if (player.id === this.spectatedPlayerId) {
-            const pokemonUI = this.gameScene?.board?.pokemons.get(pokemon.id)
-            if (pokemonUI) {
-              pokemonUI.types = new Set(values(pokemon.types))
-            }
-          }
         })
 
         $pokemon.items.onChange((value, key) => {

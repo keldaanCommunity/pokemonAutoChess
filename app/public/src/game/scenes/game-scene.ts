@@ -778,17 +778,17 @@ export default class GameScene extends Scene {
     )
   }
 
-  setHovered(gameObject: PokemonSprite) {
+  setHovered(pokemonSprite: PokemonSprite) {
     const outline = <OutlinePlugin>this.plugins.get("rexOutline")
     if (!outline) return // outline plugin doesnt work with canvas renderer
     if (this.pokemonHovered != null) this.clearHovered(this.pokemonHovered)
-    this.pokemonHovered = gameObject
+    this.pokemonHovered = pokemonSprite
 
     const thickness = Math.round(
-      1 + Math.log(gameObject.def + gameObject.speDef)
+      1 + Math.log(pokemonSprite.pokemon.def + pokemonSprite.pokemon.speDef)
     )
 
-    outline.add(gameObject.sprite, {
+    outline.add(pokemonSprite.sprite, {
       thickness,
       outlineColor: 0xffffff
     })

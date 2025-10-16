@@ -490,7 +490,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.passive === Passive.GLUTTON) {
       pokemon.addMaxHP(20, player)
       entity?.addMaxHP(20, entity, 0, false)
-      if (pokemon.hp > 750) {
+      if (pokemon.maxHP > 750) {
         player.titles.add(Title.GLUTTON)
       }
     }
@@ -572,14 +572,14 @@ export default class Simulation extends Schema implements ISimulation {
               )
               if (clonedEntity) {
                 clonedEntity.addMaxHP(
-                  -0.5 * pokemonCloned.hp,
+                  -0.5 * pokemonCloned.maxHP,
                   clonedEntity,
                   0,
                   false
                 )
               }
 
-              cloneEntity.addMaxHP(-0.5 * bug.hp, cloneEntity, 0, false)
+              cloneEntity.addMaxHP(-0.5 * bug.maxHP, cloneEntity, 0, false)
             }
           }
         }
@@ -731,7 +731,7 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (ally && ally.team === pokemon.team) {
-              ally.addShield(Math.ceil(0.2 * ally.hp), ally, 0, false)
+              ally.addShield(Math.ceil(0.2 * ally.maxHP), ally, 0, false)
               ally.status.triggerRuneProtect(5000)
             }
           })
@@ -821,7 +821,7 @@ export default class Simulation extends Schema implements ISimulation {
 
                 pokemon.commands.push(
                   new DelayedCommand(() => {
-                    if (target?.life > 0) {
+                    if (target?.hp > 0) {
                       const crit = chance(pokemon.critChance / 100, pokemon)
                       target.handleSpecialDamage(
                         3 * pokemon.atk,
@@ -1229,8 +1229,8 @@ export default class Simulation extends Schema implements ISimulation {
           }[effect]
           const shieldBoost = {
             [EffectEnum.DUBIOUS_DISC]: 0,
-            [EffectEnum.LINK_CABLE]: (5 / 100) * pokemon.hp,
-            [EffectEnum.GOOGLE_SPECS]: (10 / 100) * pokemon.hp
+            [EffectEnum.LINK_CABLE]: (5 / 100) * pokemon.maxHP,
+            [EffectEnum.GOOGLE_SPECS]: (10 / 100) * pokemon.maxHP
           }[effect]
           pokemon.addAttack(attackBoost * nbItems, pokemon, 0, false)
           pokemon.addAbilityPower(apBoost * nbItems, pokemon, 0, false)
@@ -1709,7 +1709,7 @@ export default class Simulation extends Schema implements ISimulation {
     const opponentTeam =
       opponentTeamNumber === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
     const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
-      (p) => p.life > 0
+      (p) => p.hp > 0
     ) as PokemonEntity[]
 
     if (effect === EffectEnum.CURSE_OF_VULNERABILITY) {
@@ -1842,7 +1842,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonHit.status.clearNegativeStatus()
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
-                tidalWaveLevel * 0.1 * pokemonHit.hp,
+                tidalWaveLevel * 0.1 * pokemonHit.maxHP,
                 pokemonHit,
                 0,
                 false
@@ -1850,7 +1850,7 @@ export default class Simulation extends Schema implements ISimulation {
             }
           } else {
             pokemonHit.handleDamage({
-              damage: tidalWaveLevel * 0.05 * pokemonHit.hp,
+              damage: tidalWaveLevel * 0.05 * pokemonHit.maxHP,
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,

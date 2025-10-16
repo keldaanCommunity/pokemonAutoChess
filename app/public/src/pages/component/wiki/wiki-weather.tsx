@@ -59,7 +59,7 @@ export default function WikiWeather() {
                         id={`pokemon-detail-${p.index}`}
                         className="custom-theme-tooltip game-pokemon-detail-tooltip"
                       >
-                        <GamePokemonDetail pokemon={p.name} />
+                        <GamePokemonDetail pokemon={p.name} origin="wiki" />
                       </Tooltip>
                     </div>
                   </li>

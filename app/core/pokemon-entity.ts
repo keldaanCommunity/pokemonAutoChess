@@ -75,9 +75,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("string") index: string
   @type("string") id: string
   @type("string") orientation = Orientation.DOWNLEFT
+  @type("uint16") maxHP: number
   @type("uint16") hp: number
-  @type("uint8") pp = 0
+  @type("uint16") shield = 0
   @type("uint8") maxPP: number
+  @type("uint8") pp = 0
   @type("uint16") atk: number
   @type("uint16") def: number
   @type("uint16") speDef: number
@@ -85,8 +87,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("int16") luck = 0
   @type("uint8") critChance = DEFAULT_CRIT_CHANCE
   @type("float32") critPower = DEFAULT_CRIT_POWER
-  @type("uint16") life: number
-  @type("uint16") shield = 0
   @type("uint8") team: Team
   @type("uint8") range: number
   @type("uint16") speed: number
@@ -105,6 +105,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type(Count) count: Count
   @type("uint16") healDone: number
   @type("string") emotion: Emotion
+  @type("uint8") stacks: number = 0
+  @type("uint8") stacksRequired: number = 0
   cooldown = 500
   oneSecondCooldown = 1000
   state: PokemonState
@@ -164,9 +166,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.atk = pokemon.atk
     this.def = pokemon.def
     this.speDef = pokemon.speDef
-    this.hp = pokemon.hp
+    this.maxHP = pokemon.maxHP
     this.maxPP = pokemon.maxPP
-    this.life = pokemon.hp
+    this.hp = pokemon.hp
     this.speed = pokemon.speed
     this.range = pokemon.range
     this.team = team
@@ -175,7 +177,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap
-    this.luck = pokemon.permanentLuck
+    this.luck = pokemon.luck
+    this.stacks = pokemon.stacks
+    this.stacksRequired = pokemon.stacksRequired
     this.dodge = 0
     this.physicalDamage = 0
     this.specialDamage = 0
@@ -227,7 +231,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
           attacker.id !== this.id &&
-          this.life <= 0.1 * this.hp))
+          this.hp <= 0.1 * this.maxHP))
     )
   }
 
@@ -490,13 +494,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
-    if (this.life <= 0) return
+    if (this.hp <= 0) return
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    this.hp = min(1)(this.hp + value)
-    this.life = clamp(this.life + value, 1, this.hp)
+    this.maxHP = min(1)(this.maxHP + value)
+    this.hp = clamp(this.hp + value, 1, this.maxHP)
     if (permanent && !this.isGhostOpponent) {
-      this.refToBoardPokemon.addMaxHP(value, this.player)
+      ;(this.refToBoardPokemon as Pokemon).addMaxHP(value, this.player)
     }
   }
 
@@ -994,23 +998,23 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Flying protection
     if (
       this.flyingProtection > 0 &&
-      this.life > 0 &&
+      this.hp > 0 &&
       this.canMove &&
       !this.status.paralysis
     ) {
-      const pcLife = this.life / this.hp
+      const pcHp = this.hp / this.maxHP
 
-      if (this.effects.has(EffectEnum.TAILWIND) && pcLife < 0.2) {
+      if (this.effects.has(EffectEnum.TAILWIND) && pcHp < 0.2) {
         this.flyAway(board)
         this.flyingProtection--
-      } else if (this.effects.has(EffectEnum.FEATHER_DANCE) && pcLife < 0.2) {
+      } else if (this.effects.has(EffectEnum.FEATHER_DANCE) && pcHp < 0.2) {
         this.status.triggerProtect(2000)
         this.flyAway(board)
         this.flyingProtection--
       } else if (this.effects.has(EffectEnum.MAX_AIRSTREAM)) {
         if (
-          (this.flyingProtection === 2 && pcLife < 0.5) ||
-          (this.flyingProtection === 1 && pcLife < 0.2)
+          (this.flyingProtection === 2 && pcHp < 0.5) ||
+          (this.flyingProtection === 1 && pcHp < 0.2)
         ) {
           this.status.triggerProtect(2000)
           this.flyAway(board)
@@ -1018,8 +1022,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         }
       } else if (this.effects.has(EffectEnum.SKYDIVE)) {
         if (
-          (this.flyingProtection === 2 && pcLife < 0.5) ||
-          (this.flyingProtection === 1 && pcLife < 0.2)
+          (this.flyingProtection === 2 && pcHp < 0.5) ||
+          (this.flyingProtection === 1 && pcHp < 0.2)
         ) {
           const destination =
             board.getFarthestTargetCoordinateAvailablePlace(this)
@@ -1046,7 +1050,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             )
             this.commands.push(
               new DelayedCommand(() => {
-                if (destination.target?.hp > 0) {
+                if (destination.target?.maxHP > 0) {
                   destination.target.handleSpecialDamage(
                     1.5 * this.atk,
                     board,
@@ -1095,7 +1099,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
-    if (berry && this.life > 0 && this.life < 0.5 * this.hp) {
+    if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {
       this.eatBerry(berry)
     }
 
@@ -1368,11 +1372,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       case Stat.LUCK:
         this.addLuck(value, this, 0, false, permanent)
         break
+      case Stat.RANGE:
+        this.range = min(1)(this.range + value)
     }
   }
 
   resurrect() {
-    this.life = this.hp
+    this.hp = this.maxHP
     this.pp = 0
     this.status.clearNegativeStatus()
 
@@ -1382,9 +1388,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? this.simulation.blueTeam
           : this.simulation.redTeam
       if (!team) return
-      const alliesAlive: IPokemonEntity[] = values(team).filter(
-        (e) => e.life > 0
-      )
+      const alliesAlive: IPokemonEntity[] = values(team).filter((e) => e.hp > 0)
       let koAllies: Pokemon[] = []
       if (this.player) {
         koAllies = values(this.player.board).filter(
@@ -1515,7 +1519,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     switch (berry) {
       case Item.AGUAV_BERRY:
-        heal(min(50)(0.5 * this.hp))
+        heal(min(50)(0.5 * this.maxHP))
         this.status.triggerConfusion(3000, this, this)
         break
       case Item.APICOT_BERRY:
@@ -1607,7 +1611,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(100)
         break
       case Item.BERRY_JUICE:
-        heal(this.hp - this.life)
+        heal(this.maxHP - this.hp)
         break
       case Item.BABIRI_BERRY:
         heal(50)
@@ -1706,6 +1710,24 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return [...this.effectsSet.values()].filter(
       (effect): effect is InstanceType<T> => effect instanceof effectClass
     )
+  }
+
+  addStack() {
+    if (!this.player) return
+    this.refToBoardPokemon.stacks++
+    this.stacks = this.refToBoardPokemon.stacks
+    //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
+    const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
+      this.refToBoardPokemon as Pokemon,
+      this.player,
+      this.simulation.stageLevel
+    )
+    if (pokemonEvolved) {
+      // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
+      this.index = pokemonEvolved.index
+      this.name = pokemonEvolved.name
+    }
+    return
   }
 }
 

@@ -1,10 +1,11 @@
 import { Schema, type } from "@colyseus/schema"
 import type { Board } from "../../core/board"
+import { ItemStats } from "../../core/items"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { FIGHTING_PHASE_DURATION } from "../../types/Config"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Team } from "../../types/enum/Game"
+import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
@@ -383,7 +384,7 @@ export default class Status extends Schema implements IStatus {
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
-        let burnDamage = pkm.hp * 0.05
+        let burnDamage = pkm.maxHP * 0.05
         if (pkm.simulation.weather === Weather.SUN) {
           burnDamage *= 1.3
           const nbHeatRocks = pkm.player
@@ -536,10 +537,10 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = pkm.hp * 0.05 * this.poisonStacks
+      let poisonDamage = pkm.maxHP * 0.05 * this.poisonStacks
 
       if (pkm.passive === Passive.GLISCOR || pkm.passive === Passive.GLIGAR) {
-        poisonDamage = pkm.hp * 0.05 * (this.poisonStacks - 2)
+        poisonDamage = pkm.maxHP * 0.05 * (this.poisonStacks - 2)
       }
 
       if (pkm.simulation.weather === Weather.RAIN) {
@@ -1041,7 +1042,10 @@ export default class Status extends Schema implements IStatus {
     if (this.lockedCooldown - dt <= 0) {
       this.locked = false
       pokemon.range =
-        pokemon.baseRange + (pokemon.items.has(Item.WIDE_LENS) ? 2 : 0)
+        pokemon.baseRange +
+        (pokemon.items.has(Item.WIDE_LENS)
+          ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
+          : 0)
     } else {
       this.lockedCooldown -= dt
     }

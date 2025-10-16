@@ -732,16 +732,16 @@ export default class BoardManager {
   }
 
   removePokemonsOnBoard() {
-    this.pokemons.forEach((pokemon) => {
+    this.pokemons.forEach((pkmSprite) => {
       if (
-        !isOnBench(pokemon) &&
+        !isOnBench(pkmSprite) &&
         !(
-          FlowerPotMons.includes(PkmByIndex[pokemon.index]) &&
-          pokemon.positionY === -1
+          FlowerPotMons.includes(PkmByIndex[pkmSprite.pokemon.index]) &&
+          pkmSprite.positionY === -1
         )
       ) {
-        pokemon.destroy()
-        this.pokemons.delete(pokemon.id)
+        pkmSprite.destroy()
+        this.pokemons.delete(pkmSprite.id)
       }
     })
   }
@@ -880,30 +880,27 @@ export default class BoardManager {
           )
           break
 
-        case "hp": {
+        case "hp":
+        case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
-          pokemonUI.hp = value as IPokemon["hp"]
           if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
             pokemonUI.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
-          pokemonUI.atk = value as IPokemon["atk"]
           if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
             pokemonUI.displayBoost(Stat.ATK)
           break
 
         case "def":
-          pokemonUI.def = value as IPokemon["def"]
           if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
             pokemonUI.displayBoost(Stat.DEF)
           break
 
         case "speed":
-          pokemonUI.speed = value as IPokemon["speed"]
           if (
             (value as IPokemon["speed"]) > (previousValue as IPokemon["speed"])
           )
@@ -911,13 +908,11 @@ export default class BoardManager {
           break
 
         case "ap":
-          pokemonUI.ap = value as IPokemon["ap"]
           if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
             pokemonUI.displayBoost(Stat.AP)
           break
 
         case "shiny":
-          pokemonUI.shiny = value as IPokemon["shiny"]
           this.animationManager.animatePokemon(
             pokemonUI,
             pokemonUI.action,
@@ -926,14 +921,9 @@ export default class BoardManager {
           break
 
         case "skill":
-          if (pokemonUI.skill !== value) {
-            pokemonUI.skill = value as IPokemon["skill"]
+          if (pokemonUI.pokemon.skill !== value) {
             pokemonUI.evolutionAnimation()
           }
-          break
-
-        case "types":
-          pokemonUI.types = new Set(values(value as IPokemon["types"]))
           break
 
         case "meal":
@@ -1096,18 +1086,20 @@ export default class BoardManager {
 
     if (isRedPlayer) {
       // avatar goes first in the portal
-      this.scene.tweens.add({
-        targets: this.playerAvatar,
-        ease: Phaser.Math.Easing.Quadratic.In,
-        duration: 700,
-        scale: 0,
-        x: portalX,
-        y: portalY
-      })
+      if (this.playerAvatar != null) {
+        this.scene.tweens.add({
+          targets: this.playerAvatar,
+          ease: Phaser.Math.Easing.Quadratic.In,
+          duration: 700,
+          scale: 0,
+          x: portalX,
+          y: portalY
+        })
+      }
 
       // move board pokemons into the portal
       const pokemonsToTeleport = [...this.pokemons.values()].filter(
-        (p) => FlowerPotMons.includes(PkmByIndex[p.index]) === false
+        (p) => FlowerPotMons.includes(PkmByIndex[p.pokemon.index]) === false
       )
       for (const pokemon of pokemonsToTeleport) {
         const delay = randomBetween(0, 300)

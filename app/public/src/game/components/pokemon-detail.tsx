@@ -1,19 +1,19 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import ReactDOM from "react-dom/client"
+import { DishByPkm } from "../../../../core/dishes"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../types"
 import { RarityColor } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { Rarity, Stat } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { getPortraitSrc } from "../../../../utils/avatar"
 import { AbilityTooltip } from "../../pages/component/ability/ability-tooltip"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
-import { getPortraitSrc } from "../../../../utils/avatar"
-import { DishByPkm } from "../../../../core/dishes"
-import { Item } from "../../../../types/enum/Item"
 
 export default class PokemonDetail extends GameObjects.DOMElement {
   dom: HTMLDivElement
