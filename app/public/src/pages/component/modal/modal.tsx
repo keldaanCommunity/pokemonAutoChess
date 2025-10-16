@@ -8,10 +8,10 @@ interface ModalProps {
   show: boolean
   onClose?: () => void
   className?: string
-  header?: JSX.Element | string
-  body?: JSX.Element | string
-  footer?: JSX.Element
-  children?: JSX.Element | JSX.Element[]
+  header?: React.ReactElement | string
+  body?: React.ReactElement | string
+  footer?: React.ReactElement
+  children?: React.ReactElement | React.ReactElement[]
   confirmText?: string
 }
 

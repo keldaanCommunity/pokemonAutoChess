@@ -8,7 +8,7 @@ export default function GameFiles() {
   const [version, setVersion] = useState("")
   const [cached, setCached] = useState(false)
   const askingSW = useRef<boolean>(false)
-  const preloadingScene = useRef<PreloadingScene>()
+  const preloadingScene = useRef<PreloadingScene | undefined>(undefined)
   const [preloadingMessage, setPreloadingMessage] = useState<string>(
     t("preloading_start")
   )
