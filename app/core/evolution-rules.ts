@@ -340,7 +340,8 @@ export function carryOverPermanentStats(
     "def",
     "speDef",
     "speed",
-    "ap"
+    "ap",
+    "luck"
   ] as const
   const pkm = pokemonsBeforeEvolution[0].name
   const baseData = new PokemonClasses[pkm](pkm)
