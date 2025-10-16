@@ -856,6 +856,7 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect =
       )
       if (coord) {
         const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
+        player.pokemonsPlayed.add(Pkm.PHIONE)
         simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
       }
     }
