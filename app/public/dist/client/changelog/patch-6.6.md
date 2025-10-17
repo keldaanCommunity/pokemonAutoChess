@@ -71,6 +71,8 @@
 - Nerf Vulpix line: PP 80 → 90
 - Reduce Arceus and Kecleon rate: 1/150 → 1/200
 - Poipole rework: New passive: When user or another unit of the same family gets a KO, gain 1 stack. Every 3 stacks, gain 1 Attack permanently. At 30 stacks, evolves to Naganadel. Poipole base HP: 120 → 160 ; Naganadel base HP: 200 → 280 ; Fell Stinger: Deal ~~25/50/100~~ 400% (AP scaled) of Attack as special damage to the target. If it knocks out the target, permanently gain 1 Attack and 10 HP gain 30% of base Attack ; Naganadel is now in Legendary rarity group (Poipole stays Unique)
+- Removed the zero cooldown reset on Accelerock and Agility abilities
+- New ability for Doduo line: Drill peck: Charges through the target like a drill, dealing [50,100,SP] SPECIAL and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target.
 
 
 # Changes to Synergies

@@ -11594,28 +11594,31 @@ export class Tyrogue extends Pokemon {
   skill = Ability.MACH_PUNCH
   passive = Passive.TYROGUE
   evolutions = [Pkm.HITMONTOP, Pkm.HITMONLEE, Pkm.HITMONCHAN]
-  evolutionRule = new ItemEvolutionRule([...CraftableItems, ...ItemComponents], (pokemon, player, item_) => {
-    const item = item_ as Item
-    if (
-      item === Item.CHARCOAL ||
-      item === Item.MAGNET ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
-    ) {
-      return Pkm.HITMONLEE
-    }
+  evolutionRule = new ItemEvolutionRule(
+    [...CraftableItems, ...ItemComponents],
+    (pokemon, player, item_) => {
+      const item = item_ as Item
+      if (
+        item === Item.CHARCOAL ||
+        item === Item.MAGNET ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
+      ) {
+        return Pkm.HITMONLEE
+      }
 
-    if (
-      item === Item.HEART_SCALE ||
-      item === Item.NEVER_MELT_ICE ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
-    ) {
-      return Pkm.HITMONCHAN
-    }
+      if (
+        item === Item.HEART_SCALE ||
+        item === Item.NEVER_MELT_ICE ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
+      ) {
+        return Pkm.HITMONCHAN
+      }
 
-    return Pkm.HITMONTOP
-  })
+      return Pkm.HITMONTOP
+    }
+  )
 }
 
 export class Hitmontop extends Pokemon {
@@ -12840,7 +12843,7 @@ export class Doduo extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.DRILL_PECK
   regional = true
 }
 
@@ -12855,7 +12858,7 @@ export class Dodrio extends Pokemon {
   speDef = 6
   maxPP = 85
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.DRILL_PECK
   regional = true
 }
 
