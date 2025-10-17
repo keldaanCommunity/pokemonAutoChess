@@ -6789,7 +6789,7 @@ export class Marshadow extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FIGHTING])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 200
   atk = 23
   speed = 65
   def = 10
@@ -11594,28 +11594,31 @@ export class Tyrogue extends Pokemon {
   skill = Ability.MACH_PUNCH
   passive = Passive.TYROGUE
   evolutions = [Pkm.HITMONTOP, Pkm.HITMONLEE, Pkm.HITMONCHAN]
-  evolutionRule = new ItemEvolutionRule([...CraftableItems, ...ItemComponents], (pokemon, player, item_) => {
-    const item = item_ as Item
-    if (
-      item === Item.CHARCOAL ||
-      item === Item.MAGNET ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
-    ) {
-      return Pkm.HITMONLEE
-    }
+  evolutionRule = new ItemEvolutionRule(
+    [...CraftableItems, ...ItemComponents],
+    (pokemon, player, item_) => {
+      const item = item_ as Item
+      if (
+        item === Item.CHARCOAL ||
+        item === Item.MAGNET ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
+      ) {
+        return Pkm.HITMONLEE
+      }
 
-    if (
-      item === Item.HEART_SCALE ||
-      item === Item.NEVER_MELT_ICE ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
-      (item in ItemRecipe && ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
-    ) {
-      return Pkm.HITMONCHAN
-    }
+      if (
+        item === Item.HEART_SCALE ||
+        item === Item.NEVER_MELT_ICE ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
+        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
+      ) {
+        return Pkm.HITMONCHAN
+      }
 
-    return Pkm.HITMONTOP
-  })
+      return Pkm.HITMONTOP
+    }
+  )
 }
 
 export class Hitmontop extends Pokemon {

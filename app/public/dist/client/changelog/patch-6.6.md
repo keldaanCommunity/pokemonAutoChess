@@ -71,7 +71,7 @@
 - Nerf Vulpix line: PP 80 → 90
 - Reduce Arceus and Kecleon rate: 1/150 → 1/200
 - Poipole rework: New passive: When user or another unit of the same family gets a KO, gain 1 stack. Every 3 stacks, gain 1 Attack permanently. At 30 stacks, evolves to Naganadel. Poipole base HP: 120 → 160 ; Naganadel base HP: 200 → 280 ; Fell Stinger: Deal ~~25/50/100~~ 400% (AP scaled) of Attack as special damage to the target. If it knocks out the target, permanently gain 1 Attack and 10 HP gain 30% of base Attack ; Naganadel is now in Legendary rarity group (Poipole stays Unique)
-
+- Change Spectral Thief (Marshadow): now properly steals all stat boosts (including max HP, Crit chance, Crit power, Luck) ; Marshadow HP: 220 → 200
 
 # Changes to Synergies
 
