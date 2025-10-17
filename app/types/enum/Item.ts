@@ -257,8 +257,6 @@ export enum Item {
   AQUATIC_MEMORY = "AQUATIC_MEMORY"
 }
 
-export const AllItems: Item[] = Object.values(Item)
-
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,

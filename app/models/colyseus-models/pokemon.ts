@@ -22,9 +22,8 @@ import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
 import {
-  AllItems,
   ArtificialItems,
-  Berries,
+  CraftableItems,
   Flavors,
   Item,
   ItemComponents,
@@ -11595,7 +11594,7 @@ export class Tyrogue extends Pokemon {
   skill = Ability.MACH_PUNCH
   passive = Passive.TYROGUE
   evolutions = [Pkm.HITMONTOP, Pkm.HITMONLEE, Pkm.HITMONCHAN]
-  evolutionRule = new ItemEvolutionRule(AllItems, (pokemon, player, item_) => {
+  evolutionRule = new ItemEvolutionRule([...CraftableItems, ...ItemComponents], (pokemon, player, item_) => {
     const item = item_ as Item
     if (
       item === Item.CHARCOAL ||
