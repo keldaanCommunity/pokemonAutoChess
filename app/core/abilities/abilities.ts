@@ -1823,7 +1823,6 @@ export class AccelerockStrategy extends AbilityStrategy {
     )
     pokemon.addDefense(-2 * nbEffects, pokemon, 0, false)
     pokemon.addSpeed(nbEffects * 5, pokemon, 0, false)
-    pokemon.cooldown = 0
   }
 }
 
@@ -4733,7 +4732,6 @@ export class AgilityStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     const boost = [10, 20, 30][pokemon.stars - 1] ?? 30
     pokemon.addSpeed(boost, pokemon, 1, crit)
-    pokemon.cooldown = 0
   }
 }
 
@@ -11781,6 +11779,44 @@ export class DrillRunStrategy extends AbilityStrategy {
   }
 }
 
+export class DrillPeckStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const [dx, dy] = OrientationVector[pokemon.orientation]
+
+    const nextX = target.positionX + dx
+    const nextY = target.positionY + dy
+
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.moveTo(target.positionX, target.positionY, board)
+
+    if (board.isOnBoard(nextX, nextY)) {
+      const nextEntity = board.getEntityOnCell(nextX, nextY)
+      if (nextEntity?.team === target.team) {
+        pokemon.targetX = nextX
+        pokemon.targetY = nextY
+        pokemon.targetEntityId = nextEntity.id
+        pokemon.pp = pokemon.maxPP
+      }
+    }
+  }
+}
+
 export class SaltCureStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -14821,6 +14857,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ELECTRO_BALL]: new ElectroBallStrategy(),
   [Ability.HORN_LEECH]: new HornLeechStrategy(),
   [Ability.DRILL_RUN]: new DrillRunStrategy(),
+  [Ability.DRILL_PECK]: new DrillPeckStrategy(),
   [Ability.ROCK_ARTILLERY]: new RockArtilleryStrategy(),
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.NO_RETREAT]: new NoRetreatStrategy(),

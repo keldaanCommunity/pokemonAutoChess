@@ -159,6 +159,7 @@ export enum Ability {
   SHELL_TRAP = "SHELL_TRAP",
   DIG = "DIG",
   DRILL_RUN = "DRILL_RUN",
+  DRILL_PECK = "DRILL_PECK",
   FIRE_SPIN = "FIRE_SPIN",
   SEARING_SHOT = "SEARING_SHOT",
   PECK = "PECK",

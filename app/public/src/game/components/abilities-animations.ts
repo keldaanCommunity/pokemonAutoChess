@@ -1879,6 +1879,13 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI / 2
   }),
+  [Ability.DRILL_PECK]: orientedProjectile({
+    ability: Ability.HURRICANE,
+    duration: 500,
+    distance: 1,
+    oriented: true,
+    rotation: -Math.PI / 2
+  }),
   [Ability.ROAR]: orientedProjectile({
     ability: Ability.WHIRLWIND,
     oriented: true,
