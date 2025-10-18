@@ -2928,7 +2928,7 @@
 		"BURMY": "需要3只相同蓑衣的结草儿才能进化为结草贵妇。若在第20轮移动到了一个没有对应蓑衣的地区，结草儿会进化为绅士蛾。",
 		"PSYDUCK": "受到攻击时有[10,LK]%的概率陷入CONFUSION。此宝可梦每次陷入CONFUSION时，提升100点AP。",
 		"BLOODMOON": "在BLOODMOON中切换形态。",
-		"RECYCLE": "向此宝可梦喂食树果可永久提升其15点最大HP。\n喂食消耗品可永久提升其30点最大HP，并获得一袋TRASH。",
+		"RECYCLE": "喂食消耗品可永久提升其30点最大HP，并获得一袋TRASH。",
 		"DREAM_CATCHER": "若目标处于SLEEP，攻击额外使3只最近的我方宝可梦获得10点SHIELD。",
 		"SLOW_START": "对战开始时降低30点SPEED。在初次释放招式后，提升30点SPEED和10点ATK。",
 		"STONJOURNER": "PP槽恢复至满时开始移动和发起攻击。此宝可梦的能量点使战斗开始时的ADJACENT宝可梦提升50点AP。",

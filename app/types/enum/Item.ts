@@ -882,6 +882,7 @@ export const ConsumableItems: Item[] = [
   ...Flavors,
   ...Sweets,
   ...DojoTickets,
+  ...Berries,
   Item.EXCHANGE_TICKET,
   Item.PICNIC_SET,
   Item.FIRE_SHARD,
