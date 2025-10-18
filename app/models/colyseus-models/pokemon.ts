@@ -12843,7 +12843,7 @@ export class Doduo extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.DRILL_PECK
   regional = true
 }
 
@@ -12858,7 +12858,7 @@ export class Dodrio extends Pokemon {
   speDef = 6
   maxPP = 85
   range = 1
-  skill = Ability.AGILITY
+  skill = Ability.DRILL_PECK
   regional = true
 }
 

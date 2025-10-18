@@ -4638,13 +4638,13 @@ export const PokemonAnimations: {
   },
   [Pkm.DODUO]: {
     attack: AnimationType.Jab,
-    ability: AnimationType.Charge,
+    ability: AnimationType.MultiStrike,
     emote: AnimationType.MultiStrike,
     attackSprite: AttackSprite.FLYING_MELEE
   },
   [Pkm.DODRIO]: {
     attack: AnimationType.Jab,
-    ability: AnimationType.Charge,
+    ability: AnimationType.MultiStrike,
     emote: AnimationType.MultiStrike,
     attackSprite: AttackSprite.FLYING_MELEE
   },
