@@ -981,13 +981,17 @@ export class JoinOrOpenRoomCommand extends Command<
             // 0- 1099
             minRank = EloRank.LEVEL_BALL
             maxRank = EloRank.NET_BALL
-            break
+            break            
           case EloRank.SAFARI_BALL:
           case EloRank.LOVE_BALL:
+            // 1050-1200
+            minRank = EloRank.NET_BALL
+            maxRank = EloRank.LOVE_BALL
+            break
           case EloRank.PREMIER_BALL:
           case EloRank.QUICK_BALL:
-            // 1050-1299
-            minRank = EloRank.NET_BALL
+            // 1150-1299
+            minRank = EloRank.LOVE_BALL
             maxRank = EloRank.QUICK_BALL
             break
           case EloRank.POKE_BALL:

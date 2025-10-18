@@ -98,6 +98,7 @@
 - New town encounter: Makuhita
 - Pokémons are now automatically placed from the bench onto the board when free spots are available, with smarter positioning: melee Pokémons are placed in the front row, while ranged Pokémons are placed in the back row based on their attack range.
 - Not picking an add pick or Unique or Legendary at the end of the picking phase with no free space on the bench will now automatically sell the random Pokémon picked instead of doing nothing.
+- Ranked matches elo ranges are reajusted again: 0-1099, 1050-1200, 1150-1299, 1250+ ; still trying to find the right tradeoff between wait times and fair matches. Reminder for the overlaps concerning Net Ball, Love Ball and Quick Ball ranks: the lower range is chosen by default, but player can choose to join a lobby of the higher range if they want more difficulty and higher elo rewards.
 
 # UI
 
