@@ -874,6 +874,9 @@ function spawnDIAYAvatar(player: Player): Pokemon {
   }
   if (powerScore < 5) {
     player.money += 55 - Math.round(10 * powerScore)
+  } else {
+    avatar.ap = min(-100)(avatar.ap - (powerScore - 5) * 10)
+    avatar.addAttack(- Math.round(avatar.atk * (powerScore - 5) * 0.1))
   }
   const bonusHP = Math.round(150 - powerScore * 30)
   avatar.hp = min(10)(avatar.hp + bonusHP)

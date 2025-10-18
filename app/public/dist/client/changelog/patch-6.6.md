@@ -167,3 +167,4 @@ Special thanks to salamander for reporting and working on many of these fixes!
 - 2 new scribbles rules
 - PvE stages from stage 19 are stronger with boosted stats and new items on Marowak encounter
 - All Pokémon outside of battles now perform their emote animation when left-clicked
+- Do it all yourself: highest rarity Pokémon picked as avatars now also lose Attack and AP stats based on their category
