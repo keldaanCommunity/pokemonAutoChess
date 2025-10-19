@@ -446,8 +446,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
 
     if (
-      !this.status.silence &&
-      !this.status.protect &&
+      !(value > 0 && this.status.silence) &&
+      !(value > 0 && this.status.protect) &&
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
