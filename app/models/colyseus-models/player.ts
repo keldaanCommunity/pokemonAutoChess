@@ -630,19 +630,18 @@ export default class Player extends Schema implements IPlayer {
           )
         ) {
           const burmyEvolving = burmys[0]
-          burmyEvolving.evolutionRule = new ConditionBasedEvolutionRule(
-            () => true,
-            () => Pkm.MOTHIM
-          )
-          burmyEvolving.evolutionRule.tryEvolve(
+          burmyEvolving.evolutionRule.divergentEvolution = () => Pkm.MOTHIM
+
+          const mothim = burmyEvolving.evolutionRule.evolve(
             burmyEvolving,
             this,
             state.stageLevel
           )
-          burmys.slice(1).forEach((burmyToRemove) => {
-            this.board.delete(burmyToRemove.id)
-          })
-          this.updateSynergies()
+          burmyEvolving.evolutionRule.afterEvolve(
+            mothim,
+            this,
+            state.stageLevel
+          )
         }
       }
     }
@@ -876,7 +875,7 @@ function spawnDIAYAvatar(player: Player): Pokemon {
     player.money += 55 - Math.round(10 * powerScore)
   } else {
     avatar.ap = min(-100)(avatar.ap - (powerScore - 5) * 10)
-    avatar.addAttack(- Math.round(avatar.atk * (powerScore - 5) * 0.1))
+    avatar.addAttack(-Math.round(avatar.atk * (powerScore - 5) * 0.1))
   }
   const bonusHP = Math.round(150 - powerScore * 30)
   avatar.hp = min(10)(avatar.hp + bonusHP)
