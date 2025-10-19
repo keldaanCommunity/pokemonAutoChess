@@ -77,16 +77,15 @@
 - Poipole rework: New passive: When user or another unit of the same family gets a KO, gain 1 stack. Every 3 stacks, gain 1 Attack permanently. At 30 stacks, evolves to Naganadel. Poipole base HP: 120 → 160 ; Naganadel base HP: 200 → 280 ; Fell Stinger: Deal ~~25/50/100~~ 400% (AP scaled) of Attack as special damage to the target. If it knocks out the target, permanently gain 1 Attack and 10 HP gain 30% of base Attack ; Naganadel is now in Legendary rarity group (Poipole stays Unique)
 - Removed the zero cooldown reset on Accelerock and Agility abilities
 - New ability for Doduo line: Drill peck: Charges through the target like a drill, dealing [50,100,SP] SPECIAL and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target.
-
 - Change Spectral Thief (Marshadow): now properly steals all stat boosts (including max HP, Crit chance, Crit power, Luck) ; Marshadow HP: 220 → 200
+- Ogerpon forms are now regional in their respective types regions (Teal: Flora, Hearthflame: Fire, Cornerstone: Rock, Wellspring: Aquatic)
+- Tapus are now regional in their respective types regions (Koko: Electric, Lele: Psychic, Bulu: Grass, Fini: Fairy)
 
 # Changes to Synergies
 
 - Buff Ground 8: +5 → +8 Attack when your half of the board is fully dug
 - Artificial items that can be found buried in the ground are now limited to: Toxic Orb, Hard Stone, Metal Coat, Explorer Kit, Rotom Phone, Silk Scarf, Tiny Mushroom, Incense, Electirizer, Magmarizer, Max Elixir and Exp Share.
 - Psychic 6 QoL: Unown shops now always offer 5 different types of Unown
-- Ogerpon forms are now regional in their respective types regions (Teal: Flora, Hearthflame: Fire, Cornerstone: Rock, Wellspring: Aquatic)
-- Tapus are now regional in their respective types regions (Koko: Electric, Lele: Psychic, Bulu: Grass, Fini: Fairy)
 - On stage 20, Gourmet and Normal are now limited to 2 symbols per player, and Baby symbols can't appear anymore
 
 # Changes to Items

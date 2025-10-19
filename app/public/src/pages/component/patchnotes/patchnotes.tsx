@@ -4,6 +4,7 @@ import "./patchnotes.css"
 
 export default function PatchNotes() {
   const PATCHES = [
+    "6.6",
     "6.5",
     "6.4",
     "6.3",

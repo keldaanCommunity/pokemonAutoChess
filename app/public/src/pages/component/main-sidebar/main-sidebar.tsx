@@ -128,7 +128,7 @@ export function MainSidebar(props: MainSidebarProps) {
           }}
           shimmer={isNewPatch}
         >
-          {t("news")}
+          {t("patch_notes")}
         </NavLink>
 
         {page === "main_lobby" && (
