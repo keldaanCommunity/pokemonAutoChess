@@ -2659,7 +2659,7 @@
 		"MAGMARIZER": "Every successful attack increase ATK by 1 and inflicts BURN for 2 seconds.",
 		"MACHO_BRACE": "Gives FIGHTING synergy.",
 		"LIGHT_BALL": "Gives LIGHT synergy.",
-		"TOXIC_ORB": "Gives POISON synergy. Holder suffers from POISONNED but increase its ATK by 100%.",
+		"TOXIC_ORB": "Gives POISON synergy. Holder suffers from POISONNED but increase its base ATK by 100%.",
 		"METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP.",
 		"METAL_COAT": "Gives STEEL synergy.",
 		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects.",
