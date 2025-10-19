@@ -113,7 +113,7 @@ export class OnItemDroppedEffect extends Effect {
   }
 }
 
-interface OnKillEffectArgs {
+export interface OnKillEffectArgs {
   attacker: PokemonEntity
   target: PokemonEntity
   board: Board
