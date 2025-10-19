@@ -1717,15 +1717,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.stacks++
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
-    const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
-      this.refToBoardPokemon as Pokemon,
-      this.player,
-      this.simulation.stageLevel
-    )
-    if (pokemonEvolved) {
-      // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
-      this.index = pokemonEvolved.index
-      this.name = pokemonEvolved.name
+    if (this.stacks === this.stacksRequired) {
+      const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
+        this.refToBoardPokemon as Pokemon,
+        this.player,
+        this.simulation.stageLevel
+      )
+      if (pokemonEvolved) {
+        // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
+        this.index = pokemonEvolved.index
+        this.name = pokemonEvolved.name
+      }
     }
     return
   }
