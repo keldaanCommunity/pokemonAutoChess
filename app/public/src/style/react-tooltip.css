@@ -18,6 +18,7 @@
 }
 
 :root {
-  --rt-transition-show-delay: 0s!important;
-  --rt-transition-closing-delay: 0s!important;
+  --rt-opacity: 1 !important;
+  --rt-transition-show-delay: 0s !important;
+  --rt-transition-closing-delay: 0s !important;
 }
