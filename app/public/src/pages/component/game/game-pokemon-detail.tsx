@@ -133,11 +133,6 @@ export function GamePokemonDetail(props: {
     return undefined
   }, [pokemon.items, props.origin, pokemon.shield])
 
-  const evolution =
-    "evolution" in pokemon
-      ? pokemon.evolution
-      : pokemon.refToBoardPokemon.evolution
-
   return (
     <div className="game-pokemon-detail">
       <PokemonPortrait
@@ -149,12 +144,14 @@ export function GamePokemonDetail(props: {
           emotion: props.emotion ?? pokemon.emotion
         }}
       />
-      {pokemon.index === PkmIndex[Pkm.EGG] && evolution != null && (
-        <img
-          className="game-pokemon-detail-portrait-hint"
-          src={getPortraitSrc(PkmIndex[evolution])}
-        />
-      )}
+      {pokemon.index === PkmIndex[Pkm.EGG] &&
+        "evolution" in pokemon &&
+        pokemon.evolution != null && (
+          <img
+            className="game-pokemon-detail-portrait-hint"
+            src={getPortraitSrc(PkmIndex[pokemon.evolution])}
+          />
+        )}
       <div className="game-pokemon-detail-entry">
         <p className="game-pokemon-detail-entry-name">
           {t(`pkm.${pokemon.name}`)}
