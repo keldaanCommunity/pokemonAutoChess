@@ -5,7 +5,6 @@ import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
 import { TournamentsList } from "./tournaments-list"
 import { VictoryRoad } from "./victory-road"
-import "./events-menu.css"
 
 export function EventsMenu() {
   const user = useAppSelector((state) => state.network.profile)
