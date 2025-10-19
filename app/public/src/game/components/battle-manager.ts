@@ -1136,10 +1136,10 @@ export default class BattleManager {
       const coordinates = transformEntityCoordinates(x, y, this.flip)
       const color =
         type === AttackType.PHYSICAL
-          ? "var(--color-physical)"
+          ? "#e76e55" // should be the same than var(--color-physical) but phaser cant use css variables
           : type === AttackType.SPECIAL
-            ? "var(--color-special)"
-            : "var(--color-true)"
+            ? "#5f9ff9" // should be the same than var(--color-special) but phaser cant use css variables
+            : "#f7d51d" // should be the same than var(--color-true) but phaser cant use css variables
       this.displayTween(color, coordinates, index, amount)
       displayHit(
         this.scene,
