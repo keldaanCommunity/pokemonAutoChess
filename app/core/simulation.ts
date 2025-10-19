@@ -22,7 +22,6 @@ import {
   Orientation,
   PokemonActionState,
   Rarity,
-  Stat,
   Team
 } from "../types/enum/Game"
 import {
@@ -39,7 +38,6 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
-import { isPlainFunction } from "../utils/function"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
 import {
@@ -54,13 +52,10 @@ import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
 import {
-  Effect,
   OnDishConsumedEffect,
-  OnItemGainedEffect,
   OnSimulationStartEffect,
   OnSpawnEffect
 } from "./effects/effect"
-import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
 import {
   electricTripleAttackEffect,
@@ -417,22 +412,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      this.applyItemEffect(pokemon, item)
-    })
-  }
-
-  applyItemEffect(pokemon: PokemonEntity, item: Item) {
-    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
-      pokemon.applyStat(stat as Stat, value)
-    })
-
-    ItemEffects[item]?.forEach((effect) => {
-      if (effect instanceof Effect) pokemon.effectsSet.add(effect)
-      else if (isPlainFunction(effect)) pokemon.effectsSet.add(effect())
-    })
-
-    pokemon.getEffects(OnItemGainedEffect).forEach((effect) => {
-      effect.apply(pokemon)
+      pokemon.applyItemEffect(item)
     })
   }
 
