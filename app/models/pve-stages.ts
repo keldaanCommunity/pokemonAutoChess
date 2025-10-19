@@ -131,9 +131,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.HO_OH, 5, 1]
     ],
     statBoosts: {
-      [Stat.HP]: 100,
-      [Stat.DEF]: 10,
-      [Stat.SPE_DEF]: 10
+      [Stat.HP]: 50,
+      [Stat.DEF]: 5,
+      [Stat.SPE_DEF]: 5
     },
     marowakItems: [[Item.COMET_SHARD], [Item.SACRED_ASH]],
     shinyChance: 1 / 100,
