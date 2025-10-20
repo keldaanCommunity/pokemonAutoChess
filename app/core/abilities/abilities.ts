@@ -4173,7 +4173,6 @@ export class SpectralThiefStrategy extends AbilityStrategy {
 
       
       const base = new PkmClass(target.name)
-      logger.log(`base: ${base.name}, base_index${base.index}`)
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - base.speed)
       const boostDef = min(0)(target.def - target.baseDef)
