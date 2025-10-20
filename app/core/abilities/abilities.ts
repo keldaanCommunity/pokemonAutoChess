@@ -4170,13 +4170,16 @@ export class SpectralThiefStrategy extends AbilityStrategy {
         return logger.error(
           `Spectral Thief: No class found for ${target.name} [index ${target.index}]`
         )
+
+      
       const base = new PkmClass(target.name)
+      logger.log(`base: ${base.name}, base_index${base.index}`)
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - base.speed)
       const boostDef = min(0)(target.def - target.baseDef)
       const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
       const boostAP = target.ap
-      const boostHP = min(0)(target.maxHP - base.maxHP)
+      const boostHP = min(0)(target.maxHP - base.hp)
       const boostCritChance = min(0)(target.critChance - base.critChance)
       const boostCritPower = min(0)(target.critPower - base.critPower)
       const boostLuck = min(0)(target.luck - base.luck)
