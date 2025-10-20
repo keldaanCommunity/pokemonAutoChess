@@ -93,6 +93,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") stacksRequired: number = 0
   dodge: number = 0
   deathCount: number = 0
+  killCount: number = 0
   evolutions: Pkm[] = []
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
@@ -18983,13 +18984,12 @@ export class BasculinWhite extends Pokemon {
   skill = Ability.GRUDGE_DIVE
   passive = Passive.BASCULIN_WHITE
   evolutions = [Pkm.BASCULEGION_MALE, Pkm.BASCULEGION_FEMALE]
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) =>
-      pokemon instanceof BasculinWhite &&
-      (pokemon.killCount >= 5 || pokemon.deathCount >= 5),
-    (pokemon) =>
-      pokemon.deathCount >= 5 ? Pkm.BASCULEGION_FEMALE : Pkm.BASCULEGION_MALE
-  )
+  evolutionRule = new StackBasedEvolutionRule((pokemon) => {
+    return pokemon.deathCount >= 5
+      ? Pkm.BASCULEGION_FEMALE
+      : Pkm.BASCULEGION_MALE
+  })
+  stacksRequired = 5
   onAcquired = basculinOnAcquired
 }
 
