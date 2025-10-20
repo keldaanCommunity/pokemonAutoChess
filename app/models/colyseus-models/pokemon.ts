@@ -80,7 +80,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("uint8") stars: number = 1
   @type("uint8") pp = 0
   @type("uint8") maxPP: number = 100
-  @type("uint16") ap: number = 0
+  @type("int16") ap: number = 0
   @type("uint8") luck: number = 0
   @type("string") skill: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
