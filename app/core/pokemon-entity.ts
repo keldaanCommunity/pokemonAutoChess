@@ -1234,6 +1234,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board
     attackType: AttackType
   }) {
+    if (!this.isGhostOpponent) {
+      this.refToBoardPokemon.killCount++
+    }
     this.getEffects(OnKillEffect).forEach((effect) => {
       effect.apply({ attacker: this, target, board, attackType })
     })
@@ -1741,9 +1744,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
-  addStack() {
+  addStack(amount = 1) {
     if (!this.player) return
-    this.refToBoardPokemon.stacks++
+    this.refToBoardPokemon.stacks += amount
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
     if (this.stacks === this.stacksRequired) {

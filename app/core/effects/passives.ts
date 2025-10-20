@@ -1152,7 +1152,29 @@ export const PassiveEffects: Partial<
   ],
   [Passive.BASCULIN_WHITE]: [
     new OnKillEffect(({ attacker }) => {
-      if (attacker instanceof BasculinWhite) attacker.killCount++
+      const pokemon = attacker.refToBoardPokemon
+      if (pokemon && pokemon instanceof BasculinWhite) {
+        pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        if (
+          pokemon.killCount === pokemon.stacksRequired &&
+          pokemon.deathCount < pokemon.stacksRequired
+        ) {
+          attacker.addStack(0) // trigger evolution
+        }
+      }
+    }),
+    new OnDeathEffect(({ pokemon: pokemonEntity }) => {
+      const pokemon = pokemonEntity.refToBoardPokemon
+      if (pokemon && pokemon instanceof BasculinWhite) {
+        pokemon.stacks = pokemon.deathCount
+        //pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        if (
+          pokemon.deathCount === pokemon.stacksRequired &&
+          pokemon.killCount < pokemon.stacksRequired
+        ) {
+          pokemonEntity.addStack(0) // trigger evolution
+        }
+      }
     })
   ],
   [Passive.BASCULIN_RED_BLUE]: [
