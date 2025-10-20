@@ -7425,6 +7425,7 @@ export class BarbBarrageStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
+    const damage = [20, 40, 60, 80][pokemon.stars - 1] ?? 80
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -7442,6 +7443,7 @@ export class BarbBarrageStrategy extends AbilityStrategy {
         .forEach((v) => {
           if (v) {
             v.status.triggerPoison(3000, v, pokemon)
+            v.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
             pokemon.broadcastAbility({
               targetX: v.positionX,
               targetY: v.positionY,
@@ -7449,10 +7451,10 @@ export class BarbBarrageStrategy extends AbilityStrategy {
             })
           }
         })
+    } else {
+      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     }
-
-    const damage = [20, 40, 60, 80][pokemon.stars - 1] ?? 80
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    
   }
 }
 
