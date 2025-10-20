@@ -18772,7 +18772,6 @@ export class Runerigus extends Pokemon {
 }
 
 export class Chewtle extends Pokemon {
-  jawLockTargets: string[] = []
   types = new SetSchema<Synergy>([
     Synergy.AQUATIC,
     Synergy.ROCK,
@@ -18793,7 +18792,6 @@ export class Chewtle extends Pokemon {
 }
 
 export class Drednaw extends Pokemon {
-  jawLockTargets: string[] = []
   types = new SetSchema<Synergy>([
     Synergy.AQUATIC,
     Synergy.ROCK,
