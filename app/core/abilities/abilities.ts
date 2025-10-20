@@ -13847,12 +13847,11 @@ export class JawLockStrategy extends AbilityStrategy {
     const heal = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     // Check if target is already locked (already bitten)
-    const alreadyBitten =
-      (pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
-      pokemon.jawLockTargets.includes(target.id)
+    const alreadyBitten = target.effects.has(EffectEnum.JAW_LOCK)
 
     // Apply LOCKED status for 3 seconds
     target.status.triggerLocked(3000, target)
+    target.effects.add(EffectEnum.JAW_LOCK)
 
     // Deal damage
     target.handleSpecialDamage(
@@ -13862,11 +13861,6 @@ export class JawLockStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-
-    // Add the target id to the jawLockTargets
-    ;(pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
-      pokemon.jawLockTargets.push(target.id)
-
     // If target was already bitten, heal the user
     if (alreadyBitten) {
       pokemon.handleHeal(heal, pokemon, 1, crit)
