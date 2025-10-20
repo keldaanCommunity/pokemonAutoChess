@@ -431,6 +431,7 @@ export class OpenBoosterCommand extends Command<
       })
 
       await checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
+      await mongoUser.save()
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
@@ -637,6 +638,7 @@ export class BuyEmotionCommand extends Command<
       await checkTitlesAfterEmotionUnlocked(mongoUser, [
         { name: PkmByIndex[index], emotion, shiny }
       ])
+      await mongoUser.save()
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
       logger.error(error)
