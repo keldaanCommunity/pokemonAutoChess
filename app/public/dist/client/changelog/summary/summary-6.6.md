@@ -21,6 +21,8 @@
 ![Basculin Red](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0550/Normal.png)
 ![Basculin Blue](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0550/0001/Normal.png)
 ![Basculin White](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0550/0002/Normal.png)
+![Basculegion Male](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0902/Normal.png)
+![Basculegion Female](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0902/0000/0000/0002/Normal.png)
 ![Galarian Slowpoke](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0079/0001/Normal.png)
 ![Galarian Slowbro](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0080/0001/Normal.png)
 ![Galarian Slowking](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0199/0001/Normal.png)
