@@ -566,26 +566,29 @@ export class MiniGame {
     } else {
       this.avatars?.forEach((avatar) => {
         const player = this.alivePlayers.find((p) => p.id === avatar.id)!
+        const synergiesUsable = Object.values(Synergy).filter((type) => {
+          if (type === Synergy.BABY && stageLevel === 20) return false // no baby legendaries
+          return true
+        })
         const synergiesTriggerLevels: [Synergy, number][] = Array.from(
           player.synergies
-        ).map(([type, value]) => {
-          let levelReached = player.synergies.getSynergyStep(type)
-          // removing low triggers synergies
-          if (type === Synergy.FLORA || type === Synergy.LIGHT) {
-            levelReached = min(0)(levelReached - 1)
-          }
-          if (
-            stageLevel === 20 &&
-            (type === Synergy.GOURMET || type === Synergy.NORMAL)
-          ) {
-            // not enough legendaries of that type
-            levelReached = max(2)(levelReached)
-          }
-          if (type === Synergy.BABY && stageLevel === 20) {
-            levelReached = 0 // no baby legendaries
-          }
-          return [type, levelReached]
-        })
+        )
+          .filter(([type, value]) => synergiesUsable.includes(type))
+          .map(([type, value]) => {
+            let levelReached = player.synergies.getSynergyStep(type)
+            // removing low triggers synergies
+            if (type === Synergy.FLORA || type === Synergy.LIGHT) {
+              levelReached = min(0)(levelReached - 1)
+            }
+            if (
+              stageLevel === 20 &&
+              (type === Synergy.GOURMET || type === Synergy.NORMAL)
+            ) {
+              // not enough legendaries of that type
+              levelReached = max(2)(levelReached)
+            }
+            return [type, levelReached]
+          })
         const candidatesSymbols: Synergy[] = []
         synergiesTriggerLevels.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
@@ -609,7 +612,7 @@ export class MiniGame {
         }
         while (candidatesSymbols.length < 4) {
           // if still incomplete, complete with random
-          candidatesSymbols.push(pickRandomIn(Synergy))
+          candidatesSymbols.push(pickRandomIn(synergiesUsable))
           /*logger.debug(
             "completing symbols with random synergies",
             candidatesSymbols
