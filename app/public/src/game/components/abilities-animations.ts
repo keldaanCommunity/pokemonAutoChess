@@ -1418,10 +1418,11 @@ export const AbilitiesAnimations: {
   [Ability.MUD_SHOT]: projectile({ scale: 4, duration: 350 }),
   [Ability.MOONBLAST]: (args) =>
     projectile({
-      scale: 2,
+      scale: 1,
       duration: 200,
       delay: args.delay,
-      tweenProps: { scale: 0.5 }
+      tweenProps: { scale: 2 },
+      hitAnim: onTarget({ ability: "PUFF_PINK" })
     })(args),
   [Ability.POLTERGEIST]: projectile({
     scale: 3,

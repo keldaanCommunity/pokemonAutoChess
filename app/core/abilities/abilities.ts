@@ -4171,7 +4171,6 @@ export class SpectralThiefStrategy extends AbilityStrategy {
           `Spectral Thief: No class found for ${target.name} [index ${target.index}]`
         )
 
-      
       const base = new PkmClass(target.name)
       const boostAtk = min(0)(target.atk - target.baseAtk)
       const boostSpeed = min(0)(target.speed - base.speed)
@@ -14317,19 +14316,17 @@ export class MoonblastStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
 
     const damage = 20
-    let lastTarget: PokemonEntity | undefined = pokemon
     let currentTarget: PokemonEntity | undefined = target
     let moonsRemaining = 6
     let moonIndex = 0
 
-    // Launch 6 moons instantly, gaining extra moons when targets die
-    while (moonsRemaining > 0 && currentTarget) {
+    function sendMoon() {
+      if (!currentTarget) return
       pokemon.broadcastAbility({
-        positionX: lastTarget.positionX,
-        positionY: lastTarget.positionY,
+        positionX: pokemon.positionX,
+        positionY: pokemon.positionY,
         targetX: currentTarget.positionX,
-        targetY: currentTarget.positionY,
-        delay: moonIndex * 200
+        targetY: currentTarget.positionY
       })
 
       moonIndex++
@@ -14370,14 +14367,23 @@ export class MoonblastStrategy extends AbilityStrategy {
           )[0]
 
         if (closestEnemy) {
-          lastTarget = currentTarget
           currentTarget = closestEnemy
           moonsRemaining++ // Gain 1 additional moon when switching targets
         } else {
           currentTarget = undefined
         }
       }
+
+      if (moonsRemaining > 0 && currentTarget) {
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            sendMoon()
+          }, 200)
+        )
+      }
     }
+
+    sendMoon()
   }
 }
 
