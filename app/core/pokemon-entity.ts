@@ -40,7 +40,7 @@ import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
-import { clamp, max, min, roundToNDigits } from "../utils/number"
+import { clamp, max, min } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -485,7 +485,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (1 + (apBoost * caster.ap) / 100) *
       (crit ? caster.critPower : 1)
 
-    this.critPower = min(0)(roundToNDigits(this.critPower + value, 2))
+    this.critPower = min(0)(this.critPower + value)
   }
 
   addMaxHP(

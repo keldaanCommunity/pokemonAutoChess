@@ -52,7 +52,7 @@ import {
   isOnBench
 } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
-import { clamp, min, roundToNDigits } from "../../utils/number"
+import { clamp, min } from "../../utils/number"
 import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
@@ -345,7 +345,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   addCritPower(value: number) {
-    this.critPower = min(0)(roundToNDigits(this.critPower + value, 2))
+    this.critPower = min(0)(this.critPower + value / 100)
   }
 
   addShield(value: number) {
