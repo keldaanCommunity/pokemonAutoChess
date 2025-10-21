@@ -2928,7 +2928,7 @@
 		"BURMY": "Burmy evoluciona a Wormadam si consigues 3 Burmy con el mismo camuflaje, o a Mothim tras la etapa 20 si se transporta a una región que no tiene su tipo de camuflaje",
 		"PSYDUCK": "Tiene un [10,LK]% de posibilidades de sufrir CONFUSION al recibir un golpe. Cada vez que entra en CONFUSION, gana 100 AP",
 		"BLOODMOON": "Cambia de forma durante BLOODMOON",
-		"RECYCLE": "Aliméntalo con objetos consumibles para ganar 30 HP máximos permanentes y obtener TRASH a cambio.",
+		"RECYCLE": "Aliméntalo con una baya para ganar 15 HP máximos permanentes, o con otro objeto consumible para ganar 30 HP máximos permanentes y obtener TRASH a cambio.",
 		"DREAM_CATCHER": "Si el objetivo de este pokémon esta SLEEP, sus ataques otorgan 10 de SHIELD a los 3 aliados más cercanos a él.",
 		"SLOW_START": "Comienza con -30 SPEED. Después de lanzar su habilidad por primera vez, obtiene 30 SPEED y 10 ATK",
 		"STONJOURNER": "No se mueve ni ataca hasta que la barra de PP esté llena. Su Fuente Energía le da 50 AP a todos los aliados adyacentes al comienzo de la pelea.",

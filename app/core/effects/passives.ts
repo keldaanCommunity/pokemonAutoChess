@@ -1198,7 +1198,11 @@ export const PassiveEffects: Partial<
   [Passive.CHINGLING]: [chinglingCountCastsEffect],
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
-      if (ConsumableItems.includes(item)) {
+      if (Berries.includes(item)) {
+        pokemon.addMaxHP(15, player)
+        removeInArray(player.items, item)
+        return false
+      } else if (ConsumableItems.includes(item)) {
         pokemon.addMaxHP(30, player)
         player.items.push(Item.TRASH)
         removeInArray(player.items, item)
