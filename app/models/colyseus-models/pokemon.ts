@@ -5767,7 +5767,7 @@ export class Regice extends Pokemon {
   atk = 25
   speed = 41
   def = 15
-  speDef = 25
+  speDef = 20
   maxPP = 100
   range = 1
   skill = Ability.HAIL
@@ -5824,7 +5824,7 @@ export class Regirock extends Pokemon {
   hp = 300
   atk = 25
   speed = 41
-  def = 25
+  def = 20
   speDef = 15
   maxPP = 100
   range = 1
@@ -5882,8 +5882,8 @@ export class Registeel extends Pokemon {
   hp = 300
   atk = 25
   speed = 41
-  def = 20
-  speDef = 20
+  def = 15
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.IRON_HEAD

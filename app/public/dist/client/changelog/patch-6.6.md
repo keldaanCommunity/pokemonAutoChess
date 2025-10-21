@@ -60,7 +60,7 @@
 - Nerf Stealth Rocks (Regirock): special damage 20/40/80 → 50 at all tiers
 - Nerf Regirock: Defense 25 → 20
 - Nerf Regice: Special Defense 25 → 20
-- Nerf Registeel: HP 250 → 220 ; Defense 25 → 20 ; Special Defense 25 → 20
+- Nerf Registeel: Defense 20 → 15 ; Special Defense 25 → 15
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
 - Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
 - Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
