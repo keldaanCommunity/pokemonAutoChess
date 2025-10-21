@@ -945,6 +945,7 @@ const spiritombWispEffect = new OnSimulationStartEffect(
     if (nbOddKeystones === 0) return
     const shieldAmount = nbOddKeystones * 10
     const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+      if (entity.hp <= 0) return
       entity.broadcastAbility({
         skill: "WISP",
         positionX: entity.positionX,
