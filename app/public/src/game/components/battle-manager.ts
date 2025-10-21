@@ -135,6 +135,15 @@ export default class BattleManager {
     this.group.clear(true, true)
     this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
     this.pokemonSprites.clear()
+    this.closeTooltips()
+  }
+
+  closeTooltips() {
+    this.pokemonSprites.forEach((pokemon) => {
+      if (pokemon.detail) {
+        pokemon.closeDetail()
+      }
+    })
   }
 
   removePokemon(simulationId: string, pokemon: IPokemonEntity) {
