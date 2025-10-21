@@ -335,7 +335,7 @@ export default class Shop {
     const allCandidates =
       stageLevel === PortalCarouselStages[1]
         ? [...UniquePool]
-        : [...LegendaryPool]
+        : [...LegendaryPool]        
 
     // ensure we have at least one synergy per proposition
     if (portalSynergies.length > NB_UNIQUE_PROPOSITIONS) {
@@ -368,7 +368,18 @@ export default class Shop {
       })
 
       if (candidates.length === 0) candidates = allCandidates
-      let selected = pickRandomIn(candidates)
+      let selected = pickRandomIn(candidates) 
+
+      if (selected in PkmRegionalVariants) {
+        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+          new PokemonClasses[selected](selected).isInRegion(player.map)
+        )
+        if (regionalVariants.length > 0) selected = pickRandomIn(regionalVariants)
+      }
+      if (selected in PkmColorVariantsByPkm) {
+        selected = PkmColorVariantsByPkm[selected]!(player)
+      }
+
       if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
