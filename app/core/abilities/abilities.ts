@@ -11997,8 +11997,9 @@ export class StockpileStrategy extends AbilityStrategy {
       }
       // retrieve base stats
       //only remove hp buffs from stockpile, not other sources
-      const hpGained = hpGain * 3 * ( 1 + pokemon.ap/100 )
-      pokemon.maxHP = pokemon.maxHP - hpGained
+      const hpGained = hpGain * 3 * (1 + pokemon.ap / 100)
+      //prevent overflow resulting in hp values too high
+      pokemon.maxHP = clamp(pokemon.maxHP - hpGained, pokemon.baseHP, 9999)
       pokemon.hp = Math.min(pokemon.hp, pokemon.maxHP)
       pokemon.addSpeed(30, pokemon, 0, false)
     } else {
