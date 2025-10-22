@@ -574,7 +574,6 @@ export interface IPokemonEntity {
   isSpawn: boolean
   commands: ISimulationCommand[]
   effectsSet: Set<EffectClass>
-  flyingProtection: number
   inSpotlight: boolean
 }
 

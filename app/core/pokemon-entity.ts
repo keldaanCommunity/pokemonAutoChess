@@ -58,7 +58,11 @@ import {
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
-import { FireHitEffect, MonsterKillEffect } from "./effects/synergies"
+import {
+  FireHitEffect,
+  FlyingProtectionEffect,
+  MonsterKillEffect
+} from "./effects/synergies"
 import { FlowerMonByPot, FlowerPot, getFlowerPotsUnlocked } from "./flower-pots"
 import { IdleState } from "./idle-state"
 import { ItemStats } from "./items"
@@ -124,7 +128,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   specialDamageReduced: number
   shieldDamageTaken: number
   shieldDone: number
-  flyingProtection = 0
   grassHealCooldown = 2000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
@@ -995,108 +998,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
     isRetaliation: boolean
   }) {
-    // Flying protection
-    if (
-      this.flyingProtection > 0 &&
-      this.hp > 0 &&
-      this.canMove &&
-      !this.status.paralysis
-    ) {
-      const pcHp = this.hp / this.maxHP
-
-      if (this.effects.has(EffectEnum.TAILWIND) && pcHp < 0.2) {
-        this.flyAway(board)
-        this.flyingProtection--
-      } else if (this.effects.has(EffectEnum.FEATHER_DANCE) && pcHp < 0.2) {
-        this.status.triggerProtect(2000)
-        this.flyAway(board)
-        this.flyingProtection--
-      } else if (this.effects.has(EffectEnum.MAX_AIRSTREAM)) {
-        if (
-          (this.flyingProtection === 2 && pcHp < 0.5) ||
-          (this.flyingProtection === 1 && pcHp < 0.2)
-        ) {
-          this.status.triggerProtect(2000)
-          this.flyAway(board)
-          this.flyingProtection--
-        }
-      } else if (this.effects.has(EffectEnum.SKYDIVE)) {
-        if (
-          (this.flyingProtection === 2 && pcHp < 0.5) ||
-          (this.flyingProtection === 1 && pcHp < 0.2)
-        ) {
-          const destination =
-            board.getFarthestTargetCoordinateAvailablePlace(this)
-          if (destination) {
-            this.status.triggerProtect(2000)
-            this.broadcastAbility({
-              skill: "FLYING_TAKEOFF",
-              targetX: destination.target.positionX,
-              targetY: destination.target.positionY
-            })
-            this.skydiveTo(destination.x, destination.y, board)
-            this.setTarget(destination.target)
-            this.flyingProtection--
-            this.commands.push(
-              new DelayedCommand(() => {
-                this.broadcastAbility({
-                  skill: "FLYING_SKYDIVE",
-                  positionX: destination.x,
-                  positionY: destination.y,
-                  targetX: destination.target.positionX,
-                  targetY: destination.target.positionY
-                })
-              }, 500)
-            )
-            this.commands.push(
-              new DelayedCommand(() => {
-                if (destination.target?.maxHP > 0) {
-                  destination.target.handleSpecialDamage(
-                    1.5 * this.atk,
-                    board,
-                    AttackType.PHYSICAL,
-                    this,
-                    chance(this.critChance / 100, this),
-                    false
-                  )
-                }
-              }, 1000)
-            )
-          }
-        }
-      }
-    }
-
-    // Fighting knockback
-    if (
-      this.count.fightingBlockCount > 0 &&
-      this.count.fightingBlockCount %
-        (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) ===
-        0 &&
-      !isRetaliation &&
-      distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
-        1
-    ) {
-      const targetAtContact = board.getEntityOnCell(this.targetX, this.targetY)
-      const destination = this.state.getNearestAvailablePlaceCoordinates(
-        this,
-        board,
-        4
-      )
-      if (destination && targetAtContact) {
-        targetAtContact.shield = 0
-        targetAtContact.handleDamage({
-          damage: this.atk,
-          board,
-          attackType: AttackType.PHYSICAL,
-          attacker: this,
-          shouldTargetGainMana: true,
-          isRetaliation: true
-        })
-        targetAtContact.moveTo(destination.x, destination.y, board)
-      }
-    }
-
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {
@@ -1429,7 +1330,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           true
         )
         spawnedEntity.shield = 0 // remove existing shield
-        spawnedEntity.flyingProtection = 0 // prevent flying effects twice
+        spawnedEntity
+          .getEffects(FlyingProtectionEffect)
+          .forEach((effect: FlyingProtectionEffect) => {
+            effect.flyingProtection = 0 // prevent flying effects twice
+          })
         SynergyEffects[Synergy.FOSSIL].forEach((e) =>
           spawnedEntity.effects.delete(e)
         )
@@ -1497,6 +1402,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         resetMonsterStacks(effect)
       } else if (effect instanceof FireHitEffect) {
         resetFireStacks(effect)
+      } else if (effect instanceof FlyingProtectionEffect) {
+        effect.flyingProtection = 0 // prevent flying effects twice
       }
     })
     const soundEffect = SynergyEffects[Synergy.SOUND].find((effect) =>
@@ -1508,7 +1415,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     this.status.resurection = false // prevent resurrecting again
     this.shield = 0 // remove existing shield
-    this.flyingProtection = 0 // prevent flying effects twice
   }
 
   eatBerry(berry: Item, stealedFrom?: PokemonEntity, inPuffin = false) {
@@ -1691,7 +1597,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive) {
       const oldPassiveEffects = PassiveEffects[this.passive] ?? []
       oldPassiveEffects.forEach((effect) => {
-        this.effectsSet.delete(effect)
+        if(effect instanceof EffectClass) this.effectsSet.delete(effect)
       })
     }
 
@@ -1706,10 +1612,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  getEffects<T extends typeof EffectClass>(effectClass: T): InstanceType<T>[] {
-    return [...this.effectsSet.values()].filter(
-      (effect): effect is InstanceType<T> => effect instanceof effectClass
-    )
+  getEffects<T extends new (...args: any[]) => any>(effectClass: T): InstanceType<T>[] {
+    return [...this.effectsSet.values()]
+      .filter(
+        (effect): effect is InstanceType<T> => effect instanceof effectClass
+      )
+      .sort((a, b) => b.priority - a.priority)
   }
 
   addStack() {
