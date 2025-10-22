@@ -11970,6 +11970,7 @@ export class StockpileStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
 
+    const hpGain = 50
     if (pokemon.count.ult % 4 === 0) {
       // If over 3 stacks, spit up, propelling the user to the backline and dealing 50% of max HP as SPECIAL to the target
       const damage = Math.ceil(0.5 * pokemon.maxHP)
@@ -11995,11 +11996,13 @@ export class StockpileStrategy extends AbilityStrategy {
         pokemon.moveTo(corner.x, corner.y, board)
       }
       // retrieve base stats
-      pokemon.maxHP = pokemon.baseHP
+      //only remove hp buffs from stockpile, not other sources
+      const hpGained = hpGain * 3 * ( 1 + pokemon.ap/100 )
+      pokemon.maxHP = pokemon.maxHP - hpGained
       pokemon.hp = Math.min(pokemon.hp, pokemon.maxHP)
       pokemon.addSpeed(30, pokemon, 0, false)
     } else {
-      pokemon.addMaxHP(50, pokemon, 1, crit)
+      pokemon.addMaxHP(hpGain, pokemon, 1, crit)
       pokemon.addSpeed(-10, pokemon, 0, false)
     }
   }
