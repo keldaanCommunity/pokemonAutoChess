@@ -1754,10 +1754,12 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   addPikachuSurferToBoard(team: Team) {
+    const player = team === Team.RED_TEAM ? this.redPlayer : this.bluePlayer
     const pikachuSurfer = PokemonFactory.createPokemonFromName(
       Pkm.PIKACHU_SURFER,
-      team === Team.RED_TEAM ? this.redPlayer : this.bluePlayer
+      player
     )
+    if (player) player.pokemonsPlayed.add(Pkm.PIKACHU_SURFER)
     const coord = this.getFirstFreeCell(team)
     if (coord) {
       this.addPokemon(pikachuSurfer, coord.x, coord.y, team, true)
