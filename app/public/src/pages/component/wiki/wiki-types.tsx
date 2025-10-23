@@ -57,20 +57,16 @@ export function WikiType(props: { type: Synergy }) {
 
   const pokemons = PRECOMPUTED_POKEMONS_PER_TYPE[props.type]
     .filter((p) => p !== Pkm.DEFAULT)
+    .filter((p, index, list) => {
+      if (getPokemonData(p).skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
+      if (getPokemonData(p).rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
+      if (!showEvolutions 
+          && PkmFamily[p] !== p
+          && getPokemonData(PkmFamily[p]).stars !== getPokemonData(p).stars) return false
+      return true
+    })
     .map((p) => getPokemonData(p))
     .sort((a, b) => a.stars - b.stars) // put first stage first
-    .filter((p, index, list) => {
-      if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-      if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-      if (showEvolutions) return true
-      // remove if already one member of family in the list
-      return (
-        list.findIndex(
-          (p2) =>
-            PkmFamily[p.name] === PkmFamily[p2.name] && p2.rarity === p.rarity
-        ) === index
-      )
-    })
 
   const filteredPokemons = pokemons.filter((p) =>
     overlap ? p.types.includes(overlap) : true
