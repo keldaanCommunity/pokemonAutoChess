@@ -2615,7 +2615,7 @@
 		"SMOKE_BALL": "Une fois sous les 40% de ses HP max, lâche la boule de fumée, gagne 50 SHIELD et saute vers une case plus loin. Tous les ennemis ADJACENT subissent PARALYSIS et sont BLINDED pendant 4 secondes",
 		"XRAY_VISION": "+50 SPEED. Les attaques du porteur ne peuvent plus manquer",
 		"RAZOR_FANG": "+100% CRIT_POWER. Les coups critiques appliquent ARMOR_BREAK pendant 2 secondes",
-		"PROTECTIVE_PADS": "Les attaques du porteur infligent le double de dégâts au SHIELD. Le porteur est protégé des dégâts de contrecoup et des effets de riposte",
+		"PROTECTIVE_PADS": "Le porteur inflige le double de dégâts aux unités avec un SHIELD, et est protégé des dégâts de contrecoup et des effets de riposte",
 		"CHOICE_SCARF": "Les attaques du porteur touchent également l'ennemi ADJACENT à la cible ayant le moins de HP, lui infligeant 50 % des dégâts de l'attaque. Peut déclencher des effets de contact.",
 		"PUNCHING_GLOVE": "Les attaques infligent 8 % des HP max de la cible en PHYSICAL supplémentaires",
 		"MUSCLE_BAND": "Lorsque le porteur subit des dégâts, accumule 1 charge. Toutes les 2 charges, le détenteur gagne +2 DEF, +1 ATK et +5 SPEED (max 20 charges)",

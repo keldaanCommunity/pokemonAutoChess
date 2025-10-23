@@ -2615,7 +2615,7 @@
 		"SMOKE_BALL": "Once below 40% max HP, drop the smoke ball, gain 50 SHIELD and jump to a tile away. Every ADJACENT enemy is PARALYSIS and BLINDED for 4 seconds.",
 		"XRAY_VISION": "+50 SPEED. The holder attacks can no longer miss.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Critical attacks apply ARMOR_BREAK for 2 seconds.",
-		"PROTECTIVE_PADS": "Attacks deal double damage against SHIELD. User is protected from recoil damage and retaliation effects.",
+		"PROTECTIVE_PADS": "Holder deals double damage against units with  SHIELD, and is protected from recoil damage and retaliation effects.",
 		"CHOICE_SCARF": "Attacks also hit the lowest health enemy ADJACENT to target for 50% of the attack damage, which can trigger on-hit effects.",
 		"PUNCHING_GLOVE": "Attacks deal 8 % of target max HP as additional PHYSICAL on hit",
 		"MUSCLE_BAND": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +2 DEF, +1 ATK and +5 SPEED (max 20 stacks)",
