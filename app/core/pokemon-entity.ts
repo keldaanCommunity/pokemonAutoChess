@@ -46,6 +46,7 @@ import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import type { Board } from "./board"
 import {
+  Effect,
   Effect as EffectClass,
   OnAttackEffect,
   OnDamageDealtEffect,
@@ -445,8 +446,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
 
     if (
-      !this.status.silence &&
-      !this.status.protect &&
+      !(value > 0 && this.status.silence) &&
+      !(value > 0 && this.status.protect) &&
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
@@ -647,7 +648,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(item) == false) {
       this.items.add(item)
-      this.simulation.applyItemEffect(this, item)
+      this.applyItemEffect(item)
     }
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
@@ -667,6 +668,29 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  applyItemEffect(item: Item) {
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
+      this.applyStat(stat as Stat, value)
+    })
+
+    ItemEffects[item]?.forEach((effectOrEffectFn) => {
+      const effect: Effect = isPlainFunction(effectOrEffectFn)
+        ? effectOrEffectFn()
+        : effectOrEffectFn
+      if (effect instanceof OnItemGainedEffect) {
+        effect.apply(this, item) // OnItemGainedEffect from ItemEffects are applied immediately and not added to effectsSet
+      } else if (effect instanceof OnItemRemovedEffect) {
+        return // OnItemRemovedEffect from ItemEffects are handled separately in removeItemEffect when removing items and not added to effectsSet
+      } else {
+        this.effectsSet.add(effect)
+      }
+    })
+
+    this.getEffects(OnItemGainedEffect).forEach((effect) => {
+      effect.apply(this, item)
+    })
+  }
+
   removeItemEffect(item: Item) {
     Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
       this.applyStat(stat as Stat, -value)
@@ -684,19 +708,28 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    ItemEffects[item]?.forEach((effect) => {
-      if (effect instanceof OnItemRemovedEffect) effect.apply(this)
-      if (effect instanceof EffectClass) this.effectsSet.delete(effect)
-      else if (isPlainFunction(effect)) {
-        const ef = effect()
+    ItemEffects[item]?.forEach((effectOrEffectFn) => {
+      const effect: Effect = isPlainFunction(effectOrEffectFn)
+        ? effectOrEffectFn()
+        : effectOrEffectFn
+      if (effect instanceof OnItemRemovedEffect)
+        effect.apply(this, item) // OnItemRemovedEffect from ItemEffects are applied here because they are not added to effectsSet
+      else if (effectOrEffectFn instanceof EffectClass)
+        this.effectsSet.delete(effect)
+      else if (isPlainFunction(effectOrEffectFn)) {
         this.effectsSet.forEach((e) => {
           /* delete all effects of the same class
              NOTE: all item effects declared as functions should have their own class, which should be the case because the only reason to use a function to create a new instance of effect
              instead of linking directly to an effect instance is to be able to store internal state for this effect, like stacks, which are stored as private fields of a specific class
            */
-          if (e.constructor === ef.constructor) this.effectsSet.delete(e)
+          if (e.constructor === effect.constructor) this.effectsSet.delete(e)
         })
       }
+    })
+
+    // apply the other OnItemRemovedEffects that could be present from other sources (passives, synergies, ...)
+    this.getEffects(OnItemRemovedEffect).forEach((effect) => {
+      effect.apply(this, item)
     })
   }
 
@@ -1447,12 +1480,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     stackingItems.forEach((item) => {
       if (this.items.has(item)) {
-        ItemEffects[item]
-          ?.filter((effect) => effect instanceof OnItemRemovedEffect)
-          ?.forEach((effect) => effect.apply(this))
-        ItemEffects[item]
-          ?.filter((effect) => effect instanceof OnItemGainedEffect)
-          ?.forEach((effect) => effect.apply(this))
+        this.removeItemEffect(item)
+        this.applyItemEffect(item)
       }
     })
 
@@ -1717,15 +1746,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.stacks++
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
-    const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
-      this.refToBoardPokemon as Pokemon,
-      this.player,
-      this.simulation.stageLevel
-    )
-    if (pokemonEvolved) {
-      // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
-      this.index = pokemonEvolved.index
-      this.name = pokemonEvolved.name
+    if (this.stacks === this.stacksRequired) {
+      const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
+        this.refToBoardPokemon as Pokemon,
+        this.player,
+        this.simulation.stageLevel
+      )
+      if (pokemonEvolved) {
+        // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
+        this.index = pokemonEvolved.index
+        this.name = pokemonEvolved.name
+      }
     }
     return
   }

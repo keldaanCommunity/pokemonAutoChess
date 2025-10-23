@@ -15,6 +15,7 @@ import {
   OnDamageDealtEffectArgs,
   OnDeathEffect,
   OnKillEffect,
+  OnKillEffectArgs,
   OnSpawnEffect
 } from "./effect"
 
@@ -27,11 +28,11 @@ export class MonsterKillEffect extends OnKillEffect {
     this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
   }
 
-  apply({ attacker, target }) {
+  apply({ attacker, target }: OnKillEffectArgs) {
     const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
     const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
     const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
-    const lifeBoost = hpGain * target.hp
+    const lifeBoost = hpGain * target.maxHP
     attacker.addAttack(attackBoost, attacker, 0, false)
     attacker.addAbilityPower(apBoost, attacker, 0, false)
     attacker.addMaxHP(lifeBoost, attacker, 0, false)

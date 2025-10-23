@@ -964,7 +964,8 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateCurse(dt: number, board: Board, pokemon: PokemonEntity) {
-    if (this.curseCooldown - dt <= 0) {
+    this.curseCooldown -= dt
+    if (this.curseCooldown <= 0) {
       this.curse = false
       pokemon.handleDamage({
         damage: 9999,
@@ -980,8 +981,6 @@ export default class Status extends Schema implements IStatus {
         positionY: pokemon.positionY,
         orientation: pokemon.orientation
       })
-    } else {
-      this.curseCooldown -= dt
     }
   }
 

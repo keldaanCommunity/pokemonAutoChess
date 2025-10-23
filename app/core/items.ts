@@ -61,7 +61,6 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.CHOICE_SCARF]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
-  [Item.WONDER_BOX]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.STICKY_BARB]: { [Stat.DEF]: 3, [Stat.SHIELD]: 15 },
   [Item.ABILITY_SHIELD]: { [Stat.AP]: 10 },
   [Item.WIDE_LENS]: {
