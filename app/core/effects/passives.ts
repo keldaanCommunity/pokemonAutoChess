@@ -765,11 +765,11 @@ const conversionEffect = new OnSimulationStartEffect(
     if (synergyCopied === Synergy.BUG) {
       const coord = simulation.getClosestFreeCellToPokemonEntity(
         entity,
-        player.team
+        entity.team
       )
       if (coord) {
         const bug = PokemonFactory.createPokemonFromName(entity.name, player)
-        simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
+        simulation.addPokemon(bug, coord.x, coord.y, entity.team, true)
       }
     }
 
