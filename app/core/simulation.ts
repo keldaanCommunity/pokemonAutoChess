@@ -59,7 +59,9 @@ import {
 import { WaterSpringEffect } from "./effects/passives"
 import {
   electricTripleAttackEffect,
+  FightingKnockbackEffect,
   FireHitEffect,
+  FlyingProtectionEffect,
   GroundHoleEffect,
   humanHealEffect,
   MonsterKillEffect,
@@ -991,6 +993,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.JUSTIFIED:
         if (types.has(Synergy.FIGHTING)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FightingKnockbackEffect(effect))
         }
         break
 
@@ -1053,30 +1056,12 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.TAILWIND:
-        if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 1
-          pokemon.effects.add(EffectEnum.TAILWIND)
-        }
-        break
-
       case EffectEnum.FEATHER_DANCE:
-        if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 1
-          pokemon.effects.add(EffectEnum.FEATHER_DANCE)
-        }
-        break
-
       case EffectEnum.MAX_AIRSTREAM:
-        if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 2
-          pokemon.effects.add(EffectEnum.MAX_AIRSTREAM)
-        }
-        break
-
       case EffectEnum.SKYDIVE:
         if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 2
-          pokemon.effects.add(EffectEnum.SKYDIVE)
+          pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FlyingProtectionEffect(effect))
         }
         break
 

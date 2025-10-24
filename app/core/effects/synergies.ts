@@ -8,11 +8,16 @@ import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { distanceC } from "../../utils/distance"
+import { chance } from "../../utils/random"
+import { DelayedCommand } from "../simulation-command"
 import {
   OnAbilityCastEffect,
   OnAttackEffect,
   OnDamageDealtEffect,
   OnDamageDealtEffectArgs,
+  OnDamageReceivedEffect,
+  OnDamageReceivedEffectArgs,
   OnDeathEffect,
   OnKillEffect,
   OnKillEffectArgs,
@@ -226,5 +231,138 @@ export class OnFieldDeathEffect extends OnDeathEffect {
         })
       }, 16) // delay to next tick, targeting 60 ticks per second
     }, effect)
+  }
+}
+
+export class FlyingProtectionEffect extends OnDamageReceivedEffect {
+  priority = -1
+  flyingProtection: number = 0
+  constructor(effect: EffectEnum) {
+    super(undefined, effect)
+    if (effect === EffectEnum.FEATHER_DANCE || effect === EffectEnum.TAILWIND) {
+      this.flyingProtection = 1
+    } else if (
+      effect === EffectEnum.MAX_AIRSTREAM ||
+      effect === EffectEnum.SKYDIVE
+    ) {
+      this.flyingProtection = 2
+    }
+  }
+  apply({ pokemon, board }: OnDamageReceivedEffectArgs) {
+    // Flying protection
+    if (
+      this.flyingProtection > 0 &&
+      pokemon.hp > 0 &&
+      pokemon.canMove &&
+      !pokemon.status.paralysis
+    ) {
+      const pcHp = pokemon.hp / pokemon.maxHP
+
+      if (pokemon.effects.has(EffectEnum.TAILWIND) && pcHp < 0.2) {
+        pokemon.flyAway(board)
+        this.flyingProtection--
+      } else if (pokemon.effects.has(EffectEnum.FEATHER_DANCE) && pcHp < 0.2) {
+        pokemon.status.triggerProtect(2000)
+        pokemon.flyAway(board)
+        this.flyingProtection--
+      } else if (pokemon.effects.has(EffectEnum.MAX_AIRSTREAM)) {
+        if (
+          (this.flyingProtection === 2 && pcHp < 0.5) ||
+          (this.flyingProtection === 1 && pcHp < 0.2)
+        ) {
+          pokemon.status.triggerProtect(2000)
+          pokemon.flyAway(board)
+          this.flyingProtection--
+        }
+      } else if (pokemon.effects.has(EffectEnum.SKYDIVE)) {
+        if (
+          (this.flyingProtection === 2 && pcHp < 0.5) ||
+          (this.flyingProtection === 1 && pcHp < 0.2)
+        ) {
+          const destination =
+            board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+          if (destination) {
+            pokemon.status.triggerProtect(2000)
+            pokemon.broadcastAbility({
+              skill: "FLYING_TAKEOFF",
+              targetX: destination.target.positionX,
+              targetY: destination.target.positionY
+            })
+            pokemon.skydiveTo(destination.x, destination.y, board)
+            pokemon.setTarget(destination.target)
+            this.flyingProtection--
+            pokemon.commands.push(
+              new DelayedCommand(() => {
+                pokemon.broadcastAbility({
+                  skill: "FLYING_SKYDIVE",
+                  positionX: destination.x,
+                  positionY: destination.y,
+                  targetX: destination.target.positionX,
+                  targetY: destination.target.positionY
+                })
+              }, 500)
+            )
+            pokemon.commands.push(
+              new DelayedCommand(() => {
+                if (destination.target?.maxHP > 0) {
+                  destination.target.handleSpecialDamage(
+                    1.5 * pokemon.atk,
+                    board,
+                    AttackType.PHYSICAL,
+                    pokemon,
+                    chance(pokemon.critChance / 100, pokemon),
+                    false
+                  )
+                }
+              }, 1000)
+            )
+          }
+        }
+      }
+    }
+  }
+}
+
+export class FightingKnockbackEffect extends OnDamageReceivedEffect {
+  constructor(effect: EffectEnum) {
+    super(undefined, effect)
+  }
+  apply({ pokemon, board, isRetaliation }: OnDamageReceivedEffectArgs) {
+    // Fighting knockback
+    if (
+      pokemon.count.fightingBlockCount > 0 &&
+      pokemon.count.fightingBlockCount %
+        (this.origin === EffectEnum.JUSTIFIED ? 8 : 10) ===
+        0 &&
+      !isRetaliation &&
+      distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.targetX,
+        pokemon.targetY
+      ) === 1
+    ) {
+      const targetAtContact = board.getEntityOnCell(
+        pokemon.targetX,
+        pokemon.targetY
+      )
+      const destination = pokemon.state.getNearestAvailablePlaceCoordinates(
+        pokemon,
+        board,
+        4
+      )
+      if (destination && targetAtContact) {
+        targetAtContact.shield = 0
+        targetAtContact.handleDamage({
+          damage: pokemon.atk,
+          board,
+          attackType: AttackType.PHYSICAL,
+          attacker: pokemon,
+          shouldTargetGainMana: true,
+          isRetaliation: true
+        })
+        targetAtContact.moveTo(destination.x, destination.y, board)
+      }
+    }
   }
 }

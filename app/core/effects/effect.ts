@@ -15,6 +15,7 @@ import Simulation from "../simulation"
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
 export abstract class Effect {
+  priority: number = 0
   origin?: EffectOrigin
   apply(...args: any[]) {}
   constructor(effect?: (...args: any[]) => void, origin?: EffectOrigin) {
@@ -238,7 +239,7 @@ export class OnAbilityCastEffect extends Effect {
 
 // applied after having received damage and not being KO
 
-interface OnDamageReceivedEffectArgs {
+export interface OnDamageReceivedEffectArgs {
   pokemon: PokemonEntity
   attacker: PokemonEntity | null
   board: Board
