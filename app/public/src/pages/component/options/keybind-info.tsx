@@ -98,6 +98,11 @@ export default function KeybindInfo() {
         <dd>{t("key_desc_switch")}</dd>
 
         <dt>
+          <RemappableKey keyId="expand_description" />
+        </dt>
+        <dd>{t("key_desc_expand_ability")}</dd>
+
+        <dt>
           <RemappableKey keyId="emote" />
         </dt>
         <dd>{t("key_desc_avatar_anim")}</dd>
@@ -116,6 +121,7 @@ export default function KeybindInfo() {
           <RemappableKey keyId="board_return" />
         </dt>
         <dd>{t("key_desc_board_return")}</dd>
+        
 
         <dt>
           <kbd>Ctrl</kbd>
