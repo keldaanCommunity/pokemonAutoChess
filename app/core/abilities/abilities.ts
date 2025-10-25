@@ -20,7 +20,6 @@ import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
 import { isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
-import { repeat } from "../../utils/function"
 import { logger } from "../../utils/logger"
 import { calcAngleDegrees, clamp, max, min } from "../../utils/number"
 import {
@@ -839,6 +838,7 @@ export class AquaJetStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -848,18 +848,24 @@ export class AquaJetStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -951,6 +957,7 @@ export class FlameChargeStrategy extends AbilityStrategy {
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -960,13 +967,7 @@ export class FlameChargeStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
@@ -976,6 +977,18 @@ export class FlameChargeStrategy extends AbilityStrategy {
       })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -1770,6 +1783,7 @@ export class VoltSwitchStrategy extends AbilityStrategy {
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -1780,18 +1794,23 @@ export class VoltSwitchStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -2475,6 +2494,7 @@ export class WheelOfFireStrategy extends AbilityStrategy {
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     const cells = board.getCellsBetween(
       pokemon.positionX,
@@ -2490,22 +2510,30 @@ export class WheelOfFireStrategy extends AbilityStrategy {
           positionX: cell.x,
           positionY: cell.y
         })
-
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
+        targetsHit.add(cell.value)
       }
+    })
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      enemy.commands.push(
+        new DelayedCommand(() => {
+          enemy.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }, 500)
+      )
     })
   }
 }
@@ -2521,6 +2549,7 @@ export class InfernalParadeStrategy extends AbilityStrategy {
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit)
 
+    const targetsHit = new Set<PokemonEntity>()
     const cells = board.getCellsBetween(
       pokemon.positionX,
       pokemon.positionY,
@@ -2530,18 +2559,24 @@ export class InfernalParadeStrategy extends AbilityStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team != pokemon.team) {
-        const enemy = cell.value
-        pokemon.broadcastAbility({
-          skill: "FLAME_HIT",
-          positionX: cell.x,
-          positionY: cell.y
-        })
+        targetsHit.add(cell.value)
+      }
+      pokemon.broadcastAbility({
+        skill: "FLAME_HIT",
+        positionX: cell.x,
+        positionY: cell.y
+      })
+    })
 
-        if (chance(0.5, pokemon)) {
-          enemy.status.triggerBurn(3000, cell.value, pokemon)
-        }
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      if (chance(0.5, pokemon)) {
+        enemy.status.triggerBurn(3000, enemy, pokemon)
+      }
 
-        repeat(2)(() =>
+      enemy.handleSpecialDamage(30, board, AttackType.SPECIAL, pokemon, crit)
+      enemy.commands.push(
+        new DelayedCommand(() => {
           enemy.handleSpecialDamage(
             30,
             board,
@@ -2549,8 +2584,8 @@ export class InfernalParadeStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-        )
-      }
+        }, 500)
+      )
     })
   }
 }
@@ -5197,6 +5232,8 @@ export class DigStrategy extends AbilityStrategy {
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
 
+    const targetsHit: Set<PokemonEntity> = new Set()
+
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -5206,18 +5243,23 @@ export class DigStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
-
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -5341,6 +5383,7 @@ export class PoisonPowderStrategy extends AbilityStrategy {
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -5351,19 +5394,24 @@ export class PoisonPowderStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.status.triggerPoison(5000, target, pokemon)
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.status.triggerPoison(5000, target, pokemon)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -5379,6 +5427,7 @@ export class SilverWindStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     pokemon.addAttack(1, pokemon, 0, false)
     pokemon.addDefense(1, pokemon, 0, false)
@@ -5395,18 +5444,23 @@ export class SilverWindStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -6141,6 +6195,8 @@ export class PyroBallStrategy extends AbilityStrategy {
 
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
+    const targetsHit: Set<PokemonEntity> = new Set()
+
     pokemon.broadcastAbility({
       targetX: farthestTarget.positionX,
       targetY: farthestTarget.positionY
@@ -6154,15 +6210,20 @@ export class PyroBallStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team != pokemon.team) {
-        cell.value.status.triggerBurn(2000, cell.value, pokemon)
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
+        targetsHit.add(cell.value)
       }
+    })
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.status.triggerBurn(2000, enemy, pokemon)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     })
   }
 }
@@ -6177,6 +6238,7 @@ export class WhirlpoolStrategy extends AbilityStrategy {
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit, true)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     const cells = board.getCellsBetween(
       pokemon.positionX,
@@ -6187,19 +6249,24 @@ export class WhirlpoolStrategy extends AbilityStrategy {
     for (let i = 0; i < cells.length; i++) {
       const cell = cells[i]
       if (cell && cell.value && cell.value.team !== pokemon.team) {
+        targetsHit.add(cell.value)
         pokemon.broadcastAbility({ targetX: cell.x, targetY: cell.y })
-        for (let i = 0; i < 4; i++) {
-          cell.value.handleSpecialDamage(
-            Math.ceil(pokemon.atk * 1.25),
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
-        break
+        break // only first enemy in the line is hit
       }
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      for (let i = 0; i < 4; i++) {
+        enemy.handleSpecialDamage(
+          Math.ceil(pokemon.atk * 1.25),
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
   }
 }
 
@@ -6742,6 +6809,7 @@ export class MagicalLeafStrategy extends AbilityStrategy {
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     const cells = board.getCellsBetween(
       pokemon.positionX,
@@ -6751,15 +6819,20 @@ export class MagicalLeafStrategy extends AbilityStrategy {
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team != pokemon.team) {
-        cell.value.status.triggerArmorReduction(3000, cell.value)
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
+        targetsHit.add(cell.value)
       }
+    })
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.status.triggerArmorReduction(3000, enemy)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     })
   }
 }
@@ -7302,6 +7375,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     if (farthestTarget) {
       const cells = board.getCellsBetween(
@@ -7312,16 +7386,21 @@ export class SnipeShotStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -8700,6 +8779,7 @@ export class ExtremeSpeedStrategy extends AbilityStrategy {
     const damage = 40
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
     if (farthestCoordinate) {
       pokemon.broadcastAbility({
         targetX: farthestCoordinate.x,
@@ -8713,18 +8793,23 @@ export class ExtremeSpeedStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -8795,41 +8880,40 @@ export class PsystrikeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const furthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
-    if (furthestTarget) {
-      pokemon.broadcastAbility({
-        targetX: furthestTarget.positionX,
-        targetY: furthestTarget.positionY
-      })
-      const cells = board.getCellsBetween(
-        pokemon.positionX,
-        pokemon.positionY,
-        furthestTarget.positionX,
-        furthestTarget.positionY
-      )
-      cells.forEach((cell) => {
-        if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            80,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+    const furthestTarget =
+      pokemon.state.getFarthestTarget(pokemon, board) ?? target
+    const targetsHit: Set<PokemonEntity> = new Set()
+    pokemon.broadcastAbility({
+      targetX: furthestTarget.positionX,
+      targetY: furthestTarget.positionY
+    })
+    const cells = board.getCellsBetween(
+      pokemon.positionX,
+      pokemon.positionY,
+      furthestTarget.positionX,
+      furthestTarget.positionY
+    )
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team != pokemon.team) {
+        targetsHit.add(cell.value)
+      }
+    })
 
-          const teleportationCell = board.getTeleportationCell(
-            cell.value.positionX,
-            cell.value.positionY,
-            cell.value.team
-          )
-          if (teleportationCell) {
-            cell.value.moveTo(teleportationCell.x, teleportationCell.y, board)
-          } else {
-            logger.error("unable to teleport pokemon", cell.value)
-          }
-        }
-      })
+    if (targetsHit.size === 0) {
+      targetsHit.add(furthestTarget) // guarantee at least the furthest target is hit
     }
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+
+      const teleportationCell = board.getTeleportationCell(
+        enemy.positionX,
+        enemy.positionY,
+        enemy.team
+      )
+      if (teleportationCell) {
+        enemy.moveTo(teleportationCell.x, teleportationCell.y, board)
+      }
+    })
   }
 }
 
@@ -9080,6 +9164,8 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
+
     if (farthestCoordinate) {
       pokemon.broadcastAbility({
         targetX: farthestCoordinate.x,
@@ -9094,18 +9180,24 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
-      pokemon.status.triggerProtect(1000)
     }
+
+    pokemon.status.triggerProtect(1000)
+
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -9169,31 +9261,36 @@ export class PowerWhipStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60][pokemon.stars - 1] ?? 60
 
-    const furthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
-    if (furthestTarget) {
-      const cells = board.getCellsBetween(
-        pokemon.positionX,
-        pokemon.positionY,
-        furthestTarget.positionX,
-        furthestTarget.positionY
+    const furthestTarget =
+      pokemon.state.getFarthestTarget(pokemon, board) ?? target
+    const targetsHit: Set<PokemonEntity> = new Set()
+    const cells = board.getCellsBetween(
+      pokemon.positionX,
+      pokemon.positionY,
+      furthestTarget.positionX,
+      furthestTarget.positionY
+    )
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team != pokemon.team) {
+        targetsHit.add(cell.value)
+        pokemon.broadcastAbility({
+          skill: "POWER_WHIP/hit",
+          positionX: cell.x,
+          positionY: cell.y
+        })
+      }
+    })
+
+    if (targetsHit.size === 0) targetsHit.add(furthestTarget) // guarantee at least the furthest target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
       )
-      cells.forEach((cell) => {
-        if (cell.value && cell.value.team != pokemon.team) {
-          pokemon.broadcastAbility({
-            skill: "POWER_WHIP/hit",
-            positionX: cell.x,
-            positionY: cell.y
-          })
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
-      })
-    }
+    })
   }
 }
 
@@ -9931,6 +10028,7 @@ export class PastelVeilStrategy extends AbilityStrategy {
       pokemon,
       true
     )
+    const alliesHit: Set<PokemonEntity> = new Set()
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -9940,8 +10038,7 @@ export class PastelVeilStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.status.clearNegativeStatus()
-          cell.value.addShield(shield, pokemon, 1, crit)
+          alliesHit.add(cell.value)
         }
       })
 
@@ -9951,6 +10048,12 @@ export class PastelVeilStrategy extends AbilityStrategy {
       })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (alliesHit.size === 0) alliesHit.add(pokemon) // guarantee at least the user is hit
+    alliesHit.forEach((ally) => {
+      ally.status.clearNegativeStatus()
+      ally.addShield(shield, pokemon, 1, crit)
+    })
   }
 }
 
@@ -10076,7 +10179,7 @@ export class GlaiveRushStrategy extends AbilityStrategy {
       pokemon.positionX,
       destinationRow
     )
-    const enemiesHit = new Set()
+    const enemiesHit = new Set<PokemonEntity>()
     if (destination) {
       pokemon.broadcastAbility({
         positionX: pokemon.positionX,
@@ -10095,27 +10198,20 @@ export class GlaiveRushStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           enemiesHit.add(cell.value)
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
         }
       })
     }
 
-    if (enemiesHit.size === 0) {
-      // ensure to at least hit the target
-      target.handleSpecialDamage(
+    if (enemiesHit.size === 0) enemiesHit.add(target) // ensure to at least hit the target
+    enemiesHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
         damage,
         board,
         AttackType.SPECIAL,
         pokemon,
         crit
       )
-    }
+    })
   }
 }
 
@@ -10303,6 +10399,7 @@ export class SteelWingStrategy extends AbilityStrategy {
     const damage = ([10, 20, 40][pokemon.stars - 1] ?? 40) + 2 * pokemon.def
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
@@ -10314,20 +10411,25 @@ export class SteelWingStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           pokemon.broadcastAbility({ positionX: cell.x, positionY: cell.y })
-          pokemon.addDefense(1, pokemon, 0, false)
-          cell.value.addDefense(-1, pokemon, 0, false)
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          targetsHit.add(cell.value)
         }
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if (targetsHit.size === 0) targetsHit.add(target) // ensure to at least hit the target
+    targetsHit.forEach((enemy) => {
+      pokemon.addDefense(1, pokemon, 0, false)
+      enemy.addDefense(-1, pokemon, 0, false)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -10955,6 +11057,8 @@ export class FirestarterStrategy extends AbilityStrategy {
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
+
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -10984,6 +11088,7 @@ export class FirestarterStrategy extends AbilityStrategy {
               pokemon.broadcastAbility({ targetX: cell.x, targetY: cell.y })
 
               if (cell.value && cell.value.team != pokemon.team) {
+                targetsHit.add(cell.value)
                 cell.value.handleSpecialDamage(
                   damage,
                   board,
@@ -11010,6 +11115,17 @@ export class FirestarterStrategy extends AbilityStrategy {
         }
       })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+
+    if (targetsHit.size === 0) {
+      // ensure to at least hit the target
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
   }
 }
@@ -11256,6 +11372,8 @@ export class SurfStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][tierLevel - 1] ?? 80
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit: Set<PokemonEntity> = new Set()
+
     if (farthestCoordinate) {
       pokemon.broadcastAbility({
         targetX: farthestCoordinate.x,
@@ -11269,6 +11387,7 @@ export class SurfStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
+          targetsHit.add(cell.value)
           cell.value.handleSpecialDamage(
             damage,
             board,
@@ -11301,6 +11420,17 @@ export class SurfStrategy extends AbilityStrategy {
       })
 
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+    }
+
+    if (targetsHit.size === 0) {
+      // ensure to at least hit the target
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
   }
 }
@@ -13205,6 +13335,8 @@ export class SteamrollerStrategy extends AbilityStrategy {
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const targetsHit = new Set<PokemonEntity>()
+
     if (farthestCoordinate) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -13214,20 +13346,25 @@ export class SteamrollerStrategy extends AbilityStrategy {
       )
       cells.forEach((cell, i) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-          if (chance(0.5, pokemon)) {
-            cell.value.status.triggerFlinch(3000, cell.value, pokemon)
-          }
+          targetsHit.add(cell.value)          
         }
       })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
+
+    if(targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      if (chance(0.5, pokemon)) {
+        enemy.status.triggerFlinch(3000, enemy, pokemon)
+      }
+    })
   }
 }
 export class MagnetPullStrategy extends AbilityStrategy {

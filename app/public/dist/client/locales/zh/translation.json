@@ -2615,7 +2615,7 @@
 		"SMOKE_BALL": "携带者的HP第一次低于最大值的40%时，会抛下烟雾球，获得50点SHIELD并跳至1格外。所有ADJACENT的敌方宝可梦陷入PARALYSIS和BLINDED 4秒。",
 		"XRAY_VISION": "携带者提升50点SPEED，且攻击不会落空。",
 		"RAZOR_FANG": "提升100%的CRIT_POWER。暴击会使目标陷入ARMOR_BREAK 2秒。",
-		"PROTECTIVE_PADS": "携带者的攻击对SHIELD造成的伤害翻倍。携带者免疫反冲伤害和反击类效果。",
+		"PROTECTIVE_PADS": "携带者的攻击对具有SHIELD的目标造成的伤害翻倍。携带者免疫反冲伤害和反击类效果。",
 		"CHOICE_SCARF": "击中目标时，也对目标的ADJACENT敌方宝可梦中HP最低者造成50%的普通攻击伤害。此次伤害能够触发击中时效果。",
 		"PUNCHING_GLOVE": "命中的攻击额外造成一次PHYSICAL，数值相当于目标最大HP的8%",
 		"MUSCLE_BAND": "携带者受到伤害时，获得1层“借力”（最多叠加20层）。每两层“借力”提升携带者2点DEF，1点ATK以及5点SPEED",
