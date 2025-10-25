@@ -21,6 +21,21 @@ import RoomMenu from "./component/room-menu/room-menu"
 import { cc } from "./utils/jsx"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./lobby.css"
+// UI banner to surface lost/failed connection states to the player.
+// BEFORE: lobby had no visible feedback during disconnects.
+// AFTER: this banner explains what's happening while auto-retry runs.
+import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import { setConnectionStatus } from "../stores/NetworkStore"
+import { CloseCodes } from "../../../types/enum/CloseCodes"
+import {
+  RECONNECT_BASE_DELAY_MS,
+  RECONNECT_JITTER_RATIO,
+  RECONNECT_MAX_ATTEMPTS,
+  RECONNECT_MAX_DELAY_MS
+} from "../../../types/Config"
+// Standardized reconnect helpers (backoff + telemetry)
+import { backoffDelay, logReconnectTelemetry } from "../utils/reconnect"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
@@ -40,7 +55,58 @@ export default function Lobby() {
   const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, navigate)
+      // BEFORE: on connection loss, there was no automatic recovery path on lobby.
+      // AFTER: subscribe to leave codes and orchestrate exponential backoff reconnects.
+      joinLobbyRoom(dispatch, navigate).then((room) => {
+        // handle unexpected disconnections with auto-reconnect attempts
+        const MAX_ATTEMPTS = RECONNECT_MAX_ATTEMPTS
+        const attemptReconnect = async (attempt = 1) => {
+          if (attempt > MAX_ATTEMPTS) {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
+            return
+          }
+          try {
+            logReconnectTelemetry("lobby", "reconnect_attempt", {
+              attempt,
+              maxAttempts: MAX_ATTEMPTS
+            })
+            await joinLobbyRoom(dispatch, navigate)
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+            logReconnectTelemetry("lobby", "reconnect_success", {
+              attempt
+            })
+          } catch (e) {
+            const delay = backoffDelay(
+              attempt,
+              RECONNECT_BASE_DELAY_MS,
+              RECONNECT_MAX_DELAY_MS,
+              RECONNECT_JITTER_RATIO
+            )
+            logReconnectTelemetry("lobby", "reconnect_attempt", {
+              attempt: attempt + 1,
+              delay
+            })
+            setTimeout(() => attemptReconnect(attempt + 1), delay)
+          }
+        }
+
+        room.onLeave((code) => {
+          // ABNORMAL_CLOSURE/TIMEOUT => likely network flap/browser sleep
+          // Keep the reconnection token warm and start retrying.
+          const shouldReconnect =
+            code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
+          if (shouldReconnect) {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+            // refresh reconnection token TTL
+            localStore.set(
+              LocalStoreKeys.RECONNECTION_LOBBY,
+              { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+              60 * 5
+            )
+            attemptReconnect(1)
+          }
+        })
+      })
       lobbyJoined.current = true
     }
   }, [lobbyJoined])
@@ -112,6 +178,8 @@ export default function Lobby() {
         body={<p style={{ padding: "1em" }}>{networkError}</p>}
       />
     </main>
+    {/* Display ongoing connection state while auto-reconnect is in progress */}
+    <ConnectionStatusNotification />
   )
 }
 

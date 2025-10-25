@@ -17,6 +17,18 @@ import { joinAfter } from "../stores/NetworkStore"
 import AfterMenu from "./component/after/after-menu"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import { setConnectionStatus } from "../stores/NetworkStore"
+// UI banner to surface lost/failed connection states to the player
+import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
+import {
+  RECONNECT_BASE_DELAY_MS,
+  RECONNECT_JITTER_RATIO,
+  RECONNECT_MAX_ATTEMPTS,
+  RECONNECT_MAX_DELAY_MS
+} from "../../../types/Config"
+// Standardized reconnect helpers (backoff + telemetry)
+import { backoffDelay, logReconnectTelemetry } from "../utils/reconnect"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
@@ -30,7 +42,10 @@ export default function AfterGame() {
   const [toAuth, setToAuth] = useState<boolean>(false)
 
   useEffect(() => {
-    const reconnect = async () => {
+    // BEFORE: single quick retry with fixed delay.
+    // AFTER: exponential backoff with jitter + capped attempts for stability.
+    const MAX_ATTEMPTS = RECONNECT_MAX_ATTEMPTS
+    const reconnect = async (attempt = 1) => {
       initialized.current = true
       authenticateUser()
         .then(async () => {
@@ -39,29 +54,43 @@ export default function AfterGame() {
               LocalStoreKeys.RECONNECTION_AFTER_GAME
             )?.reconnectionToken
             if (cachedReconnectionToken) {
+              logReconnectTelemetry("after", "reconnect_attempt", {
+                attempt,
+                maxAttempts: MAX_ATTEMPTS
+              })
               const r: Room<AfterGameState> = await client.reconnect(
                 cachedReconnectionToken
               )
               await initialize(r)
               dispatch(joinAfter(r))
+              dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+              logReconnectTelemetry("after", "reconnect_success", {
+                attempt
+              })
             } else {
               setToLobby(true)
             }
           } catch (error) {
-            setTimeout(async () => {
-              const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_AFTER_GAME
-              )?.reconnectionToken
-              if (cachedReconnectionToken) {
-                const r: Room<AfterGameState> = await client.reconnect(
-                  cachedReconnectionToken
-                )
-                await initialize(r)
-                dispatch(joinAfter(r))
-              } else {
-                setToLobby(true)
-              }
-            }, 1000)
+            if (attempt < MAX_ATTEMPTS) {
+              dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+              const delay = backoffDelay(
+                attempt,
+                RECONNECT_BASE_DELAY_MS,
+                RECONNECT_MAX_DELAY_MS,
+                RECONNECT_JITTER_RATIO
+              )
+              logReconnectTelemetry("after", "reconnect_attempt", {
+                attempt: attempt + 1,
+                delay
+              })
+              setTimeout(async () => reconnect(attempt + 1), delay)
+            } else {
+              dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
+              logReconnectTelemetry("after", "reconnect_failed", {
+                lastError: (error as any)?.message
+              })
+              setToLobby(true)
+            }
           }
         })
         .catch((err) => {
@@ -128,6 +157,7 @@ export default function AfterGame() {
           Back to Lobby
         </button>
         <AfterMenu />
+        <ConnectionStatusNotification />
       </div>
     )
   }

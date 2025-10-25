@@ -29,6 +29,19 @@ export const CELL_VISUAL_HEIGHT = 75
 export const MAX_LEVEL = 9
 export const ALLOWED_GAME_RECONNECTION_TIME = 60 * 5 // 5 minutes
 
+// Generic client reconnect configuration
+// Reconnect tuning knobs (client-side only)
+// BEFORE: each view had fixed or ad-hoc retry timings (or none),
+// leading to uneven behavior and token reuse races during bursts.
+// AFTER: we centralize sensible defaults here and all views consume them,
+// ensuring consistent behavior, less server pressure, and easier tuning.
+export const RECONNECT_MAX_ATTEMPTS = 5 // cap total retries to avoid infinite loops
+export const RECONNECT_BASE_DELAY_MS = 1000 // 1s base exponential backoff
+export const RECONNECT_MAX_DELAY_MS = 10000 // cap backoff to 10s
+// Jitter spreads reconnects to avoid a thundering herd
+// Functionally: delay ~= backoff +- (backoff * jitterRatio)
+export const RECONNECT_JITTER_RATIO = 0.2
+
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,
   [Rarity.UNCOMMON]: 1,

@@ -96,6 +96,14 @@ import { LocalStoreKeys, localStore } from "./utils/store"
 import { preference } from "../preferences"
 import { throttle } from "../../../utils/function"
 import Player from "../../../models/colyseus-models/player"
+import {
+  RECONNECT_BASE_DELAY_MS,
+  RECONNECT_JITTER_RATIO,
+  RECONNECT_MAX_ATTEMPTS,
+  RECONNECT_MAX_DELAY_MS
+} from "../../../types/Config"
+// Standardized reconnect helpers (backoff + telemetry)
+import { backoffDelay, logReconnectTelemetry } from "../utils/reconnect"
 
 let gameContainer: GameContainer
 
@@ -174,7 +182,11 @@ export default function Game() {
     useState<FinalRankVisibility>(FinalRankVisibility.HIDDEN)
   const container = useRef<HTMLDivElement>(null)
 
-  const MAX_ATTEMPS_RECONNECT = 3
+  // BEFORE: only 3 attempts with fixed delay; could fail under bursty network
+  // or after a page refresh due to token reuse race.
+  // AFTER: configurable attempts with exponential backoff + jitter, unified
+  // across views from Config.ts to simplify maintenance.
+  const MAX_ATTEMPS_RECONNECT = RECONNECT_MAX_ATTEMPTS
 
   const connectToGame = useCallback(
     async (attempts = 1) => {
@@ -190,7 +202,11 @@ export default function Game() {
         if (statusMessage) {
           statusMessage.textContent = `Connecting to game...`
         }
-
+        logReconnectTelemetry("game", "reconnect_attempt", {
+          attempt: attempts,
+          maxAttempts: MAX_ATTEMPS_RECONNECT
+        })
+        // Attempt to reuse the reconnection token with backoff and telemetry
         client
           .reconnect(cachedReconnectionToken)
           .then((room: Room) => {
@@ -207,10 +223,23 @@ export default function Game() {
             connected.current = true
             connecting.current = false
             dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+            logReconnectTelemetry("game", "reconnect_success", {
+              attempt: attempts
+            })
           })
           .catch((error) => {
             if (attempts < MAX_ATTEMPS_RECONNECT) {
-              setTimeout(async () => await connectToGame(attempts + 1), 1000)
+              const delay = backoffDelay(
+                attempts,
+                RECONNECT_BASE_DELAY_MS,
+                RECONNECT_MAX_DELAY_MS,
+                RECONNECT_JITTER_RATIO
+              )
+              logReconnectTelemetry("game", "reconnect_attempt", {
+                attempt: attempts + 1,
+                delay
+              })
+              setTimeout(async () => await connectToGame(attempts + 1), delay)
             } else {
               let connectError = error.message
               if (error.code === 4212) {
@@ -221,6 +250,9 @@ export default function Game() {
               setConnectError(connectError)
               dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
               logger.error("reconnect error", error)
+              logReconnectTelemetry("game", "reconnect_failed", {
+                lastError: error?.message
+              })
             }
           })
       } else {

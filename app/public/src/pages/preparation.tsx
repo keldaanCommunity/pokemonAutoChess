@@ -48,6 +48,14 @@ import { ConnectionStatusNotification } from "./component/system/connection-stat
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./preparation.css"
+import {
+  RECONNECT_BASE_DELAY_MS,
+  RECONNECT_JITTER_RATIO,
+  RECONNECT_MAX_ATTEMPTS,
+  RECONNECT_MAX_DELAY_MS
+} from "../../../types/Config"
+// Standardized reconnect helpers (backoff + telemetry)
+import { backoffDelay, logReconnectTelemetry } from "../utils/reconnect"
 
 export default function Preparation() {
   const { t } = useTranslation()
@@ -62,7 +70,11 @@ export default function Preparation() {
   const connectingToGame = useRef<boolean>(false)
 
   useEffect(() => {
-    const reconnect = async () => {
+    // BEFORE: we tried a single immediate reconnect on preparation leave.
+    // AFTER: we use exponential backoff with jitter and cap attempts,
+    // improving stability and avoiding token reuse during quick reloads.
+    const MAX_ATTEMPTS = RECONNECT_MAX_ATTEMPTS
+    const reconnect = async (attempt = 1) => {
       authenticateUser()
         .then(async (user) => {
           try {
@@ -74,6 +86,10 @@ export default function Preparation() {
               if (cachedReconnectionToken) {
                 let r: Room<PreparationState>
                 try {
+                  logReconnectTelemetry("preparation", "reconnect_attempt", {
+                    attempt,
+                    maxAttempts: MAX_ATTEMPTS
+                  })
                   r = await client.reconnect(cachedReconnectionToken)
                   if (r.name !== "preparation") {
                     throw new Error(
@@ -81,12 +97,36 @@ export default function Preparation() {
                     )
                   }
                   dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+                  logReconnectTelemetry("preparation", "reconnect_success", {
+                    attempt
+                  })
                 } catch (error) {
-                  logger.error(error)
-                  localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-                  dispatch(resetPreparation())
-                  navigate("/lobby")
-                  return
+                  if (attempt < MAX_ATTEMPTS) {
+                    const delay = backoffDelay(
+                      attempt,
+                      RECONNECT_BASE_DELAY_MS,
+                      RECONNECT_MAX_DELAY_MS,
+                      RECONNECT_JITTER_RATIO
+                    )
+                    logger.error(error)
+                    initialized.current = false
+                    logReconnectTelemetry("preparation", "reconnect_attempt", {
+                      attempt: attempt + 1,
+                      delay
+                    })
+                    setTimeout(() => reconnect(attempt + 1), delay)
+                    return
+                  } else {
+                    logger.error(error)
+                    localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+                    dispatch(resetPreparation())
+                    dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
+                    logReconnectTelemetry("preparation", "reconnect_failed", {
+                      lastError: (error as any)?.message
+                    })
+                    navigate("/lobby")
+                    return
+                  }
                 }
                 localStore.set(
                   LocalStoreKeys.RECONNECTION_PREPARATION,
@@ -244,7 +284,10 @@ export default function Preparation() {
           // clearing state variables to re-initialize
           dispatch(resetPreparation())
           initialized.current = false
-          reconnect()
+          // BEFORE: immediate retry could clash with in-flight browser teardown,
+          // making the token briefly invalid. AFTER: the reconnect() helper applies
+          // exponential backoff with jitter to let the environment settle.
+          reconnect(1)
         } else {
           localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
           dispatch(resetPreparation())
