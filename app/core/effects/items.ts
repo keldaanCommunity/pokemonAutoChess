@@ -292,6 +292,8 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.id = pokemon.id
       substitute.positionX = pokemon.positionX
       substitute.positionY = pokemon.positionY
+      pokemon.items.forEach(item => substitute.items.add(item))
+      pokemon.items.clear()
       player.board.set(substitute.id, substitute)
       player.pokemonsTrainingInDojo.push({
         pokemon,

@@ -1470,6 +1470,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         p.pokemon.ap += [15, 30, 45][p.ticketLevel - 1] ?? 0
         p.pokemon.positionX = substitute.positionX
         p.pokemon.positionY = substitute.positionY
+        substitute.items.forEach((it) => p.pokemon.items.add(it))
+        substitute.items.clear()
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
