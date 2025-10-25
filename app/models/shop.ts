@@ -374,7 +374,7 @@ export default class Shop {
 
       if (selected in PkmRegionalVariants) {
         const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
-          new PokemonClasses[selected](selected).isInRegion(player.map)
+          new PokemonClasses[p](p).isInRegion(player.map)
         )
         if (regionalVariants.length > 0)
           selected = pickRandomIn(regionalVariants)
