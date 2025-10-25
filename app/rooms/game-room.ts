@@ -226,10 +226,10 @@ export default class GameRoom extends Room<GameState> {
       // Remove all Deerling forms except the current season's
       this.additionalRarePool = this.additionalRarePool.filter((p) => {
         if (
-          p === Pkm.DEERLING_SPRING && season !== "spring" ||
-          p === Pkm.DEERLING_SUMMER && season !== "summer" ||
-          p === Pkm.DEERLING_AUTUMN && season !== "autumn" ||
-          p === Pkm.DEERLING_WINTER && season !== "winter"
+          (p === Pkm.DEERLING_SPRING && season !== "spring") ||
+          (p === Pkm.DEERLING_SUMMER && season !== "summer") ||
+          (p === Pkm.DEERLING_AUTUMN && season !== "autumn") ||
+          (p === Pkm.DEERLING_WINTER && season !== "winter")
         ) {
           return false
         }
@@ -243,13 +243,13 @@ export default class GameRoom extends Room<GameState> {
 
     if (this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
       this.additionalUncommonPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalRarePool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalEpicPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
     }
 
@@ -1212,12 +1212,10 @@ export default class GameRoom extends Room<GameState> {
         const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
           PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
         ) ?? pokemonsObtained[0].name) as Pkm
-        this.state.additionalPokemons.push(basePkm)
-        this.state.shop.addAdditionalPokemon(basePkm)
+        this.state.shop.addAdditionalPokemon(basePkm, this.state)
         player.regionalPokemons.push(pkm as Pkm)
       } else {
-        this.state.additionalPokemons.push(pkm as Pkm)
-        this.state.shop.addAdditionalPokemon(pkm)
+        this.state.shop.addAdditionalPokemon(pkm, this.state)
       }
 
       // update regional pokemons in case some regional variants of add picks are now available

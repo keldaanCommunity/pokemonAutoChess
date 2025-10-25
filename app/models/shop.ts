@@ -221,9 +221,10 @@ export default class Shop {
     }
   }
 
-  addAdditionalPokemon(pkmProposition: PkmProposition) {
+  addAdditionalPokemon(pkmProposition: PkmProposition, state: GameState) {        
     const pkm: Pkm =
       pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
+    state.additionalPokemons.push(pkm)
     const { rarity, stages } = getPokemonData(pkm)
     const pool = this.getPool(rarity)
     const entityNumber = getPoolSize(rarity, stages)

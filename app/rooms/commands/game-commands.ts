@@ -1297,9 +1297,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       repeat(remainingAddPicks)(() => {
         const p = pool.pop()
-        if (p) {
-          this.state.additionalPokemons.push(p)
-          this.state.shop.addAdditionalPokemon(p)
+        if (p) {          
+          this.state.shop.addAdditionalPokemon(p, this.state)
         }
       })
 
