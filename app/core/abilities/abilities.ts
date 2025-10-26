@@ -6986,7 +6986,7 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
       const x = target.positionX + dx
       if (x < 0 || x >= board.columns) continue
       for (
-        let y = flip ? 0 : board.rows;
+        let y = flip ? 0 : board.rows - 1;
         flip ? y < board.rows : y >= 0;
         y += flip ? 1 : -1
       ) {
