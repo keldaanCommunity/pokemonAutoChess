@@ -355,7 +355,15 @@ export default class BoardManager {
         .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
       const potPokemon = this.player.flowerPots[i]
 
-      if (potPokemon) {
+      const simulation = this.scene?.room?.state.simulations.get(
+        this.player.simulationId
+      )
+      const isOnBattle =
+        this.mode === BoardMode.BATTLE &&
+        simulation?.started &&
+        values(simulation.blueDpsMeter).some((p) => p.id === potPokemon.id)
+
+      if (potPokemon && !isOnBattle) {
         const flowerInPot = new PokemonSprite(
           this.scene,
           FLOWER_POTS_POSITIONS_BLUE[i][0],
