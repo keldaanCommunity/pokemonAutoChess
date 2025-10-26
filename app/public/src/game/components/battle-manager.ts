@@ -660,8 +660,8 @@ export default class BattleManager {
           pkmSprite.unloadAnimations(
             this.scene,
             previousValue as IPokemonEntity["index"],
-            pkmSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL //TODO: check if previous tint is already updated or not
-          ) 
+            pkmSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
+          )
           pkmSprite.attackSprite =
             PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
             pkmSprite.attackSprite
