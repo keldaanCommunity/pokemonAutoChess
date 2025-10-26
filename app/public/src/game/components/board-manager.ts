@@ -371,6 +371,7 @@ export default class BoardManager {
           false,
           true
         )
+        flowerInPot.draggable = false
         this.flowerPokemonsInPots.push(flowerInPot)
         this.pokemons.set(flowerInPot.id, flowerInPot)
       }

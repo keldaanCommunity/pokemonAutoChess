@@ -241,16 +241,16 @@ export default class PokemonSprite extends DraggableObject {
       }
     }
 
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene => "lastPokemonDetail" in scene
+
     this.draggable =
       playerId === scene.uid &&
       !inBattle &&
-      (scene as GameScene).spectate === false &&
-      FlowerPotMons.includes(pokemon.name) === false
+      isGameScene(scene) &&
+      scene.spectate === false
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
     if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
