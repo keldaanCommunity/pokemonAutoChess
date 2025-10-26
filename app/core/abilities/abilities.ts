@@ -2307,21 +2307,27 @@ export class IcicleMissileStrategy extends AbilityStrategy {
     for (let i = 0; i < count; i++) {
       const tg = rank[i]
       if (tg) {
+        const targetX = tg.positionX
+        const targetY = tg.positionY
         pokemon.broadcastAbility({
-          targetX: tg.positionX,
-          targetY: tg.positionY,
+          targetX,
+          targetY,
           delay: i
         })
-        tg.commands.push(
+        
+        pokemon.commands.push(
           new DelayedCommand(() => {
-            tg.status.triggerFreeze(3000, tg)
-            tg.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+            const entityHit = board.getEntityOnCell(targetX, targetY)
+            if (entityHit && entityHit.hp > 0 && entityHit.team !== pokemon.team){
+              entityHit.status.triggerFreeze(3000, tg)
+              entityHit.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
           }, 1500)
         )
       }
