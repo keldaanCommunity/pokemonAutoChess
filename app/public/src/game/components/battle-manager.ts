@@ -16,6 +16,7 @@ import {
   HealType,
   Orientation,
   PokemonActionState,
+  PokemonTint,
   Stat
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -572,14 +573,14 @@ export default class BattleManager {
           this.flip
         )
       } else if (field === "ap") {
-        if (value && value > (previousValue || 0)) {
+        if (previousValue && value && value > previousValue) {
           pkmSprite.displayBoost(Stat.AP)
         }
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "speed") {
-        if (value && value > (previousValue || 0)) {
+        if (previousValue && value && value > previousValue) {
           pkmSprite.displayBoost(Stat.SPEED)
         }
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
@@ -600,7 +601,7 @@ export default class BattleManager {
         }
       } else if (field === "shield") {
         if (pokemon.shield >= 0) {
-          if (value && value > (previousValue || 0)) {
+          if (previousValue && value && value > previousValue) {
             pkmSprite.displayBoost(Stat.SHIELD)
           }
           pkmSprite.lifebar?.setShield(Number(value))
@@ -616,21 +617,21 @@ export default class BattleManager {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "atk") {
-        if (value && value > (previousValue || 0)) {
+        if (previousValue && value && value > previousValue) {
           pkmSprite.displayBoost(Stat.ATK)
         }
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "def") {
-        if (value && value > (previousValue || 0)) {
+        if (previousValue && value && value > previousValue) {
           pkmSprite.displayBoost(Stat.DEF)
         }
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
           pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
         }
       } else if (field === "speDef") {
-        if (value && value > (previousValue || 0)) {
+        if (previousValue && value && value > previousValue) {
           pkmSprite.displayBoost(Stat.SPE_DEF)
         }
         if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
@@ -653,8 +654,14 @@ export default class BattleManager {
           pkmSprite.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
         }
       } else if (field === "index") {
-        if (pkmSprite.pokemon.index !== value) {
-          pkmSprite.lazyloadAnimations(this.scene, true) // unload previous index animations
+        if (previousValue !== undefined) {
+          // transformation or evolution mid-fight
+          // unload previous index animations
+          pkmSprite.unloadAnimations(
+            this.scene,
+            previousValue as IPokemonEntity["index"],
+            pkmSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL //TODO: check if previous tint is already updated or not
+          ) 
           pkmSprite.attackSprite =
             PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
             pkmSprite.attackSprite
@@ -662,7 +669,7 @@ export default class BattleManager {
           pkmSprite.displayAnimation("EVOLUTION")
           this.animationManager.animatePokemon(
             pkmSprite,
-            PokemonActionState.IDLE,
+            pkmSprite.pokemon.action,
             this.flip,
             false
           )
