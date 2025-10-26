@@ -265,6 +265,7 @@ export class HatchEvolutionRule extends EvolutionRule {
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
       setTimeout(() => {
+        if (!player.board.has(pokemon.id)) return // egg has been sold in the meantime
         const hatch = pokemon.evolutionRule.tryEvolve(
           pokemon,
           player,
