@@ -4744,32 +4744,25 @@ export class SpiritShackleStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 90
-        break
-      default:
-        break
-    }
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
+    const targetsHit: Set<PokemonEntity> = new Set()
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        cell.value.status.triggerWound(4000, cell.value, pokemon)
+        targetsHit.add(cell.value)
       }
+    })
+
+    if (targetsHit.size === 0) targetsHit.add(target) // Ensure at least the target is hit
+    targetsHit.forEach((enemy) => {
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      enemy.status.triggerWound(4000, enemy, pokemon)
     })
   }
 }
@@ -7443,7 +7436,13 @@ export class BarbBarrageStrategy extends AbilityStrategy {
         .forEach((v) => {
           if (v) {
             v.status.triggerPoison(3000, v, pokemon)
-            v.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+            v.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
             pokemon.broadcastAbility({
               targetX: v.positionX,
               targetY: v.positionY,
@@ -7452,9 +7451,14 @@ export class BarbBarrageStrategy extends AbilityStrategy {
           }
         })
     } else {
-      target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
-    
   }
 }
 
