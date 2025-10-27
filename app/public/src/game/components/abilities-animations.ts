@@ -339,10 +339,12 @@ export function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
-  const scaleX =
-    max(5)(Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
-  const scaleY =
-    max(5)(Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
+  const scaleX = max(5)(
+    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
+  )
+  const scaleY = max(5)(
+    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
+  )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
