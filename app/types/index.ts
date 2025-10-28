@@ -544,6 +544,7 @@ export interface IPokemonEntity {
   def: number
   speDef: number
   luck: number
+  baseTeam: Team
   baseAtk: number
   baseDef: number
   baseSpeDef: number

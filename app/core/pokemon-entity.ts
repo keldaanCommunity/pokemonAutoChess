@@ -112,6 +112,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   oneSecondCooldown = 1000
   state: PokemonState
   simulation: Simulation
+  baseTeam: Team
   baseAtk: number
   baseDef: number
   baseSpeDef: number
@@ -173,6 +174,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.speed = pokemon.speed
     this.range = pokemon.range
     this.team = team
+    this.baseTeam = team
     this.stars = pokemon.stars
     this.skill = pokemon.skill
     this.shiny = pokemon.shiny
@@ -238,7 +240,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   get player(): Player | undefined {
     const player =
-      this.team === Team.BLUE_TEAM
+      this.baseTeam === Team.BLUE_TEAM
         ? this.simulation.bluePlayer
         : this.simulation.redPlayer
     if (player instanceof Player) {
