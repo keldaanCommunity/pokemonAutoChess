@@ -1,0 +1,2 @@
+2023-09-19 07:08:43.201963	<@!356635814668664832>	CUR	PMDCollab_2	Normal
+2023-12-17 23:44:12.194610	<@!356635814668664832>	CUR	PMDCollab_2	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined
