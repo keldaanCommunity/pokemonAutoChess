@@ -2571,6 +2571,7 @@
 		"FLYING_MEMORY": "飞翔存储碟",
 		"ROCK_MEMORY": "岩石存储碟",
 		"GROUND_MEMORY": "大地存储碟",
+		"FIELD_MEMORY": "陆行存储碟",
 		"GHOST_MEMORY": "幽灵存储碟",
 		"LIGHT_MEMORY": "聚光存储碟",
 		"NORMAL_MEMORY": "空白存储碟",
@@ -2825,6 +2826,7 @@
 		"FLYING_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为FLYING宝可梦。",
 		"ROCK_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为ROCK宝可梦。",
 		"GROUND_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为GROUND宝可梦。",
+		"FIELD_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为FIELD宝可梦。",
 		"GHOST_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为GHOST宝可梦。",
 		"LIGHT_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为LIGHT宝可梦。",
 		"NORMAL_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为NORMAL宝可梦。",
@@ -4146,7 +4148,7 @@
 		"MUNCHLAX": "小卡比兽给大家带来了PICNIC_SET。",
 		"SABLEYE": "勾魂眼提供能够提升共鸣等级的共鸣宝石。",
 		"CELEBI": "时拉比预见到下一轮野生对战必定出现闪光的对手。",
-		"MAKUHITA": "幕下力士为你的一只宝可梦提供特训，用5轮时间提升其属性值。"
+		"MAKUHITA": "幕下力士为你的一只宝可梦提供特训，用几轮时间提升其属性值。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
