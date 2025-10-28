@@ -449,21 +449,8 @@ function minifySheet(id: string) {
     const json = JSON.parse(buffer.toString())
     delete json.meta
     fs.writeFileSync(`sheets/${id}.json`, JSON.stringify(json, null, 0))
-    const indexList = JSON.parse(
-      fs
-        .readFileSync("../app/public/src/assets/pokemons/indexList.json")
-        .toString()
-    )
-    if (!indexList.includes(id)) {
-      indexList.push(id)
-    }
-
-    fs.writeFileSync(
-      "../app/public/src/assets/pokemons/indexList.json",
-      JSON.stringify(indexList, null, 0)
-    )
   } catch (error) {
-    logger.error("error id#", id, error)
+    logger.error("error minifying sheet id#", id, error)
   }
 }
 
