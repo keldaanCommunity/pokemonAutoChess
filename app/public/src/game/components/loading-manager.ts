@@ -9,9 +9,9 @@ import {
   DungeonMusic,
   DungeonPMDO
 } from "../../../../types/enum/Dungeon"
+import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { values } from "../../../../utils/schemas"
-import indexList from "../../../src/assets/pokemons/indexList.json"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import GameScene from "../scenes/game-scene"
@@ -224,7 +224,7 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
 }
 
 export function preloadPortraits(scene: Phaser.Scene, player: Player) {
-  indexList.forEach((index) => {
+  Object.values(PkmIndex).forEach((index) => {
     const pokemonCustom = getPkmWithCustom(index, player.pokemonCustoms)
     scene.load.image(
       `portrait-${index}`,
