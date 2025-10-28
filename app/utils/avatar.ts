@@ -1,4 +1,4 @@
-import { CDN_PORTRAIT_URL, Emotion, PkmWithCustom } from "../types"
+import { Emotion, PkmWithCustom } from "../types"
 import { Pkm, PkmByIndex, PkmIndex } from "../types/enum/Pokemon"
 
 const PORTRAITS_FALLBACKS = {
@@ -22,7 +22,7 @@ export function getPortraitSrc(
 }
 
 export function getAvatarSrc(avatar: string) {
-  return `${CDN_PORTRAIT_URL}${avatar.replace(/(\d+)\-/g, "$1/")}.png`
+  return `/assets/portraits/${avatar.replace(/(\d+)\-/g, "$1/")}.png`
 }
 
 export function getAvatarString(

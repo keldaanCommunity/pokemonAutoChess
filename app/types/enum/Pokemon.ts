@@ -3506,3 +3506,10 @@ export const NonPkm: Pkm[] = [
   Pkm.PILLAR_CONCRETE,
   Pkm.DEFAULT
 ]
+
+export const NON_PMD_PKM_INDEXES: string[] = [
+  "0532-0002", // Pillar Wood
+  "0533-0002", // Pillar Iron
+  "0534-0002", // Pillar Concrete,
+  "0025-9999", // Pikachu Surfer
+]
