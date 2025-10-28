@@ -1,0 +1,7 @@
+2020-10-30 03:06:58.958461	MUCRUSH	OLD	PMDCollab_1	Normal
+2021-02-18 22:05:28.092098	<@!150809243816165377>	OLD	PMDCollab_1	Normal
+2021-02-20 02:05:05.271319	<@!810524028871114762>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried
+2021-03-23 02:31:05.244832	<@!810524028871114762>	CUR	PMDCollab_1	Angry,Determined,Inspired,Normal,Special1,Special2,Special3
+2021-03-23 02:31:16.275645	<@!810524028871114762>	CUR	PMDCollab_1	Angry,Determined,Inspired,Normal,Special1,Special2,Special3
+2021-03-24 21:57:53.888106	POWERCRISTAL	CUR	PMDCollab_1	Angry,Determined,Inspired,Normal,Special1,Special2,Special3
+2022-03-16 15:56:23.228071	<@!217899432652308480>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Special0,Special2,Special3,Stunned,Surprised,Teary-Eyed,Worried

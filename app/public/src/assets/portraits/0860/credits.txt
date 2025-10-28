@@ -1,0 +1,5 @@
+2021-11-08 22:24:17.279160	<@!702275233125630042>	OLD	PMDCollab_1	Normal
+2022-05-22 06:22:48.305816	EZERART	OLD	PMDCollab_1	Normal
+2022-11-01 21:59:54.094620	<@!544245909639397378>	CUR	PMDCollab_1	Normal,Normal^
+2023-12-23 04:04:28.967032	<@!544245909639397378>	CUR	PMDCollab_2	Normal,Sad,Joyous,Normal^,Sad^,Joyous^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
+2025-04-18 06:48:43.079745	<@!544245909639397378>	CUR	CC_BY-NC_4	Normal,Sad,Happy,Crying,Inspired,Sigh,Pain,Shouting,Pain^,Determined

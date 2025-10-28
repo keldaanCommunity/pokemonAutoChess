@@ -1,0 +1,4 @@
+2020-10-07 17:58:44.834006	<@!200318546750865418>	OLD	PMDCollab_1	Normal
+2021-01-12 13:47:47.957877	TAYLORTRAP622	OLD	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Special3,Stunned,Surprised,Teary-Eyed,Worried
+2022-06-17 01:06:24.887051	<@!237286997645983744>	CUR	PMDCollab_1	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined,Special3
+2023-10-15 23:34:57.575327	<@!237286997645983744>	CUR	PMDCollab_2	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined
