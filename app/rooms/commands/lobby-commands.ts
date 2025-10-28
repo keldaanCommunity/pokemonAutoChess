@@ -20,7 +20,6 @@ import UserMetadata, {
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { discordService } from "../../services/discord"
 import {
-  CDN_PORTRAIT_URL,
   CollectionEmotions,
   Emotion,
   IPlayer,
@@ -565,7 +564,7 @@ export class ChangeAvatarCommand extends Command<
       )
         return
       const portrait = getPortraitSrc(index, shiny, emotion)
-        .replace(CDN_PORTRAIT_URL, "")
+        .replace("/assets/portraits", "")
         .replace(".png", "")
       user.avatar = portrait
       mongoUser.avatar = portrait

@@ -1,10 +1,10 @@
 import { createObjectCsvWriter } from "csv-writer"
-import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
 import PokemonFactory, { PkmColorVariants } from "../app/models/pokemon-factory"
-import { Ability } from "../app/types/enum/Ability"
-import { logger } from "../app/utils/logger"
-import { Synergy } from "../app/types/enum/Synergy"
 import { getPokemonData } from "../app/models/precomputed/precomputed-pokemon-data"
+import { Ability } from "../app/types/enum/Ability"
+import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
+import { Synergy } from "../app/types/enum/Synergy"
+import { logger } from "../app/utils/logger"
 
 const csvWriter = createObjectCsvWriter({
   path: "../app/models/precomputed/pokemons-data.csv",
@@ -77,7 +77,7 @@ export function csvExport() {
       const pokemonData = getPokemonData(pkm)
       if (pokemon.skill != Ability.DEFAULT) {
         const family = (Object.keys(PkmFamily) as Pkm[]).filter(
-          p => PkmFamily[p] === PkmFamily[pkm]
+          (p) => PkmFamily[p] === PkmFamily[pkm]
         )
         const types: Synergy[] = pokemonData.types
         const familyTypes = [
@@ -94,7 +94,9 @@ export function csvExport() {
           name: pkm,
           category: pokemon.rarity,
           tier: pokemon.stars,
-          stages: Math.max(...family.map((p) => getPokemonData(p as Pkm).stars)),
+          stages: Math.max(
+            ...family.map((p) => getPokemonData(p as Pkm).stars)
+          ),
           additional: pokemonData.additional,
           regional: pokemonData.regional,
           variant: PkmColorVariants.includes(pkm),
