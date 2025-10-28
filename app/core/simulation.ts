@@ -817,7 +817,7 @@ export default class Simulation extends Schema implements ISimulation {
                         .forEach((cell) => {
                           if (cell.value && cell.value.team !== pokemon.team) {
                             cell.value.handleSpecialDamage(
-                              pokemon.atk,
+                              3 * pokemon.atk,
                               this.board,
                               AttackType.SPECIAL,
                               pokemon as PokemonEntity,
