@@ -4256,11 +4256,11 @@ export class StoredPowerStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const PkmClass = PokemonClasses[PkmByIndex[target.index]]
     const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
-    const boostSpeed = pokemon.speed / baseSpeed
-    const boostAtk = pokemon.atk / pokemon.baseAtk
-    const boostDef = pokemon.def / pokemon.baseDef
-    const boostSpeDef = pokemon.speDef / pokemon.baseSpeDef
-    const boostAP = pokemon.ap / 100
+    const boostSpeed = min(0)(pokemon.speed / baseSpeed - 1)
+    const boostAtk = min(0)(pokemon.atk / pokemon.baseAtk - 1)
+    const boostDef = min(0)(pokemon.def / pokemon.baseDef -1)
+    const boostSpeDef = min(0)(pokemon.speDef / pokemon.baseSpeDef -1)
+    const boostAP = min(0)(pokemon.ap / 100 - 1)
 
     const damage = Math.round(
       20 * (1 + boostAtk + boostDef + boostSpeDef + boostSpeed + boostAP)
