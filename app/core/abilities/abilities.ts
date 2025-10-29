@@ -1,9 +1,5 @@
 import { giveRandomEgg } from "../../core/eggs"
-import {
-  Chewtle,
-  Drednaw,
-  PokemonClasses
-} from "../../models/colyseus-models/pokemon"
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
@@ -10634,45 +10630,70 @@ export class ThunderousKickStrategy extends AbilityStrategy {
     const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
     const defenseDebuff = 10
 
-    target.status.triggerFlinch(4000, pokemon)
-    target.addDefense(-defenseDebuff, pokemon, 1, crit)
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.PHYSICAL,
-      pokemon,
-      crit
-    )
-    let farthestEmptyCell: Cell | null = null
+    let isBlocked = false
+    let farthestReached: { x: number; y: number } = {
+      x: target.positionX,
+      y: target.positionY
+    }
+    const enemiesHit = new Set<PokemonEntity>()
+    enemiesHit.add(target)
     effectInLine(board, pokemon, target, (cell) => {
-      if (cell.value != null && target.id !== cell.value.id) {
-        if (cell.value.team !== pokemon.team) {
-          cell.value.status.triggerFlinch(4000, pokemon)
-          cell.value.addDefense(-defenseDebuff, pokemon, 1, crit)
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.PHYSICAL,
-            pokemon,
-            crit
-          )
+      if (isBlocked) return
+      if (
+        cell.value &&
+        cell.value.team !== pokemon.team &&
+        cell.value.id !== target.id
+      ) {
+        enemiesHit.add(cell.value)
+        if (
+          board.isOnBoard(cell.x - 1, cell.y) &&
+          board.getEntityOnCell(cell.x - 1, cell.y) === undefined
+        ) {
+          // unit in the path is moved to the left
+          cell.value.moveTo(cell.x - 1, cell.y, board)
+          cell.value.cooldown = 500
+        } else if (
+          board.isOnBoard(cell.x + 1, cell.y) &&
+          board.getEntityOnCell(cell.x + 1, cell.y) === undefined
+        ) {
+          // unit in the path is moved to the right
+          cell.value.moveTo(cell.x + 1, cell.y, board)
+          cell.value.cooldown = 500
+        } else {
+          // the path is blocked, stop the effect
+          isBlocked = true
         }
-        board.swapCells(
-          target.positionX,
-          target.positionY,
-          cell.value.positionX,
-          cell.value.positionY
-        )
       }
-      if (!cell.value) {
-        farthestEmptyCell = cell
+
+      if (!isBlocked) {
+        farthestReached = cell
       }
     })
 
-    if (farthestEmptyCell) {
-      const { x, y } = farthestEmptyCell as Cell
-      board.swapCells(target.positionX, target.positionY, x, y)
+    if (
+      farthestReached &&
+      (farthestReached.x !== target.positionX ||
+        farthestReached.y !== target.positionY)
+    ) {
+      board.swapCells(
+        target.positionX,
+        target.positionY,
+        farthestReached.x,
+        farthestReached.y
+      )
     }
+
+    enemiesHit.forEach((enemy) => {
+      enemy.status.triggerFlinch(4000, pokemon)
+      enemy.addDefense(-defenseDebuff, pokemon, 1, crit)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
