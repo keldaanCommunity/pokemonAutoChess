@@ -1,3 +1,4 @@
+import path from "node:path"
 import { createObjectCsvWriter } from "csv-writer"
 import PokemonFactory, { PkmColorVariants } from "../app/models/pokemon-factory"
 import { getPokemonData } from "../app/models/precomputed/precomputed-pokemon-data"
@@ -6,8 +7,10 @@ import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
 import { Synergy } from "../app/types/enum/Synergy"
 import { logger } from "../app/utils/logger"
 
+const EXPORT_PATH = "../app/models/precomputed/pokemons-data.csv"
+
 const csvWriter = createObjectCsvWriter({
-  path: "../app/models/precomputed/pokemons-data.csv",
+  path: EXPORT_PATH,
   header: [
     { id: "index", title: "Index" },
     { id: "name", title: "Name" },
@@ -122,7 +125,11 @@ export function csvExport() {
       }
     })
 
+  const resolvedPath = path.resolve(__dirname, EXPORT_PATH)
+
   csvWriter
     .writeRecords(data)
-    .then(() => logger.info("CSV export done successfully"))
+    .then(() => logger.info(`CSV export done successfully: ${resolvedPath}`))
 }
+
+csvExport()
