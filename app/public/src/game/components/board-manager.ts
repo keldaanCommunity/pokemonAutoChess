@@ -894,30 +894,28 @@ export default class BoardManager {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
-          if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
+          if (previousValue && value && value > previousValue)
             pokemonUI.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
-          if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue && value && value > previousValue)
             pokemonUI.displayBoost(Stat.ATK)
           break
 
         case "def":
-          if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
+          if (previousValue && value && value > previousValue)
             pokemonUI.displayBoost(Stat.DEF)
           break
 
         case "speed":
-          if (
-            (value as IPokemon["speed"]) > (previousValue as IPokemon["speed"])
-          )
+          if (previousValue && value && value > previousValue)
             pokemonUI.displayBoost(Stat.SPEED)
           break
 
         case "ap":
-          if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue && value && value > previousValue)
             pokemonUI.displayBoost(Stat.AP)
           break
 
@@ -929,8 +927,14 @@ export default class BoardManager {
           )
           break
 
+        case "index":
+          if (value !== previousValue) {
+            pokemonUI.evolutionAnimation()
+          }
+          break
+
         case "skill":
-          if (pokemonUI.pokemon.skill !== value) {
+          if (previousValue && value !== previousValue) {
             pokemonUI.evolutionAnimation()
           }
           break

@@ -241,7 +241,8 @@ export default class PokemonSprite extends DraggableObject {
       }
     }
 
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene => "lastPokemonDetail" in scene
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+      "lastPokemonDetail" in scene
 
     this.draggable =
       playerId === scene.uid &&
@@ -257,35 +258,37 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  lazyloadAnimations(
-    scene: GameScene | DebugScene | undefined,
-    unload: boolean = false
-  ) {
+  lazyloadAnimations(scene: GameScene | DebugScene | undefined) {
     const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
     const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
     let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
-    if (unload) {
-      spriteCount = min(0)(spriteCount - 1)
-      if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("unloading anims for", this.index)
-        scene.animationManager?.unloadPokemonAnimations(
-          this.pokemon.index,
-          tint
-        )
-      }
-    } else {
-      scene?.animationManager
-      if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("loading anims for", this.index)
-        scene.animationManager?.createPokemonAnimations(
-          this.pokemon.index,
-          tint
-        )
-      }
-      spriteCount++
+    if (spriteCount === 0 && scene?.animationManager) {
+      //logger.debug("loading anims for", pokemonSpriteKey)
+      scene.animationManager?.createPokemonAnimations(this.pokemon.index, tint)
     }
-    //logger.debug("sprite count for", this.index, spriteCount)
+    spriteCount++
+    //logger.debug("sprite count for", pokemonSpriteKey, spriteCount)
     spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+  }
+
+  unloadAnimations(
+    scene: GameScene | DebugScene | undefined,
+    indexToUnload: string,
+    tintToUnload: PokemonTint
+  ) {
+    const pokemonSpriteKey = `${indexToUnload}/${tintToUnload}`
+    let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
+    spriteCount = min(0)(spriteCount - 1)
+    //logger.debug("sprite count for", pokemonSpriteKey, spriteCount)
+    spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+
+    if (spriteCount === 0 && scene?.animationManager) {
+      //logger.debug("unloading anims for", indexToUnload, tintToUnload)
+      scene.animationManager?.unloadPokemonAnimations(
+        indexToUnload,
+        tintToUnload
+      )
+    }
   }
 
   updateTooltipPosition() {
@@ -328,7 +331,11 @@ export default class PokemonSprite extends DraggableObject {
     const g = <GameScene>this.scene
     super.destroy(fromScene)
     this.closeDetail()
-    this.lazyloadAnimations(g, true)
+    this.unloadAnimations(
+      g,
+      this.pokemon.index,
+      this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    )
   }
 
   closeDetail() {

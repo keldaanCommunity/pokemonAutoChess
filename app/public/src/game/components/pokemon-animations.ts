@@ -5056,9 +5056,9 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.ELECTRIC_HIT
   },
   [Pkm.MORPEKO_HANGRY]: {
-    attack: AnimationType.Swing,
+    attack: AnimationType.Walk,
     ability: AnimationType.Special0,
-    emote: AnimationType.Rotate,
+    emote: AnimationType.Special0,
     attackSprite: AttackSprite.ELECTRIC_MELEE,
     hitSprite: HitSprite.ELECTRIC_HIT
   },
