@@ -21,11 +21,13 @@ import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import PokeGuesser from "../pokeguesser/pokeguesser"
 import Profile from "../profile/profile"
 import ServersList from "../servers/servers-list"
+import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
 import { createSelector } from "@reduxjs/toolkit"
+import { Synergy } from "../../../../../types/enum/Synergy"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -197,6 +199,18 @@ export function MainSidebar(props: MainSidebarProps) {
               {t("gadget.pokeguesser")}
             </NavLink>
           )}
+
+        {((!GADGETS.SYNERGY_WHEEL.disabled &&
+          profileLevel >= GADGETS.SYNERGY_WHEEL.levelRequired) ||
+          profile?.role === Role.ADMIN) && (
+          <NavLink
+            svg="synergy-wheel"
+            location="synergy-wheel"
+            handleClick={changeModal}
+          >
+            {t("gadget.synergy_wheel")}
+          </NavLink>
+        )}
 
         {page !== "game" &&
           ((!GADGETS.BOT_BUILDER.disabled &&
@@ -380,6 +394,7 @@ export type Modals =
   | "pokeguesser"
   | "profile"
   | "servers"
+  | "synergy-wheel"
   | "team-builder"
   | "tournaments"
   | "wiki"
@@ -478,6 +493,10 @@ function Modals({
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />
+      <SynergyWheelModal
+        show={modal === "synergy-wheel"}
+        handleClose={closeModal}
+      />
     </>
   )
 }
