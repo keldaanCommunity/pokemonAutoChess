@@ -1091,7 +1091,7 @@ export default class Status extends Schema implements IStatus {
 
     if (this.possessedCooldown <= 0 || lastAliveArePossessed) {
       this.possessed = false
-      pkm.team = pkm.team === Team.RED_TEAM ? Team.BLUE_TEAM : Team.RED_TEAM
+      pkm.team = pkm.baseTeam
 
       if (
         lastAliveArePossessed &&
