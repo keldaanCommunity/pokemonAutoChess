@@ -2691,7 +2691,7 @@
 		"GOLD_BOTTLE_CAP": "+1% CRIT_POWER per GOLD you have. Gain 1 GOLD per KO. If eliminating the last enemy, get a Jackpot that doubles the amount gained during the round.",
 		"ABSORB_BULB": "All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to ADJACENT enemy units as SPECIAL.",
 		"SACRED_ASH": "Gives RESURECTION. After resurecting, up to 3 allies KO are resurected as well, but without items.",
-		"COMET_SHARD": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing [300, SP]% ATK as SPECIAL to target and [100, SP]% ATK as SPECIAL to ADJACENT enemies, while gaining PROTECT for 2 seconds.",
+		"COMET_SHARD": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 300% ATK as SPECIAL to target and 100% ATK as SPECIAL to ADJACENT enemies, while gaining PROTECT for 2 seconds.",
 		"REPEAT_BALL": "Each time you spend gold on a reroll, gain 1 free reroll. For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. After lots of rerolls, you may encounter powerful Pokémon in your shop.",
 		"GOLD_BOW": "The holder does not count for team size limit.",
 		"DAMP_ROCK": "Counts for 3 towards RAIN. Under RAIN, your team gains +2 PP per second.",

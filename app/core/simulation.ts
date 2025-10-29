@@ -810,7 +810,8 @@ export default class Simulation extends Schema implements ISimulation {
                         this.board,
                         AttackType.SPECIAL,
                         pokemon as PokemonEntity,
-                        crit
+                        crit,
+                        false
                       )
                       this.board
                         .getAdjacentCells(target.positionX, target.positionY)
@@ -821,7 +822,8 @@ export default class Simulation extends Schema implements ISimulation {
                               this.board,
                               AttackType.SPECIAL,
                               pokemon as PokemonEntity,
-                              crit
+                              crit,
+                              false
                             )
                           }
                         })

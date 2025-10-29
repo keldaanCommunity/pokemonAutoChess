@@ -2691,7 +2691,7 @@
 		"GOLD_BOTTLE_CAP": "+1% CRIT_POWER par GOLD en votre possession. +1 GOLD à chaque fois que le porteur met KO un ennemi. S'il élimine le dernier ennemi, il remporte le Jackpot et double le montant gagné pendant cette manche.",
 		"ABSORB_BULB": "Tous les dégâts réduits sont absorbés par le bulbe. Une fois sous les 50% de HP, le bulbe explose, infligeant tous les dégâts absorbés en SPECIAL aux ennemis ADJACENT.",
 		"SACRED_ASH": "Octroie RESURECTION. Après résurrection, jusqu'à 3 alliés KO sont également ressuscités, mais sans leurs objets.",
-		"COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 300% de son ATK en SPECIAL à la cible et aux ennemis ADJACENT, et gagne PROTECT pendant 2 secondes.",
+		"COMET_SHARD": "Au début du combat, plonge tel une comète sur l'ennemi dans le coin opposé du plateau, infligeant 300% de son ATK en SPECIAL à la cible et 100% de son ATK en SPECIAL aux ennemis ADJACENT, et gagne PROTECT pendant 2 secondes.",
 		"REPEAT_BALL": "Toutes les 2 relances du magasin, gagne +1 SPEED et 2 SHIELD. De plus, chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
 		"GOLD_BOW": "Le porteur ne compte pas dans la taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
