@@ -2691,7 +2691,7 @@
 		"GOLD_BOTTLE_CAP": "提升CRIT_POWER，百分点相当于玩家持有的GOLD数额。击倒敌方宝可梦时玩家获得1 GOLD。若是最后一只，则额外获得使本轮获得GOLD总额翻倍的大奖。",
 		"ABSORB_BULB": "所有被减免的伤害由此道具吸收。携带者生命低于50%后，该道具爆炸并对ADJACENT敌方宝可梦造成SPECIAL，数值相当于吸收到的伤害之和。",
 		"SACRED_ASH": "携带者获得RESURECTION。复活时同时会复活3个被击倒的我方宝可梦，但他们的携带道具会消失。",
-		"COMET_SHARD": "战斗开始时获得PROTECT 2秒，并像陨石一般撞到场地对面的一只敌方宝可梦的位置，对其造成SPECIAL，数值相当于[300, SP]%的ATK。对ADJACENT敌方宝可梦造成SPECIAL，数值相当于[100, SP]%的ATK。",
+		"COMET_SHARD": "战斗开始时获得PROTECT 2秒，并像陨石一般撞到场地对面的一只敌方宝可梦的位置，对其造成SPECIAL，数值相当于300%的ATK，同时对ADJACENT敌方宝可梦造成SPECIAL，数值相当于100%的ATK。",
 		"REPEAT_BALL": "每刷新2次商店，提升1点SPEED并获得2点SHIELD。此外，每次花费GOLD刷新商店后，获得1次免费刷新次数。大量刷新商店后，可能会刷出强大的宝可梦。",
 		"GOLD_BOW": "携带者不计入出战区宝可梦数量上限。",
 		"DAMP_ROCK": "计为3只生成RAIN所需的宝可梦。在RAIN中，我方所有宝可梦每秒还会额外恢复2点PP。",
