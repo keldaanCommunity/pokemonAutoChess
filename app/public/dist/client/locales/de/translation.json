@@ -2645,7 +2645,6 @@
 		"PROTEAN3": "Das Pokemon nimmt die Typen der drei höchsten Synergien im Team an.",
 		"CASTFORM": "Formeo ändert die Form basierend auf dem Wetter und das Wetter basierend auf deiner höchsten Synergie zwischen FIRE, WATER & ICE.",
 		"MANAPHY": "$t(pkm.MANAPHY) sucht nach einem Aqua-Ei",
-		"SCYTHER": "$t(pkm.SCYTHER) sucht nach einem METAL_COAT oder einem BLACK_AUGURITE",
 		"PRIMAL": "Der Legende nach konnte man die uralten Kräfte dieser Pokémon entfesseln",
 		"WONDER_GUARD": "Blockiert 15 Schaden",
 		"ELECTRIC_TERRAIN": "Gib deinem ELECTRIC Pokémon ELECTRIC_FIELD und erhöhe seinen Schaden um 20 %",

@@ -2842,7 +2842,6 @@
 		"PROTEAN3": "Le Pokémon acquiert le type des 3 synergies les plus élevées de votre équipe.",
 		"CASTFORM": "$t(pkm.CASTFORM) change de forme et la météo en SUN, RAIN ou SNOW en fonction de votre synergie dominante sur le plateau entre FIRE WATER ICE.",
 		"MANAPHY": "Lorsqu'on lui donne un AQUA_EGG, $t(pkm.MANAPHY) fera apparaître $t(pkm.PHIONE) sur votre plateau au début du combat",
-		"SCYTHER": "$t(pkm.SCYTHER) cherche une METAL_COAT ou une BLACK_AUGURITE.",
 		"PRIMAL": "La légende raconte qu'on pourrait libérer les pouvoirs primordiaux de ces Pokémon légendaires.",
 		"WONDER_GUARD": "Bloque 20 dégâts à chaque coup reçu.",
 		"ELECTRIC_TERRAIN": "Donne ELECTRIC_FIELD à vos Pokémon ELECTRIC, augmentant leurs dégâts de 20%.",
