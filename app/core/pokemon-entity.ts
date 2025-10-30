@@ -1761,6 +1761,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
         this.index = pokemonEvolved.index
         this.name = pokemonEvolved.name
+        this.refToBoardPokemon = pokemonEvolved
       }
     }
     return
