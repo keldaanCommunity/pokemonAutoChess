@@ -19,3 +19,9 @@
 - Fixed Comet shard description and removed AP scaling that was applied by mistake.
 
 # Misc
+
+- Jukebox gadget level requirement decreased to 5
+- New gadget: Synergy Wheel, unlocks at level 10
+- Gameboy gadget level requirement decreased to 20
+- Pokeguessr gadget level requirement decreased to 30
+- Bot builder gadget level requirement increased to 40

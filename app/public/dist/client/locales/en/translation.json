@@ -3905,7 +3905,9 @@
 		"gameboy": "Gameboy",
 		"gameboy_desc": "Play the Gameboy prototype of the game",
 		"pokeguesser": "PokéGuessr",
-		"pokeguesser_desc": "Guess the Pokémon trivia game when waiting for lobby to start"
+		"pokeguesser_desc": "Guess the Pokémon trivia game when waiting for lobby to start",
+		"synergy_wheel": "Synergy Wheel",
+		"synergy_wheel_desc": "Randomly draws synergies when looking for inspiration"
 	},
 	"level_required": "Level required",
 	"map": {
@@ -4218,6 +4220,12 @@
 		"easy": "Easy",
 		"normal": "Normal",
 		"hard": "Ultra"
+	},
+	"synergy_wheel": {
+		"spin": "Spin",
+		"spinning": "Spinning",
+		"results": "Results",
+		"number_to_draw": "Number to draw"
 	},
 	"technical_terms": {
 		"STRONGEST": "strongest",
