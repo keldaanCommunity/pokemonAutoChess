@@ -12974,13 +12974,6 @@ export class Murkrow extends Pokemon {
   skill = Ability.FOUL_PLAY
   passive = Passive.BAD_LUCK
   additional = true
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }) {
-    opponentEffects.add(EffectEnum.BAD_LUCK)
-  }
 }
 
 export class Honchkrow extends Pokemon {
@@ -12997,13 +12990,6 @@ export class Honchkrow extends Pokemon {
   skill = Ability.FOUL_PLAY
   passive = Passive.BAD_LUCK
   additional = true
-  beforeSimulationStart({
-    opponentEffects
-  }: {
-    opponentEffects: Set<EffectEnum>
-  }) {
-    opponentEffects.add(EffectEnum.BAD_LUCK)
-  }
 }
 
 export class Zigzagoon extends Pokemon {

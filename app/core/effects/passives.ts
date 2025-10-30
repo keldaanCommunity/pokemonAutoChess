@@ -1186,5 +1186,14 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.POIPOLE]: [PoipoleOnKillEffect],
-  [Passive.NAGANADEL]: [PoipoleOnKillEffect]
+  [Passive.NAGANADEL]: [PoipoleOnKillEffect],
+  [Passive.BAD_LUCK]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team !== entity.team) {
+          pkm.addLuck(-20, pkm, 0, false)
+        }
+      })
+    })
+  ]
 }

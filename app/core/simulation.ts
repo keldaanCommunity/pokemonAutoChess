@@ -1352,12 +1352,6 @@ export default class Simulation extends Schema implements ISimulation {
         break
       }
 
-      case EffectEnum.BAD_LUCK: {
-        pokemon.effects.add(effect)
-        pokemon.addLuck(-20, pokemon, 0, false)
-        break
-      }
-
       case EffectEnum.WATER_SPRING: {
         pokemon.effectsSet.add(WaterSpringEffect)
         break
