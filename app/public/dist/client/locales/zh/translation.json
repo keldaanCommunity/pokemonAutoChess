@@ -3905,7 +3905,9 @@
 		"gameboy": "Gameboy游戏机",
 		"gameboy_desc": "玩这个游戏的GB移植版（实验性版本）",
 		"pokeguesser": "宝可梦猜一猜",
-		"pokeguesser_desc": "在房间里等待游戏开始的时候可以玩玩猜宝可梦的小游戏"
+		"pokeguesser_desc": "在房间里等待游戏开始的时候可以玩玩猜宝可梦的小游戏",
+		"synergy_wheel": "共鸣轮盘",
+		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣"
 	},
 	"level_required": "等级需求",
 	"map": {
@@ -4218,6 +4220,12 @@
 		"easy": "简单",
 		"normal": "普通",
 		"hard": "究极"
+	},
+	"synergy_wheel": {
+		"spin": "开始抽取",
+		"spinning": "抽取中……",
+		"results": "抽取结果",
+		"number_to_draw": "抽取数量"
 	},
 	"technical_terms": {
 		"STRONGEST": "最强的",
