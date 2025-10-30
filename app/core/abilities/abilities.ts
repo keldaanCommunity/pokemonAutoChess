@@ -4741,24 +4741,18 @@ export class SpiritShackleStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
-    const targetsHit: Set<PokemonEntity> = new Set()
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
-        targetsHit.add(cell.value)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        cell.value.status.triggerWound(4000, cell.value, pokemon)
       }
-    })
-
-    if (targetsHit.size === 0) targetsHit.add(target) // Ensure at least the target is hit
-    targetsHit.forEach((enemy) => {
-      enemy.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
-      enemy.status.triggerWound(4000, enemy, pokemon)
     })
   }
 }
