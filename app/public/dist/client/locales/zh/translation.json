@@ -2571,6 +2571,7 @@
 		"FLYING_MEMORY": "飞翔存储碟",
 		"ROCK_MEMORY": "岩石存储碟",
 		"GROUND_MEMORY": "大地存储碟",
+		"FIELD_MEMORY": "陆行存储碟",
 		"GHOST_MEMORY": "幽灵存储碟",
 		"LIGHT_MEMORY": "聚光存储碟",
 		"NORMAL_MEMORY": "空白存储碟",
@@ -2690,7 +2691,7 @@
 		"GOLD_BOTTLE_CAP": "提升CRIT_POWER，百分点相当于玩家持有的GOLD数额。击倒敌方宝可梦时玩家获得1 GOLD。若是最后一只，则额外获得使本轮获得GOLD总额翻倍的大奖。",
 		"ABSORB_BULB": "所有被减免的伤害由此道具吸收。携带者生命低于50%后，该道具爆炸并对ADJACENT敌方宝可梦造成SPECIAL，数值相当于吸收到的伤害之和。",
 		"SACRED_ASH": "携带者获得RESURECTION。复活时同时会复活3个被击倒的我方宝可梦，但他们的携带道具会消失。",
-		"COMET_SHARD": "战斗开始时获得PROTECT 2秒，并像陨石一般撞到场地对面的一只敌方宝可梦的位置，对其和ADJACENT敌方宝可梦造成SPECIAL，数值相当于300%的ATK。",
+		"COMET_SHARD": "战斗开始时获得PROTECT 2秒，并像陨石一般撞到场地对面的一只敌方宝可梦的位置，对其造成SPECIAL，数值相当于300%的ATK，同时对ADJACENT敌方宝可梦造成SPECIAL，数值相当于100%的ATK。",
 		"REPEAT_BALL": "每刷新2次商店，提升1点SPEED并获得2点SHIELD。此外，每次花费GOLD刷新商店后，获得1次免费刷新次数。大量刷新商店后，可能会刷出强大的宝可梦。",
 		"GOLD_BOW": "携带者不计入出战区宝可梦数量上限。",
 		"DAMP_ROCK": "计为3只生成RAIN所需的宝可梦。在RAIN中，我方所有宝可梦每秒还会额外恢复2点PP。",
@@ -2825,6 +2826,7 @@
 		"FLYING_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为FLYING宝可梦。",
 		"ROCK_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为ROCK宝可梦。",
 		"GROUND_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为GROUND宝可梦。",
+		"FIELD_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为FIELD宝可梦。",
 		"GHOST_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为GHOST宝可梦。",
 		"LIGHT_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为LIGHT宝可梦。",
 		"NORMAL_MEMORY": "$t(pkm.SILVALLY)可以携带此道具，并被视为NORMAL宝可梦。",
@@ -3903,7 +3905,9 @@
 		"gameboy": "Gameboy游戏机",
 		"gameboy_desc": "玩这个游戏的GB移植版（实验性版本）",
 		"pokeguesser": "宝可梦猜一猜",
-		"pokeguesser_desc": "在房间里等待游戏开始的时候可以玩玩猜宝可梦的小游戏"
+		"pokeguesser_desc": "在房间里等待游戏开始的时候可以玩玩猜宝可梦的小游戏",
+		"synergy_wheel": "共鸣轮盘",
+		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣"
 	},
 	"level_required": "等级需求",
 	"map": {
@@ -4146,7 +4150,7 @@
 		"MUNCHLAX": "小卡比兽给大家带来了PICNIC_SET。",
 		"SABLEYE": "勾魂眼提供能够提升共鸣等级的共鸣宝石。",
 		"CELEBI": "时拉比预见到下一轮野生对战必定出现闪光的对手。",
-		"MAKUHITA": "幕下力士为你的一只宝可梦提供特训，用5轮时间提升其属性值。"
+		"MAKUHITA": "幕下力士为你的一只宝可梦提供特训，用几轮时间提升其属性值。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
@@ -4216,6 +4220,12 @@
 		"easy": "简单",
 		"normal": "普通",
 		"hard": "究极"
+	},
+	"synergy_wheel": {
+		"spin": "开始抽取",
+		"spinning": "抽取中……",
+		"results": "抽取结果",
+		"number_to_draw": "抽取数量"
 	},
 	"technical_terms": {
 		"STRONGEST": "最强的",
