@@ -2464,7 +2464,6 @@
 		"PROTEAN2": "팀에서 가장 높은 시너지 2개를 부여받습니다.",
 		"PROTEAN3": "팀에서 가장 높은 시너지 3개를 부여받습니다.",
 		"CASTFORM": "팀에서 FIRE WATER ICE 셋중 어떤 시너지를 가장 많이 지녔나에 따라 캐스퐁은 폼체인지하며 날씨도 SUN, RAIN, SNOW로 바꿉니다.",
-		"SCYTHER": "$t(pkm.SCYTHER)은 METAL_COAT 혹은 BLACK_AUGURITE를 찾아 헤매고 있습니다.",
 		"PRIMAL": "이 포켓몬의 고대의 힘을 해방시킬 수 있다는 전설이 있습니다.",
 		"WONDER_GUARD": "피격시 받는 피해량이 20 감소합니다.",
 		"ELECTRIC_TERRAIN": "자신의 ELECTRIC 포켓몬들의 대미지를 20% 증가시키는  ELECTRIC_FIELD를 부여합니다.",
