@@ -198,7 +198,7 @@ export function GamePokemonDetail(props: {
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
-              title={t(`stat.${stat}`)}
+              title={`${t(`stat.${stat}`)}${value !== baseValue ? ` (${baseValue} ${value > baseValue ? "+" : "-"} ${value - baseValue})` : ""}`}
             />
             <span
               className={cc({
