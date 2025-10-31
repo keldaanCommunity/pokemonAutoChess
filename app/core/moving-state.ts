@@ -53,7 +53,8 @@ export default class MovingState extends PokemonState {
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
-      if (pokemon.status.skydiving && pokemon.cooldown <= 0) {
+      if (pokemon.status.skydiving && pokemon.cooldown <= 500) {
+        // just landed, 500ms remaining cooldown to reposition
         pokemon.status.skydiving = false
       }
     }

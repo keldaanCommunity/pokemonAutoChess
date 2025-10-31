@@ -745,11 +745,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   skydiveTo(x: number, y: number, board: Board) {
-    this.toIdleState()
-    board.swapCells(this.positionX, this.positionY, x, y)
     this.status.skydiving = true
-    this.toMovingState()
-    this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
+    board.swapCells(this.positionX, this.positionY, x, y)
+    if (this.state instanceof MovingState === false) {
+      this.toMovingState()
+    }
+    this.cooldown = 1500 // 500ms for flying up, 500ms for skydive anim, 500ms to reposition after landing
   }
 
   // called after every attack, no matter if it's successful or not

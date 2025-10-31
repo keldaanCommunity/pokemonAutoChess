@@ -1176,7 +1176,7 @@ export default class PokemonSprite extends DraggableObject {
 
       this.x = landingCoordinates[0]
       this.y = landingCoordinates[1]
-      this.moveManager.setSpeed(3)
+      this.moveManager.setSpeed(1000)
       this.moveManager.moveTo(finalCoordinates[0], finalCoordinates[1])
       this.skydiving = false
     }
