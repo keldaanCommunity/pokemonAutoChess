@@ -2314,11 +2314,15 @@ export class IcicleMissileStrategy extends AbilityStrategy {
           targetY,
           delay: i
         })
-        
+
         pokemon.commands.push(
           new DelayedCommand(() => {
             const entityHit = board.getEntityOnCell(targetX, targetY)
-            if (entityHit && entityHit.hp > 0 && entityHit.team !== pokemon.team){
+            if (
+              entityHit &&
+              entityHit.hp > 0 &&
+              entityHit.team !== pokemon.team
+            ) {
               entityHit.status.triggerFreeze(3000, tg)
               entityHit.handleSpecialDamage(
                 damage,
@@ -3543,6 +3547,30 @@ export class HydroSteamStrategy extends AbilityStrategy {
   }
 }
 
+export class CavernousChompStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Deals 40/80/160 damage to the target. If the user is able to KO the target with its ability, it becomes Enraged for 1/2/3 seconds.
+    const damage = [40, 80, 160][pokemon.stars - 1] ?? 160
+    const { death } = target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    if (death) {
+      const enragedDuration = [1000, 2000, 3000][pokemon.stars - 1] ?? 3000
+      pokemon.status.triggerRage(enragedDuration, pokemon)
+    }
+  }
+}
+
 export class PresentStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -4258,8 +4286,8 @@ export class StoredPowerStrategy extends AbilityStrategy {
     const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
     const boostSpeed = min(0)(pokemon.speed / baseSpeed - 1)
     const boostAtk = min(0)(pokemon.atk / pokemon.baseAtk - 1)
-    const boostDef = min(0)(pokemon.def / pokemon.baseDef -1)
-    const boostSpeDef = min(0)(pokemon.speDef / pokemon.baseSpeDef -1)
+    const boostDef = min(0)(pokemon.def / pokemon.baseDef - 1)
+    const boostSpeDef = min(0)(pokemon.speDef / pokemon.baseSpeDef - 1)
     const boostAP = min(0)(pokemon.ap / 100 - 1)
 
     const damage = Math.round(
@@ -6662,6 +6690,7 @@ export class AquaRingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(target, board)
     if (mostSurroundedCoordinate) {
@@ -6687,12 +6716,7 @@ export class AquaRingStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
           cell.value.status.clearNegativeStatus()
-          cell.value.handleHeal(
-            pokemon.stars === 3 ? 50 : pokemon.stars === 2 ? 30 : 20,
-            pokemon,
-            1,
-            crit
-          )
+          cell.value.handleHeal(heal, pokemon, 1, crit)
         }
       })
     }
@@ -13352,13 +13376,13 @@ export class SteamrollerStrategy extends AbilityStrategy {
       )
       cells.forEach((cell, i) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          targetsHit.add(cell.value)          
+          targetsHit.add(cell.value)
         }
       })
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
     }
 
-    if(targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
     targetsHit.forEach((enemy) => {
       enemy.handleSpecialDamage(
         damage,
@@ -15035,5 +15059,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy(),
   [Ability.TRIPLE_DIVE]: new TripleDiveStrategy(),
   [Ability.MOONBLAST]: new MoonblastStrategy(),
-  [Ability.HYDRO_STEAM]: new HydroSteamStrategy()
+  [Ability.HYDRO_STEAM]: new HydroSteamStrategy(),
+  [Ability.CAVERNOUS_CHOMP]: new CavernousChompStrategy()
 }

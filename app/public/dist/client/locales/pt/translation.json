@@ -1441,7 +1441,7 @@
 		"PARABOLIC_CHARGE": "Cura [25,50] HP e causa [25,50,100,SP] de dano SPECIAL ao alvo. O excesso de HP é convertido em SPECIAL",
 		"TEETER_DANCE": "Ganhe [20,SP] SPEED. Todos os outros Pokémon ficam com CONFUSION por 3 segundos, tanto aliados quanto inimigos.",
 		"CLOSE_COMBAT": "Causa [130,SP] SPECIAL e reduz a DEF e SPE_DEF do lançador em 2",
-		"AQUA_RING": "Mergulha no meio da equipe aliada, criando um anel aquático que limpa os status negativos e cura [20,30,50,SP] HP",
+		"AQUA_RING": "Mergulha no meio da equipe aliada, criando um anel aquático que limpa os status negativos e cura [20,40,80,SP] HP",
 		"AURASPHERE": "Exala uma aura e projecta energia numa linha, causando [25,50,100,SP] de SPECIAL e SILENCE a cada oponente atingido durante 3 segundos"
 	},
 	"effect": {
@@ -1837,7 +1837,6 @@
 		"HATCH": "Os pokémons eclodidos evoluem automaticamente após 5 estágios",
 		"SYNCHRO": "Se o pokémon for afetado por POISONNED, BURN, WOUND ou SILENCE, o caster inimigo sofrerá o mesmo status negativo",
 		"TADPOLE": "Poliwhirl evoluirá para Poliwrath se colocado na linha de frente, Politoed caso contrário",
-		"BIVALVE": "Clamperl evoluirá para Huntail se colocado na linha de frente, Gorebyss caso contrário",
 		"SUN": "Alterar tempo para SUN",
 		"RAIN": "Alterar tempo para RAIN",
 		"SANDSTORM": "Mude o clima para SANDSTORM",
