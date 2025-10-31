@@ -3,6 +3,7 @@
 # Changes to Pokemon & Abilities
 
 - Change Icicle Missile (Vanilluxe): now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss.
+- Kleavor and Scizor are now regional variants of Scyther, obtainable in Rock and Steel regions. Tier 4 → 3, adjusted stats.
 
 # Changes to Synergies
 

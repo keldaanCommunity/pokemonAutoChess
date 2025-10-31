@@ -2119,7 +2119,6 @@
 		"PROTEAN3": "Il Pokèmon acquisisce i tipi delle 3 sinergie con valore più alto della tua squadra",
 		"CASTFORM": "Castform cambia la sua forma e il clima in SUN, RAIN o NEVE a seconda della tua sinergia dominante tra FIRE WATER ICE",
 		"MANAPHY": "$t(pkm.MANAPHY) sta cercando un AQUA_EGG",
-		"SCYTHER": "$t(pkm.SCYTHER) sta cercando per una METAL_COAT o un' BLACK_AUGURITE",
 		"PRIMAL": "La leggenda narra che potresti scatenare gli antichi poteri di questi Pokèmon",
 		"WONDER_GUARD": "Blocca 20 danni per ogni colpo ricevuto",
 		"ELECTRIC_TERRAIN": "Dai ELECTRIC_FIELD ai tuoi Pokémon ELECTRIC, aumentandone i danni del 20%",

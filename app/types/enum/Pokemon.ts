@@ -3367,7 +3367,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
   [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
-  [Pkm.SUICUNE]: [Pkm.WALKING_WAKE]
+  [Pkm.SUICUNE]: [Pkm.WALKING_WAKE],
+  [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
