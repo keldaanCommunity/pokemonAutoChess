@@ -1782,7 +1782,6 @@
 		"ICE_BALL": "Incrementa la SPE_DEF del usuario en 10 e inflige SPECIAL igual a [10,20,30,SP] + [50,100,150,SP]% de la SPE_DEF del usuario.",
 		"THRASH": "Mejora el ATK en un [100,SP]% y se queda CONFUSION por 3 segundos",
 		"SOLAR_BEAM": "Inflige [25,50,100,SP] de SPECIAL a todos los Pokémon enemigos en línea tras el objetivo y les aplica BURN durante 3 segundos. Si el usuario se encuentra en el foco de luz o si el clima es SUN, duplica el daño y restaura 20 PP.",
-		"MAGMA_STORM": "El objetivo queda atrapado en una vorágine de fuego que inflige [80,SP] de SPECIAL antes de moverse a un objetivo adyacente",
 		"DIRE_CLAW": "Hace [15,30,60,SP] al objetivo. Inflige aleatoriamente POISONNED, SLEEP o PARALYSIS por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo deja WOUND por 5 segundos. Si el objetivo ya está WOUND, otorga un 30% de bonificación de SPECIAL",
 		"ERUPTION": "Dispara [20,30,45] proyectiles en el aire. Cada proyectil inflige [30,50,70,SP] de SPECIAL y causa BURN por 5 segundos",

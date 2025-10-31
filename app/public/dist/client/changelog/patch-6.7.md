@@ -3,6 +3,7 @@
 # Changes to Pokemon & Abilities
 
 - Change Icicle Missile (Vanilluxe): now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss.
+- Change Magma Storm (Heatran): now deals 100 special damage and propagates to adjacent enemies up to 5 times, losing 20% of its power for every tile travelled.
 
 # Changes to Synergies
 

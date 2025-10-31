@@ -5647,42 +5647,50 @@ export class MagmaStormStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
 
     const targetsHit = new Set<string>()
+    const baseDamage = 100
+    let power = 1
+
     const propagate = (currentTarget: PokemonEntity) => {
       targetsHit.add(currentTarget.id)
       pokemon.broadcastAbility({
         skill: Ability.MAGMA_STORM,
         targetX: currentTarget.positionX,
-        targetY: currentTarget.positionY
+        targetY: currentTarget.positionY,
+        ap: Math.round(pokemon.ap * power)
       })
       currentTarget.handleSpecialDamage(
-        80,
+        baseDamage * power,
         board,
         AttackType.SPECIAL,
         pokemon,
         false
       )
 
-      pokemon.simulation.room.clock.setTimeout(() => {
-        const board = pokemon.simulation.board
-        const nextEnemies = board
-          .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
-          .filter(
-            (cell) =>
-              cell.value &&
-              cell.value.team === currentTarget.team &&
-              !targetsHit.has(cell.value.id)
-          )
-        nextEnemies.forEach((enemy) => {
-          if (
-            enemy &&
-            enemy.value &&
-            enemy.value.hp > 0 &&
-            !pokemon.simulation.finished
-          ) {
-            propagate(enemy.value)
-          }
-        })
-      }, 250)
+      power -= 0.2
+      if (power <= 0) return
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          const board = pokemon.simulation.board
+          const nextEnemies = board
+            .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
+            .filter(
+              (cell) =>
+                cell.value &&
+                cell.value.team === currentTarget.team &&
+                !targetsHit.has(cell.value.id)
+            )
+          nextEnemies.forEach((enemy) => {
+            if (
+              enemy &&
+              enemy.value &&
+              enemy.value.hp > 0 &&
+              !pokemon.simulation.finished
+            ) {
+              propagate(enemy.value)
+            }
+          })
+        }, 250)
+      )
     }
 
     propagate(target)
