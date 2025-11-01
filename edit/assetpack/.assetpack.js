@@ -1,4 +1,4 @@
-import { path } from "@assetpack/core"
+import { path as upath } from "@assetpack/core"
 import { compressJpg, compressPng } from "@assetpack/plugin-compress"
 //import { audio } from "@assetpack/plugin-ffmpeg"
 import { json } from "@assetpack/plugin-json"
@@ -51,7 +51,7 @@ export default {
     compressedAtlas: compressedAtlas({
       path: "../../app/public/src/assets/pokemons",
       include: /\d+-?\d+/,
-      outputPath: "../../app/public/dist/client/assets/pokemons.json"
+      outputPath: "../../app/public/dist/client/assets/pokemons"
     })
   }
 }
@@ -61,7 +61,7 @@ function texturePackAtlas() {
     folder: true,
     name: "texture-pack-indexer",
     finish(tree, processor) {
-      const atlasPath = path.joinSafe(processor.config.entry, "atlas.json")
+      const atlasPath = upath.joinSafe(processor.config.entry, "atlas.json")
 
       const existingAtlas = fs.existsSync(atlasPath)
         ? fs.readJSONSync(atlasPath)
@@ -146,23 +146,19 @@ function compressedAtlas({ path, include, outputPath }) {
       const jsonFiles = files.filter(
         (file) => file.endsWith(".json") && include.test(file)
       )
-      const compressedPokemonsAtlas = {}
-      console.log(
-        `Compressing ${jsonFiles.length} JSON files into compressed atlas ${outputPath}`
-      )
       for (const jsonFile of jsonFiles) {
-        const filePath = `${path}/${jsonFile}`
+        const filePath = upath.joinSafe(path, jsonFile)
+        console.log(`Compressing ${filePath} pokemon atlas JSON`)
+
         const jsonData = fs.readJSONSync(filePath)
+
         // Process the jsonData as needed
         const { frames, size, scale, image } = jsonData.textures[0]
-        compressedPokemonsAtlas[image] = {
-          s: [size.w, size.h, size.scale], // width, height, scale
-          a: {}
-        }
+        const compressedJson = { i: image, s: [size.w, size.h, scale], a: {} }
 
         for (const frame of frames) {
           const parts = frame.filename.split("/")
-          let node = compressedPokemonsAtlas[image].a
+          let node = compressedJson.a
           while (parts.length > 1) {
             const part = parts.shift()
             if (!(part in node)) {
@@ -183,9 +179,9 @@ function compressedAtlas({ path, include, outputPath }) {
             frame.frame.h
           ]
         }
-      }
 
-      fs.writeJSONSync(outputPath, compressedPokemonsAtlas)
+        fs.writeJSONSync(upath.joinSafe(outputPath, jsonFile), compressedJson)
+      }
     }
   }
 }

@@ -263,7 +263,6 @@ export default class GameScene extends Scene {
     })
 
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
-      console.log("toggle camera input")
       savePreferences({ cameraLocked: !preference("cameraLocked") })
     })
 

@@ -2,6 +2,7 @@ import { SetSchema } from "@colyseus/schema"
 import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import pkg from "../../../../../package.json"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
@@ -301,13 +302,7 @@ export default class PokemonSprite extends DraggableObject {
               `addtexture-${this.pokemon.index}`,
               lazyCreateAnimations
             )
-            scene.load
-              .multiatlas(
-                this.pokemon.index,
-                `/assets/pokemons/${this.pokemon.index}.json`,
-                "/assets/pokemons"
-              )
-              .start()
+            loadCompressedAtlas(scene, this.pokemon.index)
           } else {
             lazyCreateAnimations()
           }
@@ -1461,4 +1456,84 @@ export const isEntity = (
   pokemon: IPokemon | IPokemonEntity
 ): pokemon is IPokemonEntity => {
   return "status" in pokemon
+}
+
+export function loadCompressedAtlas(scene: Phaser.Scene, index: string) {
+  scene.load.once(
+    `filecomplete-json-pokemon-atlas-${index}`,
+    (key, type, data) => {
+      const image = data.i
+
+      function traverse(obj: any, path: string, frames) {
+        if (Array.isArray(obj)) {
+          const [
+            sourceSizew,
+            sourceSizeh,
+            spriteSourceSizex,
+            spriteSourceSizey,
+            spriteSourceSizew,
+            spriteSourceSizeh,
+            framex,
+            framey,
+            framew,
+            frameh
+          ] = obj
+          frames.push({
+            filename: path,
+            rotated: false,
+            trimmed: true,
+            sourceSize: {
+              w: sourceSizew,
+              h: sourceSizeh
+            },
+            spriteSourceSize: {
+              x: spriteSourceSizex,
+              y: spriteSourceSizey,
+              w: spriteSourceSizew,
+              h: spriteSourceSizeh
+            },
+            frame: {
+              x: framex,
+              y: framey,
+              w: framew,
+              h: frameh
+            }
+          })
+        } else if (obj instanceof Object) {
+          for (const key in obj) {
+            traverse(obj[key], path ? path + "/" + key : key, frames)
+          }
+        }
+      }
+      const frames = []
+
+      traverse(data.a, "", frames)
+
+      const multiatlas = {
+        textures: [
+          {
+            image: `${image}?v=${pkg.version}`,
+            format: "RGBA8888",
+            size: {
+              w: data.s[0],
+              h: data.s[1]
+            },
+            scale: data.s[2] ?? 1,
+            frames
+          }
+        ]
+      }
+
+      const index = image.replace(".png", "")
+      //console.log("load multiatlas " + index)
+      // @ts-ignore: there is an error in phaser types, the second parameter can be an object
+      scene.load.multiatlas(index, multiatlas, "/assets/pokemons").start()
+    }
+  )
+  scene.load
+    .json(
+      `pokemon-atlas-${index}`,
+      `/assets/pokemons/${index}.json?v=${pkg.version}`
+    )
+    .start()
 }

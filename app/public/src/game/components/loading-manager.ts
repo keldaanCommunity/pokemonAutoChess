@@ -15,6 +15,7 @@ import { values } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import GameScene from "../scenes/game-scene"
+import { loadCompressedAtlas } from "./pokemon"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -41,11 +42,7 @@ export default class LoadingManager {
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
 
     // load missingno as default pokemon texture if not found
-    scene.load.multiatlas(
-      "0000",
-      "/assets/pokemons/0000.json",
-      "/assets/pokemons/"
-    )
+    loadCompressedAtlas(scene, "0000")
 
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")

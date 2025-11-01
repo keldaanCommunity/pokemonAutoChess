@@ -277,7 +277,6 @@ export class Pokemon extends Schema implements IPokemon {
         this.types.delete(synergyRemoved)
         if (this.passive === Passive.RKS_SYSTEM) {
           const memory = MemoryDiscsBySynergy[synergyRemoved]
-          console.log("Synergy removed", synergyRemoved, memory)
           if (player.items.includes(memory) === false && memory) {
             player.items.push(memory)
           }
