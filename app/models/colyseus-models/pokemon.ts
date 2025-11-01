@@ -8337,7 +8337,7 @@ export class Stakataka extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 300
-  atk = 10
+  atk = 20
   speed = 29
   def = 30
   speDef = 30
