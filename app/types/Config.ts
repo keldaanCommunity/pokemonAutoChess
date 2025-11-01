@@ -183,8 +183,8 @@ export const BoosterPriceByRarity: { [key in Rarity]: number } = {
 }
 
 export const DITTO_RATE = 0.005
-export const KECLEON_RATE = 1 / 200
-export const ARCEUS_RATE = 1 / 200
+export const KECLEON_RATE = 1 / 500
+export const ARCEUS_RATE = 1 / 500
 
 export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
