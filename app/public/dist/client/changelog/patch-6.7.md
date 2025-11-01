@@ -9,6 +9,7 @@
 - Clamperl is now Fossil/Water instead of Fossil/Water/Aquatic ; def 8 → 10; spe def 4 → 5 ;new ability: Iron Defense ; Clamperl will evolve into Huntail or Gorebyss based on the dominant synergy between Dark and Psychic
 - Huntail is now Fossil/Water/Dark instead of Fossil/Water/Aquatic ; new ability: Cavernous Chomp - Deals 40/80/160 damage to the target. If the user is able to KO the target with its ability, it becomes Enraged for 1/2/3 seconds.
 - Gorebyss is now Fossil/Water/Psychic instead of Fossil/Water/Aquatic ; new ability: Aqua Ring
+- Kecleon and Arceus rates have been lowered even further: 1/200 → 1/500
 
 # Changes to Synergies
 
