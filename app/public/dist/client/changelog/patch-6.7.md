@@ -20,6 +20,8 @@
 
 # UI
 
+- Pokemons sprites are now lazy-loaded. This should reduce game loading times and memory usage significantly, at the cost of having a small delay before the Pokémon sprites are displayed for the first time. A wobbling pokéball is shown while the sprite is being loaded (shouldn't take more than 1 second in most cases).
+
 # Bugfix
 
 - Added missing Field Memory Disc for Silvally

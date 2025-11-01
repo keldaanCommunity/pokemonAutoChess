@@ -48,7 +48,9 @@ export default class PokemonSpecial extends PokemonSprite {
     this.scene = scene
     this.draggable = false
     this.orientation = orientation
-    scene.animationManager?.animatePokemon(this, animation, false)
+    this.once("loaded", () =>
+      scene.animationManager?.animatePokemon(this, animation, false)
+    )
     this.dialog = dialog
     this.dialogTitle = dialogTitle
   }

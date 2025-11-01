@@ -278,6 +278,16 @@ export default class AnimationManager {
       duration: 600,
       repeat: -1
     })
+
+    this.game.anims.create({
+      key: "loading_pokeball",
+      frames: this.game.anims.generateFrameNames("loading_pokeball", {
+        frames: [2, 1, 0, 1, 2, 3, 4, 3],
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    })
   }
 
   convertPokemonActionStateToAnimationType(
@@ -379,6 +389,7 @@ export default class AnimationManager {
     } = {}
   ) {
     if (pkmSprite.animationLocked || !pkmSprite.sprite?.anims) return
+    if (pkmSprite.sprite.texture.key === "loading_pokeball") return // still loading the actual pokemon textures
 
     let orientation = config.flip
       ? OrientationFlip[pkmSprite.orientation]
