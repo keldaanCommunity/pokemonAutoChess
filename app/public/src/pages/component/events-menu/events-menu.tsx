@@ -21,7 +21,6 @@ export function EventsMenu() {
         </Tab>
         {tournaments.length > 0 && (
           <Tab>
-            <img src="/assets/ui/tournament.svg" alt="" />
             <span>{t("tournament")}</span>
           </Tab>
         )}
