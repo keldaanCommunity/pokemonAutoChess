@@ -1,6 +1,6 @@
+import { GameObjects } from "phaser"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { GameObjects } from "phaser"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 
 export class GameDialog extends GameObjects.DOMElement {

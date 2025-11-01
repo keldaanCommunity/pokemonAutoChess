@@ -19,9 +19,9 @@ import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonPortrait from "../pokemon-portrait"
 import TimerBar from "./game-timer-bar"
 import "./game-stage-info.css"
-import PokemonPortrait from "../pokemon-portrait"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()

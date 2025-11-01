@@ -1,0 +1,219 @@
+/* Wiki Stages Styling */
+#wiki-stages {
+  --stage-pve-color: #8c2022;
+  --stage-carousel-color: #4aa52e;
+  --stage-portal-color: #e6cb49;
+  --stage-additional-color: #927fff;
+  --stage-battle-color: #666;
+}
+
+#wiki-stages .wiki-stage-path-container {
+  margin: 1em 0;
+}
+
+#wiki-stages .stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2em;
+}
+
+#wiki-stages .wiki-stage-path {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em 0;
+}
+
+#wiki-stages .wiki-stage-path-item {
+  position: relative;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  transition: all 0.2s ease;
+  min-width: 45px;
+  min-height: 45px;
+}
+
+#wiki-stages .wiki-stage-path-item:hover {
+  background-color: var(--color-bg-accent);
+  transform: scale(1.05);
+}
+
+#wiki-stages .wiki-stage-path-item.selected {
+  background-color: #109fff;
+  border-color: #0080e6;
+}
+
+#wiki-stages .wiki-stage-path-item.pve {
+  border-color: var(--stage-pve-color);
+}
+
+#wiki-stages .wiki-stage-path-item.carousel {
+  border-color: var(--stage-carousel-color);
+}
+
+#wiki-stages .wiki-stage-path-item.portal {
+  border-color: var(--stage-portal-color);
+}
+
+#wiki-stages .wiki-stage-path-item.additional {
+  border-color: var(--stage-additional-color);
+}
+
+#wiki-stages .wiki-stage-path-item.battle {
+  border-color: var(--stage-battle-color);
+}
+
+#wiki-stages .wiki-stage-path-item img {
+  display: block;
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+}
+
+#wiki-stages .wiki-stage-path-item .stage-number {
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-top: 2px;
+  color: var(--color-fg-primary);
+}
+
+#wiki-stages .stage-connector {
+  color: var(--color-fg-secondary);
+  font-weight: bold;
+  margin: 0 -4px;
+}
+
+/* Stage Detail Styling */
+
+#wiki-stages .stage-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#wiki-stages .stage-detail-info h3 {
+  margin: 0;
+  color: var(--color-fg-primary);
+}
+
+#wiki-stages .stage-detail-info h4 {
+  margin: 0.2em 0;
+  color: var(--color-fg-accent);
+}
+
+#wiki-stages .stage-detail-info .stage-type {
+  font-size: 0.9em;
+  color: var(--color-fg-secondary);
+  font-style: italic;
+}
+
+#wiki-stages .stage-detail-icon img {
+  width: 48px;
+  height: 48px;
+}
+
+#wiki-stages .stage-detail ul {
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+#wiki-stages .stage-board li,
+#wiki-stages .town-encounter {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+#wiki-stages img.item {
+  width: 40px;
+  height: 40px;
+}
+
+#wiki-stages .town-encounters {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+#wiki-stages .stage-items li,
+#wiki-stages .stage-boosts li {
+  list-style: none;
+  padding: 0.3em;
+  background-color: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+#wiki-stages .stage-shiny span {
+  font-weight: bold;
+  color: var(--color-fg-gold);
+}
+
+/* Legend Styling */
+#wiki-stages .stage-legend {
+  display: flex;
+  gap: 0.6em;
+  flex-shrink: 0;
+}
+
+#wiki-stages .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.4em;
+  background-color: var(--color-bg-secondary);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#wiki-stages .legend-item:hover {
+  background-color: var(--color-bg-accent);
+}
+
+#wiki-stages .legend-item.pve {
+  border-color: var(--stage-pve-color);
+}
+
+#wiki-stages .legend-item.carousel {
+  border-color: var(--stage-carousel-color);
+}
+
+#wiki-stages .legend-item.portal {
+  border-color: var(--stage-portal-color);
+}
+
+#wiki-stages .legend-item.additional {
+  border-color: var(--stage-additional-color);
+}
+
+#wiki-stages .legend-item.battle {
+  border-color: var(--stage-battle-color);
+}
+
+#wiki-stages .legend-item img {
+  width: 24px;
+  height: 24px;
+}
+
+#wiki-stages .legend-item span {
+  font-weight: 500;
+  color: var(--color-fg-primary);
+}
+
+/* Highlight stage path items when legend is hovered */
+#wiki-stages .wiki-stage-path-item.highlighted {
+  background-color: var(--color-bg-accent);
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
