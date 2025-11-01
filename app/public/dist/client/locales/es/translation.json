@@ -3410,7 +3410,7 @@
 		"bots": "¿Cómo funcionan los bots?",
 		"bots_answer": "Los bots son creados por otros jugadores. Los bots están basados en temas, un bot Mewtwo siempre tendrá un Mewtwo en su equipo en algún momento determinado de la partida. Los bots tienen una lista de equipos predefinidos en cada ronda.",
 		"create_bot": "¿Puedo crear mi propio bot?",
-		"create_bot_answer": "Claro. Deberás tener al menos el nivel 20 para desbloquear el dispositivo Bot Builder. Puede usarlo para crear y enviar su bot; se enviará al canal #bot-creation en Discord para que el equipo de revisores de bots lo revise.",
+		"create_bot_answer": "Claro. Deberás tener al menos el nivel 40 para desbloquear el dispositivo Bot Builder. Puede usarlo para crear y enviar su bot; se enviará al canal #bot-creation en Discord para que el equipo de revisores de bots lo revise.",
 		"elo": "¿Cómo funciona el sistema elo?",
 		"elo_answer": "El sistema elo en Pokémon Auto Chess funciona igual que en otros juegos basados en elo como el ajedrez, Lol, Starcraft, etc. Para ganar puntos elo, debes vencer a otros jugadores. Cuanto mayor sea el elo de tu oponente, más elo ganarás al derrotarlo, y viceversa. Si no juegas durante 20 días, tu elo comenzará a decaer (-5 elo/día).",
 		"missing_points": "No obtuve puntos elo en mi último juego, ¿por qué?",
@@ -4236,5 +4236,26 @@
 		"reset_info": "Todos los puntos se actualizarán las 00:00 UTC el primer día de cada mes, faltan {{resetCountdown}}. El marcador se actualiza cada 10 minutos.",
 		"runners": "Participantes",
 		"finishers": "Campeones"
-	}
+	},
+	"stage_type": {
+		"pve": "Encuentro PvE",
+		"carousel": "Carrusel de objetos",
+		"portal": "Carrusel de portales",
+		"additional": "Selección adicional",
+		"battle": "Combate de jugadores"
+	},
+	"enemy_team": "Equipo enemigo",
+	"stat_boosts": "Bonificaciones de estadísticas",
+	"rewards": "Recompensas",
+	"shiny_chance": "Probabilidad de shiny",
+	"shiny_magikarp_description": "Los Magikarp shiny dan 10 ORO cada uno cuando son derrotados",
+	"shiny_pve_description": "Las rondas PvE shiny te dan la opción entre 3 objetos shiny aleatorios como recompensa cuando son derrotadas",
+	"carousel_description": "Ronda de carrusel de objetos donde puedes elegir objetos para tu equipo. Los objetos se seleccionan aleatoriamente del pool de objetos disponibles.",
+	"item_pool": "Pool de objetos",
+	"town_encounters": "Encuentros en la ciudad",
+	"portal_description_1": "Toma un portal para viajar a una nueva región. Luego tendrás que elegir un Pokémon Inicial, Único o Legendario.",
+	"portal_description_2": "Cada portal tiene símbolos de sinergia tomados aleatoriamente de las sinergias dominantes de todos los jugadores. Los símbolos influyen tanto en la región a la que viajarás como en los Pokémon que serán propuestos.",
+	"portal_description_3": "Si decides no tomar ningún portal, permanecerás en tu región actual, y los Pokémon propuestos serán totalmente aleatorios.",
+	"additional_description": "Elige una selección adicional y un componente de objeto entre 3 propuestas. Las selecciones adicionales son Pokémon de evolución de 2 etapas que se pueden encontrar en todas las tiendas de los jugadores después de ser elegidos.",
+	"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots."
 }

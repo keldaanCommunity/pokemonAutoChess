@@ -3414,7 +3414,7 @@
 		"bots": "机器人有什么用？",
 		"bots_answer": "机器人由玩家创建。机器人的队伍总会有一个主题，例如“超梦机器人”的队伍一定会在某一时刻包括一只超梦。机器人在某一轮次的队伍由玩家提前设定。",
 		"create_bot": "我可以自创机器人吗？",
-		"create_bot_answer": "可以，需要至少20级才能解锁机器人制作器工具。你可以用它来创建并提交你的机器人，官方Discord服务器的#bot-creation频道中的机器人评委将负责审核之。",
+		"create_bot_answer": "可以，需要至少40级才能解锁机器人制作器工具。你可以用它来创建并提交你的机器人，官方Discord服务器的#bot-creation频道中的机器人评委将负责审核之。",
 		"elo": "Elo机制是怎么运行的？",
 		"elo_answer": "宝可梦自走棋的Elo系统和其他游戏（如英雄联盟，星际争霸，国际象棋等）的Elo机制相同，战胜其他玩家即可获得Elo分数。对手的Elo分数越高，你战胜他时能获得的Elo分数就越多，反之亦然。如果你连续20天没有游戏，你将会开始每天损失5点Elo分数。",
 		"missing_points": "为什么某一局游戏并没有改变我的Elo分数？",
@@ -4248,5 +4248,26 @@
 		"reset_info": "每月第一天的午夜12点（UTC）重置所有分数，当前距离重置还有{{resetCountdown}}。活动排行榜每10分钟刷新一次。",
 		"runners": "参赛选手",
 		"finishers": "已完赛选手"
-	}
+	},
+	"stage_type": {
+		"pve": "PvE遭遇",
+		"carousel": "道具转盘",
+		"portal": "传送门转盘",
+		"additional": "额外选择",
+		"battle": "玩家对战"
+	},
+	"enemy_team": "敌方队伍",
+	"stat_boosts": "属性加成",
+	"rewards": "奖励",
+	"shiny_chance": "闪光概率",
+	"shiny_magikarp_description": "闪光鲤鱼王被击败时每只给予10金币",
+	"shiny_pve_description": "闪光PvE关卡被击败时可以在3个随机闪光道具中选择一个作为奖励",
+	"carousel_description": "道具转盘回合，你可以为你的队伍选择道具。道具从可用道具池中随机选择。",
+	"item_pool": "道具池",
+	"town_encounters": "城镇遭遇",
+	"portal_description_1": "使用传送门前往新的地区。然后你需要选择一个初始、独特或传说宝可梦。",
+	"portal_description_2": "每个传送门都有从所有玩家的主导协同中随机选取的协同符号。符号会影响你将要前往的地区和被推荐的宝可梦。",
+	"portal_description_3": "如果你决定不使用任何传送门，你将留在当前地区，推荐的宝可梦将完全随机。",
+	"additional_description": "从3个选项中选择一个额外选择和一个道具组件。额外选择是2阶段进化的宝可梦，被选择后可以在所有玩家商店中找到。",
+	"battle_description": "常规战斗阶段，你将与其他玩家或机器人战斗。"
 }

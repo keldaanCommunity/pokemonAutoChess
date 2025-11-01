@@ -1719,7 +1719,7 @@
 		"bots": "Hoe werken bots?",
 		"bots_answer": "Bots worden gemaakt door andere spelers. Bots zijn op thema's gebaseerd, een mewtwo-bot zal op een bepaald moment in het spel altijd een mewtwo in zijn team hebben. Bots hebben in elke fase een lijst met vooraf gedefinieerde teams.",
 		"create_bot": "Kan ik mijn eigen bot maken?",
-		"create_bot_answer": "Veilig. Je moet minimaal niveau 20 zijn om de Bot Builder-gadget te ontgrendelen. Je kunt het gebruiken om je bot te maken en in te dienen. Deze wordt verzonden naar het #bot-creation-kanaal op Discord voor beoordeling door het botreviewersteam.",
+		"create_bot_answer": "Veilig. Je moet minimaal niveau 40 zijn om de Bot Builder-gadget te ontgrendelen. Je kunt het gebruiken om je bot te maken en in te dienen. Deze wordt verzonden naar het #bot-creation-kanaal op Discord voor beoordeling door het botreviewersteam.",
 		"elo": "Hoe werkt het elo-systeem?",
 		"elo_answer": "Het elo-systeem in Pokemon Auto Chess werkt hetzelfde als in andere op elo gebaseerde spellen zoals Chess, Lol, Starcraft enz... Om elo-punten te verdienen, moet je andere spelers verslaan. Hoe hoger de elo van je tegenstander, hoe meer elo je krijgt door hem te verslaan, en vice versa. Als je 20 dagen niet speelt, begint je elo af te nemen (-5 elo/dag).",
 		"missing_points": "Ik heb geen elo-punten gekregen in mijn laatste spel, waarom?",
@@ -1967,5 +1967,26 @@
 	"search_pokemon": "Selecteer een Pokemon",
 	"search_player": "Zoeken op spelersnaam...",
 	"game-reconnect-modal-title": "Maak opnieuw verbinding met het spel",
-	"game-reconnect-modal-body": "Je hebt een lopende game verlaten. Wil je opnieuw verbinding maken met je vorige game?"
+	"game-reconnect-modal-body": "Je hebt een lopende game verlaten. Wil je opnieuw verbinding maken met je vorige game?",
+	"stage_type": {
+		"pve": "PvE Ontmoeting",
+		"carousel": "Item Carrousel",
+		"portal": "Portal Carrousel",
+		"additional": "Extra Keuze",
+		"battle": "Speler Gevecht"
+	},
+	"enemy_team": "Vijandelijk Team",
+	"stat_boosts": "Statistiek Boosts",
+	"rewards": "Beloningen",
+	"shiny_chance": "Shiny Kans",
+	"shiny_magikarp_description": "Shiny Magikarp geven 10 GOUD elk wanneer verslagen",
+	"shiny_pve_description": "Shiny PvE rondes geven je een keuze tussen 3 willekeurige shiny items als beloning wanneer verslagen",
+	"carousel_description": "Item carrousel ronde waar je items voor je team kunt kiezen. Items worden willekeurig geselecteerd uit de beschikbare item pool.",
+	"item_pool": "Item Pool",
+	"town_encounters": "Stad Ontmoetingen",
+	"portal_description_1": "Neem een portal om naar een nieuwe regio te reizen. Dan moet je een Starter, Unieke of Legendarische Pokémon kiezen.",
+	"portal_description_2": "Elke portal heeft synergie symbolen die willekeurig genomen zijn van de dominante synergieën van alle spelers. Symbolen beïnvloeden zowel de regio waar je naartoe reist als de Pokémon die voorgesteld worden.",
+	"portal_description_3": "Als je besluit geen portal te nemen, blijf je in je huidige regio, en de voorgestelde Pokémon zullen volledig willekeurig zijn.",
+	"additional_description": "Kies een extra keuze en een item component uit 3 voorstellen. Extra keuzes zijn 2-stadium evolutie Pokémon die gevonden kunnen worden in alle spelers winkels nadat ze gekozen zijn.",
+	"battle_description": "Regulaire gevecht stadium waar je vecht tegen andere spelers of bots."
 }
