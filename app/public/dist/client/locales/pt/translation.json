@@ -2587,8 +2587,6 @@
 	"game_already_started": "O jogo já foi iniciado",
 	"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
 	"max_rank_not_reached": "Sua classificação é muito alta para jogar esta partida ranqueada",
-	"not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
-	"blacklisted": "Você foi expulso desta partida",
 	"npc_dialog": {
 		"welcome": "Bem-vindo !",
 		"tell_price": "{{price}} de OURO para cada!",
@@ -2683,6 +2681,7 @@
 	"errors": {
 		"USER_INACTIVE": "Você foi expulso por inatividade a fim de economizar recursos do servidor",
 		"USER_KICKED": "Você foi expulso desta sala",
+		"USER_NOT_WHITELISTED": "Este jogo está limitado a uma lista determinada de jogadores",
 		"USER_BANNED": "Sua conta foi banida",
 		"USER_DELETED": "Sua conta foi permanentemente excluída",
 		"USER_RANK_TOO_LOW": "Seu ranque não é suficiente para participar nessa sala",

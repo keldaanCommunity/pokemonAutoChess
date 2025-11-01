@@ -4082,9 +4082,7 @@
 	"game_full": "Ce groupe est complet",
 	"game_already_started": "La partie a déjà commencé",
 	"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
-	"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé",
-	"not_whitelisted": "Cette partie est réservée à une liste blanche de joueurs",
-	"blacklisted": "Vous avez été expulsé de ce match",
+	"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé",	
 	"npc_dialog": {
 		"welcome": "Bienvenue !",
 		"tell_price": "C'est {{price}} GOLD !",
@@ -4188,7 +4186,8 @@
 	},
 	"errors": {
 		"USER_INACTIVE": "Vous avez été éjecté pour inactivité afin d'économiser des ressources serveur",
-		"USER_KICKED": "Vous avez été éjecté de ce salon",
+		"USER_NOT_WHITELISTED": "Cette partie est réservée à une liste de joueurs",
+		"USER_KICKED": "Vous avez été expulsé de ce salon",
 		"USER_BANNED": "Votre compte a été banni",
 		"USER_DELETED": "Votre compte a été définitivement supprimé",
 		"USER_RANK_TOO_LOW": "Votre rang de joueur est trop bas pour entrer dans ce salon",

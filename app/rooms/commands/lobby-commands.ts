@@ -185,6 +185,9 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
   async execute({ client }: { client: Client }) {
     try {
       if (client.auth.uid) {
+        logger.info(
+          `User ${client.auth.displayName} [${client.auth.uid}] has deleted their account`
+        )
         await UserMetadata.deleteOne({ uid: client.auth.uid })
         client.leave(CloseCodes.USER_DELETED)
       }
@@ -982,7 +985,7 @@ export class JoinOrOpenRoomCommand extends Command<
             // 0- 1099
             minRank = EloRank.LEVEL_BALL
             maxRank = EloRank.NET_BALL
-            break            
+            break
           case EloRank.SAFARI_BALL:
           case EloRank.LOVE_BALL:
             // 1050-1200

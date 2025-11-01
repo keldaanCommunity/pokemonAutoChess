@@ -3845,7 +3845,6 @@
 	"game_already_started": "Spiel hat bereits begonnen",
 	"min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
 	"max_rank_not_reached": "Dein Rang ist zu hoch, um an diesem Ranglistenspiel teilzunehmen",
-	"not_whitelisted": "Dieses Spiel ist auf eine Whitelist von Spielern beschränkt",
 	"blacklisted": "Du wurdest von diesem match gekickt",
 	"npc_dialog": {
 		"welcome": "Willkommen!",
@@ -3947,6 +3946,7 @@
 		"USER_DELETED": "Dein Konto wurde permanent gelöscht",
 		"USER_RANK_TOO_LOW": "Dein Spielerrang ist nicht hoch genug, um an dieser Lobby teilzunehmen",
 		"USER_NOT_AUTHENTICATED": "Bitte authentifizieren dich erneut",
+		"USER_NOT_WHITELISTED": "Dieses Spiel ist auf eine Whitelist von Spielern beschränkt",
 		"USER_TIMEOUT": "Du hast vor kurzem ein Spiel vor Ende verlassen und musst 5 Minuten warten, bis du einem neuen beitreten kannst.",
 		"USER_IN_ANOTHER_GAME": "Du spielst schon in einem anderen Spiel. Gehe zur Lobby zurück und stelle deine Verbindung zu diesem wieder her.",
 		"USER_ALREADY_JOINED": "Du bist bereits in der Lobby",

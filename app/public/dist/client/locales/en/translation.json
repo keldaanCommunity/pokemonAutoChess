@@ -4089,7 +4089,6 @@
 	"game_already_started": "Game has already started",
 	"min_rank_not_reached": "Your rank is not high enough to play this ranked match",
 	"max_rank_not_reached": "Your rank is too high to play this ranked match",
-	"not_whitelisted": "This match is restricted to a whitelist of players",
 	"blacklisted": "You have been kicked from this match",
 	"npc_dialog": {
 		"welcome": "Welcome !",
@@ -4199,6 +4198,7 @@
 		"USER_DELETED": "Your account has been permanently deleted",
 		"USER_RANK_TOO_LOW": "Your player rank is not high enough to participate in this lobby",
 		"USER_NOT_AUTHENTICATED": "Please authenticate again",
+		"USER_NOT_WHITELISTED": "This match is restricted to a whitelist of players",
 		"USER_TIMEOUT": "You recently left a game before its end, so you have to wait 5 minutes before joining another one.",
 		"USER_IN_ANOTHER_GAME": "You are already playing in another game, go back to lobby and reconnect to this one.",
 		"USER_ALREADY_JOINED": "You are already in this lobby",

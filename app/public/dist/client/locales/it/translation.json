@@ -3184,9 +3184,7 @@
 	"game_full": "Questo gruppo è pieno",
 	"game_already_started": "La partita è già iniziata",
 	"min_rank_not_reached": "Il tuo rango non è alto abbastanza per giocare a questa partita classificata",
-	"max_rank_not_reached": "Il tuo rango è troppo alto per giocare a questa partita classificata",
-	"not_whitelisted": "Questa partita è ristretta ad un certo gruppo di giocatori",
-	"blacklisted": "Sei stato cacciato da questa partita",
+	"max_rank_not_reached": "Il tuo rango è troppo alto per giocare a questa partita classificata",	
 	"npc_dialog": {
 		"welcome": "Benvenuto!",
 		"tell_price": "{{price}} GOLD ad ognuno!",
@@ -3259,6 +3257,7 @@
 	"errors": {
 		"USER_INACTIVE": "Sei stato cacciato per inattività per risparmiare risorse del server",
 		"USER_KICKED": "Sei stato cacciato da questa lobby",
+		"USER_NOT_WHITELISTED": "Questa partita è ristretta ad un certo gruppo di giocatori",
 		"USER_BANNED": "Il tuo account è stato bandito",
 		"USER_RANK_TOO_LOW": "Il tuo rango non è alto abbastanza per partecipare a questa lobby",
 		"USER_NOT_AUTHENTICATED": "Per favore, riprova ad autenticati",
