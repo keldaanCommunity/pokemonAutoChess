@@ -10,6 +10,7 @@
 - Huntail is now Fossil/Water/Dark instead of Fossil/Water/Aquatic ; new ability: Cavernous Chomp - Deals 40/80/160 damage to the target. If the user is able to KO the target with its ability, it becomes Enraged for 1/2/3 seconds.
 - Gorebyss is now Fossil/Water/Psychic instead of Fossil/Water/Aquatic ; new ability: Aqua Ring
 - Kecleon and Arceus rates have been lowered even further: 1/200 → 1/500
+- Buff Stakataka: Attack 10 → 20
 
 # Changes to Synergies
 
