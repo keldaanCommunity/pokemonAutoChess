@@ -2598,7 +2598,7 @@
 		"bots": "Come funzionano i bot?",
 		"bots_answer": "I bot vengono creati da altri giocatori. I bot sono basati su temi, un bot Mewtwo avrà sempre un Mewtwo nella sua squadra in un determinato momento della partita. I bot hanno un elenco di squadre predefinite in ogni fase.",
 		"create_bot": "Posso creare il mio bot?",
-		"create_bot_answer": "Certo. Dovrai essere almeno di livello 20 per sbloccare il gadget Bot Builder. Puoi usarlo per creare e inviare il tuo bot, verrà inviato nel canale #bot-creation su Discord per una revisione da parte del team di revisori dei bot.",
+		"create_bot_answer": "Certo. Dovrai essere almeno di livello 40 per sbloccare il gadget Bot Builder. Puoi usarlo per creare e inviare il tuo bot, verrà inviato nel canale #bot-creation su Discord per una revisione da parte del team di revisori dei bot.",
 		"elo": "Come funziona il sistema elo?",
 		"elo_answer": "Il sistema elo in Pokèmon Auto Chess funziona come in altri giochi basati su elo come Chess, Lol, Starcraft ecc... Per guadagnare punti elo, devi battere gli altri giocatori. Più alto è l'elo del tuo avversario, più elo guadagnerai sconfiggendolo e viceversa. Se non giochi per 20 giorni, il tuo elo inizierà a diminuire (-5 elo/giorno).",
 		"missing_points": "Non ho ottenuto punti elo nella mia ultima partita, perché?",
