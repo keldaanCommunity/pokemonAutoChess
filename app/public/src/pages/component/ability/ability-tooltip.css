@@ -87,3 +87,9 @@ h2 .description-icon > img {
   color: rgb(190, 190, 190);
   font-weight: 500;
 }
+
+.ability-extra-detail{
+  background-color: rgba(40, 40, 40, 0.3);
+  padding: 5px;
+  border-radius: 0 0 8px 8px;
+}
