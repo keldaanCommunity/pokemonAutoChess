@@ -1604,7 +1604,6 @@
 		"ICE_BALL": "시전자의 SPE_DEF 을 10 증가시키고 [10,20,30,SP] + SPE_DEF의 [50,100,150,SP]% 만큼 SPECIAL를 가한다.",
 		"THRASH": "ATK을 [100,SP]% 만큼 올리고 3 초 동안 CONFUSION 이 된다.",
 		"SOLAR_BEAM": "대상 뒤의 일직선상에 있는 모든 적 포켓몬에게 [25,50,100,SP]의 특수 효과를 부여하고 3초 동안 BURN 상태로 만듭니다. 포켓몬이 주목을 받거나 날씨가 SUN일 경우, 데미지가 두 배가 되고 PP가 20 회복됩니다.",
-		"MAGMA_STORM": "타겟을 불의 폭풍에 가두어 [80,SP] SPECIAL을 가한다. 불의 폭풍은 주변 적에게로 이동한다.",
 		"DIRE_CLAW": "타겟에게 [15,30,60,SP] SPECIAL 을 가하고, 3초 동안 POISONNED, SLEEP 혹은, PARALYSIS 이 된다.",
 		"SLASHING_CLAW": "타겟에게 [15,30,60,SP] 를 가하고 5초 동안 WOUND 로 만든다. 만약 타겟이 이미 WOUND 상태라면, 추가로 30% SPECIAL을 가한다.",
 		"ERUPTION": "공중으로 [20,30,45] 개의 돌을 날리고 각 돌은 [30,50,70,SP] SPECIAL을 가하고 5초 동안 BURN 한다.",
