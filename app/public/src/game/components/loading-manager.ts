@@ -41,9 +41,6 @@ export default class LoadingManager {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
 
-    // load missingno as default pokemon texture if not found
-    loadCompressedAtlas(scene, "0000")
-
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
     preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
@@ -109,6 +106,9 @@ export default class LoadingManager {
       preloadMusic(scene, DungeonDetails[player.map].music)
       preloadPortraits(this.scene, player)
     }
+
+    // load missingno as default pokemon texture if not found
+    loadCompressedAtlas(scene, "0000")
 
     scene.load.scenePlugin(
       "animatedTiles",

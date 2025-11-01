@@ -288,7 +288,7 @@ export default class PokemonSprite extends DraggableObject {
       } else {
         if (spriteCount === 0 && scene?.animationManager) {
           //logger.debug("loading anims for", this.pokemon.index)
-          const lazyCreateAnimations = () => {
+          const loadAnimations = () => {
             scene.animationManager?.createPokemonAnimations(
               this.pokemon.index,
               tint
@@ -298,13 +298,9 @@ export default class PokemonSprite extends DraggableObject {
 
           if (scene.textures.exists(this.pokemon.index) === false) {
             // needs to load the atlas & textures first
-            scene.textures.once(
-              `addtexture-${this.pokemon.index}`,
-              lazyCreateAnimations
-            )
-            loadCompressedAtlas(scene, this.pokemon.index)
+            loadCompressedAtlas(scene, this.pokemon.index).then(loadAnimations)
           } else {
-            lazyCreateAnimations()
+            loadAnimations()
           }
         } else {
           if (scene?.load.isLoading()) {
@@ -1458,82 +1454,95 @@ export const isEntity = (
   return "status" in pokemon
 }
 
-export function loadCompressedAtlas(scene: Phaser.Scene, index: string) {
-  scene.load.once(
-    `filecomplete-json-pokemon-atlas-${index}`,
-    (key, type, data) => {
-      const image = data.i
+const lazyLoadingRequests = {}
 
-      function traverse(obj: any, path: string, frames) {
-        if (Array.isArray(obj)) {
-          const [
-            sourceSizew,
-            sourceSizeh,
-            spriteSourceSizex,
-            spriteSourceSizey,
-            spriteSourceSizew,
-            spriteSourceSizeh,
-            framex,
-            framey,
-            framew,
-            frameh
-          ] = obj
-          frames.push({
-            filename: path,
-            rotated: false,
-            trimmed: true,
-            sourceSize: {
-              w: sourceSizew,
-              h: sourceSizeh
-            },
-            spriteSourceSize: {
-              x: spriteSourceSizex,
-              y: spriteSourceSizey,
-              w: spriteSourceSizew,
-              h: spriteSourceSizeh
-            },
-            frame: {
-              x: framex,
-              y: framey,
-              w: framew,
-              h: frameh
+export function loadCompressedAtlas(
+  scene: Phaser.Scene,
+  index: string
+): Promise<void> {
+  if (index in lazyLoadingRequests) {
+    return lazyLoadingRequests[index]
+  }
+  lazyLoadingRequests[index] = new Promise((resolve) => {
+    scene.load.once(
+      `filecomplete-json-pokemon-atlas-${index}`,
+      (key, type, data) => {
+        const image = data.i
+
+        function traverse(obj: any, path: string, frames) {
+          if (Array.isArray(obj)) {
+            const [
+              sourceSizew,
+              sourceSizeh,
+              spriteSourceSizex,
+              spriteSourceSizey,
+              spriteSourceSizew,
+              spriteSourceSizeh,
+              framex,
+              framey,
+              framew,
+              frameh
+            ] = obj
+            frames.push({
+              filename: path,
+              rotated: false,
+              trimmed: true,
+              sourceSize: {
+                w: sourceSizew,
+                h: sourceSizeh
+              },
+              spriteSourceSize: {
+                x: spriteSourceSizex,
+                y: spriteSourceSizey,
+                w: spriteSourceSizew,
+                h: spriteSourceSizeh
+              },
+              frame: {
+                x: framex,
+                y: framey,
+                w: framew,
+                h: frameh
+              }
+            })
+          } else if (obj instanceof Object) {
+            for (const key in obj) {
+              traverse(obj[key], path ? path + "/" + key : key, frames)
             }
-          })
-        } else if (obj instanceof Object) {
-          for (const key in obj) {
-            traverse(obj[key], path ? path + "/" + key : key, frames)
           }
         }
+        const frames = []
+
+        traverse(data.a, "", frames)
+
+        const multiatlas = {
+          textures: [
+            {
+              image: `${image}?v=${pkg.version}`,
+              format: "RGBA8888",
+              size: {
+                w: data.s[0],
+                h: data.s[1]
+              },
+              scale: data.s[2] ?? 1,
+              frames
+            }
+          ]
+        }
+
+        const index = image.replace(".png", "")
+
+        //console.log("load multiatlas " + index)
+        scene.textures.once(`addtexture-${index}`, resolve)
+        // @ts-ignore: there is an error in phaser types, the second parameter can be an object
+        scene.load.multiatlas(index, multiatlas, "/assets/pokemons").start()
       }
-      const frames = []
-
-      traverse(data.a, "", frames)
-
-      const multiatlas = {
-        textures: [
-          {
-            image: `${image}?v=${pkg.version}`,
-            format: "RGBA8888",
-            size: {
-              w: data.s[0],
-              h: data.s[1]
-            },
-            scale: data.s[2] ?? 1,
-            frames
-          }
-        ]
-      }
-
-      const index = image.replace(".png", "")
-      //console.log("load multiatlas " + index)
-      // @ts-ignore: there is an error in phaser types, the second parameter can be an object
-      scene.load.multiatlas(index, multiatlas, "/assets/pokemons").start()
-    }
-  )
-  scene.load
-    .json(
-      `pokemon-atlas-${index}`,
-      `/assets/pokemons/${index}.json?v=${pkg.version}`
     )
-    .start()
+    scene.load
+      .json(
+        `pokemon-atlas-${index}`,
+        `/assets/pokemons/${index}.json?v=${pkg.version}`
+      )
+      .start()
+  })
+  return lazyLoadingRequests[index]
 }
