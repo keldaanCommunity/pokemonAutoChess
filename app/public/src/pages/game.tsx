@@ -93,9 +93,6 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { preference } from "../preferences"
-import { throttle } from "../../../utils/function"
-import Player from "../../../models/colyseus-models/player"
 
 let gameContainer: GameContainer
 
@@ -418,17 +415,17 @@ export default function Game() {
         logger.info("preloading maps", maps)
         const gameScene = getGameScene()
         if (gameScene) {
-          gameScene.load.reset()
           await gameScene.preloadMaps(maps)
-          gameScene.load.once("complete", () => {
-            if (!PortalCarouselStages.includes(room.state.stageLevel)) {
-              // map loaded after the end of the portal carousel stage, we swap it now. better later than never
-              gameContainer &&
-                gameContainer.player &&
-                gameScene.setMap(gameContainer.player.map)
-            }
-          })
-          gameScene.load.start()
+          gameScene.load
+            .on("complete", () => {
+              if (!PortalCarouselStages.includes(room.state.stageLevel)) {
+                // map loaded after the end of the portal carousel stage, we swap it now. better later than never
+                gameContainer &&
+                  gameContainer.player &&
+                  gameScene.setMap(gameContainer.player.map)
+              }
+            })
+            .start()
         }
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {

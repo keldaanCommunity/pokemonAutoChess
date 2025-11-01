@@ -156,8 +156,6 @@ export default class PokemonSprite extends DraggableObject {
       rotateToTarget: false
     })
 
-    this.lazyloadAnimations(scene)
-
     if (isEntity(pokemon)) {
       this.orientation = pokemon.orientation
       this.action = pokemon.action
@@ -169,24 +167,15 @@ export default class PokemonSprite extends DraggableObject {
     const textureIndex = scene.textures.exists(this.pokemon.index)
       ? this.pokemon.index
       : "0000"
-    this.sprite = new GameObjects.Sprite(
-      scene,
-      0,
-      0,
-      textureIndex,
-      `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
-    )
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, "loading_pokeball")
+    this.sprite.anims.play("loading_pokeball")
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
       .setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
-    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      this.animationLocked = false
-      // go back to idle anim if no more animation in queue
-      scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
-    })
+
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,
       pokemon.items ?? new SetSchema(),
@@ -195,10 +184,14 @@ export default class PokemonSprite extends DraggableObject {
       this.id,
       playerId
     )
+
     const hasShadow = PokemonAnimations[pokemon.name]?.noShadow !== true
     if (hasShadow) {
       this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
-      this.shadow.setScale(2, 2).setDepth(DEPTH.POKEMON_SHADOW)
+      this.shadow
+        .setVisible(false)
+        .setScale(2, 2)
+        .setDepth(DEPTH.POKEMON_SHADOW)
       this.add(this.shadow)
     }
     this.add(this.sprite)
@@ -255,37 +248,81 @@ export default class PokemonSprite extends DraggableObject {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
     }
+
+    this.lazyloadAnimations(scene).then(() => {
+      if (!this.sprite.scene) return
+      this.sprite.setTexture(
+        scene.textures.exists(this.pokemon.index) ? this.pokemon.index : "0000"
+      )
+
+      this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+        this.animationLocked = false
+        // go back to idle anim if no more animation in queue
+        scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
+      })
+
+      scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
+      this.shadow?.setVisible(true)
+      this.emit("loaded")
+    })
   }
 
   lazyloadAnimations(
     scene: GameScene | DebugScene | undefined,
     unload: boolean = false
-  ) {
-    const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
-    let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
-    if (unload) {
-      spriteCount = min(0)(spriteCount - 1)
-      if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("unloading anims for", this.index)
-        scene.animationManager?.unloadPokemonAnimations(
-          this.pokemon.index,
-          tint
-        )
+  ): Promise<void> {
+    return new Promise((resolve) => {
+      const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+      const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
+      let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
+      if (unload) {
+        spriteCount = min(0)(spriteCount - 1)
+        if (spriteCount === 0 && scene?.animationManager) {
+          //logger.debug("unloading anims for", this.index)
+          scene.animationManager?.unloadPokemonAnimations(
+            this.pokemon.index,
+            tint
+          )
+        }
+      } else {
+        if (spriteCount === 0 && scene?.animationManager) {
+          //logger.debug("loading anims for", this.pokemon.index)
+          const lazyCreateAnimations = () => {
+            scene.animationManager?.createPokemonAnimations(
+              this.pokemon.index,
+              tint
+            )
+            resolve()
+          }
+
+          if (scene.textures.exists(this.pokemon.index) === false) {
+            // needs to load the atlas & textures first
+            scene.textures.once(
+              `addtexture-${this.pokemon.index}`,
+              lazyCreateAnimations
+            )
+            scene.load
+              .multiatlas(
+                this.pokemon.index,
+                `/assets/pokemons/${this.pokemon.index}.json`,
+                "/assets/pokemons"
+              )
+              .start()
+          } else {
+            lazyCreateAnimations()
+          }
+        } else {
+          if (scene?.load.isLoading()) {
+            scene.load.once("complete", resolve)
+          } else {
+            resolve()
+          }
+        }
+        spriteCount++
       }
-    } else {
-      scene?.animationManager
-      if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("loading anims for", this.index)
-        scene.animationManager?.createPokemonAnimations(
-          this.pokemon.index,
-          tint
-        )
-      }
-      spriteCount++
-    }
-    //logger.debug("sprite count for", this.index, spriteCount)
-    spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+      //logger.debug("sprite count for", this.index, spriteCount)
+      spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+    })
   }
 
   updateTooltipPosition() {

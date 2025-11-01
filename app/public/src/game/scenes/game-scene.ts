@@ -96,12 +96,16 @@ export default class GameScene extends Scene {
       this.room?.send(Transfer.LOADING_PROGRESS, value * 100)
     })
 
-    this.load.on("complete", () => {
-      this.room?.send(Transfer.LOADING_COMPLETE)
+    this.load.once("complete", () => {
+      logger.debug("Loading complete")
+      if (!this.started) {
+        this.room?.send(Transfer.LOADING_COMPLETE)
+      }
     })
 
     this.room!.onMessage(Transfer.LOADING_COMPLETE, () => {
       if (!this.started) {
+        logger.debug("Game starting")
         this.started = true
         this.startGame()
       }
