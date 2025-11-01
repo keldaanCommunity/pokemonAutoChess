@@ -16,6 +16,8 @@
 
 # Changes to Items
 
+- Protective pads now also protects against fighting synergy throws
+
 # Gameplay
 
 # UI
