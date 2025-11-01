@@ -3268,5 +3268,26 @@
 		"ROOM_EMPTY": "La stanza è stata rimossa per la mancanza di giocatori",
 		"ROOM_DELETED": "La stanza è stata eliminata",
 		"UNKNOWN_ERROR": "Un errore inaspettato si è verificato: {{error}}"
-	}
+	},
+	"stage_type": {
+		"pve": "Scontro PvE",
+		"carousel": "Carosello oggetti",
+		"portal": "Carosello portali",
+		"additional": "Scelta aggiuntiva",
+		"battle": "Battaglia giocatori"
+	},
+	"enemy_team": "Squadra nemica",
+	"stat_boosts": "Potenziamenti statistiche",
+	"rewards": "Ricompense",
+	"shiny_chance": "Probabilità shiny",
+	"shiny_magikarp_description": "I Magikarp shiny danno 10 ORO ciascuno quando vengono sconfitti",
+	"shiny_pve_description": "I round PvE shiny ti danno la scelta tra 3 oggetti shiny casuali come ricompensa quando vengono sconfitti",
+	"carousel_description": "Round di carosello oggetti dove puoi scegliere oggetti per la tua squadra. Gli oggetti vengono selezionati casualmente dal pool di oggetti disponibili.",
+	"item_pool": "Pool oggetti",
+	"town_encounters": "Incontri in città",
+	"portal_description_1": "Prendi un portale per viaggiare verso una nuova regione. Poi dovrai scegliere un Pokémon Starter, Unico o Leggendario.",
+	"portal_description_2": "Ogni portale ha simboli di sinergia presi casualmente dalle sinergie dominanti di tutti i giocatori. I simboli influenzano sia la regione verso cui viaggerai che i Pokémon che verranno proposti.",
+	"portal_description_3": "Se decidi di non prendere nessun portale, rimarrai nella tua regione attuale e i Pokémon proposti saranno totalmente casuali.",
+	"additional_description": "Scegli una scelta aggiuntiva e un componente oggetto tra 3 proposte. Le scelte aggiuntive sono Pokémon di evoluzione a 2 stadi che possono essere trovati in tutti i negozi dei giocatori dopo essere stati scelti.",
+	"battle_description": "Stage di battaglia regolare dove combatti contro altri giocatori o bot."
 }

@@ -3990,5 +3990,26 @@
 		"reset_info": "Alle Punkte werden am ersten Tag des Monats um Mitternacht zurückgesetzt, das ist in {{resetCountdown}}. Die Ereignis-Rangliste wird alle 10 Minuten aktualisiert.",
 		"runners": "Teilnehmer",
 		"finishers": "Finisher"
-	}
+	},
+	"stage_type": {
+		"pve": "PvE Begegnung",
+		"carousel": "Gegenstandskarussell",
+		"portal": "Portalkarussell",
+		"additional": "Zusätzliche Auswahl",
+		"battle": "Spielerkampf"
+	},
+	"enemy_team": "Feindliches Team",
+	"stat_boosts": "Statistikboni",
+	"rewards": "Belohnungen",
+	"shiny_chance": "Shiny-Chance",
+	"shiny_magikarp_description": "Shiny Karpador geben je 10 GOLD wenn sie besiegt werden",
+	"shiny_pve_description": "Shiny PvE-Runden geben dir die Wahl zwischen 3 zufälligen Shiny-Gegenständen als Belohnung wenn sie besiegt werden",
+	"carousel_description": "Gegenstandskarussell-Runde, in der du Gegenstände für dein Team auswählen kannst. Gegenstände werden zufällig aus dem verfügbaren Gegenstandspool ausgewählt.",
+	"item_pool": "Gegenstandspool",
+	"town_encounters": "Stadtbegegnungen",
+	"portal_description_1": "Nimm ein Portal um in eine neue Region zu reisen. Dann musst du ein Starter-, Unique- oder Legendäres Pokémon wählen.",
+	"portal_description_2": "Jedes Portal hat Synergie-Symbole, die zufällig aus den dominanten Synergien aller Spieler genommen werden. Symbole beeinflussen sowohl die Region, in die du reist, als auch die vorgeschlagenen Pokémon.",
+	"portal_description_3": "Wenn du dich entscheidest, kein Portal zu nehmen, bleibst du in deiner aktuellen Region und die vorgeschlagenen Pokémon sind völlig zufällig.",
+	"additional_description": "Wähle eine zusätzliche Auswahl und eine Gegenstandskomponente aus 3 Vorschlägen. Zusätzliche Auswahlen sind 2-Stufen-Evolutionspokémon, die in allen Spielerläden gefunden werden können, nachdem sie ausgewählt wurden.",
+	"battle_description": "Reguläre Kampfstufe, in der du gegen andere Spieler oder Bots kämpfst."
 }

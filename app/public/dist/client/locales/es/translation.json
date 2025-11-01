@@ -4236,5 +4236,26 @@
 		"reset_info": "Todos los puntos se actualizarán las 00:00 UTC el primer día de cada mes, faltan {{resetCountdown}}. El marcador se actualiza cada 10 minutos.",
 		"runners": "Participantes",
 		"finishers": "Campeones"
-	}
+	},
+	"stage_type": {
+		"pve": "Encuentro PvE",
+		"carousel": "Carrusel de objetos",
+		"portal": "Carrusel de portales",
+		"additional": "Selección adicional",
+		"battle": "Combate de jugadores"
+	},
+	"enemy_team": "Equipo enemigo",
+	"stat_boosts": "Bonificaciones de estadísticas",
+	"rewards": "Recompensas",
+	"shiny_chance": "Probabilidad de shiny",
+	"shiny_magikarp_description": "Los Magikarp shiny dan 10 ORO cada uno cuando son derrotados",
+	"shiny_pve_description": "Las rondas PvE shiny te dan la opción entre 3 objetos shiny aleatorios como recompensa cuando son derrotadas",
+	"carousel_description": "Ronda de carrusel de objetos donde puedes elegir objetos para tu equipo. Los objetos se seleccionan aleatoriamente del pool de objetos disponibles.",
+	"item_pool": "Pool de objetos",
+	"town_encounters": "Encuentros en la ciudad",
+	"portal_description_1": "Toma un portal para viajar a una nueva región. Luego tendrás que elegir un Pokémon Inicial, Único o Legendario.",
+	"portal_description_2": "Cada portal tiene símbolos de sinergia tomados aleatoriamente de las sinergias dominantes de todos los jugadores. Los símbolos influyen tanto en la región a la que viajarás como en los Pokémon que serán propuestos.",
+	"portal_description_3": "Si decides no tomar ningún portal, permanecerás en tu región actual, y los Pokémon propuestos serán totalmente aleatorios.",
+	"additional_description": "Elige una selección adicional y un componente de objeto entre 3 propuestas. Las selecciones adicionales son Pokémon de evolución de 2 etapas que se pueden encontrar en todas las tiendas de los jugadores después de ser elegidos.",
+	"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots."
 }

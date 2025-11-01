@@ -4248,5 +4248,26 @@
 		"reset_info": "每月第一天的午夜12点（UTC）重置所有分数，当前距离重置还有{{resetCountdown}}。活动排行榜每10分钟刷新一次。",
 		"runners": "参赛选手",
 		"finishers": "已完赛选手"
-	}
+	},
+	"stage_type": {
+		"pve": "PvE遭遇",
+		"carousel": "道具转盘",
+		"portal": "传送门转盘",
+		"additional": "额外选择",
+		"battle": "玩家对战"
+	},
+	"enemy_team": "敌方队伍",
+	"stat_boosts": "属性加成",
+	"rewards": "奖励",
+	"shiny_chance": "闪光概率",
+	"shiny_magikarp_description": "闪光鲤鱼王被击败时每只给予10金币",
+	"shiny_pve_description": "闪光PvE关卡被击败时可以在3个随机闪光道具中选择一个作为奖励",
+	"carousel_description": "道具转盘回合，你可以为你的队伍选择道具。道具从可用道具池中随机选择。",
+	"item_pool": "道具池",
+	"town_encounters": "城镇遭遇",
+	"portal_description_1": "使用传送门前往新的地区。然后你需要选择一个初始、独特或传说宝可梦。",
+	"portal_description_2": "每个传送门都有从所有玩家的主导协同中随机选取的协同符号。符号会影响你将要前往的地区和被推荐的宝可梦。",
+	"portal_description_3": "如果你决定不使用任何传送门，你将留在当前地区，推荐的宝可梦将完全随机。",
+	"additional_description": "从3个选项中选择一个额外选择和一个道具组件。额外选择是2阶段进化的宝可梦，被选择后可以在所有玩家商店中找到。",
+	"battle_description": "常规战斗阶段，你将与其他玩家或机器人战斗。"
 }

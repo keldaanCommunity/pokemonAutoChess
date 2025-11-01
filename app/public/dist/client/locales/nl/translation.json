@@ -1967,5 +1967,26 @@
 	"search_pokemon": "Selecteer een Pokemon",
 	"search_player": "Zoeken op spelersnaam...",
 	"game-reconnect-modal-title": "Maak opnieuw verbinding met het spel",
-	"game-reconnect-modal-body": "Je hebt een lopende game verlaten. Wil je opnieuw verbinding maken met je vorige game?"
+	"game-reconnect-modal-body": "Je hebt een lopende game verlaten. Wil je opnieuw verbinding maken met je vorige game?",
+	"stage_type": {
+		"pve": "PvE Ontmoeting",
+		"carousel": "Item Carrousel",
+		"portal": "Portal Carrousel",
+		"additional": "Extra Keuze",
+		"battle": "Speler Gevecht"
+	},
+	"enemy_team": "Vijandelijk Team",
+	"stat_boosts": "Statistiek Boosts",
+	"rewards": "Beloningen",
+	"shiny_chance": "Shiny Kans",
+	"shiny_magikarp_description": "Shiny Magikarp geven 10 GOUD elk wanneer verslagen",
+	"shiny_pve_description": "Shiny PvE rondes geven je een keuze tussen 3 willekeurige shiny items als beloning wanneer verslagen",
+	"carousel_description": "Item carrousel ronde waar je items voor je team kunt kiezen. Items worden willekeurig geselecteerd uit de beschikbare item pool.",
+	"item_pool": "Item Pool",
+	"town_encounters": "Stad Ontmoetingen",
+	"portal_description_1": "Neem een portal om naar een nieuwe regio te reizen. Dan moet je een Starter, Unieke of Legendarische Pokémon kiezen.",
+	"portal_description_2": "Elke portal heeft synergie symbolen die willekeurig genomen zijn van de dominante synergieën van alle spelers. Symbolen beïnvloeden zowel de regio waar je naartoe reist als de Pokémon die voorgesteld worden.",
+	"portal_description_3": "Als je besluit geen portal te nemen, blijf je in je huidige regio, en de voorgestelde Pokémon zullen volledig willekeurig zijn.",
+	"additional_description": "Kies een extra keuze en een item component uit 3 voorstellen. Extra keuzes zijn 2-stadium evolutie Pokémon die gevonden kunnen worden in alle spelers winkels nadat ze gekozen zijn.",
+	"battle_description": "Regulaire gevecht stadium waar je vecht tegen andere spelers of bots."
 }
