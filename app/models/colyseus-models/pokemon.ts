@@ -4249,7 +4249,7 @@ export class GalarianSlowpoke extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.SLOWPOKE)) &&
-      regionSynergies.includes(Synergy.PSYCHIC)
+      regionSynergies.includes(Synergy.POISON)
     )
   }
 }
@@ -4273,7 +4273,7 @@ export class GalarianSlowbro extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.SLOWPOKE)) &&
-      regionSynergies.includes(Synergy.PSYCHIC)
+      regionSynergies.includes(Synergy.POISON)
     )
   }
 }
@@ -4296,7 +4296,7 @@ export class GalarianSlowking extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.SLOWPOKE)) &&
-      regionSynergies.includes(Synergy.PSYCHIC)
+      regionSynergies.includes(Synergy.POISON)
     )
   }
 }
@@ -18700,7 +18700,7 @@ export class GalarianYamask extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.YAMASK)) &&
-      regionSynergies.includes(Synergy.GHOST)
+      regionSynergies.includes(Synergy.MONSTER)
     )
   }
 }
@@ -18723,7 +18723,7 @@ export class Runerigus extends Pokemon {
     const regionSynergies = DungeonDetails[map]?.synergies
     return (
       (!state || state.additionalPokemons.includes(Pkm.YAMASK)) &&
-      regionSynergies.includes(Synergy.GHOST)
+      regionSynergies.includes(Synergy.MONSTER)
     )
   }
 }
