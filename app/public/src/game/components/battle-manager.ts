@@ -395,6 +395,7 @@ export default class BattleManager {
     if (
       this.simulation?.id == simulationId &&
       this.group &&
+      this.scene.sys.isActive() &&
       this.pokemonSprites.has(pokemon.id)
     ) {
       const pkm = this.pokemonSprites.get(pokemon.id)!
@@ -487,6 +488,7 @@ export default class BattleManager {
     previousValue: IPokemonEntity[F]
   ) {
     if (
+      this.scene.sys.isActive() &&
       this.simulation?.id == simulationId &&
       this.pokemonSprites.has(pokemon.id)
     ) {
@@ -649,14 +651,16 @@ export default class BattleManager {
           pkmSprite.attackSprite =
             PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
             pkmSprite.attackSprite
-          pkmSprite.lazyloadAnimations(this.scene) // load the new ones
-          pkmSprite.displayAnimation("EVOLUTION")
-          this.animationManager.animatePokemon(
-            pkmSprite,
-            PokemonActionState.IDLE,
-            this.flip,
-            false
-          )
+          // load the new ones
+          pkmSprite.lazyloadAnimations(this.scene).then(() => {
+            pkmSprite.displayAnimation("EVOLUTION")
+            this.animationManager.animatePokemon(
+              pkmSprite,
+              PokemonActionState.IDLE,
+              this.flip,
+              false
+            )
+          })
         }
       } else if (field === "shiny") {
         if (pkmSprite.pokemon.shiny !== value) {

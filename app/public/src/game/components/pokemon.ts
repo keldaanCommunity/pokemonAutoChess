@@ -2,6 +2,7 @@ import { SetSchema } from "@colyseus/schema"
 import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import pkg from "../../../../../package.json"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
@@ -156,8 +157,6 @@ export default class PokemonSprite extends DraggableObject {
       rotateToTarget: false
     })
 
-    this.lazyloadAnimations(scene)
-
     if (isEntity(pokemon)) {
       this.orientation = pokemon.orientation
       this.action = pokemon.action
@@ -169,24 +168,15 @@ export default class PokemonSprite extends DraggableObject {
     const textureIndex = scene.textures.exists(this.pokemon.index)
       ? this.pokemon.index
       : "0000"
-    this.sprite = new GameObjects.Sprite(
-      scene,
-      0,
-      0,
-      textureIndex,
-      `${PokemonTint.NORMAL}/${PokemonActionState.IDLE}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
-    )
+    this.sprite = new GameObjects.Sprite(scene, 0, 0, "loading_pokeball")
+    this.sprite.anims.play("loading_pokeball")
     const baseHP = getPokemonData(pokemon.name).hp
     const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
       .setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
-    this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      this.animationLocked = false
-      // go back to idle anim if no more animation in queue
-      scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
-    })
+
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,
       pokemon.items ?? new SetSchema(),
@@ -195,10 +185,14 @@ export default class PokemonSprite extends DraggableObject {
       this.id,
       playerId
     )
+
     const hasShadow = PokemonAnimations[pokemon.name]?.noShadow !== true
     if (hasShadow) {
       this.shadow = new GameObjects.Sprite(scene, 0, 5, textureIndex)
-      this.shadow.setScale(2, 2).setDepth(DEPTH.POKEMON_SHADOW)
+      this.shadow
+        .setVisible(false)
+        .setScale(2, 2)
+        .setDepth(DEPTH.POKEMON_SHADOW)
       this.add(this.shadow)
     }
     this.add(this.sprite)
@@ -255,37 +249,71 @@ export default class PokemonSprite extends DraggableObject {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
     }
+
+    this.lazyloadAnimations(scene).then(() => {
+      if (!this.sprite.scene) return
+      this.sprite.setTexture(
+        scene.textures.exists(this.pokemon.index) ? this.pokemon.index : "0000"
+      )
+
+      this.sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+        this.animationLocked = false
+        // go back to idle anim if no more animation in queue
+        scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
+      })
+
+      scene.animationManager?.animatePokemon(this, pokemon.action, this.flip)
+      this.shadow?.setVisible(true)
+      this.emit("loaded")
+    })
   }
 
   lazyloadAnimations(
     scene: GameScene | DebugScene | undefined,
     unload: boolean = false
-  ) {
-    const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
-    let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
-    if (unload) {
-      spriteCount = min(0)(spriteCount - 1)
-      if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("unloading anims for", this.index)
-        scene.animationManager?.unloadPokemonAnimations(
-          this.pokemon.index,
-          tint
-        )
+  ): Promise<void> {
+    return new Promise((resolve) => {
+      const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+      const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
+      let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
+      if (unload) {
+        spriteCount = min(0)(spriteCount - 1)
+        if (spriteCount === 0 && scene?.animationManager) {
+          //logger.debug("unloading anims for", this.index)
+          scene.animationManager?.unloadPokemonAnimations(
+            this.pokemon.index,
+            tint
+          )
+        }
+      } else {
+        if (spriteCount === 0 && scene?.animationManager) {
+          //logger.debug("loading anims for", this.pokemon.index)
+          const loadAnimations = () => {
+            scene.animationManager?.createPokemonAnimations(
+              this.pokemon.index,
+              tint
+            )
+            resolve()
+          }
+
+          if (scene.textures.exists(this.pokemon.index) === false) {
+            // needs to load the atlas & textures first
+            loadCompressedAtlas(scene, this.pokemon.index).then(loadAnimations)
+          } else {
+            loadAnimations()
+          }
+        } else {
+          if (scene?.load.isLoading()) {
+            scene.load.once("complete", resolve)
+          } else {
+            resolve()
+          }
+        }
+        spriteCount++
       }
-    } else {
-      scene?.animationManager
-      if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("loading anims for", this.index)
-        scene.animationManager?.createPokemonAnimations(
-          this.pokemon.index,
-          tint
-        )
-      }
-      spriteCount++
-    }
-    //logger.debug("sprite count for", this.index, spriteCount)
-    spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+      //logger.debug("sprite count for", this.index, spriteCount)
+      spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
+    })
   }
 
   updateTooltipPosition() {
@@ -1424,4 +1452,97 @@ export const isEntity = (
   pokemon: IPokemon | IPokemonEntity
 ): pokemon is IPokemonEntity => {
   return "status" in pokemon
+}
+
+const lazyLoadingRequests = {}
+
+export function loadCompressedAtlas(
+  scene: Phaser.Scene,
+  index: string
+): Promise<void> {
+  if (index in lazyLoadingRequests) {
+    return lazyLoadingRequests[index]
+  }
+  lazyLoadingRequests[index] = new Promise((resolve) => {
+    scene.load.once(
+      `filecomplete-json-pokemon-atlas-${index}`,
+      (key, type, data) => {
+        const image = data.i
+
+        function traverse(obj: any, path: string, frames) {
+          if (Array.isArray(obj)) {
+            const [
+              sourceSizew,
+              sourceSizeh,
+              spriteSourceSizex,
+              spriteSourceSizey,
+              spriteSourceSizew,
+              spriteSourceSizeh,
+              framex,
+              framey,
+              framew,
+              frameh
+            ] = obj
+            frames.push({
+              filename: path,
+              rotated: false,
+              trimmed: true,
+              sourceSize: {
+                w: sourceSizew,
+                h: sourceSizeh
+              },
+              spriteSourceSize: {
+                x: spriteSourceSizex,
+                y: spriteSourceSizey,
+                w: spriteSourceSizew,
+                h: spriteSourceSizeh
+              },
+              frame: {
+                x: framex,
+                y: framey,
+                w: framew,
+                h: frameh
+              }
+            })
+          } else if (obj instanceof Object) {
+            for (const key in obj) {
+              traverse(obj[key], path ? path + "/" + key : key, frames)
+            }
+          }
+        }
+        const frames = []
+
+        traverse(data.a, "", frames)
+
+        const multiatlas = {
+          textures: [
+            {
+              image: `${image}?v=${pkg.version}`,
+              format: "RGBA8888",
+              size: {
+                w: data.s[0],
+                h: data.s[1]
+              },
+              scale: data.s[2] ?? 1,
+              frames
+            }
+          ]
+        }
+
+        const index = image.replace(".png", "")
+
+        //console.log("load multiatlas " + index)
+        scene.textures.once(`addtexture-${index}`, resolve)
+        // @ts-ignore: there is an error in phaser types, the second parameter can be an object
+        scene.load.multiatlas(index, multiatlas, "/assets/pokemons").start()
+      }
+    )
+    scene.load
+      .json(
+        `pokemon-atlas-${index}`,
+        `/assets/pokemons/${index}.json?v=${pkg.version}`
+      )
+      .start()
+  })
+  return lazyLoadingRequests[index]
 }
