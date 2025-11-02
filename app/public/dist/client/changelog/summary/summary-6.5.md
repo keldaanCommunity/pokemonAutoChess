@@ -41,4 +41,4 @@ To reduce waiting times, ranked matches elo ranges have been reduced to 3 ranges
 
 ---
 
-Check out the full changelog on Discord
+Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1416708571998982214)

@@ -153,14 +153,18 @@ function getTopSynergies(
 
   const topSynergies = [...synergies.entries()]
     .sort((a, b) => {
-      const aReachedTrigger = a[1] >= SynergyTriggers[a[0]][0]
-      const bReachedTrigger = b[1] >= SynergyTriggers[b[0]][0]
-      return aReachedTrigger && !bReachedTrigger
-        ? -1
-        : bReachedTrigger && !aReachedTrigger
-          ? +1
-          : b[1] - a[1]
+      const [typeA, valueA] = a
+      const [typeB, valueB] = b
+      const aTriggerReached = SynergyTriggers[typeA].filter(
+        (n) => valueA >= n
+      ).length
+      const bTriggerReached = SynergyTriggers[typeB].filter(
+        (n) => valueB >= n
+      ).length
+      return aTriggerReached !== bTriggerReached
+        ? bTriggerReached - aTriggerReached
+        : valueB - valueA
     })
-    .slice(0, 3)
+    .slice(0, 4)
   return topSynergies
 }

@@ -249,7 +249,8 @@ export default function Preparation() {
           localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
           dispatch(resetPreparation())
           if (shouldGoToLobby) {
-            const errorMessage = CloseCodesMessages[code]
+            const errorMessage =
+              CloseCodesMessages[code as CloseCodes] ?? "UNKNOWN_ERROR"
             if (errorMessage) {
               dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
             }

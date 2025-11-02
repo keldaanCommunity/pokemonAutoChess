@@ -20,7 +20,6 @@ import UserMetadata, {
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { discordService } from "../../services/discord"
 import {
-  CDN_PORTRAIT_URL,
   CollectionEmotions,
   Emotion,
   IPlayer,
@@ -186,6 +185,9 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
   async execute({ client }: { client: Client }) {
     try {
       if (client.auth.uid) {
+        logger.info(
+          `User ${client.auth.displayName} [${client.auth.uid}] has deleted their account`
+        )
         await UserMetadata.deleteOne({ uid: client.auth.uid })
         client.leave(CloseCodes.USER_DELETED)
       }
@@ -431,6 +433,7 @@ export class OpenBoosterCommand extends Command<
       })
 
       await checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
+      await mongoUser.save()
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
@@ -564,7 +567,7 @@ export class ChangeAvatarCommand extends Command<
       )
         return
       const portrait = getPortraitSrc(index, shiny, emotion)
-        .replace(CDN_PORTRAIT_URL, "")
+        .replace("/assets/portraits", "")
         .replace(".png", "")
       user.avatar = portrait
       mongoUser.avatar = portrait
@@ -637,6 +640,7 @@ export class BuyEmotionCommand extends Command<
       await checkTitlesAfterEmotionUnlocked(mongoUser, [
         { name: PkmByIndex[index], emotion, shiny }
       ])
+      await mongoUser.save()
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
       logger.error(error)
@@ -984,10 +988,14 @@ export class JoinOrOpenRoomCommand extends Command<
             break
           case EloRank.SAFARI_BALL:
           case EloRank.LOVE_BALL:
+            // 1050-1200
+            minRank = EloRank.NET_BALL
+            maxRank = EloRank.LOVE_BALL
+            break
           case EloRank.PREMIER_BALL:
           case EloRank.QUICK_BALL:
-            // 1050-1299
-            minRank = EloRank.NET_BALL
+            // 1150-1299
+            minRank = EloRank.LOVE_BALL
             maxRank = EloRank.QUICK_BALL
             break
           case EloRank.POKE_BALL:

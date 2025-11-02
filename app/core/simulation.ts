@@ -22,7 +22,6 @@ import {
   Orientation,
   PokemonActionState,
   Rarity,
-  Stat,
   Team
 } from "../types/enum/Game"
 import {
@@ -39,7 +38,6 @@ import { IPokemonData } from "../types/interfaces/PokemonData"
 import { count } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
-import { isPlainFunction } from "../utils/function"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
 import {
@@ -54,17 +52,16 @@ import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
 import {
-  Effect,
   OnDishConsumedEffect,
-  OnItemGainedEffect,
   OnSimulationStartEffect,
   OnSpawnEffect
 } from "./effects/effect"
-import { ItemEffects } from "./effects/items"
 import { WaterSpringEffect } from "./effects/passives"
 import {
   electricTripleAttackEffect,
+  FightingKnockbackEffect,
   FireHitEffect,
+  FlyingProtectionEffect,
   GroundHoleEffect,
   humanHealEffect,
   MonsterKillEffect,
@@ -417,22 +414,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     pokemon.items.forEach((item) => {
-      this.applyItemEffect(pokemon, item)
-    })
-  }
-
-  applyItemEffect(pokemon: PokemonEntity, item: Item) {
-    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
-      pokemon.applyStat(stat as Stat, value)
-    })
-
-    ItemEffects[item]?.forEach((effect) => {
-      if (effect instanceof Effect) pokemon.effectsSet.add(effect)
-      else if (isPlainFunction(effect)) pokemon.effectsSet.add(effect())
-    })
-
-    pokemon.getEffects(OnItemGainedEffect).forEach((effect) => {
-      effect.apply(pokemon)
+      pokemon.applyItemEffect(item)
     })
   }
 
@@ -828,7 +810,8 @@ export default class Simulation extends Schema implements ISimulation {
                         this.board,
                         AttackType.SPECIAL,
                         pokemon as PokemonEntity,
-                        crit
+                        crit,
+                        false
                       )
                       this.board
                         .getAdjacentCells(target.positionX, target.positionY)
@@ -839,7 +822,8 @@ export default class Simulation extends Schema implements ISimulation {
                               this.board,
                               AttackType.SPECIAL,
                               pokemon as PokemonEntity,
-                              crit
+                              crit,
+                              false
                             )
                           }
                         })
@@ -1011,6 +995,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.JUSTIFIED:
         if (types.has(Synergy.FIGHTING)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FightingKnockbackEffect(effect))
         }
         break
 
@@ -1073,30 +1058,12 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.TAILWIND:
-        if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 1
-          pokemon.effects.add(EffectEnum.TAILWIND)
-        }
-        break
-
       case EffectEnum.FEATHER_DANCE:
-        if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 1
-          pokemon.effects.add(EffectEnum.FEATHER_DANCE)
-        }
-        break
-
       case EffectEnum.MAX_AIRSTREAM:
-        if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 2
-          pokemon.effects.add(EffectEnum.MAX_AIRSTREAM)
-        }
-        break
-
       case EffectEnum.SKYDIVE:
         if (types.has(Synergy.FLYING)) {
-          pokemon.flyingProtection = 2
-          pokemon.effects.add(EffectEnum.SKYDIVE)
+          pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FlyingProtectionEffect(effect))
         }
         break
 
@@ -1382,12 +1349,6 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.GOOD_LUCK: {
         pokemon.effects.add(effect)
         pokemon.addLuck(20, pokemon, 0, false)
-        break
-      }
-
-      case EffectEnum.BAD_LUCK: {
-        pokemon.effects.add(effect)
-        pokemon.addLuck(-20, pokemon, 0, false)
         break
       }
 
@@ -1774,10 +1735,12 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   addPikachuSurferToBoard(team: Team) {
+    const player = team === Team.RED_TEAM ? this.redPlayer : this.bluePlayer
     const pikachuSurfer = PokemonFactory.createPokemonFromName(
       Pkm.PIKACHU_SURFER,
-      team === Team.RED_TEAM ? this.redPlayer : this.bluePlayer
+      player
     )
+    if (player) player.pokemonsPlayed.add(Pkm.PIKACHU_SURFER)
     const coord = this.getFirstFreeCell(team)
     if (coord) {
       this.addPokemon(pikachuSurfer, coord.x, coord.y, team, true)

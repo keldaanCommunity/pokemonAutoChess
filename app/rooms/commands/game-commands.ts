@@ -157,6 +157,7 @@ export class OnBuyPokemonCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
+      player.effects.has(EffectEnum.EERIE_SPELL) &&
       player.shopFreeRolls > 0 &&
       player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
     ) {
@@ -1543,6 +1544,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
         if (numberOfPokemonsToMove > 0) {
           player.updateSynergies()
+          player.boardSize = this.room.getTeamSize(player.board)
         }
       }
     })

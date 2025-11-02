@@ -380,6 +380,13 @@ export default class PreparationRoom extends Room<PreparationState> {
       } else if (this.metadata.blacklist.includes(user.uid)) {
         client.leave(CloseCodes.USER_KICKED)
         return
+      } else if (
+        this.metadata.whitelist &&
+        this.metadata.whitelist.length > 0 &&
+        !this.metadata.whitelist.includes(user.uid)
+      ) {
+        client.leave(CloseCodes.USER_NOT_WHITELISTED)
+        return
       } else {
         return user
       }

@@ -20,7 +20,7 @@
   grid-template-areas:
     "top elo syn team"
     "date date syn team";
-  grid-template-columns: 8ch 7ch 120px 1fr;
+  grid-template-columns: 8ch 7ch 160px 1fr;
   background-color: var(--color-bg-secondary);
   margin: 0 0 0.5em 0;
   padding: 0.25em;

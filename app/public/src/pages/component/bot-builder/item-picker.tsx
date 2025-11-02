@@ -9,7 +9,8 @@ import {
   Berries,
   CraftableItems,
   Item,
-  ShinyItems
+  ShinyItems,
+  MemoryDiscs
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
@@ -54,7 +55,8 @@ export default function ItemPicker(props: {
         Item.TEAL_MASK,
         Item.WELLSPRING_MASK,
         Item.CORNERSTONE_MASK,
-        Item.HEARTHFLAME_MASK
+        Item.HEARTHFLAME_MASK,
+        ...MemoryDiscs
       ]
     }
   ]

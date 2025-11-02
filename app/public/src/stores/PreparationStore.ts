@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
 import Message from "../../../models/colyseus-models/message"
 import { IChatV2 } from "../../../types"

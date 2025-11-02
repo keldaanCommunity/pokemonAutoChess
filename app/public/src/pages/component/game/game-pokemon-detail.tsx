@@ -12,8 +12,9 @@ import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
 import { Item } from "../../../../../types/enum/Item"
 import { Passive } from "../../../../../types/enum/Passive"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { values } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -143,6 +144,14 @@ export function GamePokemonDetail(props: {
           emotion: props.emotion ?? pokemon.emotion
         }}
       />
+      {pokemon.index === PkmIndex[Pkm.EGG] &&
+        "evolution" in pokemon &&
+        pokemon.evolution != null && (
+          <img
+            className="game-pokemon-detail-portrait-hint"
+            src={getPortraitSrc(PkmIndex[pokemon.evolution])}
+          />
+        )}
       <div className="game-pokemon-detail-entry">
         <p className="game-pokemon-detail-entry-name">
           {t(`pkm.${pokemon.name}`)}
@@ -189,7 +198,7 @@ export function GamePokemonDetail(props: {
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
-              title={t(`stat.${stat}`)}
+              title={`${t(`stat.${stat}`)}${value !== baseValue ? ` (${baseValue} ${value > baseValue ? "+" : "-"} ${value - baseValue})` : ""}`}
             />
             <span
               className={cc({
@@ -222,19 +231,19 @@ export function GamePokemonDetail(props: {
           <p>
             {addIconsToDescription(t(`passive_description.${pokemon.passive}`))}
           </p>
-           {pokemon.stacksRequired > 0 && (
-        <div className="game-pokemon-detail-passive-bar">
-          <GameTooltipBar
-            type="XP"
-            value={pokemon.stacks}
-            maxValue={pokemon.stacksRequired!}
-            graduationStep={1}
-          />
+          {pokemon.stacksRequired > 0 && (
+            <div className="game-pokemon-detail-passive-bar">
+              <GameTooltipBar
+                type="XP"
+                value={pokemon.stacks}
+                maxValue={pokemon.stacksRequired!}
+                graduationStep={1}
+              />
+            </div>
+          )}
         </div>
       )}
-        </div>
-      )}
-     
+
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
           <div className="ability-name">{t(`ability.${pokemon.skill}`)}</div>

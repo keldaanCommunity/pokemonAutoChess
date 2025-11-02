@@ -1386,7 +1386,6 @@
 		"ROLLOUT": "Aumenta a DEF em [2,5,10,SP] e trata 2x a DEF como SPECIAL",
 		"THRASH": "Aumente o ATK em [100,SP]% e torne-se CONFUSION por 3s",
 		"SOLAR_BEAM": "Cause [25,50,100,SP] de dano SPECIAL a todos os Pokémon inimigos em uma linha atrás do alvo e cause BURN neles por 3 segundos. Se o Pokémon estiver no holofote ou se o tempo estiver SUN, dobre o dano e restaure 20 PP.",
-		"MAGMA_STORM": "O alvo fica preso em um redemoinho de fogo que causa [80,SP] SPECIAL antes de se mover para um alvo adjacente",
 		"DIRE_CLAW": "Causa [15,30,60,SP] SPECIAL no alvo. Inflige VENENO, SONO ou PARALISIA por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] ao alvo e o WOUND por 5 segundos. Se o alvo já estiver FERIDO, concede 30% de bônus SPECIAL",
 		"ERUPTION": "Dispara projéteis [20,30,45] no ar. Cada projétil causa [30,50,70,SP] SPECIAL e BURN por 5 segundos",
@@ -1441,7 +1440,7 @@
 		"PARABOLIC_CHARGE": "Cura [25,50] HP e causa [25,50,100,SP] de dano SPECIAL ao alvo. O excesso de HP é convertido em SPECIAL",
 		"TEETER_DANCE": "Ganhe [20,SP] SPEED. Todos os outros Pokémon ficam com CONFUSION por 3 segundos, tanto aliados quanto inimigos.",
 		"CLOSE_COMBAT": "Causa [130,SP] SPECIAL e reduz a DEF e SPE_DEF do lançador em 2",
-		"AQUA_RING": "Mergulha no meio da equipe aliada, criando um anel aquático que limpa os status negativos e cura [20,30,50,SP] HP",
+		"AQUA_RING": "Mergulha no meio da equipe aliada, criando um anel aquático que limpa os status negativos e cura [20,40,80,SP] HP",
 		"AURASPHERE": "Exala uma aura e projecta energia numa linha, causando [25,50,100,SP] de SPECIAL e SILENCE a cada oponente atingido durante 3 segundos"
 	},
 	"effect": {
@@ -1821,7 +1820,6 @@
 		"PROTEAN3": "O pokémon adquire a tipagem das 3 maiores sinergias do time",
 		"CASTFORM": "Castform muda sua forma e o clima para SUN, RAIN ou SNOW, dependendo da sua sinergia dominante entre FIRE WATER ICE",
 		"MANAPHY": "$t(pkm.MANAPHY) está procurando por um AQUA_EGG",
-		"SCYTHER": "$t(pkm.SCYTHER) está procurando por um METAL_COAT ou um BLACK_AUGURITE",
 		"PRIMAL": "Diz a lenda que você poderia liberar os antigos poderes desses pokémons",
 		"WONDER_GUARD": "Bloqueia 20 danos",
 		"ELECTRIC_TERRAIN": "Dê ELECTRIC_FIELD ao seu Pokémon ELECTRIC, aumentando seu dano em 20%",
@@ -1838,7 +1836,6 @@
 		"HATCH": "Os pokémons eclodidos evoluem automaticamente após 5 estágios",
 		"SYNCHRO": "Se o pokémon for afetado por POISONNED, BURN, WOUND ou SILENCE, o caster inimigo sofrerá o mesmo status negativo",
 		"TADPOLE": "Poliwhirl evoluirá para Poliwrath se colocado na linha de frente, Politoed caso contrário",
-		"BIVALVE": "Clamperl evoluirá para Huntail se colocado na linha de frente, Gorebyss caso contrário",
 		"SUN": "Alterar tempo para SUN",
 		"RAIN": "Alterar tempo para RAIN",
 		"SANDSTORM": "Mude o clima para SANDSTORM",
@@ -2213,7 +2210,7 @@
 		"bots": "Como funcionam os bots?",
 		"bots_answer": "Os bots são criados por outros jogadores. Os bots são baseados em temas, um bot mewtwo sempre terá um mewtwo em sua equipe em um determinado momento do jogo. Os bots possuem uma lista de equipes predefinidas em cada etapa.",
 		"create_bot": "Posso criar meu próprio bot?",
-		"create_bot_answer": "Seguro. Você precisará ter pelo menos nível 20 para desbloquear o gadget Bot Builder. Você pode usá-lo para criar e enviar seu bot, ele será enviado no canal #bot-creation no Discord para revisão pela equipe de revisores de bot.",
+		"create_bot_answer": "Seguro. Você precisará ter pelo menos nível 40 para desbloquear o gadget Bot Builder. Você pode usá-lo para criar e enviar seu bot, ele será enviado no canal #bot-creation no Discord para revisão pela equipe de revisores de bot.",
 		"elo": "Como funciona o sistema elo?",
 		"elo_answer": "O sistema elo em Pokemon Auto Chess funciona da mesma forma que em outros jogos baseados em elo como Chess, Lol, Starcraft etc... Para ganhar pontos elo, você precisa vencer outros jogadores. Quanto maior o elo do seu oponente, mais elo você ganhará ao derrotá-lo e vice-versa. Se você não jogar por 20 dias, seu elo começará a decair (-5 elo/dia).",
 		"missing_points": "Não ganhei pontos elo no meu último jogo, por quê?",
@@ -2590,8 +2587,6 @@
 	"game_already_started": "O jogo já foi iniciado",
 	"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
 	"max_rank_not_reached": "Sua classificação é muito alta para jogar esta partida ranqueada",
-	"not_whitelisted": "Este jogo está limitado a uma lista determinada de jogadores",
-	"blacklisted": "Você foi expulso desta partida",
 	"npc_dialog": {
 		"welcome": "Bem-vindo !",
 		"tell_price": "{{price}} de OURO para cada!",
@@ -2686,6 +2681,7 @@
 	"errors": {
 		"USER_INACTIVE": "Você foi expulso por inatividade a fim de economizar recursos do servidor",
 		"USER_KICKED": "Você foi expulso desta sala",
+		"USER_NOT_WHITELISTED": "Este jogo está limitado a uma lista determinada de jogadores",
 		"USER_BANNED": "Sua conta foi banida",
 		"USER_DELETED": "Sua conta foi permanentemente excluída",
 		"USER_RANK_TOO_LOW": "Seu ranque não é suficiente para participar nessa sala",
@@ -2729,5 +2725,26 @@
 		"reset_info": "Todas as pontuações serão zeradas à meia-noite (UTC) do primeiro dia de cada mês, ou seja, no {{resetCountdown}}. A tabela de classificação do evento é atualizada a cada 10 minutos.",
 		"runners": "Corredores",
 		"finishers": "Finalistas"
-	}
+	},
+	"stage_type": {
+		"pve": "Encontro PvE",
+		"carousel": "Carrossel de itens",
+		"portal": "Carrossel de portais",
+		"additional": "Escolha adicional",
+		"battle": "Batalha de jogadores"
+	},
+	"enemy_team": "Equipe inimiga",
+	"stat_boosts": "Bônus de atributos",
+	"rewards": "Recompensas",
+	"shiny_chance": "Chance de shiny",
+	"shiny_magikarp_description": "Magikarp shiny dão 10 OURO cada um quando derrotados",
+	"shiny_pve_description": "Rodadas PvE shiny dão a escolha entre 3 itens shiny aleatórios como recompensa quando derrotadas",
+	"carousel_description": "Rodada de carrossel de itens onde você pode escolher itens para sua equipe. Os itens são selecionados aleatoriamente do pool de itens disponíveis.",
+	"item_pool": "Pool de itens",
+	"town_encounters": "Encontros na cidade",
+	"portal_description_1": "Pegue um portal para viajar para uma nova região. Então você terá que escolher um Pokémon Inicial, Único ou Lendário.",
+	"portal_description_2": "Cada portal tem símbolos de sinergia retirados aleatoriamente das sinergias dominantes de todos os jogadores. Os símbolos influenciam tanto a região para onde você viajará quanto os Pokémon que serão propostos.",
+	"portal_description_3": "Se você decidir não pegar nenhum portal, permanecerá em sua região atual, e os Pokémon propostos serão totalmente aleatórios.",
+	"additional_description": "Escolha uma escolha adicional e um componente de item entre 3 propostas. Escolhas adicionais são Pokémon de evolução de 2 estágios que podem ser encontrados em todas as lojas dos jogadores após serem escolhidos.",
+	"battle_description": "Estágio de batalha regular onde você luta contra outros jogadores ou bots."
 }

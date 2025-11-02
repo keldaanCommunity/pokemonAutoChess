@@ -15,6 +15,7 @@ import Simulation from "../simulation"
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
 export abstract class Effect {
+  priority: number = 0
   origin?: EffectOrigin
   apply(...args: any[]) {}
   constructor(effect?: (...args: any[]) => void, origin?: EffectOrigin) {
@@ -51,17 +52,17 @@ export class OnDishConsumedEffect extends Effect {
 
 // item effect applied on fight start of after stealing/obtaining an item
 export class OnItemGainedEffect extends Effect {
-  constructor(effect?: (pokemon: PokemonEntity) => void) {
+  constructor(effect?: (pokemon: PokemonEntity, item: Item) => void) {
     super(effect)
   }
-  override apply(pokemon: PokemonEntity) {}
+  override apply(pokemon: PokemonEntity, item: Item) {}
 }
 
 export class OnItemRemovedEffect extends Effect {
-  constructor(effect?: (pokemon: PokemonEntity) => void) {
+  constructor(effect?: (pokemon: PokemonEntity, item: Item) => void) {
     super(effect)
   }
-  override apply(pokemon: PokemonEntity) {}
+  override apply(pokemon: PokemonEntity, item: Item) {}
 }
 
 interface OnStageStartEffectArgs {
@@ -113,7 +114,7 @@ export class OnItemDroppedEffect extends Effect {
   }
 }
 
-interface OnKillEffectArgs {
+export interface OnKillEffectArgs {
   attacker: PokemonEntity
   target: PokemonEntity
   board: Board
@@ -238,7 +239,7 @@ export class OnAbilityCastEffect extends Effect {
 
 // applied after having received damage and not being KO
 
-interface OnDamageReceivedEffectArgs {
+export interface OnDamageReceivedEffectArgs {
   pokemon: PokemonEntity
   attacker: PokemonEntity | null
   board: Board

@@ -23,8 +23,7 @@ Welcome also the other newcomers !
 
 ## Emotes & Avatars
 
-You can now see your player avatar on the side of the board
-You can also communicates with others through emotes
+You can now see your player avatar on the side of the board. You can also communicates with others through emotes.
 
 ---
 

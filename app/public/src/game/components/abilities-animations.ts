@@ -916,6 +916,11 @@ export const AbilitiesAnimations: {
     tint: 0xa0c020
   }),
   [Ability.CRUNCH]: onTarget({ ability: Ability.BITE, scale: 3 }),
+  [Ability.CAVERNOUS_CHOMP]: onTarget({
+    ability: Ability.BITE,
+    scale: 2,
+    tint: 0x804000
+  }),
   [Ability.FROST_BREATH]: onCaster({
     oriented: true,
     positionOffset: [0, -30],
@@ -1418,10 +1423,11 @@ export const AbilitiesAnimations: {
   [Ability.MUD_SHOT]: projectile({ scale: 4, duration: 350 }),
   [Ability.MOONBLAST]: (args) =>
     projectile({
-      scale: 2,
+      scale: 1,
       duration: 200,
       delay: args.delay,
-      tweenProps: { scale: 0.5 }
+      tweenProps: { scale: 2 },
+      hitAnim: onTarget({ ability: "PUFF_PINK" })
     })(args),
   [Ability.POLTERGEIST]: projectile({
     scale: 3,
@@ -1873,6 +1879,13 @@ export const AbilitiesAnimations: {
   }),
   [Ability.HURRICANE]: orientedProjectile({ duration: 1000, distance: 4 }),
   [Ability.DRILL_RUN]: orientedProjectile({
+    ability: Ability.HURRICANE,
+    duration: 500,
+    distance: 1,
+    oriented: true,
+    rotation: -Math.PI / 2
+  }),
+  [Ability.DRILL_PECK]: orientedProjectile({
     ability: Ability.HURRICANE,
     duration: 500,
     distance: 1,

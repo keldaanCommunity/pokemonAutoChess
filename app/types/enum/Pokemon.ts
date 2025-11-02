@@ -2101,8 +2101,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ALCREMIE_RUBY_SWIRL]: "0869-0042",
   [Pkm.ALCREMIE_CARAMEL_SWIRL]: "0869-0049",
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: "0869-0056",
-  [Pkm.FALINKS_BRASS]: "0870-0001",
-  [Pkm.FALINKS_TROOPER]: "0870-0002",
+  [Pkm.FALINKS_BRASS]: "0870-0002",
+  [Pkm.FALINKS_TROOPER]: "0870-0003",
   //[Pkm.PINCURCHIN]: "0871",
   [Pkm.SNOM]: "0872",
   [Pkm.FROSMOTH]: "0873",
@@ -3367,7 +3367,8 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
   [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
-  [Pkm.SUICUNE]: [Pkm.WALKING_WAKE]
+  [Pkm.SUICUNE]: [Pkm.WALKING_WAKE],
+  [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
@@ -3505,4 +3506,11 @@ export const NonPkm: Pkm[] = [
   Pkm.PILLAR_IRON,
   Pkm.PILLAR_CONCRETE,
   Pkm.DEFAULT
+]
+
+export const NON_PMD_PKM_INDEXES: string[] = [
+  "0532-0002", // Pillar Wood
+  "0533-0002", // Pillar Iron
+  "0534-0002", // Pillar Concrete,
+  "0025-9999", // Pikachu Surfer
 ]

@@ -59,8 +59,9 @@ export default function SynergyComponent(props: {
     <Tooltip
       id={"detail-" + props.type}
       className="custom-theme-tooltip"
-      place="right"
-      data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
+      place="right-start"
+      delayShow={100}
+      delayHide={0}
     >
       <SynergyDetailComponent type={props.type} value={props.value} />
     </Tooltip>

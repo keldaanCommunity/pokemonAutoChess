@@ -23,6 +23,7 @@
 - Wiglett
 - Wugtrio
 - Flutter Mane
+- Walking Wake
 
 # Changes to Pokemon & Abilities
 
@@ -57,6 +58,9 @@
 - Gholdengo passive is now active when player has reached its max interests, not necessarily 50 gold depending on Amulet coins and Ghimigoul coins
 - Fixed Frost Breath damage: now deals [35, 70, 140] special damage as originally intended
 - Nerf Stealth Rocks (Regirock): special damage 20/40/80 → 50 at all tiers
+- Nerf Regirock: Defense 25 → 20
+- Nerf Regice: Special Defense 25 → 20
+- Nerf Registeel: HP 250 → 220 ; Defense 25 → 20 ; Special Defense 25 → 20
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
 - Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
 - Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
@@ -71,15 +75,17 @@
 - Nerf Vulpix line: PP 80 → 90
 - Reduce Arceus and Kecleon rate: 1/150 → 1/200
 - Poipole rework: New passive: When user or another unit of the same family gets a KO, gain 1 stack. Every 3 stacks, gain 1 Attack permanently. At 30 stacks, evolves to Naganadel. Poipole base HP: 120 → 160 ; Naganadel base HP: 200 → 280 ; Fell Stinger: Deal ~~25/50/100~~ 400% (AP scaled) of Attack as special damage to the target. If it knocks out the target, permanently gain 1 Attack and 10 HP gain 30% of base Attack ; Naganadel is now in Legendary rarity group (Poipole stays Unique)
+- Removed the zero cooldown reset on Accelerock and Agility abilities
+- New ability for Doduo line: Drill peck: Charges through the target like a drill, dealing [50,100,SP] SPECIAL and swapping position. If there's another target behind in the same direction, immediately cast the ability again on that target.
 - Change Spectral Thief (Marshadow): now properly steals all stat boosts (including max HP, Crit chance, Crit power, Luck) ; Marshadow HP: 220 → 200
+- Ogerpon forms are now regional in their respective types regions (Teal: Flora, Hearthflame: Fire, Cornerstone: Rock, Wellspring: Aquatic)
+- Tapus are now regional in their respective types regions (Koko: Electric, Lele: Psychic, Bulu: Grass, Fini: Fairy)
 
 # Changes to Synergies
 
 - Buff Ground 8: +5 → +8 Attack when your half of the board is fully dug
 - Artificial items that can be found buried in the ground are now limited to: Toxic Orb, Hard Stone, Metal Coat, Explorer Kit, Rotom Phone, Silk Scarf, Tiny Mushroom, Incense, Electirizer, Magmarizer, Max Elixir and Exp Share.
 - Psychic 6 QoL: Unown shops now always offer 5 different types of Unown
-- Ogerpon forms are now regional in their respective types regions (Teal: Flora, Hearthflame: Fire, Cornerstone: Rock, Wellspring: Aquatic)
-- Tapus are now regional in their respective types regions (Koko: Electric, Lele: Psychic, Bulu: Grass, Fini: Fairy)
 - On stage 20, Gourmet and Normal are now limited to 2 symbols per player, and Baby symbols can't appear anymore
 
 # Changes to Items
@@ -94,6 +100,7 @@
 - New town encounter: Makuhita
 - Pokémons are now automatically placed from the bench onto the board when free spots are available, with smarter positioning: melee Pokémons are placed in the front row, while ranged Pokémons are placed in the back row based on their attack range.
 - Not picking an add pick or Unique or Legendary at the end of the picking phase with no free space on the bench will now automatically sell the random Pokémon picked instead of doing nothing.
+- Ranked matches elo ranges are reajusted again: 0-1099, 1050-1200, 1150-1299, 1250+ ; still trying to find the right tradeoff between wait times and fair matches. Reminder for the overlaps concerning Net Ball, Love Ball and Quick Ball ranks: the lower range is chosen by default, but player can choose to join a lobby of the higher range if they want more difficulty and higher elo rewards.
 
 # UI
 
@@ -159,3 +166,4 @@ Special thanks to salamander for reporting and working on many of these fixes!
 - 2 new scribbles rules
 - PvE stages from stage 19 are stronger with boosted stats and new items on Marowak encounter
 - All Pokémon outside of battles now perform their emote animation when left-clicked
+- Do it all yourself: highest rarity Pokémon picked as avatars now also lose Attack and AP stats based on their category

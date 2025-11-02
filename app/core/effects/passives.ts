@@ -1176,11 +1176,6 @@ export const PassiveEffects: Partial<
   [Passive.CHINGLING]: [chinglingCountCastsEffect],
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
-      if (Berries.includes(item)) {
-        pokemon.addMaxHP(15, player)
-        removeInArray(player.items, item)
-        return false
-      }
       if (ConsumableItems.includes(item)) {
         pokemon.addMaxHP(30, player)
         player.items.push(Item.TRASH)
@@ -1191,5 +1186,14 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.POIPOLE]: [PoipoleOnKillEffect],
-  [Passive.NAGANADEL]: [PoipoleOnKillEffect]
+  [Passive.NAGANADEL]: [PoipoleOnKillEffect],
+  [Passive.BAD_LUCK]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team !== entity.team) {
+          pkm.addLuck(-20, pkm, 0, false)
+        }
+      })
+    })
+  ]
 }

@@ -26,7 +26,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   const navigate = useNavigate()
   const client: Client = useAppSelector((state) => state.network.client)
   const [isJoining, setJoining] = useState<boolean>(false)
-  const [sortBy, setSortBy] = useState<"stage" | "elo">("stage")
+  const [sortBy, setSortBy] = useState<"stage" | "elo" | "name">("stage")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
     (state) => state.network.lobby
@@ -50,30 +50,38 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   }
 
   // Function to sort rooms
-  const sortRooms = (rooms: RoomAvailable<IGameMetadata>[]): RoomAvailable<IGameMetadata>[] => {
+  const sortRooms = (
+    rooms: RoomAvailable<IGameMetadata>[]
+  ): RoomAvailable<IGameMetadata>[] => {
     return [...rooms].sort((a, b) => {
       if (sortBy === "stage") {
         const stageA = a.metadata?.stageLevel || 0
         const stageB = b.metadata?.stageLevel || 0
         return stageB - stageA // Sort by stage descending
-      } else {
+      } else if (sortBy === "elo") {
         const eloA = calculateAverageElo(a)
         const eloB = calculateAverageElo(b)
         return eloB - eloA // Sort by average elo descending
+      } else {
+        const nameA = a.metadata?.name?.toLowerCase() || ""
+        const nameB = b.metadata?.name?.toLowerCase() || ""
+        return nameA.localeCompare(nameB) // Sort by name ascending
       }
     })
   }
 
   // Function to filter rooms by player search
-  const filterRooms = (rooms: RoomAvailable<IGameMetadata>[]): RoomAvailable<IGameMetadata>[] => {
+  const filterRooms = (
+    rooms: RoomAvailable<IGameMetadata>[]
+  ): RoomAvailable<IGameMetadata>[] => {
     if (!searchQuery.trim()) return rooms
 
     const searchTerm = searchQuery.toLowerCase().trim()
-    return rooms.filter(room => {
+    return rooms.filter((room) => {
       const playersInfo = room.metadata?.playersInfo || []
 
       // Search in players info
-      return playersInfo.some(playerInfo =>
+      return playersInfo.some((playerInfo) =>
         playerInfo.toLowerCase().includes(searchTerm)
       )
     })
@@ -115,7 +123,15 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
 
   return (
     <div>
-      <div className="controls" style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "10px" }}>
+      <div
+        className="controls"
+        style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+          marginBottom: "10px"
+        }}
+      >
         <p>{t("games_in_progress", { count: filteredGameRooms.length })}</p>
         <div className="spacer"></div>
         <label htmlFor="sort-select">Sort by:</label>
@@ -127,6 +143,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
         >
           <option value="stage">{t("stage")}</option>
           <option value="elo">{t("average_elo")}</option>
+          <option value="name">{t("name")}</option>
         </select>
         <label htmlFor="search-player">{t("search")}:</label>
         <input

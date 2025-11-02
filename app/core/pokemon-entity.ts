@@ -46,6 +46,7 @@ import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import type { Board } from "./board"
 import {
+  Effect,
   Effect as EffectClass,
   OnAttackEffect,
   OnDamageDealtEffect,
@@ -58,7 +59,11 @@ import {
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
-import { FireHitEffect, MonsterKillEffect } from "./effects/synergies"
+import {
+  FireHitEffect,
+  FlyingProtectionEffect,
+  MonsterKillEffect
+} from "./effects/synergies"
 import { FlowerMonByPot, FlowerPot, getFlowerPotsUnlocked } from "./flower-pots"
 import { IdleState } from "./idle-state"
 import { ItemStats } from "./items"
@@ -124,7 +129,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   specialDamageReduced: number
   shieldDamageTaken: number
   shieldDone: number
-  flyingProtection = 0
   grassHealCooldown = 2000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
@@ -445,8 +449,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
 
     if (
-      !this.status.silence &&
-      !this.status.protect &&
+      !(value > 0 && this.status.silence) &&
+      !(value > 0 && this.status.protect) &&
       !this.status.resurecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
@@ -647,7 +651,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(item) == false) {
       this.items.add(item)
-      this.simulation.applyItemEffect(this, item)
+      this.applyItemEffect(item)
     }
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.add(item)
@@ -667,6 +671,29 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
+  applyItemEffect(item: Item) {
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
+      this.applyStat(stat as Stat, value)
+    })
+
+    ItemEffects[item]?.forEach((effectOrEffectFn) => {
+      const effect: Effect = isPlainFunction(effectOrEffectFn)
+        ? effectOrEffectFn()
+        : effectOrEffectFn
+      if (effect instanceof OnItemGainedEffect) {
+        effect.apply(this, item) // OnItemGainedEffect from ItemEffects are applied immediately and not added to effectsSet
+      } else if (effect instanceof OnItemRemovedEffect) {
+        return // OnItemRemovedEffect from ItemEffects are handled separately in removeItemEffect when removing items and not added to effectsSet
+      } else {
+        this.effectsSet.add(effect)
+      }
+    })
+
+    this.getEffects(OnItemGainedEffect).forEach((effect) => {
+      effect.apply(this, item)
+    })
+  }
+
   removeItemEffect(item: Item) {
     Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
       this.applyStat(stat as Stat, -value)
@@ -684,19 +711,28 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    ItemEffects[item]?.forEach((effect) => {
-      if (effect instanceof OnItemRemovedEffect) effect.apply(this)
-      if (effect instanceof EffectClass) this.effectsSet.delete(effect)
-      else if (isPlainFunction(effect)) {
-        const ef = effect()
+    ItemEffects[item]?.forEach((effectOrEffectFn) => {
+      const effect: Effect = isPlainFunction(effectOrEffectFn)
+        ? effectOrEffectFn()
+        : effectOrEffectFn
+      if (effect instanceof OnItemRemovedEffect)
+        effect.apply(this, item) // OnItemRemovedEffect from ItemEffects are applied here because they are not added to effectsSet
+      else if (effectOrEffectFn instanceof EffectClass)
+        this.effectsSet.delete(effect)
+      else if (isPlainFunction(effectOrEffectFn)) {
         this.effectsSet.forEach((e) => {
           /* delete all effects of the same class
              NOTE: all item effects declared as functions should have their own class, which should be the case because the only reason to use a function to create a new instance of effect
              instead of linking directly to an effect instance is to be able to store internal state for this effect, like stacks, which are stored as private fields of a specific class
            */
-          if (e.constructor === ef.constructor) this.effectsSet.delete(e)
+          if (e.constructor === effect.constructor) this.effectsSet.delete(e)
         })
       }
+    })
+
+    // apply the other OnItemRemovedEffects that could be present from other sources (passives, synergies, ...)
+    this.getEffects(OnItemRemovedEffect).forEach((effect) => {
+      effect.apply(this, item)
     })
   }
 
@@ -995,108 +1031,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
     isRetaliation: boolean
   }) {
-    // Flying protection
-    if (
-      this.flyingProtection > 0 &&
-      this.hp > 0 &&
-      this.canMove &&
-      !this.status.paralysis
-    ) {
-      const pcHp = this.hp / this.maxHP
-
-      if (this.effects.has(EffectEnum.TAILWIND) && pcHp < 0.2) {
-        this.flyAway(board)
-        this.flyingProtection--
-      } else if (this.effects.has(EffectEnum.FEATHER_DANCE) && pcHp < 0.2) {
-        this.status.triggerProtect(2000)
-        this.flyAway(board)
-        this.flyingProtection--
-      } else if (this.effects.has(EffectEnum.MAX_AIRSTREAM)) {
-        if (
-          (this.flyingProtection === 2 && pcHp < 0.5) ||
-          (this.flyingProtection === 1 && pcHp < 0.2)
-        ) {
-          this.status.triggerProtect(2000)
-          this.flyAway(board)
-          this.flyingProtection--
-        }
-      } else if (this.effects.has(EffectEnum.SKYDIVE)) {
-        if (
-          (this.flyingProtection === 2 && pcHp < 0.5) ||
-          (this.flyingProtection === 1 && pcHp < 0.2)
-        ) {
-          const destination =
-            board.getFarthestTargetCoordinateAvailablePlace(this)
-          if (destination) {
-            this.status.triggerProtect(2000)
-            this.broadcastAbility({
-              skill: "FLYING_TAKEOFF",
-              targetX: destination.target.positionX,
-              targetY: destination.target.positionY
-            })
-            this.skydiveTo(destination.x, destination.y, board)
-            this.setTarget(destination.target)
-            this.flyingProtection--
-            this.commands.push(
-              new DelayedCommand(() => {
-                this.broadcastAbility({
-                  skill: "FLYING_SKYDIVE",
-                  positionX: destination.x,
-                  positionY: destination.y,
-                  targetX: destination.target.positionX,
-                  targetY: destination.target.positionY
-                })
-              }, 500)
-            )
-            this.commands.push(
-              new DelayedCommand(() => {
-                if (destination.target?.maxHP > 0) {
-                  destination.target.handleSpecialDamage(
-                    1.5 * this.atk,
-                    board,
-                    AttackType.PHYSICAL,
-                    this,
-                    chance(this.critChance / 100, this),
-                    false
-                  )
-                }
-              }, 1000)
-            )
-          }
-        }
-      }
-    }
-
-    // Fighting knockback
-    if (
-      this.count.fightingBlockCount > 0 &&
-      this.count.fightingBlockCount %
-        (this.effects.has(EffectEnum.JUSTIFIED) ? 8 : 10) ===
-        0 &&
-      !isRetaliation &&
-      distanceC(this.positionX, this.positionY, this.targetX, this.targetY) ===
-        1
-    ) {
-      const targetAtContact = board.getEntityOnCell(this.targetX, this.targetY)
-      const destination = this.state.getNearestAvailablePlaceCoordinates(
-        this,
-        board,
-        4
-      )
-      if (destination && targetAtContact) {
-        targetAtContact.shield = 0
-        targetAtContact.handleDamage({
-          damage: this.atk,
-          board,
-          attackType: AttackType.PHYSICAL,
-          attacker: this,
-          shouldTargetGainMana: true,
-          isRetaliation: true
-        })
-        targetAtContact.moveTo(destination.x, destination.y, board)
-      }
-    }
-
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {
@@ -1429,7 +1363,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           true
         )
         spawnedEntity.shield = 0 // remove existing shield
-        spawnedEntity.flyingProtection = 0 // prevent flying effects twice
+        spawnedEntity
+          .getEffects(FlyingProtectionEffect)
+          .forEach((effect: FlyingProtectionEffect) => {
+            effect.flyingProtection = 0 // prevent flying effects twice
+          })
         SynergyEffects[Synergy.FOSSIL].forEach((e) =>
           spawnedEntity.effects.delete(e)
         )
@@ -1447,12 +1385,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     stackingItems.forEach((item) => {
       if (this.items.has(item)) {
-        ItemEffects[item]
-          ?.filter((effect) => effect instanceof OnItemRemovedEffect)
-          ?.forEach((effect) => effect.apply(this))
-        ItemEffects[item]
-          ?.filter((effect) => effect instanceof OnItemGainedEffect)
-          ?.forEach((effect) => effect.apply(this))
+        this.removeItemEffect(item)
+        this.applyItemEffect(item)
       }
     })
 
@@ -1497,6 +1431,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         resetMonsterStacks(effect)
       } else if (effect instanceof FireHitEffect) {
         resetFireStacks(effect)
+      } else if (effect instanceof FlyingProtectionEffect) {
+        effect.flyingProtection = 0 // prevent flying effects twice
       }
     })
     const soundEffect = SynergyEffects[Synergy.SOUND].find((effect) =>
@@ -1508,7 +1444,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     this.status.resurection = false // prevent resurrecting again
     this.shield = 0 // remove existing shield
-    this.flyingProtection = 0 // prevent flying effects twice
   }
 
   eatBerry(berry: Item, stealedFrom?: PokemonEntity, inPuffin = false) {
@@ -1691,7 +1626,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive) {
       const oldPassiveEffects = PassiveEffects[this.passive] ?? []
       oldPassiveEffects.forEach((effect) => {
-        this.effectsSet.delete(effect)
+        if(effect instanceof EffectClass) this.effectsSet.delete(effect)
       })
     }
 
@@ -1706,10 +1641,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  getEffects<T extends typeof EffectClass>(effectClass: T): InstanceType<T>[] {
-    return [...this.effectsSet.values()].filter(
-      (effect): effect is InstanceType<T> => effect instanceof effectClass
-    )
+  getEffects<T extends new (...args: any[]) => any>(effectClass: T): InstanceType<T>[] {
+    return [...this.effectsSet.values()]
+      .filter(
+        (effect): effect is InstanceType<T> => effect instanceof effectClass
+      )
+      .sort((a, b) => b.priority - a.priority)
   }
 
   addStack() {
@@ -1717,15 +1654,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.stacks++
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
-    const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
-      this.refToBoardPokemon as Pokemon,
-      this.player,
-      this.simulation.stageLevel
-    )
-    if (pokemonEvolved) {
-      // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
-      this.index = pokemonEvolved.index
-      this.name = pokemonEvolved.name
+    if (this.stacks === this.stacksRequired) {
+      const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
+        this.refToBoardPokemon as Pokemon,
+        this.player,
+        this.simulation.stageLevel
+      )
+      if (pokemonEvolved) {
+        // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
+        this.index = pokemonEvolved.index
+        this.name = pokemonEvolved.name
+      }
     }
     return
   }

@@ -1,0 +1,2 @@
+2020-10-07 17:58:44.593654	CHUNSOFT	CUR	Unspecified	Happy,Happy^,Normal,Normal^,Sad,Sad^,Worried,Worried^
+2021-03-22 20:03:24.059305	<@!237814999634935808>	CUR	PMDCollab_1	Angry,Angry^,Crying,Crying^,Determined,Determined^,Dizzy,Dizzy^,Happy,Happy^,Inspired,Inspired^,Joyous,Joyous^,Normal,Normal^,Pain,Pain^,Sad,Sad^,Shouting,Shouting^,Sigh,Sigh^,Stunned,Stunned^,Surprised,Surprised^,Teary-Eyed,Teary-Eyed^,Worried,Worried^

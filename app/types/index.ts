@@ -39,9 +39,6 @@ import { Weather } from "./enum/Weather"
 
 export * from "./enum/Emotion"
 
-export const CDN_PORTRAIT_URL =
-  "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/"
-
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
@@ -574,7 +571,6 @@ export interface IPokemonEntity {
   isSpawn: boolean
   commands: ISimulationCommand[]
   effectsSet: Set<EffectClass>
-  flyingProtection: number
   inSpotlight: boolean
 }
 
