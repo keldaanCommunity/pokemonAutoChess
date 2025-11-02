@@ -4273,5 +4273,6 @@
 	"portal_description_2": "Each portal has synergy symbols taken randomly from the dominant synergies of all players. Symbols both influence the region you will travel to and the Pokémon being proposed.",
 	"portal_description_3": "If you decide to not take any portal, you will stay in your current region, and the Pokémon proposed will be totally random.",
 	"additional_description": "Choose an additional pick and an item component among 3 propositions. Additional picks are 2-stage evolutions Pokémon that can be found in all players shops after being picked.",
-	"battle_description": "Regular battle stage where you fight against other players or bots."
+	"battle_description": "Regular battle stage where you fight against other players or bots.",
+	"rounds_since_last_fight": "Rounds since last fight: {{count}}"
 }
