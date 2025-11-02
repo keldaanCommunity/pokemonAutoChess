@@ -11,6 +11,7 @@
 - Gorebyss is now Fossil/Water/Psychic instead of Fossil/Water/Aquatic ; new ability: Aqua Ring
 - Kecleon and Arceus rates have been lowered even further: 1/200 → 1/500
 - Buff Stakataka: Attack 10 → 20
+- Galarian Slowpoke now appears in Poison regions instead of Psychic regions
 
 # Changes to Synergies
 
