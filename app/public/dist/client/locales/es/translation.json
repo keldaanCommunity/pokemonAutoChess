@@ -4076,9 +4076,7 @@
 	"game_full": "El grupo esta completo",
 	"game_already_started": "La partida ya ha comenzado",
 	"min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
-	"max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria",
-	"not_whitelisted": "Este partido está restringido a una lista blanca de jugadores.",
-	"blacklisted": "Has sido expulsado de esta partida.",
+	"max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria",	
 	"npc_dialog": {
 		"welcome": "¡Bienvenido!",
 		"tell_price": "¡{{price}} GOLD cada uno!",
@@ -4183,6 +4181,7 @@
 	"errors": {
 		"USER_INACTIVE": "Fuiste expulsado por inactividad para ahorrar recursos del servidor",
 		"USER_KICKED": "Fuiste expulsado de esta sala",
+		"USER_NOT_WHITELISTED": "Este partido está restringido a una lista blanca de jugadores.",
 		"USER_BANNED": "Tu cuenta fue baneada",
 		"USER_DELETED": "Tu cuenta ha sido borrada permanentemente",
 		"USER_RANK_TOO_LOW": "Tu rango de jugador no es lo suficientemente alto para unirte a esta sala",

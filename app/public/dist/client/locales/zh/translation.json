@@ -4083,8 +4083,6 @@
 	"game_already_started": "游戏已经开始",
 	"min_rank_not_reached": "你的段位过低，无法参与这场排位赛",
 	"max_rank_not_reached": "你的段位过高，无法参与这场排位赛",
-	"not_whitelisted": "只有房主允许的玩家才能参与这场比赛",
-	"blacklisted": "你已被房主踢出房间",
 	"npc_dialog": {
 		"welcome": "欢迎！",
 		"tell_price": "每件{{price}} GOLD！",
@@ -4189,6 +4187,7 @@
 	"errors": {
 		"USER_INACTIVE": "由于你长时间挂机，系统已将你踢出来节约服务器资源。",
 		"USER_KICKED": "你已被踢出此房间。",
+		"USER_NOT_WHITELISTED": "只有房主允许的玩家才能参与这场比赛",
 		"USER_BANNED": "你的账号已被封禁。",
 		"USER_DELETED": "你的账号已被永久删除。",
 		"USER_RANK_TOO_LOW": "你的段位过低，无法加入此房间。",

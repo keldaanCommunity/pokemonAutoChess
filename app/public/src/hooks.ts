@@ -7,3 +7,6 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const selectCurrentPlayer = (state: RootState) =>
   state.game.players.find((p) => p.id === state.game.currentPlayerId)
+
+export const selectConnectedPlayer = (state: RootState) =>
+  state.game.players.find((p) => p.id === state.network.uid)

@@ -4089,7 +4089,6 @@
 	"game_already_started": "Game has already started",
 	"min_rank_not_reached": "Your rank is not high enough to play this ranked match",
 	"max_rank_not_reached": "Your rank is too high to play this ranked match",
-	"not_whitelisted": "This match is restricted to a whitelist of players",
 	"blacklisted": "You have been kicked from this match",
 	"npc_dialog": {
 		"welcome": "Welcome !",
@@ -4199,6 +4198,7 @@
 		"USER_DELETED": "Your account has been permanently deleted",
 		"USER_RANK_TOO_LOW": "Your player rank is not high enough to participate in this lobby",
 		"USER_NOT_AUTHENTICATED": "Please authenticate again",
+		"USER_NOT_WHITELISTED": "This match is restricted to a whitelist of players",
 		"USER_TIMEOUT": "You recently left a game before its end, so you have to wait 5 minutes before joining another one.",
 		"USER_IN_ANOTHER_GAME": "You are already playing in another game, go back to lobby and reconnect to this one.",
 		"USER_ALREADY_JOINED": "You are already in this lobby",
@@ -4273,5 +4273,6 @@
 	"portal_description_2": "Each portal has synergy symbols taken randomly from the dominant synergies of all players. Symbols both influence the region you will travel to and the Pokémon being proposed.",
 	"portal_description_3": "If you decide to not take any portal, you will stay in your current region, and the Pokémon proposed will be totally random.",
 	"additional_description": "Choose an additional pick and an item component among 3 propositions. Additional picks are 2-stage evolutions Pokémon that can be found in all players shops after being picked.",
-	"battle_description": "Regular battle stage where you fight against other players or bots."
+	"battle_description": "Regular battle stage where you fight against other players or bots.",
+	"rounds_since_last_fight": "Rounds since last fight: {{count}}"
 }
