@@ -11,7 +11,7 @@ import {
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { DEPTH } from "../../../game/depths"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { selectConnectedPlayer, useAppDispatch, useAppSelector } from "../../../hooks"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
@@ -38,10 +38,9 @@ export default function GamePokemonsPropositions() {
     board &&
     board.getBenchSize() >=
       (pokemonsProposition.some((p) => p in PkmDuo) ? 7 : 8)
-  const life = useAppSelector(
-    (state) =>
-      state.game.players.find((p) => p.id === state.network.uid)?.life ?? 0
-  )
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
+  const life = connectedPlayer?.life ?? 0
+  
   const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(
     localStore.get(LocalStoreKeys.TEAM_PLANNER)
   )

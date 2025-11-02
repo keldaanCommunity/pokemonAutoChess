@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar"
@@ -5,7 +6,11 @@ import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Role } from "../../../../../types"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  useAppDispatch,
+  useAppSelector
+} from "../../../hooks"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
@@ -26,8 +31,6 @@ import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
-import { createSelector } from "@reduxjs/toolkit"
-import { Synergy } from "../../../../../types/enum/Synergy"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -80,9 +83,7 @@ export function MainSidebar(props: MainSidebarProps) {
     }
   }, [])
 
-  const player = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.network.uid)
-  )
+  const player = useAppSelector(selectConnectedPlayer)
   const playersAlive = useAppSelector(
     createSelector([(state) => state.game.players], (players) =>
       players.filter((p) => p.life > 0)

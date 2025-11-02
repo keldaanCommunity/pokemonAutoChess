@@ -22,6 +22,8 @@
 
 # UI
 
+- Round distance (number of rounds since last fight) is now shown in the player detail tooltip when hovering over a player's icon in game
+
 # Bugfix
 
 - Added missing Field Memory Disc for Silvally
