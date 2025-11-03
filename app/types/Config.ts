@@ -183,8 +183,8 @@ export const BoosterPriceByRarity: { [key in Rarity]: number } = {
 }
 
 export const DITTO_RATE = 0.005
-export const KECLEON_RATE = 1 / 500
-export const ARCEUS_RATE = 1 / 500
+export const KECLEON_RATE = 1 / 400
+export const ARCEUS_RATE = 1 / 400
 
 export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
@@ -461,8 +461,8 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
   20: 50,
   DEFAULT: 30
 }
-export const FIGHTING_PHASE_DURATION = 40000
-export const ITEM_CAROUSEL_BASE_DURATION = 15000
+export const FIGHTING_PHASE_DURATION = 45000
+export const ITEM_CAROUSEL_BASE_DURATION = 16000
 export const PORTAL_CAROUSEL_BASE_DURATION = 23000
 
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]

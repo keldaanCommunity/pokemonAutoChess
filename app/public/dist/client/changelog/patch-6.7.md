@@ -9,7 +9,7 @@
 - Clamperl is now Fossil/Water instead of Fossil/Water/Aquatic ; def 8 → 10; spe def 4 → 5 ;new ability: Iron Defense ; Clamperl will evolve into Huntail or Gorebyss based on the dominant synergy between Dark and Psychic
 - Huntail is now Fossil/Water/Dark instead of Fossil/Water/Aquatic ; new ability: Cavernous Chomp - Deals 40/80/160 damage to the target. If the user is able to KO the target with its ability, it becomes Enraged for 1/2/3 seconds.
 - Gorebyss is now Fossil/Water/Psychic instead of Fossil/Water/Aquatic ; new ability: Aqua Ring
-- Kecleon and Arceus rates have been lowered even further: 1/200 → 1/500
+- Kecleon and Arceus odds have been lowered even further: 1/200 → 1/400
 - Buff Stakataka: Attack 10 → 20
 - Galarian Slowpoke now appears in Poison regions instead of Psychic regions
 - Galarian Yamask now appears in Monster regions instead of Ghost regions
@@ -27,6 +27,11 @@
 - New town encounter at stage 17: Croagunk gives all players an Exchange Ticket
 - Wobbuffet encounter now gives all players a Recycle Ticket instead of an Exchange Ticket. It can now also be encountered at stage 22 and 27.
 - Sableye can no longer be encountered at stage 4, but can now be encountered at stage 17.
+
+# Gameplay
+
+- Max fight duration has been increased from 40 seconds to 45 seconds. You should get less draws now.
+- Increased base duration of item carousel from 15 seconds to 16 seconds, and base retention delay from 5 seconds to 6 seconds. A bit more time to read item descriptions and make your choice.
 
 # UI
 
