@@ -1322,7 +1322,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? this.simulation.blueTeam
           : this.simulation.redTeam
       if (!team) return
-      const alliesAlive: IPokemonEntity[] = values(team).filter((e) => e.hp > 0)
+      const alliesAlive: IPokemonEntity[] = values(team).filter(
+        (e) => e.hp > 0 || e.status.resurrecting
+      )
       let koAllies: Pokemon[] = []
       if (this.player) {
         koAllies = values(this.player.board).filter(
