@@ -1558,107 +1558,89 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    if (
-      this.redPlayer &&
-      this.id === this.redPlayer.simulationId &&
-      !this.isGhostBattle
-    ) {
-      this.redPlayer.addBattleResult(
-        this.redPlayer.opponentId,
-        this.redPlayer.opponentName,
-        this.winnerId === this.redPlayerId
+    // Handle battle results and rewards for both players
+    const playersToProcess = [
+      {
+        player: this.redPlayer,
+        playerId: this.redPlayerId,
+        opponentTeam: this.blueTeam,
+        opponentPlayer: this.bluePlayer,
+        opponentPlayerId: this.bluePlayerId
+      },
+      {
+        player: this.bluePlayer,
+        playerId: this.bluePlayerId,
+        opponentTeam: this.redTeam,
+        opponentPlayer: this.redPlayer,
+        opponentPlayerId: this.redPlayerId
+      }
+    ]
+
+    for (const {
+      player,
+      playerId,
+      opponentTeam,
+      opponentPlayer,
+      opponentPlayerId
+    } of playersToProcess) {
+      if (!player || this.id !== player.simulationId) continue
+      if (playerId === this.redPlayerId && this.isGhostBattle) continue // red player in ghost battle is always the ghost, doesnt get any rewards
+
+      // Add battle result
+      player.addBattleResult(
+        player.opponentId,
+        player.opponentName,
+        this.winnerId === playerId
           ? BattleResult.WIN
-          : this.winnerId === this.bluePlayerId
+          : this.winnerId === opponentPlayerId
             ? BattleResult.DEFEAT
             : BattleResult.DRAW,
-        this.redPlayer.opponentAvatar,
+        player.opponentAvatar,
         this.weather
       )
 
-      const client = this.room.clients.find(
-        (cli) => cli.auth.uid === this.redPlayerId
-      )
+      const client = this.room.clients.find((cli) => cli.auth.uid === playerId)
 
-      if (this.winnerId === this.redPlayerId) {
-        this.redPlayer.addMoney(1, true, null)
-        client?.send(Transfer.PLAYER_INCOME, 1)
-      } else {
-        const playerDamage = this.room.computeRoundDamage(
-          this.blueTeam,
-          this.stageLevel
-        )
-        this.redPlayer.life -= playerDamage
-        if (playerDamage > 0) {
-          client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
-        }
-        if (this.bluePlayer) {
-          this.bluePlayer.totalPlayerDamageDealt += playerDamage
-        }
-      }
-
-      if (
-        this.weather !== Weather.NEUTRAL &&
-        this.redPlayer.synergies.getSynergyStep(Synergy.ROCK) > 0
-      ) {
-        const rockCollected = WeatherRocksByWeather.get(this.weather)
-        if (rockCollected) {
-          this.redPlayer.weatherRocks.push(rockCollected)
-          if (this.redPlayer.weatherRocks.length > 3) {
-            this.redPlayer.weatherRocks.shift()
-          }
-          this.redPlayer.updateWeatherRocks()
-        }
-      }
-    }
-
-    if (this.bluePlayer && this.id === this.bluePlayer.simulationId) {
-      this.bluePlayer.addBattleResult(
-        this.bluePlayer.opponentId,
-        this.bluePlayer.opponentName,
-        this.winnerId === this.bluePlayerId
-          ? BattleResult.WIN
-          : this.winnerId === this.redPlayerId
-            ? BattleResult.DEFEAT
-            : BattleResult.DRAW,
-        this.bluePlayer.opponentAvatar,
-        this.weather
-      )
-
-      const client = this.room.clients.find(
-        (cli) => cli.auth.uid === this.bluePlayerId
-      )
-
-      if (this.winnerId === this.bluePlayerId) {
+      // Handle win/loss outcomes
+      if (this.winnerId === playerId) {
         if (this.redPlayerId !== "pve") {
-          this.bluePlayer.addMoney(1, true, null)
+          // no extra gold from PvE wins
+          player.addMoney(1, true, null)
           client?.send(Transfer.PLAYER_INCOME, 1)
         }
       } else {
         const playerDamage = this.room.computeRoundDamage(
-          this.redTeam,
+          opponentTeam,
           this.stageLevel
         )
-        this.bluePlayer.life -= playerDamage
+        player.life -= playerDamage
         if (playerDamage > 0) {
           client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
         }
-        if (this.redPlayer) {
-          this.redPlayer.totalPlayerDamageDealt += playerDamage
+        if (opponentPlayer) {
+          opponentPlayer.totalPlayerDamageDealt += playerDamage
+          if (
+            opponentPlayer.items.includes(Item.MISSION_ORDER_RED) &&
+            opponentPlayer.totalPlayerDamageDealt >= 100
+          ) {
+            opponentPlayer.completeMissionOrder(Item.MISSION_ORDER_RED)
+          }
         }
       }
 
+      // Handle weather rock collection
       if (
         this.weather !== Weather.NEUTRAL &&
-        this.bluePlayer.synergies.getSynergyStep(Synergy.ROCK) > 0 &&
-        this.redPlayerId !== "pve"
+        player.synergies.getSynergyStep(Synergy.ROCK) > 0 &&
+        this.redPlayerId !== "pve" // No weather rocks collected for PvE rounds
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
-          this.bluePlayer.weatherRocks.push(rockCollected)
-          if (this.bluePlayer.weatherRocks.length > 3) {
-            this.bluePlayer.weatherRocks.shift()
+          player.weatherRocks.push(rockCollected)
+          if (player.weatherRocks.length > 3) {
+            player.weatherRocks.shift()
           }
-          this.bluePlayer.updateWeatherRocks()
+          player.updateWeatherRocks()
         }
       }
     }

@@ -1,4 +1,5 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
+import { nanoid } from "nanoid"
 import { getUnitPowerScore } from "../../core/bot-logic"
 import { CollectionUtils } from "../../core/collection"
 import { createRandomEgg } from "../../core/eggs"
@@ -29,7 +30,10 @@ import {
   HMs,
   Item,
   ItemComponents,
+  MissionOrder,
+  MissionOrders,
   SynergyGems,
+  SynergyGivenByGem,
   SynergyGivenByItem,
   TMs,
   WeatherRocks
@@ -45,6 +49,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
+import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
 import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { removeInArray } from "../../utils/array"
@@ -75,6 +80,7 @@ import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies } from "./synergies"
+import { Wanderer } from "./wanderer"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string
@@ -99,7 +105,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>()
+  @type(["string"]) items = new ArraySchema<Item>(...MissionOrders)
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -136,6 +142,10 @@ export default class Player extends Schema implements IPlayer {
   @type("float32") eggChance: number = 0
   @type("float32") goldenEggChance: number = 0
   @type("float32") wildChance: number = 0
+  @type({ map: Wanderer }) wanderers: Map<string, Wanderer> = new Map<
+    string,
+    Wanderer
+  >()
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()
@@ -282,6 +292,16 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
+  addExperience(value: number) {
+    this.experienceManager.addExperience(value)
+    if (
+      this.experienceManager.level >= 9 &&
+      this.items.includes(Item.MISSION_ORDER_BLUE)
+    ) {
+      this.completeMissionOrder(Item.MISSION_ORDER_BLUE)
+    }
+  }
+
   addMoney(
     value: number,
     countTotalEarned: boolean,
@@ -297,6 +317,12 @@ export default class Player extends Schema implements IPlayer {
         pokemon.evolutionRule.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
       }
     })
+    if (
+      this.totalMoneyEarned >= 200 &&
+      this.items.includes(Item.MISSION_ORDER_GOLD)
+    ) {
+      this.completeMissionOrder(Item.MISSION_ORDER_GOLD)
+    }
   }
 
   addBattleResult(
@@ -407,6 +433,20 @@ export default class Player extends Schema implements IPlayer {
 
     this.updateWildChance()
     this.effects.update(this.synergies, this.board)
+
+    if (
+      this.items.includes(Item.MISSION_ORDER_GREEN) &&
+      this.synergies.countActiveSynergies() >= 8
+    ) {
+      this.completeMissionOrder(Item.MISSION_ORDER_GREEN)
+    }
+
+    if (
+      this.items.includes(Item.MISSION_ORDER_PINK) &&
+      values(this.board).filter((p) => p.stars >= 3).length >= 5
+    ) {
+      this.completeMissionOrder(Item.MISSION_ORDER_PINK)
+    }
   }
 
   updateArtificialItems(
@@ -729,6 +769,24 @@ export default class Player extends Schema implements IPlayer {
       finals.add(Pkm.BURMY_SANDY)
     }
     return finals
+  }
+
+  completeMissionOrder(missionOrder: MissionOrder) {
+    removeInArray<Item>(this.items, missionOrder)
+    const id = nanoid()
+    this.wanderers.set(
+      id,
+      new Wanderer({
+        id,
+        pkm: Pkm.WIGGLYTUFF,
+        type: WandererType.SPECIAL,
+        behavior: WandererBehavior.SPECTATE
+      })
+    )
+  }
+
+  giveMissionOrderRewards() {
+    this.addMoney(30, true, null)
   }
 }
 

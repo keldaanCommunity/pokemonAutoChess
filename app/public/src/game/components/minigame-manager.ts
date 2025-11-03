@@ -449,8 +449,8 @@ export default class MinigameManager {
 
     const celebi = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.CELEBI ? cx : 36 * 48,
-      y: encounter === TownEncounters.CELEBI ? cy : 25 * 48,
+      x: encounter === TownEncounters.CELEBI ? cx : 33 * 48,
+      y: encounter === TownEncounters.CELEBI ? cy : 23 * 48,
       name: Pkm.CELEBI,
       shiny: true,
       orientation: Orientation.DOWNLEFT
@@ -479,8 +479,8 @@ export default class MinigameManager {
 
     const sableye = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.SABLEYE ? cx : 37 * 48,
-      y: encounter === TownEncounters.SABLEYE ? cy : 4 * 48,
+      x: encounter === TownEncounters.SABLEYE ? cx : 37.25 * 48,
+      y: encounter === TownEncounters.SABLEYE ? cy : 5 * 48,
       orientation: Orientation.DOWNLEFT,
       name: Pkm.SABLEYE
     })
@@ -508,9 +508,23 @@ export default class MinigameManager {
 
     const makuhita = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.MAKUHITA ? cx : 4 * 48,
-      y: encounter === TownEncounters.MAKUHITA ? cy : 9 * 48,
+      x: encounter === TownEncounters.MAKUHITA ? cx : 36 * 48,
+      y: encounter === TownEncounters.MAKUHITA ? cy : 8.25 * 48,
       name: Pkm.MAKUHITA
+    })
+
+    const croagunk = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CROAGUNK ? cx : 11.5 * 48,
+      y: encounter === TownEncounters.CROAGUNK ? cy : 21.25 * 48,
+      name: Pkm.CROAGUNK
+    })
+
+    const wigglytuff = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.WIGGLYTUFF ? cx : 2 * 48,
+      y: encounter === TownEncounters.WIGGLYTUFF ? cy : 9 * 48,
+      name: Pkm.WIGGLYTUFF
     })
 
     const podiumPokemons = podium.map((p, rank) => {
@@ -549,6 +563,8 @@ export default class MinigameManager {
       munchlax,
       meowth,
       makuhita,
+      croagunk,
+      wigglytuff,
       ...podiumPokemons
     )
 

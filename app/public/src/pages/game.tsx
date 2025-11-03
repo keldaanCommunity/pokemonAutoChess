@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -32,7 +33,6 @@ import { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
-import { Wanderer } from "../../../types/enum/Wanderer"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
@@ -502,15 +502,6 @@ export default function Game() {
         )
       })
 
-      room.onMessage(Transfer.WANDERER, (wanderer: Wanderer) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g && g.wandererManager) {
-            g.wandererManager.addWanderer(wanderer)
-          }
-        }
-      })
-
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
           const g = getGameScene()
@@ -859,6 +850,15 @@ export default function Game() {
         $player.listen("mulchCap", (value) => {
           dispatch(changePlayer({ id: player.id, field: "mulchCap", value }))
           getGameScene()?.board?.updateMulchCount()
+        })
+
+        $player.wanderers.onAdd((wanderer: Wanderer) => {
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g && g.wandererManager) {
+              g.wandererManager.addWanderer(wanderer)
+            }
+          }
         })
       })
 

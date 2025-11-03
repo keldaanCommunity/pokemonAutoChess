@@ -47,6 +47,27 @@ export default class Synergies
     return topSynergies
   }
 
+  getSynergiesSorted(): [Synergy, number][] {
+    const synergiesSortedByLevel: [Synergy, number][] = []
+    this.forEach((value, key) => {
+      synergiesSortedByLevel.push([key as Synergy, value])
+    })
+    return synergiesSortedByLevel
+    .sort((a, b) => {
+      const [typeA, valueA] = a
+      const [typeB, valueB] = b
+      const aTriggerReached = SynergyTriggers[typeA].filter(
+        (n) => valueA >= n
+      ).length
+      const bTriggerReached = SynergyTriggers[typeB].filter(
+        (n) => valueB >= n
+      ).length
+      return aTriggerReached !== bTriggerReached
+        ? bTriggerReached - aTriggerReached
+        : valueB - valueA
+    })
+  }
+
   toMap() {
     const map = new Map<Synergy, number>()
     this.forEach((value, key) => {

@@ -1,13 +1,12 @@
-import { EvolutionTime } from "../types/Config"
-import { PokemonActionState } from "../types/enum/Game"
-import { Pkm } from "../types/enum/Pokemon"
-import { getFirstAvailablePositionInBench } from "../utils/board"
-import { pickRandomIn } from "../utils/random"
 import Player from "../models/colyseus-models/player"
 import { Egg } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
+import { PokemonActionState } from "../types/enum/Game"
+import { Pkm } from "../types/enum/Pokemon"
+import { getFirstAvailablePositionInBench } from "../utils/board"
+import { pickRandomIn } from "../utils/random"
 
 export function createRandomEgg(player: Player, shiny: boolean): Egg {
   const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(

@@ -16,6 +16,7 @@ import {
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Wanderer } from "../models/colyseus-models/wanderer"
 import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
@@ -68,7 +69,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { Wanderer } from "../types/enum/Wanderer"
+import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
@@ -226,10 +227,10 @@ export default class GameRoom extends Room<GameState> {
       // Remove all Deerling forms except the current season's
       this.additionalRarePool = this.additionalRarePool.filter((p) => {
         if (
-          p === Pkm.DEERLING_SPRING && season !== "spring" ||
-          p === Pkm.DEERLING_SUMMER && season !== "summer" ||
-          p === Pkm.DEERLING_AUTUMN && season !== "autumn" ||
-          p === Pkm.DEERLING_WINTER && season !== "winter"
+          (p === Pkm.DEERLING_SPRING && season !== "spring") ||
+          (p === Pkm.DEERLING_SUMMER && season !== "summer") ||
+          (p === Pkm.DEERLING_AUTUMN && season !== "autumn") ||
+          (p === Pkm.DEERLING_WINTER && season !== "winter")
         ) {
           return false
         }
@@ -521,7 +522,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(
-      Transfer.WANDERER_CAUGHT,
+      Transfer.WANDERER_CLICKED,
       async (client, msg: { id: string }) => {
         if (client.auth) {
           try {
@@ -1316,12 +1317,21 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  spawnWanderingPokemon(wandererNoId: Omit<Wanderer, "id">, player: Player) {
+  spawnWanderingPokemon({
+    pkm,
+    type,
+    behavior,
+    player
+  }: {
+    pkm: Pkm
+    type: WandererType
+    behavior: WandererBehavior
+    player: Player
+  }) {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    const wanderer: Wanderer = { ...wandererNoId, id }
-    this.state.wanderers.set(id, wanderer)
-    client.send(Transfer.WANDERER, wanderer)
+    const wanderer = new Wanderer({ id, pkm, type, behavior })
+    player.wanderers.set(id, wanderer)
   }
 }

@@ -25,6 +25,7 @@ import {
   CraftableNonSynergyItems,
   Item,
   ItemComponents,
+  MissionOrders,
   SynergyGems,
   SynergyGivenByGem,
   SynergyStones
@@ -355,6 +356,10 @@ export class MiniGame {
         player.life += 15
       })
     } else if (state.townEncounter === TownEncounters.WOBBUFFET) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.RECYCLE_TICKET)
+      })
+    } else if (state.townEncounter === TownEncounters.CROAGUNK) {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.EXCHANGE_TICKET)
       })
@@ -821,6 +826,12 @@ export class MiniGame {
     if (this.symbols) {
       this.symbols.forEach((symbol) => {
         this.symbols!.delete(symbol.id)
+      })
+    }
+
+    if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
+      this.alivePlayers.forEach((player) => {
+        player.itemsProposition.push(...pickNRandomIn(MissionOrders, 3))
       })
     }
   }

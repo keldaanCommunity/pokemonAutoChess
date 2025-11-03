@@ -21,6 +21,7 @@ import { TownEncounters } from "../../core/town-encounters"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { Wanderer } from "../../models/colyseus-models/wanderer"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
@@ -64,6 +65,7 @@ import {
   ArtificialItems,
   ConsumableItems,
   CraftableItems,
+  CraftableNonSynergyItems,
   Dishes,
   Item,
   ItemComponents,
@@ -85,11 +87,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
-import {
-  Wanderer,
-  WandererBehavior,
-  WandererType
-} from "../../types/enum/Wanderer"
+import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
@@ -210,10 +208,10 @@ export class OnPokemonCatchCommand extends Command<
   async execute({ client, playerId, id }) {
     if (playerId === undefined || !this.state.players.has(playerId)) return
     const player = this.state.players.get(playerId)
-    const wanderer = this.state.wanderers.get(id)
+    const wanderer = player?.wanderers.get(id)
 
     if (!player || !player.alive || !wanderer) return
-    this.state.wanderers.delete(id)
+    player.wanderers.delete(id)
 
     if (wanderer.type === WandererType.UNOWN) {
       const unownIndex = PkmIndex[wanderer.pkm]
@@ -237,7 +235,7 @@ export class OnPokemonCatchCommand extends Command<
           u.save()
         }
       }
-    } else {
+    } else if (wanderer.type === WandererType.CATCHABLE) {
       const pokemon = PokemonFactory.createPokemonFromName(wanderer.pkm, player)
       const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
       const hasSpaceOnBench =
@@ -253,6 +251,10 @@ export class OnPokemonCatchCommand extends Command<
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+      }
+    } else if (wanderer.type === WandererType.SPECIAL) {
+      if (wanderer.pkm === Pkm.WIGGLYTUFF) {
+        player.giveMissionOrderRewards()
       }
     }
   }
@@ -525,12 +527,25 @@ export class OnDragDropCombineCommand extends Command<
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
       if (ItemComponents.includes(exchangedItem)) {
         result = pickRandomIn(ItemComponents.filter((i) => i !== exchangedItem))
+      } else if (SynergyStones.includes(exchangedItem)) {
+        result = pickRandomIn(SynergyStones.filter((i) => i !== exchangedItem))
       } else if (CraftableItems.includes(exchangedItem)) {
-        result = pickRandomIn(CraftableItems.filter((i) => i !== exchangedItem))
+        result = pickRandomIn(
+          CraftableNonSynergyItems.filter((i) => i !== exchangedItem)
+        )
       } else {
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
+    } else if (itemA === Item.RECYCLE_TICKET || itemB === Item.RECYCLE_TICKET) {
+      const recycledItem = itemA === Item.RECYCLE_TICKET ? itemB : itemA
+      const recipe = ItemRecipe[recycledItem]
+      if (!recipe) {
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
+      result = recipe[0]
+      player.items.push(recipe[1])
     } else {
       // find recipe result
       const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
@@ -871,7 +886,7 @@ export class OnLevelUpCommand extends Command<
 
     const cost = getLevelUpCost(this.state.specialGameRule)
     if (player.money >= cost && player.experienceManager.canLevelUp()) {
-      player.experienceManager.addExperience(4)
+      player.addExperience(4)
       player.money -= cost
     }
   }
@@ -1215,7 +1230,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           client?.send(Transfer.PLAYER_INCOME, income)
         }
-        player.experienceManager.addExperience(2)
+        player.addExperience(2)
       }
     })
   }
@@ -1817,17 +1832,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
           const pkm = pickRandomIn(Unowns)
           const id = nanoid()
-          const wanderer: Wanderer = {
+          const wanderer = new Wanderer({
             id,
+            pkm,
             type: WandererType.UNOWN,
-            behavior: WandererBehavior.RUN_THROUGH,
-            pkm
-          }
-          this.state.wanderers.set(id, wanderer)
+            behavior: WandererBehavior.RUN_THROUGH
+          })
+
           this.clock.setTimeout(
-            () => {
-              client.send(Transfer.WANDERER, wanderer)
-            },
+            () => player.wanderers.set(id, wanderer),
             Math.round((5 + 15 * Math.random()) * 1000)
           )
         }
@@ -1845,17 +1858,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               -1,
               true
             )
-            const wanderer: Wanderer = {
+            const wanderer = new Wanderer({
               id,
+              pkm,
               type: WandererType.CATCHABLE,
-              behavior: WandererBehavior.RUN_THROUGH,
-              pkm
-            }
-            this.state.wanderers.set(id, wanderer)
+              behavior: WandererBehavior.RUN_THROUGH
+            })
+
             this.clock.setTimeout(
-              () => {
-                client.send(Transfer.WANDERER, wanderer)
-              },
+              () => player.wanderers.set(id, wanderer),
               4000 + i * 400
             )
           }
