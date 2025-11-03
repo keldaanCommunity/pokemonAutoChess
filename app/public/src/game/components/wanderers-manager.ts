@@ -288,7 +288,7 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
   dialog?: string
   dialogTitle?: string
 } {
-  if (wanderer.pkm === Pkm.WIGGLYTUFF) {
+  if (wanderer.pkm === Pkm.CHATOT) {
     return {
       dialog: t("npc_dialog.here_are_your_reward", {
         reward: `30 GOLD`

@@ -253,7 +253,7 @@ export class OnPokemonCatchCommand extends Command<
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
       }
     } else if (wanderer.type === WandererType.SPECIAL) {
-      if (wanderer.pkm === Pkm.WIGGLYTUFF) {
+      if (wanderer.pkm === Pkm.CHATOT) {
         player.giveMissionOrderRewards()
       }
     }

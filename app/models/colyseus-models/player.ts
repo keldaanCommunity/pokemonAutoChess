@@ -105,7 +105,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>(...MissionOrders)
+  @type(["string"]) items = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -778,7 +778,7 @@ export default class Player extends Schema implements IPlayer {
       id,
       new Wanderer({
         id,
-        pkm: Pkm.WIGGLYTUFF,
+        pkm: Pkm.CHATOT,
         type: WandererType.SPECIAL,
         behavior: WandererBehavior.SPECTATE
       })
