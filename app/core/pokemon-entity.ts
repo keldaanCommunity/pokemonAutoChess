@@ -211,7 +211,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return (
       !this.status.freeze &&
       !this.status.sleep &&
-      !this.status.resurecting &&
+      !this.status.resurrecting &&
       !this.status.locked
     )
   }
@@ -230,7 +230,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetAllies = false
   ): boolean {
     return (
-      !this.status.resurecting &&
+      !this.status.resurrecting &&
       ((targetAllies && this.team === attacker.team) ||
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
@@ -451,7 +451,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       !(value > 0 && this.status.silence) &&
       !(value > 0 && this.status.protect) &&
-      !this.status.resurecting &&
+      !this.status.resurrecting &&
       !(value < 0 && this.status.tree) // cannot lose PP if tree
     ) {
       this.pp = clamp(this.pp + value, 0, this.maxPP * 2 - 1)
@@ -1125,7 +1125,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  // called after killing an opponent (does not proc if resurection)
+  // called after killing an opponent (does not proc if resurrection)
   onKill({
     target,
     board,
@@ -1442,7 +1442,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       resetSoundStacks(soundEffect)
     }
 
-    this.status.resurection = false // prevent resurrecting again
+    this.status.resurrection = false // prevent resurrecting again
     this.shield = 0 // remove existing shield
   }
 
@@ -1626,7 +1626,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive) {
       const oldPassiveEffects = PassiveEffects[this.passive] ?? []
       oldPassiveEffects.forEach((effect) => {
-        if(effect instanceof EffectClass) this.effectsSet.delete(effect)
+        if (effect instanceof EffectClass) this.effectsSet.delete(effect)
       })
     }
 
@@ -1641,7 +1641,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  getEffects<T extends new (...args: any[]) => any>(effectClass: T): InstanceType<T>[] {
+  getEffects<T extends new (...args: any[]) => any>(
+    effectClass: T
+  ): InstanceType<T>[] {
     return [...this.effectsSet.values()]
       .filter(
         (effect): effect is InstanceType<T> => effect instanceof effectClass

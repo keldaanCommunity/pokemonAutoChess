@@ -584,8 +584,8 @@ export interface IStatus {
   sleep: boolean
   confusion: boolean
   wound: boolean
-  resurection: boolean
-  resurecting: boolean
+  resurrection: boolean
+  resurrecting: boolean
   paralysis: boolean
   pokerus: boolean
   locked: boolean

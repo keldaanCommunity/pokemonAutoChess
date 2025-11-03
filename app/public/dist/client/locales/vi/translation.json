@@ -1238,7 +1238,7 @@
 		"METEOR_MASH": "Gây 3 lần sát thương [15,30,60,SP] SPECIAL lên mục tiêu và tăng [2,SP] chỉ số ATK của đứa vận chiêu",
 		"HURRICANE": "Gây [25,50,100,SP] SPECIAL lên toàn bộ Pokémon đối thủ ở sau mục tiêu và khiến chúng PARALYSIS trong 3 giây",
 		"HEAL_BLOCK": "Gây [20,40,80,SP] SPECIAL và hiệu ứng WOUND cho tất cả Pokémon đối thủ gần nó trong 5 giây",
-		"ROAR_OF_TIME": "RESURECTION và [20,SP] SPEED cho đồng minh mạnh nhất (Thứ tự ưu tiên: trang bị > số sao > độ hiếm)",
+		"ROAR_OF_TIME": "RESURRECTION và [20,SP] SPEED cho đồng minh mạnh nhất (Thứ tự ưu tiên: trang bị > số sao > độ hiếm)",
 		"ROCK_TOMB": "Gây [30,60,120,SP] SPECIAL lên mục tiêu và giảm [10,20,40] SPEED của chúng",
 		"ROCK_SMASH": "Gây [25,50,100,SP] SPECIAL lên mục tiêu và ARMOR_BREAK chúng trong [3,6,9] giây",
 		"HEAD_SMASH": "Bản thân hi sinh [10,20,40,SP] PHYSICAL và gây [40,80,150,SP] SPECIAL lên mục tiêu. Loại bỏ trực tiếp mục tiêu nếu mục tiêu đang SLEEP hoặc FREEZE",

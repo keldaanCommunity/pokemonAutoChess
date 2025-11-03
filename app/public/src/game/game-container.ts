@@ -96,7 +96,13 @@ class GameContainer {
 
     for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
       team.onAdd((p, key) =>
-        this.initializePokemon(<PokemonEntity>p, simulation, team === $simulation.blueTeam ? simulation.bluePlayerId : simulation.redPlayerId)
+        this.initializePokemon(
+          <PokemonEntity>p,
+          simulation,
+          team === $simulation.blueTeam
+            ? simulation.bluePlayerId
+            : simulation.redPlayerId
+        )
       )
       team.onRemove((pokemon, key) => {
         // logger.debug('remove pokemon');
@@ -116,8 +122,16 @@ class GameContainer {
     })
   }
 
-  initializePokemon(pokemon: PokemonEntity, simulation: Simulation, playerId: string) {
-    this.gameScene?.battle?.addPokemonEntitySprite(simulation.id, pokemon, playerId)
+  initializePokemon(
+    pokemon: PokemonEntity,
+    simulation: Simulation,
+    playerId: string
+  ) {
+    this.gameScene?.battle?.addPokemonEntitySprite(
+      simulation.id,
+      pokemon,
+      playerId
+    )
     const fields: NonFunctionPropNames<Status>[] = [
       "armorReduction",
       "burn",
@@ -140,8 +154,8 @@ class GameContainer {
       "protect",
       "skydiving",
       "psychicField",
-      "resurection",
-      "resurecting",
+      "resurrection",
+      "resurrecting",
       "runeProtect",
       "silence",
       "sleep",

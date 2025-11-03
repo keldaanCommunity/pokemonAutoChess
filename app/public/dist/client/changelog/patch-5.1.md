@@ -123,9 +123,9 @@
 - Fixed no music when spectating game
 - Comfey can no longer be hold by pokemons that cannot hold items like Unowns
 - Fixed Comfey being duplicated when given to flora spawn
-- Flying protections no longer are reset after resurection
+- Flying protections no longer are reset after resurrection
 - Pokedoll no longer reduce true damage
-- Roar of time now cannot target units that already have resurection status
+- Roar of time now cannot target units that already have resurrection status
 - Fixed Technologic Scribble giving you twice the same artificial item
 
 # Misc

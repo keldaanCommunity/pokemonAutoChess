@@ -502,7 +502,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.status.addResurrection(pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.status.resurection = false
+      pokemon.status.resurrection = false
     })
   ],
 
@@ -595,7 +595,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
             (p) =>
               p &&
               p.team !== attacker.team &&
-              (p.hp > 0 || p.status.resurecting)
+              (p.hp > 0 || p.status.resurrecting)
           ) === false
         attacker.count.bottleCapCount++
         const moneyGained = isLastEnemy ? attacker.count.bottleCapCount + 1 : 1
@@ -647,7 +647,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.status.addResurrection(pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.status.resurection = false
+      pokemon.status.resurrection = false
     })
   ],
 

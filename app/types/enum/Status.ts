@@ -11,8 +11,8 @@ export enum Status {
   FLINCH = "FLINCH",
   WOUND = "WOUND",
   RAGE = "RAGE",
-  RESURECTION = "RESURECTION",
-  RESURECTING = "RESURECTING",
+  RESURRECTION = "RESURRECTION",
+  RESURRECTING = "RESURRECTING",
   PARALYSIS = "PARALYSIS",
   POKERUS = "POKERUS",
   ARMOR_BREAK = "ARMOR_BREAK",
@@ -32,7 +32,7 @@ export enum Status {
 
 export const PositiveStatuses = [
   Status.POKERUS,
-  Status.RESURECTION,
+  Status.RESURRECTION,
   Status.RUNE_PROTECT,
   Status.PROTECT,
   Status.ELECTRIC_FIELD,

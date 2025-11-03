@@ -1984,7 +1984,7 @@ export class RoarOfTimeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const speedBuff = 20
     const candidates = board.cells.filter(
-      (cell) => cell && cell.team === pokemon.team && !cell.status.resurection
+      (cell) => cell && cell.team === pokemon.team && !cell.status.resurrection
     ) as PokemonEntity[]
     const strongest = getStrongestUnit(candidates)
     if (strongest) {
