@@ -104,7 +104,7 @@
     "react-tooltip": "^5.30.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.4",
+    "@biomejs/biome": "2.3.2",
     "@types/cors": "^2.8.17",
     "@types/d3": "^7.4.3",
     "@types/elo-rank": "^1.0.3",

@@ -448,7 +448,7 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     } else super.process(pokemon, board, target, crit)
     if (pokemon.player && !pokemon.isGhostOpponent) {
-      pokemon.player.experienceManager.addExperience(1)
+      pokemon.player.addExperience(1)
     }
   }
 }
@@ -13418,14 +13418,12 @@ export class MagnetPullStrategy extends AbilityStrategy {
         pokemon,
         pokemon.player
       )
-      pokemon.simulation.room.spawnWanderingPokemon(
-        {
-          pkm: randomSteelPkm,
-          behavior: WandererBehavior.SPECTATE,
-          type: WandererType.CATCHABLE
-        },
-        pokemon.player
-      )
+      pokemon.simulation.room.spawnWanderingPokemon({
+        pkm: randomSteelPkm,
+        behavior: WandererBehavior.SPECTATE,
+        type: WandererType.CATCHABLE,
+        player: pokemon.player
+      })
     }
   }
 }

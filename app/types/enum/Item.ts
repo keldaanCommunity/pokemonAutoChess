@@ -219,6 +219,7 @@ export enum Item {
   BIG_NUGGET = "BIG_NUGGET",
   GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
   EXCHANGE_TICKET = "EXCHANGE_TICKET",
+  RECYCLE_TICKET = "RECYCLE_TICKET",
   TREASURE_BOX = "TREASURE_BOX",
   AUSPICIOUS_ARMOR = "AUSPICIOUS_ARMOR",
   MALICIOUS_ARMOR = "MALICIOUS_ARMOR",
@@ -255,7 +256,12 @@ export enum Item {
   BUG_MEMORY = "BUG_MEMORY",
   GOURMET_MEMORY = "GOURMET_MEMORY",
   MONSTER_MEMORY = "MONSTER_MEMORY",
-  AQUATIC_MEMORY = "AQUATIC_MEMORY"
+  AQUATIC_MEMORY = "AQUATIC_MEMORY",
+  MISSION_ORDER_PINK = "MISSION_ORDER_PINK",
+  MISSION_ORDER_RED = "MISSION_ORDER_RED",
+  MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
+  MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
+  MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD"
 }
 
 // should be excluded from carousels
@@ -263,7 +269,6 @@ export const SpecialItems: Item[] = [
   Item.EGG_FOR_SELL,
   Item.AMULET_COIN,
   Item.GIMMIGHOUL_COIN,
-  Item.EXCHANGE_TICKET,
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET,
@@ -324,9 +329,16 @@ export const SpecialItems: Item[] = [
   Item.GOURMET_MEMORY,
   Item.MONSTER_MEMORY,
   Item.AQUATIC_MEMORY,
+  Item.EXCHANGE_TICKET,
+  Item.RECYCLE_TICKET,
   Item.BRONZE_DOJO_TICKET,
   Item.SILVER_DOJO_TICKET,
-  Item.GOLD_DOJO_TICKET
+  Item.GOLD_DOJO_TICKET,
+  Item.MISSION_ORDER_PINK,
+  Item.MISSION_ORDER_RED,
+  Item.MISSION_ORDER_BLUE,
+  Item.MISSION_ORDER_GREEN,
+  Item.MISSION_ORDER_GOLD
 ]
 
 export const FishingRods = [
@@ -336,6 +348,16 @@ export const FishingRods = [
 ] as const // order matters
 
 export type FishingRod = (typeof FishingRods)[number]
+
+export const MissionOrders: Item[] = [
+  Item.MISSION_ORDER_PINK,
+  Item.MISSION_ORDER_RED,
+  Item.MISSION_ORDER_BLUE,
+  Item.MISSION_ORDER_GREEN,
+  Item.MISSION_ORDER_GOLD
+]
+
+export type MissionOrder = (typeof MissionOrders)[number]
 
 export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
@@ -889,6 +911,7 @@ export const ConsumableItems: Item[] = [
   ...DojoTickets,
   ...Berries,
   Item.EXCHANGE_TICKET,
+  Item.RECYCLE_TICKET,
   Item.PICNIC_SET,
   Item.FIRE_SHARD,
   Item.SCROLL_OF_DARKNESS,

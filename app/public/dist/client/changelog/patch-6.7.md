@@ -19,13 +19,19 @@
 # Changes to Items
 
 - Protective pads now also protects against fighting synergy throws
+- Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
 
-# Gameplay
+# Town Encounters
+
+- New town encounter at stage 4: Wigglytuff gives you 30 gold for completing a mission.
+- New town encounter at stage 17: Croagunk gives all players an Exchange Ticket
+- Wobbuffet encounter now gives all players a Recycle Ticket instead of an Exchange Ticket. It can now also be encountered at stage 22 and 27.
+- Sableye can no longer be encountered at stage 4, but can now be encountered at stage 17.
 
 # UI
 
-- Pokemons sprites are now lazy-loaded. This should reduce game loading times and memory usage significantly, at the cost of having a small delay before the Pokémon sprites are displayed for the first time. A wobbling pokéball is shown while the sprite is being loaded (shouldn't take more than 1 second in most cases).
-- Round distance (number of rounds since last fight) is now shown in the player detail tooltip when hovering over a player's icon in game
+- Pokemons sprites are now lazy-loaded. This should reduce game loading times and memory usage significantly, at the cost of having a small delay before the Pokémon sprites are displayed for the first time. A wobbling pokéball is shown while the sprite is being loaded (should not take more than 1 second in most cases).
+- Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
 
 # Bugfix
 

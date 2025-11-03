@@ -13,6 +13,7 @@ import {
   Flavors,
   HMs,
   Item,
+  ItemRecipe,
   MemoryDiscs,
   OgerponMasks,
   Sweets,
@@ -919,6 +920,26 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.atk += 3
         pokemon.speed += 3
         player.life = min(1)(player.life - 3)
+        removeInArray(player.items, item)
+      }
+
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.RECYCLE_TICKET]: [
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
+      let consummed = false
+      pokemon.items.forEach((heldItem) => {
+        const recipe = ItemRecipe[heldItem]
+        if (recipe) {
+          player.items.push(...recipe)
+          pokemon.items.delete(heldItem)
+          consummed = true
+        }
+      })
+
+      if (consummed) {
         removeInArray(player.items, item)
       }
 

@@ -23,7 +23,6 @@ import { GameMode, GamePhaseState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { Wanderer } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
 import { pickRandomIn, randomBetween } from "../../utils/random"
 
@@ -65,7 +64,6 @@ export default class GameState extends Schema {
   pveRewardsPropositions: Item[] = []
   minRank: EloRank | null = null
   maxRank: EloRank | null = null
-  wanderers: Map<string, Wanderer> = new Map<string, Wanderer>()
 
   constructor(
     preparationId: string,
