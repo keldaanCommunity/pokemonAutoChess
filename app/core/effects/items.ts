@@ -929,15 +929,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RECYCLE_TICKET]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
+      let consummed = false
       pokemon.items.forEach((heldItem) => {
         const recipe = ItemRecipe[heldItem]
         if (recipe) {
           player.items.push(...recipe)
           pokemon.items.delete(heldItem)
+          consummed = true
         }
       })
 
-      removeInArray(player.items, item)
+      if (consummed) {
+        removeInArray(player.items, item)
+      }
+
       return false // prevent item from being equipped
     })
   ],
