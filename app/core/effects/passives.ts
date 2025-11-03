@@ -746,7 +746,7 @@ const conversionEffect = new OnSimulationStartEffect(
         ? simulation.redPlayer
         : simulation.bluePlayer
     if (!opponent) return
-    const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies())
+    const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies(1))
     if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
     entity.types.add(synergyCopied)
     const effect =

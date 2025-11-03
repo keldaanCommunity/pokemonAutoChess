@@ -34,12 +34,24 @@ export default class Synergies
     return count
   }
 
-  getTopSynergies(): Synergy[] {
+  getTopSynergies(amount?: number): Synergy[] {
     const synergiesSortedByLevel: [Synergy, number][] = []
     this.forEach((value, key) => {
       synergiesSortedByLevel.push([key as Synergy, value])
     })
-    synergiesSortedByLevel.sort(([s1, v1], [s2, v2]) => v2 - v1)
+    synergiesSortedByLevel.sort(([s1, v1], [s2, v2]) => {
+      if (v2 === v1) {
+        // if equal level, prioritize the highest amount of synergy steps reached
+        return (
+          SynergyTriggers[s2].filter((n) => n <= v2).length -
+          SynergyTriggers[s1].filter((n) => n <= v1).length
+        )
+      }
+      return v2 - v1
+    })
+    if (amount) {
+      return synergiesSortedByLevel.slice(0, amount).map(([s, v]) => s)
+    }
     const topSynergyCount = synergiesSortedByLevel[0][1]
     const topSynergies = synergiesSortedByLevel
       .filter(([s, v]) => v >= topSynergyCount)

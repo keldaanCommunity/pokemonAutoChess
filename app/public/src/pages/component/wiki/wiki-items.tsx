@@ -13,6 +13,7 @@ import {
   ShinyItems,
   SpecialItems,
   SynergyGems,
+  SynergyGemsBuried,
   TMs,
   WeatherRocks
 } from "../../../../../types/enum/Item"
@@ -24,7 +25,9 @@ import SynergyIcon from "../icons/synergy-icon"
 export default function WikiItems() {
   const [itemHovered, setItemHovered] = useState<Item>()
   const { t } = useTranslation()
-  const specialItems = SpecialItems.filter((i) => !(MemoryDiscs as readonly Item[]).includes(i)) // too many memory discs to display
+  const specialItems = SpecialItems.filter(
+    (i) => !(MemoryDiscs as readonly Item[]).includes(i)
+  ) // too many memory discs to display
   return (
     <div id="wiki-items">
       <article className="craftable">
@@ -155,7 +158,21 @@ export default function WikiItems() {
         </h2>
         <p>{addIconsToDescription(t("gems_description"))}</p>
         <ul>
-          {SynergyGems.map((i) => (
+          {SynergyGemsBuried.map((i) => (
+            <li
+              key={i}
+              data-tooltip-id="item-detail"
+              onMouseOver={() => setItemHovered(i)}
+            >
+              <img src={"assets/item/" + i + ".png"} className="item"></img>
+            </li>
+          ))}
+        </ul>
+        <p>{addIconsToDescription(t("gems_not_buried_description"))}</p>
+        <ul>
+          {SynergyGems.filter(
+            (gem) => SynergyGemsBuried.includes(gem) === false
+          ).map((i) => (
             <li
               key={i}
               data-tooltip-id="item-detail"
