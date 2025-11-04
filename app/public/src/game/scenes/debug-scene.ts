@@ -277,7 +277,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removeFreeze()
       this.pokemonSprite.removeProtect()
       this.pokemonSprite.removeWound()
-      this.pokemonSprite.removeResurection()
+      this.pokemonSprite.removeResurrection()
       this.pokemonSprite.removeParalysis()
       this.pokemonSprite.removePokerus()
       this.pokemonSprite.removeLocked()
@@ -321,11 +321,11 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.WOUND) {
         this.pokemonSprite.addWound()
       }
-      if (status == Status.RESURECTION) {
-        this.pokemonSprite.addResurection()
+      if (status == Status.RESURRECTION) {
+        this.pokemonSprite.addResurrection()
       }
-      if (status == Status.RESURECTING) {
-        this.pokemonSprite.resurectAnimation()
+      if (status == Status.RESURRECTING) {
+        this.pokemonSprite.resurrectAnimation()
       }
       if (status == Status.PARALYSIS) {
         this.pokemonSprite.addParalysis()

@@ -8,7 +8,8 @@ import { discordService } from "./discord"
 export type IBotListItem = Omit<IBot, "steps">
 
 export async function fetchBotsList(
-  approved?: boolean
+  approved?: boolean,
+  usingPkm?: string
 ): Promise<IBotListItem[]> {
   const pageSize = 100
   const maxPages = 20 // Fail-safe: prevent infinite loops (max 2000 bots)
@@ -25,6 +26,9 @@ export async function fetchBotsList(
       const queryFilter: any = {}
       if (approved !== undefined) {
         queryFilter.approved = approved
+      }
+      if (usingPkm) {
+        queryFilter["steps.board.name"] = usingPkm
       }
 
       const botsData = await BotV2.find(

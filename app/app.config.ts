@@ -362,13 +362,13 @@ export default config({
     })
 
     app.get("/bots", async (req, res) => {
-      const botsData = await fetchBotsList(
+      const approved =
         req.query.approved === "true"
           ? true
           : req.query.approved === "false"
             ? false
             : undefined
-      )
+      const botsData = await fetchBotsList(approved, req.query.pkm?.toString())
       res.send(botsData)
     })
 

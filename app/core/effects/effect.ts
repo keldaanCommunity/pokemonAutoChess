@@ -132,7 +132,7 @@ export class OnKillEffect extends Effect {
   }
 }
 
-// applied on KO (does not proc if resurection)
+// applied on KO (does not proc if resurrection)
 interface OnDeathEffectArgs {
   board: Board
   pokemon: PokemonEntity

@@ -244,15 +244,15 @@ export default class BattleManager {
         } else {
           pkm.removeWound()
         }
-      } else if (field === "resurection") {
-        if (pokemon.status.resurection) {
-          pkm.addResurection()
+      } else if (field === "resurrection") {
+        if (pokemon.status.resurrection) {
+          pkm.addResurrection()
         } else {
-          pkm.removeResurection()
+          pkm.removeResurrection()
         }
-      } else if (field === "resurecting") {
-        if (pokemon.status.resurecting) {
-          pkm.resurectAnimation()
+      } else if (field === "resurrecting") {
+        if (pokemon.status.resurrecting) {
+          pkm.resurrectAnimation()
         } else {
           pkm.animationLocked = false
         }

@@ -23,8 +23,8 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") sleep = false
   @type("boolean") confusion = false
   @type("boolean") wound = false
-  @type("boolean") resurection = false
-  @type("boolean") resurecting = false
+  @type("boolean") resurrection = false
+  @type("boolean") resurrecting = false
   @type("boolean") paralysis = false
   @type("boolean") pokerus = false
   @type("boolean") possessed = false
@@ -76,7 +76,7 @@ export default class Status extends Schema implements IStatus {
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
   reflectCooldown = 0
-  resurectingCooldown = 0
+  resurrectingCooldown = 0
   curseCooldown = 0
   pokerusCooldown = 2500
   possessedCooldown = 0
@@ -259,8 +259,8 @@ export default class Status extends Schema implements IStatus {
       this.updateReflect(dt)
     }
 
-    if (this.resurecting) {
-      this.updateResurecting(dt, pokemon)
+    if (this.resurrecting) {
+      this.updateResurrecting(dt, pokemon)
     }
 
     if (this.curse) {
@@ -921,24 +921,24 @@ export default class Status extends Schema implements IStatus {
 
   addResurrection(pokemon: IPokemonEntity) {
     if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot be resurrected
-    this.resurection = true
+    this.resurrection = true
   }
 
-  triggerResurection(pokemon: PokemonEntity) {
-    this.resurection = false
-    this.resurecting = true
-    this.resurectingCooldown = 2000
+  triggerResurrection(pokemon: PokemonEntity) {
+    this.resurrection = false
+    this.resurrecting = true
+    this.resurrectingCooldown = 2000
     pokemon.status.clearNegativeStatus()
   }
 
-  updateResurecting(dt: number, pokemon: PokemonEntity) {
-    if (this.resurectingCooldown - dt <= 0) {
-      this.resurecting = false
+  updateResurrecting(dt: number, pokemon: PokemonEntity) {
+    if (this.resurrectingCooldown - dt <= 0) {
+      this.resurrecting = false
       pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
     } else {
-      this.resurectingCooldown -= dt
+      this.resurrectingCooldown -= dt
     }
   }
 

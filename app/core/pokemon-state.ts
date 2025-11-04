@@ -388,7 +388,7 @@ export default abstract class PokemonState {
       return { death: false, takenDamage: 0 }
     }
 
-    if (pokemon.hp <= 0 || pokemon.status.resurecting) {
+    if (pokemon.hp <= 0 || pokemon.status.resurrecting) {
       pokemon.status.possessedCooldown = 0
       return { death: false, takenDamage: 0 }
     }
@@ -692,11 +692,11 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.hp <= 0) {
-        if (pokemon.status.resurection) {
-          pokemon.status.triggerResurection(pokemon)
+        if (pokemon.status.resurrection) {
+          pokemon.status.triggerResurrection(pokemon)
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
             if (entity && entity.targetEntityId === pokemon.id) {
-              // switch aggro immediately to reduce retarget lag after resurection
+              // switch aggro immediately to reduce retarget lag after resurrection
               entity.cooldown = 0
               entity.toMovingState()
             }
@@ -807,7 +807,7 @@ export default abstract class PokemonState {
     })
 
     if (
-      (pokemon.status.resurecting ||
+      (pokemon.status.resurrecting ||
         pokemon.status.freeze ||
         pokemon.status.sleep) &&
       pokemon.state.name !== "idle"

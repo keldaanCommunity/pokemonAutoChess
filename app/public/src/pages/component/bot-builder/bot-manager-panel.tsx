@@ -1,15 +1,18 @@
 import firebase from "firebase/compat/app"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { authenticateUser } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import "./bot-manager-panel.css"
 
 export function BotManagerPanel() {
   const [filterApproved, setFilterApproved] = useState<boolean | undefined>()
+  const [filteredPokemon, setFilteredPokemon] = useState<Pkm | "">("")
   const navigate = useNavigate()
   const { t } = useTranslation()
   return (
@@ -46,13 +49,21 @@ export function BotManagerPanel() {
         >
           Bots pending approval
         </button>
+        <div className="spacer"></div>
+        <div>
+          Filter bots using this Pokémon:&nbsp;
+          <PokemonTypeahead
+            value={filteredPokemon}
+            onChange={setFilteredPokemon}
+          />
+        </div>
       </div>
-      <BotsList approved={filterApproved} />
+      <BotsList approved={filterApproved} filteredPokemon={filteredPokemon} />
     </div>
   )
 }
 
-function BotsList(props: { approved?: boolean }) {
+function BotsList(props: { approved?: boolean; filteredPokemon: Pkm | "" }) {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [bots, setBots] = useState<IBotLight[] | null>(null)
@@ -61,12 +72,14 @@ function BotsList(props: { approved?: boolean }) {
 
   useEffect(() => {
     authenticateUser()
-    fetch(`/bots?t=${Date.now()}`)
+    fetch(
+      `/bots?${props.filteredPokemon ? `pkm=${props.filteredPokemon}` : ""}&t=${Date.now()}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setBots(data)
       })
-  }, [])
+  }, [props.filteredPokemon])
 
   async function deleteBot(bot: IBotLight) {
     if (
@@ -115,31 +128,35 @@ function BotsList(props: { approved?: boolean }) {
     }
   }
 
-  function getSortedBots(bots: IBotLight[]) {
-    if (!sortColumn) return bots
-    const sorted = [...bots].sort((a, b) => {
-      let aValue = a[sortColumn as keyof IBotLight]
-      let bValue = b[sortColumn as keyof IBotLight]
-      // Special handling for name (translated), elo (number), and avatar (string)
-      if (sortColumn === "name") {
-        aValue = t(`pkm.${a.name}`)
-        bValue = t(`pkm.${b.name}`)
-      }
-      if (sortColumn === "elo") {
-        aValue = Number(a.elo)
-        bValue = Number(b.elo)
-      }
-      if (aValue === undefined || bValue === undefined) return 0
-      if (typeof aValue === "string" && typeof bValue === "string") {
-        const cmp = aValue.localeCompare(bValue)
-        return sortDirection === "asc" ? cmp : -cmp
-      }
-      if (aValue < bValue) return sortDirection === "asc" ? -1 : 1
-      if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
-      return 0
-    })
-    return sorted
-  }
+  const filteredBots = useMemo(() => {
+    if (!bots) return []
+    return bots
+      .filter(
+        (b) => props.approved === undefined || b.approved === props.approved
+      )
+      .sort((a, b) => {
+        if (!sortColumn) return 0
+        let aValue = a[sortColumn as keyof IBotLight]
+        let bValue = b[sortColumn as keyof IBotLight]
+        // Special handling for name (translated), elo (number), and avatar (string)
+        if (sortColumn === "name") {
+          aValue = t(`pkm.${a.name}`)
+          bValue = t(`pkm.${b.name}`)
+        }
+        if (sortColumn === "elo") {
+          aValue = Number(a.elo)
+          bValue = Number(b.elo)
+        }
+        if (aValue === undefined || bValue === undefined) return 0
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          const cmp = aValue.localeCompare(bValue)
+          return sortDirection === "asc" ? cmp : -cmp
+        }
+        if (aValue < bValue) return sortDirection === "asc" ? -1 : 1
+        if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
+        return 0
+      })
+  }, [bots, props.approved, sortColumn, sortDirection])
 
   return (
     <main id="bots-list" className="my-container">
@@ -219,12 +236,7 @@ function BotsList(props: { approved?: boolean }) {
             </tr>
           </thead>
           <tbody>
-            {getSortedBots(
-              bots.filter(
-                (b) =>
-                  props.approved === undefined || b.approved === props.approved
-              )
-            ).map((b) => (
+            {filteredBots.map((b) => (
               <tr key={b.id}>
                 <td>
                   <PokemonPortrait avatar={b.avatar} />

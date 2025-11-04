@@ -92,7 +92,7 @@ export default class PokemonSprite extends DraggableObject {
   curse: GameObjects.Sprite | undefined
   poison: GameObjects.Sprite | undefined
   protect: GameObjects.Sprite | undefined
-  resurection: GameObjects.Sprite | undefined
+  resurrection: GameObjects.Sprite | undefined
   runeProtect: GameObjects.Sprite | undefined
   reflectShield: GameObjects.Sprite | undefined
   electricField: GameObjects.Sprite | undefined
@@ -570,20 +570,20 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  resurectAnimation() {
+  resurrectAnimation() {
     if (this.lifebar) {
       this.lifebar.setHp(0)
     }
 
-    const resurectAnim = this.scene.add.sprite(0, -10, "RESURECT", "000")
-    resurectAnim.setDepth(DEPTH.BOOST_FRONT)
-    resurectAnim.setScale(2, 2)
-    resurectAnim.anims.play("RESURECT")
-    resurectAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      resurectAnim.destroy()
+    const resurrectAnim = this.scene.add.sprite(0, -10, "RESURRECT", "000")
+    resurrectAnim.setDepth(DEPTH.BOOST_FRONT)
+    resurrectAnim.setScale(2, 2)
+    resurrectAnim.anims.play("RESURRECT")
+    resurrectAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      resurrectAnim.destroy()
     })
 
-    this.add(resurectAnim)
+    this.add(resurrectAnim)
   }
 
   displayAnimation(anim: string, args: Partial<AbilityAnimationArgs> = {}) {
@@ -1203,20 +1203,20 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addResurection() {
-    if (!this.resurection) {
-      this.resurection = this.scene.add
-        .sprite(0, -45, "status", "RESURECTION/000.png")
+  addResurrection() {
+    if (!this.resurrection) {
+      this.resurrection = this.scene.add
+        .sprite(0, -45, "status", "RESURRECTION/000.png")
         .setScale(2)
-      this.resurection.anims.play("RESURECTION")
-      this.add(this.resurection)
+      this.resurrection.anims.play("RESURRECTION")
+      this.add(this.resurrection)
     }
   }
 
-  removeResurection() {
-    if (this.resurection) {
-      this.remove(this.resurection, true)
-      this.resurection = undefined
+  removeResurrection() {
+    if (this.resurrection) {
+      this.remove(this.resurrection, true)
+      this.resurrection = undefined
     }
   }
 
