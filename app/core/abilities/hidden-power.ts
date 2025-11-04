@@ -492,7 +492,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== null) {
-        const topSynergy = pickRandomIn(player.synergies.getTopSynergies())
+        const topSynergy = pickRandomIn(player.synergies.getTopSynergies(2))
         const monsOfThatSynergy =
           PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
         const candidates = [
@@ -502,7 +502,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
         const stageLevel = unown.simulation.stageLevel
         const rareWeight = clamp(1.5 - stageLevel / 10, 0, 1)
         const epicWeight = clamp(
-          stageLevel < 10 ? stageLevel / 10 : 2 - stageLevel / 10,
+          stageLevel < 10 ? stageLevel / 10 : 1.5 - stageLevel / 20,
           0,
           1
         )

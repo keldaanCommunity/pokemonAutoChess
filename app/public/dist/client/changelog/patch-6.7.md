@@ -13,11 +13,13 @@
 - Buff Stakataka: Attack 10 → 20
 - Galarian Slowpoke now appears in Poison regions instead of Psychic regions
 - Galarian Yamask now appears in Monster regions instead of Ghost regions
+- Nerf Unown W: now gives you a high rarity Pokémon of one of your two highest synergies. Chances to get an epic have been extended up to level 30.
 
 # Changes to Synergies
 
 # Changes to Items
 
+- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye and Wigglytuff encounters.
 - Protective pads now also protects against fighting synergy throws
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
 

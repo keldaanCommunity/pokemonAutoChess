@@ -31,9 +31,7 @@ import {
   Item,
   ItemComponents,
   MissionOrder,
-  MissionOrders,
-  SynergyGems,
-  SynergyGivenByGem,
+  SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
   WeatherRocks
@@ -816,7 +814,7 @@ function initBuriedItems() {
 
   // 3 synergy gems
   for (let i = 0; i < 3; i++) {
-    buriedItems[i] = pickRandomIn(SynergyGems)
+    buriedItems[i] = pickRandomIn(SynergyGemsBuried)
   }
 
   // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
