@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 import { PatchSummary } from "./patch-summary"
 import { Poster } from "./poster"
 import "./patchnotes.css"
-import { transition } from "d3"
 
 export default function PatchNotes() {
   const { t } = useTranslation()
@@ -87,12 +86,16 @@ export default function PatchNotes() {
       <div className="patchnotes-detail-view">
         <div className="detail-content">
           <div className="detail-poster">
-            <button className="bubbly blue" onClick={handleBackClick}>
-              {t("back")}
-            </button>
             <Poster version={selectedPatch} isDetailed />
           </div>
           <div className="detail-notes">
+            <button
+              className="close-btn"
+              onClick={handleBackClick}
+              style={{ float: "right", marginLeft: "2em" }}
+            >
+              🗙
+            </button>
             <PatchSummary version={selectedPatch} />
           </div>
         </div>

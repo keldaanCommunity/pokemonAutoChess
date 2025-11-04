@@ -57,11 +57,15 @@
   align-items: stretch;
 }
 
-.detail-notes {
+.detail-poster {
   flex: 1;
+}
+
+.detail-notes {
+  flex: 2;
   overflow-y: auto;
   background: var(--color-bg-secondary);
   border: var(--border-thick);
   border-radius: 12px;
-  padding: 0.5em 1em;
+  padding: 0.5em 0.5em 0.5em 1em;
 }
