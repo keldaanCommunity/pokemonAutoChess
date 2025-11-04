@@ -2681,11 +2681,11 @@
 	"errors": {
 		"USER_INACTIVE": "Você foi expulso por inatividade a fim de economizar recursos do servidor",
 		"USER_KICKED": "Você foi expulso desta sala",
-		"USER_NOT_WHITELISTED": "Este jogo está limitado a uma lista determinada de jogadores",
 		"USER_BANNED": "Sua conta foi banida",
 		"USER_DELETED": "Sua conta foi permanentemente excluída",
 		"USER_RANK_TOO_LOW": "Seu ranque não é suficiente para participar nessa sala",
 		"USER_NOT_AUTHENTICATED": "Por favor, faça login novamente",
+		"USER_NOT_WHITELISTED": "Este jogo está limitado a uma lista determinada de jogadores",
 		"USER_TIMEOUT": "Você recentemente deixou um jogo antes do fim, então é necessário aguardar 5 minutos antes de entrar em um novo jogo.",
 		"USER_IN_ANOTHER_GAME": "Você já esta jogando outro partida, volte a página inicial e reconecte",
 		"ROOM_FULL": "Sala cheia",
