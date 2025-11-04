@@ -2732,7 +2732,7 @@
 		"SMELLY_CLAY": "Counts for 3 towards SMOG. Under SMOG, your team gains 5% accuracy and has 15% less chance to get POISONNED.",
 		"ODD_KEYSTONE": "Counts for 3 towards MURKY. Under MURKY, your team gains 10 LUCK and -10% negative status duration, and resist to CURSE 1 second longer.",
 		"NORMAL_GEM": "+1 to NORMAL synergy",
-		"GRASS GEM": "+1 to GRASS synergy",
+		"GRASS_GEM": "+1 to GRASS synergy",
 		"FIRE_GEM": "+1 to FIRE synergy",
 		"WATER_GEM": "+1 to WATER synergy",
 		"ELECTRIC_GEM": "+1 to ELECTRIC synergy",
