@@ -3593,7 +3593,7 @@
 	"game_full": "방이 가득 찼습니다.",
 	"game_already_started": "게임이 이미 시작했습니다.",
 	"min_rank_not_reached": "이 랭크매치를 하기 위해선 랭크가 더 높아야 합니다.",
-	"max_rank_not_reached": "이 랭크매치 방은 보다 더 낮은 레이팅의 사람들을 위한 방입니다.",	
+	"max_rank_not_reached": "이 랭크매치 방은 보다 더 낮은 레이팅의 사람들을 위한 방입니다.",
 	"npc_dialog": {
 		"welcome": "어서와요!",
 		"tell_price": "각각 {{price}}골드입니다!",
@@ -3687,11 +3687,11 @@
 	"errors": {
 		"USER_INACTIVE": "장기간 미활동으로 인해 해당 서버에서 잠시 추방되었습니다.",
 		"USER_KICKED": "이 경기에서 추방당했습니다.",
-		"USER_NOT_WHITELISTED": "이 게임은 허용된 플레이어만 참가가능합니다.",
 		"USER_BANNED": "당신은 밴 되었습니다",
 		"USER_DELETED": "당신의 계정은 영구적으로 삭제되었습니다.",
 		"USER_RANK_TOO_LOW": "이 방에 참여하기에는 당신의 랭크가 너무 낮습니다.",
 		"USER_NOT_AUTHENTICATED": "다시 로그인해주세요",
+		"USER_NOT_WHITELISTED": "이 게임은 허용된 플레이어만 참가가능합니다.",
 		"USER_TIMEOUT": "최근 게임이 종료되기 전에 떠나 새로운 게임에 참여하기 위해 5분간 대기해야 합니다.",
 		"USER_IN_ANOTHER_GAME": "이미 다른 게임을 플레이 중입니다. 로비로 돌아가 재접속 해주세요.",
 		"ROOM_FULL": "방이 꽉 찼습니다",
