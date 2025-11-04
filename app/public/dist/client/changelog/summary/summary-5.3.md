@@ -31,19 +31,15 @@ Each Pokémon in shop has an additional 5% chance to share a common synergy with
 
 ## Newcomers in 5.3
 
-![Stonjourner](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0874/Normal.png)
-![Hisuian Sneasel](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0215/0001/Normal.png)
-![TyHisuian Sneaslerrunt](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0903/Normal.png)
-![Tyrunt](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0696/Normal.png)
-![Tyrantrum](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0697/Normal.png)
-![Klefki](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0707/Normal.png)
-![Rufflet](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0627/Normal.png)
-![Braviary](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0628/Normal.png)
-![Heatmor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0631/Normal.png)
-![Hawlucha](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0701/Normal.png)
-![Mienfoo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0619/Normal.png)
-![Mienshao](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0620/Normal.png)
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1264453620821393481) !
+![Stonjourner](/assets/portraits/0874/Normal.png)
+![Hisuian Sneasel](/assets/portraits/0215/0001/Normal.png)
+![TyHisuian Sneaslerrunt](/assets/portraits/0903/Normal.png)
+![Tyrunt](/assets/portraits/0696/Normal.png)
+![Tyrantrum](/assets/portraits/0697/Normal.png)
+![Klefki](/assets/portraits/0707/Normal.png)
+![Rufflet](/assets/portraits/0627/Normal.png)
+![Braviary](/assets/portraits/0628/Normal.png)
+![Heatmor](/assets/portraits/0631/Normal.png)
+![Hawlucha](/assets/portraits/0701/Normal.png)
+![Mienfoo](/assets/portraits/0619/Normal.png)
+![Mienshao](/assets/portraits/0620/Normal.png)

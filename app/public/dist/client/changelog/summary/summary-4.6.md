@@ -8,21 +8,17 @@
 
 ## Newcomers in 4.6
 
-![Sableye](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0302/Normal.png)
-![Pheromosa](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0795/Normal.png)
-![Dracovish](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0882/Normal.png)
-![Corsola](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0222/Normal.png)
-![Galar Gorsola](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0222/0001/Normal.png)
-![Cursola](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0864/Normal.png)
-![Gimmighoul](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0999/Normal.png)
-![Gholdengo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/1000/Normal.png)
-![Phantump](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0708/Normal.png)
-![Trevenant](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0709/Normal.png)
+![Sableye](/assets/portraits/0302/Normal.png)
+![Pheromosa](/assets/portraits/0795/Normal.png)
+![Dracovish](/assets/portraits/0882/Normal.png)
+![Corsola](/assets/portraits/0222/Normal.png)
+![Galar Gorsola](/assets/portraits/0222/0001/Normal.png)
+![Cursola](/assets/portraits/0864/Normal.png)
+![Gimmighoul](/assets/portraits/0999/Normal.png)
+![Gholdengo](/assets/portraits/1000/Normal.png)
+![Phantump](/assets/portraits/0708/Normal.png)
+![Trevenant](/assets/portraits/0709/Normal.png)
 
 ## Golden Eggs
 
 Baby 7 synergy now gives Golden Eggs, which can be sold for 10 gold. High risk, high reward ! Light and ground also have been slightly reworked in addition to other synergies buff/nerfs.
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1193479355922395217) !

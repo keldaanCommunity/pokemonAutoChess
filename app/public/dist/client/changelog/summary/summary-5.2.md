@@ -31,18 +31,14 @@ Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during
 
 ## Newcomers in 5.2
 
-![Grubbin](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0736/Normal.png)
-![Charjabug](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0737/Normal.png)
-![Vikavolt](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0738/Normal.png)
-![Shellos West Sea](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0422/Normal.png)
-![Gastrodon West Sea](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0423/Normal.png)
-![Shellos East Sea](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0422/0001/Normal.png)
-![Gastrodon East Sea](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0423/0001/Normal.png)
-![Munna](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0517/Normal.png)
-![Musharna](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0518/Normal.png)
-![Kleavor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0900/Normal.png)
-![Rotom Drone](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0479/0008/Normal.png)
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1254687621486088273) !
+![Grubbin](/assets/portraits/0736/Normal.png)
+![Charjabug](/assets/portraits/0737/Normal.png)
+![Vikavolt](/assets/portraits/0738/Normal.png)
+![Shellos West Sea](/assets/portraits/0422/Normal.png)
+![Gastrodon West Sea](/assets/portraits/0423/Normal.png)
+![Shellos East Sea](/assets/portraits/0422/0001/Normal.png)
+![Gastrodon East Sea](/assets/portraits/0423/0001/Normal.png)
+![Munna](/assets/portraits/0517/Normal.png)
+![Musharna](/assets/portraits/0518/Normal.png)
+![Kleavor](/assets/portraits/0900/Normal.png)
+![Rotom Drone](/assets/portraits/0479/0008/Normal.png)

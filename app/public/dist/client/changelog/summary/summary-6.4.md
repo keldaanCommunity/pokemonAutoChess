@@ -15,18 +15,18 @@ We are also making changes to the game modes. The Quick Play mode is now renamed
 
 ## Newcomers found on the road
 
-![Celesteela](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0797/Normal.png)
-![Venipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0543/Normal.png)
-![Whirlipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0544/Normal.png)
-![Scolipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0545/Normal.png)
-![Meltan](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0808/Normal.png)
-![Varoom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0965/Normal.png)
-![Revavroom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0966/Normal.png)
-![Ledyba](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0165/Normal.png)
-![Ledian](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0166/Normal.png)
-![Emolga](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0587/Normal.png)
-![Taillow](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0276/Normal.png)
-![Swellow](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0277/Normal.png)
+![Celesteela](/assets/portraits/0797/Normal.png)
+![Venipede](/assets/portraits/0543/Normal.png)
+![Whirlipede](/assets/portraits/0544/Normal.png)
+![Scolipede](/assets/portraits/0545/Normal.png)
+![Meltan](/assets/portraits/0808/Normal.png)
+![Varoom](/assets/portraits/0965/Normal.png)
+![Revavroom](/assets/portraits/0966/Normal.png)
+![Ledyba](/assets/portraits/0165/Normal.png)
+![Ledian](/assets/portraits/0166/Normal.png)
+![Emolga](/assets/portraits/0587/Normal.png)
+![Taillow](/assets/portraits/0276/Normal.png)
+![Swellow](/assets/portraits/0277/Normal.png)
 
 ## New parts in the garage
 
@@ -49,7 +49,3 @@ Several craftable items have been changed or changed recipe:
 ![Deep Sea Tooth](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/DEEP_SEA_TOOTH.png) Mana Scarf is now Deep Sea Tooth, a more physical attack-oriented version of the item valuing KOs.
 
 ![Air Balloon](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/AIR_BALLOON.png) Swift Wing is renamed to Air Balloon, which now makes the holder levitate, granting immunity to board effects.
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1401978138384400454)

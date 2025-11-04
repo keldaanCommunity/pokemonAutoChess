@@ -1,38 +1,26 @@
-import { marked } from "marked"
-import React, { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
+import React from "react"
 import "./poster.css"
 
-export function Poster(props: { version: string }) {
-  const { t } = useTranslation()
-  const [patchContent, setPatchContent] = useState<string>()
+interface PosterProps {
+  version: string
+  onClick?: () => void
+  isDetailed?: boolean
+}
 
-  useEffect(() => {
-    fetch(`/changelog/summary/summary-${props.version}.md`)
-      .then((res) => res.text())
-      .then((md) => marked.parse(md))
-      .then((parsed) => setPatchContent(parsed))
-  }, [])
-
+export function Poster({ version, onClick, isDetailed }: PosterProps) {
   return (
     <div
-      className="poster"
-      onClick={(e) => e.currentTarget.classList.toggle("flipped")}
+      className={`poster ${isDetailed ? "poster-detailed" : ""}`}
+      onClick={onClick}
+      style={{
+        viewTransitionName: `poster-${version.replace(/\./g, "-")}`
+      }}
     >
-      <div className="front">
-        <img
-          src={`/assets/posters/${props.version}.png`}
-          alt={props.version}
-          loading="lazy"
-        />
-      </div>
-      <div className="back">
-        {patchContent ? (
-          <div dangerouslySetInnerHTML={{ __html: patchContent }}></div>
-        ) : (
-          <p>{t("loading")}</p>
-        )}
-      </div>
+      <img
+        src={`/assets/posters/${version}.png`}
+        alt={`Patch ${version} poster`}
+        loading="lazy"
+      />
     </div>
   )
 }

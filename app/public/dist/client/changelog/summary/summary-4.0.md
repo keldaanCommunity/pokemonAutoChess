@@ -15,18 +15,14 @@
 
 ## New Pokémons emerge from the portal
 
-![Gligar](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0207/Normal.png)
-![Gliscor](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0472/Normal.png)
-![Shellder](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0090/Normal.png)
-![Cloyster](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0091/Normal.png)
-![Sentret](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0161/Normal.png)
-![Furret](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0162/Normal.png)
-![Spectrier](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0897/Normal.png)
+![Gligar](/assets/portraits/0207/Normal.png)
+![Gliscor](/assets/portraits/0472/Normal.png)
+![Shellder](/assets/portraits/0090/Normal.png)
+![Cloyster](/assets/portraits/0091/Normal.png)
+![Sentret](/assets/portraits/0161/Normal.png)
+![Furret](/assets/portraits/0162/Normal.png)
+![Spectrier](/assets/portraits/0897/Normal.png)
 
 ## Fairy charm
 
 Fairy rework: splash damage has no longer an area of effect: it only deals damage to the attacker/target. If the target is not at range, it is charmed for 2 seconds
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1132756077662961666)

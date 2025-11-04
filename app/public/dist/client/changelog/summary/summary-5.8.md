@@ -4,20 +4,20 @@
 
 ## Newcomers in 5.8
 
-![Galarian Articuno](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0144/0001/Normal.png)
-![Galarian Zapdos](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0145/0001/Normal.png)
-![Galarian Moltres](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0146/0001/Normal.png)
-![Krabby](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0098/Normal.png)
-![Kingler](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0099/Normal.png)
-![Zygarde (10% Form)](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0718/0002/Normal.png)
-![Zygarde (50% Form)](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0718/Normal.png)
-![Zygarde (100% Form)](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0718/0001/Normal.png)
-![Sizzlipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0850/Normal.png)
-![Centiskorch](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0851/Normal.png)
-![Stufful](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0759/Normal.png)
-![Bewear](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0760/Normal.png)
-![Glimmet](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0969/Normal.png)
-![Glimmora](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0970/Normal.png)
+![Galarian Articuno](/assets/portraits/0144/0001/Normal.png)
+![Galarian Zapdos](/assets/portraits/0145/0001/Normal.png)
+![Galarian Moltres](/assets/portraits/0146/0001/Normal.png)
+![Krabby](/assets/portraits/0098/Normal.png)
+![Kingler](/assets/portraits/0099/Normal.png)
+![Zygarde (10% Form)](/assets/portraits/0718/0002/Normal.png)
+![Zygarde (50% Form)](/assets/portraits/0718/Normal.png)
+![Zygarde (100% Form)](/assets/portraits/0718/0001/Normal.png)
+![Sizzlipede](/assets/portraits/0850/Normal.png)
+![Centiskorch](/assets/portraits/0851/Normal.png)
+![Stufful](/assets/portraits/0759/Normal.png)
+![Bewear](/assets/portraits/0760/Normal.png)
+![Glimmet](/assets/portraits/0969/Normal.png)
+![Glimmora](/assets/portraits/0970/Normal.png)
 
 Gen. 1 is now complete !
 
@@ -28,7 +28,3 @@ With player attendance having stabilized, we can reactivate the bots and start t
 ##  PAC on Gameboy ?
 
 Play the gameboy Pokemon autobattler prototype by unlocking the Gameboy gadget at level 30
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1312746495501406259) !
