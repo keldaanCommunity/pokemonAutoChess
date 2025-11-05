@@ -1,9 +1,8 @@
 /* Pokemon sprites not controlled by any player, with custom onPointer */
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { Emotion } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
-import { clamp, min } from "../../../../utils/number"
-import { preference } from "../../preferences"
 import GameScene from "../scenes/game-scene"
 import { GameDialog } from "./game-dialog"
 import PokemonSprite from "./pokemon"
@@ -23,6 +22,7 @@ export default class PokemonSpecial extends PokemonSprite {
     animation = PokemonActionState.IDLE,
     dialog,
     dialogTitle,
+    emotion,
     shiny
   }: {
     scene: GameScene
@@ -33,13 +33,14 @@ export default class PokemonSpecial extends PokemonSprite {
     animation?: PokemonActionState
     dialog?: string
     dialogTitle?: string
+    emotion?: Emotion
     shiny?: boolean
   }) {
     super(
       scene,
       x + 24,
       y + 24,
-      PokemonFactory.createPokemonFromName(name, { shiny }),
+      PokemonFactory.createPokemonFromName(name, { emotion, shiny }),
       "environment",
       false,
       false
@@ -74,36 +75,20 @@ export default class PokemonSpecial extends PokemonSprite {
         s.lastPokemonDetail = null
       }
 
-      this.detail = new GameDialog(this.scene, this.dialog, this.dialogTitle)
-      this.detail.setPosition(
-        this.detail.width / 2 + 40,
-        min(0)(-this.detail.height / 2 - 40)
-      )
-
+      this.detail = new GameDialog({
+        scene: this.scene,
+        dialog: this.dialog,
+        dialogTitle: this.dialogTitle,
+        portrait: {
+          index: this.pokemon.index,
+          shiny: this.pokemon.shiny,
+          emotion: this.pokemon.emotion
+        }
+      })
+      this.updateTooltipPosition()
       this.detail.removeInteractive()
       this.add(this.detail)
       s.lastPokemonDetail = this
-    }
-  }
-
-  updateTooltipPosition() {
-    if (this.detail) {
-      if (this.input && preference("showDetailsOnHover")) {
-        this.detail.setPosition(this.input.localX, this.input.localY)
-        return
-      }
-
-      const absX = this.x + this.detail.width / 2 + 40
-      const minX = this.detail.width / 2
-      const maxX = window.innerWidth - this.detail.width / 2
-      const absY = this.y - this.detail.height / 2 - 40
-      const minY = this.detail.height / 2
-      const maxY = window.innerHeight - this.detail.height / 2
-      const [x, y] = [
-        clamp(absX, minX, maxX) - this.x,
-        clamp(absY, minY, maxY) - this.y
-      ]
-      this.detail.setPosition(x, y)
     }
   }
 }

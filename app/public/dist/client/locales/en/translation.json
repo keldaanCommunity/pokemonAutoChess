@@ -3816,6 +3816,7 @@
 	"eligible_elo_hint": "✔ This game is eligible for Elo gain/loss.",
 	"average_elo": "Average Elo",
 	"GLHF": "GLHF",
+	"thanks_for_playing": "Thanks for playing our game !",
 	"not_eligible_elo_hint": "❌ Games with bots only are not eligible for Elo gain/loss.",
 	"add_bot_or_wait_hint": "Add bots or wait for more players to join your room",
 	"wait_for_players_hint": "Wait for more players to join your room",
