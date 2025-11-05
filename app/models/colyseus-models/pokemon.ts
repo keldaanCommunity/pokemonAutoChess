@@ -61,6 +61,7 @@ import Player from "./player"
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
   @type("string") name: Pkm
+  @type("string") secondaryName: Pkm
   @type({ set: "string" }) types = new SetSchema<Synergy>()
   @type("string") rarity: Rarity = Rarity.SPECIAL
   @type("string") index: string
@@ -106,6 +107,7 @@ export class Pokemon extends Schema implements IPokemon {
     super()
     this.id = nanoid()
     this.name = name
+    this.secondaryName = Pkm.DEFAULT
     this.index = PkmIndex[name]
     this.shiny = shiny
     this.emotion = emotion

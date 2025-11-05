@@ -291,6 +291,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       )
       player.board.delete(pokemon.id)
       substitute.id = pokemon.id
+      substitute.secondaryName = pokemon.name
       substitute.positionX = pokemon.positionX
       substitute.positionY = pokemon.positionY
       player.board.set(substitute.id, substitute)

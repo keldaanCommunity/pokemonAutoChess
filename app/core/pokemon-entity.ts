@@ -100,6 +100,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("int8") targetY = -1
   @type("string") rarity: Rarity
   @type("string") name: Pkm
+  @type("string") secondaryName: Pkm
   @type({ set: "string" }) effects = new SetSchema<EffectEnum>()
   @type({ set: "string" }) items = new SetSchema<Item>()
   @type({ set: "string" }) types = new SetSchema<Synergy>()
@@ -160,6 +161,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.positionY = positionY
     this.index = pokemon.index
     this.name = pokemon.name
+    this.secondaryName = Pkm.DEFAULT
     this.action = PokemonActionState.WALK
     this.orientation = Orientation.DOWNLEFT
     this.baseAtk = pokemon.atk

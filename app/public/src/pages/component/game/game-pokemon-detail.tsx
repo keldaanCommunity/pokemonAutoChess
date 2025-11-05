@@ -154,7 +154,7 @@ export function GamePokemonDetail(props: {
         )}
       <div className="game-pokemon-detail-entry">
         <p className="game-pokemon-detail-entry-name">
-          {t(`pkm.${pokemon.name}`)}
+          {pokemon.secondaryName === Pkm.DEFAULT ? (t(`pkm.${pokemon.name}`)) : (t(`pkm.${pokemon.name}`) + " (" + t(`pkm.${pokemon.secondaryName}`) + ")")}
         </p>
         <p
           className="game-pokemon-detail-entry-rarity"

@@ -325,6 +325,7 @@ export interface IPlayer {
 export interface IPokemon {
   id: string
   name: Pkm
+  secondaryName: Pkm
   types: SetSchema<Synergy>
   rarity: Rarity
   index: string
@@ -553,6 +554,7 @@ export interface IPokemonEntity {
   targetEntityId: string
   rarity: Rarity
   name: Pkm
+  secondaryName: Pkm
   effects: SetSchema<EffectEnum>
   items: SetSchema<Item>
   types: SetSchema<Synergy>
