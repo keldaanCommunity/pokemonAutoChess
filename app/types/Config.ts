@@ -1,6 +1,6 @@
 import { Emotion } from "."
 import { EloRank } from "./enum/EloRank"
-import { AttackType, Rarity } from "./enum/Game"
+import { Rarity } from "./enum/Game"
 import { FishingRod, Item } from "./enum/Item"
 import { Pkm, PkmDuo, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"

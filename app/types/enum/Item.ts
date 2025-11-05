@@ -92,6 +92,7 @@ export enum Item {
   HARD_STONE = "HARD_STONE",
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
+  TERRAIN_EXTENDER = "TERRAIN_EXTENDER",
   POKERUS_VIAL = "POKERUS_VIAL",
   ROTOM_PHONE = "ROTOM_PHONE",
   SILK_SCARF = "SILK_SCARF",
@@ -129,7 +130,7 @@ export enum Item {
   SMELLY_CLAY = "SMELLY_CLAY",
   ODD_KEYSTONE = "ODD_KEYSTONE",
   NORMAL_GEM = "NORMAL_GEM",
-  GRASS_GEM = "GRASS_GEM",  
+  GRASS_GEM = "GRASS_GEM",
   FIRE_GEM = "FIRE_GEM",
   WATER_GEM = "WATER_GEM",
   ELECTRIC_GEM = "ELECTRIC_GEM",
@@ -460,7 +461,7 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const ArtificialItems: Item[] = [
+export const Tools: Item[] = [
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.HARD_STONE,
@@ -481,8 +482,25 @@ export const ArtificialItems: Item[] = [
   Item.MAGMARIZER,
   Item.POKERUS_VIAL,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE
-]
+  Item.EXP_SHARE,
+  Item.TERRAIN_EXTENDER
+] as const
+
+export type Tool = (typeof Tools)[number]
+
+export const ArtificialItems: Tool[] = [
+  Item.TOXIC_ORB,
+  Item.METAL_COAT,
+  Item.MACHO_BRACE,
+  Item.EXPLORER_KIT,
+  Item.ROTOM_PHONE,
+  Item.TINY_MUSHROOM,
+  Item.ELECTIRIZER,
+  Item.POKERUS_VIAL,
+  Item.MAX_ELIXIR,
+  Item.EXP_SHARE,
+  Item.TERRAIN_EXTENDER
+] as const
 
 export const ShinyItems: Item[] = [
   Item.DYNAMAX_BAND,
@@ -595,6 +613,21 @@ export const SynergyGemsBuried: SynergyGem[] = [
   Item.GHOST_GEM
 ] as const
 
+export const ToolsBuried: Tool[] = [
+  Item.TOXIC_ORB,
+  Item.HARD_STONE,
+  Item.METAL_COAT,
+  Item.EXPLORER_KIT,
+  Item.ROTOM_PHONE,
+  Item.SILK_SCARF,
+  Item.TINY_MUSHROOM,
+  Item.INCENSE,
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
+  Item.MAX_ELIXIR,
+  Item.EXP_SHARE
+]
+
 export const MemoryDiscs = [
   Item.FIRE_MEMORY,
   Item.FOSSIL_MEMORY,
@@ -668,6 +701,8 @@ export const SynergyItems = [
   Item.METAL_COAT,
   Item.AIR_BALLOON,
   Item.HARD_STONE,
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
   Item.EXPLORER_KIT,
   Item.ROTOM_PHONE,
   Item.SHINY_STONE,
@@ -698,6 +733,8 @@ export const SynergyGivenByItem: Record<
   [Item.TOXIC_ORB]: Synergy.POISON,
   [Item.METRONOME]: Synergy.SOUND,
   [Item.METAL_COAT]: Synergy.STEEL,
+  [Item.ELECTIRIZER]: Synergy.ELECTRIC,
+  [Item.MAGMARIZER]: Synergy.FIRE,
   [Item.AIR_BALLOON]: Synergy.FLYING,
   [Item.HARD_STONE]: Synergy.ROCK,
   [Item.EXPLORER_KIT]: Synergy.GROUND,
@@ -993,6 +1030,6 @@ export const ConsumableItems: Item[] = [
 export const RemovableItems: Item[] = [
   Item.CHEF_HAT,
   Item.TRASH,
-  ...ArtificialItems,
+  ...Tools,
   ...MemoryDiscs
 ]

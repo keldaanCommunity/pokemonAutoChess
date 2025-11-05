@@ -1003,7 +1003,7 @@ export const PokemonAnimations: {
   },
   [Pkm.BELDUM]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Swing,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.PSYCHIC_MELEE,
     hitSprite: HitSprite.PSYCHIC_HIT

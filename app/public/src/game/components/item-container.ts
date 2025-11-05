@@ -1,6 +1,5 @@
 import { GameObjects } from "phaser"
 import {
-  ArtificialItems,
   Berries,
   Dishes,
   HMs,
@@ -8,6 +7,7 @@ import {
   ShinyItems,
   SpecialItems,
   TMs,
+  Tools,
   WeatherRocks
 } from "../../../../types/enum/Item"
 import { getGameScene } from "../../pages/game"
@@ -77,7 +77,7 @@ export default class ItemContainer extends DraggableObject {
   get cellIndex() {
     if (ShinyItems.includes(this.name)) return 1
     if (Berries.includes(this.name)) return 2
-    if (ArtificialItems.includes(this.name)) return 3
+    if (Tools.includes(this.name)) return 3
     if (WeatherRocks.includes(this.name)) return 4
     if (SpecialItems.includes(this.name)) return 5
     if (TMs.includes(this.name) || HMs.includes(this.name)) return 6

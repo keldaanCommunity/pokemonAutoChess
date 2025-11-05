@@ -34,6 +34,7 @@ import {
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
+  ToolsBuried,
   WeatherRocks
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -797,20 +798,6 @@ function pickRandomTMs() {
 
 function initBuriedItems() {
   const buriedItems: (Item | null)[] = new Array(24).fill(null)
-  const possibleArtificialBuriedItems = [
-    Item.TOXIC_ORB,
-    Item.HARD_STONE,
-    Item.METAL_COAT,
-    Item.EXPLORER_KIT,
-    Item.ROTOM_PHONE,
-    Item.SILK_SCARF,
-    Item.TINY_MUSHROOM,
-    Item.INCENSE,
-    Item.ELECTIRIZER,
-    Item.MAGMARIZER,
-    Item.MAX_ELIXIR,
-    Item.EXP_SHARE
-  ]
 
   // 3 synergy gems
   for (let i = 0; i < 3; i++) {
@@ -828,9 +815,9 @@ function initBuriedItems() {
     ])
   }
 
-  // 1 precious (artificial item, treasure box, big nugget)
+  // 1 precious (tool, treasure box, big nugget)
   buriedItems[7] = chance(1 / 2)
-    ? pickRandomIn(possibleArtificialBuriedItems)
+    ? pickRandomIn(ToolsBuried)
     : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
 
   shuffleArray(buriedItems)

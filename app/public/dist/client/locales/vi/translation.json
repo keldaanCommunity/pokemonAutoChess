@@ -1476,7 +1476,7 @@
 	"level": "Cấp độ",
 	"craftable_items_description": "Kết hợp 2 items để hợp thành items mạnh hơn",
 	"berries_description": "Khi bộ GRASS có hiệu lực, bạn có thể thu thập berries bằng cách chọn vào cây berry ở gần Avatar của bạn",
-	"artificial_items_description": "bộ ARTIFICIAL sẽ cho bạn exclusive items  khi được kích hoạt. Ba trong số các items đó sẽ được họn ngẫu nhiên cho các Player vào đầu game",
+	"tools_description": "bộ ARTIFICIAL sẽ cho bạn exclusive items  khi được kích hoạt. Ba trong số các items đó sẽ được họn ngẫu nhiên cho các Player vào đầu game",
 	"weather_rocks_description": "Các Weather rock có thể tìm thấy sau khi chiến đấu dưới một loại thời tiết nhất định với bộ ROCK đang được kích hoạt, và cung cấp các hiệu ứng tăng cường cho đội của bạn khi loại thời tiết này đang hoạt động. Các hiệu ứng của chúng có thể được cộng dồn.",
 	"special_items_description": "Những vật phẩm này là độc quyền cho một số Pokémon và không thể thu được bằng cách khác.",
 	"shiny_items_description": "Nếu bạn đủ may mắn để chiến đấu với một đội shiny trong các vòng PvE hoặc tìm thấy một quả trứng vàng, bạn sẽ nhận được một vật phẩm shiny làm phần thưởng.",

@@ -22,7 +22,6 @@ import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
 import {
-  ArtificialItems,
   CraftableItems,
   Flavors,
   Item,
@@ -32,7 +31,8 @@ import {
   OgerponMasks,
   RemovableItems,
   SynergyGivenByItem,
-  SynergyItems
+  SynergyItems,
+  Tools
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -17345,7 +17345,7 @@ export class Duraludon extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.ARCHALUDON
-  evolutionRule = new ItemEvolutionRule(ArtificialItems)
+  evolutionRule = new ItemEvolutionRule(Tools)
   hp = 180
   atk = 18
   speed = 52

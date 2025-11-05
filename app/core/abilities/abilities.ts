@@ -12,7 +12,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Rarity, Team } from "../../types/enum/Game"
-import { ArtificialItems, Berries, Item } from "../../types/enum/Item"
+import { Berries, Item, Tools } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -7855,7 +7855,7 @@ export class PoltergeistStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
     target.items.forEach(
-      (item) => (damage += ArtificialItems.includes(item) ? 40 : 20)
+      (item) => (damage += Tools.includes(item) ? 40 : 20)
     )
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
