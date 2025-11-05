@@ -23,7 +23,7 @@
 
 .patchnotes .modal-body blockquote {
   float: right;
-  color: gray;
+  color: #ccc;
   margin: 0;
 }
 
