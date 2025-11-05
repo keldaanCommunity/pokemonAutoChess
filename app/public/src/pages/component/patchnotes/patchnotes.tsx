@@ -43,18 +43,6 @@ export default function PatchNotes() {
 
   const [selectedPatch, setSelectedPatch] = useState<string | null>(null)
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && selectedPatch) {
-        handleBackClick()
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [selectedPatch])
-
   const viewTransition = (transition: () => void) => {
     // Use View Transition API if available
     if (
