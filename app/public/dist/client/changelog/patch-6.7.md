@@ -54,3 +54,4 @@
 - Gameboy gadget level requirement decreased to 20
 - Pokeguessr gadget level requirement decreased to 30
 - Bot builder gadget level requirement increased to 40
+- Added bench management to Bot builder
