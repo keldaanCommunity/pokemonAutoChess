@@ -1676,7 +1676,7 @@
 		"HEART_SWAP": "The user steals AP and SPE_DEF buffs from their target then inflicts [100,SP] SPECIAL. The user's status conditions are passed on to the target and healed for the user.",
 		"THIEF": "Deal [15,30,60,SP] SPECIAL and remove all items from the target, stealing as many as the user can carry.",
 		"STUN_SPORE": "Deal [15,30,60,SP] SPECIAL to the target and all enemy Pokémon ADJACENT to it and inflict PARALYSIS for 5 seconds.",
-		"METEOR_MASH": "Deal [15,30,60,SP] SPECIAL 3 times to the target and increase the user's ATK by [2,SP].",
+		"METEOR_MASH": "Deal 3 times [100,SP]% of ATK as SPECIAL to the target (4 times if user is in PSYCHIC_FIELD) then increase the user's ATK by 2 on each hit.",
 		"HURRICANE": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon behind the target and inflict them with PARALYSIS for 3 seconds.",
 		"HEAL_BLOCK": "Deal [20,40,80,SP] SPECIAL and WOUND all ADJACENT enemy Pokémon for 5 seconds.",
 		"ROAR_OF_TIME": "Grant RESURRECTION and [20,SP] SPEED to the STRONGEST allied Pokémon.",

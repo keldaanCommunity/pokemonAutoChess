@@ -3155,7 +3155,7 @@ export class DischargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25,50,100][pokemon.stars - 1] ?? 100
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
@@ -3182,19 +3182,21 @@ export class ShockwaveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25,50,100][pokemon.stars - 1] ?? 100
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const range = 2 + (pokemon.status.electricField ? 1 : 0)
-    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, range).forEach((cell) => {
-      if (cell.value && cell.value.team != pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, range)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }
 
@@ -4384,9 +4386,8 @@ export class MeteorMashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const nbHits = 3
-    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    pokemon.addAttack(2, pokemon, 1, crit)
+    const nbHits = 3 + (pokemon.status.psychicField ? 1 : 0)
+    const damage = pokemon.atk
     for (let n = 0; n < nbHits; n++) {
       target.handleSpecialDamage(
         damage,
@@ -4395,6 +4396,7 @@ export class MeteorMashStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
+      pokemon.addAttack(2, pokemon, 0, false)
     }
   }
 }
@@ -7864,9 +7866,7 @@ export class PoltergeistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    target.items.forEach(
-      (item) => (damage += Tools.includes(item) ? 40 : 20)
-    )
+    target.items.forEach((item) => (damage += Tools.includes(item) ? 40 : 20))
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

@@ -1674,7 +1674,7 @@
 		"HEART_SWAP": "Le lanceur vole les bonus de AP et de SPE_DEF de sa cible, puis inflige [100,SP] SPECIAL. Les conditions de statut du lanceur sont transférées à la cible et soignées pour le lanceur.",
 		"THIEF": "Inflige [15,30,60,SP] SPECIAL et retire tous les objets tenus de sa cible. La lanceur lui vole autant d'objets qu'il peut tenir (maximum 3).",
 		"STUN_SPORE": "Inflige [15,30,60,SP] SPECIAL et PARALYSIS pendant 5 secondes à la cible et à tous les ennemis ADJACENT.",
-		"METEOR_MASH": "Inflige 3 fois [15,30,60,SP] SPECIAL à la cible et augmente l'ATK du lanceur de [2,SP].",
+		"METEOR_MASH": "Inflige 3 fois [100,SP]% de l'ATK en tant que SPECIAL à la cible (4 fois si le lanceur est dans un PSYCHIC_FIELD) et augmente l'ATK du lanceur de 2 à chaque coup porté.",
 		"HURRICANE": "Inflige [25,50,100,SP] SPECIAL et PARALYSIS pendant 3 secondes à tous les ennemis derrière la cible (en ligne droite).",
 		"HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL et WOUND pendant 5 secondes sur la cible et à tous les ennemis ADJACENT.",
 		"ROAR_OF_TIME": "Donne RESURRECTION et [20,SP] SPEED à votre Pokémon allié le STRONGEST.",

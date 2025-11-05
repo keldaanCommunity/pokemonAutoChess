@@ -1584,7 +1584,6 @@
 		"TAKE_HEART": "Der Anwender verwendet Tapferkeit, um seine Statusbeschwerden zu heilen und seine ATK um [8,SP] wie auch SPE_DEF um [8,SP] zu erhöhen.",
 		"THIEF": "Stiehlt alle Gegenstände des Ziels, die der Träger tragen kann, und verursacht [15,30,60,SP] SPECIAL.",
 		"STUN_SPORE": "Verursacht [15,30,60,SP] SPECIAL und fügt benachbarten Feinden 5 Sekunden lang PARALYSIS zu",
-		"METEOR_MASH": "Verursacht dem Ziel dreimal [15,30,60,SP] SPECIAL und verstärkt die ATK des Benutzers um [2,SP]",
 		"HURRICANE": "Flächenangriff, der [25,50,100,SP] SPECIAL in einer Linie hinter dem Ziel verursacht und 3 Sekunden lang PARALYSIS bewirkt",
 		"HEAL_BLOCK": "Füge allen umstehenden Feinden [10,20,40,SP] SPECIAL und 5 Sekunden lang WOUND zu",
 		"ROAR_OF_TIME": "Gib deinem stärksten Verbündeten RESURRECTION und [20,SP] SPEED (die meisten Gegenstände > die meisten Sterne > die seltensten)",

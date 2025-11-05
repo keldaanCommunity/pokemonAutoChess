@@ -1292,7 +1292,6 @@
 		"TAKE_HEART": "O usuário usa bravura para curar seus status negativos e aumentar seu ATK em [8,SP] e SPE_DEF em [8,SP]",
 		"THIEF": "Rouba todos os itens do alvo que o portador pode carregar e distribui [15,30,60,SP] SPECIAL",
 		"STUN_SPORE": "Inflige [15,30,60,SP] SPECIAL e inflige PARALYSIS por 5 segundos a inimigos adjacentes",
-		"METEOR_MASH": "Inflige 3 vezes [15,30,60,SP] SPECIAL ao alvo e aumente o ATK do usuário em [2,SP]",
 		"HURRICANE": "Ataque de área de efeito que causa [25,50,100,SP] SPECIAL em uma linha atrás do alvo e causa PARALYSIS por 3 segundos",
 		"HEAL_BLOCK": "Inflige [20,40,80,SP] SPECIAL e aplique WOUND a todos os inimigos adjacentes por 5 segundos",
 		"ROAR_OF_TIME": "Dê RESURRECTION e [20,SP] SPEED ao seu aliado mais forte (mais itens > mais estrelas > mais raros)",

@@ -1672,7 +1672,6 @@
 		"HEART_SWAP": "El usuario roba los aumentos de AP y SPE_DEF del objetivo y le inflige [100,SP] de SPECIAL. El usuario pasa sus condiciones de estado al objetivo y se cura de ellas.",
 		"THIEF": "Roba tantos objetos del oponente como pueda equipar e inflige [15,30,60,SP] de SPECIAL",
 		"STUN_SPORE": "Inflige [15,30,60,SP] de SPECIAL y deja PARALYSIS por 5 segundos al objetivo y a los enemigos adyacentes",
-		"METEOR_MASH": "Inflige [15,30,60,SP] de SPECIAL al objetivo 3 veces y mejora el ATK del usuario en [2,SP]",
 		"HURRICANE": "Inflige [25,50,100,SP] de SPECIAL a todos los enemigos alrededor del objetivo y los deja PARALYSIS por 3 segundos",
 		"HEAL_BLOCK": "Inflige [20,40,80,SP] de SPECIAL y deja WOUND a todos los enemigos adyacentes por 5 segundos",
 		"ROAR_OF_TIME": "Otorga RESURRECTION y [20,SP] SPEED a tu aliado más fuerte (mayoría de objetos > mayoría de estrellas > más raro)",

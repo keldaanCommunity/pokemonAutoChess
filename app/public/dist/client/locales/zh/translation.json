@@ -1674,7 +1674,6 @@
 		"HEART_SWAP": "使用者从目标处偷取其AP和SPE_DEF增幅，随后对其造成[100,SP]点SPECIAL。使用者将自身所受的异常状态转移至目标身上。",
 		"THIEF": "尽可能多的偷取目标的道具（至使用者拿不下为止），并对其造成[15,30,60,SP]点SPECIAL。",
 		"STUN_SPORE": "对目标和其ADJACENT敌方宝可梦造成[15,30,60,SP]点SPECIAL，并使他们陷入PARALYSIS 5秒。",
-		"METEOR_MASH": "对目标造成3次[15,30,60,SP]点SPECIAL，并提升使用者[2,SP]点ATK。",
 		"HURRICANE": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL， 并使他们陷入PARALYSIS 3秒。",
 		"HEAL_BLOCK": "对所有ADJACENT敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入WOUND 5秒。",
 		"ROAR_OF_TIME": "使STRONGEST我方宝可梦获得RESURRECTION并提升其[20,SP]点SPEED。",
