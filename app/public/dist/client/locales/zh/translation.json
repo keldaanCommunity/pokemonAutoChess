@@ -1652,7 +1652,7 @@
 		"IRON_TAIL": "甩动巨大的尾巴，对前方的3只敌方宝可梦造成SPECIAL，数值相当于使用者[100,SP]%的DEF，并将他们击退。",
 		"BLAST_BURN": "对所有ADJACENT敌方宝可梦造成[30,60,120,SP]点SPECIAL。",
 		"CHARGE": "本场战斗的剩余时间内，攻击额外造成[100,SP]%的SPECIAL（可以叠加）。",
-		"DISCHARGE": "对所有ADJACENT敌方宝可梦造成[25,50,75,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
+		"DISCHARGE": "对所有ADJACENT敌方宝可梦造成[25,50,100,SP]点SPECIAL，并使其陷入PARALYSIS 5秒。",
 		"BITE": "对目标造成[40,80,120,SP]点SPECIAL。使用者自身恢复所造成伤害的30%，并使目标陷入FLINCH 5秒。",
 		"AQUA_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并获得[30,60,100,SP]点SHIELD。",
 		"DRAGON_TAIL": "对目标造成[30,60,100,SP]点SPECIAL，并提升使用者[2,4,6,SP]点DEF和SPE_DEF。",

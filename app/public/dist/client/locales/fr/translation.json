@@ -1652,7 +1652,7 @@
 		"IRON_TAIL": "Balance sa queue massive, frappant les 3 ennemis en face, les projetant en arrière et infligeant [100,SP]% de la DEF du lanceur en SPECIAL.",
 		"BLAST_BURN": "Inflige [30,60,120,SP] SPECIAL à tous les ennemis ADJACENT.",
 		"CHARGE": "Jusqu'à la fin du combat, les attaques infligent [100,SP]% de SPECIAL supplémentaires (cumulable).",
-		"DISCHARGE": "Inflige [25,50,75,SP] SPECIAL et PARALYSIS pendant 5 secondes à tous les ennemis ADJACENT.",
+		"DISCHARGE": "Inflige [25,50,100,SP] SPECIAL et PARALYSIS pendant 5 secondes à tous les ennemis ADJACENT.",
 		"BITE": "Inflige [40,80,120,SP] dégâts SPECIAL à la cible et soigne 30 % des dégâts subis. La cible subit FLINCH pendant 5 secondes.",
 		"AQUA_TAIL": "Inflige [30,60,100,SP] SPECIAL à la cible et gagne [30,60,100,SP] SHIELD.",
 		"DRAGON_TAIL": "Inflige [30,60,100,SP] SPECIAL à la cible et augmente la DEF et SPE_DEF de [2,4,6,SP].",

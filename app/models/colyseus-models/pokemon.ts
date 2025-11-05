@@ -1018,9 +1018,9 @@ export class Elekid extends Pokemon {
   speed = 55
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.SHOCKWAVE
 }
 
 export class Electabuzz extends Pokemon {
@@ -1037,9 +1037,9 @@ export class Electabuzz extends Pokemon {
   speed = 55
   def = 12
   speDef = 12
-  maxPP = 90
+  maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.SHOCKWAVE
 }
 
 export class Electivire extends Pokemon {
@@ -1055,9 +1055,9 @@ export class Electivire extends Pokemon {
   speed = 55
   def = 16
   speDef = 16
-  maxPP = 90
+  maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.SHOCKWAVE
 }
 
 export class Gible extends Pokemon {

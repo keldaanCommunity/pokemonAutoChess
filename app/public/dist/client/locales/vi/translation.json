@@ -1216,7 +1216,7 @@
 		"ORIGIN_PULSE": "Làn sóng quét ngang toàn bộ chiến trường gây nên [100,SP] SPECIAL tới toàn bộ Pokémon đối thủ trúng phải",
 		"SEED_FLARE": "Cơ thể Shaymin tạo ra sóng xung kích gây nên [30,SP] SPECIAL cho toàn bộ Pokémon đối thủ trong bán kính 5 ô và giảm 3 chỉ số SPE_DEF",
 		"BLAST_BURN": "Gây nên [30,60,120,SP] SPECIAL cho khu vực quanh bản thân",
-		"DISCHARGE": "Gây [25,50,75,SP] SPECIAL lên Pokémon ở gần và khiến chúng PARALYSIS trong 5 giây",
+		"DISCHARGE": "Gây [25,50,100,SP] SPECIAL lên Pokémon ở gần và khiến chúng PARALYSIS trong 5 giây",
 		"BITE": "Gây [40,80,120,SP] SPECIAL lên mục tiêu và hồi phục cho bản thân lượng máu bằng 30% sát thương đã gây ra. FLINCH mục tiêu trong 5 giây",
 		"AQUA_TAIL": "Gây [30,60,100,SP] SPECIAL lên mục tiêu và có thêm [30,60,100,SP] SHIELD",
 		"DRAGON_TAIL": "Gây [30,60,100,SP] SPECIAL lên mục tiêu và tăng [2,4,6,SP] chỉ số DEF và SPE_DEF cho bản thân",

@@ -1650,7 +1650,7 @@
 		"IRON_TAIL": "Agita su cola para golpear a 3 Pokémon enemigos delante del usuario, empujándolos hacia atrás e infligiéndoles un [100,SP]% de la DEF del usuario como SPECIAL",
 		"BLAST_BURN": "Inflige [30,60,120,SP] de SPECIAL alrededor del usuario",
 		"CHARGE": "Hasta el final de esta batalla, los ataques del usuario infligen un [100,SP]% de SPECIAL adicional (puede acumularse).",
-		"DISCHARGE": "Inflige [25,50,75,SP] de SPECIAL a todos los oponentes cercanos y los deja PARALYSIS por 5 segundos",
+		"DISCHARGE": "Inflige [25,50,100,SP] de SPECIAL a todos los oponentes cercanos y los deja PARALYSIS por 5 segundos",
 		"BITE": "Inflige [40,80,120,SP] de SPECIAL al objetivo y cura al usuario el 30% del daño. Deja FLINCH al objetivo por 5 segundos",
 		"AQUA_TAIL": "Inflige [30,60,100,SP] SPECIAL al objetivo y gana [30,60,100,SP] de SHIELD",
 		"DRAGON_TAIL": "Inflige [30,60,100,SP] de SPECIAL al objetivo y aumenta la DEF y SPE_DEF del usuario en [2,4,6,SP]",

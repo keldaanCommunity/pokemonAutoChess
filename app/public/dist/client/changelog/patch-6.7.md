@@ -16,6 +16,8 @@
 - Nerf Unown W: now gives you a high rarity Pokémon of one of your two highest synergies. Chances to get an epic have been extended up to level 30.
 - Buff Quagsire: Attack 15 → 21
 - Buff Guzzlord: Def/SpeDef 6 → 10
+- Buff Discharge: damage 25/50/75 → 25/50/100
+- New ability for Elekid line: Shockwave: deal 25/50/100 special damage to all enemies in a 2-range radius, +1 range if user is in an Electric field.
 
 # Changes to Synergies
 

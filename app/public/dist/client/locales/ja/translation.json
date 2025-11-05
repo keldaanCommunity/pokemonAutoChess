@@ -1534,7 +1534,7 @@
 		"ORIGIN_PULSE": "[100,SP] SPECIAL を行うと、波が戦場を水平に移動します。",
 		"SEED_FLARE": "シェイミ本体が衝撃波を発し、敵全体に[30,SP]のSPECIALを与え、物防を3ダウンさせる",
 		"BLAST_BURN": "[30,60,120,SP]のSPECIALを与える範囲攻撃",
-		"DISCHARGE": "近くの敵に[25,50,75,SP]SPECIALの衝撃を与え、5秒間麻痺させる",
+		"DISCHARGE": "近くの敵に[25,50,100,SP]SPECIALの衝撃を与え、5秒間麻痺させる",
 		"BITE": "ターゲットに[40,80,120,SP]のSPECIALダメージを与え、ダメージの30%を回復、5秒間FLINCHターゲット",
 		"DRAGON_TAIL": "[30,60,100,SP]のSPECIALを与え、DEFとSPE_DEFを[2,4,6,SP]バフする単一ターゲット攻撃",
 		"DRAGON_BREATH": "対象の後方一列に[25,50,100,SP]SPECIALの範囲攻撃",

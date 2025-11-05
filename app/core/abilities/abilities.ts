@@ -3155,27 +3155,37 @@ export class DischargeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 25
-        break
-      case 2:
-        damage = 50
-        break
-      case 3:
-        damage = 75
-        break
-      default:
-        break
-    }
+    const damage = [25,50,100][pokemon.stars - 1] ?? 100
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.status.triggerParalysis(5000, cell.value, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
+export class ShockwaveStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [25,50,100][pokemon.stars - 1] ?? 100
+    const range = 2 + (pokemon.status.electricField ? 1 : 0)
+    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, range).forEach((cell) => {
+      if (cell.value && cell.value.team != pokemon.team) {
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -14614,6 +14624,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BLAST_BURN]: new BlastBurnStrategy(),
   [Ability.CHARGE]: new ChargeStrategy(),
   [Ability.DISCHARGE]: new DischargeStrategy(),
+  [Ability.SHOCKWAVE]: new ShockwaveStrategy(),
   [Ability.BITE]: new BiteStrategy(),
   [Ability.DRAGON_TAIL]: new DragonTailStrategy(),
   [Ability.DRAGON_BREATH]: new DragonBreathStrategy(),

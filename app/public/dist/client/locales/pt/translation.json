@@ -1273,7 +1273,7 @@
 		"ORIGIN_PULSE": "Uma onda viaja horizontalmente pelo campo de batalha fazendo [100,SP] SPECIAL",
 		"SEED_FLARE": "O corpo de Shaymin emite uma onda de choque, causando [30,SP] SPECIAL a todos os inimigos e diminuindo sua SPE_DEF em 3",
 		"BLAST_BURN": "Área de ataque de efeito que causa [30,60,120,SP] SPECIAL",
-		"DISCHARGE": "Eletriza os inimigos próximos por [25,50,75,SP] SPECIAL e os deixa PARALYSIS por 5 segundos",
+		"DISCHARGE": "Eletriza os inimigos próximos por [25,50,100,SP] SPECIAL e os deixa PARALYSIS por 5 segundos",
 		"BITE": "Inflige [40,80,120,SP] de SPECIAL ao alvo e cura 30% do dano. FLINCH alvo por 5 segundos",
 		"AQUA_TAIL": "Causa [30,60,100,SP] SPECIAL no alvo e ganha [30,60,100,SP] de ESCUDO",
 		"DRAGON_TAIL": "Ataque de alvo mono que causa [30,60,100,SP] SPECIAL e buff DEF e SPE_DEF em [2,4,6,SP]",
