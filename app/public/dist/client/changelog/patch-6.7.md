@@ -15,6 +15,7 @@
 - Galarian Yamask now appears in Monster regions instead of Ghost regions
 - Nerf Unown W: now gives you a high rarity Pokémon of one of your two highest synergies. Chances to get an epic have been extended up to level 30.
 - Buff Quagsire: Attack 15 → 21
+- Buff Guzzlord: Def/SpeDef 6 → 10
 
 # Changes to Synergies
 

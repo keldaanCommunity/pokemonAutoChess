@@ -8101,8 +8101,8 @@ export class Guzzlord extends Pokemon {
   hp = 300
   atk = 25
   speed = 39
-  def = 6
-  speDef = 6
+  def = 10
+  speDef = 10
   maxPP = 100
   range = 1
   skill = Ability.CRUNCH
