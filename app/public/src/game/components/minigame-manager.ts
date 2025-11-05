@@ -437,7 +437,10 @@ export default class MinigameManager {
       scene: this.scene,
       x: encounter === TownEncounters.REGIROCK ? cx : 24 * 48,
       y: encounter === TownEncounters.REGIROCK ? cy : 22 * 48,
-      name: Pkm.REGIROCK
+      name: Pkm.REGIROCK,
+      dialog: t("thanks_for_playing"),
+      dialogTitle: "Keldaan",
+      emotion: Emotion.HAPPY
     })
 
     const marowak = new PokemonSpecial({
@@ -491,7 +494,10 @@ export default class MinigameManager {
       y: 2.5 * 48,
       name: Pkm.MAREEP,
       orientation: Orientation.DOWNLEFT,
-      animation: PokemonActionState.EAT
+      animation: PokemonActionState.EAT,
+      dialog: t("thanks_for_playing"),
+      dialogTitle: "Curry",
+      emotion: Emotion.HAPPY
     })
 
     const munchlax = new PokemonSpecial({
@@ -624,13 +630,11 @@ export default class MinigameManager {
   }
 
   showEncounterDescription(desc: string) {
-    this.encounterDescription = new GameDialog(
-      this.scene,
-      desc,
-      undefined,
-      "town-encounter-description"
-    )
-    this.encounterDescription
+    this.encounterDescription = new GameDialog({
+      scene: this.scene,
+      dialog: desc,
+      extraClass: "town-encounter-description"
+    })
       .setOrigin(0, 0)
       .setPosition(15 * 48, 15 * 48)
       .removeInteractive()

@@ -8101,8 +8101,8 @@ export class Guzzlord extends Pokemon {
   hp = 300
   atk = 25
   speed = 39
-  def = 6
-  speDef = 6
+  def = 10
+  speDef = 10
   maxPP = 100
   range = 1
   skill = Ability.CRUNCH
@@ -14787,7 +14787,7 @@ export class Quagsire extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 190
-  atk = 15
+  atk = 21
   speed = 31
   def = 15
   speDef = 10
