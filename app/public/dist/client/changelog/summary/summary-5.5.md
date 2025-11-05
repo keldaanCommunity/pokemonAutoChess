@@ -26,8 +26,8 @@ A list of community servers with live status is now available on the homepage
 
 ## Playing with fire
 
-With ![Fire](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/FIRE.svg) Fire 8, you now receive a fire shard after each round that trades permanent Attack buff for player HP
+With ![Fire](/assets/types/FIRE.svg) Fire 8, you now receive a fire shard after each round that trades permanent Attack buff for player HP
 
 ## Intangible Ghosts
 
-![Ghost](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/GHOST.svg) Ghost pokemons now have 25% dodge chance (was previously for Water pokemons)
+![Ghost](/assets/types/GHOST.svg) Ghost pokemons now have 25% dodge chance (was previously for Water pokemons)

@@ -4,8 +4,8 @@
 
 ## Newcomers
 
-![Hoothoot](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0163/Normal.png)
-![Noctowl](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0164/Normal.png)
+![Hoothoot](/assets/portraits/0163/Normal.png)
+![Noctowl](/assets/portraits/0164/Normal.png)
 Welcome to Hoothoot and Noctowl !
 
 ## Dodge & Protect

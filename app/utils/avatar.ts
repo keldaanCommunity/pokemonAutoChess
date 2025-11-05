@@ -21,6 +21,13 @@ export function getPortraitSrc(
   return getAvatarSrc(getAvatarString(index, shiny, emotion))
 }
 
+export function getPkmFromPortraitSrc(src: string): PkmWithCustom | null {
+  const regex = /\/assets\/portraits\/([\w\/]+)\.png$/
+  const match = src.match(regex)
+  if (!match) return null
+  return getPokemonCustomFromAvatar(match[1])
+}
+
 export function getAvatarSrc(avatar: string) {
   return `/assets/portraits/${avatar.replace(/(\d+)\-/g, "$1/")}.png`
 }

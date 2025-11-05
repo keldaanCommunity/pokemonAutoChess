@@ -4,7 +4,7 @@
 
 ## A little gardening
 
-![Flora](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/types/FLORA.svg) Flora and ![Ground](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/types/GROUND.svg) Ground synergies have been reworked. Collect mulch and take care of your flower pots, and let your Ground Pokémon dig up some treasures buried on your board !
+![Flora](/assets/types/FLORA.svg) Flora and ![Ground](/assets/types/GROUND.svg) Ground synergies have been reworked. Collect mulch and take care of your flower pots, and let your Ground Pokémon dig up some treasures buried on your board !
 
 ## Lots of newcomers !
 
@@ -32,7 +32,7 @@
 ![Orbeetle](/assets/portraits/0826/Normal.png)
 ![Pachirisu](/assets/portraits/0417/Normal.png)
 ![Buzzwole](/assets/portraits/0794/Normal.png)
-![Falinks](/assets/portraits/0870/Normal.png)
+![Falinks](/assets/portraits/0870/0002/Normal.png)
 
 
 ## Adjustments for ranked matches

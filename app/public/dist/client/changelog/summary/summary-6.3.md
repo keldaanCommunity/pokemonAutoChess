@@ -30,7 +30,7 @@
 ![Gossifleur](/assets/portraits/0829/Normal.png)
 ![Eldegoss](/assets/portraits/0830/Normal.png)
 ![Furfrou](/assets/portraits/0676/Normal.png)
-![Surfing Pikachu](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0025/9999/Normal.png)
+![Surfing Pikachu](/assets/portraits/0025/9999/Normal.png)
 
 ## New summer collection
 

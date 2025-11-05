@@ -7,6 +7,6 @@
   font-weight: normal;
 }
 
-.patch-summary img {
+.patch-summary p > img {
   max-height: 40px;
 }

@@ -6,12 +6,12 @@
 
 (Charcoal + Miracle Seed): +60 Shield, +6 Attack ; Attacks deal double damage on shield. User is protected from recoil and retaliation damage.
 
-![Protective pads](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/PROTECTIVE_PADS.png)
+![Protective pads](/assets/item/PROTECTIVE_PADS.png)
 
 ##  New shiny item: Repeat Ball
 
 Every 2 shop rerolls, gain +1% AP and find a mon in shop that shares a synergy with the holder. 
-![Repeat Ball](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/REPEAT_BALL.png)
+![Repeat Ball](/assets/item/REPEAT_BALL.png)
 
 ## Newcomers in 5.6
 

@@ -12,7 +12,7 @@ Phione, Shuckle, Combee and Vespiqueen
 
 Phione will evolve into a manaphy if you give him an aqua egg.
 
-![phione](/assets/portraits/0489/Normal.png) + ![aqua-egg](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/dist/client/assets/item/AQUA_EGG.png) = ![manaphy](/assets/portraits/0490/Normal.png)
+![phione](/assets/portraits/0489/Normal.png) + ![aqua-egg](/assets/item/AQUA_EGG.png) = ![manaphy](/assets/portraits/0490/Normal.png)
 
 ## I want to fly away
 

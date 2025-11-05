@@ -28,16 +28,16 @@ After Treasure Town, Pokémons decided to treat themselves to a well-deserved va
 
 Munchlax has arrrived in Treasure Town and will prepare a picnic for your next trip.
 
-![Picnic Set](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/PICNIC_SET.png)
+![Picnic Set](/assets/item/PICNIC_SET.png)
 **Picnic Set**: Immediately consummed when given. Give a Sandwich to the holder and all adjacent allies.
 
 ## New shiny and artificial items
 
-![Cooking Pot](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/COOKING_POT.png)
+![Cooking Pot](/assets/item/COOKING_POT.png)
 **Cooking Pot**: Gives Gourmet synergy. When burned, the Cooking Pot is heated little by little which gives 10 Speed per second.
 
-![Max Elixir](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/MAX_ELIXIR.png)
+![Max Elixir](/assets/item/MAX_ELIXIR.png)
 **Max Elixir**: Restores 100% of max PP 1 second after the first ability cast.
 
-![Gold Bow](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/src/assets/item%7Btps%7D/GOLD_BOW.png)
+![Gold Bow](/assets/item/GOLD_BOW.png)
 **Gold Bow**: The holder does not count for team size limit

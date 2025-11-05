@@ -6,28 +6,28 @@
 
 Those pokémons are extremely flexible and lack their own shape. Your team gains bonuses by activating a wide variety of synergies
 
-![Amorphous](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/3c11a620df1707e68b30743b29cf900c0dd0c87e/app/public/src/assets/types/AMORPHOUS.svg)
+![Amorphous](/assets/types/AMORPHOUS.svg)
 
 ## Rock Rework
 
 Rock Pokémons gain DEF and better resist to critical damage. At each stage, get a random weather rock
 
-![Black Augurite](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/BLACK_AUGURITE.png)
-![Damp Rock](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/DAMP_ROCK.png)
-![Heat Rock](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/HEAT_ROCK.png)
-![Heat Rock](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/ICY_ROCK.png)
-![Smooth Rock](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SMOOTH_ROCK.png)
+![Black Augurite](/assets/item/BLACK_AUGURITE.png)
+![Damp Rock](/assets/item/DAMP_ROCK.png)
+![Heat Rock](/assets/item/HEAT_ROCK.png)
+![Heat Rock](/assets/item/ICY_ROCK.png)
+![Smooth Rock](/assets/item/SMOOTH_ROCK.png)
 
 ## New Items
 
 Shiny items, as exclusive rewards when encountering a shiny wild Pokémon during PvE rounds.
 
-![Dynamax Band](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/DYNAMAX_BAND.png)
+![Dynamax Band](/assets/item/DYNAMAX_BAND.png)
 ![Golden Rod](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/68e8b77af4abf23dc4de9921d2321d2cf69ee536/app/public/src/assets/item%7Btps%7D/GOLDEN_ROD.png)
-![Shiny Stone](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SHINY_STONE.png)
-![White Flute](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/WHITE_FLUTE.png)
-![Rare Candy](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/RARE_CANDY.png)
-![Eviolite](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/EVIOLITE.png)
+![Shiny Stone](/assets/item/SHINY_STONE.png)
+![White Flute](/assets/item/WHITE_FLUTE.png)
+![Rare Candy](/assets/item/RARE_CANDY.png)
+![Eviolite](/assets/item/EVIOLITE.png)
 
 ## Newcomers in 5.2
 
