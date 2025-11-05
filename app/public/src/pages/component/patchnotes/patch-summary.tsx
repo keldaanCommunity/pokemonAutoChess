@@ -1,11 +1,32 @@
 import { marked } from "marked"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { clamp } from "../../../../../utils/number"
 import "./patch-summary.css"
 
 interface PatchSummaryProps {
   version: string
   showHeader?: boolean
+}
+
+function fetchMarkdown(
+  url: string,
+  headingLevelAdjustment: number = 0
+): Promise<string> {
+  return fetch(url)
+    .then((res) => res.text())
+    .then((md) => {
+      marked.use({
+        renderer: {
+          heading({ tokens, depth }) {
+            const newDepth = clamp(depth + headingLevelAdjustment, 1, 6)
+            const text = this.parser.parseInline(tokens)
+            return `<h${newDepth}>${text}</h${newDepth}>`
+          }
+        }
+      })
+      return marked.parse(md)
+    })
 }
 
 export function PatchSummary({ version }: PatchSummaryProps) {
@@ -18,13 +39,10 @@ export function PatchSummary({ version }: PatchSummaryProps) {
     setIsLoading(true)
 
     // Fetch both summary and full patch notes
-    const fetchSummary = fetch(`/changelog/summary/summary-${version}.md`)
-      .then((res) => res.text())
-      .then((md) => marked.parse(md))
-
-    const fetchFullNotes = fetch(`/changelog/patch-${version}.md`)
-      .then((res) => res.text())
-      .then((md) => marked.parse(md))
+    const fetchSummary = fetchMarkdown(
+      `/changelog/summary/summary-${version}.md`
+    )
+    const fetchFullNotes = fetchMarkdown(`/changelog/patch-${version}.md`, 2)
 
     Promise.all([fetchSummary, fetchFullNotes])
       .then(([summaryParsed, fullNotesParsed]) => {
@@ -35,7 +53,7 @@ export function PatchSummary({ version }: PatchSummaryProps) {
         setPatchContent(
           `<h2>Patch ${version}</h2><p>Changelog not available</p>`
         )
-        setFullPatchNotes("<p>Full patch notes not available</p>")
+        setFullPatchNotes("<p>Patch notes not available</p>")
       })
       .finally(() => {
         setIsLoading(false)
