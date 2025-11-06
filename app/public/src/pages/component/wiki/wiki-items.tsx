@@ -15,6 +15,7 @@ import {
   SynergyGems,
   SynergyGemsBuried,
   TMs,
+  Tools,
   WeatherRocks
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -134,11 +135,11 @@ export default function WikiItems() {
         </ul>
       </article>
 
-      <article className="artificial">
+      <article className="tools">
         <h2>
-          <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("artificial_items")}
+          <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("tools")}
         </h2>
-        <p>{addIconsToDescription(t("artificial_items_description"))}</p>
+        <p>{addIconsToDescription(t("tools_description"))}</p>
         <ul>
           {ArtificialItems.map((i) => (
             <li
@@ -149,6 +150,20 @@ export default function WikiItems() {
               <img src={"assets/item/" + i + ".png"} className="item"></img>
             </li>
           ))}
+        </ul>
+        <p>{addIconsToDescription(t("other_tools_description"))}</p>
+        <ul>
+          {Tools.filter((i) => ArtificialItems.includes(i) === false).map(
+            (i) => (
+              <li
+                key={i}
+                data-tooltip-id="item-detail"
+                onMouseOver={() => setItemHovered(i)}
+              >
+                <img src={"assets/item/" + i + ".png"} className="item"></img>
+              </li>
+            )
+          )}
         </ul>
       </article>
 

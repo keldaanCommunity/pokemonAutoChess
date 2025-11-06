@@ -22,7 +22,6 @@ import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { PokemonActionState, Rarity, Stat } from "../../types/enum/Game"
 import {
-  ArtificialItems,
   CraftableItems,
   Flavors,
   Item,
@@ -32,7 +31,8 @@ import {
   OgerponMasks,
   RemovableItems,
   SynergyGivenByItem,
-  SynergyItems
+  SynergyItems,
+  Tools
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -1018,9 +1018,9 @@ export class Elekid extends Pokemon {
   speed = 55
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.SHOCKWAVE
 }
 
 export class Electabuzz extends Pokemon {
@@ -1037,9 +1037,9 @@ export class Electabuzz extends Pokemon {
   speed = 55
   def = 12
   speDef = 12
-  maxPP = 90
+  maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.SHOCKWAVE
 }
 
 export class Electivire extends Pokemon {
@@ -1055,9 +1055,9 @@ export class Electivire extends Pokemon {
   speed = 55
   def = 16
   speDef = 16
-  maxPP = 90
+  maxPP = 100
   range = 1
-  skill = Ability.DISCHARGE
+  skill = Ability.SHOCKWAVE
 }
 
 export class Gible extends Pokemon {
@@ -17345,7 +17345,7 @@ export class Duraludon extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.ARCHALUDON
-  evolutionRule = new ItemEvolutionRule(ArtificialItems)
+  evolutionRule = new ItemEvolutionRule(Tools)
   hp = 180
   atk = 18
   speed = 52

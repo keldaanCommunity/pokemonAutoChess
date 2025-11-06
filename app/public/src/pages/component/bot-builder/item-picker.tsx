@@ -4,13 +4,13 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Tooltip } from "react-tooltip"
 import { PkmWithCustom } from "../../../../../types"
 import {
-  ArtificialItems,
   Berries,
   CraftableItems,
   Item,
   ItemComponents,
   MemoryDiscs,
-  ShinyItems
+  ShinyItems,
+  Tools
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
@@ -41,7 +41,7 @@ export default function ItemPicker(props: {
       ]
     },
 
-    { label: t("artificial_items"), key: "artificial", items: ArtificialItems },
+    { label: t("tools"), key: "tools", items: Tools },
     {
       label: t("shiny_items"),
       key: "shiny_items",

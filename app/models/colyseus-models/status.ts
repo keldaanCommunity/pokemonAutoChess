@@ -374,6 +374,9 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.WELL_BAKED) {
         pkm.addDefense(20, pkm, 0, false)
       }
+      if (pkm.items.has(Item.MAGMARIZER)) {
+        pkm.addSpeed(30, pkm, 0, false)
+      }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
         pkm.eatBerry(Item.RAWST_BERRY)
@@ -401,7 +404,10 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 0.5
         }
 
-        if (pkm.passive === Passive.WELL_BAKED) {
+        if (
+          pkm.passive === Passive.WELL_BAKED ||
+          pkm.items.has(Item.MAGMARIZER)
+        ) {
           burnDamage = 0
         }
 
@@ -441,6 +447,9 @@ export default class Status extends Schema implements IStatus {
     }
     if (pkm.passive === Passive.WELL_BAKED) {
       pkm.addDefense(-20, pkm, 0, false)
+    }
+    if (pkm.items.has(Item.MAGMARIZER)) {
+      pkm.addSpeed(-30, pkm, 0, false)
     }
   }
 
@@ -1182,5 +1191,21 @@ export default class Status extends Schema implements IStatus {
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(-30, entity, 0, false)
     }
+  }
+
+  addFairyField(entity: IPokemonEntity) {
+    this.fairyField = true
+  }
+
+  removeFairyField(entity: IPokemonEntity) {
+    this.fairyField = false
+  }
+
+  addGrassField(entity: IPokemonEntity) {
+    this.grassField = true
+  }
+
+  removeGrassField(entity: IPokemonEntity) {
+    this.grassField = false
   }
 }

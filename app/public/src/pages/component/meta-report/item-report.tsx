@@ -9,9 +9,9 @@ import {
 } from "../../../../../models/mongo-models/items-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import {
-  ArtificialItems,
   CraftableItems,
-  ShinyItems
+  ShinyItems,
+  Tools
 } from "../../../../../types/enum/Item"
 import ItemStatistic from "./item-statistic"
 
@@ -40,11 +40,7 @@ export function ItemReport() {
 
   const tabs = [
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
-    {
-      label: t("artificial_items"),
-      key: "artificial_items",
-      items: ArtificialItems
-    },
+    { label: t("tools"), key: "tools", items: Tools },
     { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }
   ]
 

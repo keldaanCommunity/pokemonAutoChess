@@ -62,7 +62,6 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  ArtificialItems,
   ConsumableItems,
   CraftableItems,
   CraftableNonSynergyItems,
@@ -76,6 +75,7 @@ import {
   SynergyGivenByGem,
   SynergyGivenByItem,
   SynergyStones,
+  Tools,
   UnholdableItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -1267,7 +1267,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((player: Player) => {
         let itemSet = ItemComponents
         if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
-          itemSet = ArtificialItems.filter(
+          itemSet = Tools.filter(
             (item) => player.artificialItems.includes(item) === false
           )
         }
