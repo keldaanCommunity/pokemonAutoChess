@@ -1,10 +1,12 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function TeamEditor(props: {
   board: IDetailledPokemon[]
+  showBench?: boolean
   handleEditorClick: (
     x: number,
     y: number,
@@ -13,6 +15,8 @@ export default function TeamEditor(props: {
   ) => void
   handleDrop: (x: number, y: number, e: React.DragEvent) => void
 }) {
+  const { t } = useTranslation()
+
   function handleOnDragStart(e: React.DragEvent, p: IDetailledPokemon) {
     e.stopPropagation()
     e.dataTransfer.setData("text/plain", ["cell", p.x, p.y].join(","))
@@ -44,63 +48,122 @@ export default function TeamEditor(props: {
         <tbody>
           {[3, 2, 1].map((y) => {
             return (
-              <tr key={"row" + y}>
-                {[0, 1, 2, 3, 4, 5, 6, 7].map((x) => {
-                  const p = props.board.find((p) => p.x === x && p.y === y)
-                  return (
-                    <td
-                      key={"row" + y + "-col" + x}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        props.handleEditorClick(x, y, false)
-                      }}
-                      onContextMenu={(e) => {
-                        e.preventDefault()
-                        props.handleEditorClick(x, y, true)
-                      }}
-                      onDragOver={handleOnDragOver}
-                      onDragLeave={handleOnDragEnd}
-                      onDrop={(e) => handleDrop(x, y, e)}
-                    >
-                      {p && (
-                        <div
-                          draggable
-                          onDragStart={(e) => handleOnDragStart(e, p)}
-                        >
-                          <PokemonPortrait
-                            portrait={{
-                              index: PkmIndex[p.name],
-                              shiny: p.shiny,
-                              emotion: p.emotion
-                            }}
-                          />
-                          {p.items && (
-                            <div className="pokemon-items">
-                              {p.items.map((it, j) => {
-                                return (
-                                  <img
-                                    key={j}
-                                    src={"assets/item/" + it + ".png"}
-                                    onContextMenu={(e) => {
-                                      e.preventDefault()
-                                      e.stopPropagation()
-                                      props.handleEditorClick(x, y, true, j)
-                                    }}
-                                  />
-                                )
-                              })}
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </td>
-                  )
-                })}
-              </tr>
+              <BoardRow
+                key={"row" + y}
+                y={y}
+                board={props.board}
+                handleEditorClick={props.handleEditorClick}
+                handleDrop={handleDrop}
+                handleOnDragStart={handleOnDragStart}
+                handleOnDragOver={handleOnDragOver}
+                handleOnDragEnd={handleOnDragEnd}
+              />
             )
           })}
         </tbody>
       </table>
+      {props.showBench && (
+        <>
+          <p>{t("bench")}</p>
+          <table>
+            <tbody>
+              <BoardRow
+                y={0}
+                board={props.board}
+                handleEditorClick={props.handleEditorClick}
+                handleDrop={handleDrop}
+                handleOnDragStart={handleOnDragStart}
+                handleOnDragOver={handleOnDragOver}
+                handleOnDragEnd={handleOnDragEnd}
+              />
+            </tbody>
+          </table>
+        </>
+      )}
     </div>
+  )
+}
+
+function BoardRow(props: {
+  y: number
+  board: IDetailledPokemon[]
+  handleEditorClick: (
+    x: number,
+    y: number,
+    rightClick: boolean,
+    itemIndex?: number
+  ) => void
+  handleDrop: (x: number, y: number, e: React.DragEvent) => void
+  handleOnDragStart: (e: React.DragEvent, p: IDetailledPokemon) => void
+  handleOnDragOver: (e: React.DragEvent) => void
+  handleOnDragEnd: (e: React.DragEvent) => void
+}) {
+  const {
+    y,
+    board,
+    handleEditorClick,
+    handleOnDragStart,
+    handleOnDragOver,
+    handleOnDragEnd
+  } = props
+
+  function handleDrop(x: number, y: number, e: React.DragEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    props.handleDrop(x, y, e)
+    handleOnDragEnd(e)
+  }
+
+  return (
+    <tr key={"row" + y}>
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((x) => {
+        const p = board.find((p) => p.x === x && p.y === y)
+        return (
+          <td
+            key={"row" + y + "-col" + x}
+            onClick={(e) => {
+              e.preventDefault()
+              handleEditorClick(x, y, false)
+            }}
+            onContextMenu={(e) => {
+              e.preventDefault()
+              handleEditorClick(x, y, true)
+            }}
+            onDragOver={handleOnDragOver}
+            onDragLeave={handleOnDragEnd}
+            onDrop={(e) => handleDrop(x, y, e)}
+          >
+            {p && (
+              <div draggable onDragStart={(e) => handleOnDragStart(e, p)}>
+                <PokemonPortrait
+                  portrait={{
+                    index: PkmIndex[p.name],
+                    shiny: p.shiny,
+                    emotion: p.emotion
+                  }}
+                />
+                {p.items && (
+                  <div className="pokemon-items">
+                    {p.items.map((it, j) => {
+                      return (
+                        <img
+                          key={j}
+                          src={"assets/item/" + it + ".png"}
+                          onContextMenu={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            handleEditorClick(x, y, true, j)
+                          }}
+                        />
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </td>
+        )
+      })}
+    </tr>
   )
 }
