@@ -2,15 +2,15 @@ import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import {
+  BOTS_ENABLED,
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME
+} from "../../../../../config"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
-import {
-  BOTS_ENABLED,
-  EloRank,
-  EloRankThreshold,
-  MAX_PLAYERS_PER_GAME
-} from "../../../../../types/Config"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { formatMinMaxRanks } from "../../../../../utils/elo"

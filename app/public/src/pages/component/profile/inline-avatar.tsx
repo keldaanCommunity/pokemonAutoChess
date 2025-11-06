@@ -2,8 +2,8 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Role } from "../../../../../types"
 import { getAvatarSrc } from "../../../../../utils/avatar"
-import { RoleBadge } from "./role-badge"
 import PokemonPortrait from "../pokemon-portrait"
+import { RoleBadge } from "./role-badge"
 
 export function InlineAvatar(props: {
   avatar: string

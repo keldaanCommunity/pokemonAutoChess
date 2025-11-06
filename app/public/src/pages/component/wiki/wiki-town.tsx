@@ -1,13 +1,13 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { addIconsToDescription } from "../../utils/descriptions"
 import {
   TownEncounter,
+  TownEncounterSellPrice,
   TownEncounters,
-  TownEncountersByStage,
-  TownEncounterSellPrice
+  TownEncountersByStage
 } from "../../../../../core/town-encounters"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { addIconsToDescription } from "../../utils/descriptions"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function WikiTown() {

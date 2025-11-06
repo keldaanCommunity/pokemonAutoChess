@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { SynergyTriggers } from "../../../../../types/Config"
+import { SynergyTriggers } from "../../../../../config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyComponent from "./synergy-component"
 

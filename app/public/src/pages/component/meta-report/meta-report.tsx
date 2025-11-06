@@ -1,8 +1,8 @@
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { ItemReport } from "./item-report"
-import { PokemonReport } from "./pokemon-report"
 import MetadataReport from "./metadata-report"
+import { PokemonReport } from "./pokemon-report"
 import "./meta-report.css"
 
 export default function MetaReport() {

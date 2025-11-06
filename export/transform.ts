@@ -1,5 +1,5 @@
-import { mkdir, writeFile } from "fs-extra"
 import { readdir } from "fs/promises"
+import { mkdir, writeFile } from "fs-extra"
 import { intToRGBA, Jimp, JimpInstance } from "jimp"
 import {
   AnimatedFrame,
@@ -14,7 +14,7 @@ import {
   MaskDefinition,
   TerrainType,
   TilesetExchangeFile
-} from "../app/types/Config"
+} from "../app/config"
 import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
 import { DungeonPMDO } from "../app/types/enum/Dungeon"
 

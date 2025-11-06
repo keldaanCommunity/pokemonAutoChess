@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { IChatV2 } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { sendMessage } from "../../../stores/NetworkStore"
 import ChatHistory from "./chat-history"
-import { IChatV2 } from "../../../../../types"
 import "./chat.css"
 
 const MAX_MESSAGE_LENGTH = 250

@@ -2,6 +2,14 @@ import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { nanoid } from "nanoid"
 import { writeHeapSnapshot } from "v8"
+import {
+  BoosterPriceByRarity,
+  DUST_PER_BOOSTER,
+  DUST_PER_SHINY,
+  EloRankThreshold,
+  getEmotionCost,
+  MAX_PLAYERS_PER_GAME
+} from "../../config"
 import { CollectionUtils, createBooster } from "../../core/collection"
 import { getPendingGame } from "../../core/pending-game-manager"
 import {
@@ -30,14 +38,6 @@ import {
   Transfer,
   USERNAME_REGEXP
 } from "../../types"
-import {
-  BoosterPriceByRarity,
-  DUST_PER_BOOSTER,
-  DUST_PER_SHINY,
-  EloRankThreshold,
-  getEmotionCost,
-  MAX_PLAYERS_PER_GAME
-} from "../../types/Config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"

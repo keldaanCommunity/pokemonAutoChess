@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import { model, Schema } from "mongoose"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 

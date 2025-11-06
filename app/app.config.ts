@@ -10,6 +10,11 @@ import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
+import {
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  MAX_POOL_CONNECTIONS_SIZE,
+  SynergyTriggers
+} from "./config"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
@@ -34,11 +39,6 @@ import {
 import { getLeaderboard } from "./services/leaderboard"
 import { getMetadata, getMetaItems, getMetaPokemons } from "./services/meta"
 import { Role } from "./types"
-import {
-  MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  MAX_POOL_CONNECTIONS_SIZE,
-  SynergyTriggers
-} from "./types/Config"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"

@@ -1,10 +1,10 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { validateBot } from "../../../../../core/bot-logic"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Emotion, PkmWithCustom } from "../../../../../types"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
-import { validateBot } from "../../../../../core/bot-logic"
 
 export default function BotAvatar(props: {
   bot: IBot

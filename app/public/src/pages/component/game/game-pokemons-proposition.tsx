@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { AdditionalPicksStages } from "../../../../../config"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
-import { AdditionalPicksStages } from "../../../../../types/Config"
 import { ShinyItems } from "../../../../../types/enum/Item"
 import {
   Pkm,
@@ -11,7 +11,11 @@ import {
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { DEPTH } from "../../../game/depths"
-import { selectConnectedPlayer, useAppDispatch, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  useAppDispatch,
+  useAppSelector
+} from "../../../hooks"
 import { pokemonPropositionClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
@@ -40,7 +44,7 @@ export default function GamePokemonsPropositions() {
       (pokemonsProposition.some((p) => p in PkmDuo) ? 7 : 8)
   const connectedPlayer = useAppSelector(selectConnectedPlayer)
   const life = connectedPlayer?.life ?? 0
-  
+
   const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(
     localStore.get(LocalStoreKeys.TEAM_PLANNER)
   )

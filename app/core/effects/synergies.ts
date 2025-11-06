@@ -1,6 +1,6 @@
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import { SynergyEffects } from "../../models/effects"
 import { Title } from "../../types"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Team } from "../../types/enum/Game"

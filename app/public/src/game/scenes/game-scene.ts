@@ -2,6 +2,7 @@ import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
+import { BOARD_WIDTH } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { canSell } from "../../../../core/pokemon-entity"
@@ -14,7 +15,6 @@ import {
   IDragDropMessage,
   Transfer
 } from "../../../../types"
-import { BOARD_WIDTH } from "../../../../types/Config"
 import {
   DungeonDetails,
   DungeonMusic,

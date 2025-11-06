@@ -1,6 +1,6 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
-import { IMeta, fetchMeta } from "../../../../../models/mongo-models/meta"
+import { fetchMeta, IMeta } from "../../../../../models/mongo-models/meta"
 import { MetaChart } from "./meta-chart"
 import TeamComp from "./team-comp"
 import "./composition-report.css"

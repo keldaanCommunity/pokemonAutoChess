@@ -1,6 +1,12 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  PortalCarouselStages,
+  SynergyTriggers
+} from "../../../../config"
+import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons,
   FlowerPots
@@ -13,12 +19,6 @@ import { getPokemonData } from "../../../../models/precomputed/precomputed-pokem
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon } from "../../../../types"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  PortalCarouselStages,
-  SynergyTriggers
-} from "../../../../types/Config"
 import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,

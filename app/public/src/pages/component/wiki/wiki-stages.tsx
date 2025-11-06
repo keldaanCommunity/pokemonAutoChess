@@ -1,16 +1,16 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import {
+  AdditionalPicksStages,
+  ItemCarouselStages,
+  PortalCarouselStages
+} from "../../../../../config"
 import { TownEncountersByStage } from "../../../../../core/town-encounters"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { getAdditionalsTier1 } from "../../../../../models/shop"
 import { Emotion } from "../../../../../types"
-import {
-  AdditionalPicksStages,
-  ItemCarouselStages,
-  PortalCarouselStages
-} from "../../../../../types/Config"
 import {
   CraftableItems,
   Item,

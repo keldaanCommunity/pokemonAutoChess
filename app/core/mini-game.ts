@@ -8,6 +8,7 @@ import {
   Events,
   Vector
 } from "matter-js"
+import { ItemCarouselStages, PortalCarouselStages } from "../config"
 import { FloatingItem } from "../models/colyseus-models/floating-item"
 import Player from "../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
@@ -15,7 +16,6 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
 import { Transfer } from "../types"
-import { ItemCarouselStages, PortalCarouselStages } from "../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {

@@ -1,11 +1,11 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
+import { EloRankThreshold } from "../../../../../config"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import {
   fetchMetaPokemons,
   IPokemonsStatisticV2
 } from "../../../../../models/mongo-models/pokemons-statistic-v2"
-import { EloRankThreshold } from "../../../../../types/Config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"

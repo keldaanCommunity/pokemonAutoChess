@@ -1,4 +1,5 @@
 import { GameObjects } from "phaser"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../config"
 import { getAttackTimings } from "../../../../core/attacking-state"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
@@ -8,7 +9,6 @@ import { FalinksTrooper } from "../../../../models/colyseus-models/pokemon"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { EffectEnum } from "../../../../types/enum/Effect"
 import {

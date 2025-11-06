@@ -1,6 +1,6 @@
+import { BASE_PROJECTILE_SPEED } from "../config"
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity } from "../types"
-import { BASE_PROJECTILE_SPEED } from "../types/Config"
 import delays from "../types/delays.json"
 import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"

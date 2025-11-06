@@ -1,5 +1,11 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
+import {
+  ARMOR_FACTOR,
+  DEFAULT_CRIT_CHANCE,
+  DEFAULT_CRIT_POWER,
+  ON_ATTACK_MANA
+} from "../config"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
@@ -9,12 +15,6 @@ import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
 import { Emotion, IPokemon, IPokemonEntity, Title, Transfer } from "../types"
-import {
-  ARMOR_FACTOR,
-  DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_POWER,
-  ON_ATTACK_MANA
-} from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import {
