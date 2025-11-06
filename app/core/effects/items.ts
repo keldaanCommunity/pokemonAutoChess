@@ -51,6 +51,7 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+import { NoEvolutionRule } from "../evolution-rules"
 
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
@@ -291,6 +292,8 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       )
       player.board.delete(pokemon.id)
       substitute.id = pokemon.id
+      substitute.evolution = pokemon.name
+      substitute.evolutionRule = new NoEvolutionRule()
       substitute.positionX = pokemon.positionX
       substitute.positionY = pokemon.positionY
       player.board.set(substitute.id, substitute)
