@@ -5,12 +5,12 @@ import { Tooltip } from "react-tooltip"
 import { PkmWithCustom } from "../../../../../types"
 import {
   ArtificialItems,
-  ItemComponents,
   Berries,
   CraftableItems,
   Item,
-  ShinyItems,
-  MemoryDiscs
+  ItemComponents,
+  MemoryDiscs,
+  ShinyItems
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"

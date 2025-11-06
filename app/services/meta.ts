@@ -1,4 +1,7 @@
 import { log } from "console"
+import ItemsStatistic, {
+  IItemsStatisticV2
+} from "../models/mongo-models/items-statistic-v2"
 import PokemonsStatistics, {
   IPokemonsStatisticV2
 } from "../models/mongo-models/pokemons-statistic-v2"
@@ -6,9 +9,6 @@ import ReportMetadata, {
   IReportMetadata
 } from "../models/mongo-models/report-metadata"
 import { logger } from "../utils/logger"
-import ItemsStatistic, {
-  IItemsStatisticV2
-} from "../models/mongo-models/items-statistic-v2"
 
 export async function fetchMetaReports() {
   logger.info("Refreshing meta reports...")

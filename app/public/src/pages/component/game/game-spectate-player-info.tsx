@@ -1,11 +1,11 @@
 import React from "react"
-import { GameAdditionalPokemonsIcon } from "./game-additional-pokemons"
-import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
-import { Life } from "../icons/life"
-import { Money } from "../icons/money"
 import { useTranslation } from "react-i18next"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { Life } from "../icons/life"
+import { Money } from "../icons/money"
 import PokemonPortrait from "../pokemon-portrait"
+import { GameAdditionalPokemonsIcon } from "./game-additional-pokemons"
+import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
 import "./game-spectate-player-info.css"
 
 export default function GameSpectatePlayerInfo() {

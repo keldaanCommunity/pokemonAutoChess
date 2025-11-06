@@ -1,8 +1,8 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IDps } from "../../../../../types"
-import ProgressBar from "../progress-bar/progress-bar"
 import PokemonPortrait from "../pokemon-portrait"
+import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDpsHeal(props: {
   maxHeal: number

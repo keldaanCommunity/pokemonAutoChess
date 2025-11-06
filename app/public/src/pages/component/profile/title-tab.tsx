@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
-  ITitleStatistic,
-  fetchTitles
+  fetchTitles,
+  ITitleStatistic
 } from "../../../../../models/mongo-models/title-statistic"
 import { Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
