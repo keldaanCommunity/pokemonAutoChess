@@ -1,6 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
+import { SynergyTriggers } from "../../config"
 import { IPokemon } from "../../types"
-import { SynergyTriggers } from "../../types/Config"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"

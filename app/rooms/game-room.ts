@@ -3,6 +3,18 @@ import { MapSchema } from "@colyseus/schema"
 import { Client, Room } from "colyseus"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
+import {
+  AdditionalPicksStages,
+  ALLOWED_GAME_RECONNECTION_TIME,
+  EventPointsPerRank,
+  ExpPlace,
+  LegendaryPool,
+  MAX_EVENT_POINTS,
+  MAX_SIMULATION_DELTA_TIME,
+  MinStageForGameToCount,
+  PortalCarouselStages,
+  UniquePool
+} from "../config"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -42,20 +54,8 @@ import {
   Title,
   Transfer
 } from "../types"
-import {
-  AdditionalPicksStages,
-  ALLOWED_GAME_RECONNECTION_TIME,
-  EloRank,
-  EventPointsPerRank,
-  ExpPlace,
-  LegendaryPool,
-  MAX_EVENT_POINTS,
-  MAX_SIMULATION_DELTA_TIME,
-  MinStageForGameToCount,
-  PortalCarouselStages,
-  UniquePool
-} from "../types/Config"
 import { CloseCodes } from "../types/enum/CloseCodes"
+import { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"

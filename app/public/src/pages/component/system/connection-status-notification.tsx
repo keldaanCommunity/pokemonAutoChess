@@ -1,7 +1,7 @@
 import React from "react"
-import { useAppSelector } from "../../../hooks"
-import { ConnectionStatus } from "../../../../../types/enum/ConnectionStatus"
 import { useTranslation } from "react-i18next"
+import { ConnectionStatus } from "../../../../../types/enum/ConnectionStatus"
+import { useAppSelector } from "../../../hooks"
 import "./connection-status-notification.css"
 
 export const ConnectionStatusNotification = () => {

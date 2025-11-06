@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import { model, Schema } from "mongoose"
 import { nanoid } from "nanoid"
 import { Emotion, PkmWithCustom } from "../../types"
 import { Item } from "../../types/enum/Item"

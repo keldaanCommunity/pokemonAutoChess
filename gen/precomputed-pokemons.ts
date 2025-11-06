@@ -1,5 +1,5 @@
+import { RarityCost } from "../app/config"
 import PokemonFactory, { PkmColorVariants } from "../app/models/pokemon-factory"
-import { RarityCost } from "../app/types/Config"
 import { Ability } from "../app/types/enum/Ability"
 import { Passive } from "../app/types/enum/Passive"
 import { Pkm } from "../app/types/enum/Pokemon"

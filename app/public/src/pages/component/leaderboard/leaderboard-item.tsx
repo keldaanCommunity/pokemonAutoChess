@@ -6,8 +6,8 @@ import {
 } from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppDispatch } from "../../../hooks"
 import { searchById } from "../../../stores/NetworkStore"
-import { EloBadge } from "../profile/elo-badge"
 import PokemonPortrait from "../pokemon-portrait"
+import { EloBadge } from "../profile/elo-badge"
 
 export default function LeaderboardItem(props: {
   item: ILeaderboardInfo | ILeaderboardBotInfo

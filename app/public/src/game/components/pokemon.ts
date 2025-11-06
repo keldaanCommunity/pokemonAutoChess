@@ -3,6 +3,7 @@ import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import pkg from "../../../../../package.json"
+import { CELL_VISUAL_HEIGHT, CELL_VISUAL_WIDTH } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
@@ -17,7 +18,6 @@ import {
   AttackSprite,
   AttackSpriteScale
 } from "../../../../types/Animation"
-import { CELL_VISUAL_HEIGHT, CELL_VISUAL_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import {

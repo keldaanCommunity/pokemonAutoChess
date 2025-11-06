@@ -1,4 +1,4 @@
-import { EloRankThreshold } from "../types/Config"
+import { EloRankThreshold } from "../config"
 import { EloRank } from "../types/enum/EloRank"
 
 export function getRank(elo: number): EloRank {

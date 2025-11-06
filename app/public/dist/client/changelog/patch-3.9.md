@@ -1,21 +1,3 @@
----
-patch announcement
----
-
-> June, 30th
-
-# Patch 3.9: Duality
-
-Dual mythicals mechanic
-Minus and Plusle
-Latios & Latias rework as dual
-Show player avatars on the side of the board
-Emotes communication between players ingame
-
----
-
-## full changelog
-
 # New Pokemons:
 
 - Tinkatin/Tinkatuff/Tinkaton

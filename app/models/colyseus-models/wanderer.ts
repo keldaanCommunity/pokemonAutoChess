@@ -8,10 +8,15 @@ export class Wanderer extends Schema {
   @type("string") type: WandererType
   @type("string") behavior: WandererBehavior
 
-  constructor({ id, pkm, type, behavior }: {
-    id: string,
-    pkm: Pkm,
-    type: WandererType,
+  constructor({
+    id,
+    pkm,
+    type,
+    behavior
+  }: {
+    id: string
+    pkm: Pkm
+    type: WandererType
     behavior: WandererBehavior
   }) {
     super()

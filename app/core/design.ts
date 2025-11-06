@@ -1,4 +1,4 @@
-import { Mask, TerrainType } from "../types/Config"
+import { Mask, TerrainType } from "../config"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { logger } from "../utils/logger"
 import Masker from "./masker"

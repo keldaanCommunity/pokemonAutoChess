@@ -13,8 +13,8 @@ import {
   Title,
   Transfer
 } from "../../../types"
-import { EloRank } from "../../../types/Config"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import { EloRank } from "../../../types/enum/EloRank"
 import { BotDifficulty } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Language } from "../../../types/enum/Language"

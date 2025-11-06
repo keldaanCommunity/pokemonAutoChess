@@ -84,7 +84,7 @@ export default function AfterGame() {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
           playSound(
-            SOUNDS["FINISH" + player.rank as keyof typeof SOUNDS],
+            SOUNDS[("FINISH" + player.rank) as keyof typeof SOUNDS],
             preference("musicVolume") / 100
           )
         }

@@ -4,13 +4,13 @@
 
 ## Newcomers
 
-![sudowoodo](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0438/Normal.png)
-![bonsly](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0185/Normal.png)
+![sudowoodo](/assets/portraits/0438/Normal.png)
+![bonsly](/assets/portraits/0185/Normal.png)
 Welcome to Bonsly and Sudowoodo !
 
-![litwick](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0607/Normal.png)
-![lampent](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0608/Normal.png)
-![chandelure](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0609/Normal.png)
+![litwick](/assets/portraits/0607/Normal.png)
+![lampent](/assets/portraits/0608/Normal.png)
+![chandelure](/assets/portraits/0609/Normal.png)
 Welcome to Litwick, Lampent and Chandelure !
 
 ## Less shield, less eggs
@@ -21,7 +21,3 @@ Welcome to Litwick, Lampent and Chandelure !
 ## A new Fire Gem
 
 Buff Fire Gem: Attacks do double damage on Shields and deal 10% of target max HP as additional damage
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)

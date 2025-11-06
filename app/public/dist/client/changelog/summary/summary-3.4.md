@@ -4,8 +4,8 @@
 
 ## Newcomers
 
-![Hoothoot](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0163/Normal.png)
-![Noctowl](https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master/portrait/0164/Normal.png)
+![Hoothoot](/assets/portraits/0163/Normal.png)
+![Noctowl](/assets/portraits/0164/Normal.png)
 Welcome to Hoothoot and Noctowl !
 
 ## Dodge & Protect
@@ -18,7 +18,3 @@ Welcome to Hoothoot and Noctowl !
 
 - Shield should be much effective now that we fixed the bug on damage on shield being counted twice
 - Shell bell & human synergy heal now also takes into account the damage on shield
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)

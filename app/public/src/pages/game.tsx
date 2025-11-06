@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import { MinStageForGameToCount, PortalCarouselStages } from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
@@ -21,10 +22,6 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import {
-  MinStageForGameToCount,
-  PortalCarouselStages
-} from "../../../types/Config"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { DungeonDetails } from "../../../types/enum/Dungeon"

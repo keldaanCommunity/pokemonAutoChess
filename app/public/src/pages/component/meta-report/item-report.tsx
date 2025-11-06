@@ -1,12 +1,13 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { EloRankThreshold } from "../../../../../config"
 import {
   fetchMetaItems,
   IItemsStatisticV2,
   IItemV2
 } from "../../../../../models/mongo-models/items-statistic-v2"
-import { EloRank, EloRankThreshold } from "../../../../../types/Config"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import {
   CraftableItems,
   ShinyItems,

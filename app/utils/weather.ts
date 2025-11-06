@@ -1,15 +1,14 @@
+import { MapSchema } from "@colyseus/schema"
+import { WeatherThreshold } from "../config"
+import Player from "../models/colyseus-models/player"
+import { Pokemon } from "../models/colyseus-models/pokemon"
+import { WeatherByWeatherRocks } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
+  PassivesAssociatedToWeather,
   Weather,
-  WeatherAssociatedToSynergy,
-  PassivesAssociatedToWeather
+  WeatherAssociatedToSynergy
 } from "../types/enum/Weather"
-
-import { WeatherByWeatherRocks } from "../types/enum/Item"
-import { MapSchema } from "@colyseus/schema"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import { WeatherThreshold } from "../types/Config"
-import Player from "../models/colyseus-models/player"
 
 export function getWeather(
   bluePlayer: Player,

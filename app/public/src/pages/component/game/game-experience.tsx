@@ -1,10 +1,10 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { MAX_LEVEL } from "../../../../../config"
 import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../stores/NetworkStore"
 import { Money } from "../icons/money"
-import { MAX_LEVEL } from "../../../../../types/Config"
 
 export default function GameExperience() {
   const { t } = useTranslation()

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { fetchMetadata } from "../../../../../models/mongo-models/report-metadata"
 import { formatDate } from "../../utils/date"
-import { useTranslation } from "react-i18next"
 import "./metadata-report.css"
 
 const MetadataReport = () => {

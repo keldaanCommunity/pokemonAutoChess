@@ -2,12 +2,12 @@ import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
+import { RarityColor } from "../../../../../config"
 import { DishByPkm } from "../../../../../core/dishes"
 import { ItemStats } from "../../../../../core/items"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
-import { RarityColor } from "../../../../../types/Config"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
 import { Item } from "../../../../../types/enum/Item"
@@ -26,7 +26,7 @@ import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | IPokemon | IPokemonEntity
-  origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki"
+  origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki" | "patchnotes"
   shiny?: boolean
   emotion?: Emotion
   isAlly?: boolean

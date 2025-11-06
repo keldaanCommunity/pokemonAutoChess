@@ -1,0 +1,12 @@
+.patch-summary {
+  text-align: left;
+}
+
+.full-patch-notes {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.patch-summary p > img {
+  max-height: 40px;
+}

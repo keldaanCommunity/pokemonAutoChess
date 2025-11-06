@@ -1,4 +1,4 @@
-import { IdTable } from "../types/Config"
+import { IdTable } from "../config"
 
 export default class Masker {
   mask8bits(matrix: number[][], row: number, col: number) {

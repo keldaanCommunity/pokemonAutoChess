@@ -1,6 +1,12 @@
 import { entity, Schema, SetSchema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
+  DEFAULT_CRIT_CHANCE,
+  DEFAULT_CRIT_POWER,
+  DEFAULT_SPEED,
+  SynergyTriggers
+} from "../../config"
+import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
   EvolutionRule,
@@ -11,12 +17,6 @@ import {
 import Simulation from "../../core/simulation"
 import GameState from "../../rooms/states/game-state"
 import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
-import {
-  DEFAULT_CRIT_CHANCE,
-  DEFAULT_CRIT_POWER,
-  DEFAULT_SPEED,
-  SynergyTriggers
-} from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"

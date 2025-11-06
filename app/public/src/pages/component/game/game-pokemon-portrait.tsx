@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
+import { RarityColor } from "../../../../../config"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import {
@@ -8,7 +9,6 @@ import {
 } from "../../../../../models/colyseus-models/pokemon-customs"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
-import { RarityColor } from "../../../../../types/Config"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getPortraitSrc } from "../../../../../utils/avatar"

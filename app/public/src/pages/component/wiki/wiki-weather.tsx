@@ -1,8 +1,8 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import { WeatherThreshold } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { WeatherThreshold } from "../../../../../types/Config"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import {
   SynergyAssociatedToWeather,

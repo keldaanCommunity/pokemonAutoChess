@@ -54,7 +54,7 @@ dialog::backdrop {
   text-align: center;
 }
 
-.modal > header .close-btn {
+.modal .close-btn {
   float: right;
   padding: 0.5em;
   margin: -0.5em 0;

@@ -11,10 +11,10 @@ import {
   PoolSize,
   RarityColor,
   RarityProbabilityPerLevel
-} from "../../../../../types/Config"
+} from "../../../../../config"
 import { Rarity } from "../../../../../types/enum/Game"
-import { getRankLabel } from "../../../../../types/strings/Strings"
 import { FishingRods } from "../../../../../types/enum/Item"
+import { getRankLabel } from "../../../../../types/strings/Strings"
 import { addIconsToDescription } from "../../utils/descriptions"
 
 export default function WikiData() {

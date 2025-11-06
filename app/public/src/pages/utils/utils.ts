@@ -3,7 +3,7 @@ import {
   BOARD_Y_START,
   CELL_HEIGHT,
   CELL_WIDTH
-} from "../../../../types/Config"
+} from "../../../../config"
 
 export function transformBoardCoordinates(
   x: number,

@@ -4,9 +4,9 @@
 
 ## Welcome to Tepig
 
-![tepig](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0498/Normal.png)
-![pignite](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0499/Normal.png)
-![emboar](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0500/Normal.png)
+![tepig](/assets/portraits/0498/Normal.png)
+![pignite](/assets/portraits/0499/Normal.png)
+![emboar](/assets/portraits/0500/Normal.png)
 Tepig, Pignite and Emboar join the stage !
 
 ## Show me your moves
@@ -22,7 +22,3 @@ Bots are no longer taken into account for ELO gain/loss calculations. Lobbys don
 - More Aquatic mons: Poliwag, Tentacool, Lotad, Froakie, Phione now have the Aquatic synergy
 - Many Psychic abilities have been reworked
 - New abilities for all mons that only had a passive effect
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752)

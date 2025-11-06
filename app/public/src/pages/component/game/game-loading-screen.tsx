@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
+import { shuffleArray } from "../../../../../utils/random"
 import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import GamePlayerLoading from "./game-player-loading"
-import { shuffleArray } from "../../../../../utils/random"
 import "./game-loading-screen.css"
 
 export default function GameLoadingScreen(props: { connectError: string }) {

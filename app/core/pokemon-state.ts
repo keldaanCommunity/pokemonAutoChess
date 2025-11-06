@@ -1,8 +1,7 @@
+import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../models/effects"
 import { IPokemonEntity, Transfer } from "../types"
-import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
@@ -13,7 +12,6 @@ import {
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
