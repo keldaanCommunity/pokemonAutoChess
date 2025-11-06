@@ -280,7 +280,8 @@ export enum Item {
   MISSION_ORDER_RED = "MISSION_ORDER_RED",
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
-  MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD"
+  MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
+  CELL_BATTERY = "CELL_BATTERY"
 }
 
 // should be excluded from carousels
@@ -294,6 +295,7 @@ export const SpecialItems: Item[] = [
   Item.TREASURE_BOX,
   Item.TRASH,
   Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
   Item.OLD_ROD,
   Item.GOOD_ROD,
   Item.SUPER_ROD,
@@ -1000,6 +1002,7 @@ export const UnholdableItems: Item[] = [
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR,
   Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
   Item.GIMMIGHOUL_COIN,
   Item.EGG_FOR_SELL,
   Item.EXCHANGE_TICKET,
@@ -1021,6 +1024,7 @@ export const ConsumableItems: Item[] = [
   Item.RECYCLE_TICKET,
   Item.PICNIC_SET,
   Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,
   Item.AUSPICIOUS_ARMOR,

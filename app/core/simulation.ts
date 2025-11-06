@@ -981,8 +981,8 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.RISING_VOLTAGE:
+        case EffectEnum.POWER_SURGE:
       case EffectEnum.OVERDRIVE:
-      case EffectEnum.POWER_SURGE:
         if (types.has(Synergy.ELECTRIC)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(electricTripleAttackEffect)
