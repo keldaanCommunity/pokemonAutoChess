@@ -48,6 +48,7 @@ import {
   OnItemRemovedEffect,
   OnKillEffect,
   OnMoveEffect,
+  OnSimulationStartEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -737,27 +738,73 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.MAGMARIZER]: [
-    new OnAttackEffect(({ pokemon, target, board }) => {
-      pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.count.magmarizerCount++
-    }),
-    new OnHitEffect(({ attacker, target }) => {
-      target.status.triggerBurn(2000, target, attacker)
-    }),
-    new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.count.magmarizerCount, pokemon, 0, false)
-      pokemon.count.magmarizerCount = 0
-    })
-  ],
-
   [Item.ELECTIRIZER]: [
     new OnAttackEffect(({ pokemon, target, board }) => {
       if (target && pokemon.count.attackCount % 3 === 0) {
-        target.addPP(-15, pokemon, 0, false)
-        target.count.manaBurnCount++
         target.status.triggerParalysis(2000, target, pokemon)
       }
+    })
+  ],
+
+  [Item.TERRAIN_EXTENDER]: [
+    new OnSimulationStartEffect(({ entity }) => {
+      const terrainTypes = [
+        Synergy.ELECTRIC,
+        Synergy.GRASS,
+        Synergy.PSYCHIC,
+        Synergy.FAIRY
+      ]
+      const fieldEffect = values(entity.types).find((type) =>
+        terrainTypes.includes(type)
+      )
+      switch (fieldEffect) {
+        case Synergy.ELECTRIC:
+          entity.status.addElectricField(entity)
+          break
+        case Synergy.GRASS:
+          entity.status.addGrassField(entity)
+          break
+        case Synergy.PSYCHIC:
+          entity.status.addPsychicField(entity)
+          break
+        case Synergy.FAIRY:
+          entity.status.addFairyField(entity)
+          break
+      }
+    }),
+    new OnAbilityCastEffect((pokemon, board) => {
+      board.cells.forEach((ally) => {
+        if (ally && ally.team === pokemon.team && ally.id !== pokemon.id) {
+          if (
+            pokemon.status.electricField &&
+            !ally.status.electricField &&
+            ally.types.has(Synergy.ELECTRIC)
+          ) {
+            ally.status.addElectricField(ally)
+          }
+          if (
+            pokemon.status.grassField &&
+            !ally.status.grassField &&
+            ally.types.has(Synergy.GRASS)
+          ) {
+            ally.status.addGrassField(ally)
+          }
+          if (
+            pokemon.status.psychicField &&
+            !ally.status.psychicField &&
+            ally.types.has(Synergy.PSYCHIC)
+          ) {
+            ally.status.addPsychicField(ally)
+          }
+          if (
+            pokemon.status.fairyField &&
+            !ally.status.fairyField &&
+            ally.types.has(Synergy.FAIRY)
+          ) {
+            ally.status.addFairyField(ally)
+          }
+        }
+      })
     })
   ],
 

@@ -902,6 +902,7 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0.8]
   }),
   [Ability.DISCHARGE]: onCasterScale3,
+  [Ability.SHOCKWAVE]: onCasterScale3,
   [Ability.OVERDRIVE]: onCasterScale2,
   [Ability.SMOG]: onCaster({ scale: 4, depth: DEPTH.ABILITY_MINOR }),
   [Ability.POISON_GAS]: onCaster({

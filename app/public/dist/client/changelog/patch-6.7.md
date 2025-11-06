@@ -16,11 +16,18 @@
 - Nerf Unown W: now gives you a high rarity Pokémon of one of your two highest synergies. Chances to get an epic have been extended up to level 30.
 - Buff Quagsire: Attack 15 → 21
 - Buff Guzzlord: Def/SpeDef 6 → 10
+- Buff Discharge: damage 25/50/75 → 25/50/100
+- New ability for Elekid line: Shockwave: deal 25/50/100 special damage to all enemies in a 2-range radius, +1 range if user is in an Electric field.
+- Rework Meteor Mash (Beldum): Deal 3 times 100% (AP) of Attack as special damage to the target (4 times if user is in Psychic field) and increase the user's attack by 2 for each hit.
 
 # Changes to Synergies
 
 # Changes to Items
 
+- Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
+- Electirizer now gives Electric type. Removed PP burn on triple attacks.
+- Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
+- New tool: Terrain extender: At the start of the fight, holder gains either Electric Field, Grass Field, Psychic Field or Fairy Field based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.
 - Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye and Wigglytuff encounters.
 - Protective pads now also protects against fighting synergy throws
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
@@ -56,3 +63,4 @@
 - Gameboy gadget level requirement decreased to 20
 - Pokeguessr gadget level requirement decreased to 30
 - Bot builder gadget level requirement increased to 40
+- Added bench management to Bot builder

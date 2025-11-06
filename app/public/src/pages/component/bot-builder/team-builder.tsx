@@ -313,6 +313,7 @@ export default function TeamBuilder(props: {
         board={board}
         handleEditorClick={handleEditorClick}
         handleDrop={handleDrop}
+        showBench={inBotBuilder}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
       <ItemPicker selectEntity={setSelection} selected={selection} />

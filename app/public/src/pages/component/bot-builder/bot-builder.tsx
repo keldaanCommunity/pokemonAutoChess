@@ -331,7 +331,7 @@ export function SubmitBotModal(props: {
       } else {
         setError(res.statusText)
       }
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message)
     }
     setLoading(false)

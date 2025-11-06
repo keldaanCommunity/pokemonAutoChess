@@ -127,7 +127,9 @@ Object.values(Pkm).forEach((pkm) => {
 })
 
 export function getPowerScore(board: IDetailledPokemon[]): number {
-  return board.reduce((sum, pkm) => sum + getUnitPowerScore(pkm.name), 0)
+  return board
+    .filter((p) => p.y > 0)
+    .reduce((sum, pkm) => sum + getUnitPowerScore(pkm.name), 0)
 }
 
 export function getUnitPowerScore(pkm: Pkm): number {
@@ -213,6 +215,7 @@ export function validateBot(bot: IBot): string[] {
 
 export function validateBoard(board: IDetailledPokemon[], stage: number) {
   const team = board
+    .filter((p) => p.y > 0)
     .map((p) => getPokemonData(p.name))
     .filter((p) => p.passive !== Passive.INANIMATE)
   const items = getNbComponentsOnBoard(board)

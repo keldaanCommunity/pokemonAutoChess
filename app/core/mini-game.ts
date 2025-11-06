@@ -19,7 +19,6 @@ import { Transfer } from "../types"
 import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
-  ArtificialItems,
   Berries,
   CraftableItems,
   CraftableNonSynergyItems,
@@ -28,7 +27,8 @@ import {
   MissionOrders,
   SynergyGems,
   SynergyGivenByGem,
-  SynergyStones
+  SynergyStones,
+  Tools
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
@@ -496,7 +496,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.ELECTIVIRE) {
-      itemsSet = ArtificialItems
+      itemsSet = Tools
       maxCopiesPerItem = 2
     }
 
