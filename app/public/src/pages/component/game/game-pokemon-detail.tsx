@@ -26,7 +26,7 @@ import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | IPokemon | IPokemonEntity
-  origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki"
+  origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki" | "patchnotes"
   shiny?: boolean
   emotion?: Emotion
   isAlly?: boolean

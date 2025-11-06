@@ -1,38 +1,45 @@
-import { marked } from "marked"
 import React, { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
 import "./poster.css"
 
-export function Poster(props: { version: string }) {
-  const { t } = useTranslation()
-  const [patchContent, setPatchContent] = useState<string>()
+interface PosterProps {
+  version: string
+  onClick?: () => void
+  isDetailed?: boolean
+}
+
+export function Poster({ version, onClick, isDetailed }: PosterProps) {
+  const [imageSrc, setImageSrc] = useState(`/assets/posters/${version}.png`)
+  const [isHdLoaded, setIsHdLoaded] = useState(false)
 
   useEffect(() => {
-    fetch(`/changelog/summary/summary-${props.version}.md`)
-      .then((res) => res.text())
-      .then((md) => marked.parse(md))
-      .then((parsed) => setPatchContent(parsed))
-  }, [])
+    if (isDetailed && !isHdLoaded) {
+      setTimeout(() => {
+        const hdImage = new Image()
+        const hdImageSrc = `/assets/posters/hd/${version}.png`
+        hdImage.src = hdImageSrc
+        hdImage.onload = () => {
+          setImageSrc(hdImageSrc)
+          setIsHdLoaded(true)
+        }
+        hdImage.onerror = () => {
+          // Keep the original image if HD version fails to load
+          console.warn(
+            `HD version of poster ${version} not found, keeping original`
+          )
+        }
+      }, 400)
+    }
+  }, [isDetailed, version, isHdLoaded])
 
   return (
     <div
-      className="poster"
-      onClick={(e) => e.currentTarget.classList.toggle("flipped")}
+      className={`poster ${isDetailed ? "poster-detailed" : ""}`}
+      onClick={onClick}
+      style={{
+        viewTransitionName: `poster-${version.replace(/\./g, "-")}`
+      }}
     >
-      <div className="front">
-        <img
-          src={`/assets/posters/${props.version}.png`}
-          alt={props.version}
-          loading="lazy"
-        />
-      </div>
-      <div className="back">
-        {patchContent ? (
-          <div dangerouslySetInnerHTML={{ __html: patchContent }}></div>
-        ) : (
-          <p>{t("loading")}</p>
-        )}
-      </div>
+      <img src={imageSrc} alt={`Patch ${version} poster`} loading="lazy" />
     </div>
   )
 }
