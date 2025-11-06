@@ -2,6 +2,19 @@ import { Command } from "@colyseus/command"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 import {
+  AdditionalPicksStages,
+  BOARD_SIDE_HEIGHT,
+  BOARD_WIDTH,
+  FIGHTING_PHASE_DURATION,
+  ITEM_CAROUSEL_BASE_DURATION,
+  ItemCarouselStages,
+  ItemProposalStages,
+  MAX_PLAYERS_PER_GAME,
+  PORTAL_CAROUSEL_BASE_DURATION,
+  PortalCarouselStages,
+  StageDuration
+} from "../../config"
+import {
   OnItemDroppedEffect,
   OnStageStartEffect
 } from "../../core/effects/effect"
@@ -40,19 +53,6 @@ import {
   Title,
   Transfer
 } from "../../types"
-import {
-  AdditionalPicksStages,
-  BOARD_SIDE_HEIGHT,
-  BOARD_WIDTH,
-  FIGHTING_PHASE_DURATION,
-  ITEM_CAROUSEL_BASE_DURATION,
-  ItemCarouselStages,
-  ItemProposalStages,
-  MAX_PLAYERS_PER_GAME,
-  PORTAL_CAROUSEL_BASE_DURATION,
-  PortalCarouselStages,
-  StageDuration
-} from "../../types/Config"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import {

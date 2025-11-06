@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { EventPointsPerRank } from "../../../../../types/Config"
+import { EventPointsPerRank } from "../../../../../config"
 import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"

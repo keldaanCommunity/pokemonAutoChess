@@ -1,13 +1,13 @@
 import { ArraySchema } from "@colyseus/schema"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { SynergyTriggers } from "../../../../../config"
 import {
   IGameRecord,
   IPokemonRecord
 } from "../../../../../models/colyseus-models/game-record"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { SynergyTriggers } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { formatDate } from "../../utils/date"

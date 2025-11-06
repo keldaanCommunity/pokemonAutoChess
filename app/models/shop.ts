@@ -1,5 +1,3 @@
-import GameState from "../rooms/states/game-state"
-import { IPokemon, IPokemonEntity } from "../types"
 import {
   ARCEUS_RATE,
   DITTO_RATE,
@@ -13,7 +11,9 @@ import {
   RarityProbabilityPerLevel,
   SHOP_SIZE,
   UniquePool
-} from "../types/Config"
+} from "../config"
+import GameState from "../rooms/states/game-state"
+import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
@@ -355,7 +355,8 @@ export default class Shop {
           return false
         }
 
-        const hasSynergyWanted = synergyWanted === undefined || types.includes(synergyWanted)
+        const hasSynergyWanted =
+          synergyWanted === undefined || types.includes(synergyWanted)
 
         return (
           hasSynergyWanted &&

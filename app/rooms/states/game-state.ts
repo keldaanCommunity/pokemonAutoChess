@@ -5,6 +5,7 @@ import {
   SetSchema,
   type
 } from "@colyseus/schema"
+import { BOARD_HEIGHT, BOARD_WIDTH, StageDuration } from "../../config"
 import BotManager from "../../core/bot-manager"
 import Simulation from "../../core/simulation"
 import { TownEncounter } from "../../core/town-encounters"
@@ -13,12 +14,7 @@ import Player from "../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Shop from "../../models/shop"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  EloRank,
-  StageDuration
-} from "../../types/Config"
+import { EloRank } from "../../types/enum/EloRank"
 import { GameMode, GamePhaseState } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"

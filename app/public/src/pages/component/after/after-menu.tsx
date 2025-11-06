@@ -1,11 +1,12 @@
 import { ArraySchema } from "@colyseus/schema"
 import React, { useState } from "react"
+import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
+import { ExpPlace, SynergyTriggers } from "../../../../../config"
 import { computeElo } from "../../../../../core/elo"
 import { Role } from "../../../../../types"
-import { ExpPlace, SynergyTriggers } from "../../../../../types/Config"
 import { GameMode } from "../../../../../types/enum/Game"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -17,7 +18,6 @@ import SynergyIcon from "../icons/synergy-icon"
 import { Avatar } from "../profile/avatar"
 import Team from "./team"
 import "./after-menu.css"
-import ReactDOM from "react-dom"
 
 export default function AfterMenu() {
   const { t } = useTranslation()

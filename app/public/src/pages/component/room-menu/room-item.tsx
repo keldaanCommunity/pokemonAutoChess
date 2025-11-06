@@ -1,12 +1,12 @@
 import { RoomAvailable } from "colyseus.js"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IPreparationMetadata, Role } from "../../../../../types"
 import {
   EloRank,
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME
-} from "../../../../../types/Config"
+} from "../../../../../config"
+import { IPreparationMetadata, Role } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { formatMinMaxRanks, getRank } from "../../../../../utils/elo"
 import { useAppSelector } from "../../../hooks"

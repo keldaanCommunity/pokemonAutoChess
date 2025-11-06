@@ -1,18 +1,15 @@
-import Player from "../../models/colyseus-models/player"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import {
   BasculinWhite,
-  Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../../models/effects"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Transfer } from "../../types"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
-  Berries,
   ConsumableItems,
   Flavors,
   Item,

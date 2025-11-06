@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AbilityAnimation,
@@ -10,7 +11,6 @@ import {
   AttackSpriteScale,
   HitSprite
 } from "../../../../types/Animation"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../types/Config"
 import { Ability } from "../../../../types/enum/Ability"
 import {
   Orientation,

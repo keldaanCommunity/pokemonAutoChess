@@ -1,5 +1,11 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  SynergyTriggers,
+  UniquePool
+} from "../../config"
 import { getUnitPowerScore } from "../../core/bot-logic"
 import { CollectionUtils } from "../../core/collection"
 import { createRandomEgg } from "../../core/eggs"
@@ -11,12 +17,6 @@ import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  SynergyTriggers,
-  UniquePool
-} from "../../types/Config"
 import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,

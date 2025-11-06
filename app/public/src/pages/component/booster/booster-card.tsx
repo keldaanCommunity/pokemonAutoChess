@@ -1,12 +1,12 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { BoosterCard } from "../../../../../types/Booster"
 import {
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
   RarityColor
-} from "../../../../../types/Config"
+} from "../../../../../config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { BoosterCard } from "../../../../../types/Booster"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"

@@ -5,6 +5,11 @@ import { Client, matchMaker } from "colyseus"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { FilterQuery } from "mongoose"
 import {
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME,
+  MIN_HUMAN_PLAYERS
+} from "../../config"
+import {
   getPendingGame,
   isPlayerTimeout,
   setPendingGame
@@ -13,16 +18,10 @@ import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
-import {
-  EloRank,
-  EloRankThreshold,
-  MAX_PLAYERS_PER_GAME,
-  MIN_HUMAN_PLAYERS
-} from "../../types/Config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
+import { EloRank } from "../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { isValidDate } from "../../utils/date"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"

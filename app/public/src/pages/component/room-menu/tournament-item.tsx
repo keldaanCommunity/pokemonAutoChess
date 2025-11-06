@@ -1,20 +1,20 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { formatDate } from "../../utils/date"
-import { participateInTournament } from "../../../stores/NetworkStore"
-import { EloBadge } from "../profile/elo-badge"
+import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../config"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
-import { entries, values } from "../../../../../utils/schemas"
 import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
 import { average } from "../../../../../utils/number"
+import { entries, values } from "../../../../../utils/schemas"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { participateInTournament } from "../../../stores/NetworkStore"
+import { formatDate } from "../../utils/date"
 import { cc } from "../../utils/jsx"
-import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../types/Config"
 import PokemonPortrait from "../pokemon-portrait"
+import { EloBadge } from "../profile/elo-badge"
 import "./tournament-item.css"
 
 export default function TournamentItem(props: {

@@ -1,3 +1,4 @@
+import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
 import {
   Chewtle,
@@ -8,7 +9,6 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import { IStatus } from "../../types"
-import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Rarity, Team } from "../../types/enum/Game"

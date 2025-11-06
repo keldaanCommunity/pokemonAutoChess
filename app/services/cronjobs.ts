@@ -2,18 +2,18 @@ import { CronJob } from "cron"
 import dayjs from "dayjs"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import TitleStatistic from "../models/mongo-models/title-statistic"
-import UserMetadata from "../models/mongo-models/user-metadata"
-import { Title } from "../types"
 import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
   CRON_HISTORY_CLEANUP_DELAY,
   ELO_DECAY_LOST_PER_DAY,
-  EloRank,
   EloRankThreshold
-} from "../types/Config"
+} from "../config"
+import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
+import TitleStatistic from "../models/mongo-models/title-statistic"
+import UserMetadata from "../models/mongo-models/user-metadata"
+import { Title } from "../types"
+import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"

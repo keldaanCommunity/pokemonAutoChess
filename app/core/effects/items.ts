@@ -1,7 +1,7 @@
+import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
-import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../types/Config"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState } from "../../types/enum/Game"

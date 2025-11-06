@@ -1,20 +1,19 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { EloRankThreshold } from "../../../../../config"
 import {
-  IItemV2,
+  fetchMetaItems,
   IItemsStatisticV2,
-  fetchMetaItems
+  IItemV2
 } from "../../../../../models/mongo-models/items-statistic-v2"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import {
   ArtificialItems,
   CraftableItems,
-  WeatherRocks,
-  ShinyItems,
-  Item
+  ShinyItems
 } from "../../../../../types/enum/Item"
 import ItemStatistic from "./item-statistic"
-import { EloRank, EloRankThreshold } from "../../../../../types/Config"
 
 export function ItemReport() {
   const [loading, setLoading] = useState<boolean>(true)

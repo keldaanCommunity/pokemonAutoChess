@@ -1,4 +1,4 @@
-import { BOTS_ENABLED } from "../types/Config"
+import { BOTS_ENABLED } from "../config"
 
 export type Gadget = {
   name: string

@@ -1,6 +1,6 @@
+import { AdditionalPicksStages, PortalCarouselStages } from "../config"
 import { IBot, IDetailledPokemon, IStep } from "../models/mongo-models/bot-v2"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
-import { AdditionalPicksStages, PortalCarouselStages } from "../types/Config"
 import { Rarity } from "../types/enum/Game"
 import { CraftableItems, Item, ItemComponents } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"

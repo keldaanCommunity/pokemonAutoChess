@@ -2,13 +2,13 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { PVEStages } from "../../../../../models/pve-stages"
-import { Emotion } from "../../../../../types"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
   PortalCarouselStages
-} from "../../../../../types/Config"
+} from "../../../../../config"
+import { PVEStages } from "../../../../../models/pve-stages"
+import { Emotion } from "../../../../../types"
 import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"

@@ -1,10 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react"
+import { BoosterPriceByRarity, getEmotionCost } from "../../../../../config"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import {
-  BoosterPriceByRarity,
-  getEmotionCost
-} from "../../../../../types/Config"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
