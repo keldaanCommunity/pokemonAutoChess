@@ -130,6 +130,12 @@ export default function SynergyDetailComponent(props: {
     })
   }
 
+  if(props.type === Synergy.ELECTRIC && currentPlayer) {
+    additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
+      charge: currentPlayer.cellBattery
+    })
+  }
+
   return (
     <div style={{ maxWidth: "560px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>

@@ -99,14 +99,14 @@ export const electricTripleAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board, isTripleAttack }) => {
     if (isTripleAttack) return // ignore the effect of the 2nd and 3d attacks of triple attacks
     let shouldTriggerTripleAttack = false,
-      isOverdrive = false
+      isSupercharged = false
     if (pokemon.effects.has(EffectEnum.RISING_VOLTAGE)) {
       shouldTriggerTripleAttack = pokemon.count.attackCount % 4 === 0
     } else if (pokemon.effects.has(EffectEnum.POWER_SURGE)) {
       shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
-    } else if (pokemon.effects.has(EffectEnum.OVERDRIVE)) {
+    } else if (pokemon.effects.has(EffectEnum.SUPERCHARGED)) {
       shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
-      isOverdrive = true
+      isSupercharged = true
     }
     if (shouldTriggerTripleAttack) {
       pokemon.count.tripleAttackCount++
@@ -121,10 +121,10 @@ export const electricTripleAttackEffect = new OnAttackEffect(
 
       pokemon.state.attack(pokemon, board, target, true)
       pokemon.state.attack(pokemon, board, target, true)
-      if (isOverdrive && target) {
+      if (isSupercharged && target) {
         target.addPP(-10, pokemon, 0, false)
         target.count.manaBurnCount++
-        if(pokemon.player){
+        if (pokemon.player) {
           pokemon.player.chargeCellBattery(5)
         }
       }

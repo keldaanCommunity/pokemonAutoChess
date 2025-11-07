@@ -72,7 +72,7 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
   [Synergy.ELECTRIC]: [
     EffectEnum.RISING_VOLTAGE,
     EffectEnum.POWER_SURGE,
-    EffectEnum.OVERDRIVE
+    EffectEnum.SUPERCHARGED
   ],
   [Synergy.FIGHTING]: [
     EffectEnum.GUTS,

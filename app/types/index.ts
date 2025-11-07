@@ -318,6 +318,7 @@ export interface IPlayer {
   wildChance: number
   eggChance: number
   goldenEggChance: number
+  cellBattery: number
   lightX: number
   lightY: number
 }
