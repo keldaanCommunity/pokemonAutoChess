@@ -706,7 +706,7 @@ export default class Simulation extends Schema implements ISimulation {
             (item) => item === Item.CELL_BATTERY
           ).length
           if (nbCellBatteries > 0) {
-            pokemon.addSpeed(5 * nbCellBatteries, pokemon, 0, false)
+            pokemon.addSpeed(3 * nbCellBatteries, pokemon, 0, false)
           }
         }
         if (pokemon.refToBoardPokemon.supercharged) {
