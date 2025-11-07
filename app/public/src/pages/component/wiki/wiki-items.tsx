@@ -19,8 +19,6 @@ import {
   TMs,
   Tools,
   TownItems,
-  UpgradedToolByTool,
-  UpgradedTools,
   WeatherRocks
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -56,23 +54,20 @@ export default function WikiItems() {
     Item.COIN,
     Item.NUGGET,
     Item.BIG_NUGGET
-  ]  
-  const specialItems = useMemo(
-    () => {
-      const specialItemsToExclude: Item[] = [
-        ...MemoryDiscs,
-        ...TownItems,
-        ...otherBuriedItems,
-        ...FishingRods,
-        ...Mulches,
-        Item.CHEF_HAT,
-        Item.FIRE_SHARD,
-        Item.CELL_BATTERY
-      ]
-      return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
-    },
-    []
-  ) // too many memory discs to display
+  ]
+  const specialItems = useMemo(() => {
+    const specialItemsToExclude: Item[] = [
+      ...MemoryDiscs,
+      ...TownItems,
+      ...otherBuriedItems,
+      ...FishingRods,
+      ...Mulches,
+      Item.CHEF_HAT,
+      Item.FIRE_SHARD,
+      Item.CELL_BATTERY
+    ]
+    return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
+  }, []) // too many memory discs to display
 
   return (
     <div id="wiki-items">
@@ -170,10 +165,11 @@ export default function WikiItems() {
         </ul>
       </article>
 
-      <article className="tools">
-        <h2>
+      <article className="synergy-items">
+        <h2>{t("items_from_synergies")}</h2>
+        <h3>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("tools")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("tools_description"))}</p>
         <ul>
           <ItemList items={ArtificialItems} onItemHover={setItemHovered} />
@@ -185,76 +181,10 @@ export default function WikiItems() {
             onItemHover={setItemHovered}
           />
         </ul>
-      </article>
 
-      <article className="upgraded-tools">
-        <h2>
-          <SynergyIcon type={Synergy.ELECTRIC} /> {t("upgraded_tools")}
-        </h2>
-        <p>{addIconsToDescription(t("upgraded_tools_description"))}</p>
-        <table>
-          <tbody>
-            <tr>
-              <td
-                style={{
-                  fontSize: "300%",
-                  verticalAlign: "middle",
-                  textAlign: "center",
-                  lineHeight: 0
-                }}
-              >
-                +
-              </td>
-              {Tools.map((i) => {
-                return (
-                  <th
-                    key={i}
-                    data-tooltip-id="item-detail"
-                    onMouseOver={() => setItemHovered(i)}
-                  >
-                    <img
-                      src={"assets/item/" + i + ".png"}
-                      className="item"
-                    ></img>
-                  </th>
-                )
-              })}
-            </tr>
-           <tr>
-              <td
-                data-tooltip-id="item-detail"
-                onMouseOver={() => setItemHovered(Item.CELL_BATTERY)}
-              >
-                <img
-                  src={"assets/item/" + Item.CELL_BATTERY + ".png"}
-                  className="item"
-                ></img>
-              </td>
-              {Tools.map((t) => {
-                const upgradedTool = UpgradedToolByTool[t]
-                if(!upgradedTool) return <td></td>
-                return (
-                  <td
-                    key={"td-" + t}
-                    data-tooltip-id="item-detail"
-                    onMouseOver={() => setItemHovered(upgradedTool)}
-                  >
-                    <img
-                      src={"assets/item/" + upgradedTool + ".png"}
-                      className="item"
-                    ></img>
-                  </td>
-                )
-              })}
-            </tr>
-          </tbody>
-        </table>
-      </article>
-
-      <article className="gems">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.GROUND} /> {t("gems")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("gems_description"))}</p>
         <ul>
           <ItemList items={SynergyGemsBuried} onItemHover={setItemHovered} />
@@ -272,22 +202,18 @@ export default function WikiItems() {
         <ul>
           <ItemList items={otherBuriedItems} onItemHover={setItemHovered} />
         </ul>
-      </article>
 
-      <article className="weather-rocks">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("weather_rocks_description"))}</p>
         <ul>
           <ItemList items={WeatherRocks} onItemHover={setItemHovered} />
         </ul>
-      </article>
 
-      <article className="tm-hm">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.HUMAN} /> {t("tm_hm")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("tm_hm_description"))}</p>
         <ul>
           <ItemList
@@ -301,12 +227,10 @@ export default function WikiItems() {
             onItemHover={setItemHovered}
           />
         </ul>
-      </article>
 
-      <article className="berries">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("berries_description"))}</p>
         <ul>
           {Berries.map((i) => (
@@ -324,12 +248,10 @@ export default function WikiItems() {
             </li>
           ))}
         </ul>
-      </article>
 
-      <article className="dishes">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.GOURMET} /> {t("dishes")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("dishes_description"))}</p>
         <ul>
           <ItemList
@@ -337,12 +259,10 @@ export default function WikiItems() {
             onItemHover={setItemHovered}
           />
         </ul>
-      </article>
 
-      <article className="fishing-rods">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.WATER} /> {t("fishing_rods")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("fishing_rods_description"))}</p>
         <ul>
           <ItemList
@@ -350,22 +270,26 @@ export default function WikiItems() {
             onItemHover={setItemHovered}
           />
         </ul>
-      </article>
 
-      <article className="mulches">
-        <h2>
+        <h3>
           <SynergyIcon type={Synergy.FLORA} /> {t("mulch")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("mulch_description"))}</p>
         <ul>
           <ItemList items={Mulches} onItemHover={setItemHovered} />
         </ul>
-      </article>
 
-      <article className="fire-shard">
-        <h2>
+        <h3>
+          <SynergyIcon type={Synergy.ELECTRIC} /> {t("item.CELL_BATTERY")}
+        </h3>
+        <p>{addIconsToDescription(t("cell_battery_description"))}</p>
+        <ul>
+          <ItemList items={[Item.CELL_BATTERY]} onItemHover={setItemHovered} />
+        </ul>
+
+        <h3>
           <SynergyIcon type={Synergy.FIRE} /> {t("item.FIRE_SHARD")}
-        </h2>
+        </h3>
         <p>{addIconsToDescription(t("fire_shard_description"))}</p>
         <ul>
           <ItemList items={[Item.FIRE_SHARD]} onItemHover={setItemHovered} />

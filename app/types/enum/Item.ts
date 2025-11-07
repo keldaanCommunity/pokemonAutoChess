@@ -101,6 +101,7 @@ export enum Item {
   SURFBOARD = "SURFBOARD",
   COOKING_POT = "COOKING_POT",
   RUNNING_SHOES = "RUNNING_SHOES",
+  MAX_ELIXIR = "MAX_ELIXIR",
   METEORITE = "METEORITE",
   TRASH = "TRASH",
   DYNAMAX_BAND = "DYNAMAX_BAND",
@@ -117,7 +118,6 @@ export enum Item {
   COMET_SHARD = "COMET_SHARD",
   REPEAT_BALL = "REPEAT_BALL",
   GOLD_BOW = "GOLD_BOW",
-  MAX_ELIXIR = "MAX_ELIXIR",
   DAMP_ROCK = "DAMP_ROCK",
   ICY_ROCK = "ICY_ROCK",
   HEAT_ROCK = "HEAT_ROCK",
@@ -540,34 +540,6 @@ export const ArtificialItems: Tool[] = [
   Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
 ] as const
-
-export const UpgradedTools: Item[] = [] as const
-export type UpgradedTools = (typeof UpgradedTools)[number]
-
-export const UpgradedToolByTool: Record<Tool, UpgradedTools | null> = {
-  [Item.TOXIC_ORB]: null,
-  [Item.HARD_STONE]: null,
-  [Item.METAL_COAT]: null,
-  [Item.AIR_BALLOON]: null,
-  [Item.MACHO_BRACE]: null,
-  [Item.METRONOME]: null,
-  [Item.EXPLORER_KIT]: null,
-  [Item.ROTOM_PHONE]: null,
-  [Item.SILK_SCARF]: null,
-  [Item.TINY_MUSHROOM]: null,
-  [Item.BERSERK_GENE]: null,
-  [Item.SURFBOARD]: null,
-  [Item.COOKING_POT]: null,
-  [Item.RUNNING_SHOES]: null,
-  [Item.INCENSE]: null,
-  [Item.ELECTIRIZER]: null,
-  [Item.MAGMARIZER]: null,
-  [Item.POKERUS_VIAL]: null,
-  [Item.MAX_ELIXIR]: null,
-  [Item.EXP_SHARE]: null,
-  [Item.TERRAIN_EXTENDER]: null,
-  [Item.LIGHT_BALL]: null
-}
 
 export const ShinyItems: Item[] = [
   Item.DYNAMAX_BAND,

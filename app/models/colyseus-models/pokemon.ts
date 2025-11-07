@@ -17345,7 +17345,7 @@ export class Duraludon extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.ARCHALUDON
-  evolutionRule = new ItemEvolutionRule(Tools)
+  evolutionRule = new ItemEvolutionRule([...Tools])
   hp = 180
   atk = 18
   speed = 52
