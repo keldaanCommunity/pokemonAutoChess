@@ -284,15 +284,96 @@ export enum Item {
   CELL_BATTERY = "CELL_BATTERY"
 }
 
-// should be excluded from carousels
-export const SpecialItems: Item[] = [
-  Item.EGG_FOR_SELL,
+export const MemoryDiscs = [
+  Item.FIRE_MEMORY,
+  Item.FOSSIL_MEMORY,
+  Item.PSYCHIC_MEMORY,
+  Item.WATER_MEMORY,
+  Item.ELECTRIC_MEMORY,
+  Item.FAIRY_MEMORY,
+  Item.DARK_MEMORY,
+  Item.GRASS_MEMORY,
+  Item.ICE_MEMORY,
+  Item.FIGHTING_MEMORY,
+  Item.POISON_MEMORY,
+  Item.SOUND_MEMORY,
+  Item.STEEL_MEMORY,
+  Item.FLYING_MEMORY,
+  Item.ROCK_MEMORY,
+  Item.GROUND_MEMORY,
+  Item.FIELD_MEMORY,
+  Item.GHOST_MEMORY,
+  Item.LIGHT_MEMORY,
+  Item.NORMAL_MEMORY,
+  Item.BUG_MEMORY,
+  Item.GOURMET_MEMORY,
+  Item.MONSTER_MEMORY,
+  Item.AQUATIC_MEMORY
+] satisfies Item[]
+
+export const MemoryDiscsBySynergy: {
+  [s in Synergy]?: (typeof MemoryDiscs)[number]
+} = {
+  [Synergy.FIRE]: Item.FIRE_MEMORY,
+  [Synergy.FOSSIL]: Item.FOSSIL_MEMORY,
+  [Synergy.PSYCHIC]: Item.PSYCHIC_MEMORY,
+  [Synergy.WATER]: Item.WATER_MEMORY,
+  [Synergy.ELECTRIC]: Item.ELECTRIC_MEMORY,
+  [Synergy.FAIRY]: Item.FAIRY_MEMORY,
+  [Synergy.DARK]: Item.DARK_MEMORY,
+  [Synergy.GRASS]: Item.GRASS_MEMORY,
+  [Synergy.ICE]: Item.ICE_MEMORY,
+  [Synergy.FIGHTING]: Item.FIGHTING_MEMORY,
+  [Synergy.POISON]: Item.POISON_MEMORY,
+  [Synergy.SOUND]: Item.SOUND_MEMORY,
+  [Synergy.STEEL]: Item.STEEL_MEMORY,
+  [Synergy.FLYING]: Item.FLYING_MEMORY,
+  [Synergy.ROCK]: Item.ROCK_MEMORY,
+  [Synergy.GROUND]: Item.GROUND_MEMORY,
+  [Synergy.FIELD]: Item.FIELD_MEMORY,
+  [Synergy.GHOST]: Item.GHOST_MEMORY,
+  [Synergy.LIGHT]: Item.LIGHT_MEMORY,
+  [Synergy.NORMAL]: Item.NORMAL_MEMORY,
+  [Synergy.BUG]: Item.BUG_MEMORY,
+  [Synergy.GOURMET]: Item.GOURMET_MEMORY,
+  [Synergy.MONSTER]: Item.MONSTER_MEMORY,
+  [Synergy.AQUATIC]: Item.AQUATIC_MEMORY
+}
+
+export const MissionOrders = [
+  Item.MISSION_ORDER_PINK,
+  Item.MISSION_ORDER_RED,
+  Item.MISSION_ORDER_BLUE,
+  Item.MISSION_ORDER_GREEN,
+  Item.MISSION_ORDER_GOLD
+] satisfies Item[]
+
+export type MissionOrder = (typeof MissionOrders)[number]
+
+export const DojoTickets = [
+  Item.BRONZE_DOJO_TICKET,
+  Item.SILVER_DOJO_TICKET,
+  Item.GOLD_DOJO_TICKET
+] satisfies Item[]
+
+export const TownItems = [
+  Item.TREASURE_BOX,
   Item.AMULET_COIN,
   Item.GIMMIGHOUL_COIN,
+  Item.EXCHANGE_TICKET,
+  Item.RECYCLE_TICKET,
+  ...DojoTickets,
+  ...MissionOrders,
+  Item.EGG_FOR_SELL,
+  Item.PICNIC_SET
+] satisfies Item[]
+
+// should be excluded from carousels
+export const SpecialItems = [
+  ...TownItems,
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET,
-  Item.TREASURE_BOX,
   Item.TRASH,
   Item.FIRE_SHARD,
   Item.CELL_BATTERY,
@@ -300,7 +381,6 @@ export const SpecialItems: Item[] = [
   Item.GOOD_ROD,
   Item.SUPER_ROD,
   Item.CHEF_HAT,
-  Item.PICNIC_SET,
   Item.VANILLA_FLAVOR,
   Item.RUBY_FLAVOR,
   Item.MATCHA_FLAVOR,
@@ -326,59 +406,16 @@ export const SpecialItems: Item[] = [
   Item.SCROLL_OF_WATERS,
   Item.SCROLL_OF_DARKNESS,
   Item.MEMORY_DISCS,
-  Item.FIRE_MEMORY,
-  Item.FOSSIL_MEMORY,
-  Item.PSYCHIC_MEMORY,
-  Item.WATER_MEMORY,
-  Item.ELECTRIC_MEMORY,
-  Item.FAIRY_MEMORY,
-  Item.DARK_MEMORY,
-  Item.GRASS_MEMORY,
-  Item.ICE_MEMORY,
-  Item.FIGHTING_MEMORY,
-  Item.POISON_MEMORY,
-  Item.SOUND_MEMORY,
-  Item.STEEL_MEMORY,
-  Item.FLYING_MEMORY,
-  Item.ROCK_MEMORY,
-  Item.GROUND_MEMORY,
-  Item.FIELD_MEMORY,
-  Item.GHOST_MEMORY,
-  Item.LIGHT_MEMORY,
-  Item.NORMAL_MEMORY,
-  Item.BUG_MEMORY,
-  Item.GOURMET_MEMORY,
-  Item.MONSTER_MEMORY,
-  Item.AQUATIC_MEMORY,
-  Item.EXCHANGE_TICKET,
-  Item.RECYCLE_TICKET,
-  Item.BRONZE_DOJO_TICKET,
-  Item.SILVER_DOJO_TICKET,
-  Item.GOLD_DOJO_TICKET,
-  Item.MISSION_ORDER_PINK,
-  Item.MISSION_ORDER_RED,
-  Item.MISSION_ORDER_BLUE,
-  Item.MISSION_ORDER_GREEN,
-  Item.MISSION_ORDER_GOLD
-]
+  ...MemoryDiscs
+] satisfies Item[]
 
 export const FishingRods = [
   Item.SUPER_ROD,
   Item.GOOD_ROD,
   Item.OLD_ROD
-] as const // order matters
+] satisfies Item[] // order matters
 
 export type FishingRod = (typeof FishingRods)[number]
-
-export const MissionOrders: Item[] = [
-  Item.MISSION_ORDER_PINK,
-  Item.MISSION_ORDER_RED,
-  Item.MISSION_ORDER_BLUE,
-  Item.MISSION_ORDER_GREEN,
-  Item.MISSION_ORDER_GOLD
-]
-
-export type MissionOrder = (typeof MissionOrders)[number]
 
 export const ItemComponents: Item[] = [
   Item.FOSSIL_STONE,
@@ -463,7 +500,7 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const Tools: Item[] = [
+export const Tools = [
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.HARD_STONE,
@@ -503,6 +540,34 @@ export const ArtificialItems: Tool[] = [
   Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
 ] as const
+
+export const UpgradedTools: Item[] = [] as const
+export type UpgradedTools = (typeof UpgradedTools)[number]
+
+export const UpgradedToolByTool: Record<Tool, UpgradedTools | null> = {
+  [Item.TOXIC_ORB]: null,
+  [Item.HARD_STONE]: null,
+  [Item.METAL_COAT]: null,
+  [Item.AIR_BALLOON]: null,
+  [Item.MACHO_BRACE]: null,
+  [Item.METRONOME]: null,
+  [Item.EXPLORER_KIT]: null,
+  [Item.ROTOM_PHONE]: null,
+  [Item.SILK_SCARF]: null,
+  [Item.TINY_MUSHROOM]: null,
+  [Item.BERSERK_GENE]: null,
+  [Item.SURFBOARD]: null,
+  [Item.COOKING_POT]: null,
+  [Item.RUNNING_SHOES]: null,
+  [Item.INCENSE]: null,
+  [Item.ELECTIRIZER]: null,
+  [Item.MAGMARIZER]: null,
+  [Item.POKERUS_VIAL]: null,
+  [Item.MAX_ELIXIR]: null,
+  [Item.EXP_SHARE]: null,
+  [Item.TERRAIN_EXTENDER]: null,
+  [Item.LIGHT_BALL]: null
+}
 
 export const ShinyItems: Item[] = [
   Item.DYNAMAX_BAND,
@@ -629,62 +694,6 @@ export const ToolsBuried: Tool[] = [
   Item.MAX_ELIXIR,
   Item.EXP_SHARE
 ]
-
-export const MemoryDiscs = [
-  Item.FIRE_MEMORY,
-  Item.FOSSIL_MEMORY,
-  Item.PSYCHIC_MEMORY,
-  Item.WATER_MEMORY,
-  Item.ELECTRIC_MEMORY,
-  Item.FAIRY_MEMORY,
-  Item.DARK_MEMORY,
-  Item.GRASS_MEMORY,
-  Item.ICE_MEMORY,
-  Item.FIGHTING_MEMORY,
-  Item.POISON_MEMORY,
-  Item.SOUND_MEMORY,
-  Item.STEEL_MEMORY,
-  Item.FLYING_MEMORY,
-  Item.ROCK_MEMORY,
-  Item.GROUND_MEMORY,
-  Item.FIELD_MEMORY,
-  Item.GHOST_MEMORY,
-  Item.LIGHT_MEMORY,
-  Item.NORMAL_MEMORY,
-  Item.BUG_MEMORY,
-  Item.GOURMET_MEMORY,
-  Item.MONSTER_MEMORY,
-  Item.AQUATIC_MEMORY
-] as const
-
-export const MemoryDiscsBySynergy: {
-  [s in Synergy]?: (typeof MemoryDiscs)[number]
-} = {
-  [Synergy.FIRE]: Item.FIRE_MEMORY,
-  [Synergy.FOSSIL]: Item.FOSSIL_MEMORY,
-  [Synergy.PSYCHIC]: Item.PSYCHIC_MEMORY,
-  [Synergy.WATER]: Item.WATER_MEMORY,
-  [Synergy.ELECTRIC]: Item.ELECTRIC_MEMORY,
-  [Synergy.FAIRY]: Item.FAIRY_MEMORY,
-  [Synergy.DARK]: Item.DARK_MEMORY,
-  [Synergy.GRASS]: Item.GRASS_MEMORY,
-  [Synergy.ICE]: Item.ICE_MEMORY,
-  [Synergy.FIGHTING]: Item.FIGHTING_MEMORY,
-  [Synergy.POISON]: Item.POISON_MEMORY,
-  [Synergy.SOUND]: Item.SOUND_MEMORY,
-  [Synergy.STEEL]: Item.STEEL_MEMORY,
-  [Synergy.FLYING]: Item.FLYING_MEMORY,
-  [Synergy.ROCK]: Item.ROCK_MEMORY,
-  [Synergy.GROUND]: Item.GROUND_MEMORY,
-  [Synergy.FIELD]: Item.FIELD_MEMORY,
-  [Synergy.GHOST]: Item.GHOST_MEMORY,
-  [Synergy.LIGHT]: Item.LIGHT_MEMORY,
-  [Synergy.NORMAL]: Item.NORMAL_MEMORY,
-  [Synergy.BUG]: Item.BUG_MEMORY,
-  [Synergy.GOURMET]: Item.GOURMET_MEMORY,
-  [Synergy.MONSTER]: Item.MONSTER_MEMORY,
-  [Synergy.AQUATIC]: Item.AQUATIC_MEMORY
-}
 
 export const SynergyItems = [
   Item.OLD_AMBER,
@@ -977,12 +986,6 @@ export const Sweets: Item[] = [
 ]
 
 export const Mulches: Item[] = [Item.RICH_MULCH, Item.AMAZE_MULCH]
-
-export const DojoTickets: Item[] = [
-  Item.BRONZE_DOJO_TICKET,
-  Item.SILVER_DOJO_TICKET,
-  Item.GOLD_DOJO_TICKET
-]
 
 export const UnholdableItems: Item[] = [
   ...WeatherRocks,
