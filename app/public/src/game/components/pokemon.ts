@@ -785,7 +785,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.postFX.addGlow(0xffff00, 4, 0, false, 0.1, 8)
     this.emoteAnimation()
     if (justHappened) {
-      scene.cameras.main.flash(250)
+      if (!preference("disableCameraShake")) scene.cameras.main.flash(250)
       this.displayAnimation(Ability.THUNDER_SHOCK, {
         targetX: this.positionX,
         targetY: this.positionY - 1

@@ -3698,7 +3698,7 @@
 	"show_details_on_hover": "Afficher les détails au survol au lieu du clic droit",
 	"show_damage_numbers": "Afficher les nombres de dégâts des coups",
 	"disable_animated_tilemap": "Désactiver les animations en arrière-plan",
-	"disable_camera_shake": "Désactiver les tremblements de l'écran",
+	"disable_camera_shake": "Désactiver les tremblements et flashs de l'écran",
 	"antialiasing": "Activer l'anti-aliasing",
 	"save": "Sauvegarder",
 	"reset": "Réinitialiser",

@@ -3706,7 +3706,7 @@
 	"show_details_on_hover": "Show details on hover instead of right click",
 	"show_damage_numbers": "Show damage numbers",
 	"disable_animated_tilemap": "No background animations",
-	"disable_camera_shake": "No camera shake",
+	"disable_camera_shake": "No camera shake or flashes",
 	"antialiasing": "Enable anti-aliasing",
 	"save": "Save",
 	"reset": "Reset",
