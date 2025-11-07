@@ -791,10 +791,10 @@ export default class Player extends Schema implements IPlayer {
 
   chargeCellBattery(amount: number) {
     this.cellBattery += amount
-    if (this.cellBattery > 100){
+    if (this.cellBattery >= 100) {
       this.items.push(Item.CELL_BATTERY)
       this.cellBattery %= 100
-    } 
+    }
   }
 }
 

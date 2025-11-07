@@ -367,6 +367,7 @@ export interface IPokemon {
   canEat: boolean
   deathCount: number
   readonly hasEvolution: boolean
+  supercharged: boolean
 }
 
 export interface IExperienceManager {
