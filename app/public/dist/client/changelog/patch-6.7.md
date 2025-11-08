@@ -30,7 +30,7 @@
 - Electirizer now gives Electric type. Removed PP burn on triple attacks.
 - Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
 - New tool: Terrain extender: At the start of the fight, holder gains either Electric Field, Grass Field, Psychic Field or Fairy Field based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.
-- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye and Wigglytuff encounters.
+- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye encounter.
 - Protective pads now also protects against fighting synergy throws
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
 - Buff Sticky Barb: base defense 3 → 6
