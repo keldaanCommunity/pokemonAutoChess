@@ -33,6 +33,7 @@
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
 - Buff Sticky Barb: base defense 3 → 6
 - Buff Smoke Ball: add 15 base shield
+- Buff Pokemonomicon: base Ability Power 10 → 50
 - Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
 
 # Town Encounters
