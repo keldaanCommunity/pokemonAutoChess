@@ -1,7 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
-import { FIGHTING_PHASE_DURATION } from "../../config"
+import { FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
-import { ItemStats } from "../../core/items"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"

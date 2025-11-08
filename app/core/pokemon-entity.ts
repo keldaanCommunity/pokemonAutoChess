@@ -4,6 +4,7 @@ import {
   ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
+  ItemStats,
   ON_ATTACK_MANA
 } from "../config"
 import Count from "../models/colyseus-models/count"
@@ -66,7 +67,6 @@ import {
 } from "./effects/synergies"
 import { FlowerMonByPot, FlowerPot, getFlowerPotsUnlocked } from "./flower-pots"
 import { IdleState } from "./idle-state"
-import { ItemStats } from "./items"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
 import Simulation from "./simulation"
@@ -1376,11 +1376,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    const stackingItems = [
-      Item.MUSCLE_BAND,
-      Item.SOUL_DEW,
-      Item.UPGRADE
-    ]
+    const stackingItems = [Item.MUSCLE_BAND, Item.SOUL_DEW, Item.UPGRADE]
 
     const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
 
