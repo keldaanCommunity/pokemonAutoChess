@@ -3040,7 +3040,7 @@
 		"ESPURR": "Évoluera en Mistigrix Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD.",
 		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être toiletté en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED.",
 		"ACCELERATION": "Turbo : gagne 20 SPEED pour chaque case sur laquelle le Pokémon se déplace (les sauts et les sprints comptent pour une case)",
-		"MELTAN": "Lorsqu'il est utilisé sur $t(pkm.MELMETAL), fusionne avec lui pour lui donner 50 HP max permanents",
+		"MELTAN": "Lorsqu'il est utilisé sur $t(pkm.MELMETAL), fusionne avec lui pour lui donner 50 HP max permanents. Si $t(pkm.MELTAN) portait des objets, ils vous sont rendus.",
 		"FALINKS": "Des cadets Hexadron ont désormais [4,LK]% de chances d'apparaître dans votre boutique, coûtant 5 GOLD chacun, jusqu'à 6 cadets. Au début du combat, tous les cadets de votre banc rejoignent le chef Hexadron, lui offrant 30 SHIELD, 1 ATK et 1 DEF chacun.",
 		"FLABEBE_COLOR": "Leur couleur indique le premier bourgeon FLORA à fleurir",
 		"DUNSPARCE": "$t(pkm.DUNSPARCE) évoluera lorsqu'au moins 10 trous dans le sol seront entièrement creusés sur le plateau",
