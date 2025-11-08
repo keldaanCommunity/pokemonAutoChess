@@ -455,7 +455,7 @@ export default class Shop {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE) &&
-      state.stageLevel >= 2 &&
+      state.stageLevel >= 6 &&
       !noSpecial
     ) {
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
