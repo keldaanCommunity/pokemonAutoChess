@@ -54,8 +54,8 @@ const defaultPreferences: IPreferencesState = {
     camera_lock: "L",
     switch: "SPACE",
     emote: "A",
-    prev_player: "PAGEUP",
-    next_player: "PAGEDOWN",
+    prev_player: "PAGE_UP",
+    next_player: "PAGE_DOWN",
     board_return: "HOME"
   }
 }

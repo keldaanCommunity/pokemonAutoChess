@@ -21,9 +21,7 @@ export default function KeybindInfo() {
         setCurrentlyRemapping(null)
         return
       }
-      if (key === " ") {
-        key = "SPACE"
-      }
+      key = KEY_CODES_TO_PHASER_KEY_CODES[key] ?? key      
       setPreferences((old) => ({
         keybindings: { ...old.keybindings, [currentlyRemapping]: key }
       }))
@@ -130,4 +128,10 @@ export default function KeybindInfo() {
       <p>{t("click_on_keybind_to_change_it")}</p>
     </div>
   )
+}
+
+const  KEY_CODES_TO_PHASER_KEY_CODES: { [key: string]: string } = {
+  " ": "SPACE",
+  "PAGEUP": "PAGE_UP",
+  "PAGEDOWN": "PAGE_DOWN",  
 }
