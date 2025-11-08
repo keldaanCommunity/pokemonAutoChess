@@ -288,6 +288,10 @@ export default class MinigameManager {
         case "y":
           symbolUI.setData("serverY", transformMiniGameYCoordinate(coordinate))
           break
+
+        case "portalId":
+          symbolUI.portalId = value as string
+          break
       }
     }
   }
