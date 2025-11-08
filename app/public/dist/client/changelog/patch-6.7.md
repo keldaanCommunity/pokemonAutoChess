@@ -19,6 +19,7 @@
 - Buff Discharge: damage 25/50/75 → 25/50/100
 - New ability for Elekid line: Shockwave: deal 25/50/100 special damage to all enemies in a 2-range radius, +1 range if user is in an Electric field.
 - Rework Meteor Mash (Beldum): Deal 3 times 100% (AP) of Attack as special damage to the target (4 times if user is in Psychic field) and increase the user's attack by 2 for each hit.
+- Buff Deoxys: all forms HP 220 → 250
 
 # Changes to Synergies
 

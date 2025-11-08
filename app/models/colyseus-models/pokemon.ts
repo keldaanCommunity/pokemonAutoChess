@@ -6919,7 +6919,7 @@ export class Deoxys extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 20
   speed = 73
   def = 10
@@ -6946,7 +6946,7 @@ export class DeoxysDefense extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 15
   speed = 45
   def = 16
@@ -6973,7 +6973,7 @@ export class DeoxysAttack extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 20
   speed = 73
   def = 4
@@ -7000,7 +7000,7 @@ export class DeoxysSpeed extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 15
   speed = 90
   def = 6
