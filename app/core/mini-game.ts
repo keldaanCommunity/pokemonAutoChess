@@ -748,7 +748,7 @@ export class MiniGame {
         }
       }
 
-      if (avatar.portalId == "" && player && !player.isBot) {
+      if (avatar.portalId == "") {
         // random propositions if no portal was taken
         avatar.portalId = "random"
         if (state.stageLevel == 0 && this.portals) {
