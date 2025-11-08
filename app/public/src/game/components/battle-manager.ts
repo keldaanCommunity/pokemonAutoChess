@@ -645,7 +645,7 @@ export default class BattleManager {
         }
       } else if (field === "index") {
         if (pkmSprite.pokemon.index !== value) {
-          pkmSprite.lazyloadAnimations(this.scene, true) // unload previous index animations
+          pkmSprite.unloadAnimations(this.scene) // unload previous index animations
           pkmSprite.attackSprite =
             PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
             pkmSprite.attackSprite
