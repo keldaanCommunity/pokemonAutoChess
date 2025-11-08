@@ -40,7 +40,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.CRIT_CHANCE]: 10,
     [Stat.CRIT_POWER]: 100
   },
-  [Item.GRACIDEA_FLOWER]: { [Stat.SPEED]: 10, [Stat.SHIELD]: 15 },
+  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
