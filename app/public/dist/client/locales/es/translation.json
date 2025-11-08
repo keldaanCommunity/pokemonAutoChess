@@ -2040,7 +2040,7 @@
 		"BEHEMOTH_BLADE": "Se coloca detrás del enemigo y le propicia un poderoso corte, infligiendo [100,SP] + 1x ATK como SPECIAL.",
 		"HEAT_CRASH": "Choca contra el enemigo, empujándolo hacia atrás e infligiéndole [40,60,80,SP] de SPECIAL. Causa más daño cuanto más ATK tenga el usuario en comparación con el objetivo.",
 		"LASER_BLADE": "Ejecuta alternativamente:\n1. Gira con su cuchilla láser, colocándose detrás de su objetivo, ganando [25,SP] de SHIELD e infligiendo [25,SP] de SPECIAL al objetivo y a los enemigos adyacentes por el camino.\n2. Corta con la cuchilla láser al frente, infligiendo 2 veces [25,SP] + ATK como SPECIAL.",
-		"ICICLE_MISSILE": "Lanza [1,2,3] misiles de hielo a los Pokémon colocados en la retaguardia enemiga, causándoles [50,SP] de SPECIAL e infligiéndoles FREEZE durante 3 segundos.",
+		"ICICLE_MISSILE": "Lanza [1,2,3] misiles de hielo a los Pokémon colocados en la retaguardia enemiga, causándoles [50,SP] de SPECIAL e infligiéndoles FREEZE durante 2 segundos.",
 		"ARM_THRUST": "Ataca de [2,LK] a [5,LK] veces, causando [100,SP]% del ATK del usuario como PHYSICAL cada vez. Todos los golpes pueden ser críticos de manera independiente por defecto en función de la CRIT_CHANCE del usuario.",
 		"DRUM_BEATING": "Realiza sucesivamente las siguientes acciones:\n1. Caja: otorga [10,20,40,SP] de SHIELD a todo el equipo aliado.\n2. Redoble de tambor: inflige [10,20,40,SP] de SPECIAL a todos los enemigos.\n3. Acelerar el ritmo: otorga [10,20,40,SP] de SPEED a todo el equipo aliado.",
 		"PSYCHO_CUT": "Tres cuchillas psíquicas cortan y atraviesan a los enemigos en una línea detrás del objetivo, cada una infligiendo [10,20,40,SP] de SPECIAL a todos los enemigos golpeados. Puede ser crítico por defecto.",

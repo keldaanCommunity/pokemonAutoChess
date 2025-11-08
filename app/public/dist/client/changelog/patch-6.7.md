@@ -2,7 +2,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Change Icicle Missile (Vanilluxe): now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss.
+- Nerf and changes to Icicle Missile (Vanilluxe): Freeze duration 3 → 2 seconds ; now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss. If the attacker is KO before the projectile landing, the missile will have no effect.
 - Change Magma Storm (Heatran): now deals 100 special damage and propagates to adjacent enemies up to 5 times, losing 20% of its power for every tile travelled.
 - Kleavor and Scizor are now regional variants of Scyther, obtainable in Rock and Steel regions. Tier 4 → 3, adjusted stats.
 - Change Aqua Ring: heal amount increased from 20/30/50 to 20/40/80.
