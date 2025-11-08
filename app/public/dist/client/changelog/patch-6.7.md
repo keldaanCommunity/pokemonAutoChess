@@ -31,6 +31,7 @@
 - Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye and Wigglytuff encounters.
 - Protective pads now also protects against fighting synergy throws
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
+- Buff Sticky Barb: base defense 3 → 6
 
 # Town Encounters
 
