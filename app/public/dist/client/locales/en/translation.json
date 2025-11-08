@@ -2637,7 +2637,7 @@
 		"SHELL_BELL": "Holder heals for 33% of all damages inflicted",
 		"LUCKY_EGG": "Increase holder's LUCK by 30",
 		"AQUA_EGG": "The holder regains 20% of its max PP after casting its ability, + 2 PP for each cast done in the fight",
-		"BLUE_ORB": "Every 4 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 20 PP",
+		"BLUE_ORB": "Every 3 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 15 PP",
 		"SCOPE_LENS": "Critical attacks steal 10 PP from the target.",
 		"STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
 		"GREEN_ORB": "Holder and ADJACENT allies regain 3% of their max HP every second. 30% of excess healing is converted to PP.",

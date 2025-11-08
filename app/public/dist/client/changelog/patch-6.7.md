@@ -32,6 +32,7 @@
 - Protective pads now also protects against fighting synergy throws
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
 - Buff Sticky Barb: base defense 3 → 6
+- Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
 
 # Town Encounters
 

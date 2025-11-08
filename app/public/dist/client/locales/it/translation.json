@@ -2015,7 +2015,7 @@
 		"POWER_LENS": "La quantità di SPECIAL ridotta dalla SPE_DEF viene inflitta all'attaccante",
 		"SHELL_BELL": "Il possessore guarisce per il 33% di tutti i danni inflitti",
 		"LUCKY_EGG": "Aumenta la LUCK del possessore del 30%",
-		"BLUE_ORB": "Ogni 4 attacco del possessore scatena una catena di fulmini che rimbalza sui 2 nemici vicini, infliggendo 10 SPECIAL e sottrae 20 PP",
+		"BLUE_ORB": "Ogni 3 attacco del possessore scatena una catena di fulmini che rimbalza sui 2 nemici vicini, infliggendo 10 SPECIAL e sottrae 15 PP",
 		"SCOPE_LENS": "I colpi critici rubano 10 PP al bersaglio.",
 		"STAR_DUST": "Dopo aver lanciato l'abilità, ottieni il 50% del PP massimi come SHIELD",
 		"GREEN_ORB": "Il possessore e gli alleati adiacenti recuperano 3% dei loro HP massimi ogni secondo",

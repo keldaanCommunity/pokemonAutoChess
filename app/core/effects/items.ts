@@ -56,7 +56,7 @@ import {
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
     pokemon.count.staticHolderCount++
-    if (pokemon.count.staticHolderCount >= 4) {
+    if (pokemon.count.staticHolderCount >= 3) {
       pokemon.count.staticHolderCount = 0
       const nbBounces = 2
       const closestEnemies = new Array<PokemonEntity>()
@@ -104,7 +104,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
             false,
             false
           )
-          secondaryTargetHit.addPP(-20, pokemon, 0, false)
+          secondaryTargetHit.addPP(-15, pokemon, 0, false)
           secondaryTargetHit.count.manaBurnCount++
           previousTg = secondaryTargetHit
         } else {
