@@ -34,6 +34,7 @@
 - Buff Sticky Barb: base defense 3 → 6
 - Buff Smoke Ball: add 15 base shield
 - Buff Pokemonomicon: base Ability Power 10 → 50
+- Buff Wide Lens: critical chance 10% → 15%, special defense 3 → 5
 - Removed base 10 speed from Gracidea Flower
 - Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
 

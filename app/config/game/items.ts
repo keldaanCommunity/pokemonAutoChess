@@ -48,8 +48,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.ABILITY_SHIELD]: { [Stat.AP]: 10 },
   [Item.WIDE_LENS]: {
     [Stat.RANGE]: 2,
-    [Stat.CRIT_CHANCE]: 10,
-    [Stat.SPE_DEF]: 3
+    [Stat.CRIT_CHANCE]: 15,
+    [Stat.SPE_DEF]: 5
   },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },
