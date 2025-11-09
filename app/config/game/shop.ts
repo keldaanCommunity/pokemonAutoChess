@@ -66,13 +66,60 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
 
 /* Special Pokemon rates */
 export const DITTO_RATE = 0.005
+export const MIN_STAGE_FOR_DITTO = 6
 export const KECLEON_RATE = 1 / 400
 export const ARCEUS_RATE = 1 / 400
 export const UNOWN_RATE_AMNESIA = 5 / 100
 export const UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL = 3
+export const UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL = 10
 export const FALINKS_TROOPER_RATE = 4 / 100
+export const REMORAID_RATE = 1 / 3
+
+export const MAGNET_PULL_RATE_PER_RARITY: { [key in Rarity]?: number } = {
+  [Rarity.COMMON]: 0.15,
+  [Rarity.UNCOMMON]: 0.28,
+  [Rarity.RARE]: 0.15,
+  [Rarity.SPECIAL]: 0.35,
+  [Rarity.EPIC]: 0.05,
+  [Rarity.ULTRA]: 0.02
+}
 
 export const PVE_WILD_CHANCE = 5 / 100
 
 export const INCENSE_CHANCE = 5 / 100
 export const HONEY_CHANCE = 5 / 100
+export const REPEAT_BALL_LEGENDARY_CAP = 120
+export const REPEAT_BALL_UNIQUE_CAP = 80
+export const REPEAT_BALL_UNIQUE_INTERVAL = 10
+
+export const HIGH_ROLLER_CHANCE = 2 / 100
+
+/* sell prices */
+export const SellPrices = {
+  EGG: 2,
+  SHINY_EGG: 10,
+  DITTO: 5,
+  FALINKS_TROOPER: 5,
+  MELTAN: 0,
+  MAGIKARP: 0,
+  GYARADOS: 10,
+  FEEBAS: 1,
+  MILOTIC: 10,
+  WISHIWASHI: 3,
+  WISHIWASHI_SCHOOL: 10,
+  REMORAID: 2,
+  OCTILLERY: 7,
+  UNOWN: 1,
+  HATCH: [3, 4, 5],
+  UNIQUE: 10,
+  UNIQUE_DUO: 6,
+  LEGENDARY: 20,
+  LEGENDARY_DUO: 10
+}
+
+export const BuyPrices = {
+  DITTO: 5,
+  FALINKS_TROOPER: 5,
+  MELTAN: 0,
+  UNOWN: 1
+}
