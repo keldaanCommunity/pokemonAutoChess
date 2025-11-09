@@ -1,16 +1,22 @@
 import {
   ARCEUS_RATE,
   DITTO_RATE,
+  FALINKS_TROOPER_RATE,
   FishRarityProbability,
   getUnownsPoolPerStage,
+  HONEY_CHANCE,
+  INCENSE_CHANCE,
   KECLEON_RATE,
   LegendaryPool,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
   PortalCarouselStages,
+  PVE_WILD_CHANCE,
   RarityCost,
   RarityProbabilityPerLevel,
   SHOP_SIZE,
+  UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL,
+  UNOWN_RATE_AMNESIA,
   UniquePool
 } from "../config"
 import GameState from "../rooms/states/game-state"
@@ -41,7 +47,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
-import { PokemonClasses } from "./colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { getPokemonBaseline, PkmColorVariantsByPkm } from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
@@ -305,13 +311,19 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
-    if (
-      player.effects.has(EffectEnum.EERIE_SPELL) &&
-      !manualRefresh &&
-      !player.shopLocked
-    ) {
+    const hasEerieSpell = player.effects.has(EffectEnum.EERIE_SPELL)
+    if (hasEerieSpell) {
+      player.shopsSinceLastUnownShop += 1
+    }
+    const shouldBeUnownShop =
+      hasEerieSpell &&
+      ((!manualRefresh && !player.shopLocked) ||
+        (manualRefresh && player.shopsSinceLastUnownShop === 10))
+
+    if (shouldBeUnownShop) {
       // Unown shop
       player.shopFreeRolls += 1
+      player.shopsSinceLastUnownShop = 0
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       const chosenUnowns: Pkm[] = []
       for (let i = 0; i < SHOP_SIZE; i++) {
@@ -321,6 +333,7 @@ export default class Shop {
         player.shop[i] = randomUnown
       }
     } else {
+      // Regular shop
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = this.pickPokemon(player, state, i)
       }
@@ -462,22 +475,29 @@ export default class Shop {
     }
 
     if (
-      player.effects.has(EffectEnum.LIGHT_SCREEN) &&
       shopIndex === 5 &&
-      (player.rerollCount + state.stageLevel) % 3 === 0 &&
-      !noSpecial
+      !noSpecial &&
+      ((player.effects.has(EffectEnum.LIGHT_SCREEN) &&
+        (player.rerollCount + state.stageLevel) %
+          UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL ===
+          0) ||
+        (player.effects.has(EffectEnum.AMNESIA) && chance(UNOWN_RATE_AMNESIA)))
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
     }
 
-    if (player.effects.has(EffectEnum.FALINKS_BRASS) && chance(4 / 100)) {
+    if (
+      player.effects.has(EffectEnum.FALINKS_BRASS) &&
+      chance(FALINKS_TROOPER_RATE)
+    ) {
       return Pkm.FALINKS_TROOPER
     }
 
     const isPVE = state.stageLevel in PVEStages
     const wildChance =
-      player.wildChance + (isPVE || state.stageLevel === 0 ? 0.05 : 0)
+      player.wildChance +
+      (isPVE || state.stageLevel === 0 ? PVE_WILD_CHANCE : 0)
 
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
@@ -485,7 +505,11 @@ export default class Shop {
     const attractors = values(player.board).filter(
       (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
     )
-    const attractor = attractors.find((p) => chance(5 / 100, p))
+    let attractor: Pokemon | null = null
+    for (const p of attractors) {
+      if (p.items.has(Item.INCENSE) && chance(INCENSE_CHANCE, p)) attractor = p
+      if (p.meal === Item.HONEY && chance(HONEY_CHANCE, p)) attractor = p
+    }
 
     if (attractor) {
       specificTypesWanted = values(attractor.types)

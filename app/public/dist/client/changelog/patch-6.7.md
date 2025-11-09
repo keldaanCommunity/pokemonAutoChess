@@ -28,6 +28,10 @@
 
 # Changes to Synergies
 
+- Psychic synergy thresholds changed: 2/4/6 → 3/5/7
+- New effect for Psychic 3: A Unown has 5% chance to appear in your shop
+- New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
+
 # Changes to Items
 
 - Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
@@ -39,7 +43,7 @@
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
 - Buff Sticky Barb: base defense 3 → 6
 - Buff Smoke Ball: add 15 base shield
-- Buff Pokemonomicon: base Ability Power 10 → 50
+- Buff Pokemonomicon: base Ability Power 10 → 30
 - Buff Wide Lens: critical chance 10% → 15%, special defense 3 → 6
 - Removed base 10 speed from Gracidea Flower
 - Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15

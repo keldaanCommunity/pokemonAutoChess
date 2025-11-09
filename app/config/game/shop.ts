@@ -1,6 +1,7 @@
 import { Rarity } from "../../types/enum/Game"
 
 export const SHOP_SIZE = 6
+export const NB_UNIQUE_PROPOSITIONS = 6
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,
@@ -51,8 +52,6 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.SPECIAL]: 0.03
 }
 
-export const DITTO_RATE = 0.005
-
 export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   1: [1, 0, 0, 0, 0],
   2: [1, 0, 0, 0, 0],
@@ -65,6 +64,15 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   9: [0.05, 0.2, 0.35, 0.3, 0.1]
 }
 
-export const NB_UNIQUE_PROPOSITIONS = 6
+/* Special Pokemon rates */
+export const DITTO_RATE = 0.005
 export const KECLEON_RATE = 1 / 400
 export const ARCEUS_RATE = 1 / 400
+export const UNOWN_RATE_AMNESIA = 5 / 100
+export const UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL = 3
+export const FALINKS_TROOPER_RATE = 4 / 100
+
+export const PVE_WILD_CHANCE = 5 / 100
+
+export const INCENSE_CHANCE = 5 / 100
+export const HONEY_CHANCE = 5 / 100
