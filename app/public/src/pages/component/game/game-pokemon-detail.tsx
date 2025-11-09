@@ -160,7 +160,14 @@ export function GamePokemonDetail(props: {
         )}
       <div className="game-pokemon-detail-entry">
         <p className="game-pokemon-detail-entry-name">
-          {t(`pkm.${pokemon.name}`)}
+          {
+            (pokemon.index === PkmIndex[Pkm.SUBSTITUTE] &&
+              "evolution" in pokemon &&
+              pokemon.evolution != null &&
+              pokemon.evolution != Pkm.DEFAULT) 
+                ? (t(`pkm.${pokemon.name}`) + " (" + t(`pkm.${pokemon.evolution}`) + ")")
+                : t(`pkm.${pokemon.name}`)
+          }
         </p>
         <p
           className="game-pokemon-detail-entry-rarity"
