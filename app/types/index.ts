@@ -318,6 +318,7 @@ export interface IPlayer {
   wildChance: number
   eggChance: number
   goldenEggChance: number
+  cellBattery: number
   lightX: number
   lightY: number
 }
@@ -366,6 +367,7 @@ export interface IPokemon {
   canEat: boolean
   deathCount: number
   readonly hasEvolution: boolean
+  supercharged: boolean
 }
 
 export interface IExperienceManager {

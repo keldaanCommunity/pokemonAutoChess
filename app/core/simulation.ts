@@ -712,6 +712,20 @@ export default class Simulation extends Schema implements ISimulation {
             }
           })
         }
+
+        if (pokemon.types.has(Synergy.ELECTRIC) && pokemon.player) {
+          const nbCellBatteries = values(pokemon.player.items).filter(
+            (item) => item === Item.CELL_BATTERY
+          ).length
+          if (nbCellBatteries > 0) {
+            pokemon.addSpeed(3 * nbCellBatteries, pokemon, 0, false)
+          }
+        }
+        if (pokemon.refToBoardPokemon.supercharged) {
+          pokemon.refToBoardPokemon.supercharged = false
+          pokemon.status.addElectricField(pokemon)
+          pokemon.addSpeed(50, pokemon, 0, false)
+        }
       })
     }
 
@@ -993,8 +1007,8 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.RISING_VOLTAGE:
-      case EffectEnum.OVERDRIVE:
       case EffectEnum.POWER_SURGE:
+      case EffectEnum.SUPERCHARGED:
         if (types.has(Synergy.ELECTRIC)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(electricTripleAttackEffect)

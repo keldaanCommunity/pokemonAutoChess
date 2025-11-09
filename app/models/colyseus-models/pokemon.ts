@@ -91,6 +91,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
   @type("uint8") stacks: number = 0
   @type("uint8") stacksRequired: number = 0
+  @type("boolean") supercharged: boolean = false
   dodge: number = 0
   deathCount: number = 0
   evolutions: Pkm[] = []
@@ -17345,7 +17346,7 @@ export class Duraludon extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 2
   evolution = Pkm.ARCHALUDON
-  evolutionRule = new ItemEvolutionRule(Tools)
+  evolutionRule = new ItemEvolutionRule([...Tools])
   hp = 180
   atk = 18
   speed = 52

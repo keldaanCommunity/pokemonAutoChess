@@ -28,6 +28,8 @@
 
 # Changes to Synergies
 
+- Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
+
 # Changes to Items
 
 - Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
@@ -60,6 +62,8 @@
 
 - Pokemons sprites are now lazy-loaded. This should reduce game loading times and memory usage significantly, at the cost of having a small delay before the Pokémon sprites are displayed for the first time. A wobbling pokéball is shown while the sprite is being loaded (should not take more than 1 second in most cases).
 - Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
+- Wiki items section has been reworked for better readability.
+- New section on the wiki: Stages
 
 # Bugfix
 

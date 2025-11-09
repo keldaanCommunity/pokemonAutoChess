@@ -931,6 +931,12 @@ export default class BoardManager {
             pokemonUI.updateMeal(value as IPokemon["meal"])
           }
           break
+
+        case "supercharged":
+          if (value === true && previousValue === false) {
+            pokemonUI.superchargeAnimation(this.scene, true)
+          }
+          break
       }
     }
   }

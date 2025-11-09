@@ -111,14 +111,14 @@ export const electricTripleAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board, isTripleAttack }) => {
     if (isTripleAttack) return // ignore the effect of the 2nd and 3d attacks of triple attacks
     let shouldTriggerTripleAttack = false,
-      isPowerSurge = false
+      isSupercharged = false
     if (pokemon.effects.has(EffectEnum.RISING_VOLTAGE)) {
       shouldTriggerTripleAttack = pokemon.count.attackCount % 4 === 0
-    } else if (pokemon.effects.has(EffectEnum.OVERDRIVE)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
     } else if (pokemon.effects.has(EffectEnum.POWER_SURGE)) {
       shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
-      isPowerSurge = true
+    } else if (pokemon.effects.has(EffectEnum.SUPERCHARGED)) {
+      shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
+      isSupercharged = true
     }
     if (shouldTriggerTripleAttack) {
       pokemon.count.tripleAttackCount++
@@ -133,31 +133,12 @@ export const electricTripleAttackEffect = new OnAttackEffect(
 
       pokemon.state.attack(pokemon, board, target, true)
       pokemon.state.attack(pokemon, board, target, true)
-      if (isPowerSurge && target) {
-        board
-          .getAdjacentCells(target.positionX, target.positionY, true)
-          .forEach((cell) => {
-            if (cell) {
-              const enemy = board.getEntityOnCell(cell.x, cell.y)
-              if (enemy && pokemon.team !== enemy.team) {
-                enemy.handleSpecialDamage(
-                  10,
-                  board,
-                  AttackType.SPECIAL,
-                  pokemon,
-                  false,
-                  false
-                )
-                if (enemy !== target) {
-                  pokemon.broadcastAbility({
-                    skill: "LINK_CABLE_link",
-                    targetX: enemy.positionX,
-                    targetY: enemy.positionY
-                  })
-                }
-              }
-            }
-          })
+      if (isSupercharged && target) {
+        target.addPP(-10, pokemon, 0, false)
+        target.count.manaBurnCount++
+        if (pokemon.player) {
+          pokemon.player.chargeCellBattery(5)
+        }
       }
     }
   }

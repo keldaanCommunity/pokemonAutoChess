@@ -977,6 +977,17 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.CELL_BATTERY]: [
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
+      if (pokemon.types.has(Synergy.ELECTRIC) && !pokemon.supercharged) {
+        pokemon.supercharged = true
+        removeInArray(player.items, item)
+      }
+
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.RECYCLE_TICKET]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       let consummed = false

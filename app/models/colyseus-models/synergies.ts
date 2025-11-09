@@ -83,8 +83,7 @@ export function computeSynergies(
   board.forEach((pkm: IPokemon, index) => {
     // reset dynamic synergies
     if (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3) {
-      //pkm.types.clear()
-      pkm.types.forEach((type) => pkm.types.delete(type))
+      pkm.types.clear()
     }
 
     addSynergiesGivenByItems(pkm)
