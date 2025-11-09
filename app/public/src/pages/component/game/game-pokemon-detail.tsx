@@ -139,6 +139,16 @@ export function GamePokemonDetail(props: {
     return undefined
   }, [pokemon.items, props.origin, pokemon.shield])
 
+  let name = t(`pkm.${pokemon.name}`)
+  if (
+    pokemon.index === PkmIndex[Pkm.SUBSTITUTE] &&
+    "evolution" in pokemon &&
+    pokemon.evolution != null &&
+    pokemon.evolution != Pkm.DEFAULT
+  ) {
+    name += ` (${t(`pkm.${pokemon.evolution}`)})` // indicate the original pokemon for Dojo substitute
+  }
+
   return (
     <div className="game-pokemon-detail">
       <PokemonPortrait
@@ -159,16 +169,7 @@ export function GamePokemonDetail(props: {
           />
         )}
       <div className="game-pokemon-detail-entry">
-        <p className="game-pokemon-detail-entry-name">
-          {
-            (pokemon.index === PkmIndex[Pkm.SUBSTITUTE] &&
-              "evolution" in pokemon &&
-              pokemon.evolution != null &&
-              pokemon.evolution != Pkm.DEFAULT) 
-                ? (t(`pkm.${pokemon.name}`) + " (" + t(`pkm.${pokemon.evolution}`) + ")")
-                : t(`pkm.${pokemon.name}`)
-          }
-        </p>
+        <p className="game-pokemon-detail-entry-name">{name}</p>
         <p
           className="game-pokemon-detail-entry-rarity"
           style={{ color: RarityColor[pokemon.rarity] }}

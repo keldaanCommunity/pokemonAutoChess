@@ -299,21 +299,6 @@ export class HatchEvolutionRule extends EvolutionRule {
   }
 }
 
-// Used to carry an extra Pokemon reference if needed (i.e. Substitutes when using dojo ticket)
-export class NoEvolutionRule extends EvolutionRule {
-  constructor(divergentEvolution?: DivergentEvolution){
-    super(divergentEvolution)
-  }
-
-  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number) : boolean {
-    return false
-  }
-
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    return pokemon
-  }
-}
-
 type EvolutionCondition = (
   pokemon: Pokemon,
   player: Player,
