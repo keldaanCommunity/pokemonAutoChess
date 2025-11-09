@@ -1,4 +1,10 @@
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
+  MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
+  MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
+} from "../../config"
 import { SynergyEffects } from "../../models/effects"
 import { Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -34,9 +40,15 @@ export class MonsterKillEffect extends OnKillEffect {
   }
 
   apply({ attacker, target }: OnKillEffectArgs) {
-    const attackBoost = [3, 6, 10, 10][this.synergyLevel] ?? 10
-    const apBoost = [10, 20, 30, 30][this.synergyLevel] ?? 30
-    const hpGain = [0.2, 0.4, 0.6, 0.6][this.synergyLevel] ?? 0.6
+    const attackBoost =
+      MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL[this.synergyLevel] ??
+      MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL.at(-1)
+    const apBoost =
+      MONSTER_AP_BUFF_PER_SYNERGY_LEVEL[this.synergyLevel] ??
+      MONSTER_AP_BUFF_PER_SYNERGY_LEVEL.at(-1)
+    const hpGain =
+      MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL[this.synergyLevel] ??
+      MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL.at(-1)
     const lifeBoost = hpGain * target.maxHP
     attacker.addAttack(attackBoost, attacker, 0, false)
     attacker.addAbilityPower(apBoost, attacker, 0, false)
