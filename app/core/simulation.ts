@@ -1,5 +1,5 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
+import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../models/effects"
@@ -28,6 +28,7 @@ import {
   Berries,
   CraftableItems,
   Item,
+  SynergyStones,
   WeatherRocksByWeather
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -68,7 +69,6 @@ import {
   OnFieldDeathEffect,
   SoundCryEffect
 } from "./effects/synergies"
-import { getWonderboxItems, ItemStats } from "./items"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
 
@@ -405,8 +405,20 @@ export default class Simulation extends Schema implements ISimulation {
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
       pokemon.items.delete(Item.WONDER_BOX)
-      const randomItems = getWonderboxItems(pokemon.items)
-      randomItems.forEach((item) => {
+
+      const wonderboxItems: Item[] = []
+      for (let n = 0; n < 2; n++) {
+        const eligibleItems = CraftableItems.filter(
+          (i) =>
+            !SynergyStones.includes(i) &&
+            !wonderboxItems.includes(i) &&
+            !pokemon.items.has(i) &&
+            i !== Item.WONDER_BOX
+        )
+        wonderboxItems.push(pickRandomIn(eligibleItems))
+      }
+
+      wonderboxItems.forEach((item) => {
         if (pokemon.items.size < 3) {
           pokemon.items.add(item)
         }

@@ -1,3 +1,4 @@
+import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
@@ -5,7 +6,7 @@ import { IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
 import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
-import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
+import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
@@ -498,7 +499,13 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
         const candidates = [
           ...monsOfThatSynergy.pokemons,
           ...monsOfThatSynergy.additionalPokemons
-        ].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+        ]
+          .filter((p) => getPokemonData(p).stars === 1)
+          .sort(
+            (a, b) =>
+              RarityCost[getPokemonData(b).rarity] -
+              RarityCost[getPokemonData(a).rarity]
+          ) as Pkm[]
         const stageLevel = unown.simulation.stageLevel
         const rareWeight = clamp(1.5 - stageLevel / 10, 0, 1)
         const epicWeight = clamp(

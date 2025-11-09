@@ -2,7 +2,8 @@
 
 # Changes to Pokemon & Abilities
 
-- Change Icicle Missile (Vanilluxe): now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss.
+- Ditto can no longer appear in shops before stage 6
+- Nerf and changes to Icicle Missile (Vanilluxe): Freeze duration 3 → 2 seconds ; now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss. If the attacker is KO before the projectile landing, the missile will have no effect.
 - Change Magma Storm (Heatran): now deals 100 special damage and propagates to adjacent enemies up to 5 times, losing 20% of its power for every tile travelled.
 - Kleavor and Scizor are now regional variants of Scyther, obtainable in Rock and Steel regions. Tier 4 → 3, adjusted stats.
 - Change Aqua Ring: heal amount increased from 20/30/50 to 20/40/80.
@@ -19,6 +20,11 @@
 - Buff Discharge: damage 25/50/75 → 25/50/100
 - New ability for Elekid line: Shockwave: deal 25/50/100 special damage to all enemies in a 2-range radius, +1 range if user is in an Electric field.
 - Rework Meteor Mash (Beldum): Deal 3 times 100% (AP) of Attack as special damage to the target (4 times if user is in Psychic field) and increase the user's attack by 2 for each hit.
+- Buff Deoxys: all forms HP 220 → 250
+- Buff Meltan: PP 80 → 50
+- Nerf Flutter Mane: Attack 20 → 17
+- Nerf Plusle & Minun: PP 60 → 70
+- Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15
 
 # Changes to Synergies
 
@@ -30,9 +36,15 @@
 - Electirizer now gives Electric type. Removed PP burn on triple attacks.
 - Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
 - New tool: Terrain extender: At the start of the fight, holder gains either Electric Field, Grass Field, Psychic Field or Fairy Field based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.
-- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye and Wigglytuff encounters.
+- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye encounter.
 - Protective pads now also protects against fighting synergy throws
 - Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
+- Buff Sticky Barb: base defense 3 → 6
+- Buff Smoke Ball: add 15 base shield
+- Buff Pokemonomicon: base Ability Power 10 → 50
+- Buff Wide Lens: critical chance 10% → 15%, special defense 3 → 6
+- Removed base 10 speed from Gracidea Flower
+- Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
 
 # Town Encounters
 
@@ -62,6 +74,7 @@
 
 # Misc
 
+- Nerfed marowak encounter items for stages 14 and 24 
 - Jukebox gadget level requirement decreased to 5
 - New gadget: Synergy Wheel, unlocks at level 10
 - Gameboy gadget level requirement decreased to 20

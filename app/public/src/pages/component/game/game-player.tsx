@@ -27,20 +27,21 @@ export default function GamePlayer(props: {
   }
 
   return (
-    <div
-      style={{
-        top: `${1 + props.index * 12.5}%`,
-        backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`
-      }}
-      className={cc("game-player", {
-        spectated: spectatedPlayerId === props.player.id,
-        self: selfPlayerId === props.player.id,
-        dead: props.player.life <= 0
-      })}
-      onClick={playerClick}
-      data-tooltip-id={"detail-" + props.player.id}
-    >
-      <div style={{ zIndex: DEPTH.PLAYER_ICON }}>
+    <div className="game-player-wrapper">
+      <div
+        style={{
+          top: `${1 + props.index * 12.5}%`,
+          backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`,
+          zIndex: DEPTH.PLAYER_ICON
+        }}
+        className={cc("game-player", {
+          spectated: spectatedPlayerId === props.player.id,
+          self: selfPlayerId === props.player.id,
+          dead: props.player.life <= 0
+        })}
+        onClick={playerClick}
+        data-tooltip-id={"detail-" + props.player.id}
+      >
         <CircularProgressbarWithChildren value={props.player.life} />
         <div className="my-container life-text">{props.player.life}</div>
       </div>

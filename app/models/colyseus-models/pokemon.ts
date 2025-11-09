@@ -5676,7 +5676,7 @@ export class Meltan extends Pokemon {
   speed = 40
   def = 8
   speDef = 2
-  maxPP = 80
+  maxPP = 50
   range = 1
   skill = Ability.MAGNET_PULL
   passive = Passive.MELTAN
@@ -6920,7 +6920,7 @@ export class Deoxys extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 20
   speed = 73
   def = 10
@@ -6947,7 +6947,7 @@ export class DeoxysDefense extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 15
   speed = 45
   def = 16
@@ -6974,7 +6974,7 @@ export class DeoxysAttack extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 20
   speed = 73
   def = 4
@@ -7001,7 +7001,7 @@ export class DeoxysSpeed extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 220
+  hp = 250
   atk = 15
   speed = 90
   def = 6
@@ -11956,7 +11956,7 @@ export class Plusle extends Pokemon {
   speed = 61
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 70
   range = 1
   skill = Ability.LINK_CABLE
 }
@@ -11970,7 +11970,7 @@ export class Minun extends Pokemon {
   speed = 61
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 70
   range = 1
   skill = Ability.LINK_CABLE
 }
@@ -13114,7 +13114,7 @@ export class HisuianQwilfish extends Pokemon {
   hp = 175
   atk = 13
   speed = 52
-  def = 15
+  def = 12
   speDef = 6
   maxPP = 100
   range = 1
@@ -13138,7 +13138,7 @@ export class Overqwil extends Pokemon {
   hp = 250
   atk = 18
   speed = 52
-  def = 18
+  def = 15
   speDef = 8
   maxPP = 100
   range = 1
@@ -18986,7 +18986,7 @@ export class FlutterMane extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 20
+  atk = 17
   speed = 59
   def = 4
   speDef = 8

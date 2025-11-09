@@ -3,7 +3,7 @@ import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { ItemStats } from "../../../../core/items"
+import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
 import {
   ConsumableItems,

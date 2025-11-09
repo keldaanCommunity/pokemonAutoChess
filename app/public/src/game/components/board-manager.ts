@@ -1041,12 +1041,8 @@ export default class BoardManager {
         )
       } else {
         pkmSprite.y -= 500
-        pkmSprite.orientation = Orientation.DOWN
-        this.scene.animationManager?.animatePokemon(
-          pkmSprite,
-          PokemonActionState.WALK,
-          false
-        )
+        pkmSprite.orientation = Orientation.UP
+        pkmSprite.pokemon.action = PokemonActionState.WALK
 
         this.scene.tweens.add({
           targets: pkmSprite,

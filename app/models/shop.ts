@@ -2,6 +2,7 @@ import {
   ARCEUS_RATE,
   DITTO_RATE,
   FishRarityProbability,
+  getUnownsPoolPerStage,
   KECLEON_RATE,
   LegendaryPool,
   NB_UNIQUE_PROPOSITIONS,
@@ -19,7 +20,6 @@ import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import { FishingRod, Item } from "../types/enum/Item"
 import {
-  getUnownsPoolPerStage,
   isRegionalVariant,
   Pkm,
   PkmDuos,
@@ -455,7 +455,7 @@ export default class Shop {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE) &&
-      state.stageLevel >= 2 &&
+      state.stageLevel >= 6 &&
       !noSpecial
     ) {
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO

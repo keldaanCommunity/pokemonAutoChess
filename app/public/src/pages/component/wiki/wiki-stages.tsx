@@ -259,31 +259,60 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
         <div className="pve-stage-details">
           <div className="stage-board">
             <h4>{t("enemy_team")}:</h4>
-            <ul>
-              {stageInfo.stageData.board.map(([pkm, x, y], index) => (
-                <li key={index}>
-                  {pokemonDetail(pkm)}
-                  <span>{t(`pkm.${pkm}`)}</span>
-                </li>
-              ))}
-            </ul>
+            <table>
+              <thead>
+                <tr>
+                  <th>{t("pokemon")}</th>
+                  {stageInfo.stageData.marowakItems && (
+                    <th>{t("marowak_items")}</th>
+                  )}
+                  {stageInfo.stageData.statBoosts && (
+                    <th>{t("stat_boosts")}</th>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {stageInfo.stageData.board.map(([pkm, x, y], index) => (
+                  <tr key={index}>
+                    <td className="pokemon-cell">
+                      {pokemonDetail(pkm)}
+                      <span>{t(`pkm.${pkm}`)}</span>
+                    </td>
+                    {stageInfo.stageData.marowakItems && (
+                      <td className="items-cell">
+                        {stageInfo.stageData.marowakItems[index]?.map(
+                          (item) => (
+                            <React.Fragment key={item}>
+                              {itemDetail(item)}
+                            </React.Fragment>
+                          )
+                        )}
+                      </td>
+                    )}
+                    {stageInfo.stageData.statBoosts && (
+                      <td className="boosts-cell">
+                        {Object.entries(stageInfo.stageData.statBoosts).map(
+                          ([stat, boost]) => (
+                            <div
+                              key={stat}
+                              className="boost-item"
+                              title={t(`stat.${stat}`)}
+                            >
+                              <img
+                                src={`assets/icons/${stat}.png`}
+                                alt={stat}
+                              />
+                              <span>+{boost as number}</span>
+                            </div>
+                          )
+                        )}
+                      </td>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-
-          {stageInfo.stageData.statBoosts && (
-            <div className="stage-boosts">
-              <h4>{t("stat_boosts")}:</h4>
-              <ul>
-                {Object.entries(stageInfo.stageData.statBoosts).map(
-                  ([stat, boost]) => (
-                    <li key={stat}>
-                      <img src={`assets/icons/${stat}.png`} />
-                      <strong>{t(`stat.${stat}`)}:</strong> +{boost as number}
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-          )}
 
           {stageInfo.stageData.rewards && (
             <div className="stage-rewards">

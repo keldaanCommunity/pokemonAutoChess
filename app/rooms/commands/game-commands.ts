@@ -1379,6 +1379,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.room.clock.setTimeout(() => {
               player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
               player.board.forEach((pokemon) => {
+                // Condition based evolutions on ground hole dig
                 if (
                   pokemon.evolutionRule instanceof ConditionBasedEvolutionRule
                 ) {
@@ -1513,6 +1514,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       itemEffects.forEach((effect) =>
         effect.apply({ pokemon, player, room: this.room })
       )
+
+      // Condition based evolutions on stage start
+      if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
+        pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
+      }
     })
 
     // Unholdable item effects on stage start
@@ -1639,15 +1645,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (pokemon.evolutionRule) {
               if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
                 pokemon.evolutionRule.updateHatch(
-                  pokemon,
-                  player,
-                  this.state.stageLevel
-                )
-              }
-              if (
-                pokemon.evolutionRule instanceof ConditionBasedEvolutionRule
-              ) {
-                pokemon.evolutionRule.tryEvolve(
                   pokemon,
                   player,
                   this.state.stageLevel

@@ -235,7 +235,7 @@ export default class MinigameManager {
           if (value != "" && typeof value === "string") {
             const avatar = this.pokemons.get(value)
             this.symbols.forEach((symbol) => {
-              if (symbol.getData("portalId") === portal.id) {
+              if (symbol.portalId === portal.id) {
                 this.removeSymbol(symbol)
               }
             })
@@ -290,7 +290,7 @@ export default class MinigameManager {
           break
 
         case "portalId":
-          symbolUI.setData("portalId", value)
+          symbolUI.portalId = value as string
           break
       }
     }

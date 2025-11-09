@@ -1,22 +1,5 @@
-import { SetSchema } from "@colyseus/schema"
-import { Stat } from "../types/enum/Game"
-import { CraftableItems, Item, SynergyStones } from "../types/enum/Item"
-import { pickRandomIn } from "../utils/random"
-
-export function getWonderboxItems(existingItems: SetSchema<Item>): Item[] {
-  const wonderboxItems: Item[] = []
-  for (let n = 0; n < 2; n++) {
-    const eligibleItems = CraftableItems.filter(
-      (i) =>
-        !SynergyStones.includes(i) &&
-        !wonderboxItems.includes(i) &&
-        !existingItems.has(i) &&
-        i !== Item.WONDER_BOX
-    )
-    wonderboxItems.push(pickRandomIn(eligibleItems))
-  }
-  return wonderboxItems
-}
+import { Stat } from "../../types/enum/Game"
+import { Item } from "../../types/enum/Item"
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
@@ -40,8 +23,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.SOUL_DEW]: {},
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.SPEED]: 10 },
   [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 20 },
-  [Item.POKEMONOMICON]: { [Stat.AP]: 10, [Stat.ATK]: 3 },
-  [Item.POWER_LENS]: { [Stat.AP]: 10, [Stat.SPE_DEF]: 10 },
+  [Item.POKEMONOMICON]: { [Stat.AP]: 50, [Stat.ATK]: 3 },
+  [Item.POWER_LENS]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 10 },
   [Item.SHELL_BELL]: { [Stat.ATK]: 3, [Stat.SPE_DEF]: 3 },
   [Item.LUCKY_EGG]: { [Stat.AP]: 50, [Stat.DEF]: 10, [Stat.LUCK]: 30 },
   [Item.AQUA_EGG]: { [Stat.PP]: 30 },
@@ -49,24 +32,24 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
   [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 50 },
   [Item.GREEN_ORB]: { [Stat.SPE_DEF]: 3 },
-  [Item.DEEP_SEA_TOOTH]: { [Stat.PP]: 15, [Stat.ATK]: 7 },
-  [Item.SMOKE_BALL]: { [Stat.CRIT_CHANCE]: 10 },
+  [Item.DEEP_SEA_TOOTH]: { [Stat.ATK]: 7, [Stat.PP]: 15 },
+  [Item.SMOKE_BALL]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 10 },
   [Item.XRAY_VISION]: { [Stat.SPEED]: 50 },
   [Item.RAZOR_FANG]: {
     [Stat.SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
     [Stat.CRIT_POWER]: 100
   },
-  [Item.GRACIDEA_FLOWER]: { [Stat.SPEED]: 10, [Stat.SHIELD]: 15 },
+  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15 },
   [Item.CHOICE_SCARF]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
-  [Item.STICKY_BARB]: { [Stat.DEF]: 3, [Stat.SHIELD]: 15 },
+  [Item.STICKY_BARB]: { [Stat.DEF]: 6, [Stat.SHIELD]: 15 },
   [Item.ABILITY_SHIELD]: { [Stat.AP]: 10 },
   [Item.WIDE_LENS]: {
     [Stat.RANGE]: 2,
-    [Stat.CRIT_CHANCE]: 10,
-    [Stat.SPE_DEF]: 3
+    [Stat.CRIT_CHANCE]: 15,
+    [Stat.SPE_DEF]: 6
   },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
   [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },

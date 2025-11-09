@@ -2,9 +2,8 @@ import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
-import { RarityColor } from "../../../../../config"
+import { ItemStats, RarityColor } from "../../../../../config"
 import { DishByPkm } from "../../../../../core/dishes"
-import { ItemStats } from "../../../../../core/items"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
@@ -26,7 +25,14 @@ import "./game-pokemon-detail.css"
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | IPokemon | IPokemonEntity
-  origin: "shop" | "proposition" | "team" | "planner" | "battle" | "wiki" | "patchnotes"
+  origin:
+    | "shop"
+    | "proposition"
+    | "team"
+    | "planner"
+    | "battle"
+    | "wiki"
+    | "patchnotes"
   shiny?: boolean
   emotion?: Emotion
   isAlly?: boolean
@@ -133,6 +139,16 @@ export function GamePokemonDetail(props: {
     return undefined
   }, [pokemon.items, props.origin, pokemon.shield])
 
+  let name = t(`pkm.${pokemon.name}`)
+  if (
+    pokemon.index === PkmIndex[Pkm.SUBSTITUTE] &&
+    "evolution" in pokemon &&
+    pokemon.evolution != null &&
+    pokemon.evolution != Pkm.DEFAULT
+  ) {
+    name += ` (${t(`pkm.${pokemon.evolution}`)})` // indicate the original pokemon for Dojo substitute
+  }
+
   return (
     <div className="game-pokemon-detail">
       <PokemonPortrait
@@ -153,9 +169,7 @@ export function GamePokemonDetail(props: {
           />
         )}
       <div className="game-pokemon-detail-entry">
-        <p className="game-pokemon-detail-entry-name">
-          {t(`pkm.${pokemon.name}`)}
-        </p>
+        <p className="game-pokemon-detail-entry-name">{name}</p>
         <p
           className="game-pokemon-detail-entry-rarity"
           style={{ color: RarityColor[pokemon.rarity] }}

@@ -32,6 +32,7 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
+import { ConditionBasedEvolutionRule } from "../evolution-rules"
 import { FlowerPotMons } from "../flower-pots"
 import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -56,7 +57,7 @@ import {
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
     pokemon.count.staticHolderCount++
-    if (pokemon.count.staticHolderCount >= 4) {
+    if (pokemon.count.staticHolderCount >= 3) {
       pokemon.count.staticHolderCount = 0
       const nbBounces = 2
       const closestEnemies = new Array<PokemonEntity>()
@@ -104,7 +105,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
             false,
             false
           )
-          secondaryTargetHit.addPP(-20, pokemon, 0, false)
+          secondaryTargetHit.addPP(-15, pokemon, 0, false)
           secondaryTargetHit.count.manaBurnCount++
           previousTg = secondaryTargetHit
         } else {
@@ -292,6 +293,8 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       )
       player.board.delete(pokemon.id)
       substitute.id = pokemon.id
+      substitute.evolution = pokemon.name
+      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
       substitute.positionX = pokemon.positionX
       substitute.positionY = pokemon.positionY
       player.board.set(substitute.id, substitute)
