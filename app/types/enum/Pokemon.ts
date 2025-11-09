@@ -3431,6 +3431,7 @@ export const Unowns: Pkm[] = [
 
 export const NonPkm: Pkm[] = [
   Pkm.SUBSTITUTE,
+  Pkm.EGG,
   Pkm.PILLAR_WOOD,
   Pkm.PILLAR_IRON,
   Pkm.PILLAR_CONCRETE,

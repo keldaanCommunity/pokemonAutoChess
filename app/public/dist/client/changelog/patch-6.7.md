@@ -71,6 +71,7 @@
 - All dash abilities and abilities hitting in between two cells now guarantee to hit at least the original target if no other enemies are hit. Abilities impacted: Aqua Jet, Flame Charge, Volt Switch, Wheel of Fire, Infernal Parade, Dig, Poison Powder, Silver Wind, Pyro Ball, Whirlpool, Magical Leaf, Snipe Shot, Extreme Speed, Psystrike, Psyshield Bash, Power Whip, Pastel Veil, Steel Wing, Firestarter, Surf, Steam Roller
 - Fixed Comet shard description and removed AP scaling that was applied by mistake.
 - Fixed Sacred Ash resurrecting a unit already currently resurrecting, causing duplication of that unit.
+- Inanimate objects and Eggs can no longer be sent to the Dojo via Dojo Ticket item
 
 # Misc
 

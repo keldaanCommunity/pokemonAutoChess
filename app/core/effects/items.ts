@@ -22,7 +22,7 @@ import {
   TMs
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
@@ -287,6 +287,7 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
 export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
   constructor(ticketLevel: number) {
     super(({ pokemon, player, room, item }) => {
+      if(NonPkm.includes(pokemon.name)) return false;
       const substitute = PokemonFactory.createPokemonFromName(
         Pkm.SUBSTITUTE,
         player
