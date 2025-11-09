@@ -3050,7 +3050,7 @@
 		"DUNSPARCE": "Dunsparce will evolve when at least 10 ground holes are fully dug on board",
 		"PACHIRISU": "Has [30,LK]% chance to find a buried SITRUS_BERRY after each fight",
 		"QWILFISH": "When struck by an attack at melee range, deal 5 TRUE to the attacker, with [30,LK]% chance to inflict POISONNED for 3 seconds",
-		"HISUIAN_QWILFISH": "Gain 1 AP permanently when casting its ability. After casting 20 times, Hisuian Qwilfish will evolve into Overqwil.",
+		"HISUIAN_QWILFISH": "After casting its ability 20 times, Hisuian Qwilfish will evolve into Overqwil.",
 		"LAST_RESPECTS": "Gains maximum PP when an ADJACENT ally is KO.",
 		"BEADS_OF_RUIN": "The envy accumulated within its curved beads radiates a curse. Each hit reduces the target's SPE_DEF by 1.",
 		"EMERGENCY_EXIT": "Starts with full PP.",

@@ -3046,7 +3046,7 @@
 		"DUNSPARCE": "$t(pkm.DUNSPARCE) évoluera lorsqu'au moins 10 trous dans le sol seront entièrement creusés sur le plateau",
 		"PACHIRISU": "A [30,LK]% de chances de trouver un SITRUS_BERRY enterrée après chaque combat",
 		"QWILFISH": "Lorsqu'il est touché par une attaque au corps à corps, inflige 5 TRUE à l'attaquant, avec [30,LK]% de chances d'infliger POISONNED pendant 3 secondes",
-		"HISUIAN_QWILFISH": "Gagne 1 AP de façon permanente en lançant sa capacité. Après 20 lancers, $t(pkm.HISUIAN_QWILFISH) évoluera en $t(pkm.OVERQWIL).",
+		"HISUIAN_QWILFISH": "Après avoir lancé sa capacité 20 fois, $t(pkm.HISUIAN_QWILFISH) évoluera en $t(pkm.OVERQWIL).",
 		"LAST_RESPECTS": "Récupère le maximum de ses PP lorsqu'un allié ADJACENT est mis KO.",
 		"BEADS_OF_RUIN": "L'envie accumulée dans ses Perles du Fléau irradie une malédiction. Chaque coup réduit la SPE_DEF de la cible de 1.",
 		"EMERGENCY_EXIT": "Commence avec ses PP au max.",

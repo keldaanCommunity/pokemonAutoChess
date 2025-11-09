@@ -11955,7 +11955,7 @@ export class Plusle extends Pokemon {
   speed = 61
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 70
   range = 1
   skill = Ability.LINK_CABLE
 }
@@ -11969,7 +11969,7 @@ export class Minun extends Pokemon {
   speed = 61
   def = 6
   speDef = 6
-  maxPP = 60
+  maxPP = 70
   range = 1
   skill = Ability.LINK_CABLE
 }
@@ -13113,7 +13113,7 @@ export class HisuianQwilfish extends Pokemon {
   hp = 175
   atk = 13
   speed = 52
-  def = 15
+  def = 12
   speDef = 6
   maxPP = 100
   range = 1
@@ -13137,7 +13137,7 @@ export class Overqwil extends Pokemon {
   hp = 250
   atk = 18
   speed = 52
-  def = 18
+  def = 15
   speDef = 8
   maxPP = 100
   range = 1
@@ -18985,7 +18985,7 @@ export class FlutterMane extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 20
+  atk = 17
   speed = 59
   def = 4
   speDef = 8

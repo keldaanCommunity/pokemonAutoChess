@@ -260,13 +260,6 @@ const KubfuOnKillEffect = new OnKillEffect(
   }
 )
 
-const HisuianQwilfishOnCastEffect = new OnAbilityCastEffect(
-  (pokemon, board) => {
-    pokemon.addAbilityPower(1, pokemon, 0, false, true)
-    pokemon.addStack()
-  }
-)
-
 const QwilfishPassiveEffect = new OnDamageReceivedEffect(
   ({ pokemon, attacker, attackType, isRetaliation }) => {
     if (
@@ -998,7 +991,7 @@ export const PassiveEffects: Partial<
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
   [Passive.KUBFU]: [KubfuOnKillEffect],
   [Passive.QWILFISH]: [QwilfishPassiveEffect],
-  [Passive.HISUIAN_QWILFISH]: [HisuianQwilfishOnCastEffect],
+  [Passive.HISUIAN_QWILFISH]: [new OnAbilityCastEffect(pokemon => pokemon.addStack())],
   [Passive.SLOW_START]: [
     new OnSpawnEffect((pokemon) => pokemon.addSpeed(-30, pokemon, 0, false)),
     new OnAbilityCastEffect((pokemon) => {

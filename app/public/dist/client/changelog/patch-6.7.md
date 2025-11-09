@@ -22,6 +22,9 @@
 - Rework Meteor Mash (Beldum): Deal 3 times 100% (AP) of Attack as special damage to the target (4 times if user is in Psychic field) and increase the user's attack by 2 for each hit.
 - Buff Deoxys: all forms HP 220 → 250
 - Buff Meltan: PP 80 → 50
+- Nerf Flutter Mane: Attack 20 → 17
+- Nerf Plusle & Minun: PP 60 → 70
+- Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15
 
 # Changes to Synergies
 

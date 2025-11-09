@@ -3043,7 +3043,7 @@
 		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。",
 		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。",
 		"QWILFISH": "受到近战攻击时，对攻击者造成5点TRUE，并有[30,LK]%的概率使其陷入POISON 3秒。",
-		"HISUIAN_QWILFISH": "每次释放招式时，永久提升1点AP。释放招式20次后，进化为万针鱼。",
+		"HISUIAN_QWILFISH": "释放招式20次后，进化为万针鱼。",
 		"LAST_RESPECTS": "每当ADJACENT我方宝可梦倒下时，恢复PP至满。",
 		"BEADS_OF_RUIN": "聚集了嫉妒之情的勾玉散发着诅咒的力量。命中的攻击降低目标1点SPE_DEF。",
 		"EMERGENCY_EXIT": "战斗开始时立即恢复PP至满。",

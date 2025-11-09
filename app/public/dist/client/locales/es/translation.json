@@ -2988,7 +2988,7 @@
 		"DUNSPARCE": "Dunsparce evolucionará cuando al menos 10 hoyos estén totalmente excavados en tu tablero",
 		"PACHIRISU": "Tiene un [30,LK]% de posibilidades de encontrar una SITRUS_BERRY enterrada después de cada batalla",
 		"QWILFISH": "Cada vez que recibe un ataque cuerpo a cuerpo, inflige 5 TRUE al atacante, con un [30,LK]% de posibilidades de dejarlo POISONNED durante 3 segundos",
-		"HISUIAN_QWILFISH": "Gana 1 de AP permanentemente cada vez que utiliza su habilidad. Tras usar su habilidad 20 veces, $t(pkm.HISUIAN_QWILFISH) evolucionará a $t(pkm.OVERQWIL).",
+		"HISUIAN_QWILFISH": "Tras usar su habilidad 20 veces, $t(pkm.HISUIAN_QWILFISH) evolucionará a $t(pkm.OVERQWIL).",
 		"LAST_RESPECTS": "Restaura los PP al máximo cuando un aliado ADJACENT cae derrotado.",
 		"BEADS_OF_RUIN": "La envidia acumulada en este Pokémon irradia una maldición. Cada golpe reduce la SPE_DEF del objetivo en 1.",
 		"EMERGENCY_EXIT": "Empieza la batalla con los PP al máximo.",
