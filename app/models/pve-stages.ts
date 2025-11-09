@@ -104,10 +104,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MEWTWO, 0, 1],
       [Pkm.MEW, 7, 1]
     ],
-    marowakItems: [
-      [Item.METAL_COAT, Item.LIGHT_BALL],
-      [Item.WIDE_LENS, Item.DEEP_SEA_TOOTH]
-    ],
+    marowakItems: [[Item.METAL_COAT], [Item.DEEP_SEA_TOOTH]],
     rewards: NonSpecialItemComponents,
     getRewards(player: Player) {
       const rewards = [pickRandomIn(NonSpecialItemComponents)]
@@ -175,9 +172,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Stat.AP]: 50
     },
     marowakItems: [
-      [Item.AQUA_EGG, Item.SOUL_DEW, Item.XRAY_VISION],
-      [Item.AQUA_EGG, Item.SOUL_DEW, Item.POKEMONOMICON],
-      [Item.AQUA_EGG, Item.SOUL_DEW, Item.STAR_DUST]
+      [Item.XRAY_VISION, Item.BLUE_ORB],
+      [Item.SOUL_DEW, Item.POKEMONOMICON],
+      [Item.AQUA_EGG, Item.STAR_DUST]
     ],
     rewards: CraftableItems,
     getRewards(player: Player) {

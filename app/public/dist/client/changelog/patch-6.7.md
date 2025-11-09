@@ -70,6 +70,7 @@
 
 # Misc
 
+- Nerfed marowak encounter items for stages 14 and 24 
 - Jukebox gadget level requirement decreased to 5
 - New gadget: Synergy Wheel, unlocks at level 10
 - Gameboy gadget level requirement decreased to 20

@@ -4323,6 +4323,8 @@
 		"battle": "Player Battle"
 	},
 	"enemy_team": "Enemy Team",
+	"pokemon": "Pokémon",
+	"marowak_items": "Items (Marowak encounter)",
 	"stat_boosts": "Stat Boosts",
 	"rewards": "Rewards",
 	"shiny_chance": "Shiny Chance",
