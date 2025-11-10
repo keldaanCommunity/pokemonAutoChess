@@ -3818,6 +3818,7 @@
 	"eligible_elo_hint": "✔ Cette partie est éligible au gain/perte d'Elo.",
 	"average_elo": "Elo moyen",
 	"GLHF": "GL HF",
+	"thanks_for_playing": "Merci d'avoir joué à notre jeu !",
 	"not_eligible_elo_hint": "❌ Les parties avec des bots uniquement ne sont pas éligibles au gain/perte d'Elo.",
 	"add_bot_or_wait_hint": "Ajoutez des bots ou attendez que plus de joueurs rejoignent votre salon",
 	"wait_for_players_hint": "Attendez que d'autres joueurs rejoignent votre salon",
