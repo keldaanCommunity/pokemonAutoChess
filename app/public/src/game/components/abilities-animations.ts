@@ -818,6 +818,25 @@ export const AbilitiesAnimations: {
     rotation: +Math.PI / 2,
     origin: [0.5, 1]
   }),
+  [Ability.SUPER_HEAT]: [
+    onCaster({
+      oriented: true,
+      origin: [0, 0.5],
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    onCaster({
+      oriented: true,
+      origin: [0, 0.5],
+      rotation: Math.PI / 4,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    onCaster({
+      oriented: true,
+      origin: [0, 0.5],
+      rotation: -Math.PI / 4,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
+  ],
   [Ability.FIERY_WRATH]: onCaster({
     ability: Ability.FLAMETHROWER,
     oriented: true,
@@ -1280,6 +1299,39 @@ export const AbilitiesAnimations: {
     onCaster({ ability: "DIG", oriented: true, origin: [0, 1], scale: [3, 3] }),
     onCaster({ ability: "DIG", oriented: true, origin: [0, 1], scale: [3, -3] })
   ],
+  [Ability.PLASMA_FISSION]: [
+    (args) => {
+      const distance = distanceM(
+        args.positionX,
+        args.positionY,
+        args.targetX,
+        args.targetY
+      )
+      const speed = 0.01
+      const duration = distance / speed
+
+      return projectile({
+        scale: 2,
+        duration: duration
+      })(args)
+    }
+  ],
+  [Ability.PLASMA_TEMPEST]: projectile({
+    ability: Ability.PLASMA_FISSION,
+    scale: 3,
+    duration: 500
+  }),
+  [Ability.DEEP_FREEZE]: projectile({
+    ability: Ability.PLASMA_FISSION,
+    scale: 2,
+    duration: 300
+  }),
+  [Ability.PLASMA_FLASH]: projectile({
+    ability: Ability.PLASMA_FISSION,
+    scale: 2,
+    duration: 300,
+    tint: 0xffea00
+  }),
   [Ability.HYPER_DRILL]: [
     projectile({
       startCoords: "target",
@@ -1471,6 +1523,12 @@ export const AbilitiesAnimations: {
   [Ability.WHIRLWIND]: projectile({ duration: 1000 }),
   [Ability.ACID_SPRAY]: projectile({ duration: 1000 }),
   [Ability.WATER_PULSE]: projectile({ duration: 1000, scale: 3 }),
+  [Ability.POWER_WASH]: skyfall({
+    ability: Ability.PLASMA_FISSION,
+    scale: 2,
+    duration: 400,
+    hitAnim: onTarget({ ability: "SMOKE_BLACK" })
+  }),
   [Ability.GRAV_APPLE]: skyfall({
     ability: Ability.NUTRIENTS,
     scale: 3,
@@ -2135,6 +2193,44 @@ export const AbilitiesAnimations: {
       },
       onComplete: function () {
         darkHarvestGroup.destroy(true, true)
+      }
+    })
+  },
+  [Ability.TRIMMING_MOWER]: ({ scene, positionX, positionY, flip, ap }) => {
+    const group = scene.add.group()
+    const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+
+    for (let i = 0; i < 5; i++) {
+      const sprite = scene.add
+        .sprite(0, 0, "abilities", `${Ability.DARK_HARVEST}/000.png`)
+        ?.setScale(2 * (1 + ap / 200))
+      sprite.setTint(0x90ee90)
+      sprite.anims.play({
+        key: Ability.PLASMA_FISSION,
+        frameRate: 8
+      })
+      group.add(sprite)
+      scene.abilitiesVfxGroup?.add(sprite)
+    }
+
+    const circle = new Phaser.Geom.Circle(x, y, 48)
+    Phaser.Actions.PlaceOnCircle(group.getChildren(), circle)
+
+    scene.tweens.add({
+      targets: circle,
+      radius: 96,
+      ease: Phaser.Math.Easing.Quartic.Out,
+      duration: 1000,
+      onUpdate: function (tween) {
+        Phaser.Actions.RotateAroundDistance(
+          group.getChildren(),
+          { x, y },
+          0.08,
+          circle.radius
+        )
+      },
+      onComplete: function () {
+        group.destroy(true, true)
       }
     })
   },

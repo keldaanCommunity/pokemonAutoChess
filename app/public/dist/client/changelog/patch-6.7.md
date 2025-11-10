@@ -1,5 +1,11 @@
 # New Pokemons:
 
+- Rotom Heat
+- Rotom Wash
+- Rotom Frost
+- Rotom Fan
+- Rotom Mow
+
 # Changes to Pokemon & Abilities
 
 - Ditto can no longer appear in shops before stage 6
@@ -30,6 +36,8 @@
 - Nerf Skarmory passive: 12 → 10 spikes
 - Nerf Hitmonlee: Attack 26 → 24
 - Buff Basculin Red & Blue: HP 140 → 160
+- Rework of Rotom Drone
+- Rework of Rotom
 
 # Changes to Synergies
 
