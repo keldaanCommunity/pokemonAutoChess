@@ -440,29 +440,28 @@ class GameContainer {
         "luck",
         "shiny",
         "skill",
-        "meal"
+        "meal",
+        "supercharged"
       ]
     ) => {
       const $pokemon = this.$<Pokemon>(pokemon)
-      $pokemon.onChange(() => {
-        fields.forEach((field) => {
-          $pokemon.listen(field, (value, previousValue) => {
-            if (field && player.id === this.spectatedPlayerId) {
-              this.gameScene?.board?.changePokemon(
-                pokemon,
-                field,
-                value as IPokemon[typeof field],
-                previousValue as IPokemon[typeof field]
-              )
-            }
-          })
-        })
-
-        $pokemon.items.onChange((value, key) => {
-          if (player.id === this.spectatedPlayerId) {
-            this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
+      fields.forEach((field) => {
+        $pokemon.listen(field, (value, previousValue) => {
+          if (field && player.id === this.spectatedPlayerId) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              field,
+              value as IPokemon[typeof field],
+              previousValue as IPokemon[typeof field]
+            )
           }
         })
+      })
+
+      $pokemon.items.onChange((value, key) => {
+        if (player.id === this.spectatedPlayerId) {
+          this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
+        }
       })
     }
 
@@ -497,9 +496,6 @@ class GameContainer {
       store.dispatch(
         changePlayer({ id: player.id, field: "board", value: player.board })
       )
-      if (pokemon) {
-        listenForPokemonChanges(pokemon)
-      }
     })
 
     $player.items.onChange((value, key) => {

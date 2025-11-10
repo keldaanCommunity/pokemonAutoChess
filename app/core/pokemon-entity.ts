@@ -5,6 +5,8 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   ItemStats,
+  MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
+  MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   ON_ATTACK_MANA
 } from "../config"
 import Count from "../models/colyseus-models/count"
@@ -1394,8 +1396,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     const resetMonsterStacks = (effect: MonsterKillEffect) => {
-      const attackBoost = [3, 6, 10, 10][effect.synergyLevel] ?? 10
-      const apBoost = [10, 20, 30, 30][effect.synergyLevel] ?? 30
+      const attackBoost =
+        MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL[effect.synergyLevel] ??
+        MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL.at(-1)
+      const apBoost =
+        MONSTER_AP_BUFF_PER_SYNERGY_LEVEL[effect.synergyLevel] ??
+        MONSTER_AP_BUFF_PER_SYNERGY_LEVEL.at(-1)
       this.addAttack(-effect.count * attackBoost, this, 0, false)
       this.addAbilityPower(-effect.count * apBoost, this, 0, false)
       this.addMaxHP(-effect.hpBoosted, this, 0, false)

@@ -141,6 +141,7 @@ export default class Player extends Schema implements IPlayer {
   @type("float32") eggChance: number = 0
   @type("float32") goldenEggChance: number = 0
   @type("float32") wildChance: number = 0
+  @type("uint8") cellBattery: number = 0
   @type({ map: Wanderer }) wanderers: Map<string, Wanderer> = new Map<
     string,
     Wanderer
@@ -787,6 +788,14 @@ export default class Player extends Schema implements IPlayer {
 
   giveMissionOrderRewards() {
     this.addMoney(30, true, null)
+  }
+
+  chargeCellBattery(amount: number) {
+    this.cellBattery += amount
+    if (this.cellBattery >= 100) {
+      this.items.push(Item.CELL_BATTERY)
+      this.cellBattery %= 100
+    }
   }
 }
 

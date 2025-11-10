@@ -126,6 +126,29 @@
   flex-wrap: wrap;
 }
 
+#wiki-stages .stage-board table {
+  border-collapse: collapse;
+  margin-top: 0.5em;
+}
+
+#wiki-stages .stage-board th,
+#wiki-stages .stage-board td {
+  padding: 0.5em;
+}
+
+#wiki-stages .stage-board .pokemon-cell img {
+  margin-right: 0.5em;
+}
+
+#wiki-stages .stage-board .boosts-cell {
+  display: flex;
+  gap: 0.5em;
+}
+#wiki-stages .stage-board .boost-item img {
+  width: 32px;
+  height: 32px;
+}
+
 #wiki-stages .stage-board li,
 #wiki-stages .town-encounter {
   display: flex;

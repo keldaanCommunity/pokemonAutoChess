@@ -22,7 +22,7 @@ import {
   TMs
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
@@ -287,6 +287,7 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
 export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
   constructor(ticketLevel: number) {
     super(({ pokemon, player, room, item }) => {
+      if(NonPkm.includes(pokemon.name)) return false;
       const substitute = PokemonFactory.createPokemonFromName(
         Pkm.SUBSTITUTE,
         player
@@ -970,6 +971,17 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.atk += 3
         pokemon.speed += 3
         player.life = min(1)(player.life - 3)
+        removeInArray(player.items, item)
+      }
+
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.CELL_BATTERY]: [
+    new OnItemDroppedEffect(({ pokemon, player, item }) => {
+      if (pokemon.types.has(Synergy.ELECTRIC) && !pokemon.supercharged) {
+        pokemon.supercharged = true
         removeInArray(player.items, item)
       }
 

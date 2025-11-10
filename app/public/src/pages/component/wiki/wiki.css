@@ -316,6 +316,10 @@
   padding: 1em;
 }
 
+#wiki-items h2 {
+  margin-bottom: 0.25em;
+}
+
 #wiki-items ul {
   display: flex;
   flex-wrap: wrap;

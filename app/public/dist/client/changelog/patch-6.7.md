@@ -25,12 +25,14 @@
 - Nerf Flutter Mane: Attack 20 → 17
 - Nerf Plusle & Minun: PP 60 → 70
 - Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15
+- Bellossom is now Flora/Grass/Sound instead of Flora/Poison/Grass
 
 # Changes to Synergies
 
 - Psychic synergy thresholds changed: 2/4/6 → 3/5/7
 - New effect for Psychic 3: A Unown has 5% chance to appear in your shop
 - New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
+- Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
 
 # Changes to Items
 
@@ -64,6 +66,8 @@
 
 - Pokemons sprites are now lazy-loaded. This should reduce game loading times and memory usage significantly, at the cost of having a small delay before the Pokémon sprites are displayed for the first time. A wobbling pokéball is shown while the sprite is being loaded (should not take more than 1 second in most cases).
 - Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
+- Wiki items section has been reworked for better readability.
+- New section on the wiki: Stages
 
 # Bugfix
 
@@ -71,9 +75,11 @@
 - All dash abilities and abilities hitting in between two cells now guarantee to hit at least the original target if no other enemies are hit. Abilities impacted: Aqua Jet, Flame Charge, Volt Switch, Wheel of Fire, Infernal Parade, Dig, Poison Powder, Silver Wind, Pyro Ball, Whirlpool, Magical Leaf, Snipe Shot, Extreme Speed, Psystrike, Psyshield Bash, Power Whip, Pastel Veil, Steel Wing, Firestarter, Surf, Steam Roller
 - Fixed Comet shard description and removed AP scaling that was applied by mistake.
 - Fixed Sacred Ash resurrecting a unit already currently resurrecting, causing duplication of that unit.
+- Inanimate objects and Eggs can no longer be sent to the Dojo via Dojo Ticket item
 
 # Misc
 
+- Nerfed marowak encounter items for stages 14 and 24 
 - Jukebox gadget level requirement decreased to 5
 - New gadget: Synergy Wheel, unlocks at level 10
 - Gameboy gadget level requirement decreased to 20

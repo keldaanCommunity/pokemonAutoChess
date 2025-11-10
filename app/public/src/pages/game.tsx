@@ -804,7 +804,8 @@ export default function Game() {
           "totalPlayerDamageDealt",
           "eggChance",
           "goldenEggChance",
-          "wildChance"
+          "wildChance",
+          "cellBattery"
         ]
 
         fields.forEach((field) => {
