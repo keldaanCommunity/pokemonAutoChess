@@ -1039,7 +1039,7 @@ export default class BoardManager {
         pokemon,
         id,
         false,
-        false
+        true
       )
 
       this.pokemons.set(id, pkmSprite)

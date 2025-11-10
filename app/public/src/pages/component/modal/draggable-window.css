@@ -1,0 +1,50 @@
+.draggable-window {
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  user-select: none;
+}
+
+.draggable-window.my-container {
+  padding: 0;
+}
+
+.draggable-window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  padding: 0.25em 0.5em;
+  border-radius: 8px 8px 0 0;
+  background: var(--color-bg-secondary);
+}
+
+.draggable-window.minimized .draggable-window-header {
+  border-radius: 8px;
+}
+
+.draggable-window-title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.draggable-window-header-button {
+  background: var(--color-bg-secondary);
+  border: 1px solid black;
+  color: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.draggable-window-header-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.draggable-window-content {
+  padding: 10px;
+  overflow-y: auto;
+  border-radius: 0 0 8px 8px;
+}
