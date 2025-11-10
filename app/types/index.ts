@@ -366,6 +366,7 @@ export interface IPokemon {
   canHoldItems: boolean
   canEat: boolean
   deathCount: number
+  killCount: number
   readonly hasEvolution: boolean
   supercharged: boolean
 }
@@ -542,6 +543,7 @@ export interface IPokemonEntity {
   def: number
   speDef: number
   luck: number
+  baseTeam: Team
   baseAtk: number
   baseDef: number
   baseSpeDef: number

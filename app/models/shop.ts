@@ -237,9 +237,11 @@ export default class Shop {
     }
   }
 
-  addAdditionalPokemon(pkmProposition: PkmProposition) {
+  addAdditionalPokemon(pkmProposition: PkmProposition, state: GameState) {
     const pkm: Pkm =
       pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
+    if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
+    state.additionalPokemons.push(pkm)
     const { rarity, stages } = getPokemonData(pkm)
     const pool = this.getPool(rarity)
     const entityNumber = getPoolSize(rarity, stages)
@@ -395,6 +397,18 @@ export default class Shop {
 
       if (candidates.length === 0) candidates = allCandidates
       let selected = pickRandomIn(candidates)
+
+      if (selected in PkmRegionalVariants) {
+        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+          new PokemonClasses[p](p).isInRegion(player.map)
+        )
+        if (regionalVariants.length > 0)
+          selected = pickRandomIn(regionalVariants)
+      }
+      if (selected in PkmColorVariantsByPkm) {
+        selected = PkmColorVariantsByPkm[selected]!(player)
+      }
+
       if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&

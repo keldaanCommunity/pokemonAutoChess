@@ -60,7 +60,7 @@
 - Nerf Stealth Rocks (Regirock): special damage 20/40/80 → 50 at all tiers
 - Nerf Regirock: Defense 25 → 20
 - Nerf Regice: Special Defense 25 → 20
-- Nerf Registeel: HP 250 → 220 ; Defense 25 → 20 ; Special Defense 25 → 20
+- Nerf Registeel: Defense 20 → 15 ; Special Defense 25 → 15
 - Change Frost Breath: Now deals [35, 70, 140] Special Damage
 - Rework Spiritomb: Now Rock/Ghost/Amorphous, range 1. New ability: Soul trap ; New passive: for each Odd Keystone you have, every time a Pokémon is KO, a wisp spawns and move to Spiritomb to give it 10 Shield
 - Deerling line has now 4 seasonal forms (Spring, Summer, Autumn, Winter) that change appearance and type based on the current season (in Northern Hemisphere)
@@ -70,7 +70,7 @@
 - Psych Up has been renamed Disable
 - Removed AP scaling from speed gain on Aura Wheel (Morpeko)
 - Changed Chingling evolution rule: now evolves into Chimecho after 30 abilities have been cast by your team ; Revert Chimecho PP buff from 6.4: PP 70 → 80
-- Trubbish passive simplified: no longer gains item stats, no longer can be fed with item components or artificial items ; New passive: when fed with a berry, gain 10 permanent max HP ; when fed with a consummable item (Mulch, TM, Dish...), gain 25 max HP permanently and gain TRASH in exchange
+- Trubbish passive simplified: no longer gains item stats, no longer can be fed with item components or artificial items ; New passive: when fed with a berry, gain 15 permanent max HP ; when fed with a consummable item (Mulch, TM, Dish...), gain 30 max HP permanently and gain TRASH in exchange
 - Updated Porygon passive Conversion: when copying Ground, after the fight, fully digs a hole at their position ; when copying Flora, when Porygon is KO, a special flora mon spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
 - Nerf Vulpix line: PP 80 → 90
 - Reduce Arceus and Kecleon rate: 1/150 → 1/200

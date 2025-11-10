@@ -10,6 +10,7 @@ import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
+  Berries,
   ConsumableItems,
   Flavors,
   Item,
@@ -755,11 +756,11 @@ const conversionEffect = new OnSimulationStartEffect(
     if (synergyCopied === Synergy.BUG) {
       const coord = simulation.getClosestFreeCellToPokemonEntity(
         entity,
-        player.team
+        entity.team
       )
       if (coord) {
         const bug = PokemonFactory.createPokemonFromName(entity.name, player)
-        simulation.addPokemon(bug, coord.x, coord.y, player.team, true)
+        simulation.addPokemon(bug, coord.x, coord.y, entity.team, true)
       }
     }
 
@@ -935,6 +936,7 @@ const spiritombWispEffect = new OnSimulationStartEffect(
     if (nbOddKeystones === 0) return
     const shieldAmount = nbOddKeystones * 10
     const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+      if (entity.hp <= 0) return
       entity.broadcastAbility({
         skill: "WISP",
         positionX: entity.positionX,
@@ -991,7 +993,9 @@ export const PassiveEffects: Partial<
   [Passive.METEOR]: [MiniorKernelOnAttackEffect],
   [Passive.KUBFU]: [KubfuOnKillEffect],
   [Passive.QWILFISH]: [QwilfishPassiveEffect],
-  [Passive.HISUIAN_QWILFISH]: [new OnAbilityCastEffect(pokemon => pokemon.addStack())],
+  [Passive.HISUIAN_QWILFISH]: [
+    new OnAbilityCastEffect((pokemon) => pokemon.addStack())
+  ],
   [Passive.SLOW_START]: [
     new OnSpawnEffect((pokemon) => pokemon.addSpeed(-30, pokemon, 0, false)),
     new OnAbilityCastEffect((pokemon) => {
@@ -1142,7 +1146,29 @@ export const PassiveEffects: Partial<
   ],
   [Passive.BASCULIN_WHITE]: [
     new OnKillEffect(({ attacker }) => {
-      if (attacker instanceof BasculinWhite) attacker.killCount++
+      const pokemon = attacker.refToBoardPokemon
+      if (pokemon && pokemon instanceof BasculinWhite) {
+        pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        if (
+          pokemon.killCount === pokemon.stacksRequired &&
+          pokemon.deathCount < pokemon.stacksRequired
+        ) {
+          attacker.addStack(0) // trigger evolution
+        }
+      }
+    }),
+    new OnDeathEffect(({ pokemon: pokemonEntity }) => {
+      const pokemon = pokemonEntity.refToBoardPokemon
+      if (pokemon && pokemon instanceof BasculinWhite) {
+        pokemon.stacks = pokemon.deathCount
+        //pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        if (
+          pokemon.deathCount === pokemon.stacksRequired &&
+          pokemon.killCount < pokemon.stacksRequired
+        ) {
+          pokemonEntity.addStack(0) // trigger evolution
+        }
+      }
     })
   ],
   [Passive.BASCULIN_RED_BLUE]: [
@@ -1166,7 +1192,11 @@ export const PassiveEffects: Partial<
   [Passive.CHINGLING]: [chinglingCountCastsEffect],
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
-      if (ConsumableItems.includes(item)) {
+      if (Berries.includes(item)) {
+        pokemon.addMaxHP(15, player)
+        removeInArray(player.items, item)
+        return false
+      } else if (ConsumableItems.includes(item)) {
         pokemon.addMaxHP(30, player)
         player.items.push(Item.TRASH)
         removeInArray(player.items, item)

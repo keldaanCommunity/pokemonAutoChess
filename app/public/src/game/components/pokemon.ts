@@ -235,16 +235,17 @@ export default class PokemonSprite extends DraggableObject {
       }
     }
 
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+      "lastPokemonDetail" in scene
+
     this.draggable =
       playerId === scene.uid &&
       !inBattle &&
-      (scene as GameScene).spectate === false &&
-      FlowerPotMons.includes(pokemon.name) === false
+      isGameScene(scene) &&
+      scene.spectate === false
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
     if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
@@ -308,14 +309,20 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
-  unloadAnimations(scene: GameScene | DebugScene | undefined) {
-    const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
+  unloadAnimations(
+    scene: GameScene | DebugScene | undefined,
+    indexToUnload: string,
+    tintToUnload: PokemonTint
+  ) {
+    const pokemonSpriteKey = `${indexToUnload}/${tintToUnload}`
     let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
     spriteCount = min(0)(spriteCount - 1)
     if (spriteCount === 0 && scene?.animationManager) {
-      //logger.debug("unloading anims for", this.pokemon.index)
-      scene.animationManager?.unloadPokemonAnimations(this.pokemon.index, tint)
+      //logger.debug("unloading anims for", indexToUnload, tintToUnload)
+      scene.animationManager?.unloadPokemonAnimations(
+        indexToUnload,
+        tintToUnload
+      )
     }
     spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
   }
@@ -360,7 +367,11 @@ export default class PokemonSprite extends DraggableObject {
     const g = <GameScene>this.scene
     super.destroy(fromScene)
     this.closeDetail()
-    this.unloadAnimations(g)
+    this.unloadAnimations(
+      g,
+      this.pokemon.index,
+      this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    )
   }
 
   closeDetail() {
@@ -1217,7 +1228,7 @@ export default class PokemonSprite extends DraggableObject {
 
       this.x = landingCoordinates[0]
       this.y = landingCoordinates[1]
-      this.moveManager.setSpeed(3)
+      this.moveManager.setSpeed(1000)
       this.moveManager.moveTo(finalCoordinates[0], finalCoordinates[1])
       this.skydiving = false
     }

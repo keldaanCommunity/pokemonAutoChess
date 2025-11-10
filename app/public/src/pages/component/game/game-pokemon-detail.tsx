@@ -14,6 +14,7 @@ import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { roundToNDigits } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -22,6 +23,13 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import { GameTooltipBar } from "./game-tooltip-bar"
 import "./game-pokemon-detail.css"
+
+interface StatInfo {
+  stat: Stat
+  value: number
+  baseValue: number
+  formatter?: (value: number) => string
+}
 
 export function GamePokemonDetail(props: {
   pokemon: Pkm | IPokemon | IPokemonEntity
@@ -49,13 +57,14 @@ export function GamePokemonDetail(props: {
 
   const pokemonStats = useMemo(() => {
     const baseStats = PokemonFactory.createPokemonFromName(pokemon.name)
-    return [
+    const stats: StatInfo[] = [
       { stat: Stat.DEF, value: pokemon.def, baseValue: baseStats.def },
       { stat: Stat.ATK, value: pokemon.atk, baseValue: baseStats.atk },
       {
         stat: Stat.CRIT_CHANCE,
         value: pokemon.critChance,
-        baseValue: baseStats.critChance
+        baseValue: baseStats.critChance,
+        formatter: (value: number) => `${value}%`
       },
       { stat: Stat.AP, value: pokemon.ap, baseValue: baseStats.ap },
       { stat: Stat.RANGE, value: pokemon.range, baseValue: baseStats.range },
@@ -68,16 +77,21 @@ export function GamePokemonDetail(props: {
       {
         stat: Stat.CRIT_POWER,
         value: pokemon.critPower,
-        baseValue: baseStats.critPower
+        baseValue: baseStats.critPower,
+        formatter: (value: number) => `x${roundToNDigits(value, 1)}`
       },
       { stat: Stat.LUCK, value: pokemon.luck, baseValue: baseStats.luck }
-    ].map((s) => {
+    ]
+    return stats.map((s) => {
       if (props.origin === "team") {
         // count item stats as well
-        s.value = values(pokemon.items).reduce(
-          (acc, item) => acc + (ItemStats[item]?.[s.stat] ?? 0),
-          s.value
-        )
+        s.value = values(pokemon.items).reduce((acc, item) => {
+          let itemStatBonus = ItemStats[item]?.[s.stat] ?? 0
+          if (s.stat === Stat.CRIT_POWER && itemStatBonus > 0) {
+            itemStatBonus = itemStatBonus / 100
+          }
+          return acc + itemStatBonus
+        }, s.value)
       }
       return s
     })
@@ -204,7 +218,7 @@ export function GamePokemonDetail(props: {
         <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
       </div>
       <div className="game-pokemon-detail-stats">
-        {pokemonStats.map(({ stat, value, baseValue }) => (
+        {pokemonStats.map(({ stat, value, baseValue, formatter }) => (
           <div
             key={stat}
             className={"game-pokemon-detail-stat-" + stat.toLowerCase()}
@@ -220,7 +234,7 @@ export function GamePokemonDetail(props: {
                 nerfed: value < baseValue
               })}
             >
-              {value}
+              {formatter ? formatter(value) : value}
             </span>
           </div>
         ))}

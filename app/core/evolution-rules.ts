@@ -264,11 +264,12 @@ export class HatchEvolutionRule extends EvolutionRule {
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
-      setTimeout(() => {
-        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
-        if (pokemon.name === Pkm.EGG && pokemon.shiny) {
-          player.items.push(pickRandomIn(ShinyItems))
-        }
+      setTimeout(() => {        
+        pokemon.evolutionRule.tryEvolve(
+          pokemon,
+          player,
+          stageLevel
+        )        
       }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
       const hatchTime = this.getHatchTime(pokemon, player)
@@ -284,17 +285,23 @@ export class HatchEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
+    if (!player.board.has(pokemon.id)) return false // egg has been sold in the meantime
     pokemon.stacksRequired = this.getHatchTime(pokemon, player)
     return pokemon.stacks >= pokemon.stacksRequired
   }
 
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {    
     pokemon.stacks = 0 // prevent trying to evolve twice in a row
     const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName
     )
+    
+    if (pokemonEvolved != null && pokemon.name === Pkm.EGG && pokemon.shiny) {
+      player.items.push(pickRandomIn(ShinyItems))
+    }
+
     return pokemonEvolved
   }
 }
@@ -317,6 +324,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
+    if (player.board.has(pokemon.id) === false) return false
     return this.condition(pokemon, player, stageLevel)
   }
 

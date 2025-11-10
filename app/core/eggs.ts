@@ -14,6 +14,7 @@ export function createRandomEgg(player: Player, shiny: boolean): Egg {
   )
   const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, { shiny }) as Egg
   egg.action = PokemonActionState.SLEEP
+  egg.stacksRequired = egg.evolutionRule.getHatchTime(egg, player)
 
   if (player) {
     const remainingEggs = hatchList.filter(

@@ -805,6 +805,7 @@ export default class GameScene extends Scene {
 
   closeTooltips() {
     this.board?.closeTooltips()
+    this.battle?.closeTooltips()
     this.minigameManager?.closeTooltips()
     this.itemsContainer?.closeTooltips()
   }

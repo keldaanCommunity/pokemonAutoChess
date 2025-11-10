@@ -1,7 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Role } from "../../../../../types"
-import { getAvatarSrc } from "../../../../../utils/avatar"
 import PokemonPortrait from "../pokemon-portrait"
 import { RoleBadge } from "./role-badge"
 

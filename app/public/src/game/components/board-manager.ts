@@ -355,7 +355,15 @@ export default class BoardManager {
         .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
       const potPokemon = this.player.flowerPots[i]
 
-      if (potPokemon) {
+      const simulation = this.scene?.room?.state.simulations.get(
+        this.player.simulationId
+      )
+      const isOnBattle =
+        this.mode === BoardMode.BATTLE &&
+        simulation?.started &&
+        values(simulation.blueDpsMeter).some((p) => p.id === potPokemon.id)
+
+      if (potPokemon && !isOnBattle) {
         const flowerInPot = new PokemonSprite(
           this.scene,
           FLOWER_POTS_POSITIONS_BLUE[i][0],
@@ -371,6 +379,7 @@ export default class BoardManager {
           false,
           true
         )
+        flowerInPot.draggable = false
         this.flowerPokemonsInPots.push(flowerInPot)
         this.pokemons.set(flowerInPot.id, flowerInPot)
       }
@@ -830,7 +839,7 @@ export default class BoardManager {
     pokemon: IPokemon,
     field: F,
     value: IPokemon[F],
-    previousValue: IPokemon[F]
+    previousValue?: IPokemon[F]
   ) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
@@ -885,30 +894,28 @@ export default class BoardManager {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
-          if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
-          if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.ATK)
           break
 
         case "def":
-          if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.DEF)
           break
 
         case "speed":
-          if (
-            (value as IPokemon["speed"]) > (previousValue as IPokemon["speed"])
-          )
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.SPEED)
           break
 
         case "ap":
-          if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.AP)
           break
 
@@ -920,8 +927,14 @@ export default class BoardManager {
           )
           break
 
+        case "index":
+          if (previousValue != null && value !== previousValue) {
+            pokemonUI.evolutionAnimation()
+          }
+          break
+
         case "skill":
-          if (pokemonUI.pokemon.skill !== value) {
+          if (previousValue != null && value !== previousValue) {
             pokemonUI.evolutionAnimation()
           }
           break
@@ -1026,7 +1039,7 @@ export default class BoardManager {
         pokemon,
         id,
         false,
-        true
+        false
       )
 
       this.pokemons.set(id, pkmSprite)

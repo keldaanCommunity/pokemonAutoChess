@@ -8,7 +8,6 @@ import { Checkbox } from "./component/checkbox/checkbox"
 import DebugScene from "./component/debug/debug-scene"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
-
 import "./sprite-viewer.css"
 
 export function SpriteDebug() {
@@ -33,6 +32,9 @@ export function SpriteDebug() {
           <label htmlFor="pokemon-typeahead">Pokemon</label>
           <PokemonTypeahead
             value={pkm}
+            options={Object.values(Pkm).sort((a, b) =>
+              t("pkm." + a).localeCompare(t("pkm." + b))
+            )}
             onChange={(pkm) => {
               if (pkm) {
                 setPkm(pkm)

@@ -275,7 +275,9 @@ export default class Simulation extends Schema implements ISimulation {
     )
 
     const dps = new Dps(
-      pokemonEntity.id,
+      pokemonEntity.refToBoardPokemon
+        ? pokemonEntity.refToBoardPokemon.id
+        : pokemonEntity.id,
       getAvatarString(
         pokemonEntity.index,
         pokemonEntity.shiny,

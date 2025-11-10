@@ -52,7 +52,7 @@ import {
   isOnBench
 } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
-import { clamp, min, roundToNDigits } from "../../utils/number"
+import { clamp, min } from "../../utils/number"
 import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
@@ -94,6 +94,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") supercharged: boolean = false
   dodge: number = 0
   deathCount: number = 0
+  killCount: number = 0
   evolutions: Pkm[] = []
   evolutionRule: EvolutionRule = new CountEvolutionRule(3)
   additional = false
@@ -344,7 +345,7 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   addCritPower(value: number) {
-    this.critPower = min(0)(roundToNDigits(this.critPower + value, 2))
+    this.critPower = min(0)(this.critPower + value / 100)
   }
 
   addShield(value: number) {
@@ -5759,7 +5760,7 @@ export class Regice extends Pokemon {
   atk = 25
   speed = 41
   def = 15
-  speDef = 25
+  speDef = 20
   maxPP = 100
   range = 1
   skill = Ability.HAIL
@@ -5816,7 +5817,7 @@ export class Regirock extends Pokemon {
   hp = 300
   atk = 25
   speed = 41
-  def = 25
+  def = 20
   speDef = 15
   maxPP = 100
   range = 1
@@ -5874,8 +5875,8 @@ export class Registeel extends Pokemon {
   hp = 300
   atk = 25
   speed = 41
-  def = 20
-  speDef = 20
+  def = 15
+  speDef = 15
   maxPP = 100
   range = 1
   skill = Ability.IRON_HEAD
@@ -18730,7 +18731,6 @@ export class Runerigus extends Pokemon {
 }
 
 export class Chewtle extends Pokemon {
-  jawLockTargets: string[] = []
   types = new SetSchema<Synergy>([
     Synergy.AQUATIC,
     Synergy.ROCK,
@@ -18751,7 +18751,6 @@ export class Chewtle extends Pokemon {
 }
 
 export class Drednaw extends Pokemon {
-  jawLockTargets: string[] = []
   types = new SetSchema<Synergy>([
     Synergy.AQUATIC,
     Synergy.ROCK,
@@ -18943,13 +18942,12 @@ export class BasculinWhite extends Pokemon {
   skill = Ability.GRUDGE_DIVE
   passive = Passive.BASCULIN_WHITE
   evolutions = [Pkm.BASCULEGION_MALE, Pkm.BASCULEGION_FEMALE]
-  evolutionRule = new ConditionBasedEvolutionRule(
-    (pokemon) =>
-      pokemon instanceof BasculinWhite &&
-      (pokemon.killCount >= 5 || pokemon.deathCount >= 5),
-    (pokemon) =>
-      pokemon.deathCount >= 5 ? Pkm.BASCULEGION_FEMALE : Pkm.BASCULEGION_MALE
-  )
+  evolutionRule = new StackBasedEvolutionRule((pokemon) => {
+    return pokemon.deathCount >= 5
+      ? Pkm.BASCULEGION_FEMALE
+      : Pkm.BASCULEGION_MALE
+  })
+  stacksRequired = 5
   onAcquired = basculinOnAcquired
 }
 

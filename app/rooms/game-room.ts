@@ -244,13 +244,13 @@ export default class GameRoom extends Room<GameState> {
 
     if (this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
       this.additionalUncommonPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalRarePool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalEpicPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
     }
 
@@ -1184,7 +1184,7 @@ export default class GameRoom extends Room<GameState> {
   ) {
     const player = this.state.players.get(playerId)
     if (!player || player.pokemonsProposition.length === 0) return
-    if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
+    if (this.state.additionalPokemons.includes(pkm as Pkm) && this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE) return // already picked, probably a double click
     if (
       UniquePool.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[1]
@@ -1213,12 +1213,10 @@ export default class GameRoom extends Room<GameState> {
         const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
           PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
         ) ?? pokemonsObtained[0].name) as Pkm
-        this.state.additionalPokemons.push(basePkm)
-        this.state.shop.addAdditionalPokemon(basePkm)
+        this.state.shop.addAdditionalPokemon(basePkm, this.state)
         player.regionalPokemons.push(pkm as Pkm)
       } else {
-        this.state.additionalPokemons.push(pkm as Pkm)
-        this.state.shop.addAdditionalPokemon(pkm)
+        this.state.shop.addAdditionalPokemon(pkm, this.state)
       }
 
       // update regional pokemons in case some regional variants of add picks are now available
