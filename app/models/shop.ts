@@ -374,25 +374,47 @@ export default class Shop {
       let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
         const { types, regional } = getPokemonData(pkm)
-        if (
-          regional &&
-          new PokemonClasses[pkm](pkm).isInRegion(player.map) === false
-        ) {
-          // skip regional pokemons not in their region
-          return false
-        }
 
         const hasSynergyWanted =
           synergyWanted === undefined || types.includes(synergyWanted)
 
-        return (
-          hasSynergyWanted &&
-          !player.pokemonsProposition.some((prop) => {
-            // avoid proposing two pokemons of the same family or regional variants
+        if (!hasSynergyWanted) return false
+
+        if (regional) {
+          const pokemon = new PokemonClasses[pkm](pkm)
+          if (!pokemon.isInRegion(player.map)) {
+            // skip regional pokemons not in their region
+            return false
+          }
+        }
+
+        if (
+          player.pokemonsProposition.some((prop) => {
             const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
             return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
           })
-        )
+        ) {
+          // avoid proposing two pokemons of the same family or regional variants
+          return false
+        }
+
+        if (
+          pkm in PkmRegionalVariants &&
+          PkmRegionalVariants[pkm]?.some((p) => {
+            const variant = new PokemonClasses[p](p)
+            const lostTypes = types.filter((type) => !variant.types.has(type))
+            return (
+              variant.isInRegion(player.map) &&
+              synergyWanted &&
+              lostTypes.includes(synergyWanted)
+            )
+          })
+        ) {
+          // avoid proposing pokemon whose regional variants would lose the wanted synergy
+          return false
+        }
+
+        return true
       })
 
       if (candidates.length === 0) candidates = allCandidates
