@@ -25,6 +25,7 @@
 - Nerf Flutter Mane: Attack 20 → 17
 - Nerf Plusle & Minun: PP 60 → 70
 - Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15
+- Bellossom is now Flora/Grass/Sound instead of Flora/Poison/Grass
 
 # Changes to Synergies
 
