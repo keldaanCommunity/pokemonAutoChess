@@ -2,7 +2,7 @@ import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
-import { BOARD_WIDTH } from "../../../../config"
+import { BOARD_WIDTH, RegionDetails } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { canSell } from "../../../../core/pokemon-entity"
@@ -15,11 +15,7 @@ import {
   IDragDropMessage,
   Transfer
 } from "../../../../types"
-import {
-  DungeonDetails,
-  DungeonMusic,
-  DungeonPMDO
-} from "../../../../types/enum/Dungeon"
+import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
@@ -165,7 +161,7 @@ export default class GameScene extends Scene {
       if (!this.music) {
         playMusic(
           this,
-          DungeonDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
+          RegionDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
         )
       }
       //;(this.sys as any).animatedTiles.init(this.map)

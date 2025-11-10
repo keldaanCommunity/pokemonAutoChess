@@ -1,8 +1,8 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import { RegionDetails } from "../../../../config"
 import Player from "../../../../models/colyseus-models/player"
 import { Transfer } from "../../../../types"
-import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
@@ -40,7 +40,7 @@ export class BerryTree extends GameObjects.Container {
       .setDepth(DEPTH.INANIMATE_OBJECTS)
       .setScale(2, 2)
       .setOrigin(0.5, 1)
-      .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
+      .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
     if (stage === 0) {
       this.sprite.anims.play("CROP")
     } else {

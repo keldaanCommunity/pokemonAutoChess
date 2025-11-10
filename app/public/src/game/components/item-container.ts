@@ -10,6 +10,7 @@ import {
   Tools,
   WeatherRocks
 } from "../../../../types/enum/Item"
+import { isIn } from "../../../../utils/array"
 import { getGameScene } from "../../pages/game"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
@@ -77,9 +78,9 @@ export default class ItemContainer extends DraggableObject {
   get cellIndex() {
     if (ShinyItems.includes(this.name)) return 1
     if (Berries.includes(this.name)) return 2
-    if (Tools.includes(this.name)) return 3
+    if (isIn(Tools, this.name)) return 3
     if (WeatherRocks.includes(this.name)) return 4
-    if (SpecialItems.includes(this.name)) return 5
+    if (isIn(SpecialItems, this.name)) return 5
     if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
     if ((Dishes.map((d) => d) as Item[]).includes(this.name)) return 7
     return 0

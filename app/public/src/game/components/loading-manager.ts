@@ -2,13 +2,10 @@ import { t } from "i18next"
 import { GameObjects } from "phaser"
 import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 import pkg from "../../../../../package.json"
+import { RegionDetails } from "../../../../config"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
-import {
-  DungeonDetails,
-  DungeonMusic,
-  DungeonPMDO
-} from "../../../../types/enum/Dungeon"
+import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { values } from "../../../../utils/schemas"
@@ -103,7 +100,7 @@ export default class LoadingManager {
           .map((p) => p.map)
           .filter<DungeonPMDO>((map): map is DungeonPMDO => map !== "town")
       )
-      preloadMusic(scene, DungeonDetails[player.map].music)
+      preloadMusic(scene, RegionDetails[player.map].music)
       preloadPortraits(this.scene, player)
     }
 

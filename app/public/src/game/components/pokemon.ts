@@ -3,12 +3,15 @@ import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import pkg from "../../../../../package.json"
-import { CELL_VISUAL_HEIGHT, CELL_VISUAL_WIDTH } from "../../../../config"
+import {
+  CELL_VISUAL_HEIGHT,
+  CELL_VISUAL_WIDTH,
+  RegionDetails
+} from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
   FlowerMonByPot,
-  FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
@@ -19,12 +22,10 @@ import {
   AttackSpriteScale
 } from "../../../../types/Animation"
 import { Ability } from "../../../../types/enum/Ability"
-import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import {
   Orientation,
   PokemonActionState,
   PokemonTint,
-  SpriteType,
   Stat,
   Team
 } from "../../../../types/enum/Game"
@@ -175,7 +176,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
-      .setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
+      .setTint(RegionDetails[scene.mapName]?.tint ?? 0xffffff)
 
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,

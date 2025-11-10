@@ -14,6 +14,7 @@ import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import { isIn } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
 import { logger } from "../../utils/logger"
@@ -7862,7 +7863,7 @@ export class PoltergeistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    target.items.forEach((item) => (damage += Tools.includes(item) ? 40 : 20))
+    target.items.forEach((item) => (damage += isIn(Tools, item) ? 40 : 20))
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

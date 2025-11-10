@@ -3,6 +3,7 @@ import { nanoid } from "nanoid"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  RegionDetails,
   SynergyTriggers,
   UniquePool
 } from "../../config"
@@ -17,7 +18,7 @@ import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
-import { DungeonDetails, DungeonPMDO } from "../../types/enum/Dungeon"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
   PokemonActionState,
@@ -625,7 +626,7 @@ export default class Player extends Schema implements IPlayer {
 
       if (state.specialGameRule === SpecialGameRule.REGIONAL_SPECIALTIES) {
         if (previousMap) {
-          const { synergies: previousSynergies } = DungeonDetails[previousMap]
+          const { synergies: previousSynergies } = RegionDetails[previousMap]
           previousSynergies.forEach((synergy) => {
             this.bonusSynergies.set(
               synergy,
@@ -634,7 +635,7 @@ export default class Player extends Schema implements IPlayer {
           })
         }
 
-        const { synergies, regionalSpeciality } = DungeonDetails[this.map]
+        const { synergies, regionalSpeciality } = RegionDetails[this.map]
         synergies.forEach((synergy) => {
           this.bonusSynergies.set(
             synergy,
@@ -667,7 +668,7 @@ export default class Player extends Schema implements IPlayer {
         if (
           cloakTypes.some(
             (type) =>
-              DungeonDetails[this.map]?.synergies.includes(type) === false
+              RegionDetails[this.map]?.synergies.includes(type) === false
           )
         ) {
           const burmyEvolving = burmys[0]

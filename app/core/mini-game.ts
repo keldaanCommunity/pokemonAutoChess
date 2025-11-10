@@ -8,7 +8,11 @@ import {
   Events,
   Vector
 } from "matter-js"
-import { ItemCarouselStages, PortalCarouselStages } from "../config"
+import {
+  ItemCarouselStages,
+  PortalCarouselStages,
+  RegionDetails
+} from "../config"
 import { FloatingItem } from "../models/colyseus-models/floating-item"
 import Player from "../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
@@ -16,7 +20,7 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
 import { Transfer } from "../types"
-import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
+import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
   Berries,
@@ -476,7 +480,7 @@ export class MiniGame {
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     let maxCopiesPerItem = 2
-    let itemsSet = ItemComponents
+    let itemsSet: readonly Item[] = ItemComponents
 
     if (stageLevel >= 20) {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition
@@ -661,7 +665,7 @@ export class MiniGame {
       let nbMaxInCommon = 0,
         candidateMaps: DungeonPMDO[] = []
       maps.forEach((map) => {
-        const synergies = DungeonDetails[map].synergies
+        const synergies = RegionDetails[map].synergies
         const inCommon = synergies.filter((s) => portalSynergies.includes(s))
         if (inCommon.length > nbMaxInCommon) {
           nbMaxInCommon = inCommon.length

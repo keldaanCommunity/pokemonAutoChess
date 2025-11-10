@@ -4,7 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { MinStageForGameToCount, PortalCarouselStages } from "../../../config"
+import {
+  MinStageForGameToCount,
+  PortalCarouselStages,
+  RegionDetails
+} from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
@@ -24,7 +28,6 @@ import {
 } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
-import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
@@ -753,9 +756,9 @@ export default function Game() {
               if (!alreadyLoading) {
                 gameScene.load.reset()
               }
-              preloadMusic(gameScene, DungeonDetails[newMap].music)
+              preloadMusic(gameScene, RegionDetails[newMap].music)
               gameScene.load.once("complete", () =>
-                playMusic(gameScene, DungeonDetails[newMap].music)
+                playMusic(gameScene, RegionDetails[newMap].music)
               )
               if (!alreadyLoading) {
                 gameScene.load.start()

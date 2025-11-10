@@ -10,6 +10,7 @@ import {
 import { EloRank } from "../../../../../types/enum/EloRank"
 import {
   CraftableItems,
+  Item,
   ShinyItems,
   Tools
 } from "../../../../../types/enum/Item"
@@ -38,7 +39,7 @@ export function ItemReport() {
     }))
   }, [metaItems, itemRankingBy])
 
-  const tabs = [
+  const tabs: { label: string; key: string; items: readonly Item[] }[] = [
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("tools"), key: "tools", items: Tools },
     { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }

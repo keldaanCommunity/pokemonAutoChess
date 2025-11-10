@@ -5,11 +5,11 @@ import { Tooltip } from "react-tooltip"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
-  PortalCarouselStages
+  PortalCarouselStages,
+  RegionDetails
 } from "../../../../../config"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
-import { DungeonDetails } from "../../../../../types/enum/Dungeon"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
@@ -115,11 +115,9 @@ export default function GameStageInfo() {
                 place="bottom"
               >
                 <div style={{ display: "flex", alignContent: "center" }}>
-                  {DungeonDetails[currentPlayer.map].synergies.map(
-                    (synergy) => (
-                      <SynergyIcon type={synergy} key={"map_type_" + synergy} />
-                    )
-                  )}
+                  {RegionDetails[currentPlayer.map].synergies.map((synergy) => (
+                    <SynergyIcon type={synergy} key={"map_type_" + synergy} />
+                  ))}
                   <p>{t(`map.${currentPlayer.map}`)}</p>
                 </div>
               </Tooltip>,
