@@ -339,10 +339,12 @@ export function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
-  const scaleX =
+  const scaleX = max(5)(
     (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
-  const scaleY =
+  )
+  const scaleY = max(5)(
     (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
+  )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
@@ -2144,7 +2146,7 @@ export const AbilitiesAnimations: {
     Sweets.forEach((sweet) => {
       const sweetSprite = scene.add
         .sprite(0, 0, "item", `${sweet}.png`)
-        ?.setScale(0.3 * (1 + ap / 200))
+        ?.setScale(0.3 * (1 + max(1000)(ap) / 200))
       decorateGroup.add(sweetSprite)
     })
 

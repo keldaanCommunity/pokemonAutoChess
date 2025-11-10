@@ -43,7 +43,7 @@ import { count } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
-import { clamp, max, min, roundToNDigits } from "../utils/number"
+import { clamp, max, min } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -118,6 +118,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   oneSecondCooldown = 1000
   state: PokemonState
   simulation: Simulation
+  baseTeam: Team
   baseAtk: number
   baseDef: number
   baseSpeDef: number
@@ -178,6 +179,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.speed = pokemon.speed
     this.range = pokemon.range
     this.team = team
+    this.baseTeam = team
     this.stars = pokemon.stars
     this.skill = pokemon.skill
     this.shiny = pokemon.shiny
@@ -243,7 +245,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   get player(): Player | undefined {
     const player =
-      this.team === Team.BLUE_TEAM
+      this.baseTeam === Team.BLUE_TEAM
         ? this.simulation.bluePlayer
         : this.simulation.redPlayer
     if (player instanceof Player) {
@@ -490,7 +492,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (1 + (apBoost * caster.ap) / 100) *
       (crit ? caster.critPower : 1)
 
-    this.critPower = min(0)(roundToNDigits(this.critPower + value, 2))
+    this.critPower = min(0)(this.critPower + value)
   }
 
   addMaxHP(
@@ -748,11 +750,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   skydiveTo(x: number, y: number, board: Board) {
-    this.toIdleState()
-    board.swapCells(this.positionX, this.positionY, x, y)
     this.status.skydiving = true
-    this.toMovingState()
-    this.cooldown = 1000 // 500ms for flying up and 500ms for skydive anim
+    board.swapCells(this.positionX, this.positionY, x, y)
+    if (this.state instanceof MovingState === false) {
+      this.toMovingState()
+    }
+    this.cooldown = 1500 // 500ms for flying up, 500ms for skydive anim, 500ms to reposition after landing
   }
 
   // called after every attack, no matter if it's successful or not
@@ -1137,6 +1140,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board
     attackType: AttackType
   }) {
+    if (!this.isGhostOpponent) {
+      this.refToBoardPokemon.killCount++
+    }
     this.getEffects(OnKillEffect).forEach((effect) => {
       effect.apply({ attacker: this, target, board, attackType })
     })
@@ -1629,7 +1635,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive) {
       const oldPassiveEffects = PassiveEffects[this.passive] ?? []
       oldPassiveEffects.forEach((effect) => {
-        if (effect instanceof EffectClass) this.effectsSet.delete(effect)
+        if (effect instanceof EffectClass) {
+          this.effectsSet.delete(effect)
+        }
       })
     }
 
@@ -1654,9 +1662,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       .sort((a, b) => b.priority - a.priority)
   }
 
-  addStack() {
+  addStack(amount = 1) {
     if (!this.player) return
-    this.refToBoardPokemon.stacks++
+    this.refToBoardPokemon.stacks += amount
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
     if (this.stacks === this.stacksRequired) {
@@ -1669,6 +1677,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
         this.index = pokemonEvolved.index
         this.name = pokemonEvolved.name
+        this.refToBoardPokemon = pokemonEvolved
       }
     }
     return

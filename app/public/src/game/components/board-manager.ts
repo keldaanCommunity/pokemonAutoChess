@@ -4,6 +4,7 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   PortalCarouselStages,
+  RegionDetails,
   SynergyTriggers
 } from "../../../../config"
 import {
@@ -19,7 +20,7 @@ import { getPokemonData } from "../../../../models/precomputed/precomputed-pokem
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
 import { IPokemon } from "../../../../types"
-import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
+import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
   GamePhaseState,
@@ -352,10 +353,18 @@ export default class BoardManager {
         )
         .setScale(2, 2)
         .setOrigin(0.5, 0.5)
-        .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
+        .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
       const potPokemon = this.player.flowerPots[i]
 
-      if (potPokemon) {
+      const simulation = this.scene?.room?.state.simulations.get(
+        this.player.simulationId
+      )
+      const isOnBattle =
+        this.mode === BoardMode.BATTLE &&
+        simulation?.started &&
+        values(simulation.blueDpsMeter).some((p) => p.id === potPokemon.id)
+
+      if (potPokemon && !isOnBattle) {
         const flowerInPot = new PokemonSprite(
           this.scene,
           FLOWER_POTS_POSITIONS_BLUE[i][0],
@@ -371,6 +380,7 @@ export default class BoardManager {
           false,
           true
         )
+        flowerInPot.draggable = false
         this.flowerPokemonsInPots.push(flowerInPot)
         this.pokemons.set(flowerInPot.id, flowerInPot)
       }
@@ -450,7 +460,7 @@ export default class BoardManager {
             .setScale(2)
             .setAlpha(0.9)
             .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-            .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
+            .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
           this.groundHoles.push(trench)
           col += trenchWidth - 1
         } else {
@@ -462,7 +472,7 @@ export default class BoardManager {
               .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
               .setScale(2)
               .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-              .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
+              .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
             this.groundHoles.push(groundHole)
           }
         }
@@ -564,7 +574,7 @@ export default class BoardManager {
       this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
       this.pveChest
         .setScale(2)
-        .setTint(DungeonDetails[this.scene.mapName]?.tint ?? 0xffffff)
+        .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
       this.pveChestGroup.add(this.pveChest)
     } else if (
       this.mode === BoardMode.BATTLE &&
@@ -752,12 +762,12 @@ export default class BoardManager {
     this.scene.setMap(this.player.map)
     if (
       this.scene.cache.audio.has(
-        "music_" + DungeonDetails[this.player.map].music
+        "music_" + RegionDetails[this.player.map].music
       ) &&
       PortalCarouselStages.includes(this.state.stageLevel)
     ) {
       // play back original region music when leaving town
-      playMusic(this.scene, DungeonDetails[this.player.map].music)
+      playMusic(this.scene, RegionDetails[this.player.map].music)
     }
     this.renderBoard(true)
     this.updatePlayerAvatar()
@@ -830,7 +840,7 @@ export default class BoardManager {
     pokemon: IPokemon,
     field: F,
     value: IPokemon[F],
-    previousValue: IPokemon[F]
+    previousValue?: IPokemon[F]
   ) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
@@ -885,30 +895,28 @@ export default class BoardManager {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
-          if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
-          if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.ATK)
           break
 
         case "def":
-          if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.DEF)
           break
 
         case "speed":
-          if (
-            (value as IPokemon["speed"]) > (previousValue as IPokemon["speed"])
-          )
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.SPEED)
           break
 
         case "ap":
-          if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.AP)
           break
 
@@ -920,8 +928,14 @@ export default class BoardManager {
           )
           break
 
+        case "index":
+          if (previousValue != null && value !== previousValue) {
+            pokemonUI.evolutionAnimation()
+          }
+          break
+
         case "skill":
-          if (pokemonUI.pokemon.skill !== value) {
+          if (previousValue != null && value !== previousValue) {
             pokemonUI.evolutionAnimation()
           }
           break
@@ -1026,7 +1040,7 @@ export default class BoardManager {
         pokemon,
         id,
         false,
-        true
+        false
       )
 
       this.pokemons.set(id, pkmSprite)

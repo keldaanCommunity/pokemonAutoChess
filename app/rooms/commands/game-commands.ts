@@ -155,7 +155,7 @@ export class OnBuyPokemonCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      player.effects.has(EffectEnum.EERIE_SPELL) &&
+      (player.effects.has(EffectEnum.EERIE_SPELL) || player.shopsSinceLastUnownShop === 0) &&
       player.shopFreeRolls > 0 &&
       player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
     ) {
@@ -1312,9 +1312,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       repeat(remainingAddPicks)(() => {
         const p = pool.pop()
-        if (p) {
-          this.state.additionalPokemons.push(p)
-          this.state.shop.addAdditionalPokemon(p)
+        if (p) {          
+          this.state.shop.addAdditionalPokemon(p, this.state)
         }
       })
 
@@ -1482,10 +1481,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         )
         if (!substitute) return
         p.pokemon.hp += [50, 100, 150][p.ticketLevel - 1] ?? 0
+        p.pokemon.maxHP += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.atk += [5, 10, 15][p.ticketLevel - 1] ?? 0
         p.pokemon.ap += [15, 30, 45][p.ticketLevel - 1] ?? 0
         p.pokemon.positionX = substitute.positionX
         p.pokemon.positionY = substitute.positionY
+        substitute.items.forEach((it) => p.pokemon.items.add(it))
+        substitute.items.clear()
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)

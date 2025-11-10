@@ -85,9 +85,9 @@
 }
 
 .game-pokemon-detail-stats img {
-  width: 32px;
-  height: 32px;
-  margin-right: 4px;
+  width: 28px;
+  height: 28px;
+  margin: 2px 2px 2px 0;
 }
 
 .game-pokemon-detail-stats .buffed {
@@ -111,6 +111,12 @@
   grid-row: span 2;
   display: flex;
   align-items: center;
+}
+
+.game-pokemon-detail-stat-range img {
+  width: 32px;
+  height: 32px;
+  margin: 4px;
 }
 
 .game-pokemon-detail-stats .game-pokemon-detail-stat-range img + span {

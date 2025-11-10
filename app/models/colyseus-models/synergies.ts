@@ -105,14 +105,17 @@ export function computeSynergies(
   })
 
   function applyDragonDoubleTypes() {
-    const dragonDoubleTypes = new Map<Pkm, Set<Synergy>>()
-    board.forEach((pkm: IPokemon) => {
+    const dragonDoubleTypes = new Map<string, Set<Synergy>>()
+    board.forEach((pkm: IPokemon, index) => {
       if (
         pkm.positionY != 0 &&
         pkm.types.has(Synergy.DRAGON) &&
         pkm.types.size > 1
       ) {
-        const family = PkmFamily[pkm.name]
+        const family =
+          specialGameRule === SpecialGameRule.FAMILY_OUTING
+            ? `pkm${index}`
+            : PkmFamily[pkm.name]
         if (!dragonDoubleTypes.has(family))
           dragonDoubleTypes.set(family, new Set())
         dragonDoubleTypes.get(family)!.add(values(pkm.types)[1])

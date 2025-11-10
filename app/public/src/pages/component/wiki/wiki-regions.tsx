@@ -1,11 +1,12 @@
-import React, { useDeferredValue, useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { RegionDetails } from "../../../../../config"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
 } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { DungeonDetails, DungeonPMDO } from "../../../../../types/enum/Dungeon"
+import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
@@ -85,7 +86,7 @@ export default function WikiRegions() {
                 >
                   <h2>{t(`map.${dungeon}`)}</h2>
                   <div style={{ display: "flex", gap: "5px" }}>
-                    {DungeonDetails[dungeon].synergies.map((synergy) => (
+                    {RegionDetails[dungeon].synergies.map((synergy) => (
                       <SynergyIcon
                         type={synergy}
                         key={"map_synergy_" + synergy}

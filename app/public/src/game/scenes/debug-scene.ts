@@ -1,7 +1,8 @@
+import { RegionDetails } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
-import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
@@ -114,7 +115,7 @@ export class DebugScene extends Phaser.Scene {
     this.pokemonSprite.positionY = 3
 
     this.pokemonSprite.sprite.setTint(
-      DungeonDetails[this.mapName].tint ?? 0xffffff
+      RegionDetails[this.mapName].tint ?? 0xffffff
     )
 
     let animationName = AnimationType[animationType]
@@ -179,7 +180,7 @@ export class DebugScene extends Phaser.Scene {
         if (sys.animatedTiles) {
           sys.animatedTiles.pause()
         }
-        playMusic(this as any, DungeonDetails[mapName].music)
+        playMusic(this as any, RegionDetails[mapName].music)
         resolve()
       })
     }
@@ -198,7 +199,7 @@ export class DebugScene extends Phaser.Scene {
             )
           })
           this.load.tilemapTiledJSON(mapName, tilemap)
-          preloadMusic(this, DungeonDetails[mapName].music)
+          preloadMusic(this, RegionDetails[mapName].music)
           this.load.once("complete", resolve)
           this.load.start()
         })
@@ -214,7 +215,7 @@ export class DebugScene extends Phaser.Scene {
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
         ;(this.sys as any).animatedTiles.init(map)
-        playMusic(this as any, DungeonDetails[mapName].music)
+        playMusic(this as any, RegionDetails[mapName].music)
       })
       .then(() => {
         this.updateSprite(Pkm.SMEARGLE, Orientation.DOWNLEFT, "Idle", "", false)
@@ -249,7 +250,7 @@ export class DebugScene extends Phaser.Scene {
 
   updateLandscape() {
     if (!this.map) return
-    const tint = DungeonDetails[this.mapName].tint ?? 0xffffff
+    const tint = RegionDetails[this.mapName].tint ?? 0xffffff
     this.landscape.forEach((sprite) => sprite.destroy())
     this.landscape = [
       this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
@@ -266,7 +267,7 @@ export class DebugScene extends Phaser.Scene {
   applyStatusAnimation(status: Status | Boost | "") {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
-        DungeonDetails[this.mapName].tint ?? 0xffffff
+        RegionDetails[this.mapName].tint ?? 0xffffff
       )
       this.pokemonSprite.removePoison()
       this.pokemonSprite.removeSleep()

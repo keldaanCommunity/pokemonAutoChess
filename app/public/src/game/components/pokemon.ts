@@ -3,12 +3,15 @@ import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
 import pkg from "../../../../../package.json"
-import { CELL_VISUAL_HEIGHT, CELL_VISUAL_WIDTH } from "../../../../config"
+import {
+  CELL_VISUAL_HEIGHT,
+  CELL_VISUAL_WIDTH,
+  RegionDetails
+} from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
   FlowerMonByPot,
-  FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
@@ -19,12 +22,10 @@ import {
   AttackSpriteScale
 } from "../../../../types/Animation"
 import { Ability } from "../../../../types/enum/Ability"
-import { DungeonDetails } from "../../../../types/enum/Dungeon"
 import {
   Orientation,
   PokemonActionState,
   PokemonTint,
-  SpriteType,
   Stat,
   Team
 } from "../../../../types/enum/Game"
@@ -175,7 +176,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
-      .setTint(DungeonDetails[scene.mapName]?.tint ?? 0xffffff)
+      .setTint(RegionDetails[scene.mapName]?.tint ?? 0xffffff)
 
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,
@@ -235,16 +236,17 @@ export default class PokemonSprite extends DraggableObject {
       }
     }
 
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+      "lastPokemonDetail" in scene
+
     this.draggable =
       playerId === scene.uid &&
       !inBattle &&
-      (scene as GameScene).spectate === false &&
-      FlowerPotMons.includes(pokemon.name) === false
+      isGameScene(scene) &&
+      scene.spectate === false
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
     if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
@@ -308,14 +310,20 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
-  unloadAnimations(scene: GameScene | DebugScene | undefined) {
-    const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
-    const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
+  unloadAnimations(
+    scene: GameScene | DebugScene | undefined,
+    indexToUnload: string,
+    tintToUnload: PokemonTint
+  ) {
+    const pokemonSpriteKey = `${indexToUnload}/${tintToUnload}`
     let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
     spriteCount = min(0)(spriteCount - 1)
     if (spriteCount === 0 && scene?.animationManager) {
-      //logger.debug("unloading anims for", this.pokemon.index)
-      scene.animationManager?.unloadPokemonAnimations(this.pokemon.index, tint)
+      //logger.debug("unloading anims for", indexToUnload, tintToUnload)
+      scene.animationManager?.unloadPokemonAnimations(
+        indexToUnload,
+        tintToUnload
+      )
     }
     spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
   }
@@ -360,7 +368,11 @@ export default class PokemonSprite extends DraggableObject {
     const g = <GameScene>this.scene
     super.destroy(fromScene)
     this.closeDetail()
-    this.unloadAnimations(g)
+    this.unloadAnimations(
+      g,
+      this.pokemon.index,
+      this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
+    )
   }
 
   closeDetail() {
@@ -1217,7 +1229,7 @@ export default class PokemonSprite extends DraggableObject {
 
       this.x = landingCoordinates[0]
       this.y = landingCoordinates[1]
-      this.moveManager.setSpeed(3)
+      this.moveManager.setSpeed(1000)
       this.moveManager.moveTo(finalCoordinates[0], finalCoordinates[1])
       this.skydiving = false
     }

@@ -1,10 +1,6 @@
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
-import {
-  Chewtle,
-  Drednaw,
-  PokemonClasses
-} from "../../models/colyseus-models/pokemon"
+import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
@@ -18,6 +14,7 @@ import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import { isIn } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
 import { logger } from "../../utils/logger"
@@ -4825,20 +4822,7 @@ export class SpiritShackleStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = 0
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 90
-        break
-      default:
-        break
-    }
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -7116,8 +7100,8 @@ export class PrismaticLaserStrategy extends AbilityStrategy {
       const x = target.positionX + dx
       if (x < 0 || x >= board.columns) continue
       for (
-        let y = flip ? 0 : board.rows;
-        flip ? y < board.rows : y > 0;
+        let y = flip ? 0 : board.rows - 1;
+        flip ? y < board.rows : y >= 0;
         y += flip ? 1 : -1
       ) {
         const entityOnCell = board.getEntityOnCell(x, y)
@@ -7554,6 +7538,7 @@ export class BarbBarrageStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
+    const damage = [20, 40, 60, 80][pokemon.stars - 1] ?? 80
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 
@@ -7571,6 +7556,13 @@ export class BarbBarrageStrategy extends AbilityStrategy {
         .forEach((v) => {
           if (v) {
             v.status.triggerPoison(3000, v, pokemon)
+            v.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
             pokemon.broadcastAbility({
               targetX: v.positionX,
               targetY: v.positionY,
@@ -7578,10 +7570,15 @@ export class BarbBarrageStrategy extends AbilityStrategy {
             })
           }
         })
+    } else {
+      target.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
-
-    const damage = [20, 40, 60, 80][pokemon.stars - 1] ?? 80
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -7866,7 +7863,7 @@ export class PoltergeistStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = pokemon.stars === 3 ? 120 : pokemon.stars === 2 ? 60 : 30
-    target.items.forEach((item) => (damage += Tools.includes(item) ? 40 : 20))
+    target.items.forEach((item) => (damage += isIn(Tools, item) ? 40 : 20))
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
@@ -10778,45 +10775,70 @@ export class ThunderousKickStrategy extends AbilityStrategy {
     const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
     const defenseDebuff = 10
 
-    target.status.triggerFlinch(4000, pokemon)
-    target.addDefense(-defenseDebuff, pokemon, 1, crit)
-    target.handleSpecialDamage(
-      damage,
-      board,
-      AttackType.PHYSICAL,
-      pokemon,
-      crit
-    )
-    let farthestEmptyCell: Cell | null = null
+    let isBlocked = false
+    let farthestReached: { x: number; y: number } = {
+      x: target.positionX,
+      y: target.positionY
+    }
+    const enemiesHit = new Set<PokemonEntity>()
+    enemiesHit.add(target)
     effectInLine(board, pokemon, target, (cell) => {
-      if (cell.value != null && target.id !== cell.value.id) {
-        if (cell.value.team !== pokemon.team) {
-          cell.value.status.triggerFlinch(4000, pokemon)
-          cell.value.addDefense(-defenseDebuff, pokemon, 1, crit)
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.PHYSICAL,
-            pokemon,
-            crit
-          )
+      if (isBlocked) return
+      if (
+        cell.value &&
+        cell.value.team !== pokemon.team &&
+        cell.value.id !== target.id
+      ) {
+        enemiesHit.add(cell.value)
+        if (
+          board.isOnBoard(cell.x - 1, cell.y) &&
+          board.getEntityOnCell(cell.x - 1, cell.y) === undefined
+        ) {
+          // unit in the path is moved to the left
+          cell.value.moveTo(cell.x - 1, cell.y, board)
+          cell.value.cooldown = 500
+        } else if (
+          board.isOnBoard(cell.x + 1, cell.y) &&
+          board.getEntityOnCell(cell.x + 1, cell.y) === undefined
+        ) {
+          // unit in the path is moved to the right
+          cell.value.moveTo(cell.x + 1, cell.y, board)
+          cell.value.cooldown = 500
+        } else {
+          // the path is blocked, stop the effect
+          isBlocked = true
         }
-        board.swapCells(
-          target.positionX,
-          target.positionY,
-          cell.value.positionX,
-          cell.value.positionY
-        )
       }
-      if (!cell.value) {
-        farthestEmptyCell = cell
+
+      if (!isBlocked) {
+        farthestReached = cell
       }
     })
 
-    if (farthestEmptyCell) {
-      const { x, y } = farthestEmptyCell as Cell
-      board.swapCells(target.positionX, target.positionY, x, y)
+    if (
+      farthestReached &&
+      (farthestReached.x !== target.positionX ||
+        farthestReached.y !== target.positionY)
+    ) {
+      board.swapCells(
+        target.positionX,
+        target.positionY,
+        farthestReached.x,
+        farthestReached.y
+      )
     }
+
+    enemiesHit.forEach((enemy) => {
+      enemy.status.triggerFlinch(4000, pokemon)
+      enemy.addDefense(-defenseDebuff, pokemon, 1, crit)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.PHYSICAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
 
@@ -14030,12 +14052,11 @@ export class JawLockStrategy extends AbilityStrategy {
     const heal = [25, 50, 100][pokemon.stars - 1] ?? 100
 
     // Check if target is already locked (already bitten)
-    const alreadyBitten =
-      (pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
-      pokemon.jawLockTargets.includes(target.id)
+    const alreadyBitten = target.effects.has(EffectEnum.JAW_LOCK)
 
     // Apply LOCKED status for 3 seconds
     target.status.triggerLocked(3000, target)
+    target.effects.add(EffectEnum.JAW_LOCK)
 
     // Deal damage
     target.handleSpecialDamage(
@@ -14045,11 +14066,6 @@ export class JawLockStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-
-    // Add the target id to the jawLockTargets
-    ;(pokemon instanceof Chewtle || pokemon instanceof Drednaw) &&
-      pokemon.jawLockTargets.push(target.id)
-
     // If target was already bitten, heal the user
     if (alreadyBitten) {
       pokemon.handleHeal(heal, pokemon, 1, crit)
