@@ -2112,8 +2112,8 @@
 		"DRIZZLE": "降雨",
 		"PRIMORDIAL_SEA": "始源之海",
 		"RISING_VOLTAGE": "电力上升",
-		"SUPERCHARGED": "电力过载",
 		"POWER_SURGE": "电力涌动",
+		"SUPERCHARGED": "电力过载",
 		"GUTS": "毅力",
 		"STURDY": "结实",
 		"DEFIANT": "不服输",
@@ -2726,6 +2726,7 @@
 		"SMELLY_CLAY": "计为3只生成SMOG所需的宝可梦。在SMOG中，我方所有宝可梦提升5%的命中率且陷入POISONNED的概率降低15%。",
 		"ODD_KEYSTONE": "计为3只生成MURKY所需的宝可梦。在MURKY中，我方所有宝可梦提升10点LUCK，陷入异常状态的时间减少10%，且CURSE延迟1秒生效。",
 		"NORMAL_GEM": "计为1只NORMAL宝可梦",
+		"GRASS_GEM": "计为1只GRASS宝可梦",
 		"FIRE_GEM": "计为1只FIRE宝可梦",
 		"WATER_GEM": "计为1只WATER宝可梦",
 		"ELECTRIC_GEM": "计为1只ELECTRIC宝可梦",
@@ -2876,8 +2877,7 @@
 		"MISSION_ORDER_RED": "完成以下任务，获取30 GOLD:\n 对其他玩家造成100点伤害",
 		"MISSION_ORDER_BLUE": "完成以下任务，获取30 GOLD:\n 局内等级达到9级",
 		"MISSION_ORDER_GREEN": "完成以下任务，获取30 GOLD:\n 同时激活8种不同共鸣",
-		"MISSION_ORDER_GOLD": "完成以下任务，获取30 GOLD:\n 在本场游戏中，总计获取200 GOLD",
-		"GRASS GEM": "计为1只GRASS宝可梦"
+		"MISSION_ORDER_GOLD": "完成以下任务，获取30 GOLD:\n 在本场游戏中，总计获取200 GOLD"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3784,8 +3784,8 @@
 	"berries": "树果",
 	"dishes": "料理",
 	"signature_dish": "专属料理",
-	"tools": "人造道具",
 	"tool": "人造道具",
+	"tools": "人造道具",
 	"weather_rocks": "天气岩石",
 	"gems": "宝石",
 	"tm_hm": "招式学习器（TM）与秘传学习器（HM）",
