@@ -9,7 +9,7 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.WATER]: [3, 6, 9],
   [Synergy.ELECTRIC]: [3, 5, 7],
   [Synergy.FIGHTING]: [2, 4, 6, 8],
-  [Synergy.PSYCHIC]: [2, 4, 6],
+  [Synergy.PSYCHIC]: [3, 5, 7],
   [Synergy.DARK]: [3, 5, 7],
   [Synergy.STEEL]: [2, 4, 6, 8],
   [Synergy.GROUND]: [2, 4, 6, 8],

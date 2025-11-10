@@ -23,7 +23,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.SOUL_DEW]: {},
   [Item.UPGRADE]: { [Stat.AP]: 10, [Stat.SPEED]: 10 },
   [Item.REAPER_CLOTH]: { [Stat.AP]: 10, [Stat.CRIT_CHANCE]: 20 },
-  [Item.POKEMONOMICON]: { [Stat.AP]: 50, [Stat.ATK]: 3 },
+  [Item.POKEMONOMICON]: { [Stat.AP]: 30, [Stat.ATK]: 3 },
   [Item.POWER_LENS]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 10 },
   [Item.SHELL_BELL]: { [Stat.ATK]: 3, [Stat.SPE_DEF]: 3 },
   [Item.LUCKY_EGG]: { [Stat.AP]: 50, [Stat.DEF]: 10, [Stat.LUCK]: 30 },
