@@ -18900,7 +18900,7 @@ export class BasculinRed extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 140
+  hp = 160
   atk = 15
   speed = 56
   def = 4
@@ -18916,7 +18916,7 @@ export class BasculinBlue extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.WILD])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 140
+  hp = 160
   atk = 15
   speed = 56
   def = 4

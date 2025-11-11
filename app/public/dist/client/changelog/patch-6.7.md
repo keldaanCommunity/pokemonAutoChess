@@ -29,6 +29,7 @@
 - Armarouge and Ceruledge now have Human synergy in addition to their existing synergies. Nerf defense ans special defense statistics as a tradeoff.
 - Nerf Skarmory passive: 12 → 10 spikes
 - Nerf Hitmonlee: Attack 26 → 24
+- Buff Basculin Red & Blue: HP 140 → 160
 
 # Changes to Synergies
 
