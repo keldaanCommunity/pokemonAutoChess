@@ -116,7 +116,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
   }
 )
 
-export const choiceScarfOnAttackEffect = new OnAttackEffect(
+export const loadedDiceOnAttackEffect = new OnAttackEffect(
   ({
     pokemon,
     target,
@@ -126,7 +126,7 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
     specialDamage,
     trueDamage
   }) => {
-    if (totalDamage > 0 && target) {
+    if (totalDamage > 0 && target && chance(0.5, pokemon)) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const candidateTargets = cells
         .filter((cell) => cell.value && pokemon.team != cell.value.team)
@@ -139,7 +139,7 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
           let totalTakenDamage = 0
           if (physicalDamage > 0) {
             const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * physicalDamage),
+              damage: physicalDamage,
               board,
               attackType: AttackType.PHYSICAL,
               attacker: pokemon,
@@ -148,9 +148,8 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
             totalTakenDamage += takenDamage
           }
           if (specialDamage > 0) {
-            const scarfSpecialDamage = Math.ceil(0.5 * specialDamage)
             const { takenDamage } = target.handleDamage({
-              damage: scarfSpecialDamage,
+              damage: specialDamage,
               board,
               attackType: AttackType.SPECIAL,
               attacker: pokemon,
@@ -165,10 +164,8 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
                 ? Math.round(target.speDef / 2)
                 : target.speDef
               const damageAfterReduction =
-                scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
-              const damageBlocked = min(0)(
-                scarfSpecialDamage - damageAfterReduction
-              )
+                specialDamage / (1 + ARMOR_FACTOR * speDef)
+              const damageBlocked = min(0)(specialDamage - damageAfterReduction)
               pokemon.broadcastAbility({ skill: "POWER_LENS" })
               pokemon.handleDamage({
                 damage: Math.round(damageBlocked),
@@ -181,7 +178,7 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
           }
           if (trueDamage > 0) {
             const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * trueDamage),
+              damage: trueDamage,
               board,
               attackType: AttackType.TRUE,
               attacker: pokemon,
@@ -287,7 +284,7 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
 export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
   constructor(ticketLevel: number) {
     super(({ pokemon, player, room, item }) => {
-      if(NonPkm.includes(pokemon.name)) return false;
+      if (NonPkm.includes(pokemon.name)) return false
       const substitute = PokemonFactory.createPokemonFromName(
         Pkm.SUBSTITUTE,
         player
@@ -298,7 +295,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
       substitute.positionX = pokemon.positionX
       substitute.positionY = pokemon.positionY
-      pokemon.items.forEach(item => substitute.items.add(item))
+      pokemon.items.forEach((item) => substitute.items.add(item))
       pokemon.items.clear()
       player.board.set(substitute.id, substitute)
       player.pokemonsTrainingInDojo.push({
@@ -839,7 +836,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
 
-  [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
+  [Item.LOADED_DICE]: [loadedDiceOnAttackEffect],
 
   [Item.STICKY_BARB]: [
     new OnDamageReceivedEffect(

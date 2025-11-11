@@ -740,7 +740,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
   }
 
-  moveTo(x: number, y: number, board: Board) {
+  moveTo(x: number, y: number, board: Board, forcedDisplacement: boolean) {
+    if (forcedDisplacement && this.items.has(Item.HEAVY_DUTY_BOOTS)) return
     this.toMovingState()
     const target = board.getEntityOnCell(x, y)
     if (target) target.toMovingState()

@@ -26,7 +26,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.POKEMONOMICON]: { [Stat.AP]: 30, [Stat.ATK]: 3 },
   [Item.POWER_LENS]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 10 },
   [Item.SHELL_BELL]: { [Stat.ATK]: 3, [Stat.SPE_DEF]: 3 },
-  [Item.LUCKY_EGG]: { [Stat.AP]: 50, [Stat.DEF]: 10, [Stat.LUCK]: 30 },
+  [Item.HEAVY_DUTY_BOOTS]: { [Stat.AP]: 30, [Stat.DEF]: 12 },
   [Item.AQUA_EGG]: { [Stat.PP]: 30 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
@@ -41,7 +41,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.CRIT_POWER]: 100
   },
   [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15 },
-  [Item.CHOICE_SCARF]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3 },
+  [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 30 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
   [Item.STICKY_BARB]: { [Stat.DEF]: 6, [Stat.SHIELD]: 15 },

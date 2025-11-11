@@ -849,7 +849,7 @@ export class AquaJetStrategy extends AbilityStrategy {
         }
       })
 
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board)
+      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board, false)
     }
 
     if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
