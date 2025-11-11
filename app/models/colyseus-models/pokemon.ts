@@ -17451,14 +17451,14 @@ export class Charcadet extends Pokemon {
 }
 
 export class Armarouge extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.PSYCHIC, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
   atk = 16
   speed = 51
   def = 8
-  speDef = 8
+  speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.ARMOR_CANNON
@@ -17468,14 +17468,14 @@ export class Armarouge extends Pokemon {
 }
 
 export class Ceruledge extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST])
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST, Synergy.HUMAN])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
   atk = 20
   speed = 51
-  def = 10
-  speDef = 12
+  def = 6
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.BITTER_BLADE

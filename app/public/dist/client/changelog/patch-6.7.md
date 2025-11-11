@@ -26,6 +26,7 @@
 - Nerf Plusle & Minun: PP 60 → 70
 - Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15
 - Bellossom is now Flora/Grass/Sound instead of Flora/Poison/Grass
+- Armarouge and Ceruledge now have Human synergy in addition to their existing synergies. Nerf defense ans special defense statistics as a tradeoff.
 
 # Changes to Synergies
 
