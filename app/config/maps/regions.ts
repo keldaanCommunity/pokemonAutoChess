@@ -412,7 +412,7 @@ export const RegionDetails: {
     tint: 0xddffdd
   },
   [DungeonPMDO.MystifyingForest]: {
-    synergies: [Synergy.BABY, Synergy.FAIRY, Synergy.FLORA],
+    synergies: [Synergy.DRAGON, Synergy.FAIRY, Synergy.FLORA],
     music: DungeonMusic.MYSTIFYING_FOREST,
     regionalSpeciality: Item.HERBA_MYSTICA_SWEET
   },
@@ -728,7 +728,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.FLOWER_SWEET
   },
   [DungeonPMDO.WishCave1]: {
-    synergies: [Synergy.FAIRY, Synergy.GOURMET, Synergy.DRAGON],
+    synergies: [Synergy.FAIRY, Synergy.GOURMET, Synergy.BABY],
     music: DungeonMusic.LIVING_SPIRIT,
     regionalSpeciality: Item.LOVE_SWEET
   },
