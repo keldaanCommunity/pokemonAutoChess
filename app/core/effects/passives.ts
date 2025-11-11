@@ -881,7 +881,7 @@ const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
     entity.commands.push(
       new DelayedCommand(() => {
         const board = simulation.board
-        const nbSpikes = 12
+        const nbSpikes = 10
         const positions = new Set<string>()
         for (let i = 0; i < nbSpikes; i++) {
           let x, y
