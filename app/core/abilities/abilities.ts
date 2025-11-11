@@ -13058,7 +13058,7 @@ export class ArmThrustStrategy extends AbilityStrategy {
     // Deal 2 to 5 hits (luck based increasing with AP) each dealing 100% of the user's ATK as physical damage. Each hit has the same individual crit chance.
     const damage = pokemon.atk
     const nbHits = clamp(
-      Math.floor(2 + Math.random() * 3 * (1 + pokemon.luck / 100)),
+      Math.floor(2 + Math.random() * 4 * (1 + pokemon.luck / 100)),
       2,
       5
     )
