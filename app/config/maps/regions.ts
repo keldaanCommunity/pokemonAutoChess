@@ -1,6 +1,7 @@
 import { DungeonMusic, DungeonPMDO } from "../../types/enum/Dungeon"
 import { Dish, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
+import { groupBy } from "../../utils/array"
 
 export interface RegionDetail {
   synergies: Synergy[]
@@ -13,7 +14,7 @@ export const RegionDetails: {
   [key in DungeonPMDO | "town"]: RegionDetail
 } = {
   [DungeonPMDO.AmpPlains]: {
-    synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.AQUATIC],
+    synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.SOUND],
     music: DungeonMusic.AMP_PLAINS,
     regionalSpeciality: Item.FRUIT_JUICE
   },
@@ -34,7 +35,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.LEEK
   },
   [DungeonPMDO.BrineCave]: {
-    synergies: [Synergy.POISON, Synergy.FOSSIL, Synergy.GROUND],
+    synergies: [Synergy.POISON, Synergy.FOSSIL, Synergy.DARK],
     music: DungeonMusic.BRINE_CAVE,
     regionalSpeciality: Item.BLACK_SLUDGE,
     tint: 0xeeddee
@@ -239,12 +240,12 @@ export const RegionDetails: {
     regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.HiddenHighland]: {
-    synergies: [Synergy.FLORA, Synergy.GRASS, Synergy.BUG],
+    synergies: [Synergy.FLORA, Synergy.GRASS, Synergy.DRAGON],
     music: DungeonMusic.HIDDEN_HIGHLAND,
     regionalSpeciality: Item.HONEY
   },
   [DungeonPMDO.HiddenLand]: {
-    synergies: [Synergy.FLORA, Synergy.WILD, Synergy.WATER],
+    synergies: [Synergy.FLORA, Synergy.BUG, Synergy.WATER],
     music: DungeonMusic.HIDDEN_LAND,
     regionalSpeciality: Item.RAGE_CANDY_BAR
   },
@@ -259,7 +260,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.IceAegisCave]: {
-    synergies: [Synergy.ICE, Synergy.FIGHTING, Synergy.DARK],
+    synergies: [Synergy.ICE, Synergy.FIGHTING, Synergy.GROUND],
     music: DungeonMusic.ILLUSION_STONE_CHAMBER,
     regionalSpeciality: Item.CASTELIACONE,
     tint: 0xccffff
@@ -364,7 +365,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.MtSteel1]: {
-    synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.FIGHTING],
+    synergies: [Synergy.STEEL, Synergy.FLYING, Synergy.FOSSIL],
     music: DungeonMusic.MT_STEEL,
     regionalSpeciality: Item.RAGE_CANDY_BAR
   },
@@ -389,12 +390,12 @@ export const RegionDetails: {
     regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.MurkyCave]: {
-    synergies: [Synergy.POISON, Synergy.GROUND, Synergy.HUMAN],
+    synergies: [Synergy.GHOST, Synergy.GROUND, Synergy.HUMAN],
     music: DungeonMusic.MONSTER_HOUSE,
     regionalSpeciality: Item.BLACK_SLUDGE
   },
   [DungeonPMDO.MurkyForest]: {
-    synergies: [Synergy.POISON, Synergy.GRASS, Synergy.DARK],
+    synergies: [Synergy.GHOST, Synergy.GRASS, Synergy.DARK],
     music: DungeonMusic.MURKY_FOREST,
     regionalSpeciality: Item.BERRY_JUICE,
     tint: 0xffeeff
@@ -457,7 +458,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.PurityForest4]: {
-    synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FAIRY],
+    synergies: [Synergy.NORMAL, Synergy.BABY, Synergy.FAIRY],
     music: DungeonMusic.POKEMON_SQUARE,
     regionalSpeciality: Item.HERBA_MYSTICA_SWEET
   },
@@ -539,7 +540,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.CASTELIACONE
   },
   [DungeonPMDO.SkyPeakSummitPass]: {
-    synergies: [Synergy.DARK, Synergy.STEEL, Synergy.ROCK],
+    synergies: [Synergy.FLYING, Synergy.ROCK, Synergy.FIGHTING],
     music: DungeonMusic.SKY_TOWER_SUMMIT,
     regionalSpeciality: Item.STAR_SWEET,
     tint: 0xeeeeee
@@ -582,13 +583,13 @@ export const RegionDetails: {
     tint: 0xeeeeee
   },
   [DungeonPMDO.SpacialRift1]: {
-    synergies: [Synergy.GHOST, Synergy.ARTIFICIAL, Synergy.MONSTER],
+    synergies: [Synergy.AMORPHOUS, Synergy.ARTIFICIAL, Synergy.MONSTER],
     music: DungeonMusic.IN_THE_FUTURE,
     regionalSpeciality: Item.STAR_SWEET,
     tint: 0xeeffee
   },
   [DungeonPMDO.SpacialRift2]: {
-    synergies: [Synergy.GHOST, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
+    synergies: [Synergy.AMORPHOUS, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
     music: DungeonMusic.PLANETS_PARALYSIS,
     regionalSpeciality: Item.STAR_SWEET,
     tint: 0xeeeeee
@@ -651,7 +652,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.FRUIT_JUICE
   },
   [DungeonPMDO.TinyMeadow]: {
-    synergies: [Synergy.NORMAL, Synergy.BABY, Synergy.AMORPHOUS],
+    synergies: [Synergy.GRASS, Synergy.BABY, Synergy.AMORPHOUS],
     music: DungeonMusic.FRIEND_AREA_GRASSLANDS,
     regionalSpeciality: Item.MOOMOO_MILK
   },
@@ -661,7 +662,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.TreeshroudForest1]: {
-    synergies: [Synergy.AMORPHOUS, Synergy.WATER, Synergy.BUG],
+    synergies: [Synergy.GOURMET, Synergy.WATER, Synergy.BUG],
     music: DungeonMusic.TREESHROUD_FOREST,
     regionalSpeciality: Item.TART_APPLE
   },
@@ -691,7 +692,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.RAGE_CANDY_BAR
   },
   [DungeonPMDO.VastIceMountain]: {
-    synergies: [Synergy.DRAGON, Synergy.ICE, Synergy.ROCK],
+    synergies: [Synergy.WILD, Synergy.ICE, Synergy.ROCK],
     music: DungeonMusic.VAST_ICE_MOUNTAIN,
     regionalSpeciality: Item.CASTELIACONE
   },
@@ -706,7 +707,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.TEA
   },
   [DungeonPMDO.WaterfallPond]: {
-    synergies: [Synergy.AQUATIC, Synergy.AMORPHOUS, Synergy.SOUND],
+    synergies: [Synergy.WATER, Synergy.AMORPHOUS, Synergy.SOUND],
     music: DungeonMusic.WATERFALL_CAVE,
     regionalSpeciality: Item.TEA,
     tint: 0xeeffff
@@ -753,7 +754,7 @@ export const RegionDetails: {
     tint: 0xeeeeee
   },
   [DungeonPMDO.ZeroIsleEast4]: {
-    synergies: [Synergy.POISON, Synergy.MONSTER, Synergy.ROCK],
+    synergies: [Synergy.POISON, Synergy.MONSTER, Synergy.PSYCHIC],
     music: DungeonMusic.VERSUS_LEGENDARY,
     regionalSpeciality: Item.BLACK_SLUDGE,
     tint: 0xeeeeee
@@ -774,3 +775,31 @@ export const RegionDetails: {
     regionalSpeciality: Item.NUTRITIOUS_EGG
   }
 }
+
+export function countRegionsBySynergy() {
+  const synergyCount: Record<Synergy, number> = {} as Record<Synergy, number>
+
+  // Initialize all synergies to 0
+  Object.values(Synergy).forEach((synergy) => {
+    synergyCount[synergy] = 0
+  })
+
+  // Count occurrences of each synergy across all regions
+  Object.values(RegionDetails).forEach((region) => {
+    region.synergies.forEach((synergy) => {
+      synergyCount[synergy]++
+    })
+  })
+
+  // Log the results
+  console.log("Regions per synergy:")
+  Object.entries(synergyCount)
+    .sort(([, a], [, b]) => b - a) // Sort by count descending
+    .forEach(([synergy, count]) => {
+      console.log(`${synergy}: ${count}`)
+    })
+
+  return synergyCount
+}
+
+countRegionsBySynergy()
