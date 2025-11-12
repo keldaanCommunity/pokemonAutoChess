@@ -1846,7 +1846,7 @@ export default class Simulation extends Schema implements ISimulation {
               }
             }
             if (newY !== y) {
-              pokemonHit.moveTo(x, newY, this.board) // push enemies away
+              pokemonHit.moveTo(x, newY, this.board, true) // push enemies away
               pokemonHit.cooldown = 500
             }
           }
