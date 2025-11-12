@@ -69,6 +69,7 @@
 # UI
 
 - Pokemons sprites are now lazy-loaded. This should reduce game loading times and memory usage significantly, at the cost of having a small delay before the Pokémon sprites are displayed for the first time. A wobbling pokéball is shown while the sprite is being loaded (should not take more than 1 second in most cases).
+- Synergies count and battle stats now can be moved around the screen and minimized/maximized as needed.
 - Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
 - Wiki items section has been reworked for better readability.
 - New section on the wiki: Stages
