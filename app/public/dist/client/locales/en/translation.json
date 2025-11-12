@@ -2647,7 +2647,7 @@
 		"XRAY_VISION": "+50 SPEED. The holder attacks can no longer miss.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Critical attacks apply ARMOR_BREAK for 2 seconds.",
 		"PROTECTIVE_PADS": "Holder deals double damage against units with  SHIELD, and is protected from recoil damage and retaliation effects.",
-		"LOADED_DICE": "Attacks have [50,LK]% chance to also hit the lowest health enemy ADJACENT to target for the same attack damage, which can trigger on-hit effects.",
+		"LOADED_DICE": "Attacks have [50,LK]% chance to also hit the lowest health enemy ADJACENT to target for the same attack damage, which also trigger on-hit effects.",
 		"PUNCHING_GLOVE": "Attacks deal 8 % of target max HP as additional PHYSICAL on hit",
 		"MUSCLE_BAND": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +2 DEF, +1 ATK and +5 SPEED (max 20 stacks)",
 		"WONDER_BOX": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary items (max 3 items held)",

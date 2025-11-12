@@ -133,71 +133,69 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
         .map((cell) => cell.value!)
       candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
-      let targetCount = 1
-      candidateTargets.forEach((target) => {
-        if (targetCount > 0) {
-          let totalTakenDamage = 0
-          if (physicalDamage > 0) {
-            const { takenDamage } = target.handleDamage({
-              damage: physicalDamage,
-              board,
-              attackType: AttackType.PHYSICAL,
-              attacker: pokemon,
-              shouldTargetGainMana: true
-            })
-            totalTakenDamage += takenDamage
-          }
-          if (specialDamage > 0) {
-            const { takenDamage } = target.handleDamage({
-              damage: specialDamage,
+      const nbBounces = 1
+      for (let i = 0; i < nbBounces; i++) {
+        const target = candidateTargets.shift()
+        if (!target) break
+        let totalTakenDamage = 0
+        if (physicalDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: physicalDamage,
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+        }
+        if (specialDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: specialDamage,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+          if (
+            target.items.has(Item.POWER_LENS) &&
+            !pokemon.items.has(Item.PROTECTIVE_PADS)
+          ) {
+            const speDef = target.status.armorReduction
+              ? Math.round(target.speDef / 2)
+              : target.speDef
+            const damageAfterReduction =
+              specialDamage / (1 + ARMOR_FACTOR * speDef)
+            const damageBlocked = min(0)(specialDamage - damageAfterReduction)
+            pokemon.broadcastAbility({ skill: "POWER_LENS" })
+            pokemon.handleDamage({
+              damage: Math.round(damageBlocked),
               board,
               attackType: AttackType.SPECIAL,
-              attacker: pokemon,
+              attacker: target,
               shouldTargetGainMana: true
             })
-            totalTakenDamage += takenDamage
-            if (
-              target.items.has(Item.POWER_LENS) &&
-              !pokemon.items.has(Item.PROTECTIVE_PADS)
-            ) {
-              const speDef = target.status.armorReduction
-                ? Math.round(target.speDef / 2)
-                : target.speDef
-              const damageAfterReduction =
-                specialDamage / (1 + ARMOR_FACTOR * speDef)
-              const damageBlocked = min(0)(specialDamage - damageAfterReduction)
-              pokemon.broadcastAbility({ skill: "POWER_LENS" })
-              pokemon.handleDamage({
-                damage: Math.round(damageBlocked),
-                board,
-                attackType: AttackType.SPECIAL,
-                attacker: target,
-                shouldTargetGainMana: true
-              })
-            }
           }
-          if (trueDamage > 0) {
-            const { takenDamage } = target.handleDamage({
-              damage: trueDamage,
-              board,
-              attackType: AttackType.TRUE,
-              attacker: pokemon,
-              shouldTargetGainMana: true
-            })
-            totalTakenDamage += takenDamage
-          }
-          pokemon.onHit({
-            target,
-            board,
-            totalTakenDamage,
-            physicalDamage,
-            specialDamage,
-            trueDamage
-          })
-
-          targetCount--
         }
-      })
+        if (trueDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: trueDamage,
+            board,
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+        }
+        pokemon.onHit({
+          target,
+          board,
+          totalTakenDamage,
+          physicalDamage,
+          specialDamage,
+          trueDamage
+        })
+      }
     }
   }
 )
