@@ -205,7 +205,7 @@ export default class ItemContainer extends DraggableObject {
       "item",
       item + ".png"
     ).setScale(this.pokemonId === null ? 0.5 : 0.25)
-    this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
+    this.tempDetail = new ItemDetail(this.scene, 0, 0, item as any)
     this.tempDetail.setDepth(DEPTH.TOOLTIP)
     this.tempDetail.setPosition(
       this.tempDetail.width * 0.5 + 40,

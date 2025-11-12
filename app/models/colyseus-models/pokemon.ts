@@ -6567,8 +6567,8 @@ export class Manaphy extends Pokemon {
 export class Rotom extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
-    Synergy.GHOST,
-    Synergy.LIGHT
+    Synergy.ARTIFICIAL,
+    Synergy.GHOST
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -6577,23 +6577,180 @@ export class Rotom extends Pokemon {
   speed = 54
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 85
   range = 3
-  skill = Ability.CHARGE
+  passive = Passive.ROTOM
+  skill = Ability.PLASMA_FISSION
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
+}
+
+export class RotomHeat extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.FIRE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 13
+  speed = 54
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  passive = Passive.ROTOM
+  skill = Ability.SUPER_HEAT
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
+}
+
+export class RotomWash extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.WATER
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 12
+  speed = 54
+  def = 7
+  speDef = 6
+  maxPP = 100
+  range = 2
+  passive = Passive.ROTOM
+  skill = Ability.POWER_WASH
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
+}
+
+export class RotomFrost extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.ICE
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 11
+  speed = 54
+  def = 6
+  speDef = 5
+  maxPP = 110
+  range = 2
+  passive = Passive.ROTOM
+  skill = Ability.DEEP_FREEZE
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
+}
+
+export class RotomFan extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 10
+  speed = 54
+  def = 6
+  speDef = 6
+  maxPP = 110
+  range = 3
+  passive = Passive.ROTOM
+  skill = Ability.PLASMA_TEMPEST
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
+}
+
+export class RotomMow extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.GRASS
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 190
+  atk = 14
+  speed = 54
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  passive = Passive.ROTOM
+  skill = Ability.TRIMMING_MOWER
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
 }
 
 export class RotomDrone extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.ARTIFICIAL])
-  rarity = Rarity.SPECIAL
-  stars = 1
-  hp = 80
-  atk = 6
-  speed = 53
-  def = 6
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 12
+  speed = 54
+  def = 7
   speDef = 6
-  maxPP = 80
-  range = 3
-  skill = Ability.FLASH
+  maxPP = 70
+  range = 2
+  passive = Passive.ROTOM
+  skill = Ability.PLASMA_FLASH
+  onAcquired(player: Player) {
+    if (!player.items.includes(Item.ROTOM_CATALOG)) {
+      player.items.push(Item.ROTOM_CATALOG)
+    }
+  }
+  afterSell(player: Player): void {
+    removeInArray(player.items, Item.ROTOM_CATALOG)
+  }
 }
 
 export class Spiritomb extends Pokemon {
@@ -19294,6 +19451,11 @@ export const PokemonClasses: Record<
   [Pkm.HEATRAN]: Heatran,
   [Pkm.HO_OH]: HooH,
   [Pkm.ROTOM]: Rotom,
+  [Pkm.ROTOM_HEAT]: RotomHeat,
+  [Pkm.ROTOM_WASH]: RotomWash,
+  [Pkm.ROTOM_FROST]: RotomFrost,
+  [Pkm.ROTOM_FAN]: RotomFan,
+  [Pkm.ROTOM_MOW]: RotomMow,
   [Pkm.ROTOM_DRONE]: RotomDrone,
   [Pkm.AERODACTYL]: Aerodactyl,
   [Pkm.SWABLU]: Swablu,

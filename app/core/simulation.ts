@@ -582,31 +582,6 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       board.forEach((pokemon) => {
-        if (pokemon.items.has(Item.ROTOM_PHONE) && !isOnBench(pokemon)) {
-          const player = board === blueBoard ? this.bluePlayer : this.redPlayer
-          const team = board === blueBoard ? this.blueTeam : this.redTeam
-          const entity = values(team).find(
-            (e) => e.refToBoardPokemon.id === pokemon.id
-          )
-          if (entity) {
-            entity.commands.push(
-              new DelayedCommand(() => {
-                const coord = this.getClosestFreeCellToPokemon(
-                  pokemon,
-                  teamIndex
-                )
-                if (!coord) return
-                const rotomDrone = PokemonFactory.createPokemonFromName(
-                  Pkm.ROTOM_DRONE,
-                  player
-                )
-                player?.pokemonsPlayed.add(Pkm.ROTOM_DRONE)
-                this.addPokemon(rotomDrone, coord.x, coord.y, teamIndex, true)
-              }, 8000)
-            )
-          }
-        }
-
         if (pokemon.items.has(Item.WHITE_FLUTE) && !isOnBench(pokemon)) {
           const wilds = PRECOMPUTED_POKEMONS_PER_TYPE[Synergy.WILD].map((p) =>
             getPokemonData(p)
