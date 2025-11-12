@@ -1702,10 +1702,45 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.ELECTRIC_RANGE,
     hitSprite: HitSprite.ELECTRIC_HIT
   },
+  [Pkm.ROTOM_HEAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.ROTOM_WASH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.ROTOM_FROST]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.ROTOM_FAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl,
+    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.ROTOM_MOW]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
   [Pkm.ROTOM_DRONE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot,
+    emote: AnimationType.Charge,
     shinyUnavailable: true,
     attackSprite: AttackSprite.GHOST_RANGE,
     hitSprite: HitSprite.ELECTRIC_HIT

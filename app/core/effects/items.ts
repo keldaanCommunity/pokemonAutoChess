@@ -944,6 +944,29 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.ROTOM_CATALOG]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.ROTOM) {
+        if (pokemon.name === Pkm.ROTOM) {
+          player.transformPokemon(pokemon, Pkm.ROTOM_HEAT)
+        } else if (pokemon.name === Pkm.ROTOM_HEAT) {
+          player.transformPokemon(pokemon, Pkm.ROTOM_WASH)
+        } else if (pokemon.name === Pkm.ROTOM_WASH) {
+          player.transformPokemon(pokemon, Pkm.ROTOM_FROST)
+        } else if (pokemon.name === Pkm.ROTOM_FROST) {
+          player.transformPokemon(pokemon, Pkm.ROTOM_FAN)
+        } else if (pokemon.name === Pkm.ROTOM_FAN) {
+          player.transformPokemon(pokemon, Pkm.ROTOM_MOW)
+        } else if (pokemon.name === Pkm.ROTOM_MOW) {
+          player.transformPokemon(pokemon, Pkm.ROTOM_DRONE)
+        } else if (pokemon.name === Pkm.ROTOM_DRONE) {
+          player.transformPokemon(pokemon, Pkm.ROTOM)
+        }
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.ZYGARDE_CUBE]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
       if (pokemon?.passive === Passive.ZYGARDE) {

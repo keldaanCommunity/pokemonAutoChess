@@ -103,6 +103,7 @@ export enum Item {
   RUNNING_SHOES = "RUNNING_SHOES",
   MAX_ELIXIR = "MAX_ELIXIR",
   METEORITE = "METEORITE",
+  ROTOM_CATALOG = "ROTOM_CATALOG",
   TRASH = "TRASH",
   DYNAMAX_BAND = "DYNAMAX_BAND",
   SHINY_STONE = "SHINY_STONE",
@@ -369,7 +370,7 @@ export const TownItems = [
 ] satisfies Item[]
 
 // should be excluded from carousels
-export const SpecialItems = [
+export const SpecialItems: Item[] = [
   ...TownItems,
   Item.COIN,
   Item.NUGGET,
@@ -394,6 +395,7 @@ export const SpecialItems = [
   Item.AMAZE_MULCH,
   Item.COMFEY,
   Item.METEORITE,
+  Item.ROTOM_CATALOG,
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
   Item.CORNERSTONE_MASK,
@@ -500,7 +502,7 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const Tools = [
+export const Tools: Item[] = [
   Item.LIGHT_BALL,
   Item.TOXIC_ORB,
   Item.HARD_STONE,
@@ -969,6 +971,7 @@ export const UnholdableItems: Item[] = [
   ...SynergyGems,
   ...Mulches,
   Item.METEORITE,
+  Item.ROTOM_CATALOG,
   Item.MYSTERY_BOX,
   Item.TREASURE_BOX,
   Item.ZYGARDE_CUBE,
