@@ -12385,7 +12385,7 @@ export class RoostStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
     // move to backline
     const corner = board.getTeleportationCell(
       pokemon.positionX,
@@ -12396,7 +12396,7 @@ export class RoostStrategy extends AbilityStrategy {
       pokemon.moveTo(corner.x, corner.y, board, false)
     }
     pokemon.status.triggerSleep(1000, pokemon)
-    pokemon.handleHeal(heal, pokemon, 1, crit)
+    pokemon.addShield(shield, pokemon, 1, crit)
   }
 }
 

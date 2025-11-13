@@ -36,8 +36,9 @@
 - Nerf Skarmory passive: 12 → 10 spikes
 - Nerf Hitmonlee: Attack 26 → 24
 - Buff Basculin Red & Blue: HP 140 → 160
-- Rework of Rotom Drone
-- Rework of Rotom
+- Changed Roost (Pidove): now gain shield instead of healing HP
+- Rework of Rotom Drone: now part of the Rotom line
+- Rework of Rotom: now has 7 different forms that can be switched between with Rotom Catalog.
 
 # Changes to Synergies
 
