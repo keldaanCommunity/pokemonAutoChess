@@ -358,7 +358,7 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
           shouldTargetGainMana: true,
           isRetaliation: true
         })
-        targetAtContact.moveTo(destination.x, destination.y, board)
+        targetAtContact.moveTo(destination.x, destination.y, board, true)
       }
     }
   }

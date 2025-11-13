@@ -740,9 +740,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
   }
 
-  moveTo(x: number, y: number, board: Board) {
-    this.toMovingState()
+  moveTo(x: number, y: number, board: Board, forcedDisplacement: boolean) {
+    if (forcedDisplacement && this.items.has(Item.HEAVY_DUTY_BOOTS)) return
     const target = board.getEntityOnCell(x, y)
+    if(forcedDisplacement && target && target?.items.has(Item.HEAVY_DUTY_BOOTS)) return
+    this.toMovingState()
     if (target) target.toMovingState()
 
     board.swapCells(this.positionX, this.positionY, x, y)
@@ -1275,7 +1277,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   flyAway(board: Board) {
     const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
     if (flyAwayCell) {
-      this.moveTo(flyAwayCell.x, flyAwayCell.y, board)
+      this.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
     }
   }
 

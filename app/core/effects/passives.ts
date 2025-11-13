@@ -341,7 +341,7 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
         pokemon.positionY,
         pokemon.team
       )
-      if (destination) pokemon.moveTo(destination.x, destination.y, board)
+      if (destination) pokemon.moveTo(destination.x, destination.y, board, false)
       pokemon.toIdleState()
       pokemon.addAttack(-10, pokemon, 0, false)
       pokemon.addSpeed(-20, pokemon, 0, false)

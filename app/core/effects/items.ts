@@ -116,7 +116,7 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
   }
 )
 
-export const choiceScarfOnAttackEffect = new OnAttackEffect(
+export const loadedDiceOnAttackEffect = new OnAttackEffect(
   ({
     pokemon,
     target,
@@ -126,81 +126,76 @@ export const choiceScarfOnAttackEffect = new OnAttackEffect(
     specialDamage,
     trueDamage
   }) => {
-    if (totalDamage > 0 && target) {
+    if (totalDamage > 0 && target && chance(0.5, pokemon)) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const candidateTargets = cells
         .filter((cell) => cell.value && pokemon.team != cell.value.team)
         .map((cell) => cell.value!)
       candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
-      let targetCount = 1
-      candidateTargets.forEach((target) => {
-        if (targetCount > 0) {
-          let totalTakenDamage = 0
-          if (physicalDamage > 0) {
-            const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * physicalDamage),
-              board,
-              attackType: AttackType.PHYSICAL,
-              attacker: pokemon,
-              shouldTargetGainMana: true
-            })
-            totalTakenDamage += takenDamage
-          }
-          if (specialDamage > 0) {
-            const scarfSpecialDamage = Math.ceil(0.5 * specialDamage)
-            const { takenDamage } = target.handleDamage({
-              damage: scarfSpecialDamage,
+      const nbBounces = 1
+      for (let i = 0; i < nbBounces; i++) {
+        const target = candidateTargets.shift()
+        if (!target) break
+        let totalTakenDamage = 0
+        if (physicalDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: physicalDamage,
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+        }
+        if (specialDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: specialDamage,
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+          if (
+            target.items.has(Item.POWER_LENS) &&
+            !pokemon.items.has(Item.PROTECTIVE_PADS)
+          ) {
+            const speDef = target.status.armorReduction
+              ? Math.round(target.speDef / 2)
+              : target.speDef
+            const damageAfterReduction =
+              specialDamage / (1 + ARMOR_FACTOR * speDef)
+            const damageBlocked = min(0)(specialDamage - damageAfterReduction)
+            pokemon.broadcastAbility({ skill: "POWER_LENS" })
+            pokemon.handleDamage({
+              damage: Math.round(damageBlocked),
               board,
               attackType: AttackType.SPECIAL,
-              attacker: pokemon,
+              attacker: target,
               shouldTargetGainMana: true
             })
-            totalTakenDamage += takenDamage
-            if (
-              target.items.has(Item.POWER_LENS) &&
-              !pokemon.items.has(Item.PROTECTIVE_PADS)
-            ) {
-              const speDef = target.status.armorReduction
-                ? Math.round(target.speDef / 2)
-                : target.speDef
-              const damageAfterReduction =
-                scarfSpecialDamage / (1 + ARMOR_FACTOR * speDef)
-              const damageBlocked = min(0)(
-                scarfSpecialDamage - damageAfterReduction
-              )
-              pokemon.broadcastAbility({ skill: "POWER_LENS" })
-              pokemon.handleDamage({
-                damage: Math.round(damageBlocked),
-                board,
-                attackType: AttackType.SPECIAL,
-                attacker: target,
-                shouldTargetGainMana: true
-              })
-            }
           }
-          if (trueDamage > 0) {
-            const { takenDamage } = target.handleDamage({
-              damage: Math.ceil(0.5 * trueDamage),
-              board,
-              attackType: AttackType.TRUE,
-              attacker: pokemon,
-              shouldTargetGainMana: true
-            })
-            totalTakenDamage += takenDamage
-          }
-          pokemon.onHit({
-            target,
-            board,
-            totalTakenDamage,
-            physicalDamage,
-            specialDamage,
-            trueDamage
-          })
-
-          targetCount--
         }
-      })
+        if (trueDamage > 0) {
+          const { takenDamage } = target.handleDamage({
+            damage: trueDamage,
+            board,
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            shouldTargetGainMana: true
+          })
+          totalTakenDamage += takenDamage
+        }
+        pokemon.onHit({
+          target,
+          board,
+          totalTakenDamage,
+          physicalDamage,
+          specialDamage,
+          trueDamage
+        })
+      }
     }
   }
 )
@@ -298,7 +293,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
       substitute.positionX = pokemon.positionX
       substitute.positionY = pokemon.positionY
-      pokemon.items.forEach(item => substitute.items.add(item))
+      pokemon.items.forEach((item) => substitute.items.add(item))
       pokemon.items.clear()
       player.board.set(substitute.id, substitute)
       player.pokemonsTrainingInDojo.push({
@@ -839,7 +834,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
 
-  [Item.CHOICE_SCARF]: [choiceScarfOnAttackEffect],
+  [Item.LOADED_DICE]: [loadedDiceOnAttackEffect],
 
   [Item.STICKY_BARB]: [
     new OnDamageReceivedEffect(

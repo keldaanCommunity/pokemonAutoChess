@@ -157,19 +157,35 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (pokemon.effects.has(EffectEnum.POISON_GAS) && this.poisonStacks === 0) {
+    if (
+      pokemon.effects.has(EffectEnum.POISON_GAS) &&
+      this.poisonStacks === 0 &&
+      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false
+    ) {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
-    if (pokemon.effects.has(EffectEnum.SMOKE) && !this.blinded) {
+    if (
+      pokemon.effects.has(EffectEnum.SMOKE) &&
+      !this.blinded &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+    ) {
       this.triggerBlinded(1000, pokemon)
     }
 
-    if (pokemon.effects.has(EffectEnum.STICKY_WEB) && !this.paralysis) {
+    if (
+      pokemon.effects.has(EffectEnum.STICKY_WEB) &&
+      !this.paralysis &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+    ) {
       this.triggerParalysis(2000, pokemon, null)
     }
 
-    if (pokemon.effects.has(EffectEnum.COTTON_BALL) && !this.sleep) {
+    if (
+      pokemon.effects.has(EffectEnum.COTTON_BALL) &&
+      !this.sleep &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+    ) {
       this.triggerSleep(1000, pokemon)
       pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
