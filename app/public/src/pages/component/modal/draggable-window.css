@@ -30,7 +30,7 @@
 
 .draggable-window-header-button {
   background: var(--color-bg-secondary);
-  border: 1px solid black;
+  border: 0;
   color: #fff;
   padding: 4px 8px;
   cursor: pointer;
