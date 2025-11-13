@@ -743,7 +743,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   moveTo(x: number, y: number, board: Board, forcedDisplacement: boolean) {
     if (forcedDisplacement && this.items.has(Item.HEAVY_DUTY_BOOTS)) return
     const target = board.getEntityOnCell(x, y)
-    if(forcedDisplacement && target && target?.items.has(Item.HEAVY_DUTY_BOOTS)) return
+    if (
+      forcedDisplacement &&
+      target &&
+      target?.items.has(Item.HEAVY_DUTY_BOOTS)
+    )
+      return
     this.toMovingState()
     if (target) target.toMovingState()
 
@@ -1239,12 +1244,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  onDeath({ board }: { board: Board }) {
+  onDeath({
+    board,
+    attacker
+  }: {
+    board: Board
+    attacker: PokemonEntity | null
+  }) {
     if (!this.isGhostOpponent) {
       this.refToBoardPokemon.deathCount++
     }
     this.getEffects(OnDeathEffect).forEach((effect) =>
-      effect.apply({ pokemon: this, board })
+      effect.apply({ pokemon: this, board, attacker })
     )
 
     if (this.status.curseVulnerability) {

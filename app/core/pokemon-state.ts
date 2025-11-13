@@ -730,7 +730,7 @@ export default abstract class PokemonState {
         : Team.BLUE_TEAM
       : pokemon.team
     pokemon.team = originalTeam
-    pokemon.onDeath({ board })
+    pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
     if (attacker && pokemon !== attacker) {
       attacker.onKill({ target: pokemon, board, attackType })
