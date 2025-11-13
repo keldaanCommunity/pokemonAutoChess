@@ -1174,5 +1174,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         )
       ]
     ])
-  )
+  ),
+  [Item.SPELL_TAG]: [
+    new OnDeathEffect(({ attacker }) => {
+      attacker?.status.triggerCurse(9000, attacker)
+    })
+  ]
 }

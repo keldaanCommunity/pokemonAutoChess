@@ -136,6 +136,7 @@ export class OnKillEffect extends Effect {
 interface OnDeathEffectArgs {
   board: Board
   pokemon: PokemonEntity
+  attacker: PokemonEntity | null
 }
 
 export class OnDeathEffect extends Effect {
