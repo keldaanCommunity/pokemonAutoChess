@@ -3206,7 +3206,7 @@
 	},
 	"synergy_description": {
 		"NORMAL": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts.",
-		"GRASS": "GRASS Pokémon heal and produce berries over time.",
+		"GRASS": "GRASS Pokémon heal and produce berries over time. 40% of overheal is gained as max HP.",
 		"FIRE": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every attack.",
 		"WATER": "WATER Pokémon generate more PP and can be fished with a rod.",
 		"ELECTRIC": "ELECTRIC Pokémon basic attacks can trigger two additional attacks.{{additionalInfo}}",

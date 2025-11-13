@@ -46,6 +46,7 @@
 - New effect for Psychic 3: A Unown has 5% chance to appear in your shop
 - New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
 - Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
+- New effect for Grass: 40% of overheal is now gained as max HP
 
 # Changes to Items
 

@@ -3182,7 +3182,7 @@
 	},
 	"synergy_description": {
 		"NORMAL": "Les Pokémon NORMAL et leurs alliés ADJACENT gagnent des bonus de SHIELD lorsque le combat commence.",
-		"GRASS": "Les Pokémon GRASS guérissent et produisent des baies avec le temps.",
+		"GRASS": "Les Pokémon GRASS guérissent et produisent des baies avec le temps. 40% des soins en surplus sont convertis en HP max.",
 		"FIRE": "Les Pokémon FIRE gagnent de l'ATK après chaque attaque et ont une chance d'infliger BURN à leurs ennemis.",
 		"WATER": "Les Pokémon WATER génèrent plus de PP et peuvent être pêchés avec une canne.",
 		"ELECTRIC": "Les attaques de base des Pokémon ELECTRIC peuvent déclencher deux attaques supplémentaires.{{additionalInfo}}",
