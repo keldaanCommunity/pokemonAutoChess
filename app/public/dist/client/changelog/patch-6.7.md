@@ -87,6 +87,7 @@
 - Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
 - Wiki items section has been reworked for better readability.
 - New section on the wiki: Stages
+- New icons for TM and HM items
 
 # Bugfix
 
