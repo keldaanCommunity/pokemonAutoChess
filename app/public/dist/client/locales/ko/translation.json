@@ -2601,7 +2601,7 @@
 		"GRASSY_TERRAIN": "자신의 GRASS 포켓몬들의 대미지를 20% 증가시키는  GRASS_FIELD를 부여합니다.",
 		"MISTY_TERRAIN": "자신의 FAIRY 포켓몬들의 대미지를 20% 증가시키는  FAIRY_FIELD를 부여합니다.",
 		"PSYCHIC_TERRAIN": "자신의 PSYCHIC 포켓몬들의 대미지를 20% 증가시키는  PSYCHIC_FIELD를 부여합니다.",
-		"EEVEE": "이브이는 주어진 시너지 돌에 따라서 8가지의 이브이 진화체로 진화합니다.",
+		"EEVEE": "이브이는 주어진 시너지 돌에 따라서 8가지의 이브이 진화체로 진화합니다.",																						  
 		"TYPE_NULL": "$t(pkm.TYPE_NULL)은 시너지 아이템을 받았을 때 $t(pkm.SILVALLY)로 진화합니다.",
 		"RKS_SYSTEM": "AR 시스템: $t(pkm.SILVALLY)은 게임 중 언제든지 시너지 아이템을 바꿀 수 있습니다. 대기석에 놓으면 시너지 아이템을 다시 떨어뜨립니다.",
 		"SUDOWOODO": "나무인척 하느라 공격을 하지 않지만 대신 초당 [2,4]ATK를 얻습니다. (중첩가능)\nPP가 꽉 찼을때부터 공격을 시작하며, 그때까지는 SILENCE상태가 되거나 PP를 잃지 않습니다.",
@@ -2618,7 +2618,7 @@
 		"SNOW": "날씨를 SNOW 으로 바꿉니다.",
 		"STORM": "날씨를 STORM 로 바꿉니다.",
 		"NIGHT": "날씨를 NIGHT 으로 바꿉니다.",
-		"WINDY": "날씨를 WINDY 로 바꿉니다.",
+		"WINDY": "날씨를 WINDY 로 바꿉니다.",																	   
 		"LUGIA": "날씨를 WINDY 로 바꾸고 DUSK_STONE 을 원합니다.",
 		"LANDORUS": "GROUND 과 FLYING 중 주력 시너지에 따라 날씨를 SANDSTORM 이나 WINDY 로 바꿉니다.",
 		"THUNDURUS": "ELECTRIC 와 FLYING 중 주력 시너지에 따라 날씨를 STORM 이나 WINDY 로 바꿉니다.",
@@ -2679,7 +2679,7 @@
 		"BERRY_EATER": "나무열매를 지닌 대상 공격시 빼앗아 먹습니다.",
 		"TOXIC_BOOST": "독 대미지를 50% 적게 받으며 POISONNED 동안 10ATK 증가합니다.",
 		"GUZZLORD": "악식킹은 타인을 위해 요리하기엔 너무 무겁고 게으릅니다. CHEF_HAT 착용 시 적을 전투불능으로 만들 때마다 영구적으로 10 최대 HP , 5 AP 증가",
-		"PSYDUCK": "피격시 [10,LK]% 확률로 CONFUSION 상태가 됩니다. CONFUSION 상태가 될시 100 AP 증가합니다.",
+		"PSYDUCK": "피격시 [10,LK]% 확률로 CONFUSION 상태가 됩니다. CONFUSION 상태가 될시 100 AP 증가합니다.",																												 
 		"BLOODMOON": "BLOODMOON 상태일때 폼이 변합니다.",
 		"DREAM_CATCHER": "SLEEP 상태의 적을 공격할시 보유자의 주변 아군 3마리에 10SHIELD를 부여합니다.",
 		"SLOW_START": "전투 시작시 -30 SPEED로 고정되며, 첫번째 기술을 사용하면 30 SPEED 및 10 ATK 증가합니다.",
@@ -2706,7 +2706,7 @@
 		"GLIMMORA": "최대 HP의 50% 이하일 때, 전방의 2x3 칸에 독압정을 뿌려 20 피해를 입힌다. 독압정은 POISON 타입이 아닌 포켓몬에게 POISONNED 을 가한다.",
 		"PILLAR": "기둥을 세워 적들의 경로를 방해한다. 시전자의 STAR 에 따라 HP, DEF, SPE_DEF 이 증가한다.",
 		"INANIMATE": "무생물 물체는 복사되거나 판매될 수 없다. 이동하거나 공격할 수 없으며 상태이상에 면역이다.",
-		"BERSERK": "특성 발동 시마다 5 AP 을 획득한다.",
+		"BERSERK": "특성 발동 시마다 5 AP 을 획득한다.",					   
 		"APPLIN": "과사삭벌레는 SWEET_APPLE 또는 TART_APPLE 또는 SIRUPY_APPLE 를 찾고 있다.",
 		"DIPPLIN": "과미르는 SIRUPY_APPLE 를 찾고 있다.",
 		"WELL_BAKED": "BURN 면역. BURN 시 20 DEF 획득",
@@ -3835,6 +3835,14 @@
 	"connection_status": {
 		"CONNECTION_LOST": "연결이 끊어졌습니다. 재연결 시도 중...",
 		"CONNECTION_FAILED": "연결 실패. 새로고침을 시도해보세요."
+	},
+	"technical_terms": {
+		"STRONGEST": "제일 센",
+		"ADJACENT": "인접한"
+	},
+	"technical_terms_definitions": {
+		"STRONGEST": "우선순위에 따라 다음과 같이 정의됩니다:\n1. 지닌 아이템 개수\n2. 유닛 단계\n3. 유닛 희귀도",
+		"ADJACENT": "유닛 주변 8개의 타일"
 	},
 	"stage_type": {
 		"pve": "PvE 조우",
