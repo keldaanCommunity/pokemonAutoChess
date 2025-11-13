@@ -105,7 +105,8 @@ export default function SynergyComponent(props: {
           fontSize: "32px",
           textShadow: "2px 2px 2px #00000080",
           textAlign: "center",
-          marginRight: "4px"
+          marginRight: "4px",
+          color: levelReached ? "#ffffff" : "#b8b8b8"
         }}
       >
         {props.value}
