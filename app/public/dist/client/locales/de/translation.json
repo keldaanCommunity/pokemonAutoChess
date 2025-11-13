@@ -1946,7 +1946,7 @@
 		"ARMOR_CANNON": "Der Nutzer schießt ein brennendes Projektil, verursacht [50,SP] SPECIAL an dem Ziel bevor es zu den 2 nächsten Gegnern springt und jeweils [30,SP] SPECIAL verursacht. Die Projektile kommen dann zum originalen Ziel zurück und verursachen jeweils extra [15,SP] SPECIAL.",
 		"BITTER_BLADE": "Der Nutzer fokussiert seine bitteren Gefühle in eine Schlitz-Attacke, verursacht [70,SP] SPECIAL zu jedem benachbarten Gegner. Der Nutzer heilt sich um 10% seiner HP für jeden getroffenen Gegner.",
 		"SUCTION_HEAL": "Saugt die Energy von seinen Zielen, verursacht [15,30,60,SP] SPECIAL in einem 2-Feld-Kegel vor dem Nutzer und heilt HP um 50% des verursachten Schadens.",
-		"ROOST": "Fliegt davon und landet in der hinteren Reihe, SLEEP für 1 Sekund und heilt für [20,40,80,SP] HP.",
+		"ROOST": "Fliegt davon und landet in der hinteren Reihe, SLEEP für 1 Sekund und erhält [20,40,80,SP] SHIELD.",
 		"BEHEMOTH_BLADE": "Presche hinter das Ziel und füge einen Kräftigen Hieb zu der [100,SP] + 1x ATK als SPECIAL Schaden anrichtet.",
 		"HEAT_CRASH": "Kracht in den Gegner, was es zurückschleudert und [40,60,80,SP] SPECIAL zufügt. Macht umso mehr Schaden wie differenz der ATK zwischen Anwender und Ziel ist.",
 		"LASER_BLADE": "Wechselt durch:\n1. Dreht die Laserklinge herum, bewegt sich hinter das Ziel, erhält [25,SP] SHIELD und fügt dem Ziel und benachbarten Feinden auf dem Weg [25,SP] SPECIAL zu.\n2. Dreht die Laserklinge vor sich und verursacht 2x [25,SP] + ATK als SPECIAL.",

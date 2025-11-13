@@ -503,8 +503,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     permanent = false
   ) {
     if (this.hp <= 0) return
-    value =
+    value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    )
     this.maxHP = min(1)(this.maxHP + value)
     this.hp = clamp(this.hp + value, 1, this.maxHP)
     if (permanent && !this.isGhostOpponent) {

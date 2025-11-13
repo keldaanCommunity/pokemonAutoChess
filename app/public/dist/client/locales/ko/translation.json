@@ -1919,7 +1919,7 @@
 		"ARMOR_CANNON": "불타는 투사체를 쏘아내어 대상에게 [50,SP] SPECIAL 를 가하고 가장 가까운 2 적에게 튕겨 [30,SP] SPECIAL 를 가한다. 튕긴 이후 투사체는 기존 대상에게 돌아가 각각 [15,SP] SPECIAL 를 가한다.",
 		"BITTER_BLADE": "주변 적에게 [70,SP] SPECIAL 를 가한다. 피격 대상 수만큼 시전자의 최대 HP 의 10% 를 회복한다.",
 		"SUCTION_HEAL": "시전자 전방 부채꼴 2칸 내의 적에게 [15,30,60,SP] SPECIAL 를 가하고 입힌 피해량의 50% 만큼 HP 를 회복한다.",
-		"ROOST": "후열로 날라가 1초간 SLEEP 상태가 되어 [20,40,80,SP] HP 를 회복한다.",
+		"ROOST": "후열로 날라가 1초간 SLEEP 상태가 되어 [20,40,80,SP] SHIELD 를 회복한다.",
 		"BEHEMOTH_BLADE": "대상 뒤로 돌진하여 [100,SP] + 1x ATK 만큼 SPECIAL 를 가한다.",
 		"HEAT_CRASH": "대상에게 돌진하여 밀어내고 [40,60,80,SP] SPECIAL 를 가한다. 시전자의 ATK 이 대상보다 클수록 피해량이 증가한다."
 	},
