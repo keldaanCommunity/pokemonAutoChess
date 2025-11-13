@@ -730,7 +730,7 @@ export default abstract class PokemonState {
         : Team.BLUE_TEAM
       : pokemon.team
     pokemon.team = originalTeam
-    pokemon.onDeath({ board })
+    pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
     if (attacker && pokemon !== attacker) {
       attacker.onKill({ target: pokemon, board, attackType })
@@ -946,7 +946,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK)
+      !pokemon.types.has(Synergy.ROCK) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -961,7 +962,8 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
       !pokemon.types.has(Synergy.FLYING) &&
-      !pokemon.types.has(Synergy.STEEL)
+      !pokemon.types.has(Synergy.STEEL) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -975,14 +977,16 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
-      !pokemon.types.has(Synergy.POISON)
+      !pokemon.types.has(Synergy.POISON) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.status.triggerPoison(1000, pokemon, undefined)
     }
 
     if (
       pokemon.effects.has(EffectEnum.HAIL) &&
-      !pokemon.types.has(Synergy.ICE)
+      !pokemon.types.has(Synergy.ICE) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -997,7 +1001,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.EMBER) &&
-      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING))
+      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,

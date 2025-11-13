@@ -802,4 +802,4 @@ export function countRegionsBySynergy() {
   return synergyCount
 }
 
-countRegionsBySynergy()
+//countRegionsBySynergy()
