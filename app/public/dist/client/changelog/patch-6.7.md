@@ -49,6 +49,7 @@
 - New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
 - Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
 - New effect for Grass: 40% of overheal is now gained as max HP
+- Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
 
 # Changes to Items
 
@@ -76,6 +77,7 @@
 - New town encounter at stage 17: Croagunk gives all players an Exchange Ticket
 - Wobbuffet encounter now gives all players a Recycle Ticket instead of an Exchange Ticket. It can now also be encountered at stage 22 and 27.
 - Sableye can no longer be encountered at stage 4, but can now be encountered at stage 17.
+- Kecleon can no longer be encountered after stage 22.
 
 # Gameplay
 
