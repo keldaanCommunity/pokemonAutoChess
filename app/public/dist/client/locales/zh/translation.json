@@ -2086,7 +2086,7 @@
 		"DRILL_RUN": "像钢钻一样冲过目标，对其造成[15,30,SP]点TRUE并与之交换位置。若相同方向上存在下一目标，立即对其重复此招式。该招式可以暴击。",
 		"DRILL_PECK": "一边旋转一边将尖喙刺入对手，对其造成[30,60,120,SP]点SPECIAL并与之交换位置。若相同方向上存在下一目标，立即对其重复此招式。",
 		"ROCK_ARTILLERY": "朝随机敌方宝可梦投掷总计[10,15,25]块会掉落在其所在位置或ADJACENT格子的岩石，每块对命中的敌方宝可梦造成[20,30,40,SP]点SPECIAL。",
-		"ZING_ZAP": "滚动至目标身后，对其造成[90,SP]点SPECIAL，并使其陷入FLINCH 3秒。若目标处于PARALYSIS，[40,SP]点SHIELD。",
+		"ZING_ZAP": "滚动至目标身后，对其造成[90,SP]点SPECIAL，并使其陷入FLINCH 3秒。若目标处于PARALYSIS，获得[40,SP]点SHIELD。",
 		"NO_RETREAT": "队伍中每有一只列阵兵，便提升1点ATK，1点DEF，1点SPE_DEF和5点SPEED。每只跟班撞击目标，造成[20,SP]点SPECIAL。",
 		"TACKLE": "对目标造成[20,40,60,SP]点SPECIAL。",
 		"STATIC_SHOCK": "对目标造成[70,SP]点SPECIAL。每有一只ADJACENT的ELECTRIC宝可梦，便获得[30,SP]点SHIELD；每有一只ADJACENT的FAIRY宝可梦，便恢复[30,SP]点HP。",
