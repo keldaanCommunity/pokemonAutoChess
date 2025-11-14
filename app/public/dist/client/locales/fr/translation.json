@@ -2043,7 +2043,7 @@
 		"ARMOR_CANNON": "Tire un projectile ardent, infligeant [50,SP] SPECIAL à la cible avant de rebondir sur les 2 ennemis les plus proches, infligeant [30,SP] SPECIAL à chacun. Les projectiles reviennent ensuite sur leur cible initiale, infligeant [15,SP] SPECIAL supplémentaires chacun.",
 		"BITTER_BLADE": "Concentre son amertume dans une attaque tranchante, infligeant [70,SP] SPECIAL à tous les ennemi ADJACENT. Se soigne à hauteur de 10% de ses HP max pour chaque ennemi touché.",
 		"SUCTION_HEAL": "Draine l'énergie de ses cibles, infligeant [15,30,60,SP] SPECIAL dans un CONE de 2 cases et se soigne à hauteur de 50% des dégâts infligés.",
-		"ROOST": "S'envole et atterrit dans la rangée arrière, puis entre en SLEEP pendant 1 seconde et se soigne de [20,40,80,SP] HP.",
+		"ROOST": "S'envole et atterrit dans la rangée arrière, puis entre en SLEEP pendant 1 seconde et gagne [20,40,80,SP] SHIELD.",
 		"BEHEMOTH_BLADE": "Fonce derrière la cible et délivre un puissant coup d'estoc, infligeant [100,SP] + [100,SP]% de son ATK comme SPECIAL.",
 		"HEAT_CRASH": "S'écrase sur la cible, la fait reculer et lui inflige [40,60,80,SP] SPECIAL. Plus le lanceur a d'ATK par rapport à la cible, plus les dégâts seront importants.",
 		"LASER_BLADE": "Alterne entre :\n1. Fait tournoyer une Lame Laser qui peut se déplacer derrière sa cible, le lanceur gagne [25,SP] SHIELD et inflige [25,SP] SPECIAL à la cible et à tous les ennemis ADJACENT sur son chemin.\n2. Fait tournoyer une Lame Laser devant eux, infligeant 2 fois [25,SP] + ATK comme SPECIAL.",
@@ -3182,7 +3182,7 @@
 	},
 	"synergy_description": {
 		"NORMAL": "Les Pokémon NORMAL et leurs alliés ADJACENT gagnent des bonus de SHIELD lorsque le combat commence.",
-		"GRASS": "Les Pokémon GRASS guérissent et produisent des baies avec le temps.",
+		"GRASS": "Les Pokémon GRASS guérissent et produisent des baies avec le temps. 40% des soins en surplus sont convertis en HP max.",
 		"FIRE": "Les Pokémon FIRE gagnent de l'ATK après chaque attaque et ont une chance d'infliger BURN à leurs ennemis.",
 		"WATER": "Les Pokémon WATER génèrent plus de PP et peuvent être pêchés avec une canne.",
 		"ELECTRIC": "Les attaques de base des Pokémon ELECTRIC peuvent déclencher deux attaques supplémentaires.{{additionalInfo}}",

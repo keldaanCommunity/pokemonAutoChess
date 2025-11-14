@@ -281,11 +281,7 @@ export default abstract class PokemonState {
       }
       return { healReceived: 0, overheal: 0 }
     }
-    if (
-      pokemon.hp > 0 &&
-      pokemon.hp < pokemon.maxHP &&
-      !pokemon.status.protect
-    ) {
+    if (pokemon.hp > 0 && !pokemon.status.protect) {
       if (apBoost > 0) {
         heal *= 1 + (apBoost * caster.ap) / 100
       }
@@ -303,11 +299,10 @@ export default abstract class PokemonState {
       }
 
       heal = Math.round(heal)
-      const healReceived = Math.min(pokemon.maxHP - pokemon.hp, heal)
-
-      pokemon.hp = Math.min(pokemon.maxHP, pokemon.hp + heal)
-
-      const overheal = min(0)(pokemon.hp + heal - pokemon.maxHP)
+      const missingHP = pokemon.maxHP - pokemon.hp
+      const healReceived = max(missingHP)(heal)
+      const overheal = min(0)(heal - missingHP)
+      pokemon.hp += healReceived
 
       if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
@@ -321,6 +316,10 @@ export default abstract class PokemonState {
           })
         }
         caster.healDone += healReceived
+      }
+
+      if (overheal > 0 && pokemon.types.has(Synergy.GRASS)) {
+        pokemon.addMaxHP(0.4 * overheal, pokemon, 0, false, false)
       }
 
       return { healReceived, overheal }

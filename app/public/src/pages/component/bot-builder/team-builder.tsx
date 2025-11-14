@@ -278,7 +278,9 @@ export default function TeamBuilder(props: {
 
   return (
     <div id="team-builder">
-      <Synergies synergies={synergies} tooltipPortal={false} />
+      <div className="synergies-container my-box">
+        <Synergies synergies={synergies} tooltipPortal={false} />
+      </div>
       <div className="actions">
         {ingame && isAdmin && (
           <details>

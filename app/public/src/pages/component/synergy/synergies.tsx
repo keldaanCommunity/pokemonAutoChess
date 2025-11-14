@@ -1,9 +1,5 @@
-import React from "react"
-import { useTranslation } from "react-i18next"
 import { SynergyTriggers } from "../../../../../config"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { usePreference } from "../../../preferences"
-import DraggableWindow from "../modal/draggable-window"
 import SynergyComponent from "./synergy-component"
 
 import "./synergies.css"
@@ -12,9 +8,6 @@ export default function Synergies(props: {
   synergies: [string, number][]
   tooltipPortal: boolean
 }) {
-  const { t } = useTranslation()
-
-  const [synergiesPosition, setSynergiesPosition] = usePreference("synergiesPosition")
   const synergies = Object.keys(Synergy)
     .sort((a, b) => {
       const fa = props.synergies.find((e) => e[0] == a)
@@ -37,12 +30,7 @@ export default function Synergies(props: {
     })
 
   return (
-    <DraggableWindow
-      title={t("synergies")}
-      className="my-container synergies-container"
-      initialPosition={synergiesPosition}
-      onMove={(position) => setSynergiesPosition(position)}
-    >
+    <div className="synergies-list">
       {synergies.map((type, index) => {
         const s = props.synergies.find((e) => e[0] == type)!
         return (
@@ -55,6 +43,6 @@ export default function Synergies(props: {
           />
         )
       })}
-    </DraggableWindow>
+    </div>
   )
 }
