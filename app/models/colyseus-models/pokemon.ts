@@ -16048,8 +16048,8 @@ export class OgerponTeal extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16070,8 +16070,8 @@ export class OgerponTealMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16093,8 +16093,8 @@ export class OgerponWellspring extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16115,8 +16115,8 @@ export class OgerponWellspringMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16139,8 +16139,8 @@ export class OgerponHearthflame extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16161,8 +16161,8 @@ export class OgerponHearthflameMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16185,8 +16185,8 @@ export class OgerponCornerstone extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16207,8 +16207,8 @@ export class OgerponCornerstoneMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL

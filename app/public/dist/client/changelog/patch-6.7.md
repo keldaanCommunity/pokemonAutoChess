@@ -39,6 +39,7 @@
 - Changed Roost (Pidove): now gain shield instead of healing HP
 - Rework of Rotom Drone: now part of the Rotom line
 - Rework of Rotom: now has 7 different forms that can be switched between with Rotom Catalog.
+- Buff Ogerpon (all forms): Def/SpeDef 8/8 → 14/16
 
 # Changes to Synergies
 
