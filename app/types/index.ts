@@ -42,8 +42,6 @@ export * from "./enum/Emotion"
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
 
-export const USERNAME_REGEXP = /^(\p{Letter}|[0-9]|\.|-|_){3,24}$/u
-
 export type PkmCustom = { shiny?: boolean; emotion?: Emotion }
 export interface PkmWithCustom extends PkmCustom {
   name: Pkm
