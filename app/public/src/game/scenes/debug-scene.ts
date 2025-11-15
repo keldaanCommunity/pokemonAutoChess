@@ -149,17 +149,19 @@ export class DebugScene extends Phaser.Scene {
       animationName = anims.eat
     }
 
-    try {
-      this.animationManager?.play(this.pokemonSprite, animationName, {
-        repeat: -1
-      })
-    } catch (err) {
-      logger.error(
-        `Error playing animation ${this.pokemonSprite.name} ${animationType}: ${animationName}`,
-        err
-      )
-    }
-    this.applyStatusAnimation(status)
+    this.pokemonSprite.once("loaded", () => {
+      try {
+        this.animationManager?.play(this.pokemonSprite!, animationName, {
+          repeat: -1
+        })
+      } catch (err) {
+        logger.error(
+          `Error playing animation ${this.pokemonSprite!.name} ${animationType}: ${animationName}`,
+          err
+        )
+      }
+      this.applyStatusAnimation(status)
+    })
   }
 
   updateMap(mapName: DungeonPMDO | "town"): Promise<void> {

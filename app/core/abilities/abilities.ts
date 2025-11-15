@@ -7509,6 +7509,7 @@ export class VineWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .map((cell) => cell.value)
@@ -7519,7 +7520,7 @@ export class VineWhipStrategy extends AbilityStrategy {
           enemy.status.triggerParalysis(3000, enemy, pokemon)
         }
       })
-    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -9298,7 +9299,7 @@ export class PowerWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60][pokemon.stars - 1] ?? 60
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
 
     const furthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target

@@ -47,6 +47,7 @@
 - Pumpkaboo and Gourgeist now have Light synergy in addition to their existing synergies. HP 90/190 → 80/180, Attack 13/26 → 10/22
 - Switch defensive stats of Burmy Trash and Burmy Sandy, and Wormadam Trash and Wormadam Sandy
 - Remoraid can now be fished when playing Wild, based on wild chance.
+- Switch abilities of Tangela and Carnivine: Tangela gets Vine Whip, Carnivine gets Power Whip
 
 # Changes to Synergies
 

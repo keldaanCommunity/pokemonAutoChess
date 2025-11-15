@@ -12212,7 +12212,7 @@ export class Carnivine extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 2
-  skill = Ability.VINE_WHIP
+  skill = Ability.POWER_WHIP
 }
 
 export class Sableye extends Pokemon {
@@ -15023,7 +15023,7 @@ export class Tangela extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.POWER_WHIP
+  skill = Ability.VINE_WHIP
   additional = true
 }
 
@@ -15042,7 +15042,7 @@ export class Tangrowth extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.POWER_WHIP
+  skill = Ability.VINE_WHIP
   additional = true
 }
 
