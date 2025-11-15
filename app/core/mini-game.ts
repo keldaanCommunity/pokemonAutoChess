@@ -589,10 +589,7 @@ export class MiniGame {
             if (type === Synergy.FLORA || type === Synergy.LIGHT) {
               levelReached = min(0)(levelReached - 1)
             }
-            if (
-              stageLevel === 20 &&
-              (type === Synergy.GOURMET || type === Synergy.NORMAL)
-            ) {
+            if (stageLevel === 20 && type === Synergy.GOURMET) {
               // not enough legendaries of that type
               levelReached = max(2)(levelReached)
             }
