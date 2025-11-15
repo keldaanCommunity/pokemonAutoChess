@@ -1309,6 +1309,7 @@ export default class BattleManager {
         trooperBrass.shiny,
         trooperBrass.emotion
       )
+      trooperInBattle.maxHP = trooperInBattle.hp
       const trooperSprite = new PokemonSprite(
         this.scene,
         coordinates[0] + (i + 1) * 20,
@@ -1320,13 +1321,6 @@ export default class BattleManager {
       )
       trooperSprite.setDepth(DEPTH.POKEMON_TROOPER)
       trooperBrassSprite.troopers?.push(trooperSprite)
-      trooperSprite.setScale(0)
-      this.scene.tweens.add({
-        targets: trooperSprite,
-        scale: 1,
-        duration: 500,
-        ease: "Power2"
-      })
 
       this.scene.animationManager?.animatePokemon(
         trooperSprite,
