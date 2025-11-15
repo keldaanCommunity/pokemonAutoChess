@@ -87,6 +87,7 @@
 - Max fight duration has been increased from 40 seconds to 45 seconds. You should get less draws now.
 - Increased base duration of item carousel from 15 seconds to 16 seconds, and base retention delay from 5 seconds to 6 seconds. A bit more time to read item descriptions and make your choice.
 - Units with both Burn and Freeze status now unfreeze twice faster
+- Synergies have been reordered based on their amount of families, unique, legendary and special excluded. This has an impact in case of equalities between synergies, notably: Arceus/Kecleon synergies, synergies obtained with Unown W, which synergy is Porygon converted to.
 
 # UI
 
