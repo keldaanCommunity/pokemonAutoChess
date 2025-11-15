@@ -459,6 +459,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   })
   const adjacentAllies = values(player.board).filter(
     (p) =>
+      isOnBench(p) === false &&
       distanceC(
         milcery.positionX,
         milcery.positionY,

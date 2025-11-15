@@ -873,17 +873,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
 
-      let freezeChance = 0
-      if (this.effects.has(EffectEnum.CHILLY)) {
-        freezeChance = 0.2
-      } else if (this.effects.has(EffectEnum.FROSTY)) {
-        freezeChance = 0.3
-      } else if (this.effects.has(EffectEnum.FREEZING)) {
-        freezeChance = 0.4
-      } else if (this.effects.has(EffectEnum.SHEER_COLD)) {
-        freezeChance = 0.4
-      }
-      freezeChance += nbIcyRocks * 0.05
+      const freezeChance = 0.3 + nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
         target.status.triggerFreeze(2000, target)
       }

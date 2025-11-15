@@ -216,16 +216,8 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("tm_hm_description"))}</p>
         <ul>
-          <ItemList
-            items={TMs}
-            icon={"assets/item/TM.png"}
-            onItemHover={setItemHovered}
-          />
-          <ItemList
-            items={HMs}
-            icon={"assets/item/HM.png"}
-            onItemHover={setItemHovered}
-          />
+          <ItemList items={TMs} onItemHover={setItemHovered} />
+          <ItemList items={HMs} onItemHover={setItemHovered} />
         </ul>
 
         <h3>

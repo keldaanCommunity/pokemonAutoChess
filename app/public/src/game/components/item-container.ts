@@ -57,17 +57,12 @@ export default class ItemContainer extends DraggableObject {
       this.circle.setFrame(this.cellIndex * 3 + (this.draggable ? 0 : 2))
     }
     this.add(this.circle)
-    const spriteName = TMs.includes(item)
-      ? "TM"
-      : HMs.includes(item)
-        ? "HM"
-        : item
     this.sprite = new GameObjects.Image(
       scene,
       0,
       0,
       "item",
-      spriteName + ".png"
+      item + ".png"
     ).setScale(pokemonId === null ? 0.5 : 0.25)
 
     this.add(this.sprite)

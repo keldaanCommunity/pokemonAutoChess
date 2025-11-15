@@ -39,6 +39,8 @@
 - Changed Roost (Pidove): now gain shield instead of healing HP
 - Rework of Rotom Drone: now part of the Rotom line
 - Rework of Rotom: now has 7 different forms that can be switched between with Rotom Catalog.
+- Buff Ogerpon (all forms): Def/SpeDef 8/8 → 14/16
+- Alcremie passive no longer count benched units to determine its flavor.
 
 # Changes to Synergies
 
@@ -47,6 +49,7 @@
 - New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
 - Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
 - New effect for Grass: 40% of overheal is now gained as max HP
+- Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
 
 # Changes to Items
 
@@ -74,6 +77,7 @@
 - New town encounter at stage 17: Croagunk gives all players an Exchange Ticket
 - Wobbuffet encounter now gives all players a Recycle Ticket instead of an Exchange Ticket. It can now also be encountered at stage 22 and 27.
 - Sableye can no longer be encountered at stage 4, but can now be encountered at stage 17.
+- Kecleon can no longer be encountered after stage 22.
 
 # Gameplay
 
@@ -87,6 +91,7 @@
 - Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
 - Wiki items section has been reworked for better readability.
 - New section on the wiki: Stages
+- New icons for TM and HM items
 
 # Bugfix
 

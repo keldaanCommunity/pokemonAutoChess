@@ -75,7 +75,6 @@ export const TownEncountersByStage: {
     [Pkm.WOBBUFFET]: 1 / 20
   },
   27: {
-    [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,
@@ -84,7 +83,6 @@ export const TownEncountersByStage: {
     [Pkm.WOBBUFFET]: 1 / 20
   },
   34: {
-    [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SPINDA]: 1 / 20,

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { USERNAME_REGEXP } from "../../../../../types"
+import { USERNAME_REGEXP } from "../../../../../config"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   changeName,
