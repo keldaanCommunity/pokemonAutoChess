@@ -71,9 +71,6 @@ export function PokemonReport() {
               setSynergy(e.target.value as Synergy | "all")
             }}
           >
-            <button>
-              <selectedcontent></selectedcontent>
-            </button>
             <option value={"all"}>
               {t("all")} {t("synergies")}
             </option>

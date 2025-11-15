@@ -148,17 +148,6 @@ select.is-light {
   color: black;
 }
 
-select selectedcontent {
-  display: flex;
-  align-items: center;
-  font-weight: normal;
-}
-
-select selectedcontent img,
-option img {
-  max-height: 1lh;
-}
-
 option {
   padding: 4px 8px;
 }
