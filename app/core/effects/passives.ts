@@ -37,6 +37,7 @@ import {
   OnAttackEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
+  OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
@@ -1002,6 +1003,11 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   })
 }, Passive.POIPOLE)
 
+const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
+  pokemon.addAttack(1, pokemon, 0, false, true)
+  pokemon.addStack()
+}
+
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -1234,13 +1240,7 @@ export const PassiveEffects: Partial<
     }, Passive.BAD_LUCK)
   ],
   [Passive.PRIMEAPE]: [
-    new OnResurrectEffect((pokemon) => {
-      pokemon.addAttack(1, pokemon, 0, false, true)
-      pokemon.addStack()
-    }, Passive.PRIMEAPE),
-    new OnDeathEffect(({ pokemon }) => {
-      pokemon.addAttack(1, pokemon, 0, false, true)
-      pokemon.addStack()
-    }, Passive.PRIMEAPE)
+    new OnResurrectEffect(addPrimeapeStack, Passive.PRIMEAPE),
+    new OnDeathEffect(addPrimeapeStack, Passive.PRIMEAPE)
   ]
 }

@@ -144,13 +144,23 @@ export class OnKillEffect extends Effect {
 }
 
 // applied on KO (does not proc if resurrection)
-interface OnDeathEffectArgs {
+export interface OnDeathEffectArgs {
   board: Board
   pokemon: PokemonEntity
   attacker: PokemonEntity | null
 }
 
 export class OnDeathEffect extends Effect {
+  apply(args: OnDeathEffectArgs) {}
+  constructor(
+    effect?: (args: OnDeathEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export class OnResurrectEffect extends Effect {
   apply(args: OnDeathEffectArgs) {}
   constructor(
     effect?: (args: OnDeathEffectArgs) => void,
@@ -324,16 +334,6 @@ export class OnShieldDepletedEffect extends Effect {
   override apply(args: OnShieldDepletedEffectArgs) {}
   constructor(
     effect?: (args: OnShieldDepletedEffectArgs) => void,
-    origin?: EffectOrigin
-  ) {
-    super(effect, origin)
-  }
-}
-
-export class OnResurrectEffect extends Effect {
-  override apply(pokemon: PokemonEntity) {}
-  constructor(
-    effect?: (pokemon: PokemonEntity) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

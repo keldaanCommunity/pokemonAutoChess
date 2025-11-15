@@ -41,6 +41,7 @@
 - Rework of Rotom: now has 7 different forms that can be switched between with Rotom Catalog.
 - Buff Ogerpon (all forms): Def/SpeDef 8/8 → 14/16
 - Alcremie passive no longer count benched units to determine its flavor.
+- Comfey is now dropped when a Pokémon resurrects, and the Pokémon lose its stats buffs upon resurrection.
 
 # Changes to Synergies
 

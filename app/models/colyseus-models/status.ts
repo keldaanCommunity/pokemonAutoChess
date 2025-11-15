@@ -1,7 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
-import { OnResurrectEffect } from "../../core/effects/effect"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -949,14 +948,11 @@ export default class Status extends Schema implements IStatus {
     this.resurrection = true
   }
 
-  triggerResurrection(pokemon: PokemonEntity) {
+  triggerResurrection(pokemon: PokemonEntity, board: Board) {
     this.resurrection = false
     this.resurrecting = true
     this.resurrectingCooldown = 2000
     pokemon.status.clearNegativeStatus()
-    pokemon
-      .getEffects(OnResurrectEffect)
-      .forEach((effect) => effect.apply(pokemon))
   }
 
   updateResurrecting(dt: number, pokemon: PokemonEntity) {

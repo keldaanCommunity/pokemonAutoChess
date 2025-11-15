@@ -502,12 +502,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
-    if (this.hp <= 0) return
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
     this.maxHP = min(1)(this.maxHP + value)
-    this.hp = clamp(this.hp + value, 1, this.maxHP)
+    if (this.hp > 0) {
+      // careful to not heal a KO pokemon
+      this.hp = clamp(this.hp + value, 1, this.maxHP)
+    }
     if (permanent && !this.isGhostOpponent) {
       ;(this.refToBoardPokemon as Pokemon).addMaxHP(value, this.player)
     }
@@ -1197,20 +1199,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           entity.cooldown = 1000
           target.player.pokemonsPlayed.add(flowerToSpawn.name)
         }
-      }
-    }
-
-    if (target.items.has(Item.COMFEY)) {
-      const nearestAvailableCoordinate =
-        this.state.getNearestAvailablePlaceCoordinates(target, board, 2)
-      if (nearestAvailableCoordinate) {
-        target.simulation.addPokemon(
-          PokemonFactory.createPokemonFromName(Pkm.COMFEY, target.player),
-          nearestAvailableCoordinate.x,
-          nearestAvailableCoordinate.y,
-          target.team,
-          false
-        )
       }
     }
 

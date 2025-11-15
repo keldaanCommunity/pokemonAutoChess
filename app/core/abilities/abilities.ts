@@ -1131,7 +1131,12 @@ export class KingShieldStrategy extends AbilityStrategy {
     pokemon.addShield(shield, pokemon, 1, crit)
     const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
-      pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board, true)
+      pokemon.moveTo(
+        farthestTarget.positionX,
+        farthestTarget.positionY,
+        board,
+        true
+      )
     }
     if (pokemon.name === Pkm.AEGISLASH) {
       pokemon.commands.push(
@@ -7579,7 +7584,7 @@ export class FloralHealingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     if (pokemon.items.has(Item.COMFEY) === false) {
-      // if comfey is hold item, we explicitely not trigger super.process() so that the pokemon doesn't get twice the oncast effects
+      // if comfey is hold item, we explicitely not trigger super.process() so that the pokemon doesn't get call the oncast effects in an infinite loop
       super.process(pokemon, board, target, crit)
     }
     pokemon.handleHeal(pokemon.maxPP, pokemon, 0, false)
@@ -15028,7 +15033,7 @@ export class TrimmingMowerStrategy extends AbilityStrategy {
       pokemon.positionY !== bestDestination.y
     ) {
       // Execute dash movement to optimal location
-      pokemon.moveTo(bestDestination.x, bestDestination.y, board)
+      pokemon.moveTo(bestDestination.x, bestDestination.y, board, false)
     }
 
     // Apply self-healing effect
