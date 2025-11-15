@@ -1,6 +1,6 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
-import { EloRankThreshold } from "../../../../../config"
+import { EloRankThreshold, RarityColor } from "../../../../../config"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import {
   fetchMetaPokemons,
@@ -10,6 +10,7 @@ import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import SynergyIcon from "../icons/synergy-icon"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
@@ -70,11 +71,15 @@ export function PokemonReport() {
               setSynergy(e.target.value as Synergy | "all")
             }}
           >
+            <button>
+              <selectedcontent></selectedcontent>
+            </button>
             <option value={"all"}>
               {t("all")} {t("synergies")}
             </option>
             {Object.keys(Synergy).map((s) => (
               <option value={s} key={s}>
+                <SynergyIcon type={s as Synergy} />
                 {t(`synergy.${s}`)}
               </option>
             ))}
@@ -87,7 +92,11 @@ export function PokemonReport() {
               {t("rarity_label")}: {t("all")}
             </option>
             {Object.keys(Rarity).map((r) => (
-              <option value={r} key={r}>
+              <option
+                value={r}
+                key={r}
+                style={{ color: RarityColor[r as Rarity] }}
+              >
                 {t(`rarity.${r}`)}
               </option>
             ))}
