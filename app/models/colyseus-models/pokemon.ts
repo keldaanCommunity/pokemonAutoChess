@@ -8664,11 +8664,11 @@ export class Noibat extends Pokemon {
     Synergy.SOUND,
     Synergy.FLYING
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.NOIVERN
   hp = 65
-  atk = 6
+  atk = 4
   speed = 64
   def = 2
   speDef = 2
@@ -8677,16 +8677,17 @@ export class Noibat extends Pokemon {
   skill = Ability.RAZOR_WIND
   additional = true
 }
+
 export class Noivern extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
     Synergy.SOUND,
     Synergy.FLYING
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 150
-  atk = 14
+  hp = 135
+  atk = 10
   speed = 64
   def = 6
   speDef = 6
@@ -14212,7 +14213,11 @@ export class DeerlingSpring extends Pokemon {
 }
 
 export class DeerlingSummer extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.GOURMET])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14279,7 +14284,11 @@ export class SawsbuckSpring extends Pokemon {
 }
 
 export class SawsbuckSummer extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.GOURMET])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.RARE
   additional = true
   stars = 2

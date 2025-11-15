@@ -43,6 +43,7 @@
 - Alcremie passive no longer count benched units to determine its flavor.
 - Comfey is now dropped when a Pokémon resurrects, and the Pokémon lose its stats buffs upon resurrection.
 - Deerling line now have Grass synergy in addition to their existing synergies.
+- Moved Noibat to Uncommon category
 
 # Changes to Synergies
 
