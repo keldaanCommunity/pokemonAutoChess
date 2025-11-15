@@ -2608,7 +2608,7 @@
 		"SMOKE_BALL": "Una vez que esté por debajo del 40% de HP máximo, suelta la bola de humo y salta a una celda lejana. Cada enemigo ADJACENT queda PARALYSIS y BLINDED durante 4 segundos.",
 		"XRAY_VISION": "+50 SPEED. Los ataques del poseedor ya no pueden fallar.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Los golpes críticos aplican ARMOR_BREAK durante 2 segundos.",
-		"PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de contraataque.",		
+		"PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de contraataque.",
 		"PUNCHING_GLOVE": "Los ataques infligen un 8 % del HP máximo del objetivo como PHYSICAL adicional.",
 		"MUSCLE_BAND": "Cuando el portador recibe daño, gana 1 acumulación. Cada 2 acumulaciones, el titular gana +2 DEF, +1 ATK y +5 SPEED (máx. 20 acumulaciones)",
 		"WONDER_BOX": "Al comienzo de cada batalla, la WONDER_BOX es reemplazada por 2 objetos temporales (máximo 3 objetos equipados)",
