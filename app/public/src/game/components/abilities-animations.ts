@@ -1972,10 +1972,10 @@ export const AbilitiesAnimations: {
     rotation: -Math.PI / 2,
     duration: 400
   }),
-  [Ability.DRAGON_BREATH]: orientedProjectile({
-    distance: 1.5,
+  [Ability.DRAGON_BREATH]: onCaster({
     oriented: true,
-    rotation: -Math.PI / 2
+    origin: [0.5, 1],
+    rotation: Math.PI / 2
   }),
   [Ability.BONEMERANG]: orientedProjectile({
     distance: 5,
