@@ -14195,7 +14195,7 @@ export class Ambipom extends Pokemon {
 }
 
 export class DeerlingSpring extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14212,7 +14212,7 @@ export class DeerlingSpring extends Pokemon {
 }
 
 export class DeerlingSummer extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.GOURMET])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14229,7 +14229,7 @@ export class DeerlingSummer extends Pokemon {
 }
 
 export class DeerlingAutumn extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.WILD])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14246,7 +14246,7 @@ export class DeerlingAutumn extends Pokemon {
 }
 
 export class DeerlingWinter extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ICE])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.ICE])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14263,7 +14263,7 @@ export class DeerlingWinter extends Pokemon {
 }
 
 export class SawsbuckSpring extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14279,7 +14279,7 @@ export class SawsbuckSpring extends Pokemon {
 }
 
 export class SawsbuckSummer extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.GOURMET])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14295,7 +14295,7 @@ export class SawsbuckSummer extends Pokemon {
 }
 
 export class SawsbuckAutumn extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.WILD])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14311,7 +14311,7 @@ export class SawsbuckAutumn extends Pokemon {
 }
 
 export class SawsbuckWinter extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ICE])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.ICE])
   rarity = Rarity.RARE
   additional = true
   stars = 2
