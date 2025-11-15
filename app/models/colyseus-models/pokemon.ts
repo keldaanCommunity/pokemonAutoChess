@@ -14810,8 +14810,8 @@ export class BurmySandy extends Pokemon {
   hp = 70
   atk = 7
   speed = 46
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14835,8 +14835,8 @@ export class BurmyTrash extends Pokemon {
   hp = 70
   atk = 7
   speed = 46
-  def = 6
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14878,8 +14878,8 @@ export class WormadamSandy extends Pokemon {
   hp = 150
   atk = 13
   speed = 46
-  def = 6
-  speDef = 6
+  def = 9
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14900,8 +14900,8 @@ export class WormadamTrash extends Pokemon {
   hp = 150
   atk = 13
   speed = 46
-  def = 9
-  speDef = 3
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
