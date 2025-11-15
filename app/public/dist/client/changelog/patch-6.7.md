@@ -71,6 +71,7 @@
 - Buff Wide Lens: critical chance 10% → 15%
 - Removed base 10 speed from Gracidea Flower
 - Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
+- Incense base stats: 10 special defense 30 AP → 10 special defense 30 Luck
 
 # Town Encounters
 
