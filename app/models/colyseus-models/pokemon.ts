@@ -8599,12 +8599,12 @@ export class Cacturne extends Pokemon {
 }
 
 export class Pumpkaboo extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.GOURGEIST
-  hp = 90
-  atk = 13
+  hp = 80
+  atk = 10
   speed = 52
   def = 12
   speDef = 6
@@ -8614,11 +8614,11 @@ export class Pumpkaboo extends Pokemon {
   additional = true
 }
 export class Gourgeist extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 190
-  atk = 26
+  hp = 180
+  atk = 22
   speed = 52
   def = 20
   speDef = 10

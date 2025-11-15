@@ -42,8 +42,9 @@
 - Buff Ogerpon (all forms): Def/SpeDef 8/8 → 14/16
 - Alcremie passive no longer count benched units to determine its flavor.
 - Comfey is now dropped when a Pokémon resurrects, and the Pokémon lose its stats buffs upon resurrection.
-- Deerling line now have Grass synergy in addition to their existing synergies.
+- Deerling and Sawsbuck now have Grass synergy in addition to their existing synergies.
 - Moved Noibat to Uncommon category
+- Pumpkaboo and Gourgeist now have Light synergy in addition to their existing synergies. HP 90/190 → 80/180, Attack 13/26 → 10/22
 
 # Changes to Synergies
 
