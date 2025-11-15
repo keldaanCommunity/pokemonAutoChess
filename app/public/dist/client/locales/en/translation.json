@@ -3145,7 +3145,7 @@
 		"FAIRY_FIELD": "Fairy Field"
 	},
 	"status_description": {
-		"BURN": "Deals 5% of max HP as TRUE every second. Reduce healing by 50%.",
+		"BURN": "Deals 5% of max HP as TRUE every second. Reduce healing and FREEZE duration by 50%.",
 		"SILENCE": "Prevents casting abilities and gaining PP",
 		"FATIGUE": "Reduce PP gain from all sources by 50%",
 		"POISONNED": "Deals 5% of max HP per stack as TRUE every second. Can stack up to 3 times by default.",
