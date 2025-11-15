@@ -701,11 +701,6 @@ export default abstract class PokemonState {
         } else {
           death = true
         }
-
-        if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.applyStat(Stat.ATK, 1, true)
-          pokemon.addStack()
-        }
       }
 
       if (death) {

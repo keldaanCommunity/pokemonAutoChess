@@ -29,9 +29,14 @@ export abstract class Effect {
 // applied on fight start or when spawning
 export class OnSpawnEffect extends Effect {
   constructor(
-    effect?: (entity: PokemonEntity, player?: Player, isSpawn?: boolean) => void
+    effect?: (
+      entity: PokemonEntity,
+      player?: Player,
+      isSpawn?: boolean
+    ) => void,
+    origin?: EffectOrigin
   ) {
-    super(effect)
+    super(effect, origin)
   }
   override apply(entity: PokemonEntity, player?: Player, isSpawn?: boolean) {}
 }
@@ -73,8 +78,11 @@ interface OnStageStartEffectArgs {
 
 // applied in between rounds at the start of the picking phase
 export class OnStageStartEffect extends Effect {
-  constructor(effect?: (args: OnStageStartEffectArgs) => void) {
-    super(effect)
+  constructor(
+    effect?: (args: OnStageStartEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
   }
   apply(args: OnStageStartEffectArgs) {}
 }
@@ -88,8 +96,11 @@ interface OnSimulationStartEffectArgs {
 
 // applied after simulation started, when the board is fully set up
 export class OnSimulationStartEffect extends Effect {
-  constructor(effect?: (args: OnSimulationStartEffectArgs) => void) {
-    super(effect)
+  constructor(
+    effect?: (args: OnSimulationStartEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
   }
   apply(args: OnSimulationStartEffectArgs) {}
 }
@@ -313,6 +324,16 @@ export class OnShieldDepletedEffect extends Effect {
   override apply(args: OnShieldDepletedEffectArgs) {}
   constructor(
     effect?: (args: OnShieldDepletedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export class OnResurrectEffect extends Effect {
+  override apply(pokemon: PokemonEntity) {}
+  constructor(
+    effect?: (pokemon: PokemonEntity) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
