@@ -661,12 +661,17 @@ export default class Shop {
     const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
-    if (mantine && chance(REMORAID_RATE, mantine)) return Pkm.REMORAID
 
     const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
+
+    if (
+      finals.has(Pkm.REMORAID) === false &&
+      ((mantine && chance(REMORAID_RATE, mantine)) || chance(player.wildChance))
+    )
+      return Pkm.REMORAID
 
     let rarity = Rarity.SPECIAL
     for (const r in rarityProbability) {
