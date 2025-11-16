@@ -23,7 +23,9 @@ export class Board {
     this.rows = rows
     this.columns = colums
     this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
-    this.boardEffects = new Array(this.rows * this.columns).map(() => [])
+    this.boardEffects = new Array(this.rows * this.columns)
+      .fill(0)
+      .map(() => [])
   }
 
   getEntityOnCell(x: number, y: number): PokemonEntity | undefined {
@@ -463,7 +465,7 @@ export class Board {
     const previousEffects = this.boardEffects[y * this.columns + x]
     const entityOnCell = this.getEntityOnCell(x, y)
     if (entityOnCell) {
-      entityOnCell.simulation.applyEffect(effect, entityOnCell)
+      entityOnCell.effects.add(effect)
     }
     if (!previousEffects.includes(effect)) {
       this.boardEffects[y * this.columns + x].push(effect)
