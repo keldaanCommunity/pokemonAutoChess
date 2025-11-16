@@ -2451,7 +2451,7 @@
 		"SMOKE_BALL": "Sobald die maximale HP unter 40 % liegt, lassen Sie die Rauchkugel fallen und springen Sie in eine Zelle weiter entfernt. Jeder benachbarte Feind ist 4 Sekunden lang PARALYSIS und BLINDED.",
 		"XRAY_VISION": "+50 SPEED. Die Angriffe des Pokémons können nicht mehr verfehlen.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Kritische Treffer verursachen 2 Sekunden lang ARMOR_BREAK.",
-		"PROTECTIVE_PADS": "Angriffe verursachen doppelten Schaden gegen SHIELD. Der Benutzer ist vor Rückstoßschäden und Vergeltungseffekten geschützt.",		
+		"PROTECTIVE_PADS": "Angriffe verursachen doppelten Schaden gegen SHIELD. Der Benutzer ist vor Rückstoßschäden und Vergeltungseffekten geschützt.",
 		"LOADED_DICE": "Angriffe haben eine [50,LK]% Chance, auch den angrenzenden Gegner mit dem niedrigsten Leben mit demselben Schaden zu treffen. Der zusätzliche Angriff kann Treffer-Effekte auslösen.",
 		"PUNCHING_GLOVE": "Angriffe verursachen 8% der max. HP des Ziels als zusätzlichen Schaden",
 		"MUSCLE_BAND": "Wenn der Träger Schaden erleidet, erhältst du 1 Stapel. Alle 2 Stapel erhält der Besitzer +2 DEF, +1 ATK und +5 SPEED (maximal 20 Stapel).",
