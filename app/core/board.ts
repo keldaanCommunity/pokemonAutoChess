@@ -17,15 +17,16 @@ export class Board {
   rows: number
   columns: number
   cells: Array<PokemonEntity | undefined>
-  boardEffects: EffectEnum[][]
+  boardEffects: Set<EffectEnum>[]
 
   constructor(rows: number, colums: number) {
     this.rows = rows
     this.columns = colums
     this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
-    this.boardEffects = new Array(this.rows * this.columns)
-      .fill(0)
-      .map(() => [])
+    this.boardEffects = Array.from(
+      { length: this.rows * this.columns },
+      () => new Set()
+    )
   }
 
   getEntityOnCell(x: number, y: number): PokemonEntity | undefined {
@@ -467,8 +468,8 @@ export class Board {
     if (entityOnCell) {
       entityOnCell.effects.add(effect)
     }
-    if (!previousEffects.includes(effect)) {
-      this.boardEffects[y * this.columns + x].push(effect)
+    if (!previousEffects.has(effect)) {
+      this.boardEffects[y * this.columns + x].add(effect)
       // show anim effect client side
       simulation.room.broadcast(Transfer.BOARD_EVENT, {
         simulationId: simulation.id,
@@ -480,12 +481,15 @@ export class Board {
   }
 
   clearBoardEffect(x: number, y: number, simulation: Simulation) {
-    const effects = this.boardEffects[y * this.columns + x]
+    const index = y * this.columns + x
+    const existingEffects = this.boardEffects[index]
     const entityOnCell = this.getEntityOnCell(x, y)
+
+    this.boardEffects[index].clear()
     if (entityOnCell) {
-      effects.forEach((effect) => entityOnCell.effects.delete(effect))
+      existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
     }
-    if (effects.length > 0) {
+    if (existingEffects.size > 0) {
       // clean effect anim client side
       simulation.room.broadcast(Transfer.BOARD_EVENT, {
         simulationId: simulation.id,
@@ -494,7 +498,6 @@ export class Board {
         y
       })
     }
-    this.boardEffects[y * this.columns + x] = []
   }
 
   getKnockBackPlace(
