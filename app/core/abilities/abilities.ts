@@ -8273,6 +8273,7 @@ export class ShieldsDownStrategy extends AbilityStrategy {
     pokemon.index = PkmIndex[pkm]
     pokemon.name = pkm
     pokemon.skill = Ability.SHIELDS_UP
+    pokemon.cooldown = 0
     if (pokemon.player) {
       pokemon.player.pokemonsPlayed.add(pkm)
     }
@@ -8291,6 +8292,7 @@ export class ShieldsUpStrategy extends AbilityStrategy {
     pokemon.index = PkmIndex[Pkm.MINIOR]
     pokemon.name = Pkm.MINIOR
     pokemon.skill = Ability.SHIELDS_DOWN
+    pokemon.cooldown = 0
   }
 }
 

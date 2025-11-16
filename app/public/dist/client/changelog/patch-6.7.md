@@ -49,6 +49,7 @@
 - Remoraid can now be fished when playing Wild, based on wild chance.
 - Switch abilities of Tangela and Carnivine: Tangela gets Vine Whip, Carnivine gets Power Whip
 - Changed Grookey line passive: no longer gives PP to user and other drummers. PP gained 2/3/4 → 2/3/5
+- Buff Minior Shields Up & Down: removed ability cooldown
 
 # Changes to Synergies
 
