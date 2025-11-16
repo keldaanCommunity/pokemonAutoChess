@@ -2967,7 +2967,7 @@
 		"CHARCADET": "Derrotar al dúo Mew otorgará a Charcadet una AUSPICIOUS_ARMOR o una MALICIOUS_ARMOR, dependiendo de qué sinergia predomina en tu equipo entre PSYCHIC o GHOST.",
 		"ZACIAN": "Zacian busca una batalla épica contra los pájaros legendarios para conseguir su RUSTED_SWORD.",
 		"PARTING_SHOT": "Cuando toma como objetivo a un enemigo por primera vez, lo insulta, lo cual reduce su ATK y AP en un 20%.",
-		"DRUMMER": "Si hay aliados y no hay enemigos en rango, toca su tambor en lugar de atacar, lo cual otorga [2,3,4] PP adicionales al usuario y a los aliados adyacentes. Esto cuenta como ataques.",
+		"DRUMMER": "Si hay aliados y no hay enemigos en rango, toca su tambor en lugar de atacar, lo cual otorga [2,3,5] PP adicionales a los aliados adyacentes (excepto otros tambores). Esto cuenta como ataques.",
 		"KIRLIA": "Evolucionará a Gallade o Gardevoir dependiendo de la sinergia predominante entre FIGHTING y FAIRY, respectivamente.",
 		"KUBFU": "Gana 5 de AP permanentes cuando consigue un KO con su habilidad hasta 10 veces, tras lo que conseguirás el SCROLL_OF_DARKNESS.\nGana 3 de SPEED permanentes cuando consigue un KO con un ataque básico hasta 10 veces, tras lo que conseguirás el SCROLL_OF_WATERS.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) es inmune al estado SLEEP.",

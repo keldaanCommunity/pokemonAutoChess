@@ -3032,7 +3032,7 @@
 		"CHARCADET": "打败超梦后，碳小侍会根据PSYCHIC和GHOST共鸣中等级较高的一方获得一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR。",
 		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
 		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和20点AP。",
-		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为使用者和ADJACENT我方宝可梦额外恢复[2,3,4]点PP，且算作一次普通攻击。",
+		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为使用者和ADJACENT我方宝可梦额外恢复[2,3,5]点PP，且算作一次普通攻击。",
 		"KIRLIA": "奇鲁莉安会根据FAIRY和FIGHTING共鸣中等级较高的一方进化为沙奈朵或艾路雷朵。",
 		"KUBFU": "每次使用招式击倒宝可梦时，永久提升5点AP，至多提升10次，封顶时获得SCROLL_OF_DARKNESS。\n每次普通攻击击倒宝可梦时，永久提升3点SPEED，至多提升10次，封顶时获得SCROLL_OF_WATERS。",
 		"VIGOROTH": "$t(pkm.VIGOROTH)免疫SLEEP",

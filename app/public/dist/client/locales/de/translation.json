@@ -2770,7 +2770,7 @@
 		"CHARCADET": "Das Besiegen des Mew-Duos verleiht Knarbon entweder AUSPICIOUS_ARMOR oder MALICIOUS_ARMOR, je nachdem, ob deine dominante Synergie PSYCHIC oder GHOST ist.",
 		"ZACIAN": "Zacian sucht den Kampf mit den Legendären Vögeln um sich sein RUSTED_SWORD zurückzuerobern",
 		"PARTING_SHOT": "Schüchtert das Ziel ein wenn es zum ersten mal Angegriffen wird, was ATK und AP um 20% reduziert.",
-		"DRUMMER": "Wenn Verbündete aber keine Gegener in reichweite sind, trommelt es statt anzugreifen, was [2,3,4] bonus PP zum Trommler und benachbarten Verbündeten gibt. Trommeln zählt als Angriff.",
+		"DRUMMER": "Wenn Verbündete aber keine Gegener in reichweite sind, trommelt es statt anzugreifen, was [2,3,5] bonus PP zum benachbarten Verbündeten gibt (außer Trommler). Trommeln zählt als Angriff.",
 		"KIRLIA": "Entwickelt sich zu Galagladi oder Guardevoir weiter abhängig davon, ob FIGHTING oder FAIRY dominanter ist.",
 		"KUBFU": "Erhalten Sie 5 permanente AP, wenn mit seiner Fähigkeit einen KO erzielt wird bis zu 10 KOs, erhalte danach SCROLL_OF_DARKNESS.\nErhalte 3 permanente SPEED, wenn du mit einem Basisangriff einen KO erzielst bis zu 10 KO, danach erhältst du die SCROLL_OF_WATERS.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) ist immun zu SLEEP",

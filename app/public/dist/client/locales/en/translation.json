@@ -3057,7 +3057,7 @@
 		"CHARCADET": "Defeating the Mew duo will grant Charchadet with an AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR based on your dominant synergy between PSYCHIC or GHOST",
 		"ZACIAN": "Zacian seeks an epic battle with the legendary birds to reclaim its RUSTED_SWORD",
 		"PARTING_SHOT": "When targeting an enemy for the first time, insults them, which reduces their ATK by 20% and AP by 20",
-		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,4] bonus PP to user and ADJACENT allies. This counts as an attack.",
+		"DRUMMER": "If there are allies and no enemies at range, beats their drum instead of attacking, which grants [2,3,5] bonus PP to ADJACENT allies (except other drummers). This counts as an attack.",
 		"KIRLIA": "Will evolve into Gallade or Gardevoir based on the dominant synergy between FIGHTING and FAIRY",
 		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",

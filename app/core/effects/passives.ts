@@ -68,11 +68,15 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
 
   pokemon.count.attackCount++
   pokemon.targetY = -1
-  const ppGained = 1 + pokemon.stars
+  const ppGained = [2, 3, 5][pokemon.stars - 1] ?? 5
   board
-    .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+    .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
     .forEach((cell) => {
-      if (cell.value && cell.value.team === pokemon.team) {
+      if (
+        cell.value &&
+        cell.value.team === pokemon.team &&
+        cell.value.passive !== Passive.DRUMMER
+      ) {
         cell.value.addPP(ppGained, pokemon, 0, false)
       }
     })
