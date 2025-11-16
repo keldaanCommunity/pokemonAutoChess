@@ -95,6 +95,7 @@
 - Units with both Burn and Freeze status now unfreeze twice faster
 - Synergies have been reordered based on their amount of families, unique, legendary and special excluded. This has an impact in case of equalities between synergies, notably: Arceus/Kecleon synergies, synergies obtained with Unown W, which synergy is Porygon converted to.
 - When evolving a pokemon by merging 3 copies, items held by units on the board are prioritized rather than those held by units on bench
+- Board effects (Smog, traps, terrain...) can now overlap on the same cell. Units moving into a cell with multiple board effects will gain all effects.
 
 # UI
 
