@@ -1603,7 +1603,10 @@
 		"WIGLETT": "Wiglett",
 		"WUGTRIO": "Wugtrio",
 		"FLUTTER_MANE": "Flutter Mane",
-		"WALKING_WAKE": "Walking Wake"
+		"WALKING_WAKE": "Walking Wake",
+		"KLINK": "Klink",
+		"KLANG": "Klang",
+		"KLINKLANG": "Klinklang"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",

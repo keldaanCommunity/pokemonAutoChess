@@ -15128,7 +15128,7 @@ export class GearGrindStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     //TODO: Implement Gear Grind ability logic
   }
-})
+}
 
 export * from "./hidden-power"
 

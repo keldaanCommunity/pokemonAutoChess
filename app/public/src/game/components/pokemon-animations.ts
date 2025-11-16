@@ -7295,24 +7295,27 @@ export const PokemonAnimations: {
   },
   [Pkm.KLINK]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Rotate,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT
+    hitSprite: HitSprite.STEEL_HIT,
+    shinyUnavailable: true
   },
   [Pkm.KLANG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Rotate,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT
+    hitSprite: HitSprite.STEEL_HIT,
+    shinyUnavailable: true
   },
   [Pkm.KLINKLANG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Charge,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Rotate,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT
+    hitSprite: HitSprite.STEEL_HIT,
+    shinyUnavailable: true
   },
   [Pkm.GALARIAN_SLOWPOKE]: {
     attack: AnimationType.Attack,
