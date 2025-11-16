@@ -13962,6 +13962,18 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
   }
 }
 
+export class GearGrindStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //TODO: implement Gear Grind ability
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -14459,5 +14471,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
   [Ability.FIRST_IMPRESSION]: new FirstImpressionStrategy(),
   [Ability.BARED_FANGS]: new BaredFangsStrategy(),
-  [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy()
+  [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy(),
+  [Ability.GEAR_GRIND]: new GearGrindStrategy()
 }
+

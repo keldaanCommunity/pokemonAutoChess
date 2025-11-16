@@ -16336,36 +16336,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board, 1)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board, 1)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
@@ -18722,7 +18722,7 @@ export class Klink extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
   rarity = Rarity.COMMON
   stars = 1
-  //evolution = Pkm.KLANG
+  evolution = Pkm.KLANG
   hp = 60
   atk = 5
   speed = 30
@@ -18730,8 +18730,38 @@ export class Klink extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.GEOMANCY
-  //skill = Ability.GEAR_GRIND
+  skill = Ability.GEAR_GRIND
+  regional = true
+}
+
+export class Klang extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.KLINKLANG
+  hp = 120
+  atk = 10
+  speed = 30
+  def = 12
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.GEAR_GRIND
+  regional = true
+}
+
+export class Klinklang extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 180
+  atk = 16
+  speed = 30
+  def = 18
+  speDef = 12
+  maxPP = 100
+  range = 1
+  skill = Ability.GEAR_GRIND
   regional = true
 }
 
@@ -19794,7 +19824,9 @@ export const PokemonClasses: Record<
   [Pkm.BASCULIN_WHITE]: BasculinWhite,
   [Pkm.BASCULEGION_FEMALE]: BasculegionFemale,
   [Pkm.BASCULEGION_MALE]: BasculegionMale,
-  [Pkm.KLINK]: Klink
+  [Pkm.KLINK]: Klink,
+  [Pkm.KLANG]: Klang,
+  [Pkm.KLINKLANG]: Klinklang
 }
 
 // declare all the classes in colyseus schema TypeRegistry

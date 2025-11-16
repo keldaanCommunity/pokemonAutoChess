@@ -7228,5 +7228,19 @@ export const PokemonAnimations: {
     emote: AnimationType.Rotate,
     attackSprite: AttackSprite.STEEL_RANGE,
     hitSprite: HitSprite.STEEL_HIT
+  },
+  [Pkm.KLANG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.STEEL_HIT
+  },
+  [Pkm.KLINKLANG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Rotate,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.STEEL_HIT
   }
 }
