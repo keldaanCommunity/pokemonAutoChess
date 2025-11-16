@@ -1,6 +1,6 @@
 // ecosystem.config.js
 const os = require("os")
-require('dotenv').config()
+require("dotenv").config()
 
 module.exports = {
   apps: [
@@ -21,7 +21,7 @@ module.exports = {
   deploy: {
     production: {
       user: "root",
-      host: process.env.DEPLOY_HOSTS?.split(',') || [],
+      host: process.env.DEPLOY_HOSTS?.split(",") || [],
       ref: "origin/prod",
       repo: "https://github.com/keldaanCommunity/pokemonAutoChess.git",
       path: "/home/deploy",

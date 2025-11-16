@@ -16,3 +16,9 @@
 .react-tooltip p:last-child {
   margin-bottom: 0;
 }
+
+:root {
+  --rt-opacity: 1 !important;
+  --rt-transition-show-delay: 0s !important;
+  --rt-transition-closing-delay: 0s !important;
+}

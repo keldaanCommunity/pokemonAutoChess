@@ -12,7 +12,8 @@
 
 .patchnotes .modal-body {
   flex: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
+  display: flex;
 }
 
 .patchnotes .modal-body h2 {
@@ -20,15 +21,9 @@
   border-bottom: 2px solid #80808080;
 }
 
-.patchnotes .modal-body ul {
-  padding: 0;
-  margin: auto;
-  justify-content: center;
-}
-
 .patchnotes .modal-body blockquote {
-  text-align: right;
-  color: gray;
+  float: right;
+  color: #ccc;
   margin: 0;
 }
 
@@ -38,20 +33,39 @@
   margin: 1em 0;
 }
 
-.patchnotes .modal-body > ul {
+.patchnotes-grid {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 32px;
   padding: 0;
 }
 
-.patchnotes .modal-body > ul > li {
+.patchnotes-grid > li {
   list-style: none;
   padding: 0;
 }
 
-@media (max-width: 640px) {
-  .patchnotes .modal-body {
-    padding: 0;
-  }
+.patchnotes-detail-view {
+  display: flex;
+}
+
+.detail-content {
+  display: flex;
+  gap: 0.5em;
+  height: 100%;
+  align-items: stretch;
+}
+
+.detail-poster {
+  flex: 1;
+}
+
+.detail-notes {
+  flex: 2;
+  overflow-y: auto;
+  background: var(--color-bg-secondary);
+  border: var(--border-thick);
+  border-radius: 12px;
+  padding: 0.5em 0.5em 0.5em 1em;
 }

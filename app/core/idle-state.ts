@@ -34,7 +34,7 @@ export class IdleState extends PokemonState {
     super.onEnter(pokemon)
     if (pokemon.status.tree) {
       pokemon.action = PokemonActionState.IDLE
-    } else if (pokemon.status.resurecting) {
+    } else if (pokemon.status.resurrecting) {
       pokemon.action = PokemonActionState.HURT
     } else if (
       (pokemon.status.sleep || pokemon.status.freeze) &&

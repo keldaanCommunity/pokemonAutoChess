@@ -1,9 +1,14 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { flushSync } from "react-dom"
+import { useTranslation } from "react-i18next"
+import { PatchSummary } from "./patch-summary"
 import { Poster } from "./poster"
 import "./patchnotes.css"
 
 export default function PatchNotes() {
+  const { t } = useTranslation()
   const PATCHES = [
+    "6.6",
     "6.5",
     "6.4",
     "6.3",
@@ -36,11 +41,65 @@ export default function PatchNotes() {
     "3.8"
   ]
 
+  const [selectedPatch, setSelectedPatch] = useState<string | null>(null)
+
+  const viewTransition = (transition: () => void) => {
+    // Use View Transition API if available
+    if (
+      "startViewTransition" in document &&
+      typeof document.startViewTransition === "function"
+    ) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          transition()
+        })
+      })
+    } else {
+      transition()
+    }
+  }
+
+  const handlePosterClick = (version: string) =>
+    viewTransition(() => {
+      setSelectedPatch(selectedPatch === version ? null : version)
+    })
+
+  const handleBackClick = () =>
+    viewTransition(() => {
+      setSelectedPatch(null)
+    })
+
+  if (selectedPatch) {
+    return (
+      <div className="patchnotes-detail-view">
+        <div className="detail-content">
+          <div className="detail-poster">
+            <Poster version={selectedPatch} isDetailed />
+          </div>
+          <div className="detail-notes">
+            <button
+              className="close-btn"
+              onClick={handleBackClick}
+              style={{ float: "right", marginLeft: "2em" }}
+            >
+              🗙
+            </button>
+            <PatchSummary version={selectedPatch} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <ul>
+    <ul className="patchnotes-grid" role="list">
       {PATCHES.map((v) => (
-        <li key={v}>
-          <Poster version={v} />
+        <li
+          key={v}
+          style={{ viewTransitionName: `poster-${v}` }}
+          role="listitem"
+        >
+          <Poster version={v} onClick={() => handlePosterClick(v)} />
         </li>
       ))}
     </ul>

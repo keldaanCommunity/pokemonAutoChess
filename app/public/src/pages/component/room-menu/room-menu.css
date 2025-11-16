@@ -51,14 +51,3 @@ section.room-menu .room-menu > ul {
   grid-auto-rows: min-content;
   gap: 8px;
 }
-
-@container (width < 900px) {
-  .room-menu .react-tabs__tab:not(:first-child, :last-child) {
-    & img {
-      margin-right: 0;
-    }
-    & span {
-      display: none;
-    }
-  }
-}

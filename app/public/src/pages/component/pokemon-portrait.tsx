@@ -3,7 +3,7 @@ import { Emotion } from "../../../../types"
 import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
 import { cc } from "../utils/jsx"
 
-interface PortraitOptions {
+export interface PortraitOptions {
   index: string
   shiny?: boolean
   emotion?: Emotion

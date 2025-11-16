@@ -3,6 +3,7 @@ import "firebase/compat/auth"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import { FIREBASE_CONFIG } from "../../../../../config"
 import { throttle } from "../../../../../utils/function"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -12,7 +13,6 @@ import { StyledFirebaseAuth } from "./styled-firebase-auth"
 
 import "firebaseui/dist/firebaseui.css"
 import "./login.css"
-import { FIREBASE_CONFIG } from "../../../../../types/Config"
 
 export default function Login() {
   const { t } = useTranslation()

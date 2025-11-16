@@ -1,6 +1,6 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
+import { SynergyTriggers } from "../config"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { SynergyTriggers } from "../types/Config"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Pkm } from "../types/enum/Pokemon"
@@ -71,8 +71,8 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
   ],
   [Synergy.ELECTRIC]: [
     EffectEnum.RISING_VOLTAGE,
-    EffectEnum.OVERDRIVE,
-    EffectEnum.POWER_SURGE
+    EffectEnum.POWER_SURGE,
+    EffectEnum.SUPERCHARGED
   ],
   [Synergy.FIGHTING]: [
     EffectEnum.GUTS,

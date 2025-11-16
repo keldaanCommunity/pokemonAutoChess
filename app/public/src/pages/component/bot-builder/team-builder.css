@@ -26,6 +26,8 @@
   grid-area: synergies;
   background-color: var(--color-bg-secondary);
   border: var(--border-thin);
+  overflow-y: auto;
+  padding: 5px;
 }
 
 #team-builder .actions {

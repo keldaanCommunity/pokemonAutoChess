@@ -1,6 +1,5 @@
 import { GameObjects } from "phaser"
 import {
-  ArtificialItems,
   Berries,
   Dishes,
   HMs,
@@ -8,17 +7,19 @@ import {
   ShinyItems,
   SpecialItems,
   TMs,
+  Tools,
   WeatherRocks
 } from "../../../../types/enum/Item"
+import { isIn } from "../../../../utils/array"
 import { getGameScene } from "../../pages/game"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
-import ItemsContainer from "./items-container"
 
 export default class ItemContainer extends DraggableObject {
+  scene: GameScene
   detail: ItemDetail | undefined
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
@@ -26,13 +27,12 @@ export default class ItemContainer extends DraggableObject {
   countText: GameObjects.Text | undefined
   circle?: GameObjects.Image
   name: Item
-  scene: Phaser.Scene
   pokemonId: string | null
   playerId: string
   mouseoutTimeout: NodeJS.Timeout | null = null
 
   constructor(
-    scene: Phaser.Scene,
+    scene: GameScene,
     x: number,
     y: number,
     item: Item,
@@ -57,17 +57,12 @@ export default class ItemContainer extends DraggableObject {
       this.circle.setFrame(this.cellIndex * 3 + (this.draggable ? 0 : 2))
     }
     this.add(this.circle)
-    const spriteName = TMs.includes(item)
-      ? "TM"
-      : HMs.includes(item)
-        ? "HM"
-        : item
     this.sprite = new GameObjects.Image(
       scene,
       0,
       0,
       "item",
-      spriteName + ".png"
+      item + ".png"
     ).setScale(pokemonId === null ? 0.5 : 0.25)
 
     this.add(this.sprite)
@@ -78,9 +73,9 @@ export default class ItemContainer extends DraggableObject {
   get cellIndex() {
     if (ShinyItems.includes(this.name)) return 1
     if (Berries.includes(this.name)) return 2
-    if (ArtificialItems.includes(this.name)) return 3
+    if (isIn(Tools, this.name)) return 3
     if (WeatherRocks.includes(this.name)) return 4
-    if (SpecialItems.includes(this.name)) return 5
+    if (isIn(SpecialItems, this.name)) return 5
     if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
     if ((Dishes.map((d) => d) as Item[]).includes(this.name)) return 7
     return 0
@@ -149,7 +144,7 @@ export default class ItemContainer extends DraggableObject {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      ;(this.parentContainer as ItemsContainer).closeDetails() // close other open item tooltips
+      this.scene.closeTooltips() // close other open tooltips
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)
@@ -205,7 +200,7 @@ export default class ItemContainer extends DraggableObject {
       "item",
       item + ".png"
     ).setScale(this.pokemonId === null ? 0.5 : 0.25)
-    this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
+    this.tempDetail = new ItemDetail(this.scene, 0, 0, item as any)
     this.tempDetail.setDepth(DEPTH.TOOLTIP)
     this.tempDetail.setPosition(
       this.tempDetail.width * 0.5 + 40,

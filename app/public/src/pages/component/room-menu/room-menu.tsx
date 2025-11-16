@@ -26,6 +26,9 @@ export default function RoomMenu() {
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
   )
+  const gameRooms: RoomAvailable[] = useAppSelector(
+    (state) => state.lobby.gameRooms
+  )
   const ccu = useAppSelector((state) => state.lobby.ccu)
 
   const client: Client = useAppSelector((state) => state.network.client)
@@ -82,6 +85,10 @@ export default function RoomMenu() {
     }
   }
 
+  const hasTournamentLobbies = gameRooms.some(
+    (r) => r.metadata.gameMode === GameMode.TOURNAMENT
+  )
+
   return (
     <Tabs className="my-container room-menu custom-bg hidden-scrollable">
       <h2>{t("rooms")}</h2>
@@ -91,6 +98,9 @@ export default function RoomMenu() {
       </p>
       <TabList>
         <Tab>{t("available_rooms")}</Tab>
+        <Tab>
+          <span>{t("in_game")}</span>
+        </Tab>
         <Tab>
           <img src="/assets/ui/classic.png" alt="" />
           <span>{t("classic")}</span>
@@ -107,10 +117,12 @@ export default function RoomMenu() {
           <img src="/assets/ui/custom.png" alt="" />
           <span>{t("custom_room_short")}</span>
         </Tab>
-        <Tab>
-          <img src="/assets/ui/spectate.svg" alt="" />
-          <span>{t("in_game")}</span>
-        </Tab>
+        {hasTournamentLobbies && (
+          <Tab>
+            <img src="/assets/ui/tournament.svg" alt="" />
+            <span>{t("tournament")}</span>
+          </Tab>
+        )}
       </TabList>
       {!user && <p className="subtitle">{t("loading")}</p>}
 
@@ -118,23 +130,25 @@ export default function RoomMenu() {
         <RoomList onRoomAction={onRoomAction} />
       </TabPanel>
       <TabPanel>
-        <RoomList gameMode={GameMode.CLASSIC} onRoomAction={onRoomAction} />
-      </TabPanel>
-      <TabPanel>
-        <RoomList gameMode={GameMode.RANKED} onRoomAction={onRoomAction} />
-      </TabPanel>
-      <TabPanel>
-        <RoomList gameMode={GameMode.SCRIBBLE} onRoomAction={onRoomAction} />
-      </TabPanel>
-      <TabPanel>
-        <RoomList
-          gameMode={GameMode.CUSTOM_LOBBY}
-          onRoomAction={onRoomAction}
-        />
-      </TabPanel>
-      <TabPanel>
         <IngameRoomsList />
       </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.CLASSIC} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.RANKED} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.SCRIBBLE} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.CUSTOM_LOBBY} />
+      </TabPanel>
+      {hasTournamentLobbies && (
+        <TabPanel>
+          <IngameRoomsList gameMode={GameMode.TOURNAMENT} />
+        </TabPanel>
+      )}
 
       <RoomSelectionMenu
         show={showRoomSelectionMenu}

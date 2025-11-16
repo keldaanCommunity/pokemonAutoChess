@@ -334,9 +334,10 @@ export async function joinExistingPreparationRoom(
       dispatch(resetLobby())
       navigate("/preparation")
     }
-  } catch (error) {
-    if (error.code && error.code in CloseCodesMessages) {
-      const errorMessage = CloseCodesMessages[error.code]
+  } catch (error: any) {
+    if (error?.code && error.code in CloseCodesMessages) {
+      const errorMessage =
+        CloseCodesMessages[error.code as keyof typeof CloseCodesMessages]
       dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
     } else {
       logger.error(error)

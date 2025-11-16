@@ -243,6 +243,16 @@ export class Board {
     return cells
   }
 
+  getCellsInRow(y: number) {
+    const cells = new Array<Cell>()
+    for (let x = 0; x < this.columns; x++) {
+      if (this.isOnBoard(x, y)) {
+        cells.push({ x, y, value: this.cells[this.columns * y + x] })
+      }
+    }
+    return cells
+  }
+
   getCellsInRadius(cellX: number, cellY: number, radius: number) {
     // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
@@ -518,5 +528,60 @@ export class Board {
 
   isOnBoard(x: number, y: number): boolean {
     return x >= 0 && x < this.columns && y >= 0 && y < this.rows
+  }
+
+  /**
+   * Finds and returns the closest enemy `PokemonEntity` to the specified position.
+   *
+   * @param positionX - The X coordinate from which to search for the closest enemy.
+   * @param positionY - The Y coordinate from which to search for the closest enemy.
+   * @param enemyTeam - The team considered as enemies.
+   * @returns The closest living enemy `PokemonEntity` to the given position, or `undefined` if none are found.
+   */
+  getClosestEnemy(
+    positionX: number,
+    positionY: number,
+    enemyTeam: Team
+  ): PokemonEntity | undefined {
+    const closestEnemy = this.cells
+      .filter(
+        (entity): entity is PokemonEntity =>
+          entity instanceof PokemonEntity &&
+          entity.team === enemyTeam &&
+          entity.hp > 0
+      )
+      .sort(
+        (a, b) =>
+          distanceC(a.positionX, a.positionY, positionX, positionY) -
+          distanceC(b.positionX, b.positionY, positionX, positionY)
+      )[0]
+    return closestEnemy
+  }
+
+  /**
+   * Returns a list of enemy `PokemonEntity` instances sorted by their distance to the specified position.
+   *
+   * @param positionX - The X coordinate from which to measure distance.
+   * @param positionY - The Y coordinate from which to measure distance.
+   * @param enemyTeam - The team considered as enemies.
+   * @returns An array of `PokemonEntity` objects belonging to the enemy team, sorted from closest to farthest relative to the given position.
+   */
+  getClosestEnemies(
+    positionX: number,
+    positionY: number,
+    enemyTeam: Team
+  ): PokemonEntity[] {
+    return this.cells
+      .filter(
+        (entity): entity is PokemonEntity =>
+          entity instanceof PokemonEntity &&
+          entity.team === enemyTeam &&
+          entity.hp > 0
+      )
+      .sort(
+        (a, b) =>
+          distanceC(a.positionX, a.positionY, positionX, positionY) -
+          distanceC(b.positionX, b.positionY, positionX, positionY)
+      )
   }
 }

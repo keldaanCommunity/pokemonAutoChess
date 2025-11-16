@@ -5,7 +5,7 @@ import {
   MAX_LEVEL,
   RarityColor,
   RarityProbabilityPerLevel
-} from "../../../../../types/Config"
+} from "../../../../../config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 

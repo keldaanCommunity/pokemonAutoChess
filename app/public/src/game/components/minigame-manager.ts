@@ -87,20 +87,20 @@ export default class MinigameManager {
   update() {
     const interpolatePosition =
       (min = 0.2, max = min, acceleration = 100) =>
-        (item) => {
-          if (!item.data) return
-          const { serverX, serverY } = item.data.values
-          item.x = Phaser.Math.Linear(
-            item.x,
-            serverX,
-            clamp(acceleration / Math.abs(serverX - item.x), min, max)
-          )
-          item.y = Phaser.Math.Linear(
-            item.y,
-            serverY,
-            clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
-          )
-        }
+      (item) => {
+        if (!item.data) return
+        const { serverX, serverY } = item.data.values
+        item.x = Phaser.Math.Linear(
+          item.x,
+          serverX,
+          clamp(acceleration / Math.abs(serverX - item.x), min, max)
+        )
+        item.y = Phaser.Math.Linear(
+          item.y,
+          serverY,
+          clamp(acceleration / Math.abs(serverY - item.y), 0.05, 0.25)
+        )
+      }
     this.pokemons.forEach(interpolatePosition(0.2))
     this.items.forEach(interpolatePosition(0.05, 0.25, 100))
     this.portals.forEach(interpolatePosition(0.05, 0.25, 100))
@@ -235,7 +235,7 @@ export default class MinigameManager {
           if (value != "" && typeof value === "string") {
             const avatar = this.pokemons.get(value)
             this.symbols.forEach((symbol) => {
-              if (symbol.getData("portalId") === portal.id) {
+              if (symbol.portalId === portal.id) {
                 this.removeSymbol(symbol)
               }
             })
@@ -290,7 +290,7 @@ export default class MinigameManager {
           break
 
         case "portalId":
-          symbolUI.setData("portalId", value)
+          symbolUI.portalId = value as string
           break
       }
     }
@@ -437,7 +437,10 @@ export default class MinigameManager {
       scene: this.scene,
       x: encounter === TownEncounters.REGIROCK ? cx : 24 * 48,
       y: encounter === TownEncounters.REGIROCK ? cy : 22 * 48,
-      name: Pkm.REGIROCK
+      name: Pkm.REGIROCK,
+      dialog: t("thanks_for_playing"),
+      dialogTitle: "Keldaan",
+      emotion: Emotion.HAPPY
     })
 
     const marowak = new PokemonSpecial({
@@ -449,8 +452,8 @@ export default class MinigameManager {
 
     const celebi = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.CELEBI ? cx : 36 * 48,
-      y: encounter === TownEncounters.CELEBI ? cy : 25 * 48,
+      x: encounter === TownEncounters.CELEBI ? cx : 33 * 48,
+      y: encounter === TownEncounters.CELEBI ? cy : 23 * 48,
       name: Pkm.CELEBI,
       shiny: true,
       orientation: Orientation.DOWNLEFT
@@ -479,8 +482,8 @@ export default class MinigameManager {
 
     const sableye = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.SABLEYE ? cx : 37 * 48,
-      y: encounter === TownEncounters.SABLEYE ? cy : 4 * 48,
+      x: encounter === TownEncounters.SABLEYE ? cx : 37.25 * 48,
+      y: encounter === TownEncounters.SABLEYE ? cy : 5 * 48,
       orientation: Orientation.DOWNLEFT,
       name: Pkm.SABLEYE
     })
@@ -491,7 +494,10 @@ export default class MinigameManager {
       y: 2.5 * 48,
       name: Pkm.MAREEP,
       orientation: Orientation.DOWNLEFT,
-      animation: PokemonActionState.EAT
+      animation: PokemonActionState.EAT,
+      dialog: t("thanks_for_playing"),
+      dialogTitle: "Curry",
+      emotion: Emotion.HAPPY
     })
 
     const munchlax = new PokemonSpecial({
@@ -508,9 +514,23 @@ export default class MinigameManager {
 
     const makuhita = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.MAKUHITA ? cx : 4 * 48,
-      y: encounter === TownEncounters.MAKUHITA ? cy : 9 * 48,
+      x: encounter === TownEncounters.MAKUHITA ? cx : 36 * 48,
+      y: encounter === TownEncounters.MAKUHITA ? cy : 8.25 * 48,
       name: Pkm.MAKUHITA
+    })
+
+    const croagunk = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CROAGUNK ? cx : 11.5 * 48,
+      y: encounter === TownEncounters.CROAGUNK ? cy : 21.25 * 48,
+      name: Pkm.CROAGUNK
+    })
+
+    const wigglytuff = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.WIGGLYTUFF ? cx : 2 * 48,
+      y: encounter === TownEncounters.WIGGLYTUFF ? cy : 9 * 48,
+      name: Pkm.WIGGLYTUFF
     })
 
     const podiumPokemons = podium.map((p, rank) => {
@@ -549,6 +569,8 @@ export default class MinigameManager {
       munchlax,
       meowth,
       makuhita,
+      croagunk,
+      wigglytuff,
       ...podiumPokemons
     )
 
@@ -571,8 +593,8 @@ export default class MinigameManager {
       this.villagers.push(smeargle)
       this.showEncounterDescription(
         t(`scribble.${specialGameRule}`) +
-        " - " +
-        t(`scribble_description.${specialGameRule}`)
+          " - " +
+          t(`scribble_description.${specialGameRule}`)
       )
     }
   }
@@ -608,13 +630,11 @@ export default class MinigameManager {
   }
 
   showEncounterDescription(desc: string) {
-    this.encounterDescription = new GameDialog(
-      this.scene,
-      desc,
-      undefined,
-      "town-encounter-description"
-    )
-    this.encounterDescription
+    this.encounterDescription = new GameDialog({
+      scene: this.scene,
+      dialog: desc,
+      extraClass: "town-encounter-description"
+    })
       .setOrigin(0, 0)
       .setPosition(15 * 48, 15 * 48)
       .removeInteractive()
@@ -622,7 +642,7 @@ export default class MinigameManager {
     this.scene.add.existing(this.encounterDescription)
   }
 
-  closeDetails() {
+  closeTooltips() {
     for (const it of this.items.values()) {
       it.closeDetail()
     }

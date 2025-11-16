@@ -1,8 +1,8 @@
 import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { Emotion } from "../../types"
+import { GameMode } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
-import { GameMode } from "../../types/enum/Game"
 export interface IPokemonRecord {
   name: Pkm
   items: Item[] | ArraySchema<Item>

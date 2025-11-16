@@ -1,6 +1,6 @@
 import { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
-import { FIREBASE_CONFIG } from "../../types/Config"
+import { FIREBASE_CONFIG } from "../../config"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import store from "./stores"

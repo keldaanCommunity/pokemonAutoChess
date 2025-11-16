@@ -1,15 +1,11 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
+import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
 import { SynergyEffects } from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { IPlayer } from "../../../../../types"
-import {
-  RarityColor,
-  RarityCost,
-  SynergyTriggers
-} from "../../../../../types/Config"
 import {
   Pkm,
   PkmFamily,
@@ -131,6 +127,12 @@ export default function SynergyDetailComponent(props: {
     )
     additionalInfo = t("synergy_description.DRAGON_STARS", {
       totalStars: dragonLevel
+    })
+  }
+
+  if(props.type === Synergy.ELECTRIC && currentPlayer) {
+    additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
+      charge: currentPlayer.cellBattery
     })
   }
 

@@ -1,6 +1,6 @@
+import { BASE_PROJECTILE_SPEED } from "../config"
 import Player from "../models/colyseus-models/player"
 import { IPokemonEntity } from "../types"
-import { BASE_PROJECTILE_SPEED } from "../types/Config"
 import delays from "../types/delays.json"
 import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
@@ -30,8 +30,8 @@ export default class AttackingState extends PokemonState {
         const candidates = this.getTargetsAtRange(pokemon, board)
         let minLife = Infinity
         for (const candidate of candidates) {
-          if (candidate.life + candidate.shield < minLife) {
-            minLife = candidate.life + candidate.shield
+          if (candidate.hp + candidate.shield < minLife) {
+            minLife = candidate.hp + candidate.shield
             target = candidate
           }
         }

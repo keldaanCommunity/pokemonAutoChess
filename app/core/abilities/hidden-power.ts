@@ -1,3 +1,4 @@
+import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
@@ -5,7 +6,7 @@ import { IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
 import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
-import { getUnownsPoolPerStage, Pkm } from "../../types/enum/Pokemon"
+import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
@@ -97,7 +98,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
     const player = unown.player
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== undefined) {
+      if (x !== null) {
         const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
         ditto.positionX = x
         ditto.positionY = 0
@@ -118,8 +119,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     if (!unown.isGhostOpponent && unown.player) {
       const egg = giveRandomEgg(unown.player, false)
       if (!egg) return
-      egg.evolutionRule.evolutionTimer =
-        egg.evolutionRule.getHatchTime(egg, unown.player) - 1
+      egg.stacks = egg.evolutionRule.getHatchTime(egg, unown.player) - 1
     }
   }
 }
@@ -172,7 +172,7 @@ export class HiddenPowerHStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          pokemon.handleHeal(pokemon.hp - pokemon.life, unown, 1, crit)
+          pokemon.handleHeal(pokemon.maxHP - pokemon.hp, unown, 1, crit)
         }
       }
     )
@@ -492,18 +492,24 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     const player = unown.player
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== undefined) {
-        const topSynergy = pickRandomIn(player.synergies.getTopSynergies())
+      if (x !== null) {
+        const topSynergy = pickRandomIn(player.synergies.getTopSynergies(2))
         const monsOfThatSynergy =
           PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
         const candidates = [
           ...monsOfThatSynergy.pokemons,
           ...monsOfThatSynergy.additionalPokemons
-        ].filter((p) => getPokemonData(p).stars === 1) as Pkm[]
+        ]
+          .filter((p) => getPokemonData(p).stars === 1)
+          .sort(
+            (a, b) =>
+              RarityCost[getPokemonData(b).rarity] -
+              RarityCost[getPokemonData(a).rarity]
+          ) as Pkm[]
         const stageLevel = unown.simulation.stageLevel
         const rareWeight = clamp(1.5 - stageLevel / 10, 0, 1)
         const epicWeight = clamp(
-          stageLevel < 10 ? stageLevel / 10 : 2 - stageLevel / 10,
+          stageLevel < 10 ? stageLevel / 10 : 1.5 - stageLevel / 20,
           0,
           1
         )
@@ -602,7 +608,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
       for (let i = 0; i < nbUnownsObtained; i++) {
         const pkm = pickRandomIn(candidates)
         const x = getFirstAvailablePositionInBench(player.board)
-        if (x !== undefined) {
+        if (x !== null) {
           const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
           pokemon.positionX = x
           pokemon.positionY = 0

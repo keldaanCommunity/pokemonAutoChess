@@ -1,0 +1,2 @@
+2022-08-25 04:15:27.430738	<@!544245909639397378>	CUR	PMDCollab_1	Normal,Normal^
+2023-11-07 04:12:03.415110	<@!544245909639397378>	CUR	PMDCollab_2	Normal,Normal^,Happy,Happy^,Pain,Surprised,Pain^,Surprised^,Worried,Worried^

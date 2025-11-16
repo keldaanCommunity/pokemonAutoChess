@@ -107,7 +107,6 @@ kbd {
 
 .custom-theme-tooltip {
   padding: 5px !important;
-  opacity: 1 !important;
   border-color: #000 !important;
   border-style: solid !important;
   border-width: 4px !important;
@@ -191,7 +190,7 @@ p:last-child {
   image-rendering: pixelated;
 }
 
-.game-emote-bubble:after {
+.game-emote-bubble::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -209,7 +208,7 @@ p:last-child {
   margin-bottom: -19px;
 }
 
-.game-emote-bubble.opponent:after {
+.game-emote-bubble.opponent::after {
   top: 0;
   border-bottom-color: white;
   border-top: 0;
@@ -225,7 +224,7 @@ p:last-child {
 }
 
 .game-dialog .game-dialog-title {
-  background-color: #4f5160;
+  background-color: var(--color-bg-secondary);
   text-transform: capitalize;
   padding: 0.25em 0.5em;
   margin: -0.25em -0.5em 4px -0.5em;

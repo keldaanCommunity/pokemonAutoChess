@@ -22,7 +22,7 @@ To work with the Docker image, you should comfortable with:
 ## Running / Deploying the Docker Image
 
 ### Preparations
-Now that the image has been built, continue with setting up Firebase from the [Deployment Tutorial](/deployment/README.md). Copy the `.env.EXAMPLE`-file and name it `.env`, `.env.development`, or `.env.production` as it suits you.
+Now that the image has been built, continue with setting up Firebase from the [Deployment Tutorial](/deployment/README.md). Copy the `.env-example` file and name it `.env`, `.env.development`, or `.env.production` as it suits you.
 
 For MongoDB you will need to create an initial root user, and root password, like the following example. When MongoDB first starts up, it reads this value and adds the user/password to the admin-database. Which is why we need to specify the authSource in the MongoDB connection string; `MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/dev?authSource=admin"
 

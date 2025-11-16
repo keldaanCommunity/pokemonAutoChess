@@ -1,0 +1,1 @@
+2025-05-01 18:05:39.604795	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Happy,Pain,Stunned

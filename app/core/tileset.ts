@@ -6,7 +6,7 @@ import {
   MaskCoordinate,
   TerrainType,
   TilesetExchangeFile
-} from "../types/Config"
+} from "../config"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"

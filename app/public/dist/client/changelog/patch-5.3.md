@@ -64,7 +64,7 @@
 
 - New Shiny Item: Gold Bottle Cap: +1% crit chance and crit power per gold you have. Gain 1 gold per KO, and a 5 gold jackpot if eliminating the last enemy.
 - New Shiny Item: Absorb Bulb: All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to adjacent enemy units as special damage.
-- New Shiny Item: Sacred Ash: Gives Resurection status. After resurecting, up to 3 allies KO are resurected as well, but without items.
+- New Shiny Item: Sacred Ash: Gives Resurrection status. After resurrecting, up to 3 allies KO are resurrected as well, but without items.
 - New Shiny Item: Comet Shard: Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 100 special damage and gaining Protect for 2 seconds.
 - White Flute: the average power of the 3 pokemons spawned has been slightly reduced at all stages
 - Shiny Stone: now gives +3 to Light synergy count

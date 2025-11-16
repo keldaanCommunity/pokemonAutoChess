@@ -2,11 +2,12 @@ import { Dispatcher } from "@colyseus/command"
 import { Client, ClientArray, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import { MAX_PLAYERS_PER_GAME } from "../config"
 import { IBot } from "../models/mongo-models/bot-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { IPreparationMetadata, Role, Transfer } from "../types"
-import { EloRank, MAX_PLAYERS_PER_GAME } from "../types/Config"
 import { CloseCodes } from "../types/enum/CloseCodes"
+import { EloRank } from "../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { values } from "../utils/schemas"
@@ -379,6 +380,13 @@ export default class PreparationRoom extends Room<PreparationState> {
         return
       } else if (this.metadata.blacklist.includes(user.uid)) {
         client.leave(CloseCodes.USER_KICKED)
+        return
+      } else if (
+        this.metadata.whitelist &&
+        this.metadata.whitelist.length > 0 &&
+        !this.metadata.whitelist.includes(user.uid)
+      ) {
+        client.leave(CloseCodes.USER_NOT_WHITELISTED)
         return
       } else {
         return user

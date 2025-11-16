@@ -46,10 +46,10 @@ import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
+import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
 import GameScene from "./scenes/game-scene"
-import { clearAbilityAnimations } from "./components/abilities-animations"
 
 class GameContainer {
   room: Room<GameState>
@@ -96,7 +96,13 @@ class GameContainer {
 
     for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
       team.onAdd((p, key) =>
-        this.initializePokemon(<PokemonEntity>p, simulation)
+        this.initializePokemon(
+          <PokemonEntity>p,
+          simulation,
+          team === $simulation.blueTeam
+            ? simulation.bluePlayerId
+            : simulation.redPlayerId
+        )
       )
       team.onRemove((pokemon, key) => {
         // logger.debug('remove pokemon');
@@ -116,9 +122,63 @@ class GameContainer {
     })
   }
 
-  initializePokemon(pokemon: PokemonEntity, simulation: Simulation) {
-    this.gameScene?.battle?.addPokemonEntitySprite(simulation.id, pokemon)
-    const fields: NonFunctionPropNames<Status>[] = [
+  initializePokemon(
+    pokemon: PokemonEntity,
+    simulation: Simulation,
+    playerId: string
+  ) {
+    this.gameScene?.battle?.addPokemonEntitySprite(
+      simulation.id,
+      pokemon,
+      playerId
+    )
+
+    const $pokemon = this.$<PokemonEntity>(pokemon)
+
+    const fields: (NonFunctionPropNames<PokemonEntity> &
+      keyof IPokemonEntity)[] = [
+      "positionX",
+      "positionY",
+      "orientation",
+      "action",
+      "critChance",
+      "critPower",
+      "ap",
+      "luck",
+      "speed",
+      "hp",
+      "maxHP",
+      "shield",
+      "pp",
+      "atk",
+      "def",
+      "speDef",
+      "range",
+      "targetX",
+      "targetY",
+      "team",
+      "index",
+      "shiny",
+      "skill",
+      "stars",
+      "types",
+      "stacks",
+      "stacksRequired"
+    ]
+
+    fields.forEach((field) => {
+      $pokemon.listen(field, (value, previousValue) => {
+        this.gameScene?.battle?.changePokemon(
+          simulation.id,
+          pokemon,
+          field,
+          value,
+          previousValue
+        )
+      })
+    })
+
+    const statusFields: NonFunctionPropNames<Status>[] = [
       "armorReduction",
       "burn",
       "charm",
@@ -140,8 +200,8 @@ class GameContainer {
       "protect",
       "skydiving",
       "psychicField",
-      "resurection",
-      "resurecting",
+      "resurrection",
+      "resurrecting",
       "runeProtect",
       "silence",
       "sleep",
@@ -156,9 +216,7 @@ class GameContainer {
       "tree"
     ]
 
-    const $pokemon = this.$<PokemonEntity>(pokemon)
-
-    fields.forEach((field) => {
+    statusFields.forEach((field) => {
       $pokemon.status.listen(field, (value, previousValue) => {
         this.gameScene?.battle?.changeStatus(
           simulation.id,
@@ -166,49 +224,6 @@ class GameContainer {
           field,
           previousValue
         )
-      })
-    })
-
-    $pokemon.onChange(() => {
-      const fields: (NonFunctionPropNames<PokemonEntity> &
-        keyof IPokemonEntity)[] = [
-        "positionX",
-        "positionY",
-        "orientation",
-        "action",
-        "critChance",
-        "critPower",
-        "ap",
-        "luck",
-        "speed",
-        "life",
-        "hp",
-        "shield",
-        "pp",
-        "atk",
-        "def",
-        "speDef",
-        "range",
-        "targetX",
-        "targetY",
-        "team",
-        "index",
-        "shiny",
-        "skill",
-        "stars",
-        "types"
-      ]
-
-      fields.forEach((field) => {
-        $pokemon.listen(field, (value, previousValue) => {
-          this.gameScene?.battle?.changePokemon(
-            simulation.id,
-            pokemon,
-            field,
-            value,
-            previousValue || value
-          )
-        })
       })
     })
 
@@ -223,7 +238,6 @@ class GameContainer {
       "fieldCount",
       "fightingBlockCount",
       "fairyCritCount",
-      "powerLensCount",
       "starDustCount",
       "spellBlockedCount",
       "manaBurnCount",
@@ -234,8 +248,7 @@ class GameContainer {
       "tripleAttackCount",
       "upgradeCount",
       "soulDewCount",
-      "defensiveRibbonCount",
-      "magmarizerCount"
+      "defensiveRibbonCount"
     ]
 
     fieldsCount.forEach((field) => {
@@ -418,44 +431,36 @@ class GameContainer {
         "positionY",
         "action",
         "hp",
+        "maxHP",
         "atk",
         "ap",
         "def",
         "speed",
+        "luck",
         "shiny",
         "skill",
-        "meal"
+        "meal",
+        "supercharged"
       ]
     ) => {
       const $pokemon = this.$<Pokemon>(pokemon)
-      $pokemon.onChange(() => {
-        fields.forEach((field) => {
-          $pokemon.listen(field, (value, previousValue) => {
-            if (field && player.id === this.spectatedPlayerId) {
-              this.gameScene?.board?.changePokemon(
-                pokemon,
-                field,
-                value as IPokemon[typeof field],
-                previousValue as IPokemon[typeof field]
-              )
-            }
-          })
-        })
-
-        $pokemon.types.onChange((value, key) => {
-          if (player.id === this.spectatedPlayerId) {
-            const pokemonUI = this.gameScene?.board?.pokemons.get(pokemon.id)
-            if (pokemonUI) {
-              pokemonUI.types = new Set(values(pokemon.types))
-            }
+      fields.forEach((field) => {
+        $pokemon.listen(field, (value, previousValue) => {
+          if (field && player.id === this.spectatedPlayerId) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              field,
+              value as IPokemon[typeof field],
+              previousValue as IPokemon[typeof field]
+            )
           }
         })
+      })
 
-        $pokemon.items.onChange((value, key) => {
-          if (player.id === this.spectatedPlayerId) {
-            this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
-          }
-        })
+      $pokemon.items.onChange((value, key) => {
+        if (player.id === this.spectatedPlayerId) {
+          this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
+        }
       })
     }
 
@@ -490,9 +495,6 @@ class GameContainer {
       store.dispatch(
         changePlayer({ id: player.id, field: "board", value: player.board })
       )
-      if (pokemon) {
-        listenForPokemonChanges(pokemon)
-      }
     })
 
     $player.items.onChange((value, key) => {

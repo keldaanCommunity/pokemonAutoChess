@@ -1,9 +1,11 @@
 import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
+import { SynergyTriggers } from "../../../../../config"
+import { getDistance } from "../../../../../core/matchmaking"
 import { IPlayer } from "../../../../../types"
-import { SynergyTriggers } from "../../../../../types/Config"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { getAvatarSrc } from "../../../../../utils/avatar"
+import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 
@@ -17,6 +19,12 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
         .map(([syn]) => syn),
     [props.player.synergies]
   )
+
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
+  const distance =
+    connectedPlayer && props.player.id !== connectedPlayer.id
+      ? getDistance(props.player, connectedPlayer, false)
+      : null
 
   return (
     <div>
@@ -72,6 +80,17 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
             </div>
           )
         })}
+        <div className="spacer"></div>
+        {distance != null && (
+          <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <img
+              src="/assets/ui/time.svg"
+              style={{ width: "16px", height: "16px" }}
+              title={t("rounds_since_last_fight", { count: distance })}
+            />
+            {distance}
+          </div>
+        )}
       </div>
       <div style={{ display: "flex", justifyContent: "start" }}>
         {synergyList.map((synergy, i) => {

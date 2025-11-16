@@ -3,9 +3,9 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Item } from "../../../../../types/enum/Item"
 import { useAppDispatch } from "../../../hooks"
+import { usePreference } from "../../../preferences"
 import { itemClick } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { usePreference } from "../../../preferences"
 
 const style: CSS.Properties = {
   width: "320px",

@@ -1,20 +1,20 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { EloRankThreshold } from "../../../../../config"
 import {
-  IItemV2,
+  fetchMetaItems,
   IItemsStatisticV2,
-  fetchMetaItems
+  IItemV2
 } from "../../../../../models/mongo-models/items-statistic-v2"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import {
-  ArtificialItems,
   CraftableItems,
-  WeatherRocks,
+  Item,
   ShinyItems,
-  Item
+  Tools
 } from "../../../../../types/enum/Item"
 import ItemStatistic from "./item-statistic"
-import { EloRank, EloRankThreshold } from "../../../../../types/Config"
 
 export function ItemReport() {
   const [loading, setLoading] = useState<boolean>(true)
@@ -39,13 +39,9 @@ export function ItemReport() {
     }))
   }, [metaItems, itemRankingBy])
 
-  const tabs = [
+  const tabs: { label: string; key: string; items: readonly Item[] }[] = [
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
-    {
-      label: t("artificial_items"),
-      key: "artificial_items",
-      items: ArtificialItems
-    },
+    { label: t("tools"), key: "tools", items: Tools },
     { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }
   ]
 

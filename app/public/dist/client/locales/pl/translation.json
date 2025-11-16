@@ -100,7 +100,6 @@
 		"FLAME_CHARGE": "Szarżujący płomień",
 		"LEECH_SEED": "Nasiona Pijawki",
 		"LOCK_ON": "wpatrzony w cel",
-		"PSYCH_UP": "Zwiększenie umysłowe",
 		"RAZOR_WIND": "Ostry wiatr",
 		"WONDER_GUARD": "Cudowna obrona",
 		"ELECTRIC_SURGE": "Wzrost elektryczny",
@@ -721,8 +720,6 @@
 		"URSALUNA": "Ursaluna",
 		"AIPOM": "Aipom",
 		"AMBIPOM": "Ambipom",
-		"DEERLING": "Deerling",
-		"SAWSBUCK": "Sawsbuck",
 		"PATRAT": "Patrat",
 		"WATCHOG": "Watchog",
 		"SPINARAK": "Spinarak",
@@ -755,5 +752,26 @@
 		"BONEMERANG": "Rzuć kość jak bumerang przez wrogą drużynę, zadając [30,60,90,SP] SPECIAL każdemu wrogiemu Pokémonowi, którego trafi",
 		"GROWL": "FLINCH sąsiadujących wrogów na 3 sekundy i zmniejsza ich ATK o [3,5,7,SP]",
 		"FAIRY_WIND": "Daj [5,10,20,SP=0.5] PP wszystkim sojuszniczym Pokémonom, z wyjątkiem użytkownika"
-	}
+	},
+	"stage_type": {
+		"pve": "Spotkanie PvE",
+		"carousel": "Karuzela Przedmiotów",
+		"portal": "Karuzela Portali",
+		"additional": "Dodatkowy Wybór",
+		"battle": "Walka Graczy"
+	},
+	"enemy_team": "Drużyna Przeciwników",
+	"stat_boosts": "Wzmocnienia Statystyk",
+	"rewards": "Nagrody",
+	"shiny_chance": "Szansa na Shiny",
+	"shiny_magikarp_description": "Shiny Magikarp dają po 10 ZŁOTA każdy gdy zostają pokonani",
+	"shiny_pve_description": "Shiny rundy PvE dają wybór między 3 losowymi shiny przedmiotami jako nagrodę gdy zostają pokonane",
+	"carousel_description": "Runda karuzeli przedmiotów gdzie możesz wybrać przedmioty dla swojej drużyny. Przedmioty są losowo wybierane z dostępnej puli przedmiotów.",
+	"item_pool": "Pula Przedmiotów",
+	"town_encounters": "Miejskie Spotkania",
+	"portal_description_1": "Weź portal aby podróżować do nowego regionu. Następnie będziesz musiał wybrać Startowego, Unikalnego lub Legendarnego Pokémona.",
+	"portal_description_2": "Każdy portal ma symbole synergii losowo wybrane z dominujących synergii wszystkich graczy. Symbole wpływają zarówno na region do którego podróżujesz jak i na proponowanych Pokémonów.",
+	"portal_description_3": "Jeśli zdecydujesz się nie brać żadnego portalu, zostaniesz w swoim obecnym regionie, a proponowani Pokémoni będą całkowicie losowi.",
+	"additional_description": "Wybierz dodatkowy wybór i komponent przedmiotu spośród 3 propozycji. Dodatkowe wybory to 2-stopniowe ewolucyjne Pokémony które można znaleźć we wszystkich sklepach graczy po wybraniu.",
+	"battle_description": "Regularny etap walki gdzie walczysz przeciwko innym graczom lub botom."
 }

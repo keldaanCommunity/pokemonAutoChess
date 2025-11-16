@@ -35,7 +35,7 @@
 - Passive abilities are now indicated separately on pokemon tooltips
 - Pokemon tooltips are now displayed in the wiki
 - Added an arrow indicator and a sound effect on Carousel rounds
-- Resurection now has an animation and a 2 seconds delay before the pokemon is revived
+- Resurrection now has an animation and a 2 seconds delay before the pokemon is revived
 
 # Misc
 - Lobbys don't need 8 players any more to be eligible for ELO, but need at least 2 human players

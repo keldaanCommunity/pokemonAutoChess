@@ -5,7 +5,6 @@ import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
 import { TournamentsList } from "./tournaments-list"
 import { VictoryRoad } from "./victory-road"
-import "./events-menu.css"
 
 export function EventsMenu() {
   const user = useAppSelector((state) => state.network.profile)
@@ -18,17 +17,14 @@ export function EventsMenu() {
       <h2>{t("events")}</h2>
       <TabList>
         <Tab>
-          <img src="/assets/ui/megaphone.svg" alt="" />
           <span>{t("announcements")}</span>
         </Tab>
         {tournaments.length > 0 && (
           <Tab>
-            <img src="/assets/ui/tournament.svg" alt="" />
             <span>{t("tournament")}</span>
           </Tab>
         )}
         <Tab>
-          <img src="/assets/ui/leaderboard.svg" alt="" />
           <span>{t("victory_road.title")}</span>
         </Tab>
       </TabList>

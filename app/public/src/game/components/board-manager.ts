@@ -1,23 +1,26 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  PortalCarouselStages,
+  RegionDetails,
+  SynergyTriggers
+} from "../../../../config"
+import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
+import { TownEncounters } from "../../../../core/town-encounters"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
-import { IPokemon, Transfer } from "../../../../types"
-import {
-  BOARD_WIDTH,
-  PortalCarouselStages,
-  SynergyTriggers
-} from "../../../../types/Config"
-import { DungeonDetails, DungeonMusic } from "../../../../types/enum/Dungeon"
+import { IPokemon } from "../../../../types"
+import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
   GamePhaseState,
@@ -46,11 +49,11 @@ import AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
+import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
-import { TownEncounters } from "../../../../core/town-encounters"
 
 export enum BoardMode {
   PICK = "pick",
@@ -75,7 +78,7 @@ export default class BoardManager {
   lightX: number
   lightY: number
   lightCell: Phaser.GameObjects.Sprite | null
-  berryTrees: Phaser.GameObjects.Sprite[] = []
+  berryTrees: BerryTree[] = []
   flowerPots: Phaser.GameObjects.Sprite[] = []
   flowerPokemonsInPots: PokemonSprite[] = []
   mulchAmountText: Phaser.GameObjects.Text | null = null
@@ -303,34 +306,12 @@ export default class BoardManager {
     ]
 
     for (let i = 0; i < nbTrees; i++) {
-      const tree = this.scene.add.sprite(
+      const tree = new BerryTree(
+        this,
         treePositions[i][0],
         treePositions[i][1],
-        "berry_trees",
-        this.player.berryTreesType[i] + "_1"
+        i
       )
-
-      tree.setDepth(DEPTH.INANIMATE_OBJECTS).setScale(2, 2).setOrigin(0.5, 1)
-      if (this.player.berryTreesStages[i] === 0) {
-        tree.anims.play("CROP")
-      } else {
-        tree.anims.play(
-          `${this.player.berryTreesType[i]}_TREE_STEP_${this.player.berryTreesStages[i]}`
-        )
-      }
-
-      tree.setInteractive()
-      tree.on("pointerdown", (pointer) => {
-        if (this.player.id !== this.scene.uid) return
-        if (this.scene.room && this.player.berryTreesStages[i] >= 3) {
-          this.scene.room.send(Transfer.PICK_BERRY, i)
-          this.displayText(pointer.x, pointer.y, t("berry_gained"), true)
-          tree.play("CROP")
-        } else {
-          this.displayText(pointer.x, pointer.y, t("berry_unripe"), true)
-        }
-      })
-
       this.berryTrees.push(tree)
     }
   }
@@ -372,9 +353,18 @@ export default class BoardManager {
         )
         .setScale(2, 2)
         .setOrigin(0.5, 0.5)
+        .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
       const potPokemon = this.player.flowerPots[i]
 
-      if (potPokemon) {
+      const simulation = this.scene?.room?.state.simulations.get(
+        this.player.simulationId
+      )
+      const isOnBattle =
+        this.mode === BoardMode.BATTLE &&
+        simulation?.started &&
+        values(simulation.blueDpsMeter).some((p) => p.id === potPokemon.id)
+
+      if (potPokemon && !isOnBattle) {
         const flowerInPot = new PokemonSprite(
           this.scene,
           FLOWER_POTS_POSITIONS_BLUE[i][0],
@@ -390,6 +380,7 @@ export default class BoardManager {
           false,
           true
         )
+        flowerInPot.draggable = false
         this.flowerPokemonsInPots.push(flowerInPot)
         this.pokemons.set(flowerInPot.id, flowerInPot)
       }
@@ -450,19 +441,43 @@ export default class BoardManager {
   renderGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
-    this.player.groundHoles.forEach((hole, index) => {
-      const [x, y] = transformBoardCoordinates(
-        index % BOARD_WIDTH,
-        Math.floor(index / BOARD_WIDTH) + 1
-      )
-      if (hole > 0) {
-        const groundHole = this.scene.add
-          .sprite(x, y + 10, "abilities", `GROUND_HOLE/00${hole - 1}.png`)
-          .setScale(2)
-          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        this.groundHoles.push(groundHole)
+    for (let row = 0; row < BOARD_HEIGHT / 2; row++) {
+      for (let col = 0; col < BOARD_WIDTH; col++) {
+        let trenchWidth = 0
+        const index = col + row * BOARD_WIDTH
+        while (
+          col + trenchWidth < BOARD_WIDTH &&
+          this.player.groundHoles[index + trenchWidth] === 5
+        ) {
+          trenchWidth++
+        }
+        if (trenchWidth >= 2) {
+          // trench
+          const [x, y] = transformBoardCoordinates(col, row + 1)
+          const trench = this.scene.add
+            .sprite(x - 44, y + 10, "ground_holes", `trench${trenchWidth}.png`)
+            .setOrigin(0, 0.5)
+            .setScale(2)
+            .setAlpha(0.9)
+            .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+            .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
+          this.groundHoles.push(trench)
+          col += trenchWidth - 1
+        } else {
+          // single hole
+          const hole = this.player.groundHoles[index]
+          if (hole > 0) {
+            const [x, y] = transformBoardCoordinates(col, row + 1)
+            const groundHole = this.scene.add
+              .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
+              .setScale(2)
+              .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+              .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
+            this.groundHoles.push(groundHole)
+          }
+        }
       }
-    })
+    }
   }
 
   hideGroundHoles() {
@@ -557,7 +572,9 @@ export default class BoardManager {
     if (this.mode === BoardMode.BATTLE && opponentId === "pve") {
       this.pveChestGroup = this.scene.add.group()
       this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
-      this.pveChest.setScale(2)
+      this.pveChest
+        .setScale(2)
+        .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
       this.pveChestGroup.add(this.pveChest)
     } else if (
       this.mode === BoardMode.BATTLE &&
@@ -628,7 +645,7 @@ export default class BoardManager {
         .map((p) => `${p.name} (${p.id}) is watching ${p.spectatedPlayerId}`)
         .join("\n")
     )
-
+ 
     logger.debug(
       "scouting now",
       scoutingPlayers.map((p) => `${p.name} (${p.id})`).join("\n")
@@ -702,7 +719,7 @@ export default class BoardManager {
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
     if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
-    this.closeTooltips()
+    this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
       const gameState = store.getState().game
@@ -725,16 +742,16 @@ export default class BoardManager {
   }
 
   removePokemonsOnBoard() {
-    this.pokemons.forEach((pokemon) => {
+    this.pokemons.forEach((pkmSprite) => {
       if (
-        !isOnBench(pokemon) &&
+        !isOnBench(pkmSprite) &&
         !(
-          FlowerPotMons.includes(PkmByIndex[pokemon.index]) &&
-          pokemon.positionY === -1
+          FlowerPotMons.includes(PkmByIndex[pkmSprite.pokemon.index]) &&
+          pkmSprite.positionY === -1
         )
       ) {
-        pokemon.destroy()
-        this.pokemons.delete(pokemon.id)
+        pkmSprite.destroy()
+        this.pokemons.delete(pkmSprite.id)
       }
     })
   }
@@ -745,12 +762,12 @@ export default class BoardManager {
     this.scene.setMap(this.player.map)
     if (
       this.scene.cache.audio.has(
-        "music_" + DungeonDetails[this.player.map].music
+        "music_" + RegionDetails[this.player.map].music
       ) &&
       PortalCarouselStages.includes(this.state.stageLevel)
     ) {
       // play back original region music when leaving town
-      playMusic(this.scene, DungeonDetails[this.player.map].music)
+      playMusic(this.scene, RegionDetails[this.player.map].music)
     }
     this.renderBoard(true)
     this.updatePlayerAvatar()
@@ -773,7 +790,7 @@ export default class BoardManager {
     this.hideGroundHoles()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
-    this.closeTooltips()
+    this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
 
     if (this.playerAvatar) {
@@ -823,7 +840,7 @@ export default class BoardManager {
     pokemon: IPokemon,
     field: F,
     value: IPokemon[F],
-    previousValue: IPokemon[F]
+    previousValue?: IPokemon[F]
   ) {
     const pokemonUI = this.pokemons.get(pokemon.id)
     let coordinates: number[]
@@ -873,44 +890,37 @@ export default class BoardManager {
           )
           break
 
-        case "hp": {
+        case "hp":
+        case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
           const sizeBuff = (pokemon.hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
-          pokemonUI.hp = value as IPokemon["hp"]
-          if ((value as IPokemon["hp"]) > (previousValue as IPokemon["hp"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
-          pokemonUI.atk = value as IPokemon["atk"]
-          if ((value as IPokemon["atk"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.ATK)
           break
 
         case "def":
-          pokemonUI.def = value as IPokemon["def"]
-          if ((value as IPokemon["def"]) > (previousValue as IPokemon["def"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.DEF)
           break
 
         case "speed":
-          pokemonUI.speed = value as IPokemon["speed"]
-          if (
-            (value as IPokemon["speed"]) > (previousValue as IPokemon["speed"])
-          )
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.SPEED)
           break
 
         case "ap":
-          pokemonUI.ap = value as IPokemon["ap"]
-          if ((value as IPokemon["ap"]) > (previousValue as IPokemon["atk"]))
+          if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.AP)
           break
 
         case "shiny":
-          pokemonUI.shiny = value as IPokemon["shiny"]
           this.animationManager.animatePokemon(
             pokemonUI,
             pokemonUI.action,
@@ -918,20 +928,27 @@ export default class BoardManager {
           )
           break
 
-        case "skill":
-          if (pokemonUI.skill !== value) {
-            pokemonUI.skill = value as IPokemon["skill"]
+        case "index":
+          if (previousValue != null && value !== previousValue) {
             pokemonUI.evolutionAnimation()
           }
           break
 
-        case "types":
-          pokemonUI.types = new Set(values(value as IPokemon["types"]))
+        case "skill":
+          if (previousValue != null && value !== previousValue) {
+            pokemonUI.evolutionAnimation()
+          }
           break
 
         case "meal":
           if (pokemonUI.meal !== value) {
             pokemonUI.updateMeal(value as IPokemon["meal"])
+          }
+          break
+
+        case "supercharged":
+          if (value === true && previousValue === false) {
+            pokemonUI.superchargeAnimation(this.scene, true)
           }
           break
       }
@@ -944,7 +961,15 @@ export default class BoardManager {
         pokemon.closeDetail()
       }
       if (pokemon.itemsContainer) {
-        pokemon.itemsContainer.closeDetails()
+        pokemon.itemsContainer.closeTooltips()
+      }
+    })
+    for (const tree of this.berryTrees.values()) {
+      tree.closeDetail()
+    }
+    this.flowerPokemonsInPots.forEach((pokemon) => {
+      if (pokemon.detail) {
+        pokemon.closeDetail()
       }
     })
   }
@@ -997,6 +1022,9 @@ export default class BoardManager {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, {
         shiny: this.state.shinyEncounter
       })
+      for (const stat in pveStage.statBoosts) {
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat], undefined)
+      }
       if (
         this.state.townEncounter === TownEncounters.MAROWAK &&
         pveStage.marowakItems &&
@@ -1027,12 +1055,8 @@ export default class BoardManager {
         )
       } else {
         pkmSprite.y -= 500
-        pkmSprite.orientation = Orientation.DOWN
-        this.scene.animationManager?.animatePokemon(
-          pkmSprite,
-          PokemonActionState.WALK,
-          false
-        )
+        pkmSprite.orientation = Orientation.UP
+        pkmSprite.pokemon.action = PokemonActionState.WALK
 
         this.scene.tweens.add({
           targets: pkmSprite,
@@ -1078,18 +1102,20 @@ export default class BoardManager {
 
     if (isRedPlayer) {
       // avatar goes first in the portal
-      this.scene.tweens.add({
-        targets: this.playerAvatar,
-        ease: Phaser.Math.Easing.Quadratic.In,
-        duration: 700,
-        scale: 0,
-        x: portalX,
-        y: portalY
-      })
+      if (this.playerAvatar != null) {
+        this.scene.tweens.add({
+          targets: this.playerAvatar,
+          ease: Phaser.Math.Easing.Quadratic.In,
+          duration: 700,
+          scale: 0,
+          x: portalX,
+          y: portalY
+        })
+      }
 
       // move board pokemons into the portal
       const pokemonsToTeleport = [...this.pokemons.values()].filter(
-        (p) => FlowerPotMons.includes(PkmByIndex[p.index]) === false
+        (p) => FlowerPotMons.includes(PkmByIndex[p.pokemon.index]) === false
       )
       for (const pokemon of pokemonsToTeleport) {
         const delay = randomBetween(0, 300)

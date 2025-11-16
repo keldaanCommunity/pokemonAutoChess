@@ -15,41 +15,37 @@ We are also making changes to the game modes. The Quick Play mode is now renamed
 
 ## Newcomers found on the road
 
-![Celesteela](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0797/Normal.png)
-![Venipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0543/Normal.png)
-![Whirlipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0544/Normal.png)
-![Scolipede](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0545/Normal.png)
-![Meltan](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0808/Normal.png)
-![Varoom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0965/Normal.png)
-![Revavroom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0966/Normal.png)
-![Ledyba](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0165/Normal.png)
-![Ledian](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0166/Normal.png)
-![Emolga](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0587/Normal.png)
-![Taillow](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0276/Normal.png)
-![Swellow](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0277/Normal.png)
+![Celesteela](/assets/portraits/0797/Normal.png)
+![Venipede](/assets/portraits/0543/Normal.png)
+![Whirlipede](/assets/portraits/0544/Normal.png)
+![Scolipede](/assets/portraits/0545/Normal.png)
+![Meltan](/assets/portraits/0808/Normal.png)
+![Varoom](/assets/portraits/0965/Normal.png)
+![Revavroom](/assets/portraits/0966/Normal.png)
+![Ledyba](/assets/portraits/0165/Normal.png)
+![Ledian](/assets/portraits/0166/Normal.png)
+![Emolga](/assets/portraits/0587/Normal.png)
+![Taillow](/assets/portraits/0276/Normal.png)
+![Swellow](/assets/portraits/0277/Normal.png)
 
 ## New parts in the garage
 
 Several craftable items have been changed or changed recipe:
 
-![Amulet coin](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/AMULET_COIN.png) Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on a new special town encounter.
+![Amulet coin](/assets/item/AMULET_COIN.png) Amulet Coin is no longer craftable, but can be obtained at stage 4 carousel on a new special town encounter.
 
-![Sticky Barb](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/STICKY_BARB.png) New item: Sticky Barb - crafted with Heart Scale + Miracle Seed, a new defense item that hurts melee attackers.
+![Sticky Barb](/assets/item/STICKY_BARB.png) New item: Sticky Barb - crafted with Heart Scale + Miracle Seed, a new defense item that hurts melee attackers.
 
-![Smoke Ball](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SMOKE_BALL.png) Smoke Ball, ![Shiny Charm](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SHINY_CHARM.png) Shiny Charm, ![Shell Bell](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SHELL_BELL.png) Shell Bell and ![Pokemonomicon](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/POKEMONOMICON.png) Pokemonomicon have new recipes and stats.
+![Smoke Ball](/assets/item/SMOKE_BALL.png) Smoke Ball, ![Shiny Charm](/assets/item/SHINY_CHARM.png) Shiny Charm, ![Shell Bell](/assets/item/SHELL_BELL.png) Shell Bell and ![Pokemonomicon](/assets/item/POKEMONOMICON.png) Pokemonomicon have new recipes and stats.
 
-![Ability Shield](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/ABILITY_SHIELD.png) Cleanse Tag is renamed to Ability Shield, with a new recipe and stats.
+![Ability Shield](/assets/item/ABILITY_SHIELD.png) Cleanse Tag is renamed to Ability Shield, with a new recipe and stats.
 
-![Aqua Egg](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/AQUA_EGG.png) Aqua Egg is now a good PP generator no matter the max PP of the Pokémon
+![Aqua Egg](/assets/item/AQUA_EGG.png) Aqua Egg is now a good PP generator no matter the max PP of the Pokémon
 
-![Green Orb](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/GREEN_ORB.png) Green Orb excess healing is now converted to PP.
+![Green Orb](/assets/item/GREEN_ORB.png) Green Orb excess healing is now converted to PP.
 
-![Soul Dew](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/SOUL_DEW.png) Soul Dew is also reworked to generate both 5 AP and 5 PP per second.
+![Soul Dew](/assets/item/SOUL_DEW.png) Soul Dew is also reworked to generate both 5 AP and 5 PP per second.
 
-![Deep Sea Tooth](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/DEEP_SEA_TOOTH.png) Mana Scarf is now Deep Sea Tooth, a more physical attack-oriented version of the item valuing KOs.
+![Deep Sea Tooth](/assets/item/DEEP_SEA_TOOTH.png) Mana Scarf is now Deep Sea Tooth, a more physical attack-oriented version of the item valuing KOs.
 
-![Air Balloon](https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/master/app/public/src/assets/item%7Btps%7D/AIR_BALLOON.png) Swift Wing is renamed to Air Balloon, which now makes the holder levitate, granting immunity to board effects.
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1401978138384400454)
+![Air Balloon](/assets/item/AIR_BALLOON.png) Swift Wing is renamed to Air Balloon, which now makes the holder levitate, granting immunity to board effects.

@@ -1,15 +1,15 @@
-import React from "react"
 import { GameObjects } from "phaser"
+import React from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../models/precomputed/precomputed-emotions"
 import { IPlayer } from "../../../../types"
 import { AvatarEmotions, Emotion } from "../../../../types/enum/Emotion"
 import { logger } from "../../../../utils/logger"
+import PokemonPortrait from "../../pages/component/pokemon-portrait"
 import { cc } from "../../pages/utils/jsx"
 import store from "../../stores"
 import GameScene from "../scenes/game-scene"
-import PokemonPortrait from "../../pages/component/pokemon-portrait"
 import "./emote-menu.css"
 
 export function EmoteMenuComponent(props: {

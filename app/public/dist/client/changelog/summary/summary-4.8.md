@@ -10,32 +10,28 @@ Wild pokemons can initially be only found during PvE stages, but they will attra
 
 ## Newcomers in 4.8
 
-![Enamorus](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0905/Normal.png)
-![Thundurus](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0642/Normal.png)
-![Landorus](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0645/Normal.png)
-![Feebas](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0349/Normal.png)
-![Milotic](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0350/Normal.png)
-![Morpeko](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0877/Normal.png)
-![Lickitung](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0108/Normal.png)
-![Lickilicky](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0463/Normal.png)
-![Kangaskhan](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0115/Normal.png)
-![Teddiursa](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0216/Normal.png)
-![Ursaring](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0217/Normal.png)
-![Aipom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0190/Normal.png)
-![Ambipom](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0424/Normal.png)
-![Deerling](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0585/Normal.png)
-![Sawsbuck](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0586/Normal.png)
-![Patrat](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0504/Normal.png)
-![Watchog](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0505/Normal.png)
-![Spinarak](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0167/Normal.png)
-![Ariados](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0168/Normal.png)
-![Type_Null](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0772/Normal.png)
-![Silvally](https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master/portrait/0773/Normal.png)
+![Enamorus](/assets/portraits/0905/Normal.png)
+![Thundurus](/assets/portraits/0642/Normal.png)
+![Landorus](/assets/portraits/0645/Normal.png)
+![Feebas](/assets/portraits/0349/Normal.png)
+![Milotic](/assets/portraits/0350/Normal.png)
+![Morpeko](/assets/portraits/0877/Normal.png)
+![Lickitung](/assets/portraits/0108/Normal.png)
+![Lickilicky](/assets/portraits/0463/Normal.png)
+![Kangaskhan](/assets/portraits/0115/Normal.png)
+![Teddiursa](/assets/portraits/0216/Normal.png)
+![Ursaring](/assets/portraits/0217/Normal.png)
+![Aipom](/assets/portraits/0190/Normal.png)
+![Ambipom](/assets/portraits/0424/Normal.png)
+![Deerling](/assets/portraits/0585/Normal.png)
+![Sawsbuck](/assets/portraits/0586/Normal.png)
+![Patrat](/assets/portraits/0504/Normal.png)
+![Watchog](/assets/portraits/0505/Normal.png)
+![Spinarak](/assets/portraits/0167/Normal.png)
+![Ariados](/assets/portraits/0168/Normal.png)
+![Type_Null](/assets/portraits/0772/Normal.png)
+![Silvally](/assets/portraits/0773/Normal.png)
 
 ## Enraged
 
 After 35 seconds of fight, units get the status Enraged, increasing a lot their damage and reducing their defense. This should prevent too many ties between two defensive compositions.
-
----
-
-Check out the full changelog on [Discord](https://discord.com/channels/737230355039387749/737230355039387752/1210882481172127794) !

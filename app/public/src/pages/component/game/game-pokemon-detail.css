@@ -61,25 +61,43 @@
   flex-wrap: wrap;
 }
 
+.game-pokemon-detail-bars {
+  grid-column: span 3;
+  display: grid;
+  gap: 4px;
+}
+
 .game-pokemon-detail-stats {
   grid-column: span 3;
   display: grid;
   grid-template: 32px 32px / repeat(5, 1fr);
-}
-
-.in-shop .game-pokemon-detail-stats,
-.in-board .game-pokemon-detail-stats {
-  grid-template: 32px 32px / repeat(4, 1fr);
+  gap: 4px;
+  margin-bottom: 1px;
 }
 
 .game-pokemon-detail-stats > div {
   white-space: nowrap;
   overflow: visible;
+  min-width: 60px;
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+  box-shadow: 1px 1px 0 #00000080;
 }
 
 .game-pokemon-detail-stats img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
+  margin: 2px 2px 2px 0;
+}
+
+.game-pokemon-detail-stats .buffed {
+  color: var(--color-fg-green);
+  font-weight: 600;
+}
+
+.game-pokemon-detail-stats .nerfed {
+  color: var(--color-fg-red);
+  font-weight: 600;
 }
 
 .game-pokemon-detail-stats img + span {
@@ -95,10 +113,15 @@
   align-items: center;
 }
 
+.game-pokemon-detail-stat-range img {
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+}
+
 .game-pokemon-detail-stats .game-pokemon-detail-stat-range img + span {
   display: inline-block;
-  margin: 0.5em;
-  font-size: 120%;
+  font-size: 150%;
 }
 
 .game-pokemon-detail-stats .negative {
@@ -143,7 +166,7 @@
   background-color: #4f5160;
   text-transform: capitalize;
   font-variant: small-caps;
-  padding: 0.25em 5px;
+  padding: 0 5px 0.1em;
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
@@ -157,15 +180,23 @@
 
 .game-pokemon-detail-passive {
   grid-column: span 3;
-  font-style: italic;
   background-color: #4f5160;
   padding: 0.25em 5px;
   margin: 0 -5px -5px -5px;
+}
+
+.game-pokemon-detail-passive p {
+  font-style: italic;
   font-size: 1em;
-  box-shadow: 0 -1px 1px rgb(0 0 0 / 50%);
   white-space: pre-wrap;
 }
 
 .game-pokemon-detail-passive:last-child {
   border-radius: 0 0 8px 8px;
+}
+
+.game-pokemon-detail-passive-bar {
+  grid-column: span 3;
+  display: grid;
+  margin: 4px 0;
 }

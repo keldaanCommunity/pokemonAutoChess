@@ -1,13 +1,12 @@
+import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import Player from "../models/colyseus-models/player"
 import { SynergyEffects } from "../models/effects"
 import { IPokemonEntity, Transfer } from "../types"
-import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../types/Config"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
   HealType,
   PokemonActionState,
-  Stat,
   Team
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
@@ -20,7 +19,11 @@ import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
-import { OnShieldDepletedEffect, PeriodicEffect } from "./effects/effect"
+import {
+  OnResurrectEffect,
+  OnShieldDepletedEffect,
+  PeriodicEffect
+} from "./effects/effect"
 import { humanHealEffect } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
 
@@ -33,7 +36,7 @@ export default abstract class PokemonState {
     target: PokemonEntity | null,
     isTripleAttack = false
   ) {
-    if (target && target.life > 0) {
+    if (target && target.hp > 0) {
       let damage = pokemon.atk
       let physicalDamage = 0
       let specialDamage = 0
@@ -135,7 +138,7 @@ export default abstract class PokemonState {
         trueDamagePart += 0.25
       }
       if (pokemon.effects.has(EffectEnum.LOCK_ON) && target) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        trueDamagePart += 3.0 * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
 
@@ -281,11 +284,7 @@ export default abstract class PokemonState {
       }
       return { healReceived: 0, overheal: 0 }
     }
-    if (
-      pokemon.life > 0 &&
-      pokemon.life < pokemon.hp &&
-      !pokemon.status.protect
-    ) {
+    if (pokemon.hp > 0 && !pokemon.status.protect) {
       if (apBoost > 0) {
         heal *= 1 + (apBoost * caster.ap) / 100
       }
@@ -303,11 +302,10 @@ export default abstract class PokemonState {
       }
 
       heal = Math.round(heal)
-      const healReceived = Math.min(pokemon.hp - pokemon.life, heal)
-
-      pokemon.life = Math.min(pokemon.hp, pokemon.life + heal)
-
-      const overheal = min(0)(pokemon.life + heal - pokemon.hp)
+      const missingHP = pokemon.maxHP - pokemon.hp
+      const healReceived = max(missingHP)(heal)
+      const overheal = min(0)(heal - missingHP)
+      pokemon.hp += healReceived
 
       if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
@@ -323,6 +321,10 @@ export default abstract class PokemonState {
         caster.healDone += healReceived
       }
 
+      if (overheal > 0 && pokemon.types.has(Synergy.GRASS)) {
+        pokemon.addMaxHP(0.4 * overheal, pokemon, 0, false, false)
+      }
+
       return { healReceived, overheal }
     }
     return { healReceived: 0, overheal: 0 }
@@ -335,7 +337,7 @@ export default abstract class PokemonState {
     apBoost: number,
     crit: boolean
   ) {
-    if (pokemon.life > 0) {
+    if (pokemon.hp > 0) {
       if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
       if (crit) shield *= caster.critPower
       if (pokemon.status.enraged && shield > 0) shield *= 0.5
@@ -386,7 +388,7 @@ export default abstract class PokemonState {
       return { death: false, takenDamage: 0 }
     }
 
-    if (pokemon.life <= 0 || pokemon.status.resurecting) {
+    if (pokemon.hp <= 0 || pokemon.status.resurrecting) {
       pokemon.status.possessedCooldown = 0
       return { death: false, takenDamage: 0 }
     }
@@ -553,7 +555,7 @@ export default abstract class PokemonState {
             attacker ? attacker.name : "Environment"
           }, attack type: ${attackType}, defense : ${
             pokemon.def
-          }, spedefense: ${pokemon.speDef}, life: ${pokemon.life}`
+          }, spedefense: ${pokemon.speDef}, life: ${pokemon.hp}`
         )
       }
 
@@ -584,11 +586,11 @@ export default abstract class PokemonState {
         pokemon.shield = min(0)(pokemon.shield - damageOnShield)
       }
 
-      takenDamage += Math.min(residualDamage, pokemon.life)
+      takenDamage += Math.min(residualDamage, pokemon.hp)
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
-        pokemon.life - residualDamage < 0.3 * pokemon.hp
+        pokemon.hp - residualDamage < 0.3 * pokemon.maxHP
       ) {
         death = false
         takenDamage = 0
@@ -600,10 +602,10 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.life - residualDamage <= 0
+        pokemon.hp - residualDamage <= 0
       ) {
         const shield = Math.round(
-          pokemon.hp *
+          pokemon.maxHP *
             (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
               ? 1
               : pokemon.effects.has(EffectEnum.ELDER_POWER)
@@ -633,16 +635,16 @@ export default abstract class PokemonState {
         })
       }
 
-      pokemon.life = Math.max(0, pokemon.life - residualDamage)
+      pokemon.hp = Math.max(0, pokemon.hp - residualDamage)
 
-      // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.life} life shield ${pokemon.shield}`);
+      // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.hp} life shield ${pokemon.shield}`);
 
       if (shouldTargetGainMana) {
         pokemon.addPP(Math.ceil(residualDamage / 10), pokemon, 0, false)
       }
 
       if (takenDamage > 0) {
-        if (pokemon.life > 0) {
+        if (pokemon.hp > 0) {
           pokemon.onDamageReceived({
             attacker,
             damage: takenDamage,
@@ -689,22 +691,21 @@ export default abstract class PokemonState {
         }
       }
 
-      if (pokemon.life <= 0) {
-        if (pokemon.status.resurection) {
-          pokemon.status.triggerResurection(pokemon)
+      if (pokemon.hp <= 0) {
+        if (pokemon.status.resurrection) {
+          pokemon.status.triggerResurrection(pokemon, board)
+          pokemon
+            .getEffects(OnResurrectEffect)
+            .forEach((effect) => effect.apply({ pokemon, board, attacker }))
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
             if (entity && entity.targetEntityId === pokemon.id) {
-              // switch aggro immediately to reduce retarget lag after resurection
+              // switch aggro immediately to reduce retarget lag after resurrection
               entity.cooldown = 0
               entity.toMovingState()
             }
           })
         } else {
           death = true
-        }
-
-        if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.applyStat(Stat.ATK, 1, true)
         }
       }
 
@@ -729,7 +730,7 @@ export default abstract class PokemonState {
         : Team.BLUE_TEAM
       : pokemon.team
     pokemon.team = originalTeam
-    pokemon.onDeath({ board })
+    pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
     if (attacker && pokemon !== attacker) {
       attacker.onKill({ target: pokemon, board, attackType })
@@ -804,7 +805,7 @@ export default abstract class PokemonState {
     })
 
     if (
-      (pokemon.status.resurecting ||
+      (pokemon.status.resurrecting ||
         pokemon.status.freeze ||
         pokemon.status.sleep) &&
       pokemon.state.name !== "idle"
@@ -931,7 +932,7 @@ export default abstract class PokemonState {
       for (const cell of adjacentCells) {
         if (cell.value && cell.value.team === pokemon.team) {
           const { overheal } = cell.value.handleHeal(
-            0.03 * cell.value.hp,
+            0.03 * cell.value.maxHP,
             pokemon,
             0,
             false
@@ -945,7 +946,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK)
+      !pokemon.types.has(Synergy.ROCK) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -960,7 +962,8 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
       !pokemon.types.has(Synergy.FLYING) &&
-      !pokemon.types.has(Synergy.STEEL)
+      !pokemon.types.has(Synergy.STEEL) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -974,14 +977,16 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
-      !pokemon.types.has(Synergy.POISON)
+      !pokemon.types.has(Synergy.POISON) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.status.triggerPoison(1000, pokemon, undefined)
     }
 
     if (
       pokemon.effects.has(EffectEnum.HAIL) &&
-      !pokemon.types.has(Synergy.ICE)
+      !pokemon.types.has(Synergy.ICE) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -996,7 +1001,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.EMBER) &&
-      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING))
+      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
         damage: 10,

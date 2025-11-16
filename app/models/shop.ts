@@ -1,25 +1,41 @@
-import GameState from "../rooms/states/game-state"
-import { IPokemon, IPokemonEntity } from "../types"
 import {
   ARCEUS_RATE,
+  BuyPrices,
   DITTO_RATE,
+  FALINKS_TROOPER_RATE,
   FishRarityProbability,
+  getUnownsPoolPerStage,
+  HIGH_ROLLER_CHANCE,
+  HONEY_CHANCE,
+  INCENSE_CHANCE,
   KECLEON_RATE,
   LegendaryPool,
+  MAGNET_PULL_RATE_PER_RARITY,
+  MIN_STAGE_FOR_DITTO,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
   PortalCarouselStages,
+  PVE_WILD_CHANCE,
   RarityCost,
   RarityProbabilityPerLevel,
+  REMORAID_RATE,
+  REPEAT_BALL_LEGENDARY_CAP,
+  REPEAT_BALL_UNIQUE_CAP,
+  REPEAT_BALL_UNIQUE_INTERVAL,
+  SellPrices,
   SHOP_SIZE,
+  UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL,
+  UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL,
+  UNOWN_RATE_AMNESIA,
   UniquePool
-} from "../types/Config"
+} from "../config"
+import GameState from "../rooms/states/game-state"
+import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import { FishingRod, Item } from "../types/enum/Item"
 import {
-  getUnownsPoolPerStage,
   isRegionalVariant,
   Pkm,
   PkmDuos,
@@ -41,7 +57,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
-import { PokemonClasses } from "./colyseus-models/pokemon"
+import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { getPokemonBaseline, PkmColorVariantsByPkm } from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
@@ -96,37 +112,37 @@ export function getSellPrice(
   }
 
   if (name === Pkm.EGG) {
-    price = pokemon.shiny ? 10 : 2
+    price = pokemon.shiny ? SellPrices.SHINY_EGG : SellPrices.EGG
   } else if (name == Pkm.DITTO) {
-    price = 5
+    price = SellPrices.DITTO
   } else if (name == Pkm.FALINKS_TROOPER) {
-    price = 5
+    price = SellPrices.FALINKS_TROOPER
   } else if (name == Pkm.MELTAN) {
-    price = 0
+    price = SellPrices.MELTAN
   } else if (name === Pkm.MAGIKARP) {
-    price = 0
+    price = SellPrices.MAGIKARP
   } else if (name === Pkm.FEEBAS) {
-    price = 1
+    price = SellPrices.FEEBAS
   } else if (name === Pkm.WISHIWASHI) {
-    price = 3
+    price = SellPrices.WISHIWASHI
   } else if (name === Pkm.REMORAID) {
-    price = 2
+    price = SellPrices.REMORAID
   } else if (name === Pkm.OCTILLERY) {
-    price = hasRareCandy ? 2 : 7
+    price = hasRareCandy ? SellPrices.REMORAID : SellPrices.OCTILLERY
   } else if (name === Pkm.GYARADOS) {
-    price = hasRareCandy ? 0 : 10
+    price = hasRareCandy ? SellPrices.MAGIKARP : SellPrices.GYARADOS
   } else if (name === Pkm.MILOTIC) {
-    price = hasRareCandy ? 1 : 10
+    price = hasRareCandy ? SellPrices.FEEBAS : SellPrices.MILOTIC
   } else if (name === Pkm.WISHIWASHI_SCHOOL) {
-    price = hasRareCandy ? 3 : 10
+    price = hasRareCandy ? SellPrices.WISHIWASHI : SellPrices.WISHIWASHI_SCHOOL
   } else if (Unowns.includes(name)) {
-    price = 1
+    price = SellPrices.UNOWN
   } else if (pokemon.rarity === Rarity.HATCH) {
-    price = [3, 4, 5][stars - 1] ?? 5
+    price = SellPrices.HATCH[stars - 1] ?? SellPrices.HATCH.at(-1)
   } else if (pokemon.rarity === Rarity.UNIQUE) {
-    price = duo ? 6 : 10
+    price = duo ? SellPrices.UNIQUE_DUO : SellPrices.UNIQUE
   } else if (pokemon.rarity === Rarity.LEGENDARY) {
-    price = duo ? 10 : 20
+    price = duo ? SellPrices.LEGENDARY_DUO : SellPrices.LEGENDARY
   } else if (getPokemonBaseline(name) === Pkm.EEVEE) {
     price = RarityCost[pokemon.rarity]
   } else if (duo) {
@@ -144,16 +160,16 @@ export function getBuyPrice(
 ): number {
   if (specialGameRule === SpecialGameRule.FREE_MARKET) return 0
 
-  let price = 1
+  let price: number
 
   if (name === Pkm.DITTO) {
-    price = 5
+    price = BuyPrices.DITTO
   } else if (name === Pkm.FALINKS_TROOPER) {
-    price = 5
+    price = BuyPrices.FALINKS_TROOPER
   } else if (name === Pkm.MELTAN) {
-    price = 0
+    price = BuyPrices.MELTAN
   } else if (Unowns.includes(name)) {
-    price = 1
+    price = BuyPrices.UNOWN
   } else {
     price = RarityCost[getPokemonData(name).rarity]
   }
@@ -221,9 +237,11 @@ export default class Shop {
     }
   }
 
-  addAdditionalPokemon(pkmProposition: PkmProposition) {
+  addAdditionalPokemon(pkmProposition: PkmProposition, state: GameState) {
     const pkm: Pkm =
       pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
+    if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
+    state.additionalPokemons.push(pkm)
     const { rarity, stages } = getPokemonData(pkm)
     const pool = this.getPool(rarity)
     const entityNumber = getPoolSize(rarity, stages)
@@ -305,18 +323,31 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
-    if (
-      player.effects.has(EffectEnum.EERIE_SPELL) &&
-      !manualRefresh &&
-      !player.shopLocked
-    ) {
+    const hasEerieSpell = player.effects.has(EffectEnum.EERIE_SPELL)
+    if (hasEerieSpell) {
+      player.shopsSinceLastUnownShop += 1
+    }
+    const shouldBeUnownShop =
+      hasEerieSpell &&
+      ((!manualRefresh && !player.shopLocked) ||
+        (manualRefresh &&
+          player.shopsSinceLastUnownShop ===
+            UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL))
+
+    if (shouldBeUnownShop) {
       // Unown shop
       player.shopFreeRolls += 1
+      player.shopsSinceLastUnownShop = 0
       const unowns = getUnownsPoolPerStage(state.stageLevel)
+      const chosenUnowns: Pkm[] = []
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = pickRandomIn(unowns)
+        const availableUnowns = unowns.filter((u) => !chosenUnowns.includes(u))
+        const randomUnown = pickRandomIn(availableUnowns)
+        chosenUnowns.push(randomUnown)
+        player.shop[i] = randomUnown
       }
     } else {
+      // Regular shop
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = this.pickPokemon(player, state, i)
       }
@@ -342,43 +373,64 @@ export default class Shop {
       const synergyWanted: Synergy | undefined = portalSynergies[i]
       let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-        const specialSynergies: ReadonlyMap<Pkm, Synergy> = new Map([
-          [Pkm.TAPU_BULU, Synergy.GRASS],
-          [Pkm.TAPU_FINI, Synergy.FAIRY],
-          [Pkm.TAPU_KOKO, Synergy.ELECTRIC],
-          [Pkm.TAPU_LELE, Synergy.PSYCHIC],
-          [Pkm.OGERPON_CORNERSTONE, Synergy.ROCK],
-          [Pkm.OGERPON_HEARTHFLAME, Synergy.FIRE],
-          [Pkm.OGERPON_WELLSPRING, Synergy.AQUATIC]
-        ])
         const { types, regional } = getPokemonData(pkm)
-        if (
-          regional &&
-          new PokemonClasses[pkm](pkm).isInRegion(player.map) === false
-        ) {
-          // skip regional pokemons not in their region
-          return false
-        }
 
         const hasSynergyWanted =
-          synergyWanted === undefined
-            ? true
-            : specialSynergies.has(pkm)
-              ? specialSynergies.get(pkm) === synergyWanted
-              : types.includes(synergyWanted)
+          synergyWanted === undefined || types.includes(synergyWanted)
 
-        return (
-          hasSynergyWanted &&
-          !player.pokemonsProposition.some((prop) => {
-            // avoid proposing two pokemons of the same family or regional variants
+        if (!hasSynergyWanted) return false
+
+        if (regional) {
+          const pokemon = new PokemonClasses[pkm](pkm)
+          if (!pokemon.isInRegion(player.map)) {
+            // skip regional pokemons not in their region
+            return false
+          }
+        }
+
+        if (
+          player.pokemonsProposition.some((prop) => {
             const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
             return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
           })
-        )
+        ) {
+          // avoid proposing two pokemons of the same family or regional variants
+          return false
+        }
+
+        if (
+          pkm in PkmRegionalVariants &&
+          PkmRegionalVariants[pkm]?.some((p) => {
+            const variant = new PokemonClasses[p](p)
+            const lostTypes = types.filter((type) => !variant.types.has(type))
+            return (
+              variant.isInRegion(player.map) &&
+              synergyWanted &&
+              lostTypes.includes(synergyWanted)
+            )
+          })
+        ) {
+          // avoid proposing pokemon whose regional variants would lose the wanted synergy
+          return false
+        }
+
+        return true
       })
 
       if (candidates.length === 0) candidates = allCandidates
       let selected = pickRandomIn(candidates)
+
+      if (selected in PkmRegionalVariants) {
+        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+          new PokemonClasses[p](p).isInRegion(player.map)
+        )
+        if (regionalVariants.length > 0)
+          selected = pickRandomIn(regionalVariants)
+      }
+      if (selected in PkmColorVariantsByPkm) {
+        selected = PkmColorVariantsByPkm[selected]!(player)
+      }
+
       if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
@@ -464,29 +516,36 @@ export default class Shop {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
       chance(DITTO_RATE) &&
-      state.stageLevel >= 2 &&
+      state.stageLevel >= MIN_STAGE_FOR_DITTO &&
       !noSpecial
     ) {
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
     if (
-      player.effects.has(EffectEnum.LIGHT_SCREEN) &&
       shopIndex === 5 &&
-      (player.rerollCount + state.stageLevel) % 3 === 0 &&
-      !noSpecial
+      !noSpecial &&
+      ((player.effects.has(EffectEnum.LIGHT_SCREEN) &&
+        (player.rerollCount + state.stageLevel) %
+          UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL ===
+          0) ||
+        (player.effects.has(EffectEnum.AMNESIA) && chance(UNOWN_RATE_AMNESIA)))
     ) {
       const unowns = getUnownsPoolPerStage(state.stageLevel)
       return pickRandomIn(unowns)
     }
 
-    if (player.effects.has(EffectEnum.FALINKS_BRASS) && chance(4 / 100)) {
+    if (
+      player.effects.has(EffectEnum.FALINKS_BRASS) &&
+      chance(FALINKS_TROOPER_RATE)
+    ) {
       return Pkm.FALINKS_TROOPER
     }
 
     const isPVE = state.stageLevel in PVEStages
     const wildChance =
-      player.wildChance + (isPVE || state.stageLevel === 0 ? 0.05 : 0)
+      player.wildChance +
+      (isPVE || state.stageLevel === 0 ? PVE_WILD_CHANCE : 0)
 
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
@@ -494,7 +553,11 @@ export default class Shop {
     const attractors = values(player.board).filter(
       (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
     )
-    const attractor = attractors.find((p) => chance(5 / 100, p))
+    let attractor: Pokemon | null = null
+    for (const p of attractors) {
+      if (p.items.has(Item.INCENSE) && chance(INCENSE_CHANCE, p)) attractor = p
+      if (p.meal === Item.HONEY && chance(HONEY_CHANCE, p)) attractor = p
+    }
 
     if (attractor) {
       specificTypesWanted = values(attractor.types)
@@ -520,7 +583,7 @@ export default class Shop {
 
     if (
       state.specialGameRule === SpecialGameRule.HIGH_ROLLER &&
-      chance(2 / 100) &&
+      chance(HIGH_ROLLER_CHANCE) &&
       !noSpecial
     ) {
       if (state.stageLevel < 10) return this.pickSpecialPokemon(Rarity.HATCH)
@@ -546,9 +609,15 @@ export default class Shop {
       shopIndex < repeatBallHolders.length &&
       !noSpecial
     ) {
-      if (totalRerolls >= 120 && totalRerolls % 10 === 0) {
+      if (
+        totalRerolls >= REPEAT_BALL_LEGENDARY_CAP &&
+        totalRerolls % REPEAT_BALL_UNIQUE_INTERVAL === 0
+      ) {
         return this.pickSpecialPokemon(Rarity.LEGENDARY)
-      } else if (totalRerolls >= 80 && totalRerolls % 10 === 0) {
+      } else if (
+        totalRerolls >= REPEAT_BALL_UNIQUE_CAP &&
+        totalRerolls % REPEAT_BALL_UNIQUE_INTERVAL === 0
+      ) {
         return this.pickSpecialPokemon(Rarity.UNIQUE)
       }
     }
@@ -592,12 +661,17 @@ export default class Shop {
     const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
-    if (mantine && chance(0.33, mantine)) return Pkm.REMORAID
 
     const rarityProbability = FishRarityProbability[rod]
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
+
+    if (
+      finals.has(Pkm.REMORAID) === false &&
+      ((mantine && chance(REMORAID_RATE, mantine)) || chance(player.wildChance))
+    )
+      return Pkm.REMORAID
 
     let rarity = Rarity.SPECIAL
     for (const r in rarityProbability) {
@@ -621,22 +695,14 @@ export default class Shop {
   }
 
   magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
-    const rarityProbability = {
-      [Rarity.COMMON]: 0.15,
-      [Rarity.UNCOMMON]: 0.28,
-      [Rarity.RARE]: 0.15,
-      [Rarity.SPECIAL]: 0.35,
-      [Rarity.EPIC]: 0.05,
-      [Rarity.ULTRA]: 0.02
-    }
     const rarity_seed =
       Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
     let threshold = 0
     const finals = player.getFinalizedLines()
 
     let rarity = Rarity.SPECIAL
-    for (const r in rarityProbability) {
-      threshold += rarityProbability[r]
+    for (const r in MAGNET_PULL_RATE_PER_RARITY) {
+      threshold += MAGNET_PULL_RATE_PER_RARITY[r]
       rarity = r as Rarity
       if (rarity_seed < threshold) {
         break

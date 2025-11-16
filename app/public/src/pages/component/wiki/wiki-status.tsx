@@ -23,7 +23,7 @@ export default function WikiStatus() {
     Status.CHARM,
     Status.POSSESSED,
     Status.PROTECT,
-    Status.RESURECTION,
+    Status.RESURRECTION,
     Status.RUNE_PROTECT,
     Status.RAGE,
     Status.POKERUS,

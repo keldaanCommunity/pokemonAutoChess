@@ -2,11 +2,12 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import WikiAbility from "./wiki-ability"
-import WikiPokemons from "./wiki-pokemons"
-import WikiRegions from "./wiki-regions"
 import WikiData from "./wiki-data"
 import WikiFaq from "./wiki-faq"
 import WikiItems from "./wiki-items"
+import WikiPokemons from "./wiki-pokemons"
+import WikiRegions from "./wiki-regions"
+import WikiStages from "./wiki-stages"
 import WikiStatistic from "./wiki-statistic"
 import WikiStatus from "./wiki-status"
 import WikiTown from "./wiki-town"
@@ -34,6 +35,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
           <Tab key="title-statistic">{t("statistics_label")}</Tab>
           <Tab key="title-status">{t("status_label")}</Tab>
           <Tab key="title-weather">{t("weather_label")}</Tab>
+          <Tab key="title-stages">{t("stages")}</Tab>
           <Tab key="title-town">{t("town_label")}</Tab>
           <Tab key="title-dungeon">{t("dungeon_label")}</Tab>
           <Tab key="title-data">{t("data_label")}</Tab>
@@ -69,6 +71,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
         </TabPanel>
         <TabPanel key="weather">
           <WikiWeather />
+        </TabPanel>
+        <TabPanel key="stages">
+          <WikiStages />
         </TabPanel>
         <TabPanel key="town">
           <WikiTown />

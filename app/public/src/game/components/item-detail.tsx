@@ -3,7 +3,7 @@ import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { ItemStats } from "../../../../core/items"
+import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
 import {
   ConsumableItems,
@@ -42,16 +42,6 @@ export function ItemDetailTooltip({
     return output
   }
 
-  const getImageFilename = () => {
-    if (TMs.includes(item)) {
-      return "TM"
-    }
-    if (HMs.includes(item)) {
-      return "HM"
-    }
-    return item
-  }
-
   const itemCategoryLabel = ConsumableItems.includes(item)
     ? t("consumable_item")
     : UnholdableItems.includes(item)
@@ -62,10 +52,7 @@ export function ItemDetailTooltip({
 
   return (
     <div className="game-item-detail">
-      <img
-        className="game-item-detail-icon"
-        src={`assets/item/${getImageFilename()}.png`}
-      />
+      <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
       <div className="game-item-detail-name">
         {ItemRecipe[item] && (
           <div className="game-item-recipe">

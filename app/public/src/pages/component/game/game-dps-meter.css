@@ -1,26 +1,26 @@
 #root .game-dps-meter {
-  position: absolute;
   right: 6vw;
   top: calc(1.5% + 10px + 2vw);
-  width: 320px;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  padding: 10px;
-  overflow-y: scroll;
-  max-height: 78%;
   color: #fff;
 }
 
-.game-dps-meter header {
+.game-dps-meter.maximized {
+  width: 320px;
+}
+
+.game-dps-meter .draggable-window-content {
+  max-height: calc(78vh - 50px);
+}
+
+.game-dps-meter .draggable-window-content header {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 0.5em;
   text-align: center;
 }
 
-.game-dps-meter header img {
+.game-dps-meter .draggable-window-content header img {
   width: 60px;
   height: 60px;
 }
@@ -76,21 +76,4 @@
   border-width: 2px;
   border-image-outset: 1.5;
   box-shadow: 1px 1px 0 #00000060;
-}
-
-#game-dps-icon {
-  position: absolute;
-  right: 6vw;
-  top: 0.5%;
-  padding: 5px;
-  background-color: var(--color-bg-primary);
-}
-
-#root #game-dps-icon:hover {
-  filter: brightness(1.25);
-}
-
-#game-dps-icon img {
-  height: 2vw;
-  width: 2vw;
 }

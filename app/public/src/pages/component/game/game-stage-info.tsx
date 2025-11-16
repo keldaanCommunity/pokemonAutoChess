@@ -2,14 +2,14 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { PVEStages } from "../../../../../models/pve-stages"
-import { Emotion } from "../../../../../types"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
-  PortalCarouselStages
-} from "../../../../../types/Config"
-import { DungeonDetails } from "../../../../../types/enum/Dungeon"
+  PortalCarouselStages,
+  RegionDetails
+} from "../../../../../config"
+import { PVEStages } from "../../../../../models/pve-stages"
+import { Emotion } from "../../../../../types"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
@@ -19,9 +19,9 @@ import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonPortrait from "../pokemon-portrait"
 import TimerBar from "./game-timer-bar"
 import "./game-stage-info.css"
-import PokemonPortrait from "../pokemon-portrait"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
@@ -115,11 +115,9 @@ export default function GameStageInfo() {
                 place="bottom"
               >
                 <div style={{ display: "flex", alignContent: "center" }}>
-                  {DungeonDetails[currentPlayer.map].synergies.map(
-                    (synergy) => (
-                      <SynergyIcon type={synergy} key={"map_type_" + synergy} />
-                    )
-                  )}
+                  {RegionDetails[currentPlayer.map].synergies.map((synergy) => (
+                    <SynergyIcon type={synergy} key={"map_type_" + synergy} />
+                  ))}
                   <p>{t(`map.${currentPlayer.map}`)}</p>
                 </div>
               </Tooltip>,

@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar"
@@ -5,7 +6,11 @@ import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Role } from "../../../../../types"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  useAppDispatch,
+  useAppSelector
+} from "../../../hooks"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
@@ -21,11 +26,11 @@ import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import PokeGuesser from "../pokeguesser/pokeguesser"
 import Profile from "../profile/profile"
 import ServersList from "../servers/servers-list"
+import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
-import { createSelector } from "@reduxjs/toolkit"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -78,9 +83,7 @@ export function MainSidebar(props: MainSidebarProps) {
     }
   }, [])
 
-  const player = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.network.uid)
-  )
+  const player = useAppSelector(selectConnectedPlayer)
   const playersAlive = useAppSelector(
     createSelector([(state) => state.game.players], (players) =>
       players.filter((p) => p.life > 0)
@@ -128,7 +131,7 @@ export function MainSidebar(props: MainSidebarProps) {
           }}
           shimmer={isNewPatch}
         >
-          {t("news")}
+          {t("patch_notes")}
         </NavLink>
 
         {page === "main_lobby" && (
@@ -197,6 +200,18 @@ export function MainSidebar(props: MainSidebarProps) {
               {t("gadget.pokeguesser")}
             </NavLink>
           )}
+
+        {((!GADGETS.SYNERGY_WHEEL.disabled &&
+          profileLevel >= GADGETS.SYNERGY_WHEEL.levelRequired) ||
+          profile?.role === Role.ADMIN) && (
+          <NavLink
+            svg="synergy-wheel"
+            location="synergy-wheel"
+            handleClick={changeModal}
+          >
+            {t("gadget.synergy_wheel")}
+          </NavLink>
+        )}
 
         {page !== "game" &&
           ((!GADGETS.BOT_BUILDER.disabled &&
@@ -380,6 +395,7 @@ export type Modals =
   | "pokeguesser"
   | "profile"
   | "servers"
+  | "synergy-wheel"
   | "team-builder"
   | "tournaments"
   | "wiki"
@@ -478,6 +494,10 @@ function Modals({
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />
+      <SynergyWheelModal
+        show={modal === "synergy-wheel"}
+        handleClose={closeModal}
+      />
     </>
   )
 }

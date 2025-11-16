@@ -4,7 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import {
+  MinStageForGameToCount,
+  PortalCarouselStages,
+  RegionDetails
+} from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
@@ -20,19 +26,13 @@ import {
   Role,
   Transfer
 } from "../../../types"
-import {
-  MinStageForGameToCount,
-  PortalCarouselStages
-} from "../../../types/Config"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
-import { DungeonDetails } from "../../../types/enum/Dungeon"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
-import { Wanderer } from "../../../types/enum/Wanderer"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
@@ -100,6 +100,42 @@ export function getGameScene(): GameScene | undefined {
   return gameContainer?.game?.scene?.getScene<GameScene>("gameScene") as
     | GameScene
     | undefined
+}
+
+export function cyclePlayers(amt: number) {
+  const players = values(gameContainer.room?.state.players)
+  playerClick(
+    players[
+      (players.findIndex((p) => p === gameContainer.player) +
+        amt +
+        players.length) %
+        players.length
+    ].id
+  )
+}
+
+export function playerClick(id: string) {
+  const scene = getGameScene()
+  if (scene?.spectate) {
+    // if spectating game we switch directly without notifying the server to not show spectators avatars
+    if (gameContainer?.room?.state?.players) {
+      const spectatedPlayer = gameContainer?.room?.state?.players.get(id)
+      if (spectatedPlayer) {
+        gameContainer.setPlayer(spectatedPlayer)
+
+        const simulation = gameContainer?.room?.state.simulations.get(
+          spectatedPlayer.simulationId
+        )
+        if (simulation) {
+          gameContainer.setSimulation(simulation)
+        }
+      }
+
+      gameContainer?.gameScene?.board?.updateScoutingAvatars()
+    }
+  } else {
+    gameContainer?.room?.send(Transfer.SPECTATE, id)
+  }
 }
 
 export default function Game() {
@@ -190,30 +226,6 @@ export default function Game() {
     },
     [client, dispatch]
   )
-
-  function playerClick(id: string) {
-    const scene = getGameScene()
-    if (scene?.spectate) {
-      // if spectating game we switch directly without notifying the server to not show spectators avatars
-      if (room?.state?.players) {
-        const spectatedPlayer = room?.state?.players.get(id)
-        if (spectatedPlayer) {
-          gameContainer.setPlayer(spectatedPlayer)
-
-          const simulation = room.state.simulations.get(
-            spectatedPlayer.simulationId
-          )
-          if (simulation) {
-            gameContainer.setSimulation(simulation)
-          }
-        }
-
-        gameContainer.gameScene?.board?.updateScoutingAvatars()
-      }
-    } else {
-      room?.send(Transfer.SPECTATE, id)
-    }
-  }
 
   const leave = useCallback(async () => {
     const afterPlayers = new Array<IAfterGamePlayer>()
@@ -403,17 +415,17 @@ export default function Game() {
         logger.info("preloading maps", maps)
         const gameScene = getGameScene()
         if (gameScene) {
-          gameScene.load.reset()
           await gameScene.preloadMaps(maps)
-          gameScene.load.once("complete", () => {
-            if (!PortalCarouselStages.includes(room.state.stageLevel)) {
-              // map loaded after the end of the portal carousel stage, we swap it now. better later than never
-              gameContainer &&
-                gameContainer.player &&
-                gameScene.setMap(gameContainer.player.map)
-            }
-          })
-          gameScene.load.start()
+          gameScene.load
+            .on("complete", () => {
+              if (!PortalCarouselStages.includes(room.state.stageLevel)) {
+                // map loaded after the end of the portal carousel stage, we swap it now. better later than never
+                gameContainer &&
+                  gameContainer.player &&
+                  gameScene.setMap(gameContainer.player.map)
+              }
+            })
+            .start()
         }
       })
       room.onMessage(Transfer.SHOW_EMOTE, (message) => {
@@ -488,15 +500,6 @@ export default function Game() {
           </div>,
           { containerId: "toast-money" }
         )
-      })
-
-      room.onMessage(Transfer.WANDERER, (wanderer: Wanderer) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g && g.wandererManager) {
-            g.wandererManager.addWanderer(wanderer)
-          }
-        }
       })
 
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
@@ -753,9 +756,9 @@ export default function Game() {
               if (!alreadyLoading) {
                 gameScene.load.reset()
               }
-              preloadMusic(gameScene, DungeonDetails[newMap].music)
+              preloadMusic(gameScene, RegionDetails[newMap].music)
               gameScene.load.once("complete", () =>
-                playMusic(gameScene, DungeonDetails[newMap].music)
+                playMusic(gameScene, RegionDetails[newMap].music)
               )
               if (!alreadyLoading) {
                 gameScene.load.start()
@@ -804,7 +807,8 @@ export default function Game() {
           "totalPlayerDamageDealt",
           "eggChance",
           "goldenEggChance",
-          "wildChance"
+          "wildChance",
+          "cellBattery"
         ]
 
         fields.forEach((field) => {
@@ -847,6 +851,15 @@ export default function Game() {
         $player.listen("mulchCap", (value) => {
           dispatch(changePlayer({ id: player.id, field: "mulchCap", value }))
           getGameScene()?.board?.updateMulchCount()
+        })
+
+        $player.wanderers.onAdd((wanderer: Wanderer) => {
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g && g.wandererManager) {
+              g.wandererManager.addWanderer(wanderer)
+            }
+          }
         })
       })
 

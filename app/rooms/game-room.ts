@@ -3,6 +3,18 @@ import { MapSchema } from "@colyseus/schema"
 import { Client, Room } from "colyseus"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
+import {
+  AdditionalPicksStages,
+  ALLOWED_GAME_RECONNECTION_TIME,
+  EventPointsPerRank,
+  ExpPlace,
+  LegendaryPool,
+  MAX_EVENT_POINTS,
+  MAX_SIMULATION_DELTA_TIME,
+  MinStageForGameToCount,
+  PortalCarouselStages,
+  UniquePool
+} from "../config"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -16,6 +28,7 @@ import {
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
+import { Wanderer } from "../models/colyseus-models/wanderer"
 import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
@@ -25,7 +38,7 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
-import { getAdditionalsTier1 } from "../models/shop"
+import { getAdditionalsTier1, getSellPrice } from "../models/shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import {
   IDragDropCombineMessage,
@@ -41,20 +54,8 @@ import {
   Title,
   Transfer
 } from "../types"
-import {
-  AdditionalPicksStages,
-  ALLOWED_GAME_RECONNECTION_TIME,
-  EloRank,
-  EventPointsPerRank,
-  ExpPlace,
-  LegendaryPool,
-  MAX_EVENT_POINTS,
-  MAX_SIMULATION_DELTA_TIME,
-  MinStageForGameToCount,
-  PortalCarouselStages,
-  UniquePool
-} from "../types/Config"
 import { CloseCodes } from "../types/enum/CloseCodes"
+import { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -68,7 +69,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { Wanderer } from "../types/enum/Wanderer"
+import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
@@ -194,19 +195,62 @@ export default class GameRoom extends Room<GameState> {
       PRECOMPUTED_POKEMONS_PER_RARITY.EPIC
     )
 
+    if (this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE) {
+      /* based on the season, we remove the Deerling seasonal forms to only keep the current season's form */
+      // Determine season based on precise date, not just month
+      const now = new Date()
+      const year = now.getFullYear()
+      const date = new Date(year, now.getMonth(), now.getDate())
+
+      // seasons (Northern Hemisphere)
+      // Spring: Mar 20 - June 21
+      // Summer: Jun 22 - Sep 22
+      // Autumn: Sep 23 - Dec 20
+      // Winter: Dec 21 - Mar 19
+
+      let season: "spring" | "summer" | "autumn" | "winter"
+      const springStart = new Date(year, 2, 20) // Mar 20
+      const summerStart = new Date(year, 5, 22) // Jun 22
+      const autumnStart = new Date(year, 8, 23) // Sep 23
+      const winterStart = new Date(year, 11, 21) // Dec 21
+
+      if (date >= springStart && date < summerStart) {
+        season = "spring"
+      } else if (date >= summerStart && date < autumnStart) {
+        season = "summer"
+      } else if (date >= autumnStart && date < winterStart) {
+        season = "autumn"
+      } else {
+        season = "winter"
+      }
+
+      // Remove all Deerling forms except the current season's
+      this.additionalRarePool = this.additionalRarePool.filter((p) => {
+        if (
+          (p === Pkm.DEERLING_SPRING && season !== "spring") ||
+          (p === Pkm.DEERLING_SUMMER && season !== "summer") ||
+          (p === Pkm.DEERLING_AUTUMN && season !== "autumn") ||
+          (p === Pkm.DEERLING_WINTER && season !== "winter")
+        ) {
+          return false
+        }
+        return true
+      })
+    }
+
     shuffleArray(this.additionalUncommonPool)
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
 
     if (this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
       this.additionalUncommonPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalRarePool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalEpicPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
     }
 
@@ -478,7 +522,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     this.onMessage(
-      Transfer.WANDERER_CAUGHT,
+      Transfer.WANDERER_CLICKED,
       async (client, msg: { id: string }) => {
         if (client.auth) {
           try {
@@ -927,11 +971,6 @@ export default class GameRoom extends Room<GameState> {
                 "announcement",
                 `${player.name} won the Victory Road race !`
               )
-            } else {
-              this.presence.publish(
-                "announcement",
-                `${player.name} finished the Victory Road !`
-              )
             }
             player.titles.add(Title.FINISHER)
             fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
@@ -1056,7 +1095,7 @@ export default class GameRoom extends Room<GameState> {
   spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
-    if (x !== undefined) {
+    if (x !== null) {
       pokemon.positionX = x
       pokemon.positionY = 0
       if (anim === "fishing") {
@@ -1145,7 +1184,7 @@ export default class GameRoom extends Room<GameState> {
   ) {
     const player = this.state.players.get(playerId)
     if (!player || player.pokemonsProposition.length === 0) return
-    if (this.state.additionalPokemons.includes(pkm as Pkm)) return // already picked, probably a double click
+    if (this.state.additionalPokemons.includes(pkm as Pkm) && this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE) return // already picked, probably a double click
     if (
       UniquePool.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[1]
@@ -1174,12 +1213,10 @@ export default class GameRoom extends Room<GameState> {
         const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
           PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
         ) ?? pokemonsObtained[0].name) as Pkm
-        this.state.additionalPokemons.push(basePkm)
-        this.state.shop.addAdditionalPokemon(basePkm)
+        this.state.shop.addAdditionalPokemon(basePkm, this.state)
         player.regionalPokemons.push(pkm as Pkm)
       } else {
-        this.state.additionalPokemons.push(pkm as Pkm)
-        this.state.shop.addAdditionalPokemon(pkm)
+        this.state.shop.addAdditionalPokemon(pkm, this.state)
       }
 
       // update regional pokemons in case some regional variants of add picks are now available
@@ -1201,11 +1238,15 @@ export default class GameRoom extends Room<GameState> {
 
     pokemonsObtained.forEach((pokemon) => {
       const freeCellX = getFirstAvailablePositionInBench(player.board)
-      if (freeCellX !== undefined) {
+      if (freeCellX !== null) {
         pokemon.positionX = freeCellX
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
+      } else {
+        // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
+        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+        player.addMoney(sellPrice, true, null)
       }
     })
   }
@@ -1274,12 +1315,21 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  spawnWanderingPokemon(wandererNoId: Omit<Wanderer, "id">, player: Player) {
+  spawnWanderingPokemon({
+    pkm,
+    type,
+    behavior,
+    player
+  }: {
+    pkm: Pkm
+    type: WandererType
+    behavior: WandererBehavior
+    player: Player
+  }) {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    const wanderer: Wanderer = { ...wandererNoId, id }
-    this.state.wanderers.set(id, wanderer)
-    client.send(Transfer.WANDERER, wanderer)
+    const wanderer = new Wanderer({ id, pkm, type, behavior })
+    player.wanderers.set(id, wanderer)
   }
 }

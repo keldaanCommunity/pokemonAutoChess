@@ -11,10 +11,10 @@ import {
   PoolSize,
   RarityColor,
   RarityProbabilityPerLevel
-} from "../../../../../types/Config"
+} from "../../../../../config"
 import { Rarity } from "../../../../../types/enum/Game"
-import { getRankLabel } from "../../../../../types/strings/Strings"
 import { FishingRods } from "../../../../../types/enum/Item"
+import { getRankLabel } from "../../../../../types/strings/Strings"
 import { addIconsToDescription } from "../../utils/descriptions"
 
 export default function WikiData() {
@@ -221,6 +221,10 @@ export default function WikiData() {
       <p>
         {t("wiki.arceus_rate")}: {percentage.format(ARCEUS_RATE)}
       </p>
+
+      <h2>{t("wiki.luck_title")}</h2>
+      <p>{addIconsToDescription(t("wiki.luck_description"))}</p>
+      <p>{addIconsToDescription(t("wiki.luck_formula"))}</p>
     </div>
   )
 }

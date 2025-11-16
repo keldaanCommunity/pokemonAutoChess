@@ -1,7 +1,8 @@
+import { RegionDetails } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
-import { DungeonDetails, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
@@ -42,15 +43,17 @@ export class DebugScene extends Phaser.Scene {
   weatherManager: WeatherManager | undefined
   onProgress: (value: number) => void
   onComplete: () => void
-  pokemon?: PokemonSprite
+  pokemonSprite?: PokemonSprite
   target?: PokemonSprite
   uid = "debug"
+  mapName: DungeonPMDO | "town" = "town"
   tilemap: DesignTiled | undefined
   map: Phaser.Tilemaps.Tilemap | undefined
   colorFilter: Phaser.GameObjects.Rectangle | null = null
   music: Phaser.Sound.WebAudioSound | null = null
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
   abilitiesVfxGroup: Phaser.GameObjects.Group | undefined
+  landscape: Phaser.GameObjects.Sprite[] = []
 
   constructor(
     height: number,
@@ -89,8 +92,8 @@ export class DebugScene extends Phaser.Scene {
     status: Status | "",
     shiny: boolean
   ) {
-    if (this.pokemon) {
-      this.pokemon.destroy()
+    if (this.pokemonSprite) {
+      this.pokemonSprite.destroy()
     }
     clearAbilityAnimations(this)
     if (this.target) {
@@ -98,7 +101,7 @@ export class DebugScene extends Phaser.Scene {
       clearInterval(this.attackAnimInterval)
     }
     const [px, py] = transformEntityCoordinates(3, 3, false)
-    this.pokemon = new PokemonSprite(
+    this.pokemonSprite = new PokemonSprite(
       this,
       px,
       py,
@@ -107,9 +110,14 @@ export class DebugScene extends Phaser.Scene {
       false,
       false
     )
-    this.pokemon.orientation = orientation
-    this.pokemon.positionX = 3
-    this.pokemon.positionY = 3
+    this.pokemonSprite.orientation = orientation
+    this.pokemonSprite.positionX = 3
+    this.pokemonSprite.positionY = 3
+
+    this.pokemonSprite.sprite.setTint(
+      RegionDetails[this.mapName].tint ?? 0xffffff
+    )
+
     let animationName = AnimationType[animationType]
     const anims = {
       ...DEFAULT_POKEMON_ANIMATION_CONFIG,
@@ -141,20 +149,25 @@ export class DebugScene extends Phaser.Scene {
       animationName = anims.eat
     }
 
-    try {
-      this.animationManager?.play(this.pokemon, animationName, { repeat: -1 })
-    } catch (err) {
-      logger.error(
-        `Error playing animation ${this.pokemon.name} ${animationType}: ${animationName}`,
-        err
-      )
-    }
-    this.applyStatusAnimation(status)
+    this.pokemonSprite.once("loaded", () => {
+      try {
+        this.animationManager?.play(this.pokemonSprite!, animationName, {
+          repeat: -1
+        })
+      } catch (err) {
+        logger.error(
+          `Error playing animation ${this.pokemonSprite!.name} ${animationType}: ${animationName}`,
+          err
+        )
+      }
+      this.applyStatusAnimation(status)
+    })
   }
 
   updateMap(mapName: DungeonPMDO | "town"): Promise<void> {
     if (this.map) this.map.destroy()
 
+    this.mapName = mapName
     if (mapName === "town") {
       return new Promise((resolve) => {
         this.map = this.add.tilemap("town")
@@ -169,7 +182,7 @@ export class DebugScene extends Phaser.Scene {
         if (sys.animatedTiles) {
           sys.animatedTiles.pause()
         }
-        playMusic(this as any, DungeonDetails[mapName].music)
+        playMusic(this as any, RegionDetails[mapName].music)
         resolve()
       })
     }
@@ -188,7 +201,7 @@ export class DebugScene extends Phaser.Scene {
             )
           })
           this.load.tilemapTiledJSON(mapName, tilemap)
-          preloadMusic(this, DungeonDetails[mapName].music)
+          preloadMusic(this, RegionDetails[mapName].music)
           this.load.once("complete", resolve)
           this.load.start()
         })
@@ -204,7 +217,11 @@ export class DebugScene extends Phaser.Scene {
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
         ;(this.sys as any).animatedTiles.init(map)
-        playMusic(this as any, DungeonDetails[mapName].music)
+        playMusic(this as any, RegionDetails[mapName].music)
+      })
+      .then(() => {
+        this.updateSprite(Pkm.SMEARGLE, Orientation.DOWNLEFT, "Idle", "", false)
+        this.updateLandscape()
       })
   }
 
@@ -233,151 +250,169 @@ export class DebugScene extends Phaser.Scene {
     )
   }
 
+  updateLandscape() {
+    if (!this.map) return
+    const tint = RegionDetails[this.mapName].tint ?? 0xffffff
+    this.landscape.forEach((sprite) => sprite.destroy())
+    this.landscape = [
+      this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
+      this.scene.scene.add.sprite(1200, 600, "ground_holes", `hole5.png`),
+      this.scene.scene.add.sprite(420, 660, "berry_trees", "ASPEAR_BERRY_4"),
+      this.scene.scene.add.sprite(360, 660, "berry_trees", "BABIRI_BERRY_6"),
+      this.scene.scene.add.sprite(300, 660, "berry_trees", "LIECHI_BERRY_3"),
+      this.scene.scene.add.sprite(320, 580, "flower_pots", "BLUE.png"),
+      this.scene.scene.add.sprite(420, 580, "flower_pots", "PINK.png")
+    ]
+    this.landscape.forEach((sprite) => sprite.setScale(2).setTint(tint))
+  }
+
   applyStatusAnimation(status: Status | Boost | "") {
-    if (this.pokemon) {
-      this.pokemon.sprite.setTint(0xffffff)
-      this.pokemon.removePoison()
-      this.pokemon.removeSleep()
-      this.pokemon.removeBurn()
-      this.pokemon.removeSilence()
-      this.pokemon.removeFatigue()
-      this.pokemon.removeConfusion()
-      this.pokemon.removeFreeze()
-      this.pokemon.removeProtect()
-      this.pokemon.removeWound()
-      this.pokemon.removeResurection()
-      this.pokemon.removeParalysis()
-      this.pokemon.removePokerus()
-      this.pokemon.removeLocked()
-      this.pokemon.removeBlinded()
-      this.pokemon.removeArmorReduction()
-      this.pokemon.removeCharm()
-      this.pokemon.removeRuneProtect()
-      this.pokemon.removePossessed()
-      this.pokemon.removeReflectShieldAnim()
-      this.pokemon.removeFlinch()
-      this.pokemon.removeCurse()
-      this.pokemon.removeElectricField()
-      this.pokemon.removePsychicField()
-      this.pokemon.removeGrassField()
-      this.pokemon.removeFairyField()
+    if (this.pokemonSprite) {
+      this.pokemonSprite.sprite.setTint(
+        RegionDetails[this.mapName].tint ?? 0xffffff
+      )
+      this.pokemonSprite.removePoison()
+      this.pokemonSprite.removeSleep()
+      this.pokemonSprite.removeBurn()
+      this.pokemonSprite.removeSilence()
+      this.pokemonSprite.removeFatigue()
+      this.pokemonSprite.removeConfusion()
+      this.pokemonSprite.removeFreeze()
+      this.pokemonSprite.removeProtect()
+      this.pokemonSprite.removeWound()
+      this.pokemonSprite.removeResurrection()
+      this.pokemonSprite.removeParalysis()
+      this.pokemonSprite.removePokerus()
+      this.pokemonSprite.removeLocked()
+      this.pokemonSprite.removeBlinded()
+      this.pokemonSprite.removeArmorReduction()
+      this.pokemonSprite.removeCharm()
+      this.pokemonSprite.removeRuneProtect()
+      this.pokemonSprite.removePossessed()
+      this.pokemonSprite.removeReflectShieldAnim()
+      this.pokemonSprite.removeFlinch()
+      this.pokemonSprite.removeCurse()
+      this.pokemonSprite.removeElectricField()
+      this.pokemonSprite.removePsychicField()
+      this.pokemonSprite.removeGrassField()
+      this.pokemonSprite.removeFairyField()
 
       if (status === Status.POISONNED) {
-        this.pokemon.addPoison()
+        this.pokemonSprite.addPoison()
       }
       if (status === Status.SLEEP) {
-        this.pokemon.addSleep()
+        this.pokemonSprite.addSleep()
       }
       if (status === Status.BURN) {
-        this.pokemon.addBurn()
+        this.pokemonSprite.addBurn()
       }
       if (status == Status.SILENCE) {
-        this.pokemon.addSilence()
+        this.pokemonSprite.addSilence()
       }
       if (status == Status.FATIGUE) {
-        this.pokemon.addFatigue()
+        this.pokemonSprite.addFatigue()
       }
       if (status == Status.CONFUSION) {
-        this.pokemon.addConfusion()
+        this.pokemonSprite.addConfusion()
       }
       if (status == Status.FREEZE) {
-        this.pokemon.addFreeze()
+        this.pokemonSprite.addFreeze()
       }
       if (status == Status.PROTECT) {
-        this.pokemon.addProtect()
+        this.pokemonSprite.addProtect()
       }
       if (status == Status.WOUND) {
-        this.pokemon.addWound()
+        this.pokemonSprite.addWound()
       }
-      if (status == Status.RESURECTION) {
-        this.pokemon.addResurection()
+      if (status == Status.RESURRECTION) {
+        this.pokemonSprite.addResurrection()
       }
-      if (status == Status.RESURECTING) {
-        this.pokemon.resurectAnimation()
+      if (status == Status.RESURRECTING) {
+        this.pokemonSprite.resurrectAnimation()
       }
       if (status == Status.PARALYSIS) {
-        this.pokemon.addParalysis()
+        this.pokemonSprite.addParalysis()
       }
       if (status == Status.POKERUS) {
-        this.pokemon.addPokerus()
+        this.pokemonSprite.addPokerus()
       }
       if (status == Status.ARMOR_BREAK) {
-        this.pokemon.addArmorReduction()
+        this.pokemonSprite.addArmorReduction()
       }
       if (status == Status.CHARM) {
-        this.pokemon.addCharm()
+        this.pokemonSprite.addCharm()
       }
       if (status === Status.FLINCH) {
-        this.pokemon.addFlinch()
+        this.pokemonSprite.addFlinch()
       }
       if (status === Status.CURSE) {
-        this.pokemon.addCurse()
+        this.pokemonSprite.addCurse()
       }
       if (status == Status.RUNE_PROTECT) {
-        this.pokemon.addRuneProtect()
+        this.pokemonSprite.addRuneProtect()
       }
       if (status == Status.RAGE) {
-        this.pokemon.addRageEffect()
+        this.pokemonSprite.addRageEffect()
       }
       if (status == Status.LOCKED) {
-        this.pokemon.addLocked()
+        this.pokemonSprite.addLocked()
       }
       if (status == Status.POSSESSED) {
-        this.pokemon.addPossessed()
+        this.pokemonSprite.addPossessed()
       }
       if (status == Status.BLINDED) {
-        this.pokemon.addBlinded()
+        this.pokemonSprite.addBlinded()
       }
       if (status == Status.SPIKY_SHIELD) {
-        this.pokemon.addReflectShieldAnim()
+        this.pokemonSprite.addReflectShieldAnim()
       }
       if (status == Status.MAGIC_BOUNCE) {
-        this.pokemon.addReflectShieldAnim(0xffa0ff)
+        this.pokemonSprite.addReflectShieldAnim(0xffa0ff)
       }
       if (status == Status.REFLECT) {
-        this.pokemon.addReflectShieldAnim(0xff3030)
+        this.pokemonSprite.addReflectShieldAnim(0xff3030)
       }
       if (status == Status.ELECTRIC_FIELD) {
-        this.pokemon.addElectricField()
+        this.pokemonSprite.addElectricField()
       }
       if (status == Status.PSYCHIC_FIELD) {
-        this.pokemon.addPsychicField()
+        this.pokemonSprite.addPsychicField()
       }
       if (status == Status.GRASS_FIELD) {
-        this.pokemon.addGrassField()
+        this.pokemonSprite.addGrassField()
       }
       if (status == Status.FAIRY_FIELD) {
-        this.pokemon.addFairyField()
+        this.pokemonSprite.addFairyField()
       }
 
       if (status === "BOOST/ATK") {
-        this.pokemon.displayBoost(Stat.ATK, true)
+        this.pokemonSprite.displayBoost(Stat.ATK, true)
       }
       if (status === "BOOST/AP") {
-        this.pokemon.displayBoost(Stat.AP, true)
+        this.pokemonSprite.displayBoost(Stat.AP, true)
       }
       if (status === "BOOST/DEF") {
-        this.pokemon.displayBoost(Stat.DEF, true)
+        this.pokemonSprite.displayBoost(Stat.DEF, true)
       }
       if (status === "BOOST/SPE_DEF") {
-        this.pokemon.displayBoost(Stat.SPE_DEF, true)
+        this.pokemonSprite.displayBoost(Stat.SPE_DEF, true)
       }
       if (status === "BOOST/SHIELD") {
-        this.pokemon.displayBoost(Stat.SHIELD, true)
+        this.pokemonSprite.displayBoost(Stat.SHIELD, true)
       }
       if (status === "BOOST/SPEED") {
-        this.pokemon.displayBoost(Stat.SPEED, true)
+        this.pokemonSprite.displayBoost(Stat.SPEED, true)
       }
     }
   }
 
   showTarget() {
-    const or = this.pokemon!.orientation
-    const range = max(2)(this.pokemon!.range)
-    const tx = this.pokemon!.positionX + OrientationVector[or][0] * range
-    const ty = this.pokemon!.positionY + OrientationVector[or][1] * range
-    this.pokemon!.targetX = tx
-    this.pokemon!.targetY = ty
+    const or = this.pokemonSprite!.orientation
+    const range = max(2)(this.pokemonSprite!.pokemon.range)
+    const tx = this.pokemonSprite!.positionX + OrientationVector[or][0] * range
+    const ty = this.pokemonSprite!.positionY + OrientationVector[or][1] * range
+    this.pokemonSprite!.targetX = tx
+    this.pokemonSprite!.targetY = ty
     const [rtx, rty] = transformEntityCoordinates(tx, ty, false)
     this.target = new PokemonSprite(
       this,
@@ -395,23 +430,23 @@ export class DebugScene extends Phaser.Scene {
 
   addAttackAnim() {
     const attack = () => {
-      if (!this.pokemon) return
-      this.pokemon.attackAnimation(
-        this.pokemon.targetX || 0,
-        this.pokemon.targetY || 0,
+      if (!this.pokemonSprite) return
+      this.pokemonSprite.attackAnimation(
+        this.pokemonSprite.targetX || 0,
+        this.pokemonSprite.targetY || 0,
         0,
         1000,
         () => {
-          if (!this.pokemon) return
+          if (!this.pokemonSprite) return
           const [x, y] = transformEntityCoordinates(
-            this.pokemon.targetX || 0,
-            this.pokemon.targetY || 0,
+            this.pokemonSprite.targetX || 0,
+            this.pokemonSprite.targetY || 0,
             false
           )
           displayHit(
             this,
-            PokemonAnimations[PkmByIndex[this.pokemon.index]]?.hitSprite ??
-              DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
+            PokemonAnimations[PkmByIndex[this.pokemonSprite.pokemon.index]]
+              ?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
             x,
             y,
             false
@@ -428,13 +463,13 @@ export class DebugScene extends Phaser.Scene {
       displayAbility({
         scene: this,
         pokemonsOnBoard: [this.target!],
-        ability: this.pokemon!.skill,
-        orientation: this.pokemon!.orientation,
-        positionX: this.pokemon!.positionX,
-        positionY: this.pokemon!.positionY,
-        targetX: this.pokemon!.targetX ?? -1,
-        targetY: this.pokemon!.targetY ?? -1,
-        flip: this.pokemon!.flip,
+        ability: this.pokemonSprite!.pokemon.skill,
+        orientation: this.pokemonSprite!.orientation,
+        positionX: this.pokemonSprite!.positionX,
+        positionY: this.pokemonSprite!.positionY,
+        targetX: this.pokemonSprite!.targetX ?? -1,
+        targetY: this.pokemonSprite!.targetY ?? -1,
+        flip: this.pokemonSprite!.flip,
         ap: 0
       })
     }

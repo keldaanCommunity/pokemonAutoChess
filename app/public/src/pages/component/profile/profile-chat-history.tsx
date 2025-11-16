@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import ChatHistory from "../chat/chat-history"
 import { useTranslation } from "react-i18next"
 import { IChatV2 } from "../../../../../types"
+import ChatHistory from "../chat/chat-history"
 
 export function ProfileChatHistory(props: { uid: string }) {
   const { t } = useTranslation()

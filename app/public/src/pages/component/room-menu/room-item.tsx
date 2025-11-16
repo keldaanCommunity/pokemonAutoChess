@@ -1,12 +1,12 @@
 import { RoomAvailable } from "colyseus.js"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IPreparationMetadata, Role } from "../../../../../types"
 import {
   EloRank,
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME
-} from "../../../../../types/Config"
+} from "../../../../../config"
+import { IPreparationMetadata, Role } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { formatMinMaxRanks, getRank } from "../../../../../utils/elo"
 import { useAppSelector } from "../../../hooks"
@@ -41,7 +41,7 @@ export default function RoomItem(props: {
     props.room.metadata.blacklist.includes(user.uid) === true
   ) {
     canJoin = false
-    disabledReason = t("blacklisted")
+    disabledReason = t("errors.USER_KICKED")
   } else if (
     props.room.metadata?.whitelist &&
     props.room.metadata.whitelist.length > 0 &&
@@ -49,10 +49,10 @@ export default function RoomItem(props: {
     props.room.metadata.whitelist.includes(user.uid) === false
   ) {
     canJoin = false
-    disabledReason = t("not_whitelisted")
+    disabledReason = t("errors.USER_NOT_WHITELISTED")
   } else if (
     props.room.metadata?.minRank != null &&
-    (user?.elo ?? 0) < EloRankThreshold[props.room.metadata?.minRank]
+    (user?.elo ?? 0) < EloRankThreshold[props.room.metadata.minRank as EloRank]
   ) {
     canJoin = false
     disabledReason = t("min_rank_not_reached")
@@ -60,7 +60,7 @@ export default function RoomItem(props: {
     props.room.metadata?.maxRank != null &&
     user?.elo &&
     EloRankThreshold[getRank(user.elo)] >
-      EloRankThreshold[props.room.metadata?.maxRank]
+      EloRankThreshold[props.room.metadata?.maxRank as EloRank]
   ) {
     canJoin = false
     disabledReason = t("max_rank_not_reached")

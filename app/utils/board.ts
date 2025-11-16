@@ -21,12 +21,13 @@ export function isPositionEmpty(
 
 export function getFirstAvailablePositionInBench(
   board: MapSchema<Pokemon, string>
-) {
+): number | null {
   for (let i = 0; i < 8; i++) {
     if (isPositionEmpty(i, 0, board)) {
       return i
     }
   }
+  return null
 }
 
 export function getFirstAvailablePositionOnBoard(

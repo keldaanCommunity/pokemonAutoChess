@@ -1,19 +1,19 @@
 import React from "react"
 import { Tooltip } from "react-tooltip"
+import { RarityColor } from "../../../../../config"
+import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { RarityColor } from "../../../../../types/Config"
 import { PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
-import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
 import { getCachedPortrait } from "./game-pokemon-portrait"
 import "./game-pokemon-portrait.css"
 
 export default function GamePokemonDuoPortrait(props: {
   index: number
-  origin: string
+  origin: "proposition"
   duo: PkmDuo
   click?: React.MouseEventHandler<HTMLDivElement>
   inPlanner?: boolean
@@ -58,6 +58,7 @@ export default function GamePokemonDuoPortrait(props: {
               pokemon={p.name}
               emotion={duoCustom[i]?.emotion}
               shiny={duoCustom[i]?.shiny}
+              origin={props.origin}
             />
           </Tooltip>
         </React.Fragment>

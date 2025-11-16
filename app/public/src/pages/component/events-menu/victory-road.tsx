@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { EventPointsPerRank } from "../../../../../types/Config"
+import { EventPointsPerRank } from "../../../../../config"
 import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"
-import { useAppSelector } from "../../../hooks"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
+import { searchById } from "../../../stores/NetworkStore"
 import { formatDate, formatDuration } from "../../utils/date"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -14,6 +15,7 @@ import "./victory-road.css"
 
 export function VictoryRoad() {
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
   const profile = useAppSelector((state) => state.network.profile)
   const eventLeaderboard = useAppSelector(
     (state) => state.lobby.eventLeaderboard
@@ -137,6 +139,7 @@ export function VictoryRoad() {
               })}
               data-tooltip-id="victory-road-player-detail"
               onMouseOver={() => setPlayerHovered(player)}
+              onClick={() => dispatch(searchById(player.id))}
               style={{
                 position: "absolute",
                 ...getPlayerCoords(player, index)

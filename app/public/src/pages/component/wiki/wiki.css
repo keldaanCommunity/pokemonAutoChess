@@ -72,7 +72,7 @@
   text-transform: capitalize;
 }
 
-#wiki-page .pokemon-portrait {
+#wiki-page .wiki-types .pokemon-portrait {
   margin: 2px;
 }
 
@@ -314,6 +314,10 @@
 
 #wiki-items article {
   padding: 1em;
+}
+
+#wiki-items h2 {
+  margin-bottom: 0.25em;
 }
 
 #wiki-items ul {

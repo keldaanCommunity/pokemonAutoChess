@@ -3,7 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { SynergyTriggers } from "../../../../../types/Config"
+import { SynergyTriggers } from "../../../../../config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
@@ -59,8 +59,9 @@ export default function SynergyComponent(props: {
     <Tooltip
       id={"detail-" + props.type}
       className="custom-theme-tooltip"
-      place="right"
-      data-tooltip-offset={{ bottom: (5 - props.index) * 50 }}
+      place="right-start"
+      delayShow={100}
+      delayHide={0}
     >
       <SynergyDetailComponent type={props.type} value={props.value} />
     </Tooltip>
@@ -104,7 +105,8 @@ export default function SynergyComponent(props: {
           fontSize: "32px",
           textShadow: "2px 2px 2px #00000080",
           textAlign: "center",
-          marginRight: "4px"
+          marginRight: "4px",
+          color: levelReached ? "#ffffff" : "#b8b8b8"
         }}
       >
         {props.value}

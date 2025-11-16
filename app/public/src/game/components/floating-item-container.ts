@@ -1,12 +1,13 @@
 import { GameObjects } from "phaser"
 import { Item } from "../../../../types/enum/Item"
-import GameScene from "../scenes/game-scene"
-import { DEPTH } from "../depths"
-import ItemDetail from "./item-detail"
 import { preference } from "../../preferences"
+import { DEPTH } from "../depths"
+import GameScene from "../scenes/game-scene"
+import ItemDetail from "./item-detail"
 import MinigameManager from "./minigame-manager"
 
 export class FloatingItemContainer extends GameObjects.Container {
+  scene: GameScene
   manager: MinigameManager
   name: Item
   circle: GameObjects.Ellipse
@@ -23,6 +24,7 @@ export class FloatingItemContainer extends GameObjects.Container {
     item: Item
   ) {
     super(manager.scene, x, y)
+    this.scene = manager.scene
     this.manager = manager
     this.name = item
     this.id = id
@@ -84,7 +86,7 @@ export class FloatingItemContainer extends GameObjects.Container {
   }
 
   openDetail() {
-    this.manager.closeDetails() // close other open item tooltips
+    this.scene.closeTooltips() // close other open item tooltips
 
     if (this.detail === undefined) {
       this.detail = new ItemDetail(this.scene, 0, 0, this.name)

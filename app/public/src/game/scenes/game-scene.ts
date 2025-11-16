@@ -2,6 +2,7 @@ import { Room } from "colyseus.js"
 import firebase from "firebase/compat/app"
 import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
+import { BOARD_WIDTH, RegionDetails } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { canSell } from "../../../../core/pokemon-entity"
@@ -14,12 +15,7 @@ import {
   IDragDropMessage,
   Transfer
 } from "../../../../types"
-import { BOARD_WIDTH } from "../../../../types/Config"
-import {
-  DungeonDetails,
-  DungeonMusic,
-  DungeonPMDO
-} from "../../../../types/enum/Dungeon"
+import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
@@ -28,6 +24,7 @@ import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
 import { values } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
+import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
 import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { preference, savePreferences } from "../../preferences"
@@ -49,6 +46,7 @@ export default class GameScene extends Scene {
   tilemaps: Map<DungeonPMDO, DesignTiled> = new Map<DungeonPMDO, DesignTiled>()
   room: Room<GameState> | undefined
   uid: string | undefined
+  mapName: DungeonPMDO | "town" = "town"
   map: Phaser.Tilemaps.Tilemap | undefined
   battleGroup: GameObjects.Group | undefined
   abilitiesVfxGroup: GameObjects.Group | undefined
@@ -94,12 +92,16 @@ export default class GameScene extends Scene {
       this.room?.send(Transfer.LOADING_PROGRESS, value * 100)
     })
 
-    this.load.on("complete", () => {
-      this.room?.send(Transfer.LOADING_COMPLETE)
+    this.load.once("complete", () => {
+      logger.debug("Loading complete")
+      if (!this.started) {
+        this.room?.send(Transfer.LOADING_COMPLETE)
+      }
     })
 
     this.room!.onMessage(Transfer.LOADING_COMPLETE, () => {
       if (!this.started) {
+        logger.debug("Game starting")
         this.started = true
         this.startGame()
       }
@@ -159,7 +161,7 @@ export default class GameScene extends Scene {
       if (!this.music) {
         playMusic(
           this,
-          DungeonDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
+          RegionDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
         )
       }
       //;(this.sys as any).animatedTiles.init(this.map)
@@ -189,6 +191,7 @@ export default class GameScene extends Scene {
     )
 
     this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+      if (preference("cameraLocked")) return
       this.cameras.main.zoom = clamp(
         this.cameras.main.zoom - Math.sign(deltaY) * 0.1,
         1,
@@ -256,8 +259,19 @@ export default class GameScene extends Scene {
     })
 
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
-      console.log("toggle camera input")
       savePreferences({ cameraLocked: !preference("cameraLocked") })
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.prev_player, () => {
+      cyclePlayers(-1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
+      cyclePlayers(1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+      playerClick(this.uid!)
     })
   }
 
@@ -330,6 +344,7 @@ export default class GameScene extends Scene {
 
   async setMap(mapName: DungeonPMDO | "town") {
     this.board?.hideGroundHoles()
+    this.mapName = mapName
 
     if (mapName === "town") {
       this.map = this.add.tilemap("town")
@@ -762,17 +777,17 @@ export default class GameScene extends Scene {
     )
   }
 
-  setHovered(gameObject: PokemonSprite) {
+  setHovered(pokemonSprite: PokemonSprite) {
     const outline = <OutlinePlugin>this.plugins.get("rexOutline")
     if (!outline) return // outline plugin doesnt work with canvas renderer
     if (this.pokemonHovered != null) this.clearHovered(this.pokemonHovered)
-    this.pokemonHovered = gameObject
+    this.pokemonHovered = pokemonSprite
 
     const thickness = Math.round(
-      1 + Math.log(gameObject.def + gameObject.speDef)
+      1 + Math.log(pokemonSprite.pokemon.def + pokemonSprite.pokemon.speDef)
     )
 
-    outline.add(gameObject.sprite, {
+    outline.add(pokemonSprite.sprite, {
       thickness,
       outlineColor: 0xffffff
     })
@@ -782,6 +797,13 @@ export default class GameScene extends Scene {
     const outline = <OutlinePlugin>this.plugins.get("rexOutline")
     if (!outline) return // outline plugin doesnt work with canvas renderer
     outline.remove(gameObject.sprite)
+  }
+
+  closeTooltips() {
+    this.board?.closeTooltips()
+    this.battle?.closeTooltips()
+    this.minigameManager?.closeTooltips()
+    this.itemsContainer?.closeTooltips()
   }
 
   displayMoneyGain(x: number, y: number, gain: number) {

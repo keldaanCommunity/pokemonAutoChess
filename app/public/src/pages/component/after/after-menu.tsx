@@ -1,16 +1,23 @@
-import React from "react"
+import { ArraySchema } from "@colyseus/schema"
+import React, { useState } from "react"
+import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
+import { Tooltip } from "react-tooltip"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
+import { ExpPlace, SynergyTriggers } from "../../../../../config"
 import { computeElo } from "../../../../../core/elo"
 import { Role } from "../../../../../types"
-import { ExpPlace, SynergyTriggers } from "../../../../../types/Config"
+import { GameMode } from "../../../../../types/enum/Game"
+import { Item } from "../../../../../types/enum/Item"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { useAppSelector } from "../../../hooks"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import { Avatar } from "../profile/avatar"
 import Team from "./team"
 import "./after-menu.css"
-import { GameMode } from "../../../../../types/enum/Game"
 
 export default function AfterMenu() {
   const { t } = useTranslation()
@@ -36,6 +43,9 @@ export default function AfterMenu() {
       )
     : null
   const shouldShowElo = eligibleToELO && currentPlayer && newElo
+
+  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
+  const [itemHovered, setItemHovered] = useState<Item>()
 
   return (
     <div className="after-menu">
@@ -151,7 +161,11 @@ export default function AfterMenu() {
                     </p>
                   </td>
                   <td>
-                    <Team team={v.pokemons} />
+                    <Team
+                      team={v.pokemons}
+                      setHoveredPokemon={setHoveredPokemon}
+                      setItemHovered={setItemHovered}
+                    />
                   </td>
                   <td>
                     <ul className="player-team-synergies">
@@ -169,6 +183,28 @@ export default function AfterMenu() {
           </tbody>
         </table>
       </div>
+      {hoveredPokemon &&
+        ReactDOM.createPortal(
+          <Tooltip
+            id="pokemon-detail"
+            className="custom-theme-tooltip game-pokemon-detail-tooltip"
+            float
+          >
+            <GamePokemonDetail pokemon={hoveredPokemon} origin="wiki" />
+          </Tooltip>,
+          document.body
+        )}
+      {itemHovered &&
+        ReactDOM.createPortal(
+          <Tooltip
+            id="item-detail"
+            className="custom-theme-tooltip item-detail-tooltip"
+            float
+          >
+            <ItemDetailTooltip item={itemHovered} />
+          </Tooltip>,
+          document.body
+        )}
     </div>
   )
 }

@@ -1,23 +1,24 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
+import { RarityColor } from "../../../../../config"
 import { CountEvolutionRule } from "../../../../../core/evolution-rules"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import PokemonFactory from "../../../../../models/pokemon-factory"
-import { getBuyPrice } from "../../../../../models/shop"
-import { RarityColor } from "../../../../../types/Config"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../../../utils/avatar"
-import { cc } from "../../utils/jsx"
-import { Money } from "../icons/money"
-import SynergyIcon from "../icons/synergy-icon"
-import { GamePokemonDetail } from "./game-pokemon-detail"
 import {
   getPkmWithCustom,
   PokemonCustoms
 } from "../../../../../models/colyseus-models/pokemon-customs"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { getBuyPrice } from "../../../../../models/shop"
+import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import { getPortraitSrc } from "../../../../../utils/avatar"
+import { values } from "../../../../../utils/schemas"
+import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
+import { cc } from "../../utils/jsx"
+import { Money } from "../icons/money"
+import SynergyIcon from "../icons/synergy-icon"
+import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
 
 export function getCachedPortrait(
@@ -34,20 +35,21 @@ export function getCachedPortrait(
 
 export default function GamePokemonPortrait(props: {
   index: number
-  origin: string
+  origin: "wiki" | "shop" | "proposition" | "team" | "planner" | "battle"
   pokemon: Pokemon | Pkm | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
   inPlanner?: boolean
 }) {
-  const pokemon = useMemo(
-    () =>
-      typeof props.pokemon === "string"
-        ? PokemonFactory.createPokemonFromName(props.pokemon)
-        : props.pokemon,
-    [props.pokemon]
-  )
+  const pokemon = useMemo(() => {
+    if (typeof props.pokemon === "string") {
+      const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
+      pokemon.pp = pokemon.maxPP
+      return pokemon
+    }
+    return props.pokemon
+  }, [props.pokemon])
 
   const uid: string = useAppSelector((state) => state.network.uid)
   const currentPlayerId: string = useAppSelector(
@@ -142,6 +144,19 @@ export default function GamePokemonPortrait(props: {
     cost = 0
   }
 
+  const gainedSynergies =
+    pokemonEvolution && willEvolve
+      ? values(pokemonEvolution.types).filter(
+          (type) => !pokemon.types.has(type)
+        )
+      : []
+  const lostSynergies =
+    pokemonEvolution && willEvolve
+      ? values(pokemon.types).filter(
+          (type) => !pokemonEvolution.types.has(type)
+        )
+      : []
+
   const canBuy = currentPlayer?.alive && currentPlayer?.money >= cost
 
   return (
@@ -173,6 +188,7 @@ export default function GamePokemonPortrait(props: {
           pokemon={pokemonInPortrait}
           emotion={pokemonCustom.emotion}
           shiny={pokemonCustom.shiny}
+          origin={props.origin}
         />
       </Tooltip>
       {willEvolve && pokemonEvolution && (
@@ -203,11 +219,19 @@ export default function GamePokemonPortrait(props: {
       <ul className="game-pokemon-portrait-types">
         {Array.from(pokemonInPortrait.types.values()).map((type) => {
           return (
-            <li key={type}>
+            <li
+              key={type}
+              className={cc({ gained: gainedSynergies.includes(type) })}
+            >
               <SynergyIcon type={type} />
             </li>
           )
         })}
+        {lostSynergies.map((type) => (
+          <li key={type} className="lost">
+            <SynergyIcon type={type} />
+          </li>
+        ))}
       </ul>
     </div>
   )

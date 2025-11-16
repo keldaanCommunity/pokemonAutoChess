@@ -122,15 +122,38 @@ select {
   background: none;
   background-color: var(--color-bg-secondary);
   color: white;
+  font-weight: normal;
   cursor: var(--cursor-hover);
   box-shadow:
     inset -6px -6px 0px 0px #00000030,
     var(--shadow-clickable);
 }
 
+select,
+select::picker(select) {
+  appearance: base-select;
+  align-items: center;
+}
+
+select::picker(select) {
+  background-color: var(--color-bg-secondary);
+  color: white;
+  border-radius: 12px;
+  border: var(--border-thin);
+  filter: drop-shadow(4px 4px 8px #303030);
+}
+
 select.is-light {
   background-color: white;
   color: black;
+}
+
+option {
+  padding: 4px 8px;
+}
+
+option::checkmark {
+  display: none;
 }
 
 textarea {

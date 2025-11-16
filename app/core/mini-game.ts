@@ -8,6 +8,11 @@ import {
   Events,
   Vector
 } from "matter-js"
+import {
+  ItemCarouselStages,
+  PortalCarouselStages,
+  RegionDetails
+} from "../config"
 import { FloatingItem } from "../models/colyseus-models/floating-item"
 import Player from "../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
@@ -15,24 +20,24 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
 import { Transfer } from "../types"
-import { ItemCarouselStages, PortalCarouselStages } from "../types/Config"
-import { DungeonDetails, DungeonPMDO } from "../types/enum/Dungeon"
+import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
-  ArtificialItems,
   Berries,
   CraftableItems,
   CraftableNonSynergyItems,
   Item,
   ItemComponents,
+  MissionOrders,
   SynergyGems,
   SynergyGivenByGem,
-  SynergyStones
+  SynergyStones,
+  Tools
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
-import { clamp, min } from "../utils/number"
+import { clamp, max, min } from "../utils/number"
 import { getOrientation } from "../utils/orientation"
 import {
   chance,
@@ -118,11 +123,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * item.index) / this.items!.size) *
-              CAROUSEL_RADIUS_X
+                CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * item.index) / this.items!.size) *
-              CAROUSEL_RADIUS_Y
+                CAROUSEL_RADIUS_Y
             Body.setPosition(itemBody, { x, y })
           }
         }
@@ -136,11 +141,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-              CAROUSEL_RADIUS_X
+                CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-              CAROUSEL_RADIUS_Y
+                CAROUSEL_RADIUS_Y
             Body.setPosition(portalBody, { x, y })
           }
         }
@@ -268,7 +273,7 @@ export class MiniGame {
         this.centerY +
         Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
       let retentionDelay =
-        4000 + (this.alivePlayers.length - player.rank) * 2000
+        5000 + (this.alivePlayers.length - player.rank) * 2000
 
       if (stageLevel === 0) {
         retentionDelay = 12000
@@ -294,11 +299,11 @@ export class MiniGame {
         avatar.targetX =
           this.centerX +
           Math.cos((2 * Math.PI * i) / this.alivePlayers.length) *
-          CAROUSEL_RADIUS_X
+            CAROUSEL_RADIUS_X
         avatar.targetY =
           this.centerY +
           Math.sin((2 * Math.PI * i) / this.alivePlayers.length) *
-          CAROUSEL_RADIUS_Y
+            CAROUSEL_RADIUS_Y
       }
 
       this.avatars!.set(avatar.id, avatar)
@@ -355,6 +360,10 @@ export class MiniGame {
         player.life += 15
       })
     } else if (state.townEncounter === TownEncounters.WOBBUFFET) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.RECYCLE_TICKET)
+      })
+    } else if (state.townEncounter === TownEncounters.CROAGUNK) {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.EXCHANGE_TICKET)
       })
@@ -449,16 +458,16 @@ export class MiniGame {
             portal.x +
             Math.cos(
               this.timeElapsed * SYMBOL_ROTATION_SPEED +
-              (Math.PI * 2 * symbol.index) / symbols.length
+                (Math.PI * 2 * symbol.index) / symbols.length
             ) *
-            25
+              25
           symbol.y =
             portal.y +
             Math.sin(
               this.timeElapsed * SYMBOL_ROTATION_SPEED +
-              (Math.PI * 2 * symbol.index) / symbols.length
+                (Math.PI * 2 * symbol.index) / symbols.length
             ) *
-            25
+              25
         })
       }
     })
@@ -471,7 +480,7 @@ export class MiniGame {
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     let maxCopiesPerItem = 2
-    let itemsSet = ItemComponents
+    let itemsSet: readonly Item[] = ItemComponents
 
     if (stageLevel >= 20) {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition
@@ -491,7 +500,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.ELECTIVIRE) {
-      itemsSet = ArtificialItems
+      itemsSet = Tools
       maxCopiesPerItem = 2
     }
 
@@ -566,16 +575,26 @@ export class MiniGame {
     } else {
       this.avatars?.forEach((avatar) => {
         const player = this.alivePlayers.find((p) => p.id === avatar.id)!
+        const synergiesUsable = Object.values(Synergy).filter((type) => {
+          if (type === Synergy.BABY && stageLevel === 20) return false // no baby legendaries
+          return true
+        })
         const synergiesTriggerLevels: [Synergy, number][] = Array.from(
           player.synergies
-        ).map(([type, value]) => {
-          let levelReached = player.synergies.getSynergyStep(type)
-          // removing low triggers synergies
-          if (type === Synergy.FLORA || type === Synergy.LIGHT)
-            levelReached = min(0)(levelReached - 1)
-          if (type === Synergy.GOURMET && levelReached > 1) levelReached = 1 // to compensate for the current lack of diversity in the legendary pool
-          return [type, levelReached]
-        })
+        )
+          .filter(([type, value]) => synergiesUsable.includes(type))
+          .map(([type, value]) => {
+            let levelReached = player.synergies.getSynergyStep(type)
+            // removing low triggers synergies
+            if (type === Synergy.FLORA || type === Synergy.LIGHT) {
+              levelReached = min(0)(levelReached - 1)
+            }
+            if (stageLevel === 20 && type === Synergy.GOURMET) {
+              // not enough legendaries of that type
+              levelReached = max(2)(levelReached)
+            }
+            return [type, levelReached]
+          })
         const candidatesSymbols: Synergy[] = []
         synergiesTriggerLevels.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
@@ -599,7 +618,7 @@ export class MiniGame {
         }
         while (candidatesSymbols.length < 4) {
           // if still incomplete, complete with random
-          candidatesSymbols.push(pickRandomIn(Synergy))
+          candidatesSymbols.push(pickRandomIn(synergiesUsable))
           /*logger.debug(
             "completing symbols with random synergies",
             candidatesSymbols
@@ -643,7 +662,7 @@ export class MiniGame {
       let nbMaxInCommon = 0,
         candidateMaps: DungeonPMDO[] = []
       maps.forEach((map) => {
-        const synergies = DungeonDetails[map].synergies
+        const synergies = RegionDetails[map].synergies
         const inCommon = synergies.filter((s) => portalSynergies.includes(s))
         if (inCommon.length > nbMaxInCommon) {
           nbMaxInCommon = inCommon.length
@@ -730,7 +749,7 @@ export class MiniGame {
         }
       }
 
-      if (avatar.portalId == "" && player && !player.isBot) {
+      if (avatar.portalId == "") {
         // random propositions if no portal was taken
         avatar.portalId = "random"
         if (state.stageLevel == 0 && this.portals) {
@@ -808,6 +827,12 @@ export class MiniGame {
     if (this.symbols) {
       this.symbols.forEach((symbol) => {
         this.symbols!.delete(symbol.id)
+      })
+    }
+
+    if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
+      this.alivePlayers.forEach((player) => {
+        player.itemsProposition.push(...pickNRandomIn(MissionOrders, 3))
       })
     }
   }
