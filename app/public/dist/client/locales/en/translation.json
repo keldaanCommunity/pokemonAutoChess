@@ -3062,7 +3062,7 @@
 		"KUBFU": "Gain 5 permament AP when getting a KO with its ability, up to 10 KO after which you get SCROLL_OF_DARKNESS.\nGain 3 permanent SPEED when getting a KO with a basic attack, up to 10 KO after which you get the SCROLL_OF_WATERS.",
 		"VIGOROTH": "$t(pkm.VIGOROTH) is immune to SLEEP",
 		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKING) gains RAGE for 3 seconds.",
-		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region.",
+		"STANTLER": "Evolves into $t(pkm.WYRDEER) at stage 20.",
 		"PIKACHU_SURFER": "Surfing Pikachu's power swells with the waves. Gain 50 SHIELD and 3 ATK for each AQUATIC synergy step reached, and fill PP bar when a wave approaches.",
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
