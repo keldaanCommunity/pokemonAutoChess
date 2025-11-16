@@ -1707,7 +1707,7 @@
 		"FLAME_CHARGE": "Fonce dans la rangée arrière de l'équipe adverse, infligeant [30,60,120,SP] SPECIAL à tous les ennemis sur son chemin.",
 		"PASTEL_VEIL": "Fonce jusqu'à l'allié le plus éloigné. Le lanceur et ses alliés sur son chemin gagnent [20,40,80,SP] SHIELD et ont leurs altérations de statut guéries.",
 		"LEECH_SEED": "Inflige POISONNED à la cible pendant [3,6,12] secondes et se soigne le lanceur de [20,40,80,SP] HP.",
-		"LOCK_ON": "Verrouille la cible. La prochaine attaque ne peut pas manquer et inflige [200,SP]% de TRUE.",
+		"LOCK_ON": "Verrouille la cible. La prochaine attaque ne peut pas manquer et inflige [300,SP]% de TRUE.",
 		"DISABLE": "Inflige [15,30,60,SP] SPECIAL et SILENCE la cible et tous les ennemis ADJACENT pendant [2,3,4] secondes.",
 		"RAZOR_WIND": "Inflige [20,40,80,SP] SPECIAL à la cible. Peut infliger un coup critique par défaut.",
 		"WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL et PARALYSIS pendant 3 secondes à tous les ennemis adjacents.",

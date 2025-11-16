@@ -964,7 +964,7 @@
 		"MYSTICAL_FIRE": "Breng [20,40,80,SP] SPECIAL",
 		"FLAME_CHARGE": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
 		"LEECH_SEED": "Pas de POISONNED status toe op het doelwit voor [3,6,12] seconden, en herstel de gebruiker's HP met [20,40,80,SP]",
-		"LOCK_ON": "Vergrendel het doel. De volgende aanval mag niet missen en deel [200,SP]% TRUE",
+		"LOCK_ON": "Vergrendel het doel. De volgende aanval mag niet missen en deel [300,SP]% TRUE",
 		"DISABLE": "Breng [15,30,60,SP] SPECIAL toe aan het doelwit en past de SILENCE status toe aan hen en aangrenzende vijandelijke Pokémon",
 		"RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit",
 		"WONDER_GUARD": "Breng [30,60,120,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor 3 seconden",

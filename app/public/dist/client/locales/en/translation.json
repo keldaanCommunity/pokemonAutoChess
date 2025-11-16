@@ -1707,7 +1707,7 @@
 		"FLAME_CHARGE": "Dash into the enemy team's back line and deal [30,60,120,SP] SPECIAL to all enemy Pokémon in the path.",
 		"PASTEL_VEIL": "Dash to the farthest ally. Grant [20,40,80,SP] SHIELD to the user and all allied Pokémon on the way and cure their negative status conditions.",
 		"LEECH_SEED": "POISONNED the target for [3,6,12] seconds and heal the user for [20,40,80,SP] HP.",
-		"LOCK_ON": "Lock on the target. The next attack cannot miss and deals [200,SP]% additional TRUE.",
+		"LOCK_ON": "Lock on the target. The next attack cannot miss and deals [300,SP]% additional TRUE.",
 		"DISABLE": "Deal [15,30,60,SP] SPECIAL to the target and SILENCE them and all ADJACENT enemy Pokémon for [2,3,4] seconds.",
 		"RAZOR_WIND": "Deal [20,40,80,SP] SPECIAL to the target. Can crit by default.",
 		"WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with PARALYSIS for 3 seconds.",
