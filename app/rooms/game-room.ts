@@ -1191,7 +1191,11 @@ export default class GameRoom extends Room<GameState> {
       return // already picked, probably a double click
     if (
       UniquePool.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[1]
+      this.state.stageLevel !== PortalCarouselStages[1] &&
+      !(
+        this.state.specialGameRule === SpecialGameRule.UNIQUE_STARTER &&
+        this.state.stageLevel <= 1
+      )
     )
       return // should not be pickable at this stage
     if (
@@ -1233,10 +1237,7 @@ export default class GameRoom extends Room<GameState> {
       player.itemsProposition.clear()
     }
 
-    if (
-      this.state.specialGameRule === SpecialGameRule.FIRST_PARTNER &&
-      this.state.stageLevel <= 1
-    ) {
+    if (this.state.stageLevel <= 1) {
       player.firstPartner = pokemonsObtained[0].name
     }
 

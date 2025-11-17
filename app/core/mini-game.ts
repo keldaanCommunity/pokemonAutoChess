@@ -49,6 +49,7 @@ import {
 } from "../utils/random"
 import { keys, values } from "../utils/schemas"
 import { giveRandomEgg } from "./eggs"
+import { spawnDIAYAvatar } from "./scribbles"
 import {
   TownEncounterSellPrice,
   TownEncounters,
@@ -800,11 +801,13 @@ export class MiniGame {
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
-        state.shop.assignUniquePropositions(
-          player,
-          state.stageLevel,
-          portalSynergies
-        )
+        if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
+          const avatar = spawnDIAYAvatar(player)
+          player.board.set(avatar.id, avatar)
+          avatar.onAcquired(player)
+        } else {
+          state.shop.assignUniquePropositions(player, state, portalSynergies)
+        }
       }
 
       this.avatars!.delete(avatar.id)

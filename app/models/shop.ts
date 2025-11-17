@@ -31,6 +31,7 @@ import {
   UNOWN_RATE_AMNESIA,
   UniquePool
 } from "../config"
+import { pickFirstPartners } from "../core/scribbles"
 import GameState from "../rooms/states/game-state"
 import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
@@ -358,15 +359,24 @@ export default class Shop {
 
   assignUniquePropositions(
     player: Player,
-    stageLevel: number,
+    state: GameState,
     portalSynergies: Synergy[]
   ) {
-    const allCandidates =
+    const stageLevel = state.stageLevel
+    let allCandidates =
       {
         [PortalCarouselStages[0]]: [...this.commonPool],
         [PortalCarouselStages[1]]: [...UniquePool],
         [PortalCarouselStages[2]]: [...LegendaryPool]
       }[stageLevel] ?? []
+
+    if (stageLevel === 0) {
+      if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
+        allCandidates = [...UniquePool]
+      } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
+        allCandidates = pickFirstPartners(player, state)
+      }
+    }
 
     // ensure we have at least one synergy per proposition
     if (portalSynergies.length > NB_UNIQUE_PROPOSITIONS) {
@@ -447,7 +457,8 @@ export default class Shop {
       if (
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.EEVEE) === false &&
-        (chance(EEVEE_RATE) || candidates.length === 0)
+        (chance(EEVEE_RATE) || candidates.length === 0) &&
+        state.specialGameRule !== SpecialGameRule.FIRST_PARTNER
       ) {
         selected = Pkm.EEVEE
         player.itemsProposition[i] = Item.FOSSIL_STONE

@@ -2800,7 +2800,7 @@
 	"snapshot": "Snapshot",
 	"passive": "Passiva",
 	"pick_additional_pokemon_hint": "Scegli un Pokèmon aggiuntivo. Sarà disponibile per tutti.",
-	"pick_first_partner_hint": "Seleziona il tuo starter. Ne otterrai una copia ogni livello fino al livello 10.",
+	"pick_first_partner_scribble": "Seleziona il tuo starter. Ne otterrai una copia ogni livello fino al livello 10.",
 	"free_slot_hint": "Devi avere uno slot libero in panchina o due per Duo",
 	"hide": "Nascondi",
 	"show": "Mostra",
