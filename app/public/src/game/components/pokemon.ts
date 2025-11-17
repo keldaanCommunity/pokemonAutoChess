@@ -56,6 +56,9 @@ import {
 
 const spriteCountPerPokemon = new Map<string, number>()
 
+const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+  "lastPokemonDetail" in scene
+
 export default class PokemonSprite extends DraggableObject {
   scene: GameScene | DebugScene
   evolution: Pkm
@@ -194,6 +197,15 @@ export default class PokemonSprite extends DraggableObject {
         .setVisible(false)
         .setScale(2, 2)
         .setDepth(DEPTH.POKEMON_SHADOW)
+      if (
+        preference("colorblindMode") &&
+        isEntity(pokemon) &&
+        playerId !== scene.uid &&
+        isGameScene(scene) &&
+        scene.spectate === false
+      ) {
+        this.shadow.setTintFill(0xff0000)
+      }
       this.add(this.shadow)
     }
     this.add(this.sprite)
@@ -235,9 +247,6 @@ export default class PokemonSprite extends DraggableObject {
         this.updateMeal(pokemon.meal)
       }
     }
-
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
 
     this.draggable =
       playerId === scene.uid &&
