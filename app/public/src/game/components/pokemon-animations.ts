@@ -4420,6 +4420,13 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.POISON_MELEE,
     hitSprite: HitSprite.POISON_HIT
   },
+  [Pkm.GALARIAN_WEEZING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Gas,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE,
+    hitSprite: HitSprite.POISON_HIT
+  },
   [Pkm.STARYU]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,

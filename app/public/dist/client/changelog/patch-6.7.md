@@ -5,6 +5,7 @@
 - Rotom Frost
 - Rotom Fan
 - Rotom Mow
+- Galarian Weezing
 
 # Changes to Pokemon & Abilities
 
@@ -39,6 +40,18 @@
 - Changed Roost (Pidove): now gain shield instead of healing HP
 - Rework of Rotom Drone: now part of the Rotom line
 - Rework of Rotom: now has 7 different forms that can be switched between with Rotom Catalog.
+- Buff Ogerpon (all forms): Def/SpeDef 8/8 → 14/16
+- Alcremie passive no longer count benched units to determine its flavor.
+- Comfey is now dropped when a Pokémon resurrects, and the Pokémon lose its stats buffs upon resurrection.
+- Deerling and Sawsbuck now have Grass synergy in addition to their existing synergies.
+- Moved Noibat to Uncommon category
+- Pumpkaboo and Gourgeist now have Light synergy in addition to their existing synergies. HP 90/190 → 80/180, Attack 13/26 → 10/22
+- Switch defensive stats of Burmy Trash and Burmy Sandy, and Wormadam Trash and Wormadam Sandy
+- Remoraid can now be fished when playing Wild, based on wild chance.
+- Switch abilities of Tangela and Carnivine: Tangela gets Vine Whip, Carnivine gets Power Whip
+- Changed Grookey line passive: no longer gives PP to user and other drummers. PP gained 2/3/4 → 2/3/5
+- Buff Minior Shields Up & Down: removed ability cooldown
+- Buff Lock On (Genesect): True damage bonus 200% → 300%
 
 # Changes to Synergies
 
@@ -47,6 +60,7 @@
 - New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
 - Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
 - New effect for Grass: 40% of overheal is now gained as max HP
+- Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
 
 # Changes to Items
 
@@ -67,6 +81,7 @@
 - Buff Wide Lens: critical chance 10% → 15%
 - Removed base 10 speed from Gracidea Flower
 - Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
+- Incense base stats: 10 special defense 30 AP → 10 special defense 30 Luck
 
 # Town Encounters
 
@@ -74,11 +89,16 @@
 - New town encounter at stage 17: Croagunk gives all players an Exchange Ticket
 - Wobbuffet encounter now gives all players a Recycle Ticket instead of an Exchange Ticket. It can now also be encountered at stage 22 and 27.
 - Sableye can no longer be encountered at stage 4, but can now be encountered at stage 17.
+- Kecleon can no longer be encountered after stage 22.
 
 # Gameplay
 
 - Max fight duration has been increased from 40 seconds to 45 seconds. You should get less draws now.
 - Increased base duration of item carousel from 15 seconds to 16 seconds, and base retention delay from 5 seconds to 6 seconds. A bit more time to read item descriptions and make your choice.
+- Units with both Burn and Freeze status now unfreeze twice faster
+- Synergies have been reordered based on their amount of families, unique, legendary and special excluded. This has an impact in case of equalities between synergies, notably: Arceus/Kecleon synergies, synergies obtained with Unown W, which synergy is Porygon converted to.
+- When evolving a pokemon by merging 3 copies, items held by units on the board are prioritized rather than those held by units on bench
+- Board effects (Smog, traps, terrain...) can now overlap on the same cell. Units moving into a cell with multiple board effects will gain all effects.
 
 # UI
 
@@ -87,6 +107,7 @@
 - Round distance (number of rounds since your last fight with a player) is now shown in the player detail tooltip when hovering over a player's icon in game. This is useful to have a better guess of who will be your next opponent, since matchmaking is designed to maximize the round distance for all players.
 - Wiki items section has been reworked for better readability.
 - New section on the wiki: Stages
+- New icons for TM and HM items
 
 # Bugfix
 

@@ -1131,7 +1131,12 @@ export class KingShieldStrategy extends AbilityStrategy {
     pokemon.addShield(shield, pokemon, 1, crit)
     const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
     if (farthestTarget) {
-      pokemon.moveTo(farthestTarget.positionX, farthestTarget.positionY, board, true)
+      pokemon.moveTo(
+        farthestTarget.positionX,
+        farthestTarget.positionY,
+        board,
+        true
+      )
     }
     if (pokemon.name === Pkm.AEGISLASH) {
       pokemon.commands.push(
@@ -3289,6 +3294,27 @@ export class SmokeScreenStrategy extends AbilityStrategy {
         board.addBoardEffect(x, y, EffectEnum.SMOKE, pokemon.simulation)
       })
     }
+  }
+}
+
+export class StrangeSteamStrategy extends AbilityStrategy {
+   process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, pokemon.count.ult, true).forEach((cell) => {
+      board.addBoardEffect(cell.x, cell.y, EffectEnum.STRANGE_STEAM, pokemon.simulation)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        if(chance(0.3, pokemon)){
+          cell.value.status.triggerConfusion(3000, cell.value, pokemon)
+        }
+      } else if (cell.value && cell.value.team === pokemon.team){
+        cell.value.status.addFairyField(cell.value)
+      }
+    })
   }
 }
 
@@ -7504,6 +7530,7 @@ export class VineWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
     board
       .getAdjacentCells(target.positionX, target.positionY)
       .map((cell) => cell.value)
@@ -7514,7 +7541,7 @@ export class VineWhipStrategy extends AbilityStrategy {
           enemy.status.triggerParalysis(3000, enemy, pokemon)
         }
       })
-    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 
@@ -7579,7 +7606,7 @@ export class FloralHealingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     if (pokemon.items.has(Item.COMFEY) === false) {
-      // if comfey is hold item, we explicitely not trigger super.process() so that the pokemon doesn't get twice the oncast effects
+      // if comfey is hold item, we explicitely not trigger super.process() so that the pokemon doesn't get call the oncast effects in an infinite loop
       super.process(pokemon, board, target, crit)
     }
     pokemon.handleHeal(pokemon.maxPP, pokemon, 0, false)
@@ -8267,6 +8294,7 @@ export class ShieldsDownStrategy extends AbilityStrategy {
     pokemon.index = PkmIndex[pkm]
     pokemon.name = pkm
     pokemon.skill = Ability.SHIELDS_UP
+    pokemon.cooldown = 0
     if (pokemon.player) {
       pokemon.player.pokemonsPlayed.add(pkm)
     }
@@ -8285,6 +8313,7 @@ export class ShieldsUpStrategy extends AbilityStrategy {
     pokemon.index = PkmIndex[Pkm.MINIOR]
     pokemon.name = Pkm.MINIOR
     pokemon.skill = Ability.SHIELDS_DOWN
+    pokemon.cooldown = 0
   }
 }
 
@@ -9293,7 +9322,7 @@ export class PowerWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60][pokemon.stars - 1] ?? 60
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
 
     const furthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
@@ -15028,7 +15057,7 @@ export class TrimmingMowerStrategy extends AbilityStrategy {
       pokemon.positionY !== bestDestination.y
     ) {
       // Execute dash movement to optimal location
-      pokemon.moveTo(bestDestination.x, bestDestination.y, board)
+      pokemon.moveTo(bestDestination.x, bestDestination.y, board, false)
     }
 
     // Apply self-healing effect
@@ -15355,6 +15384,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ASSURANCE]: new AssuranceStrategy(),
   [Ability.AQUA_RING]: new AquaRingStrategy(),
   [Ability.POISON_GAS]: new PoisonGasStrategy(),
+  [Ability.STRANGE_STEAM]: new StrangeSteamStrategy(),
   [Ability.BRAVE_BIRD]: new BraveBirdStrategy(),
   [Ability.MAGICAL_LEAF]: new MagicalLeafStrategy(),
   [Ability.STEALTH_ROCKS]: new StealthRocksStrategy(),

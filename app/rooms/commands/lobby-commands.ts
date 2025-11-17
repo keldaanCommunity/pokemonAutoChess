@@ -8,7 +8,9 @@ import {
   DUST_PER_SHINY,
   EloRankThreshold,
   getEmotionCost,
-  MAX_PLAYERS_PER_GAME
+  MAX_PLAYERS_PER_GAME,
+  MAX_USER_NAME_LENGTH,
+  USERNAME_REGEXP
 } from "../../config"
 import { CollectionUtils, createBooster } from "../../core/collection"
 import { getPendingGame } from "../../core/pending-game-manager"
@@ -35,8 +37,7 @@ import {
   PkmWithCustom,
   Role,
   Title,
-  Transfer,
-  USERNAME_REGEXP
+  Transfer
 } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
@@ -98,14 +99,14 @@ export class OnJoinCommand extends Command<
         const starterAvatar = pickRandomIn(StarterAvatars)
         await UserMetadata.create({
           uid: client.auth.uid,
-          displayName: client.auth.displayName,
+          displayName: client.auth.displayName.substring(0, MAX_USER_NAME_LENGTH),
           avatar: starterAvatar,
           booster: starterBoosters,
           pokemonCollection: new Map<string, IPokemonCollectionItemMongo>()
         })
         const newUser: IUserMetadataMongo = {
           uid: client.auth.uid,
-          displayName: client.auth.displayName,
+          displayName: client.auth.displayName.substring(0, MAX_USER_NAME_LENGTH),
           language: client.auth.metadata.language,
           avatar: starterAvatar,
           games: 0,

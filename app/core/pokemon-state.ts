@@ -7,7 +7,6 @@ import {
   AttackType,
   HealType,
   PokemonActionState,
-  Stat,
   Team
 } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
@@ -20,7 +19,11 @@ import { logger } from "../utils/logger"
 import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
-import { OnShieldDepletedEffect, PeriodicEffect } from "./effects/effect"
+import {
+  OnResurrectEffect,
+  OnShieldDepletedEffect,
+  PeriodicEffect
+} from "./effects/effect"
 import { humanHealEffect } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
 
@@ -135,7 +138,7 @@ export default abstract class PokemonState {
         trueDamagePart += 0.25
       }
       if (pokemon.effects.has(EffectEnum.LOCK_ON) && target) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        trueDamagePart += 3.0 * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
 
@@ -690,7 +693,10 @@ export default abstract class PokemonState {
 
       if (pokemon.hp <= 0) {
         if (pokemon.status.resurrection) {
-          pokemon.status.triggerResurrection(pokemon)
+          pokemon.status.triggerResurrection(pokemon, board)
+          pokemon
+            .getEffects(OnResurrectEffect)
+            .forEach((effect) => effect.apply({ pokemon, board, attacker }))
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
             if (entity && entity.targetEntityId === pokemon.id) {
               // switch aggro immediately to reduce retarget lag after resurrection
@@ -700,11 +706,6 @@ export default abstract class PokemonState {
           })
         } else {
           death = true
-        }
-
-        if (pokemon.passive === Passive.PRIMEAPE) {
-          pokemon.applyStat(Stat.ATK, 1, true)
-          pokemon.addStack()
         }
       }
 

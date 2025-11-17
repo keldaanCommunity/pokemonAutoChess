@@ -17,13 +17,16 @@ export class Board {
   rows: number
   columns: number
   cells: Array<PokemonEntity | undefined>
-  effects: Array<EffectEnum | undefined>
+  boardEffects: Set<EffectEnum>[]
 
   constructor(rows: number, colums: number) {
     this.rows = rows
     this.columns = colums
     this.cells = new Array<PokemonEntity | undefined>(this.rows * this.columns)
-    this.effects = new Array<EffectEnum | undefined>(this.rows * this.columns)
+    this.boardEffects = Array.from(
+      { length: this.rows * this.columns },
+      () => new Set()
+    )
   }
 
   getEntityOnCell(x: number, y: number): PokemonEntity | undefined {
@@ -37,24 +40,24 @@ export class Board {
       const index = this.columns * y + x
       this.cells[index] = entity
       if (entity && !(entity.positionX === x && entity.positionY === y)) {
-        const effectOnPreviousCell =
-          this.effects[entity.positionY * this.columns + entity.positionX]
-        if (effectOnPreviousCell != null) {
+        const effectsOnPreviousCell =
+          this.boardEffects[entity.positionY * this.columns + entity.positionX]
+
+        effectsOnPreviousCell.forEach((effectOnPreviousCell) => {
           //logger.debug(`${value.name} lost effect ${effectOnPreviousCell} by moving out of board effect`)
           entity.effects.delete(effectOnPreviousCell)
-        }
+        })
 
         entity.positionX = x
         entity.positionY = y
 
-        const effectOnNewCell = this.effects[index]
-        if (
-          effectOnNewCell != null &&
-          !entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
-        ) {
-          //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
-          entity.effects.add(effectOnNewCell)
-        }
+        const effectsOnNewCell = this.boardEffects[index]
+        effectsOnNewCell.forEach((effectOnNewCell) => {
+          if (!entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
+            //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
+            entity.effects.add(effectOnNewCell)
+          }
+        })
       }
     }
   }
@@ -253,14 +256,19 @@ export class Board {
     return cells
   }
 
-  getCellsInRadius(cellX: number, cellY: number, radius: number) {
+  getCellsInRadius(
+    cellX: number,
+    cellY: number,
+    radius: number,
+    includesCenter = false
+  ) {
     // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
     radius = Math.floor(Math.abs(radius)) + 0.5
     const radiusSquared = radius * radius
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
-        if (x == cellX && y == cellY) continue
+        if (x == cellX && y == cellY && !includesCenter) continue
         const dy = cellY - y
         const dx = cellX - x
         const distanceSquared = dy * dy + dx * dx
@@ -460,14 +468,13 @@ export class Board {
     effect: BoardEffect,
     simulation: Simulation
   ) {
-    const previousEffect = this.effects[y * this.columns + x]
+    const previousEffects = this.boardEffects[y * this.columns + x]
     const entityOnCell = this.getEntityOnCell(x, y)
     if (entityOnCell) {
       entityOnCell.effects.add(effect)
     }
-    this.effects[y * this.columns + x] = effect
-
-    if (previousEffect !== effect) {
+    if (!previousEffects.has(effect)) {
+      this.boardEffects[y * this.columns + x].add(effect)
       // show anim effect client side
       simulation.room.broadcast(Transfer.BOARD_EVENT, {
         simulationId: simulation.id,
@@ -479,12 +486,15 @@ export class Board {
   }
 
   clearBoardEffect(x: number, y: number, simulation: Simulation) {
-    const effect = this.effects[y * this.columns + x]
+    const index = y * this.columns + x
+    const existingEffects = this.boardEffects[index]
     const entityOnCell = this.getEntityOnCell(x, y)
-    if (effect && entityOnCell) {
-      entityOnCell.effects.delete(effect)
+
+    this.boardEffects[index].clear()
+    if (entityOnCell) {
+      existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
     }
-    if (effect) {
+    if (existingEffects.size > 0) {
       // clean effect anim client side
       simulation.room.broadcast(Transfer.BOARD_EVENT, {
         simulationId: simulation.id,
@@ -493,7 +503,6 @@ export class Board {
         y
       })
     }
-    this.effects[y * this.columns + x] = undefined
   }
 
   getKnockBackPlace(

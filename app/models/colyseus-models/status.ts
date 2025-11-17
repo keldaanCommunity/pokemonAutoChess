@@ -654,7 +654,7 @@ export default class Status extends Schema implements IStatus {
     if (this.freezeCooldown - dt <= 0) {
       this.freeze = false
     } else {
-      this.freezeCooldown -= dt
+      this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
     }
   }
 
@@ -948,7 +948,7 @@ export default class Status extends Schema implements IStatus {
     this.resurrection = true
   }
 
-  triggerResurrection(pokemon: PokemonEntity) {
+  triggerResurrection(pokemon: PokemonEntity, board: Board) {
     this.resurrection = false
     this.resurrecting = true
     this.resurrectingCooldown = 2000

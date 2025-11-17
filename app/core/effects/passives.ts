@@ -37,10 +37,12 @@ import {
   OnAttackEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
+  OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
   OnMoveEffect,
+  OnResurrectEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnSpawnEffect,
@@ -66,11 +68,15 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
 
   pokemon.count.attackCount++
   pokemon.targetY = -1
-  const ppGained = 1 + pokemon.stars
+  const ppGained = [2, 3, 5][pokemon.stars - 1] ?? 5
   board
-    .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+    .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
     .forEach((cell) => {
-      if (cell.value && cell.value.team === pokemon.team) {
+      if (
+        cell.value &&
+        cell.value.team === pokemon.team &&
+        cell.value.passive !== Passive.DRUMMER
+      ) {
         cell.value.addPP(ppGained, pokemon, 0, false)
       }
     })
@@ -135,7 +141,7 @@ const SharedVisionEffect = new OnAttackEffect(({ pokemon, board }) => {
       ally.targetEntityId = pokemon.targetEntityId
     }
   })
-})
+}, Passive.SHARED_VISION)
 
 const DurantBugBuffEffect = new OnAttackEffect(({ pokemon, target, board }) => {
   if (target) {
@@ -156,7 +162,7 @@ const DurantBugBuffEffect = new OnAttackEffect(({ pokemon, target, board }) => {
       })
     }
   }
-})
+}, Passive.DURANT)
 
 const MiniorKernelOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board, physicalDamage }) => {
@@ -214,7 +220,8 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         })
       }
     }
-  }
+  },
+  Passive.METEOR
 )
 
 const KubfuOnKillEffect = new OnKillEffect(
@@ -258,7 +265,8 @@ const KubfuOnKillEffect = new OnKillEffect(
     pokemon.refToBoardPokemon.stacks = max(MAX_BUFFS)(
       Math.max(nbBuffsAP, nbBuffsSpeed)
     )
-  }
+  },
+  Passive.KUBFU
 )
 
 const QwilfishPassiveEffect = new OnDamageReceivedEffect(
@@ -287,7 +295,8 @@ const QwilfishPassiveEffect = new OnDamageReceivedEffect(
         attacker.status.triggerPoison(3000, attacker, pokemon)
       }
     }
-  }
+  },
+  Passive.QWILFISH
 )
 
 export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
@@ -297,7 +306,7 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
       pkm.broadcastAbility({ skill: pkm.skill })
     }
   })
-})
+}, Passive.WATER_SPRING)
 
 export class AccelerationEffect extends OnMoveEffect {
   accelerationStacks = 0
@@ -306,7 +315,7 @@ export class AccelerationEffect extends OnMoveEffect {
     super((pkm) => {
       pkm.addSpeed(20, pkm, 0, false)
       this.accelerationStacks += 1
-    })
+    }, Passive.ACCELERATION)
   }
 }
 
@@ -322,7 +331,8 @@ const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
         pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
       }
     }
-  }
+  },
+  Passive.MIMIKYU
 )
 
 const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
@@ -341,7 +351,8 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
         pokemon.positionY,
         pokemon.team
       )
-      if (destination) pokemon.moveTo(destination.x, destination.y, board, false)
+      if (destination)
+        pokemon.moveTo(destination.x, destination.y, board, false)
       pokemon.toIdleState()
       pokemon.addAttack(-10, pokemon, 0, false)
       pokemon.addSpeed(-20, pokemon, 0, false)
@@ -353,13 +364,15 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
         pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
       }
     }
-  }
+  },
+  Passive.DARMANITAN
 )
 
 const DarmanitanZenOnHitEffect = new OnHitEffect(
   ({ attacker, totalTakenDamage }) => {
     attacker.handleHeal(totalTakenDamage, attacker, 0, false)
-  }
+  },
+  Passive.DARMANITAN_ZEN
 )
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
@@ -369,7 +382,7 @@ const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   )
   pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
   pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
-})
+}, Passive.PIKACHU_SURFER)
 
 const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (
@@ -434,7 +447,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
       }
     })
   }
-})
+}, Passive.GLIMMORA)
 
 const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
   if (!pokemon) return
@@ -448,7 +461,7 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
     pokemon.speed -= 5
     pokemon.def += 2
   }
-})
+}, Passive.FUR_COAT)
 
 const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   const milcery = pokemon
@@ -459,6 +472,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   })
   const adjacentAllies = values(player.board).filter(
     (p) =>
+      isOnBench(p) === false &&
       distanceC(
         milcery.positionX,
         milcery.positionY,
@@ -482,7 +496,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
     removeInArray(player.items, f)
   })
   player.items.push(flavor)
-})
+}, Passive.CREAM)
 
 const PachirisuBerryEffect = new OnStageStartEffect(
   ({ pokemon, room, player }) => {
@@ -498,7 +512,8 @@ const PachirisuBerryEffect = new OnStageStartEffect(
         }, 3000)
       }
     }, 1000)
-  }
+  },
+  Passive.PACHIRISU
 )
 
 class ClearWingEffect extends PeriodicEffect {
@@ -635,7 +650,7 @@ export class FalinksFormationEffect extends OnSpawnEffect {
         pkm.addDefense(this.stacks * 1, pkm, 0, false)
         pkm.addShield(this.stacks * 30, pkm, 0, false)
       }
-    })
+    }, Passive.FALINKS)
   }
 }
 
@@ -674,7 +689,8 @@ const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
         )
       }
     })
-  }
+  },
+  Passive.PYUKUMUKU
 )
 
 const comfeyEquipOnSimulationStartEffect = new OnSimulationStartEffect(
@@ -727,7 +743,8 @@ const comfeyEquipOnSimulationStartEffect = new OnSimulationStartEffect(
 
       holder.addItem(Item.COMFEY)
     }
-  }
+  },
+  Passive.COMFEY
 )
 
 const conversionEffect = new OnSimulationStartEffect(
@@ -834,7 +851,8 @@ const conversionEffect = new OnSimulationStartEffect(
         })
       )
     }
-  }
+  },
+  Passive.CONVERSION
 )
 
 const spawnPhioneFromAquaEggOnSimulationStartEffect =
@@ -851,7 +869,7 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect =
         simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
       }
     }
-  })
+  }, Passive.MANAPHY)
 
 const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
   ({ entity, simulation }) => {
@@ -862,7 +880,8 @@ const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
           cell.value.addAbilityPower(50, cell.value, 0, false)
         }
       })
-  }
+  },
+  Passive.STONJOURNER
 )
 
 const treeEffect = new OnSpawnEffect((entity) => {
@@ -874,7 +893,7 @@ const inanimateObjectEffect = new OnSpawnEffect((entity) => {
   entity.status.tree = true
   entity.status.triggerRuneProtect(30000)
   entity.toIdleState()
-})
+}, Passive.INANIMATE)
 
 const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
   ({ simulation, entity }) => {
@@ -902,7 +921,8 @@ const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
         }
       }, 300)
     )
-  }
+  },
+  Passive.SKARMORY
 )
 
 class DrySkinPeriodicEffect extends PeriodicEffect {
@@ -925,7 +945,7 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
   } else if (entity.simulation.weather === Weather.SUN) {
     entity.addAbilityPower(50, entity, 0, false)
   }
-})
+}, Passive.DRY_SKIN)
 
 const spiritombWispEffect = new OnSimulationStartEffect(
   ({ entity, simulation }) => {
@@ -955,7 +975,8 @@ const spiritombWispEffect = new OnSimulationStartEffect(
         pkm.effectsSet.add(onKOEffect)
       }
     })
-  }
+  },
+  Passive.SPIRITOMB
 )
 
 const chinglingCountCastsEffect = new OnSimulationStartEffect(
@@ -966,7 +987,8 @@ const chinglingCountCastsEffect = new OnSimulationStartEffect(
         new OnAbilityCastEffect(() => (entity as PokemonEntity).addStack())
       )
     })
-  }
+  },
+  Passive.CHINGLING
 )
 
 const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
@@ -983,7 +1005,12 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
       entity.addAttack(1, entity, 0, false, true)
     }
   })
-})
+}, Passive.POIPOLE)
+
+const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
+  pokemon.addAttack(1, pokemon, 0, false, true)
+  pokemon.addStack()
+}
 
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
@@ -1092,8 +1119,13 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.STENCH]: [
-    new OnMoveEffect((pokemon, board, oldX, oldY, newX, newY) => {
-      board.effects[oldY * board.columns + oldX] = EffectEnum.POISON_GAS
+    new OnMoveEffect((pokemon, board, oldX, oldY) => {
+      board.addBoardEffect(
+        oldX,
+        oldY,
+        EffectEnum.POISON_GAS,
+        pokemon.simulation
+      )
     })
   ],
   [Passive.PYUKUMUKU]: [PyukumukuExplodeOnDeathEffect],
@@ -1214,6 +1246,10 @@ export const PassiveEffects: Partial<
           pkm.addLuck(-20, pkm, 0, false)
         }
       })
-    })
+    }, Passive.BAD_LUCK)
+  ],
+  [Passive.PRIMEAPE]: [
+    new OnResurrectEffect(addPrimeapeStack, Passive.PRIMEAPE),
+    new OnDeathEffect(addPrimeapeStack, Passive.PRIMEAPE)
   ]
 }

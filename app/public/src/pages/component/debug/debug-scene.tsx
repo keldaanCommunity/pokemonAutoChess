@@ -25,8 +25,8 @@ export default function DebugSceneContainer({
   height?: number
   width?: number
 }) {
-  const gameRef = useRef<Phaser.Game>()
-  const debugScene = useRef<DebugScene>()
+  const gameRef = useRef<Phaser.Game>(null)
+  const debugScene = useRef<DebugScene>(null)
 
   const initialized = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)

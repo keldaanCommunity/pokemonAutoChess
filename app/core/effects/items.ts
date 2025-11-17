@@ -43,12 +43,14 @@ import {
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
+  OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
   OnMoveEffect,
+  OnResurrectEffect,
   OnSimulationStartEffect,
   OnStageStartEffect,
   PeriodicEffect
@@ -405,6 +407,21 @@ export class FishingRodEffect extends OnStageStartEffect {
   }
 }
 
+function dropComfey({ pokemon, board }: OnDeathEffectArgs) {
+  const nearestAvailableCoordinate =
+    pokemon.state.getNearestAvailablePlaceCoordinates(pokemon, board, 2)
+  if (nearestAvailableCoordinate) {
+    pokemon.removeItem(Item.COMFEY)
+    pokemon.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(Pkm.COMFEY, pokemon.player),
+      nearestAvailableCoordinate.x,
+      nearestAvailableCoordinate.y,
+      pokemon.team,
+      false
+    )
+  }
+}
+
 export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
     SynergyStones.map((stone) => [
@@ -726,6 +743,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
     }),
     new OnAbilityCastEffect((pokemon, board, target, crit) => {
+      if (pokemon.items.has(Item.COMFEY) === false) return
       AbilityStrategies[Ability.FLORAL_HEALING].process(
         pokemon,
         board,
@@ -733,7 +751,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         crit,
         true
       )
-    })
+    }, Item.COMFEY),
+    new OnResurrectEffect(dropComfey, Item.COMFEY),
+    new OnDeathEffect(dropComfey, Item.COMFEY)
   ],
 
   [Item.ELECTIRIZER]: [

@@ -8599,12 +8599,12 @@ export class Cacturne extends Pokemon {
 }
 
 export class Pumpkaboo extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT])
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.GOURGEIST
-  hp = 90
-  atk = 13
+  hp = 80
+  atk = 10
   speed = 52
   def = 12
   speDef = 6
@@ -8614,11 +8614,11 @@ export class Pumpkaboo extends Pokemon {
   additional = true
 }
 export class Gourgeist extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.GRASS, Synergy.LIGHT])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 190
-  atk = 26
+  hp = 180
+  atk = 22
   speed = 52
   def = 20
   speDef = 10
@@ -8664,11 +8664,11 @@ export class Noibat extends Pokemon {
     Synergy.SOUND,
     Synergy.FLYING
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.NOIVERN
   hp = 65
-  atk = 6
+  atk = 4
   speed = 64
   def = 2
   speDef = 2
@@ -8677,16 +8677,17 @@ export class Noibat extends Pokemon {
   skill = Ability.RAZOR_WIND
   additional = true
 }
+
 export class Noivern extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
     Synergy.SOUND,
     Synergy.FLYING
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 150
-  atk = 14
+  hp = 135
+  atk = 10
   speed = 64
   def = 6
   speDef = 6
@@ -12211,7 +12212,7 @@ export class Carnivine extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 2
-  skill = Ability.VINE_WHIP
+  skill = Ability.POWER_WHIP
 }
 
 export class Sableye extends Pokemon {
@@ -12254,7 +12255,15 @@ export class Koffing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.WEEZING
+  evolutions = [Pkm.WEEZING, Pkm.GALARIAN_WEEZING]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: IPlayer) => {
+      if (player.regionalPokemons.includes(Pkm.GALARIAN_WEEZING))
+        return Pkm.GALARIAN_WEEZING
+      else return Pkm.WEEZING
+    }
+  )
   hp = 70
   atk = 5
   speed = 44
@@ -12283,6 +12292,30 @@ export class Weezing extends Pokemon {
   range = 1
   skill = Ability.SMOG
   additional = true
+}
+
+export class GalarianWeezing extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.ARTIFICIAL,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 170
+  atk = 10
+  speed = 44
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.STRANGE_STEAM
+  additional = true
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.FAIRY)
+  }
 }
 
 export class Clauncher extends Pokemon {
@@ -14195,7 +14228,7 @@ export class Ambipom extends Pokemon {
 }
 
 export class DeerlingSpring extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14212,7 +14245,11 @@ export class DeerlingSpring extends Pokemon {
 }
 
 export class DeerlingSummer extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14229,7 +14266,7 @@ export class DeerlingSummer extends Pokemon {
 }
 
 export class DeerlingAutumn extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.WILD])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14246,7 +14283,7 @@ export class DeerlingAutumn extends Pokemon {
 }
 
 export class DeerlingWinter extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ICE])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.ICE])
   rarity = Rarity.RARE
   additional = true
   stars = 1
@@ -14263,7 +14300,7 @@ export class DeerlingWinter extends Pokemon {
 }
 
 export class SawsbuckSpring extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14279,7 +14316,11 @@ export class SawsbuckSpring extends Pokemon {
 }
 
 export class SawsbuckSummer extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.GRASS,
+    Synergy.GOURMET
+  ])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14295,7 +14336,7 @@ export class SawsbuckSummer extends Pokemon {
 }
 
 export class SawsbuckAutumn extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.WILD])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.WILD])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14311,7 +14352,7 @@ export class SawsbuckAutumn extends Pokemon {
 }
 
 export class SawsbuckWinter extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.ICE])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GRASS, Synergy.ICE])
   rarity = Rarity.RARE
   additional = true
   stars = 2
@@ -14801,8 +14842,8 @@ export class BurmySandy extends Pokemon {
   hp = 70
   atk = 7
   speed = 46
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 2
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14826,8 +14867,8 @@ export class BurmyTrash extends Pokemon {
   hp = 70
   atk = 7
   speed = 46
-  def = 6
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14869,8 +14910,8 @@ export class WormadamSandy extends Pokemon {
   hp = 150
   atk = 13
   speed = 46
-  def = 6
-  speDef = 6
+  def = 9
+  speDef = 3
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -14891,8 +14932,8 @@ export class WormadamTrash extends Pokemon {
   hp = 150
   atk = 13
   speed = 46
-  def = 9
-  speDef = 3
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.QUIVER_DANCE
@@ -15014,7 +15055,7 @@ export class Tangela extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.POWER_WHIP
+  skill = Ability.VINE_WHIP
   additional = true
 }
 
@@ -15033,7 +15074,7 @@ export class Tangrowth extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.POWER_WHIP
+  skill = Ability.VINE_WHIP
   additional = true
 }
 
@@ -16048,8 +16089,8 @@ export class OgerponTeal extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16070,8 +16111,8 @@ export class OgerponTealMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16093,8 +16134,8 @@ export class OgerponWellspring extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16115,8 +16156,8 @@ export class OgerponWellspringMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16139,8 +16180,8 @@ export class OgerponHearthflame extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16161,8 +16202,8 @@ export class OgerponHearthflameMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16185,8 +16226,8 @@ export class OgerponCornerstone extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -16207,8 +16248,8 @@ export class OgerponCornerstoneMask extends Pokemon {
   hp = 200
   atk = 27
   speed = 70
-  def = 8
-  speDef = 8
+  def = 14
+  speDef = 16
   maxPP = 100
   range = 1
   skill = Ability.IVY_CUDGEL
@@ -19822,6 +19863,7 @@ export const PokemonClasses: Record<
   [Pkm.DHELMISE]: Dhelmise,
   [Pkm.KOFFING]: Koffing,
   [Pkm.WEEZING]: Weezing,
+  [Pkm.GALARIAN_WEEZING]: GalarianWeezing,
   [Pkm.STARYU]: Staryu,
   [Pkm.STARMIE]: Starmie,
   [Pkm.NOSEPASS]: Nosepass,
