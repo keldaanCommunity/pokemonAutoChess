@@ -1784,7 +1784,7 @@ export default class Simulation extends Schema implements ISimulation {
     for (const y of rowRange) {
       for (let x = 0; x < this.board.columns; x++) {
         const pokemonHit = this.board.getEntityOnCell(x, y)
-        this.board.effects[y * this.board.columns + x] = undefined // clear all board effects
+        this.board.clearBoardEffect(x,y, this) // clear all board effects
         if (pokemonHit) {
           if (pokemonHit.team === team) {
             pokemonHit.status.clearNegativeStatus()

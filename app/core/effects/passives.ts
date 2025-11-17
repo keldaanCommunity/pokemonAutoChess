@@ -1119,8 +1119,13 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.STENCH]: [
-    new OnMoveEffect((pokemon, board, oldX, oldY, newX, newY) => {
-      board.effects[oldY * board.columns + oldX] = EffectEnum.POISON_GAS
+    new OnMoveEffect((pokemon, board, oldX, oldY) => {
+      board.addBoardEffect(
+        oldX,
+        oldY,
+        EffectEnum.POISON_GAS,
+        pokemon.simulation
+      )
     })
   ],
   [Passive.PYUKUMUKU]: [PyukumukuExplodeOnDeathEffect],

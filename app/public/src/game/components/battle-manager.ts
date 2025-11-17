@@ -45,7 +45,7 @@ export default class BattleManager {
   simulation: Simulation | undefined
   animationManager: AnimationManager
   player: Player
-  boardEventSprites: Array<GameObjects.Sprite | null>
+  boardEventSprites: GameObjects.Sprite[][]
   pokemonSprites: Map<string, PokemonSprite> = new Map()
 
   constructor(
@@ -59,7 +59,10 @@ export default class BattleManager {
     this.scene = scene
     this.animationManager = animationManager
     this.player = player
-    this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    this.boardEventSprites = Array.from(
+      { length: BOARD_WIDTH * BOARD_HEIGHT },
+      () => []
+    )
     this.pokemonSprites = new Map()
     if (simulation) this.setSimulation(simulation)
   }
@@ -134,7 +137,10 @@ export default class BattleManager {
 
   clear() {
     this.group.clear(true, true)
-    this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    this.boardEventSprites = Array.from(
+      { length: BOARD_WIDTH * BOARD_HEIGHT },
+      () => []
+    )
     this.pokemonSprites.clear()
     this.closeTooltips()
   }
@@ -909,10 +915,12 @@ export default class BattleManager {
     const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
     const index = event.y * BOARD_WIDTH + event.x
 
-    const existingBoardEventSprite = this.boardEventSprites[index]
-    if (existingBoardEventSprite != null) {
-      this.group.remove(existingBoardEventSprite, true, true)
-      this.boardEventSprites[index] = null
+    if (event.effect === null) {
+      // Clear all effects on this cell
+      this.boardEventSprites[index].forEach((sprite) => {
+        sprite.destroy()
+      })
+      this.boardEventSprites[index] = []
     }
 
     if (event.effect === EffectEnum.LIGHTNING_STRIKE) {
@@ -941,7 +949,7 @@ export default class BattleManager {
       sprite.anims.play(EffectEnum.SMOKE)
       sprite.setScale(3, 3)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -964,7 +972,7 @@ export default class BattleManager {
       sprite.setTint(0xa0ff20)
       sprite.setFlipX(true)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1008,7 +1016,7 @@ export default class BattleManager {
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
       sprite.setScale(1, 1)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1030,7 +1038,7 @@ export default class BattleManager {
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         .setOrigin(0.5, 0.5)
         .setScale(0, 0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1055,7 +1063,7 @@ export default class BattleManager {
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         .setOrigin(0.5, 0.5)
         .setScale(0, 0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1079,7 +1087,7 @@ export default class BattleManager {
       sprite.setScale(3, 3)
       sprite.anims.play(EffectEnum.STICKY_WEB)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1099,7 +1107,7 @@ export default class BattleManager {
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
       sprite.setScale(2, 2)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1118,7 +1126,7 @@ export default class BattleManager {
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(1).setAlpha(0)
       sprite.anims.play(EffectEnum.HAIL)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1138,7 +1146,7 @@ export default class BattleManager {
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(2).setAlpha(0)
       sprite.anims.play(EffectEnum.EMBER)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1151,12 +1159,15 @@ export default class BattleManager {
   }
 
   clearBoardEvents() {
-    this.boardEventSprites.forEach((sprite, index) => {
-      if (sprite != null) {
+    this.boardEventSprites.forEach((spritesOnCell, index) => {
+      spritesOnCell.forEach((sprite) => {
         this.group.remove(sprite, true, true)
-        this.boardEventSprites[index] = null
-      }
+      })
     })
+    this.boardEventSprites = Array.from(
+      { length: BOARD_WIDTH * BOARD_HEIGHT },
+      () => []
+    )
   }
 
   displayDamage({
