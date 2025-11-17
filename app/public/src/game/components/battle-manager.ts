@@ -975,6 +975,30 @@ export default class BattleManager {
       })
     }
 
+    if (event.effect === EffectEnum.STRANGE_STEAM) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        `${EffectEnum.SMOKE}/000.png`
+      )
+      sprite.setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
+      sprite.setScale(3, 3)
+      sprite.anims.play(EffectEnum.SMOKE)
+      sprite.setTint(0xff20a0)
+      sprite.setFlipY(true)
+      sprite.setAlpha(0)
+      this.boardEventSprites[index] = sprite
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 0.4,
+        duration: 500,
+        delay: (8 - coordinates[1]) * 100
+      })
+    }
+
     if (event.effect === EffectEnum.STEALTH_ROCKS) {
       const sprite = this.scene.add.sprite(
         coordinates[0],

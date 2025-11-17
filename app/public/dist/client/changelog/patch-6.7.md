@@ -5,6 +5,7 @@
 - Rotom Frost
 - Rotom Fan
 - Rotom Mow
+- Galarian Weezing
 
 # Changes to Pokemon & Abilities
 

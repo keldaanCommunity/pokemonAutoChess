@@ -3297,6 +3297,27 @@ export class SmokeScreenStrategy extends AbilityStrategy {
   }
 }
 
+export class StrangeSteamStrategy extends AbilityStrategy {
+   process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, pokemon.count.ult, true).forEach((cell) => {
+      board.addBoardEffect(cell.x, cell.y, EffectEnum.STRANGE_STEAM, pokemon.simulation)
+      if (cell.value && cell.value.team !== pokemon.team) {
+        if(chance(0.3, pokemon)){
+          cell.value.status.triggerConfusion(3000, cell.value, pokemon)
+        }
+      } else if (cell.value && cell.value.team === pokemon.team){
+        cell.value.status.addFairyField(cell.value)
+      }
+    })
+  }
+}
+
 export class BiteStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -15363,6 +15384,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ASSURANCE]: new AssuranceStrategy(),
   [Ability.AQUA_RING]: new AquaRingStrategy(),
   [Ability.POISON_GAS]: new PoisonGasStrategy(),
+  [Ability.STRANGE_STEAM]: new StrangeSteamStrategy(),
   [Ability.BRAVE_BIRD]: new BraveBirdStrategy(),
   [Ability.MAGICAL_LEAF]: new MagicalLeafStrategy(),
   [Ability.STEALTH_ROCKS]: new StealthRocksStrategy(),

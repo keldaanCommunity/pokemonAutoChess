@@ -532,7 +532,8 @@
 		"SHELL_SIDE_ARM": "Shell Side Arm",
 		"TRIPLE_DIVE": "Triple Dive",
 		"MOONBLAST": "Moonblast",
-		"HYDRO_STEAM": "Hydro Steam"
+		"HYDRO_STEAM": "Hydro Steam",
+		"STRANGE_STEAM": "Strange Steam"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1188,6 +1189,7 @@
 		"DHELMISE": "Dhelmise",
 		"KOFFING": "Koffing",
 		"WEEZING": "Weezing",
+		"GALARIAN_WEEZING": "Galarian Weezing",
 		"STARYU": "Staryu",
 		"STARMIE": "Starmie",
 		"NOSEPASS": "Nosepass",
@@ -2116,7 +2118,8 @@
 		"DEEP_FREEZE": "Fires 9 bolts of ice over 3 seconds, each dealing [10,SP] SPECIAL and reducing the targets SPE_DEF by 1. If the current target is KO'd, the bolts chain to the next closest enemy.",
 		"PLASMA_TEMPEST": "Flies away and fires 3 plasma bolts through the closest enemies. Each bolt deals [40,SP] SPECIAL, reduced by 10% for each enemy passed through.",
 		"TRIMMING_MOWER": "Dash within 2 tiles to hit the most enemies possible and heals [60,SP] HP. Excess healing becomes SHIELD. Deals [40,SP] SPECIAL to ADJACENT enemies.",
-		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast."
+		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast.",
+		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

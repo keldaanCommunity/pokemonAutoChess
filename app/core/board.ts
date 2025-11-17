@@ -253,14 +253,19 @@ export class Board {
     return cells
   }
 
-  getCellsInRadius(cellX: number, cellY: number, radius: number) {
+  getCellsInRadius(
+    cellX: number,
+    cellY: number,
+    radius: number,
+    includesCenter = false
+  ) {
     // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
     radius = Math.floor(Math.abs(radius)) + 0.5
     const radiusSquared = radius * radius
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
-        if (x == cellX && y == cellY) continue
+        if (x == cellX && y == cellY && !includesCenter) continue
         const dy = cellY - y
         const dx = cellX - x
         const distanceSquared = dy * dy + dx * dx
