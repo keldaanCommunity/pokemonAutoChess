@@ -647,8 +647,12 @@ export default class PokemonSprite extends DraggableObject {
         ?.destroy()
       const positions =
         "team" in this.pokemon && this.pokemon.team === Team.RED_TEAM
-          ? FLOWER_POTS_POSITIONS_RED
-          : FLOWER_POTS_POSITIONS_BLUE
+          ? this.flip
+            ? FLOWER_POTS_POSITIONS_BLUE
+            : FLOWER_POTS_POSITIONS_RED
+          : this.flip
+            ? FLOWER_POTS_POSITIONS_RED
+            : FLOWER_POTS_POSITIONS_BLUE
       const [startX, startY] = positions[FlowerPots.indexOf(flowerPot)]
       addAbilitySprite(scene, Ability.PETAL_BLIZZARD, 0, [startX, startY - 24])
       this.moveManager.setEnable(false)

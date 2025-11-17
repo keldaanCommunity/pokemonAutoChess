@@ -67,7 +67,6 @@ import {
   FlyingProtectionEffect,
   MonsterKillEffect
 } from "./effects/synergies"
-import { FlowerMonByPot, FlowerPot, getFlowerPotsUnlocked } from "./flower-pots"
 import { IdleState } from "./idle-state"
 import MovingState from "./moving-state"
 import PokemonState from "./pokemon-state"
@@ -358,7 +357,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage *= 2
         attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
       }
-      if(this.effects.has(EffectEnum.STRANGE_STEAM) || (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))){
+      if (
+        this.effects.has(EffectEnum.STRANGE_STEAM) ||
+        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
+      ) {
         specialDamage *= 1.2
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
@@ -1150,6 +1152,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       effect.apply({ attacker: this, target, board, attackType })
     })
 
+    // cannot be moved to passive effects because it needs to work on any kill from any unit, spawn included
     board.forEach(
       (x, y, v) =>
         v &&
@@ -1157,53 +1160,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         v.team === this.team &&
         v.addAttack(target.stars, v, 0, false)
     )
-
-    if (
-      target.player &&
-      (target.effects.has(EffectEnum.COTTONWEED) ||
-        target.effects.has(EffectEnum.FLYCATCHER) ||
-        target.effects.has(EffectEnum.FRAGRANT) ||
-        target.effects.has(EffectEnum.FLOWER_POWER))
-    ) {
-      if (!target.isGhostOpponent) {
-        target.player.collectMulch(target.stars)
-      }
-
-      const potsAvailable = getFlowerPotsUnlocked(target.player)
-      let nextPot: FlowerPot | undefined
-      if (target.team === Team.RED_TEAM) {
-        nextPot = potsAvailable[target.simulation.redFlowerSpawn]
-        target.simulation.redFlowerSpawn++
-      } else {
-        nextPot = potsAvailable[target.simulation.blueFlowerSpawn]
-        target.simulation.blueFlowerSpawn++
-      }
-
-      if (nextPot) {
-        const spawnSpot = board.getFarthestTargetCoordinateAvailablePlace(
-          target,
-          true
-        )
-        if (spawnSpot) {
-          const flowerToSpawn = target.player.flowerPots.find((p) =>
-            FlowerMonByPot[nextPot].includes(p.name)
-          )
-          if (!flowerToSpawn) {
-            return console.error("No flower found to spawn for pot ", nextPot)
-          }
-          const entity = target.simulation.addPokemon(
-            flowerToSpawn,
-            spawnSpot.x,
-            spawnSpot.y,
-            target.team,
-            true
-          )
-          entity.action = PokemonActionState.BLOSSOM
-          entity.cooldown = 1000
-          target.player.pokemonsPlayed.add(flowerToSpawn.name)
-        }
-      }
-    }
 
     if (
       this.player &&
