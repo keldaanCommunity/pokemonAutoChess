@@ -6,7 +6,7 @@ import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
-  RegionDetails
+  getRegionTint
 } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -179,7 +179,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
-      .setTint(RegionDetails[scene.mapName]?.tint ?? 0xffffff)
+      .setTint(getRegionTint(scene.mapName))
 
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,

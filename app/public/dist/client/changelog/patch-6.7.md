@@ -108,7 +108,7 @@
 - Wiki items section has been reworked for better readability.
 - New section on the wiki: Stages
 - New icons for TM and HM items
-- Added colorblind mode option in preferences. When enabled, Pokémon shadows are displayed in red for enemies, making it easier to spot them on the board. We're looking for feedback from colorblind players to improve it further, please reach out on our Discord if you have suggestions!
+- Added colorblind mode option in preferences. This option changes Pokémon shadows, lighting, DPS bars and various other interfaces to increase contrasts and help colorblind players. We're looking for feedback from colorblind players to improve it further, please reach out on our Discord if you have suggestions.
 
 # Bugfix
 
