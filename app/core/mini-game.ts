@@ -800,13 +800,11 @@ export class MiniGame {
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
-        if (state.stageLevel > 1) {
-          state.shop.assignUniquePropositions(
-            player,
-            state.stageLevel,
-            portalSynergies
-          )
-        }
+        state.shop.assignUniquePropositions(
+          player,
+          state.stageLevel,
+          portalSynergies
+        )
       }
 
       this.avatars!.delete(avatar.id)

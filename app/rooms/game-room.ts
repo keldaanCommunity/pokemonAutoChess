@@ -1184,7 +1184,11 @@ export default class GameRoom extends Room<GameState> {
   ) {
     const player = this.state.players.get(playerId)
     if (!player || player.pokemonsProposition.length === 0) return
-    if (this.state.additionalPokemons.includes(pkm as Pkm) && this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE) return // already picked, probably a double click
+    if (
+      this.state.additionalPokemons.includes(pkm as Pkm) &&
+      this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE
+    )
+      return // already picked, probably a double click
     if (
       UniquePool.includes(pkm) &&
       this.state.stageLevel !== PortalCarouselStages[1]
@@ -1221,12 +1225,12 @@ export default class GameRoom extends Room<GameState> {
 
       // update regional pokemons in case some regional variants of add picks are now available
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
+    }
 
-      const selectedItem = player.itemsProposition[selectedIndex]
-      if (player.itemsProposition.length > 0 && selectedItem != null) {
-        player.items.push(selectedItem)
-        player.itemsProposition.clear()
-      }
+    const selectedItem = player.itemsProposition[selectedIndex]
+    if (player.itemsProposition.length > 0 && selectedItem != null) {
+      player.items.push(selectedItem)
+      player.itemsProposition.clear()
     }
 
     if (

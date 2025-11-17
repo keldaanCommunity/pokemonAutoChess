@@ -9,6 +9,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Eevee is now in Special category, and only found at stage 0 proposals. It always comes with a Fossil stone.
 - Ditto can no longer appear in shops before stage 6
 - Nerf and changes to Icicle Missile (Vanilluxe): Freeze duration 3 → 2 seconds ; now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss. If the attacker is KO before the projectile landing, the missile will have no effect.
 - Change Magma Storm (Heatran): now deals 100 special damage and propagates to adjacent enemies up to 5 times, losing 20% of its power for every tile travelled.
@@ -93,6 +94,7 @@
 
 # Gameplay
 
+- Stage 0 portal carousel now gives you 3 starters with 3 item components to choose from based on the portal symbols. This replaces the random Pokémon given to you at the start of the game.
 - Max fight duration has been increased from 40 seconds to 45 seconds. You should get less draws now.
 - Increased base duration of item carousel from 15 seconds to 16 seconds, and base retention delay from 5 seconds to 6 seconds. A bit more time to read item descriptions and make your choice.
 - Units with both Burn and Freeze status now unfreeze twice faster
