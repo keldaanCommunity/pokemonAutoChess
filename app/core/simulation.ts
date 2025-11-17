@@ -67,6 +67,7 @@ import {
   humanHealEffect,
   MonsterKillEffect,
   OnFieldDeathEffect,
+  onFlowerMonDeath,
   SoundCryEffect
 } from "./effects/synergies"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
@@ -1083,6 +1084,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.FLOWER_POWER:
         if (types.has(Synergy.FLORA)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(onFlowerMonDeath)
         }
         break
 
