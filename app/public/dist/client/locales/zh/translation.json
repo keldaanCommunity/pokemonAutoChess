@@ -532,7 +532,8 @@
 		"SHELL_SIDE_ARM": "臂贝武器",
 		"TRIPLE_DIVE": "三连钻",
 		"MOONBLAST": "月亮之力",
-		"HYDRO_STEAM": "水蒸气"
+		"HYDRO_STEAM": "水蒸气",
+		"STRANGE_STEAM": "神奇蒸汽"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1188,6 +1189,7 @@
 		"DHELMISE": "破破舵轮",
 		"KOFFING": "瓦斯弹",
 		"WEEZING": "双弹瓦斯",
+		"GALARIAN_WEEZING": "伽勒尔双弹瓦斯",
 		"STARYU": "海星星",
 		"STARMIE": "宝石海星",
 		"NOSEPASS": "朝北鼻",
@@ -2115,7 +2117,8 @@
 		"POWER_WASH": "用等离子水滴冲刷敌方宝可梦HP之和最高的横排，造成总计[160,SP]点SPECIAL，平均分配至所有击中的敌方宝可梦身上。",
 		"PLASMA_TEMPEST": "飞离对手并对最近的敌方宝可梦发射3支等离子箭，每支造成[40,SP]点SPECIAL，每经过一只敌方宝可梦使伤害衰减10%。",
  		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
-		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。"
+		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
+		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3056,12 +3059,12 @@
 		"CHARCADET": "打败超梦后，碳小侍会根据PSYCHIC和GHOST共鸣中等级较高的一方获得一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR。",
 		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
 		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和20点AP。",
-		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为使用者和ADJACENT我方宝可梦额外恢复[2,3,5]点PP，且算作一次普通攻击。",
+		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为ADJACENT我方宝可梦（其他此被动拥有者除外）额外恢复[2,3,5]点PP，且算作一次普通攻击。",
 		"KIRLIA": "奇鲁莉安会根据FAIRY和FIGHTING共鸣中等级较高的一方进化为沙奈朵或艾路雷朵。",
 		"KUBFU": "每次使用招式击倒宝可梦时，永久提升5点AP，至多提升10次，封顶时获得SCROLL_OF_DARKNESS。\n每次普通攻击击倒宝可梦时，永久提升3点SPEED，至多提升10次，封顶时获得SCROLL_OF_WATERS。",
 		"VIGOROTH": "$t(pkm.VIGOROTH)免疫SLEEP",
 		"SLAKING": "从SLEEP中醒来时, $t(pkm.SLAKING)陷入RAGE 3秒",
-		"STANTLER": "在地区变更后进化为$t(pkm.WYRDEER)。",
+		"STANTLER": "在第20轮进化为$t(pkm.WYRDEER)。",
 		"PIKACHU_SURFER": "$t(pkm.PIKACHU_SURFER)的能力随着海浪增强而提升，每级激活的AQUATIC共鸣使之获得50点SHIELD和3点ATK。此外，海浪逼近时，$t(pkm.PIKACHU_SURFER)会回复PP。",
 		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。",
 		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。",
