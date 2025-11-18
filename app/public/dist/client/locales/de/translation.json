@@ -3418,7 +3418,7 @@
 	"snapshot": "Schnappschuss",
 	"passive": "Passiv",
 	"pick_additional_pokemon_hint": "Wähle ein zusätzliches Pokémon. Es wird für alle verfügbar sein.",
-	"pick_first_partner_hint": "Wähle deinen Starter. Du wirst eine Kopie von ihm für jede Runde bis Runde 10 erhalten.",
+	"pick_first_partner_scribble": "Wähle deinen Starter. Du wirst eine Kopie von ihm für jede Runde bis Runde 10 erhalten.",
 	"free_slot_hint": "Du musst einen freien Platz auf der Bank haben, oder zwei für Duos",
 	"hide": "Verstecken",
 	"show": "Zeigen",

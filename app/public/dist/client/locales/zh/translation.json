@@ -3733,7 +3733,7 @@
 	"snapshot": "快照",
 	"passive": "被动",
 	"pick_additional_pokemon_hint": "选择一只附加宝可梦。所有玩家均将能从商店中刷出此宝可梦。",
-	"pick_first_partner_hint": "选择你的起始宝可梦。接下来每轮（直到第10轮）开始时，你将获得一只此宝可梦。",
+	"pick_first_partner_scribble": "选择你的起始宝可梦。接下来每轮（直到第10轮）开始时，你将获得一只此宝可梦。",
 	"free_slot_hint": "需要至少有一个空余的备战位才能选择并获取宝可梦。若选择了一对，需要两个空位。",
 	"hide": "隐藏",
 	"show": "显示",

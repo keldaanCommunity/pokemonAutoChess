@@ -155,7 +155,8 @@ export class OnBuyPokemonCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      (player.effects.has(EffectEnum.EERIE_SPELL) || player.shopsSinceLastUnownShop === 0) &&
+      (player.effects.has(EffectEnum.EERIE_SPELL) ||
+        player.shopsSinceLastUnownShop === 0) &&
       player.shopFreeRolls > 0 &&
       player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
     ) {
@@ -1265,13 +1266,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     // Item propositions stages
     if (ItemProposalStages.includes(this.state.stageLevel)) {
       this.state.players.forEach((player: Player) => {
-        let itemSet = ItemComponents
-        if (this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC) {
-          itemSet = Tools.filter(
-            (item) => player.artificialItems.includes(item) === false
-          )
-        }
-        resetArraySchema(player.itemsProposition, pickNRandomIn(itemSet, 3))
+        resetArraySchema(
+          player.itemsProposition,
+          pickNRandomIn(ItemComponents, 3)
+        )
+      })
+    }
+
+    if (
+      [3, 15].includes(this.state.stageLevel) &&
+      this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC
+    ) {
+      this.state.players.forEach((player: Player) => {
+        const itemsSet = Tools.filter(
+          (item) => player.artificialItems.includes(item) === false
+        )
+        resetArraySchema(player.itemsProposition, pickNRandomIn(itemsSet, 3))
       })
     }
 
@@ -1312,7 +1322,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       repeat(remainingAddPicks)(() => {
         const p = pool.pop()
-        if (p) {          
+        if (p) {
           this.state.shop.addAdditionalPokemon(p, this.state)
         }
       })
