@@ -1,4 +1,3 @@
-import { preference } from "../../public/src/preferences"
 import { DungeonMusic, DungeonPMDO } from "../../types/enum/Dungeon"
 import { Dish, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
@@ -776,8 +775,8 @@ export const RegionDetails: {
   }
 }
 
-export function getRegionTint(region: DungeonPMDO | "town"): number {
-  if (preference("colorblindMode")) {
+export function getRegionTint(region: DungeonPMDO | "town", colorblindMode = false): number {
+  if (colorblindMode) {
     return 0xffffff
   }
   return RegionDetails[region]?.tint ?? 0xffffff

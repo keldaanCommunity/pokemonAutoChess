@@ -12,6 +12,7 @@ import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
+import { preference } from "../../preferences"
 import AnimationManager from "../animation-manager"
 import {
   clearAbilityAnimations,
@@ -114,7 +115,9 @@ export class DebugScene extends Phaser.Scene {
     this.pokemonSprite.positionX = 3
     this.pokemonSprite.positionY = 3
 
-    this.pokemonSprite.sprite.setTint(getRegionTint(this.mapName))
+    this.pokemonSprite.sprite.setTint(
+      getRegionTint(this.mapName, preference("colorblindMode"))
+    )
 
     let animationName = AnimationType[animationType]
     const anims = {
@@ -250,7 +253,7 @@ export class DebugScene extends Phaser.Scene {
 
   updateLandscape() {
     if (!this.map) return
-    const tint = getRegionTint(this.mapName)
+    const tint = getRegionTint(this.mapName, preference("colorblindMode"))
     this.landscape.forEach((sprite) => sprite.destroy())
     this.landscape = [
       this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
@@ -266,7 +269,9 @@ export class DebugScene extends Phaser.Scene {
 
   applyStatusAnimation(status: Status | Boost | "") {
     if (this.pokemonSprite) {
-      this.pokemonSprite.sprite.setTint(getRegionTint(this.mapName))
+      this.pokemonSprite.sprite.setTint(
+        getRegionTint(this.mapName, preference("colorblindMode"))
+      )
       this.pokemonSprite.removePoison()
       this.pokemonSprite.removeSleep()
       this.pokemonSprite.removeBurn()
