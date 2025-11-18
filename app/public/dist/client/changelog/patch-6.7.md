@@ -6,6 +6,7 @@
 - Rotom Fan
 - Rotom Mow
 - Galarian Weezing
+- Orthworm
 
 # Gameplay
 
