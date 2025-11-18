@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IDps } from "../../../../../types"
+import { usePreference } from "../../../preferences"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
 
@@ -9,6 +10,7 @@ export default function GameDpsHeal(props: {
   dpsMeter: IDps
 }) {
   const { t } = useTranslation()
+  const [colorblindMode] = usePreference("colorblindMode")
   return (
     <div className="game-dps-bar">
       <PokemonPortrait avatar={props.dpsMeter.name} />
@@ -16,6 +18,9 @@ export default function GameDpsHeal(props: {
         <p>{props.dpsMeter.heal + props.dpsMeter.shield}</p>
         <ProgressBar className="my-progress is-primary">
           <ProgressBar
+            className={
+              colorblindMode ? "colorblind-pattern-vertical-stripes" : ""
+            }
             style={{ backgroundColor: "#76c442" }}
             max={props.maxHeal}
             now={props.dpsMeter.heal}
@@ -23,6 +28,9 @@ export default function GameDpsHeal(props: {
             title={`${t("hp_healed")}: ${props.dpsMeter.heal}`}
           />
           <ProgressBar
+            className={
+              colorblindMode ? "colorblind-pattern-diagonal-stripes" : ""
+            }
             style={{ backgroundColor: "#8d8d8d" }}
             max={props.maxHeal}
             now={props.dpsMeter.shield}

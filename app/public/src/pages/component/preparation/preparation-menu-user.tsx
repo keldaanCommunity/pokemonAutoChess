@@ -8,6 +8,7 @@ import { RemoveButton } from "../buttons/remove-button"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
 import "./preparation-menu-user.css"
+import { preference } from "../../../preferences"
 
 export default function PreparationMenuUser(props: {
   key: string
@@ -52,6 +53,7 @@ export default function PreparationMenuUser(props: {
         title={props.user?.title}
         role={props.user?.role}
       />
+      {preference("colorblindMode") && props.user.ready && t("ready")}
       {removeButton}
     </div>
   )

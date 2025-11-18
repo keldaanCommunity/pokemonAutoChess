@@ -178,6 +178,14 @@ export default function GameOptionsModal(props: {
               label={t("antialiasing")}
             />
           </p>
+           <p>
+            <Checkbox
+              isDark
+              checked={preferences.colorblindMode}
+              onToggle={(checked) => setPreferences({ colorblindMode: checked })}
+              label={t("colorblind_mode")}
+            />
+          </p>
           {props.page === "main_lobby" && (
             <>
               <label>

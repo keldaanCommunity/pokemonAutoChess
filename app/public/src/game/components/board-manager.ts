@@ -3,6 +3,7 @@ import { GameObjects } from "phaser"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  getRegionTint,
   PortalCarouselStages,
   RegionDetails,
   SynergyTriggers
@@ -353,7 +354,7 @@ export default class BoardManager {
         )
         .setScale(2, 2)
         .setOrigin(0.5, 0.5)
-        .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
+        .setTint(getRegionTint(this.scene.mapName))
       const potPokemon = this.player.flowerPots[i]
 
       const simulation = this.scene?.room?.state.simulations.get(
@@ -460,7 +461,7 @@ export default class BoardManager {
             .setScale(2)
             .setAlpha(0.9)
             .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-            .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
+            .setTint(getRegionTint(this.scene.mapName))
           this.groundHoles.push(trench)
           col += trenchWidth - 1
         } else {
@@ -472,7 +473,7 @@ export default class BoardManager {
               .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
               .setScale(2)
               .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-              .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
+              .setTint(getRegionTint(this.scene.mapName))
             this.groundHoles.push(groundHole)
           }
         }
@@ -574,7 +575,7 @@ export default class BoardManager {
       this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
       this.pveChest
         .setScale(2)
-        .setTint(RegionDetails[this.scene.mapName]?.tint ?? 0xffffff)
+        .setTint(getRegionTint(this.scene.mapName))
       this.pveChestGroup.add(this.pveChest)
     } else if (
       this.mode === BoardMode.BATTLE &&

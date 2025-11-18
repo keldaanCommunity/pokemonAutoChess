@@ -3733,6 +3733,7 @@
 	"disable_animated_tilemap": "No background animations",
 	"disable_camera_shake": "No camera shake or flashes",
 	"antialiasing": "Enable anti-aliasing",
+	"colorblind_mode": "Colorblind mode",
 	"save": "Save",
 	"reset": "Reset",
 	"snapshot": "Snapshot",

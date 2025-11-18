@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IDps } from "../../../../../types"
+import { usePreference } from "../../../preferences"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
 
@@ -9,6 +10,7 @@ export default function GameDpsTaken(props: {
   dps: IDps
 }) {
   const { t } = useTranslation()
+  const [colorblindMode] = usePreference("colorblindMode")
   return (
     <div className="game-dps-bar">
       <PokemonPortrait avatar={props.dps.name} />
@@ -20,6 +22,9 @@ export default function GameDpsTaken(props: {
         </p>
         <ProgressBar className="my-progress is-primary">
           <ProgressBar
+            className={
+              colorblindMode ? "colorblind-pattern-vertical-stripes" : ""
+            }
             style={{ backgroundColor: "var(--color-physical)" }}
             max={props.maxDamageTaken}
             now={props.dps.physicalDamageReduced}
@@ -27,6 +32,9 @@ export default function GameDpsTaken(props: {
             title={`${t("physical_damage_reduced")}: ${props.dps.physicalDamageReduced}`}
           />
           <ProgressBar
+            className={
+              colorblindMode ? "colorblind-pattern-diagonal-stripes" : ""
+            }
             style={{ backgroundColor: "var(--color-special)" }}
             max={props.maxDamageTaken}
             now={props.dps.specialDamageReduced}
@@ -34,6 +42,7 @@ export default function GameDpsTaken(props: {
             title={`${t("special_damage_reduced")}: ${props.dps.specialDamageReduced}`}
           />
           <ProgressBar
+            className={colorblindMode ? "colorblind-pattern-dots" : ""}
             style={{ backgroundColor: "var(--color-shield)" }}
             max={props.maxDamageTaken}
             now={props.dps.shieldDamageTaken}

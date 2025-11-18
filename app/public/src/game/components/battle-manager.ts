@@ -996,7 +996,7 @@ export default class BattleManager {
       sprite.setTint(0xff20a0)
       sprite.setFlipY(true)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
