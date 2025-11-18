@@ -93,6 +93,7 @@
 - Changed Grookey line passive: no longer gives PP to user and other drummers. PP gained 2/3/4 → 2/3/5
 - Buff Minior Shields Up & Down: removed ability cooldown
 - Buff Lock On (Genesect): True damage bonus 200% → 300%
+- Buff Armor Cannon (Armarouge): secondary damage 30 → 50, final damage 15 → 25
 
 # Town Encounters
 

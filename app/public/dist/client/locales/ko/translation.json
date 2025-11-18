@@ -2053,7 +2053,7 @@
 		"SOLAR_BLADE": "2초간 빛을 충전하여(시전자가 LIGHT 위치인 경우 즉시)  전방 부채꼴 내 적 3 포켓몬에게 [30,60,120,SP] TRUE 를 가한다.",
 		"SCALE_SHOT": "주변 적에게 [40,SP] SPECIAL 를 가하고 피격 대상과 시전자 자신에게 2초간 ARMOR_BREAK 를 가한다. 2초 후 가장 먼 적에게 비늘을 쏘아내어 [20,SP] SPECIAL 를 경로상 모든 적에게 가한다.",
 		"BULLDOZE": "주변 적에게 [25,45,85,SP] SPECIAL 를 가한다. 피격 대상은 밀려나며 SPEED 가 10 감소한다.",
-		"ARMOR_CANNON": "불타는 투사체를 쏘아내어 대상에게 [50,SP] SPECIAL 를 가하고 가장 가까운 2 적에게 튕겨 [30,SP] SPECIAL 를 가한다. 튕긴 이후 투사체는 기존 대상에게 돌아가 각각 [15,SP] SPECIAL 를 가한다.",
+		"ARMOR_CANNON": "불타는 투사체를 쏘아내어 대상에게 [50,SP] SPECIAL 를 가하고 가장 가까운 2 적에게 튕겨 [50,SP] SPECIAL 를 가한다. 튕긴 이후 투사체는 기존 대상에게 돌아가 각각 [25,SP] SPECIAL 를 가한다.",
 		"BITTER_BLADE": "주변 적에게 [70,SP] SPECIAL 를 가한다. 피격 대상 수만큼 시전자의 최대 HP 의 10% 를 회복한다.",
 		"SUCTION_HEAL": "시전자 전방 부채꼴 2칸 내의 적에게 [15,30,60,SP] SPECIAL 를 가하고 입힌 피해량의 50% 만큼 HP 를 회복한다.",
 		"ROOST": "후열로 날라가 1초간 SLEEP 상태가 되어 [20,40,80,SP] SHIELD 를 회복한다.",

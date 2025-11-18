@@ -2054,7 +2054,7 @@
 		"SOLAR_BLADE": "用2秒（若被LIGHT共鸣的聚光灯照射则无需蓄力）收集满满的日光，将此力量集中在剑上斩击前方CONE内至多3只宝可梦，造成[30,60,120,SP]点TRUE。",
 		"SCALE_SHOT": "蜕下鳞片，对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL，并使自身和击中的敌方宝可梦陷入ARMOR_BREAK 2秒。2秒后，发射鳞片攻击最远的敌方宝可梦，对其造成[20,SP]点PHYSICAL，并对路径上的所有敌方宝可梦造成[10,SP]点PHYSICAL。",
 		"BULLDOZE": "用力踩踏地面，对ADJACENT敌方宝可梦造成[25,45,85,SP]点SPECIAL。击中的宝可梦被击退，并降低他们10点SPEED。",
-		"ARMOR_CANNON": "发射熊熊燃烧的炮弹，对目标造成[50,SP]点SPECIAL，随后弹射至最近的[2,SP]名敌方宝可梦，对他们也各造成[30,SP]点SPECIAL，最后弹射回到初始目标再造成[15,SP]点SPECIAL。",
+		"ARMOR_CANNON": "发射熊熊燃烧的炮弹，对目标造成[50,SP]点SPECIAL，随后弹射至最近的[2,SP]名敌方宝可梦，对他们也各造成[50,SP]点SPECIAL，最后弹射回到初始目标再造成[25,SP]点SPECIAL。",
 		"BITTER_BLADE": "将对世间的留恋聚集于剑尖，并斩击所有ADJACENT敌方宝可梦，造成[70,SP]点SPECIAL。每击中一只敌方宝可梦，使用者自身恢复10%的HP。",
 		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的CONE内的敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害量50%的HP。",
 		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 1秒，并获得[20,40,80,SP]点SHIELD。",

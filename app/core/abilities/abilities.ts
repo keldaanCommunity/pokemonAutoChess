@@ -12820,8 +12820,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const mainDamage = 50
-    const secondaryDamage = 30
-    const finalDamage = 15
+    const secondaryDamage = 50
+    const finalDamage = 25
     const numberOfTargets = 2
 
     pokemon.broadcastAbility({
