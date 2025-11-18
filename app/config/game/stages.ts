@@ -18,6 +18,6 @@ export const ITEM_CAROUSEL_BASE_DURATION = 16000
 export const PORTAL_CAROUSEL_BASE_DURATION = 23000
 
 export const ItemCarouselStages = [4, 12, 17, 22, 27, 34]
-export const ItemProposalStages = [3, 15]
+export const ItemProposalStages = [3]
 export const AdditionalPicksStages = [5, 8, 11]
 export const PortalCarouselStages = [0, 10, 20]

@@ -77,3 +77,36 @@
   border-image-outset: 1.5;
   box-shadow: 1px 1px 0 #00000060;
 }
+
+/* Colorblind mode patterns */
+.colorblind-pattern-diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.3) 3px,
+    rgba(255, 255, 255, 0.3) 6px
+  ) !important;
+  background-blend-mode: overlay;
+}
+
+.colorblind-pattern-vertical-stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.3) 4px,
+    rgba(255, 255, 255, 0.3) 8px
+  ) !important;
+  background-blend-mode: overlay;
+}
+
+.colorblind-pattern-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 1px,
+    transparent 1px
+  ) !important;
+  background-size: 6px 6px !important;
+  background-blend-mode: overlay;
+}

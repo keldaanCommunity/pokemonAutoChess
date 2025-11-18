@@ -32,6 +32,7 @@ export interface IPreferencesState {
   keybindings: Keybindings
   renderer: number
   antialiasing: boolean
+  colorblindMode: boolean
 }
 
 const defaultPreferences: IPreferencesState = {
@@ -50,6 +51,7 @@ const defaultPreferences: IPreferencesState = {
   cameraLocked: false,
   renderer: Phaser.AUTO,
   antialiasing: true,
+  colorblindMode: false,
   keybindings: {
     sell: "E",
     buy_xp: "F",

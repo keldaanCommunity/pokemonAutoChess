@@ -6,7 +6,7 @@ import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
-  RegionDetails
+  getRegionTint
 } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -55,6 +55,9 @@ import {
 } from "./pokemon-animations"
 
 const spriteCountPerPokemon = new Map<string, number>()
+
+const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+  "lastPokemonDetail" in scene
 
 export default class PokemonSprite extends DraggableObject {
   scene: GameScene | DebugScene
@@ -176,7 +179,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
-      .setTint(RegionDetails[scene.mapName]?.tint ?? 0xffffff)
+      .setTint(getRegionTint(scene.mapName))
 
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,
@@ -194,6 +197,15 @@ export default class PokemonSprite extends DraggableObject {
         .setVisible(false)
         .setScale(2, 2)
         .setDepth(DEPTH.POKEMON_SHADOW)
+      if (
+        preference("colorblindMode") &&
+        isEntity(pokemon) &&
+        playerId !== scene.uid &&
+        isGameScene(scene) &&
+        scene.spectate === false
+      ) {
+        this.shadow.setTintFill(0xff0000)
+      }
       this.add(this.shadow)
     }
     this.add(this.sprite)
@@ -235,9 +247,6 @@ export default class PokemonSprite extends DraggableObject {
         this.updateMeal(pokemon.meal)
       }
     }
-
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
 
     this.draggable =
       playerId === scene.uid &&

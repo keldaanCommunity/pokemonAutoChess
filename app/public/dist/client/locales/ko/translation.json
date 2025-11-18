@@ -3685,7 +3685,7 @@
 	"snapshot": "스냅샷",
 	"passive": "패시브",
 	"pick_additional_pokemon_hint": "추가되는 기물을 고릅니다. 모두에게 해금됩니다.",
-	"pick_first_partner_hint": "스타터를 고릅니다. 10 스테이지까지 매스테이지에 해당 스타터를 획득합니다.",
+	"pick_first_partner_scribble": "스타터를 고릅니다. 10 스테이지까지 매스테이지에 해당 스타터를 획득합니다.",
 	"free_slot_hint": "대기석에 한자리(두마리 세트의 경우 두자리)가 비어있어야 합니다.",
 	"hide": "숨기기",
 	"show": "보기",

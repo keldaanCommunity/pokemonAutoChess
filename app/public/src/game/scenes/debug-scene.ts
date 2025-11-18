@@ -1,4 +1,4 @@
-import { RegionDetails } from "../../../../config"
+import { getRegionTint, RegionDetails } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
@@ -114,9 +114,7 @@ export class DebugScene extends Phaser.Scene {
     this.pokemonSprite.positionX = 3
     this.pokemonSprite.positionY = 3
 
-    this.pokemonSprite.sprite.setTint(
-      RegionDetails[this.mapName].tint ?? 0xffffff
-    )
+    this.pokemonSprite.sprite.setTint(getRegionTint(this.mapName))
 
     let animationName = AnimationType[animationType]
     const anims = {
@@ -252,7 +250,7 @@ export class DebugScene extends Phaser.Scene {
 
   updateLandscape() {
     if (!this.map) return
-    const tint = RegionDetails[this.mapName].tint ?? 0xffffff
+    const tint = getRegionTint(this.mapName)
     this.landscape.forEach((sprite) => sprite.destroy())
     this.landscape = [
       this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
@@ -268,9 +266,7 @@ export class DebugScene extends Phaser.Scene {
 
   applyStatusAnimation(status: Status | Boost | "") {
     if (this.pokemonSprite) {
-      this.pokemonSprite.sprite.setTint(
-        RegionDetails[this.mapName].tint ?? 0xffffff
-      )
+      this.pokemonSprite.sprite.setTint(getRegionTint(this.mapName))
       this.pokemonSprite.removePoison()
       this.pokemonSprite.removeSleep()
       this.pokemonSprite.removeBurn()
