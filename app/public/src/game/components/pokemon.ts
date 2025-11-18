@@ -179,7 +179,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
-      .setTint(getRegionTint(scene.mapName))
+      .setTint(getRegionTint(scene.mapName, preference("colorblindMode")))
 
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,
