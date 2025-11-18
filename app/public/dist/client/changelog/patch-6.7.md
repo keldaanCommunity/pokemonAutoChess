@@ -7,8 +7,49 @@
 - Rotom Mow
 - Galarian Weezing
 
+# Gameplay
+
+- Stage 0 portal carousel now gives you 3 starters with 3 item components to choose from based on the portal symbols. This replaces the random Pokémon given to you at the start of the game.
+- Max fight duration has been increased from 40 seconds to 45 seconds. You should get less draws now.
+- Increased base duration of item carousel from 15 seconds to 16 seconds, and base retention delay from 5 seconds to 6 seconds. A bit more time to read item descriptions and make your choice.
+- Units with both Burn and Freeze status now unfreeze twice faster
+- Synergies have been reordered based on their amount of families, unique, legendary and special excluded. This has an impact in case of equalities between synergies, notably: Arceus/Kecleon synergies, synergies obtained with Unown W, which synergy is Porygon converted to.
+- When evolving a pokemon by merging 3 copies, items held by units on the board are prioritized rather than those held by units on bench
+- Board effects (Smog, traps, terrain...) can now overlap on the same cell. Units moving into a cell with multiple board effects will gain all effects.
+
+# Changes to Synergies
+
+- Psychic synergy thresholds changed: 2/4/6 → 3/5/7
+- New effect for Psychic 3: A Unown has 5% chance to appear in your shop
+- New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
+- Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
+- New effect for Grass: 40% of overheal is now gained as max HP
+- Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
+
+# Changes to Items
+
+- Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
+- Removed Rotom Phone item, due to the rework of Rotom.
+- New item: Spell Tag: Gives GHOST synergy. When the holder dies, curses its attacker to be KO'd in 9 seconds.
+- Choice Scarf is renamed Loaded Dice. Now gives +30 Luck as base stat. Attacks have ~~100~~ 50% chance to bounce to a random enemy for ~~50~~ 100% of the attack damage.
+- Lucky Egg is replaced by Heavy-Duty Boots: Base stats: 12 Defense 30 AP; The holder is immune to board effects and forced displacement.
+- Electirizer now gives Electric type. Removed PP burn on triple attacks.
+- Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
+- New tool: Terrain extender: At the start of the fight, holder gains either Electric Field, Grass Field, Psychic Field or Fairy Field based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.
+- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye encounter.
+- Protective pads now also protects against fighting synergy throws
+- Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
+- Buff Sticky Barb: base defense 3 → 6
+- Buff Smoke Ball: add 15 base shield
+- Buff Pokemonomicon: base Ability Power 10 → 30
+- Buff Wide Lens: critical chance 10% → 15%
+- Removed base 10 speed from Gracidea Flower
+- Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
+- Incense base stats: 10 special defense 30 AP → 10 special defense 30 Luck
+
 # Changes to Pokemon & Abilities
 
+- Eevee is now in Special category, and only found at stage 0 proposals. It always comes with a Fossil stone.
 - Ditto can no longer appear in shops before stage 6
 - Nerf and changes to Icicle Missile (Vanilluxe): Freeze duration 3 → 2 seconds ; now correctly strikes the unit at the targeted cell at impact. If the initial target leaves that cell before impact, the missile can miss. If the attacker is KO before the projectile landing, the missile will have no effect.
 - Change Magma Storm (Heatran): now deals 100 special damage and propagates to adjacent enemies up to 5 times, losing 20% of its power for every tile travelled.
@@ -53,36 +94,6 @@
 - Buff Minior Shields Up & Down: removed ability cooldown
 - Buff Lock On (Genesect): True damage bonus 200% → 300%
 
-# Changes to Synergies
-
-- Psychic synergy thresholds changed: 2/4/6 → 3/5/7
-- New effect for Psychic 3: A Unown has 5% chance to appear in your shop
-- New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
-- Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
-- New effect for Grass: 40% of overheal is now gained as max HP
-- Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
-
-# Changes to Items
-
-- Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
-- Removed Rotom Phone item, to follow the rework of Rotom.
-- New item: Spell Tag: Gives GHOST synergy. When the holder dies, curses its attacker to be KO'd in 9 seconds.
-- Choice Scarf is renamed Loaded Dice. Now gives +30 Luck as base stat. Attacks have ~~100~~ 50% chance to bounce to a random enemy for ~~50~~ 100% of the attack damage.
-- Lucky Egg is replaced by Heavy-Duty Boots: Base stats: 12 Defense 30 AP; The holder is immune to board effects and forced displacement.
-- Electirizer now gives Electric type. Removed PP burn on triple attacks.
-- Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
-- New tool: Terrain extender: At the start of the fight, holder gains either Electric Field, Grass Field, Psychic Field or Fairy Field based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.
-- Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye encounter.
-- Protective pads now also protects against fighting synergy throws
-- Exchange ticket now exchange synergy stones with another synergy stones, and other craftable items with another craftable items excluding synergy stones
-- Buff Sticky Barb: base defense 3 → 6
-- Buff Smoke Ball: add 15 base shield
-- Buff Pokemonomicon: base Ability Power 10 → 30
-- Buff Wide Lens: critical chance 10% → 15%
-- Removed base 10 speed from Gracidea Flower
-- Revert blue orb nerf from patch 6.0: applies the effect every ~~4~~ 3 attacks ; PP burned: 20 → 15
-- Incense base stats: 10 special defense 30 AP → 10 special defense 30 Luck
-
 # Town Encounters
 
 - New town encounter at stage 4: Wigglytuff gives you 30 gold for completing a mission.
@@ -90,15 +101,6 @@
 - Wobbuffet encounter now gives all players a Recycle Ticket instead of an Exchange Ticket. It can now also be encountered at stage 22 and 27.
 - Sableye can no longer be encountered at stage 4, but can now be encountered at stage 17.
 - Kecleon can no longer be encountered after stage 22.
-
-# Gameplay
-
-- Max fight duration has been increased from 40 seconds to 45 seconds. You should get less draws now.
-- Increased base duration of item carousel from 15 seconds to 16 seconds, and base retention delay from 5 seconds to 6 seconds. A bit more time to read item descriptions and make your choice.
-- Units with both Burn and Freeze status now unfreeze twice faster
-- Synergies have been reordered based on their amount of families, unique, legendary and special excluded. This has an impact in case of equalities between synergies, notably: Arceus/Kecleon synergies, synergies obtained with Unown W, which synergy is Porygon converted to.
-- When evolving a pokemon by merging 3 copies, items held by units on the board are prioritized rather than those held by units on bench
-- Board effects (Smog, traps, terrain...) can now overlap on the same cell. Units moving into a cell with multiple board effects will gain all effects.
 
 # UI
 
@@ -108,6 +110,7 @@
 - Wiki items section has been reworked for better readability.
 - New section on the wiki: Stages
 - New icons for TM and HM items
+- Added colorblind mode option in preferences. This option changes Pokémon shadows, lighting, DPS bars and various other interfaces to increase contrasts and help colorblind players. We're looking for feedback from colorblind players to improve it further, please reach out on our Discord if you have suggestions.
 
 # Bugfix
 
