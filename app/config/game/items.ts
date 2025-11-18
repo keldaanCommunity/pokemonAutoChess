@@ -52,7 +52,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.SPE_DEF]: 3
   },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
-  [Item.FLUFFY_TAIL]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },
+  [Item.SAFETY_GOGGLES]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },
   [Item.KINGS_ROCK]: { [Stat.SHIELD]: 100 },
   [Item.SHINY_CHARM]: { [Stat.DEF]: 3 },
   [Item.PROTECTIVE_PADS]: { [Stat.SHIELD]: 60, [Stat.ATK]: 6 },

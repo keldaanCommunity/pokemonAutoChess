@@ -31,6 +31,7 @@
 - Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
 - Removed Rotom Phone item, due to the rework of Rotom.
 - New item: Spell Tag: Gives GHOST synergy. When the holder dies, curses its attacker to be KO'd in 9 seconds.
+- Fluffy Tail is renamed Safety Goggles. In addition to its previous effect, it now also grants immunity to sandstorm damage.
 - Choice Scarf is renamed Loaded Dice. Now gives +30 Luck as base stat. Attacks have ~~100~~ 50% chance to bounce to a random enemy for ~~50~~ 100% of the attack damage.
 - Lucky Egg is replaced by Heavy-Duty Boots: Base stats: 12 Defense 30 AP; The holder is immune to board effects and forced displacement.
 - Electirizer now gives Electric type. Removed PP burn on triple attacks.
