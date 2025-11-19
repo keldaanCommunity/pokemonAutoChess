@@ -7,6 +7,7 @@
 - Rotom Mow
 - Galarian Weezing
 - Orthworm
+- Iron Thorns
 
 # Gameplay
 
