@@ -2122,7 +2122,7 @@
 		"TRIMMING_MOWER": "Dash within 2 tiles to hit the most enemies possible and heals [60,SP] HP. Excess healing becomes SHIELD. Deals [40,SP] SPECIAL to ADJACENT enemies.",
 		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast.",
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
-		"PUMMELING_PAYBACK": "Deals [60,SP] + 125% ATK as PHYSICAL, heals [40,SP] HP, and steals 30% of target's DEF and SPE_DEF."
+		"PUMMELING_PAYBACK": "Bites the target, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3090,7 +3090,7 @@
 		"SLOWPOKE": "Will evolve into $t(pkm.SLOWBRO) or $t(pkm.SLOWKING) based on the dominant synergy between WATER and PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Will evolve into $t(pkm.GALARIAN_SLOWBRO) or $t(pkm.GALARIAN_SLOWKING) based on the dominant synergy between POISON and PSYCHIC.",
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
-		"ORTHWORM": "When digging a hole, gains 15 HP permanently."
+		"ORTHWORM": "When digging a hole, gains 5 HP permanently."
 	},
 	"stat": {
 		"ATK": "Attack",

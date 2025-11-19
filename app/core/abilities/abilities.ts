@@ -15167,29 +15167,17 @@ export class PummelingPaybackStrategy extends AbilityStrategy {
     const adBonus = 1.25 * pokemon.atk
     const totalDamage = baseDamage + adBonus
 
-    // Deal physical damage to the target
+    // Deal special damage to the target
     target.handleSpecialDamage(
       totalDamage,
       board,
-      AttackType.PHYSICAL,
+      AttackType.SPECIAL,
       pokemon,
       crit
     )
 
     // Apply healing to the pokemon
     pokemon.handleHeal(healAmount, pokemon, 1, crit)
-
-    // Steal a percentage of the target's armor and magic resistance
-    const stealPercentage = 0.3
-    const stolenArmor = target.def * stealPercentage
-    const stolenMagicResist = target.speDef * stealPercentage
-
-    // Reduce target's defenses
-    target.addDefense(-stolenArmor, pokemon, 0, false)
-    target.addSpecialDefense(-stolenMagicResist, pokemon, 0, false)
-    // Increase pokemon's defenses
-    pokemon.addDefense(stolenArmor, pokemon, 0, false)
-    pokemon.addSpecialDefense(stolenMagicResist, pokemon, 0, false)
   }
 }
 

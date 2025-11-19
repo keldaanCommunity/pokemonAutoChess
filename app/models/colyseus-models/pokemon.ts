@@ -19222,11 +19222,11 @@ export class Orthworm extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GROUND])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 175
+  hp = 185
   atk = 12
-  speed = 48
-  def = 15
-  speDef = 6
+  speed = 40
+  def = 14
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.PUMMELING_PAYBACK
