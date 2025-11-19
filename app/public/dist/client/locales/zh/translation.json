@@ -533,7 +533,9 @@
 		"TRIPLE_DIVE": "三连钻",
 		"MOONBLAST": "月亮之力",
 		"HYDRO_STEAM": "水蒸气",
-		"STRANGE_STEAM": "神奇蒸汽"
+		"STRANGE_STEAM": "神奇蒸汽",
+		"PUMMELING_PAYBACK": "快扫拳返",
+		"VOLT_SURGE": "伏特电涌"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1605,7 +1607,9 @@
 		"WIGLETT": "海地鼠",
 		"WUGTRIO": "三海地鼠",
 		"FLUTTER_MANE": "振翼发",
-		"WALKING_WAKE": "波荡水"
+		"WALKING_WAKE": "波荡水",
+		"ORTHWORM": "拖拖蚓",
+		"IRON_THORNS": "铁荆棘"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2118,7 +2122,9 @@
 		"PLASMA_TEMPEST": "飞离对手并对最近的敌方宝可梦发射3支等离子箭，每支造成[40,SP]点SPECIAL，每经过一只敌方宝可梦使伤害衰减10%。",
  		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
 		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
-		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。"
+		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。",
+		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。",
+		"VOLT_SURGE": "使用者进入增压状态，提升[50,SP]点最大HP。本轮战斗的剩余时间内，每第3次攻击产生一道造成[30,SP]点SPECIAL并会弹射至至多4只附近敌方宝可梦身上的链状闪电。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2396,7 +2402,7 @@
 		"STICKY_BARB": "附着针",
 		"WIDE_LENS": "广角镜",
 		"RAZOR_CLAW": "锐利之爪",
-		"SAFETY_GOGGLES": "防塵護目鏡",
+		"SAFETY_GOGGLES": "防尘护目镜",
 		"KINGS_ROCK": "王者之证",
 		"SHINY_CHARM": "闪耀护符",
 		"GRACIDEA_FLOWER": "葛拉西蒂亚花",
@@ -3731,6 +3737,7 @@
 	"disable_animated_tilemap": "禁用背景动画",
 	"disable_camera_shake": "禁用屏幕振动和闪光",
 	"antialiasing": "启用抗锯齿",
+	"colorblind_mode": "色盲友好模式",
 	"save": "保存",
 	"reset": "重置",
 	"snapshot": "快照",
