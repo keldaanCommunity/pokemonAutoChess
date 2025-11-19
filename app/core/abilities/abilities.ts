@@ -34,7 +34,11 @@ import {
 import { values } from "../../utils/schemas"
 
 import type { Board, Cell } from "../board"
-import { OnDamageReceivedEffect, PeriodicEffect } from "../effects/effect"
+import {
+  OnAttackEffect,
+  OnDamageReceivedEffect,
+  PeriodicEffect
+} from "../effects/effect"
 import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -15180,6 +15184,60 @@ export class PummelingPaybackStrategy extends AbilityStrategy {
   }
 }
 
+const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
+  if (pokemon.count.attackCount % 3 === 0) {
+    const nbBounces = 4
+    const damage = 30
+    const closestEnemies = board.getClosestEnemies(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team === Team.RED_TEAM ? Team.BLUE_TEAM : Team.RED_TEAM
+    )
+
+    let previousTg: PokemonEntity = pokemon
+    let secondaryTargetHit: PokemonEntity | null = target
+
+    for (let i = 0; i < nbBounces; i++) {
+      secondaryTargetHit = closestEnemies[i]
+      if (secondaryTargetHit) {
+        pokemon.broadcastAbility({
+          skill: "LINK_CABLE_link",
+          positionX: previousTg.positionX,
+          positionY: previousTg.positionY,
+          targetX: secondaryTargetHit.positionX,
+          targetY: secondaryTargetHit.positionY
+        })
+        secondaryTargetHit.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false,
+          false
+        )
+        previousTg = secondaryTargetHit
+      } else {
+        break
+      }
+    }
+  }
+})
+
+export class VoltSurgeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    pokemon.addMaxHP(50, pokemon, 1, crit, false)
+    if (pokemon.count.ult === 1) {
+      pokemon.effectsSet.add(voltSurgeEffect)
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -15696,5 +15754,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PLASMA_TEMPEST]: new PlasmaTempestStrategy(),
   [Ability.TRIMMING_MOWER]: new TrimmingMowerStrategy(),
   [Ability.PLASMA_FLASH]: new PlasmaFlashStrategy(),
-  [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy()
+  [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
+  [Ability.VOLT_SURGE]: new VoltSurgeStrategy()
 }

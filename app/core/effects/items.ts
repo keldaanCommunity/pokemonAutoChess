@@ -4,7 +4,7 @@ import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, PokemonActionState } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   AbilityPerTM,
   Berries,
@@ -62,29 +62,11 @@ export const blueOrbOnAttackEffect = new OnAttackEffect(
     if (pokemon.count.staticHolderCount >= 3) {
       pokemon.count.staticHolderCount = 0
       const nbBounces = 2
-      const closestEnemies = new Array<PokemonEntity>()
-      board.forEach(
-        (x: number, y: number, enemy: PokemonEntity | undefined) => {
-          if (enemy && pokemon.team !== enemy.team) {
-            closestEnemies.push(enemy)
-          }
-        }
+      const closestEnemies = board.getClosestEnemies(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
       )
-      closestEnemies.sort((a, b) => {
-        const distanceA = distanceC(
-          a.positionX,
-          a.positionY,
-          pokemon.positionX,
-          pokemon.positionY
-        )
-        const distanceB = distanceC(
-          b.positionX,
-          b.positionY,
-          pokemon.positionX,
-          pokemon.positionY
-        )
-        return distanceA - distanceB
-      })
 
       let previousTg: PokemonEntity = pokemon
       let secondaryTargetHit: PokemonEntity | null = target

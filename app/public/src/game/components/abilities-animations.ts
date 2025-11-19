@@ -1006,6 +1006,11 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 3
   }),
+  [Ability.VOLT_SURGE]: onCaster({
+    ability: Ability.PARABOLIC_CHARGE,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    scale: 3
+  }),
   [Ability.POWER_HUG]: onTarget({ ability: Ability.ANCHOR_SHOT }),
   [Ability.HEAVY_SLAM]: [onCasterScale2, shakeCamera({})],
   [Ability.MORTAL_SPIN]: onCaster({

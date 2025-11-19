@@ -7349,5 +7349,11 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.GROUND_MELEE,
     hurt: AnimationType.Charge
+  },
+  [Pkm.IRON_THORNS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.ROCK_MELEE
   }
 }
