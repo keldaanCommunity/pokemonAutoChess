@@ -842,7 +842,10 @@ export default abstract class PokemonState {
           sandstormDamage -= nbSmoothRocks
           pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
-        if (pokemon.types.has(Synergy.GROUND) === false) {
+        if (
+          pokemon.types.has(Synergy.GROUND) === false &&
+          pokemon.items.has(Item.SAFETY_GOGGLES) === false
+        ) {
           pokemon.handleDamage({
             damage: sandstormDamage,
             board,
