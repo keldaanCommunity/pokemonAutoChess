@@ -2124,7 +2124,7 @@
 		"TRIMMING_MOWER": "Dash within 2 tiles to hit the most enemies possible and heals [60,SP] HP. Excess healing becomes SHIELD. Deals [40,SP] SPECIAL to ADJACENT enemies.",
 		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast.",
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
-		"PUMMELING_PAYBACK": "Bites the target, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
+		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining [50,SP] max HP. For the rest of the combat, every third attack creates an electric chain that deals [30,SP] SPECIAL and arcs to up to 4 nearby enemies."
 	},
 	"effect": {

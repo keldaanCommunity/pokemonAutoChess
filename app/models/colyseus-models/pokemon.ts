@@ -19237,7 +19237,7 @@ export class IronThorns extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ROCK,
     Synergy.ELECTRIC,
-    Synergy.STEEL
+    Synergy.ARTIFICIAL
   ])
   rarity = Rarity.UNIQUE
   stars = 3
