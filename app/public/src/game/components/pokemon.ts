@@ -1314,9 +1314,9 @@ export default class PokemonSprite extends DraggableObject {
   addElectricField() {
     if (!this.electricField) {
       this.electricField = this.scene.add
-        .sprite(0, 10, "status", "ELECTRIC_FIELD/000.png")
+        .sprite(3, 3, "status", "ELECTRIC_FIELD/000.png")
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        .setScale(1.5)
+        .setScale(1)
       this.electricField.anims.play("ELECTRIC_FIELD")
       this.add(this.electricField)
       this.bringToTop(this.sprite)
@@ -1355,7 +1355,7 @@ export default class PokemonSprite extends DraggableObject {
       this.fairyField = this.scene.add
         .sprite(0, 10, "status", "FAIRY_FIELD/000.png")
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        .setScale(1)
+        .setScale(1.5)
       this.fairyField.anims.play("FAIRY_FIELD")
       this.add(this.fairyField)
       this.bringToTop(this.sprite)
