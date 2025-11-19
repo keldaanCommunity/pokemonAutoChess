@@ -272,7 +272,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resetCooldown(baseDuration: number, speed = this.speed) {
-    this.cooldown = Math.round(baseDuration / (0.4 + this.speed * 0.007))
+    this.cooldown = Math.round(baseDuration / (0.4 + speed * 0.007))
   }
 
   setTarget(target: IPokemonEntity | null) {
