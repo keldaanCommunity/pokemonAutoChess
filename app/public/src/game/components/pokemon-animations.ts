@@ -7342,5 +7342,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.DRAGON_MELEE,
     hitSprite: HitSprite.WILD_HIT
+  },
+  [Pkm.ORTHWORM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hurt: AnimationType.Charge
   }
 }

@@ -1387,6 +1387,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             })
             this.room.clock.setTimeout(() => {
               player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+              if (pokemon.passive === Passive.ORTHWORM) {
+                pokemon.addMaxHP(15, player)
+              }
               player.board.forEach((pokemon) => {
                 // Condition based evolutions on ground hole dig
                 if (

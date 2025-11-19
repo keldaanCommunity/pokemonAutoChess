@@ -1,4 +1,3 @@
-import { off } from "process"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
@@ -3298,23 +3297,35 @@ export class SmokeScreenStrategy extends AbilityStrategy {
 }
 
 export class StrangeSteamStrategy extends AbilityStrategy {
-   process(
+  process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    board.getCellsInRadius(pokemon.positionX, pokemon.positionY, pokemon.count.ult, true).forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, EffectEnum.STRANGE_STEAM, pokemon.simulation)
-      if (cell.value && cell.value.team !== pokemon.team) {
-        if(chance(0.3, pokemon)){
-          cell.value.status.triggerConfusion(3000, cell.value, pokemon)
+    board
+      .getCellsInRadius(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.count.ult,
+        true
+      )
+      .forEach((cell) => {
+        board.addBoardEffect(
+          cell.x,
+          cell.y,
+          EffectEnum.STRANGE_STEAM,
+          pokemon.simulation
+        )
+        if (cell.value && cell.value.team !== pokemon.team) {
+          if (chance(0.3, pokemon)) {
+            cell.value.status.triggerConfusion(3000, cell.value, pokemon)
+          }
+        } else if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.status.addFairyField(cell.value)
         }
-      } else if (cell.value && cell.value.team === pokemon.team){
-        cell.value.status.addFairyField(cell.value)
-      }
-    })
+      })
   }
 }
 
@@ -15139,6 +15150,36 @@ export class PlasmaFlashStrategy extends AbilityStrategy {
   }
 }
 
+export class PummelingPaybackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Heal the pokemon by a fixed amount
+    const healAmount = 40
+
+    // Calculate total damage based on base damage and attack bonus
+    const baseDamage = 50
+    const adBonus = 1.25 * pokemon.atk
+    const totalDamage = baseDamage + adBonus
+
+    // Deal special damage to the target
+    target.handleSpecialDamage(
+      totalDamage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    // Apply healing to the pokemon
+    pokemon.handleHeal(healAmount, pokemon, 1, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -15654,5 +15695,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DEEP_FREEZE]: new DeepFreezeStrategy(),
   [Ability.PLASMA_TEMPEST]: new PlasmaTempestStrategy(),
   [Ability.TRIMMING_MOWER]: new TrimmingMowerStrategy(),
-  [Ability.PLASMA_FLASH]: new PlasmaFlashStrategy()
+  [Ability.PLASMA_FLASH]: new PlasmaFlashStrategy(),
+  [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy()
 }

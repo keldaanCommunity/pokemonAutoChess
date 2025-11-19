@@ -1068,7 +1068,8 @@ export enum Pkm {
   GALARIAN_SLOWKING = "GALARIAN_SLOWKING",
   WIGLETT = "WIGLETT",
   WUGTRIO = "WUGTRIO",
-  FLUTTER_MANE = "FLUTTER_MANE"
+  FLUTTER_MANE = "FLUTTER_MANE",
+  ORTHWORM = "ORTHWORM"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -2225,7 +2226,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VAROOM]: "0965",
   [Pkm.REVAVROOM]: "0966",
   [Pkm.CYCLIZAR]: "0967",
-  //[Pkm.ORTHWOEM]: "0968",
+  [Pkm.ORTHWORM]: "0968",
   [Pkm.GLIMMET]: "0969",
   [Pkm.GLIMMORA]: "0970",
   [Pkm.GREAVARD]: "0971",
@@ -3359,7 +3360,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WIGLETT]: Pkm.WIGLETT,
   [Pkm.WUGTRIO]: Pkm.WIGLETT,
   [Pkm.FLUTTER_MANE]: Pkm.FLUTTER_MANE,
-  [Pkm.WALKING_WAKE]: Pkm.WALKING_WAKE
+  [Pkm.WALKING_WAKE]: Pkm.WALKING_WAKE,
+  [Pkm.ORTHWORM]: Pkm.ORTHWORM
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
