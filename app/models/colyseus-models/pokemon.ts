@@ -12102,7 +12102,7 @@ export class Maractus extends Pokemon {
   speed = 44
   def = 12
   speDef = 8
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SPIKY_SHIELD
 }

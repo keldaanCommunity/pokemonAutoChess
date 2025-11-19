@@ -40,7 +40,7 @@ export class BerryTree extends GameObjects.Container {
       .setDepth(DEPTH.INANIMATE_OBJECTS)
       .setScale(2, 2)
       .setOrigin(0.5, 1)
-      .setTint(getRegionTint(this.scene.mapName))
+      .setTint(getRegionTint(this.scene.mapName, preference("colorblindMode")))
     if (stage === 0) {
       this.sprite.anims.play("CROP")
     } else {
