@@ -938,6 +938,11 @@ export const AbilitiesAnimations: {
     tint: 0xa0c020
   }),
   [Ability.CRUNCH]: onTarget({ ability: Ability.BITE, scale: 3 }),
+  [Ability.PUMMELING_PAYBACK]: onTarget({
+    ability: Ability.BITE,
+    scale: 3,
+    tint: 0xc89d7c
+  }),
   [Ability.CAVERNOUS_CHOMP]: onTarget({
     ability: Ability.BITE,
     scale: 2,

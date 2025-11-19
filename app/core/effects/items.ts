@@ -573,7 +573,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     // intentionally no item removal effect
   ],
 
-  [Item.FLUFFY_TAIL]: [
+  [Item.SAFETY_GOGGLES]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerRuneProtect(60000)
     }),

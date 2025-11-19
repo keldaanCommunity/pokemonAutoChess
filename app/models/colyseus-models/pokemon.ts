@@ -19218,6 +19218,21 @@ export class WalkingWake extends Pokemon {
   }
 }
 
+export class Orthworm extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GROUND])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 185
+  atk = 12
+  speed = 40
+  def = 14
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.PUMMELING_PAYBACK
+  passive = Passive.ORTHWORM
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20295,7 +20310,8 @@ export const PokemonClasses: Record<
   [Pkm.WIGLETT]: Wiglett,
   [Pkm.WUGTRIO]: Wugtrio,
   [Pkm.FLUTTER_MANE]: FlutterMane,
-  [Pkm.WALKING_WAKE]: WalkingWake
+  [Pkm.WALKING_WAKE]: WalkingWake,
+  [Pkm.ORTHWORM]: Orthworm
 }
 
 // declare all the classes in colyseus schema TypeRegistry
