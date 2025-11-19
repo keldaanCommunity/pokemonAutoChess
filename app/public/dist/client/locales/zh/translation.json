@@ -3091,7 +3091,8 @@
 		"SEASONAL": "季节性宝可梦会根据当前季节（以北半球为准）更改其外观和共鸣。",
 		"SLOWPOKE": "呆呆兽会根据WATER和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.SLOWBRO)或$t(pkm.SLOWKING)。",
 		"GALARIAN_SLOWPOKE": "伽勒尔呆呆兽会根据POISON和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.GALARIAN_SLOWBRO)或$t(pkm.GALARIAN_SLOWKING)。",
-		"ROTOM": "洛托姆可以通过选择ROTOM_CATALOG中的一件新家电以潜入来更改形态。"
+		"ROTOM": "洛托姆可以通过选择ROTOM_CATALOG中的一件新家电以潜入来更改形态。",
+		"ORTHWORM": "挖洞时永久提升5点HP。"
 	},
 	"stat": {
 		"ATK": "攻击",
