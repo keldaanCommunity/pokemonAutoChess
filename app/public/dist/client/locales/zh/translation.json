@@ -278,7 +278,7 @@
 		"POWER_WASH": "强力清洗",
 		"DEEP_FREEZE": "深寒",
 		"PLASMA_TEMPEST": "等离子风暴",
- 		"TRIMMING_MOWER": "割草",
+		"TRIMMING_MOWER": "割草",
 		"PLASMA_FLASH": "等离子闪光",
 		"POISON_GAS": "毒瓦斯",
 		"ASSIST": "借助",
@@ -2116,7 +2116,7 @@
 		"SUPER_HEAT": "发射一道锥形火焰，在3秒内总计造成9次[10,SP]点SPECIAL，并使击中的敌方宝可梦陷入ARMOR_BREAK 1秒。",
 		"POWER_WASH": "用等离子水滴冲刷敌方宝可梦HP之和最高的横排，造成总计[160,SP]点SPECIAL，平均分配至所有击中的敌方宝可梦身上。",
 		"PLASMA_TEMPEST": "飞离对手并对最近的敌方宝可梦发射3支等离子箭，每支造成[40,SP]点SPECIAL，每经过一只敌方宝可梦使伤害衰减10%。",
- 		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
+		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
 		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
 		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。"
 	},

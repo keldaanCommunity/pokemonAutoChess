@@ -3744,7 +3744,7 @@
 	"save": "Save",
 	"reset": "Reset",
 	"snapshot": "Snapshot",
-	"passive": "Passive",	
+	"passive": "Passive",
 	"pick_additional_pokemon_hint": "Pick an additional Pokémon. It will be available to everyone.",
 	"pick_first_partner": "Pick your starter Pokémon",
 	"pick_first_partner_scribble": "Pick your starter. You will get a copy of it every stage up to stage 10",
@@ -4397,7 +4397,7 @@
 		"download_image": "Download Image",
 		"share_on_discord": "Share on Discord",
 		"move_row_up": "Move row up",
-		"move_row_down": "Move row down", 
+		"move_row_down": "Move row down",
 		"delete_row": "Delete row"
 	}
 }
