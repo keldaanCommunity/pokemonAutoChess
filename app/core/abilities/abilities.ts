@@ -198,7 +198,7 @@ export class BeatUpStrategy extends AbilityStrategy {
           true
         )
         const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-        entity.maxHP = min(1)(Math.round(houndour.maxHP * scale))
+        entity.maxHP = min(1)(Math.round(entity.maxHP * scale))
         entity.hp = entity.maxHP
       }
     }
