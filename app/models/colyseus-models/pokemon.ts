@@ -12874,7 +12874,20 @@ export class Cherubi extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.CHERRIM
+  evolutions = [Pkm.CHERRIM, Pkm.CHERRIM_SUNLIGHT]
+  evolutionRule = new StackBasedEvolutionRule((pokemon, player) => {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    if (
+      pokemon.positionX === player.lightX &&
+      pokemon.positionY === player.lightY &&
+      hasLight
+    ) {
+      return Pkm.CHERRIM_SUNLIGHT
+    }
+    return Pkm.CHERRIM
+  })
   hp = 90
   atk = 6
   speed = 52
