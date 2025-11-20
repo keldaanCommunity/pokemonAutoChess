@@ -4011,7 +4011,9 @@
 		"pokeguesser": "宝可梦猜一猜",
 		"pokeguesser_desc": "在房间里等待游戏开始的时候可以玩玩猜宝可梦的小游戏",
 		"synergy_wheel": "共鸣轮盘",
-		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣"
+		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣",
+		"tier_list_maker": "强度表制作器",
+		"tier_list_maker_desc": "制作以及分享你自己的强度表"
 	},
 	"level_required": "等级需求",
 	"map": {
@@ -4380,5 +4382,17 @@
 	"portal_description_3": "如果你选择不进入任一传送门，则你将留在当前地区，且可供选取的宝可梦将完全随机。",
 	"additional_description": "从所给出的3个选项中选择一只附加宝可梦和一件道具组件。附加宝可梦是只有两个进化阶段的宝可梦，被选取后所有玩家均可从商店中刷出。",
 	"battle_description": "常规的战斗轮次，你将与其他玩家或机器人展开一轮对战。",
-	"rounds_since_last_fight": "上一次与此玩家对战发生于{{count}}轮之前"
+	"rounds_since_last_fight": "上一次与此玩家对战发生于{{count}}轮之前",
+	"minimize": "最小化",
+	"maximize": "最大化",
+	"battle_stats": "战斗数据",
+	"tier_list": {
+		"title": "我的强度表",
+		"add_row": "新建行",
+		"download_image": "下载图像",
+		"share_on_discord": "分享到Discord",
+		"move_row_up": "上移整行",
+		"move_row_down": "下移整行", 
+		"delete_row": "删除行"
+	}
 }
