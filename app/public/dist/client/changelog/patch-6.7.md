@@ -134,4 +134,5 @@
 - Gameboy gadget level requirement decreased to 20
 - Pokeguessr gadget level requirement decreased to 30
 - Bot builder gadget level requirement increased to 40
+- New gadget: Tier-list Maker, unlocks at level 50
 - Added bench management to Bot builder

@@ -1,0 +1,249 @@
+#tier-list {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tier-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-bg-secondary, #1a1a1a);
+  border: 1px solid var(--color-border, #333);
+}
+
+.tier-list-row {
+  border-bottom: 1px solid var(--color-border, #333);
+}
+
+.tier-list-row:last-child {
+  border-bottom: none;
+}
+
+.tier-list-table th {
+  background-color: var(--color-bg-tertiary, #2a2a2a);
+  border-bottom: 1px solid var(--color-border, #333);
+}
+
+.tier-list-label-cell {
+  width: 150px;
+  min-width: 150px;
+  padding: 8px 12px;
+  background-color: var(--color-bg-tertiary, #2a2a2a);
+  border-right: 1px solid var(--color-border, #333);
+  vertical-align: middle;
+  color: black;
+}
+
+.tier-list-label,
+.tier-list-label-input {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 4px;
+  border-width: 2px;
+  transition: background-color 0.2s;
+  padding: 6px 8px;
+  min-height: 42px;
+}
+
+.tier-list-label {
+  cursor: var(--cursor-pointer, pointer);
+}
+
+.tier-list-label:hover {
+  background-color: var(--color-bg-input, #262626);
+}
+
+.tier-list-label-input {
+  width: 100%;
+  background-color: var(--color-bg-input, #262626);
+  color: var(--color-fg-primary, #fff);
+  border-radius: 6px;
+  outline: none;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: block;
+}
+
+.tier-list-items-cell {
+  padding: 8px;
+  min-height: 60px;
+  position: relative;
+}
+
+.tier-list-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-height: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.tier-list-item {
+  position: relative;
+  display: inline-block;
+  cursor: var(--cursor-grab, grab);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Extend drop zone area with 10px transparent margin around the cell */
+.tier-list-item::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.tier-list-item:active {
+  cursor: var(--cursor-grabbing, grabbing);
+}
+
+.tier-list-item.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+/* Drop indicator */
+.tier-list-drop-indicator {
+  width: 3px;
+  height: 48px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--color-fg-accent, #fff) 20%,
+    var(--color-fg-accent, #fff) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  animation: dropIndicatorShow 0.2s ease-out forwards;
+  box-shadow: 0 0 10px var(--color-fg-accent, #fff);
+  position: relative;
+}
+
+@keyframes dropIndicatorShow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 3px;
+  }
+}
+
+.tier-list-drop-indicator::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--color-fg-accent, #fff);
+}
+
+.tier-list-drop-indicator::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid var(--color-fg-accent, #fff);
+}
+
+.tier-list-pokemon-icon,
+.tier-list-item-icon,
+.tier-list-synergy-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.tier-list-pokemon-icon {
+  border-radius: 4px;
+  border: 1px solid var(--color-border, #444);
+  background-color: var(--color-bg-icon, #2a2a2a);
+}
+
+.tier-list-synergy-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.tier-list-pokemon-icon:hover,
+.tier-list-item-icon:hover,
+.tier-list-synergy-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Row actions */
+.tier-list-actions-column {
+  width: 170px;
+  min-width: 170px;
+  padding: 8px;
+  background-color: var(--color-bg-tertiary, #2a2a2a);
+  border-left: 1px solid var(--color-border, #333);
+  vertical-align: middle;
+}
+
+.tier-list-row-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 80%;
+}
+
+.tier-list-move-row {
+  font-size: 12px;
+  padding: 4px 12px;
+  line-height: 1;
+  min-width: 50px;
+}
+
+.tier-list-move-row:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.tier-list-add-row {
+  padding: 6px 14px;
+}
+
+/* Color picker */
+.tier-list-color-picker {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: var(--cursor-hover, pointer);
+  background: none;
+  padding: 0;
+}
+
+.tier-list-color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: 1px solid var(--color-border, #444);
+  border-radius: 8px;
+}
+
+.tier-list-color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 8px;
+}

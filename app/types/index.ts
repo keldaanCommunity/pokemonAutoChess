@@ -38,6 +38,7 @@ import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
 
 export * from "./enum/Emotion"
+export * from "./enum/Item"
 
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"

@@ -29,9 +29,9 @@ import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
 export default function PokemonPicker(props: {
-  selected: PkmWithCustom | Item
-  selectEntity: React.Dispatch<React.SetStateAction<PkmWithCustom>>
-  addEntity: (e: PkmWithCustom) => void
+  selected?: PkmWithCustom | Item
+  selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom>>
+  addEntity?: (e: PkmWithCustom) => void
 }) {
   const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
   const pokemonsPerTab: IPokemonData[][] = tabs.map((t) =>
@@ -53,7 +53,33 @@ export default function PokemonPicker(props: {
         {tabs.map((t) => {
           return (
             <Tab key={t}>
-              {t === "none" ? "?" : <SynergyIcon type={t as Synergy} />}
+              {t === "none" ? (
+                "?"
+              ) : (
+                <div
+                  draggable
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData("text/plain", `synergy,${t}`)
+                    e.stopPropagation() // Prevent tab switching
+                  }}
+                  onDragEnd={() => {
+                    // Reset cursor after drag
+                  }}
+                  style={{
+                    display: "block",
+                    cursor: "var(--cursor-grab)",
+                    userSelect: "none"
+                  }}
+                  onMouseDown={(e) => {
+                    e.currentTarget.style.cursor = "var(--cursor-grabbing)"
+                  }}
+                  onMouseUp={(e) => {
+                    e.currentTarget.style.cursor = "var(--cursor-grab)"
+                  }}
+                >
+                  <SynergyIcon type={t as Synergy} />
+                </div>
+              )}
             </Tab>
           )
         })}
@@ -78,9 +104,9 @@ export default function PokemonPicker(props: {
 
 function PokemonPickerTab(props: {
   pokemons: IPokemonData[]
-  selected: PkmWithCustom | Item
-  selectEntity: React.Dispatch<React.SetStateAction<PkmWithCustom>>
-  addEntity: (e: PkmWithCustom) => void
+  selected?: PkmWithCustom | Item
+  selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom>>
+  addEntity?: (e: PkmWithCustom) => void
   type: Synergy | "none"
 }) {
   const [preferences, setPreferences] = usePreferences()
@@ -197,10 +223,10 @@ function PokemonPickerTab(props: {
                   className={cc("pokemon-portrait", {
                     additional: p.additional,
                     regional: p.regional,
-                    selected: p.name === props.selected["name"]
+                    selected: p.name === props.selected?.["name"]
                   })}
                   onClick={() => {
-                    props.selectEntity({
+                    props.selectEntity?.({
                       name: p.name,
                       emotion: Emotion.NORMAL,
                       shiny: false
@@ -208,7 +234,7 @@ function PokemonPickerTab(props: {
                   }}
                   onDoubleClick={(e) => {
                     e.preventDefault()
-                    props.addEntity({
+                    props.addEntity?.({
                       name: p.name,
                       emotion: Emotion.NORMAL,
                       shiny: false
@@ -216,7 +242,7 @@ function PokemonPickerTab(props: {
                   }}
                   onContextMenu={(e) => {
                     e.preventDefault()
-                    props.addEntity({
+                    props.addEntity?.({
                       name: p.name,
                       emotion: Emotion.NORMAL,
                       shiny: false

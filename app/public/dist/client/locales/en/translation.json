@@ -4015,7 +4015,9 @@
 		"pokeguesser": "PokéGuessr",
 		"pokeguesser_desc": "Guess the Pokémon trivia game when waiting for lobby to start",
 		"synergy_wheel": "Synergy Wheel",
-		"synergy_wheel_desc": "Randomly draws synergies when looking for inspiration"
+		"synergy_wheel_desc": "Randomly draws synergies when looking for inspiration",
+		"tier_list_maker": "Tier List Maker",
+		"tier_list_maker_desc": "Create and share your own tier lists"
 	},
 	"level_required": "Level required",
 	"map": {
@@ -4388,5 +4390,14 @@
 	"rounds_since_last_fight": "Rounds since last fight: {{count}}",
 	"minimize": "Minimize",
 	"maximize": "Maximize",
-	"battle_stats": "Battle Stats"
+	"battle_stats": "Battle Stats",
+	"tier_list": {
+		"title": "My new tier list",
+		"add_row": "Add Row",
+		"download_image": "Download Image",
+		"share_on_discord": "Share on Discord",
+		"move_row_up": "Move row up",
+		"move_row_down": "Move row down", 
+		"delete_row": "Delete row"
+	}
 }
