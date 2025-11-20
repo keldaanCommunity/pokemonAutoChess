@@ -39,11 +39,13 @@ import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
+import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { playMusic } from "../../pages/utils/audio"
 import {
   transformBoardCoordinates,
   transformEntityCoordinates
 } from "../../pages/utils/utils"
+import { preference } from "../../preferences"
 import store from "../../stores"
 import { refreshShopUI } from "../../stores/GameStore"
 import AnimationManager from "../animation-manager"
@@ -55,7 +57,6 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
-import { preference } from "../../preferences"
 
 export enum BoardMode {
   PICK = "pick",
@@ -928,6 +929,17 @@ export default class BoardManager {
         case "ap":
           if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.AP)
+          if (pokemonUI.detail instanceof GamePokemonDetailDOMWrapper) {
+            pokemonUI.detail.updatePokemon(pokemonUI.pokemon)
+          }
+          break
+
+        case "luck":
+          if (previousValue != null && value && value > previousValue)
+            pokemonUI.displayBoost(Stat.LUCK)
+          if (pokemonUI.detail instanceof GamePokemonDetailDOMWrapper) {
+            pokemonUI.detail.updatePokemon(pokemonUI.pokemon)
+          }
           break
 
         case "shiny":

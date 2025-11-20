@@ -125,6 +125,7 @@
 - Fixed Comet shard description and removed AP scaling that was applied by mistake.
 - Fixed Sacred Ash resurrecting a unit already currently resurrecting, causing duplication of that unit.
 - Inanimate objects and Eggs can no longer be sent to the Dojo via Dojo Ticket item
+- Fix passive descriptions not updating with AP and Luck
 
 # Misc
 

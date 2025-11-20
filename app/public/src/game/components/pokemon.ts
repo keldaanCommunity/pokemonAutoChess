@@ -404,8 +404,6 @@ export default class PokemonSprite extends DraggableObject {
       0,
       0,
       this.pokemon,
-      undefined,
-      undefined,
       this.inBattle ? "battle" : "team",
       this.playerId === s.uid
     )
