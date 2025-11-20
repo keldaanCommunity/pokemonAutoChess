@@ -33,7 +33,7 @@
   border: 0;
   color: #fff;
   padding: 4px 8px;
-  cursor: pointer;
+  cursor: var(--cursor-hover, pointer);
   border-radius: 3px;
   font-size: 0.9rem;
   transition: background-color 0.2s;

@@ -16,8 +16,8 @@ import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
 
 export default function ItemPicker(props: {
-  selected: PkmWithCustom | Item
-  selectEntity: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
+  selected?: PkmWithCustom | Item
+  selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
 }) {
   const [itemHovered, setItemHovered] = useState<Item>()
 
@@ -79,7 +79,7 @@ export default function ItemPicker(props: {
               })}
               data-tooltip-id="item-detail"
               onMouseOver={() => setItemHovered(item)}
-              onClick={() => props.selectEntity(item)}
+              onClick={() => props.selectEntity?.(item)}
               draggable
               onDragStart={(e) => handleOnDragStart(e, item)}
             />
