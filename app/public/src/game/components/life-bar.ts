@@ -1,12 +1,13 @@
 import { GameObjects } from "phaser"
 import { Team } from "../../../../types/enum/Game"
+import { max } from "../../../../utils/number"
 import { DEPTH } from "../depths"
 
 export default class LifeBar extends GameObjects.Graphics {
   maxHp: number
   hp: number
   shield: number
-  PP?: number
+  pp?: number
   maxPP?: number
   team: Team
   flip: boolean
@@ -94,8 +95,8 @@ export default class LifeBar extends GameObjects.Graphics {
     }
 
     // PP
-    if (this.PP !== undefined && this.maxPP !== undefined) {
-      const ppPercentage = this.PP / this.maxPP
+    if (this.pp !== undefined && this.maxPP !== undefined) {
+      const ppPercentage = max(1)(this.pp / this.maxPP)
 
       this.fillStyle(ppBarBgColor, 1)
       this.fillRect(1, 9, innerBarWidth, 3)
@@ -132,7 +133,7 @@ export default class LifeBar extends GameObjects.Graphics {
   setPP(value: number) {
     this.scene.tweens.add({
       targets: this,
-      PP: value,
+      pp: value,
       duration: 150,
       onUpdate: this.draw.bind(this),
       ease: "Sine.easeOut"
@@ -141,7 +142,7 @@ export default class LifeBar extends GameObjects.Graphics {
 
   setMaxPP(value: number) {
     this.maxPP = value
-    if (this.PP === undefined) this.PP = 0
+    if (this.pp === undefined) this.pp = 0
   }
 
   setTeam(team: number, flip: boolean) {
