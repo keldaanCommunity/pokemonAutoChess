@@ -15212,7 +15212,6 @@ const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
           board,
           AttackType.SPECIAL,
           pokemon,
-          false,
           false
         )
         previousTg = secondaryTargetHit
