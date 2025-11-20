@@ -583,7 +583,6 @@ class ZygardeCellsEffect extends PeriodicEffect {
               pokemon.name = Pkm.ZYGARDE_100
               pokemon.changePassive(Passive.NONE)
               pokemon.skill = Ability.CORE_ENFORCER
-              pokemon.pp = 0
               pokemon.effectsSet.delete(this)
               if (pokemon.player) {
                 pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)

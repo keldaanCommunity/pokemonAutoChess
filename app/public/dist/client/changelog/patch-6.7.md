@@ -99,6 +99,7 @@
 - Buff Minior Shields Up & Down: removed ability cooldown
 - Buff Lock On (Genesect): True damage bonus 200% → 300%
 - Buff Maractus: PP 90 → 80
+- Zygarde PP no longer resets to 0 when transforming into Complete form
 
 # Town Encounters
 
