@@ -213,9 +213,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Stat.AP]: 50
     },
     marowakItems: [
-      [Item.ICE_STONE, Item.THUNDER_STONE, Item.SHELL_BELL],
-      [Item.FIRE_STONE, Item.ICE_STONE, Item.SHELL_BELL],
-      [Item.FIRE_STONE, Item.THUNDER_STONE, Item.SHELL_BELL]
+      [Item.ASSAULT_VEST, Item.ROCKY_HELMET],
+      [Item.XRAY_VISION, Item.PUNCHING_GLOVE],
+      [Item.DEEP_SEA_TOOTH, Item.CHOICE_SPECS]
     ],
     rewards: CraftableItems,
     getRewardsPropositions(player: Player) {
