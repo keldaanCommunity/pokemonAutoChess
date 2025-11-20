@@ -27,6 +27,7 @@ import PokeGuesser from "../pokeguesser/pokeguesser"
 import Profile from "../profile/profile"
 import ServersList from "../servers/servers-list"
 import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
+import TierListMakerModal from "../tier-list/tier-list-maker-modal"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
@@ -231,6 +232,18 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
+        {((!GADGETS.TIER_LIST_MAKER.disabled &&
+          profileLevel >= GADGETS.TIER_LIST_MAKER.levelRequired) ||
+          profile?.role === Role.ADMIN) && (
+          <NavLink
+            svg="tier-list"
+            location="tier-list"
+            handleClick={changeModal}
+          >
+            {t("gadget.tier_list_maker")}
+          </NavLink>
+        )}
+
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
             <NavLink
@@ -397,6 +410,7 @@ export type Modals =
   | "servers"
   | "synergy-wheel"
   | "team-builder"
+  | "tier-list"
   | "tournaments"
   | "wiki"
 
@@ -478,6 +492,14 @@ function Modals({
       </Modal>
       <TeamBuilderModal
         show={modal === "team-builder"}
+        handleClose={closeModal}
+      />
+      <TeamBuilderModal
+        show={modal === "team-builder"}
+        handleClose={closeModal}
+      />
+      <TierListMakerModal
+        show={modal === "tier-list"}
         handleClose={closeModal}
       />
       <GameOptionsModal
