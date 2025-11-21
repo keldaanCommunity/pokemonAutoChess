@@ -15184,10 +15184,14 @@ export class PummelingPaybackStrategy extends AbilityStrategy {
   }
 }
 
+// Define an effect that triggers on attack
 const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
+  // Check if it's every third attack
   if (pokemon.count.attackCount % 3 === 0) {
     const nbBounces = 4
+    // Calculate damage based on number of cast
     const damage = 30 + 10 * (pokemon.count.ult - 1)
+    // Get closest enemies
     const closestEnemies = board.getClosestEnemies(
       pokemon.positionX,
       pokemon.positionY,
@@ -15197,9 +15201,11 @@ const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
     let previousTg: PokemonEntity = pokemon
     let secondaryTargetHit: PokemonEntity | null = target
 
+    // Loop through bounces
     for (let i = 0; i < nbBounces; i++) {
       secondaryTargetHit = closestEnemies[i]
       if (secondaryTargetHit) {
+        // Broadcast the ability animation
         pokemon.broadcastAbility({
           skill: "LINK_CABLE_link",
           positionX: previousTg.positionX,
@@ -15207,6 +15213,7 @@ const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
           targetX: secondaryTargetHit.positionX,
           targetY: secondaryTargetHit.positionY
         })
+        // Deal damage to the secondary target
         secondaryTargetHit.handleSpecialDamage(
           damage,
           board,
@@ -15230,7 +15237,9 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    // Increase max HP
     pokemon.addMaxHP(40, pokemon, 1, crit, false)
+    // Add the volt surge effect if it's the first ultimate
     if (pokemon.count.ult === 1) {
       pokemon.effectsSet.add(voltSurgeEffect)
     }
