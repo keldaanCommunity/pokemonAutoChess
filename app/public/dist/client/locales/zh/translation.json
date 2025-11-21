@@ -533,7 +533,9 @@
 		"TRIPLE_DIVE": "三连钻",
 		"MOONBLAST": "月亮之力",
 		"HYDRO_STEAM": "水蒸气",
-		"STRANGE_STEAM": "神奇蒸汽"
+		"STRANGE_STEAM": "神奇蒸汽",
+		"PUMMELING_PAYBACK": "快扫拳返",
+		"VOLT_SURGE": "伏特电涌"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1605,7 +1607,9 @@
 		"WIGLETT": "海地鼠",
 		"WUGTRIO": "三海地鼠",
 		"FLUTTER_MANE": "振翼发",
-		"WALKING_WAKE": "波荡水"
+		"WALKING_WAKE": "波荡水",
+		"ORTHWORM": "拖拖蚓",
+		"IRON_THORNS": "铁荆棘"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2115,10 +2119,13 @@
 		"PLASMA_FISSION": "对当前目标发射一道等离子箭，对击中的第一个目标造成[60,SP]点SPECIAL。等离子箭随后会分裂为两支，对每个经过的敌方宝可梦造成SPECIAL，数值相当于上一次所造成SPECIAL的50%。",
 		"SUPER_HEAT": "发射一道锥形火焰，在3秒内总计造成9次[10,SP]点SPECIAL，并使击中的敌方宝可梦陷入ARMOR_BREAK 1秒。",
 		"POWER_WASH": "用等离子水滴冲刷敌方宝可梦HP之和最高的横排，造成总计[160,SP]点SPECIAL，平均分配至所有击中的敌方宝可梦身上。",
+		"DEEP_FREEZE": "在3秒内发射9支寒冰箭，每支造成[10,SP]点SPECIAL并降低目标1点SPE_DEF。若当前目标倒下，寒冰箭会攻击最近的下一个敌方宝可梦。",
 		"PLASMA_TEMPEST": "飞离对手并对最近的敌方宝可梦发射3支等离子箭，每支造成[40,SP]点SPECIAL，每经过一只敌方宝可梦使伤害衰减10%。",
  		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
 		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
-		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。"
+		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。",
+		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。",
+		"VOLT_SURGE": "使用者进入增压状态，提升[50,SP]点最大HP。本轮战斗的剩余时间内，每第3次攻击产生一道造成[30,SP]点SPECIAL并会弹射至至多4只附近敌方宝可梦身上的链状闪电。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2396,7 +2403,7 @@
 		"STICKY_BARB": "附着针",
 		"WIDE_LENS": "广角镜",
 		"RAZOR_CLAW": "锐利之爪",
-		"SAFETY_GOGGLES": "防塵護目鏡",
+		"SAFETY_GOGGLES": "防尘护目镜",
 		"KINGS_ROCK": "王者之证",
 		"SHINY_CHARM": "闪耀护符",
 		"GRACIDEA_FLOWER": "葛拉西蒂亚花",
@@ -3085,7 +3092,8 @@
 		"SEASONAL": "季节性宝可梦会根据当前季节（以北半球为准）更改其外观和共鸣。",
 		"SLOWPOKE": "呆呆兽会根据WATER和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.SLOWBRO)或$t(pkm.SLOWKING)。",
 		"GALARIAN_SLOWPOKE": "伽勒尔呆呆兽会根据POISON和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.GALARIAN_SLOWBRO)或$t(pkm.GALARIAN_SLOWKING)。",
-		"ROTOM": "洛托姆可以通过选择ROTOM_CATALOG中的一件新家电以潜入来更改形态。"
+		"ROTOM": "洛托姆可以通过选择ROTOM_CATALOG中的一件新家电以潜入来更改形态。",
+		"ORTHWORM": "挖洞时永久提升5点HP。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3540,6 +3548,7 @@
 	"total_player_damage_dealt": "本局游戏中对其他玩家造成的伤害总额",
 	"total_reroll_count": "本局游戏中刷新商店的总次数",
 	"team": "队伍",
+	"bench": "备战区",
 	"synergies": "共鸣",
 	"join_as_guest": "以游客身份加入",
 	"welcome": "欢迎",
@@ -3731,11 +3740,13 @@
 	"disable_animated_tilemap": "禁用背景动画",
 	"disable_camera_shake": "禁用屏幕振动和闪光",
 	"antialiasing": "启用抗锯齿",
+	"colorblind_mode": "色盲友好模式",
 	"save": "保存",
 	"reset": "重置",
 	"snapshot": "快照",
 	"passive": "被动",
 	"pick_additional_pokemon_hint": "选择一只附加宝可梦。所有玩家均将能从商店中刷出此宝可梦。",
+	"pick_first_partner": "选择你的起始宝可梦",
 	"pick_first_partner_scribble": "选择你的起始宝可梦。接下来每轮（直到第10轮）开始时，你将获得一只此宝可梦。",
 	"free_slot_hint": "需要至少有一个空余的备战位才能选择并获取宝可梦。若选择了一对，需要两个空位。",
 	"hide": "隐藏",
@@ -3851,6 +3862,7 @@
 	"cell_battery_description": "ELECTRIC共鸣达到最高等级后，我方宝可梦的攻击会为CELL_BATTERY充电。消耗之可以为一只ELECTRIC增压一轮。",
 	"item_recipes": "道具配方",
 	"news": "新闻",
+	"full_patch_notes": "完整更新内容",
 	"patch_notes": "更新内容",
 	"remove_bot": "移除机器人",
 	"kick_user": "踢出用户",
@@ -4003,7 +4015,9 @@
 		"pokeguesser": "宝可梦猜一猜",
 		"pokeguesser_desc": "在房间里等待游戏开始的时候可以玩玩猜宝可梦的小游戏",
 		"synergy_wheel": "共鸣轮盘",
-		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣"
+		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣",
+		"tier_list_maker": "强度表制作器",
+		"tier_list_maker_desc": "制作以及分享你自己的强度表"
 	},
 	"level_required": "等级需求",
 	"map": {
@@ -4372,5 +4386,17 @@
 	"portal_description_3": "如果你选择不进入任一传送门，则你将留在当前地区，且可供选取的宝可梦将完全随机。",
 	"additional_description": "从所给出的3个选项中选择一只附加宝可梦和一件道具组件。附加宝可梦是只有两个进化阶段的宝可梦，被选取后所有玩家均可从商店中刷出。",
 	"battle_description": "常规的战斗轮次，你将与其他玩家或机器人展开一轮对战。",
-	"rounds_since_last_fight": "上一次与此玩家对战发生于{{count}}轮之前"
+	"rounds_since_last_fight": "上一次与此玩家对战发生于{{count}}轮之前",
+	"minimize": "最小化",
+	"maximize": "最大化",
+	"battle_stats": "战斗数据",
+	"tier_list": {
+		"title": "我的强度表",
+		"add_row": "新建行",
+		"download_image": "下载图像",
+		"share_on_discord": "分享到Discord",
+		"move_row_up": "上移整行",
+		"move_row_down": "下移整行", 
+		"delete_row": "删除行"
+	}
 }
