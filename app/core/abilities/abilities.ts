@@ -15187,7 +15187,7 @@ export class PummelingPaybackStrategy extends AbilityStrategy {
 const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
   if (pokemon.count.attackCount % 3 === 0) {
     const nbBounces = 4
-    const damage = 30
+    const damage = 30 + 10 * (pokemon.count.ult - 1)
     const closestEnemies = board.getClosestEnemies(
       pokemon.positionX,
       pokemon.positionY,
@@ -15230,7 +15230,7 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.addMaxHP(50, pokemon, 1, crit, false)
+    pokemon.addMaxHP(40, pokemon, 1, crit, false)
     if (pokemon.count.ult === 1) {
       pokemon.effectsSet.add(voltSurgeEffect)
     }
