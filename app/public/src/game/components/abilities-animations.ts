@@ -2477,8 +2477,27 @@ export const AbilitiesAnimations: {
     })
   }),
   [Ability.GEAR_GRIND]: [
-    projectile({ duration: 500, scale: 1 }),
-    projectile({ duration: 500, delay: 250, scale: 1 })
+    projectile({
+      duration: 500,
+      scale: 1,
+      hitAnim: onTarget({
+        ability: "STEEL/hit",
+        textureKey: "attacks",
+        oriented: true,
+        rotation: (-3 * Math.PI) / 4
+      })
+    }),
+    projectile({
+      duration: 500,
+      delay: 250,
+      scale: 1,
+      hitAnim: onTarget({
+        ability: "STEEL/hit",
+        textureKey: "attacks",
+        oriented: true,
+        rotation: (-3 * Math.PI) / 4
+      })
+    })
   ]
 }
 

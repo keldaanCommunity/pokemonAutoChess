@@ -2127,7 +2127,7 @@
 		"PLASMA_TEMPEST": "Flies away and fires 3 plasma bolts through the closest enemies. Each bolt deals [40,SP] SPECIAL, reduced by 10% for each enemy passed through.",
 		"TRIMMING_MOWER": "Dash within 2 tiles to hit the most enemies possible and heals [60,SP] HP. Excess healing becomes SHIELD. Deals [40,SP] SPECIAL to ADJACENT enemies.",
 		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast.",
-		"GEAR_GRIND": "Launches two gears at the target, each dealing [50,100,200,SP]% of SPEED as SPECIAL.",
+		"GEAR_GRIND": "Launches two gears at the target, each dealing [50,100,200,SP]% of user's SPEED as SPECIAL.",
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining [40,SP] max HP. Every third attack chains through up to 4 nearby enemies, dealing [30,SP] SPECIAL that increases by [10,SP] per cast."
