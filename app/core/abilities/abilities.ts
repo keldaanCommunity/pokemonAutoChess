@@ -15154,6 +15154,26 @@ export class PlasmaFlashStrategy extends AbilityStrategy {
   }
 }
 
+
+export class GearGrindStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Launches two gears at the target, each dealing [50,100,200,SP]% of SPEED as SPECIAL
+    super.process(pokemon, board, target, crit)
+    const speedFactor = [0.5, 1, 2][pokemon.stars - 1] ?? 2
+    const damage = Math.round(pokemon.speed * speedFactor)
+    for (let i = 0; i < 2; i++) {
+      pokemon.commands.push(new DelayedCommand(() => {
+        target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      }, i * 250))
+    }
+  }
+}
+
 export class PummelingPaybackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -15162,6 +15182,7 @@ export class PummelingPaybackStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+
     // Heal the pokemon by a fixed amount
     const healAmount = 40
 
@@ -15747,6 +15768,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FIRST_IMPRESSION]: new FirstImpressionStrategy(),
   [Ability.BARED_FANGS]: new BaredFangsStrategy(),
   [Ability.GRUDGE_DIVE]: new GrudgeDiveStrategy(),
+  [Ability.GEAR_GRIND]: new GearGrindStrategy(),
   [Ability.SOUL_TRAP]: new SoulTrapStrategy(),
   [Ability.WISE_YAWN]: new WiseYawnStrategy(),
   [Ability.EERIE_SPELL]: new EerieSpellStrategy(),
@@ -15765,3 +15787,4 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.VOLT_SURGE]: new VoltSurgeStrategy()
 }
+

@@ -19191,6 +19191,56 @@ export class BasculegionFemale extends Pokemon {
   skill = Ability.GRUDGE_DIVE
 }
 
+export class Klink extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
+  rarity = Rarity.COMMON
+  stars = 1
+  evolution = Pkm.KLANG
+  hp = 50
+  atk = 4
+  speed = 57
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 3
+  skill = Ability.GEAR_GRIND
+  passive = Passive.GEARS
+  regional = true
+}
+
+export class Klang extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
+  rarity = Rarity.COMMON
+  stars = 2
+  evolution = Pkm.KLINKLANG
+  hp = 100
+  atk = 8
+  speed = 57
+  def = 10
+  speDef = 6
+  maxPP = 100
+  range = 3
+  skill = Ability.GEAR_GRIND
+  passive = Passive.GEARS
+  regional = true
+}
+
+export class Klinklang extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
+  rarity = Rarity.COMMON
+  stars = 3
+  hp = 150
+  atk = 16
+  speed = 57
+  def = 18
+  speDef = 12
+  maxPP = 100
+  range = 3
+  skill = Ability.GEAR_GRIND
+  passive = Passive.GEARS
+  regional = true
+}
+
 export class FlutterMane extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GHOST, Synergy.FAIRY, Synergy.FOSSIL])
   rarity = Rarity.UNIQUE
@@ -20335,6 +20385,9 @@ export const PokemonClasses: Record<
   [Pkm.BASCULIN_WHITE]: BasculinWhite,
   [Pkm.BASCULEGION_FEMALE]: BasculegionFemale,
   [Pkm.BASCULEGION_MALE]: BasculegionMale,
+  [Pkm.KLINK]: Klink,
+  [Pkm.KLANG]: Klang,
+  [Pkm.KLINKLANG]: Klinklang,
   [Pkm.GALARIAN_SLOWPOKE]: GalarianSlowpoke,
   [Pkm.GALARIAN_SLOWBRO]: GalarianSlowbro,
   [Pkm.GALARIAN_SLOWKING]: GalarianSlowking,

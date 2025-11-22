@@ -372,7 +372,7 @@ export function carryOverPermanentStats(
     "luck"
   ] as const
   const pkm = pokemonsBeforeEvolution[0].name
-  const baseData = new PokemonClasses[pkm](pkm)
+  const baseData = PokemonFactory.createPokemonFromName(pkm)
   for (const stat of permanentBuffStats) {
     const sumOfPermaStatsModifier = sum(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
