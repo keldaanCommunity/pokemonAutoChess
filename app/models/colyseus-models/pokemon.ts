@@ -7742,19 +7742,19 @@ export class Gligar extends Pokemon {
     Synergy.POISON,
     Synergy.FLYING
   ])
-  rarity = Rarity.UNIQUE
-  stars = 2
+  rarity = Rarity.EPIC
+  stars = 1
   evolution = Pkm.GLISCOR
-  evolutionRule = new ItemEvolutionRule([Item.RAZOR_FANG])
-  hp = 150
-  atk = 15
+  hp = 100
+  atk = 11
   speed = 55
   def = 6
-  speDef = 6
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
-  passive = Passive.GLIGAR
+  passive = Passive.GLISCOR
+  additional = true
 }
 
 export class Gliscor extends Pokemon {
@@ -7763,17 +7763,18 @@ export class Gliscor extends Pokemon {
     Synergy.POISON,
     Synergy.FLYING
   ])
-  rarity = Rarity.UNIQUE
-  stars = 3
+  rarity = Rarity.EPIC
+  stars = 2
   hp = 170
-  atk = 16
+  atk = 22
   speed = 55
-  def = 8
-  speDef = 8
+  def = 12
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.POISON_JAB
   passive = Passive.GLISCOR
+  additional = true
 }
 
 export class Shieldon extends Pokemon {
