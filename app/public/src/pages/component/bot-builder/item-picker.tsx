@@ -6,10 +6,12 @@ import { PkmWithCustom } from "../../../../../types"
 import {
   Berries,
   CraftableItems,
+  HMs,
   Item,
   ItemComponents,
   MemoryDiscs,
   ShinyItems,
+  TMs,
   Tools
 } from "../../../../../types/enum/Item"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -42,6 +44,11 @@ export default function ItemPicker(props: {
     },
 
     { label: t("tools"), key: "tools", items: Tools },
+    {
+      label: t("tm_hm_short"),
+      key: "tm",
+      items: [...TMs, ...HMs]
+    },
     {
       label: t("shiny_items"),
       key: "shiny_items",
