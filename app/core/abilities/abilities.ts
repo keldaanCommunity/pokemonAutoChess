@@ -12928,7 +12928,7 @@ export class SuctionHealStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    const cells = board.getCellsInFront(pokemon, target)
+    const cells = board.getCellsInFront(pokemon, target, 2)
 
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
