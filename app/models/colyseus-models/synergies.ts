@@ -1,4 +1,4 @@
-import { MapSchema } from "@colyseus/schema"
+import { MapSchema, SetSchema } from "@colyseus/schema"
 import { SynergyTriggers } from "../../config"
 import { IPokemon } from "../../types"
 import { SynergyGivenByItem } from "../../types/enum/Item"
@@ -195,7 +195,11 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
   pkm.items.forEach((item) => {
     const synergy = SynergyGivenByItem[item]
     if (synergy) {
-      pkm.types.add(synergy)
+      if (synergy === Synergy.DRAGON) {
+        pkm.types = new SetSchema<Synergy>([synergy, ...pkm.types])
+      } else {
+        pkm.types.add(synergy)
+      }
     }
   })
 }

@@ -533,21 +533,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.TOXIC_ORB]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
-      pokemon.status.triggerPoison(
-        60000,
-        pokemon as PokemonEntity,
-        pokemon as PokemonEntity
-      )
-    }),
-    new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
-      pokemon.status.poisonCooldown = 0
-    })
-  ],
-
   [Item.POKERUS_VIAL]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerPokerus(pokemon)

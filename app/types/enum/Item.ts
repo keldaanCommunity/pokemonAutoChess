@@ -84,7 +84,7 @@ export enum Item {
   MAGMARIZER = "MAGMARIZER",
   MACHO_BRACE = "MACHO_BRACE",
   LIGHT_BALL = "LIGHT_BALL",
-  TOXIC_ORB = "TOXIC_ORB",
+  DRAGON_SCALE = "DRAGON_SCALE",
   METRONOME = "METRONOME",
   EXPLORER_KIT = "EXPLORER_KIT",
   METAL_COAT = "METAL_COAT",
@@ -504,8 +504,8 @@ export const Berries: Item[] = [
 
 export const Tools: Item[] = [
   Item.LIGHT_BALL,
-  Item.TOXIC_ORB,
   Item.HARD_STONE,
+  Item.DRAGON_SCALE,
   Item.METAL_COAT,
   Item.AIR_BALLOON,
   Item.MACHO_BRACE,
@@ -530,7 +530,6 @@ export const Tools: Item[] = [
 export type Tool = (typeof Tools)[number]
 
 export const ArtificialItems: Tool[] = [
-  Item.TOXIC_ORB,
   Item.METAL_COAT,
   Item.MACHO_BRACE,
   Item.EXPLORER_KIT,
@@ -538,6 +537,7 @@ export const ArtificialItems: Tool[] = [
   Item.TINY_MUSHROOM,
   Item.ELECTIRIZER,
   Item.POKERUS_VIAL,
+  Item.COOKING_POT,
   Item.MAX_ELIXIR,
   Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
@@ -655,7 +655,6 @@ export const SynergyGemsBuried: SynergyGem[] = [
 ] as const
 
 export const ToolsBuried: Tool[] = [
-  Item.TOXIC_ORB,
   Item.HARD_STONE,
   Item.METAL_COAT,
   Item.EXPLORER_KIT,
@@ -666,7 +665,8 @@ export const ToolsBuried: Tool[] = [
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE
+  Item.EXP_SHARE,
+  Item.DRAGON_SCALE
 ]
 
 export const SynergyItems = [
@@ -681,7 +681,8 @@ export const SynergyItems = [
   Item.ICE_STONE,
   Item.MACHO_BRACE,
   Item.LIGHT_BALL,
-  Item.TOXIC_ORB,
+  Item.DRAGON_SCALE,
+  Item.POKERUS_VIAL,
   Item.METRONOME,
   Item.METAL_COAT,
   Item.AIR_BALLOON,
@@ -715,7 +716,8 @@ export const SynergyGivenByItem: Record<
   [Item.ICE_STONE]: Synergy.ICE,
   [Item.MACHO_BRACE]: Synergy.FIGHTING,
   [Item.LIGHT_BALL]: Synergy.LIGHT,
-  [Item.TOXIC_ORB]: Synergy.POISON,
+  [Item.DRAGON_SCALE]: Synergy.DRAGON,
+  [Item.POKERUS_VIAL]: Synergy.POISON,
   [Item.METRONOME]: Synergy.SOUND,
   [Item.METAL_COAT]: Synergy.STEEL,
   [Item.ELECTIRIZER]: Synergy.ELECTRIC,

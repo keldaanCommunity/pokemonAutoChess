@@ -67,7 +67,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.SPEED]: -15 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
-  [Item.TOXIC_ORB]: { [Stat.SHIELD]: 15, [Stat.SPE_DEF]: 4 },
+  [Item.DRAGON_SCALE]: { [Stat.DEF]: 5, [Stat.SPE_DEF]: 5 },
   [Item.METRONOME]: { [Stat.PP]: 5 },
   [Item.METAL_COAT]: { [Stat.DEF]: 10, [Stat.SPE_DEF]: 10 },
   [Item.AIR_BALLOON]: { [Stat.SPEED]: 30 },

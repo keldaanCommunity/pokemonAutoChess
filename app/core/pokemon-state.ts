@@ -875,14 +875,6 @@ export default abstract class PokemonState {
     ) {
       pokemon.status.triggerBurn(60000, pokemon, pokemon)
     }
-
-    if (
-      pokemon.items.has(Item.TOXIC_ORB) &&
-      pokemon.status.poisonStacks === 0 &&
-      pokemon.action !== PokemonActionState.HOP
-    ) {
-      pokemon.status.triggerPoison(60000, pokemon, pokemon)
-    }
   }
 
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
