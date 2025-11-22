@@ -19196,7 +19196,7 @@ export class Klink extends Pokemon {
   rarity = Rarity.COMMON
   stars = 1
   evolution = Pkm.KLANG
-  hp = 60
+  hp = 50
   atk = 5
   speed = 30
   def = 6
@@ -19213,11 +19213,11 @@ export class Klang extends Pokemon {
   rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.KLINKLANG
-  hp = 120
+  hp = 100
   atk = 10
   speed = 30
-  def = 12
-  speDef = 8
+  def = 10
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.GEAR_GRIND
@@ -19229,8 +19229,8 @@ export class Klinklang extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.ARTIFICIAL])
   rarity = Rarity.COMMON
   stars = 3
-  hp = 180
-  atk = 16
+  hp = 150
+  atk = 20
   speed = 30
   def = 18
   speDef = 12
