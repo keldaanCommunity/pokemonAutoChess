@@ -2465,7 +2465,11 @@ export const AbilitiesAnimations: {
       scale: 2,
       depth: DEPTH.ABILITY_BELOW_POKEMON
     })
-  })
+  }),
+  [Ability.GEAR_GRIND]: [
+    projectile({ duration: 500, scale: 1 }),
+    projectile({ duration: 500, delay: 250, scale: 1 })
+  ]
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

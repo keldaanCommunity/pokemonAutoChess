@@ -1246,5 +1246,24 @@ export const PassiveEffects: Partial<
   [Passive.PRIMEAPE]: [
     new OnResurrectEffect(addPrimeapeStack, Passive.PRIMEAPE),
     new OnDeathEffect(addPrimeapeStack, Passive.PRIMEAPE)
+  ],
+  [Passive.GEARS]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team === entity.team) {
+          pkm.effectsSet.add(
+            new PeriodicEffect(
+              (pokemon) => {
+                if (entity.hp > 0) {
+                  pokemon.addSpeed(1, pokemon, 0, false)
+                }
+              },
+              Passive.GEARS,
+              1000
+            )
+          )
+        }
+      })
+    }, Passive.GEARS)
   ]
 }

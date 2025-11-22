@@ -15126,7 +15126,14 @@ export class GearGrindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    //TODO: Implement Gear Grind ability logic
+    // Launches two gears at the target, each dealing [50,100,200,SP]% of SPEED as SPECIAL
+    const speedFactor = [0.5, 1, 2][pokemon.stars - 1] ?? 2
+    const damage = Math.round(pokemon.speed * speedFactor)
+    for (let i = 0; i < 2; i++) {
+      pokemon.commands.push(new DelayedCommand(() => {
+        target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      }, i * 250))
+    }
   }
 }
 

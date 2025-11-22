@@ -19157,8 +19157,9 @@ export class Klink extends Pokemon {
   def = 6
   speDef = 4
   maxPP = 100
-  range = 1
+  range = 3
   skill = Ability.GEAR_GRIND
+  passive = Passive.GEARS
   regional = true
 }
 
@@ -19173,8 +19174,9 @@ export class Klang extends Pokemon {
   def = 12
   speDef = 8
   maxPP = 100
-  range = 1
+  range = 3
   skill = Ability.GEAR_GRIND
+  passive = Passive.GEARS
   regional = true
 }
 
@@ -19188,8 +19190,9 @@ export class Klinklang extends Pokemon {
   def = 18
   speDef = 12
   maxPP = 100
-  range = 1
+  range = 3
   skill = Ability.GEAR_GRIND
+  passive = Passive.GEARS
   regional = true
 }
 

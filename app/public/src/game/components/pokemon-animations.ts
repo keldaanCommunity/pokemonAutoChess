@@ -7296,7 +7296,7 @@ export const PokemonAnimations: {
   [Pkm.KLINK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Rotate,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
     hitSprite: HitSprite.STEEL_HIT,
     shinyUnavailable: true
@@ -7304,7 +7304,7 @@ export const PokemonAnimations: {
   [Pkm.KLANG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Rotate,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
     hitSprite: HitSprite.STEEL_HIT,
     shinyUnavailable: true
@@ -7312,7 +7312,7 @@ export const PokemonAnimations: {
   [Pkm.KLINKLANG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Rotate,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
     hitSprite: HitSprite.STEEL_HIT,
     shinyUnavailable: true
