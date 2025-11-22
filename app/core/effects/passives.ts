@@ -265,6 +265,7 @@ const KubfuOnKillEffect = new OnKillEffect(
     pokemon.refToBoardPokemon.stacks = max(MAX_BUFFS)(
       Math.max(nbBuffsAP, nbBuffsSpeed)
     )
+    pokemon.stacks = pokemon.refToBoardPokemon.stacks // update entity tooltip in real time
   },
   Passive.KUBFU
 )
@@ -1180,6 +1181,7 @@ export const PassiveEffects: Partial<
       const pokemon = attacker.refToBoardPokemon
       if (pokemon && pokemon instanceof BasculinWhite) {
         pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        attacker.stacks = pokemon.stacks // update entity tooltip in real time
         if (
           pokemon.killCount === pokemon.stacksRequired &&
           pokemon.deathCount < pokemon.stacksRequired

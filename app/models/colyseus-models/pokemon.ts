@@ -17919,9 +17919,9 @@ export class Kubfu extends Pokemon {
           ? Pkm.URSHIFU_RAPID
           : Pkm.URSHIFU_SINGLE
       }
-    ),
-    { maxStacks: 10 }
+    )
   )
+  stacksRequired = 10
   hp = 150
   atk = 15
   speed = 50
