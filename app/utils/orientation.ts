@@ -129,7 +129,8 @@ export function effectInLine(
       break
   }
 
-  const isEntity = (obj: PokemonEntity | Orientation): obj is PokemonEntity => obj.hasOwnProperty("positionX")
+  const isEntity = (obj: PokemonEntity | Orientation): obj is PokemonEntity =>
+    obj.hasOwnProperty("positionX")
   if (isEntity(target) && targetsHit.size === 0) {
     // should at least touch the original target
     // this can happen when target has an angle in between 45 degrees modulo, see https://discord.com/channels/737230355039387749/1098262507505848523

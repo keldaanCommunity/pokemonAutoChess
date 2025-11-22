@@ -775,7 +775,10 @@ export const RegionDetails: {
   }
 }
 
-export function getRegionTint(region: DungeonPMDO | "town", colorblindMode = false): number {
+export function getRegionTint(
+  region: DungeonPMDO | "town",
+  colorblindMode = false
+): number {
   if (colorblindMode) {
     return 0xffffff
   }

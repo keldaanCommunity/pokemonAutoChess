@@ -22,7 +22,7 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineEnding": "lf",
+    "lineEnding": "auto",
     "lineWidth": 80,
     "attributePosition": "auto"
   },

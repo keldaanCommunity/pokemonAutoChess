@@ -130,7 +130,7 @@ export default function SynergyDetailComponent(props: {
     })
   }
 
-  if(props.type === Synergy.ELECTRIC && currentPlayer) {
+  if (props.type === Synergy.ELECTRIC && currentPlayer) {
     additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
       charge: currentPlayer.cellBattery
     })
