@@ -47,7 +47,6 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.MARACTUS,
   PkmDuo.PLUSLE_MINUN,
   Pkm.PINSIR,
-  Pkm.GLIGAR,
   Pkm.DELIBIRD,
   Pkm.TORKOAL,
   Pkm.IRON_BUNDLE,
