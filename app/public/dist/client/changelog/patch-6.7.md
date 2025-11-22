@@ -128,6 +128,7 @@
 - Inanimate objects and Eggs can no longer be sent to the Dojo via Dojo Ticket item
 - Fix passive descriptions not updating with AP and Luck
 - Fix Houndour spawns not getting Amorphous bonuses
+- Fix range of suction heal
 
 # Misc
 
