@@ -158,6 +158,7 @@ class GameContainer {
       "targetY",
       "team",
       "index",
+      "name",
       "shiny",
       "skill",
       "stars",

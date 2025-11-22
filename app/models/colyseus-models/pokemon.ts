@@ -5955,13 +5955,13 @@ export class Rayquaza extends Pokemon {
 
 export class Eevee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 1
-  hp = 90
+  hp = 60
   atk = 5
   speed = 43
-  def = 6
-  speDef = 4
+  def = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.HAPPY_HOUR
@@ -6013,7 +6013,7 @@ export class Eevee extends Pokemon {
 
 export class Vaporeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 12
@@ -6027,7 +6027,7 @@ export class Vaporeon extends Pokemon {
 
 export class Jolteon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 8
@@ -6041,7 +6041,7 @@ export class Jolteon extends Pokemon {
 
 export class Flareon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 12
@@ -6055,7 +6055,7 @@ export class Flareon extends Pokemon {
 
 export class Espeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 8
@@ -6069,7 +6069,7 @@ export class Espeon extends Pokemon {
 
 export class Umbreon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 12
@@ -6083,7 +6083,7 @@ export class Umbreon extends Pokemon {
 
 export class Leafeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 9
@@ -6097,7 +6097,7 @@ export class Leafeon extends Pokemon {
 
 export class Sylveon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 12
@@ -6111,7 +6111,7 @@ export class Sylveon extends Pokemon {
 
 export class Glaceon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.SPECIAL
   stars = 2
   hp = 180
   atk = 12
@@ -12102,7 +12102,7 @@ export class Maractus extends Pokemon {
   speed = 44
   def = 12
   speDef = 8
-  maxPP = 90
+  maxPP = 80
   range = 1
   skill = Ability.SPIKY_SHIELD
 }
@@ -12255,7 +12255,15 @@ export class Koffing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
-  evolution = Pkm.WEEZING
+  evolutions = [Pkm.WEEZING, Pkm.GALARIAN_WEEZING]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: IPlayer) => {
+      if (player.regionalPokemons.includes(Pkm.GALARIAN_WEEZING))
+        return Pkm.GALARIAN_WEEZING
+      else return Pkm.WEEZING
+    }
+  )
   hp = 70
   atk = 5
   speed = 44
@@ -12284,6 +12292,30 @@ export class Weezing extends Pokemon {
   range = 1
   skill = Ability.SMOG
   additional = true
+}
+
+export class GalarianWeezing extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.POISON,
+    Synergy.ARTIFICIAL,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 170
+  atk = 10
+  speed = 44
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.STRANGE_STEAM
+  additional = true
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.FAIRY)
+  }
 }
 
 export class Clauncher extends Pokemon {
@@ -12842,7 +12874,20 @@ export class Cherubi extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.CHERRIM
+  evolutions = [Pkm.CHERRIM, Pkm.CHERRIM_SUNLIGHT]
+  evolutionRule = new StackBasedEvolutionRule((pokemon, player) => {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    if (
+      pokemon.positionX === player.lightX &&
+      pokemon.positionY === player.lightY &&
+      hasLight
+    ) {
+      return Pkm.CHERRIM_SUNLIGHT
+    }
+    return Pkm.CHERRIM
+  })
   hp = 90
   atk = 6
   speed = 52
@@ -19236,6 +19281,39 @@ export class WalkingWake extends Pokemon {
   }
 }
 
+export class Orthworm extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.GROUND])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 185
+  atk = 12
+  speed = 40
+  def = 14
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.PUMMELING_PAYBACK
+  passive = Passive.ORTHWORM
+}
+
+export class IronThorns extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ROCK,
+    Synergy.ELECTRIC,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 18
+  speed = 50
+  def = 8
+  speDef = 6
+  maxPP = 90
+  range = 1
+  skill = Ability.VOLT_SURGE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -19881,6 +19959,7 @@ export const PokemonClasses: Record<
   [Pkm.DHELMISE]: Dhelmise,
   [Pkm.KOFFING]: Koffing,
   [Pkm.WEEZING]: Weezing,
+  [Pkm.GALARIAN_WEEZING]: GalarianWeezing,
   [Pkm.STARYU]: Staryu,
   [Pkm.STARMIE]: Starmie,
   [Pkm.NOSEPASS]: Nosepass,
@@ -20315,7 +20394,9 @@ export const PokemonClasses: Record<
   [Pkm.WIGLETT]: Wiglett,
   [Pkm.WUGTRIO]: Wugtrio,
   [Pkm.FLUTTER_MANE]: FlutterMane,
-  [Pkm.WALKING_WAKE]: WalkingWake
+  [Pkm.WALKING_WAKE]: WalkingWake,
+  [Pkm.ORTHWORM]: Orthworm,
+  [Pkm.IRON_THORNS]: IronThorns
 }
 
 // declare all the classes in colyseus schema TypeRegistry

@@ -4420,6 +4420,13 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.POISON_MELEE,
     hitSprite: HitSprite.POISON_HIT
   },
+  [Pkm.GALARIAN_WEEZING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Gas,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE,
+    hitSprite: HitSprite.POISON_HIT
+  },
   [Pkm.STARYU]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
@@ -7359,5 +7366,18 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.DRAGON_MELEE,
     hitSprite: HitSprite.WILD_HIT
+  },
+  [Pkm.ORTHWORM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GROUND_MELEE,
+    hurt: AnimationType.Charge
+  },
+  [Pkm.IRON_THORNS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.ROCK_MELEE
   }
 }

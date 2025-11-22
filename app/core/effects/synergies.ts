@@ -9,13 +9,18 @@ import { SynergyEffects } from "../../models/effects"
 import { Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Team } from "../../types/enum/Game"
+import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { distanceC } from "../../utils/distance"
 import { chance } from "../../utils/random"
+import {
+  FlowerMonByPot,
+  FlowerPot,
+  getFlowerPotsUnlocked
+} from "../flower-pots"
 import { DelayedCommand } from "../simulation-command"
 import {
   OnAbilityCastEffect,
@@ -363,3 +368,45 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     }
   }
 }
+
+export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
+  if (!pokemon.player) return
+  if (!pokemon.isGhostOpponent) {
+    pokemon.player.collectMulch(pokemon.stars)
+  }
+
+  const potsAvailable = getFlowerPotsUnlocked(pokemon.player)
+  let nextPot: FlowerPot | undefined
+  if (pokemon.team === Team.RED_TEAM) {
+    nextPot = potsAvailable[pokemon.simulation.redFlowerSpawn]
+    pokemon.simulation.redFlowerSpawn++
+  } else {
+    nextPot = potsAvailable[pokemon.simulation.blueFlowerSpawn]
+    pokemon.simulation.blueFlowerSpawn++
+  }
+
+  if (nextPot) {
+    const spawnSpot = board.getFarthestTargetCoordinateAvailablePlace(
+      pokemon,
+      true
+    )
+    if (spawnSpot) {
+      const flowerToSpawn = pokemon.player.flowerPots.find((p) =>
+        FlowerMonByPot[nextPot].includes(p.name)
+      )
+      if (!flowerToSpawn) {
+        return console.error("No flower found to spawn for pot ", nextPot)
+      }
+      const entity = pokemon.simulation.addPokemon(
+        flowerToSpawn,
+        spawnSpot.x,
+        spawnSpot.y,
+        pokemon.team,
+        true
+      )
+      entity.action = PokemonActionState.BLOSSOM
+      entity.cooldown = 1000
+      pokemon.player.pokemonsPlayed.add(flowerToSpawn.name)
+    }
+  }
+})

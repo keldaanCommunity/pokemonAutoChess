@@ -938,6 +938,11 @@ export const AbilitiesAnimations: {
     tint: 0xa0c020
   }),
   [Ability.CRUNCH]: onTarget({ ability: Ability.BITE, scale: 3 }),
+  [Ability.PUMMELING_PAYBACK]: onTarget({
+    ability: Ability.BITE,
+    scale: 3,
+    tint: 0xc89d7c
+  }),
   [Ability.CAVERNOUS_CHOMP]: onTarget({
     ability: Ability.BITE,
     scale: 2,
@@ -998,6 +1003,11 @@ export const AbilitiesAnimations: {
   [Ability.STEAM_ERUPTION]: onTargetScale3,
   [Ability.SEARING_SHOT]: onCaster({
     ability: Ability.STEAM_ERUPTION,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    scale: 3
+  }),
+  [Ability.VOLT_SURGE]: onCaster({
+    ability: Ability.PARABOLIC_CHARGE,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 3
   }),

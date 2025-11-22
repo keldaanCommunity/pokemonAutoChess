@@ -1,0 +1,31 @@
+#tier-list-maker {
+  width: 100%;
+  display: grid;
+  grid-template-areas: "actions actions" "tierlist tierlist" "pokemons items";
+  grid-template-columns: 1fr 350px;
+  grid-template-rows: min-content 1fr 420px;
+  min-width: 1400px;
+  gap: 5px;
+  padding: 5px;
+  height: 75vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+#tier-list-maker #tier-list {
+  grid-area: tierlist;
+}
+
+.tier-list-modal .modal-body {
+  padding: 0;
+  width: 2000px;
+  max-width: 100%;
+}
+
+#tier-list-maker .actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 1em;
+}

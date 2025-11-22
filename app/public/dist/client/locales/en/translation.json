@@ -533,7 +533,10 @@
 		"TRIPLE_DIVE": "Triple Dive",
 		"MOONBLAST": "Moonblast",
 		"HYDRO_STEAM": "Hydro Steam",
-		"GEAR_GRIND": "Gear Grind"
+		"GEAR_GRIND": "Gear Grind",
+		"STRANGE_STEAM": "Strange Steam",
+		"PUMMELING_PAYBACK": "Pummeling Payback",
+		"VOLT_SURGE": "Volt Surge"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1189,6 +1192,7 @@
 		"DHELMISE": "Dhelmise",
 		"KOFFING": "Koffing",
 		"WEEZING": "Weezing",
+		"GALARIAN_WEEZING": "Galarian Weezing",
 		"STARYU": "Staryu",
 		"STARMIE": "Starmie",
 		"NOSEPASS": "Nosepass",
@@ -1607,7 +1611,9 @@
 		"WALKING_WAKE": "Walking Wake",
 		"KLINK": "Klink",
 		"KLANG": "Klang",
-		"KLINKLANG": "Klinklang"
+		"KLINKLANG": "Klinklang",
+		"ORTHWORM": "Orthworm",
+		"IRON_THORNS": "Iron Thorns"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1869,7 +1875,7 @@
 		"ASSURANCE": "Deal [25,50,100,SP] SPECIAL to the target. The damage is doubled if the user has less than 50% HP.",
 		"BRAVE_BIRD": "Fly away with the target dealing [30,60,90,SP] SPECIAL.",
 		"MAGICAL_LEAF": "The user scatters curious leaves that chase the farthest target, dealing [10,20,40,SP] SPECIAL and inflicting ARMOR_BREAK for 3 seconds to all enemy Pokémon in its path.",
-		"STEALTH_ROCKS": "Lay sharp stones within a [1,2,3] tile CONE, dealing [50,SP] SPECIAL to any enemy Pokémon in the area. The stones remain on the battlefield, dealing 10 PHYSICAL per second and WOUND non ROCK enemy Pokémon that walk on it.",
+		"STEALTH_ROCKS": "Lay sharp stones within a [1,2,3] tile CONE, dealing [50,SP] SPECIAL to any enemy Pokémon in the area. The stones remain on the battlefield, dealing 10 PHYSICAL per second and WOUND non ROCK Pokémon that walk on it.",
 		"TAIL_GLOW": "Deal [30,SP] SPECIAL to ADJACENT enemy Pokémon and increase the user's AP by 50.",
 		"STRUGGLE_BUG": "Deal [30,SP] SPECIAL to ADJACENT enemy Pokémon and reduce their AP by 50.",
 		"PRISMATIC_LASER": "The user shoots a 3-tile wide prismatic laser in a vertical straight line, dealing [60,SP] SPECIAL and pushing any enemy in its path.",
@@ -2056,7 +2062,7 @@
 		"SOLAR_BLADE": "Gathers light and fills a blade with its energy for 2 seconds (or instantly if the user is in the LIGHT spot), then slices up to 3 Pokémon in a CONE, dealing [30,60,120,SP] TRUE.",
 		"SCALE_SHOT": "The user sheds their scales, dealing [40,SP] SPECIAL to ADJACENT enemies, applying ARMOR_BREAK to itself and enemies hit for 2 seconds. After 2 seconds the scales are shot towards the farthest enemy, dealing [20,SP] SPECIAL to them and [10,SP] SPECIAL to enemies in their path.",
 		"BULLDOZE": "Stomps down on the ground dealing [25,45,85,SP] SPECIAL to ADJACENT enemies. Pokémon hit are knocked back and lose 10 SPEED.",
-		"ARMOR_CANNON": "Shoots out a blazing projectile, dealing [50,SP] SPECIAL to the target before bouncing to the 2 closest enemies, dealing [30,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [15,SP] SPECIAL each.",
+		"ARMOR_CANNON": "Shoots out a blazing projectile, dealing [50,SP] SPECIAL to the target before bouncing to the 2 closest enemies, dealing [50,SP] SPECIAL to each. The projectiles then return to the original target, dealing an extra [25,SP] SPECIAL each.",
 		"BITTER_BLADE": "Focuses its bitter feelings into a slashing attack, dealing [70,SP] SPECIAL to every ADJACENT enemy. User heals 10% of its max HP for each enemy hit.",
 		"SUCTION_HEAL": "Drains the energy from its targets, dealing [15,30,60,SP] SPECIAL in a 2 tiles range CONE and heals HP for 50% of the damage dealt.",
 		"ROOST": "Flies away and lands in the back line, SLEEP for 1 second and gaining [20,40,80,SP] SHIELD.",
@@ -2121,7 +2127,10 @@
 		"PLASMA_TEMPEST": "Flies away and fires 3 plasma bolts through the closest enemies. Each bolt deals [40,SP] SPECIAL, reduced by 10% for each enemy passed through.",
 		"TRIMMING_MOWER": "Dash within 2 tiles to hit the most enemies possible and heals [60,SP] HP. Excess healing becomes SHIELD. Deals [40,SP] SPECIAL to ADJACENT enemies.",
 		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast.",
-		"GEAR_GRIND": "Launches two gears at the target, each dealing [50,100,200,SP]% of SPEED as SPECIAL."
+		"GEAR_GRIND": "Launches two gears at the target, each dealing [50,100,200,SP]% of SPEED as SPECIAL.",
+		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
+		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
+		"VOLT_SURGE": "The user supercharges itself, gaining [40,SP] max HP. Every third attack chains through up to 4 nearby enemies, dealing [30,SP] SPECIAL that increases by [10,SP] per cast."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2399,7 +2408,7 @@
 		"STICKY_BARB": "Sticky Barb",
 		"WIDE_LENS": "Wide Lens",
 		"RAZOR_CLAW": "Razor Claw",
-		"FLUFFY_TAIL": "Fluffy Tail",
+		"SAFETY_GOGGLES": "Safety Goggles",
 		"KINGS_ROCK": "King's Rock",
 		"SHINY_CHARM": "Shiny Charm",
 		"GRACIDEA_FLOWER": "Gracidea Flower",
@@ -2680,7 +2689,7 @@
 		"STICKY_BARB": "When struck by an attack at melee range, deal 3 + 15% of DEF as retaliation TRUE to the attacker, with [30,LK]% chance to inflict WOUND for 3 seconds.",
 		"WIDE_LENS": "The holder gains +2 RANGE",
 		"RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
-		"FLUFFY_TAIL": "Holder is immune to all negative status effects",
+		"SAFETY_GOGGLES": "Holder is immune to all negative status effects and to sandstorm damage",
 		"KINGS_ROCK": "+100 SHIELD + 35% HP as SHIELD when combat begins",
 		"SHINY_CHARM": "Prevents damage and give PROTECT for 1.5 seconds and 50 PP the first time the holder gets below 30% HP",
 		"GRACIDEA_FLOWER": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW gain +20 SPEED",
@@ -3089,7 +3098,8 @@
 		"SLOWPOKE": "Will evolve into $t(pkm.SLOWBRO) or $t(pkm.SLOWKING) based on the dominant synergy between WATER and PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Will evolve into $t(pkm.GALARIAN_SLOWBRO) or $t(pkm.GALARIAN_SLOWKING) based on the dominant synergy between POISON and PSYCHIC.",
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
-		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED per second to your team."
+		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED per second to your team.",
+		"ORTHWORM": "When digging a hole, gains 5 HP permanently."
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -3736,12 +3746,14 @@
 	"disable_animated_tilemap": "No background animations",
 	"disable_camera_shake": "No camera shake or flashes",
 	"antialiasing": "Enable anti-aliasing",
+	"colorblind_mode": "Colorblind mode",
 	"save": "Save",
 	"reset": "Reset",
 	"snapshot": "Snapshot",
 	"passive": "Passive",
 	"pick_additional_pokemon_hint": "Pick an additional Pokémon. It will be available to everyone.",
-	"pick_first_partner_hint": "Pick your starter. You will get a copy of it every stage up to stage 10",
+	"pick_first_partner": "Pick your starter Pokémon",
+	"pick_first_partner_scribble": "Pick your starter. You will get a copy of it every stage up to stage 10",
 	"free_slot_hint": "You must have one free slot on the bench, or two for Duos",
 	"hide": "Hide",
 	"show": "Show",
@@ -4009,7 +4021,9 @@
 		"pokeguesser": "PokéGuessr",
 		"pokeguesser_desc": "Guess the Pokémon trivia game when waiting for lobby to start",
 		"synergy_wheel": "Synergy Wheel",
-		"synergy_wheel_desc": "Randomly draws synergies when looking for inspiration"
+		"synergy_wheel_desc": "Randomly draws synergies when looking for inspiration",
+		"tier_list_maker": "Tier List Maker",
+		"tier_list_maker_desc": "Create and share your own tier lists"
 	},
 	"level_required": "Level required",
 	"map": {
@@ -4382,5 +4396,14 @@
 	"rounds_since_last_fight": "Rounds since last fight: {{count}}",
 	"minimize": "Minimize",
 	"maximize": "Maximize",
-	"battle_stats": "Battle Stats"
+	"battle_stats": "Battle Stats",
+	"tier_list": {
+		"title": "My new tier list",
+		"add_row": "Add Row",
+		"download_image": "Download Image",
+		"share_on_discord": "Share on Discord",
+		"move_row_up": "Move row up",
+		"move_row_down": "Move row down",
+		"delete_row": "Delete row"
+	}
 }

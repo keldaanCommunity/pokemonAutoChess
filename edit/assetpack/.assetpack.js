@@ -148,7 +148,7 @@ function compressedAtlas({ path, include, outputPath }) {
       )
       for (const jsonFile of jsonFiles) {
         const filePath = upath.joinSafe(path, jsonFile)
-        console.log(`Compressing ${filePath} pokemon atlas JSON`)
+        process.stdout.write(`Compressing ${filePath} pokemon atlas JSON`)
 
         const jsonData = fs.readJSONSync(filePath)
 
@@ -181,6 +181,8 @@ function compressedAtlas({ path, include, outputPath }) {
         }
 
         fs.writeJSONSync(upath.joinSafe(outputPath, jsonFile), compressedJson)
+        process.stdout.clearLine(0)
+        process.stdout.cursorTo(0)
       }
     }
   }

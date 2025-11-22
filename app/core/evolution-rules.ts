@@ -196,9 +196,7 @@ export class CountEvolutionRule extends EvolutionRule {
     ]
     for (const itemComponent of itemComponentsToAdd) {
       if (
-        values(pokemonEvolved.items).some((i) =>
-          ItemComponents.includes(i)
-        ) ||
+        values(pokemonEvolved.items).some((i) => ItemComponents.includes(i)) ||
         pokemonEvolved.items.size >= 3
       ) {
         player.items.push(itemComponent)
@@ -365,6 +363,7 @@ export function carryOverPermanentStats(
   // carry over the permanent stat buffs
   const permanentBuffStats = [
     "hp",
+    "maxHP",
     "atk",
     "def",
     "speDef",

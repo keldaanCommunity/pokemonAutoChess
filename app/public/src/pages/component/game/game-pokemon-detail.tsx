@@ -257,7 +257,15 @@ export function GamePokemonDetail(props: {
       {pokemon.passive !== Passive.NONE && (
         <div className="game-pokemon-detail-passive">
           <p>
-            {addIconsToDescription(t(`passive_description.${pokemon.passive}`))}
+            {addIconsToDescription(
+              t(`passive_description.${pokemon.passive}`),
+              {
+                ap: pokemon.ap,
+                luck: pokemon.luck,
+                stars: pokemon.stars,
+                stages: getPokemonData(pokemon.name).stages
+              }
+            )}
           </p>
           {pokemon.stacksRequired > 0 && (
             <div className="game-pokemon-detail-passive-bar">
@@ -307,10 +315,10 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
     x: number,
     y: number,
     pokemon: Pkm | IPokemon | IPokemonEntity,
+    origin: "shop" | "team" | "planner" | "battle" | "wiki",
+    isAlly: boolean = true,
     shiny?: boolean,
-    emotion?: Emotion,
-    origin: "shop" | "team" | "planner" | "battle" | "wiki" = "wiki",
-    isAlly: boolean = true
+    emotion?: Emotion
   ) {
     super(scene, x, y)
     this.dom = document.createElement("div")

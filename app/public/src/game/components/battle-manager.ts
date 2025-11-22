@@ -45,7 +45,7 @@ export default class BattleManager {
   simulation: Simulation | undefined
   animationManager: AnimationManager
   player: Player
-  boardEventSprites: Array<GameObjects.Sprite | null>
+  boardEventSprites: GameObjects.Sprite[][]
   pokemonSprites: Map<string, PokemonSprite> = new Map()
 
   constructor(
@@ -59,7 +59,10 @@ export default class BattleManager {
     this.scene = scene
     this.animationManager = animationManager
     this.player = player
-    this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    this.boardEventSprites = Array.from(
+      { length: BOARD_WIDTH * BOARD_HEIGHT },
+      () => []
+    )
     this.pokemonSprites = new Map()
     if (simulation) this.setSimulation(simulation)
   }
@@ -134,7 +137,10 @@ export default class BattleManager {
 
   clear() {
     this.group.clear(true, true)
-    this.boardEventSprites = new Array(BOARD_WIDTH * BOARD_HEIGHT).fill(null)
+    this.boardEventSprites = Array.from(
+      { length: BOARD_WIDTH * BOARD_HEIGHT },
+      () => []
+    )
     this.pokemonSprites.clear()
     this.closeTooltips()
   }
@@ -501,203 +507,200 @@ export default class BattleManager {
       this.pokemonSprites.has(pokemon.id)
     ) {
       const pkmSprite = this.pokemonSprites.get(pokemon.id)!
-      if (field === "positionX" || field === "positionY") {
-        // logger.debug(pokemon.positionX, pokemon.positionY);
-        if (field === "positionX") {
-          pkmSprite.positionX = pokemon.positionX
-        } else if (field == "positionY") {
-          pkmSprite.positionY = pokemon.positionY
-        }
-        const coordinates = transformEntityCoordinates(
-          pokemon.positionX,
-          pokemon.positionY,
-          this.flip
-        )
-        if (pokemon.skill == Ability.TELEPORT) {
-          pkmSprite.x = coordinates[0]
-          pkmSprite.y = coordinates[1]
-          pkmSprite.specialAttackAnimation(pokemon)
-        } else if (!pokemon.status.skydiving) {
-          const walkingSpeed =
-            2 *
-            getMoveSpeed(pokemon) *
-            Math.max(
-              Math.abs(pkmSprite.x - coordinates[0]),
-              Math.abs(pkmSprite.y - coordinates[1])
+
+      switch (field) {
+        case "positionX":
+        case "positionY":
+          {
+            // logger.debug(pokemon.positionX, pokemon.positionY);
+            if (field === "positionX") {
+              pkmSprite.positionX = pokemon.positionX
+            } else if (field == "positionY") {
+              pkmSprite.positionY = pokemon.positionY
+            }
+            const coordinates = transformEntityCoordinates(
+              pokemon.positionX,
+              pokemon.positionY,
+              this.flip
             )
-          pkmSprite.moveManager.setSpeed(walkingSpeed)
-          pkmSprite.moveManager.moveTo(coordinates[0], coordinates[1])
-          if (pkmSprite.troopers) {
-            const [dx, dy] = OrientationVector[pkmSprite.orientation]
-            pkmSprite.troopers.forEach((trooper, i) => {
-              trooper.moveManager.setSpeed(walkingSpeed)
-              trooper.moveManager.moveTo(
-                coordinates[0] - dx * (i + 1) * 20,
-                coordinates[1] - dy * (i + 1) * 20
+            if (pokemon.skill == Ability.TELEPORT) {
+              pkmSprite.x = coordinates[0]
+              pkmSprite.y = coordinates[1]
+              pkmSprite.specialAttackAnimation(pokemon)
+            } else if (!pokemon.status.skydiving) {
+              const walkingSpeed =
+                2 *
+                getMoveSpeed(pokemon) *
+                Math.max(
+                  Math.abs(pkmSprite.x - coordinates[0]),
+                  Math.abs(pkmSprite.y - coordinates[1])
+                )
+              pkmSprite.moveManager.setSpeed(walkingSpeed)
+              pkmSprite.moveManager.moveTo(coordinates[0], coordinates[1])
+              if (pkmSprite.troopers) {
+                const [dx, dy] = OrientationVector[pkmSprite.orientation]
+                pkmSprite.troopers.forEach((trooper, i) => {
+                  trooper.moveManager.setSpeed(walkingSpeed)
+                  trooper.moveManager.moveTo(
+                    coordinates[0] - dx * (i + 1) * 20,
+                    coordinates[1] - dy * (i + 1) * 20
+                  )
+                })
+              }
+            }
+          }
+          break
+
+        case "orientation": {
+          if (pkmSprite.orientation !== pokemon.orientation) {
+            pkmSprite.orientation = pokemon.orientation
+            if (pokemon.action !== PokemonActionState.SLEEP) {
+              this.animationManager.animatePokemon(
+                pkmSprite,
+                pokemon.action,
+                this.flip
+              )
+            }
+            if (pkmSprite.troopers) {
+              const [dx, dy] = OrientationVector[pkmSprite.orientation]
+              const coordinates = transformEntityCoordinates(
+                pokemon.positionX,
+                pokemon.positionY,
+                this.flip
+              )
+              pkmSprite.troopers.forEach((trooper, i) => {
+                trooper.moveManager.setSpeed(5)
+                trooper.moveManager.moveTo(
+                  coordinates[0] - dx * (i + 1) * 20,
+                  coordinates[1] - dy * (i + 1) * 20
+                )
+              })
+            }
+          }
+          break
+        }
+
+        case "action":
+          if (pkmSprite.action !== pokemon.action) {
+            pkmSprite.action = pokemon.action
+            this.animationManager.animatePokemon(
+              pkmSprite,
+              pokemon.action,
+              this.flip
+            )
+          }
+          break
+
+        case "ap":
+          if (previousValue != null && value && value > previousValue) {
+            pkmSprite.displayBoost(Stat.AP)
+          }
+          break
+
+        case "speed":
+          if (previousValue != null && value && value > previousValue) {
+            pkmSprite.displayBoost(Stat.SPEED)
+          }
+          break
+
+        case "maxHP": {
+          const baseHP = getPokemonData(pokemon.name).hp
+          const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
+          pkmSprite.sprite.setScale(2 + sizeBuff)
+          pkmSprite.lifebar?.setMaxHp(pokemon.maxHP)
+          break
+        }
+        case "hp":
+          pkmSprite.lifebar?.setHp(Number(value))
+          break
+        case "shield":
+          if (pokemon.shield >= 0) {
+            if (previousValue != null && value && value > previousValue) {
+              pkmSprite.displayBoost(Stat.SHIELD)
+            }
+            pkmSprite.lifebar?.setShield(Number(value))
+          }
+          break
+        case "pp":
+          pkmSprite.lifebar?.setPP(
+            max(pokemon.maxPP)(value as IPokemonEntity["pp"])
+          )
+          break
+        case "atk":
+          if (previousValue != null && value && value > previousValue) {
+            pkmSprite.displayBoost(Stat.ATK)
+          }
+          break
+        case "def":
+          if (previousValue != null && value && value > previousValue) {
+            pkmSprite.displayBoost(Stat.DEF)
+          }
+          break
+        case "speDef":
+          if (previousValue != null && value && value > previousValue) {
+            pkmSprite.displayBoost(Stat.SPE_DEF)
+          }
+          break
+        case "targetX":
+          if (pokemon.targetX >= 0) {
+            pkmSprite.targetX = pokemon.targetX
+          } else {
+            pkmSprite.targetX = null
+          }
+          break
+        case "targetY":
+          if (pokemon.targetY >= 0) {
+            pkmSprite.targetY = pokemon.targetY
+          } else {
+            pkmSprite.targetY = null
+          }
+          break
+        case "team":
+          if (pkmSprite.lifebar) {
+            pkmSprite.lifebar.setTeam(
+              value as IPokemonEntity["team"],
+              this.flip
+            )
+          }
+          break
+        case "index":
+          if (pkmSprite.pokemon.index !== value) {
+            // transformation or evolution mid-fight
+            // unload previous index animations
+            pkmSprite.unloadAnimations(
+              this.scene,
+              previousValue as IPokemonEntity["index"],
+              pkmSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
+            )
+            pkmSprite.attackSprite =
+              PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
+              pkmSprite.attackSprite
+            // load the new ones
+            pkmSprite.lazyloadAnimations(this.scene).then(() => {
+              pkmSprite.displayAnimation("EVOLUTION")
+              this.animationManager.animatePokemon(
+                pkmSprite,
+                pkmSprite.pokemon.action,
+                this.flip,
+                false
               )
             })
           }
-        }
-      } else if (
-        field === "orientation" &&
-        pkmSprite.orientation !== pokemon.orientation
-      ) {
-        pkmSprite.orientation = pokemon.orientation
-        if (pokemon.action !== PokemonActionState.SLEEP) {
-          this.animationManager.animatePokemon(
-            pkmSprite,
-            pokemon.action,
-            this.flip
-          )
-        }
-        if (pkmSprite.troopers) {
-          const [dx, dy] = OrientationVector[pkmSprite.orientation]
-          const coordinates = transformEntityCoordinates(
-            pokemon.positionX,
-            pokemon.positionY,
-            this.flip
-          )
-          pkmSprite.troopers.forEach((trooper, i) => {
-            trooper.moveManager.setSpeed(5)
-            trooper.moveManager.moveTo(
-              coordinates[0] - dx * (i + 1) * 20,
-              coordinates[1] - dy * (i + 1) * 20
-            )
-          })
-        }
-      } else if (field === "action" && pkmSprite.action !== pokemon.action) {
-        pkmSprite.action = pokemon.action
-        this.animationManager.animatePokemon(
-          pkmSprite,
-          pokemon.action,
-          this.flip
-        )
-      } else if (field === "ap") {
-        if (previousValue != null && value && value > previousValue) {
-          pkmSprite.displayBoost(Stat.AP)
-        }
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "speed") {
-        if (previousValue != null && value && value > previousValue) {
-          pkmSprite.displayBoost(Stat.SPEED)
-        }
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "maxHP") {
-        const baseHP = getPokemonData(pokemon.name).hp
-        const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
-        pkmSprite.sprite.setScale(2 + sizeBuff)
-        pkmSprite.lifebar?.setMaxHp(pokemon.maxHP)
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field == "hp") {
-        pkmSprite.lifebar?.setHp(Number(value))
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "shield") {
-        if (pokemon.shield >= 0) {
-          if (previousValue != null && value && value > previousValue) {
-            pkmSprite.displayBoost(Stat.SHIELD)
-          }
-          pkmSprite.lifebar?.setShield(Number(value))
-          if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-            pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-          }
-        }
-      } else if (field === "pp") {
-        pkmSprite.lifebar?.setPP(
-          max(pokemon.maxPP)(value as IPokemonEntity["pp"])
-        )
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "atk") {
-        if (previousValue != null && value && value > previousValue) {
-          pkmSprite.displayBoost(Stat.ATK)
-        }
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "def") {
-        if (previousValue != null && value && value > previousValue) {
-          pkmSprite.displayBoost(Stat.DEF)
-        }
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "speDef") {
-        if (previousValue != null && value && value > previousValue) {
-          pkmSprite.displayBoost(Stat.SPE_DEF)
-        }
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
-      } else if (field === "targetX") {
-        if (pokemon.targetX >= 0) {
-          pkmSprite.targetX = pokemon.targetX
-        } else {
-          pkmSprite.targetX = null
-        }
-      } else if (field === "targetY") {
-        if (pokemon.targetY >= 0) {
-          pkmSprite.targetY = pokemon.targetY
-        } else {
-          pkmSprite.targetY = null
-        }
-      } else if (field === "team") {
-        if (pkmSprite.lifebar) {
-          pkmSprite.lifebar.setTeam(value as IPokemonEntity["team"], this.flip)
-        }
-      } else if (field === "index") {
-        if (pkmSprite.pokemon.index !== value) {
-          // transformation or evolution mid-fight
-          // unload previous index animations
-          pkmSprite.unloadAnimations(
-            this.scene,
-            previousValue as IPokemonEntity["index"],
-            pkmSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
-          )
-          pkmSprite.attackSprite =
-            PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
-            pkmSprite.attackSprite
-          // load the new ones
-          pkmSprite.lazyloadAnimations(this.scene).then(() => {
-            pkmSprite.displayAnimation("EVOLUTION")
+          break
+        case "shiny":
+          if (pkmSprite.pokemon.shiny !== value) {
             this.animationManager.animatePokemon(
               pkmSprite,
-              pkmSprite.pokemon.action,
+              PokemonActionState.IDLE,
               this.flip,
               false
             )
-          })
-        }
-      } else if (field === "shiny") {
-        if (pkmSprite.pokemon.shiny !== value) {
-          this.animationManager.animatePokemon(
-            pkmSprite,
-            PokemonActionState.IDLE,
-            this.flip,
-            false
-          )
-        }
-      } else if (
-        field === "skill" ||
-        field === "stars" ||
-        field === "critChance" ||
-        field === "critPower" ||
-        field === "luck" ||
-        field === "range" ||
-        field === "stacks" ||
-        field === "stacksRequired"
-      ) {
-        if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
-          pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
-        }
+          }
+          break
+      }
+
+      if (pkmSprite.detail instanceof GamePokemonDetailDOMWrapper) {
+        pkmSprite.detail.updatePokemon(pkmSprite.pokemon)
       }
     }
   }
@@ -909,10 +912,12 @@ export default class BattleManager {
     const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
     const index = event.y * BOARD_WIDTH + event.x
 
-    const existingBoardEventSprite = this.boardEventSprites[index]
-    if (existingBoardEventSprite != null) {
-      this.group.remove(existingBoardEventSprite, true, true)
-      this.boardEventSprites[index] = null
+    if (event.effect === null) {
+      // Clear all effects on this cell
+      this.boardEventSprites[index].forEach((sprite) => {
+        sprite.destroy()
+      })
+      this.boardEventSprites[index] = []
     }
 
     if (event.effect === EffectEnum.LIGHTNING_STRIKE) {
@@ -941,7 +946,7 @@ export default class BattleManager {
       sprite.anims.play(EffectEnum.SMOKE)
       sprite.setScale(3, 3)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -964,12 +969,36 @@ export default class BattleManager {
       sprite.setTint(0xa0ff20)
       sprite.setFlipX(true)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
         targets: sprite,
         alpha: 0.5,
+        duration: 500,
+        delay: (8 - coordinates[1]) * 100
+      })
+    }
+
+    if (event.effect === EffectEnum.STRANGE_STEAM) {
+      const sprite = this.scene.add.sprite(
+        coordinates[0],
+        coordinates[1],
+        "abilities",
+        `${EffectEnum.SMOKE}/000.png`
+      )
+      sprite.setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
+      sprite.setScale(3, 3)
+      sprite.anims.play(EffectEnum.SMOKE)
+      sprite.setTint(0xff20a0)
+      sprite.setFlipY(true)
+      sprite.setAlpha(0)
+      this.boardEventSprites[index].push(sprite)
+      this.group.add(sprite)
+
+      this.scene.tweens.add({
+        targets: sprite,
+        alpha: 0.4,
         duration: 500,
         delay: (8 - coordinates[1]) * 100
       })
@@ -984,7 +1013,7 @@ export default class BattleManager {
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
       sprite.setScale(1, 1)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1006,7 +1035,7 @@ export default class BattleManager {
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         .setOrigin(0.5, 0.5)
         .setScale(0, 0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1031,7 +1060,7 @@ export default class BattleManager {
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
         .setOrigin(0.5, 0.5)
         .setScale(0, 0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1055,7 +1084,7 @@ export default class BattleManager {
       sprite.setScale(3, 3)
       sprite.anims.play(EffectEnum.STICKY_WEB)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1075,7 +1104,7 @@ export default class BattleManager {
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
       sprite.setScale(2, 2)
       sprite.setAlpha(0)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1094,7 +1123,7 @@ export default class BattleManager {
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(1).setAlpha(0)
       sprite.anims.play(EffectEnum.HAIL)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1114,7 +1143,7 @@ export default class BattleManager {
       )
       sprite.setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL).setScale(2).setAlpha(0)
       sprite.anims.play(EffectEnum.EMBER)
-      this.boardEventSprites[index] = sprite
+      this.boardEventSprites[index].push(sprite)
       this.group.add(sprite)
 
       this.scene.tweens.add({
@@ -1127,12 +1156,15 @@ export default class BattleManager {
   }
 
   clearBoardEvents() {
-    this.boardEventSprites.forEach((sprite, index) => {
-      if (sprite != null) {
+    this.boardEventSprites.forEach((spritesOnCell, index) => {
+      spritesOnCell.forEach((sprite) => {
         this.group.remove(sprite, true, true)
-        this.boardEventSprites[index] = null
-      }
+      })
     })
+    this.boardEventSprites = Array.from(
+      { length: BOARD_WIDTH * BOARD_HEIGHT },
+      () => []
+    )
   }
 
   displayDamage({

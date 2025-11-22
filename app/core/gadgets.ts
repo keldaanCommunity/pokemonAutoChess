@@ -65,6 +65,13 @@ const BOT_BUILDER: Gadget = {
   disabled: !BOTS_ENABLED
 }
 
+const TIER_LIST_MAKER: Gadget = {
+  name: "gadget.tier_list_maker",
+  description: "gadget.tier_list_maker_desc",
+  icon: "tier-list",
+  levelRequired: 50
+}
+
 export const GADGETS = {
   TRAINER_CARD,
   BAG,
@@ -73,5 +80,6 @@ export const GADGETS = {
   SYNERGY_WHEEL,
   BOT_BUILDER,
   GAMEBOY,
-  POKEGUESSER
+  POKEGUESSER,
+  TIER_LIST_MAKER
 } as const

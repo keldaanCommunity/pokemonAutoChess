@@ -2,6 +2,7 @@ import {
   ARCEUS_RATE,
   BuyPrices,
   DITTO_RATE,
+  EEVEE_RATE,
   FALINKS_TROOPER_RATE,
   FishRarityProbability,
   getUnownsPoolPerStage,
@@ -12,6 +13,7 @@ import {
   LegendaryPool,
   MAGNET_PULL_RATE_PER_RARITY,
   MIN_STAGE_FOR_DITTO,
+  NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
   PoolSize,
   PortalCarouselStages,
@@ -29,12 +31,13 @@ import {
   UNOWN_RATE_AMNESIA,
   UniquePool
 } from "../config"
+import { pickFirstPartners } from "../core/scribbles"
 import GameState from "../rooms/states/game-state"
 import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
-import { FishingRod, Item } from "../types/enum/Item"
+import { FishingRod, Item, NonSpecialItemComponents } from "../types/enum/Item"
 import {
   isRegionalVariant,
   Pkm,
@@ -194,7 +197,7 @@ export default class Shop {
       Array(getPoolSize(Rarity.COMMON, 3)).fill(pkm)
     )
     this.uncommonPool = UncommonShop.flatMap((pkm) =>
-      Array(getPoolSize(Rarity.UNCOMMON, pkm === Pkm.EEVEE ? 2 : 3)).fill(pkm)
+      Array(getPoolSize(Rarity.UNCOMMON, 3)).fill(pkm)
     )
     this.rarePool = RareShop.flatMap((pkm) =>
       Array(getPoolSize(Rarity.RARE, 3)).fill(pkm)
@@ -356,20 +359,36 @@ export default class Shop {
 
   assignUniquePropositions(
     player: Player,
-    stageLevel: number,
+    state: GameState,
     portalSynergies: Synergy[]
   ) {
-    const allCandidates =
-      stageLevel === PortalCarouselStages[1]
-        ? [...UniquePool]
-        : [...LegendaryPool]
+    const stageLevel = state.stageLevel
+    let allCandidates =
+      {
+        [PortalCarouselStages[0]]: [...this.commonPool],
+        [PortalCarouselStages[1]]: [...UniquePool],
+        [PortalCarouselStages[2]]: [...LegendaryPool]
+      }[stageLevel] ?? []
+
+    if (stageLevel === 0) {
+      if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
+        allCandidates = [...UniquePool]
+      } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
+        allCandidates = pickFirstPartners(player, state)
+      }
+    }
 
     // ensure we have at least one synergy per proposition
     if (portalSynergies.length > NB_UNIQUE_PROPOSITIONS) {
       portalSynergies = pickNRandomIn(portalSynergies, NB_UNIQUE_PROPOSITIONS)
     }
 
-    for (let i = 0; i < NB_UNIQUE_PROPOSITIONS; i++) {
+    const nbPropositions =
+      stageLevel === PortalCarouselStages[0]
+        ? NB_STARTERS
+        : NB_UNIQUE_PROPOSITIONS
+
+    for (let i = 0; i < nbPropositions; i++) {
       const synergyWanted: Synergy | undefined = portalSynergies[i]
       let candidates = allCandidates.filter((m) => {
         const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
@@ -431,7 +450,19 @@ export default class Shop {
         selected = PkmColorVariantsByPkm[selected]!(player)
       }
 
+      if (stageLevel === PortalCarouselStages[0]) {
+        player.itemsProposition[i] = pickRandomIn(NonSpecialItemComponents)
+      }
+
       if (
+        stageLevel === PortalCarouselStages[0] &&
+        player.pokemonsProposition.includes(Pkm.EEVEE) === false &&
+        (chance(EEVEE_RATE) || candidates.length === 0) &&
+        state.specialGameRule !== SpecialGameRule.FIRST_PARTNER
+      ) {
+        selected = Pkm.EEVEE
+        player.itemsProposition[i] = Item.FOSSIL_STONE
+      } else if (
         stageLevel === PortalCarouselStages[1] &&
         player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
         chance(KECLEON_RATE)

@@ -583,7 +583,6 @@ class ZygardeCellsEffect extends PeriodicEffect {
               pokemon.name = Pkm.ZYGARDE_100
               pokemon.changePassive(Passive.NONE)
               pokemon.skill = Ability.CORE_ENFORCER
-              pokemon.pp = 0
               pokemon.effectsSet.delete(this)
               if (pokemon.player) {
                 pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
@@ -1119,8 +1118,13 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.STENCH]: [
-    new OnMoveEffect((pokemon, board, oldX, oldY, newX, newY) => {
-      board.effects[oldY * board.columns + oldX] = EffectEnum.POISON_GAS
+    new OnMoveEffect((pokemon, board, oldX, oldY) => {
+      board.addBoardEffect(
+        oldX,
+        oldY,
+        EffectEnum.POISON_GAS,
+        pokemon.simulation
+      )
     })
   ],
   [Passive.PYUKUMUKU]: [PyukumukuExplodeOnDeathEffect],

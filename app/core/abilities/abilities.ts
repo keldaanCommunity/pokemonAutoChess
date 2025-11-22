@@ -1,4 +1,3 @@
-import { off } from "process"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
@@ -35,7 +34,11 @@ import {
 import { values } from "../../utils/schemas"
 
 import type { Board, Cell } from "../board"
-import { OnDamageReceivedEffect, PeriodicEffect } from "../effects/effect"
+import {
+  OnAttackEffect,
+  OnDamageReceivedEffect,
+  PeriodicEffect
+} from "../effects/effect"
 import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -195,7 +198,7 @@ export class BeatUpStrategy extends AbilityStrategy {
           true
         )
         const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-        entity.maxHP = min(1)(Math.round(houndour.maxHP * scale))
+        entity.maxHP = min(1)(Math.round(entity.maxHP * scale))
         entity.hp = entity.maxHP
       }
     }
@@ -3294,6 +3297,39 @@ export class SmokeScreenStrategy extends AbilityStrategy {
         board.addBoardEffect(x, y, EffectEnum.SMOKE, pokemon.simulation)
       })
     }
+  }
+}
+
+export class StrangeSteamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    board
+      .getCellsInRadius(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.count.ult,
+        true
+      )
+      .forEach((cell) => {
+        board.addBoardEffect(
+          cell.x,
+          cell.y,
+          EffectEnum.STRANGE_STEAM,
+          pokemon.simulation
+        )
+        if (cell.value && cell.value.team !== pokemon.team) {
+          if (chance(0.3, pokemon)) {
+            cell.value.status.triggerConfusion(3000, cell.value, pokemon)
+          }
+        } else if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.status.addFairyField(cell.value)
+        }
+      })
   }
 }
 
@@ -12799,8 +12835,8 @@ export class ArmorCannonStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const mainDamage = 50
-    const secondaryDamage = 30
-    const finalDamage = 15
+    const secondaryDamage = 50
+    const finalDamage = 25
     const numberOfTargets = 2
 
     pokemon.broadcastAbility({
@@ -15118,6 +15154,7 @@ export class PlasmaFlashStrategy extends AbilityStrategy {
   }
 }
 
+
 export class GearGrindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -15125,7 +15162,6 @@ export class GearGrindStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
     // Launches two gears at the target, each dealing [50,100,200,SP]% of SPEED as SPECIAL
     const speedFactor = [0.5, 1, 2][pokemon.stars - 1] ?? 2
     const damage = Math.round(pokemon.speed * speedFactor)
@@ -15133,6 +15169,99 @@ export class GearGrindStrategy extends AbilityStrategy {
       pokemon.commands.push(new DelayedCommand(() => {
         target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
       }, i * 250))
+    }
+  }
+}
+
+export class PummelingPaybackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+
+    // Heal the pokemon by a fixed amount
+    const healAmount = 40
+
+    // Calculate total damage based on base damage and attack bonus
+    const baseDamage = 50
+    const adBonus = 1.25 * pokemon.atk
+    const totalDamage = baseDamage + adBonus
+
+    // Deal special damage to the target
+    target.handleSpecialDamage(
+      totalDamage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+
+    // Apply healing to the pokemon
+    pokemon.handleHeal(healAmount, pokemon, 1, crit)
+  }
+}
+
+// Define an effect that triggers on attack
+const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
+  // Check if it's every third attack
+  if (pokemon.count.attackCount % 3 === 0) {
+    const nbBounces = 4
+    // Calculate damage based on number of cast
+    const damage = 30 + 10 * (pokemon.count.ult - 1)
+    // Get closest enemies
+    const closestEnemies = board.getClosestEnemies(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team === Team.RED_TEAM ? Team.BLUE_TEAM : Team.RED_TEAM
+    )
+
+    let previousTg: PokemonEntity = pokemon
+    let secondaryTargetHit: PokemonEntity | null = target
+
+    // Loop through bounces
+    for (let i = 0; i < nbBounces; i++) {
+      secondaryTargetHit = closestEnemies[i]
+      if (secondaryTargetHit) {
+        // Broadcast the ability animation
+        pokemon.broadcastAbility({
+          skill: "LINK_CABLE_link",
+          positionX: previousTg.positionX,
+          positionY: previousTg.positionY,
+          targetX: secondaryTargetHit.positionX,
+          targetY: secondaryTargetHit.positionY
+        })
+        // Deal damage to the secondary target
+        secondaryTargetHit.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+        previousTg = secondaryTargetHit
+      } else {
+        break
+      }
+    }
+  }
+})
+
+export class VoltSurgeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Increase max HP
+    pokemon.addMaxHP(40, pokemon, 1, crit, false)
+    // Add the volt surge effect if it's the first ultimate
+    if (pokemon.count.ult === 1) {
+      pokemon.effectsSet.add(voltSurgeEffect)
     }
   }
 }
@@ -15382,6 +15511,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ASSURANCE]: new AssuranceStrategy(),
   [Ability.AQUA_RING]: new AquaRingStrategy(),
   [Ability.POISON_GAS]: new PoisonGasStrategy(),
+  [Ability.STRANGE_STEAM]: new StrangeSteamStrategy(),
   [Ability.BRAVE_BIRD]: new BraveBirdStrategy(),
   [Ability.MAGICAL_LEAF]: new MagicalLeafStrategy(),
   [Ability.STEALTH_ROCKS]: new StealthRocksStrategy(),
@@ -15652,6 +15782,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DEEP_FREEZE]: new DeepFreezeStrategy(),
   [Ability.PLASMA_TEMPEST]: new PlasmaTempestStrategy(),
   [Ability.TRIMMING_MOWER]: new TrimmingMowerStrategy(),
-  [Ability.PLASMA_FLASH]: new PlasmaFlashStrategy()
+  [Ability.PLASMA_FLASH]: new PlasmaFlashStrategy(),
+  [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
+  [Ability.VOLT_SURGE]: new VoltSurgeStrategy()
 }
 

@@ -1,7 +1,6 @@
 import { DungeonMusic, DungeonPMDO } from "../../types/enum/Dungeon"
 import { Dish, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
-import { groupBy } from "../../utils/array"
 
 export interface RegionDetail {
   synergies: Synergy[]
@@ -774,6 +773,13 @@ export const RegionDetails: {
     music: DungeonMusic.TREASURE_TOWN_STAGE_0,
     regionalSpeciality: Item.NUTRITIOUS_EGG
   }
+}
+
+export function getRegionTint(region: DungeonPMDO | "town", colorblindMode = false): number {
+  if (colorblindMode) {
+    return 0xffffff
+  }
+  return RegionDetails[region]?.tint ?? 0xffffff
 }
 
 export function countRegionsBySynergy() {

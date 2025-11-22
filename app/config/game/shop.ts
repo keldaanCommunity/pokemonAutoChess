@@ -1,6 +1,7 @@
 import { Rarity } from "../../types/enum/Game"
 
 export const SHOP_SIZE = 6
+export const NB_STARTERS = 3
 export const NB_UNIQUE_PROPOSITIONS = 6
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
@@ -67,6 +68,7 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
 /* Special Pokemon rates */
 export const DITTO_RATE = 0.005
 export const MIN_STAGE_FOR_DITTO = 6
+export const EEVEE_RATE = 1 / 20
 export const KECLEON_RATE = 1 / 400
 export const ARCEUS_RATE = 1 / 400
 export const UNOWN_RATE_AMNESIA = 5 / 100

@@ -6,7 +6,7 @@ import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
-  RegionDetails
+  getRegionTint
 } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -55,6 +55,9 @@ import {
 } from "./pokemon-animations"
 
 const spriteCountPerPokemon = new Map<string, number>()
+
+const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+  "lastPokemonDetail" in scene
 
 export default class PokemonSprite extends DraggableObject {
   scene: GameScene | DebugScene
@@ -176,7 +179,7 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
-      .setTint(RegionDetails[scene.mapName]?.tint ?? 0xffffff)
+      .setTint(getRegionTint(scene.mapName, preference("colorblindMode")))
 
     this.itemsContainer = new ItemsContainer(
       scene as GameScene,
@@ -194,6 +197,15 @@ export default class PokemonSprite extends DraggableObject {
         .setVisible(false)
         .setScale(2, 2)
         .setDepth(DEPTH.POKEMON_SHADOW)
+      if (
+        preference("colorblindMode") &&
+        isEntity(pokemon) &&
+        playerId !== scene.uid &&
+        isGameScene(scene) &&
+        scene.spectate === false
+      ) {
+        this.shadow.setTintFill(0xff0000)
+      }
       this.add(this.shadow)
     }
     this.add(this.sprite)
@@ -235,9 +247,6 @@ export default class PokemonSprite extends DraggableObject {
         this.updateMeal(pokemon.meal)
       }
     }
-
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
 
     this.draggable =
       playerId === scene.uid &&
@@ -395,8 +404,6 @@ export default class PokemonSprite extends DraggableObject {
       0,
       0,
       this.pokemon,
-      undefined,
-      undefined,
       this.inBattle ? "battle" : "team",
       this.playerId === s.uid
     )
@@ -647,8 +654,12 @@ export default class PokemonSprite extends DraggableObject {
         ?.destroy()
       const positions =
         "team" in this.pokemon && this.pokemon.team === Team.RED_TEAM
-          ? FLOWER_POTS_POSITIONS_RED
-          : FLOWER_POTS_POSITIONS_BLUE
+          ? this.flip
+            ? FLOWER_POTS_POSITIONS_BLUE
+            : FLOWER_POTS_POSITIONS_RED
+          : this.flip
+            ? FLOWER_POTS_POSITIONS_RED
+            : FLOWER_POTS_POSITIONS_BLUE
       const [startX, startY] = positions[FlowerPots.indexOf(flowerPot)]
       addAbilitySprite(scene, Ability.PETAL_BLIZZARD, 0, [startX, startY - 24])
       this.moveManager.setEnable(false)
@@ -1301,9 +1312,9 @@ export default class PokemonSprite extends DraggableObject {
   addElectricField() {
     if (!this.electricField) {
       this.electricField = this.scene.add
-        .sprite(0, 10, "status", "ELECTRIC_FIELD/000.png")
+        .sprite(3, 3, "status", "ELECTRIC_FIELD/000.png")
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        .setScale(1.5)
+        .setScale(1)
       this.electricField.anims.play("ELECTRIC_FIELD")
       this.add(this.electricField)
       this.bringToTop(this.sprite)
@@ -1342,7 +1353,7 @@ export default class PokemonSprite extends DraggableObject {
       this.fairyField = this.scene.add
         .sprite(0, 10, "status", "FAIRY_FIELD/000.png")
         .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
-        .setScale(1)
+        .setScale(1.5)
       this.fairyField.anims.play("FAIRY_FIELD")
       this.add(this.fairyField)
       this.bringToTop(this.sprite)
