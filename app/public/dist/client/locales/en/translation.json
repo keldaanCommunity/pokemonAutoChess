@@ -3012,7 +3012,7 @@
 		"SOUL_HEART": "Every time the caster gets a KO, gain 10 AP and 10 PP",
 		"ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
 		"BERRY_EATER": "When the Pokémon attacks a target, it steals all its berries and eats them",
-		"TOXIC_BOOST": "The Pokémon takes 50% less poison damage and gains 10 ATK as long as it is POISONNED",
+		"TOXIC_BOOST": "The Pokémon takes 50% less poison damage and gains 10 ATK as long as it has POISONNED",
 		"GUZZLORD": "Guzzlord is too heavy to jump and too gluttonous to cook for others. When holding CHEF_HAT, gain 10 permanent max HP and 5 permanent AP for every KO.",
 		"BURMY": "Burmy evolves into Wormadam if you get 3 Burmy with the same cloak, or into Mothim at stage 20 after moving to a region that doesn't have its cloak type",
 		"PSYDUCK": "Has [10,LK]% chance to get CONFUSION when taking a hit. Every time it gets CONFUSION, gain 100 AP",
