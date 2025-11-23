@@ -2475,7 +2475,30 @@ export const AbilitiesAnimations: {
       scale: 2,
       depth: DEPTH.ABILITY_BELOW_POKEMON
     })
-  })
+  }),
+  [Ability.GEAR_GRIND]: [
+    projectile({
+      duration: 500,
+      scale: 1,
+      hitAnim: onTarget({
+        ability: "STEEL/hit",
+        textureKey: "attacks",
+        oriented: true,
+        rotation: (-3 * Math.PI) / 4
+      })
+    }),
+    projectile({
+      duration: 500,
+      delay: 250,
+      scale: 1,
+      hitAnim: onTarget({
+        ability: "STEEL/hit",
+        textureKey: "attacks",
+        oriented: true,
+        rotation: (-3 * Math.PI) / 4
+      })
+    })
+  ]
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

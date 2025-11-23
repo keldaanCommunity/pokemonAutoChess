@@ -7300,6 +7300,30 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.WATER_MELEE
   },
+  [Pkm.KLINK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.STEEL_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.KLANG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.STEEL_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.KLINKLANG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.STEEL_HIT,
+    shinyUnavailable: true
+  },
   [Pkm.GALARIAN_SLOWPOKE]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,

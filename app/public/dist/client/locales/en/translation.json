@@ -533,6 +533,7 @@
 		"TRIPLE_DIVE": "Triple Dive",
 		"MOONBLAST": "Moonblast",
 		"HYDRO_STEAM": "Hydro Steam",
+		"GEAR_GRIND": "Gear Grind",
 		"STRANGE_STEAM": "Strange Steam",
 		"PUMMELING_PAYBACK": "Pummeling Payback",
 		"VOLT_SURGE": "Volt Surge"
@@ -1608,6 +1609,9 @@
 		"WUGTRIO": "Wugtrio",
 		"FLUTTER_MANE": "Flutter Mane",
 		"WALKING_WAKE": "Walking Wake",
+		"KLINK": "Klink",
+		"KLANG": "Klang",
+		"KLINKLANG": "Klinklang",
 		"ORTHWORM": "Orthworm",
 		"IRON_THORNS": "Iron Thorns"
 	},
@@ -2123,6 +2127,7 @@
 		"PLASMA_TEMPEST": "Flies away and fires 3 plasma bolts through the closest enemies. Each bolt deals [40,SP] SPECIAL, reduced by 10% for each enemy passed through.",
 		"TRIMMING_MOWER": "Dash within 2 tiles to hit the most enemies possible and heals [60,SP] HP. Excess healing becomes SHIELD. Deals [40,SP] SPECIAL to ADJACENT enemies.",
 		"PLASMA_FLASH": "Fires 4 plasma flashes dealing [20,SP] SPECIAL each. Gains +1 flash per cast.",
+		"GEAR_GRIND": "Launches two gears at the target, each dealing [50,100,200,SP]% of user's SPEED as SPECIAL.",
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining [40,SP] max HP. Every third attack chains through up to 4 nearby enemies, dealing [30,SP] SPECIAL that increases by [10,SP] per cast."
@@ -2438,7 +2443,7 @@
 		"MAGMARIZER": "Magmarizer",
 		"MACHO_BRACE": "Macho Brace",
 		"LIGHT_BALL": "Light Ball",
-		"TOXIC_ORB": "Toxic Orb",
+		"DRAGON_SCALE": "Dragon Scale",
 		"METRONOME": "Metronome",
 		"METAL_COAT": "Metal Coat",
 		"AIR_BALLOON": "Air Balloon",
@@ -2719,7 +2724,7 @@
 		"MAGMARIZER": "Gives FIRE synergy. The holder doesn't suffer from BURN. Instead, it gains 30 SPEED when burning.",
 		"MACHO_BRACE": "Gives FIGHTING synergy.",
 		"LIGHT_BALL": "Gives LIGHT synergy.",
-		"TOXIC_ORB": "Gives POISON synergy. Holder suffers from POISONNED but increases its base ATK by 100%.",
+		"DRAGON_SCALE": "Gives DRAGON synergy as first synergy.",
 		"METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP.",
 		"METAL_COAT": "Gives STEEL synergy.",
 		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to board effects.",
@@ -2728,7 +2733,7 @@
 		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
 		"TERRAIN_EXTENDER": "At the start of the fight, holder gains either ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD or FAIRY_FIELD based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.",
 		"EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of allies ADJACENT_IN_THE_SAME_ROW.",
-		"POKERUS_VIAL": "Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2.5 seconds and transmitting to allies.",
+		"POKERUS_VIAL": "Gives POISON synergy. Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2.5 seconds and transmitting to allies.",
 		"SPELL_TAG": "Gives GHOST synergy. When the holder is KO, CURSE its attacker to be KO'd after 9 seconds",
 		"SILK_SCARF": "Gives NORMAL synergy and increase SHIELD from all sources by 50%.",
 		"TINY_MUSHROOM": "Gives BUG synergy but reduce the holder's max HP by 50% when cloned.",
@@ -3093,6 +3098,7 @@
 		"SLOWPOKE": "Will evolve into $t(pkm.SLOWBRO) or $t(pkm.SLOWKING) based on the dominant synergy between WATER and PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Will evolve into $t(pkm.GALARIAN_SLOWBRO) or $t(pkm.GALARIAN_SLOWKING) based on the dominant synergy between POISON and PSYCHIC.",
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
+		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED per second to your team.",
 		"ORTHWORM": "When digging a hole, gains 5 HP permanently."
 	},
 	"stat": {
