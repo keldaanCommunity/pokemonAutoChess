@@ -698,6 +698,7 @@ export const SynergyItems = [
   Item.RUNNING_SHOES,
   Item.BERSERK_GENE,
   Item.SURFBOARD,
+  Item.INCENSE,
   ...MemoryDiscs
 ] as const
 
@@ -730,6 +731,7 @@ export const SynergyGivenByItem: Record<
   [Item.SILK_SCARF]: Synergy.NORMAL,
   [Item.TINY_MUSHROOM]: Synergy.BUG,
   [Item.COOKING_POT]: Synergy.GOURMET,
+  [Item.INCENSE]: Synergy.FLORA,
   [Item.RUNNING_SHOES]: Synergy.FIELD,
   [Item.BERSERK_GENE]: Synergy.MONSTER,
   [Item.SURFBOARD]: Synergy.AQUATIC,
