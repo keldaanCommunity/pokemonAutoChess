@@ -380,6 +380,7 @@ export class FishingRodEffect extends OnStageStartEffect {
         rod &&
         getFreeSpaceOnBench(player.board) > 0 &&
         !isAfterPVE &&
+        room.state.stageLevel > 3 &&
         !player.isBot
       ) {
         const fish = room.state.shop.pickFish(player, rod)
@@ -530,21 +531,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.burnCooldown = 0
-    })
-  ],
-
-  [Item.TOXIC_ORB]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
-      pokemon.status.triggerPoison(
-        60000,
-        pokemon as PokemonEntity,
-        pokemon as PokemonEntity
-      )
-    }),
-    new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
-      pokemon.status.poisonCooldown = 0
     })
   ],
 

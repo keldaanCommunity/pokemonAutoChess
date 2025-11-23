@@ -1208,8 +1208,20 @@ export default class GameRoom extends Room<GameState> {
       pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
     ).map((p) => PokemonFactory.createPokemonFromName(p, player))
 
+    const pokemon = pokemonsObtained[0]
+    const isEvolution =
+      pokemon.evolutionRule &&
+      pokemon.evolutionRule instanceof CountEvolutionRule &&
+      pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+
     const freeSpace = getFreeSpaceOnBench(player.board)
-    if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
+
+    if (
+      freeSpace < pokemonsObtained.length &&
+      !bypassLackOfSpace &&
+      !isEvolution
+    )
+      return // prevent picking if not enough space on bench
 
     // at this point, the player is allowed to pick a proposition
     const selectedIndex = player.pokemonsProposition.indexOf(pkm)
@@ -1248,6 +1260,12 @@ export default class GameRoom extends Room<GameState> {
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
+      } else if (isEvolution) {
+        pokemon.positionX = -1 // temporary position off the board just to handle evolution
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.checkEvolutionsAfterPokemonAcquired(playerId)
       } else {
         // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
         const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)

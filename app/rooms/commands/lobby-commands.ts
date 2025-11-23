@@ -99,14 +99,20 @@ export class OnJoinCommand extends Command<
         const starterAvatar = pickRandomIn(StarterAvatars)
         await UserMetadata.create({
           uid: client.auth.uid,
-          displayName: client.auth.displayName.substring(0, MAX_USER_NAME_LENGTH),
+          displayName: client.auth.displayName.substring(
+            0,
+            MAX_USER_NAME_LENGTH
+          ),
           avatar: starterAvatar,
           booster: starterBoosters,
           pokemonCollection: new Map<string, IPokemonCollectionItemMongo>()
         })
         const newUser: IUserMetadataMongo = {
           uid: client.auth.uid,
-          displayName: client.auth.displayName.substring(0, MAX_USER_NAME_LENGTH),
+          displayName: client.auth.displayName.substring(
+            0,
+            MAX_USER_NAME_LENGTH
+          ),
           language: client.auth.metadata.language,
           avatar: starterAvatar,
           games: 0,

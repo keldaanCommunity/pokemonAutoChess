@@ -387,6 +387,43 @@ export class Board {
     return candidates[0].value === undefined ? candidates[0] : null
   }
 
+  getSafePlaceAwayFrom(
+    originX: number,
+    originY: number,
+    specificSide: Team | null = null
+  ): { x: number; y: number; distance: number } | null {
+    const candidateCells = new Array<{
+      distance: number
+      x: number
+      y: number
+    }>()
+    this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
+      if (value === undefined) {
+        if (specificSide === null) {
+          candidateCells.push({
+            x,
+            y,
+            distance: distanceM(x, y, originX, originY)
+          })
+        } else {
+          if (
+            (specificSide === Team.BLUE_TEAM && y < this.rows / 2) ||
+            (specificSide === Team.RED_TEAM && y >= this.rows / 2)
+          ) {
+            candidateCells.push({
+              x,
+              y,
+              distance: distanceM(x, y, originX, originY)
+            })
+          }
+        }
+      }
+    })
+
+    candidateCells.sort((a, b) => b.distance - a.distance)
+    return candidateCells[0] ?? null
+  }
+
   getClosestAvailablePlace(
     targetX: number,
     targetY: number

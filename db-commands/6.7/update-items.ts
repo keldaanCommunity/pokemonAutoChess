@@ -9,7 +9,8 @@ const itemsToReplace = new Map<string, Item>([
   ["CHOICE_SCARF", Item.LOADED_DICE],
   ["LUCKY_EGG", Item.HEAVY_DUTY_BOOTS],
   ["ROTOM_PHONE", Item.SPELL_TAG],
-  ["FLUFFY_TAIL", Item.SAFETY_GOGGLES]
+  ["FLUFFY_TAIL", Item.SAFETY_GOGGLES],
+  ["TOXIC_ORB", Item.POKERUS_VIAL]
 ])
 
 async function main() {

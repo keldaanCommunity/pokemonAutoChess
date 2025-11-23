@@ -128,7 +128,7 @@ export class OnBuyPokemonCommand extends Command<
     const isEvolution =
       pokemon.evolutionRule &&
       pokemon.evolutionRule instanceof CountEvolutionRule &&
-      pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player)
+      pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
 
     let cost = getBuyPrice(name, this.state.specialGameRule)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
@@ -243,7 +243,7 @@ export class OnPokemonCatchCommand extends Command<
         freeSpaceOnBench > 0 ||
         (pokemon.evolutionRule &&
           pokemon.evolutionRule instanceof CountEvolutionRule &&
-          pokemon.evolutionRule.canEvolveIfBuyingOne(pokemon, player))
+          pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player))
 
       if (hasSpaceOnBench) {
         const x = getFirstAvailablePositionInBench(player.board)

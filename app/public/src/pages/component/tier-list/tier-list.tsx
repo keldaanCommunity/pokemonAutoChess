@@ -70,7 +70,7 @@ export default function TierList(props: {
   }
 
   function handleColorChange(rowIndex: number, color: string) {
-    const newRows = props.tierList.rows.map((row, index) => 
+    const newRows = props.tierList.rows.map((row, index) =>
       index === rowIndex ? { ...row, color } : row
     )
     props.onUpdate({ ...props.tierList, rows: newRows })
@@ -336,7 +336,7 @@ export default function TierList(props: {
         <tbody>
           {props.tierList.rows.map((row, rowIndex) => (
             <tr key={rowIndex} className="tier-list-row">
-              <td 
+              <td
                 className="tier-list-label-cell"
                 style={{ backgroundColor: row.color }}
               >
@@ -435,7 +435,9 @@ export default function TierList(props: {
                   <input
                     type="color"
                     value={row.color || "#2a2a2a"}
-                    onChange={(e) => handleColorChange(rowIndex, e.target.value)}
+                    onChange={(e) =>
+                      handleColorChange(rowIndex, e.target.value)
+                    }
                     className="tier-list-color-picker"
                     title="Change row color"
                   />

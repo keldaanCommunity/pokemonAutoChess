@@ -21,7 +21,7 @@ export default function KeybindInfo() {
         setCurrentlyRemapping(null)
         return
       }
-      key = KEY_CODES_TO_PHASER_KEY_CODES[key] ?? key      
+      key = KEY_CODES_TO_PHASER_KEY_CODES[key] ?? key
       setPreferences((old) => ({
         keybindings: { ...old.keybindings, [currentlyRemapping]: key }
       }))
@@ -130,8 +130,8 @@ export default function KeybindInfo() {
   )
 }
 
-const  KEY_CODES_TO_PHASER_KEY_CODES: { [key: string]: string } = {
+const KEY_CODES_TO_PHASER_KEY_CODES: { [key: string]: string } = {
   " ": "SPACE",
-  "PAGEUP": "PAGE_UP",
-  "PAGEDOWN": "PAGE_DOWN",  
+  PAGEUP: "PAGE_UP",
+  PAGEDOWN: "PAGE_DOWN"
 }
