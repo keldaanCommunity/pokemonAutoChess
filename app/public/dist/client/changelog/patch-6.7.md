@@ -35,6 +35,7 @@
 
 - Artificial items have been renamed Tools. Some tools are now exclusive to Electivire town encounter.
 - Removed Rotom Phone item, due to the rework of Rotom.
+- Removed Toxic Orb
 - New item: Spell Tag: Gives GHOST synergy. When the holder dies, curses its attacker to be KO'd in 9 seconds.
 - Fluffy Tail is renamed Safety Goggles. In addition to its previous effect, it now also grants immunity to sandstorm damage.
 - Choice Scarf is renamed Loaded Dice. Now gives +30 Luck as base stat. Attacks have ~~100~~ 50% chance to bounce to a random enemy for ~~50~~ 100% of the attack damage.
@@ -42,6 +43,8 @@
 - X-Ray Vision has a new icon
 - Electirizer now gives Electric type. Removed PP burn on triple attacks.
 - Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
+- Pokerus Vial now gives Poison type.
+- New tool: Dragon Scale: Gives DRAGON synerg as first synergy. +5 def/spe def.
 - New tool: Terrain extender: At the start of the fight, holder gains either Electric Field, Grass Field, Psychic Field or Fairy Field based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.
 - Added new synergy gems for all synergies (except Baby). These gems cannot be found buried in the ground, but can be obtained from Sableye encounter.
 - Protective pads now also protects against fighting synergy throws
