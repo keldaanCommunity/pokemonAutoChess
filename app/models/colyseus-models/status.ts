@@ -563,7 +563,7 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonDamageCooldown - dt <= 0) {
       let poisonDamage = pkm.maxHP * 0.05 * this.poisonStacks
 
-      if (pkm.passive === Passive.GLISCOR || pkm.passive === Passive.GLIGAR) {
+      if (pkm.passive === Passive.GLISCOR) {
         poisonDamage = pkm.maxHP * 0.05 * (this.poisonStacks - 2)
       }
 
