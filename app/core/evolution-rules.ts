@@ -98,7 +98,7 @@ export class CountEvolutionRule extends EvolutionRule {
     return copies.length >= this.numberRequired
   }
 
-  canEvolveIfBuyingOne(pokemon: Pokemon, player: Player): boolean {
+  canEvolveIfGettingOne(pokemon: Pokemon, player: Player): boolean {
     if (!pokemon.hasEvolution) return false
     const copies = values(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
