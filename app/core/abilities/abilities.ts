@@ -15152,7 +15152,6 @@ export class PlasmaFlashStrategy extends AbilityStrategy {
   }
 }
 
-
 export class GearGrindStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -15165,9 +15164,17 @@ export class GearGrindStrategy extends AbilityStrategy {
     const speedFactor = [0.5, 1, 2][pokemon.stars - 1] ?? 2
     const damage = Math.round(pokemon.speed * speedFactor)
     for (let i = 0; i < 2; i++) {
-      pokemon.commands.push(new DelayedCommand(() => {
-        target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }, i * 250))
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }, i * 250)
+      )
     }
   }
 }
@@ -15208,9 +15215,7 @@ const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
   // Check if it's every third attack
   if (pokemon.count.attackCount % 3 === 0) {
     const nbBounces = 4
-    // Calculate damage based on number of cast
-    const damage = 30 + 10 * (pokemon.count.ult - 1)
-    // Get closest enemies
+    const damage = 30
     const closestEnemies = board.getClosestEnemies(
       pokemon.positionX,
       pokemon.positionY,
@@ -15256,11 +15261,56 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    // Increase max HP
-    pokemon.addMaxHP(40, pokemon, 1, crit, false)
+    pokemon.addMaxHP(50, pokemon, 1, crit, false)
+    pokemon.addSpeed(30, pokemon, 0, false)
+    if (pokemon.status.electricField === false) {
+      pokemon.status.electricField = true
+      pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
+    }
+
     // Add the volt surge effect if it's the first ultimate
     if (pokemon.count.ult === 1) {
       pokemon.effectsSet.add(voltSurgeEffect)
+    }
+  }
+}
+
+export class SupercellSlamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const mostSurroundedCoordinate =
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    pokemon.addShield(shield, pokemon, 1, crit)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board,
+        false
+      )
+
+      const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+
+      cells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
     }
   }
 }
@@ -15783,6 +15833,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TRIMMING_MOWER]: new TrimmingMowerStrategy(),
   [Ability.PLASMA_FLASH]: new PlasmaFlashStrategy(),
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
-  [Ability.VOLT_SURGE]: new VoltSurgeStrategy()
+  [Ability.VOLT_SURGE]: new VoltSurgeStrategy(),
+  [Ability.SUPERCELL_SLAM]: new SupercellSlamStrategy()
 }
-

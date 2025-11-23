@@ -536,7 +536,8 @@
 		"GEAR_GRIND": "Gear Grind",
 		"STRANGE_STEAM": "Strange Steam",
 		"PUMMELING_PAYBACK": "Pummeling Payback",
-		"VOLT_SURGE": "Volt Surge"
+		"VOLT_SURGE": "Volt Surge",
+		"SUPERCELL_SLAM": "Supercell Slam"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1613,7 +1614,9 @@
 		"KLANG": "Klang",
 		"KLINKLANG": "Klinklang",
 		"ORTHWORM": "Orthworm",
-		"IRON_THORNS": "Iron Thorns"
+		"IRON_THORNS": "Iron Thorns",
+		"TADBULB": "Tadbulb",
+		"BELLIBOLT": "Bellibolt"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2130,7 +2133,8 @@
 		"GEAR_GRIND": "Launches two gears at the target, each dealing [50,100,200,SP]% of user's SPEED as SPECIAL.",
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
-		"VOLT_SURGE": "The user supercharges itself, gaining [40,SP] max HP. Every third attack chains through up to 4 nearby enemies, dealing [30,SP] SPECIAL that increases by [10,SP] per cast."
+		"VOLT_SURGE": "The user supercharges itself, gaining ELECTRIC_FIELD, 30 SPEED and [50,SP] max HP. Then every third attack chains through up to 4 nearby enemies, dealing [20,SP] SPECIAL each.",
+		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all adjacent enemy Pokemon and gaining [10,20,40,SP] SHIELD"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2802,7 +2806,7 @@
 		"AMORPHOUS_GEM": "+1 to AMORPHOUS synergy",
 		"GOURMET_GEM": "+1 to GOURMET synergy",
 		"FIRE_SHARD": "Sacrifice 3 player HP to give permanently +3 ATK and +3 SPEED to a FIRE Pokémon. Immediately consumed when given.",
-		"CELL_BATTERY": "Each cell battery on bench gives 3 SPEED to all your ELECTRIC Pokémon.\nUse it on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 SPEED and ELECTRIC_FIELD.",
+		"CELL_BATTERY": "Each cell battery on bench gives 3 SPEED to all your ELECTRIC Pokémon.\nUse it on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 30 SPEED, 50 SHIELD and ELECTRIC_FIELD.",
 		"TEAL_MASK": "This carved wooden mask is adorned with crystals, grants Ogerpon the FLORA type during battle. Ogerpon loses its mask when its shield is depleted.",
 		"WELLSPRING_MASK": "This carved wooden mask is adorned with crystals, grants Ogerpon the AQUATIC type during battle. Ogerpon loses its mask when its shield is depleted.",
 		"HEARTHFLAME_MASK": "This carved wooden mask is adorned with crystals, grants Ogerpon the FIRE type during battle. Ogerpon loses its mask when its shield is depleted.",
@@ -3098,7 +3102,8 @@
 		"GALARIAN_SLOWPOKE": "Will evolve into $t(pkm.GALARIAN_SLOWBRO) or $t(pkm.GALARIAN_SLOWKING) based on the dominant synergy between POISON and PSYCHIC.",
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
 		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED per second to your team.",
-		"ORTHWORM": "When digging a hole, gains 5 HP permanently."
+		"ORTHWORM": "When digging a hole, gains 5 HP permanently.",
+		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal [30,SP] SPECIAL to adjacent enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD."
 	},
 	"stat": {
 		"ATK": "Attack",

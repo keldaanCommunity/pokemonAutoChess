@@ -970,7 +970,7 @@ export default class BoardManager {
 
         case "supercharged":
           if (value === true && previousValue === false) {
-            pokemonUI.superchargeAnimation(this.scene, true)
+            pokemonUI.superchargeAnimation(this.scene, false, false)
           }
           break
       }

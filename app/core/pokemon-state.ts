@@ -648,6 +648,7 @@ export default abstract class PokemonState {
           pokemon.onDamageReceived({
             attacker,
             damage: takenDamage,
+            damageBeforeReduction: damage,
             board,
             attackType,
             isRetaliation

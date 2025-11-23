@@ -19310,9 +19310,50 @@ export class IronThorns extends Pokemon {
   speed = 50
   def = 8
   speDef = 6
-  maxPP = 90
+  maxPP = 110
   range = 1
   skill = Ability.VOLT_SURGE
+}
+
+export class Tadbulb extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.LIGHT,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.BELLIBOLT
+  hp = 90
+  atk = 5
+  speed = 29
+  def = 5
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.SUPERCELL_SLAM
+  passive = Passive.TADBULB
+  additional = true
+}
+
+export class Bellibolt extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.LIGHT,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 220
+  atk = 10
+  speed = 29
+  def = 10
+  speDef = 9
+  maxPP = 100
+  range = 1
+  skill = Ability.SUPERCELL_SLAM
+  passive = Passive.TADBULB
+  additional = true
 }
 
 export const PokemonClasses: Record<
@@ -20397,7 +20438,9 @@ export const PokemonClasses: Record<
   [Pkm.FLUTTER_MANE]: FlutterMane,
   [Pkm.WALKING_WAKE]: WalkingWake,
   [Pkm.ORTHWORM]: Orthworm,
-  [Pkm.IRON_THORNS]: IronThorns
+  [Pkm.IRON_THORNS]: IronThorns,
+  [Pkm.TADBULB]: Tadbulb,
+  [Pkm.BELLIBOLT]: Bellibolt
 }
 
 // declare all the classes in colyseus schema TypeRegistry

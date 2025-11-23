@@ -2498,7 +2498,15 @@ export const AbilitiesAnimations: {
         rotation: (-3 * Math.PI) / 4
       })
     })
-  ]
+  ],
+  ["SUPERCHARGE"]: ({ scene, pokemonsOnBoard, positionX, positionY }) => {
+    const pokemon = pokemonsOnBoard.find(
+      (p) => p.positionX === positionX && p.positionY === positionY
+    )
+    if (pokemon) {
+      pokemon.superchargeAnimation(scene, false, true)
+    }
+  }
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

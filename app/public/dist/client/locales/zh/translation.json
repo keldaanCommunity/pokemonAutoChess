@@ -2123,8 +2123,7 @@
 		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
 		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
 		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。",
-		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。",
-		"VOLT_SURGE": "使用者进入增压状态，提升[50,SP]点最大HP。本轮战斗的剩余时间内，每第3次攻击产生一道造成[30,SP]点SPECIAL并会弹射至至多4只附近敌方宝可梦身上的链状闪电。"
+		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。"		
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2794,7 +2793,7 @@
 		"AMORPHOUS_GEM": "计为1只AMORPHOUS宝可梦",
 		"GOURMET_GEM": "计为1只GOURMET宝可梦",
 		"FIRE_SHARD": "扣除3点玩家HP，使一只FIRE宝可梦永久提升3点ATK和3点SPEED。携带后立即消耗。",
-		"CELL_BATTERY": "存在于备战区时，所有我方ELECTRIC宝可梦提升3点SPEED。\n对一只ELECTRIC宝可梦使用，使其在下一轮对战中处于增压状态，提升50点SPEED且全程处于ELECTRIC_FIELD。",
+		"CELL_BATTERY": "存在于备战区时，所有我方ELECTRIC宝可梦提升3点SPEED。\n对一只ELECTRIC宝可梦使用，使其在下一轮对战中处于增压状态，提升30点SPEED，50点SHIELD且全程处于ELECTRIC_FIELD。",
 		"TEAL_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作FLORA宝可梦。护盾被击破后厄鬼椪会失去面具。",
 		"WELLSPRING_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作AQUATIC宝可梦。护盾被击破后厄鬼椪会失去面具。",
 		"HEARTHFLAME_MASK": "用结晶装饰的木雕面具，使厄鬼椪视作FIRE宝可梦。护盾被击破后厄鬼椪会失去面具。",

@@ -2125,7 +2125,7 @@
 		"PLASMA_FLASH": "Tire 4 éclairs de plasma infligeant [20,SP] SPECIAL chacun. Gagne +1 éclair par utilisation.",
 		"STRANGE_STEAM": "Projette une étrange vapeur autour du lanceur, sa portée augmentant d'une case par utilisation. Cette vapeur donne FAIRY_FIELD aux alliés et a [30,LK]% de chances d'infliger CONFUSION aux ennemis pendant 3 secondes. Les Pokémon pris dans la vapeur infligent et reçoivent 20% de SPECIAL supplémentaires.",
 		"PUMMELING_PAYBACK": "Bombarde la cible d'une tempête de coups de poing, infligeant [60,SP] + 125% ATK SPECIAL et soignant [40,SP] HP.",
-		"VOLT_SURGE": "Le lanceur se surcharge, gagnant [50,SP] de HP max. Pour le reste du combat, chaque troisième attaque crée une chaîne électrique infligeant [30,SP] SPECIAL et touchant jusqu'à 4 ennemis à proximité."
+		"VOLT_SURGE": "Le lanceur entre en surcharge, gagnant ELECTRIC_FIELD, 30 SPEED et [50,SP] HP max. Pour le reste du combat, chaque troisième attaque crée une chaîne électrique infligeant [30,SP] SPECIAL et touchant jusqu'à 4 ennemis à proximité."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2795,7 +2795,7 @@
 		"AMORPHOUS_GEM": "+1 à la synergie AMORPHOUS",
 		"GOURMET_GEM": "+1 à la synergie GOURMET",
 		"FIRE_SHARD": "Sacrifie 3 HP du joueur pour donner de façon permanente +3 ATK et +3 SPEED à un de vos Pokémon FIRE. Immédiatement consommé.",
-		"CELL_BATTERY": "Chaque CELL_BATTERY sur le banc offre 3 SPEED à tous vos Pokémon ELECTRIC.\nUtilisez-la sur un Pokémon ELECTRIC pour le surcharger pendant le prochain combat, lui octroyant 50 SPEED et un ELECTRIC_FIELD.",
+		"CELL_BATTERY": "Chaque CELL_BATTERY sur le banc offre 3 SPEED à tous vos Pokémon ELECTRIC.\nUtilisez-la sur un Pokémon ELECTRIC pour le surcharger pendant le prochain combat, lui octroyant 30 SPEED, 50 SHIELD et ELECTRIC_FIELD.",
 		"TEAL_MASK": "Ce masque en bois sculpté est orné de cristaux, confère à Ogerpon le type FLORA. Ogerpon perd son masque lorsque son bouclier est détruit.",
 		"WELLSPRING_MASK": "Ce masque en bois sculpté est orné de cristaux, confère à Ogerpon le type AQUATIC. Ogerpon perd son masque lorsque son bouclier est détruit.",
 		"HEARTHFLAME_MASK": "Ce masque en bois sculpté est orné de cristaux, confère à Ogerpon le type FIRE. Ogerpon perd son masque lorsque son bouclier est détruit.",

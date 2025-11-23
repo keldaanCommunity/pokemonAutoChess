@@ -68,6 +68,7 @@ export enum Pkm {
   BEEDRILL = "BEEDRILL",
   BEHEEYEM = "BEHEEYEM",
   BELDUM = "BELDUM",
+  BELLIBOLT = "BELLIBOLT",
   BELLOSSOM = "BELLOSSOM",
   BELLSPROUT = "BELLSPROUT",
   BIBAREL = "BIBAREL",
@@ -850,6 +851,7 @@ export enum Pkm {
   SWIRLIX = "SWIRLIX",
   SWOOBAT = "SWOOBAT",
   SYLVEON = "SYLVEON",
+  TADBULB = "TADBULB",
   TAILLOW = "TAILLOW",
   TALONFLAME = "TALONFLAME",
   TANDEMAUS = "TANDEMAUS",
@@ -2199,8 +2201,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.CHARCADET]: "0935",
   [Pkm.ARMAROUGE]: "0936",
   [Pkm.CERULEDGE]: "0937",
-  //[Pkm.TABDULB]: "0938",
-  //[Pkm.BELLIBOLT]: "0939",
+  [Pkm.TADBULB]: "0938",
+  [Pkm.BELLIBOLT]: "0939",
   [Pkm.WATTREL]: "0940",
   [Pkm.KILOWATTREL]: "0941",
   //[Pkm.MASCHIFF]: "0942",
@@ -3369,7 +3371,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.FLUTTER_MANE]: Pkm.FLUTTER_MANE,
   [Pkm.WALKING_WAKE]: Pkm.WALKING_WAKE,
   [Pkm.ORTHWORM]: Pkm.ORTHWORM,
-  [Pkm.IRON_THORNS]: Pkm.IRON_THORNS
+  [Pkm.IRON_THORNS]: Pkm.IRON_THORNS,
+  [Pkm.TADBULB]: Pkm.TADBULB,
+  [Pkm.BELLIBOLT]: Pkm.TADBULB
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
