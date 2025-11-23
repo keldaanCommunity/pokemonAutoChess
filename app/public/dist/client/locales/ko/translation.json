@@ -2102,7 +2102,6 @@
 		"LAST_RESPECTS": "[30,60,90,SP] SPECIAL 를 가하며 [10,8,6,SP=-0.2]초 후 KO시키는 CURSE 를 가한다. 대상이 이미 CURSE 상태면 대신 다른 ADJACENT 적을 대상으로 한다.",
 		"OCTOLOCK": "[30,60,90,SP] SPECIAL 를 가한다. 3초간 LOCKED 와 ARMOR_BREAK 상태를 부여한다.",
 		"BURNING_JEALOUSY": "대상과 ADJACENT 적에게 [30,50,70,SP] SPECIAL 를 가한다. ATK 버프를 가진 적은 버프를 잃고 5초간 BURN 상태가 된다.",
-		"FIRST_IMPRESSION": "위험을 감지한 포켓몬이 [45,90,SP] SPECIAL 를 가하고 [3,5,SP]초간 FLINCH 를 가한 후 날아가며, 무작위 1 STAR 커먼 또는 언커먼 BUG 포켓몬을 남긴다.",
 		"GRUDGE_DIVE": "시전자가 최대 HP 의 10% 를 SPECIAL 로 받으며 대상에게 [30,60,90,120,SP] SPECIAL 와 쓰러진 아군 당 [5,10,15,20,SP] 추가 SPECIAL 를 가한다.",
 		"BARED_FANGS": "대상을 물어 ATK 의 [160,SP]% 만큼 SPECIAL 를 가하며 대상의 SPEED 를 [10,SP]만큼 훔친다.",
 		"SOUL_TRAP": "[25,50,108] SHIELD 를 얻은 후, 반경 2칸 내의 적들이 [10,SP] PP 를 잃고 [2,SP,ND=1]초간 FATIGUE 상태가 되며 시전자를 타겟으로 지정한다.",

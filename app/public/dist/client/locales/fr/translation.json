@@ -2107,7 +2107,7 @@
 		"LAST_RESPECTS": "Inflige [30,60,90,SP] SPECIAL et CURSE qui mettent KO après [10,8,6,SP=-0.2] secondes. Se lance immédiatement lorsqu'un allié ADJACENT est mis KO.",
 		"OCTOLOCK": "Inflige [30,60,90,SP] SPECIAL. La cible subit LOCKED et ARMOR_BREAK pendant 3 secondes.",
 		"BURNING_JEALOUSY": "Inflige [30,50,70,SP] SPECIAL à la cible et aux ennemis ADJACENT. Les ennemis bénéficiant de bonus d'ATK les perdent et subissent BURN pendant 5 secondes.",
-		"FIRST_IMPRESSION": "Le Pokémon, sentant le danger, inflige [45,90,SP] SPECIAL et inflige FLINCH pendant [3,5,SP] secondes avant de s'envoler, invoquant derrière lui un Pokémon BUG 1 STAR commun ou peu commun aléatoire.",
+		"FIRST_IMPRESSION": "Inflige [45,90,180,SP] SPECIAL et FLINCH pendant 5 secondes. Au premier lancement, saute en arrière en invoquant un Pokémon BUG 1 STAR [Commun, Peu commun, Rare] aléatoire à son emplacement initial.",
 		"GRUDGE_DIVE": "Le lanceur prend 10% de ses HP max en SPECIAL et inflige [30,60,90,120,SP] SPECIAL à la cible + [5,10,15,20,SP] SPECIAL supplémentaires par allié KO.",
 		"BARED_FANGS": "Mord la cible en lui infligeant [160,SP] % de son ATK en tant que SPECIAL et en volant [10,SP] de SPEED à la cible",
 		"SOUL_TRAP": "Gagne [25,50,108] SHIELD, puis les ennemis dans un rayon de 2 cases perdent [10,SP] PP, subissent FATIGUE pendant [2,SP,ND=1] secondes et choisissent le lanceur comme cible.",

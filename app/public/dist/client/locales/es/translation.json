@@ -2081,7 +2081,6 @@
 		"LAST_RESPECTS": "Inflige [30,60,90,SP] de SPECIAL y deja CURSE al objetivo, que será derrotado al pasar [10,8,6,SP=-0.2] segundos. Si el objetivo ya está CURSE, ataca a otro enemigo ADJACENT en su lugar.",
 		"OCTOLOCK": "Inflige [30,60,90,SP] de SPECIAL. Causa LOCKED y ARMOR_BREAK durante 3 segundos.",
 		"BURNING_JEALOUSY": "Inflige [30,50,70,SP] de SPECIAL al objetivo y a los enemigos que estén en una casilla ADJACENT. Los enemigos que tengan mejoras de ATK las pierden y quedan BURN durante 5 segundos.",
-		"FIRST_IMPRESSION": "El usuario, sintiendo peligro, inflige [45,90,SP] de SPECIAL y deja FLINCH durante [3,5,SP] segundos al objetivo antes de salir volando, dejando atrás una copia de 1 STAR de un Pokémon común o poco común de tipo BUG aleatorio.",
 		"GRUDGE_DIVE": "El usuario sufre un 10% de sus HP máximos como SPECIAL e inflige [30,60,90,120,SP] de SPECIAL al objetivo + [5,10,15,20,SP] adicional por cada aliado caído",
 		"BARED_FANGS": "Muerde al objetivo infligiendo un [160,SP]% del ATK del usuario como SPECIAL y le roba [10,SP] de SPEED.",
 		"SOUL_TRAP": "Gana [25,50,108] de SHIELD. Tras ello los enemigos en un radio de 2 casillas pierden [10,SP] PP, sufren FATIGUE durante [2,SP,ND=1] segundos y pasan a tener al usuario como objetivo.",

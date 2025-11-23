@@ -147,12 +147,10 @@ export function addIconsToDescription(
         let nbDigits = 0
         if (array.at(-1)?.includes("ND")) {
           nbDigits = Number(array.pop()?.replace("ND=", "")) || 0
-        }
-        if (array.at(-1)?.includes("SP")) {
+        } else if (array.at(-1)?.includes("SP")) {
           scaleType = "AP"
           scaleFactor = Number(array.pop()?.replace("SP=", "")) || 1
-        }
-        if (array.at(-1)?.includes("LK")) {
+        } else if (array.at(-1)?.includes("LK")) {
           scaleType = "LUCK"
           scaleFactor = Number(array.pop()?.replace("LK=", "")) || 1
         }
@@ -181,14 +179,16 @@ export function addIconsToDescription(
             {array.slice(0, stats?.stages).map((v, j) => {
               const separator =
                 j < Math.min(stats?.stages ?? 4, array.length) - 1 ? "/" : ""
-              let value = roundToNDigits(Number(v), nbDigits)
-              if (scaleType === "AP") {
+              let value: number | string = roundToNDigits(Number(v), nbDigits)
+              if (Number.isNaN(value)) {
+                // In case of non-numeric value, just return as is
+                value = v
+              } else if (scaleType === "AP") {
                 value = roundToNDigits(
                   Number(v) * (1 + ((stats?.ap ?? 0) * scaleFactor) / 100),
                   nbDigits
                 )
-              }
-              if (scaleType === "LUCK") {
+              } else if (scaleType === "LUCK") {
                 value = roundToNDigits(
                   max(100)(
                     Math.pow(Number(v) / 100, 1 - (stats?.luck ?? 0) / 100) *

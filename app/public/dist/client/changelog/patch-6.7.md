@@ -100,6 +100,8 @@
 - Buff Lock On (Genesect): True damage bonus 200% → 300%
 - Buff Maractus: PP 90 → 80
 - Zygarde PP no longer resets to 0 when transforming into Complete form
+- Reworked First Impression (Wimpod): deals 45/90/180 special damage and inflicts Flinch for 5 seconds. On first cast, jumps backwards, spawning a random 1 star [common, uncommon, rare] Bug Pokémon at their previous location. PP 140 → 100.
+- Brave Bird and Follow me now always move to a position on your side of the board
 
 # Town Encounters
 

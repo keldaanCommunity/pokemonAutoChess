@@ -6837,9 +6837,10 @@ export class BraveBirdStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const flyAwayCell = board.getFlyAwayCell(
+    const flyAwayCell = board.getSafePlaceAwayFrom(
       pokemon.positionX,
-      pokemon.positionY
+      pokemon.positionY,
+      pokemon.team
     )
     if (flyAwayCell) {
       pokemon.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
@@ -13250,9 +13251,10 @@ export class FollowMeStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     //Jump to a free cell far away and gain [40,SP] SHIELD. Enemies that were targeting the user are CHARM for 3 seconds.
-    const cellToJump = board.getFlyAwayCell(
+    const cellToJump = board.getSafePlaceAwayFrom(
       pokemon.positionX,
-      pokemon.positionY
+      pokemon.positionY,
+      pokemon.team
     )
     if (cellToJump) {
       const enemiesTargetingPokemon = board.cells.filter<PokemonEntity>(
@@ -14211,60 +14213,56 @@ export class FirstImpressionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-
-    // Base damage: 1★=45, 2★=90
-    const damage = [45, 90][pokemon.stars - 1] ?? 90
-
-    // Base flinch duration: 1★=3s, 2★=5s, scaled by AP and crit
-    let duration = [3000, 5000][pokemon.stars - 1] ?? 5000
-    duration = Math.round(
-      duration * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
-
-    // Deal damage and apply flinch status
+    const damage = [45, 90, 180][pokemon.stars - 1] ?? 180
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerFlinch(duration, target, pokemon)
+    target.status.triggerFlinch(5000, target, pokemon)
 
-    // Find a cell to fly away to after the attack
-    const flyAwayCell = board.getFlyAwayCell(
-      pokemon.positionX,
-      pokemon.positionY
-    )
+    if (pokemon.count.ult === 1) {
+      // On first cast, find a cell to jump away to after the attack
+      const newCell = board.getSafePlaceAwayFrom(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.team
+      )
 
-    // Store original position before moving
-    const x = pokemon.positionX
-    const y = pokemon.positionY
+      // Store original position before moving
+      const x = pokemon.positionX
+      const y = pokemon.positionY
 
-    if (flyAwayCell) {
-      // Move pokemon to the fly away position
-      pokemon.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
+      if (newCell) {
+        // Move pokemon to the fly away position
+        pokemon.moveTo(newCell.x, newCell.y, board, false)
 
-      // If original position is now empty, spawn a random bug pokemon
-      if (board.getEntityOnCell(x, y) === undefined) {
-        // Get all 1-star bug pokemon from common/uncommon rarities with abilities
-        const possibleBugsPkm = [
-          ...PRECOMPUTED_POKEMONS_PER_RARITY.COMMON,
-          ...PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON
-        ].filter((pkm) => {
-          const data = getPokemonData(pkm)
-          return (
-            data.stars === 1 &&
-            data.skill !== Ability.DEFAULT &&
-            data.types.includes(Synergy.BUG)
+        // If original position is now empty, spawn a random bug pokemon
+        if (board.getEntityOnCell(x, y) === undefined) {
+          // Get all 1-star bug pokemon from common/uncommon rarities with abilities
+          const possibleBugsPkm = (
+            [
+              PRECOMPUTED_POKEMONS_PER_RARITY.COMMON,
+              PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON,
+              PRECOMPUTED_POKEMONS_PER_RARITY.RARE
+            ][pokemon.stars - 1] ?? PRECOMPUTED_POKEMONS_PER_RARITY.RARE
+          ).filter((pkm) => {
+            const data = getPokemonData(pkm)
+            return (
+              data.stars === 1 &&
+              data.skill !== Ability.DEFAULT &&
+              data.types.includes(Synergy.BUG)
+            )
+          })
+
+          // Pick a random bug pokemon from the filtered list
+          const randomBugPkm = pickRandomIn<Pkm>(possibleBugsPkm)
+
+          // Create the bug pokemon instance
+          const randomBug = PokemonFactory.createPokemonFromName(
+            randomBugPkm,
+            pokemon.player
           )
-        })
 
-        // Pick a random bug pokemon from the filtered list
-        const randomBugPkm = pickRandomIn<Pkm>(possibleBugsPkm)
-
-        // Create the bug pokemon instance
-        const randomBug = PokemonFactory.createPokemonFromName(
-          randomBugPkm,
-          pokemon.player
-        )
-
-        // Add the bug pokemon to the original position
-        pokemon.simulation.addPokemon(randomBug, x, y, pokemon.team, true)
+          // Add the bug pokemon to the original position
+          pokemon.simulation.addPokemon(randomBug, x, y, pokemon.team, true)
+        }
       }
     }
   }

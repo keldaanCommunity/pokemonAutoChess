@@ -19078,7 +19078,7 @@ export class Wimpod extends Pokemon {
   speed = 38
   def = 7
   speDef = 4
-  maxPP = 140
+  maxPP = 100
   range = 1
   skill = Ability.FIRST_IMPRESSION
   additional = true
@@ -19094,7 +19094,7 @@ export class Golisopod extends Pokemon {
   speed = 38
   def = 14
   speDef = 8
-  maxPP = 140
+  maxPP = 100
   range = 1
   skill = Ability.FIRST_IMPRESSION
   additional = true
