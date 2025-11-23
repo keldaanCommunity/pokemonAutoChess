@@ -8,6 +8,9 @@
 - Galarian Weezing
 - Orthworm
 - Iron Thorns
+- Klink
+- Klang
+- Klinklang
 
 # Gameplay
 
