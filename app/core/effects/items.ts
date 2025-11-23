@@ -380,6 +380,7 @@ export class FishingRodEffect extends OnStageStartEffect {
         rod &&
         getFreeSpaceOnBench(player.board) > 0 &&
         !isAfterPVE &&
+        room.state.stageLevel > 3 &&
         !player.isBot
       ) {
         const fish = room.state.shop.pickFish(player, rod)
