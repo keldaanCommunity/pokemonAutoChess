@@ -30,8 +30,7 @@ export default function WikiPokemons() {
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
   const [tabIndex, setTabIndex] = useState(0)
   const [showEvolutions, setShowEvolutions] = useState(true)
-  const [showAdditional, setShowAdditional] = useState(true)
-  const [showRegional, setShowRegional] = useState(true)
+  const [pool, setPool] = useState<string>("all")
 
   useEffect(() => {
     if (selectedPkm) {
@@ -55,18 +54,19 @@ export default function WikiPokemons() {
           label={t("show_evolutions")}
           isDark
         />
-        <Checkbox
-          checked={showAdditional}
-          onToggle={setShowAdditional}
-          label={t("pool.additional")}
-          isDark
-        />
-        <Checkbox
-          checked={showRegional}
-          onToggle={setShowRegional}
-          label={t("pool.regional")}
-          isDark
-        />
+        <select value={pool} onChange={(e) => setPool(e.target.value)}>
+          <option value={"all"}>
+            {t("pool_label")}: {t("all")}
+          </option>
+          {["regular", "additional", "regional"].map((p) => (
+            <option value={p} key={p}>
+              {t(`pool.${p}`)}
+            </option>
+          ))}
+          <option value={"special"} key={"special"}>
+            {t(`rarity.SPECIAL`)}
+          </option>
+        </select>
         <PokemonTypeahead
           value={selectedPkm}
           onChange={(pkm) => setSelectedPkm(pkm)}
@@ -91,8 +91,7 @@ export default function WikiPokemons() {
               selected={selectedPkm}
               onSelect={setSelectedPkm}
               showEvolutions={showEvolutions}
-              showAdditional={showAdditional}
-              showRegional={showRegional}
+              pool={pool}
             />
           </TabPanel>
         )
@@ -108,18 +107,22 @@ export function WikiPokemon(props: {
   rarity: Rarity
   selected: Pkm | ""
   showEvolutions: boolean
-  showAdditional: boolean
-  showRegional: boolean
+  pool: string
   onSelect: (pkm: Pkm) => void
 }) {
   const pokemons = useMemo(
     () =>
       PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity]
-        .filter((p, index, list) => {
+        .filter((p) => {
           if (NonPkm.includes(p)) return false
           const { additional, regional } = getPokemonData(p)
-          if (!props.showAdditional && additional) return false
-          if (!props.showRegional && regional) return false
+          const special = props.rarity === Rarity.SPECIAL
+          if (props.pool === "additional" && !additional) return false
+          if (props.pool === "regional" && !regional) return false
+          if (props.pool === "special" && !special) return false
+          if (props.pool === "regular" && (additional || regional || special))
+            return false
+
           if (
             !props.showEvolutions &&
             PkmFamily[p] !== p &&
@@ -133,12 +136,7 @@ export function WikiPokemon(props: {
             ? getPokemonData(a).stars - getPokemonData(b).stars
             : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
         }),
-    [
-      props.rarity,
-      props.showAdditional,
-      props.showRegional,
-      props.showEvolutions
-    ]
+    [props.rarity, props.pool, props.showEvolutions]
   ) as Pkm[]
 
   return (
