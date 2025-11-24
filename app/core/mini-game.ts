@@ -665,22 +665,6 @@ export class MiniGame {
       maps.forEach((map) => {
         const synergies = RegionDetails[map].synergies
         const inCommon = synergies.filter((s) => portalSynergies.includes(s))
-        if (
-          stageLevel === 0 &&
-          portalSynergies.includes(Synergy.GOURMET) &&
-          synergies.includes(Synergy.GOURMET) === false
-        ) {
-          //TOFIX: gourmet only has a regional common so we force a gourmet regional map
-          return
-        }
-        if (
-          stageLevel === 0 &&
-          portalSynergies.includes(Synergy.ARTIFICIAL) &&
-          synergies.includes(Synergy.ARTIFICIAL) === false
-        ) {
-          //TOFIX: artificial only has a regional common so we force a artificial regional map
-          return
-        }
 
         if (inCommon.length > nbMaxInCommon) {
           nbMaxInCommon = inCommon.length

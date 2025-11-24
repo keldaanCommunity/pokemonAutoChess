@@ -18672,7 +18672,6 @@ export class Smoliv extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.TERRAIN_PULSE
-  regional = true
 }
 
 export class Dolliv extends Pokemon {
@@ -18692,7 +18691,6 @@ export class Dolliv extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.TERRAIN_PULSE
-  regional = true
 }
 
 export class Arboliva extends Pokemon {
@@ -18711,7 +18709,6 @@ export class Arboliva extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.TERRAIN_PULSE
-  regional = true
 }
 
 export class Chespin extends Pokemon {
@@ -19206,7 +19203,6 @@ export class Klink extends Pokemon {
   range = 3
   skill = Ability.GEAR_GRIND
   passive = Passive.GEARS
-  regional = true
 }
 
 export class Klang extends Pokemon {
@@ -19223,7 +19219,6 @@ export class Klang extends Pokemon {
   range = 3
   skill = Ability.GEAR_GRIND
   passive = Passive.GEARS
-  regional = true
 }
 
 export class Klinklang extends Pokemon {
@@ -19239,7 +19234,6 @@ export class Klinklang extends Pokemon {
   range = 3
   skill = Ability.GEAR_GRIND
   passive = Passive.GEARS
-  regional = true
 }
 
 export class FlutterMane extends Pokemon {
