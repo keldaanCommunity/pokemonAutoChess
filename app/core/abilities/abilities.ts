@@ -9338,38 +9338,8 @@ export class PowerWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
-
-    const furthestTarget =
-      pokemon.state.getFarthestTarget(pokemon, board) ?? target
-    const targetsHit: Set<PokemonEntity> = new Set()
-    const cells = board.getCellsBetween(
-      pokemon.positionX,
-      pokemon.positionY,
-      furthestTarget.positionX,
-      furthestTarget.positionY
-    )
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team != pokemon.team) {
-        targetsHit.add(cell.value)
-        pokemon.broadcastAbility({
-          skill: "POWER_WHIP/hit",
-          positionX: cell.x,
-          positionY: cell.y
-        })
-      }
-    })
-
-    if (targetsHit.size === 0) targetsHit.add(furthestTarget) // guarantee at least the furthest target is hit
-    targetsHit.forEach((enemy) => {
-      enemy.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
-    })
+    const damage = ([15, 30, 60][pokemon.stars - 1] ?? 60) + 0.5 * pokemon.hp
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }
 

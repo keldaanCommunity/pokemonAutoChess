@@ -102,7 +102,8 @@
 - Pumpkaboo and Gourgeist now have Light synergy in addition to their existing synergies. HP 90/190 → 80/180, Attack 13/26 → 10/22
 - Switch defensive stats of Burmy Trash and Burmy Sandy, and Wormadam Trash and Wormadam Sandy
 - Remoraid can now be fished when playing Wild, based on wild chance.
-- Switch abilities of Tangela and Carnivine: Tangela gets Vine Whip, Carnivine gets Power Whip
+- New ability for Tangela: Vine Whip
+- Rework Power Whip and gave to Carnivine: deal 15/30/60 special damage + 50% of user's current HP as special damage to the target.
 - Changed Grookey line passive: no longer gives PP to user and other drummers. PP gained 2/3/4 → 2/3/5
 - Buff Minior Shields Up & Down: removed ability cooldown
 - Buff Lock On (Genesect): True damage bonus 200% → 300%

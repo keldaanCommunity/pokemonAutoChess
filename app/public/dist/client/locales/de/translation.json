@@ -1845,7 +1845,6 @@
 		"PSYSHIELD_BASH": "Rennt in den Rücken des Feindes und fügt allen Gegnern im Weg [30,40,50,60,SP] SPECIAL zu und PROTECT den Zaubernden 1 Sekunde lang",
 		"QUIVER_DANCE": "Erhält [5,SP] ATK, [5,SP] SPE_DEF, [10,SP] SPEED und 20 AP",
 		"TORCH_SONG": "Bläst [4,SP] lodernde Flammen zu zufälligen Gegnern. Jede Flamme verursacht 50% des ATK als SPECIAL, mit [30,LK]% chance den Gegner für 2 Sekunden zu BURN und die AP des Nnutzers um [1,2,3] zu erhöhen.",
-		"POWER_WHIP": "Erfasst den am weitesten entfernten Gegner und entfesselt eine riesige Ranke, die allen getroffenen Feinden [30,60,100,SP] SPECIAL zufügt.",
 		"DARK_HARVEST": "Das Pokémon teleportiert sich in die größte Gruppe von Gegnern. Für die nächsten 3 Sekunden erleidet das Pokémon SILENCE und entzieht benachbarten Gegnern HP, fügt [5,10,20,SP] SPECIAL pro Sekunde zu und heilt HP für 30% der zugefügten SPECIAL",
 		"PSYSHOCK": "Verbrenne [20,40,80,SP] PP vom Ziel und erhalte sie als SHIELD. Wenn das Ziel nicht genug PP hat, wird der Rest als SPECIAL ausgeteilt.",
 		"HEAVY_SLAM": "Schlägt auf den Boden, verursacht [15,30,60,SP] SPECIAL und gewährt sich selbst [15,30,60] SHIELD. Je mehr der Anwender das Ziel an maximalen HP überwiegt, desto größer ist die Kraft des Moves.",

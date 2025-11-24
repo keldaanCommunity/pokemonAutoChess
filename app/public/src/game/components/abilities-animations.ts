@@ -632,7 +632,15 @@ export const AbilitiesAnimations: {
   [Ability.LUNAR_BLESSING]: onCasterScale2,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
-  [Ability.POWER_WHIP]: onCasterScale2,
+  [Ability.POWER_WHIP]: [
+    onCaster({
+      oriented: true,
+      scale: 4,
+      origin: [0.5, 1],
+      rotation: Math.PI / 2
+    }),
+    onTarget({ ability: "POWER_WHIP/hit", scale: 2, delay: 100 })
+  ],
   [Ability.STORED_POWER]: onCaster({
     ability: Ability.POWER_WHIP,
     tint: 0xff80ff
@@ -793,7 +801,6 @@ export const AbilitiesAnimations: {
     ability: Ability.AQUA_JET
   }),
   [Ability.EXTREME_SPEED]: [onCaster({}), onTarget({})],
-  ["POWER_WHIP/hit"]: onCasterScale3,
   [Ability.SALT_CURE]: onCaster({
     ability: Ability.MAGIC_POWDER,
     tint: 0xb0ff80,

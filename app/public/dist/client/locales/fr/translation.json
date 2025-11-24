@@ -1959,7 +1959,7 @@
 		"PSYSHIELD_BASH": "Fonce vers l'ennemi le plus éloigné, en infligeant [30,40,50,60,SP] SPECIAL à tous les ennemis sur son chemin. Le lanceur reçoit PROTECT pendant 1 seconde.",
 		"QUIVER_DANCE": "Gagne [5,SP] ATK, [5,SP] SPE_DEF, [10,SP] SPEED et 20 AP.",
 		"TORCH_SONG": "Souffle [4,SP] boules de feu sur des ennemis aléatoires. Chaque flamme inflige 50% de l'ATK en SPECIAL, avec [30,LK]% chance de BURN pendant 2 secondes, et augmente la AP du lanceur de [1,2,3].",
-		"POWER_WHIP": "S'agrippe à l'unité adverse la plus lointaine en projetant une liane gigantesque, infligeant [30,60,100,SP] SPECIAL à tous les ennemis touchés.",
+		"POWER_WHIP": "Frappe la cible avec une liane gigantesque, infligeant [15,30,60,SP] + [50,SP]% des HP actuels du lanceur en SPECIAL.",
 		"DARK_HARVEST": "Se téléporte près du plus grand groupe de Pokémon ennemis. Pendant les 3 prochaines secondes, le lanceur subit SILENCE et draine les HP des ennemis ADJACENT, infligeant [5,10,20,SP] SPECIAL per seconde et se soignant à hauteur de 30% de SPECIAL infligés.",
 		"PSYSHOCK": "Consume [20,40,80,SP] PP de la cible et les récupère en SHIELD. Si la cible n'a plus assez de PP, la quantité de PP non consumée est infligée en SPECIAL.",
 		"HEAVY_SLAM": "Le lanceur se jette sur le sol de tout son poids, infligeant [15,30,60,SP] SPECIAL à tous les ennemis ADJACENT et gagnant [15,30,60] SHIELD. Plus le lanceur a de HP max par rapport à la cible, plus la puissance de cette capacité augmente.",
