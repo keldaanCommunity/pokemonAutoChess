@@ -192,7 +192,10 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     this.applyPostEffects(blueBoard, redBoard)
+  }
 
+  start() {
+    this.started = true
     // post simulation start hooks
     for (const [player, team] of [
       [this.bluePlayer, this.blueTeam] as const,
@@ -216,10 +219,6 @@ export default class Simulation extends Schema implements ISimulation {
         })
       }
     }
-  }
-
-  start() {
-    this.started = true
   }
 
   getEffects(playerId: string) {
@@ -702,7 +701,8 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.refToBoardPokemon.supercharged) {
           pokemon.refToBoardPokemon.supercharged = false
           pokemon.status.addElectricField(pokemon)
-          pokemon.addSpeed(50, pokemon, 0, false)
+          pokemon.addSpeed(30, pokemon, 0, false)
+          pokemon.addShield(50, pokemon, 0, false)
         }
       })
     }

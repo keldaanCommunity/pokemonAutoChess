@@ -7379,5 +7379,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.ROCK_MELEE
+  },
+  [Pkm.TADBULB]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Hover,
+    attackSprite: AttackSprite.ELECTRIC_MELEE
+  },
+  [Pkm.BELLIBOLT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_MELEE
   }
 }

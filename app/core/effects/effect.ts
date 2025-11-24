@@ -91,7 +91,7 @@ interface OnSimulationStartEffectArgs {
   simulation: Simulation
   player: Player
   team: MapSchema<IPokemonEntity>
-  entity: IPokemonEntity
+  entity: PokemonEntity
 }
 
 // applied after simulation started, when the board is fully set up
@@ -266,6 +266,7 @@ export interface OnDamageReceivedEffectArgs {
   attacker: PokemonEntity | null
   board: Board
   damage: number
+  damageBeforeReduction: number
   attackType?: AttackType
   isRetaliation: boolean
 }

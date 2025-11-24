@@ -1035,12 +1035,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   onDamageReceived({
     attacker,
     damage,
+    damageBeforeReduction,
     board,
     attackType,
     isRetaliation
   }: {
     attacker: PokemonEntity | null
     damage: number
+    damageBeforeReduction: number
     board: Board
     attackType: AttackType
     isRetaliation: boolean
@@ -1068,6 +1070,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker,
         board,
         damage,
+        damageBeforeReduction,
         attackType,
         isRetaliation
       })

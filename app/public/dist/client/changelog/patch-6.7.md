@@ -11,6 +11,8 @@
 - Klink
 - Klang
 - Klinklang
+- Tadbulb
+- Bellibolt
 
 # Gameplay
 

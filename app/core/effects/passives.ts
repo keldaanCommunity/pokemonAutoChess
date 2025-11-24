@@ -1,3 +1,4 @@
+import { entity } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import {
   BasculinWhite,
@@ -1012,6 +1013,46 @@ const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
   pokemon.addStack()
 }
 
+const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
+  if (pokemon.status.electricField === false || pokemon.status.light) {
+    pokemon.status.electricField = true
+    pokemon.addSpeed(30, pokemon, 0, false)
+    pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
+  }
+  board
+    .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    .forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        const orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          cell.value.positionX,
+          cell.value.positionY,
+          pokemon,
+          undefined
+        )
+        const destination = board.getKnockBackPlace(
+          cell.value.positionX,
+          cell.value.positionY,
+          orientation
+        )
+
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board, true)
+          cell.value.cooldown = 500
+        }
+
+        cell.value.handleSpecialDamage(
+          30,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+      }
+    })
+}
+
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -1271,5 +1312,17 @@ export const PassiveEffects: Partial<
         }
       })
     }, Passive.GEARS)
+  ],
+  [Passive.TADBULB]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      if (entity.status.light) {
+        superchargeTadbulb(entity, simulation.board)
+      }
+    }),
+    new OnDamageReceivedEffect(({ pokemon, damageBeforeReduction, board }) => {
+      if (damageBeforeReduction >= 50) {
+        superchargeTadbulb(pokemon, board)
+      }
+    })
   ]
 }

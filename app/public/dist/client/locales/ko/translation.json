@@ -2785,7 +2785,7 @@
 		"AMORPHOUS_GEM": "+1 AMORPHOUS 시너지",
 		"GOURMET_GEM": "+1 GOURMET 시너지",
 		"FIRE_SHARD": "플레이어 HP 3를 소모하여 영구적으로 해당 포켓몬의 ATK +3 SPEED +3. 장착 즉시 소비되며 FIRE 포켓몬만 소비할 수 있다.",
-		"CELL_BATTERY": "대기석에 있는 CELL_BATTERY마다 모든 ELECTRIC 포켓몬에게 3 SPEED를 부여한다.\nELECTRIC 포켓몬에게 사용하면 다음 전투에서 50 SPEED와 ELECTRIC_FIELD를 부여하여 과충전시킨다.",
+		"CELL_BATTERY": "대기석에 있는 CELL_BATTERY마다 모든 ELECTRIC 포켓몬에게 3 SPEED를 부여한다.\nELECTRIC 포켓몬에게 사용하면 다음 전투에서 30 SPEED 50 SHIELD 와 ELECTRIC_FIELD를 부여하여 과충전시킨다.",
 		"TEAL_MASK": "오거폰에게 100 SHIELD 및 FLORA 부여",
 		"WELLSPRING_MASK": "오거폰에게 100 SHIELD 및 AQUATIC 부여",
 		"HEARTHFLAME_MASK": "오거폰에게 100 SHIELD 및 FIRE 부여",
