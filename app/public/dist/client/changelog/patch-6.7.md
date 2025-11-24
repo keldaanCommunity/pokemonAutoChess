@@ -32,6 +32,7 @@
 - Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
 - New effect for Grass: 40% of overheal is now gained as max HP
 - Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
+- Fighting throws now throw the target further away and always on the target's team side of the board, and only if target is at melee contact.
 
 # Changes to Items
 

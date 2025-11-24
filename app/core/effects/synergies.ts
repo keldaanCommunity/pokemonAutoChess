@@ -344,14 +344,26 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
         pokemon.targetX,
         pokemon.targetY
       )
-      const destination = pokemon.state.getNearestAvailablePlaceCoordinates(
-        pokemon,
-        board,
-        4
+      if (
+        !targetAtContact ||
+        distanceC(
+          pokemon.targetX,
+          pokemon.targetY,
+          pokemon.positionX,
+          pokemon.positionY
+        ) > 1
+      ) {
+        // no target or not at contact
+        return
+      }
+
+      const destination = board.getSafePlaceAwayFrom(
+        pokemon.targetX,
+        pokemon.targetY,
+        targetAtContact.team
       )
       if (
         destination &&
-        targetAtContact &&
         targetAtContact.items.has(Item.PROTECTIVE_PADS) === false
       ) {
         targetAtContact.shield = 0
