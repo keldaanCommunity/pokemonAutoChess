@@ -1370,7 +1370,6 @@
 		"WONDER_GUARD": "Infliggi [30,60,120,SP] SPECIAL e causa a tutti i Pokèmon nemici adiacenti PARALYSIS per 3 secondi.",
 		"ELECTRIC_SURGE": "Potenzia la SPEED di tutti i Pokémon ELECTRIC del [10,SP].",
 		"PSYCHIC_SURGE": "Aumenta i AP di tutti i Pokémon PSYCHIC del [20,SP], tranne l'utilizzatore.",
-		"MIND_BLOWN": "Infliggi il [50,SP]% dei HP attuali del bersaglio come SPECIAL.",
 		"PAYDAY": "Infliggi [30,60,90,SP] SPECIAL. Se il bersaglio va KO, il giocatore riceve [1,2,3] GOLD.",
 		"PICKUP": "Infliggi [30,60,120,SP] SPECIAL e ruba uno degli oggetti equipaggiati dal bersaglio. Se non ha oggetti, ruba invece [1,2,3] GOLD",
 		"BEAT_UP": "Evoca [1,2,3] Houndour ([100,SP]% HP, nessun oggetto)",

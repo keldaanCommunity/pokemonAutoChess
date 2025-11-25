@@ -397,6 +397,7 @@ export interface AbilityAnimationOptions {
   origin?: [number, number]
   depth?: number
   tint?: number
+  tintFill?: number
   alpha?: number
   destroyOnComplete?: boolean
   animOptions?: Omit<Phaser.Types.Animations.PlayAnimationConfig, "key">

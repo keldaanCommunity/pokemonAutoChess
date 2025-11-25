@@ -1258,7 +1258,6 @@
 		"WONDER_GUARD": "Gây [30,60,120,SP] SPECIAL lên toàn bộ đối thủ ở gần, sau đó PARALYSIS chúng trong 3 giây",
 		"ELECTRIC_SURGE": "Tăng [10,SP] SPEED cho toàn bộ Pokémon hệ ELECTRIC",
 		"PSYCHIC_SURGE": "Tăng [20,SP] AP cho toàn bộ Pokémon hệ PSYCHIC trừ Pokémon thi triển",
-		"MIND_BLOWN": "Gây SPECIAL tương đương với [50,SP] % HP hiện tại của mục tiêu",
 		"PAYDAY": "Gây [30,60,90,SP] SPECIAL. Nếu mục tiêu bị hạ gục, người chơi nhận được [1,2,3] GOLD",
 		"BEAT_UP": "Triệu hồi [1,2,3] Houndour ([100,SP]% HP, không có trang bị)",
 		"BLUE_FLARE": "Gây [50,SP] SPECIAL + 10 cho từng cấp bậc hiệu ứng hệ FIRE lên mục tiêu và đối thủ gần nó",
