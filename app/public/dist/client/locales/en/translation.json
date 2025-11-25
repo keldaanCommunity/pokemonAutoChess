@@ -3059,7 +3059,7 @@
 		"PILLAR": "Builds [1,1,2] movable pillars that block the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
 		"INANIMATE": "Inanimate objects cannot be copied, benched or sold. They cannot move or attack, and are immune to status effects.",
 		"BERSERK": "Gains 5 AP each time a Pokémon is affected by its ability.",
-		"APPLIN": "Applin is looking for a SWEET_APPLE, a TART_APPLE or a SIRUPY_APPLE.",
+		"APPLIN": "Applin will evolve when given an apple:\nTART_APPLE: $t(pkm.FLAPPLE)\nSWEET_APPLE: $t(pkm.APPLETUN)\nSIRUPY_APPLE: $t(pkm.DIPPLIN)",
 		"DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE.",
 		"WELL_BAKED": "The Pokémon doesn't suffer from BURN. Instead, it gains 20 DEF when burning.",
 		"CONVERSION": "Conversion: Get the highest synergy of your opponent and its effects at the start of the fight.",
