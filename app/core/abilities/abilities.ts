@@ -7653,7 +7653,7 @@ export class BarbBarrageStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = [20, 40, 60, 80][pokemon.stars - 1] ?? 80
+    const damage = [15, 30, 45, 60][pokemon.stars - 1] ?? 60
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
 

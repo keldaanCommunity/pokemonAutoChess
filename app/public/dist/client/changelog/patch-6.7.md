@@ -27,11 +27,11 @@
 
 # Changes to Synergies
 
+- Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
+- New effect for Grass: 40% of overheal is now gained as max HP
 - Psychic synergy thresholds changed: 2/4/6 → 3/5/7
 - New effect for Psychic 3: A Unown has 5% chance to appear in your shop
 - New effect for Psychic 7: Get a unown shop and a free shop reroll after every fight and every 10 shop rerolls.
-- Rework Electric 7: Supercharged: Triple attacks also burn 10 PP of the target and charge a Cell Battery by 5%. Each cell battery on bench gives 3 Speed to all your Electric Pokémon. Cell batteries can also be used on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 50 Speed and Electric Field.
-- New effect for Grass: 40% of overheal is now gained as max HP
 - Changed Ice: freeze chance on hit is now 30% at all levels, Special defense buffs: 4/12/40/60 → 4/12/30/60
 - Fighting throws now throw the target further away and always on the target's team side of the board, and only if target is at melee contact.
 
@@ -86,7 +86,7 @@
 - Buff Meltan: PP 80 → 50
 - Nerf Flutter Mane: Attack 20 → 17
 - Nerf Plusle & Minun: PP 60 → 70
-- Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15
+- Nerf Hisuian Qwilfish: no longer gains 1 AP per cast. Def: 15/18 → 12/15 ; Barb barrage damage: 20/40/60/80 → 15/30/45/60
 - Bellossom is now Flora/Grass/Sound instead of Flora/Poison/Grass
 - Armarouge and Ceruledge now have Human synergy in addition to their existing synergies. Nerf defense ans special defense statistics as a tradeoff.
 - Buff Armor Cannon (Armarouge): secondary damage 30 → 50, final damage 15 → 25

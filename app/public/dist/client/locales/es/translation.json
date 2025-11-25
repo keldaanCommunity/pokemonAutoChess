@@ -1866,7 +1866,7 @@
 		"VINE_WHIP": "Inflige [30,60,100,SP] de SPECIAL y además causa PARALYSIS al objetivo y a todos los pokémon en una casilla ADJACENT a él durante 3 segundos.",
 		"BODY_SLAM": "Inflige [30,SP]% del HP máximo del usuario como SPECIAL.",
 		"STOCKPILE": "El usuario se infla, aumentando sus HP máximos en [50,SP] y perdiendo 10 de SPEED. La tercera vez que lanza la habilidad el usuario escupe sus reservas, infligiendo [50,SP]% de sus HP máximos como SPECIAL al objetivo y sale disparado hacia la retaguardia recuperando sus estadísticas de HP y SPEED originales.",
-		"BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [20,40,60,80,SP] de SPECIAL y dejando POISONNED durante 3 segundos a todos los Pokémon en una casilla ADJACENT.",
+		"BARB_BARRAGE": "Bucea en medio del equipo enemigo, causando [15,30,45,60,SP] de SPECIAL y dejando POISONNED durante 3 segundos a todos los Pokémon en una casilla ADJACENT.",
 		"MAGIC_POWDER": "Gana [10,20,40,SP] de SHIELD y deja SILENCE a los enemigos en una casilla ADJACENT al objetivo durante [2,3,4] segundos",
 		"INFERNAL_PARADE": "Lanza una rueda flamígera de ida y vuelta con [50,LK]% chance de dejar BURN por 3 segundos y causando [30, SP] de SPECIAL 2 veces a los Pokémon con los que choca",
 		"RETALIATE": "Inflige [150,SP]% del ATK como SPECIAL al objetivo + 1 ataque adicional por aliado caido",
