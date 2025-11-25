@@ -1948,7 +1948,7 @@
 		"PSYSTRIKE": "Matérialise une vague psychique vers l'ennemi le plus éloigné, infligeant [80,SP] SPECIAL et téléportant toutes les unités sur son chemin.",
 		"FACADE": "Inflige [20,40,80,SP] SPECIAL. Dégâts doublés si le lanceur a une condition de statut négatif.",
 		"DREAM_EATER": "Si un ennemi est en SLEEP, saute jusqu'à lui et inflige [45,90,150,SP] SPECIAL en se soignant du même montant en HP. Sinon, inflige SLEEP à la cible pendant [3,4,5,SP] secondes et regagne tous ses PP.",
-		"SPARK": "Lance une étincelle vers la cible, infligeant [40,80,SP] SPECIAL. L'étincelle peut rebondir jusqu'à 4 fois vers un ennemi ADJACENT, chaque rebond diminuant de moitié les SPECIAL.",
+		"SPARK": "Lance une étincelle vers la cible, infligeant [30,60,90,SP] SPECIAL. L'étincelle peut rebondir jusqu'à 4 fois vers un ennemi ADJACENT, chaque rebond diminuant de moitié les SPECIAL.",
 		"CRUNCH": "Inflige [40,80,150,SP] SPECIAL à la cible. Si elle est mise KO, le lanceur se soigne à hauteur de 50% des HP max de la cible.",
 		"CROSS_POISON": "Inflige [30,60,120,SP] SPECIAL et POISONNED pendant 2 secondes à la cible et aux ennemis ADJACENT.",
 		"DOUBLE_EDGE": "Inflige [55,110,220,SP] PHYSICAL à la cible. Le lanceur se blesse lui-même et subit [20,40,60,SP] PHYSICAL.",

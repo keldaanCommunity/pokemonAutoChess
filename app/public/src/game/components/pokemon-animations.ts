@@ -1211,14 +1211,14 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.DARK_HIT
   },
   [Pkm.SPEAROW]: {
-    attack: AnimationType.Shoot,
+    attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE,
     hitSprite: HitSprite.FLYING_HIT
   },
   [Pkm.FEAROW]: {
-    attack: AnimationType.Shoot,
+    attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE,
@@ -7390,6 +7390,12 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shock,
     emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_MELEE
+  },
+  [Pkm.PINCURCHIN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shock,
     attackSprite: AttackSprite.ELECTRIC_MELEE
   }
 }

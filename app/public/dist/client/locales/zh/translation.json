@@ -1948,7 +1948,7 @@
 		"PSYSTRIKE": "将神奇的念波实体化攻击最远的敌方宝可梦，对经过的所有目标造成[80,SP]点SPECIAL并将他们随机传送至其他位置。",
 		"FACADE": "对目标造成[20,40,80,SP]点SPECIAL。若使用者处于负面状态下，造成的伤害翻倍。",
 		"DREAM_EATER": "若有敌人处于SLEEP，跳至其身边，对其造成[45,90,150,SP]点SPECIAL，使用者自身恢复等量HP。否则，使目标陷入SLEEP [3,4,5,SP]秒，并恢复PP至满。",
-		"SPARK": "对目标发射一道电光，造成[40,80,SP]点SPECIAL。这道电光可以弹射至ADJACENT敌方宝可梦身上，至多弹射4次，每次使伤害减半。",
+		"SPARK": "对目标发射一道电光，造成[30,60,90,SP]点SPECIAL。这道电光可以弹射至ADJACENT敌方宝可梦身上，至多弹射4次，每次使伤害减半。",
 		"CRUNCH": "对目标造成[40,80,150,SP]点SPECIAL。若目标因此倒下，为使用者恢复HP，数值相当于目标最大HP的50%。",
 		"CROSS_POISON": "对目标及其ADJACENT敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入POISONNED 2秒。",
 		"DOUBLE_EDGE": "对目标造成[55,110,220,SP]点PHYSICAL，使用者自己受到[20,40,60,SP]点PHYSICAL。",

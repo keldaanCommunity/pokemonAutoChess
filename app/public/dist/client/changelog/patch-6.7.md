@@ -13,6 +13,7 @@
 - Klinklang
 - Tadbulb
 - Bellibolt
+- Pincurchin
 
 # Gameplay
 
@@ -107,6 +108,7 @@
 - Rework Power Whip and gave to Carnivine: deal 15/30/60 special damage + 50% of user's current HP as special damage to the target.
 - Changed Grookey line passive: no longer gives PP to user and other drummers. PP gained 2/3/4 → 2/3/5
 - Buff Minior Shields Up & Down: removed ability cooldown
+- Buff Mud Bubble: reduce cooldown duration
 - Buff Lock On (Genesect): True damage bonus 200% → 300%
 - Buff Maractus: PP 90 → 80
 - Zygarde PP no longer resets to 0 when transforming into Complete form
@@ -114,6 +116,7 @@
 - Reworked First Impression (Wimpod): deals 45/90/180 special damage and inflicts Flinch for 5 seconds. On first cast, jumps backwards, spawning a random 1 star [common, uncommon, rare] Bug Pokémon at their previous location. PP 140 → 100.
 - Brave Bird and Follow me now always move to a position on your side of the board
 - Smoliv line is no longer regional
+- Change Spark damage: 40/80 → 30/60/90 ; Wattrel line PP 100 → 80
 
 # Town Encounters
 

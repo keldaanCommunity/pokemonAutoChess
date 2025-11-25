@@ -6015,6 +6015,7 @@ export class MudBubbleStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1, crit)
+    pokemon.resetCooldown(250, pokemon.speed)
   }
 }
 
@@ -9053,7 +9054,44 @@ export class SparkStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = pokemon.stars === 1 ? 40 : 80
+    const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
+    const enemiesHit = new Set<PokemonEntity>()
+
+    const propagate = (currentTarget: PokemonEntity, nbBounce = 1) => {
+      const newTarget = board
+        .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
+        .find(
+          (cell) =>
+            cell.value &&
+            cell.value.team === target.team &&
+            !enemiesHit.has(cell.value)
+        )?.value
+
+      if (newTarget) {
+        enemiesHit.add(newTarget)
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            pokemon.broadcastAbility({
+              targetX: newTarget.positionX,
+              targetY: newTarget.positionY,
+              positionX: currentTarget.positionX,
+              positionY: currentTarget.positionY,
+              ap: pokemon.ap - nbBounce * 20
+            })
+            const reducedDamage = Math.ceil(damage / Math.pow(2, nbBounce))
+            newTarget.handleSpecialDamage(
+              reducedDamage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit,
+              true
+            )
+            propagate(newTarget, nbBounce + 1)
+          }, 250)
+        )
+      }
+    }
 
     target.handleSpecialDamage(
       damage,
@@ -9064,43 +9102,7 @@ export class SparkStrategy extends AbilityStrategy {
       true
     )
 
-    let previousTarget = target
-    let currentTarget = target
-    let n = 0
-    while (n <= 4) {
-      const newTarget = board
-        .getAdjacentCells(currentTarget.positionX, currentTarget.positionY)
-        .find(
-          (cell) =>
-            cell.value &&
-            cell.value.team === target.team &&
-            cell.value !== previousTarget
-        )?.value
-
-      if (newTarget) {
-        pokemon.broadcastAbility({
-          targetX: newTarget.positionX,
-          targetY: newTarget.positionY,
-          positionX: currentTarget.positionX,
-          positionY: currentTarget.positionY,
-          delay: n
-        })
-        damage = Math.ceil(damage / 2)
-        newTarget.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit,
-          true
-        )
-        previousTarget = currentTarget
-        currentTarget = newTarget
-        n++
-      } else {
-        break
-      }
-    }
+    propagate(target)
   }
 }
 

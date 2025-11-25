@@ -1616,7 +1616,8 @@
 		"ORTHWORM": "Orthworm",
 		"IRON_THORNS": "Iron Thorns",
 		"TADBULB": "Tadbulb",
-		"BELLIBOLT": "Bellibolt"
+		"BELLIBOLT": "Bellibolt",
+		"PINCURCHIN": "Pincurchin"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1955,7 +1956,7 @@
 		"PSYSTRIKE": "Materialize a strange psychic wave toward the farthest enemy Pokémon, dealing [80,SP] SPECIAL to them and teleporting all Pokémon in its path.",
 		"FACADE": "Deal [20,40,80,SP] SPECIAL, doubled if the user suffers from a negative status condition.",
 		"DREAM_EATER": "Jump next to an enemy suffering from SLEEP, deal [45,90,150,SP] SPECIAL and heal for the same amount of HP. If no enemy Pokémon suffer from SLEEP, put the target to SLEEP for [3,4,5,SP] seconds and regain all PP.",
-		"SPARK": "Fire a spark charged with electricity at the target, dealing [40,80,SP] SPECIAL. The spark can bounce up to 4 times between ADJACENT enemy Pokémon. Each rebound halves the SPECIAL.",
+		"SPARK": "Fire a spark charged with electricity at the target, dealing [30,60,90,SP] SPECIAL. The spark can bounce up to 4 times between ADJACENT enemy Pokémon. Each rebound halves the SPECIAL.",
 		"CRUNCH": "Deal [40,80,150,SP] SPECIAL to the target. If it knocks out the target, heal for 50% of the target's max HP.",
 		"CROSS_POISON": "Deal [30,60,120,SP] SPECIAL to the target and enemy Pokémon ADJACENT to them and inflict them with POISONNED for 2 seconds.",
 		"DOUBLE_EDGE": "Deal [55,110,220,SP] PHYSICAL to target. The user hurts itself for [20,40,60,SP] PHYSICAL.",
@@ -2642,6 +2643,7 @@
 		"GOURMET_MEMORY": "Gourmet Memory",
 		"MONSTER_MEMORY": "Monster Memory",
 		"AQUATIC_MEMORY": "Aquatic Memory",
+		"DRAGON_MEMORY": "Dragon Memory",
 		"MISSION_ORDER_BLUE": "Mission Order - Level up!",
 		"MISSION_ORDER_RED": "Mission Order - Destroy!",
 		"MISSION_ORDER_GREEN": "Mission Order - Diversify!",
@@ -2924,6 +2926,7 @@
 		"GOURMET_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get GOURMET type.",
 		"MONSTER_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get MONSTER type.",
 		"AQUATIC_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get AQUATIC type.",
+		"DRAGON_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get DRAGON type.",
 		"MISSION_ORDER_PINK": "Complete this mission to earn 30 GOLD:\n get 5 STAR STAR STAR Pokémon",
 		"MISSION_ORDER_RED": "Complete this mission to earn 30 GOLD:\n inflict 100 damage to other players",
 		"MISSION_ORDER_BLUE": "Complete this mission to earn 30 GOLD:\n reach level 9",
@@ -3103,7 +3106,8 @@
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
 		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED per second to your team.",
 		"ORTHWORM": "When digging a hole, gains 5 HP permanently.",
-		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal [30,SP] SPECIAL to adjacent enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD."
+		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal [30,SP] SPECIAL to adjacent enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD.",
+		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds."
 	},
 	"stat": {
 		"ATK": "Attack",
