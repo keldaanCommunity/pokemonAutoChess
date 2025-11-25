@@ -119,6 +119,7 @@
 - Smoliv line is no longer regional
 - Change Spark damage: 40/80 → 30/60/90 ; Wattrel line PP 100 → 80
 - Rework Blacephalon: now Legendary Fire/Ghost/Human. Rework Mind Blown: Throws its head in the air, which then explodes into 5 fireworks. The user takes 50% of its max HP as true damage in the process. Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color.
+- Regieleki is now Electric/Human/Amorphous instead of Electric/Human/Fossil
 
 # Town Encounters
 

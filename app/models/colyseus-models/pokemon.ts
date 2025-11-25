@@ -8221,7 +8221,7 @@ export class Regieleki extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.ELECTRIC,
     Synergy.HUMAN,
-    Synergy.FOSSIL
+    Synergy.AMORPHOUS
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
