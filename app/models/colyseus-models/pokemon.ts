@@ -14778,7 +14778,7 @@ export class Wattrel extends Pokemon {
   speed = 65
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 2
   skill = Ability.SPARK
   additional = true
@@ -14794,7 +14794,7 @@ export class Kilowattrel extends Pokemon {
   speed = 65
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 2
   skill = Ability.SPARK
   additional = true
@@ -19350,6 +19350,25 @@ export class Bellibolt extends Pokemon {
   additional = true
 }
 
+export class Pincurchin extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.AQUATIC,
+    Synergy.AMORPHOUS
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 15
+  speed = 30
+  def = 12
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.SPARK
+  passive = Passive.PINCURCHIN
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20434,7 +20453,8 @@ export const PokemonClasses: Record<
   [Pkm.ORTHWORM]: Orthworm,
   [Pkm.IRON_THORNS]: IronThorns,
   [Pkm.TADBULB]: Tadbulb,
-  [Pkm.BELLIBOLT]: Bellibolt
+  [Pkm.BELLIBOLT]: Bellibolt,
+  [Pkm.PINCURCHIN]: Pincurchin
 }
 
 // declare all the classes in colyseus schema TypeRegistry

@@ -1324,5 +1324,24 @@ export const PassiveEffects: Partial<
         superchargeTadbulb(pokemon, board)
       }
     })
+  ],
+  [Passive.PINCURCHIN]: [
+    new OnDamageReceivedEffect(({ pokemon, attackType, attacker }) => {
+      if (attackType === AttackType.SPECIAL) {
+        pokemon.status.electricField = true
+      }
+      if (
+        pokemon.status.electricField &&
+        attacker &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) <= 1
+      ) {
+        attacker.status.triggerParalysis(2000, attacker, pokemon)
+      }
+    })
   ]
 }

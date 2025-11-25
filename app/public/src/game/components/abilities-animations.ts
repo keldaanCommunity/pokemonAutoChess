@@ -1574,11 +1574,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.PSYSTRIKE]: projectile({ duration: 1000 }),
   [Ability.EGG_BOMB]: projectile({ duration: 800, scale: 3 }),
-  [Ability.SPARK]: (args) =>
-    projectile({
-      duration: 300,
-      tweenProps: { delay: (args.delay || 0) * 400 }
-    })(args),
+  [Ability.SPARK]: projectile({ duration: 250 }),
   [Ability.SUCTION_HEAL]: projectile({
     scale: 3,
     startCoords: "target",

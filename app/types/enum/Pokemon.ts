@@ -659,6 +659,7 @@ export enum Pkm {
   PILLAR_IRON = "PILLAR_IRON",
   PILLAR_CONCRETE = "PILLAR_CONCRETE",
   PILOSWINE = "PILOSWINE",
+  PINCURCHIN = "PINCURCHIN",
   PINECO = "PINECO",
   PINSIR = "PINSIR",
   PIPLUP = "PIPLUP",
@@ -2122,7 +2123,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.ALCREMIE_RAINBOW_SWIRL]: "0869-0056",
   [Pkm.FALINKS_BRASS]: "0870-0002",
   [Pkm.FALINKS_TROOPER]: "0870-0003",
-  //[Pkm.PINCURCHIN]: "0871",
+  [Pkm.PINCURCHIN]: "0871",
   [Pkm.SNOM]: "0872",
   [Pkm.FROSMOTH]: "0873",
   [Pkm.STONJOURNER]: "0874",
@@ -3373,7 +3374,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ORTHWORM]: Pkm.ORTHWORM,
   [Pkm.IRON_THORNS]: Pkm.IRON_THORNS,
   [Pkm.TADBULB]: Pkm.TADBULB,
-  [Pkm.BELLIBOLT]: Pkm.TADBULB
+  [Pkm.BELLIBOLT]: Pkm.TADBULB,
+  [Pkm.PINCURCHIN]: Pkm.PINCURCHIN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

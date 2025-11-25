@@ -180,5 +180,6 @@ export enum Passive {
   ROTOM = "ROTOM",
   GEARS = "GEARS",
   ORTHWORM = "ORTHWORM",
-  TADBULB = "TADBULB"
+  TADBULB = "TADBULB",
+  PINCURCHIN = "PINCURCHIN"
 }
