@@ -10234,14 +10234,14 @@ export class GlaiveRushStrategy extends AbilityStrategy {
         targetX: destination.x,
         targetY: destination.y
       })
-
-      pokemon.moveTo(destination.x, destination.y, board, false)
       const cells = board.getCellsBetween(
         pokemon.positionX,
         pokemon.positionY,
         destination.x,
         destination.y
       )
+      pokemon.moveTo(destination.x, destination.y, board, false)
+
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           enemiesHit.add(cell.value)
