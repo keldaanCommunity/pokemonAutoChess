@@ -225,8 +225,8 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.SOUND_HIT
   },
   [Pkm.WIGGLYTUFF]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Sleep,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.SOUND_RANGE,
     hitSprite: HitSprite.SOUND_HIT
