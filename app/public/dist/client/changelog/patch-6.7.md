@@ -114,6 +114,7 @@
 - Reworked First Impression (Wimpod): deals 45/90/180 special damage and inflicts Flinch for 5 seconds. On first cast, jumps backwards, spawning a random 1 star [common, uncommon, rare] Bug Pokémon at their previous location. PP 140 → 100.
 - Brave Bird and Follow me now always move to a position on your side of the board
 - Smoliv line is no longer regional
+- Rework Blacephalon: now Legendary Fire/Ghost/Human. Rework Mind Blown: Throws its head in the air, which then explodes into 5 fireworks. The user takes 50% of its max HP as true damage in the process. Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color.
 
 # Town Encounters
 

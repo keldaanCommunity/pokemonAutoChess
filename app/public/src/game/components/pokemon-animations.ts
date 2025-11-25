@@ -2878,8 +2878,8 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.ROCK_HIT
   },
   [Pkm.BLACEPHALON]: {
-    attack: AnimationType.Hop,
-    ability: AnimationType.Attack,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.GHOST_RANGE,
     hitSprite: HitSprite.FIRE_HIT

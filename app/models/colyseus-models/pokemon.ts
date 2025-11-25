@@ -8507,15 +8507,15 @@ export class Stakataka extends Pokemon {
 }
 
 export class Blacephalon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST])
-  rarity = Rarity.UNIQUE
+  types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.GHOST, Synergy.HUMAN])
+  rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
-  atk = 13
-  speed = 59
-  def = 6
-  speDef = 6
-  maxPP = 80
+  atk = 25
+  speed = 69
+  def = 5
+  speDef = 9
+  maxPP = 120
   range = 3
   skill = Ability.MIND_BLOWN
 }

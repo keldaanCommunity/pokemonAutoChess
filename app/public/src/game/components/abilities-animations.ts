@@ -324,6 +324,7 @@ export function addAbilitySprite(
     scale,
     depth,
     tint,
+    tintFill,
     rotation,
     angle,
     alpha,
@@ -348,6 +349,7 @@ export function addAbilitySprite(
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
+  if (tintFill) sprite.setTintFill(tintFill)
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
@@ -1152,10 +1154,6 @@ export const AbilitiesAnimations: {
   [Ability.SONG_OF_DESIRE]: onTarget({ positionOffset: [0, -60] }),
   [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
   [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
-  [Ability.MIND_BLOWN]: [
-    onCaster({ origin: [0.5, 0.8] }),
-    onTarget({ ability: "MIND_BLOWN/hit", scale: 3 })
-  ],
   [Ability.FIRE_LASH]: onCaster({
     ability: Ability.FISHIOUS_REND,
     tint: 0xff6000,
@@ -2406,6 +2404,42 @@ export const AbilitiesAnimations: {
       }
     })
   },
+
+  [Ability.MIND_BLOWN]: (args) => {
+    const { scene, ability, ap, positionX, positionY, targetX, targetY, flip } =
+      args
+    const coordinates = transformEntityCoordinates(positionX, positionY, flip)
+    const topCoords = transformEntityCoordinates(targetX, targetY + 1, false)
+    const head = addAbilitySprite(scene, ability, ap, [
+      coordinates[0],
+      coordinates[1] - 32 * (flip ? -1 : 1)
+    ])
+
+    scene.add.tween({
+      targets: head,
+      x: { value: topCoords[0], ease: Phaser.Math.Easing.Linear },
+      y: {
+        value: topCoords[1],
+        ease:
+          Math.sign(targetY - positionY) === Math.sign(flip ? +1 : -1)
+            ? Phaser.Math.Easing.Back.In
+            : Phaser.Math.Easing.Back.Out
+      },
+      duration: 1000,
+      onComplete: () => {
+        head?.destroy()
+      }
+    })
+  },
+
+  ["MIND_BLOWN_FIREWORK"]: (args) =>
+    onTarget({
+      ability: Ability.MAGIC_POWDER,
+      scale: 3,
+      tintFill: [0xd369c3, 0x41acf0, 0xe9ef4d, 0xfefff9][args.delay ?? 0],
+      positionOffset: [randomBetween(-50, 50), randomBetween(-50, 50)],
+      delay: randomBetween(0, 200)
+    })(args),
 
   [Ability.ARM_THRUST]: (args) => {
     // delay is used to pass the info of the number of hits
