@@ -8528,8 +8528,8 @@ export class Houndour extends Pokemon {
   hp = 90
   atk = 7
   speed = 55
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 10
   maxPP = 110
   range = 1
   skill = Ability.BEAT_UP
@@ -8541,11 +8541,11 @@ export class Houndoom extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   //evolution = Pkm.MEGA_HOUNDOOM
-  hp = 160
-  atk = 18
+  hp = 175
+  atk = 24
   speed = 55
-  def = 12
-  speDef = 12
+  def = 10
+  speDef = 14
   maxPP = 110
   range = 1
   skill = Ability.BEAT_UP

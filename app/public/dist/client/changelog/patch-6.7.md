@@ -111,6 +111,7 @@
 - Buff Mud Bubble: reduce cooldown duration
 - Buff Lock On (Genesect): True damage bonus 200% → 300%
 - Buff Maractus: PP 90 → 80
+- Buff Houndoom: HP 160 → 175 ; Attack 18 → 24 ; Def/Spedef: 12/12 → 10/14
 - Zygarde PP no longer resets to 0 when transforming into Complete form
 - Gligar is now Epic additional pick. Removed item evolution rule. Adjusted stats.
 - Reworked First Impression (Wimpod): deals 45/90/180 special damage and inflicts Flinch for 5 seconds. On first cast, jumps backwards, spawning a random 1 star [common, uncommon, rare] Bug Pokémon at their previous location. PP 140 → 100.
