@@ -2135,7 +2135,7 @@
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining ELECTRIC_FIELD, 30 SPEED and [50,SP] max HP. Then every third attack chains through up to 4 nearby enemies, dealing [20,SP] SPECIAL each.",
-		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all adjacent enemy Pokemon and gaining [10,20,40,SP] SHIELD"
+		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokemon and gaining [10,20,40,SP] SHIELD"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3106,7 +3106,7 @@
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
 		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED per second to your team.",
 		"ORTHWORM": "When digging a hole, gains 5 HP permanently.",
-		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal [30,SP] SPECIAL to adjacent enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD.",
+		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal [30,SP] SPECIAL to ADJACENT enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD.",
 		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds."
 	},
 	"stat": {
