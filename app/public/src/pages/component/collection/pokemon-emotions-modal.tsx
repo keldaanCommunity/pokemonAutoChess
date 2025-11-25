@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { BoosterPriceByRarity } from "../../../../../config"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed/precomputed-emotions"
+import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
@@ -38,9 +38,8 @@ export default function PokemonEmotionsModal(props: {
   const rarity = getPokemonData(props.pokemon).rarity
   const boosterCost = BoosterPriceByRarity[rarity]
 
-  const availableEmotions: Emotion[] = Object.values(Emotion).filter(
-    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[index]?.[i] === 1
-  )
+  const availableEmotions = getAvailableEmotions(index, false)
+  const shinyAvailableEmotions = getAvailableEmotions(index, true)
 
   const shinyAvailable =
     PokemonAnimations[props.pokemon]?.shinyUnavailable !== true
@@ -136,7 +135,7 @@ export default function PokemonEmotionsModal(props: {
             <section>
               <p>{t("shiny_emotions")}</p>
               <div>
-                {availableEmotions.map((e) => {
+                {shinyAvailableEmotions.map((e) => {
                   return (
                     <PokemonEmotion
                       key={e}

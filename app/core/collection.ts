@@ -1,5 +1,5 @@
 import { BoosterRarityProbability, EmotionCost } from "../config"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../models/precomputed/precomputed-emotions"
+import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
@@ -78,9 +78,8 @@ export function pickRandomPokemonBooster(
     }
   }
 
-  const availableEmotions = Object.values(Emotion).filter(
-    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[PkmIndex[name]]?.[i] === 1
-  )
+  const shiny = chance(0.05)
+  const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
   const emotion =
     randomWeighted<Emotion>(
       availableEmotions.reduce(
@@ -88,7 +87,7 @@ export function pickRandomPokemonBooster(
         {}
       )
     ) ?? Emotion.NORMAL
-  const shiny = chance(0.05)
+
   const hasAlreadyUnlocked = CollectionUtils.hasUnlockedCustom(
     user.pokemonCollection,
     {
@@ -98,7 +97,7 @@ export function pickRandomPokemonBooster(
     }
   )
 
-  return { name: name, shiny, emotion, new: !hasAlreadyUnlocked }
+  return { name, shiny, emotion, new: !hasAlreadyUnlocked }
 }
 
 // Utility functions for working with collection and the optimized unlocked field

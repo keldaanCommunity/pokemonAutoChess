@@ -60,6 +60,10 @@
   justify-content: space-around;
 }
 
+.pokemon-emotions-modal section {
+  flex: 1;
+}
+
 .pokemon-emotions-modal section p {
   text-align: center;
   margin: 0;
