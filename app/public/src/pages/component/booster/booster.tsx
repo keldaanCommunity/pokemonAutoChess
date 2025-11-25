@@ -15,6 +15,7 @@ export default function Booster() {
   const numberOfBooster = user ? user.booster : 0
 
   const [flippedStates, setFlippedStates] = useState<boolean[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setFlippedStates(new Array(boosterContent.length).fill(false))
@@ -24,9 +25,16 @@ export default function Booster() {
   useEffect(
     () => () => {
       dispatch(setBoosterContent([]))
+      setLoading(false)
     },
     [dispatch]
   )
+
+  useEffect(() => {
+    if (boosterContent.length > 0) {
+      setLoading(false)
+    }
+  }, [boosterContent])
 
   function onClickOpenBooster() {
     if (flippedStates.some((flipped) => !flipped)) {
@@ -34,6 +42,7 @@ export default function Booster() {
     } else if (numberOfBooster > 0) {
       dispatch(setBoosterContent([]))
       dispatch(openBooster())
+      setLoading(true)
     }
   }
 
@@ -62,7 +71,7 @@ export default function Booster() {
         <button
           onClick={onClickOpenBooster}
           className={cc("bubbly", { blue: numberOfBooster > 0 })}
-          disabled={numberOfBooster <= 0}
+          disabled={numberOfBooster <= 0 || loading}
         >
           {t("open_booster")}
         </button>
