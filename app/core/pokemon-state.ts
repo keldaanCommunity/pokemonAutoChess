@@ -1061,7 +1061,12 @@ export default abstract class PokemonState {
       }
     }
     if (candidates.length > 0) {
-      return pickRandomIn(candidates)
+      const pokedollHolders = candidates.filter((p) =>
+        p.items.has(Item.POKE_DOLL)
+      )
+      return pickRandomIn(
+        pokedollHolders.length > 0 ? pokedollHolders : candidates
+      )
     } else {
       return undefined
     }

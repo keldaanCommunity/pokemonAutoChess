@@ -2701,7 +2701,7 @@
 		"GRACIDEA_FLOWER": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW gain +20 SPEED",
 		"FLAME_ORB": "Holder suffers from BURN during the entire fight but increases its base ATK by 100%.",
 		"ASSAULT_VEST": "+40 SPE_DEF. Reduce BURN and POISONNED damage by 50%",
-		"POKE_DOLL": "Reduce all incoming PHYSICAL and SPECIAL by 30%",
+		"POKE_DOLL": "Reduce all incoming PHYSICAL and SPECIAL by 30%. Makes the holder more likely to be targeted.",
 		"RED_ORB": "25% of attack damage is dealt as TRUE",
 		"MAX_REVIVE": "Give RESURRECTION, preventing the holder first KO and restoring to max HP",
 		"ROCKY_HELMET": "+25 DEF. Negates critical bonus damage from all incoming critical hits.",

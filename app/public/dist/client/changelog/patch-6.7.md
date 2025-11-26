@@ -45,6 +45,7 @@
 - Choice Scarf is renamed Loaded Dice. Now gives +30 Luck as base stat. Attacks have ~~100~~ 50% chance to bounce to a random enemy for ~~50~~ 100% of the attack damage.
 - Lucky Egg is replaced by Heavy-Duty Boots: Base stats: 12 Defense 30 AP; The holder is immune to board effects and forced displacement.
 - X-Ray Vision has a new icon
+- Changed Poke Doll: holder is now more likely to be chosen as a target. When a Pokémon considers a new target between several at equal distance, it will prefer to target the holder of Poke Doll.
 - Electirizer now gives Electric type. Removed PP burn on triple attacks.
 - Magmarizer now gives Fire type. Base stat: Attack 3 → 5 New effect: The holder doesn't suffer from Burn. Instead, it gains 30 Speed when it is affected by Burn.
 - Pokerus Vial now gives Poison type.
