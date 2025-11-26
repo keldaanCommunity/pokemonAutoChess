@@ -19,7 +19,8 @@ const TechnicalTerms = [
   "STRONGEST",
   "ADJACENT",
   "ADJACENT_IN_THE_SAME_ROW",
-  "CONE"
+  "CONE",
+  "BOARD_EFFECT"
 ]
 
 export const iconRegExp = new RegExp(
