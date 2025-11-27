@@ -46,7 +46,7 @@ import {
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import {
   getFirstAvailablePositionInBench,
   getFirstAvailablePositionOnBoard,
@@ -163,7 +163,7 @@ export class Pokemon extends Schema implements IPokemon {
     if (y === 0 && !doNotRemoveItems) {
       const itemsToRemove = values(this.items).filter((item) => {
         return (
-          RemovableItems.includes(item) ||
+          isIn(RemovableItems, item) ||
           (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
             item !== Item.RARE_CANDY)
         )
@@ -9943,10 +9943,10 @@ export class Silvally extends Pokemon {
     if (y === 0) {
       const itemsToRemove = values(this.items).filter((item) => {
         return (
-          RemovableItems.includes(item) ||
+          isIn(RemovableItems, item) ||
           (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
             item !== Item.RARE_CANDY) ||
-          (SynergyItems as ReadonlyArray<Item>).includes(item)
+          isIn(SynergyItems, item)
         )
       })
       player.items.push(...itemsToRemove)

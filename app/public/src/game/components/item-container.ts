@@ -71,12 +71,12 @@ export default class ItemContainer extends DraggableObject {
   }
 
   get cellIndex() {
-    if (ShinyItems.includes(this.name)) return 1
-    if (Berries.includes(this.name)) return 2
+    if (isIn(ShinyItems, this.name)) return 1
+    if (isIn(Berries, this.name)) return 2
     if (isIn(Tools, this.name)) return 3
-    if (WeatherRocks.includes(this.name)) return 4
+    if (isIn(WeatherRocks, this.name)) return 4
     if (isIn(SpecialItems, this.name)) return 5
-    if (TMs.includes(this.name) || HMs.includes(this.name)) return 6
+    if (isIn(TMs, this.name) || isIn(HMs, this.name)) return 6
     if ((Dishes.map((d) => d) as Item[]).includes(this.name)) return 7
     return 0
   }

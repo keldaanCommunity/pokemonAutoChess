@@ -48,7 +48,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
 import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { max, min } from "../../utils/number"
@@ -454,7 +454,7 @@ export default class Player extends Schema implements IPlayer {
     let weatherRockInInventory
     do {
       weatherRockInInventory = this.items.findIndex((item, index) =>
-        WeatherRocks.includes(item)
+        isIn(WeatherRocks, item)
       )
       if (weatherRockInInventory != -1) {
         this.items.splice(weatherRockInInventory, 1)

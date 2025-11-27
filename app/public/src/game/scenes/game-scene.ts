@@ -19,6 +19,7 @@ import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
 import { Pkm } from "../../../../types/enum/Pokemon"
+import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
@@ -714,7 +715,7 @@ export default class GameScene extends Scene {
         if (
           gameObject instanceof ItemContainer &&
           dropZone.name === "flower-pot-zone" &&
-          Mulches.includes(gameObject.name)
+          isIn(Mulches, gameObject.name)
         ) {
           const flowerMonSprite =
             this.board?.flowerPokemonsInPots[dropZone.getData("index")]

@@ -505,7 +505,7 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const Tools: Item[] = [
+export const Tools = [
   Item.LIGHT_BALL,
   Item.HARD_STONE,
   Item.DRAGON_SCALE,
@@ -528,11 +528,11 @@ export const Tools: Item[] = [
   Item.MAX_ELIXIR,
   Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
-] as const
+] satisfies Item[]
 
 export type Tool = (typeof Tools)[number]
 
-export const ArtificialItems: Tool[] = [
+export const ArtificialItems = [
   Item.METAL_COAT,
   Item.MACHO_BRACE,
   Item.EXPLORER_KIT,
@@ -544,9 +544,9 @@ export const ArtificialItems: Tool[] = [
   Item.MAX_ELIXIR,
   Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
-] as const
+] satisfies Tool[]
 
-export const ShinyItems: Item[] = [
+export const ShinyItems = [
   Item.DYNAMAX_BAND,
   Item.SHINY_STONE,
   Item.RARE_CANDY,
@@ -558,9 +558,9 @@ export const ShinyItems: Item[] = [
   Item.COMET_SHARD,
   Item.REPEAT_BALL,
   Item.GOLD_BOW
-]
+] satisfies Item[]
 
-export const WeatherRocks: Item[] = [
+export const WeatherRocks = [
   Item.DAMP_ROCK,
   Item.ICY_ROCK,
   Item.HEAT_ROCK,
@@ -572,12 +572,9 @@ export const WeatherRocks: Item[] = [
   Item.BLOOD_STONE,
   Item.SMELLY_CLAY,
   Item.ODD_KEYSTONE
-]
+] satisfies Item[]
 
-export const WeatherRocksByWeather: Map<
-  Weather,
-  (typeof WeatherRocks)[number] | null
-> = new Map([
+export const WeatherRocksByWeather = new Map([
   [Weather.SUN, Item.HEAT_ROCK],
   [Weather.RAIN, Item.DAMP_ROCK],
   [Weather.SANDSTORM, Item.SMOOTH_ROCK],
@@ -590,11 +587,11 @@ export const WeatherRocksByWeather: Map<
   [Weather.NIGHT, Item.BLACK_AUGURITE],
   [Weather.BLOODMOON, Item.BLOOD_STONE],
   [Weather.NEUTRAL, null]
-])
+]) satisfies Map<Weather, (typeof WeatherRocks)[number] | null>
 
 export const WeatherByWeatherRocks = reverseMap(WeatherRocksByWeather)
 
-export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
+export const CraftableItems = Object.keys(ItemRecipe) as Item[]
 
 export const SynergyStones = [
   Item.OLD_AMBER,
@@ -606,7 +603,7 @@ export const SynergyStones = [
   Item.DUSK_STONE,
   Item.LEAF_STONE,
   Item.ICE_STONE
-]
+] satisfies Item[]
 
 export const SynergyGems = [
   Item.NORMAL_GEM,
@@ -639,7 +636,7 @@ export const SynergyGems = [
   Item.WILD_GEM,
   Item.AMORPHOUS_GEM,
   Item.GOURMET_GEM
-] as const
+] satisfies Item[]
 
 export type SynergyGem = (typeof SynergyGems)[number]
 
@@ -655,7 +652,7 @@ export const SynergyGemsBuried: SynergyGem[] = [
   Item.DRAGON_GEM,
   Item.POISON_GEM,
   Item.GHOST_GEM
-] as const
+] satisfies SynergyGem[]
 
 export const ToolsBuried: Tool[] = [
   Item.HARD_STONE,
@@ -703,12 +700,9 @@ export const SynergyItems = [
   Item.SURFBOARD,
   Item.INCENSE,
   ...MemoryDiscs
-] as const
+] satisfies Item[]
 
-export const SynergyGivenByItem: Record<
-  (typeof SynergyItems)[number],
-  Synergy
-> = {
+export const SynergyGivenByItem = {
   [Item.OLD_AMBER]: Synergy.FOSSIL,
   [Item.DAWN_STONE]: Synergy.PSYCHIC,
   [Item.WATER_STONE]: Synergy.WATER,
@@ -763,7 +757,7 @@ export const SynergyGivenByItem: Record<
   [Item.MONSTER_MEMORY]: Synergy.MONSTER,
   [Item.AQUATIC_MEMORY]: Synergy.AQUATIC,
   [Item.DRAGON_MEMORY]: Synergy.DRAGON
-}
+} satisfies Record<(typeof SynergyItems)[number], Synergy>
 
 export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
   {
@@ -903,7 +897,7 @@ export const Dishes = [
   Item.SWEETS,
   Item.SANDWICH,
   Item.HEARTY_STEW
-] as const
+] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
 
@@ -917,11 +911,9 @@ export const Flavors = [
   Item.RUBY_SWIRL_FLAVOR,
   Item.CARAMEL_SWIRL_FLAVOR,
   Item.RAINBOW_SWIRL_FLAVOR
-] as const
+] satisfies Item[]
 
-export const SynergyFlavors: {
-  [key in Synergy]: (typeof Flavors)[number]
-} = {
+export const SynergyFlavors = {
   [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
   [Synergy.GRASS]: Item.MATCHA_FLAVOR,
   [Synergy.FIRE]: Item.RUBY_SWIRL_FLAVOR,
@@ -953,9 +945,9 @@ export const SynergyFlavors: {
   [Synergy.BABY]: Item.RAINBOW_SWIRL_FLAVOR,
   [Synergy.AMORPHOUS]: Item.RAINBOW_SWIRL_FLAVOR,
   [Synergy.GOURMET]: Item.VANILLA_FLAVOR
-}
+} satisfies { [key in Synergy]: (typeof Flavors)[number] }
 
-export const Sweets: Item[] = [
+export const Sweets = [
   Item.STRAWBERRY_SWEET,
   Item.LOVE_SWEET,
   Item.FLOWER_SWEET,
@@ -965,11 +957,11 @@ export const Sweets: Item[] = [
   Item.FLOWER_SWEET,
   Item.STAR_SWEET,
   Item.RIBBON_SWEET
-]
+] satisfies Item[]
 
-export const Mulches: Item[] = [Item.RICH_MULCH, Item.AMAZE_MULCH]
+export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
-export const UnholdableItems: Item[] = [
+export const UnholdableItems = [
   ...WeatherRocks,
   ...FishingRods,
   ...TMs,
@@ -995,9 +987,9 @@ export const UnholdableItems: Item[] = [
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET
-]
+] satisfies Item[]
 
-export const ConsumableItems: Item[] = [
+export const ConsumableItems = [
   ...TMs,
   ...HMs,
   ...Dishes,
@@ -1015,11 +1007,11 @@ export const ConsumableItems: Item[] = [
   Item.SCROLL_OF_WATERS,
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR
-]
+] satisfies Item[]
 
-export const RemovableItems: Item[] = [
+export const RemovableItems = [
   Item.CHEF_HAT,
   Item.TRASH,
   ...Tools,
   ...MemoryDiscs
-]
+] satisfies Item[]

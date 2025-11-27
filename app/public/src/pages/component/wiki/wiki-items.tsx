@@ -25,6 +25,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import SynergyIcon from "../icons/synergy-icon"
+import { isIn } from "../../../../../utils/array"
 
 function ItemList(props: {
   items: readonly Item[]
@@ -177,7 +178,7 @@ export default function WikiItems() {
         <p>{addIconsToDescription(t("other_tools_description"))}</p>
         <ul>
           <ItemList
-            items={Tools.filter((i) => ArtificialItems.includes(i) === false)}
+            items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
             onItemHover={setItemHovered}
           />
         </ul>

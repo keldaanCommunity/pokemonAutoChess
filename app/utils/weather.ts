@@ -9,6 +9,7 @@ import {
   Weather,
   WeatherAssociatedToSynergy
 } from "../types/enum/Weather"
+import { hasKey } from "./map"
 
 export function getWeather(
   bluePlayer: Player,
@@ -37,7 +38,7 @@ export function getWeather(
   for (const player of [bluePlayer, redPlayer]) {
     if (player === null) continue
     player.items.forEach((item) => {
-      if (WeatherByWeatherRocks.has(item)) {
+      if (hasKey(WeatherByWeatherRocks, item)) {
         const weatherBoosted = WeatherByWeatherRocks.get(item)!
         boardWeatherScore.set(
           weatherBoosted,

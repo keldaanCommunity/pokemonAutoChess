@@ -614,7 +614,7 @@ export class OnDragDropItemCommand extends Command<
         return
       }
       pokemon = player.flowerPots[index]
-      if (!pokemon || Mulches.includes(item) === false) {
+      if (!pokemon || isIn(Mulches, item) === false) {
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
@@ -745,7 +745,7 @@ export class OnDragDropItemCommand extends Command<
       const itemCombined = recipe[0] as Item
 
       if (
-        SynergyStones.includes(itemCombined) &&
+        isIn(SynergyStones, itemCombined) &&
         pokemon.types.has(SynergyGivenByItem[itemCombined])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
@@ -775,14 +775,11 @@ export class OnDragDropItemCommand extends Command<
 
     this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
 
-    if (pokemon.items.has(item) && UnholdableItems.includes(item)) {
+    if (pokemon.items.has(item) && isIn(UnholdableItems, item)) {
       // if the item is not holdable, we immediately remove it from the pokemon items
       // It is added just in time for ItemEvolutionRule to be checked
       pokemon.items.delete(item)
-      if (
-        ConsumableItems.includes(item) === false &&
-        Mulches.includes(item) === false
-      ) {
+      if (!isIn(ConsumableItems, item) && !isIn(Mulches, item)) {
         // item is not holdable and has not been consumed, so we add it back to player items
         player.items.push(item)
       }

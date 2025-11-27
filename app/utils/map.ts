@@ -15,3 +15,7 @@ export function objToMap<K extends string, V>(obj: Record<K, V>): Map<K, V> {
   }
   return map
 }
+
+export function hasKey<K, V>(map: Map<K, V>, key: any): key is K {
+  return map.has(key)
+}

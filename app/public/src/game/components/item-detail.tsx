@@ -16,6 +16,7 @@ import {
 } from "../../../../types/enum/Item"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
+import { isIn } from "../../../../utils/array"
 
 export function ItemDetailTooltip({
   item,
@@ -44,9 +45,9 @@ export function ItemDetailTooltip({
 
   const itemCategoryLabel = ConsumableItems.includes(item)
     ? t("consumable_item")
-    : UnholdableItems.includes(item)
+    : isIn(UnholdableItems, item)
       ? t("unholdable_item")
-      : RemovableItems.includes(item)
+      : isIn(RemovableItems, item)
         ? t("removable_item")
         : null
 

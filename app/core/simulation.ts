@@ -36,7 +36,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
-import { count } from "../utils/array"
+import { count, isIn } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
@@ -412,7 +412,7 @@ export default class Simulation extends Schema implements ISimulation {
       for (let n = 0; n < 2; n++) {
         const eligibleItems = CraftableItems.filter(
           (i) =>
-            !SynergyStones.includes(i) &&
+            !isIn(SynergyStones, i) &&
             !wonderboxItems.includes(i) &&
             !pokemon.items.has(i) &&
             i !== Item.WONDER_BOX

@@ -552,9 +552,9 @@ export class MiniGame {
     }
 
     if (itemsSet === CraftableItems) {
-      while (items.filter((i) => SynergyStones.includes(i)).length > 4) {
+      while (items.filter((i) => isIn(SynergyStones, i)).length > 4) {
         // ensure that there are at most 4 synergy stones in the carousel
-        const index = items.findIndex((i) => SynergyStones.includes(i))
+        const index = items.findIndex((i) => isIn(SynergyStones, i))
         items[index] = pickRandomIn(CraftableNonSynergyItems)
       }
     }

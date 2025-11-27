@@ -10,6 +10,7 @@ import {
   PkmFamily
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import {
   selectConnectedPlayer,
@@ -125,7 +126,7 @@ export default function GamePokemonsPropositions() {
                       }
                     />
                   )}
-                  {item && ShinyItems.includes(item) === false && (
+                  {item && isIn(ShinyItems, item) === false && (
                     <div className="additional-pick-item ">
                       <span
                         style={{
