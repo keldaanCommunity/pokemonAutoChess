@@ -110,7 +110,7 @@ export function savePreferences(
 ) {
   const resolved: Partial<IPreferencesState> =
     typeof modified === "function" ? modified(preferences) : modified
-  localStore.put(LocalStoreKeys.PREFERENCES, resolved)
+  localStore.put(LocalStoreKeys.PREFERENCES, resolved, Infinity)
   preferences = Object.freeze({ ...preferences, ...resolved })
   subscriptions.forEach((s) => s(preferences))
 }

@@ -91,6 +91,17 @@
   margin: 0.25em;
 }
 
+.profile-actions .avatar-grid,
+.profile-actions .emotions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5em 0;
+}
+
+.profile-actions .emotions-grid {
+  gap: 0.5em;
+}
+
 .profile-modal article {
   grid-area: history;
   margin-left: 1em;

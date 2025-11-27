@@ -9,6 +9,7 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
+import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import PokemonPortrait from "../pokemon-portrait"
 import { CollectionFilterState } from "./pokemon-collection"
 import "./pokemon-collection-item.css"
@@ -23,6 +24,7 @@ export default function PokemonCollectionItem(props: {
   const lastBoostersOpened = useAppSelector(
     (state) => state.lobby.lastBoostersOpened
   )
+  const [favorites] = useLocalStore<Pkm[]>(LocalStoreKeys.FAVORITES, [], Infinity)
 
   if (getAvailableEmotions(props.index, false).length === 0) {
     return null
@@ -46,6 +48,8 @@ export default function PokemonCollectionItem(props: {
 
   const availableEmotions = getAvailableEmotions(props.index, false)
   const shinyAvailableEmotions = getAvailableEmotions(props.index, true)
+
+  const isFavorite = favorites.includes(props.name)
   const rarity = getPokemonData(props.name).rarity
   const boosterCost = BoosterPriceByRarity[rarity]
   if (props.filterState.filter === "refundable" && dust < boosterCost)
@@ -71,6 +75,7 @@ export default function PokemonCollectionItem(props: {
   if (props.filterState.filter === "unlocked" && !isUnlocked) return null
   if (props.filterState.filter === "unlockable" && !canUnlock) return null
   if (props.filterState.filter === "locked" && isUnlocked) return null
+  if (props.filterState.filter === "favorite" && !isFavorite) return null
 
   return (
     <div
@@ -78,6 +83,7 @@ export default function PokemonCollectionItem(props: {
         unlocked: isUnlocked,
         unlockable: canUnlock,
         new: isNew,
+        favorite: isFavorite,
         shimmer: isNew
       })}
       onClick={() => {

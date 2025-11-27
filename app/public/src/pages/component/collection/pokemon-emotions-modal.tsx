@@ -16,6 +16,7 @@ import {
   changeSelectedEmotion
 } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
+import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import { Modal } from "../modal/modal"
 import PokemonPortrait from "../pokemon-portrait"
 import PokemonEmotion from "./pokemon-emotion"
@@ -77,6 +78,34 @@ export default function PokemonEmotionsModal(props: {
       changeSelectedEmotion({ index: index, emotion: null, shiny: false })
     )
   }, [dispatch])
+
+  const isCurrentAvatar =
+    user &&
+    getAvatarSrc(user?.avatar) ===
+      getPortraitSrc(
+        index,
+        item.selectedShiny,
+        item.selectedEmotion ?? Emotion.NORMAL
+      )
+
+  const [favorites, updateFavorites] = useLocalStore<Pkm[]>(
+    LocalStoreKeys.FAVORITES,
+    [],
+    Infinity
+  )
+  const isFavorite = useMemo(
+    () => favorites.includes(props.pokemon) ?? false,
+    [favorites, props.pokemon]
+  )
+  const toggleFavorite = useCallback(() => {
+    let newFavorites: Pkm[]
+    if (isFavorite) {
+      newFavorites = favorites.filter((p) => p !== props.pokemon)
+    } else {
+      newFavorites = [...favorites, props.pokemon]
+    }
+    updateFavorites(newFavorites)
+  }, [favorites, isFavorite, props.pokemon, updateFavorites])
 
   return (
     <Modal
@@ -168,13 +197,7 @@ export default function PokemonEmotionsModal(props: {
             className="bubbly blue"
             disabled={
               (item.emotions.length === 0 && item.shinyEmotions.length === 0) ||
-              (user &&
-                getAvatarSrc(user?.avatar) ===
-                  getPortraitSrc(
-                    index,
-                    item.selectedShiny,
-                    item.selectedEmotion ?? Emotion.NORMAL
-                  ))
+              isCurrentAvatar
             }
             onClick={() =>
               dispatch(
@@ -186,7 +209,8 @@ export default function PokemonEmotionsModal(props: {
               )
             }
           >
-            {t("choose_as_avatar")}&nbsp;
+            {isCurrentAvatar ? t("chosen_as_avatar") : t("choose_as_avatar")}
+            &nbsp;
             <PokemonPortrait
               portrait={{
                 index,
@@ -210,12 +234,24 @@ export default function PokemonEmotionsModal(props: {
             item.selectedEmotion != Emotion.NORMAL && (
               <button className="bubbly blue" onClick={resetEmotion}>
                 {t("reset_emotion")}
+                &nbsp;
+                <PokemonPortrait
+                  portrait={{
+                    index,
+                    shiny: false,
+                    emotion: Emotion.NORMAL
+                  }}
+                  alt="avatar"
+                />
               </button>
             )}
 
-          <div className="spacer"></div>
-          <button className="bubbly red" onClick={props.onClose}>
-            {t("close")}
+          <button
+            className={cc("bubbly", isFavorite ? "red" : "green")}
+            onClick={toggleFavorite}
+          >
+            ❤️&nbsp;
+            {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
           </button>
         </>
       }

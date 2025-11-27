@@ -26,7 +26,14 @@ import "./pokemon-collection.css"
 
 export type CollectionFilterState = {
   mode: "collection" | "shiny" | "pokedex"
-  filter: "all" | "unlockable" | "locked" | "unlocked" | "refundable" | "new"
+  filter:
+    | "all"
+    | "unlockable"
+    | "locked"
+    | "unlocked"
+    | "refundable"
+    | "new"
+    | "favorite"
   sort: "index" | "shards" | "played" | "unlocked"
 }
 
@@ -141,10 +148,12 @@ export default function PokemonCollection() {
                 | "unlocked"
                 | "refundable"
                 | "new"
+                | "favorite"
             })
           }
         >
           <option value={"all"}>{t("show_all")}</option>
+          <option value={"favorite"}>{t("show_favorites")}</option>
           {filterState.mode !== "pokedex" && (
             <option value={"unlockable"}>{t("show_unlockable")}</option>
           )}

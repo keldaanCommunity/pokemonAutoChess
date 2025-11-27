@@ -37,6 +37,17 @@
   z-index: 1;
 }
 
+.pokemon-collection-item.favorite::after {
+  content: "❤️";
+  position: absolute;
+  top: 56px;
+  left: 2px;
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+  z-index: 1;
+}
+
 .pokemon-collection-item > p {
   text-align: center;
   border-radius: 0 0 8px 8px;
