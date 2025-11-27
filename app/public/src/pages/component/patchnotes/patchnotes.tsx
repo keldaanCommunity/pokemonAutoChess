@@ -8,6 +8,7 @@ import "./patchnotes.css"
 export default function PatchNotes() {
   const { t } = useTranslation()
   const PATCHES = [
+    "6.7",
     "6.6",
     "6.5",
     "6.4",

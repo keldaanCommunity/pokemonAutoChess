@@ -7,6 +7,7 @@ import { Item } from "../../../../../types/enum/Item"
 import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import { addIconsToHtml } from "../../utils/descriptions"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import "./patch-summary.css"
 
@@ -64,14 +65,15 @@ export function PatchSummary({ version }: PatchSummaryProps) {
 
     Promise.all([fetchSummary, fetchFullNotes])
       .then(([summaryParsed, fullNotesParsed]) => {
-        setPatchContent(summaryParsed)
-        setFullPatchNotes(fullNotesParsed)
+        setPatchContent(addIconsToHtml(summaryParsed))
+        setFullPatchNotes(addIconsToHtml(fullNotesParsed))
       })
       .catch(() => {
-        setPatchContent(
-          `<h2>Patch ${version}</h2><p>Changelog not available</p>`
-        )
-        setFullPatchNotes("<p>Patch notes not available</p>")
+        const fallbackContent = `<h2>Patch ${version}</h2><p>Changelog not available</p>`
+        const fallbackNotes = "<p>Patch notes not available</p>"
+
+        setPatchContent(addIconsToHtml(fallbackContent))
+        setFullPatchNotes(addIconsToHtml(fallbackNotes))
       })
       .finally(() => {
         setIsLoading(false)
@@ -148,6 +150,7 @@ export function PatchSummary({ version }: PatchSummaryProps) {
             className="patch-content"
             dangerouslySetInnerHTML={{ __html: patchContent || "" }}
           ></div>
+          <hr />
           {fullPatchNotes && (
             <>
               <h2>{t("full_patch_notes")}</h2>
