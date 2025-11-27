@@ -52,6 +52,11 @@ export function effectInLine(
           target
         )
       : target
+  // compute a line that includedes the source and target
+  if (target instanceof PokemonEntity) {
+    effectSourceThroughTarget(board, pokemon, target, effect)
+    return
+  }
 
   const targetsHit = new Set()
 
@@ -135,6 +140,49 @@ export function effectInLine(
     // should at least touch the original target
     // this can happen when target has an angle in between 45 degrees modulo, see https://discord.com/channels/737230355039387749/1098262507505848523
     effect({ x: target.positionX, y: target.positionY, value: target })
+  }
+}
+
+function effectSourceThroughTarget(
+  board: Board,
+  source: PokemonEntity,
+  target: PokemonEntity,
+  effect: (cell: Cell) => void
+) {
+  const sourceX = source.positionX
+  const sourceY = source.positionY
+  const targetX = target.positionX
+  const targetY = target.positionY
+
+  // Calculate direction vector
+  const deltaX = targetX - sourceX
+  const deltaY = targetY - sourceY
+
+  // If source and target are at the same position, do nothing
+  if (deltaX === 0 && deltaY === 0) return
+
+  // calculate the direction and normalize
+  const maxDistance = Math.max(board.columns, board.rows) * 2
+  const lineLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+  const directionX = deltaX / lineLength
+  const directionY = deltaY / lineLength
+
+  // step to guarantee endpoint is way past board edge
+  const extendedX = Math.round(sourceX + directionX * maxDistance)
+  const extendedY = Math.round(sourceY + directionY * maxDistance)
+
+  // Use board's existing getCellsBetween method (Supercover algorithm) from e.g. Snipe Shot Ability
+  const cells = board.getCellsBetween(sourceX, sourceY, extendedX, extendedY)
+
+  // Apply effect to all cells except the source, and only cells within board bounds
+  for (const cell of cells) {
+    // Skip the source cell itself
+    if (cell.x === sourceX && cell.y === sourceY) continue
+
+    // Skip cells outside board bounds
+    if (cell.x < 0 || cell.x >= board.columns || cell.y < 0 || cell.y >= board.rows) continue
+
+    effect(cell)
   }
 }
 
