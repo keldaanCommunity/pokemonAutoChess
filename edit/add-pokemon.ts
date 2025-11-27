@@ -531,7 +531,10 @@ function movePortrait(spriteCollabPath: string, pkmIndex: string) {
  */
 function updateEmotionsAndCredits(
   spriteCollabPath: string,
-  indexesToUpdate: string[] = Object.values(PkmIndex)
+  indexesToUpdate: string[] = Object.values(PkmIndex).flatMap((indexToAdd) => {
+    const shinyPad = indexToAdd.length === 4 ? "-0000-0001" : "-0001"
+    return [indexToAdd, `${indexToAdd}${shinyPad}`]
+  })
 ) {
   let tracker: Record<string, any> = {}
   try {
