@@ -1,1 +1,2 @@
 2022-10-12 00:52:45.357287	<@!576876006636519434>	CUR	PMDCollab_1	Normal,Sad,Joyous,Happy,Sigh,Stunned,Teary-Eyed,Worried,Special3
+2025-11-07 23:50:01.025843	<@!576876006636519434>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Normal^,Happy,Sigh,Happy^,Stunned,Teary-Eyed,Worried,Special3

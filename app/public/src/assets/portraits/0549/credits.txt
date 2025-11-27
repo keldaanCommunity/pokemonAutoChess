@@ -1,5 +1,1 @@
-2023-05-13 17:20:40.893466	<@!350050109741858829>	CUR	PMDCollab_1	Normal,Sad,Joyous,Special1,Normal^,Sad^,Joyous^,Special1^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
-2023-05-13 18:48:31.126537	<@!350050109741858829>	CUR	PMDCollab_1	Joyous,Crying,Surprised,Teary-Eyed,Dizzy,Worried
-2024-05-23 16:34:06.657490	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal,Special1,Normal^,Special1^
-2024-11-07 01:36:33.090489	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal,Normal^,Happy,Pain,Stunned,Teary-Eyed,Determined
-2024-11-10 16:07:39.617016	<@!350050109741858829>	CUR	CC_BY-NC_4	Inspired,Worried
+2025-11-21 18:49:54.169388	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Normal^,Sad^,Joyous^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
