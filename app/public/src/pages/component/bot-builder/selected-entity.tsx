@@ -3,7 +3,7 @@ import { getAvailableEmotions } from "../../../../../models/precomputed/precompu
 import { Emotion, PkmWithCustom } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import { ItemDetailTooltipContent } from "../../../game/components/item-detail"
 import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
 
@@ -15,7 +15,7 @@ export default function SelectedEntity(props: {
   if (Object.keys(Item).includes(props.entity as Item)) {
     return (
       <div id="selected-entity" className="my-box">
-        <ItemDetailTooltip item={props.entity as Item} />
+        <ItemDetailTooltipContent item={props.entity as Item} />
       </div>
     )
   } else if (

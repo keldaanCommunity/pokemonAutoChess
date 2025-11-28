@@ -22,22 +22,14 @@ import {
   WeatherRocks
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { isIn } from "../../../../../utils/array"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import SynergyIcon from "../icons/synergy-icon"
-import { isIn } from "../../../../../utils/array"
 
-function ItemList(props: {
-  items: readonly Item[]
-  icon?: string
-  onItemHover?: (item: Item) => void
-}) {
+function ItemList(props: { items: readonly Item[]; icon?: string }) {
   return props.items.map((i) => (
-    <li
-      key={i}
-      data-tooltip-id="item-detail"
-      onMouseOver={() => props.onItemHover?.(i)}
-    >
+    <li key={i} data-tooltip-id="item-detail-tooltip" data-tooltip-content={i}>
       <img
         src={props.icon ?? "assets/item/" + i + ".png"}
         className="item"
@@ -47,7 +39,6 @@ function ItemList(props: {
 }
 
 export default function WikiItems() {
-  const [itemHovered, setItemHovered] = useState<Item>()
   const { t } = useTranslation()
   const otherBuriedItems = [
     Item.TRASH,
@@ -92,8 +83,8 @@ export default function WikiItems() {
                 return (
                   <th
                     key={i}
-                    data-tooltip-id="item-detail"
-                    onMouseOver={() => setItemHovered(i)}
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={i}
                   >
                     <img
                       src={"assets/item/" + i + ".png"}
@@ -107,8 +98,8 @@ export default function WikiItems() {
               return (
                 <tr key={"tr-" + i}>
                   <td
-                    data-tooltip-id="item-detail"
-                    onMouseOver={() => setItemHovered(i)}
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={i}
                   >
                     <img
                       src={"assets/item/" + i + ".png"}
@@ -130,8 +121,8 @@ export default function WikiItems() {
                     return (
                       <td
                         key={"td-" + i + "-" + j}
-                        data-tooltip-id="item-detail"
-                        onMouseOver={() => setItemHovered(tier2Item)}
+                        data-tooltip-id="item-detail-tooltip"
+                        data-tooltip-content={tier2Item}
                       >
                         <img
                           src={"assets/item/" + tier2Item + ".png"}
@@ -150,19 +141,19 @@ export default function WikiItems() {
         <h2>{t("shiny_items")}</h2>
         <p>{addIconsToDescription(t("shiny_items_description"))}</p>
         <ul className="shiny">
-          <ItemList items={ShinyItems} onItemHover={setItemHovered} />
+          <ItemList items={ShinyItems} />
         </ul>
 
         <h2>{t("town_items")}</h2>
         <p>{t("town_items_description")}</p>
         <ul className="town">
-          <ItemList items={TownItems} onItemHover={setItemHovered} />
+          <ItemList items={TownItems} />
         </ul>
 
         <h2>{t("special_items")}</h2>
         <p>{t("special_items_description")}</p>
         <ul className="special">
-          <ItemList items={specialItems} onItemHover={setItemHovered} />
+          <ItemList items={specialItems} />
         </ul>
       </article>
 
@@ -173,13 +164,12 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("tools_description"))}</p>
         <ul>
-          <ItemList items={ArtificialItems} onItemHover={setItemHovered} />
+          <ItemList items={ArtificialItems} />
         </ul>
         <p>{addIconsToDescription(t("other_tools_description"))}</p>
         <ul>
           <ItemList
             items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
-            onItemHover={setItemHovered}
           />
         </ul>
 
@@ -188,7 +178,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("gems_description"))}</p>
         <ul>
-          <ItemList items={SynergyGemsBuried} onItemHover={setItemHovered} />
+          <ItemList items={SynergyGemsBuried} />
         </ul>
         <p>{addIconsToDescription(t("gems_not_buried_description"))}</p>
         <ul>
@@ -196,12 +186,11 @@ export default function WikiItems() {
             items={SynergyGems.filter(
               (gem) => SynergyGemsBuried.includes(gem) === false
             )}
-            onItemHover={setItemHovered}
           />
         </ul>
         <p>{addIconsToDescription(t("you_may_also_find_in_the_ground"))}</p>
         <ul>
-          <ItemList items={otherBuriedItems} onItemHover={setItemHovered} />
+          <ItemList items={otherBuriedItems} />
         </ul>
 
         <h3>
@@ -209,7 +198,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("weather_rocks_description"))}</p>
         <ul>
-          <ItemList items={WeatherRocks} onItemHover={setItemHovered} />
+          <ItemList items={WeatherRocks} />
         </ul>
 
         <h3>
@@ -217,8 +206,8 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("tm_hm_description"))}</p>
         <ul>
-          <ItemList items={TMs} onItemHover={setItemHovered} />
-          <ItemList items={HMs} onItemHover={setItemHovered} />
+          <ItemList items={TMs} />
+          <ItemList items={HMs} />
         </ul>
 
         <h3>
@@ -229,8 +218,8 @@ export default function WikiItems() {
           {Berries.map((i) => (
             <li
               key={i}
-              data-tooltip-id="item-detail"
-              onMouseOver={() => setItemHovered(i)}
+              data-tooltip-id="item-detail-tooltip"
+              data-tooltip-content={i}
             >
               <img src={"assets/item/" + i + ".png"} className="item"></img>
               <br />
@@ -247,10 +236,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("dishes_description"))}</p>
         <ul>
-          <ItemList
-            items={[Item.CHEF_HAT, ...Dishes] as Item[]}
-            onItemHover={setItemHovered}
-          />
+          <ItemList items={[Item.CHEF_HAT, ...Dishes] as Item[]} />
         </ul>
 
         <h3>
@@ -258,10 +244,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("fishing_rods_description"))}</p>
         <ul>
-          <ItemList
-            items={[...FishingRods].reverse()}
-            onItemHover={setItemHovered}
-          />
+          <ItemList items={[...FishingRods].reverse()} />
         </ul>
 
         <h3>
@@ -269,7 +252,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("mulch_description"))}</p>
         <ul>
-          <ItemList items={Mulches} onItemHover={setItemHovered} />
+          <ItemList items={Mulches} />
         </ul>
 
         <h3>
@@ -277,7 +260,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("cell_battery_description"))}</p>
         <ul>
-          <ItemList items={[Item.CELL_BATTERY]} onItemHover={setItemHovered} />
+          <ItemList items={[Item.CELL_BATTERY]} />
         </ul>
 
         <h3>
@@ -285,18 +268,11 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("fire_shard_description"))}</p>
         <ul>
-          <ItemList items={[Item.FIRE_SHARD]} onItemHover={setItemHovered} />
+          <ItemList items={[Item.FIRE_SHARD]} />
         </ul>
       </article>
 
-      {itemHovered && (
-        <Tooltip
-          id="item-detail"
-          className="custom-theme-tooltip item-detail-tooltip"
-        >
-          <ItemDetailTooltip item={itemHovered} />
-        </Tooltip>
-      )}
+      <ItemDetailTooltip />
     </div>
   )
 }

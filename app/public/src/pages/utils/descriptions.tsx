@@ -281,7 +281,7 @@ export function addIconsToHtml(
             <span class="weather-label">${t(`weather.${token}`)}</span>
           </span>`
         } else if (Items.includes(token as Item)) {
-          iconHTML = `<span class="description-icon item" title="${t(`item_description.${token}`)}" data-tooltip-id="item-detail" data-tooltip-content="${token}">
+          iconHTML = `<span class="description-icon item" title="${t(`item_description.${token}`)}" data-tooltip-id="item-detail-tooltip" data-tooltip-content="${token}">
             <img src="assets/item/${token}.png" />
             <span class="item-label">${t(`item.${token}`)}</span>
           </span>`

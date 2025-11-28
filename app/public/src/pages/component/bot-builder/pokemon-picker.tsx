@@ -23,9 +23,13 @@ import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { usePreferences } from "../../../preferences"
+import Game from "../../game"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import {
+  GamePokemonDetail,
+  GamePokemonDetailTooltip
+} from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
 export default function PokemonPicker(props: {
@@ -111,11 +115,9 @@ function PokemonPickerTab(props: {
 }) {
   const [preferences, setPreferences] = usePreferences()
   const { t } = useTranslation()
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
 
   function handleOnDragStart(e: React.DragEvent, name: Pkm) {
     e.stopPropagation()
-    setHoveredPokemon(undefined)
     e.dataTransfer.setData("text/plain", `pokemon,${name}`)
   }
 
@@ -248,11 +250,9 @@ function PokemonPickerTab(props: {
                       shiny: false
                     })
                   }}
-                  onMouseOver={() => {
-                    setHoveredPokemon(p.name)
-                  }}
                   key={p.name}
-                  data-tooltip-id="pokemon-detail"
+                  data-tooltip-id="game-pokemon-detail-tooltip"
+                  data-tooltip-content={p.name}
                   draggable
                   onDragStart={(e) => handleOnDragStart(e, p.name)}
                 >
@@ -305,15 +305,7 @@ function PokemonPickerTab(props: {
           </ul>
         </details>
       </div>
-      {hoveredPokemon && (
-        <Tooltip
-          id="pokemon-detail"
-          className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          float
-        >
-          <GamePokemonDetail pokemon={hoveredPokemon} origin="planner" />
-        </Tooltip>
-      )}
+      <GamePokemonDetailTooltip origin="planner" />
     </>
   )
 }

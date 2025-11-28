@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
+
 import { WeatherThreshold } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -11,7 +11,7 @@ import {
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
 export default function WikiWeather() {
@@ -52,15 +52,10 @@ export default function WikiWeather() {
                         additional: p.additional,
                         regional: p.regional
                       })}
-                      data-tooltip-id={`pokemon-detail-${p.index}`}
+                      data-tooltip-id="game-pokemon-detail-tooltip"
+                      data-tooltip-content={p.name}
                     >
                       <img src={getPortraitSrc(p.index)} />
-                      <Tooltip
-                        id={`pokemon-detail-${p.index}`}
-                        className="custom-theme-tooltip game-pokemon-detail-tooltip"
-                      >
-                        <GamePokemonDetail pokemon={p.name} origin="wiki" />
-                      </Tooltip>
                     </div>
                   </li>
                 ))}
@@ -68,6 +63,7 @@ export default function WikiWeather() {
           </li>
         ))}
       </ul>
+      <GamePokemonDetailTooltip origin="wiki" />
     </div>
   )
 }

@@ -1,7 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react"
-import ReactDOM from "react-dom"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import { RegionDetails } from "../../../../../config"
 import { PokemonClasses } from "../../../../../models/colyseus-models/pokemon"
 import {
@@ -10,7 +8,7 @@ import {
 } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
@@ -63,8 +61,6 @@ export default function WikiRegions() {
     )
   }, [selectedPkm, pokemonsPerRegion])
 
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
-
   return (
     <div id="wiki-regions">
       <PokemonTypeahead
@@ -110,8 +106,8 @@ export default function WikiRegions() {
                       loading="lazy"
                       portrait={PkmIndex[pkm]}
                       key={pkm}
-                      onMouseOver={() => setHoveredPokemon(pkm)}
-                      data-tooltip-id="pokemon-detail"
+                      data-tooltip-id="game-pokemon-detail-tooltip"
+                      data-tooltip-content={pkm}
                     />
                   ))}
                 </div>
@@ -119,17 +115,7 @@ export default function WikiRegions() {
             )
           })}
       </ul>
-      {hoveredPokemon &&
-        ReactDOM.createPortal(
-          <Tooltip
-            id="pokemon-detail"
-            className="custom-theme-tooltip game-pokemon-detail-tooltip"
-            float
-          >
-            <GamePokemonDetail pokemon={hoveredPokemon} origin="wiki" />
-          </Tooltip>,
-          document.querySelector(".wiki-modal")!
-        )}
+      <GamePokemonDetailTooltip origin="wiki" />
     </div>
   )
 }

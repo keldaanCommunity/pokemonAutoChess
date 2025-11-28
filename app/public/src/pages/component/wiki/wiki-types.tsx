@@ -17,7 +17,10 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import {
+  GamePokemonDetail,
+  GamePokemonDetailTooltip
+} from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
 
@@ -186,17 +189,9 @@ export function WikiType(props: { type: Synergy }) {
                       >
                         <img
                           src={getPortraitSrc(p.index)}
-                          data-tooltip-id={`pokemon-detail-${p.index}`}
+                          data-tooltip-id="game-pokemon-detail-tooltip"
+                          data-tooltip-content={p.name}
                         />
-                        {ReactDOM.createPortal(
-                          <Tooltip
-                            id={`pokemon-detail-${p.index}`}
-                            className="custom-theme-tooltip game-pokemon-detail-tooltip"
-                          >
-                            <GamePokemonDetail pokemon={p.name} origin="wiki" />
-                          </Tooltip>,
-                          document.querySelector(".wiki-modal")!
-                        )}
                       </div>
                     )
                   })}
@@ -206,6 +201,7 @@ export function WikiType(props: { type: Synergy }) {
           })}
         </tbody>
       </table>
+      <GamePokemonDetailTooltip origin="wiki" />
     </div>
   )
 }
@@ -247,7 +243,6 @@ export function WikiAllTypes() {
     ) // put first stage first
   }
 
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
   const { t } = useTranslation()
 
   return (
@@ -268,14 +263,11 @@ export function WikiAllTypes() {
                         additional: p.additional,
                         regional: p.regional
                       })}
-                      onMouseOver={() => {
-                        setHoveredPokemon(p.name)
-                      }}
-                      data-tooltip-id="pokemon-detail"
                     >
                       <img
                         src={getPortraitSrc(p.index)}
-                        data-tooltip-id={`pokemon-detail-${p.index}`}
+                        data-tooltip-id="game-pokemon-detail-tooltip"
+                        data-tooltip-content={p.name}
                       />
                     </li>
                   )
@@ -285,17 +277,7 @@ export function WikiAllTypes() {
           )
         })}
       </div>
-      {hoveredPokemon &&
-        ReactDOM.createPortal(
-          <Tooltip
-            id="pokemon-detail"
-            className="custom-theme-tooltip game-pokemon-detail-tooltip"
-            float
-          >
-            <GamePokemonDetail pokemon={hoveredPokemon} origin="wiki" />
-          </Tooltip>,
-          document.querySelector(".wiki-modal")!
-        )}
+      <GamePokemonDetailTooltip origin="wiki" />
     </>
   )
 }

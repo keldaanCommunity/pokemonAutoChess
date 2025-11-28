@@ -8,7 +8,10 @@ import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToHtml } from "../../utils/descriptions"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import {
+  GamePokemonDetail,
+  GamePokemonDetailTooltip
+} from "../game/game-pokemon-detail"
 import "./patch-summary.css"
 
 interface PatchSummaryProps {
@@ -35,10 +38,10 @@ function fetchMarkdown(
             let tooltipId = ""
             let content = ""
             if (href.startsWith("/assets/portraits/")) {
-              tooltipId = "pokemon-detail"
+              tooltipId = "game-pokemon-detail-tooltip"
               content = getPkmFromPortraitSrc(href)?.name || ""
             } else if (href.startsWith("/assets/item/")) {
-              tooltipId = "item-detail"
+              tooltipId = "item-detail-tooltip"
               const itemNameMatch = href.match(/\/assets\/item\/(\w+)\.png/)
               if (itemNameMatch && itemNameMatch[1] in Item) {
                 content = Item[itemNameMatch[1]]
@@ -106,20 +109,8 @@ export function PatchSummary({ version }: PatchSummaryProps) {
           )}
         </>
       )}
-      <Tooltip
-        id="pokemon-detail"
-        className="custom-theme-tooltip game-pokemon-detail-tooltip"
-        render={({ content }) => (
-          <GamePokemonDetail pokemon={content as Pkm} origin="patchnotes" />
-        )}
-        float
-      />
-      <Tooltip
-        id="item-detail"
-        className="custom-theme-tooltip item-detail-tooltip"
-        render={({ content }) => <ItemDetailTooltip item={content as Item} />}
-        float
-      />
+      <GamePokemonDetailTooltip origin="patchnotes" />
+      <ItemDetailTooltip />
     </div>
   )
 }

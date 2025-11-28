@@ -1,7 +1,6 @@
 import { t } from "i18next"
-import React, { useState } from "react"
+import React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Tooltip } from "react-tooltip"
 import { PkmWithCustom } from "../../../../../types"
 import {
   Berries,
@@ -21,8 +20,6 @@ export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
 }) {
-  const [itemHovered, setItemHovered] = useState<Item>()
-
   function handleOnDragStart(e: React.DragEvent, item: Item) {
     e.stopPropagation()
     e.dataTransfer.setData("text/plain", `item,${item}`)
@@ -84,8 +81,8 @@ export default function ItemPicker(props: {
               className={cc("item", {
                 selected: item === props.selected
               })}
-              data-tooltip-id="item-detail"
-              onMouseOver={() => setItemHovered(item)}
+              data-tooltip-id="item-detail-tooltip"
+              data-tooltip-content={item}
               onClick={() => props.selectEntity?.(item)}
               draggable
               onDragStart={(e) => handleOnDragStart(e, item)}
@@ -93,15 +90,7 @@ export default function ItemPicker(props: {
           ))}
         </TabPanel>
       ))}
-      {itemHovered && (
-        <Tooltip
-          id="item-detail"
-          className="custom-theme-tooltip item-detail-tooltip"
-          float
-        >
-          <ItemDetailTooltip item={itemHovered} />
-        </Tooltip>
-      )}
+      <ItemDetailTooltip />
     </Tabs>
   )
 }

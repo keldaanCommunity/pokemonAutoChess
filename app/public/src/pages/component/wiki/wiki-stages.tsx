@@ -21,7 +21,7 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import PokemonPortrait from "../pokemon-portrait"
 import "./wiki-stages.css"
 
@@ -211,8 +211,6 @@ export default function WikiStages() {
 
 function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
   const { t } = useTranslation()
-  const [itemHovered, setItemHovered] = useState<Item>()
-  const [pokemonHovered, setPokemonHovered] = useState<Pkm>()
 
   if (!stageInfo) return null
 
@@ -223,8 +221,8 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
       src={`assets/item/${item}.png`}
       alt={t(`item.${item}`)}
       title={t(`item.${item}`)}
-      data-tooltip-id="item-detail"
-      onMouseOver={() => setItemHovered(item)}
+      data-tooltip-id="item-detail-tooltip"
+      data-tooltip-content={item}
     />
   )
 
@@ -235,8 +233,8 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
         emotion: Emotion.NORMAL,
         shiny: false
       }}
-      data-tooltip-id="pokemon-detail"
-      onMouseOver={() => setPokemonHovered(pkm)}
+      data-tooltip-id="game-pokemon-detail-tooltip"
+      data-tooltip-content={pkm}
     />
   )
 
@@ -410,24 +408,8 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
         </div>
       )}
 
-      {itemHovered && (
-        <Tooltip
-          id="item-detail"
-          className="custom-theme-tooltip item-detail-tooltip"
-        >
-          <ItemDetailTooltip item={itemHovered} />
-        </Tooltip>
-      )}
-
-      {pokemonHovered && (
-        <Tooltip
-          id="pokemon-detail"
-          className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          float
-        >
-          <GamePokemonDetail pokemon={pokemonHovered} origin="wiki" />
-        </Tooltip>
-      )}
+      <ItemDetailTooltip />
+      <GamePokemonDetailTooltip origin="wiki" />
     </div>
   )
 }

@@ -253,7 +253,7 @@
   right: 1em;
   display: flex;
   gap: 5px;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
 }
 
 #wiki-weather .my-box header,

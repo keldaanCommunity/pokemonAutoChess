@@ -2,7 +2,6 @@ import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Tooltip } from "react-tooltip"
 import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
@@ -19,7 +18,7 @@ import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
-import { GamePokemonDetail } from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import PokemonPortrait from "../pokemon-portrait"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
@@ -186,8 +185,6 @@ export function WikiAllPokemons() {
     })
   }
 
-  const [hoveredPokemon, setHoveredPokemon] = useState<Pkm>()
-
   return (
     <>
       <div id="wiki-pokemons-all">
@@ -204,10 +201,8 @@ export function WikiAllPokemons() {
                         additional: p.additional,
                         regional: p.regional
                       })}
-                      onMouseOver={() => {
-                        setHoveredPokemon(p.name)
-                      }}
-                      data-tooltip-id="pokemon-detail"
+                      data-tooltip-id="game-pokemon-detail-tooltip"
+                      data-tooltip-content={p.name}
                     >
                       <img src={getPortraitSrc(p.index)} />
                     </li>
@@ -218,15 +213,7 @@ export function WikiAllPokemons() {
           )
         })}
       </div>
-      {hoveredPokemon && (
-        <Tooltip
-          id="pokemon-detail"
-          className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          float
-        >
-          <GamePokemonDetail pokemon={hoveredPokemon} origin="wiki" />
-        </Tooltip>
-      )}
+      <GamePokemonDetailTooltip origin="wiki" />
     </>
   )
 }
