@@ -148,7 +148,8 @@ export function addIconsToDescription(
         let nbDigits = 0
         if (array.at(-1)?.includes("ND")) {
           nbDigits = Number(array.pop()?.replace("ND=", "")) || 0
-        } else if (array.at(-1)?.includes("SP")) {
+        }
+        if (array.at(-1)?.includes("SP")) {
           scaleType = "AP"
           scaleFactor = Number(array.pop()?.replace("SP=", "")) || 1
         } else if (array.at(-1)?.includes("LK")) {
