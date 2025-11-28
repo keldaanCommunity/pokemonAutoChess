@@ -574,7 +574,7 @@ export class ChangeAvatarCommand extends Command<
       )
         return
       const portrait = getPortraitSrc(index, shiny, emotion)
-        .replace("/assets/portraits", "")
+        .replace("/assets/portraits/", "")
         .replace(".png", "")
       user.avatar = portrait
       mongoUser.avatar = portrait
