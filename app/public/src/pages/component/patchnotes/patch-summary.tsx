@@ -1,9 +1,9 @@
 import { marked } from "marked"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { PkmWithCustom } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -33,12 +33,18 @@ function fetchMarkdown(
           image({ href, title, text }) {
             const titleAttr = title ? ` title="${title}"` : ""
             let tooltipId = ""
+            let content = ""
             if (href.startsWith("/assets/portraits/")) {
               tooltipId = "pokemon-detail"
+              content = getPkmFromPortraitSrc(href)?.name || ""
             } else if (href.startsWith("/assets/item/")) {
               tooltipId = "item-detail"
+              const itemNameMatch = href.match(/\/assets\/item\/(\w+)\.png/)
+              if (itemNameMatch && itemNameMatch[1] in Item) {
+                content = Item[itemNameMatch[1]]
+              }
             }
-            return `<img src="${href}" alt="${text}"${titleAttr} ${tooltipId && `data-tooltip-id="${tooltipId}"`} />`
+            return `<img src="${href}" alt="${text}"${titleAttr} ${tooltipId && `data-tooltip-id="${tooltipId}"`} data-tooltip-content="${content}" />`
           }
         }
       })
@@ -51,8 +57,6 @@ export function PatchSummary({ version }: PatchSummaryProps) {
   const [patchContent, setPatchContent] = useState<string>()
   const [fullPatchNotes, setFullPatchNotes] = useState<string>()
   const [isLoading, setIsLoading] = useState(true)
-  const [hoveredPokemon, setHoveredPokemon] = useState<PkmWithCustom>()
-  const [itemHovered, setItemHovered] = useState<Item>()
 
   useEffect(() => {
     setIsLoading(true)
@@ -80,68 +84,8 @@ export function PatchSummary({ version }: PatchSummaryProps) {
       })
   }, [version])
 
-  const handleOnMouseOver = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const target = event.target as HTMLElement
-      if (target && target.matches('img[src^="/assets/portraits/"]')) {
-        // Extract Pokemon ID from image src
-        const src = target.getAttribute("src") || ""
-        const pkm = getPkmFromPortraitSrc(src)
-        if (pkm && (!hoveredPokemon || pkm.name !== hoveredPokemon.name)) {
-          setHoveredPokemon(pkm)
-          if (itemHovered) {
-            setItemHovered(undefined)
-          }
-        }
-      } else if (target && target.matches('img[src^="/assets/item/"]')) {
-        // Extract Item ID from image src
-        const src = target.getAttribute("src") || ""
-        const itemNameMatch = src.match(/\/assets\/item\/(\w+)\.png/)
-        if (itemNameMatch && itemNameMatch[1] in Item) {
-          const item = Item[itemNameMatch[1]]
-          if (item !== itemHovered) {
-            setItemHovered(item)
-            if (hoveredPokemon) {
-              setHoveredPokemon(undefined)
-            }
-          }
-        }
-      }
-    },
-    [hoveredPokemon, itemHovered]
-  )
-
-  const handleOnMouseOut = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const target = event.target as HTMLElement
-      const relatedTarget = event.relatedTarget as HTMLElement
-
-      // Don't clear tooltips if we're moving to another image or the tooltip itself
-      if (
-        relatedTarget &&
-        (relatedTarget.matches(
-          'img[src^="/assets/portraits/"], img[src^="/assets/item/"]'
-        ) ||
-          relatedTarget.closest(".react-tooltip"))
-      ) {
-        return
-      }
-
-      if (target && target.matches('img[src^="/assets/portraits/"]')) {
-        setHoveredPokemon(undefined)
-      } else if (target && target.matches('img[src^="/assets/item/"]')) {
-        setItemHovered(undefined)
-      }
-    },
-    []
-  )
-
   return (
-    <div
-      className="patch-summary"
-      onMouseOver={handleOnMouseOver}
-      onMouseOutCapture={handleOnMouseOut}
-    >
+    <div className="patch-summary">
       {isLoading ? (
         <p>{t("loading")}...</p>
       ) : (
@@ -162,29 +106,20 @@ export function PatchSummary({ version }: PatchSummaryProps) {
           )}
         </>
       )}
-      {hoveredPokemon && (
-        <Tooltip
-          id="pokemon-detail"
-          className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          float
-        >
-          <GamePokemonDetail
-            pokemon={hoveredPokemon.name}
-            emotion={hoveredPokemon.emotion}
-            shiny={hoveredPokemon.shiny}
-            origin="patchnotes"
-          />
-        </Tooltip>
-      )}
-      {itemHovered && (
-        <Tooltip
-          id="item-detail"
-          className="custom-theme-tooltip item-detail-tooltip"
-          float
-        >
-          <ItemDetailTooltip item={itemHovered} />
-        </Tooltip>
-      )}
+      <Tooltip
+        id="pokemon-detail"
+        className="custom-theme-tooltip game-pokemon-detail-tooltip"
+        render={({ content }) => (
+          <GamePokemonDetail pokemon={content as Pkm} origin="patchnotes" />
+        )}
+        float
+      />
+      <Tooltip
+        id="item-detail"
+        className="custom-theme-tooltip item-detail-tooltip"
+        render={({ content }) => <ItemDetailTooltip item={content as Item} />}
+        float
+      />
     </div>
   )
 }
