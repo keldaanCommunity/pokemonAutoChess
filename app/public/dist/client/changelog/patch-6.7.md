@@ -112,6 +112,7 @@
 - Buff Mud Bubble: reduce cooldown duration
 - Buff Lock On (Genesect): TRUE bonus 200% → 300%
 - Buff Maractus: PP 90 → 80
+- Buff Swirlix line: PP 100 → 80
 - Buff Houndoom: HP 160 → 175 ; ATK 18 → 24 ; DEF/SPE_DEF: 12/12 → 10/14
 - Zygarde PP no longer resets to 0 when transforming into Complete form
 - Gligar is now Epic additional pick. Removed item evolution rule. Adjusted stats.

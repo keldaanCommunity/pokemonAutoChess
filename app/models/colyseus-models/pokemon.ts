@@ -17184,7 +17184,7 @@ export class Swirlix extends Pokemon {
   speed = 48
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SWEET_SCENT
   additional = true
@@ -17199,7 +17199,7 @@ export class Slurpuff extends Pokemon {
   speed = 48
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SWEET_SCENT
   additional = true
