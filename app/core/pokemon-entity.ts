@@ -1558,6 +1558,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetY?: number
     delay?: number
   }) {
+    if (!this.simulation || !this.simulation.room) {
+      return
+    }
     const room = this.simulation.room
     const players = room.state.players
     for (const client of room.clients) {
