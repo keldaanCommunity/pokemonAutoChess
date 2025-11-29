@@ -1,3 +1,4 @@
+import { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
 import {
   TownEncounter,
@@ -107,7 +108,7 @@ export default class MinigameManager {
     this.symbols.forEach(interpolatePosition(0.02, 0.25, 50))
   }
 
-  buildPokemons(avatars: Map<string, IPokemonAvatar>) {
+  buildPokemons(avatars: MapSchema<IPokemonAvatar, string>) {
     avatars.forEach((pkm) => {
       if (pkm.portalId === "") {
         // we dont show pokemon if it has already taken a portal
@@ -116,16 +117,16 @@ export default class MinigameManager {
     })
   }
 
-  buildItems(items: Map<string, IFloatingItem>) {
+  buildItems(items: MapSchema<IFloatingItem, string>) {
     items.forEach((item) => {
       this.addItem(item)
     })
   }
 
   buildPortals(
-    portals: Map<string, IPortal>,
-    symbols: Map<string, ISynergySymbol>,
-    avatars: Map<string, IPokemonAvatar>
+    portals: MapSchema<IPortal, string>,
+    symbols: MapSchema<ISynergySymbol, string>,
+    avatars: MapSchema<IPokemonAvatar, string>
   ) {
     const portalsTaken = new Set<string>()
     avatars.forEach((avatar) => {

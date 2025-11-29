@@ -8,14 +8,11 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
 
-export default class Synergies
-  extends MapSchema<number, Synergy>
-  implements Map<Synergy, number>
-{
-  constructor() {
+export default class Synergies extends MapSchema<number, Synergy> {
+  constructor(synergies?: Map<Synergy, number>) {
     super()
     Object.keys(Synergy).forEach((key) => {
-      this.set(key as Synergy, 0)
+      this.set(key as Synergy, synergies?.get(key as Synergy) ?? 0)
     })
   }
 

@@ -189,8 +189,8 @@ export const gameSlice = createSlice({
       )
 
       if (playerToUpdate !== -1) {
-        state.players.at(playerToUpdate)!.synergies = new Map(
-          entries(action.payload.value)
+        state.players.at(playerToUpdate)!.synergies = new Synergies(
+          new Map(entries(action.payload.value))
         )
       }
     },
