@@ -291,6 +291,9 @@ export class MindBlownStrategy extends AbilityStrategy {
       */
       pokemon.simulation.room.clock.setTimeout(
         () => {
+          if (!pokemon.simulation || !pokemon.simulation.room) {
+            return
+          }
           const cellsHit = board.getCellsInRadius(x, y, 2, true)
           cellsHit.forEach((cell) => {
             switch (color) {
