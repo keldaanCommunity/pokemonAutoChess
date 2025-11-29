@@ -664,7 +664,7 @@ export default class BattleManager {
           }
           break
         case "index":
-          if (pkmSprite.pokemon.index !== value) {
+          if (previousValue !== value) {
             // transformation or evolution mid-fight
             // unload previous index animations
             pkmSprite.unloadAnimations(
@@ -677,7 +677,9 @@ export default class BattleManager {
               pkmSprite.attackSprite
             // load the new ones
             pkmSprite.lazyloadAnimations(this.scene).then(() => {
-              pkmSprite.displayAnimation("EVOLUTION")
+              if (previousValue !== undefined) {
+                pkmSprite.displayAnimation("EVOLUTION")
+              }
               this.animationManager.animatePokemon(
                 pkmSprite,
                 pkmSprite.pokemon.action,
