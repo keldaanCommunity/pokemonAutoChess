@@ -93,6 +93,7 @@
 - Buff Armor Cannon (Armarouge): secondary damage 30 → 50 SPECIAL, final damage 15 → 25 SPECIAL
 - Nerf Skarmory passive: 12 → 10 spikes
 - Nerf Hitmonlee: ATK 26 → 24
+- Nerf Necrozma line: PP 100 → 110
 - Buff Basculin Red & Blue: HP 140 → 160
 - Changed Roost (Pidove): now gain shield instead of healing HP
 - Rework of Rotom Drone: now part of the Rotom line

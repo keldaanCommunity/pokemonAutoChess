@@ -12810,7 +12810,7 @@ export class Necrozma extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 110
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
@@ -12848,7 +12848,7 @@ export class UltraNecrozma extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 110
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
