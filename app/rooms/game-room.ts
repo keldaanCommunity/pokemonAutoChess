@@ -1255,18 +1255,18 @@ export default class GameRoom extends Room<GameState> {
 
     pokemonsObtained.forEach((pokemon) => {
       const freeCellX = getFirstAvailablePositionInBench(player.board)
-      if (freeCellX !== null) {
-        pokemon.positionX = freeCellX
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
-        pokemon.onAcquired(player)
-      } else if (isEvolution) {
-        pokemon.positionX = -1 // temporary position off the board just to handle evolution
+      if (isEvolution) {
+        pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
         this.checkEvolutionsAfterPokemonAcquired(playerId)
-      } else {
+      } else if (freeCellX !== null) {
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+      } else  {
         // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
         const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
         player.addMoney(sellPrice, true, null)
