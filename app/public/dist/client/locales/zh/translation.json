@@ -1721,7 +1721,7 @@
 		"FLAME_CHARGE": "突进至敌方队伍的后排，对经过的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL。",
 		"PASTEL_VEIL": "突进至最远我方宝可梦的位置。所有经过的我方宝可梦和使用者自身均获得[20,40,80,SP]点SHIELD，并移除负面状态。",
 		"LEECH_SEED": "使目标陷入POISONNED [3,6,12]秒，并恢复使用者[20,40,80,SP]点HP。",
-		"LOCK_ON": "锁定目标。下一次攻击必定命中，且额外造成[300,SP]%的TRUE。",
+		"LOCK_ON": "锁定目标。下一次攻击必定命中，且额外造成[200,SP]%的TRUE。",
 		"DISABLE": "对目标造成[15,30,60,SP]点SPECIAL，并使其和所有ADJACENT敌方宝可梦陷入SILENCE [2,3,4]秒。",
 		"RAZOR_WIND": "对目标造成[20,40,80,SP]点SPECIAL。该招式可以暴击。",
 		"WONDER_GUARD": "对所有ADJACENT敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入PARALYSIS 3秒。",

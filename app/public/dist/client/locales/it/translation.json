@@ -1380,7 +1380,7 @@
 		"FLAME_CHARGE": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,SP] SPECIAL a tutti i Pokèmon nemici colpiti nel tragitto.",
 		"PASTEL_VEIL": "Scatta verso l'alleato più lontano. L'utilizzatore e tutti gli alleati nella traiettoria ottengono [20,40,80,SP] SHIELD e vengono curati degli status alterati.",
 		"LEECH_SEED": "Infliggi POISONNED al bersaglio per [3,6,12] secondi, curando l'utilizzatore di [20,40,80,SP] HP.",
-		"LOCK_ON": "Localizza il bersaglio. Il prossimo attacco non può mancare e infligge [300,SP]% TRUE in più.",
+		"LOCK_ON": "Localizza il bersaglio. Il prossimo attacco non può mancare e infligge [200,SP]% TRUE in più.",
 		"DISABLE": "Infliggi [15,30,60,SP] SPECIAL e infliggi SILENCE al bersaglio e ai Pokèmon nemici adiacenti per [2,3,4] secondi.",
 		"RAZOR_WIND": "Infliggi [20,40,80,SP] SPECIAL.",
 		"WONDER_GUARD": "Infliggi [30,60,120,SP] SPECIAL e causa a tutti i Pokèmon nemici adiacenti PARALYSIS per 3 secondi.",

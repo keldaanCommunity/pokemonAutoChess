@@ -138,7 +138,7 @@ export default abstract class PokemonState {
         trueDamagePart += 0.25
       }
       if (pokemon.effects.has(EffectEnum.LOCK_ON) && target) {
-        trueDamagePart += 3.0 * (1 + pokemon.ap / 100)
+        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
 

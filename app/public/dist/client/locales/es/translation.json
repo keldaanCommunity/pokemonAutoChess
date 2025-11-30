@@ -1690,7 +1690,7 @@
 		"FLAME_CHARGE": "Se cuela en la retaguardia enemiga e inflige [30,60,120,SP] de SPECIAL a todos los Pokémon enemigos que golpee",
 		"PASTEL_VEIL": "Va hacia el aliado mas lejano. El usuario y todos los aliados en el camino obtienen [20,40,80,SP] de SHIELD y son curados de sus estados negativos",
 		"LEECH_SEED": "Deja POISONNED al objetivo durante [3,6,12] segundos y recupera [20,40,80,SP] de HP",
-		"LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar e inflige [300,SP]% de TRUE adicional",
+		"LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar e inflige [200,SP]% de TRUE adicional",
 		"DISABLE": "Inflige [15,30,60,SP] de SPECIAL al objetivo, deja SILENCE a este y todos los enemigos adyacentes por [2,3,4] segundos",
 		"RAZOR_WIND": "Inflige [20,40,80,SP] de SPECIAL al objetivo",
 		"WONDER_GUARD": "Inflige [30,60,120,SP] de SPECIAL a todos los Pokémon enemigos adyacentes y causa PARALYSIS por 3 segundos",
