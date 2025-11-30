@@ -19301,10 +19301,10 @@ export class IronThorns extends Pokemon {
   stars = 3
   hp = 200
   atk = 18
-  speed = 50
+  speed = 30
   def = 8
   speDef = 6
-  maxPP = 110
+  maxPP = 120
   range = 1
   skill = Ability.VOLT_SURGE
 }
