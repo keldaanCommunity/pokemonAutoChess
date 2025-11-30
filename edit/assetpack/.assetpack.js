@@ -181,8 +181,12 @@ function compressedAtlas({ path, include, outputPath }) {
         }
 
         fs.writeJSONSync(upath.joinSafe(outputPath, jsonFile), compressedJson)
-        process.stdout.clearLine(0)
-        process.stdout.cursorTo(0)
+        if (process.stdout.isTTY) {
+          process.stdout.clearLine(0)
+          process.stdout.cursorTo(0)
+        } else {
+          console.log(" ✓")
+        }
       }
     }
   }
