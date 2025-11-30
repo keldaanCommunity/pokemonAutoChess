@@ -22,6 +22,7 @@ export default function Team(props: {
                   key={i}
                   src={"/assets/item/" + item + ".png"}
                   data-tooltip-id="item-detail-tooltip"
+                  data-tooltip-content={item}
                 />
               ))}
             </div>
