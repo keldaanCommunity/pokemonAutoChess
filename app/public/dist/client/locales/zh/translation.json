@@ -3244,7 +3244,7 @@
 		"FIELD": "有FIELD宝可梦倒下时，所有其他FIELD宝可梦恢复HP，且提升SPEED。",
 		"MONSTER": "MONSTER宝可梦的攻击可以使敌方宝可梦陷入FLINCH 3秒。每当他们击倒目标时，他们能提升数值，恢复HP，变得更大。",
 		"HUMAN": "HUMAN宝可梦能在用攻击和招式造成伤害时按一定百分比恢复HP，还能通过招式学习器学习新的招式。",
-		"AQUATIC": "AQUATIC宝可梦能降低所有我方宝可梦受到状态异常影响的时间。开战8秒后，会有一道席卷全场的海浪清除负面状态和场地效果，治疗我方AQUATIC宝可梦，并击退敌方宝可梦且对他们造成伤害。",
+		"AQUATIC": "AQUATIC宝可梦能降低所有我方宝可梦受到状态异常影响的时间。开战8秒后，会有一道席卷全场的海浪清除负面状态和BOARD_EFFECT，治疗我方AQUATIC宝可梦，并击退敌方宝可梦且对他们造成伤害。",
 		"BUG": "战斗开始时，复制我方STRONGEST BUG宝可梦。",
 		"FLYING": "FLYING宝可梦在HP低于阈值时会飞离，除非他们处于PARALYSIS，FREEZE，LOCKED或SLEEP。",
 		"FLORA": "当我方FLORA宝可梦倒下时，花盆中的花朵会开放，同时玩家能收集RICH_MULCH。STAR较多的宝可梦能提供更多肥料，肥料可以用来进化花盆中的宝可梦。",
