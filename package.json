@@ -80,7 +80,7 @@
     "i18next": "^25.0.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^3.0.0",
-    "immer": "^10.0.3",
+    "immer": "^11.0.1",
     "jimp": "^1.6.0",
     "loglevel": "^1.8.1",
     "markdown-to-config": "^0.4.0",
