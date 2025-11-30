@@ -2496,7 +2496,7 @@
 		"AIR_BALLOON": "Das Pokémon erhält den FLYING-Typ und +10% Chance Angriffen auszuweichen.",
 		"HARD_STONE": "Das Pokémon erhält den ROCK-Typ",
 		"EXPLORER_KIT": "Gibt GROUND Synergie. Erhöht die [LK] Chance um vergrabenes Gold im Boden zu finden.",
-		"INCENSE": "Jedes Pokémon im Shop hat eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
+		"INCENSE": "Das Pokémon erhält den FLORA-Typ. Jedes Pokémon im Shop hat eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
 		"EXP_SHARE": "Ermittelt die besten ATK, AP, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
 		"POKERUS_VIAL": "Das Pokémon erhält den POISON-Typ. Infiziert den Träger mit POKERUS, gewinnt alle 2.5 Sekunden 1 ATK und 10 AP und überträgt sich auf Verbündete",
 		"SILK_SCARF": "Verleiht dem Träger NORMAL-Synergie. Erhöht SHIELD aus allen Quellen um 50%.",

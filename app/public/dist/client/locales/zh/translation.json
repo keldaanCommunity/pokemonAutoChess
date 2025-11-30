@@ -2736,7 +2736,7 @@
 		"AIR_BALLOON": "携带者也被视作FLYING宝可梦。携带者有10%的概率闪避攻击，且无视BOARD_EFFECT。",
 		"HARD_STONE": "携带者也被视作ROCK宝可梦。",
 		"EXPLORER_KIT": "携带者也被视作GROUND宝可梦。提升挖掘时发现金币的[LK]概率。",
-		"INCENSE": "携带者也被视作FLORA宝可梦。商店中的宝可梦与携带者至少一项共鸣相同的概率提升5%。",
+		"INCENSE": "携带者也被视作FLORA宝可梦。携带者也被视作FLORA宝可梦。商店中的宝可梦与携带者至少一项共鸣相同的概率提升5%。",
 		"TERRAIN_EXTENDER": "战斗开始时，根据携带者的共鸣使其获得ELECTRIC_FIELD、GRASS_FIELD、PSYCHIC_FIELD或是FAIRY_FIELD。携带者释放招式时，会将相应的场地效果传播给所有同样具有对应共鸣的我方宝可梦。",
 		"EXP_SHARE": "获得ADJACENT_IN_THE_SAME_ROW的我方宝可梦中最高的ATK，AP，DEF与SPE_DEF。",
 		"POKERUS_VIAL": "携带者也被视作POISON宝可梦。携带者受到POKERUS，每2.5秒提升1点ATK和10点AP，且会将病毒传播给其他我方宝可梦。",

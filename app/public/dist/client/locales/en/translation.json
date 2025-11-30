@@ -2736,7 +2736,7 @@
 		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to any BOARD_EFFECT.",
 		"HARD_STONE": "Gives ROCK synergy.",
 		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground.",
-		"INCENSE": "Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
+		"INCENSE": "Gives FLORA synergy. Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
 		"TERRAIN_EXTENDER": "At the start of the fight, holder gains either ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD or FAIRY_FIELD based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.",
 		"EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of allies ADJACENT_IN_THE_SAME_ROW.",
 		"POKERUS_VIAL": "Gives POISON synergy. Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2.5 seconds and transmitting to allies.",
