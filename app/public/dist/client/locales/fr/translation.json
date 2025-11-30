@@ -2736,7 +2736,7 @@
 		"AIR_BALLOON": "Le porteur gagne le type FLYING et 10% de chance d'esquiver les attaques. Il est aussi immunisé contre tous les BOARD_EFFECT.",
 		"HARD_STONE": "Le porteur gagne le type ROCK.",
 		"EXPLORER_KIT": "Le porteur gagne le type GROUND, et augmente sa [LK] de trouver de l'or enfoui dans le sol.",
-		"INCENSE": "Chaque Pokémon du magasin a 5% de chance en plus de partager une synergie commune avec le porteur.",
+		"INCENSE": "Le porteur gagne le type FLORA. Chaque Pokémon du magasin a 5% de chance en plus de partager une synergie commune avec le porteur.",
 		"TERRAIN_EXTENDER": "Au début du combat, le porteur obtient un ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD ou FAIRY_FIELD selon ses synergies. Lors de l'activation de sa capacité, l'effet du champ est étendu à tous les alliés partageant la synergie du champ.",
 		"EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés ADJACENT_IN_THE_SAME_ROW.",
 		"POKERUS_VIAL": "Le porteur gagne le type POISON. Infecte le porteur avec le POKERUS, lui offrant 1 ATK et 10 AP toutes les 2,5 secondes et transmet ces bonus à ses alliés.",
