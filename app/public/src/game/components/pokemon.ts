@@ -1502,7 +1502,6 @@ export function loadCompressedAtlas(
   index: string
 ): Promise<void> {
   if (index in lazyLoadingRequests) {
-    console.log("reuse loading request for " + index)
     return lazyLoadingRequests[index]
   }
   lazyLoadingRequests[index] = new Promise((resolve) => {
