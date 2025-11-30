@@ -802,7 +802,7 @@ export class MiniGame {
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
-        if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF) {
+        if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF && state.stageLevel === 0) {
           const avatar = spawnDIAYAvatar(player)
           player.board.set(avatar.id, avatar)
           avatar.onAcquired(player)
