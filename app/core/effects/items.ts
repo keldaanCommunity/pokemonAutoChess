@@ -1004,7 +1004,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         const recipe = ItemRecipe[heldItem]
         if (recipe) {
           player.items.push(...recipe)
-          pokemon.items.delete(heldItem)
+          pokemon.removeItem(heldItem, player)
           consummed = true
         }
       })
