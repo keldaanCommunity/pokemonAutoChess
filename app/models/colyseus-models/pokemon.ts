@@ -19196,7 +19196,7 @@ export class Klink extends Pokemon {
   evolution = Pkm.KLANG
   hp = 50
   atk = 4
-  speed = 57
+  speed = 42
   def = 6
   speDef = 4
   maxPP = 100
@@ -19212,7 +19212,7 @@ export class Klang extends Pokemon {
   evolution = Pkm.KLINKLANG
   hp = 100
   atk = 8
-  speed = 57
+  speed = 42
   def = 10
   speDef = 6
   maxPP = 100
@@ -19227,7 +19227,7 @@ export class Klinklang extends Pokemon {
   stars = 3
   hp = 150
   atk = 16
-  speed = 57
+  speed = 42
   def = 18
   speDef = 12
   maxPP = 100
