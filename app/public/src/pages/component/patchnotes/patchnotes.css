@@ -5,6 +5,11 @@
   flex-direction: column;
 }
 
+.patchnotes.modal {
+  width: 95vw;
+  height: calc(100% - 2em - 6px);
+}
+
 .patchnotes h1 {
   font-size: 150%;
   text-shadow: 2px 2px 2px #00000040;
@@ -48,12 +53,14 @@
 
 .patchnotes-detail-view {
   display: flex;
+  width: 100%;
 }
 
 .detail-content {
   display: flex;
   gap: 0.5em;
   height: 100%;
+  width: 100%;
   align-items: stretch;
 }
 
