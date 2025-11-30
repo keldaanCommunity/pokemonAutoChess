@@ -417,8 +417,8 @@ export default function Game() {
         if (gameScene) {
           await gameScene.preloadMaps(maps)
           gameScene.load
-            .on("complete", () => {
-              if (!PortalCarouselStages.includes(room.state.stageLevel)) {
+            .once("complete", () => {
+              if (room.state.phase !== GamePhaseState.TOWN) {
                 // map loaded after the end of the portal carousel stage, we swap it now. better later than never
                 gameContainer &&
                   gameContainer.player &&
