@@ -12876,7 +12876,7 @@ export class Cherubi extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolutions = [Pkm.CHERRIM, Pkm.CHERRIM_SUNLIGHT]
-  evolutionRule = new StackBasedEvolutionRule((pokemon, player) => {
+  evolutionRule = new CountEvolutionRule(3, (pokemon, player) => {
     const hasLight =
       (player.synergies.get(Synergy.LIGHT) ?? 0) >=
       SynergyTriggers[Synergy.LIGHT][0]
