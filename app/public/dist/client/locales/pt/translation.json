@@ -1309,7 +1309,7 @@
 		"MYSTICAL_FIRE": "Inflige [20,40,80,SP] SPECIAL",
 		"FLAME_CHARGE": "Corra para a retaguarda inimiga, causando [30,60,120,SP] SPECIAL",
 		"LEECH_SEED": "POISONNED o alvo por [3,6,12] segundos, curando [20,40,80,SP] HP",
-		"LOCK_ON": "Bloqueie o alvo. O próximo ataque não pode errar e aplique [300,SP]% TRUE.",
+		"LOCK_ON": "Bloqueie o alvo. O próximo ataque não pode errar e aplique [200,SP]% TRUE.",
 		"DISABLE": "Distribua [15,30,60,SP] SPECIAL e SILENCE o alvo e seus inimigos adjacentes",
 		"RAZOR_WIND": "Inflige [20,40,80,SP] SPECIAL",
 		"WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL e deixa todos os inimigos adjacentes PARALYSIS por 3 segundos",
