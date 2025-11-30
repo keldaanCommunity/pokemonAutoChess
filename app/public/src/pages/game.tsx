@@ -854,7 +854,7 @@ export default function Game() {
         })
 
         $player.wanderers.onAdd((wanderer: Wanderer) => {
-          if (gameContainer.game) {
+          if (gameContainer.game && player.id === store.getState().game.currentPlayerId) {
             const g = getGameScene()
             if (g && g.wandererManager) {
               g.wandererManager.addWanderer(wanderer)
