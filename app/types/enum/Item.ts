@@ -970,6 +970,7 @@ export const UnholdableItems = [
   ...Dishes,
   ...SynergyGems,
   ...Mulches,
+  ...MissionOrders,
   Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.MYSTERY_BOX,
