@@ -1497,8 +1497,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         p.pokemon.positionY = substitute.positionY
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
-        p.pokemon.items = new SetSchema<Item>() // needed to solve a reactivity issue
-        substitute.items.forEach((it) => p.pokemon.addItem(it, player))
+        /* Set schemas needs to be reset to fix reactivity issues ; bug on Colyseus Schema ? */
+        p.pokemon.types = new SetSchema<Synergy>(values(p.pokemon.types))
+        p.pokemon.items = new SetSchema<Item>()
+        p.pokemon.addItems(values(substitute.items), player)
         substitute.items.clear()
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
         player.pokemonsTrainingInDojo.splice(
