@@ -19197,8 +19197,8 @@ export class Klink extends Pokemon {
   hp = 50
   atk = 4
   speed = 42
-  def = 6
-  speDef = 4
+  def = 3
+  speDef = 2
   maxPP = 100
   range = 3
   skill = Ability.GEAR_GRIND
@@ -19213,8 +19213,8 @@ export class Klang extends Pokemon {
   hp = 100
   atk = 8
   speed = 42
-  def = 10
-  speDef = 6
+  def = 5
+  speDef = 3
   maxPP = 100
   range = 3
   skill = Ability.GEAR_GRIND
@@ -19228,8 +19228,8 @@ export class Klinklang extends Pokemon {
   hp = 150
   atk = 16
   speed = 42
-  def = 18
-  speDef = 12
+  def = 9
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.GEAR_GRIND

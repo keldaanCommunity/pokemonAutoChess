@@ -2131,7 +2131,7 @@
 		"PLASMA_TEMPEST": "S'envole et tire 3 projectiles de plasma sur les ennemis les plus proches. Chaque projectile inflige [40,SP] SPECIAL, réduits de 10 % par ennemi traversé.",
 		"TRIMMING_MOWER": "Fonce sur un rayon de 2 cases pour toucher un maximum d'ennemis et se soigne de [60,SP] HP. Les soins en excès sont convertis en SHIELD. Inflige [40,SP] SPECIAL aux ennemis ADJACENT.",
 		"PLASMA_FLASH": "Tire 4 éclairs de plasma infligeant [20,SP] SPECIAL chacun. Gagne +1 éclair par utilisation.",
-		"GEAR_GRIND": "Lance deux écrous sur la cible, chacun infligeant [50,100,200,SP]% de la SPEED du lanceur comme SPECIAL.",
+		"GEAR_GRIND": "Lance deux écrous sur la cible, chacun infligeant [25,50,100,SP]% de la SPEED du lanceur comme SPECIAL.",
 		"STRANGE_STEAM": "Projette une étrange vapeur autour du lanceur, sa portée augmentant d'une case par utilisation. Cette vapeur donne FAIRY_FIELD aux alliés et a [30,LK]% de chances d'infliger CONFUSION aux ennemis pendant 3 secondes. Les Pokémon pris dans la vapeur infligent et reçoivent 20% de SPECIAL supplémentaires.",
 		"PUMMELING_PAYBACK": "Bombarde la cible d'une tempête de coups de poing, infligeant [60,SP] + 125% ATK SPECIAL et soignant [40,SP] HP.",
 		"VOLT_SURGE": "Le lanceur entre en surcharge, gagnant un ELECTRIC_FIELD, 30 SPEED et [50,SP] HP max. Ensuite, chaque troisième attaque touche à la chaîne jusqu'à 4 ennemis proches, infligeant [20,SP] SPECIAL à chacun.",
@@ -3104,7 +3104,7 @@
 		"SLOWPOKE": "Évoluera en $t(pkm.SLOWBRO) ou $t(pkm.SLOWKING) en fonction de la synergie dominante entre WATER et PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Évoluera en $t(pkm.GALARIAN_SLOWBRO) ou $t(pkm.GALARIAN_SLOWKING) en fonction de la synergie dominante entre POISON et PSYCHIC.",
 		"ROTOM": "Motisma peut changer de forme en choisissant un nouvel appareil à posséder dans le ROTOM_CATALOG.",
-		"GEARS": "Pendant que ses engrenages tournent, cela génère de l'énergie qui octroie 1 SPEED par seconde à votre équipe.",
+		"GEARS": "Pendant que ses engrenages tournent, cela génère de l'énergie qui octroie 1 SPEED toutes les [3,2,1] secondes à votre équipe.",
 		"ORTHWORM": "En creusant un trou, gagne 5 HP de façon permanente.",
 		"TADBULB": "Lorsqu'il démarre sous la LIGHT ou quand il subit 50 dégâts ou plus, entre en surcharge et inflige [30,SP] SPECIAL aux ennemis ADJACENT qui sont également repoussés. La première surcharge donne 30 SPEED, 50 SHIELD et un ELECTRIC_FIELD.",
 		"PINCURCHIN": "Lorsqu'il est touché par des SPECIAL, il gagne un ELECTRIC_FIELD. Sous l'effet d'un ELECTRIC_FIELD, les attaques reçues au corps à corps infligent PARALYSIS à l'attaquant pendant 2 secondes."
