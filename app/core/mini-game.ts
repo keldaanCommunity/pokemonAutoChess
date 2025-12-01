@@ -721,8 +721,7 @@ export class MiniGame {
     }
   }
 
-  stop(room: GameRoom) {
-    const state: GameState = room.state
+  stop(state: GameState) {
     const players: MapSchema<Player> = state.players
     const encounter = state.townEncounter
     this.bodies.forEach((body, key) => {
