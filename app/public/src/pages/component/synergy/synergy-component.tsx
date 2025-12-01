@@ -22,12 +22,13 @@ export default function SynergyComponent(props: {
     .at(-1)
 
   const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const hightlightSynergy = (type: Synergy) => {
+  const highlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
     if (!outline) return // outline plugin doesnt work with canvas renderer
-    currentPlayer?.board.forEach((p) => {
+    if (!currentPlayer?.board) return
+    currentPlayer.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
@@ -40,7 +41,7 @@ export default function SynergyComponent(props: {
     })
   }
 
-  const removeHightlightSynergy = (type: Synergy) => {
+  const removeHighlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
@@ -89,10 +90,10 @@ export default function SynergyComponent(props: {
       }}
       data-tooltip-id={"detail-" + props.type}
       onMouseEnter={() => {
-        hightlightSynergy(props.type)
+        highlightSynergy(props.type)
       }}
       onMouseLeave={() => {
-        removeHightlightSynergy(props.type)
+        removeHighlightSynergy(props.type)
       }}
     >
       {props.tooltipPortal
