@@ -1296,6 +1296,7 @@ export const PassiveEffects: Partial<
   ],
   [Passive.GEARS]: [
     new OnSimulationStartEffect(({ simulation, entity }) => {
+      const interval = [3000, 2000, 1000][entity.stars - 1] ?? 1000
       simulation.board.forEach((x, y, pkm) => {
         if (pkm && pkm.team === entity.team) {
           pkm.effectsSet.add(
@@ -1306,7 +1307,7 @@ export const PassiveEffects: Partial<
                 }
               },
               Passive.GEARS,
-              1000
+              interval
             )
           )
         }

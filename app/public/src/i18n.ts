@@ -27,7 +27,7 @@ i18n
     debug: process.env.NODE_ENV !== "production",
     backend: {
       loadPath(lngs, namespaces) {
-        return `locales/{{lng}}/{{ns}}.json?v=${pkg.version}`
+        return `locales/{{lng}}/{{ns}}.json?v=${pkg.version}-hotfix1` // TEMPORARY suffix for cache buster
       }
     },
     interpolation: {

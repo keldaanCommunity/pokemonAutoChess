@@ -2131,7 +2131,7 @@
 		"PLASMA_TEMPEST": "飞离对手并对最近的敌方宝可梦发射3支等离子箭，每支造成[40,SP]点SPECIAL，每经过一只敌方宝可梦使伤害衰减10%。",
 		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
 		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
-		"GEAR_GRIND": "对目标发射两枚齿轮，每枚造成SPECIAL，数值相当于使用者[50,100,200,SP]%的SPEED。",
+		"GEAR_GRIND": "对目标发射两枚齿轮，每枚造成SPECIAL，数值相当于使用者[25,50,100,SP]%的SPEED。",
 		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。",
 		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。",
 		"VOLT_SURGE": "使用者进入增压状态，获得ELECTRIC_FIELD并提升30点SPEED和[50,SP]点最大HP。本轮战斗的剩余时间内，每第3次攻击产生一道造成[20,SP]点SPECIAL并会弹射至至多4只附近敌方宝可梦身上的链状闪电。",
@@ -3104,7 +3104,7 @@
 		"SLOWPOKE": "呆呆兽会根据WATER和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.SLOWBRO)或$t(pkm.SLOWKING)。",
 		"GALARIAN_SLOWPOKE": "伽勒尔呆呆兽会根据POISON和PSYCHIC共鸣中等级较高的一方进化为$t(pkm.GALARIAN_SLOWBRO)或$t(pkm.GALARIAN_SLOWKING)。",
 		"ROTOM": "洛托姆可以通过选择ROTOM_CATALOG中的一件新家电以潜入来更改形态。",
-		"GEARS": "此宝可梦的齿轮旋转时会持续产生能量，每秒使我方宝可梦提升1点SPEED。",
+		"GEARS": "此宝可梦的齿轮旋转时会持续产生能量，每[3,2,1]秒使我方宝可梦提升1点SPEED。",
 		"ORTHWORM": "挖洞时永久提升5点HP。",
 		"TADBULB": "每当受到50点伤害或在战斗开始时被LIGHT共鸣的聚光灯照射，便会对ADJACENT敌方宝可梦造成[30,SP]点SPECIAL并将他们击退。首次触发此效果时还会进入增压状态，提升30点SPEED并获得50点SHIELD和ELECTRIC_FIELD。",
 		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。"
