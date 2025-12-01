@@ -1307,6 +1307,13 @@ export default class PokemonSprite extends DraggableObject {
     this.sendToBack(this.light)
   }
 
+  removeLight() {
+    if (this.light) {
+      this.remove(this.light, true)
+      this.light = undefined
+    }
+  }
+
   addElectricField() {
     if (!this.electricField) {
       this.electricField = this.scene.add
@@ -1398,6 +1405,10 @@ export default class PokemonSprite extends DraggableObject {
 
   addBerserkEffect() {
     this.sprite.setTint(0x00ff00)
+  }
+
+  removeBerserkEffect() {
+    this.sprite.clearTint()
   }
 
   addFloatingAnimation() {

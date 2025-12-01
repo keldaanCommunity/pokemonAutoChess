@@ -250,6 +250,12 @@ export class Pokemon extends Schema implements IPokemon {
     return regionSynergies.some((s) => this.types.has(s))
   }
 
+  addItem(item: Item, player: Player) {
+    if (this.canHoldItems === false) return
+    this.items.add(item)
+    this.onItemGiven(item, player)
+  }
+
   removeItem(item: Item, player: Player) {
     this.removeItems([item], player)
   }
