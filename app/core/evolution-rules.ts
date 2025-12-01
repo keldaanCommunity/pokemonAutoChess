@@ -175,7 +175,7 @@ export class CountEvolutionRule extends EvolutionRule {
     const itemsCompleteToAdd = [
       ...itemsCompleteOnBoard,
       ...itemsCompleteOnBench
-    ].slice(0, 3)
+    ]
 
     for (const item of itemsCompleteToAdd) {
       if (pokemonEvolved.items.has(item) || pokemonEvolved.items.size >= 3) {
