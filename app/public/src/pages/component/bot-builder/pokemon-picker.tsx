@@ -115,10 +115,16 @@ function PokemonPickerTab(props: {
 }) {
   const [preferences, setPreferences] = usePreferences()
   const { t } = useTranslation()
+  const [isDragging, setIsDragging] = useState(false)
 
   function handleOnDragStart(e: React.DragEvent, name: Pkm) {
     e.stopPropagation()
     e.dataTransfer.setData("text/plain", `pokemon,${name}`)
+    setIsDragging(true)
+  }
+
+  function handleOnDragEnd() {
+    setIsDragging(false)
   }
 
   const ingame = useLocation().pathname === "/game"
@@ -255,6 +261,7 @@ function PokemonPickerTab(props: {
                   data-tooltip-content={p.name}
                   draggable
                   onDragStart={(e) => handleOnDragStart(e, p.name)}
+                  onDragEnd={handleOnDragEnd}
                 >
                   <img src={getPortraitSrc(p.index)} />
                 </div>
@@ -305,7 +312,10 @@ function PokemonPickerTab(props: {
           </ul>
         </details>
       </div>
-      <GamePokemonDetailTooltip origin="planner" />
+      <GamePokemonDetailTooltip
+        origin="planner"
+        {...(isDragging ? { isOpen: false } : {})}
+      />
     </>
   )
 }
