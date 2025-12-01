@@ -366,6 +366,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
 
 export function GamePokemonDetailTooltip(props: {
   origin: "wiki" | "patchnotes" | "after" | "planner"
+  isOpen?: boolean
 }) {
   return (
     <Tooltip
@@ -375,6 +376,7 @@ export function GamePokemonDetailTooltip(props: {
         <GamePokemonDetail pokemon={content as Pkm} origin={props.origin} />
       )}
       float
+      isOpen={props.isOpen}
     />
   )
 }
