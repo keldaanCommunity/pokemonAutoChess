@@ -404,14 +404,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
 
     for (let x = -1; x < 2; x++) {
       for (let y = startY; y < endY; y++) {
-        if (
-          !(
-            pokemon.positionX + x < 0 ||
-            pokemon.positionX + x > BOARD_WIDTH ||
-            pokemon.positionY + y < 0 ||
-            pokemon.positionY + y > BOARD_HEIGHT
-          )
-        ) {
+        if (board.isOnBoard(pokemon.positionX + x, pokemon.positionY + y)) {
           cells.push({
             x: pokemon.positionX + x,
             y: pokemon.positionY + y,
