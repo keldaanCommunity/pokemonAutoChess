@@ -251,9 +251,16 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   addItem(item: Item, player: Player) {
+    this.addItems([item], player)
+  }
+
+  addItems(items: Item[], player: Player) {
     if (this.canHoldItems === false) return
-    this.items.add(item)
-    this.onItemGiven(item, player)
+    for (const item of items) {
+      this.items.add(item)
+      this.onItemGiven(item, player)
+    }
+    player.updateSynergies()
   }
 
   removeItem(item: Item, player: Player) {
