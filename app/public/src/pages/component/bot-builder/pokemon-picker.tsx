@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Tooltip } from "react-tooltip"
 import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
@@ -23,13 +22,9 @@ import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { usePreferences } from "../../../preferences"
-import Game from "../../game"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
-import {
-  GamePokemonDetail,
-  GamePokemonDetailTooltip
-} from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 
 export default function PokemonPicker(props: {
@@ -185,11 +180,12 @@ function PokemonPickerTab(props: {
   const overlapsMap = new Map(
     SynergyArray.filter((type) => type !== props.type).map((type) => [
       type,
-      filteredPokemons.filter(
-        (p, i, list) =>
-          p.types.includes(type) &&
-          list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
-      ).length
+      filteredPokemons
+        .filter((p) => p.types.includes(type))
+        .filter(
+          (p, i, list) =>
+            list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
+        ).length
     ])
   )
 

@@ -1,8 +1,6 @@
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Tooltip } from "react-tooltip"
 import { RarityColor, SynergyTriggers } from "../../../../../config"
 import { SynergyEffects } from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -102,14 +100,12 @@ export function WikiType(props: { type: Synergy }) {
   const overlapsMap = new Map(
     SynergyArray.filter((type) => type !== props.type).map((type) => [
       type,
-      pokemons.filter(
-        (p, i, list) =>
-          p.types.includes(type) &&
-          list.findIndex(
-            (q) =>
-              q.types.includes(type) && PkmFamily[p.name] === PkmFamily[q.name]
-          ) === i
-      ).length
+      pokemons
+        .filter((p) => p.types.includes(type))
+        .filter(
+          (p, i, list) =>
+            list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
+        ).length
     ])
   )
 
