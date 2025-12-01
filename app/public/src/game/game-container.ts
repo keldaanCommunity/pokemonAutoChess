@@ -458,9 +458,20 @@ class GameContainer {
         })
       })
 
-      $pokemon.items.onChange((value, key) => {
+      $pokemon.items.onAdd((item) => {
         if (player.id === this.spectatedPlayerId) {
-          this.gameScene?.board?.updatePokemonItems(player.id, pokemon, value)
+          this.gameScene?.board?.updatePokemonItems(player.id, pokemon, item)
+        }
+      })
+
+      $pokemon.items.onRemove((item) => {
+        if (player.id === this.spectatedPlayerId) {
+          this.gameScene?.board?.updatePokemonItems(
+            player.id,
+            pokemon,
+            item,
+            true
+          )
         }
       })
     }

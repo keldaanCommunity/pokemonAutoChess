@@ -828,7 +828,12 @@ export default class BoardManager {
     }
   }
 
-  updatePokemonItems(playerId: string, pokemon: IPokemon, item: Item) {
+  updatePokemonItems(
+    playerId: string,
+    pokemon: IPokemon,
+    item: Item,
+    removed: boolean = false
+  ) {
     // logger.debug(change);
     if (this.player.id === playerId) {
       const pkm = this.pokemons.get(pokemon.id)
@@ -836,13 +841,25 @@ export default class BoardManager {
         pkm.itemsContainer.render(pokemon.items)
       }
       if (item === Item.SHINY_STONE) {
-        pkm?.addLight()
+        if (removed) {
+          pkm?.removeLight()
+        } else {
+          pkm?.addLight()
+        }
       }
       if (item === Item.BERSERK_GENE) {
-        pkm?.addBerserkEffect()
+        if (removed) {
+          pkm?.removeBerserkEffect()
+        } else {
+          pkm?.addBerserkEffect()
+        }
       }
       if (item === Item.AIR_BALLOON) {
-        pkm?.addFloatingAnimation()
+        if (removed) {
+          pkm?.removeFloatingAnimation()
+        } else {
+          pkm?.addFloatingAnimation()
+        }
       }
     }
   }

@@ -1,4 +1,5 @@
 import { Command } from "@colyseus/command"
+import { SetSchema } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 import {
@@ -760,12 +761,10 @@ export class OnDragDropItemCommand extends Command<
         // pokemon already has the combined item so the second one pops off and go to player inventory
         player.items.push(itemCombined)
       } else {
-        pokemon.items.add(itemCombined)
-        pokemon.onItemGiven(itemCombined, player)
+        pokemon.addItem(itemCombined, player)
       }
     } else {
-      pokemon.items.add(item)
-      pokemon.onItemGiven(item, player)
+      pokemon.addItem(item, player)
       removeInArray(player.items, item)
     }
 
@@ -1496,10 +1495,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         p.pokemon.ap += [15, 30, 45][p.ticketLevel - 1] ?? 0
         p.pokemon.positionX = substitute.positionX
         p.pokemon.positionY = substitute.positionY
-        substitute.items.forEach((it) => p.pokemon.items.add(it))
-        substitute.items.clear()
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
+        p.pokemon.items = new SetSchema<Item>() // needed to solve a reactivity issue
+        substitute.items.forEach((it) => p.pokemon.addItem(it, player))
+        substitute.items.clear()
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
         player.pokemonsTrainingInDojo.splice(
           player.pokemonsTrainingInDojo.indexOf(p),
