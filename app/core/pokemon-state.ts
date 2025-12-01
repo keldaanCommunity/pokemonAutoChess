@@ -321,7 +321,7 @@ export default abstract class PokemonState {
         caster.healDone += healReceived
       }
 
-      if (overheal > 0 && pokemon.types.has(Synergy.GRASS)) {
+      if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {
         pokemon.addMaxHP(0.4 * overheal, pokemon, 0, false, false)
       }
 
