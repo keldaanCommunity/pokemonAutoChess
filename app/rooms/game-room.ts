@@ -1243,10 +1243,15 @@ export default class GameRoom extends Room<GameState> {
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
     }
 
-    const selectedItem = player.itemsProposition[selectedIndex]
-    if (player.itemsProposition.length > 0 && selectedItem != null) {
-      player.items.push(selectedItem)
-      player.itemsProposition.clear()
+    if (
+      AdditionalPicksStages.includes(this.state.stageLevel) ||
+      this.state.stageLevel <= 1
+    ) {
+      const selectedItem = player.itemsProposition[selectedIndex]
+      if (player.itemsProposition.length > 0 && selectedItem != null) {
+        player.items.push(selectedItem)
+        player.itemsProposition.clear()
+      }
     }
 
     if (this.state.stageLevel <= 1) {
@@ -1266,7 +1271,7 @@ export default class GameRoom extends Room<GameState> {
         pokemon.positionY = 0
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
-      } else  {
+      } else {
         // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
         const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
         player.addMoney(sellPrice, true, null)

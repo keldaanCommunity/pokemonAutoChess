@@ -974,7 +974,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     this.state.updatePhaseNeeded = false
     if (this.state.phase == GamePhaseState.TOWN) {
-      this.room.miniGame.stop(this.room)
+      this.stopTownPhase()
       /* Normally Stage level is bumped after a fighting phase, but since magikarp is round 1, we need to increase stage level from 0 -> 1 to avoid a PVP round 1. There is probably a better solution*/
       if (this.state.stageLevel === 0) {
         this.state.stageLevel = 1
@@ -1691,6 +1691,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       // Update Bots after unown deletion so unown in bot boards are not deleted
       this.state.botManager.updateBots()
     }
+  }
+
+  stopTownPhase() {
+    this.room.miniGame.stop(this.room.state)
   }
 
   initializeTownPhase() {
