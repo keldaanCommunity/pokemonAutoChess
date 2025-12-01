@@ -2125,7 +2125,7 @@
 		"MOONBLAST": "Fires 6 moons dealing [20,SP] SPECIAL each. KO'ing a Pokémon retargets remaining moons to the nearest enemy and grants 1 bonus moon.",
 		"HYDRO_STEAM": "Sprays a powerful jet of boiling water, dealing [35,70,140,SP] SPECIAL to enemies in a 2-tiles range CONE, and inflicting BURN for 4 seconds.",
 		"PLASMA_FISSION": "Fires a plasma bolt towards the current target that deals [60,SP] SPECIAL to the first enemy hit. It then splits in two, dealing 50% less SPECIAL whenever it passes through an enemy.",
-		"SUPER_HEAT": "Emits a CONE of flame that deals 9 x [10,SP] SPECIAL over 3 seconds and ARMOR_BREAK enemies for 1s.",
+		"SUPER_HEAT": "Emits a CONE of flame that deals 9 x [10,SP] SPECIAL over the course of 3 seconds and ARMOR_BREAK enemies for 1 second.",
 		"POWER_WASH": "Floods the row with the highest total enemy HP with plasma drops. Dealing [160,SP] SPECIAL split evenly among all enemies on that row.",
 		"DEEP_FREEZE": "Fires 9 bolts of ice over 3 seconds, each dealing [10,SP] SPECIAL and reducing the targets SPE_DEF by 1. If the current target is KO'd, the bolts chain to the next closest enemy.",
 		"PLASMA_TEMPEST": "Flies away and fires 3 plasma bolts through the closest enemies. Each bolt deals [40,SP] SPECIAL, reduced by 10% for each enemy passed through.",
