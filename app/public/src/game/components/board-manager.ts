@@ -1079,7 +1079,7 @@ export default class BoardManager {
         pokemon,
         id,
         false,
-        true
+        false
       )
 
       this.pokemons.set(id, pkmSprite)
@@ -1094,7 +1094,7 @@ export default class BoardManager {
         )
       } else {
         pkmSprite.y -= 500
-        pkmSprite.orientation = Orientation.UP
+        pkmSprite.orientation = Orientation.DOWN
         pkmSprite.pokemon.action = PokemonActionState.WALK
 
         this.scene.tweens.add({
