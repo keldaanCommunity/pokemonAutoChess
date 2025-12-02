@@ -451,7 +451,11 @@ export default class Shop {
       }
 
       if (stageLevel === PortalCarouselStages[0]) {
-        player.itemsProposition[i] = pickRandomIn(NonSpecialItemComponents)
+        player.itemsProposition[i] = pickRandomIn(
+          NonSpecialItemComponents.filter(
+            (c) => player.itemsProposition.includes(c) === false
+          )
+        )
       }
 
       if (
