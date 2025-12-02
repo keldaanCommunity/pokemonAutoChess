@@ -1,6 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory, {
+  getColorVariantForPlayer,
   PkmColorVariantsByPkm
 } from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
@@ -116,7 +117,7 @@ export function pickFirstPartners(player: Player, state: GameState): Pkm[] {
         if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
       }
       if (pkm in PkmColorVariantsByPkm) {
-        pkm = PkmColorVariantsByPkm[pkm]!(player)
+        pkm = getColorVariantForPlayer(pkm, player)
       }
       return pkm
     })

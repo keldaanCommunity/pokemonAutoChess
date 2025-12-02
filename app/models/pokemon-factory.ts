@@ -68,9 +68,9 @@ export default class PokemonFactory {
   }
 }
 
-export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } =
-  {
-    [Pkm.FLABEBE]: (player) => {
+export function getColorVariantForPlayer(basePkm: Pkm, player: Player): Pkm {
+  switch (basePkm) {
+    case Pkm.FLABEBE: {
       switch (player.flowerPotsSpawnOrder[0]) {
         case FlowerPot.YELLOW:
           return Pkm.FLABEBE_YELLOW
@@ -82,8 +82,8 @@ export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } =
           return Pkm.FLABEBE_WHITE
       }
       return Pkm.FLABEBE
-    },
-    [Pkm.FLOETTE]: (player) => {
+    }
+    case Pkm.FLOETTE: {
       switch (player.flowerPotsSpawnOrder[0]) {
         case FlowerPot.YELLOW:
           return Pkm.FLOETTE_YELLOW
@@ -95,8 +95,8 @@ export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } =
           return Pkm.FLOETTE_WHITE
       }
       return Pkm.FLOETTE
-    },
-    [Pkm.FLORGES]: (player) => {
+    }
+    case Pkm.FLORGES: {
       switch (player.flowerPotsSpawnOrder[0]) {
         case FlowerPot.YELLOW:
           return Pkm.FLORGES_YELLOW
@@ -109,7 +109,10 @@ export const PkmColorVariantsByPkm: { [pkm in Pkm]?: (player: Player) => Pkm } =
       }
       return Pkm.FLORGES
     }
+    default:
+      return basePkm
   }
+}
 
 export const PkmColorVariants: readonly Pkm[] = [
   Pkm.FLABEBE_YELLOW,
@@ -125,6 +128,31 @@ export const PkmColorVariants: readonly Pkm[] = [
   Pkm.FLORGES_BLUE,
   Pkm.FLORGES_WHITE
 ]
+
+export type PkmColorVariant = (typeof PkmColorVariants)[number]
+
+export const PkmColorVariantsByPkm = {
+  [Pkm.FLABEBE]: [
+    Pkm.FLABEBE_YELLOW,
+    Pkm.FLABEBE_ORANGE,
+    Pkm.FLABEBE_BLUE,
+    Pkm.FLABEBE_WHITE
+  ],
+  [Pkm.FLOETTE]: [
+    Pkm.FLOETTE_YELLOW,
+    Pkm.FLOETTE_ORANGE,
+    Pkm.FLOETTE_BLUE,
+    Pkm.FLOETTE_WHITE
+  ],
+  [Pkm.FLORGES]: [
+    Pkm.FLORGES_YELLOW,
+    Pkm.FLORGES_ORANGE,
+    Pkm.FLORGES_BLUE,
+    Pkm.FLORGES_WHITE
+  ]
+} satisfies { [base in Pkm]?: PkmColorVariant[] }
+
+export type PkmWithColorVariant = keyof typeof PkmColorVariantsByPkm
 
 export function getPokemonBaseline(name: Pkm) {
   switch (name) {

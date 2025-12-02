@@ -56,21 +56,15 @@ import {
   chance,
   pickNRandomIn,
   pickRandomIn,
-  shuffleArray,
-  simpleHashSeededCoinFlip
+  shuffleArray
 } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { Effects } from "../effects"
-import PokemonFactory, {
-  getPokemonBaseline,
-  PkmColorVariantsByPkm
-} from "../pokemon-factory"
+import PokemonFactory, { getPokemonBaseline } from "../pokemon-factory"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
 } from "../precomputed/precomputed-pokemon-data"
-import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../precomputed/precomputed-rarity"
-import { getRegularsTier1 } from "../shop"
 import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
