@@ -151,7 +151,7 @@ export function getSellPrice(
   } else if (pokemon.rarity === Rarity.LEGENDARY) {
     price = duo ? SellPrices.LEGENDARY_DUO : SellPrices.LEGENDARY
   } else if (getPokemonBaseline(name) === Pkm.EEVEE) {
-    price = RarityCost[pokemon.rarity]
+    price = SellPrices.EEVEE
   } else if (duo) {
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
   } else {

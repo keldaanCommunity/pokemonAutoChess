@@ -101,6 +101,7 @@ export const SellPrices = {
   EGG: 2,
   SHINY_EGG: 10,
   DITTO: 5,
+  EEVEE: 1,
   FALINKS_TROOPER: 5,
   MELTAN: 0,
   MAGIKARP: 0,
