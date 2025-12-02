@@ -157,7 +157,8 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
               board,
               attackType: AttackType.SPECIAL,
               attacker: target,
-              shouldTargetGainMana: true
+              shouldTargetGainMana: true,
+              isRetaliation: true
             })
           }
         }
