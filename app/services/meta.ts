@@ -1,4 +1,3 @@
-import { log } from "console"
 import ItemsStatistic, {
   IItemsStatisticV2
 } from "../models/mongo-models/items-statistic-v2"
