@@ -61,7 +61,11 @@ import {
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import { getPokemonBaseline, PkmColorVariantsByPkm } from "./pokemon-factory"
+import {
+  getColorVariantForPlayer,
+  getPokemonBaseline,
+  PkmColorVariantsByPkm
+} from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 import { PVEStages } from "./pve-stages"
@@ -447,7 +451,7 @@ export default class Shop {
           selected = pickRandomIn(regionalVariants)
       }
       if (selected in PkmColorVariantsByPkm) {
-        selected = PkmColorVariantsByPkm[selected]!(player)
+        selected = getColorVariantForPlayer(selected as Pkm, player)
       }
 
       if (stageLevel === PortalCarouselStages[0]) {
@@ -502,7 +506,7 @@ export default class Shop {
           if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
         }
         if (pkm in PkmColorVariantsByPkm) {
-          pkm = PkmColorVariantsByPkm[pkm]!(player)
+          pkm = getColorVariantForPlayer(pkm, player)
         }
         return pkm
       })

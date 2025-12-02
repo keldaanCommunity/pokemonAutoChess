@@ -1,4 +1,5 @@
 import { BoosterRarityProbability, EmotionCost } from "../config"
+import { PkmColorVariantsByPkm } from "../models/pokemon-factory"
 import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
@@ -70,6 +71,13 @@ export function pickRandomPokemonBooster(
             Unowns.includes(p) === false &&
             getPokemonData(p).skill !== Ability.DEFAULT
         )
+        // Include color variants in the pool
+        candidates
+          .filter((p) => p in PkmColorVariantsByPkm)
+          .forEach((p) => {
+            const colorVariants = PkmColorVariantsByPkm[p]!
+            candidates.push(...colorVariants)
+          })
         if (candidates.length > 0) {
           name = pickRandomIn(candidates) as Pkm
           break

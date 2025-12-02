@@ -39,6 +39,7 @@ import { Wanderer } from "../../models/colyseus-models/wanderer"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
+  getColorVariantForPlayer,
   getPokemonBaseline,
   PkmColorVariantsByPkm
 } from "../../models/pokemon-factory"
@@ -308,7 +309,7 @@ export class OnDragDropPokemonCommand extends Command<
             dittoReplaced = true
             let pkm = getPokemonBaseline(pokemonToClone.name)
             if (pkm in PkmColorVariantsByPkm) {
-              pkm = PkmColorVariantsByPkm[pkm]!(player)
+              pkm = getColorVariantForPlayer(pkm, player)
             }
             const replaceDitto = PokemonFactory.createPokemonFromName(
               pkm,
