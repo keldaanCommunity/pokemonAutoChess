@@ -393,9 +393,11 @@ export default class Shop {
         : NB_UNIQUE_PROPOSITIONS
 
     for (let i = 0; i < nbPropositions; i++) {
-      const synergyWanted: Synergy | undefined = portalSynergies[i]
-      let candidates = allCandidates.filter((m) => {
-        const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+      let synergyWanted: Synergy | undefined = portalSynergies[i]
+
+      function filterCandidates(proposition: PkmProposition): boolean {
+        const pkm: Pkm =
+          proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
         const { types, regional } = getPokemonData(pkm)
 
         const hasSynergyWanted =
@@ -438,9 +440,13 @@ export default class Shop {
         }
 
         return true
-      })
+      }
 
-      if (candidates.length === 0) candidates = allCandidates
+      let candidates = allCandidates.filter(filterCandidates)
+      if (candidates.length === 0) {
+        synergyWanted = undefined
+        candidates = allCandidates.filter(filterCandidates)
+      }
       let selected = pickRandomIn(candidates)
 
       if (selected in PkmRegionalVariants) {
