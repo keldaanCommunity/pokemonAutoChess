@@ -1875,7 +1875,7 @@
 		"CRIT_POWER": "Dano crítico",
 		"DEF": "Defesa",
 		"SPE_DEF": "Defesa Especial",
-		"HP": "Pontos de saúde",
+		"HP": "HP",
 		"HEALTH_POINTS": "Pontos de Saúde (HP)",
 		"RANGE": "Raio de ataque",
 		"PP": "PP",
