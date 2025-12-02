@@ -439,7 +439,34 @@ export default class Shop {
 
         return true
       })
+      
+      if (candidates.length === 0) {
+        candidates = allCandidates.filter((m) => {
+        const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
+        const { types, regional } = getPokemonData(pkm)
 
+
+        if (regional) {
+          const pokemon = new PokemonClasses[pkm](pkm)
+          if (!pokemon.isInRegion(player.map)) {
+            // skip regional pokemons not in their region
+            return false
+          }
+        }
+
+        if (
+          player.pokemonsProposition.some((prop) => {
+            const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
+            return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
+          })
+        ) {
+          // avoid proposing two pokemons of the same family or regional variants
+          return false
+        }
+        return true
+      })
+      }
+      
       if (candidates.length === 0) candidates = allCandidates
       let selected = pickRandomIn(candidates)
 
