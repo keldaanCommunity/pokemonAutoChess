@@ -2059,7 +2059,7 @@
 		"HEAT_CRASH": "대상에게 돌진하여 밀어내고 [40,60,80,SP] SPECIAL 를 가한다. 시전자의 ATK 이 대상보다 클수록 피해량이 증가한다.",
 		"LASER_BLADE": "번갈아가며 사용:\n1. 레이저 검을 휘두르며 대상 뒤로 이동, [25,SP] SHIELD 를 얻고 경로상 대상과 ADJACENT 적에게 [25,SP] SPECIAL 를 가한다.\n2. 전방에서 레이저 검을 회전시켜 2회 [25,SP] + ATK 만큼 SPECIAL 를 가한다.",
 		"ICICLE_MISSILE": "후열의 적에게 고드름 미사일 [1,2,3]개를 발사하여 각각 [50,SP] SPECIAL 를 가하며 2초간 FREEZE 상태로 만든다.",
-		"ARM_THRUST": "[2,LK] 에서 [5,LK] 회 공격하여 매번 ATK 의 [100,SP]% 만큼 PHYSICAL 를 가한다. 각 공격은 CRIT_CHANCE 에 따라 독립적으로 치명타가 발생할 수 있다.",
+		"ARM_THRUST": "[LK] 2 에서 5 회 공격하여 매번 ATK 의 [100,SP]% 만큼 PHYSICAL 를 가한다. 각 공격은 CRIT_CHANCE 에 따라 독립적으로 치명타가 발생할 수 있다.",
 		"DRUM_BEATING": "순환하며 사용:\n1. 우드 블록: 모든 아군에게 [10,20,40,SP] SHIELD 부여\n2. 드럼 롤: 모든 적에게 [10,20,40,SP] SPECIAL 가함\n3. 템포 올리기: 모든 아군에게 [10,20,40,SP] SPEED 부여",
 		"PSYCHO_CUT": "대상 뒤 일직선상의 적들을 베는 3개의 염력 칼날을 발사하여 각각 피격된 모든 적에게 [10,20,40,SP] SPECIAL 를 가한다. 기본적으로 치명타가 발생할 수 있다.",
 		"WICKED_BLOW": "대상에게 [60,SP] TRUE 를 가한다. 항상 치명타로 공격한다.",

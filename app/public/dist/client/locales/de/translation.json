@@ -1949,7 +1949,7 @@
 		"HEAT_CRASH": "Kracht in den Gegner, was es zurückschleudert und [40,60,80,SP] SPECIAL zufügt. Macht umso mehr Schaden wie differenz der ATK zwischen Anwender und Ziel ist.",
 		"LASER_BLADE": "Wechselt durch:\n1. Dreht die Laserklinge herum, bewegt sich hinter das Ziel, erhält [25,SP] SHIELD und fügt dem Ziel und benachbarten Feinden auf dem Weg [25,SP] SPECIAL zu.\n2. Dreht die Laserklinge vor sich und verursacht 2x [25,SP] + ATK als SPECIAL.",
 		"ICICLE_MISSILE": "Schießt [1,2,3] Eiszapfen auf die entferntesten Ziele die [50,SP] SPECIAL und FREEZE für 2 Sekunden verursachen.",
-		"ARM_THRUST": "Greift [2,LK] bis [5,LK] mal an, was jedes mal [100,SP]% der ATK als PHYICAL verursacht. Jeder treffer kann von sich auch unabhängig kritisch Trefferen abhäng von CRIT_CHANCE.",
+		"ARM_THRUST": "Greift [LK] 2 bis 5 mal an, was jedes mal [100,SP]% der ATK als PHYICAL verursacht. Jeder treffer kann von sich auch unabhängig kritisch Trefferen abhäng von CRIT_CHANCE.",
 		"DRUM_BEATING": "Wechselt durch:\n1. Wood block: Gib dem gesamten Team [10,20,40,SP] SHIELD\n2. Trommelwirbel: Füge allen Gegnern [10,20,40,SP] SPECIAL zu\n3. Steiger das Tempo: Gib dem gesamten Team [10,20,40,SP] SPEED",
 		"PSYCHO_CUT": "Drei Psychoklingen schneiden durch die Gegner in einer Linie durchs Ziel, jede Klinge verursacht [10,20,40,SP] SPECIAL an jedem getroffenen Pokémon. Kann kritisch treffen.",
 		"WICKED_BLOW": "Füge dem Ziel [60,SP] TRUE zu. Zählt immer als Kritischer Treffer.",
