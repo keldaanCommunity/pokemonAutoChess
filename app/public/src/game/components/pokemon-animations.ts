@@ -4250,14 +4250,14 @@ export const PokemonAnimations: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.FIRE_RANGE,
+    attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.SUNFLORA]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Shoot,
     emote: AnimationType.Pose,
-    attackSprite: AttackSprite.FIRE_RANGE,
+    attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.MARACTUS]: {
