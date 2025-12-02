@@ -402,19 +402,19 @@ export default abstract class PokemonState {
       takenDamage = 0
     } else {
       if (attacker && attacker.status.electricField) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (attacker && attacker.status.psychicField) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (attacker && attacker.status.grassField) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (attacker && attacker.status.fairyField) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (
@@ -422,21 +422,21 @@ export default abstract class PokemonState {
         attacker.passive === Passive.HISUIAN_TYPHLOSION &&
         (pokemon.status.burn || pokemon.status.silence)
       ) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (
         pokemon.simulation.weather === Weather.BLOODMOON &&
         attackType === AttackType.PHYSICAL
       ) {
-        damage = Math.ceil(damage * 1.2)
+        damage *= 1.2
       }
 
       if (
@@ -444,7 +444,7 @@ export default abstract class PokemonState {
         attacker &&
         attacker.effects.has(EffectEnum.SHEER_COLD)
       ) {
-        damage = Math.ceil(damage * 1.3)
+        damage *= 1.3
       }
 
       let def = pokemon.status.armorReduction
@@ -508,7 +508,7 @@ export default abstract class PokemonState {
       if (attackType !== AttackType.TRUE) {
         // damage reduction
         if (pokemon.items.has(Item.POKE_DOLL)) {
-          reducedDamage = Math.ceil(reducedDamage * 0.7)
+          reducedDamage *= 0.7
         }
 
         if (
@@ -534,7 +534,7 @@ export default abstract class PokemonState {
         }
       }
 
-      reducedDamage = min(1)(reducedDamage) // should deal 1 damage at least
+      reducedDamage = min(1)(Math.ceil(reducedDamage)) // should deal 1 damage at least
 
       if (attackType === AttackType.PHYSICAL) {
         pokemon.physicalDamageReduced += min(0)(damage - reducedDamage)
