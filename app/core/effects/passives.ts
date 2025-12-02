@@ -100,6 +100,7 @@ export function stenchJump(
   x: number,
   y: number
 ) {
+  if (!pokemon.simulation || !board) return
   board
     .getCellsBetween(x, y, pokemon.positionX, pokemon.positionY)
     .forEach((cell) => {
@@ -389,7 +390,9 @@ const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
 const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   if (
     pokemon.passive === Passive.GLIMMORA &&
-    pokemon.hp < 0.5 * pokemon.maxHP
+    pokemon.hp < 0.5 * pokemon.maxHP &&
+    pokemon.simulation &&
+    board
   ) {
     pokemon.changePassive(Passive.NONE)
 
@@ -891,9 +894,11 @@ const inanimateObjectEffect = new OnSpawnEffect((entity) => {
 
 const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
   ({ simulation, entity }) => {
+    if (!simulation) return
     entity.commands.push(
       new DelayedCommand(() => {
         const board = simulation.board
+        if (!board) return
         const nbSpikes = 10
         const positions = new Set<string>()
         for (let i = 0; i < nbSpikes; i++) {
@@ -1155,12 +1160,14 @@ export const PassiveEffects: Partial<
   ],
   [Passive.STENCH]: [
     new OnMoveEffect((pokemon, board, oldX, oldY) => {
-      board.addBoardEffect(
-        oldX,
-        oldY,
-        EffectEnum.POISON_GAS,
-        pokemon.simulation
-      )
+      if (pokemon.simulation && board) {
+        board.addBoardEffect(
+          oldX,
+          oldY,
+          EffectEnum.POISON_GAS,
+          pokemon.simulation
+        )
+      }
     })
   ],
   [Passive.PYUKUMUKU]: [PyukumukuExplodeOnDeathEffect],
