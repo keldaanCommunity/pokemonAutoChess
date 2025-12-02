@@ -1012,7 +1012,7 @@ const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
 }
 
 const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
-  if (pokemon.status.electricField === false || pokemon.status.light) {
+  if (pokemon.status.electricField === false) {
     pokemon.status.electricField = true
     pokemon.addSpeed(30, pokemon, 0, false)
     pokemon.addShield(50, pokemon, 0, false)
