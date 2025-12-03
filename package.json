@@ -51,7 +51,7 @@
     "@colyseus/monitor": "^0.16.6",
     "@colyseus/redis-driver": "^0.16.1",
     "@colyseus/redis-presence": "^0.16.1",
-    "@colyseus/schema": "^3.0.70",
+    "@colyseus/schema": "^3.0.60",
     "@colyseus/testing": "^0.16.3",
     "@colyseus/tools": "^0.16.2",
     "@colyseus/ws-transport": "^0.16.5",
