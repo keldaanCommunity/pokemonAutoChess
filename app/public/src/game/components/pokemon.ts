@@ -285,17 +285,17 @@ export default class PokemonSprite extends DraggableObject {
     return new Promise((resolve) => {
       const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
       const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
+      const loadAnimations = () => {
+        scene.animationManager?.createPokemonAnimations(
+          this.pokemon.index,
+          tint
+        )
+        resolve()
+      }
+
       let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
       if (spriteCount === 0 && scene?.animationManager) {
         //logger.debug("loading anims for", this.pokemon.index)
-        const loadAnimations = () => {
-          scene.animationManager?.createPokemonAnimations(
-            this.pokemon.index,
-            tint
-          )
-          resolve()
-        }
-
         if (scene.textures.exists(this.pokemon.index) === false) {
           // needs to load the atlas & textures first
           loadCompressedAtlas(scene, this.pokemon.index).then(loadAnimations)
@@ -304,9 +304,9 @@ export default class PokemonSprite extends DraggableObject {
         }
       } else {
         if (scene?.load.isLoading()) {
-          scene.load.once("complete", resolve)
+          scene.load.once("complete", loadAnimations)
         } else {
-          resolve()
+          loadAnimations()
         }
       }
       spriteCount++
