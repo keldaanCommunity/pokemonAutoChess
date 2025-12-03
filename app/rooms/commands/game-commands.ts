@@ -1563,7 +1563,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (pokemon) {
             const coordinates = getFirstAvailablePositionOnBoard(
               player.board,
-              pokemon.range
+              pokemon.types.has(Synergy.DARK) && pokemon.range === 1
+                ? 3
+                : pokemon.range
             )
 
             if (coordinates) {
