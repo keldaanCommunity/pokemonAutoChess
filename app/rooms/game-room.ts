@@ -338,6 +338,7 @@ export default class GameRoom extends Room<GameState> {
             playerId: client.auth.uid,
             index: message.id
           })
+          clearPendingGame(this.presence, client.auth.uid) // tryfix for reconnection leading to eject bug
         } catch (error) {
           logger.error("shop error", message, error)
         }
@@ -374,6 +375,7 @@ export default class GameRoom extends Room<GameState> {
             client: client,
             detail: message
           })
+          clearPendingGame(this.presence, client.auth.uid) // tryfix for reconnection leading to eject bug
         } catch (error) {
           const errorInformation = {
             updateBoard: true,
