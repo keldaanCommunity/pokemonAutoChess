@@ -982,7 +982,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === EffectEnum.STRANGE_STEAM) {
+    if (event.effect === EffectEnum.STRANGE_STEAM_BOARD_EFFECT) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
