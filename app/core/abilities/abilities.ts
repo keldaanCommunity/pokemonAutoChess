@@ -14644,7 +14644,13 @@ export class MoonblastStrategy extends AbilityStrategy {
         }
       }
 
-      if (moonsRemaining > 0 && currentTarget && currentTarget.hp > 0) {
+      if (
+        moonsRemaining > 0 &&
+        currentTarget &&
+        currentTarget.hp > 0 &&
+        moonIndex < 20
+      ) {
+        // safety check to prevent infinite loops
         pokemon.commands.push(
           new DelayedCommand(() => {
             sendMoon()
