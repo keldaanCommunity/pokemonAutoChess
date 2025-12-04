@@ -9141,7 +9141,7 @@ export class SparkStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
-    const enemiesHit = new Set<PokemonEntity>()
+    const enemiesHit = new Set<string>()
 
     const propagate = (currentTarget: PokemonEntity, nbBounce = 1) => {
       const newTarget = board
@@ -9150,11 +9150,11 @@ export class SparkStrategy extends AbilityStrategy {
           (cell) =>
             cell.value &&
             cell.value.team === target.team &&
-            !enemiesHit.has(cell.value)
+            !enemiesHit.has(cell.value.id)
         )?.value
 
       if (newTarget) {
-        enemiesHit.add(newTarget)
+        enemiesHit.add(newTarget.id)
         pokemon.commands.push(
           new DelayedCommand(() => {
             pokemon.broadcastAbility({
@@ -9173,7 +9173,10 @@ export class SparkStrategy extends AbilityStrategy {
               crit,
               true
             )
-            propagate(newTarget, nbBounce + 1)
+            if (nbBounce < 10) {
+              // safety to avoid infinite loops
+              propagate(newTarget, nbBounce + 1)
+            }
           }, 250)
         )
       }
