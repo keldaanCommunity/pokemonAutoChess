@@ -3260,7 +3260,7 @@
 		"DRAGON_STARS": "\n\nBonus actuel : {{totalStars}} STAR",
 		"ELECTRIC_CHARGE": "\n\nCharge de la CELL_BATTERY : {{charge}}%",
 		"LIGHT": "Les Pokémon LIGHT révèlent un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
-		"WILD": "Les Pokémon WILD gagnent en ATK et SPEED et leurs attaques peuvent infliger WOUND à leurs cibles. Pour chaque STAR de vos Pokémon WILD sur le plateau, obtenez +1% de chance de trouver des Pokémon WILD dans le magasin + 5% de chance durant les rounds PvE.{{additionalInfo}}.",
+		"WILD": "Les Pokémon WILD gagnent en ATK et SPEED et leurs attaques peuvent infliger WOUND à leurs cibles. Pour chaque STAR de vos Pokémon WILD sur le plateau et sur votre banc, obtenez +1% de chance de trouver des Pokémon WILD dans le magasin + 5% de chance durant les rounds PvE.{{additionalInfo}}.",
 		"WILD_ADDITIONAL": "\nChances actuelles de trouver des Pokémon WILD: {{wildChance}}%.",
 		"AMORPHOUS": "Les Pokémon AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
 		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets."
