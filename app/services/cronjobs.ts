@@ -21,12 +21,12 @@ import { min } from "../utils/number"
 export function initCronJobs() {
   logger.debug("init cron jobs")
 
-  CronJob.from({
-    cronTime: "0 8 * * *", // every day at 8am
-    timeZone: "Europe/Paris",
-    onTick: () => deleteOldAnonymousAccounts(),
-    start: true
-  })
+  // CronJob.from({
+  //   cronTime: "0 8 * * *", // every day at 8am
+  //   timeZone: "Europe/Paris",
+  //   onTick: () => deleteOldAnonymousAccounts(),
+  //   start: true
+  // })
   CronJob.from({
     cronTime: "15 8 * * *", // every day at 8:15am
     timeZone: "Europe/Paris",
