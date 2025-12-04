@@ -656,8 +656,10 @@ export default function Game() {
             })
           })
 
-          $dpsMeter.onRemove(() => {
-            dispatch(removeDpsMeter({ simulationId: simulation.id, team }))
+          $dpsMeter.onRemove((dps) => {
+            dispatch(
+              removeDpsMeter({ id: dps.id, team, simulationId: simulation.id })
+            )
           })
         })
       })
@@ -854,7 +856,10 @@ export default function Game() {
         })
 
         $player.wanderers.onAdd((wanderer: Wanderer) => {
-          if (gameContainer.game && player.id === store.getState().game.currentPlayerId) {
+          if (
+            gameContainer.game &&
+            player.id === store.getState().game.currentPlayerId
+          ) {
             const g = getGameScene()
             if (g && g.wandererManager) {
               g.wandererManager.addWanderer(wanderer)
