@@ -788,6 +788,16 @@ export default abstract class PokemonState {
   updateCommands(pokemon: PokemonEntity, dt: number) {
     pokemon.commands.forEach((command) => command.update(dt))
     pokemon.commands = pokemon.commands.filter((command) => !command.executed)
+
+    // Log a warning if the number of pending commands exceeds 100, as this may indicate a performance issue
+    if (pokemon.commands.length > 100) {
+      const commandClasses = [
+        ...new Set(pokemon.commands.map((cmd) => cmd.constructor.name))
+      ]
+      logger.warn(
+        `Pokemon ${pokemon.name} has ${pokemon.commands.length} pending commands: ${commandClasses.join(", ")}`
+      )
+    }
   }
 
   update(
