@@ -5788,7 +5788,9 @@ export class MagmaStormStrategy extends AbilityStrategy {
     const baseDamage = 100
     let power = 1
 
-    const propagate = (currentTarget: PokemonEntity) => {
+    const propagate = (currentTarget: PokemonEntity, depth = 0) => {
+      if (depth >= 20) return // max recursion limit
+
       targetsHit.add(currentTarget.id)
       pokemon.broadcastAbility({
         skill: Ability.MAGMA_STORM,
@@ -5824,7 +5826,7 @@ export class MagmaStormStrategy extends AbilityStrategy {
               enemy.value.hp > 0 &&
               !pokemon.simulation.finished
             ) {
-              propagate(enemy.value)
+              propagate(enemy.value, depth + 1)
             }
           })
         }, 250)
