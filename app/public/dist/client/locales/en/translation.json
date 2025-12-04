@@ -3260,7 +3260,7 @@
 		"DRAGON_STARS": "\nCurrent bonus: {{totalStars}} STAR",
 		"ELECTRIC_CHARGE": "\nCELL_BATTERY charge: {{charge}}%",
 		"LIGHT": "LIGHT Pokémon reveal a spotlight on the battlefield. The Pokémon standing in the spotlight at the start of combat gains unique bonuses.",
-		"WILD": "WILD Pokémon get increased SPEED and ATK, and their attacks can WOUND their target. For each WILD Pokémon STAR on board, gain +1% chance to find WILD in your shops + 5% chance during PvE rounds.{{additionalInfo}}",
+		"WILD": "WILD Pokémon get increased SPEED and ATK, and their attacks can WOUND their target. For each WILD Pokémon STAR on board and bench, gain +1% chance to find WILD in your shops + 5% chance during PvE rounds.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nCurrent chance to find a WILD Pokémon: {{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and SPEED by activating a wide variety of synergies.",
 		"GOURMET": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed ADJACENT allies, giving them various buffs and effects."
