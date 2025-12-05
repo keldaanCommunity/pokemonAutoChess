@@ -219,6 +219,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get canBeMoved(): boolean {
+    return !this.status.skydiving && !this.items.has(Item.HEAVY_DUTY_BOOTS)
+  }
+
   get canBeCopied(): boolean {
     return this.passive !== Passive.INANIMATE
   }
@@ -359,7 +363,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (
         this.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT) ||
-        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
+        (attacker &&
+          attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
       ) {
         specialDamage *= 1.2
       }
@@ -753,14 +758,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   moveTo(x: number, y: number, board: Board, forcedDisplacement: boolean) {
-    if (forcedDisplacement && this.items.has(Item.HEAVY_DUTY_BOOTS)) return
+    if (forcedDisplacement && !this.canBeMoved) return
     const target = board.getEntityOnCell(x, y)
-    if (
-      forcedDisplacement &&
-      target &&
-      target?.items.has(Item.HEAVY_DUTY_BOOTS)
-    )
-      return
+    if (forcedDisplacement && target && !target.canBeMoved) return
     this.toMovingState()
     if (target) target.toMovingState()
 
