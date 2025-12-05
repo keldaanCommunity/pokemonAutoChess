@@ -291,7 +291,11 @@ export class MindBlownStrategy extends AbilityStrategy {
       */
       pokemon.simulation.room.clock.setTimeout(
         () => {
-          if (!pokemon.simulation || !pokemon.simulation.room || pokemon.simulation.finished) {
+          if (
+            !pokemon.simulation ||
+            !pokemon.simulation.room ||
+            pokemon.simulation.finished
+          ) {
             return
           }
           const cellsHit = board.getCellsInRadius(x, y, 2, true)
@@ -8599,7 +8603,7 @@ export class SpacialRendStrategy extends AbilityStrategy {
     const damage = 100
     const rowToTarget = target.positionY
     const enemies = board.cells.filter(
-      (p) => p && p.team !== pokemon.team && !p.status.skydiving
+      (p) => p && p.team !== pokemon.team && p.canBeMoved
     )
     const n = enemies.length
     for (let i = 0; i < Math.floor(n / 2); i++) {
@@ -10870,7 +10874,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
     const damage = [20, 40, 60][pokemon.stars - 1] ?? 60
     const defenseDebuff = 10
 
-    let isBlocked = target.items.has(Item.HEAVY_DUTY_BOOTS)
+    let isBlocked = !target.canBeMoved
     let farthestReached: { x: number; y: number } = {
       x: target.positionX,
       y: target.positionY
@@ -10888,7 +10892,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
         if (
           board.isOnBoard(cell.x - 1, cell.y) &&
           board.getEntityOnCell(cell.x - 1, cell.y) === undefined &&
-          cell.value.items.has(Item.HEAVY_DUTY_BOOTS) === false
+          cell.value.canBeMoved
         ) {
           // unit in the path is moved to the left
           cell.value.moveTo(cell.x - 1, cell.y, board, true)
@@ -10896,7 +10900,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
         } else if (
           board.isOnBoard(cell.x + 1, cell.y) &&
           board.getEntityOnCell(cell.x + 1, cell.y) === undefined &&
-          cell.value.items.has(Item.HEAVY_DUTY_BOOTS) === false
+          cell.value.canBeMoved
         ) {
           // unit in the path is moved to the right
           cell.value.moveTo(cell.x + 1, cell.y, board, true)
