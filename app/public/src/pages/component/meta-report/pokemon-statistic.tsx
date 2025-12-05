@@ -84,7 +84,7 @@ export default function PokemonStatistic(props: {
   return (
     <article>
       {familiesArray.map(([pkm, family], i) => (
-        <div key={pkm} className="my-box pokemon-family-stat">
+        <div key={"family." + pkm} className="my-box pokemon-family-stat">
           <span className="rank">{i + 1}</span>
 
           <ul
@@ -94,8 +94,8 @@ export default function PokemonStatistic(props: {
               justifyContent: "space-between"
             }}
           >
-            {family.pokemons.map((pokemon, i) => (
-              <li key={pokemon.name}>
+            {family.pokemons.map((pokemon) => (
+              <li key={pokemon.name + "-portrait"}>
                 <PokemonPortrait portrait={PkmIndex[pokemon.name]} />
                 <span>{t(`pkm.${pokemon.name}`)}</span>
               </li>
@@ -133,7 +133,7 @@ export default function PokemonStatistic(props: {
           >
             {family.pokemons.map((pokemon) => (
               <li
-                key={pokemon.name}
+                key={pokemon.name + "-details"}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "40px 6ch 1fr 1.5fr 2fr"
@@ -153,7 +153,7 @@ export default function PokemonStatistic(props: {
                   <label>{t("popular_items")}:</label>
                   {pokemon.items.map((item) => (
                     <img
-                      key={item}
+                      key={pokemon.name + "-item-" + item}
                       src={"assets/item/" + item + ".png"}
                       style={{
                         height: "32px",

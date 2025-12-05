@@ -37,7 +37,12 @@ import {
   fetchBotsList
 } from "./services/bots"
 import { getLeaderboard } from "./services/leaderboard"
-import { getMetadata, getMetaItems, getMetaPokemons } from "./services/meta"
+import {
+  computeSynergyAverages,
+  getMetadata,
+  getMetaItems,
+  getMetaPokemons
+} from "./services/meta"
 import { Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
@@ -272,6 +277,18 @@ export default config({
       // Set Cache-Control header for 24 hours (86400 seconds)
       res.set("Cache-Control", "max-age=86400")
       res.send(getMetaPokemons())
+    })
+
+    app.get("/meta/types", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const user = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (!user || user.role !== Role.ADMIN) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+
+      res.send(computeSynergyAverages())
     })
 
     app.get("/tilemap/:map", async (req, res) => {

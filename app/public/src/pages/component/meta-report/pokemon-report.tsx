@@ -10,7 +10,6 @@ import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import SynergyIcon from "../icons/synergy-icon"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
@@ -76,7 +75,6 @@ export function PokemonReport() {
             </option>
             {Object.keys(Synergy).map((s) => (
               <option value={s} key={s}>
-                <SynergyIcon type={s as Synergy} />
                 {t(`synergy.${s}`)}
               </option>
             ))}

@@ -1,12 +1,18 @@
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { Role } from "../../../../../types"
+import { useAppSelector } from "../../../hooks"
 import { ItemReport } from "./item-report"
 import MetadataReport from "./metadata-report"
 import { PokemonReport } from "./pokemon-report"
+import { SynergyReport } from "./synergy-report"
 import "./meta-report.css"
 
 export default function MetaReport() {
   const { t } = useTranslation()
+  const isAdmin = useAppSelector(
+    (state) => state.network.profile?.role === Role.ADMIN
+  )
 
   return (
     <div id="meta-report">
@@ -15,6 +21,7 @@ export default function MetaReport() {
           {/* <Tab key="team-comps">{t("meta_report")}</Tab> */}
           <Tab key="pokemons">{t("pokemon_report")}</Tab>
           <Tab key="items">{t("item_report")}</Tab>
+          {isAdmin && <Tab key="types">{t("synergies")}</Tab>}
           <MetadataReport />
         </TabList>
 
@@ -27,6 +34,11 @@ export default function MetaReport() {
         <TabPanel>
           <ItemReport />
         </TabPanel>
+        {isAdmin && (
+          <TabPanel>
+            <SynergyReport />
+          </TabPanel>
+        )}
       </Tabs>
     </div>
   )

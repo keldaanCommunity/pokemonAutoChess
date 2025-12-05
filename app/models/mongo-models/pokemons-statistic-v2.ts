@@ -1,11 +1,14 @@
+import firebase from "firebase/compat/app"
 import { model, Schema } from "mongoose"
+import { EloRank } from "../../types/enum/EloRank"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
+import { ITypeStatistics } from "../../types/meta"
 
 export interface IPokemonsStatisticV2 {
-  tier: string
+  tier: EloRank
   pokemons: Map<
-    string,
+    EloRank,
     {
       rank: number
       count: number
@@ -54,4 +57,13 @@ export default model<IPokemonsStatisticV2>(
 
 export async function fetchMetaPokemons(): Promise<IPokemonsStatisticV2[]> {
   return fetch("/meta/pokemons").then((res) => res.json())
+}
+
+export async function fetchMetaTypes(): Promise<ITypeStatistics> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  return fetch("/meta/types", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }).then((res) => res.json())
 }
