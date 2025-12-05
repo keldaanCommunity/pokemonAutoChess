@@ -14620,6 +14620,7 @@ export class Cosmoem extends Pokemon {
   stacksRequired = 10
   onAcquired(player: Player) {
     this.hp -= 200 - 100 // revert hp buffs of cosmog
+    this.maxHP = this.hp
   }
   hp = 200
   atk = 5
@@ -14650,6 +14651,7 @@ export class Solgaleo extends Pokemon {
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
     this.hp -= 300 - 200 // revert hp buffs of cosmoem
+    this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
 }
@@ -14672,6 +14674,7 @@ export class Lunala extends Pokemon {
   skill = Ability.MOONGEIST_BEAM
   onAcquired(player: Player) {
     this.hp -= 300 - 200 // revert hp buffs of cosmoem
+    this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
 }
