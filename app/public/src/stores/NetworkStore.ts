@@ -36,6 +36,7 @@ export interface INetwork {
   after: Room<AfterGameState> | undefined
   uid: string
   displayName: string
+  email: string
   profile: IUserMetadataUnpacked | undefined
   pendingGameId: string | null
   connectionStatus: ConnectionStatus
@@ -55,6 +56,7 @@ const initalState: INetwork = {
   after: undefined,
   uid: "",
   displayName: "",
+  email: "",
   profile: undefined,
   pendingGameId: null,
   error: null,
@@ -69,11 +71,14 @@ export const networkSlice = createSlice({
       if (action.payload) {
         state.uid = action.payload.uid
         state.displayName = action.payload.displayName ?? "Anonymous"
+        state.email = action.payload.email ?? ""
       }
     },
     logOut: (state) => {
       state.client = new Client(endpoint)
       state.uid = ""
+      state.displayName = ""
+      state.email = ""
       state.preparation?.connection.isOpen && state.preparation?.leave(true)
       state.preparation = undefined
       state.lobby?.connection.isOpen && state.lobby?.leave(true)

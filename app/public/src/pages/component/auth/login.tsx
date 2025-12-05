@@ -20,6 +20,7 @@ export default function Login() {
   const navigate = useNavigate()
   const uid = useAppSelector((state) => state.network.uid)
   const displayName = useAppSelector((state) => state.network.displayName)
+  const email = useAppSelector((state) => state.network.email)
   const [prejoining, setPrejoining] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
 
@@ -77,7 +78,9 @@ export default function Login() {
       <div id="play-panel">
         <p>
           {t("authenticated_as")}:{" "}
-          <span title={displayName}>{t("hover_to_reveal")}</span>
+          <span title={`${displayName}${email ? ` (${email})` : ""}`}>
+            {t("hover_to_reveal")}
+          </span>
         </p>
         <ul className="actions">
           <li>
