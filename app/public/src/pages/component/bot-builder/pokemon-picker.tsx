@@ -13,6 +13,7 @@ import {
   Pkm,
   PkmFamily,
   PkmIndex,
+  PkmRegionalBaseVariants,
   PkmRegionalVariants
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
@@ -131,11 +132,6 @@ function PokemonPickerTab(props: {
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons?.slice() ?? []
 
-  const baseVariant = (pkm: Pkm): Pkm =>
-    (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
-      PkmRegionalVariants[p]!.includes(pkm)
-    ) ?? pkm
-
   const filteredPokemons = props.pokemons
     .filter((p) => (overlap ? p.types.includes(overlap) : true))
     .filter((p) => {
@@ -146,7 +142,7 @@ function PokemonPickerTab(props: {
     })
     .filter((p) => {
       const family = PkmFamily[p.name]
-      const baseVariantName = baseVariant(family)
+      const baseVariantName = PkmRegionalBaseVariants[family] ?? family
       const regionalVariants = PkmRegionalVariants[family]
       const isInAddPicks = additionalPokemons.includes(baseVariantName)
       const isInRegion = p.regional && regionalPokemons.includes(family)

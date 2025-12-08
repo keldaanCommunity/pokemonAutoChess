@@ -1,6 +1,7 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
+  AdditionalPicksStages,
   BOARD_HEIGHT,
   BOARD_WIDTH,
   RegionDetails,
@@ -41,6 +42,7 @@ import {
   PkmFamily,
   PkmIndex,
   type PkmProposition,
+  PkmRegionalBaseVariants,
   PkmRegionalVariants
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
@@ -635,6 +637,22 @@ export default class Player extends Schema implements IPlayer {
       newRegionalPokemons.filter((p, index, array) => {
         const pkm = getPokemonData(PkmFamily[p])
         const evolution = pkm.evolution
+        const baseVariant = PkmRegionalBaseVariants[p]
+        if(baseVariant){
+          const basePkm = getPokemonData(baseVariant)
+          if(basePkm.additional){
+            const addpickStages = {
+              [Rarity.UNCOMMON]: AdditionalPicksStages[0],
+              [Rarity.RARE]: AdditionalPicksStages[1],
+              [Rarity.EPIC]: AdditionalPicksStages[2]
+            }
+            const addPickStage = addpickStages[basePkm.rarity]
+            if(addPickStage > 0 && (state.stageLevel < addPickStage || state.additionalPokemons.includes(baseVariant) === false)){
+              return false // do not show the regional variant if its base variant is not in additional picks
+            }
+          }
+        }
+
         return (
           pkm.rarity !== Rarity.UNIQUE && // do not show uniques in regional pokemons
           pkm.rarity !== Rarity.LEGENDARY && // do not show legendaries in regional pokemons
