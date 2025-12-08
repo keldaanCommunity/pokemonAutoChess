@@ -63,6 +63,19 @@ function formatPokemonName(index: string): string {
   return `#${index} ${PkmByIndex[index] ?? "UNKNOWN"}${shiny ? " (Shiny)" : ""}`
 }
 
+function getShinyIndex(index: string): string {
+  const pathIndex = index.replaceAll("-", "/")
+  const split = pathIndex.split("/")
+
+  const shinyIndex =
+    split.length === 1
+      ? `${pathIndex}/0000/0001`
+      : split.length === 2
+        ? `${pathIndex}/0001`
+        : pathIndex.split("/").with(2, "0001").join("/")
+  return shinyIndex
+}
+
 /**
  * Cross-platform command execution
  */
@@ -251,19 +264,12 @@ class SpriteSheetProcessor {
 
   async splitIndex(spriteCollabPath: string, index: string) {
     const pathIndex = index.replaceAll("-", "/")
-    const split = pathIndex.split("/")
-
-    const shinyPad =
-      split.length === 1
-        ? `${pathIndex}/0000/0001`
-        : split.length === 2
-          ? `${pathIndex}/0001`
-          : pathIndex.split("/").with(2, "0001").join("/")
+    const shinyIndex = getShinyIndex(index)
     const conf =
       PokemonAnimations[this.mapName.get(index) as Pkm] ??
       DEFAULT_POKEMON_ANIMATION_CONFIG
     const allPads = [pathIndex]
-    if (!conf.shinyUnavailable) allPads.push(shinyPad)
+    if (!conf.shinyUnavailable) allPads.push(shinyIndex)
 
     for (let j = 0; j < allPads.length; j++) {
       const pad = allPads[j]
@@ -532,8 +538,8 @@ function movePortrait(spriteCollabPath: string, pkmIndex: string) {
 function updateEmotionsAndCredits(
   spriteCollabPath: string,
   indexesToUpdate: string[] = Object.values(PkmIndex).flatMap((indexToAdd) => {
-    const shinyPad = indexToAdd.length === 4 ? "-0000-0001" : "-0001"
-    return [indexToAdd, `${indexToAdd}${shinyPad}`]
+    const shinyIndexToAdd = getShinyIndex(indexToAdd)
+    return [indexToAdd, shinyIndexToAdd]
   })
 ) {
   let tracker: Record<string, any> = {}
@@ -572,7 +578,7 @@ function updateEmotionsAndCredits(
 
   const emotions = Object.values(Emotion)
   for (const pkmIndex of indexesToUpdate) {
-    const pathIndex = pkmIndex.split("-")
+    const pathIndex = pkmIndex.replaceAll("/", "-").split("-")
     let metadata = tracker[pathIndex[0]]
     for (let i = 1; i < pathIndex.length; i++) {
       metadata = metadata?.subgroups?.[pathIndex[i]]
@@ -795,11 +801,8 @@ async function main() {
 
       // Step 5: Updating emotions available and credits
       logger.info("Step 5/5: Updating emotions available and credits...")
-      const shinyPad = indexToAdd.length === 4 ? "-0000-0001" : "-0001"
-      updateEmotionsAndCredits(spriteCollabPath, [
-        indexToAdd,
-        `${indexToAdd}${shinyPad}`
-      ])
+      const shinyIndexToAdd = getShinyIndex(indexToAdd)
+      updateEmotionsAndCredits(spriteCollabPath, [indexToAdd, shinyIndexToAdd])
 
       logger.info(
         `✅ Process completed successfully! ${formatPokemonName(indexToAdd)} has been added to the game assets.`
