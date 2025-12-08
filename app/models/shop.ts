@@ -472,7 +472,8 @@ export default class Shop {
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.EEVEE) === false &&
         (chance(EEVEE_RATE) || candidates.length === 0) &&
-        state.specialGameRule !== SpecialGameRule.FIRST_PARTNER
+        state.specialGameRule !== SpecialGameRule.FIRST_PARTNER &&
+        state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
       ) {
         selected = Pkm.EEVEE
         player.itemsProposition[i] = Item.FOSSIL_STONE
