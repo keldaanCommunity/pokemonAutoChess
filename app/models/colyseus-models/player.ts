@@ -725,10 +725,6 @@ export default class Player extends Schema implements IPlayer {
     )
   }
 
-  giveMissionOrderRewards() {
-    this.addMoney(30, true, null)
-  }
-
   chargeCellBattery(amount: number) {
     this.cellBattery += amount
     if (this.cellBattery >= 100) {
