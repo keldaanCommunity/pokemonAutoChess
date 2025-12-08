@@ -141,7 +141,7 @@ export const electricTripleAttackEffect = new OnAttackEffect(
       if (isSupercharged && target) {
         target.addPP(-10, pokemon, 0, false)
         target.count.manaBurnCount++
-        if (pokemon.player) {
+        if (pokemon.player && !pokemon.isGhostOpponent) {
           pokemon.player.chargeCellBattery(5)
         }
       }
