@@ -1632,6 +1632,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.room.setMetadata({ stageLevel: this.state.stageLevel })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
+        player.wanderers.clear()
         if (player.alive) {
           // Fake bots XP bar
           if (player.isBot) {
@@ -1701,6 +1702,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopTownPhase() {
     this.room.miniGame.stop(this.room.state)
+    this.state.players.forEach((player: Player) => {      
+      player.wanderers.clear()
+    })
   }
 
   initializeTownPhase() {
