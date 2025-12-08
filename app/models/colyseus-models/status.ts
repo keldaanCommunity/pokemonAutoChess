@@ -362,6 +362,7 @@ export default class Status extends Schema implements IStatus {
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
+    const alreadyBurning = this.burn
     if (
       !pkm.effects.has(EffectEnum.IMMUNITY_BURN) &&
       !this.runeProtect &&
@@ -386,10 +387,10 @@ export default class Status extends Schema implements IStatus {
         pkm.addAttack(5, pkm, 0, false)
       }
 
-      if (pkm.passive === Passive.WELL_BAKED) {
+      if (pkm.passive === Passive.WELL_BAKED && !alreadyBurning) {
         pkm.addDefense(20, pkm, 0, false)
       }
-      if (pkm.items.has(Item.MAGMARIZER)) {
+      if (pkm.items.has(Item.MAGMARIZER) && !alreadyBurning) {
         pkm.addSpeed(30, pkm, 0, false)
       }
 
@@ -453,6 +454,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   healBurn(pkm: PokemonEntity) {
+    if (!this.burn) return
     this.burn = false
     this.burnOrigin = undefined
     this.burnDamageCooldown = 1000
