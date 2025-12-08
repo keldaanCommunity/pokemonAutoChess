@@ -257,7 +257,8 @@ export class OnPokemonCatchCommand extends Command<
       }
     } else if (wanderer.type === WandererType.SPECIAL) {
       if (wanderer.pkm === Pkm.CHATOT) {
-        player.giveMissionOrderRewards()
+        player.addMoney(30, true, null)
+        this.room.broadcast(Transfer.PLAYER_INCOME, 30)
       }
     }
   }
