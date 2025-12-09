@@ -44,20 +44,20 @@ export function effectInLine(
   const orientation: Orientation =
     target instanceof PokemonEntity
       ? board.orientation(
-          pokemon.positionX,
-          pokemon.positionY,
-          target.positionX,
-          target.positionY,
-          pokemon,
-          target
-        )
+        pokemon.positionX,
+        pokemon.positionY,
+        target.positionX,
+        target.positionY,
+        pokemon,
+        target
+      )
       : target
 
   const targetsHit = new Set()
 
   const applyEffect = (x: number, y: number) => {
     const value = board.getEntityOnCell(x, y)
-    if (value != null) {
+    if (value != null && value.team !== pokemon.team) {
       targetsHit.add(value)
     }
     effect({ x, y, value })
