@@ -15171,7 +15171,7 @@ export class TrimmingMowerStrategy extends AbilityStrategy {
 
     if (healingResult.overheal) {
       // Convert excess healing to shield
-      pokemon.addShield(healingResult.overheal, pokemon, 1, crit)
+      pokemon.addShield(healingResult.overheal, pokemon, 0, false)
     }
 
     pokemon.commands.push(
