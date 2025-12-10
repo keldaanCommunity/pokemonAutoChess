@@ -6,8 +6,7 @@ import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { distanceC } from "../utils/distance"
 import { max } from "../utils/number"
-import { chance } from "../utils/random"
-import { AbilityStrategies } from "./abilities/abilities"
+import { castAbility } from "./abilities/abilities"
 import type { Board } from "./board"
 import { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -68,15 +67,7 @@ export default class AttackingState extends PokemonState {
         }
       } else if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
         // CAST ABILITY
-        let crit = false
-        const ability = AbilityStrategies[pokemon.skill]
-        if (
-          pokemon.effects.has(EffectEnum.ABILITY_CRIT) ||
-          ability.canCritByDefault
-        ) {
-          crit = chance(pokemon.critChance / 100, pokemon)
-        }
-        ability.process(pokemon, board, target, crit)
+        castAbility(pokemon.skill, pokemon, board, target)
       } else {
         // BASIC ATTACK
         pokemon.count.attackCount++

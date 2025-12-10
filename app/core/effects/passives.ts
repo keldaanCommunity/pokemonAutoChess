@@ -28,7 +28,7 @@ import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { AbilityStrategies } from "../abilities/abilities"
+import { castAbility } from "../abilities/abilities"
 import { Board, Cell } from "../board"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -56,13 +56,9 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
   pokemon.resetCooldown(1000, speed) // use attack state cooldown
   if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
     // CAST ABILITY
-    let crit = false
-    if (pokemon.effects.has(EffectEnum.ABILITY_CRIT)) {
-      crit = chance(pokemon.critChance / 100, pokemon)
-    }
     const target = pokemon.state.getNearestTargetAtSight(pokemon, board)?.target
     if (target) {
-      AbilityStrategies[pokemon.skill].process(pokemon, board, target, crit)
+      castAbility(pokemon.skill, pokemon, board, target)
     }
     return
   }

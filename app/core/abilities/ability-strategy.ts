@@ -1,7 +1,6 @@
 import { Team } from "../../types/enum/Game"
 import { min } from "../../utils/number"
 import type { Board } from "../board"
-import { OnAbilityCastEffect } from "../effects/effect"
 import { PokemonEntity } from "../pokemon-entity"
 
 export class AbilityStrategy {
@@ -24,10 +23,6 @@ export class AbilityStrategy {
         ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
       })
     }
-
-    pokemon.getEffects(OnAbilityCastEffect).forEach((effect) => {
-      effect.apply(pokemon, board, target, crit)
-    })
 
     if (pokemon.team === Team.BLUE_TEAM) {
       pokemon.simulation.blueAbilitiesCast.push(pokemon.skill)

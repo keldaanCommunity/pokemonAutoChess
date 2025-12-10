@@ -239,6 +239,7 @@ export class OnAttackEffect extends Effect {
   }
 }
 
+// applied after casting an ability
 export class OnAbilityCastEffect extends Effect {
   apply(
     pokemon: PokemonEntity,
