@@ -721,10 +721,10 @@ class GameContainer {
     if (this.room.state.phase !== GamePhaseState.TOWN) {
       this.gameScene?.setMap(player.map)
     }
+    this.gameScene && clearAbilityAnimations(this.gameScene)
     this.gameScene?.battle?.setPlayer(player)
     this.gameScene?.board?.setPlayer(player)
     this.gameScene?.itemsContainer?.setPlayer(player)
-    this.gameScene && clearAbilityAnimations(this.gameScene)
     store.dispatch(setPlayer(player))
   }
 
