@@ -35,6 +35,7 @@ import { values } from "../../utils/schemas"
 
 import type { Board, Cell } from "../board"
 import {
+  OnAbilityCastEffect,
   OnAttackEffect,
   OnDamageReceivedEffect,
   PeriodicEffect
@@ -15926,4 +15927,28 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.VOLT_SURGE]: new VoltSurgeStrategy(),
   [Ability.SUPERCELL_SLAM]: new SupercellSlamStrategy()
+}
+
+export function castAbility(
+  ability: Ability,
+  pokemon: PokemonEntity,
+  board: Board,
+  target: PokemonEntity,
+  canCrit = true,
+  preventDefaultAnim = false
+) {
+  let crit = false
+  const abilityStrategy = AbilityStrategies[ability]
+  if (
+    canCrit &&
+    (pokemon.effects.has(EffectEnum.ABILITY_CRIT) ||
+      abilityStrategy.canCritByDefault)
+  ) {
+    crit = chance(pokemon.critChance / 100, pokemon)
+  }
+  abilityStrategy.process(pokemon, board, target, crit, preventDefaultAnim)
+
+  pokemon.getEffects(OnAbilityCastEffect).forEach((effect) => {
+    effect.apply(pokemon, board, target, crit)
+  })
 }

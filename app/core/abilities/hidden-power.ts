@@ -14,7 +14,7 @@ import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
 import type { Board } from "../board"
 import { giveRandomEgg } from "../eggs"
 import { PokemonEntity } from "../pokemon-entity"
-import { AbilityStrategies } from "./abilities"
+import { castAbility } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
@@ -290,17 +290,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
           const target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
           if (target) {
             pokemon.addShield(50, unown, 1, false)
-            AbilityStrategies[Ability.EXPLOSION].process(
-              pokemon,
-              board,
-              target,
-              false
-            )
-            pokemon.broadcastAbility({
-              skill: Ability.EXPLOSION,
-              targetX: target.positionX,
-              targetY: target.positionY
-            })
+            castAbility(Ability.EXPLOSION, pokemon, board, target, false)
           }
         }
       }
@@ -465,17 +455,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team !== enemy.team) {
-        AbilityStrategies[Ability.THUNDER_SHOCK].process(
-          unown,
-          board,
-          enemy,
-          false
-        )
-        unown.broadcastAbility({
-          skill: Ability.THUNDER_SHOCK,
-          targetX: enemy.positionX,
-          targetY: enemy.positionY
-        })
+        castAbility(Ability.THUNDER_SHOCK, unown, board, enemy, false)
       }
     })
   }
@@ -568,7 +548,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && unown.team === ally.team) {
-        AbilityStrategies[Ability.MEDITATE].process(ally, board, ally, false)
+        castAbility(Ability.MEDITATE, unown, board, ally, false)
       }
     })
   }
