@@ -244,8 +244,8 @@ export default class GameScene extends Scene {
         this.pokemonHovered
           .getBounds()
           .contains(
-            this.game.input.activePointer.x,
-            this.game.input.activePointer.y
+            this.input.activePointer.worldX,
+            this.input.activePointer.worldY
           )
       ) {
         this.sellPokemon(this.pokemonHovered)
