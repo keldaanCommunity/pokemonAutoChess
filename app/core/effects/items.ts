@@ -40,6 +40,7 @@ import {
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnAttackReceivedEffect,
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
@@ -826,34 +827,30 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LOADED_DICE]: [loadedDiceOnAttackEffect],
 
   [Item.STICKY_BARB]: [
-    new OnDamageReceivedEffect(
-      ({ pokemon, attacker, attackType, isRetaliation }) => {
-        if (
-          attackType === AttackType.PHYSICAL &&
-          !isRetaliation &&
-          attacker &&
-          attacker.items.has(Item.PROTECTIVE_PADS) === false &&
-          distanceC(
-            pokemon.positionX,
-            pokemon.positionY,
-            attacker.positionX,
-            attacker.positionY
-          ) === 1
-        ) {
-          const damage = Math.round(3 + 0.15 * pokemon.def)
-          attacker.handleDamage({
-            damage,
-            board: pokemon.simulation.board,
-            attackType: AttackType.TRUE,
-            attacker: pokemon,
-            shouldTargetGainMana: true
-          })
-          if (chance(0.3, pokemon)) {
-            attacker.status.triggerWound(3000, attacker, pokemon)
-          }
+    new OnAttackReceivedEffect(({ pokemon, attacker }) => {
+      if (
+        attacker &&
+        attacker.items.has(Item.PROTECTIVE_PADS) === false &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) === 1
+      ) {
+        const damage = Math.round(3 + 0.15 * pokemon.def)
+        attacker.handleDamage({
+          damage,
+          board: pokemon.simulation.board,
+          attackType: AttackType.TRUE,
+          attacker: pokemon,
+          shouldTargetGainMana: true
+        })
+        if (chance(0.3, pokemon)) {
+          attacker.status.triggerWound(3000, attacker, pokemon)
         }
       }
-    )
+    })
   ],
 
   [Item.AQUA_EGG]: [
