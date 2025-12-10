@@ -91,7 +91,7 @@ export function spawnDIAYAvatar(player: Player): Pokemon {
     powerScore = [5, 6, 7][avatar.stars] ?? 7
   }
   if (avatar.rarity === Rarity.SPECIAL) {
-    powerScore = [1, 3, 7, 7][avatar.stars] ?? 7
+    powerScore = [1, 3, 7, 7][avatar.stars - 1] ?? 7
   }
   if (powerScore < 5) {
     player.money += 55 - Math.round(10 * powerScore)
