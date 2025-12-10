@@ -210,21 +210,7 @@ export default class PokemonSprite extends DraggableObject {
     this.add(this.sprite)
 
     if (isEntity(pokemon)) {
-      if (pokemon.status.light) {
-        this.addLight()
-      }
-      if (pokemon.status.electricField) {
-        this.addElectricField()
-      }
-      if (pokemon.status.psychicField) {
-        this.addPsychicField()
-      }
-      if (pokemon.status.grassField) {
-        this.addGrassField()
-      }
-      if (pokemon.status.fairyField) {
-        this.addFairyField()
-      }
+      this.addStatusEffectsSprites(pokemon)
     } else {
       if (pokemon.items.has(Item.SHINY_STONE)) {
         this.addLight()
@@ -861,6 +847,105 @@ export default class PokemonSprite extends DraggableObject {
 
       if (pokemon.pp !== undefined && pokemon.maxPP > 0)
         this.lifebar.setMaxPP(pokemon.maxPP)
+    }
+  }
+
+  addStatusEffectsSprites(pokemon: IPokemonEntity) {
+    if (pokemon.status.light) {
+      this.addLight()
+    }
+    if (pokemon.status.wound) {
+      this.addWound()
+    }
+    if (pokemon.status.burn) {
+      this.addBurn()
+    }
+    if (pokemon.status.sleep) {
+      this.addSleep()
+    }
+    if (pokemon.status.silence) {
+      this.addSilence()
+    }
+    if (pokemon.status.fatigue) {
+      this.addFatigue()
+    }
+    if (pokemon.status.freeze) {
+      this.addFreeze()
+    }
+    if (pokemon.status.confusion) {
+      this.addConfusion()
+    }
+    if (pokemon.status.paralysis) {
+      this.addParalysis()
+    }
+    if (pokemon.status.pokerus) {
+      this.addPokerus()
+    }
+    if (pokemon.status.possessed) {
+      this.addPossessed()
+    }
+    if (pokemon.status.locked) {
+      this.addLocked()
+    }
+    if (pokemon.status.blinded) {
+      this.addBlinded()
+    }
+    if (pokemon.status.armorReduction) {
+      this.addArmorReduction()
+    }
+    if (pokemon.status.charm) {
+      this.addCharm()
+    }
+    if (pokemon.status.flinch) {
+      this.addFlinch()
+    }
+    if (pokemon.status.curse) {
+      this.addCurse()
+    }
+    if (pokemon.status.poisonStacks > 0) {
+      this.addPoison()
+    }
+    if (pokemon.status.protect) {
+      this.addProtect()
+    }
+    if (pokemon.status.resurrection) {
+      this.addResurrection()
+    }
+    if (pokemon.status.runeProtect) {
+      this.addRuneProtect()
+    }
+    if (pokemon.status.spikeArmor) {
+      this.addReflectShieldAnim()
+    }
+    if (pokemon.status.magicBounce) {
+      this.addReflectShieldAnim(0xffa0ff)
+    }
+    if (pokemon.status.reflect) {
+      this.addReflectShieldAnim(0xff3030)
+    }
+    if (pokemon.status.electricField) {
+      this.addElectricField()
+    }
+    if (pokemon.status.psychicField) {
+      this.addPsychicField()
+    }
+    if (pokemon.status.grassField) {
+      this.addGrassField()
+    }
+    if (pokemon.status.fairyField) {
+      this.addFairyField()
+    }
+    if (pokemon.status.curseVulnerability) {
+      this.addCurseVulnerability()
+    }
+    if (pokemon.status.curseWeakness) {
+      this.addCurseWeakness()
+    }
+    if (pokemon.status.curseTorment) {
+      this.addCurseTorment()
+    }
+    if (pokemon.status.curseFate) {
+      this.addCurseFate()
     }
   }
 
