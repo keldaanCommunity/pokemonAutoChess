@@ -9169,7 +9169,7 @@ export class SparkStrategy extends AbilityStrategy {
               targetY: newTarget.positionY,
               positionX: currentTarget.positionX,
               positionY: currentTarget.positionY,
-              ap: pokemon.ap - nbBounce * 20
+              ap: min(-100)(pokemon.ap - nbBounce * 20)
             })
             const reducedDamage = Math.ceil(damage / Math.pow(2, nbBounce))
             newTarget.handleSpecialDamage(
