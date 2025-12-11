@@ -14637,7 +14637,7 @@ export class MoonblastStrategy extends AbilityStrategy {
       moonsRemaining--
 
       // If target died, find closest enemy and gain bonus moon
-      if (death) {
+      if (death || currentTarget.status.resurrecting) {
         const closestEnemy = board.getClosestEnemy(
           currentTarget.positionX,
           currentTarget.positionY,
