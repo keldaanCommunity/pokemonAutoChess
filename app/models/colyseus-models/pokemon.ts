@@ -6594,6 +6594,11 @@ export class Rotom extends Pokemon {
   range = 3
   passive = Passive.ROTOM
   skill = Ability.PLASMA_FISSION
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ELECTRIC) || regionSynergies?.includes(Synergy.ARTIFICIAL)
+  }
   onAcquired(player: Player) {
     if (!player.items.includes(Item.ROTOM_CATALOG)) {
       player.items.push(Item.ROTOM_CATALOG)
