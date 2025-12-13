@@ -3256,7 +3256,7 @@
 		"SOUND": "Les Pokémon SOUND émettent un cri lorsqu'ils utilisent leurs capacités, réveillant les alliés en SLEEP et leur donnant des statistiques bonus.",
 		"ARTIFICIAL": "Les Pokémon ARTIFICIAL donnent des outils et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
 		"BABY": "Les Pokémon BABY ont une chance de vous apporter des Œufs Pokémon pour vous réconforter après une défaite. Cette chance s'accumule avec les séries de défaites.{{additionalInfo}}.",
-		"BABY_CHANCE_STACKED": "\nChance accumulée : {{eggChance}}%.",
+		"BABY_CHANCE_STACKED": "\nChance au prochain round : {{eggChance}}%",
 		"DRAGON_STARS": "\n\nBonus actuel : {{totalStars}} STAR",
 		"ELECTRIC_CHARGE": "\n\nCharge de la CELL_BATTERY : {{charge}}%",
 		"LIGHT": "Les Pokémon LIGHT révèlent un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",

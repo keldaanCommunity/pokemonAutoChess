@@ -3256,7 +3256,7 @@
 		"SOUND": "SOUND宝可梦释放招式时会发出叫声，叫醒处于SLEEP的我方宝可梦并为我方宝可梦提升数值。",
 		"ARTIFICIAL": "ARTIFICIAL宝可梦持有道具时能额外提升ATK，AP以及获得SHIELD，且能提供工具类道具。",
 		"BABY": "BABY宝可梦在你战败时会带来宝可梦的蛋安慰你，概率随连败次数增加。{{additionalInfo}}",
-		"BABY_CHANCE_STACKED": "\n\n当前概率：{{eggChance}}%",
+		"BABY_CHANCE_STACKED": "\n\n下回合概率：{{eggChance}}%",
 		"DRAGON_STARS": "\n当前总星数：{{totalStars}} × STAR",
 		"ELECTRIC_CHARGE": "\n下一节CELL_BATTERY的电量：{{charge}}%",
 		"LIGHT": "LIGHT共鸣会用聚光灯照射战场。战斗开始时处于聚光灯中的我方宝可梦会获得独有增幅。",

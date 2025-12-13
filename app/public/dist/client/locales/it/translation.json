@@ -2372,7 +2372,7 @@
 		"SOUND": "I Pokèmon SOUND emettono un verso quando usano le loro abilità, svegliando gli alleati addormentati e dando loro statistiche bonus",
 		"ARTIFICIAL": "I Pokèmon ARTIFICIAL forniscono $t(tools) e guadagnano ATK, AP e SHIELD quando tengono gli oggetti.",
 		"BABY": "I BABY possono portarti uova di Pokèmon per confortarti dopo una sconfitta. La possibilità aumenta con le serie di sconfitte.{{additionalInfo}}",
-		"BABY_CHANCE_STACKED": "Possibilità di avere un uovo: {{eggChance}}% ",
+		"BABY_CHANCE_STACKED": "\n\nProssimo round: {{eggChance}}%",
 		"LIGHT": "La LIGHT rivela un punto di luce sul campo di battaglia. L'unità sotto questa luce all'inizio del combattimento ottiene bonus unici.",
 		"WILD": "I Pokémon WILD ricevono ATK e SPEED incrementato, e hanno il [25,LK]% di possibilità di infliggere WOUND al bersaglio. Per ogni STAR di ogni Pokémon WILD sul campo, ottieni +1% di possibilità di trovare un WILD nel tuo negozio + 5% di possibilità durante i round PvE {{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nPossibilità attuale di trovare un Pokèmon WILD: {{wildChance}}%",

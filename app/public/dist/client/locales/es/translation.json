@@ -3135,7 +3135,7 @@
 		"SOUND": "Los Pokémon SOUND emiten un grito cuando usan sus habilidades, lo que despierta a los aliados dormidos y les otorga estadísticas adicionales.",
 		"ARTIFICIAL": "Los Pokémon ARTIFICIAL dan $t(tools) y ganan ATK, AP y SHIELD cuando tienen objetos equipados.",
 		"BABY": "Los Pokémon BABY pueden traerte huevos de Pokémon para consolarte después de una derrota. Las probabilidades se acumulan con las rachas perdedoras.{{additionalInfo}}",
-		"BABY_CHANCE_STACKED": "\n\nProbabilidad acumulada: {{eggChance}}%",
+		"BABY_CHANCE_STACKED": "\n\nPróximo round: {{eggChance}}%",
 		"DRAGON_STARS": "\nBonus actual: {{totalStars}} STAR",
 		"LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el foco de luz al comienzo del combate obtiene bonificaciones únicas.",
 		"WILD": "Los Pokémon WILD obtienen un mayor ATK y SPEED, y tienen un [25,LK]% de posibilidades de WOUND a su objetivo. Por cada STAR de tus Pokémon WILD en el tablero o banquillo, obtén +1% de probabilidad de encontrar Pokémon WILD en tus tiendas + 5% de probabilidad durante las rondas JcE.{{additionalInfo}}",
