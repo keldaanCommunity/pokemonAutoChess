@@ -3226,7 +3226,7 @@
 		"SOUND": "SOUND 포켓몬은 기술을 사용할 시, 아군에게 추가 능력치를 부여하고 잠듦 상태를 해제하는 울음소리를 냅니다.  ",
 		"ARTIFICIAL": "ARTIFICIAL 포켓몬은 고유 아이템을 얻으며 아이템을 장착할 시, 추가 ATK, AP과 SHIELD를 획득합니다.",
 		"BABY": "BABY 포켓몬은 패배 이후 위로의 표시로 포켓몬의 알을 가져옵니다. 연패에 따라 확률이 증가합니다.{{additionalInfo}}",
-		"BABY_CHANCE_STACKED": "\n확률 증가: {{eggChance}}%",
+		"BABY_CHANCE_STACKED": "\n다음 라운드 확률: {{eggChance}}%",
 		"LIGHT": "LIGHT 포켓몬은 전장에 스포트라이트를 비춥니다. 스포트라이트 위에 서 있는 포켓몬은 전투 시작 시, 특수한 효과를 얻습니다.",
 		"WILD": "WILD 포켓몬은 추가 ATK SPEED를 획득하고 이동속도가 빨라지며, [25,LK]%의 확률로 적을 WOUND 상태로 만듭니다. 필드 위의 WILD 포켓몬의 총 STAR 갯수에 따라 WILD 포켓몬이 상점에서 등장할 확률이 1% 증가하며, PvE 라운드에서는 5% 증가합니다.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\n현재 WILD 포켓몬이 등장할 확률: {{wildChance}}%",

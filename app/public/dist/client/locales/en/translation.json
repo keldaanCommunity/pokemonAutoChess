@@ -3256,7 +3256,7 @@
 		"SOUND": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats.",
 		"ARTIFICIAL": "ARTIFICIAL Pokémon give tools and gain ATK, AP and SHIELD when holding items.",
 		"BABY": "BABY Pokémon have a chance to bring you Pokémon Eggs to comfort you after a defeat. Chance stacks with losing streaks.{{additionalInfo}}",
-		"BABY_CHANCE_STACKED": "\n\nChance stacked: {{eggChance}}%",
+		"BABY_CHANCE_STACKED": "\n\nNext round chance: {{eggChance}}%",
 		"DRAGON_STARS": "\nCurrent bonus: {{totalStars}} STAR",
 		"ELECTRIC_CHARGE": "\nCELL_BATTERY charge: {{charge}}%",
 		"LIGHT": "LIGHT Pokémon reveal a spotlight on the battlefield. The Pokémon standing in the spotlight at the start of combat gains unique bonuses.",
