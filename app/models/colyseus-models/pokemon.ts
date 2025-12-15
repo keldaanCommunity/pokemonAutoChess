@@ -6597,7 +6597,10 @@ export class Rotom extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO): boolean {
     const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies?.includes(Synergy.ELECTRIC) || regionSynergies?.includes(Synergy.ARTIFICIAL)
+    return (
+      regionSynergies?.includes(Synergy.ELECTRIC) ||
+      regionSynergies?.includes(Synergy.ARTIFICIAL)
+    )
   }
   onAcquired(player: Player) {
     if (!player.items.includes(Item.ROTOM_CATALOG)) {
@@ -8533,7 +8536,7 @@ export class Blacephalon extends Pokemon {
   speed = 69
   def = 5
   speDef = 9
-  maxPP = 120
+  maxPP = 150
   range = 3
   skill = Ability.MIND_BLOWN
 }
