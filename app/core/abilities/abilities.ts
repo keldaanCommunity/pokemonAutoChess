@@ -4251,7 +4251,7 @@ export class HappyHourStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const buff = [2, 5, 8][pokemon.stars - 1] ?? 8
+    const buff = [2, 4, 7][pokemon.stars - 1] ?? 7
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
         ally.addAttack(buff, pokemon, 1, crit)
@@ -13591,7 +13591,7 @@ export class SpinOutStrategy extends AbilityStrategy {
     )
     if (accelerationEffect) {
       pokemon.addSpeed(
-        -accelerationEffect.accelerationStacks * 20,
+        -accelerationEffect.accelerationStacks * 15,
         pokemon,
         0,
         false
@@ -15353,8 +15353,8 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.addMaxHP(50, pokemon, 1, crit, false)
-    pokemon.addSpeed(30, pokemon, 0, false)
+    pokemon.addMaxHP(40, pokemon, 1, crit, false)
+    pokemon.addSpeed(25, pokemon, 0, false)
     if (pokemon.status.electricField === false) {
       pokemon.status.electricField = true
       pokemon.broadcastAbility({ skill: "SUPERCHARGE" })

@@ -166,7 +166,7 @@ export default class Simulation extends Schema implements ISimulation {
         (e) => this.blueEffects.has(e) || this.redEffects.has(e)
       )
     ) {
-      this.tidalWaveTimer = 8000
+      this.tidalWaveTimer = 7000
     }
 
     blueBoard.forEach((pokemon) => {
@@ -695,14 +695,14 @@ export default class Simulation extends Schema implements ISimulation {
             (item) => item === Item.CELL_BATTERY
           ).length
           if (nbCellBatteries > 0) {
-            pokemon.addSpeed(3 * nbCellBatteries, pokemon, 0, false)
+            pokemon.addSpeed(2 * nbCellBatteries, pokemon, 0, false)
           }
         }
         if (pokemon.refToBoardPokemon.supercharged) {
           pokemon.refToBoardPokemon.supercharged = false
           pokemon.status.addElectricField(pokemon)
-          pokemon.addSpeed(30, pokemon, 0, false)
-          pokemon.addShield(50, pokemon, 0, false)
+          pokemon.addSpeed(20, pokemon, 0, false)
+          pokemon.addShield(30, pokemon, 0, false)
         }
       })
     }
@@ -1511,7 +1511,7 @@ export default class Simulation extends Schema implements ISimulation {
           this.blueEffects.has(EffectEnum.SURGE_SURFER) ||
           this.tidalWaveCounter < 2
         ) {
-          this.tidalWaveTimer = 8000
+          this.tidalWaveTimer = 7000
         }
       }
     }
