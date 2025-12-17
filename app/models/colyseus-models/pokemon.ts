@@ -19393,6 +19393,39 @@ export class Pincurchin extends Pokemon {
   passive = Passive.PINCURCHIN
 }
 
+export class Mudbray extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.MUDSDALE
+  hp = 120
+  atk = 12
+  speed = 35
+  def = 6
+  speDef = 4
+  maxPP = 30
+  range = 1
+  skill = Ability.HIGH_HORSEPOWER
+  passive = Passive.STAMINA
+  additional = true
+}
+
+export class Mudsdale extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.GROUND, Synergy.FIELD])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 250
+  atk = 26
+  speed = 35
+  def = 12
+  speDef = 8
+  maxPP = 30
+  range = 1
+  skill = Ability.HIGH_HORSEPOWER
+  passive = Passive.STAMINA
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20478,7 +20511,9 @@ export const PokemonClasses: Record<
   [Pkm.IRON_THORNS]: IronThorns,
   [Pkm.TADBULB]: Tadbulb,
   [Pkm.BELLIBOLT]: Bellibolt,
-  [Pkm.PINCURCHIN]: Pincurchin
+  [Pkm.PINCURCHIN]: Pincurchin,
+  [Pkm.MUDBRAY]: Mudbray,
+  [Pkm.MUDSDALE]: Mudsdale
 }
 
 // declare all the classes in colyseus schema TypeRegistry

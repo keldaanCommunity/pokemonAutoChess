@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Mudbray
+- Mudsdale
+
 # Changes to Pokemon & Abilities
 
 - Rotom is now a regional Pokemon exclusively found in Electric or Artificial regions.

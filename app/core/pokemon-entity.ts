@@ -332,9 +332,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
                 chance(this.critChance / 100, this))
             const bounceDamage = Math.round(
               ([0.5, 1][this.stars - 1] ?? 1) *
-              damage *
-              (1 + this.ap / 100) *
-              (bounceCrit ? this.critPower : 1)
+                damage *
+                (1 + this.ap / 100) *
+                (bounceCrit ? this.critPower : 1)
             )
             this.broadcastAbility({
               skill: attacker.skill,
@@ -458,9 +458,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
     value = Math.round(
       value *
-      (1 + (apBoost * caster.ap) / 100) *
-      (crit ? caster.critPower : 1) *
-      (this.status.fatigue && value > 0 ? 0.5 : 1)
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1) *
+        (this.status.fatigue && value > 0 ? 0.5 : 1)
     )
 
     if (
@@ -975,9 +975,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const defFactor = [0.6, 0.8, 1][target.stars - 1] ?? 1
       const damage = Math.round(
         target.def *
-        defFactor *
-        (1 + target.ap / 100) *
-        (crit ? target.critPower : 1)
+          defFactor *
+          (1 + target.ap / 100) *
+          (crit ? target.critPower : 1)
       )
       this.status.triggerWound(2000, this, target)
       this.handleDamage({
@@ -1062,6 +1062,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
     isRetaliation: boolean
   }) {
+    // Increment damage received count
+    this.count.damageReceivedCount++
+
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {
@@ -1186,7 +1189,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (
       this.player &&
       this.simulation.room.state.specialGameRule ===
-      SpecialGameRule.BLOOD_MONEY &&
+        SpecialGameRule.BLOOD_MONEY &&
       !target.isSpawn
     ) {
       this.player.addMoney(1, true, this)
@@ -1323,11 +1326,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
           ? []
           : [
-            PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-              shiny: this.shiny,
-              emotion: Emotion.ANGRY
-            })
-          ]
+              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
+                shiny: this.shiny,
+                emotion: Emotion.ANGRY
+              })
+            ]
       }
 
       const spawns = pickNRandomIn(koAllies, 3)

@@ -1076,7 +1076,9 @@ export enum Pkm {
   WUGTRIO = "WUGTRIO",
   FLUTTER_MANE = "FLUTTER_MANE",
   ORTHWORM = "ORTHWORM",
-  IRON_THORNS = "IRON_THORNS"
+  IRON_THORNS = "IRON_THORNS",
+  MUDBRAY = "MUDBRAY",
+  MUDSDALE = "MUDSDALE"
 }
 
 export const PkmIndex: { [key in Pkm]: string } = {
@@ -1984,8 +1986,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WISHIWASHI_SCHOOL]: "0746-0001",
   //[Pkm.MAREANIE]: "0747",
   //[Pkm.TOXAPEX]: "0748",
-  //[Pkm.MUDBRAY]: "0749",
-  //[Pkm.MUDSDALE]: "0750",
+  [Pkm.MUDBRAY]: "0749",
+  [Pkm.MUDSDALE]: "0750",
   [Pkm.DEWPIDER]: "0751",
   [Pkm.ARAQUANID]: "0752",
   [Pkm.FOMANTIS]: "0753",
@@ -3375,7 +3377,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.IRON_THORNS]: Pkm.IRON_THORNS,
   [Pkm.TADBULB]: Pkm.TADBULB,
   [Pkm.BELLIBOLT]: Pkm.TADBULB,
-  [Pkm.PINCURCHIN]: Pkm.PINCURCHIN
+  [Pkm.PINCURCHIN]: Pkm.PINCURCHIN,
+  [Pkm.MUDBRAY]: Pkm.MUDBRAY,
+  [Pkm.MUDSDALE]: Pkm.MUDBRAY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
