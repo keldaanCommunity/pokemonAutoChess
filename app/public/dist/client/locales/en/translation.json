@@ -2139,7 +2139,7 @@
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining ELECTRIC_FIELD, 30 SPEED and [50,SP] max HP. Then every third attack chains through up to 4 nearby enemies, dealing [20,SP] SPECIAL each.",
 		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokemon and gaining [10,20,40,SP] SHIELD",
-		"HIGH_HORSEPOWER": "Charges through the target, dealing [5,10,15,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL"
+		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL"
 	},
 	"effect": {
 		"STAMINA": "Stamina",

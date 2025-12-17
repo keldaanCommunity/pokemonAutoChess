@@ -19403,7 +19403,7 @@ export class Mudbray extends Pokemon {
   speed = 35
   def = 6
   speDef = 4
-  maxPP = 30
+  maxPP = 45
   range = 1
   skill = Ability.HIGH_HORSEPOWER
   passive = Passive.STAMINA
@@ -19419,7 +19419,7 @@ export class Mudsdale extends Pokemon {
   speed = 35
   def = 12
   speDef = 8
-  maxPP = 30
+  maxPP = 45
   range = 1
   skill = Ability.HIGH_HORSEPOWER
   passive = Passive.STAMINA

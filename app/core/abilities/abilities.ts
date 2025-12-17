@@ -15416,7 +15416,7 @@ export class HighHorsepowerStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     // Determine base damage based on pokemon's star level
-    const damage = [5, 10, 15][pokemon.stars - 1] ?? 15
+    const damage = [15, 25, 35][pokemon.stars - 1] ?? 35
 
     // Calculate direction from pokemon to target
     const orientation = board.orientation(
