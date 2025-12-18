@@ -1686,7 +1686,7 @@ export default class Simulation extends Schema implements ISimulation {
       )
       if (enemyWithHighestAtk) {
         enemyWithHighestAtk.addAttack(
-          Math.round(-0.3 * enemyWithHighestAtk.atk),
+          Math.round(-0.2 * enemyWithHighestAtk.atk),
           enemyWithHighestAtk,
           0,
           false
@@ -1706,7 +1706,7 @@ export default class Simulation extends Schema implements ISimulation {
         opponentsCursable.filter((p) => p.ap === highestAP)
       )
       if (enemyWithHighestAP) {
-        enemyWithHighestAP.addAbilityPower(-50, enemyWithHighestAP, 0, false)
+        enemyWithHighestAP.addAbilityPower(-30, enemyWithHighestAP, 0, false)
         enemyWithHighestAP.status.curseTorment = true
         enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP)
       }

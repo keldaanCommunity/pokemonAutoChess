@@ -5705,8 +5705,8 @@ export class Melmetal extends Pokemon {
   atk = 35
   speed = 36
   def = 14
-  speDef = 6
-  maxPP = 100
+  speDef = 10
+  maxPP = 80
   range = 1
   skill = Ability.DOUBLE_IRON_BASH
   passive = Passive.MELMETAL
@@ -14598,7 +14598,7 @@ export class Cosmog extends Pokemon {
   rarity = Rarity.UNIQUE
   evolution = Pkm.COSMOEM
   evolutionRule = new StackBasedEvolutionRule()
-  stacksRequired = 10
+  stacksRequired = 8
   stars = 1
   hp = 100
   atk = 5
@@ -14625,9 +14625,9 @@ export class Cosmoem extends Pokemon {
       return Pkm.SOLGALEO
     else return Pkm.LUNALA
   })
-  stacksRequired = 10
+  stacksRequired = 8
   onAcquired(player: Player) {
-    this.hp -= 200 - 100 // revert hp buffs of cosmog
+    this.hp -= 200 - 80 // revert hp buffs of cosmog
     this.maxHP = this.hp
   }
   hp = 200
@@ -14658,7 +14658,7 @@ export class Solgaleo extends Pokemon {
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
-    this.hp -= 300 - 200 // revert hp buffs of cosmoem
+    this.hp -= 300 - 160 // revert hp buffs of cosmoem
     this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
@@ -14681,7 +14681,7 @@ export class Lunala extends Pokemon {
   range = 4
   skill = Ability.MOONGEIST_BEAM
   onAcquired(player: Player) {
-    this.hp -= 300 - 200 // revert hp buffs of cosmoem
+    this.hp -= 300 - 160 // revert hp buffs of cosmoem
     this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
@@ -17344,7 +17344,7 @@ export class Milcery extends Pokemon {
     [...Flavors],
     (pokemon, player, item: Item) => alcremieByFlavor[item]
   )
-  hp = 130
+  hp = 150
   atk = 10
   speed = 41
   def = 2
@@ -17371,7 +17371,7 @@ export class AlcremieVanilla extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17391,7 +17391,7 @@ export class AlcremieRuby extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17411,7 +17411,7 @@ export class AlcremieMatcha extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17431,7 +17431,7 @@ export class AlcremieMint extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17451,7 +17451,7 @@ export class AlcremieLemon extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17471,7 +17471,7 @@ export class AlcremieSalted extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17491,7 +17491,7 @@ export class AlcremieRubySwirl extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17511,7 +17511,7 @@ export class AlcremieCaramelSwirl extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17531,7 +17531,7 @@ export class AlcremieRainbowSwirl extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
