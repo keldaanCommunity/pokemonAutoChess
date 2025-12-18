@@ -746,7 +746,7 @@ export class ChatterStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 20
-    const confusionChance = 0.5
+    const confusionChance = 0.4
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -8649,7 +8649,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
       })
     }
 
-    const damage = 15 * synergyLevelsCount
+    const damage = 13 * synergyLevelsCount
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
@@ -14610,7 +14610,7 @@ export class MoonblastStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
 
-    const damage = 20
+    const damage = 18
     let currentTarget: PokemonEntity | undefined = target
     let moonsRemaining = 6
     let moonIndex = 0
