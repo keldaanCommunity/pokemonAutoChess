@@ -7397,5 +7397,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Shock,
     emote: AnimationType.Shock,
     attackSprite: AttackSprite.ELECTRIC_MELEE
+  },
+  [Pkm.MUDBRAY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    attackSprite: AttackSprite.GROUND_MELEE
+  },
+  [Pkm.MUDSDALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    attackSprite: AttackSprite.GROUND_MELEE
   }
 }

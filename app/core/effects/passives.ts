@@ -1341,5 +1341,13 @@ export const PassiveEffects: Partial<
         attacker.status.triggerParalysis(2000, attacker, pokemon)
       }
     })
+  ],
+  [Passive.STAMINA]: [
+    new OnDamageReceivedEffect(({ pokemon }) => {
+      const shield = 20
+      if (pokemon.count.damageReceivedCount % 10 === 0) {
+        pokemon.addShield(shield, pokemon, 1, false)
+      }
+    })
   ]
 }

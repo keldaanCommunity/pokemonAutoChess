@@ -537,7 +537,8 @@
 		"STRANGE_STEAM": "Strange Steam",
 		"PUMMELING_PAYBACK": "Pummeling Payback",
 		"VOLT_SURGE": "Volt Surge",
-		"SUPERCELL_SLAM": "Supercell Slam"
+		"SUPERCELL_SLAM": "Supercell Slam",
+		"HIGH_HORSEPOWER": "High Horsepower"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1617,7 +1618,9 @@
 		"IRON_THORNS": "Iron Thorns",
 		"TADBULB": "Tadbulb",
 		"BELLIBOLT": "Bellibolt",
-		"PINCURCHIN": "Pincurchin"
+		"PINCURCHIN": "Pincurchin",
+		"MUDBRAY": "Mudbray",
+		"MUDSDALE": "Mudsdale"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2135,7 +2138,8 @@
 		"STRANGE_STEAM": "Projects a strange stream around the user, gaining 1 tile range per cast. The steam gives FAIRY_FIELD to allies and has [30,LK]% chance to inflict CONFUSION to enemies for 3 seconds. Pokémon in the steam deal and receive 20% more SPECIAL.",
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining ELECTRIC_FIELD, 25 SPEED and [40,SP] max HP. Then every third attack chains through up to 4 nearby enemies, dealing [20,SP] SPECIAL each.",
-		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokemon and gaining [10,20,40,SP] SHIELD"
+		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokemon and gaining [10,20,40,SP] SHIELD",
+		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3107,7 +3111,8 @@
 		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED every [3,2,1] seconds to your team.",
 		"ORTHWORM": "When digging a hole, gains 5 HP permanently.",
 		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal [30,SP] SPECIAL to ADJACENT enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD.",
-		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds."
+		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds.",
+		"STAMINA": "Every 10 hits received, gain [20,SP] SHIELD"
 	},
 	"stat": {
 		"ATK": "Attack",

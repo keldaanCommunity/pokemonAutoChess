@@ -1062,6 +1062,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     attackType: AttackType
     isRetaliation: boolean
   }) {
+    // Increment damage received count
+    this.count.damageReceivedCount++
+
     // Berries trigger
     const berry = values(this.items).find((item) => Berries.includes(item))
     if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {

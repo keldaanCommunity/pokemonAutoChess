@@ -1,5 +1,8 @@
 # New Pokemons:
 
+- Mudbray
+- Mudsdale
+
 # Changes to Pokemon & Abilities
 
 # Changes to Synergies

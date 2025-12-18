@@ -1053,6 +1053,11 @@ export const AbilitiesAnimations: {
     shakeCamera({})
   ],
   [Ability.COUNTER]: onCasterScale2,
+  [Ability.HIGH_HORSEPOWER]: onCaster({
+    ability: Ability.COUNTER,
+    scale: 2,
+    tint: 0xc4a484
+  }),
   [Ability.SPECTRAL_THIEF]: [onTargetScale2, onCasterScale2],
   [Ability.SACRED_SWORD_IRON]: onTarget({
     ability: "SACRED_SWORD",
