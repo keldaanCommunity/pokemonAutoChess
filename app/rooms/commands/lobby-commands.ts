@@ -807,18 +807,17 @@ export class OnSearchCommand extends Command<
 > {
   async execute({ client, name }: { client: Client; name: string }) {
     try {
-      const searchTerm = name.trim()
-      const escapedSearchTerm = searchTerm.replace(
-        /[-\/\\^$*+?.()|[\]{}]/g,
-        "\\$&"
-      )
-      const regExp = new RegExp("^" + escapedSearchTerm, "i")
+      const searchTerm = name.trim().toLowerCase()
       const user = this.room.users.get(client.auth.uid)
       const showBanned =
         user?.role === Role.ADMIN || user?.role === Role.MODERATOR
+
       const users = await UserMetadata.find(
         {
-          displayName: { $regex: regExp },
+          displayName: {
+            $gte: searchTerm,
+            $lt: searchTerm + "\uffff"
+          },
           ...(showBanned ? {} : { banned: false })
         },
         [
@@ -829,8 +828,13 @@ export class OnSearchCommand extends Command<
           "avatar",
           ...(showBanned ? ["banned"] : [])
         ],
-        { limit: 100, sort: { level: -1 } }
+        {
+          limit: 100,
+          sort: { level: -1 },
+          collation: { locale: "en", strength: 2 }
+        }
       )
+
       if (users) {
         const suggestions: Array<ISuggestionUser> = users.map((u) => {
           return {
