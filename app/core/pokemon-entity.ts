@@ -1427,6 +1427,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       resetSoundStacks(soundEffect)
     }
 
+    if (this.skill === Ability.VOLT_SURGE) {
+      this.status.removeElectricField(this)
+      // This is not perfect, cause volt surge addMaxHP use AP scaling and crit
+      this.addMaxHP(-40 * this.count.ult, this, 0, false)
+      this.addSpeed(-25 * this.count.ult, this, 0, false)
+      this.count.ult = 0
+    }
+
     this.status.resurrection = false // prevent resurrecting again
     this.shield = 0 // remove existing shield
   }

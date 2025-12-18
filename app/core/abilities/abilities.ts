@@ -746,7 +746,7 @@ export class ChatterStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 20
-    const confusionChance = 0.5
+    const confusionChance = 0.4
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -4251,7 +4251,7 @@ export class HappyHourStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const buff = [2, 5, 8][pokemon.stars - 1] ?? 8
+    const buff = [2, 4, 7][pokemon.stars - 1] ?? 7
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team) {
         ally.addAttack(buff, pokemon, 1, crit)
@@ -8649,7 +8649,7 @@ export class MultiAttackStrategy extends AbilityStrategy {
       })
     }
 
-    const damage = 15 * synergyLevelsCount
+    const damage = 13 * synergyLevelsCount
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)
@@ -13591,7 +13591,7 @@ export class SpinOutStrategy extends AbilityStrategy {
     )
     if (accelerationEffect) {
       pokemon.addSpeed(
-        -accelerationEffect.accelerationStacks * 20,
+        -accelerationEffect.accelerationStacks * 15,
         pokemon,
         0,
         false
@@ -14610,7 +14610,7 @@ export class MoonblastStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
 
-    const damage = 20
+    const damage = 18
     let currentTarget: PokemonEntity | undefined = target
     let moonsRemaining = 6
     let moonIndex = 0
@@ -15353,8 +15353,8 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.addMaxHP(50, pokemon, 1, crit, false)
-    pokemon.addSpeed(30, pokemon, 0, false)
+    pokemon.addMaxHP(40, pokemon, 1, crit, false)
+    pokemon.addSpeed(25, pokemon, 0, false)
     if (pokemon.status.electricField === false) {
       pokemon.status.electricField = true
       pokemon.broadcastAbility({ skill: "SUPERCHARGE" })

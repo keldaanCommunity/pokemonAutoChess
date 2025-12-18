@@ -324,8 +324,8 @@ const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
       pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       pokemon.name = Pkm.MIMIKYU_BUSTED
       pokemon.changePassive(Passive.MIMIKYU_BUSTED)
-      pokemon.addAttack(10, pokemon, 0, false)
-      pokemon.status.triggerProtect(2000)
+      pokemon.addAttack(8, pokemon, 0, false)
+      pokemon.status.triggerProtect(1500)
       if (pokemon.player) {
         pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
       }

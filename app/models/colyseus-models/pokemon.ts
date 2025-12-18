@@ -1350,11 +1350,11 @@ export class Ralts extends Pokemon {
   stars = 1
   evolution = Pkm.KIRLIA
   hp = 90
-  atk = 5
+  atk = 6
   speed = 51
   def = 4
   speDef = 8
-  maxPP = 100
+  maxPP = 95
   range = 3
   skill = Ability.FUTURE_SIGHT
 }
@@ -1374,11 +1374,11 @@ export class Kirlia extends Pokemon {
     return fightingCount >= fairyCount ? Pkm.GALLADE : Pkm.GARDEVOIR
   })
   hp = 130
-  atk = 12
+  atk = 15
   speed = 51
   def = 6
   speDef = 10
-  maxPP = 100
+  maxPP = 95
   range = 3
   skill = Ability.FUTURE_SIGHT
   passive = Passive.KIRLIA
@@ -1397,7 +1397,7 @@ export class Gardevoir extends Pokemon {
   speed = 51
   def = 8
   speDef = 16
-  maxPP = 100
+  maxPP = 95
   range = 3
   skill = Ability.FUTURE_SIGHT
 }
@@ -1415,7 +1415,7 @@ export class Gallade extends Pokemon {
   speed = 51
   def = 10
   speDef = 20
-  maxPP = 100
+  maxPP = 95
   range = 1
   skill = Ability.PSYCHO_CUT
 }
@@ -1642,7 +1642,7 @@ export class Oshawott extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DEWOTT
-  hp = 90
+  hp = 100
   atk = 8
   speed = 47
   def = 8
@@ -1661,7 +1661,7 @@ export class Dewott extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.SAMUROTT
-  hp = 150
+  hp = 170
   atk = 15
   speed = 47
   def = 12
@@ -1679,7 +1679,7 @@ export class Samurott extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 260
+  hp = 290
   atk = 32
   speed = 47
   def = 16
@@ -5462,7 +5462,7 @@ export class Zapdos extends Pokemon {
   speed = 57
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 110
   range = 2
   skill = Ability.THUNDER
   passive = Passive.STORM
@@ -5705,8 +5705,8 @@ export class Melmetal extends Pokemon {
   atk = 35
   speed = 36
   def = 14
-  speDef = 6
-  maxPP = 100
+  speDef = 10
+  maxPP = 80
   range = 1
   skill = Ability.DOUBLE_IRON_BASH
   passive = Passive.MELMETAL
@@ -14598,7 +14598,7 @@ export class Cosmog extends Pokemon {
   rarity = Rarity.UNIQUE
   evolution = Pkm.COSMOEM
   evolutionRule = new StackBasedEvolutionRule()
-  stacksRequired = 10
+  stacksRequired = 8
   stars = 1
   hp = 100
   atk = 5
@@ -14625,9 +14625,9 @@ export class Cosmoem extends Pokemon {
       return Pkm.SOLGALEO
     else return Pkm.LUNALA
   })
-  stacksRequired = 10
+  stacksRequired = 8
   onAcquired(player: Player) {
-    this.hp -= 200 - 100 // revert hp buffs of cosmog
+    this.hp -= 200 - 80 // revert hp buffs of cosmog
     this.maxHP = this.hp
   }
   hp = 200
@@ -14658,7 +14658,7 @@ export class Solgaleo extends Pokemon {
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
-    this.hp -= 300 - 200 // revert hp buffs of cosmoem
+    this.hp -= 300 - 160 // revert hp buffs of cosmoem
     this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
@@ -14681,7 +14681,7 @@ export class Lunala extends Pokemon {
   range = 4
   skill = Ability.MOONGEIST_BEAM
   onAcquired(player: Player) {
-    this.hp -= 300 - 200 // revert hp buffs of cosmoem
+    this.hp -= 300 - 160 // revert hp buffs of cosmoem
     this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
@@ -17133,7 +17133,7 @@ export class Nacli extends Pokemon {
   speed = 36
   def = 6
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SALT_CURE
 }
@@ -17148,7 +17148,7 @@ export class Naclstack extends Pokemon {
   speed = 36
   def = 8
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SALT_CURE
 }
@@ -17162,7 +17162,7 @@ export class Garganacl extends Pokemon {
   speed = 36
   def = 12
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.SALT_CURE
 }
@@ -17344,7 +17344,7 @@ export class Milcery extends Pokemon {
     [...Flavors],
     (pokemon, player, item: Item) => alcremieByFlavor[item]
   )
-  hp = 130
+  hp = 150
   atk = 10
   speed = 41
   def = 2
@@ -17371,7 +17371,7 @@ export class AlcremieVanilla extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17391,7 +17391,7 @@ export class AlcremieRuby extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17411,7 +17411,7 @@ export class AlcremieMatcha extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17431,7 +17431,7 @@ export class AlcremieMint extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17451,7 +17451,7 @@ export class AlcremieLemon extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17471,7 +17471,7 @@ export class AlcremieSalted extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17491,7 +17491,7 @@ export class AlcremieRubySwirl extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17511,7 +17511,7 @@ export class AlcremieCaramelSwirl extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -17531,7 +17531,7 @@ export class AlcremieRainbowSwirl extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 160
+  hp = 180
   atk = 16
   speed = 41
   def = 6
@@ -18405,7 +18405,7 @@ export class Varoom extends Pokemon {
   evolution = Pkm.REVAVROOM
   hp = 70
   atk = 6
-  speed = 50
+  speed = 40
   def = 3
   speDef = 1
   maxPP = 80
@@ -18425,7 +18425,7 @@ export class Revavroom extends Pokemon {
   stars = 2
   hp = 150
   atk = 14
-  speed = 50
+  speed = 40
   def = 7
   speDef = 3
   maxPP = 80
@@ -18693,7 +18693,7 @@ export class Smoliv extends Pokemon {
   speed = 25
   def = 2
   speDef = 3
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.TERRAIN_PULSE
 }
@@ -18712,7 +18712,7 @@ export class Dolliv extends Pokemon {
   speed = 25
   def = 3
   speDef = 5
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.TERRAIN_PULSE
 }
@@ -18730,7 +18730,7 @@ export class Arboliva extends Pokemon {
   speed = 25
   def = 6
   speDef = 8
-  maxPP = 100
+  maxPP = 90
   range = 2
   skill = Ability.TERRAIN_PULSE
 }
@@ -19342,7 +19342,7 @@ export class Tadbulb extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.BELLIBOLT
-  hp = 90
+  hp = 85
   atk = 5
   speed = 29
   def = 5
@@ -19362,7 +19362,7 @@ export class Bellibolt extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 2
-  hp = 220
+  hp = 190
   atk = 10
   speed = 29
   def = 10
