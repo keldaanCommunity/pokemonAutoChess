@@ -15307,7 +15307,7 @@ const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
   // Check if it's every third attack
   if (pokemon.count.attackCount % 3 === 0) {
     const nbBounces = 4
-    const damage = 30
+    const damage = 20
     const closestEnemies = board.getClosestEnemies(
       pokemon.positionX,
       pokemon.positionY,
