@@ -537,7 +537,8 @@
 		"STRANGE_STEAM": "神奇蒸汽",
 		"PUMMELING_PAYBACK": "快扫拳返",
 		"VOLT_SURGE": "伏特电涌",
-		"SUPERCELL_SLAM": "闪电强袭"
+		"SUPERCELL_SLAM": "闪电强袭",
+		"HIGH_HORSEPOWER": "十万马力"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1617,7 +1618,9 @@
 		"IRON_THORNS": "铁荆棘",
 		"TADBULB": "光蚪仔",
 		"BELLIBOLT": "电肚蛙",
-		"PINCURCHIN": "啪嚓海胆"
+		"PINCURCHIN": "啪嚓海胆",
+		"MUDBRAY": "泥驴仔",
+		"MUDSDALE": "重泥挽马"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2135,7 +2138,8 @@
 		"STRANGE_STEAM": "在使用者周围喷出神奇的烟雾。烟雾使范围内的我方宝可梦获得FAIRY_FIELD，敌方宝可梦有[30,LK]%的概率陷入CONFUSION。烟雾内的宝可梦受到和造成的SPECIAL均提升20%。每次释放招式后下一次烟雾范围向外扩张1格。",
 		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。",
 		"VOLT_SURGE": "使用者进入增压状态，获得ELECTRIC_FIELD并提升30点SPEED和[50,SP]点最大HP。本轮战斗的剩余时间内，每第3次攻击产生一道造成[20,SP]点SPECIAL并会弹射至至多4只附近敌方宝可梦身上的链状闪电。",
-		"SUPERCELL_SLAM": "跳跃至敌方阵型中间，对所有ADJACENT敌方宝可梦造成[10,20,40,SP]点SPECIAL，并获得[10,20,40,SP]点SHIELD。"
+		"SUPERCELL_SLAM": "跳跃至敌方阵型中间，对所有ADJACENT敌方宝可梦造成[10,20,40,SP]点SPECIAL，并获得[10,20,40,SP]点SHIELD。",
+		"HIGH_HORSEPOWER": "突进穿过目标，随后对所有ADJACENT敌方宝可梦造成[15,25,35,SP]点SPECIAL。若只击中了一只敌方宝可梦，造成的SPECIAL翻倍。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3107,7 +3111,8 @@
 		"GEARS": "此宝可梦的齿轮旋转时会持续产生能量，每[3,2,1]秒使我方宝可梦提升1点SPEED。",
 		"ORTHWORM": "挖洞时永久提升5点HP。",
 		"TADBULB": "每当受到50点伤害或在战斗开始时被LIGHT共鸣的聚光灯照射，便会对ADJACENT敌方宝可梦造成[30,SP]点SPECIAL并将他们击退。首次触发此效果时还会进入增压状态，提升30点SPEED并获得50点SHIELD和ELECTRIC_FIELD。",
-		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。"
+		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。",
+		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD"
 	},
 	"stat": {
 		"ATK": "攻击",
