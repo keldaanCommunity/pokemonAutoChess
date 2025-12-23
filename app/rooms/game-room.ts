@@ -950,7 +950,8 @@ export default class GameRoom extends Room<GameState> {
           playerId: dbrecord.id,
           elo: elo,
           synergies: synergiesMap,
-          gameMode: this.state.gameMode
+          gameMode: this.state.gameMode,
+          regions: player.regions
         })
 
         if (usr.eventFinishTime == null) {

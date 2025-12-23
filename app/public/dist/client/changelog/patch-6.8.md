@@ -16,3 +16,5 @@
 # Bugfix
 
 # Misc
+
+- Added Region tracking to statistic
