@@ -168,6 +168,7 @@ export default class Player extends Schema implements IPlayer {
   }[] = []
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
+  regions: DungeonPMDO[] = []
 
   constructor(
     id: string,
@@ -638,16 +639,20 @@ export default class Player extends Schema implements IPlayer {
         const pkm = getPokemonData(PkmFamily[p])
         const evolution = pkm.evolution
         const baseVariant = PkmRegionalBaseVariants[p]
-        if(baseVariant){
+        if (baseVariant) {
           const basePkm = getPokemonData(baseVariant)
-          if(basePkm.additional){
+          if (basePkm.additional) {
             const addpickStages = {
               [Rarity.UNCOMMON]: AdditionalPicksStages[0],
               [Rarity.RARE]: AdditionalPicksStages[1],
               [Rarity.EPIC]: AdditionalPicksStages[2]
             }
             const addPickStage = addpickStages[basePkm.rarity]
-            if(addPickStage > 0 && (state.stageLevel < addPickStage || state.additionalPokemons.includes(baseVariant) === false)){
+            if (
+              addPickStage > 0 &&
+              (state.stageLevel < addPickStage ||
+                state.additionalPokemons.includes(baseVariant) === false)
+            ) {
               return false // do not show the regional variant if its base variant is not in additional picks
             }
           }

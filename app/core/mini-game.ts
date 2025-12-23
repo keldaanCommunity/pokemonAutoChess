@@ -791,6 +791,7 @@ export class MiniGame {
           if (portal.map !== player.map) {
             const previousMap = player.map
             player.map = portal.map
+            player.regions.push(portal.map)
             player.updateRegionalPool(state, true, previousMap)
             for (let i = 0; i < player.berryTreesType.length; i++) {
               player.berryTreesType[i] = pickRandomIn(Berries)
@@ -801,7 +802,10 @@ export class MiniGame {
 
         const symbols = this.symbolsByPortal.get(avatar.portalId) ?? []
         const portalSynergies = symbols.map((s) => s.synergy)
-        if (state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF && state.stageLevel === 0) {
+        if (
+          state.specialGameRule === SpecialGameRule.DO_IT_ALL_YOURSELF &&
+          state.stageLevel === 0
+        ) {
           const avatar = spawnDIAYAvatar(player)
           player.board.set(avatar.id, avatar)
           avatar.onAcquired(player)
