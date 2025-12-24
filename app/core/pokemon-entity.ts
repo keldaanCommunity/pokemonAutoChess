@@ -4,6 +4,7 @@ import {
   ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
+  FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL,
   ItemStats,
   MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
@@ -1411,6 +1412,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.count.soundCryCount = 0
     }
 
+    const resetFieldStacks = (effect: EffectEnum) => {
+      const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
+      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
+      const nbStacks = this.count.fieldCount
+      this.addSpeed(-nbStacks * speedBoost, this, 0, false)
+    }
+
     this.effectsSet.forEach((effect) => {
       if (effect instanceof MonsterKillEffect) {
         resetMonsterStacks(effect)
@@ -1425,6 +1433,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
     if (soundEffect) {
       resetSoundStacks(soundEffect)
+    }
+    const fieldEffect = SynergyEffects[Synergy.FIELD].find((effect) =>
+      this.player?.effects.has(effect)
+    )
+    if (fieldEffect) {
+      resetFieldStacks(fieldEffect)
     }
 
     if (this.skill === Ability.VOLT_SURGE) {

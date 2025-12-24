@@ -67,3 +67,6 @@ export const FishRarityProbability: {
 export const MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL = [3, 6, 10, 10]
 export const MONSTER_AP_BUFF_PER_SYNERGY_LEVEL = [10, 20, 30, 30]
 export const MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL = [0.2, 0.4, 0.6, 0.6]
+
+export const FIELD_HEAL_PER_SYNERGY_LEVEL = [30, 40, 50]
+export const FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL = [15, 20, 25]

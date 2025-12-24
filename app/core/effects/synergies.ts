@@ -1,6 +1,8 @@
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  FIELD_HEAL_PER_SYNERGY_LEVEL,
+  FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
@@ -203,18 +205,9 @@ export const humanHealEffect = new OnDamageDealtEffect(
 export class OnFieldDeathEffect extends OnDeathEffect {
   constructor(effect: EffectEnum) {
     super(({ pokemon, board }) => {
-      let heal = 0
-      let speedBoost = 0
-      if (effect === EffectEnum.BULK_UP) {
-        heal = 30
-        speedBoost = 15
-      } else if (effect === EffectEnum.RAGE) {
-        heal = 35
-        speedBoost = 20
-      } else if (effect === EffectEnum.ANGER_POINT) {
-        heal = 40
-        speedBoost = 25
-      }
+      const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
+      const heal = FIELD_HEAL_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
+      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
       pokemon.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {
           if (
