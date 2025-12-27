@@ -1,0 +1,64 @@
+#region-report {
+  padding: 1em;
+}
+
+#region-report header {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+
+#region-report h2 {
+  margin: 0;
+}
+
+#region-report .filters {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.region-stat img {
+  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+
+.region-stat span {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.region-stat label {
+  color: #ccc;
+  margin: 0;
+}
+
+.region-stat div {
+  display: flex;
+  gap: 0.4em;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.region-stat div span {
+  display: flex;
+  gap: 0.4em;
+  align-items: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .region-stat {
+    grid-template-columns: 1fr;
+  }
+
+  #region-report header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

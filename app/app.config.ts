@@ -41,7 +41,8 @@ import {
   computeSynergyAverages,
   getMetadata,
   getMetaItems,
-  getMetaPokemons
+  getMetaPokemons,
+  getMetaRegions
 } from "./services/meta"
 import { Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
@@ -277,6 +278,12 @@ export default config({
       // Set Cache-Control header for 24 hours (86400 seconds)
       res.set("Cache-Control", "max-age=86400")
       res.send(getMetaPokemons())
+    })
+
+    app.get("/meta/regions", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      res.set("Cache-Control", "max-age=86400")
+      res.send(getMetaRegions())
     })
 
     app.get("/meta/types", async (req, res) => {
