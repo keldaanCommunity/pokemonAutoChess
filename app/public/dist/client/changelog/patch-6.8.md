@@ -15,6 +15,8 @@
 
 # UI
 
+- Added Region report, diplaying region by region statistic
+
 # Bugfix
 
 - Field speed stacks are now correctly reset after resurrection

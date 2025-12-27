@@ -40,7 +40,8 @@
 
 #meta-report .team-comp,
 #meta-report .item-stat,
-#meta-report .pokemon-family-stat {
+#meta-report .pokemon-family-stat,
+#meta-report .region-stat {
   background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
@@ -62,6 +63,10 @@
 
 #meta-report .item-stat {
   grid-template-columns: 2ch 48px 16ch 16ch 10ch 1fr;
+}
+
+#meta-report .region-stat {
+  grid-template-columns: 2ch 48px 16ch 12ch 16ch 1fr;
 }
 
 #meta-report .pokemon-family-stat {
