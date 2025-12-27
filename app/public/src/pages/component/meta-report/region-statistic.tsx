@@ -29,7 +29,7 @@ export default function RegionStatistic(props: {
       <span>{t(`map.${props.region.name}`)}</span>
       <div>
         {details?.synergies?.map((synergy) => (
-          <SynergyIcon key={synergy} type={synergy} size="32px" />
+          <SynergyIcon key={synergy} type={synergy} size="38px" />
         ))}
       </div>
       <div>
