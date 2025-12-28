@@ -7409,5 +7409,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp,
     attackSprite: AttackSprite.GROUND_MELEE
+  },
+  [Pkm.SKIDDO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GRASS_MELEE
+  },
+  [Pkm.GOGOAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GRASS_MELEE
   }
 }

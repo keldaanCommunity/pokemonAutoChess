@@ -1058,6 +1058,11 @@ export const AbilitiesAnimations: {
     scale: 2,
     tint: 0xc4a484
   }),
+  [Ability.CITY_SHUTTLE]: onCaster({
+    ability: "SMOKE_BROWN",
+    scale: 2,
+    tint: 0xc19a6b
+  }),
   [Ability.SPECTRAL_THIEF]: [onTargetScale2, onCasterScale2],
   [Ability.SACRED_SWORD_IRON]: onTarget({
     ability: "SACRED_SWORD",
