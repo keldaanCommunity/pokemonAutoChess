@@ -1299,7 +1299,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   resurrect() {
     this.hp = this.maxHP
     this.pp = 0
-    this.status.clearNegativeStatus()
+    this.status.clearAllStatus()
 
     if (this.items.has(Item.SACRED_ASH)) {
       const team =

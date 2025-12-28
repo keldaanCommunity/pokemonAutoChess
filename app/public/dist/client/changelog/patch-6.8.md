@@ -25,6 +25,8 @@
 
 # Gameplay
 
+- Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
+
 # UI
 
 - Added Region report, diplaying region by region statistic

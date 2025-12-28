@@ -89,6 +89,21 @@ export default class Status extends Schema implements IStatus {
     this.enrageDelay = this.enrageDelay - elapsedTime
   }
 
+  clearAllStatus() {
+    this.clearNegativeStatus()
+    this.clearPositiveStatus()
+  }
+
+  clearPositiveStatus() {
+    this.protectCooldown = 0
+    this.runeProtectCooldown = 0
+    this.enrageCooldown = 0
+    this.spikeArmorCooldown = 0
+    this.magicBounceCooldown = 0
+    this.reflectCooldown = 0
+    this.pokerusCooldown = 0
+  }
+
   clearNegativeStatus() {
     this.burnCooldown = 0
     this.silenceCooldown = 0
