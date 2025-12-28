@@ -494,6 +494,8 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
       if (client.auth) {
         try {
+          if (!client.userData) client.userData = {}
+          client.userData.spectatedPlayerId = spectatedPlayerId
           this.dispatcher.dispatch(new OnSpectateCommand(), {
             id: client.auth.uid,
             spectatedPlayerId

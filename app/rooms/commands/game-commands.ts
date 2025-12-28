@@ -912,6 +912,8 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
   async execute({ client }) {
     try {
       //logger.debug("onJoin", client.auth.uid)
+      if(!client.userData) client.userData = {}
+      client.userData.spectatedPlayerId = client.auth.uid
       const players = values(this.state.players)
       if (players.some((p) => p.id === client.auth.uid)) {
         /*logger.info(
@@ -1246,6 +1248,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           })
         }
         player.alive = false
+        player.spectatedPlayerId = player.id // spectate self to not show KO players on another player side
         const client = this.room.clients.find(
           (cli) => cli.auth.uid === player.id
         )
@@ -1702,7 +1705,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopTownPhase() {
     this.room.miniGame.stop(this.room.state)
-    this.state.players.forEach((player: Player) => {      
+    this.state.players.forEach((player: Player) => {
       player.wanderers.clear()
     })
   }

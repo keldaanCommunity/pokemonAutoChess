@@ -116,8 +116,8 @@ export function cyclePlayers(amt: number) {
 
 export function playerClick(id: string) {
   const scene = getGameScene()
+  gameContainer?.room?.send(Transfer.SPECTATE, id)
   if (scene?.spectate) {
-    // if spectating game we switch directly without notifying the server to not show spectators avatars
     if (gameContainer?.room?.state?.players) {
       const spectatedPlayer = gameContainer?.room?.state?.players.get(id)
       if (spectatedPlayer) {
@@ -133,8 +133,6 @@ export function playerClick(id: string) {
 
       gameContainer?.gameScene?.board?.updateScoutingAvatars()
     }
-  } else {
-    gameContainer?.room?.send(Transfer.SPECTATE, id)
   }
 }
 
