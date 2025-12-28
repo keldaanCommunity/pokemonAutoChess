@@ -16,6 +16,7 @@ import {
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { usePreferences } from "../../../preferences"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
@@ -25,10 +26,10 @@ import WikiPokemonDetail from "./wiki-pokemon-detail"
 
 export default function WikiPokemons() {
   const { t } = useTranslation()
+  const [preferences, setPreferences] = usePreferences()
   const tabs = Object.values(Rarity) as Rarity[]
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
   const [tabIndex, setTabIndex] = useState(0)
-  const [showEvolutions, setShowEvolutions] = useState(true)
   const [pool, setPool] = useState<string>("all")
 
   useEffect(() => {
@@ -48,8 +49,10 @@ export default function WikiPokemons() {
     >
       <div className="filters">
         <Checkbox
-          checked={showEvolutions}
-          onToggle={setShowEvolutions}
+          checked={preferences.showEvolutions}
+          onToggle={(checked) => {
+            setPreferences({ showEvolutions: checked })
+          }}
           label={t("show_evolutions")}
           isDark
         />
@@ -89,7 +92,7 @@ export default function WikiPokemons() {
               rarity={r}
               selected={selectedPkm}
               onSelect={setSelectedPkm}
-              showEvolutions={showEvolutions}
+              showEvolutions={preferences.showEvolutions}
               pool={pool}
             />
           </TabPanel>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor, SynergyTriggers } from "../../../../../config"
@@ -12,13 +12,11 @@ import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { usePreferences } from "../../../preferences"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
-import {
-  GamePokemonDetail,
-  GamePokemonDetailTooltip
-} from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
 
@@ -53,7 +51,7 @@ export default function WikiTypes() {
 
 export function WikiType(props: { type: Synergy }) {
   const { t } = useTranslation()
-  const [showEvolutions, setShowEvolutions] = useState(false)
+  const [preferences, setPreferences] = usePreferences()
   const [overlap, setOverlap] = useState<Synergy | null>(null)
 
   const pokemons = PRECOMPUTED_POKEMONS_PER_TYPE[props.type]
@@ -63,7 +61,7 @@ export function WikiType(props: { type: Synergy }) {
     .filter((p, index, list) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-      if (showEvolutions) return true
+      if (preferences.showEvolutions) return true
       const prevolution = list.find(
         (p2) => p2.evolution === p.name || p2.evolutions.includes(p.name)
       )
@@ -141,8 +139,10 @@ export function WikiType(props: { type: Synergy }) {
       <hr />
       <div style={{ float: "right", justifyItems: "end" }}>
         <Checkbox
-          checked={showEvolutions}
-          onToggle={setShowEvolutions}
+          checked={preferences.showEvolutions}
+          onToggle={(checked) => {
+            setPreferences({ showEvolutions: checked })
+          }}
           label={t("show_evolutions")}
           isDark
         />
