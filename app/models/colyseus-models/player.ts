@@ -97,7 +97,10 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>()
+  @type(["string"]) items = new ArraySchema<Item>(
+    Item.CELL_BATTERY,
+    Item.CELL_BATTERY
+  )
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account

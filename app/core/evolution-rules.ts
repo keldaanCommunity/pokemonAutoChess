@@ -52,6 +52,7 @@ export abstract class EvolutionRule {
   ): void | Pokemon {
     if (this.canEvolve(pokemon, player, stageLevel)) {
       const pokemonEvolved = this.evolve(pokemon, player, stageLevel)
+      if (pokemon.supercharged) pokemonEvolved.supercharged = true
       this.afterEvolve(pokemonEvolved, player, stageLevel)
       return pokemonEvolved
     }

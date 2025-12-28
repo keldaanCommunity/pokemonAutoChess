@@ -25,8 +25,6 @@
 
 # Gameplay
 
-- Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
-
 # UI
 
 - Added Region report, diplaying region by region statistic
@@ -34,6 +32,7 @@
 # Bugfix
 
 - Field speed stacks are now correctly reset after resurrection
+- Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 
 # Misc
 
