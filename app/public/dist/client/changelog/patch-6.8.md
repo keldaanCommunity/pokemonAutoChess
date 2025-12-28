@@ -15,6 +15,7 @@
 - Icy Wind damage nerfed: 30/60/120 → 25/50/100
 - Link Cable damage nerfed: 50 → 40
 - Tadbulb line passive damage no longer scales with AP and is considered retaliation damage
+- Cosmog HP buffed: 100 → 140 ; Cosmoem HP buffed: 200 → 220
 
 # Changes to Synergies
 
