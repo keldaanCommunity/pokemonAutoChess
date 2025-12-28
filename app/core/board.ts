@@ -605,6 +605,36 @@ export class Board {
   }
 
   /**
+   * Finds the closest ally Pokemon to a given position.
+   * @param positionX - The X coordinate to measure distance from
+   * @param positionY - The Y coordinate to measure distance from
+   * @param allyTeam - The team to filter allies by
+   * @param excludeId - Optional Pokemon id to exclude from results
+   * @returns The closest ally Pokemon entity, or undefined if none found
+   */
+  getClosestAlly(
+    positionX: number,
+    positionY: number,
+    allyTeam: Team,
+    excludeId?: string
+  ): PokemonEntity | undefined {
+    const closestAlly = this.cells
+      .filter(
+        (entity): entity is PokemonEntity =>
+          entity instanceof PokemonEntity &&
+          entity.team === allyTeam &&
+          entity.hp > 0 &&
+          (!excludeId || entity.id !== excludeId)
+      )
+      .sort(
+        (a, b) =>
+          distanceC(a.positionX, a.positionY, positionX, positionY) -
+          distanceC(b.positionX, b.positionY, positionX, positionY)
+      )[0]
+    return closestAlly
+  }
+
+  /**
    * Returns a list of enemy `PokemonEntity` instances sorted by their distance to the specified position.
    *
    * @param positionX - The X coordinate from which to measure distance.

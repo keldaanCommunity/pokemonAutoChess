@@ -538,7 +538,8 @@
 		"PUMMELING_PAYBACK": "Pummeling Payback",
 		"VOLT_SURGE": "Volt Surge",
 		"SUPERCELL_SLAM": "Supercell Slam",
-		"HIGH_HORSEPOWER": "High Horsepower"
+		"HIGH_HORSEPOWER": "High Horsepower",
+		"CITY_SHUTTLE": "City Shuttle"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1620,7 +1621,9 @@
 		"BELLIBOLT": "Bellibolt",
 		"PINCURCHIN": "Pincurchin",
 		"MUDBRAY": "Mudbray",
-		"MUDSDALE": "Mudsdale"
+		"MUDSDALE": "Mudsdale",
+		"SKIDDO": "Skiddo",
+		"GOGOAT": "Gogoat"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2139,7 +2142,8 @@
 		"PUMMELING_PAYBACK": "Pelt the target with a storm of punches, dealing [60,SP] + 125% ATK SPECIAL and heals [40,SP] HP.",
 		"VOLT_SURGE": "The user supercharges itself, gaining ELECTRIC_FIELD, 25 SPEED and [40,SP] max HP. Then every third attack chains through up to 4 nearby enemies, dealing [20,SP] SPECIAL each.",
 		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokemon and gaining [10,20,40,SP] SHIELD",
-		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL"
+		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL",
+		"CITY_SHUTTLE": "Leap to the closest ally and saddle them on the user's back, then dash to the farthest enemy reachable. Deal [10,20,30,SP] SPECIAL + 100% of the carried ally's ATK to all enemy Pokémon in the path. Grant [20,40,80,SP] SHIELD to the user and the carried ally."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

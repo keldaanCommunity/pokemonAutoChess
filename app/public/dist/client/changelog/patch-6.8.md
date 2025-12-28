@@ -2,6 +2,8 @@
 
 - Mudbray
 - Mudsdale
+- Skiddo
+- Gogoat
 
 # Changes to Pokemon & Abilities
 
