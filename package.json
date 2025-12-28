@@ -86,7 +86,7 @@
     "markdown-to-config": "^0.4.0",
     "marked": "^17.0.0",
     "matter-js": "^0.20.0",
-    "mongoose": "^9.0.0",
+    "mongoose": "^8.9.5",
     "nanoid": "^3.3.8",
     "phaser": "^3.90.0",
     "phaser-animated-tiles-phaser3.5": "^2.0.5",

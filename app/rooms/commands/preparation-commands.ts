@@ -3,7 +3,7 @@ import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import type { QueryFilter } from "mongoose"
+import { FilterQuery } from "mongoose"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -735,7 +735,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       } else {
         // pick a random bot per difficulty
         const difficulty = type
-        let elo: QueryFilter<IBot> | undefined
+        let elo: FilterQuery<IBot> | undefined
 
         switch (difficulty) {
           case BotDifficulty.EASY:
