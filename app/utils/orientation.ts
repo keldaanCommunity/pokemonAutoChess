@@ -35,7 +35,7 @@ export const OrientationArray: Orientation[] = [
   Orientation.DOWNLEFT
 ]
 
-export function effectInLine(
+export function effectInOrientation(
   board: Board,
   pokemon: PokemonEntity,
   target: PokemonEntity | Orientation,
@@ -44,13 +44,13 @@ export function effectInLine(
   const orientation: Orientation =
     target instanceof PokemonEntity
       ? board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-      )
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY,
+          pokemon,
+          target
+        )
       : target
 
   const targetsHit = new Set()
@@ -164,4 +164,26 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   } else {
     return Orientation.RIGHT
   }
+}
+
+export function effectInLine(
+  board: Board,
+  pokemon: PokemonEntity,
+  target: PokemonEntity,
+  effect: (cell: Cell) => void
+) {
+  const angleToTarget = Math.atan2(
+    target.positionY - pokemon.positionY,
+    target.positionX - pokemon.positionX
+  )
+  const distance = 12 // sufficiently large to cover the whole board in diagonal
+  const finalX = Math.round(
+    pokemon.positionX + distance * Math.cos(angleToTarget)
+  )
+  const finalY = Math.round(
+    pokemon.positionY + distance * Math.sin(angleToTarget)
+  )
+  board
+    .getCellsBetween(pokemon.positionX, pokemon.positionY, finalX, finalY)
+    .forEach(effect)
 }
