@@ -1037,13 +1037,14 @@ const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
           cell.value.cooldown = 500
         }
 
-        cell.value.handleSpecialDamage(
-          30,
+        cell.value.handleDamage({
+          damage: 30,
           board,
-          AttackType.SPECIAL,
-          pokemon,
-          false
-        )
+          attackType: AttackType.SPECIAL,
+          attacker: pokemon,
+          isRetaliation: true,
+          shouldTargetGainMana: true
+        })
       }
     })
 }
@@ -1317,11 +1318,13 @@ export const PassiveEffects: Partial<
         superchargeTadbulb(entity, simulation.board)
       }
     }),
-    new OnDamageReceivedEffect(({ pokemon, damageBeforeReduction, board }) => {
-      if (damageBeforeReduction >= 50) {
-        superchargeTadbulb(pokemon, board)
+    new OnDamageReceivedEffect(
+      ({ pokemon, damageBeforeReduction, board, isRetaliation }) => {
+        if (damageBeforeReduction >= 50 && !isRetaliation) {
+          superchargeTadbulb(pokemon, board)
+        }
       }
-    })
+    )
   ],
   [Passive.PINCURCHIN]: [
     new OnDamageReceivedEffect(({ pokemon, attackType, attacker }) => {
