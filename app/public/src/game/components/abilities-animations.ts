@@ -519,23 +519,80 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
     }, delay)
   }
 
-const projectile: AbilityAnimationMaker<TweenAnimationMakerOptions> =
+const projectile: AbilityAnimationMaker<
+  TweenAnimationMakerOptions & {
+    orientation?: Orientation | true
+    distance?: number
+  }
+> =
   (options = {}) =>
   (args) => {
-    const [endRow, endCol, endFlip] =
-      options.endCoords === "caster"
-        ? [args.positionX, args.positionY, args.flip]
-        : (options.endCoords ?? [args.targetX, args.targetY, args.flip])
-    const endPosition = transformEntityCoordinates(
-      endRow,
-      endCol,
-      endFlip ?? args.flip
-    )
+    let { startCoords, endCoords, oriented, rotation, distance, orientation } =
+      options
+
+    let endPosition: [number, number]
+    if (distance !== undefined || orientation !== undefined) {
+      // projectile passing through units over a certain distance
+
+      let ox: number, oy: number
+      if (endCoords !== undefined) {
+        ;[ox, oy] =
+          endCoords === "caster" ? [args.positionX, args.positionY] : endCoords
+      } else {
+        ;[ox, oy] =
+          startCoords === "target"
+            ? [args.targetX, args.targetY]
+            : (startCoords ?? [args.positionX, args.positionY])
+      }
+
+      let dx: number, dy: number
+      if (options.orientation !== undefined) {
+        ;[dx, dy] =
+          OrientationVector[
+            options.orientation === true
+              ? args.orientation
+              : options.orientation
+          ]
+      } else {
+        const angleToTarget = Math.atan2(
+          args.targetY - args.positionY,
+          args.targetX - args.positionX
+        )
+        dx = Math.cos(angleToTarget)
+        dy = Math.sin(angleToTarget)
+      }
+      endPosition = transformEntityCoordinates(
+        ox + dx * (options.distance ?? 12),
+        oy + dy * (options.distance ?? 12),
+        args.flip
+      )
+
+      if (oriented) {
+        rotation = angleBetween([dx, -dy], [0, 0]) + (rotation ?? 0)
+        oriented = false // rotation is already set, prevent computation from tweenAnimation
+      }
+    } else {
+      // projectile stopping on target or certain coordinates
+      const [endRow, endCol, endFlip] =
+        endCoords === "caster"
+          ? [args.positionX, args.positionY, args.flip]
+          : (endCoords ?? [args.targetX, args.targetY, args.flip])
+      endPosition = transformEntityCoordinates(
+        endRow,
+        endCol,
+        endFlip ?? args.flip
+      )
+    }
+
     endPosition[0] += options.endPositionOffset?.[0] ?? 0
     endPosition[1] += options.endPositionOffset?.[1] ?? 0
+
     return tweenAnimation({
-      startCoords: [args.positionX, args.positionY, args.flip],
       ...options,
+      oriented,
+      rotation,
+      startCoords,
+      endCoords,
       tweenProps: {
         x: endPosition[0],
         y: endPosition[1],
@@ -573,44 +630,6 @@ const poppingIcon: AbilityAnimationMaker<
     scale: options.scale ?? 0.25,
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
   })(args)
-
-const orientedProjectile: AbilityAnimationMaker<
-  TweenAnimationMakerOptions & { orientation?: Orientation; distance?: number }
-> = (options) => (args) => {
-  const [dx, dy] = OrientationVector[options.orientation ?? args.orientation]
-  let ox: number, oy: number
-  let { startCoords, endCoords, oriented, rotation } = options
-  if (endCoords !== undefined) {
-    ;[ox, oy] =
-      endCoords === "caster" ? [args.positionX, args.positionY] : endCoords
-  } else {
-    ;[ox, oy] =
-      startCoords === "target"
-        ? [args.targetX, args.targetY]
-        : (startCoords ?? [args.positionX, args.positionY])
-  }
-  const finalCoordinates = transformEntityCoordinates(
-    ox + dx * (options.distance ?? 8),
-    oy + dy * (options.distance ?? 8),
-    args.flip
-  )
-  if (oriented) {
-    rotation = angleBetween([dx, -dy], [0, 0]) + (rotation ?? 0)
-    oriented = false // rotation is already set, prevent computation from tweenAnimation
-  }
-  return tweenAnimation({
-    ...options,
-    oriented,
-    rotation,
-    startCoords,
-    endCoords,
-    tweenProps: {
-      x: finalCoordinates[0],
-      y: finalCoordinates[1],
-      ...(options.tweenProps ?? {})
-    }
-  })(args)
-}
 
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
@@ -666,7 +685,7 @@ export const AbilitiesAnimations: {
   [Ability.FLASH]: onCasterScale2,
   [Ability.METEOR_MASH]: onTarget({ ability: Ability.FLASH }),
   [Ability.STEEL_WING]: onCasterScale2,
-  [Ability.HYPNOSIS]: orientedProjectile({
+  [Ability.HYPNOSIS]: projectile({
     oriented: true,
     textureKey: "attacks",
     ability: AttackSprite.PSYCHIC_RANGE,
@@ -1210,7 +1229,7 @@ export const AbilitiesAnimations: {
     })
   },
   [Ability.STRUGGLE_BUG]: onCaster({ ability: Ability.PSYCHIC }),
-  [Ability.SPIN_OUT]: orientedProjectile({
+  [Ability.SPIN_OUT]: projectile({
     distance: 1,
     duration: 400,
     oriented: true,
@@ -1230,7 +1249,7 @@ export const AbilitiesAnimations: {
     ),
   [Ability.PETAL_BLIZZARD]: onCasterScale3,
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
-  [Ability.AQUA_TAIL]: orientedProjectile({
+  [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
     tint: 0x80eeff,
     distance: 1,
@@ -1948,40 +1967,40 @@ export const AbilitiesAnimations: {
   [Ability.HIDDEN_POWER_Z]: hiddenPowerAnimation,
   [Ability.HIDDEN_POWER_QM]: hiddenPowerAnimation,
   [Ability.HIDDEN_POWER_EM]: hiddenPowerAnimation,
-  [Ability.ICY_WIND]: orientedProjectile({ duration: 2000 }),
+  [Ability.ICY_WIND]: projectile({ duration: 2000, distance: 12 }),
   [Ability.EERIE_SPELL]: projectile({
     duration: 400,
     ability: Ability.FISSURE,
     tint: 0xff00bf
   }),
-  [Ability.HURRICANE]: orientedProjectile({ duration: 1000, distance: 4 }),
-  [Ability.DRILL_RUN]: orientedProjectile({
+  [Ability.HURRICANE]: projectile({ duration: 1000, distance: 5 }),
+  [Ability.DRILL_RUN]: projectile({
     ability: Ability.HURRICANE,
     duration: 500,
     distance: 1,
     oriented: true,
     rotation: -Math.PI / 2
   }),
-  [Ability.DRILL_PECK]: orientedProjectile({
+  [Ability.DRILL_PECK]: projectile({
     ability: Ability.HURRICANE,
     duration: 500,
     distance: 1,
     oriented: true,
     rotation: -Math.PI / 2
   }),
-  [Ability.ROAR]: orientedProjectile({
+  [Ability.ROAR]: projectile({
     ability: Ability.WHIRLWIND,
     oriented: true,
     rotation: Math.PI / 2,
     duration: 400,
     distance: 2
   }),
-  [Ability.FLEUR_CANNON]: orientedProjectile({ duration: 2000 }),
-  [Ability.SANDSEAR_STORM]: orientedProjectile({ duration: 2000 }),
-  [Ability.WILDBOLT_STORM]: orientedProjectile({ duration: 2000 }),
-  [Ability.BLEAKWIND_STORM]: orientedProjectile({ duration: 2000 }),
-  [Ability.SPRINGTIDE_STORM]: orientedProjectile({ duration: 2000 }),
-  [Ability.SOLAR_BLADE]: orientedProjectile({
+  [Ability.FLEUR_CANNON]: projectile({ duration: 2000, distance: 8 }),
+  [Ability.SANDSEAR_STORM]: projectile({ duration: 2000, distance: 12 }),
+  [Ability.WILDBOLT_STORM]: projectile({ duration: 2000, distance: 12 }),
+  [Ability.BLEAKWIND_STORM]: projectile({ duration: 2000, distance: 12 }),
+  [Ability.SPRINGTIDE_STORM]: projectile({ duration: 2000, distance: 12 }),
+  [Ability.SOLAR_BLADE]: projectile({
     distance: 1,
     scale: 2,
     oriented: true,
@@ -1993,13 +2012,13 @@ export const AbilitiesAnimations: {
     origin: [0.5, 1],
     rotation: Math.PI / 2
   }),
-  [Ability.BONEMERANG]: orientedProjectile({
+  [Ability.BONEMERANG]: projectile({
     distance: 5,
     duration: 1000,
     ease: "Power2",
     tweenProps: { yoyo: true }
   }),
-  [Ability.SHADOW_BONE]: orientedProjectile({
+  [Ability.SHADOW_BONE]: projectile({
     ability: Ability.BONEMERANG,
     distance: 5,
     duration: 1000,
@@ -2012,15 +2031,15 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI / 2
   }),
-  [Ability.SPIRIT_SHACKLE]: orientedProjectile({
+  [Ability.SPIRIT_SHACKLE]: projectile({
     distance: 8,
     scale: 1,
     duration: 2000,
     oriented: true
   }),
-  [Ability.RAZOR_LEAF]: orientedProjectile({ distance: 8, duration: 2000 }),
+  [Ability.RAZOR_LEAF]: projectile({ distance: 8, duration: 2000 }),
   [Ability.PSYCHO_CUT]: range(1, 3).map((i) =>
-    orientedProjectile({
+    projectile({
       distance: 8,
       duration: 1000,
       oriented: true,
@@ -2028,27 +2047,27 @@ export const AbilitiesAnimations: {
       tweenProps: { delay: i * 100 }
     })
   ),
-  [Ability.MIST_BALL]: orientedProjectile({
+  [Ability.MIST_BALL]: projectile({
     distance: 4,
     duration: 1000,
     scale: 1,
     ease: "Power2",
     tweenProps: { yoyo: true }
   }),
-  [Ability.LUSTER_PURGE]: orientedProjectile({
+  [Ability.LUSTER_PURGE]: projectile({
     distance: 4,
     duration: 1000,
     scale: 1,
     ease: "Power2",
     tweenProps: { yoyo: true }
   }),
-  [Ability.STEALTH_ROCKS]: orientedProjectile({
+  [Ability.STEALTH_ROCKS]: projectile({
     distance: 1,
     scale: 2,
     depth: DEPTH.ABILITY_GROUND_LEVEL
   }),
   [Ability.SPIKY_SHIELD]: OrientationArray.map((orientation) =>
-    orientedProjectile({
+    projectile({
       orientation,
       distance: 8,
       ability: "SPIKE",
@@ -2064,7 +2083,7 @@ export const AbilitiesAnimations: {
     scale: 2.5,
     animOptions: { repeat: 1 }
   }),
-  [Ability.AURASPHERE]: orientedProjectile({
+  [Ability.AURASPHERE]: projectile({
     distance: 8,
     duration: 2000,
     oriented: true
@@ -2093,7 +2112,7 @@ export const AbilitiesAnimations: {
     }
   ],
   [Ability.BONE_ARMOR]: OrientationArray.map((orientation) =>
-    orientedProjectile({
+    projectile({
       orientation,
       distance: 0.5,
       ability: Ability.BONEMERANG,
@@ -2138,7 +2157,7 @@ export const AbilitiesAnimations: {
       OrientationArray[(OrientationArray.indexOf(args.orientation) + 7) % 8]
     ]
     orientations.forEach((orientation) => {
-      orientedProjectile({ orientation, distance: 8, duration: 1000 })(args)
+      projectile({ orientation, distance: 8, duration: 1000 })(args)
     })
   },
 

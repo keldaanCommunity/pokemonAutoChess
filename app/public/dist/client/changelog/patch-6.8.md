@@ -5,6 +5,14 @@
 
 # Changes to Pokemon & Abilities
 
+- Many abilities targeting in a line have been reworked to apply on more angles than the 8 basic orientations (vertical, horizontal and diagonals). In short, these abilities will have a better targeting now. Abilities concerned: Dynamax Cannon, Bonemerang, Shadow Bone, Aurora Beam, Hydropump, Solar Beam (nerfed), Psybeam, Hurricane, Fleur Cannon (nerfed), Sandsear Storm (nerfed), Wildbolt Storm (nerfed), Bleakwing Storm (nerfed), Springtide Storm (nerfed), Spirit Shackle (nerfed), Icy Wind (nerfed), Mist Ball, Luster Purge, Link Cable (nerfed), Aura Sphere, Moongeist Beam, Blood Moon, Freezing Glare, Electro Shot, Twin Beam
+- Solar Beam damage buff on Zenith reduced: +100% → +30%
+- Fleur Cannon damage nerfed: 120 → 100
+- Sandsear Storm, Wildbolt Storm, Bleakwing Storm and Springtide Storm damage nerfed: 80 → 75
+- Spirit Shackle damage nerfed: 30/60/90 → 25/50/75
+- Icy Wind damage nerfed: 30/60/120 → 25/50/100
+- Link Cable damage nerfed: 50 → 40
+
 # Changes to Synergies
 
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50

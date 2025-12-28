@@ -21,6 +21,7 @@ import { logger } from "../../utils/logger"
 import { calcAngleDegrees, clamp, max, min } from "../../utils/number"
 import {
   effectInLine,
+  effectInOrientation,
   OrientationArray,
   OrientationVector
 } from "../../utils/orientation"
@@ -32,7 +33,6 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { values } from "../../utils/schemas"
-
 import type { Board, Cell } from "../board"
 import {
   OnAbilityCastEffect,
@@ -2131,7 +2131,7 @@ export class SpikeArmorStrategy extends AbilityStrategy {
     if (pokemon.status.spikeArmor) {
       const damage = 30
       OrientationArray.forEach((orientation) => {
-        effectInLine(board, pokemon, orientation, (cell) => {
+        effectInOrientation(board, pokemon, orientation, (cell) => {
           if (cell.value != null && cell.value.team !== pokemon.team) {
             cell.value.handleSpecialDamage(
               damage,
@@ -2719,7 +2719,7 @@ export class FlameThrowerStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
 
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (
         cell.value != null &&
         cell.value.team != pokemon.team &&
@@ -2746,7 +2746,7 @@ export class HydroPumpStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [20, 40, 80][pokemon.stars - 1] ?? 100
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -2771,7 +2771,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     let damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     if (pokemon.simulation.weather === Weather.SUN || pokemon.status.light) {
-      damage = damage * 2
+      damage = damage * 1.3
       pokemon.addPP(20, pokemon, 0, false)
     }
     effectInLine(board, pokemon, target, (cell) => {
@@ -3921,7 +3921,7 @@ export class DragonBreathStrategy extends AbilityStrategy {
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const maxRange = pokemon.range + 1
 
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (
         cell.value != null &&
         cell.value.team !== pokemon.team &&
@@ -4550,7 +4550,7 @@ export class FleurCannonStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 120
+    const damage = 100
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -4574,7 +4574,7 @@ export class SandsearStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 80
+    const damage = 75
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -4599,7 +4599,7 @@ export class WildboltStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 80
+    const damage = 75
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -4624,7 +4624,7 @@ export class BleakwindStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 80
+    const damage = 75
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -4649,7 +4649,7 @@ export class SpringtideStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 80
+    const damage = 75
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -4941,7 +4941,7 @@ export class SpiritShackleStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
+    const damage = [25, 50, 75][pokemon.stars - 1] ?? 75
 
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -4983,7 +4983,7 @@ export class WaterShurikenStrategy extends AbilityStrategy {
     ]
 
     orientations.forEach((orientation) => {
-      effectInLine(board, pokemon, orientation, (cell) => {
+      effectInOrientation(board, pokemon, orientation, (cell) => {
         if (cell.value != null && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
             damage,
@@ -5008,7 +5008,7 @@ export class RazorLeafStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
           damage,
@@ -5032,7 +5032,7 @@ export class PsychoCutStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         for (let i = 0; i < 3; i++) {
           cell.value.handleSpecialDamage(
@@ -5152,7 +5152,7 @@ export class MawashiGeriStrategy extends AbilityStrategy {
     if (pokemon.atk > target.atk) damage *= 2
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     let farthestEmptyCell: Cell | null = null
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (!cell.value) {
         farthestEmptyCell = cell
       }
@@ -5621,7 +5621,7 @@ export class IcyWindStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const speedDebuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
     effectInLine(board, pokemon, target, (cell) => {
@@ -6139,7 +6139,7 @@ export class LinkCableStrategy extends AbilityStrategy {
             entity.team === pokemon.team
         )
         if (partner) {
-          const damage = 50
+          const damage = 40
           const targetsHit = new Set<PokemonEntity>()
           effectInLine(board, pokemon, partner, (cell) => {
             if (cell.value != null && cell.value.team !== pokemon.team) {
@@ -6187,7 +6187,7 @@ export class LinkCableStrategy extends AbilityStrategy {
             delay: 200
           })
         } else {
-          const damage = 25
+          const damage = 20
           const cells = board.getAdjacentCells(
             pokemon.positionX,
             pokemon.positionY
@@ -10417,7 +10417,7 @@ export class RoarStrategy extends AbilityStrategy {
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     let farthestEmptyCell: Cell | null = null
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (cell.value != null && target.id !== cell.value.id) {
         if (cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -10517,7 +10517,7 @@ export class ForcePalmStrategy extends AbilityStrategy {
     const damage = Math.round(60 + target.maxHP * 0.1 + additionalDamage)
     if (target.status.paralysis) {
       let farthestEmptyCell: Cell | null = null
-      effectInLine(board, pokemon, target, (cell) => {
+      effectInOrientation(board, pokemon, target, (cell) => {
         if (!cell.value) {
           farthestEmptyCell = cell
         }
@@ -10882,7 +10882,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
     }
     const enemiesHit = new Set<PokemonEntity>()
     enemiesHit.add(target)
-    effectInLine(board, pokemon, target, (cell) => {
+    effectInOrientation(board, pokemon, target, (cell) => {
       if (isBlocked) return
       if (
         cell.value &&
