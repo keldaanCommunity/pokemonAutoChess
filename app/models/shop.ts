@@ -443,7 +443,8 @@ export default class Shop {
       }
 
       let candidates = allCandidates.filter(filterCandidates)
-      if (candidates.length === 0) {
+      const initialCandidatesEmpty = candidates.length === 0
+      if (initialCandidatesEmpty) {
         synergyWanted = undefined
         candidates = allCandidates.filter(filterCandidates)
       }
@@ -471,7 +472,7 @@ export default class Shop {
       if (
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.EEVEE) === false &&
-        (chance(EEVEE_RATE) || candidates.length === 0) &&
+        (chance(EEVEE_RATE) || initialCandidatesEmpty) &&
         state.specialGameRule !== SpecialGameRule.FIRST_PARTNER &&
         state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
       ) {
