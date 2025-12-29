@@ -49,8 +49,9 @@ export default function GameStore() {
               )}
               onMouseEnter={() => {
                 if (scene) {
-                  if (scene.pokemonHovered)
-                    scene.clearHovered(scene.pokemonHovered)
+                  if (scene.pokemonHovered) {
+                    scene.clearHovered(scene.pokemonHovered.sprite)
+                  }
                   scene.pokemonHovered = null
                   scene.shopIndexHovered = index
                 }

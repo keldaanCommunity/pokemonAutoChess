@@ -1136,6 +1136,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.GOOD_ROD]: [new FishingRodEffect(Item.GOOD_ROD)],
   [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)],
 
+  [Item.RICH_MULCH]: [
+    new OnItemDroppedEffect(() => {
+      return false // prevent item from being equipped
+    })
+  ],
   [Item.AMAZE_MULCH]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (FlowerPotMons.includes(pokemon.name)) {
