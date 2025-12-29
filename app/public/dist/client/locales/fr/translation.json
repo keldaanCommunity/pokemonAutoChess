@@ -3188,7 +3188,7 @@
 		"CURSE": "Met KO le Pokémon maudit à la fin du compte à rebours",
 		"RUNE_PROTECT": "Protège des altérations de statut",
 		"POSSESSED": "Combat temporairement pour l'équipe adverse. Devient CHARM si la cible est le seul ennemi restant",
-		"LOCKED": "Empêche de bouger et réduit la RANGE à 1",
+		"LOCKED": "Empêche de bouger et d'esquiver et réduit la RANGE à 1",
 		"BLINDED": "Réduit la précision des attaques de 50%",
 		"ELECTRIC_FIELD": "Augmente les dégâts infligés par les Pokémon ELECTRIC de 20 %",
 		"PSYCHIC_FIELD": "Augmente les dégâts infligés par les Pokémon PSYCHIC de 20 %",

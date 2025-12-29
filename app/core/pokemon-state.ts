@@ -104,7 +104,8 @@ export default abstract class PokemonState {
         !pokemon.effects.has(EffectEnum.LOCK_ON) &&
         !target.status.paralysis &&
         !target.status.sleep &&
-        !target.status.freeze
+        !target.status.freeze &&
+        !target.status.locked
       ) {
         isAttackSuccessful = false
         damage = 0

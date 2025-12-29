@@ -3197,7 +3197,7 @@
 		"CURSE": "KOs the cursed Pokémon after some time",
 		"RUNE_PROTECT": "Protects from status alterations",
 		"POSSESSED": "Fight for the other team temporarily. Becomes CHARM if the target is the only enemy remaining",
-		"LOCKED": "Prevents moving and sets RANGE to 1",
+		"LOCKED": "Prevents moving and dodging and sets RANGE to 1",
 		"BLINDED": "Reduce accuracy of attacks by 50%",
 		"ELECTRIC_FIELD": "Increase damage dealt by ELECTRIC Pokémon by 20%",
 		"PSYCHIC_FIELD": "Increase damage dealt by PSYCHIC Pokémon by 20%",

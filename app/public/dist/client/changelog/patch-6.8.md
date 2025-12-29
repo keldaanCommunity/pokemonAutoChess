@@ -26,6 +26,8 @@
 
 # Gameplay
 
+- Locked status now prevents dodging
+
 # UI
 
 - Added Region report, diplaying region by region statistic
