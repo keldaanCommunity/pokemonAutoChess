@@ -547,6 +547,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonCloned.name,
             player
           )
+          bug.stacks = pokemonCloned.stacks
 
           const coord = this.getClosestFreeCellToPokemon(
             pokemonCloned,
