@@ -538,7 +538,8 @@
 		"PUMMELING_PAYBACK": "快扫拳返",
 		"VOLT_SURGE": "伏特电涌",
 		"SUPERCELL_SLAM": "闪电强袭",
-		"HIGH_HORSEPOWER": "十万马力"
+		"HIGH_HORSEPOWER": "十万马力",
+		"CITY_SHUTTLE": "山羊速多乐"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1620,7 +1621,9 @@
 		"BELLIBOLT": "电肚蛙",
 		"PINCURCHIN": "啪嚓海胆",
 		"MUDBRAY": "泥驴仔",
-		"MUDSDALE": "重泥挽马"
+		"MUDSDALE": "重泥挽马",
+		"SKIDDO": "坐骑小羊",
+		"GOGOAT": "坐骑山羊"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1814,7 +1817,7 @@
 		"ROLLOUT": "提升[2,5,10,SP]点DEF，随后对目标造成SPECIAL，数值相当于DEF乘以2。",
 		"ICE_BALL": "提升使用者10点SPE_DEF，随后对目标造成SPECIAL，数值相当于[50,100,150,SP]%的SPE_DEF加[10,20,30,SP]。",
 		"THRASH": "提升[100,SP]%的ATK，但陷入CONFUSION 3秒。",
-		"SOLAR_BEAM": "对目标身后的一条直线上的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并使他们陷入BURN 3秒。若使用者被LIGHT共鸣的聚光灯照射或天气为SUN，造成的伤害提高30%，并恢复20点PP值。",
+		"SOLAR_BEAM": "对目标身后的一条直线上的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并使他们陷入BURN 3秒。若使用者被LIGHT共鸣的聚光灯照射或天气为SUN，造成的伤害提升30%，并恢复20点PP。",
 		"MAGMA_STORM": "用火焰漩涡对目标造成[100,SP]点SPECIAL。这个漩涡随后会传递到ADJACENT目标身上，至多传递5次，每移动1格便降低20%的伤害。",
 		"DIRE_CLAW": "对目标造成[15,30,60,SP]点SPECIAL。目标可能陷入POISONNED，SLEEP或PARALYSIS之一3秒。",
 		"SLASHING_CLAW": "对目标造成[15,30,60,SP]点伤害，并使其陷入WOUND 5秒。若目标已经处于WOUND，造成的伤害增加30%。",
@@ -2139,7 +2142,8 @@
 		"PUMMELING_PAYBACK": "用暴风般的拳击击打目标，对其造成SPECIAL，数值相当于[60,SP]加125%的ATK，使用者自身恢复[40,SP]点HP。",
 		"VOLT_SURGE": "使用者进入增压状态，获得ELECTRIC_FIELD并提升25点SPEED和[40,SP]点最大HP。本轮战斗的剩余时间内，每第3次攻击产生一道造成[20,SP]点SPECIAL并会弹射至至多4只附近敌方宝可梦身上的链状闪电。",
 		"SUPERCELL_SLAM": "跳跃至敌方阵型中间，对所有ADJACENT敌方宝可梦造成[10,20,40,SP]点SPECIAL，并获得[10,20,40,SP]点SHIELD。",
-		"HIGH_HORSEPOWER": "突进穿过目标，随后对所有ADJACENT敌方宝可梦造成[15,25,35,SP]点SPECIAL。若只击中了一只敌方宝可梦，造成的SPECIAL翻倍。"
+		"HIGH_HORSEPOWER": "突进穿过目标，随后对所有ADJACENT敌方宝可梦造成[15,25,35,SP]点SPECIAL。若只击中了一只敌方宝可梦，造成的SPECIAL翻倍。",
+		"CITY_SHUTTLE": "跳跃至最近我方宝可梦的位置，将其驮在背后，随后与其一同突进至最远的可触及敌方宝可梦的邻位，对所有经过的敌方宝可梦造成SPECIAL，数值相当于[10,20,30,SP]加被驮运的我方宝可梦的ATK的100%。使用者与被驮运的我方宝可梦各获得[20,40,80,SP]点SHIELD。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
