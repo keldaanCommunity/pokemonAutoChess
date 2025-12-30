@@ -31,6 +31,7 @@
 # UI
 
 - Added Region report, diplaying region by region statistic
+- Current game mode is now displayed in the game top bar
 
 # Bugfix
 

@@ -2672,24 +2672,15 @@
 	"disable_elo_hint": "Disabilita guadagno o perdita di Elo per questa partita",
 	"minimum_rank": "Rango minimo",
 	"maximum_rank": "Rango massimo",
-	"ranked_match": "Partita classificata",
-	"ranked_match_description": "Per giocatori competitivi.\n8 giocatori, sistema Elo attivo, possono entrare solo giocatori del tuo stesso rango.",
 	"ranked_game_hint": "Questa partita è accessibile solo a giocatori con il tuo stesso rango.",
-	"smeargle_scribble": "Scarabocchi di Smeargle",
-	"smeargle_scribble_description": "Gioca per divertirti, non perdi/guadagni Elo!\nUna nuova regola speciale viene aggiunta alla partita.",
 	"smeargle_scribble_hint": "Smeargle scarabocchia una nuova regola casuale che viene applicata per tutta la partita",
 	"no_rule": "Nessuna regola speciale",
-	"classic": "Unisciti ad una lobby",
-	"classic_description": "La classica esperienza di PAC!\n8 giocatori, sistema Elo disattivo, aperta a tutti.",
 	"classic_hint": "La partita inizierà automaticamente quando 8 giocatori si uniranno",
 	"password_protected": "Lobby privata (protetta da password)",
 	"private": "Privato",
 	"available_rooms": "Stanze disponibili",
 	"new_game": "Nuova Partita",
 	"in_game": "In partita",
-	"tournament": "Torneo",
-	"custom_room": "Crea stanza",
-	"custom_room_description": "Crea una lobby privata con le tue regole",
 	"loading": "Caricamento...",
 	"connecting": "Connettiti",
 	"no_data_available": "Nessun dato disponibile",
@@ -3289,5 +3280,19 @@
 	"portal_description_2": "Ogni portale ha simboli di sinergia presi casualmente dalle sinergie dominanti di tutti i giocatori. I simboli influenzano sia la regione verso cui viaggerai che i Pokémon che verranno proposti.",
 	"portal_description_3": "Se decidi di non prendere nessun portale, rimarrai nella tua regione attuale e i Pokémon proposti saranno totalmente casuali.",
 	"additional_description": "Scegli una scelta aggiuntiva e un componente oggetto tra 3 proposte. Le scelte aggiuntive sono Pokémon di evoluzione a 2 stadi che possono essere trovati in tutti i negozi dei giocatori dopo essere stati scelti.",
-	"battle_description": "Stage di battaglia regolare dove combatti contro altri giocatori o bot."
+	"battle_description": "Stage di battaglia regolare dove combatti contro altri giocatori o bot.",
+	"game_modes": {
+		"CLASSIC": "Clásico",
+		"RANKED": "Partita classificata",
+		"SCRIBBLE": "Scarabocchi di Smeargle",
+		"CUSTOM_LOBBY": "Partita personalizzata",
+		"TOURNAMENT": "Torneo"
+	},
+	"game_modes_descriptions": {
+		"CLASSIC": "La classica esperienza di PAC!\n8 giocatori, sistema Elo disattivo, aperta a tutti.",
+		"RANKED": "Per giocatori competitivi.\n8 giocatori, sistema Elo attivo, possono entrare solo giocatori del tuo stesso rango.",
+		"SCRIBBLE": "Gioca per divertirti, non perdi/guadagni Elo!\nUna nuova regola speciale viene aggiunta alla partita.",
+		"CUSTOM_LOBBY": "Crea una lobby privata con le tue regole",
+		"TOURNAMENT": "Questa partita fa parte di un torneo. Controlla Discord per i prossimi eventi."
+	}
 }

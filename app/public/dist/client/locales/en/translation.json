@@ -3605,17 +3605,11 @@
 	"disable_elo_hint": "Disable Elo gain or loss for this game",
 	"minimum_rank": "Minimum rank",
 	"maximum_rank": "Maximum rank",
-	"ranked_match": "Ranked Match",
-	"ranked_match_short": "Ranked",
-	"ranked_match_description": "For competitors ! 8 players, Elo enabled\nRestricted to players close to your rank",
+	"ranked_match_short": "Ranked",	
 	"ranked_game_hint": "This game is restricted to players close to your current rank",
-	"smeargle_scribble": "Smeargle's Scribble",
-	"smeargle_scribble_short": "Scribble",
-	"smeargle_scribble_description": "Play for fun ! 8 players, Elo disabled\nA new special rule is added for this game.",
+	"smeargle_scribble_short": "Scribble",	
 	"smeargle_scribble_hint": "Smeargle scribbles a new random rule applied during the entire game.",
-	"no_rule": "No special rule",
-	"classic": "Classic",
-	"classic_description": "The casual PAC Experience !\n8 players, Elo disabled, open to everyone.",
+	"no_rule": "No special rule",	
 	"classic_hint": "The game will automatically start when 8 players joined",
 	"password_protected": "Private game (password protected)",
 	"private": "Private",
@@ -3624,11 +3618,8 @@
 	"in_game": "In Game",
 	"games_in_progress_one": "{{count}} game in progress",
 	"games_in_progress_other": "{{count}} games in progress",
-	"tournament": "Tournament",
 	"events": "Events",
-	"custom_room": "Custom room",
-	"custom_room_short": "Custom",
-	"custom_room_description": "Create a private room to play with your friends or with bots",
+	"custom_room_short": "Custom",	
 	"loading": "Loading...",
 	"connecting": "Connecting...",
 	"no_data_available": "No data available",
@@ -4432,5 +4423,19 @@
 		"move_row_up": "Move row up",
 		"move_row_down": "Move row down",
 		"delete_row": "Delete row"
+	},
+	"game_modes": {
+		"CLASSIC": "Classic",
+		"RANKED": "Ranked Match",
+		"SCRIBBLE": "Smeargle's Scribble",
+		"CUSTOM_LOBBY": "Custom room",
+		"TOURNAMENT": "Tournament"
+	},
+	"game_modes_descriptions": {
+		"CLASSIC": "The casual PAC Experience !\n8 players, Elo disabled, open to everyone.",
+		"RANKED": "For competitors ! 8 players, Elo enabled\nRestricted to players close to your rank",
+		"SCRIBBLE": "Play for fun ! 8 players, Elo disabled\nA new special rule is added for this game.",
+		"CUSTOM_LOBBY": "Create a private room to play with your friends or with bots",
+		"TOURNAMENT": "This match is part of a tournament. Check Discord for upcoming events."
 	}
 }

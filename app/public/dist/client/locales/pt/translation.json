@@ -2248,15 +2248,11 @@
 	"reconnect": "Reconectar",
 	"no_elo": "Apenas por diversão",
 	"minimum_rank": "Rank mínimo",
-	"ranked_match": "Jogo Rankeado",
-	"smeargle_scribble": "Garabato do Smeargle",
 	"smeargle_scribble_hint": "Smeargle deixa um garabato com uma norma aleatória que será aplicada para o resto do jogo",
-	"classic": "Junte-se a um lobby",
 	"password_protected": "Lobby privado (protegido por senha)",
 	"private": "Privado",
 	"available_rooms": "Quartos disponíveis",
 	"in_game": "No jogo",
-	"custom_room": "Criar quarto",
 	"loading": "Carregando...",
 	"no_data_available": "Sem informação disponível",
 	"leaderboard": "Entre os melhores",
@@ -2733,5 +2729,12 @@
 	"portal_description_2": "Cada portal tem símbolos de sinergia retirados aleatoriamente das sinergias dominantes de todos os jogadores. Os símbolos influenciam tanto a região para onde você viajará quanto os Pokémon que serão propostos.",
 	"portal_description_3": "Se você decidir não pegar nenhum portal, permanecerá em sua região atual, e os Pokémon propostos serão totalmente aleatórios.",
 	"additional_description": "Escolha uma escolha adicional e um componente de item entre 3 propostas. Escolhas adicionais são Pokémon de evolução de 2 estágios que podem ser encontrados em todas as lojas dos jogadores após serem escolhidos.",
-	"battle_description": "Estágio de batalha regular onde você luta contra outros jogadores ou bots."
+	"battle_description": "Estágio de batalha regular onde você luta contra outros jogadores ou bots.",
+	"game_modes": {
+		"CLASSIC": "Clássico",
+		"RANKED": "Jogo Rankeado",
+		"SCRIBBLE": "Garabato do Smeargle",
+		"CUSTOM_LOBBY": "Jogo personalizado",
+		"TOURNAMENT": "Torneio"
+	}
 }

@@ -13,10 +13,11 @@ import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+//import { mockRooms } from "../../../../../models/mock-data/room-listing"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import { IngameRoomsList } from "./game-rooms-menu"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
-//import { mockRooms } from "../../../../../models/mock-data/room-listing"
 import "./room-menu.css"
 
 export default function RoomMenu() {
@@ -102,25 +103,25 @@ export default function RoomMenu() {
           <span>{t("in_game")}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/classic.png" alt="" />
-          <span>{t("classic")}</span>
+          <GameModeIcon gameMode={GameMode.CLASSIC} />
+          <span>{t(`game_modes.${GameMode.CLASSIC}`)}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/ranked.png" alt="" />
-          <span>{t("ranked_match_short")}</span>
+          <GameModeIcon gameMode={GameMode.RANKED} />
+          <span>{t(`game_modes.${GameMode.RANKED}`)}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/scribble.png" alt="" />
-          <span>{t("smeargle_scribble_short")}</span>
+          <GameModeIcon gameMode={GameMode.SCRIBBLE} />
+          <span>{t(`game_modes.${GameMode.SCRIBBLE}`)}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/custom.png" alt="" />
-          <span>{t("custom_room_short")}</span>
+          <GameModeIcon gameMode={GameMode.CUSTOM_LOBBY} />
+          <span>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</span>
         </Tab>
         {hasTournamentLobbies && (
           <Tab>
-            <img src="/assets/ui/tournament.svg" alt="" />
-            <span>{t("tournament")}</span>
+            <GameModeIcon gameMode={GameMode.TOURNAMENT} />
+            <span>{t(`game_modes.${GameMode.TOURNAMENT}`)}</span>
           </Tab>
         )}
       </TabList>

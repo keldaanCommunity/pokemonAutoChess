@@ -3604,17 +3604,11 @@
 	"disable_elo_hint": "本场游戏的结果不会影响参加玩家的Elo分数。",
 	"minimum_rank": "最低段位",
 	"maximum_rank": "最高段位",
-	"ranked_match": "排位赛",
 	"ranked_match_short": "排位",
-	"ranked_match_description": "为认真的玩家打造！8人游戏，影响Elo\n限制段位为与你相近。",
 	"ranked_game_hint": "只有与你段位相近的玩家能够加入此游戏",
-	"smeargle_scribble": "图图犬涂鸦",
 	"smeargle_scribble_short": "涂鸦",
-	"smeargle_scribble_description": "娱乐模式！8人游戏，不影响Elo\n本场游戏中会加入一条特殊规则。",
 	"smeargle_scribble_hint": "图图犬会随机涂鸦一条全局有效的新规则。",
-	"no_rule": "无特殊规则",
-	"classic": "经典模式",
-	"classic_description": "休闲宝可梦自走棋！\n8人游戏，不影响Elo，所有人均可参加",
+	"no_rule": "无特殊规则",	
 	"classic_hint": "当参加者满8人时，游戏会自动开始",
 	"password_protected": "非公开游戏（有密码）",
 	"private": "非公开",
@@ -3623,11 +3617,8 @@
 	"in_game": "游戏中",
 	"games_in_progress_one": "{{count}}场进行中的游戏",
 	"games_in_progress_other": "{{count}}场进行中的游戏",
-	"tournament": "锦标赛",
 	"events": "活动",
-	"custom_room": "自定义房间",
 	"custom_room_short": "自定",
-	"custom_room_description": "自创一个非公开房间来和朋友或机器人游戏",
 	"loading": "加载中……",
 	"connecting": "连接中……",
 	"no_data_available": "数据不可用",
@@ -4428,5 +4419,19 @@
 		"move_row_up": "上移整行",
 		"move_row_down": "下移整行",
 		"delete_row": "删除行"
+	},
+	"game_modes": {
+		"CLASSIC": "经典模式",
+		"RANKED": "排位赛",
+		"SCRIBBLE": "图图犬涂鸦",
+		"CUSTOM_LOBBY": "自定义房间",
+		"TOURNAMENT": "锦标赛"
+	},
+	"game_modes_descriptions": {
+		"CLASSIC": "休闲宝可梦自走棋！\n8人游戏，不影响Elo，所有人均可参加",
+		"RANKED": "为认真的玩家打造！8人游戏，影响Elo\n限制段位为与你相近。",
+		"SCRIBBLE": "娱乐模式！8人游戏，不影响Elo\n本场游戏中会加入一条特殊规则。",
+		"CUSTOM_LOBBY": "自创一个非公开房间来和朋友或机器人游戏",
+		"TOURNAMENT": "这场比赛是锦标赛的一部分。请查看Discord以获取即将举行的活动信息。"
 	}
 }

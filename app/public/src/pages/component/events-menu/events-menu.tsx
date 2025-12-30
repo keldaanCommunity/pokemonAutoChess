@@ -21,7 +21,7 @@ export function EventsMenu() {
         </Tab>
         {tournaments.length > 0 && (
           <Tab>
-            <span>{t("tournament")}</span>
+            <span>{t("game_modes.TOURNAMENT")}</span>
           </Tab>
         )}
         <Tab>

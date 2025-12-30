@@ -3472,17 +3472,11 @@
 	"disable_elo_hint": "Desactiva la ganancia o pérdida de Elo para esta partida.",
 	"minimum_rank": "Rango mínimo",
 	"maximum_rank": "Rango máximo",
-	"ranked_match": "Partida Clasificatoria",
 	"ranked_match_short": "Clasificatoria",
-	"ranked_match_description": "Para competidores\n8 jugadores, Elo activado, restringido a jugadores de tu rango actual",
 	"ranked_game_hint": "Esta partida esta restringida a jugadores de tu rango actual",
-	"smeargle_scribble": "Bocetos de Smeargle",
 	"smeargle_scribble_short": "Bocetos",
-	"smeargle_scribble_description": "Juega por diversión, sin ganar/perder Elo!\nUna nueva regla especial es añadida para esta partida.",
 	"smeargle_scribble_hint": "Smeargle dibuja una nueva regla aleatoria que se aplica durante todo el juego.",
 	"no_rule": "No hay regla especial.",
-	"classic": "Partida clásica",
-	"classic_description": "La experiencia clásica de PAC!\n8 jugadores, Elo desactivado, abierta para todos.",
 	"classic_hint": "El juego comenzará automáticamente cuando se unan 8 jugadores.",
 	"password_protected": "Vestíbulo privado (protegido con contraseña)",
 	"private": "Privado",
@@ -3491,11 +3485,8 @@
 	"in_game": "En Juego",
 	"games_in_progress_one": "{{count}} partidas en progreso",
 	"games_in_progress_other": "{{count}} partidas en progreso",
-	"tournament": "Torneo",
-	"events": "Eventos",
-	"custom_room": "Partida Personalizada",
+	"events": "Eventos", 
 	"custom_room_short": "Personalizada",
-	"custom_room_description": "Crea una sala privada con tus propias reglas",
 	"loading": "Cargando...",
 	"connecting": "Conectando...",
 	"no_data_available": "Sin información disponible",
@@ -4242,5 +4233,19 @@
 	"portal_description_2": "Cada portal tiene símbolos de sinergia tomados aleatoriamente de las sinergias dominantes de todos los jugadores. Los símbolos influyen tanto en la región a la que viajarás como en los Pokémon que serán propuestos.",
 	"portal_description_3": "Si decides no tomar ningún portal, permanecerás en tu región actual, y los Pokémon propuestos serán totalmente aleatorios.",
 	"additional_description": "Elige una selección adicional y un componente de objeto entre 3 propuestas. Las selecciones adicionales son Pokémon de evolución de 2 etapas que se pueden encontrar en todas las tiendas de los jugadores después de ser elegidos.",
-	"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots."
+	"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots.",
+	"game_modes": {
+		"CLASSIC": "Partida clásica",
+		"RANKED": "Partida Clasificatoria",
+		"SCRIBBLE": "Bocetos de Smeargle",
+		"CUSTOM_LOBBY": "Partida Personalizada",
+		"TOURNAMENT": "Torneo"
+	},
+	"game_modes_descriptions": {
+		"CLASSIC": "La experiencia clásica de PAC!\n8 jugadores, Elo desactivado, abierta para todos.",
+		"RANKED": "Para competidores\n8 jugadores, Elo activado, restringido a jugadores de tu rango actual",
+		"SCRIBBLE": "Juega por diversión, sin ganar/perder Elo!\nUna nueva regla especial es añadida para esta partida.",
+		"CUSTOM_LOBBY": "Crea una sala privada con tus propias reglas",
+		"TOURNAMENT": "Esta partida forma parte de un torneo. Consulta Discord para enterarte de los próximos eventos."
+	}
 }

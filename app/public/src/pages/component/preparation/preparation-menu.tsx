@@ -29,6 +29,7 @@ import {
   toggleReady
 } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import { BotSelectModal } from "./bot-select-modal"
 import PreparationMenuUser from "./preparation-menu-user"
 import "./preparation-menu.css"
@@ -146,28 +147,23 @@ export default function PreparationMenu() {
 
   const headerMessage = (
     <>
-      {gameMode === GameMode.RANKED && <p>{t("ranked_game_hint")}</p>}
+      {gameMode === GameMode.RANKED && (
+        <p>
+          <GameModeIcon gameMode={gameMode} />
+          {t("ranked_game_hint")}
+        </p>
+      )}
 
       {(gameMode === GameMode.SCRIBBLE || specialGameRule != null) && (
         <p>
-          <img
-            alt={t("smeargle_scribble")}
-            title={t("smeargle_scribble_hint")}
-            className="scribble icon"
-            src={"/assets/ui/scribble.png"}
-          />
+          <GameModeIcon gameMode={gameMode} />
           {t("smeargle_scribble_hint")}
         </p>
       )}
 
       {gameMode === GameMode.CLASSIC && (
         <p>
-          <img
-            alt={t("classic")}
-            title={t("classic_hint")}
-            className="classic icon"
-            src={"/assets/ui/classic.png"}
-          />
+          <GameModeIcon gameMode={gameMode} />
           {t("classic_hint")}
         </p>
       )}
@@ -244,7 +240,7 @@ export default function PreparationMenu() {
     isAdmin &&
     noElo && (
       <label>
-        {t("smeargle_scribble")}
+        {t("game_modes.SCRIBBLE")}
         <select
           onChange={(e) => changeSpecialRule(e.target.value as SpecialGameRule)}
           value={specialGameRule ?? "none"}

@@ -1,16 +1,14 @@
 import { RoomAvailable } from "colyseus.js"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import {
-  EloRank,
-  EloRankThreshold,
-  MAX_PLAYERS_PER_GAME
-} from "../../../../../config"
+import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../config"
 import { IPreparationMetadata, Role } from "../../../../../types"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import { GameMode } from "../../../../../types/enum/Game"
 import { formatMinMaxRanks, getRank } from "../../../../../utils/elo"
 import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import "./room-item.css"
 
 export default function RoomItem(props: {
@@ -90,12 +88,7 @@ export default function RoomItem(props: {
         />
       )}
       {props.room.metadata?.gameMode === GameMode.SCRIBBLE && (
-        <img
-          alt={t("smeargle_scribble")}
-          title={t("smeargle_scribble_hint")}
-          className="scribble gamemode icon"
-          src="/assets/ui/scribble.png"
-        />
+        <GameModeIcon gameMode={GameMode.SCRIBBLE} />
       )}
       {props.room.metadata?.noElo &&
         props.room.metadata?.gameMode === GameMode.CUSTOM_LOBBY && (
@@ -107,12 +100,10 @@ export default function RoomItem(props: {
           />
         )}
       {props.room.metadata?.gameMode === GameMode.CLASSIC && (
-        <img
-          alt={t("classic")}
-          title={t("classic_hint")}
-          className="classic gamemode icon"
-          src="/assets/ui/classic.png"
-        />
+        <GameModeIcon gameMode={GameMode.CLASSIC} />
+      )}
+      {props.room.metadata?.gameMode === GameMode.RANKED && (
+        <GameModeIcon gameMode={GameMode.RANKED} />
       )}
       {props.room.metadata?.minRank && (
         <img

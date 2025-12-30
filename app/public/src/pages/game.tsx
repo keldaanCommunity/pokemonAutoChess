@@ -4,11 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import {
-  MinStageForGameToCount,
-  PortalCarouselStages,
-  RegionDetails
-} from "../../../config"
+import { MinStageForGameToCount, RegionDetails } from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
