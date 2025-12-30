@@ -26,6 +26,7 @@
 # Changes to Items
 
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
+- Hard Stone is renamed to Protector. No change to the effect.
 
 # Gameplay
 
