@@ -2091,7 +2091,7 @@
 		"STATIC_SHOCK": "대상에게 [70,SP] SPECIAL 를 가하며, ADJACENT ELECTRIC 포켓몬 당 [30,SP] SHIELD 를, ADJACENT FAIRY 포켓몬 당 [30,SP] HP 를 얻는다.",
 		"SAND_SPIT": "시전자 전방의 적 포켓몬 3마리에게 모래를 뿜어 [30,60,120,SP] SPECIAL 를 가하고 2초간 BLINDED 상태로 만든다.",
 		"HYPER_DRILL": "PROTECT 를 관통하는 [10,30,50,SP] TRUE 를 가하고 대상 아래 땅을 더 깊이 파내어 묻힌 아이템을 파괴한다. 대상이 이미 완전히 파인 구멍 위에 있으면 피해가 2배가 된다.",
-		"TERRAIN_PULSE": "시전자가 필드를 가지고 있지 않으면 GRASS_FIELD 를 얻는다.\n팀 내 필드 효과가 ADJACENT 아군에게 전파되고 효과가 발동된다:\nGRASS_FIELD: 최대 HP 의 [5,SP]% 회복\nELECTRIC_FIELD: [10,SP] SPEED 획득\nPSYCHIC_FIELD: [10,SP] PP 획득\nFAIRY_FIELD: 최대 HP 의 [5,SP]% 만큼 SHIELD 획득",
+		"TERRAIN_PULSE": "시전자가 필드를 가지고 있지 않으면 GRASS_FIELD 를 얻는다.\n팀 내 필드 효과가 ADJACENT 아군에게 전파되고 효과가 발동된다:\nGRASS_FIELD: 최대 HP 의 [5,7,10,SP]% 회복\nELECTRIC_FIELD: [10,12,15,SP] SPEED 획득\nPSYCHIC_FIELD: [10,12,15,SP] PP 획득\nFAIRY_FIELD: 최대 HP 의 [5,7,10,SP]% 만큼 SHIELD 획득",
 		"AXE_KICK": "PP 가 가장 높은 적에게 도약한 후 [25,50,100,SP] SPECIAL 를 가하며 [15,SP] PP 를 소모시킨다. [30,LK]% 확률로 CONFUSION 을 3초간 가한다.",
 		"EXPANDING_FORCE": "시전자가 PSYCHIC_FIELD 를 얻거나 인근 아군에게 전파한다. 이후 PSYCHIC_FIELD 에 있는 모든 아군의 염력 에너지가 공명하여 ADJACENT 적에게 [10,20,40,SP] SPECIAL 를 가한다.",
 		"SPITE": "대상의 PP 를 [20,40,60,SP]만큼 흡수하여 ADJACENT 아군에게 [20,40,60,SP] PP 를 분배한다.",

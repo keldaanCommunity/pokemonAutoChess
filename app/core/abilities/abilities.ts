@@ -13904,25 +13904,33 @@ export class TerrainPulseStrategy extends AbilityStrategy {
 
     // 3. trigger additional field effects
     /*
-    Grass field: heal 5% of max HP
-    Electric Field: gain 10 Speed
-    Psychic Field: gain 10 PP
-    Fairy Field: gain 5% of max HP as Shield
+    Grass field: heal 5/7/10% of max HP
+    Electric Field: gain 10/12/15 Speed
+    Psychic Field: gain 10/12/15 PP
+    Fairy Field: gain 5/7/10% of max HP as Shield
     */
     pokemonsWithField.forEach((field, pkm) => {
       switch (field) {
-        case "grassField":
-          pkm.handleHeal(0.05 * pkm.maxHP, pokemon, 1, crit)
+        case "grassField": {
+          const heal = [0.05, 0.07, 0.1][pokemon.stars - 1] ?? 0.1
+          pkm.handleHeal(heal * pkm.maxHP, pokemon, 1, crit)
           break
-        case "electricField":
-          pkm.addSpeed(10, pokemon, 1, crit)
+        }
+        case "electricField": {
+          const speedBuff = [10, 12, 15][pokemon.stars - 1] ?? 15
+          pkm.addSpeed(speedBuff, pokemon, 1, crit)
           break
-        case "psychicField":
-          pkm.addPP(10, pokemon, 1, crit)
+        }
+        case "psychicField": {
+          const ppGain = [10, 12, 15][pokemon.stars - 1] ?? 15
+          pkm.addPP(ppGain, pokemon, 1, crit)
           break
-        case "fairyField":
-          pkm.addShield(0.05 * pkm.maxHP, pokemon, 1, crit)
+        }
+        case "fairyField": {
+          const shieldPercent = [0.05, 0.07, 0.1][pokemon.stars - 1] ?? 0.1
+          pkm.addShield(shieldPercent * pkm.maxHP, pokemon, 1, crit)
           break
+        }
       }
     })
   }
