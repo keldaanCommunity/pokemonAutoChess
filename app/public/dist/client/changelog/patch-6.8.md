@@ -17,6 +17,7 @@
 - Tadbulb line passive damage no longer scales with AP and is considered retaliation damage
 - Cosmog HP buffed: 100 → 140 ; Cosmoem HP buffed: 200 → 220
 - Terrain pulse: change effects by unit tier: Grass field: 5/5/5 → 5/7/10 % max HP healed ; Electric field: 10/10/10 → 10/12/15 speed buff; Psychic field: 10/10/10 → 10/12/15 PP gain ; Misty field: 5/5/5 → 5/7/10 % of max HP as shield
+- Mothim is now sold for 3 gold instead of 6
 
 # Changes to Synergies
 

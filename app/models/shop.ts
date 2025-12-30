@@ -154,6 +154,8 @@ export function getSellPrice(
     price = SellPrices.EEVEE
   } else if (duo) {
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
+  } else if (name === Pkm.MOTHIM) {
+    price = RarityCost[pokemon.rarity] * 1
   } else {
     price = RarityCost[pokemon.rarity] * stars
   }
