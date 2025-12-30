@@ -1,6 +1,7 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import {
+  BERRY_TREE_POSITIONS,
   BOARD_HEIGHT,
   BOARD_WIDTH,
   getRegionTint,
@@ -302,17 +303,11 @@ export default class BoardManager {
       (n) => n <= grassLevel
     ).length
 
-    const treePositions = [
-      [408, 710],
-      [360, 710],
-      [312, 710]
-    ]
-
     for (let i = 0; i < nbTrees; i++) {
       const tree = new BerryTree(
         this,
-        treePositions[i][0],
-        treePositions[i][1],
+        BERRY_TREE_POSITIONS[i][0],
+        BERRY_TREE_POSITIONS[i][1],
         i
       )
       this.berryTrees.push(tree)

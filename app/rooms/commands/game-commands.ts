@@ -13,7 +13,8 @@ import {
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
-  StageDuration
+  StageDuration,
+  SynergyTriggers
 } from "../../config"
 import {
   OnItemDroppedEffect,
@@ -640,6 +641,22 @@ export class OnDragDropItemCommand extends Command<
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
+    } else if (zone === "berry-tree-zone") {
+      const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0
+      const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
+        (n) => n <= grassLevel
+      ).length
+
+      if (item === Item.RICH_MULCH && index < nbTrees) {
+        player.berryTreesStages[index] = 3
+        removeInArray(player.items, item)
+      } else if (item === Item.AMAZE_MULCH && index < nbTrees) {
+        //TODO: golden berry trees
+        player.berryTreesStages[index] = 3
+        removeInArray(player.items, item)
+      }
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      return
     } else {
       const x = index % BOARD_WIDTH
       const y = Math.floor(index / BOARD_WIDTH)
@@ -912,7 +929,7 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
   async execute({ client }) {
     try {
       //logger.debug("onJoin", client.auth.uid)
-      if(!client.userData) client.userData = {}
+      if (!client.userData) client.userData = {}
       client.userData.spectatedPlayerId = client.auth.uid
       const players = values(this.state.players)
       if (players.some((p) => p.id === client.auth.uid)) {

@@ -24,6 +24,8 @@
 
 # Changes to Items
 
+- Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
+
 # Gameplay
 
 - Locked status now prevents dodging

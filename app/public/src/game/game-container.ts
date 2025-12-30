@@ -527,6 +527,10 @@ class GameContainer {
       }
     })
 
+    $player.berryTreesStages.onChange((value, key) => {
+      this.gameScene?.board?.renderBerryTrees()
+    })
+
     $player.flowerPots.onAdd((pokemon, index) => {
       listenForPokemonChanges(pokemon, ["hp", "ap"])
       const board = this.gameScene?.board
