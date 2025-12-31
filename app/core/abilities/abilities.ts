@@ -15615,6 +15615,29 @@ export class CityShuttleStrategy extends AbilityStrategy {
   }
 }
 
+export class BulletPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Deal [40,SP] TRUE to the target, then gain [50,SP] SPEED for 2 seconds.
+    const damage = 40
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    const speedBuff =
+      40 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    pokemon.addSpeed(speedBuff, pokemon, 0, false)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.addSpeed(-speedBuff, pokemon, 0, false)
+      }, 2000)
+    )
+    pokemon.cooldown = 250
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16136,7 +16159,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.VOLT_SURGE]: new VoltSurgeStrategy(),
   [Ability.SUPERCELL_SLAM]: new SupercellSlamStrategy(),
   [Ability.HIGH_HORSEPOWER]: new HighHorsepowerStrategy(),
-  [Ability.CITY_SHUTTLE]: new CityShuttleStrategy()
+  [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
+  [Ability.BULLET_PUNCH]: new BulletPunchStrategy()
 }
 
 export function castAbility(

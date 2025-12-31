@@ -754,7 +754,7 @@ export class Scizor extends Pokemon {
   speDef = 10
   maxPP = 80
   range = 1
-  skill = Ability.X_SCISSOR
+  skill = Ability.BULLET_PUNCH
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = RegionDetails[map]?.synergies
