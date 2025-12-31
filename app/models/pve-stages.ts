@@ -52,14 +52,13 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.RATTATA, 5, 1]
     ],
     rewards: NonSpecialItemComponents,
-    getRewards(player) {
-      const randomComponent = pickRandomIn(
+    getRewardsPropositions(player: Player) {
+      return pickNRandomIn(
         NonSpecialItemComponents.filter(
           (i) => player.randomComponentsGiven.includes(i) === false
-        )
+        ),
+        3
       )
-      player.randomComponentsGiven.push(randomComponent)
-      return [randomComponent]
     }
   },
 
@@ -105,6 +104,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Pkm.MEW, 7, 1]
     ],
     marowakItems: [[Item.METAL_COAT], [Item.DEEP_SEA_TOOTH]],
+    shinyChance: 1 / 100,
     rewards: NonSpecialItemComponents,
     getRewards(player: Player) {
       const rewards = [pickRandomIn(NonSpecialItemComponents)]
@@ -122,6 +122,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
         rewards.push(armorReceived)
       }
       return rewards
+    },
+    getRewardsPropositions(_player: Player) {
+      return pickNRandomIn(ItemComponents, 3)
     }
   },
 
@@ -139,7 +142,6 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Stat.SPE_DEF]: 5
     },
     marowakItems: [[Item.COMET_SHARD], [Item.SACRED_ASH]],
-    shinyChance: 1 / 100,
     rewards: [...NonSpecialItemComponents, ...CraftableNonSynergyItems],
     getRewards(player: Player) {
       const items = values(player.board)

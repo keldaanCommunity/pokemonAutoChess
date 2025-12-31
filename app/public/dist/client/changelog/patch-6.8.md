@@ -31,6 +31,7 @@
 # Gameplay
 
 - Locked status now prevents dodging
+- Stage 15 component pick is back, and stage 2 no longer gives a random component as a reward. Instead, the rewards of stage 2 are the 1 out of 3 component pick proposed on stage 3.
 
 # UI
 

@@ -422,8 +422,7 @@ export const FishingRods = [
 
 export type FishingRod = (typeof FishingRods)[number]
 
-export const ItemComponents: Item[] = [
-  Item.FOSSIL_STONE,
+export const NonSpecialItemComponents: Item[] = [
   Item.TWISTED_SPOON,
   Item.MAGNET,
   Item.BLACK_GLASSES,
@@ -432,6 +431,11 @@ export const ItemComponents: Item[] = [
   Item.NEVER_MELT_ICE,
   Item.HEART_SCALE,
   Item.MYSTIC_WATER
+]
+
+export const ItemComponents: Item[] = [
+  ...NonSpecialItemComponents,
+  Item.FOSSIL_STONE
 ]
 
 export const ItemRecipe: { [key in Item]?: Item[] } = {
@@ -792,17 +796,6 @@ export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
     [Item.AMORPHOUS_GEM]: Synergy.AMORPHOUS,
     [Item.GOURMET_GEM]: Synergy.GOURMET
   }
-
-export const NonSpecialItemComponents: Item[] = [
-  Item.TWISTED_SPOON,
-  Item.MAGNET,
-  Item.BLACK_GLASSES,
-  Item.MIRACLE_SEED,
-  Item.CHARCOAL,
-  Item.NEVER_MELT_ICE,
-  Item.HEART_SCALE,
-  Item.MYSTIC_WATER
-]
 
 export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
   (item) => SynergyGivenByItem.hasOwnProperty(item) === false

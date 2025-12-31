@@ -9,7 +9,6 @@ import {
   FIGHTING_PHASE_DURATION,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
-  ItemProposalStages,
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
@@ -1284,16 +1283,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.phase = GamePhaseState.PICK
     this.state.time =
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
-
-    // Item propositions stages
-    if (ItemProposalStages.includes(this.state.stageLevel)) {
-      this.state.players.forEach((player: Player) => {
-        resetArraySchema(
-          player.itemsProposition,
-          pickNRandomIn(ItemComponents, 3)
-        )
-      })
-    }
 
     if (
       [3, 15].includes(this.state.stageLevel) &&
