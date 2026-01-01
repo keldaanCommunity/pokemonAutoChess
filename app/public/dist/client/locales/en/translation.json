@@ -3372,7 +3372,8 @@
 		"VICTORIOUS": "Victorious",
 		"MOLE": "Mole",
 		"BLOSSOMED": "Blossomed",
-		"AQUARIOPHILE": "Aquariophile"
+		"AQUARIOPHILE": "Aquariophile",
+		"POFFIN_MASTER": "Poffin Master"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3460,7 +3461,8 @@
 		"VICTORIOUS": "Finish first at the Victory Road race",
 		"MOLE": "Dig out your entire board completely",
 		"BLOSSOMED": "Get 5 fully grown flower pots",
-		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team"
+		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team",
+		"POFFIN_MASTER": "Cook a Poffin with 3 different golden berries in it"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
