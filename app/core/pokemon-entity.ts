@@ -32,6 +32,7 @@ import {
 import {
   Berries,
   Item,
+  Sweets,
   SynergyGivenByItem,
   SynergyStones
 } from "../types/enum/Item"
@@ -1559,6 +1560,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(50)
         this.status.triggerProtect(2000)
         break
+      case Item.GOLDEN_NANAB_BERRY:
+        heal(min(50)(0.5 * this.maxHP))
+        if (this.player) this.player.addMoney(5, true, this)
+        break
+      case Item.GOLDEN_RAZZ_BERRY:
+        heal(min(50)(0.5 * this.maxHP))
+        if (this.player) this.player.shopFreeRolls += 6
+        break
+      case Item.GOLDEN_PINAP_BERRY:
+        heal(min(50)(0.5 * this.maxHP))
+        if (this.player) this.player.items.push(...pickNRandomIn(Sweets, 3))
+        break
     }
 
     if (stealedFrom) {
@@ -1609,7 +1622,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         if (
           spectatedPlayer &&
           spectatedPlayer.simulationId === this.simulation.id
-        ) {          
+        ) {
           client.send(Transfer.ABILITY, {
             id: this.simulation.id,
             skill,

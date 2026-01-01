@@ -38,6 +38,7 @@ import { Synergy } from "../../../../types/enum/Synergy"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
+import { max } from "../../../../utils/number"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
@@ -299,9 +300,9 @@ export default class BoardManager {
     this.berryTrees.forEach((tree) => tree.destroy())
     this.berryTrees = []
     const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
-    const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
-      (n) => n <= grassLevel
-    ).length
+    const nbTrees = max(3)(
+      SynergyTriggers[Synergy.GRASS].filter((n) => n <= grassLevel).length
+    )
 
     for (let i = 0; i < nbTrees; i++) {
       const tree = new BerryTree(

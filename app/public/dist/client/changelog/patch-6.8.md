@@ -22,12 +22,13 @@
 
 # Changes to Synergies
 
+- New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
-
 
 # Changes to Items
 
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
+- Added Golden Pinap Berry, Golden Nanab Berry and Golden Razz Berry
 
 # Gameplay
 

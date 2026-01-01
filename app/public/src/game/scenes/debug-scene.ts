@@ -258,9 +258,9 @@ export class DebugScene extends Phaser.Scene {
     this.landscape = [
       this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
       this.scene.scene.add.sprite(1200, 600, "ground_holes", `hole5.png`),
-      this.scene.scene.add.sprite(420, 660, "berry_trees", "ASPEAR_BERRY_4"),
-      this.scene.scene.add.sprite(360, 660, "berry_trees", "BABIRI_BERRY_6"),
-      this.scene.scene.add.sprite(300, 660, "berry_trees", "LIECHI_BERRY_3"),
+      this.scene.scene.add.sprite(420, 660, "berry_trees", "ASPEAR_BERRY_4.png"),
+      this.scene.scene.add.sprite(360, 660, "berry_trees", "BABIRI_BERRY_6.png"),
+      this.scene.scene.add.sprite(300, 660, "berry_trees", "LIECHI_BERRY_3.png"),
       this.scene.scene.add.sprite(320, 580, "flower_pots", "BLUE.png"),
       this.scene.scene.add.sprite(420, 580, "flower_pots", "PINK.png")
     ]

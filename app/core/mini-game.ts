@@ -23,12 +23,12 @@ import { Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
-  Berries,
   CraftableItems,
   CraftableNonSynergyItems,
   Item,
   ItemComponents,
   MissionOrders,
+  NonSpecialBerries,
   SynergyGems,
   SynergyGivenByGem,
   SynergyStones,
@@ -794,7 +794,7 @@ export class MiniGame {
             player.regions.push(portal.map)
             player.updateRegionalPool(state, true, previousMap)
             for (let i = 0; i < player.berryTreesType.length; i++) {
-              player.berryTreesType[i] = pickRandomIn(Berries)
+              player.berryTreesType[i] = pickRandomIn(NonSpecialBerries)
               player.berryTreesStages[i] = 0
             }
           }
