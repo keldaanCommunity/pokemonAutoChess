@@ -131,7 +131,8 @@ export function getWeather(
           !(isGhostBattle && board === redPlayerBoard)
         ) {
           const dominant = getDominantWeather(playerWeatherScore, [
-            Weather.SUN,
+            Weather.DROUGHT,
+            Weather.ZENITH,
             Weather.RAIN,
             Weather.SNOW
           ])

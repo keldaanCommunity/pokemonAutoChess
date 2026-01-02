@@ -915,9 +915,9 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
+      case EffectEnum.FLAME_BODY:
+      case EffectEnum.WILDFIRE:
       case EffectEnum.BLAZE:
-      case EffectEnum.VICTORY_STAR:
-      case EffectEnum.DROUGHT:
       case EffectEnum.DESOLATE_LAND:
         if (types.has(Synergy.FIRE)) {
           pokemon.effects.add(effect)
