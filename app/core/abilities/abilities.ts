@@ -2770,7 +2770,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = [25, 50, 100][pokemon.stars - 1] ?? 100
-    if (pokemon.simulation.weather === Weather.SUN || pokemon.status.light) {
+    if (pokemon.simulation.weather === Weather.ZENITH || pokemon.status.light) {
       damage = damage * 1.3
       pokemon.addPP(20, pokemon, 0, false)
     }
@@ -5288,8 +5288,8 @@ export class GrowthStrategy extends AbilityStrategy {
 
     let attackBuff = [3, 5, 7][pokemon.stars - 1] ?? 7
     let hpBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
-    if (pokemon.simulation.weather === Weather.SUN) {
-      attackBuff *= 2 // grows twice as fast if sunny weather
+    if (pokemon.simulation.weather === Weather.ZENITH) {
+      attackBuff *= 2 // grows twice as fast if zenith weather
       hpBuff *= 2
     }
     pokemon.addAttack(attackBuff, pokemon, 1, crit)
@@ -11807,9 +11807,9 @@ export class DarkLariatStrategy extends AbilityStrategy {
                 pokemon,
                 crit
               )
-              if (pokemon.effects.has(EffectEnum.VICTORY_STAR)) {
+              if (pokemon.effects.has(EffectEnum.WILDFIRE)) {
                 pokemon.addAttack(1, pokemon, 0, false)
-              } else if (pokemon.effects.has(EffectEnum.DROUGHT)) {
+              } else if (pokemon.effects.has(EffectEnum.BLAZE)) {
                 pokemon.addAttack(2, pokemon, 0, false)
               } else if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
                 pokemon.addAttack(3, pokemon, 0, false)

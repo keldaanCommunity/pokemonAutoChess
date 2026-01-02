@@ -98,6 +98,10 @@ export function getGameScene(): GameScene | undefined {
     | undefined
 }
 
+export function getGameContainer(): GameContainer {
+  return gameContainer
+}
+
 export function cyclePlayers(amt: number) {
   const players = values(gameContainer.room?.state.players)
   playerClick(
