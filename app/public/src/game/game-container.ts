@@ -1,3 +1,4 @@
+import { pipeline } from "node:stream"
 import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getStateCallbacks, Room } from "colyseus.js"
 import { t } from "i18next"
@@ -39,7 +40,6 @@ import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
-import { values } from "../../../utils/schemas"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
@@ -595,8 +595,10 @@ class GameContainer {
         this.gameScene.weatherManager.clearWeather()
         if (value === Weather.RAIN) {
           this.gameScene.weatherManager.addRain()
-        } else if (value === Weather.SUN) {
+        } else if (value === Weather.ZENITH) {
           this.gameScene.weatherManager.addSun()
+        } else if (value === Weather.DROUGHT) {
+          this.gameScene.weatherManager.addDrought()
         } else if (value === Weather.SANDSTORM) {
           this.gameScene.weatherManager.addSandstorm()
         } else if (value === Weather.SNOW) {
@@ -738,7 +740,6 @@ class GameContainer {
     if (this.gameScene?.battle) {
       this.gameScene?.battle.setSimulation(this.simulation)
     }
-    this.handleWeatherChange(simulation, simulation.weather)
   }
 
   onDragDrop(event: CustomEvent<IDragDropMessage>) {

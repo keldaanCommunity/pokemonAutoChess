@@ -419,7 +419,7 @@ export default class Status extends Schema implements IStatus {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
         let burnDamage = pkm.maxHP * 0.05
-        if (pkm.simulation.weather === Weather.SUN) {
+        if (pkm.simulation.weather === Weather.DROUGHT) {
           burnDamage *= 1.3
           const nbHeatRocks = pkm.player
             ? count(pkm.player.items, Item.HEAT_ROCK)
@@ -649,7 +649,7 @@ export default class Status extends Schema implements IStatus {
         if (nbIcyRocks > 0) {
           duration *= 1 - 0.2 * nbIcyRocks
         }
-      } else if (pkm.simulation.weather === Weather.SUN) {
+      } else if (pkm.simulation.weather === Weather.DROUGHT) {
         duration *= 0.7
       }
       if (pkm.status.enraged) {
@@ -700,6 +700,8 @@ export default class Status extends Schema implements IStatus {
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
         duration *= 1.3
+      } else if (pkm.simulation.weather === Weather.ZENITH) {
+        duration *= 0.7
       }
       if (pkm.status.enraged) {
         duration = duration / 2
