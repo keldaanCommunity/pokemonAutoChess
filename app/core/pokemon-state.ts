@@ -301,6 +301,9 @@ export default abstract class PokemonState {
       if (pokemon.status.enraged) {
         heal *= 0.5
       }
+      if (pokemon.simulation.weather === Weather.ZENITH) {
+        heal *= 1.2
+      }
 
       heal = Math.round(heal)
       const missingHP = pokemon.maxHP - pokemon.hp
@@ -898,6 +901,7 @@ export default abstract class PokemonState {
     if (pokemon.effects.has(EffectEnum.PRIMORDIAL_SEA)) {
       pokemon.addPP(12, pokemon, 0, false)
     }
+
     if (pokemon.simulation.weather === Weather.RAIN) {
       pokemon.addPP(3, pokemon, 0, false)
       const nbDampRocks = pokemon.player
@@ -905,6 +909,18 @@ export default abstract class PokemonState {
         : 0
       if (nbDampRocks > 0) {
         pokemon.addPP(2 * nbDampRocks, pokemon, 0, false)
+      }
+    }
+
+    if (
+      pokemon.simulation.weather === Weather.ZENITH &&
+      Math.floor(pokemon.simulation.room.state.time / 1000) % 2 === 0
+    ) {
+      const nbSunStones = pokemon.player
+        ? count(pokemon.player.items, Item.SUN_STONE)
+        : 0
+      if (nbSunStones > 0) {
+        pokemon.handleHeal(5 * nbSunStones, pokemon, 0, false)
       }
     }
 

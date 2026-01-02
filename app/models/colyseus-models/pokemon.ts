@@ -5584,7 +5584,7 @@ export class Moltres extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.OVERHEAT
-  passive = Passive.SUN
+  passive = Passive.DROUGHT
 }
 
 export class GalarianMoltres extends Pokemon {
@@ -5821,7 +5821,7 @@ export class Solrock extends Pokemon {
   maxPP = 80
   range = 2
   skill = Ability.COSMIC_POWER_SUN
-  passive = Passive.SUN
+  passive = Passive.DROUGHT
 }
 
 export class Regirock extends Pokemon {
@@ -6268,7 +6268,7 @@ function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
     weatherForm = Pkm.CASTFORM_HAIL
   } else if (weather === Weather.RAIN) {
     weatherForm = Pkm.CASTFORM_RAIN
-  } else if (weather === Weather.SUN) {
+  } else if (weather === Weather.DROUGHT || weather === Weather.ZENITH) {
     weatherForm = Pkm.CASTFORM_SUN
   }
 
@@ -7275,7 +7275,7 @@ export class HooH extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_BLAST
-  passive = Passive.SUN
+  passive = Passive.DROUGHT
 }
 
 export class RoaringMoon extends Pokemon {
@@ -14510,7 +14510,7 @@ function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
   let weatherForm
   if (weather === Weather.NIGHT) {
     weatherForm = Pkm.LYCANROC_NIGHT
-  } else if (weather === Weather.SUN) {
+  } else if (weather === Weather.ZENITH) {
     weatherForm = Pkm.LYCANROC_DAY
   }
 

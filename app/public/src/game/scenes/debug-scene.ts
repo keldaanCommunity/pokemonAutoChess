@@ -490,8 +490,10 @@ export class DebugScene extends Phaser.Scene {
     this.weatherManager.clearWeather()
     if (weather === Weather.RAIN) {
       this.weatherManager.addRain()
-    } else if (weather === Weather.SUN) {
+    } else if (weather === Weather.ZENITH) {
       this.weatherManager.addSun()
+    } else if (weather === Weather.DROUGHT) {
+      this.weatherManager.addDrought()
     } else if (weather === Weather.SANDSTORM) {
       this.weatherManager.addSandstorm()
     } else if (weather === Weather.SNOW) {
