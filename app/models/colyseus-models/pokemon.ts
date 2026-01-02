@@ -1566,11 +1566,11 @@ export class Honedge extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.DOUBLADE
-  hp = 85
+  hp = 75
   atk = 6
   speed = 44
-  def = 6
-  speDef = 6
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
@@ -1585,11 +1585,11 @@ export class Doublade extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.AEGISLASH
-  hp = 130
+  hp = 120
   atk = 13
   speed = 44
-  def = 10
-  speDef = 10
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
@@ -1603,7 +1603,7 @@ export class Aegislash extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
+  hp = 210
   atk = 23
   speed = 44
   def = 14
@@ -1622,7 +1622,7 @@ export class AegislashBlade extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
+  hp = 210
   atk = 34
   speed = 44
   def = 4
