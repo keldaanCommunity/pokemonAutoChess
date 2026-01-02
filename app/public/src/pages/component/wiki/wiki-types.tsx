@@ -63,7 +63,10 @@ export function WikiType(props: { type: Synergy }) {
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
       if (preferences.showEvolutions) return true
       const prevolution = list.find(
-        (p2) => p2.evolution === p.name || p2.evolutions.includes(p.name)
+        (p2) =>
+          p2.evolution === p.name ||
+          p2.evolutions.includes(p.name) ||
+          (PkmFamily[p2.name] === PkmFamily[p.name] && p2.stars < p.stars) // for transformations
       )
       // if show evolutions is unchecked, do not show a pokemon if it has a prevolution and that prevolution is in the same rarity category
       if (prevolution && prevolution.rarity === p.rarity) return false
