@@ -540,9 +540,9 @@ export type Tool = (typeof Tools)[number]
 export const ArtificialItems = [
   Item.METAL_COAT,
   Item.MACHO_BRACE,
-  Item.EXPLORER_KIT,
   Item.SPELL_TAG,
   Item.TINY_MUSHROOM,
+  Item.MAGMARIZER,
   Item.ELECTIRIZER,
   Item.POKERUS_VIAL,
   Item.COOKING_POT,

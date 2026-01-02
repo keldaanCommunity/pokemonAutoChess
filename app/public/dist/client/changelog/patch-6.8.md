@@ -36,6 +36,7 @@
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
 - New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to BURN with their attacks.
 - Heat stone changed: no longer has additional chance to BURN with their attacks. Instead, your Pokémon gain 3 Attack.
+- Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 
 # Gameplay
 
