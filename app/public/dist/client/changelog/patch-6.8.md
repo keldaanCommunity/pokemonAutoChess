@@ -21,6 +21,11 @@
 - Mothim is now sold for 3 gold instead of 6
 - New ability for Scizor: Bullet Punch
 - Nerf Honedge line: HP 85/130/230 → 75/120/210 ; Def 6/10/14 → 4/8/14
+- Primal Groudon change weather to Drought or Sandstorm based on your dominant synergy between FIRE and GROUND
+- Primal Kyogre change weather to Rain or Storm based on your dominant synergy between WATER and ELECTRIC
+- Ho-Oh no longer changes weather to Drought.
+- Lugia no longer changes weather to Windy.
+- XD001 no longer changes weather to Night.
 
 # Changes to Synergies
 

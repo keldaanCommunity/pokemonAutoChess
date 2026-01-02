@@ -70,16 +70,16 @@ export default function WikiWeather() {
 
 const pokemonsInfluencingWeather = new Map([
   [Weather.ZENITH, [Pkm.CASTFORM_SUN]],
-  [Weather.DROUGHT, [Pkm.HO_OH, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]],
-  [Weather.NIGHT, [Pkm.LUNATONE, Pkm.SHADOW_LUGIA]],
   [
-    Weather.WINDY,
-    [Pkm.LUGIA, Pkm.LANDORUS, Pkm.THUNDURUS, Pkm.TORNADUS, Pkm.ENAMORUS]
+    Weather.DROUGHT,
+    [Pkm.PRIMAL_GROUDON, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]
   ],
+  [Weather.NIGHT, [Pkm.LUNATONE]],
+  [Weather.WINDY, [Pkm.LANDORUS, Pkm.THUNDURUS, Pkm.TORNADUS, Pkm.ENAMORUS]],
   [Weather.MISTY, [Pkm.ENAMORUS, Pkm.XERNEAS]],
   [Weather.RAIN, [Pkm.PRIMAL_KYOGRE, Pkm.CASTFORM_RAIN]],
   [Weather.SNOW, [Pkm.ARTICUNO, Pkm.CASTFORM_HAIL, Pkm.TORNADUS]],
-  [Weather.STORM, [Pkm.ZAPDOS, Pkm.THUNDURUS]],
+  [Weather.STORM, [Pkm.ZAPDOS, Pkm.THUNDURUS, Pkm.PRIMAL_KYOGRE]],
   [Weather.SANDSTORM, [Pkm.LANDORUS, Pkm.PRIMAL_GROUDON]],
   [Weather.NEUTRAL, [Pkm.MEGA_RAYQUAZA]]
 ])

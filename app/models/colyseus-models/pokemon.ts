@@ -5402,7 +5402,6 @@ export class ShadowLugia extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SKY_ATTACK_SHADOW
-  passive = Passive.NIGHT
 }
 
 export class Giratina extends Pokemon {
@@ -7275,7 +7274,6 @@ export class HooH extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_BLAST
-  passive = Passive.DROUGHT
 }
 
 export class RoaringMoon extends Pokemon {
@@ -7365,7 +7363,7 @@ export class PrimalGroudon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PRECIPICE_BLADES
-  passive = Passive.SANDSTORM
+  passive = Passive.DROUGHT_OR_SANDSTORM
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
   }
@@ -7387,7 +7385,7 @@ export class PrimalKyogre extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.ORIGIN_PULSE
-  passive = Passive.RAIN
+  passive = Passive.RAIN_OR_STORM
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
   }
