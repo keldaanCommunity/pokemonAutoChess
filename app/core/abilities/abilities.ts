@@ -2770,7 +2770,7 @@ export class SolarBeamStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = [25, 50, 100][pokemon.stars - 1] ?? 100
-    if (pokemon.simulation.weather === Weather.SUN || pokemon.status.light) {
+    if (pokemon.simulation.weather === Weather.ZENITH || pokemon.status.light) {
       damage = damage * 1.3
       pokemon.addPP(20, pokemon, 0, false)
     }
@@ -5288,8 +5288,8 @@ export class GrowthStrategy extends AbilityStrategy {
 
     let attackBuff = [3, 5, 7][pokemon.stars - 1] ?? 7
     let hpBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
-    if (pokemon.simulation.weather === Weather.SUN) {
-      attackBuff *= 2 // grows twice as fast if sunny weather
+    if (pokemon.simulation.weather === Weather.ZENITH) {
+      attackBuff *= 2 // grows twice as fast if zenith weather
       hpBuff *= 2
     }
     pokemon.addAttack(attackBuff, pokemon, 1, crit)
@@ -11807,9 +11807,9 @@ export class DarkLariatStrategy extends AbilityStrategy {
                 pokemon,
                 crit
               )
-              if (pokemon.effects.has(EffectEnum.VICTORY_STAR)) {
+              if (pokemon.effects.has(EffectEnum.WILDFIRE)) {
                 pokemon.addAttack(1, pokemon, 0, false)
-              } else if (pokemon.effects.has(EffectEnum.DROUGHT)) {
+              } else if (pokemon.effects.has(EffectEnum.BLAZE)) {
                 pokemon.addAttack(2, pokemon, 0, false)
               } else if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
                 pokemon.addAttack(3, pokemon, 0, false)
@@ -15615,6 +15615,29 @@ export class CityShuttleStrategy extends AbilityStrategy {
   }
 }
 
+export class BulletPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Deal [40,SP] TRUE to the target, then gain [50,SP] SPEED for 2 seconds.
+    const damage = 40
+    target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
+    const speedBuff =
+      40 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    pokemon.addSpeed(speedBuff, pokemon, 0, false)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.addSpeed(-speedBuff, pokemon, 0, false)
+      }, 2000)
+    )
+    pokemon.cooldown = 250
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16136,7 +16159,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.VOLT_SURGE]: new VoltSurgeStrategy(),
   [Ability.SUPERCELL_SLAM]: new SupercellSlamStrategy(),
   [Ability.HIGH_HORSEPOWER]: new HighHorsepowerStrategy(),
-  [Ability.CITY_SHUTTLE]: new CityShuttleStrategy()
+  [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
+  [Ability.BULLET_PUNCH]: new BulletPunchStrategy()
 }
 
 export function castAbility(

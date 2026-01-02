@@ -52,7 +52,8 @@ export const TownEncountersByStage: {
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
-    [Pkm.MAKUHITA]: 1 / 20
+    [Pkm.MAKUHITA]: 1 / 20,
+    [Pkm.CELEBI]: 1 / 40
   },
   17: {
     [Pkm.WOBBUFFET]: 1 / 20,
@@ -61,8 +62,7 @@ export const TownEncountersByStage: {
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.SABLEYE]: 1 / 20,
-    [Pkm.CELEBI]: 1 / 40
+    [Pkm.SABLEYE]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,

@@ -100,7 +100,8 @@ export function spawnDIAYAvatar(player: Player): Pokemon {
     avatar.addAttack(-Math.round(avatar.atk * (powerScore - 5) * 0.1))
   }
   const bonusHP = Math.round(150 - powerScore * 30)
-  avatar.hp = min(10)(avatar.hp + bonusHP)
+  avatar.maxHP = min(10)(avatar.maxHP + bonusHP)
+  avatar.hp = avatar.maxHP
   return avatar
 }
 

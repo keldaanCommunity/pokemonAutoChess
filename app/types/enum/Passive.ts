@@ -20,7 +20,7 @@ export enum Passive {
   SYNCHRO = "SYNCHRO",
   TADPOLE = "TADPOLE",
   BIVALVE = "BIVALVE",
-  SUN = "SUN",
+  DROUGHT = "DROUGHT",
   RAIN = "RAIN",
   SANDSTORM = "SANDSTORM",
   MISTY = "MISTY",

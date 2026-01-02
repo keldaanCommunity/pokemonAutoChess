@@ -9,12 +9,15 @@ import {
   FIGHTING_PHASE_DURATION,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
-  ItemProposalStages,
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
+  SHARDS_PER_SHINY_UNOWN_WANDERER,
+  SHARDS_PER_UNOWN_WANDERER,
+  SHINY_UNOWN_ENCOUNTER_CHANCE,
   StageDuration,
-  SynergyTriggers
+  SynergyTriggers,
+  UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
 import {
   OnItemDroppedEffect,
@@ -220,17 +223,17 @@ export class OnPokemonCatchCommand extends Command<
     if (wanderer.type === WandererType.UNOWN) {
       const unownIndex = PkmIndex[wanderer.pkm]
       if (client.auth) {
-        const DUST_PER_ENCOUNTER = 50
+        const shardsGained = wanderer.shiny ? SHARDS_PER_SHINY_UNOWN_WANDERER : SHARDS_PER_UNOWN_WANDERER
         const u = await UserMetadata.findOne({ uid: client.auth.uid })
         if (u) {
           const c = u.pokemonCollection.get(unownIndex)
           if (c) {
-            c.dust += DUST_PER_ENCOUNTER
+            c.dust += shardsGained
           } else {
             u.pokemonCollection.set(unownIndex, {
               id: unownIndex,
               unlocked: Buffer.alloc(5, 0),
-              dust: DUST_PER_ENCOUNTER,
+              dust: shardsGained,
               selectedEmotion: Emotion.NORMAL,
               selectedShiny: false,
               played: 0
@@ -1281,16 +1284,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.time =
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
 
-    // Item propositions stages
-    if (ItemProposalStages.includes(this.state.stageLevel)) {
-      this.state.players.forEach((player: Player) => {
-        resetArraySchema(
-          player.itemsProposition,
-          pickNRandomIn(ItemComponents, 3)
-        )
-      })
-    }
-
     if (
       [3, 15].includes(this.state.stageLevel) &&
       this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC
@@ -1870,14 +1863,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (cli) => cli.auth.uid === player.id
         )
         if (!client) return
-
-        const UNOWN_ENCOUNTER_CHANCE = 0.037
+        
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
           const pkm = pickRandomIn(Unowns)
+          const shiny = chance(SHINY_UNOWN_ENCOUNTER_CHANCE)
           const id = nanoid()
           const wanderer = new Wanderer({
             id,
             pkm,
+            shiny,
             type: WandererType.UNOWN,
             behavior: WandererBehavior.RUN_THROUGH
           })
@@ -1904,6 +1898,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             const wanderer = new Wanderer({
               id,
               pkm,
+              shiny: chance(0.01),
               type: WandererType.CATCHABLE,
               behavior: WandererBehavior.RUN_THROUGH
             })

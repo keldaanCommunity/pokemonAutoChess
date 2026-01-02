@@ -35,12 +35,14 @@ import { Item } from "../../../../types/enum/Item"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { randomBetween } from "../../../../utils/random"
 import { values } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
+import { getGameContainer } from "../../pages/game"
 import { playMusic } from "../../pages/utils/audio"
 import {
   transformBoardCoordinates,
@@ -1175,6 +1177,17 @@ export default class BoardManager {
           // switch to opponent map
 
           this.scene.setMap(opponent.map)
+
+          const simulation = this.scene?.room?.state.simulations.get(
+            this.player.simulationId
+          )
+          if (simulation && simulation.weather === Weather.DROUGHT) {
+            // postFX on tilemap layers, needs to be reapplied again if changing map
+            getGameContainer().handleWeatherChange(
+              simulation,
+              simulation.weather
+            )
+          }
 
           // move portal to the other side when spawning
           const [x, y] = transformBoardCoordinates(3.5, 2)

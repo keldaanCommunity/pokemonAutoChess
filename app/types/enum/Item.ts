@@ -130,6 +130,7 @@ export enum Item {
   BLOOD_STONE = "BLOOD_STONE",
   SMELLY_CLAY = "SMELLY_CLAY",
   ODD_KEYSTONE = "ODD_KEYSTONE",
+  SUN_STONE = "SUN_STONE",
   NORMAL_GEM = "NORMAL_GEM",
   GRASS_GEM = "GRASS_GEM",
   FIRE_GEM = "FIRE_GEM",
@@ -422,8 +423,7 @@ export const FishingRods = [
 
 export type FishingRod = (typeof FishingRods)[number]
 
-export const ItemComponents: Item[] = [
-  Item.FOSSIL_STONE,
+export const NonSpecialItemComponents: Item[] = [
   Item.TWISTED_SPOON,
   Item.MAGNET,
   Item.BLACK_GLASSES,
@@ -432,6 +432,11 @@ export const ItemComponents: Item[] = [
   Item.NEVER_MELT_ICE,
   Item.HEART_SCALE,
   Item.MYSTIC_WATER
+]
+
+export const ItemComponents: Item[] = [
+  ...NonSpecialItemComponents,
+  Item.FOSSIL_STONE
 ]
 
 export const ItemRecipe: { [key in Item]?: Item[] } = {
@@ -561,9 +566,10 @@ export const ShinyItems = [
 ] satisfies Item[]
 
 export const WeatherRocks = [
+  Item.SUN_STONE,
+  Item.HEAT_ROCK,
   Item.DAMP_ROCK,
   Item.ICY_ROCK,
-  Item.HEAT_ROCK,
   Item.SMOOTH_ROCK,
   Item.BLACK_AUGURITE,
   Item.FLOAT_STONE,
@@ -575,7 +581,8 @@ export const WeatherRocks = [
 ] satisfies Item[]
 
 export const WeatherRocksByWeather = new Map([
-  [Weather.SUN, Item.HEAT_ROCK],
+  [Weather.DROUGHT, Item.HEAT_ROCK],
+  [Weather.ZENITH, Item.SUN_STONE],
   [Weather.RAIN, Item.DAMP_ROCK],
   [Weather.SANDSTORM, Item.SMOOTH_ROCK],
   [Weather.SNOW, Item.ICY_ROCK],
@@ -792,17 +799,6 @@ export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
     [Item.AMORPHOUS_GEM]: Synergy.AMORPHOUS,
     [Item.GOURMET_GEM]: Synergy.GOURMET
   }
-
-export const NonSpecialItemComponents: Item[] = [
-  Item.TWISTED_SPOON,
-  Item.MAGNET,
-  Item.BLACK_GLASSES,
-  Item.MIRACLE_SEED,
-  Item.CHARCOAL,
-  Item.NEVER_MELT_ICE,
-  Item.HEART_SCALE,
-  Item.MYSTIC_WATER
-]
 
 export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
   (item) => SynergyGivenByItem.hasOwnProperty(item) === false

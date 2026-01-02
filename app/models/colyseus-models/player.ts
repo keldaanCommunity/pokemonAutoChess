@@ -741,6 +741,7 @@ export default class Player extends Schema implements IPlayer {
       id,
       new Wanderer({
         id,
+        shiny: false,
         pkm: Pkm.CHATOT,
         type: WandererType.SPECIAL,
         behavior: WandererBehavior.SPECTATE

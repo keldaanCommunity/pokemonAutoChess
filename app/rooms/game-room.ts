@@ -81,7 +81,7 @@ import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
-import { shuffleArray } from "../utils/random"
+import { chance, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
@@ -1362,7 +1362,7 @@ export default class GameRoom extends Room<GameState> {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    const wanderer = new Wanderer({ id, pkm, type, behavior })
+    const wanderer = new Wanderer({ id, pkm, type, behavior, shiny: chance(0.01) })
     player.wanderers.set(id, wanderer)
   }
 }

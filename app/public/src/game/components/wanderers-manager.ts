@@ -13,8 +13,9 @@ import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
+import { SHARDS_PER_SHINY_UNOWN_WANDERER,SHARDS_PER_UNOWN_WANDERER } from "../../../../config";
 
-const SHARDS_PER_UNOWN_WANDERER = 50
+
 const DEFAULT_WANDERER_SPEED = 0.25
 
 /*
@@ -48,7 +49,7 @@ export default class WanderersManager {
       wanderer,
       onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        this.displayShardGain([pointer.x, pointer.y], unownSprite.pokemon.index)
+        this.displayShardGain([pointer.x, pointer.y], unownSprite.pokemon.index, unownSprite.pokemon.shiny)
         unownSprite.destroy()
         return true
       }
@@ -164,7 +165,7 @@ export default class WanderersManager {
         this.scene,
         startX,
         startY,
-        PokemonFactory.createPokemonFromName(wanderer.pkm),
+        PokemonFactory.createPokemonFromName(wanderer.pkm, { shiny: wanderer.shiny }),
         "wanderer",
         false,
         false
@@ -228,11 +229,11 @@ export default class WanderersManager {
     return sprite
   }
 
-  displayShardGain(coordinates: number[], index: string) {
+  displayShardGain(coordinates: number[], index: string, shiny: boolean) {
     const textStyle = {
       fontSize: "25px",
       fontFamily: "Verdana",
-      color: "#fff",
+      color: shiny ? "#ffd700" : "#fff",
       align: "center",
       strokeThickness: 2,
       stroke: "#000"
@@ -248,7 +249,7 @@ export default class WanderersManager {
         this.scene,
         25,
         0,
-        SHARDS_PER_UNOWN_WANDERER.toString(),
+        (shiny ? SHARDS_PER_SHINY_UNOWN_WANDERER : SHARDS_PER_UNOWN_WANDERER).toString(),
         textStyle
       )
     )

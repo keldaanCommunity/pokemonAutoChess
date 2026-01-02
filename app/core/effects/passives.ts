@@ -937,7 +937,7 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
     entity.effectsSet.add(new DrySkinPeriodicEffect())
   } else if (entity.simulation.weather === Weather.SANDSTORM) {
     entity.addDodgeChance(0.25, entity, 0, false)
-  } else if (entity.simulation.weather === Weather.SUN) {
+  } else if (entity.simulation.weather === Weather.ZENITH) {
     entity.addAbilityPower(50, entity, 0, false)
   }
 }, Passive.DRY_SKIN)

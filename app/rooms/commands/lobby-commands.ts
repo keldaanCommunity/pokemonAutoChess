@@ -331,7 +331,7 @@ export class OpenBoosterCommand extends Command<
       if (!user) return
 
       // First, find the user and check if they have boosters
-      const userDoc = await UserMetadata.findOne({
+      let userDoc = await UserMetadata.findOne({
         uid: client.auth.uid,
         booster: { $gt: 0 }
       })
@@ -399,22 +399,29 @@ export class OpenBoosterCommand extends Command<
       })
 
       // Perform atomic update
-      const mongoUser = await UserMetadata.findOneAndUpdate(
-        { uid: client.auth.uid, booster: { $gt: 0 } },
-        updateOperations,
-        { new: true }
-      )
-
-      if (!mongoUser) return
+      await userDoc.updateOne(updateOperations)
+      userDoc = await UserMetadata.findOne({ uid: client.auth.uid }) // reload updated doc
+      if (!userDoc) {
+        logger.error(
+          `User document not found after opening booster: ${client.auth.uid}`
+        )
+        return
+      }
 
       // resync, db-authoritative
-      user.booster = mongoUser.booster
+      user.booster = userDoc.booster
       boosterContent.forEach((pkmWithCustom) => {
         const index = PkmIndex[pkmWithCustom.name]
         const pokemonCollectionItem = user.pokemonCollection.get(index)
-        const mongoPokemonCollectionItem =
-          mongoUser.pokemonCollection.get(index)
-        if (!mongoPokemonCollectionItem) return
+        const mongoPokemonCollectionItem = userDoc.pokemonCollection.get(index)
+        if (!mongoPokemonCollectionItem) {
+          logger.error(`Missing mongo collection item after booster open`, {
+            index,
+            pkmWithCustom,
+            clientUid: client.auth.uid
+          })
+          return
+        }
         if (pokemonCollectionItem) {
           pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust
           pokemonCollectionItem.unlocked = Buffer.copyBytesFrom(
@@ -439,10 +446,10 @@ export class OpenBoosterCommand extends Command<
         }
       })
 
-      await checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
-      await mongoUser.save()
+      await checkTitlesAfterEmotionUnlocked(userDoc, boosterContent)
+      await userDoc.save()
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
-      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
+      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(userDoc))
     } catch (error) {
       logger.error(error)
     }
