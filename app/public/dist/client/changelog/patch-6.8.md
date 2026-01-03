@@ -29,11 +29,13 @@
 
 # Changes to Synergies
 
+- New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
 
 # Changes to Items
 
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
+- Added Golden Pinap Berry, Golden Nanab Berry and Golden Razz Berry
 - New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to BURN with their attacks.
 - Heat stone changed: no longer has additional chance to BURN with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
@@ -60,3 +62,4 @@
 
 - Added Region tracking to statistic
 - Wandering Unown now have 5% chance to be shiny, giving 250 shards on capture instead of 50. Unown encounter chance: 3.7% → 3.3%
+- New title: Poffin Master - Cook a Poffin with 3 different golden berries in it

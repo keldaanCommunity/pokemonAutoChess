@@ -2155,6 +2155,7 @@
 		"INGRAIN": "Ingrain",
 		"GROWTH": "Growth",
 		"SPORE": "Spore",
+		"OVERGROW": "Overgrow",
 		"FLAME_BODY": "Flame Body",
 		"WILDFIRE": "Wildfire",
 		"BLAZE": "Blaze",
@@ -2271,6 +2272,7 @@
 		"INGRAIN": "Restore 5 HP every 2 seconds. Get a berry tree.",
 		"GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
 		"SPORE": "Restore 30 HP every 2 seconds. Get a third berry tree.",
+		"OVERGROW": "Once below 30% max HP, gain 50 AP. Your berry trees turn golden.",
 		"FLAME_BODY": "Attacks have [30,LK]% chance to inflict BURN for 3 seconds",
 		"WILDFIRE": "+1 ATK after every hit",
 		"BLAZE": "+2 ATK after every hit",
@@ -2453,6 +2455,9 @@
 		"ROWAP_BERRY": "Rowap Berry",
 		"SALAC_BERRY": "Salac Berry",
 		"SITRUS_BERRY": "Sitrus Berry",
+		"GOLDEN_PINAP_BERRY": "Golden Pinap Berry",
+		"GOLDEN_RAZZ_BERRY": "Golden Razz Berry",
+		"GOLDEN_NANAB_BERRY": "Golden Nanab Berry",
 		"COMFEY": "$t(pkm.COMFEY)",
 		"ELECTIRIZER": "Electirizer",
 		"MAGMARIZER": "Magmarizer",
@@ -2736,6 +2741,9 @@
 		"ROWAP_BERRY": "Consumed once below 50% HP, heal 50 HP and cast $t(ability.MAGIC_BOUNCE) for 10 seconds",
 		"SALAC_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 50 SPEED",
 		"SITRUS_BERRY": "Consumed once below 50% HP, heal 100 HP and increase all healing received by 30%",
+		"GOLDEN_PINAP_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 3 random SWEETS.",
+		"GOLDEN_RAZZ_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 6 free shop rerolls.",
+		"GOLDEN_NANAB_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 5 GOLD.",
 		"COMFEY": "Wears $t(pkm.COMFEY) and get its ability and all its base stats",
 		"ELECTIRIZER": "Gives ELECTRIC synergy. Every third attack inflicts PARALYSIS for 2 seconds.",
 		"MAGMARIZER": "Gives FIRE synergy. The holder doesn't suffer from BURN. Instead, it gains 30 SPEED when burning.",
@@ -3368,7 +3376,8 @@
 		"VICTORIOUS": "Victorious",
 		"MOLE": "Mole",
 		"BLOSSOMED": "Blossomed",
-		"AQUARIOPHILE": "Aquariophile"
+		"AQUARIOPHILE": "Aquariophile",
+		"POFFIN_MASTER": "Poffin Master"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3456,7 +3465,8 @@
 		"VICTORIOUS": "Finish first at the Victory Road race",
 		"MOLE": "Dig out your entire board completely",
 		"BLOSSOMED": "Get 5 fully grown flower pots",
-		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team"
+		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team",
+		"POFFIN_MASTER": "Cook a Poffin with 3 different golden berries in it"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",

@@ -25,9 +25,9 @@ import {
   Team
 } from "../types/enum/Game"
 import {
-  Berries,
   CraftableItems,
   Item,
+  NonSpecialBerries,
   SynergyStones,
   WeatherRocksByWeather
 } from "../types/enum/Item"
@@ -68,6 +68,7 @@ import {
   MonsterKillEffect,
   OnFieldDeathEffect,
   onFlowerMonDeath,
+  overgrowEffect,
   SoundCryEffect
 } from "./effects/synergies"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
@@ -402,7 +403,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
-      pokemon.items.add(pickRandomIn(CraftableItems.concat(Berries)))
+      pokemon.items.add(pickRandomIn(CraftableItems.concat(NonSpecialBerries)))
     }
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
@@ -926,62 +927,31 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.INGRAIN:
-        if (types.has(Synergy.GRASS)) {
-          pokemon.effects.add(EffectEnum.INGRAIN)
-        }
-        break
-
       case EffectEnum.GROWTH:
-        if (types.has(Synergy.GRASS)) {
-          pokemon.effects.add(EffectEnum.GROWTH)
-        }
-        break
-
       case EffectEnum.SPORE:
+      case EffectEnum.OVERGROW:
         if (types.has(Synergy.GRASS)) {
-          pokemon.effects.add(EffectEnum.SPORE)
+          pokemon.effects.add(effect)
+          if (effect === EffectEnum.OVERGROW) {
+            pokemon.effectsSet.add(overgrowEffect)
+          }
         }
         break
 
       case EffectEnum.RAIN_DANCE:
-        if (types.has(Synergy.WATER)) {
-          pokemon.effects.add(EffectEnum.RAIN_DANCE)
-        }
-        break
-
       case EffectEnum.DRIZZLE:
-        if (types.has(Synergy.WATER)) {
-          pokemon.effects.add(EffectEnum.DRIZZLE)
-        }
-        break
-
       case EffectEnum.PRIMORDIAL_SEA:
         if (types.has(Synergy.WATER)) {
-          pokemon.effects.add(EffectEnum.PRIMORDIAL_SEA)
+          pokemon.effects.add(effect)
         }
         break
 
       case EffectEnum.STAMINA:
-        if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.STAMINA)
-        }
-        break
-
       case EffectEnum.STRENGTH:
-        if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.STRENGTH)
-        }
-        break
-
       case EffectEnum.ENDURE:
-        if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.ENDURE)
-        }
-        break
-
       case EffectEnum.PURE_POWER:
         if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.PURE_POWER)
+          pokemon.effects.add(effect)
         }
         break
 
