@@ -25,11 +25,11 @@ import {
 } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  Berries,
   HMs,
   Item,
   ItemComponents,
   MissionOrder,
+  NonSpecialBerries,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
@@ -114,9 +114,9 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
   @type(["string"]) berryTreesType: Item[] = [
-    pickRandomIn(Berries),
-    pickRandomIn(Berries),
-    pickRandomIn(Berries)
+    pickRandomIn(NonSpecialBerries),
+    pickRandomIn(NonSpecialBerries),
+    pickRandomIn(NonSpecialBerries)
   ]
   @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
   @type([Pokemon]) flowerPots: Pokemon[] = []

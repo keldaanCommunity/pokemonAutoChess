@@ -828,17 +828,15 @@ export default abstract class PokemonState {
       pokemon.toIdleState()
     }
 
-    if (
-      pokemon.effects.has(EffectEnum.INGRAIN) ||
-      pokemon.effects.has(EffectEnum.GROWTH) ||
-      pokemon.effects.has(EffectEnum.SPORE)
-    ) {
+    if (pokemon.hasSynergyEffect(Synergy.GRASS)) {
       if (pokemon.grassHealCooldown - dt <= 0) {
-        const heal = pokemon.effects.has(EffectEnum.SPORE)
-          ? 30
-          : pokemon.effects.has(EffectEnum.GROWTH)
-            ? 15
-            : 5
+        const heal =
+          pokemon.effects.has(EffectEnum.SPORE) ||
+          pokemon.effects.has(EffectEnum.OVERGROW)
+            ? 30
+            : pokemon.effects.has(EffectEnum.GROWTH)
+              ? 15
+              : 5
         pokemon.handleHeal(heal, pokemon, 0, false)
         pokemon.grassHealCooldown = 2000
         pokemon.broadcastAbility({ skill: "GRASS_HEAL" })

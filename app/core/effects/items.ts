@@ -15,6 +15,7 @@ import {
   Item,
   ItemRecipe,
   MemoryDiscs,
+  NonSpecialBerries,
   OgerponMasks,
   Sweets,
   SynergyGivenByItem,
@@ -316,7 +317,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (dish && nbDishes > 0) {
     let dishes = Array.from({ length: nbDishes }, () => dish!)
     if (dish === Item.BERRIES) {
-      dishes = pickNRandomIn(Berries, 3 * nbDishes)
+      dishes = pickNRandomIn(NonSpecialBerries, 3 * nbDishes)
     }
     if (dish === Item.SWEETS) {
       dishes = pickNRandomIn(Sweets, nbDishes)

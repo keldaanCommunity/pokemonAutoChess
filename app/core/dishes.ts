@@ -1,8 +1,9 @@
+import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Berries, Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
-import { max, min } from "../utils/number"
+import { max } from "../utils/number"
 import { chance } from "../utils/random"
 import { values } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -208,6 +209,16 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   POFFIN: [
     new OnSpawnEffect((entity) => {
       entity.addShield(100, entity, 0, false)
+
+      if (
+        entity.player &&
+        entity.items.has(Item.GOLDEN_NANAB_BERRY) &&
+        entity.items.has(Item.GOLDEN_PINAP_BERRY) &&
+        entity.items.has(Item.GOLDEN_RAZZ_BERRY)
+      ) {
+        entity.player.titles.add(Title.POFFIN_MASTER)
+      }
+
       values(entity.items)
         .filter((item) => Berries.includes(item))
         .forEach((item) => {

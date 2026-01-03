@@ -79,6 +79,9 @@ export enum Item {
   ROWAP_BERRY = "ROWAP_BERRY",
   SALAC_BERRY = "SALAC_BERRY",
   SITRUS_BERRY = "SITRUS_BERRY",
+  GOLDEN_RAZZ_BERRY = "GOLDEN_RAZZ_BERRY",
+  GOLDEN_NANAB_BERRY = "GOLDEN_NANAB_BERRY",
+  GOLDEN_PINAP_BERRY = "GOLDEN_PINAP_BERRY",
   COMFEY = "COMFEY",
   ELECTIRIZER = "ELECTIRIZER",
   MAGMARIZER = "MAGMARIZER",
@@ -487,7 +490,7 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
 }
 
-export const Berries: Item[] = [
+export const NonSpecialBerries: Item[] = [
   Item.AGUAV_BERRY,
   Item.APICOT_BERRY,
   Item.ASPEAR_BERRY,
@@ -509,6 +512,14 @@ export const Berries: Item[] = [
   Item.SALAC_BERRY,
   Item.SITRUS_BERRY
 ]
+
+export const SpecialBerries: Item[] = [
+  Item.GOLDEN_RAZZ_BERRY,
+  Item.GOLDEN_NANAB_BERRY,
+  Item.GOLDEN_PINAP_BERRY
+]
+
+export const Berries = [...NonSpecialBerries, ...SpecialBerries]
 
 export const Tools = [
   Item.LIGHT_BALL,
