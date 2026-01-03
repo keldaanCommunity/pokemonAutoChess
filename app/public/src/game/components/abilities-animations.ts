@@ -1051,6 +1051,7 @@ export const AbilitiesAnimations: {
     onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
     shakeCamera({})
   ],
+  [Ability.EAR_DIG]: [onTarget({ ability: Ability.HEAVY_SLAM, scale: 1 })],
   [Ability.FAKE_OUT]: onCaster({ ability: Ability.FACADE }),
   [Ability.FILLET_AWAY]: onCaster({ ability: Ability.SHIELDS_UP }),
   [Ability.BITTER_BLADE]: onCasterScale3,

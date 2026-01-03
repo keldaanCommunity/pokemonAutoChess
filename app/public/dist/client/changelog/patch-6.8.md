@@ -4,6 +4,8 @@
 - Mudsdale
 - Skiddo
 - Gogoat
+- Bunnelby
+- Diggersby
 
 # Changes to Pokemon & Abilities
 
@@ -26,6 +28,8 @@
 - Ho-Oh no longer changes weather to Drought.
 - Lugia no longer changes weather to Windy.
 - XD001 no longer changes weather to Night.
+- Paldean Wooper is now exclusive to Poison regions
+- Nerf Wiglett line: PP 80 → 100
 
 # Changes to Synergies
 
