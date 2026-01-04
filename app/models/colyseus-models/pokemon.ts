@@ -7228,6 +7228,7 @@ export class ShayminSky extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SEED_FLARE
+  passive = Passive.ZENITH
 }
 
 export class Cresselia extends Pokemon {

@@ -69,7 +69,7 @@ export default function WikiWeather() {
 }
 
 const pokemonsInfluencingWeather = new Map([
-  [Weather.ZENITH, [Pkm.CASTFORM_SUN]],
+  [Weather.ZENITH, [Pkm.SHAYMIN_SKY, Pkm.CASTFORM_SUN]],
   [
     Weather.DROUGHT,
     [Pkm.PRIMAL_GROUDON, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]

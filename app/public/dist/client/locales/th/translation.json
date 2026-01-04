@@ -597,6 +597,7 @@
 		"SYNCHRO": "หากโปเกมอนได้รับสถานะ POISONNED, BURN, WOUND หรือ SILENCE, เป้าหมายที่ใช้จะได้รับสถานะเดียวกัน",
 		"TADPOLE": "Poliwhirl จะแปลงร่างเป็น Poliwrath หากวางไว้แนวหน้าของกระดาน, และเป็น Politoed ในทางตรงกันข้าม",
 		"DROUGHT": "เปลี่ยนสภาพอากาศเป็น DROUGHT",
+		"ZENITH": "เปลี่ยนสภาพอากาศเป็น ZENITH",
 		"RAIN": "เปลี่ยนสภาพอากาศเป็น RAIN",
 		"SANDSTORM": "เปลี่ยนสภาพอากาศเป็น SANDSTORM",
 		"MISTY": "เปลี่ยนสภาพอากาศเป็น MISTY",

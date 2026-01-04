@@ -2960,6 +2960,7 @@
 		"TADPOLE": "$t(pkm.POLIWHIRL) évoluera en $t(pkm.POLIWRATH) s'il est placé en première ligne, sinon $t(pkm.POLITOED).",
 		"BIVALVE": "$t(pkm.CLAMPERL) évoluera en $t(pkm.HUNTAIL) ou $t(pkm.GOREBYSS) selon votre synergie dominante entre DARK et PSYCHIC.",
 		"DROUGHT": "Change la météo en DROUGHT.",
+		"ZENITH": "Change la météo en ZENITH.",
 		"RAIN": "Change la météo en RAIN.",
 		"SANDSTORM": "Change la météo en SANDSTORM.",
 		"MISTY": "Change la météo en MISTY.",
