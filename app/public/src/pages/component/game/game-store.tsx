@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
-import PokemonFactory, {
-  isSameFamily
-} from "../../../../../models/pokemon-factory"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { isSameFamily } from "../../../../../models/pokemon-factory"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { shopClick } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
