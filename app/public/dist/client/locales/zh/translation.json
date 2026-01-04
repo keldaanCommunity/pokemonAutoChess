@@ -1911,7 +1911,7 @@
 		"BODY_SLAM": "对目标造成SPECIAL，数值相当于使用者[30,SP]%的最大HP。",
 		"STOCKPILE": "使用者使自身充气，提升[50,SP]点最大HP但降低10点SPEED。叠加3次后，将积蓄的力量喷出，对目标造成SPECIAL，数值相当于[50,SP]%的最大HP，并将使用者推回后排，同时自身的最大HP和SPEED恢复至基础值。",
 		"BARB_BARRAGE": "潜水至敌方阵型中间，随后对所有ADJACENT敌方宝可梦造成[15,30,45,60,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
-		"MAGIC_POWDER": "获得[10,20,40,SP]点SHIELD，并使ADJACENT敌方宝可梦陷入SILENCE [2,3,4]秒。",
+		"MAGIC_POWDER": "获得[15,30,60,SP]点SHIELD，并使ADJACENT敌方宝可梦陷入SILENCE [2,3,4]秒。",
 		"INFERNAL_PARADE": "对最远的敌方宝可梦发射一个会飞回的火焰轮，对所有击中的敌方宝可梦造成两次[30,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入BURN 3秒。",
 		"RETALIATE": "对目标造成SPECIAL，数值相当于[150,SP]%的ATK。每有一只倒下的我方宝可梦，额外造成一次。",
 		"SLASH": "对目标造成[10,20,40,SP]点SPECIAL。该招式可以暴击，且CRIT_CHANCE额外提升[30,60,90]%。",
