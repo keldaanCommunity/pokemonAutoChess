@@ -3114,7 +3114,7 @@
 		"ROTOM": "洛托姆可以通过选择ROTOM_CATALOG中的一件新家电以潜入来更改形态。",
 		"GEARS": "此宝可梦的齿轮旋转时会持续产生能量，每[3,2,1]秒使我方宝可梦提升1点SPEED。",
 		"ORTHWORM": "挖洞时永久提升5点HP。",
-		"TADBULB": "每当受到50点伤害或在战斗开始时被LIGHT共鸣的聚光灯照射，便会对ADJACENT敌方宝可梦造成30点SPECIAL并将他们击退。首次触发此效果时还会进入增压状态，提升30点SPEED并获得50点SHIELD和ELECTRIC_FIELD。",
+		"TADBULB": "每当受到50点伤害或在战斗开始时被LIGHT共鸣的聚光灯照射，便会对ADJACENT敌方宝可梦造成10点SPECIAL并将他们击退（3秒冷却时间）。首次触发此效果时还会进入增压状态，提升20点SPEED并获得30点SHIELD和ELECTRIC_FIELD。",
 		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。",
 		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD"
 	},

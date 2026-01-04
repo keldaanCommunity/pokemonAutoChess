@@ -1008,11 +1008,22 @@ const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
   pokemon.addStack()
 }
 
-const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
+const superchargeTadbulb = (
+  pokemon: PokemonEntity & { lastSuperchargeTime?: number },
+  board: Board
+) => {
+  if (
+    pokemon.lastSuperchargeTime &&
+    Date.now() - pokemon.lastSuperchargeTime < 3000
+  ) {
+    return
+  }
+  pokemon.lastSuperchargeTime = Date.now()
+
   if (pokemon.status.electricField === false) {
     pokemon.status.electricField = true
-    pokemon.addSpeed(30, pokemon, 0, false)
-    pokemon.addShield(50, pokemon, 0, false)
+    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addShield(30, pokemon, 0, false)
     pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
   }
   board
@@ -1039,7 +1050,7 @@ const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
         }
 
         cell.value.handleDamage({
-          damage: 30,
+          damage: 10,
           board,
           attackType: AttackType.SPECIAL,
           attacker: pokemon,

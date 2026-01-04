@@ -38,7 +38,7 @@
 - Buff Beldum line: Defense 8/12/16 → 12/18/24
 - Nerf Mind Blown (Blacephalon): damage and shield per firework: 30 → 20
 - Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
-
+- Nerf Bellibolt: passive damage 30 → 10 ; first supercharge gives 30 → 20 speed and 50 → 30 shield. Added a 3 seconds cooldown between passive procs.
 
 # Changes to Synergies
 

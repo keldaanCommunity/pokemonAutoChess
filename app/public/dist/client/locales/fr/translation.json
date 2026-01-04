@@ -3108,7 +3108,7 @@
 		"ROTOM": "Motisma peut changer de forme en choisissant un nouvel appareil à posséder dans le ROTOM_CATALOG.",
 		"GEARS": "Pendant que ses engrenages tournent, cela génère de l'énergie qui octroie 1 SPEED toutes les [3,2,1] secondes à votre équipe.",
 		"ORTHWORM": "En creusant un trou, gagne 5 HP de façon permanente.",
-		"TADBULB": "Lorsqu'il démarre sous la LIGHT ou quand il subit 50 dégâts ou plus, entre en surcharge et inflige 30 SPECIAL aux ennemis ADJACENT qui sont également repoussés. La première surcharge donne 30 SPEED, 50 SHIELD et un ELECTRIC_FIELD.",
+		"TADBULB": "Lorsqu'il démarre sous la LIGHT ou quand il subit 50 dégâts ou plus, entre en surcharge et inflige 10 SPECIAL aux ennemis ADJACENT qui sont également repoussés (3 secondes de temps de recharge). La première surcharge donne 20 SPEED, 30 SHIELD et un ELECTRIC_FIELD.",
 		"PINCURCHIN": "Lorsqu'il est touché par des SPECIAL, il gagne un ELECTRIC_FIELD. Sous l'effet d'un ELECTRIC_FIELD, les attaques reçues au corps à corps infligent PARALYSIS à l'attaquant pendant 2 secondes."
 	},
 	"stat": {
