@@ -139,6 +139,7 @@ export default config({
               "https://*.firebaseapp.com",
               "https://apis.google.com",
               "https://*.googleapis.com",
+              "https://*.doubleclick.net", // google ads, required for youtube embedded
               "https://*.githubusercontent.com",
               "http://raw.githubusercontent.com",
               "https://*.youtube.com",
@@ -155,7 +156,8 @@ export default config({
               "'unsafe-inline'",
               "'unsafe-eval'",
               "https://apis.google.com",
-              "https://*.googleapis.com"
+              "https://*.googleapis.com",
+              "https://*.doubleclick.net" // google ads, required for youtube embedded
             ],
             imgSrc: [
               "'self'",

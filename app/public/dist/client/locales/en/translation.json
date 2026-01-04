@@ -541,7 +541,8 @@
 		"HIGH_HORSEPOWER": "High Horsepower",
 		"CITY_SHUTTLE": "City Shuttle",
 		"BULLET_PUNCH": "Bullet Punch",
-		"EAR_DIG": "Ear Dig"
+		"EAR_DIG": "Ear Dig",
+		"POWDER_SNOW": "Powder Snow"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2149,7 +2150,8 @@
 		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL",
 		"CITY_SHUTTLE": "Leap to the closest ally and saddle them on the user's back, then dash to the farthest enemy reachable. Deal [10,20,30,SP] SPECIAL + 100% of the carried ally's ATK to all enemy Pokémon in the path. Grant [20,40,80,SP] SHIELD to the user and the carried ally.",
 		"BULLET_PUNCH": "Deal [40,SP] TRUE to the target, then gain [40,SP] SPEED for 2 seconds.",
-		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them."
+		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
+		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2471,7 +2473,7 @@
 		"METRONOME": "Metronome",
 		"METAL_COAT": "Metal Coat",
 		"AIR_BALLOON": "Air Balloon",
-		"HARD_STONE": "Hard Stone",
+		"PROTECTOR": "Protector",
 		"EXPLORER_KIT": "Explorer Kit",
 		"INCENSE": "Incense",
 		"EXP_SHARE": "Exp. Share",
@@ -2757,7 +2759,7 @@
 		"METRONOME": "Gives SOUND synergy. Every second, the holder gains 5 PP.",
 		"METAL_COAT": "Gives STEEL synergy.",
 		"AIR_BALLOON": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to any BOARD_EFFECT.",
-		"HARD_STONE": "Gives ROCK synergy.",
+		"PROTECTOR": "Gives ROCK synergy.",
 		"EXPLORER_KIT": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground.",
 		"INCENSE": "Gives FLORA synergy. Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder.",
 		"TERRAIN_EXTENDER": "At the start of the fight, holder gains either ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD or FAIRY_FIELD based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy.",
@@ -2982,6 +2984,7 @@
 		"TADPOLE": "Poliwhirl will evolve into Poliwrath if placed on the frontlane, Politoed otherwise",
 		"BIVALVE": "Clamperl will evolve into Huntail or Gorebyss depending on your dominant synergy between DARK and PSYCHIC",
 		"DROUGHT": "Change weather to DROUGHT",
+		"ZENITH": "Change weather to ZENITH",
 		"RAIN": "Change weather to RAIN",
 		"SANDSTORM": "Change weather to SANDSTORM",
 		"MISTY": "Change weather to MISTY",
@@ -3743,6 +3746,10 @@
 	"lvl": "Lvl",
 	"xp": "XP",
 	"experience": "Experience",
+	"gold_needed_to_level_up": "Gold needed to level up: ",
+	"clicks_one": "{{count}} click",
+	"clicks_other": "{{count}} clicks",
+	"max_level_reached": "Maximum level reached",
 	"lose_game_hint": "You lose the game when you have no more Health Points",
 	"unlock": "Unlock",
 	"lock": "Lock",

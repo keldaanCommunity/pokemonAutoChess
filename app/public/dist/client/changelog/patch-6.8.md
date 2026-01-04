@@ -40,6 +40,8 @@
 - Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
 - Nerf Bellibolt: passive damage 30 → 10 ; first supercharge gives 30 → 20 speed and 50 → 30 shield. Added a 3 seconds cooldown between passive procs.
 - Buff Magic Powder (Hatenna): Shield 10/20/40 → 15/30/60
+- New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
+- New passive for Shaymin Sky form: change weather to Zenith
 
 # Changes to Synergies
 
@@ -49,6 +51,7 @@
 # Changes to Items
 
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
+- Hard Stone is renamed to Protector. No change to the effect.
 - Added Golden Pinap Berry, Golden Nanab Berry and Golden Razz Berry
 - New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to BURN with their attacks.
 - Heat stone changed: no longer has additional chance to BURN with their attacks. Instead, your Pokémon gain 3 Attack.
@@ -65,6 +68,7 @@
 
 - Added Region report, diplaying region by region statistic
 - Current game mode is now displayed in the game top bar
+- Added a tooltip on the experience bar to show gold needed to level up and number of clicks required
 
 # Bugfix
 
