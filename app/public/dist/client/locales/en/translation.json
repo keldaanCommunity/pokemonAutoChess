@@ -540,7 +540,9 @@
 		"SUPERCELL_SLAM": "Supercell Slam",
 		"HIGH_HORSEPOWER": "High Horsepower",
 		"CITY_SHUTTLE": "City Shuttle",
-		"BULLET_PUNCH": "Bullet Punch"
+		"BULLET_PUNCH": "Bullet Punch",
+		"EAR_DIG": "Ear Dig",
+		"POWDER_SNOW": "Powder Snow"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1624,7 +1626,9 @@
 		"MUDBRAY": "Mudbray",
 		"MUDSDALE": "Mudsdale",
 		"SKIDDO": "Skiddo",
-		"GOGOAT": "Gogoat"
+		"GOGOAT": "Gogoat",
+		"BUNNELBY": "Bunnelby",
+		"DIGGERSBY": "Diggersby"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1734,7 +1738,7 @@
 		"WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with PARALYSIS for 3 seconds.",
 		"ELECTRIC_SURGE": "Increase the SPEED of all ELECTRIC allies by [10,SP] except the user.",
 		"PSYCHIC_SURGE": "Increase the AP of all PSYCHIC allies by [20,SP] except the user.",
-		"MIND_BLOWN": "Throws its head in the air, which then explodes into [5,SP] fireworks. The user sacrifies 50% of its max HP in the process. Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color:\n- Pink: Deal 30 PHYSICAL and BURN for 5 seconds .\n- Blue: Deal 30 SPECIAL and FATIGUE for 5 seconds.\n- Yellow: Deal 30 TRUE and FLINCH for 5 seconds.\n- White: Give 30 SHIELD and cure status afflictions for allies.",
+		"MIND_BLOWN": "Throws its head in the air, which then explodes into [5,SP] fireworks. The user sacrifies 50% of its max HP in the process. Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color:\n- Pink: Deal 20 PHYSICAL and BURN for 5 seconds .\n- Blue: Deal 20 SPECIAL and FATIGUE for 5 seconds.\n- Yellow: Deal 20 TRUE and FLINCH for 5 seconds.\n- White: Give 20 SHIELD and cure status afflictions for allies.",
 		"PAYDAY": "Deals [30,60,90,SP] SPECIAL. If the target is KO'd, the allied player receives [1,2,3] GOLD.",
 		"PICKUP": "Deals [30,60,120,SP] SPECIAL and steal one item from the target if possible, otherwise steal [1,2,3] GOLD from its owner.",
 		"BEAT_UP": "Summon [1,2,3] Houndour ([100,SP]% HP, no items).",
@@ -1864,7 +1868,7 @@
 		"ASTRAL_BARRAGE": "Send [7,SP] small ghosts toward random enemy Pokémon, each dealing 20 SPECIAL.",
 		"WATERFALL": "Gain [50,100,150,SP] SHIELD, cure any negative status conditions and clear the tile of all BOARD_EFFECT.",
 		"PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest enemy Pokémon, dealing [10,20,40,SP] SPECIAL and applying BURN for 2 seconds to all enemy Pokémon in its path.",
-		"WHIRLPOOL": "Unleash a hail of 4 whirlpools toward the farthest enemy Pokémon, each dealing [125,SP]% ATK SPECIAL to the first enemy Pokémon in their path.",
+		"WHIRLPOOL": "Unleash a hail of 4 whirlpools toward the farthest enemy Pokémon, each dealing [100,SP]% ATK SPECIAL to the first enemy Pokémon in their path.",
 		"SMOKE_SCREEN": "Channel underground and reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokémon and applying smoke to the back row, making enemies BLINDED.",
 		"PRESENT": "Either deal [80,SP], [150,SP] or [300,SP] SPECIAL to the target, or heal them for 50 HP, based on your LUCK.",
 		"LEAF_BLADE": "The user's next attack is a guaranteed critical hit dealing [100,SP]% of ATK as TRUE.",
@@ -1908,7 +1912,7 @@
 		"BODY_SLAM": "Deal [30,SP]% of the user's max HP as SPECIAL to the target.",
 		"STOCKPILE": "The user inflates itself, gaining [50,SP] max HP and losing 10 SPEED. After 3 casts, spit up, dealing [50,SP] % of max HP as SPECIAL to the target and propelling the user to the backline while retrieving its base max HP and SPEED.",
 		"BARB_BARRAGE": "Dive into the middle of the enemy team, dealing [15,30,45,60,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with POISONNED for 3 seconds.",
-		"MAGIC_POWDER": "Gain [10,20,40,SP] SHIELD and SILENCE ADJACENT enemy Pokémon for [2,3,4] seconds.",
+		"MAGIC_POWDER": "Gain [15,30,60,SP] SHIELD and SILENCE ADJACENT enemy Pokémon for [2,3,4] seconds.",
 		"INFERNAL_PARADE": "Shoot a returning Flame Wheel at farthest enemy, dealing [30, SP] SPECIAL twice to all enemy Pokémon in its path with a [50,LK]% chance to apply BURN for 3s.",
 		"RETALIATE": "Deal [150,SP]% of ATK as SPECIAL to the target, + 1 additional hit for each fallen allied Pokémon.",
 		"SLASH": "Deal [10,20,40,SP] SPECIAL to the target with a [30,60,90]% increased CRIT_CHANCE ratio. Can crit by default.",
@@ -2145,7 +2149,9 @@
 		"SUPERCELL_SLAM": "Jump and land in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokemon and gaining [10,20,40,SP] SHIELD",
 		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL",
 		"CITY_SHUTTLE": "Leap to the closest ally and saddle them on the user's back, then dash to the farthest enemy reachable. Deal [10,20,30,SP] SPECIAL + 100% of the carried ally's ATK to all enemy Pokémon in the path. Grant [20,40,80,SP] SHIELD to the user and the carried ally.",
-		"BULLET_PUNCH": "Deal [40,SP] TRUE to the target, then gain [40,SP] SPEED for 2 seconds."
+		"BULLET_PUNCH": "Deal [40,SP] TRUE to the target, then gain [40,SP] SPEED for 2 seconds.",
+		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
+		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2155,6 +2161,7 @@
 		"INGRAIN": "Ingrain",
 		"GROWTH": "Growth",
 		"SPORE": "Spore",
+		"OVERGROW": "Overgrow",
 		"FLAME_BODY": "Flame Body",
 		"WILDFIRE": "Wildfire",
 		"BLAZE": "Blaze",
@@ -2271,6 +2278,7 @@
 		"INGRAIN": "Restore 5 HP every 2 seconds. Get a berry tree.",
 		"GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
 		"SPORE": "Restore 30 HP every 2 seconds. Get a third berry tree.",
+		"OVERGROW": "Once below 30% max HP, gain 50 AP. Your berry trees turn golden.",
 		"FLAME_BODY": "Attacks have [30,LK]% chance to inflict BURN for 3 seconds",
 		"WILDFIRE": "+1 ATK after every hit",
 		"BLAZE": "+2 ATK after every hit",
@@ -2453,6 +2461,9 @@
 		"ROWAP_BERRY": "Rowap Berry",
 		"SALAC_BERRY": "Salac Berry",
 		"SITRUS_BERRY": "Sitrus Berry",
+		"GOLDEN_PINAP_BERRY": "Golden Pinap Berry",
+		"GOLDEN_RAZZ_BERRY": "Golden Razz Berry",
+		"GOLDEN_NANAB_BERRY": "Golden Nanab Berry",
 		"COMFEY": "$t(pkm.COMFEY)",
 		"ELECTIRIZER": "Electirizer",
 		"MAGMARIZER": "Magmarizer",
@@ -2736,6 +2747,9 @@
 		"ROWAP_BERRY": "Consumed once below 50% HP, heal 50 HP and cast $t(ability.MAGIC_BOUNCE) for 10 seconds",
 		"SALAC_BERRY": "Consumed once below 50% HP, heal 50 HP and gain 50 SPEED",
 		"SITRUS_BERRY": "Consumed once below 50% HP, heal 100 HP and increase all healing received by 30%",
+		"GOLDEN_PINAP_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 3 random SWEETS.",
+		"GOLDEN_RAZZ_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 6 free shop rerolls.",
+		"GOLDEN_NANAB_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 5 GOLD.",
 		"COMFEY": "Wears $t(pkm.COMFEY) and get its ability and all its base stats",
 		"ELECTIRIZER": "Gives ELECTRIC synergy. Every third attack inflicts PARALYSIS for 2 seconds.",
 		"MAGMARIZER": "Gives FIRE synergy. The holder doesn't suffer from BURN. Instead, it gains 30 SPEED when burning.",
@@ -2970,6 +2984,7 @@
 		"TADPOLE": "Poliwhirl will evolve into Poliwrath if placed on the frontlane, Politoed otherwise",
 		"BIVALVE": "Clamperl will evolve into Huntail or Gorebyss depending on your dominant synergy between DARK and PSYCHIC",
 		"DROUGHT": "Change weather to DROUGHT",
+		"ZENITH": "Change weather to ZENITH",
 		"RAIN": "Change weather to RAIN",
 		"SANDSTORM": "Change weather to SANDSTORM",
 		"MISTY": "Change weather to MISTY",
@@ -2977,11 +2992,13 @@
 		"STORM": "Change weather to STORM",
 		"NIGHT": "Change weather to NIGHT",
 		"WINDY": "Change weather to WINDY",
-		"LUGIA": "Lugia changes weather to WINDY and looks for a DUSK_STONE",
+		"LUGIA": "Lugia looks for a DUSK_STONE",
 		"LANDORUS": "Change weather to SANDSTORM or WINDY based on your dominant synergy between GROUND and FLYING",
 		"THUNDURUS": "Change weather to STORM or WINDY based on your dominant synergy between ELECTRIC and FLYING",
 		"TORNADUS": "Change weather to WINDY or SNOW based on your dominant synergy between FLYING and ICE",
 		"ENAMORUS": "Change weather to MISTY or WINDY based on your dominant synergy between FAIRY and FLYING",
+		"DROUGHT_OR_SANDSTORM": "Change weather to DROUGHT or SANDSTORM based on your dominant synergy between FIRE and GROUND",
+		"RAIN_OR_STORM": "Change weather to RAIN or STORM based on your dominant synergy between WATER and ELECTRIC",
 		"AIRLOCK": "Change weather to NEUTRAL",
 		"SHARED_VISION": "Shared Vision: All Pokémon with Shared Vision will attack the same target, if at range",
 		"WATER_SPRING": "Whenever an enemy uses their ability, gain 5 PP",
@@ -3118,7 +3135,7 @@
 		"ROTOM": "Rotom can change forms by choosing a new appliance to possess from the ROTOM_CATALOG.",
 		"GEARS": "While its gears spin, it generates energy and grant 1 SPEED every [3,2,1] seconds to your team.",
 		"ORTHWORM": "When digging a hole, gains 5 HP permanently.",
-		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal 30 SPECIAL to ADJACENT enemies that are also knocked back. First supercharge gives 30 SPEED, 50 SHIELD and ELECTRIC_FIELD.",
+		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal 10 SPECIAL to ADJACENT enemies that are also knocked back (3 seconds cooldown). First supercharge gives 20 SPEED, 30 SHIELD and ELECTRIC_FIELD.",
 		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds.",
 		"STAMINA": "Every 10 hits received, gain [20,SP] SHIELD"
 	},
@@ -3366,7 +3383,8 @@
 		"VICTORIOUS": "Victorious",
 		"MOLE": "Mole",
 		"BLOSSOMED": "Blossomed",
-		"AQUARIOPHILE": "Aquariophile"
+		"AQUARIOPHILE": "Aquariophile",
+		"POFFIN_MASTER": "Poffin Master"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3454,7 +3472,8 @@
 		"VICTORIOUS": "Finish first at the Victory Road race",
 		"MOLE": "Dig out your entire board completely",
 		"BLOSSOMED": "Get 5 fully grown flower pots",
-		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team"
+		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team",
+		"POFFIN_MASTER": "Cook a Poffin with 3 different golden berries in it"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",

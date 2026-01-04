@@ -191,6 +191,30 @@ export function getWeather(
             (boardWeatherScore.get(dominant) ?? 0) + 100
           )
         }
+
+        if (pkm.passive === Passive.RAIN_OR_STORM) {
+          const dominant =
+            getDominantWeather(playerWeatherScore, [
+              Weather.RAIN,
+              Weather.STORM
+            ]) ?? Weather.RAIN
+          boardWeatherScore.set(
+            dominant,
+            (boardWeatherScore.get(dominant) ?? 0) + 100
+          )
+        }
+
+        if (pkm.passive === Passive.DROUGHT_OR_SANDSTORM) {
+          const dominant =
+            getDominantWeather(playerWeatherScore, [
+              Weather.DROUGHT,
+              Weather.SANDSTORM
+            ]) ?? Weather.DROUGHT
+          boardWeatherScore.set(
+            dominant,
+            (boardWeatherScore.get(dominant) ?? 0) + 100
+          )
+        }
       }
     })
   }

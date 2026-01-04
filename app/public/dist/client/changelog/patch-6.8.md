@@ -4,6 +4,8 @@
 - Mudsdale
 - Skiddo
 - Gogoat
+- Bunnelby
+- Diggersby
 
 # Changes to Pokemon & Abilities
 
@@ -20,17 +22,40 @@
 - Terrain pulse: change effects by unit tier: Grass field: 5/5/5 → 5/7/10 % max HP healed ; Electric field: 10/10/10 → 10/12/15 speed buff; Psychic field: 10/10/10 → 10/12/15 PP gain ; Misty field: 5/5/5 → 5/7/10 % of max HP as shield
 - Mothim is now sold for 3 gold instead of 6
 - New ability for Scizor: Bullet Punch
+- Nerf Honedge line: HP 85/130/230 → 75/120/210 ; Def 6/10/14 → 4/8/14
+- Primal Groudon change weather to Drought or Sandstorm based on your dominant synergy between FIRE and GROUND
+- Primal Kyogre change weather to Rain or Storm based on your dominant synergy between WATER and ELECTRIC
+- Ho-Oh no longer changes weather to Drought.
+- Lugia no longer changes weather to Windy.
+- XD001 no longer changes weather to Night.
+- Paldean Wooper is now exclusive to Poison regions
+- Nerf Wiglett line: PP 80 → 100
+- Nerf Whirlpool (Seadra): 125 → 100% Attack damage per hit
+- Nerf Bellsprout line: HP 70/150/230 → 60/130/200
+- Nerf Meganium HP: 250 → 220
+- Buff Oddish line: HP 80/140/200 → 80/150/230
+- Nerf Bellossom HP: 300 → 250
+- Buff Beldum line: Defense 8/12/16 → 12/18/24
+- Nerf Mind Blown (Blacephalon): damage and shield per firework: 30 → 20
+- Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
+- Nerf Bellibolt: passive damage 30 → 10 ; first supercharge gives 30 → 20 speed and 50 → 30 shield. Added a 3 seconds cooldown between passive procs.
+- Buff Magic Powder (Hatenna): Shield 10/20/40 → 15/30/60
+- New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
+- New passive for Shaymin Sky form: change weather to Zenith
 
 # Changes to Synergies
 
+- New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
 
 # Changes to Items
 
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
 - Hard Stone is renamed to Protector. No change to the effect.
+- Added Golden Pinap Berry, Golden Nanab Berry and Golden Razz Berry
 - New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to BURN with their attacks.
 - Heat stone changed: no longer has additional chance to BURN with their attacks. Instead, your Pokémon gain 3 Attack.
+- Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 
 # Gameplay
 
@@ -49,8 +74,10 @@
 - Field speed stacks are now correctly reset after resurrection
 - Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 - Fossil starter portals now always offer an Eevee.
+- Fix anime of buried items when equipped with explorer kit.
 
 # Misc
 
 - Added Region tracking to statistic
 - Wandering Unown now have 5% chance to be shiny, giving 250 shards on capture instead of 50. Unown encounter chance: 3.7% → 3.3%
+- New title: Poffin Master - Cook a Poffin with 3 different golden berries in it

@@ -2,6 +2,7 @@ export enum EffectEnum {
   INGRAIN = "INGRAIN",
   GROWTH = "GROWTH",
   SPORE = "SPORE",
+  OVERGROW = "OVERGROW",
   FLAME_BODY = "FLAME_BODY",
   WILDFIRE = "WILDFIRE",
   BLAZE = "BLAZE",

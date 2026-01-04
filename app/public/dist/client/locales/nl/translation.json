@@ -1071,7 +1071,7 @@
 		"ASTRAL_BARRAGE": "Stuurt [7,SP] kleine geesten naar willekeurige vijandige Pokémon. Elk van hen deelt 20 SPECIAL uit",
 		"WATERFALL": "SHIELD zelf voor [50,100,150,SP], duidelijke negatieve status en bestuursceleffect",
 		"PYRO_BALL": "De gebruiker valt aan door een kleine steen aan te steken en deze als een vurige bal naar het verste doelwit te lanceren, waarbij hij [10,20,40,SP] SPECIAL uitdeelt en 2 seconden lang alles onderweg verbrandt",
-		"WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [125,SP]% ATK SPECIAL uit aan de eerste vijandelijke treffer",
+		"WHIRLPOOL": "Richt je op de verste vijand en laat een hagel van 4 draaikolken op hen los. Elk deelt [100,SP]% ATK SPECIAL uit aan de eerste vijandelijke treffer",
 		"PRESENT": "Deelt [80,SP], [150,SP], [300,SP] SPECIAL uit, of geneest 50 HP van het doelwit",
 		"AURASPHERE": "Straalt een aura uit en projecteert energie in een lijn die [25,50,100,SP] SPECIAL en SILENCE uitdeelt aan elke getroffen tegenstander gedurende 3 seconden."
 	},
@@ -1380,6 +1380,7 @@
 		"SYNCHRO": "Als de pokemon wordt beïnvloed door POISONNED, BURN, WOUND of SILENCE, krijgt de vijandelijke caster dezelfde negatieve status",
 		"TADPOLE": "Poliwhirl zal evolueren naar Poliwrath als hij op de frontlane wordt geplaatst, anders Politoed",
 		"DROUGHT": "Verander het weer in DROUGHT",
+		"ZENITH": "Verander het weer in ZENITH",
 		"RAIN": "Verander het weer in RAIN",
 		"SANDSTORM": "Verander het weer in SANDSTORM",
 		"MISTY": "Verander het weer in MISTY",

@@ -215,16 +215,16 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("berries_description"))}</p>
         <ul>
-          {Berries.map((i) => (
+          {Berries.map((berry) => (
             <li
-              key={i}
+              key={berry}
               data-tooltip-id="item-detail-tooltip"
-              data-tooltip-content={i}
+              data-tooltip-content={berry}
             >
-              <img src={"assets/item/" + i + ".png"} className="item"></img>
+              <img src={"assets/item/" + berry + ".png"} className="item"></img>
               <br />
               <img
-                src={"assets/environment/berry_trees/" + i + "_6.png"}
+                src={"assets/environment/berry_trees/" + berry + "_6.png"}
                 className="tree"
               ></img>
             </li>

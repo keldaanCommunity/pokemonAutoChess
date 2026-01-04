@@ -346,7 +346,7 @@ export class OpenBoosterCommand extends Command<
 
       boosterContent.forEach((card) => {
         const index = PkmIndex[card.name]
-        const existingItem = userDoc.pokemonCollection.get(index)
+        const existingItem = userDoc!.pokemonCollection.get(index)
 
         if (!existingItem) {
           if (`pokemonCollection.${index}` in updateOperations) {

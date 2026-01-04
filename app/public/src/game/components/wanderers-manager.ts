@@ -1,5 +1,9 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import {
+  SHARDS_PER_SHINY_UNOWN_WANDERER,
+  SHARDS_PER_UNOWN_WANDERER
+} from "../../../../config"
 import { Wanderer } from "../../../../models/colyseus-models/wanderer"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Transfer } from "../../../../types"
@@ -13,8 +17,6 @@ import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
-import { SHARDS_PER_SHINY_UNOWN_WANDERER,SHARDS_PER_UNOWN_WANDERER } from "../../../../config";
-
 
 const DEFAULT_WANDERER_SPEED = 0.25
 
@@ -49,7 +51,11 @@ export default class WanderersManager {
       wanderer,
       onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        this.displayShardGain([pointer.x, pointer.y], unownSprite.pokemon.index, unownSprite.pokemon.shiny)
+        this.displayShardGain(
+          [pointer.x, pointer.y],
+          unownSprite.pokemon.index,
+          unownSprite.pokemon.shiny
+        )
         unownSprite.destroy()
         return true
       }
@@ -165,7 +171,9 @@ export default class WanderersManager {
         this.scene,
         startX,
         startY,
-        PokemonFactory.createPokemonFromName(wanderer.pkm, { shiny: wanderer.shiny }),
+        PokemonFactory.createPokemonFromName(wanderer.pkm, {
+          shiny: wanderer.shiny
+        }),
         "wanderer",
         false,
         false
@@ -195,7 +203,7 @@ export default class WanderersManager {
               targets: [sprite],
               ease: "linear",
               duration: 5000,
-              delay: 5000,
+              delay: wanderer.type === WandererType.SPECIAL ? 30000 : 8000,
               x: startX,
               y: startY,
               onComplete: () => {
@@ -249,7 +257,10 @@ export default class WanderersManager {
         this.scene,
         25,
         0,
-        (shiny ? SHARDS_PER_SHINY_UNOWN_WANDERER : SHARDS_PER_UNOWN_WANDERER).toString(),
+        (shiny
+          ? SHARDS_PER_SHINY_UNOWN_WANDERER
+          : SHARDS_PER_UNOWN_WANDERER
+        ).toString(),
         textStyle
       )
     )

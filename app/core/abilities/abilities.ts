@@ -285,10 +285,10 @@ export class MindBlownStrategy extends AbilityStrategy {
 
       /*
         Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color:
-        - Pink: Deal [30,SP] PHYSICAL and BURN for 5 seconds
-        - Blue: Deal [30,SP] SPECIAL and FATIGUE for 5 seconds.
-        - Yellow: Deal [30,SP] TRUE and FLINCH for 5 seconds.
-        - White: Give [30,SP] SHIELD and cure status afflictions for allies.
+        - Pink: Deal [20,SP] PHYSICAL and BURN for 5 seconds
+        - Blue: Deal [20,SP] SPECIAL and FATIGUE for 5 seconds.
+        - Yellow: Deal [20,SP] TRUE and FLINCH for 5 seconds.
+        - White: Give [20,SP] SHIELD and cure status afflictions for allies.
       */
       pokemon.simulation.room.clock.setTimeout(
         () => {
@@ -305,7 +305,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "pink":
                 if (cell.value && cell.value.team !== pokemon.team) {
                   cell.value.handleSpecialDamage(
-                    30,
+                    20,
                     board,
                     AttackType.PHYSICAL,
                     pokemon,
@@ -318,7 +318,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "blue":
                 if (cell.value && cell.value.team !== pokemon.team) {
                   cell.value.handleSpecialDamage(
-                    30,
+                    20,
                     board,
                     AttackType.SPECIAL,
                     pokemon,
@@ -331,7 +331,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "yellow":
                 if (cell.value && cell.value.team !== pokemon.team) {
                   cell.value.handleSpecialDamage(
-                    30,
+                    20,
                     board,
                     AttackType.TRUE,
                     pokemon,
@@ -343,7 +343,7 @@ export class MindBlownStrategy extends AbilityStrategy {
                 break
               case "white":
                 if (cell.value && cell.value.team === pokemon.team) {
-                  cell.value.addShield(30, pokemon, 0, crit)
+                  cell.value.addShield(20, pokemon, 0, crit)
                   cell.value.status.clearNegativeStatus()
                 }
                 break
@@ -5639,6 +5639,36 @@ export class IcyWindStrategy extends AbilityStrategy {
   }
 }
 
+export class PowderSnowStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const freezeChance = [0.15, 0.3, 0.5][pokemon.stars - 1] ?? 0.5
+
+    effectInLine(board, pokemon, target, (cell) => {
+      if (cell.value != null && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+
+        if (chance(freezeChance, pokemon)) {
+          cell.value.status.triggerFreeze(2000, cell.value)
+        }
+      }
+    })
+  }
+}
+
 export class GigatonHammerStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6419,7 +6449,7 @@ export class WhirlpoolStrategy extends AbilityStrategy {
     targetsHit.forEach((enemy) => {
       for (let i = 0; i < 4; i++) {
         enemy.handleSpecialDamage(
-          Math.ceil(pokemon.atk * 1.25),
+          pokemon.atk,
           board,
           AttackType.SPECIAL,
           pokemon,
@@ -7731,7 +7761,7 @@ export class MagicPowderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     const silenceDuration = [2000, 3000, 4000][pokemon.stars - 1] ?? 4000
     pokemon.addShield(shield, pokemon, 1, crit)
     board
@@ -13836,6 +13866,34 @@ export class HyperDrillStrategy extends AbilityStrategy {
   }
 }
 
+export class EarDigStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.
+    const boardPlayer = target.simulation.bluePlayer
+    const index = target.positionY * BOARD_WIDTH + target.positionX
+    let holeLevel = boardPlayer?.groundHoles[index] ?? 0
+    const damage =
+      ([30, 60, 120][pokemon.stars - 1] ?? 120) +
+      holeLevel * ([5, 10, 20][pokemon.stars - 1] ?? 20)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    if (boardPlayer && holeLevel === 0) {
+      boardPlayer.groundHoles[index] = 1
+      holeLevel = 1
+    }
+    pokemon.broadcastAbility({
+      targetX: target.positionX,
+      targetY: target.positionY,
+      delay: holeLevel // delay will hold the ground hole depth info
+    })
+  }
+}
+
 export class TerrainPulseStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -15361,8 +15419,8 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.addMaxHP(40, pokemon, 1, crit, false)
-    pokemon.addSpeed(25, pokemon, 0, false)
+    pokemon.addMaxHP(30, pokemon, 1, crit, false)
+    pokemon.addSpeed(20, pokemon, 0, false)
     if (pokemon.status.electricField === false) {
       pokemon.status.electricField = true
       pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
@@ -15371,6 +15429,8 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     // Add the volt surge effect if it's the first ultimate
     if (pokemon.count.ult === 1) {
       pokemon.effectsSet.add(voltSurgeEffect)
+    } else {
+      pokemon.cooldown = 0 // no cooldown for subsequent ultimates
     }
   }
 }
@@ -16160,7 +16220,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SUPERCELL_SLAM]: new SupercellSlamStrategy(),
   [Ability.HIGH_HORSEPOWER]: new HighHorsepowerStrategy(),
   [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
-  [Ability.BULLET_PUNCH]: new BulletPunchStrategy()
+  [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
+  [Ability.EAR_DIG]: new EarDigStrategy(),
+  [Ability.POWDER_SNOW]: new PowderSnowStrategy()
 }
 
 export function castAbility(

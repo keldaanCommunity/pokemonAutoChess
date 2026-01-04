@@ -16,6 +16,7 @@ import {
   Flavors,
   Item,
   OgerponMasks,
+  SpecialBerries,
   SynergyFlavors
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -1007,11 +1008,22 @@ const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
   pokemon.addStack()
 }
 
-const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
+const superchargeTadbulb = (
+  pokemon: PokemonEntity & { lastSuperchargeTime?: number },
+  board: Board
+) => {
+  if (
+    pokemon.lastSuperchargeTime &&
+    Date.now() - pokemon.lastSuperchargeTime < 3000
+  ) {
+    return
+  }
+  pokemon.lastSuperchargeTime = Date.now()
+
   if (pokemon.status.electricField === false) {
     pokemon.status.electricField = true
-    pokemon.addSpeed(30, pokemon, 0, false)
-    pokemon.addShield(50, pokemon, 0, false)
+    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addShield(30, pokemon, 0, false)
     pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
   }
   board
@@ -1038,7 +1050,7 @@ const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
         }
 
         cell.value.handleDamage({
-          damage: 30,
+          damage: 10,
           board,
           attackType: AttackType.SPECIAL,
           attacker: pokemon,
@@ -1265,7 +1277,7 @@ export const PassiveEffects: Partial<
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
-        pokemon.addMaxHP(15, player)
+        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15, player)
         removeInArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {

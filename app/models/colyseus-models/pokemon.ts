@@ -1188,7 +1188,7 @@ export class Beldum extends Pokemon {
   hp = 110
   atk = 5
   speed = 47
-  def = 8
+  def = 12
   speDef = 8
   maxPP = 100
   range = 1
@@ -1207,7 +1207,7 @@ export class Metang extends Pokemon {
   hp = 190
   atk = 9
   speed = 47
-  def = 12
+  def = 18
   speDef = 12
   maxPP = 100
   range = 1
@@ -1225,7 +1225,7 @@ export class Metagross extends Pokemon {
   hp = 320
   atk = 20
   speed = 47
-  def = 16
+  def = 24
   speDef = 16
   maxPP = 100
   range = 1
@@ -1566,11 +1566,11 @@ export class Honedge extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.DOUBLADE
-  hp = 85
+  hp = 75
   atk = 6
   speed = 44
-  def = 6
-  speDef = 6
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
@@ -1585,11 +1585,11 @@ export class Doublade extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.AEGISLASH
-  hp = 130
+  hp = 120
   atk = 13
   speed = 44
-  def = 10
-  speDef = 10
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.KING_SHIELD
@@ -1603,7 +1603,7 @@ export class Aegislash extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
+  hp = 210
   atk = 23
   speed = 44
   def = 14
@@ -1622,7 +1622,7 @@ export class AegislashBlade extends Pokemon {
   ])
   rarity = Rarity.RARE
   stars = 3
-  hp = 230
+  hp = 210
   atk = 34
   speed = 44
   def = 4
@@ -3562,7 +3562,7 @@ export class Meganium extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 250
+  hp = 220
   atk = 22
   speed = 51
   def = 6
@@ -4399,7 +4399,7 @@ export class Bellsprout extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WEEPINBELL
-  hp = 70
+  hp = 60
   atk = 6
   speed = 47
   def = 3
@@ -4414,7 +4414,7 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VICTREEBEL
-  hp = 150
+  hp = 130
   atk = 12
   speed = 47
   def = 5
@@ -4428,7 +4428,7 @@ export class Victreebel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 230
+  hp = 200
   atk = 20
   speed = 47
   def = 7
@@ -5402,7 +5402,6 @@ export class ShadowLugia extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.SKY_ATTACK_SHADOW
-  passive = Passive.NIGHT
 }
 
 export class Giratina extends Pokemon {
@@ -7229,6 +7228,7 @@ export class ShayminSky extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.SEED_FLARE
+  passive = Passive.ZENITH
 }
 
 export class Cresselia extends Pokemon {
@@ -7275,7 +7275,6 @@ export class HooH extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRE_BLAST
-  passive = Passive.DROUGHT
 }
 
 export class RoaringMoon extends Pokemon {
@@ -7365,7 +7364,7 @@ export class PrimalGroudon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.PRECIPICE_BLADES
-  passive = Passive.SANDSTORM
+  passive = Passive.DROUGHT_OR_SANDSTORM
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
   }
@@ -7387,7 +7386,7 @@ export class PrimalKyogre extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.ORIGIN_PULSE
-  passive = Passive.RAIN
+  passive = Passive.RAIN_OR_STORM
   onAcquired(player: Player) {
     player.titles.add(Title.PRIMAL)
   }
@@ -7431,7 +7430,7 @@ export class Gloom extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VILEPLUME
-  hp = 140
+  hp = 150
   atk = 16
   speed = 41
   def = 6
@@ -7445,7 +7444,7 @@ export class Vileplume extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 200
+  hp = 230
   atk = 24
   speed = 41
   def = 8
@@ -7459,7 +7458,7 @@ export class Bellossom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.SOUND])
   rarity = Rarity.SPECIAL
   stars = 4
-  hp = 300
+  hp = 250
   atk = 30
   speed = 41
   def = 10
@@ -10237,11 +10236,11 @@ export class Snom extends Pokemon {
   hp = 70
   atk = 8
   speed = 46
-  def = 4
+  def = 2
   speDef = 4
   maxPP = 80
-  range = 2
-  skill = Ability.BUG_BUZZ
+  range = 3
+  skill = Ability.POWDER_SNOW
   additional = true
 }
 
@@ -10252,11 +10251,11 @@ export class Frosmoth extends Pokemon {
   hp = 180
   atk = 20
   speed = 46
-  def = 6
+  def = 4
   speDef = 6
   maxPP = 80
-  range = 2
-  skill = Ability.BUG_BUZZ
+  range = 3
+  skill = Ability.POWDER_SNOW
   additional = true
 }
 
@@ -11299,7 +11298,7 @@ export class Wiglett extends Pokemon {
   speed = 55
   def = 6
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.TRIPLE_DIVE
   additional = true
@@ -11314,7 +11313,7 @@ export class Wugtrio extends Pokemon {
   speed = 55
   def = 8
   speDef = 8
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.TRIPLE_DIVE
   additional = true
@@ -15057,6 +15056,10 @@ export class PaldeaWooper extends Pokemon {
   skill = Ability.RECOVER
   additional = true
   regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Clodsire extends Pokemon {
@@ -15077,6 +15080,10 @@ export class Clodsire extends Pokemon {
   skill = Ability.RECOVER
   additional = true
   regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Tangela extends Pokemon {
@@ -19459,6 +19466,37 @@ export class Gogoat extends Pokemon {
   additional = true
 }
 
+export class Bunnelby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DIGGERSBY
+  hp = 80
+  atk = 7
+  speed = 50
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.EAR_DIG
+  additional = true
+}
+
+export class Diggersby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 190
+  atk = 15
+  speed = 50
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.EAR_DIG
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20548,7 +20586,9 @@ export const PokemonClasses: Record<
   [Pkm.MUDBRAY]: Mudbray,
   [Pkm.MUDSDALE]: Mudsdale,
   [Pkm.SKIDDO]: Skiddo,
-  [Pkm.GOGOAT]: Gogoat
+  [Pkm.GOGOAT]: Gogoat,
+  [Pkm.BUNNELBY]: Bunnelby,
+  [Pkm.DIGGERSBY]: Diggersby
 }
 
 // declare all the classes in colyseus schema TypeRegistry

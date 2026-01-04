@@ -51,6 +51,15 @@ export default function WikiTutorials() {
           ></iframe>
           <h3>101 Tips and Tricks for Becoming a Pro</h3>
         </li>
+        <li className="my-box">
+          <iframe
+            src="https://www.youtube.com/embed/cjrBGXJ-JJE"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+          <h3>Make Smarter Carousel Choices</h3>
+        </li>
       </ul>
       <p>
         {t("thanks_to")}&nbsp;

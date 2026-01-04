@@ -93,6 +93,7 @@ export enum Pkm {
   BUIZEL = "BUIZEL",
   BULBASAUR = "BULBASAUR",
   BUNEARY = "BUNEARY",
+  BUNNELBY = "BUNNELBY",
   BURMY_PLANT = "BURMY_PLANT",
   BURMY_SANDY = "BURMY_SANDY",
   BURMY_TRASH = "BURMY_TRASH",
@@ -199,6 +200,7 @@ export enum Pkm {
   DHELMISE = "DHELMISE",
   DIALGA = "DIALGA",
   DIANCIE = "DIANCIE",
+  DIGGERSBY = "DIGGERSBY",
   DIGLETT = "DIGLETT",
   DIPPLIN = "DIPPLIN",
   DITTO = "DITTO",
@@ -1876,8 +1878,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FROAKIE]: "0656",
   [Pkm.FROGADIER]: "0657",
   [Pkm.GRENINJA]: "0658",
-  //[Pkm.BUNNELBY]: "0659",
-  //[Pkm.DIGGERSBY]: "0660",
+  [Pkm.BUNNELBY]: "0659",
+  [Pkm.DIGGERSBY]: "0660",
   [Pkm.FLETCHLING]: "0661",
   [Pkm.FLETCHINDER]: "0662",
   [Pkm.TALONFLAME]: "0663",
@@ -3383,7 +3385,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MUDBRAY]: Pkm.MUDBRAY,
   [Pkm.MUDSDALE]: Pkm.MUDBRAY,
   [Pkm.SKIDDO]: Pkm.SKIDDO,
-  [Pkm.GOGOAT]: Pkm.SKIDDO
+  [Pkm.GOGOAT]: Pkm.SKIDDO,
+  [Pkm.BUNNELBY]: Pkm.BUNNELBY,
+  [Pkm.DIGGERSBY]: Pkm.BUNNELBY
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
