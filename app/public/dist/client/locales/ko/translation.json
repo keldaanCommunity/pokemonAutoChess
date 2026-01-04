@@ -2128,7 +2128,6 @@
 		"WILDFIRE": "대폭발",
 		"BLAZE": "맹화",
 		"DESOLATE_LAND": "끝의대지",
-		"DROUGHT": "가뭄",
 		"RAIN_DANCE": "비바라기",
 		"DRIZZLE": "잔비",
 		"PRIMORDIAL_SEA": "시작의바다",
@@ -2231,7 +2230,8 @@
 		"ETHEREAL": "에테르화",
 		"APPETIZER": "에피타이저",
 		"LUNCH_BREAK": "점심시간",
-		"BANQUET": "연회"
+		"BANQUET": "연회",
+		"DROUGHT": "가뭄"
 	},
 	"effect_description": {
 		"STAMINA": "15 SHIELD 획득",
@@ -3536,10 +3536,10 @@
 	"enable_elo_hint": "이 게임에 Elo 획득이나 손실을 적용시킵니다.",
 	"disable_elo_hint": "이 게임에 Elo 획득이나 손실을 적용시키지 않습니다.",
 	"minimum_rank": "최소 랭크",
-	"maximum_rank": "최대 랭크",	
+	"maximum_rank": "최대 랭크",
 	"ranked_game_hint": "이 게임은 당신의 현재 랭크에 해당하는 플레이어들로 제한됩니다.",
 	"smeargle_scribble_hint": "매 게임마다 루브도가 게임내내 무작위 경기규칙을 적용시킵니다.",
-	"no_rule": "특별한 규칙 없음",	
+	"no_rule": "특별한 규칙 없음",
 	"classic_hint": "참가자 8명이 모이면 자동으로 시작합니다.",
 	"password_protected": "비밀방 (비밀번호로 보호됨)",
 	"private": "비공개",

@@ -1117,7 +1117,6 @@
 	"private": "ส่วนตัว",
 	"available_rooms": "ห้องว่าง",
 	"in_game": "อยู่ภายในเกม",
-	"custom_room": "สร้างห้อง",
 	"loading": "รอสักครู่...",
 	"connecting": "กำลังเชื่อมต่อ",
 	"no_data_available": "ไม่มีข้อมูล",
@@ -1522,5 +1521,6 @@
 		"SCRIBBLE": "ห้องหรรษาของ Smeargle",
 		"CUSTOM_LOBBY": "ห้องเล่นส่วนตัว",
 		"TOURNAMENT": "ทัวร์นาเมนต์"
-	}
+	},
+	"custom_room": "สร้างห้อง"
 }

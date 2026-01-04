@@ -1084,10 +1084,9 @@
 		"GROWTH": "Groei",
 		"SPORE": "Spoor",
 		"FLAME_BODY": "Vlam lichaam",
-		"BLAZE": "Blaas",
 		"WILDFIRE": "Wilde vuur",
+		"BLAZE": "Blaas",
 		"DESOLATE_LAND": "Verlaten land",
-		"DROUGHT": "Droogte",
 		"RAIN_DANCE": "Regendans",
 		"DRIZZLE": "Motregen",
 		"PRIMORDIAL_SEA": "Oerzee",
@@ -1165,7 +1164,8 @@
 		"GRASSY_TERRAIN": "Met gras begroeid terrein",
 		"PSYCHIC_TERRAIN": "Psychisch Terrein",
 		"ELECTRIC_TERRAIN": "Elektrisch Terrein",
-		"MISTY_TERRAIN": "Mistig terrein"
+		"MISTY_TERRAIN": "Mistig terrein",
+		"DROUGHT": "Droogte"
 	},
 	"effect_description": {
 		"STAMINA": "Ontvang 15 SHIELD",
@@ -1176,7 +1176,6 @@
 		"GROWTH": "Herstel 15 HP elke 2 seconden. Koop nog een bessenboom.",
 		"SPORE": "Herstel 30 HP elke 2 seconden. Koop een derde bessenboom.",
 		"FLAME_BODY": "[30,LK]% kans om te BURN",
-		"WWILDFIRE": "+1 ATK na elke treffer",
 		"BLAZE": "+2 ATK na elke treffer",
 		"DESOLATE_LAND": "+3 ATK na elke treffer. Koop een FIRE_SHARD.",
 		"RAIN_DANCE": "+4 PP per seconde. Vis een pokemon na elk PvP-gevecht.",
@@ -1760,12 +1759,10 @@
 	"spectate": "Toeschouwen",
 	"join": "Meedoen",
 	"no_elo": "Voor de lol",
-	"classic": "Sluit je aan bij een lobby",
 	"password_protected": "Privélobby (beveiligd met een wachtwoord)",
 	"private": "Privaat",
 	"available_rooms": "Beschikbare kamers",
 	"in_game": "In het spel",
-	"custom_room": "Ruimte creëren",
 	"loading": "Bezig met laden...",
 	"leaderboard": "Scorebord",
 	"rooms": "Kamers",
@@ -1979,5 +1976,7 @@
 	"portal_description_2": "Elke portal heeft synergie symbolen die willekeurig genomen zijn van de dominante synergieën van alle spelers. Symbolen beïnvloeden zowel de regio waar je naartoe reist als de Pokémon die voorgesteld worden.",
 	"portal_description_3": "Als je besluit geen portal te nemen, blijf je in je huidige regio, en de voorgestelde Pokémon zullen volledig willekeurig zijn.",
 	"additional_description": "Kies een extra keuze en een item component uit 3 voorstellen. Extra keuzes zijn 2-stadium evolutie Pokémon die gevonden kunnen worden in alle spelers winkels nadat ze gekozen zijn.",
-	"battle_description": "Regulaire gevecht stadium waar je vecht tegen andere spelers of bots."
+	"battle_description": "Regulaire gevecht stadium waar je vecht tegen andere spelers of bots.",
+	"classic": "Sluit je aan bij een lobby",
+	"custom_room": "Ruimte creëren"
 }

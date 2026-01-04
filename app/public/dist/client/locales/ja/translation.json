@@ -1686,11 +1686,10 @@
 		"INGRAIN": "ねをはる",
 		"GROWTH": "せいちょう",
 		"SPORE": "キノコのほうし",
-		"BLAZE": "もうか",
 		"FLAME_BODY": "もらいび",
 		"WILDFIRE": "もえあがるいかり",
+		"BLAZE": "もうか",
 		"DESOLATE_LAND": "おわりのだいち",
-		"DROUGHT": "ひでり",
 		"RAIN_DANCE": "あまごい",
 		"DRIZZLE": "あめふらし",
 		"PRIMORDIAL_SEA": "はじまりのうみ",
@@ -1777,7 +1776,8 @@
 		"QUICK_FEET": "はやあし",
 		"RUN_AWAY": "にげあし",
 		"HUSTLE": "はりきり",
-		"BERSERK": "ぎゃくじょう"
+		"BERSERK": "ぎゃくじょう",
+		"DROUGHT": "ひでり"
 	},
 	"effect_description": {
 		"STAMINA": "シールドを15獲得",
@@ -2503,12 +2503,10 @@
 	"spectate": "観戦する",
 	"join": "加入",
 	"no_elo": "ただの楽しみのために",
-	"classic": "ロビーに参加する",
 	"password_protected": "プライベートロビー（パスワード保護）",
 	"private": "プライベート",
 	"available_rooms": "空室のある部屋",
 	"in_game": "ゲームで",
-	"custom_room": "ルームの作成",
 	"loading": "読み込み中...",
 	"leaderboard": "リーダーボード",
 	"rooms": "部屋",
@@ -2849,5 +2847,7 @@
 	"portal_description_2": "各ポータルには、すべてのプレイヤーの主要なシナジーからランダムに選ばれたシナジーシンボルがあります。シンボルは、旅行先の地域と提案されるポケモンの両方に影響します。",
 	"portal_description_3": "ポータルを使わないことにした場合、現在の地域に留まり、提案されるポケモンは完全にランダムになります。",
 	"additional_description": "3つの提案から追加選択とアイテムコンポーネントを選択してください。追加選択は2段階進化ポケモンで、選択後にすべてのプレイヤーのショップで見つけることができます。",
-	"battle_description": "他のプレイヤーやボットと戦う通常のバトルステージです。"
+	"battle_description": "他のプレイヤーやボットと戦う通常のバトルステージです。",
+	"classic": "ロビーに参加する",
+	"custom_room": "ルームの作成"
 }

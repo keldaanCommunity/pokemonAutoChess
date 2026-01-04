@@ -3485,7 +3485,7 @@
 	"in_game": "En Juego",
 	"games_in_progress_one": "{{count}} partidas en progreso",
 	"games_in_progress_other": "{{count}} partidas en progreso",
-	"events": "Eventos", 
+	"events": "Eventos",
 	"custom_room_short": "Personalizada",
 	"loading": "Cargando...",
 	"connecting": "Conectando...",

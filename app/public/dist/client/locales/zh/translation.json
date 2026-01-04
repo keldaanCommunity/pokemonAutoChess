@@ -2157,7 +2157,6 @@
 		"WILDFIRE": "野火",
 		"BLAZE": "猛火",
 		"DESOLATE_LAND": "终结之地",
-		"DROUGHT": "日照",
 		"RAIN_DANCE": "求雨",
 		"DRIZZLE": "降雨",
 		"PRIMORDIAL_SEA": "始源之海",
@@ -2260,7 +2259,8 @@
 		"ETHEREAL": "飘渺",
 		"APPETIZER": "开胃小菜",
 		"LUNCH_BREAK": "正餐上桌",
-		"BANQUET": "奢华宴会"
+		"BANQUET": "奢华宴会",
+		"DROUGHT": "日照"
 	},
 	"effect_description": {
 		"STAMINA": "获得15点SHIELD。",
@@ -3609,7 +3609,7 @@
 	"ranked_game_hint": "只有与你段位相近的玩家能够加入此游戏",
 	"smeargle_scribble_short": "涂鸦",
 	"smeargle_scribble_hint": "图图犬会随机涂鸦一条全局有效的新规则。",
-	"no_rule": "无特殊规则",	
+	"no_rule": "无特殊规则",
 	"classic_hint": "当参加者满8人时，游戏会自动开始",
 	"password_protected": "非公开游戏（有密码）",
 	"private": "非公开",
