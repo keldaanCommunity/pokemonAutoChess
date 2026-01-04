@@ -7731,7 +7731,7 @@ export class MagicPowderStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     const silenceDuration = [2000, 3000, 4000][pokemon.stars - 1] ?? 4000
     pokemon.addShield(shield, pokemon, 1, crit)
     board

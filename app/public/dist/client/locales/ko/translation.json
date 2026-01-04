@@ -1887,7 +1887,7 @@
 		"BODY_SLAM": "자신의 최대 HP의 [30,SP]% 만큼 SPECIAL을 준다.",
 		"STOCKPILE": "시전자가 스스로를 부풀려 최대 HP [50,SP]를 얻고 10 SPEED를 잃는다. 3회 시전 후, 토해내어 대상에게 최대 HP의 [50,SP]%만큼 SPECIAL 를 입히고, 기본 최대 HP와 SPEED를 되찾으며 후방으로 밀려난다.",
 		"BARB_BARRAGE": "적 팀 중앙으로 돌진하여 모든 인접한 적에게 [15,30,45,60,SP] SPECIAL 과 3초 동안 POISONNED 효과를 부여한다.",
-		"MAGIC_POWDER": "자신에게 [10,20,40,SP]의 SHIELD 를 부여하고 적에게 [2,3,4]초 동안 SILENCE 를 부여한다.",
+		"MAGIC_POWDER": "자신에게 [15,30,60,SP]의 SHIELD 를 부여하고 적에게 [2,3,4]초 동안 SILENCE 를 부여한다.",
 		"INFERNAL_PARADE": "되돌아오는 화염 바퀴를 발사해 [50,LK]% 확률로 3초 동안 BURN 를 부여하고 적중당한 모든 적에게 [30,SP] SPECIAL 를 두 번 입힌다.",
 		"RETALIATE": "대상에게 ATK의 [150,SP]%만큼 특수 공격을 가하고, 쓰러진 아군 포켓몬 한 마리당 추가 공격을 1회 가합니다.",
 		"SLASH": "[30,60,90]%의 CRIT_CHANCE 를 가지고 [10,20,40,SP] SPECIAL을 입힌다.",
