@@ -37,6 +37,8 @@
 - Nerf Bellossom HP: 300 → 250
 - Buff Beldum line: Defense 8/12/16 → 12/18/24
 - Nerf Mind Blown (Blacephalon): damage and shield per firework: 30 → 20
+- Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
+
 
 # Changes to Synergies
 

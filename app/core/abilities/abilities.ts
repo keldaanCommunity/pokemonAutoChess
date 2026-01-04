@@ -15389,8 +15389,8 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.addMaxHP(40, pokemon, 1, crit, false)
-    pokemon.addSpeed(25, pokemon, 0, false)
+    pokemon.addMaxHP(30, pokemon, 1, crit, false)
+    pokemon.addSpeed(20, pokemon, 0, false)
     if (pokemon.status.electricField === false) {
       pokemon.status.electricField = true
       pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
@@ -15399,6 +15399,8 @@ export class VoltSurgeStrategy extends AbilityStrategy {
     // Add the volt surge effect if it's the first ultimate
     if (pokemon.count.ult === 1) {
       pokemon.effectsSet.add(voltSurgeEffect)
+    } else {
+      pokemon.cooldown = 0 // no cooldown for subsequent ultimates
     }
   }
 }
