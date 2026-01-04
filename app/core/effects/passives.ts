@@ -16,6 +16,7 @@ import {
   Flavors,
   Item,
   OgerponMasks,
+  SpecialBerries,
   SynergyFlavors
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -1265,7 +1266,7 @@ export const PassiveEffects: Partial<
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
-        pokemon.addMaxHP(15, player)
+        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15, player)
         removeInArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {

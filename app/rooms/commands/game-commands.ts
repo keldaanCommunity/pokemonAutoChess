@@ -7,6 +7,7 @@ import {
   BOARD_SIDE_HEIGHT,
   BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
+  GOLDEN_BERRY_TREE_TYPES,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   MAX_PLAYERS_PER_GAME,
@@ -223,7 +224,9 @@ export class OnPokemonCatchCommand extends Command<
     if (wanderer.type === WandererType.UNOWN) {
       const unownIndex = PkmIndex[wanderer.pkm]
       if (client.auth) {
-        const shardsGained = wanderer.shiny ? SHARDS_PER_SHINY_UNOWN_WANDERER : SHARDS_PER_UNOWN_WANDERER
+        const shardsGained = wanderer.shiny
+          ? SHARDS_PER_SHINY_UNOWN_WANDERER
+          : SHARDS_PER_UNOWN_WANDERER
         const u = await UserMetadata.findOne({ uid: client.auth.uid })
         if (u) {
           const c = u.pokemonCollection.get(unownIndex)
@@ -923,7 +926,11 @@ export class OnPickBerryCommand extends Command<
     if (!player || !player.alive) return
     if (player.berryTreesStages[berryIndex] >= 3) {
       player.berryTreesStages[berryIndex] = 0
-      player.items.push(player.berryTreesType[berryIndex])
+      const type =
+        player.synergies.getSynergyStep(Synergy.GRASS) === 4
+          ? GOLDEN_BERRY_TREE_TYPES[berryIndex]
+          : player.berryTreesType[berryIndex]
+      player.items.push(type)
     }
   }
 }
@@ -1038,7 +1045,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case EffectEnum.PURE_POWER:
             player.titles.add(Title.POKEFAN)
             break
-          case EffectEnum.SPORE:
+          case EffectEnum.OVERGROW:
             player.titles.add(Title.POKEMON_RANGER)
             break
           case EffectEnum.DESOLATE_LAND:
@@ -1863,7 +1870,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (cli) => cli.auth.uid === player.id
         )
         if (!client) return
-        
+
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
           const pkm = pickRandomIn(Unowns)
           const shiny = chance(SHINY_UNOWN_ENCOUNTER_CHANCE)

@@ -4,7 +4,7 @@ import { Synergy } from "../../types/enum/Synergy"
 
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
-  [Synergy.GRASS]: [3, 5, 7],
+  [Synergy.GRASS]: [3, 5, 7, 9],
   [Synergy.FIRE]: [2, 4, 6, 8],
   [Synergy.WATER]: [3, 6, 9],
   [Synergy.ELECTRIC]: [3, 5, 7],
@@ -75,3 +75,9 @@ export const UNOWN_ENCOUNTER_CHANCE = 0.033
 export const SHINY_UNOWN_ENCOUNTER_CHANCE = 0.05
 export const SHARDS_PER_UNOWN_WANDERER = 50
 export const SHARDS_PER_SHINY_UNOWN_WANDERER = 250
+
+export const GOLDEN_BERRY_TREE_TYPES = [
+  Item.GOLDEN_RAZZ_BERRY,
+  Item.GOLDEN_NANAB_BERRY,
+  Item.GOLDEN_PINAP_BERRY
+]
