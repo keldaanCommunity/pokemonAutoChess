@@ -1399,6 +1399,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             let buriedItem = isReachingMaxDepth
               ? player.buriedItems[index]
               : null
+            if (
+              pokemon.items.has(Item.EXPLORER_KIT) &&
+              isReachingMaxDepth &&
+              !buriedItem
+            ) {
+              if (chance(0.1, pokemon)) {
+                buriedItem = Item.BIG_NUGGET
+              } else if (chance(0.5, pokemon)) {
+                buriedItem = Item.NUGGET
+              } else {
+                buriedItem = Item.COIN
+              }
+            }
             this.room.broadcast(Transfer.DIG, {
               pokemonId,
               buriedItem
@@ -1422,19 +1435,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               })
             }, 1000)
 
-            if (
-              pokemon.items.has(Item.EXPLORER_KIT) &&
-              isReachingMaxDepth &&
-              !buriedItem
-            ) {
-              if (chance(0.1, pokemon)) {
-                buriedItem = Item.BIG_NUGGET
-              } else if (chance(0.5, pokemon)) {
-                buriedItem = Item.NUGGET
-              } else {
-                buriedItem = Item.COIN
-              }
-            }
+
 
             if (buriedItem) {
               this.room.clock.setTimeout(() => {
