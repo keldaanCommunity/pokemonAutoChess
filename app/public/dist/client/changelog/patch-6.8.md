@@ -35,6 +35,7 @@
 - Nerf Meganium HP: 250 → 220
 - Buff Oddish line: HP 80/140/200 → 80/150/230
 - Nerf Bellossom HP: 300 → 250
+- Buff Beldum line: Defense 8/12/16 → 12/18/24
 
 # Changes to Synergies
 

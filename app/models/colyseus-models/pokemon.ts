@@ -1188,7 +1188,7 @@ export class Beldum extends Pokemon {
   hp = 110
   atk = 5
   speed = 47
-  def = 8
+  def = 12
   speDef = 8
   maxPP = 100
   range = 1
@@ -1207,7 +1207,7 @@ export class Metang extends Pokemon {
   hp = 190
   atk = 9
   speed = 47
-  def = 12
+  def = 18
   speDef = 12
   maxPP = 100
   range = 1
@@ -1225,7 +1225,7 @@ export class Metagross extends Pokemon {
   hp = 320
   atk = 20
   speed = 47
-  def = 16
+  def = 24
   speDef = 16
   maxPP = 100
   range = 1
