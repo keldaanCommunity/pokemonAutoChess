@@ -1051,7 +1051,34 @@ export const AbilitiesAnimations: {
     onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
     shakeCamera({})
   ],
-  [Ability.EAR_DIG]: [onTarget({ ability: Ability.HEAVY_SLAM, scale: 1 })],
+  [Ability.EAR_DIG]: [
+    onTarget({ ability: Ability.HEAVY_SLAM, scale: 1 }),
+    (args) => {
+      const [x, y] = transformEntityCoordinates(
+        args.targetX,
+        args.targetY,
+        args.flip
+      )
+      const hole = args.delay ?? 0
+      if (hole > 0) {
+        const groundHole = args.scene.add
+          .sprite(x, y + 10, "ground_holes", `hole${hole}.png`)
+          .setScale(2)
+          .setDepth(DEPTH.BOARD_EFFECT_GROUND_LEVEL)
+        args.scene.abilitiesVfxGroup?.add(groundHole)
+        args.scene.tweens.add({
+          alpha: 0,
+          delay: 15000,
+          duration: 2000,
+          targets: groundHole,
+          onComplete() {
+            groundHole.destroy()
+          }
+        })
+        args.scene.abilitiesVfxGroup?.add(groundHole)
+      }
+    }
+  ],
   [Ability.FAKE_OUT]: onCaster({ ability: Ability.FACADE }),
   [Ability.FILLET_AWAY]: onCaster({ ability: Ability.SHIELDS_UP }),
   [Ability.BITTER_BLADE]: onCasterScale3,

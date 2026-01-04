@@ -19471,7 +19471,7 @@ export class Bunnelby extends Pokemon {
   stars = 1
   evolution = Pkm.DIGGERSBY
   hp = 80
-  atk = 6
+  atk = 7
   speed = 50
   def = 4
   speDef = 4
@@ -19486,7 +19486,7 @@ export class Diggersby extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   hp = 190
-  atk = 12
+  atk = 15
   speed = 50
   def = 8
   speDef = 8

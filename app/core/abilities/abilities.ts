@@ -13843,18 +13843,24 @@ export class EarDigStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     // Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.
     const boardPlayer = target.simulation.bluePlayer
     const index = target.positionY * BOARD_WIDTH + target.positionX
-    const holeLevel = boardPlayer?.groundHoles[index] ?? 0
+    let holeLevel = boardPlayer?.groundHoles[index] ?? 0
     const damage =
       ([30, 60, 120][pokemon.stars - 1] ?? 120) +
       holeLevel * ([5, 10, 20][pokemon.stars - 1] ?? 20)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     if (boardPlayer && holeLevel === 0) {
       boardPlayer.groundHoles[index] = 1
+      holeLevel = 1
     }
+    pokemon.broadcastAbility({
+      targetX: target.positionX,
+      targetY: target.positionY,
+      delay: holeLevel // delay will hold the ground hole depth info
+    })
   }
 }
 
