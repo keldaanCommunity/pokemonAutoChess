@@ -4775,7 +4775,6 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    shinyUnavailable: true,
     attackSprite: AttackSprite.WATER_RANGE,
     hitSprite: HitSprite.WATER_HIT
   },
@@ -7305,24 +7304,21 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.STEEL_HIT
   },
   [Pkm.KLANG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.STEEL_HIT
   },
   [Pkm.KLINKLANG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.STEEL_HIT
   },
   [Pkm.GALARIAN_SLOWPOKE]: {
     attack: AnimationType.Attack,
@@ -7421,5 +7417,18 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.GRASS_MELEE
+  },
+  [Pkm.BUNNELBY]: {
+    attack: AnimationType.QuickStrike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.DIGGERSBY]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
   }
 }

@@ -11297,7 +11297,7 @@ export class Wiglett extends Pokemon {
   speed = 55
   def = 6
   speDef = 4
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.TRIPLE_DIVE
   additional = true
@@ -11312,7 +11312,7 @@ export class Wugtrio extends Pokemon {
   speed = 55
   def = 8
   speDef = 8
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.TRIPLE_DIVE
   additional = true
@@ -15055,6 +15055,10 @@ export class PaldeaWooper extends Pokemon {
   skill = Ability.RECOVER
   additional = true
   regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Clodsire extends Pokemon {
@@ -15075,6 +15079,10 @@ export class Clodsire extends Pokemon {
   skill = Ability.RECOVER
   additional = true
   regional = true
+  isInRegion(map: DungeonPMDO) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.POISON)
+  }
 }
 
 export class Tangela extends Pokemon {
@@ -19457,6 +19465,37 @@ export class Gogoat extends Pokemon {
   additional = true
 }
 
+export class Bunnelby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.DIGGERSBY
+  hp = 80
+  atk = 7
+  speed = 50
+  def = 4
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.EAR_DIG
+  additional = true
+}
+
+export class Diggersby extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 190
+  atk = 15
+  speed = 50
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.EAR_DIG
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20546,7 +20585,9 @@ export const PokemonClasses: Record<
   [Pkm.MUDBRAY]: Mudbray,
   [Pkm.MUDSDALE]: Mudsdale,
   [Pkm.SKIDDO]: Skiddo,
-  [Pkm.GOGOAT]: Gogoat
+  [Pkm.GOGOAT]: Gogoat,
+  [Pkm.BUNNELBY]: Bunnelby,
+  [Pkm.DIGGERSBY]: Diggersby
 }
 
 // declare all the classes in colyseus schema TypeRegistry
