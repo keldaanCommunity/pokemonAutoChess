@@ -36,6 +36,7 @@
 - Buff Oddish line: HP 80/140/200 → 80/150/230
 - Nerf Bellossom HP: 300 → 250
 - Buff Beldum line: Defense 8/12/16 → 12/18/24
+- Nerf Mind Blown (Blacephalon): damage and shield per firework: 30 → 20
 
 # Changes to Synergies
 

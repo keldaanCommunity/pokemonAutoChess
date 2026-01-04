@@ -285,10 +285,10 @@ export class MindBlownStrategy extends AbilityStrategy {
 
       /*
         Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color:
-        - Pink: Deal [30,SP] PHYSICAL and BURN for 5 seconds
-        - Blue: Deal [30,SP] SPECIAL and FATIGUE for 5 seconds.
-        - Yellow: Deal [30,SP] TRUE and FLINCH for 5 seconds.
-        - White: Give [30,SP] SHIELD and cure status afflictions for allies.
+        - Pink: Deal [20,SP] PHYSICAL and BURN for 5 seconds
+        - Blue: Deal [20,SP] SPECIAL and FATIGUE for 5 seconds.
+        - Yellow: Deal [20,SP] TRUE and FLINCH for 5 seconds.
+        - White: Give [20,SP] SHIELD and cure status afflictions for allies.
       */
       pokemon.simulation.room.clock.setTimeout(
         () => {
@@ -305,7 +305,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "pink":
                 if (cell.value && cell.value.team !== pokemon.team) {
                   cell.value.handleSpecialDamage(
-                    30,
+                    20,
                     board,
                     AttackType.PHYSICAL,
                     pokemon,
@@ -318,7 +318,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "blue":
                 if (cell.value && cell.value.team !== pokemon.team) {
                   cell.value.handleSpecialDamage(
-                    30,
+                    20,
                     board,
                     AttackType.SPECIAL,
                     pokemon,
@@ -331,7 +331,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "yellow":
                 if (cell.value && cell.value.team !== pokemon.team) {
                   cell.value.handleSpecialDamage(
-                    30,
+                    20,
                     board,
                     AttackType.TRUE,
                     pokemon,
@@ -343,7 +343,7 @@ export class MindBlownStrategy extends AbilityStrategy {
                 break
               case "white":
                 if (cell.value && cell.value.team === pokemon.team) {
-                  cell.value.addShield(30, pokemon, 0, crit)
+                  cell.value.addShield(20, pokemon, 0, crit)
                   cell.value.status.clearNegativeStatus()
                 }
                 break

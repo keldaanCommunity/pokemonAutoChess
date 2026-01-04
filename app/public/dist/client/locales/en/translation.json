@@ -1737,7 +1737,7 @@
 		"WONDER_GUARD": "Deal [30,60,120,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with PARALYSIS for 3 seconds.",
 		"ELECTRIC_SURGE": "Increase the SPEED of all ELECTRIC allies by [10,SP] except the user.",
 		"PSYCHIC_SURGE": "Increase the AP of all PSYCHIC allies by [20,SP] except the user.",
-		"MIND_BLOWN": "Throws its head in the air, which then explodes into [5,SP] fireworks. The user sacrifies 50% of its max HP in the process. Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color:\n- Pink: Deal 30 PHYSICAL and BURN for 5 seconds .\n- Blue: Deal 30 SPECIAL and FATIGUE for 5 seconds.\n- Yellow: Deal 30 TRUE and FLINCH for 5 seconds.\n- White: Give 30 SHIELD and cure status afflictions for allies.",
+		"MIND_BLOWN": "Throws its head in the air, which then explodes into [5,SP] fireworks. The user sacrifies 50% of its max HP in the process. Fireworks hit in a 2 tile radius above random enemies, with effect depending on their color:\n- Pink: Deal 20 PHYSICAL and BURN for 5 seconds .\n- Blue: Deal 20 SPECIAL and FATIGUE for 5 seconds.\n- Yellow: Deal 20 TRUE and FLINCH for 5 seconds.\n- White: Give 20 SHIELD and cure status afflictions for allies.",
 		"PAYDAY": "Deals [30,60,90,SP] SPECIAL. If the target is KO'd, the allied player receives [1,2,3] GOLD.",
 		"PICKUP": "Deals [30,60,120,SP] SPECIAL and steal one item from the target if possible, otherwise steal [1,2,3] GOLD from its owner.",
 		"BEAT_UP": "Summon [1,2,3] Houndour ([100,SP]% HP, no items).",
