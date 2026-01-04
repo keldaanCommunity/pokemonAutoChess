@@ -61,6 +61,7 @@
 - Field speed stacks are now correctly reset after resurrection
 - Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 - Fossil starter portals now always offer an Eevee.
+- Fix anime of buried items when equipped with explorer kit.
 
 # Misc
 
