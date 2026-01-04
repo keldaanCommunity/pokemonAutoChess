@@ -1863,7 +1863,7 @@
 		"ASTRAL_BARRAGE": "向随机敌方宝可梦发射[7,SP]只小幽灵，每只造成20点SPECIAL。",
 		"WATERFALL": "获得[50,100,150,SP]点SHIELD，移除全部负面状态，并移除当前所在位置的BOARD_EFFECT。",
 		"PYRO_BALL": "点燃小石子，形成火球攻击最远的目标，对其经过的所有宝可梦造成[10,20,40,SP]点SPECIAL，并使他们陷入BURN 2秒。",
-		"WHIRLPOOL": "锁定最远的敌方宝可梦，向其释放4道潮旋，每道潮旋分别对其击中的第一只敌方宝可梦造成SPECIAL，数值相当于[125,SP]%的ATK。",
+		"WHIRLPOOL": "锁定最远的敌方宝可梦，向其释放4道潮旋，每道潮旋分别对其击中的第一只敌方宝可梦造成SPECIAL，数值相当于[100,SP]%的ATK。",
 		"SMOKE_SCREEN": "埋入地下，随后在敌方阵型中间现身，对所有ADJACENT目标造成[10,20,40,SP]点SPECIAL，并在后排放出烟雾，使其中的宝可梦陷入BLINDED。",
 		"PRESENT": "根据LUCK，随机造成[80,SP]，[150,SP]，[300,SP]点SPECIAL或为目标恢复50点HP。",
 		"LEAF_BLADE": "下一次攻击必定暴击，造成TRUE，数值相当于[100,SP]%的ATK。",

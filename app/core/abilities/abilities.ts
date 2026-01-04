@@ -6419,7 +6419,7 @@ export class WhirlpoolStrategy extends AbilityStrategy {
     targetsHit.forEach((enemy) => {
       for (let i = 0; i < 4; i++) {
         enemy.handleSpecialDamage(
-          Math.ceil(pokemon.atk * 1.25),
+          pokemon.atk,
           board,
           AttackType.SPECIAL,
           pokemon,

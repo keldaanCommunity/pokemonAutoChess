@@ -30,6 +30,7 @@
 - XD001 no longer changes weather to Night.
 - Paldean Wooper is now exclusive to Poison regions
 - Nerf Wiglett line: PP 80 → 100
+- Nerf Whirlpool (Seadra): 125 → 100% Attack damage per hit
 
 # Changes to Synergies
 

@@ -1857,7 +1857,7 @@
 		"ASTRAL_BARRAGE": "Attaque des ennemis aléatoires avec [7,SP] petits spectres, chacun infligeant 20 SPECIAL",
 		"WATERFALL": "Gagne [50,100,150,SP] SHIELD, se débarrasse de tout statut négatif et nettoie la case de tous les BOARD_EFFECT.",
 		"PYRO_BALL": "Le lanceur attaque en allumant une petite pierre et en la lançant comme une boule de feu sur la cible la plus éloignée, infligeant [10,20,40,SP] SPECIAL et BURN pendant 2 secondes à tous les ennemis sur son chemin.",
-		"WHIRLPOOL": "Cible l'ennemi le plus éloigné et déchaîne 4 tourbillons vers lui. Chacun inflige [125,SP]% d'ATK en SPECIAL au premier ennemi touché sur leur chemin.",
+		"WHIRLPOOL": "Cible l'ennemi le plus éloigné et déchaîne 4 tourbillons vers lui. Chacun inflige [100,SP]% d'ATK en SPECIAL au premier ennemi touché sur leur chemin.",
 		"SMOKE_SCREEN": "Passe sous terre pour réapparaître au milieu de l'équipe adverse, infligeant [10,20,40,SP] SPECIAL à tous les ennemis ADJACENT et en enfumant la rangée arrière pour réduire leur précision en les rendant BLINDED",
 		"PRESENT": "Peut soit infliger [80,SP], [150,SP], [300,SP] SPECIAL à la cible, soit la soigner de 50 HP, en fonction de votre LUCK.",
 		"LEAF_BLADE": "La prochaine attaque est un coup critique garanti infligeant [100,SP]% ATK en TRUE.",
