@@ -5639,6 +5639,36 @@ export class IcyWindStrategy extends AbilityStrategy {
   }
 }
 
+export class PowderSnowStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const freezeChance = [0.15, 0.3, 0.5][pokemon.stars - 1] ?? 0.5
+
+    effectInLine(board, pokemon, target, (cell) => {
+      if (cell.value != null && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+
+        if (chance(freezeChance, pokemon)) {
+          cell.value.status.triggerFreeze(2000, cell.value)
+        }
+      }
+    })
+  }
+}
+
 export class GigatonHammerStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16191,7 +16221,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HIGH_HORSEPOWER]: new HighHorsepowerStrategy(),
   [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
   [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
-  [Ability.EAR_DIG]: new EarDigStrategy()
+  [Ability.EAR_DIG]: new EarDigStrategy(),
+  [Ability.POWDER_SNOW]: new PowderSnowStrategy()
 }
 
 export function castAbility(

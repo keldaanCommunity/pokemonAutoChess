@@ -541,7 +541,8 @@
 		"HIGH_HORSEPOWER": "High Horsepower",
 		"CITY_SHUTTLE": "City Shuttle",
 		"BULLET_PUNCH": "Bullet Punch",
-		"EAR_DIG": "Ear Dig"
+		"EAR_DIG": "Ear Dig",
+		"POWDER_SNOW": "Powder Snow"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2149,7 +2150,8 @@
 		"HIGH_HORSEPOWER": "Charges through the target, then deals [15,25,35,SP] SPECIAL to all ADJACENT enemies. If only one enemy is hit, deals double SPECIAL",
 		"CITY_SHUTTLE": "Leap to the closest ally and saddle them on the user's back, then dash to the farthest enemy reachable. Deal [10,20,30,SP] SPECIAL + 100% of the carried ally's ATK to all enemy Pokémon in the path. Grant [20,40,80,SP] SHIELD to the user and the carried ally.",
 		"BULLET_PUNCH": "Deal [40,SP] TRUE to the target, then gain [40,SP] SPEED for 2 seconds.",
-		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them."
+		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
+		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

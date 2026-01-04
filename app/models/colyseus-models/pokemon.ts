@@ -10235,11 +10235,11 @@ export class Snom extends Pokemon {
   hp = 70
   atk = 8
   speed = 46
-  def = 4
+  def = 2
   speDef = 4
   maxPP = 80
-  range = 2
-  skill = Ability.BUG_BUZZ
+  range = 3
+  skill = Ability.POWDER_SNOW
   additional = true
 }
 
@@ -10250,11 +10250,11 @@ export class Frosmoth extends Pokemon {
   hp = 180
   atk = 20
   speed = 46
-  def = 6
+  def = 4
   speDef = 6
   maxPP = 80
-  range = 2
-  skill = Ability.BUG_BUZZ
+  range = 3
+  skill = Ability.POWDER_SNOW
   additional = true
 }
 

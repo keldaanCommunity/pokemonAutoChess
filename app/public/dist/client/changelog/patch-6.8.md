@@ -40,6 +40,7 @@
 - Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
 - Nerf Bellibolt: passive damage 30 → 10 ; first supercharge gives 30 → 20 speed and 50 → 30 shield. Added a 3 seconds cooldown between passive procs.
 - Buff Magic Powder (Hatenna): Shield 10/20/40 → 15/30/60
+- New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
 
 # Changes to Synergies
 
