@@ -31,6 +31,10 @@
 - Paldean Wooper is now exclusive to Poison regions
 - Nerf Wiglett line: PP 80 → 100
 - Nerf Whirlpool (Seadra): 125 → 100% Attack damage per hit
+- Nerf Bellsprout line: HP 70/150/230 → 60/130/200
+- Nerf Meganium HP: 250 → 220
+- Buff Oddish line: HP 80/140/200 → 80/150/230
+- Nerf Bellossom HP: 300 → 250
 
 # Changes to Synergies
 

@@ -3562,7 +3562,7 @@ export class Meganium extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 250
+  hp = 220
   atk = 22
   speed = 51
   def = 6
@@ -4399,7 +4399,7 @@ export class Bellsprout extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WEEPINBELL
-  hp = 70
+  hp = 60
   atk = 6
   speed = 47
   def = 3
@@ -4414,7 +4414,7 @@ export class Weepinbell extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VICTREEBEL
-  hp = 150
+  hp = 130
   atk = 12
   speed = 47
   def = 5
@@ -4428,7 +4428,7 @@ export class Victreebel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 230
+  hp = 200
   atk = 20
   speed = 47
   def = 7
@@ -7429,7 +7429,7 @@ export class Gloom extends Pokemon {
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VILEPLUME
-  hp = 140
+  hp = 150
   atk = 16
   speed = 41
   def = 6
@@ -7443,7 +7443,7 @@ export class Vileplume extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 200
+  hp = 230
   atk = 24
   speed = 41
   def = 8
@@ -7457,7 +7457,7 @@ export class Bellossom extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.SOUND])
   rarity = Rarity.SPECIAL
   stars = 4
-  hp = 300
+  hp = 250
   atk = 30
   speed = 41
   def = 10
