@@ -367,7 +367,7 @@ export default abstract class PokemonState {
 
   handleDamage({
     target: pokemon,
-    damage,
+    damage: incomingDamage,
     board,
     attackType,
     attacker,
@@ -384,6 +384,7 @@ export default abstract class PokemonState {
   }): { death: boolean; takenDamage: number } {
     let death = false
     let takenDamage = 0
+    let damage = incomingDamage
 
     if (isNaN(damage)) {
       logger.trace(
@@ -637,6 +638,29 @@ export default abstract class PokemonState {
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
+      } else if (pokemon.hp - residualDamage <= 0) {
+        // is about to die, check adjacent ally with Cover band
+        const coverAlly = board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .map((cell) => cell.value)
+          .find(
+            (ally) =>
+              ally &&
+              ally.team === pokemon.team &&
+              ally.items.has(Item.COVER_BAND) &&
+              ally.hp > 0
+          )
+        if (coverAlly) {
+          // cover ally takes the hit instead
+          return coverAlly.handleDamage({
+            damage: incomingDamage,
+            board,
+            attackType,
+            attacker,
+            shouldTargetGainMana,
+            isRetaliation
+          })
+        }
       }
 
       pokemon.hp = Math.max(0, pokemon.hp - residualDamage)
