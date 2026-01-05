@@ -1324,7 +1324,7 @@
 		"FIRE_BLAST": "Spara una Fuocobomba in un'area a forma di stella, infliggendo [30,60,110,SP] SPECIAL a tutti gli avversari colpiti.",
 		"WHEEL_OF_FIRE": "Lancia un Ruotafuoco ritornante che infligge [10,20,30,SP] SPECIAL a tutti i Pokèmon nemici nel suo tragitto.",
 		"SEISMIC_TOSS": "Infligge al bersaglio [5,10,20,SP] TRUE moltiplicati per il tuo livello giocatore",
-		"GUILLOTINE": "Infligge al bersaglio [1,2,3,SP] per ATK SPECIAL. Ripristina metà PP all'utilizzatore se il bersaglio è andato KO.",
+		"GUILLOTINE": "Infligge al bersaglio [300,SP]% per ATK SPECIAL. Ripristina metà PP all'utilizzatore se il bersaglio è andato KO.",
 		"ROCK_SLIDE": "Infligge [30,60,120,SP] SPECIAL al bersaglio. Raddoppia i danni se il bersaglio è di tipo FLYING.",
 		"HEAT_WAVE": "Infliggi [10,20,30,SP] SPECIAL a tutti i nemici, con il [20,LK]% di possibilità di causare BURN per 3 secondi. Scongela tutti i Pokèmon con la condizione FREEZE.",
 		"FLAMETHROWER": "Infliggi [30,60,120,SP] SPECIAL e causa BURN per 4 secondi a tutti i Pokèmon nemici in linea retta dentro un raggio di 3 caselle.",

@@ -1628,7 +1628,7 @@
 		"FIRE_BLAST": "Lanza una llamarada en forma de estrella, realizando [30,60,110,SP] SPECIAL a todos los Pokémon enemigos golpeados.",
 		"WHEEL_OF_FIRE": "El usuario se envuelve en llamas, rodando hacia los enemigos de ida y vuelta. Inflige [10,20,30,SP] de SPECIAL dos veces a todos los Pokémon enemigos que golpea",
 		"SEISMIC_TOSS": "Inflige [5,10,20,SP] de TRUE al objetivo multiplicado por tu nivel de jugador",
-		"GUILLOTINE": "Inflige [1,2,3,SP] x ATK SPECIAL a un objetivo. Restaura la mitad de PP si el objetivo queda KO",
+		"GUILLOTINE": "Inflige [300,SP]% ATK SPECIAL a un objetivo. Restaura la mitad de PP si el objetivo queda KO",
 		"ROCK_SLIDE": "Inflige [30,60,120,SP] de SPECIAL a un objetivo, duplica el daño si el objetivo es FLYING",
 		"HEAT_WAVE": "Inflige [10,20,30,SP] SPECIAL a todos los enemigos, con un [20,LK]% de BURN por 3 segundos. Descongela a todo pokémon FREEZE",
 		"FLAMETHROWER": "Inflige [30,60,120,SP] SPECIAL y BURN por 4 segundos a todos los Pokémon enemigos a una dirección con un radio de 3 casillas.",

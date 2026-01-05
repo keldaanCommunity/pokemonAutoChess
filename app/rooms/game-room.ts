@@ -879,7 +879,6 @@ export default class GameRoom extends Room<GameState> {
           if (usr.elo === minElo && humans.length >= 8) {
             player.titles.add(Title.OUTSIDER)
           }
-          //this.presence.publish("ranked-lobby-winner", player)
         }
       }
 

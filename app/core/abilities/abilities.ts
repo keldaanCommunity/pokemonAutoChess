@@ -2537,7 +2537,7 @@ export class GuillotineStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = pokemon.atk * pokemon.stars
+    const damage = pokemon.atk * 3
     const { death } = target.handleSpecialDamage(
       damage,
       board,

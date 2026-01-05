@@ -1,3 +1,4 @@
+import { matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import dayjs from "dayjs"
 import admin from "firebase-admin"
@@ -188,6 +189,11 @@ async function resetEventScores() {
 
     logger.info(
       `Event reset completed! Reset event data for ${result.modifiedCount} users`
+    )
+
+    matchMaker.presence.publish(
+      "announcement",
+      "Victory Road has started! Be the first to reach the finish line!"
     )
   } catch (e) {
     logger.error("Error during event reset scores:", e)
