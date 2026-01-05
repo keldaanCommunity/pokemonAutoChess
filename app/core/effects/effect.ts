@@ -225,6 +225,7 @@ interface OnAttackEffectArgs {
   specialDamage: number
   trueDamage: number
   totalDamage: number
+  crit: boolean
   isTripleAttack?: boolean
   hasAttackKilled?: boolean
 }
@@ -293,6 +294,7 @@ export interface OnAttackReceivedEffectArgs {
   totalDamage: number
   isTripleAttack?: boolean
   attackType?: AttackType
+  crit: boolean
 }
 
 export class OnAttackReceivedEffect extends Effect {

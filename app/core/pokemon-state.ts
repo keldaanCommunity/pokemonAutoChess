@@ -245,7 +245,8 @@ export default abstract class PokemonState {
         trueDamage,
         totalDamage,
         isTripleAttack,
-        hasAttackKilled
+        hasAttackKilled,
+        crit
       })
       if (isAttackSuccessful) {
         pokemon.onHit({
@@ -469,14 +470,14 @@ export default abstract class PokemonState {
           attacker.items.has(Item.PROTECTIVE_PADS) === false &&
           !isRetaliation
         ) {
-          const crit =
+          const reflectCrit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
             chance(pokemon.critChance / 100, pokemon)
           const reflectDamage = Math.round(
             0.5 *
               damage *
               (1 + pokemon.ap / 100) *
-              (crit ? pokemon.critPower : 1)
+              (reflectCrit ? pokemon.critPower : 1)
           )
           attacker.handleDamage({
             damage: reflectDamage,

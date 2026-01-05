@@ -457,13 +457,24 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
-    value = Math.round(
-      value *
+  addPP(
+    baseValue: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    const value = Math.round(
+      baseValue *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1) *
-        (this.status.fatigue && value > 0 ? 0.5 : 1)
+        (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
+
+    if (this.items.has(Item.NULLIFY_BANDANA)) {
+      if (value <= 0) return // cannot lose PP
+      this.addShield(baseValue, caster, apBoost, crit) // PP are gained as shield instead
+      return
+    }
 
     if (
       !(value > 0 && this.status.silence) &&
@@ -790,7 +801,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage,
     totalDamage,
     isTripleAttack,
-    hasAttackKilled
+    hasAttackKilled,
+    crit
   }: {
     target: PokemonEntity
     board: Board
@@ -800,6 +812,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     totalDamage: number
     isTripleAttack: boolean
     hasAttackKilled: boolean
+    crit: boolean
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
 
@@ -817,7 +830,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         trueDamage,
         totalDamage,
         isTripleAttack,
-        hasAttackKilled
+        hasAttackKilled,
+        crit
       })
     })
 
@@ -830,7 +844,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage,
         trueDamage,
         totalDamage,
-        isTripleAttack
+        isTripleAttack,
+        crit
       })
     })
   }

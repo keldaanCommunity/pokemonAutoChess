@@ -28,7 +28,13 @@ export function ItemDetailTooltipContent({
   const { t } = useTranslation()
   const recipes = useMemo(
     () =>
-      Object.entries(ItemRecipe).filter(([, recipe]) => recipe.includes(item)),
+      ItemComponents.map((c) =>
+        Object.entries(ItemRecipe).find(
+          ([, recipe]) =>
+            (recipe[0] === item && recipe[1] === c) ||
+            (recipe[1] === item && recipe[0] === c)
+        )
+      ).filter((r) => r != null),
     [item]
   )
 

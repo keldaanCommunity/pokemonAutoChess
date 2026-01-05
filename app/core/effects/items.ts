@@ -502,6 +502,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.BLACK_BELT]: [
+    new OnAttackEffect(({ pokemon, totalDamage, crit }) => {
+      if(crit){
+        pokemon.addShield(Math.ceil(0.33 * totalDamage), pokemon, 0, false)
+      }
+    })
+  ],
+
   [Item.MAX_REVIVE]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.addResurrection(pokemon)

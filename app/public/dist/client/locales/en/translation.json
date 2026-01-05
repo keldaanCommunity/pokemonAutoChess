@@ -2972,7 +2972,7 @@
 		"BLACK_BELT": "Critical attacks provide 33% of the damage dealt as SHIELD.",
 		"MACH_RIBBON": "When the holder attacks, gain 1 stack. The holder gains 1 ATK per stack. At 20 stacks, the holder gains 30 SPEED.",
 		"EXPLOSIVE_BAND": "The first time user shield is depleted, this item explodes, dealing 10 + 100% of received damage as SPECIAL to adjacent enemies.",
-		"TWIST_BAND": "Stat debuffs received become buffs instead.",
+		"TWIST_BAND": "Stat debuffs inflicted by enemies become buffs instead.",
 		"BIG_EATER_BELT": "Increase all permanent stat buffs received by 25%. Allows the wearer to eat 2 different dishes per round.",
 		"LUCKY_RIBBON": "Increase holder's LUCK by 30%",
 		"COVER_BAND": "If an adjacent teammate is about to get KO with some incoming damage, the wearer takes the damage instead.",
