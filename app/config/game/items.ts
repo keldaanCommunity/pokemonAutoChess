@@ -104,6 +104,6 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.BIG_EATER_BELT]: { [Stat.SHIELD]: 15, [Stat.HP]: 50 },
   [Item.MACH_RIBBON]: { [Stat.SHIELD]: 15, [Stat.SPEED]: 10 },
   [Item.COVER_BAND]: { [Stat.DEF]: 12, [Stat.SHIELD]: 50 },
-  [Item.HEAL_RIBBON]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
-  [Item.NULLIFY_BANDANA]: { [Stat.SHIELD]: 30 }
+  [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
+  [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 }
 }

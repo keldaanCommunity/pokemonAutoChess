@@ -296,8 +296,8 @@ export enum Item {
   BIG_EATER_BELT = "BIG_EATER_BELT",
   LUCKY_RIBBON = "LUCKY_RIBBON",
   COVER_BAND = "COVER_BAND",
-  HEAL_RIBBON = "HEAL_RIBBON",
-  NULLIFY_BANDANA = "NULLIFY_BANDANA"
+  EFFICIENT_BANDANNA = "EFFICIENT_BANDANNA",
+  NULLIFY_BANDANNA = "NULLIFY_BANDANNA"
 }
 
 export const MemoryDiscs = [
@@ -507,8 +507,8 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.LUCKY_RIBBON]: [Item.SILK_SCARF, Item.TWISTED_SPOON],
   [Item.BIG_EATER_BELT]: [Item.SILK_SCARF, Item.MIRACLE_SEED],
   [Item.COVER_BAND]: [Item.SILK_SCARF, Item.HEART_SCALE],
-  [Item.HEAL_RIBBON]: [Item.SILK_SCARF, Item.MYSTIC_WATER],
-  [Item.NULLIFY_BANDANA]: [Item.SILK_SCARF, Item.SILK_SCARF]
+  [Item.EFFICIENT_BANDANNA]: [Item.SILK_SCARF, Item.MYSTIC_WATER],
+  [Item.NULLIFY_BANDANNA]: [Item.SILK_SCARF, Item.SILK_SCARF]
 }
 
 export const NonSpecialBerries: Item[] = [

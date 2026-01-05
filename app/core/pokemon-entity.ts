@@ -478,7 +478,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (this.items.has(Item.NULLIFY_BANDANA)) {
+    if (this.items.has(Item.NULLIFY_BANDANNA)) {
       if (value <= 0) return // cannot lose PP
       this.addShield(baseValue, caster, apBoost, crit) // PP are gained as shield instead
       return

@@ -2679,8 +2679,8 @@
 		"BIG_EATER_BELT": "Big Eater Belt",
 		"LUCKY_RIBBON": "Lucky Ribbon",
 		"COVER_BAND": "Cover Band",
-		"HEAL_RIBBON": "Heal Ribbon",
-		"NULLIFY_BANDANA": "Nullify Bandana"
+		"EFFICIENT_BANDANNA": "Efficient Bandanna",
+		"NULLIFY_BANDANNA": "Nullify Bandanna"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2971,13 +2971,13 @@
 		"FRIEND_BOW": "Gives NORMAL synergy.",
 		"BLACK_BELT": "Critical attacks provide 33% of the damage dealt as SHIELD.",
 		"MACH_RIBBON": "When the holder attacks, gain 1 stack (max 20 stacks). The holder gains 1 ATK per stack. At 20 stacks, gains 30 SPEED.",
-		"EXPLOSIVE_BAND": "The first time user shield is depleted, this item explodes, dealing 10 + 100% of received damage as SPECIAL to adjacent enemies.",
+		"EXPLOSIVE_BAND": "The first time user shield is depleted, this item explodes, dealing 10 + 100% of received damage as SPECIAL to ADJACENT enemies.",
 		"TWIST_BAND": "Stat debuffs inflicted by enemies become buffs instead.",
 		"BIG_EATER_BELT": "Increase all permanent stat buffs received by 25%. Allows the wearer to eat 2 different dishes per round.",
 		"LUCKY_RIBBON": "Increase holder's LUCK by 30%",
-		"COVER_BAND": "If an adjacent teammate is about to get KO with some incoming damage, the wearer takes the damage instead.",
-		"HEAL_RIBBON": "Increase all sources of healing received and provided by 20%. 50% of overheal is applied as SHIELD instead.",
-		"NULLIFY_BANDANA": "100% of PP gained are converted to SHIELD."
+		"COVER_BAND": "If an ADJACENT teammate is about to get KO with some incoming damage, the wearer takes the damage instead.",
+		"EFFICIENT_BANDANNA": "All ADJACENT allies have their max PP reduced by 5%.",
+		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. 100% of PP gained are converted to SHIELD."
 	},
 	"passive_description": {
 		"NONE": "No passive",

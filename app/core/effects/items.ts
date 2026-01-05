@@ -1228,5 +1228,21 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.broadcastAbility({ skill: "EXPLOSION" })
       pokemon.removeItem(Item.EXPLOSIVE_BAND)
     })
+  ],
+
+  [Item.EFFICIENT_BANDANNA]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      simulation.board
+        .getAdjacentCells(entity.positionX, entity.positionY)
+        .forEach((cell) => {
+          if (
+            cell.value &&
+            cell.value.team === entity.team &&
+            cell.value.id !== entity.id
+          ) {
+            cell.value.maxPP = Math.round(0.95 * cell.value.maxPP)
+          }
+        })
+    }, Item.EFFICIENT_BANDANNA)
   ]
 }
