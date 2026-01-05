@@ -92,7 +92,7 @@ export enum Item {
   EXPLORER_KIT = "EXPLORER_KIT",
   METAL_COAT = "METAL_COAT",
   AIR_BALLOON = "AIR_BALLOON",
-  HARD_STONE = "HARD_STONE",
+  PROTECTOR = "PROTECTOR",
   INCENSE = "INCENSE",
   EXP_SHARE = "EXP_SHARE",
   TERRAIN_EXTENDER = "TERRAIN_EXTENDER",
@@ -523,7 +523,7 @@ export const Berries = [...NonSpecialBerries, ...SpecialBerries]
 
 export const Tools = [
   Item.LIGHT_BALL,
-  Item.HARD_STONE,
+  Item.PROTECTOR,
   Item.DRAGON_SCALE,
   Item.METAL_COAT,
   Item.AIR_BALLOON,
@@ -673,7 +673,7 @@ export const SynergyGemsBuried: SynergyGem[] = [
 ] satisfies SynergyGem[]
 
 export const ToolsBuried: Tool[] = [
-  Item.HARD_STONE,
+  Item.PROTECTOR,
   Item.METAL_COAT,
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
@@ -704,7 +704,7 @@ export const SynergyItems = [
   Item.METRONOME,
   Item.METAL_COAT,
   Item.AIR_BALLOON,
-  Item.HARD_STONE,
+  Item.PROTECTOR,
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
   Item.EXPLORER_KIT,
@@ -739,7 +739,7 @@ export const SynergyGivenByItem = {
   [Item.ELECTIRIZER]: Synergy.ELECTRIC,
   [Item.MAGMARIZER]: Synergy.FIRE,
   [Item.AIR_BALLOON]: Synergy.FLYING,
-  [Item.HARD_STONE]: Synergy.ROCK,
+  [Item.PROTECTOR]: Synergy.ROCK,
   [Item.EXPLORER_KIT]: Synergy.GROUND,
   [Item.SPELL_TAG]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
