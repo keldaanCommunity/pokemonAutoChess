@@ -504,7 +504,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.BLACK_BELT]: [
     new OnAttackEffect(({ pokemon, totalDamage, crit }) => {
-      if(crit){
+      if (crit) {
         pokemon.addShield(Math.ceil(0.33 * totalDamage), pokemon, 0, false)
       }
     })
@@ -662,9 +662,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.MUSCLE_BAND]: [
     new OnDamageReceivedEffect(({ pokemon, damage }) => {
-      if (pokemon.count.defensiveRibbonCount < 20 && damage > 0) {
-        pokemon.count.defensiveRibbonCount++
-        if (pokemon.count.defensiveRibbonCount % 2 === 0) {
+      if (pokemon.count.muscleBandCount < 20 && damage > 0) {
+        pokemon.count.muscleBandCount++
+        if (pokemon.count.muscleBandCount % 2 === 0) {
           pokemon.addAttack(1, pokemon, 0, false)
           pokemon.addDefense(2, pokemon, 0, false)
           pokemon.addSpeed(5, pokemon, 0, false)
@@ -672,11 +672,32 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       }
     }),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
+      const stacks = Math.floor(pokemon.count.muscleBandCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
       pokemon.addDefense(-2 * stacks, pokemon, 0, false)
       pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
-      pokemon.count.defensiveRibbonCount = 0
+      pokemon.count.muscleBandCount = 0
+    })
+  ],
+
+  [Item.MACH_RIBBON]: [
+    new OnAttackEffect(({ pokemon }) => {
+      if (pokemon.count.machRibbonCount < 20) {
+        pokemon.count.machRibbonCount++
+        pokemon.addAttack(1, pokemon, 0, false)
+        if (pokemon.count.machRibbonCount === 20) {
+          // final stack also gives speed
+          pokemon.addSpeed(30, pokemon, 0, false)
+        }
+      }
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks = pokemon.count.machRibbonCount
+      pokemon.addAttack(-stacks, pokemon, 0, false)
+      if(stacks >= 20) {
+        pokemon.addSpeed(-30, pokemon, 0, false)
+      }
+      pokemon.count.machRibbonCount = 0
     })
   ],
 

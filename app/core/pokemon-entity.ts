@@ -1380,7 +1380,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    const stackingItems = [Item.MUSCLE_BAND, Item.SOUL_DEW, Item.UPGRADE]
+    const stackingItems = [Item.MUSCLE_BAND, Item.SOUL_DEW, Item.UPGRADE, Item.MACH_RIBBON]
 
     const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
 

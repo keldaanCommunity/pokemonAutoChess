@@ -249,7 +249,7 @@ class GameContainer {
       "tripleAttackCount",
       "upgradeCount",
       "soulDewCount",
-      "defensiveRibbonCount"
+      "muscleBandCount"
     ]
 
     fieldsCount.forEach((field) => {
