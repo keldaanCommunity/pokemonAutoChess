@@ -88,9 +88,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     board: [[Pkm.GYARADOS, 4, 2]],
     marowakItems: [[Item.KINGS_ROCK]],
     shinyChance: 1 / 100,
-    rewards: ItemComponents,
+    rewards: NonSpecialItemComponents,
     getRewards(player: Player) {
-      const randomComponents = pickNRandomIn(ItemComponents, 1)
+      const randomComponents = pickNRandomIn(NonSpecialItemComponents, 1)
       return randomComponents
     }
   },
@@ -124,7 +124,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       return rewards
     },
     getRewardsPropositions(_player: Player) {
-      return pickNRandomIn(ItemComponents, 3)
+      return pickNRandomIn([...NonSpecialItemComponents, Item.FOSSIL_STONE], 3)
     }
   },
 

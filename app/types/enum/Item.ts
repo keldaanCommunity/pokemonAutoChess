@@ -98,7 +98,6 @@ export enum Item {
   TERRAIN_EXTENDER = "TERRAIN_EXTENDER",
   POKERUS_VIAL = "POKERUS_VIAL",
   SPELL_TAG = "SPELL_TAG",
-  SILK_SCARF = "SILK_SCARF",
   TINY_MUSHROOM = "TINY_MUSHROOM",
   BERSERK_GENE = "BERSERK_GENE",
   SURFBOARD = "SURFBOARD",
@@ -287,7 +286,18 @@ export enum Item {
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
   MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
-  CELL_BATTERY = "CELL_BATTERY"
+  CELL_BATTERY = "CELL_BATTERY",
+  SILK_SCARF = "SILK_SCARF",
+  FRIEND_BOW = "FRIEND_BOW",
+  BLACK_BELT = "BLACK_BELT",
+  MACH_RIBBON = "MACH_RIBBON",
+  EXPLOSIVE_BAND = "EXPLOSIVE_BAND",
+  TWIST_BAND = "TWIST_BAND",
+  BIG_EATER_BELT = "BIG_EATER_BELT",
+  LUCKY_RIBBON = "LUCKY_RIBBON",
+  COVER_BAND = "COVER_BAND",
+  HEAL_RIBBON = "HEAL_RIBBON",
+  NULLIFY_BANDANA = "NULLIFY_BANDANA"
 }
 
 export const MemoryDiscs = [
@@ -427,19 +437,20 @@ export const FishingRods = [
 export type FishingRod = (typeof FishingRods)[number]
 
 export const NonSpecialItemComponents: Item[] = [
-  Item.TWISTED_SPOON,
+  Item.MIRACLE_SEED,
+  Item.MYSTIC_WATER,
+  Item.HEART_SCALE,
+  Item.NEVER_MELT_ICE,
+  Item.CHARCOAL,
   Item.MAGNET,
   Item.BLACK_GLASSES,
-  Item.MIRACLE_SEED,
-  Item.CHARCOAL,
-  Item.NEVER_MELT_ICE,
-  Item.HEART_SCALE,
-  Item.MYSTIC_WATER
+  Item.TWISTED_SPOON
 ]
 
 export const ItemComponents: Item[] = [
   ...NonSpecialItemComponents,
-  Item.FOSSIL_STONE
+  Item.FOSSIL_STONE,
+  Item.SILK_SCARF
 ]
 
 export const ItemRecipe: { [key in Item]?: Item[] } = {
@@ -487,7 +498,17 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.POKE_DOLL]: [Item.NEVER_MELT_ICE, Item.HEART_SCALE],
   [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
   [Item.FLAME_ORB]: [Item.CHARCOAL, Item.HEART_SCALE],
-  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
+  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE],
+  [Item.FRIEND_BOW]: [Item.SILK_SCARF, Item.FOSSIL_STONE],
+  [Item.BLACK_BELT]: [Item.SILK_SCARF, Item.BLACK_GLASSES],
+  [Item.MACH_RIBBON]: [Item.SILK_SCARF, Item.MAGNET],
+  [Item.EXPLOSIVE_BAND]: [Item.SILK_SCARF, Item.CHARCOAL],
+  [Item.TWIST_BAND]: [Item.SILK_SCARF, Item.NEVER_MELT_ICE],
+  [Item.LUCKY_RIBBON]: [Item.SILK_SCARF, Item.TWISTED_SPOON],
+  [Item.BIG_EATER_BELT]: [Item.SILK_SCARF, Item.MIRACLE_SEED],
+  [Item.COVER_BAND]: [Item.SILK_SCARF, Item.HEART_SCALE],
+  [Item.HEAL_RIBBON]: [Item.SILK_SCARF, Item.MYSTIC_WATER],
+  [Item.NULLIFY_BANDANA]: [Item.SILK_SCARF, Item.SILK_SCARF]
 }
 
 export const NonSpecialBerries: Item[] = [
@@ -531,7 +552,6 @@ export const Tools = [
   Item.METRONOME,
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
-  Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
   Item.BERSERK_GENE,
   Item.SURFBOARD,
@@ -677,7 +697,6 @@ export const ToolsBuried: Tool[] = [
   Item.METAL_COAT,
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
-  Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
   Item.INCENSE,
   Item.ELECTIRIZER,
@@ -710,13 +729,13 @@ export const SynergyItems = [
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
   Item.SHINY_STONE,
-  Item.SILK_SCARF,
   Item.TINY_MUSHROOM,
   Item.COOKING_POT,
   Item.RUNNING_SHOES,
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.INCENSE,
+  Item.FRIEND_BOW,
   ...MemoryDiscs
 ] satisfies Item[]
 
@@ -743,7 +762,7 @@ export const SynergyGivenByItem = {
   [Item.EXPLORER_KIT]: Synergy.GROUND,
   [Item.SPELL_TAG]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
-  [Item.SILK_SCARF]: Synergy.NORMAL,
+  [Item.FRIEND_BOW]: Synergy.NORMAL,
   [Item.TINY_MUSHROOM]: Synergy.BUG,
   [Item.COOKING_POT]: Synergy.GOURMET,
   [Item.INCENSE]: Synergy.FLORA,

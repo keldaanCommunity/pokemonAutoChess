@@ -8,8 +8,10 @@ import { Stat } from "../../../../types/enum/Game"
 import {
   ConsumableItems,
   Item,
+  ItemComponents,
   ItemRecipe,
   RemovableItems,
+  ShinyItems,
   UnholdableItems
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
@@ -41,13 +43,14 @@ export function ItemDetailTooltipContent({
     return output
   }
 
-  const itemCategoryLabel = ConsumableItems.includes(item)
-    ? t("consumable_item")
-    : isIn(UnholdableItems, item)
-      ? t("unholdable_item")
-      : isIn(RemovableItems, item)
-        ? t("removable_item")
-        : null
+  const itemCategoryLabel = useMemo(() => {
+    if (ConsumableItems.includes(item)) return t("consumable_item")
+    if (isIn(UnholdableItems, item)) return t("unholdable_item")
+    if (isIn(RemovableItems, item)) return t("removable_item")
+    if (isIn(ItemComponents, item)) return t("item_component")
+    if (isIn(ShinyItems, item)) return t("shiny")
+    return null
+  }, [item, t])
 
   return (
     <div className="game-item-detail">

@@ -27,9 +27,9 @@ import {
   ArtificialItems,
   HMs,
   Item,
-  ItemComponents,
   MissionOrder,
   NonSpecialBerries,
+  NonSpecialItemComponents,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
@@ -231,7 +231,8 @@ export default class Player extends Schema implements IPlayer {
     }
 
     if (state.specialGameRule === SpecialGameRule.SLAMINGO) {
-      for (let i = 0; i < 4; i++) this.items.push(pickRandomIn(ItemComponents))
+      for (let i = 0; i < 4; i++)
+        this.items.push(pickRandomIn(NonSpecialItemComponents))
     }
   }
 

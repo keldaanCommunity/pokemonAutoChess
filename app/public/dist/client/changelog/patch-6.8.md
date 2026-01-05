@@ -57,6 +57,10 @@
 - New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to BURN with their attacks.
 - Heat stone changed: no longer has additional chance to BURN with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
+- Miracle seed, Leaf Stone and Sticky Barb now gives 15 max HP instead of 15 shield.
+- Removed base 15 shield from Gracidea flower and Max Revive.
+- Removed base 15 shield from Smoke Ball. Shield received from Smoke Ball drop: 50 → 70
+- Kings Rock now gives 100 max HP instead of 100 shield. 35 → 30 % of max HP as shield on fight start. 
 
 # Gameplay
 
@@ -64,6 +68,7 @@
 - Stage 15 component pick is back, and stage 2 no longer gives a random component as a reward. Instead, the rewards of stage 2 are the 1 out of 3 component pick proposed on stage 3.
 - Fire weather is renamed to Drought
 - Zenith is now the weather triggered by Grass synergy. New effect: +15% healing, -30% Sleep duration
+- Item components carousels now have 40% chance to include one additional Fossil Stone. Otherwise they will only propose non-special item components.
 
 # UI
 

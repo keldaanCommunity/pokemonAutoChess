@@ -77,6 +77,7 @@ import {
   ItemComponents,
   ItemRecipe,
   Mulches,
+  NonSpecialItemComponents,
   ShinyItems,
   SynergyGems,
   SynergyGivenByGem,
@@ -537,7 +538,7 @@ export class OnDragDropCombineCommand extends Command<
     if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
       if (ItemComponents.includes(exchangedItem)) {
-        result = pickRandomIn(ItemComponents.filter((i) => i !== exchangedItem))
+        result = pickRandomIn(NonSpecialItemComponents.filter((i) => i !== exchangedItem))
       } else if (SynergyStones.includes(exchangedItem)) {
         result = pickRandomIn(SynergyStones.filter((i) => i !== exchangedItem))
       } else if (CraftableItems.includes(exchangedItem)) {
