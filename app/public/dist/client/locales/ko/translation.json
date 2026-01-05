@@ -1644,7 +1644,7 @@
 		"FIRE_BLAST": "大 모양의 화염을 발사하여 적중한 모든 적에게 [30,60,110,SP] SPECIAL 를 가한다.",
 		"WHEEL_OF_FIRE": "되돌아오는 화염자동차를 발사한다. 맞은 적 포켓몬들에게 [10,20,30,SP] SPECIAL 을 두번 가한다.",
 		"SEISMIC_TOSS": "대상에게 [5,10,20,SP]에 플레이어 레벨을 곱한 만큼의 TRUE 을 가한다.",
-		"GUILLOTINE": "대상에 [1,2,3,SP] x ATK SPECIAL 을 가한다. 대상이 기절한 경우 사용자는 절반의 PP를 회복한다.",
+		"GUILLOTINE": "대상에 [300,SP]% ATK SPECIAL 을 가한다. 대상이 기절한 경우 사용자는 절반의 PP를 회복한다.",
 		"ROCK_SLIDE": "대상에 [30,60,120,SP] SPECIAL 을 가한다. 대상이 FLYING 일 경우 대미지가 두배가 된다.",
 		"HEAT_WAVE": "모든 적에게 [10,20,30,SP] SPECIAL 를 가한다. [20,LK]% 확률로 BURN 을 3초간 가한다. 모든 FREEZE 포켓몬을 해동한다.",
 		"FLAMETHROWER": "3칸 이내의 한 방향으로 모든 적에게 [30,60,120,SP] SPECIAL 를 입히고 4초간 BURN 을 가한다.",

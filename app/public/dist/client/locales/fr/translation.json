@@ -1657,7 +1657,7 @@
 		"FIRE_BLAST": "Lance une Déflagration de feu dans une zone d'effet en forme d'étoile, infligeant [30,60,110,SP] SPECIAL à tous les ennemis touchés.",
 		"WHEEL_OF_FIRE": "Envoie une Roue de Feu sur l’ennemi le plus éloigné et inflige deux fois [10,20,30,SP] de SPECIAL à tous les ennemis sur son chemin, à l'aller et au retour.",
 		"SEISMIC_TOSS": "Inflige à la cible [5,10,20,SP] TRUE multiplié par votre niveau de dresseur.",
-		"GUILLOTINE": "Inflige à la cible [1,2,3,SP] x ATK SPECIAL. Restaure la moitié des PP du lanceur si la cible a été mise KO.",
+		"GUILLOTINE": "Inflige à la cible [300,SP]% de l'ATK du lanceur en SPECIAL. Restaure la moitié des PP du lanceur si la cible a été mise KO.",
 		"ROCK_SLIDE": "Inflige à la cible [30,60,120,SP] SPECIAL. Les dégâts sont doublés si la cible est de type FLYING.",
 		"HEAT_WAVE": "Inflige [10,20,30,SP] SPECIAL à tous les ennemis, avec [20,LK]% de chance d'infliger BURN pendant 3 secondes. Dégèle tous les Pokémon FREEZE.",
 		"FLAMETHROWER": "Inflige [30,60,120,SP] SPECIAL et BURN pendant 4 secondes à tous les ennemis dans une direction et un rayon de 3 cases.",

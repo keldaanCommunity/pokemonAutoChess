@@ -42,6 +42,7 @@
 - Buff Magic Powder (Hatenna): Shield 10/20/40 → 15/30/60
 - New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
 - New passive for Shaymin Sky form: change weather to Zenith
+- Buff Guillotine (Machop): Attack: 100/200/300% ATK SPECIAL → 300% ATK SPECIAL at all tiers
 
 # Changes to Synergies
 

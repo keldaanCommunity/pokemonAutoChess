@@ -1663,7 +1663,7 @@
 		"FIRE_BLAST": "发射一道对星形区域造成伤害的火焰，对击中的所有敌方宝可梦造成[30,60,110,SP]点SPECIAL。",
 		"WHEEL_OF_FIRE": "对最远的敌方宝可梦发射一个会飞回的火焰轮，对经过的所有敌方宝可梦造成两次[10,20,30,SP]点SPECIAL。",
 		"SEISMIC_TOSS": "对目标造成TRUE，数值相当于[5,10,20,SP]乘以玩家的局内等级。",
-		"GUILLOTINE": "对目标造成SPECIAL，数值相当于使用者[100,200,300,SP]%的ATK。若目标因此倒下，恢复使用者一半的PP。",
+		"GUILLOTINE": "对目标造成SPECIAL，数值相当于使用者[300,SP]%的ATK。若目标因此倒下，恢复使用者一半的PP。",
 		"ROCK_SLIDE": "对目标造成[30,60,120,SP]点SPECIAL。对FLYING宝可梦伤害翻倍。",
 		"HEAT_WAVE": "对所有敌方宝可梦造成[10,20,30,SP]点SPECIAL，并有[20,LK]%的概率使他们陷入BURN 3秒。解除所有宝可梦的FREEZE。",
 		"FLAMETHROWER": "对一个方向上3格半径以内的所有敌方宝可梦造成[30,60,120,SP]点SPECIAL，并使他们陷入BURN 4秒。",

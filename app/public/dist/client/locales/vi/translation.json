@@ -1200,7 +1200,7 @@
 		"CONFUSION": "Mục tiêu bị CONFUSION và SILENCE trong [3,5,7] giây. Nếu đã CONFUSION, gây [75,150,300,SP] SPECIAL",
 		"WHEEL_OF_FIRE": "Bắn ra vòng xoáy lửa, gây 2 lần [10,20,30,SP] SPECIAL cho tất cả pokemon bị trúng đòn",
 		"SEISMIC_TOSS": "Gây [5,10,20,SP] TRUE lên mục tiêu nhân với cấp độ người chơi của bạn",
-		"GUILLOTINE": "Gây [1,2,3,SP] x ATK SPECIAL lên mục tiêu. Hồi phục một nửa PP nếu đối thủ bị tiêu diệt",
+		"GUILLOTINE": "Gây [300,SP]% ATK SPECIAL lên mục tiêu. Hồi phục một nửa PP nếu đối thủ bị tiêu diệt",
 		"ROCK_SLIDE": "Gây [30,60,120,SP] SPECIAL tới mục tiêu, gấp đôi sát thương nếu mục tiêu đang trúng hiệu ứng FLYING",
 		"THUNDER_SHOCK": "Gây [30,60,120,SP] SPECIAL",
 		"HYDRO_PUMP": "Gây [20,40,80,SP] SPECIAL đến tất cả Pokémon đối thủ phía sau mục tiêu",
