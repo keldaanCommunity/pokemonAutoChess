@@ -3748,7 +3748,7 @@
 	"gold_needed_to_level_up": "升级所需金币：",
 	"clicks_one": "还需点击一次",
 	"clicks_other": "还需点击{{count}}次",
-	"max_level_reached": "Maximum level reached",
+	"max_level_reached": "等级已达上限",
 	"lose_game_hint": "当你生命值归零后，你就输掉了本场游戏",
 	"unlock": "解锁",
 	"lock": "锁定",
