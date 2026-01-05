@@ -355,6 +355,7 @@ interface OnShieldDepletedEffectArgs {
   pokemon: PokemonEntity
   attacker: PokemonEntity | null
   board: Board
+  damage: number
 }
 
 export class OnShieldDepletedEffect extends Effect {

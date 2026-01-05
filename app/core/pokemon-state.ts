@@ -581,7 +581,7 @@ export default abstract class PokemonState {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
           pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
-            effect.apply({ pokemon, board, attacker })
+            effect.apply({ pokemon, board, attacker, damage: reducedDamage })
           })
         }
 

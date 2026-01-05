@@ -53,6 +53,7 @@ import {
   OnKillEffect,
   OnMoveEffect,
   OnResurrectEffect,
+  OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnStageStartEffect,
   PeriodicEffect
@@ -694,7 +695,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       const stacks = pokemon.count.machRibbonCount
       pokemon.addAttack(-stacks, pokemon, 0, false)
-      if(stacks >= 20) {
+      if (stacks >= 20) {
         pokemon.addSpeed(-30, pokemon, 0, false)
       }
       pokemon.count.machRibbonCount = 0
@@ -1199,6 +1200,33 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.SPELL_TAG]: [
     new OnDeathEffect(({ attacker }) => {
       attacker?.status.triggerCurse(9000, attacker)
+    })
+  ],
+
+  [Item.EXPLOSIVE_BAND]: [
+    new OnShieldDepletedEffect(({ pokemon, board, damage }) => {
+      // The first time user shield is depleted, this item explodes,
+      // dealing 10 + 100% of received damage as SPECIAL to adjacent enemies.
+      const adjacentCells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY
+      )
+      const explosionDamage = 10 + damage
+      adjacentCells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            explosionDamage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            false,
+            false
+          )
+        }
+      })
+
+      pokemon.broadcastAbility({ skill: "EXPLOSION" })
+      pokemon.removeItem(Item.EXPLOSIVE_BAND)
     })
   ]
 }
