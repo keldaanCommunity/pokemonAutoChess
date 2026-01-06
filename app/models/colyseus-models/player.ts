@@ -30,6 +30,7 @@ import {
   MissionOrder,
   NonSpecialBerries,
   NonSpecialItemComponents,
+  ScarfItem,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
@@ -148,6 +149,7 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  scarvesItems: Item[] = []
   buriedItems: (Item | null)[] = initBuriedItems()
   tms: (Item | null)[] = pickRandomTMs()
   weatherRocks: Item[] = []
@@ -322,15 +324,20 @@ export default class Player extends Schema implements IPlayer {
       this.specialGameRule
     )
 
+    const normalNeedsRecomputing = this.updateScarves(
+      previousSynergies,
+      updatedSynergies
+    )
+
     const artifNeedsRecomputing = this.updateArtificialItems(
       previousSynergies,
       updatedSynergies
     )
-    if (artifNeedsRecomputing) {
+    if (artifNeedsRecomputing || normalNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
-      right after losing an artificial item, since many edgecases may need to be adressed when 
-      losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
-      decrementing by 1 in updatedSynergies map count
+      right after losing an artificial item or a scarf, since many edgecases may need to be 
+      adressed when losing a type (Axew double dragon + artif item for example) ;
+      it's not as easy as just decrementing by 1 in updatedSynergies map count
       */
       updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
     }
@@ -441,6 +448,66 @@ export default class Player extends Schema implements IPlayer {
       }
 
       lostArtificialItems.forEach(removeArtificialItem)
+    }
+
+    return needsRecomputingSynergiesAgain
+  }
+
+
+  updateScarves(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ): boolean {
+    let needsRecomputingSynergiesAgain = false
+    const previousNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
+      (n) => (previousSynergies.get(Synergy.NORMAL) ?? 0) >= n
+    ).length
+
+    const newNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
+      (n) => (updatedSynergies.get(Synergy.NORMAL) ?? 0) >= n
+    ).length
+
+    if (newNbScarves > previousNbScarves) {
+      // some scarves are gained
+      while(this.scarvesItems.length < newNbScarves) {
+        // initialize scarves items if not done yet
+        this.scarvesItems.push(Item.SILK_SCARF)
+        console.log("Adding silk scarf to player", this.name, this.scarvesItems)
+      }
+
+      const gainedScarves = this.scarvesItems.slice(
+        previousNbScarves,
+        newNbScarves
+      )
+      gainedScarves.forEach((item) => {
+        this.items.push(item)
+      })
+    } else if (newNbScarves < previousNbScarves) {
+      // some scarves are lost
+      const lostScarves = this.scarvesItems.slice(
+        newNbScarves,
+        previousNbScarves
+      )
+
+      const removeScarf = (item: ScarfItem) => {
+        // first check held items
+        const pokemons = values(this.board)
+        for (const pokemon of pokemons) {
+          if (pokemon.items.has(item)) {
+            pokemon.removeItem(item, this)
+
+            if (item in SynergyGivenByItem && !isOnBench(pokemon)) {
+              needsRecomputingSynergiesAgain = true
+            }
+            return // break for loop to remove only one
+          }
+        }
+
+        // if not found check player item bench
+        removeInArray<Item>(this.items, item)
+      }
+
+      lostScarves.forEach(removeScarf)
     }
 
     return needsRecomputingSynergiesAgain

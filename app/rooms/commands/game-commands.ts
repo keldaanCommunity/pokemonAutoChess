@@ -578,6 +578,15 @@ export class OnDragDropCombineCommand extends Command<
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     } else {
+      if(itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
+        // replace silk scarf by scarf-made item
+        const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
+        if(scarfIndex >= 0) {
+          console.log("Replacing scarf at index", scarfIndex, "by", result)
+          player.scarvesItems[scarfIndex] = result
+        }
+      }
+
       player.items.push(result)
       removeInArray(player.items, itemA)
       removeInArray(player.items, itemB)
@@ -772,6 +781,15 @@ export class OnDragDropItemCommand extends Command<
       }
 
       const itemCombined = recipe[0] as Item
+
+      if(recipe[1].includes(Item.SILK_SCARF)) {
+        // replace silk scarf by scarf-made item
+        const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
+        if(scarfIndex >= 0) {
+          console.log("Replacing scarf at index", scarfIndex, "by", itemCombined)
+          player.scarvesItems[scarfIndex] = itemCombined
+        }
+      }
 
       if (
         (isIn(SynergyStones, itemCombined) ||

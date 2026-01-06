@@ -515,6 +515,8 @@ export const Scarves = Object.keys(ItemRecipe).filter((itemKey) =>
   ItemRecipe[itemKey as Item]?.includes(Item.SILK_SCARF)
 ) as Item[]
 
+export type ScarfItem = (typeof Scarves)[number]
+
 export const NonSpecialBerries: Item[] = [
   Item.AGUAV_BERRY,
   Item.APICOT_BERRY,
