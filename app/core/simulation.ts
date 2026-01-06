@@ -28,6 +28,7 @@ import {
   CraftableItemsNoScarves,
   Item,
   NonSpecialBerries,
+  Scarves,
   SynergyStones,
   WeatherRocksByWeather
 } from "../types/enum/Item"
@@ -681,6 +682,11 @@ export default class Simulation extends Schema implements ISimulation {
         }
         if (pokemon.effects.has(EffectEnum.PURE_POWER)) {
           shieldBonus += 30
+          if(values(pokemon.items).some(item => Scarves.includes(item))) {
+            // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
+            pokemon.addAttack(Math.round(0.3 * pokemon.baseAtk), pokemon, 0, false)
+            pokemon.addAbilityPower(30, pokemon, 0, false)
+          }
         }
         if (shieldBonus >= 0) {
           pokemon.addShield(shieldBonus, pokemon, 0, false)
