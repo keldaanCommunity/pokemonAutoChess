@@ -71,7 +71,7 @@ import {
 import {
   ConsumableItems,
   CraftableItems,
-  CraftableNonSynergyItems,
+  CraftableNoStonesOrScarves,
   Dishes,
   Item,
   ItemComponents,
@@ -538,12 +538,14 @@ export class OnDragDropCombineCommand extends Command<
     if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
       if (ItemComponents.includes(exchangedItem)) {
-        result = pickRandomIn(NonSpecialItemComponents.filter((i) => i !== exchangedItem))
+        result = pickRandomIn(
+          NonSpecialItemComponents.filter((i) => i !== exchangedItem)
+        )
       } else if (SynergyStones.includes(exchangedItem)) {
         result = pickRandomIn(SynergyStones.filter((i) => i !== exchangedItem))
       } else if (CraftableItems.includes(exchangedItem)) {
         result = pickRandomIn(
-          CraftableNonSynergyItems.filter((i) => i !== exchangedItem)
+          CraftableNoStonesOrScarves.filter((i) => i !== exchangedItem)
         )
       } else {
         client.send(Transfer.DRAG_DROP_CANCEL, message)
@@ -697,8 +699,8 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (isIn(Dishes, item)) {
-      if (pokemon.meal === "" && pokemon.canEat) {
-        pokemon.meal = item
+      if (pokemon.canEat && !pokemon.dishes.has(item)) {
+        pokemon.dishes.add(item)
         pokemon.action = PokemonActionState.EAT
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
@@ -713,7 +715,7 @@ export class OnDragDropItemCommand extends Command<
       } else {
         client.send(Transfer.DRAG_DROP_CANCEL, {
           ...message,
-          text: pokemon.canEat ? "belly_full" : "not_hungry",
+          text: pokemon.dishes.size > 0 ? "belly_full" : "not_hungry",
           pokemonId: pokemon.id
         })
         return
@@ -772,7 +774,8 @@ export class OnDragDropItemCommand extends Command<
       const itemCombined = recipe[0] as Item
 
       if (
-        isIn(SynergyStones, itemCombined) &&
+        (isIn(SynergyStones, itemCombined) ||
+          itemCombined === Item.FRIEND_BOW) &&
         pokemon.types.has(SynergyGivenByItem[itemCombined])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
@@ -1435,8 +1438,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 }
               })
             }, 1000)
-
-
 
             if (buriedItem) {
               this.room.clock.setTimeout(() => {

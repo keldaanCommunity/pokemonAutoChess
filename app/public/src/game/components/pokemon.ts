@@ -37,6 +37,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
+import { values } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -112,8 +113,8 @@ export default class PokemonSprite extends DraggableObject {
   flip: boolean
   animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
   skydiving: boolean = false
-  meal: Item | "" = ""
-  mealSprite: GameObjects.Sprite | undefined
+  dishes: Item[] = []
+  dishesSprites: GameObjects.Sprite[] = []
   inBattle: boolean = false
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
@@ -228,8 +229,8 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(pokemon, scene)
       //this.setEffects(p, scene);
     } else {
-      if (pokemon.meal !== "") {
-        this.updateMeal(pokemon.meal)
+      if (pokemon.dishes.size > 0) {
+        this.updateDishes(values(pokemon.dishes))
       }
     }
 
@@ -799,14 +800,17 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  updateMeal(meal: Item | "") {
-    this.meal = meal
-    this.mealSprite?.destroy()
-    if (meal) {
-      this.mealSprite = this.scene.add
-        .sprite(0, 20, "item", meal + ".png")
-        .setScale(0.25)
-      this.add(this.mealSprite)
+  updateDishes(dishes: Item[]) {
+    this.dishes = dishes
+    this.dishesSprites.forEach((sprite) => sprite.destroy())
+    if (dishes.length > 0) {
+      dishes.forEach((dish, i) => {
+        const dishSprite = this.scene.add
+          .sprite((i - (dishes.length - 1) / 2) * 20, 20, "item", dish + ".png")
+          .setScale(0.25)
+        this.add(dishSprite)
+        this.dishesSprites.push(dishSprite)
+      })
     }
   }
 

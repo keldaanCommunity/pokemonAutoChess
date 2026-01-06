@@ -302,7 +302,7 @@ export default class Player extends Schema implements IPlayer {
         newPokemon.shiny = true
       }
     })
-    newPokemon.meal = pokemon.meal
+    newPokemon.dishes = pokemon.dishes
     newPokemon.positionX = pokemon.positionX
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
@@ -587,8 +587,8 @@ export default class Player extends Schema implements IPlayer {
         this.updateSynergies()
         if (regionalSpeciality) {
           this.board.forEach((pokemon) => {
-            if (pokemon.canEat) {
-              pokemon.meal = regionalSpeciality
+            if (pokemon.canEat && !pokemon.dishes.has(regionalSpeciality)) {
+              pokemon.dishes.add(regionalSpeciality)
             }
           })
         }

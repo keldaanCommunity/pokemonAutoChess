@@ -23,8 +23,8 @@ import { Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
-  CraftableItems,
-  CraftableNonSynergyItems,
+  CraftableItemsNoScarves,
+  CraftableNoStonesOrScarves,
   Item,
   ItemComponents,
   MissionOrders,
@@ -488,7 +488,7 @@ export class MiniGame {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition
       nbItemsToPick += 1
       maxCopiesPerItem = 1
-      itemsSet = CraftableItems
+      itemsSet = CraftableItemsNoScarves
     }
 
     if (encounter === TownEncounters.KECLEON) {
@@ -497,7 +497,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.KANGASKHAN) {
-      itemsSet = CraftableNonSynergyItems
+      itemsSet = CraftableNoStonesOrScarves
       maxCopiesPerItem = 1
     }
 
@@ -552,11 +552,11 @@ export class MiniGame {
       items.push(item)
     }
 
-    if (itemsSet === CraftableItems) {
+    if (itemsSet === CraftableItemsNoScarves) {
       while (items.filter((i) => isIn(SynergyStones, i)).length > 4) {
         // ensure that there are at most 4 synergy stones in the carousel
         const index = items.findIndex((i) => isIn(SynergyStones, i))
-        items[index] = pickRandomIn(CraftableNonSynergyItems)
+        items[index] = pickRandomIn(CraftableNoStonesOrScarves)
       }
     } else if (itemsSet === NonSpecialItemComponents && chance(0.4)) {
       // max 1 random fossil stone, added with 40% chance

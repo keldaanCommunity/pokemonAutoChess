@@ -511,6 +511,10 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.NULLIFY_BANDANNA]: [Item.SILK_SCARF, Item.SILK_SCARF]
 }
 
+export const Scarves = Object.keys(ItemRecipe).filter((itemKey) =>
+  ItemRecipe[itemKey as Item]?.includes(Item.SILK_SCARF)
+) as Item[]
+
 export const NonSpecialBerries: Item[] = [
   Item.AGUAV_BERRY,
   Item.APICOT_BERRY,
@@ -630,6 +634,9 @@ export const WeatherRocksByWeather = new Map([
 export const WeatherByWeatherRocks = reverseMap(WeatherRocksByWeather)
 
 export const CraftableItems = Object.keys(ItemRecipe) as Item[]
+export const CraftableItemsNoScarves = CraftableItems.filter(
+  (item) => !Scarves.includes(item)
+) as Item[]
 
 export const SynergyStones = [
   Item.OLD_AMBER,
@@ -830,9 +837,10 @@ export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
     [Item.GOURMET_GEM]: Synergy.GOURMET
   }
 
-export const CraftableNonSynergyItems: Item[] = CraftableItems.filter(
-  (item) => SynergyGivenByItem.hasOwnProperty(item) === false
-)
+export const CraftableNoStonesOrScarves: Item[] =
+  CraftableItemsNoScarves.filter(
+    (item) => SynergyGivenByItem.hasOwnProperty(item) === false
+  )
 
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,

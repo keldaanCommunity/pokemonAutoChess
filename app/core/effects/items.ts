@@ -331,8 +331,8 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       room.clock.setTimeout(() => {
         const candidates = values(player.board).filter(
           (p) =>
-            p.meal === "" &&
             p.canEat &&
+            !p.dishes.has(dish) &&
             !isOnBench(p) &&
             distanceC(
               chef.positionX,
@@ -342,16 +342,16 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             ) === 1
         )
         candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-        dishes.forEach((meal, i) => {
+        dishes.forEach((dish, i) => {
           if (
             [
               Item.TART_APPLE,
               Item.SWEET_APPLE,
               Item.SIRUPY_APPLE,
               ...Berries
-            ].includes(meal)
+            ].includes(dish)
           ) {
-            player.items.push(meal)
+            player.items.push(dish)
           } else {
             const pokemon = candidates[i] ?? chef
             if (dish === Item.HERBA_MYSTICA) {
@@ -365,9 +365,9 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
               if (pokemon.types.has(Synergy.GRASS))
                 flavors.push(Item.HERBA_MYSTICA_BITTER)
               if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
-              meal = pickRandomIn(flavors)
+              dish = pickRandomIn(flavors)
             }
-            pokemon.meal = meal
+            pokemon.dishes.add(dish)
             pokemon.action = PokemonActionState.EAT
           }
         })
@@ -411,7 +411,7 @@ function dropComfey({ pokemon, board }: OnDeathEffectArgs) {
 
 export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
-    SynergyStones.map((stone) => [
+    [...SynergyStones, Item.FRIEND_BOW].map((stone) => [
       stone,
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
@@ -1063,11 +1063,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.PICNIC_SET]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      if (pokemon.meal == "") {
+      if (pokemon.canEat) {
         let nbSandwiches = 0
         values(player.board).forEach((pkm) => {
           if (
-            pkm.meal === "" &&
             pkm.canEat &&
             pokemon &&
             distanceC(
@@ -1077,7 +1076,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
               pokemon.positionY
             ) <= 1
           ) {
-            pkm.meal = Item.SANDWICH
+            pkm.dishes.add(Item.SANDWICH)
             pkm.action = PokemonActionState.EAT
             nbSandwiches++
           }

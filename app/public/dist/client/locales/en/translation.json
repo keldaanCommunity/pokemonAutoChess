@@ -2968,7 +2968,7 @@
 		"MISSION_ORDER_GREEN": "Complete this mission to earn 30 GOLD:\n reach 8 different active synergies",
 		"MISSION_ORDER_GOLD": "Complete this mission to earn 30 GOLD:\n earn 200 GOLD in total during the game",
 		"SILK_SCARF": "Combine it with other item components to make all kinds of scarves, bands, bows or ribbons. Those items will be removed if you lower down Normal synergy level.",
-		"FRIEND_BOW": "Gives NORMAL synergy.",
+		"FRIEND_BOW": "The holder gains the NORMAL type.",
 		"BLACK_BELT": "Critical attacks provide 33% of the damage dealt as SHIELD.",
 		"MACH_RIBBON": "When the holder attacks, gain 1 stack (max 20 stacks). The holder gains 1 ATK per stack. At 20 stacks, gains 30 SPEED.",
 		"EXPLOSIVE_BAND": "The first time user shield is depleted, this item explodes, dealing 10 + 100% of received damage as SPECIAL to ADJACENT enemies.",

@@ -11,7 +11,7 @@ import { PVEStages } from "../../../../../models/pve-stages"
 import { getAdditionalsTier1 } from "../../../../../models/shop"
 import { Emotion } from "../../../../../types"
 import {
-  CraftableItems,
+  CraftableItemsNoScarves,
   Item,
   NonSpecialItemComponents
 } from "../../../../../types/enum/Item"
@@ -348,7 +348,7 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
           <div className="stage-rewards">
             <ul className="">
               {(stageInfo.level >= 20
-                ? CraftableItems
+                ? CraftableItemsNoScarves
                 : [...NonSpecialItemComponents, Item.FOSSIL_STONE]
               ).map((item) => (
                 <li key={item}>{itemDetail(item)}</li>

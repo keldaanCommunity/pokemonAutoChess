@@ -25,7 +25,7 @@ import {
   Team
 } from "../types/enum/Game"
 import {
-  CraftableItems,
+  CraftableItemsNoScarves,
   Item,
   NonSpecialBerries,
   SynergyStones,
@@ -207,10 +207,12 @@ export default class Simulation extends Schema implements ISimulation {
           const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
           ) as PokemonEntity | undefined
-          if (pokemon.meal !== "") {
-            this.applyDishEffects(pokemon.meal, pokemon, entity, player)
+          if (pokemon.dishes.size > 0) {
+            pokemon.dishes.forEach((dish) => {
+              this.applyDishEffects(dish, pokemon, entity, player)
+            })
             pokemon.action = PokemonActionState.IDLE
-            pokemon.meal = "" // consume all meals
+            pokemon.dishes.clear() // consume all dishes
           }
           if (entity) {
             entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
@@ -403,7 +405,9 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
-      pokemon.items.add(pickRandomIn(CraftableItems.concat(NonSpecialBerries)))
+      pokemon.items.add(
+        pickRandomIn(CraftableItemsNoScarves.concat(NonSpecialBerries))
+      )
     }
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
@@ -411,7 +415,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       const wonderboxItems: Item[] = []
       for (let n = 0; n < 2; n++) {
-        const eligibleItems = CraftableItems.filter(
+        const eligibleItems = CraftableItemsNoScarves.filter(
           (i) =>
             !isIn(SynergyStones, i) &&
             !wonderboxItems.includes(i) &&

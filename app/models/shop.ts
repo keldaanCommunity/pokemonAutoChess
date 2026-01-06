@@ -600,12 +600,12 @@ export default class Shop {
     let specificTypesWanted: Synergy[] | undefined = undefined
 
     const attractors = values(player.board).filter(
-      (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
+      (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)
     )
     let attractor: Pokemon | null = null
     for (const p of attractors) {
       if (p.items.has(Item.INCENSE) && chance(INCENSE_CHANCE, p)) attractor = p
-      if (p.meal === Item.HONEY && chance(HONEY_CHANCE, p)) attractor = p
+      if (p.dishes.has(Item.HONEY) && chance(HONEY_CHANCE, p)) attractor = p
     }
 
     if (attractor) {

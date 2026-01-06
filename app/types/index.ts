@@ -353,7 +353,7 @@ export interface IPokemon {
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
-  meal: Item | ""
+  dishes: SetSchema<Item>
   tm: Ability | null
   shiny: boolean
   emotion: Emotion

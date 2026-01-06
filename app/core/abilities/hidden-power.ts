@@ -1,3 +1,4 @@
+import { SetSchema } from "@colyseus/schema"
 import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
@@ -5,7 +6,12 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomp
 import { IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
-import { Berries, Dishes, Item, NonSpecialItemComponents } from "../../types/enum/Item"
+import {
+  Berries,
+  Dishes,
+  Item,
+  NonSpecialItemComponents
+} from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -309,7 +315,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     if (pokemon.player) {
       pokemon.player.board.forEach((p: IPokemon) => {
         if (p.canEat) {
-          p.meal = pickRandomIn(Dishes as unknown as Item[])
+          p.dishes = new SetSchema([pickRandomIn(Dishes as unknown as Item[])])
         }
       })
     }

@@ -86,7 +86,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") skill: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
-  @type("string") meal: Item | "" = ""
+  @type({ set: "string" }) dishes = new SetSchema<Item>()
   @type("boolean") shiny: boolean
   @type("string") emotion: Emotion
   @type("string") action: PokemonActionState = PokemonActionState.IDLE
@@ -138,7 +138,12 @@ export class Pokemon extends Schema implements IPokemon {
   }
 
   get canEat(): boolean {
-    return this.passive !== Passive.INANIMATE && !Unowns.includes(this.name)
+    return (
+      this.passive !== Passive.INANIMATE &&
+      !Unowns.includes(this.name) &&
+      (this.dishes.size === 0 ||
+        (this.items.has(Item.BIG_EATER_BELT) && this.dishes.size === 1))
+    )
   }
 
   get hasEvolution(): boolean {
@@ -10043,7 +10048,7 @@ export class Dipplin extends Pokemon {
   passive = Passive.DIPPLIN
 
   onAcquired() {
-    this.meal = "" // consume meal to evolve
+    this.dishes.delete(Item.SIRUPY_APPLE) // consume meal to evolve
     this.items.delete(Item.SIRUPY_APPLE)
   }
 }
@@ -10066,7 +10071,7 @@ export class Appletun extends Pokemon {
   skill = Ability.APPLE_ACID
 
   onAcquired() {
-    this.meal = "" // consume meal to evolve
+    this.dishes.delete(Item.SWEET_APPLE)// consume meal to evolve
     this.items.delete(Item.SWEET_APPLE)
   }
 }
@@ -10089,7 +10094,7 @@ export class Flapple extends Pokemon {
   skill = Ability.GRAV_APPLE
 
   onAcquired() {
-    this.meal = "" // consume meal to evolve
+    this.dishes.delete(Item.TART_APPLE) // consume meal to evolve
     this.items.delete(Item.TART_APPLE)
   }
 }
@@ -10112,7 +10117,7 @@ export class Hydrapple extends Pokemon {
   skill = Ability.FICKLE_BEAM
 
   onAcquired() {
-    this.meal = "" // consume meal to evolve
+    this.dishes.delete(Item.SIRUPY_APPLE) // consume meal to evolve
     this.items.delete(Item.SIRUPY_APPLE)
   }
 }

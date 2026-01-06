@@ -40,6 +40,7 @@ import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
+import { values } from "../../../utils/schemas"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
@@ -440,7 +441,6 @@ class GameContainer {
         "luck",
         "shiny",
         "skill",
-        "meal",
         "supercharged"
       ]
     ) => {
@@ -471,6 +471,16 @@ class GameContainer {
             pokemon,
             item,
             true
+          )
+        }
+      })
+
+      $pokemon.dishes.onChange((value, key) => {
+        if (player.id === this.spectatedPlayerId) {
+          this.gameScene?.board?.updatePokemonDishes(
+            player.id,
+            pokemon,
+            values(pokemon.dishes)
           )
         }
       })
