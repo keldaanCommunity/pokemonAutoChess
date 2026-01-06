@@ -1050,5 +1050,6 @@ export const RemovableItems = [
   Item.CHEF_HAT,
   Item.TRASH,
   ...Tools,
+  ...Scarves,
   ...MemoryDiscs
 ] satisfies Item[]

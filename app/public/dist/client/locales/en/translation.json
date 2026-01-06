@@ -3920,7 +3920,7 @@
 	"berries_description": "When GRASS synergy is active, you can collect berries by clicking on the berry trees next to your avatar.",
 	"dishes_description": "Dishes are cooked by GOURMET chefs to give strong buffs to a Pokémon in the next fight.",
 	"mulch_description": "Mulch is collected every time a FLORA mon is KO. Use it to evolve your flower pots.",
-	"scarves_description": "NORMAL synergy gives you SILK_SCARF that can be combined with other item components for exclusive items. These items are removed when NORMAL synergy is lost or lowered.",
+	"scarves_description": "NORMAL synergy gives you SILK_SCARF that can be combined with other item components for exclusive items. These items are removed when NORMAL synergy is lost or lowered. Scarves can be removed by benching the unit.",
 	"tools_description": "ARTIFICIAL synergy gives you three tools randomly picked each game for each player. Tools can be removed by benching the unit.",
 	"other_tools_description": "Some other tools are exclusive to certain merchants encountered in town or to certain rewards:",
 	"weather_rocks_description": "Weather rocks are found after fighting under a certain weather with ROCK synergy active, and provide bonuses to your team when this weather is active. Their effects can be cumulated.",
