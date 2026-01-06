@@ -674,13 +674,13 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus = 15
         }
         if (pokemon.effects.has(EffectEnum.STRENGTH)) {
-          shieldBonus += 25
+          shieldBonus += 20
         }
         if (pokemon.effects.has(EffectEnum.ENDURE)) {
-          shieldBonus += 35
+          shieldBonus += 25
         }
         if (pokemon.effects.has(EffectEnum.PURE_POWER)) {
-          shieldBonus += 50
+          shieldBonus += 30
         }
         if (shieldBonus >= 0) {
           pokemon.addShield(shieldBonus, pokemon, 0, false)

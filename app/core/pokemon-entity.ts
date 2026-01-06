@@ -480,7 +480,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.items.has(Item.NULLIFY_BANDANNA)) {
       if (value <= 0) return // cannot lose PP
-      this.addShield(baseValue, caster, apBoost, crit) // PP are gained as shield instead
+      this.addShield(value, caster, 1, false) // PP are gained as shield instead
       return
     }
 

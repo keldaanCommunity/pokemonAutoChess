@@ -682,22 +682,16 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.MACH_RIBBON]: [
-    new OnAttackEffect(({ pokemon }) => {
-      if (pokemon.count.machRibbonCount < 20) {
-        pokemon.count.machRibbonCount++
-        pokemon.addAttack(1, pokemon, 0, false)
-        if (pokemon.count.machRibbonCount === 20) {
-          // final stack also gives speed
-          pokemon.addSpeed(30, pokemon, 0, false)
-        }
-      }
-    }),
+    new PeriodicEffect((pokemon) => {
+      pokemon.addSpeed(20, pokemon, 0, false)
+      pokemon.count.machRibbonCount++
+    },
+      Item.MACH_RIBBON,
+      4000
+    ),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = pokemon.count.machRibbonCount
-      pokemon.addAttack(-stacks, pokemon, 0, false)
-      if (stacks >= 20) {
-        pokemon.addSpeed(-30, pokemon, 0, false)
-      }
+      const stacks = pokemon.count.machRibbonCount      
+      pokemon.addSpeed(-20*stacks, pokemon, 0, false)
       pokemon.count.machRibbonCount = 0
     })
   ],
@@ -1203,14 +1197,17 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.EXPLOSIVE_BAND]: [
-    new OnShieldDepletedEffect(({ pokemon, board, damage }) => {
+    new OnShieldDepletedEffect(({ pokemon, board }) => {
       // The first time user shield is depleted, this item explodes,
-      // dealing 10 + 100% of received damage as SPECIAL to adjacent enemies.
+      // dealing 50% of all shield gained so far as special damage to adjacent enemies.
       const adjacentCells = board.getAdjacentCells(
         pokemon.positionX,
         pokemon.positionY
       )
-      const explosionDamage = 10 + damage
+      const dps = pokemon.team === Team.BLUE_TEAM ? pokemon.simulation.blueDpsMeter : pokemon.simulation.redDpsMeter
+      const shieldGained = dps.get(pokemon.id)?.shield ?? 0      
+      const explosionDamage = Math.round(0.5 * shieldGained)
+
       adjacentCells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -1231,17 +1228,15 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.EFFICIENT_BANDANNA]: [
     new OnSimulationStartEffect(({ entity, simulation }) => {
-      simulation.board
-        .getAdjacentCells(entity.positionX, entity.positionY)
-        .forEach((cell) => {
-          if (
-            cell.value &&
-            cell.value.team === entity.team &&
-            cell.value.id !== entity.id
-          ) {
-            cell.value.maxPP = Math.round(0.95 * cell.value.maxPP)
-          }
-        })
+      ;[-1, 0, 1].forEach((offset) => {
+        const ally = simulation.board.getEntityOnCell(
+          entity.positionX + offset,
+          entity.positionY
+        )
+        if (ally) {
+          ally.maxPP = Math.round(0.8 * ally.maxPP)
+        }
+      })
     }, Item.EFFICIENT_BANDANNA)
   ]
 }
