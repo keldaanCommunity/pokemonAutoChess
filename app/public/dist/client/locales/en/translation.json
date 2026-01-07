@@ -1788,7 +1788,7 @@
 		"MEGA_PUNCH": "Deal [60,SP] SPECIAL to the target. The damage is doubled if the user has a higher DEF than the target.",
 		"TRIPLE_KICK": "Deal [60,SP] SPECIAL to up to 3 ADJACENT enemy Pokémon.",
 		"MAWASHI_GERI": "Deal [60,SP] SPECIAL to the target and push it away. The damage is doubled if the user has a higher ATK than the target.",
-		"FORECAST": "Grant [10,SP] SHIELD to all allied Pokémon, plus an additional bonus depending on the weather:\n SNOW: +[2,SP] DEF / SPE_DEF\n DROUGHT: +[4,SP] ATK \n RAIN: +[8,SP] PP",
+		"FORECAST": "Grant [10,SP] SHIELD to all allies, plus an additional bonus depending on the weather:\n SNOW: +[2,SP] DEF / SPE_DEF\n ZENITH/DROUGHT: +[4,SP] ATK \n RAIN: +[8,SP] PP",
 		"X_SCISSOR": "Deal [10,20,40,60,SP] TRUE twice.",
 		"MANTIS_BLADES": "Unleash a trio of blades upon the target, each dealing [10,20,40,SP] with a distinct damage type: PHYSICAL, SPECIAL and TRUE.",
 		"PLASMA_FIST": "Deal [120,SP] SPECIAL to the target and heal 30% of damage dealt.",
