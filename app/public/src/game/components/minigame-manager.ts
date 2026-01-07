@@ -534,6 +534,14 @@ export default class MinigameManager {
       name: Pkm.WIGGLYTUFF
     })
 
+    const cincinno = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CINCCINO ? cx : 18 * 48,
+      y: encounter === TownEncounters.CINCCINO ? cy : 23 * 48,
+      orientation: Orientation.UP,
+      name: Pkm.CINCCINO
+    })
+
     const podiumPokemons = podium.map((p, rank) => {
       const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
       const champion = new PokemonSpecial({
@@ -572,6 +580,7 @@ export default class MinigameManager {
       makuhita,
       croagunk,
       wigglytuff,
+      cincinno,
       ...podiumPokemons
     )
 

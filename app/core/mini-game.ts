@@ -23,10 +23,11 @@ import { Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
-  CraftableItems,
-  CraftableNonSynergyItems,
+  CraftableItemsNoScarves,
+  CraftableNoStonesOrScarves,
   Item,
   ItemComponents,
+  ItemComponentsNoFossilOrScarf,
   MissionOrders,
   NonSpecialBerries,
   SynergyGems,
@@ -481,13 +482,13 @@ export class MiniGame {
 
     let nbItemsToPick = clamp(this.alivePlayers.length + 3, 5, 9)
     let maxCopiesPerItem = 2
-    let itemsSet: readonly Item[] = ItemComponents
+    let itemsSet: readonly Item[] = ItemComponentsNoFossilOrScarf
 
     if (stageLevel >= 20) {
       // Carousels after stage 20 propose full items and no longer components, and have one more proposition
       nbItemsToPick += 1
       maxCopiesPerItem = 1
-      itemsSet = CraftableItems
+      itemsSet = CraftableItemsNoScarves
     }
 
     if (encounter === TownEncounters.KECLEON) {
@@ -496,7 +497,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.KANGASKHAN) {
-      itemsSet = CraftableNonSynergyItems
+      itemsSet = CraftableNoStonesOrScarves
       maxCopiesPerItem = 1
     }
 
@@ -535,6 +536,15 @@ export class MiniGame {
       )
     }
 
+    if (encounter === TownEncounters.CINCCINO) {
+      items.push(
+        Item.SILK_SCARF,
+        Item.SILK_SCARF,
+        Item.SILK_SCARF,
+        Item.SILK_SCARF
+      )
+    }
+
     if (encounter === TownEncounters.SABLEYE) {
       items.push(...pickNRandomIn(SynergyGems, 4))
     }
@@ -551,12 +561,15 @@ export class MiniGame {
       items.push(item)
     }
 
-    if (itemsSet === CraftableItems) {
+    if (itemsSet === CraftableItemsNoScarves) {
       while (items.filter((i) => isIn(SynergyStones, i)).length > 4) {
         // ensure that there are at most 4 synergy stones in the carousel
         const index = items.findIndex((i) => isIn(SynergyStones, i))
-        items[index] = pickRandomIn(CraftableNonSynergyItems)
+        items[index] = pickRandomIn(CraftableNoStonesOrScarves)
       }
+    } else if (itemsSet === ItemComponentsNoFossilOrScarf && chance(0.4)) {
+      // max 1 random fossil stone, added with 40% chance
+      items.push(Item.FOSSIL_STONE)
     }
 
     return shuffleArray(items)

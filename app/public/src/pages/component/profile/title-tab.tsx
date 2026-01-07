@@ -7,6 +7,7 @@ import {
 import { Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setTitle } from "../../../stores/NetworkStore"
+import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
 
@@ -76,12 +77,14 @@ export function TitleTab() {
                 }
               }}
             >
-              <div>
-                <span>{t(`title.${k.name}`)}</span>
-                <p>{t(`title_description.${k.name}`)}</p>
-              </div>
+              <span className="title-name">{t(`title.${k.name}`)}</span>
+              <p className="title-description">
+                {addIconsToDescription(t(`title_description.${k.name}`))}
+              </p>
 
-              <span>{(k.rarity * 100).toFixed(3)}%</span>
+              <span className="title-rarity">
+                {(k.rarity * 100).toFixed(3)}%
+              </span>
             </li>
           ))}
       </ul>

@@ -53,6 +53,7 @@ import {
   OnKillEffect,
   OnMoveEffect,
   OnResurrectEffect,
+  OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnStageStartEffect,
   PeriodicEffect
@@ -330,8 +331,8 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       room.clock.setTimeout(() => {
         const candidates = values(player.board).filter(
           (p) =>
-            p.meal === "" &&
             p.canEat &&
+            !p.dishes.has(dish) &&
             !isOnBench(p) &&
             distanceC(
               chef.positionX,
@@ -341,16 +342,16 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             ) === 1
         )
         candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-        dishes.forEach((meal, i) => {
+        dishes.forEach((dish, i) => {
           if (
             [
               Item.TART_APPLE,
               Item.SWEET_APPLE,
               Item.SIRUPY_APPLE,
               ...Berries
-            ].includes(meal)
+            ].includes(dish)
           ) {
-            player.items.push(meal)
+            player.items.push(dish)
           } else {
             const pokemon = candidates[i] ?? chef
             if (dish === Item.HERBA_MYSTICA) {
@@ -364,9 +365,9 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
               if (pokemon.types.has(Synergy.GRASS))
                 flavors.push(Item.HERBA_MYSTICA_BITTER)
               if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
-              meal = pickRandomIn(flavors)
+              dish = pickRandomIn(flavors)
             }
-            pokemon.meal = meal
+            pokemon.dishes.add(dish)
             pokemon.action = PokemonActionState.EAT
           }
         })
@@ -410,7 +411,7 @@ function dropComfey({ pokemon, board }: OnDeathEffectArgs) {
 
 export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
-    SynergyStones.map((stone) => [
+    [...SynergyStones, Item.FRIEND_BOW].map((stone) => [
       stone,
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
@@ -499,6 +500,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.SHELL_BELL]: [
     new OnDamageDealtEffect(({ pokemon, damage }) => {
       pokemon.handleHeal(Math.ceil(0.33 * damage), pokemon, 0, false)
+    })
+  ],
+
+  [Item.BLACK_BELT]: [
+    new OnAttackEffect(({ pokemon, totalDamage, crit }) => {
+      if (crit) {
+        pokemon.addShield(Math.ceil(0.33 * totalDamage), pokemon, 0, false)
+      }
     })
   ],
 
@@ -654,9 +663,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.MUSCLE_BAND]: [
     new OnDamageReceivedEffect(({ pokemon, damage }) => {
-      if (pokemon.count.defensiveRibbonCount < 20 && damage > 0) {
-        pokemon.count.defensiveRibbonCount++
-        if (pokemon.count.defensiveRibbonCount % 2 === 0) {
+      if (pokemon.count.muscleBandCount < 20 && damage > 0) {
+        pokemon.count.muscleBandCount++
+        if (pokemon.count.muscleBandCount % 2 === 0) {
           pokemon.addAttack(1, pokemon, 0, false)
           pokemon.addDefense(2, pokemon, 0, false)
           pokemon.addSpeed(5, pokemon, 0, false)
@@ -664,11 +673,29 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       }
     }),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
+      const stacks = Math.floor(pokemon.count.muscleBandCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
       pokemon.addDefense(-2 * stacks, pokemon, 0, false)
       pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
-      pokemon.count.defensiveRibbonCount = 0
+      pokemon.count.muscleBandCount = 0
+    })
+  ],
+
+  [Item.MACH_RIBBON]: [
+    new PeriodicEffect((pokemon) => {
+      pokemon.addSpeed(20, pokemon, 0, false)
+      pokemon.count.machRibbonCount++
+      if(pokemon.count.machRibbonCount >= 10 && pokemon.player) {
+        pokemon.player.titles.add(Title.TOP_GUN)
+      }
+    },
+      Item.MACH_RIBBON,
+      4000
+    ),
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks = pokemon.count.machRibbonCount      
+      pokemon.addSpeed(-20*stacks, pokemon, 0, false)
+      pokemon.count.machRibbonCount = 0
     })
   ],
 
@@ -1033,11 +1060,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.PICNIC_SET]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      if (pokemon.meal == "") {
+      if (pokemon.canEat) {
         let nbSandwiches = 0
         values(player.board).forEach((pkm) => {
           if (
-            pkm.meal === "" &&
             pkm.canEat &&
             pokemon &&
             distanceC(
@@ -1047,7 +1073,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
               pokemon.positionY
             ) <= 1
           ) {
-            pkm.meal = Item.SANDWICH
+            pkm.dishes.add(Item.SANDWICH)
             pkm.action = PokemonActionState.EAT
             nbSandwiches++
           }
@@ -1171,5 +1197,49 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnDeathEffect(({ attacker }) => {
       attacker?.status.triggerCurse(9000, attacker)
     })
+  ],
+
+  [Item.EXPLOSIVE_BAND]: [
+    new OnShieldDepletedEffect(({ pokemon, board }) => {
+      // The first time user shield is depleted, this item explodes,
+      // dealing 50% of all shield gained so far as special damage to adjacent enemies.
+      const adjacentCells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY
+      )
+      const dps = pokemon.team === Team.BLUE_TEAM ? pokemon.simulation.blueDpsMeter : pokemon.simulation.redDpsMeter
+      const shieldGained = dps.get(pokemon.id)?.shield ?? 0      
+      const explosionDamage = Math.round(0.5 * shieldGained)
+
+      adjacentCells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            explosionDamage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            false,
+            false
+          )
+        }
+      })
+
+      pokemon.broadcastAbility({ skill: "EXPLOSION" })
+      pokemon.removeItem(Item.EXPLOSIVE_BAND)
+    })
+  ],
+
+  [Item.EFFICIENT_BANDANNA]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      ;[-1, 0, 1].forEach((offset) => {
+        const ally = simulation.board.getEntityOnCell(
+          entity.positionX + offset,
+          entity.positionY
+        )
+        if (ally) {
+          ally.maxPP = Math.round(0.8 * ally.maxPP)
+        }
+      })
+    }, Item.EFFICIENT_BANDANNA)
   ]
 }

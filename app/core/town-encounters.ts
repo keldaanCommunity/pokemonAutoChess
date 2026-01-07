@@ -17,7 +17,8 @@ export const TownEncounters = {
   [Pkm.CELEBI]: Pkm.CELEBI,
   [Pkm.MAKUHITA]: Pkm.MAKUHITA,
   [Pkm.CROAGUNK]: Pkm.CROAGUNK,
-  [Pkm.WIGGLYTUFF]: Pkm.WIGGLYTUFF
+  [Pkm.WIGGLYTUFF]: Pkm.WIGGLYTUFF,
+  [Pkm.CINCCINO]: Pkm.CINCCINO
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
@@ -35,11 +36,12 @@ export const TownEncountersByStage: {
   [stageLevel: number]: { [encounter in TownEncounter]?: number }
 } = {
   4: {
+    [Pkm.CINCCINO]: 1, //TEMP
     [Pkm.WIGGLYTUFF]: 1 / 20,
     [Pkm.CHANSEY]: 1 / 20,
     [Pkm.MEOWTH]: 1 / 20,
     [Pkm.DUSKULL]: 1 / 20,
-    [Pkm.ELECTIVIRE]: 1 / 20,
+    //[Pkm.CINCCINO]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.CELEBI]: 1 / 40,
     [Pkm.MAKUHITA]: 1 / 20
@@ -50,6 +52,7 @@ export const TownEncountersByStage: {
     [Pkm.KECLEON]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
+    [Pkm.CINCCINO]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.MAKUHITA]: 1 / 20,
@@ -62,7 +65,8 @@ export const TownEncountersByStage: {
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.SABLEYE]: 1 / 20
+    [Pkm.SABLEYE]: 1 / 20,
+    [Pkm.MAKUHITA]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,
@@ -71,7 +75,6 @@ export const TownEncountersByStage: {
     [Pkm.SPINDA]: 1 / 20,
     [Pkm.REGIROCK]: 1 / 20,
     [Pkm.MUNCHLAX]: 1 / 20,
-    [Pkm.MAKUHITA]: 1 / 20,
     [Pkm.WOBBUFFET]: 1 / 20
   },
   27: {

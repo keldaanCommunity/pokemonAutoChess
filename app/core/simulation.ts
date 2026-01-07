@@ -25,9 +25,10 @@ import {
   Team
 } from "../types/enum/Game"
 import {
-  CraftableItems,
+  CraftableItemsNoScarves,
   Item,
   NonSpecialBerries,
+  Scarves,
   SynergyStones,
   WeatherRocksByWeather
 } from "../types/enum/Item"
@@ -207,10 +208,12 @@ export default class Simulation extends Schema implements ISimulation {
           const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
           ) as PokemonEntity | undefined
-          if (pokemon.meal !== "") {
-            this.applyDishEffects(pokemon.meal, pokemon, entity, player)
+          if (pokemon.dishes.size > 0) {
+            pokemon.dishes.forEach((dish) => {
+              this.applyDishEffects(dish, pokemon, entity, player)
+            })
             pokemon.action = PokemonActionState.IDLE
-            pokemon.meal = "" // consume all meals
+            pokemon.dishes.clear() // consume all dishes
           }
           if (entity) {
             entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
@@ -403,7 +406,9 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
-      pokemon.items.add(pickRandomIn(CraftableItems.concat(NonSpecialBerries)))
+      pokemon.items.add(
+        pickRandomIn(CraftableItemsNoScarves.concat(NonSpecialBerries))
+      )
     }
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
@@ -411,7 +416,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       const wonderboxItems: Item[] = []
       for (let n = 0; n < 2; n++) {
-        const eligibleItems = CraftableItems.filter(
+        const eligibleItems = CraftableItemsNoScarves.filter(
           (i) =>
             !isIn(SynergyStones, i) &&
             !wonderboxItems.includes(i) &&
@@ -670,13 +675,18 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus = 15
         }
         if (pokemon.effects.has(EffectEnum.STRENGTH)) {
-          shieldBonus += 25
+          shieldBonus += 20
         }
         if (pokemon.effects.has(EffectEnum.ENDURE)) {
-          shieldBonus += 35
+          shieldBonus += 25
         }
         if (pokemon.effects.has(EffectEnum.PURE_POWER)) {
-          shieldBonus += 50
+          shieldBonus += 30
+          if(values(pokemon.items).some(item => Scarves.includes(item))) {
+            // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
+            pokemon.addAttack(Math.round(0.3 * pokemon.baseAtk), pokemon, 0, false)
+            pokemon.addAbilityPower(30, pokemon, 0, false)
+          }
         }
         if (shieldBonus >= 0) {
           pokemon.addShield(shieldBonus, pokemon, 0, false)

@@ -488,8 +488,10 @@ export default class BattleManager {
         pkm.itemsContainer.updateCount(Item.UPGRADE, value)
       } else if (field === "soulDewCount") {
         pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
-      } else if (field === "defensiveRibbonCount") {
+      } else if (field === "muscleBandCount") {
         pkm.itemsContainer.updateCount(Item.MUSCLE_BAND, value)
+      } else if (field === "machRibbonCount") {
+        pkm.itemsContainer.updateCount(Item.MACH_RIBBON, value)
       }
     }
   }

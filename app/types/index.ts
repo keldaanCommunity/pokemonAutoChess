@@ -353,7 +353,7 @@ export interface IPokemon {
   skill: Ability
   passive: Passive
   items: SetSchema<Item>
-  meal: Item | ""
+  dishes: SetSchema<Item>
   tm: Ability | null
   shiny: boolean
   emotion: Emotion
@@ -613,7 +613,8 @@ export interface ICount {
   starDustCount: number
   tripleAttackCount: number
   staticHolderCount: number
-  defensiveRibbonCount: number
+  muscleBandCount: number
+  machRibbonCount: number
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number
@@ -744,7 +745,9 @@ export enum Title {
   FINISHER = "FINISHER",
   VICTORIOUS = "VICTORIOUS",
   AQUARIOPHILE = "AQUARIOPHILE",
-  POFFIN_MASTER = "POFFIN_MASTER"
+  POFFIN_MASTER = "POFFIN_MASTER",
+  TOP_GUN = "TOP_GUN",
+  SCOUT = "SCOUT"
 }
 
 export interface IBoardEvent {

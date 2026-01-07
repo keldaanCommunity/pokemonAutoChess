@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import {
   ArtificialItems,
   Berries,
@@ -8,7 +7,7 @@ import {
   FishingRods,
   HMs,
   Item,
-  ItemComponents,
+  ItemComponentsNoScarf,
   ItemRecipe,
   MemoryDiscs,
   Mulches,
@@ -61,6 +60,8 @@ export default function WikiItems() {
     return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
   }, []) // too many memory discs to display
 
+  const components = ItemComponentsNoScarf
+
   return (
     <div id="wiki-items">
       <article className="craftable">
@@ -79,7 +80,7 @@ export default function WikiItems() {
               >
                 +
               </td>
-              {ItemComponents.map((i) => {
+              {components.map((i) => {
                 return (
                   <th
                     key={i}
@@ -94,7 +95,7 @@ export default function WikiItems() {
                 )
               })}
             </tr>
-            {ItemComponents.map((i) => {
+            {components.map((i) => {
               return (
                 <tr key={"tr-" + i}>
                   <td
@@ -106,7 +107,7 @@ export default function WikiItems() {
                       className="item"
                     ></img>
                   </td>
-                  {ItemComponents.map((j) => {
+                  {components.map((j) => {
                     let tier2Item
                     Object.keys(ItemRecipe).forEach((recipeName) => {
                       if (
@@ -159,6 +160,78 @@ export default function WikiItems() {
 
       <article className="synergy-items">
         <h2>{t("items_from_synergies")}</h2>
+
+        <h3>
+          <SynergyIcon type={Synergy.NORMAL} /> {t("scarves")}
+        </h3>
+        <p>{addIconsToDescription(t("scarves_description"))}</p>
+        <table>
+          <tbody>
+            <tr>
+              <td
+                style={{
+                  fontSize: "300%",
+                  verticalAlign: "middle",
+                  textAlign: "center",
+                  lineHeight: 0
+                }}
+              >
+                +
+              </td>
+              {[...components, Item.SILK_SCARF].map((i) => {
+                return (
+                  <th
+                    key={i}
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={i}
+                  >
+                    <img
+                      src={"assets/item/" + i + ".png"}
+                      className="item"
+                    ></img>
+                  </th>
+                )
+              })}
+            </tr>
+            <tr>
+              <td
+                data-tooltip-id="item-detail-tooltip"
+                data-tooltip-content={Item.SILK_SCARF}
+              >
+                <img
+                  src={"assets/item/" + Item.SILK_SCARF + ".png"}
+                  className="item"
+                ></img>
+              </td>
+              {[...components, Item.SILK_SCARF].map((j) => {
+                let tier2Item
+                Object.keys(ItemRecipe).forEach((recipeName) => {
+                  if (
+                    (ItemRecipe[recipeName][0] == Item.SILK_SCARF &&
+                      ItemRecipe[recipeName][1] == j) ||
+                    (ItemRecipe[recipeName][0] == j &&
+                      ItemRecipe[recipeName][1] == Item.SILK_SCARF)
+                  ) {
+                    tier2Item = recipeName
+                  }
+                })
+                return (
+                  <td
+                    key={"td-" + Item.SILK_SCARF + "-" + j}
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={tier2Item}
+                  >
+                    <img
+                      src={"assets/item/" + tier2Item + ".png"}
+                      className="item"
+                    ></img>
+                  </td>
+                )
+              })}
+            </tr>
+          </tbody>
+        </table>
+
         <h3>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("tools")}
         </h3>

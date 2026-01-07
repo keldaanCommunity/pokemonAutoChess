@@ -8,8 +8,10 @@ import { Stat } from "../../../../types/enum/Game"
 import {
   ConsumableItems,
   Item,
+  ItemComponents,
   ItemRecipe,
   RemovableItems,
+  ShinyItems,
   UnholdableItems
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
@@ -26,7 +28,13 @@ export function ItemDetailTooltipContent({
   const { t } = useTranslation()
   const recipes = useMemo(
     () =>
-      Object.entries(ItemRecipe).filter(([, recipe]) => recipe.includes(item)),
+      ItemComponents.map((c) =>
+        Object.entries(ItemRecipe).find(
+          ([, recipe]) =>
+            (recipe[0] === item && recipe[1] === c) ||
+            (recipe[1] === item && recipe[0] === c)
+        )
+      ).filter((r) => r != null),
     [item]
   )
 
@@ -41,13 +49,14 @@ export function ItemDetailTooltipContent({
     return output
   }
 
-  const itemCategoryLabel = ConsumableItems.includes(item)
-    ? t("consumable_item")
-    : isIn(UnholdableItems, item)
-      ? t("unholdable_item")
-      : isIn(RemovableItems, item)
-        ? t("removable_item")
-        : null
+  const itemCategoryLabel = useMemo(() => {
+    if (ConsumableItems.includes(item)) return t("consumable_item")
+    if (isIn(UnholdableItems, item)) return t("unholdable_item")
+    if (isIn(RemovableItems, item)) return t("removable_item")
+    if (isIn(ItemComponents, item)) return t("item_component")
+    if (isIn(ShinyItems, item)) return t("shiny")
+    return null
+  }, [item, t])
 
   return (
     <div className="game-item-detail">

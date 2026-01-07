@@ -187,17 +187,24 @@ ul.titles > li {
   justify-content: space-between;
 }
 
-ul.titles > li div {
+ul.titles > li {
   display: flex;
   gap: 0.5em;
 }
 
-ul.titles > li p {
+ul.titles .title-description {
   color: #a0a0a0;
+  flex: 1;
 }
 
-ul.titles > li span {
+ul.titles .title-name {
   color: #e76e55;
+  flex: 0 0 10ch;
+}
+
+ul.titles .title-rarity {
+  color: #e76e55;
+  flex: 0 0 5ch;
 }
 
 ul.titles > li.unlocked {
@@ -208,15 +215,16 @@ ul.titles > li.selected {
   border-color: var(--color-fg-gold);
 }
 
-ul.titles > li.unlocked span {
+ul.titles > li.unlocked .title-name,
+ul.titles > li.unlocked .title-rarity {
   color: #92cc41;
 }
 
-ul.titles > li.unlocked p {
+ul.titles > li.unlocked .title-description {
   color: white;
 }
 
-ul.titles > li.selected span {
+ul.titles > li.selected .title-name {
   color: var(--color-fg-gold);
 }
 

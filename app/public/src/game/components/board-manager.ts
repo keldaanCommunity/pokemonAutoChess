@@ -862,6 +862,15 @@ export default class BoardManager {
     }
   }
 
+  updatePokemonDishes(playerId: string, pokemon: IPokemon, dishes: Item[]) {
+    if (this.player.id === playerId) {
+      const pokemonUI = this.pokemons.get(pokemon.id)
+      if (pokemonUI) {
+        pokemonUI.updateDishes(dishes)
+      }
+    }
+  }
+
   changePokemon<F extends NonFunctionPropNames<IPokemon>>(
     pokemon: IPokemon,
     field: F,
@@ -974,12 +983,6 @@ export default class BoardManager {
         case "skill":
           if (previousValue != null && value !== previousValue) {
             pokemonUI.evolutionAnimation()
-          }
-          break
-
-        case "meal":
-          if (pokemonUI.meal !== value) {
-            pokemonUI.updateMeal(value as IPokemon["meal"])
           }
           break
 

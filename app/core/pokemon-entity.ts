@@ -457,13 +457,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
-  addPP(value: number, caster: IPokemonEntity, apBoost: number, crit: boolean) {
-    value = Math.round(
-      value *
+  addPP(
+    baseValue: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    let value = Math.round(
+      baseValue *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1) *
-        (this.status.fatigue && value > 0 ? 0.5 : 1)
+        (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
+    if (this.items.has(Item.NULLIFY_BANDANNA)) {
+      if (value <= 0) return // cannot lose PP
+      this.addShield(value, caster, 1, false) // PP are gained as shield instead
+      return
+    }
 
     if (
       !(value > 0 && this.status.silence) &&
@@ -484,9 +503,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
 
-    // for every 5% crit chance > 100, +10 crit power
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     this.critChance += value
 
+    // for every 5% crit chance > 100, +10 crit power
     if (this.critChance > 100) {
       const overCritChance = Math.round(this.critChance - 100)
       this.addCritPower(overCritChance, this, 0, false)
@@ -505,6 +532,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (1 + (apBoost * caster.ap) / 100) *
       (crit ? caster.critPower : 1)
 
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     this.critPower = min(0)(this.critPower + value)
   }
 
@@ -518,6 +553,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     this.maxHP = min(1)(this.maxHP + value)
     if (this.hp > 0) {
       // careful to not heal a KO pokemon
@@ -537,6 +581,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     this.dodge = clamp(this.dodge + value, 0, 0.9)
   }
 
@@ -550,6 +603,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     const update = (target: { ap: number }) => {
       target.ap = min(-100)(target.ap + value)
     }
@@ -568,6 +630,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     const update = (target: { luck: number }) => {
       target.luck = clamp(target.luck + value, -100, +100)
     }
@@ -587,6 +658,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     const update = (target: { def: number }) => {
       target.def = min(0)(target.def + value)
     }
@@ -606,6 +686,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     const update = (target: { speDef: number }) => {
       target.speDef = min(0)(target.speDef + value)
     }
@@ -625,6 +714,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
+
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     const update = (target: { atk: number }) => {
       target.atk = min(1)(target.atk + value)
     }
@@ -641,6 +739,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
+    if (
+      value < 0 &&
+      this.items.has(Item.TWIST_BAND) &&
+      caster.team !== this.team
+    ) {
+      value *= -1 // twist band turn debuffs into buffs
+    }
+
     if (this.passive === Passive.MELMETAL) {
       this.addAttack(value * 0.5, caster, apBoost, crit, permanent)
     } else {
@@ -790,7 +896,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage,
     totalDamage,
     isTripleAttack,
-    hasAttackKilled
+    hasAttackKilled,
+    crit
   }: {
     target: PokemonEntity
     board: Board
@@ -800,6 +907,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     totalDamage: number
     isTripleAttack: boolean
     hasAttackKilled: boolean
+    crit: boolean
   }) {
     this.addPP(ON_ATTACK_MANA, this, 0, false)
 
@@ -817,7 +925,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         trueDamage,
         totalDamage,
         isTripleAttack,
-        hasAttackKilled
+        hasAttackKilled,
+        crit
       })
     })
 
@@ -830,7 +939,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage,
         trueDamage,
         totalDamage,
-        isTripleAttack
+        isTripleAttack,
+        crit
       })
     })
   }
@@ -1365,7 +1475,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    const stackingItems = [Item.MUSCLE_BAND, Item.SOUL_DEW, Item.UPGRADE]
+    const stackingItems = [
+      Item.MUSCLE_BAND,
+      Item.SOUL_DEW,
+      Item.UPGRADE,
+      Item.MACH_RIBBON
+    ]
 
     const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
 

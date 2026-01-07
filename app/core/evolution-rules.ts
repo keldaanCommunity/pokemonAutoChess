@@ -164,10 +164,16 @@ export class CountEvolutionRule extends EvolutionRule {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
-    if (pokemonsBeforeEvolution.some((p) => p.meal)) {
-      pokemonEvolved.meal = pickRandomIn(
-        pokemonsBeforeEvolution.filter((p) => p.meal).map((p) => p.meal)
-      )
+    if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
+      const dishes = pokemonsBeforeEvolution
+        .filter((p) => p.dishes.size > 0)
+        .flatMap((p) => values(p.dishes))
+      while (pokemonEvolved.canEat && dishes.length > 0) {
+        const dish = dishes.pop()
+        if (dish && !pokemonEvolved.dishes.has(dish)) {
+          pokemonEvolved.dishes.add(dish)
+        }
+      }
     }
 
     shuffleArray(itemsCompleteOnBench)
@@ -237,9 +243,8 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
-    const items = values(pokemon.items)
-    pokemon.meal !== "" && items.push(pokemon.meal)
-    const itemEvolution = items.find((item) =>
+    const itemsAndDishes = values(pokemon.items).concat(values(pokemon.dishes))
+    const itemEvolution = itemsAndDishes.find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
 
