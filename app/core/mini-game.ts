@@ -536,6 +536,15 @@ export class MiniGame {
       )
     }
 
+    if (encounter === TownEncounters.CINCCINO) {
+      items.push(
+        Item.SILK_SCARF,
+        Item.SILK_SCARF,
+        Item.SILK_SCARF,
+        Item.SILK_SCARF
+      )
+    }
+
     if (encounter === TownEncounters.SABLEYE) {
       items.push(...pickNRandomIn(SynergyGems, 4))
     }

@@ -4341,7 +4341,8 @@
 		"SABLEYE": "Sableye proposes synergy gems that increase your synergies levels",
 		"CELEBI": "Celebi predicts the next PvE fight will be shiny",
 		"MAKUHITA": "Makuhita trains one of your Pokémon for several stages to improve their stats",
-		"WIGGLYTUFF": "Complete missions for Wigglytuff Guild to earn rewards"
+		"WIGGLYTUFF": "Complete missions for Wigglytuff Guild to earn rewards",
+		"CINCCINO": "Cinccino offers elegant SILK_SCARF"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
