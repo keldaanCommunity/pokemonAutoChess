@@ -2713,7 +2713,7 @@
 		"BLUE_ORB": "Every 3 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 15 PP",
 		"SCOPE_LENS": "Critical attacks steal 10 PP from the target.",
 		"STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
-		"GREEN_ORB": "Holder and ADJACENT allies regain 3% of their max HP every second. 30% of excess healing is converted to PP.",
+		"GREEN_ORB": "Holder and ADJACENT allies regain 3% of their max HP every second. 30% of overheal is converted to PP.",
 		"DEEP_SEA_TOOTH": "The holder attacks restore 5 additional PP. If the attack knocks out the target, restore 15 additional PP.",
 		"SMOKE_BALL": "Once below 40% max HP, drop the smoke ball, gain 70 SHIELD and jump to a tile away. Every ADJACENT enemy is PARALYSIS and BLINDED for 4 seconds.",
 		"XRAY_VISION": "+50 SPEED. The holder attacks can no longer miss.",
@@ -3279,7 +3279,7 @@
 		"GOURMET": "Gourmet"
 	},
 	"synergy_description": {
-		"NORMAL": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts.",
+		"NORMAL": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts, and can craft various scarves.",
 		"GRASS": "GRASS Pokémon heal and produce berries over time. 40% of overheal is gained as max HP.",
 		"FIRE": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every attack.",
 		"WATER": "WATER Pokémon generate more PP and can be fished with a rod.",
