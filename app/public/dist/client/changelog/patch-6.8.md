@@ -46,21 +46,41 @@
 
 # Changes to Synergies
 
+- Normal rework: 
+    - Normal (3): gain 15 shield. Get a Scarf
+    - Normal (5): gain 20 shield. Get a second Scarf
+    - Normal (7): gain 25 shield. Get a third Scarf
+    - Normal (9) gain 30 shield. Get a fourth Scarf. All scarves holders gain 30% increased base Attack and 30 AP.
 - New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
 
 # Changes to Items
 
-- Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
-- Hard Stone is renamed to Protector. No change to the effect.
-- Added Golden Pinap Berry, Golden Nanab Berry and Golden Razz Berry
-- New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to BURN with their attacks.
-- Heat stone changed: no longer has additional chance to BURN with their attacks. Instead, your Pokémon gain 3 Attack.
-- Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
+- New item component: Silk Scarf, obtained from Normal synergy: 15 shield
+- New scarves items craftable with Silk Scarf:
+    - Friend Bow: 15 shield - The holder gains the Normal type.
+    - Black Belt: 15 shield, 20% crit chance - Critical attacks provide 33% of the damage dealt as Shield.
+    - Mach Ribbon: 15 shield, 10 speed - Every 4 seconds, gain 20 Speed.
+    - Explosive Band: 50 shield, 5 attack - The first time user shield is depleted, this item explodes, dealing 50% of all Shield gained so far as special damage to adjacent enemies.
+    - Twist Band: 20 special defense, 50 shield - Stat debuffs inflicted by enemies become buffs instead.
+    - Big Eater Belt: 15 shield, 50 HP - Increase all permanent stat buffs received by 25%. Allows the wearer to eat 2 different dishes per round.
+    - Lucky Ribbon: 10 defense, 50 AP -Increase holder's Luck by 30%
+    - Cover Band: 12 defense, 50 shield - If an adjacent ally is about to get KO with some incoming damage, the wearer takes the damage instead.
+    - Efficient Bandanna: 15 shield, 15 PP - The holder and allies adjacent in the same row have their max PP reduced by 20%.
+    - Nullify Bandanna: 30 shield - Holder can no longer cast its ability. 100% (scales with AP) of PP gained are converted to Shield.
+
 - Miracle seed, Leaf Stone and Sticky Barb now gives 15 max HP instead of 15 shield.
 - Removed base 15 shield from Gracidea flower and Max Revive.
 - Removed base 15 shield from Smoke Ball. Shield received from Smoke Ball drop: 50 → 70
 - Kings Rock now gives 100 max HP instead of 100 shield. 35 → 30 % of max HP as shield on fight start. 
+- New recipe for Green Orb: Miracle Seed + Mystic Water. Base stats: 3 special defense → 15 HP
+- New recipe for Star Dust: Never Melt Ice + Mystic Water. Base stats: 50 shield → 10 special defense.
+- Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
+- Hard Stone is renamed to Protector. No change to the effect.
+- Added Golden Pinap Berry, Golden Nanab Berry and Golden Razz Berry
+- New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to burn with their attacks.
+- Heat stone changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 Attack.
+- Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 
 # Gameplay
 
