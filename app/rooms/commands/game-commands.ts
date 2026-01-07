@@ -585,6 +585,9 @@ export class OnDragDropCombineCommand extends Command<
         if (scarfIndex >= 0) {
           player.scarvesItems[scarfIndex] = result
         }
+        if (player.scarvesItems.length >= 5) {
+          player.titles.add(Title.SCOUT)
+        }
       }
 
       player.items.push(result)
@@ -787,6 +790,9 @@ export class OnDragDropItemCommand extends Command<
         const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
         if (scarfIndex >= 0) {
           player.scarvesItems[scarfIndex] = itemCombined
+        }
+        if (player.scarvesItems.length >= 5) {
+          player.titles.add(Title.SCOUT)
         }
       }
 

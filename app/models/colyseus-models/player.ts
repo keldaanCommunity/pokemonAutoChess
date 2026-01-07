@@ -471,7 +471,6 @@ export default class Player extends Schema implements IPlayer {
       while (this.scarvesItems.length < newNbScarves) {
         // initialize scarves items if not done yet
         this.scarvesItems.push(Item.SILK_SCARF)
-        console.log("Adding silk scarf to player", this.name, this.scarvesItems)
       }
 
       const gainedScarves = this.scarvesItems.slice(

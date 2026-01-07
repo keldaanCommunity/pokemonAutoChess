@@ -110,3 +110,5 @@
 - Added Region tracking to statistic
 - Wandering Unown now have 5% chance to be shiny, giving 250 shards on capture instead of 50. Unown encounter chance: 3.7% → 3.3%
 - New title: Poffin Master - Cook a Poffin with 3 different golden berries in it
+- New title: Top Gun - Get to Mach 10 with a Mach Ribbon
+- New title: Scout - Equip your team with at least 5 Silk Scarf made items

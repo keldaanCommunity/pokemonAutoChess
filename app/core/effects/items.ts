@@ -685,6 +685,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new PeriodicEffect((pokemon) => {
       pokemon.addSpeed(20, pokemon, 0, false)
       pokemon.count.machRibbonCount++
+      if(pokemon.count.machRibbonCount >= 10 && pokemon.player) {
+        pokemon.player.titles.add(Title.TOP_GUN)
+      }
     },
       Item.MACH_RIBBON,
       4000
