@@ -638,7 +638,10 @@ export default abstract class PokemonState {
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
-      } else if (pokemon.hp - residualDamage <= 0) {
+      } else if (
+        pokemon.hp - residualDamage <= 0 &&
+        pokemon.items.has(Item.COVER_BAND) === false
+      ) {
         // is about to die, check adjacent ally with Cover band
         const coverAlly = board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
