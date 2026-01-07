@@ -7,10 +7,10 @@ import {
   FishingRods,
   HMs,
   Item,
+  ItemComponentsNoScarf,
   ItemRecipe,
   MemoryDiscs,
   Mulches,
-  NonSpecialItemComponents,
   ShinyItems,
   SpecialItems,
   SynergyGems,
@@ -60,7 +60,7 @@ export default function WikiItems() {
     return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
   }, []) // too many memory discs to display
 
-  const components = [...NonSpecialItemComponents, Item.FOSSIL_STONE]
+  const components = ItemComponentsNoScarf
 
   return (
     <div id="wiki-items">

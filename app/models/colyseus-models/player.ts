@@ -27,9 +27,9 @@ import {
   ArtificialItems,
   HMs,
   Item,
+  ItemComponentsNoFossilOrScarf,
   MissionOrder,
   NonSpecialBerries,
-  NonSpecialItemComponents,
   ScarfItem,
   SynergyGemsBuried,
   SynergyGivenByItem,
@@ -234,7 +234,7 @@ export default class Player extends Schema implements IPlayer {
 
     if (state.specialGameRule === SpecialGameRule.SLAMINGO) {
       for (let i = 0; i < 4; i++)
-        this.items.push(pickRandomIn(NonSpecialItemComponents))
+        this.items.push(pickRandomIn(ItemComponentsNoFossilOrScarf))
     }
   }
 
@@ -453,7 +453,6 @@ export default class Player extends Schema implements IPlayer {
     return needsRecomputingSynergiesAgain
   }
 
-
   updateScarves(
     previousSynergies: Map<Synergy, number>,
     updatedSynergies: Map<Synergy, number>
@@ -469,7 +468,7 @@ export default class Player extends Schema implements IPlayer {
 
     if (newNbScarves > previousNbScarves) {
       // some scarves are gained
-      while(this.scarvesItems.length < newNbScarves) {
+      while (this.scarvesItems.length < newNbScarves) {
         // initialize scarves items if not done yet
         this.scarvesItems.push(Item.SILK_SCARF)
         console.log("Adding silk scarf to player", this.name, this.scarvesItems)

@@ -75,9 +75,10 @@ import {
   Dishes,
   Item,
   ItemComponents,
+  ItemComponentsNoFossilOrScarf,
+  ItemComponentsNoScarf,
   ItemRecipe,
   Mulches,
-  NonSpecialItemComponents,
   ShinyItems,
   SynergyGems,
   SynergyGivenByGem,
@@ -539,7 +540,7 @@ export class OnDragDropCombineCommand extends Command<
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
       if (ItemComponents.includes(exchangedItem)) {
         result = pickRandomIn(
-          NonSpecialItemComponents.filter((i) => i !== exchangedItem)
+          ItemComponentsNoFossilOrScarf.filter((i) => i !== exchangedItem)
         )
       } else if (SynergyStones.includes(exchangedItem)) {
         result = pickRandomIn(SynergyStones.filter((i) => i !== exchangedItem))
@@ -578,11 +579,10 @@ export class OnDragDropCombineCommand extends Command<
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     } else {
-      if(itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
+      if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
         // replace silk scarf by scarf-made item
         const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
-        if(scarfIndex >= 0) {
-          console.log("Replacing scarf at index", scarfIndex, "by", result)
+        if (scarfIndex >= 0) {
           player.scarvesItems[scarfIndex] = result
         }
       }
@@ -782,11 +782,10 @@ export class OnDragDropItemCommand extends Command<
 
       const itemCombined = recipe[0] as Item
 
-      if(recipe[1].includes(Item.SILK_SCARF)) {
+      if (recipe[1].includes(Item.SILK_SCARF)) {
         // replace silk scarf by scarf-made item
         const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
-        if(scarfIndex >= 0) {
-          console.log("Replacing scarf at index", scarfIndex, "by", itemCombined)
+        if (scarfIndex >= 0) {
           player.scarvesItems[scarfIndex] = itemCombined
         }
       }
@@ -1336,7 +1335,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
-          const items = pickNRandomIn(ItemComponents, 3)
+          const items = pickNRandomIn(ItemComponentsNoScarf, 3)
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {

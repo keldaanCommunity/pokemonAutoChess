@@ -6,12 +6,7 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomp
 import { IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
-import {
-  Berries,
-  Dishes,
-  Item,
-  NonSpecialItemComponents
-} from "../../types/enum/Item"
+import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -194,7 +189,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   ) {
     super.process(unown, board, target, crit)
     if (unown.player && !unown.isGhostOpponent) {
-      unown.player.items.push(pickRandomIn(NonSpecialItemComponents))
+      unown.player.items.push(pickRandomIn(ItemComponents))
     }
   }
 }

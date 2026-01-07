@@ -436,7 +436,7 @@ export const FishingRods = [
 
 export type FishingRod = (typeof FishingRods)[number]
 
-export const NonSpecialItemComponents: Item[] = [
+export const ItemComponentsNoFossilOrScarf: Item[] = [
   Item.MIRACLE_SEED,
   Item.MYSTIC_WATER,
   Item.HEART_SCALE,
@@ -447,8 +447,13 @@ export const NonSpecialItemComponents: Item[] = [
   Item.TWISTED_SPOON
 ]
 
+export const ItemComponentsNoScarf: Item[] = [
+  ...ItemComponentsNoFossilOrScarf,
+  Item.FOSSIL_STONE
+]
+
 export const ItemComponents: Item[] = [
-  ...NonSpecialItemComponents,
+  ...ItemComponentsNoFossilOrScarf,
   Item.FOSSIL_STONE,
   Item.SILK_SCARF
 ]

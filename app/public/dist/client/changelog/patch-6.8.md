@@ -90,6 +90,7 @@
 - Fire weather is renamed to Drought
 - Zenith is now the weather triggered by Grass synergy. New effect: +15% healing, -30% Sleep duration
 - Item components carousels now have 40% chance to include one additional Fossil Stone. Otherwise they will only propose non-special item components.
+- Removed the reward change between component and full item on stage 19 PvE, based on the amount of components collected. It is too easy to manipulate with Silk Scarf, Unown-I and ground digging. Stage 19 PvE now always offers a full craftable item as a reward.
 
 # UI
 

@@ -13,7 +13,7 @@ import { Emotion } from "../../../../../types"
 import {
   CraftableItemsNoScarves,
   Item,
-  NonSpecialItemComponents
+  ItemComponentsNoScarf
 } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -349,7 +349,7 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
             <ul className="">
               {(stageInfo.level >= 20
                 ? CraftableItemsNoScarves
-                : [...NonSpecialItemComponents, Item.FOSSIL_STONE]
+                : ItemComponentsNoScarf
               ).map((item) => (
                 <li key={item}>{itemDetail(item)}</li>
               ))}
