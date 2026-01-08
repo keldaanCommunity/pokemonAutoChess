@@ -1673,11 +1673,10 @@
 		"INGRAIN": "Radicamento",
 		"GROWTH": "Crescita",
 		"SPORE": "Spora",
-		"BLAZE": "Aiutofuoco",
 		"FLAME_BODY": "Corpo Ardente",
 		"WILDFIRE": "Fuocobomba",
+		"BLAZE": "Aiutofuoco",
 		"DESOLATE_LAND": "Terra Estrema",
-		"DROUGHT": "Siccità",
 		"RAIN_DANCE": "Pioggiadanza",
 		"DRIZZLE": "Piovischio",
 		"PRIMORDIAL_SEA": "Mare Primordiale",
@@ -1771,7 +1770,8 @@
 		"BERSERK": "Furore",
 		"FLUID": "Fluido",
 		"SHAPELESS": "Informe",
-		"ETHEREAL": "Etereo"
+		"ETHEREAL": "Etereo",
+		"DROUGHT": "Siccità"
 	},
 	"effect_description": {
 		"STAMINA": "Ottieni 15 SHIELD",

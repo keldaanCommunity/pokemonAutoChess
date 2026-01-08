@@ -806,7 +806,6 @@
 	"minimum_rank": "Minimalna ranga",
 	"maximum_rank": "Maksymalna ranga",
 	"no_rule": "Brak specjalnych zasad",
-	"classic": "Klasyczny",
 	"private": "Prywatny",
 	"available_rooms": "Otwarte pokoje",
 	"new_game": "Nowa gra",
@@ -881,5 +880,6 @@
 		"move_row_up": "Przesuń wiersz w góre",
 		"move_row_down": "Przesuń wiersz w dół",
 		"delete_row": "Usuń wiersz"
-	}
+	},
+	"classic": "Klasyczny"
 }

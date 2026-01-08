@@ -1354,7 +1354,6 @@
 		"WILDFIRE": "Lửa hoang dã",
 		"BLAZE": "Ngọn lửa nhỏ",
 		"DESOLATE_LAND": "Lãnh địa hoang tàn",
-		"DROUGHT": "Hạn hán",
 		"RAIN_DANCE": "Điệu nhảy cầu mưa",
 		"DRIZZLE": "Mưa phùn",
 		"PRIMORDIAL_SEA": "Đại dương nguyên thuỷ",
@@ -1387,7 +1386,8 @@
 		"DRAGON_DANCE": "Long vũ",
 		"BULK_UP": "Gồng mình",
 		"RAGE": "Nổi điên",
-		"ANGER_POINT": "Điểm chết"
+		"ANGER_POINT": "Điểm chết",
+		"DROUGHT": "Hạn hán"
 	},
 	"stat": {
 		"ATK": "Công",

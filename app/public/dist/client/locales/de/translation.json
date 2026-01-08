@@ -1987,7 +1987,6 @@
 		"GROWTH": "Wachstum",
 		"SPORE": "Pilzspore",
 		"BLAZE": "Großbrand",
-		"DROUGHT": "Dürre",
 		"DESOLATE_LAND": "Endland",
 		"RAIN_DANCE": "Regentanz",
 		"DRIZZLE": "Niesel",
@@ -2086,7 +2085,8 @@
 		"ETHEREAL": "Ätherisch",
 		"APPETIZER": "Vorspeise",
 		"LUNCH_BREAK": "Mittagspause",
-		"BANQUET": "Bankett"
+		"BANQUET": "Bankett",
+		"DROUGHT": "Dürre"
 	},
 	"effect_description": {
 		"STAMINA": "Erhalte 15 SHIELD",
@@ -3251,7 +3251,7 @@
 	"ranked_game_hint": "Dieses Spiel ist auf Spieler des aktuellen Rangs beschränkt",
 	"smeargle_scribble_short": "Kritzelei",
 	"smeargle_scribble_hint": "Farbeagle kritzelt eine neue Zufallsregel, die während des gesamten Spiels gilt.",
-	"no_rule": "Keine Spezialregel",	
+	"no_rule": "Keine Spezialregel",
 	"classic_hint": "Das Spiel wird automatisch gestartet, wenn sich 8 Spieler in der Lobby befinden.",
 	"password_protected": "Private Lobby (passwortgeschützt)",
 	"private": "Privat",
@@ -3259,7 +3259,7 @@
 	"new_game": "Neues Spiel",
 	"in_game": "Im Spiel",
 	"events": "Ereignisse",
-	"custom_room_short": "Benutzerdefiniert",	
+	"custom_room_short": "Benutzerdefiniert",
 	"loading": "Wird geladen...",
 	"connecting": "Verbinden...",
 	"no_data_available": "Keine Daten vorhanden",

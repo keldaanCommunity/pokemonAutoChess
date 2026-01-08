@@ -1449,10 +1449,9 @@
 		"GROWTH": "Crescimento",
 		"SPORE": "Esporo",
 		"FLAME_BODY": "Corpo de Chama",
-		"BLAZE": "Chama",		
 		"WILDFIRE": "Fogo Selvagem",
+		"BLAZE": "Chama",
 		"DESOLATE_LAND": "Terra Desolada",
-		"DROUGHT": "Seca",
 		"RAIN_DANCE": "Dança da chuva",
 		"DRIZZLE": "Chuvisco",
 		"PRIMORDIAL_SEA": "mar primordial",
@@ -1541,7 +1540,8 @@
 		"QUICK_FEET": "Pés Ligeiros",
 		"RUN_AWAY": "Sair Correndo",
 		"HUSTLE": "Apressar",
-		"BERSERK": "Berserk"
+		"BERSERK": "Berserk",
+		"DROUGHT": "Seca"
 	},
 	"effect_description": {
 		"STAMINA": "Ganhe 15 SHIELD",
