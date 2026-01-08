@@ -49,6 +49,7 @@
 - Buff Guillotine (Machop): Attack: 100/200/300% ATK SPECIAL → 300% ATK SPECIAL at all tiers
 - Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
 - Buff Rage: base cooldown reduced from 500ms to 250ms
+- Buff Solosis line: Def 2/2/2 → 4/6/8, Special Def 2/2/2 → 5/7/10
 
 # Changes to Synergies
 

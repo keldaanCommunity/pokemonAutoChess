@@ -2291,8 +2291,8 @@ export class Solosis extends Pokemon {
   hp = 100
   atk = 6
   speed = 35
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 5
   maxPP = 90
   range = 2
   skill = Ability.PSYCHIC
@@ -2306,8 +2306,8 @@ export class Duosion extends Pokemon {
   hp = 200
   atk = 10
   speed = 35
-  def = 2
-  speDef = 2
+  def = 6
+  speDef = 7
   maxPP = 90
   range = 2
   skill = Ability.PSYCHIC
@@ -2320,8 +2320,8 @@ export class Reuniclus extends Pokemon {
   hp = 300
   atk = 20
   speed = 35
-  def = 2
-  speDef = 2
+  def = 8
+  speDef = 10
   maxPP = 90
   range = 2
   skill = Ability.PSYCHIC
