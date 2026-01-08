@@ -323,7 +323,7 @@ export default class GameScene extends Scene {
       this.board?.minigameMode()
       this.weatherManager?.setTownDaytime(this.room?.state.stageLevel ?? 0)
     } else {
-      this.board?.pickMode()
+      this.board?.pickMode(true)
     }
   }
 
