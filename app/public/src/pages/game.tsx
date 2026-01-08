@@ -136,6 +136,16 @@ export function playerClick(id: string) {
   }
 }
 
+function showMoneyToast(value: number) {
+  toast(
+    <div className="toast-player-income">
+      <span style={{ verticalAlign: "middle" }}>+{value}</span>
+      <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
+    </div>,
+    { containerId: "toast-money" }
+  )
+}
+
 export default function Game() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
@@ -490,15 +500,7 @@ export default function Game() {
         )
       })
 
-      room.onMessage(Transfer.PLAYER_INCOME, (value) => {
-        toast(
-          <div className="toast-player-income">
-            <span style={{ verticalAlign: "middle" }}>+{value}</span>
-            <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
-          </div>,
-          { containerId: "toast-money" }
-        )
-      })
+      room.onMessage(Transfer.PLAYER_INCOME, showMoneyToast)
 
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
@@ -690,8 +692,12 @@ export default function Game() {
           $player.listen("shopFreeRolls", (value) => {
             dispatch(setShopFreeRolls(value))
           })
-          $player.listen("money", (value) => {
+          $player.listen("money", (value, previousValue) => {
             dispatch(setMoney(value))
+            if (value - previousValue >= 30) {
+              // show income toast for significant income only
+              showMoneyToast(value - previousValue)
+            }
           })
           $player.listen("streak", (value) => {
             dispatch(setStreak(value))

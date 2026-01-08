@@ -41,8 +41,8 @@ export default class WanderersManager {
       this.addWanderingUnown(wanderer)
     } else if (wanderer.type === WandererType.CATCHABLE) {
       this.addCatchableWanderer(wanderer)
-    } else if (wanderer.type === WandererType.SPECIAL) {
-      this.addSpecialWanderer(wanderer)
+    } else if (wanderer.type === WandererType.DIALOG) {
+      this.addDialogWanderer(wanderer)
     }
   }
 
@@ -83,7 +83,7 @@ export default class WanderersManager {
     })
   }
 
-  addSpecialWanderer(wanderer: Wanderer) {
+  addDialogWanderer(wanderer: Wanderer) {
     const sprite = new PokemonSpecial({
       scene: this.scene,
       x: -100,
@@ -97,27 +97,15 @@ export default class WanderersManager {
       wanderer,
       existingSprite: sprite,
       onClick: (wanderer, sprite) => {
-        sprite.openDetail()
-        this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        setTimeout(() => {
+        //this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id }) // not needed for dialog wanderers for now
+        if (sprite.detail) {
           sprite.closeDetail()
-          this.scene.tweens.add({
-            targets: sprite,
-            x: -100,
-            y: 350,
-            ease: "Linear",
-            duration: 4000,
-            onStart: () => {
-              sprite.orientation = Orientation.LEFT
-              this.scene.animationManager?.animatePokemon(
-                sprite,
-                PokemonActionState.WALK,
-                false
-              )
-            },
-            onComplete: () => sprite.destroy()
-          })
-        }, 3000)
+        } else {
+          sprite.openDetail()
+          setTimeout(() => {
+            sprite.closeDetail()
+          }, 3000)
+        }
         return false
       }
     })
@@ -198,18 +186,22 @@ export default class WanderersManager {
             PokemonActionState.IDLE,
             false
           )
+          if (wanderer.type === WandererType.DIALOG) {
+            sprite.openDetail()
+          }
           tweens.push(
             this.scene.add.tween({
               targets: [sprite],
               ease: "linear",
               duration: 5000,
-              delay: wanderer.type === WandererType.SPECIAL ? 30000 : 8000,
+              delay: 8000,
               x: startX,
               y: startY,
               onComplete: () => {
                 sprite.destroy()
               },
               onStart: () => {
+                sprite.closeDetail()
                 sprite.orientation = Orientation.LEFT
                 this.scene.animationManager?.animatePokemon(
                   sprite,

@@ -809,10 +809,14 @@ export default class Player extends Schema implements IPlayer {
         id,
         shiny: false,
         pkm: Pkm.CHATOT,
-        type: WandererType.SPECIAL,
+        type: WandererType.DIALOG,
         behavior: WandererBehavior.SPECTATE
       })
     )
+
+    setTimeout(() => {
+      this.addMoney(30, true, null)
+    }, 7000)
   }
 
   chargeCellBattery(amount: number) {

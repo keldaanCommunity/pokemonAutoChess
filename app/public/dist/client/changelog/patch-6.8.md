@@ -106,6 +106,7 @@
 - Current game mode is now displayed in the game top bar
 - Added a tooltip on the experience bar to show gold needed to level up and number of clicks required
 - New animation for Fairy field
+- Wigglypuff mission gold reward is now automatically granted when the mission is completed, instead of requiring to click on Chatot
 
 # Bugfix
 

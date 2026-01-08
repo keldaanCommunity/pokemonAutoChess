@@ -264,11 +264,6 @@ export class OnPokemonCatchCommand extends Command<
         pokemon.onAcquired(player)
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
       }
-    } else if (wanderer.type === WandererType.SPECIAL) {
-      if (wanderer.pkm === Pkm.CHATOT) {
-        player.addMoney(30, true, null)
-        this.room.broadcast(Transfer.PLAYER_INCOME, 30)
-      }
     }
   }
 }

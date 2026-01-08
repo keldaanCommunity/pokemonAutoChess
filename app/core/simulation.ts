@@ -1,5 +1,5 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../models/effects"
