@@ -1515,6 +1515,10 @@ export const AbilitiesAnimations: {
     positionOffset: [0, -36],
     scale: [4, 2]
   }),
+  [Ability.POWDER]: onCaster({
+    ability: "PUFF_PINK",
+    scale: 3
+  }),
   [Ability.ORIGIN_PULSE]: (args) =>
     projectile({
       startCoords: [0, args.targetY],

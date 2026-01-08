@@ -1220,7 +1220,7 @@ export class KingShieldStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const duration = 1500
-    const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
     pokemon.status.triggerProtect(duration)
     pokemon.addShield(shield, pokemon, 1, crit)
     const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
@@ -2881,21 +2881,15 @@ export class WishStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const heal = 50
-    const count = pokemon.stars
-
-    const allies = board.cells
-      .filter(
-        (cell): cell is PokemonEntity =>
-          cell != null && cell.team === pokemon.team
-      )
-      .sort((a, b) => b.maxHP - b.hp - (a.maxHP - a.hp))
-      .slice(0, count)
-
-    for (const ally of allies) {
-      ally.handleHeal(heal, pokemon, 1, crit)
-      ally.addLuck(20, pokemon, 1, crit)
-    }
+    //  Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally.
+    const lowestHealthAlly = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
+    const shield = [30, 60, 120][pokemon.stars - 1] ?? 120
+    lowestHealthAlly.addShield(shield, pokemon, 1, crit)
+    lowestHealthAlly.status.triggerProtect(1500)
   }
 }
 
@@ -9677,7 +9671,7 @@ export class BulldozeStrategy extends AbilityStrategy {
 
         if (destination) {
           cell.value.moveTo(destination.x, destination.y, board, true)
-          cell.value.cooldown = 500
+          cell.value.resetCooldown(500)
         }
 
         cell.value.addSpeed(-speedReduction, pokemon, 0, false)
@@ -11428,6 +11422,7 @@ export class RageStrategy extends AbilityStrategy {
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.maxHP / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
+    pokemon.resetCooldown(200)
   }
 }
 
@@ -15694,7 +15689,70 @@ export class BulletPunchStrategy extends AbilityStrategy {
         pokemon.addSpeed(-speedBuff, pokemon, 0, false)
       }, 2000)
     )
-    pokemon.cooldown = 250
+    pokemon.resetCooldown(250)
+  }
+}
+
+export class PowderStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const speedFactor = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+
+    // Find the enemy with the highest SPEED
+    const enemies = board.cells
+      .filter((entity) => entity && entity.team !== pokemon.team)
+      .map((entity) => entity as PokemonEntity)
+      .sort((a, b) => b.speed - a.speed)
+
+    const enemyWithHighestSpeed = enemies[0]
+    if (enemyWithHighestSpeed) {
+      const cells = board.getCellsBetween(
+        pokemon.positionX,
+        pokemon.positionY,
+        enemyWithHighestSpeed.positionX,
+        enemyWithHighestSpeed.positionY
+      )
+      for (const cell of cells) {
+        pokemon.broadcastAbility({
+          positionX: cell.x,
+          positionY: cell.y
+        })
+        if (cell.value) {
+          if (cell.value.team !== pokemon.team) {
+            // Enemy: take damage and reduce SPEED
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            cell.value.addSpeed(-speedFactor, pokemon, 5000, false)
+            cell.value.commands.push(
+              new DelayedCommand(() => {
+                cell.value?.addSpeed(speedFactor, pokemon, 0, false)
+              }, 5000)
+            )
+          }
+          if (cell.value.team === pokemon.team) {
+            // Ally: heal and increase SPEED
+            cell.value.handleHeal(damage, pokemon, 1, crit)
+            cell.value.addSpeed(speedFactor, pokemon, 5000, false)
+            cell.value.commands.push(
+              new DelayedCommand(() => {
+                cell.value?.addSpeed(-speedFactor, pokemon, 0, false)
+              }, 5000)
+            )
+          }
+        }
+      }
+    }
   }
 }
 
@@ -16222,7 +16280,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
   [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
   [Ability.EAR_DIG]: new EarDigStrategy(),
-  [Ability.POWDER_SNOW]: new PowderSnowStrategy()
+  [Ability.POWDER_SNOW]: new PowderSnowStrategy(),
+  [Ability.POWDER]: new PowderStrategy()
 }
 
 export function castAbility(

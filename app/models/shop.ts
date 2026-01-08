@@ -37,7 +37,11 @@ import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
-import { FishingRod, Item, NonSpecialItemComponents } from "../types/enum/Item"
+import {
+  FishingRod,
+  Item,
+  ItemComponentsNoFossilOrScarf
+} from "../types/enum/Item"
 import {
   isRegionalVariant,
   Pkm,
@@ -465,7 +469,7 @@ export default class Shop {
 
       if (stageLevel === PortalCarouselStages[0]) {
         player.itemsProposition[i] = pickRandomIn(
-          NonSpecialItemComponents.filter(
+          ItemComponentsNoFossilOrScarf.filter(
             (c) => player.itemsProposition.includes(c) === false
           )
         )
@@ -600,12 +604,12 @@ export default class Shop {
     let specificTypesWanted: Synergy[] | undefined = undefined
 
     const attractors = values(player.board).filter(
-      (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
+      (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)
     )
     let attractor: Pokemon | null = null
     for (const p of attractors) {
       if (p.items.has(Item.INCENSE) && chance(INCENSE_CHANCE, p)) attractor = p
-      if (p.meal === Item.HONEY && chance(HONEY_CHANCE, p)) attractor = p
+      if (p.dishes.has(Item.HONEY) && chance(HONEY_CHANCE, p)) attractor = p
     }
 
     if (attractor) {

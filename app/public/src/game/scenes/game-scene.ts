@@ -5,6 +5,7 @@ import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_WIDTH,
+  getRegionTint,
   RegionDetails
 } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
@@ -323,7 +324,7 @@ export default class GameScene extends Scene {
       this.board?.minigameMode()
       this.weatherManager?.setTownDaytime(this.room?.state.stageLevel ?? 0)
     } else {
-      this.board?.pickMode()
+      this.board?.pickMode(true)
     }
   }
 
@@ -386,6 +387,13 @@ export default class GameScene extends Scene {
         sys.animatedTiles.pause()
       }
     }
+
+    // update region tint on pokemons
+    this.board?.pokemons.forEach((p) => {
+      p.sprite.setTint(
+        getRegionTint(this.mapName, preference("colorblindMode"))
+      )
+    })
   }
 
   resetDragState() {

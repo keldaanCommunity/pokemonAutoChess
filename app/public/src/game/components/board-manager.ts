@@ -124,12 +124,13 @@ export default class BoardManager {
     this.flowerPokemonsInPots = []
 
     if (state.phase == GamePhaseState.FIGHT) {
+      this.renderBoard(false)
       this.battleMode(false)
     } else if (state.phase === GamePhaseState.TOWN) {
-      this.renderBoard(true)
+      this.renderBoard(false)
       this.minigameMode()
     } else {
-      this.pickMode()
+      this.pickMode(false)
     }
   }
 
@@ -238,7 +239,7 @@ export default class BoardManager {
     this.pokemons.delete(pokemonToRemove.id)
   }
 
-  renderBoard(phaseChanged: boolean) {
+  renderBoard(phaseJustChanged: boolean) {
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
 
@@ -266,13 +267,8 @@ export default class BoardManager {
       this.addSmeargle()
     }
 
-    if (this.state.stageLevel in PVEStages) {
-      if (phaseChanged) {
-        this.addPvePokemons(PVEStages[this.state.stageLevel], false)
-      } else if (this.mode === BoardMode.PICK) {
-        // immediately add PVE pokemons
-        this.addPvePokemons(PVEStages[this.state.stageLevel], true)
-      }
+    if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
+      this.addPvePokemons(PVEStages[this.state.stageLevel], phaseJustChanged)
     }
   }
 
@@ -723,11 +719,11 @@ export default class BoardManager {
     }
   }
 
-  battleMode(phaseChanged: boolean) {
+  battleMode(phaseJustChanged: boolean) {
     // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
-    if (!phaseChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
+    if (!phaseJustChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
@@ -738,7 +734,7 @@ export default class BoardManager {
       if (currentPlayer) {
         const isPVERound = currentPlayer.opponentId === "pve"
         const isRedPlayer = gameState.currentTeam === Team.RED_TEAM
-        if (!isPVERound && phaseChanged) {
+        if (!isPVERound && phaseJustChanged) {
           this.portalTransition(isRedPlayer)
         } else {
           this.updateOpponentAvatar(
@@ -765,7 +761,7 @@ export default class BoardManager {
     })
   }
 
-  pickMode() {
+  pickMode(phaseJustChanged: boolean) {
     // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.scene.setMap(this.player.map)
@@ -778,7 +774,7 @@ export default class BoardManager {
       // play back original region music when leaving town
       playMusic(this.scene, RegionDetails[this.player.map].music)
     }
-    this.renderBoard(true)
+    this.renderBoard(phaseJustChanged)
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
@@ -858,6 +854,15 @@ export default class BoardManager {
         } else {
           pkm?.addFloatingAnimation()
         }
+      }
+    }
+  }
+
+  updatePokemonDishes(playerId: string, pokemon: IPokemon, dishes: Item[]) {
+    if (this.player.id === playerId) {
+      const pokemonUI = this.pokemons.get(pokemon.id)
+      if (pokemonUI) {
+        pokemonUI.updateDishes(dishes)
       }
     }
   }
@@ -974,12 +979,6 @@ export default class BoardManager {
         case "skill":
           if (previousValue != null && value !== previousValue) {
             pokemonUI.evolutionAnimation()
-          }
-          break
-
-        case "meal":
-          if (pokemonUI.meal !== value) {
-            pokemonUI.updateMeal(value as IPokemon["meal"])
           }
           break
 

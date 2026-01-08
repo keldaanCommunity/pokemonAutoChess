@@ -245,7 +245,8 @@ export default abstract class PokemonState {
         trueDamage,
         totalDamage,
         isTripleAttack,
-        hasAttackKilled
+        hasAttackKilled,
+        crit
       })
       if (isAttackSuccessful) {
         pokemon.onHit({
@@ -345,7 +346,6 @@ export default abstract class PokemonState {
       if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
       if (crit) shield *= caster.critPower
       if (pokemon.status.enraged && shield > 0) shield *= 0.5
-      if (pokemon.items.has(Item.SILK_SCARF) && shield > 0) shield *= 1.5
 
       shield = Math.round(shield)
       pokemon.shield = min(0)(pokemon.shield + shield)
@@ -367,7 +367,7 @@ export default abstract class PokemonState {
 
   handleDamage({
     target: pokemon,
-    damage,
+    damage: incomingDamage,
     board,
     attackType,
     attacker,
@@ -384,6 +384,7 @@ export default abstract class PokemonState {
   }): { death: boolean; takenDamage: number } {
     let death = false
     let takenDamage = 0
+    let damage = incomingDamage
 
     if (isNaN(damage)) {
       logger.trace(
@@ -470,14 +471,14 @@ export default abstract class PokemonState {
           attacker.items.has(Item.PROTECTIVE_PADS) === false &&
           !isRetaliation
         ) {
-          const crit =
+          const reflectCrit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
             chance(pokemon.critChance / 100, pokemon)
           const reflectDamage = Math.round(
             0.5 *
               damage *
               (1 + pokemon.ap / 100) *
-              (crit ? pokemon.critPower : 1)
+              (reflectCrit ? pokemon.critPower : 1)
           )
           attacker.handleDamage({
             damage: reflectDamage,
@@ -581,7 +582,7 @@ export default abstract class PokemonState {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
           pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
-            effect.apply({ pokemon, board, attacker })
+            effect.apply({ pokemon, board, attacker, damage: reducedDamage })
           })
         }
 
@@ -637,6 +638,32 @@ export default abstract class PokemonState {
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
+      } else if (
+        pokemon.hp - residualDamage <= 0 &&
+        pokemon.items.has(Item.COVER_BAND) === false
+      ) {
+        // is about to die, check adjacent ally with Cover band
+        const coverAlly = board
+          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+          .map((cell) => cell.value)
+          .find(
+            (ally) =>
+              ally &&
+              ally.team === pokemon.team &&
+              ally.items.has(Item.COVER_BAND) &&
+              ally.hp > 0
+          )
+        if (coverAlly) {
+          // cover ally takes the hit instead
+          return coverAlly.handleDamage({
+            damage: incomingDamage,
+            board,
+            attackType,
+            attacker,
+            shouldTargetGainMana,
+            isRetaliation
+          })
+        }
       }
 
       pokemon.hp = Math.max(0, pokemon.hp - residualDamage)

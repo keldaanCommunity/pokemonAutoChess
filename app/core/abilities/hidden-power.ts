@@ -1,3 +1,4 @@
+import { SetSchema } from "@colyseus/schema"
 import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
@@ -309,7 +310,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     if (pokemon.player) {
       pokemon.player.board.forEach((p: IPokemon) => {
         if (p.canEat) {
-          p.meal = pickRandomIn(Dishes as unknown as Item[])
+          p.dishes = new SetSchema([pickRandomIn(Dishes as unknown as Item[])])
         }
       })
     }

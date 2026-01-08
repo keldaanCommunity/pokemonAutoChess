@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
@@ -12,9 +11,9 @@ import { PVEStages } from "../../../../../models/pve-stages"
 import { getAdditionalsTier1 } from "../../../../../models/shop"
 import { Emotion } from "../../../../../types"
 import {
-  CraftableItems,
+  CraftableItemsNoScarves,
   Item,
-  ItemComponents
+  ItemComponentsNoScarf
 } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -348,11 +347,12 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
           <h4>{t("item_pool")}</h4>
           <div className="stage-rewards">
             <ul className="">
-              {(stageInfo.level >= 20 ? CraftableItems : ItemComponents).map(
-                (item) => (
-                  <li key={item}>{itemDetail(item)}</li>
-                )
-              )}
+              {(stageInfo.level >= 20
+                ? CraftableItemsNoScarves
+                : ItemComponentsNoScarf
+              ).map((item) => (
+                <li key={item}>{itemDetail(item)}</li>
+              ))}
             </ul>
           </div>
 
