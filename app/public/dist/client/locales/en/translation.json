@@ -542,7 +542,8 @@
 		"CITY_SHUTTLE": "City Shuttle",
 		"BULLET_PUNCH": "Bullet Punch",
 		"EAR_DIG": "Ear Dig",
-		"POWDER_SNOW": "Powder Snow"
+		"POWDER_SNOW": "Powder Snow",
+		"POWDER": "Powder"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1628,7 +1629,29 @@
 		"SKIDDO": "Skiddo",
 		"GOGOAT": "Gogoat",
 		"BUNNELBY": "Bunnelby",
-		"DIGGERSBY": "Diggersby"
+		"DIGGERSBY": "Diggersby",
+		"SCATTERBUG": "Scatterbug",
+		"SPEWPA": "Spewpa",
+		"VIVILLON": "Vivillon (Meadow)",
+		"VIVILLON_ICY_SNOW": "Vivillon (Icy Snow)",
+		"VIVILLON_POLAR": "Vivillon (Polar)",
+		"VIVILLON_TUNDRA": "Vivillon (Tundra)",
+		"VIVILLON_CONTINENTAL": "Vivillon (Continental)",
+		"VIVILLON_GARDEN": "Vivillon (Garden)",
+		"VIVILLON_ELEGANT": "Vivillon (Elegant)",
+		"VIVILLON_MODERN": "Vivillon (Modern)",
+		"VIVILLON_MARINE": "Vivillon (Marine)",
+		"VIVILLON_ARCHIPELAGO": "Vivillon (Archipelago)",
+		"VIVILLON_HIGH_PLAINS": "Vivillon (High Plains)",
+		"VIVILLON_SANDSTORM": "Vivillon (Sandstorm)",
+		"VIVILLON_RIVER": "Vivillon (River)",
+		"VIVILLON_MONSOON": "Vivillon (Monsoon)",
+		"VIVILLON_SAVANNA": "Vivillon (Savanna)",
+		"VIVILLON_SUN": "Vivillon (Sun)",
+		"VIVILLON_OCEAN": "Vivillon (Ocean)",
+		"VIVILLON_JUNGLE": "Vivillon (Jungle)",
+		"VIVILLON_FANCY": "Vivillon (Fancy)",
+		"VIVILLON_POKE_BALL": "Vivillon (Poké Ball)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2151,7 +2174,8 @@
 		"CITY_SHUTTLE": "Leap to the closest ally and saddle them on the user's back, then dash to the farthest enemy reachable. Deal [10,20,30,SP] SPECIAL + 100% of the carried ally's ATK to all enemy Pokémon in the path. Grant [20,40,80,SP] SHIELD to the user and the carried ally.",
 		"BULLET_PUNCH": "Deal [40,SP] TRUE to the target, then gain [40,SP] SPEED for 2 seconds.",
 		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
-		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds."
+		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.",
+		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3157,7 +3181,8 @@
 		"ORTHWORM": "When digging a hole, gains 5 HP permanently.",
 		"TADBULB": "When starting under LIGHT or when receiving 50 incoming damage or more, supercharges and deal 10 SPECIAL to ADJACENT enemies that are also knocked back (3 seconds cooldown). First supercharge gives 20 SPEED, 30 SHIELD and ELECTRIC_FIELD.",
 		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds.",
-		"STAMINA": "Every 10 hits received, gain [20,SP] SHIELD"
+		"STAMINA": "Every 10 hits received, gain [20,SP] SHIELD",
+		"SPEWPA": "Hatched Pokémon evolve automatically after 5 stages. The evolution depends on your dominant synergy on board between SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL"
 	},
 	"stat": {
 		"ATK": "Attack",

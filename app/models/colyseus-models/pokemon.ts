@@ -10071,7 +10071,7 @@ export class Appletun extends Pokemon {
   skill = Ability.APPLE_ACID
 
   onAcquired() {
-    this.dishes.delete(Item.SWEET_APPLE)// consume meal to evolve
+    this.dishes.delete(Item.SWEET_APPLE) // consume meal to evolve
     this.items.delete(Item.SWEET_APPLE)
   }
 }
@@ -19502,6 +19502,440 @@ export class Diggersby extends Pokemon {
   additional = true
 }
 
+export class Scatterbug extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS])
+  rarity = Rarity.HATCH
+  stars = 1
+  evolution = Pkm.SPEWPA
+  evolutionRule = new HatchEvolutionRule()
+  hp = 70
+  atk = 4
+  speed = 52
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+  passive = Passive.HATCH
+}
+
+export class Spewpa extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS])
+  rarity = Rarity.HATCH
+  stars = 2
+  evolutions = [
+    Pkm.VIVILLON,
+    Pkm.VIVILLON_ICY_SNOW,
+    Pkm.VIVILLON_POLAR,
+    Pkm.VIVILLON_TUNDRA,
+    Pkm.VIVILLON_CONTINENTAL,
+    Pkm.VIVILLON_GARDEN,
+    Pkm.VIVILLON_ELEGANT,
+    Pkm.VIVILLON_MODERN,
+    Pkm.VIVILLON_MARINE,
+    Pkm.VIVILLON_ARCHIPELAGO,
+    Pkm.VIVILLON_HIGH_PLAINS,
+    Pkm.VIVILLON_SANDSTORM,
+    Pkm.VIVILLON_RIVER,
+    Pkm.VIVILLON_MONSOON,
+    Pkm.VIVILLON_SAVANNA,
+    Pkm.VIVILLON_SUN,
+    Pkm.VIVILLON_OCEAN,
+    Pkm.VIVILLON_JUNGLE,
+    Pkm.VIVILLON_FANCY,
+    Pkm.VIVILLON_POKE_BALL
+  ]
+  evolutionRule = new HatchEvolutionRule((pokemon, player) => {
+    const synergyVivillon: { synergy: Synergy; form: Pkm; count: number }[] = [
+      { synergy: Synergy.SOUND, form: Pkm.VIVILLON, count: 0 },
+      { synergy: Synergy.NORMAL, form: Pkm.VIVILLON_ICY_SNOW, count: 0 },
+      { synergy: Synergy.GHOST, form: Pkm.VIVILLON_POLAR, count: 0 },
+      { synergy: Synergy.ICE, form: Pkm.VIVILLON_TUNDRA, count: 0 },
+      { synergy: Synergy.FOSSIL, form: Pkm.VIVILLON_CONTINENTAL, count: 0 },
+      { synergy: Synergy.GRASS, form: Pkm.VIVILLON_GARDEN, count: 0 },
+      { synergy: Synergy.PSYCHIC, form: Pkm.VIVILLON_ELEGANT, count: 0 },
+      { synergy: Synergy.FIELD, form: Pkm.VIVILLON_MODERN, count: 0 },
+      { synergy: Synergy.WATER, form: Pkm.VIVILLON_MARINE, count: 0 },
+      { synergy: Synergy.FIGHTING, form: Pkm.VIVILLON_ARCHIPELAGO, count: 0 },
+      { synergy: Synergy.HUMAN, form: Pkm.VIVILLON_HIGH_PLAINS, count: 0 },
+      { synergy: Synergy.ROCK, form: Pkm.VIVILLON_SANDSTORM, count: 0 },
+      { synergy: Synergy.AQUATIC, form: Pkm.VIVILLON_RIVER, count: 0 },
+      { synergy: Synergy.STEEL, form: Pkm.VIVILLON_MONSOON, count: 0 },
+      { synergy: Synergy.ELECTRIC, form: Pkm.VIVILLON_SAVANNA, count: 0 },
+      { synergy: Synergy.FIRE, form: Pkm.VIVILLON_SUN, count: 0 },
+      { synergy: Synergy.LIGHT, form: Pkm.VIVILLON_OCEAN, count: 0 },
+      { synergy: Synergy.POISON, form: Pkm.VIVILLON_JUNGLE, count: 0 },
+      { synergy: Synergy.FAIRY, form: Pkm.VIVILLON_FANCY, count: 0 },
+      { synergy: Synergy.ARTIFICIAL, form: Pkm.VIVILLON_POKE_BALL, count: 0 }
+    ]
+
+    for (const s of synergyVivillon) {
+      s.count = player.synergies.get(s.synergy) || 0
+    }
+
+    synergyVivillon.sort((a, b) => b.count - a.count)
+    return synergyVivillon[0].form
+  })
+
+  hp = 125
+  atk = 11
+  speed = 52
+  def = 5
+  speDef = 5
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+  passive = Passive.SPEWPA
+}
+
+export class Vivillon extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonIcySnow extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.NORMAL
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonPolar extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.GHOST
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonTundra extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS, Synergy.ICE])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonContinental extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonGarden extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.GRASS
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonElegant extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonModern extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonMarine extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.WATER
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonArchipelago extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonHighPlains extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.HUMAN
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonSandstorm extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS, Synergy.ROCK])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonRiver extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonMonsoon extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.STEEL
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonSavanna extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonSun extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.AMORPHOUS, Synergy.FIRE])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonOcean extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.LIGHT
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonJungle extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.POISON
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonFancy extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
+export class VivillonPokeball extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.AMORPHOUS,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.HATCH
+  stars = 3
+  hp = 180
+  atk = 19
+  speed = 52
+  def = 7
+  speDef = 7
+  maxPP = 90
+  range = 2
+  skill = Ability.POWDER
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -20593,7 +21027,29 @@ export const PokemonClasses: Record<
   [Pkm.SKIDDO]: Skiddo,
   [Pkm.GOGOAT]: Gogoat,
   [Pkm.BUNNELBY]: Bunnelby,
-  [Pkm.DIGGERSBY]: Diggersby
+  [Pkm.DIGGERSBY]: Diggersby,
+  [Pkm.SCATTERBUG]: Scatterbug,
+  [Pkm.SPEWPA]: Spewpa,
+  [Pkm.VIVILLON]: Vivillon,
+  [Pkm.VIVILLON_ICY_SNOW]: VivillonIcySnow,
+  [Pkm.VIVILLON_POLAR]: VivillonPolar,
+  [Pkm.VIVILLON_TUNDRA]: VivillonTundra,
+  [Pkm.VIVILLON_CONTINENTAL]: VivillonContinental,
+  [Pkm.VIVILLON_GARDEN]: VivillonGarden,
+  [Pkm.VIVILLON_ELEGANT]: VivillonElegant,
+  [Pkm.VIVILLON_MODERN]: VivillonModern,
+  [Pkm.VIVILLON_MARINE]: VivillonMarine,
+  [Pkm.VIVILLON_ARCHIPELAGO]: VivillonArchipelago,
+  [Pkm.VIVILLON_HIGH_PLAINS]: VivillonHighPlains,
+  [Pkm.VIVILLON_SANDSTORM]: VivillonSandstorm,
+  [Pkm.VIVILLON_RIVER]: VivillonRiver,
+  [Pkm.VIVILLON_MONSOON]: VivillonMonsoon,
+  [Pkm.VIVILLON_SAVANNA]: VivillonSavanna,
+  [Pkm.VIVILLON_SUN]: VivillonSun,
+  [Pkm.VIVILLON_OCEAN]: VivillonOcean,
+  [Pkm.VIVILLON_JUNGLE]: VivillonJungle,
+  [Pkm.VIVILLON_FANCY]: VivillonFancy,
+  [Pkm.VIVILLON_POKE_BALL]: VivillonPokeball
 }
 
 // declare all the classes in colyseus schema TypeRegistry
