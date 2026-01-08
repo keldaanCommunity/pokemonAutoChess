@@ -275,7 +275,6 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         Pkm.SUBSTITUTE,
         player
       )
-      player.board.delete(pokemon.id)
       substitute.id = pokemon.id
       substitute.evolution = pokemon.name
       substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
@@ -283,9 +282,12 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.positionY = pokemon.positionY
       pokemon.items.forEach((item) => substitute.items.add(item))
       pokemon.removeItems(values(pokemon.items), player)
+      const pokemonLeaving =
+        player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
+      player.board.delete(pokemonLeaving.id)
       player.board.set(substitute.id, substitute)
       player.pokemonsTrainingInDojo.push({
-        pokemon,
+        pokemon: pokemonLeaving,
         ticketLevel,
         returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
       })
@@ -682,19 +684,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.MACH_RIBBON]: [
-    new PeriodicEffect((pokemon) => {
-      pokemon.addSpeed(20, pokemon, 0, false)
-      pokemon.count.machRibbonCount++
-      if(pokemon.count.machRibbonCount >= 10 && pokemon.player) {
-        pokemon.player.titles.add(Title.TOP_GUN)
-      }
-    },
+    new PeriodicEffect(
+      (pokemon) => {
+        pokemon.addSpeed(20, pokemon, 0, false)
+        pokemon.count.machRibbonCount++
+        if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
+          pokemon.player.titles.add(Title.TOP_GUN)
+        }
+      },
       Item.MACH_RIBBON,
       4000
     ),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = pokemon.count.machRibbonCount      
-      pokemon.addSpeed(-20*stacks, pokemon, 0, false)
+      const stacks = pokemon.count.machRibbonCount
+      pokemon.addSpeed(-20 * stacks, pokemon, 0, false)
       pokemon.count.machRibbonCount = 0
     })
   ],
@@ -1207,8 +1210,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.positionX,
         pokemon.positionY
       )
-      const dps = pokemon.team === Team.BLUE_TEAM ? pokemon.simulation.blueDpsMeter : pokemon.simulation.redDpsMeter
-      const shieldGained = dps.get(pokemon.id)?.shield ?? 0      
+      const dps =
+        pokemon.team === Team.BLUE_TEAM
+          ? pokemon.simulation.blueDpsMeter
+          : pokemon.simulation.redDpsMeter
+      const shieldGained = dps.get(pokemon.id)?.shield ?? 0
       const explosionDamage = Math.round(0.5 * shieldGained)
 
       adjacentCells.forEach((cell) => {
