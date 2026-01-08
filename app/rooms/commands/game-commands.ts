@@ -667,7 +667,7 @@ export class OnDragDropItemCommand extends Command<
         player.berryTreesStages[index] = 3
         removeInArray(player.items, item)
       } else if (item === Item.AMAZE_MULCH && index < nbTrees) {
-        //TODO: golden berry trees
+        player.berryTreesType[index] = pickRandomIn(GOLDEN_BERRY_TREE_TYPES)
         player.berryTreesStages[index] = 3
         removeInArray(player.items, item)
       }
