@@ -2576,7 +2576,7 @@
 		"BERRIES": "Erhalte 3 zufällige Beere.",
 		"POFFIN": "Erhalte 100 SHIELD. Alle gehaltenen Beeren werden zum Knursp hinzugefügt. Ihre Effekte werden direkt angewandt, wobei heilenden HP in SHIELD verwandelt werden.",
 		"HONEY": "Jedes Pokémon in den nächsten Shop-Rolls dieser Runde haben eine zusätzliche 5% Chance eine Sinergie mit dem HONEY essenden Pokémon zu teilen.",
-		"ROCK_SALT": "Starte den nächsten Kampf für 8 Sekunden mit RUNE_PROTECT und 15% HP SHIELD.",
+		"ROCK_SALT": "Starte den nächsten Kampf für 8 Sekunden mit RUNE_PROTECT und 20% HP SHIELD.",
 		"NUTRITIOUS_EGG": "Starte den nächsten Kampf mit +30% Basis- ATK, DEF und SPE_DEF.",
 		"LEFTOVERS": "Kein Effekt. Es bleibt nicht viel zu Essen übrig.",
 		"BLACK_SLUDGE": "POISONNED das Pokémon, welches es isst. Wenn das Pokémon den POISON -Typ besitzt, stelle stattdessen alle 2 Sekunden 5% der max HP.",

@@ -88,6 +88,7 @@
 - New weather rock: Sun Stone: Counts for 3 towards Zenith. Under Zenith, your Pokémon heal for 5 HP every second and have 5% additional chance to burn with their attacks.
 - Heat stone changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
+- Buff Rock Salt: 15 → 20% of max HP as shield on fight start.
 
 # Gameplay
 
