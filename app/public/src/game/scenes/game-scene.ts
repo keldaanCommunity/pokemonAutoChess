@@ -220,8 +220,27 @@ export default class GameScene extends Scene {
     })
   }
 
+  static readonly LEGACY_DOM_TO_PHASER: Record<string, string> = {
+    ARROWUP: "UP",
+    ARROWDOWN: "DOWN",
+    ARROWLEFT: "LEFT",
+    ARROWRIGHT: "RIGHT"
+  }
+
+  static normalizePhaserKey(key: string): string {
+    return GameScene.LEGACY_DOM_TO_PHASER[key] ?? key
+  }
+
   registerKeys() {
-    const keybindings = preference("keybindings")
+    const rawKeybindings = preference("keybindings")
+
+    const keybindings = Object.fromEntries(
+      Object.entries(rawKeybindings).map(([action, key]) => [
+        action,
+        GameScene.normalizePhaserKey(key)
+      ])
+    ) as typeof rawKeybindings
+
     this.input.keyboard!.removeAllListeners()
     this.input.keyboard!.on(
       "keydown-" + keybindings.refresh,
