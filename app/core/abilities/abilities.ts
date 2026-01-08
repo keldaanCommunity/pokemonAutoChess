@@ -1220,7 +1220,7 @@ export class KingShieldStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const duration = 1500
-    const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
     pokemon.status.triggerProtect(duration)
     pokemon.addShield(shield, pokemon, 1, crit)
     const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
@@ -2881,21 +2881,15 @@ export class WishStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const heal = 50
-    const count = pokemon.stars
-
-    const allies = board.cells
-      .filter(
-        (cell): cell is PokemonEntity =>
-          cell != null && cell.team === pokemon.team
-      )
-      .sort((a, b) => b.maxHP - b.hp - (a.maxHP - a.hp))
-      .slice(0, count)
-
-    for (const ally of allies) {
-      ally.handleHeal(heal, pokemon, 1, crit)
-      ally.addLuck(20, pokemon, 1, crit)
-    }
+    //  Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally.
+    const lowestHealthAlly = (
+      board.cells.filter(
+        (cell) => cell && cell.team === pokemon.team
+      ) as PokemonEntity[]
+    ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
+    const shield = [30, 60, 120][pokemon.stars - 1] ?? 120
+    lowestHealthAlly.addShield(shield, pokemon, 1, crit)
+    lowestHealthAlly.status.triggerProtect(1500)
   }
 }
 

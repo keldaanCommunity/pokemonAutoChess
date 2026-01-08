@@ -22,7 +22,7 @@
 - Terrain pulse: change effects by unit tier: Grass field: 5/5/5 → 5/7/10 % max HP healed ; Electric field: 10/10/10 → 10/12/15 speed buff; Psychic field: 10/10/10 → 10/12/15 PP gain ; Misty field: 5/5/5 → 5/7/10 % of max HP as shield
 - Mothim is now sold for 3 gold instead of 6
 - New ability for Scizor: Bullet Punch
-- Nerf Honedge line: HP 85/130/230 → 75/120/210 ; Def 6/10/14 → 4/8/14
+- Nerf Honedge line: HP 85/130/230 → 75/120/210 ; Def 6/10/14 → 4/8/14 ; King's shield shield: 10/20/30 → 10/20/40
 - Primal Groudon change weather to Drought or Sandstorm based on your dominant synergy between FIRE and GROUND
 - Primal Kyogre change weather to Rain or Storm based on your dominant synergy between WATER and ELECTRIC
 - Ho-Oh no longer changes weather to Drought.
@@ -44,6 +44,7 @@
 - New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
 - New passive for Shaymin Sky form: change weather to Zenith
 - Buff Guillotine (Machop): Attack: 100/200/300% ATK SPECIAL → 300% ATK SPECIAL at all tiers
+- Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
 
 # Changes to Synergies
 

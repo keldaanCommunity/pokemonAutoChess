@@ -538,7 +538,10 @@ export default class MinigameManager {
       scene: this.scene,
       x: encounter === TownEncounters.CINCCINO ? cx : 18 * 48,
       y: encounter === TownEncounters.CINCCINO ? cy : 23 * 48,
-      orientation: Orientation.UP,
+      orientation:
+        encounter === TownEncounters.CINCCINO
+          ? Orientation.DOWN
+          : Orientation.UP,
       name: Pkm.CINCCINO
     })
 

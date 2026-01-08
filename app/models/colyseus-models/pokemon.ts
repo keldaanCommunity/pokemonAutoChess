@@ -2729,7 +2729,7 @@ export class Togepi extends Pokemon {
   speed = 51
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 100
   range = 2
   skill = Ability.WISH
 }
@@ -2748,7 +2748,7 @@ export class Togetic extends Pokemon {
   speed = 51
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 100
   range = 2
   skill = Ability.WISH
 }
@@ -2766,7 +2766,7 @@ export class Togekiss extends Pokemon {
   speed = 51
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 100
   range = 2
   skill = Ability.WISH
 }
@@ -10071,7 +10071,7 @@ export class Appletun extends Pokemon {
   skill = Ability.APPLE_ACID
 
   onAcquired() {
-    this.dishes.delete(Item.SWEET_APPLE)// consume meal to evolve
+    this.dishes.delete(Item.SWEET_APPLE) // consume meal to evolve
     this.items.delete(Item.SWEET_APPLE)
   }
 }
