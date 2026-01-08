@@ -2134,7 +2134,7 @@
 		"GEAR_GRIND": "Lance deux écrous sur la cible, chacun infligeant [25,50,100,SP]% de la SPEED du lanceur comme SPECIAL.",
 		"STRANGE_STEAM": "Projette une étrange vapeur autour du lanceur, sa portée augmentant d'une case par utilisation. Cette vapeur donne FAIRY_FIELD aux alliés et a [30,LK]% de chances d'infliger CONFUSION aux ennemis pendant 3 secondes. Les Pokémon pris dans la vapeur infligent et reçoivent 20% de SPECIAL supplémentaires.",
 		"PUMMELING_PAYBACK": "Bombarde la cible d'une tempête de coups de poing, infligeant [60,SP] + 125% ATK SPECIAL et soignant [40,SP] HP.",
-		"VOLT_SURGE": "Le lanceur entre en surcharge, gagnant un ELECTRIC_FIELD, 30 SPEED et [50,SP] HP max. Ensuite, chaque troisième attaque touche à la chaîne jusqu'à 4 ennemis proches, infligeant [20,SP] SPECIAL à chacun.",
+		"VOLT_SURGE": "Le lanceur entre en surcharge, gagnant un ELECTRIC_FIELD, 20 SPEED et [30,SP] HP max. Ensuite, chaque troisième attaque touche à la chaîne jusqu'à 4 ennemis proches, infligeant [20,SP] SPECIAL à chacun.",
 		"SUPERCELL_SLAM": "Saute et atterri au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL à tous les ennemis ADJACENT et gagnant [10,20,40,SP] de SHIELD"
 	},
 	"effect": {
