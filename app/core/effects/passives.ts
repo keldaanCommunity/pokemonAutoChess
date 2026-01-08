@@ -86,7 +86,8 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
       physicalDamage: 0,
       specialDamage: 0,
       trueDamage: 0,
-      totalDamage: 0
+      totalDamage: 0,
+      crit: false
     })
   })
 }
