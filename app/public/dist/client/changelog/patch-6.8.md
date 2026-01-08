@@ -45,6 +45,7 @@
 - New passive for Shaymin Sky form: change weather to Zenith
 - Buff Guillotine (Machop): Attack: 100/200/300% ATK SPECIAL → 300% ATK SPECIAL at all tiers
 - Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
+- Buff Rage: base cooldown reduced from 500ms to 250ms
 
 # Changes to Synergies
 

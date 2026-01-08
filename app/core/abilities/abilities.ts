@@ -9671,7 +9671,7 @@ export class BulldozeStrategy extends AbilityStrategy {
 
         if (destination) {
           cell.value.moveTo(destination.x, destination.y, board, true)
-          cell.value.cooldown = 500
+          cell.value.resetCooldown(500)
         }
 
         cell.value.addSpeed(-speedReduction, pokemon, 0, false)
@@ -11422,6 +11422,7 @@ export class RageStrategy extends AbilityStrategy {
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.maxHP / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
+    pokemon.resetCooldown(200)
   }
 }
 
@@ -15688,7 +15689,7 @@ export class BulletPunchStrategy extends AbilityStrategy {
         pokemon.addSpeed(-speedBuff, pokemon, 0, false)
       }, 2000)
     )
-    pokemon.cooldown = 250
+    pokemon.resetCooldown(250)
   }
 }
 
