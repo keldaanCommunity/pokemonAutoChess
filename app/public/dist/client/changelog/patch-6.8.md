@@ -6,6 +6,9 @@
 - Gogoat
 - Bunnelby
 - Diggersby
+- Scatterbug
+- Spewpa
+- Vivillon (20 different forms)
 
 # Changes to Pokemon & Abilities
 

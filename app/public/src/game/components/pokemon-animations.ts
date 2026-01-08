@@ -7430,5 +7430,139 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE,
     shinyUnavailable: true
+  },
+  [Pkm.SCATTERBUG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE,
+    shinyUnavailable: true
+  },
+  [Pkm.SPEWPA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE,
+    shinyUnavailable: true
+  },
+  [Pkm.VIVILLON]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_ICY_SNOW]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_POLAR]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_TUNDRA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_CONTINENTAL]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_GARDEN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_ELEGANT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_MODERN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_MARINE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_ARCHIPELAGO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_HIGH_PLAINS]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_SANDSTORM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_RIVER]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_MONSOON]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_SAVANNA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_SUN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_OCEAN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_JUNGLE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_FANCY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_POKE_BALL]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
   }
 }
