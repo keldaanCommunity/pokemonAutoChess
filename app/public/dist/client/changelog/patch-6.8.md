@@ -104,6 +104,7 @@
 - Added Region report, diplaying region by region statistic
 - Current game mode is now displayed in the game top bar
 - Added a tooltip on the experience bar to show gold needed to level up and number of clicks required
+- New animation for Fairy field
 
 # Bugfix
 
