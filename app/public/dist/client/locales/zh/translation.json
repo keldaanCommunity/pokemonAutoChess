@@ -1677,6 +1677,7 @@
 		"HYDRO_PUMP": "对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
 		"DRACO_METEOR": "对所有敌方宝可梦造成[50,SP]点SPECIAL。",
 		"BLAZE_KICK": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入BURN 2秒。若目标已经处于BURN，则造成的伤害增加30%。",
+		"WISH": "使HP百分比最低的我方宝可梦获得[30,60,120,SP]点SHIELD，以及PROTECT 1.5秒。",
 		"LUNAR_BLESSING": "为使用者和所有我方宝可梦恢复各自[25,SP]%的最大HP，并清除他们的负面状态。",
 		"MEDITATE": "提升使用者[100,SP]%的ATK。",
 		"DEFENSE_CURL": "提升使用者[5,10,15,SP]点DEF和SPE_DEF。",
