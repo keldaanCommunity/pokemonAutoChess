@@ -2292,8 +2292,7 @@
 		"ETHEREAL": "飘渺",
 		"APPETIZER": "开胃小菜",
 		"LUNCH_BREAK": "正餐上桌",
-		"BANQUET": "奢华宴会",
-		"DROUGHT": "日照"
+		"BANQUET": "奢华宴会"
 	},
 	"effect_description": {
 		"STAMINA": "获得15点SHIELD。获得一条SILK_SCARF。",
@@ -3255,7 +3254,7 @@
 		"CONFUSION": "强制随时切换目标，有时还会对自身造成伤害。",
 		"WOUND": "无法受到任何来源的治疗。",
 		"RAGE": "造成的伤害翻倍，提升80点SPEED，受到治疗、获得SHIELD，陷入FREEZE和SLEEP的时间减半，并失去PROTECT。所有宝可梦战斗35秒后自动陷入RAGE。",
-		"RESURRECTION": "第一次受到致命伤害时防止此伤害，并恢复HP至满。",
+		"RESURRECTION": "第一次受到致命伤害时防止此伤害，并恢复HP至满（基础值）。来自共鸣的增幅，道具的叠层和异常状态会被重置。",
 		"PARALYSIS": "降低50%的有效SPEED，且无法闪避攻击。",
 		"POKERUS": "每2.5秒，提升1点ATK和10点AP，然后使2个ADJACENT我方宝可梦受到POKERUS。",
 		"ARMOR_BREAK": "降低50%的有效DEF和SPE_DEF。",
