@@ -66,14 +66,52 @@ const defaultPreferences: IPreferencesState = {
   }
 }
 
+const LEGACY_DOM_TO_PHASER: Record<string, string> = {
+  ARROWUP: "UP",
+  ARROWDOWN: "DOWN",
+  ARROWLEFT: "LEFT",
+  ARROWRIGHT: "RIGHT"
+}
+
+function migrateLegacyKeybindings(
+  stored: any
+): { migrated: any; changed: boolean } {
+  const keybindings = stored?.keybindings
+  if (!keybindings || typeof keybindings !== "object") {
+    return { migrated: stored, changed: false }
+  }
+
+  let changed = false
+  const migratedKeybindings: Record<string, string> = { ...keybindings }
+
+  for (const [action, key] of Object.entries(migratedKeybindings)) {
+    if (typeof key !== "string") continue
+    const mapped = LEGACY_DOM_TO_PHASER[key] ?? key
+    if (mapped !== key) {
+      migratedKeybindings[action] = mapped
+      changed = true
+    }
+  }
+
+  if (!changed) return { migrated: stored, changed: false }
+  return { migrated: { ...stored, keybindings: migratedKeybindings }, changed: true }
+}
+
 function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
+    const stored = localStore.get(LocalStoreKeys.PREFERENCES)
+
+    const { migrated, changed } = migrateLegacyKeybindings(stored)
+    if (changed) {
+      localStore.put(LocalStoreKeys.PREFERENCES, migrated, Infinity)
+    }
+
     return {
       ...defaultPreferences,
-      ...localStore.get(LocalStoreKeys.PREFERENCES),
+      ...migrated,
       keybindings: {
         ...defaultPreferences.keybindings,
-        ...localStore.get(LocalStoreKeys.PREFERENCES)?.keybindings
+        ...migrated?.keybindings
       }
     }
   } else {

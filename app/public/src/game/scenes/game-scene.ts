@@ -222,6 +222,7 @@ export default class GameScene extends Scene {
 
   registerKeys() {
     const keybindings = preference("keybindings")
+
     this.input.keyboard!.removeAllListeners()
     this.input.keyboard!.on(
       "keydown-" + keybindings.refresh,
