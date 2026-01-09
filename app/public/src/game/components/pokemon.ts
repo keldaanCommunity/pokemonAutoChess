@@ -56,6 +56,10 @@ import {
 
 const spriteCountPerPokemon = new Map<string, number>()
 
+export function resetSpriteCounts() {
+  spriteCountPerPokemon.clear()
+}
+
 const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
   "lastPokemonDetail" in scene
 

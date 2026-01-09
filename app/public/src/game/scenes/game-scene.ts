@@ -42,7 +42,7 @@ import ItemContainer from "../components/item-container"
 import ItemsContainer from "../components/items-container"
 import LoadingManager from "../components/loading-manager"
 import MinigameManager from "../components/minigame-manager"
-import PokemonSprite from "../components/pokemon"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
 import { SellZone } from "../components/sell-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
@@ -92,6 +92,7 @@ export default class GameScene extends Scene {
   }
 
   preload() {
+    resetSpriteCounts()
     this.loadingManager = new LoadingManager(this)
 
     this.load.on("progress", (value: number) => {
