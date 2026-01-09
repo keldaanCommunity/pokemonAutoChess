@@ -8474,7 +8474,6 @@ export class Xerneas extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.GEOMANCY
-  passive = Passive.MISTY
 }
 
 export class TapuFini extends Pokemon {
