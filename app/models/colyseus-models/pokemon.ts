@@ -7803,15 +7803,15 @@ export class Gliscor extends Pokemon {
 }
 
 export class Shieldon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FOSSIL, Synergy.STEEL])
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.BASTIODON
   hp = 90
   atk = 7
   speed = 35
-  def = 10
-  speDef = 6
+  def = 6
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.IRON_DEFENSE
@@ -7819,13 +7819,13 @@ export class Shieldon extends Pokemon {
 }
 
 export class Bastiodon extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.STEEL])
+  types = new SetSchema<Synergy>([Synergy.ROCK, Synergy.FOSSIL, Synergy.STEEL])
   rarity = Rarity.RARE
   stars = 2
   hp = 250
   atk = 11
   speed = 35
-  def = 16
+  def = 12
   speDef = 8
   maxPP = 100
   range = 1

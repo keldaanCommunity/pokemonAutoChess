@@ -51,6 +51,7 @@
 - Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
 - Buff Rage: base cooldown reduced from 500ms to 250ms
 - Buff Solosis line: Def 2/2/2 → 4/6/8, Special Def 2/2/2 → 5/7/10
+- Change Shieldon line: now also has Rock synergy. Def 10/16 → 6/12, Special Def 6/8 → 4/8
 
 # Changes to Synergies
 
