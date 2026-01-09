@@ -90,6 +90,7 @@
 - Heat stone changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 - Buff Rock Salt: 15 → 20% of max HP as shield on fight start.
+- Buff Berserk Gene: Attack 5 → 10
 
 # Gameplay
 
