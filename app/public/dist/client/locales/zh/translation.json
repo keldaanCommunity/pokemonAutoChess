@@ -542,7 +542,8 @@
 		"CITY_SHUTTLE": "山羊速多乐",
 		"BULLET_PUNCH": "子弹拳",
 		"EAR_DIG": "用耳挖掘",
-		"POWDER_SNOW": "细雪"
+		"POWDER_SNOW": "细雪",
+		"POWDER": "粉尘"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1628,7 +1629,29 @@
 		"SKIDDO": "坐骑小羊",
 		"GOGOAT": "坐骑山羊",
 		"BUNNELBY": "掘掘兔",
-		"DIGGERSBY": "掘地兔"
+		"DIGGERSBY": "掘地兔",
+		"SCATTERBUG": "粉蝶虫",
+		"SPEWPA": "粉蝶蛹",
+		"VIVILLON": "彩粉蝶（花园）",
+		"VIVILLON_ICY_SNOW": "彩粉蝶（冰雪）",
+		"VIVILLON_POLAR": "彩粉蝶（雪国）",
+		"VIVILLON_TUNDRA": "彩粉蝶（雪原）",
+		"VIVILLON_CONTINENTAL": "彩粉蝶（大陆）",
+		"VIVILLON_GARDEN": "彩粉蝶（庭园）",
+		"VIVILLON_ELEGANT": "彩粉蝶（高雅）",
+		"VIVILLON_MODERN": "彩粉蝶（摩登）",
+		"VIVILLON_MARINE": "彩粉蝶（大海）",
+		"VIVILLON_ARCHIPELAGO": "彩粉蝶（群岛）",
+		"VIVILLON_HIGH_PLAINS": "彩粉蝶（荒野）",
+		"VIVILLON_SANDSTORM": "彩粉蝶（沙尘）",
+		"VIVILLON_RIVER": "彩粉蝶（大河）",
+		"VIVILLON_MONSOON": "彩粉蝶（骤雨）",
+		"VIVILLON_SAVANNA": "彩粉蝶（热带草原）",
+		"VIVILLON_SUN": "彩粉蝶（太阳）",
+		"VIVILLON_OCEAN": "彩粉蝶（大洋）",
+		"VIVILLON_JUNGLE": "彩粉蝶（热带雨林）",
+		"VIVILLON_FANCY": "彩粉蝶（幻彩）",
+		"VIVILLON_POKE_BALL": "彩粉蝶（球球）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2151,7 +2174,8 @@
 		"CITY_SHUTTLE": "跳跃至最近我方宝可梦的位置，将其驮在背后，随后与其一同突进至最远的可触及敌方宝可梦的邻位，对所有经过的敌方宝可梦造成SPECIAL，数值相当于[10,20,30,SP]加被驮运的我方宝可梦的ATK的100%。使用者与被驮运的我方宝可梦各获得[20,40,80,SP]点SHIELD。",
 		"BULLET_PUNCH": "对目标造成[40,SP]点TRUE，随后提升[40,SP]点SPEED，持续2秒。",
 		"EAR_DIG": "对目标造成SPECIAL，数值相当于[30,60,120,SP]加目标所处位置的坑洞深度等级乘以[5,10,20,SP]。若目标并不处于坑洞之中，还会在目标所在的位置挖洞。",
-		"POWDER_SNOW": "将冰冷的细雪吹向目标，对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并有[15,30,50,LK]%的概率使他们陷入FREEZE 2秒。"
+		"POWDER_SNOW": "将冰冷的细雪吹向目标，对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并有[15,30,50,LK]%的概率使他们陷入FREEZE 2秒。",
+		"POWDER": "朝SPEED最高的敌方宝可梦发射一团粉尘云。接触粉尘云的敌方宝可梦受到[10,20,30,SP]点SPECIAL并降低30点SPEED 5秒。我方宝可梦则恢复[10,20,30,SP]点HP并提升30点SPEED 5秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2933,7 +2957,7 @@
 		"SCROLL_OF_WATERS": "上面写着水之奥秘。对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_RAPID)。",
 		"SCROLL_OF_DARKNESS": "上面写着恶之奥秘。 对$t(pkm.KUBFU)使用，使之进化为$t(pkm.URSHIFU_SINGLE)。",
 		"RICH_MULCH": "对一个花盆使用，使其中的宝可梦进化。或是对一株果树使用，使其立即完全长成。",
-		"AMAZE_MULCH": "对一个花盆使用，使其中的宝可梦永久提升50点最大HP和30点AP。或是对一株果树使用，使其立即完全长成。",
+		"AMAZE_MULCH": "对一个花盆使用，使其中的宝可梦永久提升50点最大HP和30点AP。或是对一株果树使用，使其变为黄金果树并立即完全长成。",
 		"BRONZE_DOJO_TICKET": "对一只宝可梦使用，使其前往训练所进行用时3轮的特训，该宝可梦返回时提升50点最大HP，5点ATK和15点AP。在此期间，会有替身占据其原本在的位置。",
 		"SILVER_DOJO_TICKET": "对一只宝可梦使用，使其前往训练所进行用时4轮的特训，该宝可梦返回时提升100点最大HP，10点ATK和30点AP。在此期间，会有替身占据其原本在的位置。",
 		"GOLD_DOJO_TICKET": "对一只宝可梦使用，使其前往训练所进行用时5轮的特训，该宝可梦返回时提升150点最大HP，15点ATK和45点AP。在此期间，会有替身占据其原本在的位置。",
@@ -3158,7 +3182,8 @@
 		"ORTHWORM": "挖洞时永久提升5点HP。",
 		"TADBULB": "每当受到50点伤害或在战斗开始时被LIGHT共鸣的聚光灯照射，便会对ADJACENT敌方宝可梦造成10点SPECIAL并将他们击退（每3秒至多触发一次）。首次触发此效果时还会进入增压状态，提升20点SPEED并获得30点SHIELD和ELECTRIC_FIELD。",
 		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。",
-		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD"
+		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD",
+		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化型态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL"
 	},
 	"stat": {
 		"ATK": "攻击",
