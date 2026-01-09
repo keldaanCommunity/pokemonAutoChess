@@ -3254,7 +3254,7 @@
 		"CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
 		"WOUND": "Prevents healing from any source",
 		"RAGE": "Double all damage, get +80 SPEED. Half healing, SHIELD, FREEZE and SLEEP durations, and lose PROTECT. All units become RAGE after 35 seconds of fight.",
-		"RESURRECTION": "Prevents KO once, restoring to base max HP. Buffs, stacks and statuses are reset upon resurrection.",
+		"RESURRECTION": "Prevents KO once, restoring to base max HP. Synergy buffs, item stacks and statuses are reset upon resurrection.",
 		"PARALYSIS": "Reduce the effectiveness of SPEED by 50% and prevents dodging attacks",
 		"POKERUS": "Every 2.5 seconds, gain 1 ATK and 10 AP before infecting 2 ADJACENT allies with POKERUS",
 		"ARMOR_BREAK": "Reduce the effectiveness of DEF & SPE_DEF by 50%",

@@ -3209,7 +3209,7 @@
 		"CONFUSION": "Force à changer de cible tout le temps et parfois à s'auto-infliger des dégâts",
 		"WOUND": "Empêche d'être soigné, toutes sources confondues",
 		"RAGE": "Double tous les dégâts, gagne +80 de SPEED. Réduit de moitié le soin, le SHIELD, la durée du FREEZE et du SLEEP, retire PROTECT. Toutes les unités deviennent RAGE après 35 secondes de combat.",
-		"RESURRECTION": "Empêche de tomber KO une fois, restaurant les HP max de base. Les bonus, les effets cumulés et les statuts sont réinitialisés lors de la résurrection.",
+		"RESURRECTION": "Empêche de tomber KO une fois, restaurant les HP max de base. Les bonus de synergie, les effets d'objets cumulés et les statuts sont réinitialisés lors de la résurrection.",
 		"PARALYSIS": "Réduit l'efficacité de la SPEED de 50% et empêche d'esquiver les attaques.",
 		"POKERUS": "Toutes les 2,5 secondes, gagne 1 ATK et 10 AP avant d'infecter 2 alliés ADJACENT avec le POKERUS",
 		"ARMOR_BREAK": "Réduit l'efficacité de la DEF et SPE_DEF de 50 %",
