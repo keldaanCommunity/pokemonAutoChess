@@ -543,7 +543,8 @@
 		"BULLET_PUNCH": "Bullet Punch",
 		"EAR_DIG": "Ear Dig",
 		"POWDER_SNOW": "Powder Snow",
-		"POWDER": "Powder"
+		"POWDER": "Powder",
+		"LINGERING_AROMA": "Lingering Aroma"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1651,7 +1652,10 @@
 		"VIVILLON_OCEAN": "Vivillon (Ocean)",
 		"VIVILLON_JUNGLE": "Vivillon (Jungle)",
 		"VIVILLON_FANCY": "Vivillon (Fancy)",
-		"VIVILLON_POKE_BALL": "Vivillon (Poké Ball)"
+		"VIVILLON_POKE_BALL": "Vivillon (Poké Ball)",
+		"LECHONK": "Lechonk",
+		"OINKOLOGNE_MALE": "Oinkologne ♂",
+		"OINKOLOGNE_FEMALE": "Oinkologne ♀"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2175,7 +2179,8 @@
 		"BULLET_PUNCH": "Deal [40,SP] TRUE to the target, then gain [40,SP] SPEED for 2 seconds.",
 		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
 		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.",
-		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds."
+		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds.",
+		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] special damage and lose 5 PP."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2505,7 +2510,7 @@
 		"POKERUS_VIAL": "Pokérus Vial",
 		"MAX_ELIXIR": "Max Elixir",
 		"SPELL_TAG": "Spell Tag",
-		"TINY_MUSHROOM": "Tiny Mushroom",
+		"SHED_SHELL": "Shed Shell",
 		"BERSERK_GENE": "Berserk Gene",
 		"SURFBOARD": "Surf Board",
 		"COOKING_POT": "Cooking Pot",
@@ -2613,6 +2618,10 @@
 		"HERBA_MYSTICA_SPICY": "Herba Mystica (Spicy)",
 		"HERBA_MYSTICA_SOUR": "Herba Mystica (Sour)",
 		"OLIVE_OIL": "Olive Oil",
+		"MUSHROOMS": "Mushrooms",
+		"TINY_MUSHROOM": "Tiny Mushroom",
+		"BIG_MUSHROOM": "Big Mushroom",
+		"BALM_MUSHROOM": "Balm Mushroom",
 		"MOOMOO_MILK": "Moomoo Milk",
 		"BERRIES": "Berries",
 		"HONEY": "Honey",
@@ -2800,7 +2809,7 @@
 		"EXP_SHARE": "Get the best ATK, AP, DEF and SPE_DEF values of allies ADJACENT_IN_THE_SAME_ROW.",
 		"POKERUS_VIAL": "Gives POISON synergy. Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 2.5 seconds and transmitting to allies.",
 		"SPELL_TAG": "Gives GHOST synergy. When the holder is KO, CURSE its attacker to be KO'd after 9 seconds",
-		"TINY_MUSHROOM": "Gives BUG synergy but reduce the holder's max HP by 50% when cloned.",
+		"SHED_SHELL": "Gives BUG synergy but reduce the holder's max HP by 50% when cloned.",
 		"BERSERK_GENE": "Gives MONSTER synergy. The holder gets CONFUSION for 3 seconds if gaining MONSTER stacks.",
 		"SURFBOARD": "Gives AQUATIC synergy. The holder casts $t(ability.SURF) at every tidal wave, with the ability level matching current AQUATIC synergy level.",
 		"COOKING_POT": "Gives GOURMET synergy. When BURN, the COOKING_POT is heated little by little which gives 10 SPEED per second.",
@@ -2914,6 +2923,10 @@
 		"BERRIES": "Get 3 random berries",
 		"POFFIN": "Gain 100 SHIELD. All held berries are added to the poffin. Their effects are applied immediately, with healed HP turned into SHIELD.",
 		"HONEY": "Each Pokémon in the next shop rerolls this round has an additional 5% chance to share a common synergy with a Pokémon eating HONEY.",
+		"MUSHROOMS": "A mix of mushrooms that can be sold for GOLD when coming back to town",
+		"TINY_MUSHROOM": "Gives 40 SPEED and reduce max HP by 20% for the next fight when consumed. Will be sold for 1 GOLD when returning to town.",
+		"BIG_MUSHROOM": "Gives +30% max HP for the next fight when consumed. Will be sold for 2 GOLD when returning to town.",
+		"BALM_MUSHROOM": "When consumed, gains RUNE_PROTECT, 40 SPEED and heals 10% of max HP per second for the next fight. Will be sold for 5 GOLD when returning to town.",
 		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 10 seconds and 20% of max HP as SHIELD.",
 		"NUTRITIOUS_EGG": "Start the next fight with +30% base ATK, DEF and SPE_DEF.",
 		"LEFTOVERS": "No effect. There is not much left to eat.",
