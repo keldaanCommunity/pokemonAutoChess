@@ -96,6 +96,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(30000)
       entity.addSpeed(40, entity, 0, false)
+      entity.effects.add(EffectEnum.BALM_MUSHROOM)
       entity.effectsSet.add(
         new PeriodicEffect(
           (entity) => {
