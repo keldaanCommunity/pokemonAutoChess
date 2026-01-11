@@ -12232,7 +12232,7 @@ export class Carnivine extends Pokemon {
   stars = 3
   hp = 180
   atk = 21
-  speed = 40
+  speed = 29
   def = 6
   speDef = 6
   maxPP = 100
