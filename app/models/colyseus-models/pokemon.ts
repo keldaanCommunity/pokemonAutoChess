@@ -7159,7 +7159,7 @@ export class DeoxysAttack extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250
-  atk = 20
+  atk = 25
   speed = 73
   def = 4
   speDef = 4

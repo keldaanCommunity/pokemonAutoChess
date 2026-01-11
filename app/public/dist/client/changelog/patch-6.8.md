@@ -53,6 +53,7 @@
 - Buff Solosis line: Def 2/2/2 → 4/6/8, Special Def 2/2/2 → 5/7/10
 - Change Shieldon line: now also has Rock synergy. Def 10/16 → 6/12, Special Def 6/8 → 4/8
 - Nerf Carnivine: Speed 40 → 29 ; Nerf Power Whip: 50% → 30% of HP as bonus special damage
+- Buff Deoxys Attack form: Attack 20 → 25
 
 # Changes to Synergies
 
