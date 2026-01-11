@@ -28,6 +28,7 @@ import {
   Transfer
 } from "../../../types"
 import { Ability } from "../../../types/enum/Ability"
+import { EffectEnum } from "../../../types/enum/Effect"
 import {
   AttackType,
   GamePhaseState,
@@ -231,6 +232,14 @@ class GameContainer {
 
     $pokemon.items.onChange((value, key) => {
       this.gameScene?.battle?.updatePokemonItems(simulation.id, pokemon)
+    })
+
+    $pokemon.effects.onChange((value, key) => {
+      if (pokemon.effects.has(EffectEnum.BALM_MUSHROOM)) {
+        this.gameScene?.battle?.pokemonSprites
+          .get(pokemon.id)
+          ?.addBalmMushroomEffect()
+      }
     })
 
     const fieldsCount: NonFunctionPropNames<Count>[] = [

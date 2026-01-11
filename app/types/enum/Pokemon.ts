@@ -471,6 +471,7 @@ export enum Pkm {
   LATIOS = "LATIOS",
   LEAFEON = "LEAFEON",
   LEAVANNY = "LEAVANNY",
+  LECHONK = "LECHONK",
   LEDYBA = "LEDYBA",
   LEDIAN = "LEDIAN",
   LICKILICKY = "LICKILICKY",
@@ -618,6 +619,8 @@ export enum Pkm {
   OGERPON_TEAL_MASK = "OGERPON_TEAL_MASK",
   OGERPON_WELLSPRING = "OGERPON_WELLSPRING",
   OGERPON_WELLSPRING_MASK = "OGERPON_WELLSPRING_MASK",
+  OINKOLOGNE_MALE = "OINKOLOGNE_MALE",
+  //OINKOLOGNE_FEMALE = "OINKOLOGNE_FEMALE",
   OKIDOGI = "OKIDOGI",
   OMANYTE = "OMANYTE",
   OMASTAR = "OMASTAR",
@@ -2225,8 +2228,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.QUAXLY]: "0912",
   //[Pkm.QUAXWELL]: "0913",
   //[Pkm.QUAQUAVAL]: "0914",
-  //[Pkm.LECHONK]: "0915",
-  //[Pkm.OINKOLOGNE]: "0916",
+  [Pkm.LECHONK]: "0915",
+  [Pkm.OINKOLOGNE_MALE]: "0916",
+  //[Pkm.OINKOLOGNE_FEMALE]: "0916-0003",
   //[Pkm.TAROUNTULA]: "0917",
   //[Pkm.SPIDOPS]: "0918",
   [Pkm.NYMBLE]: "0919",
@@ -3450,7 +3454,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VIVILLON_OCEAN]: Pkm.SCATTERBUG,
   [Pkm.VIVILLON_JUNGLE]: Pkm.SCATTERBUG,
   [Pkm.VIVILLON_FANCY]: Pkm.SCATTERBUG,
-  [Pkm.VIVILLON_POKE_BALL]: Pkm.SCATTERBUG
+  [Pkm.VIVILLON_POKE_BALL]: Pkm.SCATTERBUG,
+  [Pkm.LECHONK]: Pkm.LECHONK,
+  [Pkm.OINKOLOGNE_MALE]: Pkm.LECHONK
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

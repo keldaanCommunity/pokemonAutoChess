@@ -15,7 +15,7 @@ export const RegionDetails: {
   [DungeonPMDO.AmpPlains]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.SOUND],
     music: DungeonMusic.AMP_PLAINS,
-    regionalSpeciality: Item.FRUIT_JUICE
+    regionalSpeciality: Item.HERBA_MYSTICA_SOUR
   },
   [DungeonPMDO.AppleWoods]: {
     synergies: [Synergy.BUG, Synergy.GOURMET, Synergy.BABY],
@@ -42,7 +42,7 @@ export const RegionDetails: {
   [DungeonPMDO.BuriedRelic1]: {
     synergies: [Synergy.LIGHT, Synergy.ARTIFICIAL, Synergy.HUMAN],
     music: DungeonMusic.BURIED_RELIC,
-    regionalSpeciality: Item.SPINDA_COCKTAIL
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.BuriedRelic2]: {
     synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.LIGHT],
@@ -93,7 +93,7 @@ export const RegionDetails: {
   [DungeonPMDO.DarkHill1]: {
     synergies: [Synergy.GHOST, Synergy.DARK, Synergy.FLYING],
     music: DungeonMusic.DARK_HILL,
-    regionalSpeciality: Item.TEA,
+    regionalSpeciality: Item.TINY_MUSHROOM,
     tint: 0xeeffee
   },
   [DungeonPMDO.DarkHill2]: {
@@ -105,7 +105,7 @@ export const RegionDetails: {
   [DungeonPMDO.DarkIceMountain]: {
     synergies: [Synergy.DARK, Synergy.ICE, Synergy.NORMAL],
     music: DungeonMusic.DARK_ICE_MOUNTAIN,
-    regionalSpeciality: Item.CASTELIACONE
+    regionalSpeciality: Item.HEARTY_STEW
   },
   [DungeonPMDO.DarkIceMountainPeak]: {
     synergies: [Synergy.DARK, Synergy.ICE, Synergy.FLYING],
@@ -132,13 +132,13 @@ export const RegionDetails: {
   [DungeonPMDO.DeepDarkCrater]: {
     synergies: [Synergy.DARK, Synergy.FIRE, Synergy.MONSTER],
     music: DungeonMusic.DEEP_DARK_CRATER,
-    regionalSpeciality: Item.CURRY,
+    regionalSpeciality: Item.SMOKED_FILET,
     tint: 0xffddee
   },
   [DungeonPMDO.DeepDuskForest1]: {
     synergies: [Synergy.DARK, Synergy.GRASS, Synergy.GOURMET],
     music: DungeonMusic.DEEP_DUSK_FOREST,
-    regionalSpeciality: Item.TEA,
+    regionalSpeciality: Item.HERBA_MYSTICA_BITTER,
     tint: 0xeeffee
   },
   [DungeonPMDO.DeepDuskForest2]: {
@@ -188,7 +188,7 @@ export const RegionDetails: {
   [DungeonPMDO.FarAmpPlains]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.FOSSIL],
     music: DungeonMusic.FAR_AMP_PLAINS,
-    regionalSpeciality: Item.FRUIT_JUICE
+    regionalSpeciality: Item.HERBA_MYSTICA_SOUR
   },
   [DungeonPMDO.FinalMaze2]: {
     synergies: [Synergy.NORMAL, Synergy.FLORA, Synergy.BUG],
@@ -208,7 +208,7 @@ export const RegionDetails: {
   [DungeonPMDO.FrostyForest]: {
     synergies: [Synergy.LIGHT, Synergy.ICE, Synergy.FIGHTING],
     music: DungeonMusic.FROSTY_FOREST,
-    regionalSpeciality: Item.CASTELIACONE
+    regionalSpeciality: Item.TINY_MUSHROOM
   },
   [DungeonPMDO.FutureTemporalSpire]: {
     synergies: [Synergy.HUMAN, Synergy.ARTIFICIAL, Synergy.PSYCHIC],
@@ -236,7 +236,7 @@ export const RegionDetails: {
   [DungeonPMDO.GreatCanyon]: {
     synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FIRE],
     music: DungeonMusic.GREAT_CANYON,
-    regionalSpeciality: Item.RAGE_CANDY_BAR
+    regionalSpeciality: Item.HERBA_MYSTICA_SPICY
   },
   [DungeonPMDO.HiddenHighland]: {
     synergies: [Synergy.FLORA, Synergy.GRASS, Synergy.DRAGON],
@@ -261,7 +261,7 @@ export const RegionDetails: {
   [DungeonPMDO.IceAegisCave]: {
     synergies: [Synergy.ICE, Synergy.FIGHTING, Synergy.GROUND],
     music: DungeonMusic.ILLUSION_STONE_CHAMBER,
-    regionalSpeciality: Item.CASTELIACONE,
+    regionalSpeciality: Item.TINY_MUSHROOM,
     tint: 0xccffff
   },
   [DungeonPMDO.IceMaze]: {
@@ -272,7 +272,7 @@ export const RegionDetails: {
   [DungeonPMDO.IcicleForest]: {
     synergies: [Synergy.ICE, Synergy.FIELD, Synergy.FIGHTING],
     music: DungeonMusic.ICICLE_FOREST,
-    regionalSpeciality: Item.CASTELIACONE
+    regionalSpeciality: Item.HERBA_MYSTICA_SALTY
   },
   [DungeonPMDO.JoyousTower]: {
     synergies: [Synergy.LIGHT, Synergy.FAIRY, Synergy.BABY],
@@ -283,7 +283,7 @@ export const RegionDetails: {
   [DungeonPMDO.LapisCave]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FOSSIL],
     music: DungeonMusic.LAPIS_CAVE,
-    regionalSpeciality: Item.TEA
+    regionalSpeciality: Item.HERBA_MYSTICA_SWEET
   },
   [DungeonPMDO.LightningField]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
@@ -320,7 +320,7 @@ export const RegionDetails: {
   [DungeonPMDO.MeteorCave]: {
     synergies: [Synergy.PSYCHIC, Synergy.FAIRY, Synergy.HUMAN],
     music: DungeonMusic.RANDOM_DUNGEON_1,
-    regionalSpeciality: Item.SPINDA_COCKTAIL
+    regionalSpeciality: Item.BIG_MUSHROOM
   },
   [DungeonPMDO.MiracleSea]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FAIRY],
@@ -351,7 +351,7 @@ export const RegionDetails: {
   [DungeonPMDO.MtFaraway4]: {
     synergies: [Synergy.ICE, Synergy.FLYING, Synergy.SOUND],
     music: DungeonMusic.ESCAPE_THROUGH_THE_SNOW,
-    regionalSpeciality: Item.CASTELIACONE
+    regionalSpeciality: Item.HERBA_MYSTICA_SALTY
   },
   [DungeonPMDO.MtFreeze]: {
     synergies: [Synergy.ICE, Synergy.FLYING, Synergy.NORMAL],
@@ -418,12 +418,12 @@ export const RegionDetails: {
   [DungeonPMDO.NorthernDesert1]: {
     synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.LIGHT],
     music: DungeonMusic.NORTHERN_DESERT,
-    regionalSpeciality: Item.CURRY
+    regionalSpeciality: Item.HERBA_MYSTICA_SPICY
   },
   [DungeonPMDO.NorthernDesert2]: {
     synergies: [Synergy.DRAGON, Synergy.FIRE, Synergy.WILD],
     music: DungeonMusic.NORTHERN_DESERT,
-    regionalSpeciality: Item.CURRY
+    regionalSpeciality: Item.HERBA_MYSTICA_SPICY
   },
   [DungeonPMDO.NorthernRange1]: {
     synergies: [Synergy.POISON, Synergy.AQUATIC, Synergy.STEEL],
@@ -552,7 +552,7 @@ export const RegionDetails: {
   [DungeonPMDO.SnowPath]: {
     synergies: [Synergy.ICE, Synergy.FIELD, Synergy.NORMAL],
     music: DungeonMusic.SKY_PEAK_SNOWFIELD,
-    regionalSpeciality: Item.CASTELIACONE
+    regionalSpeciality: Item.HEARTY_STEW
   },
   [DungeonPMDO.SolarCave1]: {
     synergies: [Synergy.PSYCHIC, Synergy.FIRE, Synergy.SOUND],
@@ -596,7 +596,7 @@ export const RegionDetails: {
   [DungeonPMDO.SteamCave]: {
     synergies: [Synergy.FIRE, Synergy.GOURMET, Synergy.ELECTRIC],
     music: DungeonMusic.STEAM_CAVE,
-    regionalSpeciality: Item.CURRY,
+    regionalSpeciality: Item.BALM_MUSHROOM,
     tint: 0xfff0f0
   },
   [DungeonPMDO.SteelAegisCave]: {
@@ -648,7 +648,7 @@ export const RegionDetails: {
   [DungeonPMDO.ThunderwaveCave]: {
     synergies: [Synergy.ELECTRIC, Synergy.GROUND, Synergy.LIGHT],
     music: DungeonMusic.THUNDERWAVE_CAVE,
-    regionalSpeciality: Item.FRUIT_JUICE
+    regionalSpeciality: Item.BIG_MUSHROOM
   },
   [DungeonPMDO.TinyMeadow]: {
     synergies: [Synergy.GRASS, Synergy.BABY, Synergy.AMORPHOUS],
@@ -678,7 +678,7 @@ export const RegionDetails: {
   [DungeonPMDO.UnusedSteamCave]: {
     synergies: [Synergy.FIRE, Synergy.WATER, Synergy.ELECTRIC],
     music: DungeonMusic.UPPER_STEAM_CAVE,
-    regionalSpeciality: Item.CURRY
+    regionalSpeciality: Item.BALM_MUSHROOM
   },
   [DungeonPMDO.UnusedWaterfallPond]: {
     synergies: [Synergy.AQUATIC, Synergy.BUG, Synergy.WILD],
@@ -693,7 +693,7 @@ export const RegionDetails: {
   [DungeonPMDO.VastIceMountain]: {
     synergies: [Synergy.WILD, Synergy.ICE, Synergy.ROCK],
     music: DungeonMusic.VAST_ICE_MOUNTAIN,
-    regionalSpeciality: Item.CASTELIACONE
+    regionalSpeciality: Item.HEARTY_STEW
   },
   [DungeonPMDO.VastIceMountainPeak]: {
     synergies: [Synergy.DRAGON, Synergy.ICE, Synergy.FLYING],
@@ -724,7 +724,7 @@ export const RegionDetails: {
   [DungeonPMDO.WesternCave2]: {
     synergies: [Synergy.HUMAN, Synergy.FLORA, Synergy.ROCK],
     music: DungeonMusic.JOB_CLEAR,
-    regionalSpeciality: Item.FLOWER_SWEET
+    regionalSpeciality: Item.HERBA_MYSTICA_BITTER
   },
   [DungeonPMDO.WishCave1]: {
     synergies: [Synergy.FAIRY, Synergy.GOURMET, Synergy.BABY],
@@ -749,7 +749,7 @@ export const RegionDetails: {
   [DungeonPMDO.ZeroIsleEast3]: {
     synergies: [Synergy.AMORPHOUS, Synergy.PSYCHIC, Synergy.STEEL],
     music: DungeonMusic.VERSUS_BOSS,
-    regionalSpeciality: Item.SPINDA_COCKTAIL,
+    regionalSpeciality: Item.BIG_MUSHROOM,
     tint: 0xeeeeee
   },
   [DungeonPMDO.ZeroIsleEast4]: {
@@ -766,7 +766,7 @@ export const RegionDetails: {
   [DungeonPMDO.ZeroIsleSouth2]: {
     synergies: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING],
     music: DungeonMusic.WIGGLYTUFFS_GUILD,
-    regionalSpeciality: Item.ROCK_SALT
+    regionalSpeciality: Item.HERBA_MYSTICA_SALTY
   },
   town: {
     synergies: [],

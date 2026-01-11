@@ -1488,6 +1488,21 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.setTint(0xff0000)
   }
 
+  addBalmMushroomEffect() {
+    let i = 0
+    const hsv = Phaser.Display.Color.HSVColorWheel(0.7, 1)
+    const updateBalmMushroomEffect = () => {
+      const top = hsv[i].color
+      const bottom = hsv[359 - i].color
+      this.sprite.setTint(top, top, bottom, bottom)
+      i = (i + 1) % 360
+    }
+    this.scene.events.on("update", updateBalmMushroomEffect)
+    this.sprite.once("destroy", () => {
+      this.scene.events.off("update", updateBalmMushroomEffect)
+    })
+  }
+
   removeRageEffect(hasBerserkGene: boolean = false) {
     if (hasBerserkGene) {
       this.addBerserkEffect()

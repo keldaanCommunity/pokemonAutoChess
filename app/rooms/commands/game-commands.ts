@@ -10,6 +10,7 @@ import {
   GOLDEN_BERRY_TREE_TYPES,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
+  ItemSellPricesAtTown,
   MAX_PLAYERS_PER_GAME,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
@@ -78,6 +79,7 @@ import {
   ItemComponentsNoFossilOrScarf,
   ItemComponentsNoScarf,
   ItemRecipe,
+  ItemsSoldAtTown,
   Mulches,
   ShinyItems,
   SynergyGems,
@@ -1766,6 +1768,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     }
     this.state.time = minigamePhaseDuration
     this.room.miniGame.initialize(this.state, this.room)
+
+    this.state.players.forEach((player: Player) => {
+      if (player.alive) {
+        const itemsToSell = player.items.filter((item) =>
+          isIn(ItemsSoldAtTown, item)
+        )
+        let totalMoneyGained = 0
+        itemsToSell.forEach((item) => {
+          player.money += ItemSellPricesAtTown[item] ?? 0
+          totalMoneyGained += ItemSellPricesAtTown[item] ?? 0
+          removeInArray<Item>(player.items, item)
+        })
+        if (totalMoneyGained > 0) {
+          const client = this.room.clients.find(
+            (cli) => cli.auth.uid === player.id
+          )
+          client?.send(Transfer.PLAYER_INCOME, totalMoneyGained)
+        }
+      }
+    })
   }
 
   initializeFightingPhase() {

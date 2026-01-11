@@ -9,6 +9,8 @@
 - Scatterbug
 - Spewpa
 - Vivillon (20 different forms)
+- Lechonk
+- Oinkologne (Male form only)
 
 # Changes to Pokemon & Abilities
 
@@ -96,6 +98,8 @@
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 - Buff Rock Salt: 15 → 20% of max HP as shield on fight start.
 - Buff Berserk Gene: Attack 5 → 10
+- Tiny mushroom is rebranded as Shed Shell. No change to the effect.
+- New dishes, Mushrooms: Tiny Mushroom, Big Mushroom, Balm mushroom
 
 # Gameplay
 

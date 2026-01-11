@@ -37,6 +37,7 @@ import type { Board, Cell } from "../board"
 import {
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnAttackReceivedEffect,
   OnDamageReceivedEffect,
   PeriodicEffect
 } from "../effects/effect"
@@ -15755,6 +15756,43 @@ export class PowderStrategy extends AbilityStrategy {
   }
 }
 
+export class LingeringAromaStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] special damage (scales with AP) and lose 5 PP
+    const duration = 5000
+    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const lingeringAromaEffect = new OnAttackReceivedEffect(
+      ({ attacker, pokemon }) => {
+        // Deal special damage to the attacker
+        attacker.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit,
+          true
+        )
+        // Reduce attacker's PP by 5
+        attacker.addPP(-5, pokemon, 0, false)
+      }
+    )
+
+    pokemon.effectsSet.add(lingeringAromaEffect)
+    // Remove the effect after the duration
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.effectsSet.delete(lingeringAromaEffect)
+      }, duration)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16280,7 +16318,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
   [Ability.EAR_DIG]: new EarDigStrategy(),
   [Ability.POWDER_SNOW]: new PowderSnowStrategy(),
-  [Ability.POWDER]: new PowderStrategy()
+  [Ability.POWDER]: new PowderStrategy(),
+  [Ability.LINGERING_AROMA]: new LingeringAromaStrategy()
 }
 
 export function castAbility(

@@ -98,7 +98,7 @@ export enum Item {
   TERRAIN_EXTENDER = "TERRAIN_EXTENDER",
   POKERUS_VIAL = "POKERUS_VIAL",
   SPELL_TAG = "SPELL_TAG",
-  TINY_MUSHROOM = "TINY_MUSHROOM",
+  SHED_SHELL = "SHED_SHELL",
   BERSERK_GENE = "BERSERK_GENE",
   SURFBOARD = "SURFBOARD",
   COOKING_POT = "COOKING_POT",
@@ -208,6 +208,10 @@ export enum Item {
   MOOMOO_MILK = "MOOMOO_MILK",
   BERRIES = "BERRIES",
   HONEY = "HONEY",
+  MUSHROOMS = "MUSHROOMS",
+  TINY_MUSHROOM = "TINY_MUSHROOM",
+  BIG_MUSHROOM = "BIG_MUSHROOM",
+  BALM_MUSHROOM = "BALM_MUSHROOM",
   POFFIN = "POFFIN",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
@@ -553,6 +557,8 @@ export const SpecialBerries: Item[] = [
 
 export const Berries = [...NonSpecialBerries, ...SpecialBerries]
 
+export type Berry = (typeof Berries)[number]
+
 export const Tools = [
   Item.LIGHT_BALL,
   Item.PROTECTOR,
@@ -563,7 +569,7 @@ export const Tools = [
   Item.METRONOME,
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
-  Item.TINY_MUSHROOM,
+  Item.SHED_SHELL,
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.COOKING_POT,
@@ -583,7 +589,7 @@ export const ArtificialItems = [
   Item.METAL_COAT,
   Item.MACHO_BRACE,
   Item.SPELL_TAG,
-  Item.TINY_MUSHROOM,
+  Item.SHED_SHELL,
   Item.MAGMARIZER,
   Item.ELECTIRIZER,
   Item.POKERUS_VIAL,
@@ -711,7 +717,7 @@ export const ToolsBuried: Tool[] = [
   Item.METAL_COAT,
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
-  Item.TINY_MUSHROOM,
+  Item.SHED_SHELL,
   Item.INCENSE,
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
@@ -743,7 +749,7 @@ export const SynergyItems = [
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
   Item.SHINY_STONE,
-  Item.TINY_MUSHROOM,
+  Item.SHED_SHELL,
   Item.COOKING_POT,
   Item.RUNNING_SHOES,
   Item.BERSERK_GENE,
@@ -777,7 +783,7 @@ export const SynergyGivenByItem = {
   [Item.SPELL_TAG]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
   [Item.FRIEND_BOW]: Synergy.NORMAL,
-  [Item.TINY_MUSHROOM]: Synergy.BUG,
+  [Item.SHED_SHELL]: Synergy.BUG,
   [Item.COOKING_POT]: Synergy.GOURMET,
   [Item.INCENSE]: Synergy.FLORA,
   [Item.RUNNING_SHOES]: Synergy.FIELD,
@@ -937,10 +943,33 @@ export const Dishes = [
   Item.RIBBON_SWEET,
   Item.SWEETS,
   Item.SANDWICH,
-  Item.HEARTY_STEW
+  Item.HEARTY_STEW,
+  Item.MUSHROOMS,
+  Item.TINY_MUSHROOM,
+  Item.BIG_MUSHROOM,
+  Item.BALM_MUSHROOM
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
+
+export const Mushrooms = [
+  Item.TINY_MUSHROOM,
+  Item.BIG_MUSHROOM,
+  Item.BALM_MUSHROOM
+] satisfies Item[]
+
+export const DishesGoingToInventory = [
+  Item.TART_APPLE,
+  Item.SWEET_APPLE,
+  Item.SIRUPY_APPLE,
+  Item.TINY_MUSHROOM,
+  Item.BIG_MUSHROOM,
+  Item.BALM_MUSHROOM,
+  ...Berries
+] satisfies (Dish | Berry)[]
+
+export const ItemsSoldAtTown = [...Mushrooms] satisfies Item[]
+export type ItemsSoldAtTown = (typeof ItemsSoldAtTown)[number]
 
 export const Flavors = [
   Item.VANILLA_FLAVOR,

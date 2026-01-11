@@ -9,12 +9,14 @@ import {
   AbilityPerTM,
   Berries,
   Dish,
+  DishesGoingToInventory,
   FishingRod,
   Flavors,
   HMs,
   Item,
   ItemRecipe,
   MemoryDiscs,
+  Mushrooms,
   NonSpecialBerries,
   OgerponMasks,
   Sweets,
@@ -29,7 +31,12 @@ import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
-import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  randomWeighted
+} from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
@@ -327,6 +334,15 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
     if (dish === Item.BERRIES) {
       dishes = pickNRandomIn(NonSpecialBerries, 3 * nbDishes)
     }
+    if (dish === Item.MUSHROOMS) {
+      dishes = [
+        randomWeighted({
+          [Item.TINY_MUSHROOM]: 70,
+          [Item.BIG_MUSHROOM]: 25,
+          [Item.BALM_MUSHROOM]: 5
+        }) ?? Item.TINY_MUSHROOM
+      ]
+    }
     if (dish === Item.SWEETS) {
       dishes = pickNRandomIn(Sweets, nbDishes)
     }
@@ -350,14 +366,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
         )
         candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
         dishes.forEach((dish, i) => {
-          if (
-            [
-              Item.TART_APPLE,
-              Item.SWEET_APPLE,
-              Item.SIRUPY_APPLE,
-              ...Berries
-            ].includes(dish)
-          ) {
+          if (DishesGoingToInventory.includes(dish)) {
             player.items.push(dish)
           } else {
             const pokemon = candidates[i] ?? chef

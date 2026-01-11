@@ -165,7 +165,8 @@ export enum EffectEnum {
   SURGE_SURFER = "SURGE_SURFER",
   FALINKS_BRASS = "FALINKS_BRASS",
   SPECIAL_ATTACKS = "SPECIAL_ATTACKS",
-  JAW_LOCK = "JAW_LOCK"
+  JAW_LOCK = "JAW_LOCK",
+  BALM_MUSHROOM = "BALM_MUSHROOM"
 }
 
 export const BoardEffects = [
