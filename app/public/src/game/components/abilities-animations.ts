@@ -445,16 +445,30 @@ const onSprite =
     handler({ casterSprite, targetSprite, ...args })
   }
 
+type AbilityCoordinates = [number, number, boolean?] | "target" | "caster"
+
 type TweenAnimationMakerOptions = {
   duration?: number
   ease?: string | ((v: number) => number)
   hitAnim?: AbilityAnimation
   tweenProps?: Record<string, any>
-  startCoords?: [number, number, boolean?] | "target"
-  endCoords?: [number, number, boolean?] | "caster"
+  startCoords?: AbilityCoordinates
+  endCoords?: AbilityCoordinates
   startPositionOffset?: [number, number]
   endPositionOffset?: [number, number]
   destroyOnTweenComplete?: boolean
+}
+
+const parseCoordinates = (
+  coords: AbilityCoordinates,
+  args: AbilityAnimationArgs
+): [number, number, boolean?] => {
+  if (coords === "caster") {
+    return [args.positionX, args.positionY, args.flip]
+  } else if (coords === "target") {
+    return [args.targetX, args.targetY, args.flip]
+  }
+  return coords
 }
 
 const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
@@ -462,10 +476,10 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (args) => {
     const { scene, flip } = args
     let { rotation } = options
-    const [startRow, startCol, startFlip] =
-      options.startCoords === "target"
-        ? [args.targetX, args.targetY, args.flip]
-        : (options.startCoords ?? [args.positionX, args.positionY, args.flip])
+    const [startRow, startCol, startFlip] = parseCoordinates(
+      options.startCoords ?? "caster",
+      args
+    )
     const delay = options.delay ?? args.delay ?? 0
     setTimeout(() => {
       const startPosition = transformEntityCoordinates(
@@ -536,13 +550,9 @@ const projectile: AbilityAnimationMaker<
 
       let ox: number, oy: number
       if (endCoords !== undefined) {
-        ;[ox, oy] =
-          endCoords === "caster" ? [args.positionX, args.positionY] : endCoords
+        ;[ox, oy] = parseCoordinates(endCoords ?? "caster", args)
       } else {
-        ;[ox, oy] =
-          startCoords === "target"
-            ? [args.targetX, args.targetY]
-            : (startCoords ?? [args.positionX, args.positionY])
+        ;[ox, oy] = parseCoordinates(startCoords ?? "caster", args)
       }
 
       let dx: number, dy: number
@@ -573,10 +583,10 @@ const projectile: AbilityAnimationMaker<
       }
     } else {
       // projectile stopping on target or certain coordinates
-      const [endRow, endCol, endFlip] =
-        endCoords === "caster"
-          ? [args.positionX, args.positionY, args.flip]
-          : (endCoords ?? [args.targetX, args.targetY, args.flip])
+      const [endRow, endCol, endFlip] = parseCoordinates(
+        endCoords ?? "target",
+        args
+      )
       endPosition = transformEntityCoordinates(
         endRow,
         endCol,
@@ -1672,10 +1682,12 @@ export const AbilitiesAnimations: {
     projectile({
       scale: 1,
       tweenProps: { scale: 3, yoyo: true },
+      startCoords: "target",
+      endCoords: "target",
       duration: 800,
-      ease: Phaser.Math.Easing.Sine.InOut
-    }),
-    shakeCamera({})
+      ease: Phaser.Math.Easing.Sine.InOut,
+      depth: DEPTH.ABILITY_GROUND_LEVEL
+    })
   ],
   [Ability.ERUPTION]: projectile({
     startCoords: "target",
