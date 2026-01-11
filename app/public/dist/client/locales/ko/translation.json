@@ -2239,7 +2239,7 @@
 		"PURE_POWER": "30 SHIELD 획득",
 		"INGRAIN": "2초당 5 HP 회복. 열매나무 1개 획득.",
 		"GROWTH": "2초당 15 HP 회복. 열매나무 2개 획득.",
-		"SPORE": "2초당 30 HP 회복. 열매나무 3개 획득",
+		"SPORE": "2초당 25 HP 회복. 열매나무 3개 획득",
 		"FLAME_BODY": "[30,LK]% 확률로 BURN",
 		"WILDFIRE": "타격 성공시마다 +1 ATK",
 		"BLAZE": "타격 성공시마다 +2 ATK",

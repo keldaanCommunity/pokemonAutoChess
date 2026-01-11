@@ -2277,7 +2277,7 @@
 		"PURE_POWER": "Gagne 30 SHIELD. Obtenez une quatrième SILK_SCARF. Tous les porteurs d'SCARVES gagnent +30% d'ATK de base et 30 AP.",
 		"INGRAIN": "Restaure 5 HP toutes les 2 secondes. Un arbre à baies apparaît",
 		"GROWTH": "Restaure 15 HP toutes les 2 secondes. Deux arbres à baies sont disponibles",
-		"SPORE": "Restaure 30 HP toutes les 2 secondes. Trois arbres à baies sont disponibles",
+		"SPORE": "Restaure 25 HP toutes les 2 secondes. Trois arbres à baies sont disponibles",
 		"OVERGROW": "Une fois sous les 30% de ses HP max, gagne 50 AP. Vos arbres à baies deviennent dorés.",
 		"FLAME_BODY": "[30,LK]% de chance de BURN pendant 3 secondes",
 		"WILDFIRE": "+1 ATK après chaque coup",

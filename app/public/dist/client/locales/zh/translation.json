@@ -2301,7 +2301,7 @@
 		"PURE_POWER": "获得30点SHIELD。获得第四条SILK_SCARF。携带由SILK_SCARF合成得到的道具的宝可梦提升30%的基础ATK和30点AP。",
 		"INGRAIN": "每2秒恢复7点HP。种下一株果树。",
 		"GROWTH": "每2秒恢复15点HP。种下第二株果树。",
-		"SPORE": "每2秒恢复30点HP。种下第三株果树。",
+		"SPORE": "每2秒恢复25点HP。种下第三株果树。",
 		"OVERGROW": "每轮对战中HP首次低于最大值的30%时，提升50点AP。果树升级为黄金果树。",
 		"FLAME_BODY": "攻击有[30,LK]%的概率使目标陷入BURN 3秒。",
 		"WILDFIRE": "每次击中目标后，提升1点ATK。",

@@ -860,7 +860,7 @@ export default abstract class PokemonState {
         const heal =
           pokemon.effects.has(EffectEnum.SPORE) ||
           pokemon.effects.has(EffectEnum.OVERGROW)
-            ? 30
+            ? 25
             : pokemon.effects.has(EffectEnum.GROWTH)
               ? 15
               : 5

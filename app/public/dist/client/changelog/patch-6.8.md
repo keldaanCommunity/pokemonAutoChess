@@ -61,6 +61,7 @@
     - Normal (7): gain 25 shield. Get a third Scarf
     - Normal (9) gain 30 shield. Get a fourth Scarf. All scarves holders gain 30% increased base Attack and 30 AP.
 - New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
+- Nerf Grass 7: 30 → 25 HP healed every 2 seconds
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
 
 # Changes to Items

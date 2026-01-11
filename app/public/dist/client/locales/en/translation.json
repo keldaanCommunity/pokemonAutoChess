@@ -2301,7 +2301,7 @@
 		"PURE_POWER": "Gain 30 SHIELD. Get a fourth SILK_SCARF. All SILK_SCARF-made item holders gain 30% base ATK and 30 AP.",
 		"INGRAIN": "Restore 5 HP every 2 seconds. Get a berry tree.",
 		"GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
-		"SPORE": "Restore 30 HP every 2 seconds. Get a third berry tree.",
+		"SPORE": "Restore 25 HP every 2 seconds. Get a third berry tree.",
 		"OVERGROW": "Once below 30% max HP, gain 50 AP. Your berry trees turn golden.",
 		"FLAME_BODY": "Attacks have [30,LK]% chance to inflict BURN for 3 seconds",
 		"WILDFIRE": "+1 ATK after every hit",

@@ -2208,7 +2208,7 @@
 		"PURE_POWER": "Gana 30 SHIELD",
 		"INGRAIN": "Restaura 5 HP cada 2 segundos. Consigue un árbol de bayas.",
 		"GROWTH": "Restaura 15 HP cada 2 segundos. Consigue otro árbol de bayas.",
-		"SPORE": "Restaura 30 HP cada 2 segundos. Consigue un tercer árbol de bayas.",
+		"SPORE": "Restaura 25 HP cada 2 segundos. Consigue un tercer árbol de bayas.",
 		"FLAME_BODY": "Los ataques tienen un [30,LK]% de probabilidad de BURN",
 		"WILDFIRE": "+1 ATK después de cada golpe",
 		"BLAZE": "+2 ATK después de cada golpe",
