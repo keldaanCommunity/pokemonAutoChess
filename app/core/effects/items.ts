@@ -121,13 +121,16 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
       candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
       const nbBounces = 1
+      const secondHitPhysicalDamage = Math.round(physicalDamage * 0.75)
+      const secondHitSpecialDamage = Math.round(specialDamage * 0.75)
+      const secondHitTrueDamage = Math.round(trueDamage * 0.75)
       for (let i = 0; i < nbBounces; i++) {
-        const target = candidateTargets.shift()
-        if (!target) break
+        const secondHitTarget = candidateTargets.shift()
+        if (!secondHitTarget) break
         let totalTakenDamage = 0
         if (physicalDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: physicalDamage,
+          const { takenDamage } = secondHitTarget.handleDamage({
+            damage: secondHitPhysicalDamage,
             board,
             attackType: AttackType.PHYSICAL,
             attacker: pokemon,
@@ -135,9 +138,9 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           })
           totalTakenDamage += takenDamage
         }
-        if (specialDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: specialDamage,
+        if (secondHitSpecialDamage > 0) {
+          const { takenDamage } = secondHitTarget.handleDamage({
+            damage: secondHitSpecialDamage,
             board,
             attackType: AttackType.SPECIAL,
             attacker: pokemon,
@@ -145,29 +148,31 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           })
           totalTakenDamage += takenDamage
           if (
-            target.items.has(Item.POWER_LENS) &&
+            secondHitTarget.items.has(Item.POWER_LENS) &&
             !pokemon.items.has(Item.PROTECTIVE_PADS)
           ) {
-            const speDef = target.status.armorReduction
-              ? Math.round(target.speDef / 2)
-              : target.speDef
+            const speDef = secondHitTarget.status.armorReduction
+              ? Math.round(secondHitTarget.speDef / 2)
+              : secondHitTarget.speDef
             const damageAfterReduction =
-              specialDamage / (1 + ARMOR_FACTOR * speDef)
-            const damageBlocked = min(0)(specialDamage - damageAfterReduction)
+              secondHitSpecialDamage / (1 + ARMOR_FACTOR * speDef)
+            const damageBlocked = min(0)(
+              secondHitSpecialDamage - damageAfterReduction
+            )
             pokemon.broadcastAbility({ skill: "POWER_LENS" })
             pokemon.handleDamage({
               damage: Math.round(damageBlocked),
               board,
               attackType: AttackType.SPECIAL,
-              attacker: target,
+              attacker: secondHitTarget,
               shouldTargetGainMana: true,
               isRetaliation: true
             })
           }
         }
-        if (trueDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: trueDamage,
+        if (secondHitTrueDamage > 0) {
+          const { takenDamage } = secondHitTarget.handleDamage({
+            damage: secondHitTrueDamage,
             board,
             attackType: AttackType.TRUE,
             attacker: pokemon,
@@ -176,12 +181,12 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           totalTakenDamage += takenDamage
         }
         pokemon.onHit({
-          target,
+          target: secondHitTarget,
           board,
           totalTakenDamage,
-          physicalDamage,
-          specialDamage,
-          trueDamage
+          physicalDamage: secondHitPhysicalDamage,
+          specialDamage: secondHitSpecialDamage,
+          trueDamage: secondHitTrueDamage
         })
       }
     }
