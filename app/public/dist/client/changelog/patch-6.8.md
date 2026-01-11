@@ -54,6 +54,7 @@
 - Change Shieldon line: now also has Rock synergy. Def 10/16 → 6/12, Special Def 6/8 → 4/8
 - Nerf Carnivine: Speed 40 → 29 ; Nerf Power Whip: 50% → 30% of HP as bonus special damage
 - Buff Deoxys Attack form: Attack 20 → 25
+- Rework Psychic Surge (Tapu Lele): Now grants 40 shield to all Psychic allies except user ; PP 80 → 100
 
 # Changes to Synergies
 

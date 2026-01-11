@@ -8451,7 +8451,7 @@ export class TapuLele extends Pokemon {
   speed = 55
   def = 6
   speDef = 6
-  maxPP = 80
+  maxPP = 100
   range = 3
   skill = Ability.PSYCHIC_SURGE
   passive = Passive.PSYCHIC_TERRAIN
