@@ -42,7 +42,7 @@ export const RegionDetails: {
   [DungeonPMDO.BuriedRelic1]: {
     synergies: [Synergy.LIGHT, Synergy.ARTIFICIAL, Synergy.HUMAN],
     music: DungeonMusic.BURIED_RELIC,
-    regionalSpeciality: Item.SPINDA_COCKTAIL
+    regionalSpeciality: Item.POFFIN
   },
   [DungeonPMDO.BuriedRelic2]: {
     synergies: [Synergy.GROUND, Synergy.ARTIFICIAL, Synergy.LIGHT],
@@ -93,7 +93,7 @@ export const RegionDetails: {
   [DungeonPMDO.DarkHill1]: {
     synergies: [Synergy.GHOST, Synergy.DARK, Synergy.FLYING],
     music: DungeonMusic.DARK_HILL,
-    regionalSpeciality: Item.TEA,
+    regionalSpeciality: Item.TINY_MUSHROOM,
     tint: 0xeeffee
   },
   [DungeonPMDO.DarkHill2]: {
@@ -138,7 +138,7 @@ export const RegionDetails: {
   [DungeonPMDO.DeepDuskForest1]: {
     synergies: [Synergy.DARK, Synergy.GRASS, Synergy.GOURMET],
     music: DungeonMusic.DEEP_DUSK_FOREST,
-    regionalSpeciality: Item.TEA,
+    regionalSpeciality: Item.HERBA_MYSTICA_BITTER,
     tint: 0xeeffee
   },
   [DungeonPMDO.DeepDuskForest2]: {
@@ -236,7 +236,7 @@ export const RegionDetails: {
   [DungeonPMDO.GreatCanyon]: {
     synergies: [Synergy.NORMAL, Synergy.WILD, Synergy.FIRE],
     music: DungeonMusic.GREAT_CANYON,
-    regionalSpeciality: Item.RAGE_CANDY_BAR
+    regionalSpeciality: Item.HERBA_MYSTICA_SPICY
   },
   [DungeonPMDO.HiddenHighland]: {
     synergies: [Synergy.FLORA, Synergy.GRASS, Synergy.DRAGON],
@@ -283,7 +283,7 @@ export const RegionDetails: {
   [DungeonPMDO.LapisCave]: {
     synergies: [Synergy.WATER, Synergy.AQUATIC, Synergy.FOSSIL],
     music: DungeonMusic.LAPIS_CAVE,
-    regionalSpeciality: Item.TEA
+    regionalSpeciality: Item.HERBA_MYSTICA_SWEET
   },
   [DungeonPMDO.LightningField]: {
     synergies: [Synergy.ELECTRIC, Synergy.FIELD, Synergy.LIGHT],
@@ -766,7 +766,7 @@ export const RegionDetails: {
   [DungeonPMDO.ZeroIsleSouth2]: {
     synergies: [Synergy.ROCK, Synergy.GROUND, Synergy.FIGHTING],
     music: DungeonMusic.WIGGLYTUFFS_GUILD,
-    regionalSpeciality: Item.ROCK_SALT
+    regionalSpeciality: Item.HERBA_MYSTICA_SALTY
   },
   town: {
     synergies: [],
