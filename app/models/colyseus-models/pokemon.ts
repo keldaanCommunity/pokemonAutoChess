@@ -13690,7 +13690,7 @@ export class Comfey extends Pokemon {
   stars = 3
   hp = 150
   atk = 13
-  speed = 57
+  speed = 64
   def = 8
   speDef = 12
   maxPP = 80

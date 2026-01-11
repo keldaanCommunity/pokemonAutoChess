@@ -741,19 +741,15 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
-      pokemon.addAbilityPower(comfey.ap, pokemon, 0, false)
-      pokemon.addAttack(comfey.atk, pokemon, 0, false)
-      pokemon.addSpeed(comfey.speed - DEFAULT_SPEED, pokemon, 0, false)
       pokemon.addMaxHP(comfey.maxHP, pokemon, 0, false)
+      pokemon.addAttack(comfey.atk, pokemon, 0, false)
       pokemon.addDefense(comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(comfey.speDef, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
-      pokemon.addAbilityPower(-comfey.ap, pokemon, 0, false)
-      pokemon.addAttack(-comfey.atk, pokemon, 0, false)
-      pokemon.addSpeed(-(comfey.speed - DEFAULT_SPEED), pokemon, 0, false)
       pokemon.addMaxHP(-comfey.maxHP, pokemon, 0, false)
+      pokemon.addAttack(-comfey.atk, pokemon, 0, false)
       pokemon.addDefense(-comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
     }),
