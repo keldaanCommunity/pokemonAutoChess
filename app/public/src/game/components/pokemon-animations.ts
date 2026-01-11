@@ -7564,5 +7564,28 @@ export const PokemonAnimations: {
     ability: AnimationType.FlapAround,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.LECHONK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.OINKOLOGNE_MALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
   }
+  /*
+  [Pkm.OINKOLOGNE_FEMALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  */
 }

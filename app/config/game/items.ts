@@ -1,5 +1,5 @@
 import { Stat } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { Item, ItemsSoldAtTown } from "../../types/enum/Item"
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
@@ -106,4 +106,10 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.COVER_BAND]: { [Stat.DEF]: 12, [Stat.SHIELD]: 50 },
   [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
   [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 }
+}
+
+export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {
+  [Item.TINY_MUSHROOM]: 1,
+  [Item.BIG_MUSHROOM]: 2,
+  [Item.BALM_MUSHROOM]: 5
 }

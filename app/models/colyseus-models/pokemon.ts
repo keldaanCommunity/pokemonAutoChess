@@ -19935,6 +19935,65 @@ export class VivillonPokeball extends Pokemon {
   skill = Ability.POWDER
 }
 
+export class Lechonk extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNCOMMON
+  evolution = Pkm.OINKOLOGNE_MALE
+  stars = 1
+  hp = 75
+  atk = 6
+  speed = 41
+  def = 3
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.LINGERING_AROMA
+  additional = true
+}
+
+export class OinkologneMale extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 160
+  atk = 15
+  speed = 41
+  def = 5
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.LINGERING_AROMA
+  additional = true
+}
+
+export class OinkologneFemale extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.NORMAL,
+    Synergy.FIELD,
+    Synergy.GOURMET
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 185
+  atk = 13
+  speed = 50
+  def = 9
+  speDef = 10
+  maxPP = 80
+  range = 1
+  skill = Ability.LINGERING_AROMA
+  //skill = Ability.AROMA_VEIL
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21048,7 +21107,10 @@ export const PokemonClasses: Record<
   [Pkm.VIVILLON_OCEAN]: VivillonOcean,
   [Pkm.VIVILLON_JUNGLE]: VivillonJungle,
   [Pkm.VIVILLON_FANCY]: VivillonFancy,
-  [Pkm.VIVILLON_POKE_BALL]: VivillonPokeball
+  [Pkm.VIVILLON_POKE_BALL]: VivillonPokeball,
+  [Pkm.LECHONK]: Lechonk,
+  [Pkm.OINKOLOGNE_MALE]: OinkologneMale
+  //[Pkm.OINKOLOGNE_FEMALE]: OinkologneFemale
 }
 
 // declare all the classes in colyseus schema TypeRegistry
