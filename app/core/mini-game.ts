@@ -806,8 +806,9 @@ export class MiniGame {
             player.map = portal.map
             player.regions.push(portal.map)
             player.updateRegionalPool(state, true, previousMap)
+            const newBerryTreeTypes = pickNRandomIn(NonSpecialBerries, 3)
             for (let i = 0; i < player.berryTreesType.length; i++) {
-              player.berryTreesType[i] = pickRandomIn(NonSpecialBerries)
+              player.berryTreesType[i] = newBerryTreeTypes[i]
               player.berryTreesStages[i] = 0
             }
           }

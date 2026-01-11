@@ -121,8 +121,9 @@
 - Field speed stacks are now correctly reset after resurrection
 - Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 - Fossil starter portals now always offer an Eevee.
-- Fix anime of buried items when equipped with explorer kit.
+- Fix the display of buried items when the digger is equipped with explorer kit.
 - Fixed arrow key keybinds not working when bound via the options (Previous player's board, Next player's board)
+- Berry trees can no longer share the same berry type.
 
 # Misc
 

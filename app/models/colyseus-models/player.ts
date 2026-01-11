@@ -114,11 +114,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type(["string"]) berryTreesType: Item[] = [
-    pickRandomIn(NonSpecialBerries),
-    pickRandomIn(NonSpecialBerries),
-    pickRandomIn(NonSpecialBerries)
-  ]
+  @type(["string"]) berryTreesType: Item[] = pickNRandomIn(NonSpecialBerries, 3)
   @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
   @type([Pokemon]) flowerPots: Pokemon[] = []
   @type("uint8") mulch: number = 0
