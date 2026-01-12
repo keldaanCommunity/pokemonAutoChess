@@ -69,6 +69,7 @@
 - New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Nerf Grass 7: 30 → 25 HP healed every 2 seconds
 - Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
+- Change Snow weather effect: -20 Speed (-10 if Ice) instead of -20 for all
 
 # Changes to Items
 

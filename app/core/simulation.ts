@@ -682,9 +682,14 @@ export default class Simulation extends Schema implements ISimulation {
         }
         if (pokemon.effects.has(EffectEnum.PURE_POWER)) {
           shieldBonus += 30
-          if(values(pokemon.items).some(item => Scarves.includes(item))) {
+          if (values(pokemon.items).some((item) => Scarves.includes(item))) {
             // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
-            pokemon.addAttack(Math.round(0.3 * pokemon.baseAtk), pokemon, 0, false)
+            pokemon.addAttack(
+              Math.round(0.3 * pokemon.baseAtk),
+              pokemon,
+              0,
+              false
+            )
             pokemon.addAbilityPower(30, pokemon, 0, false)
           }
         }
@@ -1356,7 +1361,12 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.SNOW:
-        pokemon.addSpeed(-20, pokemon, 0, false)
+        pokemon.addSpeed(
+          pokemon.types.has(Synergy.ICE) ? -10 : -20,
+          pokemon,
+          0,
+          false
+        )
         break
 
       case EffectEnum.SMOG: {
