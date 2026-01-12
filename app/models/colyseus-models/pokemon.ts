@@ -10089,7 +10089,7 @@ export class Flapple extends Pokemon {
   def = 4
   speDef = 4
   maxPP = 80
-  range = 2
+  range = 3
   skill = Ability.GRAV_APPLE
 
   onAcquired() {
