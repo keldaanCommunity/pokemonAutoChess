@@ -2180,7 +2180,7 @@
 		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
 		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.",
 		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds.",
-		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] special damage and lose 5 PP."
+		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] SPECIAL and lose 5 PP."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2702,7 +2702,7 @@
 		"MISSION_ORDER_RED": "Mission Order - Destroy!",
 		"MISSION_ORDER_GREEN": "Mission Order - Diversify!",
 		"MISSION_ORDER_GOLD": "Mission Order - Prosper!",
-		"MISSION_ORDER_PINK": "Mission Order - Evolve!",		
+		"MISSION_ORDER_PINK": "Mission Order - Evolve!",
 		"SILK_SCARF": "Silk Scarf",
 		"FRIEND_BOW": "Friend Bow",
 		"BLACK_BELT": "Black Belt",
@@ -2899,7 +2899,7 @@
 		"HM_DIVE": "$t(item_description.TM)\n$t(ability.DIVE): $t(ability_description.DIVE)",
 		"HM_WATERFALL": "$t(item_description.TM)\n$t(ability.WATERFALL): $t(ability_description.WATERFALL)",
 		"HM_ROCK_SMASH": "$t(item_description.TM)\n$t(ability.ROCK_SMASH): $t(ability_description.ROCK_SMASH)",
-		"CHEF_HAT": "The holder will cook their Signature Dish between rounds. Dropped when benching the unit.",
+		"CHEF_HAT": "The holder will cook their Signature Dish between rounds.",
 		"PICNIC_SET": "Immediately consumed when given. Give a SANDWICH to the holder and all ADJACENT allies. SANDWICH gives stat boosts for the next fight based on the types of the Pokémon eating it.",
 		"SANDWICH": "Gives various stat boosts for the next fight based on the types of the Pokémon eating it.",
 		"HEARTY_STEW": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds.",
@@ -3748,7 +3748,7 @@
 	"submit": "Submit",
 	"help_create_bot": "To create a bot, you need to fill a certain number of steps. Each step represents the state of your bot at a moment in the game   The bot will start with the team defined on step 1. Then, it will go   to step 2 and so on   The team of the step 2 should always be stronger than the step 1   team   As the player cannot get more than 10 Pokémon/step, your bot is not   allowed too.",
 	"item_components": "Item Components",
-	"item_component" : "Component",
+	"item_component": "Component",
 	"board_power": "Board Power",
 	"avatar": "Avatar",
 	"author": "Author",
