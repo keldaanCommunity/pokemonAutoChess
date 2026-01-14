@@ -9286,10 +9286,10 @@ export class Smoochum extends Pokemon {
   evolution = Pkm.JYNX
   hp = 60
   atk = 5
-  speed = 55
+  speed = 61
   def = 2
   speDef = 3
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.LOVELY_KISS
   additional = true
@@ -9301,10 +9301,10 @@ export class Jynx extends Pokemon {
   stars = 2
   hp = 130
   atk = 11
-  speed = 55
+  speed = 61
   def = 6
   speDef = 8
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.LOVELY_KISS
   additional = true

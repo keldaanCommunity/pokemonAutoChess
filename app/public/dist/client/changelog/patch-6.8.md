@@ -60,6 +60,7 @@
 - Change Comfey: holder no longer gains speed and AP from Comfey, only max HP, Attack, Defense and Special Defense. Comfey speed 57 → 64
 - Buff Flapple: range 2 → 3
 - Reduce Falinks Trooper price: 5 → 3 gold
+- Buff Smoochum line: Speed 55 → 61, PP 80 → 70
 
 # Changes to Synergies
 
