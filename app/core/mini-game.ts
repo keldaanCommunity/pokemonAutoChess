@@ -632,7 +632,7 @@ export class MiniGame {
         )*/
 
         let candidatesSymbols: Synergy[] = []
-        const SYMBOLS_POOL_SIZE = 7
+        const SYMBOLS_POOL_SIZE = stageLevel <= 10 ? 5 : 7
         synergiesTriggerLevels.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
           candidatesSymbols.push(...new Array(level).fill(type))
