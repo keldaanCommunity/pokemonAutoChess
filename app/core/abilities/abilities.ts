@@ -16330,6 +16330,10 @@ export function castAbility(
   canCrit = true,
   preventDefaultAnim = false
 ) {
+  if (pokemon.items.has(Item.NULLIFY_BANDANNA)) {
+    return // nullify bandanna prevent ability use
+  }
+
   let crit = false
   const abilityStrategy = AbilityStrategies[ability]
   if (
