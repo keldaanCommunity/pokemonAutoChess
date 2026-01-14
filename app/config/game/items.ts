@@ -70,6 +70,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.METRONOME]: { [Stat.PP]: 5 },
   [Item.METAL_COAT]: { [Stat.DEF]: 10, [Stat.SPE_DEF]: 10 },
   [Item.AIR_BALLOON]: { [Stat.SPEED]: 30 },
+  [Item.EXPLORER_KIT]: { [Stat.DEF]: 5, [Stat.SPE_DEF]: 5, [Stat.ATK]: 5 },
   [Item.PROTECTOR]: { [Stat.SHIELD]: 100 },
   [Item.BERSERK_GENE]: { [Stat.ATK]: 10 },
   [Item.SURFBOARD]: { [Stat.SPEED]: 30 },

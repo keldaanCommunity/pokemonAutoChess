@@ -101,9 +101,11 @@
 - Heat stone changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 - Buff Rock Salt: 15 → 20% of max HP as shield on fight start.
-- Buff Berserk Gene: Attack 5 → 10
 - Tiny mushroom is rebranded as Shed Shell. No change to the effect.
 - New dishes, Mushrooms: Tiny Mushroom, Big Mushroom, Balm mushroom
+- Buff Berserk Gene: Attack 5 → 10
+- Buff Explorer Kit: give 5 Attack, 5 Defense and 5 Special Defense as base stats
+- Nerf Spell Tag: Curse duration increased: 9 → 10 seconds
 
 # Gameplay
 
