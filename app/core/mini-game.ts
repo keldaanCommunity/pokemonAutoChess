@@ -1,4 +1,5 @@
 import { MapSchema } from "@colyseus/schema"
+import { logger } from "colyseus"
 import {
   Bodies,
   Body,
@@ -38,7 +39,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
-import { clamp, max, min } from "../utils/number"
+import { clamp, max } from "../utils/number"
 import { getOrientation } from "../utils/orientation"
 import {
   chance,
@@ -599,38 +600,63 @@ export class MiniGame {
           .filter(([type, value]) => synergiesUsable.includes(type))
           .map(([type, value]) => {
             let levelReached = player.synergies.getSynergyStep(type)
-            // removing low triggers synergies
-            if (type === Synergy.FLORA || type === Synergy.LIGHT) {
-              levelReached = min(0)(levelReached - 1)
+            // lowering down low triggers synergies
+            if (type === Synergy.LIGHT) {
+              levelReached = [0, 1, 1, 2, 3][levelReached]
+            }
+            if (type === Synergy.FLORA) {
+              levelReached = [0, 1, 2, 3, 3][levelReached]
             }
             if (stageLevel === 20 && type === Synergy.GOURMET) {
               // not enough legendaries of that type
               levelReached = max(2)(levelReached)
             }
-            return [type, levelReached]
+            return [type, levelReached] as [Synergy, number]
           })
-        const candidatesSymbols: Synergy[] = []
+          .sort(([typeA, stepA], [typeB, stepB]) => {
+            const levelA = player.synergies.get(typeA) ?? 0
+            const levelB = player.synergies.get(typeB) ?? 0
+            if (stepA !== stepB) {
+              return stepB - stepA
+            } else if (levelA !== levelB) {
+              return levelB - levelA
+            } else {
+              // favor synergies with the least distribution (should be at the end of the list)
+              return SynergyArray.indexOf(typeB) - SynergyArray.indexOf(typeA)
+            }
+          })
+
+        /*logger.debug(
+          "Synergies sorted",
+          synergiesTriggerLevels.map(([t, l]) => `${t}:${l}`).join(", ")
+        )*/
+
+        let candidatesSymbols: Synergy[] = []
+        const SYMBOLS_POOL_SIZE = 7
         synergiesTriggerLevels.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
           candidatesSymbols.push(...new Array(level).fill(type))
         })
         //logger.debug("symbols from synergies", candidatesSymbols)
-        if (candidatesSymbols.length < 4) {
-          // if player has reached less than 4 synergy level triggers, we complete with random other incomplete synergies
+        if (candidatesSymbols.length < SYMBOLS_POOL_SIZE) {
+          // complete with random other incomplete synergies
           const incompleteSynergies = synergiesTriggerLevels
             .filter(
               ([type, level]) => level === 0 && player.synergies.get(type)! > 0
             )
             .map(([type, _level]) => type)
           candidatesSymbols.push(
-            ...pickNRandomIn(incompleteSynergies, 4 - candidatesSymbols.length)
+            ...pickNRandomIn(
+              incompleteSynergies,
+              SYMBOLS_POOL_SIZE - candidatesSymbols.length
+            )
           )
           /*logger.debug(
             "completing symbols with incomplete synergies",
             incompleteSynergies
           )*/
         }
-        while (candidatesSymbols.length < 4) {
+        while (candidatesSymbols.length < SYMBOLS_POOL_SIZE) {
           // if still incomplete, complete with random
           candidatesSymbols.push(pickRandomIn(synergiesUsable))
           /*logger.debug(
@@ -639,6 +665,8 @@ export class MiniGame {
           )*/
         }
 
+        candidatesSymbols = candidatesSymbols.slice(0, SYMBOLS_POOL_SIZE)
+        //logger.debug("final candidates symbols", candidatesSymbols)
         const symbols = pickNRandomIn(candidatesSymbols, NB_SYMBOLS_PER_PLAYER)
         //logger.debug(`symbols chosen for player ${player.name}`, symbols)
         symbols.forEach((type, i) => {

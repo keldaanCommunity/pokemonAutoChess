@@ -117,6 +117,7 @@
 - Removed the reward change between component and full item on stage 19 PvE, based on the amount of components collected. It is too easy to manipulate with Silk Scarf, Unown-I and ground digging. Stage 19 PvE now always offers a full craftable item as a reward.
 - New town encounter: Cinccino
 - Makuhita can now be encountered at stage 17, and no longer at stage 22
+- Portal symbols generation has been reworked to no longer favorize vertical comps over horizontal ones. 4 symbols are picked from a pool of a fixed size of 7. [Details here](https://discord.com/channels/737230355039387749/1458942594787840103/1458979662804816054)
 
 # UI
 
