@@ -63,6 +63,7 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
+import { PkmColorVariants } from "../../models/pokemon-factory";
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -682,7 +683,7 @@ async function checkTitlesAfterEmotionUnlocked(
   if (!mongoUser.titles.includes(Title.DUKE)) {
     if (
       Object.values(Pkm)
-        .filter((p) => NonPkm.includes(p) === false)
+        .filter((p) => NonPkm.includes(p) === false && PkmColorVariants.includes(p) === false)
         .every((pkm) => {
           const item = mongoUser.pokemonCollection.get(PkmIndex[pkm])
           if (!item) return false
