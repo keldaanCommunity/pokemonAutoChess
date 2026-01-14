@@ -3016,7 +3016,7 @@
 		"DURANT": "아이앤트의 기본 공격은 필드 위의 BUG 아군 하나당 1 추가 TRUE 를 입힙니다.",
 		"OGERPON_TEAL": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시 인접한 적 하나당 [6,SP]의 ATK를 얻습니다.",
 		"OGERPON_WELLSPRING": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n 시전 시 인접한 아군에게 [50,SP]의 HP와 [25,SP]의 PP를 부여합니다.",
-		"OGERPON_HEARTHFLAME": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n시전 시 인접한 적에게 [20,SP]의 SPECIAL을 부여하고 5초 동안 BURN 효과를 부여합니다.",
+		"OGERPON_HEARTHFLAME": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n시전 시 인접한 적에게 [30,SP]의 SPECIAL을 부여하고 5초 동안 BURN 효과를 부여합니다.",
 		"OGERPON_CORNERSTONE": "오거폰은 TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK 그리고 CORNERSTONE_MASK 을 착용하여 외형을 변환할 수 있습니다.\n시전 시 인접한 적에게 [2,SP=0.5]의 PROTECT 효과를 부여하고 5초 동안 FLINCH 효과를 부여합니다.",
 		"VICTINI": "팀의 명중률을 올린다. 아군의 공격은 더이상 빗나가지 않는다.",
 		"AEGISLASH": "기술을 시전할 때 실드폼과 블레이드폼 사이에 전환한다.",

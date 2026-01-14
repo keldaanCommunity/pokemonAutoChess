@@ -10501,7 +10501,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
         .forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
             cell.value.handleSpecialDamage(
-              20,
+              30,
               board,
               AttackType.SPECIAL,
               pokemon,
