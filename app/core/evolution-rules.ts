@@ -104,7 +104,7 @@ export class CountEvolutionRule extends EvolutionRule {
     const copies = values(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )
-    return copies.length >= this.numberRequired - 1
+    return copies.length === this.numberRequired - 1
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
