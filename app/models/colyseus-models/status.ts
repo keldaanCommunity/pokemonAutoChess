@@ -1075,8 +1075,10 @@ export default class Status extends Schema implements IStatus {
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
+      if (pkm.range != 1) {
+        pkm.toMovingState() // force retargetting if the current range is not 1
+      }
       pkm.range = 1
-      pkm.toMovingState() // force retargetting
     }
   }
 
