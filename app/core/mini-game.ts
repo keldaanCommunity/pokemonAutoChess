@@ -632,13 +632,14 @@ export class MiniGame {
         )*/
 
         let candidatesSymbols: Synergy[] = []
-        const SYMBOLS_POOL_SIZE = stageLevel <= 10 ? 5 : 7
+        const MIN_SYMBOLS_POOL_SIZE = stageLevel <= 10 ? 4 : 5
+        const MAX_SYMBOLS_POOL_SIZE = stageLevel <= 10 ? 4 : 7
         synergiesTriggerLevels.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
           candidatesSymbols.push(...new Array(level).fill(type))
         })
         //logger.debug("symbols from synergies", candidatesSymbols)
-        if (candidatesSymbols.length < SYMBOLS_POOL_SIZE) {
+        if (candidatesSymbols.length < MIN_SYMBOLS_POOL_SIZE) {
           // complete with random other incomplete synergies
           const incompleteSynergies = synergiesTriggerLevels
             .filter(
@@ -648,7 +649,7 @@ export class MiniGame {
           candidatesSymbols.push(
             ...pickNRandomIn(
               incompleteSynergies,
-              SYMBOLS_POOL_SIZE - candidatesSymbols.length
+              MIN_SYMBOLS_POOL_SIZE - candidatesSymbols.length
             )
           )
           /*logger.debug(
@@ -656,7 +657,7 @@ export class MiniGame {
             incompleteSynergies
           )*/
         }
-        while (candidatesSymbols.length < SYMBOLS_POOL_SIZE) {
+        while (candidatesSymbols.length < MIN_SYMBOLS_POOL_SIZE) {
           // if still incomplete, complete with random
           candidatesSymbols.push(pickRandomIn(synergiesUsable))
           /*logger.debug(
@@ -665,7 +666,7 @@ export class MiniGame {
           )*/
         }
 
-        candidatesSymbols = candidatesSymbols.slice(0, SYMBOLS_POOL_SIZE)
+        candidatesSymbols = candidatesSymbols.slice(0, MAX_SYMBOLS_POOL_SIZE)
         //logger.debug("final candidates symbols", candidatesSymbols)
         const symbols = pickNRandomIn(candidatesSymbols, NB_SYMBOLS_PER_PLAYER)
         //logger.debug(`symbols chosen for player ${player.name}`, symbols)
