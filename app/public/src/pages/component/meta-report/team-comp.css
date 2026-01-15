@@ -1,11 +1,4 @@
-.team-comp-header {
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
+/* Container Layout */
 .team-comp-container {
   display: flex;
   gap: 2em;
@@ -20,6 +13,25 @@
   flex: 1;
 }
 
+/* Header Section */
+.team-comp-header {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-info {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+/* Synergy Section */
 .synergy-group {
   display: flex;
   gap: 0;
@@ -32,29 +44,28 @@
   align-items: center;
 }
 
-.pokemon-container {
-  position: relative;
-}
-
-.player-team-pokemons,
-.team-pokemons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+/* Popular Pokémons Section */
+.popular-pokemons-header {
+  font-weight: bold;
+  font-size: 0.95em;
+  color: #ddd;
+  width: 100%;
+  text-align: left;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
 }
 
 .player-team-pokemons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
+  justify-content: flex-start;
 }
 
-.team-pokemons {
-  gap: 4px;
-}
-
-.player-team-pokemons > div,
-.team-pokemons > div {
+.pokemon-container {
   position: relative;
 }
 
@@ -62,11 +73,6 @@
   width: 60px;
   height: 60px;
   margin: 10px 0;
-}
-
-.team-pokemons .pokemon-portrait {
-  width: 40px;
-  height: 40px;
 }
 
 .player-team-pokemons .pokemon-items {
@@ -79,7 +85,6 @@
 .player-team-pokemons .pokemon-items img {
   width: 20px;
   height: 20px;
-  image-rendering: pixelated;
 }
 
 .player-team-pokemons .pokemon-frequency {
@@ -88,14 +93,123 @@
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 0.85em;
-  color: white !important;
+  font-size: 0.8em;
 }
 
-.top-teams-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Popular Items Section */
+.top-items-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.items-header {
+  font-weight: bold;
+  font-size: 0.95em;
+  color: #ddd;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.5em;
+}
+
+.items-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
+
+.item-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.8em;
+  flex-shrink: 0;
+}
+
+.item-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.item-frequency {
+  color: #aaa;
+  font-weight: 500;
+}
+
+/* Carousel Priority Section */
+.carousel-priority-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+  width: 100%;
+  padding-top: 0.5em;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel-header {
+  font-weight: bold;
+  font-size: 0.95em;
+  color: #ddd;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.5em;
+}
+
+.carousel-items-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: flex-start;
+  padding-left: 0.5em;
+}
+
+.carousel-item-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.carousel-item-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.carousel-item-frequency {
+  color: #aaa;
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+/* Example Teams Section */
+.top-teams-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  min-width: 200px;
+}
+
+.teams-header {
+  font-weight: bold;
+  font-size: 0.95em;
+  color: #ddd;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0.1em;
+  padding-left: 0.5em;
 }
 
 .top-team-entry {
@@ -107,17 +221,34 @@
 }
 
 .team-rank {
-  min-width: 2em;
+  min-width: auto;
   color: #aaa;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.2em;
+  gap: 0.3em;
+  font-size: 1.05em;
+  white-space: nowrap;
 }
 
-.team-elo {
-  font-size: 0.75em;
-  color: #999;
+.team-elo .elo.badge {
+  font-size: 0.9em;
+}
+
+/* Example Teams Pokemon */
+.team-pokemons {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.team-pokemons > div {
+  position: relative;
+}
+
+.team-pokemons .pokemon-portrait {
+  width: 40px;
+  height: 40px;
 }
 
 .team-pokemons .pokemon-items {
@@ -131,5 +262,4 @@
 .team-pokemons .pokemon-items img {
   width: 12px;
   height: 12px;
-  image-rendering: pixelated;
 }
