@@ -6,7 +6,10 @@ import React, {
   useState
 } from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemons } from "../../../../../../gen/precomputed-pokemons"
+import {
+  precomputedPokemons,
+  precomputedPokemonsImplemented
+} from "../../../../../../gen/precomputed-pokemons"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -22,8 +25,7 @@ import { Modal } from "../modal/modal"
 import PokemonPortrait from "../pokemon-portrait"
 import "./pokeguesser.css"
 
-const listPokemonsToGuess = precomputedPokemons
-  .filter((p) => p.passive !== Passive.INANIMATE && p.skill !== Ability.DEFAULT)
+const listPokemonsToGuess = precomputedPokemonsImplemented
   .filter(
     (p) =>
       !(
