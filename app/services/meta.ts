@@ -7,6 +7,7 @@ import PokemonsStatistics, {
 import RegionStatistic, {
   IRegionStatistic
 } from "../models/mongo-models/regions-statistic"
+import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
 import ReportMetadata, {
   IReportMetadata
 } from "../models/mongo-models/report-metadata"
@@ -23,7 +24,8 @@ export async function fetchMetaReports() {
     fetchMetadata(),
     fetchMetaItems(),
     fetchMetaPokemons(),
-    fetchMetaRegions()
+    fetchMetaRegions(),
+    fetchMetaV2()
   ])
   logger.info("Meta reports refreshed")
   return data
@@ -33,6 +35,7 @@ let metadata = new Array<IReportMetadata>()
 let metaItems = new Array<IItemsStatisticV2>()
 let metaPokemons = new Array<IPokemonsStatisticV2>()
 let metaRegions = new Array<IRegionStatistic>()
+let metaV2 = new Array<IMetaV2>()
 
 async function fetchMetaItems() {
   metaItems = await ItemsStatistic.find().exec()
@@ -54,6 +57,11 @@ async function fetchMetaRegions() {
   return metaRegions
 }
 
+async function fetchMetaV2() {
+  metaV2 = await MetaV2.find().exec()
+  return metaV2
+}
+
 export function getMetaPokemons() {
   return metaPokemons
 }
@@ -68,6 +76,10 @@ export function getMetadata() {
 
 export function getMetaRegions() {
   return metaRegions
+}
+
+export function getMetaV2() {
+  return metaV2
 }
 
 export function computeSynergyAverages() {

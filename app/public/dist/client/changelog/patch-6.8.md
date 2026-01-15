@@ -145,4 +145,5 @@
 - New title: Poffin Master - Cook a Poffin with 3 different golden berries in it
 - New title: Top Gun - Get to Mach 10 with a Mach Ribbon
 - New title: Scout - Equip your team with at least 5 Silk Scarf made items
+- Added a new meta report section, with a cluster map
 - Change to the boosters: color variants are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple color variants (such as Flabebe or Vivillon) appearing in boosters.

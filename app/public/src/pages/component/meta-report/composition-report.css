@@ -7,26 +7,17 @@
 #meta-report-compo article {
   overflow-y: auto;
   display: flex;
-  justify-content: space-between;
   gap: 1em;
 }
 
 #meta-report-compo-list {
   overflow-y: scroll;
-  width: 50%;
-  padding-right: 2px;
+  flex: 1;
+  min-width: 0;
 }
 
-@media (width <= 1280px) {
-  #meta-report-compo article {
-    display: block;
-  }
-
-  #meta-report-compo svg {
-    display: none;
-  }
-
-  #meta-report-compo-list {
-    width: 100%;
-  }
+#meta-report-compo svg {
+  flex-shrink: 0;
+  width: 500px;
+  height: 700px;
 }
