@@ -92,7 +92,8 @@
     - Nullify Bandanna: 30 shield - Holder can no longer cast its ability. AP is converted to shield, and PP are converted to bonus special damage on attack.
 
 - Miracle seed, Leaf Stone and Sticky Barb now gives 15 max HP instead of 15 shield.
-- Removed base 15 shield from Gracidea flower and Max Revive.
+- Removed base 15 shield from Gracidea flower
+- Removed base stats of Max Revive
 - Removed base 15 shield from Smoke Ball. Shield received from Smoke Ball drop: 50 → 70
 - Kings Rock now gives 100 max HP instead of 100 shield. 35 → 30 % of max HP as shield on fight start. 
 - New recipe for Green Orb: Miracle Seed + Mystic Water. Base stats: 3 special defense → 15 HP
@@ -132,7 +133,7 @@
 
 # Bugfix
 
-- Field speed stacks are now correctly reset after resurrection
+- Resurrection now properly reset all temporary stat buffs, including field speed stacks and temporary buffs from abilities
 - Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 - Fossil starter portals now always offer an Eevee.
 - Fix the display of buried items when the digger is equipped with explorer kit.

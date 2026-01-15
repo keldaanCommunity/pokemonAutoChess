@@ -55,7 +55,6 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.KINGS_ROCK]: { [Stat.HP]: 100 },
   [Item.SHINY_CHARM]: { [Stat.DEF]: 3 },
   [Item.PROTECTIVE_PADS]: { [Stat.SHIELD]: 60, [Stat.ATK]: 6 },
-  [Item.MAX_REVIVE]: { [Stat.SPE_DEF]: 3, [Stat.SHIELD]: 15 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 40 },
   [Item.AMULET_COIN]: {},
   [Item.POKE_DOLL]: { [Stat.DEF]: 3, [Stat.SPE_DEF]: 3 },
