@@ -763,7 +763,11 @@ export class Scizor extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.STEEL)
+    return (
+      regionSynergies.includes(Synergy.STEEL) ||
+      regionSynergies.includes(Synergy.ARTIFICIAL) ||
+      regionSynergies.includes(Synergy.FIGHTING)
+    )
   }
 }
 
@@ -782,7 +786,11 @@ export class Kleavor extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.ROCK)
+    return (
+      regionSynergies.includes(Synergy.ROCK) ||
+      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.DARK)
+    )
   }
 }
 
@@ -5487,7 +5495,11 @@ export class GalarianZapdos extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
     const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.FIGHTING)
+    return (
+      regionSynergies.includes(Synergy.FIGHTING) ||
+      regionSynergies.includes(Synergy.WILD) ||
+      regionSynergies.includes(Synergy.FIELD)
+    )
   }
 }
 
@@ -5606,7 +5618,11 @@ export class GalarianMoltres extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO) {
     const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DARK)
+    return (
+      regionSynergies.includes(Synergy.DARK) ||
+      regionSynergies.includes(Synergy.PSYCHIC) ||
+      regionSynergies.includes(Synergy.GHOST)
+    )
   }
 }
 
@@ -5654,7 +5670,11 @@ export class GalarianArticuno extends Pokemon {
   regional = true
   isInRegion(map: DungeonPMDO) {
     const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.PSYCHIC)
+    return (
+      regionSynergies.includes(Synergy.PSYCHIC) ||
+      regionSynergies.includes(Synergy.FAIRY) ||
+      regionSynergies.includes(Synergy.DARK)
+    )
   }
 }
 
@@ -19308,7 +19328,8 @@ export class WalkingWake extends Pokemon {
     const regionSynergies = RegionDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.DRAGON) ||
-      regionSynergies.includes(Synergy.FOSSIL)
+      regionSynergies.includes(Synergy.FOSSIL) ||
+      regionSynergies.includes(Synergy.MONSTER)
     )
   }
 }
@@ -19545,7 +19566,7 @@ export class Spewpa extends Pokemon {
     Pkm.VIVILLON_POKE_BALL
   ]
   evolutionRule = new HatchEvolutionRule((pokemon, player) => {
-    return getColorVariantForPlayer(Pkm.VIVILLON, player)    
+    return getColorVariantForPlayer(Pkm.VIVILLON, player)
   })
   hp = 125
   atk = 11

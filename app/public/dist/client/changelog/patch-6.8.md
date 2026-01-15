@@ -62,6 +62,7 @@
 - Reduce Falinks Trooper price: 5 → 3 gold
 - Buff Smoochum line: Speed 55 → 61, PP 80 → 70
 - Buff Ogerpon Hearthflame passive: 20 → 30 special damage to adjacent enemies
+- Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
 
 # Changes to Synergies
 
