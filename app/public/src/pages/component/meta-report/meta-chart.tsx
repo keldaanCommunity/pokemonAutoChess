@@ -3,6 +3,8 @@ import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
 import { IMetaV2 } from "../../../../../models/mongo-models/meta-v2"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { clamp } from "../../../../../utils/number"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import "./meta-chart.css"
 import { rankType } from "./team-comp"
 
@@ -184,23 +186,52 @@ export function MetaChart(props: {
                         }
                       }}
                     />
-                    {synergy && (
-                      <g
-                        transform={`translate(${x(d.x)}, ${y(d.y)}) scale(${
-                          transform ? 1 / transform.k : 1
-                        })`}
-                      >
-                        <image
-                          x={-clamp(d.count, 8, 30) / 2}
-                          y={-clamp(d.count, 8, 30) / 2}
-                          width={clamp(d.count, 8, 30)}
-                          height={clamp(d.count, 8, 30)}
-                          href={`assets/types/${synergy}.svg`}
-                          className="synergy-icon"
-                          style={{ pointerEvents: "none" }}
-                        />
-                      </g>
-                    )}
+                    {d.mean_team?.pokemons &&
+                      (() => {
+                        const pokemonEntries = Object.entries(
+                          d.mean_team.pokemons
+                        )
+                        const mostPlayed = pokemonEntries.sort(
+                          (a, b) =>
+                            (b[1]?.frequency ?? 0) - (a[1]?.frequency ?? 0)
+                        )[0]
+                        const pokemonName = mostPlayed?.[0]
+
+                        const radius = clamp(d.count, 12, 42) / 2
+                        const clipPathId = `clip-pokemon-${d.cluster_id}`
+                        return pokemonName ? (
+                          <g
+                            transform={`translate(${x(d.x)}, ${y(d.y)}) scale(${
+                              transform ? 1 / transform.k : 1
+                            })`}
+                          >
+                            <defs>
+                              <clipPath id={clipPathId}>
+                                <circle cx={0} cy={0} r={radius} />
+                              </clipPath>
+                            </defs>
+                            <circle
+                              cx={0}
+                              cy={0}
+                              r={radius}
+                              fill="white"
+                              style={{ pointerEvents: "none" }}
+                            />
+                            <image
+                              x={-radius}
+                              y={-radius}
+                              width={radius * 2}
+                              height={radius * 2}
+                              href={getPortraitSrc(
+                                PkmIndex[pokemonName as keyof typeof PkmIndex]
+                              )}
+                              clipPath={`url(#${clipPathId})`}
+                              className="pokemon-portrait"
+                              style={{ pointerEvents: "none" }}
+                            />
+                          </g>
+                        ) : null
+                      })()}
                   </g>
                 )
               }
