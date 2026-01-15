@@ -2725,7 +2725,7 @@
 		"DURANT": "Durant-Basisangriffe verursachen 1 zusätzlichen TRUE für jeden BUG Verbündeten auf deinem Brett.",
 		"OGERPON_TEAL": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden erhalte [6,SP] ATK für jeden benachbarten Feind.",
 		"OGERPON_WELLSPRING": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nVerleiht beim Anwenden benachbarten Verbündeten [50,SP] HP and [25,SP] PP.",
-		"OGERPON_HEARTHFLAME": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden BURN man benachbarte Feinde für 5 Sekunden und [20,SP] SPECIAL ",
+		"OGERPON_HEARTHFLAME": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden BURN man benachbarte Feinde für 5 Sekunden und [30,SP] SPECIAL ",
 		"OGERPON_CORNERSTONE": "Ogerpon kann TEAL_MASK, HEARTHFLAME_MASK, WELLSPRING_MASK und CORNERSTONE_MASK tragen, um sein Aussehen zu ändern\nBeim Anwenden Erhalte PROTECT für [2,SP=0.5] Sekunden une FLINCH benachbarte Gegner 5 Sekunden lang zusammen",
 		"VICTINI": "Erhöht die Genauigkeit des Teams. Verbündete können nicht mehr Attacken verfehlen.",
 		"AEGISLASH": "Wechselt zwischen Schild- und Schwert-Form, wenn Fähigkeiten verwendet werden.",

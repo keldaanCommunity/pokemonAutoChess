@@ -16,7 +16,7 @@ import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
-import { max, min } from "../utils/number"
+import { clamp, max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
@@ -119,6 +119,11 @@ export default abstract class PokemonState {
 
       if (additionalSpecialDamagePart > 0) {
         specialDamage += Math.ceil(damage * additionalSpecialDamagePart)
+      }
+
+      if (pokemon.items.has(Item.NULLIFY_BANDANNA)) {
+        specialDamage += clamp(pokemon.pp, 0, pokemon.maxPP)
+        pokemon.pp = 0
       }
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {

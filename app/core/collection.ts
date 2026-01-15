@@ -71,13 +71,6 @@ export function pickRandomPokemonBooster(
             Unowns.includes(p) === false &&
             getPokemonData(p).skill !== Ability.DEFAULT
         )
-        // Include color variants in the pool
-        candidates
-          .filter((p) => p in PkmColorVariantsByPkm)
-          .forEach((p) => {
-            const colorVariants = PkmColorVariantsByPkm[p]!
-            candidates.push(...colorVariants)
-          })
         if (candidates.length > 0) {
           name = pickRandomIn(candidates) as Pkm
           break
@@ -87,6 +80,12 @@ export function pickRandomPokemonBooster(
   }
 
   const shiny = chance(0.05)
+
+  if (name in PkmColorVariantsByPkm) {
+    // If the selected Pokemon has color variants, pick one of them randomly
+    name = pickRandomIn([...name, PkmColorVariantsByPkm[name]!])
+  }
+
   const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
   const emotion =
     randomWeighted<Emotion>(
