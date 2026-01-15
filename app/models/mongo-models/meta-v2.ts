@@ -32,6 +32,10 @@ export interface IMetaV2 {
   mean_rank: number
   synergies: { [key in Synergy]?: number }
   mean_team: IMeanTeam
+  mean_items?: Array<{
+    item: string
+    frequency: number
+  }>
   top_teams?: ITopTeam[]
   hull?: [number, number][]
   x: number
@@ -75,6 +79,12 @@ const metaV2Schema = new Schema({
   },
   synergies: Object,
   mean_team: meanTeamSchema,
+  mean_items: [
+    new Schema({
+      item: String,
+      frequency: Number
+    })
+  ],
   top_teams: [
     new Schema({
       rank: Number,
