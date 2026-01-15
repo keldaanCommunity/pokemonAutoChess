@@ -56,7 +56,7 @@ import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
 import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
-import PokemonFactory from "../pokemon-factory"
+import PokemonFactory, { getColorVariantForPlayer } from "../pokemon-factory"
 import Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {
@@ -19545,37 +19545,8 @@ export class Spewpa extends Pokemon {
     Pkm.VIVILLON_POKE_BALL
   ]
   evolutionRule = new HatchEvolutionRule((pokemon, player) => {
-    const synergyVivillon: { synergy: Synergy; form: Pkm; count: number }[] = [
-      { synergy: Synergy.SOUND, form: Pkm.VIVILLON, count: 0 },
-      { synergy: Synergy.NORMAL, form: Pkm.VIVILLON_ICY_SNOW, count: 0 },
-      { synergy: Synergy.GHOST, form: Pkm.VIVILLON_POLAR, count: 0 },
-      { synergy: Synergy.ICE, form: Pkm.VIVILLON_TUNDRA, count: 0 },
-      { synergy: Synergy.FOSSIL, form: Pkm.VIVILLON_CONTINENTAL, count: 0 },
-      { synergy: Synergy.GRASS, form: Pkm.VIVILLON_GARDEN, count: 0 },
-      { synergy: Synergy.PSYCHIC, form: Pkm.VIVILLON_ELEGANT, count: 0 },
-      { synergy: Synergy.FIELD, form: Pkm.VIVILLON_MODERN, count: 0 },
-      { synergy: Synergy.WATER, form: Pkm.VIVILLON_MARINE, count: 0 },
-      { synergy: Synergy.FIGHTING, form: Pkm.VIVILLON_ARCHIPELAGO, count: 0 },
-      { synergy: Synergy.HUMAN, form: Pkm.VIVILLON_HIGH_PLAINS, count: 0 },
-      { synergy: Synergy.ROCK, form: Pkm.VIVILLON_SANDSTORM, count: 0 },
-      { synergy: Synergy.AQUATIC, form: Pkm.VIVILLON_RIVER, count: 0 },
-      { synergy: Synergy.STEEL, form: Pkm.VIVILLON_MONSOON, count: 0 },
-      { synergy: Synergy.ELECTRIC, form: Pkm.VIVILLON_SAVANNA, count: 0 },
-      { synergy: Synergy.FIRE, form: Pkm.VIVILLON_SUN, count: 0 },
-      { synergy: Synergy.LIGHT, form: Pkm.VIVILLON_OCEAN, count: 0 },
-      { synergy: Synergy.POISON, form: Pkm.VIVILLON_JUNGLE, count: 0 },
-      { synergy: Synergy.FAIRY, form: Pkm.VIVILLON_FANCY, count: 0 },
-      { synergy: Synergy.ARTIFICIAL, form: Pkm.VIVILLON_POKE_BALL, count: 0 }
-    ]
-
-    for (const s of synergyVivillon) {
-      s.count = player.synergies.get(s.synergy) || 0
-    }
-
-    synergyVivillon.sort((a, b) => b.count - a.count)
-    return synergyVivillon[0].form
+    return getColorVariantForPlayer(Pkm.VIVILLON, player)    
   })
-
   hp = 125
   atk = 11
   speed = 52

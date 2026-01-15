@@ -4,6 +4,7 @@ import { TownEncounter, TownEncounters } from "../core/town-encounters"
 import { Emotion, IPlayer, PkmCustom } from "../types"
 import { Stat } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
@@ -68,7 +69,7 @@ export default class PokemonFactory {
   }
 }
 
-export function getColorVariantForPlayer(basePkm: Pkm, player: Player): Pkm {
+export function getColorVariantForPlayer(basePkm: Pkm, player: IPlayer): Pkm {
   switch (basePkm) {
     case Pkm.FLABEBE: {
       switch (player.flowerPotsSpawnOrder[0]) {
@@ -109,6 +110,48 @@ export function getColorVariantForPlayer(basePkm: Pkm, player: Player): Pkm {
       }
       return Pkm.FLORGES
     }
+
+    case Pkm.VIVILLON: {
+      const synergyVivillon: { synergy: Synergy; form: Pkm; count: number }[] =
+        [
+          { synergy: Synergy.SOUND, form: Pkm.VIVILLON, count: 0 },
+          { synergy: Synergy.NORMAL, form: Pkm.VIVILLON_ICY_SNOW, count: 0 },
+          { synergy: Synergy.GHOST, form: Pkm.VIVILLON_POLAR, count: 0 },
+          { synergy: Synergy.ICE, form: Pkm.VIVILLON_TUNDRA, count: 0 },
+          { synergy: Synergy.FOSSIL, form: Pkm.VIVILLON_CONTINENTAL, count: 0 },
+          { synergy: Synergy.GRASS, form: Pkm.VIVILLON_GARDEN, count: 0 },
+          { synergy: Synergy.PSYCHIC, form: Pkm.VIVILLON_ELEGANT, count: 0 },
+          { synergy: Synergy.FIELD, form: Pkm.VIVILLON_MODERN, count: 0 },
+          { synergy: Synergy.WATER, form: Pkm.VIVILLON_MARINE, count: 0 },
+          {
+            synergy: Synergy.FIGHTING,
+            form: Pkm.VIVILLON_ARCHIPELAGO,
+            count: 0
+          },
+          { synergy: Synergy.HUMAN, form: Pkm.VIVILLON_HIGH_PLAINS, count: 0 },
+          { synergy: Synergy.ROCK, form: Pkm.VIVILLON_SANDSTORM, count: 0 },
+          { synergy: Synergy.AQUATIC, form: Pkm.VIVILLON_RIVER, count: 0 },
+          { synergy: Synergy.STEEL, form: Pkm.VIVILLON_MONSOON, count: 0 },
+          { synergy: Synergy.ELECTRIC, form: Pkm.VIVILLON_SAVANNA, count: 0 },
+          { synergy: Synergy.FIRE, form: Pkm.VIVILLON_SUN, count: 0 },
+          { synergy: Synergy.LIGHT, form: Pkm.VIVILLON_OCEAN, count: 0 },
+          { synergy: Synergy.POISON, form: Pkm.VIVILLON_JUNGLE, count: 0 },
+          { synergy: Synergy.FAIRY, form: Pkm.VIVILLON_FANCY, count: 0 },
+          {
+            synergy: Synergy.ARTIFICIAL,
+            form: Pkm.VIVILLON_POKE_BALL,
+            count: 0
+          }
+        ]
+
+      for (const s of synergyVivillon) {
+        s.count = player.synergies.get(s.synergy) || 0
+      }
+
+      synergyVivillon.sort((a, b) => b.count - a.count)
+      return synergyVivillon[0].form
+    }
+
     default:
       return basePkm
   }
@@ -130,7 +173,26 @@ export const PkmColorVariants: readonly Pkm[] = [
   Pkm.MINIOR_KERNEL_RED,
   Pkm.MINIOR_KERNEL_ORANGE,
   Pkm.MINIOR_KERNEL_GREEN,
-  Pkm.MINIOR_KERNEL_BLUE
+  Pkm.MINIOR_KERNEL_BLUE,
+  Pkm.VIVILLON_ICY_SNOW,
+  Pkm.VIVILLON_POLAR,
+  Pkm.VIVILLON_TUNDRA,
+  Pkm.VIVILLON_CONTINENTAL,
+  Pkm.VIVILLON_GARDEN,
+  Pkm.VIVILLON_ELEGANT,
+  Pkm.VIVILLON_MODERN,
+  Pkm.VIVILLON_MARINE,
+  Pkm.VIVILLON_ARCHIPELAGO,
+  Pkm.VIVILLON_HIGH_PLAINS,
+  Pkm.VIVILLON_SANDSTORM,
+  Pkm.VIVILLON_RIVER,
+  Pkm.VIVILLON_MONSOON,
+  Pkm.VIVILLON_SAVANNA,
+  Pkm.VIVILLON_SUN,
+  Pkm.VIVILLON_OCEAN,
+  Pkm.VIVILLON_JUNGLE,
+  Pkm.VIVILLON_FANCY,
+  Pkm.VIVILLON_POKE_BALL
 ]
 
 export type PkmColorVariant = (typeof PkmColorVariants)[number]
@@ -159,6 +221,27 @@ export const PkmColorVariantsByPkm = {
     Pkm.MINIOR_KERNEL_ORANGE,
     Pkm.MINIOR_KERNEL_GREEN,
     Pkm.MINIOR_KERNEL_BLUE
+  ],
+  [Pkm.VIVILLON]: [
+    Pkm.VIVILLON_ICY_SNOW,
+    Pkm.VIVILLON_POLAR,
+    Pkm.VIVILLON_TUNDRA,
+    Pkm.VIVILLON_CONTINENTAL,
+    Pkm.VIVILLON_GARDEN,
+    Pkm.VIVILLON_ELEGANT,
+    Pkm.VIVILLON_MODERN,
+    Pkm.VIVILLON_MARINE,
+    Pkm.VIVILLON_ARCHIPELAGO,
+    Pkm.VIVILLON_HIGH_PLAINS,
+    Pkm.VIVILLON_SANDSTORM,
+    Pkm.VIVILLON_RIVER,
+    Pkm.VIVILLON_MONSOON,
+    Pkm.VIVILLON_SAVANNA,
+    Pkm.VIVILLON_SUN,
+    Pkm.VIVILLON_OCEAN,
+    Pkm.VIVILLON_JUNGLE,
+    Pkm.VIVILLON_FANCY,
+    Pkm.VIVILLON_POKE_BALL
   ]
 } satisfies { [base in Pkm]?: PkmColorVariant[] }
 

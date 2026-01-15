@@ -1,6 +1,6 @@
 import { EvolutionTime } from "../config"
 import Player from "../models/colyseus-models/player"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { IPlayer } from "../types"
 import { Ability } from "../types/enum/Ability"
