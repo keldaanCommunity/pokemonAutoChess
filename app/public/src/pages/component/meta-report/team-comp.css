@@ -1,0 +1,135 @@
+.team-comp-header {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.team-comp-container {
+  display: flex;
+  gap: 2em;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.team-comp-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  flex: 1;
+}
+
+.synergy-group {
+  display: flex;
+  gap: 0;
+  width: fit-content;
+}
+
+.synergy-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-container {
+  position: relative;
+}
+
+.player-team-pokemons,
+.team-pokemons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.player-team-pokemons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.team-pokemons {
+  gap: 4px;
+}
+
+.player-team-pokemons > div,
+.team-pokemons > div {
+  position: relative;
+}
+
+.player-team-pokemons .pokemon-portrait {
+  width: 60px;
+  height: 60px;
+  margin: 10px 0;
+}
+
+.team-pokemons .pokemon-portrait {
+  width: 40px;
+  height: 40px;
+}
+
+.player-team-pokemons .pokemon-items {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  display: flex;
+}
+
+.player-team-pokemons .pokemon-items img {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+}
+
+.player-team-pokemons .pokemon-frequency {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.85em;
+  color: white !important;
+}
+
+.top-teams-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+}
+
+.top-team-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.9em;
+  padding: 0.5em 0;
+}
+
+.team-rank {
+  min-width: 2em;
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+}
+
+.team-elo {
+  font-size: 0.75em;
+  color: #999;
+}
+
+.team-pokemons .pokemon-items {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  display: flex;
+  gap: 1px;
+}
+
+.team-pokemons .pokemon-items img {
+  width: 12px;
+  height: 12px;
+  image-rendering: pixelated;
+}

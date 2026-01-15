@@ -42,7 +42,8 @@ import {
   getMetadata,
   getMetaItems,
   getMetaPokemons,
-  getMetaRegions
+  getMetaRegions,
+  getMetaV2
 } from "./services/meta"
 import { Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
@@ -243,23 +244,6 @@ export default config({
       res.send(SynergyTriggers)
     })
 
-    app.get("/meta", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
-      res.send(
-        await Meta.find({}, [
-          "cluster_id",
-          "count",
-          "ratio",
-          "winrate",
-          "mean_rank",
-          "types",
-          "pokemons",
-          "x",
-          "y"
-        ])
-      )
-    })
-
     app.get("/titles", async (req, res) => {
       res.send(await TitleStatistic.find().sort({ name: 1 }).exec()) // Ensure a consistent order by sorting on a unique field
     })
@@ -286,6 +270,12 @@ export default config({
       // Set Cache-Control header for 24 hours (86400 seconds)
       res.set("Cache-Control", "max-age=86400")
       res.send(getMetaRegions())
+    })
+
+    app.get("/meta-v2", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      res.set("Cache-Control", "max-age=86400")
+      res.send(getMetaV2())
     })
 
     app.get("/meta/types", async (req, res) => {
@@ -529,7 +519,6 @@ export default config({
      * Before before gameServer.listen() is called.
      */
     connect(process.env.MONGO_URI!, {
-      maxPoolSize: MAX_POOL_CONNECTIONS_SIZE,
       socketTimeoutMS: 45000
     })
     admin.initializeApp({
