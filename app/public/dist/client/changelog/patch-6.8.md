@@ -60,6 +60,8 @@
 - Change Comfey: holder no longer gains speed and AP from Comfey, only max HP, Attack, Defense and Special Defense. Comfey speed 57 → 64
 - Buff Flapple: range 2 → 3
 - Reduce Falinks Trooper price: 5 → 3 gold
+- Buff Smoochum line: Speed 55 → 61, PP 80 → 70
+- Buff Ogerpon Hearthflame passive: 20 → 30 special damage to adjacent enemies
 
 # Changes to Synergies
 
@@ -80,13 +82,13 @@
     - Friend Bow: 15 shield - The holder gains the Normal type.
     - Black Belt: 15 shield, 20% crit chance - Critical attacks provide 33% of the damage dealt as Shield.
     - Mach Ribbon: 15 shield, 10 speed - Every 4 seconds, gain 20 Speed.
-    - Explosive Band: 50 shield, 5 attack - The first time user shield is depleted, this item explodes, dealing 50% of all Shield gained so far as special damage to adjacent enemies.
+    - Explosive Band: 50 shield, 3 attack - The first time user shield is depleted, this item explodes, dealing 30% of all Shield gained so far as special damage to adjacent enemies.
     - Twist Band: 20 special defense, 50 shield - Stat debuffs inflicted by enemies become buffs instead.
     - Big Eater Belt: 15 shield, 50 HP - Increase all permanent stat buffs received by 25%. Allows the wearer to eat 2 different dishes per round.
     - Lucky Ribbon: 10 defense, 50 AP -Increase holder's Luck by 30%
     - Cover Band: 12 defense, 50 shield - If an adjacent ally is about to get KO with some incoming damage, the wearer takes the damage instead.
-    - Efficient Bandanna: 15 shield, 15 PP - The holder and allies adjacent in the same row have their max PP reduced by 20%.
-    - Nullify Bandanna: 30 shield - Holder can no longer cast its ability. 100% (scales with AP) of PP gained are converted to Shield.
+    - Efficient Bandanna: 15 shield, 15 PP - The holder and allies adjacent in the same row have their max PP reduced by 10%.
+    - Nullify Bandanna: 30 shield - Holder can no longer cast its ability. AP is converted to shield, and PP are converted to bonus special damage on attack.
 
 - Miracle seed, Leaf Stone and Sticky Barb now gives 15 max HP instead of 15 shield.
 - Removed base 15 shield from Gracidea flower and Max Revive.
@@ -101,9 +103,11 @@
 - Heat stone changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
 - Buff Rock Salt: 15 → 20% of max HP as shield on fight start.
-- Buff Berserk Gene: Attack 5 → 10
 - Tiny mushroom is rebranded as Shed Shell. No change to the effect.
 - New dishes, Mushrooms: Tiny Mushroom, Big Mushroom, Balm mushroom
+- Buff Berserk Gene: Attack 5 → 10
+- Buff Explorer Kit: give 5 Attack, 5 Defense and 5 Special Defense as base stats
+- Nerf Spell Tag: Curse duration increased: 9 → 10 seconds
 
 # Gameplay
 
@@ -115,6 +119,7 @@
 - Removed the reward change between component and full item on stage 19 PvE, based on the amount of components collected. It is too easy to manipulate with Silk Scarf, Unown-I and ground digging. Stage 19 PvE now always offers a full craftable item as a reward.
 - New town encounter: Cinccino
 - Makuhita can now be encountered at stage 17, and no longer at stage 22
+- Portal symbols generation at stage 20 has been reworked to more consistently provide symbols for your top synergies in horizontal compositions such as Dragon/Amorphous.
 
 # UI
 
@@ -141,3 +146,4 @@
 - New title: Top Gun - Get to Mach 10 with a Mach Ribbon
 - New title: Scout - Equip your team with at least 5 Silk Scarf made items
 - Added a new meta report section, with a cluster map
+- Change to the boosters: color variants are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple color variants (such as Flabebe or Vivillon) appearing in boosters.

@@ -62,6 +62,7 @@ import {
   OnResurrectEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
+  OnSpawnEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -1208,7 +1209,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ),
   [Item.SPELL_TAG]: [
     new OnDeathEffect(({ attacker }) => {
-      attacker?.status.triggerCurse(9000, attacker)
+      attacker?.status.triggerCurse(10000, attacker)
     })
   ],
 
@@ -1225,7 +1226,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           ? pokemon.simulation.blueDpsMeter
           : pokemon.simulation.redDpsMeter
       const shieldGained = dps.get(pokemon.id)?.shield ?? 0
-      const explosionDamage = Math.round(0.5 * shieldGained)
+      const explosionDamage = Math.round(0.3 * shieldGained)
 
       adjacentCells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
@@ -1253,7 +1254,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           entity.positionY
         )
         if (ally) {
-          ally.maxPP = Math.round(0.8 * ally.maxPP)
+          ally.maxPP = Math.round(0.9 * ally.maxPP)
         }
       })
     }, Item.EFFICIENT_BANDANNA)

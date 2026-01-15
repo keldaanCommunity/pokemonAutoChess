@@ -478,12 +478,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      if (value <= 0) return // cannot lose PP
-      this.addShield(value, caster, 1, false) // PP are gained as shield instead
-      return
-    }
-
     if (
       !(value > 0 && this.status.silence) &&
       !(value > 0 && this.status.protect) &&
@@ -615,7 +609,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const update = (target: { ap: number }) => {
       target.ap = min(-100)(target.ap + value)
     }
-    update(this)
+
+    if (this.items.has(Item.NULLIFY_BANDANNA)) {
+      this.addShield(value, caster, 0, false) // AP is gained as shield instead
+    } else {
+      update(this)
+    }
+
     if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }

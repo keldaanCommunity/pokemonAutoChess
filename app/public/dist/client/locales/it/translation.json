@@ -2220,7 +2220,7 @@
 		"DURANT": "Gli attacchi base di Durant infliggono 1 danno puro extra per ogni alleato BUG sul tuo terreno.",
 		"OGERPON_TEAL": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, guadagna [6,SP] ATK per ogni nemico adiacente.",
 		"OGERPON_WELLSPRING": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, dai [50,SP] e [25,SP] PP agli alleati adiacenti",
-		"OGERPON_HEARTHFLAME": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, infliggi [20,SP] SPECIAL e BURN ai nemici adiacenti per 5 secondi.",
+		"OGERPON_HEARTHFLAME": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, infliggi [30,SP] SPECIAL e BURN ai nemici adiacenti per 5 secondi.",
 		"OGERPON_CORNERSTONE": "Ogerpon può equipaggiare la TEAL_MASK, la HEARTHFLAME_MASK, la WELLSPRING_MASK e la CORNERSTONE_MASK per cambiare la sua forma. Quando Ogerpon lancia la sua abilità, guadagna PROTECT per [2,SP=0.5] secondi e causa FLINCH ai nemici adiacenti per 5 secondi.",
 		"VICTINI": "Gli attacchi degli alleati non possono più mancare.",
 		"AEGISLASH": "Alternati tra la Forma Scudo e la Forma Spada quando l'abilità viene usata.",

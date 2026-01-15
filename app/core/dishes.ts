@@ -14,6 +14,7 @@ import {
   OnSpawnEffect,
   PeriodicEffect
 } from "./effects/effect"
+import { FIGHTING_PHASE_DURATION } from "../config"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
@@ -188,7 +189,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   HERBA_MYSTICA_SALTY: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(40000)
+      entity.status.triggerRuneProtect(FIGHTING_PHASE_DURATION)
     })
   ],
   HONEY: [],

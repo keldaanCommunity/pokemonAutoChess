@@ -1,6 +1,6 @@
 import { EvolutionTime } from "../config"
 import Player from "../models/colyseus-models/player"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { IPlayer } from "../types"
 import { Ability } from "../types/enum/Ability"
@@ -104,7 +104,7 @@ export class CountEvolutionRule extends EvolutionRule {
     const copies = values(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )
-    return copies.length >= this.numberRequired - 1
+    return copies.length === this.numberRequired - 1
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
