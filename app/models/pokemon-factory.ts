@@ -126,7 +126,11 @@ export const PkmColorVariants: readonly Pkm[] = [
   Pkm.FLORGES_YELLOW,
   Pkm.FLORGES_ORANGE,
   Pkm.FLORGES_BLUE,
-  Pkm.FLORGES_WHITE
+  Pkm.FLORGES_WHITE,
+  Pkm.MINIOR_KERNEL_RED,
+  Pkm.MINIOR_KERNEL_ORANGE,
+  Pkm.MINIOR_KERNEL_GREEN,
+  Pkm.MINIOR_KERNEL_BLUE
 ]
 
 export type PkmColorVariant = (typeof PkmColorVariants)[number]
@@ -149,6 +153,12 @@ export const PkmColorVariantsByPkm = {
     Pkm.FLORGES_ORANGE,
     Pkm.FLORGES_BLUE,
     Pkm.FLORGES_WHITE
+  ],
+  [Pkm.MINIOR]: [
+    Pkm.MINIOR_KERNEL_RED,
+    Pkm.MINIOR_KERNEL_ORANGE,
+    Pkm.MINIOR_KERNEL_GREEN,
+    Pkm.MINIOR_KERNEL_BLUE
   ]
 } satisfies { [base in Pkm]?: PkmColorVariant[] }
 
