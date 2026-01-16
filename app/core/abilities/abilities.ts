@@ -11452,6 +11452,20 @@ export class BrickBreakStrategy extends AbilityStrategy {
   }
 }
 
+export class ReturnStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.addAbilityPower(2, pokemon, 0, false, true)
+  }
+}
+
 export class TauntStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16205,6 +16219,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TOPSY_TURVY]: new TopsyTurvyStrategy(),
   [Ability.RAGE]: new RageStrategy(),
   [Ability.BRICK_BREAK]: new BrickBreakStrategy(),
+  [Ability.RETURN]: new ReturnStrategy(),
   [Ability.TAUNT]: new TauntStrategy(),
   [Ability.BULK_UP]: new BulkUpStrategy(),
   [Ability.CUT]: new CutStrategy(),
