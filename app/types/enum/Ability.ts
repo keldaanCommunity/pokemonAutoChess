@@ -412,6 +412,7 @@ export enum Ability {
   ICE_BALL = "ICE_BALL",
   RAGE = "RAGE",
   BRICK_BREAK = "BRICK_BREAK",
+  RETURN = "RETURN",
   TAUNT = "TAUNT",
   BULK_UP = "BULK_UP",
   CUT = "CUT",

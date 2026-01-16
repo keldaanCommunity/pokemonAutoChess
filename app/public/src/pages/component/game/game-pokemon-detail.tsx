@@ -112,6 +112,10 @@ export function GamePokemonDetail(props: {
     props.origin
   ])
 
+  const getStatWithItemBonus = (stat: Stat): number | undefined => {
+    return pokemonStats.find((s) => s.stat === stat)?.value
+  }
+
   let dish = DishByPkm[pokemon.name]
   if (!dish && pokemon.types.has(Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
@@ -289,8 +293,8 @@ export function GamePokemonDetail(props: {
             <AbilityTooltip
               ability={pokemon.skill}
               stats={{
-                ap: pokemon.ap,
-                luck: pokemon.luck,
+                ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
+                luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars: pokemon.stars,
                 stages: getPokemonData(pokemon.name).stages
               }}
