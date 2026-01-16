@@ -9957,7 +9957,57 @@ export class TypeNull extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 2
   evolution = Pkm.SILVALLY
-  evolutionRule = new ItemEvolutionRule([...SynergyItems])
+  evolutionRule = new ItemEvolutionRule(
+    [...SynergyItems],
+    (pokemon, player, item) => {
+      switch (SynergyGivenByItem[item]) {
+        case Synergy.BUG:
+          return Pkm.SILVALLY_BUG
+        case Synergy.DARK:
+          return Pkm.SILVALLY_DARK
+        case Synergy.DRAGON:
+        case Synergy.FOSSIL:
+          return Pkm.SILVALLY_DRAGON
+        case Synergy.ELECTRIC:
+          return Pkm.SILVALLY_ELECTRIC
+        case Synergy.FAIRY:
+        case Synergy.AMORPHOUS:
+          return Pkm.SILVALLY_FAIRY
+        case Synergy.FIGHTING:
+        case Synergy.WILD:
+          return Pkm.SILVALLY_FIGHTING
+        case Synergy.FIRE:
+        case Synergy.GOURMET:
+          return Pkm.SILVALLY_FIRE
+        case Synergy.FLYING:
+          return Pkm.SILVALLY_FLYING
+        case Synergy.GHOST:
+          return Pkm.SILVALLY_GHOST
+        case Synergy.GRASS:
+        case Synergy.FLORA:
+          return Pkm.SILVALLY_GRASS
+        case Synergy.GROUND:
+        case Synergy.FIELD:
+          return Pkm.SILVALLY_GROUND
+        case Synergy.ICE:
+          return Pkm.SILVALLY_ICE
+        case Synergy.POISON:
+        case Synergy.MONSTER:
+          return Pkm.SILVALLY_POISON
+        case Synergy.PSYCHIC:
+          return Pkm.SILVALLY_PSYCHIC
+        case Synergy.ROCK:
+          return Pkm.SILVALLY_ROCK
+        case Synergy.STEEL:
+        case Synergy.ARTIFICIAL:
+          return Pkm.SILVALLY_STEEL
+        case Synergy.WATER:
+        case Synergy.AQUATIC:
+          return Pkm.SILVALLY_WATER
+      }
+      return Pkm.SILVALLY
+    }
+  )
   hp = 260
   atk = 20
   speed = 55
@@ -10003,7 +10053,8 @@ export class Silvally extends Pokemon {
       values(this.items).filter((item) =>
         (SynergyItems as ReadonlyArray<Item>).includes(item)
       ).length === 0 &&
-      player.getPokemonAt(this.positionX, this.positionY)?.name === Pkm.SILVALLY
+      player.getPokemonAt(this.positionX, this.positionY)?.name !==
+        Pkm.TYPE_NULL
     ) {
       player.transformPokemon(this, Pkm.TYPE_NULL)
     }
@@ -20758,6 +20809,23 @@ export const PokemonClasses: Record<
   [Pkm.ARIADOS]: Ariados,
   [Pkm.TYPE_NULL]: TypeNull,
   [Pkm.SILVALLY]: Silvally,
+  [Pkm.SILVALLY_FIGHTING]: Silvally,
+  [Pkm.SILVALLY_FLYING]: Silvally,
+  [Pkm.SILVALLY_POISON]: Silvally,
+  [Pkm.SILVALLY_GROUND]: Silvally,
+  [Pkm.SILVALLY_ROCK]: Silvally,
+  [Pkm.SILVALLY_BUG]: Silvally,
+  [Pkm.SILVALLY_GHOST]: Silvally,
+  [Pkm.SILVALLY_STEEL]: Silvally,
+  [Pkm.SILVALLY_FIRE]: Silvally,
+  [Pkm.SILVALLY_WATER]: Silvally,
+  [Pkm.SILVALLY_GRASS]: Silvally,
+  [Pkm.SILVALLY_ELECTRIC]: Silvally,
+  [Pkm.SILVALLY_PSYCHIC]: Silvally,
+  [Pkm.SILVALLY_ICE]: Silvally,
+  [Pkm.SILVALLY_DRAGON]: Silvally,
+  [Pkm.SILVALLY_DARK]: Silvally,
+  [Pkm.SILVALLY_FAIRY]: Silvally,
   [Pkm.DEWPIDER]: Dewpider,
   [Pkm.ARAQUANID]: Araquanid,
   [Pkm.ROCKRUFF]: Rockruff,

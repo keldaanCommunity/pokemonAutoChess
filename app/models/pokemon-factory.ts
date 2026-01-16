@@ -192,7 +192,24 @@ export const PkmColorVariants: readonly Pkm[] = [
   Pkm.VIVILLON_OCEAN,
   Pkm.VIVILLON_JUNGLE,
   Pkm.VIVILLON_FANCY,
-  Pkm.VIVILLON_POKE_BALL
+  Pkm.VIVILLON_POKE_BALL,
+  Pkm.SILVALLY_FIGHTING,
+  Pkm.SILVALLY_FLYING,
+  Pkm.SILVALLY_POISON,
+  Pkm.SILVALLY_GROUND,
+  Pkm.SILVALLY_ROCK,
+  Pkm.SILVALLY_BUG,
+  Pkm.SILVALLY_GHOST,
+  Pkm.SILVALLY_STEEL,
+  Pkm.SILVALLY_FIRE,
+  Pkm.SILVALLY_WATER,
+  Pkm.SILVALLY_GRASS,
+  Pkm.SILVALLY_ELECTRIC,
+  Pkm.SILVALLY_PSYCHIC,
+  Pkm.SILVALLY_ICE,
+  Pkm.SILVALLY_DRAGON,
+  Pkm.SILVALLY_DARK,
+  Pkm.SILVALLY_FAIRY
 ]
 
 export type PkmColorVariant = (typeof PkmColorVariants)[number]
@@ -242,6 +259,25 @@ export const PkmColorVariantsByPkm = {
     Pkm.VIVILLON_JUNGLE,
     Pkm.VIVILLON_FANCY,
     Pkm.VIVILLON_POKE_BALL
+  ],
+  [Pkm.SILVALLY]: [
+    Pkm.SILVALLY_FIGHTING,
+    Pkm.SILVALLY_FLYING,
+    Pkm.SILVALLY_POISON,
+    Pkm.SILVALLY_GROUND,
+    Pkm.SILVALLY_ROCK,
+    Pkm.SILVALLY_BUG,
+    Pkm.SILVALLY_GHOST,
+    Pkm.SILVALLY_STEEL,
+    Pkm.SILVALLY_FIRE,
+    Pkm.SILVALLY_WATER,
+    Pkm.SILVALLY_GRASS,
+    Pkm.SILVALLY_ELECTRIC,
+    Pkm.SILVALLY_PSYCHIC,
+    Pkm.SILVALLY_ICE,
+    Pkm.SILVALLY_DRAGON,
+    Pkm.SILVALLY_DARK,
+    Pkm.SILVALLY_FAIRY
   ]
 } satisfies { [base in Pkm]?: PkmColorVariant[] }
 
