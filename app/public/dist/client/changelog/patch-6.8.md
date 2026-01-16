@@ -115,6 +115,7 @@
 # Gameplay
 
 - Locked status now prevents dodging
+- Curse status on cleanse got its delay increased by ~~1~~ 2 seconds
 - Stage 15 component pick is back, and stage 2 no longer gives a random component as a reward. Instead, the rewards of stage 2 are the 1 out of 3 component pick proposed on stage 3.
 - Fire weather is renamed to Drought
 - Zenith is now the weather triggered by Grass synergy. New effect: +15% healing, -30% Sleep duration

@@ -123,7 +123,7 @@ export default class Status extends Schema implements IStatus {
     this.flinchCooldown = 0
     this.armorReductionCooldown = 0
     if (this.curse && this.curseCooldown > 0) {
-      this.curseCooldown += 1000 // do not clear curseCooldown on purpose
+      this.curseCooldown += 2000 // do not clear curseCooldown on purpose
     }
     this.curse = false
     this.possessedCooldown = 0
