@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor } from "../../../../../config"
+import { PkmColorVariants } from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -48,6 +49,14 @@ export default function WikiPokemons() {
       }}
     >
       <div className="filters">
+        <Checkbox
+          checked={preferences.showColorVariants}
+          onToggle={(checked) => {
+            setPreferences({ showColorVariants: checked })
+          }}
+          label={t("show_color_variants")}
+          isDark
+        />
         <Checkbox
           checked={preferences.showEvolutions}
           onToggle={(checked) => {
@@ -112,6 +121,7 @@ export function WikiPokemon(props: {
   pool: string
   onSelect: (pkm: Pkm) => void
 }) {
+  const [preferences, setPreferences] = usePreferences()
   const pokemons = useMemo(
     () =>
       PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity]
@@ -125,6 +135,8 @@ export function WikiPokemon(props: {
           if (props.pool === "regular" && (additional || regional || special))
             return false
 
+          if (PkmColorVariants.includes(p) && !preferences.showColorVariants)
+            return false
           if (
             !props.showEvolutions &&
             PkmFamily[p] !== p &&
@@ -138,7 +150,12 @@ export function WikiPokemon(props: {
             ? getPokemonData(a).stars - getPokemonData(b).stars
             : PkmIndex[PkmFamily[a]].localeCompare(PkmIndex[PkmFamily[b]])
         }),
-    [props.rarity, props.pool, props.showEvolutions]
+    [
+      props.rarity,
+      props.pool,
+      props.showEvolutions,
+      preferences.showColorVariants
+    ]
   ) as Pkm[]
 
   return (

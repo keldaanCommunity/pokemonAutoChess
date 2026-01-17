@@ -3,10 +3,12 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor, SynergyTriggers } from "../../../../../config"
 import { SynergyEffects } from "../../../../../models/effects"
+import { PkmColorVariants } from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
+import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
@@ -61,7 +63,10 @@ export function WikiType(props: { type: Synergy }) {
     .filter((p, index, list) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
+      if (!preferences.showColorVariants && PkmColorVariants.includes(p.name))
+        return false
       if (preferences.showEvolutions) return true
+
       const prevolution = list.find(
         (p2) =>
           p2.evolution === p.name ||
@@ -141,6 +146,14 @@ export function WikiType(props: { type: Synergy }) {
 
       <hr />
       <div style={{ float: "right", justifyItems: "end" }}>
+        <Checkbox
+          checked={preferences.showColorVariants}
+          onToggle={(checked) => {
+            setPreferences({ showColorVariants: checked })
+          }}
+          label={t("show_color_variants")}
+          isDark
+        />
         <Checkbox
           checked={preferences.showEvolutions}
           onToggle={(checked) => {
@@ -233,6 +246,10 @@ export function WikiAllTypes() {
       pokemonsPerType[type].push(p)
     }
   }
+  pokemonsPerType["protean"] = [
+    getPokemonData(Pkm.KECLEON),
+    getPokemonData(Pkm.ARCEUS)
+  ]
 
   for (const type in pokemonsPerType) {
     pokemonsPerType[type].sort((a, b) =>
@@ -243,15 +260,22 @@ export function WikiAllTypes() {
   }
 
   const { t } = useTranslation()
+  const types = [...SynergyArray, "protean"] as const
 
   return (
     <>
       <div id="wiki-types-all">
-        {SynergyArray.map((type) => {
+        {types.map((type) => {
           return (
             <section key={type}>
               <h2>
-                <SynergyIcon type={type} /> {t(`synergy.${type}`)}
+                {type === "protean" ? (
+                  t("type_fluid")
+                ) : (
+                  <>
+                    <SynergyIcon type={type} /> {t(`synergy.${type}`)}
+                  </>
+                )}
               </h2>
               <ul>
                 {(pokemonsPerType[type] ?? []).map((p) => {

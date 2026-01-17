@@ -25,6 +25,7 @@ export interface IPreferencesState {
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   showEvolutions: boolean
+  showColorVariants: boolean
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   disableCameraShake: boolean
@@ -45,6 +46,7 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
+  showColorVariants: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   disableCameraShake: true,
@@ -73,9 +75,10 @@ const LEGACY_DOM_TO_PHASER: Record<string, string> = {
   ARROWRIGHT: "RIGHT"
 }
 
-function migrateLegacyKeybindings(
-  stored: any
-): { migrated: any; changed: boolean } {
+function migrateLegacyKeybindings(stored: any): {
+  migrated: any
+  changed: boolean
+} {
   const keybindings = stored?.keybindings
   if (!keybindings || typeof keybindings !== "object") {
     return { migrated: stored, changed: false }
@@ -94,7 +97,10 @@ function migrateLegacyKeybindings(
   }
 
   if (!changed) return { migrated: stored, changed: false }
-  return { migrated: { ...stored, keybindings: migratedKeybindings }, changed: true }
+  return {
+    migrated: { ...stored, keybindings: migratedKeybindings },
+    changed: true
+  }
 }
 
 function loadPreferences(): IPreferencesState {
