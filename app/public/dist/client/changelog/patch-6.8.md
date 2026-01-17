@@ -123,7 +123,7 @@
 - Removed the reward change between component and full item on stage 19 PvE, based on the amount of components collected. It is too easy to manipulate with Silk Scarf, Unown-I and ground digging. Stage 19 PvE now always offers a full craftable item as a reward.
 - New town encounter: Cinccino
 - Makuhita can now be encountered at stage 17, and no longer at stage 22
-- Portal symbols generation at stage 20 has been reworked to more consistently provide symbols for your top synergies in horizontal compositions such as Dragon/Amorphous.
+- Portal symbols generation at stage 20 has been reworked. Issue 1 : In horizontal compositions such as Dragon/Amorphous, too many synergy steps are activated, leading to very inconsistent symbol generation. Solution: truncate the symbols pool size to max 7, ordered by top synergy as shown in the synergy menu. Issue 2 :Vertical comps are too consistent in symbol generation, especially when several players play the same synergy. Solution: limit the amount of symbols of the same synergy to the number of players alive.
 
 # UI
 
