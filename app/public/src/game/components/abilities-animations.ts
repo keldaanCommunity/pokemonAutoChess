@@ -994,6 +994,10 @@ export const AbilitiesAnimations: {
     scale: 4
   }),
   [Ability.TORMENT]: onCaster({ positionOffset: [0, -50] }),
+  [Ability.RAGING_BULL]: onCaster({
+    positionOffset: [0, -50],
+    ability: Ability.TORMENT
+  }),
   [Ability.RAGE]: onCaster({
     ability: Ability.TORMENT,
     positionOffset: [0, -50],

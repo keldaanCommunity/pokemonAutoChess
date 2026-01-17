@@ -545,7 +545,8 @@
 		"EAR_DIG": "Ear Dig",
 		"POWDER_SNOW": "Powder Snow",
 		"POWDER": "Powder",
-		"LINGERING_AROMA": "Lingering Aroma"
+		"LINGERING_AROMA": "Lingering Aroma",
+		"RAGING_BULL": "Raging Bull"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -967,6 +968,9 @@
 		"CACNEA": "Cacnea",
 		"CACTURNE": "Cacturne",
 		"TAUROS": "Tauros",
+		"TAUROS_COMBAT_BREED": "Tauros (Combat Breed)",
+		"TAUROS_BLAZE_BREED": "Tauros (Blaze Breed)",
+		"TAUROS_AQUA_BREED": "Tauros (Aqua Breed)",
 		"HAPPINY": "Happiny",
 		"CHANSEY": "Chansey",
 		"BLISSEY": "Blissey",
@@ -2182,7 +2186,8 @@
 		"EAR_DIG": "Deal [30,60,120,SP] SPECIAL + [5,10,20,SP] per depth level of the hole the target is in. If the target is not in a hole, also dig a hole under them.",
 		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.",
 		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds.",
-		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] SPECIAL and lose 5 PP."
+		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] SPECIAL and lose 5 PP.",
+		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target"
 	},
 	"effect": {
 		"STAMINA": "Stamina",

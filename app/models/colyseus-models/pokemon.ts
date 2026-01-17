@@ -5863,17 +5863,91 @@ export class Regirock extends Pokemon {
 }
 
 export class Tauros extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.NORMAL, Synergy.FIELD])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
-  atk = 17
+  atk = 16
   speed = 60
-  def = 14
+  def = 10
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.HEAD_SMASH
+  skill = Ability.RAGING_BULL
+}
+
+export class TaurosCombatBreed extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.FIGHTING,
+    Synergy.FIELD
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  speed = 60
+  def = 10
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RAGING_BULL
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies ?? []
+    return (
+      regionSynergies.includes(Synergy.FIGHTING) ||
+      regionSynergies.includes(Synergy.ROCK)
+    )
+  }
+}
+
+export class TaurosBlazeBreed extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  speed = 60
+  def = 10
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RAGING_BULL
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies ?? []
+    return (
+      regionSynergies.includes(Synergy.FIRE) ||
+      regionSynergies.includes(Synergy.LIGHT)
+    )
+  }
+}
+
+export class TaurosAquaBreed extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.WILD,
+    Synergy.WATER,
+    Synergy.FIGHTING
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 16
+  speed = 60
+  def = 10
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.RAGING_BULL
+  regional = true
+  isInRegion(map: DungeonPMDO, state: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies ?? []
+    return (
+      regionSynergies.includes(Synergy.WATER) ||
+      regionSynergies.includes(Synergy.AQUATIC)
+    )
+  }
 }
 
 export class Heracross extends Pokemon {
@@ -20407,6 +20481,9 @@ export const PokemonClasses: Record<
   [Pkm.CACTURNE]: Cacturne,
   [Pkm.RELICANTH]: Relicanth,
   [Pkm.TAUROS]: Tauros,
+  [Pkm.TAUROS_AQUA_BREED]: TaurosAquaBreed,
+  [Pkm.TAUROS_BLAZE_BREED]: TaurosBlazeBreed,
+  [Pkm.TAUROS_COMBAT_BREED]: TaurosCombatBreed,
   [Pkm.HAPPINY]: Happiny,
   [Pkm.CHANSEY]: Chansey,
   [Pkm.BLISSEY]: Blissey,
