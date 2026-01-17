@@ -108,7 +108,7 @@
 - Tiny mushroom is rebranded as Shed Shell. No change to the effect.
 - New dishes, Mushrooms: Tiny Mushroom, Big Mushroom, Balm mushroom
 - Buff Berserk Gene: Attack 5 → 10
-- Buff Explorer Kit: give 5 Attack, 5 Defense and 5 Special Defense as base stats
+- Buff Explorer Kit: give 3 Attack, 5 Defense and 5 Special Defense as base stats
 - Nerf Spell Tag: Curse duration increased: 9 → 10 seconds
 - Replace TM Brick Break with TM Return: deal 20/40/80 special damage, then gain 2 AP permanently.
 
