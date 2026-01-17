@@ -632,10 +632,15 @@ export class MiniGame {
         )*/
 
         let candidatesSymbols: Synergy[] = []
-        const MIN_SYMBOLS_POOL_SIZE = stageLevel <= 10 ? 4 : 5
-        const MAX_SYMBOLS_POOL_SIZE = stageLevel <= 10 ? 4 : 7
+        const MIN_SYMBOLS_POOL_SIZE = 4
+        const MAX_SYMBOLS_POOL_SIZE = 7
+        const MAX_SYMBOLS_OF_THE_SAME_TYPE = this.alivePlayers.length
+        const getNbOfType = (type: Synergy) =>
+          candidatesSymbols.filter((t) => t === type).length
+
         synergiesTriggerLevels.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
+          if (getNbOfType(type) >= MAX_SYMBOLS_OF_THE_SAME_TYPE) return
           candidatesSymbols.push(...new Array(level).fill(type))
         })
         //logger.debug("symbols from synergies", candidatesSymbols)
@@ -643,7 +648,10 @@ export class MiniGame {
           // complete with random other incomplete synergies
           const incompleteSynergies = synergiesTriggerLevels
             .filter(
-              ([type, level]) => level === 0 && player.synergies.get(type)! > 0
+              ([type, level]) =>
+                level === 0 &&
+                player.synergies.get(type)! > 0 &&
+                getNbOfType(type) < MAX_SYMBOLS_OF_THE_SAME_TYPE
             )
             .map(([type, _level]) => type)
           candidatesSymbols.push(
@@ -659,7 +667,13 @@ export class MiniGame {
         }
         while (candidatesSymbols.length < MIN_SYMBOLS_POOL_SIZE) {
           // if still incomplete, complete with random
-          candidatesSymbols.push(pickRandomIn(synergiesUsable))
+          candidatesSymbols.push(
+            pickRandomIn(
+              synergiesUsable.filter(
+                (type) => getNbOfType(type) < MAX_SYMBOLS_OF_THE_SAME_TYPE
+              )
+            )
+          )
           /*logger.debug(
             "completing symbols with random synergies",
             candidatesSymbols
