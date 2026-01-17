@@ -319,7 +319,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
-  } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+  } else if (chef.name.startsWith("ARCEUS") || chef.name === Pkm.KECLEON) {
     dish = Item.SANDWICH
   }
 

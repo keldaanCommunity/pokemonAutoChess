@@ -64,6 +64,7 @@
 - Buff Ogerpon Hearthflame passive: 20 → 30 special damage to adjacent enemies
 - Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
 - Silvally now has 18 color variants based on its first synergy item given at evolution.
+- Arceus now has 18 color variants based on its first synergy given.
 
 # Changes to Synergies
 

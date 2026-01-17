@@ -680,7 +680,7 @@ export default class BattleManager {
             // load the new ones
             pkmSprite.lazyloadAnimations(this.scene).then(() => {
               if (previousValue !== undefined) {
-                pkmSprite.displayAnimation("EVOLUTION")
+                pkmSprite.evolutionAnimation()
               }
               this.animationManager.animatePokemon(
                 pkmSprite,

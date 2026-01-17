@@ -209,7 +209,24 @@ export const PkmColorVariants: readonly Pkm[] = [
   Pkm.SILVALLY_ICE,
   Pkm.SILVALLY_DRAGON,
   Pkm.SILVALLY_DARK,
-  Pkm.SILVALLY_FAIRY
+  Pkm.SILVALLY_FAIRY,
+  Pkm.ARCEUS_BUG,
+  Pkm.ARCEUS_DARK,
+  Pkm.ARCEUS_DRAGON,
+  Pkm.ARCEUS_ELECTRIC,
+  Pkm.ARCEUS_FIGHTING,
+  Pkm.ARCEUS_FIRE,
+  Pkm.ARCEUS_FLYING,
+  Pkm.ARCEUS_GHOST,
+  Pkm.ARCEUS_GRASS,
+  Pkm.ARCEUS_GROUND,
+  Pkm.ARCEUS_ICE,
+  Pkm.ARCEUS_POISON,
+  Pkm.ARCEUS_PSYCHIC,
+  Pkm.ARCEUS_ROCK,
+  Pkm.ARCEUS_STEEL,
+  Pkm.ARCEUS_WATER,
+  Pkm.ARCEUS_FAIRY
 ]
 
 export type PkmColorVariant = (typeof PkmColorVariants)[number]
@@ -278,6 +295,25 @@ export const PkmColorVariantsByPkm = {
     Pkm.SILVALLY_DRAGON,
     Pkm.SILVALLY_DARK,
     Pkm.SILVALLY_FAIRY
+  ],
+  [Pkm.ARCEUS]: [
+    Pkm.ARCEUS_BUG,
+    Pkm.ARCEUS_DARK,
+    Pkm.ARCEUS_DRAGON,
+    Pkm.ARCEUS_ELECTRIC,
+    Pkm.ARCEUS_FIGHTING,
+    Pkm.ARCEUS_FIRE,
+    Pkm.ARCEUS_FLYING,
+    Pkm.ARCEUS_GHOST,
+    Pkm.ARCEUS_GRASS,
+    Pkm.ARCEUS_GROUND,
+    Pkm.ARCEUS_ICE,
+    Pkm.ARCEUS_POISON,
+    Pkm.ARCEUS_PSYCHIC,
+    Pkm.ARCEUS_ROCK,
+    Pkm.ARCEUS_STEEL,
+    Pkm.ARCEUS_WATER,
+    Pkm.ARCEUS_FAIRY
   ]
 } satisfies { [base in Pkm]?: PkmColorVariant[] }
 
