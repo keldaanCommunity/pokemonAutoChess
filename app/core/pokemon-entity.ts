@@ -1226,13 +1226,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
-        shockDamageFactor += 0.2
+        shockDamageFactor *= 1.2
       } else if (target.effects.has(EffectEnum.FAIRY_WIND)) {
-        shockDamageFactor += 0.4
+        shockDamageFactor *= 1.4
       } else if (target.effects.has(EffectEnum.STRANGE_STEAM)) {
-        shockDamageFactor += 0.6
+        shockDamageFactor *= 1.6
       } else if (target.effects.has(EffectEnum.MOON_FORCE)) {
-        shockDamageFactor += 0.8
+        shockDamageFactor *= 1.8
       }
 
       const shockDamage = shockDamageFactor * damage
