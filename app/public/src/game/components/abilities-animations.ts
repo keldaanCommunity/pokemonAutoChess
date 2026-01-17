@@ -1338,6 +1338,7 @@ export const AbilitiesAnimations: {
   [Ability.WOOD_HAMMER]: onTarget({ scale: 1, origin: [0.5, 1] }),
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
+  [Ability.DIZZY_PUNCH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
   [Ability.HEAD_SMASH]: onTarget({
     ability: "FIGHTING_KNOCKBACK",
     tint: 0xffffa0

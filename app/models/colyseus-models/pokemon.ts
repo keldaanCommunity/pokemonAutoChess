@@ -14230,9 +14230,9 @@ export class Lickilicky extends Pokemon {
 
 export class Kangaskhan extends Pokemon {
   types = new SetSchema<Synergy>([
-    Synergy.WILD,
     Synergy.FIGHTING,
-    Synergy.NORMAL
+    Synergy.NORMAL,
+    Synergy.MONSTER
   ])
   rarity = Rarity.UNIQUE
   stars = 3
@@ -14243,7 +14243,7 @@ export class Kangaskhan extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.HEADBUTT
+  skill = Ability.DIZZY_PUNCH
 }
 
 export class Teddiursa extends Pokemon {

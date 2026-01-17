@@ -5175,6 +5175,24 @@ export class HeadbuttStrategy extends AbilityStrategy {
   }
 }
 
+export class DizzyPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    let damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    if (target.shield > 0) {
+      damage *= 2
+    }
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    target.status.triggerConfusion(3000, target, pokemon)
+  }
+}
+
+
 export class TripleKickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16213,6 +16231,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.HEADBUTT]: new HeadbuttStrategy(),
+  [Ability.DIZZY_PUNCH]: new DizzyPunchStrategy(),
   [Ability.STEEL_WING]: new SteelWingStrategy(),
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.FIERY_DANCE]: new FieryDanceStrategy(),

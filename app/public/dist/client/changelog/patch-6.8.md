@@ -67,6 +67,7 @@
 - Buff Ogerpon Hearthflame passive: 20 → 30 special damage to adjacent enemies
 - Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
 - Tauros now is Wild/Normal/Field. Adjusted stats.
+- Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 
 # Changes to Synergies
 
