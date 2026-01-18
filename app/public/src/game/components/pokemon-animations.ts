@@ -2835,6 +2835,24 @@ export const PokemonAnimations: {
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.NORMAL_MELEE
   },
+  [Pkm.TAUROS_COMBAT_BREED]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAUROS_BLAZE_BREED]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAUROS_AQUA_BREED]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
   [Pkm.HAPPINY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shake,
