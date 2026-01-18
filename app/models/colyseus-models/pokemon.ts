@@ -8561,7 +8561,7 @@ export class Xerneas extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.LIGHT, Synergy.FLORA])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 300
+  hp = 200
   atk = 22
   speed = 57
   def = 6
