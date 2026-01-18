@@ -146,6 +146,8 @@
 - Fix the display of buried items when the digger is equipped with explorer kit.
 - Fixed arrow key keybinds not working when bound via the options (Previous player's board, Next player's board)
 - Berry trees can no longer share the same berry type.
+- Additional bonus damage on Fairy shocks provided by Fairy synergy effects now apply to the shock damage, and not the incoming damage.
+- Crit damage reduction from Rock synergy effects now apply to the final crit damage after crit power is applied, instead of before.
 
 # Misc
 
