@@ -1226,13 +1226,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       let shockDamageFactor = 0.3
       if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
-        shockDamageFactor += 0.2
+        shockDamageFactor *= 1.2
       } else if (target.effects.has(EffectEnum.FAIRY_WIND)) {
-        shockDamageFactor += 0.4
+        shockDamageFactor *= 1.4
       } else if (target.effects.has(EffectEnum.STRANGE_STEAM)) {
-        shockDamageFactor += 0.6
+        shockDamageFactor *= 1.6
       } else if (target.effects.has(EffectEnum.MOON_FORCE)) {
-        shockDamageFactor += 0.8
+        shockDamageFactor *= 1.8
       }
 
       const shockDamage = shockDamageFactor * damage
@@ -1411,9 +1411,35 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
-    this.hp = this.maxHP
-    this.pp = 0
-    this.status.clearAllStatus()
+    // Recalculate stats as it was at the start of the battle
+    const cloneReference = new PokemonEntity(
+      this.refToBoardPokemon,
+      0,
+      0,
+      this.team,
+      this.simulation
+    )
+    this.simulation.applySynergyEffects(cloneReference)
+    this.simulation.applyItemsEffects(cloneReference)
+
+    this.maxHP = cloneReference.maxHP
+    this.atk = cloneReference.atk
+    this.def = cloneReference.def
+    this.speDef = cloneReference.speDef
+    this.ap = cloneReference.ap
+    this.speed = cloneReference.speed
+    this.critChance = cloneReference.critChance
+    this.critPower = cloneReference.critPower
+    this.dodge = cloneReference.dodge
+    this.range = cloneReference.range
+    this.luck = cloneReference.luck
+
+    // Reset stacking items and effects counts
+    this.count.machRibbonCount = 0
+    this.count.muscleBandCount = 0
+    this.count.soulDewCount = 0
+    this.count.upgradeCount = 0
+    this.count.soundCryCount = 0
 
     if (this.items.has(Item.SACRED_ASH)) {
       const team =
@@ -1475,21 +1501,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     }
 
-    const stackingItems = [
-      Item.MUSCLE_BAND,
-      Item.SOUL_DEW,
-      Item.UPGRADE,
-      Item.MACH_RIBBON
-    ]
-
     const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
-
-    stackingItems.forEach((item) => {
-      if (this.items.has(item)) {
-        this.removeItemEffect(item)
-        this.applyItemEffect(item)
-      }
-    })
 
     removedItems.forEach((item) => {
       if (this.items.has(item)) {
@@ -1497,79 +1509,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     })
 
-    const resetMonsterStacks = (effect: MonsterKillEffect) => {
-      const attackBoost =
-        MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL[effect.synergyLevel] ??
-        MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL.at(-1)
-      const apBoost =
-        MONSTER_AP_BUFF_PER_SYNERGY_LEVEL[effect.synergyLevel] ??
-        MONSTER_AP_BUFF_PER_SYNERGY_LEVEL.at(-1)
-      this.addAttack(-effect.count * attackBoost, this, 0, false)
-      this.addAbilityPower(-effect.count * apBoost, this, 0, false)
-      this.addMaxHP(-effect.hpBoosted, this, 0, false)
-      effect.hpBoosted = 0
-      effect.count = 0
-    }
-
-    const resetFireStacks = (effect: FireHitEffect) => {
-      const removalAmount = -effect.count * effect.synergyLevel
-      this.addAttack(removalAmount, this, 0, false)
-      effect.count = 0
-    }
-
-    const resetSoundStacks = (effect: EffectEnum) => {
-      const synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
-      const attackBoost =
-        ([2, 1, 1][synergyLevel] ?? 0) * -this.count.soundCryCount
-      const speedBoost =
-        ([0, 5, 5][synergyLevel] ?? 0) * -this.count.soundCryCount
-      const manaBoost =
-        ([0, 0, 3][synergyLevel] ?? 0) * -this.count.soundCryCount
-      this.addAttack(attackBoost, this, 0, false)
-      this.addSpeed(speedBoost, this, 0, false)
-      this.addPP(manaBoost, this, 0, false)
-      this.count.soundCryCount = 0
-    }
-
-    const resetFieldStacks = (effect: EffectEnum) => {
-      const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
-      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
-      const nbStacks = this.count.fieldCount
-      this.addSpeed(-nbStacks * speedBoost, this, 0, false)
-    }
-
     this.effectsSet.forEach((effect) => {
       if (effect instanceof MonsterKillEffect) {
-        resetMonsterStacks(effect)
+        effect.hpBoosted = 0
+        effect.count = 0
       } else if (effect instanceof FireHitEffect) {
-        resetFireStacks(effect)
+        effect.count = 0
       } else if (effect instanceof FlyingProtectionEffect) {
         effect.flyingProtection = 0 // prevent flying effects twice
       }
     })
-    const soundEffect = SynergyEffects[Synergy.SOUND].find((effect) =>
-      this.player?.effects.has(effect)
-    )
-    if (soundEffect) {
-      resetSoundStacks(soundEffect)
-    }
-    const fieldEffect = SynergyEffects[Synergy.FIELD].find((effect) =>
-      this.player?.effects.has(effect)
-    )
-    if (fieldEffect) {
-      resetFieldStacks(fieldEffect)
-    }
 
     if (this.skill === Ability.VOLT_SURGE) {
-      this.status.removeElectricField(this)
-      // This is not perfect, cause volt surge addMaxHP use AP scaling and crit
-      this.addMaxHP(-40 * this.count.ult, this, 0, false)
-      this.addSpeed(-25 * this.count.ult, this, 0, false)
       this.count.ult = 0
     }
 
-    this.status.resurrection = false // prevent resurrecting again
-    this.shield = 0 // remove existing shield
+    this.status.clearAllStatus(this)
+    this.hp = this.maxHP
+    this.pp = 0
+    this.shield = 0
   }
 
   eatBerry(berry: Item, stealedFrom?: PokemonEntity, inPuffin = false) {

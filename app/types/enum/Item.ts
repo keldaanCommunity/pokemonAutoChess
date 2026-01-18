@@ -170,7 +170,7 @@ export enum Item {
   HEARTHFLAME_MASK = "HEARTHFLAME_MASK",
   ZYGARDE_CUBE = "ZYGARDE_CUBE",
   TM_RAGE = "TM_RAGE",
-  TM_BRICK_BREAK = "TM_BRICK_BREAK",
+  TM_RETURN = "TM_RETURN",
   TM_TAUNT = "TM_TAUNT",
   TM_BULK_UP = "TM_BULK_UP",
   TM_REFLECT = "TM_REFLECT",
@@ -864,7 +864,7 @@ export const OgerponMasks: Item[] = [
 
 export const TMs = [
   Item.TM_RAGE,
-  Item.TM_BRICK_BREAK,
+  Item.TM_RETURN,
   Item.TM_TAUNT,
   Item.TM_BULK_UP,
   Item.TM_REFLECT,
@@ -886,7 +886,7 @@ export const HMs = [
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_RAGE]: Ability.RAGE,
-  [Item.TM_BRICK_BREAK]: Ability.BRICK_BREAK,
+  [Item.TM_RETURN]: Ability.RETURN,
   [Item.TM_TAUNT]: Ability.TAUNT,
   [Item.TM_BULK_UP]: Ability.BULK_UP,
   [Item.TM_REFLECT]: Ability.REFLECT,

@@ -89,12 +89,12 @@ export default class Status extends Schema implements IStatus {
     this.enrageDelay = this.enrageDelay - elapsedTime
   }
 
-  clearAllStatus() {
+  clearAllStatus(entity: PokemonEntity) {
     this.clearNegativeStatus()
-    this.clearPositiveStatus()
+    this.clearPositiveStatus(entity)
   }
 
-  clearPositiveStatus() {
+  clearPositiveStatus(entity: PokemonEntity) {
     this.protectCooldown = 0
     this.runeProtectCooldown = 0
     this.enrageCooldown = 0
@@ -102,6 +102,11 @@ export default class Status extends Schema implements IStatus {
     this.magicBounceCooldown = 0
     this.reflectCooldown = 0
     this.pokerusCooldown = 0
+    this.resurrection = false
+    this.removeElectricField(entity)
+    this.removePsychicField(entity)
+    this.removeGrassField(entity)
+    this.removeFairyField(entity)
   }
 
   clearNegativeStatus() {
@@ -118,7 +123,7 @@ export default class Status extends Schema implements IStatus {
     this.flinchCooldown = 0
     this.armorReductionCooldown = 0
     if (this.curse && this.curseCooldown > 0) {
-      this.curseCooldown += 1000 // do not clear curseCooldown on purpose
+      this.curseCooldown += 2000 // do not clear curseCooldown on purpose
     }
     this.curse = false
     this.possessedCooldown = 0

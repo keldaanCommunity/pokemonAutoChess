@@ -11,6 +11,9 @@
 - Vivillon (20 different forms)
 - Lechonk
 - Oinkologne (Male form only)
+- Tauros Combat Breed
+- Tauros Blaze Breed
+- Tauros Aqua Breed
 
 # Changes to Pokemon & Abilities
 
@@ -65,6 +68,8 @@
 - Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
 - Silvally now has 18 color variants based on its first synergy item given at evolution.
 - Arceus now has 18 color variants based on its first synergy given.
+- Tauros now is Wild/Normal/Field. Adjusted stats.
+- Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 
 # Changes to Synergies
 
@@ -94,7 +99,8 @@
     - Nullify Bandanna: 30 shield - Holder can no longer cast its ability. AP is converted to shield, and PP are converted to bonus special damage on attack.
 
 - Miracle seed, Leaf Stone and Sticky Barb now gives 15 max HP instead of 15 shield.
-- Removed base 15 shield from Gracidea flower and Max Revive.
+- Removed base 15 shield from Gracidea flower
+- Removed base stats of Max Revive
 - Removed base 15 shield from Smoke Ball. Shield received from Smoke Ball drop: 50 → 70
 - Kings Rock now gives 100 max HP instead of 100 shield. 35 → 30 % of max HP as shield on fight start. 
 - New recipe for Green Orb: Miracle Seed + Mystic Water. Base stats: 3 special defense → 15 HP
@@ -109,12 +115,15 @@
 - Tiny mushroom is rebranded as Shed Shell. No change to the effect.
 - New dishes, Mushrooms: Tiny Mushroom, Big Mushroom, Balm mushroom
 - Buff Berserk Gene: Attack 5 → 10
-- Buff Explorer Kit: give 5 Attack, 5 Defense and 5 Special Defense as base stats
+- Buff Explorer Kit: give 3 Attack, 5 Defense and 5 Special Defense as base stats
 - Nerf Spell Tag: Curse duration increased: 9 → 10 seconds
+- Replace TM Brick Break with TM Return: deal 20/40/80 special damage, then gain 2 AP permanently.
+- Icicle missile (Vanillite) travels faster: 1.5 second → 1 second
 
 # Gameplay
 
 - Locked status now prevents dodging
+- Curse status on cleanse got its delay increased by ~~1~~ 2 seconds
 - Stage 15 component pick is back, and stage 2 no longer gives a random component as a reward. Instead, the rewards of stage 2 are the 1 out of 3 component pick proposed on stage 3.
 - Fire weather is renamed to Drought
 - Zenith is now the weather triggered by Grass synergy. New effect: +15% healing, -30% Sleep duration
@@ -122,7 +131,7 @@
 - Removed the reward change between component and full item on stage 19 PvE, based on the amount of components collected. It is too easy to manipulate with Silk Scarf, Unown-I and ground digging. Stage 19 PvE now always offers a full craftable item as a reward.
 - New town encounter: Cinccino
 - Makuhita can now be encountered at stage 17, and no longer at stage 22
-- Portal symbols generation at stage 20 has been reworked to more consistently provide symbols for your top synergies in horizontal compositions such as Dragon/Amorphous.
+- Portal symbols generation at stage 20 has been reworked. Issue 1 : In horizontal compositions such as Dragon/Amorphous, too many synergy steps are activated, leading to very inconsistent symbol generation. Solution: truncate the symbols pool size to max 7, ordered by top synergy as shown in the synergy menu. Issue 2 :Vertical comps are too consistent in symbol generation, especially when several players play the same synergy. Solution: limit the amount of symbols of the same synergy to the number of players alive.
 
 # UI
 
@@ -134,12 +143,14 @@
 
 # Bugfix
 
-- Field speed stacks are now correctly reset after resurrection
+- Resurrection now properly reset all temporary stat buffs, including field speed stacks and temporary buffs from abilities
 - Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 - Fossil starter portals now always offer an Eevee.
 - Fix the display of buried items when the digger is equipped with explorer kit.
 - Fixed arrow key keybinds not working when bound via the options (Previous player's board, Next player's board)
 - Berry trees can no longer share the same berry type.
+- Additional bonus damage on Fairy shocks provided by Fairy synergy effects now apply to the shock damage, and not the incoming damage.
+- Crit damage reduction from Rock synergy effects now apply to the final crit damage after crit power is applied, instead of before.
 
 # Misc
 

@@ -49,19 +49,25 @@ export default abstract class PokemonState {
 
       if (crit) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let opponentCritPower = pokemon.critPower
+          let reductionFactor = 1.0
           if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
-            opponentCritPower -= 0.3
+            reductionFactor -= 0.3
           } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
-            opponentCritPower -= 0.5
+            reductionFactor -= 0.5
           } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
-            opponentCritPower -= 0.7
+            reductionFactor -= 0.7
           }
           const nbBlackAugurite = target.player
             ? count(target.player.items, Item.BLACK_AUGURITE)
             : 0
-          opponentCritPower -= 0.1 * nbBlackAugurite
-          damage = min(0)(Math.round(damage * opponentCritPower))
+          reductionFactor -= 0.1 * nbBlackAugurite
+          const damageWithoutCrit = damage
+          const damageAfterCrit = damage * pokemon.critPower
+          const critPartOfTheDamage = damageAfterCrit - damageWithoutCrit
+
+          damage = min(0)(
+            Math.round(damageWithoutCrit + critPartOfTheDamage * reductionFactor)
+          )
           target.count.crit++
         }
         pokemon.onCriticalAttack({ target, board, damage })

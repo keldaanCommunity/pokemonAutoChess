@@ -902,6 +902,9 @@ export enum Pkm {
   TAPU_KOKO = "TAPU_KOKO",
   TAPU_LELE = "TAPU_LELE",
   TAUROS = "TAUROS",
+  TAUROS_COMBAT_BREED = "TAUROS_COMBAT_BREED",
+  TAUROS_BLAZE_BREED = "TAUROS_BLAZE_BREED",
+  TAUROS_AQUA_BREED = "TAUROS_AQUA_BREED",
   TEDDIURSA = "TEDDIURSA",
   TENTACOOL = "TENTACOOL",
   TENTACRUEL = "TENTACRUEL",
@@ -1307,6 +1310,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MAGMAR]: "0126",
   [Pkm.PINSIR]: "0127",
   [Pkm.TAUROS]: "0128",
+  [Pkm.TAUROS_COMBAT_BREED]: "0128-0001",
+  [Pkm.TAUROS_BLAZE_BREED]: "0128-0002",
+  [Pkm.TAUROS_AQUA_BREED]: "0128-0003",
   [Pkm.MAGIKARP]: "0129",
   [Pkm.GYARADOS]: "0130",
   [Pkm.LAPRAS]: "0131",
@@ -2846,6 +2852,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CACNEA]: Pkm.CACNEA,
   [Pkm.CACTURNE]: Pkm.CACNEA,
   [Pkm.TAUROS]: Pkm.TAUROS,
+  [Pkm.TAUROS_COMBAT_BREED]: Pkm.TAUROS,
+  [Pkm.TAUROS_BLAZE_BREED]: Pkm.TAUROS,
+  [Pkm.TAUROS_AQUA_BREED]: Pkm.TAUROS,
   [Pkm.HAPPINY]: Pkm.HAPPINY,
   [Pkm.CHANSEY]: Pkm.HAPPINY,
   [Pkm.BLISSEY]: Pkm.HAPPINY,
@@ -3585,7 +3594,12 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
   [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
   [Pkm.SUICUNE]: [Pkm.WALKING_WAKE],
-  [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR]
+  [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR],
+  [Pkm.TAUROS]: [
+    Pkm.TAUROS_COMBAT_BREED,
+    Pkm.TAUROS_BLAZE_BREED,
+    Pkm.TAUROS_AQUA_BREED
+  ]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
