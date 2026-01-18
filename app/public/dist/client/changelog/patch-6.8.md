@@ -171,4 +171,4 @@ We are introducing the notion of Pokémon alternative forms in the game. Alterna
 - Pokéguesser now accepts any alternative form of the Pokémon to guess as a correct answer.
 - Silvally now has 18 alternative forms based on its first synergy item given at evolution.
 - Arceus now has 18 alternative forms based on its first synergy given.
-- List of Pokémon with different alternative forms: Flabebe, Floette, Florges, Minior, Silvally, Arceus, Alcremie, Ogerpon, Basculin, Basculegion, Darmanitan, Maushold, Hoopa, Aegislash, Vivillon, Mimikyu, Deoxys
+- List of Pokémon with different alternative forms: Flabebe, Floette, Florges, Minior, Silvally, Arceus, Alcremie, Ogerpon, Basculin, Basculegion, Darmanitan, Maushold, Hoopa, Aegislash, Vivillon, Mimikyu, Deoxys, Lycanroc

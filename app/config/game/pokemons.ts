@@ -273,7 +273,10 @@ export const PkmAltForms: readonly Pkm[] = [
 
   Pkm.DEOXYS_ATTACK,
   Pkm.DEOXYS_DEFENSE,
-  Pkm.DEOXYS_SPEED
+  Pkm.DEOXYS_SPEED,
+
+  Pkm.LYCANROC_NIGHT,
+  Pkm.LYCANROC_DUSK
 ]
 
 export type PkmAltForm = (typeof PkmAltForms)[number]
@@ -381,7 +384,7 @@ export const PkmAltFormsByPkm = {
     Pkm.OGERPON_WELLSPRING,
     Pkm.OGERPON_WELLSPRING_MASK
   ],
-  
+
   [Pkm.BASCULIN_WHITE]: [Pkm.BASCULIN_BLUE, Pkm.BASCULIN_RED],
   [Pkm.BASCULEGION_MALE]: [Pkm.BASCULEGION_FEMALE],
   [Pkm.DARMANITAN]: [Pkm.DARMANITAN_ZEN],
@@ -389,13 +392,9 @@ export const PkmAltFormsByPkm = {
   [Pkm.HOOPA]: [Pkm.HOOPA_UNBOUND],
   [Pkm.AEGISLASH]: [Pkm.AEGISLASH_BLADE],
   [Pkm.MIMIKYU]: [Pkm.MIMIKYU_BUSTED],
-  [Pkm.DEOXYS]: [
-    Pkm.DEOXYS_ATTACK,
-    Pkm.DEOXYS_DEFENSE,
-    Pkm.DEOXYS_SPEED
-  ]
+  [Pkm.DEOXYS]: [Pkm.DEOXYS_ATTACK, Pkm.DEOXYS_DEFENSE, Pkm.DEOXYS_SPEED],
+  [Pkm.LYCANROC_DAY]: [Pkm.LYCANROC_NIGHT, Pkm.LYCANROC_DUSK]
 } satisfies { [base in Pkm]?: PkmAltForm[] }
-
 
 export type PkmWithAltForm = keyof typeof PkmAltFormsByPkm
 
