@@ -777,25 +777,27 @@ export class BuyBoosterCommand extends Command<
       const rarity = getPokemonData(pkm).rarity
       const boosterCost = BoosterPriceByRarity[rarity]
 
+      const shardIndex = PkmIndex[getBaseColorVariant(pkm)]
+
       const mongoUser = await UserMetadata.findOneAndUpdate(
         {
           uid: client.auth.uid,
-          [`pokemonCollection.${index}.dust`]: { $gte: boosterCost }
+          [`pokemonCollection.${shardIndex}.dust`]: { $gte: boosterCost }
         },
         {
           $inc: {
             booster: 1,
-            [`pokemonCollection.${index}.dust`]: -boosterCost
+            [`pokemonCollection.${shardIndex}.dust`]: -boosterCost
           }
         },
         { new: true }
       )
       if (!mongoUser) return
 
-      const pokemonCollectionItem = user.pokemonCollection.get(index)
+      const pokemonCollectionItem = user.pokemonCollection.get(shardIndex)
       if (!pokemonCollectionItem) return
 
-      const mongoPokemonCollectionItem = mongoUser.pokemonCollection.get(index)
+      const mongoPokemonCollectionItem = mongoUser.pokemonCollection.get(shardIndex)
       if (!mongoPokemonCollectionItem) return
 
       user.booster = mongoUser.booster
