@@ -66,8 +66,6 @@
 - Buff Smoochum line: Speed 55 → 61, PP 80 → 70
 - Buff Ogerpon Hearthflame passive: 20 → 30 special damage to adjacent enemies
 - Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
-- Silvally now has 18 color variants based on its first synergy item given at evolution.
-- Arceus now has 18 color variants based on its first synergy given.
 - Tauros now is Wild/Normal/Field. Adjusted stats.
 - Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 
@@ -153,6 +151,7 @@
 - Additional bonus damage on Fairy shocks provided by Fairy synergy effects now apply to the shock damage, and not the incoming damage.
 - Crit damage reduction from Rock synergy effects now apply to the final crit damage after crit power is applied, instead of before.
 
+
 # Misc
 
 - Added Region tracking to statistic
@@ -162,4 +161,7 @@
 - New title: Scout - Equip your team with at least 5 Silk Scarf made items
 - Added a new meta report section, with a cluster map
 - Change to the boosters: color variants are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple color variants (such as Flabebe or Vivillon) appearing in boosters.
+- Silvally now has 18 color variants based on its first synergy item given at evolution.
+- Arceus now has 18 color variants based on its first synergy given.
+- Alcremie flavors are now considered as color variants
 - Pokéguesser now accepts any color variant of the Pokémon as a correct answer.

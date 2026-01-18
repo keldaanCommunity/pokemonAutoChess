@@ -14,7 +14,7 @@ export const precomputedPokemons = Object.values(Pkm)
   .map((pkm) => PokemonFactory.createPokemonFromName(pkm))
   .sort(sortByRarityAndTier)
 
-// filter out color variants and unimplemented pokemons
+// filter out unimplemented pokemons
 export const precomputedPokemonsImplemented = precomputedPokemons.filter(
   (pokemon) =>
     pokemon.skill !== Ability.DEFAULT || pokemon.passive !== Passive.NONE
