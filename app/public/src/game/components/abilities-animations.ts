@@ -2465,13 +2465,13 @@ export const AbilitiesAnimations: {
           x: topCoords[0],
           y: topCoords[1],
           rotation: angle2,
-          duration: 750,
+          duration: 500,
           ease: Phaser.Math.Easing.Quadratic.Out
         },
         {
           x: coordinatesTarget[0],
           y: coordinatesTarget[1],
-          duration: 750,
+          duration: 500,
           ease: Phaser.Math.Easing.Quadratic.In
         }
       ],

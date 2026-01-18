@@ -2413,7 +2413,7 @@ export class IcicleMissileStrategy extends AbilityStrategy {
                 crit
               )
             }
-          }, 1500)
+          }, 1000)
         )
       }
     }
