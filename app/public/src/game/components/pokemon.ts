@@ -678,7 +678,8 @@ export default class PokemonSprite extends DraggableObject {
 
   emoteAnimation() {
     const g = <GameScene>this.scene
-    g.animationManager?.animatePokemon(
+    if (!g.animationManager) return
+    g.animationManager.animatePokemon(
       this,
       PokemonActionState.EMOTE,
       this.flip,

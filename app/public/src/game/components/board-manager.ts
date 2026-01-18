@@ -21,13 +21,14 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
-import { IPokemon } from "../../../../types"
+import { IPokemon, IPokemonEntity } from "../../../../types"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
   GamePhaseState,
   Orientation,
   PokemonActionState,
+  PokemonTint,
   Stat,
   Team
 } from "../../../../types/enum/Game"
@@ -972,7 +973,26 @@ export default class BoardManager {
 
         case "index":
           if (previousValue != null && value !== previousValue) {
-            pokemonUI.evolutionAnimation()
+            // transformation or evolution mid-fight
+            // unload previous index animations
+            pokemonUI.unloadAnimations(
+              this.scene,
+              previousValue as IPokemonEntity["index"],
+              pokemonUI.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
+            )
+            pokemonUI.attackSprite =
+              PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
+              pokemonUI.attackSprite
+            // load the new ones
+            pokemonUI.lazyloadAnimations(this.scene).then(() => {
+              pokemonUI.evolutionAnimation()
+              this.animationManager.animatePokemon(
+                pokemonUI,
+                pokemonUI.pokemon.action,
+                false,
+                false
+              )
+            })
           }
           break
 

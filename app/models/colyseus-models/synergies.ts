@@ -3,7 +3,7 @@ import { SynergyTriggers } from "../../config"
 import { IPokemon } from "../../types"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { PkmFamily } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { values } from "../../utils/schemas"
@@ -185,6 +185,72 @@ export function computeSynergies(
 
       if (shouldComputeDragonDoubleTypeAgain) {
         applyDragonDoubleTypes()
+      }
+
+      if (pkm.name.startsWith("ARCEUS")) {
+        switch (values(pkm.types)[0]) {
+          case Synergy.BUG:
+            pkm.index = PkmIndex[Pkm.ARCEUS_BUG]
+            break
+          case Synergy.DARK:
+            pkm.index = PkmIndex[Pkm.ARCEUS_DARK]
+            break
+          case Synergy.DRAGON:
+          case Synergy.FOSSIL:
+            pkm.index = PkmIndex[Pkm.ARCEUS_DRAGON]
+            break
+          case Synergy.ELECTRIC:
+            pkm.index = PkmIndex[Pkm.ARCEUS_ELECTRIC]
+            break
+          case Synergy.FIGHTING:
+          case Synergy.WILD:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FIGHTING]
+            break
+          case Synergy.FIRE:
+          case Synergy.GOURMET:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FIRE]
+            break
+          case Synergy.FLYING:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FLYING]
+            break
+          case Synergy.GHOST:
+            pkm.index = PkmIndex[Pkm.ARCEUS_GHOST]
+            break
+          case Synergy.GRASS:
+          case Synergy.FLORA:
+            pkm.index = PkmIndex[Pkm.ARCEUS_GRASS]
+            break
+          case Synergy.GROUND:
+          case Synergy.FIELD:
+            pkm.index = PkmIndex[Pkm.ARCEUS_GROUND]
+            break
+          case Synergy.ICE:
+            pkm.index = PkmIndex[Pkm.ARCEUS_ICE]
+            break
+          case Synergy.POISON:
+          case Synergy.MONSTER:
+            pkm.index = PkmIndex[Pkm.ARCEUS_POISON]
+            break
+          case Synergy.PSYCHIC:
+          case Synergy.SOUND:
+            pkm.index = PkmIndex[Pkm.ARCEUS_PSYCHIC]
+            break
+          case Synergy.ROCK:
+            pkm.index = PkmIndex[Pkm.ARCEUS_ROCK]
+            break
+          case Synergy.STEEL:
+          case Synergy.ARTIFICIAL:
+            pkm.index = PkmIndex[Pkm.ARCEUS_STEEL]
+            break
+          case Synergy.WATER:
+          case Synergy.AQUATIC:
+            pkm.index = PkmIndex[Pkm.ARCEUS_WATER]
+            break
+          case Synergy.FAIRY:
+          case Synergy.AMORPHOUS:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FAIRY]
+            break
+        }
       }
     }
   })

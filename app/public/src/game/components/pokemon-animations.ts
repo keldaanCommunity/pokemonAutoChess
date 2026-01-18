@@ -1856,6 +1856,108 @@ export const PokemonAnimations: {
     emote: AnimationType.SpAttack,
     attackSprite: AttackSprite.DRAGON_MELEE
   },
+  [Pkm.ARCEUS_BUG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_DARK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_DRAGON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_ELECTRIC]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FIGHTING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FIRE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FLYING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_GHOST]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_GRASS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_GROUND]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_ICE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_POISON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_PSYCHIC]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_ROCK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_STEEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_WATER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FAIRY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
   [Pkm.SHAYMIN]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Emit,
@@ -4012,6 +4114,91 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.DARK_HIT
   },
   [Pkm.SILVALLY]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FIGHTING]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FLYING]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_POISON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GROUND]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_ROCK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_BUG]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GHOST]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_STEEL]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FIRE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_WATER]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GRASS]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_ELECTRIC]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_PSYCHIC]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_ICE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_DRAGON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_DARK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FAIRY]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot

@@ -439,6 +439,7 @@ class GameContainer {
     const listenForPokemonChanges = (
       pokemon: Pokemon,
       fields: NonFunctionPropNames<IPokemon>[] = [
+        "index",
         "positionX",
         "positionY",
         "action",

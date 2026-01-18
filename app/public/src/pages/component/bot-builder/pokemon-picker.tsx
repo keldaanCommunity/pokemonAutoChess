@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor } from "../../../../../config"
+import { PkmColorVariants } from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Emotion, PkmWithCustom } from "../../../../../types"
@@ -17,7 +18,7 @@ import {
   PkmRegionalVariants
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -27,6 +28,8 @@ import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
+import { PokemonFilters } from "../pokemon-filters/pokemon-filters"
+import { SynergyOverlaps } from "../synergy-overlaps/synergy-overlaps"
 
 export default function PokemonPicker(props: {
   selected?: PkmWithCustom | Item
@@ -132,65 +135,109 @@ function PokemonPickerTab(props: {
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons?.slice() ?? []
 
-  const filteredPokemons = props.pokemons
-    .filter((p) => (overlap ? p.types.includes(overlap) : true))
-    .filter((p) => {
-      if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-      if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-      if (preferences.showEvolutions) return true
-      else return p.name === PkmFamily[p.name]
-    })
-    .filter((p) => {
-      const family = PkmFamily[p.name]
-      const baseVariantName = PkmRegionalBaseVariants[family] ?? family
-      const regionalVariants = PkmRegionalVariants[family]
-      const isInAddPicks = additionalPokemons.includes(baseVariantName)
-      const isInRegion = p.regional && regionalPokemons.includes(family)
-      const hasVariantInRegion = regionalVariants?.some((variant) =>
-        regionalPokemons.includes(variant)
-      )
-      const isAvailable =
-        (!p.regional || isInRegion) &&
-        (!p.additional || isInAddPicks) &&
-        !hasVariantInRegion
-      return (
-        !ingame ||
-        !preferences.filterAvailableAddsAndRegionals ||
-        isAvailable ||
-        specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
-      )
-    })
+  const filteredPokemons = useMemo(
+    () =>
+      props.pokemons
+        .filter((p) => (overlap ? p.types.includes(overlap) : true))
+        .filter((p) => {
+          if (p.rarity === Rarity.SPECIAL)
+            return preferences.showSpecialPool === true // show all summons & specials, even in the same family
+          if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
+          if (preferences.showAdditionalPool === false && p.additional)
+            return false
+          if (preferences.showRegionalPool === false && p.regional) return false
+          if (
+            preferences.showColorVariants === false &&
+            PkmColorVariants.includes(p.name)
+          )
+            return false
+          if (
+            preferences.showRegularPool === false &&
+            !p.additional &&
+            !p.regional
+          )
+            return false
 
-  const pokemonsPerRarity = groupBy(filteredPokemons, (p) => p.rarity)
-  for (const rarity in pokemonsPerRarity) {
-    pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
-      if (a.regional !== b.regional) return +a.regional - +b.regional
-      if (a.additional !== b.additional) return +a.additional - +b.additional
-      if (PkmFamily[a.name] === PkmFamily[b.name]) return a.stars - b.stars
-      return PkmIndex[PkmFamily[a.name]].localeCompare(
-        PkmIndex[PkmFamily[b.name]]
-      )
-    })
-  }
-
-  const overlapsMap = new Map(
-    SynergyArray.filter((type) => type !== props.type).map((type) => [
-      type,
-      filteredPokemons
-        .filter((p) => p.types.includes(type))
-        .filter(
-          (p, i, list) =>
-            list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
-        ).length
-    ])
+          if (preferences.showEvolutions) return true
+          return p.name === PkmFamily[p.name]
+        })
+        .filter((p) => {
+          const family = PkmFamily[p.name]
+          const baseVariantName = PkmRegionalBaseVariants[family] ?? family
+          const regionalVariants = PkmRegionalVariants[family]
+          const isInAddPicks = additionalPokemons.includes(baseVariantName)
+          const isInRegion = p.regional && regionalPokemons.includes(family)
+          const hasVariantInRegion = regionalVariants?.some((variant) =>
+            regionalPokemons.includes(variant)
+          )
+          const isAvailable =
+            (!p.regional || isInRegion) &&
+            (!p.additional || isInAddPicks) &&
+            !hasVariantInRegion
+          return (
+            !ingame ||
+            !preferences.filterAvailableAddsAndRegionals ||
+            isAvailable ||
+            specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
+          )
+        }),
+    [
+      props.pokemons,
+      overlap,
+      preferences.showAdditionalPool,
+      preferences.showRegionalPool,
+      preferences.showRegularPool,
+      preferences.showEvolutions,
+      preferences.showColorVariants,
+      preferences.filterAvailableAddsAndRegionals,
+      additionalPokemons,
+      regionalPokemons,
+      ingame,
+      specialGameRule
+    ]
   )
 
-  const overlaps = [...overlapsMap.entries()]
-    .filter(([type, nb]) => nb > 0)
-    .sort((a, b) => b[1] - a[1])
+  const pokemonsPerRarity = useMemo(() => {
+    const pokemonsPerRarity = groupBy(filteredPokemons, (p) => p.rarity)
+    for (const rarity in pokemonsPerRarity) {
+      pokemonsPerRarity[rarity].sort((a: IPokemonData, b: IPokemonData) => {
+        if (a.regional !== b.regional) return +a.regional - +b.regional
+        if (a.additional !== b.additional) return +a.additional - +b.additional
+        if (PkmFamily[a.name] === PkmFamily[b.name]) return a.stars - b.stars
+        return PkmIndex[PkmFamily[a.name]].localeCompare(
+          PkmIndex[PkmFamily[b.name]]
+        )
+      })
+    }
+    return pokemonsPerRarity
+  }, [filteredPokemons])
 
   return (
     <>
+      <div
+        className="filters"
+        style={{ display: "flex", justifyContent: "end", gap: "1em" }}
+      >
+        {ingame && (
+          <Checkbox
+            checked={preferences.filterAvailableAddsAndRegionals}
+            onToggle={(checked) => {
+              setPreferences({ filterAvailableAddsAndRegionals: checked })
+            }}
+            label={t("show_only_available_picks")}
+            isDark
+          />
+        )}
+        <PokemonFilters />
+        {props.type !== "none" && (
+          <SynergyOverlaps
+            type={props.type}
+            pokemons={props.pokemons}
+            overlap={overlap}
+            setOverlap={setOverlap}
+          />
+        )}
+      </div>
       <dl id="rarity-grid">
         {(
           [
@@ -262,48 +309,6 @@ function PokemonPickerTab(props: {
           </React.Fragment>
         ))}
       </dl>
-      <div className="filters">
-        <Checkbox
-          checked={preferences.showEvolutions}
-          onToggle={(checked) => {
-            setPreferences({ showEvolutions: checked })
-          }}
-          label={t("show_evolutions")}
-          isDark
-        />
-        {ingame && (
-          <Checkbox
-            checked={preferences.filterAvailableAddsAndRegionals}
-            onToggle={(checked) => {
-              setPreferences({ filterAvailableAddsAndRegionals: checked })
-            }}
-            label={t("show_only_available_picks")}
-            isDark
-          />
-        )}
-        <details>
-          <summary>{t("overlaps")}</summary>
-          <ul className="synergy-overlaps">
-            {overlaps.map(([type, nb]) => {
-              return (
-                <li
-                  onClick={() => setOverlap(overlap === type ? null : type)}
-                  key={type}
-                  className={cc({ active: overlap === type })}
-                >
-                  {props.type === "none" ? (
-                    "?"
-                  ) : (
-                    <SynergyIcon type={props.type} />
-                  )}
-                  <SynergyIcon type={type} />
-                  <span>{nb}</span>
-                </li>
-              )
-            })}
-          </ul>
-        </details>
-      </div>
       <GamePokemonDetailTooltip
         origin="planner"
         {...(isDragging ? { isOpen: false } : {})}

@@ -66,6 +66,8 @@
 - Buff Smoochum line: Speed 55 → 61, PP 80 → 70
 - Buff Ogerpon Hearthflame passive: 20 → 30 special damage to adjacent enemies
 - Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
+- Silvally now has 18 color variants based on its first synergy item given at evolution.
+- Arceus now has 18 color variants based on its first synergy given.
 - Tauros now is Wild/Normal/Field. Adjusted stats.
 - Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 
