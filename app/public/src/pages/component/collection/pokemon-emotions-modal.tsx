@@ -1,6 +1,10 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { BoosterPriceByRarity } from "../../../../../config"
+import {
+  BoosterPriceByRarity,
+  PkmColorVariants,
+  PkmColorVariantsByPkm
+} from "../../../../../config"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
@@ -21,6 +25,7 @@ import { Modal } from "../modal/modal"
 import PokemonPortrait from "../pokemon-portrait"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
+import { use } from "matter"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
@@ -35,15 +40,20 @@ export default function PokemonEmotionsModal(props: {
   )
   const user = useAppSelector((state) => state.network.profile)
 
-  const index = PkmIndex[props.pokemon]
-  const rarity = getPokemonData(props.pokemon).rarity
+  const [selectedVariant, setSelectedVariant] = useState<Pkm>(props.pokemon)
+  useEffect(() => {
+    setSelectedVariant(props.pokemon)
+  }, [props.pokemon])
+  const shardIndex = PkmIndex[props.pokemon]
+  const index = PkmIndex[selectedVariant]
+  const rarity = getPokemonData(selectedVariant).rarity
   const boosterCost = BoosterPriceByRarity[rarity]
 
   const availableEmotions = getAvailableEmotions(index, false)
   const shinyAvailableEmotions = getAvailableEmotions(index, true)
 
   const shinyAvailable =
-    PokemonAnimations[props.pokemon]?.shinyUnavailable !== true
+    PokemonAnimations[selectedVariant]?.shinyUnavailable !== true
 
   const item = useMemo(
     () =>
@@ -57,6 +67,11 @@ export default function PokemonEmotionsModal(props: {
         played: 0
       },
     [index, pokemonCollection]
+  )
+
+  const shards = useMemo(
+    () => pokemonCollection.get(shardIndex)?.dust ?? 0,
+    [shardIndex, pokemonCollection]
   )
 
   const handlePokemonEmotionClick = useCallback(
@@ -94,18 +109,25 @@ export default function PokemonEmotionsModal(props: {
     Infinity
   )
   const isFavorite = useMemo(
-    () => favorites.includes(props.pokemon) ?? false,
-    [favorites, props.pokemon]
+    () => favorites.includes(selectedVariant) ?? false,
+    [favorites, selectedVariant]
   )
   const toggleFavorite = useCallback(() => {
     let newFavorites: Pkm[]
     if (isFavorite) {
-      newFavorites = favorites.filter((p) => p !== props.pokemon)
+      newFavorites = favorites.filter((p) => p !== selectedVariant)
     } else {
-      newFavorites = [...favorites, props.pokemon]
+      newFavorites = [...favorites, selectedVariant]
     }
     updateFavorites(newFavorites)
-  }, [favorites, isFavorite, props.pokemon, updateFavorites])
+  }, [favorites, isFavorite, selectedVariant, updateFavorites])
+
+  const isColorVariant =
+    PkmColorVariants.includes(props.pokemon) ||
+    props.pokemon in PkmColorVariantsByPkm
+  const colorVariants = isColorVariant
+    ? [props.pokemon, ...(PkmColorVariantsByPkm[props.pokemon] || [])]
+    : []
 
   return (
     <Modal
@@ -123,13 +145,28 @@ export default function PokemonEmotionsModal(props: {
             className={cc({ unlocked: item != null })}
           />
           <h2>
-            {t(`pkm.${props.pokemon}`)} #{PkmIndex[props.pokemon]} -{" "}
+            {t(`pkm.${selectedVariant}`)} #{PkmIndex[selectedVariant]} -{" "}
             {t("played_times", { count: item.played ?? 0 })}
           </h2>
           <div className="spacer" />
+          {isColorVariant && (
+            <div className="color-variants-select">
+              <label>{t("color_variants")}</label>
+              <select
+                onChange={(e) => setSelectedVariant(e.target.value as Pkm)}
+                value={selectedVariant}
+              >
+                {colorVariants.map((variant) => (
+                  <option key={variant} value={variant}>
+                    {t(`pkm.${variant}`)} ({variant})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <p className="dust">
             <img src={getPortraitSrc(index)} className="dust" alt="dust" />
-            {item.dust} {t("shards")}{" "}
+            {shards} {t("shards")}{" "}
           </p>
         </>
       }
@@ -148,7 +185,7 @@ export default function PokemonEmotionsModal(props: {
                     selected={item.selectedEmotion === e && !item.selectedShiny}
                     path={index.replace("-", "/")}
                     emotion={e}
-                    dust={item.dust}
+                    dust={shards}
                     onClick={() =>
                       handlePokemonEmotionClick(
                         item && item.emotions.includes(e),
@@ -176,7 +213,7 @@ export default function PokemonEmotionsModal(props: {
                       }
                       path={`${index.replace("-", "/")}/0000/0001`}
                       emotion={e}
-                      dust={item.dust}
+                      dust={shards}
                       onClick={() =>
                         handlePokemonEmotionClick(
                           item && item.shinyEmotions.includes(e),
@@ -223,7 +260,7 @@ export default function PokemonEmotionsModal(props: {
 
           <button
             className="bubbly orange"
-            disabled={item.dust < boosterCost}
+            disabled={shards < boosterCost}
             onClick={() => dispatch(buyBooster({ index }))}
           >
             {t("buy_booster", { cost: boosterCost })}

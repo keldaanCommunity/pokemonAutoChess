@@ -76,3 +76,10 @@
   gap: 1vw;
   margin: 0 1vw;
 }
+
+.color-variants-select {
+  display: flex;
+  gap: 0.5em;
+  margin: 0 1em;
+  align-items: center;
+}

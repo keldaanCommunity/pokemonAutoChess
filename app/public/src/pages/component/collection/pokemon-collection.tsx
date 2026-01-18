@@ -9,10 +9,16 @@ import React, {
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
+import { PkmColorVariants } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  Pkm,
+  PkmByIndex,
+  PkmFamily,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
@@ -36,6 +42,10 @@ export type CollectionFilterState = {
     | "favorite"
   sort: "index" | "shards" | "played" | "unlocked"
 }
+
+const listPokemons = precomputedPokemonsImplemented.filter(
+  (pokemon) => PkmColorVariants.includes(pokemon.name) === false
+)
 
 export default function PokemonCollection() {
   const { t } = useTranslation()
@@ -67,14 +77,14 @@ export default function PokemonCollection() {
       switch (filterState.mode) {
         case "pokedex":
           setCount(collection.filter((item) => item.played > 0).length)
-          setTotal(precomputedPokemonsImplemented.length)
+          setTotal(listPokemons.length)
           break
         case "shiny":
           setCount(
             collection.filter((item) => item.shinyEmotions.length > 0).length
           )
           setTotal(
-            precomputedPokemonsImplemented.filter(
+            listPokemons.filter(
               (p) => !PokemonAnimations[p.name]?.shinyUnavailable
             ).length
           )
@@ -86,7 +96,7 @@ export default function PokemonCollection() {
                 item.emotions.length > 0 || item.shinyEmotions.length > 0
             ).length
           )
-          setTotal(precomputedPokemonsImplemented.length)
+          setTotal(listPokemons.length)
           break
       }
     },
@@ -281,6 +291,7 @@ export function PokemonCollectionList(props: {
       const pokemonData = getPokemonData(pkm)
       return (
         pkm !== Pkm.DEFAULT &&
+        PkmColorVariants.includes(pkm) === false &&
         (pokemonData.skill !== Ability.DEFAULT ||
           pokemonData.passive !== Passive.NONE) &&
         pokemonData.passive !== Passive.UNOWN &&
