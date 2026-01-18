@@ -116,6 +116,8 @@ import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { resetArraySchema, values } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
+import { ItemStats } from "../../config/game/items"
+import { Stat } from "../../types/enum/Game"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -1989,6 +1991,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       for (const baby of babies) {
+        // compute luck from items to influence hatch chance properly
+        let itemLuck = baby.luck
+
+        for (const item of baby.items) {
+          const stats = ItemStats[item]
+          if (stats && stats[Stat.LUCK]) {
+            itemLuck += stats[Stat.LUCK]!
+          }
+        }
+        //console.log(`${baby.name} has computed luck from items: ${itemLuck}`)
+        //console.log(`${baby.name} has luck: ${baby.luck}`)
         if (
           player.effects.has(EffectEnum.GOLDEN_EGGS) &&
           nbOfGoldenEggsOnBench === 0 &&
@@ -2001,14 +2014,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
         if (player.effects.has(EffectEnum.GOLDEN_EGGS) && !goldenEggFound) {
           player.goldenEggChance += max(0.1)(
-            Math.pow(GOLDEN_EGG_CHANCE, 1 - baby.luck / 200)
+            Math.pow(GOLDEN_EGG_CHANCE, 1 - itemLuck / 200)
           )
         } else if (
           player.effects.has(EffectEnum.HATCHER) &&
           nbEggsFound === 0
         ) {
           player.eggChance += max(0.2)(
-            Math.pow(EGG_CHANCE, 1 - baby.luck / 100)
+            Math.pow(EGG_CHANCE, 1 - itemLuck / 100)
           )
         }
       }
