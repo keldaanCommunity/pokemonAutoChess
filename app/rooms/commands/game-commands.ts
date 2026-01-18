@@ -8,10 +8,12 @@ import {
   BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
   GOLDEN_BERRY_TREE_TYPES,
+  getColorVariantForPlayer,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemSellPricesAtTown,
   MAX_PLAYERS_PER_GAME,
+  PkmColorVariantsByPkm,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   SHARDS_PER_SHINY_UNOWN_WANDERER,
@@ -45,9 +47,7 @@ import { Wanderer } from "../../models/colyseus-models/wanderer"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
-  getColorVariantForPlayer,
-  getPokemonBaseline,
-  PkmColorVariantsByPkm
+  getPokemonBaseline
 } from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"

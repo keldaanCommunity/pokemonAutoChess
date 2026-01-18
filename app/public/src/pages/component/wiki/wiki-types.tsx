@@ -1,9 +1,12 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { RarityColor, SynergyTriggers } from "../../../../../config"
+import {
+  PkmColorVariants,
+  RarityColor,
+  SynergyTriggers
+} from "../../../../../config"
 import { SynergyEffects } from "../../../../../models/effects"
-import { PkmColorVariants } from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Ability } from "../../../../../types/enum/Ability"

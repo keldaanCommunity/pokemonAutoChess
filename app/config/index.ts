@@ -1,6 +1,7 @@
 export * from "./game/battle"
 export * from "./game/board"
 export * from "./game/collection"
+export * from "./game/color-variants"
 export * from "./game/elo"
 export * from "./game/events"
 export * from "./game/experience"

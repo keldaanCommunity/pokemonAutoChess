@@ -4,6 +4,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   DEFAULT_SPEED,
+  getColorVariantForPlayer,
   RegionDetails,
   SynergyTriggers
 } from "../../config"
@@ -56,7 +57,7 @@ import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
 import { values } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
-import PokemonFactory, { getColorVariantForPlayer } from "../pokemon-factory"
+import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {

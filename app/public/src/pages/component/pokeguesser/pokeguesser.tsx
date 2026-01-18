@@ -6,14 +6,14 @@ import React, {
   useState
 } from "react"
 import { useTranslation } from "react-i18next"
+import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import {
-  precomputedPokemons,
-  precomputedPokemonsImplemented
-} from "../../../../../../gen/precomputed-pokemons"
+  getBaseColorVariant,
+  PkmColorVariants,
+  PkmColorVariantsByPkm
+} from "../../../../../config"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
-import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
@@ -26,14 +26,6 @@ import PokemonPortrait from "../pokemon-portrait"
 import "./pokeguesser.css"
 
 const listPokemonsToGuess = precomputedPokemonsImplemented
-  .filter(
-    (p) =>
-      !(
-        PkmFamily[p.name] === Pkm.MILCERY &&
-        p.stars === 3 &&
-        p.name !== Pkm.ALCREMIE_VANILLA
-      )
-  )
   .filter((p) => !(PkmFamily[p.name] === Pkm.UNOWN_A && p.name !== Pkm.UNOWN_A))
   .sort(
     (a, b) => parseInt(a.index.split("-")[0]) - parseInt(b.index.split("-")[0])
@@ -60,7 +52,17 @@ export default function Pokeguesser(props: {
     if (!pokemon) return null
     setAttempts([...attempts, pokemon])
     setValue("")
-    if (pokemon.name === pokemonToGuess.name) {
+    if (PkmFamily[pokemonName] === Pkm.UNOWN_A) {
+      setFound(PkmFamily[pokemonToGuess.name] === Pkm.UNOWN_A)
+    } else if (
+      pokemonToGuess.name in PkmColorVariantsByPkm ||
+      PkmColorVariants.includes(pokemonName)
+    ) {
+      setFound(
+        getBaseColorVariant(pokemonToGuess.name) ===
+          getBaseColorVariant(pokemonName)
+      )
+    } else if (pokemonName === pokemonToGuess.name) {
       setFound(true)
     }
   }

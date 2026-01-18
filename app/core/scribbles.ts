@@ -1,9 +1,7 @@
+import { getColorVariantForPlayer, PkmColorVariantsByPkm } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  getColorVariantForPlayer,
-  PkmColorVariantsByPkm
-} from "../models/pokemon-factory"
+import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getRegularsTier1 } from "../models/shop"

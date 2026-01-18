@@ -1,5 +1,8 @@
-import { BoosterRarityProbability, EmotionCost } from "../config"
-import { PkmColorVariantsByPkm } from "../models/pokemon-factory"
+import {
+  BoosterRarityProbability,
+  EmotionCost,
+  PkmColorVariantsByPkm
+} from "../config"
 import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"

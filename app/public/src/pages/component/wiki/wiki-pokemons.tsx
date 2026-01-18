@@ -2,8 +2,7 @@ import { t } from "i18next"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { RarityColor } from "../../../../../config"
-import { PkmColorVariants } from "../../../../../models/pokemon-factory"
+import { PkmColorVariants, RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -107,7 +106,7 @@ export function WikiPokemon(props: {
           if (PkmColorVariants.includes(p) && !preferences.showColorVariants)
             return false
           if (
-            !props.showEvolutions &&
+            !preferences.showEvolutions &&
             PkmFamily[p] !== p &&
             getPokemonData(PkmFamily[p]).stars !== getPokemonData(p).stars
           )

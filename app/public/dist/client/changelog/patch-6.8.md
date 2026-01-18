@@ -140,6 +140,7 @@
 - Added a tooltip on the experience bar to show gold needed to level up and number of clicks required
 - New animation for Fairy field
 - Wigglypuff mission gold reward is now automatically granted when the mission is completed, instead of requiring to click on Chatot
+- Improve the filters on Wiki Pokémon and synergies pages. Can now filter color variants.
 
 # Bugfix
 
@@ -161,3 +162,4 @@
 - New title: Scout - Equip your team with at least 5 Silk Scarf made items
 - Added a new meta report section, with a cluster map
 - Change to the boosters: color variants are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple color variants (such as Flabebe or Vivillon) appearing in boosters.
+- Pokéguesser now accepts any color variant of the Pokémon as a correct answer.
