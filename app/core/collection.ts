@@ -1,6 +1,9 @@
+import { HydratedDocument } from "mongoose"
 import {
   BoosterRarityProbability,
   EmotionCost,
+  getBaseColorVariant,
+  PkmColorVariants,
   PkmColorVariantsByPkm
 } from "../config"
 import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
@@ -10,7 +13,7 @@ import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
 import { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
 import { Rarity } from "../types/enum/Game"
-import { Pkm, PkmIndex, Unowns } from "../types/enum/Pokemon"
+import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../types/enum/Pokemon"
 import {
   IPokemonCollectionItemClient,
   IPokemonCollectionItemMongo,
@@ -18,6 +21,7 @@ import {
   IUserMetadataMongo
 } from "../types/interfaces/UserMetadata"
 import { sum } from "../utils/array"
+import { logger } from "../utils/logger"
 import { chance, pickRandomIn, randomWeighted } from "../utils/random"
 
 export function createBooster(user: IUserMetadataMongo): Booster {
@@ -292,5 +296,45 @@ export class CollectionUtils {
     if (byteIndex >= mask.length) return false
 
     return (mask[byteIndex] & (1 << bitPosition)) !== 0
+  }
+}
+
+export async function migrateShardsOfColorVariants(
+  mongoUser: HydratedDocument<IUserMetadataMongo>
+) {
+  let modified = false
+
+  for (const [index, item] of mongoUser.pokemonCollection) {
+    const pkm = PkmByIndex[index]
+    if (PkmColorVariants.includes(pkm) && item.dust > 0) {
+      const basePkm = getBaseColorVariant(pkm)
+      const baseIndex = PkmIndex[basePkm]
+      const baseItem = mongoUser.pokemonCollection.get(baseIndex)
+      const dustToMigrate = item.dust
+      if (!baseItem) {
+        // Base variant is not in collection, create new collection item
+        const newCollectionItem: IPokemonCollectionItemMongo = {
+          id: index,
+          unlocked: Buffer.alloc(5, 0),
+          dust: item.dust,
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          played: 0
+        }
+        mongoUser.pokemonCollection.set(baseIndex, newCollectionItem)
+      } else {
+        // Base variant exists, add dust
+        baseItem.dust += dustToMigrate
+        item.dust = 0
+      }
+      logger.info(
+        `Migrated ${dustToMigrate} shards from ${pkm} to its base variant ${basePkm} for user ${mongoUser.uid}`
+      )
+      modified = true
+    }
+  }
+
+  if (modified) {
+    return await mongoUser.save()
   }
 }

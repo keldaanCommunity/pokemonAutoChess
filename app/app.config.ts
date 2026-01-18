@@ -10,16 +10,12 @@ import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
-import {
-  MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  MAX_POOL_CONNECTIONS_SIZE,
-  SynergyTriggers
-} from "./config"
+import { MAX_CONCURRENT_PLAYERS_ON_SERVER, SynergyTriggers } from "./config"
+import { migrateShardsOfColorVariants } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
-import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
 import UserMetadata, {
   toUserMetadataJSON
@@ -417,6 +413,7 @@ export default config({
         if (!userAuth) return
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
+        await migrateShardsOfColorVariants(mongoUser) // TEMPORARY migration; to be removed in future
         res.set("Cache-Control", "no-cache")
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
