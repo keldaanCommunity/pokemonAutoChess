@@ -9,7 +9,7 @@ import React, {
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
-import { PkmColorVariants } from "../../../../../config"
+import { PkmAltForms } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
@@ -44,7 +44,7 @@ export type CollectionFilterState = {
 }
 
 const listPokemons = precomputedPokemonsImplemented.filter(
-  (pokemon) => PkmColorVariants.includes(pokemon.name) === false
+  (pokemon) => PkmAltForms.includes(pokemon.name) === false
 )
 
 export default function PokemonCollection() {
@@ -291,7 +291,7 @@ export function PokemonCollectionList(props: {
       const pokemonData = getPokemonData(pkm)
       return (
         pkm !== Pkm.DEFAULT &&
-        PkmColorVariants.includes(pkm) === false &&
+        PkmAltForms.includes(pkm) === false &&
         (pokemonData.skill !== Ability.DEFAULT ||
           pokemonData.passive !== Passive.NONE) &&
         pokemonData.passive !== Passive.UNOWN &&

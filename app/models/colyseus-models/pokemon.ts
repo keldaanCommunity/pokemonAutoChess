@@ -4,7 +4,7 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   DEFAULT_SPEED,
-  getColorVariantForPlayer,
+  getAltFormForPlayer,
   RegionDetails,
   SynergyTriggers
 } from "../../config"
@@ -19692,7 +19692,7 @@ export class Spewpa extends Pokemon {
     Pkm.VIVILLON_POKE_BALL
   ]
   evolutionRule = new HatchEvolutionRule((pokemon, player) => {
-    return getColorVariantForPlayer(Pkm.VIVILLON, player)
+    return getAltFormForPlayer(Pkm.VIVILLON, player)
   })
   hp = 125
   atk = 11

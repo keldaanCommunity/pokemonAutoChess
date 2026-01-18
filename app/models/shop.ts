@@ -5,7 +5,7 @@ import {
   EEVEE_RATE,
   FALINKS_TROOPER_RATE,
   FishRarityProbability,
-  getColorVariantForPlayer,
+  getAltFormForPlayer,
   getUnownsPoolPerStage,
   HIGH_ROLLER_CHANCE,
   HONEY_CHANCE,
@@ -16,7 +16,7 @@ import {
   MIN_STAGE_FOR_DITTO,
   NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
-  PkmColorVariantsByPkm,
+  PkmAltFormsByPkm,
   PoolSize,
   PortalCarouselStages,
   PVE_WILD_CHANCE,
@@ -461,8 +461,8 @@ export default class Shop {
         if (regionalVariants.length > 0)
           selected = pickRandomIn(regionalVariants)
       }
-      if (selected in PkmColorVariantsByPkm) {
-        selected = getColorVariantForPlayer(selected as Pkm, player)
+      if (selected in PkmAltFormsByPkm) {
+        selected = getAltFormForPlayer(selected as Pkm, player)
       }
 
       if (stageLevel === PortalCarouselStages[0]) {
@@ -517,8 +517,8 @@ export default class Shop {
           )
           if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
         }
-        if (pkm in PkmColorVariantsByPkm) {
-          pkm = getColorVariantForPlayer(pkm, player)
+        if (pkm in PkmAltFormsByPkm) {
+          pkm = getAltFormForPlayer(pkm, player)
         }
         return pkm
       })

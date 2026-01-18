@@ -138,7 +138,7 @@
 - Added a tooltip on the experience bar to show gold needed to level up and number of clicks required
 - New animation for Fairy field
 - Wigglypuff mission gold reward is now automatically granted when the mission is completed, instead of requiring to click on Chatot
-- Improve the filters on Wiki Pokémon and synergies pages. Can now filter color variants.
+- Improve the filters on Wiki Pokémon and synergies pages. Can now filter alternative forms.
 
 # Bugfix
 
@@ -160,9 +160,15 @@
 - New title: Top Gun - Get to Mach 10 with a Mach Ribbon
 - New title: Scout - Equip your team with at least 5 Silk Scarf made items
 - Added a new meta report section, with a cluster map
-- Change to the boosters: color variants are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple color variants (such as Flabebe or Vivillon) appearing in boosters.
-- Silvally now has 18 color variants based on its first synergy item given at evolution.
-- Arceus now has 18 color variants based on its first synergy given.
-- Alcremie flavors are now considered as color variants
-- Pokéguesser now accepts any color variant of the Pokémon as a correct answer.
-- Collection shards for color variants can now be used to buy any color variant of a Pokémon.
+- Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
+
+# Pokemon Alternative Forms
+
+We are introducing the notion of Pokémon alternative forms in the game. Alternative Forms are mostly aesthetic variations of the same Pokémon, that will be merged in your Collection and in various other places, like the Pokéguesser gadget.
+
+- Collection shards can now be used to buy any alternative form of a Pokémon.
+- All the existing shards you had on an alternative form will be attributed to the base form.
+- Pokéguesser now accepts any alternative form of the Pokémon to guess as a correct answer.
+- Silvally now has 18 alternative forms based on its first synergy item given at evolution.
+- Arceus now has 18 alternative forms based on its first synergy given.
+- List of Pokémon with different alternative forms: Flabebe, Floette, Florges, Minior, Silvally, Arceus, Alcremie, Ogerpon, Basculin, Basculegion, Darmanitan, Maushold, Hoopa, Aegislash, Vivillon, Mimikyu, Deoxys

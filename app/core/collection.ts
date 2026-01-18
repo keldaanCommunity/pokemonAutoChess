@@ -2,9 +2,9 @@ import { HydratedDocument } from "mongoose"
 import {
   BoosterRarityProbability,
   EmotionCost,
-  getBaseColorVariant,
-  PkmColorVariants,
-  PkmColorVariantsByPkm
+  getBaseAltForm,
+  PkmAltForms,
+  PkmAltFormsByPkm
 } from "../config"
 import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
@@ -88,9 +88,9 @@ export function pickRandomPokemonBooster(
 
   const shiny = chance(0.05)
 
-  if (name in PkmColorVariantsByPkm) {
-    // If the selected Pokemon has color variants, pick one of them randomly
-    name = pickRandomIn([...name, PkmColorVariantsByPkm[name]!])
+  if (name in PkmAltFormsByPkm) {
+    // If the selected Pokemon has alt forms, pick one of them randomly
+    name = pickRandomIn([...name, PkmAltFormsByPkm[name]!])
   }
 
   const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
@@ -299,20 +299,20 @@ export class CollectionUtils {
   }
 }
 
-export async function migrateShardsOfColorVariants(
+export async function migrateShardsOfAltForms(
   mongoUser: HydratedDocument<IUserMetadataMongo>
 ) {
   let modified = false
 
   for (const [index, item] of mongoUser.pokemonCollection) {
     const pkm = PkmByIndex[index]
-    if (PkmColorVariants.includes(pkm) && item.dust > 0) {
-      const basePkm = getBaseColorVariant(pkm)
+    if (PkmAltForms.includes(pkm) && item.dust > 0) {
+      const basePkm = getBaseAltForm(pkm)
       const baseIndex = PkmIndex[basePkm]
       const baseItem = mongoUser.pokemonCollection.get(baseIndex)
       const dustToMigrate = item.dust
       if (!baseItem) {
-        // Base variant is not in collection, create new collection item
+        // Base form is not in collection, create new collection item
         const newCollectionItem: IPokemonCollectionItemMongo = {
           id: index,
           unlocked: Buffer.alloc(5, 0),
@@ -323,12 +323,12 @@ export async function migrateShardsOfColorVariants(
         }
         mongoUser.pokemonCollection.set(baseIndex, newCollectionItem)
       } else {
-        // Base variant exists, add dust
+        // Base form exists, add dust
         baseItem.dust += dustToMigrate
         item.dust = 0
       }
       logger.info(
-        `Migrated ${dustToMigrate} shards from ${pkm} to its base variant ${basePkm} for user ${mongoUser.uid}`
+        `Migrated ${dustToMigrate} shards from ${pkm} to its base form ${basePkm} for user ${mongoUser.uid}`
       )
       modified = true
     }

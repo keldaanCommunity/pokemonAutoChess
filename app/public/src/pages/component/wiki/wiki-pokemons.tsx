@@ -2,7 +2,7 @@ import { t } from "i18next"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { PkmColorVariants, RarityColor } from "../../../../../config"
+import { PkmAltForms, RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -103,8 +103,7 @@ export function WikiPokemon(props: {
           )
             return false
 
-          if (PkmColorVariants.includes(p) && !preferences.showColorVariants)
-            return false
+          if (PkmAltForms.includes(p) && !preferences.showAltForms) return false
           if (
             !preferences.showEvolutions &&
             PkmFamily[p] !== p &&
@@ -125,7 +124,7 @@ export function WikiPokemon(props: {
       preferences.showSpecialPool,
       preferences.showRegularPool,
       preferences.showEvolutions,
-      preferences.showColorVariants
+      preferences.showAltForms
     ]
   ) as Pkm[]
 

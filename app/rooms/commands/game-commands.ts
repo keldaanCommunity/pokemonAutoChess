@@ -8,12 +8,12 @@ import {
   BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
   GOLDEN_BERRY_TREE_TYPES,
-  getColorVariantForPlayer,
+  getAltFormForPlayer,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemSellPricesAtTown,
   MAX_PLAYERS_PER_GAME,
-  PkmColorVariantsByPkm,
+  PkmAltFormsByPkm,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   SHARDS_PER_SHINY_UNOWN_WANDERER,
@@ -315,8 +315,8 @@ export class OnDragDropPokemonCommand extends Command<
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             let pkm = getPokemonBaseline(pokemonToClone.name)
-            if (pkm in PkmColorVariantsByPkm) {
-              pkm = getColorVariantForPlayer(pkm, player)
+            if (pkm in PkmAltFormsByPkm) {
+              pkm = getAltFormForPlayer(pkm, player)
             }
             const replaceDitto = PokemonFactory.createPokemonFromName(
               pkm,

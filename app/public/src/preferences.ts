@@ -25,7 +25,7 @@ export interface IPreferencesState {
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   showEvolutions: boolean
-  showColorVariants: boolean
+  showAltForms: boolean
   showRegularPool: boolean
   showAdditionalPool: boolean
   showRegionalPool: boolean
@@ -50,7 +50,7 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
-  showColorVariants: false,
+  showAltForms: false,
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { PkmColorVariants, RarityColor } from "../../../../../config"
+import { PkmAltForms, RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Emotion, PkmWithCustom } from "../../../../../types"
@@ -146,8 +146,8 @@ function PokemonPickerTab(props: {
             return false
           if (preferences.showRegionalPool === false && p.regional) return false
           if (
-            preferences.showColorVariants === false &&
-            PkmColorVariants.includes(p.name)
+            preferences.showAltForms === false &&
+            PkmAltForms.includes(p.name)
           )
             return false
           if (
@@ -187,7 +187,7 @@ function PokemonPickerTab(props: {
       preferences.showRegionalPool,
       preferences.showRegularPool,
       preferences.showEvolutions,
-      preferences.showColorVariants,
+      preferences.showAltForms,
       preferences.filterAvailableAddsAndRegionals,
       additionalPokemons,
       regionalPokemons,

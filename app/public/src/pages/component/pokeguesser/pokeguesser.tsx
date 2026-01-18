@@ -8,9 +8,9 @@ import React, {
 import { useTranslation } from "react-i18next"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import {
-  getBaseColorVariant,
-  PkmColorVariants,
-  PkmColorVariantsByPkm
+  getBaseAltForm,
+  PkmAltForms,
+  PkmAltFormsByPkm
 } from "../../../../../config"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { Stat } from "../../../../../types/enum/Game"
@@ -55,12 +55,11 @@ export default function Pokeguesser(props: {
     if (PkmFamily[pokemonName] === Pkm.UNOWN_A) {
       setFound(PkmFamily[pokemonToGuess.name] === Pkm.UNOWN_A)
     } else if (
-      pokemonToGuess.name in PkmColorVariantsByPkm ||
-      PkmColorVariants.includes(pokemonName)
+      pokemonToGuess.name in PkmAltFormsByPkm ||
+      PkmAltForms.includes(pokemonName)
     ) {
       setFound(
-        getBaseColorVariant(pokemonToGuess.name) ===
-          getBaseColorVariant(pokemonName)
+        getBaseAltForm(pokemonToGuess.name) === getBaseAltForm(pokemonName)
       )
     } else if (pokemonName === pokemonToGuess.name) {
       setFound(true)

@@ -48,11 +48,11 @@ export function PokemonFilters() {
           isDark
         />
         <Checkbox
-          checked={preferences.showColorVariants}
+          checked={preferences.showAltForms}
           onToggle={(checked) => {
-            setPreferences({ showColorVariants: checked })
+            setPreferences({ showAltForms: checked })
           }}
-          label={t("show_color_variants")}
+          label={t("show_alt_forms")}
           isDark
         />
       </div>

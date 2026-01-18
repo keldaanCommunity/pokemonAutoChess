@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import {
-  PkmColorVariants,
+  PkmAltForms,
   RarityColor,
   SynergyTriggers
 } from "../../../../../config"
@@ -66,7 +66,7 @@ export function WikiType(props: { type: Synergy }) {
     .filter((p, index, list) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
       if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
-      if (!preferences.showColorVariants && PkmColorVariants.includes(p.name))
+      if (!preferences.showAltForms && PkmAltForms.includes(p.name))
         return false
       if (preferences.showEvolutions) return true
 

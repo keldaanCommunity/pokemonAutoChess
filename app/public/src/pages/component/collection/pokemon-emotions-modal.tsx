@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   BoosterPriceByRarity,
-  PkmColorVariants,
-  PkmColorVariantsByPkm
+  PkmAltForms,
+  PkmAltFormsByPkm
 } from "../../../../../config"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -122,11 +122,10 @@ export default function PokemonEmotionsModal(props: {
     updateFavorites(newFavorites)
   }, [favorites, isFavorite, selectedVariant, updateFavorites])
 
-  const isColorVariant =
-    PkmColorVariants.includes(props.pokemon) ||
-    props.pokemon in PkmColorVariantsByPkm
-  const colorVariants = isColorVariant
-    ? [props.pokemon, ...(PkmColorVariantsByPkm[props.pokemon] || [])]
+  const isAltForm =
+    PkmAltForms.includes(props.pokemon) || props.pokemon in PkmAltFormsByPkm
+  const altForms = isAltForm
+    ? [props.pokemon, ...(PkmAltFormsByPkm[props.pokemon] || [])]
     : []
 
   return (
@@ -149,14 +148,14 @@ export default function PokemonEmotionsModal(props: {
             {t("played_times", { count: item.played ?? 0 })}
           </h2>
           <div className="spacer" />
-          {isColorVariant && (
-            <div className="color-variants-select">
-              <label>{t("color_variants")}</label>
+          {isAltForm && (
+            <div className="alt-forms-select">
+              <label>{t("alt_forms")}</label>
               <select
                 onChange={(e) => setSelectedVariant(e.target.value as Pkm)}
                 value={selectedVariant}
               >
-                {colorVariants.map((variant) => (
+                {altForms.map((variant) => (
                   <option key={variant} value={variant}>
                     {t(`pkm.${variant}`)} ({variant})
                   </option>

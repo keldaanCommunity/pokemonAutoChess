@@ -1,4 +1,4 @@
-import { getColorVariantForPlayer, PkmColorVariantsByPkm } from "../config"
+import { getAltFormForPlayer, PkmAltFormsByPkm } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -115,8 +115,8 @@ export function pickFirstPartners(player: Player, state: GameState): Pkm[] {
         )
         if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
       }
-      if (pkm in PkmColorVariantsByPkm) {
-        pkm = getColorVariantForPlayer(pkm, player)
+      if (pkm in PkmAltFormsByPkm) {
+        pkm = getAltFormForPlayer(pkm, player)
       }
       return pkm
     })

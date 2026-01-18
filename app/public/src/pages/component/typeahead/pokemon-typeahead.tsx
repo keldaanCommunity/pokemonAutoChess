@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { PkmColorVariants } from "../../../../../config"
+import { PkmAltForms } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
@@ -25,7 +25,7 @@ export function PokemonTypeahead({
         return (
           (pokemon.skill !== Ability.DEFAULT ||
             pokemon.passive !== Passive.NONE) &&
-          PkmColorVariants.includes(pokemon.name as Pkm) === false
+          PkmAltForms.includes(pokemon.name as Pkm) === false
         )
       })
       .sort((a, b) => t("pkm." + a).localeCompare(t("pkm." + b)))

@@ -11,7 +11,7 @@ import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
 import { MAX_CONCURRENT_PLAYERS_ON_SERVER, SynergyTriggers } from "./config"
-import { migrateShardsOfColorVariants } from "./core/collection"
+import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
@@ -413,7 +413,7 @@ export default config({
         if (!userAuth) return
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
-        await migrateShardsOfColorVariants(mongoUser) // TEMPORARY migration; to be removed in future
+        await migrateShardsOfAltForms(mongoUser) // TEMPORARY migration; to be removed in future
         res.set("Cache-Control", "no-cache")
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {

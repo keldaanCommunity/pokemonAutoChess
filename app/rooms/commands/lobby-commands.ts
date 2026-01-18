@@ -7,11 +7,11 @@ import {
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
   EloRankThreshold,
-  getBaseColorVariant,
+  getBaseAltForm,
   getEmotionCost,
   MAX_PLAYERS_PER_GAME,
   MAX_USER_NAME_LENGTH,
-  PkmColorVariants,
+  PkmAltForms,
   USERNAME_REGEXP
 } from "../../config"
 import { CollectionUtils, createBooster } from "../../core/collection"
@@ -385,7 +385,7 @@ export class OpenBoosterCommand extends Command<
           if (hasUnlocked) {
             // Add dust
             const dustGain = card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
-            const shardIndex = PkmIndex[getBaseColorVariant(card.name)]
+            const shardIndex = PkmIndex[getBaseAltForm(card.name)]
             updateOperations.$inc = updateOperations.$inc || {}
             updateOperations.$inc[`pokemonCollection.${shardIndex}.dust`] =
               dustGain
@@ -616,8 +616,8 @@ export class BuyEmotionCommand extends Command<
       const cost = getEmotionCost(emotion, shiny)
       if (!user || !PkmByIndex.hasOwnProperty(index)) return
 
-      // If a color variant is bought, shards must be taken from the base variant
-      const shardIndex = PkmIndex[getBaseColorVariant(PkmByIndex[index])]
+      // If an alt form is bought, shards must be taken from the base form
+      const shardIndex = PkmIndex[getBaseAltForm(PkmByIndex[index])]
       const pokemonCollectionItem = user.pokemonCollection.get(index)
       const shardCollectionItem = user.pokemonCollection.get(shardIndex)
       if (!pokemonCollectionItem || !shardCollectionItem) return
@@ -695,8 +695,7 @@ async function checkTitlesAfterEmotionUnlocked(
       Object.values(Pkm)
         .filter(
           (p) =>
-            NonPkm.includes(p) === false &&
-            PkmColorVariants.includes(p) === false
+            NonPkm.includes(p) === false && PkmAltForms.includes(p) === false
         )
         .every((pkm) => {
           const item = mongoUser.pokemonCollection.get(PkmIndex[pkm])
@@ -777,7 +776,7 @@ export class BuyBoosterCommand extends Command<
       const rarity = getPokemonData(pkm).rarity
       const boosterCost = BoosterPriceByRarity[rarity]
 
-      const shardIndex = PkmIndex[getBaseColorVariant(pkm)]
+      const shardIndex = PkmIndex[getBaseAltForm(pkm)]
 
       const mongoUser = await UserMetadata.findOneAndUpdate(
         {
@@ -797,7 +796,8 @@ export class BuyBoosterCommand extends Command<
       const pokemonCollectionItem = user.pokemonCollection.get(shardIndex)
       if (!pokemonCollectionItem) return
 
-      const mongoPokemonCollectionItem = mongoUser.pokemonCollection.get(shardIndex)
+      const mongoPokemonCollectionItem =
+        mongoUser.pokemonCollection.get(shardIndex)
       if (!mongoPokemonCollectionItem) return
 
       user.booster = mongoUser.booster
