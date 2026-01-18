@@ -26,6 +26,10 @@ export interface IPreferencesState {
   showDamageNumbers: boolean
   showEvolutions: boolean
   showColorVariants: boolean
+  showRegularPool: boolean
+  showAdditionalPool: boolean
+  showRegionalPool: boolean
+  showSpecialPool: boolean
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   disableCameraShake: boolean
@@ -46,7 +50,11 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
-  showColorVariants: true,
+  showColorVariants: false,
+  showRegularPool: true,
+  showAdditionalPool: true,
+  showRegionalPool: true,
+  showSpecialPool: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   disableCameraShake: true,

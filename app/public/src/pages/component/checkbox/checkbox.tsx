@@ -8,7 +8,7 @@ interface CheckboxProps {
   onToggle?: (value: boolean) => void
   label: string
   isDark?: boolean
-  readOnly?: boolean
+  disabled?: boolean
   title?: string
 }
 
@@ -17,7 +17,7 @@ export function Checkbox({
   onToggle,
   label,
   isDark = false,
-  readOnly,
+  disabled,
   title
 }: CheckboxProps) {
   const handleChange = useCallback(
@@ -35,9 +35,11 @@ export function Checkbox({
         className={cc("my-checkbox", { "is-dark": isDark })}
         checked={checked}
         onChange={handleChange}
-        readOnly={readOnly}
+        disabled={disabled}
       />
-      <span style={{ color: isDark ? "white" : "black" }}>{label}</span>
+      <span>
+        {label}
+      </span>
     </label>
   )
 }

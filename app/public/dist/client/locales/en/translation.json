@@ -14,7 +14,8 @@
 	"pool": {
 		"regular": "Regular",
 		"additional": "Additional",
-		"regional": "Regional"
+		"regional": "Regional",
+		"special": "Special"
 	},
 	"damage": {
 		"SPECIAL": "special damage",
@@ -3887,6 +3888,7 @@
 	"disable_camera_shake": "No camera shake or flashes",
 	"antialiasing": "Enable anti-aliasing",
 	"colorblind_mode": "Colorblind mode",
+	"filters": "Filters",
 	"save": "Save",
 	"reset": "Reset",
 	"snapshot": "Snapshot",

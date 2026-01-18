@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor, SynergyTriggers } from "../../../../../config"
@@ -8,7 +8,6 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
@@ -17,10 +16,11 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
-import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
+import { PokemonFilters } from "../pokemon-filters/pokemon-filters"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
+import { SynergyOverlaps } from "../synergy-overlaps/synergy-overlaps"
 
 export default function WikiTypes() {
   const { t } = useTranslation()
@@ -53,7 +53,7 @@ export default function WikiTypes() {
 
 export function WikiType(props: { type: Synergy }) {
   const { t } = useTranslation()
-  const [preferences, setPreferences] = usePreferences()
+  const [preferences] = usePreferences()
   const [overlap, setOverlap] = useState<Synergy | null>(null)
 
   const pokemons = PRECOMPUTED_POKEMONS_PER_TYPE[props.type]
@@ -103,22 +103,6 @@ export function WikiType(props: { type: Synergy }) {
       })
   }
 
-  const overlapsMap = new Map(
-    SynergyArray.filter((type) => type !== props.type).map((type) => [
-      type,
-      pokemons
-        .filter((p) => p.types.includes(type))
-        .filter(
-          (p, i, list) =>
-            list.findIndex((q) => PkmFamily[p.name] === PkmFamily[q.name]) === i
-        ).length
-    ])
-  )
-
-  const overlaps = [...overlapsMap.entries()]
-    .filter(([type, nb]) => nb > 0)
-    .sort((a, b) => b[1] - a[1])
-
   return (
     <div style={{ padding: "0 1em" }}>
       <h2>
@@ -146,40 +130,13 @@ export function WikiType(props: { type: Synergy }) {
 
       <hr />
       <div style={{ float: "right", justifyItems: "end" }}>
-        <Checkbox
-          checked={preferences.showColorVariants}
-          onToggle={(checked) => {
-            setPreferences({ showColorVariants: checked })
-          }}
-          label={t("show_color_variants")}
-          isDark
+        <PokemonFilters />
+        <SynergyOverlaps
+          type={props.type}
+          pokemons={pokemons}
+          overlap={overlap}
+          setOverlap={setOverlap}
         />
-        <Checkbox
-          checked={preferences.showEvolutions}
-          onToggle={(checked) => {
-            setPreferences({ showEvolutions: checked })
-          }}
-          label={t("show_evolutions")}
-          isDark
-        />
-        <details>
-          <summary style={{ textAlign: "end" }}>{t("overlaps")}</summary>
-          <ul className="synergy-overlaps">
-            {overlaps.map(([type, nb]) => {
-              return (
-                <li
-                  onClick={() => setOverlap(overlap === type ? null : type)}
-                  key={type}
-                  className={cc({ active: overlap === type })}
-                >
-                  <SynergyIcon type={props.type} />
-                  <SynergyIcon type={type} />
-                  <span>{nb}</span>
-                </li>
-              )
-            })}
-          </ul>
-        </details>
       </div>
       <table>
         <tbody>
