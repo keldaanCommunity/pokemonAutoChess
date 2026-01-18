@@ -789,7 +789,7 @@ export class Kleavor extends Pokemon {
     const regionSynergies = RegionDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ROCK) ||
-      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FOSSIL) ||
       regionSynergies.includes(Synergy.DARK)
     )
   }

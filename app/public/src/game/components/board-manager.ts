@@ -5,6 +5,7 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   getRegionTint,
+  ItemStats,
   PortalCarouselStages,
   RegionDetails,
   SynergyTriggers
@@ -925,7 +926,11 @@ export default class BoardManager {
         case "hp":
         case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
-          const sizeBuff = (pokemon.hp - baseHP) / baseHP
+          const hp = values(pokemon.items).reduce(
+            (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
+            pokemon.hp
+          )
+          const sizeBuff = (hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
           if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.HP)
