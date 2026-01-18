@@ -165,3 +165,4 @@
 - Arceus now has 18 color variants based on its first synergy given.
 - Alcremie flavors are now considered as color variants
 - Pokéguesser now accepts any color variant of the Pokémon as a correct answer.
+- Collection shards for color variants can now be used to buy any color variant of a Pokémon.

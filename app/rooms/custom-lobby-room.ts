@@ -11,7 +11,6 @@ import {
 } from "../config"
 import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
-import { IBot } from "../models/mongo-models/bot-v2"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
