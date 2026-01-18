@@ -259,7 +259,21 @@ export const PkmAltForms: readonly Pkm[] = [
   Pkm.OGERPON_HEARTHFLAME,
   Pkm.OGERPON_HEARTHFLAME_MASK,
   Pkm.OGERPON_WELLSPRING,
-  Pkm.OGERPON_WELLSPRING_MASK
+  Pkm.OGERPON_WELLSPRING_MASK,
+
+  Pkm.BASCULIN_BLUE,
+  Pkm.BASCULIN_RED,
+  Pkm.BASCULEGION_FEMALE,
+
+  Pkm.DARMANITAN_ZEN,
+  Pkm.MAUSHOLD_FOUR,
+  Pkm.HOOPA_UNBOUND,
+  Pkm.AEGISLASH_BLADE,
+  Pkm.MIMIKYU_BUSTED,
+
+  Pkm.DEOXYS_ATTACK,
+  Pkm.DEOXYS_DEFENSE,
+  Pkm.DEOXYS_SPEED
 ]
 
 export type PkmAltForm = (typeof PkmAltForms)[number]
@@ -366,8 +380,22 @@ export const PkmAltFormsByPkm = {
     Pkm.OGERPON_HEARTHFLAME_MASK,
     Pkm.OGERPON_WELLSPRING,
     Pkm.OGERPON_WELLSPRING_MASK
+  ],
+  
+  [Pkm.BASCULIN_WHITE]: [Pkm.BASCULIN_BLUE, Pkm.BASCULIN_RED],
+  [Pkm.BASCULEGION_MALE]: [Pkm.BASCULEGION_FEMALE],
+  [Pkm.DARMANITAN]: [Pkm.DARMANITAN_ZEN],
+  [Pkm.MAUSHOLD_FOUR]: [Pkm.MAUSHOLD_THREE],
+  [Pkm.HOOPA]: [Pkm.HOOPA_UNBOUND],
+  [Pkm.AEGISLASH]: [Pkm.AEGISLASH_BLADE],
+  [Pkm.MIMIKYU]: [Pkm.MIMIKYU_BUSTED],
+  [Pkm.DEOXYS]: [
+    Pkm.DEOXYS_ATTACK,
+    Pkm.DEOXYS_DEFENSE,
+    Pkm.DEOXYS_SPEED
   ]
 } satisfies { [base in Pkm]?: PkmAltForm[] }
+
 
 export type PkmWithAltForm = keyof typeof PkmAltFormsByPkm
 
