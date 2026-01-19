@@ -1696,7 +1696,9 @@
 		"VIVILLON_POKE_BALL": "Vivillon (Poké Ball)",
 		"LECHONK": "Lechonk",
 		"OINKOLOGNE_MALE": "Oinkologne ♂",
-		"OINKOLOGNE_FEMALE": "Oinkologne ♀"
+		"OINKOLOGNE_FEMALE": "Oinkologne ♀",
+		"WOOLOO": "Wooloo",
+		"DUBWOOL": "Dubwool"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -3215,7 +3217,7 @@
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region at stage 20.",
 		"PIKACHU_SURFER": "Surfing Pikachu's power swells with the waves. Gain 50 SHIELD and 3 ATK for each AQUATIC synergy step reached, and fill PP bar when a wave approaches.",
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
-		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
+		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by staying one stage on the bench, which reset its DEF and SPEED stats. When groomed at max stacks, get a SILK_SCARF.",
 		"ACCELERATION": "Acceleration: gain 15 SPEED every tile you move (jumps and dashes count for one)",
 		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP. If Meltan was holding items, they are dropped.",
 		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each.",

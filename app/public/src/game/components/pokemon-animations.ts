@@ -7783,7 +7783,7 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE,
     shinyUnavailable: true
-  }
+  },
   /*
   [Pkm.OINKOLOGNE_FEMALE]: {
     attack: AnimationType.Attack,
@@ -7793,4 +7793,17 @@ export const PokemonAnimations: {
     shinyUnavailable: true
   },
   */
+  [Pkm.WOOLOO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.DUBWOOL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  }
 }
