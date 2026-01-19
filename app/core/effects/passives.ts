@@ -998,7 +998,7 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   familyMembers.forEach((entity) => {
     if (!attacker.player) return
     entity.addStack()
-    if (entity.refToBoardPokemon.stacks % 3 === 0) {
+    if (entity.refToBoardPokemon.stacks % 2 === 0) {
       entity.addAttack(1, entity, 0, false, true)
     }
   })
