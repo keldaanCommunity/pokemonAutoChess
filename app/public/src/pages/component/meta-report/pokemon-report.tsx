@@ -11,6 +11,7 @@ import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import { PokemonDistribution } from "./pokemon-distribution"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
 
@@ -137,18 +138,34 @@ export function PokemonReport() {
       </header>
       {loading && <p>{t("loading")}</p>}
       {!loading && (
-        <PokemonStatistic
-          pokemons={
-            sortedMetaPokemons?.find((p) => p.tier === eloThreshold)
-              ?.pokemons || new Array<IPokemonsStatistic>()
-          }
-          rankingBy={pokemonRankingBy}
-          synergy={synergy}
-          rarity={rarity}
-          pool={pool}
-          tier={tier}
-          selectedPkm={selectedPkm}
-        />
+        <div className="pokemon-report-content">
+          <div className="pokemon-statistics-list">
+            <PokemonStatistic
+              pokemons={
+                sortedMetaPokemons?.find((p) => p.tier === eloThreshold)
+                  ?.pokemons || new Array<IPokemonsStatistic>()
+              }
+              rankingBy={pokemonRankingBy}
+              synergy={synergy}
+              rarity={rarity}
+              pool={pool}
+              tier={tier}
+              selectedPkm={selectedPkm}
+            />
+          </div>
+          <div className="pokemon-distribution-chart">
+            <PokemonDistribution
+              metaPokemons={metaPokemons}
+              eloThreshold={eloThreshold}
+              loading={loading}
+              synergy={synergy}
+              rarity={rarity}
+              pool={pool}
+              tier={tier}
+              selectedPkm={selectedPkm}
+            />
+          </div>
+        </div>
       )}
     </div>
   )
