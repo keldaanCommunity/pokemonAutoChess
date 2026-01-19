@@ -2947,7 +2947,7 @@
 		"GHOST": "GHOST Pokémon haben eine [15,LK]% Chance, bei einem Treffer SILENCE auszulösen und Angriffen auszuweichen, und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
 		"FAIRY": "FAIRY Pokémon verursachen mit ihren Angriffen zusätzliche SPECIAL und lösen Schocks aus, wenn sie einen kritischen Treffer erleiden.",
 		"ICE": "ICE Pokemon haben [30,LK]% Chance, den Gegner nach einem Treffer für 2 Sekunden zu FREEZE und dem gesamten Team SPE_DEF zu geben",
-		"FOSSIL": "Bei ihrem ersten KO erwachen FOSSIL Pokémon mit erhöhter ATK wieder zum Leben",
+		"FOSSIL": "Bei 30 % HP erwecken FOSSIL Pokémon ihre Urkraft und erhalten SHIELD und ATK.",
 		"SOUND": "SOUND Pokémon stoßen einen Schrei aus, wenn sie ihre Fähigkeiten einsetzen, wecken damit schlafende Verbündete und verleihen ihnen Bonuswerte",
 		"ARTIFICIAL": "ARTIFICIAL Pokémons geben $t(tools) und erhalten ATK, AP und SHIELD, wenn sie Items tragen.",
 		"BABY": "BABY können dir Pokémon-Eier bringen, um dich nach einer Niederlage zu trösten. Der Zufall steigert sich mit Pechsträhnen.{{additionalInfo}}",

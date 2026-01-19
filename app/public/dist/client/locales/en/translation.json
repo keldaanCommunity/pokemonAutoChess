@@ -3386,7 +3386,7 @@
 		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
 		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.",
 		"ICE": "ICE Pokémon have [30,LK]% chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team.",
-		"FOSSIL": "FOSSIL Pokémon survive the first hit that would knock them out, taking the damage into SHIELD instead and gaining ATK.",
+		"FOSSIL": "At 30% HP, FOSSIL Pokemon awaken their primordial power, gaining SHIELD and ATK.",
 		"SOUND": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats.",
 		"ARTIFICIAL": "ARTIFICIAL Pokémon give tools and gain ATK, AP and SHIELD when holding items.",
 		"BABY": "BABY Pokémon have a chance to bring you Pokémon Eggs to comfort you after a defeat. Chance stacks with losing streaks.{{additionalInfo}}",

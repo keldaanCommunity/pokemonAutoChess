@@ -3163,7 +3163,7 @@
 		"GHOST": "Los pokémon GHOST tienen un [15,LK]% de probabilidad de esquivar ataques y SILENCE al golpear, y aplicar varias maldiciones a los rivales.",
 		"FAIRY": "Los Pokémon FAIRY infligen SPECIAL adicional con sus ataques y desatan descargas al recibir un golpe crítico, devolviendo un 30% del daño entrante.",
 		"ICE": "Los Pokémon ICE tienen un [30,LK]% de probabilidad de FREEZE al enemigo durante 2 segundos tras un golpe y otorgan SPE_DEF a todo el equipo.",
-		"FOSSIL": "Los Pokémon FOSSIL sobreviven el primer golpe que los derrotaría, obteniendo SHIELD para recibir dicho golpe y ganan ATK.",
+		"FOSSIL": "Con un 30% de HP, los Pokémon FOSSIL despiertan su poder primordial, ganando SHIELD y ATK.",
 		"SOUND": "Los Pokémon SOUND emiten un grito cuando usan sus habilidades, lo que despierta a los aliados dormidos y les otorga estadísticas adicionales.",
 		"ARTIFICIAL": "Los Pokémon ARTIFICIAL dan $t(tools) y ganan ATK, AP y SHIELD cuando tienen objetos equipados.",
 		"BABY": "Los Pokémon BABY pueden traerte huevos de Pokémon para consolarte después de una derrota. Las probabilidades se acumulan con las rachas perdedoras.{{additionalInfo}}",

@@ -1551,7 +1551,7 @@
 		"GHOST": "GHOST Pokémons hebben [15,LK]% kans om aanvallen en SILENCE te ontwijken bij een hit, en passen verschillende vloeken toe op tegenstanders",
 		"FAIRY": "FAIRY Pokemons zorgen voor extra SPECIAL met hun aanvallen en ontketenen schokken als ze een kritieke treffer ontvangen",
 		"ICE": "ICE pokemons hebben [30,LK]% kans om FREEZE de vijand voor 2 seconden na een hit en geven SPE_DEF aan het hele team.",
-		"FOSSIL": "Bij hun eerste KO komen FOSSIL pokemons weer tot leven met verhoogde ATK",
+		"FOSSIL": "Met 30% HP ontwaken FOSSIL Pokemon hun oerkracht en verkrijgen ze SHIELD en ATK.",
 		"SOUND": "SOUND pokemons laten een kreet horen wanneer ze hun vaardigheden gebruiken, slapende bondgenoten wakker maken en bonusstatistieken geven",
 		"ARTIFICIAL": "ARTIFICIAL pokemons geven $t(tools) en winnen ATK, AP en SHIELD als ze items vasthouden.",
 		"BABY": "BABY pokemons kunnen je Pokemon-eieren brengen om je te troosten na een nederlaag. Kans stapelt zich op met verliesstrepen.{{additionalInfo}}",

@@ -6,7 +6,8 @@ import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
-  getRegionTint
+  getRegionTint,
+  ItemStats
 } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -179,7 +180,13 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite = new GameObjects.Sprite(scene, 0, 0, "loading_pokeball")
     this.sprite.anims.play("loading_pokeball")
     const baseHP = getPokemonData(pokemon.name).hp
-    const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
+    const maxHP = inBattle
+      ? pokemon.maxHP
+      : values(pokemon.items).reduce(
+          (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
+          pokemon.maxHP
+        )
+    const sizeBuff = (maxHP - baseHP) / baseHP
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
