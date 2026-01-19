@@ -13,3 +13,22 @@
 #pokemon-report article {
   overflow-y: auto;
 }
+
+#pokemon-report .pokemon-report-content {
+  flex: 1;
+  display: flex;
+  gap: 1em;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#pokemon-report .pokemon-statistics-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#pokemon-report .pokemon-distribution-chart {
+  flex: 1;
+  overflow-y: hidden;
+}

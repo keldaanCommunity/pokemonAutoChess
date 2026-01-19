@@ -102,7 +102,8 @@
     "react-router-dom": "^6.28.0",
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.6",
-    "react-tooltip": "^5.30.0"
+    "react-tooltip": "^5.30.0",
+    "recharts": "^3.6.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.8",

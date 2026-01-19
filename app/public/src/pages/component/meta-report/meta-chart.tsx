@@ -191,46 +191,71 @@ export function MetaChart(props: {
                         const pokemonEntries = Object.entries(
                           d.mean_team.pokemons
                         )
-                        const mostPlayed = pokemonEntries.sort(
-                          (a, b) =>
-                            (b[1]?.frequency ?? 0) - (a[1]?.frequency ?? 0)
-                        )[0]
-                        const pokemonName = mostPlayed?.[0]
+                        const top3Pokemon = pokemonEntries
+                          .sort(
+                            (a, b) =>
+                              (b[1]?.frequency ?? 0) - (a[1]?.frequency ?? 0)
+                          )
+                          .slice(0, 3)
 
-                        const radius = clamp(d.count, 12, 42) / 2
-                        const clipPathId = `clip-pokemon-${d.cluster_id}`
-                        return pokemonName ? (
+                        const baseSize = 40
+                        const pokemonRadius = baseSize / 2
+                        const containerRadius = baseSize / 2
+
+                        return (
                           <g
                             transform={`translate(${x(d.x)}, ${y(d.y)}) scale(${
                               transform ? 1 / transform.k : 1
                             })`}
                           >
                             <defs>
-                              <clipPath id={clipPathId}>
-                                <circle cx={0} cy={0} r={radius} />
-                              </clipPath>
+                              {top3Pokemon.map((_, idx) => (
+                                <clipPath
+                                  key={`clip-${d.cluster_id}-${idx}`}
+                                  id={`clip-pokemon-${d.cluster_id}-${idx}`}
+                                >
+                                  <circle cx={0} cy={0} r={pokemonRadius} />
+                                </clipPath>
+                              ))}
                             </defs>
-                            <circle
-                              cx={0}
-                              cy={0}
-                              r={radius}
-                              fill="white"
-                              style={{ pointerEvents: "none" }}
-                            />
-                            <image
-                              x={-radius}
-                              y={-radius}
-                              width={radius * 2}
-                              height={radius * 2}
-                              href={getPortraitSrc(
-                                PkmIndex[pokemonName as keyof typeof PkmIndex]
-                              )}
-                              clipPath={`url(#${clipPathId})`}
-                              className="pokemon-portrait"
-                              style={{ pointerEvents: "none" }}
-                            />
+
+                            {/* Render top 3 Pokemon in a triangle */}
+                            {top3Pokemon.map((entry, idx) => {
+                              const angle = (idx * 120 - 90) * (Math.PI / 180)
+                              const px = containerRadius * Math.cos(angle)
+                              const py = containerRadius * Math.sin(angle)
+                              const pokemonName = entry[0]
+
+                              return (
+                                <g key={`poke-${d.cluster_id}-${idx}`}>
+                                  <circle
+                                    cx={px}
+                                    cy={py}
+                                    r={pokemonRadius}
+                                    fill="white"
+                                    style={{ pointerEvents: "none" }}
+                                  />
+                                  <g transform={`translate(${px}, ${py})`}>
+                                    <image
+                                      x={-pokemonRadius}
+                                      y={-pokemonRadius}
+                                      width={pokemonRadius * 2}
+                                      height={pokemonRadius * 2}
+                                      xlinkHref={getPortraitSrc(
+                                        PkmIndex[
+                                          pokemonName as keyof typeof PkmIndex
+                                        ]
+                                      )}
+                                      clipPath={`url(#clip-pokemon-${d.cluster_id}-${idx})`}
+                                      className="pokemon-portrait"
+                                      style={{ pointerEvents: "none" }}
+                                    />
+                                  </g>
+                                </g>
+                              )
+                            })}
                           </g>
-                        ) : null
+                        )
                       })()}
                   </g>
                 )

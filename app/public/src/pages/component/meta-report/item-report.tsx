@@ -14,7 +14,9 @@ import {
   ShinyItems,
   Tools
 } from "../../../../../types/enum/Item"
+import { ItemDistribution } from "./item-distribution"
 import ItemStatistic from "./item-statistic"
+import "./item-report.css"
 
 export function ItemReport() {
   const [loading, setLoading] = useState<boolean>(true)
@@ -39,7 +41,7 @@ export function ItemReport() {
     }))
   }, [metaItems, itemRankingBy])
 
-  const tabs: { label: string; key: string; items: readonly Item[] }[] = [
+  const tabs: { label: string; key: string; items?: readonly Item[] }[] = [
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("tools"), key: "tools", items: Tools },
     { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }
@@ -81,21 +83,30 @@ export function ItemReport() {
           ))}
         </TabList>
         {tabs.map((tab) => (
-          <TabPanel
-            key={tab.key}
-            style={{ height: "calc(90vh - 12em)", overflowY: "scroll" }}
-          >
-            {sortedMetaItems.length === 0 && (
-              <p>{loading ? t("loading") : t("no_data_available")}</p>
-            )}
-            {sortedMetaItems
-              ?.find((i) => i.tier === eloThreshold)
-              ?.items.filter((item) => tab.items.includes(item.name))
-              .map((item, i) => {
-                return (
-                  <ItemStatistic item={item} key={item.name} rank={i + 1} />
+          <TabPanel key={tab.key}>
+            <div className="item-statistics-list">
+              {sortedMetaItems.length === 0 && (
+                <p>{loading ? t("loading") : t("no_data_available")}</p>
+              )}
+              {sortedMetaItems
+                ?.find((i) => i.tier === eloThreshold)
+                ?.items.filter(
+                  (item) => tab.items && tab.items.includes(item.name)
                 )
-              })}
+                .map((item, i) => {
+                  return (
+                    <ItemStatistic item={item} key={item.name} rank={i + 1} />
+                  )
+                })}
+            </div>
+            <div className="item-distribution-chart">
+              <ItemDistribution
+                metaItems={metaItems}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                itemFilter={tab.items}
+              />
+            </div>
           </TabPanel>
         ))}
       </Tabs>
