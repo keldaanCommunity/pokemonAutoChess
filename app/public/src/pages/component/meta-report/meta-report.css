@@ -16,7 +16,8 @@
 
 #meta-report .react-tabs__tab-panel {
   flex: 1;
-  overflow-y: auto;
+  min-height: 0;
+  overflow: hidden;
 }
 
 #meta-report header {
@@ -50,8 +51,7 @@
   overflow-x: auto;
 }
 
-#meta-report .item-stat,
-#meta-report .pokemon-family-stat {
+#meta-report .item-stat {
   background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
@@ -59,32 +59,9 @@
   gap: 1em;
   padding: 0.5em;
   overflow-x: auto;
-}
-
-#meta-report .team-comp label {
-  display: block;
-}
-
-#meta-report .item-stat {
   grid-template-columns: 2ch 48px 16ch 16ch 10ch 1fr;
 }
 
 #meta-report .region-stat {
   grid-template-columns: 2ch 48px 16ch 12ch 16ch 1fr;
-}
-
-#meta-report .pokemon-family-stat {
-  grid-template-columns: 3ch 16ch 10ch 10ch 14ch 1fr;
-}
-
-#meta-report .pokemon-family-stat ul {
-  padding: 0;
-  margin: 0;
-}
-
-#meta-report .pokemon-family-stat li {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
 }

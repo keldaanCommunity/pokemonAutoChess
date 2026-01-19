@@ -1696,7 +1696,9 @@
 		"VIVILLON_POKE_BALL": "Vivillon (Poké Ball)",
 		"LECHONK": "Lechonk",
 		"OINKOLOGNE_MALE": "Oinkologne ♂",
-		"OINKOLOGNE_FEMALE": "Oinkologne ♀"
+		"OINKOLOGNE_FEMALE": "Oinkologne ♀",
+		"WOOLOO": "Wooloo",
+		"DUBWOOL": "Dubwool"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2757,7 +2759,8 @@
 		"LUCKY_RIBBON": "Lucky Ribbon",
 		"COVER_BAND": "Cover Band",
 		"EFFICIENT_BANDANNA": "Efficient Bandanna",
-		"NULLIFY_BANDANNA": "Nullify Bandanna"
+		"NULLIFY_BANDANNA": "Nullify Bandanna",
+		"WANTED_NOTICE": "Wanted Notice"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3058,7 +3061,8 @@
 		"LUCKY_RIBBON": "Increase holder's LUCK by 30%",
 		"COVER_BAND": "If an ADJACENT ally is about to get KO with some incoming damage, the wearer takes the damage instead.",
 		"EFFICIENT_BANDANNA": "The holder and allies ADJACENT_IN_THE_SAME_ROW have their max PP reduced by 10%.",
-		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack."
+		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack.",
+		"WANTED_NOTICE": "Wanted: Fainted or Alive\n Reward: 10 GOLD"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3215,7 +3219,7 @@
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region at stage 20.",
 		"PIKACHU_SURFER": "Surfing Pikachu's power swells with the waves. Gain 50 SHIELD and 3 ATK for each AQUATIC synergy step reached, and fill PP bar when a wave approaches.",
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
-		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by spending one stage on the bench, which reset its DEF and SPEED stats.",
+		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by staying one stage on the bench, which reset its DEF and SPEED stats. When groomed at max stacks, get a SILK_SCARF.",
 		"ACCELERATION": "Acceleration: gain 15 SPEED every tile you move (jumps and dashes count for one)",
 		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP. If Meltan was holding items, they are dropped.",
 		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 5 GOLD each, up to 6 troopers. At the start of the battle, all troopers on your bench join Falinks Brass, giving 30 SHIELD, 1 ATK and 1 DEF each.",
@@ -3384,7 +3388,7 @@
 		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
 		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.",
 		"ICE": "ICE Pokémon have [30,LK]% chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team.",
-		"FOSSIL": "FOSSIL Pokémon survive the first hit that would knock them out, taking the damage into SHIELD instead and gaining ATK.",
+		"FOSSIL": "At 30% HP, FOSSIL Pokemon awaken their primordial power, gaining SHIELD and ATK.",
 		"SOUND": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats.",
 		"ARTIFICIAL": "ARTIFICIAL Pokémon give tools and gain ATK, AP and SHIELD when holding items.",
 		"BABY": "BABY Pokémon have a chance to bring you Pokémon Eggs to comfort you after a defeat. Chance stacks with losing streaks.{{additionalInfo}}",
@@ -4106,6 +4110,7 @@
 	"not_hungry": "NOT HUNGRY",
 	"fully_grown": "FULLY GROWN",
 	"already_held": "ALREADY HELD",
+	"caught": "CAUGHT !",
 	"drop_here_to_sell": "Drop here to sell",
 	"for_price_gold": "for {{price}} gold",
 	"buy_xp": "Buy XP {{cost}}",
@@ -4368,7 +4373,9 @@
 		"tell_price": "{{price}} GOLD each !",
 		"thank_you": "THANK YOU !",
 		"good_job": "Good job !",
-		"here_are_your_reward": "Here are your reward:\n{{reward}}"
+		"here_are_your_reward": "Here are your reward:\n{{reward}}",
+		"magnemite": "Have you seen the fugitive ?",
+		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Everyone is here !",
@@ -4430,7 +4437,8 @@
 		"CELEBI": "Celebi predicts the next PvE fight will be shiny",
 		"MAKUHITA": "Makuhita trains one of your Pokémon for several stages to improve their stats",
 		"WIGGLYTUFF": "Complete missions for Wigglytuff Guild to earn rewards",
-		"CINCCINO": "Cinccino offers elegant SILK_SCARF"
+		"CINCCINO": "Cinccino offers elegant SILK_SCARF",
+		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

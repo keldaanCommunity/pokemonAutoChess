@@ -1,9 +1,8 @@
 import { MapSchema } from "@colyseus/schema"
-
-import { TownEncounter, TownEncounters } from "../core/town-encounters"
 import { Emotion, IPlayer, PkmCustom } from "../types"
 import { Stat } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
 
 import { logger } from "../utils/logger"
 import Player from "./colyseus-models/player"

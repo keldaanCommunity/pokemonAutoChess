@@ -218,7 +218,7 @@ export function GamePokemonDetail(props: {
           type={props.isAlly === false ? "HP_ENEMY" : "HP_ALLY"}
           value={hp}
           extraValue={shield}
-          maxValue={pokemon.maxHP}
+          maxValue={props.origin === "team" ? hp! : pokemon.maxHP}
           graduationStep={10}
         />
         <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />

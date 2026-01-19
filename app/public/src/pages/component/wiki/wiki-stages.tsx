@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
-  PortalCarouselStages
+  PortalCarouselStages,
+  TownEncountersByStage
 } from "../../../../../config"
-import { TownEncountersByStage } from "../../../../../core/town-encounters"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { getAdditionalsTier1 } from "../../../../../models/shop"

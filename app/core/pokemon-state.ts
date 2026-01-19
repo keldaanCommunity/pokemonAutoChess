@@ -618,7 +618,7 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <= 0
+        pokemon.hp - residualDamage <= 0.3 * pokemon.maxHP
       ) {
         const shield = Math.round(
           pokemon.maxHP *
