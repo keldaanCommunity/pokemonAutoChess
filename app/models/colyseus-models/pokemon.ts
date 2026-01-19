@@ -9265,7 +9265,7 @@ export class Poipole extends Pokemon {
   stars = 2
   evolution = Pkm.NAGANADEL
   evolutionRule = new StackBasedEvolutionRule()
-  stacksRequired: number = 30
+  stacksRequired: number = 20
   hp = 160
   atk = 10
   speed = 64

@@ -72,6 +72,7 @@
 - Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 - Nerf Xerneas: HP 300 → 200
 - Change Fur Coat (Furfrou, Wooloo): now gains 2 def and loses 5 speed until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a Silk Scarf.
+- Buff Poipole: every ~~3~~ 2 stacks, gain 1 ATK permanently. Evolves at ~~30~~ 20 stacks.
 
 # Changes to Synergies
 
