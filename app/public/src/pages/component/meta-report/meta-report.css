@@ -16,7 +16,8 @@
 
 #meta-report .react-tabs__tab-panel {
   flex: 1;
-  overflow-y: auto;
+  min-height: 0;
+  overflow: hidden;
 }
 
 #meta-report header {
