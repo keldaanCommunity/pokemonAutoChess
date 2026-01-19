@@ -15,7 +15,6 @@ import {
   FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
-import { TownEncounters } from "../../../../core/town-encounters"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -37,6 +36,7 @@ import { Item } from "../../../../types/enum/Item"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
