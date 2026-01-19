@@ -283,7 +283,9 @@ export class DebugScene extends Phaser.Scene {
     this.landscape.forEach((sprite) => sprite.setScale(2).setTint(tint))
   }
 
-  applyStatusAnimation(status: Status | Boost | "BALM_MUSHROOM" | "") {
+  applyStatusAnimation(
+    status: Status | Boost | "BALM_MUSHROOM" | "POISONNED_BADLY" | ""
+  ) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
         getRegionTint(this.mapName, preference("colorblindMode"))
@@ -315,7 +317,10 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removeFairyField()
 
       if (status === Status.POISONNED) {
-        this.pokemonSprite.addPoison()
+        this.pokemonSprite.addPoison(1)
+      }
+      if (status === "POISONNED_BADLY") {
+        this.pokemonSprite.addPoison(3)
       }
       if (status === Status.SLEEP) {
         this.pokemonSprite.addSleep()

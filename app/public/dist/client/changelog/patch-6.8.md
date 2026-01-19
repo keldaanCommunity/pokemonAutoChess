@@ -146,6 +146,7 @@
 - New animation for Fairy field
 - Wigglypuff mission gold reward is now automatically granted when the mission is completed, instead of requiring to click on Chatot
 - Improve the filters on Wiki Pokémon and synergies pages. Can now filter alternative forms.
+- Poison status now has a different animation when badly poisoned (3 stacks or more)
 
 # Bugfix
 

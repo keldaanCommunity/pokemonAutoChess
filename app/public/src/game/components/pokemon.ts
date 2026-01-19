@@ -919,7 +919,7 @@ export default class PokemonSprite extends DraggableObject {
       this.addCurse()
     }
     if (pokemon.status.poisonStacks > 0) {
-      this.addPoison()
+      this.addPoison(pokemon.status.poisonStacks)
     }
     if (pokemon.status.protect) {
       this.addProtect()
@@ -1280,13 +1280,17 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addPoison() {
+  addPoison(stacks) {
+    const poisonTexture = stacks >= 3 ? "POISON_BADLY" : "POISON"
     if (!this.poison) {
       this.poison = this.scene.add
-        .sprite(0, -30, "status", "POISON/000.png")
+        .sprite(0, -30, "status", `${poisonTexture}/000.png`)
         .setScale(2)
-      this.poison.anims.play("POISON")
+      this.poison.anims.play(poisonTexture)
       this.add(this.poison)
+    } else if (this.poison.texture.key !== poisonTexture) {
+      this.poison.setTexture("status", `${poisonTexture}/000.png`)
+      this.poison.anims.play(poisonTexture)
     }
   }
 
