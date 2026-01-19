@@ -1,27 +1,5 @@
-import { Pkm } from "../types/enum/Pokemon"
-
-export const TownEncounters = {
-  [Pkm.KECLEON]: Pkm.KECLEON,
-  [Pkm.CHANSEY]: Pkm.CHANSEY,
-  [Pkm.ELECTIVIRE]: Pkm.ELECTIVIRE,
-  [Pkm.XATU]: Pkm.XATU,
-  [Pkm.KANGASKHAN]: Pkm.KANGASKHAN,
-  [Pkm.DUSKULL]: Pkm.DUSKULL,
-  [Pkm.MEOWTH]: Pkm.MEOWTH,
-  [Pkm.MAROWAK]: Pkm.MAROWAK,
-  [Pkm.WOBBUFFET]: Pkm.WOBBUFFET,
-  [Pkm.SPINDA]: Pkm.SPINDA,
-  [Pkm.REGIROCK]: Pkm.REGIROCK,
-  [Pkm.MUNCHLAX]: Pkm.MUNCHLAX,
-  [Pkm.SABLEYE]: Pkm.SABLEYE,
-  [Pkm.CELEBI]: Pkm.CELEBI,
-  [Pkm.MAKUHITA]: Pkm.MAKUHITA,
-  [Pkm.CROAGUNK]: Pkm.CROAGUNK,
-  [Pkm.WIGGLYTUFF]: Pkm.WIGGLYTUFF,
-  [Pkm.CINCCINO]: Pkm.CINCCINO
-} as const
-
-export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
+import { Pkm } from "../../types/enum/Pokemon"
+import { TownEncounter } from "../../types/enum/TownEncounter"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
   {
@@ -43,7 +21,8 @@ export const TownEncountersByStage: {
     [Pkm.CINCCINO]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.CELEBI]: 1 / 40,
-    [Pkm.MAKUHITA]: 1 / 20
+    [Pkm.MAKUHITA]: 1 / 20,
+    [Pkm.MAGNEZONE]: 1 / 20
   },
   12: {
     [Pkm.KANGASKHAN]: 1 / 20,
@@ -92,3 +71,5 @@ export const TownEncountersByStage: {
     [Pkm.MUNCHLAX]: 1 / 20
   }
 }
+
+export const OUTLAW_GOLD_REWARD = 10

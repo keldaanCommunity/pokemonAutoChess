@@ -2757,7 +2757,8 @@
 		"LUCKY_RIBBON": "Lucky Ribbon",
 		"COVER_BAND": "Cover Band",
 		"EFFICIENT_BANDANNA": "Efficient Bandanna",
-		"NULLIFY_BANDANNA": "Nullify Bandanna"
+		"NULLIFY_BANDANNA": "Nullify Bandanna",
+		"WANTED_NOTICE": "Wanted Notice"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3058,7 +3059,8 @@
 		"LUCKY_RIBBON": "Increase holder's LUCK by 30%",
 		"COVER_BAND": "If an ADJACENT ally is about to get KO with some incoming damage, the wearer takes the damage instead.",
 		"EFFICIENT_BANDANNA": "The holder and allies ADJACENT_IN_THE_SAME_ROW have their max PP reduced by 10%.",
-		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack."
+		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack.",
+		"WANTED_NOTICE": "Wanted: Fainted or Alive\n Reward: 10 GOLD"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -4106,6 +4108,7 @@
 	"not_hungry": "NOT HUNGRY",
 	"fully_grown": "FULLY GROWN",
 	"already_held": "ALREADY HELD",
+	"caught": "CAUGHT !",
 	"drop_here_to_sell": "Drop here to sell",
 	"for_price_gold": "for {{price}} gold",
 	"buy_xp": "Buy XP {{cost}}",
@@ -4368,7 +4371,9 @@
 		"tell_price": "{{price}} GOLD each !",
 		"thank_you": "THANK YOU !",
 		"good_job": "Good job !",
-		"here_are_your_reward": "Here are your reward:\n{{reward}}"
+		"here_are_your_reward": "Here are your reward:\n{{reward}}",
+		"magnemite": "Have you seen the fugitive ?",
+		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Everyone is here !",
@@ -4430,7 +4435,8 @@
 		"CELEBI": "Celebi predicts the next PvE fight will be shiny",
 		"MAKUHITA": "Makuhita trains one of your Pokémon for several stages to improve their stats",
 		"WIGGLYTUFF": "Complete missions for Wigglytuff Guild to earn rewards",
-		"CINCCINO": "Cinccino offers elegant SILK_SCARF"
+		"CINCCINO": "Cinccino offers elegant SILK_SCARF",
+		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

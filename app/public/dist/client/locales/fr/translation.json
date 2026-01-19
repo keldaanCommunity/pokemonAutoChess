@@ -4352,7 +4352,9 @@
 		"tell_price": "C'est {{price}} GOLD !",
 		"thank_you": "MERCI !",
 		"good_job": "Bien joué",
-		"here_are_your_reward": "Voici ta récompense :\n{{reward}}"
+		"here_are_your_reward": "Voici ta récompense :\n{{reward}}",
+		"magnemite": "Avez-vous vu le fugitif ?",
+		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Tout le monde est là !",
