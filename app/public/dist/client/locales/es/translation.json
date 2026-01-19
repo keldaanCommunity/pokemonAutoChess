@@ -3001,7 +3001,7 @@
 		"STANTLER": "Evoluciona a $t(pkm.WYRDEER) cuando cambia de región.",
 		"PIKACHU_SURFER": "Cada vez que se acerca una ola, $t(pkm.PIKACHU_SURFER) se llena de confianza, lo cual rellena su barra de PP.",
 		"ESPURR": "Evolucionará a $t(pkm.MEOWSTIC_MALE) o $t(pkm.MEOWSTIC_FEMALE) dependiendo de tu sinergia predominante entre PSYCHIC y FIELD.",
-		"FUR_COAT": "Su pelaje crece, otorgando +2 DEF y -5 SPEED cada ronda. Puede recortar su pelaje si pasa una ronda en el banquillo, lo cual reestablecerá sus estadísticas de DEF y SPEED.",
+		"FUR_COAT": "Su pelaje crece, otorgando +2 DEF y -5 SPEED cada ronda. Puede recortar su pelaje si pasa una ronda en el banquillo, lo cual reestablecerá sus estadísticas de DEF y SPEED. Cuando esté preparado con el máximo de acumulaciones, obtendrá un SILK_SCARF.",
 		"ACCELERATION": "Gana 15 de SPEED por cada casilla que recorre (saltos y teletransportes cuentan como una única casilla)",
 		"MELTAN": "Si se utiliza sobre $t(pkm:MELMETAL), se funde con él para otorgarle 50 de HP máximos permanentes.",
 		"FALINKS": "$t(pkm.FALINKS_TROOPER) tienen un [4,LK]% de posibilidades de aparecer en tu tienda, con un coste de 5 GOLD cada uno, hasta 6 soldados. Al comienzo de cada batalla, todos los soldados de tu banquillo se unen a $t(pkm.FALINKS_BRASS), otorgándole 30 de SHIELD, 1 ATK y 1 DEF cada uno.",

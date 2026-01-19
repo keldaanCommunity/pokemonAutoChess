@@ -269,6 +269,7 @@ export enum Pkm {
   DRIZZILE = "DRIZZILE",
   DROWZEE = "DROWZEE",
   DRUDDIGON = "DRUDDIGON",
+  DUBWOOL = "DUBWOOL",
   DUDUNSPARCE = "DUDUNSPARCE",
   DUGTRIO = "DUGTRIO",
   DUNSPARCE = "DUNSPARCE",
@@ -1117,6 +1118,7 @@ export enum Pkm {
   WISHIWASHI_SCHOOL = "WISHIWASHI_SCHOOL",
   WOBBUFFET = "WOBBUFFET",
   WOOBAT = "WOOBAT",
+  WOOLOO = "WOOLOO",
   WOOPER = "WOOPER",
   WORMADAM_PLANT = "WORMADAM_PLANT",
   WORMADAM_SANDY = "WORMADAM_SANDY",
@@ -2198,8 +2200,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.THIEVUL]: "0828",
   [Pkm.GOSSIFLEUR]: "0829",
   [Pkm.ELDEGOSS]: "0830",
-  //[Pkm.WOOLOO]: "0831",
-  //[Pkm.DUBWOOL]: "0832",
+  [Pkm.WOOLOO]: "0831",
+  [Pkm.DUBWOOL]: "0832",
   [Pkm.CHEWTLE]: "0833",
   [Pkm.DREDNAW]: "0834",
   //[Pkm.YAMPER]: "0835",
@@ -3567,7 +3569,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.VIVILLON_FANCY]: Pkm.SCATTERBUG,
   [Pkm.VIVILLON_POKE_BALL]: Pkm.SCATTERBUG,
   [Pkm.LECHONK]: Pkm.LECHONK,
-  [Pkm.OINKOLOGNE_MALE]: Pkm.LECHONK
+  [Pkm.OINKOLOGNE_MALE]: Pkm.LECHONK,
+  [Pkm.WOOLOO]: Pkm.WOOLOO,
+  [Pkm.DUBWOOL]: Pkm.WOOLOO
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

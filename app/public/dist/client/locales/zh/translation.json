@@ -3207,7 +3207,7 @@
 		"STANTLER": "在第20轮更换地区后进化为$t(pkm.WYRDEER)。",
 		"PIKACHU_SURFER": "$t(pkm.PIKACHU_SURFER)的能力随着海浪增强而提升，每级激活的AQUATIC共鸣使之获得50点SHIELD和3点ATK。此外，海浪逼近时，$t(pkm.PIKACHU_SURFER)会回复PP。",
 		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。",
-		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。",
+		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。当梳妆达到最大堆叠数时，获得一条 SILK_SCARF。",
 		"ACCELERATION": "加速：每移动1格，提升15点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
 		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
 		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为3 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
