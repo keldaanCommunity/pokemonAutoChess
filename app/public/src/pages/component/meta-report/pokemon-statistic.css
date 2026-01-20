@@ -25,12 +25,12 @@
 
 .pokemon-family-stats {
   display: flex;
-  gap: 24px;
-  font-size: 13px;
+  gap: 4px;
+  font-size: 12px;
 }
 
 .pokemon-stat-item {
-  min-width: 50px;
+  min-width: 70px;
 }
 
 .pokemon-stat-item > div {
@@ -50,14 +50,14 @@
 
 .pokemon-detail-row {
   display: flex;
-  gap: 12px;
+  gap: 4px;
   align-items: center;
   font-size: 12px;
   flex-wrap: wrap;
 }
 
 .pokemon-detail-stat {
-  min-width: 40px;
+  min-width: 25px;
 }
 
 .pokemon-items-row {
@@ -80,4 +80,12 @@
 #meta-report label {
   color: #ccc;
   margin: 0;
+}
+
+.pokemon-name-container {
+  min-width: 100px;
+}
+
+.pokemon-stat-container {
+  width: 90px;
 }
