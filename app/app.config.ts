@@ -51,6 +51,14 @@ const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
   : path.join(__dirname, "public", "dist", "client")
 const viewsSrc = path.join(clientSrc, "index.html")
+const isDevelopment = process.env.MODE === "dev"
+const setCacheControl = (res: any, maxAge: number = 86400) => {
+  if (!isDevelopment) {
+    res.set("Cache-Control", `max-age=${maxAge}`)
+  } else {
+    res.set("Cache-Control", "no-cache")
+  }
+}
 
 /**
  * Import your Room files
@@ -246,31 +254,31 @@ export default config({
 
     app.get("/meta/metadata", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetadata())
     })
 
     app.get("/meta/items", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaItems())
     })
 
     app.get("/meta/pokemons", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaPokemons())
     })
 
     app.get("/meta/regions", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaRegions())
     })
 
     app.get("/meta-v2", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaV2())
     })
 
@@ -303,32 +311,44 @@ export default config({
     })
 
     app.get("/leaderboards", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard())
     })
 
     app.get("/leaderboards/bots", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.botLeaderboard)
     })
 
     app.get("/leaderboards/elo", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.leaderboard)
     })
 
     app.get("/leaderboards/level", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.levelLeaderboard)
     })
 
     app.get("/leaderboards/event", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.eventLeaderboard)
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 10
@@ -360,7 +380,9 @@ export default config({
     })
 
     app.get("/chat-history/:playerUid", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 30
@@ -414,7 +436,9 @@ export default config({
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
         await migrateShardsOfAltForms(mongoUser) // TEMPORARY migration; to be removed in future
-        res.set("Cache-Control", "no-cache")
+        if (!isDevelopment) {
+          res.set("Cache-Control", "no-cache")
+        }
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
         logger.error("Error fetching profile", error)

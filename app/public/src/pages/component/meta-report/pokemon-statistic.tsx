@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -91,10 +90,16 @@ export default function PokemonStatistic(props: {
           <div className="pokemon-family-summary">
             <div className="pokemon-portraits-vertical">
               {family.pokemons.map((pokemon) => (
-                <PokemonPortrait
-                  key={pokemon.name + "-thumb"}
-                  portrait={PkmIndex[pokemon.name]}
-                />
+                <div className="pokemon-detail-row">
+                  <PokemonPortrait
+                    key={pokemon.name + "-thumb"}
+                    portrait={PkmIndex[pokemon.name]}
+                    width={40}
+                  />
+                  <span className="pokemon-name-container">
+                    <span>{t(`pkm.${pokemon.name}`)}</span>
+                  </span>
+                </div>
               ))}
             </div>
             <div className="pokemon-family-stats">
@@ -123,16 +128,16 @@ export default function PokemonStatistic(props: {
                 key={pokemon.name + "-details"}
                 className="pokemon-detail-row"
               >
-                <PokemonPortrait portrait={PkmIndex[pokemon.name]} />
+                <PokemonPortrait portrait={PkmIndex[pokemon.name]} width={40} />
                 <span className="pokemon-detail-stat" title="Average Rank">
                   <strong>
                     {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
                   </strong>
                 </span>
-                <span>
+                <span className="pokemon-stat-container">
                   <label>{t("count")}:</label> {pokemon.count}
                 </span>
-                <span>
+                <span className="pokemon-stat-container">
                   <label>{t("held_items")}:</label> {pokemon.item_count}
                 </span>
                 <div className="pokemon-items-row">
