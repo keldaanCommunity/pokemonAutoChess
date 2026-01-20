@@ -124,6 +124,7 @@
 - Nerf Spell Tag: Curse duration increased: 9 → 10 seconds
 - Replace TM Brick Break with TM Return: deal 20/40/80 special damage, then gain 2 AP permanently.
 - Icicle missile (Vanillite) travels faster: 1.5 second → 1 second
+- Buff Shiny Stone: now also gives 50 AP
 
 # Gameplay
 
