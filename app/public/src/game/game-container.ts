@@ -6,6 +6,7 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
+import { ItemStats } from "../../../config"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../core/flower-pots"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
@@ -27,13 +28,15 @@ import {
   Transfer
 } from "../../../types"
 import { Ability } from "../../../types/enum/Ability"
+import { EffectEnum } from "../../../types/enum/Effect"
 import {
   AttackType,
   GamePhaseState,
   HealType,
   Orientation,
   PokemonActionState,
-  Rarity
+  Rarity,
+  Stat
 } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
@@ -232,6 +235,14 @@ class GameContainer {
       this.gameScene?.battle?.updatePokemonItems(simulation.id, pokemon)
     })
 
+    $pokemon.effects.onChange((value, key) => {
+      if (pokemon.effects.has(EffectEnum.BALM_MUSHROOM)) {
+        this.gameScene?.battle?.pokemonSprites
+          .get(pokemon.id)
+          ?.addBalmMushroomEffect()
+      }
+    })
+
     const fieldsCount: NonFunctionPropNames<Count>[] = [
       "crit",
       "dodgeCount",
@@ -249,7 +260,8 @@ class GameContainer {
       "tripleAttackCount",
       "upgradeCount",
       "soulDewCount",
-      "defensiveRibbonCount"
+      "muscleBandCount",
+      "machRibbonCount"
     ]
 
     fieldsCount.forEach((field) => {
@@ -428,6 +440,7 @@ class GameContainer {
     const listenForPokemonChanges = (
       pokemon: Pokemon,
       fields: NonFunctionPropNames<IPokemon>[] = [
+        "index",
         "positionX",
         "positionY",
         "action",
@@ -440,7 +453,6 @@ class GameContainer {
         "luck",
         "shiny",
         "skill",
-        "meal",
         "supercharged"
       ]
     ) => {
@@ -461,6 +473,14 @@ class GameContainer {
       $pokemon.items.onAdd((item) => {
         if (player.id === this.spectatedPlayerId) {
           this.gameScene?.board?.updatePokemonItems(player.id, pokemon, item)
+          if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              "hp",
+              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp
+            )
+          }
         }
       })
 
@@ -471,6 +491,16 @@ class GameContainer {
             pokemon,
             item,
             true
+          )
+        }
+      })
+
+      $pokemon.dishes.onChange((value, key) => {
+        if (player.id === this.spectatedPlayerId) {
+          this.gameScene?.board?.updatePokemonDishes(
+            player.id,
+            pokemon,
+            values(pokemon.dishes)
           )
         }
       })
@@ -525,6 +555,10 @@ class GameContainer {
         this.gameScene?.board?.renderBerryTrees()
         this.gameScene?.board?.renderFlowerPots()
       }
+    })
+
+    $player.berryTreesStages.onChange((value, key) => {
+      this.gameScene?.board?.renderBerryTrees()
     })
 
     $player.flowerPots.onAdd((pokemon, index) => {
@@ -591,8 +625,10 @@ class GameContainer {
         this.gameScene.weatherManager.clearWeather()
         if (value === Weather.RAIN) {
           this.gameScene.weatherManager.addRain()
-        } else if (value === Weather.SUN) {
+        } else if (value === Weather.ZENITH) {
           this.gameScene.weatherManager.addSun()
+        } else if (value === Weather.DROUGHT) {
+          this.gameScene.weatherManager.addDrought()
         } else if (value === Weather.SANDSTORM) {
           this.gameScene.weatherManager.addSandstorm()
         } else if (value === Weather.SNOW) {
@@ -734,7 +770,6 @@ class GameContainer {
     if (this.gameScene?.battle) {
       this.gameScene?.battle.setSimulation(this.simulation)
     }
-    this.handleWeatherChange(simulation, simulation.weather)
   }
 
   onDragDrop(event: CustomEvent<IDragDropMessage>) {

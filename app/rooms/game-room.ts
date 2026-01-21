@@ -81,7 +81,7 @@ import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
-import { shuffleArray } from "../utils/random"
+import { chance, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
@@ -494,6 +494,8 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
       if (client.auth) {
         try {
+          if (!client.userData) client.userData = {}
+          client.userData.spectatedPlayerId = spectatedPlayerId
           this.dispatcher.dispatch(new OnSpectateCommand(), {
             id: client.auth.uid,
             spectatedPlayerId
@@ -877,7 +879,6 @@ export default class GameRoom extends Room<GameState> {
           if (usr.elo === minElo && humans.length >= 8) {
             player.titles.add(Title.OUTSIDER)
           }
-          //this.presence.publish("ranked-lobby-winner", player)
         }
       }
 
@@ -1360,7 +1361,7 @@ export default class GameRoom extends Room<GameState> {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    const wanderer = new Wanderer({ id, pkm, type, behavior })
+    const wanderer = new Wanderer({ id, pkm, type, behavior, shiny: chance(0.01) })
     player.wanderers.set(id, wanderer)
   }
 }

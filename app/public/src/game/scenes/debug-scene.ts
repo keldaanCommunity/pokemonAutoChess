@@ -20,7 +20,7 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
-import PokemonSprite from "../components/pokemon"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
@@ -70,6 +70,7 @@ export class DebugScene extends Phaser.Scene {
   }
 
   preload() {
+    resetSpriteCounts()
     this.loadingManager = new LoadingManager(this)
 
     this.load.on("progress", (value: number) => {
@@ -258,16 +259,33 @@ export class DebugScene extends Phaser.Scene {
     this.landscape = [
       this.scene.scene.add.sprite(850, 600, "ground_holes", `trench3.png`),
       this.scene.scene.add.sprite(1200, 600, "ground_holes", `hole5.png`),
-      this.scene.scene.add.sprite(420, 660, "berry_trees", "ASPEAR_BERRY_4"),
-      this.scene.scene.add.sprite(360, 660, "berry_trees", "BABIRI_BERRY_6"),
-      this.scene.scene.add.sprite(300, 660, "berry_trees", "LIECHI_BERRY_3"),
+      this.scene.scene.add.sprite(
+        420,
+        660,
+        "berry_trees",
+        "ASPEAR_BERRY_4.png"
+      ),
+      this.scene.scene.add.sprite(
+        360,
+        660,
+        "berry_trees",
+        "BABIRI_BERRY_6.png"
+      ),
+      this.scene.scene.add.sprite(
+        300,
+        660,
+        "berry_trees",
+        "LIECHI_BERRY_3.png"
+      ),
       this.scene.scene.add.sprite(320, 580, "flower_pots", "BLUE.png"),
       this.scene.scene.add.sprite(420, 580, "flower_pots", "PINK.png")
     ]
     this.landscape.forEach((sprite) => sprite.setScale(2).setTint(tint))
   }
 
-  applyStatusAnimation(status: Status | Boost | "") {
+  applyStatusAnimation(
+    status: Status | Boost | "BALM_MUSHROOM" | "POISONNED_BADLY" | ""
+  ) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
         getRegionTint(this.mapName, preference("colorblindMode"))
@@ -299,7 +317,10 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removeFairyField()
 
       if (status === Status.POISONNED) {
-        this.pokemonSprite.addPoison()
+        this.pokemonSprite.addPoison(1)
+      }
+      if (status === "POISONNED_BADLY") {
+        this.pokemonSprite.addPoison(3)
       }
       if (status === Status.SLEEP) {
         this.pokemonSprite.addSleep()
@@ -385,7 +406,9 @@ export class DebugScene extends Phaser.Scene {
       if (status == Status.FAIRY_FIELD) {
         this.pokemonSprite.addFairyField()
       }
-
+      if (status === "BALM_MUSHROOM") {
+        this.pokemonSprite.addBalmMushroomEffect()
+      }
       if (status === "BOOST/ATK") {
         this.pokemonSprite.displayBoost(Stat.ATK, true)
       }
@@ -490,8 +513,10 @@ export class DebugScene extends Phaser.Scene {
     this.weatherManager.clearWeather()
     if (weather === Weather.RAIN) {
       this.weatherManager.addRain()
-    } else if (weather === Weather.SUN) {
+    } else if (weather === Weather.ZENITH) {
       this.weatherManager.addSun()
+    } else if (weather === Weather.DROUGHT) {
+      this.weatherManager.addDrought()
     } else if (weather === Weather.SANDSTORM) {
       this.weatherManager.addSandstorm()
     } else if (weather === Weather.SNOW) {

@@ -7,9 +7,11 @@ import {
   DUST_PER_BOOSTER,
   DUST_PER_SHINY,
   EloRankThreshold,
+  getBaseAltForm,
   getEmotionCost,
   MAX_PLAYERS_PER_GAME,
   MAX_USER_NAME_LENGTH,
+  PkmAltForms,
   USERNAME_REGEXP
 } from "../../config"
 import { CollectionUtils, createBooster } from "../../core/collection"
@@ -331,7 +333,7 @@ export class OpenBoosterCommand extends Command<
       if (!user) return
 
       // First, find the user and check if they have boosters
-      const userDoc = await UserMetadata.findOne({
+      let userDoc = await UserMetadata.findOne({
         uid: client.auth.uid,
         booster: { $gt: 0 }
       })
@@ -346,7 +348,7 @@ export class OpenBoosterCommand extends Command<
 
       boosterContent.forEach((card) => {
         const index = PkmIndex[card.name]
-        const existingItem = userDoc.pokemonCollection.get(index)
+        const existingItem = userDoc!.pokemonCollection.get(index)
 
         if (!existingItem) {
           if (`pokemonCollection.${index}` in updateOperations) {
@@ -383,8 +385,10 @@ export class OpenBoosterCommand extends Command<
           if (hasUnlocked) {
             // Add dust
             const dustGain = card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
+            const shardIndex = PkmIndex[getBaseAltForm(card.name)]
             updateOperations.$inc = updateOperations.$inc || {}
-            updateOperations.$inc[`pokemonCollection.${index}.dust`] = dustGain
+            updateOperations.$inc[`pokemonCollection.${shardIndex}.dust`] =
+              dustGain
           } else {
             // Add new emotion
             CollectionUtils.unlockEmotion(
@@ -399,22 +403,29 @@ export class OpenBoosterCommand extends Command<
       })
 
       // Perform atomic update
-      const mongoUser = await UserMetadata.findOneAndUpdate(
-        { uid: client.auth.uid, booster: { $gt: 0 } },
-        updateOperations,
-        { new: true }
-      )
-
-      if (!mongoUser) return
+      await userDoc.updateOne(updateOperations)
+      userDoc = await UserMetadata.findOne({ uid: client.auth.uid }) // reload updated doc
+      if (!userDoc) {
+        logger.error(
+          `User document not found after opening booster: ${client.auth.uid}`
+        )
+        return
+      }
 
       // resync, db-authoritative
-      user.booster = mongoUser.booster
+      user.booster = userDoc.booster
       boosterContent.forEach((pkmWithCustom) => {
         const index = PkmIndex[pkmWithCustom.name]
         const pokemonCollectionItem = user.pokemonCollection.get(index)
-        const mongoPokemonCollectionItem =
-          mongoUser.pokemonCollection.get(index)
-        if (!mongoPokemonCollectionItem) return
+        const mongoPokemonCollectionItem = userDoc.pokemonCollection.get(index)
+        if (!mongoPokemonCollectionItem) {
+          logger.error(`Missing mongo collection item after booster open`, {
+            index,
+            pkmWithCustom,
+            clientUid: client.auth.uid
+          })
+          return
+        }
         if (pokemonCollectionItem) {
           pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust
           pokemonCollectionItem.unlocked = Buffer.copyBytesFrom(
@@ -439,10 +450,10 @@ export class OpenBoosterCommand extends Command<
         }
       })
 
-      await checkTitlesAfterEmotionUnlocked(mongoUser, boosterContent)
-      await mongoUser.save()
+      await checkTitlesAfterEmotionUnlocked(userDoc, boosterContent)
+      await userDoc.save()
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
-      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
+      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(userDoc))
     } catch (error) {
       logger.error(error)
     }
@@ -604,8 +615,12 @@ export class BuyEmotionCommand extends Command<
       const user = this.room.users.get(client.auth.uid)
       const cost = getEmotionCost(emotion, shiny)
       if (!user || !PkmByIndex.hasOwnProperty(index)) return
+
+      // If an alt form is bought, shards must be taken from the base form
+      const shardIndex = PkmIndex[getBaseAltForm(PkmByIndex[index])]
       const pokemonCollectionItem = user.pokemonCollection.get(index)
-      if (!pokemonCollectionItem) return
+      const shardCollectionItem = user.pokemonCollection.get(shardIndex)
+      if (!pokemonCollectionItem || !shardCollectionItem) return
 
       // Check if emotion is already unlocked
       if (
@@ -623,7 +638,10 @@ export class BuyEmotionCommand extends Command<
       if (!mongoUser) return
 
       const mongoItem = mongoUser.pokemonCollection.get(index)
-      if (!mongoItem || mongoItem.dust < cost) return
+      const mongoShardItem = mongoUser.pokemonCollection.get(shardIndex)
+      if (!mongoItem || !mongoShardItem) return
+
+      if (mongoShardItem.dust < cost) return
 
       // Add the emotion using optimized storage
       CollectionUtils.unlockEmotion(mongoItem.unlocked, emotion, shiny)
@@ -632,7 +650,7 @@ export class BuyEmotionCommand extends Command<
       mongoUser.markModified(`pokemonCollection.${index}`) // mongoose does not track changes to Buffers automatically
 
       // Deduct cost
-      mongoItem.dust -= cost
+      mongoShardItem.dust -= cost
 
       // Update in-memory user data
       CollectionUtils.unlockEmotion(
@@ -640,7 +658,7 @@ export class BuyEmotionCommand extends Command<
         emotion,
         shiny
       )
-      pokemonCollectionItem.dust = mongoItem.dust
+      shardCollectionItem.dust = mongoShardItem.dust
       pokemonCollectionItem.selectedEmotion = emotion
       pokemonCollectionItem.selectedShiny = shiny
 
@@ -675,7 +693,10 @@ async function checkTitlesAfterEmotionUnlocked(
   if (!mongoUser.titles.includes(Title.DUKE)) {
     if (
       Object.values(Pkm)
-        .filter((p) => NonPkm.includes(p) === false)
+        .filter(
+          (p) =>
+            NonPkm.includes(p) === false && PkmAltForms.includes(p) === false
+        )
         .every((pkm) => {
           const item = mongoUser.pokemonCollection.get(PkmIndex[pkm])
           if (!item) return false
@@ -755,25 +776,28 @@ export class BuyBoosterCommand extends Command<
       const rarity = getPokemonData(pkm).rarity
       const boosterCost = BoosterPriceByRarity[rarity]
 
+      const shardIndex = PkmIndex[getBaseAltForm(pkm)]
+
       const mongoUser = await UserMetadata.findOneAndUpdate(
         {
           uid: client.auth.uid,
-          [`pokemonCollection.${index}.dust`]: { $gte: boosterCost }
+          [`pokemonCollection.${shardIndex}.dust`]: { $gte: boosterCost }
         },
         {
           $inc: {
             booster: 1,
-            [`pokemonCollection.${index}.dust`]: -boosterCost
+            [`pokemonCollection.${shardIndex}.dust`]: -boosterCost
           }
         },
         { new: true }
       )
       if (!mongoUser) return
 
-      const pokemonCollectionItem = user.pokemonCollection.get(index)
+      const pokemonCollectionItem = user.pokemonCollection.get(shardIndex)
       if (!pokemonCollectionItem) return
 
-      const mongoPokemonCollectionItem = mongoUser.pokemonCollection.get(index)
+      const mongoPokemonCollectionItem =
+        mongoUser.pokemonCollection.get(shardIndex)
       if (!mongoPokemonCollectionItem) return
 
       user.booster = mongoUser.booster

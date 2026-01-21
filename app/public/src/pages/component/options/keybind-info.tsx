@@ -16,6 +16,11 @@ export default function KeybindInfo() {
   useEffect(() => {
     function onKeydown(e: KeyboardEvent) {
       if (currentlyRemapping === null) return
+
+      // Prevent page scroll / focus movement while capturing keys (arrows, space, etc.)
+      e.preventDefault()
+      e.stopPropagation()
+
       let key = e.key.toUpperCase()
       if (key === "ESCAPE") {
         setCurrentlyRemapping(null)
@@ -133,5 +138,12 @@ export default function KeybindInfo() {
 const KEY_CODES_TO_PHASER_KEY_CODES: { [key: string]: string } = {
   " ": "SPACE",
   PAGEUP: "PAGE_UP",
-  PAGEDOWN: "PAGE_DOWN"
+  PAGEDOWN: "PAGE_DOWN",
+
+  // Normalize arrow keys from DOM KeyboardEvent format to Phaser key names
+  // e.g. "ArrowLeft" -> "ARROWLEFT" -> "LEFT"
+  ARROWUP: "UP",
+  ARROWDOWN: "DOWN",
+  ARROWLEFT: "LEFT",
+  ARROWRIGHT: "RIGHT"
 }

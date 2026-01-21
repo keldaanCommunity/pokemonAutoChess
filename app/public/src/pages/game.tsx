@@ -4,11 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import {
-  MinStageForGameToCount,
-  PortalCarouselStages,
-  RegionDetails
-} from "../../../config"
+import { MinStageForGameToCount, RegionDetails } from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
@@ -102,6 +98,10 @@ export function getGameScene(): GameScene | undefined {
     | undefined
 }
 
+export function getGameContainer(): GameContainer {
+  return gameContainer
+}
+
 export function cyclePlayers(amt: number) {
   const players = values(gameContainer.room?.state.players)
   playerClick(
@@ -116,8 +116,8 @@ export function cyclePlayers(amt: number) {
 
 export function playerClick(id: string) {
   const scene = getGameScene()
+  gameContainer?.room?.send(Transfer.SPECTATE, id)
   if (scene?.spectate) {
-    // if spectating game we switch directly without notifying the server to not show spectators avatars
     if (gameContainer?.room?.state?.players) {
       const spectatedPlayer = gameContainer?.room?.state?.players.get(id)
       if (spectatedPlayer) {
@@ -133,9 +133,17 @@ export function playerClick(id: string) {
 
       gameContainer?.gameScene?.board?.updateScoutingAvatars()
     }
-  } else {
-    gameContainer?.room?.send(Transfer.SPECTATE, id)
   }
+}
+
+function showMoneyToast(value: number) {
+  toast(
+    <div className="toast-player-income">
+      <span style={{ verticalAlign: "middle" }}>+{value}</span>
+      <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
+    </div>,
+    { containerId: "toast-money" }
+  )
 }
 
 export default function Game() {
@@ -492,15 +500,7 @@ export default function Game() {
         )
       })
 
-      room.onMessage(Transfer.PLAYER_INCOME, (value) => {
-        toast(
-          <div className="toast-player-income">
-            <span style={{ verticalAlign: "middle" }}>+{value}</span>
-            <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
-          </div>,
-          { containerId: "toast-money" }
-        )
-      })
+      room.onMessage(Transfer.PLAYER_INCOME, showMoneyToast)
 
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
@@ -692,8 +692,12 @@ export default function Game() {
           $player.listen("shopFreeRolls", (value) => {
             dispatch(setShopFreeRolls(value))
           })
-          $player.listen("money", (value) => {
+          $player.listen("money", (value, previousValue) => {
             dispatch(setMoney(value))
+            if (value - previousValue >= 30) {
+              // show income toast for significant income only
+              showMoneyToast(value - previousValue)
+            }
           })
           $player.listen("streak", (value) => {
             dispatch(setStreak(value))

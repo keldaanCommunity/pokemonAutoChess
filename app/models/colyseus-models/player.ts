@@ -25,11 +25,12 @@ import {
 } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  Berries,
   HMs,
   Item,
-  ItemComponents,
+  ItemComponentsNoFossilOrScarf,
   MissionOrder,
+  NonSpecialBerries,
+  ScarfItem,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
@@ -113,11 +114,7 @@ export default class Player extends Schema implements IPlayer {
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type(["string"]) berryTreesType: Item[] = [
-    pickRandomIn(Berries),
-    pickRandomIn(Berries),
-    pickRandomIn(Berries)
-  ]
+  @type(["string"]) berryTreesType: Item[] = pickNRandomIn(NonSpecialBerries, 3)
   @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
   @type([Pokemon]) flowerPots: Pokemon[] = []
   @type("uint8") mulch: number = 0
@@ -148,6 +145,7 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  scarvesItems: Item[] = []
   buriedItems: (Item | null)[] = initBuriedItems()
   tms: (Item | null)[] = pickRandomTMs()
   weatherRocks: Item[] = []
@@ -231,7 +229,8 @@ export default class Player extends Schema implements IPlayer {
     }
 
     if (state.specialGameRule === SpecialGameRule.SLAMINGO) {
-      for (let i = 0; i < 4; i++) this.items.push(pickRandomIn(ItemComponents))
+      for (let i = 0; i < 4; i++)
+        this.items.push(pickRandomIn(ItemComponentsNoFossilOrScarf))
     }
   }
 
@@ -301,7 +300,7 @@ export default class Player extends Schema implements IPlayer {
         newPokemon.shiny = true
       }
     })
-    newPokemon.meal = pokemon.meal
+    newPokemon.dishes = pokemon.dishes
     newPokemon.positionX = pokemon.positionX
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
@@ -321,15 +320,20 @@ export default class Player extends Schema implements IPlayer {
       this.specialGameRule
     )
 
+    const normalNeedsRecomputing = this.updateScarves(
+      previousSynergies,
+      updatedSynergies
+    )
+
     const artifNeedsRecomputing = this.updateArtificialItems(
       previousSynergies,
       updatedSynergies
     )
-    if (artifNeedsRecomputing) {
+    if (artifNeedsRecomputing || normalNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
-      right after losing an artificial item, since many edgecases may need to be adressed when 
-      losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
-      decrementing by 1 in updatedSynergies map count
+      right after losing an artificial item or a scarf, since many edgecases may need to be 
+      adressed when losing a type (Axew double dragon + artif item for example) ;
+      it's not as easy as just decrementing by 1 in updatedSynergies map count
       */
       updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
     }
@@ -440,6 +444,64 @@ export default class Player extends Schema implements IPlayer {
       }
 
       lostArtificialItems.forEach(removeArtificialItem)
+    }
+
+    return needsRecomputingSynergiesAgain
+  }
+
+  updateScarves(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ): boolean {
+    let needsRecomputingSynergiesAgain = false
+    const previousNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
+      (n) => (previousSynergies.get(Synergy.NORMAL) ?? 0) >= n
+    ).length
+
+    const newNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
+      (n) => (updatedSynergies.get(Synergy.NORMAL) ?? 0) >= n
+    ).length
+
+    if (newNbScarves > previousNbScarves) {
+      // some scarves are gained
+      while (this.scarvesItems.length < newNbScarves) {
+        // initialize scarves items if not done yet
+        this.scarvesItems.push(Item.SILK_SCARF)
+      }
+
+      const gainedScarves = this.scarvesItems.slice(
+        previousNbScarves,
+        newNbScarves
+      )
+      gainedScarves.forEach((item) => {
+        this.items.push(item)
+      })
+    } else if (newNbScarves < previousNbScarves) {
+      // some scarves are lost
+      const lostScarves = this.scarvesItems.slice(
+        newNbScarves,
+        previousNbScarves
+      )
+
+      const removeScarf = (item: ScarfItem) => {
+        // first check held items
+        const pokemons = values(this.board)
+        for (const pokemon of pokemons) {
+          if (pokemon.items.has(item)) {
+            pokemon.removeItem(item, this)
+
+            if (item in SynergyGivenByItem && !isOnBench(pokemon)) {
+              needsRecomputingSynergiesAgain = true
+            }
+            return // break for loop to remove only one
+          }
+        }
+
+        // if not found check player item bench
+        removeInArray<Item>(this.items, item)
+      }
+
+      lostScarves.forEach(removeScarf)
     }
 
     return needsRecomputingSynergiesAgain
@@ -586,8 +648,8 @@ export default class Player extends Schema implements IPlayer {
         this.updateSynergies()
         if (regionalSpeciality) {
           this.board.forEach((pokemon) => {
-            if (pokemon.canEat) {
-              pokemon.meal = regionalSpeciality
+            if (pokemon.canEat && !pokemon.dishes.has(regionalSpeciality)) {
+              pokemon.dishes.add(regionalSpeciality)
             }
           })
         }
@@ -741,11 +803,16 @@ export default class Player extends Schema implements IPlayer {
       id,
       new Wanderer({
         id,
+        shiny: false,
         pkm: Pkm.CHATOT,
-        type: WandererType.SPECIAL,
+        type: WandererType.DIALOG,
         behavior: WandererBehavior.SPECTATE
       })
     )
+
+    setTimeout(() => {
+      this.addMoney(30, true, null)
+    }, 7000)
   }
 
   chargeCellBattery(amount: number) {

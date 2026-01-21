@@ -1,10 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
-import {
-  TownEncounter,
-  TownEncounterSellPrice,
-  TownEncounters
-} from "../../../../core/town-encounters"
+import { TownEncounterSellPrice } from "../../../../config"
 import GameState from "../../../../rooms/states/game-state"
 import {
   Emotion,
@@ -17,6 +13,10 @@ import {
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import {
+  TownEncounter,
+  TownEncounters
+} from "../../../../types/enum/TownEncounter"
 import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
 import { getRankLabel } from "../../../../types/strings/Strings"
 import { getPokemonCustomFromAvatar } from "../../../../utils/avatar"
@@ -534,6 +534,24 @@ export default class MinigameManager {
       name: Pkm.WIGGLYTUFF
     })
 
+    const cincinno = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CINCCINO ? cx : 18 * 48,
+      y: encounter === TownEncounters.CINCCINO ? cy : 23 * 48,
+      orientation:
+        encounter === TownEncounters.CINCCINO
+          ? Orientation.DOWN
+          : Orientation.UP,
+      name: Pkm.CINCCINO
+    })
+
+    const magnezone = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.MAGNEZONE ? cx : 41 * 48,
+      y: encounter === TownEncounters.MAGNEZONE ? cy : 15 * 48,
+      name: Pkm.MAGNEZONE
+    })
+
     const podiumPokemons = podium.map((p, rank) => {
       const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
       const champion = new PokemonSpecial({
@@ -572,6 +590,8 @@ export default class MinigameManager {
       makuhita,
       croagunk,
       wigglytuff,
+      cincinno,
+      magnezone,
       ...podiumPokemons
     )
 

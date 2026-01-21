@@ -1,11 +1,11 @@
 import { Stat } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { Item, ItemsSoldAtTown } from "../../types/enum/Item"
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
   [Item.MAGNET]: { [Stat.SPEED]: 10 },
   [Item.BLACK_GLASSES]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.MIRACLE_SEED]: { [Stat.SHIELD]: 15 },
+  [Item.MIRACLE_SEED]: { [Stat.HP]: 15 },
   [Item.CHARCOAL]: { [Stat.ATK]: 3 },
   [Item.NEVER_MELT_ICE]: { [Stat.SPE_DEF]: 3 },
   [Item.HEART_SCALE]: { [Stat.DEF]: 3 },
@@ -17,7 +17,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.FIRE_STONE]: { [Stat.ATK]: 3 },
   [Item.MOON_STONE]: { [Stat.DEF]: 3 },
   [Item.DUSK_STONE]: { [Stat.CRIT_CHANCE]: 10 },
-  [Item.LEAF_STONE]: { [Stat.SHIELD]: 15 },
+  [Item.LEAF_STONE]: { [Stat.HP]: 15 },
   [Item.ICE_STONE]: { [Stat.SPE_DEF]: 3 },
   [Item.CHOICE_SPECS]: { [Stat.AP]: 100 },
   [Item.SOUL_DEW]: {},
@@ -30,21 +30,20 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.AQUA_EGG]: { [Stat.PP]: 30 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
-  [Item.STAR_DUST]: { [Stat.PP]: 15, [Stat.SHIELD]: 50 },
-  [Item.GREEN_ORB]: { [Stat.SPE_DEF]: 3 },
+  [Item.STAR_DUST]: { [Stat.SPE_DEF]: 10, [Stat.PP]: 15 },
+  [Item.GREEN_ORB]: { [Stat.HP]: 15 },
   [Item.DEEP_SEA_TOOTH]: { [Stat.ATK]: 7, [Stat.PP]: 15 },
-  [Item.SMOKE_BALL]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 10 },
+  [Item.SMOKE_BALL]: { [Stat.CRIT_CHANCE]: 10 },
   [Item.XRAY_VISION]: { [Stat.SPEED]: 50 },
   [Item.RAZOR_FANG]: {
     [Stat.SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
     [Stat.CRIT_POWER]: 100
   },
-  [Item.GRACIDEA_FLOWER]: { [Stat.SHIELD]: 15 },
   [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 30 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
-  [Item.STICKY_BARB]: { [Stat.DEF]: 6, [Stat.SHIELD]: 15 },
+  [Item.STICKY_BARB]: { [Stat.DEF]: 6, [Stat.HP]: 15 },
   [Item.ABILITY_SHIELD]: { [Stat.AP]: 10 },
   [Item.WIDE_LENS]: {
     [Stat.RANGE]: 2,
@@ -53,10 +52,9 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   },
   [Item.RAZOR_CLAW]: { [Stat.CRIT_CHANCE]: 50, [Stat.ATK]: 3 },
   [Item.SAFETY_GOGGLES]: { [Stat.CRIT_CHANCE]: 10, [Stat.DEF]: 3 },
-  [Item.KINGS_ROCK]: { [Stat.SHIELD]: 100 },
+  [Item.KINGS_ROCK]: { [Stat.HP]: 100 },
   [Item.SHINY_CHARM]: { [Stat.DEF]: 3 },
   [Item.PROTECTIVE_PADS]: { [Stat.SHIELD]: 60, [Stat.ATK]: 6 },
-  [Item.MAX_REVIVE]: { [Stat.SPE_DEF]: 3, [Stat.SHIELD]: 15 },
   [Item.ASSAULT_VEST]: { [Stat.SPE_DEF]: 40 },
   [Item.AMULET_COIN]: {},
   [Item.POKE_DOLL]: { [Stat.DEF]: 3, [Stat.SPE_DEF]: 3 },
@@ -71,8 +69,9 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.METRONOME]: { [Stat.PP]: 5 },
   [Item.METAL_COAT]: { [Stat.DEF]: 10, [Stat.SPE_DEF]: 10 },
   [Item.AIR_BALLOON]: { [Stat.SPEED]: 30 },
-  [Item.HARD_STONE]: { [Stat.SHIELD]: 100 },
-  [Item.BERSERK_GENE]: { [Stat.ATK]: 5 },
+  [Item.EXPLORER_KIT]: { [Stat.DEF]: 5, [Stat.SPE_DEF]: 5, [Stat.ATK]: 3 },
+  [Item.PROTECTOR]: { [Stat.SHIELD]: 100 },
+  [Item.BERSERK_GENE]: { [Stat.ATK]: 10 },
   [Item.SURFBOARD]: { [Stat.SPEED]: 30 },
   [Item.TERRAIN_EXTENDER]: { [Stat.SHIELD]: 50, [Stat.AP]: 50 },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.LUCK]: 30 },
@@ -90,10 +89,28 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.CRIT_CHANCE]: 30
   },
   [Item.COMET_SHARD]: { [Stat.ATK]: 15 },
+  [Item.SHINY_STONE]: { [Stat.AP]: 50 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },
   [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 100, [Stat.SPE_DEF]: 10 },
   [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 100, [Stat.DEF]: 10 },
-  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 }
+  [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 },
+  [Item.SILK_SCARF]: { [Stat.SHIELD]: 15 },
+  [Item.FRIEND_BOW]: { [Stat.SHIELD]: 15 },
+  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 20 },
+  [Item.LUCKY_RIBBON]: { [Stat.DEF]: 10, [Stat.AP]: 50, [Stat.LUCK]: 30 },
+  [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },
+  [Item.TWIST_BAND]: { [Stat.SPE_DEF]: 20, [Stat.SHIELD]: 50 },
+  [Item.BIG_EATER_BELT]: { [Stat.SHIELD]: 15, [Stat.HP]: 50 },
+  [Item.MACH_RIBBON]: { [Stat.SHIELD]: 15, [Stat.SPEED]: 10 },
+  [Item.COVER_BAND]: { [Stat.DEF]: 12, [Stat.SHIELD]: 50 },
+  [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
+  [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 }
+}
+
+export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {
+  [Item.TINY_MUSHROOM]: 1,
+  [Item.BIG_MUSHROOM]: 2,
+  [Item.BALM_MUSHROOM]: 5
 }

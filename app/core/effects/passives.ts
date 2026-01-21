@@ -16,6 +16,7 @@ import {
   Flavors,
   Item,
   OgerponMasks,
+  SpecialBerries,
   SynergyFlavors
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -85,7 +86,8 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
       physicalDamage: 0,
       specialDamage: 0,
       trueDamage: 0,
-      totalDamage: 0
+      totalDamage: 0,
+      crit: false
     })
   })
 }
@@ -443,7 +445,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   }
 }, Passive.GLIMMORA)
 
-const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
+const FurCoatEffect = new OnStageStartEffect(({ pokemon, player }) => {
   if (!pokemon) return
   if (isOnBench(pokemon)) {
     const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
@@ -451,9 +453,15 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
     ](pokemon.name)
     pokemon.speed = initialSpeed
     pokemon.def = initialDef
-  } else if (pokemon.speed >= 5) {
+    if (pokemon.stacks >= pokemon.stacksRequired && player) {
+      pokemon.stacks = 0
+      player.items.push(Item.SILK_SCARF)
+    }
+    pokemon.stacks = 0
+  } else if (pokemon.stacks < pokemon.stacksRequired) {
     pokemon.speed -= 5
     pokemon.def += 2
+    pokemon.stacks += 1
   }
 }, Passive.FUR_COAT)
 
@@ -937,7 +945,7 @@ const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
     entity.effectsSet.add(new DrySkinPeriodicEffect())
   } else if (entity.simulation.weather === Weather.SANDSTORM) {
     entity.addDodgeChance(0.25, entity, 0, false)
-  } else if (entity.simulation.weather === Weather.SUN) {
+  } else if (entity.simulation.weather === Weather.ZENITH) {
     entity.addAbilityPower(50, entity, 0, false)
   }
 }, Passive.DRY_SKIN)
@@ -996,7 +1004,7 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   familyMembers.forEach((entity) => {
     if (!attacker.player) return
     entity.addStack()
-    if (entity.refToBoardPokemon.stacks % 3 === 0) {
+    if (entity.refToBoardPokemon.stacks % 2 === 0) {
       entity.addAttack(1, entity, 0, false, true)
     }
   })
@@ -1007,11 +1015,22 @@ const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
   pokemon.addStack()
 }
 
-const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
+const superchargeTadbulb = (
+  pokemon: PokemonEntity & { lastSuperchargeTime?: number },
+  board: Board
+) => {
+  if (
+    pokemon.lastSuperchargeTime &&
+    Date.now() - pokemon.lastSuperchargeTime < 3000
+  ) {
+    return
+  }
+  pokemon.lastSuperchargeTime = Date.now()
+
   if (pokemon.status.electricField === false) {
     pokemon.status.electricField = true
-    pokemon.addSpeed(30, pokemon, 0, false)
-    pokemon.addShield(50, pokemon, 0, false)
+    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addShield(30, pokemon, 0, false)
     pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
   }
   board
@@ -1037,13 +1056,14 @@ const superchargeTadbulb = (pokemon: PokemonEntity, board: Board) => {
           cell.value.cooldown = 500
         }
 
-        cell.value.handleSpecialDamage(
-          30,
+        cell.value.handleDamage({
+          damage: 10,
           board,
-          AttackType.SPECIAL,
-          pokemon,
-          false
-        )
+          attackType: AttackType.SPECIAL,
+          attacker: pokemon,
+          isRetaliation: true,
+          shouldTargetGainMana: true
+        })
       }
     })
 }
@@ -1264,7 +1284,7 @@ export const PassiveEffects: Partial<
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
-        pokemon.addMaxHP(15, player)
+        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15, player)
         removeInArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {
@@ -1317,11 +1337,13 @@ export const PassiveEffects: Partial<
         superchargeTadbulb(entity, simulation.board)
       }
     }),
-    new OnDamageReceivedEffect(({ pokemon, damageBeforeReduction, board }) => {
-      if (damageBeforeReduction >= 50) {
-        superchargeTadbulb(pokemon, board)
+    new OnDamageReceivedEffect(
+      ({ pokemon, damageBeforeReduction, board, isRetaliation }) => {
+        if (damageBeforeReduction >= 50 && !isRetaliation) {
+          superchargeTadbulb(pokemon, board)
+        }
       }
-    })
+    )
   ],
   [Passive.PINCURCHIN]: [
     new OnDamageReceivedEffect(({ pokemon, attackType, attacker }) => {

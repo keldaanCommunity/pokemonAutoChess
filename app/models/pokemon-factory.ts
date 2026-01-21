@@ -1,9 +1,9 @@
 import { MapSchema } from "@colyseus/schema"
-import { FlowerPot } from "../core/flower-pots"
-import { TownEncounter, TownEncounters } from "../core/town-encounters"
 import { Emotion, IPlayer, PkmCustom } from "../types"
 import { Stat } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
+
 import { logger } from "../utils/logger"
 import Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
@@ -67,92 +67,6 @@ export default class PokemonFactory {
     }
   }
 }
-
-export function getColorVariantForPlayer(basePkm: Pkm, player: Player): Pkm {
-  switch (basePkm) {
-    case Pkm.FLABEBE: {
-      switch (player.flowerPotsSpawnOrder[0]) {
-        case FlowerPot.YELLOW:
-          return Pkm.FLABEBE_YELLOW
-        case FlowerPot.ORANGE:
-          return Pkm.FLABEBE_ORANGE
-        case FlowerPot.BLUE:
-          return Pkm.FLABEBE_BLUE
-        case FlowerPot.WHITE:
-          return Pkm.FLABEBE_WHITE
-      }
-      return Pkm.FLABEBE
-    }
-    case Pkm.FLOETTE: {
-      switch (player.flowerPotsSpawnOrder[0]) {
-        case FlowerPot.YELLOW:
-          return Pkm.FLOETTE_YELLOW
-        case FlowerPot.ORANGE:
-          return Pkm.FLOETTE_ORANGE
-        case FlowerPot.BLUE:
-          return Pkm.FLOETTE_BLUE
-        case FlowerPot.WHITE:
-          return Pkm.FLOETTE_WHITE
-      }
-      return Pkm.FLOETTE
-    }
-    case Pkm.FLORGES: {
-      switch (player.flowerPotsSpawnOrder[0]) {
-        case FlowerPot.YELLOW:
-          return Pkm.FLORGES_YELLOW
-        case FlowerPot.ORANGE:
-          return Pkm.FLORGES_ORANGE
-        case FlowerPot.BLUE:
-          return Pkm.FLORGES_BLUE
-        case FlowerPot.WHITE:
-          return Pkm.FLORGES_WHITE
-      }
-      return Pkm.FLORGES
-    }
-    default:
-      return basePkm
-  }
-}
-
-export const PkmColorVariants: readonly Pkm[] = [
-  Pkm.FLABEBE_YELLOW,
-  Pkm.FLABEBE_ORANGE,
-  Pkm.FLABEBE_BLUE,
-  Pkm.FLABEBE_WHITE,
-  Pkm.FLOETTE_YELLOW,
-  Pkm.FLOETTE_ORANGE,
-  Pkm.FLOETTE_BLUE,
-  Pkm.FLOETTE_WHITE,
-  Pkm.FLORGES_YELLOW,
-  Pkm.FLORGES_ORANGE,
-  Pkm.FLORGES_BLUE,
-  Pkm.FLORGES_WHITE
-]
-
-export type PkmColorVariant = (typeof PkmColorVariants)[number]
-
-export const PkmColorVariantsByPkm = {
-  [Pkm.FLABEBE]: [
-    Pkm.FLABEBE_YELLOW,
-    Pkm.FLABEBE_ORANGE,
-    Pkm.FLABEBE_BLUE,
-    Pkm.FLABEBE_WHITE
-  ],
-  [Pkm.FLOETTE]: [
-    Pkm.FLOETTE_YELLOW,
-    Pkm.FLOETTE_ORANGE,
-    Pkm.FLOETTE_BLUE,
-    Pkm.FLOETTE_WHITE
-  ],
-  [Pkm.FLORGES]: [
-    Pkm.FLORGES_YELLOW,
-    Pkm.FLORGES_ORANGE,
-    Pkm.FLORGES_BLUE,
-    Pkm.FLORGES_WHITE
-  ]
-} satisfies { [base in Pkm]?: PkmColorVariant[] }
-
-export type PkmWithColorVariant = keyof typeof PkmColorVariantsByPkm
 
 export function getPokemonBaseline(name: Pkm) {
   switch (name) {

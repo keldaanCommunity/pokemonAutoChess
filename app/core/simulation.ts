@@ -1,5 +1,5 @@
 import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_WIDTH, ItemStats } from "../config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { SynergyEffects } from "../models/effects"
@@ -25,9 +25,10 @@ import {
   Team
 } from "../types/enum/Game"
 import {
-  Berries,
-  CraftableItems,
+  CraftableItemsNoScarves,
   Item,
+  NonSpecialBerries,
+  Scarves,
   SynergyStones,
   WeatherRocksByWeather
 } from "../types/enum/Item"
@@ -68,6 +69,7 @@ import {
   MonsterKillEffect,
   OnFieldDeathEffect,
   onFlowerMonDeath,
+  overgrowEffect,
   SoundCryEffect
 } from "./effects/synergies"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
@@ -206,10 +208,12 @@ export default class Simulation extends Schema implements ISimulation {
           const entity = values(team).find(
             (p) => p.refToBoardPokemon === pokemon
           ) as PokemonEntity | undefined
-          if (pokemon.meal !== "") {
-            this.applyDishEffects(pokemon.meal, pokemon, entity, player)
+          if (pokemon.dishes.size > 0) {
+            pokemon.dishes.forEach((dish) => {
+              this.applyDishEffects(dish, pokemon, entity, player)
+            })
             pokemon.action = PokemonActionState.IDLE
-            pokemon.meal = "" // consume all meals
+            pokemon.dishes.clear() // consume all dishes
           }
           if (entity) {
             entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
@@ -402,7 +406,9 @@ export default class Simulation extends Schema implements ISimulation {
 
   applyItemsEffects(pokemon: PokemonEntity) {
     if (pokemon.passive === Passive.PICKUP && pokemon.items.size === 0) {
-      pokemon.items.add(pickRandomIn(CraftableItems.concat(Berries)))
+      pokemon.items.add(
+        pickRandomIn(CraftableItemsNoScarves.concat(NonSpecialBerries))
+      )
     }
     // wonderbox should be applied first so that wonderbox items effects can be applied after
     if (pokemon.items.has(Item.WONDER_BOX)) {
@@ -410,7 +416,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       const wonderboxItems: Item[] = []
       for (let n = 0; n < 2; n++) {
-        const eligibleItems = CraftableItems.filter(
+        const eligibleItems = CraftableItemsNoScarves.filter(
           (i) =>
             !isIn(SynergyStones, i) &&
             !wonderboxItems.includes(i) &&
@@ -547,6 +553,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonCloned.name,
             player
           )
+          bug.stacks = pokemonCloned.stacks
 
           const coord = this.getClosestFreeCellToPokemon(
             pokemonCloned,
@@ -668,13 +675,23 @@ export default class Simulation extends Schema implements ISimulation {
           shieldBonus = 15
         }
         if (pokemon.effects.has(EffectEnum.STRENGTH)) {
-          shieldBonus += 25
+          shieldBonus += 20
         }
         if (pokemon.effects.has(EffectEnum.ENDURE)) {
-          shieldBonus += 35
+          shieldBonus += 25
         }
         if (pokemon.effects.has(EffectEnum.PURE_POWER)) {
-          shieldBonus += 50
+          shieldBonus += 30
+          if (values(pokemon.items).some((item) => Scarves.includes(item))) {
+            // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
+            pokemon.addAttack(
+              Math.round(0.3 * pokemon.baseAtk),
+              pokemon,
+              0,
+              false
+            )
+            pokemon.addAbilityPower(30, pokemon, 0, false)
+          }
         }
         if (shieldBonus >= 0) {
           pokemon.addShield(shieldBonus, pokemon, 0, false)
@@ -914,9 +931,9 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
+      case EffectEnum.FLAME_BODY:
+      case EffectEnum.WILDFIRE:
       case EffectEnum.BLAZE:
-      case EffectEnum.VICTORY_STAR:
-      case EffectEnum.DROUGHT:
       case EffectEnum.DESOLATE_LAND:
         if (types.has(Synergy.FIRE)) {
           pokemon.effects.add(effect)
@@ -925,62 +942,31 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.INGRAIN:
-        if (types.has(Synergy.GRASS)) {
-          pokemon.effects.add(EffectEnum.INGRAIN)
-        }
-        break
-
       case EffectEnum.GROWTH:
-        if (types.has(Synergy.GRASS)) {
-          pokemon.effects.add(EffectEnum.GROWTH)
-        }
-        break
-
       case EffectEnum.SPORE:
+      case EffectEnum.OVERGROW:
         if (types.has(Synergy.GRASS)) {
-          pokemon.effects.add(EffectEnum.SPORE)
+          pokemon.effects.add(effect)
+          if (effect === EffectEnum.OVERGROW) {
+            pokemon.effectsSet.add(overgrowEffect)
+          }
         }
         break
 
       case EffectEnum.RAIN_DANCE:
-        if (types.has(Synergy.WATER)) {
-          pokemon.effects.add(EffectEnum.RAIN_DANCE)
-        }
-        break
-
       case EffectEnum.DRIZZLE:
-        if (types.has(Synergy.WATER)) {
-          pokemon.effects.add(EffectEnum.DRIZZLE)
-        }
-        break
-
       case EffectEnum.PRIMORDIAL_SEA:
         if (types.has(Synergy.WATER)) {
-          pokemon.effects.add(EffectEnum.PRIMORDIAL_SEA)
+          pokemon.effects.add(effect)
         }
         break
 
       case EffectEnum.STAMINA:
-        if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.STAMINA)
-        }
-        break
-
       case EffectEnum.STRENGTH:
-        if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.STRENGTH)
-        }
-        break
-
       case EffectEnum.ENDURE:
-        if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.ENDURE)
-        }
-        break
-
       case EffectEnum.PURE_POWER:
         if (types.has(Synergy.NORMAL)) {
-          pokemon.effects.add(EffectEnum.PURE_POWER)
+          pokemon.effects.add(effect)
         }
         break
 
@@ -1375,7 +1361,12 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.SNOW:
-        pokemon.addSpeed(-20, pokemon, 0, false)
+        pokemon.addSpeed(
+          pokemon.types.has(Synergy.ICE) ? -10 : -20,
+          pokemon,
+          0,
+          false
+        )
         break
 
       case EffectEnum.SMOG: {

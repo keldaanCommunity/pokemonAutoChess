@@ -9,3 +9,9 @@ export const CELL_HEIGHT = 96
 
 export const CELL_VISUAL_WIDTH = 75
 export const CELL_VISUAL_HEIGHT = 75
+
+export const BERRY_TREE_POSITIONS = [
+  [408, 710],
+  [360, 710],
+  [312, 710]
+]

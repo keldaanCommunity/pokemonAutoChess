@@ -1,0 +1,2 @@
+2023-05-05 03:47:31.130258	<@!350050109741858829>	CUR	PMDCollab_1	Normal,Sad,Special1,Happy,Inspired,Teary-Eyed,Special2,Determined,Special0
+2025-09-14 22:25:15.236924	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal,Sad,Special1,Happy,Inspired,Surprised,Teary-Eyed,Special2,Determined,Special0

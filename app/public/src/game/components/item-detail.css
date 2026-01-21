@@ -1,6 +1,6 @@
 .game-item-detail {
   min-width: 200px;
-  max-width: 400px;
+  max-width: 440px;
   color: white;
   display: grid;
   font-size: 1.2rem;
@@ -34,6 +34,7 @@
 
 .game-item-recipe {
   float: right;
+  margin-left: 0.5em;
 }
 
 .game-item-recipe img {

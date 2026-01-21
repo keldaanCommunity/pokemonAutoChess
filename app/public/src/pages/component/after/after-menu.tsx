@@ -9,6 +9,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { useAppSelector } from "../../../hooks"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
 import { Avatar } from "../profile/avatar"
 import Team from "./team"
@@ -51,40 +52,8 @@ export default function AfterMenu() {
               <span>{getRankLabel(playerRank)}</span>
             </div>
             <p className="gamemode">
-              {gameMode === GameMode.SCRIBBLE && (
-                <>
-                  <img
-                    alt={t("smeargle_scribble")}
-                    className="scribble icon"
-                    src="/assets/ui/scribble.png"
-                    draggable="false"
-                  />
-                  {t("smeargle_scribble")}
-                </>
-              )}
-              {gameMode === GameMode.CUSTOM_LOBBY && t("custom_room")}
-              {gameMode === GameMode.CLASSIC && (
-                <>
-                  <img
-                    alt={t("classic")}
-                    className="classic icon"
-                    src="/assets/ui/classic.png"
-                    draggable="false"
-                  />
-                  {t("classic")}
-                </>
-              )}
-              {gameMode === GameMode.RANKED && (
-                <>
-                  <img
-                    src="assets/ui/ranked.png"
-                    alt={t("ranked_match")}
-                    className="ranked icon"
-                    draggable="false"
-                  />
-                  {t("ranked_match")}
-                </>
-              )}
+              <GameModeIcon gameMode={gameMode} />
+              {t(`game_modes.${gameMode}`)}
             </p>
             <div className="player-gains">
               {shouldShowElo && (

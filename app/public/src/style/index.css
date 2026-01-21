@@ -238,6 +238,7 @@ p:last-child {
   text-align: center;
 }
 
+summary,
 .clickable {
   cursor: var(--cursor-hover) !important;
 }

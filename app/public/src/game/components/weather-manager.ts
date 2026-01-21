@@ -1,5 +1,6 @@
 import Phaser from "phaser"
 import { DEPTH } from "../depths"
+import GameScene from "../scenes/game-scene"
 
 export default class WeatherManager {
   scene: Phaser.Scene
@@ -7,11 +8,15 @@ export default class WeatherManager {
   colorFilter: Phaser.GameObjects.Rectangle | undefined
   particlesEmitters: Phaser.GameObjects.Particles.ParticleEmitter[]
   image: Phaser.GameObjects.Image | undefined
+  tweens: Phaser.Tweens.Tween[]
+  fxs: Phaser.FX.Controller[]
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
     this.screen = new Phaser.Geom.Rectangle(0, 0, 3000, 2000)
     this.particlesEmitters = []
+    this.tweens = []
+    this.fxs = []
     if (scene.renderer.type === Phaser.WEBGL) {
       this.scene.cameras.main.initPostPipeline()
     }
@@ -201,6 +206,42 @@ export default class WeatherManager {
         0.6
       ).setDepth(DEPTH.WEATHER_FX)
     )
+  }
+
+  addDrought() {
+    this.colorFilter = this.scene.add.existing(
+      new Phaser.GameObjects.Rectangle(
+        this.scene,
+        1500,
+        1000,
+        3000,
+        2000,
+        0xa04818,
+        0.3
+      ).setDepth(DEPTH.WEATHER_FX)
+    )
+
+    // Add heat haze effect using WebGL shader
+    if (this.scene.renderer.type === Phaser.WEBGL) {
+      //const camera = this.scene.cameras.main
+      this.fxs =
+        (this.scene as GameScene).map?.layers.map((layer) =>
+          layer.tilemapLayer.postFX.addDisplacement("distort", -0.001, 0)
+        ) ?? []
+
+      //camera.postFX.addDisplacement("distort", -0.001, 0)
+      this.tweens = [
+        this.scene.tweens.add({
+          targets: this.fxs,
+          x: 0.001,
+          y: 0,
+          yoyo: true,
+          loop: -1,
+          duration: 500,
+          ease: "sine.inout"
+        })
+      ]
+    }
   }
 
   addBloodMoon() {
@@ -583,9 +624,19 @@ export default class WeatherManager {
     this.particlesEmitters = []
     if (this.colorFilter) {
       this.colorFilter.destroy()
+      this.colorFilter = undefined
     }
     if (this.image) {
       this.image.destroy()
+      this.image = undefined
+    }
+    if (this.tweens) {
+      this.tweens.forEach((tween) => tween.destroy())
+      this.tweens = []
+    }
+    if (this.fxs) {
+      this.fxs.forEach((effect) => effect.destroy())
+      this.fxs = []
     }
   }
 }

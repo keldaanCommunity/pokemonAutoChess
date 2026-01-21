@@ -10,16 +10,12 @@ import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
-import {
-  MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  MAX_POOL_CONNECTIONS_SIZE,
-  SynergyTriggers
-} from "./config"
+import { MAX_CONCURRENT_PLAYERS_ON_SERVER, SynergyTriggers } from "./config"
+import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
-import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
 import UserMetadata, {
   toUserMetadataJSON
@@ -42,7 +38,8 @@ import {
   getMetadata,
   getMetaItems,
   getMetaPokemons,
-  getMetaRegions
+  getMetaRegions,
+  getMetaV2
 } from "./services/meta"
 import { Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
@@ -54,6 +51,14 @@ const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
   : path.join(__dirname, "public", "dist", "client")
 const viewsSrc = path.join(clientSrc, "index.html")
+const isDevelopment = process.env.MODE === "dev"
+const setCacheControl = (res: any, maxAge: number = 86400) => {
+  if (!isDevelopment) {
+    res.set("Cache-Control", `max-age=${maxAge}`)
+  } else {
+    res.set("Cache-Control", "no-cache")
+  }
+}
 
 /**
  * Import your Room files
@@ -139,6 +144,7 @@ export default config({
               "https://*.firebaseapp.com",
               "https://apis.google.com",
               "https://*.googleapis.com",
+              "https://*.doubleclick.net", // google ads, required for youtube embedded
               "https://*.githubusercontent.com",
               "http://raw.githubusercontent.com",
               "https://*.youtube.com",
@@ -155,7 +161,8 @@ export default config({
               "'unsafe-inline'",
               "'unsafe-eval'",
               "https://apis.google.com",
-              "https://*.googleapis.com"
+              "https://*.googleapis.com",
+              "https://*.doubleclick.net" // google ads, required for youtube embedded
             ],
             imgSrc: [
               "'self'",
@@ -241,49 +248,38 @@ export default config({
       res.send(SynergyTriggers)
     })
 
-    app.get("/meta", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
-      res.send(
-        await Meta.find({}, [
-          "cluster_id",
-          "count",
-          "ratio",
-          "winrate",
-          "mean_rank",
-          "types",
-          "pokemons",
-          "x",
-          "y"
-        ])
-      )
-    })
-
     app.get("/titles", async (req, res) => {
       res.send(await TitleStatistic.find().sort({ name: 1 }).exec()) // Ensure a consistent order by sorting on a unique field
     })
 
     app.get("/meta/metadata", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetadata())
     })
 
     app.get("/meta/items", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaItems())
     })
 
     app.get("/meta/pokemons", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaPokemons())
     })
 
     app.get("/meta/regions", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaRegions())
+    })
+
+    app.get("/meta-v2", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getMetaV2())
     })
 
     app.get("/meta/types", async (req, res) => {
@@ -315,32 +311,44 @@ export default config({
     })
 
     app.get("/leaderboards", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard())
     })
 
     app.get("/leaderboards/bots", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.botLeaderboard)
     })
 
     app.get("/leaderboards/elo", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.leaderboard)
     })
 
     app.get("/leaderboards/level", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.levelLeaderboard)
     })
 
     app.get("/leaderboards/event", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.eventLeaderboard)
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 10
@@ -372,7 +380,9 @@ export default config({
     })
 
     app.get("/chat-history/:playerUid", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 30
@@ -425,7 +435,10 @@ export default config({
         if (!userAuth) return
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
-        res.set("Cache-Control", "no-cache")
+        await migrateShardsOfAltForms(mongoUser) // TEMPORARY migration; to be removed in future
+        if (!isDevelopment) {
+          res.set("Cache-Control", "no-cache")
+        }
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
         logger.error("Error fetching profile", error)
@@ -527,7 +540,6 @@ export default config({
      * Before before gameServer.listen() is called.
      */
     connect(process.env.MONGO_URI!, {
-      maxPoolSize: MAX_POOL_CONNECTIONS_SIZE,
       socketTimeoutMS: 45000
     })
     admin.initializeApp({

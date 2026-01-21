@@ -1,18 +1,87 @@
 import * as d3 from "d3"
-import React, { Dispatch, SetStateAction } from "react"
-import { IMeta } from "../../../../../models/mongo-models/meta"
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
+import { IMetaV2 } from "../../../../../models/mongo-models/meta-v2"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { clamp } from "../../../../../utils/number"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import "./meta-chart.css"
 import { rankType } from "./team-comp"
 
+// Synergy color mapping for convex hulls - extracted from SVG fill colors
+const SYNERGY_COLORS: Record<Synergy, string> = {
+  NORMAL: "rgba(255, 254, 254, 0.3)",
+  FIRE: "rgba(255, 144, 36, 0.3)",
+  WATER: "rgba(45, 162, 253, 0.3)",
+  GRASS: "rgba(23, 179, 0, 0.3)",
+  ELECTRIC: "rgba(253, 255, 74, 0.3)",
+  ICE: "rgba(195, 228, 238, 0.3)",
+  FIGHTING: "rgba(243, 50, 24, 0.3)",
+  POISON: "rgba(136, 215, 160, 0.3)",
+  GROUND: "rgba(198, 150, 74, 0.3)",
+  FLYING: "rgba(178, 233, 255, 0.3)",
+  PSYCHIC: "rgba(185, 85, 210, 0.3)",
+  BUG: "rgba(255, 254, 102, 0.3)",
+  ROCK: "rgba(231, 229, 175, 0.3)",
+  GHOST: "rgba(135, 109, 173, 0.3)",
+  DRAGON: "rgba(184, 115, 51, 0.3)",
+  DARK: "rgba(166, 166, 166, 0.3)",
+  STEEL: "rgba(219, 219, 219, 0.3)",
+  FAIRY: "rgba(255, 175, 209, 0.3)",
+  FIELD: "rgba(222, 138, 78, 0.3)",
+  AQUATIC: "rgba(20, 200, 200, 0.3)",
+  MONSTER: "rgba(0, 180, 100, 0.3)",
+  AMORPHOUS: "rgba(229, 178, 244, 0.3)",
+  WILD: "rgba(178, 35, 52, 0.3)",
+  SOUND: "rgba(255, 96, 149, 0.3)",
+  FLORA: "rgba(255, 96, 241, 0.3)",
+  BABY: "rgba(255, 215, 154, 0.3)",
+  HUMAN: "rgba(253, 187, 139, 0.3)",
+  LIGHT: "rgba(255, 248, 150, 0.3)",
+  GOURMET: "rgba(255, 132, 115, 0.3)",
+  FOSSIL: "rgba(210, 211, 91, 0.3)",
+  ARTIFICIAL: "rgba(237, 237, 237, 0.3)"
+}
+
 export function MetaChart(props: {
-  meta: IMeta[]
+  meta: IMetaV2[]
   setSelectedComposition: Dispatch<SetStateAction<string | undefined>>
+  setHoveredCluster: Dispatch<SetStateAction<IMetaV2 | undefined>>
+  selectedCluster?: string
 }) {
-  const width = 900,
-    height = 700,
-    margin = 50
+  const svgRef = useRef<SVGSVGElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [transform, setTransform] = React.useState<d3.ZoomTransform | null>(
+    null
+  )
+  const [hoveredCluster, setHoveredCluster] = React.useState<
+    string | undefined
+  >()
+  const [dimensions, setDimensions] = React.useState({
+    width: 700,
+    height: 700
+  })
+
+  const margin = 20
+  const width = dimensions.width
+  const height = dimensions.height
+
+  React.useEffect(() => {
+    if (!containerRef.current) return
+
+    const resizeObserver = new ResizeObserver(() => {
+      const rect = containerRef.current?.getBoundingClientRect()
+      if (rect) {
+        setDimensions({
+          width: Math.max(rect.width, 300),
+          height: Math.max(rect.height, 300)
+        })
+      }
+    })
+
+    resizeObserver.observe(containerRef.current)
+    return () => resizeObserver.disconnect()
+  }, [])
 
   const x = d3
     .scaleLinear()
@@ -31,34 +100,170 @@ export function MetaChart(props: {
     .nice()
     .range([height - margin, margin])
 
+  useEffect(() => {
+    if (!svgRef.current) return
+
+    const zoom = d3.zoom<SVGSVGElement, unknown>().on("zoom", (event) => {
+      setTransform(event.transform)
+    })
+
+    d3.select(svgRef.current).call(zoom)
+  }, [])
+
   return (
-    <svg
-      width={width}
-      height={height}
-      style={{ maxWidth: "100%", height: "auto" }}
-    >
-      {props.meta
-        .sort((a, b) => b.count - a.count)
-        .map((d, i) => {
-          const synergy = (Object.keys(d.types) as Synergy[]).sort((a, b) => {
-            return rankType(a, b, d.types)
-          })[0]
-          const size = clamp(d.count, 40, 120)
-          return (
-            <image
-              key={d.cluster_id}
-              x={x(d.x) - margin}
-              y={y(d.y) - margin}
-              width={size}
-              height={size}
-              href={`assets/types/${synergy.toUpperCase()}.svg`}
-              className="meta-svg-icon"
-              onClick={(e) => {
-                props.setSelectedComposition(d.cluster_id)
-              }}
-            />
-          )
-        })}
-    </svg>
+    <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+      <svg
+        ref={svgRef}
+        width={width}
+        height={height}
+        style={{
+          width: "100%",
+          height: "100%",
+          maxWidth: "100%",
+          maxHeight: "100%",
+          cursor: "grab"
+        }}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <g
+          transform={
+            transform
+              ? `translate(${transform.x},${transform.y}) scale(${transform.k})`
+              : ""
+          }
+        >
+          {props.meta
+            .sort((a, b) => b.count - a.count)
+            .map((d, i) => {
+              // Render convex hull if available
+              if (d.hull && d.hull.length > 0) {
+                const synergies = d.synergies ? Object.keys(d.synergies) : []
+                const sortedSynergies = (synergies as Synergy[]).sort(
+                  (a, b) => {
+                    return rankType(a, b, d.synergies || {})
+                  }
+                )
+                const synergy =
+                  (sortedSynergies[0]?.toUpperCase() as Synergy) || undefined
+                const hullPoints = d.hull
+                  .map((point) => `${x(point[0])},${y(point[1])}`)
+                  .join(" ")
+
+                const fillColor =
+                  synergy && SYNERGY_COLORS[synergy]
+                    ? SYNERGY_COLORS[synergy]
+                    : "rgba(100, 150, 255, 0.3)"
+                const strokeColor =
+                  synergy && SYNERGY_COLORS[synergy]
+                    ? SYNERGY_COLORS[synergy].replace("0.3", "1")
+                    : "rgb(100, 150, 255)"
+
+                const isSelected = props.selectedCluster === d.cluster_id
+                const isHovered = hoveredCluster === d.cluster_id
+
+                return (
+                  <g key={`hull-${d.cluster_id}`}>
+                    <polygon
+                      points={hullPoints}
+                      fill={fillColor}
+                      stroke={strokeColor}
+                      strokeWidth="2"
+                      className={`hull-polygon ${isHovered ? "hovered" : ""} ${
+                        isSelected ? "selected" : ""
+                      }`}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        props.setSelectedComposition(d.cluster_id)
+                      }}
+                      onMouseEnter={() => {
+                        setHoveredCluster(d.cluster_id)
+                        props.setHoveredCluster(d)
+                      }}
+                      onMouseLeave={() => {
+                        setHoveredCluster(undefined)
+                        if (props.selectedCluster !== d.cluster_id) {
+                          props.setHoveredCluster(undefined)
+                        }
+                      }}
+                    />
+                    {d.mean_team?.pokemons &&
+                      (() => {
+                        const pokemonEntries = Object.entries(
+                          d.mean_team.pokemons
+                        )
+                        const top3Pokemon = pokemonEntries
+                          .sort(
+                            (a, b) =>
+                              (b[1]?.frequency ?? 0) - (a[1]?.frequency ?? 0)
+                          )
+                          .slice(0, 3)
+
+                        const baseSize = 40
+                        const pokemonRadius = baseSize / 2
+                        const containerRadius = baseSize / 2
+
+                        return (
+                          <g
+                            transform={`translate(${x(d.x)}, ${y(d.y)}) scale(${
+                              transform ? 1 / transform.k : 1
+                            })`}
+                          >
+                            <defs>
+                              {top3Pokemon.map((_, idx) => (
+                                <clipPath
+                                  key={`clip-${d.cluster_id}-${idx}`}
+                                  id={`clip-pokemon-${d.cluster_id}-${idx}`}
+                                >
+                                  <circle cx={0} cy={0} r={pokemonRadius} />
+                                </clipPath>
+                              ))}
+                            </defs>
+
+                            {/* Render top 3 Pokemon in a triangle */}
+                            {top3Pokemon.map((entry, idx) => {
+                              const angle = (idx * 120 - 90) * (Math.PI / 180)
+                              const px = containerRadius * Math.cos(angle)
+                              const py = containerRadius * Math.sin(angle)
+                              const pokemonName = entry[0]
+
+                              return (
+                                <g key={`poke-${d.cluster_id}-${idx}`}>
+                                  <circle
+                                    cx={px}
+                                    cy={py}
+                                    r={pokemonRadius}
+                                    fill="white"
+                                    style={{ pointerEvents: "none" }}
+                                  />
+                                  <g transform={`translate(${px}, ${py})`}>
+                                    <image
+                                      x={-pokemonRadius}
+                                      y={-pokemonRadius}
+                                      width={pokemonRadius * 2}
+                                      height={pokemonRadius * 2}
+                                      xlinkHref={getPortraitSrc(
+                                        PkmIndex[
+                                          pokemonName as keyof typeof PkmIndex
+                                        ]
+                                      )}
+                                      clipPath={`url(#clip-pokemon-${d.cluster_id}-${idx})`}
+                                      className="pokemon-portrait"
+                                      style={{ pointerEvents: "none" }}
+                                    />
+                                  </g>
+                                </g>
+                              )
+                            })}
+                          </g>
+                        )
+                      })()}
+                  </g>
+                )
+              }
+              return null
+            })}
+        </g>
+      </svg>
+    </div>
   )
 }

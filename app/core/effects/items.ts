@@ -9,12 +9,15 @@ import {
   AbilityPerTM,
   Berries,
   Dish,
+  DishesGoingToInventory,
   FishingRod,
   Flavors,
   HMs,
   Item,
   ItemRecipe,
   MemoryDiscs,
+  Mushrooms,
+  NonSpecialBerries,
   OgerponMasks,
   Sweets,
   SynergyGivenByItem,
@@ -28,7 +31,12 @@ import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
-import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  randomWeighted
+} from "../../utils/random"
 import { values } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
@@ -52,7 +60,9 @@ import {
   OnKillEffect,
   OnMoveEffect,
   OnResurrectEffect,
+  OnShieldDepletedEffect,
   OnSimulationStartEffect,
+  OnSpawnEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -119,13 +129,16 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
       candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
       const nbBounces = 1
+      const secondHitPhysicalDamage = Math.round(physicalDamage * 0.75)
+      const secondHitSpecialDamage = Math.round(specialDamage * 0.75)
+      const secondHitTrueDamage = Math.round(trueDamage * 0.75)
       for (let i = 0; i < nbBounces; i++) {
-        const target = candidateTargets.shift()
-        if (!target) break
+        const secondHitTarget = candidateTargets.shift()
+        if (!secondHitTarget) break
         let totalTakenDamage = 0
         if (physicalDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: physicalDamage,
+          const { takenDamage } = secondHitTarget.handleDamage({
+            damage: secondHitPhysicalDamage,
             board,
             attackType: AttackType.PHYSICAL,
             attacker: pokemon,
@@ -133,9 +146,9 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           })
           totalTakenDamage += takenDamage
         }
-        if (specialDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: specialDamage,
+        if (secondHitSpecialDamage > 0) {
+          const { takenDamage } = secondHitTarget.handleDamage({
+            damage: secondHitSpecialDamage,
             board,
             attackType: AttackType.SPECIAL,
             attacker: pokemon,
@@ -143,29 +156,31 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           })
           totalTakenDamage += takenDamage
           if (
-            target.items.has(Item.POWER_LENS) &&
+            secondHitTarget.items.has(Item.POWER_LENS) &&
             !pokemon.items.has(Item.PROTECTIVE_PADS)
           ) {
-            const speDef = target.status.armorReduction
-              ? Math.round(target.speDef / 2)
-              : target.speDef
+            const speDef = secondHitTarget.status.armorReduction
+              ? Math.round(secondHitTarget.speDef / 2)
+              : secondHitTarget.speDef
             const damageAfterReduction =
-              specialDamage / (1 + ARMOR_FACTOR * speDef)
-            const damageBlocked = min(0)(specialDamage - damageAfterReduction)
+              secondHitSpecialDamage / (1 + ARMOR_FACTOR * speDef)
+            const damageBlocked = min(0)(
+              secondHitSpecialDamage - damageAfterReduction
+            )
             pokemon.broadcastAbility({ skill: "POWER_LENS" })
             pokemon.handleDamage({
               damage: Math.round(damageBlocked),
               board,
               attackType: AttackType.SPECIAL,
-              attacker: target,
+              attacker: secondHitTarget,
               shouldTargetGainMana: true,
               isRetaliation: true
             })
           }
         }
-        if (trueDamage > 0) {
-          const { takenDamage } = target.handleDamage({
-            damage: trueDamage,
+        if (secondHitTrueDamage > 0) {
+          const { takenDamage } = secondHitTarget.handleDamage({
+            damage: secondHitTrueDamage,
             board,
             attackType: AttackType.TRUE,
             attacker: pokemon,
@@ -174,12 +189,12 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           totalTakenDamage += takenDamage
         }
         pokemon.onHit({
-          target,
+          target: secondHitTarget,
           board,
           totalTakenDamage,
-          physicalDamage,
-          specialDamage,
-          trueDamage
+          physicalDamage: secondHitPhysicalDamage,
+          specialDamage: secondHitSpecialDamage,
+          trueDamage: secondHitTrueDamage
         })
       }
     }
@@ -273,7 +288,6 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         Pkm.SUBSTITUTE,
         player
       )
-      player.board.delete(pokemon.id)
       substitute.id = pokemon.id
       substitute.evolution = pokemon.name
       substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
@@ -281,9 +295,12 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.positionY = pokemon.positionY
       pokemon.items.forEach((item) => substitute.items.add(item))
       pokemon.removeItems(values(pokemon.items), player)
+      const pokemonLeaving =
+        player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
+      player.board.delete(pokemonLeaving.id)
       player.board.set(substitute.id, substitute)
       player.pokemonsTrainingInDojo.push({
-        pokemon,
+        pokemon: pokemonLeaving,
         ticketLevel,
         returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
       })
@@ -302,7 +319,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
-  } else if (chef.name === Pkm.ARCEUS || chef.name === Pkm.KECLEON) {
+  } else if (chef.name.startsWith("ARCEUS") || chef.name === Pkm.KECLEON) {
     dish = Item.SANDWICH
   }
 
@@ -316,7 +333,16 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (dish && nbDishes > 0) {
     let dishes = Array.from({ length: nbDishes }, () => dish!)
     if (dish === Item.BERRIES) {
-      dishes = pickNRandomIn(Berries, 3 * nbDishes)
+      dishes = pickNRandomIn(NonSpecialBerries, 3 * nbDishes)
+    }
+    if (dish === Item.MUSHROOMS) {
+      dishes = [
+        randomWeighted({
+          [Item.TINY_MUSHROOM]: 70,
+          [Item.BIG_MUSHROOM]: 25,
+          [Item.BALM_MUSHROOM]: 5
+        }) ?? Item.TINY_MUSHROOM
+      ]
     }
     if (dish === Item.SWEETS) {
       dishes = pickNRandomIn(Sweets, nbDishes)
@@ -329,8 +355,8 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       room.clock.setTimeout(() => {
         const candidates = values(player.board).filter(
           (p) =>
-            p.meal === "" &&
             p.canEat &&
+            !p.dishes.has(dish) &&
             !isOnBench(p) &&
             distanceC(
               chef.positionX,
@@ -340,16 +366,9 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             ) === 1
         )
         candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-        dishes.forEach((meal, i) => {
-          if (
-            [
-              Item.TART_APPLE,
-              Item.SWEET_APPLE,
-              Item.SIRUPY_APPLE,
-              ...Berries
-            ].includes(meal)
-          ) {
-            player.items.push(meal)
+        dishes.forEach((dish, i) => {
+          if (DishesGoingToInventory.includes(dish)) {
+            player.items.push(dish)
           } else {
             const pokemon = candidates[i] ?? chef
             if (dish === Item.HERBA_MYSTICA) {
@@ -363,9 +382,9 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
               if (pokemon.types.has(Synergy.GRASS))
                 flavors.push(Item.HERBA_MYSTICA_BITTER)
               if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
-              meal = pickRandomIn(flavors)
+              dish = pickRandomIn(flavors)
             }
-            pokemon.meal = meal
+            pokemon.dishes.add(dish)
             pokemon.action = PokemonActionState.EAT
           }
         })
@@ -409,7 +428,7 @@ function dropComfey({ pokemon, board }: OnDeathEffectArgs) {
 
 export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
-    SynergyStones.map((stone) => [
+    [...SynergyStones, Item.FRIEND_BOW].map((stone) => [
       stone,
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
@@ -498,6 +517,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.SHELL_BELL]: [
     new OnDamageDealtEffect(({ pokemon, damage }) => {
       pokemon.handleHeal(Math.ceil(0.33 * damage), pokemon, 0, false)
+    })
+  ],
+
+  [Item.BLACK_BELT]: [
+    new OnAttackEffect(({ pokemon, totalDamage, crit }) => {
+      if (crit) {
+        pokemon.addShield(Math.ceil(0.33 * totalDamage), pokemon, 0, false)
+      }
     })
   ],
 
@@ -653,9 +680,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.MUSCLE_BAND]: [
     new OnDamageReceivedEffect(({ pokemon, damage }) => {
-      if (pokemon.count.defensiveRibbonCount < 20 && damage > 0) {
-        pokemon.count.defensiveRibbonCount++
-        if (pokemon.count.defensiveRibbonCount % 2 === 0) {
+      if (pokemon.count.muscleBandCount < 20 && damage > 0) {
+        pokemon.count.muscleBandCount++
+        if (pokemon.count.muscleBandCount % 2 === 0) {
           pokemon.addAttack(1, pokemon, 0, false)
           pokemon.addDefense(2, pokemon, 0, false)
           pokemon.addSpeed(5, pokemon, 0, false)
@@ -663,11 +690,30 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       }
     }),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = Math.floor(pokemon.count.defensiveRibbonCount / 2)
+      const stacks = Math.floor(pokemon.count.muscleBandCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
       pokemon.addDefense(-2 * stacks, pokemon, 0, false)
       pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
-      pokemon.count.defensiveRibbonCount = 0
+      pokemon.count.muscleBandCount = 0
+    })
+  ],
+
+  [Item.MACH_RIBBON]: [
+    new PeriodicEffect(
+      (pokemon) => {
+        pokemon.addSpeed(20, pokemon, 0, false)
+        pokemon.count.machRibbonCount++
+        if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
+          pokemon.player.titles.add(Title.TOP_GUN)
+        }
+      },
+      Item.MACH_RIBBON,
+      4000
+    ),
+    new OnItemRemovedEffect((pokemon) => {
+      const stacks = pokemon.count.machRibbonCount
+      pokemon.addSpeed(-20 * stacks, pokemon, 0, false)
+      pokemon.count.machRibbonCount = 0
     })
   ],
 
@@ -696,19 +742,15 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
-      pokemon.addAbilityPower(comfey.ap, pokemon, 0, false)
-      pokemon.addAttack(comfey.atk, pokemon, 0, false)
-      pokemon.addSpeed(comfey.speed - DEFAULT_SPEED, pokemon, 0, false)
       pokemon.addMaxHP(comfey.maxHP, pokemon, 0, false)
+      pokemon.addAttack(comfey.atk, pokemon, 0, false)
       pokemon.addDefense(comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(comfey.speDef, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
-      pokemon.addAbilityPower(-comfey.ap, pokemon, 0, false)
-      pokemon.addAttack(-comfey.atk, pokemon, 0, false)
-      pokemon.addSpeed(-(comfey.speed - DEFAULT_SPEED), pokemon, 0, false)
       pokemon.addMaxHP(-comfey.maxHP, pokemon, 0, false)
+      pokemon.addAttack(-comfey.atk, pokemon, 0, false)
       pokemon.addDefense(-comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(-comfey.speDef, pokemon, 0, false)
     }),
@@ -1032,11 +1074,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.PICNIC_SET]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      if (pokemon.meal == "") {
+      if (pokemon.canEat) {
         let nbSandwiches = 0
         values(player.board).forEach((pkm) => {
           if (
-            pkm.meal === "" &&
             pkm.canEat &&
             pokemon &&
             distanceC(
@@ -1046,7 +1087,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
               pokemon.positionY
             ) <= 1
           ) {
-            pkm.meal = Item.SANDWICH
+            pkm.dishes.add(Item.SANDWICH)
             pkm.action = PokemonActionState.EAT
             nbSandwiches++
           }
@@ -1136,6 +1177,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.GOOD_ROD]: [new FishingRodEffect(Item.GOOD_ROD)],
   [Item.SUPER_ROD]: [new FishingRodEffect(Item.SUPER_ROD)],
 
+  [Item.RICH_MULCH]: [
+    new OnItemDroppedEffect(() => {
+      return false // prevent item from being equipped
+    })
+  ],
   [Item.AMAZE_MULCH]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (FlowerPotMons.includes(pokemon.name)) {
@@ -1163,7 +1209,54 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ),
   [Item.SPELL_TAG]: [
     new OnDeathEffect(({ attacker }) => {
-      attacker?.status.triggerCurse(9000, attacker)
+      attacker?.status.triggerCurse(10000, attacker)
     })
+  ],
+
+  [Item.EXPLOSIVE_BAND]: [
+    new OnShieldDepletedEffect(({ pokemon, board }) => {
+      // The first time user shield is depleted, this item explodes,
+      // dealing 50% of all shield gained so far as special damage to adjacent enemies.
+      const adjacentCells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY
+      )
+      const dps =
+        pokemon.team === Team.BLUE_TEAM
+          ? pokemon.simulation.blueDpsMeter
+          : pokemon.simulation.redDpsMeter
+      const shieldGained = dps.get(pokemon.id)?.shield ?? 0
+      const explosionDamage = Math.round(0.3 * shieldGained)
+
+      adjacentCells.forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            explosionDamage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            false,
+            false
+          )
+        }
+      })
+
+      pokemon.broadcastAbility({ skill: "EXPLOSION" })
+      pokemon.removeItem(Item.EXPLOSIVE_BAND)
+    })
+  ],
+
+  [Item.EFFICIENT_BANDANNA]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      ;[-1, 0, 1].forEach((offset) => {
+        const ally = simulation.board.getEntityOnCell(
+          entity.positionX + offset,
+          entity.positionY
+        )
+        if (ally) {
+          ally.maxPP = Math.round(0.9 * ally.maxPP)
+        }
+      })
+    }, Item.EFFICIENT_BANDANNA)
   ]
 }

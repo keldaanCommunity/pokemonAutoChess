@@ -18,6 +18,7 @@ import { min } from "../../../../../utils/number"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import TimerBar from "./game-timer-bar"
@@ -30,6 +31,7 @@ export default function GameStageInfo() {
 
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const gameMode = useAppSelector((state) => state.network.game?.state.gameMode)
 
   if (!currentPlayer) return null
 
@@ -148,6 +150,26 @@ export default function GameStageInfo() {
               document.body
             )}
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
+          </div>
+        )}
+
+        {gameMode && (
+          <div
+            className="game-mode-information"
+            data-tooltip-id="detail-game-mode"
+          >
+            {ReactDOM.createPortal(
+              <Tooltip
+                id="detail-game-mode"
+                className="custom-theme-tooltip"
+                place="bottom"
+              >
+                <p>{t(`game_modes.${gameMode}`)}</p>
+                <p>{t(`game_modes_descriptions.${gameMode}`)}</p>
+              </Tooltip>,
+              document.body
+            )}
+            <GameModeIcon gameMode={gameMode} />
           </div>
         )}
 

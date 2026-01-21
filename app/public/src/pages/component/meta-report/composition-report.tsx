@@ -1,23 +1,25 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
-import { fetchMeta, IMeta } from "../../../../../models/mongo-models/meta"
-import { MetaChart } from "./meta-chart"
+import {
+  fetchMetaV2,
+  IMetaV2
+} from "../../../../../models/mongo-models/meta-v2"
 import TeamComp from "./team-comp"
 import "./composition-report.css"
 
 export function CompositionReport() {
   const [loading, setLoading] = useState<boolean>(true)
-  const [meta, setMeta] = useState<IMeta[]>([])
+  const [meta, setMeta] = useState<IMetaV2[]>([])
   const [selectedComposition, setSelectedComposition] = useState<
     string | undefined
   >()
   useEffect(() => {
-    fetchMeta().then((res) => {
+    fetchMetaV2().then((res) => {
       setLoading(false)
       setMeta(res)
     })
   }, [])
-  const [rankingBy, setRanking] = useState<string>("count")
+  const [rankingBy, setRanking] = useState<string>("mean_rank")
 
   const sortedMeta = useMemo(() => {
     return [...meta].sort((a, b) => {
@@ -55,12 +57,6 @@ export function CompositionReport() {
       <article>
         {sortedMeta.length === 0 && (
           <p>{loading ? t("loading") : t("no_data_available")}</p>
-        )}
-        {meta.length > 0 && (
-          <MetaChart
-            meta={meta}
-            setSelectedComposition={setSelectedComposition}
-          />
         )}
         <div id="meta-report-compo-list">
           {sortedMeta.map((team, i) => {

@@ -9,3 +9,23 @@
 .checkbox-container span {
   line-height: 1;
 }
+
+.checkbox-container input[type="checkbox"] + span,
+.checkbox-container input[type="checkbox"] + span::before {
+  color: black;
+}
+
+.checkbox-container input[type="checkbox"].is-dark + span,
+.checkbox-container input[type="checkbox"].is-dark + span::before {
+  color: white;
+}
+
+.checkbox-container input[type="checkbox"][disabled] + span,
+.checkbox-container input[type="checkbox"][disabled] + span::before {
+  color: #999;
+}
+
+.checkbox-container input[type="checkbox"][disabled].is-dark + span,
+.checkbox-container input[type="checkbox"][disabled].is-dark + span::before {
+  color: #aaa;
+}

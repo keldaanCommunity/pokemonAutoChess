@@ -8,10 +8,10 @@ import {
 } from "../../../../../models/colyseus-models/game-record"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { GameMode } from "../../../../../types/enum/Game"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
 import "./game-history.css"
@@ -84,30 +84,7 @@ export default function GameHistory(props: {
           gameHistory.map((r) => (
             <div key={r.time} className="my-box game-history">
               <span className="top">
-                {r.gameMode === GameMode.CLASSIC && (
-                  <img
-                    alt={t("classic")}
-                    title={t("classic")}
-                    className="classic gamemode icon"
-                    src="/assets/ui/classic.png"
-                  />
-                )}
-                {r.gameMode === GameMode.RANKED && (
-                  <img
-                    alt={t("ranked_match")}
-                    title={t("ranked_match")}
-                    className="ranked gamemode icon"
-                    src="/assets/ui/ranked.png"
-                  />
-                )}
-                {r.gameMode === GameMode.SCRIBBLE && (
-                  <img
-                    alt={t("smeargle_scribble")}
-                    title={t("smeargle_scribble")}
-                    className="scribble gamemode icon"
-                    src="/assets/ui/scribble.png"
-                  />
-                )}
+                <GameModeIcon gameMode={r.gameMode} />
                 {t("top")} {r.rank}
               </span>
               <EloBadge elo={r.elo} />

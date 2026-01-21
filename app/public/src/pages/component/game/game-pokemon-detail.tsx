@@ -112,6 +112,10 @@ export function GamePokemonDetail(props: {
     props.origin
   ])
 
+  const getStatWithItemBonus = (stat: Stat): number | undefined => {
+    return pokemonStats.find((s) => s.stat === stat)?.value
+  }
+
   let dish = DishByPkm[pokemon.name]
   if (!dish && pokemon.types.has(Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
@@ -214,7 +218,7 @@ export function GamePokemonDetail(props: {
           type={props.isAlly === false ? "HP_ENEMY" : "HP_ALLY"}
           value={hp}
           extraValue={shield}
-          maxValue={pokemon.maxHP}
+          maxValue={props.origin === "team" ? hp! : pokemon.maxHP}
           graduationStep={10}
         />
         <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
@@ -289,8 +293,8 @@ export function GamePokemonDetail(props: {
             <AbilityTooltip
               ability={pokemon.skill}
               stats={{
-                ap: pokemon.ap,
-                luck: pokemon.luck,
+                ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
+                luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars: pokemon.stars,
                 stages: getPokemonData(pokemon.name).stages
               }}

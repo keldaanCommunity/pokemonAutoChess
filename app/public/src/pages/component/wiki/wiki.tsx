@@ -19,7 +19,7 @@ import "./wiki.css"
 export default function Wiki({ inGame = false }: { inGame: boolean }) {
   const { t } = useTranslation()
   return (
-    <div id="wiki-page">
+    <div id="wiki-page" onKeyDown={(e) => e.stopPropagation()}>
       <Tabs>
         <TabList>
           {!inGame && (

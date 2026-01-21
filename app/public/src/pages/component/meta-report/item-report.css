@@ -1,0 +1,33 @@
+#item-report {
+  width: 100%;
+  height: calc(95vh - 12rem);
+}
+
+#item-report .react-tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#item-report .react-tabs__tab-panel {
+  flex: 1;
+  display: flex;
+  gap: 1em;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#item-report .react-tabs__tab-panel:not(.react-tabs__tab-panel--selected) {
+  display: none;
+}
+
+#item-report .item-statistics-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#item-report .item-distribution-chart {
+  flex: 1;
+  overflow-y: hidden;
+}

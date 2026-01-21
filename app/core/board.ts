@@ -295,13 +295,14 @@ export class Board {
 
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
     /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
-    const cells: Cell[] = [
-      {
+    const cells: Cell[] = []
+    if (this.isOnBoard(x0, y0)) {
+      cells.push({
         x: x0,
         y: y0,
         value: this.cells[this.columns * y0 + x0]
-      }
-    ]
+      })
+    }
     const dx = x1 - x0,
       dy = y1 - y0
     const nx = Math.abs(dx),
@@ -328,7 +329,9 @@ export class Board {
         y += sign_y
         iy++
       }
-      cells.push({ x, y, value: this.cells[this.columns * y + x] })
+      if (this.isOnBoard(x, y)) {
+        cells.push({ x, y, value: this.cells[this.columns * y + x] })
+      }
     }
 
     return cells
@@ -602,6 +605,36 @@ export class Board {
           distanceC(b.positionX, b.positionY, positionX, positionY)
       )[0]
     return closestEnemy
+  }
+
+  /**
+   * Finds the closest ally Pokemon to a given position.
+   * @param positionX - The X coordinate to measure distance from
+   * @param positionY - The Y coordinate to measure distance from
+   * @param allyTeam - The team to filter allies by
+   * @param excludeId - Optional Pokemon id to exclude from results
+   * @returns The closest ally Pokemon entity, or undefined if none found
+   */
+  getClosestAlly(
+    positionX: number,
+    positionY: number,
+    allyTeam: Team,
+    excludeId?: string
+  ): PokemonEntity | undefined {
+    const closestAlly = this.cells
+      .filter(
+        (entity): entity is PokemonEntity =>
+          entity instanceof PokemonEntity &&
+          entity.team === allyTeam &&
+          entity.hp > 0 &&
+          (!excludeId || entity.id !== excludeId)
+      )
+      .sort(
+        (a, b) =>
+          distanceC(a.positionX, a.positionY, positionX, positionY) -
+          distanceC(b.positionX, b.positionY, positionX, positionY)
+      )[0]
+    return closestAlly
   }
 
   /**

@@ -1,0 +1,91 @@
+#meta-report .pokemon-family-stat {
+  background-color: rgb(84, 89, 107);
+  margin-bottom: 0.5em;
+  color: white;
+  display: flex;
+  gap: 1em;
+  padding: 0.5em;
+  overflow-x: auto;
+  align-items: flex-start;
+}
+
+.pokemon-family-summary {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 12px;
+  min-width: fit-content;
+}
+
+.pokemon-portraits-vertical {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.pokemon-family-stats {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.pokemon-stat-item {
+  min-width: 70px;
+}
+
+.pokemon-stat-item > div {
+  color: #ccc;
+}
+
+.pokemon-stat-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pokemon-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pokemon-detail-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.pokemon-detail-stat {
+  min-width: 25px;
+}
+
+.pokemon-items-row {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.pokemon-item-img {
+  height: 24px;
+  width: 24px;
+}
+
+#meta-report .rank {
+  min-width: 2ch;
+  text-align: center;
+  font-size: 150%;
+}
+
+#meta-report label {
+  color: #ccc;
+  margin: 0;
+}
+
+.pokemon-name-container {
+  min-width: 100px;
+}
+
+.pokemon-stat-container {
+  width: 90px;
+}

@@ -1,5 +1,10 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import {
+  OUTLAW_GOLD_REWARD,
+  SHARDS_PER_SHINY_UNOWN_WANDERER,
+  SHARDS_PER_UNOWN_WANDERER
+} from "../../../../config"
 import { Wanderer } from "../../../../models/colyseus-models/wanderer"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { Transfer } from "../../../../types"
@@ -14,7 +19,6 @@ import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
 
-const SHARDS_PER_UNOWN_WANDERER = 50
 const DEFAULT_WANDERER_SPEED = 0.25
 
 /*
@@ -38,8 +42,10 @@ export default class WanderersManager {
       this.addWanderingUnown(wanderer)
     } else if (wanderer.type === WandererType.CATCHABLE) {
       this.addCatchableWanderer(wanderer)
-    } else if (wanderer.type === WandererType.SPECIAL) {
-      this.addSpecialWanderer(wanderer)
+    } else if (wanderer.type === WandererType.DIALOG) {
+      this.addDialogWanderer(wanderer)
+    } else if (wanderer.type === WandererType.OUTLAW) {
+      this.addOutlawWanderer(wanderer)
     }
   }
 
@@ -48,7 +54,11 @@ export default class WanderersManager {
       wanderer,
       onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        this.displayShardGain([pointer.x, pointer.y], unownSprite.pokemon.index)
+        this.displayShardGain(
+          [pointer.x, pointer.y],
+          unownSprite.pokemon.index,
+          unownSprite.pokemon.shiny
+        )
         unownSprite.destroy()
         return true
       }
@@ -76,13 +86,37 @@ export default class WanderersManager {
     })
   }
 
-  addSpecialWanderer(wanderer: Wanderer) {
+  addOutlawWanderer(wanderer: Wanderer) {
+    this.addWandererPokemonSprite({
+      wanderer,
+      speed: 0.4,
+      onClick: (wanderer, sprite, pointer) => {
+        let caught = false
+        if (this.scene.board) {
+          caught = true
+          this.scene.room?.send(Transfer.WANDERER_CLICKED, {
+            id: wanderer.id
+          })
+          sprite.destroy()
+          this.scene.board.displayText(
+            pointer.x,
+            pointer.y - 40,
+            t("caught"),
+            true
+          )
+          this.scene.displayMoneyGain(pointer.x, pointer.y, OUTLAW_GOLD_REWARD)
+        }
+        return caught
+      }
+    })
+  }
+
+  addDialogWanderer(wanderer: Wanderer) {
     const sprite = new PokemonSpecial({
       scene: this.scene,
       x: -100,
       y: 350,
       name: wanderer.pkm,
-      orientation: Orientation.RIGHT,
       animation: PokemonActionState.WALK,
       ...getDialogsBySpecialWanderer(wanderer)
     })
@@ -90,27 +124,15 @@ export default class WanderersManager {
       wanderer,
       existingSprite: sprite,
       onClick: (wanderer, sprite) => {
-        sprite.openDetail()
-        this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        setTimeout(() => {
+        //this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id }) // not needed for dialog wanderers for now
+        if (sprite.detail) {
           sprite.closeDetail()
-          this.scene.tweens.add({
-            targets: sprite,
-            x: -100,
-            y: 350,
-            ease: "Linear",
-            duration: 4000,
-            onStart: () => {
-              sprite.orientation = Orientation.LEFT
-              this.scene.animationManager?.animatePokemon(
-                sprite,
-                PokemonActionState.WALK,
-                false
-              )
-            },
-            onComplete: () => sprite.destroy()
-          })
-        }, 3000)
+        } else {
+          sprite.openDetail()
+          setTimeout(() => {
+            sprite.closeDetail()
+          }, 3000)
+        }
         return false
       }
     })
@@ -119,10 +141,12 @@ export default class WanderersManager {
   addWandererPokemonSprite({
     wanderer,
     onClick,
-    existingSprite
+    existingSprite,
+    speed = DEFAULT_WANDERER_SPEED
   }: {
     wanderer: Wanderer
     existingSprite?: PokemonSprite
+    speed?: number
     onClick: (
       wanderer: Wanderer,
       pokemon: PokemonSprite,
@@ -133,7 +157,7 @@ export default class WanderersManager {
       startY = 350,
       endX = window.innerWidth + 100,
       endY = 350
-    let duration = clamp(window.innerWidth / DEFAULT_WANDERER_SPEED, 4000, 6000)
+    let duration = clamp(window.innerWidth / speed, 4000, 6000)
     let caught = false
     const tweens: Phaser.Tweens.Tween[] = []
 
@@ -162,13 +186,17 @@ export default class WanderersManager {
       existingSprite ??
       new PokemonSprite(
         this.scene,
-        startX,
-        startY,
-        PokemonFactory.createPokemonFromName(wanderer.pkm),
+        -100,
+        350,
+        PokemonFactory.createPokemonFromName(wanderer.pkm, {
+          shiny: wanderer.shiny
+        }),
         "wanderer",
         false,
         false
       )
+    sprite.x = startX
+    sprite.y = startY
     sprite.orientation = startX < endX ? Orientation.RIGHT : Orientation.LEFT
     this.scene.animationManager?.animatePokemon(
       sprite,
@@ -189,18 +217,22 @@ export default class WanderersManager {
             PokemonActionState.IDLE,
             false
           )
+          if (wanderer.type === WandererType.DIALOG) {
+            sprite.openDetail()
+          }
           tweens.push(
             this.scene.add.tween({
               targets: [sprite],
               ease: "linear",
               duration: 5000,
-              delay: 5000,
+              delay: 8000,
               x: startX,
               y: startY,
               onComplete: () => {
                 sprite.destroy()
               },
               onStart: () => {
+                sprite.closeDetail()
                 sprite.orientation = Orientation.LEFT
                 this.scene.animationManager?.animatePokemon(
                   sprite,
@@ -228,11 +260,11 @@ export default class WanderersManager {
     return sprite
   }
 
-  displayShardGain(coordinates: number[], index: string) {
+  displayShardGain(coordinates: number[], index: string, shiny: boolean) {
     const textStyle = {
       fontSize: "25px",
       fontFamily: "Verdana",
-      color: "#fff",
+      color: shiny ? "#ffd700" : "#fff",
       align: "center",
       strokeThickness: 2,
       stroke: "#000"
@@ -248,7 +280,10 @@ export default class WanderersManager {
         this.scene,
         25,
         0,
-        SHARDS_PER_UNOWN_WANDERER.toString(),
+        (shiny
+          ? SHARDS_PER_SHINY_UNOWN_WANDERER
+          : SHARDS_PER_UNOWN_WANDERER
+        ).toString(),
         textStyle
       )
     )
@@ -294,6 +329,16 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
         reward: `30 GOLD`
       }),
       dialogTitle: t("npc_dialog.good_job")
+    }
+  }
+  if (wanderer.pkm === Pkm.MAGNEMITE) {
+    return {
+      dialog: t("npc_dialog.magnemite")
+    }
+  }
+  if (wanderer.pkm === Pkm.MAGNEZONE) {
+    return {
+      dialog: t("npc_dialog.magnezone")
     }
   }
   return {}

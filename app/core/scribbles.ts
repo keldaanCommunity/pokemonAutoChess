@@ -1,9 +1,7 @@
+import { getAltFormForPlayer, PkmAltFormsByPkm } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  getColorVariantForPlayer,
-  PkmColorVariantsByPkm
-} from "../models/pokemon-factory"
+import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getRegularsTier1 } from "../models/shop"
@@ -100,7 +98,8 @@ export function spawnDIAYAvatar(player: Player): Pokemon {
     avatar.addAttack(-Math.round(avatar.atk * (powerScore - 5) * 0.1))
   }
   const bonusHP = Math.round(150 - powerScore * 30)
-  avatar.hp = min(10)(avatar.hp + bonusHP)
+  avatar.maxHP = min(10)(avatar.maxHP + bonusHP)
+  avatar.hp = avatar.maxHP
   return avatar
 }
 
@@ -116,8 +115,8 @@ export function pickFirstPartners(player: Player, state: GameState): Pkm[] {
         )
         if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
       }
-      if (pkm in PkmColorVariantsByPkm) {
-        pkm = getColorVariantForPlayer(pkm, player)
+      if (pkm in PkmAltFormsByPkm) {
+        pkm = getAltFormForPlayer(pkm, player)
       }
       return pkm
     })

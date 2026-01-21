@@ -260,7 +260,8 @@ export default class AnimationManager {
           frames: this.game.anims.generateFrameNames("berry_trees", {
             start: step * 2 - 1,
             end: step * 2,
-            prefix: berryName + "_"
+            prefix: berryName + "_",
+            suffix: ".png"
           }),
           duration: 600,
           repeat: -1
@@ -273,7 +274,8 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("berry_trees", {
         start: 1,
         end: 2,
-        prefix: "CROP_"
+        prefix: "CROP_",
+        suffix: ".png"
       }),
       duration: 600,
       repeat: -1

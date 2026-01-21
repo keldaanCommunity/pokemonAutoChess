@@ -89,6 +89,26 @@ export default class Status extends Schema implements IStatus {
     this.enrageDelay = this.enrageDelay - elapsedTime
   }
 
+  clearAllStatus(entity: PokemonEntity) {
+    this.clearNegativeStatus()
+    this.clearPositiveStatus(entity)
+  }
+
+  clearPositiveStatus(entity: PokemonEntity) {
+    this.protectCooldown = 0
+    this.runeProtectCooldown = 0
+    this.enrageCooldown = 0
+    this.spikeArmorCooldown = 0
+    this.magicBounceCooldown = 0
+    this.reflectCooldown = 0
+    this.pokerusCooldown = 0
+    this.resurrection = false
+    this.removeElectricField(entity)
+    this.removePsychicField(entity)
+    this.removeGrassField(entity)
+    this.removeFairyField(entity)
+  }
+
   clearNegativeStatus() {
     this.burnCooldown = 0
     this.silenceCooldown = 0
@@ -103,7 +123,7 @@ export default class Status extends Schema implements IStatus {
     this.flinchCooldown = 0
     this.armorReductionCooldown = 0
     if (this.curse && this.curseCooldown > 0) {
-      this.curseCooldown += 1000 // do not clear curseCooldown on purpose
+      this.curseCooldown += 2000 // do not clear curseCooldown on purpose
     }
     this.curse = false
     this.possessedCooldown = 0
@@ -404,7 +424,7 @@ export default class Status extends Schema implements IStatus {
     if (this.burnDamageCooldown - dt <= 0) {
       if (this.burnOrigin) {
         let burnDamage = pkm.maxHP * 0.05
-        if (pkm.simulation.weather === Weather.SUN) {
+        if (pkm.simulation.weather === Weather.DROUGHT) {
           burnDamage *= 1.3
           const nbHeatRocks = pkm.player
             ? count(pkm.player.items, Item.HEAT_ROCK)
@@ -634,7 +654,7 @@ export default class Status extends Schema implements IStatus {
         if (nbIcyRocks > 0) {
           duration *= 1 - 0.2 * nbIcyRocks
         }
-      } else if (pkm.simulation.weather === Weather.SUN) {
+      } else if (pkm.simulation.weather === Weather.DROUGHT) {
         duration *= 0.7
       }
       if (pkm.status.enraged) {
@@ -685,6 +705,8 @@ export default class Status extends Schema implements IStatus {
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
         duration *= 1.3
+      } else if (pkm.simulation.weather === Weather.ZENITH) {
+        duration *= 0.7
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -1058,8 +1080,10 @@ export default class Status extends Schema implements IStatus {
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
+      if (pkm.range != 1) {
+        pkm.toMovingState() // force retargetting if the current range is not 1
+      }
       pkm.range = 1
-      pkm.toMovingState() // force retargetting
     }
   }
 

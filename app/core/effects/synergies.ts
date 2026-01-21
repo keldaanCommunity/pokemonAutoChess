@@ -415,3 +415,13 @@ export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
     }
   }
 })
+
+export const overgrowEffect = new OnDamageReceivedEffect(
+  ({ pokemon }: OnDamageReceivedEffectArgs) => {
+    if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
+      pokemon.addAbilityPower(50, pokemon, 0, false)
+      // Remove the effect to avoid multiple triggers
+      pokemon.effectsSet.delete(overgrowEffect)
+    }
+  }
+)

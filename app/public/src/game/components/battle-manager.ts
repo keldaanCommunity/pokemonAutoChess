@@ -197,7 +197,7 @@ export default class BattleManager {
       const pkm = this.pokemonSprites.get(pokemon.id)!
       if (field === "poisonStacks") {
         if (pokemon.status.poisonStacks > 0) {
-          pkm.addPoison()
+          pkm.addPoison(pokemon.status.poisonStacks)
         } else {
           pkm.removePoison()
         }
@@ -488,8 +488,10 @@ export default class BattleManager {
         pkm.itemsContainer.updateCount(Item.UPGRADE, value)
       } else if (field === "soulDewCount") {
         pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
-      } else if (field === "defensiveRibbonCount") {
+      } else if (field === "muscleBandCount") {
         pkm.itemsContainer.updateCount(Item.MUSCLE_BAND, value)
+      } else if (field === "machRibbonCount") {
+        pkm.itemsContainer.updateCount(Item.MACH_RIBBON, value)
       }
     }
   }
@@ -678,7 +680,7 @@ export default class BattleManager {
             // load the new ones
             pkmSprite.lazyloadAnimations(this.scene).then(() => {
               if (previousValue !== undefined) {
-                pkmSprite.displayAnimation("EVOLUTION")
+                pkmSprite.evolutionAnimation()
               }
               this.animationManager.animatePokemon(
                 pkmSprite,

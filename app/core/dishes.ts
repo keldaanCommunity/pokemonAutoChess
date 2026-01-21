@@ -1,8 +1,9 @@
+import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Berries, Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
-import { max, min } from "../utils/number"
+import { max } from "../utils/number"
 import { chance } from "../utils/random"
 import { values } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -13,6 +14,7 @@ import {
   OnSpawnEffect,
   PeriodicEffect
 } from "./effects/effect"
+import { FIGHTING_PHASE_DURATION } from "../config"
 
 export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
@@ -72,7 +74,10 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.DOLLIV]: Item.OLIVE_OIL,
   [Pkm.ARBOLIVA]: Item.OLIVE_OIL,
   [Pkm.DEERLING_SUMMER]: Item.TEA,
-  [Pkm.SAWSBUCK_SUMMER]: Item.TEA
+  [Pkm.SAWSBUCK_SUMMER]: Item.TEA,
+  [Pkm.LECHONK]: Item.MUSHROOMS,
+  [Pkm.OINKOLOGNE_MALE]: Item.MUSHROOMS
+  //[Pkm.OINKOLOGNE_FEMALE]: Item.MUSHROOMS
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -81,6 +86,27 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnSpawnEffect((entity) => {
       entity.addShield(100, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
+    })
+  ],
+  BIG_MUSHROOM: [
+    new OnSpawnEffect((entity) => {
+      entity.addMaxHP(0.3 * entity.baseHP, entity, 0, false)
+    })
+  ],
+  BALM_MUSHROOM: [
+    new OnSpawnEffect((entity) => {
+      entity.status.triggerRuneProtect(30000)
+      entity.addSpeed(40, entity, 0, false)
+      entity.effects.add(EffectEnum.BALM_MUSHROOM)
+      entity.effectsSet.add(
+        new PeriodicEffect(
+          (entity) => {
+            entity.handleHeal(0.1 * entity.maxHP, entity, 0, false)
+          },
+          Item.BALM_MUSHROOM,
+          1000
+        )
+      )
     })
   ],
   BINDING_MOCHI: [
@@ -163,7 +189,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   HERBA_MYSTICA_SALTY: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(40000)
+      entity.status.triggerRuneProtect(FIGHTING_PHASE_DURATION)
     })
   ],
   HONEY: [],
@@ -192,6 +218,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity?.addMaxHP(15, entity, 0, false)
     })
   ],
+  MUSHROOMS: [],
   NUTRITIOUS_EGG: [
     new OnSpawnEffect((entity) => {
       // Start the next fight with +30% base ATK, DEF, SPE_DEF and AP
@@ -208,6 +235,16 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   POFFIN: [
     new OnSpawnEffect((entity) => {
       entity.addShield(100, entity, 0, false)
+
+      if (
+        entity.player &&
+        entity.items.has(Item.GOLDEN_NANAB_BERRY) &&
+        entity.items.has(Item.GOLDEN_PINAP_BERRY) &&
+        entity.items.has(Item.GOLDEN_RAZZ_BERRY)
+      ) {
+        entity.player.titles.add(Title.POFFIN_MASTER)
+      }
+
       values(entity.items)
         .filter((item) => Berries.includes(item))
         .forEach((item) => {
@@ -343,6 +380,12 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   TEA: [
     new OnSpawnEffect((entity) => {
       entity.addPP(80, entity, 0, false)
+    })
+  ],
+  TINY_MUSHROOM: [
+    new OnSpawnEffect((entity) => {
+      entity.addMaxHP(-0.2 * entity.baseHP, entity, 0, false)
+      entity.addSpeed(40, entity, 0, false)
     })
   ],
   WHIPPED_DREAM: [

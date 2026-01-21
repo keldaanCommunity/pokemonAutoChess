@@ -1,5 +1,11 @@
-import { BoosterRarityProbability, EmotionCost } from "../config"
-import { PkmColorVariantsByPkm } from "../models/pokemon-factory"
+import { HydratedDocument } from "mongoose"
+import {
+  BoosterRarityProbability,
+  EmotionCost,
+  getBaseAltForm,
+  PkmAltForms,
+  PkmAltFormsByPkm
+} from "../config"
 import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
@@ -7,7 +13,7 @@ import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
 import { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
 import { Rarity } from "../types/enum/Game"
-import { Pkm, PkmIndex, Unowns } from "../types/enum/Pokemon"
+import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../types/enum/Pokemon"
 import {
   IPokemonCollectionItemClient,
   IPokemonCollectionItemMongo,
@@ -15,6 +21,7 @@ import {
   IUserMetadataMongo
 } from "../types/interfaces/UserMetadata"
 import { sum } from "../utils/array"
+import { logger } from "../utils/logger"
 import { chance, pickRandomIn, randomWeighted } from "../utils/random"
 
 export function createBooster(user: IUserMetadataMongo): Booster {
@@ -71,13 +78,6 @@ export function pickRandomPokemonBooster(
             Unowns.includes(p) === false &&
             getPokemonData(p).skill !== Ability.DEFAULT
         )
-        // Include color variants in the pool
-        candidates
-          .filter((p) => p in PkmColorVariantsByPkm)
-          .forEach((p) => {
-            const colorVariants = PkmColorVariantsByPkm[p]!
-            candidates.push(...colorVariants)
-          })
         if (candidates.length > 0) {
           name = pickRandomIn(candidates) as Pkm
           break
@@ -87,6 +87,12 @@ export function pickRandomPokemonBooster(
   }
 
   const shiny = chance(0.05)
+
+  if (name in PkmAltFormsByPkm) {
+    // If the selected Pokemon has alt forms, pick one of them randomly
+    name = pickRandomIn([...name, PkmAltFormsByPkm[name]!])
+  }
+
   const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
   const emotion =
     randomWeighted<Emotion>(
@@ -290,5 +296,45 @@ export class CollectionUtils {
     if (byteIndex >= mask.length) return false
 
     return (mask[byteIndex] & (1 << bitPosition)) !== 0
+  }
+}
+
+export async function migrateShardsOfAltForms(
+  mongoUser: HydratedDocument<IUserMetadataMongo>
+) {
+  let modified = false
+
+  for (const [index, item] of mongoUser.pokemonCollection) {
+    const pkm = PkmByIndex[index]
+    if (PkmAltForms.includes(pkm) && item.dust > 0) {
+      const basePkm = getBaseAltForm(pkm)
+      const baseIndex = PkmIndex[basePkm]
+      const baseItem = mongoUser.pokemonCollection.get(baseIndex)
+      const dustToMigrate = item.dust
+      if (!baseItem) {
+        // Base form is not in collection, create new collection item
+        const newCollectionItem: IPokemonCollectionItemMongo = {
+          id: index,
+          unlocked: Buffer.alloc(5, 0),
+          dust: item.dust,
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          played: 0
+        }
+        mongoUser.pokemonCollection.set(baseIndex, newCollectionItem)
+      } else {
+        // Base form exists, add dust
+        baseItem.dust += dustToMigrate
+        item.dust = 0
+      }
+      logger.info(
+        `Migrated ${dustToMigrate} shards from ${pkm} to its base form ${basePkm} for user ${mongoUser.uid}`
+      )
+      modified = true
+    }
+  }
+
+  if (modified) {
+    return await mongoUser.save()
   }
 }
