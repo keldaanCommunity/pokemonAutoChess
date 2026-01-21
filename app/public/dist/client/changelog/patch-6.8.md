@@ -74,6 +74,7 @@
 - Change Fur Coat (Furfrou, Wooloo): now gains 2 def and loses 5 speed until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a Silk Scarf.
 - Buff Poipole: every ~~3~~ 2 stacks, gain 1 ATK permanently. Evolves at ~~30~~ 20 stacks.
 - Buff Screamtail: HP 190 → 210
+- Larvesta line is now regional in Bug and Fire regions
 
 # Changes to Synergies
 

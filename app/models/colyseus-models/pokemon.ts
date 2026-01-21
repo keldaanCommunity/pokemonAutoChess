@@ -6280,7 +6280,7 @@ export class Larvesta extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_DANCE
-  additional = true
+  regional = true
 }
 
 export class Volcarona extends Pokemon {
@@ -6295,7 +6295,7 @@ export class Volcarona extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_DANCE
-  additional = true
+  regional = true
 }
 
 export class Chatot extends Pokemon {
