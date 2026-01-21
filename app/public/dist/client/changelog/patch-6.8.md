@@ -20,6 +20,7 @@
 # Bugfix
 
 - Field speed stacks are now correctly reset after resurrection
+- Units now properly reset their targeting after their target starts resurrecting
 
 # Misc
 
