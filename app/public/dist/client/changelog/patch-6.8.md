@@ -75,6 +75,7 @@
 - Buff Poipole: every ~~3~~ 2 stacks, gain 1 ATK permanently. Evolves at ~~30~~ 20 stacks.
 - Buff Screamtail: HP 190 → 210
 - Larvesta line is now regional in Bug and Fire regions
+- Buff Groudon: Attack 18 → 20
 
 # Changes to Synergies
 

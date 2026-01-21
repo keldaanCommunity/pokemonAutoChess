@@ -6038,7 +6038,7 @@ export class Groudon extends Pokemon {
   evolution = Pkm.PRIMAL_GROUDON
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   hp = 300
-  atk = 18
+  atk = 20
   speed = 54
   def = 10
   speDef = 6
