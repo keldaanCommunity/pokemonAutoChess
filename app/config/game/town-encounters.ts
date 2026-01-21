@@ -1,13 +1,13 @@
 import { Pkm } from "../../types/enum/Pokemon"
 import { TownEncounter } from "../../types/enum/TownEncounter"
+import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
   {
     [Pkm.KECLEON]: 10,
     [Pkm.KANGASKHAN]: 10,
     [Pkm.CHANSEY]: 10,
-    [Pkm.ELECTIVIRE]: 10,
-    [Pkm.XATU]: 10
+    [Pkm.ELECTIVIRE]: 10
   }
 
 export const TownEncountersByStage: {
@@ -73,3 +73,25 @@ export const TownEncountersByStage: {
 }
 
 export const OUTLAW_GOLD_REWARD = 10
+
+export const TREASURE_BOX_LIFE_THRESHOLD = 40
+export type TreasureBoxReward =
+  | "gold"
+  | "mushrooms"
+  | "sweets"
+  | "itemComponents"
+  | "craftableItems"
+  | "goldBow"
+
+export function getTreasureBoxReward(): TreasureBoxReward {
+  return (
+    randomWeighted<TreasureBoxReward>({
+      gold: 0.2,
+      mushrooms: 0.1,
+      sweets: 0.1,
+      itemComponents: 0.2,
+      craftableItems: 0.15,
+      goldBow: 0.05
+    }) ?? "itemComponents"
+  )
+}

@@ -2650,7 +2650,7 @@
 		"KECLEON": "Kecleon vende Pedras Sinérgicas por {{cost}} de OURO",
 		"CHANSEY": "Chansey vende EGG_FOR_SELL por {{cost}} de OURO",
 		"ELECTIVIRE": "Electivire vende $t(tools) por {{cost}} de OURO",
-		"XATU": "Xatu vende uma TREASURE_BOX contendo 2 componentes de itens aleatórios por {{cost}} de OURO",
+		"XATU": "Xatu dá um TREASURE_BOX para todos os jogadores. Você se pergunta o que há dentro.",
 		"KANGASKHAN": "Kangashkhan vende itens criados completos pelo {{cost}} de OURO",
 		"DUSKULL": "As moedas Duskull aumentam sua renda a longo prazo",
 		"MAROWAK": "Marowak torna a próxima luta PvE mais difícil",

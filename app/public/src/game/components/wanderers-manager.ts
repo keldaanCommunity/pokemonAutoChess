@@ -7,7 +7,7 @@ import {
 } from "../../../../config"
 import { Wanderer } from "../../../../models/colyseus-models/wanderer"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { Transfer } from "../../../../types"
+import { Item, Transfer } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { WandererBehavior, WandererType } from "../../../../types/enum/Wanderer"
@@ -136,6 +136,20 @@ export default class WanderersManager {
         return false
       }
     })
+
+    if (wanderer.pkm === Pkm.XATU && wanderer.data && this.scene.board) {
+      const { chest, chestGroup } = this.scene.board.addChest(590, 450)
+      setTimeout(() => {
+        this.scene.board?.openChest(
+          chestGroup,
+          chest,
+          wanderer.data.split(";") as Item[]
+        )
+      }, 5000)
+      setTimeout(() => {
+        chestGroup.destroy(true, true)
+      }, 8000)
+    }
   }
 
   addWandererPokemonSprite({
@@ -166,7 +180,10 @@ export default class WanderersManager {
         startX = -100
         startY = 100 + Math.round(Math.random() * 500)
         endX = 590
-        endY = 300 + Math.round(Math.random() * 200)
+        endY =
+          wanderer.type === WandererType.DIALOG
+            ? 500
+            : 300 + Math.round(Math.random() * 200)
         duration = 4000
         break
       }
@@ -339,6 +356,11 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
   if (wanderer.pkm === Pkm.MAGNEZONE) {
     return {
       dialog: t("npc_dialog.magnezone")
+    }
+  }
+  if (wanderer.pkm === Pkm.XATU) {
+    return {
+      dialog: t("npc_dialog.xatu")
     }
   }
   return {}

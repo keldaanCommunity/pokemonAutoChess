@@ -153,31 +153,12 @@ export default class BoardManager {
           false
         )
       }
-      if (this.pveChest) {
-        this.pveChest.anims.play("open_chest")
-        const rewards = values(this.player.pveRewards).concat(
-          values(this.player.pveRewardsPropositions)
-        )
-        rewards.forEach((item, i) => {
-          const itemSprite = this.scene.add.sprite(
-            1512,
-            122,
-            "item",
-            item + ".png"
-          )
-          itemSprite.setScale(0.5)
-          const shinyEffect = this.scene.add.sprite(1512, 122, "shine")
-          shinyEffect.setScale(2)
-          shinyEffect.play("shine")
-          this.pveChestGroup?.addMultiple([itemSprite, shinyEffect])
-          this.scene.tweens.add({
-            targets: [itemSprite, shinyEffect],
-            ease: Phaser.Math.Easing.Quadratic.Out,
-            duration: 1000,
-            y: 75,
-            x: 1512 + (i - (rewards.length - 1) / 2) * 70
-          })
-        })
+      if (this.pveChest && this.pveChestGroup) {
+        const rewards = [
+          ...values(this.player.pveRewards),
+          ...values(this.player.pveRewardsPropositions)
+        ]
+        this.openChest(this.pveChestGroup, this.pveChest, rewards)
       }
     } else if (winnerId === this.opponentAvatar?.playerId) {
       this.animationManager.animatePokemon(
@@ -575,14 +556,9 @@ export default class BoardManager {
     }
 
     if (this.mode === BoardMode.BATTLE && opponentId === "pve") {
-      this.pveChestGroup = this.scene.add.group()
-      this.pveChest = this.scene.add.sprite(1512, 122, "chest", "1.png")
-      this.pveChest
-        .setScale(2)
-        .setTint(
-          getRegionTint(this.scene.mapName, preference("colorblindMode"))
-        )
-      this.pveChestGroup.add(this.pveChest)
+      const { chest, chestGroup } = this.addChest(1512, 122)
+      this.pveChest = chest
+      this.pveChestGroup = chestGroup
     } else if (
       this.mode === BoardMode.BATTLE &&
       opponentAvatarString &&
@@ -1400,5 +1376,44 @@ export default class BoardManager {
         }
       })
     }
+  }
+
+  addChest(x: number, y: number) {
+    const chestGroup = this.scene.add.group()
+    const chest = this.scene.add
+      .sprite(x, y, "chest", "1.png")
+      .setScale(2)
+      .setTint(getRegionTint(this.scene.mapName, preference("colorblindMode")))
+    chestGroup.add(chest)
+    chestGroup.setDepth(DEPTH.INANIMATE_OBJECTS)
+    return { chest, chestGroup }
+  }
+
+  openChest(
+    chestGroup: Phaser.GameObjects.Group,
+    chest: Phaser.GameObjects.Sprite,
+    rewards: Item[]
+  ) {
+    chest.anims.play("open_chest")
+    rewards.forEach((item, i) => {
+      const itemSprite = this.scene.add.sprite(
+        chest.x,
+        chest.y,
+        "item",
+        item + ".png"
+      )
+      itemSprite.setScale(0.5)
+      const shinyEffect = this.scene.add.sprite(chest.x, chest.y, "shine")
+      shinyEffect.setScale(2)
+      shinyEffect.play("shine")
+      chestGroup?.addMultiple([itemSprite, shinyEffect])
+      this.scene.tweens.add({
+        targets: [itemSprite, shinyEffect],
+        ease: Phaser.Math.Easing.Quadratic.Out,
+        duration: 1000,
+        y: chest.y - 48,
+        x: chest.x + (i - (rewards.length - 1) / 2) * 70
+      })
+    })
   }
 }

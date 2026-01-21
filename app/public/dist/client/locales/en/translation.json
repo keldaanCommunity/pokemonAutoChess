@@ -3009,7 +3009,7 @@
 		"BIG_NUGGET": "A big gold nugget. +10 GOLD when obtained.",
 		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
 		"RECYCLE_TICKET": "Recycle a crafted item on bench or the crafted items held by a Pokémon into their base components. Single use.",
-		"TREASURE_BOX": "You wonder what's inside.",
+		"TREASURE_BOX": "You wonder what's inside. It will open once you have 40 HP or less.",
 		"AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
 		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
@@ -4375,7 +4375,8 @@
 		"good_job": "Good job !",
 		"here_are_your_reward": "Here are your reward:\n{{reward}}",
 		"magnemite": "Have you seen the fugitive ?",
-		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know."
+		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know.",
+		"xatu": "Let me open this treasure box for you..."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Everyone is here !",
@@ -4423,7 +4424,7 @@
 		"KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
 		"CHANSEY": "Chansey sells EGG_FOR_SELL for {{cost}} GOLD",
 		"ELECTIVIRE": "Electivire sells tools for {{cost}} GOLD",
-		"XATU": "Xatu sells a TREASURE_BOX containing 2 random item components for {{cost}} GOLD",
+		"XATU": "Xatu gives a TREASURE_BOX to all players. You wonder what's inside.",
 		"KANGASKHAN": "Kangashkhan sells complete craftable items for {{cost}} GOLD",
 		"DUSKULL": "Duskull proposes coins that increase your long term money income",
 		"MEOWTH": "Meowth proposes AMULET_COIN that let you earn GOLD from kills but reduce your max interest",
