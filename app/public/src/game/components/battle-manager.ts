@@ -197,7 +197,7 @@ export default class BattleManager {
       const pkm = this.pokemonSprites.get(pokemon.id)!
       if (field === "poisonStacks") {
         if (pokemon.status.poisonStacks > 0) {
-          pkm.addPoison()
+          pkm.addPoison(pokemon.status.poisonStacks)
         } else {
           pkm.removePoison()
         }

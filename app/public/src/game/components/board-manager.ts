@@ -5,6 +5,7 @@ import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   getRegionTint,
+  ItemStats,
   PortalCarouselStages,
   RegionDetails,
   SynergyTriggers
@@ -14,7 +15,6 @@ import {
   FlowerPotMons,
   FlowerPots
 } from "../../../../core/flower-pots"
-import { TownEncounters } from "../../../../core/town-encounters"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
@@ -36,6 +36,7 @@ import { Item } from "../../../../types/enum/Item"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
+import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
@@ -925,7 +926,11 @@ export default class BoardManager {
         case "hp":
         case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
-          const sizeBuff = (pokemon.hp - baseHP) / baseHP
+          const hp = values(pokemon.items).reduce(
+            (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
+            pokemon.hp
+          )
+          const sizeBuff = (hp - baseHP) / baseHP
           pokemonUI.sprite.setScale(2 + sizeBuff)
           if (previousValue != null && value && value > previousValue)
             pokemonUI.displayBoost(Stat.HP)

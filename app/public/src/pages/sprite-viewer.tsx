@@ -92,6 +92,7 @@ export function SpriteDebug() {
                 {k}
               </option>
             ))}
+            <option value="POISONNED_BADLY">Poisonned badly</option>
             <option value="BALM_MUSHROOM">Balm Mushroom</option>
             <option value="BOOST/ATK">Boost Attack</option>
             <option value="BOOST/DEF">Boost Defense</option>

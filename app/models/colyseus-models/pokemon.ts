@@ -789,7 +789,7 @@ export class Kleavor extends Pokemon {
     const regionSynergies = RegionDetails[map]?.synergies
     return (
       regionSynergies.includes(Synergy.ROCK) ||
-      regionSynergies.includes(Synergy.GROUND) ||
+      regionSynergies.includes(Synergy.FOSSIL) ||
       regionSynergies.includes(Synergy.DARK)
     )
   }
@@ -6038,7 +6038,7 @@ export class Groudon extends Pokemon {
   evolution = Pkm.PRIMAL_GROUDON
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   hp = 300
-  atk = 18
+  atk = 20
   speed = 54
   def = 10
   speDef = 6
@@ -6280,7 +6280,7 @@ export class Larvesta extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_DANCE
-  additional = true
+  regional = true
 }
 
 export class Volcarona extends Pokemon {
@@ -6295,7 +6295,7 @@ export class Volcarona extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_DANCE
-  additional = true
+  regional = true
 }
 
 export class Chatot extends Pokemon {
@@ -9265,7 +9265,7 @@ export class Poipole extends Pokemon {
   stars = 2
   evolution = Pkm.NAGANADEL
   evolutionRule = new StackBasedEvolutionRule()
-  stacksRequired: number = 30
+  stacksRequired: number = 20
   hp = 160
   atk = 10
   speed = 64
@@ -18163,7 +18163,7 @@ export class ScreamTail extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 190
+  hp = 210
   atk = 14
   speed = 71
   def = 8
@@ -18551,6 +18551,7 @@ export class Furfrou extends Pokemon {
   range = 1
   skill = Ability.COTTON_GUARD
   passive = Passive.FUR_COAT
+  stacksRequired: number = 5
 }
 
 export class Varoom extends Pokemon {
@@ -20112,6 +20113,41 @@ export class OinkologneFemale extends Pokemon {
   additional = true
 }
 
+export class Wooloo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.DUBWOOL
+  hp = 60
+  atk = 5
+  speed = 56
+  def = 4
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.FUR_COAT
+  stacksRequired: number = 10
+  additional = true
+}
+
+export class Dubwool extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 160
+  atk = 14
+  speed = 56
+  def = 8
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.FUR_COAT
+  stacksRequired: number = 10
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21264,8 +21300,10 @@ export const PokemonClasses: Record<
   [Pkm.VIVILLON_FANCY]: VivillonFancy,
   [Pkm.VIVILLON_POKE_BALL]: VivillonPokeball,
   [Pkm.LECHONK]: Lechonk,
-  [Pkm.OINKOLOGNE_MALE]: OinkologneMale
-  //[Pkm.OINKOLOGNE_FEMALE]: OinkologneFemale
+  [Pkm.OINKOLOGNE_MALE]: OinkologneMale,
+  //[Pkm.OINKOLOGNE_FEMALE]: OinkologneFemale,
+  [Pkm.WOOLOO]: Wooloo,
+  [Pkm.DUBWOOL]: Dubwool
 }
 
 // declare all the classes in colyseus schema TypeRegistry

@@ -445,7 +445,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   }
 }, Passive.GLIMMORA)
 
-const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
+const FurCoatEffect = new OnStageStartEffect(({ pokemon, player }) => {
   if (!pokemon) return
   if (isOnBench(pokemon)) {
     const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
@@ -453,9 +453,15 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon }) => {
     ](pokemon.name)
     pokemon.speed = initialSpeed
     pokemon.def = initialDef
-  } else if (pokemon.speed >= 5) {
+    if (pokemon.stacks >= pokemon.stacksRequired && player) {
+      pokemon.stacks = 0
+      player.items.push(Item.SILK_SCARF)
+    }
+    pokemon.stacks = 0
+  } else if (pokemon.stacks < pokemon.stacksRequired) {
     pokemon.speed -= 5
     pokemon.def += 2
+    pokemon.stacks += 1
   }
 }, Passive.FUR_COAT)
 
@@ -998,7 +1004,7 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   familyMembers.forEach((entity) => {
     if (!attacker.player) return
     entity.addStack()
-    if (entity.refToBoardPokemon.stacks % 3 === 0) {
+    if (entity.refToBoardPokemon.stacks % 2 === 0) {
       entity.addAttack(1, entity, 0, false, true)
     }
   })

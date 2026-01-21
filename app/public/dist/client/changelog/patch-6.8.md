@@ -14,6 +14,8 @@
 - Tauros Combat Breed
 - Tauros Blaze Breed
 - Tauros Aqua Breed
+- Wooloo
+- Dubwool
 
 # Changes to Pokemon & Abilities
 
@@ -69,6 +71,11 @@
 - Tauros now is Wild/Normal/Field. Adjusted stats.
 - Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 - Nerf Xerneas: HP 300 → 200
+- Change Fur Coat (Furfrou, Wooloo): now gains 2 def and loses 5 speed until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a Silk Scarf.
+- Buff Poipole: every ~~3~~ 2 stacks, gain 1 ATK permanently. Evolves at ~~30~~ 20 stacks.
+- Buff Screamtail: HP 190 → 210
+- Larvesta line is now regional in Bug and Fire regions
+- Buff Groudon: Attack 18 → 20
 
 # Changes to Synergies
 
@@ -79,7 +86,8 @@
     - Normal (9) gain 30 shield. Get a fourth Scarf. All scarves holders gain 30% increased base Attack and 30 AP.
 - New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Nerf Grass 7: 30 → 25 HP healed every 2 seconds
-- Buff field: healing on field unit KO increased: 30/35/40 → 30/40/50
+- Buff Field: healing on field unit KO increased: 30/35/40 → 30/40/50
+- Buff Fossil: Fossil effects are now triggered at 30% HP instead of 0% HP.
 - Change Snow weather effect: -20 Speed (-10 if Ice) instead of -20 for all
 
 # Changes to Items
@@ -118,6 +126,7 @@
 - Nerf Spell Tag: Curse duration increased: 9 → 10 seconds
 - Replace TM Brick Break with TM Return: deal 20/40/80 special damage, then gain 2 AP permanently.
 - Icicle missile (Vanillite) travels faster: 1.5 second → 1 second
+- Buff Shiny Stone: now also gives 50 AP
 
 # Gameplay
 
@@ -140,6 +149,7 @@
 - New animation for Fairy field
 - Wigglypuff mission gold reward is now automatically granted when the mission is completed, instead of requiring to click on Chatot
 - Improve the filters on Wiki Pokémon and synergies pages. Can now filter alternative forms.
+- Poison status now has a different animation when badly poisoned (3 stacks or more)
 
 # Bugfix
 
@@ -161,7 +171,10 @@
 - New title: Top Gun - Get to Mach 10 with a Mach Ribbon
 - New title: Scout - Equip your team with at least 5 Silk Scarf made items
 - Added a new meta report section, with a cluster map
+- Added a chart for pokemon report and item report, count function of average place
 - Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
+- Added a very small chance to get a "god pack" booster
+- New town encounter: Magnezone
 
 # Pokemon Alternative Forms
 

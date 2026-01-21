@@ -2403,7 +2403,7 @@
 		"GHOST": "I Pokèmon GHOST hanno il [15,LK]% di probabilità di schivare gli attacchi e infliggere SILENCE quando vengono colpiti, e di applicare varie maledizioni agli avversari all'inizio del combattimento.",
 		"FAIRY": "I Pokèmon FAIRY infliggono SPECIAL aggiuntivi con i loro attacchi e scatenano shock quando ricevono un colpo critico.",
 		"ICE": "I Pokèmon ICE hanno il [30,LK]% di probabilità di infliggere FREEZE al nemico per 2 secondi dopo un colpo e danno SPE_DEF a tutta la squadra.",
-		"FOSSIL": "Al loro primo KO, i Pokèmon FOSSIL tornano in vita con un aumento dell'ATK",
+		"FOSSIL": "Al 30% di HP, i Pokemon FOSSIL risvegliano il loro potere primordiale, guadagnando SHIELD e ATK.",
 		"SOUND": "I Pokèmon SOUND emettono un verso quando usano le loro abilità, svegliando gli alleati addormentati e dando loro statistiche bonus",
 		"ARTIFICIAL": "I Pokèmon ARTIFICIAL forniscono $t(tools) e guadagnano ATK, AP e SHIELD quando tengono gli oggetti.",
 		"BABY": "I BABY possono portarti uova di Pokèmon per confortarti dopo una sconfitta. La possibilità aumenta con le serie di sconfitte.{{additionalInfo}}",

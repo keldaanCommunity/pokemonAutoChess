@@ -1696,7 +1696,9 @@
 		"VIVILLON_POKE_BALL": "Prismillon (Poké Ball)",
 		"LECHONK": "Gourmelet",
 		"OINKOLOGNE_MALE": "Fragroin ♂",
-		"OINKOLOGNE_FEMALE": "Fragroin ♀"
+		"OINKOLOGNE_FEMALE": "Fragroin ♀",
+		"WOOLOO": "Moumouton",
+		"DUBWOOL": "Moumouflon"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2757,7 +2759,8 @@
 		"LUCKY_RIBBON": "Bandana Veinard",
 		"COVER_BAND": "Bandana Protège",
 		"EFFICIENT_BANDANNA": "Bandana Économe",
-		"NULLIFY_BANDANNA": "Écharpe Anti-Talent"
+		"NULLIFY_BANDANNA": "Écharpe Anti-Talent",
+		"WANTED_NOTICE": "Avis de recherche"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -3058,7 +3061,8 @@
 		"LUCKY_RIBBON": "Augmente la LUCK du porteur de 30%",
 		"COVER_BAND": "Si un allié ADJACENT est sur le point d'être mis KO par des dégâts entrants, le porteur encaisse les dégâts à sa place.",
 		"EFFICIENT_BANDANNA": "Le porteur et ses alliés ADJACENT_IN_THE_SAME_ROW voient leur PP max réduit de 10%.",
-		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en SHIELD, et les PP sont convertis en SPECIAL bonus sur la prochaine attaque."
+		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en SHIELD, et les PP sont convertis en SPECIAL bonus sur la prochaine attaque.",
+		"WANTED_NOTICE": "Recherché KO ou Vif\\nRécompense: 10 GOLD"
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -3162,8 +3166,8 @@
 		"DREAM_CATCHER": "Si sa cible est en SLEEP, les attaques du porteur donnent 10 SHIELD aux 3 alliés les plus proches de celle-ci.",
 		"SLOW_START": "Démarre avec -30 SPEED. Après avoir lancé sa capacité la première fois, gagne 30 SPEED et 10 ATK.",
 		"STONJOURNER": "Ne se déplace pas et n'attaque pas tant que sa barre de PP n'est pas pleine. Son cercle d'énergie octroie 50 AP à tous les alliés ADJACENT au début du combat.",
-		"POIPOLE": "Quand ce Pokémon ou un membre de la même famille met KO un ennemi, gagne 1 cumul. Tous les 3 cumuls, gagne 1 ATK de manière permanente. À 30 cumuls, évolue en $t(pkm.NAGANADEL).",
-		"NAGANADEL": "Quand ce Pokémon ou un membre de la même famille met KO un ennemi, gagne 1 cumul. Tous les 3 cumuls, gagne 1 ATK de manière permanente.",
+		"POIPOLE": "Quand ce Pokémon ou un membre de la même famille met KO un ennemi, gagne 1 cumul. Tous les 2 cumuls, gagne 1 ATK de manière permanente. À 20 cumuls, évolue en $t(pkm.NAGANADEL).",
+		"NAGANADEL": "Quand ce Pokémon ou un membre de la même famille met KO un ennemi, gagne 1 cumul. Tous les 2 cumuls, gagne 1 ATK de manière permanente.",
 		"PYUKUMUKU": "Quand ce Pokémon tombe KO, il explose en infligeant [50,SP]% des HP max en SPECIAL aux ennemis ADJACENT.",
 		"LUVDISC": "Les alliés à sa gauche et à sa droite tombent amoureux et partagent la meilleure valeur de leur ATK, AP, DEF et SPE_DEF respectifs au début du combat.",
 		"MANTYKE": "Lorsque $t(pkm.MANTYKE) est sur le plateau, vous gagnez [33,LK]% de chance de pêcher un $t(pkm.REMORAID) avec votre canne à pêche. Évolue en $t(pkm.MANTINE) si un $t(pkm.REMORAID) se trouve à côté de lui.",
@@ -3215,7 +3219,7 @@
 		"STANTLER": "Évolue en $t(pkm.WYRDEER) en changeant de région au stage 20.",
 		"PIKACHU_SURFER": "La puissance de $t(pkm.PIKACHU_SURFER) dépend des vagues. Gagne 50 SHIELD et 3 ATK par niveau de synergie AQUATIC atteint, et remplit sa barre de PP lorsqu'une vague approche.",
 		"ESPURR": "Évoluera en Mistigrix Mâle ou Femelle en fonction de la synergie dominante entre PSYCHIC et FIELD.",
-		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être toiletté en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED.",
+		"FUR_COAT": "Sa fourrure pousse, donnant +2 DEF et -5 SPEED à chaque tour. Il peut être tondu en passant un tour sur le banc, ce qui réinitialise ses statistiques de DEF et de SPEED, et octroie au joueur un SILK_SCARF s'il a atteint le max de cumuls.",
 		"ACCELERATION": "Turbo : gagne 15 SPEED pour chaque case sur laquelle le Pokémon se déplace (les sauts et les sprints comptent pour une case)",
 		"MELTAN": "Lorsqu'il est utilisé sur $t(pkm.MELMETAL), fusionne avec lui pour lui donner 50 HP max permanents. Si $t(pkm.MELTAN) portait des objets, ils vous sont rendus.",
 		"FALINKS": "Des cadets Hexadron ont désormais [4,LK]% de chances d'apparaître dans votre boutique, coûtant 5 GOLD chacun, jusqu'à 6 cadets. Au début du combat, tous les cadets de votre banc rejoignent le chef Hexadron, lui offrant 30 SHIELD, 1 ATK et 1 DEF chacun.",
@@ -3384,7 +3388,7 @@
 		"GHOST": "Les Pokémon GHOST appliquent diverses malédictions aux unités adverses. Ils ont [15,LK]% de chance d'esquiver les attaques et de mettre sous SILENCE leur cible avec leurs attaques si la synergie est active.",
 		"FAIRY": "Les Pokémon FAIRY infligent des SPECIAL supplémentaires avec leurs attaques et libèrent des chocs lorsqu'ils reçoivent un coup critique, ripostant à hauteur de 30% des dégâts subis.",
 		"ICE": "Les Pokémon ICE ont [30,LK]% de chance de FREEZE leur cible pendant 2 secondes après un coup et font gagner de la SPE_DEF à toute l'équipe.",
-		"FOSSIL": "Les Pokémon FOSSIL survivent au premier coup qui les mettraient KO, en encaissant les dégâts dans un SHIELD et en gagnant de l'ATK.",
+		"FOSSIL": "À 30% de HP, les Pokémon FOSSIL éveillent leur pouvoir primordial, gagnant un SHIELD et de l'ATK.",
 		"SOUND": "Les Pokémon SOUND émettent un cri lorsqu'ils utilisent leurs capacités, réveillant les alliés en SLEEP et leur donnant des statistiques bonus.",
 		"ARTIFICIAL": "Les Pokémon ARTIFICIAL donnent des outils et gagnent de l'ATK, de la AP et du SHIELD lorsqu'ils portent des objets.",
 		"BABY": "Les Pokémon BABY ont une chance de vous apporter des Œufs Pokémon pour vous réconforter après une défaite. Cette chance s'accumule avec les séries de défaites.{{additionalInfo}}.",
@@ -4106,6 +4110,7 @@
 	"not_hungry": "PAS FAIM",
 	"fully_grown": "TOTALEMENT FLEURI",
 	"already_held": "DÉJÀ TENU",
+	"caught": "ATTRAPÉ !",
 	"drop_here_to_sell": "Déposez ici pour vendre",
 	"for_price_gold": "pour {{price}} pièces d'or",
 	"buy_xp": "Acheter XP {{cost}}",
@@ -4368,7 +4373,9 @@
 		"tell_price": "C'est {{price}} GOLD !",
 		"thank_you": "MERCI !",
 		"good_job": "Bien joué",
-		"here_are_your_reward": "Voici ta récompense :\n{{reward}}"
+		"here_are_your_reward": "Voici ta récompense :\n{{reward}}",
+		"magnemite": "Avez-vous vu le fugitif ?",
+		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Tout le monde est là !",
@@ -4430,7 +4437,8 @@
 		"CELEBI": "$t(pkm.CELEBI) prédit que les prochains Pokémon sauvages seront Shiny",
 		"MAKUHITA": "Makuhita entraîne l'un de vos Pokémon pendant plusieurs tours pour améliorer ses statistiques",
 		"WIGGLYTUFF": "Accomplissez les missions de la guilde $t(pkm.WIGGLYTUFF) pour gagner des récompenses.",
-		"CINCCINO": "$t(pkm.CINCCINO) offre d'élégants SILK_SCARF"
+		"CINCCINO": "$t(pkm.CINCCINO) offre d'élégants SILK_SCARF",
+		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver."
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -4542,7 +4550,7 @@
 	},
 	"enemy_team": "Équipe ennemie",
 	"pokemon": "Pokémon",
-	"type_fluid": "Type-Fluide",
+	"type_fluid": "Type variable",
 	"marowak_items": "Objets (Rencontre Ossatueur)",
 	"stat_boosts": "Bonus de statistiques",
 	"rewards": "Récompenses",

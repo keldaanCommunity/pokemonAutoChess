@@ -6,7 +6,8 @@ import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
-  getRegionTint
+  getRegionTint,
+  ItemStats
 } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -179,7 +180,13 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite = new GameObjects.Sprite(scene, 0, 0, "loading_pokeball")
     this.sprite.anims.play("loading_pokeball")
     const baseHP = getPokemonData(pokemon.name).hp
-    const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
+    const maxHP = inBattle
+      ? pokemon.maxHP
+      : values(pokemon.items).reduce(
+          (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
+          pokemon.maxHP
+        )
+    const sizeBuff = (maxHP - baseHP) / baseHP
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
@@ -912,7 +919,7 @@ export default class PokemonSprite extends DraggableObject {
       this.addCurse()
     }
     if (pokemon.status.poisonStacks > 0) {
-      this.addPoison()
+      this.addPoison(pokemon.status.poisonStacks)
     }
     if (pokemon.status.protect) {
       this.addProtect()
@@ -1273,13 +1280,17 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addPoison() {
+  addPoison(stacks) {
+    const poisonTexture = stacks >= 3 ? "POISON_BADLY" : "POISON"
     if (!this.poison) {
       this.poison = this.scene.add
-        .sprite(0, -30, "status", "POISON/000.png")
+        .sprite(0, -30, "status", `${poisonTexture}/000.png`)
         .setScale(2)
-      this.poison.anims.play("POISON")
+      this.poison.anims.play(poisonTexture)
       this.add(this.poison)
+    } else if (this.poison.texture.key !== poisonTexture) {
+      this.poison.setTexture("status", `${poisonTexture}/000.png`)
+      this.poison.anims.play(poisonTexture)
     }
   }
 

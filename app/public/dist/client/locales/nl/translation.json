@@ -1551,7 +1551,7 @@
 		"GHOST": "GHOST Pokémons hebben [15,LK]% kans om aanvallen en SILENCE te ontwijken bij een hit, en passen verschillende vloeken toe op tegenstanders",
 		"FAIRY": "FAIRY Pokemons zorgen voor extra SPECIAL met hun aanvallen en ontketenen schokken als ze een kritieke treffer ontvangen",
 		"ICE": "ICE pokemons hebben [30,LK]% kans om FREEZE de vijand voor 2 seconden na een hit en geven SPE_DEF aan het hele team.",
-		"FOSSIL": "Bij hun eerste KO komen FOSSIL pokemons weer tot leven met verhoogde ATK",
+		"FOSSIL": "Met 30% HP ontwaken FOSSIL Pokemon hun oerkracht en verkrijgen ze SHIELD en ATK.",
 		"SOUND": "SOUND pokemons laten een kreet horen wanneer ze hun vaardigheden gebruiken, slapende bondgenoten wakker maken en bonusstatistieken geven",
 		"ARTIFICIAL": "ARTIFICIAL pokemons geven $t(tools) en winnen ATK, AP en SHIELD als ze items vasthouden.",
 		"BABY": "BABY pokemons kunnen je Pokemon-eieren brengen om je te troosten na een nederlaag. Kans stapelt zich op met verliesstrepen.{{additionalInfo}}",
@@ -2009,7 +2009,5 @@
 	"portal_description_2": "Elke portal heeft synergie symbolen die willekeurig genomen zijn van de dominante synergieën van alle spelers. Symbolen beïnvloeden zowel de regio waar je naartoe reist als de Pokémon die voorgesteld worden.",
 	"portal_description_3": "Als je besluit geen portal te nemen, blijf je in je huidige regio, en de voorgestelde Pokémon zullen volledig willekeurig zijn.",
 	"additional_description": "Kies een extra keuze en een item component uit 3 voorstellen. Extra keuzes zijn 2-stadium evolutie Pokémon die gevonden kunnen worden in alle spelers winkels nadat ze gekozen zijn.",
-	"battle_description": "Regulaire gevecht stadium waar je vecht tegen andere spelers of bots.",
-	"classic": "Sluit je aan bij een lobby",
-	"custom_room": "Ruimte creëren"
+	"battle_description": "Regulaire gevecht stadium waar je vecht tegen andere spelers of bots."
 }

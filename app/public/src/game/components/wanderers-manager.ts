@@ -1,6 +1,7 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
 import {
+  OUTLAW_GOLD_REWARD,
   SHARDS_PER_SHINY_UNOWN_WANDERER,
   SHARDS_PER_UNOWN_WANDERER
 } from "../../../../config"
@@ -43,6 +44,8 @@ export default class WanderersManager {
       this.addCatchableWanderer(wanderer)
     } else if (wanderer.type === WandererType.DIALOG) {
       this.addDialogWanderer(wanderer)
+    } else if (wanderer.type === WandererType.OUTLAW) {
+      this.addOutlawWanderer(wanderer)
     }
   }
 
@@ -83,13 +86,37 @@ export default class WanderersManager {
     })
   }
 
+  addOutlawWanderer(wanderer: Wanderer) {
+    this.addWandererPokemonSprite({
+      wanderer,
+      speed: 0.4,
+      onClick: (wanderer, sprite, pointer) => {
+        let caught = false
+        if (this.scene.board) {
+          caught = true
+          this.scene.room?.send(Transfer.WANDERER_CLICKED, {
+            id: wanderer.id
+          })
+          sprite.destroy()
+          this.scene.board.displayText(
+            pointer.x,
+            pointer.y - 40,
+            t("caught"),
+            true
+          )
+          this.scene.displayMoneyGain(pointer.x, pointer.y, OUTLAW_GOLD_REWARD)
+        }
+        return caught
+      }
+    })
+  }
+
   addDialogWanderer(wanderer: Wanderer) {
     const sprite = new PokemonSpecial({
       scene: this.scene,
       x: -100,
       y: 350,
       name: wanderer.pkm,
-      orientation: Orientation.RIGHT,
       animation: PokemonActionState.WALK,
       ...getDialogsBySpecialWanderer(wanderer)
     })
@@ -114,10 +141,12 @@ export default class WanderersManager {
   addWandererPokemonSprite({
     wanderer,
     onClick,
-    existingSprite
+    existingSprite,
+    speed = DEFAULT_WANDERER_SPEED
   }: {
     wanderer: Wanderer
     existingSprite?: PokemonSprite
+    speed?: number
     onClick: (
       wanderer: Wanderer,
       pokemon: PokemonSprite,
@@ -128,7 +157,7 @@ export default class WanderersManager {
       startY = 350,
       endX = window.innerWidth + 100,
       endY = 350
-    let duration = clamp(window.innerWidth / DEFAULT_WANDERER_SPEED, 4000, 6000)
+    let duration = clamp(window.innerWidth / speed, 4000, 6000)
     let caught = false
     const tweens: Phaser.Tweens.Tween[] = []
 
@@ -157,8 +186,8 @@ export default class WanderersManager {
       existingSprite ??
       new PokemonSprite(
         this.scene,
-        startX,
-        startY,
+        -100,
+        350,
         PokemonFactory.createPokemonFromName(wanderer.pkm, {
           shiny: wanderer.shiny
         }),
@@ -166,6 +195,8 @@ export default class WanderersManager {
         false,
         false
       )
+    sprite.x = startX
+    sprite.y = startY
     sprite.orientation = startX < endX ? Orientation.RIGHT : Orientation.LEFT
     this.scene.animationManager?.animatePokemon(
       sprite,
@@ -298,6 +329,16 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
         reward: `30 GOLD`
       }),
       dialogTitle: t("npc_dialog.good_job")
+    }
+  }
+  if (wanderer.pkm === Pkm.MAGNEMITE) {
+    return {
+      dialog: t("npc_dialog.magnemite")
+    }
+  }
+  if (wanderer.pkm === Pkm.MAGNEZONE) {
+    return {
+      dialog: t("npc_dialog.magnezone")
     }
   }
   return {}

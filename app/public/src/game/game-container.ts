@@ -1,4 +1,3 @@
-import { pipeline } from "node:stream"
 import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getStateCallbacks, Room } from "colyseus.js"
 import { t } from "i18next"
@@ -7,6 +6,7 @@ import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
 import React from "react"
 import { toast } from "react-toastify"
+import { ItemStats } from "../../../config"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../core/flower-pots"
 import { PokemonEntity } from "../../../core/pokemon-entity"
 import Simulation from "../../../core/simulation"
@@ -35,7 +35,8 @@ import {
   HealType,
   Orientation,
   PokemonActionState,
-  Rarity
+  Rarity,
+  Stat
 } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
@@ -472,6 +473,14 @@ class GameContainer {
       $pokemon.items.onAdd((item) => {
         if (player.id === this.spectatedPlayerId) {
           this.gameScene?.board?.updatePokemonItems(player.id, pokemon, item)
+          if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              "hp",
+              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp
+            )
+          }
         }
       })
 

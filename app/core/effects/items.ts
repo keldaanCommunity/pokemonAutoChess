@@ -1057,6 +1057,12 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.EXCHANGE_TICKET]: [
+    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.CHEF_HAT]: [
     chefCookEffect,
     new OnItemDroppedEffect(({ pokemon }) => {

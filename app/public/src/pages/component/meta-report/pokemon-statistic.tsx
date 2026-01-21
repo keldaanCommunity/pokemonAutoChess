@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -13,6 +12,7 @@ import {
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonPortrait from "../pokemon-portrait"
+import "./pokemon-statistic.css"
 
 export default function PokemonStatistic(props: {
   pokemons: IPokemonsStatistic[]
@@ -87,85 +87,71 @@ export default function PokemonStatistic(props: {
         <div key={"family." + pkm} className="my-box pokemon-family-stat">
           <span className="rank">{i + 1}</span>
 
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}
-          >
-            {family.pokemons.map((pokemon) => (
-              <li key={pokemon.name + "-portrait"}>
-                <PokemonPortrait portrait={PkmIndex[pokemon.name]} />
-                <span>{t(`pkm.${pokemon.name}`)}</span>
-              </li>
-            ))}
-          </ul>
-
-          <span>
-            <label>{t("average_place")}:</label>
-            <br />
-            <span style={{ fontSize: "140%" }}>
-              {family.averageRank ? family.averageRank.toFixed(1) : "???"}
-            </span>
-          </span>
-
-          <span>
-            <label>{t("count")}:</label>
-            <br />
-            <span style={{ fontSize: "140%" }}>{family.totalCount}</span>
-          </span>
-
-          <span>
-            <label>{t("held_items")}:</label>
-            <br />
-            <span style={{ fontSize: "140%" }}>
-              {family.averageItemHeld?.toFixed(2)}
-            </span>
-          </span>
-
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}
-          >
-            {family.pokemons.map((pokemon) => (
-              <li
-                key={pokemon.name + "-details"}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "40px 6ch 1fr 1.5fr 2fr"
-                }}
-              >
-                <PokemonPortrait portrait={PkmIndex[pokemon.name]} />
-                <span>
-                  {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
+          <div className="pokemon-family-summary">
+            <div className="pokemon-portraits-vertical">
+              {family.pokemons.map((pokemon) => (
+                <div className="pokemon-detail-row">
+                  <PokemonPortrait
+                    key={pokemon.name + "-thumb"}
+                    portrait={PkmIndex[pokemon.name]}
+                    width={40}
+                  />
+                  <span className="pokemon-name-container">
+                    <span>{t(`pkm.${pokemon.name}`)}</span>
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="pokemon-family-stats">
+              <span className="pokemon-stat-item">
+                <div>{t("average_place")}</div>
+                <span className="pokemon-stat-value">
+                  {family.averageRank ? family.averageRank.toFixed(1) : "???"}
                 </span>
-                <span>
+              </span>
+              <span className="pokemon-stat-item">
+                <div>{t("count")}</div>
+                <span className="pokemon-stat-value">{family.totalCount}</span>
+              </span>
+              <span className="pokemon-stat-item">
+                <div>{t("held_items")}</div>
+                <span className="pokemon-stat-value">
+                  {family.averageItemHeld?.toFixed(2)}
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div className="pokemon-details-list">
+            {family.pokemons.map((pokemon) => (
+              <div
+                key={pokemon.name + "-details"}
+                className="pokemon-detail-row"
+              >
+                <PokemonPortrait portrait={PkmIndex[pokemon.name]} width={40} />
+                <span className="pokemon-detail-stat" title="Average Rank">
+                  <strong>
+                    {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
+                  </strong>
+                </span>
+                <span className="pokemon-stat-container">
                   <label>{t("count")}:</label> {pokemon.count}
                 </span>
-                <span>
+                <span className="pokemon-stat-container">
                   <label>{t("held_items")}:</label> {pokemon.item_count}
                 </span>
-                <div>
-                  <label>{t("popular_items")}:</label>
+                <div className="pokemon-items-row">
                   {pokemon.items.map((item) => (
                     <img
                       key={pokemon.name + "-item-" + item}
                       src={"assets/item/" + item + ".png"}
-                      style={{
-                        height: "32px",
-                        width: "32px",
-                        marginLeft: "4px"
-                      }}
+                      className="pokemon-item-img"
                     />
                   ))}
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       ))}
     </article>
