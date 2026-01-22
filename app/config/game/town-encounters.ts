@@ -79,6 +79,7 @@ export type TreasureBoxReward =
   | "gold"
   | "mushrooms"
   | "sweets"
+  | "componentsAndTickets"
   | "itemComponents"
   | "craftableItems"
   | "goldBow"
@@ -89,7 +90,8 @@ export function getTreasureBoxReward(): TreasureBoxReward {
       gold: 0.2,
       mushrooms: 0.1,
       sweets: 0.1,
-      itemComponents: 0.2,
+      itemComponents: 0.1,
+      componentsAndTickets: 0.1,
       craftableItems: 0.15,
       goldBow: 0.05
     }) ?? "itemComponents"

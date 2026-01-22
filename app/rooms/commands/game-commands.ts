@@ -1434,6 +1434,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         case "itemComponents":
           rewards = pickNRandomIn(ItemComponents, 4)
           break
+        case "componentsAndTickets":
+          rewards = [
+            ...pickNRandomIn(ItemComponents, 2),
+            Item.RECYCLE_TICKET,
+            Item.EXCHANGE_TICKET
+          ]
+          break
         case "craftableItems":
           rewards = pickNRandomIn(CraftableItems, 2)
           break
