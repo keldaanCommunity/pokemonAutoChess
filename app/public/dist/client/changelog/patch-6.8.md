@@ -23,7 +23,13 @@
 
 - Many abilities targeting in a line have been reworked to apply on more angles than the 8 basic orientations (vertical, horizontal and diagonals). In short, these abilities will have a better targeting now. Abilities concerned: Dynamax Cannon, Bonemerang, Shadow Bone, Aurora Beam, Hydropump, Solar Beam (nerfed), Psybeam, Hurricane, Fleur Cannon (nerfed), Sandsear Storm (nerfed), Wildbolt Storm (nerfed), Bleakwing Storm (nerfed), Springtide Storm (nerfed), Spirit Shackle (nerfed), Icy Wind (nerfed), Mist Ball, Luster Purge, Link Cable (nerfed), Aura Sphere, Moongeist Beam, Blood Moon, Freezing Glare, Electro Shot, Twin Beam
 - Rework Terrain pulse (Arboliva): change effects by unit tier: Grass field: 5/5/5 → 5/7/10 % max HP healed ; Electric field: 10/10/10 → 10/12/15 speed buff; Psychic field: 10/10/10 → 10/12/15 PP gain ; Misty field: 5/5/5 → 5/7/10 % of max HP as shield
+
+> Togepi AP in ghost vertical is a comp that exists since patch 5.7, but for some reason became super popular only recently. Although the consistency of this composition is shaky (as we saw in last tournament), many players loudly voiced their dislike for this strategy that they judge unfun to play against. So we're reworking Togepi to no longer be able to buff allies dodge to the maximum. It should still remain a valuable support Pokémon with the targeted protect.
+
 - Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
+
+> Players are asking for more weather enforcers passive for legendary Pokémon, but having too much ruins the weather system and prevents strategizing around weather. So we're currently looking to limit the amount of weather enforcers. Shaymin Sky still gets the opportunity to make the sun shine.
+
 - Primal Groudon change weather to Drought or Sandstorm based on your dominant synergy between FIRE and GROUND
 - Primal Kyogre change weather to Rain or Storm based on your dominant synergy between WATER and ELECTRIC
 - Ho-Oh no longer changes weather to Drought.
@@ -32,18 +38,28 @@
 - Xerneas no longer changes weather to Misty.
 - Castform now changes to Sunny form under Drought or Zenith
 - New passive for Shaymin Sky form: change weather to Zenith
+
 - New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
 - Change Shieldon line: now also has Rock synergy. Def 10/16 → 6/12, Special Def 6/8 → 4/8
+
+> Psychic really didnt need even more AP. Funny numbers aside, Tapu Lele's Psychic Surge was barely useful, so we're instead giving what Psychic needs: defense and time.
+
 - Rework Psychic Surge (Tapu Lele): Now grants 40 shield to all Psychic allies except user ; PP 80 → 100
+
 - Change Comfey: holder no longer gains speed and AP from Comfey, only max HP, Attack, Defense and Special Defense. Comfey speed 57 → 64
 - Tauros now is Wild/Normal/Field. Adjusted stats.
 - Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
+
+> Sewing a scarf with its wool is the only thing that can make Wooloo vaguely interesting, otherwise it's just a Mareep with flat battery. You should have more reasons to groom your Furfrou as well.
+
 - Change Fur Coat (Furfrou, Wooloo): now gains 2 def and loses 5 speed until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a Silk Scarf.
 - New ability for Scizor: Bullet Punch
 - Mothim is now sold for 3 gold instead of 6
 - Paldean Wooper is now exclusive to Poison regions
 
 ## Buffs
+
+> Nothing too crazy here, just giving some love to Psychic. Hatenna and Metang should hold the line longer now to give you time to unleash your psychic powers.
 
 - Buff Cosmog HP : 100 → 140 ; Cosmoem HP: 200 → 220
 - Buff Oddish line: HP 80/140/200 → 80/150/230
@@ -60,6 +76,9 @@
 - Buff Poipole: every ~~3~~ 2 stacks, gain 1 ATK permanently. Evolves at ~~30~~ 20 stacks.
 - Buff Screamtail: HP 190 → 210
 - Buff Groudon: Attack 18 → 20
+
+> Duskull is for sure a weird-looking tank, but it may be able to fit that role now.
+
 - Buff Duskull line: HP 70/150/240 → 70/140/220 , Def and Spe def: 2/2/2 → 4/7/12
 - Icicle missile (Vanillite) travels faster: 1.5 second → 1 second
 
@@ -72,30 +91,46 @@
 - Nerf Link Cable damage: 50 → 40
 - Nerf Solar Beam damage buff on Zenith: +100% → +30%
 - Nerf Growth buff on Zenith: +100% → +30%
+
+> Sorry, we messed up with Bellibolt. No cooldown on passive was a huge mistake, this unit was dealing way too much damage. Time to calm down the tummy.
+
 - Nerf Tadbulb line. Passive damage is reduced from 30 to 10, no longer scales with AP and is considered retaliation damage. First supercharge gives 30 → 20 speed and 50 → 30 shield. Added a 3 seconds cooldown between passive procs.
 - Nerf Honedge line: HP 85/130/230 → 75/120/210 ; Def 6/10/14 → 4/8/14 ; King's shield shield: 10/20/30 → 10/20/40
 - Nerf Wiglett line: PP 80 → 100
 - Nerf Whirlpool (Seadra): 125 → 100% Attack damage per hit
+
+> Nerfing Flora pots HP and their best unique and legendary carries
+
 - Nerf Bellsprout line: HP 70/150/230 → 60/130/200
 - Nerf Meganium HP: 250 → 220
 - Nerf Bellossom HP: 300 → 250
 - Nerf Mind Blown (Blacephalon): damage and shield per firework: 30 → 20
 - Nerf Carnivine: Speed 40 → 29 ; Nerf Power Whip: 50% → 30% of HP as bonus special damage
 - Nerf Xerneas: HP 300 → 200
+
+> "Cool design but numbers off the chart" is a good summary of 6.7. We go back down to the same numbers as the cell battery balancing hotfix.
+
 - Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
 
 ## Regional changes
+
+> Regional uniques and legendaries should hopefully be more common now, so that you don't have to screenshot every time you see one to prove it exists.
 
 - Scizor, Kleavor, Galarian Moltres, Galarian Zapdos, Galarian Articuno and Walking Wake are now found in more regions.
 - Larvesta line is now regional in Bug and Fire regions
 
 # Changes to Synergies
 
+> Making normal complex, diversified and interesting is for sure a challenge. Let's try anyway and bring the emblematic scarves of the Mystery Dungeon games into PAC.
+
 - Normal rework: 
     - Normal (3): gain 15 shield. Get a Scarf
     - Normal (5): gain 20 shield. Get a second Scarf
     - Normal (7): gain 25 shield. Get a third Scarf
     - Normal (9) gain 30 shield. Get a fourth Scarf. All scarves holders gain 30% increased base Attack and 30 AP.
+
+> The goal is to give Grass synergy a true vertical as we did with other synergies, while not making it overpowered. The performance of Grass last patch seemed to be related to Flora so we hope other nerfs will keep it in check.
+
 - New synergy effect Grass 9 Overflow: Once below 30% max HP, gain 50 AP. Your berry trees turn golden.
 - Nerf Grass 7: 30 → 25 HP healed every 2 seconds
 - Buff Field: healing on field unit KO increased: 30/35/40 → 30/40/50
@@ -107,6 +142,9 @@
 ## New component: Silk Scarf
 
 - New item component: Silk Scarf, obtained from Normal synergy - gives 15 shield
+
+> Introducing 10 new items is scary, and our eyes will be focused on those on the first weeks of 6.8. Have fun with experimenting those new item combinations !
+
 - New scarves items craftable with Silk Scarf:
     - Friend Bow: 15 shield - The holder gains the Normal type.
     - Black Belt: 15 shield, 20% crit chance - Critical attacks provide 33% of the damage dealt as Shield.
@@ -120,6 +158,8 @@
     - Nullify Bandanna: 30 shield - Holder can no longer cast its ability. AP is converted to shield, and PP are converted to bonus special damage on attack.
 
 ## Changing miracle seed to HP-based effects
+
+> It took a while, but we finally have a HP-based item component. Green Orb and Star Dust recipe switch should help for players coming from TFT. Oh, and King's Rock makes you truely the King of the board now.
 
 - Miracle seed, Leaf Stone and Sticky Barb now gives 15 max HP instead of 15 shield.
 - Removed base 15 shield from Gracidea flower
@@ -140,6 +180,8 @@
 
 ## Item reworks
 
+> Funny interaction between mulch and berry trees, but don't expect it to be the play.
+
 - Rich Mulch and Amaze Mulch can now be used on berry trees to instantly fully grow them
 - Heat stone changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 Attack.
 - Explorer Kit is no longer obtainable from Artificial synergy. Magmarizer can now be obtained from Artificial synergy.
@@ -154,6 +196,8 @@
 
 # Changes to carousels & PvE rounds
 
+> Stage 1 starter pick brought the unintended side-effect of having one more component in the early game, and one you choose. This led to slamming strong items earlier than before, and a more agressive early game overall. We're reverting stage 15 changes to get back to the previous pacing.
+
 - Stage 15 component pick is back, and stage 2 no longer gives a random component as a reward. Instead, the rewards of stage 2 are the 1 out of 3 component pick proposed on stage 3.
 - Item components carousels now have 40% chance to include one additional Fossil Stone. Otherwise they will only propose other item components.
 - Removed the reward change between component and full item on stage 19 PvE, based on the amount of components collected. It is too easy to manipulate with Silk Scarf, Unown-I and ground digging. Stage 19 PvE now always offers a full craftable item as a reward.
@@ -162,7 +206,10 @@
 - Rework Xatu town encounter: now gives a Treasure Box for free. It will open when the player goes below 40% HP, granting the same random reward to all players.
 - Makuhita can now be encountered at stage 17, and no longer at stage 22
 - Wigglypuff mission gold reward is now automatically granted when the mission is completed, instead of requiring to click on Chatot
-- Portal symbols generation at stage 20 has been reworked. Issue 1 : In horizontal compositions such as Dragon/Amorphous, too many synergy steps are activated, leading to very inconsistent symbol generation. Solution: truncate the symbols pool size to max 7, ordered by top synergy as shown in the synergy menu. Issue 2 :Vertical comps are too consistent in symbol generation, especially when several players play the same synergy. Solution: limit the amount of symbols of the same synergy to the number of players alive.
+
+> This intends to fix two problems we observed with portal symbols generation at stage 20: the inconsistency of Dragon/Amorphous symbols due to the amount of active synergy thresholds, and the overconsistency of vertical synergies when several players play it in the same lobby.
+
+- Portal symbols generation at stage 20 has been reworked. Symbols pool size is now limited to 7 symbols, and the amount of symbols of the same synergy is limited to the number of players alive.
 
 # Changes to Statuses
 
@@ -178,7 +225,7 @@
 
 # Pokemon Alternative Forms
 
-We are introducing the notion of Pokémon alternative forms in the game. Alternative Forms are mostly aesthetic variations of the same Pokémon, that will be merged in your Collection and in various other places.
+> We are introducing the notion of Pokémon alternative forms in the game. Alternative Forms are mostly aesthetic variations of the same Pokémon, that will be merged in your Collection and in various other places. This makes it easier to complete your Collection, your Pokédex, and nail it at Pokéguessr.
 
 List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silvally, Arceus, Alcremie, Ogerpon, Basculin, Basculegion, Darmanitan, Maushold, Hoopa, Aegislash, Vivillon, Mimikyu, Deoxys, Lycanroc
 
@@ -191,6 +238,8 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 
 # User Interface
 
+> Meta report got a big upgrade this patch, with new sections and charts to help you figure out the best team compositions and items.
+
 - Added new meta report sections: Compositions, Cluster map, Region tracking
 - Added a chart for Pokémon meta report and item meta report, showing count vs average placement
 - Current game mode is now displayed in the game top bar
@@ -199,6 +248,9 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 
 # Bugfix
 
+> We found too late that Loaded Dice second hit damage was incorrectly calculated, and it had a significant impact on the meta. Oopsie. Several resurrection related bugs, that many players thought were not bugs, have also been fixed. So no more secret strats around Max Revive, a unit resurrecting should get back to the state it was when the fight started.
+
+- Fix Loaded Dice second hit damage dealing 100% instead of 75% of the attack damage
 - Field speed stacks are now correctly reset after resurrection
 - Units now properly reset their targeting after their target starts resurrecting
 - Resurrection now properly reset all temporary stat buffs, including buffs from abilities
@@ -209,6 +261,10 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 - Berry trees can no longer share the same berry type.
 - Additional bonus damage on Fairy shocks provided by Fairy synergy effects now applies to the shock damage, and not the incoming damage.
 - Crit damage reduction from Rock synergy effects now applies to the final crit damage after crit power is applied, instead of before.
+
+> Sorry for making you refresh your page on every other game to get the Pokémon out of their pokéballs. The main cause should be fixed now, but other causes may still exist.
+
+- Fix lazy loading of Pokémon sprites when entering a game for the second time without cache unloaded.
 
 # Misc
 
