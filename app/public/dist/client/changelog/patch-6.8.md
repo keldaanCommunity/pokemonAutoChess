@@ -176,6 +176,7 @@
 - Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
 - Added a very small chance to get a "god pack" booster
 - New town encounter: Magnezone
+- Rework Xatu town encounter: now gives a Treasure Box for free. It will open when the player goes below 40% HP, granting the same random reward to all players.
 
 # Pokemon Alternative Forms
 

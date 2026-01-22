@@ -372,6 +372,10 @@ export class MiniGame {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.PICNIC_SET)
       })
+    } else if (state.townEncounter === TownEncounters.XATU) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.TREASURE_BOX)
+      })
     } else if (state.townEncounter === TownEncounters.MAKUHITA) {
       const ticket =
         state.stageLevel >= 20
@@ -512,12 +516,6 @@ export class MiniGame {
 
     if (encounter === TownEncounters.CHANSEY) {
       itemsSet = [Item.EGG_FOR_SELL]
-      nbItemsToPick = this.alivePlayers.length
-      maxCopiesPerItem = 99
-    }
-
-    if (encounter === TownEncounters.XATU) {
-      itemsSet = [Item.TREASURE_BOX]
       nbItemsToPick = this.alivePlayers.length
       maxCopiesPerItem = 99
     }
@@ -825,8 +823,6 @@ export class MiniGame {
         if (item && player && !player.isBot) {
           if (item.name === Item.EGG_FOR_SELL) {
             giveRandomEgg(player, false)
-          } else if (item.name === Item.TREASURE_BOX) {
-            player.items.push(...pickNRandomIn(ItemComponents, 2))
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
             player.addMoney(3, true, null)
