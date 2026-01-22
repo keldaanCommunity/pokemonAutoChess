@@ -5075,7 +5075,7 @@ export class PlasmaFistStrategy extends AbilityStrategy {
       crit
     )
     if (takenDamage > 0) {
-      pokemon.handleHeal(Math.round(takenDamage * 0.3), pokemon, 0, crit)
+      pokemon.handleHeal(Math.round(takenDamage * 0.3), pokemon, 0, false)
     }
   }
 }
