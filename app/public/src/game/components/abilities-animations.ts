@@ -1509,7 +1509,10 @@ export const AbilitiesAnimations: {
     ease: "Power2",
     tweenProps: { yoyo: true }
   }),
-  [Ability.SHADOW_BALL]: projectile({ duration: 1000 }),
+  [Ability.SHADOW_BALL]: projectile({
+    duration: 1000,
+    scale: 2
+  }),
   [Ability.GRUDGE]: projectile({
     duration: 750,
     scale: 2,

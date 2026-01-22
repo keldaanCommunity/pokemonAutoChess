@@ -76,6 +76,7 @@
 - Buff Screamtail: HP 190 → 210
 - Larvesta line is now regional in Bug and Fire regions
 - Buff Groudon: Attack 18 → 20
+- Buff Duskull line: HP 70/150/240 → 70/140/220 , Def and Spe def: 2/2/2 → 4/7/12
 
 # Changes to Synergies
 
