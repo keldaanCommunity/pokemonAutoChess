@@ -22,9 +22,8 @@
 ## Reworks
 
 - Many abilities targeting in a line have been reworked to apply on more angles than the 8 basic orientations (vertical, horizontal and diagonals). In short, these abilities will have a better targeting now. Abilities concerned: Dynamax Cannon, Bonemerang, Shadow Bone, Aurora Beam, Hydropump, Solar Beam (nerfed), Psybeam, Hurricane, Fleur Cannon (nerfed), Sandsear Storm (nerfed), Wildbolt Storm (nerfed), Bleakwing Storm (nerfed), Springtide Storm (nerfed), Spirit Shackle (nerfed), Icy Wind (nerfed), Mist Ball, Luster Purge, Link Cable (nerfed), Aura Sphere, Moongeist Beam, Blood Moon, Freezing Glare, Electro Shot, Twin Beam
-- Mothim is now sold for 3 gold instead of 6
 - Rework Terrain pulse (Arboliva): change effects by unit tier: Grass field: 5/5/5 → 5/7/10 % max HP healed ; Electric field: 10/10/10 → 10/12/15 speed buff; Psychic field: 10/10/10 → 10/12/15 PP gain ; Misty field: 5/5/5 → 5/7/10 % of max HP as shield
-- New ability for Scizor: Bullet Punch
+- Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
 - Primal Groudon change weather to Drought or Sandstorm based on your dominant synergy between FIRE and GROUND
 - Primal Kyogre change weather to Rain or Storm based on your dominant synergy between WATER and ELECTRIC
 - Ho-Oh no longer changes weather to Drought.
@@ -32,17 +31,17 @@
 - XD001 no longer changes weather to Night.
 - Xerneas no longer changes weather to Misty.
 - Castform now changes to Sunny form under Drought or Zenith
-- Paldean Wooper is now exclusive to Poison regions
-- Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
-- New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
 - New passive for Shaymin Sky form: change weather to Zenith
-- Rework Wish (Togepi): Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally. Togepi line PP: 70 → 100
+- New ability for Snom line: Powder Snow: A snow mist is blown towards the target, dealing 15/30/60 SPECIAL to all enemies in a line with 15/30/50% chance to FREEZE them for 2 seconds. ; Attack range: 2 → 3, Def: 4/6 → 2/4
 - Change Shieldon line: now also has Rock synergy. Def 10/16 → 6/12, Special Def 6/8 → 4/8
 - Rework Psychic Surge (Tapu Lele): Now grants 40 shield to all Psychic allies except user ; PP 80 → 100
 - Change Comfey: holder no longer gains speed and AP from Comfey, only max HP, Attack, Defense and Special Defense. Comfey speed 57 → 64
 - Tauros now is Wild/Normal/Field. Adjusted stats.
 - Kangashkan is now Normal/Monster/Fighting;. New ability: Dizzy Punch: Deal 20/40/80 special damage to the target and inflict them with Confusion for 3 seconds. The damage is doubled if the target has a Shield.
 - Change Fur Coat (Furfrou, Wooloo): now gains 2 def and loses 5 speed until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a Silk Scarf.
+- New ability for Scizor: Bullet Punch
+- Mothim is now sold for 3 gold instead of 6
+- Paldean Wooper is now exclusive to Poison regions
 
 ## Buffs
 
@@ -83,6 +82,7 @@
 - Nerf Mind Blown (Blacephalon): damage and shield per firework: 30 → 20
 - Nerf Carnivine: Speed 40 → 29 ; Nerf Power Whip: 50% → 30% of HP as bonus special damage
 - Nerf Xerneas: HP 300 → 200
+- Change Iron Thorns: speed buff: 25 → 20, HP gained: 40 → 30 ; Remove cooldown on subsequent casts after supercharge
 
 ## Regional changes
 
