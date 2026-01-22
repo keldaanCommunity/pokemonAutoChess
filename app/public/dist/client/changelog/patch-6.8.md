@@ -154,6 +154,8 @@
 
 # Bugfix
 
+- Field speed stacks are now correctly reset after resurrection
+- Units now properly reset their targeting after their target starts resurrecting
 - Resurrection now properly reset all temporary stat buffs, including field speed stacks and temporary buffs from abilities
 - Resurrecting now also properly reset positive statuses: protect, rune protect, enrage, spike armor, magic bounce, reflect and Pokérus
 - Fossil starter portals now always offer an Eevee.

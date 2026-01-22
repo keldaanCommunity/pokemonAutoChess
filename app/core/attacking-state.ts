@@ -25,6 +25,10 @@ export default class AttackingState extends PokemonState {
       // first, try to hit the same target than previous attack
       let target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
 
+      const previousTarget =
+        pokemon.simulation.blueTeam.get(pokemon.targetEntityId) ||
+        pokemon.simulation.redTeam.get(pokemon.targetEntityId)
+
       if (pokemon.effects.has(EffectEnum.MERCILESS)) {
         const candidates = this.getTargetsAtRange(pokemon, board)
         let minLife = Infinity
@@ -38,9 +42,6 @@ export default class AttackingState extends PokemonState {
         target = this.getTargetWhenConfused(pokemon, board)
       } else if (!target || target.id !== pokemon.targetEntityId) {
         // previous target has moved, check if still at range
-        const previousTarget =
-          pokemon.simulation.blueTeam.get(pokemon.targetEntityId) ||
-          pokemon.simulation.redTeam.get(pokemon.targetEntityId)
         if (
           previousTarget &&
           previousTarget.isTargettableBy(pokemon) &&
@@ -57,7 +58,10 @@ export default class AttackingState extends PokemonState {
           // if target is no longer alive or at range, retargeting
           target = this.getNearestTargetAtRange(pokemon, board)
         }
-      }
+      } else if (previousTarget && previousTarget.isTargettableBy(pokemon) === false) {
+        // previous target is no longer targettable, retargeting
+        target = this.getNearestTargetAtRange(pokemon, board)
+      } 
 
       // no target at range, changing to moving state
       if (!target || pokemon.status.charm) {
@@ -65,12 +69,7 @@ export default class AttackingState extends PokemonState {
         if (targetAtSight) {
           pokemon.toMovingState()
         }
-      } else if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
-        // CAST ABILITY
-        castAbility(pokemon.skill, pokemon, board, target)
       } else {
-        // BASIC ATTACK
-        pokemon.count.attackCount++
         pokemon.targetX = target.positionX
         pokemon.targetY = target.positionY
         pokemon.targetEntityId = target.id
@@ -83,15 +82,22 @@ export default class AttackingState extends PokemonState {
           target
         )
 
-        const { delayBeforeShoot, travelTime } = getAttackTimings(pokemon)
-        pokemon.commands.push(
-          new AttackCommand(
-            delayBeforeShoot + travelTime,
-            pokemon,
-            target,
-            board
+        if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
+          // CAST ABILITY
+          castAbility(pokemon.skill, pokemon, board, target)
+        } else {
+          // BASIC ATTACK
+          pokemon.count.attackCount++
+          const { delayBeforeShoot, travelTime } = getAttackTimings(pokemon)
+          pokemon.commands.push(
+            new AttackCommand(
+              delayBeforeShoot + travelTime,
+              pokemon,
+              target,
+              board
+            )
           )
-        )
+        }
       }
     } else {
       pokemon.cooldown = Math.max(0, pokemon.cooldown - dt)
