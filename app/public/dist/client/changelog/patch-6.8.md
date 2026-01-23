@@ -235,6 +235,7 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 - Collection shards can now be used to buy any alternative form of a Pokémon.
 - All the existing shards you had on an alternative form will be attributed to the base form.
 - Pokéguesser now accepts any alternative form of the Pokémon to guess as a correct answer.
+- Titles Collector and Duke accept any alternative form of the Pokémon to count towards their total.
 - Silvally now has 18 alternative forms based on its first synergy item given at evolution.
 - Arceus now has 18 alternative forms based on its first synergy given.
 - Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
