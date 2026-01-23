@@ -9631,13 +9631,11 @@ export class HeavySlamStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     if (pokemon.maxHP > target.maxHP) {
       damage = Math.round(
         damage * (1 + (0.5 * (pokemon.maxHP - target.maxHP)) / target.maxHP)
       )
     }
-    pokemon.addShield(shield, pokemon, 0, false)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
       .forEach((cell) => {
@@ -15882,6 +15880,22 @@ export class ElectrifyStrategy extends AbilityStrategy {
   }
 }
 
+export class WaveSplashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL
+    const shieldAmount = Math.round(pokemon.maxHP * 0.2)
+    pokemon.addShield(shieldAmount, pokemon, 1, crit)
+    const damage = Math.round(pokemon.maxHP * 0.2)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16412,7 +16426,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWDER]: new PowderStrategy(),
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
   [Ability.RAGING_BULL]: new RagingBullStrategy(),
-  [Ability.ELECTRIFY]: new ElectrifyStrategy()
+  [Ability.ELECTRIFY]: new ElectrifyStrategy(),
+  [Ability.WAVE_SPLASH]: new WaveSplashStrategy()
 }
 
 export function castAbility(

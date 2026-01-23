@@ -3857,7 +3857,7 @@ export class Piplup extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.METAL_CLAW
+  skill = Ability.WAVE_SPLASH
 }
 
 export class Prinplup extends Pokemon {
@@ -3872,7 +3872,7 @@ export class Prinplup extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.METAL_CLAW
+  skill = Ability.WAVE_SPLASH
 }
 
 export class Empoleon extends Pokemon {
@@ -3886,7 +3886,7 @@ export class Empoleon extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.METAL_CLAW
+  skill = Ability.WAVE_SPLASH
 }
 
 export class Chimchar extends Pokemon {

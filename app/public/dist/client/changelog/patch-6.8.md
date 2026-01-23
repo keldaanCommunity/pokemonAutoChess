@@ -58,6 +58,10 @@
 - New ability for Scizor: Bullet Punch
 - Mothim is now sold for 3 GOLD instead of 6
 - Paldean Wooper is now exclusive to POISON regions
+- Heavy Slam (Aron line) no longer gives Shield to user.
+- New ability for Piplup line: Wave Splash: User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL
+
+> You might want to put a crown on the head of kings and emperors
 
 ## Buffs
 
