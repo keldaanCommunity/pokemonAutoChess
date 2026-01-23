@@ -12667,7 +12667,7 @@ export class Bidoof extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BIBAREL
-  hp = 65
+  hp = 70
   atk = 7
   speed = 48
   def = 4
@@ -12682,7 +12682,7 @@ export class Bibarel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.AQUATIC])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 140
+  hp = 150
   atk = 16
   speed = 48
   def = 6
