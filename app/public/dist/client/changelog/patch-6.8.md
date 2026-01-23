@@ -179,6 +179,7 @@
 - Hard Stone is replaced by PROTECTOR. No change to the effect.
 - Tiny mushroom is replaced by SHED_SHELL. No change to the effect.
 - Replace TM Brick Break with TM Return: deal 20/40/80 SPECIAL, then gain 2 AP permanently.
+- All craftable synergy stones base stats have been doubled.
 
 ## Item reworks
 
