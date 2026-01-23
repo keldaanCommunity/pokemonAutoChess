@@ -2719,22 +2719,24 @@ export class FlameThrowerStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
 
-    effectInOrientation(board, pokemon, target, (cell) => {
-      if (
-        cell.value != null &&
-        cell.value.team != pokemon.team &&
-        distanceC(cell.x, cell.y, pokemon.positionX, pokemon.positionY) <= 3
-      ) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        cell.value.status.triggerBurn(4000, cell.value, pokemon)
-      }
-    })
+    effectInOrientation(
+      board,
+      pokemon,
+      target,
+      (cell) => {
+        if (cell.value != null && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          cell.value.status.triggerBurn(4000, cell.value, pokemon)
+        }
+      },
+      3
+    )
   }
 }
 
@@ -3915,22 +3917,23 @@ export class DragonBreathStrategy extends AbilityStrategy {
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const maxRange = pokemon.range + 1
 
-    effectInOrientation(board, pokemon, target, (cell) => {
-      if (
-        cell.value != null &&
-        cell.value.team !== pokemon.team &&
-        distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) <=
-          maxRange
-      ) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    effectInOrientation(
+      board,
+      pokemon,
+      target,
+      (cell) => {
+        if (cell.value != null && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      },
+      maxRange
+    )
   }
 }
 

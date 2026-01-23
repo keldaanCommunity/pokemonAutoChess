@@ -1,6 +1,7 @@
 import { Board, Cell } from "../core/board"
 import { PokemonEntity } from "../core/pokemon-entity"
 import { Orientation } from "../types/enum/Game"
+import { distanceC } from "./distance"
 
 export const OrientationVector: Record<Orientation, [number, number]> = {
   [Orientation.UP]: [0, 1],
@@ -39,7 +40,8 @@ export function effectInOrientation(
   board: Board,
   pokemon: PokemonEntity,
   target: PokemonEntity | Orientation,
-  effect: (cell: Cell) => void
+  effect: (cell: Cell) => void,
+  maxRange?: number
 ) {
   const orientation: Orientation =
     target instanceof PokemonEntity
@@ -56,6 +58,12 @@ export function effectInOrientation(
   const targetsHit = new Set()
 
   const applyEffect = (x: number, y: number) => {
+    if (maxRange != null) {
+      const distance = distanceC(x, y, pokemon.positionX, pokemon.positionY)
+      if (distance > maxRange) {
+        return
+      }
+    }
     const value = board.getEntityOnCell(x, y)
     if (value != null && value.team !== pokemon.team) {
       targetsHit.add(value)
