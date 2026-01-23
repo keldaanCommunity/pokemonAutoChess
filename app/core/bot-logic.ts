@@ -260,9 +260,7 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
     .filter(removeUniqueThatEvolveToLegendary)
 
   const additionalUncommon = team.filter(
-    (p) =>
-      p.additional &&
-      (p.rarity === Rarity.UNCOMMON || p.rarity === Rarity.COMMON) // TEMP: common add picks should be moved to uncommon
+    (p) => p.additional && p.rarity === Rarity.UNCOMMON
   )
   const additionalRare = team.filter(
     (p) => p.additional && p.rarity === Rarity.RARE
