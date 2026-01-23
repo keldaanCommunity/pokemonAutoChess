@@ -8,10 +8,12 @@ import {
   ALLOWED_GAME_RECONNECTION_TIME,
   EventPointsPerRank,
   ExpPlace,
+  getBaseAltForm,
   LegendaryPool,
   MAX_EVENT_POINTS,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
+  PkmAltFormsByPkm,
   PortalCarouselStages,
   UniquePool
 } from "../config"
@@ -1024,10 +1026,17 @@ export default class GameRoom extends Room<GameState> {
         Object.values(Pkm)
           .filter((p) => NonPkm.includes(p) === false)
           .every((pkm) => {
-            const pokemonCollectionItem = usr.pokemonCollection.get(
-              PkmIndex[pkm]
-            )
-            return pokemonCollectionItem && pokemonCollectionItem.played > 0
+            const baseForm = getBaseAltForm(pkm)
+            const accepted: Pkm[] =
+              baseForm in PkmAltFormsByPkm
+                ? [baseForm, ...PkmAltFormsByPkm[baseForm]]
+                : [baseForm]
+            return accepted.some((form) => {
+              const pokemonCollectionItem = usr.pokemonCollection.get(
+                PkmIndex[form]
+              )
+              return pokemonCollectionItem && pokemonCollectionItem.played > 0
+            })
           })
       ) {
         player.titles.add(Title.COLLECTOR)
@@ -1361,7 +1370,13 @@ export default class GameRoom extends Room<GameState> {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    const wanderer = new Wanderer({ id, pkm, type, behavior, shiny: chance(0.01) })
+    const wanderer = new Wanderer({
+      id,
+      pkm,
+      type,
+      behavior,
+      shiny: chance(0.01)
+    })
     player.wanderers.set(id, wanderer)
   }
 }

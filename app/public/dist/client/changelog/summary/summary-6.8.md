@@ -22,6 +22,7 @@
 ![Dubwool](/assets/portraits/0832/Normal.png)
 ![Yamper](/assets/portraits/0835/Normal.png)
 ![Boltund](/assets/portraits/0836/Normal.png)
+![Great Tusk](/assets/portraits/0984/Normal.png)
 
 ## Put on your bandanas
 
