@@ -5192,7 +5192,6 @@ export class DizzyPunchStrategy extends AbilityStrategy {
   }
 }
 
-
 export class TripleKickStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -15846,6 +15845,43 @@ export class RagingBullStrategy extends AbilityStrategy {
   }
 }
 
+export class ElectrifyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD.
+    super.process(pokemon, board, target, crit)
+    const nonElectricAllies = board.cells.filter(
+      (entity) =>
+        entity &&
+        entity.team === pokemon.team &&
+        entity.id !== pokemon.id &&
+        entity.types.has(Synergy.ELECTRIC) === false &&
+        entity.status.electricField !== true
+    ) as PokemonEntity[]
+    const strongestAlly = getStrongestUnit(nonElectricAllies)
+    const buffedUnit = strongestAlly ?? pokemon //  If no ally is found, self-cast instead.
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
+    buffedUnit.status.addElectricField(buffedUnit)
+    buffedUnit.addShield(shield, pokemon, 1, crit)
+    if (buffedUnit.types.has(Synergy.ELECTRIC) === false) {
+      buffedUnit.types.add(Synergy.ELECTRIC)
+      pokemon.simulation.applySynergyEffects(buffedUnit, Synergy.ELECTRIC)
+      if (pokemon.player) {
+        const nbCellBatteries = values(pokemon.player.items).filter(
+          (item) => item === Item.CELL_BATTERY
+        ).length
+        if (nbCellBatteries > 0) {
+          buffedUnit.addSpeed(2 * nbCellBatteries, pokemon, 0, false)
+        }
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16375,7 +16411,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWDER_SNOW]: new PowderSnowStrategy(),
   [Ability.POWDER]: new PowderStrategy(),
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
-  [Ability.RAGING_BULL]: new RagingBullStrategy()
+  [Ability.RAGING_BULL]: new RagingBullStrategy(),
+  [Ability.ELECTRIFY]: new ElectrifyStrategy()
 }
 
 export function castAbility(

@@ -548,7 +548,8 @@
 		"POWDER_SNOW": "Powder Snow",
 		"POWDER": "Powder",
 		"LINGERING_AROMA": "Lingering Aroma",
-		"RAGING_BULL": "Raging Bull"
+		"RAGING_BULL": "Raging Bull",
+		"ELECTRIFY": "Electrify"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1698,7 +1699,9 @@
 		"OINKOLOGNE_MALE": "Oinkologne ♂",
 		"OINKOLOGNE_FEMALE": "Oinkologne ♀",
 		"WOOLOO": "Wooloo",
-		"DUBWOOL": "Dubwool"
+		"DUBWOOL": "Dubwool",
+		"YAMPER": "Yamper",
+		"BOLTUND": "Boltund"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2226,7 +2229,8 @@
 		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.",
 		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds.",
 		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] SPECIAL and lose 5 PP.",
-		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target"
+		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target",
+		"ELECTRIFY": "Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD. If no ally is found, self-cast instead."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

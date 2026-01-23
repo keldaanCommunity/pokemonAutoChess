@@ -478,7 +478,7 @@ export class Manectric extends Pokemon {
   stars = 2
   //evolution = Pkm.MEGA_MANECTRIC
   hp = 160
-  atk = 12
+  atk = 14
   speed = 70
   def = 8
   speDef = 8
@@ -20148,6 +20148,37 @@ export class Dubwool extends Pokemon {
   additional = true
 }
 
+export class Yamper extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BOLTUND
+  hp = 60
+  atk = 6
+  speed = 77
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ELECTRIFY
+  additional = true
+}
+
+export class Boltund extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 130
+  atk = 14
+  speed = 77
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.ELECTRIFY
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21303,7 +21334,9 @@ export const PokemonClasses: Record<
   [Pkm.OINKOLOGNE_MALE]: OinkologneMale,
   //[Pkm.OINKOLOGNE_FEMALE]: OinkologneFemale,
   [Pkm.WOOLOO]: Wooloo,
-  [Pkm.DUBWOOL]: Dubwool
+  [Pkm.DUBWOOL]: Dubwool,
+  [Pkm.YAMPER]: Yamper,
+  [Pkm.BOLTUND]: Boltund
 }
 
 // declare all the classes in colyseus schema TypeRegistry
