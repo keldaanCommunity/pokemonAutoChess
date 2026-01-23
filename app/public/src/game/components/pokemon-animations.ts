@@ -7805,5 +7805,18 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE,
     shinyUnavailable: true
+  },
+  [Pkm.YAMPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_MELEE
+  },
+  [Pkm.BOLTUND]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_MELEE,
+    shinyUnavailable: true
   }
 }

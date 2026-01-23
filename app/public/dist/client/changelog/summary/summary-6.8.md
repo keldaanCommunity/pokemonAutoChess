@@ -20,6 +20,8 @@
 ![Tauros Aqua Breed](/assets/portraits/0128/0003/Normal.png)
 ![Wooloo](/assets/portraits/0831/Normal.png)
 ![Dubwool](/assets/portraits/0832/Normal.png)
+![Yamper](/assets/portraits/0835/Normal.png)
+![Boltund](/assets/portraits/0836/Normal.png)
 
 ## Put on your bandanas
 

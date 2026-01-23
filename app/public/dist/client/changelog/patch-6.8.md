@@ -16,6 +16,8 @@
 - Tauros Aqua Breed
 - Wooloo
 - Dubwool
+- Yamper
+- Boltund
 
 # Changes to Pokemon & Abilities
 
@@ -77,6 +79,7 @@
 - Buff Screamtail: HP 190 → 210
 - Buff Groudon: ATK 18 → 20
 - Buff Duskull line: HP 70/150/240 → 70/140/220 , DEF and SPE_DEF: 2/2/2 → 4/7/12
+- Buff Manectric: Attack 12 → 14
 - Icicle missile (Vanillite) travels faster: 1.5 second → 1 second
 
 ## Nerfs
