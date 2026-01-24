@@ -2719,22 +2719,24 @@ export class FlameThrowerStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
 
-    effectInOrientation(board, pokemon, target, (cell) => {
-      if (
-        cell.value != null &&
-        cell.value.team != pokemon.team &&
-        distanceC(cell.x, cell.y, pokemon.positionX, pokemon.positionY) <= 3
-      ) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        cell.value.status.triggerBurn(4000, cell.value, pokemon)
-      }
-    })
+    effectInOrientation(
+      board,
+      pokemon,
+      target,
+      (cell) => {
+        if (cell.value != null && cell.value.team != pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          cell.value.status.triggerBurn(4000, cell.value, pokemon)
+        }
+      },
+      3
+    )
   }
 }
 
@@ -3915,22 +3917,23 @@ export class DragonBreathStrategy extends AbilityStrategy {
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const maxRange = pokemon.range + 1
 
-    effectInOrientation(board, pokemon, target, (cell) => {
-      if (
-        cell.value != null &&
-        cell.value.team !== pokemon.team &&
-        distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) <=
-          maxRange
-      ) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    effectInOrientation(
+      board,
+      pokemon,
+      target,
+      (cell) => {
+        if (cell.value != null && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      },
+      maxRange
+    )
   }
 }
 
@@ -5075,7 +5078,7 @@ export class PlasmaFistStrategy extends AbilityStrategy {
       crit
     )
     if (takenDamage > 0) {
-      pokemon.handleHeal(Math.round(takenDamage * 0.3), pokemon, 0, crit)
+      pokemon.handleHeal(Math.round(takenDamage * 0.3), pokemon, 0, false)
     }
   }
 }
@@ -5191,7 +5194,6 @@ export class DizzyPunchStrategy extends AbilityStrategy {
     target.status.triggerConfusion(3000, target, pokemon)
   }
 }
-
 
 export class TripleKickStrategy extends AbilityStrategy {
   process(
@@ -9632,13 +9634,11 @@ export class HeavySlamStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     if (pokemon.maxHP > target.maxHP) {
       damage = Math.round(
         damage * (1 + (0.5 * (pokemon.maxHP - target.maxHP)) / target.maxHP)
       )
     }
-    pokemon.addShield(shield, pokemon, 0, false)
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
       .forEach((cell) => {
@@ -15846,6 +15846,59 @@ export class RagingBullStrategy extends AbilityStrategy {
   }
 }
 
+export class ElectrifyStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD.
+    super.process(pokemon, board, target, crit)
+    const nonElectricAllies = board.cells.filter(
+      (entity) =>
+        entity &&
+        entity.team === pokemon.team &&
+        entity.id !== pokemon.id &&
+        entity.types.has(Synergy.ELECTRIC) === false &&
+        entity.status.electricField !== true
+    ) as PokemonEntity[]
+    const strongestAlly = getStrongestUnit(nonElectricAllies)
+    const buffedUnit = strongestAlly ?? pokemon //  If no ally is found, self-cast instead.
+    const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
+    buffedUnit.status.addElectricField(buffedUnit)
+    buffedUnit.addShield(shield, pokemon, 1, crit)
+    if (buffedUnit.types.has(Synergy.ELECTRIC) === false) {
+      buffedUnit.types.add(Synergy.ELECTRIC)
+      pokemon.simulation.applySynergyEffects(buffedUnit, Synergy.ELECTRIC)
+      if (pokemon.player) {
+        const nbCellBatteries = values(pokemon.player.items).filter(
+          (item) => item === Item.CELL_BATTERY
+        ).length
+        if (nbCellBatteries > 0) {
+          buffedUnit.addSpeed(2 * nbCellBatteries, pokemon, 0, false)
+        }
+      }
+    }
+  }
+}
+
+export class WaveSplashStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL
+    const shieldAmount = Math.round(pokemon.maxHP * 0.2)
+    pokemon.addShield(shieldAmount, pokemon, 1, crit)
+    const damage = Math.round(pokemon.maxHP * 0.2)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16375,7 +16428,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POWDER_SNOW]: new PowderSnowStrategy(),
   [Ability.POWDER]: new PowderStrategy(),
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
-  [Ability.RAGING_BULL]: new RagingBullStrategy()
+  [Ability.RAGING_BULL]: new RagingBullStrategy(),
+  [Ability.ELECTRIFY]: new ElectrifyStrategy(),
+  [Ability.WAVE_SPLASH]: new WaveSplashStrategy()
 }
 
 export function castAbility(

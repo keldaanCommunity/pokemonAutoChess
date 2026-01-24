@@ -548,7 +548,9 @@
 		"POWDER_SNOW": "Powder Snow",
 		"POWDER": "Powder",
 		"LINGERING_AROMA": "Lingering Aroma",
-		"RAGING_BULL": "Raging Bull"
+		"RAGING_BULL": "Raging Bull",
+		"ELECTRIFY": "Electrify",
+		"WAVE_SPLASH": "Wave Splash"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1652,8 +1654,8 @@
 		"BASCULIN_RED": "Basculin (Red Stripes)",
 		"BASCULIN_BLUE": "Basculin (Blue Stripes)",
 		"BASCULIN_WHITE": "Basculin (White Stripes)",
-		"BASCULEGION_MALE": "Basculegion (♂)",
-		"BASCULEGION_FEMALE": "Basculegion (♀)",
+		"BASCULEGION_MALE": "Basculegion ♂",
+		"BASCULEGION_FEMALE": "Basculegion ♀",
 		"WIGLETT": "Wiglett",
 		"WUGTRIO": "Wugtrio",
 		"FLUTTER_MANE": "Flutter Mane",
@@ -1698,7 +1700,9 @@
 		"OINKOLOGNE_MALE": "Oinkologne ♂",
 		"OINKOLOGNE_FEMALE": "Oinkologne ♀",
 		"WOOLOO": "Wooloo",
-		"DUBWOOL": "Dubwool"
+		"DUBWOOL": "Dubwool",
+		"YAMPER": "Yamper",
+		"BOLTUND": "Boltund"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2051,7 +2055,7 @@
 		"POWER_WHIP": "Unleash a giant vine toward the target, dealing [15,30,60,SP] + [30,SP]% of user's current HP as SPECIAL.",
 		"DARK_HARVEST": "Teleport into the largest group of enemy Pokémon. Inflict the user with SILENCE for 3 seconds and drain the HP of ADJACENT enemy Pokémon, dealing [5,10,20,SP] SPECIAL per second and heal for 30% of the damage dealt.",
 		"PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. If target has no more PP, the amount of unburned PP is dealt as SPECIAL.",
-		"HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to ADJACENT opponents and gain [15,30,60] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
+		"HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to ADJACENT opponents. The more max HP the user has than the target, the greater the ability's power.",
 		"RAPID_SPIN": "Deal [20,50,SP] SPECIAL and gain [50,SP]% of ATK as DEF and SPE_DEF",
 		"BOUNCE": "Bounce [1,2,3] times to the farthest enemy Pokémon, dealing [10,20,30,SP] SPECIAL to all ADJACENT enemy Pokémon each time.",
 		"BLOOD_MOON": "Ursaluna concentrates all their energy into the blood-red moon on their forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and applying WOUND for 3 seconds to all enemy Pokémon hit.",
@@ -2226,7 +2230,9 @@
 		"POWDER_SNOW": "A snow mist is blown towards the target, dealing [20,40,80,SP] SPECIAL to all enemies in a line with [15,30,50,LK]% chance to FREEZE them for 2 seconds.",
 		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds.",
 		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] SPECIAL and lose 5 PP.",
-		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target"
+		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target",
+		"ELECTRIFY": "Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD. If no ally is found, self-cast instead.",
+		"WAVE_SPLASH": "User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3009,7 +3015,7 @@
 		"BIG_NUGGET": "A big gold nugget. +10 GOLD when obtained.",
 		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
 		"RECYCLE_TICKET": "Recycle a crafted item on bench or the crafted items held by a Pokémon into their base components. Single use.",
-		"TREASURE_BOX": "You wonder what's inside.",
+		"TREASURE_BOX": "You wonder what's inside. It will open once you have 40 HP or less.",
 		"AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",
 		"MALICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.",
 		"RUSTED_SWORD": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints.",
@@ -3321,7 +3327,7 @@
 		"ARMOR_BREAK": "Reduce the effectiveness of DEF & SPE_DEF by 50%",
 		"CHARM": "Prevents attacking the target and forces to get closer to it",
 		"FLINCH": "50% of incoming damage bypass SHIELD",
-		"CURSE": "KOs the cursed Pokémon after some time",
+		"CURSE": "KOs the cursed Pokémon after some time. Applying curse on an already cursed Pokémon triggers KO immediately.",
 		"RUNE_PROTECT": "Protects from status alterations",
 		"POSSESSED": "Fight for the other team temporarily. Becomes CHARM if the target is the only enemy remaining",
 		"LOCKED": "Prevents moving and dodging and sets RANGE to 1",
@@ -4374,7 +4380,8 @@
 		"good_job": "Good job !",
 		"here_are_your_reward": "Here are your reward:\n{{reward}}",
 		"magnemite": "Have you seen the fugitive ?",
-		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know."
+		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know.",
+		"xatu": "Let me open this treasure box for you..."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Everyone is here !",
@@ -4422,7 +4429,7 @@
 		"KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
 		"CHANSEY": "Chansey sells EGG_FOR_SELL for {{cost}} GOLD",
 		"ELECTIVIRE": "Electivire sells tools for {{cost}} GOLD",
-		"XATU": "Xatu sells a TREASURE_BOX containing 2 random item components for {{cost}} GOLD",
+		"XATU": "Xatu gives a TREASURE_BOX to all players. You wonder what's inside.",
 		"KANGASKHAN": "Kangashkhan sells complete craftable items for {{cost}} GOLD",
 		"DUSKULL": "Duskull proposes coins that increase your long term money income",
 		"MEOWTH": "Meowth proposes AMULET_COIN that let you earn GOLD from kills but reduce your max interest",
@@ -4549,7 +4556,7 @@
 	},
 	"enemy_team": "Enemy Team",
 	"pokemon": "Pokémon",
-	"type_fluid" :"Type-Fluid",
+	"type_fluid": "Type-Fluid",
 	"marowak_items": "Items (Marowak encounter)",
 	"stat_boosts": "Stat Boosts",
 	"rewards": "Rewards",

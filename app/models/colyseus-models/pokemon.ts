@@ -478,7 +478,7 @@ export class Manectric extends Pokemon {
   stars = 2
   //evolution = Pkm.MEGA_MANECTRIC
   hp = 160
-  atk = 12
+  atk = 14
   speed = 70
   def = 8
   speDef = 8
@@ -3340,8 +3340,8 @@ export class Duskull extends Pokemon {
   hp = 70
   atk = 6
   speed = 39
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 2
   skill = Ability.SHADOW_BALL
@@ -3352,11 +3352,11 @@ export class Dusclops extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.DUSKNOIR
-  hp = 150
+  hp = 140
   atk = 12
   speed = 39
-  def = 2
-  speDef = 2
+  def = 7
+  speDef = 7
   maxPP = 100
   range = 2
   skill = Ability.SHADOW_BALL
@@ -3366,11 +3366,11 @@ export class Dusknoir extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 240
+  hp = 220
   atk = 26
   speed = 39
-  def = 2
-  speDef = 2
+  def = 12
+  speDef = 12
   maxPP = 100
   range = 2
   skill = Ability.SHADOW_BALL
@@ -3857,7 +3857,7 @@ export class Piplup extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.METAL_CLAW
+  skill = Ability.WAVE_SPLASH
 }
 
 export class Prinplup extends Pokemon {
@@ -3872,7 +3872,7 @@ export class Prinplup extends Pokemon {
   speDef = 8
   maxPP = 100
   range = 1
-  skill = Ability.METAL_CLAW
+  skill = Ability.WAVE_SPLASH
 }
 
 export class Empoleon extends Pokemon {
@@ -3886,7 +3886,7 @@ export class Empoleon extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.METAL_CLAW
+  skill = Ability.WAVE_SPLASH
 }
 
 export class Chimchar extends Pokemon {
@@ -6038,7 +6038,7 @@ export class Groudon extends Pokemon {
   evolution = Pkm.PRIMAL_GROUDON
   evolutionRule = new ItemEvolutionRule([Item.RED_ORB])
   hp = 300
-  atk = 18
+  atk = 20
   speed = 54
   def = 10
   speDef = 6
@@ -6280,7 +6280,7 @@ export class Larvesta extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_DANCE
-  additional = true
+  regional = true
 }
 
 export class Volcarona extends Pokemon {
@@ -6295,7 +6295,7 @@ export class Volcarona extends Pokemon {
   maxPP = 100
   range = 3
   skill = Ability.FIERY_DANCE
-  additional = true
+  regional = true
 }
 
 export class Chatot extends Pokemon {
@@ -12667,7 +12667,7 @@ export class Bidoof extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.BIBAREL
-  hp = 65
+  hp = 70
   atk = 7
   speed = 48
   def = 4
@@ -12682,7 +12682,7 @@ export class Bibarel extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.AQUATIC])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 140
+  hp = 150
   atk = 16
   speed = 48
   def = 6
@@ -20148,6 +20148,37 @@ export class Dubwool extends Pokemon {
   additional = true
 }
 
+export class Yamper extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.BOLTUND
+  hp = 60
+  atk = 6
+  speed = 77
+  def = 3
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.ELECTRIFY
+  additional = true
+}
+
+export class Boltund extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 130
+  atk = 14
+  speed = 77
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.ELECTRIFY
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21303,7 +21334,9 @@ export const PokemonClasses: Record<
   [Pkm.OINKOLOGNE_MALE]: OinkologneMale,
   //[Pkm.OINKOLOGNE_FEMALE]: OinkologneFemale,
   [Pkm.WOOLOO]: Wooloo,
-  [Pkm.DUBWOOL]: Dubwool
+  [Pkm.DUBWOOL]: Dubwool,
+  [Pkm.YAMPER]: Yamper,
+  [Pkm.BOLTUND]: Boltund
 }
 
 // declare all the classes in colyseus schema TypeRegistry

@@ -897,6 +897,5 @@
 		"move_row_up": "Przesuń wiersz w góre",
 		"move_row_down": "Przesuń wiersz w dół",
 		"delete_row": "Usuń wiersz"
-	},
-	"classic": "Klasyczny"
+	}
 }

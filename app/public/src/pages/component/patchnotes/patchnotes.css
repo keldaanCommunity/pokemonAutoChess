@@ -26,10 +26,25 @@
   border-bottom: 2px solid #80808080;
 }
 
-.patchnotes .modal-body blockquote {
+.patchnotes .modal-body blockquote:first-child {
   float: right;
   color: #ccc;
   margin: 0;
+}
+
+.patchnotes .modal-body blockquote:not(:first-child) {
+  padding: 0.5rem 1rem;
+  font-style: italic;
+  color: #ddd;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+
+.patchnotes .modal-body blockquote:not(:first-child) p::before {
+  content: "“ ";
+}
+.patchnotes .modal-body blockquote:not(:first-child) p::after {
+  content: " ”";
 }
 
 .patchnotes .modal-body hr {

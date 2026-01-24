@@ -9,6 +9,7 @@ import {
 import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
+import { PokemonAnimations } from "../public/src/game/components/pokemon-animations"
 import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
 import { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
@@ -28,6 +29,7 @@ export function createBooster(user: IUserMetadataMongo): Booster {
   const NB_PER_BOOSTER = 10
   const boosterContent: BoosterCard[] = []
   const alreadyTaken = new Set<string>()
+  const godPack = chance(1 / 1000)
 
   for (let i = 0; i < NB_PER_BOOSTER; i++) {
     const guaranteedUnique = i === NB_PER_BOOSTER - 1
@@ -36,7 +38,7 @@ export function createBooster(user: IUserMetadataMongo): Booster {
     const maxAttempts = 50 // Prevent infinite loops
 
     do {
-      card = pickRandomPokemonBooster(user, guaranteedUnique)
+      card = pickRandomPokemonBooster(user, guaranteedUnique, godPack)
       attempts++
     } while (
       attempts < maxAttempts &&
@@ -53,14 +55,15 @@ export function createBooster(user: IUserMetadataMongo): Booster {
 
 export function pickRandomPokemonBooster(
   user: IUserMetadataMongo,
-  guaranteedUnique: boolean
+  guaranteedUnique: boolean,
+  godPack: boolean
 ): BoosterCard {
   let name = Pkm.MAGIKARP
   const rarities = Object.keys(Rarity) as Rarity[]
   const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
   let threshold = 0
 
-  if (guaranteedUnique) {
+  if (godPack || guaranteedUnique) {
     name = pickRandomIn([
       ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
       ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
@@ -86,7 +89,9 @@ export function pickRandomPokemonBooster(
     }
   }
 
-  const shiny = chance(0.05)
+  const shiny =
+    (godPack || chance(0.05)) &&
+    PokemonAnimations[name]?.shinyUnavailable !== true
 
   if (name in PkmAltFormsByPkm) {
     // If the selected Pokemon has alt forms, pick one of them randomly
@@ -94,13 +99,27 @@ export function pickRandomPokemonBooster(
   }
 
   const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
-  const emotion =
+  let emotion =
     randomWeighted<Emotion>(
       availableEmotions.reduce(
         (o, e) => ({ ...o, [e]: 1 / EmotionCost[e] }),
         {}
       )
     ) ?? Emotion.NORMAL
+
+  if (godPack) {
+    const emotionsNotUnlocked = availableEmotions.filter(
+      (emotion) =>
+        !CollectionUtils.hasUnlockedCustom(user.pokemonCollection, {
+          name,
+          shiny,
+          emotion
+        })
+    )
+    if (emotionsNotUnlocked.length > 0) {
+      emotion = pickRandomIn(emotionsNotUnlocked)
+    }
+  }
 
   const hasAlreadyUnlocked = CollectionUtils.hasUnlockedCustom(
     user.pokemonCollection,

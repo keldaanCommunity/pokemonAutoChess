@@ -5,7 +5,13 @@ import {
   SetSchema,
   type
 } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_WIDTH, StageDuration } from "../../config"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  getTreasureBoxReward,
+  StageDuration,
+  TreasureBoxReward
+} from "../../config"
 import BotManager from "../../core/bot-manager"
 import Simulation from "../../core/simulation"
 import { FloatingItem } from "../../models/colyseus-models/floating-item"
@@ -61,6 +67,7 @@ export default class GameState extends Schema {
   minRank: EloRank | null = null
   maxRank: EloRank | null = null
   outlawStage: number | null = null
+  treasureBoxRewardGiven: TreasureBoxReward = getTreasureBoxReward()
 
   constructor(
     preparationId: string,

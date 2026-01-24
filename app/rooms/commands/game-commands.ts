@@ -22,6 +22,7 @@ import {
   SHINY_UNOWN_ENCOUNTER_CHANCE,
   StageDuration,
   SynergyTriggers,
+  TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
 import {
@@ -82,6 +83,7 @@ import {
   ItemsSoldAtTown,
   Mulches,
   ShinyItems,
+  Sweets,
   SynergyGems,
   SynergyGivenByGem,
   SynergyGivenByItem,
@@ -1414,6 +1416,64 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.life > 2
     ) {
       player.items.push(Item.FIRE_SHARD)
+    }
+
+    if (
+      player.items.includes(Item.TREASURE_BOX) &&
+      player.life <= TREASURE_BOX_LIFE_THRESHOLD
+    ) {
+      removeInArray(player.items, Item.TREASURE_BOX)
+
+      let rewards: Item[] = []
+      let rewardsIcons: Item[] = []
+      switch (this.state.treasureBoxRewardGiven) {
+        case "sweets":
+          rewardsIcons = [Item.SWEETS]
+          rewards = pickNRandomIn(Sweets, 5)
+          break
+        case "itemComponents":
+          rewards = pickNRandomIn(ItemComponents, 4)
+          break
+        case "componentsAndTickets":
+          rewards = [
+            ...pickNRandomIn(ItemComponents, 2),
+            Item.RECYCLE_TICKET,
+            Item.EXCHANGE_TICKET
+          ]
+          break
+        case "craftableItems":
+          rewards = pickNRandomIn(CraftableItems, 2)
+          break
+        case "mushrooms":
+          rewardsIcons = [Item.MUSHROOMS]
+          rewards = [Item.TINY_MUSHROOM, Item.BIG_MUSHROOM, Item.BALM_MUSHROOM]
+          break
+        case "goldBow":
+          rewards = [Item.GOLD_BOW]
+          break
+        case "gold":
+        default:
+          rewards = [Item.BIG_NUGGET]
+          break
+      }
+
+      const id = nanoid()
+      const wanderer = new Wanderer({
+        id,
+        pkm: Pkm.XATU,
+        shiny: false,
+        type: WandererType.DIALOG,
+        behavior: WandererBehavior.SPECTATE,
+        data: (rewardsIcons ?? rewards).join(";")
+      })
+      player.wanderers.set(id, wanderer)
+      setTimeout(() => {
+        if (rewards[0] === Item.BIG_NUGGET) {
+          player.addMoney(10, true, null)
+        } else {
+          player.items.push(...rewards)
+        }
+      }, 7000)
     }
 
     const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
