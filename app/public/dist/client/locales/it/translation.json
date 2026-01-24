@@ -548,7 +548,8 @@
 		"POWDER_SNOW": "Polneve",
 		"POWDER": "Pulviscoppio",
 		"LINGERING_AROMA": "Odore Tenace",
-		"RAGING_BULL": "Scatenatoro"
+		"RAGING_BULL": "Scatenatoro",
+		"ELECTRIFY": "Elettrocontagio"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
