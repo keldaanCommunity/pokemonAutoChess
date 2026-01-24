@@ -273,6 +273,15 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 - Additional bonus damage on FAIRY shocks provided by FAIRY synergy effects now applies to the shock damage, and not the incoming damage.
 - Crit damage reduction from ROCK synergy effects now applies to the final crit damage after crit power is applied, instead of before.
 
+- Added Region tracking to statistic
+- Wandering Unown now have 5% chance to be shiny, giving 250 shards on capture instead of 50. Unown encounter chance: 3.7% → 3.3%
+- New title: Poffin Master - Cook a Poffin with 3 different golden berries in it
+- New title: Top Gun - Get to Mach 10 with a Mach Ribbon
+- New title: Scout - Equip your team with at least 5 Silk Scarf made items
+- Added a new meta report section, with a cluster map and a dendrogram
+- Added a chart for pokemon report and item report, count function of average place
+- Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
+- New town encounter: Magnezone
 - Fix lazy loading of Pokémon sprites when entering a game for the second time without cache unloaded.
 
 > Sorry for making you refresh your page on every other game to get the Pokémon out of their pokéballs. The main cause should be fixed now, but other causes may still exist.

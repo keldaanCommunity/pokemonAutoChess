@@ -9,6 +9,7 @@ import { SynergyReport } from "./synergy-report"
 import { RegionReport } from "./region-report"
 import { CompositionReport } from "./composition-report"
 import { ClusterMap } from "./cluster-map"
+import { DendrogramChart } from "./dendrogram-chart"
 import "./meta-report.css"
 
 export default function MetaReport() {
@@ -22,7 +23,8 @@ export default function MetaReport() {
       <Tabs>
         <TabList>
           <Tab key="team-comps">{t("meta_report")}</Tab>
-          <Tab key="cluster-map">{t("cluster_map")}</Tab>
+          <Tab key="cluster-map">{t("cluster_map.title")}</Tab>
+          <Tab key="dendrogram">{t("dendrogram.title")}</Tab>
           <Tab key="pokemons">{t("pokemon_report")}</Tab>
           <Tab key="items">{t("item_report")}</Tab>
           <Tab key="regions">{t("region_report")}</Tab>
@@ -35,6 +37,9 @@ export default function MetaReport() {
         </TabPanel>
         <TabPanel key="cluster-map-panel">
           <ClusterMap />
+        </TabPanel>
+        <TabPanel key="dendrogram-panel">
+          <DendrogramChart />
         </TabPanel>
         <TabPanel>
           <PokemonReport />

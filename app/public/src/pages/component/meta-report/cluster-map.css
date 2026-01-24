@@ -1,23 +1,120 @@
 .cluster-map-container {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   height: 100%;
-  display: flex;
-  gap: 1em;
-  padding: 1em;
-  position: relative;
-  overflow: hidden;
+  min-height: 500px;
+  gap: 16px;
+  padding: 16px;
   box-sizing: border-box;
-  min-height: 0;
+  background-color: rgb(84, 89, 107);
+  border-radius: 8px;
 }
 
-.cluster-map-chart-wrapper {
-  flex: 1 1 0;
+.cluster-map-loading {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 400px;
+  color: #ccc;
+  font-size: 18px;
+}
+
+.cluster-map-chart-wrapper {
+  flex: 1;
   min-width: 0;
-  min-height: 0;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cluster-map-info-panel {
+  width: 280px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.cluster-map-info-panel h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.cluster-map-info-text {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.cluster-map-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.cluster-map-stats .stat-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.cluster-map-stats .stat-item label {
+  color: #888;
+}
+
+.cluster-map-stats .stat-item span {
+  color: #fff;
+}
+
+.cluster-detail-panel {
+  padding: 12px;
+  background: rgb(64, 69, 87);
+  border-radius: 6px;
+  border-left: 3px solid #4a9eff;
+}
+
+.cluster-detail-panel h4 {
+  margin: 0 0 8px 0;
+  color: #4a9eff;
+  font-size: 14px;
+}
+
+.cluster-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.cluster-stats .stat-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.cluster-stats .stat-item label {
+  color: #888;
+}
+
+.cluster-stats .stat-item span {
+  color: #fff;
 }
 
 .synergies-container {
@@ -41,19 +138,11 @@
   color: #ccc;
 }
 
-.mean-team-section {
-  margin-top: 0.5em;
-}
-
-.mean-team-label {
-  font-size: 0.9em;
-  margin: 0 0 0.5em 0;
-}
-
-.mean-team-grid {
+.pokemon-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0.5em;
+  gap: 4px;
+  margin-top: 8px;
 }
 
 .pokemon-container-item {
@@ -72,57 +161,5 @@
 
 .pokemon-frequency {
   color: #ccc;
-}
-
-.pokemon-items-container {
-  display: flex;
-  gap: 0.1em;
-  margin-top: 0.2em;
-}
-
-.pokemon-item-icon {
-  width: 12px;
-  height: 12px;
-}
-
-.cluster-info-panel-fixed {
-  width: 300px;
-  max-height: 100%;
-  overflow-y: auto;
-  background-color: rgb(84, 89, 107);
-  padding: 1em;
-  border-radius: 8px;
-  flex-shrink: 0;
-  min-height: 0;
-}
-
-.cluster-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-.cluster-info h4 {
-  margin: 0 0 0.5em 0;
-  font-size: 1em;
-}
-
-.info-stat {
-  display: flex;
-  justify-content: space-between;
-  gap: 1em;
-  font-size: 0.9em;
-}
-
-.info-stat label {
-  color: #ccc;
-  font-weight: 500;
-}
-
-.info-stat span {
-  color: #fff;
-}
-
-.hover-info {
-  opacity: 0.8;
+  font-size: 10px;
 }
