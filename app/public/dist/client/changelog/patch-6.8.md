@@ -192,7 +192,7 @@
 
 > Funny interaction between mulch and berry trees, mostly useful if you're stuck on a low FLORA for a while.
 
-- HEAT_STONE changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 ATK.
+- HEAT_ROCK changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 ATK.
 - EXPLORER_KIT is no longer obtainable from ARTIFICIAL synergy. MAGMARIZER can now be obtained from ARTIFICIAL synergy.
 
 ## Buffs and nerfs
