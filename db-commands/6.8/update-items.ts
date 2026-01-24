@@ -6,7 +6,8 @@ import { Item } from "../../app/types/enum/Item"
 import { logger } from "../../app/utils/logger"
 
 const itemsToReplace = new Map<string, Item>([
-  ["HARD_STONE", Item.PROTECTOR]
+  ["HARD_STONE", Item.PROTECTOR],
+  ["TINY_MUSHROOM", Item.SHED_SHELL]
 ])
 
 async function main() {
