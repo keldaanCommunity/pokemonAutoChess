@@ -13,41 +13,6 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import "./dendrogram-chart.css"
 
-// Synergy color mapping
-const SYNERGY_COLORS: Record<Synergy, string> = {
-  NORMAL: "#FEFEFE",
-  FIRE: "#FF9024",
-  WATER: "#2DA2FD",
-  GRASS: "#17B300",
-  ELECTRIC: "#FDFF4A",
-  ICE: "#C3E4EE",
-  FIGHTING: "#F33218",
-  POISON: "#88D7A0",
-  GROUND: "#C6964A",
-  FLYING: "#B2E9FF",
-  PSYCHIC: "#B955D2",
-  BUG: "#FFFE66",
-  ROCK: "#E7E5AF",
-  GHOST: "#876DAD",
-  DRAGON: "#B87333",
-  DARK: "#A6A6A6",
-  STEEL: "#DBDBDB",
-  FAIRY: "#FFAFD1",
-  FIELD: "#DE8A4E",
-  AQUATIC: "#14C8C8",
-  MONSTER: "#00B464",
-  AMORPHOUS: "#E5B2F4",
-  WILD: "#B22334",
-  SOUND: "#FF6095",
-  FLORA: "#FF60F1",
-  BABY: "#FFD79A",
-  HUMAN: "#FDBB8B",
-  LIGHT: "#FFF896",
-  GOURMET: "#FF8473",
-  FOSSIL: "#D2D35B",
-  ARTIFICIAL: "#EDEDED"
-}
-
 export function DendrogramChart() {
   const { t } = useTranslation()
   const [loading, setLoading] = useState<boolean>(true)
