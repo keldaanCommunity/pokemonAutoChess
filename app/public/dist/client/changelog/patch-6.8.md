@@ -184,7 +184,6 @@
 - Hard Stone is replaced by PROTECTOR. No change to the effect.
 - Tiny mushroom is replaced by SHED_SHELL. No change to the effect.
 - Replace TM Brick Break with TM Return: deal 20/40/80 SPECIAL, then gain 2 AP permanently.
-- All craftable synergy stones base stats have been doubled.
 
 ## Item reworks
 
@@ -197,6 +196,7 @@
 
 ## Buffs and nerfs
 
+- All craftable synergy stones base stats have been doubled.
 - Buff BERSERK_GENE: ATK 5 → 10
 - Buff EXPLORER_KIT: give 3 ATK, 5 DEF and 5 SPE_DEF as base stats
 - Buff ROCK_SALT: 15 → 20% of max HP as SHIELD on fight start.
