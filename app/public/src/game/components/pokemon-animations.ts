@@ -7818,5 +7818,11 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ELECTRIC_MELEE,
     shinyUnavailable: true
+  },
+  [Pkm.GREAT_TUSK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GROUND_MELEE
   }
 }

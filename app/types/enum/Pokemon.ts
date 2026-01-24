@@ -413,6 +413,7 @@ export enum Pkm {
   GRANBULL = "GRANBULL",
   GRAPPLOCT = "GRAPPLOCT",
   GRAVELER = "GRAVELER",
+  GREAT_TUSK = "GREAT_TUSK",
   GREAVARD = "GREAVARD",
   GRENINJA = "GRENINJA",
   GRIMER = "GRIMER",
@@ -2378,7 +2379,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FARIGIRAF]: "0981",
   [Pkm.DUDUNSPARCE]: "0982",
   [Pkm.KINGAMBIT]: "0983",
-  //[Pkm.GREAT_TUSK]: "0984",
+  [Pkm.GREAT_TUSK]: "0984",
   [Pkm.SCREAM_TAIL]: "0985",
   //[Pkm.BRUTE_BONNET]: "0986",
   [Pkm.FLUTTER_MANE]: "0987",
@@ -3575,7 +3576,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.WOOLOO]: Pkm.WOOLOO,
   [Pkm.DUBWOOL]: Pkm.WOOLOO,
   [Pkm.YAMPER]: Pkm.YAMPER,
-  [Pkm.BOLTUND]: Pkm.YAMPER
+  [Pkm.BOLTUND]: Pkm.YAMPER,
+  [Pkm.GREAT_TUSK]: Pkm.GREAT_TUSK
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
