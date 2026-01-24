@@ -548,7 +548,8 @@
 		"POWDER_SNOW": "Poudreuse",
 		"POWDER": "Nuée de Poudre",
 		"LINGERING_AROMA": "Odeur Tenace",
-		"RAGING_BULL": "Taurogne"
+		"RAGING_BULL": "Taurogne",
+		"ELECTRIFY": "Électrisation"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1698,7 +1699,9 @@
 		"OINKOLOGNE_MALE": "Fragroin ♂",
 		"OINKOLOGNE_FEMALE": "Fragroin ♀",
 		"WOOLOO": "Moumouton",
-		"DUBWOOL": "Moumouflon"
+		"DUBWOOL": "Moumouflon",
+		"YAMPER": "Voltoutou",
+		"BOLTUND": "Fulgudog"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2226,7 +2229,8 @@
 		"POWDER_SNOW": "De la neige poudreuse est soufflée vers la cible, infligeant [20,40,80,SP] SPECIAL à tous les ennemis alignés derrière la cible avec [15,30,50,LK]% de chances de les FREEZE pendant 2 secondes.",
 		"POWDER": "Projette un nuage de poudre sur l'ennemi avec la SPEED la plus élevée. Les ennemis touchés subissent [10,20,30,SP] SPECIAL et leur SPEED est réduite de 30 pendant 5 secondes. Les alliés récupèrent [10,20,30,SP] HP et gagnent +30 VITESSE pendant 5 secondes.",
 		"LINGERING_AROMA": "Pendant les 5 prochaines secondes, chaque attaque au corps à corps subit par le lanceur fait que l'attaquant reçoit [10,20,SP] SPECIAL et perd 5 PP.",
-		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible"
+		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible",
+		"ELECTRIFY": "Donne un ELECTRIC_FIELD à votre allié non-ELECTRIC STRONGEST et tous les effets de la synergie ELECTRIC active + [15,30,60,SP] SHIELD. Si aucun allié n'est trouvé, lance la capacité sur soit-même."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -4375,7 +4379,8 @@
 		"good_job": "Bien joué",
 		"here_are_your_reward": "Voici ta récompense :\n{{reward}}",
 		"magnemite": "Avez-vous vu le fugitif ?",
-		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés."
+		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés.",
+		"xatu": "Permettez-moi d'ouvrir ce coffre au trésor pour vous..."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Tout le monde est là !",
