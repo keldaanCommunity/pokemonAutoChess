@@ -1307,6 +1307,14 @@ export const AbilitiesAnimations: {
     scale: 3,
     destroyOnComplete: true
   }),
+  [Ability.WAVE_SPLASH]: projectile({
+    distance: 2,
+    duration: 600,
+    oriented: true,
+    rotation: -Math.PI / 2,
+    scale: 3,
+    destroyOnComplete: true
+  }),
   [Ability.RAPID_SPIN]: onTarget({ scale: 1.5 }),
   [Ability.COTTON_GUARD]: onCaster({ ability: Ability.COTTON_SPORE, scale: 3 }),
   ["FLOWER_TRICK_EXPLOSION"]: onCaster({ ability: "PUFF_PINK", scale: 3 }),

@@ -548,7 +548,8 @@
 		"POWDER_SNOW": "Poudreuse",
 		"POWDER": "Nuée de Poudre",
 		"LINGERING_AROMA": "Odeur Tenace",
-		"RAGING_BULL": "Taurogne"
+		"RAGING_BULL": "Taurogne",
+		"ELECTRIFY": "Électrisation"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1698,7 +1699,9 @@
 		"OINKOLOGNE_MALE": "Fragroin ♂",
 		"OINKOLOGNE_FEMALE": "Fragroin ♀",
 		"WOOLOO": "Moumouton",
-		"DUBWOOL": "Moumouflon"
+		"DUBWOOL": "Moumouflon",
+		"YAMPER": "Voltoutou",
+		"BOLTUND": "Fulgudog"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2051,7 +2054,7 @@
 		"POWER_WHIP": "Frappe la cible avec une liane gigantesque, infligeant [15,30,60,SP] + [30,SP]% des HP actuels du lanceur en SPECIAL.",
 		"DARK_HARVEST": "Se téléporte près du plus grand groupe de Pokémon ennemis. Pendant les 3 prochaines secondes, le lanceur subit SILENCE et draine les HP des ennemis ADJACENT, infligeant [5,10,20,SP] SPECIAL per seconde et se soignant à hauteur de 30% de SPECIAL infligés.",
 		"PSYSHOCK": "Consume [20,40,80,SP] PP de la cible et les récupère en SHIELD. Si la cible n'a plus assez de PP, la quantité de PP non consumée est infligée en SPECIAL.",
-		"HEAVY_SLAM": "Le lanceur se jette sur le sol de tout son poids, infligeant [15,30,60,SP] SPECIAL à tous les ennemis ADJACENT et gagnant [15,30,60] SHIELD. Plus le lanceur a de HP max par rapport à la cible, plus la puissance de cette capacité augmente.",
+		"HEAVY_SLAM": "Le lanceur se jette sur le sol de tout son poids, infligeant [15,30,60,SP] SPECIAL à tous les ennemis ADJACENT. Plus le lanceur a de HP max par rapport à la cible, plus la puissance de cette capacité augmente.",
 		"RAPID_SPIN": "Inflige [20,50,SP] SPECIAL et gagne [50,SP]% de son ATK en DEF et SPE_DEF.",
 		"BOUNCE": "Rebondit [1,2,3] fois jusqu'à la cible la plus éloignée, infligeant [10,20,30,SP] SPECIAL à tous les ennemis ADJACENT à chaque rebond.",
 		"BLOOD_MOON": "Concentre toute son énergie dans la Lune Vermeille sur son front, puis la projette en une ligne droite qui inflige à tous les ennemis touchés [200,SP]% de son ATK en SPECIAL et WOUND pendant 3 secondes.",
@@ -2226,7 +2229,8 @@
 		"POWDER_SNOW": "De la neige poudreuse est soufflée vers la cible, infligeant [20,40,80,SP] SPECIAL à tous les ennemis alignés derrière la cible avec [15,30,50,LK]% de chances de les FREEZE pendant 2 secondes.",
 		"POWDER": "Projette un nuage de poudre sur l'ennemi avec la SPEED la plus élevée. Les ennemis touchés subissent [10,20,30,SP] SPECIAL et leur SPEED est réduite de 30 pendant 5 secondes. Les alliés récupèrent [10,20,30,SP] HP et gagnent +30 VITESSE pendant 5 secondes.",
 		"LINGERING_AROMA": "Pendant les 5 prochaines secondes, chaque attaque au corps à corps subit par le lanceur fait que l'attaquant reçoit [10,20,SP] SPECIAL et perd 5 PP.",
-		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible"
+		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible",
+		"ELECTRIFY": "Donne un ELECTRIC_FIELD à votre allié non-ELECTRIC STRONGEST et tous les effets de la synergie ELECTRIC active + [15,30,60,SP] SHIELD. Si aucun allié n'est trouvé, lance la capacité sur soit-même."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -4375,7 +4379,8 @@
 		"good_job": "Bien joué",
 		"here_are_your_reward": "Voici ta récompense :\n{{reward}}",
 		"magnemite": "Avez-vous vu le fugitif ?",
-		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés."
+		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés.",
+		"xatu": "Permettez-moi d'ouvrir ce coffre au trésor pour vous..."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Tout le monde est là !",

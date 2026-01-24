@@ -59,6 +59,10 @@
 - New ability for Scizor: Bullet Punch
 - Mothim is now sold for 3 GOLD instead of 6
 - Paldean Wooper is now exclusive to POISON regions
+- Heavy Slam (Aron line) no longer gives Shield to user.
+- New ability for Piplup line: Wave Splash: User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL
+
+> You might want to put a crown on the head of kings and emperors
 
 ## Buffs
 
@@ -81,6 +85,7 @@
 - Buff Groudon: ATK 18 → 20
 - Buff Duskull line: HP 70/150/240 → 70/140/220 , DEF and SPE_DEF: 2/2/2 → 4/7/12
 - Buff Manectric: Attack 12 → 14
+- Buff Bidoof line HP: 65/140 → 70/150
 - Icicle missile (Vanillite) travels faster: 1.5 second → 1 second
 
 ## Nerfs
@@ -179,6 +184,7 @@
 - Hard Stone is replaced by PROTECTOR. No change to the effect.
 - Tiny mushroom is replaced by SHED_SHELL. No change to the effect.
 - Replace TM Brick Break with TM Return: deal 20/40/80 SPECIAL, then gain 2 AP permanently.
+- All craftable synergy stones base stats have been doubled.
 
 ## Item reworks
 
@@ -234,6 +240,7 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 - Collection shards can now be used to buy any alternative form of a Pokémon.
 - All the existing shards you had on an alternative form will be attributed to the base form.
 - Pokéguesser now accepts any alternative form of the Pokémon to guess as a correct answer.
+- Titles Collector and Duke accept any alternative form of the Pokémon to count towards their total.
 - Silvally now has 18 alternative forms based on its first synergy item given at evolution.
 - Arceus now has 18 alternative forms based on its first synergy given.
 - Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
