@@ -49,7 +49,7 @@
 
 > Psychic really didnt need even more AP. Funny numbers aside, Tapu Lele's Psychic Surge was barely useful, so we're instead giving what Psychic lacks: defense and time.
 
-- Change Comfey: holder no longer gains  and AP from Comfey, only max HP, ATK, DEF and SPE_DEF. Comfey SPEED 57 → 64
+- Change Comfey: holder no longer gains SPEED and AP from Comfey, only max HP, ATK, DEF and SPE_DEF. Comfey SPEED 57 → 64
 - Tauros now is WILD NORMAL FIELD. Adjusted stats.
 - Kangashkan is now NORMAL MONSTER FIGHTING ; New ability: Dizzy Punch: Deal 20/40/80 SPECIAL to the target and inflict them with CONFUSION for 3 seconds. The damage is doubled if the target has a SHIELD.
 - Change Fur Coat (Furfrou, Wooloo): now gains 2 DEF and loses 5 SPEED until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a SILK_SCARF.
