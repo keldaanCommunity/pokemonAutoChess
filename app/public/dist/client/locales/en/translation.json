@@ -3975,7 +3975,6 @@
 	"meta_report": "Meta Report",
 	"item_report": "Item Report",
 	"pokemon_report": "Pokémon Report",
-	"cluster_map": "Cluster Map",
 	"region_report": "Region Report",
 	"best_team_compositions": "Best Team Compositions",
 	"by_poularity": "by popularity",
@@ -4591,5 +4590,37 @@
 		"SCRIBBLE": "Play for fun ! 8 players, Elo disabled\nA new special rule is added for this game.",
 		"CUSTOM_LOBBY": "Create a private room to play with your friends or with bots",
 		"TOURNAMENT": "This match is part of a tournament. Check Discord for upcoming events."
+	},
+	"dendrogram": {
+		"title": "Cluster Hierarchy",
+		"description": "This dendrogram shows how team compositions cluster together based on synergy similarity. Branches that merge at lower heights are more similar.",
+		"loading": "Loading dendrogram...",
+		"no_data": "No dendrogram data available. Hierarchical clustering may not have been run yet.",
+		"total_clusters": "Total Clusters",
+		"total_matches": "Total Matches",
+		"linkage_method": "Linkage Method",
+		"branches": "Branches",
+		"branch": "Branch",
+		"branch_total_matches": "Total Matches",
+		"branch_contains_clusters": "Contains Clusters",
+		"cluster": "Cluster",
+		"hovered_cluster": "Hovered",
+		"selected_cluster": "Selected",
+		"cluster_size": "Size",
+		"matches": "matches"
+	},
+	"cluster_map": {
+		"title": "Cluster Map",
+		"description": "This map shows team composition clusters based on synergy similarity. Each point represents a cluster of similar team builds.",
+		"loading": "Loading cluster map...",
+		"total_clusters": "Total Clusters",
+		"total_matches": "Total Matches",
+		"cluster": "Cluster",
+		"hovered_cluster": "Hovered",
+		"selected_cluster": "Selected",
+		"rank": "Rank",
+		"winrate": "Winrate",
+		"popularity": "Popularity",
+		"count": "Count"
 	}
 }
