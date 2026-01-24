@@ -550,7 +550,8 @@
 		"LINGERING_AROMA": "甩不掉的气味",
 		"RAGING_BULL": "怒牛",
 		"ELECTRIFY": "输电",
-		"WAVE_SPLASH": "飞溅"
+		"WAVE_SPLASH": "飞溅",
+		"HEADLONDING_RUSH": "突飞猛扑"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1702,7 +1703,8 @@
 		"WOOLOO": "毛辫羊",
 		"DUBWOOL": "毛毛角羊",
 		"YAMPER": "来电汪",
-		"BOLTUND": "逐电犬"
+		"BOLTUND": "逐电犬",
+		"GREAT_TUSK": "雄伟牙"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2232,7 +2234,8 @@
 		"LINGERING_AROMA": "在接下来的5秒内，使用者受到近战攻击时使攻击者受到[10,20,SP]点SPECIAL，并失去5点PP。",
 		"RAGING_BULL": "移除目标的PROTECT，$t(ability.REFLECT)，$t(ability.MAGIC_BOUNCE)等防护类状态，并使之陷入ARMOR_BREAK 3秒，随后对其造成[20,40,80,SP]点SPECIAL。",
 		"ELECTRIFY": "使STRONGEST非ELECTRIC我方宝可梦获得ELECTRIC_FIELD，当前激活的ELECTRIC共鸣效果和[15,30,60,SP]点SHIELD。若没有满足条件的我方宝可梦，对自身释放此招式。",
-		"WAVE_SPLASH": "用水包裹自身，获得SHIELD，数值相当于使用者[20,SP]%的最大HP，然后冲撞目标，对其造成SPECIAL，数值相当于使用者[20,SP]%的最大HP。"
+		"WAVE_SPLASH": "用水包裹自身，获得SHIELD，数值相当于使用者[20,SP]%的最大HP，然后冲撞目标，对其造成SPECIAL，数值相当于使用者[20,SP]%的最大HP。",
+		"HEADLONDING_RUSH": "突进至最远的敌方宝可梦的位置，对其造成[20,40,80,SP]点SPECIAL。对经过的所有敌方宝可梦造成[10,20,30,SP]点SPECIAL，并将他们击退。每对一个敌方宝可梦造成伤害，使用者降低1点DEF和1点SPE_DEF。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
