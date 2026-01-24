@@ -2262,8 +2262,7 @@
 		"ETHEREAL": "에테르화",
 		"APPETIZER": "에피타이저",
 		"LUNCH_BREAK": "점심시간",
-		"BANQUET": "연회",
-		"DROUGHT": "가뭄"
+		"BANQUET": "연회"
 	},
 	"effect_description": {
 		"STAMINA": "15 SHIELD 획득",

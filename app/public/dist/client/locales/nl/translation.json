@@ -1196,8 +1196,7 @@
 		"GRASSY_TERRAIN": "Met gras begroeid terrein",
 		"PSYCHIC_TERRAIN": "Psychisch Terrein",
 		"ELECTRIC_TERRAIN": "Elektrisch Terrein",
-		"MISTY_TERRAIN": "Mistig terrein",
-		"DROUGHT": "Droogte"
+		"MISTY_TERRAIN": "Mistig terrein"
 	},
 	"effect_description": {
 		"STAMINA": "Ontvang 15 SHIELD",
