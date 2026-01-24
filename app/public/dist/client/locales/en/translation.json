@@ -549,7 +549,8 @@
 		"POWDER": "Powder",
 		"LINGERING_AROMA": "Lingering Aroma",
 		"RAGING_BULL": "Raging Bull",
-		"ELECTRIFY": "Electrify"
+		"ELECTRIFY": "Electrify",
+		"WAVE_SPLASH": "Wave Splash"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2054,7 +2055,7 @@
 		"POWER_WHIP": "Unleash a giant vine toward the target, dealing [15,30,60,SP] + [30,SP]% of user's current HP as SPECIAL.",
 		"DARK_HARVEST": "Teleport into the largest group of enemy Pokémon. Inflict the user with SILENCE for 3 seconds and drain the HP of ADJACENT enemy Pokémon, dealing [5,10,20,SP] SPECIAL per second and heal for 30% of the damage dealt.",
 		"PSYSHOCK": "Burn [20,40,80,SP] PP from the target and gain SHIELD for the same amount. If target has no more PP, the amount of unburned PP is dealt as SPECIAL.",
-		"HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to ADJACENT opponents and gain [15,30,60] SHIELD. The more max HP the user has than the target, the greater the ability's power.",
+		"HEAVY_SLAM": "Slam the ground, dealing [15,30,60,SP] SPECIAL to ADJACENT opponents. The more max HP the user has than the target, the greater the ability's power.",
 		"RAPID_SPIN": "Deal [20,50,SP] SPECIAL and gain [50,SP]% of ATK as DEF and SPE_DEF",
 		"BOUNCE": "Bounce [1,2,3] times to the farthest enemy Pokémon, dealing [10,20,30,SP] SPECIAL to all ADJACENT enemy Pokémon each time.",
 		"BLOOD_MOON": "Ursaluna concentrates all their energy into the blood-red moon on their forehead and projects it in a line, dealing [200,SP]% of ATK as SPECIAL and applying WOUND for 3 seconds to all enemy Pokémon hit.",
@@ -2230,7 +2231,8 @@
 		"POWDER": "Releases a cloud of powder toward the enemy with the highest SPEED. Enemies touched by the cloud take [10,20,30,SP] SPECIAL and have their SPEED reduced by 30 for 5 seconds. Allies are healed for [10,20,30,SP] HP and gain +30 SPEED for 5 seconds.",
 		"LINGERING_AROMA": "For the next 5 seconds, every melee attack received by the user makes the attacker receive [10,20,SP] SPECIAL and lose 5 PP.",
 		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target",
-		"ELECTRIFY": "Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD. If no ally is found, self-cast instead."
+		"ELECTRIFY": "Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD. If no ally is found, self-cast instead.",
+		"WAVE_SPLASH": "User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
