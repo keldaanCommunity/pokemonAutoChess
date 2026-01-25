@@ -2353,10 +2353,10 @@
 		"DROUGHT": "Siccità"
 	},
 	"effect_description": {
-		"STAMINA": "Ottieni 15 SHIELD",
-		"STRENGTH": "Ottieni 20 SHIELD",
-		"ENDURE": "Ottieni 25 SHIELD",
-		"PURE_POWER": "Ottieni 30 SHIELD",
+		"STAMINA": "Ottieni 15 SHIELD. Ottieni una SILK_SCARF.",
+		"STRENGTH": "Ottieni 20 SHIELD. Ottieni una seconda SILK_SCARF.",
+		"ENDURE": "Ottieni 25 SHIELD. Ottieni una terza Ottieni una SILK_SCARF.",
+		"PURE_POWER": "Ottieni 30 SHIELD. Ottieni una quarta SILK_SCARF. I possessori di oggetti craftati da una SLIK_SCARF guadagnano il 30% dell'ATK di base in più e 30 AP.",
 		"INGRAIN": "Ripristina 5 HP ogni 2 secondi. Ottieni un albero di bacche.",
 		"GROWTH": "Ripristina 15 HP ogni 2 secondi. Ottieni un altro albero di bacche.",
 		"SPORE": "Ripristina 25 HP ogni 2 secondi. Ottieni un terzo albero di bacche.",
@@ -2777,7 +2777,7 @@
 		"BLACK_GLASSES": "+10% CRIT_CHANCE",
 		"MIRACLE_SEED": "+15 HP",
 		"NEVER_MELT_ICE": "+3 SPE_DEF",
-		"CHARCOAL": "+3 ATT",
+		"CHARCOAL": "+3 ATK",
 		"HEART_SCALE": "+3 DEF",
 		"OLD_AMBER": "Il possessore ottiene la sinergia FOSSIL",
 		"DAWN_STONE": "Il possessore ottiene la sinergia PSYCHIC",
@@ -3981,7 +3981,6 @@
 	"meta_report": "Rapporto del Meta",
 	"item_report": "Rapporto degli Oggetti",
 	"pokemon_report": "Rapporto Pokèmon",
-	"cluster_map": "Cluster Map",
 	"region_report": "Statistiche Regione",
 	"best_team_compositions": "Le migliori squadre",
 	"by_poularity": "per popolarità",
@@ -4597,5 +4596,6 @@
 		"SCRIBBLE": "Gioca per divertirti, non perdi/guadagni Elo!\nUna nuova regola speciale viene aggiunta alla partita.",
 		"CUSTOM_LOBBY": "Crea una lobby privata con le tue regole",
 		"TOURNAMENT": "Questa partita fa parte di un torneo. Controlla Discord per i prossimi eventi."
-	}
+	},
+	"cluster_map": "Cluster Map"
 }
