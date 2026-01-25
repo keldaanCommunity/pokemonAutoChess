@@ -3981,7 +3981,6 @@
 	"meta_report": "Rapporto del Meta",
 	"item_report": "Rapporto degli Oggetti",
 	"pokemon_report": "Rapporto Pokèmon",
-	"cluster_map": "Cluster Map",
 	"region_report": "Statistiche Regione",
 	"best_team_compositions": "Le migliori squadre",
 	"by_poularity": "per popolarità",
@@ -4597,5 +4596,6 @@
 		"SCRIBBLE": "Gioca per divertirti, non perdi/guadagni Elo!\nUna nuova regola speciale viene aggiunta alla partita.",
 		"CUSTOM_LOBBY": "Crea una lobby privata con le tue regole",
 		"TOURNAMENT": "Questa partita fa parte di un torneo. Controlla Discord per i prossimi eventi."
-	}
+	},
+	"cluster_map": "Cluster Map"
 }
