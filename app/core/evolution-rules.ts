@@ -164,6 +164,8 @@ export class CountEvolutionRule extends EvolutionRule {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
+    pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
+
     if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
       const dishes = pokemonsBeforeEvolution
         .filter((p) => p.dishes.size > 0)
