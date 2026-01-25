@@ -12,6 +12,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import "./dendrogram-chart.css"
+import { SYNERGY_COLORS } from "../../../../../config"
 
 export function DendrogramChart() {
   const { t } = useTranslation()
