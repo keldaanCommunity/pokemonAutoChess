@@ -109,6 +109,7 @@
 - Nerf Meganium HP: 250 → 220
 - Nerf Bellossom HP: 300 → 250
 - Nerf Carnivine: SPEED 40 → 29 ; Nerf Power Whip: 50% → 30% of HP as bonus SPECIAL
+- Nerf Maractus: HP: 200 → 175 ; DEF 12 → 8
 - Nerf Xerneas: HP 300 → 200
 
 > Nerfing Flora pots HP and their best unique and legendary carries

@@ -12268,10 +12268,10 @@ export class Maractus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.SOUND, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 175
   atk = 16
   speed = 44
-  def = 12
+  def = 8
   speDef = 8
   maxPP = 80
   range = 1
