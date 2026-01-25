@@ -152,7 +152,7 @@
 
 - New item component: SILK_SCARF, obtained from NORMAL synergy - gives 15 SHIELD
 - New scarves items craftable with SILK_SCARF:
-    - FRIEND_BOW: 15 SHIELD - The holder gains the NORMAL type.
+    - FRIEND_BOW: 30 SHIELD - The holder gains the NORMAL type.
     - BLACK_BELT: 15 SHIELD, 20% CRIT_CHANCE - Critical attacks provide 33% of the damage dealt as SHIELD.
     - MACH_RIBBON: 15 SHIELD, 10 SPEED - Every 4 seconds, gain 20 SPEED.
     - EXPLOSIVE_BAND: 50 SHIELD, 3 ATK - The first time user shield is depleted, this item explodes, dealing 30% of all SHIELD gained so far as SPECIAL to adjacent enemies.
