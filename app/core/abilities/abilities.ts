@@ -8819,7 +8819,7 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-        } else {
+        } else if (cell.value.id !== pokemon.id) {
           cell.value.addShield(100, pokemon, 1, crit)
         }
       }
