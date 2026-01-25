@@ -449,6 +449,12 @@ export default class Player extends Schema implements IPlayer {
     return needsRecomputingSynergiesAgain
   }
 
+  countScarvesUsed(): number {
+    return this.scarvesItems.reduce((count, scarf) => {
+      return count + (scarf === Item.NULLIFY_BANDANNA ? 2 : 1)
+    }, 0)
+  }
+
   updateScarves(
     previousSynergies: Map<Synergy, number>,
     updatedSynergies: Map<Synergy, number>
@@ -464,7 +470,7 @@ export default class Player extends Schema implements IPlayer {
 
     if (newNbScarves > previousNbScarves) {
       // some scarves are gained
-      while (this.scarvesItems.length < newNbScarves) {
+      while (this.countScarvesUsed() < newNbScarves) {
         // initialize scarves items if not done yet
         this.scarvesItems.push(Item.SILK_SCARF)
       }
