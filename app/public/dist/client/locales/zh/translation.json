@@ -4601,5 +4601,36 @@
 		"CUSTOM_LOBBY": "自创一个非公开房间来和朋友或机器人游戏",
 		"TOURNAMENT": "这场比赛是锦标赛的一部分。请查看Discord以获取即将举行的活动信息。"
 	},
-	"cluster_map": "聚类图"
+	"dendrogram": {
+		"title": "聚点树状图",
+		"description": "这张树状图展示了队伍根据共鸣相似性形成的聚类。分支的合并点越低，说明它们越为近似。",
+		"loading": "树状图加载中……",
+		"no_data": "缺少数据，树状图无法生成。这可能是因为聚类过程尚未被运行过。",
+		"total_clusters": "总计聚点数",
+		"total_matches": "总计游戏局数",
+		"linkage_method": "连接方式",
+		"branches": "分支",
+		"branch": "分支",
+		"branch_total_matches": "分支游戏局数",
+		"branch_contains_clusters": "包含聚点",
+		"cluster": "聚点",
+		"hovered_cluster": "当前悬停聚点",
+		"selected_cluster": "当前选中聚点",
+		"cluster_size": "聚类大小",
+		"matches": "游戏局数"
+	},
+	"cluster_map": {
+		"title": "聚类图",
+		"description": "这张聚类图显示了共鸣近似的队伍形成的聚点。每个聚点表示一类近似的队伍构成。",
+		"loading": "聚类图加载中……",
+		"total_clusters": "总计聚点数",
+		"total_matches": "总计游戏局数",
+		"cluster": "聚点",
+		"hovered_cluster": "当前悬停聚点",
+		"selected_cluster": "当前选中聚点",
+		"rank": "段位",
+		"winrate": "胜率",
+		"popularity": "人气",
+		"count": "计数"
+	}
 }
