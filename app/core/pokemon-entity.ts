@@ -4,10 +4,8 @@ import {
   ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
-  FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL,
   ItemStats,
-  MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
-  MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
+  MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
 import Count from "../models/colyseus-models/count"
@@ -755,7 +753,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
       const update = (target: { speed: number }) => {
-        target.speed = clamp(target.speed + value, 0, 300)
+        target.speed = clamp(target.speed + value, 0, MAX_SPEED)
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
