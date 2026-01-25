@@ -17,6 +17,7 @@ import {
   NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
   PkmAltFormsByPkm,
+  PkmsWithAltForms,
   PoolSize,
   PortalCarouselStages,
   PVE_WILD_CHANCE,
@@ -517,9 +518,6 @@ export default class Shop {
           )
           if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
         }
-        if (pkm in PkmAltFormsByPkm) {
-          pkm = getAltFormForPlayer(pkm, player)
-        }
         return pkm
       })
       .filter((pkm) => {
@@ -529,6 +527,14 @@ export default class Shop {
               types.includes(specificTypeWanted)
             )
           : types.includes(Synergy.WILD) === false
+
+        if (
+          PkmsWithAltForms.includes(pkm) &&
+          getAltFormForPlayer(pkm, player) !== pkm
+        ) {
+          // only keep desired alt form for player
+          return false
+        }
 
         return isOfTypeWanted && !finals.has(getPokemonBaseline(pkm))
       })

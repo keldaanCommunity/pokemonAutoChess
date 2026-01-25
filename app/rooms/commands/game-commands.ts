@@ -14,7 +14,7 @@ import {
   ItemSellPricesAtTown,
   MAX_PLAYERS_PER_GAME,
   OUTLAW_GOLD_REWARD,
-  PkmAltFormsByPkm,
+  PkmsWithAltForms,
   PORTAL_CAROUSEL_BASE_DURATION,
   PortalCarouselStages,
   SHARDS_PER_SHINY_UNOWN_WANDERER,
@@ -326,7 +326,7 @@ export class OnDragDropPokemonCommand extends Command<
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
             let pkm = getPokemonBaseline(pokemonToClone.name)
-            if (pkm in PkmAltFormsByPkm) {
+            if (PkmsWithAltForms.includes(pkm)) {
               pkm = getAltFormForPlayer(pkm, player)
             }
             const replaceDitto = PokemonFactory.createPokemonFromName(

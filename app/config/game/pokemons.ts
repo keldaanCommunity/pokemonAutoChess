@@ -80,7 +80,8 @@ export function getUnownsPoolPerStage(stageLevel: number) {
   else return UnownsStage3
 }
 
-export function getAltFormForPlayer(basePkm: Pkm, player: IPlayer): Pkm {
+export function getAltFormForPlayer(pkm: Pkm, player: IPlayer): Pkm {
+  const basePkm = getBaseAltForm(pkm)
   switch (basePkm) {
     case Pkm.FLABEBE: {
       switch (player.flowerPotsSpawnOrder[0]) {
@@ -399,6 +400,15 @@ export const PkmAltFormsByPkm = {
 } satisfies { [base in Pkm]?: PkmAltForm[] }
 
 export type PkmWithAltForm = keyof typeof PkmAltFormsByPkm
+
+export const PkmsWithAltForms: Pkm[] = Object.entries(PkmAltFormsByPkm).reduce(
+  (acc, [base, forms]) => {
+    acc.push(base as Pkm)
+    acc.push(...forms)
+    return acc
+  },
+  [] as Pkm[]
+)
 
 export function getBaseAltForm(pkm: Pkm): Pkm {
   if (pkm in PkmAltFormsByPkm) {
