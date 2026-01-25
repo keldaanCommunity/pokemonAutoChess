@@ -353,23 +353,23 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
         dishes
       })
       room.clock.setTimeout(() => {
-        const candidates = values(player.board).filter(
-          (p) =>
-            p.canEat &&
-            !p.dishes.has(dish) &&
-            !isOnBench(p) &&
-            distanceC(
-              chef.positionX,
-              chef.positionY,
-              p.positionX,
-              p.positionY
-            ) === 1
-        )
-        candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
         dishes.forEach((dish, i) => {
           if (DishesGoingToInventory.includes(dish)) {
             player.items.push(dish)
           } else {
+            const candidates = values(player.board).filter(
+              (p) =>
+                p.canEat &&
+                !p.dishes.has(dish) &&
+                !isOnBench(p) &&
+                distanceC(
+                  chef.positionX,
+                  chef.positionY,
+                  p.positionX,
+                  p.positionY
+                ) === 1
+            )
+            candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
             const pokemon = candidates[i] ?? chef
             if (dish === Item.HERBA_MYSTICA) {
               const flavors: Dish[] = []
