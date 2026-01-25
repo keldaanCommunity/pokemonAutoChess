@@ -1,0 +1,279 @@
+.dendrogram-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: rgb(84, 89, 107);
+  border-radius: 8px;
+}
+
+.dendrogram-loading,
+.dendrogram-no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  color: #ccc;
+  font-size: 18px;
+}
+
+.dendrogram-chart-wrapper {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dendrogram-chart-wrapper svg {
+  display: block;
+}
+
+.dendrogram-chart-wrapper .y-axis text {
+  fill: #ccc;
+  font-size: 10px;
+}
+
+.dendrogram-chart-wrapper .y-axis line,
+.dendrogram-chart-wrapper .y-axis path {
+  stroke: #555;
+}
+
+.dendrogram-info-panel {
+  width: 280px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.dendrogram-info-panel h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.dendrogram-info-panel h4 {
+  margin: 8px 0 4px 0;
+  color: #ddd;
+  font-size: 14px;
+}
+
+.dendrogram-info-text {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.dendrogram-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.branch-detail-panel {
+  padding: 12px;
+  background: rgb(84, 89, 107);
+  border-radius: 6px;
+  border-left: 3px solid #ffa500;
+}
+
+.branch-detail-panel h4 {
+  margin: 0 0 8px 0;
+  color: #ffa500;
+}
+
+.branch-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.branch-stats .stat-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.branch-stats .stat-item label {
+  color: #888;
+}
+
+.branch-stats .stat-item span {
+  color: #fff;
+}
+
+.branch-synergies label {
+  display: block;
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.synergy-percentage {
+  color: #ffa500;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: right;
+}
+
+.dendrogram-stats .stat-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.dendrogram-stats .stat-item label {
+  color: #888;
+}
+
+.dendrogram-stats .stat-item span {
+  color: #fff;
+  font-weight: 500;
+}
+
+.cluster-detail-panel {
+  padding: 12px;
+  background: rgb(84, 89, 107);
+  border-radius: 6px;
+  border-left: 3px solid #4a9eff;
+}
+
+.cluster-detail-panel h4 {
+  margin: 0 0 8px 0;
+  color: #4a9eff;
+}
+
+.cluster-size {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.cluster-size label {
+  color: #888;
+}
+
+.cluster-size span {
+  color: #fff;
+}
+
+.cluster-synergies label {
+  display: block;
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.synergy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.synergy-item {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.synergy-item .synergy-name {
+  flex: 1;
+  color: #ddd;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.synergy-item .synergy-diff {
+  color: #4ade80;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Synergy display like cluster-map */
+.synergies-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.synergy-item-display {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.synergy-item-display span {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Pokemon grid like cluster-map */
+.pokemon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.pokemon-container-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.pokemon-portrait-wrapper {
+  position: relative;
+}
+
+.pokemon-frequency {
+  font-size: 10px;
+  color: #aaa;
+  text-align: center;
+}
+
+/* Dendrogram SVG elements */
+.dendrogram-chart-wrapper svg {
+  display: block;
+  cursor: grab;
+}
+
+.dendrogram-chart-wrapper svg:active {
+  cursor: grabbing;
+}
+
+.dendrogram-chart-wrapper .branch {
+  transition:
+    stroke-width 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.dendrogram-chart-wrapper .grid line {
+  stroke: #333;
+  stroke-opacity: 0.3;
+  stroke-dasharray: 2, 2;
+}

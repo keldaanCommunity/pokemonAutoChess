@@ -8,6 +8,7 @@ import RegionStatistic, {
   IRegionStatistic
 } from "../models/mongo-models/regions-statistic"
 import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
+import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
 import ReportMetadata, {
   IReportMetadata
 } from "../models/mongo-models/report-metadata"
@@ -25,7 +26,8 @@ export async function fetchMetaReports() {
     fetchMetaItems(),
     fetchMetaPokemons(),
     fetchMetaRegions(),
-    fetchMetaV2()
+    fetchMetaV2(),
+    fetchDendrogramData()
   ])
   logger.info("Meta reports refreshed")
   return data
@@ -36,6 +38,7 @@ let metaItems = new Array<IItemsStatisticV2>()
 let metaPokemons = new Array<IPokemonsStatisticV2>()
 let metaRegions = new Array<IRegionStatistic>()
 let metaV2 = new Array<IMetaV2>()
+let dendrogram: IDendrogram | null = null
 
 async function fetchMetaItems() {
   metaItems = await ItemsStatistic.find().exec()
@@ -80,6 +83,15 @@ export function getMetaRegions() {
 
 export function getMetaV2() {
   return metaV2
+}
+
+async function fetchDendrogramData() {
+  dendrogram = await Dendrogram.findOne().exec()
+  return dendrogram
+}
+
+export function getDendrogram() {
+  return dendrogram
 }
 
 export function computeSynergyAverages() {

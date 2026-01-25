@@ -35,6 +35,7 @@ import {
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
+  getDendrogram,
   getMetadata,
   getMetaItems,
   getMetaPokemons,
@@ -280,6 +281,12 @@ export default config({
       // Set Cache-Control header for 24 hours (86400 seconds)
       setCacheControl(res, 86400)
       res.send(getMetaV2())
+    })
+
+    app.get("/dendrogram", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getDendrogram())
     })
 
     app.get("/meta/types", async (req, res) => {

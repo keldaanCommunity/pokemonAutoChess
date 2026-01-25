@@ -18,6 +18,7 @@
 - Dubwool
 - Yamper
 - Boltund
+- Great Tusk
 
 # Changes to Pokemon & Abilities
 
@@ -48,7 +49,7 @@
 
 > Psychic really didnt need even more AP. Funny numbers aside, Tapu Lele's Psychic Surge was barely useful, so we're instead giving what Psychic lacks: defense and time.
 
-- Change Comfey: holder no longer gains  and AP from Comfey, only max HP, ATK, DEF and SPE_DEF. Comfey SPEED 57 → 64
+- Change Comfey: holder no longer gains SPEED and AP from Comfey, only max HP, ATK, DEF and SPE_DEF. Comfey SPEED 57 → 64
 - Tauros now is WILD NORMAL FIELD. Adjusted stats.
 - Kangashkan is now NORMAL MONSTER FIGHTING ; New ability: Dizzy Punch: Deal 20/40/80 SPECIAL to the target and inflict them with CONFUSION for 3 seconds. The damage is doubled if the target has a SHIELD.
 - Change Fur Coat (Furfrou, Wooloo): now gains 2 DEF and loses 5 SPEED until it reaches max stacks (5 for Furfrou, 10 for Wooloo). If groomed at max stacks, player gains a SILK_SCARF.
@@ -108,6 +109,7 @@
 - Nerf Meganium HP: 250 → 220
 - Nerf Bellossom HP: 300 → 250
 - Nerf Carnivine: SPEED 40 → 29 ; Nerf Power Whip: 50% → 30% of HP as bonus SPECIAL
+- Nerf Maractus: HP: 200 → 175 ; DEF 12 → 8
 - Nerf Xerneas: HP 300 → 200
 
 > Nerfing Flora pots HP and their best unique and legendary carries
@@ -183,7 +185,6 @@
 - Hard Stone is replaced by PROTECTOR. No change to the effect.
 - Tiny mushroom is replaced by SHED_SHELL. No change to the effect.
 - Replace TM Brick Break with TM Return: deal 20/40/80 SPECIAL, then gain 2 AP permanently.
-- All craftable synergy stones base stats have been doubled.
 
 ## Item reworks
 
@@ -191,11 +192,12 @@
 
 > Funny interaction between mulch and berry trees, mostly useful if you're stuck on a low FLORA for a while.
 
-- HEAT_STONE changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 ATK.
+- HEAT_ROCK changed: no longer has additional chance to burn with their attacks. Instead, your Pokémon gain 3 ATK.
 - EXPLORER_KIT is no longer obtainable from ARTIFICIAL synergy. MAGMARIZER can now be obtained from ARTIFICIAL synergy.
 
 ## Buffs and nerfs
 
+- All craftable synergy stones base stats have been doubled.
 - Buff BERSERK_GENE: ATK 5 → 10
 - Buff EXPLORER_KIT: give 3 ATK, 5 DEF and 5 SPE_DEF as base stats
 - Buff ROCK_SALT: 15 → 20% of max HP as SHIELD on fight start.
@@ -234,7 +236,7 @@
 
 > We are introducing the notion of Pokémon alternative forms in the game. Alternative Forms are mostly aesthetic variations of the same Pokémon, that will be merged in your Collection and in various other places. This makes it easier to complete your Collection, your Pokédex, and nail it at Pokéguessr.
 
-List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silvally, Arceus, Alcremie, Ogerpon, Basculin, Basculegion, Darmanitan, Maushold, Hoopa, Aegislash, Vivillon, Mimikyu, Deoxys, Lycanroc
+List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silvally, Arceus, Alcremie, Ogerpon, Basculin, Basculegion, Darmanitan, Maushold, Hoopa, Aegislash, Vivillon, Mimikyu, Deoxys, Lycanroc, Morpeko
 
 - Collection shards can now be used to buy any alternative form of a Pokémon.
 - All the existing shards you had on an alternative form will be attributed to the base form.
@@ -273,6 +275,15 @@ List of Pokémon with alternative forms: Flabebe, Floette, Florges, Minior, Silv
 - Additional bonus damage on FAIRY shocks provided by FAIRY synergy effects now applies to the shock damage, and not the incoming damage.
 - Crit damage reduction from ROCK synergy effects now applies to the final crit damage after crit power is applied, instead of before.
 
+- Added Region tracking to statistic
+- Wandering Unown now have 5% chance to be shiny, giving 250 shards on capture instead of 50. Unown encounter chance: 3.7% → 3.3%
+- New title: Poffin Master - Cook a Poffin with 3 different golden berries in it
+- New title: Top Gun - Get to Mach 10 with a Mach Ribbon
+- New title: Scout - Equip your team with at least 5 Silk Scarf made items
+- Added a new meta report section, with a cluster map and a dendrogram
+- Added a chart for pokemon report and item report, count function of average place
+- Change to the boosters: alternative forms are now picked after picking the Pokémon, rather than adding all variants to the pool first. This reduces the frequency of Pokémon with multiple alternative forms (such as Flabebe or Vivillon) appearing in boosters.
+- New town encounter: Magnezone
 - Fix lazy loading of Pokémon sprites when entering a game for the second time without cache unloaded.
 
 > Sorry for making you refresh your page on every other game to get the Pokémon out of their pokéballs. The main cause should be fixed now, but other causes may still exist.

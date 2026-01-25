@@ -270,6 +270,7 @@ export const PkmAltForms: readonly Pkm[] = [
   Pkm.HOOPA_UNBOUND,
   Pkm.AEGISLASH_BLADE,
   Pkm.MIMIKYU_BUSTED,
+  Pkm.MORPEKO_HANGRY,
 
   Pkm.DEOXYS_ATTACK,
   Pkm.DEOXYS_DEFENSE,
@@ -392,6 +393,7 @@ export const PkmAltFormsByPkm = {
   [Pkm.HOOPA]: [Pkm.HOOPA_UNBOUND],
   [Pkm.AEGISLASH]: [Pkm.AEGISLASH_BLADE],
   [Pkm.MIMIKYU]: [Pkm.MIMIKYU_BUSTED],
+  [Pkm.MORPEKO]: [Pkm.MORPEKO_HANGRY],
   [Pkm.DEOXYS]: [Pkm.DEOXYS_ATTACK, Pkm.DEOXYS_DEFENSE, Pkm.DEOXYS_SPEED],
   [Pkm.LYCANROC_DAY]: [Pkm.LYCANROC_NIGHT, Pkm.LYCANROC_DUSK]
 } satisfies { [base in Pkm]?: PkmAltForm[] }

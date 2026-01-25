@@ -1,47 +1,14 @@
 import * as d3 from "d3"
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
+import { SYNERGY_COLORS } from "../../../../../config"
 import { IMetaV2 } from "../../../../../models/mongo-models/meta-v2"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import { clamp } from "../../../../../utils/number"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import "./meta-chart.css"
 import { rankType } from "./team-comp"
+import "./meta-chart.css"
 
-// Synergy color mapping for convex hulls - extracted from SVG fill colors
-const SYNERGY_COLORS: Record<Synergy, string> = {
-  NORMAL: "rgba(255, 254, 254, 0.3)",
-  FIRE: "rgba(255, 144, 36, 0.3)",
-  WATER: "rgba(45, 162, 253, 0.3)",
-  GRASS: "rgba(23, 179, 0, 0.3)",
-  ELECTRIC: "rgba(253, 255, 74, 0.3)",
-  ICE: "rgba(195, 228, 238, 0.3)",
-  FIGHTING: "rgba(243, 50, 24, 0.3)",
-  POISON: "rgba(136, 215, 160, 0.3)",
-  GROUND: "rgba(198, 150, 74, 0.3)",
-  FLYING: "rgba(178, 233, 255, 0.3)",
-  PSYCHIC: "rgba(185, 85, 210, 0.3)",
-  BUG: "rgba(255, 254, 102, 0.3)",
-  ROCK: "rgba(231, 229, 175, 0.3)",
-  GHOST: "rgba(135, 109, 173, 0.3)",
-  DRAGON: "rgba(184, 115, 51, 0.3)",
-  DARK: "rgba(166, 166, 166, 0.3)",
-  STEEL: "rgba(219, 219, 219, 0.3)",
-  FAIRY: "rgba(255, 175, 209, 0.3)",
-  FIELD: "rgba(222, 138, 78, 0.3)",
-  AQUATIC: "rgba(20, 200, 200, 0.3)",
-  MONSTER: "rgba(0, 180, 100, 0.3)",
-  AMORPHOUS: "rgba(229, 178, 244, 0.3)",
-  WILD: "rgba(178, 35, 52, 0.3)",
-  SOUND: "rgba(255, 96, 149, 0.3)",
-  FLORA: "rgba(255, 96, 241, 0.3)",
-  BABY: "rgba(255, 215, 154, 0.3)",
-  HUMAN: "rgba(253, 187, 139, 0.3)",
-  LIGHT: "rgba(255, 248, 150, 0.3)",
-  GOURMET: "rgba(255, 132, 115, 0.3)",
-  FOSSIL: "rgba(210, 211, 91, 0.3)",
-  ARTIFICIAL: "rgba(237, 237, 237, 0.3)"
-}
+const ALPHA_FILL = "4D" // Hex for ~0.3 alpha
 
 export function MetaChart(props: {
   meta: IMetaV2[]
@@ -151,12 +118,10 @@ export function MetaChart(props: {
 
                 const fillColor =
                   synergy && SYNERGY_COLORS[synergy]
-                    ? SYNERGY_COLORS[synergy]
+                    ? `${SYNERGY_COLORS[synergy]}${ALPHA_FILL}`
                     : "rgba(100, 150, 255, 0.3)"
                 const strokeColor =
-                  synergy && SYNERGY_COLORS[synergy]
-                    ? SYNERGY_COLORS[synergy].replace("0.3", "1")
-                    : "rgb(100, 150, 255)"
+                  SYNERGY_COLORS[synergy] ?? "rgb(100, 150, 255)"
 
                 const isSelected = props.selectedCluster === d.cluster_id
                 const isHovered = hoveredCluster === d.cluster_id

@@ -549,7 +549,9 @@
 		"POWDER": "Nuée de Poudre",
 		"LINGERING_AROMA": "Odeur Tenace",
 		"RAGING_BULL": "Taurogne",
-		"ELECTRIFY": "Électrisation"
+		"ELECTRIFY": "Électrisation",
+		"HEADLONDING_RUSH": "Assaut Frontal",
+		"WAVE_SPLASH": "Aqua Splash"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1701,7 +1703,8 @@
 		"WOOLOO": "Moumouton",
 		"DUBWOOL": "Moumouflon",
 		"YAMPER": "Voltoutou",
-		"BOLTUND": "Fulgudog"
+		"BOLTUND": "Fulgudog",
+		"GREAT_TUSK": "Fort-Ivoire"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2230,7 +2233,9 @@
 		"POWDER": "Projette un nuage de poudre sur l'ennemi avec la SPEED la plus élevée. Les ennemis touchés subissent [10,20,30,SP] SPECIAL et leur SPEED est réduite de 30 pendant 5 secondes. Les alliés récupèrent [10,20,30,SP] HP et gagnent +30 VITESSE pendant 5 secondes.",
 		"LINGERING_AROMA": "Pendant les 5 prochaines secondes, chaque attaque au corps à corps subit par le lanceur fait que l'attaquant reçoit [10,20,SP] SPECIAL et perd 5 PP.",
 		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible",
-		"ELECTRIFY": "Donne un ELECTRIC_FIELD à votre allié non-ELECTRIC STRONGEST et tous les effets de la synergie ELECTRIC active + [15,30,60,SP] SHIELD. Si aucun allié n'est trouvé, lance la capacité sur soit-même."
+		"ELECTRIFY": "Donne un ELECTRIC_FIELD à votre allié non-ELECTRIC STRONGEST et tous les effets de la synergie ELECTRIC active + [15,30,60,SP] SHIELD. Si aucun allié n'est trouvé, lance la capacité sur soit-même.",
+		"HEADLONDING_RUSH": "Fonce sur l'ennemi le plus éloigné et lui inflige [20,40,80,SP] de SPECIAL. Tous les ennemis sur le passage sont repoussés et subissent [10,20,30,SP] de SPECIAL. Le lanceur perd 1 point de DEF et de SPE_DEF pour chaque ennemi bousculé.",
+		"WAVE_SPLASH": "Le lanceur s'enveloppe d'eau, gagnant [20,SP]% de ses HP max en tant que SHIELD, puis percute la cible avec tout son corps pour infliger [20,SP]% de ses HP max en tant que SPECIAL."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -3979,7 +3984,6 @@
 	"meta_report": "Rapport de Méta",
 	"item_report": "Rapport de Méta : Objets",
 	"pokemon_report": "Rapport de Méta : Pokémon",
-	"cluster_map": "Carte de cluster",
 	"region_report": "Rapport de Méta : Régions",
 	"best_team_compositions": "Meilleures compositions d'équipe",
 	"by_poularity": "par popularité",
@@ -4596,5 +4600,24 @@
 		"SCRIBBLE": "Jouez pour le fun ! 8 joueurs, Elo désactivé\nUne nouvelle règle spéciale est ajoutée à cette partie.",
 		"CUSTOM_LOBBY": "Créer un salon privé pour jouer avec vos amis ou des bots",
 		"TOURNAMENT": "Match de tournoi. Consultez Discord pour les événements à venir."
-	}
+	},
+	"dendrogram": {
+		"title": "Hiérarchie des clusters",
+		"description": "Ce dendrogramme illustre le regroupement des compositions d'équipes en fonction de leur synergie. Les branches qui convergent à des hauteurs plus basses sont plus similaires.",
+		"loading": "Chargement du dendogramme",
+		"no_data": "Aucune donnée de dendrogramme disponible. Le clustering hiérarchique n'a peut-être pas encore été effectué.",
+		"total_clusters": "Nombre total de clusters",
+		"total_matches": "Nombre total de correspondances",
+		"linkage_method": "Méthode de liaison",
+		"branches": "Branches",
+		"branch": "Branche",
+		"branch_total_matches": "Nombre total de correspondances",
+		"branch_contains_clusters": "Clusters contenus",
+		"cluster": "Cluster",
+		"hovered_cluster": "Survolé",
+		"selected_cluster": "Sélectionné",
+		"cluster_size": "Taille",
+		"matches": "correspondances"
+	},
+	"cluster_map": "Carte de cluster"
 }

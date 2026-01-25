@@ -12268,10 +12268,10 @@ export class Maractus extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.SOUND, Synergy.FLORA])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 175
   atk = 16
   speed = 44
-  def = 12
+  def = 8
   speDef = 8
   maxPP = 80
   range = 1
@@ -20179,6 +20179,24 @@ export class Boltund extends Pokemon {
   additional = true
 }
 
+export class GreatTusk extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.GROUND,
+    Synergy.FIGHTING,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 185
+  atk = 20
+  speed = 56
+  def = 10
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADLONDING_RUSH
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21336,7 +21354,8 @@ export const PokemonClasses: Record<
   [Pkm.WOOLOO]: Wooloo,
   [Pkm.DUBWOOL]: Dubwool,
   [Pkm.YAMPER]: Yamper,
-  [Pkm.BOLTUND]: Boltund
+  [Pkm.BOLTUND]: Boltund,
+  [Pkm.GREAT_TUSK]: GreatTusk
 }
 
 // declare all the classes in colyseus schema TypeRegistry

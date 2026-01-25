@@ -797,6 +797,16 @@ export class OnDragDropItemCommand extends Command<
 
       const itemCombined = recipe[0] as Item
 
+      if (
+        (isIn(SynergyStones, itemCombined) ||
+          itemCombined === Item.FRIEND_BOW) &&
+        pokemon.types.has(SynergyGivenByItem[itemCombined])
+      ) {
+        // prevent combining into a synergy stone on a pokemon that already has this synergy
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
+
       if (recipe[1].includes(Item.SILK_SCARF)) {
         // replace silk scarf by scarf-made item
         const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
@@ -806,16 +816,6 @@ export class OnDragDropItemCommand extends Command<
         if (player.scarvesItems.length >= 5) {
           player.titles.add(Title.SCOUT)
         }
-      }
-
-      if (
-        (isIn(SynergyStones, itemCombined) ||
-          itemCombined === Item.FRIEND_BOW) &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
-      ) {
-        // prevent combining into a synergy stone on a pokemon that already has this synergy
-        client.send(Transfer.DRAG_DROP_CANCEL, message)
-        return
       }
 
       pokemon.items.delete(existingBasicItemToCombine)

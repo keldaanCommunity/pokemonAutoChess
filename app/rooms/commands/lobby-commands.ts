@@ -12,6 +12,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   MAX_USER_NAME_LENGTH,
   PkmAltForms,
+  PkmAltFormsByPkm,
   USERNAME_REGEXP
 } from "../../config"
 import { CollectionUtils, createBooster } from "../../core/collection"
@@ -697,12 +698,16 @@ async function checkTitlesAfterEmotionUnlocked(
           (p) =>
             NonPkm.includes(p) === false && PkmAltForms.includes(p) === false
         )
-        .every((pkm) => {
-          const item = mongoUser.pokemonCollection.get(PkmIndex[pkm])
-          if (!item) return false
-          const { emotions, shinyEmotions } =
-            CollectionUtils.getEmotionsUnlocked(item)
-          return emotions.length > 0 || shinyEmotions.length > 0
+        .every((pkm) => {          
+          const baseForm = getBaseAltForm(pkm)
+          const accepted: Pkm[] = baseForm in PkmAltFormsByPkm ? [baseForm, ...PkmAltFormsByPkm[baseForm]] : [baseForm]
+          return accepted.some((form) => {
+            const item = mongoUser.pokemonCollection.get(PkmIndex[form])
+            if (!item) return false
+            const { emotions, shinyEmotions } =
+              CollectionUtils.getEmotionsUnlocked(item)
+            return emotions.length > 0 || shinyEmotions.length > 0
+          })
         })
     ) {
       newTitles.push(Title.DUKE)
