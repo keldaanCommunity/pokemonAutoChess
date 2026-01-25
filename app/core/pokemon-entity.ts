@@ -561,6 +561,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
+      if(boardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
       boardPokemon.addMaxHP(value, this.player)
     }
   }
@@ -614,7 +615,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       update(this)
     }
 
-    if (permanent && !this.isGhostOpponent) {
+    if (permanent && !this.isGhostOpponent) {      
+      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -642,6 +644,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
+      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -670,6 +673,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
+      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -698,6 +702,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
+      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -726,6 +731,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
+      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -757,6 +763,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
+        if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
         update(this.refToBoardPokemon)
       }
     }
