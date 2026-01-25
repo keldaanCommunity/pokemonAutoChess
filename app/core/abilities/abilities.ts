@@ -13253,7 +13253,7 @@ export class LaserBladeStrategy extends AbilityStrategy {
             entity != null && entity.team !== pokemon.team
         )
         .forEach((enemy) => enemiesHit.add(enemy))
-      pokemon.moveTo(target.positionX, target.positionY, board, false)
+      pokemon.moveTo(target.positionX, target.positionY, board, true)
       pokemon.addShield(shield, pokemon, 1, crit)
       enemiesHit.forEach((enemy) => {
         enemy.handleSpecialDamage(
