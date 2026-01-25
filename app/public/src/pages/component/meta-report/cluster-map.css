@@ -117,7 +117,7 @@
   color: #fff;
 }
 
-.synergies-container {
+.cluster-map-container .synergies-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
@@ -126,7 +126,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.synergy-item-display {
+.cluster-map-container .synergy-item-display {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,32 +134,32 @@
   gap: 0.2em;
 }
 
-.synergy-item-display span {
+.cluster-map-container .synergy-item-display span {
   color: #ccc;
 }
 
-.pokemon-grid {
+.cluster-map-container .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 4px;
   margin-top: 8px;
 }
 
-.pokemon-container-item {
+.cluster-map-container .pokemon-container-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 0.75em;
 }
 
-.pokemon-portrait-wrapper {
+.cluster-map-container .pokemon-portrait-wrapper {
   position: relative;
   width: 40px;
   height: 40px;
   margin-bottom: 0.2em;
 }
 
-.pokemon-frequency {
+.cluster-map-container .pokemon-frequency {
   color: #ccc;
   font-size: 10px;
 }
