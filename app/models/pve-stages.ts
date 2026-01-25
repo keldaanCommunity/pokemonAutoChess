@@ -106,7 +106,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     shinyChance: 1 / 100,
     rewards: ItemComponentsNoFossilOrScarf,
     getRewards(player: Player) {
-      const rewards = [pickRandomIn(ItemComponentsNoFossilOrScarf)]
+      const rewards: Item[] = []
       if (values(player.board).some((p) => p.name === Pkm.CHARCADET)) {
         const psyLevel = player.synergies.get(Synergy.PSYCHIC) || 0
         const ghostLevel = player.synergies.get(Synergy.GHOST) || 0
