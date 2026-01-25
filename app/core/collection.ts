@@ -67,7 +67,7 @@ export function pickRandomPokemonBooster(
     name = pickRandomIn([
       ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
       ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
-    ]) as Pkm
+    ].filter((p) => getBaseAltForm(p) === p)) as Pkm
   } else {
     for (let i = 0; i < rarities.length; i++) {
       const rarity = rarities[i]
@@ -79,7 +79,8 @@ export function pickRandomPokemonBooster(
         ).filter(
           (p) =>
             Unowns.includes(p) === false &&
-            getPokemonData(p).skill !== Ability.DEFAULT
+            getPokemonData(p).skill !== Ability.DEFAULT &&
+            getBaseAltForm(p) === p
         )
         if (candidates.length > 0) {
           name = pickRandomIn(candidates) as Pkm
@@ -89,14 +90,14 @@ export function pickRandomPokemonBooster(
     }
   }
 
-  const shiny =
-    (godPack || chance(0.05)) &&
-    PokemonAnimations[name]?.shinyUnavailable !== true
-
   if (name in PkmAltFormsByPkm) {
     // If the selected Pokemon has alt forms, pick one of them randomly
     name = pickRandomIn([...name, PkmAltFormsByPkm[name]!])
   }
+
+  const shiny =
+    (godPack || chance(0.05)) &&
+    PokemonAnimations[name]?.shinyUnavailable !== true
 
   const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
   let emotion =
