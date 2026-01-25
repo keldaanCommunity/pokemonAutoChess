@@ -1,6 +1,7 @@
 import * as d3 from "d3"
-import React, { useEffect, useRef, useState, useCallback } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { SYNERGY_COLORS } from "../../../../../config"
 import {
   fetchDendrogram,
   IBranchProfile,
@@ -12,7 +13,6 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import "./dendrogram-chart.css"
-import { SYNERGY_COLORS } from "../../../../../config"
 
 export function DendrogramChart() {
   const { t } = useTranslation()

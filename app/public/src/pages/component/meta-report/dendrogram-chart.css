@@ -89,47 +89,47 @@
   border-radius: 4px;
 }
 
-.branch-detail-panel {
+.dendrogram-container .branch-detail-panel {
   padding: 12px;
   background: rgb(84, 89, 107);
   border-radius: 6px;
   border-left: 3px solid #ffa500;
 }
 
-.branch-detail-panel h4 {
+.dendrogram-container .branch-detail-panel h4 {
   margin: 0 0 8px 0;
   color: #ffa500;
 }
 
-.branch-stats {
+.dendrogram-container .branch-stats {
   display: flex;
   flex-direction: column;
   gap: 4px;
   margin-bottom: 8px;
 }
 
-.branch-stats .stat-item {
+.dendrogram-container .branch-stats .stat-item {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
 }
 
-.branch-stats .stat-item label {
+.dendrogram-container .branch-stats .stat-item label {
   color: #888;
 }
 
-.branch-stats .stat-item span {
+.dendrogram-container .branch-stats .stat-item span {
   color: #fff;
 }
 
-.branch-synergies label {
+.dendrogram-container .branch-synergies label {
   display: block;
   color: #888;
   font-size: 12px;
   margin-bottom: 4px;
 }
 
-.synergy-percentage {
+.dendrogram-container .synergy-percentage {
   color: #ffa500;
   font-size: 12px;
   font-weight: 500;
@@ -137,127 +137,127 @@
   text-align: right;
 }
 
-.dendrogram-stats .stat-item {
+.dendrogram-container .dendrogram-stats .stat-item {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
 }
 
-.dendrogram-stats .stat-item label {
+.dendrogram-container .dendrogram-stats .stat-item label {
   color: #888;
 }
 
-.dendrogram-stats .stat-item span {
+.dendrogram-container .dendrogram-stats .stat-item span {
   color: #fff;
   font-weight: 500;
 }
 
-.cluster-detail-panel {
+.dendrogram-container .cluster-detail-panel {
   padding: 12px;
   background: rgb(84, 89, 107);
   border-radius: 6px;
   border-left: 3px solid #4a9eff;
 }
 
-.cluster-detail-panel h4 {
+.dendrogram-container .cluster-detail-panel h4 {
   margin: 0 0 8px 0;
   color: #4a9eff;
 }
 
-.cluster-size {
+.dendrogram-container .cluster-size {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
-.cluster-size label {
+.dendrogram-container .cluster-size label {
   color: #888;
 }
 
-.cluster-size span {
+.dendrogram-container .cluster-size span {
   color: #fff;
 }
 
-.cluster-synergies label {
+.dendrogram-container .cluster-synergies label {
   display: block;
   color: #888;
   font-size: 12px;
   margin-bottom: 4px;
 }
 
-.synergy-list {
+.dendrogram-container .synergy-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.synergy-item {
+.dendrogram-container .synergy-item {
   display: flex;
   align-items: center;
   border-radius: 4px;
 }
 
-.synergy-item .synergy-name {
+.dendrogram-container .synergy-item .synergy-name {
   flex: 1;
   color: #ddd;
   font-size: 12px;
   text-transform: capitalize;
 }
 
-.synergy-item .synergy-diff {
+.dendrogram-container .synergy-item .synergy-diff {
   color: #4ade80;
   font-size: 12px;
   font-weight: 500;
 }
 
 /* Synergy display like cluster-map */
-.synergies-container {
+.dendrogram-container .synergies-container {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 8px;
 }
 
-.synergy-item-display {
+.dendrogram-container .synergy-item-display {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.synergy-item-display span {
+.dendrogram-container .synergy-item-display span {
   color: #fff;
   font-size: 14px;
   font-weight: 500;
 }
 
 /* Pokemon grid like cluster-map */
-.pokemon-grid {
+.dendrogram-container .pokemon-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   margin-top: 8px;
 }
 
-.pokemon-container-item {
+.dendrogram-container .pokemon-container-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
 
-.pokemon-portrait-wrapper {
+.dendrogram-container .pokemon-portrait-wrapper {
   position: relative;
 }
 
-.pokemon-frequency {
+.dendrogram-container .pokemon-frequency {
   font-size: 10px;
   color: #aaa;
   text-align: center;
 }
 
 /* Dendrogram SVG elements */
-.dendrogram-chart-wrapper svg {
+.dendrogram-container .dendrogram-chart-wrapper svg {
   display: block;
   cursor: grab;
 }
