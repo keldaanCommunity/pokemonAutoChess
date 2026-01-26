@@ -5,6 +5,7 @@ import {
   ITitleStatistic
 } from "../../../../../models/mongo-models/title-statistic"
 import { Title } from "../../../../../types"
+import { isIn } from "../../../../../utils/array"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setTitle } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -17,6 +18,9 @@ export function TitleTab() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
   const [titles, setTitles] = useState<ITitleStatistic[]>([])
+  const nbTitlesUnlocked = user
+    ? Object.keys(Title).filter((title) => isIn(user.titles, title)).length
+    : 0
 
   useEffect(() => {
     fetchTitles().then((res) => {
@@ -40,7 +44,7 @@ export function TitleTab() {
         />
         <p>
           {t("titles_unlocked", {
-            count: user.titles.length,
+            count: nbTitlesUnlocked,
             total: Object.keys(Title).length
           })}
         </p>
