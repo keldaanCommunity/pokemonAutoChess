@@ -561,7 +561,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      if(boardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (boardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       boardPokemon.addMaxHP(value, this.player)
     }
   }
@@ -615,8 +616,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       update(this)
     }
 
-    if (permanent && !this.isGhostOpponent) {      
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+    if (permanent && !this.isGhostOpponent) {
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -644,7 +646,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -673,7 +676,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -702,7 +706,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -731,7 +736,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -763,7 +769,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
-        if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+        if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+          value = Math.round(value * 1.25)
         update(this.refToBoardPokemon)
       }
     }
@@ -1643,15 +1650,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.GOLDEN_NANAB_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player) this.player.addMoney(5, true, this)
+        if (this.player && !this.simulation.isGhostBattle)
+          this.player.addMoney(5, true, this)
         break
       case Item.GOLDEN_RAZZ_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player) this.player.shopFreeRolls += 6
+        if (this.player && !this.simulation.isGhostBattle)
+          this.player.shopFreeRolls += 6
         break
       case Item.GOLDEN_PINAP_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player) this.player.items.push(...pickNRandomIn(Sweets, 3))
+        if (this.player && !this.simulation.isGhostBattle)
+          this.player.items.push(...pickNRandomIn(Sweets, 3))
         break
     }
 
