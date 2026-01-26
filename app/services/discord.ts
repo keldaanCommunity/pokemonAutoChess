@@ -1,4 +1,5 @@
 import { EmbedBuilder, WebhookClient } from "discord.js"
+import { BASE_URL } from "../config"
 import { IBot } from "../models/mongo-models/bot-v2"
 import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { getAvatarSrc } from "../utils/avatar"
@@ -19,6 +20,11 @@ if (process.env.DISCORD_BAN_WEBHOOK_URL) {
   })
 }
 
+const toAbsoluteURL = (url: string) => {
+  if (url.startsWith("http")) return url
+  return `${BASE_URL || "http://localhost:3000"}${url}`
+}
+
 export const discordService = {
   announceBan(
     user: IUserMetadataMongo,
@@ -29,12 +35,12 @@ export const discordService = {
       .setTitle(`${user.displayName} banned the user ${bannedUser.displayName}`)
       .setAuthor({
         name: user.displayName,
-        iconURL: getAvatarSrc(user.avatar)
+        iconURL: toAbsoluteURL(getAvatarSrc(user.avatar))
       })
       .setDescription(
         `${user.displayName} banned the user ${bannedUser.displayName}. Reason: ${reason}`
       )
-      .setThumbnail(getAvatarSrc(bannedUser.avatar))
+      .setThumbnail(toAbsoluteURL(getAvatarSrc(bannedUser.avatar)))
     try {
       discordBanWebhook?.send({
         embeds: [dsEmbed]
@@ -49,10 +55,10 @@ export const discordService = {
       .setTitle(`${user.displayName} unbanned the user ${name}`)
       .setAuthor({
         name: user.displayName,
-        iconURL: getAvatarSrc(user.avatar)
+        iconURL: toAbsoluteURL(getAvatarSrc(user.avatar))
       })
       .setDescription(`${user.displayName} unbanned the user ${name}`)
-      .setThumbnail(getAvatarSrc(user.avatar))
+      .setThumbnail(toAbsoluteURL(getAvatarSrc(user.avatar)))
     try {
       discordBanWebhook?.send({
         embeds: [dsEmbed]
@@ -67,12 +73,12 @@ export const discordService = {
       .setTitle(`BOT ${bot.name} created by ${bot.author}`)
       .setAuthor({
         name: bot.author,
-        iconURL: getAvatarSrc(bot.avatar)
+        iconURL: toAbsoluteURL(getAvatarSrc(bot.avatar))
       })
       .setDescription(
         `A new bot has been created by ${bot.author}, pending approval by a Bot Manager.`
       )
-      .setThumbnail(getAvatarSrc(bot.avatar))
+      .setThumbnail(toAbsoluteURL(getAvatarSrc(bot.avatar)))
 
     try {
       discordWebhook?.send({
@@ -90,12 +96,12 @@ export const discordService = {
       )
       .setAuthor({
         name: approver.displayName,
-        iconURL: getAvatarSrc(approver.avatar)
+        iconURL: toAbsoluteURL(getAvatarSrc(approver.avatar))
       })
       .setDescription(
         `BOT ${botData.name} by @${botData.author} approved by ${approver.displayName}`
       )
-      .setThumbnail(getAvatarSrc(botData.avatar))
+      .setThumbnail(toAbsoluteURL(getAvatarSrc(botData.avatar)))
     try {
       discordWebhook?.send({
         embeds: [dsEmbed]
