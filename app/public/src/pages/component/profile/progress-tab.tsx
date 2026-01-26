@@ -4,6 +4,7 @@ import { precomputedPokemonsImplemented } from "../../../../../../gen/precompute
 import { GADGETS } from "../../../../../core/gadgets"
 import { Title } from "../../../../../types"
 import { NonPkm } from "../../../../../types/enum/Pokemon"
+import { isIn } from "../../../../../utils/array"
 import { useAppSelector } from "../../../hooks"
 import "./progress-tab.css"
 
@@ -23,7 +24,9 @@ export function ProgressTab() {
   const nbPokemonsTotal = precomputedPokemonsImplemented.filter(
     (p) => NonPkm.includes(p.name) === false
   ).length
-  const nbTitlesUnlocked = user?.titles.length ?? 0
+  const nbTitlesUnlocked = user
+    ? Object.keys(Title).filter((title) => isIn(user.titles, title)).length
+    : 0
   const nbTitlesTotal = Object.keys(Title).length
   const level = user?.level ?? 0
   const gadgets = Object.values(GADGETS).filter((g) => !g.disabled)
