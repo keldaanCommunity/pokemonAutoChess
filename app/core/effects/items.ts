@@ -336,13 +336,15 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       dishes = pickNRandomIn(NonSpecialBerries, 3 * nbDishes)
     }
     if (dish === Item.MUSHROOMS) {
-      dishes = [
-        randomWeighted({
-          [Item.TINY_MUSHROOM]: 70,
-          [Item.BIG_MUSHROOM]: 25,
-          [Item.BALM_MUSHROOM]: 5
-        }) ?? Item.TINY_MUSHROOM
-      ]
+      dishes = Array.from(
+        { length: nbDishes },
+        () =>
+          randomWeighted({
+            [Item.TINY_MUSHROOM]: 70,
+            [Item.BIG_MUSHROOM]: 25,
+            [Item.BALM_MUSHROOM]: 5
+          }) ?? Item.TINY_MUSHROOM
+      )
     }
     if (dish === Item.SWEETS) {
       dishes = pickNRandomIn(Sweets, nbDishes)
