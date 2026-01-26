@@ -118,7 +118,7 @@ export function ItemDistribution({
       {scatterData.length === 0 ? (
         <p>{loading ? t("loading") : t("no_data_available")}</p>
       ) : (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="95%">
           <ScatterChart data={scatterData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
