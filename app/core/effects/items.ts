@@ -1221,6 +1221,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.EXPLOSIVE_BAND]: [
     new OnShieldDepletedEffect(({ pokemon, board }) => {
+      if (!pokemon.items.has(Item.EXPLOSIVE_BAND)) {
+        return // failsafe
+      }
       // The first time user shield is depleted, this item explodes,
       // dealing 50% of all shield gained so far as special damage to adjacent enemies.
       const adjacentCells = board.getAdjacentCells(
@@ -1234,6 +1237,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       const shieldGained = dps.get(pokemon.id)?.shield ?? 0
       const explosionDamage = Math.round(0.3 * shieldGained)
 
+      pokemon.broadcastAbility({ skill: "EXPLOSION" })
+      pokemon.removeItem(Item.EXPLOSIVE_BAND)
+
       adjacentCells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -1246,9 +1252,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           )
         }
       })
-
-      pokemon.broadcastAbility({ skill: "EXPLOSION" })
-      pokemon.removeItem(Item.EXPLOSIVE_BAND)
     })
   ],
 
