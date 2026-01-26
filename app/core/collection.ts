@@ -64,10 +64,12 @@ export function pickRandomPokemonBooster(
   let threshold = 0
 
   if (godPack || guaranteedUnique) {
-    name = pickRandomIn([
-      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
-      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
-    ].filter((p) => getBaseAltForm(p) === p)) as Pkm
+    name = pickRandomIn(
+      [
+        ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
+        ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
+      ].filter((p) => getBaseAltForm(p) === p)
+    ) as Pkm
   } else {
     for (let i = 0; i < rarities.length; i++) {
       const rarity = rarities[i]
@@ -92,7 +94,7 @@ export function pickRandomPokemonBooster(
 
   if (name in PkmAltFormsByPkm) {
     // If the selected Pokemon has alt forms, pick one of them randomly
-    name = pickRandomIn([...name, PkmAltFormsByPkm[name]!])
+    name = pickRandomIn([name, ...PkmAltFormsByPkm[name]!])
   }
 
   const shiny =
