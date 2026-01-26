@@ -589,11 +589,8 @@ export class OnDragDropCombineCommand extends Command<
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
         // replace silk scarf by scarf-made item
-        const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
-        if (scarfIndex >= 0) {
-          player.scarvesItems[scarfIndex] = result
-        }
-        if (player.countScarvesUsed() >= 5) {
+        player.scarvesItems.push(result)
+        if (player.scarvesItems.length >= 5) {
           player.titles.add(Title.SCOUT)
         }
       }
@@ -813,7 +810,7 @@ export class OnDragDropItemCommand extends Command<
         if (scarfIndex >= 0) {
           player.scarvesItems[scarfIndex] = itemCombined
         }
-        if (player.countScarvesUsed() >= 5) {
+        if (player.scarvesItems.length >= 5) {
           player.titles.add(Title.SCOUT)
         }
       }

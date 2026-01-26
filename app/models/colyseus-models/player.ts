@@ -449,10 +449,18 @@ export default class Player extends Schema implements IPlayer {
     return needsRecomputingSynergiesAgain
   }
 
-  countScarvesUsed(): number {
-    return this.scarvesItems.reduce((count, scarf) => {
-      return count + (scarf === Item.NULLIFY_BANDANNA ? 2 : 1)
-    }, 0)
+  getScarvesItemsWithNbScarves(n: number): Item[] {
+    let i = 0
+    const scarves: Item[] = []
+    while (n > 0) {
+      const scarf = this.scarvesItems[i] ?? Item.SILK_SCARF
+      n -= scarf === Item.NULLIFY_BANDANNA ? 2 : 1
+      if (n >= 0) {
+        scarves.push(scarf)
+        i++
+      }
+    }
+    return scarves
   }
 
   updateScarves(
@@ -463,30 +471,27 @@ export default class Player extends Schema implements IPlayer {
     const previousNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
       (n) => (previousSynergies.get(Synergy.NORMAL) ?? 0) >= n
     ).length
+    const previousScarves = this.getScarvesItemsWithNbScarves(previousNbScarves)
 
     const newNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
       (n) => (updatedSynergies.get(Synergy.NORMAL) ?? 0) >= n
     ).length
+    const newScarves = this.getScarvesItemsWithNbScarves(newNbScarves)
 
-    if (newNbScarves > previousNbScarves) {
+    if (newScarves.length > previousScarves.length) {
       // some scarves are gained
-      while (this.countScarvesUsed() < newNbScarves) {
-        // initialize scarves items if not done yet
-        this.scarvesItems.push(Item.SILK_SCARF)
-      }
-
-      const gainedScarves = this.scarvesItems.slice(
-        previousNbScarves,
-        newNbScarves
+      const gainedScarves = newScarves.slice(
+        previousScarves.length,
+        newScarves.length
       )
       gainedScarves.forEach((item) => {
         this.items.push(item)
       })
-    } else if (newNbScarves < previousNbScarves) {
+    } else if (newScarves.length < previousScarves.length) {
       // some scarves are lost
-      const lostScarves = this.scarvesItems.slice(
-        newNbScarves,
-        previousNbScarves
+      const lostScarves = previousScarves.slice(
+        newScarves.length,
+        previousScarves.length
       )
 
       const removeScarf = (item: ScarfItem) => {
