@@ -175,7 +175,7 @@
 - New recipe for GREEN_ORB: MIRACLE_SEED + MYSTIC_WATER. Base stats: 3 SPE_DEF → 15 HP
 - New recipe for STAR_DUST: NEVER_MELT_ICE + MYSTIC_WATER. Base stats: 50 SHIELD → 10 SPE_DEF.
 
-> It took a while, but we finally have a HP-based item component. Green Orb and Star Dust recipe switch should help for players coming from TFT. Oh, and King's Rock makes you truely the King of the board now.
+> It took a while, but we finally have a HP-based item component. Green Orb and Star Dust recipe switch should help for players coming from TFT. Oh, and King's Rock makes you truly the King of the board now.
 
 ## New items
 
