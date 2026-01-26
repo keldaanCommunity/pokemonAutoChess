@@ -20,41 +20,92 @@
   flex-wrap: wrap;
 }
 
+.region-stat {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.5em !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
+  padding: 1em !important;
+  margin-bottom: 0.5em;
+}
+
+/* Rank */
+.region-stat > .rank {
+  width: 2em;
+  text-align: center;
+  font-weight: bold;
+  flex-shrink: 0;
+  min-width: 2em;
+}
+
+/* Image */
 .region-stat img {
   border-radius: 4px;
   width: 48px;
   height: 48px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
-.region-stat span {
-  display: flex;
-  align-items: center;
-  gap: 0.4em;
+/* Region name */
+.region-stat > span:nth-of-type(2) {
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+/* Synergies section */
+.region-stat > div:nth-of-type(1) {
+  display: flex !important;
+  gap: 0.5em !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0;
+  min-width: 150px;
+}
+
+/* Stats section (count and average place) */
+.region-stat > div:nth-of-type(2) {
+  display: flex !important;
+  gap: 1.5em !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+
+.region-stat > div:nth-of-type(2) span {
+  display: flex !important;
+  gap: 0.4em !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+/* Popular pokemons section */
+.region-stat > div:nth-of-type(3) {
+  display: flex !important;
+  gap: 0.5em !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 1;
+  min-width: auto;
+}
+
+.region-stat > div:nth-of-type(3) label {
+  white-space: nowrap !important;
+  flex-shrink: 0;
 }
 
 .region-stat label {
   color: #ccc;
   margin: 0;
-}
-
-.region-stat div {
-  display: flex;
-  gap: 0.4em;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-
-.region-stat div span {
-  display: flex;
-  gap: 0.4em;
-  align-items: center;
-  white-space: nowrap;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
   .region-stat {
-    grid-template-columns: 1fr;
+    flex-wrap: wrap !important;
+    gap: 0.5em !important;
   }
 
   #region-report header {
