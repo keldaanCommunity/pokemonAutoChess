@@ -82,6 +82,7 @@ import {
   ItemRecipe,
   ItemsSoldAtTown,
   Mulches,
+  Scarves,
   ShinyItems,
   Sweets,
   SynergyGems,
@@ -567,8 +568,15 @@ export class OnDragDropCombineCommand extends Command<
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
-      result = recipe[0]
+      if (Scarves.includes(recycledItem)) {
+        removeInArray(player.scarvesItems, recycledItem)
+      }
+      removeInArray(player.items, itemA)
+      removeInArray(player.items, itemB)
+      player.items.push(recipe[0])
       player.items.push(recipe[1])
+      player.updateSynergies()
+      return
     } else {
       // find recipe result
       const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
@@ -603,6 +611,7 @@ export class OnDragDropCombineCommand extends Command<
     player.updateSynergies()
   }
 }
+
 export class OnDragDropItemCommand extends Command<
   GameRoom,
   {

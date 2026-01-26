@@ -7,7 +7,6 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   AbilityPerTM,
-  Berries,
   Dish,
   DishesGoingToInventory,
   FishingRod,
@@ -16,9 +15,9 @@ import {
   Item,
   ItemRecipe,
   MemoryDiscs,
-  Mushrooms,
   NonSpecialBerries,
   OgerponMasks,
+  Scarves,
   Sweets,
   SynergyGivenByItem,
   SynergyStones,
@@ -1048,6 +1047,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
+        }
+        if (Scarves.includes(heldItem)) {
+          removeInArray(player.scarvesItems, heldItem)
         }
       })
 
