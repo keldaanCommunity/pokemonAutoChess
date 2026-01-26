@@ -546,7 +546,7 @@ export class OnDragDropCombineCommand extends Command<
 
     if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
-      if (ItemComponents.includes(exchangedItem)) {
+      if (ItemComponentsNoScarf.includes(exchangedItem)) {
         result = pickRandomIn(
           ItemComponentsNoFossilOrScarf.filter((i) => i !== exchangedItem)
         )
