@@ -1,3 +1,5 @@
+export const BASE_URL = "https://pokemon-auto-chess.com"
+
 export const MAX_POOL_CONNECTIONS_SIZE = 16
 export const MAX_CONCURRENT_PLAYERS_ON_SERVER = 1000
 export const MAX_CONCURRENT_PLAYERS_ON_LOBBY = 500
