@@ -3330,7 +3330,7 @@
 		"ARMOR_BREAK": "Réduit l'efficacité de la DEF et SPE_DEF de 50 %",
 		"CHARM": "Empêche d'attaquer la cible et oblige à s'en rapprocher",
 		"FLINCH": "50% des dégâts reçus passent à travers le SHIELD",
-		"CURSE": "Met KO le Pokémon maudit à la fin du compte à rebours",
+		"CURSE": "Met KO le Pokémon maudit à la fin du compte à rebours. Appliquer une malédiction à un Pokémon déjà maudit provoque un KO immédiat.",
 		"RUNE_PROTECT": "Protège des altérations de statut",
 		"POSSESSED": "Combat temporairement pour l'équipe adverse. Devient CHARM si la cible est le seul ennemi restant",
 		"LOCKED": "Empêche de bouger et d'esquiver et réduit la RANGE à 1",
@@ -4619,5 +4619,18 @@
 		"cluster_size": "Taille",
 		"matches": "correspondances"
 	},
-	"cluster_map": "Carte de cluster"
+	"cluster_map": {
+		"title": "Carte des clusters",
+		"description": "Cette carte illustre les clusters de compositions d'équipes en fonction de la similarité de leurs synergies. Chaque point représente un cluster de builds d'équipes similaires.",
+		"loading": "Chargement de la carte des clusters...",
+		"total_clusters": "Nombre total de clusters",
+		"total_matches": "Nombre total de matchs",
+		"cluster": "Cluster",
+		"hovered_cluster": "Survolé",
+		"selected_cluster": "Sélectionné",
+		"rank": "Rang",
+		"winrate": "Taux de victoire",
+		"popularity": "Popularité",
+		"count": "Compte"
+	}
 }
