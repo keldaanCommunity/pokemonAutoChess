@@ -21,13 +21,17 @@
 }
 
 .region-stat {
-  display: flex !important;
-  align-items: center !important;
-  gap: 1.5em !important;
-  flex-wrap: nowrap !important;
-  flex-direction: row !important;
-  padding: 1em !important;
+  background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
+  color: white;
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 1em;
+  grid-template-columns: 2ch 48px 16ch 12ch 16ch 1fr;
 }
 
 /* Rank */
