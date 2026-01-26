@@ -39,8 +39,7 @@
   margin: 0;
 }
 
-#meta-report .team-comp,
-#meta-report .region-stat {
+#meta-report .team-comp {
   background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
@@ -60,8 +59,4 @@
   padding: 0.5em;
   overflow-x: auto;
   grid-template-columns: 2ch 48px 16ch 16ch 10ch 1fr;
-}
-
-#meta-report .region-stat {
-  grid-template-columns: 2ch 48px 16ch 12ch 16ch 1fr;
 }
