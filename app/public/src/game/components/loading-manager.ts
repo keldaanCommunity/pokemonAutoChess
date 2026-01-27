@@ -135,7 +135,7 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
   )
   scene.load.multiatlas(
     "berry_trees",
-    "/assets/environment/berry_trees.json",
+    "/assets/environment/berry_trees.json?tempcacheburst=68", //TEMP
     "/assets/environment/"
   )
   scene.load.multiatlas(
