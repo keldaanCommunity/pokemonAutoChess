@@ -1472,14 +1472,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         behavior: WandererBehavior.SPECTATE,
         data: (rewardsIcons ?? rewards).join(";")
       })
-      player.wanderers.set(id, wanderer)
+      setTimeout(() => player.wanderers.set(id, wanderer), 3000)
       setTimeout(() => {
         if (rewards[0] === Item.BIG_NUGGET) {
           player.addMoney(10, true, null)
         } else {
           player.items.push(...rewards)
         }
-      }, 7000)
+      }, 10000)
     }
 
     const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
