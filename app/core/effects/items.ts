@@ -371,7 +371,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
                 ) === 1
             )
             candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-            const pokemon = candidates[i] ?? chef
+            const pokemon = candidates[0] ?? chef // idx 0 equals the strongest unit
             if (dish === Item.HERBA_MYSTICA) {
               const flavors: Dish[] = []
               if (pokemon.types.has(Synergy.FAIRY))
