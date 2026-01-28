@@ -3603,6 +3603,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
   [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
+  [Pkm.WEEZING]: [Pkm.GALARIAN_WEEZING],
   [Pkm.SUICUNE]: [Pkm.WALKING_WAKE],
   [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR],
   [Pkm.TAUROS]: [
@@ -3625,6 +3626,8 @@ export const PkmRegionalBaseVariants: { [key in Pkm]?: Pkm } =
       variants.map((variant) => [variant, base])
     )
   ) as { [key in Pkm]?: Pkm }
+
+console.log(PkmRegionalBaseVariants)
 
 export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
