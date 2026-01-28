@@ -214,6 +214,22 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
+export class MachRibbonEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.addSpeed(20, pokemon, 0, false)
+        pokemon.count.machRibbonCount++
+        if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
+          pokemon.player.titles.add(Title.TOP_GUN)
+        }
+      },
+      Item.MACH_RIBBON,
+      4000
+    )
+  }
+}
+
 export class RunningShoesOnMoveEffect extends OnMoveEffect {
   stacks = 0
 
@@ -700,21 +716,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.MACH_RIBBON]: [
-    new PeriodicEffect(
-      (pokemon) => {
-        pokemon.addSpeed(20, pokemon, 0, false)
-        pokemon.count.machRibbonCount++
-        if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
-          pokemon.player.titles.add(Title.TOP_GUN)
-        }
-      },
-      Item.MACH_RIBBON,
-      4000
-    ),
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effectsSet.add(new MachRibbonEffect())
+    }),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = pokemon.count.machRibbonCount
-      pokemon.addSpeed(-20 * stacks, pokemon, 0, false)
-      pokemon.count.machRibbonCount = 0
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof MachRibbonEffect) {
+          pokemon.addSpeed(-20 * effect.count, pokemon, 0, false)
+          pokemon.effectsSet.delete(effect)
+          pokemon.count.machRibbonCount = 0
+          break
+        }
+      }
     })
   ],
 
