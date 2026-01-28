@@ -459,7 +459,7 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon, player }) => {
     }
     pokemon.stacks = 0
   } else if (pokemon.stacks < pokemon.stacksRequired) {
-    pokemon.speed -= 5
+    pokemon.speed = min(0)(pokemon.speed - 5)
     pokemon.def += 2
     pokemon.stacks += 1
   }
