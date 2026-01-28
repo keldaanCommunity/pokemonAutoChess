@@ -107,7 +107,7 @@ export function WikiPokemon(props: {
           if (
             !preferences.showEvolutions &&
             PkmFamily[p] !== p &&
-            getPokemonData(PkmFamily[p]).stars !== getPokemonData(p).stars
+            getPokemonData(PkmFamily[p]).stars < getPokemonData(p).stars
           )
             return false
           return true

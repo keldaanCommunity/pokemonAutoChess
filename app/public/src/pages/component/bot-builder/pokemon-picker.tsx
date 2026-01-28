@@ -158,7 +158,10 @@ function PokemonPickerTab(props: {
             return false
 
           if (preferences.showEvolutions) return true
-          return p.name === PkmFamily[p.name]
+          return (
+            getPokemonData(p.name).stars ===
+            getPokemonData(PkmFamily[p.name]).stars
+          )
         })
         .filter((p) => {
           const family = PkmFamily[p.name]
