@@ -1537,6 +1537,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     this.status.clearAllStatus(this)
+    // copy statuses applied from item effects
+    this.status.runeProtect = cloneReference.status.runeProtect // from safety goggles
+    this.status.runeProtectCooldown = cloneReference.status.runeProtectCooldown
+    this.status.burn = cloneReference.status.burn // from flame orb
+    this.status.burnCooldown = cloneReference.status.burnCooldown
+
     this.hp = this.maxHP
     this.pp = 0
     this.shield = 0
