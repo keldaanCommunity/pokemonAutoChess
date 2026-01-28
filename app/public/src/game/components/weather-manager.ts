@@ -637,6 +637,8 @@ export default class WeatherManager {
     if (this.fxs) {
       this.fxs.forEach((effect) => effect.destroy())
       this.fxs = []
+      const scene = this.scene as GameScene
+      scene.map?.layers.forEach((layer) => layer.tilemapLayer.clearFX())
     }
   }
 }

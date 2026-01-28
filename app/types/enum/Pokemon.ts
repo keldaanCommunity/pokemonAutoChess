@@ -3627,8 +3627,6 @@ export const PkmRegionalBaseVariants: { [key in Pkm]?: Pkm } =
     )
   ) as { [key in Pkm]?: Pkm }
 
-console.log(PkmRegionalBaseVariants)
-
 export enum PkmDuo {
   LATIOS_LATIAS = "LATIOS_LATIAS",
   PLUSLE_MINUN = "PLUSLE_MINUN",
