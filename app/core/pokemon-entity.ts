@@ -554,15 +554,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     this.maxHP = min(1)(this.maxHP + value)
     if (this.hp > 0) {
       // careful to not heal a KO pokemon
       this.hp = clamp(this.hp + value, 1, this.maxHP)
     }
+
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      if (boardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       boardPokemon.addMaxHP(value, this.player)
     }
   }
@@ -606,6 +609,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { ap: number }) => {
       target.ap = min(-100)(target.ap + value)
     }
@@ -617,8 +624,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -641,13 +646,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { luck: number }) => {
       target.luck = clamp(target.luck + value, -100, +100)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -671,13 +678,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { def: number }) => {
       target.def = min(0)(target.def + value)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -701,13 +710,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { speDef: number }) => {
       target.speDef = min(0)(target.speDef + value)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -731,13 +742,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { atk: number }) => {
       target.atk = min(1)(target.atk + value)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -764,13 +777,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
+
+      if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
+        value = Math.round(value * 1.25)
+      }
+
       const update = (target: { speed: number }) => {
         target.speed = clamp(target.speed + value, 0, MAX_SPEED)
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
-        if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-          value = Math.round(value * 1.25)
         update(this.refToBoardPokemon)
       }
     }
