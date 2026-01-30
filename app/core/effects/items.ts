@@ -445,7 +445,7 @@ function dropComfey({ pokemon, board }: OnDeathEffectArgs) {
 
 export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
-    [...SynergyStones, Item.FRIEND_BOW].map((stone) => [
+    SynergyStones.map((stone) => [
       stone,
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
