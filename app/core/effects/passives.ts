@@ -314,7 +314,7 @@ export class AccelerationEffect extends OnMoveEffect {
 
   constructor() {
     super((pkm) => {
-      pkm.addSpeed(20, pkm, 0, false)
+      pkm.addSpeed(15, pkm, 0, false)
       this.accelerationStacks += 1
     }, Passive.ACCELERATION)
   }
