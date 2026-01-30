@@ -3071,7 +3071,7 @@
 		"COVER_BAND": "Si un allié ADJACENT est sur le point d'être mis KO par des dégâts entrants, le porteur encaisse les dégâts à sa place.",
 		"EFFICIENT_BANDANNA": "Le porteur et ses alliés ADJACENT_IN_THE_SAME_ROW voient leur PP max réduit de 10%.",
 		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en SHIELD, et les PP sont convertis en SPECIAL bonus sur la prochaine attaque.",
-		"WANTED_NOTICE": "Recherché KO ou Vif\\nRécompense: 10 GOLD"
+		"WANTED_NOTICE": "Recherché KO ou Vif\nRécompense: 10 GOLD"
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
