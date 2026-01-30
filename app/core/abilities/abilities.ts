@@ -15854,8 +15854,8 @@ export class PowderStrategy extends AbilityStrategy {
             )
             const speedNerf = max(pokemon.speed)(
               speedFactor *
-                (1 + cell.value.ap / 100) *
-                (crit ? cell.value.critPower : 1)
+                (1 + pokemon.ap / 100) *
+                (crit ? pokemon.critPower : 1)
             )
             cell.value.addSpeed(-speedNerf, pokemon, 0, false)
             cell.value.commands.push(
