@@ -1389,6 +1389,16 @@ export default class Simulation extends Schema implements ISimulation {
         break
       }
 
+      case EffectEnum.DROUGHT: {
+        const player = pokemon.player
+        const nbHeatStones = player
+          ? count(player.items, Item.HEAT_ROCK)
+          : 0
+
+        pokemon.addAttack(3 * nbHeatStones, pokemon, 0, false)
+        break
+      }
+
       case EffectEnum.MURKY: {
         const player = pokemon.player
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
