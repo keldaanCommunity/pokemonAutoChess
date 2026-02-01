@@ -966,13 +966,8 @@ export default class BoardManager {
               pokemonUI.attackSprite
             // load the new ones
             pokemonUI.lazyloadAnimations(this.scene).then(() => {
+              pokemonUI.animationLocked = false
               pokemonUI.evolutionAnimation()
-              this.animationManager.animatePokemon(
-                pokemonUI,
-                pokemonUI.pokemon.action,
-                false,
-                false
-              )
             })
           }
           break
