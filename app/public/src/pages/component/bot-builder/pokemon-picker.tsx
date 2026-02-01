@@ -21,7 +21,11 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppSelector
+} from "../../../hooks"
 import { usePreferences } from "../../../preferences"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
@@ -131,8 +135,10 @@ function PokemonPickerTab(props: {
     (state) => state.game.additionalPokemons
   )
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const regionalPokemons: Pkm[] = currentPlayer?.regionalPokemons?.slice() ?? []
+  const currentPlayer = useAppSelector(selectConnectedPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const player = currentPlayer ?? spectatedPlayer // when spectating another lobby, use that spectated player's data for team planner
+  const regionalPokemons: Pkm[] = player?.regionalPokemons?.slice() ?? []
 
   const filteredPokemons = useMemo(
     () =>

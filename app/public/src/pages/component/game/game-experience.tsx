@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip"
 import { MAX_LEVEL } from "../../../../../config"
 import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
 import {
-  selectCurrentPlayer,
+  selectSpectatedPlayer,
   useAppDispatch,
   useAppSelector
 } from "../../../hooks"
@@ -28,9 +28,9 @@ export default function GameExperience() {
         (experienceManager.expNeeded - experienceManager.experience) /
           levelUpCost
       ) * levelUpCost
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const canLevelup =
-    !isLevelMax && currentPlayer && currentPlayer.money >= levelUpCost
+    !isLevelMax && spectatedPlayer && spectatedPlayer.money >= levelUpCost
 
   return (
     <div className="game-experience">

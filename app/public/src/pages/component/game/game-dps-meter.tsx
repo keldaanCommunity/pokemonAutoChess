@@ -4,7 +4,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { GamePhaseState, Team } from "../../../../../types/enum/Game"
 import { DEPTH } from "../../../game/depths"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { usePreference } from "../../../preferences"
 import DraggableWindow from "../modal/draggable-window"
 import PokemonPortrait from "../pokemon-portrait"
@@ -15,8 +15,8 @@ import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const team = useAppSelector((state) => state.game.currentTeam)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const team = useAppSelector((state) => state.game.teamSpectated)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const phase = useAppSelector((state) => state.game.phase)
   const [showDpsMeter, setShowDpsMeter] = usePreference("showDpsMeter")
@@ -28,17 +28,17 @@ export default function GameDpsMeter() {
   const myDpsMeter = team === Team.BLUE_TEAM ? blueDpsMeter : redDpsMeter
   const opponentDpsMeter = team === Team.BLUE_TEAM ? redDpsMeter : blueDpsMeter
 
-  if (!currentPlayer) return null
+  if (!spectatedPlayer) return null
 
   const isPVE =
     phase === GamePhaseState.FIGHT
       ? stageLevel in PVEStages
       : stageLevel - 1 in PVEStages
 
-  const name = currentPlayer.name
-  const avatar = currentPlayer.avatar
-  const opponentName = currentPlayer.opponentName
-  const opponentAvatar = currentPlayer.opponentAvatar
+  const name = spectatedPlayer.name
+  const avatar = spectatedPlayer.avatar
+  const opponentName = spectatedPlayer.opponentName
+  const opponentAvatar = spectatedPlayer.opponentAvatar
 
   if (opponentAvatar == "") {
     return null

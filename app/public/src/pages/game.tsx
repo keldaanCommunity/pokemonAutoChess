@@ -35,7 +35,12 @@ import { logger } from "../../../utils/logger"
 import { values } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
-import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppDispatch,
+  useAppSelector
+} from "../hooks"
 import { authenticateUser } from "../network"
 import store from "../stores"
 import {
@@ -158,11 +163,12 @@ export default function Game() {
     (state) => state.network.game
   )
   const uid: string = useAppSelector((state) => state.network.uid)
-  const currentPlayerId: string = useAppSelector(
-    (state) => state.game.currentPlayerId
+  const spectatedPlayerId: string = useAppSelector(
+    (state) => state.game.playerIdSpectated
   )
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const spectate = currentPlayerId !== uid || !currentPlayer?.alive
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const spectate = spectatedPlayerId !== uid || !spectatedPlayer?.alive
 
   const initialized = useRef<boolean>(false)
   const connecting = useRef<boolean>(false)
@@ -246,7 +252,7 @@ export default function Game() {
 
     const nbPlayers = room?.state.players.size ?? 0
     const hasLeftBeforeEnd =
-      currentPlayer?.alive === true && room?.state?.gameFinished === false
+      connectedPlayer?.alive === true && room?.state?.gameFinished === false
 
     if (nbPlayers > 0) {
       room?.state.players.forEach((p) => {
@@ -754,7 +760,7 @@ export default function Game() {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
         })
         $player.listen("map", (newMap) => {
-          if (player.id === store.getState().game.currentPlayerId) {
+          if (player.id === store.getState().game.playerIdSpectated) {
             const gameScene = getGameScene()
             if (gameScene) {
               gameScene.setMap(newMap)
@@ -842,7 +848,7 @@ export default function Game() {
         })
 
         $player.groundHoles.onChange((value) => {
-          if (player.id === store.getState().game.currentPlayerId) {
+          if (player.id === store.getState().game.playerIdSpectated) {
             const gameScene = getGameScene()
             if (gameScene?.board && room.state.phase === GamePhaseState.PICK) {
               gameScene.board.renderGroundHoles()
@@ -862,7 +868,7 @@ export default function Game() {
         $player.wanderers.onAdd((wanderer: Wanderer) => {
           if (
             gameContainer.game &&
-            player.id === store.getState().game.currentPlayerId
+            player.id === store.getState().network.uid
           ) {
             const g = getGameScene()
             if (g && g.wandererManager) {
@@ -888,7 +894,7 @@ export default function Game() {
     dispatch,
     client,
     uid,
-    currentPlayerId,
+    spectatedPlayerId,
     connectToGame,
     leave
   ])

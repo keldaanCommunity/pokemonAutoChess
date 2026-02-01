@@ -706,18 +706,18 @@ export default class BoardManager {
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
       const gameState = store.getState().game
-      const currentPlayer = gameState.players.find(
-        (p) => p.id === gameState.currentPlayerId
+      const spectatedPlayer = gameState.players.find(
+        (p) => p.id === gameState.playerIdSpectated
       )
-      if (currentPlayer) {
-        const isPVERound = currentPlayer.opponentId === "pve"
-        const isRedPlayer = gameState.currentTeam === Team.RED_TEAM
+      if (spectatedPlayer) {
+        const isPVERound = spectatedPlayer.opponentId === "pve"
+        const isRedPlayer = gameState.teamSpectated === Team.RED_TEAM
         if (!isPVERound && phaseJustChanged) {
           this.portalTransition(isRedPlayer)
         } else {
           this.updateOpponentAvatar(
-            currentPlayer.opponentId,
-            currentPlayer.opponentAvatar
+            spectatedPlayer.opponentId,
+            spectatedPlayer.opponentAvatar
           )
         }
       }

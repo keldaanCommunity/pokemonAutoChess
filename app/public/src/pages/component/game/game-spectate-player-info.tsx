@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 import PokemonPortrait from "../pokemon-portrait"
@@ -10,9 +10,9 @@ import "./game-spectate-player-info.css"
 
 export default function GameSpectatePlayerInfo() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   return (
-    currentPlayer && (
+    spectatedPlayer && (
       <div
         className="game-spectate-player-info my-container"
         style={{
@@ -24,9 +24,9 @@ export default function GameSpectatePlayerInfo() {
         <GameAdditionalPokemonsIcon />
         <GameRegionalPokemonsIcon />
 
-        <PokemonPortrait avatar={currentPlayer.avatar} />
+        <PokemonPortrait avatar={spectatedPlayer.avatar} />
         <span className="player-name">
-          {t("spectating", { name: currentPlayer.name })}
+          {t("spectating", { name: spectatedPlayer.name })}
         </span>
         <div>
           <div
@@ -37,13 +37,13 @@ export default function GameSpectatePlayerInfo() {
             }}
           >
             <span>
-              {t("lvl")} {currentPlayer.experienceManager.level}
+              {t("lvl")} {spectatedPlayer.experienceManager.level}
             </span>
             <span>
-              <Life value={currentPlayer.life} />
+              <Life value={spectatedPlayer.life} />
             </span>
             <span>
-              <Money value={currentPlayer.money} />
+              <Money value={spectatedPlayer.money} />
             </span>
           </div>
           <div
@@ -60,7 +60,7 @@ export default function GameSpectatePlayerInfo() {
                 alt="$"
                 style={{ width: "24px", height: "24px" }}
               />{" "}
-              {currentPlayer.totalMoneyEarned}
+              {spectatedPlayer.totalMoneyEarned}
             </span>
             <span title={t("total_player_damage_dealt")}>
               <img
@@ -68,7 +68,7 @@ export default function GameSpectatePlayerInfo() {
                 alt="✊"
                 style={{ width: "24px", height: "24px" }}
               />
-              {currentPlayer.totalPlayerDamageDealt}
+              {spectatedPlayer.totalPlayerDamageDealt}
             </span>
             <span title={t("total_reroll_count")}>
               <img
@@ -76,7 +76,7 @@ export default function GameSpectatePlayerInfo() {
                 alt="↻"
                 style={{ width: "24px", height: "24px" }}
               />{" "}
-              {currentPlayer.rerollCount}
+              {spectatedPlayer.rerollCount}
             </span>
           </div>
         </div>

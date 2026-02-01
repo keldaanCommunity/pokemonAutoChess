@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip"
 import { RarityColor, RarityCost } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectConnectedPlayer, selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
 
@@ -30,9 +30,10 @@ export function GameRegionalPokemonsIcon() {
 
 export function GameRegionalPokemons() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const regionalPokemons: Pkm[] = (
-    currentPlayer?.regionalPokemons ?? new Array<Pkm>()
+    spectatedPlayer?.regionalPokemons ?? new Array<Pkm>()
   )
     .slice()
     .sort((a, b) => {
@@ -65,7 +66,7 @@ export function GameRegionalPokemons() {
                 style={{
                   backgroundColor: rarityColor,
                   borderColor: rarityColor,
-                  backgroundImage: `url("${getCachedPortrait(pokemon.index, currentPlayer?.pokemonCustoms)}")`
+                  backgroundImage: `url("${getCachedPortrait(pokemon.index, connectedPlayer?.pokemonCustoms)}")`
                 }}
               >
                 <ul className="game-pokemon-portrait-types">

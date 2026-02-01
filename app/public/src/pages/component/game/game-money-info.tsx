@@ -4,15 +4,15 @@ import { Tooltip } from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { max } from "../../../../../utils/number"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 
 export function GameMoneyInfo() {
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const maxInterest = useAppSelector((state) => state.game.maxInterest)
-  if (!currentPlayer) return null
+  if (!spectatedPlayer) return null
 
   return (
     <div id="game-money-info" className="my-container money information">
@@ -21,8 +21,10 @@ export function GameMoneyInfo() {
           <GameMoneyDetail />
         </Tooltip>
         <Money
-          value={currentPlayer.money}
-          className={cc({ "is-max": currentPlayer.money >= maxInterest * 10 })}
+          value={spectatedPlayer.money}
+          className={cc({
+            "is-max": spectatedPlayer.money >= maxInterest * 10
+          })}
         />
       </div>
     </div>
@@ -33,7 +35,7 @@ export function GameMoneyDetail() {
   const { t } = useTranslation()
   const streak = useAppSelector((state) => state.game.streak)
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const currentPlayer = useAppSelector(selectSpectatedPlayer)
   const lastPlayerBattle =
     currentPlayer && currentPlayer.history && currentPlayer.history.length > 0
       ? currentPlayer.history.filter((r) => r.id !== "pve").at(-1)
