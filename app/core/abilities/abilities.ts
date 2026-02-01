@@ -9522,7 +9522,12 @@ class DarkHarvestEffect extends PeriodicEffect {
               )
             }
           })
-        if (this.duration <= 0) {
+        if (
+          this.duration <= 0 ||
+          pokemon.status.resurrecting ||
+          pokemon.status.freeze ||
+          pokemon.status.sleep
+        ) {
           pokemon.effectsSet.delete(this)
           pokemon.effects.delete(EffectEnum.DARK_HARVEST)
         } else {
@@ -15017,6 +15022,13 @@ export class SuperHeatStrategy extends AbilityStrategy {
     for (let i = 0; i < 9; i++) {
       pokemon.commands.push(
         new DelayedCommand(() => {
+          if (
+            pokemon.status.resurrecting ||
+            pokemon.status.freeze ||
+            pokemon.status.sleep
+          ) {
+            return
+          }
           // Broadcast the ability animation
           pokemon.broadcastAbility({
             positionX: pokemon.positionX,
