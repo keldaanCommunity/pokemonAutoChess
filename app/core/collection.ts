@@ -21,7 +21,6 @@ import {
   IPokemonCollectionItemUnpacked,
   IUserMetadataMongo
 } from "../types/interfaces/UserMetadata"
-import { sum } from "../utils/array"
 import { logger } from "../utils/logger"
 import { chance, pickRandomIn, randomWeighted } from "../utils/random"
 
@@ -59,9 +58,8 @@ export function pickRandomPokemonBooster(
   godPack: boolean
 ): BoosterCard {
   let name = Pkm.MAGIKARP
-  const rarities = Object.keys(Rarity) as Rarity[]
-  const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
-  let threshold = 0
+  const rarity =
+    randomWeighted<Rarity>(BoosterRarityProbability) ?? Rarity.COMMON
 
   if (godPack || guaranteedUnique) {
     name = pickRandomIn(
@@ -71,24 +69,20 @@ export function pickRandomPokemonBooster(
       ].filter((p) => getBaseAltForm(p) === p)
     ) as Pkm
   } else {
-    for (let i = 0; i < rarities.length; i++) {
-      const rarity = rarities[i]
-      const rarityProbability = BoosterRarityProbability[rarity]
-      threshold += rarityProbability
-      if (seed < threshold) {
-        const candidates: Pkm[] = (
-          PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
-        ).filter(
-          (p) =>
-            Unowns.includes(p) === false &&
-            getPokemonData(p).skill !== Ability.DEFAULT &&
-            getBaseAltForm(p) === p
-        )
-        if (candidates.length > 0) {
-          name = pickRandomIn(candidates) as Pkm
-          break
-        }
-      }
+    const candidates: Pkm[] = (
+      PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
+    ).filter(
+      (p) =>
+        Unowns.includes(p) === false &&
+        getPokemonData(p).skill !== Ability.DEFAULT &&
+        getBaseAltForm(p) === p
+    )
+    name = pickRandomIn(candidates)
+    if (name === undefined) {
+      name = Pkm.MAGIKARP
+      logger.warn(
+        `No candidates found for booster card rarity ${rarity}, defaulting to MAGIKARP`
+      )
     }
   }
 
