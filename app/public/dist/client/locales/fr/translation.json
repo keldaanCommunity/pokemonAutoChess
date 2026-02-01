@@ -2891,7 +2891,7 @@
 		"GOLD_BOW": "Le porteur ne compte pas dans la taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
 		"ICY_ROCK": "Compte pour 3 pour SNOW. Sous la SNOW, votre équipe est FREEZE 20% moins longtemps et a [5,LK]% de chance en plus d'infliger FREEZE à leurs ennemis avec leurs attaques.",
-		"SUN_STONE": "Compte pour 3 pour SUNNY. Sous SUNNY, votre équipe regagne 5 HP toutes les 2 secondes et a [5,LK]% de chance en plus d'infliger BURN à leurs ennemis avec leurs attaques.",
+		"SUN_STONE": "Compte pour 3 pour ZENITH. Sous ZENITH, votre équipe regagne 5 HP toutes les 2 secondes et a [5,LK]% de chance en plus d'infliger BURN à leurs ennemis avec leurs attaques.",
 		"HEAT_ROCK": "Compte pour 3 pour DROUGHT. Sous DROUGHT, votre équipe gagne 3 ATK et subit 20% moins de dégâts de BURN.",
 		"SMOOTH_ROCK": "Compte pour 3 pour SANDSTORM. Sous SANDSTORM, votre équipe subit 20% moins de dégâts de la tempête et gagne 1 SPEED chaque seconde.",
 		"BLACK_AUGURITE": "Compte pour 3 pour la NIGHT. Pendant la NIGHT, votre équipe gagne 5% CRIT_CHANCE et subit 10% de dégâts critiques en moins.",
