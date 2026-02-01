@@ -2802,7 +2802,7 @@
 		"FUR_COAT": "Sein Fell wächst und gibt in jeder Stufe +2 DEF und -5 SPEED. Kann trainiert werden, indem man eine Phase auf der Bank verbringt, wodurch seine DEF- und SPEED-Werte zurückgesetzt werden. Bei maximaler Stapelanzahl erhalten Sie einen SILK_SCARF.",
 		"ACCELERATION": "Beschleunigung: erhält 15 SPEED für jedes Feld was es sich fortbewegt (Sprünge und ähnliches zählt als eine Fortbewegung)",
 		"MELTAN": "Wenn es auf $t(pkm.MELMETAL) benutzt wird, verschmelze und gib $t(pkm.MELMETAL) 50 max HP",
-		"FALINKS": "Legios Untergebene haben nun eine [4,LK]% Chance im Shop aufzutauchen. Die Untergebenen kosten 5 GOLD und bis zu 6 mal gekauft werden. Am Start des Kampfes treten sie dem Legios Anführer an und geben jeweils 30 SHIELD, 1 ATK und 1 DEF"
+		"FALINKS": "Legios Untergebene haben nun eine [4,LK]% Chance im Shop aufzutauchen. Die Untergebenen kosten 3 GOLD und bis zu 6 mal gekauft werden. Am Start des Kampfes treten sie dem Legios Anführer an und geben jeweils 30 SHIELD, 1 ATK und 1 DEF"
 	},
 	"stat": {
 		"ATK": "Angriff",

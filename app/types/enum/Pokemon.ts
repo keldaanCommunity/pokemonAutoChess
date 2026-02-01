@@ -3603,6 +3603,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
   [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
+  [Pkm.WEEZING]: [Pkm.GALARIAN_WEEZING],
   [Pkm.SUICUNE]: [Pkm.WALKING_WAKE],
   [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR],
   [Pkm.TAUROS]: [

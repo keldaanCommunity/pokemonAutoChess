@@ -251,7 +251,7 @@ export default class BoardManager {
     }
 
     if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
-      this.addPvePokemons(PVEStages[this.state.stageLevel], phaseJustChanged)
+      this.addPvePokemons(PVEStages[this.state.stageLevel], !phaseJustChanged)
     }
   }
 

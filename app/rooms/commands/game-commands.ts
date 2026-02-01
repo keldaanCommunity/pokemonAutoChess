@@ -596,10 +596,11 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        // replace silk scarf by scarf-made item
-        player.scarvesItems.push(result)
-        if (player.scarvesItems.length >= 5) {
-          player.titles.add(Title.SCOUT)
+        const nbScarvesBasedOnNormalSynergy = player.synergies.getSynergyStep(
+          Synergy.NORMAL
+        )
+        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
+          player.scarvesItems.push(result)
         }
       }
 
@@ -814,13 +815,11 @@ export class OnDragDropItemCommand extends Command<
       }
 
       if (recipe[1].includes(Item.SILK_SCARF)) {
-        // replace silk scarf by scarf-made item
-        const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
-        if (scarfIndex >= 0) {
-          player.scarvesItems[scarfIndex] = itemCombined
-        }
-        if (player.scarvesItems.length >= 5) {
-          player.titles.add(Title.SCOUT)
+        const nbScarvesBasedOnNormalSynergy = player.synergies.getSynergyStep(
+          Synergy.NORMAL
+        )
+        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
+          player.scarvesItems.push(itemCombined)
         }
       }
 
@@ -1215,6 +1214,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       if (this.state.stageLevel >= 40) {
         player.titles.add(Title.ETERNAL)
+      }
+
+      const equippedItems = values(player.board).flatMap((p) => values(p.items))
+      if (equippedItems.filter((i) => isIn(Scarves, i)).length >= 5) {
+        player.titles.add(Title.SCOUT)
       }
     }
   }

@@ -451,7 +451,7 @@ export class OpenBoosterCommand extends Command<
         }
       })
 
-      await checkTitlesAfterEmotionUnlocked(userDoc, boosterContent)
+      checkTitlesAfterEmotionUnlocked(userDoc, boosterContent)
       await userDoc.save()
       client.send(Transfer.BOOSTER_CONTENT, boosterContent)
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(userDoc))
@@ -663,7 +663,7 @@ export class BuyEmotionCommand extends Command<
       pokemonCollectionItem.selectedEmotion = emotion
       pokemonCollectionItem.selectedShiny = shiny
 
-      await checkTitlesAfterEmotionUnlocked(mongoUser, [
+      checkTitlesAfterEmotionUnlocked(mongoUser, [
         { name: PkmByIndex[index], emotion, shiny }
       ])
       await mongoUser.save()
@@ -698,9 +698,12 @@ async function checkTitlesAfterEmotionUnlocked(
           (p) =>
             NonPkm.includes(p) === false && PkmAltForms.includes(p) === false
         )
-        .every((pkm) => {          
+        .every((pkm) => {
           const baseForm = getBaseAltForm(pkm)
-          const accepted: Pkm[] = baseForm in PkmAltFormsByPkm ? [baseForm, ...PkmAltFormsByPkm[baseForm]] : [baseForm]
+          const accepted: Pkm[] =
+            baseForm in PkmAltFormsByPkm
+              ? [baseForm, ...PkmAltFormsByPkm[baseForm]]
+              : [baseForm]
           return accepted.some((form) => {
             const item = mongoUser.pokemonCollection.get(PkmIndex[form])
             if (!item) return false
@@ -758,11 +761,7 @@ async function checkTitlesAfterEmotionUnlocked(
   }
 
   if (newTitles.length > 0) {
-    mongoUser.titles.push(...newTitles)
-    await UserMetadata.updateOne(
-      { uid: mongoUser.uid },
-      { titles: mongoUser.titles }
-    )
+    mongoUser.titles.push(...newTitles) // NOTE: document needs to be saved after those modifications
   }
 }
 
