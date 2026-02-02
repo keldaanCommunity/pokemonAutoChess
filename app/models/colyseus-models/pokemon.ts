@@ -2109,10 +2109,6 @@ export class Deino extends Pokemon {
   range = 2
   skill = Ability.DARK_HARVEST
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DRAGON)
-  }
 }
 
 export class Zweilous extends Pokemon {
@@ -2129,10 +2125,6 @@ export class Zweilous extends Pokemon {
   range = 2
   skill = Ability.DARK_HARVEST
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DRAGON)
-  }
 }
 
 export class Hydreigon extends Pokemon {
@@ -2148,10 +2140,6 @@ export class Hydreigon extends Pokemon {
   range = 2
   skill = Ability.DARK_HARVEST
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DRAGON)
-  }
 }
 
 export class Poliwag extends Pokemon {
@@ -14869,6 +14857,10 @@ export class Impidimp extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Morgrem extends Pokemon {
@@ -14885,6 +14877,10 @@ export class Morgrem extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Grimmsnarl extends Pokemon {
@@ -14900,6 +14896,10 @@ export class Grimmsnarl extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Drowzee extends Pokemon {
