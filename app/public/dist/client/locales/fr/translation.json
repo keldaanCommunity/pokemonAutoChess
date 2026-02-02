@@ -2123,7 +2123,7 @@
 		"RAGE": "Gagne le statut RAGE pendant 3 secondes et [10,SP]% d'ATK de base pour chaque tranche de 10% des HP max perdus.",
 		"BRICK_BREAK": "Inflige [150,SP]% de l'ATK comme TRUE. Brise l'PROTECT et le $t(ability.MAGIC_BOUNCE) de la cible. Inflige ARMOR_BREAK à la cible pendant 4 secondes.",
 		"RETURN": "Inflige [20,40,80,SP] SPECIAL à la cible, puis gagne 2 AP de façon permanente.",
-		"TAUNT": "Gagne [25,SP=0.5]% de vos HP max en SHIELD et force les ennemis dans un rayon de 2 cases à vous choisir comme cible.",
+		"TAUNT": "Gagne [25,SP=0.5]% de vos HP max en SHIELD et force les ennemis à portée d'attaque à vous choisir comme cible.",
 		"BULK_UP": "Augmente l'ATK de base et la DEF de base de [50,SP]%.",
 		"CUT": "Inflige [40,SP]% des HP max de la cible comme SPECIAL et WOUND pendant 5 secondes.",
 		"FLY": "S'élève dans les airs et retombe sur la cible la plus éloignée après 1 seconde, infligeant [400,SP]% de l'ATK en tant que SPECIAL.",
