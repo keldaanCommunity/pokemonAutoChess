@@ -11500,10 +11500,17 @@ export class TauntStrategy extends AbilityStrategy {
     // Gain 25% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
     const shield = 0.25 * pokemon.maxHP
     pokemon.addShield(shield, pokemon, 0.5, crit)
-    const enemiesTaunted = board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
-      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
-      .map((cell) => cell.value as PokemonEntity)
+    const enemiesTaunted = board.cells.filter(
+      (enemy): enemy is PokemonEntity =>
+        enemy != null &&
+        enemy.team !== pokemon.team &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY
+        ) <= enemy.range
+    )
     enemiesTaunted.forEach((enemy) => {
       enemy.setTarget(pokemon)
       pokemon.broadcastAbility({

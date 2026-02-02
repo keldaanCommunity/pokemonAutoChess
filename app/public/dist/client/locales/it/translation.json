@@ -2121,7 +2121,7 @@
 		"RAGE": "Infliggiti RAGE per 3 secondi e guadagna [10,SP]% di ATK base per ogni 10% dei tuoi HP massimi mancanti",
 		"BRICK_BREAK": "Infliggi [150,SP]% dell' ATK come TRUE. Rompe la PROTECT e il Magispecchio del bersaglio. Infliggi ARMOR_BREAK sul bersaglio per 4 secondi.",
 		"RETURN": "Infliggi [20,40,80,SP] SPECIAL al bersaglio, poi guadagna 2 AP permanentemente.",
-		"TAUNT": "Guadagna [25,SP=0.5]% dei tuoi HP massimi come SHIELD, poi forza i nemici nel raggio di 2 caselle a sceglierti come bersaglio",
+		"TAUNT": "Guadagna [25,SP=0.5]% dei tuoi HP massimi come SHIELD, e costringere i nemici a distanza di attacco a scegliere l'utente come bersaglio",
 		"BULK_UP": "Aumenta l' ATK di base e la DEF di base del [50,SP]%",
 		"CUT": "Infliggi  [40,SP]% degli HP massimi del bersaglio come SPECIAL. Infliggi WOUND per 5 secondi.",
 		"FLY": "Spicca il volo e schiantati sul bersaglio più lontano dopo 1 secondo, infliggendo [400,SP]% dell' ATK come SPECIAL.",

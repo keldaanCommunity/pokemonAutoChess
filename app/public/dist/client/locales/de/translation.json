@@ -1942,7 +1942,7 @@
 		"BONE_ARMOR": "Fliegt zum schwächsten Gegner und fügt ihm [20,40,80,SP] SPECIAL zu und heilt sich um den verursachten Schaden. Geht das Ziel dabei K.O., sammelt es die Knochen für eine Knochenrüstung und erhält [4,8,12] DEF und SPE_DEF.",
 		"RAGE": "Anwender verfällt für 3 Sekunden in RAGE und erhöht seinen ATK für jede 10% seiner fehlenden MAX HP.",
 		"BRICK_BREAK": "Fügt [150,SP]% des ATK als TRUE zu. Bricht das gegnerische PROTECT und Magiespiegel.",
-		"TAUNT": "Gewinne [25,SP=0.5]% der MAX HP als SHIELD. Zwingt Gegner in einem Radius von 2 Feldern, dich anzugreifen.",
+		"TAUNT": "Gewinne [25,SP=0.5]% der MAX HP als SHIELD. Zwinge Feinde in Angriffsreichweite, den Benutzer als Ziel zu wählen.",
 		"BULK_UP": "Erhöht den ATK und die DEF um [50,SP]%.",
 		"CUT": "Verursache [40,SP]% der MAX HP des Gegners als SPECIAL. Fügt ihm für 5 Sekunden WOUND zu.",
 		"FLY": "Fliegt hoch und stürzt sich nach 1 Sekunde auf den entferntesten Gegner und fügt ihm [400,SP]% des ATK als SPECIAL zu.",

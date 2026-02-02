@@ -2032,7 +2032,7 @@
 		"BONE_ARMOR": "Vuela al enemigo más débil infligiendo [20,40,80] SPECIAL, y curando a si mismo el daño hecho. Si el objetivo queda KO, recupera sus huesos para crear armadura, obteniendo [4,8,12] DEF y SPE_DEF.",
 		"RAGE": "Obtiene el estado de RAGE por 3 segundos y gana [10,SP]% ATK por cada 10% de sus HP máximos faltantes",
 		"BRICK_BREAK": "Inflige [150,SP]% de ATK como TRUE. Rompe la PROTECT y el Magic Bounce del objetivo. ",
-		"TAUNT": "Gana [25,SP=0.5]% de sus HP máximos como SHIELD, forzando a los enemigos en un radio de 2 casillas a elegirle como objetivo.",
+		"TAUNT": "Gana [25,SP=0.5]% de sus HP máximos como SHIELD, forzando los enemigos en el rango de ataque a elegir al usuario como objetivo.",
 		"BULK_UP": "Incrementa el ATK base y la DEF base en un [50,SP]%",
 		"CUT": "Inflige [40,SP]% de los HP máximos del objetivo como SPECIAL. Causa WOUND por 5 segundos.",
 		"FLY": "Sube en el aire y cae en el objetivo más lejano tras 1 segundo, infligiendo [400,SP]% de su ATK como SPECIAL.",
