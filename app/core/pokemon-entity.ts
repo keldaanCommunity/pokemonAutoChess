@@ -1442,8 +1442,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Recalculate stats as it was at the start of the battle
     const cloneReference = new PokemonEntity(
       this.refToBoardPokemon,
-      0,
-      0,
+      this.refToBoardPokemon.positionX,
+      this.refToBoardPokemon.positionY - 1,
       this.team,
       this.simulation
     )
