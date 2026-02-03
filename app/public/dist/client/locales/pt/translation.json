@@ -1881,7 +1881,7 @@
 		"SURGE_SURFER": "O surfista ganha +30 de SPEED em ELECTRIC_FIELD ou PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "Esta habilidade do Pokémon emite 3 gritos SOM em vez de um",
 		"CLEAR_WING": "Ganha 1 de bônus de SPEED a cada segundo",
-		"DRY_SKIN": "Cura 8 HP por segundo sob RAIN. Ganha 25% de chance de esquiva sob SANDSTORM. Ganha 50 AP sob ZENITH",
+		"DRY_SKIN": "RAIN:Cura 8 HP por segundo\nDROUGHT:Perde 8 HP por segundo\nSANDSTORM:Ganha 25% de chance de esquiva\nZENITH:Ganha 50 AP",
 		"SPOT_PANDA": "O Pokémon é imune a CONFUSION e causa [100,SP]% adicional de SPECIAL para Pokémons CONFUSION",
 		"GUTS": "O Pokémon ganha 5 ATK enquanto estiver QUEIMADO ou POISON",
 		"STENCH": "Deixa para trás uma nuvem fedorenta que POISON qualquer unidade que a respire",

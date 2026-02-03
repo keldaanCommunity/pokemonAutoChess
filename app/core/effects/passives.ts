@@ -926,8 +926,19 @@ const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
 class DrySkinPeriodicEffect extends PeriodicEffect {
   constructor() {
     super(
-      (pokemon) => {
-        pokemon.handleHeal(8, pokemon, 0, false)
+      (pokemon, board) => {
+        if (pokemon.simulation.weather === Weather.RAIN) {
+          pokemon.handleHeal(8, pokemon, 0, false)
+        } else if (pokemon.simulation.weather === Weather.DROUGHT) {
+          pokemon.handleSpecialDamage(
+            8,
+            board,
+            AttackType.TRUE,
+            pokemon,
+            false,
+            false
+          )
+        }
       },
       Passive.DRY_SKIN,
       1000
@@ -936,7 +947,10 @@ class DrySkinPeriodicEffect extends PeriodicEffect {
 }
 
 const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
-  if (entity.simulation.weather === Weather.RAIN) {
+  if (
+    entity.simulation.weather === Weather.RAIN ||
+    entity.simulation.weather === Weather.DROUGHT
+  ) {
     entity.effectsSet.add(new DrySkinPeriodicEffect())
   } else if (entity.simulation.weather === Weather.SANDSTORM) {
     entity.addDodgeChance(0.25, entity, 0, false)

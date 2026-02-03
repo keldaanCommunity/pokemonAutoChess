@@ -3132,7 +3132,7 @@
 		"SURGE_SURFER": "Le surfeur gagne +30 SPEED lorsqu'il est dans un ELECTRIC_FIELD ou un PSYCHIC_FIELD.",
 		"MEGA_LAUNCHER": "Emet 3 cris SOUND au lieu d'un au lancement de la capacité spéciale.",
 		"CLEAR_WING": "Gagne +1 SPEED à chaque seconde.",
-		"DRY_SKIN": "Soigne 8 HP par seconde sous la RAIN. Gagne 25% de chances d'esquive sous SANDSTORM. Gagne 50 AP sous ZENITH.",
+		"DRY_SKIN": "RAIN: Soigne 8 HP par seconde\nDROUGHT: Perd 8 HP par seconde\nSANDSTORM: Gagne 25% de chances d'esquive\nZENITH: Gagne 50 AP",
 		"SPOT_PANDA": "Ce Pokémon ne peut pas devenir CONFUSION et inflige [100,SP]% de SPECIAL supplémentaires aux Pokémon CONFUSION.",
 		"GUTS": "Gagne 5 ATK tant que le Pokémon subit BURN ou POISONNED.",
 		"STENCH": "Laisse derrière lui un nuage puant qui rend POISONNED toute unité qui le respire.",
