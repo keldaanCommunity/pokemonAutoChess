@@ -763,12 +763,7 @@ const conversionEffect = new OnSimulationStartEffect(
         opponent.effects.has(effect)
       ) ?? SynergyEffects[synergyCopied][0]!
 
-    simulation.applyEffect(
-      entity,
-      entity.types,
-      effect,
-      player?.synergies.countActiveSynergies() || 0
-    )
+    simulation.applyEffect(entity, effect)
 
     // when converting to bug, get a clone
     if (synergyCopied === Synergy.BUG) {

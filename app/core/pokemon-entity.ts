@@ -814,7 +814,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (type && !this.types.has(type)) {
       if (type === Synergy.DRAGON) {
-        this.types = new SetSchema<Synergy>([type, ...this.types])
+        this.types = new SetSchema<Synergy>([type, ...this.types]) // dragon always go first synergy
       } else {
         this.types.add(type)
       }
