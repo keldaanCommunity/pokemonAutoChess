@@ -49,6 +49,8 @@ export class AttackCommand extends SimulationCommand {
   }
 
   execute(): void {
-    this.pokemon.state.attack(this.pokemon, this.board, this.target)
+    if (this.pokemon.canAttack) {
+      this.pokemon.state.attack(this.pokemon, this.board, this.target)
+    }
   }
 }
