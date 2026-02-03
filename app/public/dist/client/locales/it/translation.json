@@ -3129,7 +3129,7 @@
 		"SURGE_SURFER": "Ottieni +30 di SPEED sotto ELECTRIC_FIELD o PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "L'abilità di questo Pokèmon emette versi che contano per 3 SOUND invece che 1.",
 		"CLEAR_WING": "Ottieni il 1 in più di SPEED ogni secondo",
-		"DRY_SKIN": "Curati di 8 HP ogni secondo sotto la RAIN. Ottieni il 25% di possibilità di schivare sotto la SANDSTORM. Ottieni 50 AP sotto il tempo DROUGHT",
+		"DRY_SKIN": "RAIN: Curati di 8 HP ogni secondo\nDROUGHT: Perdi 8 HP ogni secondo\nSANDSTORM: Ottieni il 25% di possibilità di schivare\nZENITH: Ottieni 50 AP",
 		"SPOT_PANDA": "Il Pokèmon è immune a CONFUSION e infligge il [100,SP]% di SPECIAL aggiuntivi a Pokèmon afflitti da CONFUSION",
 		"GUTS": "Questo Pokèmon guadagna 5 di ATK finchè è inflitto da BURN o POISONNED",
 		"STENCH": "Si lascia dietro una nuvola puzzolente che infligge POISONNED a tutte le unità che ci respirano dentro",

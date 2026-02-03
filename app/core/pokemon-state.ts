@@ -853,7 +853,7 @@ export default abstract class PokemonState {
 
     pokemon.effectsSet.forEach((effect) => {
       if (effect instanceof PeriodicEffect) {
-        effect.update(dt, pokemon)
+        effect.update(dt, pokemon, board)
       }
     })
 

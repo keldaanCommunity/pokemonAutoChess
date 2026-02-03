@@ -3132,7 +3132,7 @@
 		"SURGE_SURFER": "电泳冲浪者在处于ELECTRIC_FIELD或PSYCHIC_FIELD下时提升30%的SPEED。",
 		"MEGA_LAUNCHER": "此宝可梦发出SOUND共鸣的叫声时，连续发出3次。",
 		"CLEAR_WING": "每秒提升1点SPEED。",
-		"DRY_SKIN": "在RAIN中，每秒恢复8点HP。在SANDSTORM中，提升25%的闪避率。在DROUGHT中，提升50点AP。",
+		"DRY_SKIN": "RAIN:每秒恢复8点HP。\nDROUGHT:每秒失去8点HP。\nSANDSTORM:提升25%的闪避率。\nZENITH:提升50点AP。",
 		"SPOT_PANDA": "此宝可梦免疫CONFUSION，且对处于CONFUSION的宝可梦额外造成[100,SP]%的SPECIAL。",
 		"GUTS": "此宝可梦在处于BURN或POISONNED时，提升5点ATK。",
 		"STENCH": "留下一团臭气云，使任何处于其中的宝可梦陷入POISONNED。",

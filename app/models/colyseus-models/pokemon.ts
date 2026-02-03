@@ -12553,7 +12553,7 @@ export class Helioptile extends Pokemon {
   stars = 1
   evolution = Pkm.HELIOLISK
   hp = 75
-  atk = 8
+  atk = 7
   speed = 60
   def = 4
   speDef = 4
@@ -12573,7 +12573,7 @@ export class Heliolisk extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 170
-  atk = 19
+  atk = 17
   speed = 60
   def = 6
   speDef = 6
