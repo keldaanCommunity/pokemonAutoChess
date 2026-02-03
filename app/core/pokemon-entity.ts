@@ -220,6 +220,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get canAttack(): boolean {
+    return (
+      !this.status.freeze &&
+      !this.status.sleep &&
+      !this.status.resurrecting &&
+      !this.status.skydiving
+    )
+  }
+
   get canBeMoved(): boolean {
     return !this.status.skydiving && !this.items.has(Item.HEAVY_DUTY_BOOTS)
   }
@@ -561,7 +570,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      if(boardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (boardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       boardPokemon.addMaxHP(value, this.player)
     }
   }
@@ -615,8 +625,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       update(this)
     }
 
-    if (permanent && !this.isGhostOpponent) {      
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+    if (permanent && !this.isGhostOpponent) {
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -644,7 +655,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -673,7 +685,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -702,7 +715,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -731,7 +745,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -763,7 +778,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
-        if(this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT)) value = Math.round(value * 1.25)
+        if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
+          value = Math.round(value * 1.25)
         update(this.refToBoardPokemon)
       }
     }
