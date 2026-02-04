@@ -15,3 +15,7 @@
 
 - Resurrection now properly resets Ground stats buffs based on the hole at the start of the battle, dragon stat buffs based on the amount of dragon stars on the board, and electric cell batteries speed buff.
 - Attack commands that were already started are now cancelled if the Pokemon becomes unable to attack (asleep, frozen, resurrecting, skydiving) in between the start of the animation and the hit delay.
+
+# Misc
+
+- Reduced max loading time before forcing game start to 3 minutes (from 5 minutes)

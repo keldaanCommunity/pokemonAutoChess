@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import { MAX_LOADING_TIME } from "../../../config"
 import { GameUser } from "../../../models/colyseus-models/game-user"
 import GameState from "../../../rooms/states/game-state"
 import PreparationState from "../../../rooms/states/preparation-state"
@@ -271,8 +272,8 @@ export default function Preparation() {
           localStore.set(
             LocalStoreKeys.RECONNECTION_GAME,
             { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
-            5 * 60
-          ) // 5 minutes allowed to start game
+            MAX_LOADING_TIME / 1000
+          ) // 3 minutes allowed to start game
           await Promise.allSettled([
             room.connection.isOpen && room.leave(),
             game.connection.isOpen && game.leave(false)

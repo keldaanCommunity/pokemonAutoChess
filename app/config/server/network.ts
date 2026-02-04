@@ -10,3 +10,4 @@ export const MIN_HUMAN_PLAYERS = process.env.MIN_HUMAN_PLAYERS
 export const INACTIVITY_TIMEOUT = 60 * 1000 * 30 // 30 minutes
 
 export const MAX_SIMULATION_DELTA_TIME = 50 // milliseconds
+export const MAX_LOADING_TIME = 3 * 60 * 1000 // 3 minutes max of loading before forcing game start
