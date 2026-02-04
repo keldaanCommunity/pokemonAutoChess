@@ -7,6 +7,10 @@
 - Change Dry Skin passive (Helioptile): now loses 8 HP per second in Drought weather. Fixed passive description.
 - Nerf Helioptile: Attack 8/19 → 7/17
 
+# Changes to Synergies
+
+- Aquatic now reduces status **damage** (burn and poison) in addition to status duration
+
 # Bugfix
 
 - Resurrection now properly resets Ground stats buffs based on the hole at the start of the battle, dragon stat buffs based on the amount of dragon stars on the board, and electric cell batteries speed buff.

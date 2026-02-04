@@ -440,6 +440,14 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 0.5
         }
 
+        if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+          burnDamage *= 0.7
+        } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+          burnDamage *= 0.5
+        } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+          burnDamage *= 0.3
+        }
+
         if (
           pkm.passive === Passive.WELL_BAKED ||
           pkm.items.has(Item.MAGMARIZER)
@@ -451,9 +459,10 @@ export default class Status extends Schema implements IStatus {
           pkm.addSpeed(10, pkm, 0, false)
         }
 
+        burnDamage = Math.round(burnDamage)
         if (burnDamage > 0) {
           pkm.handleDamage({
-            damage: Math.round(burnDamage),
+            damage: burnDamage,
             board,
             attackType: AttackType.TRUE,
             attacker: this.burnOrigin,
@@ -599,6 +608,15 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.TOXIC_BOOST) {
         poisonDamage *= 0.5
       }
+
+      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+        poisonDamage *= 0.7
+      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+        poisonDamage *= 0.5
+      } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+        poisonDamage *= 0.3
+      }
+      poisonDamage = Math.round(poisonDamage)
 
       if (poisonDamage < 0) {
         pkm.handleHeal(Math.round(-poisonDamage), pkm, 0, false)
