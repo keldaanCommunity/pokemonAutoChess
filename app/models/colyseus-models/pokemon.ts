@@ -13453,7 +13453,7 @@ export class Qwilfish extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 175
+  hp = 150
   atk = 13
   speed = 52
   def = 15

@@ -6,6 +6,7 @@
 - Impidimp can now only be found in Human regions
 - Change Dry Skin passive (Helioptile): now loses 8 HP per second in Drought weather. Fixed passive description.
 - Nerf Helioptile: Attack 8/19 → 7/17
+- Nerf Qwilfish: HP 175 → 150
 
 # Changes to Synergies
 
