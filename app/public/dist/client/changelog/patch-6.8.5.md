@@ -12,10 +12,6 @@
 
 - Aquatic now reduces status **damage** (burn and poison) in addition to status duration
 
-# Changes to Synergies
-
-- Aquatic now reduces status **damage** (burn and poison) in addition to status duration
-
 # Bugfix
 
 - Resurrection now properly resets Ground stats buffs based on the hole at the start of the battle, dragon stat buffs based on the amount of dragon stars on the board, and electric cell batteries speed buff.
