@@ -3677,6 +3677,28 @@ export const Unowns: Pkm[] = [
   Pkm.UNOWN_EXCLAMATION
 ]
 
+export const UnownsForScribble: Pkm[] = [
+  Pkm.UNOWN_B,
+  Pkm.UNOWN_C,
+  Pkm.UNOWN_D,
+  Pkm.UNOWN_G,
+  Pkm.UNOWN_H,
+  Pkm.UNOWN_I,
+  Pkm.UNOWN_M,
+  Pkm.UNOWN_N,
+  Pkm.UNOWN_O,
+  Pkm.UNOWN_R,
+  Pkm.UNOWN_S,
+  Pkm.UNOWN_T,
+  Pkm.UNOWN_V,
+  Pkm.UNOWN_W,
+  Pkm.UNOWN_X,
+  Pkm.UNOWN_Y,
+  Pkm.UNOWN_Z,
+  Pkm.UNOWN_EXCLAMATION,
+  Pkm.UNOWN_QUESTION
+]
+
 export const NonPkm: Pkm[] = [
   Pkm.SUBSTITUTE,
   Pkm.EGG,

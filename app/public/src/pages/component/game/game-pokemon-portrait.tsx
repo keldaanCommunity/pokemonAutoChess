@@ -10,7 +10,6 @@ import {
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { values } from "../../../../../utils/schemas"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
@@ -134,15 +133,7 @@ export default function GamePokemonPortrait(props: {
   const pokemonInPortrait =
     willEvolve && pokemonEvolution ? pokemonEvolution : pokemon
 
-  let cost = getBuyPrice(pokemon.name, specialGameRule)
-
-  if (
-    willEvolve &&
-    pokemonEvolution &&
-    specialGameRule === SpecialGameRule.BUYER_FEVER
-  ) {
-    cost = 0
-  }
+  const cost = getBuyPrice(pokemon.name, specialGameRule)
 
   const gainedSynergies =
     pokemonEvolution && willEvolve
