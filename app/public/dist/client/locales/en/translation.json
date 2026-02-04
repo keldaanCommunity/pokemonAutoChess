@@ -1797,7 +1797,7 @@
 		"ROCK_SMASH": "Deal [25,50,100,SP] SPECIAL and ARMOR_BREAK for [3,6,9] seconds to the target.",
 		"HEAD_SMASH": "Deal [40,80,150,SP] SPECIAL to the target and [10,20,40,SP] PHYSICAL to the user. Execute the target if they suffer from SLEEP or FREEZE.",
 		"ROCK_HEAD": "Deal [120,SP]% of ATK + DEF as SPECIAL to the target.",
-		"CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target. Execute the target if they are below 30% HP. Can crit by default with a [30,LK]% increased CRIT_CHANCE.",
+		"CRABHAMMER": "Deal [40,80,120,SP] SPECIAL to the target. Execute the target if they are below 30% HP. Can crit by default with a 30% increased CRIT_CHANCE.",
 		"DIAMOND_STORM": "Deal [100,SP]% of the user's DEF as SPECIAL to all ADJACENT enemy Pokémon.",
 		"DRACO_ENERGY": "Deal [100,SP]% of the user's current HP as SPECIAL to the target.",
 		"DYNAMAX_CANNON": "Shoot a Dynamax beam in a straight line. Enemy Pokémon hit take [50,SP]% of their max HP as SPECIAL.",

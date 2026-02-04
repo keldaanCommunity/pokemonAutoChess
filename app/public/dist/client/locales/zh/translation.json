@@ -1797,7 +1797,7 @@
 		"ROCK_SMASH": "对目标造成[25,50,100,SP]点SPECIAL，并使其陷入ARMOR_BREAK [3,6,9]秒。",
 		"HEAD_SMASH": "使用者对自身造成[10,20,40,SP]点PHYSICAL，并对目标造成[40,80,150,SP]点SPECIAL。若目标处于SLEEP或FREEZE，直接消灭之。",
 		"ROCK_HEAD": "对目标造成SPECIAL，数值相当于[120,SP]%的ATK与DEF之和。",
-		"CRABHAMMER": "对目标造成[40,80,120,SP]点SPECIAL。若目标HP低于30%，直接消灭之。该招式可以暴击，且CRIT_CHANCE额外提升[30,LK]%。",
+		"CRABHAMMER": "对目标造成[40,80,120,SP]点SPECIAL。若目标HP低于30%，直接消灭之。该招式可以暴击，且CRIT_CHANCE额外提升30%。",
 		"DIAMOND_STORM": "对所有ADJACENT敌方宝可梦造成SPECIAL，数值相当于使用者[100,SP]%的DEF。",
 		"DRACO_ENERGY": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的当前HP。",
 		"DYNAMAX_CANNON": "发射一条极巨光束攻击直线上的目标。被击中的敌方宝可梦受到SPECIAL，数值相当于其最大HP的[50,SP]%。",

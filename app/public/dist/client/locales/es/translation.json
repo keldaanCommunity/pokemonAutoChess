@@ -1712,7 +1712,7 @@
 		"ROCK_SMASH": "Inflige [25,50,100,SP] de SPECIAL al objetivo y causa ARMOR_BREAK por [3,6,9] segundos",
 		"HEAD_SMASH": "El usuario se daña a sí mismo por [10,20,40,SP] PHYSICAL e inflige [40,80,150,SP] de SPECIAL al objetivo. Ejecuta si el objetivo se encuentra SLEEP o FREEZE",
 		"ROCK_HEAD": "Inflige [120,SP]% del ATK + DEF como SPECIAL",
-		"CRABHAMMER": "Inflige [40,80,120,SP] de SPECIAL al objetivo. Lo ejecuta si está por debajo del 30% de HP. Puede hacer daño crítico por defecto y tiene [30,LK]% más de CRIT_CHANCE.",
+		"CRABHAMMER": "Inflige [40,80,120,SP] de SPECIAL al objetivo. Lo ejecuta si está por debajo del 30% de HP. Puede hacer daño crítico por defecto y tiene 30% más de CRIT_CHANCE.",
 		"DIAMOND_STORM": "Inflige [100,SP]% de la DEF actual del usuario como SPECIAL a los todos enemigos adyacentes",
 		"DRACO_ENERGY": "Inflige [100,SP] % del HP del usuario como SPECIAL",
 		"DYNAMAX_CANNON": "Dispara un rayo Dinamax en línea recta. Todos los Pokemon enemigos que golpea reciben un [50,SP] % de su HP máximo como SPECIAL",
