@@ -11,6 +11,7 @@ import {
   getBaseAltForm,
   LegendaryPool,
   MAX_EVENT_POINTS,
+  MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PkmAltFormsByPkm,
@@ -311,17 +312,14 @@ export default class GameRoom extends Room<GameState> {
       })
     )
 
-    this.clock.setTimeout(
-      () => {
-        if (this.state.gameLoaded) return // already started
-        this.broadcast(Transfer.LOADING_COMPLETE)
-        this.state.players.forEach((player) => {
-          clearPendingGame(this.presence, player.id)
-        })
-        this.startGame()
-      },
-      5 * 60 * 1000
-    ) // maximum 5 minutes of loading game, game will start no matter what after that
+    this.clock.setTimeout(() => {
+      if (this.state.gameLoaded) return // already started
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.state.players.forEach((player) => {
+        clearPendingGame(this.presence, player.id)
+      })
+      this.startGame()
+    }, MAX_LOADING_TIME) // maximum 3 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, item: Item) => {
       if (!this.state.gameFinished && client.auth) {
