@@ -1,4 +1,5 @@
 import Player from "../models/colyseus-models/player"
+import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
@@ -88,7 +89,7 @@ export default class MovingState extends PokemonState {
           stenchJump(pokemon, board, x, y)
         }
 
-        if (pokemon.passive === Passive.PARTING_SHOT) {
+        if (pokemon.passive === Passive.PARTING_SHOT &&  farthestCoordinate.target.effects.has(EffectEnum.PARTING_SHOT) === false) {
           partingShot(pokemon, farthestCoordinate.target, x, y)
         }
 

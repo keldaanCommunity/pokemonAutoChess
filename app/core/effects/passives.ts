@@ -121,6 +121,7 @@ export function partingShot(
 ) {
   target.addAbilityPower(-20, pokemon, 0, false)
   target.addAttack(-0.2 * target.baseAtk, pokemon, 0, false)
+  target.effects.add(EffectEnum.PARTING_SHOT)
   pokemon.broadcastAbility({
     skill: "PARTING_SHOT",
     positionX: x,
