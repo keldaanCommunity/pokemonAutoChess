@@ -1111,9 +1111,11 @@ export default class Status extends Schema implements IStatus {
           ? pkm.simulation.redTeam
           : pkm.simulation.blueTeam
       if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
+        if (!this.possessed) {
+            pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM :Team.BLUE_TEAM
+        }
         this.possessed = true
         duration = this.applyStatusDurationReductions(duration, pkm)
-        pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
         pkm.setTarget(null) // force retargetting
         origin.setTarget(null) // force retargetting
         this.possessedCooldown = Math.max(
