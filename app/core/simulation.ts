@@ -1041,7 +1041,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.add(effect)
           if (player) {
             const dragonLevel = values(player.board).reduce(
-              (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
+              (acc, p) => acc + (p.types.has(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
               0
             )
             if (
