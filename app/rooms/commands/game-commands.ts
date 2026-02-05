@@ -25,6 +25,7 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
+import { castAbility } from "../../core/abilities/abilities"
 import {
   OnItemDroppedEffect,
   OnStageStartEffect
@@ -39,7 +40,7 @@ import {
 } from "../../core/evolution-rules"
 import { getFlowerPotsUnlocked } from "../../core/flower-pots"
 import { selectMatchups } from "../../core/matchmaking"
-import { canSell } from "../../core/pokemon-entity"
+import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
@@ -96,7 +97,8 @@ import {
   Pkm,
   PkmIndex,
   PkmRegionalVariants,
-  Unowns
+  Unowns,
+  UnownsForScribble
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
@@ -149,16 +151,9 @@ export class OnBuyPokemonCommand extends Command<
       pokemon.evolutionRule instanceof CountEvolutionRule &&
       pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
 
-    let cost = getBuyPrice(name, this.state.specialGameRule)
+    const cost = getBuyPrice(name, this.state.specialGameRule)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
     const hasSpaceOnBench = freeSpaceOnBench > 0 || isEvolution
-
-    if (
-      isEvolution &&
-      this.state.specialGameRule === SpecialGameRule.BUYER_FEVER
-    ) {
-      cost = 0
-    }
 
     const canBuy = player.money >= cost && hasSpaceOnBench
     if (!canBuy) return
@@ -1328,7 +1323,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
 
     if (
-      [3, 15].includes(this.state.stageLevel) &&
+      [2, 4].includes(this.state.stageLevel) &&
       this.state.specialGameRule === SpecialGameRule.TECHNOLOGIC
     ) {
       this.state.players.forEach((player: Player) => {
@@ -1970,6 +1965,47 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           this.state.simulationPaused = false
           simulation.start()
         }, 2500) // 2 seconds for portal transition animation, 500 ms for latency
+      })
+    }
+
+    if (this.state.specialGameRule === SpecialGameRule.UNOWN_SPELL) {
+      this.state.simulations.forEach((simulation) => {
+        const unown = pickRandomIn(UnownsForScribble)
+        ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
+          if (
+            !player ||
+            (simulation.isGhostBattle && player === simulation.redPlayer)
+          )
+            return
+          const id = nanoid()
+          const wanderer = new Wanderer({
+            id,
+            pkm: unown,
+            shiny: false,
+            type: WandererType.UNOWN_SPELL,
+            behavior: WandererBehavior.SPECTATE
+          })
+          player.wanderers.set(id, wanderer)
+          this.clock.setTimeout(() => {
+            player.wanderers.delete(id)
+            if (simulation.finished) return
+            const caster = new PokemonEntity(
+              PokemonFactory.createPokemonFromName(unown),
+              9,
+              2,
+              player.team,
+              simulation
+            )
+            castAbility(
+              caster.skill,
+              caster,
+              simulation.board,
+              caster,
+              false,
+              true
+            )
+          }, 10000)
+        })
       })
     }
   }

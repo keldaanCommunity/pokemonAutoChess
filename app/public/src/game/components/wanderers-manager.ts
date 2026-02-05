@@ -40,6 +40,8 @@ export default class WanderersManager {
   addWanderer(wanderer: Wanderer) {
     if (wanderer.type === WandererType.UNOWN) {
       this.addWanderingUnown(wanderer)
+    } else if (wanderer.type === WandererType.UNOWN_SPELL) {
+      this.addSpectatingUnown(wanderer)
     } else if (wanderer.type === WandererType.CATCHABLE) {
       this.addCatchableWanderer(wanderer)
     } else if (wanderer.type === WandererType.DIALOG) {
@@ -63,6 +65,10 @@ export default class WanderersManager {
         return true
       }
     })
+  }
+
+  addSpectatingUnown(wanderer: Wanderer) {
+    this.addWandererPokemonSprite({ wanderer })
   }
 
   addCatchableWanderer(wanderer: Wanderer) {
@@ -161,50 +167,47 @@ export default class WanderersManager {
     wanderer: Wanderer
     existingSprite?: PokemonSprite
     speed?: number
-    onClick: (
+    onClick?: (
       wanderer: Wanderer,
       pokemon: PokemonSprite,
       pointer: Phaser.Input.Pointer
     ) => boolean
   }): PokemonSprite {
-    let startX = -100,
-      startY = 350,
-      endX = window.innerWidth + 100,
-      endY = 350
-    let duration = clamp(window.innerWidth / speed, 4000, 6000)
     let caught = false
     const tweens: Phaser.Tweens.Tween[] = []
+    let fromLeft = chance(1 / 2)
+    if (wanderer.type === WandererType.DIALOG) {
+      fromLeft = true // Xatu always comes from left to right to end where the chest is
+    }
+    if (wanderer.type === WandererType.UNOWN_SPELL) {
+      fromLeft = false // Unown spell always comes from right to left to end near Smeargle
+    }
+    let startX = fromLeft ? -100 : +window.innerWidth + 100,
+      startY = 100 + Math.round(Math.random() * 500),
+      endX = fromLeft ? +window.innerWidth + 100 : -100,
+      endY = 350
+    let duration = clamp(window.innerWidth / speed, 4000, 6000)
 
-    switch (wanderer.behavior) {
-      case WandererBehavior.SPECTATE: {
-        startX = -100
-        startY = 100 + Math.round(Math.random() * 500)
-        endX = 590
-        endY =
-          wanderer.type === WandererType.DIALOG
-            ? 500
-            : 300 + Math.round(Math.random() * 200)
-        duration = 4000
-        break
-      }
+    if (wanderer.behavior === WandererBehavior.SPECTATE) {
+      endX = fromLeft ? 590 : 1512
+      endY =
+        wanderer.type === WandererType.DIALOG ||
+        wanderer.type === WandererType.UNOWN_SPELL
+          ? 500
+          : 300 + Math.round(Math.random() * 200)
+      duration = 4000
+    }
 
-      case WandererBehavior.RUN_THROUGH:
-      default: {
-        const fromLeft = chance(1 / 2)
-        startX = fromLeft ? -100 : +window.innerWidth + 100
-        startY = 100 + Math.round(Math.random() * 500)
-        endX = fromLeft ? +window.innerWidth + 100 : -100
-        endY = 100 + Math.round(Math.random() * 500)
-        break
-      }
+    if (wanderer.behavior === WandererBehavior.RUN_THROUGH) {
+      endY = 100 + Math.round(Math.random() * 500)
     }
 
     const sprite =
       existingSprite ??
       new PokemonSprite(
         this.scene,
-        -100,
-        350,
+        startX,
+        startY,
         PokemonFactory.createPokemonFromName(wanderer.pkm, {
           shiny: wanderer.shiny
         }),
@@ -212,8 +215,6 @@ export default class WanderersManager {
         false,
         false
       )
-    sprite.x = startX
-    sprite.y = startY
     sprite.orientation = startX < endX ? Orientation.RIGHT : Orientation.LEFT
     this.scene.animationManager?.animatePokemon(
       sprite,
@@ -236,6 +237,13 @@ export default class WanderersManager {
           )
           if (wanderer.type === WandererType.DIALOG) {
             sprite.openDetail()
+          } else if (wanderer.type === WandererType.UNOWN_SPELL) {
+            sprite.orientation = Orientation.DOWN
+            this.scene.animationManager?.animatePokemon(
+              sprite,
+              PokemonActionState.IDLE,
+              false
+            )
           }
           tweens.push(
             this.scene.add.tween({
@@ -269,7 +277,7 @@ export default class WanderersManager {
     sprite.draggable = false
     sprite.sprite.setInteractive()
     sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      if (caught) return
+      if (caught || !onClick) return
       caught = onClick(wanderer, sprite, pointer)
       if (caught) tweens.forEach((tween) => tween.destroy())
     })

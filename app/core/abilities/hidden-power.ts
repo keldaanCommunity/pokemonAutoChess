@@ -549,7 +549,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && unown.team === ally.team) {
-        castAbility(Ability.MEDITATE, unown, board, ally, false)
+        castAbility(Ability.MEDITATE, ally, board, ally, false)
       }
     })
   }
