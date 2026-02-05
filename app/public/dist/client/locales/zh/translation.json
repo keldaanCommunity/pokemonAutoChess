@@ -4404,7 +4404,8 @@
 		"HIGH_ROLLER": "幸 运 之 星",
 		"REGIONAL_SPECIALTIES": "本 地 特 产",
 		"GO_BIG_OR_GO_HOME": "坚 持 锻 炼",
-		"FAMILY_OUTING": "全 家 出 动"
+		"FAMILY_OUTING": "全 家 出 动",
+		"UNOWN_SPELL": "图 腾 神 力"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "所有附加宝可梦在游戏开始时立即可选。",
@@ -4424,7 +4425,8 @@
 		"HIGH_ROLLER": "在第0-9轮，商店有概率刷出孵化宝可梦；第10-19轮，独特宝可梦；第20轮起，传说宝可梦。",
 		"REGIONAL_SPECIALTIES": "当前所在地区的共鸣类型也会计入你的共鸣等级。穿过传送门后，所有我方宝可梦食用一道本地特色料理。",
 		"GO_BIG_OR_GO_HOME": "所有宝可梦每轮提升5点最大HP，体型也会相应变大。",
-		"FAMILY_OUTING": "同一进化线上的宝可梦可以同时参与共鸣计数。"
+		"FAMILY_OUTING": "同一进化线上的宝可梦可以同时参与共鸣计数。",
+		"UNOWN_SPELL": "未知图腾会围观每轮对战，并向双方队伍释放招式。"
 	},
 	"town_encounter_description": {
 		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",
