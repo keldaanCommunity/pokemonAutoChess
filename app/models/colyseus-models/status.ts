@@ -1225,6 +1225,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   addPsychicField(entity: IPokemonEntity) {
+    if (this.psychicField) return
     this.psychicField = true
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(30, entity, 0, false)
@@ -1232,6 +1233,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   removePsychicField(entity: IPokemonEntity) {
+    if (!this.psychicField) return
     this.psychicField = false
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(-30, entity, 0, false)
@@ -1239,6 +1241,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   addElectricField(entity: IPokemonEntity) {
+    if (this.electricField) return
     this.electricField = true
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(30, entity, 0, false)
@@ -1246,6 +1249,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   removeElectricField(entity: IPokemonEntity) {
+    if (!this.electricField) return
     this.electricField = false
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(-30, entity, 0, false)
