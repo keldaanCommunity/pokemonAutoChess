@@ -11,6 +11,7 @@ import {
   DishesGoingToInventory,
   FishingRod,
   Flavors,
+  HerbaMysticas,
   HMs,
   Item,
   ItemRecipe,
@@ -374,7 +375,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
           if (DishesGoingToInventory.includes(dish)) {
             player.items.push(dish)
           } else {
-            const candidates = values(player.board).filter(
+            let candidates = values(player.board).filter(
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
@@ -386,6 +387,11 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
                   p.positionY
                 ) === 1
             )
+            if (dish === Item.HERBA_MYSTICA) {
+              candidates = candidates.filter((p) =>
+                HerbaMysticas.every((herba) => p.dishes.has(herba) === false)
+              )
+            }
             candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
             const pokemon = candidates[0] ?? chef // idx 0 equals the strongest unit
             if (dish === Item.HERBA_MYSTICA) {

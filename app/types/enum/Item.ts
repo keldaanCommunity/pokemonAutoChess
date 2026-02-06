@@ -973,6 +973,15 @@ export const DishesGoingToInventory = [
 export const ItemsSoldAtTown = [...Mushrooms] satisfies Item[]
 export type ItemsSoldAtTown = (typeof ItemsSoldAtTown)[number]
 
+export const HerbaMysticas: Dish[] = [
+  Item.HERBA_MYSTICA,
+  Item.HERBA_MYSTICA_SWEET,
+  Item.HERBA_MYSTICA_SPICY,
+  Item.HERBA_MYSTICA_SOUR,
+  Item.HERBA_MYSTICA_BITTER,
+  Item.HERBA_MYSTICA_SALTY
+]
+
 export const Flavors = [
   Item.VANILLA_FLAVOR,
   Item.RUBY_FLAVOR,
