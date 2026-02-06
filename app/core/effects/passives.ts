@@ -55,7 +55,7 @@ import {
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
   pokemon.resetCooldown(1000, speed) // use attack state cooldown
-  if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
+  if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
     // CAST ABILITY
     const target = pokemon.state.getNearestTargetAtSight(pokemon, board)?.target
     if (target) {

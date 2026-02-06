@@ -229,6 +229,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get canCast(): boolean {
+    return !this.status.silence && !this.items.has(Item.NULLIFY_BANDANNA)
+  }
+
   get canBeMoved(): boolean {
     return !this.status.skydiving && !this.items.has(Item.HEAVY_DUTY_BOOTS)
   }
