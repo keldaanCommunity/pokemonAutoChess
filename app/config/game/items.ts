@@ -102,7 +102,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.LUCKY_RIBBON]: { [Stat.DEF]: 10, [Stat.AP]: 50, [Stat.LUCK]: 30 },
   [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },
   [Item.TWIST_BAND]: { [Stat.SPE_DEF]: 20, [Stat.SHIELD]: 50 },
-  [Item.BIG_EATER_BELT]: { [Stat.SHIELD]: 15, [Stat.HP]: 50 },
+  [Item.BIG_EATER_BELT]: { [Stat.SHIELD]: 50, [Stat.HP]: 50 },
   [Item.MACH_RIBBON]: { [Stat.SHIELD]: 15, [Stat.SPEED]: 10 },
   [Item.COVER_BAND]: { [Stat.DEF]: 12, [Stat.SHIELD]: 50 },
   [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },

@@ -3066,7 +3066,7 @@
 		"MACH_RIBBON": "每4秒提升20点SPEED。",
 		"EXPLOSIVE_BAND": "每轮对战中首次失去所有SHIELD时，该道具爆炸并对ADJACENT敌方宝可梦造成SPECIAL，数值相当于获得的SHIELD之和的30%。",
 		"TWIST_BAND": "来自敌方宝可梦的数值下降改为上升。",
-		"BIG_EATER_BELT": "所有永久提升属性的效果额外提升25%的属性。携带者可以在同一轮食用2份料理。",
+		"BIG_EATER_BELT": "所有永久提升属性的效果额外提升33%的属性。携带者可以在同一轮食用2份料理。",
 		"LUCKY_RIBBON": "携带者提升30点LUCK",
 		"COVER_BAND": "ADJACENT我方宝可梦即将受到致命伤害时，改为由携带者承受此伤害。",
 		"EFFICIENT_BANDANNA": "携带者与ADJACENT_IN_THE_SAME_ROW我方宝可梦的PP上限降低10%。",

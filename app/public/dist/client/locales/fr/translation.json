@@ -3066,7 +3066,7 @@
 		"MACH_RIBBON": "Toutes les 4 secondes, gagne 20 SPEED.",
 		"EXPLOSIVE_BAND": "La première fois que le bouclier du porteur est épuisé, cet objet explose, infligeant 30% de tout le SHIELD gagné jusqu'à présent comme SPECIAL aux ennemis ADJACENT.",
 		"TWIST_BAND": "Les malus de statistiques infligés par les ennemis se transforment en bonus.",
-		"BIG_EATER_BELT": "Augmente de 25% tous les bonus de statistiques permanents reçus. Permet au porteur de consommer 2 plats différents par manche.",
+		"BIG_EATER_BELT": "Augmente de 33% tous les bonus de statistiques permanents reçus. Permet au porteur de consommer 2 plats différents par manche.",
 		"LUCKY_RIBBON": "Augmente la LUCK du porteur de 30%",
 		"COVER_BAND": "Si un allié ADJACENT est sur le point d'être mis KO par des dégâts entrants, le porteur encaisse les dégâts à sa place.",
 		"EFFICIENT_BANDANNA": "Le porteur et ses alliés ADJACENT_IN_THE_SAME_ROW voient leur PP max réduit de 10%.",

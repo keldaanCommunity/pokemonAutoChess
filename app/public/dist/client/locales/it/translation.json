@@ -3063,7 +3063,7 @@
 		"MACH_RIBBON": "Ogni 4 secondi, ottieni 20 SPEED.",
 		"EXPLOSIVE_BAND": "La prima volta che si esaurisce lo SHIELD del possessore, questo strumento esplode, infliggendo il 30% dello SHIELD guadagnato fino a questo punto come SPECIAL ai nemici ADJACENT.",
 		"TWIST_BAND": "I depotenziamenti alle statistiche inflitti dai nemici diventano invece potenziamenti.",
-		"BIG_EATER_BELT": "Aumenta tutti i potenziamenti permanenti alle statistiche dell'utilizzatore del 25% e permettigli di mangiare 2 piatti per round.",
+		"BIG_EATER_BELT": "Aumenta tutti i potenziamenti permanenti alle statistiche dell'utilizzatore del 33% e permettigli di mangiare 2 piatti per round.",
 		"LUCKY_RIBBON": "Aumenta la LUCK del possessore del 30%",
 		"COVER_BAND": "Se un alleato ADJACENT sta per venire messo KO da del danno in arrivo, il possessore riceve invece quel danno.",
 		"EFFICIENT_BANDANNA": "Il possessore e tutti gli alleati ADJACENT_IN_THE_SAME_ROW hanno i loro PP massimi ridotti del 10%",

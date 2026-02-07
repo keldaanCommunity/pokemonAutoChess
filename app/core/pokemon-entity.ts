@@ -568,7 +568,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     this.maxHP = min(1)(this.maxHP + value)
@@ -623,7 +623,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { ap: number }) => {
@@ -660,7 +660,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { luck: number }) => {
@@ -692,7 +692,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { def: number }) => {
@@ -724,7 +724,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { speDef: number }) => {
@@ -756,7 +756,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { atk: number }) => {
@@ -792,7 +792,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (crit ? caster.critPower : 1)
 
       if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-        value = Math.round(value * 1.25)
+        value = Math.round(value * 1.33)
       }
 
       const update = (target: { speed: number }) => {
