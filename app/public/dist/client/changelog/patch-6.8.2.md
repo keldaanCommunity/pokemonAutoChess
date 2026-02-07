@@ -3,6 +3,7 @@
 
 - Nerf Dustox: Poison Powder poison duration 5 → 3 seconds
 - Nerf Klink line: Attack 4/8/16 → 4/7/14, Speed 42 → 35
+- Nerf Shockwave: Deal Ability Power ~25/50/120~ → 30/60/120 special damage to all enemies in a 2-range radius, +1 range if user is in an Electric Field, **-20% damage per tile from the user.**
 
 # Changes to Items
 

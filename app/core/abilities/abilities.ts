@@ -3273,14 +3273,21 @@ export class ShockwaveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const range = 2 + (pokemon.status.electricField ? 1 : 0)
     board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, range)
       .forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
+          const distance = distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            cell.x,
+            cell.y
+          )
+          const damageMultiplier = 1 - 0.2 * distance
           cell.value.handleSpecialDamage(
-            damage,
+            Math.round(damage * damageMultiplier),
             board,
             AttackType.SPECIAL,
             pokemon,
