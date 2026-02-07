@@ -2683,7 +2683,7 @@
 		"EXPLORER_KIT": "El portador gana la sinergia GROUND. Aumenta la [LK] probabilidad de encontrar dinero enterrado.",
 		"INCENSE": "El portador gana el tipo FLORA. Cada Pokémon en la tienda tiene un 5% adicional de posibilidades de compartir una sinergia común con el portador.",
 		"EXP_SHARE": "Obtén los mejores valores de ATK, AP, DEF y SPE_DEF de los aliados ADJACENT_IN_THE_SAME_ROW.",
-		"POKERUS_VIAL": "El portador gana el tipo POISON. Inflige al poseedor con POKERUS, obteniendo 1 ATK y 10 AP cada 2.5 segundos y transmitiéndoselo a los aliados.",
+		"POKERUS_VIAL": "El portador gana el tipo POISON. Inflige al poseedor con POKERUS, obteniendo 1 ATK y 10 AP cada 3 segundos y transmitiéndoselo a los aliados.",
 		"BERSERK_GENE": "Otorga la sinergia MONSTER. El portador queda CONFUSION durante 3 segundos si gana acumulaciones de MONSTER.",
 		"SURFBOARD": "Otorga la sinergia AQUATIC. El usuario lanza $t(ability.SURF) cada vez que llega una ola, con el nivel de habilidad correspondiente al nivel de sinergia AQUATIC actual.",
 		"COOKING_POT": "Otorga sinergia GOURMET al portador. Si el usuario está BURN, la COOKING_POT se calienta poco a poco otorgándole 10 de SPEED por segundo.",

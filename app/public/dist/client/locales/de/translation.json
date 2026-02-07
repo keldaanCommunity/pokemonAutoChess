@@ -2529,7 +2529,7 @@
 		"EXPLORER_KIT": "Gibt GROUND Synergie. Erhöht die [LK] Chance um vergrabenes Gold im Boden zu finden.",
 		"INCENSE": "Das Pokémon erhält den FLORA-Typ. Jedes Pokémon im Shop hat eine zusätzliche Chance von 5%, eine gemeinsame Synergie mit dem Besitzer zu teilen.",
 		"EXP_SHARE": "Ermittelt die besten ATK, AP, DEF- und SPE_DEF Werte benachbarter Verbündeter in derselben Reihe",
-		"POKERUS_VIAL": "Das Pokémon erhält den POISON-Typ. Infiziert den Träger mit POKERUS, gewinnt alle 2.5 Sekunden 1 ATK und 10 AP und überträgt sich auf Verbündete",
+		"POKERUS_VIAL": "Das Pokémon erhält den POISON-Typ. Infiziert den Träger mit POKERUS, gewinnt alle 3 Sekunden 1 ATK und 10 AP und überträgt sich auf Verbündete",
 		"BERSERK_GENE": "Verleiht MONSTER-Synergie. Der Träger erhält 3 Sekunden lang CONFUSION , wenn er MONSTER-Stapel erhält. Wird beim auf der Bank setzen fallen gelassen.",
 		"SURFBOARD": "Verleiht AQUATIC-Synergie. Der Träger wirkt $t(ability.SURF) bei jeder Flutwelle, wobei die Fähigkeits-Stufe der aktuellen AQUATIC-Synergiestufe entspricht. Wird beim auf der Bank setzen fallen gelassen.",
 		"COOKING_POT": "Gibt GOURMET Synergie. Wenn BURN, wird der COOKING_POT Stück für Stück erhitzt, was 10 SPEED pro Sekunde gibt.",

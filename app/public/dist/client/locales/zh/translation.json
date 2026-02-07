@@ -2863,7 +2863,7 @@
 		"INCENSE": "携带者也被视作FLORA宝可梦。携带者也被视作FLORA宝可梦。商店中的宝可梦与携带者至少一项共鸣相同的概率提升5%。",
 		"TERRAIN_EXTENDER": "战斗开始时，根据携带者的共鸣使其获得ELECTRIC_FIELD、GRASS_FIELD、PSYCHIC_FIELD或是FAIRY_FIELD。携带者释放招式时，会将相应的场地效果传播给所有同样具有对应共鸣的我方宝可梦。",
 		"EXP_SHARE": "获得ADJACENT_IN_THE_SAME_ROW的我方宝可梦中最高的ATK，AP，DEF与SPE_DEF。",
-		"POKERUS_VIAL": "携带者也被视作POISON宝可梦。携带者受到POKERUS，每2.5秒提升1点ATK和10点AP，且会将病毒传播给其他我方宝可梦。",
+		"POKERUS_VIAL": "携带者也被视作POISON宝可梦。携带者受到POKERUS，每3秒提升1点ATK和10点AP，且会将病毒传播给其他我方宝可梦。",
 		"SPELL_TAG": "携带者也被视作GHOST宝可梦。携带者倒下时，使攻击者陷入CURSE，其将在10秒后直接倒下。",
 		"SHED_SHELL": "携带者也被视作BUG宝可梦。若携带者被复制，携带者降低50%的最大HP。",
 		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则陷入CONFUSION 3秒。",

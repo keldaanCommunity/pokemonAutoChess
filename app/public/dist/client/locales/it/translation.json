@@ -2861,7 +2861,7 @@
 		"INCENSE": "Il possessore riceve la sinergia FLORA. Ogni Pokèmon nel negozio ha un probabilità del 5% di avere in comune una sinergia del possessore.",
 		"TERRAIN_EXTENDER": "All'inizio del combattimento, il possessore ottiene l'effetto del ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD o FAIRY_FIELD a seconda delle sue sinergie. Dopo aver utilizzato la sua abilità, propaga l'effetto a tutti gli alleati che condividono la sinergia del campo.",
 		"EXP_SHARE": "Ottieni i migliori valori di ATK, AP, DEF e SPE_DEF dagli alleati adiacenti nella stessa riga",
-		"POKERUS_VIAL": "Il possessore riceve la sinergia POISON. Infetta il possessore con il POKERUS, guadagnando ogni 2.5 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
+		"POKERUS_VIAL": "Il possessore riceve la sinergia POISON. Infetta il possessore con il POKERUS, guadagnando ogni 3 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
 		"SPELL_TAG": "Dà la sinergia GHOST. Quando il possessore è messo KO, infligge CURSE all'aggressore, uccidendolo dopo 10 secondi.",
 		"SHED_SHELL": "Dà la sinergia BUG ma riduce i HP massimi del possessore del 50% se clonato.",
 		"BERSERK_GENE": "Dà la sinergia MONSTER. Il possessore viene affetto da CONFUSION per 3 secondi se guadagna stack di MONSTER.",

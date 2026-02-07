@@ -2863,7 +2863,7 @@
 		"INCENSE": "Le porteur gagne le type FLORA. Chaque Pokémon du magasin a 5% de chance en plus de partager une synergie commune avec le porteur.",
 		"TERRAIN_EXTENDER": "Au début du combat, le porteur obtient un ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD ou FAIRY_FIELD selon ses synergies. Lors de l'activation de sa capacité, l'effet du champ est étendu à tous les alliés partageant la synergie du champ.",
 		"EXP_SHARE": "Copie la plus haute valeur d'ATK, de AP, de DEF et de SPE_DEF des alliés ADJACENT_IN_THE_SAME_ROW.",
-		"POKERUS_VIAL": "Le porteur gagne le type POISON. Infecte le porteur avec le POKERUS, lui offrant 1 ATK et 10 AP toutes les 2,5 secondes et transmet ces bonus à ses alliés.",
+		"POKERUS_VIAL": "Le porteur gagne le type POISON. Infecte le porteur avec le POKERUS, lui offrant 1 ATK et 10 AP toutes les 3 secondes et transmet ces bonus à ses alliés.",
 		"SPELL_TAG": "Le porteur gagne le type GHOST. Lorsque le porteur est mis KO, maudit son attaquant, qui sera mis KO dans 10 secondes.",
 		"SHED_SHELL": "Le porteur gagne le type BUG mais ses HP max sont réduits de 50% lorsqu'il est cloné.",
 		"BERSERK_GENE": "Le porteur gagne le type MONSTER. Le porteur devient CONFUSION pendant 3 secondes s'il cumule des KO via la synergie MONSTER.",

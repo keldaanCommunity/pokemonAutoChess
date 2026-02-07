@@ -77,7 +77,7 @@ export default class Status extends Schema implements IStatus {
   reflectCooldown = 0
   resurrectingCooldown = 0
   curseCooldown = 0
-  pokerusCooldown = 2500
+  pokerusCooldown = 3000
   possessedCooldown = 0
   lockedCooldown = 0
   blindCooldown = 0
@@ -1086,7 +1086,7 @@ export default class Status extends Schema implements IStatus {
           }
         }
       })
-      this.pokerusCooldown = 2500
+      this.pokerusCooldown = 3000
     } else {
       this.pokerusCooldown -= dt
     }
