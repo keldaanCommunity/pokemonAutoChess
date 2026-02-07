@@ -1821,7 +1821,7 @@
 		"COSMIC_POWER_SUN": "외한 모든 아군의 기본 ATK 을 [25,SP]% 증가시킨다.",
 		"ENTANGLING_THREAD": "대상에 [10,20,40,SP] SPECIAL와 4초의 PARALYSIS를 가한다",
 		"SILVER_WIND": "적 라인 뒤쪽으로 돌진하여 가는 길에 있는 모든 적에게 [20,40,80,SP] SPECIAL 를 가하고 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP, 10 SPEED 를 획득한다. ",
-		"POISON_POWDER": "적 후방에 돌진하며, 경로상의 모든 적들에 [20,40,80,SP] SPECIAL 및 5초간 POISONNED 상태를 가한다.",
+		"POISON_POWDER": "적 후방에 돌진하며, 경로상의 모든 적들에 [20,40,80,SP] SPECIAL 및 3초간 POISONNED 상태를 가한다.",
 		"ICY_WIND": "줄에 있는 모든 적에게 [25,50,100,SP] SPECIAL 를 가하고 SPEED 를 [10,20,40] 만큼 줄인다.",
 		"GIGATON_HAMMER": "시전자가 6초간 FATIGUE상태가 되는 대신 대상에 [100,200,400,SP] SPECIAL을 가한다.",
 		"ACROBATICS": "[20,40,80,SP] SPECIAL을 처리하고 대상과 적당한 거리에 있는 셀로 이동합니다. 아무 아이템도 들고 있지 않으면 더 멀리 이동합니다.",

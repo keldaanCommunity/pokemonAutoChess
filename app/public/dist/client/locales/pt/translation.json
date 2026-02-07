@@ -1409,7 +1409,7 @@
 		"COSMIC_POWER_MOON": "Aumente o AP da sua equipe em [25,SP]",
 		"ENTANGLING_THREAD": "Inflige [10,20,40,SP] SPECIAL e PARALYSIS o alvo e os inimigos adjacentes por 4 segundos",
 		"SILVER_WIND": "Corra para a retaguarda inimiga, causando [20,40,80,SP] SPECIAL a todos os inimigos no caminho. Em seguida, ganhe 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP e 10 SPEED",
-		"POISON_POWDER": "Corra para a retaguarda inimiga, causando [20,40,80,SP] e aplicando POISONNED por 5 segundos em todos os inimigos no caminho",
+		"POISON_POWDER": "Corra para a retaguarda inimiga, causando [20,40,80,SP] e aplicando POISONNED por 3 segundos em todos os inimigos no caminho",
 		"ICY_WIND": "Causa [25,50,100,SP] de SPECIAL a todos os alvos numa linha e diminui a sua SPEED em [10,20,40]",
 		"GIGATON_HAMMER": "Oferece [100,200,400,SP] SPECIAL, mas FATIGUE por 6 segundos",
 		"ACROBATICS": "Deal [20,40,80,SP] SPECIAL e mova-se para uma célula a uma boa distância do seu alvo. Mova-se para mais longe se não estiver segurando nenhum item",

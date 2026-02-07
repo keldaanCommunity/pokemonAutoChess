@@ -1890,7 +1890,7 @@
 		"COSMIC_POWER_SUN": "Augmente l'ATK de base de tous les alliés de [25,SP]%, excepté le lanceur.",
 		"ENTANGLING_THREAD": "Inflige [10,20,40,SP] SPECIAL et PARALYSIS pendant 4 secondes à la cible et aux ennemis ADJACENT.",
 		"SILVER_WIND": "Fonce vers l'ennemi le plus éloigné, infligeant [20,40,80,SP] SPECIAL à tous les ennemis sur son chemin. Puis gagne 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP et 10 SPEED.",
-		"POISON_POWDER": "Fonce vers l'ennemi le plus éloigné, infligeant [20,40,80,SP] SPECIAL à tous les ennemis sur son chemin et en leur appliquant POISONNED pendant 5 secondes.",
+		"POISON_POWDER": "Fonce vers l'ennemi le plus éloigné, infligeant [20,40,80,SP] SPECIAL à tous les ennemis sur son chemin et en leur appliquant POISONNED pendant 3 secondes.",
 		"ICY_WIND": "Inflige [25,50,100,SP] SPECIAL à tous les ennemis alignés derrière la cible et diminue leur SPEED de [10,20,40].",
 		"GIGATON_HAMMER": "Inflige [100,200,400,SP] SPECIAL mais le lanceur subit FATIGUE pendant 6 secondes.",
 		"ACROBATICS": "Inflige [20,40,80,SP] SPECIAL et se déplace vers une case à bonne distance de sa cible. Le lanceur s'envole encore plus loin s'il ne tient aucun objet.",

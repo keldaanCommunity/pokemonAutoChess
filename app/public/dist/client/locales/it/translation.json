@@ -1888,7 +1888,7 @@
 		"COSMIC_POWER_SUN": "Aumenta l' ATK base di ogni Pokémon alleato di [25,SP]%.",
 		"ENTANGLING_THREAD": "Infligge [10,20,40,SP] SPECIAL e PARALYSIS al bersaglio e ai nemici adiacenti per 4 secondi",
 		"SILVER_WIND": "Scatta nelle retrovie nemiche, infliggendo [20,40,80,SP] SPECIAL a tutti i nemici sul percorso. Inoltre ottieni 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP e 10 SPEED.",
-		"POISON_POWDER": "Scatta nelle retrovie nemiche, infliggendo [20,40,80,SP] SPECIAL e applicando POISONNED per 5 secondi a ogni nemico nella traiettoria.",
+		"POISON_POWDER": "Scatta nelle retrovie nemiche, infliggendo [20,40,80,SP] SPECIAL e applicando POISONNED per 3 secondi a ogni nemico nella traiettoria.",
 		"ICY_WIND": "Infligge [25,50,100,SP] SPECIAL a tutti i bersagli in una linea retta e diminuisce il loro SPEED del [10,20,40].",
 		"GIGATON_HAMMER": "Infligge [100,200,400,SP] SPECIAL ma provoca a se stesso FATIGUE per 6 secondi.",
 		"ACROBATICS": "Distribuisci [20,40,80,SP] SPECIAL e spostati in una cella a una buona distanza dal suo bersaglio. Spostati ulteriormente se non hai alcun oggetto in mano",

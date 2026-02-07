@@ -1890,7 +1890,7 @@
 		"COSMIC_POWER_SUN": "Increase the base ATK of all allied Pokémon other than the user by [25,SP]%.",
 		"ENTANGLING_THREAD": "Deal [10,20,40,SP] SPECIAL to the target and ADJACENT enemies and inflict them with PARALYSIS 4 seconds.",
 		"SILVER_WIND": "Dash to the farthest reachable enemy, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon in the path. Then gain 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP and 10 SPEED.",
-		"POISON_POWDER": "Dash to the farthest reachable enemy, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon in the path and inflicting them with POISONNED for 5 seconds.",
+		"POISON_POWDER": "Dash to the farthest reachable enemy, dealing [20,40,80,SP] SPECIAL to all enemy Pokémon in the path and inflicting them with POISONNED for 3 seconds.",
 		"ICY_WIND": "Deal [25,50,100,SP] SPECIAL to all enemy Pokémon in a line behind the target and decrease their SPEED by [10,20,40].",
 		"GIGATON_HAMMER": "Deal [100,200,400,SP] SPECIAL to the target and inflict the user with FATIGUE for 6 seconds.",
 		"ACROBATICS": "Deal [20,40,80,SP] SPECIAL and move to a tile at good distance from its target. Move further away if not holding any item.",

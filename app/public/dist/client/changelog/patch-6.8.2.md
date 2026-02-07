@@ -1,6 +1,7 @@
 
 # Changes to Pokemon & Abilities
 
+- Nerf Dustox: Poison Powder poison duration 5 → 3 seconds
 
 # Changes to Items
 

@@ -5588,7 +5588,7 @@ export class PoisonPowderStrategy extends AbilityStrategy {
 
     if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
     targetsHit.forEach((enemy) => {
-      enemy.status.triggerPoison(5000, target, pokemon)
+      enemy.status.triggerPoison(3000, target, pokemon)
       enemy.handleSpecialDamage(
         damage,
         board,

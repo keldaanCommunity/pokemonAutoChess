@@ -1890,7 +1890,7 @@
 		"COSMIC_POWER_SUN": "除使用者自身外的我方宝可梦提升[25,SP]%的基础ATK。",
 		"ENTANGLING_THREAD": "对目标及ADJACENT宝可梦造成[10,20,40,SP]点SPECIAL，并使他们陷入PARALYSIS 4秒。",
 		"SILVER_WIND": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，然后提升1点ATK、1点DEF、1点SPE_DEF、10点AP以及10点SPEED。",
-		"POISON_POWDER": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入POISONNED 5秒。",
+		"POISON_POWDER": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
 		"ICY_WIND": "对目标身后的一条直线上的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并降低他们[10,20,40]点SPEED。",
 		"GIGATON_HAMMER": "对目标造成[100,200,400,SP]点SPECIAL，但使用者陷入FATIGUE 6秒。",
 		"ACROBATICS": "对目标造成[20,40,80,SP]点SPECIAL，并移动至与目标有一定距离的单元格。若使用者没有携带任何道具，与目标的距离会进一步提升。",
