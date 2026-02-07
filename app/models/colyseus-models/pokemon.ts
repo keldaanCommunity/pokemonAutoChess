@@ -14059,9 +14059,9 @@ export class Smeargle extends Pokemon {
 
 export class Toxel extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.BABY,
     Synergy.ELECTRIC,
-    Synergy.POISON,
-    Synergy.BABY
+    Synergy.POISON
   ])
   rarity = Rarity.RARE
   evolution = Pkm.TOXTRICITY
@@ -14079,9 +14079,9 @@ export class Toxel extends Pokemon {
 
 export class Toxtricity extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.SOUND,
     Synergy.ELECTRIC,
-    Synergy.POISON,
-    Synergy.SOUND
+    Synergy.POISON
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -19205,9 +19205,9 @@ export class Clobbopus extends Pokemon {
   evolution = Pkm.GRAPPLOCT
   hp = 70
   atk = 6
-  speed = 39
-  def = 5
-  speDef = 5
+  speed = 27
+  def = 4
+  speDef = 4
   maxPP = 65
   range = 1
   skill = Ability.OCTOLOCK
@@ -19222,11 +19222,11 @@ export class Grapploct extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 12
-  speed = 39
-  def = 9
-  speDef = 9
+  hp = 160
+  atk = 14
+  speed = 27
+  def = 8
+  speDef = 8
   maxPP = 65
   range = 1
   skill = Ability.OCTOLOCK
