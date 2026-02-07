@@ -12421,11 +12421,11 @@ export class Koffing extends Pokemon {
       else return Pkm.WEEZING
     }
   )
-  hp = 70
+  hp = 65
   atk = 5
   speed = 44
-  def = 6
-  speDef = 6
+  def = 8
+  speDef = 4
   maxPP = 60
   range = 1
   skill = Ability.SMOG
@@ -12440,11 +12440,11 @@ export class Weezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 170
+  hp = 155
   atk = 10
   speed = 44
-  def = 10
-  speDef = 10
+  def = 12
+  speDef = 7
   maxPP = 60
   range = 1
   skill = Ability.SMOG
@@ -12459,11 +12459,11 @@ export class GalarianWeezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 170
+  hp = 155
   atk = 10
   speed = 44
-  def = 10
-  speDef = 10
+  def = 12
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.STRANGE_STEAM

@@ -5,6 +5,7 @@
 - Nerf Klink line: Attack 4/8/16 → 4/7/14, Speed 42 → 35
 - Nerf Shockwave: Deal Ability Power ~25/50/120~ → 30/60/120 special damage to all enemies in a 2-range radius, +1 range if user is in an Electric Field, **-20% damage per tile from the user.**
 - Nerf Grapploct line: Speed 39 → 27, Def/Spedef: 5/9 → 4/8, Attack 6/12 → 6/14, HP: 70/180 → 70/160
+- Nerf Weezing line: HP 70/170 → 65/155, Def: 6/10 → 8/12, Spe def: 6/10 → 4/7 (same nerfs for Galarian Weezing)
 
 # Changes to Items
 
