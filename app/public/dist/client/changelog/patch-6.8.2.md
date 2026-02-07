@@ -11,6 +11,7 @@
 - Twist Band now also prevents abilities that steal stat buffs from stealing buffs from the wearer. (e.g. Manaphy Heart Swap)
 - Nerf Electirizer: remove 30 speed base stat
 - Nerf Pokerus Vial: infection every 2.5 seconds → every 3 seconds
+- Change Terrain Extender: 50 shield 50 AP → 50 shield 20 PP
 
 # Changes to Synergies
 
