@@ -345,7 +345,6 @@ export class MindBlownStrategy extends AbilityStrategy {
                     crit,
                     false
                   )
-                  cell.value.status.triggerFlinch(5000, cell.value, pokemon)
                 }
                 break
               case "white":
