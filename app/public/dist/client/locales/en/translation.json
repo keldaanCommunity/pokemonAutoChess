@@ -2851,7 +2851,7 @@
 		"GOLDEN_NANAB_BERRY": "Consumed once below 50% HP, heal 50% of max HP and player gains 5 GOLD.",
 		"COMFEY": "Wears $t(pkm.COMFEY) and get its ability and its max HP, ATK, DEF, and SPE_DEF as bonus stats.",
 		"ELECTIRIZER": "Gives ELECTRIC synergy. Every third attack inflicts PARALYSIS for 2 seconds.",
-		"MAGMARIZER": "Gives FIRE synergy. The holder doesn't suffer from BURN. Instead, it gains 30 SPEED when burning.",
+		"MAGMARIZER": "Gives FIRE synergy. The holder doesn't take BURN damage. Instead, it gains 30 SPEED when burning.",
 		"MACHO_BRACE": "Gives FIGHTING synergy.",
 		"LIGHT_BALL": "Gives LIGHT synergy.",
 		"DRAGON_SCALE": "Gives DRAGON synergy as first synergy.",
