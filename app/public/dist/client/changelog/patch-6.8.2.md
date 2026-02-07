@@ -2,6 +2,7 @@
 # Changes to Pokemon & Abilities
 
 - Nerf Dustox: Poison Powder poison duration 5 → 3 seconds
+- Nerf Klink line: Attack 4/8/16 → 4/7/14, Speed 42 → 35
 
 # Changes to Items
 
