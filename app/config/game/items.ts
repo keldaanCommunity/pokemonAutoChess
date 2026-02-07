@@ -61,7 +61,6 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.RED_ORB]: { [Stat.ATK]: 10 },
   [Item.FLAME_ORB]: { [Stat.ATK]: 5, [Stat.DEF]: 3 },
   [Item.ROCKY_HELMET]: { [Stat.DEF]: 25 },
-  [Item.ELECTIRIZER]: { [Stat.SPEED]: 30 },
   [Item.MAGMARIZER]: { [Stat.ATK]: 5 },
   [Item.MACHO_BRACE]: { [Stat.ATK]: 15, [Stat.SPEED]: -15 },
   [Item.LIGHT_BALL]: { [Stat.AP]: 75 },
