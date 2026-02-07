@@ -1633,8 +1633,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.LUM_BERRY:
         heal(50)
-        this.status.clearNegativeStatus()
-        this.status.triggerRuneProtect(5000)
+        this.status.clearNegativeStatus(this, this)
+        this.status.triggerRuneProtect(5000, this, this)
         break
       case Item.ORAN_BERRY:
         heal(50)

@@ -888,7 +888,7 @@ const treeEffect = new OnSpawnEffect((entity) => {
 
 const inanimateObjectEffect = new OnSpawnEffect((entity) => {
   entity.status.tree = true
-  entity.status.triggerRuneProtect(30000)
+  entity.status.triggerRuneProtect(30000, entity, entity)
   entity.toIdleState()
 }, Passive.INANIMATE)
 
@@ -1102,7 +1102,7 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
   ],
   [Passive.MEGA_SABLEYE]: [
-    new OnSpawnEffect((entity) => entity.status.triggerRuneProtect(60000))
+    new OnSpawnEffect((entity) => entity.status.triggerRuneProtect(60000, entity, entity))
   ],
   [Passive.PIKACHU_SURFER]: [PikachuSurferBuffEffect],
   [Passive.ACCELERATION]: [
@@ -1225,7 +1225,7 @@ export const PassiveEffects: Partial<
   [Passive.AQUA_VEIL]: [
     new OnSpawnEffect((entity) => {
       if (entity.simulation.weather === Weather.RAIN) {
-        entity.status.triggerRuneProtect(60000)
+        entity.status.triggerRuneProtect(60000, entity, entity)
       }
     })
   ],
@@ -1240,7 +1240,7 @@ export const PassiveEffects: Partial<
         entity.player &&
         entity.player.money >= entity.player.maxInterest * 10
       ) {
-        entity.status.triggerRuneProtect(60000)
+        entity.status.triggerRuneProtect(60000, entity, entity)
       }
     })
   ],

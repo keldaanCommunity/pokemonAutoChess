@@ -350,7 +350,7 @@ export class MindBlownStrategy extends AbilityStrategy {
               case "white":
                 if (cell.value && cell.value.team === pokemon.team) {
                   cell.value.addShield(20, pokemon, 0, crit)
-                  cell.value.status.clearNegativeStatus()
+                  cell.value.status.clearNegativeStatus(cell.value, pokemon)
                 }
                 break
             }
@@ -391,7 +391,7 @@ export class SoftBoiledStrategy extends AbilityStrategy {
       if (tg && pokemon.team == tg.team) {
         pokemon.broadcastAbility({ positionX: x, positionY: y })
         tg.addShield(shield, pokemon, 1, crit)
-        tg.status.clearNegativeStatus()
+        tg.status.clearNegativeStatus(tg, pokemon)
       }
     })
   }
@@ -488,7 +488,7 @@ export class SlackOffStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon, pokemon)
     const healFactor = 0.3
     pokemon.handleHeal(pokemon.maxHP * healFactor, pokemon, 1, crit)
     pokemon.status.triggerSleep(3000, pokemon)
@@ -873,7 +873,7 @@ export class ElectroBoostStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team && tg.types.has(Synergy.ELECTRIC)) {
-        tg.status.triggerRuneProtect(5000)
+        tg.status.triggerRuneProtect(5000, tg, pokemon)
       }
     })
   }
@@ -893,7 +893,7 @@ export class AuroraVeilStrategy extends AbilityStrategy {
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team == tg.team) {
         tg.addShield(shield, pokemon, 1, crit)
-        tg.status.triggerRuneProtect(runeProtectDuration)
+        tg.status.triggerRuneProtect(runeProtectDuration, tg, pokemon)
       }
     })
   }
@@ -910,7 +910,7 @@ export class TimeTravelStrategy extends AbilityStrategy {
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
         ally.handleHeal(25, pokemon, 1, crit)
-        ally.status.clearNegativeStatus()
+        ally.status.clearNegativeStatus(ally, pokemon)
       }
     })
 
@@ -2911,7 +2911,7 @@ export class LunarBlessingStrategy extends AbilityStrategy {
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.hp < ally.maxHP) {
         ally.handleHeal(0.25 * ally.maxHP, pokemon, 1, crit)
-        ally.status.clearNegativeStatus()
+        ally.status.clearNegativeStatus(ally, pokemon)
       }
     })
   }
@@ -2935,7 +2935,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
-      lowestHealthAlly.status.triggerRuneProtect(pokemon.stars * 1000)
+      lowestHealthAlly.status.triggerRuneProtect(pokemon.stars * 1000, lowestHealthAlly, pokemon)
       pokemon.broadcastAbility({
         targetX: lowestHealthAlly.positionX,
         targetY: lowestHealthAlly.positionY
@@ -3857,7 +3857,7 @@ export class WaterfallStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
     pokemon.addShield(shield, pokemon, 1, crit)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon, pokemon)
     board.clearBoardEffect(
       pokemon.positionX,
       pokemon.positionY,
@@ -4317,7 +4317,7 @@ export class TakeHeartStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(8, pokemon, 1, crit)
     pokemon.addSpecialDefense(8, pokemon, 1, crit)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon, pokemon)
     pokemon.resetCooldown(100)
   }
 }
@@ -4339,7 +4339,7 @@ export class HeartSwapStrategy extends AbilityStrategy {
     target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
 
     pokemon.status.transferNegativeStatus(pokemon, target)
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon, pokemon)
   }
 }
 
@@ -6891,7 +6891,7 @@ export class AquaRingStrategy extends AbilityStrategy {
 
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.status.clearNegativeStatus()
+          cell.value.status.clearNegativeStatus(cell.value, pokemon)
           cell.value.handleHeal(heal, pokemon, 1, crit)
         }
       })
@@ -8604,7 +8604,7 @@ export class AromatherapyStrategy extends AbilityStrategy {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
-          cell.value.status.clearNegativeStatus()
+          cell.value.status.clearNegativeStatus(cell.value, pokemon)
           cell.value.handleHeal(heal, pokemon, 1, crit)
         }
       })
@@ -10209,7 +10209,7 @@ export class PurifyStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon, pokemon)
     pokemon.handleHeal(heal, pokemon, 1, crit)
   }
 }
@@ -10251,7 +10251,7 @@ export class PastelVeilStrategy extends AbilityStrategy {
 
     if (alliesHit.size === 0) alliesHit.add(pokemon) // guarantee at least the user is hit
     alliesHit.forEach((ally) => {
-      ally.status.clearNegativeStatus()
+      ally.status.clearNegativeStatus(ally, pokemon)
       ally.addShield(shield, pokemon, 1, crit)
     })
   }
@@ -12291,7 +12291,7 @@ export class SaltCureStrategy extends AbilityStrategy {
       if (cell.value) {
         if (cell.value.team === pokemon.team) {
           cell.value.addShield(shield, pokemon, 1, crit)
-          cell.value.status.clearNegativeStatus()
+          cell.value.status.clearNegativeStatus(cell.value, pokemon)
         } else {
           if (
             cell.value.types.has(Synergy.WATER) ||

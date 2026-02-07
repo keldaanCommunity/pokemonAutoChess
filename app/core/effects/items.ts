@@ -599,7 +599,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.SAFETY_GOGGLES]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.triggerRuneProtect(60000)
+      pokemon.status.triggerRuneProtect(60000, pokemon, pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.runeProtectCooldown = 0

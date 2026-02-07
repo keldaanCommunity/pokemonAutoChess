@@ -90,7 +90,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   clearAllStatus(entity: PokemonEntity) {
-    this.clearNegativeStatus()
+    this.clearNegativeStatus(entity)
     this.clearPositiveStatus(entity)
   }
 
@@ -109,7 +109,7 @@ export default class Status extends Schema implements IStatus {
     this.removeFairyField(entity)
   }
 
-  clearNegativeStatus() {
+  clearNegativeStatus(entity: IPokemonEntity, origin?: IPokemonEntity) {
     this.burnCooldown = 0
     this.silenceCooldown = 0
     this.fatigueCooldown = 0
@@ -126,7 +126,11 @@ export default class Status extends Schema implements IStatus {
       this.curseCooldown += 2000 // do not clear curseCooldown on purpose
     }
     this.curse = false
-    this.possessedCooldown = 0
+    if (this.possessed && origin && origin.team === entity.team) {
+      // Posession should not be considered negative status if by being possessed it comes to your team
+    } else {
+      this.possessedCooldown = 0
+    }
     this.lockedCooldown = 0
     this.blindCooldown = 0
   }
@@ -904,9 +908,13 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerRuneProtect(timer: number) {
+  triggerRuneProtect(
+    timer: number,
+    pokemon: IPokemonEntity,
+    origin: IPokemonEntity
+  ) {
     this.runeProtect = true
-    this.clearNegativeStatus()
+    this.clearNegativeStatus(pokemon, origin)
     if (timer > this.runeProtectCooldown) {
       this.runeProtectCooldown = timer
     }
@@ -994,7 +1002,7 @@ export default class Status extends Schema implements IStatus {
     this.resurrection = false
     this.resurrecting = true
     this.resurrectingCooldown = 2000
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon)
   }
 
   updateResurrecting(dt: number, pokemon: PokemonEntity) {

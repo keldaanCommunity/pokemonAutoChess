@@ -1,4 +1,4 @@
-import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
+import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
@@ -667,7 +667,7 @@ export default class Simulation extends Schema implements ISimulation {
             )
             if (ally && ally.team === pokemon.team) {
               ally.addShield(Math.ceil(0.2 * ally.maxHP), ally, 0, false)
-              ally.status.triggerRuneProtect(5000)
+              ally.status.triggerRuneProtect(5000, ally, pokemon as PokemonEntity)
             }
           })
         }
@@ -1195,7 +1195,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.add(EffectEnum.ETERNAL_LIGHT)
           pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
           pokemon.addAbilityPower(20, pokemon, 0, false)
-          pokemon.status.triggerRuneProtect(8000)
+          pokemon.status.triggerRuneProtect(8000, pokemon, pokemon)
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
           pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef, pokemon, 0, false)
         }
@@ -1207,7 +1207,7 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.add(EffectEnum.MAX_ILLUMINATION)
           pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
           pokemon.addAbilityPower(20, pokemon, 0, false)
-          pokemon.status.triggerRuneProtect(8000)
+          pokemon.status.triggerRuneProtect(8000, pokemon, pokemon)
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
           pokemon.addSpecialDefense(0.5 * pokemon.baseSpeDef, pokemon, 0, false)
           pokemon.addShield(100, pokemon, 0, false)
@@ -1491,7 +1491,7 @@ export default class Simulation extends Schema implements ISimulation {
           : null
     if (winningTeam) {
       winningTeam.forEach((p) => {
-        p.status.clearNegativeStatus()
+        p.status.clearNegativeStatus(p as PokemonEntity)
         if (!p.status.tree) {
           p.action = PokemonActionState.HOP
         }
@@ -1724,7 +1724,7 @@ export default class Simulation extends Schema implements ISimulation {
         this.board.clearBoardEffect(x, y, this) // clear all board effects
         if (pokemonHit) {
           if (pokemonHit.team === team) {
-            pokemonHit.status.clearNegativeStatus()
+            pokemonHit.status.clearNegativeStatus(pokemonHit)
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,

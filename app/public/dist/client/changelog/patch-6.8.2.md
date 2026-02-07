@@ -9,6 +9,10 @@
 
 # Changes to Synergies
 
+# Gameplay changes
+
+- Posession is no longer considered a negative status if by being possessed it came to your team
+
 
 # Bugfix
 

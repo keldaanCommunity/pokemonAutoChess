@@ -94,7 +94,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   BALM_MUSHROOM: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(30000)
+      entity.status.triggerRuneProtect(30000, entity, entity)
       entity.addSpeed(40, entity, 0, false)
       entity.effects.add(EffectEnum.BALM_MUSHROOM)
       entity.effectsSet.add(
@@ -188,7 +188,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   HERBA_MYSTICA_SALTY: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(FIGHTING_PHASE_DURATION)
+      entity.status.triggerRuneProtect(FIGHTING_PHASE_DURATION, entity, entity)
     })
   ],
   HONEY: [],
@@ -257,7 +257,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   ROCK_SALT: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(10000)
+      entity.status.triggerRuneProtect(10000, entity, entity)
       entity.addShield(0.15 * entity.maxHP, entity, 0, false)
     })
   ],
