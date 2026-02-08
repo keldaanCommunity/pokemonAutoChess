@@ -8,54 +8,72 @@ export default function WikiTutorials() {
       <ul>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/3LJbX2v6ba8"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/3LJbX2v6ba8?si=d2QnWqIgahEKO4DA"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <h3>Official Trailer</h3>
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/wEOipl5L7A8"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/wEOipl5L7A8?si=hg11sJyl6tmAP0Ws"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <h3>A beginner's guide to Pokemon Auto-chess</h3>
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/Zep0Tk7xMVs"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/Zep0Tk7xMVs?si=aRgf6eHFsZq6n6l2"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <h3>How to position your units</h3>
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/VK-wTKsQ108"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/VK-wTKsQ108?si=fcQhOXC1vi34URLc"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <h3>How to manage your economy</h3>
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/4IPNEnEbvdE"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/4IPNEnEbvdE?si=5ZZa7ItnKWPaBu7d"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <h3>101 Tips and Tricks for Becoming a Pro</h3>
         </li>
         <li className="my-box">
           <iframe
-            src="https://www.youtube.com/embed/cjrBGXJ-JJE"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/cjrBGXJ-JJE?si=zCnq1zXJH4rXQ6Pd"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
           <h3>Make Smarter Carousel Choices</h3>
