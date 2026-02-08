@@ -59,7 +59,8 @@ import {
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
-  OnKillEffect
+  OnKillEffect,
+  OnSpawnEffect
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
@@ -1462,6 +1463,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
     this.simulation.applySynergyEffects(cloneReference)
     this.simulation.applyItemsEffects(cloneReference)
+    cloneReference.getEffects(OnSpawnEffect).forEach((effect) => {
+      effect.apply(cloneReference, this.player, this.isSpawn)
+    })
 
     this.maxHP = cloneReference.maxHP
     this.atk = cloneReference.atk
