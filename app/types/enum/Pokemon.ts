@@ -3623,7 +3623,7 @@ export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
 export const PkmRegionalBaseVariants: { [key in Pkm]?: Pkm } =
   Object.fromEntries(
     Object.entries(PkmRegionalVariants).flatMap(([base, variants]) =>
-      variants.map((variant) => [variant, base])
+      variants.map((variant) => [variant, PkmFamily[base]])
     )
   ) as { [key in Pkm]?: Pkm }
 
