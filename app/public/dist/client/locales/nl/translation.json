@@ -1056,7 +1056,7 @@
 		"COSMIC_POWER_MOON": "Verbeter de AP van je team met [25,SP]",
 		"ENTANGLING_THREAD": "Deelt [10,20,40,SP] SPECIAL uit en verlamt het doelwit en aangrenzende vijanden gedurende 4 seconden",
 		"SILVER_WIND": "Stort je in de achterlijn van de vijand en deel [20,40,80,SP] SPECIAL uit aan elke vijand op het pad. Krijg dan 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP en 10 SPEED",
-		"POISON_POWDER": "Stort je in de achterlijn van de vijand, deel [20,40,80,SP] en breng gedurende 5 seconden POISONNED aan op elke vijand op het pad",
+		"POISON_POWDER": "Stort je in de achterlijn van de vijand, deel [20,40,80,SP] en breng gedurende 3 seconden POISONNED aan op elke vijand op het pad",
 		"ICY_WIND": "Verdeelt [25,50,100,SP] SPECIAL naar alle doelwitten in een lijn en verlaagt hun SPEED met [10,20,40].",
 		"GIGATON_HAMMER": "Biedt [100,200,400,SP] SPECIAL aan, maar FATIGUE zelf gedurende 6 seconden",
 		"ACROBATICS": "Deal [20,40,80,SP] SPECIAL en ga naar een cel op een goede afstand van het doelwit. Ga verder weg als je geen item vasthoudt",

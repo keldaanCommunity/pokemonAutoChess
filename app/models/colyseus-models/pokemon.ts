@@ -2109,10 +2109,6 @@ export class Deino extends Pokemon {
   range = 2
   skill = Ability.DARK_HARVEST
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DRAGON)
-  }
 }
 
 export class Zweilous extends Pokemon {
@@ -2129,10 +2125,6 @@ export class Zweilous extends Pokemon {
   range = 2
   skill = Ability.DARK_HARVEST
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DRAGON)
-  }
 }
 
 export class Hydreigon extends Pokemon {
@@ -2148,10 +2140,6 @@ export class Hydreigon extends Pokemon {
   range = 2
   skill = Ability.DARK_HARVEST
   regional = true
-  isInRegion(map: DungeonPMDO, state?: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.DRAGON)
-  }
 }
 
 export class Poliwag extends Pokemon {
@@ -12433,11 +12421,11 @@ export class Koffing extends Pokemon {
       else return Pkm.WEEZING
     }
   )
-  hp = 70
+  hp = 65
   atk = 5
   speed = 44
-  def = 6
-  speDef = 6
+  def = 8
+  speDef = 4
   maxPP = 60
   range = 1
   skill = Ability.SMOG
@@ -12452,11 +12440,11 @@ export class Weezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 170
+  hp = 155
   atk = 10
   speed = 44
-  def = 10
-  speDef = 10
+  def = 12
+  speDef = 7
   maxPP = 60
   range = 1
   skill = Ability.SMOG
@@ -12471,11 +12459,11 @@ export class GalarianWeezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 170
+  hp = 155
   atk = 10
   speed = 44
-  def = 10
-  speDef = 10
+  def = 12
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.STRANGE_STEAM
@@ -12563,7 +12551,7 @@ export class Helioptile extends Pokemon {
   stars = 1
   evolution = Pkm.HELIOLISK
   hp = 75
-  atk = 8
+  atk = 7
   speed = 60
   def = 4
   speDef = 4
@@ -12583,7 +12571,7 @@ export class Heliolisk extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 170
-  atk = 19
+  atk = 17
   speed = 60
   def = 6
   speDef = 6
@@ -13463,7 +13451,7 @@ export class Qwilfish extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 175
+  hp = 150
   atk = 13
   speed = 52
   def = 15
@@ -14071,9 +14059,9 @@ export class Smeargle extends Pokemon {
 
 export class Toxel extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.BABY,
     Synergy.ELECTRIC,
-    Synergy.POISON,
-    Synergy.BABY
+    Synergy.POISON
   ])
   rarity = Rarity.RARE
   evolution = Pkm.TOXTRICITY
@@ -14091,9 +14079,9 @@ export class Toxel extends Pokemon {
 
 export class Toxtricity extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.SOUND,
     Synergy.ELECTRIC,
-    Synergy.POISON,
-    Synergy.SOUND
+    Synergy.POISON
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -14869,6 +14857,10 @@ export class Impidimp extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Morgrem extends Pokemon {
@@ -14885,6 +14877,10 @@ export class Morgrem extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Grimmsnarl extends Pokemon {
@@ -14900,6 +14896,10 @@ export class Grimmsnarl extends Pokemon {
   range = 1
   skill = Ability.SPIRIT_BREAK
   regional = true
+  isInRegion(map: DungeonPMDO, state?: GameState) {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.HUMAN)
+  }
 }
 
 export class Drowzee extends Pokemon {
@@ -19205,9 +19205,9 @@ export class Clobbopus extends Pokemon {
   evolution = Pkm.GRAPPLOCT
   hp = 70
   atk = 6
-  speed = 39
-  def = 5
-  speDef = 5
+  speed = 27
+  def = 4
+  speDef = 4
   maxPP = 65
   range = 1
   skill = Ability.OCTOLOCK
@@ -19222,11 +19222,11 @@ export class Grapploct extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 12
-  speed = 39
-  def = 9
-  speDef = 9
+  hp = 160
+  atk = 14
+  speed = 27
+  def = 8
+  speDef = 8
   maxPP = 65
   range = 1
   skill = Ability.OCTOLOCK
@@ -19378,7 +19378,7 @@ export class Klink extends Pokemon {
   evolution = Pkm.KLANG
   hp = 50
   atk = 4
-  speed = 42
+  speed = 35
   def = 3
   speDef = 2
   maxPP = 100
@@ -19393,8 +19393,8 @@ export class Klang extends Pokemon {
   stars = 2
   evolution = Pkm.KLINKLANG
   hp = 100
-  atk = 8
-  speed = 42
+  atk = 7
+  speed = 35
   def = 5
   speDef = 3
   maxPP = 100
@@ -19408,8 +19408,8 @@ export class Klinklang extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 150
-  atk = 16
-  speed = 42
+  atk = 14
+  speed = 35
   def = 9
   speDef = 6
   maxPP = 100

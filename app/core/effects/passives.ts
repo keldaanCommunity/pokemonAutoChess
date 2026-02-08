@@ -55,7 +55,7 @@ import {
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
   pokemon.resetCooldown(1000, speed) // use attack state cooldown
-  if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
+  if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
     // CAST ABILITY
     const target = pokemon.state.getNearestTargetAtSight(pokemon, board)?.target
     if (target) {
@@ -121,6 +121,7 @@ export function partingShot(
 ) {
   target.addAbilityPower(-20, pokemon, 0, false)
   target.addAttack(-0.2 * target.baseAtk, pokemon, 0, false)
+  target.effects.add(EffectEnum.PARTING_SHOT)
   pokemon.broadcastAbility({
     skill: "PARTING_SHOT",
     positionX: x,
@@ -763,12 +764,7 @@ const conversionEffect = new OnSimulationStartEffect(
         opponent.effects.has(effect)
       ) ?? SynergyEffects[synergyCopied][0]!
 
-    simulation.applyEffect(
-      entity,
-      entity.types,
-      effect,
-      player?.synergies.countActiveSynergies() || 0
-    )
+    simulation.applyEffect(entity, effect)
 
     // when converting to bug, get a clone
     if (synergyCopied === Synergy.BUG) {
@@ -892,7 +888,7 @@ const treeEffect = new OnSpawnEffect((entity) => {
 
 const inanimateObjectEffect = new OnSpawnEffect((entity) => {
   entity.status.tree = true
-  entity.status.triggerRuneProtect(30000)
+  entity.status.triggerRuneProtect(30000, entity, entity)
   entity.toIdleState()
 }, Passive.INANIMATE)
 
@@ -931,8 +927,19 @@ const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
 class DrySkinPeriodicEffect extends PeriodicEffect {
   constructor() {
     super(
-      (pokemon) => {
-        pokemon.handleHeal(8, pokemon, 0, false)
+      (pokemon, board) => {
+        if (pokemon.simulation.weather === Weather.RAIN) {
+          pokemon.handleHeal(8, pokemon, 0, false)
+        } else if (pokemon.simulation.weather === Weather.DROUGHT) {
+          pokemon.handleSpecialDamage(
+            8,
+            board,
+            AttackType.TRUE,
+            pokemon,
+            false,
+            false
+          )
+        }
       },
       Passive.DRY_SKIN,
       1000
@@ -941,7 +948,10 @@ class DrySkinPeriodicEffect extends PeriodicEffect {
 }
 
 const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
-  if (entity.simulation.weather === Weather.RAIN) {
+  if (
+    entity.simulation.weather === Weather.RAIN ||
+    entity.simulation.weather === Weather.DROUGHT
+  ) {
     entity.effectsSet.add(new DrySkinPeriodicEffect())
   } else if (entity.simulation.weather === Weather.SANDSTORM) {
     entity.addDodgeChance(0.25, entity, 0, false)
@@ -1092,7 +1102,7 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
   ],
   [Passive.MEGA_SABLEYE]: [
-    new OnSpawnEffect((entity) => entity.status.triggerRuneProtect(60000))
+    new OnSpawnEffect((entity) => entity.status.triggerRuneProtect(60000, entity, entity))
   ],
   [Passive.PIKACHU_SURFER]: [PikachuSurferBuffEffect],
   [Passive.ACCELERATION]: [
@@ -1215,7 +1225,7 @@ export const PassiveEffects: Partial<
   [Passive.AQUA_VEIL]: [
     new OnSpawnEffect((entity) => {
       if (entity.simulation.weather === Weather.RAIN) {
-        entity.status.triggerRuneProtect(60000)
+        entity.status.triggerRuneProtect(60000, entity, entity)
       }
     })
   ],
@@ -1230,7 +1240,7 @@ export const PassiveEffects: Partial<
         entity.player &&
         entity.player.money >= entity.player.maxInterest * 10
       ) {
-        entity.status.triggerRuneProtect(60000)
+        entity.status.triggerRuneProtect(60000, entity, entity)
       }
     })
   ],

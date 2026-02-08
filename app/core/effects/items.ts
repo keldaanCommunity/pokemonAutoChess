@@ -11,6 +11,7 @@ import {
   DishesGoingToInventory,
   FishingRod,
   Flavors,
+  HerbaMysticas,
   HMs,
   Item,
   ItemRecipe,
@@ -334,7 +335,11 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
-  } else if (chef.name.startsWith("ARCEUS") || chef.name === Pkm.KECLEON) {
+  } else if (
+    chef.name.startsWith("ARCEUS") ||
+    chef.name === Pkm.KECLEON ||
+    chef.items.has(Item.GOURMET_MEMORY)
+  ) {
     dish = Item.SANDWICH
   }
 
@@ -374,7 +379,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
           if (DishesGoingToInventory.includes(dish)) {
             player.items.push(dish)
           } else {
-            const candidates = values(player.board).filter(
+            let candidates = values(player.board).filter(
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
@@ -386,6 +391,11 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
                   p.positionY
                 ) === 1
             )
+            if (dish === Item.HERBA_MYSTICA) {
+              candidates = candidates.filter((p) =>
+                HerbaMysticas.every((herba) => p.dishes.has(herba) === false)
+              )
+            }
             candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
             const pokemon = candidates[0] ?? chef // idx 0 equals the strongest unit
             if (dish === Item.HERBA_MYSTICA) {
@@ -589,7 +599,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.SAFETY_GOGGLES]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.triggerRuneProtect(60000)
+      pokemon.status.triggerRuneProtect(60000, pokemon, pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.runeProtectCooldown = 0
@@ -598,7 +608,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.KINGS_ROCK]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(0.35 * pokemon.baseHP, pokemon, 0, false)
+      pokemon.addShield(0.3 * pokemon.baseHP, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addShield(-0.3 * pokemon.baseHP, pokemon, 0, false)

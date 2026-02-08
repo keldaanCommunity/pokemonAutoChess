@@ -77,7 +77,7 @@ export default class Status extends Schema implements IStatus {
   reflectCooldown = 0
   resurrectingCooldown = 0
   curseCooldown = 0
-  pokerusCooldown = 2500
+  pokerusCooldown = 3000
   possessedCooldown = 0
   lockedCooldown = 0
   blindCooldown = 0
@@ -90,7 +90,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   clearAllStatus(entity: PokemonEntity) {
-    this.clearNegativeStatus()
+    this.clearNegativeStatus(entity)
     this.clearPositiveStatus(entity)
   }
 
@@ -109,7 +109,7 @@ export default class Status extends Schema implements IStatus {
     this.removeFairyField(entity)
   }
 
-  clearNegativeStatus() {
+  clearNegativeStatus(entity: IPokemonEntity, origin?: IPokemonEntity) {
     this.burnCooldown = 0
     this.silenceCooldown = 0
     this.fatigueCooldown = 0
@@ -126,7 +126,11 @@ export default class Status extends Schema implements IStatus {
       this.curseCooldown += 2000 // do not clear curseCooldown on purpose
     }
     this.curse = false
-    this.possessedCooldown = 0
+    if (this.possessed && origin && origin.team === entity.team) {
+      // Posession should not be considered negative status if by being possessed it comes to your team
+    } else {
+      this.possessedCooldown = 0
+    }
     this.lockedCooldown = 0
     this.blindCooldown = 0
   }
@@ -440,6 +444,14 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 0.5
         }
 
+        if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+          burnDamage *= 0.7
+        } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+          burnDamage *= 0.5
+        } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+          burnDamage *= 0.3
+        }
+
         if (
           pkm.passive === Passive.WELL_BAKED ||
           pkm.items.has(Item.MAGMARIZER)
@@ -451,9 +463,10 @@ export default class Status extends Schema implements IStatus {
           pkm.addSpeed(10, pkm, 0, false)
         }
 
+        burnDamage = Math.round(burnDamage)
         if (burnDamage > 0) {
           pkm.handleDamage({
-            damage: Math.round(burnDamage),
+            damage: burnDamage,
             board,
             attackType: AttackType.TRUE,
             attacker: this.burnOrigin,
@@ -599,6 +612,15 @@ export default class Status extends Schema implements IStatus {
       if (pkm.passive === Passive.TOXIC_BOOST) {
         poisonDamage *= 0.5
       }
+
+      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+        poisonDamage *= 0.7
+      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+        poisonDamage *= 0.5
+      } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+        poisonDamage *= 0.3
+      }
+      poisonDamage = Math.round(poisonDamage)
 
       if (poisonDamage < 0) {
         pkm.handleHeal(Math.round(-poisonDamage), pkm, 0, false)
@@ -886,9 +908,13 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerRuneProtect(timer: number) {
+  triggerRuneProtect(
+    timer: number,
+    pokemon: IPokemonEntity,
+    origin: IPokemonEntity
+  ) {
     this.runeProtect = true
-    this.clearNegativeStatus()
+    this.clearNegativeStatus(pokemon, origin)
     if (timer > this.runeProtectCooldown) {
       this.runeProtectCooldown = timer
     }
@@ -976,7 +1002,7 @@ export default class Status extends Schema implements IStatus {
     this.resurrection = false
     this.resurrecting = true
     this.resurrectingCooldown = 2000
-    pokemon.status.clearNegativeStatus()
+    pokemon.status.clearNegativeStatus(pokemon)
   }
 
   updateResurrecting(dt: number, pokemon: PokemonEntity) {
@@ -1060,7 +1086,7 @@ export default class Status extends Schema implements IStatus {
           }
         }
       })
-      this.pokerusCooldown = 2500
+      this.pokerusCooldown = 3000
     } else {
       this.pokerusCooldown -= dt
     }
@@ -1207,6 +1233,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   addPsychicField(entity: IPokemonEntity) {
+    if (this.psychicField) return
     this.psychicField = true
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(30, entity, 0, false)
@@ -1214,6 +1241,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   removePsychicField(entity: IPokemonEntity) {
+    if (!this.psychicField) return
     this.psychicField = false
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(-30, entity, 0, false)
@@ -1221,6 +1249,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   addElectricField(entity: IPokemonEntity) {
+    if (this.electricField) return
     this.electricField = true
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(30, entity, 0, false)
@@ -1228,6 +1257,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   removeElectricField(entity: IPokemonEntity) {
+    if (!this.electricField) return
     this.electricField = false
     if (entity.passive === Passive.SURGE_SURFER) {
       entity.addSpeed(-30, entity, 0, false)

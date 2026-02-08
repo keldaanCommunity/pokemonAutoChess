@@ -220,6 +220,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
   }
 
+  get canAttack(): boolean {
+    return (
+      !this.status.freeze &&
+      !this.status.sleep &&
+      !this.status.resurrecting &&
+      !this.status.skydiving
+    )
+  }
+
+  get canCast(): boolean {
+    return !this.status.silence && !this.items.has(Item.NULLIFY_BANDANNA)
+  }
+
   get canBeMoved(): boolean {
     return !this.status.skydiving && !this.items.has(Item.HEAVY_DUTY_BOOTS)
   }
@@ -555,7 +568,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     this.maxHP = min(1)(this.maxHP + value)
@@ -610,7 +623,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { ap: number }) => {
@@ -647,7 +660,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { luck: number }) => {
@@ -679,7 +692,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { def: number }) => {
@@ -711,7 +724,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { speDef: number }) => {
@@ -743,7 +756,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = Math.round(value * 1.33)
     }
 
     const update = (target: { atk: number }) => {
@@ -779,7 +792,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (crit ? caster.critPower : 1)
 
       if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-        value = Math.round(value * 1.25)
+        value = Math.round(value * 1.33)
       }
 
       const update = (target: { speed: number }) => {
@@ -814,7 +827,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (type && !this.types.has(type)) {
       if (type === Synergy.DRAGON) {
-        this.types = new SetSchema<Synergy>([type, ...this.types])
+        this.types = new SetSchema<Synergy>([type, ...this.types]) // dragon always go first synergy
       } else {
         this.types.add(type)
       }
@@ -1442,8 +1455,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Recalculate stats as it was at the start of the battle
     const cloneReference = new PokemonEntity(
       this.refToBoardPokemon,
-      0,
-      0,
+      this.refToBoardPokemon.positionX,
+      this.refToBoardPokemon.positionY - 1,
       this.team,
       this.simulation
     )
@@ -1620,8 +1633,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.LUM_BERRY:
         heal(50)
-        this.status.clearNegativeStatus()
-        this.status.triggerRuneProtect(5000)
+        this.status.clearNegativeStatus(this, this)
+        this.status.triggerRuneProtect(5000, this, this)
         break
       case Item.ORAN_BERRY:
         heal(50)
