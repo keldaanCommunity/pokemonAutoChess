@@ -25,6 +25,7 @@
   "scripts": {
     "dev-client": "node esbuild.js --dev",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
+    "training": "ts-node --transpile-only ./app/training/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx @biomejs/biome lint app/",
     "format": "npx @biomejs/biome format app/ --write",
