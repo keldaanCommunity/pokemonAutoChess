@@ -28,4 +28,6 @@
 
 # Misc
 
+- Ghost opponents avatars are now displayed in semi-transparent
+
 

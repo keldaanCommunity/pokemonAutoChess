@@ -667,7 +667,11 @@ export default class Simulation extends Schema implements ISimulation {
             )
             if (ally && ally.team === pokemon.team) {
               ally.addShield(Math.ceil(0.2 * ally.maxHP), ally, 0, false)
-              ally.status.triggerRuneProtect(5000, ally, pokemon as PokemonEntity)
+              ally.status.triggerRuneProtect(
+                5000,
+                ally,
+                pokemon as PokemonEntity
+              )
             }
           })
         }
@@ -1041,7 +1045,9 @@ export default class Simulation extends Schema implements ISimulation {
           pokemon.effects.add(effect)
           if (player) {
             const dragonLevel = values(player.board).reduce(
-              (acc, p) => acc + (p.types.has(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
+              (acc, p) =>
+                acc +
+                (p.types.has(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
               0
             )
             if (
@@ -1523,41 +1529,60 @@ export default class Simulation extends Schema implements ISimulation {
       opponentPlayer,
       opponentPlayerId
     } of playersToProcess) {
-      if (!player || this.id !== player.simulationId) continue
-      if (playerId === this.redPlayerId && this.isGhostBattle) continue // red player in ghost battle is always the ghost, doesnt get any rewards
+      /*logger.debug(
+        `Processing results for player ${playerId} in simulation ${this.id} (stage: ${this.stageLevel}, ${player?.name} vs ${opponentPlayer?.name})`,
+        {
+          playerId,
+          opponentPlayerId,
+          noPlayer: !player,
+          isGhostOpponent: playerId === this.bluePlayerId && this.isGhostBattle,
+          isGhostPlayer: this.id !== player?.simulationId
+        }
+      )*/
+      const isPVEPlayer = playerId === "pve" || !player
+      if (isPVEPlayer) continue
+      const isGhostPlayer = this.id !== player.simulationId
+      const isGhostOpponent =
+        playerId === this.bluePlayerId && this.isGhostBattle
 
       // Add battle result
-      player.addBattleResult(
-        player.opponentId,
-        player.opponentName,
-        this.winnerId === playerId
-          ? BattleResult.WIN
-          : this.winnerId === opponentPlayerId
-            ? BattleResult.DEFEAT
-            : BattleResult.DRAW,
-        player.opponentAvatar,
-        this.weather
-      )
+      if (!isGhostPlayer) {
+        player.addBattleResult(
+          player.opponentId,
+          player.opponentName,
+          this.winnerId === playerId
+            ? BattleResult.WIN
+            : this.winnerId === opponentPlayerId
+              ? BattleResult.DEFEAT
+              : BattleResult.DRAW,
+          player.opponentAvatar,
+          this.weather
+        )
+      }
 
       const client = this.room.clients.find((cli) => cli.auth.uid === playerId)
 
       // Handle win/loss outcomes
       if (this.winnerId === playerId) {
-        if (this.redPlayerId !== "pve") {
+        // WIN
+        if (this.redPlayerId !== "pve" && !isGhostPlayer) {
           // no extra gold from PvE wins
           player.addMoney(1, true, null)
           client?.send(Transfer.PLAYER_INCOME, 1)
         }
       } else {
+        // LOSE
         const playerDamage = this.room.computeRoundDamage(
           opponentTeam,
           this.stageLevel
         )
-        player.life -= playerDamage
-        if (playerDamage > 0) {
-          client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+        if (!isGhostPlayer) {
+          player.life -= playerDamage
+          if (playerDamage > 0) {
+            client?.send(Transfer.PLAYER_DAMAGE, playerDamage)
+          }
         }
-        if (opponentPlayer) {
+        if (opponentPlayer && !isGhostOpponent) {
           opponentPlayer.totalPlayerDamageDealt += playerDamage
           if (
             opponentPlayer.items.includes(Item.MISSION_ORDER_RED) &&
@@ -1572,6 +1597,7 @@ export default class Simulation extends Schema implements ISimulation {
       if (
         this.weather !== Weather.NEUTRAL &&
         player.synergies.getSynergyStep(Synergy.ROCK) > 0 &&
+        !isGhostPlayer &&
         this.redPlayerId !== "pve" // No weather rocks collected for PvE rounds
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
