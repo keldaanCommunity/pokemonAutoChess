@@ -333,20 +333,23 @@ export class OpenBoosterCommand extends Command<
       const user = this.room.users.get(client.auth.uid)
       if (!user) return
 
-      // First, find the user and check if they have boosters
-      let userDoc = await UserMetadata.findOne({
-        uid: client.auth.uid,
-        booster: { $gt: 0 }
-      })
-      if (!userDoc) return
+      // Immediately find and decrement booster count to avoid any possible race condition
+      let userDoc = await UserMetadata.findOneAndUpdate(
+        {
+          uid: client.auth.uid,
+          booster: { $gt: 0 }
+        },
+        {
+          $inc: { booster: -1 }
+        },
+        { new: true }
+      )
 
-      const boosterContent = createBooster(userDoc)
+      if (!userDoc) return // No boosters available or user not found
 
       // Build update operations for all booster cards
-      const updateOperations: any = {
-        $inc: { booster: -1 }
-      }
-
+      const updateOperations: any = {}
+      const boosterContent = createBooster(userDoc)
       boosterContent.forEach((card) => {
         const index = PkmIndex[card.name]
         const existingItem = userDoc!.pokemonCollection.get(index)
@@ -405,7 +408,9 @@ export class OpenBoosterCommand extends Command<
 
       // Perform atomic update
       await userDoc.updateOne(updateOperations)
-      userDoc = await UserMetadata.findOne({ uid: client.auth.uid }) // reload updated doc
+
+      // Reload updated user
+      userDoc = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!userDoc) {
         logger.error(
           `User document not found after opening booster: ${client.auth.uid}`
