@@ -802,17 +802,7 @@ export class OnDragDropItemCommand extends Command<
         return
       }
 
-      const itemCombined = recipe[0] as Item
-
-      if (
-        (isIn(SynergyStones, itemCombined) ||
-          itemCombined === Item.FRIEND_BOW) &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
-      ) {
-        // prevent combining into a synergy stone on a pokemon that already has this synergy
-        client.send(Transfer.DRAG_DROP_CANCEL, message)
-        return
-      }
+      const itemCombined = recipe[0] as Item      
 
       if (recipe[1].includes(Item.SILK_SCARF)) {
         const nbScarvesBasedOnNormalSynergy = player.synergies.getSynergyStep(
@@ -829,10 +819,26 @@ export class OnDragDropItemCommand extends Command<
       if (pokemon.items.has(itemCombined)) {
         // pokemon already has the combined item so the second one pops off and go to player inventory
         player.items.push(itemCombined)
+      } else if (
+        (isIn(SynergyStones, itemCombined) ||
+          itemCombined === Item.FRIEND_BOW) &&
+        pokemon.types.has(SynergyGivenByItem[itemCombined])
+      ) {
+        // combining into a synergy stone on a pokemon that already has this synergy makes the stone pops off and go to player inventory
+        player.items.push(itemCombined)
       } else {
         pokemon.addItem(itemCombined, player)
       }
     } else {
+      if (
+        (isIn(SynergyStones, item) ||
+          item === Item.FRIEND_BOW) &&
+        pokemon.types.has(SynergyGivenByItem[item])
+      ) {
+        // prevent combining into a synergy stone on a pokemon that already has this synergy
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
       pokemon.addItem(item, player)
       removeInArray(player.items, item)
     }
