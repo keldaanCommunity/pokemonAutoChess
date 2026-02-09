@@ -11,7 +11,7 @@
 
 # Changes to Items
 
-- Buff Big Eater Belt: 15 → 50 shield. Increase all permanent stat buffs by ~~25%~~ 33%.
+- Buff Big Eater Belt: now increase all stat buffs by 25%, not only the permanent ones.
 - Change King's Rock: 30% of base max HP gained as shield on battle start → 20% of max HP, all buffs included, gained as shield on battle start. The shield is no longer removed and reapplied when stealing the item.
 - Twist Band now also prevents abilities that steal stat buffs from stealing buffs from the wearer. (e.g. Manaphy Heart Swap)
 - Nerf Electirizer: remove 30 speed base stat

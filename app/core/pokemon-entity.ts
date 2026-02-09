@@ -440,15 +440,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return this.state.handleHeal(this, heal, caster, apBoost, crit)
   }
 
-  addShield(
-    shield: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean
-  ) {
-    return this.state.addShield(this, shield, caster, apBoost, crit)
-  }
-
   changeState(state: PokemonState) {
     this.state.onExit(this)
     this.state = state
@@ -469,6 +460,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
+  addShield(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+    return this.state.addShield(this, value, caster, apBoost, crit)
+  }
+
   addPP(
     baseValue: number,
     caster: IPokemonEntity,
@@ -481,6 +484,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (crit ? caster.critPower : 1) *
         (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    } 
 
     if (
       value < 0 &&
@@ -508,6 +515,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
 
     if (
       value < 0 &&
@@ -537,6 +548,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (value / 100) *
       (1 + (apBoost * caster.ap) / 100) *
       (crit ? caster.critPower : 1)
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
 
     if (
       value < 0 &&
@@ -568,8 +583,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.33)
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     this.maxHP = min(1)(this.maxHP + value)
@@ -592,6 +607,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
 
     if (
       value < 0 &&
@@ -623,8 +642,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.33)
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { ap: number }) => {
@@ -660,8 +679,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.33)
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { luck: number }) => {
@@ -692,8 +711,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.33)
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { def: number }) => {
@@ -724,8 +743,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.33)
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { speDef: number }) => {
@@ -756,8 +775,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
-    if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.33)
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { atk: number }) => {
@@ -792,8 +811,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
 
-      if (permanent && this.items.has(Item.BIG_EATER_BELT)) {
-        value = Math.round(value * 1.33)
+      if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+        value = Math.round(value * 1.25)
       }
 
       const update = (target: { speed: number }) => {

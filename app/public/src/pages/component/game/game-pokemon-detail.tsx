@@ -92,6 +92,9 @@ export function GamePokemonDetail(props: {
           if (s.stat === Stat.CRIT_POWER && itemStatBonus > 0) {
             itemStatBonus = itemStatBonus / 100
           }
+          if (pokemon.items.has(Item.BIG_EATER_BELT) && itemStatBonus > 0) {
+            itemStatBonus = Math.round(itemStatBonus * 1.25)
+          }
           return acc + itemStatBonus
         }, s.value)
       }
