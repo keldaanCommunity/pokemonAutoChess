@@ -2643,7 +2643,7 @@
 		"WIDE_LENS": "El poseedor gana +2 RANGE",
 		"RAZOR_CLAW": "El titular gana +50% CRIT_CHANCE",
 		"SAFETY_GOGGLES": "El portador es inmune a todas los problemas de estado y para daños causados por tormentas de arena.",
-		"KINGS_ROCK": "+100 HP. 30% HP SHIELD cuando comienza el combate",
+		"KINGS_ROCK": "+100 HP. 20% HP SHIELD cuando comienza el combate",
 		"SHINY_CHARM": "Previene daños y otorga tanto 50 PP como PROTECT durante 1.5 segundos la primera vez que el portador baja del 30% de sus HP.",
 		"GRACIDEA_FLOWER": "Cuando comienza el combate, el poseedor y los aliados ADJACENT_IN_THE_SAME_ROW ganan +20 de SPEED",
 		"FLAME_ORB": "El titular se quema durante toda la batalla pero aumenta su ATK en un 100%",

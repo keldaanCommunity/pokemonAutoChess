@@ -2817,7 +2817,7 @@
 		"WIDE_LENS": "携带者提升2点RANGE",
 		"RAZOR_CLAW": "携带者提升50%的CRIT_CHANCE",
 		"SAFETY_GOGGLES": "携带者免疫所有状态效果和沙暴伤害",
-		"KINGS_ROCK": "提升100点HP。战斗开始时，获得SHIELD，数值相当于最大HP的30%。",
+		"KINGS_ROCK": "提升100点HP。战斗开始时，获得SHIELD，数值相当于最大HP的20%。",
 		"SHINY_CHARM": "携带者的生命值第一次低于30%时，获得PROTECT 1.5秒，免疫伤害，并恢复50点PP",
 		"GRACIDEA_FLOWER": "战斗开始时，携带者和ADJACENT_IN_THE_SAME_ROW的我方宝可梦提升20点SPEED",
 		"FLAME_ORB": "携带者将在战斗中全程处于BURN，但提升100%的ATK",

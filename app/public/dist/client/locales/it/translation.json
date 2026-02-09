@@ -2815,7 +2815,7 @@
 		"WIDE_LENS": "Il possessore guadagna +2 RANGE",
 		"RAZOR_CLAW": "Il possessore guadagna +50% di CRIT_CHANCE",
 		"SAFETY_GOGGLES": "Il possessore è immune a tutti gli status alterati e ai danni della tempesta di sabbia",
-		"KINGS_ROCK": "+100 SHIELD + il 35% degli HP come SHIELD all'inizio del combattimento",
+		"KINGS_ROCK": "+100 SHIELD + il 20% degli HP come SHIELD all'inizio del combattimento",
 		"SHINY_CHARM": "Previene i danni e fornisce PROTECT per 1.5 secondi la prima volta che il possessore scende al di sotto del 30% dei HP",
 		"GRACIDEA_FLOWER": "Quando inizia il combattimento, il possessore e gli alleati adiacenti nella stessa fila ottengono +20 di SPEED",
 		"FLAME_ORB": "Il possessore è scottato ma aumenta il suo ATT del 100%",

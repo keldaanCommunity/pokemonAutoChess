@@ -2817,7 +2817,7 @@
 		"WIDE_LENS": "Le porteur gagne +2 RANGE",
 		"RAZOR_CLAW": "Le porteur gagne +50% CRIT_CHANCE",
 		"SAFETY_GOGGLES": "Le porteur est immunisé contre toutes les altérations de statut et aux dégâts de tempête de sable",
-		"KINGS_ROCK": "+100 HP. 30% des HP max sont gagnés en SHIELD au début du combat.",
+		"KINGS_ROCK": "+100 HP. 20% des HP max sont gagnés en SHIELD au début du combat.",
 		"SHINY_CHARM": "Annule les dégats et donne PROTECT pendant 1.5 secondes et 50 PP la première fois que le porteur tombe sous les 30% de HP",
 		"GRACIDEA_FLOWER": "Lorsque le combat commence, le porteur et tous les alliés ADJACENT_IN_THE_SAME_ROW gagnent +20 SPEED",
 		"FLAME_ORB": "Le porteur subit BURN pendant tout le combat mais augmente son ATK de base de 100%.",

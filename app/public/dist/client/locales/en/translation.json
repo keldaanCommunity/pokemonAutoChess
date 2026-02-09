@@ -2817,7 +2817,7 @@
 		"WIDE_LENS": "The holder gains +2 RANGE",
 		"RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
 		"SAFETY_GOGGLES": "Holder is immune to all negative status effects and to sandstorm damage",
-		"KINGS_ROCK": "+100 HP. 30% of max HP are gained as SHIELD when combat begins.",
+		"KINGS_ROCK": "+100 HP. 20% of max HP are gained as SHIELD when combat begins.",
 		"SHINY_CHARM": "Prevents damage and give PROTECT for 1.5 seconds and 50 PP the first time the holder gets below 30% HP",
 		"GRACIDEA_FLOWER": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW gain +20 SPEED",
 		"FLAME_ORB": "Holder suffers from BURN during the entire fight but increases its base ATK by 100%.",

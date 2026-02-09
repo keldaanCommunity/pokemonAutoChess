@@ -607,11 +607,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.KINGS_ROCK]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(0.3 * pokemon.baseHP, pokemon, 0, false)
-    }),
-    new OnItemRemovedEffect((pokemon) => {
-      pokemon.addShield(-0.3 * pokemon.baseHP, pokemon, 0, false)
+    new OnSimulationStartEffect(({ entity }) => {
+      entity.addShield(0.2 * entity.maxHP, entity, 0, false)
     })
   ],
 
