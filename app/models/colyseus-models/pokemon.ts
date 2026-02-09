@@ -9233,7 +9233,7 @@ export class Snorlax extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 260
+  hp = 300
   atk = 21
   speed = 35
   def = 6
