@@ -391,6 +391,11 @@ export class MiniGame {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.WANTED_NOTICE)
       })
+    } else if (state.townEncounter === TownEncounters.KINGAMBIT) {
+      const highestLifePlayer = this.alivePlayers.reduce((prev, current) =>
+        prev.life > current.life ? prev : current
+      )
+      highestLifePlayer.items.push(Item.LEADERS_CREST)
     }
   }
 

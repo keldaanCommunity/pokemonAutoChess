@@ -552,6 +552,13 @@ export default class MinigameManager {
       name: Pkm.MAGNEZONE
     })
 
+    const kingambit = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.KINGAMBIT ? cx : 22 * 48,
+      y: encounter === TownEncounters.KINGAMBIT ? cy : 25 * 48,
+      name: Pkm.KINGAMBIT
+    })
+
     const podiumPokemons = podium.map((p, rank) => {
       const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
       const champion = new PokemonSpecial({
@@ -592,6 +599,7 @@ export default class MinigameManager {
       wigglytuff,
       cincinno,
       magnezone,
+      kingambit,
       ...podiumPokemons
     )
 

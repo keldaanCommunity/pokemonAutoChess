@@ -291,6 +291,7 @@ export enum Item {
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
   MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
+  LEADERS_CREST = "LEADERS_CREST",
   CELL_BATTERY = "CELL_BATTERY",
   SILK_SCARF = "SILK_SCARF",
   FRIEND_BOW = "FRIEND_BOW",
@@ -389,7 +390,8 @@ export const TownItems = [
   ...MissionOrders,
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,
-  Item.WANTED_NOTICE
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST
 ] satisfies Item[]
 
 // should be excluded from carousels

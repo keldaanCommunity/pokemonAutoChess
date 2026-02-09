@@ -37,7 +37,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import { IPokemonData } from "../types/interfaces/PokemonData"
-import { count, isIn } from "../utils/array"
+import { count, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
@@ -1601,8 +1601,15 @@ export default class Simulation extends Schema implements ISimulation {
       if (this.winnerId === playerId) {
         if (this.redPlayerId !== "pve") {
           // no extra gold from PvE wins
-          player.addMoney(1, true, null)
-          client?.send(Transfer.PLAYER_INCOME, 1)
+          const hasLeadersCrest =
+            opponentPlayer?.items.includes(Item.LEADERS_CREST) ?? false
+          const moneyGain = hasLeadersCrest ? 5 : 1
+          player.addMoney(moneyGain, true, null)
+          client?.send(Transfer.PLAYER_INCOME, moneyGain)
+          if (hasLeadersCrest && opponentPlayer) {
+            removeInArray(opponentPlayer.items, Item.LEADERS_CREST)
+            player.items.push(Item.LEADERS_CREST)
+          }
         }
       } else {
         const playerDamage = this.room.computeRoundDamage(

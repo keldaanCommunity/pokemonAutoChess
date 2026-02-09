@@ -2758,6 +2758,7 @@
 		"MISSION_ORDER_GREEN": "Mission Order - Diversify!",
 		"MISSION_ORDER_GOLD": "Mission Order - Prosper!",
 		"MISSION_ORDER_PINK": "Mission Order - Evolve!",
+		"LEADERS_CREST": "Leader's Crest",
 		"SILK_SCARF": "Silk Scarf",
 		"FRIEND_BOW": "Friend Bow",
 		"BLACK_BELT": "Black Belt",
@@ -3060,6 +3061,7 @@
 		"MISSION_ORDER_BLUE": "Complete this mission to earn 30 GOLD:\n reach level 9",
 		"MISSION_ORDER_GREEN": "Complete this mission to earn 30 GOLD:\n reach 8 different active synergies",
 		"MISSION_ORDER_GOLD": "Complete this mission to earn 30 GOLD:\n earn 200 GOLD in total during the game",
+		"LEADERS_CREST": "When another player beats you in battle, they get an additional 4 GOLD and take the LEADERS_CREST.",
 		"SILK_SCARF": "Combine it with other item components to make all kinds of scarves, bands and bows. Those items will be removed if you lower down NORMAL synergy level.",
 		"FRIEND_BOW": "The holder gains the NORMAL type.",
 		"BLACK_BELT": "Critical attacks provide 33% of the damage dealt as SHIELD.",
@@ -4447,7 +4449,8 @@
 		"MAKUHITA": "Makuhita trains one of your Pokémon for several stages to improve their stats",
 		"WIGGLYTUFF": "Complete missions for Wigglytuff Guild to earn rewards",
 		"CINCCINO": "Cinccino offers elegant SILK_SCARF",
-		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them"
+		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them",
+		"KINGAMBIT": "Kingambit has given the player in first place the LEADERS_CREST. Beat them in battle to earn extra GOLD!"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

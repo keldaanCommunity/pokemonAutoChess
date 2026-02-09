@@ -53,7 +53,8 @@ export const TownEncountersByStage: {
     [Pkm.SPINDA]: 1 / 20,
     [Pkm.REGIROCK]: 1 / 20,
     [Pkm.MUNCHLAX]: 1 / 20,
-    [Pkm.WOBBUFFET]: 1 / 20
+    [Pkm.WOBBUFFET]: 1 / 20,
+    [Pkm.KINGAMBIT]: 1 / 20
   },
   27: {
     [Pkm.ELECTIVIRE]: 1 / 20,
