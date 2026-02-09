@@ -34,7 +34,12 @@ import {
   Rarity,
   Team
 } from "../types/enum/Game"
-import { Item, ItemComponentsNoScarf } from "../types/enum/Item"
+import {
+  CraftableItemsNoScarves,
+  Item,
+  ItemComponentsNoFossilOrScarf,
+  ItemComponentsNoScarf
+} from "../types/enum/Item"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
@@ -159,11 +164,21 @@ export class TrainingEnv {
     // Initialize shop for agent
     this.state.shop.assignShop(agentPlayer, false, this.state)
 
-    // Start the game: begin with stage 0 (TOWN), then immediately advance to PICK
+    // Start the game
     this.state.gameLoaded = true
     this.state.stageLevel = 0
 
-    // Skip stage 0 TOWN phase, go directly to stage 1 PICK
+    // Stage 0: Portal carousel gives starter pokemon propositions
+    // assignUniquePropositions picks from the common pool at stage 0
+    this.state.players.forEach((player) => {
+      if (!player.isBot) {
+        this.state.shop.assignUniquePropositions(player, this.state, [])
+      }
+    })
+    // Auto-pick starter for all players (including agent)
+    this.autoPickPropositions()
+
+    // Advance to stage 1
     this.state.stageLevel = 1
     this.state.phase = GamePhaseState.PICK
     this.state.time =
@@ -633,11 +648,39 @@ export class TrainingEnv {
 
   /**
    * After fight, advance to the next PICK phase.
-   * Skips TOWN phases entirely for training.
-   * Handles additional pick stages (5, 8, 11) by populating propositions
-   * and auto-picking for all players.
+   * Handles all skipped TOWN-phase events:
+   *   - Portal carousel stages (0, 10, 20): unique/legendary pokemon propositions
+   *   - Item carousel stages (4, 12, 17, 22, 27, 34): random item components
+   *   - Additional pick stages (5, 8, 11): uncommon/rare/epic pokemon propositions
    */
   private advanceToNextPickPhase(): void {
+    // Handle portal carousel stages (10 = uniques, 20 = legendaries)
+    // Stage 0 is handled in reset() separately
+    if (
+      PortalCarouselStages.includes(this.state.stageLevel) &&
+      this.state.stageLevel > 0
+    ) {
+      this.state.players.forEach((player) => {
+        if (!player.isBot) {
+          this.state.shop.assignUniquePropositions(player, this.state, [])
+        }
+      })
+      this.autoPickPropositions()
+    }
+
+    // Handle item carousel stages — give each alive player a random item
+    if (ItemCarouselStages.includes(this.state.stageLevel)) {
+      this.state.players.forEach((player) => {
+        if (!player.isBot && player.alive) {
+          const itemPool =
+            this.state.stageLevel >= 20
+              ? CraftableItemsNoScarves
+              : ItemComponentsNoFossilOrScarf
+          player.items.push(pickRandomIn(itemPool))
+        }
+      })
+    }
+
     // Refresh shop for agent
     const agent = this.state.players.get(this.agentId)
     if (agent && agent.alive) {
@@ -686,14 +729,22 @@ export class TrainingEnv {
       }
     }
 
-    // Auto-pick propositions for all players
+    // Auto-pick any remaining propositions (additional picks, PVE rewards)
+    this.autoPickPropositions()
+  }
+
+  /**
+   * Auto-pick pokemon and item propositions for all players.
+   * Picks randomly, creates the pokemon, places on bench, gives item.
+   */
+  private autoPickPropositions(): void {
     this.state.players.forEach((player) => {
       if (player.pokemonsProposition.length > 0) {
         const propositions = values(player.pokemonsProposition)
         const pick = pickRandomIn(propositions) as Pkm
         const selectedIndex = player.pokemonsProposition.indexOf(pick)
 
-        // Create the pokemon and place on bench (same as GameRoom.pickPokemonProposition)
+        // Create the pokemon and place on bench
         const pokemon = PokemonFactory.createPokemonFromName(pick, player)
         const freeCellX = getFirstAvailablePositionInBench(player.board)
         if (freeCellX !== null) {
