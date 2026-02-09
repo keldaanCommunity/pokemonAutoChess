@@ -40,7 +40,7 @@ import {
   ItemComponentsNoFossilOrScarf,
   ItemComponentsNoScarf
 } from "../types/enum/Item"
-import { Pkm, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
@@ -56,6 +56,9 @@ import { pickNRandomIn, pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import { HeadlessRoom } from "./headless-room"
 import {
+  MAX_PROPOSITIONS,
+  OBS_PROPOSITION_FEATURES,
+  OBS_PROPOSITION_SLOTS,
   REWARD_PER_DRAW,
   REWARD_PER_KILL,
   REWARD_PER_LOSS,
@@ -169,26 +172,19 @@ export class TrainingEnv {
     this.state.stageLevel = 0
 
     // Stage 0: Portal carousel gives starter pokemon propositions
-    // assignUniquePropositions picks from the common pool at stage 0
+    // Agent gets propositions to choose from; bots auto-pick
     this.state.players.forEach((player) => {
       if (!player.isBot) {
         this.state.shop.assignUniquePropositions(player, this.state, [])
       }
     })
-    // Auto-pick starter for all players (including agent)
-    this.autoPickPropositions()
+    // Auto-pick for bots only; agent propositions stay pending
+    this.autoPickPropositionsForBots()
 
-    // Advance to stage 1
-    this.state.stageLevel = 1
+    // Stay at stage 0 with propositions — agent picks via PICK_PROPOSITION action
     this.state.phase = GamePhaseState.PICK
     this.state.time =
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
-
-    // Update bots for stage 1
-    this.state.botManager.updateBots()
-
-    // Give agent their first shop
-    this.state.shop.assignShop(agentPlayer, false, this.state)
 
     this.actionsThisTurn = 0
     this.totalSteps = 0
@@ -230,12 +226,40 @@ export class TrainingEnv {
       const actionExecuted = this.executeAction(action, agent)
       this.actionsThisTurn++
 
+      // If agent just picked a proposition, check if we need to advance from stage 0
+      if (
+        actionExecuted &&
+        action >= TrainingAction.PICK_PROPOSITION_0 &&
+        action <= TrainingAction.PICK_PROPOSITION_5
+      ) {
+        // After picking, if still at stage 0, advance to stage 1
+        if (this.state.stageLevel === 0) {
+          this.state.stageLevel = 1
+          this.state.botManager.updateBots()
+          this.state.shop.assignShop(agent, false, this.state)
+          this.actionsThisTurn = 0
+        }
+        // If at a later stage with propositions (uniques, additionals), just continue the turn
+        // The propositions have been cleared so normal PICK actions resume
+        return {
+          observation: this.getObservation(),
+          reward,
+          done: false,
+          info: this.getInfo()
+        }
+      }
+
       // Check if turn should end
       const shouldEndTurn =
         action === TrainingAction.END_TURN ||
         this.actionsThisTurn >= TRAINING_MAX_ACTIONS_PER_TURN
 
       if (shouldEndTurn) {
+        // Safety: if propositions are still pending at turn end, auto-pick randomly
+        if (agent.pokemonsProposition.length > 0) {
+          this.autoPickForAgent(agent)
+        }
+
         // Auto-place pokemon on board if there's room
         this.autoPlaceTeam(agent)
 
@@ -268,6 +292,19 @@ export class TrainingEnv {
   }
 
   private executeAction(action: number, agent: Player): boolean {
+    // If agent has propositions pending, only allow PICK_PROPOSITION actions
+    if (agent.pokemonsProposition.length > 0) {
+      if (
+        action >= TrainingAction.PICK_PROPOSITION_0 &&
+        action <= TrainingAction.PICK_PROPOSITION_5
+      ) {
+        const propositionIndex =
+          action - TrainingAction.PICK_PROPOSITION_0
+        return this.pickProposition(agent, propositionIndex)
+      }
+      return false // no other actions allowed during proposition phase
+    }
+
     switch (action) {
       case TrainingAction.END_TURN:
         return true
@@ -299,9 +336,96 @@ export class TrainingEnv {
       case TrainingAction.LEVEL_UP:
         return this.levelUp(agent)
 
+      case TrainingAction.PICK_PROPOSITION_0:
+      case TrainingAction.PICK_PROPOSITION_1:
+      case TrainingAction.PICK_PROPOSITION_2:
+      case TrainingAction.PICK_PROPOSITION_3:
+      case TrainingAction.PICK_PROPOSITION_4:
+      case TrainingAction.PICK_PROPOSITION_5: {
+        const propositionIndex =
+          action - TrainingAction.PICK_PROPOSITION_0
+        return this.pickProposition(agent, propositionIndex)
+      }
+
       default:
         return false
     }
+  }
+
+  /**
+   * Pick a pokemon proposition for the agent.
+   * Replicates the logic from GameRoom.pickPokemonProposition().
+   */
+  private pickProposition(player: Player, propositionIndex: number): boolean {
+    if (player.pokemonsProposition.length === 0) return false
+    if (propositionIndex >= player.pokemonsProposition.length) return false
+
+    const pkm = player.pokemonsProposition[propositionIndex] as Pkm
+    if (!pkm) return false
+
+    // Handle duos (e.g., Latios/Latias)
+    const pokemonsObtained: Pokemon[] = (
+      pkm in PkmDuos ? PkmDuos[pkm as keyof typeof PkmDuos] : [pkm]
+    ).map((p) => PokemonFactory.createPokemonFromName(p as Pkm, player))
+
+    const pokemon = pokemonsObtained[0]
+    const isEvolution =
+      pokemon.evolutionRule &&
+      pokemon.evolutionRule instanceof CountEvolutionRule &&
+      pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+
+    const freeSpace = getFreeSpaceOnBench(player.board)
+    if (freeSpace < pokemonsObtained.length && !isEvolution) return false
+
+    const selectedIndex = propositionIndex
+    player.pokemonsProposition.clear()
+
+    // Add to additional pool for additional pick stages
+    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
+      this.state.shop.addAdditionalPokemon(pkm, this.state)
+    }
+
+    // Give corresponding item (starters and additional picks)
+    if (
+      AdditionalPicksStages.includes(this.state.stageLevel) ||
+      this.state.stageLevel <= 1
+    ) {
+      if (player.itemsProposition.length > 0) {
+        const selectedItem = player.itemsProposition[selectedIndex]
+        if (selectedItem != null) {
+          player.items.push(selectedItem)
+        }
+        player.itemsProposition.clear()
+      }
+    }
+
+    // Track first partner for stage 0
+    if (this.state.stageLevel <= 1) {
+      player.firstPartner = pokemonsObtained[0].name
+    }
+
+    // Place all obtained pokemon on bench
+    pokemonsObtained.forEach((pkmn) => {
+      const freeCellX = getFirstAvailablePositionInBench(player.board)
+      if (isEvolution) {
+        pkmn.positionX = freeCellX ?? -1
+        pkmn.positionY = 0
+        player.board.set(pkmn.id, pkmn)
+        pkmn.onAcquired(player)
+        this.room.checkEvolutionsAfterPokemonAcquired(player.id)
+      } else if (freeCellX !== null) {
+        pkmn.positionX = freeCellX
+        pkmn.positionY = 0
+        player.board.set(pkmn.id, pkmn)
+        pkmn.onAcquired(player)
+      } else {
+        // No space — sell for money
+        const sellPrice = getSellPrice(pkmn, this.state.specialGameRule)
+        player.addMoney(sellPrice, true, null)
+      }
+    })
+
+    return true
   }
 
   private buyPokemon(player: Player, shopIndex: number): boolean {
@@ -660,12 +784,14 @@ export class TrainingEnv {
       PortalCarouselStages.includes(this.state.stageLevel) &&
       this.state.stageLevel > 0
     ) {
+      // Agent gets propositions to choose from via PICK_PROPOSITION actions
       this.state.players.forEach((player) => {
         if (!player.isBot) {
           this.state.shop.assignUniquePropositions(player, this.state, [])
         }
       })
-      this.autoPickPropositions()
+      // Only auto-pick for bots; agent propositions stay pending
+      this.autoPickPropositionsForBots()
     }
 
     // Handle item carousel stages — give each alive player a random item
@@ -681,9 +807,9 @@ export class TrainingEnv {
       })
     }
 
-    // Refresh shop for agent
+    // Refresh shop for agent (only if no pending propositions)
     const agent = this.state.players.get(this.agentId)
-    if (agent && agent.alive) {
+    if (agent && agent.alive && agent.pokemonsProposition.length === 0) {
       if (!agent.shopLocked) {
         this.state.shop.assignShop(agent, false, this.state)
         agent.shopLocked = false
@@ -704,6 +830,7 @@ export class TrainingEnv {
             ? this.additionalRarePool
             : this.additionalEpicPool
 
+      // Agent gets propositions to choose from
       this.state.players.forEach((player) => {
         if (!player.isBot) {
           const items = pickNRandomIn(ItemComponentsNoScarf, 3)
@@ -729,16 +856,19 @@ export class TrainingEnv {
       }
     }
 
-    // Auto-pick any remaining propositions (additional picks, PVE rewards)
-    this.autoPickPropositions()
+    // Auto-pick for bots only; agent propositions stay pending for PICK_PROPOSITION actions
+    this.autoPickPropositionsForBots()
   }
 
   /**
-   * Auto-pick pokemon and item propositions for all players.
-   * Picks randomly, creates the pokemon, places on bench, gives item.
+   * Auto-pick pokemon and item propositions for bot players only.
+   * The RL agent picks via PICK_PROPOSITION actions instead.
+   * Bots pick randomly, creates the pokemon, places on bench, gives item.
    */
-  private autoPickPropositions(): void {
+  private autoPickPropositionsForBots(): void {
     this.state.players.forEach((player) => {
+      // Skip agent — agent picks via PICK_PROPOSITION actions
+      if (player.id === this.agentId) return
       if (player.pokemonsProposition.length > 0) {
         const propositions = values(player.pokemonsProposition)
         const pick = pickRandomIn(propositions) as Pkm
@@ -777,6 +907,24 @@ export class TrainingEnv {
         player.itemsProposition.clear()
       }
     })
+  }
+
+  /**
+   * Fallback: auto-pick a random proposition for the agent.
+   * Used when turn ends but propositions are still pending (safety cap hit).
+   */
+  private autoPickForAgent(agent: Player): void {
+    if (agent.pokemonsProposition.length > 0) {
+      const propositions = values(agent.pokemonsProposition)
+      const pick = pickRandomIn(propositions) as Pkm
+      const selectedIndex = agent.pokemonsProposition.indexOf(pick)
+      this.pickProposition(agent, selectedIndex)
+    }
+    // If propositions still there (pickProposition failed due to no space), force clear
+    if (agent.pokemonsProposition.length > 0) {
+      agent.pokemonsProposition.clear()
+      agent.itemsProposition.clear()
+    }
   }
 
   /**
@@ -906,13 +1054,14 @@ export class TrainingEnv {
       obs.push(val / 10) // normalize
     }
 
-    // Game info (3)
+    // Game info (4)
     obs.push(this.state.stageLevel / 50)
     obs.push(this.state.phase / 2)
     const playersAlive = values(this.state.players).filter(
       (p) => p.alive
     ).length
     obs.push(playersAlive / 8)
+    obs.push(agent.pokemonsProposition.length > 0 ? 1 : 0) // hasPropositions
 
     // Opponent stats (16 = 8 opponents * 2 features)
     const opponents = values(this.state.players).filter(
@@ -924,6 +1073,36 @@ export class TrainingEnv {
         obs.push(opponents[i].rank / 8)
       } else {
         obs.push(0, 0)
+      }
+    }
+
+    // Proposition slots (6 slots × 3 features = 18)
+    // Each slot: rarity, numTypes, hasItem
+    const propositions = values(agent.pokemonsProposition) as Pkm[]
+    const rarityMap: Record<string, number> = {
+      [Rarity.COMMON]: 0.1,
+      [Rarity.UNCOMMON]: 0.2,
+      [Rarity.RARE]: 0.4,
+      [Rarity.EPIC]: 0.6,
+      [Rarity.ULTRA]: 0.8,
+      [Rarity.UNIQUE]: 0.9,
+      [Rarity.LEGENDARY]: 1.0,
+      [Rarity.HATCH]: 0.3,
+      [Rarity.SPECIAL]: 0.5
+    }
+    for (let i = 0; i < MAX_PROPOSITIONS; i++) {
+      if (i < propositions.length && propositions[i]) {
+        const data = getPokemonData(propositions[i])
+        obs.push(rarityMap[data.rarity] ?? 0) // rarity
+        obs.push((data.types?.length ?? 0) / 5) // numTypes normalized
+        obs.push(
+          agent.itemsProposition.length > i &&
+            agent.itemsProposition[i] != null
+            ? 1
+            : 0
+        ) // hasItem
+      } else {
+        obs.push(0, 0, 0)
       }
     }
 
@@ -945,6 +1124,34 @@ export class TrainingEnv {
       return mask
     }
 
+    // If agent has propositions pending, only PICK_PROPOSITION actions are valid
+    if (agent.pokemonsProposition.length > 0) {
+      const freeSpace = getFreeSpaceOnBench(agent.board)
+      for (let i = 0; i < agent.pokemonsProposition.length; i++) {
+        const pkm = agent.pokemonsProposition[i] as Pkm
+        if (!pkm) continue
+        // Check if agent has bench space (or if it could evolve)
+        const pokemon = PokemonFactory.createPokemonFromName(pkm, agent)
+        const isEvolution =
+          pokemon.evolutionRule &&
+          pokemon.evolutionRule instanceof CountEvolutionRule &&
+          pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, agent)
+        const numNeeded =
+          pkm in PkmDuos
+            ? PkmDuos[pkm as keyof typeof PkmDuos].length
+            : 1
+        if (freeSpace >= numNeeded || isEvolution) {
+          mask[TrainingAction.PICK_PROPOSITION_0 + i] = 1
+        }
+      }
+      // If no proposition is valid (bench full, no evolution), allow END_TURN as fallback
+      if (mask.every((m) => m === 0)) {
+        mask[TrainingAction.END_TURN] = 1
+      }
+      return mask
+    }
+
+    // Normal PICK phase: economy actions
     // END_TURN is always valid
     mask[TrainingAction.END_TURN] = 1
 
