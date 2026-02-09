@@ -34,7 +34,7 @@ import {
   Rarity,
   Team
 } from "../types/enum/Game"
-import { Item } from "../types/enum/Item"
+import { Item, ItemComponentsNoScarf } from "../types/enum/Item"
 import { Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
@@ -47,7 +47,7 @@ import {
   isOnBench
 } from "../utils/board"
 import { max } from "../utils/number"
-import { pickRandomIn, shuffleArray } from "../utils/random"
+import { pickNRandomIn, pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import { HeadlessRoom } from "./headless-room"
 import {
@@ -94,6 +94,9 @@ export class TrainingEnv {
   totalSteps = 0
   lastBattleResult: BattleResult | null = null
   cachedBots: IBot[] = []
+  additionalUncommonPool: Pkm[] = []
+  additionalRarePool: Pkm[] = []
+  additionalEpicPool: Pkm[] = []
 
   async initialize() {
     // Pre-fetch bots from DB so we don't need to query every reset
@@ -118,6 +121,20 @@ export class TrainingEnv {
     )
 
     this.room = new HeadlessRoom(this.state)
+
+    // Initialize additional pick pools (same as GameRoom.onCreate)
+    this.additionalUncommonPool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON
+    )
+    this.additionalRarePool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.RARE
+    )
+    this.additionalEpicPool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.EPIC
+    )
+    shuffleArray(this.additionalUncommonPool)
+    shuffleArray(this.additionalRarePool)
+    shuffleArray(this.additionalEpicPool)
 
     // Create RL agent player
     this.agentId = "rl-agent-" + nanoid(6)
@@ -617,6 +634,8 @@ export class TrainingEnv {
   /**
    * After fight, advance to the next PICK phase.
    * Skips TOWN phases entirely for training.
+   * Handles additional pick stages (5, 8, 11) by populating propositions
+   * and auto-picking for all players.
    */
   private advanceToNextPickPhase(): void {
     // Refresh shop for agent
@@ -633,13 +652,75 @@ export class TrainingEnv {
     this.state.time =
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
 
-    // Auto-pick propositions if any
+    // Populate additional pick propositions at stages 5, 8, 11
+    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
+      const pool =
+        this.state.stageLevel === AdditionalPicksStages[0]
+          ? this.additionalUncommonPool
+          : this.state.stageLevel === AdditionalPicksStages[1]
+            ? this.additionalRarePool
+            : this.additionalEpicPool
+
+      this.state.players.forEach((player) => {
+        if (!player.isBot) {
+          const items = pickNRandomIn(ItemComponentsNoScarf, 3)
+          for (let i = 0; i < 3; i++) {
+            const p = pool.pop()
+            if (p) {
+              player.pokemonsProposition.push(p)
+              player.itemsProposition.push(items[i])
+            }
+          }
+        }
+      })
+
+      // Remaining picks go into shared pool
+      const remainingPicks = 8 - values(this.state.players).filter(
+        (p) => !p.isBot
+      ).length
+      for (let i = 0; i < remainingPicks; i++) {
+        const p = pool.pop()
+        if (p) {
+          this.state.shop.addAdditionalPokemon(p, this.state)
+        }
+      }
+    }
+
+    // Auto-pick propositions for all players
     this.state.players.forEach((player) => {
       if (player.pokemonsProposition.length > 0) {
-        const pick = pickRandomIn(values(player.pokemonsProposition))
+        const propositions = values(player.pokemonsProposition)
+        const pick = pickRandomIn(propositions) as Pkm
+        const selectedIndex = player.pokemonsProposition.indexOf(pick)
+
+        // Create the pokemon and place on bench (same as GameRoom.pickPokemonProposition)
+        const pokemon = PokemonFactory.createPokemonFromName(pick, player)
+        const freeCellX = getFirstAvailablePositionInBench(player.board)
+        if (freeCellX !== null) {
+          pokemon.positionX = freeCellX
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+          pokemon.onAcquired(player)
+        }
+
+        // Add to shared pool for additional pick stages
+        if (AdditionalPicksStages.includes(this.state.stageLevel)) {
+          this.state.shop.addAdditionalPokemon(pick, this.state)
+        }
+
+        // Give corresponding item
+        if (player.itemsProposition.length > 0) {
+          const selectedItem = player.itemsProposition[selectedIndex]
+          if (selectedItem != null) {
+            player.items.push(selectedItem)
+          }
+        }
+
         player.pokemonsProposition.clear()
-      }
-      if (player.itemsProposition.length > 0) {
+        player.itemsProposition.clear()
+        this.room.checkEvolutionsAfterPokemonAcquired(player.id)
+      } else if (player.itemsProposition.length > 0) {
+        // Item-only propositions (PVE rewards, etc.)
         const pick = pickRandomIn(values(player.itemsProposition))
         player.items.push(pick)
         player.itemsProposition.clear()
