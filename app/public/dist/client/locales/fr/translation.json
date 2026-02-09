@@ -3173,7 +3173,7 @@
 		"BLOODMOON": "Change de forme pendant la BLOODMOON.",
 		"RECYCLE": "Nourrissez-le avec des baies pour gagner 15 HP max permanents, ou nourrissez-le avec d'autres objets consommables pour gagner 30 HP max permanents et obtenez un TRASH en retour.",
 		"DREAM_CATCHER": "Si sa cible est en SLEEP, les attaques du porteur donnent 10 SHIELD aux 3 alliés les plus proches de celle-ci.",
-		"SLOW_START": "Démarre avec -30 SPEED. Après avoir lancé sa capacité la première fois, gagne 30 SPEED et 10 ATK.",
+		"SLOW_START": "Démarre avec -30 SPEED. Après avoir rempli sa barre de PP, gagne 30 SPEED et 10 ATK.",
 		"STONJOURNER": "Ne se déplace pas et n'attaque pas tant que sa barre de PP n'est pas pleine. Son cercle d'énergie octroie 50 AP à tous les alliés ADJACENT au début du combat.",
 		"POIPOLE": "Quand ce Pokémon ou un membre de la même famille met KO un ennemi, gagne 1 cumul. Tous les 2 cumuls, gagne 1 ATK de manière permanente. À 20 cumuls, évolue en $t(pkm.NAGANADEL).",
 		"NAGANADEL": "Quand ce Pokémon ou un membre de la même famille met KO un ennemi, gagne 1 cumul. Tous les 2 cumuls, gagne 1 ATK de manière permanente.",
