@@ -928,7 +928,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerFlinch(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
+  triggerFlinch(duration: number, pkm: PokemonEntity) {
     if (!this.runeProtect) {
       this.flinch = true
 

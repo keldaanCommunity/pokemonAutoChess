@@ -1615,11 +1615,16 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   applyCurse(effect: EffectEnum, opponentTeamNumber: number) {
+    const team =
+      opponentTeamNumber === Team.RED_TEAM ? this.blueTeam : this.redTeam
     const opponentTeam =
       opponentTeamNumber === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
     const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
       (p) => p.hp > 0
     ) as PokemonEntity[]
+    const curser = values(team).find((e) => e.types.has(Synergy.GHOST))
+    // the curser is not important, we just need a reference to an opponent for stat debuffs
+    if (!curser) return
 
     if (effect === EffectEnum.CURSE_OF_VULNERABILITY) {
       const highestDef = Math.max(
@@ -1629,14 +1634,10 @@ export default class Simulation extends Schema implements ISimulation {
         opponentsCursable.filter((p) => p.def + p.speDef === highestDef)
       )
       if (enemyWithHighestDef) {
-        enemyWithHighestDef.addDefense(-5, enemyWithHighestDef, 0, false)
-        enemyWithHighestDef.addSpecialDefense(-5, enemyWithHighestDef, 0, false)
+        enemyWithHighestDef.addDefense(-5, curser, 0, false)
+        enemyWithHighestDef.addSpecialDefense(-5, curser, 0, false)
         enemyWithHighestDef.status.curseVulnerability = true
-        enemyWithHighestDef.status.triggerFlinch(
-          30000,
-          enemyWithHighestDef,
-          undefined
-        )
+        enemyWithHighestDef.status.triggerFlinch(30000, enemyWithHighestDef)
       }
     }
 
@@ -1648,7 +1649,7 @@ export default class Simulation extends Schema implements ISimulation {
       if (enemyWithHighestAtk) {
         enemyWithHighestAtk.addAttack(
           Math.round(-0.2 * enemyWithHighestAtk.atk),
-          enemyWithHighestAtk,
+          curser,
           0,
           false
         )
@@ -1667,7 +1668,7 @@ export default class Simulation extends Schema implements ISimulation {
         opponentsCursable.filter((p) => p.ap === highestAP)
       )
       if (enemyWithHighestAP) {
-        enemyWithHighestAP.addAbilityPower(-30, enemyWithHighestAP, 0, false)
+        enemyWithHighestAP.addAbilityPower(-30, curser, 0, false)
         enemyWithHighestAP.status.curseTorment = true
         enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP)
       }

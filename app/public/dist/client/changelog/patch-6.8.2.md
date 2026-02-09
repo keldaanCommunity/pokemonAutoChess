@@ -25,6 +25,7 @@
 
 # Bugfix
 
+- Fix Twist Band not reversing ghost curses stat debuffs
 
 # Misc
 
