@@ -110,7 +110,7 @@ if (process.env.NODE_APP_INSTANCE) {
   gameOptions.devMode = true
 }*/
 
-export default defineServer({
+export const server = defineServer({
   ...gameOptions,
 
   /* uWebSockets turned out to be unstable in production, so we are using the default transport

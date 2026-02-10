@@ -7,8 +7,9 @@ import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
+import LobbyState from "../../../rooms/states/lobby-state"
 import PreparationState from "../../../rooms/states/preparation-state"
-import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
+import { ISuggestionUser, Transfer } from "../../../types"
 import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
@@ -52,8 +53,8 @@ import { resetPreparation } from "../stores/PreparationStore"
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
   navigate: NavigateFunction
-): Promise<Room<ICustomLobbyState>> {
-  const promise: Promise<Room<ICustomLobbyState>> = new Promise(
+): Promise<Room<{ state: LobbyState }>> {
+  const promise: Promise<Room<{ state: LobbyState }>> = new Promise(
     (resolve, reject) => {
       const client = store.getState().network.client
       const lobby = store.getState().network.lobby
@@ -64,7 +65,7 @@ export async function joinLobbyRoom(
 
       authenticateUser().then(async (user) => {
         try {
-          let room: Room<ICustomLobbyState> | undefined = undefined
+          let room: Room<{ state: LobbyState }> | undefined = undefined
 
           const reconnectToken: string = localStore.get(
             LocalStoreKeys.RECONNECTION_LOBBY
@@ -72,7 +73,9 @@ export async function joinLobbyRoom(
           if (reconnectToken) {
             try {
               // if a reconnect token is found, try to reconnect to the lobby room
-              room = await client.reconnect(reconnectToken)
+              room = (await client.reconnect(reconnectToken)) as Room<{
+                state: LobbyState
+              }>
             } catch (error) {
               localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
             }
@@ -300,7 +303,7 @@ export async function joinLobbyRoom(
 export async function joinExistingPreparationRoom(
   roomId: string,
   client: Client,
-  lobby: Room<ICustomLobbyState> | undefined,
+  lobby: Room<{ state: LobbyState }> | undefined,
   dispatch: AppDispatch,
   navigate: NavigateFunction,
   password?: string

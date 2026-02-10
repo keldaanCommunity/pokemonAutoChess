@@ -1,18 +1,14 @@
 import { Client, Room } from "@colyseus/sdk"
 import { User } from "@firebase/auth-types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import type { server } from "../../../app.config.ts"
 import { CollectionUtils } from "../../../core/collection"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import GameState from "../../../rooms/states/game-state"
+import LobbyState from "../../../rooms/states/lobby-state"
 import PreparationState from "../../../rooms/states/preparation-state"
-import {
-  Emotion,
-  ICustomLobbyState,
-  Role,
-  Title,
-  Transfer
-} from "../../../types"
+import { Emotion, Role, Title, Transfer } from "../../../types"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { EloRank } from "../../../types/enum/EloRank"
 import { BotDifficulty } from "../../../types/enum/Game"
@@ -29,8 +25,8 @@ import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
 
 export interface INetwork {
-  client: Client
-  lobby: Room<ICustomLobbyState> | undefined
+  client: Client<typeof server>
+  lobby: Room<{ state: LobbyState }> | undefined
   preparation: Room<PreparationState> | undefined
   game: Room<GameState> | undefined
   after: Room<AfterGameState> | undefined
@@ -49,7 +45,7 @@ const endpoint = `${window.location.protocol.replace("http", "ws")}//${
 logger.info(endpoint)
 
 const initalState: INetwork = {
-  client: new Client(endpoint),
+  client: new Client<typeof server>(endpoint),
   lobby: undefined,
   preparation: undefined,
   game: undefined,
@@ -75,7 +71,7 @@ export const networkSlice = createSlice({
       }
     },
     logOut: (state) => {
-      state.client = new Client(endpoint)
+      state.client = new Client<typeof server>(endpoint)
       state.uid = ""
       state.displayName = ""
       state.email = ""
@@ -104,7 +100,7 @@ export const networkSlice = createSlice({
         pokemonCollection: unpackedCollection
       }
     },
-    joinLobby: (state, action: PayloadAction<Room<ICustomLobbyState>>) => {
+    joinLobby: (state, action: PayloadAction<Room<{ state: LobbyState }>>) => {
       state.lobby = action.payload
       state.preparation?.connection.isOpen && state.preparation?.leave(true)
       state.preparation = undefined

@@ -4,12 +4,8 @@ import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import GameState from "../../../../../rooms/states/game-state"
-import {
-  ICustomLobbyState,
-  IGameMetadata,
-  Role,
-  Transfer
-} from "../../../../../types"
+import LobbyState from "../../../../../rooms/states/lobby-state"
+import { IGameMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -28,7 +24,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   const [isJoining, setJoining] = useState<boolean>(false)
   const [sortBy, setSortBy] = useState<"stage" | "elo" | "name">("stage")
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
+  const lobby: Room<{ state: LobbyState }> | undefined = useAppSelector(
     (state) => state.network.lobby
   )
   const user = useAppSelector((state) => state.network.profile)
