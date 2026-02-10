@@ -468,17 +468,18 @@ export default class CustomLobbyRoom extends Room {
     this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
   }
 
+  async onDrop(client: Client, code: number) {
+    // allow reconnection for 30 seconds
+    await this.allowReconnection(client, 30)
+  }
+
+  async onReconnect(client: Client) {
+    // if reconnected, trigger the onJoin logic again to send them the initial data
+    this.onJoin(client)
+  }
+
   async onLeave(client: Client, code: number) {
-    try {
-      if (code === CloseCode.CONSENTED) {
-        throw new Error("consented leave")
-      }
-      await this.allowReconnection(client, 30)
-      // if reconnected, trigger the onJoin logic again to send them the initial data
-      this.onJoin(client)
-    } catch (error) {
-      this.dispatcher.dispatch(new OnLeaveCommand(), { client })
-    }
+    this.dispatcher.dispatch(new OnLeaveCommand(), { client })
   }
 
   onDispose() {

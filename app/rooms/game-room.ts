@@ -656,90 +656,90 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
   }
 
+  async onDrop(client: Client, code: number) {
+    /*if (client && client.auth && client.auth.displayName) {
+      logger.info(`${client.auth.displayName} has been disconnected`)
+    }*/
+    // allow disconnected client to reconnect into this room until 5 minutes
+    setPendingGame(this.presence, client.auth.uid, this.roomId)
+    await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+  }
+
+  async onReconnect(client: Client) {
+    // if the user reconnects, we clear the pending game and recall the OnJoinCommand
+    clearPendingGame(this.presence, client.auth.uid)
+    this.dispatcher.dispatch(new OnJoinCommand(), { client })
+  }
+
   async onLeave(client: Client, code: number) {
     const consented = code === CloseCode.CONSENTED
-    try {
-      /*if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} has been disconnected`)
-      }*/
-      if (consented) {
-        throw new Error("consented leave")
-      }
 
-      // allow disconnected client to reconnect into this room until 5 minutes
-      setPendingGame(this.presence, client.auth.uid, this.roomId)
-      await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
-      // if the user reconnects, we clear the pending game and recall the OnJoinCommand
-      clearPendingGame(this.presence, client.auth.uid)
-      this.dispatcher.dispatch(new OnJoinCommand(), { client })
-    } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
-        const pendingGame = await getPendingGame(this.presence, client.auth.uid)
-        if (!pendingGame && !consented)
-          return // user has reconnected through other ways (new browser/machine/session)
-        else if (
-          pendingGame &&
-          isValidDate(pendingGame.reconnectionDeadline) &&
-          pendingGame.reconnectionDeadline.getTime() > Date.now()
-        ) {
-          // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
-          // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
-          return
-        }
-        clearPendingGame(this.presence, client.auth.uid)
-
-        //logger.info(`${client.auth.displayName} left game`)
-        const player = this.state.players.get(client.auth.uid)
-        const hasLeftGameBeforeTheEnd =
-          player && player.life > 0 && !this.state.gameFinished
-        const otherHumans = values(this.state.players).filter(
-          (p) => !p.isBot && p.id !== client.auth.uid
-        )
-        if (
-          hasLeftGameBeforeTheEnd &&
-          otherHumans.length >= 1 &&
-          player.role !== Role.ADMIN
-        ) {
-          /* if a user leaves a game before the end, 
-          they cannot join another in the next 5 minutes */
-          givePlayerTimeout(this.presence, client.auth.uid)
-        }
-
-        if (player && this.state.stageLevel <= 5 && !consented) {
-          /* 
-          if player left game during the loading screen or before stage 6,
-          we consider they didn't play the game and presume a technical issue
-          we remove it from the players and don't give them any rewards
-          */
-          this.state.players.delete(client.auth.uid)
-          this.setMetadata({
-            playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
-          })
-
-          /*logger.info(
-            `${client.auth.displayName} has been removed from players list`
-          )*/
-        } else if (player && !player.hasLeftGame) {
-          player.hasLeftGame = true
-          player.spectatedPlayerId = player.id
-
-          const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
-          if (hasLeftBeforeEnd) {
-            // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
-            player.life = -99
-            this.rankPlayers()
-          }
-
-          this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
-        }
-      }
-      if (
-        !this.state.gameLoaded &&
-        values(this.state.players).every((p) => p.loadingProgress === 100)
+    if (client && client.auth && client.auth.displayName) {
+      const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+      if (!pendingGame && !consented)
+        return // user has reconnected through other ways (new browser/machine/session)
+      else if (
+        pendingGame &&
+        isValidDate(pendingGame.reconnectionDeadline) &&
+        pendingGame.reconnectionDeadline.getTime() > Date.now()
       ) {
-        this.broadcast(Transfer.LOADING_COMPLETE)
-        this.startGame()
+        // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
+        // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
+        return
       }
+      clearPendingGame(this.presence, client.auth.uid)
+
+      //logger.info(`${client.auth.displayName} left game`)
+      const player = this.state.players.get(client.auth.uid)
+      const hasLeftGameBeforeTheEnd =
+        player && player.life > 0 && !this.state.gameFinished
+      const otherHumans = values(this.state.players).filter(
+        (p) => !p.isBot && p.id !== client.auth.uid
+      )
+      if (
+        hasLeftGameBeforeTheEnd &&
+        otherHumans.length >= 1 &&
+        player.role !== Role.ADMIN
+      ) {
+        /* if a user leaves a game before the end, 
+        they cannot join another in the next 5 minutes */
+        givePlayerTimeout(this.presence, client.auth.uid)
+      }
+
+      if (player && this.state.stageLevel <= 5 && !consented) {
+        /* 
+        if player left game during the loading screen or before stage 6,
+        we consider they didn't play the game and presume a technical issue
+        we remove it from the players and don't give them any rewards
+        */
+        this.state.players.delete(client.auth.uid)
+        this.setMetadata({
+          playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
+        })
+
+        /*logger.info(
+          `${client.auth.displayName} has been removed from players list`
+        )*/
+      } else if (player && !player.hasLeftGame) {
+        player.hasLeftGame = true
+        player.spectatedPlayerId = player.id
+
+        const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
+        if (hasLeftBeforeEnd) {
+          // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
+          player.life = -99
+          this.rankPlayers()
+        }
+
+        this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
+      }
+    }
+    if (
+      !this.state.gameLoaded &&
+      values(this.state.players).every((p) => p.loadingProgress === 100)
+    ) {
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.startGame()
     }
   }
 

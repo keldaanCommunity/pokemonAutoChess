@@ -75,19 +75,16 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
     //logger.info(`${client.auth.email} join after game`)
   }
 
-  async onLeave(client: Client, code: number) {
-    try {
-      if (code === CloseCode.CONSENTED) {
-        throw new Error("consented leave")
-      }
+  async onDrop(client: Client, code: number) {        
+    // allow disconnected client to reconnect into this room until 20 seconds
+    await this.allowReconnection(client, 20);
+  }
 
-      // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 20)
-    } catch (e) {
-      /*if (client && client.auth && client.auth.displayName) {
+  async onLeave(client: Client, code: number) {
+    // player not coming back
+    /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave after game room`)
-      }*/
-    }
+    }*/
   }
 
   onDispose() {

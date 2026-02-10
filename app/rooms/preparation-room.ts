@@ -410,32 +410,29 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     }
   }
 
+  async onDrop(client: Client, code: number) {
+    /*if (client.auth && client.auth.displayName) {
+      logger.info(
+        `${client.auth.displayName} ${client.id} is leaving preparation room`
+      )
+    }*/
+    this.state.abortOnPlayerLeave?.abort()
+    // allow disconnected client to reconnect into this room until 10 seconds
+    await this.allowReconnection(client, 10)
+  }
+
   async onLeave(client: Client, code: number) {
     const consented = code === CloseCode.CONSENTED
-    if (client.auth && client.auth.displayName) {
-      /*logger.info(
-        `${client.auth.displayName} ${client.id} is leaving preparation room`
-      )*/
-    }
-    try {
-      this.state.abortOnPlayerLeave?.abort()
-      if (consented) {
-        throw new Error("consented leave")
-      }
-      // allow disconnected client to reconnect into this room until 10 seconds
-      await this.allowReconnection(client, 10)
-    } catch (e) {
-      if (client.auth && client.auth.displayName) {
-        /*logger.info(
+    /*if (client.auth && client.auth.displayName) {
+        logger.info(
           `${client.auth.displayName} ${client.id} leave preparation room`
-        )*/
-      }
-      this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
-    }
+        )
+      }*/
+    this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
   }
 
   onDispose() {
-    logger.info("Dispose Preparation", this.roomId)
+    logger.info("Dispose preparation room", this.roomId)
     this.dispatcher.stop()
   }
 
