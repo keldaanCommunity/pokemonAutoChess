@@ -14199,10 +14199,10 @@ export class Dewpider extends Pokemon {
   stars = 1
   evolution = Pkm.ARAQUANID
   hp = 60
-  atk = 8
+  atk = 6
   speed = 38
-  def = 4
-  speDef = 2
+  def = 2
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.STICKY_WEB
@@ -14219,10 +14219,10 @@ export class Araquanid extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
-  atk = 17
+  atk = 13
   speed = 38
-  def = 8
-  speDef = 4
+  def = 4
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.STICKY_WEB
