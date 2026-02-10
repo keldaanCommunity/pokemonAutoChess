@@ -59,7 +59,7 @@ import {
 } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
-import { GameMode, PokemonActionState } from "../types/enum/Game"
+import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
@@ -1215,7 +1215,7 @@ export default class GameRoom extends Room<GameState> {
     )
       return // should not be pickable at this stage
 
-    const pokemonsObtained: Pokemon[] = (
+    let pokemonsObtained: Pokemon[] = (
       pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
     ).map((p) => PokemonFactory.createPokemonFromName(p, player))
 
@@ -1248,6 +1248,25 @@ export default class GameRoom extends Room<GameState> {
         player.regionalPokemons.push(pkm as Pkm)
       } else {
         this.state.shop.addAdditionalPokemon(pkm, this.state)
+      }
+
+      if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
+        pokemonsObtained = pokemonsObtained.map((pkm) => {
+          const evolution = pkm.hasEvolution
+            ? pkm.evolutionRule.getEvolution(pkm, player, this.state.stageLevel)
+            : pkm.name
+          const rank = [Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC].indexOf(
+            pkm.rarity
+          )
+          const replacement = PokemonFactory.createPokemonFromName(
+            evolution,
+            player
+          )
+          replacement.addMaxHP([50, 100, 150][rank] ?? 50, player)
+          replacement.addAttack([5, 10, 15][rank] ?? 5)
+          replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
+          return replacement
+        })
       }
 
       // update regional pokemons in case some regional variants of add picks are now available

@@ -4407,7 +4407,8 @@
 		"REGIONAL_SPECIALTIES": "Regional Specialties",
 		"GO_BIG_OR_GO_HOME": "Go big or go home",
 		"FAMILY_OUTING": "Family Outing",
-		"UNOWN_SPELL": "Unown Spell"
+		"UNOWN_SPELL": "Unown Spell",
+		"CHOSEN_ONES": "The Chosen Ones"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -4428,7 +4429,8 @@
 		"REGIONAL_SPECIALTIES": "Your current region types count towards your synergies. After changing region, your team tastes a local dish.",
 		"GO_BIG_OR_GO_HOME": "Units gain 5 max HP and grow in size at every stage.",
 		"FAMILY_OUTING": "Pokémon from the same family all count towards synergy levels.",
-		"UNOWN_SPELL": "Unowns are spectating your fights and are casting spells on both teams each round."
+		"UNOWN_SPELL": "Unowns are spectating your fights and are casting spells on both teams each round.",
+		"CHOSEN_ONES": "The add picks you choose evolve immediately and gain bonus stats."
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
