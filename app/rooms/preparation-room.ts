@@ -1,5 +1,5 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, ClientArray, Room, updateLobby } from "colyseus"
+import { Client, ClientArray, CloseCode, Room, updateLobby } from "colyseus"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { MAX_PLAYERS_PER_GAME } from "../config"
@@ -29,9 +29,9 @@ import {
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
 
-export default class PreparationRoom extends Room<PreparationState> {
+export default class PreparationRoom extends Room<{ state: PreparationState }> {
   dispatcher: Dispatcher<this>
-  clients!: ClientArray<undefined, UserRecord>
+  clients!: ClientArray<Client<{ auth: UserRecord }>>
   private roomPassword: string | null
 
   constructor() {
@@ -46,7 +46,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       name: name.slice(0, 30),
       type: "preparation"
     })
-    updateLobby(this)
   }
 
   async setPassword(password: string | null) {
@@ -56,12 +55,10 @@ export default class PreparationRoom extends Room<PreparationState> {
       type: "preparation"
     })
     this.roomPassword = hasPassword ? password : null
-    updateLobby(this)
   }
 
   async setNoElo(noElo: boolean) {
     await this.setMetadata(<IPreparationMetadata>{ noElo })
-    updateLobby(this)
   }
 
   async setMinMaxRanks(minRank: EloRank, maxRank: EloRank) {
@@ -69,7 +66,6 @@ export default class PreparationRoom extends Room<PreparationState> {
       minRank: minRank,
       maxRank: maxRank
     })
-    updateLobby(this)
   }
 
   async setGameStarted(gameStartedAt: string) {
@@ -398,7 +394,7 @@ export default class PreparationRoom extends Room<PreparationState> {
   }
 
   async onJoin(
-    client: Client<undefined, UserRecord>,
+    client: Client<{ auth: UserRecord }>,
     options: any,
     auth: UserRecord | undefined
   ) {
@@ -414,7 +410,8 @@ export default class PreparationRoom extends Room<PreparationState> {
     }
   }
 
-  async onLeave(client: Client, consented: boolean) {
+  async onLeave(client: Client, code: number) {
+    const consented = code === CloseCode.CONSENTED
     if (client.auth && client.auth.displayName) {
       /*logger.info(
         `${client.auth.displayName} ${client.id} is leaving preparation room`
@@ -440,9 +437,6 @@ export default class PreparationRoom extends Room<PreparationState> {
   onDispose() {
     logger.info("Dispose Preparation", this.roomId)
     this.dispatcher.stop()
-    this.presence.unsubscribe("server-announcement", this.onServerAnnouncement)
-    this.presence.unsubscribe("game-started", this.onGameStart)
-    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
   }
 
   onServerAnnouncement(message: string) {

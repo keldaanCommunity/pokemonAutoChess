@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room, RoomAvailable } from "colyseus.js"
+import { Client, getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { NavigateFunction } from "react-router-dom"
@@ -127,11 +127,11 @@ export async function joinLobbyRoom(
           $state.tournaments.onAdd((tournament) => {
             dispatch(addTournament(tournament))
             const $tournament = $(tournament)
-            const fields: NonFunctionPropNames<TournamentSchema>[] = [
+            const fields = [
               "id",
               "name",
               "startDate"
-            ]
+            ] satisfies NonFunctionPropNames<TournamentSchema>[]
 
             fields.forEach((field) => {
               $tournament.listen(field, (value) => {
@@ -148,9 +148,9 @@ export async function joinLobbyRoom(
             $tournament.players.onAdd((player, userId) => {
               dispatch(updateTournament()) // TOFIX: force redux reactivity
               const $player = $(player)
-              const fields: NonFunctionPropNames<TournamentPlayerSchema>[] = [
+              const fields = [
                 "eliminated"
-              ]
+              ] satisfies NonFunctionPropNames<TournamentPlayerSchema>[]
               fields.forEach((field) => {
                 $player.listen(field, (value) => {
                   dispatch(
@@ -179,10 +179,10 @@ export async function joinLobbyRoom(
               )
 
               const $bracket = $(bracket)
-              const fields: NonFunctionPropNames<TournamentBracketSchema>[] = [
+              const fields = [
                 "name",
                 "finished"
-              ]
+              ] satisfies NonFunctionPropNames<TournamentBracketSchema>[]
               fields.forEach((field) => {
                 $bracket.listen(field, (value) => {
                   dispatch(

@@ -1,4 +1,4 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
+import { Client, Room, RoomAvailable } from "@colyseus/sdk"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"

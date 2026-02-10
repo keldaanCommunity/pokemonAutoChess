@@ -1,4 +1,4 @@
-import { Room } from "colyseus.js"
+import { Room } from "@colyseus/sdk"
 import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"

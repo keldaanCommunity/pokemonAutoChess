@@ -1,6 +1,6 @@
+import { Client, Room } from "@colyseus/sdk"
 import { User } from "@firebase/auth-types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Client, Room } from "colyseus.js"
 import { CollectionUtils } from "../../../core/collection"
 import { IBot } from "../../../models/mongo-models/bot-v2"
 import AfterGameState from "../../../rooms/states/after-game-state"

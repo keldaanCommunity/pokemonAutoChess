@@ -1,5 +1,12 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, IRoomCache, matchMaker, Room, subscribeLobby } from "colyseus"
+import {
+  Client,
+  CloseCode,
+  IRoomCache,
+  matchMaker,
+  Room,
+  subscribeLobby
+} from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import {
@@ -55,7 +62,8 @@ import {
 } from "./commands/lobby-commands"
 import LobbyState from "./states/lobby-state"
 
-export default class CustomLobbyRoom extends Room<LobbyState> {
+export default class CustomLobbyRoom extends Room {
+  state = new LobbyState()
   unsubscribeLobby: (() => void) | undefined
   rooms: IRoomCache[] | undefined
   dispatcher: Dispatcher<this>
@@ -107,9 +115,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    this.state = new LobbyState()
     this.autoDispose = false
-    this.listing.unlisted = true
+    this["_listing"].unlisted = true
 
     this.clock.setInterval(async () => {
       const ccu = await matchMaker.stats.getGlobalCCU()
@@ -461,9 +468,9 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
   }
 
-  async onLeave(client: Client, consented: boolean) {
+  async onLeave(client: Client, code: number) {
     try {
-      if (consented) {
+      if (code === CloseCode.CONSENTED) {
         throw new Error("consented leave")
       }
       await this.allowReconnection(client, 30)

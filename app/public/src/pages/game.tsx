@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -643,7 +643,7 @@ export default function Game() {
           $dpsMeter.onAdd((dps) => {
             dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
             const $dps = $(dps)
-            const fields: NonFunctionPropNames<IDps>[] = [
+            const fields = [
               "id",
               "name",
               "physicalDamage",
@@ -654,7 +654,7 @@ export default function Game() {
               "physicalDamageReduced",
               "specialDamageReduced",
               "shieldDamageTaken"
-            ]
+            ] satisfies NonFunctionPropNames<IDps>[]
             fields.forEach((field) => {
               $dps.listen(field, (value) => {
                 dispatch(
@@ -734,11 +734,11 @@ export default function Game() {
           const $experienceManager = $(experienceManager)
           if (player.id === uid) {
             dispatch(updateExperienceManager(experienceManager))
-            const fields: NonFunctionPropNames<IExperienceManager>[] = [
+            const fields = [
               "experience",
               "expNeeded",
               "level"
-            ]
+            ] satisfies NonFunctionPropNames<IExperienceManager>[]
             fields.forEach((field) => {
               $experienceManager.listen(field, (value) => {
                 dispatch(
@@ -806,7 +806,7 @@ export default function Game() {
           }
         })
 
-        const fields: NonFunctionPropNames<IPlayer>[] = [
+        const fields = [
           "name",
           "avatar",
           "boardSize",
@@ -829,7 +829,7 @@ export default function Game() {
           "goldenEggChance",
           "wildChance",
           "cellBattery"
-        ]
+        ] satisfies NonFunctionPropNames<IPlayer>[]
 
         fields.forEach((field) => {
           $player.listen(field, (value) => {

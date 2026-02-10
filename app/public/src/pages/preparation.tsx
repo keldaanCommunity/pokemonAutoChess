@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
@@ -178,7 +178,7 @@ export default function Preparation() {
 
         const $user = $(user)
 
-        const fields: NonFunctionPropNames<GameUser>[] = [
+        const fields = [
           "anonymous",
           "avatar",
           "elo",
@@ -188,7 +188,7 @@ export default function Preparation() {
           "role",
           "title",
           "ready"
-        ]
+        ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {
           $user.listen(field, (value, previousValue) => {

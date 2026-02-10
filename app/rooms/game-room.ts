@@ -1,6 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
-import { Client, Room } from "colyseus"
+import { Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import {
@@ -106,7 +106,7 @@ import {
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
-export default class GameRoom extends Room<GameState> {
+export default class GameRoom extends Room<{ state: GameState }> {
   dispatcher: Dispatcher<this>
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
@@ -656,7 +656,8 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  async onLeave(client: Client, consented: boolean) {
+  async onLeave(client: Client, code: number) {
+    const consented = code === CloseCode.CONSENTED
     try {
       /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} has been disconnected`)
@@ -744,7 +745,6 @@ export default class GameRoom extends Room<GameState> {
 
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
-    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
     const players = values(this.state.players)
     players.forEach((player) => {
       clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
