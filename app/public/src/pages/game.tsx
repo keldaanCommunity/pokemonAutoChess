@@ -361,6 +361,20 @@ export default function Game() {
   }, [])
 
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        getGameScene()?.board?.clearBoard()
+      } else {
+        getGameScene()?.board?.renderBoard(false)
+      }
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+    }
+  }, [])
+
+  useEffect(() => {
     try {
       fetch("/leaderboards")
         .then((res) => res.json())

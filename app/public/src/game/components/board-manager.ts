@@ -222,9 +222,13 @@ export default class BoardManager {
     this.pokemons.delete(pokemonToRemove.id)
   }
 
-  renderBoard(phaseJustChanged: boolean) {
+  clearBoard() {
     this.pokemons.forEach((p) => p.destroy())
     this.pokemons.clear()
+  }
+
+  renderBoard(phaseJustChanged: boolean) {
+    this.clearBoard()
 
     if (this.mode !== BoardMode.TOWN) {
       this.renderBerryTrees()
