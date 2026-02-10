@@ -213,24 +213,9 @@ export default function Preparation() {
         dispatch(removeMessage(m))
       })
 
-      room.onLeave((code) => {
-        const shouldGoToLobby = [
-          CloseCodes.USER_KICKED,
-          CloseCodes.ROOM_DELETED,
-          CloseCodes.ROOM_FULL,
-          CloseCodes.ROOM_EMPTY,
-          CloseCodes.USER_BANNED,
-          CloseCodes.USER_RANK_TOO_LOW,
-          CloseCodes.USER_TIMEOUT
-        ].includes(code)
-
+      room.onDrop((code) => {
         const shouldReconnect =
           code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
-        logger.info(`left preparation room with code ${code}`, {
-          shouldGoToLobby,
-          shouldReconnect
-        })
-
         if (shouldReconnect) {
           dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
           logger.log(
@@ -242,22 +227,37 @@ export default function Preparation() {
             { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
-          // clearing state variables to re-initialize
-          dispatch(resetPreparation())
-          initialized.current = false
-          reconnect()
-        } else {
-          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-          dispatch(resetPreparation())
-          if (shouldGoToLobby) {
-            const errorMessage =
-              CloseCodesMessages[code as CloseCodes] ?? "UNKNOWN_ERROR"
-            if (errorMessage) {
-              dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
-            }
-            navigate("/lobby")
-            playSound(SOUNDS.LEAVE_ROOM)
+        }
+      })
+
+      room.onReconnect(() => {
+        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+      })
+
+      room.onLeave((code) => {
+        const shouldGoToLobby = [
+          CloseCodes.USER_KICKED,
+          CloseCodes.ROOM_DELETED,
+          CloseCodes.ROOM_FULL,
+          CloseCodes.ROOM_EMPTY,
+          CloseCodes.USER_BANNED,
+          CloseCodes.USER_RANK_TOO_LOW,
+          CloseCodes.USER_TIMEOUT
+        ].includes(code)
+
+        logger.info(`left preparation room with code ${code}`)
+        localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+        dispatch(resetPreparation())
+        if (shouldGoToLobby) {
+          const errorMessage =
+            CloseCodesMessages[code as CloseCodes] ?? "UNKNOWN_ERROR"
+          if (errorMessage) {
+            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
           }
+          navigate("/lobby")
+          playSound(SOUNDS.LEAVE_ROOM)
+        } else {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
         }
       })
 
