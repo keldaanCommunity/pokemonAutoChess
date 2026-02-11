@@ -9,6 +9,7 @@
 - Nerf Dewpider line: Attack 8/17 → 6/13, switched Defense and Special Defense
 - Change Mind Blown (Blacephalon): Yellow fireworks no longer inflict FLINCH
 - Change Snorlax: HP 260 → 300
+- Silvally no longer devolves to Type Null when losing all its synergy items
 
 # Changes to Items
 

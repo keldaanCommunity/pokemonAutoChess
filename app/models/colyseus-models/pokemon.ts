@@ -10108,18 +10108,6 @@ export class Silvally extends Pokemon {
       this.removeItems(itemsToRemove, player)
     }
   }
-  onItemRemoved(item: Item, player: Player) {
-    if (
-      (SynergyItems as ReadonlyArray<Item>).includes(item) &&
-      values(this.items).filter((item) =>
-        (SynergyItems as ReadonlyArray<Item>).includes(item)
-      ).length === 0 &&
-      player.getPokemonAt(this.positionX, this.positionY)?.name !==
-        Pkm.TYPE_NULL
-    ) {
-      player.transformPokemon(this, Pkm.TYPE_NULL)
-    }
-  }
 }
 
 export class Applin extends Pokemon {
