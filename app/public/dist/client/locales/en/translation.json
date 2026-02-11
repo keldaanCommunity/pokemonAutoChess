@@ -4505,7 +4505,9 @@
 		"ROOM_DELETED": "This room has been deleted",
 		"GAME_ALREADY_STARTED": "This game has already started",
 		"INVALID_PASSWORD": "Wrong password",
-		"UNKNOWN_ERROR": "An unexpected error occurred: {{error}}"
+		"UNKNOWN_ERROR": "An unexpected error occurred: {{error}}",
+		"SERVER_SHUTDOWN": "Server is shutting down for maintenance",
+		"FAILED_TO_RECONNECT": "Failed to reconnect to the game. Please refresh the page and try again."
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Connection lost. Attempting to reconnect...",
