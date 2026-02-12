@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
 import React, { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import AfterGameState from "../../../rooms/states/after-game-state"

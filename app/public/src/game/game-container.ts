@@ -1,5 +1,5 @@
 import { SchemaCallbackProxy } from "@colyseus/schema"
-import { getStateCallbacks, Room } from "colyseus.js"
+import { getStateCallbacks, Room } from "@colyseus/sdk"
 import { t } from "i18next"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
@@ -138,8 +138,7 @@ class GameContainer {
 
     const $pokemon = this.$<PokemonEntity>(pokemon)
 
-    const fields: (NonFunctionPropNames<PokemonEntity> &
-      keyof IPokemonEntity)[] = [
+    const fields = [
       "positionX",
       "positionY",
       "orientation",
@@ -168,7 +167,7 @@ class GameContainer {
       "types",
       "stacks",
       "stacksRequired"
-    ]
+    ] satisfies (NonFunctionPropNames<PokemonEntity> & keyof IPokemonEntity)[]
 
     fields.forEach((field) => {
       $pokemon.listen(field, (value, previousValue) => {
@@ -182,7 +181,7 @@ class GameContainer {
       })
     })
 
-    const statusFields: NonFunctionPropNames<Status>[] = [
+    const statusFields = [
       "armorReduction",
       "burn",
       "charm",
@@ -218,7 +217,7 @@ class GameContainer {
       "magicBounce",
       "reflect",
       "tree"
-    ]
+    ] satisfies NonFunctionPropNames<Status>[]
 
     statusFields.forEach((field) => {
       $pokemon.status.listen(field, (value, previousValue) => {
@@ -243,7 +242,7 @@ class GameContainer {
       }
     })
 
-    const fieldsCount: NonFunctionPropNames<Count>[] = [
+    const fieldsCount = [
       "crit",
       "dodgeCount",
       "ult",
@@ -262,7 +261,7 @@ class GameContainer {
       "soulDewCount",
       "muscleBandCount",
       "machRibbonCount"
-    ]
+    ] satisfies NonFunctionPropNames<Count>[]
 
     fieldsCount.forEach((field) => {
       $pokemon.count.listen(field, (value, previousValue) => {
@@ -358,7 +357,7 @@ class GameContainer {
       ]
       fields.forEach((field) => {
         $avatar.listen(field, (value, previousValue) => {
-          this.gameScene?.minigameManager?.changePokemon(avatar, field, value)
+          this.gameScene?.minigameManager?.changePokemon(avatar, field!, value)
         })
       })
     })
@@ -369,11 +368,11 @@ class GameContainer {
 
     $state.floatingItems.onAdd((floatingItem) => {
       this.gameScene?.minigameManager?.addItem(floatingItem)
-      const fields: NonFunctionPropNames<FloatingItem>[] = [
+      const fields = [
         "x",
         "y",
         "avatarId"
-      ]
+      ] satisfies NonFunctionPropNames<FloatingItem>[]
       const $floatingItem = this.$<FloatingItem>(floatingItem)
       fields.forEach((field) => {
         $floatingItem.listen(field, (value, previousValue) => {
@@ -393,7 +392,11 @@ class GameContainer {
     $state.portals.onAdd((portal) => {
       this.gameScene?.minigameManager?.addPortal(portal)
       const $portal = this.$<Portal>(portal)
-      const fields: NonFunctionPropNames<Portal>[] = ["x", "y", "avatarId"]
+      const fields = [
+        "x",
+        "y",
+        "avatarId"
+      ] satisfies NonFunctionPropNames<Portal>[]
 
       fields.forEach((field) => {
         $portal.listen(field, (value, previousValue) => {
@@ -409,11 +412,11 @@ class GameContainer {
     $state.symbols.onAdd((symbol) => {
       this.gameScene?.minigameManager?.addSymbol(symbol)
       const $symbol = this.$<SynergySymbol>(symbol)
-      const fields: NonFunctionPropNames<SynergySymbol>[] = [
+      const fields = [
         "x",
         "y",
         "portalId"
-      ]
+      ] satisfies NonFunctionPropNames<SynergySymbol>[]
 
       fields.forEach((field) => {
         $symbol.listen(field, (value, previousValue) => {

@@ -1,5 +1,5 @@
+import { RoomAvailable } from "@colyseus/sdk"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RoomAvailable } from "colyseus.js"
 import Message from "../../../models/colyseus-models/message"
 import {
   TournamentBracketSchema,

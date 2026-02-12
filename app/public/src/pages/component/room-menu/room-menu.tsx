@@ -1,14 +1,10 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
+import { Client, Room, RoomAvailable } from "@colyseus/sdk"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import {
-  ICustomLobbyState,
-  IPreparationMetadata,
-  Role,
-  Transfer
-} from "../../../../../types"
+import LobbyState from "../../../../../rooms/states/lobby-state"
+import { IPreparationMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
@@ -33,7 +29,7 @@ export default function RoomMenu() {
   const ccu = useAppSelector((state) => state.lobby.ccu)
 
   const client: Client = useAppSelector((state) => state.network.client)
-  const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
+  const lobby: Room<{ state: LobbyState }> | undefined = useAppSelector(
     (state) => state.network.lobby
   )
   const user = useAppSelector((state) => state.network.profile)

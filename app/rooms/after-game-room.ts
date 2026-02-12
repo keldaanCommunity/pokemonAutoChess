@@ -1,14 +1,14 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, Room } from "colyseus"
+import { Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import AfterGamePlayer from "../models/colyseus-models/after-game-player"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { IAfterGamePlayer, Transfer } from "../types"
+import { IAfterGamePlayer } from "../types"
 import { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import AfterGameState from "./states/after-game-state"
 
-export default class AfterGameRoom extends Room<AfterGameState> {
+export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
   dispatcher: Dispatcher<this>
   constructor() {
     super()
@@ -75,19 +75,16 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     //logger.info(`${client.auth.email} join after game`)
   }
 
-  async onLeave(client: Client, consented: boolean) {
-    try {
-      if (consented) {
-        throw new Error("consented leave")
-      }
+  async onDrop(client: Client, code: number) {        
+    // allow disconnected client to reconnect into this room until 20 seconds
+    await this.allowReconnection(client, 20);
+  }
 
-      // allow disconnected client to reconnect into this room until 20 seconds
-      await this.allowReconnection(client, 20)
-    } catch (e) {
-      /*if (client && client.auth && client.auth.displayName) {
+  async onLeave(client: Client, code: number) {
+    // player not coming back
+    /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} leave after game room`)
-      }*/
-    }
+    }*/
   }
 
   onDispose() {

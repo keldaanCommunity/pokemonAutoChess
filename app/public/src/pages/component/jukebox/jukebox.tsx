@@ -49,8 +49,8 @@ export default function Jukebox(props: {
     }
   }
 
-  function handleVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const newVolume = Number(e.target.value)
+  function handleVolumeChange(e: React.InputEvent<HTMLInputElement>) {
+    const newVolume = Number(e.currentTarget.value)
     setVolume(newVolume)
   }
 

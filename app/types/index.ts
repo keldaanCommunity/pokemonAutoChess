@@ -8,16 +8,13 @@ import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
-import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
 import Status from "../models/colyseus-models/status"
 import Synergies from "../models/colyseus-models/synergies"
-import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
-import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
 import { AttackSprite } from "./Animation"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
@@ -182,24 +179,6 @@ export interface IDragDropItemMessage {
 export interface IDragDropCombineMessage {
   itemA: Item
   itemB: Item
-}
-
-export interface ICustomLobbyState extends Schema {
-  ccu: number
-  messages: ArraySchema<Message>
-  leaderboard: ILeaderboardInfo[]
-  botLeaderboard: ILeaderboardInfo[]
-  levelLeaderboard: ILeaderboardInfo[]
-  tournaments: ArraySchema<TournamentSchema>
-  clients: number
-}
-
-export interface IGameState extends Schema {
-  afterGameId: string
-  roundTime: number
-  phase: string
-  players: MapSchema<IPlayer>
-  stageLevel: number
 }
 
 export interface ISimplePlayer {
