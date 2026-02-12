@@ -226,7 +226,7 @@ export class MachRibbonEffect extends PeriodicEffect {
         }
       },
       Item.MACH_RIBBON,
-      4000
+      3000
     )
   }
 }
@@ -1259,7 +1259,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           ? pokemon.simulation.blueDpsMeter
           : pokemon.simulation.redDpsMeter
       const shieldGained = dps.get(pokemon.id)?.shield ?? 0
-      const explosionDamage = Math.round(0.3 * shieldGained)
+      const explosionDamage = Math.round(0.5 * shieldGained)
 
       pokemon.broadcastAbility({ skill: "EXPLOSION" })
       pokemon.removeItem(Item.EXPLOSIVE_BAND)
@@ -1287,7 +1287,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           entity.positionY
         )
         if (ally) {
-          ally.maxPP = Math.round(0.9 * ally.maxPP)
+          ally.maxPP = Math.round(0.85 * ally.maxPP)
         }
       })
     }, Item.EFFICIENT_BANDANNA)
