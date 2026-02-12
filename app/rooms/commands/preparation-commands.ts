@@ -33,7 +33,7 @@ import PreparationRoom from "../preparation-room"
 export class OnJoinCommand extends Command<
   PreparationRoom,
   {
-    client: Client<undefined, UserRecord>
+    client: Client<{ auth: UserRecord }>
     options: any
     auth: UserRecord
   }

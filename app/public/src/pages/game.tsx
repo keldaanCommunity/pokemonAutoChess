@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -548,6 +548,19 @@ export default function Game() {
 
       room.onMessage(Transfer.GAME_END, leave)
 
+      room.onDrop((code) => {
+        if (code >= 1001 && code <= 1015) {
+          // Between 1001 and 1015 - Abnormal socket shutdown
+          if (connectionStatus === ConnectionStatus.CONNECTED) {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+          }
+        }
+      })
+
+      room.onReconnect(() => {
+        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+      })
+
       room.onLeave((code) => {
         const shouldGoToLobby = [
           CloseCodes.ROOM_DELETED,
@@ -562,20 +575,8 @@ export default function Game() {
           const scene = getGameScene()
           if (scene?.music) scene.music.destroy()
           navigate("/lobby")
-        } else if (code >= 1001 && code <= 1015) {
-          // Between 1001 and 1015 - Abnormal socket shutdown
-          if (connectionStatus === ConnectionStatus.CONNECTED) {
-            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
-            // attempting to auto reconnect after 3 seconds
-            /* We leave 3 seconds because when refreshing the page, the connection is closed with code 1001 on Firefox
-              and this code is called, so the reconnection token might be reused before the page reload, causing the
-              reconnection token to be invalid the second time after page reload
-              3 seconds should be enough for the browser to kill all existing connections and timeouts for the tab
-              before reloading the page */
-            setTimeout(() => connectToGame(), 3000) //TOFIX: find a better way to handle this
-          } else {
-            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
-          }
+        } else {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
         }
       })
 
@@ -643,7 +644,7 @@ export default function Game() {
           $dpsMeter.onAdd((dps) => {
             dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
             const $dps = $(dps)
-            const fields: NonFunctionPropNames<IDps>[] = [
+            const fields = [
               "id",
               "name",
               "physicalDamage",
@@ -654,7 +655,7 @@ export default function Game() {
               "physicalDamageReduced",
               "specialDamageReduced",
               "shieldDamageTaken"
-            ]
+            ] satisfies NonFunctionPropNames<IDps>[]
             fields.forEach((field) => {
               $dps.listen(field, (value) => {
                 dispatch(
@@ -734,11 +735,11 @@ export default function Game() {
           const $experienceManager = $(experienceManager)
           if (player.id === uid) {
             dispatch(updateExperienceManager(experienceManager))
-            const fields: NonFunctionPropNames<IExperienceManager>[] = [
+            const fields = [
               "experience",
               "expNeeded",
               "level"
-            ]
+            ] satisfies NonFunctionPropNames<IExperienceManager>[]
             fields.forEach((field) => {
               $experienceManager.listen(field, (value) => {
                 dispatch(
@@ -806,7 +807,7 @@ export default function Game() {
           }
         })
 
-        const fields: NonFunctionPropNames<IPlayer>[] = [
+        const fields = [
           "name",
           "avatar",
           "boardSize",
@@ -829,7 +830,7 @@ export default function Game() {
           "goldenEggChance",
           "wildChance",
           "cellBattery"
-        ]
+        ] satisfies NonFunctionPropNames<IPlayer>[]
 
         fields.forEach((field) => {
           $player.listen(field, (value) => {

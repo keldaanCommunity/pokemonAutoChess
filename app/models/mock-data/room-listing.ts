@@ -1,4 +1,4 @@
-import { RoomAvailable } from "colyseus.js"
+import { RoomAvailable } from "@colyseus/sdk"
 import { GameMode } from "../../types/enum/Game"
 
 // Mock room data for testing

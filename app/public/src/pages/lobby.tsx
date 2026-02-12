@@ -1,4 +1,4 @@
-import { Room, RoomAvailable } from "colyseus.js"
+import { Room, RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"

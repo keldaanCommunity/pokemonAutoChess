@@ -1,6 +1,12 @@
 import { monitor } from "@colyseus/monitor"
-import config from "@colyseus/tools"
-import { matchMaker, RedisDriver, RedisPresence, ServerOptions } from "colyseus"
+import {
+  defineRoom,
+  defineServer,
+  matchMaker,
+  RedisDriver,
+  RedisPresence,
+  ServerOptions
+} from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -104,8 +110,8 @@ if (process.env.NODE_APP_INSTANCE) {
   gameOptions.devMode = true
 }*/
 
-export default config({
-  options: gameOptions,
+export const server = defineServer({
+  ...gameOptions,
 
   /* uWebSockets turned out to be unstable in production, so we are using the default transport
   2025-06-29T16:50:08: Error: Invalid access of closed uWS.WebSocket/SSLWebSocket.
@@ -117,17 +123,14 @@ export default config({
     })
   },*/
 
-  initializeGameServer: (gameServer) => {
-    /**
-     * Define your room handlers:
-     */
-    gameServer.define("after-game", AfterGameRoom)
-    gameServer.define("lobby", CustomLobbyRoom)
-    gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
-    gameServer.define("game", GameRoom).enableRealtimeListing()
+  rooms: {
+    "after-game": defineRoom(AfterGameRoom),
+    lobby: defineRoom(CustomLobbyRoom),
+    preparation: defineRoom(PreparationRoom).enableRealtimeListing(),
+    game: defineRoom(GameRoom).enableRealtimeListing()
   },
 
-  initializeExpress: (app) => {
+  express: (app) => {
     /**
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
