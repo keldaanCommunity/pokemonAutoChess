@@ -2072,7 +2072,7 @@
 		"STONE_AXE": "Inflige [50,SP] TRUE à la cible et dépose des pierres pointues autour d'elle. BOARD_EFFECT : Les pierres infligent 10 PHYSICAL par seconde et WOUND aux Pokémon qui marchent dessus, excepté les Pokémon de type ROCK.",
 		"FLASH": "Les ennemis dans un rayon de 3 cases sont BLINDED pendant [2,4,6,SP,ND=1] secondes.",
 		"CRUSH_CLAW": "Réduit la DEF de la cible par [5,10] puis déclenche deux attaques rapides infligeant chacune [100,SP]% de son ATK en PHYSICAL.",
-		"FIRE_LASH": "Inflige [120,SP] SPECIAL à la cible et ARMOR_BREAK pendant 4 secondes.",
+		"FIRE_LASH": "Inflige ARMOR_BREAK pendant 4 secondes et [30,60,120,SP] SPECIAL à la cible.",
 		"FAIRY_LOCK": "Répartit [90,SP] SPECIAL uniformément entre la cible et les ennemis ADJACENT. La cible est LOCKED pendant 5 secondes.",
 		"DRAIN_PUNCH": "Inflige [200,SP]% de l'ATK en SPECIAL et restaure 200% des dégâts infligés en HP.",
 		"GRAVITY": "Toute l'équipe adverse est LOCKED pendant [2,SP] secondes.",

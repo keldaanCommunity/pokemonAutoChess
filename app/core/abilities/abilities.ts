@@ -9975,9 +9975,10 @@ export class FireLashStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     target.status.triggerArmorReduction(4000, target)
     target.handleSpecialDamage(
-      120,
+      damage,
       board,
       AttackType.SPECIAL,
       pokemon,

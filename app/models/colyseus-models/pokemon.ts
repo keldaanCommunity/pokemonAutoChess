@@ -9438,9 +9438,9 @@ export class Salandit extends Pokemon {
   speed = 63
   def = 4
   speDef = 4
-  maxPP = 60
+  maxPP = 100
   range = 2
-  skill = Ability.TOXIC
+  skill = Ability.FIRE_LASH
   additional = true
 }
 
@@ -9453,9 +9453,9 @@ export class Salazzle extends Pokemon {
   speed = 63
   def = 8
   speDef = 8
-  maxPP = 60
+  maxPP = 100
   range = 2
-  skill = Ability.TOXIC
+  skill = Ability.FIRE_LASH
   additional = true
 }
 

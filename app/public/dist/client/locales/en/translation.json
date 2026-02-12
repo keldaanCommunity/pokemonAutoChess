@@ -2072,7 +2072,7 @@
 		"STONE_AXE": "Deal [50,SP] TRUE to the target and lay sharp stones around them. BOARD_EFFECT: stones deal 10 PHYSICAL per second and WOUND non ROCK Pokémon that walk on it.",
 		"FLASH": "Opponents within a 3-tiles radius are BLINDED for [2,4,6,SP,ND=1] seconds.",
 		"CRUSH_CLAW": "Reduce the target's DEF by [5,10] then perform two quick attacks, each dealing [100,SP]% of ATK as PHYSICAL.",
-		"FIRE_LASH": "Deal [120,SP] SPECIAL to the target and apply ARMOR_BREAK for 4 seconds.",
+		"FIRE_LASH": "Apply ARMOR_BREAK for 4 seconds and deal [30,60,120,SP] SPECIAL to the target.",
 		"FAIRY_LOCK": "Spread [90,SP] SPECIAL evenly across the target and ADJACENT enemy Pokémon. The target is LOCKED for 5 seconds.",
 		"DRAIN_PUNCH": " Deal [200,SP]% of ATK as SPECIAL and heal for 200% of the damage dealt.",
 		"GRAVITY": "All enemy Pokémon are LOCKED for [2,SP] seconds.",

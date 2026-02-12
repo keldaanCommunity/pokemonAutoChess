@@ -1,3 +1,7 @@
+# Changes to Pokémon & Abilities
+
+- New ability for Salandit line: Fire lash ; PP 60 → 100
+
 # Misc
 
 - Removed Buyer Fever scribble

@@ -1894,7 +1894,7 @@
 		"STONE_AXE": "Geben [50,SP] TRUE. Legt scharfe Steine um das Ziel herum. Die Steine bleiben auf dem Spielfeld liegen und fügen Pokémons, die darauf laufen, 10 PHYSICAL pro Sekunde zu und WOUND sie, wenn sie nicht ROCK.",
 		"FLASH": "Benachbarte Feinde sind BLINDED für [2,4,6,SP,ND=1] Sekunden",
 		"CRUSH_CLAW": "Verringere die DEF des Ziels um [5,10] und führe dann zwei schnelle Angriffe aus, die jeweils [100,SP]% der ATK als PHYSICAL verursachen",
-		"FIRE_LASH": "Fügt dem Ziel [120,SP] SPECIAL zu und wendet 4 Sekunden lang ARMOR_BREAK an",
+		"FIRE_LASH": "Fügt dem Ziel [30,60,120,SP] SPECIAL zu und wendet 4 Sekunden lang ARMOR_BREAK an",
 		"FAIRY_LOCK": "Verteilt [90,SP] SPECIAL gleichmäßig auf das Ziel und benachbarte Gegner. Das Ziel ist für 5 Sekunden LOCKED.",
 		"DRAIN_PUNCH": " Der nächste Angriff fügt [100,SP]% zusätzliche SPECIAL zu und stellt 200% HP des zugefügten Schadens wieder her.",
 		"GRAVITY": "Das gegnerische Team ist für [2,SP] Sekunden LOCKED",

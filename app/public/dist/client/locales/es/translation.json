@@ -1983,7 +1983,7 @@
 		"STONE_AXE": "Causa [50,SP] TRUE. Coloca piedras afiladas alrededor del objetivo. Las piedras permanecen en el campo causando 10 PHYSICAL por segundo y WOUND a los oponentes que caminan sobre él, si no son ROCK",
 		"FLASH": "Los oponentes en un radio de 3 casillas son BLINDED por [2,4,6,SP,ND=1] segundos.",
 		"CRUSH_CLAW": "Reduce la DEF del objetivo en [5,10] y luego realiza dos ataques rápidos infligiendo [100,SP]% del ATK como PHYSICAL cada uno",
-		"FIRE_LASH": "Hace [120,SP] SPECIAL y aplica ARMOR_BREAK por 4 segundos",
+		"FIRE_LASH": "Hace [30,60,120,SP] SPECIAL y aplica ARMOR_BREAK por 4 segundos",
 		"FAIRY_LOCK": "Esparce [90,SP] SPECIAL equitativamente entre el objetivo y los enemigos adyacentes. El objetivo es LOCKED por 5 segundos",
 		"DRAIN_PUNCH": "El próximo ataque inflige [100,SP]% de SPECIAL adicional y restaura 200% HP del daño infligido.",
 		"GRAVITY": "El equipo enemigo es LOCKED por [2,SP] segundos",

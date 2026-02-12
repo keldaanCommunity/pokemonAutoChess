@@ -2072,7 +2072,7 @@
 		"STONE_AXE": "造成[50,SP]点TRUE，并在目标周围设下尖锐的岩石。BOARD_EFFECT：这些岩石对在其中移动的非ROCK宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
 		"FLASH": "半径3格内的敌方宝可梦陷入BLINDED [2,4,6,SP,ND=1]秒。",
 		"CRUSH_CLAW": "降低目标[5,10]点DEF，随后对其快速发起两次攻击，造成PHYSICAL，数值相当于使用者[100,SP]%的ATK。",
-		"FIRE_LASH": "对目标造成[120,SP]点SPECIAL，并使其陷入ARMOR_BREAK 4秒。",
+		"FIRE_LASH": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入ARMOR_BREAK 4秒。",
 		"FAIRY_LOCK": "使目标陷入LOCKED 5秒，其和ADJACENT敌方宝可梦分摊[90,SP]点SPECIAL。",
 		"DRAIN_PUNCH": "对目标造成SPECIAL，数值相当于[200,SP]%的ATK，使用者自身恢复造成伤害量的200%。",
 		"GRAVITY": "使所有敌方宝可梦陷入LOCKED [2,SP]秒。",
