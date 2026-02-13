@@ -25,7 +25,6 @@ import {
 } from "../../types/enum/Game"
 import {
   ArtificialItems,
-  HMs,
   Item,
   ItemComponentsNoFossilOrScarf,
   MissionOrder,
@@ -34,6 +33,9 @@ import {
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMs,
+  TMsBronze,
+  TMsGold,
+  TMsSilver,
   ToolsBuried,
   WeatherRocks
 } from "../../types/enum/Item"
@@ -542,9 +544,7 @@ export default class Player extends Schema implements IPlayer {
 
     let tmInInventory
     do {
-      tmInInventory = this.items.findIndex(
-        (item, index) => TMs.includes(item) || HMs.includes(item)
-      )
+      tmInInventory = this.items.findIndex((item) => TMs.includes(item))
       if (tmInInventory != -1) {
         this.items.splice(tmInInventory, 1)
       }
@@ -836,10 +836,10 @@ export default class Player extends Schema implements IPlayer {
 }
 
 function pickRandomTMs() {
-  const firstTM = pickRandomIn(TMs)
-  const secondTM = pickRandomIn(TMs.filter((tm) => tm !== firstTM))
-  const hm = pickRandomIn(HMs)
-  return [firstTM, secondTM, hm]
+  const bronzeTM = pickRandomIn(TMsBronze)
+  const silverTM = pickRandomIn(TMsSilver)
+  const goldTM = pickRandomIn(TMsGold)
+  return [bronzeTM, silverTM, goldTM]
 }
 
 function initBuriedItems() {

@@ -1,4 +1,4 @@
-import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../config"
+import { ARMOR_FACTOR } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
@@ -7,16 +7,13 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   AbilityPerTM,
-  Berries,
   Dish,
   DishesGoingToInventory,
   FishingRod,
   Flavors,
-  HMs,
   Item,
   ItemRecipe,
   MemoryDiscs,
-  Mushrooms,
   NonSpecialBerries,
   OgerponMasks,
   Sweets,
@@ -441,14 +438,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     ])
   ),
 
-  ...Object.fromEntries(
-    [...TMs, ...HMs].map((tm) => [
+  ...Object.fromEntries(TMs.map((tm) => [
       tm,
       [
         new OnItemDroppedEffect(({ pokemon, player, item }) => {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
-            return false // prevent equipping TMs/HMs on non-human pokemon
+            return false // prevent equipping TMs on non-human pokemon
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
