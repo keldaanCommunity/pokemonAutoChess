@@ -30,6 +30,8 @@
 
 # Changes to Synergies
 
+- Nerf Ice: Freeze chance 30% → 25% ; Special Defense 4/12/30/60 → 4/12/25/50
+
 # Gameplay changes
 
 - POSSESSED is no longer considered a negative status if by being possessed it came to your team

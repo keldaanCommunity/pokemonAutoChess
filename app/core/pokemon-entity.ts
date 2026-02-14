@@ -1072,7 +1072,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
 
-      const freezeChance = 0.3 + nbIcyRocks * 0.05
+      const freezeChance = 0.25 + nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
         target.status.triggerFreeze(2000, target)
       }
