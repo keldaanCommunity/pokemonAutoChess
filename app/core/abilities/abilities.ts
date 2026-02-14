@@ -15870,12 +15870,12 @@ export class PowderStrategy extends AbilityStrategy {
     const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
 
     // Find the enemy with the highest SPEED
-    const enemies = board.cells
-      .filter((entity) => entity && entity.team !== pokemon.team)
-      .map((entity) => entity as PokemonEntity)
+    const enemies = board.getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map((cell) => cell.value as PokemonEntity)
       .sort((a, b) => b.speed - a.speed)
 
-    const enemyWithHighestSpeed = enemies[0]
+    const enemyWithHighestSpeed = enemies[0] ?? target
     if (enemyWithHighestSpeed) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
@@ -15909,25 +15909,7 @@ export class PowderStrategy extends AbilityStrategy {
                 cell.value?.addSpeed(speedNerf, pokemon, 0, false)
               }, 5000)
             )
-          }
-          if (
-            cell.value.team === pokemon.team &&
-            cell.value.id !== pokemon.id
-          ) {
-            // Ally: heal and increase SPEED
-            cell.value.handleHeal(damage, pokemon, 1, crit)
-            const speedBuff = max(MAX_SPEED)(
-              speedFactor *
-                (1 + pokemon.ap / 100) *
-                (crit ? pokemon.critPower : 1)
-            )
-            cell.value.addSpeed(speedBuff, pokemon, 0, false)
-            cell.value.commands.push(
-              new DelayedCommand(() => {
-                cell.value?.addSpeed(-speedBuff, pokemon, 0, false)
-              }, 5000)
-            )
-          }
+          }        
         }
       }
     }

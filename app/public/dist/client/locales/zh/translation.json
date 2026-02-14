@@ -2230,7 +2230,7 @@
 		"BULLET_PUNCH": "对目标造成[40,SP]点TRUE，随后提升[40,SP]点SPEED，持续2秒。",
 		"EAR_DIG": "对目标造成SPECIAL，数值相当于[30,60,120,SP]加目标所处位置的坑洞深度等级乘以[5,10,20,SP]。若目标并不处于坑洞之中，还会在目标所在的位置挖洞。",
 		"POWDER_SNOW": "将冰冷的细雪吹向目标，对一条直线上的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并有[15,30,50,LK]%的概率使他们陷入FREEZE 2秒。",
-		"POWDER": "朝SPEED最高的敌方宝可梦发射一团粉尘云。接触粉尘云的敌方宝可梦受到[10,20,30,SP]点SPECIAL并降低30点SPEED 5秒。我方宝可梦则恢复[10,20,30,SP]点HP并提升30点SPEED 5秒。",
+		"POWDER": "朝SPEED最高的敌方宝可梦发射一团粉尘云。接触粉尘云的敌方宝可梦受到[10,20,30,SP]点SPECIAL并降低30点SPEED 5秒。",
 		"LINGERING_AROMA": "在接下来的5秒内，使用者受到近战攻击时使攻击者受到[10,20,SP]点SPECIAL，并失去5点PP。",
 		"RAGING_BULL": "移除目标的PROTECT，$t(ability.REFLECT)，$t(ability.MAGIC_BOUNCE)等防护类状态，并使之陷入ARMOR_BREAK 3秒，随后对其造成[20,40,80,SP]点SPECIAL。",
 		"ELECTRIFY": "使STRONGEST非ELECTRIC我方宝可梦获得ELECTRIC_FIELD，当前激活的ELECTRIC共鸣效果和[15,30,60,SP]点SHIELD。若没有满足条件的我方宝可梦，对自身释放此招式。",

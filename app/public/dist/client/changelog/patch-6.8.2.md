@@ -13,6 +13,7 @@
 - Change Snorlax: HP 260 → 300
 - Nerf Kakuna: Def 8 → 6
 - Silvally no longer devolves to Type Null when losing all its synergy items
+- Nerf Vivillon: PP 90 → 100 ; now targets the highest SPEED enemy **within range**. Removed ally buffs.
 
 # Changes to Items
 

@@ -2228,7 +2228,7 @@
 		"BULLET_PUNCH": "Infliggi [40,SP] TRUE al bersaglio, poi guadagna [40,SP] SPEED per 2 secondi.",
 		"EAR_DIG": "Infliggi [30,60,120,SP] SPECIAL + [5,10,20,SP] per ciascun grado di profondità del buco in cui è situato il bersaglio. Se il bersaglio non è in un buco, ne scava uno ai suoi piedi.",
 		"POWDER_SNOW": "Soffia via della polvere innevata in direzione del bersaglio, infliggendo [20,40,80,SP] SPECIAL a tutti i nemici in linea retta con il [15,30,50,LK]% di chance di affliggerli con FREEZE per 2 secondi.",
-		"POWDER": "Rilascia della polvere verso il nemico dalla SPEED più alta. I nemici toccati dalla polvere subiscono [10,20,30,SP] SPECIAL e la loro SPEED viene ridotta di 30 per 5 secondi. Gli alleati sono curati per [10,20,30,SP] HP e guadagnano 30 di SPEED per 5 secondi.",
+		"POWDER": "Rilascia della polvere verso il nemico dalla SPEED più alta nel raggio d'azione. I nemici toccati dalla polvere subiscono [10,20,30,SP] SPECIAL e la loro SPEED viene ridotta di 30 per 5 secondi.",
 		"LINGERING_AROMA": "Per i prossimi 5 secondi, quando l'utilizzatore viene colpito da un attacco corpo a corpo, infligge [10,20,SP] SPECIAL all'attaccante e gli fa perdere 5 PP.",
 		"RAGING_BULL": "Distrugge barriere quali PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) e infligge ARMOR_BREAK per 3 secondi per poi infliggere [20,40,80,SP] SPECIAL al bersaglio.",
 		"ELECTRIFY": "Dà ELECTRIC_FIELD al tuo alleato STRONGEST non-ELECTRIC e tutti gli effetti della sinergia ELECTRIC attiva +[15,30,60,SP] di SHIELD. Se nessun alleato rispecchia il criterio, usa l'abilità su sé stesso.",
