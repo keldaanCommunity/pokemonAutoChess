@@ -2448,8 +2448,8 @@ export class Axew extends Pokemon {
   evolution = Pkm.FRAXURE
   hp = 80
   atk = 9
-  speed = 56
-  def = 2
+  speed = 62
+  def = 5
   speDef = 4
   maxPP = 100
   range = 1
@@ -2465,8 +2465,8 @@ export class Fraxure extends Pokemon {
   evolution = Pkm.HAXORUS
   hp = 130
   atk = 18
-  speed = 56
-  def = 4
+  speed = 62
+  def = 10
   speDef = 8
   maxPP = 100
   range = 1
@@ -2480,8 +2480,8 @@ export class Haxorus extends Pokemon {
   stars = 3
   hp = 200
   atk = 27
-  speed = 56
-  def = 8
+  speed = 62
+  def = 15
   speDef = 12
   maxPP = 100
   range = 1
@@ -12062,7 +12062,7 @@ export class Tepig extends Pokemon {
   stars = 1
   evolution = Pkm.PIGNITE
   evolutionRule = new HatchEvolutionRule()
-  hp = 70
+  hp = 75
   atk = 7
   speed = 46
   def = 4
@@ -12079,7 +12079,7 @@ export class Pignite extends Pokemon {
   stars = 2
   evolution = Pkm.EMBOAR
   evolutionRule = new HatchEvolutionRule()
-  hp = 140
+  hp = 150
   atk = 12
   speed = 46
   def = 8
@@ -12094,7 +12094,7 @@ export class Emboar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.FIRE, Synergy.FIGHTING])
   rarity = Rarity.HATCH
   stars = 3
-  hp = 210
+  hp = 230
   atk = 20
   speed = 46
   def = 12

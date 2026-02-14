@@ -14,6 +14,9 @@
 - Nerf Kakuna: Def 8 → 6
 - Silvally no longer devolves to Type Null when losing all its synergy items
 - Nerf Vivillon: PP 90 → 100 ; now targets the highest SPEED enemy **within range**. Removed ally buffs.
+- Buff Outrage (Axew, Druddigon): 150/200/250% ATK → 300% ATK at all tiers
+- Buff Axew line: Def: 2/4/8 → 5/10/15 ; Speed: 56 → 62
+- Buff Tepig line: HP 70/140/210 → 75/150/230 
 
 # Changes to Items
 
