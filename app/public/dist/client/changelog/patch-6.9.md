@@ -5,6 +5,7 @@
 # Changes to Synergies
 
 - Human HM have been removed, and TM are now split into 3 categories: Bronze, Silver and Gold ; each category matching one synergy level of Human synergy. Removed TM Taunt. New TMs: Charge, Focus Punch, Hyper Beam, Protect, Skill Swap
+- Nerf Human healing: 25/40/60% → 25/35/50%
 
 # Misc
 
