@@ -7,6 +7,7 @@
 - Nerf Grapploct line: SPEED 39 → 27, DEF/SPE_DEF: 5/9 → 4/8, ATK 6/12 → 6/14, HP: 70/180 → 70/160
 - Nerf Weezing line: HP 70/170 → 65/155, DEF: 6/10 → 8/12, SPE_DEF: 6/10 → 4/7 (same nerfs for Galarian Weezing)
 - Nerf Dewpider line: ATK 8/17 → 6/13, switched DEF and SPE_DEF
+- Nerf Misdreavus line: Attack 7/20 → 6/18
 - Change Mind Blown (Blacephalon): Yellow fireworks no longer inflict FLINCH
 - Change Snorlax: HP 260 → 300
 - Silvally no longer devolves to Type Null when losing all its synergy items

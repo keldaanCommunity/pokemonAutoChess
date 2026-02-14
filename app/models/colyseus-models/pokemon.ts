@@ -13124,7 +13124,7 @@ export class Misdreavus extends Pokemon {
   stars = 1
   evolution = Pkm.MISMAGIUS
   hp = 80
-  atk = 7
+  atk = 6
   speed = 59
   def = 4
   speDef = 6
@@ -13143,7 +13143,7 @@ export class Mismagius extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 160
-  atk = 20
+  atk = 18
   speed = 59
   def = 4
   speDef = 8
