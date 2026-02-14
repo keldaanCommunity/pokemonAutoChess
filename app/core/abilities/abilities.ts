@@ -3649,7 +3649,7 @@ export class HydroSteamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [35, 70, 140][pokemon.stars - 1] ?? 140
+    const damage = [30, 60, 100][pokemon.stars - 1] ?? 100
 
     pokemon.orientation = board.orientation(
       pokemon.positionX,

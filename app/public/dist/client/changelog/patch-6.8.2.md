@@ -8,6 +8,7 @@
 - Nerf Weezing line: HP 70/170 → 65/155, DEF: 6/10 → 8/12, SPE_DEF: 6/10 → 4/7 (same nerfs for Galarian Weezing)
 - Nerf Dewpider line: ATK 8/17 → 6/13, switched DEF and SPE_DEF
 - Nerf Misdreavus line: Attack 7/20 → 6/18
+- Nerf Hydro Steam (Walking Wake): 35/70/140 → 30/60/100 special
 - Change Mind Blown (Blacephalon): Yellow fireworks no longer inflict FLINCH
 - Change Snorlax: HP 260 → 300
 - Silvally no longer devolves to Type Null when losing all its synergy items

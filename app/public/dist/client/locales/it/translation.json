@@ -2210,7 +2210,7 @@
 		"SHELL_SIDE_ARM": "Lancia un proiettile che rimbalza su 3 bersagli aggiuntivi, prioritizzando i Pokémon dai HP alti. Infligge POISONNED ai nemici per [2,3,SP] secondi e dà [10,20] AP agli alleati.",
 		"TRIPLE_DIVE": "L'utilizzatore performa un tuffo triplo veramente portentoso, colpendo 3 bersagli diversi dai HP bassi con degli spruzzi d'acqua, infliggendo [15,30,45,SP] SPECIAL.",
 		"MOONBLAST": "Spara 6 lune, ciascuna infliggendo [18,SP] SPECIAL. Mettendo KO un Pokémon con una delle lune induce le lune rimanenti a cambiare bersaglio, colpendo il nemico più vicino e aggiungendo 1 altra luna.",
-		"HYDRO_STEAM": "Spruzza un getto d'acqua bollente veramente portentoso, infliggendo [35,70,140,SP] SPECIAL a tutti i nemici in un un cono dal raggio di 2 caselle e causando loro BURN per 4 secondi.",
+		"HYDRO_STEAM": "Spruzza un getto d'acqua bollente veramente portentoso, infliggendo [30,60,100,SP] SPECIAL a tutti i nemici in un un cono dal raggio di 2 caselle e causando loro BURN per 4 secondi.",
 		"PLASMA_FISSION": "Spara un proiettile di plasma verso il bersaglio, infliggendogli [60,SP] SPECIAL. Si divide poi in due proiettili più piccoli, che infliggono 50% del SPECIAL in meno ogni volta che trapassano un nemico.",
 		"SUPER_HEAT": "Frigge un area a CONE davanti a sé, infliggendo 9 x [10,SP] SPECIAL lungo una durata di 3 secondi, infliggendo ARMOR_BREAK per 1 secondo.",
 		"POWER_WASH": "Allaga la riga con i HP nemici totali maggiori con gocce di plasma, infliggendo [160,SP] SPECIAL distribuito equamente tra tutti i nemici in quella riga.",

@@ -2212,7 +2212,7 @@
 		"SHELL_SIDE_ARM": "Lance une vague qui rebondit sur 3 cibles supplémentaires, en privilégiant les Pokémon avec le plus de HP. Les ennemis deviennent POISONNED pendant [2,3,SP] secondes et les alliés gagnent [10,20] AP.",
 		"TRIPLE_DIVE": "Le lanceur effectue un triple plongeon parfaitement synchronisé, frappant 3 cibles différentes à faible HP avec les éclaboussures d'eau infligeant [15,30,45,SP] SPECIAL.",
 		"MOONBLAST": "Tire 6 lunes infligeant [18,SP] SPECIAL chacune. Mettre KO un Pokémon redirige les lunes restantes vers l'ennemi le plus proche et accorde 1 lune bonus.",
-		"HYDRO_STEAM": "Asperge avec un puissant jet d'eau bouillante, infligeant [35,70,140,SP] SPECIAL aux ennemis dans un CONE de 2 cases et infligeant BURN pendant 4 secondes.",
+		"HYDRO_STEAM": "Asperge avec un puissant jet d'eau bouillante, infligeant [30,60,100,SP] SPECIAL aux ennemis dans un CONE de 2 cases et infligeant BURN pendant 4 secondes.",
 		"PLASMA_FISSION": "Tire un projectile de plasma sur la cible actuelle, infligeant [60,SP] points de dégâts SPECIAL au premier ennemi touché. Le projectile se divise ensuite en deux, infligeant 50 % de dégâts SPECIAL en moins à chaque passage à travers un ennemi.",
 		"SUPER_HEAT": "Émet un CONE de flammes qui inflige 9 x [10,SP] SPECIAL pendant les 3 secondes suivantes et ARMOR_BREAK aux ennemis pendant 1 seconde.",
 		"POWER_WASH": "Inonde la rangée d'ennemis ayant le plus de HP totaux avec des gouttes de plasma. Inflige [160,SP] SPECIAL répartis équitablement entre tous les ennemis de cette rangée.",
