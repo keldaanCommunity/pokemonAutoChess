@@ -19660,7 +19660,7 @@ export class Scatterbug extends Pokemon {
   speed = 52
   def = 3
   speDef = 3
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
   passive = Passive.HATCH
@@ -19700,7 +19700,7 @@ export class Spewpa extends Pokemon {
   speed = 52
   def = 5
   speDef = 5
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
   passive = Passive.SPEWPA
@@ -19719,7 +19719,7 @@ export class Vivillon extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19737,7 +19737,7 @@ export class VivillonIcySnow extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19755,7 +19755,7 @@ export class VivillonPolar extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19769,7 +19769,7 @@ export class VivillonTundra extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19787,7 +19787,7 @@ export class VivillonContinental extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19805,7 +19805,7 @@ export class VivillonGarden extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19823,7 +19823,7 @@ export class VivillonElegant extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19841,7 +19841,7 @@ export class VivillonModern extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19859,7 +19859,7 @@ export class VivillonMarine extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19877,7 +19877,7 @@ export class VivillonArchipelago extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19895,7 +19895,7 @@ export class VivillonHighPlains extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19909,7 +19909,7 @@ export class VivillonSandstorm extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19927,7 +19927,7 @@ export class VivillonRiver extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19945,7 +19945,7 @@ export class VivillonMonsoon extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19963,7 +19963,7 @@ export class VivillonSavanna extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19977,7 +19977,7 @@ export class VivillonSun extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -19995,7 +19995,7 @@ export class VivillonOcean extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -20013,7 +20013,7 @@ export class VivillonJungle extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -20031,7 +20031,7 @@ export class VivillonFancy extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }
@@ -20049,7 +20049,7 @@ export class VivillonPokeball extends Pokemon {
   speed = 52
   def = 7
   speDef = 7
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.POWDER
 }

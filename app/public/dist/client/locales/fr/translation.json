@@ -2230,7 +2230,7 @@
 		"BULLET_PUNCH": "Inflige [40,SP] TRUE à la cible, puis gagne [40,SP] SPEED pendant 2 secondes.",
 		"EAR_DIG": "Inflige [30,60,120,SP] SPECIAL + [5,10,20,SP] par niveau de profondeur du trou où se trouve la cible. Si la cible n'est pas dans un trou, creuse en un sous elle.",
 		"POWDER_SNOW": "De la neige poudreuse est soufflée vers la cible, infligeant [20,40,80,SP] SPECIAL à tous les ennemis alignés derrière la cible avec [15,30,50,LK]% de chances de les FREEZE pendant 2 secondes.",
-		"POWDER": "Projette un nuage de poudre sur l'ennemi avec la SPEED la plus élevée. Les ennemis touchés subissent [10,20,30,SP] SPECIAL et leur SPEED est réduite de 30 pendant 5 secondes. Les alliés récupèrent [10,20,30,SP] HP et gagnent +30 VITESSE pendant 5 secondes.",
+		"POWDER": "Projette un nuage de poudre sur l'ennemi à portée avec la SPEED la plus élevée. Les ennemis touchés subissent [10,20,30,SP] SPECIAL et leur SPEED est réduite de 30 pendant 5 secondes.",
 		"LINGERING_AROMA": "Pendant les 5 prochaines secondes, chaque attaque au corps à corps subit par le lanceur fait que l'attaquant reçoit [10,20,SP] SPECIAL et perd 5 PP.",
 		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible",
 		"ELECTRIFY": "Donne un ELECTRIC_FIELD à votre allié non-ELECTRIC STRONGEST et tous les effets de la synergie ELECTRIC active + [15,30,60,SP] SHIELD. Si aucun allié n'est trouvé, lance la capacité sur soit-même.",
