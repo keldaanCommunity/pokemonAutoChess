@@ -65,10 +65,12 @@ export function WikiType(props: { type: Synergy }) {
     .sort((a, b) => a.stars - b.stars) // put first stage first
     .filter((p, index, list) => {
       if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-      if (p.rarity === Rarity.SPECIAL) return true // show all summons & specials, even in the same family
+      if (p.rarity === Rarity.SPECIAL) return !!preferences.showSpecialPool // show all summons & specials, even in the same family
       if (!preferences.showAltForms && PkmAltForms.includes(p.name))
         return false
       if (preferences.showEvolutions) return true
+      if (p.additional && !preferences.showAdditionalPool) return false
+      if (p.regional && !preferences.showRegionalPool) return false
 
       const prevolution = list.find(
         (p2) =>
