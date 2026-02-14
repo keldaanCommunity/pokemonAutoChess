@@ -21,6 +21,8 @@
 - TWIST_BAND now also prevents abilities that steal stat buffs from stealing buffs from the wearer. (e.g. Manaphy Heart Swap)
 - Nerf ELECTIRIZER: remove 30 speed base stat
 - Nerf POKERUS_VIAL: infection every 2.5 seconds → every 3 seconds
+- Nerf PROTECTOR: SHIELD 100 → 75
+- Nerf LIGHT_BALL: AP 75 → 50
 - Change TERRAIN_EXTENDER: 50 shield 50 AP → 50 shield 20 PP
 
 # Changes to Synergies
