@@ -1,3 +1,7 @@
+# Changes to Synergies
+
+- Nerf Ice: Freeze chance 30% → 25% ; Special Defense 4/12/30/60 → 4/12/25/50
+
 # Changes to Pokémon & Abilities
 
 - New ability for Salandit line: Fire lash ; PP 60 → 100
