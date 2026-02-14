@@ -11,6 +11,7 @@
 - Nerf Hydro Steam (Walking Wake): 35/70/140 → 30/60/100 special
 - Change Mind Blown (Blacephalon): Yellow fireworks no longer inflict FLINCH
 - Change Snorlax: HP 260 → 300
+- Nerf Kakuna: Def 8 → 6
 - Silvally no longer devolves to Type Null when losing all its synergy items
 
 # Changes to Items
