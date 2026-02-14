@@ -4891,7 +4891,7 @@ export class Kakuna extends Pokemon {
   hp = 110
   atk = 10
   speed = 35
-  def = 8
+  def = 6
   speDef = 4
   maxPP = 100
   range = 1
