@@ -330,10 +330,10 @@ export interface IPokemon {
   stacks: number
   stacksRequired: number
   skill: Ability
+  tm: Ability
   passive: Passive
   items: SetSchema<Item>
   dishes: SetSchema<Item>
-  tm: Ability | null
   shiny: boolean
   emotion: Emotion
   additional: boolean
@@ -540,6 +540,7 @@ export interface IPokemonEntity {
   types: SetSchema<Synergy>
   stars: number
   skill: Ability
+  tm: Ability
   passive: Passive
   status: Status
   count: Count
