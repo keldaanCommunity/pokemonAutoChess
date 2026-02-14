@@ -1,4 +1,5 @@
 import { ARMOR_FACTOR } from "../../config"
+import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
@@ -311,7 +312,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (!pokemon) return
   const chef = pokemon
 
-  const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
+  const gourmetLevel = getSynergyStep(player.synergies, Synergy.GOURMET)
   const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
@@ -438,7 +439,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     ])
   ),
 
-  ...Object.fromEntries(TMs.map((tm) => [
+  ...Object.fromEntries(
+    TMs.map((tm) => [
       tm,
       [
         new OnItemDroppedEffect(({ pokemon, player, item }) => {
@@ -449,10 +451,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.skill = ability
           pokemon.maxPP = 100
           removeInArray(player.items, item)
-          const tmIndex = player.tms.findIndex((tm) => tm === item)
-          if (tmIndex !== -1) {
-            player.tms[tmIndex] = null
-          }
           return false
         })
       ]

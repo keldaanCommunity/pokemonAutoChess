@@ -16,6 +16,7 @@ import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
@@ -24,6 +25,7 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
+  AbilityPerTM,
   ArtificialItems,
   Item,
   ItemComponentsNoFossilOrScarf,
@@ -74,7 +76,7 @@ import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
-import Synergies, { computeSynergies } from "./synergies"
+import Synergies, { computeSynergies, getSynergyStep } from "./synergies"
 import { Wanderer } from "./wanderer"
 
 export default class Player extends Schema implements IPlayer {
@@ -149,7 +151,7 @@ export default class Player extends Schema implements IPlayer {
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   scarvesItems: Item[] = []
   buriedItems: (Item | null)[] = initBuriedItems()
-  tms: (Item | null)[] = pickRandomTMs()
+  tms: Item[] = pickRandomTMs()
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
@@ -370,7 +372,7 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies.get(Synergy.HUMAN) !==
       updatedSynergies.get(Synergy.HUMAN)
     ) {
-      this.updateTms()
+      this.updateTms(previousSynergies, updatedSynergies)
     }
 
     if (
@@ -470,14 +472,10 @@ export default class Player extends Schema implements IPlayer {
     updatedSynergies: Map<Synergy, number>
   ): boolean {
     let needsRecomputingSynergiesAgain = false
-    const previousNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
-      (n) => (previousSynergies.get(Synergy.NORMAL) ?? 0) >= n
-    ).length
+    const previousNbScarves = getSynergyStep(previousSynergies, Synergy.NORMAL)
     const previousScarves = this.getScarvesItemsWithNbScarves(previousNbScarves)
 
-    const newNbScarves = SynergyTriggers[Synergy.NORMAL].filter(
-      (n) => (updatedSynergies.get(Synergy.NORMAL) ?? 0) >= n
-    ).length
+    const newNbScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
     const newScarves = this.getScarvesItemsWithNbScarves(newNbScarves)
 
     if (newScarves.length > previousScarves.length) {
@@ -521,7 +519,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWeatherRocks() {
-    const nbWeatherRocks = this.synergies.getSynergyStep(Synergy.ROCK)
+    const nbWeatherRocks = getSynergyStep(this.synergies, Synergy.ROCK)
 
     let weatherRockInInventory
     do {
@@ -539,27 +537,34 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
-  updateTms() {
-    const nbTMs = this.synergies.getSynergyStep(Synergy.HUMAN)
-
-    let tmInInventory
-    do {
-      tmInInventory = this.items.findIndex((item) => TMs.includes(item))
-      if (tmInInventory != -1) {
-        this.items.splice(tmInInventory, 1)
-      }
-    } while (tmInInventory != -1)
-
-    if (nbTMs > 0) {
-      const tmsCollected = this.tms
-        .slice(0, nbTMs)
-        .filter<Item>((tm): tm is Item => tm != null)
-      this.items.push(...tmsCollected)
+  updateTms(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ) {
+    const previousNbTMs = getSynergyStep(previousSynergies, Synergy.HUMAN)
+    const newNbTMs = getSynergyStep(updatedSynergies, Synergy.HUMAN)
+    if (previousNbTMs < newNbTMs) {
+      // some TMs are gained
+      const gainedTMs = this.tms.slice(previousNbTMs, newNbTMs)
+      this.items.push(...gainedTMs)
+    } else if (newNbTMs < previousNbTMs) {
+      // some TMs are lost, we need to remove them from the inventory and from the pokemons that hold them
+      const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
+      lostTMs.forEach((tm) => {
+        removeInArray(this.items, tm)
+        const pokemonWithThisTm = values(this.board).find(
+          (p) => p.tm === AbilityPerTM[tm]
+        )
+        if (pokemonWithThisTm) {
+          pokemonWithThisTm.tm = Ability.DEFAULT
+          pokemonWithThisTm.skill = getPokemonData(pokemonWithThisTm.name).skill
+        }
+      })
     }
   }
 
   updateFishingRods() {
-    const fishingLevel = this.synergies.getSynergyStep(Synergy.WATER)
+    const fishingLevel = getSynergyStep(this.synergies, Synergy.WATER)
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
       removeInArray<Item>(this.items, Item.OLD_ROD)
@@ -587,7 +592,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateChefsHats() {
-    const gourmetLevel = this.synergies.getSynergyStep(Synergy.GOURMET)
+    const gourmetLevel = getSynergyStep(this.synergies, Synergy.GOURMET)
     const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
     const hatHolders = values(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
