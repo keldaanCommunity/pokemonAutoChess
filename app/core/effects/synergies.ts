@@ -339,6 +339,7 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
       )
       if (
         !targetAtContact ||
+        targetAtContact.range > 1 ||
         distanceC(
           pokemon.targetX,
           pokemon.targetY,

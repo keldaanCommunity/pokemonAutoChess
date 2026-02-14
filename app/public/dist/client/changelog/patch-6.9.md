@@ -1,6 +1,7 @@
 # Changes to Synergies
 
 - Nerf Ice: Freeze chance 30% → 25% ; Special Defense 4/12/30/60 → 4/12/25/50
+- Fighting 8 now only throw away melee enemies (1 range)
 
 # Changes to Pokémon & Abilities
 

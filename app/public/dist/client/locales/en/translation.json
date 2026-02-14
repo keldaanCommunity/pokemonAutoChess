@@ -3381,7 +3381,7 @@
 		"FIRE": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every attack.",
 		"WATER": "WATER Pokémon generate more PP and can be fished with a rod.",
 		"ELECTRIC": "ELECTRIC Pokémon basic attacks can trigger two additional attacks.{{additionalInfo}}",
-		"FIGHTING": "FIGHTING Pokémon block a flat amount of damage on every hit received. After 10 hits blocked, throw the target away, destroying their SHIELD.",
+		"FIGHTING": "FIGHTING Pokémon block a flat amount of damage on every hit received. After 10 hits blocked, throw the melee target away, destroying their SHIELD.",
 		"PSYCHIC": "PSYCHIC Pokémon gain additional AP and attract Unowns.",
 		"DARK": "DARK Pokémon's critical hits are more powerful and more frequent. Melee Dark Pokémon jump to the farthest target reachable.",
 		"STEEL": "STEEL Pokémon deal a percentage of their damage as TRUE.",
