@@ -16110,13 +16110,14 @@ export class HyperBeamStrategy extends AbilityStrategy {
             )
           }
         })
-        pokemon.status.triggerFatigue(3000, pokemon)
+        pokemon.status.triggerFatigue(5000, pokemon)
       }, 1000)
     )
   }
 }
 
 export class SkillSwapStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -16124,14 +16125,16 @@ export class SkillSwapStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.skill = target.skill
-    pokemon.maxPP = target.refToBoardPokemon
-      ? target.refToBoardPokemon.maxPP
-      : target.maxPP
-    if (pokemon.refToBoardPokemon) {
-      pokemon.refToBoardPokemon.skill = target.skill
+    if (AbilityStrategies[target.skill].copyable) {
+      pokemon.skill = target.skill
+      pokemon.maxPP = target.refToBoardPokemon
+        ? target.refToBoardPokemon.maxPP
+        : target.maxPP
+      if (pokemon.refToBoardPokemon) {
+        pokemon.refToBoardPokemon.skill = target.skill
+      }
+      AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     }
-    AbilityStrategies[target.skill].process(pokemon, board, target, crit)
   }
 }
 

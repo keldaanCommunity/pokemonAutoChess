@@ -2285,7 +2285,7 @@
 		"MERCILESS": "MONSTER pueden tener de objetivo a aliados con menos del 10% de sus HP máximos.",
 		"MEDITATE": "Recupera el 25% del daño inflingido como HP. Consigue una MT aleatoria.",
 		"FOCUS_ENERGY": "Recupera el 35% del daño inflingido como HP. Consigue otra MT aleatoria.",
-		"CALM_MIND": "Recupera el 50% del daño inflingido como HP. Consigue una MO aleatoria.",
+		"CALM_MIND": "Recupera el 50% del daño inflingido como HP. Consigue una MT aleatoria.",
 		"SWIFT_SWIM": "-30% de duración de problemas de estado. La ola cura un 10% de los HP máximos e inflige un 5% de los HP máximos como TRUE.",
 		"HYDRATION": "-50% de duración de problemas de estado. La ola cura un 20% de los HP máximos e inflige un 10% de los HP máximos como TRUE.",
 		"WATER_VEIL": "-70% de duración de problemas de estado. La ola cura un 30% de los HP máximos e inflige un 15% de los HP máximos como TRUE. Una segunda ola golpea el tablero después de 16 segundos.",
