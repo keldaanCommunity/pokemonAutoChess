@@ -1,8 +1,7 @@
 import {
   createSlice,
   PayloadAction,
-  SliceCaseReducers,
-  SliceSelectors
+  Slice
 } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import Simulation from "../../../core/simulation"
@@ -91,15 +90,7 @@ const initialState: GameStateStore = {
   podium: new Array<ILeaderboardInfo>()
 }
 
-type GameStoreReducers = SliceCaseReducers<GameStateStore>
-type GameStoreSelectors = SliceSelectors<GameStateStore>
-
-export const gameSlice = createSlice<
-  GameStateStore,
-  GameStoreReducers,
-  "game",
-  GameStoreSelectors
->({
+export const gameSlice: Slice<GameStateStore> = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {
