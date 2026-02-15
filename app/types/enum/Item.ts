@@ -171,20 +171,16 @@ export enum Item {
   ZYGARDE_CUBE = "ZYGARDE_CUBE",
   TM_RAGE = "TM_RAGE",
   TM_RETURN = "TM_RETURN",
-  TM_TAUNT = "TM_TAUNT",
-  TM_BULK_UP = "TM_BULK_UP",
-  TM_REFLECT = "TM_REFLECT",
-  TM_DISABLE = "TM_DISABLE",
   TM_COUNTER = "TM_COUNTER",
+  TM_DISABLE = "TM_DISABLE",
+  TM_BULK_UP = "TM_BULK_UP",
+  TM_CHARGE = "TM_CHARGE",
+  TM_REFLECT = "TM_REFLECT",
   TM_PAYDAY = "TM_PAYDAY",
-  HM_CUT = "HM_CUT",
-  HM_FLY = "HM_FLY",
-  HM_SURF = "HM_SURF",
-  HM_STRENGTH = "HM_STRENGTH",
-  HM_FLASH = "HM_FLASH",
-  HM_ROCK_SMASH = "HM_ROCK_SMASH",
-  HM_DIVE = "HM_DIVE",
-  HM_WATERFALL = "HM_WATERFALL",
+  TM_FOCUS_PUNCH = "TM_FOCUS_PUNCH",
+  TM_HYPER_BEAM = "TM_HYPER_BEAM",
+  TM_PROTECT = "TM_PROTECT",
+  TM_SKILL_SWAP = "TM_SKILL_SWAP",
   CHEF_HAT = "CHEF_HAT",
   PICNIC_SET = "PICNIC_SET",
   SANDWICH = "SANDWICH",
@@ -866,45 +862,42 @@ export const OgerponMasks: Item[] = [
   Item.HEARTHFLAME_MASK
 ]
 
-export const TMs = [
+export const TMsBronze = [
   Item.TM_RAGE,
   Item.TM_RETURN,
-  Item.TM_TAUNT,
-  Item.TM_BULK_UP,
-  Item.TM_REFLECT,
-  Item.TM_DISABLE,
   Item.TM_COUNTER,
+  Item.TM_DISABLE
+]
+
+export const TMsSilver = [
+  Item.TM_BULK_UP,
+  Item.TM_CHARGE,
+  Item.TM_REFLECT,
   Item.TM_PAYDAY
 ]
 
-export const HMs = [
-  Item.HM_CUT,
-  Item.HM_FLY,
-  Item.HM_SURF,
-  Item.HM_STRENGTH,
-  Item.HM_FLASH,
-  Item.HM_ROCK_SMASH,
-  Item.HM_WATERFALL,
-  Item.HM_DIVE
+export const TMsGold = [
+  Item.TM_FOCUS_PUNCH,
+  Item.TM_HYPER_BEAM,
+  Item.TM_PROTECT,
+  Item.TM_SKILL_SWAP
 ]
+
+export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_RAGE]: Ability.RAGE,
   [Item.TM_RETURN]: Ability.RETURN,
-  [Item.TM_TAUNT]: Ability.TAUNT,
-  [Item.TM_BULK_UP]: Ability.BULK_UP,
-  [Item.TM_REFLECT]: Ability.REFLECT,
-  [Item.TM_DISABLE]: Ability.DISABLE,
   [Item.TM_COUNTER]: Ability.COUNTER,
+  [Item.TM_DISABLE]: Ability.DISABLE,
+  [Item.TM_BULK_UP]: Ability.BULK_UP,
+  [Item.TM_CHARGE]: Ability.CHARGE,
+  [Item.TM_REFLECT]: Ability.REFLECT,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
-  [Item.HM_CUT]: Ability.CUT,
-  [Item.HM_FLY]: Ability.FLY,
-  [Item.HM_SURF]: Ability.SURF,
-  [Item.HM_STRENGTH]: Ability.STRENGTH,
-  [Item.HM_FLASH]: Ability.FLASH,
-  [Item.HM_ROCK_SMASH]: Ability.ROCK_SMASH,
-  [Item.HM_WATERFALL]: Ability.WATERFALL,
-  [Item.HM_DIVE]: Ability.DIVE
+  [Item.TM_FOCUS_PUNCH]: Ability.FOCUS_PUNCH,
+  [Item.TM_HYPER_BEAM]: Ability.HYPER_BEAM,
+  [Item.TM_PROTECT]: Ability.PROTECT,
+  [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
 export const Dishes = [
@@ -1039,7 +1032,6 @@ export const UnholdableItems = [
   ...WeatherRocks,
   ...FishingRods,
   ...TMs,
-  ...HMs,
   ...Flavors,
   ...Dishes,
   ...SynergyGems,
@@ -1067,7 +1059,6 @@ export const UnholdableItems = [
 
 export const ConsumableItems = [
   ...TMs,
-  ...HMs,
   ...Dishes,
   ...Mulches,
   ...Flavors,

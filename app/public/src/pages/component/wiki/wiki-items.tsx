@@ -5,7 +5,6 @@ import {
   Berries,
   Dishes,
   FishingRods,
-  HMs,
   Item,
   ItemComponentsNoScarf,
   ItemRecipe,
@@ -16,6 +15,9 @@ import {
   SynergyGems,
   SynergyGemsBuried,
   TMs,
+  TMsBronze,
+  TMsGold,
+  TMsSilver,
   Tools,
   TownItems,
   WeatherRocks
@@ -275,12 +277,13 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.HUMAN} /> {t("tm_hm")}
+          <SynergyIcon type={Synergy.HUMAN} /> {t("tm")}
         </h3>
-        <p>{addIconsToDescription(t("tm_hm_description"))}</p>
+        <p>{addIconsToDescription(t("tm_description"))}</p>
         <ul>
-          <ItemList items={TMs} />
-          <ItemList items={HMs} />
+          <ItemList items={TMsBronze} />
+          <ItemList items={TMsSilver} />
+          <ItemList items={TMsGold} />
         </ul>
 
         <h3>

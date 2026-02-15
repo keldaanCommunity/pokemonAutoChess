@@ -1,9 +1,9 @@
-import { entity } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
+import { BOARD_WIDTH } from "../../config"
 import {
   BasculinWhite,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
+import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import { SynergyEffects } from "../../models/effects"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Transfer } from "../../types"
@@ -379,7 +379,8 @@ const DarmanitanZenOnHitEffect = new OnHitEffect(
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   if (!pkm.player) return
-  const aquaticStepReached = pkm.player.synergies.getSynergyStep(
+  const aquaticStepReached = getSynergyStep(
+    pkm.player.synergies,
     Synergy.AQUATIC
   )
   pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
@@ -819,7 +820,7 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when convertig to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
     if (synergyCopied === Synergy.FLORA) {
-      const floraLevel = opponent.synergies.getSynergyStep(Synergy.FLORA)
+      const floraLevel = getSynergyStep(opponent.synergies, Synergy.FLORA)
       entity.effectsSet.add(
         new OnDeathEffect(({ pokemon }) => {
           let flowerToSpawn: Pkm | null = null

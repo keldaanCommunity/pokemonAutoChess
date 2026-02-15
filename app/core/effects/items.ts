@@ -1,4 +1,5 @@
-import { ARMOR_FACTOR, DEFAULT_SPEED } from "../../config"
+import { ARMOR_FACTOR } from "../../config"
+import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
@@ -7,16 +8,13 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   AbilityPerTM,
-  Berries,
   Dish,
   DishesGoingToInventory,
   FishingRod,
   Flavors,
-  HMs,
   Item,
   ItemRecipe,
   MemoryDiscs,
-  Mushrooms,
   NonSpecialBerries,
   OgerponMasks,
   Sweets,
@@ -314,7 +312,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (!pokemon) return
   const chef = pokemon
 
-  const gourmetLevel = player.synergies.getSynergyStep(Synergy.GOURMET)
+  const gourmetLevel = getSynergyStep(player.synergies, Synergy.GOURMET)
   const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
@@ -442,21 +440,17 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ),
 
   ...Object.fromEntries(
-    [...TMs, ...HMs].map((tm) => [
+    TMs.map((tm) => [
       tm,
       [
         new OnItemDroppedEffect(({ pokemon, player, item }) => {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
-            return false // prevent equipping TMs/HMs on non-human pokemon
+            return false // prevent equipping TMs on non-human pokemon
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
           removeInArray(player.items, item)
-          const tmIndex = player.tms.findIndex((tm) => tm === item)
-          if (tmIndex !== -1) {
-            player.tms[tmIndex] = null
-          }
           return false
         })
       ]

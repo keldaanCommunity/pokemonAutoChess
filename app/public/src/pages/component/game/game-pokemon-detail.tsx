@@ -10,7 +10,12 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
-import { Item } from "../../../../../types/enum/Item"
+import {
+  AbilityPerTM,
+  Item,
+  TMsBronze,
+  TMsGold
+} from "../../../../../types/enum/Item"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -169,6 +174,29 @@ export function GamePokemonDetail(props: {
     name += ` (${t(`pkm.${pokemon.evolution}`)})` // indicate the original pokemon for Dojo substitute
   }
 
+  const tmIcon = useMemo(() => {
+    if (pokemon.tm === Ability.DEFAULT) return null
+    let icon = "assets/item/TM.png"
+    console.log("TM", pokemon.tm, pokemon.skill)
+    if (
+      pokemon.tm === Ability.SKILL_SWAP &&
+      pokemon.skill !== Ability.SKILL_SWAP
+    ) {
+      icon = "assets/ui/SKILL_SWAP.png"
+    } else if (TMsBronze.some((x) => AbilityPerTM[x] === pokemon.tm)) {
+      icon = "assets/item/TM_BRONZE.png"
+    } else if (TMsGold.some((x) => AbilityPerTM[x] === pokemon.tm)) {
+      icon = "assets/item/TM_GOLD.png"
+    }
+    return (
+      <img
+        src={icon}
+        className="game-pokemon-detail-ability-icon"
+        alt={t("tm")}
+      />
+    )
+  }, [pokemon.tm, pokemon.skill])
+
   return (
     <div className="game-pokemon-detail">
       <PokemonPortrait
@@ -288,7 +316,10 @@ export function GamePokemonDetail(props: {
 
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
-          <div className="ability-name">{t(`ability.${pokemon.skill}`)}</div>
+          <div className="ability-name">
+            {tmIcon}
+            {t(`ability.${pokemon.skill}`)}
+          </div>
           <div>
             <AbilityTooltip
               ability={pokemon.skill}

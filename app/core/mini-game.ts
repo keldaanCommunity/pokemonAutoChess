@@ -20,6 +20,7 @@ import { FloatingItem } from "../models/colyseus-models/floating-item"
 import Player from "../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
+import { getSynergyStep } from "../models/colyseus-models/synergies"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
 import { Transfer } from "../types"
@@ -29,7 +30,6 @@ import {
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Item,
-  ItemComponents,
   ItemComponentsNoFossilOrScarf,
   MissionOrders,
   NonSpecialBerries,
@@ -605,7 +605,7 @@ export class MiniGame {
         )
           .filter(([type, value]) => synergiesUsable.includes(type))
           .map(([type, value]) => {
-            let levelReached = player.synergies.getSynergyStep(type)
+            let levelReached = getSynergyStep(player.synergies, type)
             // lowering down low triggers synergies
             if (type === Synergy.LIGHT) {
               levelReached = [0, 1, 1, 2, 3][levelReached]

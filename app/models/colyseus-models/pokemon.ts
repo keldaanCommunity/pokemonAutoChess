@@ -85,6 +85,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("int16") ap: number = 0
   @type("uint8") luck: number = 0
   @type("string") skill: Ability = Ability.DEFAULT
+  @type("string") tm: Ability = Ability.DEFAULT
   @type("string") passive: Passive = Passive.NONE
   @type({ set: "string" }) items = new SetSchema<Item>()
   @type({ set: "string" }) dishes = new SetSchema<Item>()
@@ -103,8 +104,7 @@ export class Pokemon extends Schema implements IPokemon {
   regional = false
   canHoldItems = true
   canBeBenched = true
-  canBeSold = true
-  tm: Ability | null = null
+  canBeSold = true  
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()
@@ -176,6 +176,10 @@ export class Pokemon extends Schema implements IPokemon {
       })
       player.items.push(...itemsToRemove)
       this.removeItems(itemsToRemove, player)
+    }
+    if (y === 0 && this.tm === Ability.SKILL_SWAP) {
+      this.skill = Ability.SKILL_SWAP
+      this.maxPP = 100
     }
   }
 

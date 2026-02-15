@@ -107,6 +107,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   @type({ set: "string" }) types = new SetSchema<Synergy>()
   @type("uint8") stars: number
   @type("string") skill: Ability
+  @type("string") tm: Ability
   @type("string") passive: Passive
   @type(Status) status: Status
   @type(Count) count: Count
@@ -182,6 +183,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.baseTeam = team
     this.stars = pokemon.stars
     this.skill = pokemon.skill
+    this.tm = pokemon.tm
     this.shiny = pokemon.shiny
     this.emotion = pokemon.emotion
     this.ap = pokemon.ap

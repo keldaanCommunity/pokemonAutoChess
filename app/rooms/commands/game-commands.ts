@@ -45,6 +45,7 @@ import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
+import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import { Wanderer } from "../../models/colyseus-models/wanderer"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
@@ -958,7 +959,7 @@ export class OnPickBerryCommand extends Command<
     if (player.berryTreesStages[berryIndex] >= 3) {
       player.berryTreesStages[berryIndex] = 0
       const type =
-        player.synergies.getSynergyStep(Synergy.GRASS) === 4
+        getSynergyStep(player.synergies, Synergy.GRASS) === 4
           ? GOLDEN_BERRY_TREE_TYPES[berryIndex]
           : player.berryTreesType[berryIndex]
       player.items.push(type)
@@ -1403,7 +1404,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     const board = values(player.board)
 
     if (
-      player.synergies.getSynergyStep(Synergy.FIRE) === 4 &&
+      getSynergyStep(player.synergies, Synergy.FIRE) === 4 &&
       player.items.includes(Item.FIRE_SHARD) === false &&
       player.life > 2
     ) {
@@ -1468,12 +1469,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }, 7000)
     }
 
-    const nbTrees = player.synergies.getSynergyStep(Synergy.GRASS)
+    const nbTrees = getSynergyStep(player.synergies, Synergy.GRASS)
     for (let i = 0; i < nbTrees; i++) {
       player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
     }
 
-    if (player.synergies.getSynergyStep(Synergy.GROUND) > 0) {
+    if (getSynergyStep(player.synergies, Synergy.GROUND) > 0) {
       player.board.forEach((pokemon, pokemonId) => {
         if (
           pokemon.types.has(Synergy.GROUND) &&

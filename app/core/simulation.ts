@@ -2,6 +2,7 @@ import { MapSchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
+import { getSynergyStep } from "../models/colyseus-models/synergies"
 import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
@@ -1634,7 +1635,7 @@ export default class Simulation extends Schema implements ISimulation {
       // Handle weather rock collection
       if (
         this.weather !== Weather.NEUTRAL &&
-        player.synergies.getSynergyStep(Synergy.ROCK) > 0 &&
+        getSynergyStep(player.synergies, Synergy.ROCK) > 0 &&
         this.redPlayerId !== "pve" // No weather rocks collected for PvE rounds
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
