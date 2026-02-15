@@ -741,6 +741,7 @@ export const AbilitiesAnimations: {
   [Ability.ELECTRO_WEB]: onTargetScale2,
   [Ability.PSYSHIELD_BASH]: onTargetScale2,
   [Ability.LIQUIDATION]: onTargetScale2,
+  [Ability.ACID_ARMOR]: onCasterScale2,
   [Ability.AIR_SLASH]: onTargetScale2,
   [Ability.DREAM_EATER]: onTargetScale2,
   [Ability.BURN_UP]: onTargetScale3,

@@ -6597,6 +6597,32 @@ export class LavaPlumeStrategy extends AbilityStrategy {
   }
 }
 
+export class AcidArmorStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const defGain = [3, 6, 12][pokemon.stars - 1] ?? 12
+    pokemon.addDefense(defGain, pokemon, 1, crit)
+    let count = 4
+    const acidHitEffect = new OnDamageReceivedEffect(
+      ({ pokemon, attacker }) => {
+        if (attacker?.range === 1) {
+          attacker.addDefense(-1, pokemon, 0, false)
+        }
+        count--
+        if (count <= 0) {
+          pokemon.effectsSet.delete(acidHitEffect)
+        }
+      }
+    )
+    pokemon.effectsSet.add(acidHitEffect)
+  }
+}
+
 export class ShelterStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6605,12 +6631,14 @@ export class ShelterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const defGain = [5, 10, 15][pokemon.stars - 1] ?? 15
+    const defGain = [3, 6, 12][pokemon.stars - 1] ?? 12
     pokemon.addDefense(defGain, pokemon, 1, crit)
-    const cells = board.getCellsInFront(pokemon, target)
-    cells.forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, EffectEnum.SMOKE, pokemon.simulation)
-    })
+    board.addBoardEffect(
+      pokemon.targetX,
+      pokemon.targetY,
+      EffectEnum.SMOKE,
+      pokemon.simulation
+    )
   }
 }
 
@@ -15830,7 +15858,8 @@ export class PowderStrategy extends AbilityStrategy {
     const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
 
     // Find the enemy with the highest SPEED
-    const enemies = board.getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
+    const enemies = board
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
       .map((cell) => cell.value as PokemonEntity)
       .sort((a, b) => b.speed - a.speed)
@@ -15869,7 +15898,7 @@ export class PowderStrategy extends AbilityStrategy {
                 cell.value?.addSpeed(speedNerf, pokemon, 0, false)
               }, 5000)
             )
-          }        
+          }
         }
       }
     }
@@ -16314,6 +16343,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CRUNCH]: new CrunchStrategy(),
   [Ability.CROSS_POISON]: new CrossPoisonStrategy(),
   [Ability.SHELTER]: new ShelterStrategy(),
+  [Ability.ACID_ARMOR]: new AcidArmorStrategy(),
   [Ability.FIRE_FANG]: new FireFangStrategy(),
   [Ability.ICE_FANG]: new IceFangStrategy(),
   [Ability.THUNDER_FANG]: new ThunderFangStrategy(),

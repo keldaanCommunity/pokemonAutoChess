@@ -1768,7 +1768,7 @@
 		"SLUDGE_WAVE": "Lanza un rocío de desechos al objetivo y a los enemigos adyacentes, lo que inflige [10,20,40,SP] SPECIAL y POISONNED durante [2,3,4,SP] segundos.",
 		"SMOG": "Expulsa una nube de gas fétido sobre 3 espacios al frente, causando [10,20,40,SP] de SPECIAL. El gas persiste hasta el fin del combate y reduce la precisión de los Pokémon dentro de el en 50%.",
 		"LAVA_PLUME": "Genera lava en las 3 casillas frente al usuario, infligiendo [20,40,80,SP] SPECIAL. La lava se queda en el suelo, infligiendo 10 SPECIAL y BURN a Pokémon que caminen en ella si no son FLYING o FIRE.",
-		"SHELTER": "Gana [5,10,15,SP] de DEF y proyecta una cortina de humo sobre 3 espacios al frente. El humo persiste hasta el final de la pelea y reduce la precisión de los Pokémon dentro de el en un 50%.",
+		"SHELTER": "Gana [5,10,15,SP] de DEF y proyecta una cortina de humo en el cuadrado del objetivo. El humo persiste hasta el final de la pelea y reduce la precisión de los Pokémon dentro de el en un 50%.",
 		"AURORA_BEAM": "Dispara un rayo en una línea. Todos los objetivos golpeados reciben [25,50,100,SP] de SPECIAL y pueden quedar FREEZE (la probabilidad se basa en la sinergia de hielo actual)",
 		"AGILITY": "Aumenta la SPEED en [10,20,30,SP] (acumulativo)",
 		"SPIRIT_SHACKLE": "Dispara una flecha perforante que inflige [25,50,75,SP] de SPECIAL en una línea detrás del objetivo y deja WOUND durante 4 segundos a todos los Pokémon golpeados",

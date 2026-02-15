@@ -2496,7 +2496,7 @@ export class Dratini extends Pokemon {
     Synergy.FLYING,
     Synergy.AQUATIC
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAGONAIR
   hp = 80
@@ -2515,7 +2515,7 @@ export class Dragonair extends Pokemon {
     Synergy.FLYING,
     Synergy.AQUATIC
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.DRAGONITE
   hp = 120
@@ -2534,7 +2534,7 @@ export class Dragonite extends Pokemon {
     Synergy.FLYING,
     Synergy.AQUATIC
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.EPIC
   stars = 3
   hp = 250
   atk = 22
@@ -2552,7 +2552,7 @@ export class Goomy extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.EPIC
+  rarity = Rarity.COMMON
   stars = 1
   evolutions = [Pkm.SLIGOO, Pkm.HISUI_SLIGGOO]
   evolutionRule = new CountEvolutionRule(
@@ -2563,14 +2563,14 @@ export class Goomy extends Pokemon {
       else return Pkm.SLIGOO
     }
   )
-  hp = 90
-  atk = 6
-  speed = 51
-  def = 8
-  speDef = 12
+  hp = 65
+  atk = 4
+  speed = 35
+  def = 2
+  speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.LIQUIDATION
+  skill = Ability.ACID_ARMOR
 }
 
 export class Sligoo extends Pokemon {
@@ -2579,17 +2579,17 @@ export class Sligoo extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.EPIC
+  rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.GOODRA
-  hp = 160
-  atk = 13
-  speed = 51
-  def = 10
-  speDef = 14
+  hp = 120
+  atk = 8
+  speed = 35
+  def = 4
+  speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.LIQUIDATION
+  skill = Ability.ACID_ARMOR
 }
 
 export class Goodra extends Pokemon {
@@ -2598,16 +2598,16 @@ export class Goodra extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.EPIC
+  rarity = Rarity.COMMON
   stars = 3
-  hp = 300
-  atk = 28
-  speed = 51
-  def = 12
-  speDef = 20
+  hp = 220
+  atk = 16
+  speed = 35
+  def = 6
+  speDef = 12
   maxPP = 100
   range = 1
-  skill = Ability.LIQUIDATION
+  skill = Ability.ACID_ARMOR
 }
 
 export class HisuiSliggoo extends Pokemon {
@@ -2616,15 +2616,15 @@ export class HisuiSliggoo extends Pokemon {
     Synergy.STEEL,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.EPIC
+  rarity = Rarity.COMMON
   stars = 2
   evolution = Pkm.HISUI_GOODRA
-  hp = 160
-  atk = 13
-  speed = 38
-  def = 14
-  speDef = 10
-  maxPP = 80
+  hp = 110
+  atk = 8
+  speed = 35
+  def = 6
+  speDef = 4
+  maxPP = 100
   range = 1
   skill = Ability.SHELTER
   regional = true
@@ -2640,14 +2640,14 @@ export class HisuiGoodra extends Pokemon {
     Synergy.STEEL,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.EPIC
+  rarity = Rarity.COMMON
   stars = 3
-  hp = 300
-  atk = 28
-  speed = 38
-  def = 20
-  speDef = 12
-  maxPP = 80
+  hp = 200
+  atk = 16
+  speed = 35
+  def = 12
+  speDef = 8
+  maxPP = 100
   range = 1
   skill = Ability.SHELTER
   regional = true
@@ -17885,7 +17885,7 @@ export class Tynamo extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.COMMON
+  rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.EELEKTRIK
   hp = 50
@@ -17905,7 +17905,7 @@ export class Eelektrik extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.COMMON
+  rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.EELEKTROSS
   hp = 115
@@ -17925,7 +17925,7 @@ export class Eelektross extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.COMMON
+  rarity = Rarity.HATCH
   stars = 3
   hp = 185
   atk = 24
