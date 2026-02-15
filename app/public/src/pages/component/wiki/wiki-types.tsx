@@ -1,15 +1,10 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import {
-  PkmAltForms,
-  RarityColor,
-  SynergyTriggers
-} from "../../../../../config"
+import { RarityColor, SynergyTriggers } from "../../../../../config"
 import { SynergyEffects } from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
-import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
@@ -21,7 +16,10 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
-import { PokemonFilters } from "../pokemon-filters/pokemon-filters"
+import {
+  filterPokemonsAccordingToPreferences,
+  PokemonFilters
+} from "../pokemon-filters/pokemon-filters"
 import { EffectDescriptionComponent } from "../synergy/effect-description"
 import { SynergyOverlaps } from "../synergy-overlaps/synergy-overlaps"
 
@@ -59,29 +57,12 @@ export function WikiType(props: { type: Synergy }) {
   const [preferences] = usePreferences()
   const [overlap, setOverlap] = useState<Synergy | null>(null)
 
-  const pokemons = PRECOMPUTED_POKEMONS_PER_TYPE[props.type]
-    .filter((p) => p !== Pkm.DEFAULT)
+  const pokemons = filterPokemonsAccordingToPreferences(
+    PRECOMPUTED_POKEMONS_PER_TYPE[props.type],
+    preferences
+  )
     .map((p) => getPokemonData(p))
     .sort((a, b) => a.stars - b.stars) // put first stage first
-    .filter((p, index, list) => {
-      if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-      if (p.rarity === Rarity.SPECIAL) return !!preferences.showSpecialPool // show all summons & specials, even in the same family
-      if (!preferences.showAltForms && PkmAltForms.includes(p.name))
-        return false
-      if (preferences.showEvolutions) return true
-      if (p.additional && !preferences.showAdditionalPool) return false
-      if (p.regional && !preferences.showRegionalPool) return false
-
-      const prevolution = list.find(
-        (p2) =>
-          p2.evolution === p.name ||
-          p2.evolutions.includes(p.name) ||
-          (PkmFamily[p2.name] === PkmFamily[p.name] && p2.stars < p.stars) // for transformations
-      )
-      // if show evolutions is unchecked, do not show a pokemon if it has a prevolution and that prevolution is in the same rarity category
-      if (prevolution && prevolution.rarity === p.rarity) return false
-      return true
-    })
 
   const filteredPokemons = pokemons.filter((p) =>
     overlap ? p.types.includes(overlap) : true
@@ -181,6 +162,7 @@ export function WikiType(props: { type: Synergy }) {
 }
 
 export function WikiAllTypes() {
+  const [preferences] = usePreferences()
   const rarityOrder = [
     Rarity.COMMON,
     Rarity.UNCOMMON,
@@ -192,13 +174,10 @@ export function WikiAllTypes() {
     Rarity.LEGENDARY,
     Rarity.SPECIAL
   ]
-  const pokemons = Object.values(Pkm)
-    .filter((p) => p !== Pkm.DEFAULT)
-    .map((p) => getPokemonData(p))
-    .filter((a, index, list) => {
-      if (a.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-      return true
-    })
+  const pokemons = filterPokemonsAccordingToPreferences(
+    Object.values(Pkm),
+    preferences
+  ).map((p) => getPokemonData(p))
 
   const pokemonsPerType = Object.fromEntries(
     SynergyArray.map((type) => [type as Synergy, [] as IPokemonData[]])
@@ -227,6 +206,9 @@ export function WikiAllTypes() {
   return (
     <>
       <div id="wiki-types-all">
+        <div style={{ float: "right", justifyItems: "end" }}>
+          <PokemonFilters />
+        </div>
         {types.map((type) => {
           return (
             <section key={type}>
