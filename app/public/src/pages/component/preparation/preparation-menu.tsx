@@ -1,4 +1,3 @@
-import { Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -8,7 +7,6 @@ import {
   MAX_PLAYERS_PER_GAME
 } from "../../../../../config"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
-import PreparationState from "../../../../../rooms/states/preparation-state"
 import { Role } from "../../../../../types"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"
@@ -33,6 +31,7 @@ import { GameModeIcon } from "../icons/game-mode-icon"
 import { BotSelectModal } from "./bot-select-modal"
 import PreparationMenuUser from "./preparation-menu-user"
 import "./preparation-menu.css"
+import { rooms } from "../../../network"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -55,9 +54,6 @@ export default function PreparationMenu() {
   const uid: string = useAppSelector((state) => state.network.uid)
   const isOwner: boolean = useAppSelector(
     (state) => state.preparation.ownerId === state.network.uid
-  )
-  const room: Room<PreparationState> | undefined = useAppSelector(
-    (state) => state.network.preparation
   )
 
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
@@ -115,7 +111,7 @@ export default function PreparationMenu() {
   }
 
   const startGame = throttle(async function startGame() {
-    if (room) {
+    if (rooms.preparation) {
       const token = await firebase.auth().currentUser?.getIdToken()
       if (token) {
         dispatch(gameStartRequest(token))

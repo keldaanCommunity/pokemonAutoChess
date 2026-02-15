@@ -65,7 +65,7 @@ export const rooms: {
   after: undefined
 }
 
-export function leaveRoom(
+export async function leaveRoom(
   roomName: keyof typeof rooms,
   allowReconnect = false
 ): Promise<number> {
@@ -73,17 +73,19 @@ export function leaveRoom(
   if (room) {
     rooms[roomName] = undefined
     if (room.connection.isOpen) {
-      return room.leave(!allowReconnect)
+      return await room.leave(!allowReconnect)
     }
   }
   return Promise.resolve(-1)
 }
 
-export function leaveAllRooms() {
-  leaveRoom("lobby")
-  leaveRoom("preparation")
-  leaveRoom("game")
-  leaveRoom("after")
+export async function leaveAllRooms() {
+  return await Promise.allSettled([
+    leaveRoom("lobby"),
+    leaveRoom("preparation"),
+    leaveRoom("game"),
+    leaveRoom("after")
+  ])
 }
 
 export function joinLobby(room: Room<{ state: LobbyState }>) {
