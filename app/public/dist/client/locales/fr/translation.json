@@ -2226,7 +2226,7 @@
 		"VOLT_SURGE": "Le lanceur entre en surcharge, gagnant un ELECTRIC_FIELD, 20 SPEED et [30,SP] HP max. Ensuite, chaque troisième attaque touche à la chaîne jusqu'à 4 ennemis proches, infligeant [20,SP] SPECIAL à chacun.",
 		"SUPERCELL_SLAM": "Saute et atterri au milieu de l'équipe ennemie, infligeant [10,20,40,SP] SPECIAL à tous les ennemis ADJACENT et gagnant [10,20,40,SP] de SHIELD",
 		"HIGH_HORSEPOWER": "Charge à travers la cible, puis inflige [15,25,35,SP] SPECIAL à tous les ennemis ADJACENT. Si un seul ennemi est touché, inflige le double de SPECIAL.",
-		"CITY_SHUTTLE": "Bondit sur l'allié le plus proche et le chevauche sur le dos du lanceur, puis fonce vers l'ennemi le plus éloigné à portée. Inflige [10,20,30,SP] SPECIAL + 100% de l'ATK de l'allié transporté à tous les ennemis sur votre passage. Offre [20,40,80,SP] SHIELD au lanceur et à l'allié transporté.",
+		"CITY_SHUTTLE": "Bondit sur l'allié le plus proche et le chevauche sur le dos du lanceur, puis fonce vers l'ennemi le plus éloigné à portée. Inflige [10,20,30,SP] SPECIAL + [100,SP]% de l'ATK de l'allié transporté à tous les ennemis sur votre passage. Offre [20,40,80,SP] SHIELD au lanceur et à l'allié transporté.",
 		"BULLET_PUNCH": "Inflige [40,SP] TRUE à la cible, puis gagne [40,SP] SPEED pendant 2 secondes.",
 		"EAR_DIG": "Inflige [30,60,120,SP] SPECIAL + [5,10,20,SP] par niveau de profondeur du trou où se trouve la cible. Si la cible n'est pas dans un trou, creuse en un sous elle.",
 		"POWDER_SNOW": "De la neige poudreuse est soufflée vers la cible, infligeant [20,40,80,SP] SPECIAL à tous les ennemis alignés derrière la cible avec [15,30,50,LK]% de chances de les FREEZE pendant 2 secondes.",
@@ -2758,6 +2758,7 @@
 		"MISSION_ORDER_GREEN": "Ordre de Mission - Diversifier !",
 		"MISSION_ORDER_GOLD": "Ordre de Mission - Prospérer !",
 		"MISSION_ORDER_PINK": "Ordre de Mission - Évoluer !",
+		"LEADERS_CREST": "Emblème du Général",
 		"SILK_SCARF": "Mouchoir Soie",
 		"FRIEND_BOW": "Ruban Ami",
 		"BLACK_BELT": "Ceinture Noire",
@@ -3060,6 +3061,7 @@
 		"MISSION_ORDER_BLUE": "Accomplissez cette mission pour gagner 30 GOLD :\n atteignez le niveau 9",
 		"MISSION_ORDER_GREEN": "Accomplissez cette mission pour gagner 30 GOLD :\n atteignez les 8 synergies actives différentes",
 		"MISSION_ORDER_GOLD": "Accomplissez cette mission pour gagner 30 GOLD :\n  gagnez 200 GOLD au total pendant la partie.",
+		"LEADERS_CREST": "Lorsqu'un autre joueur vous bat au combat, il obtient 4 GOLD supplémentaires et récupère l'LEADERS_CREST.",
 		"SILK_SCARF": "Combinez-le avec un autre composant d'objet pour créer toutes sortes de rubans, de bandeaux et de nœuds. Ces objets seront supprimés si vous abaissez le niveau de synergie NORMAL.",
 		"FRIEND_BOW": "Le porteur gagne le type NORMAL.",
 		"BLACK_BELT": "Les attaques critiques fournissent 33% des dégâts infligés comme SHIELD.",
@@ -3379,7 +3381,7 @@
 		"FIRE": "Les Pokémon FIRE gagnent de l'ATK après chaque attaque et ont une chance d'infliger BURN à leurs ennemis.",
 		"WATER": "Les Pokémon WATER génèrent plus de PP et peuvent être pêchés avec une canne.",
 		"ELECTRIC": "Les attaques de base des Pokémon ELECTRIC peuvent déclencher deux attaques supplémentaires.{{additionalInfo}}",
-		"FIGHTING": "Les Pokémon FIGHTING bloquent un montant fixe de dégâts à chaque coup reçu. Après 10 coups bloqués, ils projettent leur cible au loin, détruisant ainsi leur SHIELD.",
+		"FIGHTING": "Les Pokémon FIGHTING bloquent un montant fixe de dégâts à chaque coup reçu. Après 10 coups bloqués, ils projettent au loin leur cible au corps à corps, détruisant ainsi leur SHIELD.",
 		"PSYCHIC": "Les Pokémon PSYCHIC gagnent de la AP supplémentaire et attirent les Zarbi.",
 		"DARK": "Les coups critiques des Pokémon DARK sont plus puissants et plus fréquents. Les Pokémon DARK avec une portée de 1 sautent vers la cible la plus éloignée atteignable.",
 		"STEEL": "Les Pokémon STEEL infligent un pourcentage de leurs dégâts en TRUE.",
@@ -4404,7 +4406,9 @@
 		"HIGH_ROLLER": "Flambeur",
 		"REGIONAL_SPECIALTIES": "Spécialités régionales",
 		"GO_BIG_OR_GO_HOME": "Voit grand ou abandonne",
-		"FAMILY_OUTING": "Ballade en famille"
+		"FAMILY_OUTING": "Ballade en famille",
+		"UNOWN_SPELL": "Le Sort des Zarbi",
+		"CHOSEN_ONES": "Les Élus"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Tous les Pokémon additionnels sont disponibles immédiatement",
@@ -4415,7 +4419,7 @@
 		"TECHNOLOGIC": "Choisissez entre 3 outils aux tours 2 et 4",
 		"CROWDED": "+3 unités maximum sur le plateau",
 		"FREE_MARKET": "Les Pokémon s'achètent et se vendent pour 0 GOLD",
-		"SHINY_HUNTER": "Toutes les rencontres PvE aux tours 1, 9 et 19 sont des Shiny",
+		"SHINY_HUNTER": "Toutes les rencontres PvE aux tours 1, 9 et 14 sont des Shiny",
 		"DO_IT_ALL_YOURSELF": "Commencez avec une copie de votre avatar. Les avatars de faible rareté obtiennent plus de HP max et d'or au départ.",
 		"FIRST_PARTNER": "Choisissez votre Pokémon de départ. Vous obtenez un exemplaire de cette unité à chaque tour jusqu'au tour 10.",
 		"SLAMINGO": "Tous les objets sont lâchés lorsqu'un Pokémon est placé sur le banc. Commencez avec 4 composants aléatoires.",
@@ -4424,7 +4428,9 @@
 		"HIGH_ROLLER": "Vos boutiques ont une chance de contenir des Pokémon éclos aux tours 0 à 10, des Uniques aux tours 10 à 20 et des Légendaires après le tour 20.",
 		"REGIONAL_SPECIALTIES": "Les types de votre région actuelle comptent dans le niveau de vos synergies. Après avoir changé de région, votre équipe goûte un plat local.",
 		"GO_BIG_OR_GO_HOME": "Les unités gagnent 5 HP max et grossissent en taille à chaque tour.",
-		"FAMILY_OUTING": "Les Pokémon de la même famille comptent tous dans le niveau de vos synergies."
+		"FAMILY_OUTING": "Les Pokémon de la même famille comptent tous dans le niveau de vos synergies.",
+		"UNOWN_SPELL": "Les Zarbi observent vos combats et lancent des sorts sur les deux équipes à chaque manche.",
+		"CHOSEN_ONES": "Les choix additionnels que vous sélectionnez évoluent immédiatement et gagnent des statistiques bonus."
 	},
 	"town_encounter_description": {
 		"KECLEON": "$t(pkm.KECLEON) vend des pierres synergies pour {{cost}} GOLD",
@@ -4445,7 +4451,8 @@
 		"MAKUHITA": "Makuhita entraîne l'un de vos Pokémon pendant plusieurs tours pour améliorer ses statistiques",
 		"WIGGLYTUFF": "Accomplissez les missions de la guilde $t(pkm.WIGGLYTUFF) pour gagner des récompenses.",
 		"CINCCINO": "$t(pkm.CINCCINO) offre d'élégants SILK_SCARF",
-		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver."
+		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver.",
+		"KINGAMBIT": "Scalpereur a offert l'LEADERS_CREST au joueur en première place. Battez-le au combat pour gagner de l'GOLD supplémentaire !"
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -4500,7 +4507,9 @@
 		"ROOM_DELETED": "Ce salon a été supprimé",
 		"GAME_ALREADY_STARTED": "Cette partie a déjà commencé",
 		"INVALID_PASSWORD": "Mot de passe incorrect",
-		"UNKNOWN_ERROR": "Une erreur inconnue est survenue: {{error}}"
+		"UNKNOWN_ERROR": "Une erreur inconnue est survenue: {{error}}",
+		"SERVER_SHUTDOWN": "Le serveur est en cours d'arrêt pour maintenance.",
+		"FAILED_TO_RECONNECT": "Impossible de se reconnecter au jeu. Veuillez actualiser la page et réessayer."
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Connexion perdue. Tentative de reconnexion…",
