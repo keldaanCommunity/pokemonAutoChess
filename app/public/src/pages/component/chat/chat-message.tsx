@@ -1,11 +1,12 @@
 import React from "react"
 import { IChatV2, Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { removeMessage, searchById } from "../../../stores/NetworkStore"
+import { searchById } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
+import { ChatRoom, removeMessage } from "../../../network"
 import PokemonPortrait from "../pokemon-portrait"
 
-export default function ChatMessage(props: { message: IChatV2 }) {
+export default function ChatMessage(props: { message: IChatV2, source: ChatRoom }) {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
   const role = user?.role
@@ -37,11 +38,9 @@ export default function ChatMessage(props: { message: IChatV2 }) {
               className="remove-chat bubbly red"
               title="Remove message"
               onClick={() =>
-                dispatch(
-                  removeMessage({
+                removeMessage({
                     id: props.message.id
-                  })
-                )
+                  }, props.source)                
               }
             >
               <p style={{ fontSize: "0.5em", margin: "0" }}>X</p>

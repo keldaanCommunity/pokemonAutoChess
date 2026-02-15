@@ -1,44 +1,49 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IChatV2 } from "../../../../../types"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { sendMessage } from "../../../stores/NetworkStore"
+import { useAppSelector } from "../../../hooks"
 import ChatHistory from "./chat-history"
+import { ChatRoom, rooms, sendMessage } from "../../../network"
+import { Callbacks } from "@colyseus/sdk"
 import "./chat.css"
 
 const MAX_MESSAGE_LENGTH = 250
 
-export default function Chat(props: { source: string; canWrite: boolean }) {
+export default function Chat(props: { source: ChatRoom; canWrite: boolean }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const [currentText, setCurrentText] = useState<string>("")
-  const user = useAppSelector((state) => state[props.source].user)
-  const messages: IChatV2[] = useAppSelector(
-    (state) => state[props.source].messages
-  )
+  const anonymous = useAppSelector((state) => !state.network.profile)
+  const [messages, setMessages] = useState<IChatV2[]>([])
+  if (props.source === "lobby" && rooms.lobby) {
+    Callbacks.get(rooms.lobby).listen("messages", (newMessages) => {
+      setMessages([...newMessages])
+    })
+  } else if (props.source === "preparation" && rooms.preparation) {
+    Callbacks.get(rooms.preparation).listen("messages", (newMessages) => {
+      setMessages([...newMessages])
+    })
+  }
 
   return (
     <div className="user-chat">
-      <ChatHistory messages={messages} />
+      <ChatHistory messages={messages} source={props.source} />
       {props.canWrite && (
         <form
           onSubmit={(e) => {
-            if (!user?.anonymous) {
+            if (!anonymous) {
               e.preventDefault()
-              dispatch(sendMessage(currentText))
+              sendMessage(currentText, props.source)
               setCurrentText("")
             }
           }}
         >
           <input
             placeholder={
-              user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
+              anonymous ? t("chat_disabled_anonymous") : t("type_here")
             }
-            disabled={user?.anonymous}
+            disabled={anonymous}
             type="text"
-            title={
-              user?.anonymous ? t("chat_disabled_anonymous") : t("type_here")
-            }
+            title={anonymous ? t("chat_disabled_anonymous") : t("type_here")}
             onChange={(e) => {
               setCurrentText(e.target.value)
             }}
@@ -47,10 +52,8 @@ export default function Chat(props: { source: string; canWrite: boolean }) {
           />
           <button
             className="bubbly blue"
-            disabled={user?.anonymous}
-            title={
-              user?.anonymous ? t("chat_disabled_anonymous") : t("send_message")
-            }
+            disabled={anonymous}
+            title={anonymous ? t("chat_disabled_anonymous") : t("send_message")}
           >
             {t("send")}
           </button>

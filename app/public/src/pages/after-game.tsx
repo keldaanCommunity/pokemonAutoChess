@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import { CloseCodes } from "../../../types/enum/CloseCodes"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { authenticateUser } from "../network"
+import { authenticateUser, client, joinAfter, rooms } from "../network"
 import { preference } from "../preferences"
 import {
   addPlayer,
@@ -13,18 +13,14 @@ import {
   setElligibilityToXP,
   setGameMode
 } from "../stores/AfterGameStore"
-import { joinAfter } from "../stores/NetworkStore"
 import AfterMenu from "./component/after/after-menu"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
-  const client: Client = useAppSelector((state) => state.network.client)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
-  const room: Room<AfterGameState> | undefined = useAppSelector(
-    (state) => state.network.after
-  )
+  const room: Room<AfterGameState> | undefined = rooms.after
   const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
@@ -39,11 +35,11 @@ export default function AfterGame() {
               LocalStoreKeys.RECONNECTION_AFTER_GAME
             )?.reconnectionToken
             if (cachedReconnectionToken) {
-              const r: Room<AfterGameState> = await client.reconnect(
+              const r = await client.reconnect<AfterGameState>(
                 cachedReconnectionToken
               )
               await initialize(r)
-              dispatch(joinAfter(r))
+              joinAfter(r)
             } else {
               setToLobby(true)
             }
@@ -53,11 +49,11 @@ export default function AfterGame() {
                 LocalStoreKeys.RECONNECTION_AFTER_GAME
               )?.reconnectionToken
               if (cachedReconnectionToken) {
-                const r: Room<AfterGameState> = await client.reconnect(
+                const r = await client.reconnect<AfterGameState>(
                   cachedReconnectionToken
                 )
                 await initialize(r)
-                dispatch(joinAfter(r))
+                joinAfter(r)
               } else {
                 setToLobby(true)
               }

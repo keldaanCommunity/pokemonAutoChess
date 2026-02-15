@@ -1,13 +1,10 @@
-import { Client, Room } from "@colyseus/sdk"
+
 import { User } from "@firebase/auth-types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import type { server } from "../../../app.config.ts"
 import { CollectionUtils } from "../../../core/collection"
 import { IBot } from "../../../models/mongo-models/bot-v2"
-import AfterGameState from "../../../rooms/states/after-game-state"
-import GameState from "../../../rooms/states/game-state"
-import LobbyState from "../../../rooms/states/lobby-state"
-import PreparationState from "../../../rooms/states/preparation-state"
+
 import { Emotion, Role, Title, Transfer } from "../../../types"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { EloRank } from "../../../types/enum/EloRank"
@@ -22,14 +19,9 @@ import {
   IUserMetadataUnpacked
 } from "../../../types/interfaces/UserMetadata"
 import { getAvatarString } from "../../../utils/avatar"
-import { logger } from "../../../utils/logger"
+import { leaveAllRooms, leaveRoom, rooms } from "../network.js"
 
 export interface INetwork {
-  client: Client<typeof server>
-  lobby: Room<{ state: LobbyState }> | undefined
-  preparation: Room<PreparationState> | undefined
-  game: Room<GameState> | undefined
-  after: Room<AfterGameState> | undefined
   uid: string
   displayName: string
   email: string
@@ -39,17 +31,7 @@ export interface INetwork {
   error: string | null
 }
 
-const endpoint = `${window.location.protocol.replace("http", "ws")}//${
-  window.location.host
-}`
-logger.info(endpoint)
-
 const initalState: INetwork = {
-  client: new Client<typeof server>(endpoint),
-  lobby: undefined,
-  preparation: undefined,
-  game: undefined,
-  after: undefined,
   uid: "",
   displayName: "",
   email: "",
@@ -71,18 +53,10 @@ export const networkSlice = createSlice({
       }
     },
     logOut: (state) => {
-      state.client = new Client<typeof server>(endpoint)
       state.uid = ""
       state.displayName = ""
       state.email = ""
-      state.preparation?.connection.isOpen && state.preparation?.leave(true)
-      state.preparation = undefined
-      state.lobby?.connection.isOpen && state.lobby?.leave(true)
-      state.lobby = undefined
-      state.game?.connection.isOpen && state.game?.leave(true)
-      state.game = undefined
-      state.after?.connection.isOpen && state.after?.leave(true)
-      state.after = undefined
+      leaveAllRooms()
     },
     setProfile: (state, action: PayloadAction<IUserMetadataJSON>) => {
       const unpackedCollection: Map<string, IPokemonCollectionItemUnpacked> =
@@ -99,65 +73,14 @@ export const networkSlice = createSlice({
         ...action.payload,
         pokemonCollection: unpackedCollection
       }
-    },
-    joinLobby: (state, action: PayloadAction<Room<{ state: LobbyState }>>) => {
-      state.lobby = action.payload
-      state.preparation?.connection.isOpen && state.preparation?.leave(true)
-      state.preparation = undefined
-      state.game?.connection.close() // still allow to reconnect if left by mistake
-      state.game = undefined
-      state.after?.connection.isOpen && state.after?.leave(true)
-      state.after = undefined
-    },
-    joinPreparation: (state, action: PayloadAction<Room<PreparationState>>) => {
-      state.preparation = action.payload
-      state.lobby?.connection.isOpen && state.lobby?.leave(true)
-      state.lobby = undefined
-      state.game?.connection.close() // still allow to reconnect if left by mistake
-      state.game = undefined
-      state.after?.connection.isOpen && state.after?.leave(true)
-      state.after = undefined
-    },
-    joinGame: (state, action: PayloadAction<Room<GameState>>) => {
-      Object.assign(state, { game: action.payload })
-      state.preparation?.connection.isOpen && state.preparation?.leave(true)
-      state.preparation = undefined
-      state.lobby?.connection.isOpen && state.lobby?.leave(true)
-      state.lobby = undefined
-      state.after?.connection.isOpen && state.after?.leave(true)
-      state.after = undefined
-    },
-    joinAfter: (state, action: PayloadAction<Room<AfterGameState>>) => {
-      state.after = action.payload
-      state.game?.connection.close() // still allow to reconnect if left by mistake
-      state.game = undefined
-      state.lobby?.connection.isOpen && state.lobby?.leave(true)
-      state.lobby = undefined
-      state.preparation?.connection.isOpen && state.preparation?.leave(true)
-      state.preparation = undefined
-    },
-    sendMessage: (state, action: PayloadAction<string>) => {
-      if (state.lobby) {
-        state.lobby.send(Transfer.NEW_MESSAGE, action.payload)
-      }
-      if (state.preparation) {
-        state.preparation.send(Transfer.NEW_MESSAGE, action.payload)
-      }
-    },
-    removeMessage: (state, action: PayloadAction<{ id: string }>) => {
-      if (state.lobby) {
-        state.lobby.send(Transfer.REMOVE_MESSAGE, action.payload)
-      }
-      if (state.preparation) {
-        state.preparation.send(Transfer.REMOVE_MESSAGE, action.payload)
-      }
-    },
+    },  
+  
     searchName: (state, action: PayloadAction<string>) => {
-      state.lobby?.send(Transfer.SEARCH, { name: action.payload })
+      rooms.lobby?.send(Transfer.SEARCH, { name: action.payload })
     },
     changeName: (state, action: PayloadAction<string>) => {
       if (state.profile) state.profile.displayName = action.payload
-      state.lobby?.send(Transfer.CHANGE_NAME, { name: action.payload })
+      rooms.lobby?.send(Transfer.CHANGE_NAME, { name: action.payload })
     },
     changeAvatar: (
       state,
@@ -169,45 +92,45 @@ export const networkSlice = createSlice({
           action.payload.shiny,
           action.payload.emotion
         )
-      state.lobby?.send(Transfer.CHANGE_AVATAR, action.payload)
+      rooms.lobby?.send(Transfer.CHANGE_AVATAR, action.payload)
     },
     addBot: (state, action: PayloadAction<BotDifficulty | IBot>) => {
-      state.preparation?.send(Transfer.ADD_BOT, action.payload)
+      rooms.preparation?.send(Transfer.ADD_BOT, action.payload)
     },
     removeBot: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.REMOVE_BOT, action.payload)
+      rooms.preparation?.send(Transfer.REMOVE_BOT, action.payload)
     },
     toggleReady: (state, action: PayloadAction<boolean>) => {
-      state.preparation?.send(Transfer.TOGGLE_READY, action.payload)
+      rooms.preparation?.send(Transfer.TOGGLE_READY, action.payload)
     },
     setNoElo: (state, action: PayloadAction<boolean>) => {
-      state.preparation?.send(Transfer.CHANGE_NO_ELO, action.payload)
+      rooms.preparation?.send(Transfer.CHANGE_NO_ELO, action.payload)
     },
     lockShop: (state) => {
-      state.game?.send(Transfer.LOCK)
+      rooms.game?.send(Transfer.LOCK)
     },
     levelClick: (state) => {
-      state.game?.send(Transfer.LEVEL_UP)
+      rooms.game?.send(Transfer.LEVEL_UP)
     },
     shopClick: (state, action: PayloadAction<number>) => {
-      state.game?.send(Transfer.SHOP, { id: action.payload })
+      rooms.game?.send(Transfer.SHOP, { id: action.payload })
     },
     pokemonPropositionClick: (state, action: PayloadAction<PkmProposition>) => {
-      state.game?.send(Transfer.POKEMON_PROPOSITION, action.payload)
+      rooms.game?.send(Transfer.POKEMON_PROPOSITION, action.payload)
     },
     itemClick: (state, action: PayloadAction<Item>) => {
-      state.game?.send(Transfer.ITEM, action.payload)
+      rooms.game?.send(Transfer.ITEM, action.payload)
     },
     gameStartRequest: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.GAME_START_REQUEST, {
+      rooms.preparation?.send(Transfer.GAME_START_REQUEST, {
         token: action.payload
       })
     },
     changeRoomName: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.CHANGE_ROOM_NAME, action.payload)
+      rooms.preparation?.send(Transfer.CHANGE_ROOM_NAME, action.payload)
     },
     changeRoomPassword: (state, action: PayloadAction<string | null>) => {
-      state.preparation?.send(Transfer.CHANGE_ROOM_PASSWORD, action.payload)
+      rooms.preparation?.send(Transfer.CHANGE_ROOM_PASSWORD, action.payload)
     },
     changeRoomMinMaxRanks: (
       state,
@@ -216,10 +139,10 @@ export const networkSlice = createSlice({
         maxRank: EloRank | null
       }>
     ) => {
-      state.preparation?.send(Transfer.CHANGE_ROOM_RANKS, action.payload)
+      rooms.preparation?.send(Transfer.CHANGE_ROOM_RANKS, action.payload)
     },
     setSpecialRule: (state, action: PayloadAction<SpecialGameRule | null>) => {
-      state.preparation?.send(Transfer.CHANGE_SPECIAL_RULE, action.payload)
+      rooms.preparation?.send(Transfer.CHANGE_SPECIAL_RULE, action.payload)
     },
     changeSelectedEmotion: (
       state,
@@ -238,84 +161,84 @@ export const networkSlice = createSlice({
           pokemonCollectionItem.selectedShiny = action.payload.shiny
         }
       }
-      state.lobby?.send(Transfer.CHANGE_SELECTED_EMOTION, action.payload)
+      rooms.lobby?.send(Transfer.CHANGE_SELECTED_EMOTION, action.payload)
     },
     buyEmotion: (
       state,
       action: PayloadAction<{ index: string; emotion: Emotion; shiny: boolean }>
     ) => {
-      state.lobby?.send(Transfer.BUY_EMOTION, action.payload)
+      rooms.lobby?.send(Transfer.BUY_EMOTION, action.payload)
     },
     buyBooster: (state, action: PayloadAction<{ index: string }>) => {
-      state.lobby?.send(Transfer.BUY_BOOSTER, action.payload)
+      rooms.lobby?.send(Transfer.BUY_BOOSTER, action.payload)
     },
     openBooster: (state) => {
-      state.lobby?.send(Transfer.OPEN_BOOSTER)
+      rooms.lobby?.send(Transfer.OPEN_BOOSTER)
     },
     showEmote: (state, action: PayloadAction<string | undefined>) => {
-      state.game?.send(Transfer.SHOW_EMOTE, action.payload)
+      rooms.game?.send(Transfer.SHOW_EMOTE, action.payload)
     },
     searchById: (state, action: PayloadAction<string>) => {
-      state.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
+      rooms.lobby?.send(Transfer.SEARCH_BY_ID, action.payload)
     },
     setTitle: (state, action: PayloadAction<Title | "">) => {
       if (state.profile) state.profile.title = action.payload
-      state.lobby?.send(Transfer.SET_TITLE, action.payload)
+      rooms.lobby?.send(Transfer.SET_TITLE, action.payload)
     },
     deleteTournament: (state, action: PayloadAction<{ id: string }>) => {
-      state.lobby?.send(Transfer.DELETE_TOURNAMENT, action.payload)
+      rooms.lobby?.send(Transfer.DELETE_TOURNAMENT, action.payload)
     },
     remakeTournamentLobby: (
       state,
       action: PayloadAction<{ tournamentId: string; bracketId: string }>
     ) => {
-      state.lobby?.send(Transfer.REMAKE_TOURNAMENT_LOBBY, action.payload)
+      rooms.lobby?.send(Transfer.REMAKE_TOURNAMENT_LOBBY, action.payload)
     },
     participateInTournament: (
       state,
       action: PayloadAction<{ tournamentId: string; participate: boolean }>
     ) => {
-      state.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
+      rooms.lobby?.send(Transfer.PARTICIPATE_TOURNAMENT, action.payload)
     },
     giveBooster: (
       state,
       action: PayloadAction<{ uid: string; numberOfBoosters: number }>
     ) => {
-      state.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
+      rooms.lobby?.send(Transfer.GIVE_BOOSTER, action.payload)
     },
     heapSnapshot: (state) => {
-      state.lobby?.send(Transfer.HEAP_SNAPSHOT)
+      rooms.lobby?.send(Transfer.HEAP_SNAPSHOT)
     },
     deleteAccount: (state) => {
-      state.lobby?.send(Transfer.DELETE_ACCOUNT)
+      rooms.lobby?.send(Transfer.DELETE_ACCOUNT)
     },
     giveRole: (state, action: PayloadAction<{ uid: string; role: Role }>) => {
-      state.lobby?.send(Transfer.SET_ROLE, action.payload)
+      rooms.lobby?.send(Transfer.SET_ROLE, action.payload)
     },
     giveTitle: (
       state,
       action: PayloadAction<{ uid: string; title: Title }>
     ) => {
-      state.lobby?.send(Transfer.GIVE_TITLE, action.payload)
+      rooms.lobby?.send(Transfer.GIVE_TITLE, action.payload)
     },
     kick: (state, action: PayloadAction<string>) => {
-      state.preparation?.send(Transfer.KICK, action.payload)
+      rooms.preparation?.send(Transfer.KICK, action.payload)
     },
     ban: (state, action: PayloadAction<{ uid: string; reason: string }>) => {
-      state.lobby?.send(Transfer.BAN, action.payload)
+      rooms.lobby?.send(Transfer.BAN, action.payload)
     },
     unban: (state, action: PayloadAction<{ uid: string; name: string }>) => {
-      state.lobby?.send(Transfer.UNBAN, action.payload)
+      rooms.lobby?.send(Transfer.UNBAN, action.payload)
     },
     selectLanguage: (state, action: PayloadAction<Language>) => {
       if (state.profile) state.profile.language = action.payload
-      state.lobby?.send(Transfer.SELECT_LANGUAGE, action.payload)
+      rooms.lobby?.send(Transfer.SELECT_LANGUAGE, action.payload)
     },
     createTournament: (
       state,
       action: PayloadAction<{ name: string; startDate: string }>
     ) => {
-      state.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
+      rooms.lobby?.send(Transfer.NEW_TOURNAMENT, action.payload)
     },
     setErrorAlertMessage: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
@@ -337,7 +260,6 @@ export const {
   pokemonPropositionClick,
   giveTitle,
   giveRole,
-  removeMessage,
   deleteTournament,
   remakeTournamentLobby,
   participateInTournament,
@@ -355,12 +277,7 @@ export const {
   logIn,
   logOut,
   setProfile,
-  joinLobby,
-  sendMessage,
   searchName,
-  joinPreparation,
-  joinGame,
-  joinAfter,
   changeName,
   changeAvatar,
   addBot,

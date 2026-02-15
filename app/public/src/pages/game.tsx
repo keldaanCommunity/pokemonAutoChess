@@ -36,7 +36,7 @@ import { values } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
-import { authenticateUser } from "../network"
+import { authenticateUser, client, joinGame, rooms } from "../network"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -49,6 +49,7 @@ import {
   removePlayer,
   setAdditionalPokemons,
   setEmotesUnlocked,
+  setGameMode,
   setInterest,
   setItemsProposition,
   setLife,
@@ -70,7 +71,6 @@ import {
   updateExperienceManager
 } from "../stores/GameStore"
 import {
-  joinGame,
   setConnectionStatus,
   setErrorAlertMessage
 } from "../stores/NetworkStore"
@@ -149,14 +149,11 @@ function showMoneyToast(value: number) {
 export default function Game() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const client: Client = useAppSelector((state) => state.network.client)
+  const navigate = useNavigate()  
   const connectionStatus = useAppSelector(
     (state) => state.network.connectionStatus
   )
-  const room: Room<GameState> | undefined = useAppSelector(
-    (state) => state.network.game
-  )
+  const room: Room<GameState> | undefined = rooms.game
   const uid: string = useAppSelector((state) => state.network.uid)
   const currentPlayerId: string = useAppSelector(
     (state) => state.game.currentPlayerId
@@ -197,7 +194,7 @@ export default function Game() {
         }
 
         client
-          .reconnect(cachedReconnectionToken)
+          .reconnect<GameState>(cachedReconnectionToken)
           .then((room: Room) => {
             // store game token for 1 hour
             localStore.set(
@@ -208,7 +205,7 @@ export default function Game() {
               },
               60 * 60
             )
-            dispatch(joinGame(room))
+            joinGame(room)
             connected.current = true
             connecting.current = false
             dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
@@ -307,7 +304,7 @@ export default function Game() {
       afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
     const gameMode = room?.state.gameMode
 
-    const r: Room<AfterGameState> = await client.create("after-game", {
+    const r = await client.create<AfterGameState>("after-game", {
       players: afterPlayers,
       idToken: token,
       eligibleToXP,
@@ -322,7 +319,7 @@ export default function Game() {
     if (r.connection.isOpen) {
       await r.leave(false)
     }
-    dispatch(leaveGame())
+    dispatch(leaveGame(0))
     navigate("/after")
     if (room?.connection.isOpen) {
       room.leave()
@@ -582,6 +579,10 @@ export default function Game() {
 
       const $ = getStateCallbacks(room)
       const $state = $(room.state)
+
+      $state.listen("gameMode", mode => {
+        dispatch(setGameMode(mode))
+      })
 
       $state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
