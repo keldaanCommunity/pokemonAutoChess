@@ -4,7 +4,6 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { Role, Title } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 import {
   ban,
   giveBooster,
@@ -14,7 +13,8 @@ import {
   searchById,
   searchName,
   unban
-} from "../../../stores/NetworkStore"
+} from "../../../network"
+import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 import { AccountTab } from "./account-tab"
 import { AvatarTab } from "./avatar-tab"
 import { GadgetsTab } from "./gadgets-tab"
@@ -40,7 +40,7 @@ export default function Profile() {
 
   function onSearchQueryChange(query: string) {
     if (query) {
-      dispatch(searchName(query))
+      searchName(query)
     } else {
       resetSearch()
     }
@@ -124,7 +124,6 @@ function OtherProfileActions(props: {
   setRightPanel: React.Dispatch<React.SetStateAction<"game" | "chat">>
 }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const currentUid = useAppSelector((state) => state.network.profile?.uid)
   const role = useAppSelector((state) => state.network.profile?.role)
   const user = useAppSelector((state) => state.lobby.searchedUser)
@@ -136,12 +135,10 @@ function OtherProfileActions(props: {
       <button
         className="bubbly green"
         onClick={() => {
-          dispatch(
-            giveBooster({
-              numberOfBoosters: Number(prompt("How many boosters ?")) || 1,
-              uid: user.uid
-            })
-          )
+          giveBooster({
+            numberOfBoosters: Number(prompt("How many boosters ?")) || 1,
+            uid: user.uid
+          })
         }}
       >
         {t("give_boosters")}
@@ -150,12 +147,7 @@ function OtherProfileActions(props: {
 
   const heapSnapshotButton =
     user && role && role === Role.ADMIN ? (
-      <button
-        className="bubbly red"
-        onClick={() => {
-          dispatch(heapSnapshot())
-        }}
-      >
+      <button className="bubbly red" onClick={() => heapSnapshot()}>
         {t("heap_snapshot")}
       </button>
     ) : null
@@ -166,7 +158,7 @@ function OtherProfileActions(props: {
         className="bubbly red"
         onClick={() => {
           const reason = prompt(`Reason for the ban:`)
-          dispatch(ban({ uid: user.uid, reason: reason ? reason : "" }))
+          ban({ uid: user.uid, reason: reason ? reason : "" })
         }}
       >
         {t("ban_user")}
@@ -178,7 +170,8 @@ function OtherProfileActions(props: {
       <button
         className="bubbly red"
         onClick={() => {
-          dispatch(unban({ uid: user.uid, name: user.displayName }))
+          unban({ uid: user.uid, name: user.displayName })
+          alert(`${user.displayName} has been unbanned`)
         }}
       >
         {t("unban_user")}
@@ -215,7 +208,7 @@ function OtherProfileActions(props: {
         <button
           className="bubbly orange"
           onClick={() => {
-            dispatch(giveRole({ uid: user.uid, role: profileRole }))
+            giveRole({ uid: user.uid, role: profileRole })
             alert(`Role ${profileRole} given to ${user.displayName}`)
           }}
         >
@@ -242,7 +235,7 @@ function OtherProfileActions(props: {
         <button
           className="bubbly blue"
           onClick={() => {
-            dispatch(giveTitle({ uid: user.uid, title: title }))
+            giveTitle({ uid: user.uid, title: title })
             alert(`Title ${title} given to ${user.displayName}`)
           }}
         >
@@ -272,10 +265,7 @@ function OtherProfileActions(props: {
       {user?.banned ? unbanButton : banButton}
       {props.rightPanel === "game" ? chatHistoryButton : gameHistoryButton}
       {currentUid && user && user.uid !== currentUid && (
-        <button
-          className="bubbly blue"
-          onClick={() => dispatch(searchById(currentUid))}
-        >
+        <button className="bubbly blue" onClick={() => searchById(currentUid)}>
           {t("back_to_my_profile")}
         </button>
       )}

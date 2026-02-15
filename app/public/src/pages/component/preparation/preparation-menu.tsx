@@ -15,27 +15,26 @@ import { formatMinMaxRanks } from "../../../../../utils/elo"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useAppSelector } from "../../../hooks"
 import {
   addBot,
   changeRoomMinMaxRanks,
   changeRoomName,
   changeRoomPassword,
   gameStartRequest,
+  rooms,
   setNoElo,
   setSpecialRule,
   toggleReady
-} from "../../../stores/NetworkStore"
+} from "../../../network"
 import { cc } from "../../utils/jsx"
 import { GameModeIcon } from "../icons/game-mode-icon"
 import { BotSelectModal } from "./bot-select-modal"
 import PreparationMenuUser from "./preparation-menu-user"
 import "./preparation-menu.css"
-import { rooms } from "../../../network"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const [inputValue, setInputValue] = useState<string>("")
   const users: IGameUser[] = useAppSelector((state) => state.preparation.users)
   const user = useAppSelector((state) => state.preparation.user)
@@ -100,45 +99,41 @@ export default function PreparationMenu() {
         .toString(36)
         .substring(2, 6)
         .toUpperCase()
-      dispatch(changeRoomPassword(newPassword))
+      changeRoomPassword(newPassword)
     } else {
-      dispatch(changeRoomPassword(null))
+      changeRoomPassword(null)
     }
   }
 
   function toggleNoElo() {
-    dispatch(setNoElo(!noElo))
+    setNoElo(!noElo)
   }
 
   const startGame = throttle(async function startGame() {
     if (rooms.preparation) {
       const token = await firebase.auth().currentUser?.getIdToken()
       if (token) {
-        dispatch(gameStartRequest(token))
+        gameStartRequest(token)
       }
     }
   }, 1000)
 
   const changeMinRank = (newMinRank: EloRank) => {
-    dispatch(
-      changeRoomMinMaxRanks({
-        minRank: newMinRank,
-        maxRank: maxRank
-      })
-    )
+    changeRoomMinMaxRanks({
+      minRank: newMinRank,
+      maxRank: maxRank
+    })
   }
 
   const changeMaxRank = (newMaxRank: EloRank) => {
-    dispatch(
-      changeRoomMinMaxRanks({
-        minRank: minRank,
-        maxRank: newMaxRank
-      })
-    )
+    changeRoomMinMaxRanks({
+      minRank: minRank,
+      maxRank: newMaxRank
+    })
   }
 
   const changeSpecialRule = (rule: SpecialGameRule | "none") => {
-    dispatch(setSpecialRule(rule === "none" ? null : rule))
+    setSpecialRule(rule === "none" ? null : rule)
   }
 
   const headerMessage = (
@@ -268,7 +263,7 @@ export default function PreparationMenu() {
         />
         <button
           className="bubbly blue"
-          onClick={() => dispatch(changeRoomName(inputValue))}
+          onClick={() => changeRoomName(inputValue)}
         >
           {t("change_room_name")}
         </button>
@@ -284,7 +279,7 @@ export default function PreparationMenu() {
             if (botDifficulty === BotDifficulty.CUSTOM) {
               setShowBotSelectModal(true)
             } else {
-              dispatch(addBot(botDifficulty))
+              addBot(botDifficulty)
             }
           }}
         >
@@ -321,7 +316,7 @@ export default function PreparationMenu() {
       <button
         className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
         onClick={() => {
-          dispatch(toggleReady(!isReady))
+          toggleReady(!isReady)
         }}
       >
         {t("ready")} {isReady ? "✔" : "?"}

@@ -14,12 +14,14 @@ import { GameMode } from "../../../types/enum/Game"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { authenticateUser, client, joinPreparation, rooms } from "../network"
 import {
-  setConnectionStatus,
-  setErrorAlertMessage,
+  authenticateUser,
+  client,
+  joinPreparation,
+  rooms,
   toggleReady
-} from "../stores/NetworkStore"
+} from "../network"
+import { setConnectionStatus, setErrorAlertMessage } from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -166,7 +168,7 @@ export default function Preparation() {
         if (user.uid === uid) {
           dispatch(setUser(user))
           if (room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
-            dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+            toggleReady(true) // automatically set users ready in non-classic game mode
           }
         } else if (!user.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
