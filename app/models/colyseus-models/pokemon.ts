@@ -17885,14 +17885,14 @@ export class Tynamo extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.HATCH
+  rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.EELEKTRIK
   hp = 50
-  atk = 5
+  atk = 6
   speed = 41
-  def = 3
-  speDef = 3
+  def = 4
+  speDef = 4
   maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
@@ -17905,14 +17905,14 @@ export class Eelektrik extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.HATCH
+  rarity = Rarity.UNCOMMON
   stars = 2
   evolution = Pkm.EELEKTROSS
-  hp = 115
-  atk = 10
+  hp = 150
+  atk = 12
   speed = 41
-  def = 5
-  speDef = 5
+  def = 8
+  speDef = 8
   maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL
@@ -17925,13 +17925,13 @@ export class Eelektross extends Pokemon {
     Synergy.AQUATIC,
     Synergy.AMORPHOUS
   ])
-  rarity = Rarity.HATCH
+  rarity = Rarity.UNCOMMON
   stars = 3
-  hp = 185
+  hp = 250
   atk = 24
   speed = 41
-  def = 8
-  speDef = 8
+  def = 12
+  speDef = 12
   maxPP = 80
   range = 1
   skill = Ability.SUCTION_HEAL

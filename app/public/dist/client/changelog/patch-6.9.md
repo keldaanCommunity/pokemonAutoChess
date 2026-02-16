@@ -5,6 +5,11 @@
 # Changes to Pokémon & Abilities
 
 - New ability for Salandit line: Fire lash ; PP 60 → 100
+- Goomy line is now Common instead of Epic
+- Dratini line is now Epic instead of Rare
+- Tynamo line is back to Uncommon instead of Common
+
+
 
 # Misc
 
