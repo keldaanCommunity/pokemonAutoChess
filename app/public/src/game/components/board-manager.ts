@@ -868,7 +868,7 @@ export default class BoardManager {
           )
           pokemonUI.x = coordinates[0]
           pokemonUI.y = coordinates[1]
-          store.dispatch(refreshShopUI())
+          store.dispatch(refreshShopUI(0))
           break
 
         case "positionY": {
@@ -891,7 +891,7 @@ export default class BoardManager {
             pokemonUI.destroy()
             this.pokemons.delete(pokemonUI.id)
           }
-          store.dispatch(refreshShopUI())
+          store.dispatch(refreshShopUI(0))
           break
         }
 

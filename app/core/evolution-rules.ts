@@ -391,7 +391,7 @@ export function carryOverPermanentStats(
   // carry over TM
   const existingTms = pokemonsBeforeEvolution
     .map((p) => p.tm)
-    .filter<Ability>((tm): tm is Ability => tm != null)
+    .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
   if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
     pokemonEvolved.skill = pokemonEvolved.tm

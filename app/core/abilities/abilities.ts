@@ -16044,12 +16044,143 @@ export class WaveSplashStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
+    super.process(pokemon, board, target, crit)
     // User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL
     const shieldAmount = Math.round(pokemon.maxHP * 0.2)
     pokemon.addShield(shieldAmount, pokemon, 1, crit)
     const damage = Math.round(pokemon.maxHP * 0.2)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
+export class FocusPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    pokemon.cooldown = 1000
+    pokemon.broadcastAbility({
+      skill: "FOCUS_PUNCH_CHARGE",
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY
+    })
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target.hp <= 0) {
+          pokemon.pp = pokemon.maxPP
+          return
+        }
+        let farthestEmptyCell: Cell | null = null
+        let blocked = false
+        effectInOrientation(board, pokemon, target, (cell) => {
+          if (cell.value && cell.value.id !== target.id) {
+            blocked = true
+          } else {
+            farthestEmptyCell = cell
+          }
+        })
+        pokemon.broadcastAbility({ skill: "FOCUS_PUNCH" })
+        if (farthestEmptyCell != null && target.canBeMoved) {
+          const targetX = target.positionX
+          const targetY = target.positionY
+          const willEject =
+            !blocked &&
+            !target.status.resurrection &&
+            !target.status.magicBounce &&
+            !target.status.protect
+          if (willEject) {
+            // eject from the board
+            pokemon.broadcastAbility({ skill: "FOCUS_PUNCH_EJECT" })
+            target.cooldown = 9999
+            target.handleSpecialDamage(
+              9999,
+              board,
+              AttackType.TRUE,
+              pokemon,
+              crit
+            )
+          } else {
+            const { x, y } = farthestEmptyCell as Cell
+            target.moveTo(x, y, board, true)
+            const damage = 5 * pokemon.atk
+            target.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+          pokemon.moveTo(targetX, targetY, board, true)
+        }
+      }, 900)
+    )
+  }
+}
+
+export class HyperBeamStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    pokemon.cooldown = 1000
+    pokemon.broadcastAbility({
+      skill: "HYPER_BEAM_CHARGE",
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY
+    })
+
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.broadcastAbility({ skill: "HYPER_BEAM" })
+        const damage = [50, 100, 150][pokemon.stars - 1] ?? 150
+        pokemon.broadcastAbility({
+          skill: Ability.HYPER_BEAM,
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        effectInLine(board, pokemon, target, (cell) => {
+          if (cell.value != null && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+        pokemon.status.triggerFatigue(5000, pokemon)
+      }, 1000)
+    )
+  }
+}
+
+export class SkillSwapStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    if (AbilityStrategies[target.skill].copyable) {
+      pokemon.skill = target.skill
+      pokemon.maxPP = target.refToBoardPokemon
+        ? target.refToBoardPokemon.maxPP
+        : target.maxPP
+      if (pokemon.refToBoardPokemon) {
+        pokemon.refToBoardPokemon.skill = target.skill
+      }
+      AbilityStrategies[target.skill].process(pokemon, board, target, crit)
+    }
   }
 }
 
@@ -16587,7 +16718,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ELECTRIFY]: new ElectrifyStrategy(),
   [Ability.HEADLONDING_RUSH]: new HeadlongRushStrategy(),
   [Ability.WAVE_SPLASH]: new WaveSplashStrategy(),
-  [Ability.TWISTER]: new TwisterStrategy()
+  [Ability.TWISTER]: new TwisterStrategy(),
+  [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
+  [Ability.HYPER_BEAM]: new HyperBeamStrategy(),
+  [Ability.SKILL_SWAP]: new SkillSwapStrategy()
 }
 
 export function castAbility(

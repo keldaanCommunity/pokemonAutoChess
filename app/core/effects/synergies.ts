@@ -195,9 +195,9 @@ export const humanHealEffect = new OnDamageDealtEffect(
     if (pokemon.effects.has(EffectEnum.MEDITATE)) {
       lifesteal = 0.25
     } else if (pokemon.effects.has(EffectEnum.FOCUS_ENERGY)) {
-      lifesteal = 0.4
+      lifesteal = 0.35
     } else if (pokemon.effects.has(EffectEnum.CALM_MIND)) {
-      lifesteal = 0.6
+      lifesteal = 0.5
     }
     pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
   },

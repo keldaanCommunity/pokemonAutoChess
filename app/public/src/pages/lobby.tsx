@@ -1,4 +1,4 @@
-import { Room, RoomAvailable } from "@colyseus/sdk"
+import { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -7,6 +7,7 @@ import GameState from "../../../rooms/states/game-state"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { client, leaveRoom, rooms } from "../network"
 import { resetLobby } from "../stores/LobbyStore"
 import {
   logOut,
@@ -25,8 +26,6 @@ import "./lobby.css"
 export default function Lobby() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const lobby = useAppSelector((state) => state.network.lobby)
-  const client = useAppSelector((state) => state.network.client)
   const networkError = useAppSelector((state) => state.network.error)
   const pendingGameId = useAppSelector((state) => state.network.pendingGameId)
   const gameRooms: RoomAvailable[] = useAppSelector(
@@ -46,19 +45,17 @@ export default function Lobby() {
   }, [lobbyJoined])
 
   const signOut = useCallback(async () => {
-    if (lobby?.connection.isOpen) {
-      await lobby.leave()
-    }
+    leaveRoom("lobby")
     await firebase.auth().signOut()
     dispatch(resetLobby())
     dispatch(logOut())
     navigate("/")
-  }, [dispatch, lobby])
+  }, [dispatch])
 
   const reconnectToGame = throttle(async function reconnectToGame() {
     const idToken = await firebase.auth().currentUser?.getIdToken()
     if (idToken && pendingGameId) {
-      const game: Room<GameState> = await client.joinById(pendingGameId, {
+      const game = await client.joinById<GameState>(pendingGameId, {
         idToken
       })
       localStore.set(
@@ -67,8 +64,8 @@ export default function Lobby() {
         30
       )
       await Promise.allSettled([
-        lobby?.connection.isOpen && lobby.leave(false),
-        game.connection.isOpen && game.leave(false)
+        leaveRoom("lobby", true),
+        leaveRoom("game", true)
       ])
       dispatch(resetLobby())
       navigate("/game")

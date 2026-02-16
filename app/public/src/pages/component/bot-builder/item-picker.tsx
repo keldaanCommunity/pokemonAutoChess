@@ -5,7 +5,6 @@ import { PkmWithCustom } from "../../../../../types"
 import {
   Berries,
   CraftableItems,
-  HMs,
   Item,
   ItemComponents,
   MemoryDiscs,
@@ -42,9 +41,9 @@ export default function ItemPicker(props: {
 
     { label: t("tools"), key: "tools", items: Tools },
     {
-      label: t("tm_hm_short"),
+      label: t("tm_short"),
       key: "tm",
-      items: [...TMs, ...HMs]
+      items: TMs
     },
     {
       label: t("shiny_items"),

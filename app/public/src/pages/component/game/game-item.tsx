@@ -2,9 +2,7 @@ import CSS from "csstype"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { Item } from "../../../../../types/enum/Item"
-import { useAppDispatch } from "../../../hooks"
-import { usePreference } from "../../../preferences"
-import { itemClick } from "../../../stores/NetworkStore"
+import { pickItem } from "../../../network"
 import { addIconsToDescription } from "../../utils/descriptions"
 
 const style: CSS.Properties = {
@@ -19,7 +17,6 @@ const style: CSS.Properties = {
 
 export default function GameItem(props: { item: Item }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
 
   return (
     <div className="my-container" style={style}>
@@ -33,7 +30,7 @@ export default function GameItem(props: { item: Item }) {
       </p>
       <button
         onClick={() => {
-          dispatch(itemClick(props.item))
+          pickItem(props.item)
         }}
         type="button"
         className="bubbly blue active"

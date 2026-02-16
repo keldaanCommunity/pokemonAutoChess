@@ -1,7 +1,7 @@
 import Player from "../models/colyseus-models/player"
 import { BotV2, IBot } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
-import { AbilityPerTM, Emotion, HMs, TMs } from "../types"
+import { AbilityPerTM, Emotion, TMs } from "../types"
 import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
@@ -67,10 +67,10 @@ export default class Bot {
         pkm.positionY = stepTeam.board[i].y
         if (stepTeam.board[i].items) {
           stepTeam.board[i].items.forEach((item) => {
-            if ([...TMs, ...HMs].includes(item)) {
+            if (TMs.includes(item)) {
               const ability = AbilityPerTM[item]
               if (!ability || pkm.types.has(Synergy.HUMAN) === false)
-                return false // prevent equipping TMs/HMs on non-human pokemon
+                return false // prevent equipping TMs on non-human pokemon
               pkm.tm = ability
               pkm.skill = ability
               pkm.maxPP = 100

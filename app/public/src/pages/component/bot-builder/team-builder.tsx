@@ -1,4 +1,3 @@
-import { Room } from "@colyseus/sdk"
 import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
@@ -8,7 +7,6 @@ import {
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import GameState from "../../../../../rooms/states/game-state"
 import { Emotion, PkmWithCustom, Role, Transfer } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -16,6 +14,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../../utils/board"
 import { values } from "../../../../../utils/schemas"
 import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { rooms } from "../../../network"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
 import ItemPicker from "./item-picker"
@@ -44,9 +43,6 @@ export default function TeamBuilder(props: {
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
   const isAdmin = useAppSelector(
     (state) => state.network.profile?.role === Role.ADMIN
-  )
-  const room: Room<GameState> | undefined = useAppSelector(
-    (state) => state.network.game
   )
 
   useEffect(() => {
@@ -273,7 +269,7 @@ export default function TeamBuilder(props: {
   }
 
   function overwriteBoard() {
-    room?.send(Transfer.OVERWRITE_BOARD, board)
+    rooms.game?.send(Transfer.OVERWRITE_BOARD, board)
   }
 
   return (
@@ -285,11 +281,9 @@ export default function TeamBuilder(props: {
         {ingame && isAdmin && (
           <details>
             <summary>Admin</summary>
-            {room && (
-              <button className="bubbly blue" onClick={overwriteBoard}>
-                Overwrite game board
-              </button>
-            )}
+            <button className="bubbly blue" onClick={overwriteBoard}>
+              Overwrite game board
+            </button>
           </details>
         )}
         {ingame && (

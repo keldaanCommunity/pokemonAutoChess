@@ -1,14 +1,14 @@
-import { Client, Room, RoomAvailable } from "@colyseus/sdk"
+import { RoomAvailable } from "@colyseus/sdk"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import LobbyState from "../../../../../rooms/states/lobby-state"
 import { IPreparationMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { rooms } from "../../../network"
 //import { mockRooms } from "../../../../../models/mock-data/room-listing"
 import { GameModeIcon } from "../icons/game-mode-icon"
 import { IngameRoomsList } from "./game-rooms-menu"
@@ -27,18 +27,13 @@ export default function RoomMenu() {
     (state) => state.lobby.gameRooms
   )
   const ccu = useAppSelector((state) => state.lobby.ccu)
-
-  const client: Client = useAppSelector((state) => state.network.client)
-  const lobby: Room<{ state: LobbyState }> | undefined = useAppSelector(
-    (state) => state.network.lobby
-  )
   const user = useAppSelector((state) => state.network.profile)
   const [showRoomSelectionMenu, setShowRoomSelectionMenu] =
     useState<boolean>(false)
 
   const requestRoom = throttle(async function (gameMode: GameMode) {
-    if (lobby) {
-      lobby.send(Transfer.REQUEST_ROOM, gameMode)
+    if (rooms.lobby) {
+      rooms.lobby.send(Transfer.REQUEST_ROOM, gameMode)
       setShowRoomSelectionMenu(false)
     }
   }, 1000)
@@ -48,7 +43,7 @@ export default function RoomMenu() {
   ) {
     const passwordProtected = selectedRoom.metadata?.passwordProtected
 
-    if (lobby) {
+    if (rooms.lobby) {
       let password: string | undefined
       if (
         passwordProtected &&
@@ -62,8 +57,6 @@ export default function RoomMenu() {
 
       await joinExistingPreparationRoom(
         selectedRoom.roomId,
-        client,
-        lobby,
         dispatch,
         navigate,
         password
@@ -78,7 +71,8 @@ export default function RoomMenu() {
     if (action === "join") {
       requestJoiningExistingRoom(room)
     } else if (action === "delete" && user?.role === Role.ADMIN) {
-      confirm("Delete room ?") && lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+      confirm("Delete room ?") &&
+        rooms.lobby?.send(Transfer.DELETE_ROOM, room.roomId)
     }
   }
 

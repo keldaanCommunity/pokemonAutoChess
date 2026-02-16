@@ -14,13 +14,14 @@ import { GameMode } from "../../../types/enum/Game"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { authenticateUser } from "../network"
 import {
+  authenticateUser,
+  client,
   joinPreparation,
-  setConnectionStatus,
-  setErrorAlertMessage,
+  rooms,
   toggleReady
-} from "../stores/NetworkStore"
+} from "../network"
+import { setConnectionStatus, setErrorAlertMessage } from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -53,11 +54,8 @@ import "./preparation.css"
 export default function Preparation() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-  const client: Client = useAppSelector((state) => state.network.client)
-  const room: Room<PreparationState> | undefined = useAppSelector(
-    (state) => state.network.preparation
-  )
+  const dispatch = useAppDispatch()  
+  const room: Room<PreparationState> | undefined = rooms.preparation
   const user = useAppSelector((state) => state.preparation.user)
   const initialized = useRef<boolean>(false)
   const connectingToGame = useRef<boolean>(false)
@@ -75,7 +73,7 @@ export default function Preparation() {
               if (cachedReconnectionToken) {
                 let r: Room<PreparationState>
                 try {
-                  r = await client.reconnect(cachedReconnectionToken)
+                  r = await client.reconnect<PreparationState>(cachedReconnectionToken)
                   if (r.name !== "preparation") {
                     throw new Error(
                       `Expected to join a preparation room but joined ${r.name} instead`
@@ -95,7 +93,7 @@ export default function Preparation() {
                   30
                 )
                 await initialize(r, user.uid)
-                dispatch(joinPreparation(r))
+                joinPreparation(r)
               } else {
                 navigate("/lobby")
               }
@@ -170,7 +168,7 @@ export default function Preparation() {
         if (user.uid === uid) {
           dispatch(setUser(user))
           if (room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
-            dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+            toggleReady(true) // automatically set users ready in non-classic game mode
           }
         } else if (!user.isBot) {
           playSound(SOUNDS.JOIN_ROOM)

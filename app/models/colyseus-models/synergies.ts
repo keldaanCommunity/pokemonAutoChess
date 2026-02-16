@@ -16,11 +16,6 @@ export default class Synergies extends MapSchema<number, Synergy> {
     })
   }
 
-  getSynergyStep(type: Synergy): number {
-    return SynergyTriggers[type].filter((n) => (this.get(type) ?? 0) >= n)
-      .length
-  }
-
   hasSynergyActive(type: Synergy): boolean {
     return (this.get(type) ?? 0) >= SynergyTriggers[type][0]
   }
@@ -269,4 +264,12 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
       }
     }
   })
+}
+
+export function getSynergyStep(
+  synergies: Map<Synergy, number> | MapSchema<number, Synergy>,
+  type: Synergy
+): number {
+  return SynergyTriggers[type].filter((n) => (synergies.get(type) ?? 0) >= n)
+    .length
 }
