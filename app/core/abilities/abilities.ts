@@ -8538,26 +8538,30 @@ export class FurySwipesStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    const min = Math.round(2 * scale)
-    const max = Math.round(5 * scale)
-    const nbAttacks = clamp(
-      Math.floor(
-        Math.random() * (1 + pokemon.luck / 100) * (max - min + 1) + min
-      ),
-      min,
-      max
-    )
+    const scale = 1 + pokemon.ap / 100
+    const nbAttacks = Math.round(5 * scale)
+    const hitPerSecond = Math.round(1000 / nbAttacks)
+
     for (let n = 0; n < nbAttacks; n++) {
-      target.handleSpecialDamage(
-        Math.ceil(pokemon.atk),
-        board,
-        AttackType.PHYSICAL,
-        pokemon,
-        false,
-        false
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          if (target && target.hp > 0) {
+            target.handleSpecialDamage(
+              Math.ceil(pokemon.atk),
+              board,
+              AttackType.PHYSICAL,
+              pokemon,
+              crit,
+              false
+            )
+          } else {
+            pokemon.pp = pokemon.maxPP // cast again immediately if target is dead
+          }
+        }, n * hitPerSecond)
       )
     }
+
+    pokemon.cooldown += 1000
   }
 }
 
@@ -15830,7 +15834,8 @@ export class PowderStrategy extends AbilityStrategy {
     const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
 
     // Find the enemy with the highest SPEED
-    const enemies = board.getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
+    const enemies = board
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
       .map((cell) => cell.value as PokemonEntity)
       .sort((a, b) => b.speed - a.speed)
@@ -15869,7 +15874,7 @@ export class PowderStrategy extends AbilityStrategy {
                 cell.value?.addSpeed(speedNerf, pokemon, 0, false)
               }, 5000)
             )
-          }        
+          }
         }
       }
     }
