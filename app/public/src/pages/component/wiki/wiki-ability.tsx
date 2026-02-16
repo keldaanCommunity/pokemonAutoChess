@@ -1,20 +1,20 @@
 import React, { useMemo, useState } from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
-import { AbilityPerTM, Item, TMs } from "../../../../../types/enum/Item"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  AbilityPerTM,
+  Item,
+  TMsBronze,
+  TMsSilver
+} from "../../../../../types/enum/Item"
+import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
-import {
-  GamePokemonDetail,
-  GamePokemonDetailTooltip
-} from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 
 export default function WikiAbility() {
   const { t } = useTranslation()
@@ -110,7 +110,7 @@ export default function WikiAbility() {
                       data-tooltip-content={tmPerAbility[ability]}
                     >
                       <img
-                        src={`assets/item/${TMs.includes(tmPerAbility[ability]) ? "TM" : "HM"}.png`}
+                        src={`assets/item/${TMsBronze.includes(tmPerAbility[ability]) ? "TM_Bronze" : TMsSilver.includes(tmPerAbility[ability]) ? "TM_Silver" : "TM_Gold"}.png`}
                         className="item"
                       />
                     </li>

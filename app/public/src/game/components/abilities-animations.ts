@@ -917,6 +917,15 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0],
     scale: [1, 2]
   }),
+  [Ability.HYPER_BEAM]: onCaster({
+    ability: Ability.PSYBEAM,
+    oriented: true,
+    rotation: -Math.PI / 2,
+    origin: [0.5, 0],
+    scale: [2, 2],
+    tint: 0xffffa0
+  }),
+  ["HYPER_BEAM_CHARGE"]: onCasterScale2,
   [Ability.THUNDER_SHOCK]: onTarget({
     ability: Ability.THUNDER,
     scale: 2,
@@ -1483,6 +1492,29 @@ export const AbilitiesAnimations: {
   [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
   [Ability.WONDER_ROOM]: onTargetScale4,
   [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.DRAIN_PUNCH }),
+  [Ability.FOCUS_PUNCH]: onTargetScale2,
+  ["FOCUS_PUNCH_CHARGE"]: onCaster({
+    ability: "HYPER_BEAM_CHARGE",
+    scale: 1,
+    tint: 0xffc0c0
+  }),
+  ["FOCUS_PUNCH_EJECT"]: onSprite(
+    ({ targetSprite, orientation, positionX, positionY, scene, flip }) => {
+      const [dx, dy] = OrientationVector[orientation]
+      const [x, y] = transformEntityCoordinates(
+        positionX + dx * 8,
+        positionY + dy * 8,
+        flip
+      )
+      scene.tweens.add({
+        targets: targetSprite,
+        duration: 1000,
+        delay: 100,
+        x,
+        y
+      })
+    }
+  ),
   [Ability.STONE_EDGE]: onCaster({ ability: Ability.TORMENT }),
   [Ability.MAGNET_PULL]: onCaster({
     ability: Ability.THUNDER_CAGE,

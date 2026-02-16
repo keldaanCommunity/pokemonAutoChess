@@ -2,7 +2,6 @@ import { GameObjects } from "phaser"
 import {
   Berries,
   Dishes,
-  HMs,
   Item,
   ShinyItems,
   SpecialItems,
@@ -76,8 +75,8 @@ export default class ItemContainer extends DraggableObject {
     if (isIn(Tools, this.name)) return 3
     if (isIn(WeatherRocks, this.name)) return 4
     if (isIn(SpecialItems, this.name)) return 5
-    if (isIn(TMs, this.name) || isIn(HMs, this.name)) return 6
-    if ((Dishes.map((d) => d) as Item[]).includes(this.name)) return 7
+    if (isIn(TMs, this.name)) return 6
+    if (isIn(Dishes, this.name)) return 7
     return 0
   }
 
