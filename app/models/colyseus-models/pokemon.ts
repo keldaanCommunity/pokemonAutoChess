@@ -2499,12 +2499,12 @@ export class Dratini extends Pokemon {
   rarity = Rarity.EPIC
   stars = 1
   evolution = Pkm.DRAGONAIR
-  hp = 80
-  atk = 5
+  hp = 90
+  atk = 7
   speed = 51
   def = 8
   speDef = 8
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.TWISTER
 }
@@ -2518,12 +2518,12 @@ export class Dragonair extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.DRAGONITE
-  hp = 120
-  atk = 12
+  hp = 150
+  atk = 15
   speed = 51
-  def = 10
-  speDef = 10
-  maxPP = 110
+  def = 13
+  speDef = 13
+  maxPP = 100
   range = 1
   skill = Ability.TWISTER
 }
@@ -2536,12 +2536,12 @@ export class Dragonite extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
-  hp = 250
-  atk = 22
+  hp = 290
+  atk = 28
   speed = 51
-  def = 12
-  speDef = 12
-  maxPP = 110
+  def = 20
+  speDef = 20
+  maxPP = 100
   range = 1
   skill = Ability.TWISTER
 }
