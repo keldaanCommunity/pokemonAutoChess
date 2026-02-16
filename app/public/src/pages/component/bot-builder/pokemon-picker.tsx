@@ -211,7 +211,7 @@ function PokemonPickerTab(props: {
         {props.type !== "none" && (
           <SynergyOverlaps
             type={props.type}
-            pokemons={props.pokemons}
+            pokemons={filteredPokemons}
             overlap={overlap}
             setOverlap={setOverlap}
           />

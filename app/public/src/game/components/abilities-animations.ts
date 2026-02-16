@@ -2299,6 +2299,43 @@ export const AbilitiesAnimations: {
       }
     })
   },
+
+  [Ability.TWISTER]: ({ scene, positionX, positionY, flip, ap }) => {
+    let [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+    y -= 30 // adjust y to make the tornado appear more centered on the target
+
+    const tornadoSprite = scene.add
+      .sprite(0, 0, "abilities", `${Ability.TWISTER}/000.png`)
+      ?.setScale(2 * (1 + ap / 200))
+      ?.setTint(0xc0fff0)
+    tornadoSprite.anims.play({
+      key: Ability.TWISTER,
+      frameRate: 15
+    })
+    scene.abilitiesVfxGroup?.add(tornadoSprite)
+
+    const circle = new Phaser.Geom.Circle(x, y, 48)
+    Phaser.Actions.PlaceOnCircle([tornadoSprite], circle, Math.PI)
+
+    scene.tweens.add({
+      targets: circle,
+      radius: 96,
+      ease: Phaser.Math.Easing.Quartic.Out,
+      duration: 1000,
+      onUpdate: function (tween) {
+        Phaser.Actions.RotateAroundDistance(
+          [tornadoSprite],
+          { x, y },
+          0.05,
+          circle.radius
+        )
+      },
+      onComplete: function () {
+        tornadoSprite.destroy(true)
+      }
+    })
+  },
+
   [Ability.TRIMMING_MOWER]: ({ scene, positionX, positionY, flip, ap }) => {
     const group = scene.add.group()
     const [x, y] = transformEntityCoordinates(positionX, positionY, flip)

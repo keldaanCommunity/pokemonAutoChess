@@ -552,7 +552,8 @@
 		"RAGING_BULL": "Raging Bull",
 		"ELECTRIFY": "Electrify",
 		"HEADLONDING_RUSH": "Headlong Rush",
-		"WAVE_SPLASH": "Wave Splash"
+		"WAVE_SPLASH": "Wave Splash",
+		"TWISTER": "Twister"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2237,7 +2238,8 @@
 		"RAGING_BULL": "Destroy barriers like PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target",
 		"ELECTRIFY": "Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD. If no ally is found, self-cast instead.",
 		"HEADLONDING_RUSH": "Rush to the farthest enemy, dealing it [20,40,80,SP] SPECIAL. All enemies in the path are pushed on the side and take [10,20,30,SP] SPECIAL. User loses 1 DEF and 1 SPE_DEF for each enemy hit this way.",
-		"WAVE_SPLASH": "User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL."
+		"WAVE_SPLASH": "User shrouds itself in water, gaining [20,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,SP]% of its max HP as SPECIAL.",
+		"TWISTER": "Whips up a whirlwind dealing [25,50,100,SP] SPECIAL to ADJACENT enemies and pushing them at a random location [1,2,3] tiles away. ADJACENT FLYING allies take off and fly away, triggering their synergy effect."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

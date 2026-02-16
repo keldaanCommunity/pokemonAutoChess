@@ -47,6 +47,7 @@ import {
   PeriodicEffect
 } from "../effects/effect"
 import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
+import { FlyingProtectionEffect } from "../effects/synergies"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
@@ -3113,24 +3114,8 @@ export class BlastBurnStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
-
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -3140,6 +3125,58 @@ export class BlastBurnStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+      }
+    })
+  }
+}
+
+export class TwisterStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const flyRange = [1, 2, 3][pokemon.stars - 1] ?? 3
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        const freeCells = board
+          .getCellsInRadius(cell.x, cell.y, flyRange, false)
+          .filter((cell) => board.getEntityOnCell(cell.x, cell.y) === undefined)
+        // filter the cells at max distance from cell
+        const distances = freeCells.map((cell) =>
+          distanceM(cell.x, cell.y, pokemon.positionX, pokemon.positionY)
+        )
+        const maxDistance = Math.max(...distances)
+        const farthestCells = freeCells.filter(
+          (cell, i) => distances[i] === maxDistance
+        )
+        const destination = pickRandomIn(farthestCells)
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board, true)
+        }
+      } else if (
+        cell.value &&
+        pokemon.team === cell.value.team &&
+        pokemon.id !== cell.value.id &&
+        cell.value.hasSynergyEffect(Synergy.FLYING)
+      ) {
+        const flyingProtectionEffect = [...cell.value.effectsSet].find(
+          (e) => e instanceof FlyingProtectionEffect
+        )
+        if (flyingProtectionEffect) {
+          flyingProtectionEffect.trigger(cell.value, board)
+        }
       }
     })
   }
@@ -16549,7 +16586,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RAGING_BULL]: new RagingBullStrategy(),
   [Ability.ELECTRIFY]: new ElectrifyStrategy(),
   [Ability.HEADLONDING_RUSH]: new HeadlongRushStrategy(),
-  [Ability.WAVE_SPLASH]: new WaveSplashStrategy()
+  [Ability.WAVE_SPLASH]: new WaveSplashStrategy(),
+  [Ability.TWISTER]: new TwisterStrategy()
 }
 
 export function castAbility(

@@ -2506,7 +2506,7 @@ export class Dratini extends Pokemon {
   speDef = 8
   maxPP = 110
   range = 1
-  skill = Ability.DRAGON_BREATH
+  skill = Ability.TWISTER
 }
 
 export class Dragonair extends Pokemon {
@@ -2525,7 +2525,7 @@ export class Dragonair extends Pokemon {
   speDef = 10
   maxPP = 110
   range = 1
-  skill = Ability.DRAGON_BREATH
+  skill = Ability.TWISTER
 }
 
 export class Dragonite extends Pokemon {
@@ -2543,7 +2543,7 @@ export class Dragonite extends Pokemon {
   speDef = 12
   maxPP = 110
   range = 1
-  skill = Ability.DRAGON_BREATH
+  skill = Ability.TWISTER
 }
 
 export class Goomy extends Pokemon {
