@@ -163,6 +163,7 @@
 		"SKY_ATTACK": "神鸟猛击",
 		"SKY_ATTACK_SHADOW": "神鸟猛击",
 		"ILLUSION": "幻觉",
+		"ACID_ARMOR": "溶化",
 		"SHELTER": "闭关",
 		"LAVA_PLUME": "喷烟",
 		"SMOG": "浊雾",
@@ -554,7 +555,8 @@
 		"WAVE_SPLASH": "飞溅",
 		"FOCUS_PUNCH": "真气拳",
 		"HYPER_BEAM": "破坏光线",
-		"SKILL_SWAP": "特性互换"
+		"SKILL_SWAP": "特性互换",
+		"TWISTER": "龙卷风"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1857,7 +1859,8 @@
 		"SLUDGE_WAVE": "朝目标和ADJACENT敌人喷射废料，对他们造成[10,20,40,SP]点SPECIAL，并使他们陷入POISONNED [2,3,4,SP]秒。",
 		"SMOG": "向使用者前方3格发射一团臭气，对其中的目标造成[10,20,40,SP]点SPECIAL。BOARD_EFFECT：臭气云使其中的宝可梦陷入BLINDED。",
 		"LAVA_PLUME": "向使用者前方3格发射熔岩，对其中的目标造成[20,40,80,SP]点SPECIAL。BOARD_EFFECT：熔岩对走到此处的非FLYING、非FIRE宝可梦每秒造成10点SPECIAL，并使其陷入BURN。",
-		"SHELTER": "提升[5,10,15,SP]点DEF，并向使用者前方3格发射一团烟幕。BOARD_EFFECT：烟幕使其中的宝可梦陷入BLINDED。",
+		"ACID_ARMOR": "提升[3,6,12,SP]点DEF。下4次受到近战攻击时，降低攻击者1点DEF。",
+		"SHELTER": "提升[3,6,12,SP]点DEF，并向目标格子发射一团烟幕。BOARD_EFFECT：烟幕使其中的宝可梦陷入BLINDED。",
 		"AURORA_BEAM": "直线发射一道光束。击中的所有敌方宝可梦受到[25,50,100,SP]点SPECIAL且可能陷入FREEZE 2秒（概率由ICE共鸣等级和LUCK决定）。",
 		"AGILITY": "立即提升[10,20,30,SP]点SPEED。",
 		"SPIRIT_SHACKLE": "发射一支穿透敌人的箭，对目标身后的一条直线上的所有敌方宝可梦造成[25,50,75,SP]点SPECIAL，并使他们陷入WOUND 4秒。",
@@ -2241,7 +2244,8 @@
 		"WAVE_SPLASH": "用水包裹自身，获得SHIELD，数值相当于使用者[20,SP]%的最大HP，然后冲撞目标，对其造成SPECIAL，数值相当于使用者[20,SP]%的最大HP。",
 		"FOCUS_PUNCH": "集中精神出拳，在1秒后突进至目标所在的位置，对其造成SPECIAL，数值相当于[500,SP]%的ATK，并将其击退。若目标没有和任何宝可梦相撞，其将被推出场外。",
 		"HYPER_BEAM": "用1秒集中能量，随后发射一道对一条直线上的敌方宝可梦造成[50,100,150,SP]点SPECIAL的强大射线。使用者陷入FATIGUE 5秒。",
-		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。"
+		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。",
+		"TWISTER": "兴起龙卷风，对ADJACENT敌方宝可梦造成[25,50,100,SP]点SPECIAL，并将他们向随机方向击退[1,2,3]格。ADJACENT我方FLYING宝可梦乘风飞离，触发一次共鸣效果。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
