@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
+import { getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { NavigateFunction } from "react-router-dom"
@@ -19,7 +19,14 @@ import {
   IUserMetadataJSON
 } from "../../../types/interfaces/UserMetadata"
 import { logger } from "../../../utils/logger"
-import { authenticateUser } from "../network"
+import {
+  authenticateUser,
+  client,
+  joinLobby,
+  leaveRoom,
+  removeMessage,
+  rooms
+} from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
 import store, { AppDispatch } from "../stores"
 import {
@@ -41,8 +48,6 @@ import {
   updateTournament
 } from "../stores/LobbyStore"
 import {
-  joinLobby,
-  removeMessage,
   setConnectionStatus,
   setErrorAlertMessage,
   setPendingGameId,
@@ -56,11 +61,9 @@ export async function joinLobbyRoom(
 ): Promise<Room<{ state: LobbyState }>> {
   const promise: Promise<Room<{ state: LobbyState }>> = new Promise(
     (resolve, reject) => {
-      const client = store.getState().network.client
-      const lobby = store.getState().network.lobby
-      if (lobby?.connection.isOpen) {
+      if (rooms.lobby?.connection.isOpen) {
         // already connected to a lobby room fully initialized
-        return resolve(lobby)
+        return resolve(rooms.lobby)
       }
 
       authenticateUser().then(async (user) => {
@@ -73,9 +76,7 @@ export async function joinLobbyRoom(
           if (reconnectToken) {
             try {
               // if a reconnect token is found, try to reconnect to the lobby room
-              room = (await client.reconnect(reconnectToken)) as Room<{
-                state: LobbyState
-              }>
+              room = await client.reconnect<LobbyState>(reconnectToken)
             } catch (error) {
               localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
             }
@@ -84,7 +85,11 @@ export async function joinLobbyRoom(
           if (!room) {
             // otherwise, connect to the lobby room
             const idToken = await user.getIdToken()
-            room = await client.join("lobby", { idToken })
+            room = await client.join<LobbyState>("lobby", { idToken })
+          }
+
+          if (!room) {
+            throw new Error("Failed to join or reconnect to the lobby room")
           }
 
           // store reconnection token for 5 minutes ; server may kick the inactive users before that
@@ -120,7 +125,7 @@ export async function joinLobbyRoom(
             dispatch(pushMessage(m))
           })
           $state.messages.onRemove((m) => {
-            dispatch(removeMessage(m))
+            removeMessage(m, "lobby")
           })
 
           $state.listen("ccu", (value) => {
@@ -234,13 +239,7 @@ export async function joinLobbyRoom(
           })
 
           room.onMessage(Transfer.REQUEST_ROOM, async (roomId: string) => {
-            joinExistingPreparationRoom(
-              roomId,
-              client,
-              lobby,
-              dispatch,
-              navigate
-            )
+            joinExistingPreparationRoom(roomId, dispatch, navigate)
           })
 
           room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
@@ -279,8 +278,7 @@ export async function joinLobbyRoom(
             }
           )
 
-          dispatch(joinLobby(room)) // lobby room is now fully initialized and accessible from state.network.lobby
-
+          joinLobby(room) // lobby room is now fully initialized and accessible
           resolve(room)
         } catch (error) {
           reject(error)
@@ -302,8 +300,6 @@ export async function joinLobbyRoom(
 
 export async function joinExistingPreparationRoom(
   roomId: string,
-  client: Client,
-  lobby: Room<{ state: LobbyState }> | undefined,
   dispatch: AppDispatch,
   navigate: NavigateFunction,
   password?: string
@@ -312,7 +308,7 @@ export async function joinExistingPreparationRoom(
     const token = await firebase.auth().currentUser?.getIdToken()
     if (token) {
       dispatch(resetPreparation())
-      const room: Room<PreparationState> = await client.joinById(roomId, {
+      const room = await client.joinById<PreparationState>(roomId, {
         idToken: token,
         password
       })
@@ -331,7 +327,7 @@ export async function joinExistingPreparationRoom(
         30
       )
       await Promise.allSettled([
-        lobby?.connection.isOpen && lobby.leave(false),
+        leaveRoom("lobby"),
         room.connection.isOpen && room.leave(false)
       ])
       dispatch(resetLobby())

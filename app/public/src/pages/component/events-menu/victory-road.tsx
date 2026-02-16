@@ -6,8 +6,8 @@ import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInf
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { searchById } from "../../../network"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
-import { searchById } from "../../../stores/NetworkStore"
 import { formatDate, formatDuration } from "../../utils/date"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -139,7 +139,7 @@ export function VictoryRoad() {
               })}
               data-tooltip-id="victory-road-player-detail"
               onMouseOver={() => setPlayerHovered(player)}
-              onClick={() => dispatch(searchById(player.id))}
+              onClick={() => searchById(player.id)}
               style={{
                 position: "absolute",
                 ...getPlayerCoords(player, index)

@@ -1,24 +1,19 @@
 import React, { useState } from "react"
-import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
 import {
   ITournament,
   ITournamentBracket
 } from "../../../../../types/interfaces/Tournament"
 import { entries } from "../../../../../utils/schemas"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useAppSelector } from "../../../hooks"
 import {
   createTournament,
   deleteTournament,
   remakeTournamentLobby
-} from "../../../stores/NetworkStore"
+} from "../../../network"
 import { formatDate } from "../../utils/date"
 import "./tournament-admin.css"
 
 export function TournamentsAdmin() {
-  const { t } = useTranslation()
-  const dispatch = useDispatch()
-
   const [tournamentName, setTournamentName] = useState<string>("")
   const [tournamentDate, setTournamentDate] = useState<string>("")
 
@@ -27,12 +22,10 @@ export function TournamentsAdmin() {
 
   async function createNewTournament(event) {
     event.preventDefault()
-    dispatch(
-      createTournament({
-        name: tournamentName,
-        startDate: tournamentDate
-      })
-    )
+    createTournament({
+      name: tournamentName,
+      startDate: tournamentDate
+    })
   }
 
   return (
@@ -88,7 +81,6 @@ export function TournamentsAdmin() {
 }
 
 function TournamentAdminItem(props: { tournament: ITournament }) {
-  const dispatch = useAppDispatch()
   const brackets = entries(props.tournament.brackets)
 
   return (
@@ -104,7 +96,7 @@ function TournamentAdminItem(props: { tournament: ITournament }) {
             className="remove-btn bubbly red"
             onClick={() => {
               if (confirm("Delete tournament and all registrations ?")) {
-                dispatch(deleteTournament({ id: props.tournament.id! }))
+                deleteTournament({ id: props.tournament.id! })
               }
             }}
           >
@@ -118,12 +110,10 @@ function TournamentAdminItem(props: { tournament: ITournament }) {
                   "Remake tournament lobbies ? Previous lobbies won't be deleted so do this only after a server reboot if lobbies have been lost"
                 )
               ) {
-                dispatch(
-                  remakeTournamentLobby({
-                    tournamentId: props.tournament.id!,
-                    bracketId: "all"
-                  })
-                )
+                remakeTournamentLobby({
+                  tournamentId: props.tournament.id!,
+                  bracketId: "all"
+                })
               }
             }}
           >
@@ -145,7 +135,6 @@ function TournamentBrackets(props: {
   tournamentId: string
   brackets: [string, ITournamentBracket][]
 }) {
-  const dispatch = useAppDispatch()
   return (
     <div>
       <table>
@@ -174,12 +163,10 @@ function TournamentBrackets(props: {
                         "Remake this tournament lobby ? Ongoing game will be deleted as well"
                       )
                     ) {
-                      dispatch(
-                        remakeTournamentLobby({
-                          tournamentId: props.tournamentId,
-                          bracketId
-                        })
-                      )
+                      remakeTournamentLobby({
+                        tournamentId: props.tournamentId,
+                        bracketId
+                      })
                     }
                   }}
                 >

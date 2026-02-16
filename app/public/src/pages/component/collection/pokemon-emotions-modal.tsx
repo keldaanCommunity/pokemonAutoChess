@@ -13,19 +13,14 @@ import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import {
-  buyBooster,
-  buyEmotion,
-  changeAvatar,
-  changeSelectedEmotion
-} from "../../../stores/NetworkStore"
+import { buyBooster, buyEmotion } from "../../../network"
+import { changeAvatar, changeSelectedEmotion } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import { Modal } from "../modal/modal"
 import PokemonPortrait from "../pokemon-portrait"
 import PokemonEmotion from "./pokemon-emotion"
 import "./pokemon-emotions-modal.css"
-import { use } from "matter"
 
 export default function PokemonEmotionsModal(props: {
   pokemon: Pkm
@@ -82,7 +77,7 @@ export default function PokemonEmotionsModal(props: {
       if (unlocked) {
         dispatch(changeSelectedEmotion(update))
       } else {
-        dispatch(buyEmotion(update))
+        buyEmotion(update)
       }
     },
     [dispatch]
@@ -260,7 +255,7 @@ export default function PokemonEmotionsModal(props: {
           <button
             className="bubbly orange"
             disabled={shards < boosterCost}
-            onClick={() => dispatch(buyBooster({ index }))}
+            onClick={() => buyBooster({ index })}
           >
             {t("buy_booster", { cost: boosterCost })}
             <img src={getPortraitSrc(index)} className="dust" alt="dust" />

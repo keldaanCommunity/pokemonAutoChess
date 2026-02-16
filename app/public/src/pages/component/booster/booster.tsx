@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { openBooster } from "../../../network"
 import { setBoosterContent } from "../../../stores/LobbyStore"
-import { openBooster } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { BoosterCard } from "./booster-card"
 import "./booster.css"
@@ -41,7 +41,7 @@ export default function Booster() {
       setFlippedStates(new Array(boosterContent.length).fill(true))
     } else if (numberOfBooster > 0) {
       dispatch(setBoosterContent([]))
-      dispatch(openBooster())
+      openBooster()
       setLoading(true)
     }
   }

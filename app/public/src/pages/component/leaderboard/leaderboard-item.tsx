@@ -4,8 +4,7 @@ import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../../../../../types/interfaces/LeaderboardInfo"
-import { useAppDispatch } from "../../../hooks"
-import { searchById } from "../../../stores/NetworkStore"
+import { searchById } from "../../../network"
 import PokemonPortrait from "../pokemon-portrait"
 import { EloBadge } from "../profile/elo-badge"
 
@@ -15,7 +14,6 @@ export default function LeaderboardItem(props: {
   noElo: boolean | undefined
 }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   return (
     <div
       className="player my-box clickable"
@@ -26,7 +24,7 @@ export default function LeaderboardItem(props: {
       }}
       onClick={() => {
         if (!props.isBot && "id" in props.item) {
-          dispatch(searchById(props.item.id))
+          searchById(props.item.id)
         }
       }}
     >

@@ -4,10 +4,10 @@ import { AvatarEmotions, Emotion, IPokemonAvatar } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { getAvatarSrc, getAvatarString } from "../../../../utils/avatar"
 import { throttle } from "../../../../utils/function"
+import { showEmote } from "../../network"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
 import { preference } from "../../preferences"
 import store from "../../stores"
-import { showEmote } from "../../stores/NetworkStore"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
@@ -230,10 +230,8 @@ export default class PokemonAvatar extends PokemonSprite {
   sendEmote(emotion: Emotion) {
     const state = store.getState()
     if (state.game.emotesUnlocked.includes(emotion)) {
-      store.dispatch(
-        showEmote(
-          getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
-        )
+      showEmote(
+        getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
       )
       this.hideEmoteMenu()
     }
@@ -241,7 +239,7 @@ export default class PokemonAvatar extends PokemonSprite {
 
   playAnimation() {
     try {
-      store.dispatch(showEmote())
+      showEmote()
     } catch (err) {
       console.error("could not play animation", err)
     }

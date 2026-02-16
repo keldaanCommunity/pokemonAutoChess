@@ -1,12 +1,11 @@
 import React from "react"
 import { IChatV2, Role } from "../../../../../types"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { removeMessage, searchById } from "../../../stores/NetworkStore"
+import { useAppSelector } from "../../../hooks"
+import { ChatRoom, removeMessage, searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 
-export default function ChatMessage(props: { message: IChatV2 }) {
-  const dispatch = useAppDispatch()
+export default function ChatMessage(props: { message: IChatV2, source: ChatRoom }) {
   const user = useAppSelector((state) => state.network.profile)
   const role = user?.role
   const time = new Date(props.message.time).toLocaleTimeString(undefined, {
@@ -27,7 +26,7 @@ export default function ChatMessage(props: { message: IChatV2 }) {
           <div
             className="author-and-time"
             title="open profile"
-            onClick={() => dispatch(searchById(props.message.authorId))}
+            onClick={() => searchById(props.message.authorId)}
           >
             <span className="chat-message-author">{props.message.author}</span>
             <span className="chat-message-time">{time}</span>
@@ -37,11 +36,9 @@ export default function ChatMessage(props: { message: IChatV2 }) {
               className="remove-chat bubbly red"
               title="Remove message"
               onClick={() =>
-                dispatch(
-                  removeMessage({
+                removeMessage({
                     id: props.message.id
-                  })
-                )
+                  }, props.source)                
               }
             >
               <p style={{ fontSize: "0.5em", margin: "0" }}>X</p>

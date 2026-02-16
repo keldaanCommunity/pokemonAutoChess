@@ -10,7 +10,10 @@ import {
 } from "../../../../../config"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
-import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
+import {
+  BattleResult,
+  GamePhaseState
+} from "../../../../../types/enum/Game"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
@@ -31,7 +34,7 @@ export default function GameStageInfo() {
 
   const currentPlayer = useAppSelector(selectCurrentPlayer)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const gameMode = useAppSelector((state) => state.network.game?.state.gameMode)
+  const gameMode = useAppSelector((state) => state.game.gameMode)
 
   if (!currentPlayer) return null
 

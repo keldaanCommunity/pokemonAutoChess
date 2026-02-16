@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { useAppDispatch } from "../../../hooks"
-import { addBot } from "../../../stores/NetworkStore"
+import { addBot } from "../../../network"
 import { cc } from "../../utils/jsx"
 import { Modal } from "../modal/modal"
 import { EloBadge } from "../profile/elo-badge"
@@ -13,8 +12,6 @@ export function BotSelectModal(props: {
   botsSelected: string[]
   close: () => void
 }) {
-  const dispatch = useAppDispatch()
-
   const [sortBotsOrder, setSortBotsOrder] = useState<boolean>(false)
   const [sortBotsCriteria, setSortBotsCriteria] = useState<string>("name")
   const [queryBot, setQueryBot] = useState<string>("")
@@ -131,7 +128,7 @@ export function BotSelectModal(props: {
           <button
             className="bubbly blue"
             onClick={() => {
-              botsSelection.forEach((bot) => dispatch(addBot(bot)))
+              botsSelection.forEach((bot) => addBot(bot))
               props.close()
             }}
           >
