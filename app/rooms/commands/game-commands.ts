@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { SetSchema } from "@colyseus/schema"
+import { SetSchema, StateView } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
 import { nanoid } from "nanoid"
 import {
@@ -973,11 +973,14 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
       //logger.debug("onJoin", client.auth.uid)
       if (!client.userData) client.userData = {}
       client.userData.spectatedPlayerId = client.auth.uid
+      client.view = new StateView()
       const players = values(this.state.players)
-      if (players.some((p) => p.id === client.auth.uid)) {
+      const connectedPlayer = players.find((p) => p.id === client.auth.uid)
+      if (connectedPlayer) {
         /*logger.info(
           `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
         )*/
+        client.view.add(connectedPlayer)
         if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
           const humanPlayers = players.filter((p) => !p.isBot)
           if (humanPlayers.length === 1) {

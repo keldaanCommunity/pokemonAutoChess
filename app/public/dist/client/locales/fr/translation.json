@@ -2021,7 +2021,7 @@
 		"SPRINGTIDE_STORM": "Un violent typhon mêlé de haine et d'amour s'abat sur tous les ennemis en ligne droite, infligeant [75,SP] SPECIAL et rend CHARM pendant 2 secondes.",
 		"AURA_WHEEL": "Inflige [60,SP] SPECIAL, gagne 10 SPEED et bascule entre les formes Affamé et Rassasié.",
 		"LICK": "Un grand coup de langue qui inflige [30,60,120,SP] SPECIAL, PARALYSIS et rend CONFUSION pendant 3 secondes.",
-		"FURY_SWIPES": "Inflige un nombre aléatoire [LK] d'attaques basiques d'affilée entre [2,SP] et [5,SP] fois.",
+		"FURY_SWIPES": "Inflige [5,SP] attaques rapides en une seconde, chacune infligeant 100 % de l'ATK en PHYSICAL. Si la cible est mise KO pendant la capacité, récupère tous ses PP.",
 		"TICKLE": "Réduit l'ATK et la DEF des [1,2] ennemis les plus proches de [3,SP].",
 		"AROMATHERAPY": "Supprime les effets négatfs de statut des alliés ADJACENT et les soigne de [20,40,80,SP] HP.",
 		"DETECT": "Donne PROTECT aux alliés ADJACENT pendant [0.5,SP,ND=1] secondes, mutiplié par le nombre de Pokémon ennemis repérés dans un rayon de 2 cases.",

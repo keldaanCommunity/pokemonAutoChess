@@ -8603,26 +8603,30 @@ export class FurySwipesStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const scale = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    const min = Math.round(2 * scale)
-    const max = Math.round(5 * scale)
-    const nbAttacks = clamp(
-      Math.floor(
-        Math.random() * (1 + pokemon.luck / 100) * (max - min + 1) + min
-      ),
-      min,
-      max
-    )
+    const scale = 1 + pokemon.ap / 100
+    const nbAttacks = Math.round(5 * scale)
+    const hitPerSecond = Math.round(1000 / nbAttacks)
+
     for (let n = 0; n < nbAttacks; n++) {
-      target.handleSpecialDamage(
-        Math.ceil(pokemon.atk),
-        board,
-        AttackType.PHYSICAL,
-        pokemon,
-        false,
-        false
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          if (target && target.hp > 0) {
+            target.handleSpecialDamage(
+              Math.ceil(pokemon.atk),
+              board,
+              AttackType.PHYSICAL,
+              pokemon,
+              crit,
+              false
+            )
+          } else {
+            pokemon.pp = pokemon.maxPP // cast again immediately if target is dead
+          }
+        }, n * hitPerSecond)
       )
     }
+
+    pokemon.cooldown += 1000
   }
 }
 

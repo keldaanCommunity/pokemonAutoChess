@@ -2021,7 +2021,7 @@
 		"SPRINGTIDE_STORM": "用交织着爱与恨的烈风攻击一条直线上的敌方宝可梦，对他们造成[75,SP]点SPECIAL并使他们陷入CHARM 2秒。",
 		"AURA_WHEEL": "对目标造成[60,SP]点SPECIAL，并提升使用者10点SPEED，且在满腹和空腹状态之间切换。",
 		"LICK": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入CONFUSION和PARALYSIS 3秒。",
-		"FURY_SWIPES": "连续进行[2,SP]到[5,SP]次普通攻击。攻击次数同时受到LUCK加成。",
+		"FURY_SWIPES": "秒内发动 [5,SP] 次快速攻击，每次攻击造成 PHYSICAL 100% 的攻击力。如果目标在技能期间被击杀，则恢复所有 PP。",
 		"TICKLE": "降低最近的[1,2]个目标[3,SP]点ATK和DEF。",
 		"AROMATHERAPY": "为ADJACENT我方宝可梦恢复[20,40,80,SP]点HP，并移除他们的负面状态。",
 		"DETECT": "使ADJACENT我方宝可梦获得PROTECT，时长为[0.5,SP,ND=1]秒乘以2格半径内敌方宝可梦的数量。",
