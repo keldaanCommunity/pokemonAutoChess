@@ -5,6 +5,7 @@
 # Changes to Pokémon & Abilities
 
 - New ability for Salandit line: Fire lash ; PP 60 → 100
+- Rework Fury Swipes (Teddiursa): from "Deal a [LK] random number of basic attacks between [2,SP] to [5,SP] times." to "Unleash [5,SP] rapid attacks in one second, each dealing 100% of ATK as PHYSICAL. If the target is KO'd during the ability, regain all PP."
 
 # Changes to Synergies
 

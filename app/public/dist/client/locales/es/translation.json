@@ -1933,7 +1933,7 @@
 		"SPRINGTIDE_STORM": "Feroces vientos mezclados de amor y odio golpean a todos los enemigos en línea recta, causando [75,SP] de SPECIAL y CHARM por 2 segundos",
 		"AURA_WHEEL": "Inflige [60,SP] de SPECIAL, gana 10 de SPEED y cambia entre su forma Saciada y Voraz",
 		"LICK": "Inflige [30,60,120,SP] de SPECIAL. Deja al objetivo CONFUSION y PARALYSIS por 3 segundos",
-		"FURY_SWIPES": "Inflige de [2,SP] a [5,SP] ataques como PHYSICAL",
+		"FURY_SWIPES": "Desata [5,SP] ataques rápidos en un segundo, cada uno de los cuales inflige el 100% del ATK como PHYSICAL. Si el objetivo queda KO durante la habilidad, recupera todos los PP.",
 		"TICKLE": "Reduce el ATK y DEF de [1,2] enemigos más cercanos en [3,SP]",
 		"AROMATHERAPY": "Elimina los cambios de estado negativos y cura [20,40,80,SP] HP a los aliados adyacentes",
 		"DETECT": "PROTECT a los aliados adyacentes durante [500,SP] milisegundos multiplicados por el número de oponentes detectados en un radio de 2 celdas",

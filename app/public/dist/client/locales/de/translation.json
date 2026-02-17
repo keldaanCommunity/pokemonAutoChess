@@ -1844,7 +1844,7 @@
 		"SPRINGTIDE_STORM": "Wilde Winde voller Liebe und Hass treffen alle Feinde in einer geraden Linie und verursachen 2 Sekunden lang [75,SP] SPECIAL und CHARM",
 		"AURA_WHEEL": "Verursacht [60,SP] SPECIAL, erhält 10 SPEED und wechselt zwischen Normal- und Hangry-Form",
 		"LICK": "Verursacht [30,60,120,SP] SPECIAL. Das Ziel ist 3 Sekunden lang CONFUSION und PARALYSIS",
-		"FURY_SWIPES": "Verursacht [2,SP] bis [5,SP] Angriffe als PHYSICAL",
+		"FURY_SWIPES": "Entfessle [5,SP] schnelle Angriffe in einer Sekunde, die jeweils 100 % der ATK als PHYSICAL verursachen. Wenn das Ziel während der Fähigkeit KO wird, erhältst du alle PP zurück.",
 		"TICKLE": "Reduziert ATK und DEF der [1,2] nächstgelegenen Ziele um [3,SP]",
 		"AROMATHERAPY": "Beseitigt negative Statusveränderungen und heilt [20,40,80,SP] HP von benachbarten Verbündeten",
 		"DETECT": "PROTECT benachbarte Verbündete für [0.5,SP] Sekunden, multipliziert mit der Anzahl der in einem Radius von 2 Zellen erkannten Gegner",
