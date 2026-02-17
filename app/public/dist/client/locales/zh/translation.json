@@ -553,10 +553,10 @@
 		"ELECTRIFY": "输电",
 		"HEADLONDING_RUSH": "突飞猛扑",
 		"WAVE_SPLASH": "飞溅",
+		"TWISTER": "龙卷风",
 		"FOCUS_PUNCH": "真气拳",
 		"HYPER_BEAM": "破坏光线",
-		"SKILL_SWAP": "特性互换",
-		"TWISTER": "龙卷风"
+		"SKILL_SWAP": "特性互换"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2242,10 +2242,10 @@
 		"ELECTRIFY": "使STRONGEST非ELECTRIC我方宝可梦获得ELECTRIC_FIELD，当前激活的ELECTRIC共鸣效果和[15,30,60,SP]点SHIELD。若没有满足条件的我方宝可梦，对自身释放此招式。",
 		"HEADLONDING_RUSH": "突进至最远的敌方宝可梦的位置，对其造成[20,40,80,SP]点SPECIAL。对经过的所有敌方宝可梦造成[10,20,30,SP]点SPECIAL，并将他们击退。每对一个敌方宝可梦造成伤害，使用者降低1点DEF和1点SPE_DEF。",
 		"WAVE_SPLASH": "用水包裹自身，获得SHIELD，数值相当于使用者[20,SP]%的最大HP，然后冲撞目标，对其造成SPECIAL，数值相当于使用者[20,SP]%的最大HP。",
+		"TWISTER": "兴起龙卷风，对ADJACENT敌方宝可梦造成[25,50,100,SP]点SPECIAL，并将他们向随机方向击退[1,2,3]格。ADJACENT我方FLYING宝可梦乘风飞离，触发一次共鸣效果。",
 		"FOCUS_PUNCH": "集中精神出拳，在1秒后突进至目标所在的位置，对其造成SPECIAL，数值相当于[500,SP]%的ATK，并将其击退。若目标没有和任何宝可梦相撞，其将被推出场外。",
 		"HYPER_BEAM": "用1秒集中能量，随后发射一道对一条直线上的敌方宝可梦造成[50,100,150,SP]点SPECIAL的强大射线。使用者陷入FATIGUE 5秒。",
-		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。",
-		"TWISTER": "兴起龙卷风，对ADJACENT敌方宝可梦造成[25,50,100,SP]点SPECIAL，并将他们向随机方向击退[1,2,3]格。ADJACENT我方FLYING宝可梦乘风飞离，触发一次共鸣效果。"
+		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
