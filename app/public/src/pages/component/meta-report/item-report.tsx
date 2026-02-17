@@ -15,14 +15,18 @@ import {
   Tools
 } from "../../../../../types/enum/Item"
 import { ItemDistribution } from "./item-distribution"
+import { ItemHistoryPanel } from "./item-history-panel"
 import ItemStatistic from "./item-statistic"
 import "./item-report.css"
+
+type ViewMode = "distribution" | "count-history" | "rank-history"
 
 export function ItemReport() {
   const [loading, setLoading] = useState<boolean>(true)
   const [metaItems, setMetaItems] = useState<IItemsStatisticV2[]>([])
   const [itemRankingBy, setItemRanking] = useState<string>("count")
   const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
+  const [viewMode, setViewMode] = useState<ViewMode>("distribution")
 
   useEffect(() => {
     fetchMetaItems().then((res) => {
@@ -100,12 +104,61 @@ export function ItemReport() {
                 })}
             </div>
             <div className="item-distribution-chart">
-              <ItemDistribution
-                metaItems={metaItems}
-                eloThreshold={eloThreshold}
-                loading={loading}
-                itemFilter={tab.items}
-              />
+              <div className="view-switcher">
+                <button
+                  className={viewMode === "distribution" ? "active" : ""}
+                  onClick={() => setViewMode("distribution")}
+                >
+                  {t("overview")}
+                  <span className="view-limit-hint">
+                    {t("top_n", { count: 400 })}
+                  </span>
+                </button>
+                <button
+                  className={viewMode === "count-history" ? "active" : ""}
+                  onClick={() => setViewMode("count-history")}
+                >
+                  {t("popularity_over_time")}
+                  <span className="view-limit-hint">
+                    {t("top_n", { count: 200 })}
+                  </span>
+                </button>
+                <button
+                  className={viewMode === "rank-history" ? "active" : ""}
+                  onClick={() => setViewMode("rank-history")}
+                >
+                  {t("placement_over_time")}
+                  <span className="view-limit-hint">
+                    {t("top_n", { count: 200 })}
+                  </span>
+                </button>
+              </div>
+              {viewMode === "distribution" && (
+                <ItemDistribution
+                  metaItems={metaItems}
+                  eloThreshold={eloThreshold}
+                  loading={loading}
+                  itemFilter={tab.items}
+                />
+              )}
+              {viewMode === "count-history" && (
+                <ItemHistoryPanel
+                  metaItems={metaItems}
+                  eloThreshold={eloThreshold}
+                  loading={loading}
+                  metric="count"
+                  itemFilter={tab.items}
+                />
+              )}
+              {viewMode === "rank-history" && (
+                <ItemHistoryPanel
+                  metaItems={metaItems}
+                  eloThreshold={eloThreshold}
+                  loading={loading}
+                  metric="rank"
+                  itemFilter={tab.items}
+                />
+              )}
             </div>
           </TabPanel>
         ))}

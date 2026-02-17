@@ -162,6 +162,8 @@ export function PokemonDistribution({
         if (!isCorrectTier(pokemon.name as Pkm, tier)) return false
         return true
       })
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 400)
 
     return pokemons
   }, [metaPokemons, eloThreshold, synergy, rarity, pool, tier, selectedPkm])

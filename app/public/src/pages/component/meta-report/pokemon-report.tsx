@@ -1,9 +1,9 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold, RarityColor } from "../../../../../config"
-import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
 import {
   fetchMetaPokemons,
+  IPokemonStatV2,
   IPokemonsStatisticV2
 } from "../../../../../models/mongo-models/pokemons-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
@@ -12,8 +12,11 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { PokemonDistribution } from "./pokemon-distribution"
+import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
+
+type ViewMode = "distribution" | "count-history" | "rank-history"
 
 export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
@@ -24,6 +27,7 @@ export function PokemonReport() {
   const [loading, setLoading] = useState<boolean>(true)
   const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
+  const [viewMode, setViewMode] = useState<ViewMode>("distribution")
 
   const [metaPokemons, setMetaPokemons] = useState<IPokemonsStatisticV2[]>([])
   useEffect(() => {
@@ -143,7 +147,7 @@ export function PokemonReport() {
             <PokemonStatistic
               pokemons={
                 sortedMetaPokemons?.find((p) => p.tier === eloThreshold)
-                  ?.pokemons || new Array<IPokemonsStatistic>()
+                  ?.pokemons || new Array<IPokemonStatV2>()
               }
               rankingBy={pokemonRankingBy}
               synergy={synergy}
@@ -154,16 +158,73 @@ export function PokemonReport() {
             />
           </div>
           <div className="pokemon-distribution-chart">
-            <PokemonDistribution
-              metaPokemons={metaPokemons}
-              eloThreshold={eloThreshold}
-              loading={loading}
-              synergy={synergy}
-              rarity={rarity}
-              pool={pool}
-              tier={tier}
-              selectedPkm={selectedPkm}
-            />
+            <div className="view-switcher">
+              <button
+                className={viewMode === "distribution" ? "active" : ""}
+                onClick={() => setViewMode("distribution")}
+              >
+                {t("overview")}
+                <span className="view-limit-hint">
+                  {t("top_n", { count: 400 })}
+                </span>
+              </button>
+              <button
+                className={viewMode === "count-history" ? "active" : ""}
+                onClick={() => setViewMode("count-history")}
+              >
+                {t("popularity_over_time")}
+                <span className="view-limit-hint">
+                  {t("top_n", { count: 200 })}
+                </span>
+              </button>
+              <button
+                className={viewMode === "rank-history" ? "active" : ""}
+                onClick={() => setViewMode("rank-history")}
+              >
+                {t("placement_over_time")}
+                <span className="view-limit-hint">
+                  {t("top_n", { count: 200 })}
+                </span>
+              </button>
+            </div>
+            {viewMode === "distribution" && (
+              <PokemonDistribution
+                metaPokemons={metaPokemons}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                synergy={synergy}
+                rarity={rarity}
+                pool={pool}
+                tier={tier}
+                selectedPkm={selectedPkm}
+              />
+            )}
+            {viewMode === "count-history" && (
+              <PokemonHistoryPanel
+                metaPokemons={metaPokemons}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                metric="count"
+                synergy={synergy}
+                rarity={rarity}
+                pool={pool}
+                tier={tier}
+                selectedPkm={selectedPkm}
+              />
+            )}
+            {viewMode === "rank-history" && (
+              <PokemonHistoryPanel
+                metaPokemons={metaPokemons}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                metric="rank"
+                synergy={synergy}
+                rarity={rarity}
+                pool={pool}
+                tier={tier}
+                selectedPkm={selectedPkm}
+              />
+            )}
           </div>
         </div>
       )}
