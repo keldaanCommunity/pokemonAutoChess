@@ -102,7 +102,7 @@ export function ItemDistribution({
       items = items.filter((item) => itemFilter.includes(item.name as Item))
     }
 
-    return items
+    return items.sort((a, b) => b.count - a.count).slice(0, 400)
   }, [metaItems, eloThreshold, itemFilter])
 
   const xAxisDomain = useMemo(() => {

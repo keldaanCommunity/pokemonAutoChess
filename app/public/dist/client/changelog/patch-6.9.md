@@ -23,3 +23,4 @@
 - New Scribble: Unown Spell
 - New Scribble: The Chosen Ones
 - New Town Encounter: Kingambit
+- Add 15-day history tracking to meta reports with multi-line trends visualization

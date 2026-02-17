@@ -30,4 +30,6 @@
 #item-report .item-distribution-chart {
   flex: 1;
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
 }
