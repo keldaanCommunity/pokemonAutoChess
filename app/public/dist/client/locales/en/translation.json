@@ -1758,7 +1758,7 @@
 		"BLAZE_KICK": "Deal [30,60,120,SP] SPECIAL and BURN the target for 2 seconds. If it already has BURN, deal +30% damage.",
 		"WISH": "Grant [30,60,120,SP] SHIELD and 1.5 second PROTECT to the lowest % HP ally.",
 		"LUNAR_BLESSING": "Heal the user and all allied Pokémon for [25,SP]% of their max HP and cure their negative status conditions.",
-		"MEDITATE": "Increase the user's ATK by [100,SP]%.",
+		"MEDITATE": "Increase the user's ATK by [100,SP]% of base ATK.",
 		"DEFENSE_CURL": "Increase the user's DEF and SPE_DEF by [5,10,15,SP].",
 		"IRON_HEAD": "Increase the user's DEF and SPE_DEF by [5,10,15,SP] then hit target with a powerful headbutt, dealing [100,SP]% of (DEF + SPE_DEF) as SPECIAL.",
 		"IRON_DEFENSE": "Grant [20,40,80,SP] SHIELD to all allied Pokémon in the same row as the user.",
