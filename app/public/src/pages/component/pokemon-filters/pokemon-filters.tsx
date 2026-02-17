@@ -1,8 +1,14 @@
 import { useTranslation } from "react-i18next"
-import { usePreferences } from "../../../preferences"
+import { IPreferencesState, usePreferences } from "../../../preferences"
 import { closeSiblingDetails } from "../../utils/toggle"
 import { Checkbox } from "../checkbox/checkbox"
 import "./pokemon-filters.css"
+import { PkmAltForms } from "../../../../../config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { Ability } from "../../../../../types/enum/Ability"
+import { Rarity } from "../../../../../types/enum/Game"
+import { NonPkm, Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 
 export function PokemonFilters() {
   const { t } = useTranslation()
@@ -58,4 +64,38 @@ export function PokemonFilters() {
       </div>
     </details>
   )
+}
+
+export function filterPokemonsAccordingToPreferences(
+  pokemons: Pkm[],
+  preferences: IPreferencesState
+) {
+  const data = pokemons.map((p) => getPokemonData(p))
+  return pokemons.filter((p) => {
+    if (NonPkm.includes(p)) return false
+    const { additional, regional, rarity, skill, stars } = getPokemonData(p)
+    if (skill === Ability.DEFAULT) return false // pokemons with no ability are not ready
+    const special = rarity === Rarity.SPECIAL
+    if (!preferences.showAdditionalPool && additional) return false
+    if (!preferences.showRegionalPool && regional) return false
+    if (!preferences.showSpecialPool && special) return false
+    if (!preferences.showRegularPool && !(additional || regional || special))
+      return false
+
+    if (PkmAltForms.includes(p) && !preferences.showAltForms) return false
+    if (!preferences.showEvolutions) {
+      const prevolution = data.find((p2) => {
+        return (
+          p2.evolution === p ||
+          p2.evolutions.includes(p) ||
+          (PkmFamily[p2.name] === PkmFamily[p] && p2.stars < stars) // for transformations
+        )
+      })
+
+      // if show evolutions is unchecked, do not show a pokemon if it has a prevolution and that prevolution is in the same rarity category
+      if (prevolution && prevolution.rarity === rarity) return false
+    }
+
+    return true
+  })
 }

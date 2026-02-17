@@ -47,6 +47,7 @@ import {
   PeriodicEffect
 } from "../effects/effect"
 import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
+import { FlyingProtectionEffect } from "../effects/synergies"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
@@ -3113,24 +3114,8 @@ export class BlastBurnStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let damage = 0
-
-    switch (pokemon.stars) {
-      case 1:
-        damage = 30
-        break
-      case 2:
-        damage = 60
-        break
-      case 3:
-        damage = 120
-        break
-      default:
-        break
-    }
-
+    const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(
@@ -3140,6 +3125,58 @@ export class BlastBurnStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
+      }
+    })
+  }
+}
+
+export class TwisterStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const flyRange = [1, 2, 3][pokemon.stars - 1] ?? 3
+    cells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        const freeCells = board
+          .getCellsInRadius(cell.x, cell.y, flyRange, false)
+          .filter((cell) => board.getEntityOnCell(cell.x, cell.y) === undefined)
+        // filter the cells at max distance from cell
+        const distances = freeCells.map((cell) =>
+          distanceM(cell.x, cell.y, pokemon.positionX, pokemon.positionY)
+        )
+        const maxDistance = Math.max(...distances)
+        const farthestCells = freeCells.filter(
+          (cell, i) => distances[i] === maxDistance
+        )
+        const destination = pickRandomIn(farthestCells)
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board, true)
+        }
+      } else if (
+        cell.value &&
+        pokemon.team === cell.value.team &&
+        pokemon.id !== cell.value.id &&
+        cell.value.hasSynergyEffect(Synergy.FLYING)
+      ) {
+        const flyingProtectionEffect = [...cell.value.effectsSet].find(
+          (e) => e instanceof FlyingProtectionEffect
+        )
+        if (flyingProtectionEffect) {
+          flyingProtectionEffect.trigger(cell.value, board)
+        }
       }
     })
   }
@@ -6597,6 +6634,32 @@ export class LavaPlumeStrategy extends AbilityStrategy {
   }
 }
 
+export class AcidArmorStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const defGain = [3, 6, 12][pokemon.stars - 1] ?? 12
+    pokemon.addDefense(defGain, pokemon, 1, crit)
+    let count = 4
+    const acidHitEffect = new OnDamageReceivedEffect(
+      ({ pokemon, attacker }) => {
+        if (attacker?.range === 1) {
+          attacker.addDefense(-1, pokemon, 0, false)
+        }
+        count--
+        if (count <= 0) {
+          pokemon.effectsSet.delete(acidHitEffect)
+        }
+      }
+    )
+    pokemon.effectsSet.add(acidHitEffect)
+  }
+}
+
 export class ShelterStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -6605,12 +6668,14 @@ export class ShelterStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const defGain = [5, 10, 15][pokemon.stars - 1] ?? 15
+    const defGain = [3, 6, 12][pokemon.stars - 1] ?? 12
     pokemon.addDefense(defGain, pokemon, 1, crit)
-    const cells = board.getCellsInFront(pokemon, target)
-    cells.forEach((cell) => {
-      board.addBoardEffect(cell.x, cell.y, EffectEnum.SMOKE, pokemon.simulation)
-    })
+    board.addBoardEffect(
+      pokemon.targetX,
+      pokemon.targetY,
+      EffectEnum.SMOKE,
+      pokemon.simulation
+    )
   }
 }
 
@@ -16450,6 +16515,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CRUNCH]: new CrunchStrategy(),
   [Ability.CROSS_POISON]: new CrossPoisonStrategy(),
   [Ability.SHELTER]: new ShelterStrategy(),
+  [Ability.ACID_ARMOR]: new AcidArmorStrategy(),
   [Ability.FIRE_FANG]: new FireFangStrategy(),
   [Ability.ICE_FANG]: new IceFangStrategy(),
   [Ability.THUNDER_FANG]: new ThunderFangStrategy(),
@@ -16656,6 +16722,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ELECTRIFY]: new ElectrifyStrategy(),
   [Ability.HEADLONDING_RUSH]: new HeadlongRushStrategy(),
   [Ability.WAVE_SPLASH]: new WaveSplashStrategy(),
+  [Ability.TWISTER]: new TwisterStrategy(),
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
   [Ability.HYPER_BEAM]: new HyperBeamStrategy(),
   [Ability.SKILL_SWAP]: new SkillSwapStrategy()

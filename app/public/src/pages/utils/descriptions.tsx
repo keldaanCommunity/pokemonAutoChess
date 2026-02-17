@@ -48,6 +48,11 @@ export function addIconsToDescription(
   return descriptionParts.map((f, i) => {
     const token = matchIcon![i - 1]
     let d: ReactElement | null = null
+    const isAtStartOfSentence =
+      i === 0 || descriptionParts[i - 1].trim().endsWith(".")
+    const capitalize = (s: string) =>
+      isAtStartOfSentence ? s.charAt(0).toUpperCase() + s.slice(1) : s
+
     if (token) {
       if (token === "GOLD") {
         d = (
@@ -137,7 +142,7 @@ export function addIconsToDescription(
           >
             <img src={`assets/ui/${token.toLowerCase()}.svg`} />
             <i className="technical-term-label">
-              {t(`technical_terms.${token}`)}
+              {capitalize(t(`technical_terms.${token}`))}
             </i>
           </span>
         )

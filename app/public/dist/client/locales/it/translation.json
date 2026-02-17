@@ -1852,7 +1852,7 @@
 		"SLUDGE_WAVE": "Lancia uno spruzzo di rifiuti sul bersaglio e sui nemici adiacenti, infliggendo [10,20,40,SP] SPECIAL e POISONNED per [2,3,4,SP] secondi",
 		"SMOG": "Proietta una nuova di gas puzzolente nelle tre celle di fronte, infliggendo [10,20,40,SP] SPECIAL. Il gas rimane sul campo fino alla fine del combattimento e riduce la precisione dei Pokèmon del 50%. ",
 		"LAVA_PLUME": "Proietta lava nelle 3 caselle in fronte all'utilizzatore, infliggendo [20,40,80,SP] SPECIAL. La lava rimane sul terreno, infliggendo 10 SPECIAL e causa BURN a tutti i Pokèmon non FIRE/FLYING che ci camminano sopra.",
-		"SHELTER": "Aumenta la DEF di [5,10,15,SP] e proietta un muro di fumo nelle 3 celle di fronte. Il fumo rimane sul campo fino alla fine del combattimento e riduce la precisione dei Pokèmon del 50%. ",
+		"SHELTER": "Aumenta la DEF di [5,10,15,SP] e proietta un muro di fumo sul quadrato del bersaglio. Il fumo rimane sul campo fino alla fine del combattimento e riduce la precisione dei Pokèmon del 50%. ",
 		"AURORA_BEAM": "Spara un raggio in linea retta. Tutti i bersagli colpiti prendono [25,50,100,SP] SPECIAL e possono subire lo status FREEZE (probabilità basata sull'attuale livello di sinergia di ghiaccio).",
 		"AGILITY": "Aumenta la SPEED del [10,20,30,SP]. L'effetto è cumulativo.",
 		"SPIRIT_SHACKLE": "Scaglia una freccia perforante che infligge [25,50,75,SP] SPECIAL in linea retta dietro il bersaglio e infligge WOUND per 4 secondi a tutti quelli colpiti nella traiettoria.",
