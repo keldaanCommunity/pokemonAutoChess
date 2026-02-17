@@ -2,6 +2,11 @@ import { model, Schema } from "mongoose"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 
+export interface IHistoryEntry {
+  date: string
+  value: number
+}
+
 export interface IItemsStatisticV2 {
   tier: string
   items: Map<string, IItemV2>
@@ -12,7 +17,23 @@ export interface IItemV2 {
   count: number
   name: Item
   pokemons: Pkm[]
+  rank_history?: IHistoryEntry[]
+  count_history?: IHistoryEntry[]
 }
+
+const historyEntrySchema = new Schema(
+  {
+    date: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: Number,
+      required: true
+    }
+  },
+  { _id: false }
+)
 
 const pokemonsStatistic = new Schema({
   tier: {
@@ -36,7 +57,15 @@ const pokemonsStatistic = new Schema({
           type: String,
           enum: Object.values(Pkm)
         }
-      ]
+      ],
+      rank_history: {
+        type: [historyEntrySchema],
+        default: []
+      },
+      count_history: {
+        type: [historyEntrySchema],
+        default: []
+      }
     }
   }
 })
