@@ -149,7 +149,7 @@ function showMoneyToast(value: number) {
 export default function Game() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
-  const navigate = useNavigate()  
+  const navigate = useNavigate()
   const connectionStatus = useAppSelector(
     (state) => state.network.connectionStatus
   )
@@ -580,7 +580,7 @@ export default function Game() {
       const $ = getStateCallbacks(room)
       const $state = $(room.state)
 
-      $state.listen("gameMode", mode => {
+      $state.listen("gameMode", (mode) => {
         dispatch(setGameMode(mode))
       })
 
