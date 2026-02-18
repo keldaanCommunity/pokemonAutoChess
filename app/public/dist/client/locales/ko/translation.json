@@ -1952,7 +1952,7 @@
 		"SPRINGTIDE_STORM": "사랑과 증오로 가득 찬 맹렬한 바람이 직선상의 모든 적에게 강타를 하며 [75,SP] SPECIAL을 입히고 과 2초 동안 CHARM 을 부여한다.",
 		"AURA_WHEEL": "[60,SP] SPECIAL을 입히고, 10의 SPEED를 얻고, 배부른 모양과 배고픈 모양 사이를 전환한다.",
 		"LICK": "[30,60,120,SP] SPECIAL 을 입힌다. 대상은 3초 동안 CONFUSION 과 PARALYSIS에 빠진다.",
-		"FURY_SWIPES": "1초 안에 [5,SP]의 빠른 공격을 가하며 각각 ATK의 100%를 PHYSICAL로 처리합니다. 능력 도중 대상이 KO되면 모든 PP를 회복합니다.",
+		"FURY_SWIPES": "1초 안에 [5,SP]의 빠른 공격을 가하며 각각 ATK의 100%를 PHYSICAL로 처리합니다. 능력 도중 대상이 KO되면 남은 타격당 PP를 20 회복합니다.",
 		"TICKLE": "가장 가까운 [1,2] 대상의 ATK 과 DEF 를 [3,SP]만큼 감소시킨다.",
 		"AROMATHERAPY": "모든 부정적인 상태이상을 해제 하고 인접한 아군의 HP를 [20,40,80,SP] 만큼 회복한다.",
 		"DETECT": " 2칸 반경에 있는 적 포켓몬 마릿수 X [500,SP] ms 동안 인접한 아군을 보호합니다.",

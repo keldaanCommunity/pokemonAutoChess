@@ -26,7 +26,7 @@
 - Goomy line is now Common instead of Epic. Adjusted stats.
 - Dratini line is now Epic instead of Rare. Adjusted stats. New ability: Twister
 - Tynamo line is back to Uncommon instead of Common. Adjusted stats.
-- Rework Fury Swipes (Teddiursa): from "Deal a [LK] random number of basic attacks between [2,SP] to [5,SP] times." to "Unleash [5,SP] rapid attacks in one second, each dealing 100% of ATK as PHYSICAL. If the target is KO'd during the ability, regain all PP."
+- Rework Fury Swipes (Teddiursa): from "Deal a [LK] random number of basic attacks between [2,SP] to [5,SP] times." to "Unleash [5,SP] rapid attacks in one second, each dealing 100% of ATK as PHYSICAL. If the target is KO'd during the ability, regain 20 PP per remaining hit."
 
 # Misc
 

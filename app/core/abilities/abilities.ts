@@ -8620,7 +8620,7 @@ export class FurySwipesStrategy extends AbilityStrategy {
               false
             )
           } else {
-            pokemon.pp = pokemon.maxPP // cast again immediately if target is dead
+            pokemon.addPP(20, pokemon, 0, false) // regain 20 PP per remaining hit
           }
         }, n * hitPerSecond)
       )
