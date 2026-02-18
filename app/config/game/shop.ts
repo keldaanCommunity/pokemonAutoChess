@@ -86,8 +86,6 @@ export const MAGNET_PULL_RATE_PER_RARITY: { [key in Rarity]?: number } = {
   [Rarity.ULTRA]: 0.02
 }
 
-export const PVE_WILD_CHANCE = 5 / 100
-
 export const INCENSE_CHANCE = 5 / 100
 export const HONEY_CHANCE = 5 / 100
 export const REPEAT_BALL_LEGENDARY_CAP = 120

@@ -829,7 +829,6 @@ export default function Game() {
           "totalPlayerDamageDealt",
           "eggChance",
           "goldenEggChance",
-          "wildChance",
           "cellBattery"
         ] satisfies NonFunctionPropNames<IPlayer>[]
 

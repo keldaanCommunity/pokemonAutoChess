@@ -1,12 +1,14 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
 import { SynergyTriggers } from "../../config"
-import { IPokemon } from "../../types"
+import { IPlayer, IPokemon } from "../../types"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
+import { isOnBench } from "../../utils/board"
 import { values } from "../../utils/schemas"
+import { PVEStages } from "../pve-stages"
 
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {
@@ -272,4 +274,16 @@ export function getSynergyStep(
 ): number {
   return SynergyTriggers[type].filter((n) => (synergies.get(type) ?? 0) >= n)
     .length
+}
+
+export function getWildChance(player: IPlayer, stageLevel: number): number {
+  const isPVE = stageLevel === 0 || stageLevel in PVEStages
+  const wildLevel = getSynergyStep(player.synergies, Synergy.WILD)
+  // 8% base chance in PVE stage of at Wild 4 and above
+  const baseChance = isPVE || wildLevel > 0 ? 8 : 0
+  // each star of a pokemon with wild synergy gives 0.5% wild chance
+  const nbWildStars = values(player.board)
+    .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
+    .reduce((total, p) => total + p.stars, 0)
+  return (baseChance + 0.5 * nbWildStars) / 100
 }

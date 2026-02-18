@@ -71,7 +71,8 @@ import {
   OnFieldDeathEffect,
   onFlowerMonDeath,
   overgrowEffect,
-  SoundCryEffect
+  SoundCryEffect,
+  wildBerserkEffect
 } from "./effects/synergies"
 import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
@@ -1273,31 +1274,31 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.QUICK_FEET:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.QUICK_FEET)
-          pokemon.addSpeed(30, pokemon, 0, false)
+          pokemon.addSpeed(20, pokemon, 0, false)
         }
         break
 
       case EffectEnum.RUN_AWAY:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.RUN_AWAY)
-          pokemon.addSpeed(50, pokemon, 0, false)
+          pokemon.addSpeed(40, pokemon, 0, false)
         }
         break
 
       case EffectEnum.HUSTLE:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.HUSTLE)
-          pokemon.addAttack(Math.ceil(0.2 * pokemon.baseAtk), pokemon, 0, false)
-          pokemon.addSpeed(50, pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
+          pokemon.addSpeed(40, pokemon, 0, false)
         }
         break
 
       case EffectEnum.BERSERK:
         if (types.has(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.BERSERK)
+          pokemon.effectsSet.add(wildBerserkEffect)
           pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
-          pokemon.addSpeed(50, pokemon, 0, false)
-          pokemon.status.enrageDelay -= 5000
+          pokemon.addSpeed(40, pokemon, 0, false)
         }
         break
 

@@ -165,7 +165,6 @@ export class OnBuyPokemonCommand extends Command<
     pokemon.positionX = x !== null ? x : -1
     pokemon.positionY = 0
     player.board.set(pokemon.id, pokemon)
-    if (pokemon.types.has(Synergy.WILD)) player.updateWildChance()
     pokemon.onAcquired(player)
 
     if (
