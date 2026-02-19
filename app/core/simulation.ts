@@ -1305,12 +1305,9 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.SNOW:
-        pokemon.addSpeed(
-          pokemon.types.has(Synergy.ICE) ? -10 : -20,
-          pokemon,
-          0,
-          false
-        )
+        if (pokemon.types.has(Synergy.ICE) === false) {
+          pokemon.addSpeed(-10, pokemon, 0, false)
+        }
         break
 
       case EffectEnum.SMOG: {

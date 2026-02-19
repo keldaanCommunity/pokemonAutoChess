@@ -3618,7 +3618,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP duration",
 		"STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
 		"MISTY": "+20% SPECIAL\n+30% CHARM duration",
-		"SNOW": "-20 SPEED (-10 if ICE)\n+30% FREEZE duration",
+		"SNOW": "-10 SPEED if not ICE\n+30% FREEZE duration",
 		"SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration",
 		"BLOODMOON": "+20% PHYSICAL\n+30% WOUND duration",
 		"SMOG": "-15% accuracy\n+30% POISONNED duration",

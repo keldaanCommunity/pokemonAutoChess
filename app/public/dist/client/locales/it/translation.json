@@ -3615,7 +3615,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% durata SLEEP",
 		"STORM": "I fulmini colpiscono casualmente il tabellone, infliggendo 100 SPECIAL (ELECTRIC sono immuni)\n+30% alla durata della PARALYSIS",
 		"MISTY": "+20% SPECIAL\n+30% alla durata del CHARM",
-		"SNOW": "-20 SPEED\n+30% alla durata del FREEZE",
+		"SNOW": "-10 SPEED\n+30% alla durata del FREEZE",
 		"SANDSTORM": "5 SPECIAL al secondo (GROUND sono immuni)\n +30% durata CONFUSION",
 		"BLOODMOON": "+20% PHYSICAL\n+30% durata di WOUND",
 		"SMOG": "-15% precisione\n+30% durata POISONNED",

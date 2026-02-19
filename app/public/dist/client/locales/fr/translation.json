@@ -3618,7 +3618,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% de durée du SLEEP",
 		"STORM": "La foudre frappe au hasard sur le plateau, infligeant 100 SPECIAL (les ELECTRIC sont immunisés)\n+30% de durée de PARALYSIS",
 		"MISTY": "+20% SPECIAL\n+30% de durée de CHARM",
-		"SNOW": "-20 SPEED (-10 si ICE)\n+30% de durée du FREEZE",
+		"SNOW": "-10 SPEED (les ICE sont immunisés)\n+30% de durée du FREEZE",
 		"SANDSTORM": "Inflige 5 SPECIAL par seconde (les GROUND sont immunisés)\n+30% de durée de CONFUSION",
 		"BLOODMOON": "+20% PHYSICAL\n+30% de durée de WOUND",
 		"SMOG": "-15% de précision\n+30% de durée de POISONNED",

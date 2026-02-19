@@ -1691,7 +1691,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% SLAAPduur",
 		"STORM": "Bliksem slaat willekeurig op het bord en deelt 100 SPECIAL (ELECTRIC is immuun)\n+30% duur van de verlamming",
 		"MISTY": "+20% SPECIAL\n+30% SILENCE duur",
-		"SNOW": "-20 SPEED\n+30% FREEZE duur",
+		"SNOW": "-10 SPEED\n+30% FREEZE duur",
 		"SANDSTORM": "5SPECIAL per seconde (GROUND is immuun)\n CONFUSION duur +30%",
 		"SMOG": "-15% nauwkeurigheid\n+30% POISONNED duur"
 	},

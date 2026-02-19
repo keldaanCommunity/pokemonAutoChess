@@ -3618,7 +3618,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP持续时间",
 		"STORM": "闪电随机轰击场地，对击中的宝可梦造成100点SPECIAL（ELECTRIC免疫此伤害）\n+30% PARALYSIS持续时间",
 		"MISTY": "+20% SPECIAL\n+30% CHARM持续时间",
-		"SNOW": "-20 SPEED（若为ICE，改为-10）\n+30% FREEZE持续时间",
+		"SNOW": "-10 SPEED（若为ICE，改为-10）\n+30% FREEZE持续时间",
 		"SANDSTORM": "每秒对所有宝可梦造成5点SPECIAL（GROUND免疫此伤害）\n+30% CONFUSION持续时间",
 		"BLOODMOON": "+20% PHYSICAL\n+30% WOUND持续时间",
 		"SMOG": "-15% 命中率\n+30% POISONNED持续时间",

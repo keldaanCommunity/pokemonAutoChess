@@ -3440,7 +3440,7 @@
 		"NIGHT": "CRIT_CHANCE +10%\nSLEEP 지속시간 +30%",
 		"STORM": "100 SPECIAL을 가하는 번개가 보드판에 아무곳에나 떨어집니다. (ELECTRIC는 피해를 입지 않습니다.)\nPARALYSIS 지속시간+30%",
 		"MISTY": "SPECIAL +20% \nCHARM 지속시간 +30%",
-		"SNOW": "-20 SPEED\nFREEZE 지속시간 +30%",
+		"SNOW": "-10 SPEED\nFREEZE 지속시간 +30%",
 		"SANDSTORM": "모든 포켓몬은 초당 5 SPECIAL를 입습니다. (GROUND는 피해를 입지 않습니다.)\nCONFUSION 지속시간 +30%",
 		"BLOODMOON": "PHYSICAL +20%\nWOUND 지속시간 +30%",
 		"SMOG": "-15% 명중률\n+30% POISONNED 지속 시간",

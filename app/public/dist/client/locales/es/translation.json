@@ -3376,7 +3376,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% de duración del SLEEP",
 		"STORM": "Un rayo cae aleatoriamente en el tablero e inflige 100 de SPECIAL (ELECTRIC es inmune)\n+30% de duración de PARALYSIS",
 		"MISTY": "+20% de SPECIAL\n+30% de duración de CHARM",
-		"SNOW": "-20 SPEED\n+30% de duración de FREEZE",
+		"SNOW": "-10 SPEED\n+30% de duración de FREEZE",
 		"SANDSTORM": "5 de SPECIAL por segundo (GROUND son inmunes)\n+30% de duración de CONFUSION",
 		"BLOODMOON": "+20% de PHYSICAL\nDuración de WOUND +30%",
 		"SMOG": "-15% de precisión\n+30% de duración de POISONNED",

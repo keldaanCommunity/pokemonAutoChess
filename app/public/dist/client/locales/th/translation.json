@@ -991,7 +991,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% ระยะเวลาสถานะ SLEEP",
 		"STORM": "สุ่มสายฟ้าฟาดลงบนสนาม, สร้างความเสียหาย 100 SPECIAL (ประเภท ELECTRIC จะไม่ได้รับผล)\n+30% ระยะเวลาสถานะ PARALYSIS",
 		"MISTY": "+20% SPECIAL\n+30% ระยะเวลาสถานะ CHARM",
-		"SNOW": "-20 SPEED\n+30% ระยะเวลาสถานะ FREEZE",
+		"SNOW": "-10 SPEED\n+30% ระยะเวลาสถานะ FREEZE",
 		"SANDSTORM": "สร้างความเสียหาย 5 SPECIAL ต่อวินาที (ประเภท GROUND จะไม่ได้รับผล)\n+30% ระยะเวลาสถานะ CONFUSION",
 		"BLOODMOON": "+20% PHYSICAL\n30% ระยะเวลาสถานะ WOUND",
 		"SMOG": "-15% ความแม่นยำ\n+30% ระยะเวลา POISONNED"

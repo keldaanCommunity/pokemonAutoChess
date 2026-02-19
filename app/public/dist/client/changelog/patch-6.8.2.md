@@ -39,7 +39,7 @@
 # Gameplay changes
 
 - POSSESSED is no longer considered a negative status if by being possessed it came to your team
-
+- SNOW weather: -10 speed if not ICE instead of -20
 
 # Bugfix
 

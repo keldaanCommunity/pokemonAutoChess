@@ -2180,7 +2180,7 @@
 		"NIGHT": "+10% CRIT_CHANCE\n+30% de duração do SLEEP",
 		"STORM": "Um raio atinge aleatoriamente o tabuleiro, causando 100 SPECIAL (ELECTRIC são imunes)\n+30% de duração da PARALYSIS",
 		"MISTY": "+20% SPECIAL\n+30% de duração do CHARM",
-		"SNOW": "-20 SPEED\n+30% de duração de FREEZE",
+		"SNOW": "-10 SPEED\n+30% de duração de FREEZE",
 		"SANDSTORM": "5 SPECIAL por segundo (TERRA são imunes)\n Duração da CONFUSION +30%",
 		"SMOG": "-15% de precisão\n+30% de duração de POISONNED"
 	},
