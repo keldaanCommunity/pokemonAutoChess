@@ -27,6 +27,7 @@
 
 # Misc
 
+- Added notifications pop-up on lobby screen when gaining new titles, leveling up, or changing elo rank
 - Removed Buyer Fever scribble
 - Changed Technologic scribble to give tools at stages 2 and 4 (from stages 3 and 15)
 - New Scribble: Unown Spell

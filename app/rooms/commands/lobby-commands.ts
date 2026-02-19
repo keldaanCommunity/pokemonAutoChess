@@ -32,6 +32,7 @@ import UserMetadata, {
 } from "../../models/mongo-models/user-metadata"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { discordService } from "../../services/discord"
+import { notificationsService } from "../../services/notifications"
 import {
   CollectionEmotions,
   Emotion,
@@ -95,6 +96,14 @@ export class OnJoinCommand extends Command<
         )
         if (pendingGame != null && !pendingGame.isExpired) {
           client.send(Transfer.RECONNECT_PROMPT, pendingGame.gameId)
+        }
+
+        // Send any pending notifications
+        const notifications = notificationsService.getNotifications(
+          client.auth.uid
+        )
+        if (notifications.length > 0) {
+          client.send(Transfer.NOTIFICATIONS, notifications)
         }
       } else {
         // create new user account

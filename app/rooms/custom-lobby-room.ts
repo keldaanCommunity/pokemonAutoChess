@@ -1,12 +1,5 @@
 import { Dispatcher } from "@colyseus/command"
-import {
-  Client,
-  CloseCode,
-  IRoomCache,
-  matchMaker,
-  Room,
-  subscribeLobby
-} from "colyseus"
+import { Client, IRoomCache, matchMaker, Room, subscribeLobby } from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import {
@@ -21,8 +14,10 @@ import { TournamentSchema } from "../models/colyseus-models/tournament"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
 import UserMetadata from "../models/mongo-models/user-metadata"
+import { notificationsService } from "../services/notifications"
 import { Emotion, Role, Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
+import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { ITournament } from "../types/interfaces/Tournament"
@@ -372,6 +367,19 @@ export default class CustomLobbyRoom extends Room {
     this.onMessage(Transfer.SEARCH, (client, { name }: { name: string }) => {
       this.dispatcher.dispatch(new OnSearchCommand(), { client, name })
     })
+
+    // Handle notification acknowledgment from client
+    this.onMessage(
+      Transfer.NOTIFICATION_SEEN,
+      (client, notificationId: string) => {
+        if (client.auth) {
+          notificationsService.clearNotification(
+            client.auth.uid,
+            notificationId
+          )
+        }
+      }
+    )
 
     this.onMessage(
       Transfer.CHANGE_AVATAR,
