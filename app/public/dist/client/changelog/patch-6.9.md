@@ -9,9 +9,9 @@
 > It will be easier to get a WILD start, but harder to find all your remaining evos in the late game. We also remove the previous quirks of WILD synergy design like the incentive to roll on PvE stages only, or the fact that benched WILD Pokémon contributed to the shop odds, in order to make it more consistent and easier to understand. The new odds allows us to buff Teddiursa line and make it closer to what you could expect from an Ultra category Pokémon.
 
 - Benched WILD Pokémon no longer contribute to WILD shop odds.
-- WILD Pokémon have ~~5~~ 8% base chance to be found in shops during PvE encounter stages
-- WILD 2: +30 → +20 SPEED. If WILD is active, WILD Pokémon can now be found at all stages.
-- WILD 4: +50 → +40 SPEED. For each WILD STAR on board, gain +0.5% chance to find WILD in shops.
+- WILD Pokémon have ~~5~~ 8% base chance to be found in shops during PvE encounter stages. If WILD is active, WILD Pokémon can now be found at all stages. For each WILD STAR on board, gain +0.5% chance to find WILD in shops.
+- WILD 2: +30 → +20 SPEED. 
+- WILD 4: +50 → +40 SPEED.
 - WILD 6: +50 SPEED and +20% base ATK → +40 SPEED and +40% base ATK
 - New effect for WILD 9: Once below 30% HP, gain 30 Shield and double the Attack and Speed buffs for 3 seconds.
 
