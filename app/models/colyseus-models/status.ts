@@ -82,6 +82,7 @@ export default class Status extends Schema implements IStatus {
   lockedCooldown = 0
   blindCooldown = 0
   enrageDelay = 35000
+  ccCooldown = 0
 
   constructor(simulation: ISimulation) {
     super()
@@ -95,6 +96,7 @@ export default class Status extends Schema implements IStatus {
   }
 
   clearPositiveStatus(entity: PokemonEntity) {
+    this.ccCooldown = 0
     this.protectCooldown = 0
     this.runeProtectCooldown = 0
     this.enrageCooldown = 0
@@ -307,6 +309,10 @@ export default class Status extends Schema implements IStatus {
     }
 
     this.updateRage(dt, pokemon)
+
+    if(this.ccCooldown > 0) {
+      this.ccCooldown = min(0)(this.ccCooldown - dt)
+    }
 
     if (pokemon.status.curseVulnerability && !pokemon.status.flinch) {
       this.triggerFlinch(30000, pokemon)
@@ -666,7 +672,8 @@ export default class Status extends Schema implements IStatus {
       !this.freeze && // freeze cannot be stacked
       !this.runeProtect &&
       !this.skydiving &&
-      !pkm.effects.has(EffectEnum.IMMUNITY_FREEZE)
+      !pkm.effects.has(EffectEnum.IMMUNITY_FREEZE) &&
+      this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
         duration *= 1.3
@@ -697,6 +704,7 @@ export default class Status extends Schema implements IStatus {
   updateFreeze(dt: number) {
     if (this.freezeCooldown - dt <= 0) {
       this.freeze = false
+      this.ccCooldown = Math.max(this.ccCooldown, 1000)
     } else {
       this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
     }
@@ -723,7 +731,8 @@ export default class Status extends Schema implements IStatus {
       !this.sleep &&
       !this.runeProtect &&
       !this.skydiving &&
-      !pkm.effects.has(EffectEnum.IMMUNITY_SLEEP)
+      !pkm.effects.has(EffectEnum.IMMUNITY_SLEEP) &&
+      this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
         duration *= 1.3
@@ -748,6 +757,7 @@ export default class Status extends Schema implements IStatus {
   updateSleep(dt: number, pkm: PokemonEntity) {
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
+      this.ccCooldown = Math.max(this.ccCooldown, 1000)
       if (pkm.passive === Passive.SLAKING) {
         this.triggerRage(3000, pkm)
       }
@@ -1096,7 +1106,8 @@ export default class Status extends Schema implements IStatus {
     if (
       !this.locked && // lock cannot be stacked
       !this.skydiving &&
-      !this.runeProtect
+      !this.runeProtect &&
+      this.ccCooldown <= 0
     ) {
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -1121,6 +1132,7 @@ export default class Status extends Schema implements IStatus {
         (pokemon.items.has(Item.WIDE_LENS)
           ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
           : 0)
+      this.ccCooldown = Math.max(this.ccCooldown, 1000)
     } else {
       this.lockedCooldown -= dt
     }
