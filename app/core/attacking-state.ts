@@ -82,7 +82,7 @@ export default class AttackingState extends PokemonState {
           target
         )
 
-        if (pokemon.pp >= pokemon.maxPP && !pokemon.status.silence) {
+        if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
           // CAST ABILITY
           castAbility(pokemon.skill, pokemon, board, target)
         } else {

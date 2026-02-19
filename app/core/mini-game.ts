@@ -378,7 +378,7 @@ export class MiniGame {
       })
     } else if (state.townEncounter === TownEncounters.MAKUHITA) {
       const ticket =
-        state.stageLevel >= 20
+        state.stageLevel >= 15
           ? Item.GOLD_DOJO_TICKET
           : state.stageLevel >= 10
             ? Item.SILVER_DOJO_TICKET

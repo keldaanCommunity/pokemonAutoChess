@@ -84,6 +84,7 @@ import {
   ItemRecipe,
   ItemsSoldAtTown,
   Mulches,
+  Scarves,
   ShinyItems,
   Sweets,
   SynergyGems,
@@ -562,8 +563,15 @@ export class OnDragDropCombineCommand extends Command<
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
-      result = recipe[0]
+      if (Scarves.includes(recycledItem)) {
+        removeInArray(player.scarvesItems, recycledItem)
+      }
+      removeInArray(player.items, itemA)
+      removeInArray(player.items, itemB)
+      player.items.push(recipe[0])
       player.items.push(recipe[1])
+      player.updateSynergies()
+      return
     } else {
       // find recipe result
       const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
@@ -583,10 +591,12 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        // replace silk scarf by scarf-made item
-        player.scarvesItems.push(result)
-        if (player.scarvesItems.length >= 5) {
-          player.titles.add(Title.SCOUT)
+        const nbScarvesBasedOnNormalSynergy = getSynergyStep(
+          player.synergies,
+          Synergy.NORMAL
+        )
+        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
+          player.scarvesItems.push(result)
         }
       }
 
@@ -598,6 +608,7 @@ export class OnDragDropCombineCommand extends Command<
     player.updateSynergies()
   }
 }
+
 export class OnDragDropItemCommand extends Command<
   GameRoom,
   {
@@ -789,24 +800,13 @@ export class OnDragDropItemCommand extends Command<
 
       const itemCombined = recipe[0] as Item
 
-      if (
-        (isIn(SynergyStones, itemCombined) ||
-          itemCombined === Item.FRIEND_BOW) &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
-      ) {
-        // prevent combining into a synergy stone on a pokemon that already has this synergy
-        client.send(Transfer.DRAG_DROP_CANCEL, message)
-        return
-      }
-
       if (recipe[1].includes(Item.SILK_SCARF)) {
-        // replace silk scarf by scarf-made item
-        const scarfIndex = player.scarvesItems.indexOf(Item.SILK_SCARF)
-        if (scarfIndex >= 0) {
-          player.scarvesItems[scarfIndex] = itemCombined
-        }
-        if (player.scarvesItems.length >= 5) {
-          player.titles.add(Title.SCOUT)
+        const nbScarvesBasedOnNormalSynergy = getSynergyStep(
+          player.synergies,
+          Synergy.NORMAL
+        )
+        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
+          player.scarvesItems.push(itemCombined)
         }
       }
 
@@ -816,10 +816,25 @@ export class OnDragDropItemCommand extends Command<
       if (pokemon.items.has(itemCombined)) {
         // pokemon already has the combined item so the second one pops off and go to player inventory
         player.items.push(itemCombined)
+      } else if (
+        (isIn(SynergyStones, itemCombined) ||
+          itemCombined === Item.FRIEND_BOW) &&
+        pokemon.types.has(SynergyGivenByItem[itemCombined])
+      ) {
+        // combining into a synergy stone on a pokemon that already has this synergy makes the stone pops off and go to player inventory
+        player.items.push(itemCombined)
       } else {
         pokemon.addItem(itemCombined, player)
       }
     } else {
+      if (
+        (isIn(SynergyStones, item) || item === Item.FRIEND_BOW) &&
+        pokemon.types.has(SynergyGivenByItem[item])
+      ) {
+        // prevent combining into a synergy stone on a pokemon that already has this synergy
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
       pokemon.addItem(item, player)
       removeInArray(player.items, item)
     }
@@ -1205,6 +1220,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (this.state.stageLevel >= 40) {
         player.titles.add(Title.ETERNAL)
       }
+
+      const equippedItems = values(player.board).flatMap((p) => values(p.items))
+      if (equippedItems.filter((i) => isIn(Scarves, i)).length >= 5) {
+        player.titles.add(Title.SCOUT)
+      }
     }
   }
 
@@ -1461,14 +1481,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         behavior: WandererBehavior.SPECTATE,
         data: (rewardsIcons ?? rewards).join(";")
       })
-      player.wanderers.set(id, wanderer)
+      setTimeout(() => player.wanderers.set(id, wanderer), 3000)
       setTimeout(() => {
         if (rewards[0] === Item.BIG_NUGGET) {
           player.addMoney(10, true, null)
         } else {
           player.items.push(...rewards)
         }
-      }, 7000)
+      }, 10000)
     }
 
     const nbTrees = getSynergyStep(player.synergies, Synergy.GRASS)

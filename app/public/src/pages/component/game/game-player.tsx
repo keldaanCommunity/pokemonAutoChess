@@ -18,9 +18,9 @@ export default function GamePlayer(props: {
   index: number
 }) {
   const spectatedPlayerId = useAppSelector(
-    (state) => state.game.currentPlayerId
+    (state) => state.game.playerIdSpectated
   )
-  const selfPlayerId = useAppSelector((state) => state.network.uid)
+  const connectedPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
     props.click(props.player.id)
@@ -36,7 +36,7 @@ export default function GamePlayer(props: {
         }}
         className={cc("game-player", {
           spectated: spectatedPlayerId === props.player.id,
-          self: selfPlayerId === props.player.id,
+          self: connectedPlayerId === props.player.id,
           dead: props.player.life <= 0
         })}
         onClick={playerClick}

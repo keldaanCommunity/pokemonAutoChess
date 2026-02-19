@@ -255,7 +255,7 @@ export default class BoardManager {
     }
 
     if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
-      this.addPvePokemons(PVEStages[this.state.stageLevel], phaseJustChanged)
+      this.addPvePokemons(PVEStages[this.state.stageLevel], !phaseJustChanged)
     }
   }
 
@@ -547,7 +547,8 @@ export default class BoardManager {
 
   updateOpponentAvatar(
     opponentId: string | null,
-    opponentAvatarString: string | null
+    opponentAvatarString: string | null,
+    isGhostBattle: boolean = false
   ) {
     if (this.opponentAvatar) {
       this.opponentAvatar.destroy()
@@ -593,6 +594,7 @@ export default class BoardManager {
 
       this.opponentAvatar.orientation = Orientation.DOWNLEFT
       this.opponentAvatar.updateLife(opponentLife)
+      if (isGhostBattle) this.opponentAvatar.sprite.setAlpha(0.5)
       this.animationManager.animatePokemon(
         this.opponentAvatar,
         this.opponentAvatar.action,
@@ -710,18 +712,23 @@ export default class BoardManager {
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
     setTimeout(() => {
       const gameState = store.getState().game
-      const currentPlayer = gameState.players.find(
-        (p) => p.id === gameState.currentPlayerId
+      const spectatedPlayer = gameState.players.find(
+        (p) => p.id === gameState.playerIdSpectated
       )
-      if (currentPlayer) {
-        const isPVERound = currentPlayer.opponentId === "pve"
-        const isRedPlayer = gameState.currentTeam === Team.RED_TEAM
+      const player = spectatedPlayer ?? this.player
+      const simulation = this.scene?.room?.state.simulations.get(
+        player.simulationId
+      )
+      if (spectatedPlayer) {
+        const isPVERound = spectatedPlayer.opponentId === "pve"
+        const isRedPlayer = gameState.teamSpectated === Team.RED_TEAM
         if (!isPVERound && phaseJustChanged) {
           this.portalTransition(isRedPlayer)
         } else {
           this.updateOpponentAvatar(
-            currentPlayer.opponentId,
-            currentPlayer.opponentAvatar
+            spectatedPlayer.opponentId,
+            spectatedPlayer.opponentAvatar,
+            simulation?.isGhostBattle
           )
         }
       }
@@ -796,9 +803,13 @@ export default class BoardManager {
       this.player = player
       this.renderBoard(false)
       this.updatePlayerAvatar()
+      const simulation = this.scene?.room?.state.simulations.get(
+        player.simulationId
+      )
       this.updateOpponentAvatar(
         this.player.opponentId,
-        this.player.opponentAvatar
+        this.player.opponentAvatar,
+        simulation?.isGhostBattle
       )
       this.updateScoutingAvatars(true)
     }
@@ -970,13 +981,8 @@ export default class BoardManager {
               pokemonUI.attackSprite
             // load the new ones
             pokemonUI.lazyloadAnimations(this.scene).then(() => {
+              pokemonUI.animationLocked = false
               pokemonUI.evolutionAnimation()
-              this.animationManager.animatePokemon(
-                pokemonUI,
-                pokemonUI.pokemon.action,
-                false,
-                false
-              )
             })
           }
           break
@@ -1225,7 +1231,12 @@ export default class BoardManager {
           })
 
           // show the opponent avatar
-          this.updateOpponentAvatar(opponent.id, opponent.avatar)
+          const isGhostOpponent = simulation?.isGhostBattle && !isRedPlayer
+          this.updateOpponentAvatar(
+            opponent.id,
+            opponent.avatar,
+            isGhostOpponent
+          )
 
           // replace the red pokemon avatar
           if (this.playerAvatar) {
@@ -1295,7 +1306,11 @@ export default class BoardManager {
       })
     } else {
       // opponent avatar move out of the portal
-      this.updateOpponentAvatar(opponent.id, opponent.avatar)
+      const simulation = this.scene?.room?.state.simulations.get(
+        this.player.simulationId
+      )
+      const isGhostOpponent = simulation?.isGhostBattle && !isRedPlayer
+      this.updateOpponentAvatar(opponent.id, opponent.avatar, isGhostOpponent)
       if (this.opponentAvatar) {
         this.opponentAvatar.x = portalX
         this.opponentAvatar.y = portalY

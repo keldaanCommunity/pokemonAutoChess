@@ -14,8 +14,8 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
 import {
+  NonPkm,
   Pkm,
-  PkmByIndex,
   PkmFamily,
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
@@ -44,7 +44,9 @@ export type CollectionFilterState = {
 }
 
 const listPokemons = precomputedPokemonsImplemented.filter(
-  (pokemon) => PkmAltForms.includes(pokemon.name) === false
+  (pokemon) =>
+    PkmAltForms.includes(pokemon.name) === false &&
+    NonPkm.includes(pokemon.name) === false
 )
 
 export default function PokemonCollection() {
@@ -76,12 +78,24 @@ export default function PokemonCollection() {
     function updateCount() {
       switch (filterState.mode) {
         case "pokedex":
-          setCount(collection.filter((item) => item.played > 0).length)
+          setCount(
+            listPokemons.filter((pkm) => {
+              const collectionItem = collection.find(
+                (item) => item.id === pkm.index
+              )
+              return collectionItem && collectionItem.played > 0
+            }).length
+          )
           setTotal(listPokemons.length)
           break
         case "shiny":
           setCount(
-            collection.filter((item) => item.shinyEmotions.length > 0).length
+            listPokemons.filter((pkm) => {
+              const collectionItem = collection.find(
+                (item) => item.id === pkm.index
+              )
+              return collectionItem && collectionItem.shinyEmotions.length > 0
+            }).length
           )
           setTotal(
             listPokemons.filter(
@@ -91,10 +105,16 @@ export default function PokemonCollection() {
           break
         default:
           setCount(
-            collection.filter(
-              (item) =>
-                item.emotions.length > 0 || item.shinyEmotions.length > 0
-            ).length
+            listPokemons.filter((pkm) => {
+              const collectionItem = collection.find(
+                (item) => item.id === pkm.index
+              )
+              return (
+                collectionItem &&
+                (collectionItem.emotions.length > 0 ||
+                  collectionItem.shinyEmotions.length > 0)
+              )
+            }).length
           )
           setTotal(listPokemons.length)
           break
@@ -294,7 +314,7 @@ export function PokemonCollectionList(props: {
         PkmAltForms.includes(pkm) === false &&
         (pokemonData.skill !== Ability.DEFAULT ||
           pokemonData.passive !== Passive.NONE) &&
-        pokemonData.passive !== Passive.UNOWN &&
+        (props.type === "all" || pokemonData.passive !== Passive.UNOWN) &&
         (props.type === "all" ||
           pokemonData.types.includes(Synergy[props.type]))
       )

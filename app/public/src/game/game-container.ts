@@ -462,7 +462,7 @@ class GameContainer {
       const $pokemon = this.$<Pokemon>(pokemon)
       fields.forEach((field) => {
         $pokemon.listen(field, (value, previousValue) => {
-          if (field && player.id === this.spectatedPlayerId) {
+          if (field && player.id === this.playerIdSpectated) {
             this.gameScene?.board?.changePokemon(
               pokemon,
               field,
@@ -474,7 +474,7 @@ class GameContainer {
       })
 
       $pokemon.items.onAdd((item) => {
-        if (player.id === this.spectatedPlayerId) {
+        if (player.id === this.playerIdSpectated) {
           this.gameScene?.board?.updatePokemonItems(player.id, pokemon, item)
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
@@ -488,7 +488,7 @@ class GameContainer {
       })
 
       $pokemon.items.onRemove((item) => {
-        if (player.id === this.spectatedPlayerId) {
+        if (player.id === this.playerIdSpectated) {
           this.gameScene?.board?.updatePokemonItems(
             player.id,
             pokemon,
@@ -499,7 +499,7 @@ class GameContainer {
       })
 
       $pokemon.dishes.onChange((value, key) => {
-        if (player.id === this.spectatedPlayerId) {
+        if (player.id === this.playerIdSpectated) {
           this.gameScene?.board?.updatePokemonDishes(
             player.id,
             pokemon,
@@ -531,7 +531,7 @@ class GameContainer {
     }, false)
 
     $player.board.onRemove((pokemon, key) => {
-      if (player.id === this.spectatedPlayerId) {
+      if (player.id === this.playerIdSpectated) {
         this.gameScene?.board?.removePokemon(pokemon)
       }
     })
@@ -543,7 +543,7 @@ class GameContainer {
     })
 
     $player.items.onChange((value, key) => {
-      if (player.id === this.spectatedPlayerId) {
+      if (player.id === this.playerIdSpectated) {
         //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
@@ -551,7 +551,7 @@ class GameContainer {
 
     $player.synergies.onChange(() => {
       if (
-        player.id === this.spectatedPlayerId &&
+        player.id === this.playerIdSpectated &&
         this.gameScene?.board?.mode === BoardMode.PICK
       ) {
         this.gameScene?.board?.showLightCell()
@@ -569,7 +569,7 @@ class GameContainer {
       const board = this.gameScene?.board
       if (
         board &&
-        player.id === this.spectatedPlayerId &&
+        player.id === this.playerIdSpectated &&
         this.gameScene?.board?.mode !== BoardMode.TOWN
       ) {
         board.renderFlowerPots()
@@ -614,8 +614,8 @@ class GameContainer {
     return this.game?.scene?.getScene("gameScene") as GameScene | undefined
   }
 
-  get spectatedPlayerId(): string {
-    return store.getState().game.currentPlayerId
+  get playerIdSpectated(): string {
+    return store.getState().game.playerIdSpectated
   }
 
   get simulationId(): string {
@@ -704,7 +704,7 @@ class GameContainer {
     const board = this.gameScene?.board
     if (
       board &&
-      player.id === this.spectatedPlayerId &&
+      player.id === this.playerIdSpectated &&
       (board.mode === BoardMode.PICK || pokemon.positionY === 0)
     ) {
       const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)

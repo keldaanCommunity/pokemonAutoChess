@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import { preference, usePreferences } from "../../preferences"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 
@@ -222,7 +223,10 @@ export default class WeatherManager {
     )
 
     // Add heat haze effect using WebGL shader
-    if (this.scene.renderer.type === Phaser.WEBGL) {
+    if (
+      this.scene.renderer.type === Phaser.WEBGL &&
+      !preference("disableAnimatedTilemap")
+    ) {
       //const camera = this.scene.cameras.main
       this.fxs =
         (this.scene as GameScene).map?.layers.map((layer) =>
@@ -637,6 +641,8 @@ export default class WeatherManager {
     if (this.fxs) {
       this.fxs.forEach((effect) => effect.destroy())
       this.fxs = []
+      const scene = this.scene as GameScene
+      scene.map?.layers.forEach((layer) => layer.tilemapLayer.clearFX())
     }
   }
 }

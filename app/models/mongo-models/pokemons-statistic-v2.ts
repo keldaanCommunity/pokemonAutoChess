@@ -10,21 +10,20 @@ export interface IHistoryEntry {
   value: number
 }
 
+export interface IPokemonStatV2 {
+  rank: number
+  count: number
+  name: Pkm
+  items: Item[]
+  item_count: number
+  rank_history?: IHistoryEntry[]
+  count_history?: IHistoryEntry[]
+  item_count_history?: IHistoryEntry[]
+}
+
 export interface IPokemonsStatisticV2 {
   tier: EloRank
-  pokemons: Map<
-    EloRank,
-    {
-      rank: number
-      count: number
-      name: Pkm
-      items: Item[]
-      item_count: number
-      rank_history?: IHistoryEntry[]
-      count_history?: IHistoryEntry[]
-      item_count_history?: IHistoryEntry[]
-    }
-  >
+  pokemons: Map<EloRank, IPokemonStatV2>
 }
 
 const historyEntrySchema = new Schema(

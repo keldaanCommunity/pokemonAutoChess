@@ -9,6 +9,26 @@
   align-items: flex-start;
 }
 
+.pokemon-rank-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pokemon-family-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.pokemon-family-top {
+  display: flex;
+  gap: 1em;
+  align-items: flex-start;
+}
+
 .pokemon-family-summary {
   display: flex;
   gap: 16px;
@@ -27,6 +47,7 @@
   display: flex;
   gap: 4px;
   font-size: 12px;
+  align-items: center;
 }
 
 .pokemon-stat-item {
@@ -69,6 +90,13 @@
 .pokemon-item-img {
   height: 24px;
   width: 24px;
+}
+
+.pokemon-history-charts {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  width: 100%;
 }
 
 #meta-report .rank {

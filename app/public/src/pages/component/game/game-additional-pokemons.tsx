@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip"
 import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectConnectedPlayer, selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
 
@@ -35,7 +35,7 @@ export function GameAdditionalPokemons() {
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const currentPlayer = useAppSelector(selectConnectedPlayer)
 
   if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (

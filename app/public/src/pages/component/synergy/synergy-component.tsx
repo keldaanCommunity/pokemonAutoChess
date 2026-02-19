@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { SynergyTriggers } from "../../../../../config"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
 import SynergyDetailComponent from "./synergy-detail-component"
@@ -21,14 +21,14 @@ export default function SynergyComponent(props: {
     .filter((n) => n <= props.value)
     .at(-1)
 
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const highlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
     if (!outline) return // outline plugin doesnt work with canvas renderer
-    if (!currentPlayer?.board) return
-    currentPlayer.board.forEach((p) => {
+    if (!spectatedPlayer?.board) return
+    spectatedPlayer.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
@@ -46,7 +46,7 @@ export default function SynergyComponent(props: {
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
     if (!outline) return // outline plugin doesnt work with canvas renderer
-    currentPlayer?.board.forEach((p) => {
+    spectatedPlayer?.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {

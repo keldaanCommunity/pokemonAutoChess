@@ -13,8 +13,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../../utils/board"
 import { values } from "../../../../../utils/schemas"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
-import { rooms } from "../../../network"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
 import ItemPicker from "./item-picker"
@@ -22,6 +21,7 @@ import PokemonPicker from "./pokemon-picker"
 import SelectedEntity from "./selected-entity"
 import TeamEditor from "./team-editor"
 import "./team-builder.css"
+import { rooms } from "../../../network"
 
 export default function TeamBuilder(props: {
   bot?: IBot
@@ -39,7 +39,7 @@ export default function TeamBuilder(props: {
 
   const ingame = useLocation().pathname === "/game"
   const inBotBuilder = useLocation().pathname.startsWith("/bot-builder")
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
   const isAdmin = useAppSelector(
     (state) => state.network.profile?.role === Role.ADMIN
@@ -206,9 +206,9 @@ export default function TeamBuilder(props: {
 
   function snapshot() {
     try {
-      if (!currentPlayer) return
+      if (!spectatedPlayer) return
       updateBoard(
-        values(currentPlayer.board)
+        values(spectatedPlayer.board)
           .filter((pokemon) => !isOnBench(pokemon))
           .map((p) => {
             return {

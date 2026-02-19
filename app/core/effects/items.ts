@@ -12,11 +12,13 @@ import {
   DishesGoingToInventory,
   FishingRod,
   Flavors,
+  HerbaMysticas,
   Item,
   ItemRecipe,
   MemoryDiscs,
   NonSpecialBerries,
   OgerponMasks,
+  Scarves,
   Sweets,
   SynergyGivenByItem,
   SynergyStones,
@@ -213,6 +215,22 @@ export class SoulDewEffect extends PeriodicEffect {
   }
 }
 
+export class MachRibbonEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.addSpeed(20, pokemon, 0, false)
+        pokemon.count.machRibbonCount++
+        if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
+          pokemon.player.titles.add(Title.TOP_GUN)
+        }
+      },
+      Item.MACH_RIBBON,
+      3000
+    )
+  }
+}
+
 export class RunningShoesOnMoveEffect extends OnMoveEffect {
   stacks = 0
 
@@ -317,7 +335,11 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
-  } else if (chef.name.startsWith("ARCEUS") || chef.name === Pkm.KECLEON) {
+  } else if (
+    chef.name.startsWith("ARCEUS") ||
+    chef.name === Pkm.KECLEON ||
+    chef.items.has(Item.GOURMET_MEMORY)
+  ) {
     dish = Item.SANDWICH
   }
 
@@ -357,7 +379,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
           if (DishesGoingToInventory.includes(dish)) {
             player.items.push(dish)
           } else {
-            const candidates = values(player.board).filter(
+            let candidates = values(player.board).filter(
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
@@ -369,6 +391,11 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
                   p.positionY
                 ) === 1
             )
+            if (dish === Item.HERBA_MYSTICA) {
+              candidates = candidates.filter((p) =>
+                HerbaMysticas.every((herba) => p.dishes.has(herba) === false)
+              )
+            }
             candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
             const pokemon = candidates[0] ?? chef // idx 0 equals the strongest unit
             if (dish === Item.HERBA_MYSTICA) {
@@ -428,7 +455,7 @@ function dropComfey({ pokemon, board }: OnDeathEffectArgs) {
 
 export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ...Object.fromEntries(
-    [...SynergyStones, Item.FRIEND_BOW].map((stone) => [
+    SynergyStones.map((stone) => [
       stone,
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
@@ -568,7 +595,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.SAFETY_GOGGLES]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.status.triggerRuneProtect(60000)
+      pokemon.status.triggerRuneProtect(60000, pokemon, pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.status.runeProtectCooldown = 0
@@ -576,11 +603,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.KINGS_ROCK]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(0.35 * pokemon.baseHP, pokemon, 0, false)
-    }),
-    new OnItemRemovedEffect((pokemon) => {
-      pokemon.addShield(-0.3 * pokemon.baseHP, pokemon, 0, false)
+    new OnSimulationStartEffect(({ entity }) => {
+      entity.addShield(0.2 * entity.maxHP, entity, 0, false)
     })
   ],
 
@@ -695,21 +719,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.MACH_RIBBON]: [
-    new PeriodicEffect(
-      (pokemon) => {
-        pokemon.addSpeed(20, pokemon, 0, false)
-        pokemon.count.machRibbonCount++
-        if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
-          pokemon.player.titles.add(Title.TOP_GUN)
-        }
-      },
-      Item.MACH_RIBBON,
-      4000
-    ),
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effectsSet.add(new MachRibbonEffect())
+    }),
     new OnItemRemovedEffect((pokemon) => {
-      const stacks = pokemon.count.machRibbonCount
-      pokemon.addSpeed(-20 * stacks, pokemon, 0, false)
-      pokemon.count.machRibbonCount = 0
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof MachRibbonEffect) {
+          pokemon.addSpeed(-20 * effect.count, pokemon, 0, false)
+          pokemon.effectsSet.delete(effect)
+          pokemon.count.machRibbonCount = 0
+          break
+        }
+      }
     })
   ],
 
@@ -1043,6 +1064,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.removeItem(heldItem, player)
           consummed = true
         }
+        if (Scarves.includes(heldItem)) {
+          removeInArray(player.scarvesItems, heldItem)
+        }
       })
 
       if (consummed) {
@@ -1231,7 +1255,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           ? pokemon.simulation.blueDpsMeter
           : pokemon.simulation.redDpsMeter
       const shieldGained = dps.get(pokemon.id)?.shield ?? 0
-      const explosionDamage = Math.round(0.3 * shieldGained)
+      const explosionDamage = Math.round(0.5 * shieldGained)
+
+      pokemon.broadcastAbility({ skill: "EXPLOSION" })
+      pokemon.removeItem(Item.EXPLOSIVE_BAND)
 
       pokemon.broadcastAbility({ skill: "EXPLOSION" })
       pokemon.removeItem(Item.EXPLOSIVE_BAND)
@@ -1259,7 +1286,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           entity.positionY
         )
         if (ally) {
-          ally.maxPP = Math.round(0.9 * ally.maxPP)
+          ally.maxPP = Math.round(0.85 * ally.maxPP)
         }
       })
     }, Item.EFFICIENT_BANDANNA)

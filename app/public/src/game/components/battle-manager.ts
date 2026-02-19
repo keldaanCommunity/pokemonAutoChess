@@ -679,15 +679,17 @@ export default class BattleManager {
               pkmSprite.attackSprite
             // load the new ones
             pkmSprite.lazyloadAnimations(this.scene).then(() => {
+              pkmSprite.animationLocked = false
               if (previousValue !== undefined) {
                 pkmSprite.evolutionAnimation()
+              } else {
+                this.animationManager.animatePokemon(
+                  pkmSprite,
+                  pkmSprite.pokemon.action,
+                  this.flip,
+                  false
+                )
               }
-              this.animationManager.animatePokemon(
-                pkmSprite,
-                pkmSprite.pokemon.action,
-                this.flip,
-                false
-              )
             })
           }
           break

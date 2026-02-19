@@ -1343,7 +1343,7 @@
 		"COSMIC_POWER_MOON": "Tăng [25,SP] AP cho tất cả đồng minh",
 		"ENTANGLING_THREAD": "Gây [10,20,40,SP] SPECIAL và gây hiệu ứng PARALYSIS lên mục tiêu và kẻ thù ở gần trong 4 giây",
 		"SILVER_WIND": "Tốc biến xuống hậu tuyến kẻ thù, gây [20,40,80,SP] SPECIAL lên kẻ thù trên đường đi. Sau đó tăng 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP và 10 SPEED",
-		"POISON_POWDER": "Tốc biến xuống hậu tuyến kẻ thù, gây [20,40,80,SP] và hiệu ứng POISONED trong 5 giây lên kẻ thù trên đường đi",
+		"POISON_POWDER": "Tốc biến xuống hậu tuyến kẻ thù, gây [20,40,80,SP] và hiệu ứng POISONED trong 3 giây lên kẻ thù trên đường đi",
 		"ICY_WIND": "Gây [25,50,100,SP] SPECIAL lên mục tiêu cùng một hàng và giảm [10,20,40] SPEED của chúng",
 		"GIGATON_HAMMER": "Gây [100,200,400,SP] SPECIAL nhưng bản thân bị FATIGUE trong 6 giây",
 		"ACROBATICS": "Gây [20,40,80,SP] SPECIAL và di chuyển đến một ô cách xa mục tiêu. Di chuyển xa hơn nếu không cầm bất kỳ vật phẩm nào",

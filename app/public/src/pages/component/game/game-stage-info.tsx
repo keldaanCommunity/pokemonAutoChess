@@ -18,7 +18,7 @@ import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { min } from "../../../../../utils/number"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GameModeIcon } from "../icons/game-mode-icon"
@@ -32,22 +32,22 @@ export default function GameStageInfo() {
   const phase = useAppSelector((state) => state.game.phase)
   const weather = useAppSelector((state) => state.game.weather)
 
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const gameMode = useAppSelector((state) => state.game.gameMode)
 
-  if (!currentPlayer) return null
+  if (!spectatedPlayer) return null
 
   const isPVE = stageLevel in PVEStages
-  const name = currentPlayer.name
-  const title = currentPlayer.title
-  const avatar = currentPlayer.avatar
+  const name = spectatedPlayer.name
+  const title = spectatedPlayer.title
+  const avatar = spectatedPlayer.avatar
   const opponentName =
-    phase === GamePhaseState.FIGHT ? currentPlayer.opponentName : ""
+    phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentName : ""
   const opponentAvatar =
-    phase === GamePhaseState.FIGHT ? currentPlayer.opponentAvatar : ""
+    phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentAvatar : ""
   const opponentTitle =
-    phase === GamePhaseState.FIGHT ? currentPlayer.opponentTitle : ""
+    phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentTitle : ""
 
   return (
     <>
@@ -111,7 +111,7 @@ export default function GameStageInfo() {
           )}
         </div>
 
-        {currentPlayer.map && (
+        {spectatedPlayer.map && (
           <div className="map-information" data-tooltip-id="detail-map">
             {ReactDOM.createPortal(
               <Tooltip
@@ -120,10 +120,12 @@ export default function GameStageInfo() {
                 place="bottom"
               >
                 <div style={{ display: "flex", alignContent: "center" }}>
-                  {RegionDetails[currentPlayer.map].synergies.map((synergy) => (
-                    <SynergyIcon type={synergy} key={"map_type_" + synergy} />
-                  ))}
-                  <p>{t(`map.${currentPlayer.map}`)}</p>
+                  {RegionDetails[spectatedPlayer.map].synergies.map(
+                    (synergy) => (
+                      <SynergyIcon type={synergy} key={"map_type_" + synergy} />
+                    )
+                  )}
+                  <p>{t(`map.${spectatedPlayer.map}`)}</p>
                 </div>
               </Tooltip>,
               document.body
@@ -191,8 +193,8 @@ type PathStep = {
 
 export function StagePath() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const history = [...(currentPlayer?.history ?? [])]
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const history = [...(spectatedPlayer?.history ?? [])]
   const phase = useAppSelector((state) => state.game.phase)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const startStage = min(1)(stageLevel - 3)

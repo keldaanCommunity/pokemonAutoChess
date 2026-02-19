@@ -295,12 +295,10 @@ export class Pokemon extends Schema implements IPokemon {
         (i) => SynergyGivenByItem[i] === synergyRemoved
       )
 
-      if (
-        synergyRemoved &&
-        nativeTypes.has(synergyRemoved) === false &&
-        otherSynergyItemsHeld.length === 0
-      ) {
-        this.types.delete(synergyRemoved)
+      if (synergyRemoved && otherSynergyItemsHeld.length === 0) {
+        if (nativeTypes.has(synergyRemoved) === false) {
+          this.types.delete(synergyRemoved)
+        }
         if (this.passive === Passive.RKS_SYSTEM) {
           const memory = MemoryDiscsBySynergy[synergyRemoved]
           if (player.items.includes(memory) === false && memory) {
@@ -9239,7 +9237,7 @@ export class Snorlax extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  hp = 260
+  hp = 300
   atk = 21
   speed = 35
   def = 6
@@ -10112,18 +10110,6 @@ export class Silvally extends Pokemon {
       })
       player.items.push(...itemsToRemove)
       this.removeItems(itemsToRemove, player)
-    }
-  }
-  onItemRemoved(item: Item, player: Player) {
-    if (
-      (SynergyItems as ReadonlyArray<Item>).includes(item) &&
-      values(this.items).filter((item) =>
-        (SynergyItems as ReadonlyArray<Item>).includes(item)
-      ).length === 0 &&
-      player.getPokemonAt(this.positionX, this.positionY)?.name !==
-        Pkm.TYPE_NULL
-    ) {
-      player.transformPokemon(this, Pkm.TYPE_NULL)
     }
   }
 }
@@ -12427,11 +12413,11 @@ export class Koffing extends Pokemon {
       else return Pkm.WEEZING
     }
   )
-  hp = 70
+  hp = 65
   atk = 5
   speed = 44
-  def = 6
-  speDef = 6
+  def = 8
+  speDef = 4
   maxPP = 60
   range = 1
   skill = Ability.SMOG
@@ -12446,11 +12432,11 @@ export class Weezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 170
+  hp = 155
   atk = 10
   speed = 44
-  def = 10
-  speDef = 10
+  def = 12
+  speDef = 7
   maxPP = 60
   range = 1
   skill = Ability.SMOG
@@ -12465,11 +12451,11 @@ export class GalarianWeezing extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 170
+  hp = 155
   atk = 10
   speed = 44
-  def = 10
-  speDef = 10
+  def = 12
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.STRANGE_STEAM
@@ -13142,7 +13128,7 @@ export class Misdreavus extends Pokemon {
   stars = 1
   evolution = Pkm.MISMAGIUS
   hp = 80
-  atk = 7
+  atk = 6
   speed = 59
   def = 4
   speDef = 6
@@ -13161,7 +13147,7 @@ export class Mismagius extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   hp = 160
-  atk = 20
+  atk = 18
   speed = 59
   def = 4
   speDef = 8
@@ -14065,9 +14051,9 @@ export class Smeargle extends Pokemon {
 
 export class Toxel extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.BABY,
     Synergy.ELECTRIC,
-    Synergy.POISON,
-    Synergy.BABY
+    Synergy.POISON
   ])
   rarity = Rarity.RARE
   evolution = Pkm.TOXTRICITY
@@ -14085,9 +14071,9 @@ export class Toxel extends Pokemon {
 
 export class Toxtricity extends Pokemon {
   types = new SetSchema<Synergy>([
+    Synergy.SOUND,
     Synergy.ELECTRIC,
-    Synergy.POISON,
-    Synergy.SOUND
+    Synergy.POISON
   ])
   rarity = Rarity.RARE
   stars = 2
@@ -14205,10 +14191,10 @@ export class Dewpider extends Pokemon {
   stars = 1
   evolution = Pkm.ARAQUANID
   hp = 60
-  atk = 8
+  atk = 6
   speed = 38
-  def = 4
-  speDef = 2
+  def = 2
+  speDef = 4
   maxPP = 100
   range = 1
   skill = Ability.STICKY_WEB
@@ -14225,10 +14211,10 @@ export class Araquanid extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 150
-  atk = 17
+  atk = 13
   speed = 38
-  def = 8
-  speDef = 4
+  def = 4
+  speDef = 8
   maxPP = 100
   range = 1
   skill = Ability.STICKY_WEB
@@ -19211,9 +19197,9 @@ export class Clobbopus extends Pokemon {
   evolution = Pkm.GRAPPLOCT
   hp = 70
   atk = 6
-  speed = 39
-  def = 5
-  speDef = 5
+  speed = 27
+  def = 4
+  speDef = 4
   maxPP = 65
   range = 1
   skill = Ability.OCTOLOCK
@@ -19228,11 +19214,11 @@ export class Grapploct extends Pokemon {
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
-  atk = 12
-  speed = 39
-  def = 9
-  speDef = 9
+  hp = 160
+  atk = 14
+  speed = 27
+  def = 8
+  speDef = 8
   maxPP = 65
   range = 1
   skill = Ability.OCTOLOCK
@@ -19384,7 +19370,7 @@ export class Klink extends Pokemon {
   evolution = Pkm.KLANG
   hp = 50
   atk = 4
-  speed = 42
+  speed = 35
   def = 3
   speDef = 2
   maxPP = 100
@@ -19399,8 +19385,8 @@ export class Klang extends Pokemon {
   stars = 2
   evolution = Pkm.KLINKLANG
   hp = 100
-  atk = 8
-  speed = 42
+  atk = 7
+  speed = 35
   def = 5
   speDef = 3
   maxPP = 100
@@ -19414,8 +19400,8 @@ export class Klinklang extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 150
-  atk = 16
-  speed = 42
+  atk = 14
+  speed = 35
   def = 9
   speDef = 6
   maxPP = 100

@@ -3603,6 +3603,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.QWILFISH]: [Pkm.HISUIAN_QWILFISH],
   [Pkm.YAMASK]: [Pkm.GALARIAN_YAMASK],
   [Pkm.SLOWPOKE]: [Pkm.GALARIAN_SLOWPOKE],
+  [Pkm.WEEZING]: [Pkm.GALARIAN_WEEZING],
   [Pkm.SUICUNE]: [Pkm.WALKING_WAKE],
   [Pkm.SCYTHER]: [Pkm.SCIZOR, Pkm.KLEAVOR],
   [Pkm.TAUROS]: [
@@ -3622,7 +3623,7 @@ export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
 export const PkmRegionalBaseVariants: { [key in Pkm]?: Pkm } =
   Object.fromEntries(
     Object.entries(PkmRegionalVariants).flatMap(([base, variants]) =>
-      variants.map((variant) => [variant, base])
+      variants.map((variant) => [variant, PkmFamily[base]])
     )
   ) as { [key in Pkm]?: Pkm }
 

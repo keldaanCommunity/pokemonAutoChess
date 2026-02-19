@@ -37,7 +37,7 @@ export const PassivesAssociatedToWeather: Map<Weather, Passive[]> = new Map([
   [Weather.SNOW, [Passive.SNOW]],
   [Weather.STORM, [Passive.STORM]],
   [Weather.NIGHT, [Passive.NIGHT]],
-  [Weather.WINDY, [Passive.WINDY, Passive.LUGIA]],
+  [Weather.WINDY, [Passive.WINDY]],
   [Weather.NEUTRAL, [Passive.AIRLOCK]]
 ])
 
