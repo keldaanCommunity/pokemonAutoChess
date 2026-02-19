@@ -12,12 +12,13 @@ import { Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { Item, Scarves } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { distanceC } from "../../utils/distance"
 import { chance } from "../../utils/random"
+import { values } from "../../utils/schemas"
 import { Board } from "../board"
 import {
   FlowerMonByPot,
@@ -36,6 +37,7 @@ import {
   OnDeathEffect,
   OnKillEffect,
   OnKillEffectArgs,
+  OnSimulationStartEffect,
   OnSpawnEffect
 } from "./effect"
 
@@ -425,6 +427,42 @@ export const overgrowEffect = new OnDamageReceivedEffect(
       pokemon.addAbilityPower(50, pokemon, 0, false)
       // Remove the effect to avoid multiple triggers
       pokemon.effectsSet.delete(overgrowEffect)
+    }
+  }
+)
+
+export const normalShieldEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    let shieldBonus = 0
+    if (entity.effects.has(EffectEnum.STAMINA)) {
+      shieldBonus = 15
+    }
+    if (entity.effects.has(EffectEnum.STRENGTH)) {
+      shieldBonus += 20
+    }
+    if (entity.effects.has(EffectEnum.ENDURE)) {
+      shieldBonus += 25
+    }
+    if (entity.effects.has(EffectEnum.PURE_POWER)) {
+      shieldBonus += 30
+      if (values(entity.items).some((item) => Scarves.includes(item))) {
+        // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
+        entity.addAttack(Math.round(0.3 * entity.baseAtk), entity, 0, false)
+        entity.addAbilityPower(30, entity, 0, false)
+      }
+    }
+    if (shieldBonus >= 0) {
+      entity.addShield(shieldBonus, entity, 0, false)
+      const cells = simulation.board.getAdjacentCells(
+        entity.positionX,
+        entity.positionY
+      )
+
+      cells.forEach((cell) => {
+        if (cell.value && entity.team == cell.value.team) {
+          cell.value.addShield(shieldBonus, entity, 0, false)
+        }
+      })
     }
   }
 )

@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { MAX_LEVEL } from "../../../../../config"
 import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
-import {
-  selectCurrentPlayer,
-  useAppSelector
-} from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../network"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { Money } from "../icons/money"
@@ -26,9 +23,9 @@ export default function GameExperience() {
         (experienceManager.expNeeded - experienceManager.experience) /
           levelUpCost
       ) * levelUpCost
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const canLevelup =
-    !isLevelMax && currentPlayer && currentPlayer.money >= levelUpCost
+    !isLevelMax && spectatedPlayer && spectatedPlayer.money >= levelUpCost
 
   return (
     <div className="game-experience">

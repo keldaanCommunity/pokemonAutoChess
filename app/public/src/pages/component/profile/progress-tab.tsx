@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
+import { PkmAltForms } from "../../../../../config"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Title } from "../../../../../types"
 import { NonPkm } from "../../../../../types/enum/Pokemon"
@@ -11,19 +12,25 @@ import "./progress-tab.css"
 export function ProgressTab() {
   const { t } = useTranslation()
 
+  const listPokemons = precomputedPokemonsImplemented.filter(
+    (pokemon) =>
+      PkmAltForms.includes(pokemon.name) === false &&
+      NonPkm.includes(pokemon.name) === false
+  )
+
   const pokemonCollection = useAppSelector((state) => [
     ...(state.network.profile?.pokemonCollection?.values() ?? [])
   ])
   const user = useAppSelector((state) => state.network.profile)
-  const nbAvatarsUnlocked = pokemonCollection.filter(
-    (item) => item.emotions.length > 0 || item.shinyEmotions.length > 0
-  ).length
-  const nbPokemonsPlayed = pokemonCollection.filter(
-    (item) => item.played > 0
-  ).length
-  const nbPokemonsTotal = precomputedPokemonsImplemented.filter(
-    (p) => NonPkm.includes(p.name) === false
-  ).length
+  const nbAvatarsUnlocked = listPokemons.filter((pkm) => {
+    const item = pokemonCollection.find((p) => p.id === pkm.index)
+    return item && (item.emotions.length > 0 || item.shinyEmotions.length > 0)
+  }).length
+  const nbPokemonsPlayed = listPokemons.filter((pkm) => {
+    const item = pokemonCollection.find((p) => p.id === pkm.index)
+    return item && item.played > 0
+  }).length
+  const nbPokemonsTotal = listPokemons.length
   const nbTitlesUnlocked = user
     ? Object.keys(Title).filter((title) => isIn(user.titles, title)).length
     : 0

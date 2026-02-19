@@ -17,7 +17,7 @@ import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { isOnBench } from "../../../../../utils/board"
 import { roundToNDigits } from "../../../../../utils/number"
 import { values } from "../../../../../utils/schemas"
-import { useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { getCachedPortrait } from "../game/game-pokemon-portrait"
@@ -33,9 +33,7 @@ export default function SynergyDetailComponent(props: {
     (state) => state.game.additionalPokemons
   )
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.game.currentPlayerId)
-  )
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
 
   const levelReached = SynergyTriggers[props.type]
@@ -95,29 +93,29 @@ export default function SynergyDetailComponent(props: {
 
   let additionalInfo = ""
 
-  if (props.type === Synergy.WILD && currentPlayer) {
+  if (props.type === Synergy.WILD && spectatedPlayer) {
     const isPVE = stageLevel in PVEStages
     additionalInfo = t("synergy_description.WILD_ADDITIONAL", {
       wildChance: roundToNDigits(
-        currentPlayer.wildChance * 100 + (isPVE ? 5 : 0),
+        spectatedPlayer.wildChance * 100 + (isPVE ? 5 : 0),
         1
       )
     })
   }
 
-  if (props.type === Synergy.BABY && currentPlayer) {
+  if (props.type === Synergy.BABY && spectatedPlayer) {
     additionalInfo = t("synergy_description.BABY_CHANCE_STACKED", {
       eggChance: roundToNDigits(
         (levelReached === 7
-          ? currentPlayer.goldenEggChance
-          : currentPlayer.eggChance) * 100,
+          ? spectatedPlayer.goldenEggChance
+          : spectatedPlayer.eggChance) * 100,
         1
       )
     })
   }
 
-  if (props.type === Synergy.DRAGON && currentPlayer) {
-    const dragonLevel = values(currentPlayer.board).reduce(
+  if (props.type === Synergy.DRAGON && spectatedPlayer) {
+    const dragonLevel = values(spectatedPlayer.board).reduce(
       (acc, pokemon) =>
         acc +
         (pokemon.types.has(Synergy.DRAGON) && !isOnBench(pokemon)
@@ -130,9 +128,9 @@ export default function SynergyDetailComponent(props: {
     })
   }
 
-  if (props.type === Synergy.ELECTRIC && currentPlayer) {
+  if (props.type === Synergy.ELECTRIC && spectatedPlayer) {
     additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
-      charge: currentPlayer.cellBattery
+      charge: spectatedPlayer.cellBattery
     })
   }
 
@@ -182,7 +180,7 @@ export default function SynergyDetailComponent(props: {
             p={p}
             key={p.name}
             type={props.type}
-            player={currentPlayer}
+            player={spectatedPlayer}
           />
         ))}
       </div>
@@ -192,7 +190,7 @@ export default function SynergyDetailComponent(props: {
             p={p}
             key={p.name}
             type={props.type}
-            player={currentPlayer}
+            player={spectatedPlayer}
           />
         ))}
       </div>
@@ -202,7 +200,7 @@ export default function SynergyDetailComponent(props: {
             p={p}
             key={p.name}
             type={props.type}
-            player={currentPlayer}
+            player={spectatedPlayer}
           />
         ))}
       </div>
@@ -212,7 +210,7 @@ export default function SynergyDetailComponent(props: {
             p={p}
             key={p.name}
             type={props.type}
-            player={currentPlayer}
+            player={spectatedPlayer}
           />
         ))}
       </div>
@@ -222,7 +220,7 @@ export default function SynergyDetailComponent(props: {
             p={p}
             key={p.name}
             type={props.type}
-            player={currentPlayer}
+            player={spectatedPlayer}
           />
         ))}
       </div>

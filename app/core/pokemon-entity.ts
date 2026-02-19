@@ -59,7 +59,8 @@ import {
   OnHitEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
-  OnKillEffect
+  OnKillEffect,
+  OnSpawnEffect
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
@@ -229,6 +230,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.resurrecting &&
       !this.status.skydiving
     )
+  }
+
+  get canCast(): boolean {
+    return !this.status.silence && !this.items.has(Item.NULLIFY_BANDANNA)
   }
 
   get canBeMoved(): boolean {
@@ -437,15 +442,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     return this.state.handleHeal(this, heal, caster, apBoost, crit)
   }
 
-  addShield(
-    shield: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean
-  ) {
-    return this.state.addShield(this, shield, caster, apBoost, crit)
-  }
-
   changeState(state: PokemonState) {
     this.state.onExit(this)
     this.state = state
@@ -466,6 +462,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.changeState(new IdleState())
   }
 
+  addShield(
+    value: number,
+    caster: IPokemonEntity,
+    apBoost: number,
+    crit: boolean
+  ) {
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+    return this.state.addShield(this, value, caster, apBoost, crit)
+  }
+
   addPP(
     baseValue: number,
     caster: IPokemonEntity,
@@ -478,6 +486,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (crit ? caster.critPower : 1) *
         (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    } 
 
     if (
       value < 0 &&
@@ -505,6 +517,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
 
     if (
       value < 0 &&
@@ -534,6 +550,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (value / 100) *
       (1 + (apBoost * caster.ap) / 100) *
       (crit ? caster.critPower : 1)
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
 
     if (
       value < 0 &&
@@ -565,11 +585,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     this.maxHP = min(1)(this.maxHP + value)
     if (this.hp > 0) {
       // careful to not heal a KO pokemon
       this.hp = clamp(this.hp + value, 1, this.maxHP)
     }
+
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
       if (boardPokemon.items.has(Item.BIG_EATER_BELT))
@@ -586,6 +611,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
 
     if (
       value < 0 &&
@@ -615,6 +644,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       caster.team !== this.team
     ) {
       value *= -1 // twist band turn debuffs into buffs
+    }
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { ap: number }) => {
@@ -652,6 +685,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { luck: number }) => {
       target.luck = clamp(target.luck + value, -100, +100)
     }
@@ -680,6 +717,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       caster.team !== this.team
     ) {
       value *= -1 // twist band turn debuffs into buffs
+    }
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { def: number }) => {
@@ -712,6 +753,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       value *= -1 // twist band turn debuffs into buffs
     }
 
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
+    }
+
     const update = (target: { speDef: number }) => {
       target.speDef = min(0)(target.speDef + value)
     }
@@ -740,6 +785,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       caster.team !== this.team
     ) {
       value *= -1 // twist band turn debuffs into buffs
+    }
+
+    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+      value = Math.round(value * 1.25)
     }
 
     const update = (target: { atk: number }) => {
@@ -775,6 +824,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         value *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
+
+      if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
+        value = Math.round(value * 1.25)
+      }
+
       const update = (target: { speed: number }) => {
         target.speed = clamp(target.speed + value, 0, MAX_SPEED)
       }
@@ -809,7 +863,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (type && !this.types.has(type)) {
       if (type === Synergy.DRAGON) {
-        this.types = new SetSchema<Synergy>([type, ...this.types])
+        this.types = new SetSchema<Synergy>([type, ...this.types]) // dragon always go first synergy
       } else {
         this.types.add(type)
       }
@@ -1437,13 +1491,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     // Recalculate stats as it was at the start of the battle
     const cloneReference = new PokemonEntity(
       this.refToBoardPokemon,
-      0,
-      0,
+      this.refToBoardPokemon.positionX,
+      this.refToBoardPokemon.positionY - 1,
       this.team,
       this.simulation
     )
     this.simulation.applySynergyEffects(cloneReference)
     this.simulation.applyItemsEffects(cloneReference)
+    cloneReference.getEffects(OnSpawnEffect).forEach((effect) => {
+      effect.apply(cloneReference, this.player, this.isSpawn)
+    })
 
     this.maxHP = cloneReference.maxHP
     this.atk = cloneReference.atk
@@ -1548,6 +1605,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     this.status.clearAllStatus(this)
+    // copy statuses applied from item effects
+    this.status.runeProtect = cloneReference.status.runeProtect // from safety goggles
+    this.status.runeProtectCooldown = cloneReference.status.runeProtectCooldown
+    this.status.burn = cloneReference.status.burn // from flame orb
+    this.status.burnCooldown = cloneReference.status.burnCooldown
+
     this.hp = this.maxHP
     this.pp = 0
     this.shield = 0
@@ -1609,8 +1672,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.LUM_BERRY:
         heal(50)
-        this.status.clearNegativeStatus()
-        this.status.triggerRuneProtect(5000)
+        this.status.clearNegativeStatus(this, this)
+        this.status.triggerRuneProtect(5000, this, this)
         break
       case Item.ORAN_BERRY:
         heal(50)
@@ -1661,15 +1724,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.GOLDEN_NANAB_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player) this.player.addMoney(5, true, this)
+        if (this.player && !this.simulation.isGhostBattle)
+          this.player.addMoney(5, true, this)
         break
       case Item.GOLDEN_RAZZ_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player) this.player.shopFreeRolls += 6
+        if (this.player && !this.simulation.isGhostBattle)
+          this.player.shopFreeRolls += 6
         break
       case Item.GOLDEN_PINAP_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player) this.player.items.push(...pickNRandomIn(Sweets, 3))
+        if (this.player && !this.simulation.isGhostBattle)
+          this.player.items.push(...pickNRandomIn(Sweets, 3))
         break
     }
 
