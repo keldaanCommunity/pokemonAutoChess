@@ -285,5 +285,6 @@ export function getWildChance(player: IPlayer, stageLevel: number): number {
   const nbWildStars = values(player.board)
     .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
     .reduce((total, p) => total + p.stars, 0)
-  return (baseChance + 0.5 * nbWildStars) / 100
+  const bonusChance = wildLevel > 0 ? nbWildStars * 0.5 : 0
+  return (baseChance + bonusChance) / 100
 }
