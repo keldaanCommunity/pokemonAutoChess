@@ -4650,7 +4650,7 @@
 		"level_up_title": "Level Up!",
 		"level_up_message": "Congratulations!\nYou've reached level {{level}} and earned a booster pack!",
 		"new_title_title": "New Title Unlocked!",
-		"new_title_message": "You've unlocked a new title:\n{{title}}",
+		"new_title_message": "You've unlocked a new title:\n{{title}}: {{description}}",
 		"elo_rank_change_title": "Rank Changed!",
 		"elo_rank_change_message": "Your new rank is:\n{{rank}}",
 		"next": "Next",

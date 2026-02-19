@@ -69,7 +69,8 @@ export function NotificationModal({
         })
       case "new_title":
         return t("notification.new_title_message", {
-          title: t(`title.${notification.message}`)
+          title: t(`title.${notification.message}`),
+          description: t(`title_description.${notification.message}`)
         })
       case "elo_rank_change":
         return t("notification.elo_rank_change_message", {
