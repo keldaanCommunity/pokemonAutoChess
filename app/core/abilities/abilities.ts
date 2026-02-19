@@ -13771,6 +13771,7 @@ export class SteamrollerStrategy extends AbilityStrategy {
   }
 }
 export class MagnetPullStrategy extends AbilityStrategy {
+  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,

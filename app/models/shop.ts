@@ -12,7 +12,6 @@ import {
   INCENSE_CHANCE,
   KECLEON_RATE,
   LegendaryPool,
-  MAGNET_PULL_RATE_PER_RARITY,
   MIN_STAGE_FOR_DITTO,
   NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
@@ -63,6 +62,7 @@ import {
   chance,
   pickNRandomIn,
   pickRandomIn,
+  randomWeighted,
   shuffleArray
 } from "../utils/random"
 import { values } from "../utils/schemas"
@@ -752,20 +752,19 @@ export default class Shop {
   }
 
   magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
-    const rarity_seed =
-      Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
-    let threshold = 0
     const finals = player.getFinalizedLines()
 
-    let rarity = Rarity.SPECIAL
-    for (const r in MAGNET_PULL_RATE_PER_RARITY) {
-      threshold += MAGNET_PULL_RATE_PER_RARITY[r]
-      rarity = r as Rarity
-      if (rarity_seed < threshold) {
-        break
-      }
+    const rarityProbabilies = RarityProbabilityPerLevel[player.experienceManager.level]
+    const magnetPullRatePerRarity = {
+      [Rarity.COMMON]: rarityProbabilies[0],
+      [Rarity.UNCOMMON]: rarityProbabilies[1],
+      [Rarity.RARE]: rarityProbabilies[2],
+      [Rarity.EPIC]: rarityProbabilies[3],
+      [Rarity.ULTRA]: rarityProbabilies[4],
+      [Rarity.SPECIAL]: 0.35
     }
-
+    const rarity = randomWeighted(magnetPullRatePerRarity, 1.35, meltan.ap, 0.5, meltan.luck) ?? Rarity.SPECIAL
+   
     if (rarity !== Rarity.SPECIAL) {
       const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
         Synergy.STEEL
