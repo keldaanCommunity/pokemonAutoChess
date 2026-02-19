@@ -1855,7 +1855,7 @@
 		"SMOG": "向使用者前方3格发射一团臭气，对其中的目标造成[10,20,40,SP]点SPECIAL。BOARD_EFFECT：臭气云使其中的宝可梦陷入BLINDED。",
 		"LAVA_PLUME": "向使用者前方3格发射熔岩，对其中的目标造成[20,40,80,SP]点SPECIAL。BOARD_EFFECT：熔岩对走到此处的非FLYING、非FIRE宝可梦每秒造成10点SPECIAL，并使其陷入BURN。",
 		"SHELTER": "提升[5,10,15,SP]点DEF，并向使用者前方3格发射一团烟幕。BOARD_EFFECT：烟幕使其中的宝可梦陷入BLINDED。",
-		"AURORA_BEAM": "直线发射一道光束。击中的所有敌方宝可梦受到[25,50,100,SP]点SPECIAL且可能陷入FREEZE 2秒（概率由ICE共鸣等级和LUCK决定）。",
+		"AURORA_BEAM": "直线发射一道光束。击中的所有敌方宝可梦受到[25,50,100,SP]点SPECIAL且可能陷入FREEZE 2秒（[50,LK]%概率）。",
 		"AGILITY": "立即提升[10,20,30,SP]点SPEED。",
 		"SPIRIT_SHACKLE": "发射一支穿透敌人的箭，对目标身后的一条直线上的所有敌方宝可梦造成[25,50,75,SP]点SPECIAL，并使他们陷入WOUND 4秒。",
 		"WATER_SHURIKEN": "朝3个方向扔出3枚穿透敌人的手里剑，造成[20,40,60,SP]点SPECIAL。",

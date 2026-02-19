@@ -1681,7 +1681,7 @@
 		"SMOG": "Projiziert eine Wolke stinkenden Gases auf 3 Felder vor sich und verursacht [10,20,40,SP] SPECIAL. Das Gas bleibt bis zum Ende des Kampfes an Bord und reduziert die Genauigkeit der Pokémons im Inneren um 50%.",
 		"LAVA_PLUME": "Schleudert 3 Lavafelder vor den Anwender und fügt Gegnern [20,40,80,SP] SPECIAL zu. Das Lavafeld fügt Gegnern (außer FLYING oder FIRE) bei Kontakt 10 SPECIAL und BURN zu.",
 		"SHELTER": "Erhält [5,10,15,SP] DEF und projiziert eine Rauchwand auf 3 Felder vor sich. Der Rauch bleibt bis zum Ende des Kampfes an Bord und reduziert die Genauigkeit der Pokémons darin um 50%.",
-		"AURORA_BEAM": "Feuert einen Strahl in einer Linie ab. Alle getroffenen Ziele erhalten [25,50,100,SP] SPECIAL und können eingefroren werden (Chance basiert auf der aktuellen Eissynergie).",
+		"AURORA_BEAM": "Feuert einen Strahl in einer Linie ab. Alle getroffenen Ziele erhalten [25,50,100,SP] SPECIAL und können FREEZE werden ([50,LK]% Chance).",
 		"AGILITY": "Erhöht SPEED um [10,20,30,SP] (Stapel)",
 		"SPIRIT_SHACKLE": "Schießt einen durchdringenden Pfeil ab, der [25,50,75,SP] SPECIAL in einer Linie hinter dem Ziel verursacht und jedem Treffer 4 Sekunden lang WOUND zufügt",
 		"WATER_SHURIKEN": "Wirft 3 Shuriken in 3 Richtungen, die durch Feinde hindurchgehen und [20,40,60,SP] SPECIAL verursachen",

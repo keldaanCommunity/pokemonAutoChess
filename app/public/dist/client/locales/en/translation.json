@@ -1855,7 +1855,7 @@
 		"SMOG": "Project a cloud of stinking gas onto the 3 tiles in front of the user, dealing [10,20,40,SP] SPECIAL. BOARD_EFFECT: gas makes Pokémon BLINDED.",
 		"LAVA_PLUME": "Project lava onto the 3 tiles in front of the user, dealing [20,40,80,SP] SPECIAL. BOARD_EFFECT: lava deals 10 SPECIAL per second and BURN non FLYING or FIRE Pokémon that walk on it.",
 		"SHELTER": "Gain [5,10,15,SP] DEF and project a smoke screen onto the 3 tiles in front of the user. BOARD_EFFECT: smoke makes Pokémon BLINDED.",
-		"AURORA_BEAM": "Fire a beam in a line. All enemy Pokémon hit take [25,50,100,SP] SPECIAL and may be inflicted with FREEZE for 2 seconds (chance based on ICE synergy level and LUCK).",
+		"AURORA_BEAM": "Fire a beam in a line. All enemy Pokémon hit take [25,50,100,SP] SPECIAL and have [50,LK]% chance to be inflicted with FREEZE for 2 seconds.",
 		"AGILITY": "Immediately increase SPEED by [10,20,30,SP]",
 		"SPIRIT_SHACKLE": "Shoot a Piercing Arrow, dealing [25,50,75,SP] SPECIAL in a line behind the target and apply WOUND for 4 seconds.",
 		"WATER_SHURIKEN": "Throw 3 shuriken in 3 directions that pass through enemy Pokémon and deal [20,40,60,SP] SPECIAL.",

@@ -1501,16 +1501,7 @@ export class AuroraBeamStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        let freezeChance = 0
-        if (pokemon.effects.has(EffectEnum.CHILLY)) {
-          freezeChance = 0.4
-        } else if (pokemon.effects.has(EffectEnum.FROSTY)) {
-          freezeChance = 0.6
-        } else if (pokemon.effects.has(EffectEnum.FREEZING)) {
-          freezeChance = 0.8
-        } else if (pokemon.effects.has(EffectEnum.SHEER_COLD)) {
-          freezeChance = 1.0
-        }
+        const freezeChance = 0.5
         if (chance(freezeChance, pokemon)) {
           cell.value.status.triggerFreeze(2000, target)
         }

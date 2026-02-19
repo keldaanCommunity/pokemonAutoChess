@@ -1855,7 +1855,7 @@
 		"SMOG": "Projette un nuage de gaz puant sur les 3 cases qui font face au lanceur, infligeant [10,20,40,SP] SPECIAL. BOARD_EFFECT : Le gaz rend BLINDED les Pokémon.",
 		"LAVA_PLUME": "Projette de la lave sur les 3 cases qui font face au lanceur, infligeant [20,40,80,SP] SPECIAL. BOARD_EFFECT : La lave inflige 10 SPECIAL par seconde et BURN aux Pokémon qui marchent dessus, excepté les Pokémon de type FLYING ou FIRE.",
 		"SHELTER": "Gagne [5,10,15,SP] DEF et projette un écran de fumée sur les 3 cases qui font face au lanceur. BOARD_EFFECT : La fumée rend BLINDED les Pokémon.",
-		"AURORA_BEAM": "Tire un faisceau en ligne. Tous les ennemis touchés subissent [25,50,100,SP] SPECIAL et peuvent subir FREEZE (basé sur la LUCK et le niveau de synergie ICE).",
+		"AURORA_BEAM": "Tire un faisceau en ligne. Tous les ennemis touchés subissent [25,50,100,SP] SPECIAL et ont [50,LK]% de chance de subir FREEZE pendant 2 secondes.",
 		"AGILITY": "Augmente immédiatement la SPEED de [10,20,30,SP].",
 		"SPIRIT_SHACKLE": "Tire une Flèche Perçante qui inflige [25,50,75,SP] SPECIAL et WOUND pendant 4 secondes à la cible et tous les ennemis alignés derrière elle.",
 		"WATER_SHURIKEN": "Lance 3 shuriken dans 3 directions qui traversent les ennemis et infligent [20,40,60,SP] SPECIAL.",
