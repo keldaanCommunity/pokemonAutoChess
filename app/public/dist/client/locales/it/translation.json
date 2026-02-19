@@ -2974,7 +2974,7 @@
 		"BIG_MUSHROOM": "Dà +30% di HP massimi per il prossimo combattimento se consumato. Sarà venduto per 2 GOLD quando tornerai in paese.",
 		"BALM_MUSHROOM": "Dà RUNE_PROTECT, 40 SPEED e cura il 10% dei HP massimi al secondo per il prossimo combattimento. Sarà venduto per 5 GOLF quando tornerai in paese.",
 		"ROCK_SALT": "Inizia il prossimo combattimento con RUNE_PROTECT per 10 secondi e il 20% dei tuoi HP massimi come SHIELD aggiuntivo.",
-		"NUTRITIOUS_EGG": "Inizia il prossimo combattimento con +30% dei tuoi ATK, DEF e SPE_DEF di base.",
+		"NUTRITIOUS_EGG": "Inizia il prossimo combattimento con +50% dei tuoi ATK, DEF e SPE_DEF di base.",
 		"LEFTOVERS": "Non fa sega. La mela ormai è andata.",
 		"BLACK_SLUDGE": "Infligge POISONNED al Pokémon che la mangia. Se è di tipo POISON, invece recupera il 5% dei HP massimi ogni due secondi.",
 		"BINDING_MOCHI": "Il primo attacco effettuato nel prossimo combattimento infligge POSSESSED on-hit per 5 secondi.",

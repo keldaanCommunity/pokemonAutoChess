@@ -21,6 +21,10 @@
 
 - Crowd control (CC) statuses that prevent attacking and movement (Sleep, Freeze, Lock) now have a 1-second cooldown per unit when they wear off or are cleansed, preventing them from being immediately re-applied. This is intended to give units a small window to act and mitigate infinite CC locking combos.
 
+# Changes to Items
+
+- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+
 # Misc
 
 - Removed Buyer Fever scribble

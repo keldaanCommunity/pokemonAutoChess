@@ -219,10 +219,10 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   MUSHROOMS: [],
   NUTRITIOUS_EGG: [
     new OnSpawnEffect((entity) => {
-      // Start the next fight with +30% base ATK, DEF, SPE_DEF and AP
-      entity.addAttack(0.3 * entity.baseAtk, entity, 0, false)
-      entity.addDefense(0.3 * entity.baseDef, entity, 0, false)
-      entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
+      // Start the next fight with +50% base ATK, DEF, SPE_DEF and AP
+      entity.addAttack(0.5 * entity.baseAtk, entity, 0, false)
+      entity.addDefense(0.5 * entity.baseDef, entity, 0, false)
+      entity.addSpecialDefense(0.5 * entity.baseSpeDef, entity, 0, false)
     })
   ],
   OLIVE_OIL: [

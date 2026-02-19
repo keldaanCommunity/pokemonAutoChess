@@ -2771,7 +2771,7 @@
 		"HONEY": "Cada Pokémon en los cambios de la tienda tiene un 5% de probabilidad adicional de compartir una sinergia con el Pokémon que está comiéndose la HONEY.",
 		"TINY_MUSHROOM": "Otorga sinergia BUG pero reduce los HP máximos del portador en un 50% cuando sea clonado.",
 		"ROCK_SALT": "Empieza la siguiente batalla con RUNE_PROTECT durante 10 segundos y 20% HP SHIELD.",
-		"NUTRITIOUS_EGG": "Comienza la siguiente batalla con +30% de los valores base de ATK, DEF y SPE_DEF.",
+		"NUTRITIOUS_EGG": "Comienza la siguiente batalla con +50% de los valores base de ATK, DEF y SPE_DEF.",
 		"LEFTOVERS": "Sin efecto. No queda mucho más que comer.",
 		"BLACK_SLUDGE": "El Pokémon que se lo come queda POISONNED. Si es de tipo POISON, recupera el 5% de los HP máximos cada 2 segundos.",
 		"BINDING_MOCHI": "El primer ataque de la siguiente batalla infligirá POSSESSED durante 5 segundos al acertar.",

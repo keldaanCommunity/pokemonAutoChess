@@ -2846,7 +2846,7 @@
 		"HONEY": "이번 스테이지에 상점 새로고침 시마다 5%의 확률로 HONEY 을 섭취한 포켓몬과 시너지를 공유하는 포켓몬 등장",
 		"TINY_MUSHROOM": "BUG 시너지 부여, 최대 HP 50% 감소합니다",
 		"ROCK_SALT": "다음 전투 시작 시 10초간 RUNE_PROTECT, 20% HP SHIELD",
-		"NUTRITIOUS_EGG": "다음 전투 시작 시 +30% 기본 ATK, DEF, SPE_DEF",
+		"NUTRITIOUS_EGG": "다음 전투 시작 시 +50% 기본 ATK, DEF, SPE_DEF",
 		"LEFTOVERS": "효과없음.",
 		"BLACK_SLUDGE": "섭취하는 포켓몬에게 POISONNED. POISON 포켓몬이면 대신 2초마다 최대 HP 5% 회복",
 		"BINDING_MOCHI": "다음 전투에서 첫 공격은 5초간 POSSESSED 를 가함",
