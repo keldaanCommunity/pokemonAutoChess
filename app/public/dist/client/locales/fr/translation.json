@@ -2086,7 +2086,7 @@
 		"ENTRAINMENT": "Dance sur un rythme étrange, regagnant [10,SP] PP et forçant sa cible à l'imiter, ce qui remplace sa capacité par Ten-Danse. Si la cible danse déjà, cible un autre ennemi proche.",
 		"OCTAZOOKA": "Lance un projectile infligeant [300,SP]% de l'ATK du lanceur en SPECIAL, et laisse un nuage d'encre à l'impact qui réduit la précision de la cible en la rendant BLINDED pendant 4 secondes.",
 		"PSYCHO_SHIFT": "Échange la position de la cible et de l'ennemi le plus éloigné, infligeant [60,SP] à chacun d'eux.",
-		"GLAIVE_RUSH": "Le lanceur jette tout son corps dans une charge imprudente, en fonçant derrière les rangées ennemies et inflige [50,100,200,SP] SPECIAL à toutes les unités adverses dans sa colonne. Ensuite, il subit ARMOR_BREAK pendant 6 secondes.",
+		"GLAIVE_RUSH": "Le lanceur fonce derrière les rangées ennemies, percutant toutes les unités adverses dans sa colonne. Le lanceur et les adversaires touchés subissent ARMOR_BREAK pendant 6 secondes, puis les adversaires touchés subissent [50,100,200,SP] SPECIAL.",
 		"FOUL_PLAY": "Inflige à la cible [200,400,600,SP]% de son ATK en SPECIAL.",
 		"DOUBLE_IRON_BASH": "Le lanceur pivote, centre l'écrou hexagonal sur sa poitrine, puis frappe avec ses bras deux fois de suite avec [150,SP]% de son ATK. Cela inflige FLINCH à la cible pendant 3 secondes.",
 		"STONE_EDGE": "Pendant [5,8] secondes, le lanceur s'auto-inflige SILENCE, gagne 2 RANGE, [20,SP] CRIT_CHANCE et inflige [100,SP]% de sa DEF en PHYSICAL avec ses attaques.",

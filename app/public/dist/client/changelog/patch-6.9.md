@@ -10,6 +10,7 @@
 - Tynamo line is back to Uncommon instead of Common. Adjusted stats.
 - Rework Fury Swipes (Teddiursa): from "Deal a [LK] random number of basic attacks between [2,SP] to [5,SP] times." to "Unleash [5,SP] rapid attacks in one second, each dealing 100% of ATK as PHYSICAL. If the target is KO'd during the ability, regain all PP."
 - Magnet Pull (Meltan) can no longer be casted by Metronome. Rarity of attracted mon now follows your current player level rarity odds.
+- Buff Glaive Rush (Frigibax): enemies hit now also get ARMOR_BREAK for 6 seconds
 
 # Changes to Synergies
 

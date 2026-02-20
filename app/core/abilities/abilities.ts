@@ -10477,6 +10477,7 @@ export class GlaiveRushStrategy extends AbilityStrategy {
 
     if (enemiesHit.size === 0) enemiesHit.add(target) // ensure to at least hit the target
     enemiesHit.forEach((enemy) => {
+      enemy.status.triggerArmorReduction(6000, pokemon)
       enemy.handleSpecialDamage(
         damage,
         board,
