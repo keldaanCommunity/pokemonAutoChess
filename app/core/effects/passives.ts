@@ -1404,7 +1404,8 @@ export const PassiveEffects: Partial<
                 entity.addDefense(5, entity, 0, false)
                 entity.addSpecialDefense(5, entity, 0, false)
                 entity.hp = entity.maxHP
-                if (entity.player) {
+                if (entity.player) {                  
+                  entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
                   entity.player.transformPokemon(
                     entity.refToBoardPokemon as Pokemon,
                     Pkm.PALAFIN
