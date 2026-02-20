@@ -1400,7 +1400,8 @@ export const PassiveEffects: Partial<
                 entity.index = PkmIndex[Pkm.PALAFIN_HERO]
                 entity.name = Pkm.PALAFIN_HERO
                 // TODO: update stats to match the hero form
-                entity.addAttack(15, entity, 0, false)
+                entity.addAttack(18, entity, 0, false)
+                entity.addSpeed(16, entity, 0, false)
                 entity.addDefense(5, entity, 0, false)
                 entity.addSpecialDefense(5, entity, 0, false)
                 entity.hp = entity.maxHP

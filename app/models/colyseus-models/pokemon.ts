@@ -20193,7 +20193,7 @@ export class GreatTusk extends Pokemon {
 export class Finizen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.UNIQUE
-  stars = 2
+  stars = 3
   evolution = Pkm.PALAFIN
   hp = 200
   atk = 12
@@ -20209,9 +20209,9 @@ export class Finizen extends Pokemon {
 export class Palafin extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.UNIQUE
-  stars = 2
+  stars = 3
   hp = 200
-  atk = 15
+  atk = 12
   speed = 64
   def = 7
   speDef = 6
@@ -20224,10 +20224,10 @@ export class Palafin extends Pokemon {
 export class PalafinHero extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.UNIQUE
-  stars = 3
+  stars = 4
   hp = 200
   atk = 30
-  speed = 64
+  speed = 80
   def = 12
   speDef = 11
   maxPP = 80
