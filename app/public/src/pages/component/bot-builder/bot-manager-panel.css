@@ -29,7 +29,7 @@
 .bots-table-header,
 .bots-table-row {
   display: grid;
-  grid-template-columns: 50px 1fr 1fr 60px 1fr 80px auto;
+  grid-template-columns: 50px 120px 150px 60px 1fr 80px 400px;
   align-items: center;
   gap: 0 0.5em;
   padding: 0 0.5em;
