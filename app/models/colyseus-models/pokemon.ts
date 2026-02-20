@@ -16838,6 +16838,7 @@ export class Fletchling extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRESTARTER
+  passive = Passive.GALE_WINGS
 }
 
 export class Fletchinder extends Pokemon {
@@ -16853,6 +16854,7 @@ export class Fletchinder extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRESTARTER
+  passive = Passive.GALE_WINGS
 }
 
 export class Talonflame extends Pokemon {
@@ -16867,6 +16869,7 @@ export class Talonflame extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.FIRESTARTER
+  passive = Passive.GALE_WINGS
 }
 
 export class Vullaby extends Pokemon {

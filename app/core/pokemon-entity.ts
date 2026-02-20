@@ -1443,6 +1443,23 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   flyAway(board: Board) {
     const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
     if (flyAwayCell) {
+      if (this.passive === Passive.GALE_WINGS) {
+        board
+          .getCellsBetween(
+            this.positionX,
+            this.positionY,
+            flyAwayCell.x,
+            flyAwayCell.y
+          )
+          .forEach((cell) => {
+            board.addBoardEffect(
+              cell.x,
+              cell.y,
+              EffectEnum.EMBER,
+              this.simulation
+            )
+          })
+      }
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
     }
   }

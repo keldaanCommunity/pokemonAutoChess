@@ -2118,7 +2118,7 @@
 		"POWER_HUG": "Inflige [40,80,SP] SPECIAL à la cible. La cible subit PARALYSIS et est LOCKED pendant 3 secondes.",
 		"MORTAL_SPIN": "Repousse tous les Pokémon ciblant le lanceur à portée de corps à corps. Inflige [20,30,40,SP] SPECIAL à tous les ennemis touchés et applique POISONNED pendant 4 secondes.",
 		"METAL_CLAW": "Inflige [10,20,40,SP] TRUE à la cible et augmente l'ATK du lanceur de [2,4,6,SP].",
-		"FIRESTARTER": "Gagne [10,20,40,SP] SPEED et vole vers l'ennemi le plus éloigné, laissant tomber des braises sur les cases entre eux. Les braises infligent [20,40,80,SP] SPECIAL à l'impact et restent au sol. BOARD_EFFECT : Les braises infligent 10 SPECIAL par seconde et BURN aux Pokémon qui marchent dessus, excepté les Pokémon de type FLYING ou FIRE.",
+		"FIRESTARTER": "Gagne [10,20,40,SP] SPEED et vole vers l'ennemi le plus éloigné, laissant tomber des braises sur les cases entre eux. Les braises infligent [20,40,80,SP] SPECIAL à l'impact.",
 		"BONE_ARMOR": "Vole vers l'ennemi le plus faible et lui inflige [20,40,80,SP] SPECIAL, se soignant à hauteur des dégâts infligés. Si la cible est mise KO, le lanceur récupère ses os pour fabriquer une armure, gagnant [4,8,12] DEF et SPE_DEF.",
 		"RAGE": "Gagne le statut RAGE pendant 3 secondes et [10,SP]% d'ATK de base pour chaque tranche de 10% des HP max perdus.",
 		"BRICK_BREAK": "Inflige [150,SP]% de l'ATK comme TRUE. Brise l'PROTECT et le $t(ability.MAGIC_BOUNCE) de la cible. Inflige ARMOR_BREAK à la cible pendant 4 secondes.",
@@ -3246,7 +3246,8 @@
 		"TADBULB": "Lorsqu'il démarre sous la LIGHT ou quand il subit 50 dégâts ou plus, entre en surcharge et inflige 10 SPECIAL aux ennemis ADJACENT qui sont également repoussés (3 secondes de temps de recharge). La première surcharge donne 20 SPEED, 30 SHIELD et un ELECTRIC_FIELD.",
 		"PINCURCHIN": "Lorsqu'il est touché par des SPECIAL, il gagne un ELECTRIC_FIELD. Sous l'effet d'un ELECTRIC_FIELD, les attaques reçues au corps à corps infligent PARALYSIS à l'attaquant pendant 2 secondes.",
 		"STAMINA": "Tous les 10 coups reçus, gagnez [20,SP] SHIELD",
-		"SPEWPA": "Les Pokémon éclos évoluent automatiquement après 5 tours. L'évolution dépend de la synergie dominante sur votre plateau entre SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL"
+		"SPEWPA": "Les Pokémon éclos évoluent automatiquement après 5 tours. L'évolution dépend de la synergie dominante sur votre plateau entre SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
+		"GALE_WINGS": "Laisse tomber des braises au sol lorsqu'il s'envole. BOARD_EFFECT : Les braises infligent 10 SPECIAL par seconde et BURN aux Pokémon qui marchent dessus, excepté les Pokémon de type FLYING ou FIRE."
 	},
 	"stat": {
 		"ATK": "Attaque",
