@@ -556,7 +556,8 @@
 		"TWISTER": "Twister",
 		"FOCUS_PUNCH": "Focus Punch",
 		"HYPER_BEAM": "Hyper Beam",
-		"SKILL_SWAP": "Skill Swap"
+		"SKILL_SWAP": "Skill Swap",
+		"JET_PUNCH": "Jet Punch"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1709,7 +1710,10 @@
 		"DUBWOOL": "Dubwool",
 		"YAMPER": "Yamper",
 		"BOLTUND": "Boltund",
-		"GREAT_TUSK": "Great Tusk"
+		"GREAT_TUSK": "Great Tusk",
+		"FINIZEN": "Finizen",
+		"PALAFIN": "Palafin",
+		"PALAFIN_HERO": "Palafin (Hero)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2245,7 +2249,8 @@
 		"TWISTER": "Whips up a whirlwind dealing [25,50,100,SP] SPECIAL to ADJACENT enemies and pushing them at a random location [1,2,3] tiles away. ADJACENT FLYING allies take off and fly away, triggering their synergy effect.",
 		"FOCUS_PUNCH": "Focuses its energy into a single punch, rushing towards the target after 1 second, dealing [500,SP]% of ATK as SPECIAL and pushing it back. Target is ejected from the board if it does not collide with any other unit.",
 		"HYPER_BEAM": "Concentrates its energy for 1 second then fires a powerful beam that deals [50,100,150,SP] SPECIAL to enemies in a line. Then user gets FATIGUE for 5 seconds.",
-		"SKILL_SWAP": "Copy the ability and max PP of the target, then cast it immediately. The copied ability persists between fights and can be reset by benching the user."
+		"SKILL_SWAP": "Copy the ability and max PP of the target, then cast it immediately. The copied ability persists between fights and can be reset by benching the user.",
+		"JET_PUNCH": "Deal [100,SP]% of user's SPEED as SPECIAL to the target."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3257,8 +3262,8 @@
 		"PINCURCHIN": "When hit by SPECIAL, gain ELECTRIC_FIELD. On ELECTRIC_FIELD, attacks received at melee range cause the attacker PARALYSIS for 2 seconds.",
 		"STAMINA": "Every 10 hits received, gain [20,SP] SHIELD",
 		"SPEWPA": "Hatched Pokémon evolve automatically after 5 stages. The evolution depends on your dominant synergy on board between SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
-		"GALE_WINGS": "Drops embers on the ground when flying away. BOARD_EFFECT: embers deal 10 SPECIAL per second and BURN non FLYING or FIRE Pokémon that walk on it."
-	},
+		"GALE_WINGS": "Drops embers on the ground when flying away. BOARD_EFFECT: embers deal 10 SPECIAL per second and BURN non FLYING or FIRE Pokémon that walk on it.",
+		"FINIZEN": "Transforms into Palafin Hero Form after 5 of your allies are KO'd (not counting spawns), or if you're last one standing. Regain all HP when that happens."	},
 	"stat": {
 		"ATK": "Attack",
 		"SPEED": "Speed",

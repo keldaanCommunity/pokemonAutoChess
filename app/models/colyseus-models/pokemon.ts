@@ -20190,6 +20190,51 @@ export class GreatTusk extends Pokemon {
   skill = Ability.HEADLONDING_RUSH
 }
 
+export class Finizen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  evolution = Pkm.PALAFIN
+  hp = 200
+  atk = 12
+  speed = 64
+  def = 7
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.JET_PUNCH
+  passive = Passive.FINIZEN
+}
+
+export class Palafin extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 2
+  hp = 200
+  atk = 15
+  speed = 64
+  def = 7
+  speDef = 6
+  maxPP = 80
+  range = 1
+  skill = Ability.JET_PUNCH
+  passive = Passive.FINIZEN
+}
+
+export class PalafinHero extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 30
+  speed = 64
+  def = 12
+  speDef = 11
+  maxPP = 80
+  range = 1
+  skill = Ability.JET_PUNCH
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21348,7 +21393,10 @@ export const PokemonClasses: Record<
   [Pkm.DUBWOOL]: Dubwool,
   [Pkm.YAMPER]: Yamper,
   [Pkm.BOLTUND]: Boltund,
-  [Pkm.GREAT_TUSK]: GreatTusk
+  [Pkm.GREAT_TUSK]: GreatTusk,
+  [Pkm.FINIZEN]: Finizen,
+  [Pkm.PALAFIN]: Palafin,
+  [Pkm.PALAFIN_HERO]: PalafinHero
 }
 
 // declare all the classes in colyseus schema TypeRegistry

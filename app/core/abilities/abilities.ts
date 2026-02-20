@@ -16214,6 +16214,19 @@ export class SkillSwapStrategy extends AbilityStrategy {
   }
 }
 
+export class JetPunchStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = 1 * pokemon.speed
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16751,7 +16764,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TWISTER]: new TwisterStrategy(),
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
   [Ability.HYPER_BEAM]: new HyperBeamStrategy(),
-  [Ability.SKILL_SWAP]: new SkillSwapStrategy()
+  [Ability.SKILL_SWAP]: new SkillSwapStrategy(),
+  [Ability.JET_PUNCH]: new JetPunchStrategy()
 }
 
 export function castAbility(
