@@ -58,7 +58,9 @@ export function ProfileChatHistory(props: { uid: string }) {
         {(!chatHistory || chatHistory.length === 0) && (
           <p>{t("no_history_found")}</p>
         )}
-        {chatHistory && <ChatHistory messages={chatHistory} source="preparation" />}
+        {chatHistory && (
+          <ChatHistory messages={chatHistory} source="preparation" />
+        )}
         {hasMore && (
           <button
             onClick={loadMore}

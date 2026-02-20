@@ -1103,7 +1103,9 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
   ],
   [Passive.MEGA_SABLEYE]: [
-    new OnSpawnEffect((entity) => entity.status.triggerRuneProtect(60000, entity, entity))
+    new OnSpawnEffect((entity) =>
+      entity.status.triggerRuneProtect(60000, entity, entity)
+    )
   ],
   [Passive.PIKACHU_SURFER]: [PikachuSurferBuffEffect],
   [Passive.ACCELERATION]: [

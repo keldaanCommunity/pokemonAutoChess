@@ -12,7 +12,11 @@ import { getBuyPrice } from "../../../../../models/shop"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { values } from "../../../../../utils/schemas"
-import { selectConnectedPlayer, selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppSelector
+} from "../../../hooks"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
@@ -58,7 +62,7 @@ export default function GamePokemonPortrait(props: {
   const connectedPlayer = useAppSelector(selectConnectedPlayer)
 
   const board = connectedPlayer?.board ?? null
-  
+
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
 

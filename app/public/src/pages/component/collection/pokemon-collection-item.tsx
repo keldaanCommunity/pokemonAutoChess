@@ -24,7 +24,11 @@ export default function PokemonCollectionItem(props: {
   const lastBoostersOpened = useAppSelector(
     (state) => state.lobby.lastBoostersOpened
   )
-  const [favorites] = useLocalStore<Pkm[]>(LocalStoreKeys.FAVORITES, [], Infinity)
+  const [favorites] = useLocalStore<Pkm[]>(
+    LocalStoreKeys.FAVORITES,
+    [],
+    Infinity
+  )
 
   if (getAvailableEmotions(props.index, false).length === 0) {
     return null

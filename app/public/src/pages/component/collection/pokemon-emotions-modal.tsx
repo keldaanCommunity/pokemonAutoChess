@@ -14,7 +14,10 @@ import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { buyBooster, buyEmotion } from "../../../network"
-import { changeAvatar, changeSelectedEmotion } from "../../../stores/NetworkStore"
+import {
+  changeAvatar,
+  changeSelectedEmotion
+} from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import { Modal } from "../modal/modal"

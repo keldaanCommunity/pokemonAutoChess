@@ -489,7 +489,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
       value = Math.round(value * 1.25)
-    } 
+    }
 
     if (
       value < 0 &&

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { Grid } from "react-window"
+import { AutoSizer } from "react-virtualized-auto-sizer"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { addBot } from "../../../network"
 import { cc } from "../../utils/jsx"
@@ -7,6 +9,9 @@ import { Modal } from "../modal/modal"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
 import "./bot-select-modal.css"
+
+const MIN_COL_WIDTH = 360
+const ROW_HEIGHT = 58
 
 export function BotSelectModal(props: {
   botsSelected: string[]
@@ -92,27 +97,39 @@ export function BotSelectModal(props: {
           {!loading && botsListSorted.length === 0 && (
             <p>{t("no_bots_found")}</p>
           )}
-          <ul>
-            {botsListSorted.map((bot) => (
-              <li
-                className={cc("player", "my-box", "preparation-menu-user", {
-                  selected: botsSelection.has(bot)
-                })}
-                onClick={() => {
-                  if (botsSelection.has(bot)) {
-                    botsSelection.delete(bot)
-                  } else {
-                    botsSelection.add(bot)
-                  }
-                  setBotsSelection(new Set([...botsSelection]))
+          {!loading && botsListSorted.length > 0 && (
+            <div className="bot-select-grid">
+              <AutoSizer
+                renderProp={({ height, width }) => {
+                  if (height === undefined || width === undefined) return null
+                  const columnCount = Math.max(
+                    1,
+                    Math.floor(width / MIN_COL_WIDTH)
+                  )
+                  const columnWidth = Math.floor(width / columnCount)
+                  const rowCount = Math.ceil(
+                    botsListSorted.length / columnCount
+                  )
+                  return (
+                    <Grid<BotCellData>
+                      style={{ height, width }}
+                      columnCount={columnCount}
+                      columnWidth={columnWidth}
+                      rowCount={rowCount}
+                      rowHeight={ROW_HEIGHT}
+                      cellComponent={BotCell}
+                      cellProps={{
+                        botsListSorted,
+                        columnCount,
+                        botsSelection,
+                        setBotsSelection
+                      }}
+                    />
+                  )
                 }}
-                key={"proposition-bot-" + bot.id}
-              >
-                <EloBadge elo={bot.elo} />
-                <InlineAvatar avatar={bot.avatar} name={bot.name} />
-              </li>
-            ))}
-          </ul>
+              />
+            </div>
+          )}
         </>
       }
       footer={
@@ -138,5 +155,51 @@ export function BotSelectModal(props: {
         </>
       }
     />
+  )
+}
+
+type BotCellData = {
+  botsListSorted: IBot[]
+  columnCount: number
+  botsSelection: Set<IBot>
+  setBotsSelection: React.Dispatch<React.SetStateAction<Set<IBot>>>
+}
+
+function BotCell({
+  columnIndex,
+  rowIndex,
+  style,
+  botsListSorted,
+  columnCount,
+  botsSelection,
+  setBotsSelection
+}: {
+  ariaAttributes: object
+  columnIndex: number
+  rowIndex: number
+  style: React.CSSProperties
+} & BotCellData): React.ReactElement | null {
+  const index = rowIndex * columnCount + columnIndex
+  if (index >= botsListSorted.length) return null
+  const bot = botsListSorted[index]
+  return (
+    <div style={{ ...style, padding: "0 4px 8px 0" }}>
+      <li
+        className={cc("player", "my-box", "preparation-menu-user", {
+          selected: botsSelection.has(bot)
+        })}
+        onClick={() => {
+          if (botsSelection.has(bot)) {
+            botsSelection.delete(bot)
+          } else {
+            botsSelection.add(bot)
+          }
+          setBotsSelection(new Set([...botsSelection]))
+        }}
+      >
+        <EloBadge elo={bot.elo} />
+        <InlineAvatar avatar={bot.avatar} name={bot.name} />
+      </li>
+    </div>
   )
 }

@@ -310,7 +310,7 @@ export default class Status extends Schema implements IStatus {
 
     this.updateRage(dt, pokemon)
 
-    if(this.ccCooldown > 0) {
+    if (this.ccCooldown > 0) {
       this.ccCooldown = min(0)(this.ccCooldown - dt)
     }
 
@@ -1150,7 +1150,8 @@ export default class Status extends Schema implements IStatus {
           : pkm.simulation.blueTeam
       if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
         if (!this.possessed) {
-            pkm.team = pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM :Team.BLUE_TEAM
+          pkm.team =
+            pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
         }
         this.possessed = true
         duration = this.applyStatusDurationReductions(duration, pkm)

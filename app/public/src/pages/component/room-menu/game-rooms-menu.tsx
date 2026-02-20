@@ -109,7 +109,8 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
     if (action === "join" || action === "spectate") {
       joinGame(room)
     } else if (action === "delete" && user?.role === Role.ADMIN) {
-      confirm("Delete room ?") && rooms.lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+      confirm("Delete room ?") &&
+        rooms.lobby?.send(Transfer.DELETE_ROOM, room.roomId)
     }
   }
 

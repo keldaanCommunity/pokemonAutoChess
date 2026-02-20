@@ -10,6 +10,10 @@
   flex-wrap: wrap;
 }
 
+#region-report header > .pokemon-typeahead {
+  margin-left: auto;
+}
+
 #region-report h2 {
   margin: 0;
 }

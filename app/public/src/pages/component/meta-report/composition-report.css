@@ -5,15 +5,17 @@
 }
 
 #meta-report-compo article {
+  flex: 1;
   overflow-y: auto;
   display: flex;
   gap: 1em;
+  min-height: 0;
 }
 
 #meta-report-compo-list {
-  overflow-y: scroll;
   flex: 1;
   min-width: 0;
+  min-height: 0;
 }
 
 #meta-report-compo svg {

@@ -66,7 +66,9 @@ export default abstract class PokemonState {
           const critPartOfTheDamage = damageAfterCrit - damageWithoutCrit
 
           damage = min(0)(
-            Math.round(damageWithoutCrit + critPartOfTheDamage * reductionFactor)
+            Math.round(
+              damageWithoutCrit + critPartOfTheDamage * reductionFactor
+            )
           )
           target.count.crit++
         }

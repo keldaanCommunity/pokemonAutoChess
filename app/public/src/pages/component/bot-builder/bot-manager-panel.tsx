@@ -2,6 +2,8 @@ import firebase from "firebase/compat/app"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import { List } from "react-window"
+import { AutoSizer } from "react-virtualized-auto-sizer"
 import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { authenticateUser } from "../../../network"
@@ -9,6 +11,8 @@ import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import "./bot-manager-panel.css"
+
+const ROW_HEIGHT = 50
 
 export function BotManagerPanel() {
   const [filterApproved, setFilterApproved] = useState<boolean | undefined>()
@@ -163,123 +167,164 @@ function BotsList(props: { approved?: boolean; filteredPokemon: Pkm | "" }) {
       {bots === null ? (
         <p>Loading...</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th
-                onClick={() => handleSort("avatar")}
-                style={{ cursor: "pointer" }}
-              >
-                Avatar{" "}
-                {sortColumn === "avatar"
-                  ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
-                  : ""}
-              </th>
-              <th
-                onClick={() => handleSort("name")}
-                style={{ cursor: "pointer" }}
-              >
-                Name{" "}
-                {sortColumn === "name"
-                  ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
-                  : ""}
-              </th>
-              <th
-                onClick={() => handleSort("author")}
-                style={{ cursor: "pointer" }}
-              >
-                Author{" "}
-                {sortColumn === "author"
-                  ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
-                  : ""}
-              </th>
-              <th
-                onClick={() => handleSort("elo")}
-                style={{ cursor: "pointer" }}
-              >
-                Elo{" "}
-                {sortColumn === "elo"
-                  ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
-                  : ""}
-              </th>
-              <th
-                onClick={() => handleSort("id")}
-                style={{ cursor: "pointer" }}
-              >
-                UID{" "}
-                {sortColumn === "id"
-                  ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
-                  : ""}
-              </th>
-              <th
-                onClick={() => handleSort("approved")}
-                style={{ cursor: "pointer" }}
-              >
-                Approved{" "}
-                {sortColumn === "approved"
-                  ? sortDirection === "asc"
-                    ? "▲"
-                    : "▼"
-                  : ""}
-              </th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredBots.map((b) => (
-              <tr key={b.id}>
-                <td>
-                  <PokemonPortrait avatar={b.avatar} />
-                </td>
-                <td>{t(`pkm.${b.name}`)}</td>
-                <td>{b.author}</td>
-                <td>{b.elo}</td>
-                <td style={{ color: "#999", fontSize: "80%" }}>{b.id}</td>
-                <td>
-                  {b.approved ? (
-                    <span style={{ color: "lime" }}>{t("yes")}</span>
-                  ) : (
-                    <span style={{ color: "red" }}>{t("no")}</span>
-                  )}
-                </td>
-                <td>
-                  <button
-                    onClick={() => navigate(`/bot-builder?bot=${b.id}`)}
-                    className="bubbly blue"
-                    style={{ fontSize: "80%" }}
-                  >
-                    {t("edit")}
-                  </button>
-                  <button
-                    onClick={() => approveBot(b.id, !b.approved)}
-                    className={cc("bubbly", b.approved ? "orange" : "green")}
-                    style={{ fontSize: "80%" }}
-                  >
-                    {b.approved ? t("disapprove") : t("approve")}
-                  </button>
-                  <button
-                    onClick={() => deleteBot(b)}
-                    className="bubbly red"
-                    style={{ fontSize: "80%" }}
-                  >
-                    {t("delete")}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <>
+          <div className="bots-table-header">
+            <span
+              onClick={() => handleSort("avatar")}
+              style={{ cursor: "pointer" }}
+            >
+              Avatar{" "}
+              {sortColumn === "avatar"
+                ? sortDirection === "asc"
+                  ? "▲"
+                  : "▼"
+                : ""}
+            </span>
+            <span
+              onClick={() => handleSort("name")}
+              style={{ cursor: "pointer" }}
+            >
+              Name{" "}
+              {sortColumn === "name"
+                ? sortDirection === "asc"
+                  ? "▲"
+                  : "▼"
+                : ""}
+            </span>
+            <span
+              onClick={() => handleSort("author")}
+              style={{ cursor: "pointer" }}
+            >
+              Author{" "}
+              {sortColumn === "author"
+                ? sortDirection === "asc"
+                  ? "▲"
+                  : "▼"
+                : ""}
+            </span>
+            <span
+              onClick={() => handleSort("elo")}
+              style={{ cursor: "pointer" }}
+            >
+              Elo{" "}
+              {sortColumn === "elo"
+                ? sortDirection === "asc"
+                  ? "▲"
+                  : "▼"
+                : ""}
+            </span>
+            <span
+              onClick={() => handleSort("id")}
+              style={{ cursor: "pointer" }}
+            >
+              UID{" "}
+              {sortColumn === "id" ? (sortDirection === "asc" ? "▲" : "▼") : ""}
+            </span>
+            <span
+              onClick={() => handleSort("approved")}
+              style={{ cursor: "pointer" }}
+            >
+              Approved{" "}
+              {sortColumn === "approved"
+                ? sortDirection === "asc"
+                  ? "▲"
+                  : "▼"
+                : ""}
+            </span>
+            <span>Actions</span>
+          </div>
+          <div style={{ flex: 1, minHeight: 0 }}>
+            <AutoSizer
+              renderProp={({ height, width }) => {
+                if (height === undefined || width === undefined) return null
+                return (
+                  <List<BotRowData>
+                    style={{ height, width }}
+                    rowCount={filteredBots.length}
+                    rowHeight={ROW_HEIGHT}
+                    rowComponent={BotRow}
+                    rowProps={{
+                      filteredBots,
+                      t,
+                      navigate,
+                      onApprove: approveBot,
+                      onDelete: deleteBot
+                    }}
+                  />
+                )
+              }}
+            />
+          </div>
+        </>
       )}
     </main>
+  )
+}
+
+type BotRowData = {
+  filteredBots: IBotLight[]
+  t: (key: string) => string
+  navigate: (path: string) => void
+  onApprove: (botId: string, approved: boolean) => Promise<void>
+  onDelete: (bot: IBotLight) => Promise<void>
+}
+
+function BotRow({
+  index,
+  style,
+  filteredBots,
+  t,
+  navigate,
+  onApprove,
+  onDelete
+}: {
+  ariaAttributes: object
+  index: number
+  style: React.CSSProperties
+} & BotRowData): React.ReactElement | null {
+  const b = filteredBots[index]
+  return (
+    <div
+      className={cc("bots-table-row", { even: index % 2 === 0 })}
+      style={style}
+    >
+      <span>
+        <PokemonPortrait avatar={b.avatar} />
+      </span>
+      <span>{t(`pkm.${b.name}`)}</span>
+      <span>{b.author}</span>
+      <span>{b.elo}</span>
+      <span style={{ color: "#999", fontSize: "80%" }}>{b.id}</span>
+      <span>
+        {b.approved ? (
+          <span style={{ color: "lime" }}>{t("yes")}</span>
+        ) : (
+          <span style={{ color: "red" }}>{t("no")}</span>
+        )}
+      </span>
+      <span>
+        <button
+          onClick={() => navigate(`/bot-builder?bot=${b.id}`)}
+          className="bubbly blue"
+          style={{ fontSize: "80%" }}
+        >
+          {t("edit")}
+        </button>
+        <button
+          onClick={() => onApprove(b.id, !b.approved)}
+          className={cc("bubbly", b.approved ? "orange" : "green")}
+          style={{ fontSize: "80%" }}
+        >
+          {b.approved ? t("disapprove") : t("approve")}
+        </button>
+        <button
+          onClick={() => onDelete(b)}
+          className="bubbly red"
+          style={{ fontSize: "80%" }}
+        >
+          {t("delete")}
+        </button>
+      </span>
+    </div>
   )
 }

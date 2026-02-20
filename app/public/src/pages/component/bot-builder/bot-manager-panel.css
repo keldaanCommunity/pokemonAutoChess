@@ -13,10 +13,10 @@
 #bots-list {
   display: flex;
   flex-flow: column;
-  align-items: center;
-  overflow: auto;
   max-width: 100%;
   padding: 0;
+  flex: 1;
+  min-height: 0;
 }
 
 #bot-manager-panel .controls {
@@ -26,26 +26,29 @@
   gap: 1em;
 }
 
-#bots-list table {
-  width: 100%;
-}
-
-#bots-list table thead {
-  border-bottom: 4px solid white;
-}
-
-#bots-list td,
-#bots-list th {
+.bots-table-header,
+.bots-table-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 60px 1fr 80px auto;
+  align-items: center;
+  gap: 0 0.5em;
   padding: 0 0.5em;
   text-align: center;
 }
 
-#bots-list td:first-child {
+.bots-table-header {
+  border-bottom: 4px solid white;
+  font-weight: bold;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+
+.bots-table-row > span:first-child {
   text-align: left;
   padding: 0;
 }
 
-#bot-manager-panel tr:nth-child(even) {
+.bots-table-row.even {
   background-color: var(--color-bg-secondary);
 }
 

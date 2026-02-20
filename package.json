@@ -104,6 +104,8 @@
     "react-tabs": "^6.0.2",
     "react-toastify": "^10.0.6",
     "react-tooltip": "^5.30.0",
+    "react-virtualized-auto-sizer": "^2.0.3",
+    "react-window": "^2.2.7",
     "recharts": "^3.6.0"
   },
   "devDependencies": {
