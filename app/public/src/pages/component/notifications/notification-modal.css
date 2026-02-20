@@ -1,0 +1,19 @@
+.notification-modal .modal-body {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.notification-modal img {
+  width: auto;
+  max-width: 320px;
+  height: 320px;
+  margin: 2rem;
+}
+
+.notification-modal p {
+  font-size: 2rem;
+  white-space: pre-wrap;
+}

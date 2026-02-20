@@ -4,12 +4,14 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import GameState from "../../../rooms/states/game-state"
+import { Transfer } from "../../../types"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { client, leaveRoom, rooms } from "../network"
 import { resetLobby } from "../stores/LobbyStore"
 import {
+  clearNotification,
   logOut,
   setErrorAlertMessage,
   setPendingGameId
@@ -18,6 +20,7 @@ import { EventsMenu } from "./component/events-menu/events-menu"
 import LeaderboardMenu from "./component/leaderboard/leaderboard-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { Modal } from "./component/modal/modal"
+import { NotificationModal } from "./component/notifications/notification-modal"
 import RoomMenu from "./component/room-menu/room-menu"
 import { cc } from "./utils/jsx"
 import { LocalStoreKeys, localStore } from "./utils/store"
@@ -28,6 +31,7 @@ export default function Lobby() {
   const navigate = useNavigate()
   const networkError = useAppSelector((state) => state.network.error)
   const pendingGameId = useAppSelector((state) => state.network.pendingGameId)
+  const notifications = useAppSelector((state) => state.network.notifications)
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
   )
@@ -51,6 +55,13 @@ export default function Lobby() {
     dispatch(logOut())
     navigate("/")
   }, [dispatch])
+
+  const handleNotificationClose = (notificationId: string) => {
+    // Send acknowledgment to server
+    rooms.lobby?.send(Transfer.NOTIFICATION_SEEN, notificationId)
+    // Remove from local state
+    dispatch(clearNotification(notificationId))
+  }
 
   const reconnectToGame = throttle(async function reconnectToGame() {
     const idToken = await firebase.auth().currentUser?.getIdToken()
@@ -102,9 +113,15 @@ export default function Lobby() {
           </>
         }
       ></Modal>
+      <NotificationModal
+        notifications={notifications}
+        onClose={handleNotificationClose}
+      />
       <Modal
         show={networkError != null}
-        onClose={() => dispatch(setErrorAlertMessage(null))}
+        onClose={() => {
+          dispatch(setErrorAlertMessage(null))
+        }}
         className="is-dark basic-modal-body"
         body={<p style={{ padding: "1em" }}>{networkError}</p>}
       />

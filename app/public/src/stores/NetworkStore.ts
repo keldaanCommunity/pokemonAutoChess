@@ -1,8 +1,6 @@
-
 import { User } from "@firebase/auth-types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { CollectionUtils } from "../../../core/collection"
-
 import { Emotion, Title, Transfer } from "../../../types"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { Language } from "../../../types/enum/Language"
@@ -11,6 +9,7 @@ import {
   IUserMetadataJSON,
   IUserMetadataUnpacked
 } from "../../../types/interfaces/UserMetadata"
+import { INotification } from "../../../types/notifications"
 import { getAvatarString } from "../../../utils/avatar"
 import { leaveAllRooms, rooms } from "../network.js"
 
@@ -22,6 +21,7 @@ export interface INetwork {
   pendingGameId: string | null
   connectionStatus: ConnectionStatus
   error: string | null
+  notifications: INotification[]
 }
 
 const initalState: INetwork = {
@@ -31,7 +31,8 @@ const initalState: INetwork = {
   profile: undefined,
   pendingGameId: null,
   error: null,
-  connectionStatus: ConnectionStatus.PENDING
+  connectionStatus: ConnectionStatus.PENDING,
+  notifications: []
 }
 
 export const networkSlice = createSlice({
@@ -118,6 +119,14 @@ export const networkSlice = createSlice({
     },
     setPendingGameId: (state, action: PayloadAction<string | null>) => {
       state.pendingGameId = action.payload
+    },
+    setNotifications: (state, action: PayloadAction<INotification[]>) => {
+      state.notifications = action.payload
+    },
+    clearNotification: (state, action: PayloadAction<string>) => {
+      state.notifications = state.notifications.filter(
+        (n) => n.id !== action.payload
+      )
     }
   }
 })
@@ -126,6 +135,8 @@ export const {
   logIn,
   logOut,
   setProfile,
+  setNotifications,
+  clearNotification,
   changeName,
   changeAvatar,
   changeSelectedEmotion,

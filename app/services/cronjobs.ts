@@ -18,6 +18,7 @@ import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
+import { notificationsService } from "./notifications"
 
 export function initCronJobs() {
   logger.debug("init cron jobs")
@@ -44,6 +45,12 @@ export function initCronJobs() {
     cronTime: "45 8 * * *", // every day at 8:45am
     timeZone: "Europe/Paris",
     onTick: () => titleStats(),
+    start: true
+  })
+  CronJob.from({
+    cronTime: "50 8 * * *", // every day at 8:50am
+    timeZone: "Europe/Paris",
+    onTick: () => notificationsService.cleanupOldNotifications(),
     start: true
   })
   CronJob.from({

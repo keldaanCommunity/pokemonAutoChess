@@ -28,7 +28,7 @@ import {
   rooms
 } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
-import store, { AppDispatch } from "../stores"
+import { AppDispatch } from "../stores"
 import {
   addRoom,
   addTournament,
@@ -50,6 +50,7 @@ import {
 import {
   setConnectionStatus,
   setErrorAlertMessage,
+  setNotifications,
   setPendingGameId,
   setProfile
 } from "../stores/NetworkStore"
@@ -232,6 +233,10 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.BANNED, (message) => {
             alert(message)
+          })
+
+          room.onMessage(Transfer.NOTIFICATIONS, (notifications) => {
+            dispatch(setNotifications(notifications))
           })
 
           room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
