@@ -104,7 +104,7 @@ export class Pokemon extends Schema implements IPokemon {
   regional = false
   canHoldItems = true
   canBeBenched = true
-  canBeSold = true  
+  canBeSold = true
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()

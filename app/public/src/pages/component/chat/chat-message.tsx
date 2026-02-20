@@ -5,7 +5,10 @@ import { ChatRoom, removeMessage, searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 
-export default function ChatMessage(props: { message: IChatV2, source: ChatRoom }) {
+export default function ChatMessage(props: {
+  message: IChatV2
+  source: ChatRoom
+}) {
   const user = useAppSelector((state) => state.network.profile)
   const role = user?.role
   const time = new Date(props.message.time).toLocaleTimeString(undefined, {
@@ -36,9 +39,12 @@ export default function ChatMessage(props: { message: IChatV2, source: ChatRoom 
               className="remove-chat bubbly red"
               title="Remove message"
               onClick={() =>
-                removeMessage({
+                removeMessage(
+                  {
                     id: props.message.id
-                  }, props.source)                
+                  },
+                  props.source
+                )
               }
             >
               <p style={{ fontSize: "0.5em", margin: "0" }}>X</p>

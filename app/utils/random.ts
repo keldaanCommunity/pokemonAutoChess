@@ -25,7 +25,11 @@ export function randomWeighted<T extends string>(
       0
     )
   }
-  let random = Math.random() * totalWeight  * (1 + ap * (apScaling / 100))* (1 + luck / 100)
+  let random =
+    Math.random() *
+    totalWeight *
+    (1 + ap * (apScaling / 100)) *
+    (1 + luck / 100)
   for (const [item, weight] of Object.entries(weights) as [T, number][]) {
     if ((random -= weight) < 0) return item
   }

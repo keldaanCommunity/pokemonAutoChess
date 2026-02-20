@@ -1,6 +1,8 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { List, useDynamicRowHeight } from "react-window"
+import { AutoSizer } from "react-virtualized-auto-sizer"
 import { EloRankThreshold } from "../../../../../config"
 import {
   fetchMetaItems,
@@ -92,16 +94,15 @@ export function ItemReport() {
               {sortedMetaItems.length === 0 && (
                 <p>{loading ? t("loading") : t("no_data_available")}</p>
               )}
-              {sortedMetaItems
-                ?.find((i) => i.tier === eloThreshold)
-                ?.items.filter(
-                  (item) => tab.items && tab.items.includes(item.name)
-                )
-                .map((item, i) => {
-                  return (
-                    <ItemStatistic item={item} key={item.name} rank={i + 1} />
-                  )
-                })}
+              <VirtualizedItemList
+                items={
+                  sortedMetaItems
+                    ?.find((i) => i.tier === eloThreshold)
+                    ?.items.filter(
+                      (item) => tab.items && tab.items.includes(item.name)
+                    ) ?? []
+                }
+              />
             </div>
             <div className="item-distribution-chart">
               <div className="view-switcher">
@@ -163,6 +164,56 @@ export function ItemReport() {
           </TabPanel>
         ))}
       </Tabs>
+    </div>
+  )
+}
+
+const ESTIMATED_ITEM_HEIGHT = 80
+
+function VirtualizedItemList({ items }: { items: IItemV2[] }) {
+  const dynamicRowHeight = useDynamicRowHeight({
+    defaultRowHeight: ESTIMATED_ITEM_HEIGHT,
+    key: items.length
+  })
+
+  if (items.length === 0) return null
+
+  return (
+    <AutoSizer
+      renderProp={({ height, width }) => {
+        if (height === undefined || width === undefined) return null
+        return (
+          <List<ItemRowData>
+            style={{ height, width }}
+            rowCount={items.length}
+            rowHeight={dynamicRowHeight}
+            rowComponent={ItemRow}
+            rowProps={{ items }}
+          />
+        )
+      }}
+    />
+  )
+}
+
+type ItemRowData = {
+  items: IItemV2[]
+}
+
+function ItemRow({
+  index,
+  style,
+  items
+}: {
+  ariaAttributes: object
+  index: number
+  style: React.CSSProperties
+} & ItemRowData): React.ReactElement | null {
+  return (
+    <div style={style}>
+      <div>
+        <ItemStatistic item={items[index]} rank={index + 1} />
+      </div>
     </div>
   )
 }

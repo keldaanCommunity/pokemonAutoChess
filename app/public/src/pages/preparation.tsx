@@ -21,7 +21,10 @@ import {
   rooms,
   toggleReady
 } from "../network"
-import { setConnectionStatus, setErrorAlertMessage } from "../stores/NetworkStore"
+import {
+  setConnectionStatus,
+  setErrorAlertMessage
+} from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
@@ -54,7 +57,7 @@ import "./preparation.css"
 export default function Preparation() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()  
+  const dispatch = useAppDispatch()
   const room: Room<PreparationState> | undefined = rooms.preparation
   const user = useAppSelector((state) => state.preparation.user)
   const initialized = useRef<boolean>(false)
@@ -73,7 +76,9 @@ export default function Preparation() {
               if (cachedReconnectionToken) {
                 let r: Room<PreparationState>
                 try {
-                  r = await client.reconnect<PreparationState>(cachedReconnectionToken)
+                  r = await client.reconnect<PreparationState>(
+                    cachedReconnectionToken
+                  )
                   if (r.name !== "preparation") {
                     throw new Error(
                       `Expected to join a preparation room but joined ${r.name} instead`

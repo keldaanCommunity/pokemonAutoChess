@@ -8,10 +8,18 @@ import React, {
 } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { Grid } from "react-window"
+import { AutoSizer } from "react-virtualized-auto-sizer"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
-import { PkmAltForms } from "../../../../../config"
+import {
+  BoosterPriceByRarity,
+  getEmotionCost,
+  PkmAltForms
+} from "../../../../../config"
+import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
+import { Emotion } from "../../../../../types/enum/Emotion"
 import { Passive } from "../../../../../types/enum/Passive"
 import {
   NonPkm,
@@ -22,13 +30,16 @@ import {
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
-import { LocalStoreKeys, localStore } from "../../utils/store"
+import { LocalStoreKeys, localStore, useLocalStore } from "../../utils/store"
 import SynergyIcon from "../icons/synergy-icon"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import PokemonCollectionItem from "./pokemon-collection-item"
 import PokemonEmotionsModal from "./pokemon-emotions-modal"
 import UnownPanel from "./unown-panel"
 import "./pokemon-collection.css"
+
+const CELL_WIDTH = 90
+const CELL_HEIGHT = 118
 
 export type CollectionFilterState = {
   mode: "collection" | "shiny" | "pokedex"
@@ -272,6 +283,14 @@ export function PokemonCollectionList(props: {
   const pokemonCollection = useAppSelector(
     (state) => state.network.profile?.pokemonCollection
   )
+  const lastBoostersOpened = useAppSelector(
+    (state) => state.lobby.lastBoostersOpened
+  )
+  const [favorites] = useLocalStore<Pkm[]>(
+    LocalStoreKeys.FAVORITES,
+    [],
+    Infinity
+  )
 
   const getItem = useCallback(
     (index) => pokemonCollection?.get(index),
@@ -321,23 +340,144 @@ export function PokemonCollectionList(props: {
     })
   }, [pokemonsSorted, props.type])
 
-  const eligiblePokemons: (React.JSX.Element | null)[] = useMemo(
-    () =>
-      pokemonsFiltered.map((pkm) => {
-        const pokemonData = getPokemonData(pkm)
-        return (
-          <PokemonCollectionItem
-            key={`${pokemonData.index}-${props.type}`}
-            name={pkm}
-            index={pokemonData.index}
-            item={getItem(pokemonData.index)}
-            filterState={props.filterState}
-            setPokemon={props.setPokemon}
-          />
-        )
-      }),
-    [getItem, pokemonsFiltered, props.filterState, props.setPokemon, props.type]
-  )
+  // Pre-filter items so the grid knows the exact count (no null renders)
+  const displayedPokemons = useMemo(() => {
+    return pokemonsFiltered.filter((pkm) => {
+      const pokemonData = getPokemonData(pkm)
+      const item = getItem(pokemonData.index)
 
-  return <div className="pokemon-collection-list">{eligiblePokemons}</div>
+      if (getAvailableEmotions(pokemonData.index, false).length === 0)
+        return false
+
+      const { dust, emotions, shinyEmotions } = item ?? {
+        dust: 0,
+        emotions: [] as Emotion[],
+        shinyEmotions: [] as Emotion[]
+      }
+
+      const isUnlocked =
+        props.filterState.mode === "pokedex"
+          ? (item?.played ?? 0) > 0
+          : props.filterState.mode === "shiny"
+            ? shinyEmotions?.length > 0
+            : emotions?.length > 0 || shinyEmotions?.length > 0
+
+      const isNew = lastBoostersOpened.some((booster) =>
+        booster.some((card) => card.name === pkm && card.new)
+      )
+
+      const isFavorite = favorites.includes(pkm)
+      const rarity = pokemonData.rarity
+      const boosterCost = BoosterPriceByRarity[rarity]
+
+      const availableEmotions = getAvailableEmotions(pokemonData.index, false)
+      const shinyAvailableEmotions = getAvailableEmotions(
+        pokemonData.index,
+        true
+      )
+      const canUnlock =
+        props.filterState.mode !== "pokedex" &&
+        (availableEmotions.some(
+          (e) =>
+            !emotions.includes(e) &&
+            dust >= getEmotionCost(e, false) &&
+            props.filterState.mode !== "shiny"
+        ) ||
+          shinyAvailableEmotions.some(
+            (e) =>
+              !shinyEmotions.includes(e) &&
+              dust >= getEmotionCost(e, true) &&
+              !PokemonAnimations[pkm]?.shinyUnavailable
+          ))
+
+      if (props.filterState.filter === "refundable" && dust < boosterCost)
+        return false
+      if (props.filterState.filter === "new" && !isNew) return false
+      if (props.filterState.filter === "unlocked" && !isUnlocked) return false
+      if (props.filterState.filter === "unlockable" && !canUnlock) return false
+      if (props.filterState.filter === "locked" && isUnlocked) return false
+      if (props.filterState.filter === "favorite" && !isFavorite) return false
+
+      return true
+    })
+  }, [
+    pokemonsFiltered,
+    getItem,
+    props.filterState,
+    lastBoostersOpened,
+    favorites
+  ])
+
+  return (
+    <div className="pokemon-collection-list">
+      <AutoSizer
+        renderProp={({ height, width }) => {
+          if (height === undefined || width === undefined) return null
+          const columnCount = Math.max(1, Math.floor(width / CELL_WIDTH))
+          const rowCount = Math.ceil(displayedPokemons.length / columnCount)
+          return (
+            <Grid<PokemonCellData>
+              style={{ height, width }}
+              columnCount={columnCount}
+              columnWidth={CELL_WIDTH}
+              rowCount={rowCount}
+              rowHeight={CELL_HEIGHT}
+              cellComponent={PokemonCell}
+              cellProps={{
+                displayedPokemons,
+                columnCount,
+                getItem,
+                filterState: props.filterState,
+                setPokemon: props.setPokemon,
+                type: props.type
+              }}
+            />
+          )
+        }}
+      />
+    </div>
+  )
+}
+
+type PokemonCellData = {
+  displayedPokemons: Pkm[]
+  columnCount: number
+  getItem: (index: string) => any
+  filterState: CollectionFilterState
+  setPokemon: Dispatch<SetStateAction<Pkm | "">>
+  type: Synergy | "all"
+}
+
+function PokemonCell({
+  columnIndex,
+  rowIndex,
+  style,
+  displayedPokemons,
+  columnCount,
+  getItem,
+  filterState,
+  setPokemon,
+  type
+}: {
+  ariaAttributes: object
+  columnIndex: number
+  rowIndex: number
+  style: React.CSSProperties
+} & PokemonCellData): React.ReactElement | null {
+  const index = rowIndex * columnCount + columnIndex
+  if (index >= displayedPokemons.length) return null
+  const pkm = displayedPokemons[index]
+  const pokemonData = getPokemonData(pkm)
+  return (
+    <div style={style}>
+      <PokemonCollectionItem
+        key={`${pokemonData.index}-${type}`}
+        name={pkm}
+        index={pokemonData.index}
+        item={getItem(pokemonData.index)}
+        filterState={filterState}
+        setPokemon={setPokemon}
+      />
+    </div>
+  )
 }

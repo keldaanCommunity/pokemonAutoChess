@@ -89,7 +89,11 @@ export default class MovingState extends PokemonState {
           stenchJump(pokemon, board, x, y)
         }
 
-        if (pokemon.passive === Passive.PARTING_SHOT &&  farthestCoordinate.target.effects.has(EffectEnum.PARTING_SHOT) === false) {
+        if (
+          pokemon.passive === Passive.PARTING_SHOT &&
+          farthestCoordinate.target.effects.has(EffectEnum.PARTING_SHOT) ===
+            false
+        ) {
           partingShot(pokemon, farthestCoordinate.target, x, y)
         }
 

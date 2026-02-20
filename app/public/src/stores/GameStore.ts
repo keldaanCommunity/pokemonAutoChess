@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  PayloadAction,
-  Slice
-} from "@reduxjs/toolkit"
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"

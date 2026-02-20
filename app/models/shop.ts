@@ -754,7 +754,8 @@ export default class Shop {
   magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
     const finals = player.getFinalizedLines()
 
-    const rarityProbabilies = RarityProbabilityPerLevel[player.experienceManager.level]
+    const rarityProbabilies =
+      RarityProbabilityPerLevel[player.experienceManager.level]
     const magnetPullRatePerRarity = {
       [Rarity.COMMON]: rarityProbabilies[0],
       [Rarity.UNCOMMON]: rarityProbabilies[1],
@@ -763,8 +764,15 @@ export default class Shop {
       [Rarity.ULTRA]: rarityProbabilies[4],
       [Rarity.SPECIAL]: 0.35
     }
-    const rarity = randomWeighted(magnetPullRatePerRarity, 1.35, meltan.ap, 0.5, meltan.luck) ?? Rarity.SPECIAL
-   
+    const rarity =
+      randomWeighted(
+        magnetPullRatePerRarity,
+        1.35,
+        meltan.ap,
+        0.5,
+        meltan.luck
+      ) ?? Rarity.SPECIAL
+
     if (rarity !== Rarity.SPECIAL) {
       const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
         Synergy.STEEL
