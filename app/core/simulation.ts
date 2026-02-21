@@ -1495,9 +1495,14 @@ export default class Simulation extends Schema implements ISimulation {
           : null
     if (winningTeam) {
       winningTeam.forEach((p) => {
-        p.status.clearNegativeStatus(p as PokemonEntity)
-        if (!p.status.tree) {
-          p.action = PokemonActionState.HOP
+        const entity = p as PokemonEntity
+        entity.status.clearNegativeStatus(entity)
+        if (entity.status.resurrecting) {
+          entity.status.resurrecting = false
+          entity.resurrect()
+        }
+        if (!entity.status.tree) {
+          entity.action = PokemonActionState.HOP
         }
       })
     }
