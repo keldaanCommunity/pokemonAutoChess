@@ -63,7 +63,7 @@ const initalState: INetwork = {
   connectionStatus: ConnectionStatus.PENDING
 }
 
-export const networkSlice = createSlice({
+const networkSlice = createSlice({
   name: "network",
   initialState: initalState,
   reducers: {

@@ -129,7 +129,7 @@ export default function Jukebox(props: {
             min="0"
             max="100"
             value={volume}
-            onInput={handleVolumeChange}
+            onChange={handleVolumeChange}
           ></input>
         </label>
       </p>

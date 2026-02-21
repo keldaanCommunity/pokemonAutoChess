@@ -84,7 +84,7 @@ const initialState: GameStateStore = {
   podium: new Array<ILeaderboardInfo>()
 }
 
-export const gameSlice = createSlice({
+const gameSlice = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {
