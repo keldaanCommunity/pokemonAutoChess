@@ -46,6 +46,7 @@
 # Bugfix
 
 - Fix Twist Band not reversing ghost curses stat debuffs
+- Fix Pikachu Surfer spawn spot when on red team
 
 # Misc
 

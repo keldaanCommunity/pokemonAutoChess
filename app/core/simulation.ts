@@ -315,7 +315,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
     } else {
-      for (let y = 0; y < this.board.rows; y++) {
+      for (let y = this.board.rows-1 ; y >= 0; y--) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
           if (this.board.getEntityOnCell(x, y) === undefined) {
             return { x, y }
