@@ -135,7 +135,6 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") totalPlayerDamageDealt: number = 0
   @type("float32") eggChance: number = 0
   @type("float32") goldenEggChance: number = 0
-  @type("float32") wildChance: number = 0
   @type("uint8") cellBattery: number = 0
   @type({ map: Wanderer }) wanderers: Map<string, Wanderer> = new Map<
     string,
@@ -383,7 +382,6 @@ export default class Player extends Schema implements IPlayer {
       this.updateChefsHats()
     }
 
-    this.updateWildChance()
     this.effects.update(this.synergies, this.board)
 
     if (
@@ -580,16 +578,6 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.GOOD_ROD)
     if (this.items.includes(Item.SUPER_ROD) === false && fishingLevel === 3)
       this.items.push(Item.SUPER_ROD)
-  }
-
-  updateWildChance() {
-    this.wildChance = values(this.board)
-      .filter((p) => p.types.has(Synergy.WILD))
-      .reduce(
-        (total, p) =>
-          total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)),
-        0
-      )
   }
 
   updateChefsHats() {

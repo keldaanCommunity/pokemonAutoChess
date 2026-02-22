@@ -431,7 +431,7 @@ export class FishingRodEffect extends OnStageStartEffect {
         room.state.stageLevel > 3 &&
         !player.isBot
       ) {
-        const fish = room.state.shop.pickFish(player, rod)
+        const fish = room.state.shop.pickFish(player, rod, room.state)
         room.spawnOnBench(player, fish, "fishing")
       }
     })

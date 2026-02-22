@@ -140,7 +140,8 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
       for (let i = 0; i < nbFishes; i++) {
         const fish = unown.simulation.room.state.shop.pickFish(
           player,
-          Item.SUPER_ROD
+          Item.SUPER_ROD,
+          unown.simulation.room.state
         )
         unown.simulation.room.spawnOnBench(player, fish, "fishing")
       }

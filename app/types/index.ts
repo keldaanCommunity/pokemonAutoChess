@@ -295,7 +295,6 @@ export interface IPlayer {
   rerollCount: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
-  wildChance: number
   eggChance: number
   goldenEggChance: number
   cellBattery: number

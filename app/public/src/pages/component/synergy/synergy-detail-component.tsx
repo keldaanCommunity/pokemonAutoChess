@@ -1,10 +1,10 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
+import { getWildChance } from "../../../../../models/colyseus-models/synergies"
 import { SynergyEffects } from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
-import { PVEStages } from "../../../../../models/pve-stages"
 import { IPlayer } from "../../../../../types"
 import {
   Pkm,
@@ -94,12 +94,9 @@ export default function SynergyDetailComponent(props: {
   let additionalInfo = ""
 
   if (props.type === Synergy.WILD && spectatedPlayer) {
-    const isPVE = stageLevel in PVEStages
+    const wildChance = getWildChance(spectatedPlayer, stageLevel)
     additionalInfo = t("synergy_description.WILD_ADDITIONAL", {
-      wildChance: roundToNDigits(
-        spectatedPlayer.wildChance * 100 + (isPVE ? 5 : 0),
-        1
-      )
+      wildChance: roundToNDigits(wildChance * 100, 1)
     })
   }
 

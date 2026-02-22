@@ -19,7 +19,6 @@ import {
   PkmsWithAltForms,
   PoolSize,
   PortalCarouselStages,
-  PVE_WILD_CHANCE,
   RarityCost,
   RarityProbabilityPerLevel,
   REMORAID_RATE,
@@ -68,10 +67,10 @@ import {
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { getWildChance } from "./colyseus-models/synergies"
 import { getPokemonBaseline } from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
-import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -599,11 +598,7 @@ export default class Shop {
       return Pkm.FALINKS_TROOPER
     }
 
-    const isPVE = state.stageLevel in PVEStages
-    const wildChance =
-      player.wildChance +
-      (isPVE || state.stageLevel === 0 ? PVE_WILD_CHANCE : 0)
-
+    const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
@@ -714,7 +709,7 @@ export default class Shop {
     return Pkm.MAGIKARP
   }
 
-  pickFish(player: Player, rod: FishingRod): Pkm {
+  pickFish(player: Player, rod: FishingRod, state: GameState): Pkm {
     const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
@@ -723,10 +718,11 @@ export default class Shop {
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
+    const wildChance = getWildChance(player, state.stageLevel)
 
     if (
       finals.has(Pkm.REMORAID) === false &&
-      ((mantine && chance(REMORAID_RATE, mantine)) || chance(player.wildChance))
+      ((mantine && chance(REMORAID_RATE, mantine)) || chance(wildChance))
     )
       return Pkm.REMORAID
 

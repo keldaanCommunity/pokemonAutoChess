@@ -431,6 +431,27 @@ export const overgrowEffect = new OnDamageReceivedEffect(
   }
 )
 
+export const wildBerserkEffect = new OnDamageReceivedEffect(
+  ({ pokemon }: OnDamageReceivedEffectArgs) => {
+    if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
+      pokemon.addSpeed(40, pokemon, 0, false)
+      pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
+      pokemon.addShield(30, pokemon, 0, false)
+      // Remove the effect to avoid multiple triggers
+      pokemon.effectsSet.delete(wildBerserkEffect)
+      // Remove after 3 seconds
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addSpeed(-40, pokemon, 0, false)
+          pokemon.addAttack(
+            -Math.ceil(0.4 * pokemon.baseAtk),
+            pokemon,
+            0,
+            false
+          )
+        }, 3000)
+      )
+
 export const normalShieldEffect = new OnSimulationStartEffect(
   ({ entity, simulation }) => {
     let shieldBonus = 0
