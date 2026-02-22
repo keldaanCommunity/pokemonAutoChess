@@ -988,10 +988,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
           if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
             usr.eventFinishTime = new Date()
 
-            const finisher = await UserMetadata.findOne({
+            const nbFinishers = await UserMetadata.countDocuments({
               eventFinishTime: { $ne: null }
             })
-            if (!finisher) {
+            if (nbFinishers === 0) {
               player.titles.add(Title.VICTORIOUS)
               this.presence.publish(
                 "announcement",
@@ -999,6 +999,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
               )
             }
             player.titles.add(Title.FINISHER)
+            notificationsService.addNotification(
+              player.id,
+              "victory_road_finished",
+              `${nbFinishers + 1}`
+            )
             fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
           }
 

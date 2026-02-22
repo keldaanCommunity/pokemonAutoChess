@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { INotification } from "../../../../../types/notifications"
+import { getRankLabel } from "../../../../../types/strings/Strings"
 import { Modal } from "../modal/modal"
 import "./notification-modal.css"
 
@@ -50,12 +51,13 @@ export function NotificationModal({
 
   const getNotificationTitle = (notification: INotification) => {
     switch (notification.type) {
-      case "level_up":
-        return t("notification.level_up_title")
       case "new_title":
         return t("notification.new_title_title")
       case "elo_rank_change":
         return t("notification.elo_rank_change_title")
+      case "victory_road_finished":
+        return t("notification.victory_road_finished_title")
+      case "level_up":
       default:
         return t("notification.level_up_title")
     }
@@ -76,6 +78,10 @@ export function NotificationModal({
         return t("notification.elo_rank_change_message", {
           rank: t(`elorank.${notification.message}`)
         })
+      case "victory_road_finished":
+        return t("notification.victory_road_finished_message", {
+          place: getRankLabel(Number(notification.message))
+        })
       default:
         return notification.message
     }
@@ -87,6 +93,8 @@ export function NotificationModal({
         return `/assets/titles/${notification.message}.svg`
       case "elo_rank_change":
         return `/assets/ranks/${notification.message}.svg`
+      case "victory_road_finished":
+        return `/assets/notifications/victory-road.png`
       case "level_up":
       default:
         return "/assets/ui/booster.png"

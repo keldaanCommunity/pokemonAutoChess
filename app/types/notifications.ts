@@ -1,7 +1,8 @@
 export const NotificationTypes = [
   "level_up",
   "new_title",
-  "elo_rank_change"
+  "elo_rank_change",
+  "victory_road_finished"
 ] as const
 
 export type NotificationType = (typeof NotificationTypes)[number]
