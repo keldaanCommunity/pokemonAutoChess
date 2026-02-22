@@ -37,20 +37,15 @@
 - Buff Glaive Rush (Frigibax): enemies hit now also get ARMOR_BREAK for 6 seconds
 - New passive for Fletchlinder line: drops embers on the ground when flying away.
 
-# Changes to Synergies
+# Changes to Items
 
-- Human HM have been removed, and TM are now split into 3 categories: Bronze, Silver and Gold ; each category matching one synergy level of Human synergy. Removed TM Taunt. New TMs: Charge, Focus Punch, Hyper Beam, Protect, Skill Swap
-- TMs are now unlearned and regained dynamically based on Human synergy level
-- Nerf Human healing: 25/40/60% → 25/35/50%
+- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+- Added visual effects for support items on adjacent positions
 
 # Changes to Gameplay
 
 - Crowd control (CC) statuses that prevent attacking and movement (Sleep, Freeze, Lock) now have a 1-second cooldown per unit when they wear off or are cleansed, preventing them from being immediately re-applied. This is intended to give units a small window to act and mitigate infinite CC locking combos.
 
-# Changes to Items
-
-- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
-- Added visual effects for support items on adjacent positions
 
 # Misc
 
