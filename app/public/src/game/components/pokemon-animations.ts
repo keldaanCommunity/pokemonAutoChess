@@ -7824,5 +7824,23 @@ export const PokemonAnimations: {
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.GROUND_MELEE
+  },
+  [Pkm.FINIZEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.PALAFIN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.PALAFIN_HERO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.WATER_MELEE
   }
 }

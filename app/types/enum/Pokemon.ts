@@ -318,6 +318,7 @@ export enum Pkm {
   FEZANDIPITI = "FEZANDIPITI",
   FIDOUGH = "FIDOUGH",
   FINNEON = "FINNEON",
+  FINIZEN = "FINIZEN",
   FLABEBE = "FLABEBE",
   FLABEBE_BLUE = "FLABEBE_BLUE",
   FLABEBE_ORANGE = "FLABEBE_ORANGE",
@@ -703,6 +704,8 @@ export enum Pkm {
   OSHAWOTT = "OSHAWOTT",
   OVERQWIL = "OVERQWIL",
   PACHIRISU = "PACHIRISU",
+  PALAFIN = "PALAFIN",
+  PALAFIN_HERO = "PALAFIN_HERO",
   PALDEA_WOOPER = "PALDEA_WOOPER",
   PALKIA = "PALKIA",
   PALOSSAND = "PALOSSAND",
@@ -2357,9 +2360,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.WIGLETT]: "0960",
   [Pkm.WUGTRIO]: "0961",
   //[Pkm.BOMBIRDIER]: "0962",
-  //[Pkm.FINIZEN]: "0963",
-  //[Pkm.PALAFIN]: "0964",
-  //[Pkm.PALAFIN_HERO]: "0964-0001",
+  [Pkm.FINIZEN]: "0963",
+  [Pkm.PALAFIN]: "0964",
+  [Pkm.PALAFIN_HERO]: "0964-0001",
   [Pkm.VAROOM]: "0965",
   [Pkm.REVAVROOM]: "0966",
   [Pkm.CYCLIZAR]: "0967",
@@ -3577,7 +3580,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DUBWOOL]: Pkm.WOOLOO,
   [Pkm.YAMPER]: Pkm.YAMPER,
   [Pkm.BOLTUND]: Pkm.YAMPER,
-  [Pkm.GREAT_TUSK]: Pkm.GREAT_TUSK
+  [Pkm.GREAT_TUSK]: Pkm.GREAT_TUSK,
+  [Pkm.FINIZEN]: Pkm.FINIZEN,
+  [Pkm.PALAFIN]: Pkm.FINIZEN,
+  [Pkm.PALAFIN_HERO]: Pkm.FINIZEN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

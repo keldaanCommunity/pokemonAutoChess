@@ -1965,6 +1965,24 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -(3 / 4) * Math.PI
   }),
+  [Ability.JET_PUNCH]: [
+    projectile({
+      ability: Ability.SURF,
+      duration: 300,
+      oriented: true,
+      rotation: -(3 / 4) * Math.PI,
+      ease: Phaser.Math.Easing.Quadratic.Out
+    }),
+    projectile({
+      ability: "FIGHTING/FIST",
+      duration: 200,
+      oriented: false,
+      scale: 2,
+      tweenProps: { scale: 3 },
+      tint: 0xa0c0ff,
+      ease: Phaser.Math.Easing.Quadratic.Out
+    })
+  ],
   [Ability.BURNING_JEALOUSY]: projectile({
     duration: 400
   }),

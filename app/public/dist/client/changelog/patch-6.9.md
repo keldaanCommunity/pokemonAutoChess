@@ -1,3 +1,9 @@
+# New Pokémon
+
+- Finizen
+- Palafin
+- Palafin Hero
+
 # Changes to Synergies
 
 - Fighting 8 now only throw away melee enemies (1 range)

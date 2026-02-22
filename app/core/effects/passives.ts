@@ -1,6 +1,7 @@
 import { BOARD_WIDTH } from "../../config"
 import {
   BasculinWhite,
+  Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
@@ -1383,6 +1384,39 @@ export const PassiveEffects: Partial<
       if (pokemon.count.damageReceivedCount % 10 === 0) {
         pokemon.addShield(shield, pokemon, 1, false)
       }
+    })
+  ],
+  [Passive.FINIZEN]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      let alliesKo = 0
+      let alliesNb = 0
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team === entity.team && pkm.id !== entity.id) {
+          alliesNb++
+          pkm.effectsSet.add(
+            new OnDeathEffect(() => {
+              alliesKo++
+              if (alliesKo >= 5 || alliesKo >= alliesNb) {
+                entity.index = PkmIndex[Pkm.PALAFIN_HERO]
+                entity.name = Pkm.PALAFIN_HERO
+                // TODO: update stats to match the hero form
+                entity.addAttack(18, entity, 0, false)
+                entity.addSpeed(16, entity, 0, false)
+                entity.addDefense(5, entity, 0, false)
+                entity.addSpecialDefense(5, entity, 0, false)
+                entity.hp = entity.maxHP
+                if (entity.player) {                  
+                  entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
+                  entity.player.transformPokemon(
+                    entity.refToBoardPokemon as Pokemon,
+                    Pkm.PALAFIN
+                  )
+                }
+              }
+            })
+          )
+        }
+      })
     })
   ]
 }
