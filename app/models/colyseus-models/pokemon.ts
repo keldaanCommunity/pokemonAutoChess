@@ -4278,7 +4278,6 @@ export class GalarianSlowbro extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.POISON])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.SLOWKING
   hp = 160
   atk = 12
   speed = 35

@@ -451,6 +451,9 @@ export const wildBerserkEffect = new OnDamageReceivedEffect(
           )
         }, 3000)
       )
+    }
+  }
+)
 
 export const normalShieldEffect = new OnSimulationStartEffect(
   ({ entity, simulation }) => {
