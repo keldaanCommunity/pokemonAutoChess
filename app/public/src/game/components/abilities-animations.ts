@@ -1,5 +1,10 @@
-import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../config"
+import Phaser, { GameObjects } from "phaser"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  CELL_HEIGHT,
+  CELL_WIDTH
+} from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AbilityAnimation,
@@ -17,7 +22,8 @@ import {
   OrientationFlip,
   PokemonActionState,
   PokemonTint,
-  SpriteType
+  SpriteType,
+  Stat
 } from "../../../../types/enum/Game"
 import { Sweets } from "../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
@@ -2736,4 +2742,44 @@ export function displayAbility(args: AbilityAnimationArgs) {
 
 export function clearAbilityAnimations(scene: GameScene | DebugScene) {
   scene.abilitiesVfxGroup?.clear(true, true)
+}
+
+export function displayBoost(
+  pokemonSprite: PokemonSprite,
+  stat: Stat,
+  dX: number = 0,
+  dY: number = 0,
+  debug?: boolean
+) {
+  const tint =
+    {
+      [Stat.AP]: 0xff00aa,
+      [Stat.PP]: 0x8080ff,
+      [Stat.SPEED]: 0xffaa44,
+      [Stat.ATK]: 0xff6633,
+      [Stat.DEF]: 0xffaa66,
+      [Stat.SPE_DEF]: 0xff99cc,
+      [Stat.SHIELD]: 0xffcc99
+    }[stat] ?? 0xffffff
+
+  const boost = new GameObjects.Sprite(
+    pokemonSprite.scene,
+    0 + dX * CELL_WIDTH,
+    dY * CELL_HEIGHT - 20,
+    "abilities",
+    `BOOST/000.png`
+  )
+    .setDepth(DEPTH.BOOST_BACK)
+    .setScale(2)
+    .setTint(tint)
+
+  pokemonSprite.add(boost)
+
+  boost.anims.play({
+    key: "BOOST",
+    repeat: debug ? 5 : 0
+  })
+  boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+    boost.destroy()
+  })
 }

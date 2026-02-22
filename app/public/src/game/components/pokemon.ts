@@ -45,7 +45,11 @@ import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import { addAbilitySprite, displayAbility } from "./abilities-animations"
+import {
+  addAbilitySprite,
+  displayAbility,
+  displayBoost
+} from "./abilities-animations"
 import DraggableObject from "./draggable-object"
 import { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
@@ -1588,35 +1592,7 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   displayBoost(stat: Stat, debug?: boolean) {
-    const tint =
-      {
-        [Stat.AP]: 0xff00aa,
-        [Stat.SPEED]: 0xffaa44,
-        [Stat.ATK]: 0xff6633,
-        [Stat.DEF]: 0xffaa66,
-        [Stat.SPE_DEF]: 0xff99cc,
-        [Stat.SHIELD]: 0xffcc99
-      }[stat] ?? 0xffffff
-
-    const boost = new GameObjects.Sprite(
-      this.scene,
-      0,
-      -20,
-      "abilities",
-      `BOOST/000.png`
-    )
-      .setDepth(DEPTH.BOOST_BACK)
-      .setScale(2)
-      .setTint(tint)
-
-    this.add(boost)
-    boost.anims.play({
-      key: "BOOST",
-      repeat: debug ? 5 : 0
-    })
-    boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      boost.destroy()
-    })
+    displayBoost(this, stat, 0, 0, debug)
   }
 }
 

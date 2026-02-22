@@ -50,6 +50,7 @@
 # Changes to Items
 
 - Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+- Added visual effects for support items on adjacent positions
 
 # Misc
 

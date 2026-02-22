@@ -58,6 +58,7 @@ import AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
+import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
@@ -866,49 +867,63 @@ export default class BoardManager {
     value: IPokemon[F],
     previousValue?: IPokemon[F]
   ) {
-    const pokemonUI = this.pokemons.get(pokemon.id)
+    const pokemonSprite = this.pokemons.get(pokemon.id)
     let coordinates: number[]
-    if (pokemonUI) {
+    if (pokemonSprite) {
       switch (field) {
         case "positionX":
-          pokemonUI.positionX = value as IPokemon["positionX"]
-          pokemonUI.positionY = pokemon.positionY
+          pokemonSprite.positionX = value as IPokemon["positionX"]
+          pokemonSprite.positionY = pokemon.positionY
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
           )
-          pokemonUI.x = coordinates[0]
-          pokemonUI.y = coordinates[1]
+          pokemonSprite.x = coordinates[0]
+          pokemonSprite.y = coordinates[1]
           store.dispatch(refreshShopUI(0))
+          this.showSupportItemsVfx(
+            values(pokemon.items),
+            pokemonSprite,
+            pokemon.positionX,
+            pokemon.positionY
+          )
           break
 
         case "positionY": {
-          pokemonUI.positionY = value as IPokemon["positionY"]
-          pokemonUI.positionX = pokemon.positionX
+          pokemonSprite.positionY = value as IPokemon["positionY"]
+          pokemonSprite.positionX = pokemon.positionX
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
           )
-          pokemonUI.x = coordinates[0]
-          pokemonUI.y = coordinates[1]
+          pokemonSprite.x = coordinates[0]
+          pokemonSprite.y = coordinates[1]
           const simulation = this.scene?.room?.state.simulations.get(
             this.player.simulationId
           )
           if (
             this.mode === BoardMode.BATTLE &&
-            !isOnBench(pokemonUI) &&
+            !isOnBench(pokemon) &&
             simulation?.started
           ) {
-            pokemonUI.destroy()
-            this.pokemons.delete(pokemonUI.id)
+            pokemonSprite.destroy()
+            this.pokemons.delete(pokemonSprite.id)
           }
           store.dispatch(refreshShopUI(0))
+          if (!isOnBench(pokemon)) {
+            this.showSupportItemsVfx(
+              values(pokemon.items),
+              pokemonSprite,
+              pokemon.positionX,
+              pokemon.positionY
+            )
+          }
           break
         }
 
         case "action":
           this.animationManager.animatePokemon(
-            pokemonUI,
+            pokemonSprite,
             value as IPokemon["action"],
             false
           )
@@ -922,47 +937,47 @@ export default class BoardManager {
             pokemon.hp
           )
           const sizeBuff = (hp - baseHP) / baseHP
-          pokemonUI.sprite.setScale(2 + sizeBuff)
+          pokemonSprite.sprite.setScale(2 + sizeBuff)
           if (previousValue != null && value && value > previousValue)
-            pokemonUI.displayBoost(Stat.HP)
+            pokemonSprite.displayBoost(Stat.HP)
           break
         }
 
         case "atk":
           if (previousValue != null && value && value > previousValue)
-            pokemonUI.displayBoost(Stat.ATK)
+            pokemonSprite.displayBoost(Stat.ATK)
           break
 
         case "def":
           if (previousValue != null && value && value > previousValue)
-            pokemonUI.displayBoost(Stat.DEF)
+            pokemonSprite.displayBoost(Stat.DEF)
           break
 
         case "speed":
           if (previousValue != null && value && value > previousValue)
-            pokemonUI.displayBoost(Stat.SPEED)
+            pokemonSprite.displayBoost(Stat.SPEED)
           break
 
         case "ap":
           if (previousValue != null && value && value > previousValue)
-            pokemonUI.displayBoost(Stat.AP)
-          if (pokemonUI.detail instanceof GamePokemonDetailDOMWrapper) {
-            pokemonUI.detail.updatePokemon(pokemonUI.pokemon)
+            pokemonSprite.displayBoost(Stat.AP)
+          if (pokemonSprite.detail instanceof GamePokemonDetailDOMWrapper) {
+            pokemonSprite.detail.updatePokemon(pokemonSprite.pokemon)
           }
           break
 
         case "luck":
           if (previousValue != null && value && value > previousValue)
-            pokemonUI.displayBoost(Stat.LUCK)
-          if (pokemonUI.detail instanceof GamePokemonDetailDOMWrapper) {
-            pokemonUI.detail.updatePokemon(pokemonUI.pokemon)
+            pokemonSprite.displayBoost(Stat.LUCK)
+          if (pokemonSprite.detail instanceof GamePokemonDetailDOMWrapper) {
+            pokemonSprite.detail.updatePokemon(pokemonSprite.pokemon)
           }
           break
 
         case "shiny":
           this.animationManager.animatePokemon(
-            pokemonUI,
-            pokemonUI.action,
+            pokemonSprite,
+            pokemonSprite.action,
             false
           )
           break
@@ -971,31 +986,33 @@ export default class BoardManager {
           if (previousValue != null && value !== previousValue) {
             // transformation or evolution mid-fight
             // unload previous index animations
-            pokemonUI.unloadAnimations(
+            pokemonSprite.unloadAnimations(
               this.scene,
               previousValue as IPokemonEntity["index"],
-              pokemonUI.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
+              pokemonSprite.pokemon.shiny
+                ? PokemonTint.SHINY
+                : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
             )
-            pokemonUI.attackSprite =
+            pokemonSprite.attackSprite =
               PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
-              pokemonUI.attackSprite
+              pokemonSprite.attackSprite
             // load the new ones
-            pokemonUI.lazyloadAnimations(this.scene).then(() => {
-              pokemonUI.animationLocked = false
-              pokemonUI.evolutionAnimation()
+            pokemonSprite.lazyloadAnimations(this.scene).then(() => {
+              pokemonSprite.animationLocked = false
+              pokemonSprite.evolutionAnimation()
             })
           }
           break
 
         case "skill":
           if (previousValue != null && value !== previousValue) {
-            pokemonUI.evolutionAnimation()
+            pokemonSprite.evolutionAnimation()
           }
           break
 
         case "supercharged":
           if (value === true && previousValue === false) {
-            pokemonUI.superchargeAnimation(this.scene, false, false)
+            pokemonSprite.superchargeAnimation(this.scene, false, false)
           }
           break
       }
@@ -1433,6 +1450,44 @@ export default class BoardManager {
         y: chest.y - 48,
         x: chest.x + (i - (rewards.length - 1) / 2) * 70
       })
+    })
+  }
+
+  showSupportItemsVfx(
+    items: Item[],
+    pokemonSprite: PokemonSprite,
+    positionX: number,
+    positionY: number
+  ) {
+    const adjacentEffectsItems = [
+      Item.ABILITY_SHIELD,
+      Item.GRACIDEA_FLOWER,
+      Item.EFFICIENT_BANDANNA
+    ]
+
+    const shouldDisplayLeft = positionX > 0
+    const shouldDisplayRight = positionX < BOARD_WIDTH - 1
+
+    adjacentEffectsItems.forEach((item) => {
+      if (items.includes(item)) {
+        let statBoost: Stat | null = null
+        switch (item) {
+          case Item.ABILITY_SHIELD:
+            statBoost = Stat.SHIELD
+            break
+          case Item.GRACIDEA_FLOWER:
+            statBoost = Stat.SPEED
+            break
+          case Item.EFFICIENT_BANDANNA:
+            statBoost = Stat.PP
+            break
+        }
+        if (statBoost) {
+          displayBoost(pokemonSprite, statBoost, 0, 0)
+          if (shouldDisplayLeft) displayBoost(pokemonSprite, statBoost, -1, 0)
+          if (shouldDisplayRight) displayBoost(pokemonSprite, statBoost, +1, 0)
+        }
+      }
     })
   }
 }
