@@ -5375,7 +5375,6 @@ export class Lugia extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   evolution = Pkm.SHADOW_LUGIA
-  evolutionRule = new ItemEvolutionRule([Item.DUSK_STONE])
   stars = 3
   hp = 300
   atk = 26
