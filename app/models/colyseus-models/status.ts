@@ -281,7 +281,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.charm) {
-      this.updateCharm(dt)
+      this.updateCharm(dt, pokemon)
     }
 
     if (this.flinch) {
@@ -829,10 +829,11 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updateCharm(dt: number) {
+  updateCharm(dt: number, pkm: PokemonEntity) {
     if (this.charmCooldown - dt <= 0) {
       this.charm = false
       this.charmOrigin = undefined
+      pkm.setTarget(null) // force retargeting
     } else {
       this.charmCooldown -= dt
     }
