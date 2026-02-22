@@ -1242,9 +1242,9 @@ export const PokemonAnimations: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Dance,
     emote: AnimationType.Charge,
-    shinyUnavailable: true,
     attackSprite: AttackSprite.FLYING_MELEE,
-    hitSprite: HitSprite.DARK_HIT
+    hitSprite: HitSprite.DARK_HIT,
+    shinyUnavailable: true
   },
   [Pkm.GIRATINA]: {
     attack: AnimationType.Attack,
@@ -1807,6 +1807,14 @@ export const PokemonAnimations: {
     emote: AnimationType.Pose,
     attackSprite: AttackSprite.PSYCHIC_RANGE,
     hitSprite: HitSprite.PSYCHIC_HIT
+  },
+  [Pkm.SHADOW_MEWTWO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Punch,
+    emote: AnimationType.Pose,
+    attackSprite: AttackSprite.PSYCHIC_RANGE,
+    hitSprite: HitSprite.PSYCHIC_HIT,
+    shinyUnavailable: true
   },
   [Pkm.KYUREM]: {
     attack: AnimationType.Shoot,

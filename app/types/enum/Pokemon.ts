@@ -854,6 +854,7 @@ export enum Pkm {
   SEVIPER = "SEVIPER",
   SEWADDLE = "SEWADDLE",
   SHADOW_LUGIA = "SHADOW_LUGIA",
+  SHADOW_MEWTWO = "SHADOW_MEWTWO",
   SHARPEDO = "SHARPEDO",
   SHAYMIN = "SHAYMIN",
   SHAYMIN_SKY = "SHAYMIN_SKY",
@@ -1346,6 +1347,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.DRAGONAIR]: "0148",
   [Pkm.DRAGONITE]: "0149",
   [Pkm.MEWTWO]: "0150",
+  [Pkm.SHADOW_MEWTWO]: "0150-0003",
   [Pkm.MEW]: "0151",
 
   // Gen 2
@@ -2662,6 +2664,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.AZELF]: Pkm.AZELF,
   [Pkm.UXIE]: Pkm.UXIE,
   [Pkm.MEWTWO]: Pkm.MEWTWO,
+  [Pkm.SHADOW_MEWTWO]: Pkm.SHADOW_MEWTWO,
   [Pkm.KYUREM]: Pkm.KYUREM,
   [Pkm.RESHIRAM]: Pkm.RESHIRAM,
   [Pkm.ZEKROM]: Pkm.ZEKROM,
@@ -3616,7 +3619,9 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
     Pkm.TAUROS_COMBAT_BREED,
     Pkm.TAUROS_BLAZE_BREED,
     Pkm.TAUROS_AQUA_BREED
-  ]
+  ],
+  [Pkm.LUGIA]: [Pkm.SHADOW_LUGIA],
+  [Pkm.MEWTWO]: [Pkm.SHADOW_MEWTWO]
 } as const
 
 export function isRegionalVariant(a: Pkm, b: Pkm): boolean {
