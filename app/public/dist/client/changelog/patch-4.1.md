@@ -1,7 +1,3 @@
----
-patch announcement
----
-
 > September, 9th
 
 # Patch 4.1
