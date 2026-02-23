@@ -557,7 +557,8 @@
 		"FOCUS_PUNCH": "真气拳",
 		"HYPER_BEAM": "破坏光线",
 		"SKILL_SWAP": "特性互换",
-		"JET_PUNCH": "喷射拳"
+		"JET_PUNCH": "喷射拳",
+		"BANEFUL_BUNKER": "碉堡"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -825,6 +826,7 @@
 		"AZELF": "亚克诺姆",
 		"UXIE": "由克希",
 		"MEWTWO": "超梦",
+		"SHADOW_MEWTWO": "黑暗超梦",
 		"KYUREM": "酋雷姆",
 		"RESHIRAM": "莱希拉姆",
 		"ZEKROM": "捷克罗姆",
@@ -1713,7 +1715,9 @@
 		"GREAT_TUSK": "雄伟牙",
 		"FINIZEN": "波普海豚",
 		"PALAFIN": "海豚侠",
-		"PALAFIN_HERO": "海豚侠（全能形态）"
+		"PALAFIN_HERO": "海豚侠（全能形态）",
+		"MAREANIE": "好坏星",
+		"TOXAPEX": "超坏星"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2250,7 +2254,8 @@
 		"FOCUS_PUNCH": "集中精神出拳，在1秒后突进至目标所在的位置，对其造成SPECIAL，数值相当于[500,SP]%的ATK，并将其击退。若目标没有和任何宝可梦相撞，其将被推出场外。",
 		"HYPER_BEAM": "用1秒集中能量，随后发射一道对一条直线上的敌方宝可梦造成[50,100,150,SP]点SPECIAL的强大射线。使用者陷入FATIGUE 5秒。",
 		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。",
-		"JET_PUNCH": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的SPEED。"
+		"JET_PUNCH": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的SPEED。",
+		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并进入PROTECT [2,3]秒。在此期间，攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3115,7 +3120,6 @@
 		"STORM": "将天气设置为STORM。",
 		"NIGHT": "将天气设置为NIGHT。",
 		"WINDY": "将天气设置为WINDY。",
-		"LUGIA": "洛奇亚似乎需要一枚DUSK_STONE……",
 		"LANDORUS": "根据当前最高共鸣是GROUND还是FLYING，将天气设置为SANDSTORM或WINDY。",
 		"THUNDURUS": "根据当前最高共鸣是ELECTRIC还是FLYING，将天气设置为STORM或WINDY。",
 		"TORNADUS": "根据当前最高共鸣是FLYING还是ICE，将天气设置为WINDY或SNOW。",
