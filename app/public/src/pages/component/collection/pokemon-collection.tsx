@@ -8,11 +8,12 @@ import React, {
 } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Grid } from "react-window"
 import { AutoSizer } from "react-virtualized-auto-sizer"
+import { Grid } from "react-window"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import {
   BoosterPriceByRarity,
+  getAllAltForms,
   getEmotionCost,
   PkmAltForms
 } from "../../../../../config"
@@ -355,15 +356,20 @@ export function PokemonCollectionList(props: {
         shinyEmotions: [] as Emotion[]
       }
 
-      const isUnlocked =
-        props.filterState.mode === "pokedex"
-          ? (item?.played ?? 0) > 0
+      const allForms = getAllAltForms(pkm)
+      const isUnlocked = allForms.some((form) => {
+        const formItem = getItem(PkmIndex[form])
+        const formEmotions = formItem?.emotions ?? []
+        const formShinyEmotions = formItem?.shinyEmotions ?? []
+        return props.filterState.mode === "pokedex"
+          ? (formItem?.played ?? 0) > 0
           : props.filterState.mode === "shiny"
-            ? shinyEmotions?.length > 0
-            : emotions?.length > 0 || shinyEmotions?.length > 0
+            ? formShinyEmotions.length > 0
+            : formEmotions.length > 0 || formShinyEmotions.length > 0
+      })
 
       const isNew = lastBoostersOpened.some((booster) =>
-        booster.some((card) => card.name === pkm && card.new)
+        booster.some((card) => allForms.includes(card.name) && card.new)
       )
 
       const isFavorite = favorites.includes(pkm)
