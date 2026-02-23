@@ -1348,7 +1348,7 @@
 		"WONDER_GUARD": "Inflige [30,60,120,SP] SPECIAL e deixa todos os inimigos adjacentes PARALYSIS por 3 segundos",
 		"ELECTRIC_SURGE": "Aumente a SPEED de todos os Pokémon ELECTRIC em [10,SP]",
 		"PSYCHIC_SURGE": "Todos os aliados recebem [40,SP] SHIELD, exceto o lançador",
-		"PAYDAY": "Inflige [30,60,90,SP] SPECIAL. Se o alvo for KO, o jogador recebe [1,2,3] GOLD",
+		"PAYDAY": "Inflige [30,60,90,SP=0.5] SPECIAL. Se o alvo for KO, o jogador recebe [1,2,3] GOLD",
 		"BEAT_UP": "Summon [1,2,3] Houndour ([100,SP]% HP, sem itens)",
 		"BLUE_FLARE": "Inflige [50,SP] SPECIAL + 10 por sinergia FIRE",
 		"FUSION_BOLT": "Inflige [50,SP] SPECIAL + 10 por sinergia ELECTRIC",

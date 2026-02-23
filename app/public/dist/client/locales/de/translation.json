@@ -1641,7 +1641,7 @@
 		"WONDER_GUARD": "Verursacht [30,60,120,SP] SPECIAL und paralysiert alle angrenzenden Feinde für 3 Sekunden",
 		"ELECTRIC_SURGE": "Erhöhe SPEED aller ELECTRIC Pokémon um [10,SP]",
 		"PSYCHIC_SURGE": "Erhöht die SHIELD aller PSYCHIC Pokémon um [40,SP], außer dem Zaubernden",
-		"PAYDAY": "Angebote [30,60,90,SP] SPECIAL. Wenn das Ziel KO ist, erhält der Spieler [1,2,3] Gold",
+		"PAYDAY": "Angebote [30,60,90,SP=0.5] SPECIAL. Wenn das Ziel KO ist, erhält der Spieler [1,2,3] Gold",
 		"PICKUP": "Fügt [30,60,120,SP] SPECIAL zu und stiehlt dem Ziel einen Gegenstand. Wenn kein Gegenstand vorhanden ist, stiehlt [1,2,3] GOLD von seinem Besitzer.",
 		"BEAT_UP": "[1,2,3] Hunduster beschwören ([100,SP]% HP, keine Gegenstände)",
 		"BLUE_FLARE": "Verursacht [50,SP] SPECIAL + [10,SP] pro FIRE synergie",

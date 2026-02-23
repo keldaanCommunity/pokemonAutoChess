@@ -1002,7 +1002,7 @@
 		"RAZOR_WIND": "Breng [20,40,80,SP] SPECIAL toe aan het doelwit",
 		"WONDER_GUARD": "Breng [30,60,120,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor 3 seconden",
 		"ELECTRIC_SURGE": "Verhoog SPEED van alle ELECTRIC pokemons met [10,SP]",
-		"PAYDAY": "Aanbiedingen [30,60,90,SP] SPECIAL. Als het doelwit KO is, ontvangt de speler [1,2,3] goud",
+		"PAYDAY": "Aanbiedingen [30,60,90,SP=0.5] SPECIAL. Als het doelwit KO is, ontvangt de speler [1,2,3] goud",
 		"BEAT_UP": "Roep [1,2,3] Houndour op ([100,SP]% HP, geen items)",
 		"BLUE_FLARE": "Veroorzaakt [50,SP] SPECIAL + 10 per fase van FIRE synergie",
 		"FUSION_BOLT": "Zorgt voor [50,SP] SPECIAL + 10 per fase van ELECTRIC synergie",
