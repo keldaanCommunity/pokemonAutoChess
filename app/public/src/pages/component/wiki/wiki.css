@@ -36,9 +36,8 @@
 
 #wiki-page > .react-tabs > .react-tabs__tab-panel {
   height: 75vh;
-  padding: 0.5em 0 40px 0;
+  padding: 0.5em 0 0 0;
   overflow-y: auto;
-  scrollbar-gutter: stable;
 }
 
 #wiki-page .pokemon-name {
