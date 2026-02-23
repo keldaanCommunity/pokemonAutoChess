@@ -3,6 +3,8 @@
 - Finizen
 - Palafin
 - Palafin Hero
+- Mareanie
+- Toxapex
 - Shadow Mewtwo
 
 # Changes to Synergies

@@ -11606,6 +11606,38 @@ export class TauntStrategy extends AbilityStrategy {
   }
 }
 
+export class BanefulBunkerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const duration = [2000, 3000][pokemon.stars - 1] ?? 3000
+    pokemon.status.triggerProtect(duration)
+    pokemon.effects.add(EffectEnum.BANEFUL_BUNKER)
+    pokemon.commands.push(
+      new DelayedCommand(
+        () => pokemon.effects.delete(EffectEnum.BANEFUL_BUNKER),
+        duration
+      )
+    )
+
+    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    cells.forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.setTarget(pokemon)
+        pokemon.broadcastAbility({
+          skill: "TAUNT_HIT",
+          targetX: cell.value.positionX,
+          targetY: cell.value.positionY
+        })
+      }
+    })
+  }
+}
+
 export class BulkUpStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16765,7 +16797,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
   [Ability.HYPER_BEAM]: new HyperBeamStrategy(),
   [Ability.SKILL_SWAP]: new SkillSwapStrategy(),
-  [Ability.JET_PUNCH]: new JetPunchStrategy()
+  [Ability.JET_PUNCH]: new JetPunchStrategy(),
+  [Ability.BANEFUL_BUNKER]: new BanefulBunkerStrategy()
 }
 
 export function castAbility(

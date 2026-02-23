@@ -20259,6 +20259,37 @@ export class PalafinHero extends Pokemon {
   skill = Ability.JET_PUNCH
 }
 
+export class Mareanie extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.POISON])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.TOXAPEX
+  hp = 60
+  atk = 6
+  speed = 35
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.BANEFUL_BUNKER
+  additional = true
+}
+
+export class Toxapex extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.POISON])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 120
+  atk = 12
+  speed = 35
+  def = 20
+  speDef = 20
+  maxPP = 100
+  range = 1
+  skill = Ability.BANEFUL_BUNKER
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21421,7 +21452,9 @@ export const PokemonClasses: Record<
   [Pkm.GREAT_TUSK]: GreatTusk,
   [Pkm.FINIZEN]: Finizen,
   [Pkm.PALAFIN]: Palafin,
-  [Pkm.PALAFIN_HERO]: PalafinHero
+  [Pkm.PALAFIN_HERO]: PalafinHero,
+  [Pkm.MAREANIE]: Mareanie,
+  [Pkm.TOXAPEX]: Toxapex
 }
 
 // declare all the classes in colyseus schema TypeRegistry
