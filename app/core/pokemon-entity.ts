@@ -992,6 +992,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.addDefense(-2, target, 0, false)
     }
 
+    if (target.effects.has(EffectEnum.BANEFUL_BUNKER)) {
+      const damage = [10, 20, 30][target.stars - 1] ?? 30
+      this.handleSpecialDamage(damage, board, AttackType.SPECIAL, target, false)
+      this.status.triggerPoison(3000, this, target)
+    }
+
     this.getEffects(OnAttackEffect).forEach((effect) => {
       effect.apply({
         pokemon: this,

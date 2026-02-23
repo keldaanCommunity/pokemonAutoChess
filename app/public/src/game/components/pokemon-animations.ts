@@ -7850,5 +7850,18 @@ export const PokemonAnimations: {
     ability: AnimationType.Attack,
     emote: AnimationType.SpAttack,
     attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.MAREANIE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE
+  },
+  [Pkm.TOXAPEX]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE,
+    shinyUnavailable: true
   }
 }

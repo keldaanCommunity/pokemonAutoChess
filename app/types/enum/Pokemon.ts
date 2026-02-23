@@ -589,6 +589,7 @@ export enum Pkm {
   MANTINE = "MANTINE",
   MANTYKE = "MANTYKE",
   MARACTUS = "MARACTUS",
+  MAREANIE = "MAREANIE",
   MAREEP = "MAREEP",
   MARILL = "MARILL",
   MAROWAK = "MAROWAK",
@@ -998,6 +999,7 @@ export enum Pkm {
   TORTERRA = "TORTERRA",
   TOTODILE = "TOTODILE",
   //TOUCANNON = "TOUCANNON",
+  TOXAPEX = "TOXAPEX",
   TOXEL = "TOXEL",
   TOXICROAK = "TOXICROAK",
   TOXTRICITY = "TOXTRICITY",
@@ -2099,8 +2101,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LYCANROC_NIGHT]: "0745-0001",
   [Pkm.WISHIWASHI]: "0746",
   [Pkm.WISHIWASHI_SCHOOL]: "0746-0001",
-  //[Pkm.MAREANIE]: "0747",
-  //[Pkm.TOXAPEX]: "0748",
+  [Pkm.MAREANIE]: "0747",
+  [Pkm.TOXAPEX]: "0748",
   [Pkm.MUDBRAY]: "0749",
   [Pkm.MUDSDALE]: "0750",
   [Pkm.DEWPIDER]: "0751",
@@ -3586,7 +3588,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.GREAT_TUSK]: Pkm.GREAT_TUSK,
   [Pkm.FINIZEN]: Pkm.FINIZEN,
   [Pkm.PALAFIN]: Pkm.FINIZEN,
-  [Pkm.PALAFIN_HERO]: Pkm.FINIZEN
+  [Pkm.PALAFIN_HERO]: Pkm.FINIZEN,
+  [Pkm.MAREANIE]: Pkm.MAREANIE,
+  [Pkm.TOXAPEX]: Pkm.MAREANIE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
