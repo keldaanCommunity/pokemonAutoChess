@@ -3,6 +3,7 @@
 - Finizen
 - Palafin
 - Palafin Hero
+- Shadow Mewtwo
 
 # Changes to Synergies
 
@@ -36,6 +37,7 @@
 - Magnet Pull (Meltan) can no longer be casted by Metronome. Rarity of attracted mon now follows your current player level rarity odds.
 - Buff Glaive Rush (Frigibax): enemies hit now also get ARMOR_BREAK for 6 seconds
 - New passive for Fletchlinder line: drops embers on the ground when flying away.
+- Shadow Lugia is now a regional variant of Lugia in Dark regions
 
 # Changes to Items
 
