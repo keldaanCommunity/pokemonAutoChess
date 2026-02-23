@@ -11614,7 +11614,7 @@ export class BanefulBunkerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const duration = [2000, 3000][pokemon.stars - 1] ?? 3000
+    const duration = 2000
     pokemon.status.triggerProtect(duration)
     pokemon.effects.add(EffectEnum.BANEFUL_BUNKER)
     pokemon.commands.push(
