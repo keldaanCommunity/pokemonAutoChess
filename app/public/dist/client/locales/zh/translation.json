@@ -2092,7 +2092,7 @@
 		"ENTRAINMENT": "用神奇的节奏跳舞，恢复[10,SP]点PP，并强迫目标模仿使用者，使其招式被替换为找伙伴。若目标的招式已经被替换，则选取附近的其他敌方宝可梦。",
 		"OCTAZOOKA": "发射一枚炮弹造成SPECIAL，数值相当于使用者[300,SP]%的ATK。炮弹会在落点留下一团墨水云，使其中的宝可梦陷入BLINDED 4秒。",
 		"PSYCHO_SHIFT": "交换目标和最远的敌方宝可梦的位置，对两者均造成[60,SP]点SPECIAL。",
-		"GLAIVE_RUSH": "有勇无谋的舍身突击，突进至敌方后排，对与使用者处于同一纵列上的所有敌方宝可梦造成[50,100,200,SP]点SPECIAL，然后自身陷入ARMOR_BREAK 6秒。",
+		"GLAIVE_RUSH": "有勇无谋的舍身突击，突进至敌方后排，攻击与使用者处于同一纵列上的所有敌方宝可梦。使用者和被击中的敌方宝可梦陷入ARMOR_BREAK 6秒，然后对被击中的敌方宝可梦造成[50,100,200,SP]点SPECIAL。",
 		"FOUL_PLAY": "对目标造成SPECIAL，数值相当于目标[200,400,600,SP]%的ATK。",
 		"DOUBLE_IRON_BASH": "以胸口的螺帽为中心旋转，并连续两次挥动手臂打击目标，每次造成PHYSICAL，数值相当于[150,SP]%的ATK。目标陷入FLINCH 3秒。",
 		"STONE_EDGE": "使用者陷入SILENCE [5,8]秒，并提升2点RANGE和[20,SP]点CRIT_CHANCE，且每次攻击额外造成PHYSICAL，数值相当于使用者[100,SP]%的DEF。",
@@ -2124,7 +2124,7 @@
 		"POWER_HUG": "对目标造成[40,80,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS 3秒。",
 		"MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,30,40,SP]点SPECIAL，并使他们陷入POISONNED 4秒。",
 		"METAL_CLAW": "对目标造成[10,20,40,SP]点TRUE，并提升使用者[2,4,6,SP]点ATK。",
-		"FIRESTARTER": "提升[10,20,40,SP]点SPEED，并飞到最远的敌方宝可梦的位置，沿途洒下烟灰，造成[20,40,80,SP]点SPECIAL。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
+		"FIRESTARTER": "提升[10,20,40,SP]点SPEED，并飞到最远的敌方宝可梦的位置，沿途洒下烟灰，造成[20,40,80,SP]点SPECIAL。",
 		"BONE_ARMOR": "飞至最弱的敌方宝可梦的位置，对其造成[20,40,80,SP]点SPECIAL，自身恢复等量HP。若目标因此倒下，收集其骸骨来制造盔甲，从而提升使用者[4,8,12]点DEF和SPE_DEF。",
 		"RAGE": "使用者陷入RAGE 3秒，且每失去10%的最大HP，便提升[10,SP]%的基础ATK。",
 		"BRICK_BREAK": "对目标造成TRUE，数值相当于[150,SP]%的ATK。使目标失去PROTECT和魔法镜的保护。目标陷入ARMOR_BREAK 4秒。",
@@ -3256,7 +3256,8 @@
 		"TADBULB": "每当受到50点伤害或在战斗开始时被LIGHT共鸣的聚光灯照射，便会对ADJACENT敌方宝可梦造成10点SPECIAL并将他们击退（每3秒至多触发一次）。首次触发此效果时还会进入增压状态，提升20点SPEED并获得30点SHIELD和ELECTRIC_FIELD。",
 		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。",
 		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD",
-		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL"
+		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
+		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -4639,5 +4640,18 @@
 		"winrate": "胜率",
 		"popularity": "人气",
 		"count": "计数"
+	},
+	"notification": {
+		"level_up_title": "等级提升！",
+		"level_up_message": "恭喜！\n你升到了{{level}}级，获得了一包补充包！",
+		"new_title_title": "新头衔解锁！",
+		"new_title_message": "你解锁了一个新的头衔：\n{{title}}——{{description}}",
+		"elo_rank_change_title": "段位变更！",
+		"elo_rank_change_message": "你的段位现在是：\n{{rank}}",
+		"victory_road_finished_title": "胜利之路已完成！",
+		"victory_road_finished_message": "恭喜！\n你完成了胜利之路，你的名次是：{{place}}！",
+		"next": "下一条",
+		"close": "关闭",
+		"dismiss_all": "全部关闭"
 	}
 }
