@@ -556,7 +556,8 @@
 		"TWISTER": "龙卷风",
 		"FOCUS_PUNCH": "真气拳",
 		"HYPER_BEAM": "破坏光线",
-		"SKILL_SWAP": "特性互换"
+		"SKILL_SWAP": "特性互换",
+		"JET_PUNCH": "喷射拳"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1709,7 +1710,10 @@
 		"DUBWOOL": "毛毛角羊",
 		"YAMPER": "来电汪",
 		"BOLTUND": "逐电犬",
-		"GREAT_TUSK": "雄伟牙"
+		"GREAT_TUSK": "雄伟牙",
+		"FINIZEN": "波普海豚",
+		"PALAFIN": "海豚侠",
+		"PALAFIN_HERO": "海豚侠（全能形态）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2027,7 +2031,7 @@
 		"SPRINGTIDE_STORM": "用交织着爱与恨的烈风攻击一条直线上的敌方宝可梦，对他们造成[75,SP]点SPECIAL并使他们陷入CHARM 2秒。",
 		"AURA_WHEEL": "对目标造成[60,SP]点SPECIAL，并提升使用者10点SPEED，且在满腹和空腹状态之间切换。",
 		"LICK": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入CONFUSION和PARALYSIS 3秒。",
-		"FURY_SWIPES": "在1秒内连续发起[5,SP]次快速攻击，每次造成PHYSICAL，数值相当于100%的ATK。若目标在此期间已经倒下，则每次剩余击中都会恢复 20 PP。",
+		"FURY_SWIPES": "在1秒内连续发起[5,SP]次快速攻击，每次造成PHYSICAL，数值相当于100%的ATK。若目标在此期间已经倒下，每有一次尚未发起的攻击，便恢复20点PP。",
 		"TICKLE": "降低最近的[1,2]个目标[3,SP]点ATK和DEF。",
 		"AROMATHERAPY": "为ADJACENT我方宝可梦恢复[20,40,80,SP]点HP，并移除他们的负面状态。",
 		"DETECT": "使ADJACENT我方宝可梦获得PROTECT，时长为[0.5,SP,ND=1]秒乘以2格半径内敌方宝可梦的数量。",
@@ -2245,7 +2249,8 @@
 		"TWISTER": "兴起龙卷风，对ADJACENT敌方宝可梦造成[25,50,100,SP]点SPECIAL，并将他们向随机方向击退[1,2,3]格。ADJACENT我方FLYING宝可梦乘风飞离，触发一次共鸣效果。",
 		"FOCUS_PUNCH": "集中精神出拳，在1秒后突进至目标所在的位置，对其造成SPECIAL，数值相当于[500,SP]%的ATK，并将其击退。若目标没有和任何宝可梦相撞，其将被推出场外。",
 		"HYPER_BEAM": "用1秒集中能量，随后发射一道对一条直线上的敌方宝可梦造成[50,100,150,SP]点SPECIAL的强大射线。使用者陷入FATIGUE 5秒。",
-		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。"
+		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。",
+		"JET_PUNCH": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的SPEED。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2469,10 +2474,10 @@
 		"LIGHT_PULSE": "除之前等级的效果外，每秒还恢复8点PP。",
 		"ETERNAL_LIGHT": "除之前等级的效果外，还获得RUNE_PROTECT 8秒，并提升50%的DEF和SPE_DEF。",
 		"MAX_ILLUMINATION": "除之前等级的效果外，还获得100点SHIELD和RESURRECTION。",
-		"QUICK_FEET": "WILD Pokémon 获得 20点SPEED 速度，现在可以在每个阶段的商店中找到。（8% 基本几率 + 机上每个 WILD STAR +0.5%）",
+		"QUICK_FEET": "WILD宝可梦提升20点SPEED，且可以在任意轮次中出现在商店中（概率为基础值8%，场上每有一颗属于WILD宝可梦的STAR加0.5%）。",
 		"RUN_AWAY": "提升40点SPEED。",
-		"HUSTLE": "提升40%的ATK和40点SPEED。",
-		"BERSERK": "旦 HP 低于 30%，获得 30 SHIELD 并将 ATK 和 SPEED 增益加倍，持续 3 秒。",
+		"HUSTLE": "提升40%的基础ATK和40点SPEED。",
+		"BERSERK": "每轮对战中HP首次低于最大值的30%时，获得30点SHIELD，且上述ATK和SPEED增幅翻倍，持续3秒。",
 		"FLUID": "每有一种不同的激活共鸣，所有我方宝可梦提升1点SPEED和3点HP。",
 		"SHAPELESS": "每有一种不同的激活共鸣，所有我方宝可梦提升3点SPEED和6点HP。",
 		"ETHEREAL": "每有一种不同的激活共鸣，所有我方宝可梦提升6点SPEED和12点HP。",
@@ -3257,7 +3262,8 @@
 		"PINCURCHIN": "受到SPECIAL时，获得ELECTRIC_FIELD。若自身处于ELECTRIC_FIELD，受到近战攻击时会使攻击者陷入PARALYSIS 2秒。",
 		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD",
 		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
-		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。"
+		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
+		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。"	
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3410,7 +3416,7 @@
 		"DRAGON_STARS": "\n当前总星数：{{totalStars}} × STAR",
 		"ELECTRIC_CHARGE": "\n下一节CELL_BATTERY的电量：{{charge}}%",
 		"LIGHT": "LIGHT共鸣会用聚光灯照射战场。战斗开始时处于聚光灯中的我方宝可梦会获得独有增幅。",
-		"WILD": "WILD 神奇宝贝仅在协同作用未激活的 PvE 遭遇阶段中出现（8% 基本几率）。他们的攻击有 [25,LK]% 几率造成伤害，持续 3 秒。{{additionalInfo}}",
+		"WILD": "若共鸣未激活，WILD宝可梦只会在野生对战轮次出现（基础概率为8%）。他们的攻击有[25,LK]%的概率让目标陷入WOUND 3秒。{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\n\n当前发现WILD宝可梦的概率：{{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS宝可梦极为善于适应，自身形状不定。所有我方宝可梦能根据当前具有的不同共鸣种类数提升HP和SPEED。",
 		"GOURMET": "GOURMET宝可梦能够携带CHEF_HAT，成为厨师。厨师会在战斗准备期间制作其专属料理，并喂给ADJACENT我方宝可梦，使其获得多种多样的增益和效果。"
@@ -4573,7 +4579,7 @@
 	"rewards": "奖励",
 	"shiny_chance": "闪光概率",
 	"shiny_magikarp_description": "闪光鲤鱼王被击倒时会掉落10 GOLD",
-	"shiny_pve_description": "通过闪光PvE轮次时可以从3个随机闪光道具中选择一个作为奖励",
+	"shiny_pve_description": "通过闪光野生宝可梦轮次时可以从3个随机闪光道具中选择一个作为奖励",
 	"carousel_description": "在道具轮盘回合，你可以为你的队伍选择道具。轮盘中的道具从可用道具池中随机选择。",
 	"item_pool": "道具池",
 	"town_encounters": "城镇遭遇",
