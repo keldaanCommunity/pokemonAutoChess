@@ -1,8 +1,8 @@
 import { ArraySchema } from "@colyseus/schema"
 import React, { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { List, useDynamicRowHeight } from "react-window"
 import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List, useDynamicRowHeight } from "react-window"
 import { SynergyTriggers } from "../../../../../config"
 import {
   IGameRecord,

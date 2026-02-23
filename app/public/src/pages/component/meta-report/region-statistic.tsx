@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next"
 import { RegionDetails } from "../../../../../config"
 import { IRegionStatistic } from "../../../../../models/mongo-models/regions-statistic"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import PokemonPortrait from "../pokemon-portrait"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonPortrait from "../pokemon-portrait"
 
 export default function RegionStatistic(props: {
   region: IRegionStatistic

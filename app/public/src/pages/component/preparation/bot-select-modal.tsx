@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Grid } from "react-window"
 import { AutoSizer } from "react-virtualized-auto-sizer"
+import { Grid } from "react-window"
 import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { addBot } from "../../../network"
 import { cc } from "../../utils/jsx"

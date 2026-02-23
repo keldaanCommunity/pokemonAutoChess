@@ -1,7 +1,7 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { List, useDynamicRowHeight } from "react-window"
 import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List, useDynamicRowHeight } from "react-window"
 import {
   IHistoryEntry,
   IPokemonStatV2
@@ -15,8 +15,8 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import PokemonPortrait from "../pokemon-portrait"
 import { HistoryDelta } from "./history-delta"
 import {
-  MultiLineHistoryChart,
-  type HistorySeries
+  type HistorySeries,
+  MultiLineHistoryChart
 } from "./multi-line-history-chart"
 import "./pokemon-statistic.css"
 

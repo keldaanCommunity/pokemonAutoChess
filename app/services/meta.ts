@@ -1,14 +1,14 @@
+import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
 import ItemsStatistic, {
   IItemsStatisticV2
 } from "../models/mongo-models/items-statistic-v2"
+import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
 import PokemonsStatistics, {
   IPokemonsStatisticV2
 } from "../models/mongo-models/pokemons-statistic-v2"
 import RegionStatistic, {
   IRegionStatistic
 } from "../models/mongo-models/regions-statistic"
-import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
-import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
 import ReportMetadata, {
   IReportMetadata
 } from "../models/mongo-models/report-metadata"

@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next"
 import { IMetaV2 } from "../../../../../models/mongo-models/meta-v2"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import {
   Item,
-  ItemRecipe,
-  ItemComponents
+  ItemComponents,
+  ItemRecipe
 } from "../../../../../types/enum/Item"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import { EloBadge } from "../profile/elo-badge"

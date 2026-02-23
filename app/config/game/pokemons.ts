@@ -425,5 +425,7 @@ export function getBaseAltForm(pkm: Pkm): Pkm {
 
 export function getAllAltForms(pkm: Pkm): Pkm[] {
   const base = getBaseAltForm(pkm)
-  return base in PkmAltFormsByPkm ? [base, ...(PkmAltFormsByPkm[base] as Pkm[])] : [pkm]
+  return base in PkmAltFormsByPkm
+    ? [base, ...(PkmAltFormsByPkm[base] as Pkm[])]
+    : [pkm]
 }

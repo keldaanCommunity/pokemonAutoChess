@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement } from "react"
-import { List } from "react-window"
 import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List } from "react-window"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo

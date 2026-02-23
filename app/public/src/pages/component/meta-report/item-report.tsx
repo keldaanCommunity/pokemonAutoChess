@@ -1,8 +1,8 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { List, useDynamicRowHeight } from "react-window"
 import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List, useDynamicRowHeight } from "react-window"
 import { EloRankThreshold } from "../../../../../config"
 import {
   fetchMetaItems,
