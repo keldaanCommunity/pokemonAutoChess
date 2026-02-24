@@ -57,3 +57,4 @@
 - New Scribble: The Chosen Ones
 - New Town Encounter: Kingambit
 - Add 15-day history tracking to meta reports with multi-line trends visualization
+- Added a key shortcut to open the wiki and the team planner
