@@ -8,6 +8,7 @@ import {
   estimateElo,
   getMaxItemComponents,
   getNbComponentsOnBoard,
+  getNbScarvesOnBoard,
   getPowerEvaluation,
   getPowerScore,
   MAX_BOTS_STAGE,
@@ -15,11 +16,17 @@ import {
   validateBoard
 } from "../../../../../core/bot-logic"
 import {
+  computeSynergies,
+  getSynergyStep
+} from "../../../../../models/colyseus-models/synergies"
+import {
   IBot,
   IDetailledPokemon
 } from "../../../../../models/mongo-models/bot-v2"
+import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PkmWithCustom, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
@@ -178,6 +185,26 @@ export default function BotBuilder() {
     () => bot.steps[currentStage]?.board ?? [],
     [bot, currentStage]
   )
+
+  const synergies = useMemo(
+    () =>
+      computeSynergies(
+        board.map((p) => {
+          const pkm = PokemonFactory.createPokemonFromName(p.name, {
+            emotion: p.emotion,
+            shiny: p.shiny
+          })
+          pkm.positionX = p.x
+          pkm.positionY = p.y
+          p.items.forEach((item) => {
+            pkm.items.add(item)
+          })
+          return pkm
+        })
+      ),
+    [board]
+  )
+
   const nbComponentsOnBoard = useMemo(
     () => getNbComponentsOnBoard(board),
     [board]
@@ -185,6 +212,11 @@ export default function BotBuilder() {
   const nbMaxComponentsOnBoard = useMemo(
     () => getMaxItemComponents(currentStage),
     [currentStage]
+  )
+  const nbScarvesOnBoard = useMemo(() => getNbScarvesOnBoard(board), [board])
+  const nbMaxScarvesOnBoard = useMemo(
+    () => getSynergyStep(synergies, Synergy.NORMAL),
+    [board]
   )
   const powerScore = useMemo(() => getPowerScore(board), [board])
   const powerEvaluation = useMemo(
@@ -195,7 +227,7 @@ export default function BotBuilder() {
   useEffect(() => {
     setViolation(undefined)
     try {
-      validateBoard(board, currentStage)
+      validateBoard(board, currentStage, synergies)
     } catch (err: any) {
       if (err instanceof Error) {
         setViolation(err.message)
@@ -265,6 +297,15 @@ export default function BotBuilder() {
           {t("item_components")}: {nbComponentsOnBoard} /{" "}
           {nbMaxComponentsOnBoard}
         </span>
+        {nbMaxScarvesOnBoard > 0 && (
+          <span
+            className={
+              nbScarvesOnBoard > nbMaxScarvesOnBoard ? "invalid" : "valid"
+            }
+          >
+            {t("scarves")}: {nbScarvesOnBoard} / {nbMaxScarvesOnBoard}
+          </span>
+        )}
         <span>
           {t("board_power")}: {powerScore}
         </span>

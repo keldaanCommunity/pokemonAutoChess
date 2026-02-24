@@ -1,8 +1,18 @@
 import { AdditionalPicksStages, PortalCarouselStages } from "../config"
+import {
+  computeSynergies,
+  getSynergyStep
+} from "../models/colyseus-models/synergies"
 import { IBot, IDetailledPokemon, IStep } from "../models/mongo-models/bot-v2"
+import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { Rarity } from "../types/enum/Game"
-import { CraftableItems, Item, ItemComponents } from "../types/enum/Item"
+import {
+  CraftableItems,
+  Item,
+  ItemComponents,
+  Scarves
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
   NonPkm,
@@ -11,6 +21,7 @@ import {
   PkmFamily,
   PkmIndex
 } from "../types/enum/Pokemon"
+import { Synergy } from "../types/enum/Synergy"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
 
@@ -154,16 +165,26 @@ export function getMaxItemComponents(stage: number): number {
 export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
   return board
     .flatMap((pkm) => pkm.items)
-    .reduce(
-      (nbComponents: number, item: Item) =>
-        nbComponents +
-        (CraftableItems.includes(item)
-          ? 2
-          : ItemComponents.includes(item)
-            ? 1
-            : 0),
-      0
-    )
+    .reduce((total: number, item: Item) => {
+      let nbComponents = 0
+      if (Scarves.includes(item))
+        nbComponents = item === Item.NULLIFY_BANDANNA ? 0 : 1
+      else if (CraftableItems.includes(item)) nbComponents = 2
+      else if (ItemComponents.includes(item)) nbComponents = 1
+      return total + nbComponents
+    }, 0)
+}
+
+export function getNbScarvesOnBoard(board: IDetailledPokemon[]): number {
+  return board
+    .flatMap((pkm) => pkm.items)
+    .reduce((total: number, item: Item) => {
+      let nbScarves = 0
+      if (Scarves.includes(item))
+        nbScarves = item === Item.NULLIFY_BANDANNA ? 2 : 1
+      else if (item === Item.SILK_SCARF) nbScarves = 1
+      return total + nbScarves
+    }, 0)
 }
 
 export function rewriteBotRoundsRequiredto1(bot: IBot) {
@@ -205,7 +226,22 @@ export function validateBot(bot: IBot): string[] {
   const errors: string[] = []
   for (let stage = 0; stage < bot.steps.length; stage++) {
     try {
-      validateBoard(bot.steps[stage].board, stage)
+      const board = bot.steps[stage].board
+      const synergies = computeSynergies(
+        board.map((p) => {
+          const pkm = PokemonFactory.createPokemonFromName(p.name, {
+            emotion: p.emotion,
+            shiny: p.shiny
+          })
+          pkm.positionX = p.x
+          pkm.positionY = p.y
+          p.items.forEach((item) => {
+            pkm.items.add(item)
+          })
+          return pkm
+        })
+      )
+      validateBoard(bot.steps[stage].board, stage, synergies)
     } catch (err) {
       errors.push(`Stage ${stage}: ${err}`)
     }
@@ -213,13 +249,20 @@ export function validateBot(bot: IBot): string[] {
   return errors
 }
 
-export function validateBoard(board: IDetailledPokemon[], stage: number) {
+export function validateBoard(
+  board: IDetailledPokemon[],
+  stage: number,
+  synergies: Map<Synergy, number>
+): void {
   const team = board
     .filter((p) => p.y > 0)
     .map((p) => getPokemonData(p.name))
     .filter((p) => p.passive !== Passive.INANIMATE)
   const items = getNbComponentsOnBoard(board)
   const maxItems = getMaxItemComponents(stage)
+
+  const scarves = getNbScarvesOnBoard(board)
+  const maxScarves = getSynergyStep(synergies, Synergy.NORMAL)
 
   const duos = Object.values(PkmDuos)
 
@@ -307,5 +350,8 @@ export function validateBoard(board: IDetailledPokemon[], stage: number) {
   }
   if (items > maxItems) {
     throw new Error(`Too many item components are used at this stage`)
+  }
+  if (scarves > maxScarves) {
+    throw new Error(`Too many silk scarves are used in this team`)
   }
 }

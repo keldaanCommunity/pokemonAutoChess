@@ -14,6 +14,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../../utils/board"
 import { values } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import { rooms } from "../../../network"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
 import ItemPicker from "./item-picker"
@@ -21,7 +22,6 @@ import PokemonPicker from "./pokemon-picker"
 import SelectedEntity from "./selected-entity"
 import TeamEditor from "./team-editor"
 import "./team-builder.css"
-import { rooms } from "../../../network"
 
 export default function TeamBuilder(props: {
   bot?: IBot
