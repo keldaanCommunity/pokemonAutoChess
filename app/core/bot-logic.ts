@@ -11,7 +11,8 @@ import {
   CraftableItems,
   Item,
   ItemComponents,
-  Scarves
+  Scarves,
+  Tools
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
@@ -22,6 +23,7 @@ import {
   PkmIndex
 } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
+import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
 
@@ -187,6 +189,11 @@ export function getNbScarvesOnBoard(board: IDetailledPokemon[]): number {
     }, 0)
 }
 
+export function getNbToolsOnBoard(board: IDetailledPokemon[]): number {
+  return board.flatMap((pkm) => pkm.items).filter((item) => isIn(Tools, item))
+    .length
+}
+
 export function rewriteBotRoundsRequiredto1(bot: IBot) {
   /*
   Compatibility layer for old bots that use roundsRequired > 1 to skip some stages
@@ -263,6 +270,9 @@ export function validateBoard(
 
   const scarves = getNbScarvesOnBoard(board)
   const maxScarves = getSynergyStep(synergies, Synergy.NORMAL)
+
+  const nbToolsOnBoard = getNbToolsOnBoard(board)
+  const nbMaxToolsOnBoard = getSynergyStep(synergies, Synergy.ARTIFICIAL)
 
   const duos = Object.values(PkmDuos)
 
@@ -353,5 +363,8 @@ export function validateBoard(
   }
   if (scarves > maxScarves) {
     throw new Error(`Too many silk scarves are used in this team`)
+  }
+  if (nbToolsOnBoard > nbMaxToolsOnBoard) {
+    throw new Error(`Too many tools are used in this team`)
   }
 }

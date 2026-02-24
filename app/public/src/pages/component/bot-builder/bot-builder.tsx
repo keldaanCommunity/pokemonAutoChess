@@ -9,6 +9,7 @@ import {
   getMaxItemComponents,
   getNbComponentsOnBoard,
   getNbScarvesOnBoard,
+  getNbToolsOnBoard,
   getPowerEvaluation,
   getPowerScore,
   MAX_BOTS_STAGE,
@@ -218,6 +219,11 @@ export default function BotBuilder() {
     () => getSynergyStep(synergies, Synergy.NORMAL),
     [board]
   )
+  const nbToolsOnBoard = useMemo(() => getNbToolsOnBoard(board), [board])
+  const nbMaxToolsOnBoard = useMemo(
+    () => getSynergyStep(synergies, Synergy.ARTIFICIAL),
+    [board]
+  )
   const powerScore = useMemo(() => getPowerScore(board), [board])
   const powerEvaluation = useMemo(
     () => getPowerEvaluation(powerScore, currentStage),
@@ -297,13 +303,20 @@ export default function BotBuilder() {
           {t("item_components")}: {nbComponentsOnBoard} /{" "}
           {nbMaxComponentsOnBoard}
         </span>
-        {nbMaxScarvesOnBoard > 0 && (
+        {(nbScarvesOnBoard > 0 || nbMaxScarvesOnBoard > 0) && (
           <span
             className={
               nbScarvesOnBoard > nbMaxScarvesOnBoard ? "invalid" : "valid"
             }
           >
             {t("scarves")}: {nbScarvesOnBoard} / {nbMaxScarvesOnBoard}
+          </span>
+        )}
+        {(nbToolsOnBoard > 0 || nbMaxToolsOnBoard > 0) && (
+          <span
+            className={nbToolsOnBoard > nbMaxToolsOnBoard ? "invalid" : "valid"}
+          >
+            {t("tools")}: {nbToolsOnBoard} / {nbMaxToolsOnBoard}
           </span>
         )}
         <span>
