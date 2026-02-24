@@ -2255,7 +2255,7 @@
 		"HYPER_BEAM": "Concentrates its energy for 1 second then fires a powerful beam that deals [50,100,150,SP] SPECIAL to enemies in a line. Then user gets FATIGUE for 5 seconds.",
 		"SKILL_SWAP": "Copy the ability and max PP of the target, then cast it immediately. The copied ability persists between fights and can be reset by benching the user.",
 		"JET_PUNCH": "Deal [100,SP]% of user's SPEED as SPECIAL to the target.",
-		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, attackers take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds."
+		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
