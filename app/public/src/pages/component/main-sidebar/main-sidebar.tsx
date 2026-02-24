@@ -11,6 +11,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from "../../../hooks"
+import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
@@ -56,6 +57,7 @@ export function MainSidebar(props: MainSidebarProps) {
   const { t } = useTranslation()
   const profile = useAppSelector((state) => state.network.profile)
   const profileLevel = profile?.level ?? 0
+  const [preferences] = usePreferences()
 
   const { isNewPatch, updateVersionChecked } = usePatchVersion()
 
@@ -83,6 +85,31 @@ export function MainSidebar(props: MainSidebarProps) {
       }
     }
   }, [])
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      const key = e.key.toUpperCase()
+      const keybindings = preferences.keybindings
+
+      if (key === keybindings.wiki) {
+        e.preventDefault()
+        setModal((current) => (current === "wiki" ? undefined : "wiki"))
+      } else if (
+        key === keybindings.team_planner &&
+        profileLevel >= GADGETS.TEAM_PLANNER.levelRequired
+      ) {
+        e.preventDefault()
+        setModal((current) =>
+          current === "team-builder" ? undefined : "team-builder"
+        )
+      }
+    }
+
+    window.addEventListener("keydown", handleKeydown)
+    return () => {
+      window.removeEventListener("keydown", handleKeydown)
+    }
+  }, [preferences.keybindings, profileLevel])
 
   const player = useAppSelector(selectConnectedPlayer)
   const playersAlive = useAppSelector(

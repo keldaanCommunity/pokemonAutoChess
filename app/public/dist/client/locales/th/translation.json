@@ -1388,12 +1388,14 @@
 	"toggle_locked": "สลับการล็อค",
 	"key": "ปุ่ม",
 	"action": "ทำ",
-	"key_desc_sell": "ขายโปเกมอนที่เมาส์ชี้",
-	"key_desc_buy_xp": "ซื้อ Exp.",
-	"key_desc_refresh": "เปลี่ยนตัวในร้านค้า",
-	"key_desc_avatar_anim": "เล่นอนิเมชั่นภาพโปรไฟล์",
-	"key_desc_avatar_emotes": "เปิดดูอีโมท",
-	"key_desc_avatar_show_emote": "ใช้งานอีโมท",
+	"key_description": {
+		"sell": "ขายโปเกมอนที่เมาส์ชี้",
+		"buy_xp": "ซื้อ Exp.",
+		"refresh": "เปลี่ยนตัวในร้านค้า",
+		"avatar_anim": "เล่นอนิเมชั่นภาพโปรไฟล์",
+		"avatar_emotes": "เปิดดูอีโมท",
+		"avatar_show_emote": "ใช้งานอีโมท"
+	},
 	"gadgets": "อุปกรณ์เสริม",
 	"gadgets_unlocked": "{{count}}/{{total}} ปลดล็อค : อุปกรณ์เสริม",
 	"gadget": {

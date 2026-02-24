@@ -14,6 +14,8 @@ export type Keybindings = {
   prev_player: string
   next_player: string
   board_return: string
+  wiki: string
+  team_planner: string
 }
 export interface IPreferencesState {
   musicVolume: number
@@ -72,7 +74,9 @@ const defaultPreferences: IPreferencesState = {
     emote: "A",
     prev_player: "PAGE_UP",
     next_player: "PAGE_DOWN",
-    board_return: "HOME"
+    board_return: "HOME",
+    wiki: "W",
+    team_planner: "T"
   }
 }
 

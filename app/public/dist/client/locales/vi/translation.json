@@ -1522,11 +1522,13 @@
 	"game-reconnect-modal-body": "Bạn vừa thoát trận. Bạn có muốn quay trở lại trận đấu vừa nãy?",
 	"key": "Chìa khoá",
 	"action": "Hành động",
-	"key_desc_buy_xp": "Mua kinh nghiệm",
-	"key_desc_refresh": "Làm mới shop",
-	"key_desc_avatar_anim": "Chạy biểu cảm nhân vật",
-	"key_desc_avatar_emotes": "Chuyển đổi menu biểu cảm",
-	"key_desc_avatar_show_emote": "Kích hoạt biểu cảm ",
+	"key_description": {
+		"buy_xp": "Mua kinh nghiệm",
+		"refresh": "Làm mới shop",
+		"avatar_anim": "Chạy biểu cảm nhân vật",
+		"avatar_emotes": "Chuyển đổi menu biểu cảm",
+		"avatar_show_emote": "Kích hoạt biểu cảm "
+	},
 	"gadgets": "Dụng cụ",
 	"gadgets_unlocked": "{{count}}/{{total}} Công cụ đã mở khoá",
 	"gadget": {

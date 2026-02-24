@@ -2514,11 +2514,13 @@
 	"game-reconnect-modal-body": "Você saiu de um jogo em andamento. Deseja se reconectar ao jogo anterior?",
 	"key": "Chave",
 	"action": "Ação",
-	"key_desc_sell": "Vender o Pokémon sinalizado",
-	"key_desc_buy_xp": "Comprar experiência",
-	"key_desc_refresh": "Renovar a loja",
-	"key_desc_avatar_anim": "Mostrar a animação do avatar",
-	"key_desc_avatar_emotes": "Ativar o menú de emotes",
+	"key_description": {
+		"sell": "Vender o Pokémon sinalizado",
+		"buy_xp": "Comprar experiência",
+		"refresh": "Renovar a loja",
+		"avatar_anim": "Mostrar a animação do avatar",
+		"avatar_emotes": "Ativar o menú de emotes"
+	},
 	"gadgets": "Engenhocas",
 	"gadgets_unlocked": "{{count}}/{{total}} Engenhocas disponíveis",
 	"gadget": {
