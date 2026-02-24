@@ -49,7 +49,8 @@ export default function PokemonPicker(props: {
           Pkm.ARCEUS,
           Pkm.PILLAR_WOOD,
           Pkm.PILLAR_IRON,
-          Pkm.PILLAR_CONCRETE
+          Pkm.PILLAR_CONCRETE,
+          Pkm.EGG
         ]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
   )
@@ -141,9 +142,14 @@ function PokemonPickerTab(props: {
   const player = currentPlayer ?? spectatedPlayer // when spectating another lobby, use that spectated player's data for team planner
   const regionalPokemons: Pkm[] = player?.regionalPokemons?.slice() ?? []
 
+  const shouldIncludeNonPkm = props.type === "none"
   const filteredPokemons = useMemo(
     () =>
-      filterPokemonsAccordingToPreferences(props.pokemons, preferences)
+      filterPokemonsAccordingToPreferences(
+        props.pokemons,
+        preferences,
+        shouldIncludeNonPkm
+      )
         .map((p) => getPokemonData(p))
         .filter((p) => (overlap ? p.types.includes(overlap) : true))
         .filter((p) => {
