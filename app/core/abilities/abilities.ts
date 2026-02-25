@@ -16259,6 +16259,111 @@ export class JetPunchStrategy extends AbilityStrategy {
   }
 }
 
+export class ShadowForceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = 60
+    pokemon.index = PkmIndex[Pkm.ORIGIN_GIRATINA]
+    pokemon.skill = Ability.SHADOW_CLAW
+    pokemon.toMovingState()
+    if (pokemon.player) {
+      pokemon.player.pokemonsPlayed.add(Pkm.ORIGIN_GIRATINA)
+    }
+
+    const mostSurroundedCoordinate =
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+
+    if (mostSurroundedCoordinate) {
+      pokemon.moveTo(
+        mostSurroundedCoordinate.x,
+        mostSurroundedCoordinate.y,
+        board,
+        false
+      )
+    }
+
+    pokemon.broadcastAbility({
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      skill: Ability.SHADOW_FORCE
+    })
+
+    const adjacentEnemies = board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map((cell) => cell.value as PokemonEntity)
+
+    for (const enemy of adjacentEnemies) {
+      if (enemy.status.protect) {
+        enemy.status.protect = false
+        enemy.status.protectCooldown = 0
+      }
+      if (enemy.status.reflect) {
+        enemy.status.reflect = false
+        enemy.status.reflectCooldown = 0
+      }
+      if (enemy.status.magicBounce) {
+        enemy.status.magicBounce = false
+        enemy.status.magicBounceCooldown = 0
+      }
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    }
+  }
+}
+
+export class ShadowClawStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const baseDamage = [20, 40, 60][pokemon.stars - 1] ?? 60
+    const enemies = board
+      .getCellsInFront(pokemon, target)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map((cell) => cell.value as PokemonEntity)
+    const orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    pokemon.broadcastAbility({
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      orientation: orientation
+    })
+    const damage = enemies.length === 1 ? baseDamage * 2 : baseDamage
+    let damageDone = 0
+    for (const enemy of enemies) {
+      const report = enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+      damageDone += report.takenDamage
+    }
+    pokemon.handleHeal(damageDone * 0.25, pokemon, 1, crit)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16798,7 +16903,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HYPER_BEAM]: new HyperBeamStrategy(),
   [Ability.SKILL_SWAP]: new SkillSwapStrategy(),
   [Ability.JET_PUNCH]: new JetPunchStrategy(),
-  [Ability.BANEFUL_BUNKER]: new BanefulBunkerStrategy()
+  [Ability.BANEFUL_BUNKER]: new BanefulBunkerStrategy(),
+  [Ability.SHADOW_CLAW]: new ShadowClawStrategy(),
+  [Ability.SHADOW_FORCE]: new ShadowForceStrategy()
 }
 
 export function castAbility(

@@ -4093,7 +4093,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Scratch,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.GHOST_RANGE,
+    attackSprite: AttackSprite.GHOST_MELEE,
     hitSprite: HitSprite.GHOST_HIT
   },
   [Pkm.MELTAN]: {

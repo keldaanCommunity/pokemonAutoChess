@@ -5418,43 +5418,23 @@ export class Giratina extends Pokemon {
   speed = 54
   def = 12
   speDef = 12
-  maxPP = 40
+  maxPP = 70
   range = 1
-  skill = Ability.SHADOW_SNEAK
-  passive = Passive.GIRATINA
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    if (y !== 3) {
-      player.transformPokemon(this, Pkm.ORIGIN_GIRATINA)
-    }
-  }
+  skill = Ability.SHADOW_FORCE
 }
 
 export class OriginGiratina extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.GHOST,
-    Synergy.FLYING
-  ])
+  types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.GHOST])
   rarity = Rarity.LEGENDARY
   stars = 3
-  hp = 200
+  hp = 250
   atk = 32
   speed = 54
-  def = 4
-  speDef = 4
-  maxPP = 40
-  range = 2
-  skill = Ability.SHADOW_SNEAK
-  passive = Passive.GIRATINA
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    if (y === 3) {
-      player.transformPokemon(this, Pkm.GIRATINA)
-    }
-  }
+  def = 12
+  speDef = 12
+  maxPP = 70
+  range = 1
+  skill = Ability.SHADOW_CLAW
 }
 
 export class Zapdos extends Pokemon {

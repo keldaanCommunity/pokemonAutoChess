@@ -2285,6 +2285,17 @@ export const AbilitiesAnimations: {
     })
   },
 
+  [Ability.SHADOW_FORCE]: (args) => {
+    OrientationArray.forEach((orientation) => {
+      projectile({
+        orientation,
+        distance: 1,
+        ability: "SMOKE_BLACK",
+        duration: 1000
+      })(args)
+    })
+  },
+
   [Ability.SNIPE_SHOT]: (args) => {
     const targetAngle = angleBetween(
       [args.positionX, args.positionY],
@@ -2428,6 +2439,23 @@ export const AbilitiesAnimations: {
       onComplete: function () {
         group.destroy(true, true)
       }
+    })
+  },
+
+  [Ability.SHADOW_CLAW]: (args) => {
+    const orientations = [
+      args.orientation,
+      OrientationArray[(OrientationArray.indexOf(args.orientation) + 1) % 8],
+      OrientationArray[(OrientationArray.indexOf(args.orientation) + 7) % 8]
+    ]
+    orientations.forEach((orientation) => {
+      projectile({
+        scale: 2,
+        orientation,
+        distance: 1,
+        duration: 500,
+        ability: "DARK_HARVEST"
+      })(args)
     })
   },
 

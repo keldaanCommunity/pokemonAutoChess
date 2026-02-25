@@ -2883,7 +2883,6 @@
 		"MAGIKARP": "8 Magikarp evolucionan en Gyarados",
 		"FEEBAS": "6 $t(pkm.FEEBAS) evolucionan en $t(pkm.MILOTIC)",
 		"WISHIWASHI": "3 Wishiwashi evolucionan a la forma Banco",
-		"GIRATINA": "Giratina cambia entre su forma alterada y su forma de origen dependiendo de su posición en el tablero.",
 		"MELOETTA": "Meloetta cambia entre su Forma Danza y Forma Lírica dependiendo de su posición en el tablero",
 		"UNOWN": "Unown no puede contener objetos y desaparece después de una pelea o después de lanzar su habilidad.",
 		"GLISCOR": "La primera acumulación de POISONNED cura a $t(pkm.GLISCOR) en lugar de recibir daño.",
