@@ -558,7 +558,9 @@
 		"HYPER_BEAM": "Hyper Beam",
 		"SKILL_SWAP": "Skill Swap",
 		"JET_PUNCH": "Jet Punch",
-		"BANEFUL_BUNKER": "Baneful Bunker"
+		"BANEFUL_BUNKER": "Baneful Bunker",
+		"SHADOW_FORCE": "Shadow Force",
+		"SHADOW_CLAW": "Shadow Claw"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -2255,7 +2257,9 @@
 		"HYPER_BEAM": "Concentrates its energy for 1 second then fires a powerful beam that deals [50,100,150,SP] SPECIAL to enemies in a line. Then user gets FATIGUE for 5 seconds.",
 		"SKILL_SWAP": "Copy the ability and max PP of the target, then cast it immediately. The copied ability persists between fights and can be reset by benching the user.",
 		"JET_PUNCH": "Deal [100,SP]% of user's SPEED as SPECIAL to the target.",
-		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds."
+		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds.",
+		"SHADOW_FORCE": "Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form.",
+		"SHADOW_CLAW": "Slash enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [60,100,140,SP] SPECIAL."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3132,7 +3136,6 @@
 		"MAGIKARP": "8 Magikarp evolve in Gyarados",
 		"FEEBAS": "6 Feebas evolve in Milotic",
 		"WISHIWASHI": "3 Wishiwashi evolve in School Form",
-		"GIRATINA": "Giratina switches between its Altered Forme and Origin Forme depending on its position on the board",
 		"MELOETTA": "Meloetta switches between its Pirouette Forme and Aria Forme depending on its position on the board",
 		"UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability",
 		"GLISCOR": "First stack of POISONNED heals this Pokémon instead of taking damage",

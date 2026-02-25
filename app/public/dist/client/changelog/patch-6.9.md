@@ -40,6 +40,8 @@
 - Buff Glaive Rush (Frigibax): enemies hit now also get ARMOR_BREAK for 6 seconds
 - New passive for Fletchlinder line: drops embers on the ground when flying away.
 - Shadow Lugia is now a regional variant of Lugia in Dark regions
+- Rework Giratina: Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form
+- Rework Origin Giratina: Slash all enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [40,80,120,SP] SPECIAL.
 
 # Changes to Items
 
