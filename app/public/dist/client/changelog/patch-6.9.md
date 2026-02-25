@@ -42,6 +42,7 @@
 - Shadow Lugia is now a regional variant of Lugia in Dark regions
 - Rework Giratina: Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form
 - Rework Origin Giratina: Slash all enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [40,80,120,SP] SPECIAL.
+- Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 
 # Changes to Items
 
