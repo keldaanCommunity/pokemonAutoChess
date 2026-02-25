@@ -3009,7 +3009,7 @@
 		"COIN": "Une vieille pièce rouillée. +1 GOLD une fois obtenue.",
 		"NUGGET": "Une petite pépite d'or. +3 GOLD une fois obtenue.",
 		"BIG_NUGGET": "Une grosse pépite d'or. +10 GOLD une fois obtenue.",
-		"EXCHANGE_TICKET": "Échange un composant d'objet ou un objet fabriqué de votre banc contre un autre aléatoire. Usage unique.",
+		"EXCHANGE_TICKET": "Échange un composant d'objet ou un objet fabriqué de votre banc contre un autre aléatoire. Usage unique, ne fonctionne pas avec les rubans.",
 		"RECYCLE_TICKET": "Recyclez un objet fabriqué sur le banc ou les objets fabriqués tenus par un Pokémon en leurs composants de base. Usage unique.",
 		"TREASURE_BOX": "Vous vous demandez ce qu'il y a à l'intérieur. Il s'ouvrira quand vous aurez 40 HP ou moins.",
 		"AUSPICIOUS_ARMOR": "Une armure mystérieuse pouvant faire évoluer un certain Pokémon. Des vœux de bonne fortune y sont enfermés.",

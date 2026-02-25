@@ -3033,7 +3033,7 @@
 		"COIN": "An old rusty coin. +1 GOLD when obtained.",
 		"NUGGET": "A small gold nugget. +3 GOLD when obtained.",
 		"BIG_NUGGET": "A big gold nugget. +10 GOLD when obtained.",
-		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use.",
+		"EXCHANGE_TICKET": "Exchange an item component or a crafted item on bench for another random one. Single use, does not work with scarves.",
 		"RECYCLE_TICKET": "Recycle a crafted item on bench or the crafted items held by a Pokémon into their base components. Single use.",
 		"TREASURE_BOX": "You wonder what's inside. It will open once you have 40 HP or less.",
 		"AUSPICIOUS_ARMOR": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.",

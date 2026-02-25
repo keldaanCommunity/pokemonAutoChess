@@ -75,6 +75,7 @@ import {
 import {
   ConsumableItems,
   CraftableItems,
+  CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Dishes,
   Item,
@@ -548,7 +549,7 @@ export class OnDragDropCombineCommand extends Command<
         )
       } else if (SynergyStones.includes(exchangedItem)) {
         result = pickRandomIn(SynergyStones.filter((i) => i !== exchangedItem))
-      } else if (CraftableItems.includes(exchangedItem)) {
+      } else if (CraftableItemsNoScarves.includes(exchangedItem)) {
         result = pickRandomIn(
           CraftableNoStonesOrScarves.filter((i) => i !== exchangedItem)
         )
