@@ -1,0 +1,3694 @@
+{
+  "copies_to_upgrade": 3,
+  "max_star_level": 3,
+  "evolution_chains": [
+    {
+      "family_id": "BULBASAUR",
+      "chain": [
+        "BULBASAUR",
+        "IVYSAUR",
+        "VENUSAUR"
+      ]
+    },
+    {
+      "family_id": "CHARMANDER",
+      "chain": [
+        "CHARMANDER",
+        "CHARMELEON",
+        "CHARIZARD"
+      ]
+    },
+    {
+      "family_id": "SQUIRTLE",
+      "chain": [
+        "SQUIRTLE",
+        "WARTORTLE",
+        "BLASTOISE"
+      ]
+    },
+    {
+      "family_id": "CATERPIE",
+      "chain": [
+        "CATERPIE",
+        "METAPOD",
+        "BUTTERFREE"
+      ]
+    },
+    {
+      "family_id": "WEEDLE",
+      "chain": [
+        "WEEDLE",
+        "KAKUNA",
+        "BEEDRILL"
+      ]
+    },
+    {
+      "family_id": "PIDGEY",
+      "chain": [
+        "PIDGEY",
+        "PIDGEOTTO",
+        "PIDGEOT"
+      ]
+    },
+    {
+      "family_id": "RATTATA",
+      "chain": [
+        "RATTATA",
+        "RATICATE"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_RATTATA",
+      "chain": [
+        "ALOLAN_RATTATA",
+        "ALOLAN_RATICATE"
+      ]
+    },
+    {
+      "family_id": "SPEAROW",
+      "chain": [
+        "SPEAROW",
+        "FEAROW"
+      ]
+    },
+    {
+      "family_id": "EKANS",
+      "chain": [
+        "EKANS",
+        "ARBOK"
+      ]
+    },
+    {
+      "family_id": "PICHU",
+      "chain": [
+        "PIKACHU",
+        "PIKACHU_SURFER",
+        "RAICHU",
+        "ALOLAN_RAICHU",
+        "PICHU"
+      ]
+    },
+    {
+      "family_id": "SANDSHREW",
+      "chain": [
+        "SANDSHREW",
+        "SANDSLASH"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_SANDSHREW",
+      "chain": [
+        "ALOLAN_SANDSHREW",
+        "ALOLAN_SANDSLASH"
+      ]
+    },
+    {
+      "family_id": "NIDORANF",
+      "chain": [
+        "NIDORANF",
+        "NIDORINA",
+        "NIDOQUEEN"
+      ]
+    },
+    {
+      "family_id": "NIDORANM",
+      "chain": [
+        "NIDORANM",
+        "NIDORINO",
+        "NIDOKING"
+      ]
+    },
+    {
+      "family_id": "CLEFFA",
+      "chain": [
+        "CLEFAIRY",
+        "CLEFABLE",
+        "CLEFFA"
+      ]
+    },
+    {
+      "family_id": "VULPIX",
+      "chain": [
+        "VULPIX",
+        "NINETALES"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_VULPIX",
+      "chain": [
+        "ALOLAN_VULPIX",
+        "ALOLAN_NINETALES"
+      ]
+    },
+    {
+      "family_id": "IGGLYBUFF",
+      "chain": [
+        "JIGGLYPUFF",
+        "WIGGLYTUFF",
+        "IGGLYBUFF"
+      ]
+    },
+    {
+      "family_id": "ZUBAT",
+      "chain": [
+        "ZUBAT",
+        "GOLBAT",
+        "CROBAT"
+      ]
+    },
+    {
+      "family_id": "ODDISH",
+      "chain": [
+        "ODDISH",
+        "GLOOM",
+        "VILEPLUME"
+      ]
+    },
+    {
+      "family_id": "PARAS",
+      "chain": [
+        "PARAS",
+        "PARASECT"
+      ]
+    },
+    {
+      "family_id": "VENONAT",
+      "chain": [
+        "VENONAT",
+        "VENOMOTH"
+      ]
+    },
+    {
+      "family_id": "DIGLETT",
+      "chain": [
+        "DIGLETT",
+        "DUGTRIO"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_DIGLETT",
+      "chain": [
+        "ALOLAN_DIGLETT",
+        "ALOLAN_DUGTRIO"
+      ]
+    },
+    {
+      "family_id": "MEOWTH",
+      "chain": [
+        "MEOWTH",
+        "PERSIAN"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_MEOWTH",
+      "chain": [
+        "ALOLAN_MEOWTH",
+        "ALOLAN_PERSIAN"
+      ]
+    },
+    {
+      "family_id": "PSYDUCK",
+      "chain": [
+        "PSYDUCK",
+        "GOLDUCK"
+      ]
+    },
+    {
+      "family_id": "MANKEY",
+      "chain": [
+        "MANKEY",
+        "PRIMEAPE",
+        "ANNIHILAPE"
+      ]
+    },
+    {
+      "family_id": "GROWLITHE",
+      "chain": [
+        "GROWLITHE",
+        "ARCANINE"
+      ]
+    },
+    {
+      "family_id": "HISUI_GROWLITHE",
+      "chain": [
+        "HISUI_GROWLITHE",
+        "HISUI_ARCANINE"
+      ]
+    },
+    {
+      "family_id": "POLIWAG",
+      "chain": [
+        "POLIWAG",
+        "POLIWHIRL",
+        "POLIWRATH",
+        "POLITOED"
+      ]
+    },
+    {
+      "family_id": "ABRA",
+      "chain": [
+        "ABRA",
+        "KADABRA",
+        "ALAKAZAM"
+      ]
+    },
+    {
+      "family_id": "MACHOP",
+      "chain": [
+        "MACHOP",
+        "MACHOKE",
+        "MACHAMP"
+      ]
+    },
+    {
+      "family_id": "BELLSPROUT",
+      "chain": [
+        "BELLSPROUT",
+        "WEEPINBELL",
+        "VICTREEBEL"
+      ]
+    },
+    {
+      "family_id": "TENTACOOL",
+      "chain": [
+        "TENTACOOL",
+        "TENTACRUEL"
+      ]
+    },
+    {
+      "family_id": "GEODUDE",
+      "chain": [
+        "GEODUDE",
+        "GRAVELER",
+        "GOLEM"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_GEODUDE",
+      "chain": [
+        "ALOLAN_GEODUDE",
+        "ALOLAN_GRAVELER",
+        "ALOLAN_GOLEM"
+      ]
+    },
+    {
+      "family_id": "PONYTA",
+      "chain": [
+        "PONYTA",
+        "RAPIDASH"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_PONYTA",
+      "chain": [
+        "GALARIAN_PONYTA",
+        "GALARIAN_RAPIDASH"
+      ]
+    },
+    {
+      "family_id": "SLOWPOKE",
+      "chain": [
+        "SLOWPOKE",
+        "SLOWBRO",
+        "SLOWKING"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_SLOWPOKE",
+      "chain": [
+        "GALARIAN_SLOWPOKE",
+        "GALARIAN_SLOWBRO",
+        "GALARIAN_SLOWKING"
+      ]
+    },
+    {
+      "family_id": "MAGNEMITE",
+      "chain": [
+        "MAGNEMITE",
+        "MAGNETON",
+        "MAGNEZONE"
+      ]
+    },
+    {
+      "family_id": "FARFETCH_D",
+      "chain": [
+        "FARFETCH_D"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_FARFETCH_D",
+      "chain": [
+        "GALARIAN_FARFETCH_D"
+      ]
+    },
+    {
+      "family_id": "DODUO",
+      "chain": [
+        "DODUO",
+        "DODRIO"
+      ]
+    },
+    {
+      "family_id": "SEEL",
+      "chain": [
+        "SEEL",
+        "DEWGONG"
+      ]
+    },
+    {
+      "family_id": "GRIMER",
+      "chain": [
+        "GRIMER",
+        "MUK"
+      ]
+    },
+    {
+      "family_id": "ALOLAN_GRIMER",
+      "chain": [
+        "ALOLAN_GRIMER",
+        "ALOLAN_MUK"
+      ]
+    },
+    {
+      "family_id": "SHELLDER",
+      "chain": [
+        "SHELLDER",
+        "CLOYSTER"
+      ]
+    },
+    {
+      "family_id": "GASTLY",
+      "chain": [
+        "GASTLY",
+        "HAUNTER",
+        "GENGAR"
+      ]
+    },
+    {
+      "family_id": "ONIX",
+      "chain": [
+        "ONIX",
+        "STEELIX"
+      ]
+    },
+    {
+      "family_id": "DROWZEE",
+      "chain": [
+        "DROWZEE",
+        "HYPNO"
+      ]
+    },
+    {
+      "family_id": "KRABBY",
+      "chain": [
+        "KRABBY",
+        "KINGLER"
+      ]
+    },
+    {
+      "family_id": "VOLTORB",
+      "chain": [
+        "VOLTORB",
+        "ELECTRODE"
+      ]
+    },
+    {
+      "family_id": "HISUI_VOLTORB",
+      "chain": [
+        "HISUI_VOLTORB",
+        "HISUI_ELECTRODE"
+      ]
+    },
+    {
+      "family_id": "EXEGGCUTE",
+      "chain": [
+        "EXEGGCUTE",
+        "EXEGGUTOR",
+        "ALOLAN_EXEGGUTOR"
+      ]
+    },
+    {
+      "family_id": "CUBONE",
+      "chain": [
+        "CUBONE",
+        "MAROWAK",
+        "ALOLAN_MAROWAK"
+      ]
+    },
+    {
+      "family_id": "TYROGUE",
+      "chain": [
+        "HITMONLEE",
+        "HITMONCHAN",
+        "TYROGUE",
+        "HITMONTOP"
+      ]
+    },
+    {
+      "family_id": "LICKITUNG",
+      "chain": [
+        "LICKITUNG",
+        "LICKILICKY"
+      ]
+    },
+    {
+      "family_id": "KOFFING",
+      "chain": [
+        "KOFFING",
+        "WEEZING",
+        "GALARIAN_WEEZING"
+      ]
+    },
+    {
+      "family_id": "RHYHORN",
+      "chain": [
+        "RHYHORN",
+        "RHYDON",
+        "RHYPERIOR"
+      ]
+    },
+    {
+      "family_id": "HAPPINY",
+      "chain": [
+        "CHANSEY",
+        "BLISSEY",
+        "HAPPINY"
+      ]
+    },
+    {
+      "family_id": "TANGELA",
+      "chain": [
+        "TANGELA",
+        "TANGROWTH"
+      ]
+    },
+    {
+      "family_id": "KANGASKHAN",
+      "chain": [
+        "KANGASKHAN"
+      ]
+    },
+    {
+      "family_id": "HORSEA",
+      "chain": [
+        "HORSEA",
+        "SEADRA",
+        "KINGDRA"
+      ]
+    },
+    {
+      "family_id": "GOLDEEN",
+      "chain": [
+        "GOLDEEN",
+        "SEAKING"
+      ]
+    },
+    {
+      "family_id": "STARYU",
+      "chain": [
+        "STARYU",
+        "STARMIE"
+      ]
+    },
+    {
+      "family_id": "MIME_JR",
+      "chain": [
+        "MR_MIME",
+        "MIME_JR"
+      ]
+    },
+    {
+      "family_id": "SCYTHER",
+      "chain": [
+        "SCYTHER",
+        "SCIZOR",
+        "KLEAVOR"
+      ]
+    },
+    {
+      "family_id": "SMOOCHUM",
+      "chain": [
+        "JYNX",
+        "SMOOCHUM"
+      ]
+    },
+    {
+      "family_id": "ELEKID",
+      "chain": [
+        "ELECTABUZZ",
+        "ELEKID",
+        "ELECTIVIRE"
+      ]
+    },
+    {
+      "family_id": "MAGBY",
+      "chain": [
+        "MAGMAR",
+        "MAGBY",
+        "MAGMORTAR"
+      ]
+    },
+    {
+      "family_id": "PINSIR",
+      "chain": [
+        "PINSIR"
+      ]
+    },
+    {
+      "family_id": "TAUROS",
+      "chain": [
+        "TAUROS",
+        "TAUROS_COMBAT_BREED",
+        "TAUROS_BLAZE_BREED",
+        "TAUROS_AQUA_BREED"
+      ]
+    },
+    {
+      "family_id": "MAGIKARP",
+      "chain": [
+        "MAGIKARP",
+        "GYARADOS"
+      ]
+    },
+    {
+      "family_id": "LAPRAS",
+      "chain": [
+        "LAPRAS"
+      ]
+    },
+    {
+      "family_id": "DITTO",
+      "chain": [
+        "DITTO"
+      ]
+    },
+    {
+      "family_id": "EEVEE",
+      "chain": [
+        "EEVEE",
+        "VAPOREON",
+        "JOLTEON",
+        "FLAREON",
+        "ESPEON",
+        "UMBREON",
+        "LEAFEON",
+        "GLACEON",
+        "SYLVEON"
+      ]
+    },
+    {
+      "family_id": "PORYGON",
+      "chain": [
+        "PORYGON",
+        "PORYGON_2",
+        "PORYGON_Z"
+      ]
+    },
+    {
+      "family_id": "OMANYTE",
+      "chain": [
+        "OMANYTE",
+        "OMASTAR"
+      ]
+    },
+    {
+      "family_id": "KABUTO",
+      "chain": [
+        "KABUTO",
+        "KABUTOPS"
+      ]
+    },
+    {
+      "family_id": "AERODACTYL",
+      "chain": [
+        "AERODACTYL"
+      ]
+    },
+    {
+      "family_id": "MUNCHLAX",
+      "chain": [
+        "SNORLAX",
+        "MUNCHLAX"
+      ]
+    },
+    {
+      "family_id": "ARTICUNO",
+      "chain": [
+        "ARTICUNO"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_ARTICUNO",
+      "chain": [
+        "GALARIAN_ARTICUNO"
+      ]
+    },
+    {
+      "family_id": "ZAPDOS",
+      "chain": [
+        "ZAPDOS"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_ZAPDOS",
+      "chain": [
+        "GALARIAN_ZAPDOS"
+      ]
+    },
+    {
+      "family_id": "MOLTRES",
+      "chain": [
+        "MOLTRES"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_MOLTRES",
+      "chain": [
+        "GALARIAN_MOLTRES"
+      ]
+    },
+    {
+      "family_id": "DRATINI",
+      "chain": [
+        "DRATINI",
+        "DRAGONAIR",
+        "DRAGONITE"
+      ]
+    },
+    {
+      "family_id": "MEWTWO",
+      "chain": [
+        "MEWTWO"
+      ]
+    },
+    {
+      "family_id": "MEW",
+      "chain": [
+        "MEW"
+      ]
+    },
+    {
+      "family_id": "CHIKORITA",
+      "chain": [
+        "CHIKORITA",
+        "BAYLEEF",
+        "MEGANIUM"
+      ]
+    },
+    {
+      "family_id": "CYNDAQUIL",
+      "chain": [
+        "CYNDAQUIL",
+        "QUILAVA",
+        "TYPHLOSION",
+        "HISUIAN_TYPHLOSION"
+      ]
+    },
+    {
+      "family_id": "TOTODILE",
+      "chain": [
+        "TOTODILE",
+        "CROCONAW",
+        "FERALIGATR"
+      ]
+    },
+    {
+      "family_id": "SENTRET",
+      "chain": [
+        "SENTRET",
+        "FURRET"
+      ]
+    },
+    {
+      "family_id": "HOOTHOOT",
+      "chain": [
+        "HOOTHOOT",
+        "NOCTOWL"
+      ]
+    },
+    {
+      "family_id": "LEDYBA",
+      "chain": [
+        "LEDYBA",
+        "LEDIAN"
+      ]
+    },
+    {
+      "family_id": "SPINARAK",
+      "chain": [
+        "SPINARAK",
+        "ARIADOS"
+      ]
+    },
+    {
+      "family_id": "CHINCHOU",
+      "chain": [
+        "CHINCHOU",
+        "LANTURN"
+      ]
+    },
+    {
+      "family_id": "TOGEPI",
+      "chain": [
+        "TOGEPI",
+        "TOGETIC",
+        "TOGEKISS"
+      ]
+    },
+    {
+      "family_id": "NATU",
+      "chain": [
+        "NATU",
+        "XATU"
+      ]
+    },
+    {
+      "family_id": "MAREEP",
+      "chain": [
+        "MAREEP",
+        "FLAFFY",
+        "AMPHAROS"
+      ]
+    },
+    {
+      "family_id": "BELLOSSOM",
+      "chain": [
+        "BELLOSSOM"
+      ]
+    },
+    {
+      "family_id": "AZURILL",
+      "chain": [
+        "MARILL",
+        "AZUMARILL",
+        "AZURILL"
+      ]
+    },
+    {
+      "family_id": "BONSLEY",
+      "chain": [
+        "SUDOWOODO",
+        "BONSLEY"
+      ]
+    },
+    {
+      "family_id": "HOPPIP",
+      "chain": [
+        "HOPPIP",
+        "SKIPLOOM",
+        "JUMPLUFF"
+      ]
+    },
+    {
+      "family_id": "AIPOM",
+      "chain": [
+        "AIPOM",
+        "AMBIPOM"
+      ]
+    },
+    {
+      "family_id": "SUNKERN",
+      "chain": [
+        "SUNKERN",
+        "SUNFLORA"
+      ]
+    },
+    {
+      "family_id": "YANMA",
+      "chain": [
+        "YANMA",
+        "YANMEGA"
+      ]
+    },
+    {
+      "family_id": "WOOPER",
+      "chain": [
+        "WOOPER",
+        "QUAGSIRE"
+      ]
+    },
+    {
+      "family_id": "PALDEA_WOOPER",
+      "chain": [
+        "PALDEA_WOOPER",
+        "CLODSIRE"
+      ]
+    },
+    {
+      "family_id": "MURKROW",
+      "chain": [
+        "MURKROW",
+        "HONCHKROW"
+      ]
+    },
+    {
+      "family_id": "MISDREAVUS",
+      "chain": [
+        "MISDREAVUS",
+        "MISMAGIUS"
+      ]
+    },
+    {
+      "family_id": "UNOWN_A",
+      "chain": [
+        "UNOWN_A",
+        "UNOWN_B",
+        "UNOWN_C",
+        "UNOWN_D",
+        "UNOWN_E",
+        "UNOWN_F",
+        "UNOWN_G",
+        "UNOWN_H",
+        "UNOWN_I",
+        "UNOWN_J",
+        "UNOWN_K",
+        "UNOWN_L",
+        "UNOWN_M",
+        "UNOWN_N",
+        "UNOWN_O",
+        "UNOWN_P",
+        "UNOWN_Q",
+        "UNOWN_R",
+        "UNOWN_S",
+        "UNOWN_T",
+        "UNOWN_U",
+        "UNOWN_V",
+        "UNOWN_W",
+        "UNOWN_X",
+        "UNOWN_Y",
+        "UNOWN_Z",
+        "UNOWN_EXCLAMATION",
+        "UNOWN_QUESTION"
+      ]
+    },
+    {
+      "family_id": "WYNAUT",
+      "chain": [
+        "WOBBUFFET",
+        "WYNAUT"
+      ]
+    },
+    {
+      "family_id": "GIRAFARIG",
+      "chain": [
+        "GIRAFARIG",
+        "FARIGIRAF"
+      ]
+    },
+    {
+      "family_id": "PINECO",
+      "chain": [
+        "PINECO",
+        "FORRETRESS"
+      ]
+    },
+    {
+      "family_id": "DUNSPARCE",
+      "chain": [
+        "DUNSPARCE",
+        "DUDUNSPARCE"
+      ]
+    },
+    {
+      "family_id": "GLIGAR",
+      "chain": [
+        "GLIGAR",
+        "GLISCOR"
+      ]
+    },
+    {
+      "family_id": "SNUBULL",
+      "chain": [
+        "SNUBULL",
+        "GRANBULL"
+      ]
+    },
+    {
+      "family_id": "QWILFISH",
+      "chain": [
+        "QWILFISH"
+      ]
+    },
+    {
+      "family_id": "HISUIAN_QWILFISH",
+      "chain": [
+        "HISUIAN_QWILFISH",
+        "OVERQWIL"
+      ]
+    },
+    {
+      "family_id": "SHUCKLE",
+      "chain": [
+        "SHUCKLE"
+      ]
+    },
+    {
+      "family_id": "HERACROSS",
+      "chain": [
+        "HERACROSS"
+      ]
+    },
+    {
+      "family_id": "SNEASEL",
+      "chain": [
+        "SNEASEL",
+        "WEAVILE"
+      ]
+    },
+    {
+      "family_id": "HISUI_SNEASEL",
+      "chain": [
+        "HISUI_SNEASEL",
+        "SNEASLER"
+      ]
+    },
+    {
+      "family_id": "TEDDIURSA",
+      "chain": [
+        "TEDDIURSA",
+        "URSARING",
+        "URSALUNA",
+        "URSALUNA_BLOODMOON"
+      ]
+    },
+    {
+      "family_id": "SLUGMA",
+      "chain": [
+        "SLUGMA",
+        "MAGCARGO"
+      ]
+    },
+    {
+      "family_id": "SWINUB",
+      "chain": [
+        "SWINUB",
+        "PILOSWINE",
+        "MAMOSWINE"
+      ]
+    },
+    {
+      "family_id": "CORSOLA",
+      "chain": [
+        "CORSOLA",
+        "GALAR_CORSOLA",
+        "CURSOLA"
+      ]
+    },
+    {
+      "family_id": "REMORAID",
+      "chain": [
+        "REMORAID",
+        "OCTILLERY"
+      ]
+    },
+    {
+      "family_id": "DELIBIRD",
+      "chain": [
+        "DELIBIRD"
+      ]
+    },
+    {
+      "family_id": "MANTYKE",
+      "chain": [
+        "MANTINE",
+        "MANTYKE"
+      ]
+    },
+    {
+      "family_id": "SKARMORY",
+      "chain": [
+        "SKARMORY"
+      ]
+    },
+    {
+      "family_id": "HOUNDOUR",
+      "chain": [
+        "HOUNDOUR",
+        "HOUNDOOM"
+      ]
+    },
+    {
+      "family_id": "PHANPY",
+      "chain": [
+        "PHANPY",
+        "DONPHAN"
+      ]
+    },
+    {
+      "family_id": "STANTLER",
+      "chain": [
+        "STANTLER",
+        "WYRDEER"
+      ]
+    },
+    {
+      "family_id": "SMEARGLE",
+      "chain": [
+        "SMEARGLE"
+      ]
+    },
+    {
+      "family_id": "MILTANK",
+      "chain": [
+        "MILTANK"
+      ]
+    },
+    {
+      "family_id": "RAIKOU",
+      "chain": [
+        "RAIKOU"
+      ]
+    },
+    {
+      "family_id": "ENTEI",
+      "chain": [
+        "ENTEI"
+      ]
+    },
+    {
+      "family_id": "SUICUNE",
+      "chain": [
+        "SUICUNE"
+      ]
+    },
+    {
+      "family_id": "LARVITAR",
+      "chain": [
+        "LARVITAR",
+        "PUPITAR",
+        "TYRANITAR"
+      ]
+    },
+    {
+      "family_id": "LUGIA",
+      "chain": [
+        "LUGIA",
+        "SHADOW_LUGIA"
+      ]
+    },
+    {
+      "family_id": "HO_OH",
+      "chain": [
+        "HO_OH"
+      ]
+    },
+    {
+      "family_id": "CELEBI",
+      "chain": [
+        "CELEBI"
+      ]
+    },
+    {
+      "family_id": "TREECKO",
+      "chain": [
+        "TREECKO",
+        "GROVYLE",
+        "SCEPTILE"
+      ]
+    },
+    {
+      "family_id": "TORCHIC",
+      "chain": [
+        "TORCHIC",
+        "COMBUSKEN",
+        "BLAZIKEN"
+      ]
+    },
+    {
+      "family_id": "MUDKIP",
+      "chain": [
+        "MUDKIP",
+        "MARSHTOMP",
+        "SWAMPERT"
+      ]
+    },
+    {
+      "family_id": "POOCHYENA",
+      "chain": [
+        "POOCHYENA",
+        "MIGHTYENA"
+      ]
+    },
+    {
+      "family_id": "ZIGZAGOON",
+      "chain": [
+        "ZIGZAGOON",
+        "LINOONE"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_ZIGZAGOON",
+      "chain": [
+        "GALARIAN_ZIGZAGOON",
+        "GALARIAN_LINOONE",
+        "OBSTAGOON"
+      ]
+    },
+    {
+      "family_id": "WURMPLE",
+      "chain": [
+        "WURMPLE",
+        "SILCOON",
+        "BEAUTIFLY",
+        "CASCOON",
+        "DUSTOX"
+      ]
+    },
+    {
+      "family_id": "LOTAD",
+      "chain": [
+        "LOTAD",
+        "LOMBRE",
+        "LUDICOLO"
+      ]
+    },
+    {
+      "family_id": "SEEDOT",
+      "chain": [
+        "SEEDOT",
+        "NUZLEAF",
+        "SHIFTRY"
+      ]
+    },
+    {
+      "family_id": "TAILLOW",
+      "chain": [
+        "TAILLOW",
+        "SWELLOW"
+      ]
+    },
+    {
+      "family_id": "WINGULL",
+      "chain": [
+        "WINGULL",
+        "PELIPPER"
+      ]
+    },
+    {
+      "family_id": "RALTS",
+      "chain": [
+        "RALTS",
+        "KIRLIA",
+        "GARDEVOIR",
+        "GALLADE"
+      ]
+    },
+    {
+      "family_id": "SURSKIT",
+      "chain": [
+        "SURSKIT",
+        "MASQUERAIN"
+      ]
+    },
+    {
+      "family_id": "SHROOMISH",
+      "chain": [
+        "SHROOMISH",
+        "BRELOOM"
+      ]
+    },
+    {
+      "family_id": "SLAKOTH",
+      "chain": [
+        "SLAKOTH",
+        "VIGOROTH",
+        "SLAKING"
+      ]
+    },
+    {
+      "family_id": "NINCADA",
+      "chain": [
+        "NINCADA",
+        "NINJASK"
+      ]
+    },
+    {
+      "family_id": "SHEDINJA",
+      "chain": [
+        "SHEDINJA"
+      ]
+    },
+    {
+      "family_id": "WHISMUR",
+      "chain": [
+        "WHISMUR",
+        "LOUDRED",
+        "EXPLOUD"
+      ]
+    },
+    {
+      "family_id": "MAKUHITA",
+      "chain": [
+        "MAKUHITA",
+        "HARIYAMA"
+      ]
+    },
+    {
+      "family_id": "NOSEPASS",
+      "chain": [
+        "NOSEPASS",
+        "PROBOPASS"
+      ]
+    },
+    {
+      "family_id": "SKITTY",
+      "chain": [
+        "SKITTY",
+        "DELCATTY"
+      ]
+    },
+    {
+      "family_id": "SABLEYE",
+      "chain": [
+        "SABLEYE",
+        "MEGA_SABLEYE"
+      ]
+    },
+    {
+      "family_id": "MAWILE",
+      "chain": [
+        "MAWILE"
+      ]
+    },
+    {
+      "family_id": "ARON",
+      "chain": [
+        "ARON",
+        "LAIRON",
+        "AGGRON"
+      ]
+    },
+    {
+      "family_id": "MEDITITE",
+      "chain": [
+        "MEDITITE",
+        "MEDICHAM"
+      ]
+    },
+    {
+      "family_id": "ELECTRIKE",
+      "chain": [
+        "ELECTRIKE",
+        "MANECTRIC"
+      ]
+    },
+    {
+      "family_id": "PLUSLE",
+      "chain": [
+        "PLUSLE"
+      ]
+    },
+    {
+      "family_id": "MINUN",
+      "chain": [
+        "MINUN"
+      ]
+    },
+    {
+      "family_id": "VOLBEAT",
+      "chain": [
+        "VOLBEAT"
+      ]
+    },
+    {
+      "family_id": "ILLUMISE",
+      "chain": [
+        "ILLUMISE"
+      ]
+    },
+    {
+      "family_id": "BUDEW",
+      "chain": [
+        "ROSELIA",
+        "BUDEW",
+        "ROSERADE"
+      ]
+    },
+    {
+      "family_id": "GULPIN",
+      "chain": [
+        "GULPIN",
+        "SWALOT"
+      ]
+    },
+    {
+      "family_id": "CARVANHA",
+      "chain": [
+        "CARVANHA",
+        "SHARPEDO"
+      ]
+    },
+    {
+      "family_id": "WAILMER",
+      "chain": [
+        "WAILMER",
+        "WAILORD"
+      ]
+    },
+    {
+      "family_id": "NUMEL",
+      "chain": [
+        "NUMEL",
+        "CAMERUPT"
+      ]
+    },
+    {
+      "family_id": "TORKOAL",
+      "chain": [
+        "TORKOAL"
+      ]
+    },
+    {
+      "family_id": "SPOINK",
+      "chain": [
+        "SPOINK",
+        "GRUMPIG"
+      ]
+    },
+    {
+      "family_id": "SPINDA",
+      "chain": [
+        "SPINDA"
+      ]
+    },
+    {
+      "family_id": "TRAPINCH",
+      "chain": [
+        "TRAPINCH",
+        "VIBRAVA",
+        "FLYGON"
+      ]
+    },
+    {
+      "family_id": "CACNEA",
+      "chain": [
+        "CACNEA",
+        "CACTURNE"
+      ]
+    },
+    {
+      "family_id": "SWABLU",
+      "chain": [
+        "SWABLU",
+        "ALTARIA"
+      ]
+    },
+    {
+      "family_id": "ZANGOOSE",
+      "chain": [
+        "ZANGOOSE"
+      ]
+    },
+    {
+      "family_id": "SEVIPER",
+      "chain": [
+        "SEVIPER"
+      ]
+    },
+    {
+      "family_id": "LUNATONE",
+      "chain": [
+        "LUNATONE"
+      ]
+    },
+    {
+      "family_id": "SOLROCK",
+      "chain": [
+        "SOLROCK"
+      ]
+    },
+    {
+      "family_id": "BARBOACH",
+      "chain": [
+        "BARBOACH",
+        "WHISCASH"
+      ]
+    },
+    {
+      "family_id": "CORPHISH",
+      "chain": [
+        "CORPHISH",
+        "CRAWDAUNT"
+      ]
+    },
+    {
+      "family_id": "BALTOY",
+      "chain": [
+        "BALTOY",
+        "CLAYDOL"
+      ]
+    },
+    {
+      "family_id": "LILEEP",
+      "chain": [
+        "LILEEP",
+        "CRADILY"
+      ]
+    },
+    {
+      "family_id": "ANORITH",
+      "chain": [
+        "ANORITH",
+        "ARMALDO"
+      ]
+    },
+    {
+      "family_id": "FEEBAS",
+      "chain": [
+        "FEEBAS",
+        "MILOTIC"
+      ]
+    },
+    {
+      "family_id": "CASTFORM",
+      "chain": [
+        "CASTFORM",
+        "CASTFORM_SUN",
+        "CASTFORM_RAIN",
+        "CASTFORM_HAIL"
+      ]
+    },
+    {
+      "family_id": "KECLEON",
+      "chain": [
+        "KECLEON"
+      ]
+    },
+    {
+      "family_id": "SHUPPET",
+      "chain": [
+        "SHUPPET",
+        "BANETTE"
+      ]
+    },
+    {
+      "family_id": "DUSKULL",
+      "chain": [
+        "DUSKULL",
+        "DUSCLOPS",
+        "DUSKNOIR"
+      ]
+    },
+    {
+      "family_id": "TROPIUS",
+      "chain": [
+        "TROPIUS"
+      ]
+    },
+    {
+      "family_id": "CHINGLING",
+      "chain": [
+        "CHIMECHO",
+        "CHINGLING"
+      ]
+    },
+    {
+      "family_id": "ABSOL",
+      "chain": [
+        "ABSOL"
+      ]
+    },
+    {
+      "family_id": "SNORUNT",
+      "chain": [
+        "SNORUNT",
+        "GLALIE",
+        "FROSLASS"
+      ]
+    },
+    {
+      "family_id": "SPHEAL",
+      "chain": [
+        "SPHEAL",
+        "SEALEO",
+        "WALREIN"
+      ]
+    },
+    {
+      "family_id": "CLAMPERL",
+      "chain": [
+        "CLAMPERL",
+        "HUNTAIL",
+        "GOREBYSS"
+      ]
+    },
+    {
+      "family_id": "RELICANTH",
+      "chain": [
+        "RELICANTH"
+      ]
+    },
+    {
+      "family_id": "LUVDISC",
+      "chain": [
+        "LUVDISC"
+      ]
+    },
+    {
+      "family_id": "BAGON",
+      "chain": [
+        "BAGON",
+        "SHELGON",
+        "SALAMENCE"
+      ]
+    },
+    {
+      "family_id": "BELDUM",
+      "chain": [
+        "BELDUM",
+        "METANG",
+        "METAGROSS"
+      ]
+    },
+    {
+      "family_id": "REGIROCK",
+      "chain": [
+        "REGIROCK"
+      ]
+    },
+    {
+      "family_id": "REGICE",
+      "chain": [
+        "REGICE"
+      ]
+    },
+    {
+      "family_id": "REGISTEEL",
+      "chain": [
+        "REGISTEEL"
+      ]
+    },
+    {
+      "family_id": "LATIAS",
+      "chain": [
+        "LATIAS"
+      ]
+    },
+    {
+      "family_id": "LATIOS",
+      "chain": [
+        "LATIOS"
+      ]
+    },
+    {
+      "family_id": "KYOGRE",
+      "chain": [
+        "KYOGRE",
+        "PRIMAL_KYOGRE"
+      ]
+    },
+    {
+      "family_id": "GROUDON",
+      "chain": [
+        "GROUDON",
+        "PRIMAL_GROUDON"
+      ]
+    },
+    {
+      "family_id": "RAYQUAZA",
+      "chain": [
+        "RAYQUAZA",
+        "MEGA_RAYQUAZA"
+      ]
+    },
+    {
+      "family_id": "JIRACHI",
+      "chain": [
+        "JIRACHI"
+      ]
+    },
+    {
+      "family_id": "DEOXYS",
+      "chain": [
+        "DEOXYS",
+        "DEOXYS_ATTACK",
+        "DEOXYS_DEFENSE",
+        "DEOXYS_SPEED"
+      ]
+    },
+    {
+      "family_id": "TURTWIG",
+      "chain": [
+        "TURTWIG",
+        "GROTLE",
+        "TORTERRA"
+      ]
+    },
+    {
+      "family_id": "CHIMCHAR",
+      "chain": [
+        "CHIMCHAR",
+        "MONFERNO",
+        "INFERNAPE"
+      ]
+    },
+    {
+      "family_id": "PIPLUP",
+      "chain": [
+        "PIPLUP",
+        "PRINPLUP",
+        "EMPOLEON"
+      ]
+    },
+    {
+      "family_id": "STARLY",
+      "chain": [
+        "STARLY",
+        "STARAVIA",
+        "STARAPTOR"
+      ]
+    },
+    {
+      "family_id": "BIDOOF",
+      "chain": [
+        "BIDOOF",
+        "BIBAREL"
+      ]
+    },
+    {
+      "family_id": "KRICKETOT",
+      "chain": [
+        "KRICKETOT",
+        "KRICKETUNE"
+      ]
+    },
+    {
+      "family_id": "SHINX",
+      "chain": [
+        "SHINX",
+        "LUXIO",
+        "LUXRAY"
+      ]
+    },
+    {
+      "family_id": "CRANIDOS",
+      "chain": [
+        "CRANIDOS",
+        "RAMPARDOS"
+      ]
+    },
+    {
+      "family_id": "SHIELDON",
+      "chain": [
+        "SHIELDON",
+        "BASTIODON"
+      ]
+    },
+    {
+      "family_id": "BURMY_PLANT",
+      "chain": [
+        "BURMY_PLANT",
+        "WORMADAM_PLANT",
+        "MOTHIM"
+      ]
+    },
+    {
+      "family_id": "BURMY_SANDY",
+      "chain": [
+        "BURMY_SANDY",
+        "WORMADAM_SANDY"
+      ]
+    },
+    {
+      "family_id": "BURMY_TRASH",
+      "chain": [
+        "BURMY_TRASH",
+        "WORMADAM_TRASH"
+      ]
+    },
+    {
+      "family_id": "COMBEE",
+      "chain": [
+        "COMBEE",
+        "VESPIQUEEN"
+      ]
+    },
+    {
+      "family_id": "PACHIRISU",
+      "chain": [
+        "PACHIRISU"
+      ]
+    },
+    {
+      "family_id": "BUIZEL",
+      "chain": [
+        "BUIZEL",
+        "FLOATZEL"
+      ]
+    },
+    {
+      "family_id": "CHERUBI",
+      "chain": [
+        "CHERUBI",
+        "CHERRIM",
+        "CHERRIM_SUNLIGHT"
+      ]
+    },
+    {
+      "family_id": "SHELLOS_WEST_SEA",
+      "chain": [
+        "SHELLOS_WEST_SEA",
+        "GASTRODON_WEST_SEA"
+      ]
+    },
+    {
+      "family_id": "SHELLOS_EAST_SEA",
+      "chain": [
+        "SHELLOS_EAST_SEA",
+        "GASTRODON_EAST_SEA"
+      ]
+    },
+    {
+      "family_id": "DRIFLOON",
+      "chain": [
+        "DRIFLOON",
+        "DRIFBLIM"
+      ]
+    },
+    {
+      "family_id": "BUNEARY",
+      "chain": [
+        "BUNEARY",
+        "LOPUNNY"
+      ]
+    },
+    {
+      "family_id": "GLAMEOW",
+      "chain": [
+        "GLAMEOW",
+        "PURUGLY"
+      ]
+    },
+    {
+      "family_id": "STUNKY",
+      "chain": [
+        "STUNKY",
+        "SKUNTANK"
+      ]
+    },
+    {
+      "family_id": "BRONZOR",
+      "chain": [
+        "BRONZOR",
+        "BRONZONG"
+      ]
+    },
+    {
+      "family_id": "CHATOT",
+      "chain": [
+        "CHATOT"
+      ]
+    },
+    {
+      "family_id": "SPIRITOMB",
+      "chain": [
+        "SPIRITOMB"
+      ]
+    },
+    {
+      "family_id": "GIBLE",
+      "chain": [
+        "GIBLE",
+        "GABITE",
+        "GARCHOMP"
+      ]
+    },
+    {
+      "family_id": "RIOLU",
+      "chain": [
+        "RIOLU",
+        "LUCARIO"
+      ]
+    },
+    {
+      "family_id": "HIPPOPOTAS",
+      "chain": [
+        "HIPPOPOTAS",
+        "HIPPODOWN"
+      ]
+    },
+    {
+      "family_id": "SKORUPI",
+      "chain": [
+        "SKORUPI",
+        "DRAPION"
+      ]
+    },
+    {
+      "family_id": "CROAGUNK",
+      "chain": [
+        "CROAGUNK",
+        "TOXICROAK"
+      ]
+    },
+    {
+      "family_id": "CARNIVINE",
+      "chain": [
+        "CARNIVINE"
+      ]
+    },
+    {
+      "family_id": "FINNEON",
+      "chain": [
+        "FINNEON",
+        "LUMINEON"
+      ]
+    },
+    {
+      "family_id": "SNOVER",
+      "chain": [
+        "SNOVER",
+        "ABOMASNOW"
+      ]
+    },
+    {
+      "family_id": "ROTOM",
+      "chain": [
+        "ROTOM",
+        "ROTOM_HEAT",
+        "ROTOM_WASH",
+        "ROTOM_FROST",
+        "ROTOM_FAN",
+        "ROTOM_MOW",
+        "ROTOM_DRONE"
+      ]
+    },
+    {
+      "family_id": "UXIE",
+      "chain": [
+        "UXIE"
+      ]
+    },
+    {
+      "family_id": "MESPRIT",
+      "chain": [
+        "MESPRIT"
+      ]
+    },
+    {
+      "family_id": "AZELF",
+      "chain": [
+        "AZELF"
+      ]
+    },
+    {
+      "family_id": "DIALGA",
+      "chain": [
+        "DIALGA"
+      ]
+    },
+    {
+      "family_id": "PALKIA",
+      "chain": [
+        "PALKIA"
+      ]
+    },
+    {
+      "family_id": "HEATRAN",
+      "chain": [
+        "HEATRAN"
+      ]
+    },
+    {
+      "family_id": "REGIGIGAS",
+      "chain": [
+        "REGIGIGAS"
+      ]
+    },
+    {
+      "family_id": "GIRATINA",
+      "chain": [
+        "GIRATINA",
+        "ORIGIN_GIRATINA"
+      ]
+    },
+    {
+      "family_id": "CRESSELIA",
+      "chain": [
+        "CRESSELIA"
+      ]
+    },
+    {
+      "family_id": "PHIONE",
+      "chain": [
+        "PHIONE"
+      ]
+    },
+    {
+      "family_id": "MANAPHY",
+      "chain": [
+        "MANAPHY"
+      ]
+    },
+    {
+      "family_id": "DARKRAI",
+      "chain": [
+        "DARKRAI"
+      ]
+    },
+    {
+      "family_id": "SHAYMIN",
+      "chain": [
+        "SHAYMIN",
+        "SHAYMIN_SKY"
+      ]
+    },
+    {
+      "family_id": "ARCEUS",
+      "chain": [
+        "ARCEUS",
+        "ARCEUS_BUG",
+        "ARCEUS_DARK",
+        "ARCEUS_DRAGON",
+        "ARCEUS_ELECTRIC",
+        "ARCEUS_FIGHTING",
+        "ARCEUS_FIRE",
+        "ARCEUS_FLYING",
+        "ARCEUS_GHOST",
+        "ARCEUS_GRASS",
+        "ARCEUS_GROUND",
+        "ARCEUS_ICE",
+        "ARCEUS_POISON",
+        "ARCEUS_PSYCHIC",
+        "ARCEUS_ROCK",
+        "ARCEUS_STEEL",
+        "ARCEUS_WATER",
+        "ARCEUS_FAIRY"
+      ]
+    },
+    {
+      "family_id": "VICTINI",
+      "chain": [
+        "VICTINI"
+      ]
+    },
+    {
+      "family_id": "SNIVY",
+      "chain": [
+        "SNIVY",
+        "SERVINE",
+        "SERPERIOR"
+      ]
+    },
+    {
+      "family_id": "TEPIG",
+      "chain": [
+        "TEPIG",
+        "PIGNITE",
+        "EMBOAR"
+      ]
+    },
+    {
+      "family_id": "OSHAWOTT",
+      "chain": [
+        "OSHAWOTT",
+        "DEWOTT",
+        "SAMUROTT"
+      ]
+    },
+    {
+      "family_id": "PATRAT",
+      "chain": [
+        "PATRAT",
+        "WATCHOG"
+      ]
+    },
+    {
+      "family_id": "LILLIPUP",
+      "chain": [
+        "LILLIPUP",
+        "HERDIER",
+        "STOUTLAND"
+      ]
+    },
+    {
+      "family_id": "PURRLOIN",
+      "chain": [
+        "PURRLOIN",
+        "LIEPARD"
+      ]
+    },
+    {
+      "family_id": "MUNNA",
+      "chain": [
+        "MUNNA",
+        "MUSHARNA"
+      ]
+    },
+    {
+      "family_id": "PIDOVE",
+      "chain": [
+        "PIDOVE",
+        "TRANQUILL",
+        "UNFEZANT"
+      ]
+    },
+    {
+      "family_id": "ROGGENROLA",
+      "chain": [
+        "ROGGENROLA",
+        "BOLDORE",
+        "GIGALITH"
+      ]
+    },
+    {
+      "family_id": "WOOBAT",
+      "chain": [
+        "WOOBAT",
+        "SWOOBAT"
+      ]
+    },
+    {
+      "family_id": "DRILBUR",
+      "chain": [
+        "DRILBUR",
+        "EXCADRILL"
+      ]
+    },
+    {
+      "family_id": "AUDINO",
+      "chain": [
+        "AUDINO"
+      ]
+    },
+    {
+      "family_id": "TIMBURR",
+      "chain": [
+        "TIMBURR",
+        "GURDURR",
+        "CONKELDURR"
+      ]
+    },
+    {
+      "family_id": "TYMPOLE",
+      "chain": [
+        "TYMPOLE",
+        "PALPITOAD",
+        "SEISMITOAD"
+      ]
+    },
+    {
+      "family_id": "SEWADDLE",
+      "chain": [
+        "SEWADDLE",
+        "SWADLOON",
+        "LEAVANNY"
+      ]
+    },
+    {
+      "family_id": "VENIPEDE",
+      "chain": [
+        "VENIPEDE",
+        "WHIRLIPEDE",
+        "SCOLIPEDE"
+      ]
+    },
+    {
+      "family_id": "COTTONEE",
+      "chain": [
+        "COTTONEE",
+        "WHIMSICOTT"
+      ]
+    },
+    {
+      "family_id": "PETILIL",
+      "chain": [
+        "PETILIL",
+        "LILIGANT",
+        "HISUIAN_LILLIGANT"
+      ]
+    },
+    {
+      "family_id": "BASCULIN_RED",
+      "chain": [
+        "BASCULIN_RED"
+      ]
+    },
+    {
+      "family_id": "BASCULIN_BLUE",
+      "chain": [
+        "BASCULIN_BLUE"
+      ]
+    },
+    {
+      "family_id": "BASCULIN_WHITE",
+      "chain": [
+        "BASCULIN_WHITE",
+        "BASCULEGION_MALE",
+        "BASCULEGION_FEMALE"
+      ]
+    },
+    {
+      "family_id": "SANDILE",
+      "chain": [
+        "SANDILE",
+        "KROKOROK",
+        "KROOKODILE"
+      ]
+    },
+    {
+      "family_id": "DARUMAKA",
+      "chain": [
+        "DARUMAKA",
+        "DARMANITAN",
+        "DARMANITAN_ZEN"
+      ]
+    },
+    {
+      "family_id": "MARACTUS",
+      "chain": [
+        "MARACTUS"
+      ]
+    },
+    {
+      "family_id": "SCRAGGY",
+      "chain": [
+        "SCRAGGY",
+        "SCRAFTY"
+      ]
+    },
+    {
+      "family_id": "SIGILYPH",
+      "chain": [
+        "SIGILYPH"
+      ]
+    },
+    {
+      "family_id": "YAMASK",
+      "chain": [
+        "YAMASK",
+        "COFAGRIGUS"
+      ]
+    },
+    {
+      "family_id": "GALARIAN_YAMASK",
+      "chain": [
+        "GALARIAN_YAMASK",
+        "RUNERIGUS"
+      ]
+    },
+    {
+      "family_id": "ARCHEN",
+      "chain": [
+        "ARCHEN",
+        "ARCHEOPS"
+      ]
+    },
+    {
+      "family_id": "TRUBBISH",
+      "chain": [
+        "TRUBBISH",
+        "GARBODOR"
+      ]
+    },
+    {
+      "family_id": "ZORUA",
+      "chain": [
+        "ZORUA",
+        "ZOROARK"
+      ]
+    },
+    {
+      "family_id": "HISUI_ZORUA",
+      "chain": [
+        "HISUI_ZORUA",
+        "HISUI_ZOROARK"
+      ]
+    },
+    {
+      "family_id": "MINCCINO",
+      "chain": [
+        "MINCCINO",
+        "CINCCINO"
+      ]
+    },
+    {
+      "family_id": "GOTHITA",
+      "chain": [
+        "GOTHITA",
+        "GOTHORITA",
+        "GOTHITELLE"
+      ]
+    },
+    {
+      "family_id": "SOLOSIS",
+      "chain": [
+        "SOLOSIS",
+        "DUOSION",
+        "REUNICLUS"
+      ]
+    },
+    {
+      "family_id": "VANILLITE",
+      "chain": [
+        "VANILLITE",
+        "VANILLISH",
+        "VANILLUXE"
+      ]
+    },
+    {
+      "family_id": "DEERLING_SPRING",
+      "chain": [
+        "DEERLING_SPRING",
+        "SAWSBUCK_SPRING"
+      ]
+    },
+    {
+      "family_id": "DEERLING_SUMMER",
+      "chain": [
+        "DEERLING_SUMMER",
+        "SAWSBUCK_SUMMER"
+      ]
+    },
+    {
+      "family_id": "DEERLING_AUTUMN",
+      "chain": [
+        "DEERLING_AUTUMN",
+        "SAWSBUCK_AUTUMN"
+      ]
+    },
+    {
+      "family_id": "DEERLING_WINTER",
+      "chain": [
+        "DEERLING_WINTER",
+        "SAWSBUCK_WINTER"
+      ]
+    },
+    {
+      "family_id": "EMOLGA",
+      "chain": [
+        "EMOLGA"
+      ]
+    },
+    {
+      "family_id": "JOLTIK",
+      "chain": [
+        "JOLTIK",
+        "GALVANTULA"
+      ]
+    },
+    {
+      "family_id": "FERROSEED",
+      "chain": [
+        "FERROSEED",
+        "FERROTHORN"
+      ]
+    },
+    {
+      "family_id": "KLINK",
+      "chain": [
+        "KLINK",
+        "KLANG",
+        "KLINKLANG"
+      ]
+    },
+    {
+      "family_id": "TYNAMO",
+      "chain": [
+        "TYNAMO",
+        "EELEKTRIK",
+        "EELEKTROSS"
+      ]
+    },
+    {
+      "family_id": "ELGYEM",
+      "chain": [
+        "ELGYEM",
+        "BEHEEYEM"
+      ]
+    },
+    {
+      "family_id": "LITWICK",
+      "chain": [
+        "LITWICK",
+        "LAMPENT",
+        "CHANDELURE"
+      ]
+    },
+    {
+      "family_id": "AXEW",
+      "chain": [
+        "AXEW",
+        "FRAXURE",
+        "HAXORUS"
+      ]
+    },
+    {
+      "family_id": "CUBCHOO",
+      "chain": [
+        "CUBCHOO",
+        "BEARTIC"
+      ]
+    },
+    {
+      "family_id": "CRYOGONAL",
+      "chain": [
+        "CRYOGONAL"
+      ]
+    },
+    {
+      "family_id": "MIENFOO",
+      "chain": [
+        "MIENFOO",
+        "MIENSHAO"
+      ]
+    },
+    {
+      "family_id": "DRUDDIGON",
+      "chain": [
+        "DRUDDIGON"
+      ]
+    },
+    {
+      "family_id": "GOLETT",
+      "chain": [
+        "GOLETT",
+        "GOLURK"
+      ]
+    },
+    {
+      "family_id": "PAWNIARD",
+      "chain": [
+        "PAWNIARD",
+        "BISHARP",
+        "KINGAMBIT"
+      ]
+    },
+    {
+      "family_id": "RUFFLET",
+      "chain": [
+        "RUFFLET",
+        "BRAVIARY"
+      ]
+    },
+    {
+      "family_id": "VULLABY",
+      "chain": [
+        "VULLABY",
+        "MANDIBUZZ"
+      ]
+    },
+    {
+      "family_id": "HEATMOR",
+      "chain": [
+        "HEATMOR"
+      ]
+    },
+    {
+      "family_id": "DURANT",
+      "chain": [
+        "DURANT"
+      ]
+    },
+    {
+      "family_id": "DEINO",
+      "chain": [
+        "DEINO",
+        "ZWEILOUS",
+        "HYDREIGON"
+      ]
+    },
+    {
+      "family_id": "LARVESTA",
+      "chain": [
+        "LARVESTA",
+        "VOLCARONA"
+      ]
+    },
+    {
+      "family_id": "COBALION",
+      "chain": [
+        "COBALION"
+      ]
+    },
+    {
+      "family_id": "TERRAKION",
+      "chain": [
+        "TERRAKION"
+      ]
+    },
+    {
+      "family_id": "VIRIZION",
+      "chain": [
+        "VIRIZION"
+      ]
+    },
+    {
+      "family_id": "TORNADUS",
+      "chain": [
+        "TORNADUS"
+      ]
+    },
+    {
+      "family_id": "THUNDURUS",
+      "chain": [
+        "THUNDURUS"
+      ]
+    },
+    {
+      "family_id": "RESHIRAM",
+      "chain": [
+        "RESHIRAM"
+      ]
+    },
+    {
+      "family_id": "ZEKROM",
+      "chain": [
+        "ZEKROM"
+      ]
+    },
+    {
+      "family_id": "LANDORUS",
+      "chain": [
+        "LANDORUS"
+      ]
+    },
+    {
+      "family_id": "KYUREM",
+      "chain": [
+        "KYUREM"
+      ]
+    },
+    {
+      "family_id": "KELDEO",
+      "chain": [
+        "KELDEO"
+      ]
+    },
+    {
+      "family_id": "MELOETTA",
+      "chain": [
+        "MELOETTA",
+        "PIROUETTE_MELOETTA"
+      ]
+    },
+    {
+      "family_id": "GENESECT",
+      "chain": [
+        "GENESECT"
+      ]
+    },
+    {
+      "family_id": "CHESPIN",
+      "chain": [
+        "CHESPIN",
+        "QUILLADIN",
+        "CHESNAUGHT"
+      ]
+    },
+    {
+      "family_id": "FENNEKIN",
+      "chain": [
+        "FENNEKIN",
+        "BRAIXEN",
+        "DELPHOX"
+      ]
+    },
+    {
+      "family_id": "FROAKIE",
+      "chain": [
+        "FROAKIE",
+        "FROGADIER",
+        "GRENINJA"
+      ]
+    },
+    {
+      "family_id": "BUNNELBY",
+      "chain": [
+        "BUNNELBY",
+        "DIGGERSBY"
+      ]
+    },
+    {
+      "family_id": "FLETCHLING",
+      "chain": [
+        "FLETCHLING",
+        "FLETCHINDER",
+        "TALONFLAME"
+      ]
+    },
+    {
+      "family_id": "SCATTERBUG",
+      "chain": [
+        "SCATTERBUG",
+        "SPEWPA",
+        "VIVILLON",
+        "VIVILLON_ICY_SNOW",
+        "VIVILLON_POLAR",
+        "VIVILLON_TUNDRA",
+        "VIVILLON_CONTINENTAL",
+        "VIVILLON_GARDEN",
+        "VIVILLON_ELEGANT",
+        "VIVILLON_MODERN",
+        "VIVILLON_MARINE",
+        "VIVILLON_ARCHIPELAGO",
+        "VIVILLON_HIGH_PLAINS",
+        "VIVILLON_SANDSTORM",
+        "VIVILLON_RIVER",
+        "VIVILLON_MONSOON",
+        "VIVILLON_SAVANNA",
+        "VIVILLON_SUN",
+        "VIVILLON_OCEAN",
+        "VIVILLON_JUNGLE",
+        "VIVILLON_FANCY",
+        "VIVILLON_POKE_BALL"
+      ]
+    },
+    {
+      "family_id": "FLABEBE",
+      "chain": [
+        "FLABEBE",
+        "FLOETTE",
+        "FLORGES"
+      ]
+    },
+    {
+      "family_id": "FLABEBE_YELLOW",
+      "chain": [
+        "FLABEBE_YELLOW",
+        "FLOETTE_YELLOW",
+        "FLORGES_YELLOW"
+      ]
+    },
+    {
+      "family_id": "FLABEBE_ORANGE",
+      "chain": [
+        "FLABEBE_ORANGE",
+        "FLOETTE_ORANGE",
+        "FLORGES_ORANGE"
+      ]
+    },
+    {
+      "family_id": "FLABEBE_BLUE",
+      "chain": [
+        "FLABEBE_BLUE",
+        "FLOETTE_BLUE",
+        "FLORGES_BLUE"
+      ]
+    },
+    {
+      "family_id": "FLABEBE_WHITE",
+      "chain": [
+        "FLABEBE_WHITE",
+        "FLOETTE_WHITE",
+        "FLORGES_WHITE"
+      ]
+    },
+    {
+      "family_id": "SKIDDO",
+      "chain": [
+        "SKIDDO",
+        "GOGOAT"
+      ]
+    },
+    {
+      "family_id": "PANCHAM",
+      "chain": [
+        "PANCHAM",
+        "PANGORO"
+      ]
+    },
+    {
+      "family_id": "FURFROU",
+      "chain": [
+        "FURFROU"
+      ]
+    },
+    {
+      "family_id": "ESPURR",
+      "chain": [
+        "ESPURR",
+        "MEOWSTIC_MALE",
+        "MEOWSTIC_FEMALE"
+      ]
+    },
+    {
+      "family_id": "HONEDGE",
+      "chain": [
+        "HONEDGE",
+        "DOUBLADE",
+        "AEGISLASH",
+        "AEGISLASH_BLADE"
+      ]
+    },
+    {
+      "family_id": "SWIRLIX",
+      "chain": [
+        "SWIRLIX",
+        "SLURPUFF"
+      ]
+    },
+    {
+      "family_id": "INKAY",
+      "chain": [
+        "INKAY",
+        "MALAMAR"
+      ]
+    },
+    {
+      "family_id": "BINACLE",
+      "chain": [
+        "BINACLE",
+        "BARBARACLE"
+      ]
+    },
+    {
+      "family_id": "SKRELP",
+      "chain": [
+        "SKRELP",
+        "DRAGALGE"
+      ]
+    },
+    {
+      "family_id": "CLAUNCHER",
+      "chain": [
+        "CLAUNCHER",
+        "CLAWITZER"
+      ]
+    },
+    {
+      "family_id": "HELIOPTILE",
+      "chain": [
+        "HELIOPTILE",
+        "HELIOLISK"
+      ]
+    },
+    {
+      "family_id": "TYRUNT",
+      "chain": [
+        "TYRUNT",
+        "TYRANTRUM"
+      ]
+    },
+    {
+      "family_id": "AMAURA",
+      "chain": [
+        "AMAURA",
+        "AURORUS"
+      ]
+    },
+    {
+      "family_id": "HAWLUCHA",
+      "chain": [
+        "HAWLUCHA"
+      ]
+    },
+    {
+      "family_id": "DEDENNE",
+      "chain": [
+        "DEDENNE"
+      ]
+    },
+    {
+      "family_id": "CARBINK",
+      "chain": [
+        "CARBINK",
+        "DIANCIE"
+      ]
+    },
+    {
+      "family_id": "GOOMY",
+      "chain": [
+        "GOOMY",
+        "SLIGOO",
+        "HISUI_SLIGGOO",
+        "GOODRA",
+        "HISUI_GOODRA"
+      ]
+    },
+    {
+      "family_id": "KLEFKI",
+      "chain": [
+        "KLEFKI"
+      ]
+    },
+    {
+      "family_id": "PHANTUMP",
+      "chain": [
+        "PHANTUMP",
+        "TREVENANT"
+      ]
+    },
+    {
+      "family_id": "PUMPKABOO",
+      "chain": [
+        "PUMPKABOO",
+        "GOURGEIST"
+      ]
+    },
+    {
+      "family_id": "NOIBAT",
+      "chain": [
+        "NOIBAT",
+        "NOIVERN"
+      ]
+    },
+    {
+      "family_id": "XERNEAS",
+      "chain": [
+        "XERNEAS"
+      ]
+    },
+    {
+      "family_id": "YVELTAL",
+      "chain": [
+        "YVELTAL"
+      ]
+    },
+    {
+      "family_id": "ZYGARDE_10",
+      "chain": [
+        "ZYGARDE_50",
+        "ZYGARDE_10",
+        "ZYGARDE_100"
+      ]
+    },
+    {
+      "family_id": "HOOPA",
+      "chain": [
+        "HOOPA",
+        "HOOPA_UNBOUND"
+      ]
+    },
+    {
+      "family_id": "VOLCANION",
+      "chain": [
+        "VOLCANION"
+      ]
+    },
+    {
+      "family_id": "ROWLET",
+      "chain": [
+        "ROWLET",
+        "DARTIX",
+        "DECIDUEYE"
+      ]
+    },
+    {
+      "family_id": "LITTEN",
+      "chain": [
+        "LITTEN",
+        "TORRACAT",
+        "INCINEROAR"
+      ]
+    },
+    {
+      "family_id": "POPPLIO",
+      "chain": [
+        "POPPLIO",
+        "BRIONNE",
+        "PRIMARINA"
+      ]
+    },
+    {
+      "family_id": "GRUBBIN",
+      "chain": [
+        "GRUBBIN",
+        "CHARJABUG",
+        "VIKAVOLT"
+      ]
+    },
+    {
+      "family_id": "CRABRAWLER",
+      "chain": [
+        "CRABRAWLER",
+        "CRABOMINABLE"
+      ]
+    },
+    {
+      "family_id": "CUTIEFLY",
+      "chain": [
+        "CUTIEFLY",
+        "RIBOMBEE"
+      ]
+    },
+    {
+      "family_id": "ROCKRUFF",
+      "chain": [
+        "ROCKRUFF",
+        "LYCANROC_DAY",
+        "LYCANROC_NIGHT",
+        "LYCANROC_DUSK"
+      ]
+    },
+    {
+      "family_id": "WISHIWASHI",
+      "chain": [
+        "WISHIWASHI",
+        "WISHIWASHI_SCHOOL"
+      ]
+    },
+    {
+      "family_id": "MUDBRAY",
+      "chain": [
+        "MUDBRAY",
+        "MUDSDALE"
+      ]
+    },
+    {
+      "family_id": "DEWPIDER",
+      "chain": [
+        "DEWPIDER",
+        "ARAQUANID"
+      ]
+    },
+    {
+      "family_id": "FOMANTIS",
+      "chain": [
+        "FOMANTIS",
+        "LURANTIS"
+      ]
+    },
+    {
+      "family_id": "SALANDIT",
+      "chain": [
+        "SALANDIT",
+        "SALAZZLE"
+      ]
+    },
+    {
+      "family_id": "STUFFUL",
+      "chain": [
+        "STUFFUL",
+        "BEWEAR"
+      ]
+    },
+    {
+      "family_id": "BOUNSWEET",
+      "chain": [
+        "BOUNSWEET",
+        "STEENEE",
+        "TSAREENA"
+      ]
+    },
+    {
+      "family_id": "COMFEY",
+      "chain": [
+        "COMFEY"
+      ]
+    },
+    {
+      "family_id": "WIMPOD",
+      "chain": [
+        "WIMPOD",
+        "GOLISOPOD"
+      ]
+    },
+    {
+      "family_id": "SANDYGAST",
+      "chain": [
+        "SANDYGAST",
+        "PALOSSAND"
+      ]
+    },
+    {
+      "family_id": "PYUKUMUKU",
+      "chain": [
+        "PYUKUMUKU"
+      ]
+    },
+    {
+      "family_id": "TYPE_NULL",
+      "chain": [
+        "TYPE_NULL",
+        "SILVALLY",
+        "SILVALLY_FIGHTING",
+        "SILVALLY_FLYING",
+        "SILVALLY_POISON",
+        "SILVALLY_GROUND",
+        "SILVALLY_ROCK",
+        "SILVALLY_BUG",
+        "SILVALLY_GHOST",
+        "SILVALLY_STEEL",
+        "SILVALLY_FIRE",
+        "SILVALLY_WATER",
+        "SILVALLY_GRASS",
+        "SILVALLY_ELECTRIC",
+        "SILVALLY_PSYCHIC",
+        "SILVALLY_ICE",
+        "SILVALLY_DRAGON",
+        "SILVALLY_DARK",
+        "SILVALLY_FAIRY"
+      ]
+    },
+    {
+      "family_id": "MINIOR",
+      "chain": [
+        "MINIOR",
+        "MINIOR_KERNEL_RED",
+        "MINIOR_KERNEL_ORANGE",
+        "MINIOR_KERNEL_GREEN",
+        "MINIOR_KERNEL_BLUE"
+      ]
+    },
+    {
+      "family_id": "TURTONATOR",
+      "chain": [
+        "TURTONATOR"
+      ]
+    },
+    {
+      "family_id": "TOGEDEMARU",
+      "chain": [
+        "TOGEDEMARU"
+      ]
+    },
+    {
+      "family_id": "MIMIKYU",
+      "chain": [
+        "MIMIKYU",
+        "MIMIKYU_BUSTED"
+      ]
+    },
+    {
+      "family_id": "BRUXISH",
+      "chain": [
+        "BRUXISH"
+      ]
+    },
+    {
+      "family_id": "DRAMPA",
+      "chain": [
+        "DRAMPA"
+      ]
+    },
+    {
+      "family_id": "DHELMISE",
+      "chain": [
+        "DHELMISE"
+      ]
+    },
+    {
+      "family_id": "JANGMO_O",
+      "chain": [
+        "JANGMO_O",
+        "HAKAMO_O",
+        "KOMMO_O"
+      ]
+    },
+    {
+      "family_id": "TAPU_KOKO",
+      "chain": [
+        "TAPU_KOKO"
+      ]
+    },
+    {
+      "family_id": "TAPU_LELE",
+      "chain": [
+        "TAPU_LELE"
+      ]
+    },
+    {
+      "family_id": "TAPU_BULU",
+      "chain": [
+        "TAPU_BULU"
+      ]
+    },
+    {
+      "family_id": "TAPU_FINI",
+      "chain": [
+        "TAPU_FINI"
+      ]
+    },
+    {
+      "family_id": "COSMOG",
+      "chain": [
+        "COSMOG",
+        "COSMOEM",
+        "SOLGALEO",
+        "LUNALA"
+      ]
+    },
+    {
+      "family_id": "NIHILEGO",
+      "chain": [
+        "NIHILEGO"
+      ]
+    },
+    {
+      "family_id": "BUZZWOLE",
+      "chain": [
+        "BUZZWOLE"
+      ]
+    },
+    {
+      "family_id": "PHEROMOSA",
+      "chain": [
+        "PHEROMOSA"
+      ]
+    },
+    {
+      "family_id": "XURKITREE",
+      "chain": [
+        "XURKITREE"
+      ]
+    },
+    {
+      "family_id": "CELESTEELA",
+      "chain": [
+        "CELESTEELA"
+      ]
+    },
+    {
+      "family_id": "KARTANA",
+      "chain": [
+        "KARTANA"
+      ]
+    },
+    {
+      "family_id": "GUZZLORD",
+      "chain": [
+        "GUZZLORD"
+      ]
+    },
+    {
+      "family_id": "NECROZMA",
+      "chain": [
+        "NECROZMA",
+        "ULTRA_NECROZMA"
+      ]
+    },
+    {
+      "family_id": "MAGEARNA",
+      "chain": [
+        "MAGEARNA"
+      ]
+    },
+    {
+      "family_id": "MARSHADOW",
+      "chain": [
+        "MARSHADOW"
+      ]
+    },
+    {
+      "family_id": "POIPOLE",
+      "chain": [
+        "POIPOLE",
+        "NAGANADEL"
+      ]
+    },
+    {
+      "family_id": "STAKATAKA",
+      "chain": [
+        "STAKATAKA"
+      ]
+    },
+    {
+      "family_id": "BLACEPHALON",
+      "chain": [
+        "BLACEPHALON"
+      ]
+    },
+    {
+      "family_id": "ZERAORA",
+      "chain": [
+        "ZERAORA"
+      ]
+    },
+    {
+      "family_id": "MELTAN",
+      "chain": [
+        "MELTAN"
+      ]
+    },
+    {
+      "family_id": "MELMETAL",
+      "chain": [
+        "MELMETAL"
+      ]
+    },
+    {
+      "family_id": "GROOKEY",
+      "chain": [
+        "GROOKEY",
+        "THWACKEY",
+        "RILLABOOM"
+      ]
+    },
+    {
+      "family_id": "SCORBUNNY",
+      "chain": [
+        "SCORBUNNY",
+        "RABOOT",
+        "CINDERACE"
+      ]
+    },
+    {
+      "family_id": "SOBBLE",
+      "chain": [
+        "SOBBLE",
+        "DRIZZILE",
+        "INTELEON"
+      ]
+    },
+    {
+      "family_id": "ROOKIDEE",
+      "chain": [
+        "ROOKIDEE",
+        "CORVISQUIRE",
+        "CORVIKNIGHT"
+      ]
+    },
+    {
+      "family_id": "BLIPBUG",
+      "chain": [
+        "BLIPBUG",
+        "DOTTLER",
+        "ORBEETLE"
+      ]
+    },
+    {
+      "family_id": "NICKIT",
+      "chain": [
+        "NICKIT",
+        "THIEVUL"
+      ]
+    },
+    {
+      "family_id": "GOSSIFLEUR",
+      "chain": [
+        "GOSSIFLEUR",
+        "ELDEGOSS"
+      ]
+    },
+    {
+      "family_id": "WOOLOO",
+      "chain": [
+        "WOOLOO",
+        "DUBWOOL"
+      ]
+    },
+    {
+      "family_id": "CHEWTLE",
+      "chain": [
+        "CHEWTLE",
+        "DREDNAW"
+      ]
+    },
+    {
+      "family_id": "YAMPER",
+      "chain": [
+        "YAMPER",
+        "BOLTUND"
+      ]
+    },
+    {
+      "family_id": "APPLIN",
+      "chain": [
+        "APPLIN",
+        "FLAPPLE",
+        "APPLETUN",
+        "DIPPLIN",
+        "HYDRAPPLE"
+      ]
+    },
+    {
+      "family_id": "SILICOBRA",
+      "chain": [
+        "SILICOBRA",
+        "SANDACONDA"
+      ]
+    },
+    {
+      "family_id": "CRAMORANT",
+      "chain": [
+        "CRAMORANT"
+      ]
+    },
+    {
+      "family_id": "ARROKUDA",
+      "chain": [
+        "ARROKUDA"
+      ]
+    },
+    {
+      "family_id": "TOXEL",
+      "chain": [
+        "TOXEL",
+        "TOXTRICITY"
+      ]
+    },
+    {
+      "family_id": "SIZZLIPEDE",
+      "chain": [
+        "SIZZLIPEDE",
+        "CENTISKORCH"
+      ]
+    },
+    {
+      "family_id": "CLOBBOPUS",
+      "chain": [
+        "CLOBBOPUS",
+        "GRAPPLOCT"
+      ]
+    },
+    {
+      "family_id": "SINISTEA",
+      "chain": [
+        "SINISTEA",
+        "POLTEAGEIST"
+      ]
+    },
+    {
+      "family_id": "HATENNA",
+      "chain": [
+        "HATENNA",
+        "HATTREM",
+        "HATTERENE"
+      ]
+    },
+    {
+      "family_id": "IMPIDIMP",
+      "chain": [
+        "IMPIDIMP",
+        "MORGREM",
+        "GRIMMSNARL"
+      ]
+    },
+    {
+      "family_id": "MILCERY",
+      "chain": [
+        "MILCERY",
+        "ALCREMIE_VANILLA",
+        "ALCREMIE_RUBY",
+        "ALCREMIE_MATCHA",
+        "ALCREMIE_MINT",
+        "ALCREMIE_LEMON",
+        "ALCREMIE_SALTED",
+        "ALCREMIE_RUBY_SWIRL",
+        "ALCREMIE_CARAMEL_SWIRL",
+        "ALCREMIE_RAINBOW_SWIRL"
+      ]
+    },
+    {
+      "family_id": "FALINKS_TROOPER",
+      "chain": [
+        "FALINKS_BRASS",
+        "FALINKS_TROOPER"
+      ]
+    },
+    {
+      "family_id": "PINCURCHIN",
+      "chain": [
+        "PINCURCHIN"
+      ]
+    },
+    {
+      "family_id": "SNOM",
+      "chain": [
+        "SNOM",
+        "FROSMOTH"
+      ]
+    },
+    {
+      "family_id": "STONJOURNER",
+      "chain": [
+        "STONJOURNER"
+      ]
+    },
+    {
+      "family_id": "INDEEDEE_MALE",
+      "chain": [
+        "INDEEDEE_MALE"
+      ]
+    },
+    {
+      "family_id": "INDEEDEE_FEMALE",
+      "chain": [
+        "INDEEDEE_FEMALE"
+      ]
+    },
+    {
+      "family_id": "MORPEKO",
+      "chain": [
+        "MORPEKO",
+        "MORPEKO_HANGRY"
+      ]
+    },
+    {
+      "family_id": "DRACOZOLT",
+      "chain": [
+        "DRACOZOLT"
+      ]
+    },
+    {
+      "family_id": "ARCTOZOLT",
+      "chain": [
+        "ARCTOZOLT"
+      ]
+    },
+    {
+      "family_id": "DRACOVISH",
+      "chain": [
+        "DRACOVISH"
+      ]
+    },
+    {
+      "family_id": "ARCTOVISH",
+      "chain": [
+        "ARCTOVISH"
+      ]
+    },
+    {
+      "family_id": "DURALUDON",
+      "chain": [
+        "DURALUDON",
+        "ARCHALUDON"
+      ]
+    },
+    {
+      "family_id": "DREEPY",
+      "chain": [
+        "DREEPY",
+        "DRAKLOAK",
+        "DRAGAPULT"
+      ]
+    },
+    {
+      "family_id": "ZACIAN",
+      "chain": [
+        "ZACIAN",
+        "ZACIAN_CROWNED"
+      ]
+    },
+    {
+      "family_id": "ETERNATUS",
+      "chain": [
+        "ETERNATUS"
+      ]
+    },
+    {
+      "family_id": "KUBFU",
+      "chain": [
+        "KUBFU",
+        "URSHIFU_SINGLE",
+        "URSHIFU_RAPID"
+      ]
+    },
+    {
+      "family_id": "REGIELEKI",
+      "chain": [
+        "REGIELEKI"
+      ]
+    },
+    {
+      "family_id": "REGIDRAGO",
+      "chain": [
+        "REGIDRAGO"
+      ]
+    },
+    {
+      "family_id": "SPECTRIER",
+      "chain": [
+        "SPECTRIER"
+      ]
+    },
+    {
+      "family_id": "ENAMORUS",
+      "chain": [
+        "ENAMORUS"
+      ]
+    },
+    {
+      "family_id": "SPRIGATITO",
+      "chain": [
+        "SPRIGATITO",
+        "FLORAGATO",
+        "MEOWSCARADA"
+      ]
+    },
+    {
+      "family_id": "FUECOCO",
+      "chain": [
+        "FUECOCO",
+        "CROCALOR",
+        "SKELEDIRGE"
+      ]
+    },
+    {
+      "family_id": "LECHONK",
+      "chain": [
+        "LECHONK",
+        "OINKOLOGNE_MALE"
+      ]
+    },
+    {
+      "family_id": "NYMBLE",
+      "chain": [
+        "NYMBLE",
+        "LOKIX"
+      ]
+    },
+    {
+      "family_id": "PAWMI",
+      "chain": [
+        "PAWMI",
+        "PAWMO",
+        "PAWMOT"
+      ]
+    },
+    {
+      "family_id": "TANDEMAUS",
+      "chain": [
+        "TANDEMAUS",
+        "MAUSHOLD_FOUR",
+        "MAUSHOLD_THREE"
+      ]
+    },
+    {
+      "family_id": "FIDOUGH",
+      "chain": [
+        "FIDOUGH",
+        "DACHSBUN"
+      ]
+    },
+    {
+      "family_id": "SMOLIV",
+      "chain": [
+        "SMOLIV",
+        "DOLLIV",
+        "ARBOLIVA"
+      ]
+    },
+    {
+      "family_id": "NACLI",
+      "chain": [
+        "NACLI",
+        "NACLSTACK",
+        "GARGANACL"
+      ]
+    },
+    {
+      "family_id": "CHARCADET",
+      "chain": [
+        "CHARCADET",
+        "ARMAROUGE",
+        "CERULEDGE"
+      ]
+    },
+    {
+      "family_id": "TADBULB",
+      "chain": [
+        "TADBULB",
+        "BELLIBOLT"
+      ]
+    },
+    {
+      "family_id": "WATTREL",
+      "chain": [
+        "WATTREL",
+        "KILOWATTREL"
+      ]
+    },
+    {
+      "family_id": "CAPSAKID",
+      "chain": [
+        "CAPSAKID",
+        "SCOVILLAIN"
+      ]
+    },
+    {
+      "family_id": "TINKATINK",
+      "chain": [
+        "TINKATINK",
+        "TINKATUFF",
+        "TINKATON"
+      ]
+    },
+    {
+      "family_id": "WIGLETT",
+      "chain": [
+        "WIGLETT",
+        "WUGTRIO"
+      ]
+    },
+    {
+      "family_id": "FINIZEN",
+      "chain": [
+        "FINIZEN",
+        "PALAFIN",
+        "PALAFIN_HERO"
+      ]
+    },
+    {
+      "family_id": "VAROOM",
+      "chain": [
+        "VAROOM",
+        "REVAVROOM"
+      ]
+    },
+    {
+      "family_id": "CYCLIZAR",
+      "chain": [
+        "CYCLIZAR"
+      ]
+    },
+    {
+      "family_id": "ORTHWORM",
+      "chain": [
+        "ORTHWORM"
+      ]
+    },
+    {
+      "family_id": "GLIMMET",
+      "chain": [
+        "GLIMMET",
+        "GLIMMORA"
+      ]
+    },
+    {
+      "family_id": "GREAVARD",
+      "chain": [
+        "GREAVARD",
+        "HOUNDSTONE"
+      ]
+    },
+    {
+      "family_id": "VELUZA",
+      "chain": [
+        "VELUZA"
+      ]
+    },
+    {
+      "family_id": "GREAT_TUSK",
+      "chain": [
+        "GREAT_TUSK"
+      ]
+    },
+    {
+      "family_id": "SCREAM_TAIL",
+      "chain": [
+        "SCREAM_TAIL"
+      ]
+    },
+    {
+      "family_id": "FLUTTER_MANE",
+      "chain": [
+        "FLUTTER_MANE"
+      ]
+    },
+    {
+      "family_id": "IRON_BUNDLE",
+      "chain": [
+        "IRON_BUNDLE"
+      ]
+    },
+    {
+      "family_id": "IRON_HANDS",
+      "chain": [
+        "IRON_HANDS"
+      ]
+    },
+    {
+      "family_id": "IRON_THORNS",
+      "chain": [
+        "IRON_THORNS"
+      ]
+    },
+    {
+      "family_id": "FRIGIBAX",
+      "chain": [
+        "FRIGIBAX",
+        "ARCTIBAX",
+        "BAXCALIBUR"
+      ]
+    },
+    {
+      "family_id": "GIMMIGHOUL",
+      "chain": [
+        "GIMMIGHOUL",
+        "GHOLDENGO"
+      ]
+    },
+    {
+      "family_id": "CHI_YU",
+      "chain": [
+        "CHI_YU"
+      ]
+    },
+    {
+      "family_id": "ROARING_MOON",
+      "chain": [
+        "ROARING_MOON"
+      ]
+    },
+    {
+      "family_id": "IRON_VALIANT",
+      "chain": [
+        "IRON_VALIANT"
+      ]
+    },
+    {
+      "family_id": "WALKING_WAKE",
+      "chain": [
+        "WALKING_WAKE"
+      ]
+    },
+    {
+      "family_id": "OKIDOGI",
+      "chain": [
+        "OKIDOGI"
+      ]
+    },
+    {
+      "family_id": "MUNKIDORI",
+      "chain": [
+        "MUNKIDORI"
+      ]
+    },
+    {
+      "family_id": "FEZANDIPITI",
+      "chain": [
+        "FEZANDIPITI"
+      ]
+    },
+    {
+      "family_id": "OGERPON_TEAL",
+      "chain": [
+        "OGERPON_TEAL",
+        "OGERPON_WELLSPRING",
+        "OGERPON_HEARTHFLAME",
+        "OGERPON_CORNERSTONE",
+        "OGERPON_TEAL_MASK",
+        "OGERPON_WELLSPRING_MASK",
+        "OGERPON_HEARTHFLAME_MASK",
+        "OGERPON_CORNERSTONE_MASK"
+      ]
+    },
+    {
+      "family_id": "PECHARUNT",
+      "chain": [
+        "PECHARUNT"
+      ]
+    }
+  ],
+  "special_fusion_rules": [],
+  "constraints": {
+    "bench_size": 9,
+    "board_size_by_level": "equals_player_level",
+    "fusion_checks_on": [
+      "buy",
+      "round_end"
+    ]
+  }
+}

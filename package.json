@@ -45,7 +45,28 @@
     "colyseus-post-deploy": "npx colyseus-post-deploy",
     "deploy-live": "pm2 deploy production update",
     "setup-live": "pm2 deploy production setup",
-    "check-circular-refs": "npx madge ./app -- --circular --exclude '^public/dist'"
+    "check-circular-refs": "npx madge ./app -- --circular --exclude '^public/dist'",
+    "extract-science-data": "node gen/extract-scientific-dataset.js",
+    "validate-science-data": "node gen/science/validate-science-data.js --allow-formalization-gaps true",
+    "generate-claims": "node gen/science/make-claims.js",
+    "run-experiments": "node gen/science/run-experiments.js",
+    "test:science": "node --test gen/science/__tests__/*.test.js",
+    "verify-mechanics": "node gen/science/verify-mechanics.js",
+    "run-baselines": "node gen/science/run-baselines.js",
+    "search-comps": "node gen/science/search-comps.js",
+    "validate-result-schemas": "node gen/science/validate-result-schemas.js",
+    "simulate-lobby": "node gen/science/simulate-lobby.js",
+    "validate-simulator": "node gen/science/validate-simulator.js",
+    "run-policy-experiments": "node gen/science/run-policy-experiments.js",
+    "meta-report": "node gen/science/meta-report.js",
+    "generate-policy-claims": "node gen/science/make-policy-claims.js",
+    "win:bundle": "node gen/science/cli.js run --profile fast --seed 42 --run-id latest",
+    "win:dist": "node gen/science/build-windows-dist.js",
+    "build:bundle": "npx esbuild gen/science/cli.js --bundle --platform=node --format=cjs --outfile=dist/cli.cjs",
+    "build:win": "npm run build:bundle && npx pkg dist/cli.cjs --targets node18-win-x64 --output dist/pokechess-science.exe",
+    "test:windows-smoke": "node gen/science/test-windows-smoke.js",
+    "win:doctor": "node gen/science/win-doctor.js",
+    "resolve-science-conflicts": "bash scripts/resolve-science-conflicts.sh"
   },
   "dependencies": {
     "@colyseus/command": "^0.3.1",
@@ -128,5 +149,12 @@
     "pm2": "^6.0.8",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
+  },
+  "pkg": {
+    "assets": [
+      "data/**/*",
+      "app/models/precomputed/scientific-method/**/*",
+      "policies/**/*"
+    ]
   }
 }

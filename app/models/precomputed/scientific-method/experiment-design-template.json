@@ -1,0 +1,31 @@
+{
+  "objective": "Run reproducible scientific experiments on Pokemon team combinations.",
+  "hypothesisTemplate": "If we include [X variable], then [Y metric] will [increase/decrease] because [mechanism].",
+  "variables": {
+    "independent": [
+      "pokemon combination",
+      "type combination",
+      "ability composition",
+      "star curve"
+    ],
+    "dependent": [
+      "placement",
+      "win rate",
+      "damage dealt",
+      "damage taken",
+      "rounds survived"
+    ],
+    "controls": [
+      "patch version",
+      "economy strategy",
+      "item policy",
+      "random seed policy"
+    ]
+  },
+  "combinationSpace": {
+    "pokemonPool": 1134,
+    "uniqueCombinationsAt6": 2914686739823859,
+    "uniqueCombinationsAt8": 66166303680741420000,
+    "uniqueCombinationsAt10": 9.312907243064356e+23
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "rounds": [
+    {
+      "round": 3,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 5,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 6,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 9,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 10,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 12,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 15,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 18,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 20,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 21,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 24,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 25,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 27,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 30,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 33,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 35,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    },
+    {
+      "round": 36,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 39,
+      "event_type": "drop",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.7,
+        "rare": 0.22,
+        "epic": 0.07,
+        "unique": 0.01
+      },
+      "offered_slots": 1
+    },
+    {
+      "round": 40,
+      "event_type": "carousel",
+      "pick_order_rule": "reverse_placement_then_seeded_tiebreak",
+      "rarity_distribution": {
+        "common": 0.45,
+        "rare": 0.35,
+        "epic": 0.15,
+        "unique": 0.05
+      },
+      "offered_slots": 8
+    }
+  ]
+}

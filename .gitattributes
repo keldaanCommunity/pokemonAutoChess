@@ -1,0 +1,5 @@
+# NOTE:
+# We do NOT force `merge=ours` for scientific-method datasets anymore.
+# Conflict policy is handled explicitly via:
+#   npm run resolve-science-conflicts
+# which prioritizes incoming (`--theirs`) content in Git Bash.

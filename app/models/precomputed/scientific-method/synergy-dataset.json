@@ -1,0 +1,2698 @@
+[
+  {
+    "synergy_id": "type.NORMAL",
+    "key": "NORMAL",
+    "name_en": "Normal",
+    "thresholds": [
+      3,
+      5,
+      7,
+      9
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__STAMINA",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            15
+          ],
+          "inferred_from_text": true,
+          "damage": 15,
+          "heal": null,
+          "shield": null,
+          "duration_s": 15,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 15 SHIELD. Get a SILK_SCARF."
+      },
+      {
+        "effect_id": "SYNERGY__STRENGTH",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 20,
+          "heal": null,
+          "shield": null,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 20 SHIELD. Get a second SILK_SCARF."
+      },
+      {
+        "effect_id": "SYNERGY__ENDURE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            25
+          ],
+          "inferred_from_text": true,
+          "damage": 25,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 25 SHIELD. Get a third SILK_SCARF."
+      },
+      {
+        "effect_id": "SYNERGY__PURE_POWER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            30,
+            30
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 30,
+          "shield": 30,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 30 SHIELD. Get a fourth SILK_SCARF. All SILK_SCARF-made item holders gain 30% base ATK and 30 AP."
+      }
+    ],
+    "description_en": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts, and can craft various scarves."
+  },
+  {
+    "synergy_id": "type.GRASS",
+    "key": "GRASS",
+    "name_en": "Grass",
+    "thresholds": [
+      3,
+      5,
+      7,
+      9
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__INGRAIN",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5,
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": 2,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Restore 5 HP every 2 seconds. Get a berry tree."
+      },
+      {
+        "effect_id": "SYNERGY__GROWTH",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            15,
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 15,
+          "heal": 2,
+          "shield": null,
+          "duration_s": 15,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Restore 15 HP every 2 seconds. Get another berry tree."
+      },
+      {
+        "effect_id": "SYNERGY__SPORE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            25,
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 25,
+          "heal": 2,
+          "shield": null,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Restore 25 HP every 2 seconds. Get a third berry tree."
+      },
+      {
+        "effect_id": "SYNERGY__OVERGROW",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            50
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 50,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Once below 30% max HP, gain 50 AP. Your berry trees turn golden."
+      }
+    ],
+    "description_en": "GRASS Pokémon heal and produce berries over time. 40% of overheal is gained as max HP."
+  },
+  {
+    "synergy_id": "type.FIRE",
+    "key": "FIRE",
+    "name_en": "Fire",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__FLAME_BODY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 3,
+          "shield": null,
+          "duration_s": 3,
+          "status": true
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Attacks have [30,LK]% chance to inflict BURN for 3 seconds"
+      },
+      {
+        "effect_id": "SYNERGY__WILDFIRE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": null,
+          "shield": null,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+1 ATK after every hit"
+      },
+      {
+        "effect_id": "SYNERGY__BLAZE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 2,
+          "heal": null,
+          "shield": null,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+2 ATK after every hit"
+      },
+      {
+        "effect_id": "SYNERGY__DESOLATE_LAND",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            3,
+            1
+          ],
+          "inferred_from_text": true,
+          "damage": 3,
+          "heal": 1,
+          "shield": null,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+3 ATK after every hit. After every round, get a FIRE_SHARD (max 1)"
+      }
+    ],
+    "description_en": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every attack."
+  },
+  {
+    "synergy_id": "type.WATER",
+    "key": "WATER",
+    "name_en": "Water",
+    "thresholds": [
+      3,
+      6,
+      9
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__RAIN_DANCE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            4
+          ],
+          "inferred_from_text": true,
+          "damage": 4,
+          "heal": null,
+          "shield": null,
+          "duration_s": 4,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+4 PP per second. Get an Old Rod."
+      },
+      {
+        "effect_id": "SYNERGY__DRIZZLE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 8,
+          "heal": null,
+          "shield": null,
+          "duration_s": 8,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+8 PP per second. Get a Good Rod."
+      },
+      {
+        "effect_id": "SYNERGY__PRIMORDIAL_SEA",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            12
+          ],
+          "inferred_from_text": true,
+          "damage": 12,
+          "heal": null,
+          "shield": null,
+          "duration_s": 12,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+12 PP per second. Get a Super Rod."
+      }
+    ],
+    "description_en": "WATER Pokémon generate more PP and can be fished with a rod."
+  },
+  {
+    "synergy_id": "type.ELECTRIC",
+    "key": "ELECTRIC",
+    "name_en": "Electric",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__RISING_VOLTAGE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Every fourth attack is a triple attack"
+      },
+      {
+        "effect_id": "SYNERGY__POWER_SURGE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Every third attack is a triple attack"
+      },
+      {
+        "effect_id": "SYNERGY__SUPERCHARGED",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            10,
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 10,
+          "heal": 5,
+          "shield": null,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Triple attacks also burn 10 PP of the target and charge a CELL_BATTERY by 5%"
+      }
+    ],
+    "description_en": "ELECTRIC Pokémon basic attacks can trigger two additional attacks.{{additionalInfo}}"
+  },
+  {
+    "synergy_id": "type.FIGHTING",
+    "key": "FIGHTING",
+    "name_en": "Fighting",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__GUTS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 3,
+          "heal": null,
+          "shield": null,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Blocks 3 damage"
+      },
+      {
+        "effect_id": "SYNERGY__STURDY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            6
+          ],
+          "inferred_from_text": true,
+          "damage": 6,
+          "heal": null,
+          "shield": null,
+          "duration_s": 6,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Blocks 6 damage"
+      },
+      {
+        "effect_id": "SYNERGY__DEFIANT",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            9
+          ],
+          "inferred_from_text": true,
+          "damage": 9,
+          "heal": null,
+          "shield": null,
+          "duration_s": 9,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Blocks 9 damage"
+      },
+      {
+        "effect_id": "SYNERGY__JUSTIFIED",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            12,
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 12,
+          "heal": 8,
+          "shield": null,
+          "duration_s": 12,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Blocks 12 damage. Throws the target after 8 hits blocked."
+      }
+    ],
+    "description_en": "FIGHTING Pokémon block a flat amount of damage on every hit received. After 10 hits blocked, throw the melee target away, destroying their SHIELD."
+  },
+  {
+    "synergy_id": "type.PSYCHIC",
+    "key": "PSYCHIC",
+    "name_en": "Psychic",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__AMNESIA",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50,
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": 5,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+50 AP. A Unown has 5% chance to appear in every shop."
+      },
+      {
+        "effect_id": "SYNERGY__LIGHT_SCREEN",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            100,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 100,
+          "heal": 3,
+          "shield": null,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+100 AP. A Unown appears every 3 shops."
+      },
+      {
+        "effect_id": "SYNERGY__EERIE_SPELL",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            150,
+            10
+          ],
+          "inferred_from_text": true,
+          "damage": 150,
+          "heal": 10,
+          "shield": null,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+150 AP. Get a Unown shop and a free shop reroll after every fight and every 10 shop rerolls."
+      }
+    ],
+    "description_en": "PSYCHIC Pokémon gain additional AP and attract Unowns."
+  },
+  {
+    "synergy_id": "type.DARK",
+    "key": "DARK",
+    "name_en": "Dark",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__HONE_CLAWS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            30
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 30,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain +30% CRIT_CHANCE and +30% CRIT_POWER"
+      },
+      {
+        "effect_id": "SYNERGY__ASSURANCE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            40,
+            50
+          ],
+          "inferred_from_text": true,
+          "damage": 40,
+          "heal": 50,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain +40% CRIT_CHANCE and +50% CRIT_POWER"
+      },
+      {
+        "effect_id": "SYNERGY__BEAT_UP",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50,
+            80
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": 80,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain +50% CRIT_CHANCE and +80% CRIT_POWER"
+      }
+    ],
+    "description_en": "DARK Pokémon's critical hits are more powerful and more frequent. Melee Dark Pokémon jump to the farthest target reachable."
+  },
+  {
+    "synergy_id": "type.STEEL",
+    "key": "STEEL",
+    "name_en": "Steel",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__STEEL_SURGE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            33
+          ],
+          "inferred_from_text": true,
+          "damage": 33,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Deal 33% of ATK as TRUE"
+      },
+      {
+        "effect_id": "SYNERGY__STEEL_SPIKE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            66
+          ],
+          "inferred_from_text": true,
+          "damage": 66,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Deal 66% of ATK as TRUE"
+      },
+      {
+        "effect_id": "SYNERGY__CORKSCREW_CRASH",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            100
+          ],
+          "inferred_from_text": true,
+          "damage": 100,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Deal 100% of ATK as TRUE"
+      },
+      {
+        "effect_id": "SYNERGY__MAX_MELTDOWN",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            120
+          ],
+          "inferred_from_text": true,
+          "damage": 120,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Deal 120% of ATK as TRUE"
+      }
+    ],
+    "description_en": "STEEL Pokémon deal a percentage of their damage as TRUE."
+  },
+  {
+    "synergy_id": "type.GROUND",
+    "key": "GROUND",
+    "name_en": "Ground",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__TILLER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1,
+            5,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": 5,
+          "shield": 3,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain from +1 to +5 DEF and SPE_DEF and +3 ATK at max depth"
+      },
+      {
+        "effect_id": "SYNERGY__DIGGER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            2,
+            10,
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 2,
+          "heal": 10,
+          "shield": 5,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain from +2 to +10 DEF and SPE_DEF and +5 ATK at max depth"
+      },
+      {
+        "effect_id": "SYNERGY__DRILLER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            3,
+            15,
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 3,
+          "heal": 15,
+          "shield": 8,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain from +3 to +15 DEF and SPE_DEF and +8 ATK at max depth"
+      },
+      {
+        "effect_id": "SYNERGY__DEEP_MINER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5,
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": 8,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 5 extra DEF and SPE_DEF for each fully dug row and +8 ATK when your half of the board is fully dug"
+      }
+    ],
+    "description_en": "GROUND Pokémon dig holes on board in between stages, and gain stats based on the depth of the hole they start in. They sometimes find buried items at max depth (5 stages)."
+  },
+  {
+    "synergy_id": "type.POISON",
+    "key": "POISON",
+    "name_en": "Poison",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__POISONOUS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": true
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "[30,LK]% chance to POISONNED"
+      },
+      {
+        "effect_id": "SYNERGY__VENOMOUS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            60,
+            1
+          ],
+          "inferred_from_text": true,
+          "damage": 60,
+          "heal": 1,
+          "shield": null,
+          "duration_s": 1,
+          "status": true
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "[60,LK]% chance to POISONNED. Max stacks of POISONNED +1"
+      },
+      {
+        "effect_id": "SYNERGY__TOXIC",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            100,
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 100,
+          "heal": 2,
+          "shield": null,
+          "duration_s": 2,
+          "status": true
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "[100,LK]% chance to POISONNED. Max stacks of POISONNED +2"
+      }
+    ],
+    "description_en": "POISON Pokémon have a chance to POISONNED their target for 4 seconds with their basic attacks. Poison inflicts TRUE over time"
+  },
+  {
+    "synergy_id": "type.DRAGON",
+    "key": "DRAGON",
+    "name_en": "Dragon",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__DRAGON_ENERGY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Dragon's second synergy counts double (not the third)"
+      },
+      {
+        "effect_id": "SYNERGY__DRAGON_SCALES",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": null,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Dragons gain 5 SHIELD for each STAR of all your DRAGON units on board"
+      },
+      {
+        "effect_id": "SYNERGY__DRAGON_DANCE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1,
+            1
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": 1,
+          "shield": null,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Dragons gain 1 SPEED and 1 AP for each STAR of all your DRAGON units on board"
+      }
+    ],
+    "description_en": "DRAGON Pokémon amplify synergies and gain more stats when fully evolved.{{additionalInfo}}"
+  },
+  {
+    "synergy_id": "type.FIELD",
+    "key": "FIELD",
+    "name_en": "Field",
+    "thresholds": [
+      3,
+      6,
+      9
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__BULK_UP",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            15
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 15,
+          "shield": null,
+          "duration_s": 15,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Heal 30 HP and gain 15 SPEED"
+      },
+      {
+        "effect_id": "SYNERGY__RAGE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            40,
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 40,
+          "heal": 20,
+          "shield": null,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Heal 40 HP and gain 20 SPEED"
+      },
+      {
+        "effect_id": "SYNERGY__ANGER_POINT",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50,
+            25
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": 25,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Heal 50 HP and gain 25 SPEED"
+      }
+    ],
+    "description_en": "When a FIELD Pokémon is KO'd, all the other FIELD Pokémon are healed and gain SPEED"
+  },
+  {
+    "synergy_id": "type.MONSTER",
+    "key": "MONSTER",
+    "name_en": "Monster",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__PURSUIT",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            3,
+            10,
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 3,
+          "shield": 10,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "[30,LK]% chance to FLINCH. When knocking out a target, gain 3 ATK, 10 AP and 20% of its max HP."
+      },
+      {
+        "effect_id": "SYNERGY__BRUTAL_SWING",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            6,
+            20,
+            40
+          ],
+          "inferred_from_text": true,
+          "damage": 6,
+          "heal": 20,
+          "shield": 40,
+          "duration_s": 6,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "When knocking out a target, gain 6 ATK, 20 AP and 40% of its max HP"
+      },
+      {
+        "effect_id": "SYNERGY__POWER_TRIP",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            10,
+            30,
+            60
+          ],
+          "inferred_from_text": true,
+          "damage": 10,
+          "heal": 30,
+          "shield": 60,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "When knocking out a target, gain 10 ATK, 30 AP and 60% of its max HP"
+      },
+      {
+        "effect_id": "SYNERGY__MERCILESS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            10
+          ],
+          "inferred_from_text": true,
+          "damage": 10,
+          "heal": null,
+          "shield": null,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "MONSTER always target the lowest health unit and can target allies with less than 10% of their max HP"
+      }
+    ],
+    "description_en": "MONSTER Pokémon can FLINCH their opponents for 3 seconds on attack. Every time they get a KO, they gain stats, heal and grow in size."
+  },
+  {
+    "synergy_id": "type.HUMAN",
+    "key": "HUMAN",
+    "name_en": "Human",
+    "thresholds": [
+      2,
+      4,
+      6
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__MEDITATE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            25
+          ],
+          "inferred_from_text": true,
+          "damage": 25,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Heal for 25% HP of the damage. Get a random bronze TM."
+      },
+      {
+        "effect_id": "SYNERGY__FOCUS_ENERGY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            35
+          ],
+          "inferred_from_text": true,
+          "damage": 35,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Heal for 35% HP of the damage. Get a random silver TM."
+      },
+      {
+        "effect_id": "SYNERGY__CALM_MIND",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Heal for 50% HP of the damage. Get a random gold TM."
+      }
+    ],
+    "description_en": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs and HMs."
+  },
+  {
+    "synergy_id": "type.AQUATIC",
+    "key": "AQUATIC",
+    "name_en": "Aquatic",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__SWIFT_SWIM",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            -30,
+            10,
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": -30,
+          "heal": 10,
+          "shield": 5,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "-30% negative status duration and damage. Wave heals 10% max HP and deal 5% max HP as TRUE."
+      },
+      {
+        "effect_id": "SYNERGY__HYDRATION",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            -50,
+            20,
+            10
+          ],
+          "inferred_from_text": true,
+          "damage": -50,
+          "heal": 20,
+          "shield": 10,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "-50% negative status duration and damage. Wave heals 20% max HP and deal 10% max HP as TRUE."
+      },
+      {
+        "effect_id": "SYNERGY__WATER_VEIL",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            -70,
+            30,
+            15,
+            16
+          ],
+          "inferred_from_text": true,
+          "damage": -70,
+          "heal": 30,
+          "shield": 15,
+          "duration_s": 15,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "-70% negative status duration and damage. Wave heals 30% max HP and deal 15% max HP as TRUE. A second wave hits after 16 seconds."
+      },
+      {
+        "effect_id": "SYNERGY__SURGE_SURFER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 8,
+          "heal": null,
+          "shield": null,
+          "duration_s": 8,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Waves hit every 8 seconds for the rest of combat. After the first wave, a Surfing Pikachu joins you in battle."
+      }
+    ],
+    "description_en": "AQUATIC Pokémon mitigate status afflictions for all your team. After 7 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies."
+  },
+  {
+    "synergy_id": "type.BUG",
+    "key": "BUG",
+    "name_en": "Bug",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__COCOON",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": null,
+          "shield": null,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Copy 1 BUG Pokémon"
+      },
+      {
+        "effect_id": "SYNERGY__INFESTATION",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 2,
+          "heal": null,
+          "shield": null,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Copy 2 BUG Pokémon"
+      },
+      {
+        "effect_id": "SYNERGY__HORDE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 3,
+          "heal": null,
+          "shield": null,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Copy 3 BUG Pokémon"
+      },
+      {
+        "effect_id": "SYNERGY__HEART_OF_THE_SWARM",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": null,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Copy 5 BUG Pokémon"
+      }
+    ],
+    "description_en": "At the start of combat spawns a copy of your STRONGEST BUG Pokémon."
+  },
+  {
+    "synergy_id": "type.FLYING",
+    "key": "FLYING",
+    "name_en": "Flying",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__TAILWIND",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 20,
+          "heal": null,
+          "shield": null,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Fly away once under 20% HP"
+      },
+      {
+        "effect_id": "SYNERGY__FEATHER_DANCE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 2,
+          "heal": null,
+          "shield": null,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get PROTECT for 2 seconds after flying away"
+      },
+      {
+        "effect_id": "SYNERGY__MAX_AIRSTREAM",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50,
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": 20,
+          "shield": null,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Fly away twice when under 50% HP and 20% HP"
+      },
+      {
+        "effect_id": "SYNERGY__SKYDIVE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            150
+          ],
+          "inferred_from_text": true,
+          "damage": 150,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Now perform skydive attacks, dealing 150% PHYSICAL ATK on landing on their target"
+      }
+    ],
+    "description_en": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP."
+  },
+  {
+    "synergy_id": "type.FLORA",
+    "key": "FLORA",
+    "name_en": "Flora",
+    "thresholds": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__COTTONWEED",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get an Hoppip Flower Pot"
+      },
+      {
+        "effect_id": "SYNERGY__FLYCATCHER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get a Bellsprout Flower Pot"
+      },
+      {
+        "effect_id": "SYNERGY__FRAGRANT",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get a Chikorita Flower Pot"
+      },
+      {
+        "effect_id": "SYNERGY__FLOWER_POWER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get an Oddish Flower Pot. If all your pots are fully grown, get a Bellossom Flower Pot and receive AMAZE_MULCH instead."
+      }
+    ],
+    "description_en": "When a FLORA Pokémon is KO'd, a Flower Pot blossoms and you collect RICH_MULCH. Higher STAR units give more mulch, which can be used to evolve your Flower Pots."
+  },
+  {
+    "synergy_id": "type.ROCK",
+    "key": "ROCK",
+    "name_en": "Rock",
+    "thresholds": [
+      2,
+      4,
+      6
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__BATTLE_ARMOR",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            10,
+            -30
+          ],
+          "inferred_from_text": true,
+          "damage": 10,
+          "heal": -30,
+          "shield": null,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 10 DEF, receive -30% critical damage. Collect one weather rock when the weather changes."
+      },
+      {
+        "effect_id": "SYNERGY__MOUTAIN_RESISTANCE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            -50,
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": -50,
+          "shield": 2,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 30 DEF, receive -50% critical damage. Collect up to 2 weather rocks."
+      },
+      {
+        "effect_id": "SYNERGY__DIAMOND_STORM",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            60,
+            -70,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 60,
+          "heal": -70,
+          "shield": 3,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 60 DEF, receive -70% critical damage. Collect up to 3 weather rocks."
+      }
+    ],
+    "description_en": "ROCK Pokémon gain DEF, better resist to critical attacks, and can adapt to weather."
+  },
+  {
+    "synergy_id": "type.GHOST",
+    "key": "GHOST",
+    "name_en": "Ghost",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__CURSE_OF_VULNERABILITY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": null,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "The enemy with the highest DEF + SPE_DEF lose 5 of it and is FLINCH"
+      },
+      {
+        "effect_id": "SYNERGY__CURSE_OF_WEAKNESS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 20,
+          "heal": null,
+          "shield": null,
+          "duration_s": 20,
+          "status": true
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Also, the enemy with the highest ATK lose 20% of it and is PARALYSIS"
+      },
+      {
+        "effect_id": "SYNERGY__CURSE_OF_TORMENT",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Also, the enemy with the highest AP lose 30 of it and is FATIGUE"
+      },
+      {
+        "effect_id": "SYNERGY__CURSE_OF_FATE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 8,
+          "heal": null,
+          "shield": null,
+          "duration_s": 8,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Also, the STRONGEST enemy is CURSE and will be KO after 8 seconds"
+      }
+    ],
+    "description_en": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active."
+  },
+  {
+    "synergy_id": "type.FAIRY",
+    "key": "FAIRY",
+    "name_en": "Fairy",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__AROMATIC_MIST",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 20,
+          "heal": null,
+          "shield": null,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "20% additional SPECIAL to attacks and shocks"
+      },
+      {
+        "effect_id": "SYNERGY__FAIRY_WIND",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            40
+          ],
+          "inferred_from_text": true,
+          "damage": 40,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "40% additional SPECIAL to attacks and shocks"
+      },
+      {
+        "effect_id": "SYNERGY__STRANGE_STEAM",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            60
+          ],
+          "inferred_from_text": true,
+          "damage": 60,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "60% additional SPECIAL to attacks and shocks"
+      },
+      {
+        "effect_id": "SYNERGY__MOON_FORCE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            80
+          ],
+          "inferred_from_text": true,
+          "damage": 80,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "80% additional SPECIAL to attacks and shocks"
+      }
+    ],
+    "description_en": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage."
+  },
+  {
+    "synergy_id": "type.ICE",
+    "key": "ICE",
+    "name_en": "Ice",
+    "thresholds": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__CHILLY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            4
+          ],
+          "inferred_from_text": true,
+          "damage": 4,
+          "heal": null,
+          "shield": null,
+          "duration_s": 4,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+4 SPE_DEF"
+      },
+      {
+        "effect_id": "SYNERGY__FROSTY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            12
+          ],
+          "inferred_from_text": true,
+          "damage": 12,
+          "heal": null,
+          "shield": null,
+          "duration_s": 12,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+12 SPE_DEF"
+      },
+      {
+        "effect_id": "SYNERGY__FREEZING",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            25
+          ],
+          "inferred_from_text": true,
+          "damage": 25,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+25 SPE_DEF"
+      },
+      {
+        "effect_id": "SYNERGY__SHEER_COLD",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50,
+            30
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": 30,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+50 SPE_DEF, frozen enemies take 30% additional damage"
+      }
+    ],
+    "description_en": "ICE Pokémon have [25,LK]% chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team."
+  },
+  {
+    "synergy_id": "type.FOSSIL",
+    "key": "FOSSIL",
+    "name_en": "Fossil",
+    "thresholds": [
+      2,
+      4,
+      6
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__ANCIENT_POWER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            40,
+            40
+          ],
+          "inferred_from_text": true,
+          "damage": 40,
+          "heal": 40,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 40% base max HP as SHIELD and +40% base ATK"
+      },
+      {
+        "effect_id": "SYNERGY__ELDER_POWER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            70,
+            70
+          ],
+          "inferred_from_text": true,
+          "damage": 70,
+          "heal": 70,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 70% base max HP as SHIELD and +70% base ATK"
+      },
+      {
+        "effect_id": "SYNERGY__FORGOTTEN_POWER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            100,
+            100
+          ],
+          "inferred_from_text": true,
+          "damage": 100,
+          "heal": 100,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain 100% base max HP as SHIELD and +100% base ATK"
+      }
+    ],
+    "description_en": "At 30% HP, FOSSIL Pokemon awaken their primordial power, gaining SHIELD and ATK."
+  },
+  {
+    "synergy_id": "type.SOUND",
+    "key": "SOUND",
+    "name_en": "Sound",
+    "thresholds": [
+      2,
+      4,
+      6
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__LARGO",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            2
+          ],
+          "inferred_from_text": true,
+          "damage": 2,
+          "heal": null,
+          "shield": null,
+          "duration_s": 2,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Ally team gains +2 ATK"
+      },
+      {
+        "effect_id": "SYNERGY__ALLEGRO",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1,
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": 5,
+          "shield": null,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Ally team gains +1 ATK and +5 SPEED"
+      },
+      {
+        "effect_id": "SYNERGY__PRESTO",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1,
+            5,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": 5,
+          "shield": 3,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Ally team gains +1 ATK, +5 SPEED and 3 PP"
+      }
+    ],
+    "description_en": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats."
+  },
+  {
+    "synergy_id": "type.ARTIFICIAL",
+    "key": "ARTIFICIAL",
+    "name_en": "Artificial",
+    "thresholds": [
+      2,
+      4,
+      6
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__DUBIOUS_DISC",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [],
+          "inferred_from_text": true,
+          "damage": null,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get a tool. It is removed when losing the synergy."
+      },
+      {
+        "effect_id": "SYNERGY__LINK_CABLE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": null,
+          "shield": null,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain +5% base ATK, AP and max HP as SHIELD per held item. Get another tool."
+      },
+      {
+        "effect_id": "SYNERGY__GOOGLE_SPECS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            10
+          ],
+          "inferred_from_text": true,
+          "damage": 10,
+          "heal": null,
+          "shield": null,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Gain +10% base ATK, AP and max HP as SHIELD per held item. Get another tool."
+      }
+    ],
+    "description_en": "ARTIFICIAL Pokémon give tools and gain ATK, AP and SHIELD when holding items."
+  },
+  {
+    "synergy_id": "type.BABY",
+    "key": "BABY",
+    "name_en": "Baby",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__HATCHER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            10
+          ],
+          "inferred_from_text": true,
+          "damage": 10,
+          "heal": null,
+          "shield": null,
+          "duration_s": 10,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Each BABY has a [10,LK]% chance to find an EGG_FOR_SELL."
+      },
+      {
+        "effect_id": "SYNERGY__BREEDER",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": null,
+          "shield": null,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Get at least one EGG_FOR_SELL after each defeat against a player. Eggs hatch 1 stage earlier."
+      },
+      {
+        "effect_id": "SYNERGY__GOLDEN_EGGS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            5,
+            1,
+            10
+          ],
+          "inferred_from_text": true,
+          "damage": 5,
+          "heal": 1,
+          "shield": 10,
+          "duration_s": 5,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Each BABY has a [5,LK]% chance to find a Golden Egg (max 1 on bench). Golden eggs can be sold for 10 GOLD or give a shiny item when hatched."
+      }
+    ],
+    "description_en": "BABY Pokémon have a chance to bring you Pokémon Eggs to comfort you after a defeat. Chance stacks with losing streaks.{{additionalInfo}}"
+  },
+  {
+    "synergy_id": "type.LIGHT",
+    "key": "LIGHT",
+    "name_en": "Light",
+    "thresholds": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__SHINING_RAY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            20,
+            20
+          ],
+          "inferred_from_text": true,
+          "damage": 20,
+          "heal": 20,
+          "shield": null,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Increase AP by 20 and ATK by 20%"
+      },
+      {
+        "effect_id": "SYNERGY__LIGHT_PULSE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 8,
+          "heal": null,
+          "shield": null,
+          "duration_s": 8,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Also give +8 PP per second"
+      },
+      {
+        "effect_id": "SYNERGY__ETERNAL_LIGHT",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            50,
+            8
+          ],
+          "inferred_from_text": true,
+          "damage": 50,
+          "heal": 8,
+          "shield": null,
+          "duration_s": 8,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Also increase DEF and SPE_DEF by 50% and give RUNE_PROTECT for 8 seconds"
+      },
+      {
+        "effect_id": "SYNERGY__MAX_ILLUMINATION",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            100
+          ],
+          "inferred_from_text": true,
+          "damage": 100,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Also give 100 SHIELD and RESURRECTION"
+      }
+    ],
+    "description_en": "LIGHT Pokémon reveal a spotlight on the battlefield. The Pokémon standing in the spotlight at the start of combat gains unique bonuses."
+  },
+  {
+    "synergy_id": "type.WILD",
+    "key": "WILD",
+    "name_en": "Wild",
+    "thresholds": [
+      2,
+      4,
+      6,
+      9
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__QUICK_FEET",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            20,
+            8,
+            0.5
+          ],
+          "inferred_from_text": true,
+          "damage": 20,
+          "heal": 8,
+          "shield": 0.5,
+          "duration_s": 20,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "WILD Pokémon get +20 SPEED, and can now be found in shops at every stage (8% base chance + +0.5% for each WILD STAR on board)."
+      },
+      {
+        "effect_id": "SYNERGY__RUN_AWAY",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            40
+          ],
+          "inferred_from_text": true,
+          "damage": 40,
+          "heal": null,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+40 SPEED."
+      },
+      {
+        "effect_id": "SYNERGY__HUSTLE",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            40,
+            40
+          ],
+          "inferred_from_text": true,
+          "damage": 40,
+          "heal": 40,
+          "shield": null,
+          "duration_s": null,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "+40 SPEED and +40% base ATK"
+      },
+      {
+        "effect_id": "SYNERGY__BERSERK",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            30,
+            30,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 30,
+          "heal": 30,
+          "shield": 3,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Once below 30% HP, gain 30 SHIELD and double these ATK and SPEED buffs for 3 seconds."
+      }
+    ],
+    "description_en": "WILD Pokémon are only found during PvE encounters stages when synergy is not active (8% base chance). Their attacks have [25,LK]% chance to inflict WOUND for 3 seconds.{{additionalInfo}}"
+  },
+  {
+    "synergy_id": "type.AMORPHOUS",
+    "key": "AMORPHOUS",
+    "name_en": "Amorphous",
+    "thresholds": [
+      3,
+      5,
+      7
+    ],
+    "bonuses": [
+      {
+        "effect_id": "SYNERGY__FLUID",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            1,
+            3
+          ],
+          "inferred_from_text": true,
+          "damage": 1,
+          "heal": 3,
+          "shield": null,
+          "duration_s": 1,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Ally team gains 1 SPEED and 3 HP per unique active synergy"
+      },
+      {
+        "effect_id": "SYNERGY__SHAPELESS",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            3,
+            6
+          ],
+          "inferred_from_text": true,
+          "damage": 3,
+          "heal": 6,
+          "shield": null,
+          "duration_s": 3,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Ally team gains 3 SPEED and 6 HP per unique active synergy"
+      },
+      {
+        "effect_id": "SYNERGY__ETHEREAL",
+        "source_type": "synergy",
+        "trigger": "passive",
+        "targeting": "contextual",
+        "payload": {
+          "raw_numbers": [
+            6,
+            12
+          ],
+          "inferred_from_text": true,
+          "damage": 6,
+          "heal": 12,
+          "shield": null,
+          "duration_s": 6,
+          "status": false
+        },
+        "cooldown": null,
+        "mana_cost": null,
+        "internal_icd": null,
+        "notes": "Ally team gains 6 SPEED and 12 HP per unique active synergy"
+      }
+    ],
+    "description_en": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and SPEED by activating a wide variety of synergies."
+  },
+  {
+    "synergy_id": "type.GOURMET",
+    "key": "GOURMET",
+    "name_en": "Gourmet",
+    "thresholds": [
+      3,
+      4,
+      5
+    ],
+    "bonuses": [],
+    "description_en": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed ADJACENT allies, giving them various buffs and effects."
+  }
+]

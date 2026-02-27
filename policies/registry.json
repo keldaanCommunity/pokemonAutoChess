@@ -1,0 +1,21 @@
+[
+  {
+    "id": "policy.greedy-synergy",
+    "name": "Greedy Synergy",
+    "description": "Prioritize purchases that increase current synergy overlap.",
+    "leveling": "balanced"
+  },
+  {
+    "id": "policy.value-curve",
+    "name": "Value Curve",
+    "description": "Buy highest immediate strength-per-cost units and keep efficient curve.",
+    "leveling": "balanced"
+  },
+  {
+    "id": "policy.forced-comp",
+    "name": "Forced Comp",
+    "description": "Attempts to force a target comp and accepts higher contesting risk.",
+    "leveling": "aggressive",
+    "target_units": ["BULBASAUR", "IVYSAUR", "VENUSAUR", "CHARMANDER", "CHARMELEON", "CHARIZARD", "SQUIRTLE", "WARTORTLE"]
+  }
+]

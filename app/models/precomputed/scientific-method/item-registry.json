@@ -1,0 +1,4738 @@
+[
+  {
+    "item_id": "FOSSIL_STONE",
+    "name_en": "Fossil Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FOSSIL_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A fossil of a Pokémon that lived in prehistoric times"
+  },
+  {
+    "item_id": "TWISTED_SPOON",
+    "name_en": "Twisted Spoon",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TWISTED_SPOON"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+10 AP"
+  },
+  {
+    "item_id": "MYSTIC_WATER",
+    "name_en": "Mystic Water",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MYSTIC_WATER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+15 PP"
+  },
+  {
+    "item_id": "MAGNET",
+    "name_en": "Magnet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MAGNET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+10 SPEED"
+  },
+  {
+    "item_id": "BLACK_GLASSES",
+    "name_en": "Black Glasses",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BLACK_GLASSES"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+10% CRIT_CHANCE"
+  },
+  {
+    "item_id": "MIRACLE_SEED",
+    "name_en": "Miracle Seed",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MIRACLE_SEED"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+15 HP"
+  },
+  {
+    "item_id": "NEVER_MELT_ICE",
+    "name_en": "Never Melt Ice",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__NEVER_MELT_ICE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+3 SPE_DEF"
+  },
+  {
+    "item_id": "CHARCOAL",
+    "name_en": "Charcoal",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CHARCOAL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+3 ATK"
+  },
+  {
+    "item_id": "HEART_SCALE",
+    "name_en": "Heart Scale",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HEART_SCALE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+3 DEF"
+  },
+  {
+    "item_id": "OLD_AMBER",
+    "name_en": "Old Amber",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__OLD_AMBER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the FOSSIL type"
+  },
+  {
+    "item_id": "DAWN_STONE",
+    "name_en": "Dawn Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__DAWN_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the PSYCHIC type"
+  },
+  {
+    "item_id": "WATER_STONE",
+    "name_en": "Water Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__WATER_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the WATER type"
+  },
+  {
+    "item_id": "THUNDER_STONE",
+    "name_en": "Thunder Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__THUNDER_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the ELECTRIC type"
+  },
+  {
+    "item_id": "FIRE_STONE",
+    "name_en": "Fire Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIRE_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the FIRE type"
+  },
+  {
+    "item_id": "MOON_STONE",
+    "name_en": "Moon Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MOON_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the FAIRY type"
+  },
+  {
+    "item_id": "DUSK_STONE",
+    "name_en": "Dusk Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__DUSK_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the DARK type"
+  },
+  {
+    "item_id": "LEAF_STONE",
+    "name_en": "Leaf Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LEAF_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the GRASS type"
+  },
+  {
+    "item_id": "ICE_STONE",
+    "name_en": "Ice Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ICE_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the ICE type"
+  },
+  {
+    "item_id": "CHOICE_SPECS",
+    "name_en": "Choice Specs",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CHOICE_SPECS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains 100 bonus AP"
+  },
+  {
+    "item_id": "SOUL_DEW",
+    "name_en": "Soul Dew",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SOUL_DEW"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "During combat, the holder gains 5 AP and 5 PP every second"
+  },
+  {
+    "item_id": "UPGRADE",
+    "name_en": "Upgrade",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__UPGRADE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Attacks grant +5 SPEED (stackable)"
+  },
+  {
+    "item_id": "REAPER_CLOTH",
+    "name_en": "Reaper Cloth",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__REAPER_CLOTH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder's ability can now critically strike based on CRIT_CHANCE. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead."
+  },
+  {
+    "item_id": "POKEMONOMICON",
+    "name_en": "Pokemonomicon",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__POKEMONOMICON"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When the holder deals SPECIAL, they BURN the target for 3 seconds"
+  },
+  {
+    "item_id": "POWER_LENS",
+    "name_en": "Power Lens",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__POWER_LENS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The amount of SPECIAL blocked by SPE_DEF is inflicted back to the attacker"
+  },
+  {
+    "item_id": "SHELL_BELL",
+    "name_en": "Shell Bell",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SHELL_BELL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder heals for 33% of all damages inflicted"
+  },
+  {
+    "item_id": "HEAVY_DUTY_BOOTS",
+    "name_en": "Heavy-Duty Boots",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HEAVY_DUTY_BOOTS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder is immune to any BOARD_EFFECT and forced displacement"
+  },
+  {
+    "item_id": "AQUA_EGG",
+    "name_en": "Aqua Egg",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__AQUA_EGG"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder regains 20% of its max PP after casting its ability, + 2 PP for each cast done in the fight"
+  },
+  {
+    "item_id": "BLUE_ORB",
+    "name_en": "Blue Orb",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BLUE_ORB"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Every 3 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 15 PP"
+  },
+  {
+    "item_id": "SCOPE_LENS",
+    "name_en": "Scope Lens",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SCOPE_LENS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Critical attacks steal 10 PP from the target."
+  },
+  {
+    "item_id": "STAR_DUST",
+    "name_en": "Star Dust",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__STAR_DUST"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "After casting ability, gain 50% of max PP as SHIELD"
+  },
+  {
+    "item_id": "GREEN_ORB",
+    "name_en": "Green Orb",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GREEN_ORB"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder and ADJACENT allies regain 3% of their max HP every second. 30% of overheal is converted to PP."
+  },
+  {
+    "item_id": "DEEP_SEA_TOOTH",
+    "name_en": "Deep Sea Tooth",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__DEEP_SEA_TOOTH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder attacks restore 5 additional PP. If the attack knocks out the target, restore 15 additional PP."
+  },
+  {
+    "item_id": "SMOKE_BALL",
+    "name_en": "Smoke Ball",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SMOKE_BALL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Once below 40% max HP, drop the smoke ball, gain 70 SHIELD and jump to a tile away. Every ADJACENT enemy is PARALYSIS and BLINDED for 4 seconds."
+  },
+  {
+    "item_id": "XRAY_VISION",
+    "name_en": "XRay Vision",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__XRAY_VISION"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+50 SPEED. The holder attacks can no longer miss."
+  },
+  {
+    "item_id": "RAZOR_FANG",
+    "name_en": "Razor Fang",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RAZOR_FANG"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+100% CRIT_POWER. Critical attacks apply ARMOR_BREAK for 2 seconds."
+  },
+  {
+    "item_id": "PROTECTIVE_PADS",
+    "name_en": "Protective Pads",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__PROTECTIVE_PADS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder deals double damage against units with  SHIELD, and is protected from recoil damage and retaliation effects."
+  },
+  {
+    "item_id": "LOADED_DICE",
+    "name_en": "Loaded Dice",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LOADED_DICE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Attacks have [50,LK]% chance to also hit the lowest health enemy ADJACENT to target for 75% of the damage, which also trigger on-hit effects."
+  },
+  {
+    "item_id": "PUNCHING_GLOVE",
+    "name_en": "Punching Glove",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__PUNCHING_GLOVE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Attacks deal 8 % of target max HP as additional PHYSICAL on hit"
+  },
+  {
+    "item_id": "MUSCLE_BAND",
+    "name_en": "Muscle Band",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MUSCLE_BAND"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +2 DEF, +1 ATK and +5 SPEED (max 20 stacks)"
+  },
+  {
+    "item_id": "WONDER_BOX",
+    "name_en": "Wonder Box",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__WONDER_BOX"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary random craftable items (max 3 items held)"
+  },
+  {
+    "item_id": "ABILITY_SHIELD",
+    "name_en": "Ability Shield",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ABILITY_SHIELD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW receive 20% of their max HP as SHIELD and RUNE_PROTECT for 5 seconds"
+  },
+  {
+    "item_id": "STICKY_BARB",
+    "name_en": "Sticky Barb",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__STICKY_BARB"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When struck by an attack at melee range, deal 3 + 15% of DEF as retaliation TRUE to the attacker, with [30,LK]% chance to inflict WOUND for 3 seconds."
+  },
+  {
+    "item_id": "WIDE_LENS",
+    "name_en": "Wide Lens",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__WIDE_LENS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains +2 RANGE"
+  },
+  {
+    "item_id": "RAZOR_CLAW",
+    "name_en": "Razor Claw",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RAZOR_CLAW"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains +50% CRIT_CHANCE"
+  },
+  {
+    "item_id": "SAFETY_GOGGLES",
+    "name_en": "Safety Goggles",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SAFETY_GOGGLES"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder is immune to all negative status effects and to sandstorm damage"
+  },
+  {
+    "item_id": "KINGS_ROCK",
+    "name_en": "King's Rock",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__KINGS_ROCK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+100 HP. 20% of max HP are gained as SHIELD when combat begins."
+  },
+  {
+    "item_id": "SHINY_CHARM",
+    "name_en": "Shiny Charm",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SHINY_CHARM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Prevents damage and give PROTECT for 1.5 seconds and 50 PP the first time the holder gets below 30% HP"
+  },
+  {
+    "item_id": "GRACIDEA_FLOWER",
+    "name_en": "Gracidea Flower",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GRACIDEA_FLOWER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW gain +20 SPEED"
+  },
+  {
+    "item_id": "FLAME_ORB",
+    "name_en": "Flame Orb",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FLAME_ORB"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder suffers from BURN during the entire fight but increases its base ATK by 100%."
+  },
+  {
+    "item_id": "ASSAULT_VEST",
+    "name_en": "Assault Vest",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ASSAULT_VEST"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+40 SPE_DEF. Reduce BURN and POISONNED damage by 50%"
+  },
+  {
+    "item_id": "POKE_DOLL",
+    "name_en": "Poke Doll",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__POKE_DOLL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Reduce all incoming PHYSICAL and SPECIAL by 30%. Makes the holder more likely to be targeted."
+  },
+  {
+    "item_id": "RED_ORB",
+    "name_en": "Red Orb",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RED_ORB"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "25% of attack damage is dealt as TRUE"
+  },
+  {
+    "item_id": "MAX_REVIVE",
+    "name_en": "Max Revive",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MAX_REVIVE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Give RESURRECTION, preventing the holder first KO and restoring to max HP"
+  },
+  {
+    "item_id": "ROCKY_HELMET",
+    "name_en": "Rocky Helmet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ROCKY_HELMET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+25 DEF. Negates critical bonus damage from all incoming critical hits."
+  },
+  {
+    "item_id": "AGUAV_BERRY",
+    "name_en": "Aguav Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__AGUAV_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, restore 50% HP and get CONFUSION for 3 seconds"
+  },
+  {
+    "item_id": "APICOT_BERRY",
+    "name_en": "Apicot Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__APICOT_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 20 SPE_DEF"
+  },
+  {
+    "item_id": "ASPEAR_BERRY",
+    "name_en": "Aspear Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ASPEAR_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after being FREEZE, heal 50 HP and give +15 SPEED and immunity to FREEZE for the rest of the fight"
+  },
+  {
+    "item_id": "BABIRI_BERRY",
+    "name_en": "Babiri Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__BABIRI_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after receiving a critical hit, heal 50 HP and gain PROTECT for 2 seconds"
+  },
+  {
+    "item_id": "CHERI_BERRY",
+    "name_en": "Cheri Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__CHERI_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after being PARALYSIS, heal 50 HP and give +10 ATK and immunity to PARALYSIS for the rest of the fight"
+  },
+  {
+    "item_id": "CHESTO_BERRY",
+    "name_en": "Chesto Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__CHESTO_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after being SLEEP, heal 50 HP and give +50 AP and immunity to SLEEP for the rest of the fight"
+  },
+  {
+    "item_id": "GANLON_BERRY",
+    "name_en": "Ganlon Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GANLON_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 20 DEF"
+  },
+  {
+    "item_id": "JABOCA_BERRY",
+    "name_en": "Jaboca Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__JABOCA_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and cast $t(ability.SPIKY_SHIELD) for 10 seconds"
+  },
+  {
+    "item_id": "LANSAT_BERRY",
+    "name_en": "Lansat Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__LANSAT_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 50% CRIT_CHANCE"
+  },
+  {
+    "item_id": "LEPPA_BERRY",
+    "name_en": "Leppa Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__LEPPA_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after casting ability, heal 50 HP and gain 50 PP"
+  },
+  {
+    "item_id": "LIECHI_BERRY",
+    "name_en": "Liechi Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__LIECHI_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 15 ATK"
+  },
+  {
+    "item_id": "LUM_BERRY",
+    "name_en": "Lum Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__LUM_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP, clear negative status and get RUNE_PROTECT for 5 seconds"
+  },
+  {
+    "item_id": "ORAN_BERRY",
+    "name_en": "Oran Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ORAN_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 80 SHIELD"
+  },
+  {
+    "item_id": "PECHA_BERRY",
+    "name_en": "Pecha Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__PECHA_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after being POISONNED, heal 100 HP and give immunity to POISONNED for the rest of the fight"
+  },
+  {
+    "item_id": "PERSIM_BERRY",
+    "name_en": "Persim Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__PERSIM_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after being CONFUSION, heal 50 HP and give 10 SPE_DEF and immunity to CONFUSION for the rest of the fight"
+  },
+  {
+    "item_id": "PETAYA_BERRY",
+    "name_en": "Petaya Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__PETAYA_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 80 AP"
+  },
+  {
+    "item_id": "RAWST_BERRY",
+    "name_en": "Rawst Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__RAWST_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP or after being BURN, heal 50 HP and give 10 DEF and immunity to BURN for the rest of the fight"
+  },
+  {
+    "item_id": "ROWAP_BERRY",
+    "name_en": "Rowap Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ROWAP_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and cast $t(ability.MAGIC_BOUNCE) for 10 seconds"
+  },
+  {
+    "item_id": "SALAC_BERRY",
+    "name_en": "Salac Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__SALAC_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50 HP and gain 50 SPEED"
+  },
+  {
+    "item_id": "SITRUS_BERRY",
+    "name_en": "Sitrus Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__SITRUS_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 100 HP and increase all healing received by 30%"
+  },
+  {
+    "item_id": "GOLDEN_PINAP_BERRY",
+    "name_en": "Golden Pinap Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOLDEN_PINAP_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50% of max HP and player gains 3 random SWEETS."
+  },
+  {
+    "item_id": "GOLDEN_RAZZ_BERRY",
+    "name_en": "Golden Razz Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOLDEN_RAZZ_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50% of max HP and player gains 6 free shop rerolls."
+  },
+  {
+    "item_id": "GOLDEN_NANAB_BERRY",
+    "name_en": "Golden Nanab Berry",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOLDEN_NANAB_BERRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Consumed once below 50% HP, heal 50% of max HP and player gains 5 GOLD."
+  },
+  {
+    "item_id": "COMFEY",
+    "name_en": "$t(pkm.COMFEY)",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__COMFEY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Wears $t(pkm.COMFEY) and get its ability and its max HP, ATK, DEF, and SPE_DEF as bonus stats."
+  },
+  {
+    "item_id": "ELECTIRIZER",
+    "name_en": "Electirizer",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ELECTIRIZER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives ELECTRIC synergy. Every third attack inflicts PARALYSIS for 2 seconds."
+  },
+  {
+    "item_id": "MAGMARIZER",
+    "name_en": "Magmarizer",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MAGMARIZER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives FIRE synergy. The holder doesn't take BURN damage. Instead, it gains 30 SPEED when burning."
+  },
+  {
+    "item_id": "MACHO_BRACE",
+    "name_en": "Macho Brace",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MACHO_BRACE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives FIGHTING synergy."
+  },
+  {
+    "item_id": "LIGHT_BALL",
+    "name_en": "Light Ball",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LIGHT_BALL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives LIGHT synergy."
+  },
+  {
+    "item_id": "DRAGON_SCALE",
+    "name_en": "Dragon Scale",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__DRAGON_SCALE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives DRAGON synergy as first synergy."
+  },
+  {
+    "item_id": "METRONOME",
+    "name_en": "Metronome",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__METRONOME"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives SOUND synergy. Every second, the holder gains 5 PP."
+  },
+  {
+    "item_id": "METAL_COAT",
+    "name_en": "Metal Coat",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__METAL_COAT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives STEEL synergy."
+  },
+  {
+    "item_id": "AIR_BALLOON",
+    "name_en": "Air Balloon",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__AIR_BALLOON"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives FLYING synergy. Gain 10% chance to dodge attacks and immunity to any BOARD_EFFECT."
+  },
+  {
+    "item_id": "PROTECTOR",
+    "name_en": "Protector",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__PROTECTOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives ROCK synergy."
+  },
+  {
+    "item_id": "EXPLORER_KIT",
+    "name_en": "Explorer Kit",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EXPLORER_KIT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives GROUND synergy. Increase the [LK] chance to find gold buried in the ground."
+  },
+  {
+    "item_id": "INCENSE",
+    "name_en": "Incense",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__INCENSE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives FLORA synergy. Each Pokémon in shop has an additional 5% chance to share a common synergy with the holder."
+  },
+  {
+    "item_id": "EXP_SHARE",
+    "name_en": "Exp. Share",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EXP_SHARE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get the best ATK, AP, DEF and SPE_DEF values of allies ADJACENT_IN_THE_SAME_ROW."
+  },
+  {
+    "item_id": "TERRAIN_EXTENDER",
+    "name_en": "Terrain Extender",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TERRAIN_EXTENDER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "At the start of the fight, holder gains either ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD or FAIRY_FIELD based on its synergies. When casting its ability, spread the field effect to all allies sharing the field's synergy."
+  },
+  {
+    "item_id": "POKERUS_VIAL",
+    "name_en": "Pokérus Vial",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__POKERUS_VIAL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives POISON synergy. Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 3 seconds and transmitting to ADJACENT allies."
+  },
+  {
+    "item_id": "MAX_ELIXIR",
+    "name_en": "Max Elixir",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MAX_ELIXIR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Restores 100% of max PP 1 second after the first ability cast."
+  },
+  {
+    "item_id": "SPELL_TAG",
+    "name_en": "Spell Tag",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SPELL_TAG"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives GHOST synergy. When the holder is KO, CURSE its attacker to be KO'd after 10 seconds"
+  },
+  {
+    "item_id": "SHED_SHELL",
+    "name_en": "Shed Shell",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SHED_SHELL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives BUG synergy but reduce the holder's max HP by 50% when cloned."
+  },
+  {
+    "item_id": "BERSERK_GENE",
+    "name_en": "Berserk Gene",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BERSERK_GENE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives MONSTER synergy. The holder gets CONFUSION for 3 seconds if gaining MONSTER stacks."
+  },
+  {
+    "item_id": "SURFBOARD",
+    "name_en": "Surf Board",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SURFBOARD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives AQUATIC synergy. The holder casts $t(ability.SURF) at every tidal wave, with the ability level matching current AQUATIC synergy level."
+  },
+  {
+    "item_id": "COOKING_POT",
+    "name_en": "Cooking Pot",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__COOKING_POT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives GOURMET synergy. When BURN, the COOKING_POT is heated little by little which gives 10 SPEED per second."
+  },
+  {
+    "item_id": "RUNNING_SHOES",
+    "name_en": "Running Shoes",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RUNNING_SHOES"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives FIELD synergy. The holder gains 5 SPEED every tile they move (jumps and dashes count for one tile)."
+  },
+  {
+    "item_id": "METEORITE",
+    "name_en": "Meteorite",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__METEORITE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A meteorite that seems to interact with Deoxys. It continues to give off a faint glow and is slightly warm to the touch."
+  },
+  {
+    "item_id": "ROTOM_CATALOG",
+    "name_en": "Rotom Catalog",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ROTOM_CATALOG"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A catalog of devices that Rotom like. Use the catalog to have Rotom hop in and out of the various devices listed within."
+  },
+  {
+    "item_id": "MYSTERY_BOX",
+    "name_en": "Mystery Box",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MYSTERY_BOX"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A mysterious old box. When in your inventory, all $t(pkm.DITTO) found in shops are replaced by $t(pkm.MELTAN)."
+  },
+  {
+    "item_id": "TRASH",
+    "name_en": "Trash",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TRASH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "No effect, but can be held."
+  },
+  {
+    "item_id": "DYNAMAX_BAND",
+    "name_en": "Dynamax Band",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__DYNAMAX_BAND"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "At the start of the fight, raise max HP by 200%."
+  },
+  {
+    "item_id": "OLD_ROD",
+    "name_en": "Old Rod",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__OLD_ROD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch common and uncommon WATER Pokémon as well as $t(pkm.MAGIKARP)."
+  },
+  {
+    "item_id": "GOOD_ROD",
+    "name_en": "Good Rod",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOOD_ROD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch rare WATER Pokémon as well as $t(pkm.FEEBAS)."
+  },
+  {
+    "item_id": "SUPER_ROD",
+    "name_en": "Super Rod",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SUPER_ROD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "After each PvP round, fish a Pokémon that is then added to a free slot on your bench. Can catch epic WATER Pokémon as well as $t(pkm.WISHIWASHI)."
+  },
+  {
+    "item_id": "SHINY_STONE",
+    "name_en": "Shiny Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SHINY_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives LIGHT synergy. A second spotlight is projected onto the holder's tile at the start of the fight."
+  },
+  {
+    "item_id": "RARE_CANDY",
+    "name_en": "Rare Candy",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RARE_CANDY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Immediately make a Pokémon evolve. Can only be given to Pokémon that can evolve, and reduce its sell price to its previous tier."
+  },
+  {
+    "item_id": "EVIOLITE",
+    "name_en": "Eviolite",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EVIOLITE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder gets a bunch of stats, but can no longer evolve. Can only be given to non-fully evolved Pokémon."
+  },
+  {
+    "item_id": "WHITE_FLUTE",
+    "name_en": "White Flute",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__WHITE_FLUTE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Spawn 3 WILD Pokémon around the holder at the start of the fight. Rarity and tier increase with stage level."
+  },
+  {
+    "item_id": "GOLD_BOTTLE_CAP",
+    "name_en": "Gold Bottle Cap",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOLD_BOTTLE_CAP"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1% CRIT_POWER per GOLD you have. Gain 1 GOLD per KO. If eliminating the last enemy, get a Jackpot that doubles the amount gained during the round."
+  },
+  {
+    "item_id": "ABSORB_BULB",
+    "name_en": "Absorb Bulb",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ABSORB_BULB"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "All the damage reduction is absorbed by the bulb. Once under 50% HP, bulb explodes, dealing all damage absorbed to ADJACENT enemy units as SPECIAL."
+  },
+  {
+    "item_id": "SACRED_ASH",
+    "name_en": "Sacred Ash",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SACRED_ASH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives RESURRECTION. After resurrecting, up to 3 allies KO are resurrected as well, but without items."
+  },
+  {
+    "item_id": "COMET_SHARD",
+    "name_en": "Comet Shard",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__COMET_SHARD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 300% ATK as SPECIAL to target and 100% ATK as SPECIAL to ADJACENT enemies, while gaining PROTECT for 2 seconds."
+  },
+  {
+    "item_id": "REPEAT_BALL",
+    "name_en": "Repeat Ball",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__REPEAT_BALL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Each time you spend gold on a reroll, gain 1 free reroll. For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. After lots of rerolls, you may encounter powerful Pokémon in your shop."
+  },
+  {
+    "item_id": "GOLD_BOW",
+    "name_en": "Gold Bow",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOLD_BOW"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder does not count for team size limit."
+  },
+  {
+    "item_id": "DAMP_ROCK",
+    "name_en": "Damp Rock",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__DAMP_ROCK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards RAIN. Under RAIN, your team gains +2 PP per second."
+  },
+  {
+    "item_id": "ICY_ROCK",
+    "name_en": "Icy Rock",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ICY_ROCK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards SNOW. Under SNOW, your team recovers from FREEZE 20% faster and have [5,LK]% additional chance to FREEZE their opponents with their attacks."
+  },
+  {
+    "item_id": "SUN_STONE",
+    "name_en": "Sun Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SUN_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards ZENITH. Under ZENITH, your Pokémon heal for 5 HP every 2 seconds and have 5% additional chance to BURN with their attacks."
+  },
+  {
+    "item_id": "HEAT_ROCK",
+    "name_en": "Heat Rock",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HEAT_ROCK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards DROUGHT. Under DROUGHT, your team gains 3 ATK and takes 20% less damage from BURN."
+  },
+  {
+    "item_id": "SMOOTH_ROCK",
+    "name_en": "Smooth Rock",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SMOOTH_ROCK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards SANDSTORM. Under SANDSTORM, your team takes 20% less sandstorm damage and gain 1 SPEED every second."
+  },
+  {
+    "item_id": "BLACK_AUGURITE",
+    "name_en": "Black Augurite",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BLACK_AUGURITE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards NIGHT. Under NIGHT, your team gains 5% CRIT_CHANCE and take 10% less critical damage."
+  },
+  {
+    "item_id": "ELECTRIC_QUARTZ",
+    "name_en": "Electric Quartz",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ELECTRIC_QUARTZ"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards STORM. Under STORM, your team gains 50 SHIELD when struck by lightning and recovers from PARALYSIS 20% faster."
+  },
+  {
+    "item_id": "FLOAT_STONE",
+    "name_en": "Float Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FLOAT_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards WINDY. Under WINDY, your team gains 10 SPEED."
+  },
+  {
+    "item_id": "MIST_STONE",
+    "name_en": "Mist Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MIST_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards MISTY. Under MISTY, your team gains 3 SPE_DEF."
+  },
+  {
+    "item_id": "BLOOD_STONE",
+    "name_en": "Blood Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BLOOD_STONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards BLOODMOON. Under BLOODMOON, your team gets 30% of incoming healing as SHIELD when WOUND, and heal for 20% of damage dealt if target is WOUND."
+  },
+  {
+    "item_id": "SMELLY_CLAY",
+    "name_en": "Smelly Clay",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SMELLY_CLAY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards SMOG. Under SMOG, your team gains 5% accuracy and has 15% less chance to get POISONNED."
+  },
+  {
+    "item_id": "ODD_KEYSTONE",
+    "name_en": "Odd Stone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ODD_KEYSTONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Counts for 3 towards MURKY. Under MURKY, your team gains 10 LUCK and -10% negative status duration, and resist to CURSE 1 second longer."
+  },
+  {
+    "item_id": "NORMAL_GEM",
+    "name_en": "Normal Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__NORMAL_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to NORMAL synergy"
+  },
+  {
+    "item_id": "GRASS_GEM",
+    "name_en": "Grass Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GRASS_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to GRASS synergy"
+  },
+  {
+    "item_id": "FIRE_GEM",
+    "name_en": "Fire Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIRE_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FIRE synergy"
+  },
+  {
+    "item_id": "WATER_GEM",
+    "name_en": "Water Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__WATER_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to WATER synergy"
+  },
+  {
+    "item_id": "ELECTRIC_GEM",
+    "name_en": "Electric Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ELECTRIC_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to ELECTRIC synergy"
+  },
+  {
+    "item_id": "FIGHTING_GEM",
+    "name_en": "Fighting Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIGHTING_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FIGHTING synergy"
+  },
+  {
+    "item_id": "PSYCHIC_GEM",
+    "name_en": "Psychic Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__PSYCHIC_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to PSYCHIC synergy"
+  },
+  {
+    "item_id": "DARK_GEM",
+    "name_en": "Dark Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__DARK_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to DARK synergy"
+  },
+  {
+    "item_id": "STEEL_GEM",
+    "name_en": "Steel Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__STEEL_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to STEEL synergy"
+  },
+  {
+    "item_id": "GROUND_GEM",
+    "name_en": "Ground Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GROUND_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to GROUND synergy"
+  },
+  {
+    "item_id": "POISON_GEM",
+    "name_en": "Poison Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__POISON_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to POISON synergy"
+  },
+  {
+    "item_id": "DRAGON_GEM",
+    "name_en": "Dragon Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__DRAGON_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to DRAGON synergy"
+  },
+  {
+    "item_id": "FIELD_GEM",
+    "name_en": "Field Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIELD_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FIELD synergy"
+  },
+  {
+    "item_id": "MONSTER_GEM",
+    "name_en": "Monster Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__MONSTER_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to MONSTER synergy"
+  },
+  {
+    "item_id": "HUMAN_GEM",
+    "name_en": "Human Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__HUMAN_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to HUMAN synergy"
+  },
+  {
+    "item_id": "AQUATIC_GEM",
+    "name_en": "Aquatic Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__AQUATIC_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to AQUATIC synergy"
+  },
+  {
+    "item_id": "BUG_GEM",
+    "name_en": "Bug Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__BUG_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to BUG synergy"
+  },
+  {
+    "item_id": "FLYING_GEM",
+    "name_en": "Flying Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FLYING_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FLYING synergy"
+  },
+  {
+    "item_id": "FLORA_GEM",
+    "name_en": "Flora Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FLORA_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FLORA synergy"
+  },
+  {
+    "item_id": "ROCK_GEM",
+    "name_en": "Rock Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ROCK_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to ROCK synergy"
+  },
+  {
+    "item_id": "GHOST_GEM",
+    "name_en": "Ghost Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GHOST_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to GHOST synergy"
+  },
+  {
+    "item_id": "FAIRY_GEM",
+    "name_en": "Fairy Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FAIRY_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FAIRY synergy"
+  },
+  {
+    "item_id": "ICE_GEM",
+    "name_en": "Ice Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ICE_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to ICE synergy"
+  },
+  {
+    "item_id": "FOSSIL_GEM",
+    "name_en": "Fossil Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__FOSSIL_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to FOSSIL synergy"
+  },
+  {
+    "item_id": "SOUND_GEM",
+    "name_en": "Sound Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__SOUND_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to SOUND synergy"
+  },
+  {
+    "item_id": "ARTIFICIAL_GEM",
+    "name_en": "Artificial Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__ARTIFICIAL_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to ARTIFICIAL synergy"
+  },
+  {
+    "item_id": "LIGHT_GEM",
+    "name_en": "Light Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__LIGHT_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to LIGHT synergy"
+  },
+  {
+    "item_id": "WILD_GEM",
+    "name_en": "Wild Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__WILD_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to WILD synergy"
+  },
+  {
+    "item_id": "AMORPHOUS_GEM",
+    "name_en": "Amorphous Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__AMORPHOUS_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to AMORPHOUS synergy"
+  },
+  {
+    "item_id": "GOURMET_GEM",
+    "name_en": "Gourmet Gem",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOURMET_GEM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 to GOURMET synergy"
+  },
+  {
+    "item_id": "FIRE_SHARD",
+    "name_en": "Fire Shard",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIRE_SHARD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Sacrifice 3 player HP to give permanently +3 ATK and +3 SPEED to a FIRE Pokémon. Immediately consumed when given."
+  },
+  {
+    "item_id": "CELL_BATTERY",
+    "name_en": "Cell Battery",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CELL_BATTERY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Each cell battery on bench gives 2 SPEED to all your ELECTRIC Pokémon.\nUse it on an ELECTRIC Pokémon to supercharge it for the next fight, granting it 20 SPEED, 30 SHIELD and ELECTRIC_FIELD."
+  },
+  {
+    "item_id": "TEAL_MASK",
+    "name_en": "Teal Mask",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TEAL_MASK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "This carved wooden mask is adorned with crystals, grants Ogerpon the FLORA type during battle. Ogerpon loses its mask when its shield is depleted."
+  },
+  {
+    "item_id": "WELLSPRING_MASK",
+    "name_en": "Wellspring Mask",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__WELLSPRING_MASK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "This carved wooden mask is adorned with crystals, grants Ogerpon the AQUATIC type during battle. Ogerpon loses its mask when its shield is depleted."
+  },
+  {
+    "item_id": "CORNERSTONE_MASK",
+    "name_en": "Cornerstone Mask",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__CORNERSTONE_MASK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "This carved wooden mask is adorned with crystals, grants Ogerpon the ROCK type during battle. Ogerpon loses its mask when its shield is depleted."
+  },
+  {
+    "item_id": "HEARTHFLAME_MASK",
+    "name_en": "Hearthflame Mask",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__HEARTHFLAME_MASK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "This carved wooden mask is adorned with crystals, grants Ogerpon the FIRE type during battle. Ogerpon loses its mask when its shield is depleted."
+  },
+  {
+    "item_id": "ZYGARDE_CUBE",
+    "name_en": "Zygarde Cube",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ZYGARDE_CUBE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Contains cells of the Order Pokémon, Zygarde. It will cause a transformation into one of its alternate formes."
+  },
+  {
+    "item_id": "TM_RAGE",
+    "name_en": "TM01 - $t(ability.RAGE)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_RAGE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.RAGE): $t(ability_description.RAGE)"
+  },
+  {
+    "item_id": "TM_RETURN",
+    "name_en": "TM02 - $t(ability.RETURN)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_RETURN"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.RETURN): $t(ability_description.RETURN)"
+  },
+  {
+    "item_id": "TM_COUNTER",
+    "name_en": "TM03 - $t(ability.COUNTER)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_COUNTER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.COUNTER): $t(ability_description.COUNTER)"
+  },
+  {
+    "item_id": "TM_DISABLE",
+    "name_en": "TM04 - $t(ability.DISABLE)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_DISABLE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.DISABLE): $t(ability_description.DISABLE)"
+  },
+  {
+    "item_id": "TM_BULK_UP",
+    "name_en": "TM05 - $t(ability.BULK_UP)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_BULK_UP"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.BULK_UP): $t(ability_description.BULK_UP)"
+  },
+  {
+    "item_id": "TM_CHARGE",
+    "name_en": "TM06 - $t(ability.CHARGE)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_CHARGE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.CHARGE): $t(ability_description.CHARGE)"
+  },
+  {
+    "item_id": "TM_REFLECT",
+    "name_en": "TM07 - $t(ability.REFLECT)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_REFLECT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.REFLECT): $t(ability_description.REFLECT)"
+  },
+  {
+    "item_id": "TM_PAYDAY",
+    "name_en": "TM08 - $t(ability.PAYDAY)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_PAYDAY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.PAYDAY): $t(ability_description.PAYDAY)"
+  },
+  {
+    "item_id": "TM_FOCUS_PUNCH",
+    "name_en": "TM09 - $t(ability.FOCUS_PUNCH)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_FOCUS_PUNCH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.FOCUS_PUNCH): $t(ability_description.FOCUS_PUNCH)"
+  },
+  {
+    "item_id": "TM_HYPER_BEAM",
+    "name_en": "TM10 - $t(ability.HYPER_BEAM)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_HYPER_BEAM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.HYPER_BEAM): $t(ability_description.HYPER_BEAM)"
+  },
+  {
+    "item_id": "TM_PROTECT",
+    "name_en": "TM11 - $t(ability.PROTECT)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_PROTECT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.PROTECT): $t(ability_description.PROTECT)"
+  },
+  {
+    "item_id": "TM_SKILL_SWAP",
+    "name_en": "TM12 - $t(ability.SKILL_SWAP)",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__TM_SKILL_SWAP"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "$t(item_description.TM)\n$t(ability.SKILL_SWAP): $t(ability_description.SKILL_SWAP)"
+  },
+  {
+    "item_id": "CHEF_HAT",
+    "name_en": "Chef's Hat",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CHEF_HAT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder will cook their Signature Dish between rounds."
+  },
+  {
+    "item_id": "PICNIC_SET",
+    "name_en": "Picnic Set",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__PICNIC_SET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Immediately consumed when given. Give a SANDWICH to the holder and all ADJACENT allies. SANDWICH gives stat boosts for the next fight based on the types of the Pokémon eating it."
+  },
+  {
+    "item_id": "SANDWICH",
+    "name_en": "Sandwich",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SANDWICH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives various stat boosts for the next fight based on the types of the Pokémon eating it."
+  },
+  {
+    "item_id": "HEARTY_STEW",
+    "name_en": "Hearty Stew",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HEARTY_STEW"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds."
+  },
+  {
+    "item_id": "RAGE_CANDY_BAR",
+    "name_en": "Rage Candy Bar",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RAGE_CANDY_BAR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 10 ATK at the start of the next fight."
+  },
+  {
+    "item_id": "TEA",
+    "name_en": "Tea",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TEA"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 80 PP at the start of the next fight."
+  },
+  {
+    "item_id": "CURRY",
+    "name_en": "Curry",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CURRY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Start the next fight RAGE for 4 seconds."
+  },
+  {
+    "item_id": "CASTELIACONE",
+    "name_en": "Casteliacone",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CASTELIACONE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The first attack in the next fight will inflict FREEZE for 5 seconds on hit."
+  },
+  {
+    "item_id": "WHIPPED_DREAM",
+    "name_en": "Whipped Dream",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__WHIPPED_DREAM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The first attack in the next fight will inflict CHARM for 5 seconds on hit."
+  },
+  {
+    "item_id": "BERRY_JUICE",
+    "name_en": "Berry Juice",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__BERRY_JUICE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 100 SHIELD at the start of the next fight and every time a berry is consumed."
+  },
+  {
+    "item_id": "TART_APPLE",
+    "name_en": "Tart Apple",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TART_APPLE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "In the next fight, each attack by this Pokémon will remove 2 DEF from the target. Will turn into a SWEET_APPLE after one round."
+  },
+  {
+    "item_id": "SWEET_APPLE",
+    "name_en": "Sweet Apple",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SWEET_APPLE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "In the next fight, each attack by this Pokémon will remove 2 SPE_DEF from the target. Will turn into a SIRUPY_APPLE after one round."
+  },
+  {
+    "item_id": "SIRUPY_APPLE",
+    "name_en": "Syrupy Apple",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SIRUPY_APPLE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "In the next fight, each attack by this Pokémon has [30,LK]% chance to inflict PARALYSIS for 1 second. Will turn into LEFTOVERS after one round."
+  },
+  {
+    "item_id": "HERBA_MYSTICA",
+    "name_en": "Herba Mystica",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HERBA_MYSTICA"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain a field effect based on its flavor. The flavor will be determined by the type of the Pokémon eating it:\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\nOthers: HERBA_MYSTICA_SALTY"
+  },
+  {
+    "item_id": "HERBA_MYSTICA_BITTER",
+    "name_en": "Herba Mystica (Bitter)",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HERBA_MYSTICA_BITTER"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get GRASS_FIELD during the next fight"
+  },
+  {
+    "item_id": "HERBA_MYSTICA_SALTY",
+    "name_en": "Herba Mystica (Salty)",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HERBA_MYSTICA_SALTY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get RUNE_PROTECT during the next fight"
+  },
+  {
+    "item_id": "HERBA_MYSTICA_SWEET",
+    "name_en": "Herba Mystica (Sweet)",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HERBA_MYSTICA_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get FAIRY_FIELD during the next fight"
+  },
+  {
+    "item_id": "HERBA_MYSTICA_SPICY",
+    "name_en": "Herba Mystica (Spicy)",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HERBA_MYSTICA_SPICY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get PSYCHIC_FIELD during the next fight"
+  },
+  {
+    "item_id": "HERBA_MYSTICA_SOUR",
+    "name_en": "Herba Mystica (Sour)",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HERBA_MYSTICA_SOUR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get ELECTRIC_FIELD during the next fight"
+  },
+  {
+    "item_id": "OLIVE_OIL",
+    "name_en": "Olive Oil",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__OLIVE_OIL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 20% dodge chance in the next fight."
+  },
+  {
+    "item_id": "MUSHROOMS",
+    "name_en": "Mushrooms",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MUSHROOMS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A mix of mushrooms that can be sold for GOLD when coming back to town"
+  },
+  {
+    "item_id": "TINY_MUSHROOM",
+    "name_en": "Tiny Mushroom",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TINY_MUSHROOM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives 40 SPEED and reduce max HP by 20% for the next fight when consumed. Will be sold for 1 GOLD when returning to town."
+  },
+  {
+    "item_id": "BIG_MUSHROOM",
+    "name_en": "Big Mushroom",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BIG_MUSHROOM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gives +30% max HP for the next fight when consumed. Will be sold for 2 GOLD when returning to town."
+  },
+  {
+    "item_id": "BALM_MUSHROOM",
+    "name_en": "Balm Mushroom",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BALM_MUSHROOM"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When consumed, gains RUNE_PROTECT, 40 SPEED and heals 10% of max HP per second for the next fight. Will be sold for 5 GOLD when returning to town."
+  },
+  {
+    "item_id": "MOOMOO_MILK",
+    "name_en": "Moomoo Milk",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MOOMOO_MILK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 15 permanent max HP."
+  },
+  {
+    "item_id": "BERRIES",
+    "name_en": "Berries",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BERRIES"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Get 3 random berries"
+  },
+  {
+    "item_id": "HONEY",
+    "name_en": "Honey",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__HONEY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Each Pokémon in the next shop rerolls this round has an additional 5% chance to share a common synergy with a Pokémon eating HONEY."
+  },
+  {
+    "item_id": "POFFIN",
+    "name_en": "Poffin",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__POFFIN"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 100 SHIELD. All held berries are added to the poffin. Their effects are applied immediately, with healed HP turned into SHIELD."
+  },
+  {
+    "item_id": "ROCK_SALT",
+    "name_en": "Rock Salt",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__ROCK_SALT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Start the next fight with RUNE_PROTECT for 10 seconds and 20% of max HP as SHIELD."
+  },
+  {
+    "item_id": "NUTRITIOUS_EGG",
+    "name_en": "Nutritious Egg",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__NUTRITIOUS_EGG"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Start the next fight with +50% base ATK, DEF and SPE_DEF."
+  },
+  {
+    "item_id": "LEFTOVERS",
+    "name_en": "Leftovers",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LEFTOVERS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "No effect. There is not much left to eat."
+  },
+  {
+    "item_id": "BLACK_SLUDGE",
+    "name_en": "Black Sludge",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BLACK_SLUDGE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead."
+  },
+  {
+    "item_id": "BINDING_MOCHI",
+    "name_en": "Binding Mochi",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BINDING_MOCHI"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The first attack in the next fight will cause POSSESSED for 5 seconds on hit."
+  },
+  {
+    "item_id": "FRUIT_JUICE",
+    "name_en": "Fruit Juice",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FRUIT_JUICE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 50 SPEED in the next fight."
+  },
+  {
+    "item_id": "LEEK",
+    "name_en": "Leek",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LEEK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 50% CRIT_CHANCE and allow ability to critically strike in the next fight. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead."
+  },
+  {
+    "item_id": "LARGE_LEEK",
+    "name_en": "Large Leek",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LARGE_LEEK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 100% CRIT_POWER and allow ability to critically strike in the next fight. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead."
+  },
+  {
+    "item_id": "SPINDA_COCKTAIL",
+    "name_en": "Spinda's Cocktail",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SPINDA_COCKTAIL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A cocktail with [LK] random effects that can buff stats or make you dizzy."
+  },
+  {
+    "item_id": "SMOKED_FILET",
+    "name_en": "Smoked Fillet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SMOKED_FILET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Permanently lose 5 max HP to gain 5 ATK and 10 AP."
+  },
+  {
+    "item_id": "SWEETS",
+    "name_en": "Sweets",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SWEETS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A random candy granting a permanent stats bonus"
+  },
+  {
+    "item_id": "RIBBON_SWEET",
+    "name_en": "Ribbon Sweet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RIBBON_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 3 permanent SPE_DEF"
+  },
+  {
+    "item_id": "STAR_SWEET",
+    "name_en": "Star Sweet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__STAR_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 10 permanent AP"
+  },
+  {
+    "item_id": "FLOWER_SWEET",
+    "name_en": "Flower Sweet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FLOWER_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 5 permanent SPEED"
+  },
+  {
+    "item_id": "CLOVER_SWEET",
+    "name_en": "Clover Sweet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CLOVER_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 10 permanent LUCK"
+  },
+  {
+    "item_id": "BERRY_SWEET",
+    "name_en": "Berry Sweet",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__BERRY_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 15 permanent HP"
+  },
+  {
+    "item_id": "LOVE_SWEET",
+    "name_en": "Love Sweet",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LOVE_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 3 permanent DEF"
+  },
+  {
+    "item_id": "STRAWBERRY_SWEET",
+    "name_en": "Strawberry Sweet",
+    "rarity": "common",
+    "effects": [
+      {
+        "effect_id": "ITEM__STRAWBERRY_SWEET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Gain 3 permanent ATK"
+  },
+  {
+    "item_id": "RUBY_FLAVOR",
+    "name_en": "Ruby Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RUBY_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with FIGHTING HUMAN STEEL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY). $t(passive_description.RUBY_CREAM)"
+  },
+  {
+    "item_id": "MATCHA_FLAVOR",
+    "name_en": "Matcha Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MATCHA_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with GRASS FLORA POISON GHOST allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MATCHA). $t(passive_description.MATCHA_CREAM)"
+  },
+  {
+    "item_id": "MINT_FLAVOR",
+    "name_en": "Mint Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MINT_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with WATER AQUATIC ICE allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MINT). $t(passive_description.MINT_CREAM)"
+  },
+  {
+    "item_id": "SALTED_FLAVOR",
+    "name_en": "Salted Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SALTED_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with ROCK GROUND FOSSIL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_SALTED). $t(passive_description.SALTED_CREAM)"
+  },
+  {
+    "item_id": "CARAMEL_SWIRL_FLAVOR",
+    "name_en": "Caramel Swirl Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__CARAMEL_SWIRL_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with DARK MONSTER DRAGON allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)"
+  },
+  {
+    "item_id": "RUBY_SWIRL_FLAVOR",
+    "name_en": "Ruby Swirl Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RUBY_SWIRL_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with FIRE WILD FIELD allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY_SWIRL). $t(passive_description.RUBY_SWIRL_CREAM)"
+  },
+  {
+    "item_id": "LEMON_FLAVOR",
+    "name_en": "Lemon Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LEMON_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with ELECTRIC BUG FAIRY SOUND allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_LEMON). $t(passive_description.LEMON_CREAM)"
+  },
+  {
+    "item_id": "RAINBOW_SWIRL_FLAVOR",
+    "name_en": "Rainbow Swirl Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RAINBOW_SWIRL_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)"
+  },
+  {
+    "item_id": "VANILLA_FLAVOR",
+    "name_en": "Vanilla Flavor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__VANILLA_FLAVOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Baked with NORMAL FLYING ARTIFICIAL GOURMET allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)"
+  },
+  {
+    "item_id": "EGG_FOR_SELL",
+    "name_en": "Pokémon Egg",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EGG_FOR_SELL"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "An Egg sold at Chansey's Daycare"
+  },
+  {
+    "item_id": "AMULET_COIN",
+    "name_en": "Amulet Coin",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__AMULET_COIN"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+1 GOLD each time the holder knocks out an opponent.\nReduce max interest cap by 10 GOLD."
+  },
+  {
+    "item_id": "GIMMIGHOUL_COIN",
+    "name_en": "Gimmighoul Coin",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GIMMIGHOUL_COIN"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "+3 GOLD when obtained.\nIncrease max interest cap by 10 GOLD."
+  },
+  {
+    "item_id": "COIN",
+    "name_en": "Rusty Coin",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__COIN"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "An old rusty coin. +1 GOLD when obtained."
+  },
+  {
+    "item_id": "NUGGET",
+    "name_en": "Nugget",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__NUGGET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A small gold nugget. +3 GOLD when obtained."
+  },
+  {
+    "item_id": "BIG_NUGGET",
+    "name_en": "Big Nugget",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BIG_NUGGET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A big gold nugget. +10 GOLD when obtained."
+  },
+  {
+    "item_id": "EXCHANGE_TICKET",
+    "name_en": "Exchange Ticket",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EXCHANGE_TICKET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Exchange an item component or a crafted item on bench for another random one. Single use."
+  },
+  {
+    "item_id": "RECYCLE_TICKET",
+    "name_en": "Recycle Ticket",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RECYCLE_TICKET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Recycle a crafted item on bench or the crafted items held by a Pokémon into their base components. Single use."
+  },
+  {
+    "item_id": "TREASURE_BOX",
+    "name_en": "Treasure Box",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TREASURE_BOX"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "You wonder what's inside. It will open once you have 40 HP or less."
+  },
+  {
+    "item_id": "AUSPICIOUS_ARMOR",
+    "name_en": "Auspicious Armor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__AUSPICIOUS_ARMOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it."
+  },
+  {
+    "item_id": "MALICIOUS_ARMOR",
+    "name_en": "Malicious Armor",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MALICIOUS_ARMOR"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it."
+  },
+  {
+    "item_id": "RUSTED_SWORD",
+    "name_en": "Rusted Sword",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RUSTED_SWORD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "It is said that a hero used this sword to halt a terrible disaster in ancient times. Gives the holder +50% base ATK. Transfers to the ally with the weakest ATK when the holder faints."
+  },
+  {
+    "item_id": "SCROLL_OF_WATERS",
+    "name_en": "Scroll of Waters",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SCROLL_OF_WATERS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Written upon it are the true secrets of the path of water. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_RAPID)."
+  },
+  {
+    "item_id": "SCROLL_OF_DARKNESS",
+    "name_en": "Scroll of Darkness",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SCROLL_OF_DARKNESS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Written upon it are the true secrets of the path of darkness. When used on a $t(pkm.KUBFU), will cause it to evolve into $t(pkm.URSHIFU_SINGLE)"
+  },
+  {
+    "item_id": "RICH_MULCH",
+    "name_en": "Rich Mulch",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__RICH_MULCH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Use it on a flower pot to evolve the Pokémon inside, or on a berry tree to fully grow it."
+  },
+  {
+    "item_id": "AMAZE_MULCH",
+    "name_en": "Amaze Mulch",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__AMAZE_MULCH"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Use it on a flower pot to permanently give 50 max HP and 30 AP to the Pokémon inside, or on a berry tree to fully grow it and make it golden."
+  },
+  {
+    "item_id": "BRONZE_DOJO_TICKET",
+    "name_en": "Bronze Dojo Ticket",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BRONZE_DOJO_TICKET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Use it on a Pokémon to send them to the Dojo for 3 stages, returning with +50 max HP, +5 ATK and +15 AP. A substitute takes their place in the meantime."
+  },
+  {
+    "item_id": "SILVER_DOJO_TICKET",
+    "name_en": "Silver Dojo Ticket",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SILVER_DOJO_TICKET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Use it on a Pokémon to send them to the Dojo for 4 stages, returning with +100 max HP, +10 ATK and +30 AP. A substitute takes their place in the meantime."
+  },
+  {
+    "item_id": "GOLD_DOJO_TICKET",
+    "name_en": "Gold Dojo Ticket",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOLD_DOJO_TICKET"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Use it on a Pokémon to send them to the Dojo for 5 stages, returning with +150 max HP, +15 ATK and +45 AP. A substitute takes their place in the meantime."
+  },
+  {
+    "item_id": "MEMORY_DISCS",
+    "name_en": "Memory Discs",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MEMORY_DISCS"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get a previously used type."
+  },
+  {
+    "item_id": "FIRE_MEMORY",
+    "name_en": "Fire Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIRE_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get FIRE type."
+  },
+  {
+    "item_id": "FOSSIL_MEMORY",
+    "name_en": "Fossil Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__FOSSIL_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get FOSSIL type."
+  },
+  {
+    "item_id": "PSYCHIC_MEMORY",
+    "name_en": "Psychic Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__PSYCHIC_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get PSYCHIC type."
+  },
+  {
+    "item_id": "WATER_MEMORY",
+    "name_en": "Water Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__WATER_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get WATER type."
+  },
+  {
+    "item_id": "ELECTRIC_MEMORY",
+    "name_en": "Electric Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__ELECTRIC_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get ELECTRIC type."
+  },
+  {
+    "item_id": "FAIRY_MEMORY",
+    "name_en": "Fairy Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__FAIRY_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get FAIRY type."
+  },
+  {
+    "item_id": "DARK_MEMORY",
+    "name_en": "Dark Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__DARK_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get DARK type."
+  },
+  {
+    "item_id": "GRASS_MEMORY",
+    "name_en": "Grass Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__GRASS_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get GRASS type."
+  },
+  {
+    "item_id": "ICE_MEMORY",
+    "name_en": "Ice Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__ICE_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get ICE type."
+  },
+  {
+    "item_id": "FIGHTING_MEMORY",
+    "name_en": "Fighting Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIGHTING_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get FIGHTING type."
+  },
+  {
+    "item_id": "POISON_MEMORY",
+    "name_en": "Poison Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__POISON_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get POISON type."
+  },
+  {
+    "item_id": "SOUND_MEMORY",
+    "name_en": "Sound Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__SOUND_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get SOUND type."
+  },
+  {
+    "item_id": "STEEL_MEMORY",
+    "name_en": "Steel Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__STEEL_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get STEEL type."
+  },
+  {
+    "item_id": "FLYING_MEMORY",
+    "name_en": "Flying Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__FLYING_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get FLYING type."
+  },
+  {
+    "item_id": "ROCK_MEMORY",
+    "name_en": "Rock Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__ROCK_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get ROCK type."
+  },
+  {
+    "item_id": "GROUND_MEMORY",
+    "name_en": "Ground Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__GROUND_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get GROUND type."
+  },
+  {
+    "item_id": "FIELD_MEMORY",
+    "name_en": "Field Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__FIELD_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get FIELD type."
+  },
+  {
+    "item_id": "GHOST_MEMORY",
+    "name_en": "Ghost Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__GHOST_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get GHOST type."
+  },
+  {
+    "item_id": "LIGHT_MEMORY",
+    "name_en": "Light Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__LIGHT_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get LIGHT type."
+  },
+  {
+    "item_id": "NORMAL_MEMORY",
+    "name_en": "Normal Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__NORMAL_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get NORMAL type."
+  },
+  {
+    "item_id": "BUG_MEMORY",
+    "name_en": "Bug Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__BUG_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get BUG type."
+  },
+  {
+    "item_id": "GOURMET_MEMORY",
+    "name_en": "Gourmet Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__GOURMET_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get GOURMET type."
+  },
+  {
+    "item_id": "MONSTER_MEMORY",
+    "name_en": "Monster Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__MONSTER_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get MONSTER type."
+  },
+  {
+    "item_id": "AQUATIC_MEMORY",
+    "name_en": "Aquatic Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__AQUATIC_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get AQUATIC type."
+  },
+  {
+    "item_id": "DRAGON_MEMORY",
+    "name_en": "Dragon Memory",
+    "rarity": "epic",
+    "effects": [
+      {
+        "effect_id": "ITEM__DRAGON_MEMORY"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Can be equipped on $t(pkm.SILVALLY) to get DRAGON type."
+  },
+  {
+    "item_id": "MISSION_ORDER_BLUE",
+    "name_en": "Mission Order - Level up!",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MISSION_ORDER_BLUE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Complete this mission to earn 30 GOLD:\n reach level 9"
+  },
+  {
+    "item_id": "MISSION_ORDER_RED",
+    "name_en": "Mission Order - Destroy!",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MISSION_ORDER_RED"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Complete this mission to earn 30 GOLD:\n inflict 100 damage to other players"
+  },
+  {
+    "item_id": "MISSION_ORDER_GREEN",
+    "name_en": "Mission Order - Diversify!",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MISSION_ORDER_GREEN"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Complete this mission to earn 30 GOLD:\n reach 8 different active synergies"
+  },
+  {
+    "item_id": "MISSION_ORDER_GOLD",
+    "name_en": "Mission Order - Prosper!",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MISSION_ORDER_GOLD"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Complete this mission to earn 30 GOLD:\n earn 200 GOLD in total during the game"
+  },
+  {
+    "item_id": "MISSION_ORDER_PINK",
+    "name_en": "Mission Order - Evolve!",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MISSION_ORDER_PINK"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Complete this mission to earn 30 GOLD:\n get 5 STAR STAR STAR Pokémon on board"
+  },
+  {
+    "item_id": "LEADERS_CREST",
+    "name_en": "Leader's Crest",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LEADERS_CREST"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "When another player beats you in battle, they get an additional 4 GOLD and take the LEADERS_CREST."
+  },
+  {
+    "item_id": "SILK_SCARF",
+    "name_en": "Silk Scarf",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__SILK_SCARF"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Combine it with other item components to make all kinds of scarves, bands and bows. Those items will be removed if you lower down NORMAL synergy level."
+  },
+  {
+    "item_id": "FRIEND_BOW",
+    "name_en": "Friend Bow",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__FRIEND_BOW"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder gains the NORMAL type."
+  },
+  {
+    "item_id": "BLACK_BELT",
+    "name_en": "Black Belt",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BLACK_BELT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Critical attacks provide 33% of the damage dealt as SHIELD."
+  },
+  {
+    "item_id": "MACH_RIBBON",
+    "name_en": "Mach Ribbon",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__MACH_RIBBON"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Every 3 seconds, gain 20 SPEED."
+  },
+  {
+    "item_id": "EXPLOSIVE_BAND",
+    "name_en": "Explosive Band",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EXPLOSIVE_BAND"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The first time user shield is depleted, this item explodes, dealing 50% of all SHIELD gained so far as SPECIAL to ADJACENT enemies."
+  },
+  {
+    "item_id": "TWIST_BAND",
+    "name_en": "Twist Band",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__TWIST_BAND"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Stat debuffs inflicted by enemies become buffs instead. Holder stat buffs cannot be stolen."
+  },
+  {
+    "item_id": "BIG_EATER_BELT",
+    "name_en": "Big Eater Belt",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__BIG_EATER_BELT"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Increase all stat buffs received by 25%. Allows the wearer to eat 2 different dishes per round."
+  },
+  {
+    "item_id": "LUCKY_RIBBON",
+    "name_en": "Lucky Ribbon",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__LUCKY_RIBBON"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Increase holder's LUCK by 30%"
+  },
+  {
+    "item_id": "COVER_BAND",
+    "name_en": "Cover Band",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__COVER_BAND"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "If an ADJACENT ally is about to get KO with some incoming damage, the wearer takes the damage instead."
+  },
+  {
+    "item_id": "EFFICIENT_BANDANNA",
+    "name_en": "Efficient Bandanna",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__EFFICIENT_BANDANNA"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "The holder and allies ADJACENT_IN_THE_SAME_ROW have their max PP reduced by 15%."
+  },
+  {
+    "item_id": "NULLIFY_BANDANNA",
+    "name_en": "Nullify Bandanna",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__NULLIFY_BANDANNA"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack."
+  },
+  {
+    "item_id": "WANTED_NOTICE",
+    "name_en": "Wanted Notice",
+    "rarity": "rare",
+    "effects": [
+      {
+        "effect_id": "ITEM__WANTED_NOTICE"
+      }
+    ],
+    "constraints": {
+      "unique_per_team": false,
+      "unique_per_unit": true,
+      "slot_limit": 3
+    },
+    "text_en": "Wanted: Fainted or Alive\n Reward: 10 GOLD"
+  }
+]

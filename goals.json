@@ -1,0 +1,12 @@
+{
+  "requirements": [
+    { "type": "command", "name": "validate-science-data" },
+    { "type": "command", "name": "verify-mechanics" },
+    {
+      "type": "metric",
+      "file": "policy-experiment-results.json",
+      "path": "0.delta_top4",
+      "min": -1
+    }
+  ]
+}
