@@ -63,6 +63,7 @@ import {
 import { getPortraitSrc } from "../../utils/avatar"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
+import { generateRandomName } from "../../utils/name-generation"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { convertSchemaToRawObject, values } from "../../utils/schemas"
@@ -109,22 +110,17 @@ export class OnJoinCommand extends Command<
         // create new user account
         const starterBoosters = 3
         const starterAvatar = pickRandomIn(StarterAvatars)
+        const randomName = generateRandomName()
         await UserMetadata.create({
           uid: client.auth.uid,
-          displayName: client.auth.displayName.substring(
-            0,
-            MAX_USER_NAME_LENGTH
-          ),
+          displayName: randomName,
           avatar: starterAvatar,
           booster: starterBoosters,
           pokemonCollection: new Map<string, IPokemonCollectionItemMongo>()
         })
         const newUser: IUserMetadataMongo = {
           uid: client.auth.uid,
-          displayName: client.auth.displayName.substring(
-            0,
-            MAX_USER_NAME_LENGTH
-          ),
+          displayName: randomName,
           language: client.auth.metadata.language,
           avatar: starterAvatar,
           games: 0,
