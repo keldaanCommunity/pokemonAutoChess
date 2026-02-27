@@ -5673,7 +5673,7 @@ export class Palkia extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 110
+  maxPP = 120
   range = 1
   skill = Ability.SPACIAL_REND
 }
