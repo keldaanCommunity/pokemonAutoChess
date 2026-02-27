@@ -69,10 +69,11 @@ export abstract class EvolutionRule {
       ) {
         pokemon.addMaxHP(10, player)
         pokemon.stacks++
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
       }
-      // check evolutions again if it can evolve twice in a row
-      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
     })
+    // check evolutions again if it can evolve twice in a row
+    pokemonEvolved.evolutionRule.tryEvolve(pokemonEvolved, player, stageLevel)
   }
 }
 
