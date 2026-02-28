@@ -32,9 +32,9 @@ import {
   MissionOrder,
   NonSpecialBerries,
   ScarfItem,
+  Scarves,
   SynergyGemsBuried,
   SynergyGivenByItem,
-  TMs,
   TMsBronze,
   TMsGold,
   TMsSilver,
@@ -471,10 +471,19 @@ export default class Player extends Schema implements IPlayer {
     updatedSynergies: Map<Synergy, number>
   ): boolean {
     let needsRecomputingSynergiesAgain = false
-    const previousNbScarves = getSynergyStep(previousSynergies, Synergy.NORMAL)
+    const previousNbNormalScarves = getSynergyStep(
+      previousSynergies,
+      Synergy.NORMAL
+    )
+    const previousNbScarves = this.items
+      .concat(values(this.board).flatMap((p) => Array.from(p.items)))
+      .filter((i) => isIn(Scarves, i) || i === Item.SILK_SCARF)
+      .reduce((total, i) => total + (i === Item.NULLIFY_BANDANNA ? 2 : 1), 0) // count scarves already held by player and pokemons, with nullify bandanna counting as 2
+    const extraScarves = previousNbScarves - previousNbNormalScarves // if > 0 it means player got a scarf from another source (encounter, passive...)
     const previousScarves = this.getScarvesItemsWithNbScarves(previousNbScarves)
 
-    const newNbScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
+    const newNbNormalScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
+    const newNbScarves = newNbNormalScarves + extraScarves
     const newScarves = this.getScarvesItemsWithNbScarves(newNbScarves)
 
     if (newScarves.length > previousScarves.length) {
