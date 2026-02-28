@@ -64,3 +64,7 @@
 - Add 15-day history tracking to meta reports with multi-line trends visualization
 - Added a key shortcut to open the wiki and the team planner
 - New users have now a random generated name (ex: "Happy-Charmander-12345") to prevent eventual doxxing.
+
+# Bug Fixes
+
+- Temporary stat buffs on big eater belt holder when lost are now fully removed, so the 25% bonus is not kept forever

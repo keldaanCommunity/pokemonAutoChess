@@ -468,9 +468,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
     return this.state.addShield(this, value, caster, apBoost, crit)
   }
 
@@ -487,17 +485,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
 
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     if (
       !(value > 0 && this.status.silence) &&
@@ -517,18 +506,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     this.critChance += value
 
@@ -550,18 +529,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (value / 100) *
       (1 + (apBoost * caster.ap) / 100) *
       (crit ? caster.critPower : 1)
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = roundToNDigits(value * 1.25, 2)
-    }
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster, 2)
+    value = applyTwistBandBuff(this, value, caster)
 
     this.critPower = min(0)(this.critPower + value)
   }
@@ -576,18 +545,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     this.maxHP = min(1)(this.maxHP + value)
     if (this.hp > 0) {
@@ -597,8 +556,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      if (boardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       boardPokemon.addMaxHP(value, this.player)
     }
   }
@@ -611,18 +568,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     this.dodge = clamp(this.dodge + value, 0, 0.9)
   }
@@ -637,18 +584,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     const update = (target: { ap: number }) => {
       target.ap = min(-100)(target.ap + value)
@@ -661,8 +598,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -676,26 +611,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     const update = (target: { luck: number }) => {
       target.luck = clamp(target.luck + value, -100, +100)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -710,26 +633,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     const update = (target: { def: number }) => {
       target.def = min(0)(target.def + value)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -744,26 +655,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     const update = (target: { speDef: number }) => {
       target.speDef = min(0)(target.speDef + value)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -778,26 +677,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
-
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
-
-    if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     const update = (target: { atk: number }) => {
       target.atk = min(1)(target.atk + value)
     }
     update(this)
     if (permanent && !this.isGhostOpponent) {
-      if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-        value = Math.round(value * 1.25)
       update(this.refToBoardPokemon)
     }
   }
@@ -809,13 +696,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
-    if (
-      value < 0 &&
-      this.items.has(Item.TWIST_BAND) &&
-      caster.team !== this.team
-    ) {
-      value *= -1 // twist band turn debuffs into buffs
-    }
+    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyTwistBandBuff(this, value, caster)
 
     if (this.passive === Passive.MELMETAL) {
       this.addAttack(value * 0.5, caster, apBoost, crit, permanent)
@@ -825,17 +707,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1)
 
-      if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-        value = Math.round(value * 1.25)
-      }
-
       const update = (target: { speed: number }) => {
         target.speed = clamp(target.speed + value, 0, MAX_SPEED)
       }
       update(this)
       if (permanent && !this.isGhostOpponent) {
-        if (this.refToBoardPokemon.items.has(Item.BIG_EATER_BELT))
-          value = Math.round(value * 1.25)
         update(this.refToBoardPokemon)
       }
     }
@@ -1932,4 +1808,33 @@ export function getMoveSpeed(pokemon: IPokemonEntity): number {
   // at max 300 speed, it's 3.5 = 143ms per cell
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
   return 0.5 + speed / 100
+}
+
+function applyBigEaterBeltStatBuff(
+  pokemon: PokemonEntity,
+  value: number,
+  caster: IPokemonEntity,
+  nbDigits: number = 0
+) {
+  const isBuffOrBuffLost =
+    value > 0 || (value < 0 && caster.team === pokemon.team)
+  if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
+    value = roundToNDigits(value * 1.25, nbDigits)
+  }
+  return value
+}
+
+function applyTwistBandBuff(
+  pokemon: PokemonEntity,
+  value: number,
+  caster: IPokemonEntity
+) {
+  if (
+    value < 0 &&
+    pokemon.items.has(Item.TWIST_BAND) &&
+    caster.team !== pokemon.team
+  ) {
+    value *= -1 // twist band turn debuffs into buffs
+  }
+  return value
 }
