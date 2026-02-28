@@ -1739,7 +1739,7 @@
 		"SING": "Inflige SLEEP aux [1,2,3] Pokémon ennemis de la rangée arrière pendant [2,SP] secondes.",
 		"PROTECT": "Donne PROTECT au lanceur, devenant invulnérable pendant [1,3,5,SP=0.5] secondes.",
 		"OBSTRUCT": "Donne PROTECT au lanceur, devenant invulnérable pendant [2,SP=0.5] secondes. Toute attaque reçue pendant ce délai réduit la DEF de l'attaquant de 2.",
-		"BLIZZARD": "Inflige FREEZE à toute l'équipe adverse pendant 2 secondes et leur inflige [10,20,30,SP] SPECIAL. Dégâts doublés si la cible est déjà FREEZE.",
+		"BLIZZARD": "Inflige FREEZE à tous les adversaires dans un rayon de 4 cases pendant 2 secondes et leur inflige [10,20,40,SP] SPECIAL. Dégâts doublés si la cible est déjà FREEZE.",
 		"CONFUSION": "Rend la cible CONFUSION et sous SILENCE pendant [3,5,7] secondes. Si la cible est déjà CONFUSION, inflige [75,150,300,SP] SPECIAL à la place.",
 		"FIRE_BLAST": "Lance une Déflagration de feu dans une zone d'effet en forme d'étoile, infligeant [30,60,110,SP] SPECIAL à tous les ennemis touchés.",
 		"WHEEL_OF_FIRE": "Envoie une Roue de Feu sur l’ennemi le plus éloigné et inflige deux fois [10,20,30,SP] de SPECIAL à tous les ennemis sur son chemin, à l'aller et au retour.",

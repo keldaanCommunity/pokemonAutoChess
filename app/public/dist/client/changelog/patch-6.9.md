@@ -44,6 +44,7 @@
 - Rework Origin Giratina: Slash all enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [40,80,120,SP] SPECIAL.
 - Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 - Nerf Palkia: PP 110 → 120
+- Change Blizzard (Articuno): freeze all enemies **in a 4-cell radius** ; damage: 10/20/30 → 10/20/40
 
 # Changes to Items
 

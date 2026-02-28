@@ -1752,7 +1752,7 @@
 		"SING": "使[1,2,3]只最靠后的敌方宝可梦陷入SLEEP [2,SP]秒。",
 		"PROTECT": "使用者获得PROTECT，在[1,3,5,SP=0.5] 秒内无敌。",
 		"OBSTRUCT": "使用者获得PROTECT，在[2,SP=0.5] 秒内无敌。在此期间受到攻击时，会降低攻击者2点DEF。",
-		"BLIZZARD": "使所有敌方宝可梦陷入FREEZE 2秒，并对其造成[10,20,30,SP]点SPECIAL。 已经处于FREEZE的敌人受到伤害翻倍。",
+		"BLIZZARD": "FREEZE 4格半径内的所有敌方神奇宝贝 2 秒并造成 [10,20,40,SP] SPECIAL。如果目标已经受到 FREEZE 的伤害，伤害会加倍。",
 		"CONFUSION": "使目标陷入CONFUSION及SILENCE [3,5,7]秒。若已经处于CONFUSION，改为造成[75,150,300,SP]点SPECIAL。",
 		"FIRE_BLAST": "发射一道对星形区域造成伤害的火焰，对击中的所有敌方宝可梦造成[30,60,110,SP]点SPECIAL。",
 		"WHEEL_OF_FIRE": "对最远的敌方宝可梦发射一个会飞回的火焰轮，对经过的所有敌方宝可梦造成两次[10,20,30,SP]点SPECIAL。",

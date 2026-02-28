@@ -1,3 +1,4 @@
+import { borderBottomLeftRadius } from "html2canvas/dist/types/css/property-descriptors/border-radius"
 import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
@@ -2264,19 +2265,22 @@ export class BlizzardStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const freezeDuration = 2000
-    const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
-    board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (enemy && pokemon.team != enemy.team) {
-        enemy.handleSpecialDamage(
-          enemy.status.freeze ? damage * 2 : damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-        enemy.status.triggerFreeze(freezeDuration, enemy)
-      }
-    })
+    const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          const enemy = cell.value
+          enemy.handleSpecialDamage(
+            enemy.status.freeze ? damage * 2 : damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          enemy.status.triggerFreeze(freezeDuration, enemy)
+        }
+      })
   }
 }
 
