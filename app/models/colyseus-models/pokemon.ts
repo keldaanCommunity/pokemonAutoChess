@@ -12932,7 +12932,7 @@ export class Skuntank extends Pokemon {
 }
 
 export class Illumise extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.LIGHT, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 130
@@ -12947,7 +12947,7 @@ export class Illumise extends Pokemon {
 }
 
 export class Volbeat extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.BUG, Synergy.LIGHT])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.LIGHT, Synergy.FLYING])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 130
