@@ -163,8 +163,8 @@
 		"SKY_ATTACK": "神鸟猛击",
 		"SKY_ATTACK_SHADOW": "神鸟猛击",
 		"ILLUSION": "幻觉",
-		"ACID_ARMOR": "溶化",
 		"SHELTER": "闭关",
+		"ACID_ARMOR": "溶化",
 		"LAVA_PLUME": "喷烟",
 		"SMOG": "浊雾",
 		"SLUDGE": "污泥攻击",
@@ -3266,7 +3266,7 @@
 		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD",
 		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
-		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。"	
+		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。"
 	},
 	"stat": {
 		"ATK": "攻击",
