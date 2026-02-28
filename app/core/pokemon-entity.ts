@@ -43,7 +43,7 @@ import { count, isIn } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
-import { clamp, max, min } from "../utils/number"
+import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -552,7 +552,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (crit ? caster.critPower : 1)
 
     if (value > 0 && this.items.has(Item.BIG_EATER_BELT)) {
-      value = Math.round(value * 1.25)
+      value = roundToNDigits(value * 1.25, 2)
     }
 
     if (

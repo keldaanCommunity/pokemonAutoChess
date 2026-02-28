@@ -94,11 +94,11 @@ export function GamePokemonDetail(props: {
         // count item stats as well
         s.value = values(pokemon.items).reduce((acc, item) => {
           let itemStatBonus = ItemStats[item]?.[s.stat] ?? 0
-          if (s.stat === Stat.CRIT_POWER && itemStatBonus > 0) {
-            itemStatBonus = itemStatBonus / 100
-          }
           if (pokemon.items.has(Item.BIG_EATER_BELT) && itemStatBonus > 0) {
             itemStatBonus = Math.round(itemStatBonus * 1.25)
+          }
+          if (s.stat === Stat.CRIT_POWER && itemStatBonus > 0) {
+            itemStatBonus = itemStatBonus / 100
           }
           return acc + itemStatBonus
         }, s.value)
