@@ -750,9 +750,15 @@ export class OnDragDropItemCommand extends Command<
       }
     }
 
+    if (UnholdableItems.includes(item) && !ConsumableItems.includes(item)) {
+      // Unholdable and non-consummable items should have zero interaction on any Pokémon
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      return
+    }
+
     if (
       pokemon.canHoldItems === false &&
-      UnholdableItems.includes(item) === false
+      !(UnholdableItems.includes(item) && isIn(ConsumableItems, item)) // unholdable consumable items like dishes or dojo tickets can still be used on pokemon that can't hold items, since they are consumed right away and don't actually get held by the pokemon
     ) {
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
