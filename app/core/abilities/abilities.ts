@@ -375,12 +375,8 @@ export class MindBlownStrategy extends AbilityStrategy {
 }
 
 export class SoftBoiledStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  doesRequireTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
@@ -16916,7 +16912,7 @@ export function castAbility(
   ability: Ability,
   pokemon: PokemonEntity,
   board: Board,
-  target: PokemonEntity,
+  target: PokemonEntity | null,
   canCrit = true,
   preventDefaultAnim = false
 ) {
