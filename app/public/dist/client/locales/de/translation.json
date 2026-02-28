@@ -3899,7 +3899,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",
-		"max_loading_time": "Das Spiel startet nach maximal 5 Minuten Ladezeit, egal was...",
+		"max_loading_time": "Das Spiel startet nach maximal 3 Minuten Ladezeit, egal was...",
 		"disconnection_time": "Spieler, deren Verbindung für mehr als 3 Minuten unterbrochen wird, werden aus dem Spiel geworfen. Wenn dies vor Ebene 6 geschieht, verlieren sie keine Elo.",
 		"translation_project": "Die Übersetzungen im Spiel werden von der Community verwaltet! Schauen auf Discord, wenn du etwas beitragen möchtest.",
 		"discord": "Tritt unserem Discord bei, um die Community zu treffen! Link im Seitenmenü",

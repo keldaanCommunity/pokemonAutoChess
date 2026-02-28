@@ -2662,7 +2662,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "Não saia da tela! O carregamento é pausado quando esta janela do navegador está inativa.",
-		"max_loading_time": "O jogo começará após, no máximo, 5 minutos de carregamento, não importa o que...",
+		"max_loading_time": "O jogo começará após, no máximo, 3 minutos de carregamento, não importa o que...",
 		"disconnection_time": "Jogadores ausentes do jogo por mais de 3 minutos são expulsos do jogo. Se isso acontecer antes da fase 6, eles não perderão Elo.",
 		"translation_project": "As traduções são gerenciadas pela comunidade. Se você quiser traduzir ou ajudar a melhorar uma tradução, acesse o Discord.",
 		"discord": "Junte-se ao nosso Discord para conhecer a comunidade! Link no menu lateral",

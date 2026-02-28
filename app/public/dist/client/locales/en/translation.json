@@ -4480,7 +4480,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
-		"max_loading_time": "Game will start after maximum 5 minutes of loading, no matter what...",
+		"max_loading_time": "Game will start after maximum 3 minutes of loading, no matter what...",
 		"disconnection_time": "Players disconnected for more than 3 minutes are kicked out of the game. If it happens before stage 6, they won't lose Elo.",
 		"translation_project": "Translations in game are managed by the community ! Check on Discord if you want to contribute.",
 		"discord": "Join our Discord to meet the community! Link in the side menu",

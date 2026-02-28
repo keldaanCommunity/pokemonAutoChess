@@ -4470,7 +4470,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
-		"max_loading_time": "无论如何，加载5分钟之后会强制开始游戏。",
+		"max_loading_time": "无论如何，加载3分钟之后会强制开始游戏。",
 		"disconnection_time": "断线超过3分钟的玩家会被踢出本局游戏。若此时游戏尚未进行到第6轮，这名掉线的玩家不会损失Elo分数。",
 		"translation_project": "翻译由社区成员志愿完成！若想要协助或添加翻译，请前往官方Discord服务器。",
 		"discord": "加入官方Discord服务器，和社区成员接触！链接在侧边栏里。",

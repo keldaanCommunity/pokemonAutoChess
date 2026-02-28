@@ -4449,7 +4449,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
-		"max_loading_time": "La partie démarrera après 5 minutes max de chargement, peu importe ce qui se passe...",
+		"max_loading_time": "La partie démarrera après 3 minutes max de chargement, peu importe ce qui se passe...",
 		"disconnection_time": "Les joueurs déconnectés pendant plus de 3 minutes sont expulsés de la partie. Si cela survient avant le tour 6, ils ne perdront pas d'Elo.",
 		"translation_project": "Les traductions dans le jeu sont gérées par la communauté. Joignez notre Discord si vous voulez y contribuer.",
 		"discord": "Joignez notre Discord pour rencontrer la communauté. Le lien est dans le menu latéral.",

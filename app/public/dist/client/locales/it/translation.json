@@ -4439,7 +4439,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "Non cambiare finestra! Il caricamento è in pausa quando la finestra del browser è inattiva.",
-		"max_loading_time": "La partita inizierà dopo 5 minuti di caricamento, qualunque cosa accada...",
+		"max_loading_time": "La partita inizierà dopo 3 minuti di caricamento, qualunque cosa accada...",
 		"disconnection_time": "I giocatori disconnessi per più di 3 minuti sono cacciati dalla partita. Se capita prima del livello 6, non perderanno Elo.",
 		"translation_project": "Le traduzioni sono gestite dalla community! Controlla Discord se vuoi contribuire.",
 		"discord": "Entra nel nostro Discord per conoscere la community! Il link è nel menù a lato.",

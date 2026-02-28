@@ -4145,7 +4145,7 @@
 	},
 	"loading_hints": {
 		"tab_out": "¡No cambies de ventana! La carga se detiene cuando esta ventana del navegador está inactiva.",
-		"max_loading_time": "El tiempo de espera máximo son 5 minutos, la partida siempre comenzará entonces...",
+		"max_loading_time": "El tiempo de espera máximo son 3 minutos, la partida siempre comenzará entonces...",
 		"disconnection_time": "Los jugadores desconectados durante más de 3 minutos son expulsados ​​de la partida. Si esto sucede antes de la etapa 6, no perderán ELO",
 		"translation_project": "¡Las traducciones del juego son gestionadas por la comunidad! Consulta Discord si quieres contribuir.",
 		"discord": "¡Únete a nuestro Discord para conocer a la comunidad! Enlace en el menú lateral.",
