@@ -53,6 +53,8 @@
 
 # Changes to Gameplay
 
+- Abilities that do not require a target can now be casted even when the caster is not currently targeting an enemy. Here are the affected abilities: Agility, Anchor Shot, Aqua Ring, Astral Barrage, Attract, Aurora Veil, Axe Kick, Baneful Bunker, Beat Up, Bone Armor, Bounce, Bulk Up, Chain Crazed, Chatter, Column Crush, Cosmic Power (Moon), Cosmic Power (Sun), Curse, Dark Harvest, Decorate, Defense Curl, Dive, Echo, Electric Surge, Electrify, Eruption, Expanding Force, Fairy Wind, Fly, Flying Press, Forecast, Future Sight, Geomancy, Grassy Surge, Gravity, Growth, Happy Hour, Harden, Helping Hand, Hidden Power (all), Hypnosis, Icicle Missile, Lunar Blessing, Lunge, Magic Bounce, Magnet Pull, Meditate, Misty Surge, Mud Bubble, Nasty Plot, Natural Gift, Nightmare, Nutrients, Pastel Veil, Petal Dance, Pollen Puff, Psychic Surge, Purify, Quiver Dance, Recover, Relic Song, Roar of Time, Rock Artillery, Roost, Shadow Force, Shadow Punch, Shed Tail, Shields Down, Shields Up, Shore Up, Sing, Sky Attack, Slack Off, Smokescreen, Soft Boiled, Song of Desire, Spicy Extract, Splash, Stone Edge, Sunsteel Strike, Supercell Slam, Syrup Bomb, Tailwind, Take Heart, Teatime, Teeter Dance, Teleport, Terrain Pulse, Thousand Arrows, Thrash, Thunder, Time Travel, Torch Song, Torment, Triple Dive, Unbound, Victory Dance, Volt Surge, Waterfall, Wise Yawn, Wish, Yawn.
+
 # Misc
 
 - Added notifications pop-up on lobby screen when gaining new titles, leveling up, or changing elo rank

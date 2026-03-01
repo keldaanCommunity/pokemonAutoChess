@@ -245,14 +245,14 @@ export class OnAbilityCastEffect extends Effect {
   apply(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: PokemonEntity | null,
     crit: boolean
   ) {}
   constructor(
     effect?: (
       pokemon: PokemonEntity,
       board: Board,
-      target: PokemonEntity,
+      target: PokemonEntity | null,
       crit: boolean
     ) => void,
     origin?: EffectOrigin
