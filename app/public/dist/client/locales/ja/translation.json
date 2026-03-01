@@ -1558,7 +1558,7 @@
 		"ROCK_SLIDE": "[30,60,120,SP]SPECIALを与える単対象攻撃。対象が飛行タイプの場合、ダメージが2倍になる。",
 		"THUNDER_SHOCK": "[30,60,120,SP] SPECIALを与える単一ターゲットダメージ。",
 		"HYDRO_PUMP": "対象の後ろ一列の敵全員に[20,40,80,SP]のSPECIALを与える範囲攻撃。",
-		"DRACO_METEOR": "敵全体に範囲攻撃[50,SP]SPECIAL",
+		"DRACO_METEOR": "ターゲットとADJACENTの敵に[30,60,120,150,SP]SPECIALを与え、その後20APを失います。",
 		"BLAZE_KICK": "対象に[30,60,120,SP]のSPECIALとBURNを2秒間与える。すでにBURN状態の場合、+30%のダメージを与える。",
 		"MEDITATE": "ポケモンの攻撃力を[100,SP]%アップ",
 		"DEFENSE_CURL": "DEFとSPE_DEFを[5,10,15,SP]ポイントバフします",

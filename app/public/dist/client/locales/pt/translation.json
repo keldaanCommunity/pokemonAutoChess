@@ -1295,7 +1295,7 @@
 		"ROCK_SLIDE": "Ataque de alvo mono que causa [30,60,120,SP] SPECIAL. Dobra o dano se o alvo for do tipo FLYING.",
 		"THUNDER_SHOCK": "Dano de alvo mono que causa [30,60,120,SP] SPECIAL.",
 		"HYDRO_PUMP": "Ataque em área de efeito que causa [20,40,80,SP] SPECIAL a todos os inimigos em uma linha atrás do alvo.",
-		"DRACO_METEOR": "Área de ataque de efeito que causa [50,SP] SPECIAL a todos os inimigos",
+		"DRACO_METEOR": "Inflige [30,60,120,150,SP] SPECIAL para atingir e ADJACENT inimigos, depois perca 20 AP.",
 		"BLAZE_KICK": "Inflige [30,60,120,SP] SPECIAL e BURN ao alvo durante 2 segundos. Se ele já tiver BURN, causa +30% de dano.",
 		"LUNAR_BLESSING": "Cura o usuário e todos os aliados por [25,SP]% dos seus HP máximos e tirando os efeitos negativos",
 		"MEDITATE": "Buff o ATK do pokémon em [100,SP]%",

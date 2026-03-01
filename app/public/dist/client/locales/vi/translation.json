@@ -1238,7 +1238,7 @@
 		"ROCK_SLIDE": "Gây [30,60,120,SP] SPECIAL tới mục tiêu, gấp đôi sát thương nếu mục tiêu đang trúng hiệu ứng FLYING",
 		"THUNDER_SHOCK": "Gây [30,60,120,SP] SPECIAL",
 		"HYDRO_PUMP": "Gây [20,40,80,SP] SPECIAL đến tất cả Pokémon đối thủ phía sau mục tiêu",
-		"DRACO_METEOR": "Gây [50,SP] SPECIAL tới tất cả Pokémon đối thủ",
+		"DRACO_METEOR": "Gây [30,60,120,150,SP] SPECIAL cho mục tiêu và kẻ địch ADJACENT, sau đó mất 20 AP.",
 		"BLAZE_KICK": "Gây [30,60,120,SP] SPECIAL và BURN mục tiêu trong 2 giây. Nếu đối thủ đã bị BURN, gây +30% sát thương",
 		"LUNAR_BLESSING": "Hồi phục cho bản thân và toàn bộ đồng minh [25,SP]% max HP và xóa toàn bộ hiệu ứng xấu",
 		"MEDITATE": "Tăng [100,SP]% ATK cho bản thân",

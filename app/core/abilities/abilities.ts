@@ -2766,12 +2766,25 @@ export class DracoMeteorStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 50
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }
-    })
+    const damage = [30, 60, 120, 150][pokemon.stars - 1] ?? 150
+    const x = target.positionX
+    const y = target.positionY
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        board.getAdjacentCells(x, y, true).forEach((cell) => {
+          if (cell.value && pokemon.team !== cell.value.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+        pokemon.addAbilityPower(-20, pokemon, 0, false)
+      }, 1000)
+    )
   }
 }
 
@@ -7985,7 +7998,12 @@ export class OverdriveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInRadius(target.positionX, target.positionY, 3, false)
+    const cells = board.getCellsInRadius(
+      target.positionX,
+      target.positionY,
+      3,
+      false
+    )
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         const distance = distanceC(

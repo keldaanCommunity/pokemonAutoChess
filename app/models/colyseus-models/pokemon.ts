@@ -6030,7 +6030,7 @@ export class Rayquaza extends Pokemon {
   speed = 55
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.DRACO_METEOR
   passive = Passive.PRIMAL
@@ -7503,7 +7503,7 @@ export class MegaRayquaza extends Pokemon {
   speed = 55
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 120
   range = 2
   skill = Ability.DRACO_METEOR
   passive = Passive.AIRLOCK

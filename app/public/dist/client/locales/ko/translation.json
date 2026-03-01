@@ -1764,7 +1764,7 @@
 		"THUNDER_SHOCK": "[30,60,120,SP] SPECIAL 을 가한다.",
 		"THUNDER": "무작위 적 3 포켓몬을 공격하여 [25,50,100,SP] SPECIAL 를 입히고, [30,LK]% 확률로 3초간 PARALYSIS 를 가한다.",
 		"HYDRO_PUMP": "대상의 뒤에 있는 모든 적포켓몬들에게 [20,40,80,SP] SPECIAL 을 가한다.",
-		"DRACO_METEOR": "모든 적포켓몬들에게 [50,SP] SPECIAL 을 가한다.",
+		"DRACO_METEOR": "대상 및 ADJACENT 적에게 [30,60,120,150,SP] SPECIAL을 처리한 다음 20 AP를 잃습니다.",
 		"BLAZE_KICK": "대상에게 [30,60,120,SP] SPECIAL 을 가하며 2초간 BURN 상태로 만든다. BURN 상태의 포켓몬에게는 30%의 추가피해를 가한다.",
 		"WISH": "HP가 가장 낮은 아군에게 [30,60,120,SP] SHIELD와 1.5초의 PROTECT을 부여한다.",
 		"LUNAR_BLESSING": "시전자와 모든 아군포켓몬을 최대 HP 의 [25,SP]%만큼 회복시키며 부정적인 효과를 치유시킨다.",

@@ -1669,7 +1669,7 @@
 		"THUNDER_SHOCK": "Inflige [30,60,120,SP] de SPECIAL",
 		"THUNDER": "Una tormenta de rayos cae sobre 3 enemigos aleatorios, infligiendo [25,50,100,SP] SPECIAL con un [30,LK]% de posibilidades de infligir PARALYSIS durante 3 segundos",
 		"HYDRO_PUMP": "Ataque de área que causa [20,40,80,SP] de SPECIAL a todos los Pokémon enemigos que se encuentren detrás del objetivo",
-		"DRACO_METEOR": "Inflige [50,SP] de SPECIAL a todos los Pokémon enemigos",
+		"DRACO_METEOR": "Inflige [30,60,120,150,SP] SPECIAL al objetivo y a los enemigos ADJACENT, luego pierde 20 AP.",
 		"BLAZE_KICK": "Inflige [30,60,120,SP] de SPECIAL y causa BURN al objetivo por 2 segundos. Si ya tiene BURN, inflige un +30% de daño",
 		"LUNAR_BLESSING": "Cura al usuario y a todos sus aliados un [25,SP]% de su vida máxima y remueve problemas de estado",
 		"MEDITATE": "Mejora el ATK del usuario en un [100,SP]%",
