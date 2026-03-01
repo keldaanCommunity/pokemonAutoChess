@@ -1113,11 +1113,12 @@ export class DarkVoidStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 30
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (tg.status.silence) {
-          tg.status.triggerSleep(2000, tg)
+    board.getCellsInRadius(target.positionX, target.positionY, 4).forEach((cell) => {      
+      if(cell.value && cell.value.team !== pokemon.team) {
+        const enemy = cell.value
+        enemy.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+        if (chance(0.8, pokemon)) {
+          enemy.status.triggerSleep(2000, enemy)
         }
       }
     })

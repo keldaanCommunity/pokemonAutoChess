@@ -1463,9 +1463,9 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.GROUND_MELEE
     },*/
   [Pkm.DARKRAI]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Sink,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.SpAttack,
     attackSprite: AttackSprite.DARK_RANGE,
     hitSprite: HitSprite.DARK_HIT
   },

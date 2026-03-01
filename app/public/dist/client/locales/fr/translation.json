@@ -1872,7 +1872,7 @@
 		"GEOMANCY": "Gagne [15,SP] ATK, [10,SP] SPE_DEF et 20 SPEED.",
 		"DEATH_WING": "Inflige [150,SP] SPECIAL et se soigne à hauteur de 75% des dégâts subis par la cible.",
 		"SLACK_OFF": "Retire tous les statuts négatifs, soigne [30,SP]% des HP max et inflige SLEEP au lanceur pendant 3 secondes.",
-		"DARK_VOID": "Inflige [30,SP] SPECIAL à tous les ennemis. Si une cible affectée était sous SILENCE, elle subit SLEEP pendant 2 secondes.",
+		"DARK_VOID": "Inflige [30,SP] SPECIAL à tous les ennemis dans un rayon de 4 cases, avec [80,LK]% de chance de provoquer SLEEP pendant 2 secondes.",
 		"OVERHEAT": "Inflige [40,SP] SPECIAL à toute l'équipe adverse. +30% de dégâts supplémentaires si la cible subit BURN.",
 		"HYPNOSIS": "Inflige SLEEP à 1 ennemi dans les rangées arrière pendant [2,3.5,6,SP=0.5] secondes.",
 		"MIMIC": "Copie la capacité de la cible.",
