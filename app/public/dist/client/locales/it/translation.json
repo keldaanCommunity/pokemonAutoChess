@@ -2640,7 +2640,7 @@
 		"TM_COUNTER": "TM03 - $t(ability.COUNTER)",
 		"TM_DISABLE": "TM04 - $t(ability.DISABLE)",
 		"TM_BULK_UP": "TM04 - $t(ability.BULK_UP)",
-		"TM_CHARGE": "TM05 - $t(ability.CHARGE)",		
+		"TM_CHARGE": "TM05 - $t(ability.CHARGE)",
 		"TM_REFLECT": "TM06 - $t(ability.REFLECT)",
 		"TM_PAYDAY": "TM08 - $t(ability.PAYDAY)",
 		"TM_FOCUS_PUNCH": "TM09 - $t(ability.FOCUS_PUNCH)",

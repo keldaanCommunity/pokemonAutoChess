@@ -2645,7 +2645,7 @@
 		"TM_CHARGE": "CT06 - $t(ability.CHARGE)",
 		"TM_REFLECT": "CT07 - $t(ability.REFLECT)",
 		"TM_PAYDAY": "CT08 - $t(ability.PAYDAY)",
-		"TM_FOCUS_PUNCH": "CT09 - $t(ability.FOCUS_PUNCH)", 
+		"TM_FOCUS_PUNCH": "CT09 - $t(ability.FOCUS_PUNCH)",
 		"TM_HYPER_BEAM": "CT10 - $t(ability.HYPER_BEAM)",
 		"TM_PROTECT": "CT11 - $t(ability.PROTECT)",
 		"TM_SKILL_SWAP": "CT12 - $t(ability.SKILL_SWAP)",
