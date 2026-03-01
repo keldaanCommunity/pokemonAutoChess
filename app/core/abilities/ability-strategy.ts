@@ -5,7 +5,7 @@ import { PokemonEntity } from "../pokemon-entity"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome, encore...
-  doesRequireTarget = true // if false, can be casted from everywhere without having to walk up to a target at range
+  requiresTarget = true // if false, can be casted from everywhere without having to walk up to a target at range
   canCritByDefault = false
   process(
     pokemon: PokemonEntity,

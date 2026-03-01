@@ -179,12 +179,8 @@ export class GlaciateStrategy extends AbilityStrategy {
 }
 
 export class BeatUpStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     for (let i = 0; i < pokemon.stars; i++) {
       const houndour = PokemonFactory.createPokemonFromName(
@@ -375,7 +371,7 @@ export class MindBlownStrategy extends AbilityStrategy {
 }
 
 export class SoftBoiledStrategy extends AbilityStrategy {
-  doesRequireTarget = false
+  requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
@@ -390,12 +386,8 @@ export class SoftBoiledStrategy extends AbilityStrategy {
 }
 
 export class TeaTimeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
@@ -433,16 +425,12 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
 }
 
 export class SongOfDesireStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
 
     const rank = new Array<PokemonEntity>()
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+    board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
         rank.push(tg)
       }
@@ -473,12 +461,8 @@ export class SongOfDesireStrategy extends AbilityStrategy {
 }
 
 export class SlackOffStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.status.clearNegativeStatus(pokemon, pokemon)
     const healFactor = 0.3
@@ -616,12 +600,8 @@ export class JudgementStrategy extends AbilityStrategy {
 }
 
 export class ElectricSurgeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = 10
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
@@ -638,12 +618,8 @@ export class ElectricSurgeStrategy extends AbilityStrategy {
 }
 
 export class PsychicSurgeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
@@ -659,12 +635,8 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
 }
 
 export class MistySurgeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const ppGain = 25
     const hpGain = 25
@@ -683,12 +655,8 @@ export class MistySurgeStrategy extends AbilityStrategy {
 }
 
 export class GrassySurgeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = 5
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
@@ -735,12 +703,8 @@ export class PsychicStrategy extends AbilityStrategy {
 }
 
 export class ChatterStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = 20
     const confusionChance = 0.4
@@ -872,12 +836,8 @@ export class ElectroBoostStrategy extends AbilityStrategy {
 }
 
 export class AuroraVeilStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const runeProtectDuration = 1000
     const shield = [5, 10, 15][pokemon.stars - 1] ?? 15
@@ -892,12 +852,8 @@ export class AuroraVeilStrategy extends AbilityStrategy {
 }
 
 export class TimeTravelStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
@@ -1189,12 +1145,8 @@ export class OverheatStrategy extends AbilityStrategy {
 }
 
 export class HypnosisStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit)
@@ -1523,12 +1475,8 @@ export class GrowlStrategy extends AbilityStrategy {
 }
 
 export class RelicSongStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     if (pokemon.count.ult % 3 === 0) {
       const factor = 0.5
@@ -1553,12 +1501,8 @@ export class RelicSongStrategy extends AbilityStrategy {
 }
 
 export class FairyWindStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const ppGain = [5, 10, 20][pokemon.stars - 1] ?? 0
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
@@ -1682,12 +1626,8 @@ export class TriAttackStrategy extends AbilityStrategy {
 }
 
 export class EchoStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = [3, 6, 9][pokemon.stars - 1] ?? 9
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
@@ -1705,12 +1645,8 @@ export class EchoStrategy extends AbilityStrategy {
 }
 
 export class FutureSightStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     const count = 5
@@ -1746,12 +1682,8 @@ export class FutureSightStrategy extends AbilityStrategy {
 }
 
 export class PetalDanceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
 
     const damage = [20, 30, 50][pokemon.stars - 1] ?? 50
@@ -2064,12 +1996,8 @@ export class RockTombStrategy extends AbilityStrategy {
 }
 
 export class RoarOfTimeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const speedBuff = 20
     const candidates = board.cells.filter(
@@ -2187,12 +2115,8 @@ export class SeedFlareStrategy extends AbilityStrategy {
 }
 
 export class NightmareStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const duration = [2000, 4000, 6000][pokemon.stars - 1] ?? 6000
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
@@ -2324,19 +2248,15 @@ export class ObstructStrategy extends AbilityStrategy {
 }
 
 export class SingStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const timer = Math.round(
       2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
     const count = pokemon.stars
     const rank = new Array<PokemonEntity>()
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
+    board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
         rank.push(tg)
       }
@@ -2358,12 +2278,8 @@ export class SingStrategy extends AbilityStrategy {
 }
 
 export class IcicleMissileStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = 50
     const count = pokemon.stars
@@ -2800,12 +2716,8 @@ export class ThunderShockStrategy extends AbilityStrategy {
 }
 
 export class ThunderStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     const enemies = board.cells.filter(
@@ -2871,12 +2783,8 @@ export class BlazeKickStrategy extends AbilityStrategy {
 }
 
 export class WishStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     //  Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally.
     const lowestHealthAlly = (
@@ -2891,12 +2799,8 @@ export class WishStrategy extends AbilityStrategy {
 }
 
 export class LunarBlessingStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && pokemon.team == ally.team && ally.hp < ally.maxHP) {
@@ -2908,12 +2812,8 @@ export class LunarBlessingStrategy extends AbilityStrategy {
 }
 
 export class NaturalGiftStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
 
     const lowestHealthAlly = (
@@ -2939,12 +2839,8 @@ export class NaturalGiftStrategy extends AbilityStrategy {
 }
 
 export class MeditateStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = 1
     pokemon.addAttack(buff * pokemon.baseAtk, pokemon, 1, crit)
@@ -2952,12 +2848,8 @@ export class MeditateStrategy extends AbilityStrategy {
 }
 
 export class CosmicPowerMoonStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const apGain = 25
     board.forEach((x, y, ally) => {
@@ -2969,12 +2861,8 @@ export class CosmicPowerMoonStrategy extends AbilityStrategy {
 }
 
 export class CosmicPowerSunStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const atkBuffMultiplier = 0.25
     board.forEach((x, y, ally) => {
@@ -2986,12 +2874,8 @@ export class CosmicPowerSunStrategy extends AbilityStrategy {
 }
 
 export class DefenseCurlStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
     pokemon.addDefense(buff, pokemon, 1, crit)
@@ -3188,12 +3072,8 @@ export class ChargeStrategy extends AbilityStrategy {
 }
 
 export class TailwindStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = [5, 10, 15][pokemon.stars - 1] ?? 15
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
@@ -3320,18 +3200,19 @@ export class ShockwaveStrategy extends AbilityStrategy {
 }
 
 export class DiveStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
     const freezeDuration = 1000
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     pokemon.addShield(shield, pokemon, 0, false)
 
@@ -3362,16 +3243,17 @@ export class DiveStrategy extends AbilityStrategy {
 }
 
 export class SmokeScreenStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -3533,12 +3415,8 @@ export class GravAppleStrategy extends AbilityStrategy {
 }
 
 export class NutrientsStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const heal = 40
 
@@ -3563,12 +3441,8 @@ export class NutrientsStrategy extends AbilityStrategy {
 }
 
 export class SyrupBombStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = 50
 
@@ -3885,12 +3759,8 @@ export class LeafBladeStrategy extends AbilityStrategy {
 }
 
 export class WaterfallStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [50, 100, 150][pokemon.stars - 1] ?? 150
     pokemon.addShield(shield, pokemon, 1, crit)
@@ -4077,12 +3947,8 @@ export class IngrainStrategy extends AbilityStrategy {
 }
 
 export class TormentStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const boost = [20, 35, 50][pokemon.stars - 1] ?? 60
     pokemon.addSpeed(boost, pokemon, 1, crit)
@@ -4283,12 +4149,8 @@ export class LeechLifeStrategy extends AbilityStrategy {
 }
 
 export class HappyHourStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = [2, 4, 7][pokemon.stars - 1] ?? 7
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
@@ -4300,12 +4162,8 @@ export class HappyHourStrategy extends AbilityStrategy {
 }
 
 export class TeleportStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, false) // crit is handled with TELEPORT_NEXT_ATTACK effect
 
     const potentialCells = [
@@ -4331,12 +4189,8 @@ export class TeleportStrategy extends AbilityStrategy {
 }
 
 export class NastyPlotStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const buff = 10
     pokemon.addAttack(buff, pokemon, 1, crit)
@@ -4345,12 +4199,8 @@ export class NastyPlotStrategy extends AbilityStrategy {
 }
 
 export class TakeHeartStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(8, pokemon, 1, crit)
     pokemon.addSpecialDefense(8, pokemon, 1, crit)
@@ -4845,12 +4695,8 @@ export class MetronomeStrategy extends AbilityStrategy {
 }
 
 export class SkyAttackStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
@@ -4886,13 +4732,9 @@ export class SkyAttackStrategy extends AbilityStrategy {
 }
 
 export class SkyAttackShadowStrategy extends AbilityStrategy {
+  requiresTarget = false
   canCritByDefault = true
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
@@ -4928,12 +4770,8 @@ export class SkyAttackShadowStrategy extends AbilityStrategy {
 }
 
 export class FlyingPressStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
@@ -4968,12 +4806,8 @@ export class FlyingPressStrategy extends AbilityStrategy {
 }
 
 export class AgilityStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const boost = [10, 20, 30][pokemon.stars - 1] ?? 30
     pokemon.addSpeed(boost, pokemon, 1, crit)
@@ -5134,12 +4968,8 @@ export class PlasmaFistStrategy extends AbilityStrategy {
 }
 
 export class ForecastStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
       if (p && pokemon.team === p.team) {
@@ -5276,12 +5106,8 @@ export class TripleKickStrategy extends AbilityStrategy {
 }
 
 export class GeomancyStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(15, pokemon, 1, crit)
     pokemon.addSpecialDefense(10, pokemon, 1, crit)
@@ -5342,12 +5168,8 @@ export class HexStrategy extends AbilityStrategy {
 }
 
 export class GrowthStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
 
     let attackBuff = [3, 5, 7][pokemon.stars - 1] ?? 7
@@ -5548,12 +5370,8 @@ export class PeckStrategy extends AbilityStrategy {
 }
 
 export class SplashStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     // does nothing, intentionally
   }
@@ -5862,12 +5680,8 @@ export class IceBallStrategy extends AbilityStrategy {
 }
 
 export class ThrashStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(pokemon.baseAtk, pokemon, 1, crit)
     pokemon.status.triggerConfusion(3000, pokemon, pokemon)
@@ -6017,12 +5831,8 @@ export class FellStingerStrategy extends AbilityStrategy {
 }
 
 export class EruptionStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = [30, 50, 70][pokemon.stars - 1] ?? 30
     const numberOfProjectiles =
@@ -6193,12 +6003,8 @@ export class LusterPurgeStrategy extends AbilityStrategy {
 }
 
 export class MudBubbleStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const heal = pokemon.stars === 3 ? 40 : pokemon.stars === 2 ? 20 : 10
     pokemon.handleHeal(heal, pokemon, 1, crit)
@@ -6305,12 +6111,8 @@ export class LinkCableStrategy extends AbilityStrategy {
 }
 
 export class MagicBounceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.status.triggerMagicBounce(5000)
   }
@@ -6357,12 +6159,8 @@ export class ShellSmashStrategy extends AbilityStrategy {
 }
 
 export class HelpingHandStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const nbAlliesBuffed = 2
     const shield = [30, 60, 100][pokemon.stars - 1] ?? 100
@@ -6396,12 +6194,8 @@ export class HelpingHandStrategy extends AbilityStrategy {
 }
 
 export class AstralBarrageStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damagePerGhost = 20
 
@@ -6525,15 +6319,11 @@ export class WhirlpoolStrategy extends AbilityStrategy {
 }
 
 export class AnchorShotStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     const damage = pokemon.stars === 3 ? 80 : pokemon.stars === 2 ? 40 : 20
-    const farthestTarget =
-      pokemon.state.getFarthestTarget(pokemon, board) ?? target
+    const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
+    if (!farthestTarget) return
     super.process(pokemon, board, farthestTarget, crit, true)
     const adjacentCells = board.getAdjacentCells(
       pokemon.positionX,
@@ -6718,12 +6508,8 @@ export class MagnetRiseStrategy extends AbilityStrategy {
 }
 
 export class AttractStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const targets = pickNRandomIn(
       board.cells.filter((v) => v && v.team !== pokemon.team),
@@ -6824,12 +6610,8 @@ export class ParabolicChargeStrategy extends AbilityStrategy {
 }
 
 export class TeeterDanceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addSpeed(20, pokemon, 1, crit)
     board.cells
@@ -6931,16 +6713,15 @@ export class AssuranceStrategy extends AbilityStrategy {
 }
 
 export class AquaRingStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const heal = [20, 40, 80][pokemon.stars - 1] ?? 80
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(target, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        pokemon.team,
+        board
+      )
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
         mostSurroundedCoordinate.x,
@@ -6973,12 +6754,8 @@ export class AquaRingStrategy extends AbilityStrategy {
 }
 
 export class LungeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const enemiesSortedByAttack = board.cells
       .filter((enemy) => enemy && enemy.team !== pokemon.team)
@@ -7293,12 +7070,8 @@ export class StruggleBugStrategy extends AbilityStrategy {
 }
 
 export class QuiverDanceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(5, pokemon, 1, crit)
     pokemon.addSpecialDefense(5, pokemon, 1, crit)
@@ -7595,12 +7368,8 @@ export class AcidSprayStrategy extends AbilityStrategy {
 }
 
 export class UnboundStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.index = PkmIndex[Pkm.HOOPA_UNBOUND]
     pokemon.skill = Ability.HYPERSPACE_FURY
@@ -7786,8 +7555,13 @@ export class BarbBarrageStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const damage = [15, 30, 45, 60][pokemon.stars - 1] ?? 60
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -8006,12 +7780,8 @@ export class MakeItRainStrategy extends AbilityStrategy {
 }
 
 export class RecoverStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.handleHeal(0.25 * pokemon.maxHP, pokemon, 1, crit)
   }
@@ -8043,12 +7813,8 @@ export class TranseStrategy extends AbilityStrategy {
 }
 
 export class CurseStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const enemies = board.cells.filter(
       (p) => p && p.team !== pokemon.team
@@ -8288,12 +8054,8 @@ export class PsychicFangsStrategy extends AbilityStrategy {
 }
 
 export class ShedTailStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const x = pokemon.positionX
     const y = pokemon.positionY
@@ -8325,15 +8087,9 @@ export class ShedTailStrategy extends AbilityStrategy {
 }
 
 export class ShadowPunchStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const x = pokemon.positionX
-    const y = pokemon.positionY
     const lowestHealthEnemy = (
       board.cells.filter(
         (cell) => cell && cell.team !== pokemon.team
@@ -8507,12 +8263,8 @@ export class KowtowCleaveStrategy extends AbilityStrategy {
 }
 
 export class ShieldsDownStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     pokemon.broadcastAbility({ skill: Ability.SHIELDS_UP })
     const pkm = pickRandomIn([
@@ -8532,12 +8284,8 @@ export class ShieldsDownStrategy extends AbilityStrategy {
 }
 
 export class ShieldsUpStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     pokemon.broadcastAbility({ skill: Ability.SHIELDS_UP })
     pokemon.index = PkmIndex[Pkm.MINIOR]
@@ -8817,15 +8565,16 @@ export class PetalBlizzardStrategy extends AbilityStrategy {
 }
 
 export class SunsteelStrikeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     if (mostSurroundedCoordinate) {
       pokemon.skydiveTo(
@@ -9145,12 +8894,8 @@ export class PsychoBoostStrategy extends AbilityStrategy {
 }
 
 export class PollenPuffStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const lowestHealthAlly = (
       board.cells.filter(
@@ -9503,12 +9248,8 @@ export class PsyshieldBashStrategy extends AbilityStrategy {
 }
 
 export class TorchSongStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     // Blow out [4,SP] raging flames to random opponents. Each flame deals 50% of ATK as SPECIAL, with [30,LK]% chance to BURN for 2 seconds, and buff the user AP by [1,2,3].
     const damagePerFlame = 0.5 * pokemon.atk
@@ -9633,16 +9374,17 @@ class DarkHarvestEffect extends PeriodicEffect {
 }
 
 export class DarkHarvestStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
 
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -9658,12 +9400,8 @@ export class DarkHarvestStrategy extends AbilityStrategy {
 }
 
 export class StoneEdgeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const duration = pokemon.stars === 1 ? 5000 : 8000
     if (pokemon.effects.has(EffectEnum.STONE_EDGE)) return // ignore if already active
@@ -9810,12 +9548,8 @@ export class RapidSpinStrategy extends AbilityStrategy {
 }
 
 export class BounceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const nbBounces = [1, 2, 3][pokemon.stars - 1] ?? 3
     for (let i = 0; i < nbBounces; i++) {
@@ -10116,12 +9850,8 @@ export class FairyLockStrategy extends AbilityStrategy {
 }
 
 export class GravityStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const lockDuration = Math.round(
       2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
@@ -10277,12 +10007,8 @@ export class DoubleShockStrategy extends AbilityStrategy {
 }
 
 export class PurifyStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
     pokemon.status.clearNegativeStatus(pokemon, pokemon)
@@ -10291,6 +10017,7 @@ export class PurifyStrategy extends AbilityStrategy {
 }
 
 export class PastelVeilStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -10769,12 +10496,8 @@ export class BideStrategy extends AbilityStrategy {
 }
 
 export class YawnStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const opponentsTargetingMe = board.cells.filter<PokemonEntity>(
       (entity): entity is PokemonEntity =>
@@ -10795,12 +10518,8 @@ export class YawnStrategy extends AbilityStrategy {
 }
 
 export class WiseYawnStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
 
     // Find ally with lowest current health
@@ -10840,12 +10559,8 @@ export class WiseYawnStrategy extends AbilityStrategy {
 }
 
 export class ShoreUpStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     let healFactor = [0.2, 0.25][pokemon.stars - 1] ?? 0.25
     if (pokemon.simulation.weather === Weather.SANDSTORM) {
@@ -11170,12 +10885,8 @@ export class LandsWrathStrategy extends AbilityStrategy {
 }
 
 export class ThousandArrowsStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = 60
     const numberOfProjectiles = 33
@@ -11434,12 +11145,8 @@ export class FirestarterStrategy extends AbilityStrategy {
 }
 
 export class BoneArmorStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const lowestHealthEnemy = (
       board.cells.filter(
@@ -11457,7 +11164,7 @@ export class BoneArmorStrategy extends AbilityStrategy {
       }
       const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
       const defBuff = [4, 8, 12][pokemon.stars - 1] ?? 12
-      const attack = target.handleSpecialDamage(
+      const attack = lowestHealthEnemy.handleSpecialDamage(
         damage,
         board,
         AttackType.SPECIAL,
@@ -11607,12 +11314,8 @@ export class TauntStrategy extends AbilityStrategy {
 }
 
 export class BanefulBunkerStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const duration = 2000
     pokemon.status.triggerProtect(duration)
@@ -11639,12 +11342,8 @@ export class BanefulBunkerStrategy extends AbilityStrategy {
 }
 
 export class BulkUpStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     // Increase base Attack and base Defense by 40%
     const atkBoost = Math.ceil(0.5 * pokemon.baseAtk)
@@ -11670,12 +11369,8 @@ export class CutStrategy extends AbilityStrategy {
 }
 
 export class FlyStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
@@ -11895,12 +11590,8 @@ export class StrengthStrategy extends AbilityStrategy {
 }
 
 export class HardenStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const defGain = [4, 8, 12][pokemon.stars - 1] ?? 12
     pokemon.addDefense(defGain, pokemon, 1, crit)
@@ -11908,12 +11599,8 @@ export class HardenStrategy extends AbilityStrategy {
 }
 
 export class ColumnCrushStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
 
     const pillar = board.cells.find(
@@ -12418,12 +12105,8 @@ export class SaltCureStrategy extends AbilityStrategy {
 }
 
 export class SpicyExtractStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     //Make 1/2/3 closest allies RAGE for [2,SP] seconds
     const nbAllies = [1, 2, 3][pokemon.stars - 1] ?? 3
@@ -12571,12 +12254,8 @@ export class StockpileStrategy extends AbilityStrategy {
 }
 
 export class DecorateStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const atkBoost = [1, 2, 3][pokemon.stars - 1] ?? 8
     const apBoost = [10, 20, 30][pokemon.stars - 1] ?? 50
@@ -12758,12 +12437,8 @@ export class FilletAwayStrategy extends AbilityStrategy {
 }
 
 export class RoostStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
     // move to backline
@@ -13536,12 +13211,8 @@ export class WickedBlowStrategy extends AbilityStrategy {
 }
 
 export class VictoryDanceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, true)
     // gain 3 Attack, 3 Defense and 10 Speed.
     pokemon.addAttack(3, pokemon, 1, crit)
@@ -13722,12 +13393,8 @@ export class EncoreStrategy extends AbilityStrategy {
 }
 
 export class ChainCrazedStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     // Self inflict poison and gain 20 speed, 15 attack and 10 defense
     pokemon.status.triggerPoison(3000, pokemon, pokemon)
@@ -13805,12 +13472,8 @@ export class SteamrollerStrategy extends AbilityStrategy {
 }
 export class MagnetPullStrategy extends AbilityStrategy {
   copyable = false
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     if (pokemon.player) {
       const randomSteelPkm = pokemon.simulation.room.state.shop.magnetPull(
@@ -13870,12 +13533,8 @@ export class SpinOutStrategy extends AbilityStrategy {
 }
 
 export class RockArtilleryStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const numberOfRocks = [10, 15, 25][pokemon.stars - 1] ?? 25
     const damage = [20, 30, 40][pokemon.stars - 1] ?? 40
@@ -14133,12 +13792,8 @@ export class EarDigStrategy extends AbilityStrategy {
 }
 
 export class TerrainPulseStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const fieldEffects: (keyof IStatus)[] = [
       "fairyField",
@@ -14233,12 +13888,8 @@ export class TerrainPulseStrategy extends AbilityStrategy {
 }
 
 export class AxeKickStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     // Leap to the enemy with the highest PP then deal [30,60,100,SP] SPECIAL and burn [15,SP] PP. Has [30,LK]% chance to inflict CONFUSION for 3 seconds
     const highestPPEnemies = board.cells
@@ -14277,12 +13928,8 @@ export class AxeKickStrategy extends AbilityStrategy {
 }
 
 export class ExpandingForceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     // User gains PSYCHIC_FIELD, or spreads it to a nearby ally.
     if (!pokemon.status.psychicField) {
@@ -14848,12 +14495,8 @@ export class ShellSideArmStrategy extends AbilityStrategy {
 }
 
 export class TripleDiveStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
 
     const damage = [15, 30, 45][pokemon.stars - 1] ?? 45
@@ -15659,12 +15302,8 @@ const voltSurgeEffect = new OnAttackEffect(({ pokemon, target, board }) => {
 })
 
 export class VoltSurgeStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addMaxHP(30, pokemon, 1, crit, false)
     pokemon.addSpeed(20, pokemon, 0, false)
@@ -15683,17 +15322,18 @@ export class VoltSurgeStrategy extends AbilityStrategy {
 }
 
 export class SupercellSlamStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     pokemon.addShield(shield, pokemon, 1, crit)
 
@@ -16063,12 +15703,8 @@ export class RagingBullStrategy extends AbilityStrategy {
 }
 
 export class ElectrifyStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     // Give to your STRONGEST non-ELECTRIC ally ELECTRIC_FIELD and all the effects of active ELECTRIC synergy + [15,30,60,SP] SHIELD.
     super.process(pokemon, board, target, crit)
     const nonElectricAllies = board.cells.filter(
@@ -16260,12 +15896,8 @@ export class JetPunchStrategy extends AbilityStrategy {
 }
 
 export class ShadowForceStrategy extends AbilityStrategy {
-  process(
-    pokemon: PokemonEntity,
-    board: Board,
-    target: PokemonEntity,
-    crit: boolean
-  ) {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const damage = 60
     pokemon.index = PkmIndex[Pkm.ORIGIN_GIRATINA]
@@ -16275,8 +15907,13 @@ export class ShadowForceStrategy extends AbilityStrategy {
       pokemon.player.pokemonsPlayed.add(Pkm.ORIGIN_GIRATINA)
     }
 
+    const opponentTeam =
+      pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
-      pokemon.state.getMostSurroundedCoordinateAvailablePlace(pokemon, board)
+      pokemon.state.getMostSurroundedCoordinateAvailablePlace(
+        opponentTeam,
+        board
+      )
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(

@@ -38,7 +38,7 @@ export default class MovingState extends PokemonState {
       } else if (
         pokemon.pp >= pokemon.maxPP &&
         pokemon.canCast &&
-        AbilityStrategies[pokemon.skill]?.doesRequireTarget === false
+        AbilityStrategies[pokemon.skill]?.requiresTarget === false
       ) {
         castAbility(pokemon.skill, pokemon, board, null)
       } else if (targetAtRange) {

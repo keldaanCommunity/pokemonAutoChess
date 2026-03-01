@@ -19,11 +19,12 @@ import { castAbility } from "./abilities"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
+  requiresTarget = false
   copyable = false
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ): void {
     super.process(unown, board, target, crit)
@@ -35,7 +36,7 @@ export class HiddenPowerAStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -58,7 +59,7 @@ export class HiddenPowerBStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -74,7 +75,7 @@ export class HiddenPowerCStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -92,7 +93,7 @@ export class HiddenPowerDStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -113,7 +114,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -129,7 +130,7 @@ export class HiddenPowerFStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -153,7 +154,7 @@ export class HiddenPowerGStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -167,7 +168,7 @@ export class HiddenPowerHStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -185,7 +186,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -199,7 +200,7 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -224,7 +225,7 @@ export class HiddenPowerKStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -246,7 +247,7 @@ export class HiddenPowerLStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -264,7 +265,7 @@ export class HiddenPowerMStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -282,7 +283,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -304,7 +305,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
@@ -322,7 +323,7 @@ export class HiddenPowerPStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -373,7 +374,7 @@ export class HiddenPowerQStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -386,7 +387,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -400,7 +401,7 @@ export class HiddenPowerSStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -412,7 +413,7 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -429,7 +430,7 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -451,7 +452,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -467,7 +468,7 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -526,7 +527,7 @@ export class HiddenPowerXStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -544,7 +545,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -560,7 +561,7 @@ export class HiddenPowerZStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -576,7 +577,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
   process(
     unown: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(unown, board, target, crit)
@@ -605,7 +606,7 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
