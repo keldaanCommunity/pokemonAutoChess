@@ -45,6 +45,7 @@
 - Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 - Nerf Palkia: PP 110 → 120
 - Change Blizzard (Articuno): freeze all enemies **in a 4-cell radius** ; damage: 10/20/30 → 10/20/40
+- Rework Dark Void: now deals damage on all enemies **in a 4-cell radius**, with 80% chance to put them to sleep for 2 seconds.
 
 # Changes to Items
 
