@@ -191,8 +191,9 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 }
 
 export const humanHealEffect = new OnDamageDealtEffect(
-  ({ pokemon, damage, isRetaliation }: OnDamageDealtEffectArgs) => {
+  ({ pokemon, target, damage, isRetaliation }: OnDamageDealtEffectArgs) => {
     if (isRetaliation) return // don't lifesteal on retaliation dammage from items
+    if (target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
     let lifesteal = 0
     if (pokemon.effects.has(EffectEnum.MEDITATE)) {
       lifesteal = 0.25

@@ -1438,10 +1438,12 @@ export default class BoardManager {
         "item",
         item + ".png"
       )
-      itemSprite.setScale(0.5)
+      itemSprite.setScale(0.5).setDepth(chest.depth + 1)
       const shinyEffect = this.scene.add.sprite(chest.x, chest.y, "shine")
-      shinyEffect.setScale(2)
-      shinyEffect.play("shine")
+      shinyEffect
+        .setScale(2)
+        .setDepth(chest.depth + 1)
+        .play("shine")
       chestGroup?.addMultiple([itemSprite, shinyEffect])
       this.scene.tweens.add({
         targets: [itemSprite, shinyEffect],

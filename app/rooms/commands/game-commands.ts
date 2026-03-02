@@ -1447,7 +1447,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       removeInArray(player.items, Item.TREASURE_BOX)
 
       let rewards: Item[] = []
-      let rewardsIcons: Item[] = []
+      let rewardsIcons: Item[] | undefined = undefined
       switch (this.state.treasureBoxRewardGiven) {
         case "sweets":
           rewardsIcons = [Item.SWEETS]
@@ -1491,7 +1491,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       setTimeout(() => player.wanderers.set(id, wanderer), 3000)
       setTimeout(() => {
         if (rewards[0] === Item.BIG_NUGGET) {
-          player.addMoney(10, true, null)
+          const moneyGained = 10
+          player.addMoney(moneyGained, true, null)
+          const client = this.room.clients.find(
+            (cli) => cli.auth.uid === player.id
+          )
+          client?.send(Transfer.PLAYER_INCOME, moneyGained)
         } else {
           player.items.push(...rewards)
         }

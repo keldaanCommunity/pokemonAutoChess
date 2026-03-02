@@ -539,7 +539,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.SHELL_BELL]: [
-    new OnDamageDealtEffect(({ pokemon, damage }) => {
+    new OnDamageDealtEffect(({ pokemon, damage, target }) => {
+      if(target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
       pokemon.handleHeal(Math.ceil(0.33 * damage), pokemon, 0, false)
     })
   ],
