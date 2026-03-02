@@ -260,7 +260,7 @@ export class Board {
     cellX: number,
     cellY: number,
     radius: number,
-    includesCenter = false
+    includesCenter: boolean
   ) {
     // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
@@ -382,7 +382,7 @@ export class Board {
     while (candidates[0].value !== undefined && radius < 5) {
       candidates.shift()
       if (candidates.length === 0) {
-        candidates.push(...this.getCellsInRadius(cx, cy, radius))
+        candidates.push(...this.getCellsInRadius(cx, cy, radius, false))
         radius++
       }
     }

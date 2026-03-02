@@ -1,6 +1,3 @@
-import { Dish, Item } from "./Item"
-import { Synergy } from "./Synergy"
-
 export enum DungeonMusic {
   AEGIS_CAVE = "Aegis Cave",
   AMP_PLAINS = "Amp Plains",

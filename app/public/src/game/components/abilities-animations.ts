@@ -346,10 +346,10 @@ export function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
-  const scaleX = max(5)(
+  const scaleX = max(10)(
     (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
   )
-  const scaleY = max(5)(
+  const scaleY = max(10)(
     (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
   )
   sprite.setScale(scaleX, scaleY)
@@ -855,7 +855,10 @@ export const AbilitiesAnimations: {
     tint: 0xffc0c0,
     scale: 3
   }),
-  [Ability.DARK_VOID]: onTargetScale4,
+  [Ability.DARK_VOID]: onTarget({
+    scale: 6,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
   [Ability.SEED_FLARE]: onCasterScale3,
   [Ability.MULTI_ATTACK]: onCasterScale4,
   [Ability.ROCK_SLIDE]: onTarget({ scale: 2, origin: [0.5, 0.9] }),
@@ -883,14 +886,6 @@ export const AbilitiesAnimations: {
       depth: DEPTH.ABILITY_BELOW_POKEMON
     })
   ],
-  [Ability.FIERY_WRATH]: onCaster({
-    ability: Ability.FLAMETHROWER,
-    oriented: true,
-    rotation: +Math.PI / 2,
-    origin: [0.5, 1],
-    scale: 2,
-    tint: 0xc000c0
-  }),
   [Ability.BLOOD_MOON]: [
     onCaster({ ability: "COSMIC_POWER", tint: 0xff5060, origin: [0.5, 1] }),
     (args) => {
@@ -1259,8 +1254,14 @@ export const AbilitiesAnimations: {
   [Ability.BLIZZARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.OVERHEAT]: onCaster({
     ability: Ability.FIRE_BLAST,
-    scale: 3,
+    scale: 4,
     depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
+  [Ability.FIERY_WRATH]: onCaster({
+    ability: Ability.FIRE_BLAST,
+    scale: 4,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    tint: 0xb000ff
   }),
   ["LINK_CABLE_link"]: (args) => {
     const distance = distanceE(

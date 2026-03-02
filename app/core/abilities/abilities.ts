@@ -1113,14 +1113,23 @@ export class DarkVoidStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 30
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (tg.status.silence) {
-          tg.status.triggerSleep(2000, tg)
+    board
+      .getCellsInRadius(target.positionX, target.positionY, 4, true)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          const enemy = cell.value
+          enemy.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (chance(0.8, pokemon)) {
+            enemy.status.triggerSleep(2000, enemy)
+          }
         }
-      }
-    })
+      })
   }
 }
 
@@ -1132,15 +1141,27 @@ export class OverheatStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        let damage = 40
-        if (tg.status.burn) {
-          damage = Math.round(damage * 1.3)
+    board
+      .getCellsInRadius(target.positionX, target.positionY, 4, true)
+      .forEach((cell) => {
+        const unit = cell.value
+        if (unit && pokemon.team !== unit.team) {
+          let damage = 50
+          if (unit.status.burn) {
+            damage = Math.round(damage * 1.3)
+          }
+          unit.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         }
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }
-    })
+        if (unit && unit.status.freeze) {
+          unit.status.freezeCooldown = 0
+        }
+      })
   }
 }
 
@@ -1525,7 +1546,8 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
-      radius
+      radius,
+      false
     )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
@@ -2187,7 +2209,7 @@ export class BlizzardStrategy extends AbilityStrategy {
     const freezeDuration = 2000
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4, false)
       .forEach((cell) => {
         if (cell.value && pokemon.team != cell.value.team) {
           const enemy = cell.value
@@ -2756,12 +2778,25 @@ export class DracoMeteorStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 50
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }
-    })
+    const damage = [30, 60, 120, 150][pokemon.stars - 1] ?? 150
+    const x = target.positionX
+    const y = target.positionY
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        board.getAdjacentCells(x, y, true).forEach((cell) => {
+          if (cell.value && pokemon.team !== cell.value.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+          }
+        })
+        pokemon.addAbilityPower(-20, pokemon, 0, false)
+      }, 1000)
+    )
   }
 }
 
@@ -3177,7 +3212,7 @@ export class ShockwaveStrategy extends AbilityStrategy {
     const damage = [30, 60, 120][pokemon.stars - 1] ?? 120
     const range = 2 + (pokemon.status.electricField ? 1 : 0)
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, range)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, range, false)
       .forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
           const distance = distanceC(
@@ -5339,7 +5374,8 @@ export class SearingShotStrategy extends AbilityStrategy {
     const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
-      2
+      2,
+      false
     )
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
@@ -5584,7 +5620,7 @@ export class AcrobaticsStrategy extends AbilityStrategy {
 
     const travelDistance = 4 - pokemon.items.size
     const candidateDestinationCells = board
-      .getCellsInRadius(pokemon.targetX, pokemon.targetY, pokemon.range)
+      .getCellsInRadius(pokemon.targetX, pokemon.targetY, pokemon.range, false)
       .filter((cell) => cell.value === undefined)
       .sort(
         (a, b) =>
@@ -7281,7 +7317,8 @@ export class ScreechStrategy extends AbilityStrategy {
     const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
-      2
+      2,
+      false
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -7973,7 +8010,12 @@ export class OverdriveStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInRadius(target.positionX, target.positionY, 3)
+    const cells = board.getCellsInRadius(
+      target.positionX,
+      target.positionY,
+      3,
+      false
+    )
     cells.forEach((cell) => {
       if (cell && cell.value && cell.value.team !== pokemon.team) {
         const distance = distanceC(
@@ -9728,7 +9770,7 @@ export class FlashStrategy extends AbilityStrategy {
       (1 + pokemon.ap / 100) *
       (crit ? pokemon.critPower : 1)
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3, false)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.status.triggerBlinded(duration, cell.value)
@@ -10797,28 +10839,26 @@ export class FieryWrathStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
-    const damage = 30
+    super.process(pokemon, board, target, crit)
+    const damage = 50
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        if (chance(0.5, pokemon)) {
-          value.status.triggerFlinch(4000, value)
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4, false)
+      .forEach((cell) => {
+        const unit = cell.value
+        if (unit && pokemon.team !== unit.team) {
+          if (chance(0.5, pokemon)) {
+            unit.status.triggerFlinch(4000, unit, pokemon)
+          }
+          unit.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         }
-        pokemon.broadcastAbility({
-          positionX: x,
-          positionY: y,
-          orientation: value.orientation
-        })
-        value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+      })
   }
 }
 
@@ -12154,7 +12194,8 @@ export class SweetScentStrategy extends AbilityStrategy {
     const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
-      3
+      3,
+      false
     )
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
@@ -14373,7 +14414,7 @@ export class SoulTrapStrategy extends AbilityStrategy {
     )
     pokemon.addShield(shieldAmount, pokemon, 0, false)
     const enemies = board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2, false)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
     enemies.forEach((cell) => {
       const enemy = cell.value!
