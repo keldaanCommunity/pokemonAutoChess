@@ -88,6 +88,14 @@ export function MainSidebar(props: MainSidebarProps) {
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
+      //if event occures in an input, textarea or select, ignore it
+      if (
+        ["INPUT", "TEXTAREA", "SELECT"].includes(
+          (e.target as HTMLElement).tagName
+        )
+      ) {
+        return
+      }
       const key = e.key.toUpperCase()
       const keybindings = preferences.keybindings
 
