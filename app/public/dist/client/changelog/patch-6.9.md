@@ -70,3 +70,4 @@
 # Bug Fixes
 
 - Temporary stat buffs on big eater belt holder when lost are now fully removed, so the 25% bonus is not kept forever
+- Shell Bell and Human synergy no longer heals on self-inflicted damage (e.g. Flame Orb)
