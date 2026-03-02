@@ -45,7 +45,7 @@
 - Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 - Nerf Palkia: PP 110 → 120
 - Change Blizzard (Articuno): freeze all enemies **in a 4-cell radius around user** ; damage: 10/20/30 → 10/20/40
-- Rework Dark Void: now deals damage on all enemies **in a 4-cell radius aroundd target**, with 80% chance to put them to sleep for 2 seconds.
+- Rework Dark Void: now deals damage on all enemies **in a 4-cell radius around target**, with 80% chance to put them to sleep for 2 seconds.
 - Rework Draco Meteor: now deals damage to the target and adjacent enemies, instead of all enemies. Damage 50 → 30/60/120/150, and user loses 20 AP after the cast. PP: 100 → 120
 - Rework Overheat: now deals damage to all enemies **in a 4-cell radius around user**. 40 → 50 special damage. All FREEZE Pokémon are unfrozen.
 - Rework Fiery Wrath: now deals damage to all enemies **in a 4-cell radius around user**. 30 → 50 special damage.
