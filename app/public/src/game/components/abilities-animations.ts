@@ -886,14 +886,6 @@ export const AbilitiesAnimations: {
       depth: DEPTH.ABILITY_BELOW_POKEMON
     })
   ],
-  [Ability.FIERY_WRATH]: onCaster({
-    ability: Ability.FLAMETHROWER,
-    oriented: true,
-    rotation: +Math.PI / 2,
-    origin: [0.5, 1],
-    scale: 2,
-    tint: 0xc000c0
-  }),
   [Ability.BLOOD_MOON]: [
     onCaster({ ability: "COSMIC_POWER", tint: 0xff5060, origin: [0.5, 1] }),
     (args) => {
@@ -1262,8 +1254,14 @@ export const AbilitiesAnimations: {
   [Ability.BLIZZARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.OVERHEAT]: onCaster({
     ability: Ability.FIRE_BLAST,
-    scale: 3,
+    scale: 4,
     depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
+  [Ability.FIERY_WRATH]: onCaster({
+    ability: Ability.FIRE_BLAST,
+    scale: 4,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    tint: 0xb000ff
   }),
   ["LINK_CABLE_link"]: (args) => {
     const distance = distanceE(

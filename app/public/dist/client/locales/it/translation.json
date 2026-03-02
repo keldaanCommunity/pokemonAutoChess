@@ -2105,7 +2105,7 @@
 		"TRICK_OR_TREAT": "Il bersaglio deve dare uno dei suoi oggetti equipaggiati all'utilizzatore. Se non ne ha, riceve una maledizione la quale potenza aumenta con la AP dell'utilizzatore.",
 		"FREEZING_GLARE": "Infliggi [20,40,80,SP] SPECIAL a tutti i nemici in linea retta, con il [50,LK]% di possibilità di causare FREEZE per 3 secondi.",
 		"THUNDEROUS_KICK": "Il bersaglio viene scaraventato via. Tutti i nemici nella traiettoria e il bersaglio subiscono FLINCH per 4 secondi, perdono [10,SP] di DEF e gli vengono inflitti [20,40,60,SP] PHYSICAL.",
-		"FIERY_WRATH": "Infligge [30,SP] SPECIAL a tutti i Pokèmon nemici, con il [50,LK]% di possibilità di causare FLINCH per 4 secondi.",
+		"FIERY_WRATH": "Infligge [50,SP] SPECIAL a tutti i Pokèmon nemici in un raggio di 4 tessere intorno all'utente, con il [50,LK]% di possibilità di causare FLINCH per 4 secondi.",
 		"VISE_GRIP": "Afferra il bersaglio con delle potenti chele, infliggendo [30,60,100,SP] SPECIAL al bersaglio. Sia l'utilizzatore che il bersaglio subiscono LOCKED per 4 secondi.",
 		"BURN_UP": "Causa a se stesso BURN per 3 secondi per infliggere [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "La terra esplode, infliggendo 40 + [100,SP]% dell'ATK come SPECIAL al bersaglio ed ai nemici adiacenti, inoltre diminuisce la loro DEF e SPE_DEF di [5,SP].",

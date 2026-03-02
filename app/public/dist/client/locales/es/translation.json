@@ -2017,7 +2017,7 @@
 		"TRICK_OR_TREAT": "El objetivo debe dar uno de sus objetos al usuario. Si este no tiene alguno, se transforma en un $t(pkm.MAGIKARP) durante [3,SP,ND=1] segundos.",
 		"FREEZING_GLARE": "Inflige [20,40,80,SP] SPECIAL a todos los enemigos en una línea, con un [50,LK]% de FREEZE por 3 segundos",
 		"THUNDEROUS_KICK": "El objetivo es empujado. Este y todos los enemigos en el camino son FLINCH por 4 segundos, pierden [10,SP] DEF y reciben [20,40,60,SP] PHYSICAL.",
-		"FIERY_WRATH": "Inflige [30,SP] SPECIAL a todos los Pokémon enemigos, con un [50,LK]% de aplicar FLINCH por 4 segundos.",
+		"FIERY_WRATH": "Inflige [50,SP] SPECIAL a todos los Pokémon enemigos en un radio de 4 casillas alrededor del usuario, con un [50,LK]% de aplicar FLINCH por 4 segundos.",
 		"VISE_GRIP": "Agarra al objetivo con poderosas tenazas, causando [30,60,100,SP] SPECIAL al objetivo. Ambos usuario y objetivo son LOCKED por 4 segundos.",
 		"BURN_UP": "Se causa BURN a si mismo por 3 segundos para infligir [50,100,200,SP] SPECIAL.",
 		"LANDS_WRATH": "El suelo erupciona, infligiendo 40 + [100,SP]% ATK como SPECIAL al objetivo y a enemigos adyacentes, luego bajando su DEF y SPE_DEF en [5,SP].",

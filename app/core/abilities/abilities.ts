@@ -1141,19 +1141,27 @@ export class OverheatStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    board.getCellsInRadius(target.positionX, target.positionY, 4, true).forEach((cell) => {
-      const unit = cell.value
-      if (unit && pokemon.team !== unit.team) {
-        let damage = 50
-        if (unit.status.burn) {
-          damage = Math.round(damage * 1.3)
+    board
+      .getCellsInRadius(target.positionX, target.positionY, 4, true)
+      .forEach((cell) => {
+        const unit = cell.value
+        if (unit && pokemon.team !== unit.team) {
+          let damage = 50
+          if (unit.status.burn) {
+            damage = Math.round(damage * 1.3)
+          }
+          unit.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         }
-        unit.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-      }
-      if(unit && unit.status.freeze) {
-        unit.status.freezeCooldown = 0        
-      }
-    })
+        if (unit && unit.status.freeze) {
+          unit.status.freezeCooldown = 0
+        }
+      })
   }
 }
 
@@ -10831,28 +10839,26 @@ export class FieryWrathStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
-    const damage = 30
+    super.process(pokemon, board, target, crit)
+    const damage = 50
 
-    board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value && pokemon.team != value.team) {
-        if (chance(0.5, pokemon)) {
-          value.status.triggerFlinch(4000, value)
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4, false)
+      .forEach((cell) => {
+        const unit = cell.value
+        if (unit && pokemon.team !== unit.team) {
+          if (chance(0.5, pokemon)) {
+            unit.status.triggerFlinch(4000, unit, pokemon)
+          }
+          unit.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
         }
-        pokemon.broadcastAbility({
-          positionX: x,
-          positionY: y,
-          orientation: value.orientation
-        })
-        value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+      })
   }
 }
 
