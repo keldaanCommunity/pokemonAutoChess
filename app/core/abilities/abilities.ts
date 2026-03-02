@@ -2120,7 +2120,7 @@ export class SeedFlareStrategy extends AbilityStrategy {
     const damage = 30
 
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 5)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 5, false)
       .forEach((cell) => {
         if (cell.value && pokemon.team !== cell.value.team) {
           cell.value.addSpecialDefense(-3, pokemon, 0, false)
@@ -16077,7 +16077,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SEISMIC_TOSS]: new SeismicTossStrategy(),
   [Ability.GUILLOTINE]: new GuillotineStrategy(),
   [Ability.ROCK_SLIDE]: new RockSlideStrategy(),
-  [Ability.HEAT_WAVE]: new HeatWaveStrategy(),
   [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
   [Ability.THUNDER_SHOCK]: new ThunderShockStrategy(),
   [Ability.THUNDER]: new ThunderStrategy(),
