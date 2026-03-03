@@ -271,6 +271,7 @@ export enum Pkm {
   DROWZEE = "DROWZEE",
   DRUDDIGON = "DRUDDIGON",
   DUBWOOL = "DUBWOOL",
+  DUCKLETT = "DUCKLETT",
   DUDUNSPARCE = "DUDUNSPARCE",
   DUGTRIO = "DUGTRIO",
   DUNSPARCE = "DUNSPARCE",
@@ -956,6 +957,7 @@ export enum Pkm {
   SWADLOON = "SWADLOON",
   SWALOT = "SWALOT",
   SWAMPERT = "SWAMPERT",
+  SWANNA = "SWANNA",
   SWELLOW = "SWELLOW",
   SWINUB = "SWINUB",
   SWIRLIX = "SWIRLIX",
@@ -1885,8 +1887,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SOLOSIS]: "0577",
   [Pkm.DUOSION]: "0578",
   [Pkm.REUNICLUS]: "0579",
-  //[Pkm.DUCKLETT]: "0580",
-  //[Pkm.SWANNA]: "0581",
+  [Pkm.DUCKLETT]: "0580",
+  [Pkm.SWANNA]: "0581",
   [Pkm.VANILLITE]: "0582",
   [Pkm.VANILLISH]: "0583",
   [Pkm.VANILLUXE]: "0584",
@@ -3590,7 +3592,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PALAFIN]: Pkm.FINIZEN,
   [Pkm.PALAFIN_HERO]: Pkm.FINIZEN,
   [Pkm.MAREANIE]: Pkm.MAREANIE,
-  [Pkm.TOXAPEX]: Pkm.MAREANIE
+  [Pkm.TOXAPEX]: Pkm.MAREANIE,
+  [Pkm.DUCKLETT]: Pkm.DUCKLETT,
+  [Pkm.SWANNA]: Pkm.DUCKLETT
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

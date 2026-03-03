@@ -6,6 +6,8 @@
 - Mareanie
 - Toxapex
 - Shadow Mewtwo
+- Ducklett
+- Swanna
 
 # Changes to Synergies
 

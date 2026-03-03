@@ -528,6 +528,16 @@ export default function Game() {
         }
       })
 
+      room.onMessage(Transfer.CLEAR_BOARD_EVENT, (event: IBoardEvent) => {
+        //logger.debug("Received CLEAR_BOARD_EVENT", event)
+        if (gameContainer.game) {
+          const g = getGameScene()
+          if (g?.battle?.simulation?.id === event.simulationId) {
+            g.battle.removeBoardEvent(event)
+          }
+        }
+      })
+
       room.onMessage(
         Transfer.CLEAR_BOARD,
         (event: { simulationId: string }) => {

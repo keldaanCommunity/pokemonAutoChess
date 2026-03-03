@@ -914,17 +914,31 @@ export default class BattleManager {
     })
   }
 
-  displayBoardEvent(event: IBoardEvent) {
-    const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
+  removeBoardEvent(event: IBoardEvent) {
+    //console.log("Removing board event", event)
     const index = event.y * BOARD_WIDTH + event.x
-
     if (event.effect === null) {
       // Clear all effects on this cell
       this.boardEventSprites[index].forEach((sprite) => {
         sprite.destroy()
       })
       this.boardEventSprites[index] = []
+    } else {
+      // Clear specific effect
+      this.boardEventSprites[index].forEach((sprite) => {
+        if (
+          sprite.texture.key === "abilities" &&
+          sprite.frame.name.includes(event.effect)
+        ) {
+          sprite.destroy()
+        }
+      })
     }
+  }
+
+  displayBoardEvent(event: IBoardEvent) {
+    const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
+    const index = event.y * BOARD_WIDTH + event.x
 
     if (event.effect === EffectEnum.LIGHTNING_STRIKE) {
       const thunderSprite = this.scene.add.sprite(

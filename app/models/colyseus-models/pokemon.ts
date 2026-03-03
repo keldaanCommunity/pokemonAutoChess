@@ -13264,6 +13264,45 @@ export class Hippodown extends Pokemon {
   passive = Passive.SAND_STREAM
 }
 
+export class Ducklett extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.SWANNA
+  hp = 105
+  atk = 11
+  speed = 56
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 2
+  skill = Ability.FEATHER_DANCE
+  additional = true
+}
+
+export class Swanna extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FLYING,
+    Synergy.SOUND
+  ])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 210
+  atk = 21
+  speed = 56
+  def = 8
+  speDef = 8
+  maxPP = 100
+  range = 2
+  skill = Ability.FEATHER_DANCE
+  additional = true
+}
+
 export class Wingull extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FLYING])
   rarity = Rarity.EPIC
@@ -21442,7 +21481,9 @@ export const PokemonClasses: Record<
   [Pkm.PALAFIN]: Palafin,
   [Pkm.PALAFIN_HERO]: PalafinHero,
   [Pkm.MAREANIE]: Mareanie,
-  [Pkm.TOXAPEX]: Toxapex
+  [Pkm.TOXAPEX]: Toxapex,
+  [Pkm.DUCKLETT]: Ducklett,
+  [Pkm.SWANNA]: Swanna
 }
 
 // declare all the classes in colyseus schema TypeRegistry
