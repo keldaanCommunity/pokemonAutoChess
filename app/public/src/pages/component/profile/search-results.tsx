@@ -1,14 +1,13 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
-import { useAppSelector } from "../../../hooks"
+import { ISuggestionUser } from "../../../../../types"
 import { searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 
-export default function SearchResults() {
-  const { t } = useTranslation()
-  const suggestions = useAppSelector((state) => state.lobby.suggestions)
-
+export default function SearchResults(props: {
+  suggestions: ISuggestionUser[]
+}) {
+  const { suggestions } = props
   return (
     <div>
       <ul className="search-suggestions">

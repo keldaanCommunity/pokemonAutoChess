@@ -9,7 +9,7 @@ import {
 } from "../../../models/colyseus-models/tournament"
 import LobbyState from "../../../rooms/states/lobby-state"
 import PreparationState from "../../../rooms/states/preparation-state"
-import { ISuggestionUser, Transfer } from "../../../types"
+import { Transfer } from "../../../types"
 import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
@@ -44,7 +44,6 @@ import {
   setBoosterContent,
   setCcu,
   setSearchedUser,
-  setSuggestions,
   updateTournament
 } from "../stores/LobbyStore"
 import {
@@ -273,13 +272,6 @@ export async function joinLobbyRoom(
             Transfer.BOOSTER_CONTENT,
             (boosterContent: Booster) => {
               dispatch(setBoosterContent(boosterContent))
-            }
-          )
-
-          room.onMessage(
-            Transfer.SUGGESTIONS,
-            (suggestions: ISuggestionUser[]) => {
-              dispatch(setSuggestions(suggestions))
             }
           )
 

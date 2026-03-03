@@ -134,10 +134,6 @@ export function removeMessage(message: { id: string }, source: ChatRoom) {
   }
 }
 
-export function searchName(name: string) {
-  rooms.lobby?.send(Transfer.SEARCH, { name })
-}
-
 export function addBot(bot: BotDifficulty | IBot) {
   rooms.preparation?.send(Transfer.ADD_BOT, bot)
 }

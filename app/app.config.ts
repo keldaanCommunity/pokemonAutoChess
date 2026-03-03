@@ -48,7 +48,7 @@ import {
   getMetaRegions,
   getMetaV2
 } from "./services/meta"
-import { Role } from "./types"
+import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
@@ -403,6 +403,58 @@ export const server = defineServer({
         sort: { time: -1 }
       })
       return res.status(200).json(messages ?? [])
+    })
+
+    app.get("/players", async (req, res) => {
+      try {
+        const searchTerm =
+          req.query?.name?.toString().trim().toLowerCase() || ""
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const user = await UserMetadata.findOne({ uid: userAuth.uid })
+        const showBanned =
+          user?.role === Role.ADMIN || user?.role === Role.MODERATOR
+
+        const users = await UserMetadata.find(
+          {
+            displayName: {
+              $gte: searchTerm,
+              $lt: searchTerm + "\uffff"
+            },
+            ...(showBanned ? {} : { banned: false })
+          },
+          [
+            "uid",
+            "elo",
+            "displayName",
+            "level",
+            "avatar",
+            ...(showBanned ? ["banned"] : [])
+          ],
+          {
+            limit: 100,
+            sort: { level: -1 },
+            collation: { locale: "en", strength: 2 }
+          }
+        )
+
+        if (users) {
+          const suggestions: Array<ISuggestionUser> = users.map((u) => {
+            return {
+              id: u.uid,
+              elo: u.elo,
+              name: u.displayName,
+              level: u.level,
+              avatar: u.avatar,
+              banned: u.banned
+            }
+          })
+          res.status(200).json(suggestions)
+        }
+      } catch (error) {
+        logger.error(error)
+        res.status(500).json({ error: "Error fetching players" })
+      }
     })
 
     app.get("/bots", async (req, res) => {
