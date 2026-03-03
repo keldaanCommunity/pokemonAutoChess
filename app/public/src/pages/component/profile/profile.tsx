@@ -1,8 +1,10 @@
-import React, { useCallback, useState } from "react"
+import firebase from "firebase/compat/app"
+import React, { useCallback, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
-import { Role, Title } from "../../../../../types"
+import { ISuggestionUser, Role, Title } from "../../../../../types"
+import { debounce } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   ban,
@@ -11,10 +13,9 @@ import {
   giveTitle,
   heapSnapshot,
   searchById,
-  searchName,
   unban
 } from "../../../network"
-import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
+import { setSearchedUser } from "../../../stores/LobbyStore"
 import { AccountTab } from "./account-tab"
 import { AvatarTab } from "./avatar-tab"
 import { GadgetsTab } from "./gadgets-tab"
@@ -31,16 +32,57 @@ export default function Profile() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
-  const suggestions = useAppSelector((state) => state.lobby.suggestions)
+  const [suggestions, setSuggestions] = useState<ISuggestionUser[]>([])
   const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
 
   const profile = searchedUser ?? user
   const [gameHistory, setGameHistory] = useState<IGameRecord[]>([])
   const [rightPanel, setRightPanel] = useState<"chat" | "game">("game")
 
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
+  const abortControllerRef = useRef<AbortController | null>(null)
+
+  async function searchName(query: string) {
+    abortControllerRef.current = new AbortController()
+    const { signal } = abortControllerRef.current
+    setLoading(true)
+    setError("")
+    try {
+      const token = await firebase.auth().currentUser?.getIdToken()
+      const res = await fetch(`/players?name=${encodeURIComponent(query)}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        signal
+      })
+      if (res.ok) {
+        const suggestions = await res.json()
+        if (suggestions.length === 0) {
+          setError(t("no_results_found"))
+        } else {
+          setSuggestions(suggestions)
+          setError("")
+        }
+      } else {
+        setError(res.statusText)
+      }
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
+        setError(err.message)
+      }
+    }
+    setLoading(false)
+  }
+
+  const debouncedSearchName = useRef(debounce(searchName, 500)).current
+
   function onSearchQueryChange(query: string) {
+    abortControllerRef.current?.abort()
     if (query) {
-      searchName(query)
+      debouncedSearchName(query)
     } else {
       resetSearch()
     }
@@ -49,7 +91,8 @@ export default function Profile() {
   const resetSearch = useCallback(
     (user = searchedUser) => {
       dispatch(setSearchedUser(user))
-      dispatch(setSuggestions([]))
+      setSuggestions([])
+      setError("")
     },
     [dispatch]
   )
@@ -66,8 +109,12 @@ export default function Profile() {
       <SearchBar onChange={onSearchQueryChange} />
 
       <div className="profile-actions">
-        {suggestions.length > 0 ? (
-          <SearchResults />
+        {loading ? (
+          <div className="loading">{t("loading")}</div>
+        ) : error ? (
+          <div className="error">{error}</div>
+        ) : suggestions.length > 0 ? (
+          <SearchResults suggestions={suggestions} />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}

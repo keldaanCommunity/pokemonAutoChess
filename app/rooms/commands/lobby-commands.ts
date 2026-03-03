@@ -839,59 +839,6 @@ export class OnSearchByIdCommand extends Command<
   }
 }
 
-export class OnSearchCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; name: string }
-> {
-  async execute({ client, name }: { client: Client; name: string }) {
-    try {
-      const searchTerm = name.trim().toLowerCase()
-      const user = this.room.users.get(client.auth.uid)
-      const showBanned =
-        user?.role === Role.ADMIN || user?.role === Role.MODERATOR
-
-      const users = await UserMetadata.find(
-        {
-          displayName: {
-            $gte: searchTerm,
-            $lt: searchTerm + "\uffff"
-          },
-          ...(showBanned ? {} : { banned: false })
-        },
-        [
-          "uid",
-          "elo",
-          "displayName",
-          "level",
-          "avatar",
-          ...(showBanned ? ["banned"] : [])
-        ],
-        {
-          limit: 100,
-          sort: { level: -1 },
-          collation: { locale: "en", strength: 2 }
-        }
-      )
-
-      if (users) {
-        const suggestions: Array<ISuggestionUser> = users.map((u) => {
-          return {
-            id: u.uid,
-            elo: u.elo,
-            name: u.displayName,
-            level: u.level,
-            avatar: u.avatar,
-            banned: u.banned
-          }
-        })
-        client.send(Transfer.SUGGESTIONS, suggestions)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class BanUserCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; reason: string }

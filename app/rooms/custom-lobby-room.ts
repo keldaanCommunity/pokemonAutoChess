@@ -47,7 +47,6 @@ import {
   OnLeaveCommand,
   OnNewMessageCommand,
   OnSearchByIdCommand,
-  OnSearchCommand,
   OpenBoosterCommand,
   ParticipateInTournamentCommand,
   RemakeTournamentLobbyCommand,
@@ -362,10 +361,6 @@ export default class CustomLobbyRoom extends Room {
 
     this.onMessage(Transfer.SEARCH_BY_ID, (client, uid: string) => {
       this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })
-    })
-
-    this.onMessage(Transfer.SEARCH, (client, { name }: { name: string }) => {
-      this.dispatcher.dispatch(new OnSearchCommand(), { client, name })
     })
 
     // Handle notification acknowledgment from client
