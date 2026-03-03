@@ -3218,7 +3218,7 @@
 		"BERSERK": "Gains 5 AP each time a Pokémon is affected by its ability.",
 		"APPLIN": "Applin will evolve when given an apple:\nTART_APPLE: $t(pkm.FLAPPLE)\nSWEET_APPLE: $t(pkm.APPLETUN)\nSIRUPY_APPLE: $t(pkm.DIPPLIN)",
 		"DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE.",
-		"WELL_BAKED": "The Pokémon doesn't suffer from BURN. Instead, it gains 20 DEF when burning.",
+		"WELL_BAKED": "The Pokémon doesn't suffer from BURN damage. Instead, it gains 20 DEF when burning.",
 		"CONVERSION": "Conversion: Get the highest synergy of your opponent and its effects at the start of the fight.",
 		"CREAM": "$t(pkm.MILCERY) is looking for a delicious flavor...",
 		"VANILLA_CREAM": "Upon casting, the VANILLA_FLAVOR adds [80,SP] SHIELD to the decorated ally",
