@@ -7863,5 +7863,18 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.POISON_MELEE,
     shinyUnavailable: true
+  },
+  [Pkm.DUCKLETT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FLYING_RANGE,
+    shinyUnavailable: true
+  },
+  [Pkm.SWANNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FLYING_RANGE
   }
 }

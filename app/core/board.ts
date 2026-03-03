@@ -54,7 +54,9 @@ export class Board {
         const effectsOnNewCell = this.boardEffects[index]
         effectsOnNewCell.forEach((effectOnNewCell) => {
           if (!entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
-            //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
+            // logger.debug(
+            //   `${entity.name} gained effect ${effectOnNewCell} by moving into board effect`
+            // )
             entity.effects.add(effectOnNewCell)
           }
         })
@@ -513,6 +515,7 @@ export class Board {
     if (entityOnCell) {
       entityOnCell.effects.add(effect)
     }
+
     if (!previousEffects.has(effect)) {
       this.boardEffects[y * this.columns + x].add(effect)
       // show anim effect client side
@@ -525,18 +528,36 @@ export class Board {
     }
   }
 
-  clearBoardEffect(x: number, y: number, simulation: Simulation) {
+  clearBoardEffect(
+    x: number,
+    y: number,
+    simulation: Simulation,
+    effectToClear?: BoardEffect
+  ) {
     const index = y * this.columns + x
     const existingEffects = this.boardEffects[index]
     const entityOnCell = this.getEntityOnCell(x, y)
 
-    this.boardEffects[index].clear()
-    if (entityOnCell) {
-      existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
-    }
-    if (existingEffects.size > 0) {
-      // clean effect anim client side
-      simulation.room.broadcast(Transfer.BOARD_EVENT, {
+    if (effectToClear) {
+      // Clear specific effect
+      existingEffects.delete(effectToClear)
+      if (entityOnCell) {
+        entityOnCell.effects.delete(effectToClear)
+      }
+      logger.debug(`Clearing board effect ${effectToClear} at (${x}, ${y})`)
+      simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
+        simulationId: simulation.id,
+        effect: effectToClear,
+        x,
+        y
+      })
+    } else {
+      // Clear all effects
+      existingEffects.clear()
+      if (entityOnCell) {
+        existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
+      }
+      simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
         simulationId: simulation.id,
         effect: null,
         x,
