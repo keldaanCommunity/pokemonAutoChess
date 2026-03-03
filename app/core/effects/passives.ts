@@ -1388,15 +1388,18 @@ export const PassiveEffects: Partial<
   ],
   [Passive.FINIZEN]: [
     new OnSimulationStartEffect(({ simulation, entity }) => {
+      if (entity.name === Pkm.PALAFIN_HERO) return
       let alliesKo = 0
       let alliesNb = 0
+      let transformed = false
       simulation.board.forEach((x, y, pkm) => {
         if (pkm && pkm.team === entity.team && pkm.id !== entity.id) {
           alliesNb++
           pkm.effectsSet.add(
             new OnDeathEffect(() => {
               alliesKo++
-              if (alliesKo >= 5 || alliesKo >= alliesNb) {
+              if (!transformed && (alliesKo >= 5 || alliesKo >= alliesNb)) {
+                transformed = true
                 entity.index = PkmIndex[Pkm.PALAFIN_HERO]
                 entity.name = Pkm.PALAFIN_HERO
                 // TODO: update stats to match the hero form
@@ -1417,6 +1420,22 @@ export const PassiveEffects: Partial<
           )
         }
       })
+
+      // edge case no allies
+      if (alliesNb === 0) {
+        entity.index = PkmIndex[Pkm.PALAFIN_HERO]
+        entity.name = Pkm.PALAFIN_HERO
+        entity.addAttack(18, entity, 0, false)
+        entity.addSpeed(16, entity, 0, false)
+        entity.addDefense(5, entity, 0, false)
+        entity.addSpecialDefense(5, entity, 0, false)
+        entity.hp = entity.maxHP
+        if (entity.player) {
+          entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
+          entity.player.transformPokemon(entity.refToBoardPokemon as Pokemon, Pkm.PALAFIN)
+        }
+      }
+
     })
   ]
 }
