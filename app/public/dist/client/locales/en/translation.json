@@ -2261,7 +2261,7 @@
 		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds.",
 		"SHADOW_FORCE": "Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form.",
 		"SHADOW_CLAW": "Slash enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [60,100,140,SP] SPECIAL.",
-		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [2,SP] ATK, [2,SP] DEF, [2,SP] SPE_DEF, [5,SP] SPEED, or [10,SP] LUCK."
+		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
