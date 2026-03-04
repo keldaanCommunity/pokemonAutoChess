@@ -1180,6 +1180,11 @@ export const PassiveEffects: Partial<
       attacker.addAbilityPower(30, attacker, 0, false)
     })
   ],
+  [Passive.CHILLING_NEIGH]: [
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAttack(5, attacker, 0, false)
+    })
+  ],
   [Passive.GUZZLORD]: [
     new OnKillEffect(({ attacker }) => {
       if (attacker.items.has(Item.CHEF_HAT)) {

@@ -12305,10 +12305,25 @@ export class Spectrier extends Pokemon {
   speed = 67
   def = 10
   speDef = 20
-  maxPP = 80
+  maxPP = 100
   range = 1
   skill = Ability.ASTRAL_BARRAGE
   passive = Passive.GRIM_NEIGH
+}
+
+export class Glastrier extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 280
+  atk = 30
+  speed = 22
+  def = 20
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.GLACIAL_LANCE
+  passive = Passive.CHILLING_NEIGH
 }
 
 export class Kartana extends Pokemon {
@@ -20973,6 +20988,7 @@ export const PokemonClasses: Record<
   [Pkm.SENTRET]: Sentret,
   [Pkm.FURRET]: Furret,
   [Pkm.SPECTRIER]: Spectrier,
+  [Pkm.GLASTRIER]: Glastrier,
   [Pkm.TORKOAL]: Torkoal,
   [Pkm.DELIBIRD]: Delibird,
   [Pkm.IRON_BUNDLE]: IronBundle,

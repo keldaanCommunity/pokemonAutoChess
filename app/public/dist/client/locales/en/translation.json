@@ -560,7 +560,8 @@
 		"BANEFUL_BUNKER": "Baneful Bunker",
 		"SHADOW_FORCE": "Shadow Force",
 		"SHADOW_CLAW": "Shadow Claw",
-		"FEATHER_DANCE": "Feather Dance"
+		"FEATHER_DANCE": "Feather Dance",
+		"GLACIAL_LANCE": "Glacial Lance"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1721,7 +1722,8 @@
 		"MAREANIE": "Mareanie",
 		"TOXAPEX": "Toxapex",
 		"DUCKLETT": "Ducklett",
-		"SWANNA": "Swanna"
+		"SWANNA": "Swanna",
+		"GLASTRIER": "Glastrier"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -1958,7 +1960,7 @@
 		"POISON_JAB": "Deal [30,60,90,SP] SPECIAL, swap places with the target, and inflict both the target and the caster with POISONNED for 3 seconds.",
 		"SHELL_SMASH": "Deal [15,30,SP] SPECIAL to ADJACENT enemy Pokémon. Gain 2 ATK, 20 AP and 20 SPEED and lose 2 DEF and 2 SPE_DEF.",
 		"HELPING_HAND": "Grant [30,60,100,SP] SHIELD to the 2 nearest allied Pokémon and double the damage of their next ability.",
-		"ASTRAL_BARRAGE": "Send [7,SP] small ghosts toward random enemy Pokémon, each dealing 20 SPECIAL.",
+		"ASTRAL_BARRAGE": "Rush to a safe spot in the backline while sending [7,SP] small ghosts toward random enemy Pokémon, each dealing 20 SPECIAL.",
 		"WATERFALL": "Gain [50,100,150,SP] SHIELD, cure any negative status conditions and clear the tile of all BOARD_EFFECT.",
 		"PYRO_BALL": "The user attacks by igniting a small stone and launching it as a fiery ball at the farthest enemy Pokémon, dealing [10,20,40,SP] SPECIAL and applying BURN for 2 seconds to all enemy Pokémon in its path.",
 		"WHIRLPOOL": "Unleash a hail of 4 whirlpools toward the farthest enemy Pokémon, each dealing [100,SP]% ATK SPECIAL to the first enemy Pokémon in their path.",
@@ -2261,7 +2263,8 @@
 		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds.",
 		"SHADOW_FORCE": "Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form.",
 		"SHADOW_CLAW": "Slash enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [60,100,140,SP] SPECIAL.",
-		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [2,SP] ATK, [2,SP] DEF, [2,SP] SPE_DEF, [5,SP] SPEED, or [10,SP] LUCK."
+		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [2,SP] ATK, [2,SP] DEF, [2,SP] SPE_DEF, [5,SP] SPEED, or [10,SP] LUCK.",
+		"GLACIAL_LANCE": "Rush to a safe spot in the backline and then throws a lance of ice to the farthest target. First enemy hit takes [300,SP]% of user's ATK as SPECIAL, and ADJACENT enemies take half of that damage."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3141,7 +3144,8 @@
 		"MELOETTA": "Meloetta switches between its Pirouette Forme and Aria Forme depending on its position on the board",
 		"UNOWN": "Unown cannot hold items and vanish after one fight or after casting their ability",
 		"GLISCOR": "First stack of POISONNED heals this Pokémon instead of taking damage",
-		"GRIM_NEIGH": "When the Pokémon knocks out an enemy, it emits a terrifying whinny sound that increases its AP by 30",
+		"GRIM_NEIGH": "When the Pokémon knocks out an enemy, it emits a grim neigh that increases its AP by 30",
+		"CHILLING_NEIGH": "When the Pokémon knocks out an enemy, it emits a chilling neigh that increases its ATK by 5",
 		"SHAYMIN": "Shaymin is looking for a GRACIDEA_FLOWER",
 		"BEAST_BOOST_ATK": "Upon inflicting a KO, this Pokémon gains 5 ATK",
 		"BEAST_BOOST_AP": "Upon inflicting a KO, this Pokémon gains 10 AP",

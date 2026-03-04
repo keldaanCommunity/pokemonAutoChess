@@ -514,12 +514,7 @@ export default class BattleManager {
         case "positionX":
         case "positionY":
           {
-            // logger.debug(pokemon.positionX, pokemon.positionY);
-            if (field === "positionX") {
-              pkmSprite.positionX = pokemon.positionX
-            } else if (field == "positionY") {
-              pkmSprite.positionY = pokemon.positionY
-            }
+            // logger.debug(pokemon.positionX, pokemon.positionY);            
             const coordinates = transformEntityCoordinates(
               pokemon.positionX,
               pokemon.positionY,

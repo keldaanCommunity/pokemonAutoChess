@@ -76,8 +76,6 @@ export default class PokemonSprite extends DraggableObject {
   id: string
   targetX: number | null
   targetY: number | null
-  positionX: number
-  positionY: number
   attackSprite: AttackSprite
   itemsContainer: ItemsContainer
   orientation: Orientation
@@ -158,8 +156,6 @@ export default class PokemonSprite extends DraggableObject {
     this.id = pokemon.id
     this.targetX = null
     this.targetY = null
-    this.positionX = pokemon.positionX
-    this.positionY = pokemon.positionY
     this.attackSprite =
       PokemonAnimations[pokemon.name]?.attackSprite ??
       DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
@@ -281,6 +277,14 @@ export default class PokemonSprite extends DraggableObject {
       }
       this.emit("loaded")
     })
+  }
+
+  get positionX(): number {
+    return this.pokemon.positionX
+  }
+
+  get positionY(): number {
+    return this.pokemon.positionY
   }
 
   lazyloadAnimations(scene: GameScene | DebugScene): Promise<void> {
