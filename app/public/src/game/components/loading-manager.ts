@@ -51,6 +51,7 @@ export default class LoadingManager {
     scene.load.image("fog", "/assets/environment/fog.png")
     scene.load.image("sun", "/assets/environment/sun.png")
     scene.load.image("clouds", "/assets/environment/clouds.png")
+    scene.load.image("distort", "/assets/environment/noise.png")
     scene.load.multiatlas(
       "snowflakes",
       "/assets/environment/snowflakes.json",
@@ -134,7 +135,7 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
   )
   scene.load.multiatlas(
     "berry_trees",
-    "/assets/environment/berry_trees.json",
+    "/assets/environment/berry_trees.json?tempcacheburst=68", //TEMP
     "/assets/environment/"
   )
   scene.load.multiatlas(

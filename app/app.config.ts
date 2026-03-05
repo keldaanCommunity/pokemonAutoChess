@@ -1,6 +1,12 @@
 import { monitor } from "@colyseus/monitor"
-import config from "@colyseus/tools"
-import { matchMaker, RedisDriver, RedisPresence, ServerOptions } from "colyseus"
+import {
+  defineRoom,
+  defineServer,
+  matchMaker,
+  RedisDriver,
+  RedisPresence,
+  ServerOptions
+} from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -10,16 +16,12 @@ import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
-import {
-  MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  MAX_POOL_CONNECTIONS_SIZE,
-  SynergyTriggers
-} from "./config"
+import { MAX_CONCURRENT_PLAYERS_ON_SERVER, SynergyTriggers } from "./config"
+import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
 import DetailledStatistic from "./models/mongo-models/detailled-statistic-v2"
-import Meta from "./models/mongo-models/meta"
 import TitleStatistic from "./models/mongo-models/title-statistic"
 import UserMetadata, {
   toUserMetadataJSON
@@ -39,11 +41,14 @@ import {
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
+  getDendrogram,
   getMetadata,
   getMetaItems,
-  getMetaPokemons
+  getMetaPokemons,
+  getMetaRegions,
+  getMetaV2
 } from "./services/meta"
-import { Role } from "./types"
+import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
@@ -53,6 +58,14 @@ const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
   : path.join(__dirname, "public", "dist", "client")
 const viewsSrc = path.join(clientSrc, "index.html")
+const isDevelopment = process.env.MODE === "dev"
+const setCacheControl = (res: any, maxAge: number = 86400) => {
+  if (!isDevelopment) {
+    res.set("Cache-Control", `max-age=${maxAge}`)
+  } else {
+    res.set("Cache-Control", "no-cache")
+  }
+}
 
 /**
  * Import your Room files
@@ -97,8 +110,8 @@ if (process.env.NODE_APP_INSTANCE) {
   gameOptions.devMode = true
 }*/
 
-export default config({
-  options: gameOptions,
+export const server = defineServer({
+  ...gameOptions,
 
   /* uWebSockets turned out to be unstable in production, so we are using the default transport
   2025-06-29T16:50:08: Error: Invalid access of closed uWS.WebSocket/SSLWebSocket.
@@ -110,17 +123,14 @@ export default config({
     })
   },*/
 
-  initializeGameServer: (gameServer) => {
-    /**
-     * Define your room handlers:
-     */
-    gameServer.define("after-game", AfterGameRoom)
-    gameServer.define("lobby", CustomLobbyRoom)
-    gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
-    gameServer.define("game", GameRoom).enableRealtimeListing()
+  rooms: {
+    "after-game": defineRoom(AfterGameRoom),
+    lobby: defineRoom(CustomLobbyRoom),
+    preparation: defineRoom(PreparationRoom).enableRealtimeListing(),
+    game: defineRoom(GameRoom).enableRealtimeListing()
   },
 
-  initializeExpress: (app) => {
+  express: (app) => {
     /**
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
@@ -138,6 +148,7 @@ export default config({
               "https://*.firebaseapp.com",
               "https://apis.google.com",
               "https://*.googleapis.com",
+              "https://*.doubleclick.net", // google ads, required for youtube embedded
               "https://*.githubusercontent.com",
               "http://raw.githubusercontent.com",
               "https://*.youtube.com",
@@ -154,7 +165,8 @@ export default config({
               "'unsafe-inline'",
               "'unsafe-eval'",
               "https://apis.google.com",
-              "https://*.googleapis.com"
+              "https://*.googleapis.com",
+              "https://*.doubleclick.net" // google ads, required for youtube embedded
             ],
             imgSrc: [
               "'self'",
@@ -240,43 +252,44 @@ export default config({
       res.send(SynergyTriggers)
     })
 
-    app.get("/meta", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
-      res.send(
-        await Meta.find({}, [
-          "cluster_id",
-          "count",
-          "ratio",
-          "winrate",
-          "mean_rank",
-          "types",
-          "pokemons",
-          "x",
-          "y"
-        ])
-      )
-    })
-
     app.get("/titles", async (req, res) => {
       res.send(await TitleStatistic.find().sort({ name: 1 }).exec()) // Ensure a consistent order by sorting on a unique field
     })
 
     app.get("/meta/metadata", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetadata())
     })
 
     app.get("/meta/items", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaItems())
     })
 
     app.get("/meta/pokemons", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
-      res.set("Cache-Control", "max-age=86400")
+      setCacheControl(res, 86400)
       res.send(getMetaPokemons())
+    })
+
+    app.get("/meta/regions", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getMetaRegions())
+    })
+
+    app.get("/meta-v2", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getMetaV2())
+    })
+
+    app.get("/dendrogram", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getDendrogram())
     })
 
     app.get("/meta/types", async (req, res) => {
@@ -308,32 +321,44 @@ export default config({
     })
 
     app.get("/leaderboards", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard())
     })
 
     app.get("/leaderboards/bots", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.botLeaderboard)
     })
 
     app.get("/leaderboards/elo", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.leaderboard)
     })
 
     app.get("/leaderboards/level", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.levelLeaderboard)
     })
 
     app.get("/leaderboards/event", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       res.send(getLeaderboard()?.eventLeaderboard)
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 10
@@ -365,7 +390,9 @@ export default config({
     })
 
     app.get("/chat-history/:playerUid", async (req, res) => {
-      res.set("Cache-Control", "no-cache")
+      if (!isDevelopment) {
+        res.set("Cache-Control", "no-cache")
+      }
       const { playerUid } = req.params
       const { page = 1 } = req.query
       const limit = 30
@@ -376,6 +403,58 @@ export default config({
         sort: { time: -1 }
       })
       return res.status(200).json(messages ?? [])
+    })
+
+    app.get("/players", async (req, res) => {
+      try {
+        const searchTerm =
+          req.query?.name?.toString().trim().toLowerCase() || ""
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const user = await UserMetadata.findOne({ uid: userAuth.uid })
+        const showBanned =
+          user?.role === Role.ADMIN || user?.role === Role.MODERATOR
+
+        const users = await UserMetadata.find(
+          {
+            displayName: {
+              $gte: searchTerm,
+              $lt: searchTerm + "\uffff"
+            },
+            ...(showBanned ? {} : { banned: false })
+          },
+          [
+            "uid",
+            "elo",
+            "displayName",
+            "level",
+            "avatar",
+            ...(showBanned ? ["banned"] : [])
+          ],
+          {
+            limit: 100,
+            sort: { level: -1 },
+            collation: { locale: "en", strength: 2 }
+          }
+        )
+
+        if (users) {
+          const suggestions: Array<ISuggestionUser> = users.map((u) => {
+            return {
+              id: u.uid,
+              elo: u.elo,
+              name: u.displayName,
+              level: u.level,
+              avatar: u.avatar,
+              banned: u.banned
+            }
+          })
+          res.status(200).json(suggestions)
+        }
+      } catch (error) {
+        logger.error(error)
+        res.status(500).json({ error: "Error fetching players" })
+      }
     })
 
     app.get("/bots", async (req, res) => {
@@ -418,7 +497,10 @@ export default config({
         if (!userAuth) return
         const mongoUser = await UserMetadata.findOne({ uid: userAuth.uid })
         if (!mongoUser) return res.status(404).send("User not found")
-        res.set("Cache-Control", "no-cache")
+        await migrateShardsOfAltForms(mongoUser) // TEMPORARY migration; to be removed in future
+        if (!isDevelopment) {
+          res.set("Cache-Control", "no-cache")
+        }
         res.send(toUserMetadataJSON(mongoUser))
       } catch (error) {
         logger.error("Error fetching profile", error)
@@ -520,7 +602,6 @@ export default config({
      * Before before gameServer.listen() is called.
      */
     connect(process.env.MONGO_URI!, {
-      maxPoolSize: MAX_POOL_CONNECTIONS_SIZE,
       socketTimeoutMS: 45000
     })
     admin.initializeApp({

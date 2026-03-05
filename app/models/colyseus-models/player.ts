@@ -1,4 +1,4 @@
-import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type, view } from "@colyseus/schema"
 import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
@@ -16,6 +16,7 @@ import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
@@ -24,15 +25,19 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
+  AbilityPerTM,
   ArtificialItems,
-  Berries,
-  HMs,
   Item,
-  ItemComponents,
+  ItemComponentsNoFossilOrScarf,
   MissionOrder,
+  NonSpecialBerries,
+  ScarfItem,
+  Scarves,
   SynergyGemsBuried,
   SynergyGivenByItem,
-  TMs,
+  TMsBronze,
+  TMsGold,
+  TMsSilver,
   ToolsBuried,
   WeatherRocks
 } from "../../types/enum/Item"
@@ -71,7 +76,7 @@ import ExperienceManager from "./experience-manager"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
-import Synergies, { computeSynergies } from "./synergies"
+import Synergies, { computeSynergies, getSynergyStep } from "./synergies"
 import { Wanderer } from "./wanderer"
 
 export default class Player extends Schema implements IPlayer {
@@ -81,13 +86,13 @@ export default class Player extends Schema implements IPlayer {
   @type("string") name: string
   @type("string") avatar: string
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
-  @type(["string"]) shop = new ArraySchema<Pkm>()
+  @view() @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint16") money = process.env.MODE == "dev" ? 999 : 5
   @type("int16") life = 100
-  @type("boolean") shopLocked: boolean = false
-  @type("uint8") shopFreeRolls: number = 0
+  @view() @type("boolean") shopLocked: boolean = false
+  @view() @type("uint8") shopFreeRolls: number = 0
   @type("uint8") streak: number = 0
   @type("uint8") maxInterest: number = 5
   @type("uint8") interest: number = 0
@@ -108,16 +113,13 @@ export default class Player extends Schema implements IPlayer {
   @type("string") emotesUnlocked = ""
   @type("string") title: Title | ""
   @type("string") role: Role
-  @type(["string"]) itemsProposition = new ArraySchema<Item>()
-  @type(["string"]) pokemonsProposition = new ArraySchema<PkmProposition>()
+  @view() @type(["string"]) itemsProposition = new ArraySchema<Item>()
+  @view() @type(["string"]) pokemonsProposition =
+    new ArraySchema<PkmProposition>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
-  @type(["string"]) berryTreesType: Item[] = [
-    pickRandomIn(Berries),
-    pickRandomIn(Berries),
-    pickRandomIn(Berries)
-  ]
+  @type(["string"]) berryTreesType: Item[] = pickNRandomIn(NonSpecialBerries, 3)
   @type(["uint8"]) berryTreesStages: number[] = [1, 1, 1]
   @type([Pokemon]) flowerPots: Pokemon[] = []
   @type("uint8") mulch: number = 0
@@ -133,7 +135,6 @@ export default class Player extends Schema implements IPlayer {
   @type("uint16") totalPlayerDamageDealt: number = 0
   @type("float32") eggChance: number = 0
   @type("float32") goldenEggChance: number = 0
-  @type("float32") wildChance: number = 0
   @type("uint8") cellBattery: number = 0
   @type({ map: Wanderer }) wanderers: Map<string, Wanderer> = new Map<
     string,
@@ -148,8 +149,9 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  scarvesItems: Item[] = []
   buriedItems: (Item | null)[] = initBuriedItems()
-  tms: (Item | null)[] = pickRandomTMs()
+  tms: Item[] = pickRandomTMs()
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
@@ -168,6 +170,7 @@ export default class Player extends Schema implements IPlayer {
   }[] = []
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
+  regions: DungeonPMDO[] = []
 
   constructor(
     id: string,
@@ -230,7 +233,8 @@ export default class Player extends Schema implements IPlayer {
     }
 
     if (state.specialGameRule === SpecialGameRule.SLAMINGO) {
-      for (let i = 0; i < 4; i++) this.items.push(pickRandomIn(ItemComponents))
+      for (let i = 0; i < 4; i++)
+        this.items.push(pickRandomIn(ItemComponentsNoFossilOrScarf))
     }
   }
 
@@ -300,7 +304,7 @@ export default class Player extends Schema implements IPlayer {
         newPokemon.shiny = true
       }
     })
-    newPokemon.meal = pokemon.meal
+    newPokemon.dishes = pokemon.dishes
     newPokemon.positionX = pokemon.positionX
     newPokemon.positionY = pokemon.positionY
     this.board.delete(pokemon.id)
@@ -320,15 +324,20 @@ export default class Player extends Schema implements IPlayer {
       this.specialGameRule
     )
 
+    const normalNeedsRecomputing = this.updateScarves(
+      previousSynergies,
+      updatedSynergies
+    )
+
     const artifNeedsRecomputing = this.updateArtificialItems(
       previousSynergies,
       updatedSynergies
     )
-    if (artifNeedsRecomputing) {
+    if (artifNeedsRecomputing || normalNeedsRecomputing) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
-      right after losing an artificial item, since many edgecases may need to be adressed when 
-      losing a type (Axew double dragon + artif item for example) ; it's not as easy as just 
-      decrementing by 1 in updatedSynergies map count
+      right after losing an artificial item or a scarf, since many edgecases may need to be 
+      adressed when losing a type (Axew double dragon + artif item for example) ;
+      it's not as easy as just decrementing by 1 in updatedSynergies map count
       */
       updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
     }
@@ -363,7 +372,7 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies.get(Synergy.HUMAN) !==
       updatedSynergies.get(Synergy.HUMAN)
     ) {
-      this.updateTms()
+      this.updateTms(previousSynergies, updatedSynergies)
     }
 
     if (
@@ -373,7 +382,6 @@ export default class Player extends Schema implements IPlayer {
       this.updateChefsHats()
     }
 
-    this.updateWildChance()
     this.effects.update(this.synergies, this.board)
 
     if (
@@ -444,8 +452,82 @@ export default class Player extends Schema implements IPlayer {
     return needsRecomputingSynergiesAgain
   }
 
+  getScarvesItemsWithNbScarves(n: number): Item[] {
+    let i = 0
+    const scarves: Item[] = []
+    while (n > 0) {
+      const scarf = this.scarvesItems[i] ?? Item.SILK_SCARF
+      n -= scarf === Item.NULLIFY_BANDANNA ? 2 : 1
+      if (n >= 0) {
+        scarves.push(scarf)
+        i++
+      }
+    }
+    return scarves
+  }
+
+  updateScarves(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ): boolean {
+    let needsRecomputingSynergiesAgain = false
+    const previousNbNormalScarves = getSynergyStep(
+      previousSynergies,
+      Synergy.NORMAL
+    )
+    const previousNbScarves = this.items
+      .concat(values(this.board).flatMap((p) => Array.from(p.items)))
+      .filter((i) => isIn(Scarves, i) || i === Item.SILK_SCARF)
+      .reduce((total, i) => total + (i === Item.NULLIFY_BANDANNA ? 2 : 1), 0) // count scarves already held by player and pokemons, with nullify bandanna counting as 2
+    const extraScarves = previousNbScarves - previousNbNormalScarves // if > 0 it means player got a scarf from another source (encounter, passive...)
+    const previousScarves = this.getScarvesItemsWithNbScarves(previousNbScarves)
+
+    const newNbNormalScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
+    const newNbScarves = newNbNormalScarves + extraScarves
+    const newScarves = this.getScarvesItemsWithNbScarves(newNbScarves)
+
+    if (newScarves.length > previousScarves.length) {
+      // some scarves are gained
+      const gainedScarves = newScarves.slice(
+        previousScarves.length,
+        newScarves.length
+      )
+      gainedScarves.forEach((item) => {
+        this.items.push(item)
+      })
+    } else if (newScarves.length < previousScarves.length) {
+      // some scarves are lost
+      const lostScarves = previousScarves.slice(
+        newScarves.length,
+        previousScarves.length
+      )
+
+      const removeScarf = (item: ScarfItem) => {
+        // first check held items
+        const pokemons = values(this.board)
+        for (const pokemon of pokemons) {
+          if (pokemon.items.has(item)) {
+            pokemon.removeItem(item, this)
+
+            if (item in SynergyGivenByItem && !isOnBench(pokemon)) {
+              needsRecomputingSynergiesAgain = true
+            }
+            return // break for loop to remove only one
+          }
+        }
+
+        // if not found check player item bench
+        removeInArray<Item>(this.items, item)
+      }
+
+      lostScarves.forEach(removeScarf)
+    }
+
+    return needsRecomputingSynergiesAgain
+  }
+
   updateWeatherRocks() {
-    const nbWeatherRocks = this.synergies.getSynergyStep(Synergy.ROCK)
+    const nbWeatherRocks = getSynergyStep(this.synergies, Synergy.ROCK)
 
     let weatherRockInInventory
     do {
@@ -463,29 +545,34 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
-  updateTms() {
-    const nbTMs = this.synergies.getSynergyStep(Synergy.HUMAN)
-
-    let tmInInventory
-    do {
-      tmInInventory = this.items.findIndex(
-        (item, index) => TMs.includes(item) || HMs.includes(item)
-      )
-      if (tmInInventory != -1) {
-        this.items.splice(tmInInventory, 1)
-      }
-    } while (tmInInventory != -1)
-
-    if (nbTMs > 0) {
-      const tmsCollected = this.tms
-        .slice(0, nbTMs)
-        .filter<Item>((tm): tm is Item => tm != null)
-      this.items.push(...tmsCollected)
+  updateTms(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ) {
+    const previousNbTMs = getSynergyStep(previousSynergies, Synergy.HUMAN)
+    const newNbTMs = getSynergyStep(updatedSynergies, Synergy.HUMAN)
+    if (previousNbTMs < newNbTMs) {
+      // some TMs are gained
+      const gainedTMs = this.tms.slice(previousNbTMs, newNbTMs)
+      this.items.push(...gainedTMs)
+    } else if (newNbTMs < previousNbTMs) {
+      // some TMs are lost, we need to remove them from the inventory and from the pokemons that hold them
+      const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
+      lostTMs.forEach((tm) => {
+        removeInArray(this.items, tm)
+        const pokemonWithThisTm = values(this.board).find(
+          (p) => p.tm === AbilityPerTM[tm]
+        )
+        if (pokemonWithThisTm) {
+          pokemonWithThisTm.tm = Ability.DEFAULT
+          pokemonWithThisTm.skill = getPokemonData(pokemonWithThisTm.name).skill
+        }
+      })
     }
   }
 
   updateFishingRods() {
-    const fishingLevel = this.synergies.getSynergyStep(Synergy.WATER)
+    const fishingLevel = getSynergyStep(this.synergies, Synergy.WATER)
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
       removeInArray<Item>(this.items, Item.OLD_ROD)
@@ -502,18 +589,8 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.SUPER_ROD)
   }
 
-  updateWildChance() {
-    this.wildChance = values(this.board)
-      .filter((p) => p.types.has(Synergy.WILD))
-      .reduce(
-        (total, p) =>
-          total + p.stars * max(0.1)(Math.pow(0.01, 1 - p.luck / 200)),
-        0
-      )
-  }
-
   updateChefsHats() {
-    const gourmetLevel = this.synergies.getSynergyStep(Synergy.GOURMET)
+    const gourmetLevel = getSynergyStep(this.synergies, Synergy.GOURMET)
     const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
     const hatHolders = values(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
@@ -585,8 +662,8 @@ export default class Player extends Schema implements IPlayer {
         this.updateSynergies()
         if (regionalSpeciality) {
           this.board.forEach((pokemon) => {
-            if (pokemon.canEat) {
-              pokemon.meal = regionalSpeciality
+            if (pokemon.canEat && !pokemon.dishes.has(regionalSpeciality)) {
+              pokemon.dishes.add(regionalSpeciality)
             }
           })
         }
@@ -638,16 +715,20 @@ export default class Player extends Schema implements IPlayer {
         const pkm = getPokemonData(PkmFamily[p])
         const evolution = pkm.evolution
         const baseVariant = PkmRegionalBaseVariants[p]
-        if(baseVariant){
+        if (baseVariant) {
           const basePkm = getPokemonData(baseVariant)
-          if(basePkm.additional){
+          if (basePkm.additional) {
             const addpickStages = {
               [Rarity.UNCOMMON]: AdditionalPicksStages[0],
               [Rarity.RARE]: AdditionalPicksStages[1],
               [Rarity.EPIC]: AdditionalPicksStages[2]
             }
             const addPickStage = addpickStages[basePkm.rarity]
-            if(addPickStage > 0 && (state.stageLevel < addPickStage || state.additionalPokemons.includes(baseVariant) === false)){
+            if (
+              addPickStage > 0 &&
+              (state.stageLevel < addPickStage ||
+                state.additionalPokemons.includes(baseVariant) === false)
+            ) {
               return false // do not show the regional variant if its base variant is not in additional picks
             }
           }
@@ -736,11 +817,16 @@ export default class Player extends Schema implements IPlayer {
       id,
       new Wanderer({
         id,
+        shiny: false,
         pkm: Pkm.CHATOT,
-        type: WandererType.SPECIAL,
+        type: WandererType.DIALOG,
         behavior: WandererBehavior.SPECTATE
       })
     )
+
+    setTimeout(() => {
+      this.addMoney(30, true, null)
+    }, 7000)
   }
 
   chargeCellBattery(amount: number) {
@@ -753,10 +839,10 @@ export default class Player extends Schema implements IPlayer {
 }
 
 function pickRandomTMs() {
-  const firstTM = pickRandomIn(TMs)
-  const secondTM = pickRandomIn(TMs.filter((tm) => tm !== firstTM))
-  const hm = pickRandomIn(HMs)
-  return [firstTM, secondTM, hm]
+  const bronzeTM = pickRandomIn(TMsBronze)
+  const silverTM = pickRandomIn(TMsSilver)
+  const goldTM = pickRandomIn(TMsGold)
+  return [bronzeTM, silverTM, goldTM]
 }
 
 function initBuriedItems() {

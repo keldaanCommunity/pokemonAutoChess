@@ -1,10 +1,14 @@
+import { PokemonEntity } from "../../core/pokemon-entity"
+import { Stat, Team } from "./Game"
+
 export enum EffectEnum {
   INGRAIN = "INGRAIN",
   GROWTH = "GROWTH",
   SPORE = "SPORE",
+  OVERGROW = "OVERGROW",
+  FLAME_BODY = "FLAME_BODY",
+  WILDFIRE = "WILDFIRE",
   BLAZE = "BLAZE",
-  VICTORY_STAR = "VICTORY_STAR",
-  DROUGHT = "DROUGHT",
   DESOLATE_LAND = "DESOLATE_LAND",
   DRIZZLE = "DRIZZLE",
   RAIN_DANCE = "RAIN_DANCE",
@@ -98,7 +102,7 @@ export enum EffectEnum {
   PSYCHIC_TERRAIN = "PSYCHIC_TERRAIN",
   ELECTRIC_TERRAIN = "ELECTRIC_TERRAIN",
   MISTY_TERRAIN = "MISTY_TERRAIN",
-  SUN = "SUN",
+  DROUGHT = "DROUGHT",
   RAIN = "RAIN",
   SANDSTORM = "SANDSTORM",
   MISTY = "MISTY",
@@ -164,7 +168,10 @@ export enum EffectEnum {
   SURGE_SURFER = "SURGE_SURFER",
   FALINKS_BRASS = "FALINKS_BRASS",
   SPECIAL_ATTACKS = "SPECIAL_ATTACKS",
-  JAW_LOCK = "JAW_LOCK"
+  JAW_LOCK = "JAW_LOCK",
+  BALM_MUSHROOM = "BALM_MUSHROOM",
+  PARTING_SHOT = "PARTING_SHOT",
+  BANEFUL_BUNKER = "BANEFUL_BUNKER"
 }
 
 export const BoardEffects = [

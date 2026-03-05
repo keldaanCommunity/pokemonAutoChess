@@ -2,17 +2,17 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { getMaxTeamSize } from "../../../../../utils/board"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 
 export function GameTeamInfo() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
 
-  if (!currentPlayer) return null
+  if (!spectatedPlayer) return null
 
   const maxTeamSize = getMaxTeamSize(
-    currentPlayer.experienceManager.level,
+    spectatedPlayer.experienceManager.level,
     specialGameRule
   )
 
@@ -31,7 +31,7 @@ export function GameTeamInfo() {
           <p className="help">{t("team_size_hint")}</p>
         </Tooltip>
         <span>
-          {currentPlayer.boardSize}/{maxTeamSize}
+          {spectatedPlayer.boardSize}/{maxTeamSize}
         </span>
         <img className="icon" src="assets/ui/pokeball.svg" />
       </div>

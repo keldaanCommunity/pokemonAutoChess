@@ -92,12 +92,14 @@ export function SpriteDebug() {
                 {k}
               </option>
             ))}
-            <option value="BOOST/ATK">BOOST ATTACK</option>
-            <option value="BOOST/DEF">BOOST DEFENSE</option>
-            <option value="BOOST/SPE_DEF">BOOST SPE_DEF</option>
-            <option value="BOOST/SHIELD">BOOST SHIELD</option>
-            <option value="BOOST/SPEED">BOOST SPEED</option>
-            <option value="BOOST/AP">BOOST AP</option>
+            <option value="POISONNED_BADLY">Poisonned badly</option>
+            <option value="BALM_MUSHROOM">Balm Mushroom</option>
+            <option value="BOOST/ATK">Boost Attack</option>
+            <option value="BOOST/DEF">Boost Defense</option>
+            <option value="BOOST/SPE_DEF">Boost Special Defense</option>
+            <option value="BOOST/SHIELD">Boost Shield</option>
+            <option value="BOOST/SPEED">Boost Speed</option>
+            <option value="BOOST/AP">Boost AP</option>
           </select>
         </div>
         <div className="sprite-viewer-sprite">

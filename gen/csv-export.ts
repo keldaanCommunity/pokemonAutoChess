@@ -1,6 +1,7 @@
 import path from "node:path"
 import { createObjectCsvWriter } from "csv-writer"
-import PokemonFactory, { PkmColorVariants } from "../app/models/pokemon-factory"
+import { PkmAltForms } from "../app/config"
+import PokemonFactory from "../app/models/pokemon-factory"
 import { getPokemonData } from "../app/models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../app/types/enum/Ability"
 import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../app/types/enum/Pokemon"
@@ -102,7 +103,7 @@ export function csvExport() {
           ),
           additional: pokemonData.additional,
           regional: pokemonData.regional,
-          variant: PkmColorVariants.includes(pkm),
+          variant: PkmAltForms.includes(pkm),
           duo: Object.values(PkmDuos).some((duo) => duo.includes(pkm)),
           type1: types[0] ?? "",
           type2: types[1] ?? "",

@@ -6,7 +6,8 @@ import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
   CELL_VISUAL_WIDTH,
-  getRegionTint
+  getRegionTint,
+  ItemStats
 } from "../../../../config"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -37,13 +38,18 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
+import { values } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import { addAbilitySprite, displayAbility } from "./abilities-animations"
+import {
+  addAbilitySprite,
+  displayAbility,
+  displayBoost
+} from "./abilities-animations"
 import DraggableObject from "./draggable-object"
 import { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
@@ -54,6 +60,10 @@ import {
 } from "./pokemon-animations"
 
 const spriteCountPerPokemon = new Map<string, number>()
+
+export function resetSpriteCounts() {
+  spriteCountPerPokemon.clear()
+}
 
 const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
   "lastPokemonDetail" in scene
@@ -112,8 +122,8 @@ export default class PokemonSprite extends DraggableObject {
   flip: boolean
   animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
   skydiving: boolean = false
-  meal: Item | "" = ""
-  mealSprite: GameObjects.Sprite | undefined
+  dishes: Item[] = []
+  dishesSprites: GameObjects.Sprite[] = []
   inBattle: boolean = false
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
@@ -174,7 +184,13 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite = new GameObjects.Sprite(scene, 0, 0, "loading_pokeball")
     this.sprite.anims.play("loading_pokeball")
     const baseHP = getPokemonData(pokemon.name).hp
-    const sizeBuff = (pokemon.maxHP - baseHP) / baseHP
+    const maxHP = inBattle
+      ? pokemon.maxHP
+      : values(pokemon.items).reduce(
+          (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
+          pokemon.maxHP
+        )
+    const sizeBuff = (maxHP - baseHP) / baseHP
     this.sprite
       .setScale(2 + sizeBuff)
       .setDepth(DEPTH.POKEMON)
@@ -228,8 +244,8 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(pokemon, scene)
       //this.setEffects(p, scene);
     } else {
-      if (pokemon.meal !== "") {
-        this.updateMeal(pokemon.meal)
+      if (pokemon.dishes.size > 0) {
+        this.updateDishes(values(pokemon.dishes))
       }
     }
 
@@ -673,7 +689,8 @@ export default class PokemonSprite extends DraggableObject {
 
   emoteAnimation() {
     const g = <GameScene>this.scene
-    g.animationManager?.animatePokemon(
+    if (!g.animationManager) return
+    g.animationManager.animatePokemon(
       this,
       PokemonActionState.EMOTE,
       this.flip,
@@ -799,14 +816,17 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  updateMeal(meal: Item | "") {
-    this.meal = meal
-    this.mealSprite?.destroy()
-    if (meal) {
-      this.mealSprite = this.scene.add
-        .sprite(0, 20, "item", meal + ".png")
-        .setScale(0.25)
-      this.add(this.mealSprite)
+  updateDishes(dishes: Item[]) {
+    this.dishes = dishes
+    this.dishesSprites.forEach((sprite) => sprite.destroy())
+    if (dishes.length > 0) {
+      dishes.forEach((dish, i) => {
+        const dishSprite = this.scene.add
+          .sprite((i - (dishes.length - 1) / 2) * 20, 20, "item", dish + ".png")
+          .setScale(0.25)
+        this.add(dishSprite)
+        this.dishesSprites.push(dishSprite)
+      })
     }
   }
 
@@ -903,7 +923,7 @@ export default class PokemonSprite extends DraggableObject {
       this.addCurse()
     }
     if (pokemon.status.poisonStacks > 0) {
-      this.addPoison()
+      this.addPoison(pokemon.status.poisonStacks)
     }
     if (pokemon.status.protect) {
       this.addProtect()
@@ -1264,13 +1284,17 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addPoison() {
+  addPoison(stacks) {
+    const poisonTexture = stacks >= 3 ? "POISON_BADLY" : "POISON"
     if (!this.poison) {
       this.poison = this.scene.add
-        .sprite(0, -30, "status", "POISON/000.png")
+        .sprite(0, -30, "status", `${poisonTexture}/000.png`)
         .setScale(2)
-      this.poison.anims.play("POISON")
+      this.poison.anims.play(poisonTexture)
       this.add(this.poison)
+    } else if (this.poison.texture.key !== poisonTexture) {
+      this.poison.setTexture("status", `${poisonTexture}/000.png`)
+      this.poison.anims.play(poisonTexture)
     }
   }
 
@@ -1480,6 +1504,21 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.setTint(0xff0000)
   }
 
+  addBalmMushroomEffect() {
+    let i = 0
+    const hsv = Phaser.Display.Color.HSVColorWheel(0.7, 1)
+    const updateBalmMushroomEffect = () => {
+      const top = hsv[i].color
+      const bottom = hsv[359 - i].color
+      this.sprite.setTint(top, top, bottom, bottom)
+      i = (i + 1) % 360
+    }
+    this.scene.events.on("update", updateBalmMushroomEffect)
+    this.sprite.once("destroy", () => {
+      this.scene.events.off("update", updateBalmMushroomEffect)
+    })
+  }
+
   removeRageEffect(hasBerserkGene: boolean = false) {
     if (hasBerserkGene) {
       this.addBerserkEffect()
@@ -1553,35 +1592,7 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   displayBoost(stat: Stat, debug?: boolean) {
-    const tint =
-      {
-        [Stat.AP]: 0xff00aa,
-        [Stat.SPEED]: 0xffaa44,
-        [Stat.ATK]: 0xff6633,
-        [Stat.DEF]: 0xffaa66,
-        [Stat.SPE_DEF]: 0xff99cc,
-        [Stat.SHIELD]: 0xffcc99
-      }[stat] ?? 0xffffff
-
-    const boost = new GameObjects.Sprite(
-      this.scene,
-      0,
-      -20,
-      "abilities",
-      `BOOST/000.png`
-    )
-      .setDepth(DEPTH.BOOST_BACK)
-      .setScale(2)
-      .setTint(tint)
-
-    this.add(boost)
-    boost.anims.play({
-      key: "BOOST",
-      repeat: debug ? 5 : 0
-    })
-    boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      boost.destroy()
-    })
+    displayBoost(this, stat, 0, 0, debug)
   }
 }
 

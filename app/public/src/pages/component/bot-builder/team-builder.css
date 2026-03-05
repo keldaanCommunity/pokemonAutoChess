@@ -161,11 +161,9 @@
   display: block;
 }
 
-#pokemon-picker .synergy-overlaps {
-  display: flex;
-  gap: 0.5em;
+#pokemon-picker .synergy-overlaps ul {
+  max-width: 640px;
   padding: 0;
-  flex-wrap: wrap;
 }
 
 #pokemon-picker summary {
@@ -174,6 +172,7 @@
 }
 
 #pokemon-picker .filters label {
+  font-size: 1rem;
   float: right;
   margin-left: 1em;
 }

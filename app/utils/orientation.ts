@@ -1,6 +1,7 @@
 import { Board, Cell } from "../core/board"
 import { PokemonEntity } from "../core/pokemon-entity"
 import { Orientation } from "../types/enum/Game"
+import { distanceC } from "./distance"
 
 export const OrientationVector: Record<Orientation, [number, number]> = {
   [Orientation.UP]: [0, 1],
@@ -35,27 +36,34 @@ export const OrientationArray: Orientation[] = [
   Orientation.DOWNLEFT
 ]
 
-export function effectInLine(
+export function effectInOrientation(
   board: Board,
   pokemon: PokemonEntity,
   target: PokemonEntity | Orientation,
-  effect: (cell: Cell) => void
+  effect: (cell: Cell) => void,
+  maxRange?: number
 ) {
   const orientation: Orientation =
     target instanceof PokemonEntity
       ? board.orientation(
-        pokemon.positionX,
-        pokemon.positionY,
-        target.positionX,
-        target.positionY,
-        pokemon,
-        target
-      )
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY,
+          pokemon,
+          target
+        )
       : target
 
   const targetsHit = new Set()
 
   const applyEffect = (x: number, y: number) => {
+    if (maxRange != null) {
+      const distance = distanceC(x, y, pokemon.positionX, pokemon.positionY)
+      if (distance > maxRange) {
+        return
+      }
+    }
     const value = board.getEntityOnCell(x, y)
     if (value != null && value.team !== pokemon.team) {
       targetsHit.add(value)
@@ -164,4 +172,26 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   } else {
     return Orientation.RIGHT
   }
+}
+
+export function effectInLine(
+  board: Board,
+  pokemon: PokemonEntity,
+  target: PokemonEntity,
+  effect: (cell: Cell) => void
+) {
+  const angleToTarget = Math.atan2(
+    target.positionY - pokemon.positionY,
+    target.positionX - pokemon.positionX
+  )
+  const distance = 12 // sufficiently large to cover the whole board in diagonal
+  const finalX = Math.round(
+    pokemon.positionX + distance * Math.cos(angleToTarget)
+  )
+  const finalY = Math.round(
+    pokemon.positionY + distance * Math.sin(angleToTarget)
+  )
+  board
+    .getCellsBetween(pokemon.positionX, pokemon.positionY, finalX, finalY)
+    .forEach(effect)
 }

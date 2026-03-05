@@ -1,14 +1,10 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import {
-  MinStageForGameToCount,
-  PortalCarouselStages,
-  RegionDetails
-} from "../../../config"
+import { MinStageForGameToCount, RegionDetails } from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
@@ -39,8 +35,13 @@ import { logger } from "../../../utils/logger"
 import { values } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
-import { selectCurrentPlayer, useAppDispatch, useAppSelector } from "../hooks"
-import { authenticateUser } from "../network"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppDispatch,
+  useAppSelector
+} from "../hooks"
+import { authenticateUser, client, joinGame, rooms } from "../network"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -53,6 +54,7 @@ import {
   removePlayer,
   setAdditionalPokemons,
   setEmotesUnlocked,
+  setGameMode,
   setInterest,
   setItemsProposition,
   setLife,
@@ -74,7 +76,6 @@ import {
   updateExperienceManager
 } from "../stores/GameStore"
 import {
-  joinGame,
   setConnectionStatus,
   setErrorAlertMessage
 } from "../stores/NetworkStore"
@@ -102,6 +103,10 @@ export function getGameScene(): GameScene | undefined {
     | undefined
 }
 
+export function getGameContainer(): GameContainer {
+  return gameContainer
+}
+
 export function cyclePlayers(amt: number) {
   const players = values(gameContainer.room?.state.players)
   playerClick(
@@ -116,8 +121,8 @@ export function cyclePlayers(amt: number) {
 
 export function playerClick(id: string) {
   const scene = getGameScene()
+  gameContainer?.room?.send(Transfer.SPECTATE, id)
   if (scene?.spectate) {
-    // if spectating game we switch directly without notifying the server to not show spectators avatars
     if (gameContainer?.room?.state?.players) {
       const spectatedPlayer = gameContainer?.room?.state?.players.get(id)
       if (spectatedPlayer) {
@@ -133,28 +138,34 @@ export function playerClick(id: string) {
 
       gameContainer?.gameScene?.board?.updateScoutingAvatars()
     }
-  } else {
-    gameContainer?.room?.send(Transfer.SPECTATE, id)
   }
+}
+
+function showMoneyToast(value: number) {
+  toast(
+    <div className="toast-player-income">
+      <span style={{ verticalAlign: "middle" }}>+{value}</span>
+      <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
+    </div>,
+    { containerId: "toast-money" }
+  )
 }
 
 export default function Game() {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const client: Client = useAppSelector((state) => state.network.client)
   const connectionStatus = useAppSelector(
     (state) => state.network.connectionStatus
   )
-  const room: Room<GameState> | undefined = useAppSelector(
-    (state) => state.network.game
-  )
+  const room: Room<GameState> | undefined = rooms.game
   const uid: string = useAppSelector((state) => state.network.uid)
-  const currentPlayerId: string = useAppSelector(
-    (state) => state.game.currentPlayerId
+  const spectatedPlayerId: string = useAppSelector(
+    (state) => state.game.playerIdSpectated
   )
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
-  const spectate = currentPlayerId !== uid || !currentPlayer?.alive
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const spectate = spectatedPlayerId !== uid || !spectatedPlayer?.alive
 
   const initialized = useRef<boolean>(false)
   const connecting = useRef<boolean>(false)
@@ -189,7 +200,7 @@ export default function Game() {
         }
 
         client
-          .reconnect(cachedReconnectionToken)
+          .reconnect<GameState>(cachedReconnectionToken)
           .then((room: Room) => {
             // store game token for 1 hour
             localStore.set(
@@ -200,7 +211,7 @@ export default function Game() {
               },
               60 * 60
             )
-            dispatch(joinGame(room))
+            joinGame(room)
             connected.current = true
             connecting.current = false
             dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
@@ -238,7 +249,7 @@ export default function Game() {
 
     const nbPlayers = room?.state.players.size ?? 0
     const hasLeftBeforeEnd =
-      currentPlayer?.alive === true && room?.state?.gameFinished === false
+      connectedPlayer?.alive === true && room?.state?.gameFinished === false
 
     if (nbPlayers > 0) {
       room?.state.players.forEach((p) => {
@@ -299,7 +310,7 @@ export default function Game() {
       afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
     const gameMode = room?.state.gameMode
 
-    const r: Room<AfterGameState> = await client.create("after-game", {
+    const r = await client.create<AfterGameState>("after-game", {
       players: afterPlayers,
       idToken: token,
       eligibleToXP,
@@ -314,7 +325,7 @@ export default function Game() {
     if (r.connection.isOpen) {
       await r.leave(false)
     }
-    dispatch(leaveGame())
+    dispatch(leaveGame(0))
     navigate("/after")
     if (room?.connection.isOpen) {
       room.leave()
@@ -349,6 +360,20 @@ export default function Game() {
     window.addEventListener("popstate", confirmLeave)
     return () => {
       window.removeEventListener("popstate", confirmLeave)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        getGameScene()?.board?.clearBoard()
+      } else {
+        getGameScene()?.board?.renderBoard(false)
+      }
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
     }
   }, [])
 
@@ -492,21 +517,23 @@ export default function Game() {
         )
       })
 
-      room.onMessage(Transfer.PLAYER_INCOME, (value) => {
-        toast(
-          <div className="toast-player-income">
-            <span style={{ verticalAlign: "middle" }}>+{value}</span>
-            <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
-          </div>,
-          { containerId: "toast-money" }
-        )
-      })
+      room.onMessage(Transfer.PLAYER_INCOME, showMoneyToast)
 
       room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
         if (gameContainer.game) {
           const g = getGameScene()
           if (g?.battle?.simulation?.id === event.simulationId) {
             g.battle.displayBoardEvent(event)
+          }
+        }
+      })
+
+      room.onMessage(Transfer.CLEAR_BOARD_EVENT, (event: IBoardEvent) => {
+        //logger.debug("Received CLEAR_BOARD_EVENT", event)
+        if (gameContainer.game) {
+          const g = getGameScene()
+          if (g?.battle?.simulation?.id === event.simulationId) {
+            g.battle.removeBoardEvent(event)
           }
         }
       })
@@ -534,6 +561,19 @@ export default function Game() {
 
       room.onMessage(Transfer.GAME_END, leave)
 
+      room.onDrop((code) => {
+        if (code >= 1001 && code <= 1015) {
+          // Between 1001 and 1015 - Abnormal socket shutdown
+          if (connectionStatus === ConnectionStatus.CONNECTED) {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+          }
+        }
+      })
+
+      room.onReconnect(() => {
+        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+      })
+
       room.onLeave((code) => {
         const shouldGoToLobby = [
           CloseCodes.ROOM_DELETED,
@@ -548,25 +588,17 @@ export default function Game() {
           const scene = getGameScene()
           if (scene?.music) scene.music.destroy()
           navigate("/lobby")
-        } else if (code >= 1001 && code <= 1015) {
-          // Between 1001 and 1015 - Abnormal socket shutdown
-          if (connectionStatus === ConnectionStatus.CONNECTED) {
-            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
-            // attempting to auto reconnect after 3 seconds
-            /* We leave 3 seconds because when refreshing the page, the connection is closed with code 1001 on Firefox
-              and this code is called, so the reconnection token might be reused before the page reload, causing the
-              reconnection token to be invalid the second time after page reload
-              3 seconds should be enough for the browser to kill all existing connections and timeouts for the tab
-              before reloading the page */
-            setTimeout(() => connectToGame(), 3000) //TOFIX: find a better way to handle this
-          } else {
-            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
-          }
+        } else {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
         }
       })
 
       const $ = getStateCallbacks(room)
       const $state = $(room.state)
+
+      $state.listen("gameMode", (mode) => {
+        dispatch(setGameMode(mode))
+      })
 
       $state.listen("roundTime", (value) => {
         dispatch(setRoundTime(value))
@@ -629,7 +661,7 @@ export default function Game() {
           $dpsMeter.onAdd((dps) => {
             dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
             const $dps = $(dps)
-            const fields: NonFunctionPropNames<IDps>[] = [
+            const fields = [
               "id",
               "name",
               "physicalDamage",
@@ -640,7 +672,7 @@ export default function Game() {
               "physicalDamageReduced",
               "specialDamageReduced",
               "shieldDamageTaken"
-            ]
+            ] satisfies NonFunctionPropNames<IDps>[]
             fields.forEach((field) => {
               $dps.listen(field, (value) => {
                 dispatch(
@@ -692,8 +724,12 @@ export default function Game() {
           $player.listen("shopFreeRolls", (value) => {
             dispatch(setShopFreeRolls(value))
           })
-          $player.listen("money", (value) => {
+          $player.listen("money", (value, previousValue) => {
             dispatch(setMoney(value))
+            if (value - previousValue >= 30) {
+              // show income toast for significant income only
+              showMoneyToast(value - previousValue)
+            }
           })
           $player.listen("streak", (value) => {
             dispatch(setStreak(value))
@@ -716,11 +752,11 @@ export default function Game() {
           const $experienceManager = $(experienceManager)
           if (player.id === uid) {
             dispatch(updateExperienceManager(experienceManager))
-            const fields: NonFunctionPropNames<IExperienceManager>[] = [
+            const fields = [
               "experience",
               "expNeeded",
               "level"
-            ]
+            ] satisfies NonFunctionPropNames<IExperienceManager>[]
             fields.forEach((field) => {
               $experienceManager.listen(field, (value) => {
                 dispatch(
@@ -750,7 +786,7 @@ export default function Game() {
           dispatch(setLoadingProgress({ id: player.id, value: value }))
         })
         $player.listen("map", (newMap) => {
-          if (player.id === store.getState().game.currentPlayerId) {
+          if (player.id === store.getState().game.playerIdSpectated) {
             const gameScene = getGameScene()
             if (gameScene) {
               gameScene.setMap(newMap)
@@ -788,7 +824,7 @@ export default function Game() {
           }
         })
 
-        const fields: NonFunctionPropNames<IPlayer>[] = [
+        const fields = [
           "name",
           "avatar",
           "boardSize",
@@ -809,9 +845,8 @@ export default function Game() {
           "totalPlayerDamageDealt",
           "eggChance",
           "goldenEggChance",
-          "wildChance",
           "cellBattery"
-        ]
+        ] satisfies NonFunctionPropNames<IPlayer>[]
 
         fields.forEach((field) => {
           $player.listen(field, (value) => {
@@ -838,7 +873,7 @@ export default function Game() {
         })
 
         $player.groundHoles.onChange((value) => {
-          if (player.id === store.getState().game.currentPlayerId) {
+          if (player.id === store.getState().game.playerIdSpectated) {
             const gameScene = getGameScene()
             if (gameScene?.board && room.state.phase === GamePhaseState.PICK) {
               gameScene.board.renderGroundHoles()
@@ -858,7 +893,7 @@ export default function Game() {
         $player.wanderers.onAdd((wanderer: Wanderer) => {
           if (
             gameContainer.game &&
-            player.id === store.getState().game.currentPlayerId
+            player.id === store.getState().network.uid
           ) {
             const g = getGameScene()
             if (g && g.wandererManager) {
@@ -884,7 +919,7 @@ export default function Game() {
     dispatch,
     client,
     uid,
-    currentPlayerId,
+    spectatedPlayerId,
     connectToGame,
     leave
   ])

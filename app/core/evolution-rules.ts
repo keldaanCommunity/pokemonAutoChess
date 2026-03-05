@@ -1,6 +1,6 @@
 import { EvolutionTime } from "../config"
 import Player from "../models/colyseus-models/player"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { IPlayer } from "../types"
 import { Ability } from "../types/enum/Ability"
@@ -52,6 +52,7 @@ export abstract class EvolutionRule {
   ): void | Pokemon {
     if (this.canEvolve(pokemon, player, stageLevel)) {
       const pokemonEvolved = this.evolve(pokemon, player, stageLevel)
+      if (pokemon.supercharged) pokemonEvolved.supercharged = true
       this.afterEvolve(pokemonEvolved, player, stageLevel)
       return pokemonEvolved
     }
@@ -68,10 +69,11 @@ export abstract class EvolutionRule {
       ) {
         pokemon.addMaxHP(10, player)
         pokemon.stacks++
+        pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
       }
-      // check evolutions again if it can evolve twice in a row
-      pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
     })
+    // check evolutions again if it can evolve twice in a row
+    pokemonEvolved.evolutionRule.tryEvolve(pokemonEvolved, player, stageLevel)
   }
 }
 
@@ -103,7 +105,7 @@ export class CountEvolutionRule extends EvolutionRule {
     const copies = values(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )
-    return copies.length >= this.numberRequired - 1
+    return copies.length === this.numberRequired - 1
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
@@ -163,10 +165,18 @@ export class CountEvolutionRule extends EvolutionRule {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
-    if (pokemonsBeforeEvolution.some((p) => p.meal)) {
-      pokemonEvolved.meal = pickRandomIn(
-        pokemonsBeforeEvolution.filter((p) => p.meal).map((p) => p.meal)
-      )
+    pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
+
+    if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
+      const dishes = pokemonsBeforeEvolution
+        .filter((p) => p.dishes.size > 0)
+        .flatMap((p) => values(p.dishes))
+      while (pokemonEvolved.canEat && dishes.length > 0) {
+        const dish = dishes.pop()
+        if (dish && !pokemonEvolved.dishes.has(dish)) {
+          pokemonEvolved.dishes.add(dish)
+        }
+      }
     }
 
     shuffleArray(itemsCompleteOnBench)
@@ -236,9 +246,8 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
-    const items = values(pokemon.items)
-    pokemon.meal !== "" && items.push(pokemon.meal)
-    const itemEvolution = items.find((item) =>
+    const itemsAndDishes = values(pokemon.items).concat(values(pokemon.dishes))
+    const itemEvolution = itemsAndDishes.find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
 
@@ -383,7 +392,7 @@ export function carryOverPermanentStats(
   // carry over TM
   const existingTms = pokemonsBeforeEvolution
     .map((p) => p.tm)
-    .filter<Ability>((tm): tm is Ability => tm != null)
+    .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
   if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
     pokemonEvolved.skill = pokemonEvolved.tm

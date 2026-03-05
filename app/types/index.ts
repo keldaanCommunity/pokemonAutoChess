@@ -8,16 +8,13 @@ import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
-import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
 import Status from "../models/colyseus-models/status"
 import Synergies from "../models/colyseus-models/synergies"
-import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
-import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
 import { AttackSprite } from "./Animation"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
@@ -65,7 +62,6 @@ export enum Transfer {
   REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
   CHANGE_SELECTED_EMOTION = "CHANGE_SELECTED_EMOTION",
   NEW_MESSAGE = "NEW_MESSAGE",
-  SEARCH = "SEARCH",
   CHANGE_NAME = "CHANGE_NAME",
   CHANGE_AVATAR = "CHANGE_AVATAR",
   REQUEST_BOT_MONITOR = "REQUEST_BOT_MONITOR",
@@ -97,7 +93,6 @@ export enum Transfer {
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
   SEARCH_BY_ID = "SEARCH_BY_ID",
-  SUGGESTIONS = "SUGGESTIONS",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   NEW_TOURNAMENT = "NEW_TOURNAMENT",
@@ -127,6 +122,7 @@ export enum Transfer {
   REMOVE_ROOM = "REMOVE_ROOM",
   UNBAN = "UNBAN",
   BOARD_EVENT = "BOARD_EVENT",
+  CLEAR_BOARD_EVENT = "CLEAR_BOARD_EVENT",
   CLEAR_BOARD = "CLEAR_BOARD",
   SIMULATION_STOP = "SIMULATION_STOP",
   ABILITY = "ABILITY",
@@ -138,7 +134,9 @@ export enum Transfer {
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
   HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
   RECONNECT_PROMPT = "RECONNECT_PROMPT",
-  OVERWRITE_BOARD = "OVERWRITE_BOARD"
+  OVERWRITE_BOARD = "OVERWRITE_BOARD",
+  NOTIFICATIONS = "NOTIFICATIONS",
+  NOTIFICATION_SEEN = "NOTIFICATION_SEEN"
 }
 
 export enum ReadWriteMode {
@@ -182,24 +180,6 @@ export interface IDragDropItemMessage {
 export interface IDragDropCombineMessage {
   itemA: Item
   itemB: Item
-}
-
-export interface ICustomLobbyState extends Schema {
-  ccu: number
-  messages: ArraySchema<Message>
-  leaderboard: ILeaderboardInfo[]
-  botLeaderboard: ILeaderboardInfo[]
-  levelLeaderboard: ILeaderboardInfo[]
-  tournaments: ArraySchema<TournamentSchema>
-  clients: number
-}
-
-export interface IGameState extends Schema {
-  afterGameId: string
-  roundTime: number
-  phase: string
-  players: MapSchema<IPlayer>
-  stageLevel: number
 }
 
 export interface ISimplePlayer {
@@ -314,7 +294,6 @@ export interface IPlayer {
   rerollCount: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
-  wildChance: number
   eggChance: number
   goldenEggChance: number
   cellBattery: number
@@ -351,10 +330,10 @@ export interface IPokemon {
   stacks: number
   stacksRequired: number
   skill: Ability
+  tm: Ability
   passive: Passive
   items: SetSchema<Item>
-  meal: Item | ""
-  tm: Ability | null
+  dishes: SetSchema<Item>
   shiny: boolean
   emotion: Emotion
   additional: boolean
@@ -561,6 +540,7 @@ export interface IPokemonEntity {
   types: SetSchema<Synergy>
   stars: number
   skill: Ability
+  tm: Ability
   passive: Passive
   status: Status
   count: Count
@@ -613,7 +593,8 @@ export interface ICount {
   starDustCount: number
   tripleAttackCount: number
   staticHolderCount: number
-  defensiveRibbonCount: number
+  muscleBandCount: number
+  machRibbonCount: number
   spellBlockedCount: number
   manaBurnCount: number
   moneyCount: number
@@ -743,7 +724,10 @@ export enum Title {
   RUNNER = "RUNNER",
   FINISHER = "FINISHER",
   VICTORIOUS = "VICTORIOUS",
-  AQUARIOPHILE = "AQUARIOPHILE"
+  AQUARIOPHILE = "AQUARIOPHILE",
+  POFFIN_MASTER = "POFFIN_MASTER",
+  TOP_GUN = "TOP_GUN",
+  SCOUT = "SCOUT"
 }
 
 export interface IBoardEvent {

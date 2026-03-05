@@ -1,25 +1,31 @@
 import React, { useMemo, useState } from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
+import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List, useDynamicRowHeight } from "react-window"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
-import { AbilityPerTM, Item, TMs } from "../../../../../types/enum/Item"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  AbilityPerTM,
+  Item,
+  TMsBronze,
+  TMsSilver
+} from "../../../../../types/enum/Item"
+import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
-import {
-  GamePokemonDetail,
-  GamePokemonDetailTooltip
-} from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
+
+const MIN_COL_WIDTH = 320
+const ROW_HEIGHT = 200
 
 export default function WikiAbility() {
   const { t } = useTranslation()
 
   const [searchQuery, setSearchQuery] = useState<string>("")
+
   const pokemonsPerAbility = useMemo(
     () =>
       Object.keys(Ability).reduce((o, ability) => {
@@ -67,6 +73,11 @@ export default function WikiAbility() {
     )
     .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
 
+  const dynamicRowHeight = useDynamicRowHeight({
+    defaultRowHeight: ROW_HEIGHT,
+    key: filteredAbilities.length
+  })
+
   return (
     <div id="wiki-ability">
       <div className="actions">
@@ -78,51 +89,115 @@ export default function WikiAbility() {
           }
         />
       </div>
-      <ul>
-        {filteredAbilities.map((ability) => {
-          return (
-            <li key={ability} className="my-box">
-              <div>
-                <h2>{t(`ability.${ability}`)}</h2>
-                <p>
-                  {addIconsToDescription(t(`ability_description.${ability}`))}
-                </p>
-              </div>
-              <div>
-                <ul>
-                  {(pokemonsPerAbility[ability] ?? []).map((p) => (
-                    <li key={p.name}>
-                      <div
-                        className={cc("pokemon-portrait", {
-                          additional: p.additional,
-                          regional: p.regional
-                        })}
-                        data-tooltip-id="game-pokemon-detail-tooltip"
-                        data-tooltip-content={p.name}
-                      >
-                        <img src={getPortraitSrc(p.index)} />
-                      </div>
-                    </li>
-                  ))}
-                  {tmPerAbility[ability] && (
-                    <li
-                      data-tooltip-id="item-detail-tooltip"
-                      data-tooltip-content={tmPerAbility[ability]}
-                    >
-                      <img
-                        src={`assets/item/${TMs.includes(tmPerAbility[ability]) ? "TM" : "HM"}.png`}
-                        className="item"
-                      />
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+      <div style={{ flex: 1, minHeight: 0 }}>
+        <AutoSizer
+          renderProp={({ height, width }) => {
+            if (height === undefined || width === undefined) return null
+            const columnCount = Math.max(1, Math.floor(width / MIN_COL_WIDTH))
+            const rowCount = Math.ceil(filteredAbilities.length / columnCount)
+
+            return (
+              <List<AbilityRowData>
+                key={columnCount}
+                style={{ height, width }}
+                rowCount={rowCount}
+                rowHeight={dynamicRowHeight}
+                rowComponent={AbilityRow}
+                rowProps={{
+                  abilities: filteredAbilities,
+                  columnCount,
+                  pokemonsPerAbility,
+                  tmPerAbility,
+                  t
+                }}
+              />
+            )
+          }}
+        />
+      </div>
       <GamePokemonDetailTooltip origin="wiki" />
       <ItemDetailTooltip />
+    </div>
+  )
+}
+
+type AbilityRowData = {
+  abilities: Ability[]
+  columnCount: number
+  pokemonsPerAbility: Record<string, any[]>
+  tmPerAbility: Partial<Record<Ability, Item>>
+  t: (key: string) => string
+}
+
+function AbilityRow({
+  index,
+  style,
+  abilities,
+  columnCount,
+  pokemonsPerAbility,
+  tmPerAbility,
+  t
+}: {
+  ariaAttributes: object
+  index: number
+  style: React.CSSProperties
+} & AbilityRowData): React.ReactElement | null {
+  const startIdx = index * columnCount
+  const rowAbilities = abilities.slice(startIdx, startIdx + columnCount)
+
+  return (
+    <div style={{ ...style, paddingBottom: "0.5em" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
+          gap: "0.5em"
+        }}
+      >
+        {rowAbilities.map((ability) => (
+          <div
+            key={ability}
+            className="my-box"
+            style={{ display: "flex", flexDirection: "column", gap: 5 }}
+          >
+            <div>
+              <h2>{t(`ability.${ability}`)}</h2>
+              <p>
+                {addIconsToDescription(t(`ability_description.${ability}`))}
+              </p>
+            </div>
+            <div>
+              <ul>
+                {(pokemonsPerAbility[ability] ?? []).map((p) => (
+                  <li key={p.name}>
+                    <div
+                      className={cc("pokemon-portrait", {
+                        additional: p.additional,
+                        regional: p.regional
+                      })}
+                      data-tooltip-id="game-pokemon-detail-tooltip"
+                      data-tooltip-content={p.name}
+                    >
+                      <img src={getPortraitSrc(p.index)} />
+                    </div>
+                  </li>
+                ))}
+                {tmPerAbility[ability] && (
+                  <li
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={tmPerAbility[ability]}
+                  >
+                    <img
+                      src={`assets/item/${TMsBronze.includes(tmPerAbility[ability]!) ? "TM_Bronze" : TMsSilver.includes(tmPerAbility[ability]!) ? "TM_Silver" : "TM_Gold"}.png`}
+                      className="item"
+                    />
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

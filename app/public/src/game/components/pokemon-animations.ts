@@ -1242,9 +1242,9 @@ export const PokemonAnimations: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Dance,
     emote: AnimationType.Charge,
-    shinyUnavailable: true,
     attackSprite: AttackSprite.FLYING_MELEE,
-    hitSprite: HitSprite.DARK_HIT
+    hitSprite: HitSprite.DARK_HIT,
+    shinyUnavailable: true
   },
   [Pkm.GIRATINA]: {
     attack: AnimationType.Attack,
@@ -1463,9 +1463,9 @@ export const PokemonAnimations: {
         attackSprite: AttackSprite.GROUND_MELEE
     },*/
   [Pkm.DARKRAI]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Sink,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.SpAttack,
     attackSprite: AttackSprite.DARK_RANGE,
     hitSprite: HitSprite.DARK_HIT
   },
@@ -1808,6 +1808,14 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.PSYCHIC_RANGE,
     hitSprite: HitSprite.PSYCHIC_HIT
   },
+  [Pkm.SHADOW_MEWTWO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Punch,
+    emote: AnimationType.Pose,
+    attackSprite: AttackSprite.PSYCHIC_RANGE,
+    hitSprite: HitSprite.PSYCHIC_HIT,
+    shinyUnavailable: true
+  },
   [Pkm.KYUREM]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Attack,
@@ -1851,6 +1859,108 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.PSYCHIC_HIT
   },
   [Pkm.ARCEUS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_BUG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_DARK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_DRAGON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_ELECTRIC]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FIGHTING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FIRE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FLYING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_GHOST]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_GRASS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_GROUND]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_ICE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_POISON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_PSYCHIC]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_ROCK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_STEEL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_WATER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.DRAGON_MELEE
+  },
+  [Pkm.ARCEUS_FAIRY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.SpAttack,
@@ -2830,6 +2940,24 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.TAUROS]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAUROS_COMBAT_BREED]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAUROS_BLAZE_BREED]: {
+    attack: AnimationType.Stomp,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAUROS_AQUA_BREED]: {
     attack: AnimationType.Stomp,
     ability: AnimationType.Attack,
     emote: AnimationType.Charge,
@@ -3965,7 +4093,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Scratch,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.GHOST_RANGE,
+    attackSprite: AttackSprite.GHOST_MELEE,
     hitSprite: HitSprite.GHOST_HIT
   },
   [Pkm.MELTAN]: {
@@ -3994,6 +4122,91 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.DARK_HIT
   },
   [Pkm.SILVALLY]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FIGHTING]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FLYING]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_POISON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GROUND]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_ROCK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_BUG]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GHOST]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_STEEL]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FIRE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_WATER]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_GRASS]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_ELECTRIC]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_PSYCHIC]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_ICE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_DRAGON]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_DARK]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  [Pkm.SILVALLY_FAIRY]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
@@ -4775,7 +4988,6 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    shinyUnavailable: true,
     attackSprite: AttackSprite.WATER_RANGE,
     hitSprite: HitSprite.WATER_HIT
   },
@@ -7305,24 +7517,21 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.STEEL_HIT
   },
   [Pkm.KLANG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.STEEL_HIT
   },
   [Pkm.KLINKLANG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_RANGE,
-    hitSprite: HitSprite.STEEL_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.STEEL_HIT
   },
   [Pkm.GALARIAN_SLOWPOKE]: {
     attack: AnimationType.Attack,
@@ -7409,5 +7618,263 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp,
     attackSprite: AttackSprite.GROUND_MELEE
+  },
+  [Pkm.SKIDDO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GRASS_MELEE
+  },
+  [Pkm.GOGOAT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.GRASS_MELEE
+  },
+  [Pkm.BUNNELBY]: {
+    attack: AnimationType.QuickStrike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.DIGGERSBY]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.SCATTERBUG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE,
+    shinyUnavailable: true
+  },
+  [Pkm.SPEWPA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE,
+    shinyUnavailable: true
+  },
+  [Pkm.VIVILLON]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_ICY_SNOW]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_POLAR]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_TUNDRA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_CONTINENTAL]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_GARDEN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_ELEGANT]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_MODERN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_MARINE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_ARCHIPELAGO]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_HIGH_PLAINS]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_SANDSTORM]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_RIVER]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_MONSOON]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_SAVANNA]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_SUN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_OCEAN]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_JUNGLE]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_FANCY]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.VIVILLON_POKE_BALL]: {
+    attack: AnimationType.Shoot,
+    ability: AnimationType.FlapAround,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.BUG_RANGE
+  },
+  [Pkm.LECHONK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.OINKOLOGNE_MALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  /*
+  [Pkm.OINKOLOGNE_FEMALE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  */
+  [Pkm.WOOLOO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.DUBWOOL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.YAMPER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_MELEE
+  },
+  [Pkm.BOLTUND]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ELECTRIC_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.GREAT_TUSK]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.GROUND_MELEE
+  },
+  [Pkm.FINIZEN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.PALAFIN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Twirl,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.PALAFIN_HERO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.SpAttack,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.MAREANIE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE
+  },
+  [Pkm.TOXAPEX]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.POISON_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.DUCKLETT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FLYING_RANGE,
+    shinyUnavailable: true
+  },
+  [Pkm.SWANNA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.FLYING_RANGE
   }
 }

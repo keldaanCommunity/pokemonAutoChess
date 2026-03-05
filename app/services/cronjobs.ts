@@ -1,3 +1,4 @@
+import { matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import dayjs from "dayjs"
 import admin from "firebase-admin"
@@ -17,6 +18,7 @@ import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
+import { notificationsService } from "./notifications"
 
 export function initCronJobs() {
   logger.debug("init cron jobs")
@@ -43,6 +45,12 @@ export function initCronJobs() {
     cronTime: "45 8 * * *", // every day at 8:45am
     timeZone: "Europe/Paris",
     onTick: () => titleStats(),
+    start: true
+  })
+  CronJob.from({
+    cronTime: "50 8 * * *", // every day at 8:50am
+    timeZone: "Europe/Paris",
+    onTick: () => notificationsService.cleanupOldNotifications(),
     start: true
   })
   CronJob.from({
@@ -188,6 +196,11 @@ async function resetEventScores() {
 
     logger.info(
       `Event reset completed! Reset event data for ${result.modifiedCount} users`
+    )
+
+    matchMaker.presence.publish(
+      "announcement",
+      "Victory Road has started! Be the first to reach the finish line!"
     )
   } catch (e) {
     logger.error("Error during event reset scores:", e)

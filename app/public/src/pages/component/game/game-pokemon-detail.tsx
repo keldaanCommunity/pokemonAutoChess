@@ -10,7 +10,12 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
-import { Item } from "../../../../../types/enum/Item"
+import {
+  AbilityPerTM,
+  Item,
+  TMsBronze,
+  TMsGold
+} from "../../../../../types/enum/Item"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -89,6 +94,9 @@ export function GamePokemonDetail(props: {
         // count item stats as well
         s.value = values(pokemon.items).reduce((acc, item) => {
           let itemStatBonus = ItemStats[item]?.[s.stat] ?? 0
+          if (pokemon.items.has(Item.BIG_EATER_BELT) && itemStatBonus > 0) {
+            itemStatBonus = Math.round(itemStatBonus * 1.25)
+          }
           if (s.stat === Stat.CRIT_POWER && itemStatBonus > 0) {
             itemStatBonus = itemStatBonus / 100
           }
@@ -111,6 +119,10 @@ export function GamePokemonDetail(props: {
     pokemon.luck,
     props.origin
   ])
+
+  const getStatWithItemBonus = (stat: Stat): number | undefined => {
+    return pokemonStats.find((s) => s.stat === stat)?.value
+  }
 
   let dish = DishByPkm[pokemon.name]
   if (!dish && pokemon.types.has(Synergy.GOURMET)) {
@@ -165,6 +177,29 @@ export function GamePokemonDetail(props: {
     name += ` (${t(`pkm.${pokemon.evolution}`)})` // indicate the original pokemon for Dojo substitute
   }
 
+  const tmIcon = useMemo(() => {
+    if (pokemon.tm === Ability.DEFAULT) return null
+    let icon = "assets/item/TM.png"
+    console.log("TM", pokemon.tm, pokemon.skill)
+    if (
+      pokemon.tm === Ability.SKILL_SWAP &&
+      pokemon.skill !== Ability.SKILL_SWAP
+    ) {
+      icon = "assets/ui/SKILL_SWAP.png"
+    } else if (TMsBronze.some((x) => AbilityPerTM[x] === pokemon.tm)) {
+      icon = "assets/item/TM_BRONZE.png"
+    } else if (TMsGold.some((x) => AbilityPerTM[x] === pokemon.tm)) {
+      icon = "assets/item/TM_GOLD.png"
+    }
+    return (
+      <img
+        src={icon}
+        className="game-pokemon-detail-ability-icon"
+        alt={t("tm")}
+      />
+    )
+  }, [pokemon.tm, pokemon.skill])
+
   return (
     <div className="game-pokemon-detail">
       <PokemonPortrait
@@ -214,7 +249,7 @@ export function GamePokemonDetail(props: {
           type={props.isAlly === false ? "HP_ENEMY" : "HP_ALLY"}
           value={hp}
           extraValue={shield}
-          maxValue={pokemon.maxHP}
+          maxValue={props.origin === "team" ? hp! : pokemon.maxHP}
           graduationStep={10}
         />
         <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
@@ -284,13 +319,16 @@ export function GamePokemonDetail(props: {
 
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
-          <div className="ability-name">{t(`ability.${pokemon.skill}`)}</div>
+          <div className="ability-name">
+            {tmIcon}
+            {t(`ability.${pokemon.skill}`)}
+          </div>
           <div>
             <AbilityTooltip
               ability={pokemon.skill}
               stats={{
-                ap: pokemon.ap,
-                luck: pokemon.luck,
+                ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
+                luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars: pokemon.stars,
                 stages: getPokemonData(pokemon.name).stages
               }}

@@ -12,12 +12,8 @@ import {
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
-import {
-  selectConnectedPlayer,
-  useAppDispatch,
-  useAppSelector
-} from "../../../hooks"
-import { pokemonPropositionClick } from "../../../stores/NetworkStore"
+import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
+import { pickPokemonProposition } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -28,7 +24,6 @@ import "./game-pokemon-propositions.css"
 
 export default function GamePokemonsPropositions() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const pokemonsProposition = useAppSelector(
     (state) => state.game.pokemonsProposition
   )
@@ -92,7 +87,7 @@ export default function GamePokemonsPropositions() {
                   onClick={(e) => {
                     e.stopPropagation()
                     playSound(SOUNDS.BUTTON_CLICK)
-                    dispatch(pokemonPropositionClick(proposition))
+                    pickPokemonProposition(proposition)
                   }}
                 >
                   {proposition in PkmDuos ? (

@@ -1,9 +1,14 @@
+import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
 import ItemsStatistic, {
   IItemsStatisticV2
 } from "../models/mongo-models/items-statistic-v2"
+import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
 import PokemonsStatistics, {
   IPokemonsStatisticV2
 } from "../models/mongo-models/pokemons-statistic-v2"
+import RegionStatistic, {
+  IRegionStatistic
+} from "../models/mongo-models/regions-statistic"
 import ReportMetadata, {
   IReportMetadata
 } from "../models/mongo-models/report-metadata"
@@ -19,7 +24,10 @@ export async function fetchMetaReports() {
   const data = await Promise.all([
     fetchMetadata(),
     fetchMetaItems(),
-    fetchMetaPokemons()
+    fetchMetaPokemons(),
+    fetchMetaRegions(),
+    fetchMetaV2(),
+    fetchDendrogramData()
   ])
   logger.info("Meta reports refreshed")
   return data
@@ -28,6 +36,9 @@ export async function fetchMetaReports() {
 let metadata = new Array<IReportMetadata>()
 let metaItems = new Array<IItemsStatisticV2>()
 let metaPokemons = new Array<IPokemonsStatisticV2>()
+let metaRegions = new Array<IRegionStatistic>()
+let metaV2 = new Array<IMetaV2>()
+let dendrogram: IDendrogram | null = null
 
 async function fetchMetaItems() {
   metaItems = await ItemsStatistic.find().exec()
@@ -44,6 +55,16 @@ async function fetchMetadata() {
   return metadata
 }
 
+async function fetchMetaRegions() {
+  metaRegions = await RegionStatistic.find().exec()
+  return metaRegions
+}
+
+async function fetchMetaV2() {
+  metaV2 = await MetaV2.find().exec()
+  return metaV2
+}
+
 export function getMetaPokemons() {
   return metaPokemons
 }
@@ -54,6 +75,23 @@ export function getMetaItems() {
 
 export function getMetadata() {
   return metadata
+}
+
+export function getMetaRegions() {
+  return metaRegions
+}
+
+export function getMetaV2() {
+  return metaV2
+}
+
+async function fetchDendrogramData() {
+  dendrogram = await Dendrogram.findOne().exec()
+  return dendrogram
+}
+
+export function getDendrogram() {
+  return dendrogram
 }
 
 export function computeSynergyAverages() {

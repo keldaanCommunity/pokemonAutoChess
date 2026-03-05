@@ -82,7 +82,12 @@ export function getPokemonCustomFromAvatar(avatar: string): PkmWithCustom {
     }
     if (split.length === 3) {
       index = `${split[0]}-${split[1]}`
-      shiny = true
+      shiny = split[2] === "0001"
+    }
+    if (split.length === 4) {
+      // ex: Meowstic Female, index 0678/0000/0000/0002
+      index = `${split[0]}-${split[1]}-0000-${split[3]}`
+      shiny = split[2] === "0001"
     }
   }
   return {

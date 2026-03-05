@@ -1,6 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
-import { Client, Room } from "colyseus"
+import { Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import { nanoid } from "nanoid"
 import {
@@ -8,10 +8,13 @@ import {
   ALLOWED_GAME_RECONNECTION_TIME,
   EventPointsPerRank,
   ExpPlace,
+  getBaseAltForm,
   LegendaryPool,
   MAX_EVENT_POINTS,
+  MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
+  PkmAltFormsByPkm,
   PortalCarouselStages,
   UniquePool
 } from "../config"
@@ -40,6 +43,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1, getSellPrice } from "../models/shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
+import { notificationsService } from "../services/notifications"
 import {
   IDragDropCombineMessage,
   IDragDropItemMessage,
@@ -56,7 +60,7 @@ import {
 } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
-import { GameMode, PokemonActionState } from "../types/enum/Game"
+import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
@@ -78,10 +82,10 @@ import {
   getFreeSpaceOnBench
 } from "../utils/board"
 import { isValidDate } from "../utils/date"
-import { formatMinMaxRanks } from "../utils/elo"
+import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
-import { shuffleArray } from "../utils/random"
+import { chance, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
@@ -103,7 +107,7 @@ import {
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
-export default class GameRoom extends Room<GameState> {
+export default class GameRoom extends Room<{ state: GameState }> {
   dispatcher: Dispatcher<this>
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
@@ -309,17 +313,14 @@ export default class GameRoom extends Room<GameState> {
       })
     )
 
-    this.clock.setTimeout(
-      () => {
-        if (this.state.gameLoaded) return // already started
-        this.broadcast(Transfer.LOADING_COMPLETE)
-        this.state.players.forEach((player) => {
-          clearPendingGame(this.presence, player.id)
-        })
-        this.startGame()
-      },
-      5 * 60 * 1000
-    ) // maximum 5 minutes of loading game, game will start no matter what after that
+    this.clock.setTimeout(() => {
+      if (this.state.gameLoaded) return // already started
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.state.players.forEach((player) => {
+        clearPendingGame(this.presence, player.id)
+      })
+      this.startGame()
+    }, MAX_LOADING_TIME) // maximum 3 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.ITEM, (client, item: Item) => {
       if (!this.state.gameFinished && client.auth) {
@@ -494,6 +495,8 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
       if (client.auth) {
         try {
+          if (!client.userData) client.userData = {}
+          client.userData.spectatedPlayerId = spectatedPlayerId
           this.dispatcher.dispatch(new OnSpectateCommand(), {
             id: client.auth.uid,
             spectatedPlayerId
@@ -654,95 +657,95 @@ export default class GameRoom extends Room<GameState> {
     }
   }
 
-  async onLeave(client: Client, consented: boolean) {
-    try {
-      /*if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} has been disconnected`)
-      }*/
-      if (consented) {
-        throw new Error("consented leave")
-      }
+  async onDrop(client: Client, code: number) {
+    /*if (client && client.auth && client.auth.displayName) {
+      logger.info(`${client.auth.displayName} has been disconnected`)
+    }*/
+    // allow disconnected client to reconnect into this room until 5 minutes
+    setPendingGame(this.presence, client.auth.uid, this.roomId)
+    await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+  }
 
-      // allow disconnected client to reconnect into this room until 5 minutes
-      setPendingGame(this.presence, client.auth.uid, this.roomId)
-      await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
-      // if the user reconnects, we clear the pending game and recall the OnJoinCommand
-      clearPendingGame(this.presence, client.auth.uid)
-      this.dispatcher.dispatch(new OnJoinCommand(), { client })
-    } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
-        const pendingGame = await getPendingGame(this.presence, client.auth.uid)
-        if (!pendingGame && !consented)
-          return // user has reconnected through other ways (new browser/machine/session)
-        else if (
-          pendingGame &&
-          isValidDate(pendingGame.reconnectionDeadline) &&
-          pendingGame.reconnectionDeadline.getTime() > Date.now()
-        ) {
-          // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
-          // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
-          return
-        }
-        clearPendingGame(this.presence, client.auth.uid)
+  async onReconnect(client: Client) {
+    // if the user reconnects, we clear the pending game and recall the OnJoinCommand
+    clearPendingGame(this.presence, client.auth.uid)
+    this.dispatcher.dispatch(new OnJoinCommand(), { client })
+  }
 
-        //logger.info(`${client.auth.displayName} left game`)
-        const player = this.state.players.get(client.auth.uid)
-        const hasLeftGameBeforeTheEnd =
-          player && player.life > 0 && !this.state.gameFinished
-        const otherHumans = values(this.state.players).filter(
-          (p) => !p.isBot && p.id !== client.auth.uid
-        )
-        if (
-          hasLeftGameBeforeTheEnd &&
-          otherHumans.length >= 1 &&
-          player.role !== Role.ADMIN
-        ) {
-          /* if a user leaves a game before the end, 
-          they cannot join another in the next 5 minutes */
-          givePlayerTimeout(this.presence, client.auth.uid)
-        }
+  async onLeave(client: Client, code: number) {
+    const consented = code === CloseCode.CONSENTED
 
-        if (player && this.state.stageLevel <= 5 && !consented) {
-          /* 
-          if player left game during the loading screen or before stage 6,
-          we consider they didn't play the game and presume a technical issue
-          we remove it from the players and don't give them any rewards
-          */
-          this.state.players.delete(client.auth.uid)
-          this.setMetadata({
-            playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
-          })
-
-          /*logger.info(
-            `${client.auth.displayName} has been removed from players list`
-          )*/
-        } else if (player && !player.hasLeftGame) {
-          player.hasLeftGame = true
-          player.spectatedPlayerId = player.id
-
-          const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
-          if (hasLeftBeforeEnd) {
-            // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
-            player.life = -99
-            this.rankPlayers()
-          }
-
-          this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
-        }
-      }
-      if (
-        !this.state.gameLoaded &&
-        values(this.state.players).every((p) => p.loadingProgress === 100)
+    if (client && client.auth && client.auth.displayName) {
+      const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+      if (!pendingGame && !consented)
+        return // user has reconnected through other ways (new browser/machine/session)
+      else if (
+        pendingGame &&
+        isValidDate(pendingGame.reconnectionDeadline) &&
+        pendingGame.reconnectionDeadline.getTime() > Date.now()
       ) {
-        this.broadcast(Transfer.LOADING_COMPLETE)
-        this.startGame()
+        // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
+        // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
+        return
       }
+      clearPendingGame(this.presence, client.auth.uid)
+
+      //logger.info(`${client.auth.displayName} left game`)
+      const player = this.state.players.get(client.auth.uid)
+      const hasLeftGameBeforeTheEnd =
+        player && player.life > 0 && !this.state.gameFinished
+      const otherHumans = values(this.state.players).filter(
+        (p) => !p.isBot && p.id !== client.auth.uid
+      )
+      if (
+        hasLeftGameBeforeTheEnd &&
+        otherHumans.length >= 1 &&
+        player.role !== Role.ADMIN
+      ) {
+        /* if a user leaves a game before the end, 
+        they cannot join another in the next 5 minutes */
+        givePlayerTimeout(this.presence, client.auth.uid)
+      }
+
+      if (player && this.state.stageLevel <= 5 && !consented) {
+        /* 
+        if player left game during the loading screen or before stage 6,
+        we consider they didn't play the game and presume a technical issue
+        we remove it from the players and don't give them any rewards
+        */
+        this.state.players.delete(client.auth.uid)
+        this.setMetadata({
+          playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
+        })
+
+        /*logger.info(
+          `${client.auth.displayName} has been removed from players list`
+        )*/
+      } else if (player && !player.hasLeftGame) {
+        player.hasLeftGame = true
+        player.spectatedPlayerId = player.id
+
+        const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
+        if (hasLeftBeforeEnd) {
+          // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
+          player.life = -99
+          this.rankPlayers()
+        }
+
+        this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
+      }
+    }
+    if (
+      !this.state.gameLoaded &&
+      values(this.state.players).every((p) => p.loadingProgress === 100)
+    ) {
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.startGame()
     }
   }
 
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
-    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
     const players = values(this.state.players)
     players.forEach((player) => {
       clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
@@ -853,12 +856,23 @@ export default class GameRoom extends Room<GameState> {
 
     const usr = await UserMetadata.findOne({ uid: player.id })
     if (usr) {
+      // Track previous values for notifications
+      const previousElo = usr.elo
+      const previousRank = getRank(previousElo)
+
       if (eligibleToXP) {
         const expThreshold = 1000
         if (usr.exp + exp >= expThreshold) {
           usr.level += 1
           usr.booster += 1
           usr.exp = usr.exp + exp - expThreshold
+
+          // Add level up notification
+          notificationsService.addNotification(
+            player.id,
+            "level_up",
+            usr.level.toString()
+          )
         } else {
           usr.exp = usr.exp + exp
         }
@@ -877,7 +891,6 @@ export default class GameRoom extends Room<GameState> {
           if (usr.elo === minElo && humans.length >= 8) {
             player.titles.add(Title.OUTSIDER)
           }
-          //this.presence.publish("ranked-lobby-winner", player)
         }
       }
 
@@ -935,6 +948,16 @@ export default class GameRoom extends Room<GameState> {
         usr.elo = elo
         usr.maxElo = Math.max(usr.maxElo, elo)
 
+        // Check if elo rank changed
+        const newRank = getRank(elo)
+        if (newRank !== previousRank) {
+          notificationsService.addNotification(
+            player.id,
+            "elo_rank_change",
+            newRank
+          )
+        }
+
         const dbrecord = this.transformToSimplePlayer(player)
         const synergiesMap = new Map<Synergy, number>()
         player.synergies.forEach((v, k) => {
@@ -950,7 +973,8 @@ export default class GameRoom extends Room<GameState> {
           playerId: dbrecord.id,
           elo: elo,
           synergies: synergiesMap,
-          gameMode: this.state.gameMode
+          gameMode: this.state.gameMode,
+          regions: player.regions
         })
 
         if (usr.eventFinishTime == null) {
@@ -964,10 +988,10 @@ export default class GameRoom extends Room<GameState> {
           if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
             usr.eventFinishTime = new Date()
 
-            const finisher = await UserMetadata.findOne({
+            const nbFinishers = await UserMetadata.countDocuments({
               eventFinishTime: { $ne: null }
             })
-            if (!finisher) {
+            if (nbFinishers === 0) {
               player.titles.add(Title.VICTORIOUS)
               this.presence.publish(
                 "announcement",
@@ -975,6 +999,11 @@ export default class GameRoom extends Room<GameState> {
               )
             }
             player.titles.add(Title.FINISHER)
+            notificationsService.addNotification(
+              player.id,
+              "victory_road_finished",
+              `${nbFinishers + 1}`
+            )
             fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
           }
 
@@ -1022,10 +1051,17 @@ export default class GameRoom extends Room<GameState> {
         Object.values(Pkm)
           .filter((p) => NonPkm.includes(p) === false)
           .every((pkm) => {
-            const pokemonCollectionItem = usr.pokemonCollection.get(
-              PkmIndex[pkm]
-            )
-            return pokemonCollectionItem && pokemonCollectionItem.played > 0
+            const baseForm = getBaseAltForm(pkm)
+            const accepted: Pkm[] =
+              baseForm in PkmAltFormsByPkm
+                ? [baseForm, ...PkmAltFormsByPkm[baseForm]]
+                : [baseForm]
+            return accepted.some((form) => {
+              const pokemonCollectionItem = usr.pokemonCollection.get(
+                PkmIndex[form]
+              )
+              return pokemonCollectionItem && pokemonCollectionItem.played > 0
+            })
           })
       ) {
         player.titles.add(Title.COLLECTOR)
@@ -1035,12 +1071,21 @@ export default class GameRoom extends Room<GameState> {
         usr.titles = []
       }
 
+      const newTitlesEarned: string[] = []
       player.titles.forEach((t) => {
         if (!usr.titles.includes(t)) {
           //logger.info("title added ", t)
           usr.titles.push(t)
+          newTitlesEarned.push(t)
         }
       })
+
+      // Add notification for new titles
+      if (newTitlesEarned.length > 0) {
+        newTitlesEarned.forEach((title) => {
+          notificationsService.addNotification(player.id, "new_title", title)
+        })
+      }
 
       //logger.debug(usr);
       //usr.markModified('metadata');
@@ -1206,7 +1251,7 @@ export default class GameRoom extends Room<GameState> {
     )
       return // should not be pickable at this stage
 
-    const pokemonsObtained: Pokemon[] = (
+    let pokemonsObtained: Pokemon[] = (
       pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
     ).map((p) => PokemonFactory.createPokemonFromName(p, player))
 
@@ -1239,6 +1284,25 @@ export default class GameRoom extends Room<GameState> {
         player.regionalPokemons.push(pkm as Pkm)
       } else {
         this.state.shop.addAdditionalPokemon(pkm, this.state)
+      }
+
+      if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
+        pokemonsObtained = pokemonsObtained.map((pkm) => {
+          const evolution = pkm.hasEvolution
+            ? pkm.evolutionRule.getEvolution(pkm, player, this.state.stageLevel)
+            : pkm.name
+          const rank = [Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC].indexOf(
+            pkm.rarity
+          )
+          const replacement = PokemonFactory.createPokemonFromName(
+            evolution,
+            player
+          )
+          replacement.addMaxHP([50, 100, 150][rank] ?? 50, player)
+          replacement.addAttack([5, 10, 15][rank] ?? 5)
+          replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
+          return replacement
+        })
       }
 
       // update regional pokemons in case some regional variants of add picks are now available
@@ -1359,7 +1423,13 @@ export default class GameRoom extends Room<GameState> {
     const client = this.clients.find((cli) => cli.auth.uid === player.id)
     if (!client) return
     const id = nanoid()
-    const wanderer = new Wanderer({ id, pkm, type, behavior })
+    const wanderer = new Wanderer({
+      id,
+      pkm,
+      type,
+      behavior,
+      shiny: chance(0.01)
+    })
     player.wanderers.set(id, wanderer)
   }
 }

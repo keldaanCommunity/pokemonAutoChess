@@ -1,12 +1,14 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
 import { SynergyTriggers } from "../../config"
-import { IPokemon } from "../../types"
+import { IPlayer, IPokemon } from "../../types"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { PkmFamily } from "../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
+import { isOnBench } from "../../utils/board"
 import { values } from "../../utils/schemas"
+import { PVEStages } from "../pve-stages"
 
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {
@@ -16,15 +18,14 @@ export default class Synergies extends MapSchema<number, Synergy> {
     })
   }
 
-  getSynergyStep(type: Synergy): number {
-    return SynergyTriggers[type].filter((n) => (this.get(type) ?? 0) >= n)
-      .length
+  hasSynergyActive(type: Synergy): boolean {
+    return (this.get(type) ?? 0) >= SynergyTriggers[type][0]
   }
 
   countActiveSynergies() {
     let count = 0
-    this.forEach((value, key) => {
-      if (value >= SynergyTriggers[key][0]) {
+    this.forEach((value, synergy) => {
+      if (value >= SynergyTriggers[synergy][0]) {
         count++
       }
     })
@@ -182,6 +183,72 @@ export function computeSynergies(
       if (shouldComputeDragonDoubleTypeAgain) {
         applyDragonDoubleTypes()
       }
+
+      if (pkm.name.startsWith("ARCEUS")) {
+        switch (values(pkm.types)[0]) {
+          case Synergy.BUG:
+            pkm.index = PkmIndex[Pkm.ARCEUS_BUG]
+            break
+          case Synergy.DARK:
+            pkm.index = PkmIndex[Pkm.ARCEUS_DARK]
+            break
+          case Synergy.DRAGON:
+          case Synergy.FOSSIL:
+            pkm.index = PkmIndex[Pkm.ARCEUS_DRAGON]
+            break
+          case Synergy.ELECTRIC:
+            pkm.index = PkmIndex[Pkm.ARCEUS_ELECTRIC]
+            break
+          case Synergy.FIGHTING:
+          case Synergy.WILD:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FIGHTING]
+            break
+          case Synergy.FIRE:
+          case Synergy.GOURMET:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FIRE]
+            break
+          case Synergy.FLYING:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FLYING]
+            break
+          case Synergy.GHOST:
+            pkm.index = PkmIndex[Pkm.ARCEUS_GHOST]
+            break
+          case Synergy.GRASS:
+          case Synergy.FLORA:
+            pkm.index = PkmIndex[Pkm.ARCEUS_GRASS]
+            break
+          case Synergy.GROUND:
+          case Synergy.FIELD:
+            pkm.index = PkmIndex[Pkm.ARCEUS_GROUND]
+            break
+          case Synergy.ICE:
+            pkm.index = PkmIndex[Pkm.ARCEUS_ICE]
+            break
+          case Synergy.POISON:
+          case Synergy.MONSTER:
+            pkm.index = PkmIndex[Pkm.ARCEUS_POISON]
+            break
+          case Synergy.PSYCHIC:
+          case Synergy.SOUND:
+            pkm.index = PkmIndex[Pkm.ARCEUS_PSYCHIC]
+            break
+          case Synergy.ROCK:
+            pkm.index = PkmIndex[Pkm.ARCEUS_ROCK]
+            break
+          case Synergy.STEEL:
+          case Synergy.ARTIFICIAL:
+            pkm.index = PkmIndex[Pkm.ARCEUS_STEEL]
+            break
+          case Synergy.WATER:
+          case Synergy.AQUATIC:
+            pkm.index = PkmIndex[Pkm.ARCEUS_WATER]
+            break
+          case Synergy.FAIRY:
+          case Synergy.AMORPHOUS:
+            pkm.index = PkmIndex[Pkm.ARCEUS_FAIRY]
+            break
+        }
+      }
     }
   })
 
@@ -199,4 +266,25 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
       }
     }
   })
+}
+
+export function getSynergyStep(
+  synergies: Map<Synergy, number> | MapSchema<number, Synergy>,
+  type: Synergy
+): number {
+  return SynergyTriggers[type].filter((n) => (synergies.get(type) ?? 0) >= n)
+    .length
+}
+
+export function getWildChance(player: IPlayer, stageLevel: number): number {
+  const isPVE = stageLevel === 0 || stageLevel in PVEStages
+  const wildLevel = getSynergyStep(player.synergies, Synergy.WILD)
+  // 8% base chance in PVE stage of at Wild 4 and above
+  const baseChance = isPVE || wildLevel > 0 ? 8 : 0
+  // each star of a pokemon with wild synergy gives 0.5% wild chance
+  const nbWildStars = values(player.board)
+    .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
+    .reduce((total, p) => total + p.stars, 0)
+  const bonusChance = wildLevel > 0 ? nbWildStars * 0.5 : 0
+  return (baseChance + bonusChance) / 100
 }

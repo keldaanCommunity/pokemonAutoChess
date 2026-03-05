@@ -1,6 +1,8 @@
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  FIELD_HEAL_PER_SYNERGY_LEVEL,
+  FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
@@ -10,17 +12,20 @@ import { Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
+import { Item, Scarves } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { distanceC } from "../../utils/distance"
 import { chance } from "../../utils/random"
+import { values } from "../../utils/schemas"
+import { Board } from "../board"
 import {
   FlowerMonByPot,
   FlowerPot,
   getFlowerPotsUnlocked
 } from "../flower-pots"
+import { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
   OnAbilityCastEffect,
@@ -32,6 +37,7 @@ import {
   OnDeathEffect,
   OnKillEffect,
   OnKillEffectArgs,
+  OnSimulationStartEffect,
   OnSpawnEffect
 } from "./effect"
 
@@ -185,15 +191,16 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 }
 
 export const humanHealEffect = new OnDamageDealtEffect(
-  ({ pokemon, damage, isRetaliation }: OnDamageDealtEffectArgs) => {
+  ({ pokemon, target, damage, isRetaliation }: OnDamageDealtEffectArgs) => {
     if (isRetaliation) return // don't lifesteal on retaliation dammage from items
+    if (target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
     let lifesteal = 0
     if (pokemon.effects.has(EffectEnum.MEDITATE)) {
       lifesteal = 0.25
     } else if (pokemon.effects.has(EffectEnum.FOCUS_ENERGY)) {
-      lifesteal = 0.4
+      lifesteal = 0.35
     } else if (pokemon.effects.has(EffectEnum.CALM_MIND)) {
-      lifesteal = 0.6
+      lifesteal = 0.5
     }
     pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
   },
@@ -203,18 +210,9 @@ export const humanHealEffect = new OnDamageDealtEffect(
 export class OnFieldDeathEffect extends OnDeathEffect {
   constructor(effect: EffectEnum) {
     super(({ pokemon, board }) => {
-      let heal = 0
-      let speedBoost = 0
-      if (effect === EffectEnum.BULK_UP) {
-        heal = 30
-        speedBoost = 15
-      } else if (effect === EffectEnum.RAGE) {
-        heal = 35
-        speedBoost = 20
-      } else if (effect === EffectEnum.ANGER_POINT) {
-        heal = 40
-        speedBoost = 25
-      }
+      const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
+      const heal = FIELD_HEAL_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
+      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
       pokemon.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {
           if (
@@ -255,68 +253,68 @@ export class FlyingProtectionEffect extends OnDamageReceivedEffect {
       !pokemon.status.paralysis
     ) {
       const pcHp = pokemon.hp / pokemon.maxHP
+      const shouldProcAt50 =
+        pokemon.effects.has(EffectEnum.MAX_AIRSTREAM) ||
+        pokemon.effects.has(EffectEnum.SKYDIVE)
 
-      if (pokemon.effects.has(EffectEnum.TAILWIND) && pcHp < 0.2) {
-        pokemon.flyAway(board)
+      if (this.flyingProtection === 1 && pcHp < 0.2) {
         this.flyingProtection--
-      } else if (pokemon.effects.has(EffectEnum.FEATHER_DANCE) && pcHp < 0.2) {
+        this.trigger(pokemon, board)
+      } else if (shouldProcAt50 && this.flyingProtection === 2 && pcHp < 0.5) {
+        this.flyingProtection--
+        this.trigger(pokemon, board)
+      }
+    }
+  }
+
+  trigger(pokemon: PokemonEntity, board: Board) {
+    const shouldProtect =
+      pokemon.effects.has(EffectEnum.FEATHER_DANCE) ||
+      pokemon.effects.has(EffectEnum.SKYDIVE) ||
+      pokemon.effects.has(EffectEnum.MAX_AIRSTREAM)
+    const shouldSkydive = pokemon.effects.has(EffectEnum.SKYDIVE)
+
+    if (shouldProtect) pokemon.status.triggerProtect(2000)
+    if (shouldSkydive) {
+      const destination =
+        board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+      if (destination) {
         pokemon.status.triggerProtect(2000)
-        pokemon.flyAway(board)
-        this.flyingProtection--
-      } else if (pokemon.effects.has(EffectEnum.MAX_AIRSTREAM)) {
-        if (
-          (this.flyingProtection === 2 && pcHp < 0.5) ||
-          (this.flyingProtection === 1 && pcHp < 0.2)
-        ) {
-          pokemon.status.triggerProtect(2000)
-          pokemon.flyAway(board)
-          this.flyingProtection--
-        }
-      } else if (pokemon.effects.has(EffectEnum.SKYDIVE)) {
-        if (
-          (this.flyingProtection === 2 && pcHp < 0.5) ||
-          (this.flyingProtection === 1 && pcHp < 0.2)
-        ) {
-          const destination =
-            board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-          if (destination) {
-            pokemon.status.triggerProtect(2000)
+        pokemon.broadcastAbility({
+          skill: "FLYING_TAKEOFF",
+          targetX: destination.target.positionX,
+          targetY: destination.target.positionY
+        })
+        pokemon.skydiveTo(destination.x, destination.y, board)
+        pokemon.setTarget(destination.target)
+        pokemon.commands.push(
+          new DelayedCommand(() => {
             pokemon.broadcastAbility({
-              skill: "FLYING_TAKEOFF",
+              skill: "FLYING_SKYDIVE",
+              positionX: destination.x,
+              positionY: destination.y,
               targetX: destination.target.positionX,
               targetY: destination.target.positionY
             })
-            pokemon.skydiveTo(destination.x, destination.y, board)
-            pokemon.setTarget(destination.target)
-            this.flyingProtection--
-            pokemon.commands.push(
-              new DelayedCommand(() => {
-                pokemon.broadcastAbility({
-                  skill: "FLYING_SKYDIVE",
-                  positionX: destination.x,
-                  positionY: destination.y,
-                  targetX: destination.target.positionX,
-                  targetY: destination.target.positionY
-                })
-              }, 500)
-            )
-            pokemon.commands.push(
-              new DelayedCommand(() => {
-                if (destination.target?.maxHP > 0) {
-                  destination.target.handleSpecialDamage(
-                    1.5 * pokemon.atk,
-                    board,
-                    AttackType.PHYSICAL,
-                    pokemon,
-                    chance(pokemon.critChance / 100, pokemon),
-                    false
-                  )
-                }
-              }, 1000)
-            )
-          }
-        }
+          }, 500)
+        )
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            if (destination.target?.maxHP > 0) {
+              destination.target.handleSpecialDamage(
+                1.5 * pokemon.atk,
+                board,
+                AttackType.PHYSICAL,
+                pokemon,
+                chance(pokemon.critChance / 100, pokemon),
+                false
+              )
+            }
+          }, 1000)
+        )
       }
+    } else {
+      pokemon.flyAway(board)
     }
   }
 }
@@ -346,6 +344,7 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
       )
       if (
         !targetAtContact ||
+        targetAtContact.range > 1 ||
         distanceC(
           pokemon.targetX,
           pokemon.targetY,
@@ -422,3 +421,73 @@ export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
     }
   }
 })
+
+export const overgrowEffect = new OnDamageReceivedEffect(
+  ({ pokemon }: OnDamageReceivedEffectArgs) => {
+    if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
+      pokemon.addAbilityPower(50, pokemon, 0, false)
+      // Remove the effect to avoid multiple triggers
+      pokemon.effectsSet.delete(overgrowEffect)
+    }
+  }
+)
+
+export const wildBerserkEffect = new OnDamageReceivedEffect(
+  ({ pokemon }: OnDamageReceivedEffectArgs) => {
+    if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
+      pokemon.addSpeed(40, pokemon, 0, false)
+      pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
+      pokemon.addShield(30, pokemon, 0, false)
+      // Remove the effect to avoid multiple triggers
+      pokemon.effectsSet.delete(wildBerserkEffect)
+      // Remove after 3 seconds
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.addSpeed(-40, pokemon, 0, false)
+          pokemon.addAttack(
+            -Math.ceil(0.4 * pokemon.baseAtk),
+            pokemon,
+            0,
+            false
+          )
+        }, 3000)
+      )
+    }
+  }
+)
+
+export const normalShieldEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    let shieldBonus = 0
+    if (entity.effects.has(EffectEnum.STAMINA)) {
+      shieldBonus = 15
+    }
+    if (entity.effects.has(EffectEnum.STRENGTH)) {
+      shieldBonus += 20
+    }
+    if (entity.effects.has(EffectEnum.ENDURE)) {
+      shieldBonus += 25
+    }
+    if (entity.effects.has(EffectEnum.PURE_POWER)) {
+      shieldBonus += 30
+      if (values(entity.items).some((item) => Scarves.includes(item))) {
+        // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
+        entity.addAttack(Math.round(0.3 * entity.baseAtk), entity, 0, false)
+        entity.addAbilityPower(30, entity, 0, false)
+      }
+    }
+    if (shieldBonus >= 0) {
+      entity.addShield(shieldBonus, entity, 0, false)
+      const cells = simulation.board.getAdjacentCells(
+        entity.positionX,
+        entity.positionY
+      )
+
+      cells.forEach((cell) => {
+        if (cell.value && entity.team == cell.value.team) {
+          cell.value.addShield(shieldBonus, entity, 0, false)
+        }
+      })
+    }
+  }
+)

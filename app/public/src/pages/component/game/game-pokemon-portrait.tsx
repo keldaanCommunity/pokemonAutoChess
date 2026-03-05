@@ -10,10 +10,13 @@ import {
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { values } from "../../../../../utils/schemas"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppSelector
+} from "../../../hooks"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
@@ -51,19 +54,19 @@ export default function GamePokemonPortrait(props: {
     return props.pokemon
   }, [props.pokemon])
 
-  const uid: string = useAppSelector((state) => state.network.uid)
-  const currentPlayerId: string = useAppSelector(
-    (state) => state.game.currentPlayerId
+  const currentPlayerUid: string = useAppSelector((state) => state.network.uid)
+  const spectatedPlayerId: string = useAppSelector(
+    (state) => state.game.playerIdSpectated
   )
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
 
-  const board = useAppSelector(
-    (state) => state.game.players.find((p) => p.id === uid)?.board
-  )
+  const board = connectedPlayer?.board ?? null
+
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
 
-  const isOnAnotherBoard = currentPlayerId !== uid
+  const isOnAnotherBoard = spectatedPlayerId !== currentPlayerUid
 
   const [count, setCount] = useState(0)
   const [countEvol, setCountEvol] = useState(0)
@@ -97,12 +100,12 @@ export default function GamePokemonPortrait(props: {
     return <div className="game-pokemon-portrait my-box empty" />
   }
 
-  const customs = currentPlayer?.pokemonCustoms
+  const customs = spectatedPlayer?.pokemonCustoms
   const pokemonCustom = getPkmWithCustom(pokemon.index, customs)
   const rarityColor = RarityColor[pokemon.rarity]
 
-  const evolutionName = currentPlayer
-    ? pokemon.evolutionRule.getEvolution(pokemon, currentPlayer)
+  const evolutionName = spectatedPlayer
+    ? pokemon.evolutionRule.getEvolution(pokemon, spectatedPlayer)
     : (pokemon.evolutions[0] ?? pokemon.evolution)
   let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
@@ -121,10 +124,10 @@ export default function GamePokemonPortrait(props: {
     countEvol === pokemon.evolutionRule.numberRequired - 1 &&
     pokemonEvolution.hasEvolution
   ) {
-    const evolutionName2 = currentPlayer
+    const evolutionName2 = spectatedPlayer
       ? pokemonEvolution.evolutionRule.getEvolution(
           pokemonEvolution,
-          currentPlayer,
+          spectatedPlayer,
           stageLevel
         )
       : (pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution)
@@ -134,15 +137,7 @@ export default function GamePokemonPortrait(props: {
   const pokemonInPortrait =
     willEvolve && pokemonEvolution ? pokemonEvolution : pokemon
 
-  let cost = getBuyPrice(pokemon.name, specialGameRule)
-
-  if (
-    willEvolve &&
-    pokemonEvolution &&
-    specialGameRule === SpecialGameRule.BUYER_FEVER
-  ) {
-    cost = 0
-  }
+  const cost = getBuyPrice(pokemon.name, specialGameRule)
 
   const gainedSynergies =
     pokemonEvolution && willEvolve
@@ -157,7 +152,7 @@ export default function GamePokemonPortrait(props: {
         )
       : []
 
-  const canBuy = currentPlayer?.alive && currentPlayer?.money >= cost
+  const canBuy = spectatedPlayer?.alive && spectatedPlayer?.money >= cost
 
   return (
     <div

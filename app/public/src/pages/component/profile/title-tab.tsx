@@ -5,8 +5,10 @@ import {
   ITitleStatistic
 } from "../../../../../models/mongo-models/title-statistic"
 import { Title } from "../../../../../types"
+import { isIn } from "../../../../../utils/array"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { setTitle } from "../../../stores/NetworkStore"
+import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Checkbox } from "../checkbox/checkbox"
 
@@ -16,6 +18,9 @@ export function TitleTab() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
   const [titles, setTitles] = useState<ITitleStatistic[]>([])
+  const nbTitlesUnlocked = user
+    ? Object.keys(Title).filter((title) => isIn(user.titles, title)).length
+    : 0
 
   useEffect(() => {
     fetchTitles().then((res) => {
@@ -39,7 +44,7 @@ export function TitleTab() {
         />
         <p>
           {t("titles_unlocked", {
-            count: user.titles.length,
+            count: nbTitlesUnlocked,
             total: Object.keys(Title).length
           })}
         </p>
@@ -76,12 +81,14 @@ export function TitleTab() {
                 }
               }}
             >
-              <div>
-                <span>{t(`title.${k.name}`)}</span>
-                <p>{t(`title_description.${k.name}`)}</p>
-              </div>
+              <span className="title-name">{t(`title.${k.name}`)}</span>
+              <p className="title-description">
+                {addIconsToDescription(t(`title_description.${k.name}`))}
+              </p>
 
-              <span>{(k.rarity * 100).toFixed(3)}%</span>
+              <span className="title-rarity">
+                {(k.rarity * 100).toFixed(3)}%
+              </span>
             </li>
           ))}
       </ul>

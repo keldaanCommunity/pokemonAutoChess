@@ -1,8 +1,13 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
+import {
+  OUTLAW_GOLD_REWARD,
+  SHARDS_PER_SHINY_UNOWN_WANDERER,
+  SHARDS_PER_UNOWN_WANDERER
+} from "../../../../config"
 import { Wanderer } from "../../../../models/colyseus-models/wanderer"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { Transfer } from "../../../../types"
+import { Item, Transfer } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { WandererBehavior, WandererType } from "../../../../types/enum/Wanderer"
@@ -14,7 +19,6 @@ import GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
 
-const SHARDS_PER_UNOWN_WANDERER = 50
 const DEFAULT_WANDERER_SPEED = 0.25
 
 /*
@@ -36,10 +40,14 @@ export default class WanderersManager {
   addWanderer(wanderer: Wanderer) {
     if (wanderer.type === WandererType.UNOWN) {
       this.addWanderingUnown(wanderer)
+    } else if (wanderer.type === WandererType.UNOWN_SPELL) {
+      this.addSpectatingUnown(wanderer)
     } else if (wanderer.type === WandererType.CATCHABLE) {
       this.addCatchableWanderer(wanderer)
-    } else if (wanderer.type === WandererType.SPECIAL) {
-      this.addSpecialWanderer(wanderer)
+    } else if (wanderer.type === WandererType.DIALOG) {
+      this.addDialogWanderer(wanderer)
+    } else if (wanderer.type === WandererType.OUTLAW) {
+      this.addOutlawWanderer(wanderer)
     }
   }
 
@@ -48,11 +56,19 @@ export default class WanderersManager {
       wanderer,
       onClick: (wanderer, unownSprite, pointer) => {
         this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        this.displayShardGain([pointer.x, pointer.y], unownSprite.pokemon.index)
+        this.displayShardGain(
+          [pointer.x, pointer.y],
+          unownSprite.pokemon.index,
+          unownSprite.pokemon.shiny
+        )
         unownSprite.destroy()
         return true
       }
     })
+  }
+
+  addSpectatingUnown(wanderer: Wanderer) {
+    this.addWandererPokemonSprite({ wanderer })
   }
 
   addCatchableWanderer(wanderer: Wanderer) {
@@ -76,13 +92,37 @@ export default class WanderersManager {
     })
   }
 
-  addSpecialWanderer(wanderer: Wanderer) {
+  addOutlawWanderer(wanderer: Wanderer) {
+    this.addWandererPokemonSprite({
+      wanderer,
+      speed: 0.4,
+      onClick: (wanderer, sprite, pointer) => {
+        let caught = false
+        if (this.scene.board) {
+          caught = true
+          this.scene.room?.send(Transfer.WANDERER_CLICKED, {
+            id: wanderer.id
+          })
+          sprite.destroy()
+          this.scene.board.displayText(
+            pointer.x,
+            pointer.y - 40,
+            t("caught"),
+            true
+          )
+          this.scene.displayMoneyGain(pointer.x, pointer.y, OUTLAW_GOLD_REWARD)
+        }
+        return caught
+      }
+    })
+  }
+
+  addDialogWanderer(wanderer: Wanderer) {
     const sprite = new PokemonSpecial({
       scene: this.scene,
       x: -100,
       y: 350,
       name: wanderer.pkm,
-      orientation: Orientation.RIGHT,
       animation: PokemonActionState.WALK,
       ...getDialogsBySpecialWanderer(wanderer)
     })
@@ -90,72 +130,76 @@ export default class WanderersManager {
       wanderer,
       existingSprite: sprite,
       onClick: (wanderer, sprite) => {
-        sprite.openDetail()
-        this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id })
-        setTimeout(() => {
+        //this.scene.room?.send(Transfer.WANDERER_CLICKED, { id: wanderer.id }) // not needed for dialog wanderers for now
+        if (sprite.detail) {
           sprite.closeDetail()
-          this.scene.tweens.add({
-            targets: sprite,
-            x: -100,
-            y: 350,
-            ease: "Linear",
-            duration: 4000,
-            onStart: () => {
-              sprite.orientation = Orientation.LEFT
-              this.scene.animationManager?.animatePokemon(
-                sprite,
-                PokemonActionState.WALK,
-                false
-              )
-            },
-            onComplete: () => sprite.destroy()
-          })
-        }, 3000)
+        } else {
+          sprite.openDetail()
+          setTimeout(() => {
+            sprite.closeDetail()
+          }, 3000)
+        }
         return false
       }
     })
+
+    if (wanderer.pkm === Pkm.XATU && wanderer.data && this.scene.board) {
+      const { chest, chestGroup } = this.scene.board.addChest(590, 450)
+      setTimeout(() => {
+        this.scene.board?.openChest(
+          chestGroup,
+          chest,
+          wanderer.data.split(";") as Item[]
+        )
+      }, 5000)
+      setTimeout(() => {
+        chestGroup.destroy(true, true)
+      }, 8000)
+    }
   }
 
   addWandererPokemonSprite({
     wanderer,
     onClick,
-    existingSprite
+    existingSprite,
+    speed = DEFAULT_WANDERER_SPEED
   }: {
     wanderer: Wanderer
     existingSprite?: PokemonSprite
-    onClick: (
+    speed?: number
+    onClick?: (
       wanderer: Wanderer,
       pokemon: PokemonSprite,
       pointer: Phaser.Input.Pointer
     ) => boolean
   }): PokemonSprite {
-    let startX = -100,
-      startY = 350,
-      endX = window.innerWidth + 100,
-      endY = 350
-    let duration = clamp(window.innerWidth / DEFAULT_WANDERER_SPEED, 4000, 6000)
     let caught = false
     const tweens: Phaser.Tweens.Tween[] = []
+    let fromLeft = chance(1 / 2)
+    if (wanderer.type === WandererType.DIALOG) {
+      fromLeft = true // Xatu always comes from left to right to end where the chest is
+    }
+    if (wanderer.type === WandererType.UNOWN_SPELL) {
+      fromLeft = false // Unown spell always comes from right to left to end near Smeargle
+    }
+    let startX = fromLeft ? -100 : +window.innerWidth + 100,
+      startY = 100 + Math.round(Math.random() * 500),
+      endX = fromLeft ? +window.innerWidth + 100 : -100,
+      endY = 350
+    let duration = clamp(window.innerWidth / speed, 4000, 6000)
 
-    switch (wanderer.behavior) {
-      case WandererBehavior.SPECTATE: {
-        startX = -100
-        startY = 100 + Math.round(Math.random() * 500)
-        endX = 590
-        endY = 300 + Math.round(Math.random() * 200)
-        duration = 4000
-        break
-      }
+    if (wanderer.behavior === WandererBehavior.SPECTATE) {
+      endX = fromLeft ? 590 : 1512
+      endY =
+        wanderer.type === WandererType.DIALOG ||
+        wanderer.type === WandererType.UNOWN_SPELL
+          ? 500
+          : 300 + Math.round(Math.random() * 200)
+      duration = 4000
+    }
 
-      case WandererBehavior.RUN_THROUGH:
-      default: {
-        const fromLeft = chance(1 / 2)
-        startX = fromLeft ? -100 : +window.innerWidth + 100
-        startY = 100 + Math.round(Math.random() * 500)
-        endX = fromLeft ? +window.innerWidth + 100 : -100
-        endY = 100 + Math.round(Math.random() * 500)
-        break
-      }
+    if (wanderer.behavior === WandererBehavior.RUN_THROUGH) {
+      endY = 100 + Math.round(Math.random() * 500)
     }
 
     const sprite =
@@ -164,7 +208,9 @@ export default class WanderersManager {
         this.scene,
         startX,
         startY,
-        PokemonFactory.createPokemonFromName(wanderer.pkm),
+        PokemonFactory.createPokemonFromName(wanderer.pkm, {
+          shiny: wanderer.shiny
+        }),
         "wanderer",
         false,
         false
@@ -189,18 +235,29 @@ export default class WanderersManager {
             PokemonActionState.IDLE,
             false
           )
+          if (wanderer.type === WandererType.DIALOG) {
+            sprite.openDetail()
+          } else if (wanderer.type === WandererType.UNOWN_SPELL) {
+            sprite.orientation = Orientation.DOWN
+            this.scene.animationManager?.animatePokemon(
+              sprite,
+              PokemonActionState.IDLE,
+              false
+            )
+          }
           tweens.push(
             this.scene.add.tween({
               targets: [sprite],
               ease: "linear",
               duration: 5000,
-              delay: 5000,
+              delay: 8000,
               x: startX,
               y: startY,
               onComplete: () => {
                 sprite.destroy()
               },
               onStart: () => {
+                sprite.closeDetail()
                 sprite.orientation = Orientation.LEFT
                 this.scene.animationManager?.animatePokemon(
                   sprite,
@@ -220,7 +277,7 @@ export default class WanderersManager {
     sprite.draggable = false
     sprite.sprite.setInteractive()
     sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      if (caught) return
+      if (caught || !onClick) return
       caught = onClick(wanderer, sprite, pointer)
       if (caught) tweens.forEach((tween) => tween.destroy())
     })
@@ -228,11 +285,11 @@ export default class WanderersManager {
     return sprite
   }
 
-  displayShardGain(coordinates: number[], index: string) {
+  displayShardGain(coordinates: number[], index: string, shiny: boolean) {
     const textStyle = {
       fontSize: "25px",
       fontFamily: "Verdana",
-      color: "#fff",
+      color: shiny ? "#ffd700" : "#fff",
       align: "center",
       strokeThickness: 2,
       stroke: "#000"
@@ -248,7 +305,10 @@ export default class WanderersManager {
         this.scene,
         25,
         0,
-        SHARDS_PER_UNOWN_WANDERER.toString(),
+        (shiny
+          ? SHARDS_PER_SHINY_UNOWN_WANDERER
+          : SHARDS_PER_UNOWN_WANDERER
+        ).toString(),
         textStyle
       )
     )
@@ -294,6 +354,21 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
         reward: `30 GOLD`
       }),
       dialogTitle: t("npc_dialog.good_job")
+    }
+  }
+  if (wanderer.pkm === Pkm.MAGNEMITE) {
+    return {
+      dialog: t("npc_dialog.magnemite")
+    }
+  }
+  if (wanderer.pkm === Pkm.MAGNEZONE) {
+    return {
+      dialog: t("npc_dialog.magnezone")
+    }
+  }
+  if (wanderer.pkm === Pkm.XATU) {
+    return {
+      dialog: t("npc_dialog.xatu")
     }
   }
   return {}

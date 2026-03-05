@@ -77,15 +77,6 @@ export const UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL = 10
 export const FALINKS_TROOPER_RATE = 4 / 100
 export const REMORAID_RATE = 1 / 3
 
-export const MAGNET_PULL_RATE_PER_RARITY: { [key in Rarity]?: number } = {
-  [Rarity.COMMON]: 0.15,
-  [Rarity.UNCOMMON]: 0.28,
-  [Rarity.RARE]: 0.15,
-  [Rarity.SPECIAL]: 0.35,
-  [Rarity.EPIC]: 0.05,
-  [Rarity.ULTRA]: 0.02
-}
-
 export const PVE_WILD_CHANCE = 5 / 100
 
 export const INCENSE_CHANCE = 5 / 100
@@ -102,7 +93,7 @@ export const SellPrices = {
   SHINY_EGG: 10,
   DITTO: 5,
   EEVEE: 1,
-  FALINKS_TROOPER: 5,
+  FALINKS_TROOPER: 3,
   MELTAN: 0,
   MAGIKARP: 0,
   GYARADOS: 10,
@@ -122,7 +113,7 @@ export const SellPrices = {
 
 export const BuyPrices = {
   DITTO: 5,
-  FALINKS_TROOPER: 5,
+  FALINKS_TROOPER: 3,
   MELTAN: 0,
   UNOWN: 1
 }

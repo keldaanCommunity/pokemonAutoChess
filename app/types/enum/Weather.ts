@@ -4,17 +4,18 @@ import { Passive } from "./Passive"
 import { Synergy } from "./Synergy"
 
 export enum Weather {
-  SUN = "SUN",
-  NIGHT = "NIGHT",
   WINDY = "WINDY",
-  MISTY = "MISTY",
-  RAIN = "RAIN",
-  SNOW = "SNOW",
-  STORM = "STORM",
+  NIGHT = "NIGHT",
   SANDSTORM = "SANDSTORM",
-  BLOODMOON = "BLOODMOON",
+  ZENITH = "ZENITH",
+  RAIN = "RAIN",
   SMOG = "SMOG",
+  MISTY = "MISTY",
+  DROUGHT = "DROUGHT",
   MURKY = "MURKY",
+  BLOODMOON = "BLOODMOON",
+  STORM = "STORM",
+  SNOW = "SNOW",
   NEUTRAL = "NEUTRAL"
 }
 
@@ -28,19 +29,21 @@ export const WeatherEffects: ReadonlyMap<Weather, EffectEnum> = new Map([
 ])
 
 export const PassivesAssociatedToWeather: Map<Weather, Passive[]> = new Map([
-  [Weather.SUN, [Passive.SUN]],
   [Weather.RAIN, [Passive.RAIN]],
+  [Weather.DROUGHT, [Passive.DROUGHT]],
+  [Weather.ZENITH, [Passive.ZENITH]],
   [Weather.SANDSTORM, [Passive.SANDSTORM]],
   [Weather.MISTY, [Passive.MISTY]],
   [Weather.SNOW, [Passive.SNOW]],
   [Weather.STORM, [Passive.STORM]],
   [Weather.NIGHT, [Passive.NIGHT]],
-  [Weather.WINDY, [Passive.WINDY, Passive.LUGIA]],
+  [Weather.WINDY, [Passive.WINDY]],
   [Weather.NEUTRAL, [Passive.AIRLOCK]]
 ])
 
 export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
-  [Synergy.FIRE, Weather.SUN],
+  [Synergy.GRASS, Weather.ZENITH],
+  [Synergy.FIRE, Weather.DROUGHT],
   [Synergy.WATER, Weather.RAIN],
   [Synergy.GROUND, Weather.SANDSTORM],
   [Synergy.FAIRY, Weather.MISTY],

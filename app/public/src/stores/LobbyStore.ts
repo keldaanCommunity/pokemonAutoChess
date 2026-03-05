@@ -1,5 +1,5 @@
+import { RoomAvailable } from "@colyseus/sdk"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RoomAvailable } from "colyseus.js"
 import Message from "../../../models/colyseus-models/message"
 import {
   TournamentBracketSchema,
@@ -33,7 +33,6 @@ export interface IUserLobbyState {
   gameRooms: RoomAvailable[]
   boosterContent: Booster
   lastBoostersOpened: Booster[]
-  suggestions: ISuggestionUser[]
   language: Language
   tournaments: TournamentSchema[]
   ccu: number
@@ -41,7 +40,6 @@ export interface IUserLobbyState {
 
 const initialState: IUserLobbyState = {
   language: Language.en,
-  suggestions: [],
   boosterContent: [],
   lastBoostersOpened: [],
   messages: [],
@@ -125,7 +123,6 @@ export const lobbySlice = createSlice({
       action: PayloadAction<IUserMetadataClient | undefined>
     ) => {
       state.searchedUser = action.payload
-      state.suggestions = []
     },
     setBoosterContent: (state, action: PayloadAction<Booster>) => {
       state.boosterContent = action.payload
@@ -133,9 +130,6 @@ export const lobbySlice = createSlice({
     },
     resetLastBoostersOpened: (state) => {
       state.lastBoostersOpened = []
-    },
-    setSuggestions: (state, action: PayloadAction<ISuggestionUser[]>) => {
-      state.suggestions = action.payload
     },
     resetLobby: () => initialState,
     addTournament: (state, action: PayloadAction<TournamentSchema>) => {
@@ -250,7 +244,6 @@ export const {
   setCcu,
   setSearchedUser,
   resetLobby,
-  setSuggestions,
   addTournament,
   removeTournament,
   changeTournament,

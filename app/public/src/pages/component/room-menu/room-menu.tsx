@@ -1,22 +1,19 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
+import { RoomAvailable } from "@colyseus/sdk"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import {
-  ICustomLobbyState,
-  IPreparationMetadata,
-  Role,
-  Transfer
-} from "../../../../../types"
+import { IPreparationMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { rooms } from "../../../network"
+//import { mockRooms } from "../../../../../models/mock-data/room-listing"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import { IngameRoomsList } from "./game-rooms-menu"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
-//import { mockRooms } from "../../../../../models/mock-data/room-listing"
 import "./room-menu.css"
 
 export default function RoomMenu() {
@@ -30,18 +27,13 @@ export default function RoomMenu() {
     (state) => state.lobby.gameRooms
   )
   const ccu = useAppSelector((state) => state.lobby.ccu)
-
-  const client: Client = useAppSelector((state) => state.network.client)
-  const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
-    (state) => state.network.lobby
-  )
   const user = useAppSelector((state) => state.network.profile)
   const [showRoomSelectionMenu, setShowRoomSelectionMenu] =
     useState<boolean>(false)
 
   const requestRoom = throttle(async function (gameMode: GameMode) {
-    if (lobby) {
-      lobby.send(Transfer.REQUEST_ROOM, gameMode)
+    if (rooms.lobby) {
+      rooms.lobby.send(Transfer.REQUEST_ROOM, gameMode)
       setShowRoomSelectionMenu(false)
     }
   }, 1000)
@@ -51,7 +43,7 @@ export default function RoomMenu() {
   ) {
     const passwordProtected = selectedRoom.metadata?.passwordProtected
 
-    if (lobby) {
+    if (rooms.lobby) {
       let password: string | undefined
       if (
         passwordProtected &&
@@ -65,8 +57,6 @@ export default function RoomMenu() {
 
       await joinExistingPreparationRoom(
         selectedRoom.roomId,
-        client,
-        lobby,
         dispatch,
         navigate,
         password
@@ -81,7 +71,8 @@ export default function RoomMenu() {
     if (action === "join") {
       requestJoiningExistingRoom(room)
     } else if (action === "delete" && user?.role === Role.ADMIN) {
-      confirm("Delete room ?") && lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+      confirm("Delete room ?") &&
+        rooms.lobby?.send(Transfer.DELETE_ROOM, room.roomId)
     }
   }
 
@@ -102,25 +93,25 @@ export default function RoomMenu() {
           <span>{t("in_game")}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/classic.png" alt="" />
-          <span>{t("classic")}</span>
+          <GameModeIcon gameMode={GameMode.CLASSIC} />
+          <span>{t(`game_modes.${GameMode.CLASSIC}`)}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/ranked.png" alt="" />
-          <span>{t("ranked_match_short")}</span>
+          <GameModeIcon gameMode={GameMode.RANKED} />
+          <span>{t(`game_modes.${GameMode.RANKED}`)}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/scribble.png" alt="" />
-          <span>{t("smeargle_scribble_short")}</span>
+          <GameModeIcon gameMode={GameMode.SCRIBBLE} />
+          <span>{t(`game_modes.${GameMode.SCRIBBLE}`)}</span>
         </Tab>
         <Tab>
-          <img src="/assets/ui/custom.png" alt="" />
-          <span>{t("custom_room_short")}</span>
+          <GameModeIcon gameMode={GameMode.CUSTOM_LOBBY} />
+          <span>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</span>
         </Tab>
         {hasTournamentLobbies && (
           <Tab>
-            <img src="/assets/ui/tournament.svg" alt="" />
-            <span>{t("tournament")}</span>
+            <GameModeIcon gameMode={GameMode.TOURNAMENT} />
+            <span>{t(`game_modes.${GameMode.TOURNAMENT}`)}</span>
           </Tab>
         )}
       </TabList>

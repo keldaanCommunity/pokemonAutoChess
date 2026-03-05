@@ -16,6 +16,7 @@ button {
     inset -6px -6px 0px 0px #cfcfcf,
     var(--shadow-clickable);
   text-decoration: none;
+  user-select: none;
 }
 
 .bubbly:not([disabled]):hover {

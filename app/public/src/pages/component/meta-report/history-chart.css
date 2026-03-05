@@ -1,0 +1,39 @@
+.history-expand-btn {
+  background: rgb(84, 89, 107);
+  border: var(--border-thin);
+  border-radius: 4px;
+  color: #ccc;
+  cursor: var(--cursor-hover);
+  font-size: 14px;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.history-expand-btn:hover {
+  background: rgb(100, 106, 128);
+  color: white;
+}
+
+.history-chart {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-chart-label {
+  font-size: 10px;
+  color: #ccc;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.sparkline-tooltip {
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+}

@@ -24,11 +24,11 @@ export function RoomSelectionMenu(props: {
           >
             <img
               src="assets/ui/game_modes/classic.png"
-              alt="Classic"
+              alt={t(`game_modes.${GameMode.CLASSIC}`)}
               draggable="false"
             />
-            <h2>{t("classic")}</h2>
-            <p>{t("classic_description")}</p>
+            <h2>{t(`game_modes.${GameMode.CLASSIC}`)}</h2>
+            <p>{t(`game_modes_descriptions.${GameMode.CLASSIC}`)}</p>
           </li>
           <li
             className="my-box"
@@ -36,11 +36,11 @@ export function RoomSelectionMenu(props: {
           >
             <img
               src="assets/ui/game_modes/ranked.png"
-              alt="Ranked match"
+              alt={t(`game_modes.${GameMode.RANKED}`)}
               draggable="false"
             />
-            <h2>{t("ranked_match")}</h2>
-            <p>{t("ranked_match_description")}</p>
+            <h2>{t(`game_modes.${GameMode.RANKED}`)}</h2>
+            <p>{t(`game_modes_descriptions.${GameMode.RANKED}`)}</p>
           </li>
           <li
             className="my-box"
@@ -48,23 +48,23 @@ export function RoomSelectionMenu(props: {
           >
             <img
               src="assets/ui/game_modes/scribble.png"
-              alt="Smeargle's Scribble"
+              alt={t(`game_modes.${GameMode.SCRIBBLE}`)}
               draggable="false"
             />
-            <h2>{t("smeargle_scribble")}</h2>
-            <p>{t("smeargle_scribble_description")}</p>
+            <h2>{t(`game_modes.${GameMode.SCRIBBLE}`)}</h2>
+            <p>{t(`game_modes_descriptions.${GameMode.SCRIBBLE}`)}</p>
           </li>
           <li
             className="my-box"
             onClick={() => props.onSelectMode(GameMode.CUSTOM_LOBBY)}
           >
             <img
-              src="assets/ui/game_modes/custom.png"
-              alt="Custom lobby"
+              src="assets/ui/game_modes/custom_lobby.png"
+              alt={t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}
               draggable="false"
             />
-            <h2>{t("custom_room")}</h2>
-            <p>{t("custom_room_description")}</p>
+            <h2>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</h2>
+            <p>{t(`game_modes_descriptions.${GameMode.CUSTOM_LOBBY}`)}</p>
           </li>
         </ul>
       }

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
-import PokemonFactory, {
-  isSameFamily
-} from "../../../../../models/pokemon-factory"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { shopClick } from "../../../stores/NetworkStore"
+import { isSameFamily } from "../../../../../models/pokemon-factory"
+import { Pkm } from "../../../../../types/enum/Pokemon"
+import { useAppSelector } from "../../../hooks"
+import { buyInShop } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 
 export default function GameStore() {
-  const dispatch = useAppDispatch()
   const shop = useAppSelector((state) => state.game.shop)
   const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(
     localStore.get(LocalStoreKeys.TEAM_PLANNER)
@@ -49,8 +46,9 @@ export default function GameStore() {
               )}
               onMouseEnter={() => {
                 if (scene) {
-                  if (scene.pokemonHovered)
-                    scene.clearHovered(scene.pokemonHovered)
+                  if (scene.pokemonHovered) {
+                    scene.clearHovered(scene.pokemonHovered.sprite)
+                  }
                   scene.pokemonHovered = null
                   scene.shopIndexHovered = index
                 }
@@ -60,7 +58,7 @@ export default function GameStore() {
               }}
               click={(e) => {
                 playSound(SOUNDS.BUTTON_CLICK)
-                dispatch(shopClick(index))
+                buyInShop(index)
                 if (scene) scene.shopIndexHovered = null
               }}
             />

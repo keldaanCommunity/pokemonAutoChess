@@ -6,7 +6,7 @@ import "./modal.css"
 
 interface ModalProps {
   show: boolean
-  onClose?: () => void
+  onClose?: () => boolean | void
   className?: string
   header?: React.ReactElement | string
   body?: React.ReactElement | string
@@ -30,8 +30,9 @@ export function Modal(props: ModalProps) {
   const { t } = useTranslation()
 
   const close = () => {
-    ref.current?.close()
-    onClose()
+    if (onClose() !== false) {
+      ref.current?.close()
+    }
   }
 
   useEffect(() => {

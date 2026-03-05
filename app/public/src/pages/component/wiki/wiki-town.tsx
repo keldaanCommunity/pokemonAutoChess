@@ -1,12 +1,13 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import {
-  TownEncounter,
   TownEncounterSellPrice,
-  TownEncounters,
   TownEncountersByStage
-} from "../../../../../core/town-encounters"
+} from "../../../../../config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  TownEncounter,
+  TownEncounters
+} from "../../../../../types/enum/TownEncounter"
 import { addIconsToDescription } from "../../utils/descriptions"
 import PokemonPortrait from "../pokemon-portrait"
 

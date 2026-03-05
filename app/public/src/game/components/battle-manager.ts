@@ -197,7 +197,7 @@ export default class BattleManager {
       const pkm = this.pokemonSprites.get(pokemon.id)!
       if (field === "poisonStacks") {
         if (pokemon.status.poisonStacks > 0) {
-          pkm.addPoison()
+          pkm.addPoison(pokemon.status.poisonStacks)
         } else {
           pkm.removePoison()
         }
@@ -488,8 +488,10 @@ export default class BattleManager {
         pkm.itemsContainer.updateCount(Item.UPGRADE, value)
       } else if (field === "soulDewCount") {
         pkm.itemsContainer.updateCount(Item.SOUL_DEW, value)
-      } else if (field === "defensiveRibbonCount") {
+      } else if (field === "muscleBandCount") {
         pkm.itemsContainer.updateCount(Item.MUSCLE_BAND, value)
+      } else if (field === "machRibbonCount") {
+        pkm.itemsContainer.updateCount(Item.MACH_RIBBON, value)
       }
     }
   }
@@ -523,7 +525,7 @@ export default class BattleManager {
               pokemon.positionY,
               this.flip
             )
-            if (pokemon.skill == Ability.TELEPORT) {
+            if (pokemon.skill === Ability.TELEPORT) {
               pkmSprite.x = coordinates[0]
               pkmSprite.y = coordinates[1]
               pkmSprite.specialAttackAnimation(pokemon)
@@ -677,15 +679,17 @@ export default class BattleManager {
               pkmSprite.attackSprite
             // load the new ones
             pkmSprite.lazyloadAnimations(this.scene).then(() => {
+              pkmSprite.animationLocked = false
               if (previousValue !== undefined) {
-                pkmSprite.displayAnimation("EVOLUTION")
+                pkmSprite.evolutionAnimation()
+              } else {
+                this.animationManager.animatePokemon(
+                  pkmSprite,
+                  pkmSprite.pokemon.action,
+                  this.flip,
+                  false
+                )
               }
-              this.animationManager.animatePokemon(
-                pkmSprite,
-                pkmSprite.pokemon.action,
-                this.flip,
-                false
-              )
             })
           }
           break
@@ -910,17 +914,31 @@ export default class BattleManager {
     })
   }
 
-  displayBoardEvent(event: IBoardEvent) {
-    const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
+  removeBoardEvent(event: IBoardEvent) {
+    //console.log("Removing board event", event)
     const index = event.y * BOARD_WIDTH + event.x
-
     if (event.effect === null) {
       // Clear all effects on this cell
       this.boardEventSprites[index].forEach((sprite) => {
         sprite.destroy()
       })
       this.boardEventSprites[index] = []
+    } else {
+      // Clear specific effect
+      this.boardEventSprites[index].forEach((sprite) => {
+        if (
+          sprite.texture.key === "abilities" &&
+          sprite.frame.name.includes(event.effect)
+        ) {
+          sprite.destroy()
+        }
+      })
     }
+  }
+
+  displayBoardEvent(event: IBoardEvent) {
+    const coordinates = transformEntityCoordinates(event.x, event.y, this.flip)
+    const index = event.y * BOARD_WIDTH + event.x
 
     if (event.effect === EffectEnum.LIGHTNING_STRIKE) {
       const thunderSprite = this.scene.add.sprite(

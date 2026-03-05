@@ -5,19 +5,20 @@ import {
   EEVEE_RATE,
   FALINKS_TROOPER_RATE,
   FishRarityProbability,
+  getAltFormForPlayer,
   getUnownsPoolPerStage,
   HIGH_ROLLER_CHANCE,
   HONEY_CHANCE,
   INCENSE_CHANCE,
   KECLEON_RATE,
   LegendaryPool,
-  MAGNET_PULL_RATE_PER_RARITY,
   MIN_STAGE_FOR_DITTO,
   NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
+  PkmAltFormsByPkm,
+  PkmsWithAltForms,
   PoolSize,
   PortalCarouselStages,
-  PVE_WILD_CHANCE,
   RarityCost,
   RarityProbabilityPerLevel,
   REMORAID_RATE,
@@ -37,7 +38,11 @@ import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
-import { FishingRod, Item, NonSpecialItemComponents } from "../types/enum/Item"
+import {
+  FishingRod,
+  Item,
+  ItemComponentsNoFossilOrScarf
+} from "../types/enum/Item"
 import {
   isRegionalVariant,
   Pkm,
@@ -56,19 +61,16 @@ import {
   chance,
   pickNRandomIn,
   pickRandomIn,
+  randomWeighted,
   shuffleArray
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import {
-  getColorVariantForPlayer,
-  getPokemonBaseline,
-  PkmColorVariantsByPkm
-} from "./pokemon-factory"
+import { getWildChance } from "./colyseus-models/synergies"
+import { getPokemonBaseline } from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
-import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -154,6 +156,8 @@ export function getSellPrice(
     price = SellPrices.EEVEE
   } else if (duo) {
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
+  } else if (name === Pkm.MOTHIM) {
+    price = RarityCost[pokemon.rarity] * 1
   } else {
     price = RarityCost[pokemon.rarity] * stars
   }
@@ -443,7 +447,8 @@ export default class Shop {
       }
 
       let candidates = allCandidates.filter(filterCandidates)
-      if (candidates.length === 0) {
+      const initialCandidatesEmpty = candidates.length === 0
+      if (initialCandidatesEmpty) {
         synergyWanted = undefined
         candidates = allCandidates.filter(filterCandidates)
       }
@@ -456,13 +461,13 @@ export default class Shop {
         if (regionalVariants.length > 0)
           selected = pickRandomIn(regionalVariants)
       }
-      if (selected in PkmColorVariantsByPkm) {
-        selected = getColorVariantForPlayer(selected as Pkm, player)
+      if (selected in PkmAltFormsByPkm) {
+        selected = getAltFormForPlayer(selected as Pkm, player)
       }
 
       if (stageLevel === PortalCarouselStages[0]) {
         player.itemsProposition[i] = pickRandomIn(
-          NonSpecialItemComponents.filter(
+          ItemComponentsNoFossilOrScarf.filter(
             (c) => player.itemsProposition.includes(c) === false
           )
         )
@@ -471,7 +476,7 @@ export default class Shop {
       if (
         stageLevel === PortalCarouselStages[0] &&
         player.pokemonsProposition.includes(Pkm.EEVEE) === false &&
-        (chance(EEVEE_RATE) || candidates.length === 0) &&
+        (chance(EEVEE_RATE) || initialCandidatesEmpty) &&
         state.specialGameRule !== SpecialGameRule.FIRST_PARTNER &&
         state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
       ) {
@@ -512,9 +517,6 @@ export default class Shop {
           )
           if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
         }
-        if (pkm in PkmColorVariantsByPkm) {
-          pkm = getColorVariantForPlayer(pkm, player)
-        }
         return pkm
       })
       .filter((pkm) => {
@@ -524,6 +526,14 @@ export default class Shop {
               types.includes(specificTypeWanted)
             )
           : types.includes(Synergy.WILD) === false
+
+        if (
+          PkmsWithAltForms.includes(pkm) &&
+          getAltFormForPlayer(pkm, player) !== pkm
+        ) {
+          // only keep desired alt form for player
+          return false
+        }
 
         return isOfTypeWanted && !finals.has(getPokemonBaseline(pkm))
       })
@@ -588,21 +598,17 @@ export default class Shop {
       return Pkm.FALINKS_TROOPER
     }
 
-    const isPVE = state.stageLevel in PVEStages
-    const wildChance =
-      player.wildChance +
-      (isPVE || state.stageLevel === 0 ? PVE_WILD_CHANCE : 0)
-
+    const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
     const attractors = values(player.board).filter(
-      (p) => p.items.has(Item.INCENSE) || p.meal === Item.HONEY
+      (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)
     )
     let attractor: Pokemon | null = null
     for (const p of attractors) {
       if (p.items.has(Item.INCENSE) && chance(INCENSE_CHANCE, p)) attractor = p
-      if (p.meal === Item.HONEY && chance(HONEY_CHANCE, p)) attractor = p
+      if (p.dishes.has(Item.HONEY) && chance(HONEY_CHANCE, p)) attractor = p
     }
 
     if (attractor) {
@@ -703,7 +709,7 @@ export default class Shop {
     return Pkm.MAGIKARP
   }
 
-  pickFish(player: Player, rod: FishingRod): Pkm {
+  pickFish(player: Player, rod: FishingRod, state: GameState): Pkm {
     const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
@@ -712,10 +718,11 @@ export default class Shop {
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
+    const wildChance = getWildChance(player, state.stageLevel)
 
     if (
       finals.has(Pkm.REMORAID) === false &&
-      ((mantine && chance(REMORAID_RATE, mantine)) || chance(player.wildChance))
+      ((mantine && chance(REMORAID_RATE, mantine)) || chance(wildChance))
     )
       return Pkm.REMORAID
 
@@ -741,19 +748,26 @@ export default class Shop {
   }
 
   magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
-    const rarity_seed =
-      Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
-    let threshold = 0
     const finals = player.getFinalizedLines()
 
-    let rarity = Rarity.SPECIAL
-    for (const r in MAGNET_PULL_RATE_PER_RARITY) {
-      threshold += MAGNET_PULL_RATE_PER_RARITY[r]
-      rarity = r as Rarity
-      if (rarity_seed < threshold) {
-        break
-      }
+    const rarityProbabilies =
+      RarityProbabilityPerLevel[player.experienceManager.level]
+    const magnetPullRatePerRarity = {
+      [Rarity.COMMON]: rarityProbabilies[0],
+      [Rarity.UNCOMMON]: rarityProbabilies[1],
+      [Rarity.RARE]: rarityProbabilies[2],
+      [Rarity.EPIC]: rarityProbabilies[3],
+      [Rarity.ULTRA]: rarityProbabilies[4],
+      [Rarity.SPECIAL]: 0.35
     }
+    const rarity =
+      randomWeighted(
+        magnetPullRatePerRarity,
+        1.35,
+        meltan.ap,
+        0.5,
+        meltan.luck
+      ) ?? Rarity.SPECIAL
 
     if (rarity !== Rarity.SPECIAL) {
       const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [

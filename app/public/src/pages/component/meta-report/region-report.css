@@ -1,0 +1,123 @@
+#region-report {
+  padding: 1em;
+}
+
+#region-report header {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+
+#region-report header > .pokemon-typeahead {
+  margin-left: auto;
+}
+
+#region-report h2 {
+  margin: 0;
+}
+
+#region-report .filters {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.region-stat {
+  background-color: rgb(84, 89, 107);
+  margin-bottom: 0.5em;
+  color: white;
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 1em;
+  grid-template-columns: 2ch 48px 16ch 12ch 16ch 1fr;
+}
+
+/* Rank */
+.region-stat > .rank {
+  width: 2em;
+  text-align: center;
+  font-weight: bold;
+  flex-shrink: 0;
+  min-width: 2em;
+}
+
+/* Image */
+.region-stat img {
+  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Region name */
+.region-stat > span:nth-of-type(2) {
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+/* Synergies section */
+.region-stat > div:nth-of-type(1) {
+  display: flex !important;
+  gap: 0.5em !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0;
+  min-width: 150px;
+}
+
+/* Stats section (count and average place) */
+.region-stat > div:nth-of-type(2) {
+  display: flex !important;
+  gap: 1.5em !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+
+.region-stat > div:nth-of-type(2) span {
+  display: flex !important;
+  gap: 0.4em !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+/* Popular pokemons section */
+.region-stat > div:nth-of-type(3) {
+  display: flex !important;
+  gap: 0.5em !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  flex-shrink: 1;
+  min-width: auto;
+}
+
+.region-stat > div:nth-of-type(3) label {
+  white-space: nowrap !important;
+  flex-shrink: 0;
+}
+
+.region-stat label {
+  color: #ccc;
+  margin: 0;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .region-stat {
+    flex-wrap: wrap !important;
+    gap: 0.5em !important;
+  }
+
+  #region-report header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

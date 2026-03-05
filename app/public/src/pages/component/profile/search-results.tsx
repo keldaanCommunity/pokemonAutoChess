@@ -1,15 +1,13 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { searchById } from "../../../stores/NetworkStore"
+import { ISuggestionUser } from "../../../../../types"
+import { searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 
-export default function SearchResults() {
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const suggestions = useAppSelector((state) => state.lobby.suggestions)
-
+export default function SearchResults(props: {
+  suggestions: ISuggestionUser[]
+}) {
+  const { suggestions } = props
   return (
     <div>
       <ul className="search-suggestions">
@@ -19,9 +17,7 @@ export default function SearchResults() {
               banned: suggestion.banned === true
             })}
             key={suggestion.id}
-            onClick={(e) => {
-              dispatch(searchById(suggestion.id))
-            }}
+            onClick={() => searchById(suggestion.id)}
           >
             <PokemonPortrait avatar={suggestion.avatar} />
             <span>{suggestion.name}</span>

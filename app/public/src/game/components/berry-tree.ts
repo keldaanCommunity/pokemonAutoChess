@@ -1,8 +1,13 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
-import { getRegionTint } from "../../../../config"
+import {
+  GOLDEN_BERRY_TREE_TYPES,
+  getRegionTint,
+  SynergyTriggers
+} from "../../../../config"
 import Player from "../../../../models/colyseus-models/player"
 import { Transfer } from "../../../../types"
+import { Synergy } from "../../../../types/enum/Synergy"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
@@ -25,14 +30,21 @@ export class BerryTree extends GameObjects.Container {
     this.index = i
     this.player = manager.player
     const stage = this.player.berryTreesStages[i]
-    const type = this.player.berryTreesType[i]
+    const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
+    const grassStep = SynergyTriggers[Synergy.GRASS].filter(
+      (n) => n <= grassLevel
+    ).length
+    const type =
+      grassStep === 4
+        ? GOLDEN_BERRY_TREE_TYPES[i]
+        : this.player.berryTreesType[i]
 
     this.sprite = new Phaser.GameObjects.Sprite(
       this.scene,
       0,
       0,
       "berry_trees",
-      type + "_1"
+      type + "_1.png"
     )
     this.add(this.sprite)
     this.setSize(72, 72)

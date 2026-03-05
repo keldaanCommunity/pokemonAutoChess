@@ -57,11 +57,16 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
     EffectEnum.ENDURE,
     EffectEnum.PURE_POWER
   ],
-  [Synergy.GRASS]: [EffectEnum.INGRAIN, EffectEnum.GROWTH, EffectEnum.SPORE],
+  [Synergy.GRASS]: [
+    EffectEnum.INGRAIN,
+    EffectEnum.GROWTH,
+    EffectEnum.SPORE,
+    EffectEnum.OVERGROW
+  ],
   [Synergy.FIRE]: [
+    EffectEnum.FLAME_BODY,
+    EffectEnum.WILDFIRE,
     EffectEnum.BLAZE,
-    EffectEnum.VICTORY_STAR,
-    EffectEnum.DROUGHT,
     EffectEnum.DESOLATE_LAND
   ],
   [Synergy.WATER]: [

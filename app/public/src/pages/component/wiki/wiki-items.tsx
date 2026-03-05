@@ -1,14 +1,12 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import {
   ArtificialItems,
   Berries,
   Dishes,
   FishingRods,
-  HMs,
   Item,
-  ItemComponents,
+  ItemComponentsNoScarf,
   ItemRecipe,
   MemoryDiscs,
   Mulches,
@@ -17,6 +15,9 @@ import {
   SynergyGems,
   SynergyGemsBuried,
   TMs,
+  TMsBronze,
+  TMsGold,
+  TMsSilver,
   Tools,
   TownItems,
   WeatherRocks
@@ -61,6 +62,8 @@ export default function WikiItems() {
     return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
   }, []) // too many memory discs to display
 
+  const components = ItemComponentsNoScarf
+
   return (
     <div id="wiki-items">
       <article className="craftable">
@@ -79,7 +82,7 @@ export default function WikiItems() {
               >
                 +
               </td>
-              {ItemComponents.map((i) => {
+              {components.map((i) => {
                 return (
                   <th
                     key={i}
@@ -94,7 +97,7 @@ export default function WikiItems() {
                 )
               })}
             </tr>
-            {ItemComponents.map((i) => {
+            {components.map((i) => {
               return (
                 <tr key={"tr-" + i}>
                   <td
@@ -106,7 +109,7 @@ export default function WikiItems() {
                       className="item"
                     ></img>
                   </td>
-                  {ItemComponents.map((j) => {
+                  {components.map((j) => {
                     let tier2Item
                     Object.keys(ItemRecipe).forEach((recipeName) => {
                       if (
@@ -159,6 +162,78 @@ export default function WikiItems() {
 
       <article className="synergy-items">
         <h2>{t("items_from_synergies")}</h2>
+
+        <h3>
+          <SynergyIcon type={Synergy.NORMAL} /> {t("scarves")}
+        </h3>
+        <p>{addIconsToDescription(t("scarves_description"))}</p>
+        <table>
+          <tbody>
+            <tr>
+              <td
+                style={{
+                  fontSize: "300%",
+                  verticalAlign: "middle",
+                  textAlign: "center",
+                  lineHeight: 0
+                }}
+              >
+                +
+              </td>
+              {[...components, Item.SILK_SCARF].map((i) => {
+                return (
+                  <th
+                    key={i}
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={i}
+                  >
+                    <img
+                      src={"assets/item/" + i + ".png"}
+                      className="item"
+                    ></img>
+                  </th>
+                )
+              })}
+            </tr>
+            <tr>
+              <td
+                data-tooltip-id="item-detail-tooltip"
+                data-tooltip-content={Item.SILK_SCARF}
+              >
+                <img
+                  src={"assets/item/" + Item.SILK_SCARF + ".png"}
+                  className="item"
+                ></img>
+              </td>
+              {[...components, Item.SILK_SCARF].map((j) => {
+                let tier2Item
+                Object.keys(ItemRecipe).forEach((recipeName) => {
+                  if (
+                    (ItemRecipe[recipeName][0] == Item.SILK_SCARF &&
+                      ItemRecipe[recipeName][1] == j) ||
+                    (ItemRecipe[recipeName][0] == j &&
+                      ItemRecipe[recipeName][1] == Item.SILK_SCARF)
+                  ) {
+                    tier2Item = recipeName
+                  }
+                })
+                return (
+                  <td
+                    key={"td-" + Item.SILK_SCARF + "-" + j}
+                    data-tooltip-id="item-detail-tooltip"
+                    data-tooltip-content={tier2Item}
+                  >
+                    <img
+                      src={"assets/item/" + tier2Item + ".png"}
+                      className="item"
+                    ></img>
+                  </td>
+                )
+              })}
+            </tr>
+          </tbody>
+        </table>
+
         <h3>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("tools")}
         </h3>
@@ -202,12 +277,13 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.HUMAN} /> {t("tm_hm")}
+          <SynergyIcon type={Synergy.HUMAN} /> {t("tm")}
         </h3>
-        <p>{addIconsToDescription(t("tm_hm_description"))}</p>
+        <p>{addIconsToDescription(t("tm_description"))}</p>
         <ul>
-          <ItemList items={TMs} />
-          <ItemList items={HMs} />
+          <ItemList items={TMsBronze} />
+          <ItemList items={TMsSilver} />
+          <ItemList items={TMsGold} />
         </ul>
 
         <h3>
@@ -215,16 +291,16 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("berries_description"))}</p>
         <ul>
-          {Berries.map((i) => (
+          {Berries.map((berry) => (
             <li
-              key={i}
+              key={berry}
               data-tooltip-id="item-detail-tooltip"
-              data-tooltip-content={i}
+              data-tooltip-content={berry}
             >
-              <img src={"assets/item/" + i + ".png"} className="item"></img>
+              <img src={"assets/item/" + berry + ".png"} className="item"></img>
               <br />
               <img
-                src={"assets/environment/berry_trees/" + i + "_6.png"}
+                src={"assets/environment/berry_trees/" + berry + "_6.png"}
                 className="tree"
               ></img>
             </li>

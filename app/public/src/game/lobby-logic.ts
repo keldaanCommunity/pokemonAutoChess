@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room, RoomAvailable } from "colyseus.js"
+import { getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
 import { NavigateFunction } from "react-router-dom"
@@ -7,8 +7,9 @@ import {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
+import LobbyState from "../../../rooms/states/lobby-state"
 import PreparationState from "../../../rooms/states/preparation-state"
-import { ICustomLobbyState, ISuggestionUser, Transfer } from "../../../types"
+import { Transfer } from "../../../types"
 import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
@@ -18,9 +19,16 @@ import {
   IUserMetadataJSON
 } from "../../../types/interfaces/UserMetadata"
 import { logger } from "../../../utils/logger"
-import { authenticateUser } from "../network"
+import {
+  authenticateUser,
+  client,
+  joinLobby,
+  leaveRoom,
+  removeMessage,
+  rooms
+} from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
-import store, { AppDispatch } from "../stores"
+import { AppDispatch } from "../stores"
 import {
   addRoom,
   addTournament,
@@ -36,14 +44,12 @@ import {
   setBoosterContent,
   setCcu,
   setSearchedUser,
-  setSuggestions,
   updateTournament
 } from "../stores/LobbyStore"
 import {
-  joinLobby,
-  removeMessage,
   setConnectionStatus,
   setErrorAlertMessage,
+  setNotifications,
   setPendingGameId,
   setProfile
 } from "../stores/NetworkStore"
@@ -52,19 +58,17 @@ import { resetPreparation } from "../stores/PreparationStore"
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
   navigate: NavigateFunction
-): Promise<Room<ICustomLobbyState>> {
-  const promise: Promise<Room<ICustomLobbyState>> = new Promise(
+): Promise<Room<{ state: LobbyState }>> {
+  const promise: Promise<Room<{ state: LobbyState }>> = new Promise(
     (resolve, reject) => {
-      const client = store.getState().network.client
-      const lobby = store.getState().network.lobby
-      if (lobby?.connection.isOpen) {
+      if (rooms.lobby?.connection.isOpen) {
         // already connected to a lobby room fully initialized
-        return resolve(lobby)
+        return resolve(rooms.lobby)
       }
 
       authenticateUser().then(async (user) => {
         try {
-          let room: Room<ICustomLobbyState> | undefined = undefined
+          let room: Room<{ state: LobbyState }> | undefined = undefined
 
           const reconnectToken: string = localStore.get(
             LocalStoreKeys.RECONNECTION_LOBBY
@@ -72,7 +76,7 @@ export async function joinLobbyRoom(
           if (reconnectToken) {
             try {
               // if a reconnect token is found, try to reconnect to the lobby room
-              room = await client.reconnect(reconnectToken)
+              room = await client.reconnect<LobbyState>(reconnectToken)
             } catch (error) {
               localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
             }
@@ -81,7 +85,11 @@ export async function joinLobbyRoom(
           if (!room) {
             // otherwise, connect to the lobby room
             const idToken = await user.getIdToken()
-            room = await client.join("lobby", { idToken })
+            room = await client.join<LobbyState>("lobby", { idToken })
+          }
+
+          if (!room) {
+            throw new Error("Failed to join or reconnect to the lobby room")
           }
 
           // store reconnection token for 5 minutes ; server may kick the inactive users before that
@@ -117,7 +125,7 @@ export async function joinLobbyRoom(
             dispatch(pushMessage(m))
           })
           $state.messages.onRemove((m) => {
-            dispatch(removeMessage(m))
+            removeMessage(m, "lobby")
           })
 
           $state.listen("ccu", (value) => {
@@ -127,11 +135,11 @@ export async function joinLobbyRoom(
           $state.tournaments.onAdd((tournament) => {
             dispatch(addTournament(tournament))
             const $tournament = $(tournament)
-            const fields: NonFunctionPropNames<TournamentSchema>[] = [
+            const fields = [
               "id",
               "name",
               "startDate"
-            ]
+            ] satisfies NonFunctionPropNames<TournamentSchema>[]
 
             fields.forEach((field) => {
               $tournament.listen(field, (value) => {
@@ -148,9 +156,9 @@ export async function joinLobbyRoom(
             $tournament.players.onAdd((player, userId) => {
               dispatch(updateTournament()) // TOFIX: force redux reactivity
               const $player = $(player)
-              const fields: NonFunctionPropNames<TournamentPlayerSchema>[] = [
+              const fields = [
                 "eliminated"
-              ]
+              ] satisfies NonFunctionPropNames<TournamentPlayerSchema>[]
               fields.forEach((field) => {
                 $player.listen(field, (value) => {
                   dispatch(
@@ -179,10 +187,10 @@ export async function joinLobbyRoom(
               )
 
               const $bracket = $(bracket)
-              const fields: NonFunctionPropNames<TournamentBracketSchema>[] = [
+              const fields = [
                 "name",
                 "finished"
-              ]
+              ] satisfies NonFunctionPropNames<TournamentBracketSchema>[]
               fields.forEach((field) => {
                 $bracket.listen(field, (value) => {
                   dispatch(
@@ -226,18 +234,16 @@ export async function joinLobbyRoom(
             alert(message)
           })
 
+          room.onMessage(Transfer.NOTIFICATIONS, (notifications) => {
+            dispatch(setNotifications(notifications))
+          })
+
           room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
             rooms.forEach((room) => dispatch(addRoom(room)))
           })
 
           room.onMessage(Transfer.REQUEST_ROOM, async (roomId: string) => {
-            joinExistingPreparationRoom(
-              roomId,
-              client,
-              lobby,
-              dispatch,
-              navigate
-            )
+            joinExistingPreparationRoom(roomId, dispatch, navigate)
           })
 
           room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
@@ -269,15 +275,7 @@ export async function joinLobbyRoom(
             }
           )
 
-          room.onMessage(
-            Transfer.SUGGESTIONS,
-            (suggestions: ISuggestionUser[]) => {
-              dispatch(setSuggestions(suggestions))
-            }
-          )
-
-          dispatch(joinLobby(room)) // lobby room is now fully initialized and accessible from state.network.lobby
-
+          joinLobby(room) // lobby room is now fully initialized and accessible
           resolve(room)
         } catch (error) {
           reject(error)
@@ -299,8 +297,6 @@ export async function joinLobbyRoom(
 
 export async function joinExistingPreparationRoom(
   roomId: string,
-  client: Client,
-  lobby: Room<ICustomLobbyState> | undefined,
   dispatch: AppDispatch,
   navigate: NavigateFunction,
   password?: string
@@ -309,7 +305,7 @@ export async function joinExistingPreparationRoom(
     const token = await firebase.auth().currentUser?.getIdToken()
     if (token) {
       dispatch(resetPreparation())
-      const room: Room<PreparationState> = await client.joinById(roomId, {
+      const room = await client.joinById<PreparationState>(roomId, {
         idToken: token,
         password
       })
@@ -328,7 +324,7 @@ export async function joinExistingPreparationRoom(
         30
       )
       await Promise.allSettled([
-        lobby?.connection.isOpen && lobby.leave(false),
+        leaveRoom("lobby"),
         room.connection.isOpen && room.leave(false)
       ])
       dispatch(resetLobby())

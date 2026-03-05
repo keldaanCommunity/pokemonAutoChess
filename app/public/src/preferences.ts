@@ -14,6 +14,8 @@ export type Keybindings = {
   prev_player: string
   next_player: string
   board_return: string
+  wiki: string
+  team_planner: string
 }
 export interface IPreferencesState {
   musicVolume: number
@@ -25,6 +27,11 @@ export interface IPreferencesState {
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   showEvolutions: boolean
+  showAltForms: boolean
+  showRegularPool: boolean
+  showAdditionalPool: boolean
+  showRegionalPool: boolean
+  showSpecialPool: boolean
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   disableCameraShake: boolean
@@ -45,6 +52,11 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
+  showAltForms: false,
+  showRegularPool: true,
+  showAdditionalPool: true,
+  showRegionalPool: true,
+  showSpecialPool: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   disableCameraShake: true,
@@ -62,18 +74,62 @@ const defaultPreferences: IPreferencesState = {
     emote: "A",
     prev_player: "PAGE_UP",
     next_player: "PAGE_DOWN",
-    board_return: "HOME"
+    board_return: "HOME",
+    wiki: "W",
+    team_planner: "T"
+  }
+}
+
+const LEGACY_DOM_TO_PHASER: Record<string, string> = {
+  ARROWUP: "UP",
+  ARROWDOWN: "DOWN",
+  ARROWLEFT: "LEFT",
+  ARROWRIGHT: "RIGHT"
+}
+
+function migrateLegacyKeybindings(stored: any): {
+  migrated: any
+  changed: boolean
+} {
+  const keybindings = stored?.keybindings
+  if (!keybindings || typeof keybindings !== "object") {
+    return { migrated: stored, changed: false }
+  }
+
+  let changed = false
+  const migratedKeybindings: Record<string, string> = { ...keybindings }
+
+  for (const [action, key] of Object.entries(migratedKeybindings)) {
+    if (typeof key !== "string") continue
+    const mapped = LEGACY_DOM_TO_PHASER[key] ?? key
+    if (mapped !== key) {
+      migratedKeybindings[action] = mapped
+      changed = true
+    }
+  }
+
+  if (!changed) return { migrated: stored, changed: false }
+  return {
+    migrated: { ...stored, keybindings: migratedKeybindings },
+    changed: true
   }
 }
 
 function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
+    const stored = localStore.get(LocalStoreKeys.PREFERENCES)
+
+    const { migrated, changed } = migrateLegacyKeybindings(stored)
+    if (changed) {
+      localStore.put(LocalStoreKeys.PREFERENCES, migrated, Infinity)
+    }
+
     return {
       ...defaultPreferences,
-      ...localStore.get(LocalStoreKeys.PREFERENCES),
+      ...migrated,
       keybindings: {
         ...defaultPreferences.keybindings,
-        ...localStore.get(LocalStoreKeys.PREFERENCES)?.keybindings
+        ...migrated?.keybindings
       }
     }
   } else {

@@ -54,7 +54,9 @@ export class Board {
         const effectsOnNewCell = this.boardEffects[index]
         effectsOnNewCell.forEach((effectOnNewCell) => {
           if (!entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
-            //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
+            // logger.debug(
+            //   `${entity.name} gained effect ${effectOnNewCell} by moving into board effect`
+            // )
             entity.effects.add(effectOnNewCell)
           }
         })
@@ -260,7 +262,7 @@ export class Board {
     cellX: number,
     cellY: number,
     radius: number,
-    includesCenter = false
+    includesCenter: boolean
   ) {
     // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
@@ -295,13 +297,14 @@ export class Board {
 
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
     /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
-    const cells: Cell[] = [
-      {
+    const cells: Cell[] = []
+    if (this.isOnBoard(x0, y0)) {
+      cells.push({
         x: x0,
         y: y0,
         value: this.cells[this.columns * y0 + x0]
-      }
-    ]
+      })
+    }
     const dx = x1 - x0,
       dy = y1 - y0
     const nx = Math.abs(dx),
@@ -328,7 +331,9 @@ export class Board {
         y += sign_y
         iy++
       }
-      cells.push({ x, y, value: this.cells[this.columns * y + x] })
+      if (this.isOnBoard(x, y)) {
+        cells.push({ x, y, value: this.cells[this.columns * y + x] })
+      }
     }
 
     return cells
@@ -379,7 +384,7 @@ export class Board {
     while (candidates[0].value !== undefined && radius < 5) {
       candidates.shift()
       if (candidates.length === 0) {
-        candidates.push(...this.getCellsInRadius(cx, cy, radius))
+        candidates.push(...this.getCellsInRadius(cx, cy, radius, false))
         radius++
       }
     }
@@ -510,6 +515,7 @@ export class Board {
     if (entityOnCell) {
       entityOnCell.effects.add(effect)
     }
+
     if (!previousEffects.has(effect)) {
       this.boardEffects[y * this.columns + x].add(effect)
       // show anim effect client side
@@ -522,18 +528,36 @@ export class Board {
     }
   }
 
-  clearBoardEffect(x: number, y: number, simulation: Simulation) {
+  clearBoardEffect(
+    x: number,
+    y: number,
+    simulation: Simulation,
+    effectToClear?: BoardEffect
+  ) {
     const index = y * this.columns + x
     const existingEffects = this.boardEffects[index]
     const entityOnCell = this.getEntityOnCell(x, y)
 
-    this.boardEffects[index].clear()
-    if (entityOnCell) {
-      existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
-    }
-    if (existingEffects.size > 0) {
-      // clean effect anim client side
-      simulation.room.broadcast(Transfer.BOARD_EVENT, {
+    if (effectToClear) {
+      // Clear specific effect
+      existingEffects.delete(effectToClear)
+      if (entityOnCell) {
+        entityOnCell.effects.delete(effectToClear)
+      }
+      logger.debug(`Clearing board effect ${effectToClear} at (${x}, ${y})`)
+      simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
+        simulationId: simulation.id,
+        effect: effectToClear,
+        x,
+        y
+      })
+    } else {
+      // Clear all effects
+      existingEffects.clear()
+      if (entityOnCell) {
+        existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
+      }
+      simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
         simulationId: simulation.id,
         effect: null,
         x,
@@ -602,6 +626,36 @@ export class Board {
           distanceC(b.positionX, b.positionY, positionX, positionY)
       )[0]
     return closestEnemy
+  }
+
+  /**
+   * Finds the closest ally Pokemon to a given position.
+   * @param positionX - The X coordinate to measure distance from
+   * @param positionY - The Y coordinate to measure distance from
+   * @param allyTeam - The team to filter allies by
+   * @param excludeId - Optional Pokemon id to exclude from results
+   * @returns The closest ally Pokemon entity, or undefined if none found
+   */
+  getClosestAlly(
+    positionX: number,
+    positionY: number,
+    allyTeam: Team,
+    excludeId?: string
+  ): PokemonEntity | undefined {
+    const closestAlly = this.cells
+      .filter(
+        (entity): entity is PokemonEntity =>
+          entity instanceof PokemonEntity &&
+          entity.team === allyTeam &&
+          entity.hp > 0 &&
+          (!excludeId || entity.id !== excludeId)
+      )
+      .sort(
+        (a, b) =>
+          distanceC(a.positionX, a.positionY, positionX, positionY) -
+          distanceC(b.positionX, b.positionY, positionX, positionY)
+      )[0]
+    return closestAlly
   }
 
   /**

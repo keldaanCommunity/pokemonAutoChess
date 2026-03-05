@@ -176,7 +176,7 @@ export class PeriodicEffect extends Effect {
   count: number
 
   constructor(
-    effect: (entity: PokemonEntity, ...others: any[]) => void,
+    effect: (entity: PokemonEntity, board: Board, ...others: any[]) => void,
     origin: EffectOrigin,
     intervalMs: number
   ) {
@@ -186,11 +186,11 @@ export class PeriodicEffect extends Effect {
     this.count = 0
   }
 
-  update(dt: number, entity: PokemonEntity) {
+  update(dt: number, entity: PokemonEntity, board: Board) {
     this.timer -= dt
     if (this.timer <= 0) {
       this.count++
-      this.apply(entity)
+      this.apply(entity, board)
       this.timer = this.intervalMs
     }
   }
@@ -225,6 +225,7 @@ interface OnAttackEffectArgs {
   specialDamage: number
   trueDamage: number
   totalDamage: number
+  crit: boolean
   isTripleAttack?: boolean
   hasAttackKilled?: boolean
 }
@@ -244,14 +245,14 @@ export class OnAbilityCastEffect extends Effect {
   apply(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: PokemonEntity | null,
     crit: boolean
   ) {}
   constructor(
     effect?: (
       pokemon: PokemonEntity,
       board: Board,
-      target: PokemonEntity,
+      target: PokemonEntity | null,
       crit: boolean
     ) => void,
     origin?: EffectOrigin
@@ -293,6 +294,7 @@ export interface OnAttackReceivedEffectArgs {
   totalDamage: number
   isTripleAttack?: boolean
   attackType?: AttackType
+  crit: boolean
 }
 
 export class OnAttackReceivedEffect extends Effect {
@@ -353,6 +355,7 @@ interface OnShieldDepletedEffectArgs {
   pokemon: PokemonEntity
   attacker: PokemonEntity | null
   board: Board
+  damage: number
 }
 
 export class OnShieldDepletedEffect extends Effect {

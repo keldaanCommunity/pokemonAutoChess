@@ -96,27 +96,21 @@ export function selectMatchups(state: GameState): Matchup[] {
   )
 
   /* step 3) get matchup combinations that have the lowest total count */
-  matchupCombinations.sort((a, b) => {
-    return sum(a.map((m) => m.count)) - sum(b.map((m) => m.count))
-  })
-  const lowestTotalCount = sum(matchupCombinations[0].map((m) => m.count))
+  const matchupCombinationsCount = matchupCombinations.map((combination) =>
+    sum(combination.map((m) => m.count))
+  )
+  const lowestTotalCount = Math.min(...matchupCombinationsCount)
   const lowestTotalCountMatchupCombinations = matchupCombinations.filter(
-    (matchups) => {
-      return sum(matchups.map((m) => m.count)) === lowestTotalCount
-    }
+    (matchups, index) => matchupCombinationsCount[index] === lowestTotalCount
   )
 
   /* step 4) get matchup combinations that have the largest total distance */
-  lowestTotalCountMatchupCombinations.sort((a, b) => {
-    return sum(b.map((m) => m.distance)) - sum(a.map((m) => m.distance))
-  })
-  const maxDistance = sum(
-    lowestTotalCountMatchupCombinations[0].map((m) => m.distance)
+  const matchupCombinationsDistance = lowestTotalCountMatchupCombinations.map(
+    (combination) => sum(combination.map((m) => m.distance))
   )
+  const maxDistance = Math.max(...matchupCombinationsDistance)
   const mostDistantMatchups = lowestTotalCountMatchupCombinations.filter(
-    (matchups) => {
-      return sum(matchups.map((m) => m.distance)) === maxDistance
-    }
+    (matchups, index) => matchupCombinationsDistance[index] === maxDistance
   )
 
   /* step 5) pick a random matchup combination among the most distant and the lowest count */
@@ -134,7 +128,7 @@ export function selectMatchups(state: GameState): Matchup[] {
     matchups
       .map(
         (m) =>
-          `${m.a.name} - ${m.b.name} (count: ${m.count}, distance: ${m.distance})`
+          `${m.bluePlayer.name} - ${m.redPlayer.name} (count: ${m.count}, distance: ${m.distance})`
       )
       .join("\n")
   )
@@ -143,7 +137,9 @@ export function selectMatchups(state: GameState): Matchup[] {
     matchupCombinations
       .map(
         (c) =>
-          c.map((m) => `${m.a.name} - ${m.b.name}`).join(" ; ") +
+          c
+            .map((m) => `${m.bluePlayer.name} - ${m.redPlayer.name}`)
+            .join(" ; ") +
           ` (total count: ${sum(c.map((m) => m.count))}, total distance: ${sum(
             c.map((m) => m.distance)
           )})`
@@ -153,7 +149,7 @@ export function selectMatchups(state: GameState): Matchup[] {
   logger.debug("Selected matchups:")
   selectedMatchups.forEach((matchup) => {
     logger.debug(
-      `${matchup.a.name} - ${matchup.b.name} (count: ${
+      `${matchup.bluePlayer.name} - ${matchup.redPlayer.name} (count: ${
         matchup.count
       }, distance: ${matchup.distance}) (${matchup.ghost ? "ghost" : "pvp"})`
     )

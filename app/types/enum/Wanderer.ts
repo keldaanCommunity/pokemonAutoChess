@@ -6,5 +6,7 @@ export enum WandererBehavior {
 export enum WandererType {
   CATCHABLE = "CATCHABLE",
   UNOWN = "UNOWN",
-  SPECIAL = "SPECIAL"
+  UNOWN_SPELL = "UNOWN_SPELL",
+  DIALOG = "DIALOG",
+  OUTLAW = "OUTLAW"
 }

@@ -4,7 +4,7 @@ import { RarityColor } from "../../../../../config"
 import { getPkmWithCustom } from "../../../../../models/colyseus-models/pokemon-customs"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PkmDuo, PkmDuos } from "../../../../../types/enum/Pokemon"
-import { selectCurrentPlayer, useAppSelector } from "../../../hooks"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
@@ -20,9 +20,9 @@ export default function GamePokemonDuoPortrait(props: {
 }) {
   const duo = PkmDuos[props.duo].map((p) => getPokemonData(p))
   const rarityColor = RarityColor[duo[0].rarity]
-  const currentPlayer = useAppSelector(selectCurrentPlayer)
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const duoCustom = duo.map((p) =>
-    getPkmWithCustom(p.index, currentPlayer?.pokemonCustoms)
+    getPkmWithCustom(p.index, spectatedPlayer?.pokemonCustoms)
   )
 
   return (
@@ -46,7 +46,7 @@ export default function GamePokemonDuoPortrait(props: {
             )}
             data-tooltip-id={`tooltip-${props.origin}-${props.index}-${p.index}`}
             style={{
-              backgroundImage: `url("${getCachedPortrait(p.index, currentPlayer?.pokemonCustoms)}")`
+              backgroundImage: `url("${getCachedPortrait(p.index, spectatedPlayer?.pokemonCustoms)}")`
             }}
           ></div>
           <Tooltip

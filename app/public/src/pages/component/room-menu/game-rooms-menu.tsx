@@ -1,18 +1,14 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
+import { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import GameState from "../../../../../rooms/states/game-state"
-import {
-  ICustomLobbyState,
-  IGameMetadata,
-  Role,
-  Transfer
-} from "../../../../../types"
+import { IGameMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { client, leaveRoom, rooms } from "../../../network"
 import { resetLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
@@ -24,13 +20,9 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
     (state) => state.lobby.gameRooms
   ).filter((r) => !gameMode || r.metadata.gameMode === gameMode)
   const navigate = useNavigate()
-  const client: Client = useAppSelector((state) => state.network.client)
   const [isJoining, setJoining] = useState<boolean>(false)
   const [sortBy, setSortBy] = useState<"stage" | "elo" | "name">("stage")
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
-    (state) => state.network.lobby
-  )
   const user = useAppSelector((state) => state.network.profile)
 
   // Function to extract elo from playersInfo strings like "PlayerName [1450]"
@@ -94,9 +86,9 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
     selectedRoom: RoomAvailable<IGameMetadata>
   ) {
     const token = await firebase.auth().currentUser?.getIdToken()
-    if (lobby && !isJoining && token) {
+    if (rooms.lobby && !isJoining && token) {
       setJoining(true)
-      const game: Room<GameState> = await client.joinById(selectedRoom.roomId, {
+      const game = await client.joinById<GameState>(selectedRoom.roomId, {
         idToken: token
       })
       localStore.set(
@@ -105,8 +97,8 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
         30
       )
       await Promise.allSettled([
-        lobby.connection.isOpen && lobby.leave(false),
-        game.connection.isOpen && game.leave(false)
+        leaveRoom("lobby", true),
+        leaveRoom("game", true)
       ])
       dispatch(resetLobby())
       navigate("/game")
@@ -117,7 +109,8 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
     if (action === "join" || action === "spectate") {
       joinGame(room)
     } else if (action === "delete" && user?.role === Role.ADMIN) {
-      confirm("Delete room ?") && lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+      confirm("Delete room ?") &&
+        rooms.lobby?.send(Transfer.DELETE_ROOM, room.roomId)
     }
   }
 
