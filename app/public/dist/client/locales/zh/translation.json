@@ -559,7 +559,8 @@
 		"JET_PUNCH": "喷射拳",
 		"BANEFUL_BUNKER": "碉堡",
 		"SHADOW_FORCE": "暗影潜袭",
-		"SHADOW_CLAW": "暗影爪"
+		"SHADOW_CLAW": "暗影爪",
+		"FEATHER_DANCE": "羽毛舞"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1718,7 +1719,9 @@
 		"PALAFIN": "海豚侠",
 		"PALAFIN_HERO": "海豚侠（全能形态）",
 		"MAREANIE": "好坏星",
-		"TOXAPEX": "超坏星"
+		"TOXAPEX": "超坏星",
+		"DUCKLETT": "鸭宝宝",
+		"SWANNA": "舞天鹅"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1887,7 +1890,7 @@
 		"DEATH_WING": "对目标造成[150,SP]点SPECIAL。使用者自身恢复造成伤害的75%。",
 		"SLACK_OFF": "清除自身所有负面状态，恢复[30,SP]%的最大HP，并陷入SLEEP 3秒。",
 		"DARK_VOID": "对目标周围4格半径内的所有敌方宝可梦造成[30,SP]点SPECIAL，并有[80,LK]%的概率使他们陷入SLEEP 2秒。",
-		"OVERHEAT": "对使用者周围4格半径内的所有敌方宝可梦造成[50,SP]点SPECIAL，对处于BURN的宝可梦造成的伤害增加30%。解除所有宝可梦的FREEZE。",
+		"OVERHEAT": "对使用者周围4格半径内的所有敌方宝可梦造成[50,SP]点SPECIAL，对处于BURN的宝可梦造成的伤害增加30%。解除此范围内所有宝可梦的FREEZE。",
 		"HYPNOSIS": "使最远的敌方宝可梦陷入SLEEP [2,3.5,6,SP=0.5]秒。",
 		"MIMIC": "复制当前目标的招式。",
 		"HEX": "对目标造成[20,40,80,SP]点SPECIAL。若目标处于负面状态下，造成的伤害翻倍。",
@@ -2172,7 +2175,7 @@
 		"ARMOR_CANNON": "发射熊熊燃烧的炮弹，对目标造成[50,SP]点SPECIAL，随后弹射至最近的[2,SP]名敌方宝可梦，对他们也各造成[50,SP]点SPECIAL，最后弹射回到初始目标再造成[25,SP]点SPECIAL。",
 		"BITTER_BLADE": "将对世间的留恋聚集于剑尖，并斩击所有ADJACENT敌方宝可梦，造成[70,SP]点SPECIAL。每击中一只敌方宝可梦，使用者自身恢复10%的HP。",
 		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的CONE内的敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害的50%。",
-		"ROOST": "飞离对手，移动到己方半场的后排，陷入SLEEP 1秒，并获得[20,40,80,SP]点SHIELD。",
+		"ROOST": "飞离对手，移动到我方后排，陷入SLEEP 1秒，并获得[20,40,80,SP]点SHIELD。",
 		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成SPECIAL，数值相当于[100,SP]%的ATK加[100,SP]。",
 		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL。使用者的ATK比目标的越高，造成的伤害越高。",
 		"LASER_BLADE": "每次使用招式时依次循环执行以下行为之一：\n1.旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的ADJACENT宝可梦造成[25,SP]点SPECIAL；\n2.向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[25,SP]。",
@@ -2257,7 +2260,8 @@
 		"JET_PUNCH": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的SPEED。",
 		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并进入PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
-		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。"
+		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
+		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
