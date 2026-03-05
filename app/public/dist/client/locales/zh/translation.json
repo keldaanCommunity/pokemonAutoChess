@@ -560,7 +560,8 @@
 		"BANEFUL_BUNKER": "碉堡",
 		"SHADOW_FORCE": "暗影潜袭",
 		"SHADOW_CLAW": "暗影爪",
-		"FEATHER_DANCE": "羽毛舞"
+		"FEATHER_DANCE": "羽毛舞",
+		"GLACIAL_LANCE": "雪矛"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1721,7 +1722,8 @@
 		"MAREANIE": "好坏星",
 		"TOXAPEX": "超坏星",
 		"DUCKLETT": "鸭宝宝",
-		"SWANNA": "舞天鹅"
+		"SWANNA": "舞天鹅",
+		"GLASTRIER": "雪暴马"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1958,7 +1960,7 @@
 		"POISON_JAB": "对目标造成[30,60,90,SP]点SPECIAL，并与其交换位置。使用者和目标均陷入POISONNED 3秒。",
 		"SHELL_SMASH": "对ADJACENT敌方宝可梦造成[15,30,SP]点SPECIAL。使用者提升2点ATK，20点AP和20点SPEED，但降低2点DEF和2点SPE_DEF。",
 		"HELPING_HAND": "使最近的2只我方宝可梦获得[30,60,100,SP]点SHIELD，且其下一个招式的伤害翻倍。",
-		"ASTRAL_BARRAGE": "向随机敌方宝可梦发射[7,SP]只小幽灵，每只造成20点SPECIAL。",
+		"ASTRAL_BARRAGE": "突进至我方后排的安全位置，并向随机敌方宝可梦发射[7,SP]只小幽灵，每只造成20点SPECIAL。",
 		"WATERFALL": "获得[50,100,150,SP]点SHIELD，移除全部负面状态，并移除当前所在位置的BOARD_EFFECT。",
 		"PYRO_BALL": "点燃小石子，形成火球攻击最远的目标，对其经过的所有宝可梦造成[10,20,40,SP]点SPECIAL，并使他们陷入BURN 2秒。",
 		"WHIRLPOOL": "锁定最远的敌方宝可梦，向其释放4道潮旋，每道潮旋分别对其击中的第一只敌方宝可梦造成SPECIAL，数值相当于[100,SP]%的ATK。",
@@ -2233,7 +2235,7 @@
 		"PLASMA_FISSION": "对当前目标发射一道等离子箭，对击中的第一个目标造成[60,SP]点SPECIAL。等离子箭随后会分裂为两支，对每个经过的敌方宝可梦造成SPECIAL，数值相当于上一次所造成SPECIAL的50%。",
 		"SUPER_HEAT": "发射一道锥形火焰，在3秒内总计造成9次[10,SP]点SPECIAL，并使击中的敌方宝可梦陷入ARMOR_BREAK 1秒。",
 		"POWER_WASH": "用等离子水滴冲刷敌方宝可梦HP之和最高的横排，造成总计[160,SP]点SPECIAL，平均分配至所有击中的敌方宝可梦身上。",
-		"DEEP_FREEZE": "在3秒内发射9支寒冰箭，每支造成[10,SP]点SPECIAL并降低目标1点SPE_DEF。若当前目标倒下，寒冰箭会攻击最近的下一个敌方宝可梦。",
+		"DEEP_FREEZE": "在3秒内发射9支寒冰箭，每支造成[10,SP]点SPECIAL并降低目标1点SPE_DEF。若当前目标倒下，寒冰箭会攻击最近的下一只敌方宝可梦。",
 		"PLASMA_TEMPEST": "飞离对手并对最近的敌方宝可梦发射3支等离子箭，每支造成[40,SP]点SPECIAL，每经过一只敌方宝可梦使伤害衰减10%。",
 		"TRIMMING_MOWER": "冲刺至多2格以寻找能命中最多敌方宝可梦的位置，并恢复[60,SP]点HP，溢出治疗量转化为SHIELD。随后对ADJACENT敌方宝可梦造成[40,SP]点SPECIAL。",
 		"PLASMA_FLASH": "发射4束等离子闪光，每束造成[20,SP]点SPECIAL。每次释放招式后，下一次多发射1束光。",
@@ -2251,7 +2253,7 @@
 		"LINGERING_AROMA": "在接下来的5秒内，使用者受到近战攻击时使攻击者受到[10,20,SP]点SPECIAL，并失去5点PP。",
 		"RAGING_BULL": "移除目标的PROTECT，$t(ability.REFLECT)，$t(ability.MAGIC_BOUNCE)等防护类状态，并使之陷入ARMOR_BREAK 3秒，随后对其造成[20,40,80,SP]点SPECIAL。",
 		"ELECTRIFY": "使STRONGEST非ELECTRIC我方宝可梦获得ELECTRIC_FIELD，当前激活的ELECTRIC共鸣效果和[15,30,60,SP]点SHIELD。若没有满足条件的我方宝可梦，对自身释放此招式。",
-		"HEADLONDING_RUSH": "突进至最远的敌方宝可梦的位置，对其造成[20,40,80,SP]点SPECIAL。对经过的所有敌方宝可梦造成[10,20,30,SP]点SPECIAL，并将他们击退。每对一个敌方宝可梦造成伤害，使用者降低1点DEF和1点SPE_DEF。",
+		"HEADLONDING_RUSH": "突进至最远的敌方宝可梦的位置，对其造成[20,40,80,SP]点SPECIAL。对经过的所有敌方宝可梦造成[10,20,30,SP]点SPECIAL，并将他们击退。每对一只敌方宝可梦造成伤害，使用者降低1点DEF和1点SPE_DEF。",
 		"WAVE_SPLASH": "用水包裹自身，获得SHIELD，数值相当于使用者[20,SP]%的最大HP，然后冲撞目标，对其造成SPECIAL，数值相当于使用者[20,SP]%的最大HP。",
 		"TWISTER": "兴起龙卷风，对ADJACENT敌方宝可梦造成[25,50,100,SP]点SPECIAL，并将他们向随机方向击退[1,2,3]格。ADJACENT我方FLYING宝可梦乘风飞离，触发一次共鸣效果。",
 		"FOCUS_PUNCH": "集中精神出拳，在1秒后突进至目标所在的位置，对其造成SPECIAL，数值相当于[500,SP]%的ATK，并将其击退。若目标没有和任何宝可梦相撞，其将被推出场外。",
@@ -2261,7 +2263,8 @@
 		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并进入PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
-		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。"
+		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
+		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标透支一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3142,6 +3145,7 @@
 		"UNOWN": "未知图腾不能携带道具，且会在一场战斗或释放招式后消失。",
 		"GLISCOR": "此宝可梦陷入的第一层POISONNED改为为其恢复HP。",
 		"GRIM_NEIGH": "此宝可梦击倒敌方宝可梦时，会用恐怖的声音嘶鸣，提升自身30点AP。",
+		"CHILLING_NEIGH": "此宝可梦击倒敌方宝可梦时，会用冰冷的声音嘶鸣，提升自身5点ATK。",
 		"SHAYMIN": "谢米似乎需要一朵GRACIDEA_FLOWER……",
 		"BEAST_BOOST_ATK": "击倒敌方宝可梦时，提升此宝可梦5点ATK。",
 		"BEAST_BOOST_AP": "击倒敌方宝可梦时，提升此宝可梦10点AP。",
