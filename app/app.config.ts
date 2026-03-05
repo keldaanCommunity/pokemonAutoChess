@@ -421,10 +421,7 @@ export const server = defineServer({
 
         const users = await UserMetadata.find(
           {
-            displayName: {
-              $gte: searchTerm,
-              $lt: searchTerm + "\uffff"
-            },
+            displayName: { $regex: searchTerm, $options: "i" },
             ...(showBanned ? {} : { banned: false })
           },
           [
@@ -437,8 +434,7 @@ export const server = defineServer({
           ],
           {
             limit: 100,
-            sort: { level: -1 },
-            collation: { locale: "en", strength: 2 }
+            sort: { level: -1 }
           }
         )
 
