@@ -16137,7 +16137,7 @@ export class ShadowClawStrategy extends AbilityStrategy {
       )
       damageDone += report.takenDamage
     }
-    pokemon.handleHeal(damageDone * 0.25, pokemon, 1, crit)
+    pokemon.handleHeal(damageDone * 0.25, pokemon, 0, false)
   }
 }
 
