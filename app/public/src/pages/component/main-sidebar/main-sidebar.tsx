@@ -21,6 +21,7 @@ import PokemonCollection from "../collection/pokemon-collection"
 import Jukebox from "../jukebox/jukebox"
 import MetaReport from "../meta-report/meta-report"
 import { Modal } from "../modal/modal"
+import ModerationPanel from "../moderation/moderation-panel"
 import GameOptionsModal from "../options/game-options-modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
@@ -279,6 +280,18 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
+        {page !== "game" &&
+          (profile?.role === Role.MODERATOR ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink
+              svg="hammer"
+              location="moderation"
+              handleClick={changeModal}
+            >
+              Moderation
+            </NavLink>
+          )}
+
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
             <NavLink
@@ -434,6 +447,7 @@ function NavLink(props: NavLinkProps) {
 export type Modals =
   | "announcement"
   | "booster"
+  | "moderation"
   | "collection"
   | "jukebox"
   | "keybinds"
@@ -548,6 +562,13 @@ function Modals({
         header="Tournaments"
       >
         <TournamentsAdmin />
+      </Modal>
+      <Modal
+        onClose={closeModal}
+        show={modal === "moderation"}
+        header="Moderation"
+      >
+        <ModerationPanel />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />
