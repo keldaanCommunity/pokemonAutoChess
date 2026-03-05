@@ -4,7 +4,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { USERNAME_REGEXP } from "../../../../../config"
 import { IChatV2, ISuggestionUser } from "../../../../../types"
 import { debounce } from "../../../../../utils/function"
-import { renameAccount, searchMessages } from "../../../network"
+import { renameAccount, searchById, searchMessages } from "../../../network"
 import ChatHistory from "../chat/chat-history"
 import SearchResults from "../profile/search-results"
 import "./moderation-panel.css"
@@ -14,10 +14,14 @@ export default function ModerationPanel() {
     <div className="moderation-panel">
       <Tabs>
         <TabList>
+          <Tab>Search by user ID</Tab>
           <Tab>Search by message content</Tab>
           <Tab>Rename accounts</Tab>
         </TabList>
 
+        <TabPanel>
+          <SearchByUserId />
+        </TabPanel>
         <TabPanel>
           <SearchByMessageContent />
         </TabPanel>
@@ -240,6 +244,38 @@ function RenameAccounts() {
           )}
         </div>
       )}
+    </div>
+  )
+}
+
+function SearchByUserId() {
+  const [uid, setUid] = useState("")
+
+  function handleSearch() {
+    const trimmed = uid.trim()
+    if (!trimmed) return
+    searchById(trimmed)
+  }
+
+  return (
+    <div className="moderation-search">
+      <div className="moderation-search-bar">
+        <input
+          type="text"
+          className="moderation-search-input"
+          placeholder="User ID…"
+          value={uid}
+          onChange={(e) => setUid(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+        />
+        <button
+          className="bubbly blue"
+          disabled={uid.trim().length === 0}
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
     </div>
   )
 }
