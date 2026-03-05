@@ -54,7 +54,8 @@ const userMetadataSchema = new Schema({
     default: 0
   },
   eventFinishTime: {
-    type: Date
+    type: Date,
+    sparse: true
   },
   booster: {
     type: Number,

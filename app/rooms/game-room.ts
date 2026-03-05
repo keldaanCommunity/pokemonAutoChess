@@ -992,7 +992,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
               usr.markModified("eventFinishTime")
 
               const nbFinishers = await UserMetadata.countDocuments({
-                eventFinishTime: { $ne: null }
+                eventFinishTime: { $exists: true, $ne: null }
               })
               if (nbFinishers === 0) {
                 player.titles.add(Title.VICTORIOUS)

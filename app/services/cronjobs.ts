@@ -182,7 +182,7 @@ async function resetEventScores() {
         $or: [
           { eventPoints: { $gt: 0 } },
           { maxEventPoints: { $gt: 0 } },
-          { eventFinishTime: { $ne: null } }
+          { eventFinishTime: { $exists: true, $ne: null } }
         ]
       },
       {
