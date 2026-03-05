@@ -97,33 +97,6 @@ const userMetadataSchema = new Schema({
       selectedShiny: {
         type: Boolean
       },
-      //LEGACY: Emotions and shinyEmotions are now stored in unlocked field
-      //TO BE REMOVED after migration
-      emotions: {
-        type: [
-          {
-            type: String,
-            enum: Emotion
-          }
-        ],
-        required: false,
-        default: () => {
-          return undefined
-        } // important otherwise mongoose will create empty array
-      },
-      shinyEmotions: {
-        type: [
-          {
-            type: String,
-            enum: Emotion
-          }
-        ],
-        required: false,
-        default: () => {
-          return undefined
-        } // important otherwise mongoose will create empty array
-      },
-      // END LEGACY
       id: {
         type: String
       },
