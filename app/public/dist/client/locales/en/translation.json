@@ -4136,7 +4136,7 @@
 	"bot_admin": "Bot Admin",
 	"change_name": "Change Name",
 	"invalid_username": "Invalid username. Username must be between 3 and 24 characters, start with a letter, only contain letters or numbers or \".-_\" , no whitespaces.",
-	"username_disclaimer": "Inappropriate usernames will lead to a ban of your account. This includes profanity, adult/sexual themes, direct & indirect threats, political statements, and advertisement for things not related to the game.",
+	"username_disclaimer": "Inappropriate usernames will lead to a ban of your account. This includes:\n- illegal: hate speech, threats, references to illegal material\n- explicit: things you can't say it in front of your mother or lil bro\n- offensive: some players may legitimately be pissed off when reading the name\n- impersonating: pretend to be a staff member or another well-known player\n- harassing: targeting another specific user (e.g., \"User123_is_a_Loser\")\n- advertising: promoting external content unrelated to the game (e.g. \"JoinMySiteDOTcom\")\n- unicode/character abuse: invisible characters, excessive Zalgo text, or characters that can break the UI.",
 	"change": "Change",
 	"change_avatar": "Change Avatar",
 	"play_more_games_hint": "Play more games to earn boosters and unlock new avatars !",
