@@ -108,10 +108,8 @@ export default class Simulation extends Schema implements ISimulation {
   constructor(
     id: string,
     room: GameRoom,
-    blueBoard: MapSchema<Pokemon>,
-    redBoard: MapSchema<Pokemon>,
     bluePlayer: Player,
-    redPlayer: Player | undefined,
+    redPlayer: Player | { id: "pve"; board: MapSchema<Pokemon> },
     stageLevel: number,
     weather: Weather,
     isGhostBattle = false
@@ -120,9 +118,9 @@ export default class Simulation extends Schema implements ISimulation {
     this.id = id
     this.room = room
     this.bluePlayer = bluePlayer
-    this.redPlayer = redPlayer
+    this.redPlayer = redPlayer.id === "pve" ? undefined : (redPlayer as Player)
     this.bluePlayerId = bluePlayer.id
-    this.redPlayerId = redPlayer?.id ?? "pve"
+    this.redPlayerId = redPlayer.id
     this.stageLevel = stageLevel
     this.weather = weather
     this.isGhostBattle = isGhostBattle
@@ -159,8 +157,8 @@ export default class Simulation extends Schema implements ISimulation {
       this.redEffects.add(weatherEffect)
     }
 
-    bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
-    redPlayer?.effects.forEach((e) => this.redEffects.add(e))
+    this.bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
+    this.redPlayer?.effects.forEach((e) => this.redEffects.add(e))
 
     this.finished = false
     this.winnerId = ""
@@ -173,7 +171,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.tidalWaveTimer = 7000
     }
 
-    blueBoard.forEach((pokemon) => {
+    this.bluePlayer.board.forEach((pokemon) => {
       if (!isOnBench(pokemon)) {
         this.addPokemon(
           pokemon,
@@ -184,6 +182,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
     })
 
+    const redBoard = this.redPlayer ? this.redPlayer.board : redPlayer.board
     redBoard.forEach((pokemon) => {
       if (!isOnBench(pokemon)) {
         this.addPokemon(
@@ -195,7 +194,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
     })
 
-    this.applyPostEffects(blueBoard, redBoard)
+    this.applyPostEffects(bluePlayer.board, redBoard)
   }
 
   start() {

@@ -1931,10 +1931,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const simulation = new Simulation(
             nanoid(),
             this.room,
-            player.board,
-            pveBoard,
             player,
-            undefined,
+            { id: "pve", board: pveBoard },
             this.state.stageLevel,
             weather
           )
@@ -1986,8 +1984,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const simulation = new Simulation(
           simulationId,
           this.room,
-          bluePlayer.board,
-          redPlayer.board,
           bluePlayer,
           redPlayer,
           this.state.stageLevel,
