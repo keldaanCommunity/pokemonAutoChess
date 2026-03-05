@@ -61,9 +61,9 @@ function SearchByMessageContent() {
 
   return (
     <div className="moderation-search moderation-chat-search">
-      <p>
-        Searching messages in content is performance-intensive. Use it in
-        moderation (pun intended).
+      <p className="moderation-warning">
+        Searching in all messages is costly in performance. Use it in moderation
+        (pun intended).
       </p>
       <div className="moderation-search-bar">
         <input
@@ -87,7 +87,7 @@ function SearchByMessageContent() {
       {error && <p className="moderation-error">{error}</p>}
 
       {results !== null && (
-        <div className="moderation-results">
+        <div className="moderation-results my-box">
           {results.length === 0 ? (
             <p className="moderation-no-results">No messages found.</p>
           ) : (
@@ -208,12 +208,17 @@ function RenameAccounts() {
           <SearchResults suggestions={suggestions} onSelect={selectUser} />
         </div>
       )}
+      {suggestions.length === 0 &&
+        query.trim().length >= 2 &&
+        !searchLoading && (
+          <p className="moderation-no-results">No users found.</p>
+        )}
 
       {selected && (
-        <div className="moderation-rename-form">
+        <div className="moderation-rename-form my-box">
           <p className="moderation-hint">
             Renaming <strong>{selected.name}</strong>
-            <span className="moderation-uid"> ({selected.id})</span>
+            <span className="moderation-uid"> (UID: {selected.id})</span>
           </p>
           <div className="moderation-search-bar">
             <input
