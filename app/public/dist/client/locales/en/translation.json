@@ -3420,7 +3420,7 @@
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical attacks, and can adapt to weather.",
 		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
 		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.",
-		"ICE": "ICE Pokémon have [25,LK]% chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team.",
+		"ICE": "ICE Pokémon have [20,LK]% chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team.",
 		"FOSSIL": "At 30% HP, FOSSIL Pokemon awaken their primordial power, gaining SHIELD and ATK.",
 		"SOUND": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats.",
 		"ARTIFICIAL": "ARTIFICIAL Pokémon give tools and gain ATK, AP and SHIELD when holding items.",

@@ -2930,7 +2930,7 @@
 		"ROCK": "ROCK Pokémon erhalten DEF und widerstehen kritischem Schaden besser",
 		"GHOST": "GHOST Pokémon haben eine [15,LK]% Chance, bei einem Treffer SILENCE auszulösen und Angriffen auszuweichen, und verschiedene Flüche auf Gegner zu Beginn des Kampfes anzuwenden.",
 		"FAIRY": "FAIRY Pokémon verursachen mit ihren Angriffen zusätzliche SPECIAL und lösen Schocks aus, wenn sie einen kritischen Treffer erleiden.",
-		"ICE": "ICE Pokémon haben [25,LK]% Chance, den Gegner nach einem Treffer für 2 Sekunden zu FREEZE und dem gesamten Team SPE_DEF zu geben",
+		"ICE": "ICE Pokémon haben [20,LK]% Chance, den Gegner nach einem Treffer für 2 Sekunden zu FREEZE und dem gesamten Team SPE_DEF zu geben",
 		"FOSSIL": "Bei 30 % HP erwecken FOSSIL Pokémon ihre Urkraft und erhalten SHIELD und ATK.",
 		"SOUND": "SOUND Pokémon stoßen einen Schrei aus, wenn sie ihre Fähigkeiten einsetzen, wecken damit schlafende Verbündete und verleihen ihnen Bonuswerte",
 		"ARTIFICIAL": "ARTIFICIAL Pokémon geben $t(tools) und erhalten ATK, AP und SHIELD, wenn sie Items tragen.",

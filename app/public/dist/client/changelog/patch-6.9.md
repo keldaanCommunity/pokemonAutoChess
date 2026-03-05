@@ -28,6 +28,7 @@
 - New effect for WILD 9: Once below 30% HP, gain 30 Shield and double the Attack and Speed buffs for 3 seconds.
 
 - Fighting now only throw away melee enemies (1 range)
+- Nerf Ice: Freeze chance 25% → 20%
 
 # Changes to Pokémon & Abilities
 
@@ -58,6 +59,8 @@
 
 - Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
 - Added visual effects for support items on adjacent positions
+- Buff Black Belt: 20% → 25% crit chance
+- Nerf Nullify Bandanna: removed 30 base shield
 
 # Changes to Gameplay
 
