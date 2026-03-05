@@ -114,7 +114,10 @@ export default function Profile() {
         ) : error ? (
           <div className="error">{error}</div>
         ) : suggestions.length > 0 ? (
-          <SearchResults suggestions={suggestions} />
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => searchById(suggestion.id)}
+          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
