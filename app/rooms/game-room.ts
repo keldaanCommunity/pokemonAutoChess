@@ -846,6 +846,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     })
 
+    let shouldRefetchEventLeaderboard = false
     const eligibleToELO =
       !this.state.noElo &&
       (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
@@ -978,37 +979,42 @@ export default class GameRoom extends Room<{ state: GameState }> {
         })
 
         if (usr.eventFinishTime == null) {
-          const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
-          usr.eventPoints = clamp(
-            usr.eventPoints + eventPointsGained,
-            0,
-            MAX_EVENT_POINTS
-          )
-          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
-          if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
-            usr.eventFinishTime = new Date()
-
-            const nbFinishers = await UserMetadata.countDocuments({
-              eventFinishTime: { $ne: null }
-            })
-            if (nbFinishers === 0) {
-              player.titles.add(Title.VICTORIOUS)
-              this.presence.publish(
-                "announcement",
-                `${player.name} won the Victory Road race !`
-              )
-            }
-            player.titles.add(Title.FINISHER)
-            notificationsService.addNotification(
-              player.id,
-              "victory_road_finished",
-              `${nbFinishers + 1}`
+          try {
+            const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+            usr.eventPoints = clamp(
+              usr.eventPoints + eventPointsGained,
+              0,
+              MAX_EVENT_POINTS
             )
-            fetchEventLeaderboard() // a new finisher is enough to justify fetching the leaderboard again immediately
-          }
+            usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+            if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
+              usr.eventFinishTime = new Date()
+              usr.markModified("eventFinishTime")
 
-          if (usr.maxEventPoints >= 100) {
-            player.titles.add(Title.RUNNER)
+              const nbFinishers = await UserMetadata.countDocuments({
+                eventFinishTime: { $ne: null }
+              })
+              if (nbFinishers === 0) {
+                player.titles.add(Title.VICTORIOUS)
+                this.presence.publish(
+                  "announcement",
+                  `${player.name} won the Victory Road race !`
+                )
+              }
+              player.titles.add(Title.FINISHER)
+              notificationsService.addNotification(
+                player.id,
+                "victory_road_finished",
+                `${nbFinishers + 1}`
+              )
+              shouldRefetchEventLeaderboard = true
+            }
+
+            if (usr.maxEventPoints >= 100) {
+              player.titles.add(Title.RUNNER)
+            }
+          } catch (error) {
+            logger.error("Error updating event points", error)
           }
         }
       }
@@ -1089,7 +1095,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
       //logger.debug(usr);
       //usr.markModified('metadata');
-      usr.save()
+      await usr.save()
+      if (shouldRefetchEventLeaderboard) {
+        await fetchEventLeaderboard()
+      }
     }
   }
 
