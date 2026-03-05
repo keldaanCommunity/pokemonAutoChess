@@ -391,6 +391,7 @@ export enum Pkm {
   GLACEON = "GLACEON",
   GLALIE = "GLALIE",
   GLAMEOW = "GLAMEOW",
+  GLASTRIER = "GLASTRIER",
   GLIGAR = "GLIGAR",
   GLISCOR = "GLISCOR",
   GLIMMET = "GLIMMET",
@@ -2292,7 +2293,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.ZARUDE]: "0893",
   [Pkm.REGIELEKI]: "0894",
   [Pkm.REGIDRAGO]: "0895",
-  //[Pkm.GLASTRIER]: "0896",
+  [Pkm.GLASTRIER]: "0896",
   [Pkm.SPECTRIER]: "0897",
   //[Pkm.CALYREX]: "0898",
   //[Pkm.CALYREX_ICE]: "0898-0001",
@@ -3594,7 +3595,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.MAREANIE]: Pkm.MAREANIE,
   [Pkm.TOXAPEX]: Pkm.MAREANIE,
   [Pkm.DUCKLETT]: Pkm.DUCKLETT,
-  [Pkm.SWANNA]: Pkm.DUCKLETT
+  [Pkm.SWANNA]: Pkm.DUCKLETT,
+  [Pkm.GLASTRIER]: Pkm.GLASTRIER
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

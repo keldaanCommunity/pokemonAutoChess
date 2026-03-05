@@ -43,7 +43,11 @@ import {
 } from "../effects/effect"
 import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
 import { FlyingProtectionEffect } from "../effects/synergies"
-import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
+import {
+  getMoveSpeed,
+  getStrongestUnit,
+  PokemonEntity
+} from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
 import {
@@ -6232,6 +6236,15 @@ export class AstralBarrageStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
+    const corner = board.getTeleportationCell(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team
+    )
+    if (corner) {
+      pokemon.moveTo(corner.x, corner.y, board, false)
+    }
+
     const damagePerGhost = 20
 
     const enemies: PokemonEntity[] = []
@@ -6242,25 +6255,30 @@ export class AstralBarrageStrategy extends AbilityStrategy {
     })
 
     const nbGhosts = 7 * (1 + pokemon.ap / 100)
+    const delay = Math.round(500 / getMoveSpeed(pokemon)) / (nbGhosts + 1)
+
     for (let i = 0; i < nbGhosts; i++) {
       const randomTarget = pickRandomIn(enemies)
       pokemon.commands.push(
-        new DelayedCommand(() => {
-          pokemon.broadcastAbility({
-            targetX: randomTarget.positionX,
-            targetY: randomTarget.positionY
-          })
-          if (randomTarget?.hp > 0) {
-            randomTarget.handleSpecialDamage(
-              damagePerGhost,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit,
-              false
-            )
-          }
-        }, 100 * i)
+        new DelayedCommand(
+          () => {
+            pokemon.broadcastAbility({
+              targetX: randomTarget.positionX,
+              targetY: randomTarget.positionY
+            })
+            if (randomTarget?.hp > 0) {
+              randomTarget.handleSpecialDamage(
+                damagePerGhost,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit,
+                false
+              )
+            }
+          },
+          delay * (i + 1)
+        )
       )
     }
   }
@@ -16141,6 +16159,80 @@ export class ShadowClawStrategy extends AbilityStrategy {
   }
 }
 
+export class GlacialLanceStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const corner = board.getTeleportationCell(
+      pokemon.positionX,
+      pokemon.positionY,
+      pokemon.team
+    )
+    if (corner) {
+      pokemon.moveTo(corner.x, corner.y, board, false)
+    }
+    pokemon.commands.push(
+      new DelayedCommand(
+        () => {
+          const damage = 3 * pokemon.atk
+          const farthestTarget =
+            pokemon.state.getFarthestTarget(pokemon, board) ?? target
+          let targetHit: PokemonEntity = farthestTarget
+
+          const cells = board.getCellsBetween(
+            pokemon.positionX,
+            pokemon.positionY,
+            farthestTarget.positionX,
+            farthestTarget.positionY
+          )
+          for (const cell of cells) {
+            if (cell.value && cell.value.team != pokemon.team) {
+              targetHit = cell.value
+              break
+            }
+          }
+
+          pokemon.broadcastAbility({
+            targetX: targetHit.positionX,
+            targetY: targetHit.positionY
+          })
+
+          pokemon.commands.push(
+            new DelayedCommand(() => {
+              targetHit.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+
+              board
+                .getAdjacentCells(targetHit.positionX, targetHit.positionY)
+                .forEach((cell) => {
+                  if (cell.value && cell.value.team !== pokemon.team) {
+                    cell.value.handleSpecialDamage(
+                      damage * 0.5,
+                      board,
+                      AttackType.SPECIAL,
+                      pokemon,
+                      crit
+                    )
+                  }
+                })
+            }, 500)
+          )
+        },
+        corner ? Math.round(500 / getMoveSpeed(pokemon)) : 0
+      )
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16682,7 +16774,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BANEFUL_BUNKER]: new BanefulBunkerStrategy(),
   [Ability.SHADOW_CLAW]: new ShadowClawStrategy(),
   [Ability.SHADOW_FORCE]: new ShadowForceStrategy(),
-  [Ability.FEATHER_DANCE]: new FeatherDanceStrategy()
+  [Ability.FEATHER_DANCE]: new FeatherDanceStrategy(),
+  [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy()
 }
 
 export function castAbility(

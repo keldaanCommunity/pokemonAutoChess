@@ -4564,6 +4564,14 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.GHOST_MELEE,
     hitSprite: HitSprite.GHOST_HIT
   },
+  [Pkm.GLASTRIER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    attackSprite: AttackSprite.ICE_MELEE,
+    hitSprite: HitSprite.ICE_HIT,
+    shinyUnavailable: true
+  },
   [Pkm.TORKOAL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,

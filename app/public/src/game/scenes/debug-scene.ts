@@ -113,8 +113,8 @@ export class DebugScene extends Phaser.Scene {
       false
     )
     this.pokemonSprite.orientation = orientation
-    this.pokemonSprite.positionX = 3
-    this.pokemonSprite.positionY = 3
+    this.pokemonSprite.pokemon.positionX = 3
+    this.pokemonSprite.pokemon.positionY = 3
 
     this.pokemonSprite.sprite.setTint(
       getRegionTint(this.mapName, preference("colorblindMode"))
@@ -447,8 +447,8 @@ export class DebugScene extends Phaser.Scene {
       false,
       false
     )
-    this.target.positionX = tx
-    this.target.positionY = ty
+    this.target.pokemon.positionX = tx
+    this.target.pokemon.positionY = ty
     this.animationManager?.play(this.target, AnimationType.Idle, { repeat: -1 })
   }
 

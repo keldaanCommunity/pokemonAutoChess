@@ -871,9 +871,7 @@ export default class BoardManager {
     let coordinates: number[]
     if (pokemonSprite) {
       switch (field) {
-        case "positionX":
-          pokemonSprite.positionX = value as IPokemon["positionX"]
-          pokemonSprite.positionY = pokemon.positionY
+        case "positionX":          
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
@@ -890,8 +888,6 @@ export default class BoardManager {
           break
 
         case "positionY": {
-          pokemonSprite.positionY = value as IPokemon["positionY"]
-          pokemonSprite.positionX = pokemon.positionX
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY

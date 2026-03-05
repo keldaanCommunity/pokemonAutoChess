@@ -560,6 +560,7 @@ type TweenAnimationMakerOptions = {
   endCoords?: AbilityCoordinates
   startPositionOffset?: [number, number]
   endPositionOffset?: [number, number]
+  startPosition?: [number, number]
   destroyOnTweenComplete?: boolean
 }
 
@@ -586,13 +587,11 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
     )
     const delay = options.delay ?? args.delay ?? 0
     setTimeout(() => {
-      const startPosition = transformEntityCoordinates(
-        startRow,
-        startCol,
-        startFlip ?? flip
-      )
-      startPosition[0] += options.startPositionOffset?.[0] ?? 0
-      startPosition[1] += options.startPositionOffset?.[1] ?? 0
+      const startPosition =
+        options.startPosition ||
+        transformEntityCoordinates(startRow, startCol, startFlip ?? flip).map(
+          (coord, i) => coord + (options.startPositionOffset?.[i] ?? 0)
+        )
 
       if (options?.oriented) {
         const coordinates = transformEntityCoordinates(
@@ -1912,11 +1911,19 @@ export const AbilitiesAnimations: {
     rotation: -Math.PI / 2,
     hitAnim: onTarget({ ability: "PUFF_PINK", scale: 1 })
   }),
-  [Ability.ASTRAL_BARRAGE]: projectile({
-    scale: 1,
-    oriented: true,
-    rotation: -Math.PI
-  }),
+  [Ability.ASTRAL_BARRAGE]: (args) => {
+    const pokemonSprite = args.pokemonsOnBoard.find(
+      (p) => p.positionX === args.positionX && p.positionY === args.positionY
+    )
+    projectile({
+      scale: 1,
+      oriented: true,
+      startPosition: pokemonSprite
+        ? [pokemonSprite.x, pokemonSprite.y]
+        : undefined,
+      rotation: -Math.PI
+    })(args)
+  },
   [Ability.MACH_PUNCH]: poppingIcon({
     ability: "FIGHTING/FIST",
     maxScale: 2,
@@ -2425,6 +2432,35 @@ export const AbilitiesAnimations: {
       oriented: true,
       rotation: Math.PI / 2,
       origin: [0.5, 1]
+    })(args)
+  },
+
+  [Ability.GLACIAL_LANCE]: (args) => {
+    const targetAngle = angleBetween(
+      [args.positionX, args.positionY],
+      [args.targetX, args.targetY]
+    )
+    const orientationAngle = OrientationAngle[args.orientation] ?? 0
+    const coordinates = transformEntityCoordinates(
+      args.positionX,
+      args.positionY,
+      args.flip
+    )
+    projectile({
+      ability: Ability.GLACIAL_LANCE,
+      scale: 1.5,
+      duration: 500,
+      rotation: -targetAngle - Math.PI / 2,
+      hitAnim: onTarget({ ability: Ability.SHEER_COLD, scale: 2 })
+    })(args)
+    staticAnimation({
+      ability: "SNIPE_SHOT/shoot",
+      x: coordinates[0] + Math.round(Math.cos(orientationAngle) * 30),
+      y: coordinates[1] - Math.round(Math.sin(orientationAngle) * 50) - 10,
+      scale: 1,
+      oriented: true,
+      rotation: Math.PI / 2,
+      origin: [0.5, 0.6]
     })(args)
   },
 
