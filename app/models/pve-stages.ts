@@ -9,7 +9,12 @@ import {
 } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
-import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  randomWeighted
+} from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 
@@ -144,9 +149,18 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Stat.SPE_DEF]: 5
     },
     marowakItems: [[Item.COMET_SHARD], [Item.SACRED_ASH]],
-    rewards: CraftableNoStonesOrScarves,
+    rewards: ItemComponentsNoFossilOrScarf,
     getRewards(player: Player) {
-      return [pickRandomIn(CraftableNoStonesOrScarves)]
+      const componentsWeights = ItemComponentsNoFossilOrScarf.reduce((o, i) => {
+        return { ...o, [i]: player.randomComponentsGiven.includes(i) ? 1 : 2 } // twice the weight if the player doesn't have it yet
+      }, {})
+      const randomComponentsGiven: Item[] = []
+      for (let i = 0; i < 2; i++) {
+        randomComponentsGiven.push(randomWeighted(componentsWeights)!)
+      }
+
+      player.randomComponentsGiven.push(...randomComponentsGiven)
+      return randomComponentsGiven
     }
   },
 

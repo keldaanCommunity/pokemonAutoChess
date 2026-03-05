@@ -1892,7 +1892,7 @@
 		"DEATH_WING": "Deal [150,SP] SPECIAL and heal for 75% of the damage dealt.",
 		"SLACK_OFF": "Cure all negative status conditions, heal [30,SP]% of max HP and put the user to SLEEP for 3 seconds.",
 		"DARK_VOID": "Deal [30,SP] SPECIAL to all enemy Pokémon in a 4-tile radius around target, with [80,LK]% chance to cause SLEEP for 2 seconds.",
-		"OVERHEAT": "Deal [50,SP] SPECIAL to all enemy Pokémon in a 4-tile radius around user, +30% if they suffer from BURN. Unfreeze all FREEZE Pokémon.",
+		"OVERHEAT": "Deal [50,SP] SPECIAL to all enemy Pokémon in a 4-tile radius around user, +30% if they suffer from BURN. Unfreeze all FREEZE Pokémon in that area.",
 		"HYPNOSIS": "Put the farthest enemy Pokémon to SLEEP for [2,3.5,6,SP=0.5] seconds.",
 		"MIMIC": "Copy the target's ability.",
 		"HEX": "Deal [20,40,80,SP] SPECIAL to the target. The damage is doubled if the target suffers from a negative status condition.",
@@ -2263,8 +2263,8 @@
 		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,SP] SPECIAL and are inflicted with POISONNED for 3 seconds.",
 		"SHADOW_FORCE": "Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form.",
 		"SHADOW_CLAW": "Slash enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [60,100,140,SP] SPECIAL.",
-		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [2,SP] ATK, [2,SP] DEF, [2,SP] SPE_DEF, [5,SP] SPEED, or [10,SP] LUCK.",
 		"GLACIAL_LANCE": "Rush to a safe spot in the backline and then throws a lance of ice to the farthest target. First enemy hit takes [300,SP]% of user's ATK as SPECIAL, and ADJACENT enemies take half of that damage."
+		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

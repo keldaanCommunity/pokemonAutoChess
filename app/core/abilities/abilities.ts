@@ -15662,7 +15662,7 @@ export class FeatherDanceStrategy extends AbilityStrategy {
       "PRETTY_FEATHER"
     ] as const
 
-    const featherCount = 10
+    const featherCount = [8, 10, 12][pokemon.stars - 1] ?? 12
     const landingPlace =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon, true) ||
       board.getSafePlaceAwayFrom(
@@ -15711,20 +15711,20 @@ export class FeatherDanceStrategy extends AbilityStrategy {
                   )
                 }
               } else if (feather === "MUSCLE_FEATHER") {
-                featherTarget.addAttack(sign * 2, featherTarget, 1, crit)
+                featherTarget.addAttack(sign * 4, featherTarget, 1, crit)
               } else if (feather === "RESIST_FEATHER") {
-                featherTarget.addDefense(sign * 2, featherTarget, 1, crit)
+                featherTarget.addDefense(sign * 4, featherTarget, 1, crit)
               } else if (feather === "GENIUS_FEATHER") {
                 featherTarget.addAbilityPower(sign * 10, featherTarget, 1, crit)
               } else if (feather === "CLEVER_FEATHER") {
                 featherTarget.addSpecialDefense(
-                  sign * 2,
+                  sign * 4,
                   featherTarget,
                   1,
                   crit
                 )
               } else if (feather === "SWIFT_FEATHER") {
-                featherTarget.addSpeed(sign * 5, featherTarget, 1, crit)
+                featherTarget.addSpeed(sign * 10, featherTarget, 1, crit)
               } else if (feather === "PRETTY_FEATHER") {
                 featherTarget.addLuck(sign * 10, featherTarget, 1, crit)
               }
@@ -16155,7 +16155,7 @@ export class ShadowClawStrategy extends AbilityStrategy {
       )
       damageDone += report.takenDamage
     }
-    pokemon.handleHeal(damageDone * 0.25, pokemon, 1, crit)
+    pokemon.handleHeal(damageDone * 0.25, pokemon, 0, false)
   }
 }
 
