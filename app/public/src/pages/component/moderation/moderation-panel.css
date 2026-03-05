@@ -1,3 +1,69 @@
 .moderation-panel {
-  padding: 1em;
+  width: min(80vw, 900px);
+  color: white;
+}
+
+.moderation-panel .react-tabs__tab-panel--selected {
+  padding: 1em 0.5em;
+}
+
+.moderation-search {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.moderation-search-bar {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.moderation-search-input {
+  flex: 1;
+}
+
+.moderation-results {
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 0.5em;
+}
+
+.moderation-result-count {
+  margin: 0 0 0.5em;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.moderation-no-results {
+  color: #aaa;
+  text-align: center;
+  margin: 1em 0;
+}
+
+.moderation-error {
+  color: #f88;
+  margin: 0;
+}
+
+.moderation-success {
+  color: #8f8;
+  margin: 0;
+}
+
+.moderation-uid {
+  color: #888;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.moderation-rename-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  padding: 0.75em;
+  border: 1px solid #444;
+  border-radius: 6px;
 }
