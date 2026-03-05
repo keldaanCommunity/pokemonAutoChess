@@ -26,7 +26,7 @@
 - WILD 6: +50 SPEED and +20% base ATK → +40 SPEED and +40% base ATK
 - New effect for WILD 9: Once below 30% HP, gain 30 Shield and double the Attack and Speed buffs for 3 seconds.
 
-- Fighting 8 now only throw away melee enemies (1 range)
+- Fighting now only throw away melee enemies (1 range)
 
 # Changes to Pokémon & Abilities
 
