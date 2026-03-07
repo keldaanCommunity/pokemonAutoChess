@@ -4577,6 +4577,19 @@
 		"CONE": "shooting at a 90 degrees angle in front of the unit, centered on the target",
 		"BOARD_EFFECT": "A Board Effect is an effect on a cell of the board that influences all units standing on it, no matter the team, until the end of the fight. Board effects can be cleared by certain abilities."
 	},
+	"expeditions": {
+		"title": "Expeditions",
+		"points": "{{points}} points",
+		"your_points": "Your points: {{points}}",
+		"leaderboard": "Leaderboard",
+		"instructions": "Complete the objectives of the expeditions to earn more experience points !",
+		"help1": "Each expedition has a difficulty ranked from E to S. Completing difficult expeditions objectives grants you more XP and unlocks more difficult expeditions.",
+		"help2": "By completing difficult expeditions and being the player with the most completed expeditions at the end of the month, you earn exclusive titles !",
+		"RESCUE": "Rescue Mission",
+		"DELIVERY": "Delivery Mission",
+		"SECRET_BASE": "Secret Base",
+		"BATTLE": "Battle Mission"
+	},
 	"victory_road": {
 		"title": "Victory Road",
 		"points": "{{points}} points",

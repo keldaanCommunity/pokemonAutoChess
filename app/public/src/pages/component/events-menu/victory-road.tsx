@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { EventPointsPerRank } from "../../../../../config"
+import { VictoryRoadPointsPerRank } from "../../../../../config"
 import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useAppSelector } from "../../../hooks"
 import { searchById } from "../../../network"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
 import { formatDate, formatDuration } from "../../utils/date"
@@ -15,7 +15,6 @@ import "./victory-road.css"
 
 export function VictoryRoad() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const profile = useAppSelector((state) => state.network.profile)
   const eventLeaderboard = useAppSelector(
     (state) => state.lobby.eventLeaderboard
@@ -230,13 +229,13 @@ export function VictoryRoad() {
                   <dt>{getRankLabel(rank)}</dt>
                   <dd
                     className={cc({
-                      positive: EventPointsPerRank[rank - 1] > 0,
-                      negative: EventPointsPerRank[rank - 1] < 0
+                      positive: VictoryRoadPointsPerRank[rank - 1] > 0,
+                      negative: VictoryRoadPointsPerRank[rank - 1] < 0
                     })}
                   >
-                    {(EventPointsPerRank[rank - 1] > 0 ? "+" : "") +
+                    {(VictoryRoadPointsPerRank[rank - 1] > 0 ? "+" : "") +
                       t("victory_road.points", {
-                        points: EventPointsPerRank[rank - 1]
+                        points: VictoryRoadPointsPerRank[rank - 1]
                       })}
                   </dd>
                 </React.Fragment>

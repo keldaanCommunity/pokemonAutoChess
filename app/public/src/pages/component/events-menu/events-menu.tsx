@@ -3,6 +3,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
 import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
+import { Expeditions } from "./expeditions."
 import { TournamentsList } from "./tournaments-list"
 import { VictoryRoad } from "./victory-road"
 
@@ -25,6 +26,9 @@ export function EventsMenu() {
           </Tab>
         )}
         <Tab>
+          <span>{t("expeditions.title")}</span>
+        </Tab>
+        <Tab>
           <span>{t("victory_road.title")}</span>
         </Tab>
       </TabList>
@@ -36,6 +40,9 @@ export function EventsMenu() {
           <TournamentsList />
         </TabPanel>
       )}
+      <TabPanel>
+        <Expeditions />
+      </TabPanel>
       <TabPanel>
         <VictoryRoad />
       </TabPanel>

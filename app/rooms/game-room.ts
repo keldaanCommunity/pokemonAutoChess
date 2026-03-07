@@ -6,7 +6,6 @@ import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
-  EventPointsPerRank,
   ExpPlace,
   getBaseAltForm,
   LegendaryPool,
@@ -16,7 +15,8 @@ import {
   MinStageForGameToCount,
   PkmAltFormsByPkm,
   PortalCarouselStages,
-  UniquePool
+  UniquePool,
+  VictoryRoadPointsPerRank
 } from "../config"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
@@ -980,7 +980,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
         if (usr.eventFinishTime == null) {
           try {
-            const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+            const eventPointsGained =
+              VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
             usr.eventPoints = clamp(
               usr.eventPoints + eventPointsGained,
               0,

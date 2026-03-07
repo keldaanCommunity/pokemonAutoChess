@@ -1,6 +1,6 @@
 export const MAX_EVENT_POINTS = 500
 
-export const EventPointsPerRank = [
+export const VictoryRoadPointsPerRank = [
   +15, // 1st
   +8, // 2nd
   +5, // 3rd
