@@ -159,6 +159,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       name = `${formatMinMaxRanks(minRank, maxRank)} ${name}`
     }
 
+    if (gameMode === GameMode.RANKED || gameMode === GameMode.TOURNAMENT) {
+      this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
+    }
+
     this.setMetadata(<IGameMetadata>{
       name,
       ownerName,
