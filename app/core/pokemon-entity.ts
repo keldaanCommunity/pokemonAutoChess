@@ -485,7 +485,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
 
-    value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
     if (
@@ -1819,7 +1818,7 @@ function applyBigEaterBeltStatBuff(
   const isBuffOrBuffLost =
     value > 0 || (value < 0 && caster.team === pokemon.team)
   if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
-    value = roundToNDigits(value * 1.25, nbDigits)
+    value = roundToNDigits(value * 1.25, nbDigits, "down")
   }
   return value
 }
