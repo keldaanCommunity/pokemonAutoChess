@@ -30,7 +30,7 @@ export function Modal(props: ModalProps) {
   const { t } = useTranslation()
 
   const close = () => {
-    if (onClose() !== false) {
+    if (ref.current?.open && onClose() !== false) {
       ref.current?.close()
     }
   }
@@ -54,7 +54,7 @@ export function Modal(props: ModalProps) {
             rect.left <= event.clientX &&
             event.clientX <= rect.left + rect.width) ||
           ["OPTION", "SELECT", "BUTTON"].includes((event.target as any).tagName)
-        if (!isInDialog) {
+        if (show && !isInDialog) {
           close()
         }
       })
