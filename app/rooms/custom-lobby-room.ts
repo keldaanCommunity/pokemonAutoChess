@@ -274,9 +274,10 @@ export default class CustomLobbyRoom extends Room {
       }
     )
 
-    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
+    // This feature has been deactivated for security reasons. Only enable it when investigating memory leaks.
+    /*this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
       this.dispatcher.dispatch(new HeapSnapshotCommand())
-    })
+    })*/
 
     this.onMessage(
       Transfer.GIVE_TITLE,
