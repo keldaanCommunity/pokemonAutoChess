@@ -46,11 +46,11 @@ export const BoosterRarityProbability: { [key in Rarity]: number } = {
   [Rarity.UNCOMMON]: 0.2,
   [Rarity.RARE]: 0.2,
   [Rarity.EPIC]: 0.18,
-  [Rarity.ULTRA]: 0.06,
+  [Rarity.ULTRA]: 0.04,
   [Rarity.UNIQUE]: 0.1,
-  [Rarity.LEGENDARY]: 0.05,
-  [Rarity.HATCH]: 0.06,
-  [Rarity.SPECIAL]: 0.03
+  [Rarity.LEGENDARY]: 0.06,
+  [Rarity.HATCH]: 0.05,
+  [Rarity.SPECIAL]: 0.05
 }
 
 export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
