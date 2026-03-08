@@ -495,6 +495,14 @@ class GameContainer {
             item,
             true
           )
+          if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              "hp",
+              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp
+            )
+          }
         }
       })
 
