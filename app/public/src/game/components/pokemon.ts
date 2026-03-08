@@ -860,7 +860,7 @@ export default class PokemonSprite extends DraggableObject {
         scene,
         0,
         25,
-        pokemon.hp,
+        pokemon.maxHP,
         pokemon.hp,
         pokemon.shield,
         pokemon.team as Team,
