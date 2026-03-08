@@ -54,6 +54,7 @@
 - Rework Overheat: now deals damage to all enemies **in a 4-cell radius around user**. 40 → 50 special damage. All FREEZE Pokémon in the zone are unfrozen.
 - Rework Fiery Wrath: now deals damage to all enemies **in a 4-cell radius around user**. 30 → 50 special damage.
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
+- Adjust Bounce Damage (Spoink, Mantyke): 10/20/30 → 15/20/25
 
 # Changes to Items
 
