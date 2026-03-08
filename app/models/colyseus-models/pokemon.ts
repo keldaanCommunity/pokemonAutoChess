@@ -10064,7 +10064,6 @@ export class TypeNull extends Pokemon {
         case Synergy.FLORA:
           return Pkm.SILVALLY_GRASS
         case Synergy.GROUND:
-        case Synergy.FIELD:
           return Pkm.SILVALLY_GROUND
         case Synergy.ICE:
           return Pkm.SILVALLY_ICE
@@ -10081,8 +10080,10 @@ export class TypeNull extends Pokemon {
         case Synergy.WATER:
         case Synergy.AQUATIC:
           return Pkm.SILVALLY_WATER
+        case Synergy.FIELD:
+        default:
+          return Pkm.SILVALLY
       }
-      return Pkm.SILVALLY
     }
   )
   hp = 260
