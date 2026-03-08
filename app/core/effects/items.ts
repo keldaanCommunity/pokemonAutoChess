@@ -196,6 +196,13 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           specialDamage: secondHitSpecialDamage,
           trueDamage: secondHitTrueDamage
         })
+        pokemon.broadcastAbility({
+          skill: "LOADED_DICE",
+          positionX: target.positionX,
+          positionY: target.positionY,
+          targetX: secondHitTarget.positionX,
+          targetY: secondHitTarget.positionY
+        })
       }
     }
   }

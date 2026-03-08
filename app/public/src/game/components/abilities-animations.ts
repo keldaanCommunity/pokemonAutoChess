@@ -640,6 +640,8 @@ const projectile: AbilityAnimationMaker<
   TweenAnimationMakerOptions & {
     orientation?: Orientation | true
     distance?: number
+    easeX?: string | ((v: number) => number)
+    easeY?: string | ((v: number) => number)
   }
 > =
   (options = {}) =>
@@ -707,8 +709,14 @@ const projectile: AbilityAnimationMaker<
       startCoords,
       endCoords,
       tweenProps: {
-        x: endPosition[0],
-        y: endPosition[1],
+        x: {
+          value: endPosition[0],
+          ease: options.easeX ?? options.ease ?? "linear"
+        },
+        y: {
+          value: endPosition[1],
+          ease: options.easeY ?? options.ease ?? "linear"
+        },
         ...(options.tweenProps ?? {})
       }
     })(args)
@@ -2898,7 +2906,15 @@ export const AbilitiesAnimations: {
   ["GENIUS_FEATHER"]: featherAnimation,
   ["CLEVER_FEATHER"]: featherAnimation,
   ["SWIFT_FEATHER"]: featherAnimation,
-  ["PRETTY_FEATHER"]: featherAnimation
+  ["PRETTY_FEATHER"]: featherAnimation,
+  ["LOADED_DICE"]: projectile({
+    tweenProps: {
+      angle: 480,
+      easeY: Phaser.Math.Easing.Back.In
+    },
+    hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 }),
+    scale: 0.25
+  })
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

@@ -76,6 +76,7 @@
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
 
 - Added visual effects for support items on adjacent positions
+- Added visual effect for Loaded dice second hit
 
 # Changes to Gameplay
 
