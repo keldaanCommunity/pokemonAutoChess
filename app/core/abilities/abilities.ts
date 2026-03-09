@@ -9370,6 +9370,13 @@ class DarkHarvestEffect extends PeriodicEffect {
   constructor(duration: number, pokemon: PokemonEntity) {
     super(
       (pokemon) => {
+        if (
+          pokemon.status.resurrecting ||
+          pokemon.status.freeze ||
+          pokemon.status.sleep
+        ) {
+          return // temporary disable during resurrection, freeze or sleep
+        }
         pokemon.broadcastAbility({ skill: Ability.DARK_HARVEST })
         const board = pokemon.simulation.board
         const crit = pokemon.effects.has(EffectEnum.ABILITY_CRIT)
@@ -9397,12 +9404,8 @@ class DarkHarvestEffect extends PeriodicEffect {
               )
             }
           })
-        if (
-          this.duration <= 0 ||
-          pokemon.status.resurrecting ||
-          pokemon.status.freeze ||
-          pokemon.status.sleep
-        ) {
+
+        if (this.duration <= 0) {
           pokemon.effectsSet.delete(this)
           pokemon.effects.delete(EffectEnum.DARK_HARVEST)
         } else {
