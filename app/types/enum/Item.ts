@@ -1063,7 +1063,8 @@ export const UnholdableItems = [
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET,
-  Item.WANTED_NOTICE
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST
 ] satisfies Item[]
 
 export const ConsumableItems = [
