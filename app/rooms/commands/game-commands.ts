@@ -171,7 +171,7 @@ export class OnBuyPokemonCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      (player.effects.has(EffectEnum.EERIE_SPELL) ||
+      (player.effects.has(EffectEnum.TRANSCENDENCE) ||
         player.shopsSinceLastUnownShop === 0) &&
       player.shopFreeRolls > 0 &&
       player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
@@ -1116,7 +1116,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           case EffectEnum.JUSTIFIED:
             player.titles.add(Title.BLACK_BELT)
             break
-          case EffectEnum.EERIE_SPELL:
+          case EffectEnum.TRANSCENDENCE:
             player.titles.add(Title.TELEKINESIST)
             break
           case EffectEnum.BEAT_UP:

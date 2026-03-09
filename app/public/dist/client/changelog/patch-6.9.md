@@ -29,6 +29,8 @@
 
 - Fighting now only throw away melee enemies (1 range)
 - Nerf Ice: Freeze chance 25% → 20%
+- Changed Psychic 3: Unown now appears every 5 shops
+- Renamed Psychic synergy steps
 
 # Changes to Pokémon & Abilities
 

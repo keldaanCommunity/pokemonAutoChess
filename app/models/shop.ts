@@ -27,9 +27,9 @@ import {
   REPEAT_BALL_UNIQUE_INTERVAL,
   SellPrices,
   SHOP_SIZE,
-  UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL,
-  UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL,
-  UNOWN_RATE_AMNESIA,
+  UNOWN_PSY3_NB_SHOPS_INTERVAL,
+  UNOWN_PSY5_NB_SHOPS_INTERVAL,
+  UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
 import { pickFirstPartners } from "../core/scribbles"
@@ -334,16 +334,15 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
-    const hasEerieSpell = player.effects.has(EffectEnum.EERIE_SPELL)
-    if (hasEerieSpell) {
+    const hasTranscendence = player.effects.has(EffectEnum.TRANSCENDENCE)
+    if (hasTranscendence) {
       player.shopsSinceLastUnownShop += 1
     }
     const shouldBeUnownShop =
-      hasEerieSpell &&
+      hasTranscendence &&
       ((!manualRefresh && !player.shopLocked) ||
         (manualRefresh &&
-          player.shopsSinceLastUnownShop ===
-            UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL))
+          player.shopsSinceLastUnownShop === UNOWN_PSY7_NB_SHOPS_INTERVAL))
 
     if (shouldBeUnownShop) {
       // Unown shop
@@ -578,17 +577,17 @@ export default class Shop {
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
-    if (
-      shopIndex === 5 &&
-      !noSpecial &&
-      ((player.effects.has(EffectEnum.LIGHT_SCREEN) &&
-        (player.rerollCount + state.stageLevel) %
-          UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL ===
-          0) ||
-        (player.effects.has(EffectEnum.AMNESIA) && chance(UNOWN_RATE_AMNESIA)))
-    ) {
-      const unowns = getUnownsPoolPerStage(state.stageLevel)
-      return pickRandomIn(unowns)
+    if (shopIndex === 5 && !noSpecial) {
+      const totalRerolls = player.rerollCount + state.stageLevel
+      if (
+        (player.effects.has(EffectEnum.PRECOGNITION) &&
+          totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
+        (player.effects.has(EffectEnum.AURA) &&
+          totalRerolls % UNOWN_PSY5_NB_SHOPS_INTERVAL === 0)
+      ) {
+        const unowns = getUnownsPoolPerStage(state.stageLevel)
+        return pickRandomIn(unowns)
+      }
     }
 
     if (

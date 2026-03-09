@@ -71,9 +71,9 @@ export const MIN_STAGE_FOR_DITTO = 6
 export const EEVEE_RATE = 1 / 20
 export const KECLEON_RATE = 1 / 400
 export const ARCEUS_RATE = 1 / 400
-export const UNOWN_RATE_AMNESIA = 5 / 100
-export const UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL = 3
-export const UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL = 10
+export const UNOWN_PSY3_NB_SHOPS_INTERVAL = 5
+export const UNOWN_PSY5_NB_SHOPS_INTERVAL = 3
+export const UNOWN_PSY7_NB_SHOPS_INTERVAL = 10
 export const FALINKS_TROOPER_RATE = 4 / 100
 export const REMORAID_RATE = 1 / 3
 

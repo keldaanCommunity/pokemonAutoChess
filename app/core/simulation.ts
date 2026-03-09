@@ -961,23 +961,23 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
-      case EffectEnum.AMNESIA:
+      case EffectEnum.PRECOGNITION:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.effects.add(EffectEnum.AMNESIA)
+          pokemon.effects.add(EffectEnum.PRECOGNITION)
           pokemon.addAbilityPower(50, pokemon, 0, false)
         }
         break
 
-      case EffectEnum.LIGHT_SCREEN:
+      case EffectEnum.AURA:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.effects.add(EffectEnum.LIGHT_SCREEN)
+          pokemon.effects.add(EffectEnum.AURA)
           pokemon.addAbilityPower(100, pokemon, 0, false)
         }
         break
 
-      case EffectEnum.EERIE_SPELL:
+      case EffectEnum.TRANSCENDENCE:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.effects.add(EffectEnum.EERIE_SPELL)
+          pokemon.effects.add(EffectEnum.TRANSCENDENCE)
           pokemon.addAbilityPower(150, pokemon, 0, false)
         }
         break
