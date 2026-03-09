@@ -12835,6 +12835,12 @@ export class ScaleShotStrategy extends AbilityStrategy {
     for (const { x, y, delay } of scalePositions) {
       pokemon.commands.push(
         new DelayedCommand(() => {
+          if (
+            pokemon.status.freeze ||
+            pokemon.status.sleep ||
+            pokemon.status.resurrecting
+          )
+            return
           const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
           if (farthestTarget) {
             pokemon.broadcastAbility({

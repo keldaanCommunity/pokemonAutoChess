@@ -61,6 +61,7 @@
 
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
 - Adjust Bounce Damage (Spoink, Mantyke): 10/20/30 → 15/20/25
+- Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast
 
 # Changes to Items
 
