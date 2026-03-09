@@ -197,6 +197,17 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects(bluePlayer.board, redBoard)
   }
 
+  broadcastToSpectators(transfer: Transfer, data: any) {
+    if (!this.room) return
+    const players = this.room.state.players
+    for (const client of this.room.clients) {
+      const spectatedPlayer = players.get(client.userData?.spectatedPlayerId)
+      if (spectatedPlayer?.simulationId === this.id) {
+        client.send(transfer, data)
+      }
+    }
+  }
+
   start() {
     this.started = true
     // post simulation start hooks

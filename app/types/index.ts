@@ -371,6 +371,7 @@ export interface ISimulation {
   redDpsMeter: MapSchema<Dps>
   bluePlayerId: string
   redPlayerId: string
+  broadcastToSpectators(transfer: Transfer, data: any): void
 }
 
 export interface ISimulationCommand {
