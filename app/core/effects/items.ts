@@ -226,7 +226,7 @@ export class MachRibbonEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(20, pokemon, 0, false)
+        pokemon.addSpeed(15, pokemon, 0, false)
         pokemon.count.machRibbonCount++
         if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
           pokemon.player.titles.add(Title.TOP_GUN)
@@ -734,7 +734,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof MachRibbonEffect) {
-          pokemon.addSpeed(-20 * effect.count, pokemon, 0, false)
+          pokemon.addSpeed(-15 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.machRibbonCount = 0
           break

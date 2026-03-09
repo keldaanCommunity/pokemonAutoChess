@@ -3042,7 +3042,7 @@
 		"SILK_SCARF": "NORMAL 시너지 부여, 받는 모든 SHIELD 50% 증가",
 		"FRIEND_BOW": "장착 시 타입에 NORMAL 추가",
 		"BLACK_BELT": "급소에 맞혔을 때, 준 데미지의 33% 만큼 SHIELD를 얻는다.",
-		"MACH_RIBBON": "매 3초마다 20의 SPEED를 얻는다.",
+		"MACH_RIBBON": "매 3초마다 15의 SPEED를 얻는다.",
 		"EXPLOSIVE_BAND": "착용자의 SHIELD가 처음으로 파괴될 경우, 이 아이템이 폭발하여 ADJACENT 적에게 지금까지 획득한 모든 SHIELD의 50%에 해당하는 만큼의 SPECIAL를 입힌다.",
 		"TWIST_BAND": "적이 부여한 디버프가 버프로 적용된다. 착용자의 스탯은 빼앗을 수 없게 된다.",
 		"BIG_EATER_BELT": "착용자가 받는 모든 스탯 버프를 25% 증가시킨다 (소수점은 버림, PP에는 영향을 주지 않음). 또한 매 라운드마다 2개의 시그니처 디쉬를 먹을 수 있게 된다.",

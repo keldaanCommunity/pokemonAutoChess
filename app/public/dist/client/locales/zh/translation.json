@@ -3086,7 +3086,7 @@
 		"SILK_SCARF": "与其他道具组件合成，可以制作各种围巾，头带和腰带。这些合成道具会在NORMAL共鸣等级降级时被移除。",
 		"FRIEND_BOW": "携带者也被视作NORMAL宝可梦。",
 		"BLACK_BELT": "攻击造成暴击时获得SHIELD，数值相当于造成伤害的33%。",
-		"MACH_RIBBON": "每3秒提升20点SPEED。",
+		"MACH_RIBBON": "每3秒提升15点SPEED。",
 		"EXPLOSIVE_BAND": "每轮对战中首次失去所有SHIELD时，该道具爆炸并对ADJACENT敌方宝可梦造成SPECIAL，数值相当于获得的SHIELD之和的50%。",
 		"TWIST_BAND": "来自敌方宝可梦的属性下降改为上升。携带者的属性增幅无法被偷取。",
 		"BIG_EATER_BELT": "所有提升属性的效果额外提升25%的属性 (小数点向下取整，不影响PP)。携带者可以在同一轮食用2份料理。",
