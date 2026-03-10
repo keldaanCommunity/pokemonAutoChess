@@ -2255,9 +2255,7 @@
 		"STURDY": "Vigore",
 		"DEFIANT": "Agonismo",
 		"JUSTIFIED": "Giustizia",
-		"PRECOGNIZIONE": "Precognizione",
 		"AURA": "Aura",
-		"TRANSCENDENZA": "Trascendenza",
 		"HONE_CLAWS": "Unghiaguzze",
 		"ASSURANCE": "Garanzia",
 		"BEAT_UP": "Picchiaduro",
@@ -2348,7 +2346,9 @@
 		"APPETIZER": "Antipastino",
 		"LUNCH_BREAK": "Pausa Pranzo",
 		"BANQUET": "Banchetto",
-		"DROUGHT": "Siccità"
+		"DROUGHT": "Siccità",
+		"PRECOGNIZIONE": "Precognizione",
+		"TRANSCENDENZA": "Trascendenza"
 	},
 	"effect_description": {
 		"STAMINA": "Ottieni 15 SHIELD. Ottieni una SILK_SCARF.",
