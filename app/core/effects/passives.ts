@@ -857,7 +857,7 @@ const conversionEffect = new OnSimulationStartEffect(
 const spawnPhioneFromAquaEggOnSimulationStartEffect =
   new OnSimulationStartEffect(({ entity, simulation, player }) => {
     if (entity.items.has(Item.AQUA_EGG)) {
-      entity.items.delete(Item.AQUA_EGG)
+      entity.removeItem(Item.AQUA_EGG)
       const coord = simulation.getClosestFreeCellToPokemonEntity(
         entity,
         entity.team
