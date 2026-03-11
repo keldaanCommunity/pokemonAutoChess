@@ -584,7 +584,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.triggerBurn(
-        60000,
+        300000,
         pokemon as PokemonEntity,
         pokemon as PokemonEntity
       )
