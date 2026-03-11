@@ -76,6 +76,46 @@ export default class GameScene extends Scene {
   started: boolean = false
   spectate: boolean = false
 
+  // Debounce related variables
+  private moveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+  private readonly DEBOUNCE_DELAY = 100; // 100ms delay, adjustable as needed (50-150ms range recommended)
+  private lastVector: { x: number; y: number } | null = null;
+  
+  /**
+   * Debounced vector data sending
+   * When the user clicks continuously, only the last target position will be sent
+   */
+  sendVector(vector: { x: number; y: number }) {
+    // Save the last input vector
+    this.lastVector = vector;
+  
+    // Clear the previous timer (cancel the pending data to be sent)
+    if (this.moveDebounceTimer) {
+      clearTimeout(this.moveDebounceTimer);
+    }
+  
+    // Set a new timer to send the last data after delay
+    this.moveDebounceTimer = setTimeout(() => {
+      if (this.lastVector && this.room) {
+        this.room.send(Transfer.VECTOR, this.lastVector);
+        // console.log("Debounced send vector:", this.lastVector);
+        
+        // Clear after sending
+        this.lastVector = null;
+      }
+      this.moveDebounceTimer = null;
+    }, this.DEBOUNCE_DELAY);
+  }
+  
+  // Cleanup method (call when component is destroyed)
+  destroy() {
+    if (this.moveDebounceTimer) {
+      clearTimeout(this.moveDebounceTimer);
+      this.moveDebounceTimer = null;
+    }
+    this.lastVector = null;
+  }
+
   constructor() {
     super({
       key: "gameScene",
@@ -471,7 +511,9 @@ export default class GameScene extends Scene {
         const [maxX, minY] = transformBoardCoordinates(8, 7)
         if (x < minX || x > maxX || y > maxY || y < minY) return
         const vector = this.minigameManager.getVector(x, y)
-        this.room?.send(Transfer.VECTOR, vector)
+
+        this.sendVector(vector);
+        // this.room?.send(Transfer.VECTOR, vector)
 
         const clickAnimation = this.add.sprite(
           x,
