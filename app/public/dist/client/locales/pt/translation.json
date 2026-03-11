@@ -2812,11 +2812,71 @@
 	"portal_description_3": "Se você decidir não pegar nenhum portal, permanecerá em sua região atual, e os Pokémon propostos serão totalmente aleatórios.",
 	"additional_description": "Escolha uma escolha adicional e um componente de item entre 3 propostas. Escolhas adicionais são Pokémon de evolução de 2 estágios que podem ser encontrados em todas as lojas dos jogadores após serem escolhidos.",
 	"battle_description": "Estágio de batalha regular onde você luta contra outros jogadores ou bots.",
+	"tier_list": {
+		"add_row": "Adicionar Linha",
+		"download_image": "Download da Imagem",
+		"share_on_discord": "Compatilhar no Discord",
+		"move_row_up": "Move a linha para cima",
+		"move_row_down": "Move a linha para baixo",
+		"delete_row": "Remove a linha"
+	},
 	"game_modes": {
 		"CLASSIC": "Clássico",
 		"RANKED": "Jogo Rankeado",
 		"SCRIBBLE": "Garabato do Smeargle",
 		"CUSTOM_LOBBY": "Jogo personalizado",
 		"TOURNAMENT": "Torneio"
+	},
+	"game_modes_descriptions": {
+		"CLASSIC": "Uma experiencia casual do PAC !\n8 jogadores, SEM alteração no Elo, livre para todos.",
+		"RANKED": "Competitivo ! 8 jogadores, COM alteração no Elo\nRestrito a jogadores com um ranque próximo ao seu",
+		"SCRIBBLE": "Jogue por diversão! 8 jogadores, SEM alteração no Elo\nUma regra especial é adicionada a esse modo de jogo.",
+		"CUSTOM_LOBBY": "Cria uma sala privada para jogar com seus amigos ou com robôs.",
+		"TOURNAMENT": "Essa partida é parte de um torneio. Veja no Discord para eventos futuros."
+	},
+	"dendrogram": {
+		"title": "Hierarquia dos grupos",
+		"description": "Essa arvore de dados mostra a composição de grupos juntos baseados em sinergias similares. As ramificações na parte inferior são mais similares.",
+		"loading": "Carregando arvore de dados...",
+		"no_data": "Sem informação disponível. Hierarquia do grupo talvez não esteja em uso ainda.",
+		"total_clusters": "Total de Grupos",
+		"total_matches": "Total de Partidas",
+		"linkage_method": "Método de Ligação",
+		"branches": "Ramificações",
+		"branch": "Ramificação",
+		"branch_total_matches": "Total de Partidas",
+		"branch_contains_clusters": "Incluido no Grupo",
+		"cluster": "Grupo",
+		"hovered_cluster": "Segurar",
+		"selected_cluster": "Selecionar",
+		"cluster_size": "Tamanho",
+		"matches": "Partidas"
+	},
+	"cluster_map": {
+		"title": "Mapa de Grupo",
+		"description": "Esse mapa mostra a composição de um grupo baseado em sinergias similares. Cada ponto representa um grupo com construções similares de times.",
+		"loading": "Carregando mapa de grupo...",
+		"total_clusters": "Total de Grupo",
+		"total_matches": "Total de Partidas",
+		"cluster": "Grupo",
+		"hovered_cluster": "Segurar",
+		"selected_cluster": "Seleção",
+		"rank": "Ranque",
+		"winrate": "Taxa de Vitorias",
+		"popularity": "Popularidade",
+		"count": "Contagem"
+	},
+	"notification": {
+		"level_up_title": "Subiu de Nível!",
+		"level_up_message": "Parabéns!\nVocê alcançou o nível {{level}} e ganhou um pacote de figurinhas!",
+		"new_title_title": "Novo Titulo Desbloqueado!",
+		"new_title_message": "Você desbloqueou um novo titulo:\n{{title}}: {{description}}",
+		"elo_rank_change_title": "Mudança de Ranque!",
+		"elo_rank_change_message": "Seu novo ranque é:\n{{rank}}",
+		"victory_road_finished_title": "Rota da Vitória Finalizada!",
+		"victory_road_finished_message": "Parabéns!\nVocê finalizou a Rota da Vitória em {{place}}!",
+		"next": "Próximo",
+		"close": "Fechar",
+		"dismiss_all": "Fechar Tudo"
 	}
 }
