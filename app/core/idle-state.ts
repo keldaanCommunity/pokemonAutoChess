@@ -11,20 +11,20 @@ export class IdleState extends PokemonState {
   update(pokemon: PokemonEntity, dt: number, board: Board, player: Player) {
     super.update(pokemon, dt, board, player)
 
-    if (pokemon.status.tree) {
-      if (pokemon.maxPP > 0 && pokemon.pp >= pokemon.maxPP && pokemon.canMove) {
-        pokemon.status.tree = false
-        pokemon.toMovingState()
-      }
-    } else if (pokemon.canMove) {
+    if (
+      pokemon.status.tree &&
+      pokemon.maxPP > 0 &&
+      pokemon.pp >= pokemon.maxPP
+    ) {
+      pokemon.status.tree = false
+    }
+
+    if (pokemon.canMove) {
       pokemon.toMovingState()
     }
 
     if (pokemon.cooldown <= 0) {
       pokemon.cooldown = 500
-      if (pokemon.passive === Passive.SUDOWOODO && pokemon.status.tree) {
-        pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
-      }
     } else {
       pokemon.cooldown -= dt
     }

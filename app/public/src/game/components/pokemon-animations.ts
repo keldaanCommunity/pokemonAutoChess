@@ -6392,6 +6392,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Idle,
     emote: AnimationType.Idle,
     hop: AnimationType.Idle,
+    hurt: AnimationType.Idle,
     walk: AnimationType.Idle,
     sleep: AnimationType.Idle,
     eat: AnimationType.Idle,
@@ -6399,9 +6400,7 @@ export const PokemonAnimations: {
     noShadow: true,
     attackSprite: AttackSprite.FIRE_RANGE,
     animationsOriented: {
-      [AnimationType.Idle]: false,
-      [AnimationType.Hurt]: false,
-      [AnimationType.Walk]: false
+      [AnimationType.Idle]: false
     }
   },
   [Pkm.KRABBY]: {

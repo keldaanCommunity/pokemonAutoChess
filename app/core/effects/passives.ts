@@ -359,8 +359,8 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
       pokemon.toIdleState()
       pokemon.addAttack(-10, pokemon, 0, false)
       pokemon.addSpeed(-20, pokemon, 0, false)
-      pokemon.addDefense(10, pokemon, 0, false)
-      pokemon.addSpecialDefense(10, pokemon, 0, false)
+      pokemon.addDefense(6, pokemon, 0, false)
+      pokemon.addSpecialDefense(6, pokemon, 0, false)
       pokemon.range += 4
       pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
       if (pokemon.player) {
@@ -383,23 +383,23 @@ const GalarianDarmanitanZenTransformEffect = new OnDamageReceivedEffect(
       pokemon.skill = Ability.TRANSE
       pokemon.pp = 0
       pokemon.status.tree = true
-      pokemon.toIdleState()
-      pokemon.addAttack(-10, pokemon, 0, false)
-      pokemon.addSpeed(-20, pokemon, 0, false)
-      pokemon.addDefense(10, pokemon, 0, false)
-      pokemon.addSpecialDefense(10, pokemon, 0, false)
       pokemon.status.untargettable = true
       pokemon.commands.push(
         new DelayedCommand(() => {
           pokemon.status.untargettable = false
         }, 1500)
       )
+
+      pokemon.toIdleState()
+      pokemon.addAttack(6, pokemon, 0, false)
+      pokemon.addSpeed(-60, pokemon, 0, false)
+
       if (pokemon.player) {
         pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
       }
     }
   },
-  Passive.DARMANITAN
+  Passive.GALARIAN_DARMANITAN
 )
 
 const DarmanitanZenOnHitEffect = new OnHitEffect(
@@ -413,20 +413,24 @@ const GalarianDarmanitanBurnEffect = new PeriodicEffect(
   (pokemon, board) => {
     if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
       // inflict special damage and burn adjacent enemies
-      pokemon.broadcastAbility({ skill: "INFERNO" })
+      pokemon.broadcastAbility({ skill: "GALARIAN_DARMANITAN_ZEN_BURN" })
+      const crit =
+        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
+        chance(pokemon.critChance / 100, pokemon)
+      pokemon.handleHeal(10, pokemon, 1, crit)
+      const damage = 0.25 * pokemon.atk
       board
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team !== pokemon.team) {
             cell.value.handleSpecialDamage(
-              10,
+              damage,
               board,
               AttackType.SPECIAL,
               pokemon,
-              true,
-              true
+              crit
             )
-            cell.value.status.triggerBurn(1100, pokemon, cell.value)
+            cell.value.status.triggerBurn(2000, pokemon, cell.value)
           }
         })
     }
@@ -1063,6 +1067,16 @@ const chinglingCountCastsEffect = new OnSimulationStartEffect(
   Passive.CHINGLING
 )
 
+const SudowoodoGainAttackEffect = new PeriodicEffect(
+  (pokemon) => {
+    if (pokemon.status.tree) {
+      pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
+    }
+  },
+  Passive.SUDOWOODO,
+  1000
+)
+
 const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
     (entity): entity is PokemonEntity =>
@@ -1281,7 +1295,7 @@ export const PassiveEffects: Partial<
     treeEffect
   ],
   [Passive.WOBBUFFET]: [treeEffect],
-  [Passive.SUDOWOODO]: [treeEffect],
+  [Passive.SUDOWOODO]: [treeEffect, SudowoodoGainAttackEffect],
   [Passive.INANIMATE]: [inanimateObjectEffect],
   [Passive.SKARMORY]: [skarmorySpikesOnSimulationStartEffect],
   [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],

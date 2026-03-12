@@ -3220,7 +3220,7 @@
 		"DARMANITAN": "When below 30% HP, jumps to a safe place and turns into Zen Mode.",
 		"GALARIAN_DARMANITAN": "When below 30% HP, lose aggro and turns into Zen Mode.",
 		"DARMANITAN_ZEN": "In Zen mode, attacks deal SPECIAL that scales with AP and heal for 100% of damage dealt. Transforms back into Standard Mode when fully healed.",
-		"GALARIAN_DARMANITAN_ZEN": "In Zen mode, can no longer move or attack, but deals [10,SP] SPECIAL to ADJACENT enemies and BURN them every second.",
+		"GALARIAN_DARMANITAN_ZEN": "In Zen mode, can no longer move or attack, but every second, heals [10,SP] HP, deals [25,SP]% of user's ATK as SPECIAL to ADJACENT enemies and BURN them.",
 		"BAD_LUCK": "Reduce all opponents LUCK by 20",
 		"GOOD_LUCK": "Increase the LUCK of all allies by 20",
 		"PRIMEAPE": "Primeape becomes angrier when knocked out, gaining 1 permanent ATK. After Primeape is knocked out 10 times, it evolves into Annihilape.",
