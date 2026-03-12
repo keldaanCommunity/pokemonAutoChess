@@ -58,7 +58,6 @@ export default class PokemonSpecial extends PokemonSprite {
 
   onPointerDown(pointer, event) {
     super.onPointerDown(pointer, event)
-    event.stopPropagation()
     this.scene.animationManager?.animatePokemon(
       this,
       PokemonActionState.EMOTE,

@@ -124,11 +124,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * item.index) / this.items!.size) *
-                CAROUSEL_RADIUS_X
+              CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * item.index) / this.items!.size) *
-                CAROUSEL_RADIUS_Y
+              CAROUSEL_RADIUS_Y
             Body.setPosition(itemBody, { x, y })
           }
         }
@@ -142,11 +142,11 @@ export class MiniGame {
             const x =
               this.centerX +
               Math.cos(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-                CAROUSEL_RADIUS_X
+              CAROUSEL_RADIUS_X
             const y =
               this.centerY +
               Math.sin(t + (Math.PI * 2 * portal.index) / this.portals!.size) *
-                CAROUSEL_RADIUS_Y
+              CAROUSEL_RADIUS_Y
             Body.setPosition(portalBody, { x, y })
           }
         }
@@ -300,11 +300,11 @@ export class MiniGame {
         avatar.targetX =
           this.centerX +
           Math.cos((2 * Math.PI * i) / this.alivePlayers.length) *
-            CAROUSEL_RADIUS_X
+          CAROUSEL_RADIUS_X
         avatar.targetY =
           this.centerY +
           Math.sin((2 * Math.PI * i) / this.alivePlayers.length) *
-            CAROUSEL_RADIUS_Y
+          CAROUSEL_RADIUS_Y
       }
 
       this.avatars!.set(avatar.id, avatar)
@@ -328,7 +328,18 @@ export class MiniGame {
         encounter = null // prevent getting the same encounter twice in a gamme
       }
       state.townEncounter = encounter ?? null
-      if (encounter) state.townEncounters.add(encounter)
+      if (encounter) {
+        state.townEncounters.add(encounter)
+        // add a fixed blocked circle collision body around encounter
+        const body = Bodies.circle(this.centerX, this.centerY, 20, {
+          isStatic: true,
+          collisionFilter: {
+            mask: 1
+          }
+        })
+        Composite.add(this.engine.world, body)
+        this.bodies.set("encounter", body)
+      }
     } else {
       state.townEncounter = null
     }
@@ -473,16 +484,16 @@ export class MiniGame {
             portal.x +
             Math.cos(
               this.timeElapsed * SYMBOL_ROTATION_SPEED +
-                (Math.PI * 2 * symbol.index) / symbols.length
+              (Math.PI * 2 * symbol.index) / symbols.length
             ) *
-              25
+            25
           symbol.y =
             portal.y +
             Math.sin(
               this.timeElapsed * SYMBOL_ROTATION_SPEED +
-                (Math.PI * 2 * symbol.index) / symbols.length
+              (Math.PI * 2 * symbol.index) / symbols.length
             ) *
-              25
+            25
         })
       }
     })
