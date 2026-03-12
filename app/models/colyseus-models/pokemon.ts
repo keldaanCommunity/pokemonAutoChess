@@ -16712,6 +16712,66 @@ export class DarmanitanZen extends Pokemon {
   passive = Passive.DARMANITAN_ZEN
 }
 
+export class GalarianDarumaka extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ICE, Synergy.FIRE])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.GALARIAN_DARMANITAN
+  hp = 80
+  atk = 11
+  speed = 55
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ICE)
+  }
+}
+
+export class GalarianDarmanitan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ICE, Synergy.FIRE])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 24
+  speed = 61
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.GALARIAN_DARMANITAN
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ICE)
+  }
+}
+
+export class GalarianDarmanitanZen extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ICE, Synergy.FIRE])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 220
+  atk = 14
+  speed = 41
+  def = 12
+  speDef = 12
+  maxPP = 100
+  range = 5
+  skill = Ability.TRANSE
+  passive = Passive.GALARIAN_DARMANITAN_ZEN
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ICE)
+  }
+}
+
 export class Krabby extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
@@ -21274,6 +21334,9 @@ export const PokemonClasses: Record<
   [Pkm.DARUMAKA]: Darumaka,
   [Pkm.DARMANITAN]: Darmanitan,
   [Pkm.DARMANITAN_ZEN]: DarmanitanZen,
+  [Pkm.GALARIAN_DARUMAKA]: GalarianDarumaka,
+  [Pkm.GALARIAN_DARMANITAN]: GalarianDarmanitan,
+  [Pkm.GALARIAN_DARMANITAN_ZEN]: GalarianDarmanitanZen,
   [Pkm.KRABBY]: Krabby,
   [Pkm.KINGLER]: Kingler,
   [Pkm.ZYGARDE_10]: Zygarde10,

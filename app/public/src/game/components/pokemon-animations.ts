@@ -26,7 +26,7 @@ export const DEFAULT_POKEMON_ANIMATION_CONFIG: Required<PokemonAnimationConfig> 
       HitSprite.NORMAL_HIT3,
       HitSprite.NORMAL_HIT4
     ],
-    animationsOriented: []
+    animationsOriented: {}
   } as const
 
 export const PokemonAnimations: {
@@ -2430,7 +2430,7 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_MELEE,
     hitSprite: HitSprite.STEEL_HIT,
-    animationsOriented: [AnimationType.Special0]
+    animationsOriented: { [AnimationType.Special0]: true }
   },
   [Pkm.AEGISLASH_BLADE]: {
     attack: AnimationType.Attack,
@@ -2438,7 +2438,7 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_MELEE,
     hitSprite: HitSprite.STEEL_HIT,
-    animationsOriented: [AnimationType.Special0]
+    animationsOriented: { [AnimationType.Special0]: true }
   },
   [Pkm.CUBONE]: {
     attack: AnimationType.Strike,
@@ -5813,7 +5813,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Special0,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ROCK_MELEE,
-    animationsOriented: [AnimationType.Special0]
+    animationsOriented: { [AnimationType.Special0]: true }
   },
   [Pkm.SPOINK]: {
     attack: AnimationType.Attack,
@@ -6370,6 +6370,39 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.PSYCHIC_RANGE
+  },
+  [Pkm.GALARIAN_DARUMAKA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Charge,
+    attackSprite: AttackSprite.ICE_MELEE,
+    hitSprite: HitSprite.WILD_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.GALARIAN_DARMANITAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ICE_MELEE,
+    hitSprite: HitSprite.WILD_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.GALARIAN_DARMANITAN_ZEN]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    hop: AnimationType.Idle,
+    walk: AnimationType.Idle,
+    sleep: AnimationType.Idle,
+    eat: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true,
+    attackSprite: AttackSprite.FIRE_RANGE,
+    animationsOriented: {
+      [AnimationType.Idle]: false,
+      [AnimationType.Hurt]: false,
+      [AnimationType.Walk]: false
+    }
   },
   [Pkm.KRABBY]: {
     attack: AnimationType.Attack,

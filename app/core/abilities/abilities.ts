@@ -7850,9 +7850,16 @@ export class TranseStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     pokemon.skill = Ability.HEADBUTT
-    pokemon.index = PkmIndex[Pkm.DARMANITAN]
-    pokemon.name = Pkm.DARMANITAN
-    pokemon.changePassive(Passive.DARMANITAN)
+    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
+      pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN]
+      pokemon.name = Pkm.GALARIAN_DARMANITAN
+      pokemon.changePassive(Passive.GALARIAN_DARMANITAN)
+      pokemon.status.tree = false
+    } else {
+      pokemon.index = PkmIndex[Pkm.DARMANITAN]
+      pokemon.name = Pkm.DARMANITAN
+      pokemon.changePassive(Passive.DARMANITAN)
+    }
     pokemon.skill = Ability.HEADBUTT
     pokemon.handleHeal(Math.round(0.3 * pokemon.maxHP), pokemon, 0, false)
     pokemon.addAttack(10, pokemon, 0, false)

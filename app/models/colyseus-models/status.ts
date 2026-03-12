@@ -83,6 +83,7 @@ export default class Status extends Schema implements IStatus {
   blindCooldown = 0
   enrageDelay = 35000
   ccCooldown = 0
+  untargettable = false
 
   constructor(simulation: ISimulation) {
     super()
@@ -1013,12 +1014,14 @@ export default class Status extends Schema implements IStatus {
     this.resurrection = false
     this.resurrecting = true
     this.resurrectingCooldown = 2000
+    this.untargettable = true
     pokemon.status.clearNegativeStatus(pokemon)
   }
 
   updateResurrecting(dt: number, pokemon: PokemonEntity) {
     if (this.resurrectingCooldown - dt <= 0) {
       this.resurrecting = false
+      this.untargettable = false
       pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0

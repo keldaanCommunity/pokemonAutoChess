@@ -371,11 +371,68 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
   Passive.DARMANITAN
 )
 
+const GalarianDarmanitanZenTransformEffect = new OnDamageReceivedEffect(
+  ({ pokemon }) => {
+    if (
+      pokemon.hp < 0.3 * pokemon.maxHP &&
+      pokemon.passive === Passive.GALARIAN_DARMANITAN
+    ) {
+      pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
+      pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
+      pokemon.changePassive(Passive.GALARIAN_DARMANITAN_ZEN)
+      pokemon.skill = Ability.TRANSE
+      pokemon.pp = 0
+      pokemon.status.tree = true
+      pokemon.toIdleState()
+      pokemon.addAttack(-10, pokemon, 0, false)
+      pokemon.addSpeed(-20, pokemon, 0, false)
+      pokemon.addDefense(10, pokemon, 0, false)
+      pokemon.addSpecialDefense(10, pokemon, 0, false)
+      pokemon.status.untargettable = true
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.status.untargettable = false
+        }, 1500)
+      )
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
+      }
+    }
+  },
+  Passive.DARMANITAN
+)
+
 const DarmanitanZenOnHitEffect = new OnHitEffect(
   ({ attacker, totalTakenDamage }) => {
     attacker.handleHeal(totalTakenDamage, attacker, 0, false)
   },
   Passive.DARMANITAN_ZEN
+)
+
+const GalarianDarmanitanBurnEffect = new PeriodicEffect(
+  (pokemon, board) => {
+    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
+      // inflict special damage and burn adjacent enemies
+      pokemon.broadcastAbility({ skill: "INFERNO" })
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+        .forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              10,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              true,
+              true
+            )
+            cell.value.status.triggerBurn(1100, pokemon, cell.value)
+          }
+        })
+    }
+  },
+  Passive.GALARIAN_DARMANITAN_ZEN,
+  1000
 )
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
@@ -1115,6 +1172,8 @@ export const PassiveEffects: Partial<
   [Passive.MIMIKYU]: [MimikuBustedTransformEffect],
   [Passive.DARMANITAN]: [DarmanitanZenTransformEffect],
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
+  [Passive.GALARIAN_DARMANITAN]: [GalarianDarmanitanZenTransformEffect],
+  [Passive.GALARIAN_DARMANITAN_ZEN]: [GalarianDarmanitanBurnEffect, treeEffect],
   [Passive.GLIMMORA]: [ToxicSpikesEffect],
   [Passive.FUR_COAT]: [FurCoatEffect],
   [Passive.CREAM]: [MilceryFlavorEffect],
