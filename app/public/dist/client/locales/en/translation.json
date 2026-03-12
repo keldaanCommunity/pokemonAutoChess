@@ -4515,7 +4515,7 @@
 		"defense_calculation": "How Defense works?",
 		"defense_calculation_description": "Same system as League of Legends: Damage = ATK / (1+(0.05*DEF)), rounded up. DEF works for PHYSICAL, SPE_DEF for SPECIAL.",
 		"round_damage_calculation": "Round damage calculation",
-		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponents alive) ; rounded up, clones/spawns do not count",
+		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponent's Pokémon alive) ; rounded up, clones/spawns do not count",
 		"pool_size_per_category": "Pool size per category",
 		"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
 		"luck_title": "How Luck works?",
