@@ -166,8 +166,8 @@ export default class CustomLobbyRoom extends Room {
 
     this.onMessage(
       Transfer.UNBAN,
-      (client, { uid, name }: { uid: string; name: string }) => {
-        this.dispatcher.dispatch(new UnbanUserCommand(), { client, uid, name })
+      (client, { uid, reason }: { uid: string; reason: string }) => {
+        this.dispatcher.dispatch(new UnbanUserCommand(), { client, uid, reason })
       }
     )
 

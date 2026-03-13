@@ -296,7 +296,7 @@ export function ban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.BAN, params)
 }
 
-export function unban(params: { uid: string; name: string }) {
+export function unban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.UNBAN, params)
 }
 
