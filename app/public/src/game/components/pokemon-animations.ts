@@ -6380,8 +6380,8 @@ export const PokemonAnimations: {
     shinyUnavailable: true
   },
   [Pkm.GALARIAN_DARMANITAN]: {
-    attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
+    attack: AnimationType.Shoot,
+    ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ICE_MELEE,
     hitSprite: HitSprite.WILD_HIT,
@@ -6392,7 +6392,6 @@ export const PokemonAnimations: {
     ability: AnimationType.Idle,
     emote: AnimationType.Idle,
     hop: AnimationType.Idle,
-    hurt: AnimationType.Idle,
     walk: AnimationType.Idle,
     sleep: AnimationType.Idle,
     eat: AnimationType.Idle,
@@ -6400,7 +6399,8 @@ export const PokemonAnimations: {
     noShadow: true,
     attackSprite: AttackSprite.FIRE_RANGE,
     animationsOriented: {
-      [AnimationType.Idle]: false
+      [AnimationType.Idle]: false,
+      [AnimationType.Hurt]: false
     }
   },
   [Pkm.KRABBY]: {

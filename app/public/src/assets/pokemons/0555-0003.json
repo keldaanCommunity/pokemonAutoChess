@@ -21,6 +21,14 @@
           "sourceSize": { "w": 35, "h": 40 },
           "spriteSourceSize": { "x": 0, "y": 0, "w": 35, "h": 40 },
           "frame": { "x": 35, "y": 0, "w": 35, "h": 40 }
+        },
+        {
+          "filename": "Normal/Hurt/Anim/0/0000",
+          "rotated": false,
+          "trimmed": true,
+          "sourceSize": { "w": 35, "h": 40 },
+          "spriteSourceSize": { "x": 0, "y": 0, "w": 35, "h": 40 },
+          "frame": { "x": 70, "y": 0, "w": 35, "h": 40 }
         }
       ]
     }
