@@ -401,7 +401,12 @@ export default function Game() {
     }
 
     if (!connected.current) {
-      connect()
+      if (room) {
+        connected.current = true
+        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+      } else {
+        connect()
+      }
     } else if (
       !initialized.current &&
       room != undefined &&
