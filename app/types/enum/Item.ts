@@ -208,6 +208,7 @@ export enum Item {
   TINY_MUSHROOM = "TINY_MUSHROOM",
   BIG_MUSHROOM = "BIG_MUSHROOM",
   BALM_MUSHROOM = "BALM_MUSHROOM",
+  RICE = "RICE",
   POFFIN = "POFFIN",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
@@ -299,7 +300,10 @@ export enum Item {
   LUCKY_RIBBON = "LUCKY_RIBBON",
   COVER_BAND = "COVER_BAND",
   EFFICIENT_BANDANNA = "EFFICIENT_BANDANNA",
-  NULLIFY_BANDANNA = "NULLIFY_BANDANNA"
+  NULLIFY_BANDANNA = "NULLIFY_BANDANNA",
+  TATSUGIRI_CURLY = "TATSUGIRI_CURLY",
+  TATSUGIRI_DROOPY = "TATSUGIRI_DROOPY",
+  TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY"
 }
 
 export const MemoryDiscs = [
@@ -414,14 +418,13 @@ export const SpecialItems: Item[] = [
   Item.RAINBOW_SWIRL_FLAVOR,
   Item.RICH_MULCH,
   Item.AMAZE_MULCH,
-  Item.COMFEY,
-  Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
   Item.CORNERSTONE_MASK,
   Item.HEARTHFLAME_MASK,
   Item.ZYGARDE_CUBE,
+  Item.METEORITE,
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR,
   Item.MYSTERY_BOX,
@@ -429,7 +432,11 @@ export const SpecialItems: Item[] = [
   Item.SCROLL_OF_WATERS,
   Item.SCROLL_OF_DARKNESS,
   Item.MEMORY_DISCS,
-  ...MemoryDiscs
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -944,7 +951,8 @@ export const Dishes = [
   Item.MUSHROOMS,
   Item.TINY_MUSHROOM,
   Item.BIG_MUSHROOM,
-  Item.BALM_MUSHROOM
+  Item.BALM_MUSHROOM,
+  Item.RICE
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
