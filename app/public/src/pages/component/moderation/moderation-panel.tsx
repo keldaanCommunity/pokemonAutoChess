@@ -210,9 +210,8 @@ function RenameAccounts() {
       )}
       {suggestions.length === 0 &&
         query.trim().length >= 2 &&
-        !searchLoading && (
-          <p className="moderation-no-results">No users found.</p>
-        )}
+        !searchLoading &&
+        !selected && <p className="moderation-no-results">No users found.</p>}
 
       {selected && (
         <div className="moderation-rename-form my-box">
