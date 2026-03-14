@@ -358,6 +358,19 @@ export default class AnimationManager {
       pokemonSprite.orientation = Orientation.DOWN
     }
 
+    if (
+      action === PokemonActionState.EAT &&
+      this.game.anims.exists(
+        `${pokemonSprite.pokemon.index}/${pokemonSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL}/${animation}/${SpriteType.ANIM}/${Orientation.DOWN}`
+      ) === false
+    ) {
+      // fallback to sleep animation if eat animation doesn't exist
+      animation = this.convertPokemonActionStateToAnimationType(
+        PokemonActionState.SLEEP,
+        pokemonSprite
+      )
+    }
+
     try {
       this.play(pokemonSprite, animation, {
         flip,

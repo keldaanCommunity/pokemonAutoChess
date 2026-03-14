@@ -9,6 +9,10 @@
 - Ducklett
 - Swanna
 - Glastrier
+- Dondozo
+- Tatsugiri (Curly)
+- Tatsugiri (Droopy)
+- Tatsugiri (Stretchy)
 
 # Changes to Synergies
 

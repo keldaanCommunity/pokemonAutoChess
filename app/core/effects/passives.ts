@@ -751,6 +751,45 @@ const comfeyEquipOnSimulationStartEffect = new OnSimulationStartEffect(
   Passive.COMFEY
 )
 
+const commanderPassive = new OnSimulationStartEffect(
+  ({ simulation, team, entity }) => {
+    const dondozo = simulation.board
+      .getAdjacentCells(entity.positionX, entity.positionY)
+      .find(
+        (cell) =>
+          cell.value &&
+          cell.value.name === Pkm.DONDOZO &&
+          cell.value.team === entity.team &&
+          cell.value.items.size < 3
+      )?.value
+
+    if (dondozo) {
+      // delete tatsugiri
+      team.delete(entity.id)
+      simulation.board.setEntityOnCell(
+        entity.positionX,
+        entity.positionY,
+        undefined
+      )
+      if (simulation.blueDpsMeter.has(entity.id)) {
+        simulation.blueDpsMeter.delete(entity.id)
+      }
+      if (simulation.redDpsMeter.has(entity.id)) {
+        simulation.redDpsMeter.delete(entity.id)
+      }
+
+      if (entity.name === Pkm.TATSUGIRI_CURLY) {
+        dondozo.addItem(Item.TATSUGIRI_CURLY)
+      } else if (entity.name === Pkm.TATSUGIRI_DROOPY) {
+        dondozo.addItem(Item.TATSUGIRI_DROOPY)
+      } else if (entity.name === Pkm.TATSUGIRI_STRETCHY) {
+        dondozo.addItem(Item.TATSUGIRI_STRETCHY)
+      }
+    }
+  },
+  Passive.COMMANDER
+)
+
 const conversionEffect = new OnSimulationStartEffect(
   ({ simulation, player, entity }) => {
     const opponent =
@@ -1215,6 +1254,7 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((pkm) => pkm.addPP(pkm.maxPP, pkm, 0, false))
   ],
   [Passive.COMFEY]: [comfeyEquipOnSimulationStartEffect],
+  [Passive.COMMANDER]: [commanderPassive],
   [Passive.CONVERSION]: [conversionEffect],
   [Passive.MANAPHY]: [spawnPhioneFromAquaEggOnSimulationStartEffect],
   [Passive.STONJOURNER]: [
