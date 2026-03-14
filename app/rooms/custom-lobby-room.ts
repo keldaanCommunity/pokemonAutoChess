@@ -17,7 +17,6 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { notificationsService } from "../services/notifications"
 import { Emotion, Role, Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
-import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
 import { Language } from "../types/enum/Language"
 import { ITournament } from "../types/interfaces/Tournament"
@@ -31,29 +30,31 @@ import {
   ChangeNameCommand,
   ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
-  CreateTournamentLobbiesCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
-  DeleteTournamentCommand,
-  EndTournamentMatchCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
   HeapSnapshotCommand,
   JoinOrOpenRoomCommand,
-  NextTournamentStageCommand,
-  OnCreateTournamentCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
   OnSearchByIdCommand,
   OpenBoosterCommand,
-  ParticipateInTournamentCommand,
-  RemakeTournamentLobbyCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
 } from "./commands/lobby-commands"
+import {
+  CreateTournamentLobbiesCommand,
+  DeleteTournamentCommand,
+  EndTournamentMatchCommand,
+  NextTournamentStageCommand,
+  OnCreateTournamentCommand,
+  ParticipateInTournamentCommand,
+  RemakeTournamentLobbyCommand
+} from "./commands/tournament-commands"
 import LobbyState from "./states/lobby-state"
 
 export default class CustomLobbyRoom extends Room {
@@ -167,7 +168,11 @@ export default class CustomLobbyRoom extends Room {
     this.onMessage(
       Transfer.UNBAN,
       (client, { uid, reason }: { uid: string; reason: string }) => {
-        this.dispatcher.dispatch(new UnbanUserCommand(), { client, uid, reason })
+        this.dispatcher.dispatch(new UnbanUserCommand(), {
+          client,
+          uid,
+          reason
+        })
       }
     )
 
@@ -428,7 +433,7 @@ export default class CustomLobbyRoom extends Room {
     this.fetchTournaments()
   }
 
-  async onAuth(client: Client, options, context) {
+  async onAuth(client: Client, options, context): Promise<admin.auth.UserRecord> {
     try {
       super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)

@@ -4700,6 +4700,12 @@
 		"elo_rank_change_message": "Your new rank is:\n{{rank}}",
 		"victory_road_finished_title": "Victory Road Finished!",
 		"victory_road_finished_message": "Congratulations!\nYou've finished the Victory Road at {{place}}!",
+		"tournament_win_title": "Victory!",
+		"tournament_win_message": "Congratulations!\nYou've won the tournament!",
+		"tournament_finalist_title": "Congratulations!",
+		"tournament_finalist_message": "Congratulations! You've made it to the finals of the tournament.\nYour final position: {{place}}",
+		"tournament_finished_title": "Tournament elimination",
+		"tournament_finished_message": "You've been eliminated from the tournament.\nYour final position: {{place}}",
 		"next": "Next",
 		"close": "Close",
 		"dismiss_all": "Dismiss All"
