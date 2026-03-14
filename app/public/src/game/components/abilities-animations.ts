@@ -1752,6 +1752,14 @@ export const AbilitiesAnimations: {
   [Ability.FLYING_PRESS]: skyfall({
     hitAnim: onTarget({ ability: Ability.HEAVY_SLAM })
   }),
+  [Ability.ORDER_UP]: [
+    skyfall({
+      scale: 1,
+      ease: Phaser.Math.Easing.Bounce.Out,
+      duration: 1000
+    }),
+    onTarget({ ability: Ability.HEAVY_SLAM, scale: 1, delay: 300 })
+  ],
   [Ability.SUNSTEEL_STRIKE]: skyfall({ hitAnim: shakeCamera({}), scale: 1 }),
   ["COMET_CRASH"]: skyfall({
     ability: Ability.SUNSTEEL_STRIKE,
