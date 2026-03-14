@@ -582,6 +582,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.FLAME_ORB]: [
     new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_FREEZE)
       pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.triggerBurn(
         300000,
@@ -592,6 +593,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.burnCooldown = 0
+    })
+  ],
+
+  [Item.HEAVY_DUTY_BOOTS]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_LOCKED)
+    })
+  ],
+
+  [Item.XRAY_VISION]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_SLEEP)
     })
   ],
 

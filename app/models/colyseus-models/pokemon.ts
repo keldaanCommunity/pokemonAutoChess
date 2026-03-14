@@ -6609,7 +6609,7 @@ export class Mawile extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
-  atk = 16
+  atk = 18
   speed = 41
   def = 12
   speDef = 12
@@ -7388,7 +7388,7 @@ export class RoaringMoon extends Pokemon {
   speed = 61
   def = 6
   speDef = 9
-  maxPP = 140
+  maxPP = 130
   range = 3
   skill = Ability.SCALE_SHOT
 }
@@ -17628,7 +17628,7 @@ export class Milcery extends Pokemon {
   speed = 41
   def = 2
   speDef = 6
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.CREAM
@@ -17655,7 +17655,7 @@ export class AlcremieVanilla extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.VANILLA_CREAM
@@ -17675,7 +17675,7 @@ export class AlcremieRuby extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.RUBY_CREAM
@@ -17695,7 +17695,7 @@ export class AlcremieMatcha extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.MATCHA_CREAM
@@ -17715,7 +17715,7 @@ export class AlcremieMint extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.MINT_CREAM
@@ -17735,7 +17735,7 @@ export class AlcremieLemon extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.LEMON_CREAM
@@ -17755,7 +17755,7 @@ export class AlcremieSalted extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.SALTED_CREAM
@@ -17775,7 +17775,7 @@ export class AlcremieRubySwirl extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.RUBY_SWIRL_CREAM
@@ -17795,7 +17795,7 @@ export class AlcremieCaramelSwirl extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.CARAMEL_SWIRL_CREAM
@@ -17815,7 +17815,7 @@ export class AlcremieRainbowSwirl extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.RAINBOW_SWIRL_CREAM
@@ -20393,6 +20393,68 @@ export class Toxapex extends Pokemon {
   additional = true
 }
 
+export class Dondozo extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 250
+  atk = 15
+  speed = 30
+  def = 20
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.ORDER_UP
+}
+
+export class TatsugiriCurly extends Pokemon {
+  canHoldItems = false
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 18
+  speed = 50
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SOAK
+  passive = Passive.COMMANDER
+}
+
+export class TatsugiriDroopy extends Pokemon {
+  canHoldItems = false
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 10
+  speed = 50
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.SOAK
+  passive = Passive.COMMANDER
+}
+
+export class TatsugiriStretchy extends Pokemon {
+  canHoldItems = false
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 80
+  atk = 10
+  speed = 75
+  def = 2
+  speDef = 2
+  maxPP = 100
+  range = 1
+  skill = Ability.SOAK
+  passive = Passive.COMMANDER
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21563,7 +21625,11 @@ export const PokemonClasses: Record<
   [Pkm.MAREANIE]: Mareanie,
   [Pkm.TOXAPEX]: Toxapex,
   [Pkm.DUCKLETT]: Ducklett,
-  [Pkm.SWANNA]: Swanna
+  [Pkm.SWANNA]: Swanna,
+  [Pkm.DONDOZO]: Dondozo,
+  [Pkm.TATSUGIRI_CURLY]: TatsugiriCurly,
+  [Pkm.TATSUGIRI_DROOPY]: TatsugiriDroopy,
+  [Pkm.TATSUGIRI_STRETCHY]: TatsugiriStretchy
 }
 
 // declare all the classes in colyseus schema TypeRegistry

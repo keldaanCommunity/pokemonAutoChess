@@ -1111,6 +1111,7 @@ export default class Status extends Schema implements IStatus {
       !this.locked && // lock cannot be stacked
       !this.skydiving &&
       !this.runeProtect &&
+      !pkm.effects.has(EffectEnum.IMMUNITY_LOCKED) && 
       this.ccCooldown <= 0
     ) {
       if (pkm.status.enraged) {

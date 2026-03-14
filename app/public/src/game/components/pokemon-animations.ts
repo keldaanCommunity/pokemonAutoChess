@@ -7916,5 +7916,30 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
     attackSprite: AttackSprite.FLYING_RANGE
+  },
+  [Pkm.DONDOZO]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
+    attackSprite: AttackSprite.WATER_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.TATSUGIRI_CURLY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.TATSUGIRI_DROOPY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.TATSUGIRI_STRETCHY]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.WATER_MELEE
   }
 }

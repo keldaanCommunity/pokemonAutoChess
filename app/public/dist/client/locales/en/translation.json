@@ -561,7 +561,8 @@
 		"SHADOW_FORCE": "Shadow Force",
 		"SHADOW_CLAW": "Shadow Claw",
 		"FEATHER_DANCE": "Feather Dance",
-		"GLACIAL_LANCE": "Glacial Lance"
+		"GLACIAL_LANCE": "Glacial Lance",
+		"ORDER_UP": "Order Up"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1726,7 +1727,11 @@
 		"TOXAPEX": "Toxapex",
 		"DUCKLETT": "Ducklett",
 		"SWANNA": "Swanna",
-		"GLASTRIER": "Glastrier"
+		"GLASTRIER": "Glastrier",
+		"DONDOZO": "Dondozo",
+		"TATSUGIRI_CURLY": "Tatsugiri (Curly)",
+		"TATSUGIRI_DROOPY": "Tatsugiri (Droopy)",
+		"TATSUGIRI_STRETCHY": "Tatsugiri (Stretchy)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2267,7 +2272,8 @@
 		"SHADOW_FORCE": "Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form.",
 		"SHADOW_CLAW": "Slash enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [60,100,140,SP] SPECIAL.",
 		"GLACIAL_LANCE": "Rush to a safe spot in the backline and then throws a lance of ice to the farthest target. First enemy hit takes [300,SP]% of user's ATK as SPECIAL, and ADJACENT enemies take half of that damage.",
-		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK."
+		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK.",
+		"ORDER_UP": "Deal [100,SP] SPECIAL to the target. If a Tatsugiri has been swallowed, gains the stats provided by it again. If no Tatsugiri is on board, one spawns on your bench, with a different form each round."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2705,6 +2711,7 @@
 		"TINY_MUSHROOM": "Tiny Mushroom",
 		"BIG_MUSHROOM": "Big Mushroom",
 		"BALM_MUSHROOM": "Balm Mushroom",
+		"RICE": "Rice",
 		"MOOMOO_MILK": "Moomoo Milk",
 		"BERRIES": "Berries",
 		"HONEY": "Honey",
@@ -2798,7 +2805,10 @@
 		"COVER_BAND": "Cover Band",
 		"EFFICIENT_BANDANNA": "Efficient Bandanna",
 		"NULLIFY_BANDANNA": "Nullify Bandanna",
-		"WANTED_NOTICE": "Wanted Notice"
+		"WANTED_NOTICE": "Wanted Notice",
+		"TATSUGIRI_CURLY": "Tatsugiri Commander (Curly)",
+		"TATSUGIRI_DROOPY": "Tatsugiri Commander (Droopy)",
+		"TATSUGIRI_STRETCHY": "Tatsugiri Commander (Stretchy)"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -2826,7 +2836,7 @@
 		"POKEMONOMICON": "When the holder deals SPECIAL, they BURN the target for 3 seconds",
 		"POWER_LENS": "The amount of SPECIAL blocked by SPE_DEF is inflicted back to the attacker",
 		"SHELL_BELL": "Holder heals for 33% of all damages inflicted",
-		"HEAVY_DUTY_BOOTS": "Holder is immune to any BOARD_EFFECT and forced displacement",
+		"HEAVY_DUTY_BOOTS": "Holder is immune to any BOARD_EFFECT, forced displacement and LOCKED",
 		"AQUA_EGG": "The holder regains 20% of its max PP after casting its ability, + 2 PP for each cast done in the fight",
 		"BLUE_ORB": "Every 3 attacks, unleashes a chain lightning that bounces to the 2 closest enemies, dealing 10 SPECIAL and burning 15 PP",
 		"SCOPE_LENS": "Critical attacks steal 10 PP from the target.",
@@ -2834,7 +2844,7 @@
 		"GREEN_ORB": "Holder and ADJACENT allies regain 3% of their max HP every second. 30% of overheal is converted to PP.",
 		"DEEP_SEA_TOOTH": "The holder attacks restore 5 additional PP. If the attack knocks out the target, restore 15 additional PP.",
 		"SMOKE_BALL": "Once below 40% max HP, drop the smoke ball, gain 70 SHIELD and jump to a tile away. Every ADJACENT enemy is PARALYSIS and BLINDED for 4 seconds.",
-		"XRAY_VISION": "+50 SPEED. The holder attacks can no longer miss.",
+		"XRAY_VISION": "Holder is immune to SLEEP and their attacks can no longer miss.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Critical attacks apply ARMOR_BREAK for 2 seconds.",
 		"PROTECTIVE_PADS": "Holder deals double damage against units with  SHIELD, and is protected from recoil damage and retaliation effects.",
 		"LOADED_DICE": "Attacks have [50,LK]% chance to also hit the lowest health enemy ADJACENT to target for 75% of the damage, which also trigger on-hit effects.",
@@ -2849,7 +2859,7 @@
 		"KINGS_ROCK": "+100 HP. 20% of max HP are gained as SHIELD when combat begins.",
 		"SHINY_CHARM": "Prevents damage and give PROTECT for 1.5 seconds and 50 PP the first time the holder gets below 30% HP",
 		"GRACIDEA_FLOWER": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW gain +20 SPEED",
-		"FLAME_ORB": "Holder suffers from BURN during the entire fight but increases its base ATK by 100%.",
+		"FLAME_ORB": "Holder increases its base ATK by 100% and is immune to FREEZE, but suffers from BURN during the entire fight.",
 		"ASSAULT_VEST": "+40 SPE_DEF. Reduce BURN and POISONNED damage by 50%",
 		"POKE_DOLL": "Reduce all incoming PHYSICAL and SPECIAL by 30%. Makes the holder more likely to be targeted.",
 		"RED_ORB": "25% of attack damage is dealt as TRUE",
@@ -3008,6 +3018,7 @@
 		"TINY_MUSHROOM": "Gives 40 SPEED and reduce max HP by 20% for the next fight when consumed. Will be sold for 1 GOLD when returning to town.",
 		"BIG_MUSHROOM": "Gives +30% max HP for the next fight when consumed. Will be sold for 2 GOLD when returning to town.",
 		"BALM_MUSHROOM": "When consumed, gains RUNE_PROTECT, 40 SPEED and heals 10% of max HP per second for the next fight. Will be sold for 5 GOLD when returning to town.",
+		"RICE": "Gives 50 SHIELD. If a Tatsugiri is on the board, also provides the additional stats given by its form.",
 		"ROCK_SALT": "Start the next fight with RUNE_PROTECT for 10 seconds and 20% of max HP as SHIELD.",
 		"NUTRITIOUS_EGG": "Start the next fight with +50% base ATK, DEF and SPE_DEF.",
 		"LEFTOVERS": "No effect. There is not much left to eat.",
@@ -3097,7 +3108,10 @@
 		"COVER_BAND": "If an ADJACENT ally is about to get KO with some incoming damage, the wearer takes the damage instead.",
 		"EFFICIENT_BANDANNA": "The holder and allies ADJACENT_IN_THE_SAME_ROW have their max PP reduced by 15%.",
 		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack.",
-		"WANTED_NOTICE": "Wanted: Fainted or Alive\n Reward: 10 GOLD"
+		"WANTED_NOTICE": "Wanted: Fainted or Alive\n Reward: 10 GOLD",
+		"TATSUGIRI_CURLY": "Can command a Dondozo.",
+		"TATSUGIRI_DROOPY": "Can command a Dondozo.",
+		"TATSUGIRI_STRETCHY": "Can command a Dondozo."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3281,7 +3295,8 @@
 		"STAMINA": "Every 10 hits received, gain [20,SP] SHIELD",
 		"SPEWPA": "Hatched Pokémon evolve automatically after 5 stages. The evolution depends on your dominant synergy on board between SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "Drops embers on the ground when flying away. BOARD_EFFECT: embers deal 10 SPECIAL per second and BURN non FLYING or FIRE Pokémon that walk on it.",
-		"FINIZEN": "Transforms into Palafin Hero Form after 5 allies are KO'd (not counting spawns), or if this Pokémon is the last one standing. Regain all HP when that happens."
+		"FINIZEN": "Transforms into Palafin Hero Form after 5 allies are KO'd (not counting spawns), or if this Pokémon is the last one standing. Regain all HP when that happens.",
+		"COMMANDER": "Tatsugiri cannot hold items. At the start of the fight, an ADJACENT Dondozo with a free item slot swallows Tatsugiri. Tatsugiri provides stats based on its form: \nCurly Form: +8 ATK\nDroopy Form: +8 DEF\nStretchy Form: +25 SPEED"		
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -4520,7 +4535,7 @@
 		"defense_calculation": "How Defense works?",
 		"defense_calculation_description": "Same system as League of Legends: Damage = ATK / (1+(0.05*DEF)), rounded up. DEF works for PHYSICAL, SPE_DEF for SPECIAL.",
 		"round_damage_calculation": "Round damage calculation",
-		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponents alive) ; rounded up, clones/spawns do not count",
+		"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponent's Pokémon alive) ; rounded up, clones/spawns do not count",
 		"pool_size_per_category": "Pool size per category",
 		"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
 		"luck_title": "How Luck works?",

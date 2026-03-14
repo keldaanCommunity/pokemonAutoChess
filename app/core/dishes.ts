@@ -1,4 +1,4 @@
-import { FIGHTING_PHASE_DURATION } from "../config"
+import { FIGHTING_PHASE_DURATION, getBaseAltForm } from "../config"
 import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Berries, Dishes, Item } from "../types/enum/Item"
@@ -15,7 +15,7 @@ import {
   PeriodicEffect
 } from "./effects/effect"
 
-export const DishByPkm: { [pkm in Pkm]?: Item } = {
+export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
   [Pkm.LICKILICKY]: Item.RAGE_CANDY_BAR,
   [Pkm.SINISTEA]: Item.TEA,
@@ -75,8 +75,13 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.DEERLING_SUMMER]: Item.TEA,
   [Pkm.SAWSBUCK_SUMMER]: Item.TEA,
   [Pkm.LECHONK]: Item.MUSHROOMS,
-  [Pkm.OINKOLOGNE_MALE]: Item.MUSHROOMS
+  [Pkm.OINKOLOGNE_MALE]: Item.MUSHROOMS,
   //[Pkm.OINKOLOGNE_FEMALE]: Item.MUSHROOMS
+  [Pkm.DONDOZO]: Item.RICE,
+  [Pkm.TATSUGIRI_CURLY]: null,
+  [Pkm.TATSUGIRI_DROOPY]: null,
+  [Pkm.TATSUGIRI_STRETCHY]: null,
+  [Pkm.GUZZLORD]: null
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -426,6 +431,21 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   RIBBON_SWEET: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
       entity?.addSpecialDefense(3, entity, 0, false, true)
+    })
+  ],
+  RICE: [
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      entity?.addShield(50, entity, 0, false)
+      const tatsugiriOnBoard = values(player.board).find(
+        (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
+      )
+      if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_CURLY) {
+        entity?.addAttack(8, entity, 0, false)
+      } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_DROOPY) {
+        entity?.addDefense(8, entity, 0, false)
+      } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_STRETCHY) {
+        entity?.addSpeed(25, entity, 0, false)
+      }
     })
   ]
 }

@@ -12,6 +12,10 @@
 - Galarian Darumaka
 - Galarian Darmanitan
 - Galarian Darmanitan (Zen)
+- Dondozo
+- Tatsugiri (Curly)
+- Tatsugiri (Droopy)
+- Tatsugiri (Stretchy)
 
 # Changes to Synergies
 
@@ -53,6 +57,9 @@
 - Rework Origin Giratina: Slash all enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [40,80,120,SP] SPECIAL.
 - Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 - Nerf Palkia: PP 110 → 120
+- Buff Mawile: Attack 16 → 18
+
+- Buff Alcremie line: PP 80 → 70
 
 > We continue to reduce the amount of abilities that can hit the whole enemy team, in order to make positionning and movement more important in the game.
 
@@ -64,13 +71,15 @@
 
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
 - Adjust Bounce Damage (Spoink, Mantyke): 10/20/30 → 15/20/25
-- Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast
+- Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast. Roaring Moon PP 140 → 130
 
 # Changes to Items
 
-> Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
-- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+> Statuses are not all equal in how much they frustrate players, so we provide additional hard counter itemization options for those that prevent movement or action.
 
+- New effect for Flame Orb: holder is immune to FREEZE
+- New effect for Heavy-Duty Boots: holder is immune to LOCKED
+- New effect for X-Ray vision: holder is immune to SLEEP
 
 > We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. The items that are very easy to play like Nullify Bandanna or Mach Ribbon are overperforming a bit, while the ones that are more niche and require more game knowledge like Black Belt or Explosive Band are underperforming globally, but are performing better at higher Elo. Base item stats adjustments are a good way to reduce the gap between low and high elo, while keeping the skill diff of these items intact.
 
@@ -81,6 +90,10 @@
 > Big Eater Belt change brought many quirks we aim to remove. It should now only works with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
 
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
+
+> Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
+
+- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
 
 - Added visual effects for support items on adjacent positions
 - Added visual effect for Loaded dice second hit

@@ -1,4 +1,10 @@
-import { BOARD_HEIGHT, BOARD_WIDTH, DEFAULT_SPEED } from "../../config"
+import { t } from "i18next"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  DEFAULT_SPEED,
+  getBaseAltForm
+} from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -16252,6 +16258,38 @@ export class GlacialLanceStrategy extends AbilityStrategy {
   }
 }
 
+export class OrderUpStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const damage = 100
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    if (pokemon.player) {
+      const tatsugiriOnBoard = values(pokemon.player.board).find(
+        (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
+      )
+      if (!tatsugiriOnBoard) {
+        const form = [
+          Pkm.TATSUGIRI_CURLY,
+          Pkm.TATSUGIRI_DROOPY,
+          Pkm.TATSUGIRI_STRETCHY
+        ][pokemon.simulation.stageLevel % 3]
+        pokemon.simulation.room.spawnOnBench(pokemon.player, form, "fishing")
+      } else if (tatsugiriOnBoard.name === Pkm.TATSUGIRI_CURLY) {
+        pokemon.addAttack(8, pokemon, 1, crit)
+      } else if (tatsugiriOnBoard.name === Pkm.TATSUGIRI_DROOPY) {
+        pokemon.addDefense(8, pokemon, 1, crit)
+      } else if (tatsugiriOnBoard.name === Pkm.TATSUGIRI_STRETCHY) {
+        pokemon.addSpeed(25, pokemon, 1, crit)
+      }
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16794,7 +16832,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHADOW_CLAW]: new ShadowClawStrategy(),
   [Ability.SHADOW_FORCE]: new ShadowForceStrategy(),
   [Ability.FEATHER_DANCE]: new FeatherDanceStrategy(),
-  [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy()
+  [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
+  [Ability.ORDER_UP]: new OrderUpStrategy()
 }
 
 export function castAbility(

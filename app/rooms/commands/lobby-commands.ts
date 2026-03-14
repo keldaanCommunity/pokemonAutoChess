@@ -853,7 +853,7 @@ export class BanUserCommand extends Command<
     reason: string
   }) {
     try {
-      const bannedUser = await UserMetadata.findOne({ uid: uid })
+      const bannedUser = await UserMetadata.findOne({ uid })
       const user = this.room.users.get(client.auth.uid)
       if (
         user &&
@@ -861,11 +861,11 @@ export class BanUserCommand extends Command<
         (user.role === Role.ADMIN || user.role === Role.MODERATOR) &&
         bannedUser.role !== Role.ADMIN
       ) {
+        const res = await UserMetadata.updateOne({ uid }, { banned: true })
         this.state.removeMessages(uid)
-        if (!bannedUser.banned) {
-          await UserMetadata.updateOne({ uid }, { banned: true })
+        if (res.modifiedCount > 0) {
           client.send(
-            Transfer.BANNED,
+            Transfer.ALERT,
             `${user.displayName} banned the user ${bannedUser.displayName}`
           )
 
@@ -874,7 +874,7 @@ export class BanUserCommand extends Command<
           client.send(Transfer.USER, bannedUser)
         } else {
           client.send(
-            Transfer.BANNED,
+            Transfer.ALERT,
             `${bannedUser.displayName} was already banned`
           )
         }
@@ -883,6 +883,8 @@ export class BanUserCommand extends Command<
             c.leave(CloseCodes.USER_BANNED)
           }
         })
+      } else if (!bannedUser) {
+        client.send(Transfer.ALERT, `No user found with ID ${uid}`)
       }
     } catch (error) {
       logger.error(error)
@@ -892,30 +894,42 @@ export class BanUserCommand extends Command<
 
 export class UnbanUserCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; uid: string; name: string }
+  { client: Client; uid: string; reason: string }
 > {
   async execute({
     client,
     uid,
-    name
+    reason
   }: {
     client: Client
     uid: string
-    name: string
+    reason: string
   }) {
     try {
+      const unbannedUser = await UserMetadata.findOne({ uid })
       const user = this.room.users.get(client.auth.uid)
-      if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
+      if (
+        unbannedUser &&
+        user &&
+        (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+      ) {
         const res = await UserMetadata.updateOne({ uid }, { banned: false })
         if (res.modifiedCount > 0) {
           client.send(
-            Transfer.BANNED,
-            `${user.displayName} unbanned the user ${name}`
+            Transfer.ALERT,
+            `${user.displayName} unbanned the user ${unbannedUser?.displayName} (User ID: ${uid})`
           )
-          discordService.announceUnban(user, name)
-          const unbannedUser = await UserMetadata.findOne({ uid })
-          if (unbannedUser) client.send(Transfer.USER, unbannedUser)
+          discordService.announceUnban(user, unbannedUser, reason)
+          unbannedUser.banned = false
+          client.send(Transfer.USER, unbannedUser)
+        } else {
+          client.send(
+            Transfer.ALERT,
+            `${unbannedUser.displayName} was not banned`
+          )
         }
+      } else if (!unbannedUser) {
+        client.send(Transfer.ALERT, `No user found with ID ${uid}`)
       }
     } catch (error) {
       logger.error(error)
