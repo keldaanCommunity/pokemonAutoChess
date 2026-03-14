@@ -1828,8 +1828,6 @@
 		"STURDY": "6ダメージをブロック",
 		"DEFIANT": "9ダメージをブロック",
 		"JUSTIFIED": "12ダメージをブロック",
-		"LIGHT_SCREEN": "+100%AP。3店舗ごとにアンノーンが出現します。",
-		"EERIE_SPELL": "+150%AP。戦闘後、アンノーンショップを入手。",
 		"HONE_CLAWS": "+30% CRIT_CHANCE と +30% CRIT_POWER を獲得",
 		"ASSURANCE": "+40% CRIT_CHANCE と +50% CRIT_POWER を獲得",
 		"BEAT_UP": "+50% CRIT_CHANCE と +80% CRIT_POWER を獲得",
@@ -1893,7 +1891,9 @@
 		"GRASSY_TERRAIN": "与ダメージ20%アップ(草のみ)",
 		"PSYCHIC_TERRAIN": "与ダメージ20%アップ(サイキックのみ)",
 		"ELECTRIC_TERRAIN": "与ダメージ20%アップ(電気のみ)",
-		"MISTY_TERRAIN": "与ダメージ20%アップ(妖精のみ)"
+		"MISTY_TERRAIN": "与ダメージ20%アップ(妖精のみ)",
+		"LIGHT_SCREEN": "+100%AP。3店舗ごとにアンノーンが出現します。",
+		"EERIE_SPELL": "+150%AP。戦闘後、アンノーンショップを入手。"
 	},
 	"item": {
 		"FOSSIL_STONE": "化石石",

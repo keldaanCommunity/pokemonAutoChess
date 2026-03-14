@@ -2263,8 +2263,8 @@
 		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并进入PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
-		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
-		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。"
+		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。",
+		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
