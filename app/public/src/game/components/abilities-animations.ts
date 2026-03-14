@@ -2922,6 +2922,11 @@ export const AbilitiesAnimations: {
     },
     hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 }),
     scale: 0.25
+  }),
+  ["GALARIAN_DARMANITAN_ZEN_BURN"]: onCaster({
+    ability: "INFERNO",
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    scale: 2
   })
 }
 

@@ -250,7 +250,7 @@ export type PokemonAnimationConfig = {
   noShadow?: boolean
   attackSprite?: AttackSprite
   hitSprite?: HitSprite | HitSprite[]
-  animationsOriented?: AnimationType[]
+  animationsOriented?: { [anim in AnimationType]?: boolean }
 }
 
 export enum AttackSprite {

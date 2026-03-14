@@ -9,6 +9,9 @@
 - Ducklett
 - Swanna
 - Glastrier
+- Galarian Darumaka
+- Galarian Darmanitan
+- Galarian Darmanitan (Zen)
 - Dondozo
 - Tatsugiri (Curly)
 - Tatsugiri (Droopy)
@@ -31,10 +34,10 @@
 - WILD 6: +50 SPEED and +20% base ATK → +40 SPEED and +40% base ATK
 - New effect for WILD 9: Once below 30% HP, gain 30 Shield and double the Attack and Speed buffs for 3 seconds.
 
-- Fighting now only throw away melee enemies (1 range)
-- Nerf Ice: Freeze chance 25% → 20%
-- Changed Psychic 3: Unown now appears every 5 shops
-- Renamed Psychic synergy steps
+- FIGHTING now only throw away melee enemies (1 range)
+- Nerf ICE: FREEZE chance 25% → 20%
+- Changed PSYCHIC 3: Unown now appears every 5 shops
+- Renamed PSYCHIC synergy steps
 
 # Changes to Pokémon & Abilities
 
