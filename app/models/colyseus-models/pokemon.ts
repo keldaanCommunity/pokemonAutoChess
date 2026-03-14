@@ -17568,7 +17568,7 @@ export class Milcery extends Pokemon {
   speed = 41
   def = 2
   speDef = 6
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.CREAM
@@ -17595,7 +17595,7 @@ export class AlcremieVanilla extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.VANILLA_CREAM
@@ -17615,7 +17615,7 @@ export class AlcremieRuby extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.RUBY_CREAM
@@ -17635,7 +17635,7 @@ export class AlcremieMatcha extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.MATCHA_CREAM
@@ -17655,7 +17655,7 @@ export class AlcremieMint extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.MINT_CREAM
@@ -17675,7 +17675,7 @@ export class AlcremieLemon extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.LEMON_CREAM
@@ -17695,7 +17695,7 @@ export class AlcremieSalted extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.SALTED_CREAM
@@ -17715,7 +17715,7 @@ export class AlcremieRubySwirl extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.RUBY_SWIRL_CREAM
@@ -17735,7 +17735,7 @@ export class AlcremieCaramelSwirl extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.CARAMEL_SWIRL_CREAM
@@ -17755,7 +17755,7 @@ export class AlcremieRainbowSwirl extends Pokemon {
   speed = 41
   def = 6
   speDef = 12
-  maxPP = 80
+  maxPP = 70
   range = 2
   skill = Ability.DECORATE
   passive = Passive.RAINBOW_SWIRL_CREAM
