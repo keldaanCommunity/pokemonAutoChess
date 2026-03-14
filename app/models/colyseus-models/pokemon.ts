@@ -7388,7 +7388,7 @@ export class RoaringMoon extends Pokemon {
   speed = 61
   def = 6
   speDef = 9
-  maxPP = 140
+  maxPP = 130
   range = 3
   skill = Ability.SCALE_SHOT
 }
