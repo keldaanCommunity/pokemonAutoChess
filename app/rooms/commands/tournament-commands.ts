@@ -38,6 +38,14 @@ export class OnCreateTournamentCommand extends Command<
       if (user && user.role && user.role === Role.ADMIN) {
         await this.state.createTournament(name, startDate)
         await this.room.fetchTournaments()
+        this.room.presence.publish(
+          "announcement",
+          `A new tournament "${name}" is planned on ${new Date(
+            startDate
+          ).toLocaleString("en-US", {
+            timeZoneName: "short"
+          })}, mark your calendar !`
+        )
       }
     } catch (error) {
       logger.error(error)
