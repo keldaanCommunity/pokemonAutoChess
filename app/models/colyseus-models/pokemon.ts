@@ -6609,7 +6609,7 @@ export class Mawile extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 180
-  atk = 16
+  atk = 18
   speed = 41
   def = 12
   speDef = 12
