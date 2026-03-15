@@ -319,15 +319,21 @@ export default class Simulation extends Schema implements ISimulation {
     if (team === Team.BLUE_TEAM) {
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
-          if (this.board.getEntityOnCell(x, y) === undefined) {
+          if (
+            this.board.isOnBoard(x, y) &&
+            this.board.getEntityOnCell(x, y) === undefined
+          ) {
             return { x, y }
           }
         }
       }
     } else {
-      for (let y = 0; y < this.board.rows; y++) {
+      for (let y = this.board.rows - 1; y >= 0; y--) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
-          if (this.board.getEntityOnCell(x, y) === undefined) {
+          if (
+            this.board.isOnBoard(x, y) &&
+            this.board.getEntityOnCell(x, y) === undefined
+          ) {
             return { x, y }
           }
         }
@@ -383,10 +389,7 @@ export default class Simulation extends Schema implements ISimulation {
       const y = positionY + dy * (team === Team.BLUE_TEAM ? 1 : -1)
 
       if (
-        x >= 0 &&
-        x < this.board.columns &&
-        y >= 0 &&
-        y < this.board.rows &&
+        this.board.isOnBoard(x, y) &&
         this.board.getEntityOnCell(x, y) === undefined
       ) {
         return { x, y }
