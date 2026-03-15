@@ -98,6 +98,7 @@
 ## Tools
 
 - Partial revert of Electrizier: base SPEED: 0 → 10
+- Removed 30 base SPEED from Surfboard
 
 ## Dishes
 
