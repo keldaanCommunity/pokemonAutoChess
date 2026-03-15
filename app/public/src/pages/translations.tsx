@@ -15,7 +15,28 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
+import { localStore, LocalStoreKeys } from "./utils/store"
 import "./translations.css"
+
+function storageKey(lang: Language) {
+  return `${LocalStoreKeys.TRANSLATION_EDITS}:${lang}`
+}
+
+function loadEdits(lang: Language): Record<string, string> {
+  return localStore.get(storageKey(lang) as LocalStoreKeys) ?? {}
+}
+
+function saveEdits(lang: Language, edits: Record<string, string>) {
+  if (Object.keys(edits).length === 0) {
+    localStore.delete(storageKey(lang) as LocalStoreKeys)
+  } else {
+    localStore.set(storageKey(lang) as LocalStoreKeys, edits)
+  }
+}
+
+function clearEdits(lang: Language) {
+  localStore.delete(storageKey(lang) as LocalStoreKeys)
+}
 
 export default function TranslationsPage() {
   const navigate = useNavigate()
@@ -51,10 +72,10 @@ export default function TranslationsPage() {
       })
   }, [])
 
-  // Reload target language
+  // Reload target language and restore any saved edits
   useEffect(() => {
     setLoading(true)
-    setEdits({})
+    setEdits(loadEdits(targetLang))
     fetch(`locales/${targetLang}/translation.json`)
       .then((r) => r.json())
       .then((data: TranslationMap) => {
@@ -76,17 +97,28 @@ export default function TranslationsPage() {
     [edits, targetData]
   )
 
-  const onEdit = useCallback((path: string, value: string) => {
-    setEdits((prev) => ({ ...prev, [path]: value }))
-  }, [])
+  const onEdit = useCallback(
+    (path: string, value: string) => {
+      setEdits((prev) => {
+        const next = { ...prev, [path]: value }
+        saveEdits(targetLang, next)
+        return next
+      })
+    },
+    [targetLang]
+  )
 
-  const onRevert = useCallback((path: string) => {
-    setEdits((prev) => {
-      const next = { ...prev }
-      delete next[path]
-      return next
-    })
-  }, [])
+  const onRevert = useCallback(
+    (path: string) => {
+      setEdits((prev) => {
+        const next = { ...prev }
+        delete next[path]
+        saveEdits(targetLang, next)
+        return next
+      })
+    },
+    [targetLang]
+  )
 
   const allLeaves = useMemo<
     Array<{ path: string; leafKey: string; enValue: string }>
@@ -180,6 +212,7 @@ export default function TranslationsPage() {
           content,
           setPrProgress
         )
+        clearEdits(targetLang)
         setPrUrl(url)
       } catch (e: unknown) {
         setPrError(e instanceof Error ? e.message : "Unknown error")
@@ -206,8 +239,9 @@ export default function TranslationsPage() {
 
   const handleReset = useCallback(() => {
     if (editedCount > 0 && !window.confirm("Discard all edits?")) return
+    clearEdits(targetLang)
     setEdits({})
-  }, [editedCount])
+  }, [editedCount, targetLang])
 
   const isReady = enData !== null && targetData !== null && !loading
 
@@ -226,6 +260,7 @@ export default function TranslationsPage() {
             search={search}
             translatedCount={translatedCount}
             totalCount={allLeaves.length}
+            editedCount={editedCount}
             onLangChange={setTargetLang}
             onFilterChange={setFilterMode}
             onSearch={setSearch}

@@ -9,6 +9,7 @@ export interface TranslationToolbarProps {
   search: string
   translatedCount: number
   totalCount: number
+  editedCount: number
   onLangChange: (lang: Language) => void
   onFilterChange: (mode: "all" | "missing" | "translated") => void
   onSearch: (q: string) => void
@@ -22,6 +23,7 @@ export function TranslationToolbar({
   search,
   translatedCount,
   totalCount,
+  editedCount,
   onLangChange,
   onFilterChange,
   onSearch,
@@ -37,7 +39,17 @@ export function TranslationToolbar({
       <select
         id="lang-select"
         value={targetLang}
-        onChange={(e) => onLangChange(e.currentTarget.value as Language)}
+        onChange={(e) => {
+          const next = e.currentTarget.value as Language
+          if (
+            editedCount === 0 ||
+            window.confirm(
+              `You have ${editedCount} unsaved edit${editedCount === 1 ? "" : "s"}. Switching language will discard all changes. Continue?`
+            )
+          ) {
+            onLangChange(next)
+          }
+        }}
       >
         {Object.values(Language)
           .filter((l) => l !== Language.en)
@@ -65,9 +77,11 @@ export function TranslationToolbar({
 
       <span className="translations-stats">
         <span className="stat-translated">{translatedCount} translated</span>
-        {" · "}
-        <span className="stat-missing">{missingCount} missing</span>(
-        {((translatedCount / totalCount) * 100).toFixed(1)}% complete)
+        {", "}
+        <span className="stat-missing">{missingCount} missing</span>{" "}
+        <span>
+          ({((translatedCount / totalCount) * 100).toFixed(1)}% complete)
+        </span>
       </span>
 
       <div className="spacer" />
