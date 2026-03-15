@@ -23,7 +23,12 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import { getSynergyStep } from "../models/colyseus-models/synergies"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
-import { Transfer } from "../types"
+import {
+  MemoryDiscs,
+  SynergyGivenByItem,
+  SynergyItems,
+  Transfer
+} from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -516,7 +521,13 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.KECLEON) {
-      itemsSet = SynergyStones
+      const topSynergies = values(state.players).flatMap((p) =>
+        p.synergies.getTopSynergies(3)
+      )
+      itemsSet = SynergyItems.filter(
+        (i) =>
+          !isIn(MemoryDiscs, i) && isIn(topSynergies, SynergyGivenByItem[i])
+      )
       maxCopiesPerItem = 2
     }
 

@@ -4484,7 +4484,7 @@
 		"CHOSEN_ONES": "The add picks you choose evolve immediately and gain bonus stats."
 	},
 	"town_encounter_description": {
-		"KECLEON": "Kecleon sells Synergy stones for {{cost}} GOLD",
+		"KECLEON": "Kecleon sells Synergy items for {{cost}} GOLD",
 		"CHANSEY": "Chansey sells EGG_FOR_SELL for {{cost}} GOLD",
 		"ELECTIVIRE": "Electivire sells tools for {{cost}} GOLD",
 		"XATU": "Xatu gives a TREASURE_BOX to all players. You wonder what's inside.",

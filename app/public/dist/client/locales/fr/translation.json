@@ -4425,7 +4425,7 @@
 		"CHOSEN_ONES": "Les choix additionnels que vous sélectionnez évoluent immédiatement et gagnent des statistiques bonus."
 	},
 	"town_encounter_description": {
-		"KECLEON": "$t(pkm.KECLEON) vend des pierres synergies pour {{cost}} GOLD",
+		"KECLEON": "$t(pkm.KECLEON) vend des objets à synergies pour {{cost}} GOLD",
 		"CHANSEY": "$t(pkm.CHANSEY) vend des EGG_FOR_SELL pour {{cost}} GOLD",
 		"ELECTIVIRE": "$t(pkm.ELECTIVIRE) vend des outils pour {{cost}} GOLD",
 		"XATU": "$t(pkm.XATU) donne une TREASURE_BOX à tous les joueurs. Vous vous demandez ce qu'il y a à l'intérieur.",

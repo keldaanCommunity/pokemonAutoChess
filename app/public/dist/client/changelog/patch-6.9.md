@@ -108,12 +108,13 @@
 
 ## Town Items
 
-- Nerf MISSION_ORDER_GREEN: reach 8 → 9 different active synergies
-
 > I can't nerf the quality of community guides unfortunately, so I have to make this mission more difficult despite being already hard for beginners, in order to keep it balanced for high elo players.
+
+- Nerf MISSION_ORDER_GREEN: reach 8 → 9 different active synergies
 
 - Buff GIMMIGHOUL_COIN: +3 GOLD → +5 GOLD when obtained
 - Reduce the price of Chansey EGG_FOR_SELL: 10 → 5 GOLD
+- Kecleon now sells all kinds of synergy items instead of just synergy stones. Also the item choice better matches the top synergies of each player.
 
 ## Misc
 
