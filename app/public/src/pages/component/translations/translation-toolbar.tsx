@@ -66,7 +66,8 @@ export function TranslationToolbar({
       <span className="translations-stats">
         <span className="stat-translated">{translatedCount} translated</span>
         {" · "}
-        <span className="stat-missing">{missingCount} missing</span>
+        <span className="stat-missing">{missingCount} missing</span>(
+        {((translatedCount / totalCount) * 100).toFixed(1)}% complete)
       </span>
 
       <div className="spacer" />
