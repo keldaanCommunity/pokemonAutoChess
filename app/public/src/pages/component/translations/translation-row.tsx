@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { addIconsToDescription } from "../../utils/descriptions"
+import "./translation-row.css"
 
 export interface TranslationRowProps {
   path: string

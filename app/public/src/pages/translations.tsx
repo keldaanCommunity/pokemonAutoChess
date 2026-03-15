@@ -199,10 +199,10 @@ export default function TranslationsPage() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = `${targetLang}.json`
+    a.download = `translation.json`
     a.click()
     URL.revokeObjectURL(url)
-  }, [targetData, edits, targetLang])
+  }, [targetData, edits])
 
   const handleReset = useCallback(() => {
     if (editedCount > 0 && !window.confirm("Discard all edits?")) return
@@ -308,6 +308,7 @@ export default function TranslationsPage() {
                 <button className="bubbly red" onClick={handleReset}>
                   Reset all
                 </button>
+                <div className="spacer"></div>
                 <button className="bubbly blue" onClick={handleDownload}>
                   Download {LanguageNames[targetLang]} JSON
                 </button>

@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useRef, useState } from "react"
 import { Language } from "../../../../../types/enum/Language"
+import "./translation-toolbar.css"
 import { LanguageNames } from "../../../../dist/client/locales"
 
 export interface TranslationToolbarProps {
@@ -28,6 +29,8 @@ export function TranslationToolbar({
   onExpandAll
 }: TranslationToolbarProps) {
   const missingCount = totalCount - translatedCount
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
   return (
     <div className="translations-toolbar my-box">
       <label htmlFor="lang-select">Translate to:</label>
@@ -77,6 +80,13 @@ export function TranslationToolbar({
       </button>
       <button
         className="bubbly"
+        onClick={() => dialogRef.current?.showModal()}
+        style={{ fontSize: "0.9em" }}
+      >
+        Help
+      </button>
+      <button
+        className="bubbly"
         onClick={onExpandAll}
         style={{ fontSize: "0.9em" }}
       >
@@ -90,6 +100,44 @@ export function TranslationToolbar({
         value={search}
         onChange={(e) => onSearch(e.currentTarget.value)}
       />
+      <dialog ref={dialogRef} className="translations-help-dialog">
+        <h3>How to contribute translations</h3>
+        <ul>
+          <li>
+            Select the target language from the <strong>Translate to</strong>{" "}
+            dropdown.
+          </li>
+          <li>
+            Use the <strong>Filter</strong> dropdown to focus on missing or
+            already-translated labels.
+          </li>
+          <li>
+            Edit the right-hand column for any label you want to translate.
+            Edited rows are highlighted.
+          </li>
+          <li>
+            Click <strong>↩</strong> on a row to revert your change to the saved
+            value.
+          </li>
+          <li>
+            Use the search bar to quickly find labels by key, English text, or
+            translated text.
+          </li>
+          <li>
+            When done, use <strong>Download JSON</strong> to save the file
+            locally, or <strong>Submit Pull Request</strong> to contribute
+            directly via GitHub (requires a personal access token).
+          </li>
+        </ul>
+        <div className="translations-help-dialog-actions">
+          <button
+            className="bubbly blue"
+            onClick={() => dialogRef.current?.close()}
+          >
+            Close
+          </button>
+        </div>
+      </dialog>
     </div>
   )
 }

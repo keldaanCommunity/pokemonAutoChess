@@ -1,5 +1,6 @@
 import React, { useMemo } from "react"
 import { TranslationRow } from "./translation-row"
+import "./translation-section.css"
 import type { TranslationNode } from "./types"
 
 export interface TranslationSectionProps {
