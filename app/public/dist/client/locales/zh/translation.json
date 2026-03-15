@@ -3991,6 +3991,7 @@
 	"chat_history": "聊天记录",
 	"load_more": "加载更多",
 	"no_history_found": "未发现记录",
+	"no_results_found": "未找到结果",
 	"top": "名次：",
 	"level": "等级",
 	"wins": "胜场",
@@ -4023,6 +4024,10 @@
 	"profile": "个人资料",
 	"search": "搜索",
 	"average_place": "平均名次",
+	"overview": "总览",
+	"popularity_over_time": "人气—时间关系图",
+	"placement_over_time": "名次—时间关系图",
+	"top_n": "名次：{{count}}",
 	"carousel_priority": "轮盘选取优先级",
 	"count": "计数",
 	"meta_report": "环境报告",
@@ -4553,7 +4558,9 @@
 		"ROOM_DELETED": "这个房间已被删除。",
 		"GAME_ALREADY_STARTED": "这局游戏已经开始。",
 		"INVALID_PASSWORD": "密码错误。",
-		"UNKNOWN_ERROR": "发生错误。异常代码：{{error}}"
+		"UNKNOWN_ERROR": "发生错误。异常代码：{{error}}",
+		"SERVER_SHUTDOWN": "服务器维护中",
+		"FAILED_TO_RECONNECT": "未能重新连接。请刷新页面再试一次。"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "连接已断开。正在尝试重新连接……",
@@ -4693,6 +4700,12 @@
 		"elo_rank_change_message": "你的段位现在是：\n{{rank}}",
 		"victory_road_finished_title": "胜利之路已完成！",
 		"victory_road_finished_message": "恭喜！\n你完成了胜利之路，你的名次是：{{place}}！",
+		"tournament_win_title": "Victory!",
+		"tournament_win_message": "Congratulations!\nYou've won the tournament!",
+		"tournament_finalist_title": "Congratulations!",
+		"tournament_finalist_message": "Congratulations! You've made it to the finals of the tournament.\nYour final position: {{place}}",
+		"tournament_finished_title": "Tournament elimination",
+		"tournament_finished_message": "You've been eliminated from the tournament.\nYour final position: {{place}}",
 		"next": "下一条",
 		"close": "关闭",
 		"dismiss_all": "全部关闭"
