@@ -561,7 +561,8 @@
 		"SHADOW_FORCE": "暗影潜袭",
 		"SHADOW_CLAW": "暗影爪",
 		"FEATHER_DANCE": "羽毛舞",
-		"GLACIAL_LANCE": "雪矛"
+		"GLACIAL_LANCE": "雪矛",
+		"ORDER_UP": "上菜"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1505,6 +1506,9 @@
 		"DARUMAKA": "火红不倒翁",
 		"DARMANITAN": "达摩狒狒",
 		"DARMANITAN_ZEN": "达摩狒狒（达摩模式）",
+		"GALARIAN_DARUMAKA": "伽勒尔火红不倒翁",
+		"GALARIAN_DARMANITAN": "伽勒尔达摩狒狒",
+		"GALARIAN_DARMANITAN_ZEN": "伽勒尔达摩狒狒（达摩模式）",
 		"TURTONATOR": "爆焰龟兽",
 		"KRABBY": "大钳蟹",
 		"KINGLER": "巨钳蟹",
@@ -1723,7 +1727,11 @@
 		"TOXAPEX": "超坏星",
 		"DUCKLETT": "鸭宝宝",
 		"SWANNA": "舞天鹅",
-		"GLASTRIER": "雪暴马"
+		"GLASTRIER": "雪暴马",
+		"DONDOZO": "吃吼霸",
+		"TATSUGIRI_CURLY": "米立龙（上弓姿势）",
+		"TATSUGIRI_DROOPY": "米立龙（下垂姿势）",
+		"TATSUGIRI_STRETCHY": "米立龙（平挺姿势）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2264,7 +2272,8 @@
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
 		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
-		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。"
+		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。",
+		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战席上将出现一只，其形态每轮均有不同。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2289,6 +2298,9 @@
 		"STURDY": "结实",
 		"DEFIANT": "不服输",
 		"JUSTIFIED": "正义之心",
+		"PRECOGNITION": "预知",
+		"AURA": "气场",
+		"TRANSCENDENCE": "超越",
 		"HONE_CLAWS": "磨爪",
 		"ASSURANCE": "恶意追击",
 		"BEAT_UP": "围攻",
@@ -2699,6 +2711,7 @@
 		"TINY_MUSHROOM": "小蘑菇",
 		"BIG_MUSHROOM": "大蘑菇",
 		"BALM_MUSHROOM": "芳香蘑菇",
+		"RICE": "米饭",
 		"MOOMOO_MILK": "哞哞鲜奶",
 		"BERRIES": "热带龙的果实",
 		"HONEY": "甜甜蜜",
@@ -2792,7 +2805,10 @@
 		"COVER_BAND": "掩护头巾",
 		"EFFICIENT_BANDANNA": "高效头巾",
 		"NULLIFY_BANDANNA": "消除头巾",
-		"WANTED_NOTICE": "通缉令"
+		"WANTED_NOTICE": "通缉令",
+		"TATSUGIRI_CURLY": "发号施令的米立龙（上弓姿势）",
+		"TATSUGIRI_DROOPY": "发号施令的米立龙（下垂姿势）",
+		"TATSUGIRI_STRETCHY": "发号施令的米立龙（平挺姿势）"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -2820,7 +2836,7 @@
 		"POKEMONOMICON": "携带者造成SPECIAL时还会使目标陷入BURN 3秒",
 		"POWER_LENS": "由SPE_DEF减免的SPECIAL改为反弹至进攻方",
 		"SHELL_BELL": "携带者造成任意伤害时，恢复伤害额的33%",
-		"HEAVY_DUTY_BOOTS": "携带者无视BOARD_EFFECT，且无法被强制位移。",
+		"HEAVY_DUTY_BOOTS": "携带者免疫LOCKED，无视BOARD_EFFECT，且无法被强制位移。",
 		"AQUA_EGG": "携带者每次释放招式后恢复20%的PP，本轮战斗中每释放过一次招式再额外恢复2点",
 		"BLUE_ORB": "每3次攻击会额外释放一道链状闪电，弹射至2个最近的敌方宝可梦，对他们造成10点SPECIAL并移除他们15点PP",
 		"SCOPE_LENS": "造成暴击时会偷取目标10点PP。",
@@ -2828,7 +2844,7 @@
 		"GREEN_ORB": "携带者和ADJACENT我方宝可梦每秒恢复3%的最大HP。溢出的恢复量的30%转化为PP恢复。",
 		"DEEP_SEA_TOOTH": "携带者的攻击额外恢复5点PP。此外，若攻击击倒了敌方宝可梦，额外恢复15点PP。",
 		"SMOKE_BALL": "携带者的HP第一次低于最大值的40%时，会抛下烟雾球，获得70点SHIELD并跳跃至1格外。所有ADJACENT的敌方宝可梦陷入PARALYSIS和BLINDED 4秒。",
-		"XRAY_VISION": "携带者提升50点SPEED，且攻击不会落空。",
+		"XRAY_VISION": "携带者免疫SLEEP，提升50点SPEED，且攻击不会落空。",
 		"RAZOR_FANG": "提升100%的CRIT_POWER。暴击会使目标陷入ARMOR_BREAK 2秒。",
 		"PROTECTIVE_PADS": "携带者的攻击对具有SHIELD的目标造成的伤害翻倍。携带者免疫反冲伤害和反击类效果。",
 		"LOADED_DICE": "击中目标时，有[50,LK]%的概率同时对目标的ADJACENT敌方宝可梦中HP最低者造成75%的伤害。此次伤害能够触发击中时效果。",
@@ -2843,7 +2859,7 @@
 		"KINGS_ROCK": "提升100点HP。战斗开始时，获得SHIELD，数值相当于最大HP的20%。",
 		"SHINY_CHARM": "携带者的生命值第一次低于30%时，获得PROTECT 1.5秒，免疫伤害，并恢复50点PP",
 		"GRACIDEA_FLOWER": "战斗开始时，携带者和ADJACENT_IN_THE_SAME_ROW的我方宝可梦提升20点SPEED",
-		"FLAME_ORB": "携带者将在战斗中全程处于BURN，但提升100%的ATK",
+		"FLAME_ORB": "携带者免疫FREEZE且提升100%的ATK，但在战斗中全程处于BURN。",
 		"ASSAULT_VEST": "提升40点SPE_DEF，且来自BURN和POISONNED的伤害降低50%",
 		"POKE_DOLL": "所有受到的PHYSICAL或SPECIAL减免30%。提升敌方宝可梦指定携带者为目标的概率。",
 		"RED_ORB": "攻击伤害的25%改为TRUE",
@@ -3002,6 +3018,7 @@
 		"TINY_MUSHROOM": "仅在下一轮战斗中，食用者提升40点SPEED，但降低20%的最大HP。返回宝藏镇时，会以1 GOLD的价格出售。",
 		"BIG_MUSHROOM": "仅在下一轮战斗中，食用者提升30%的最大HP。返回宝藏镇时，会以2 GOLD的价格出售。",
 		"BALM_MUSHROOM": "仅在下一轮战斗中，食用者获得RUNE_PROTECT并提升40点SPEED，且每秒恢复10%的最大HP。返回宝藏镇时，会以5 GOLD的价格出售。",
+		"RICE": "在下一轮战斗开始时，获得50点SHIELD。若场上有米立龙，仅在下一轮战斗中，还会提升其被动能力对应的数值。",
 		"ROCK_SALT": "在下一轮战斗开始时，获得RUNE_PROTECT 10秒，以及SHIELD，数值相当于20%的HP。",
 		"NUTRITIOUS_EGG": "仅在下一轮战斗中，提升50%的基础ATK，DEF和SPE_DEF。",
 		"LEFTOVERS": "没有效果。剩下的可食用部分不多了。",
@@ -3086,12 +3103,15 @@
 		"MACH_RIBBON": "每3秒提升15点SPEED。",
 		"EXPLOSIVE_BAND": "每轮对战中首次失去所有SHIELD时，该道具爆炸并对ADJACENT敌方宝可梦造成SPECIAL，数值相当于获得的SHIELD之和的50%。",
 		"TWIST_BAND": "来自敌方宝可梦的属性下降改为上升。携带者的属性增幅无法被偷取。",
-		"BIG_EATER_BELT": "所有提升属性的效果额外提升25%的属性 (小数点向下取整，不影响PP)。携带者可以在同一轮食用2份料理。",
+		"BIG_EATER_BELT": "所有提升属性的效果（PP除外）额外提升25%的属性（向下取整）。携带者可以在同一轮食用2份料理。",
 		"LUCKY_RIBBON": "携带者提升30点LUCK",
 		"COVER_BAND": "ADJACENT我方宝可梦即将受到致命伤害时，改为由携带者承受此伤害。",
 		"EFFICIENT_BANDANNA": "携带者与ADJACENT_IN_THE_SAME_ROW我方宝可梦的PP上限降低15%。",
 		"NULLIFY_BANDANNA": "携带者无法释放招式。携带者的AP转化为等量SHIELD，PP转化为在下次攻击时额外造成的SPECIAL。",
-		"WANTED_NOTICE": "悬赏：击倒或捉拿\n 赏金：10 GOLD"
+		"WANTED_NOTICE": "悬赏：击倒或捉拿\n 赏金：10 GOLD",
+		"TATSUGIRI_CURLY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。",
+		"TATSUGIRI_DROOPY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。",
+		"TATSUGIRI_STRETCHY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3212,7 +3232,9 @@
 		"VICTINI": "提升所有我方宝可梦的命中率。我方宝可梦的攻击不会打空。",
 		"AEGISLASH": "释放招式时会在盾牌形态和刀剑形态之间切换。",
 		"DARMANITAN": "HP低于30%时，跳跃至一个安全的位置，并进入达摩模式。",
+		"GALARIAN_DARMANITAN": "HP低于30%时，迫使敌方宝可梦转移攻击目标，并进入达摩模式。",
 		"DARMANITAN_ZEN": "达摩模式下的普通攻击造成能被AP提升的SPECIAL，且自身回复所造成伤害的100%。HP恢复至满后会变回普通模式。",
+		"GALARIAN_DARMANITAN_ZEN": "达摩模式下无法移动或攻击，但每秒恢复[10,SP]点HP，并每秒对ADJACENT敌方宝可梦造成SPECIAL，数值相当于使用者[25,SP]%的ATK，同时使他们陷入BURN。",
 		"BAD_LUCK": "降低所有敌方宝可梦20点LUCK。",
 		"GOOD_LUCK": "提升所有我方宝可梦20点LUCK。",
 		"PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。",
@@ -3239,7 +3261,7 @@
 		"CHARCADET": "打败超梦后，碳小侍会根据PSYCHIC和GHOST共鸣中等级较高的一方获得一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR。",
 		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
 		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和20点AP。",
-		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为ADJACENT我方宝可梦（其他此被动拥有者除外）额外恢复[2,3,5]点PP，且算作一次普通攻击。",
+		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为ADJACENT我方宝可梦（其他此被动能力拥有者除外）额外恢复[2,3,5]点PP，且算作一次普通攻击。",
 		"KIRLIA": "奇鲁莉安会根据FAIRY和FIGHTING共鸣中等级较高的一方进化为沙奈朵或艾路雷朵。",
 		"KUBFU": "每次使用招式击倒宝可梦时，永久提升5点AP，至多提升10次，封顶时获得SCROLL_OF_DARKNESS。\n每次普通攻击击倒宝可梦时，永久提升3点SPEED，至多提升10次，封顶时获得SCROLL_OF_WATERS。",
 		"VIGOROTH": "$t(pkm.VIGOROTH)免疫SLEEP",
@@ -3273,7 +3295,8 @@
 		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD",
 		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
-		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。"
+		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。",
+		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3968,6 +3991,7 @@
 	"chat_history": "聊天记录",
 	"load_more": "加载更多",
 	"no_history_found": "未发现记录",
+	"no_results_found": "未找到结果",
 	"top": "名次：",
 	"level": "等级",
 	"wins": "胜场",
@@ -4000,6 +4024,10 @@
 	"profile": "个人资料",
 	"search": "搜索",
 	"average_place": "平均名次",
+	"overview": "总览",
+	"popularity_over_time": "人气—时间关系图",
+	"placement_over_time": "名次—时间关系图",
+	"top_n": "名次：{{count}}",
 	"carousel_priority": "轮盘选取优先级",
 	"count": "计数",
 	"meta_report": "环境报告",
@@ -4128,7 +4156,7 @@
 	"bot_admin": "机器人管理员",
 	"change_name": "更改名字",
 	"invalid_username": "无效的用户名。用户名长度必须为3到24个字符，第一个字符必须为字母，且只能包含字母、数字和 . - _ 三种特殊符号，还不能含有空格。",
-	"username_disclaimer": "管理员有权因不当用户名将你的账户封禁。“不当”包括但不限于：侮辱性内容，黄色内容，直接或间接的威胁，政治敏感内容和与本游戏无关的广告。",
+	"username_disclaimer": "管理员有权因不当用户名将你的账户封禁。“不当”包括但不限于——\n1.违法内容：仇恨言论，威胁性内容，和对非法材料的影射\n2.黄色内容：少儿不宜的内容\n3.攻击性言论：可能激怒其他玩家的用户名\n4.仿冒用户名：试图高仿管理员或知名玩家的用户名\n5.骚扰言论：针对某特定玩家的内容（例：“某甲彩笔”）\n6.广告：宣传与游戏无关的内容（例：“关注永雏塔菲谢谢喵”）\n7.滥用unicode或字符：不可见文字，过量的附加符号，或是其他妨碍UI显示的字符",
 	"change": "更改",
 	"change_avatar": "更改形象",
 	"play_more_games_hint": "玩更多游戏，赚取补充包，解锁新的形象！",
@@ -4530,7 +4558,9 @@
 		"ROOM_DELETED": "这个房间已被删除。",
 		"GAME_ALREADY_STARTED": "这局游戏已经开始。",
 		"INVALID_PASSWORD": "密码错误。",
-		"UNKNOWN_ERROR": "发生错误。异常代码：{{error}}"
+		"UNKNOWN_ERROR": "发生错误。异常代码：{{error}}",
+		"SERVER_SHUTDOWN": "服务器维护中",
+		"FAILED_TO_RECONNECT": "未能重新连接。请刷新页面再试一次。"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "连接已断开。正在尝试重新连接……",
@@ -4670,6 +4700,12 @@
 		"elo_rank_change_message": "你的段位现在是：\n{{rank}}",
 		"victory_road_finished_title": "胜利之路已完成！",
 		"victory_road_finished_message": "恭喜！\n你完成了胜利之路，你的名次是：{{place}}！",
+		"tournament_win_title": "胜利！",
+		"tournament_win_message": "恭喜！\n你取得了锦标赛的胜利！",
+		"tournament_finalist_title": "恭喜！",
+		"tournament_finalist_message": "恭喜！你进入了本轮锦标赛的决赛圈。\n你的最终名次是：{{place}}",
+		"tournament_finished_title": "淘汰出局",
+		"tournament_finished_message": "你已被淘汰，无缘本轮锦标赛。\n你的最终名次是：{{place}}",
 		"next": "下一条",
 		"close": "关闭",
 		"dismiss_all": "全部关闭"
