@@ -113,6 +113,7 @@
 > I can't nerf the quality of community guides unfortunately, so I have to make this mission more difficult despite being already hard for beginners, in order to keep it balanced for high elo players.
 
 - Buff GIMMIGHOUL_COIN: +3 GOLD → +5 GOLD when obtained
+- Reduce the price of Chansey EGG_FOR_SELL: 10 → 5 GOLD
 
 ## Misc
 

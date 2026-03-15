@@ -4,9 +4,9 @@ import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
   {
+    [Pkm.CHANSEY]: 5,
     [Pkm.KECLEON]: 10,
     [Pkm.KANGASKHAN]: 10,
-    [Pkm.CHANSEY]: 10,
     [Pkm.ELECTIVIRE]: 10
   }
 
