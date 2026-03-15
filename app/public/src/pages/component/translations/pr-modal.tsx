@@ -202,12 +202,13 @@ export function PRModal({
                 rel="noopener noreferrer"
                 style={{ marginLeft: 8, fontSize: "0.8em" }}
               >
-                (create one)
+                (click here to create one)
               </a>
             </label>
             <p className="pr-modal-hint">
               Requires <code>repo</code> (or <code>public_repo</code>) scope.
-              The token is only kept in memory and never stored.
+              The token is only kept in memory and never stored, so it's up to
+              you to save it securely.
             </p>
             <input
               id="gh-token"

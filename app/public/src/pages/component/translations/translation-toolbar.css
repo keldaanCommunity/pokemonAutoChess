@@ -52,7 +52,7 @@
   background: var(--color-bg-secondary);
   color: var(--color-fg-primary);
   padding: 24px 28px;
-  max-width: 560px;
+  max-width: 800px;
   width: 90vw;
 }
 
@@ -73,5 +73,6 @@
 
 .translations-help-dialog-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin-top: 1em;
 }

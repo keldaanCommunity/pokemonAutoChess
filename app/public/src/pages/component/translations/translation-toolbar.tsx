@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Language } from "../../../../../types/enum/Language"
-import "./translation-toolbar.css"
 import { LanguageNames } from "../../../../dist/client/locales"
+import "./translation-toolbar.css"
 
 export interface TranslationToolbarProps {
   targetLang: Language
@@ -72,18 +72,18 @@ export function TranslationToolbar({
       <div className="spacer" />
 
       <button
+        className="bubbly blue"
+        onClick={() => dialogRef.current?.showModal()}
+        style={{ fontSize: "0.9em" }}
+      >
+        Help
+      </button>
+      <button
         className="bubbly"
         onClick={onCollapseAll}
         style={{ fontSize: "0.9em" }}
       >
         Collapse all
-      </button>
-      <button
-        className="bubbly"
-        onClick={() => dialogRef.current?.showModal()}
-        style={{ fontSize: "0.9em" }}
-      >
-        Help
       </button>
       <button
         className="bubbly"
@@ -105,7 +105,8 @@ export function TranslationToolbar({
         <ul>
           <li>
             Select the target language from the <strong>Translate to</strong>{" "}
-            dropdown.
+            dropdown. The reference language is English, it is the one
+            maintained by the developers.
           </li>
           <li>
             Use the <strong>Filter</strong> dropdown to focus on missing or
@@ -116,25 +117,40 @@ export function TranslationToolbar({
             Edited rows are highlighted.
           </li>
           <li>
-            Click <strong>↩</strong> on a row to revert your change to the saved
-            value.
+            If you made a mistale, you can click the <strong>↩</strong> button
+            on a row to revert your change to the saved value. You can also
+            reset all edits with the <strong>Reset all</strong> button in the
+            footer.
           </li>
           <li>
-            Use the search bar to quickly find labels by key, English text, or
-            translated text.
+            A search bar on top right can be used to quickly find labels by key,
+            English text, or translated text.
           </li>
           <li>
-            When done, use <strong>Download JSON</strong> to save the file
-            locally, or <strong>Submit Pull Request</strong> to contribute
-            directly via GitHub (requires a personal access token).
+            When done, you can submit your changes. You will need a Github
+            account and a personal access token with <code>public_repo</code>{" "}
+            access. Then click on <strong>Submit Pull Request</strong> and
+            follow instructions.
           </li>
         </ul>
+        <p
+          className="disclaimer"
+          style={{
+            padding: "1em",
+            backgroundColor: "#700000",
+            borderRadius: 4
+          }}
+        >
+          <strong>IMPORTANT:</strong> if you contribute for the first time,
+          start with just a few translations before trying to submit a pull
+          request, so you don't lose too much work if something goes wrong.
+        </p>
         <div className="translations-help-dialog-actions">
           <button
             className="bubbly blue"
             onClick={() => dialogRef.current?.close()}
           >
-            Close
+            Understood!
           </button>
         </div>
       </dialog>
