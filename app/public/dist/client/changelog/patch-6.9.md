@@ -110,6 +110,10 @@
 
 - Added visual effects for support items on adjacent positions
 - Added visual effect for Loaded dice second hit
+- Nerf Mission Order: Diversify: reach 8 → 9 different active synergies
+
+> I can't nerf the quality of community guides unfortunately, so I have to make this mission more difficult despite being already hard for beginners, in order to keep it balanced for high elo players.
+
 
 # Changes to Gameplay
 
