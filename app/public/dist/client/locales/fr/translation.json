@@ -3103,6 +3103,7 @@
 		"TORNADUS": "Change la météo en WINDY ou SNOW selon votre synergie dominante entre FLYING et ICE.",
 		"ENAMORUS": "Change la météo en MISTY ou WINDY selon votre synergie dominante entre FAIRY et FLYING.",
 		"DROUGHT_OR_SANDSTORM": "Change la météo en DROUGHT ou SANDSTORM selon votre synergie dominante entre FIRE et GROUND.",
+		"DROUGHT_OR_ZENITH": "Change la météo en DROUGHT ou ZENITH selon votre synergie dominante entre FIRE et LIGHT.",
 		"RAIN_OR_STORM": "Change la météo en RAIN ou STORM selon votre synergie dominante entre WATER et ELECTRIC.",
 		"AIRLOCK": "Neutralise tous les effets météorologiques, retourne à une météo NEUTRAL.",
 		"SHARED_VISION": "Vision Partagée : Tous les Pokémon avec le passif Vision Partagée attaqueront la même cible, si elle est à portée.",
