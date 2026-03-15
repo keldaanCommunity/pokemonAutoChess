@@ -812,18 +812,12 @@ export default class Player extends Schema implements IPlayer {
 
   completeMissionOrder(missionOrder: MissionOrder) {
     removeInArray<Item>(this.items, missionOrder)
-    const id = nanoid()
-    this.wanderers.set(
-      id,
-      new Wanderer({
-        id,
-        shiny: false,
-        pkm: Pkm.CHATOT,
-        type: WandererType.DIALOG,
-        behavior: WandererBehavior.SPECTATE
-      })
-    )
-
+    this.spawnWanderingPokemon({
+      shiny: false,
+      pkm: Pkm.CHATOT,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE
+    })
     setTimeout(() => {
       this.addMoney(30, true, null)
     }, 7000)
@@ -835,6 +829,36 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.CELL_BATTERY)
       this.cellBattery %= 100
     }
+  }
+
+  spawnWanderingPokemon({
+    pkm,
+    type,
+    behavior,
+    data,
+    delay = 0,
+    shiny = chance(0.01)
+  }: {
+    pkm: Pkm
+    type: WandererType
+    behavior: WandererBehavior
+    data?: string
+    delay?: number
+    shiny?: boolean
+  }): Wanderer {
+    const id = nanoid()
+    const wanderer = new Wanderer({
+      id,
+      pkm,
+      type,
+      behavior,
+      data,
+      shiny
+    })
+    setTimeout(() => {
+      this.wanderers.set(id, wanderer)
+    }, delay)
+    return wanderer
   }
 }
 

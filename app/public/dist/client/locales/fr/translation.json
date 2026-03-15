@@ -2753,6 +2753,7 @@
 		"MISSION_ORDER_GOLD": "Ordre de Mission - Prospérer !",
 		"MISSION_ORDER_PINK": "Ordre de Mission - Évoluer !",
 		"LEADERS_CREST": "Emblème du Général",
+		"LAPRAS_PASSPORT": "Passeport Lapras",
 		"SILK_SCARF": "Mouchoir Soie",
 		"FRIEND_BOW": "Ruban Ami",
 		"BLACK_BELT": "Ceinture Noire",
@@ -3052,6 +3053,7 @@
 		"MISSION_ORDER_GREEN": "Accomplissez cette mission pour gagner 30 GOLD :\n activez 9 synergies différentes",
 		"MISSION_ORDER_GOLD": "Accomplissez cette mission pour gagner 30 GOLD :\n  gagnez 200 GOLD au total pendant la partie.",
 		"LEADERS_CREST": "Lorsqu'un autre joueur vous bat au combat, il obtient 4 GOLD supplémentaires et récupère l'LEADERS_CREST.",
+		"LAPRAS_PASSPORT": "Lokhlass vous propose un voyage vers une autre région. Utilisez le passeport sur un Pokémon pour influencer la destination en fonction de ses synergies.",
 		"SILK_SCARF": "Combinez-le avec un autre composant d'objet pour créer toutes sortes de rubans, de bandeaux et de nœuds. Ces objets seront supprimés si vous abaissez le niveau de synergie NORMAL.",
 		"FRIEND_BOW": "Le porteur gagne le type NORMAL.",
 		"BLACK_BELT": "Les attaques critiques fournissent 33% des dégâts infligés comme SHIELD.",
@@ -4378,7 +4380,8 @@
 		"here_are_your_reward": "Voici ta récompense :\n{{reward}}",
 		"magnemite": "Avez-vous vu le fugitif ?",
 		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés.",
-		"xatu": "Permettez-moi d'ouvrir ce coffre au trésor pour vous..."
+		"xatu": "Permettez-moi d'ouvrir ce coffre au trésor pour vous...",
+		"lapras": "Prêt à partir ? Alors tous à bord !"
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Tout le monde est là !",
@@ -4444,7 +4447,8 @@
 		"WIGGLYTUFF": "Accomplissez les missions de la guilde $t(pkm.WIGGLYTUFF) pour gagner des récompenses.",
 		"CINCCINO": "$t(pkm.CINCCINO) offre d'élégants SILK_SCARF",
 		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver.",
-		"KINGAMBIT": "Scalpereur a offert l'LEADERS_CREST au joueur en première place. Battez-le au combat pour gagner de l'GOLD supplémentaire !"
+		"KINGAMBIT": "Scalpereur a offert l'LEADERS_CREST au joueur en première place. Battez-le au combat pour gagner de l'GOLD supplémentaire !",
+		"LAPRAS": "Lapras vous offre un voyage vers une autre région."
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",

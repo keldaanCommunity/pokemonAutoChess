@@ -1421,28 +1421,4 @@ export default class GameRoom extends Room<{ state: GameState }> {
       this.disconnect(CloseCodes.ROOM_DELETED)
     }
   }
-
-  spawnWanderingPokemon({
-    pkm,
-    type,
-    behavior,
-    player
-  }: {
-    pkm: Pkm
-    type: WandererType
-    behavior: WandererBehavior
-    player: Player
-  }) {
-    const client = this.clients.find((cli) => cli.auth.uid === player.id)
-    if (!client) return
-    const id = nanoid()
-    const wanderer = new Wanderer({
-      id,
-      pkm,
-      type,
-      behavior,
-      shiny: chance(0.01)
-    })
-    player.wanderers.set(id, wanderer)
-  }
 }

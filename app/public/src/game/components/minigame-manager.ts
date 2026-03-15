@@ -554,10 +554,27 @@ export default class MinigameManager {
 
     const kingambit = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KINGAMBIT ? cx : 22 * 48,
-      y: encounter === TownEncounters.KINGAMBIT ? cy : 25 * 48,
+      x: encounter === TownEncounters.KINGAMBIT ? cx : 44.5 * 48,
+      y: encounter === TownEncounters.KINGAMBIT ? cy : 5 * 48,
       name: Pkm.KINGAMBIT
     })
+
+    const lapras = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.LAPRAS ? cx : 0 * 48,
+      y: encounter === TownEncounters.LAPRAS ? cy : 3.75 * 48,
+      name: Pkm.LAPRAS,
+      animation: PokemonActionState.WALK,
+      orientation:
+        encounter === TownEncounters.LAPRAS
+          ? Orientation.DOWN
+          : Orientation.RIGHT
+    })
+
+    if (encounter !== TownEncounters.LAPRAS) {
+      lapras.moveManager.setSpeed(15)
+      lapras.moveManager.moveTo(8 * 48, 4 * 48)
+    }
 
     const podiumPokemons = podium.map((p, rank) => {
       const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
@@ -600,6 +617,7 @@ export default class MinigameManager {
       cincinno,
       magnezone,
       kingambit,
+      lapras,
       ...podiumPokemons
     )
 

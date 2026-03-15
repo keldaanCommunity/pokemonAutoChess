@@ -13563,11 +13563,10 @@ export class MagnetPullStrategy extends AbilityStrategy {
         pokemon,
         pokemon.player
       )
-      pokemon.simulation.room.spawnWanderingPokemon({
+      pokemon.player.spawnWanderingPokemon({
         pkm: randomSteelPkm,
         behavior: WandererBehavior.SPECTATE,
-        type: WandererType.CATCHABLE,
-        player: pokemon.player
+        type: WandererType.CATCHABLE
       })
     }
   }
