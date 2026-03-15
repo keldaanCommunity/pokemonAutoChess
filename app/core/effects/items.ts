@@ -1,9 +1,10 @@
-import { ARMOR_FACTOR } from "../../config"
+import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
@@ -27,6 +28,7 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
@@ -1146,6 +1148,47 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
       }
 
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.LAPRAS_PASSPORT]: [
+    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
+      const previousMap = player.map
+      const chosenSynergies = values(pokemon.types)
+      const maps = Object.values(DungeonPMDO).filter(
+        (map) => map !== previousMap
+      )
+      let nbMaxInCommon = 0,
+        candidateMaps: DungeonPMDO[] = []
+      maps.forEach((map) => {
+        const synergies = RegionDetails[map].synergies
+        const inCommon = synergies.filter((s) => chosenSynergies.includes(s))
+
+        if (inCommon.length > nbMaxInCommon) {
+          nbMaxInCommon = inCommon.length
+          candidateMaps = [map]
+        } else if (inCommon.length === nbMaxInCommon) {
+          candidateMaps.push(map)
+        }
+      })
+
+      const newMap = pickRandomIn(candidateMaps)
+      room.broadcast(Transfer.PRELOAD_MAPS, [newMap])
+
+      player.spawnWanderingPokemon({
+        pkm: Pkm.LAPRAS,
+        type: WandererType.DIALOG,
+        behavior: WandererBehavior.SPECTATE,
+        data: newMap
+      })
+      setTimeout(() => {
+        player.map = newMap
+        player.regions.push(newMap)
+        player.updateRegionalPool(room.state, true, previousMap)
+      }, 10000)
+
+      removeInArray(player.items, item)
       return false // prevent item from being equipped
     })
   ],

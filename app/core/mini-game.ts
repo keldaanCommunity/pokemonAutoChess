@@ -412,6 +412,10 @@ export class MiniGame {
         prev.life > current.life ? prev : current
       )
       highestLifePlayer.items.push(Item.LEADERS_CREST)
+    } else if (state.townEncounter === TownEncounters.LAPRAS) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.LAPRAS_PASSPORT)
+      })
     }
   }
 
