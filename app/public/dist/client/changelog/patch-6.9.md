@@ -75,11 +75,15 @@
 
 # Changes to Items
 
+## Craftable Items
+
 > Statuses are not all equal in how much they frustrate players, so we provide additional hard counter itemization options for those that prevent movement or action.
 
 - New effect for Flame Orb: holder is immune to FREEZE
 - New effect for Heavy-Duty Boots: holder is immune to LOCKED
 - New effect for X-Ray vision: holder is immune to SLEEP
+
+## Scarves
 
 > We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. The items that are very easy to play like Nullify Bandanna or Mach Ribbon are overperforming a bit, while the ones that are more niche and require more game knowledge like Black Belt or Explosive Band are underperforming globally, but are performing better at higher Elo. Base item stats adjustments are a good way to reduce the gap between low and high elo, while keeping the skill diff of these items intact.
 
@@ -91,9 +95,17 @@
 
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
 
+## Tools
+
+- Partial revert of Electrizier: base SPEED: 0 → 10
+
+## Dishes
+
 > Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
 
 - Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+
+## Misc
 
 - Added visual effects for support items on adjacent positions
 - Added visual effect for Loaded dice second hit
