@@ -561,7 +561,8 @@
 		"SHADOW_FORCE": "暗影潜袭",
 		"SHADOW_CLAW": "暗影爪",
 		"FEATHER_DANCE": "羽毛舞",
-		"GLACIAL_LANCE": "雪矛"
+		"GLACIAL_LANCE": "雪矛",
+		"ORDER_UP": "上菜"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1726,7 +1727,11 @@
 		"TOXAPEX": "超坏星",
 		"DUCKLETT": "鸭宝宝",
 		"SWANNA": "舞天鹅",
-		"GLASTRIER": "雪暴马"
+		"GLASTRIER": "雪暴马",
+		"DONDOZO": "吃吼霸",
+		"TATSUGIRI_CURLY": "米立龙（上弓姿势）",
+		"TATSUGIRI_DROOPY": "米立龙（下垂姿势）",
+		"TATSUGIRI_STRETCHY": "米立龙（平挺姿势）"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2267,7 +2272,8 @@
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
 		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
-		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。"
+		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。",
+		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战席上将出现一只，其形态每轮均有不同。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2705,6 +2711,7 @@
 		"TINY_MUSHROOM": "小蘑菇",
 		"BIG_MUSHROOM": "大蘑菇",
 		"BALM_MUSHROOM": "芳香蘑菇",
+		"RICE": "米饭",
 		"MOOMOO_MILK": "哞哞鲜奶",
 		"BERRIES": "热带龙的果实",
 		"HONEY": "甜甜蜜",
@@ -2798,7 +2805,10 @@
 		"COVER_BAND": "掩护头巾",
 		"EFFICIENT_BANDANNA": "高效头巾",
 		"NULLIFY_BANDANNA": "消除头巾",
-		"WANTED_NOTICE": "通缉令"
+		"WANTED_NOTICE": "通缉令",
+		"TATSUGIRI_CURLY": "发号施令的米立龙（上弓姿势）",
+		"TATSUGIRI_DROOPY": "发号施令的米立龙（下垂姿势）",
+		"TATSUGIRI_STRETCHY": "发号施令的米立龙（平挺姿势）"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -3008,6 +3018,7 @@
 		"TINY_MUSHROOM": "仅在下一轮战斗中，食用者提升40点SPEED，但降低20%的最大HP。返回宝藏镇时，会以1 GOLD的价格出售。",
 		"BIG_MUSHROOM": "仅在下一轮战斗中，食用者提升30%的最大HP。返回宝藏镇时，会以2 GOLD的价格出售。",
 		"BALM_MUSHROOM": "仅在下一轮战斗中，食用者获得RUNE_PROTECT并提升40点SPEED，且每秒恢复10%的最大HP。返回宝藏镇时，会以5 GOLD的价格出售。",
+		"RICE": "在下一轮战斗开始时，获得50点SHIELD。若场上有米立龙，仅在下一轮战斗中，还会提升其被动能力对应的数值。",
 		"ROCK_SALT": "在下一轮战斗开始时，获得RUNE_PROTECT 10秒，以及SHIELD，数值相当于20%的HP。",
 		"NUTRITIOUS_EGG": "仅在下一轮战斗中，提升50%的基础ATK，DEF和SPE_DEF。",
 		"LEFTOVERS": "没有效果。剩下的可食用部分不多了。",
@@ -3097,7 +3108,10 @@
 		"COVER_BAND": "ADJACENT我方宝可梦即将受到致命伤害时，改为由携带者承受此伤害。",
 		"EFFICIENT_BANDANNA": "携带者与ADJACENT_IN_THE_SAME_ROW我方宝可梦的PP上限降低15%。",
 		"NULLIFY_BANDANNA": "携带者无法释放招式。携带者的AP转化为等量SHIELD，PP转化为在下次攻击时额外造成的SPECIAL。",
-		"WANTED_NOTICE": "悬赏：击倒或捉拿\n 赏金：10 GOLD"
+		"WANTED_NOTICE": "悬赏：击倒或捉拿\n 赏金：10 GOLD",
+		"TATSUGIRI_CURLY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。",
+		"TATSUGIRI_DROOPY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。",
+		"TATSUGIRI_STRETCHY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3247,7 +3261,7 @@
 		"CHARCADET": "打败超梦后，碳小侍会根据PSYCHIC和GHOST共鸣中等级较高的一方获得一副AUSPICIOUS_ARMOR或是MALICIOUS_ARMOR。",
 		"ZACIAN": "苍响想要和传说的鸟宝可梦大战一场，夺回他的RUSTED_SWORD。",
 		"PARTING_SHOT": "首次指定敌方宝可梦为目标时，对其抛下狠话，降低其20%的ATK和20点AP。",
-		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为ADJACENT我方宝可梦（其他此被动拥有者除外）额外恢复[2,3,5]点PP，且算作一次普通攻击。",
+		"DRUMMER": "若仍有我方宝可梦存活且没有敌方宝可梦在RANGE之内，则用击鼓替代攻击。每次击鼓为ADJACENT我方宝可梦（其他此被动能力拥有者除外）额外恢复[2,3,5]点PP，且算作一次普通攻击。",
 		"KIRLIA": "奇鲁莉安会根据FAIRY和FIGHTING共鸣中等级较高的一方进化为沙奈朵或艾路雷朵。",
 		"KUBFU": "每次使用招式击倒宝可梦时，永久提升5点AP，至多提升10次，封顶时获得SCROLL_OF_DARKNESS。\n每次普通攻击击倒宝可梦时，永久提升3点SPEED，至多提升10次，封顶时获得SCROLL_OF_WATERS。",
 		"VIGOROTH": "$t(pkm.VIGOROTH)免疫SLEEP",
@@ -3281,7 +3295,8 @@
 		"STAMINA": "每受到10次攻击后，获得[20,SP]点SHIELD",
 		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
-		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。"
+		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。",
+		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED"
 	},
 	"stat": {
 		"ATK": "攻击",
