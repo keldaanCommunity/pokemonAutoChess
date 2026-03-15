@@ -97,23 +97,27 @@
 
 ## Tools
 
-- Partial revert of Electrizier: base SPEED: 0 → 10
+- Partial revert of ELECTIRIZER: base SPEED: 0 → 10
 - Removed 30 base SPEED from Surfboard
 
 ## Dishes
 
 > Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
 
-- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+- Buff NUTRITIOUS_EGG: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+
+## Town Items
+
+- Nerf MISSION_ORDER_GREEN: reach 8 → 9 different active synergies
+
+> I can't nerf the quality of community guides unfortunately, so I have to make this mission more difficult despite being already hard for beginners, in order to keep it balanced for high elo players.
+
+- Buff GIMMIGHOUL_COIN: +3 GOLD → +5 GOLD when obtained
 
 ## Misc
 
 - Added visual effects for support items on adjacent positions
 - Added visual effect for Loaded dice second hit
-- Nerf Mission Order: Diversify: reach 8 → 9 different active synergies
-
-> I can't nerf the quality of community guides unfortunately, so I have to make this mission more difficult despite being already hard for beginners, in order to keep it balanced for high elo players.
-
 
 # Changes to Gameplay
 

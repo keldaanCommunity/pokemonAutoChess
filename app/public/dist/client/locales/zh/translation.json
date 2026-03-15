@@ -3048,7 +3048,7 @@
 		"RAINBOW_SWIRL_FLAVOR": "与PSYCHIC、AMORPHOUS、BABY、LIGHT宝可梦一同制作的调味料。对$t(pkm.MILCERY)使用，使之进化为$t(pkm.ALCREMIE_RAINBOW_SWIRL)。$t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "一枚吉利蛋育蛋铺出售的宝可梦的蛋",
 		"AMULET_COIN": "携带者每次击倒敌方宝可梦，玩家获得1 GOLD。利息收入上限-1。",
-		"GIMMIGHOUL_COIN": "拾取时立即获得3 GOLD。利息收入上限+1。",
+		"GIMMIGHOUL_COIN": "拾取时立即获得5 GOLD。利息收入上限+1。",
 		"COIN": "一枚老旧的掉色金币。拾取时立即获得1 GOLD。",
 		"NUGGET": "一枚小小的纯金制成的珠子。拾取时立即获得3 GOLD。",
 		"BIG_NUGGET": "一枚闪着金光的大珠子。拾取时立即获得10 GOLD。",

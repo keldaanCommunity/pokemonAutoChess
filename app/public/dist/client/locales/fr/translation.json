@@ -3003,7 +3003,7 @@
 		"RAINBOW_SWIRL_FLAVOR": "Préparé avec des alliés PSYCHIC AMORPHOUS BABY LIGHT. Utilisez-la sur $t(pkm.MILCERY) pour évoluer en $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Un EGG_FOR_SELL vendu à la Garderie $t(pkm.CHANSEY)",
 		"AMULET_COIN": "+1 GOLD à chaque fois que le porteur met KO un ennemi.\nRéduit le plafond d'intérêt maximum de 10 GOLD.",
-		"GIMMIGHOUL_COIN": "+3 GOLD lorsque obtenu.\nAugmente le plafond d'intérêt maximum de 10 GOLD.",
+		"GIMMIGHOUL_COIN": "+5 GOLD lorsque obtenu.\nAugmente le plafond d'intérêt maximum de 10 GOLD.",
 		"COIN": "Une vieille pièce rouillée. +1 GOLD une fois obtenue.",
 		"NUGGET": "Une petite pépite d'or. +3 GOLD une fois obtenue.",
 		"BIG_NUGGET": "Une grosse pépite d'or. +10 GOLD une fois obtenue.",

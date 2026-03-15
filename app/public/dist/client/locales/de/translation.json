@@ -2622,7 +2622,7 @@
 		"RAINBOW_SWIRL_FLAVOR": "Gebacken mit PSYCHIC AMORPHOUS BABY LIGHT Verbündeten. Benutze es auf $t(pkm.MILCERY), um es zu $t(pkm.ALCREMIE_RAINBOW_SWIRL) zu entwickeln. $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Ein Ei, welches bei Chansey's Daycare verkauft wurde",
 		"AMULET_COIN": "+1 Gold jedes Mal, wenn der Besitzer einen Gegner niederschlägt.\nReduziert die maximale Zinsen-Wert um 10 GOLD.",
-		"GIMMIGHOUL_COIN": "+3 Gold wenn erhalten.\nErhöhe den maximalen Zinsen-Wert um 10 GOLD.",
+		"GIMMIGHOUL_COIN": "+5 Gold wenn erhalten.\nErhöhe den maximalen Zinsen-Wert um 10 GOLD.",
 		"COIN": "Eine alte rostige Münze. +1 GOLD beim ausgraben.",
 		"NUGGET": "Ein kleines Goldnugget. +3 GOLD beim ausgraben.",
 		"BIG_NUGGET": "Ein großes Goldnugget. +10 GOLD beim ausgraben.",

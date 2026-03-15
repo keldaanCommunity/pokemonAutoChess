@@ -2989,7 +2989,7 @@
 		"RAINBOW_SWIRL_FLAVOR": "PSYCHIC AMORPHOUS BABY LIGHT 아군들이 제작. $t(pkm.MILCERY) 에게 사용하여 $t(pkm.ALCREMIE_RAINBOW_SWIRL) 로 진화. $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "럭키의 키우미집에서 판매하는 알",
 		"AMULET_COIN": "장착자가 상대 포켓몬을 기절시킬 시 매 번 +1 GOLD",
-		"GIMMIGHOUL_COIN": "획득하며 최대 이자를 1 증가시킨다.",
+		"GIMMIGHOUL_COIN": "획득 시 +5 GOLD. 획득하며 최대 이자를 1 증가시킨다.",
 		"COIN": "오래된 녹슨 코인이다. 획득 시 +1 GOLD를 얻는다.",
 		"NUGGET": "작은 금구슬이다. 획득 시 +3 GOLD를 얻는다.",
 		"BIG_NUGGET": "큰 금구슬이다. 획득 시 +10 GOLD를 얻는다.",

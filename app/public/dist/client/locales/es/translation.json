@@ -2798,7 +2798,7 @@
 		"RAINBOW_SWIRL_FLAVOR": "Horneado con aliados de tipo PSYCHIC AMORPHOUS BABY LIGHT. Úsalo con $t(pkm.MILCERY) para evolucionarlo a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "Un Huevo vendido en la guardería de Chansey",
 		"AMULET_COIN": "+1 de oro cada vez que el poseedor derriba a un oponente.\nReduce el máximo de interés en 10 de GOLD.",
-		"GIMMIGHOUL_COIN": "+3 de GOLD cuando se obtiene.\nIncrementa el máximo de interés en 10 de GOLD.",
+		"GIMMIGHOUL_COIN": "+5 de GOLD cuando se obtiene.\nIncrementa el máximo de interés en 10 de GOLD.",
 		"COIN": "Una moneda antigua oxidada. +1 de GOLD cuando la consigues.",
 		"NUGGET": "Una pequeña pepita de oro. +3 GOLD cuando la consigues.",
 		"BIG_NUGGET": "Una gran pepita de oro. +10 GOLD cuando la consigues.",
