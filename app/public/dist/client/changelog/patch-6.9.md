@@ -115,6 +115,7 @@
 - Buff GIMMIGHOUL_COIN: +3 GOLD → +5 GOLD when obtained
 - Reduce the price of Chansey EGG_FOR_SELL: 10 → 5 GOLD
 - Kecleon now sells all kinds of synergy items instead of just synergy stones. Also the item choice better matches the top synergies of each player.
+- Removed Kangaskhan encounter from stage 17
 
 ## Misc
 

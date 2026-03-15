@@ -39,7 +39,6 @@ export const TownEncountersByStage: {
   17: {
     [Pkm.WOBBUFFET]: 1 / 20,
     [Pkm.CROAGUNK]: 1 / 20,
-    [Pkm.KANGASKHAN]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
