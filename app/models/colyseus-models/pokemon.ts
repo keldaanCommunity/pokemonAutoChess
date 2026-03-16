@@ -20455,6 +20455,37 @@ export class TatsugiriStretchy extends Pokemon {
   passive = Passive.COMMANDER
 }
 
+export class Cetoddle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.SOUND, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.CETITAN
+  hp = 90
+  atk = 5
+  speed = 48
+  def = 2
+  speDef = 2
+  maxPP = 90
+  range = 1
+  skill = Ability.ICE_SPINNER
+  regional = true
+}
+
+export class Cetitan extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.SOUND, Synergy.FIELD])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 190
+  atk = 10
+  speed = 48
+  def = 3
+  speDef = 3
+  maxPP = 90
+  range = 1
+  skill = Ability.ICE_SPINNER
+  regional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21629,7 +21660,9 @@ export const PokemonClasses: Record<
   [Pkm.DONDOZO]: Dondozo,
   [Pkm.TATSUGIRI_CURLY]: TatsugiriCurly,
   [Pkm.TATSUGIRI_DROOPY]: TatsugiriDroopy,
-  [Pkm.TATSUGIRI_STRETCHY]: TatsugiriStretchy
+  [Pkm.TATSUGIRI_STRETCHY]: TatsugiriStretchy,
+  [Pkm.CETODDLE]: Cetoddle,
+  [Pkm.CETITAN]: Cetitan
 }
 
 // declare all the classes in colyseus schema TypeRegistry

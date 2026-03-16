@@ -1452,6 +1452,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.STONE_AXE]: onTargetScale2,
   [Ability.CRUSH_CLAW]: onTargetScale2,
+  [Ability.ICE_SPINNER]: onTargetScale2,
   [Ability.METAL_CLAW]: onTarget({ ability: Ability.CRUSH_CLAW, scale: 2 }),
   [Ability.DRAGON_CLAW]: onTargetScale1,
   [Ability.PRECIPICE_BLADES]: [onCasterScale3, shakeCamera({ duration: 350 })],

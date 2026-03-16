@@ -152,6 +152,8 @@ export enum Pkm {
   CELESTEELA = "CELESTEELA",
   CENTISKORCH = "CENTISKORCH",
   CERULEDGE = "CERULEDGE",
+  CETITAN = "CETITAN",
+  CETODDLE = "CETODDLE",
   CHANDELURE = "CHANDELURE",
   CHANSEY = "CHANSEY",
   CHARCADET = "CHARCADET",
@@ -2389,8 +2391,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GREAVARD]: "0971",
   [Pkm.HOUNDSTONE]: "0972",
   //[Pkm.FLAMIGO]: "0973",
-  //[Pkm.CETODDLE]: "0974",
-  //[Pkm.CETITAN]: "0975",
+  [Pkm.CETODDLE]: "0974",
+  [Pkm.CETITAN]: "0975",
   [Pkm.VELUZA]: "0976",
   [Pkm.DONDOZO]: "0977",
   [Pkm.TATSUGIRI_CURLY]: "0978",
@@ -3615,7 +3617,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.DONDOZO]: Pkm.DONDOZO,
   [Pkm.TATSUGIRI_CURLY]: Pkm.TATSUGIRI_CURLY,
   [Pkm.TATSUGIRI_DROOPY]: Pkm.TATSUGIRI_DROOPY,
-  [Pkm.TATSUGIRI_STRETCHY]: Pkm.TATSUGIRI_STRETCHY
+  [Pkm.TATSUGIRI_STRETCHY]: Pkm.TATSUGIRI_STRETCHY,
+  [Pkm.CETODDLE]: Pkm.CETODDLE,
+  [Pkm.CETITAN]: Pkm.CETODDLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
