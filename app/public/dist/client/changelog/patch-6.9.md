@@ -16,6 +16,8 @@
 - Tatsugiri (Curly)
 - Tatsugiri (Droopy)
 - Tatsugiri (Stretchy)
+- Cetoddle
+- Cetitan
 
 # Changes to Synergies
 

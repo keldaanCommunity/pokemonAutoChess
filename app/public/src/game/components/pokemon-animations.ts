@@ -7941,5 +7941,17 @@ export const PokemonAnimations: {
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.WATER_MELEE
+  },
+  [Pkm.CETODDLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Emit,
+    attackSprite: AttackSprite.ICE_MELEE
+  },
+  [Pkm.CETITAN]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Emit,
+    attackSprite: AttackSprite.ICE_MELEE
   }
 }

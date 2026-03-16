@@ -16289,6 +16289,63 @@ export class OrderUpStrategy extends AbilityStrategy {
   }
 }
 
+export class IceSpinnerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+    const cells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY,
+      true
+    )
+
+    let delay = 0
+    for (const cell of cells) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.broadcastAbility({
+            targetX: cell.x,
+            targetY: cell.y
+          })
+          board.clearBoardEffect(cell.x, cell.y, pokemon.simulation)
+          if (cell.value && cell.value.team !== pokemon.team) {
+            const orientation = board.orientation(
+              pokemon.positionX,
+              pokemon.positionY,
+              cell.value.positionX,
+              cell.value.positionY,
+              pokemon,
+              undefined
+            )
+            const knockbackCell = board.getKnockBackPlace(
+              cell.value.positionX,
+              cell.value.positionY,
+              orientation
+            )
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            if (knockbackCell) {
+              cell.value.moveTo(knockbackCell.x, knockbackCell.y, board, true)
+              cell.value.cooldown = 500
+            }
+          }
+        }, delay)
+      )
+      delay += 100
+    }
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16832,7 +16889,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHADOW_FORCE]: new ShadowForceStrategy(),
   [Ability.FEATHER_DANCE]: new FeatherDanceStrategy(),
   [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
-  [Ability.ORDER_UP]: new OrderUpStrategy()
+  [Ability.ORDER_UP]: new OrderUpStrategy(),
+  [Ability.ICE_SPINNER]: new IceSpinnerStrategy()
 }
 
 export function castAbility(
