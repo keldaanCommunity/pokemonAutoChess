@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import {
+  getExpeditionLabel,
+  getPlayerExpeditions
+} from "../../../../../models/expeditions"
 import { Expedition } from "../../../../../types/enum/Expedition"
 import { useAppSelector } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
-import { formatDate } from "../../utils/date"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import "./expeditions.css"
-import { getPlayerExpeditions } from "../../../../../models/expeditions"
+import { ExpPerExpeditionRank } from "../../../../../config/game/expeditions"
 
 export function Expeditions() {
   const { t } = useTranslation()
@@ -129,7 +132,12 @@ export function ExpeditionBox(props: { expedition: Expedition }) {
   const { t } = useTranslation()
   return (
     <div className="expedition my-box">
-      <span
+      <img
+        className="expedition-illustration"
+        src={`/assets/notifications/${props.expedition.type}_${props.expedition.rank}.jpg`}
+        alt=""
+      />
+      <p
         className="expedition-rank"
         style={{
           backgroundImage: `url(/assets/ranks/expedition-ranks.png)`,
@@ -142,13 +150,16 @@ export function ExpeditionBox(props: { expedition: Expedition }) {
         }}
       >
         {props.expedition.rank}
-      </span>
+      </p>
       <div className="expedition-objective">
         <span className="expedition-type">
           {t("expeditions." + props.expedition.type)}
         </span>
-        <p>
-          {addIconsToDescription(t(`expeditions.${props.expedition.type}`))}
+        <p>{addIconsToDescription(getExpeditionLabel(props.expedition))}</p>
+        <p className="expedition-rewards">
+          {t("expeditions.reward", {
+            points: ExpPerExpeditionRank[props.expedition.rank]
+          })}
         </p>
       </div>
     </div>

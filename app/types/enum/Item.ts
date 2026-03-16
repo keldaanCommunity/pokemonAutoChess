@@ -726,7 +726,7 @@ export const ToolsBuried: Tool[] = [
   Item.DRAGON_SCALE
 ]
 
-export const SynergyItems = [
+export const SynergyItemsNoSpecial =  [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
   Item.WATER_STONE,
@@ -755,7 +755,11 @@ export const SynergyItems = [
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.INCENSE,
-  Item.FRIEND_BOW,
+  Item.FRIEND_BOW
+] satisfies Item[]
+
+export const SynergyItems = [
+  ...SynergyItemsNoSpecial,
   ...MemoryDiscs
 ] satisfies Item[]
 

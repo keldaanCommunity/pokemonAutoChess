@@ -1,3 +1,9 @@
+import { DungeonPMDO } from "./Dungeon"
+import { Stat } from "./Game"
+import { Item } from "./Item"
+import { Pkm } from "./Pokemon"
+import { Synergy } from "./Synergy"
+
 export enum ExpeditionRank {
   E = "E",
   D = "D",
@@ -37,4 +43,31 @@ export enum ExpeditionQuest {
   FEED_THE_BEAST = "FEED_THE_BEAST",
   SELL_UNIQUE = "SELL_UNIQUE",
   HOARDER = "HOARDER"
+}
+
+export type ExpeditionData =
+  | RescueMissionData
+  | SecretBaseMissionData
+  | BattleMissionData
+  | DeliveryMissionData
+
+export type RescueMissionData = {
+  pokemon: Pkm
+}
+
+export type SecretBaseMissionData = {
+  region: DungeonPMDO
+  regionSynergies: string
+  synergy: Synergy
+  level: number
+}
+
+export type BattleMissionData = {
+  stat: Stat
+  amount: number
+}
+
+export type DeliveryMissionData = {
+  item: Item
+  quantity: number
 }

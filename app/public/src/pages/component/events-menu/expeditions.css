@@ -1,10 +1,4 @@
 .expeditions.my-container {
-  flex: 1;
-  background-size: 600px 2640px;
-  background-position: top;
-  background-repeat: no-repeat;
-  min-height: 2640px;
-  height: 2640px;
   padding: 0;
   position: relative;
 }
@@ -51,12 +45,17 @@
 }
 
 .expeditions .expedition {
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
   gap: 0.5em;
-  padding: 0.5em;
+  padding: 0;
+  overflow: clip;
+  position: relative;
+}
+
+.expedition-rewards {
+  font-weight: bold;
+  margin-top: 0.25em;
+  font-size: 0.8em;
+  color: var(--color-fg-gold);
 }
 
 .expeditions-leaderboard-container,
@@ -65,7 +64,25 @@
   background-color: var(--color-bg-primary);
   max-height: calc(100vh - 320px);
   overflow-y: auto;
-  position: sticky;
+  position: absolute;
   top: 135px;
+  left: 1em;
+  right: 1em;
   z-index: 20;
+}
+
+.expedition-illustration {
+  width: 100%;
+  aspect-ratio: 500 / 281;
+  object-fit: cover;
+}
+
+.expedition-rank {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.expedition-objective {
+  padding: 0.5em;
 }

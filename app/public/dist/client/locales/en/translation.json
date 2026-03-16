@@ -4588,7 +4588,12 @@
 		"RESCUE": "Rescue Mission",
 		"DELIVERY": "Delivery Mission",
 		"SECRET_BASE": "Secret Base",
-		"BATTLE": "Battle Mission"
+		"BATTLE": "Battle Mission",
+		"RESCUE_DESCRIPTION": "Have a $t(pkm.{{pokemon}}) in your final team",
+		"SECRET_BASE_DESCRIPTION": "Travel to $t(map.{{region}}) ({{regionSynergies}}) during the game and get synergy {{synergy}} level {{level}} or more active in your final team",
+		"BATTLE_DESCRIPTION": "Have a Pokémon reach {{amount}} {{stat}} or more in a fight",
+		"DELIVERY_DESCRIPTION": "Get {{quantity}} {{item}} in your inventory or equipped on a Pokémon at the end of the game",
+		"reward": "Reward: {{points}} XP"
 	},
 	"victory_road": {
 		"title": "Victory Road",
