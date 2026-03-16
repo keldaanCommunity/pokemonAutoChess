@@ -1,0 +1,165 @@
+/* ── Column sizing ────────────────────────────────────────────────────────── */
+
+.col-key,
+.translation-key {
+  flex: 0 0 180px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.col-en {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.col-target {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* ── Field wrapper (for preview positioning) ────────────────────────────── */
+
+.translation-field-wrap {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.translation-field-wrap .translation-en,
+.translation-field-wrap .translation-target {
+  width: 100%;
+}
+
+.translation-preview {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--color-bg-tertiary);
+  border: var(--border-thin);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85em;
+  line-height: 1.5;
+  box-shadow: var(--color-shadow) 2px 4px 8px;
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.translation-preview::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  border: 6px solid transparent;
+  border-top-color: black;
+}
+
+/* ── Rows ─────────────────────────────────────────────────────────────────── */
+
+.translation-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+.translation-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.translation-row.edited {
+  background-color: rgba(255, 193, 7, 0.15);
+  border-left: 3px solid var(--color-fg-gold);
+  padding-left: 3px;
+}
+
+.translation-key {
+  font-family: monospace;
+  font-size: 0.8em;
+  color: var(--color-fg-secondary);
+  cursor: default;
+  padding-top: 4px;
+}
+
+.translation-en,
+.translation-target {
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: var(--border-extra-thin);
+  font-size: 0.85em;
+  font-family: inherit;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-fg-primary);
+  resize: none;
+  overflow: hidden;
+  word-break: break-word;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  field-sizing: content;
+}
+
+.translation-en {
+  opacity: 0.65;
+  cursor: default;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.translation-target {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.translation-target:focus {
+  outline: none;
+  border-color: var(--color-bg-accent);
+  background-color: var(--color-bg-primary);
+}
+
+.translation-row.edited .translation-target {
+  border-color: var(--color-fg-gold);
+}
+
+/* ── Revert button ───────────────────────────────────────────────────────── */
+
+.translation-revert-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: var(--border-extra-thin);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-fg-secondary);
+  font-size: 1em;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.translation-row:hover .translation-revert-btn:not(:disabled),
+.translation-row.edited .translation-revert-btn:not(:disabled) {
+  opacity: 1;
+}
+
+.translation-revert-btn:not(:disabled):hover {
+  color: var(--color-fg-red);
+  border-color: var(--color-fg-red);
+}
+
+.translation-revert-btn:disabled {
+  cursor: default;
+  opacity: 0 !important;
+}

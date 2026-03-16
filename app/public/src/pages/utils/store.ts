@@ -102,7 +102,8 @@ export enum LocalStoreKeys {
   TEAM_PLANNER = "team_planner",
   TIER_LIST = "tier_list",
   LAST_PATCH_READ = "last_patch_read",
-  COLLECTION_FILTER = "collection_filter"
+  COLLECTION_FILTER = "collection_filter",
+  TRANSLATION_EDITS = "translation_edits"
 }
 
 export const localStore = new LocalStore<LocalStoreKeys>()
