@@ -289,6 +289,7 @@ export enum Item {
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
   MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
   LEADERS_CREST = "LEADERS_CREST",
+  LAPRAS_PASSPORT = "LAPRAS_PASSPORT",
   CELL_BATTERY = "CELL_BATTERY",
   SILK_SCARF = "SILK_SCARF",
   FRIEND_BOW = "FRIEND_BOW",
@@ -391,7 +392,8 @@ export const TownItems = [
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,
   Item.WANTED_NOTICE,
-  Item.LEADERS_CREST
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT
 ] satisfies Item[]
 
 // should be excluded from carousels
@@ -1072,7 +1074,8 @@ export const UnholdableItems = [
   Item.NUGGET,
   Item.BIG_NUGGET,
   Item.WANTED_NOTICE,
-  Item.LEADERS_CREST
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT
 ] satisfies Item[]
 
 export const ConsumableItems = [
