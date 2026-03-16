@@ -550,7 +550,8 @@
 		"RAGING_BULL": "Taurogne",
 		"ELECTRIFY": "Électrisation",
 		"HEADLONDING_RUSH": "Assaut Frontal",
-		"WAVE_SPLASH": "Aqua Splash"
+		"WAVE_SPLASH": "Aqua Splash",
+		"ACID_ARMOR": "Acidarmure"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
