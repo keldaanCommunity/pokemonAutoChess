@@ -5,13 +5,13 @@ import "./translation-toolbar.css"
 
 export interface TranslationToolbarProps {
   targetLang: Language
-  filterMode: "all" | "missing" | "translated"
+  filterMode: "all" | "missing" | "translated" | "edited"
   search: string
   translatedCount: number
   totalCount: number
   editedCount: number
   onLangChange: (lang: Language) => void
-  onFilterChange: (mode: "all" | "missing" | "translated") => void
+  onFilterChange: (mode: "all" | "missing" | "translated" | "edited") => void
   onSearch: (q: string) => void
   onCollapseAll: () => void
   onExpandAll: () => void
@@ -66,13 +66,14 @@ export function TranslationToolbar({
         value={filterMode}
         onChange={(e) =>
           onFilterChange(
-            e.currentTarget.value as "all" | "missing" | "translated"
+            e.currentTarget.value as "all" | "missing" | "translated" | "edited"
           )
         }
       >
         <option value="all">All</option>
         <option value="missing">Missing translations</option>
         <option value="translated">Already translated</option>
+        <option value="edited">Edited (not saved)</option>
       </select>
 
       <span className="translations-stats">

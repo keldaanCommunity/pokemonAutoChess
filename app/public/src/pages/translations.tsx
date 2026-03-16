@@ -48,7 +48,7 @@ export default function TranslationsPage() {
   const [edits, setEdits] = useState<Record<string, string>>({})
   const [search, setSearch] = useState("")
   const [filterMode, setFilterMode] = useState<
-    "all" | "missing" | "translated"
+    "all" | "missing" | "translated" | "edited"
   >("all")
   const [collapsedSections, setCollapsedSections] = useState<Set<string>>(
     new Set()
@@ -149,6 +149,7 @@ export default function TranslationsPage() {
       if (filterMode === "missing" && targetVal !== "" && !(path in edits))
         return false
       if (filterMode === "translated" && targetVal === "") return false
+      if (filterMode === "edited" && !(path in edits)) return false
       if (q) {
         return (
           path.toLowerCase().includes(q) ||
