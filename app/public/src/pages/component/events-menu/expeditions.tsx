@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { ExpPerExpeditionRank } from "../../../../../config/game/expeditions"
 import {
   getExpeditionLabel,
   getPlayerExpeditions
@@ -11,11 +12,10 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import "./expeditions.css"
-import { ExpPerExpeditionRank } from "../../../../../config/game/expeditions"
 
 export function Expeditions() {
   const { t } = useTranslation()
-  const profile = useAppSelector((state) => state.network.profile)
+  const profile = useAppSelector((state) => state.network.profile)  
 
   const eventLeaderboard = useAppSelector(
     (state) => state.lobby.eventLeaderboard

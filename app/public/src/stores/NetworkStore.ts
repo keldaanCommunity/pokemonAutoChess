@@ -65,7 +65,8 @@ export const networkSlice = createSlice({
 
       state.profile = {
         ...action.payload,
-        pokemonCollection: unpackedCollection
+        pokemonCollection: unpackedCollection,
+        eventPoints: 1 // TEMP: Testing
       }
     },
     changeName: (state, action: PayloadAction<string>) => {

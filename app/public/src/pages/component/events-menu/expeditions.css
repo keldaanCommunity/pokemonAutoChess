@@ -80,9 +80,10 @@
 .expedition-rank {
   position: absolute;
   top: 8px;
-  left: 8px;
+  right: 8px;
 }
 
 .expedition-objective {
   padding: 0.5em;
+  border-top: var(--border-extra-thin);
 }

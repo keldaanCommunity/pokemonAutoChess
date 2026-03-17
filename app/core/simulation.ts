@@ -104,6 +104,7 @@ export default class Simulation extends Schema implements ISimulation {
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
+  entities: IPokemonEntity[] = []
 
   constructor(
     id: string,
@@ -295,6 +296,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
+    this.entities.push(pokemonEntity)
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this, isSpawn })
     pokemonEntity.getEffects(OnSpawnEffect).forEach((effect) => {

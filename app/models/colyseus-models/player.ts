@@ -14,6 +14,7 @@ import {
 } from "../../core/evolution-rules"
 import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
 import { PokemonEntity } from "../../core/pokemon-entity"
+import Simulation from "../../core/simulation"
 import type GameState from "../../rooms/states/game-state"
 import { IPlayer, Role, Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -22,6 +23,7 @@ import {
   BattleResult,
   PokemonActionState,
   Rarity,
+  Stat,
   Team
 } from "../../types/enum/Game"
 import {
@@ -54,11 +56,15 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import {
+  BattleStats,
+  initialBattleStats
+} from "../../types/interfaces/BattleStats"
 import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
-import { max, min } from "../../utils/number"
+import { min } from "../../utils/number"
 import {
   chance,
   pickNRandomIn,
@@ -171,6 +177,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  battleStats: BattleStats = { ...initialBattleStats }
 
   constructor(
     id: string,
@@ -835,6 +842,75 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.CELL_BATTERY)
       this.cellBattery %= 100
     }
+  }
+
+  updateBattleStats(state: GameState) {
+    const simulation = state.simulations.get(this.simulationId)
+    if (!simulation) return
+
+    this.battleStats.maxAP = Math.max(
+      this.battleStats.maxAP,
+      ...simulation.entities.flatMap((e) => e.ap)
+    )
+    this.battleStats.maxAttack = Math.max(
+      this.battleStats.maxAttack,
+      ...simulation.entities.flatMap((e) => e.atk)
+    )
+    this.battleStats.maxDefense = Math.max(
+      this.battleStats.maxDefense,
+      ...simulation.entities.flatMap((e) => e.def)
+    )
+    this.battleStats.maxSpecialDefense = Math.max(
+      this.battleStats.maxSpecialDefense,
+      ...simulation.entities.flatMap((e) => e.speDef)
+    )
+    this.battleStats.maxHP = Math.max(
+      this.battleStats.maxHP,
+      ...simulation.entities.flatMap((e) => e.hp)
+    )
+    this.battleStats.maxSpeed = Math.max(
+      this.battleStats.maxSpeed,
+      ...simulation.entities.flatMap((e) => e.speed)
+    )
+
+    const dps = simulation.getDpsMeter(this.id)
+    if (dps) {
+      const dpsList = values(dps)
+      this.battleStats.maxHeal = Math.max(
+        this.battleStats.maxHeal,
+        ...dpsList.map((d) => d.heal)
+      )
+      this.battleStats.maxShield = Math.max(
+        this.battleStats.maxShield,
+        ...dpsList.map((d) => d.shield)
+      )
+      this.battleStats.maxPhysicalDamage = Math.max(
+        this.battleStats.maxPhysicalDamage,
+        ...dpsList.map((d) => d.physicalDamage)
+      )
+      this.battleStats.maxSpecialDamage = Math.max(
+        this.battleStats.maxSpecialDamage,
+        ...dpsList.map((d) => d.specialDamage)
+      )
+      this.battleStats.maxTrueDamage = Math.max(
+        this.battleStats.maxTrueDamage,
+        ...dpsList.map((d) => d.trueDamage)
+      )
+    }
+
+    let maxVictoryStreak = 0
+    for (let i = this.history.length - 1; i >= 0; i--) {
+      let streak = 0
+      while (this.history[i].result === BattleResult.WIN) {
+        streak++
+        i--
+      }
+      maxVictoryStreak = Math.max(maxVictoryStreak, streak)
+    }
+    this.battleStats.maxVictoryStreak = Math.max(
+      this.battleStats.maxVictoryStreak,
+      maxVictoryStreak
+    )
   }
 }
 

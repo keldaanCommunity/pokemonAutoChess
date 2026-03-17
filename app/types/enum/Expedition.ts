@@ -1,3 +1,4 @@
+import { BattleStat } from "../interfaces/BattleStats"
 import { DungeonPMDO } from "./Dungeon"
 import { Stat } from "./Game"
 import { Item } from "./Item"
@@ -15,7 +16,7 @@ export enum ExpeditionRank {
 
 export enum ExpeditionType {
   RESCUE = "RESCUE",
-  SECRET_BASE = "SECRET_BASE",
+  EXPLORATION = "EXPLORATION",
   BATTLE = "BATTLE",
   DELIVERY = "DELIVERY"
 }
@@ -47,7 +48,7 @@ export enum ExpeditionQuest {
 
 export type ExpeditionData =
   | RescueMissionData
-  | SecretBaseMissionData
+  | ExplorationMissionData
   | BattleMissionData
   | DeliveryMissionData
 
@@ -55,15 +56,14 @@ export type RescueMissionData = {
   pokemon: Pkm
 }
 
-export type SecretBaseMissionData = {
+export type ExplorationMissionData = {
   region: DungeonPMDO
-  regionSynergies: string
   synergy: Synergy
   level: number
 }
 
 export type BattleMissionData = {
-  stat: Stat
+  stat: BattleStat
   amount: number
 }
 

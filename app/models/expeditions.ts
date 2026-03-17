@@ -17,16 +17,19 @@ import {
   ExpeditionData,
   ExpeditionRank,
   ExpeditionType,
-  RescueMissionData,
-  SecretBaseMissionData
+  ExplorationMissionData,
+  RescueMissionData
 } from "../types/enum/Expedition"
 import { Rarity, Stat } from "../types/enum/Game"
+import { BattleStat, BattleStatsList } from "../types/interfaces/BattleStats"
 import {
   IUserMetadataClient,
   IUserMetadataMongo,
   IUserMetadataUnpacked
 } from "../types/interfaces/UserMetadata"
 import { max } from "../utils/number"
+import { values } from "../utils/schemas"
+import Player from "./colyseus-models/player"
 
 export function getPlayerExpeditions(
   user: IUserMetadataClient | IUserMetadataMongo | IUserMetadataUnpacked
@@ -65,16 +68,92 @@ export function getExpeditionTier(level: number): ExpeditionRank {
   }
 }
 
+export function updatePlayerExpeditionsAfterGame(
+  player: Player,
+  usr: IUserMetadataMongo
+) {
+  getPlayerExpeditions(usr).forEach((expedition) => {
+    if (checkExpeditionCompletion(player, expedition)) {
+      // mark expedition as completed in the database
+      usr.eventPoints++
+      usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+    }
+  })
+}
+
 export function checkExpeditionCompletion(
-  user: IUserMetadataClient | IUserMetadataMongo | IUserMetadataUnpacked,
+  player: Player,
   expedition: Expedition
 ): boolean {
-  // Placeholder logic for checking expedition completion
-  // This should be replaced with actual logic based on the user's progress and the expedition's requirements
-  return false
+  switch (expedition.type) {
+    case ExpeditionType.RESCUE: {
+      const expeditionData = getExpeditionData(expedition) as RescueMissionData
+      return values(player.board).some((p) => p.name === expeditionData.pokemon)
+    }
+
+    case ExpeditionType.EXPLORATION: {
+      const expeditionData = getExpeditionData(
+        expedition
+      ) as ExplorationMissionData
+      return (
+        player.regions.includes(expeditionData.region) &&
+        (player.synergies.get(expeditionData.synergy) ?? 0) >=
+          expeditionData.level
+      )
+    }
+
+    case ExpeditionType.BATTLE: {
+      const expeditionData = getExpeditionData(expedition) as BattleMissionData
+      return (
+        (player.battleStats[expeditionData.stat] ?? 0) >= expeditionData.amount
+      )
+    }
+
+    case ExpeditionType.DELIVERY: {
+      const expeditionData = getExpeditionData(
+        expedition
+      ) as DeliveryMissionData
+      const items = [
+        ...player.items,
+        ...values(player.board).flatMap((p) => p.items)
+      ]
+      return (
+        items.filter((item) => item === expeditionData.item).length >=
+        expeditionData.quantity
+      )
+    }
+
+    default:
+      return false
+  }
 }
 
 export function getExpeditionLabel(expedition: Expedition): string {
+  if (expedition.type === ExpeditionType.BATTLE) {
+    const data = getExpeditionData(expedition) as BattleMissionData
+    if (data.stat === "maxVictoryStreak") {
+      return t(`expeditions.BATTLE_VICTORY_STREAK_DESCRIPTION`, data)
+    } else {
+      const battleStatLabelMapping: Record<BattleStat, string> = {
+        maxHP: t(`stat.HP`),
+        maxAttack: t(`stat.ATK`),
+        maxDefense: t(`stat.DEF`),
+        maxAP: t(`stat.AP`),
+        maxSpecialDefense: t(`stat.SPE_DEF`),
+        maxSpeed: t(`stat.SPEED`),
+        maxPhysicalDamage: t(`physical_damage_dealt`),
+        maxSpecialDamage: t(`special_damage_dealt`),
+        maxTrueDamage: t(`true_damage_dealt`),
+        maxShield: t(`shield_given`),
+        maxHeal: t(`hp_healed`),
+        maxVictoryStreak: t(`streak`)
+      }
+      return t(`expeditions.BATTLE_DESCRIPTION`, {
+        ...data,
+        battleStat: battleStatLabelMapping[data.stat] || data.stat
+      })
+    }
+  }
   return t(
     `expeditions.${expedition.type}_DESCRIPTION`,
     getExpeditionData(expedition)
@@ -86,8 +165,8 @@ export function getExpeditionData(
   expedition: Expedition & { type: ExpeditionType.RESCUE }
 ): RescueMissionData
 export function getExpeditionData(
-  expedition: Expedition & { type: ExpeditionType.SECRET_BASE }
-): SecretBaseMissionData
+  expedition: Expedition & { type: ExpeditionType.EXPLORATION }
+): ExplorationMissionData
 export function getExpeditionData(
   expedition: Expedition & { type: ExpeditionType.BATTLE }
 ): BattleMissionData
@@ -98,7 +177,7 @@ export function getExpeditionData(
   expedition: Expedition
 ):
   | RescueMissionData
-  | SecretBaseMissionData
+  | ExplorationMissionData
   | BattleMissionData
   | DeliveryMissionData {
   const rankIndex = ["E", "D", "C", "B", "A", "S"].indexOf(expedition.rank)
@@ -121,7 +200,7 @@ export function getExpeditionData(
       return { pokemon: pokemonToRescue.name }
     }
 
-    case ExpeditionType.SECRET_BASE: {
+    case ExpeditionType.EXPLORATION: {
       const regions = Object.values(DungeonPMDO)
       const region = regions[expedition.hash % regions.length]
       const regionSynergies = RegionDetails[region].synergies
@@ -130,66 +209,100 @@ export function getExpeditionData(
       const level = synergyTriggers[max(synergyTriggers.length - 1)(rankIndex)]
       return {
         region,
-        regionSynergies: regionSynergies.join(" "),
         synergy,
         level
       }
     }
 
     case ExpeditionType.BATTLE: {
-      const stats = [
-        Stat.ATK,
-        Stat.DEF,
-        Stat.SPE_DEF,
-        Stat.SPEED,
-        Stat.HP
-      ] satisfies Stat[]
-      const stat = stats[expedition.hash % stats.length]
+      const stat = BattleStatsList[expedition.hash % BattleStatsList.length]
       const AMOUNTS_BY_RANK: Record<
         ExpeditionRank,
-        Record<(typeof stats)[number], number>
+        Record<BattleStat, number>
       > = {
         E: {
-          [Stat.ATK]: 40,
-          [Stat.DEF]: 40,
-          [Stat.SPE_DEF]: 40,
-          [Stat.SPEED]: 150,
-          [Stat.HP]: 400
+          maxAttack: 50,
+          maxDefense: 50,
+          maxSpecialDefense: 50,
+          maxSpeed: 150,
+          maxHP: 400,
+          maxAP: 200,
+          maxPhysicalDamage: 500,
+          maxSpecialDamage: 500,
+          maxTrueDamage: 250,
+          maxShield: 250,
+          maxHeal: 250,
+          maxVictoryStreak: 5
         },
         D: {
-          [Stat.ATK]: 50,
-          [Stat.DEF]: 50,
-          [Stat.SPE_DEF]: 50,
-          [Stat.SPEED]: 180,
-          [Stat.HP]: 500
+          maxAttack: 60,
+          maxDefense: 60,
+          maxSpecialDefense: 60,
+          maxSpeed: 180,
+          maxHP: 500,
+          maxAP: 250,
+          maxPhysicalDamage: 600,
+          maxSpecialDamage: 600,
+          maxTrueDamage: 300,
+          maxShield: 300,
+          maxHeal: 300,
+          maxVictoryStreak: 6
         },
         C: {
-          [Stat.ATK]: 60,
-          [Stat.DEF]: 60,
-          [Stat.SPE_DEF]: 60,
-          [Stat.SPEED]: 210,
-          [Stat.HP]: 750
+          maxAttack: 80,
+          maxDefense: 80,
+          maxSpecialDefense: 80,
+          maxSpeed: 210,
+          maxHP: 750,
+          maxAP: 300,
+          maxPhysicalDamage: 750,
+          maxSpecialDamage: 750,
+          maxTrueDamage: 400,
+          maxShield: 400,
+          maxHeal: 400,
+          maxVictoryStreak: 7
         },
         B: {
-          [Stat.ATK]: 70,
-          [Stat.DEF]: 70,
-          [Stat.SPE_DEF]: 70,
-          [Stat.SPEED]: 240,
-          [Stat.HP]: 1000
+          maxAttack: 100,
+          maxDefense: 100,
+          maxSpecialDefense: 100,
+          maxSpeed: 240,
+          maxHP: 1000,
+          maxAP: 350,
+          maxPhysicalDamage: 1000,
+          maxSpecialDamage: 1000,
+          maxTrueDamage: 500,
+          maxShield: 500,
+          maxHeal: 500,
+          maxVictoryStreak: 8
         },
         A: {
-          [Stat.ATK]: 80,
-          [Stat.DEF]: 80,
-          [Stat.SPE_DEF]: 80,
-          [Stat.SPEED]: 270,
-          [Stat.HP]: 1250
+          maxAttack: 200,
+          maxDefense: 200,
+          maxSpecialDefense: 200,
+          maxSpeed: 270,
+          maxHP: 1250,
+          maxAP: 400,
+          maxPhysicalDamage: 1500,
+          maxSpecialDamage: 1500,
+          maxTrueDamage: 750,
+          maxShield: 750,
+          maxHeal: 750,
+          maxVictoryStreak: 9
         },
         S: {
-          [Stat.ATK]: 100,
-          [Stat.DEF]: 100,
-          [Stat.SPE_DEF]: 100,
-          [Stat.SPEED]: 300,
-          [Stat.HP]: 1500
+          maxAttack: 300,
+          maxDefense: 300,
+          maxSpecialDefense: 300,
+          maxSpeed: 300,
+          maxHP: 1500,
+          maxAP: 500,
+          maxPhysicalDamage: 2000,
+          maxSpecialDamage: 2000,
+          maxTrueDamage: 1000,
+          maxShield: 1000,
+          maxHeal: 1000,
+          maxVictoryStreak: 10
         }
       }
       const amount = AMOUNTS_BY_RANK[expedition.rank][stat]
