@@ -4699,6 +4699,8 @@
 		"elo_rank_change_message": "Your new rank is:\n{{rank}}",
 		"victory_road_finished_title": "Victory Road Finished!",
 		"victory_road_finished_message": "Congratulations!\nYou've finished the Victory Road at {{place}}!",
+		"expedition_completed_title": "Expedition Completed!",
+		"expedition_completed_message": "Good job on that $t() rank {{rank}}!\nYou've completed the expedition:\n{{expedition}} and earned {{points}} XP!",
 		"next": "Next",
 		"close": "Close",
 		"dismiss_all": "Dismiss All"

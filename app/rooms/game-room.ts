@@ -105,6 +105,7 @@ import {
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
+import { giveUserExp } from "../core/collection"
 
 export default class GameRoom extends Room<{ state: GameState }> {
   dispatcher: Dispatcher<this>
@@ -861,22 +862,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const previousRank = getRank(previousElo)
 
       if (eligibleToXP) {
-        const expThreshold = 1000
-        if (usr.exp + exp >= expThreshold) {
-          usr.level += 1
-          usr.booster += 1
-          usr.exp = usr.exp + exp - expThreshold
-
-          // Add level up notification
-          notificationsService.addNotification(
-            player.id,
-            "level_up",
-            usr.level.toString()
-          )
-        } else {
-          usr.exp = usr.exp + exp
-        }
-        usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+        giveUserExp(usr, exp)
       }
 
       usr.games += 1

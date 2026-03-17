@@ -1,6 +1,9 @@
 import { t } from "i18next"
 import { precomputedPokemons } from "../../gen/precomputed-pokemons"
 import { RegionDetails, SynergyTriggers } from "../config"
+import { ExpPerExpeditionRank } from "../config/game/expeditions"
+import { giveUserExp } from "../core/collection"
+import { notificationsService } from "../services/notifications"
 import {
   CraftableItemsNoScarves,
   Item,
@@ -20,7 +23,7 @@ import {
   ExplorationMissionData,
   RescueMissionData
 } from "../types/enum/Expedition"
-import { Rarity, Stat } from "../types/enum/Game"
+import { Rarity } from "../types/enum/Game"
 import { BattleStat, BattleStatsList } from "../types/interfaces/BattleStats"
 import {
   IUserMetadataClient,
@@ -77,6 +80,13 @@ export function updatePlayerExpeditionsAfterGame(
       // mark expedition as completed in the database
       usr.eventPoints++
       usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+      const points = ExpPerExpeditionRank[expedition.rank]
+      notificationsService.addNotification(
+        player.id,
+        "expedition_completed",
+        `${expedition.type}|${expedition.rank}|${points}`
+      )
+      giveUserExp(usr, points)
     }
   })
 }
