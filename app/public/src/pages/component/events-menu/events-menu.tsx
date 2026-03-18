@@ -1,6 +1,8 @@
 import { t } from "i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { getCurrentGameEvent } from "../../../../../config"
 import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
+import { GameEvent } from "../../../../../types/events"
 import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
 import { Expeditions } from "./expeditions"
@@ -12,6 +14,7 @@ export function EventsMenu() {
   const tournaments: TournamentSchema[] = useAppSelector(
     (state) => state.lobby.tournaments
   )
+  const currentGameEvent = getCurrentGameEvent()
 
   return (
     <Tabs className="my-container events-menu custom-bg hidden-scrollable">
@@ -25,12 +28,16 @@ export function EventsMenu() {
             <span>{t("game_modes.TOURNAMENT")}</span>
           </Tab>
         )}
-        <Tab>
-          <span>{t("expeditions.title")}</span>
-        </Tab>
-        <Tab>
-          <span>{t("victory_road.title")}</span>
-        </Tab>
+        {currentGameEvent === GameEvent.EXPEDITIONS && (
+          <Tab>
+            <span>{t("expeditions.title")}</span>
+          </Tab>
+        )}
+        {currentGameEvent === GameEvent.VICTORY_ROAD && (
+          <Tab>
+            <span>{t("victory_road.title")}</span>
+          </Tab>
+        )}
       </TabList>
       <TabPanel>
         <Announcements />
@@ -40,12 +47,16 @@ export function EventsMenu() {
           <TournamentsList />
         </TabPanel>
       )}
-      <TabPanel>
-        <Expeditions />
-      </TabPanel>
-      <TabPanel>
-        <VictoryRoad />
-      </TabPanel>
+      {currentGameEvent === GameEvent.EXPEDITIONS && (
+        <TabPanel>
+          <Expeditions />
+        </TabPanel>
+      )}
+      {currentGameEvent === GameEvent.VICTORY_ROAD && (
+        <TabPanel>
+          <VictoryRoad />
+        </TabPanel>
+      )}
       {!user && <p className="subtitle">{t("loading")}</p>}
     </Tabs>
   )

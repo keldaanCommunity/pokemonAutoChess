@@ -5,7 +5,7 @@ import { VictoryRoadPointsPerRank } from "../../../../../config"
 import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"
-import { useAppSelector } from "../../../hooks"
+import { useAppSelector, useGameEventResetCountdown } from "../../../hooks"
 import { searchById } from "../../../network"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
 import { formatDate, formatDuration } from "../../utils/date"
@@ -73,24 +73,7 @@ export function VictoryRoad() {
     return { left: `${x}%`, top: `${y}px` }
   }
 
-  // midnight UTC on the first day of each month
-  const now = new Date()
-  const resetDate = new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 0, 0, 0, 0)
-  )
-  const [resetCountdown, setResetCountdown] = useState(
-    Math.round((resetDate.getTime() - now.getTime()) / 1000)
-  )
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date()
-      setResetCountdown(
-        Math.round((resetDate.getTime() - now.getTime()) / 1000)
-      )
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [resetDate])
+  const resetCountdown = useGameEventResetCountdown()
 
   return (
     <div
@@ -243,7 +226,7 @@ export function VictoryRoad() {
             </dl>
             <p>{t("victory_road.help2")}</p>
             <p style={{ fontStyle: "italic" }}>
-              {t("victory_road.reset_info", {
+              {t("events_reset_info", {
                 resetCountdown: formatDuration(resetCountdown)
               })}
             </p>

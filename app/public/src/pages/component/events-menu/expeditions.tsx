@@ -6,8 +6,9 @@ import {
   getPlayerExpeditions
 } from "../../../../../models/expeditions"
 import { Expedition } from "../../../../../types/enum/Expedition"
-import { useAppSelector } from "../../../hooks"
+import { useAppSelector, useGameEventResetCountdown } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
+import { formatDuration } from "../../utils/date"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -36,6 +37,8 @@ export function Expeditions() {
 
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [showHelp, setShowHelp] = useState(false)
+
+  const resetCountdown = useGameEventResetCountdown()
 
   const handleLeaderboardClick = () => {
     if (showLeaderboard) {
@@ -121,6 +124,14 @@ export function Expeditions() {
           <h3>{t("expeditions.instructions")}</h3>
           <div className="help-content">
             <p>{t("expeditions.help1")}</p>
+            <p>{t("expeditions.help2")}</p>
+            <p>{t("expeditions.help3")}</p>
+            <p>{t("expeditions.help4")}</p>
+            <p style={{ fontStyle: "italic" }}>
+              {t("events_reset_info", {
+                resetCountdown: formatDuration(resetCountdown)
+              })}
+            </p>
           </div>
         </div>
       )}

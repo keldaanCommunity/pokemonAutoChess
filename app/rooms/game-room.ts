@@ -7,13 +7,14 @@ import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
   ExpPlace,
+  getCurrentGameEvent,
   LegendaryPool,
-  MAX_EVENT_POINTS,
   MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PortalCarouselStages,
   UniquePool,
+  VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
 import { giveUserExp } from "../core/collection"
@@ -74,6 +75,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
+import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
@@ -928,17 +930,20 @@ export default class GameRoom extends Room<{ state: GameState }> {
           regions: player.regions
         })
 
-        if (usr.eventFinishTime == null) {
+        if (
+          usr.eventFinishTime == null &&
+          getCurrentGameEvent() === GameEvent.VICTORY_ROAD
+        ) {
           try {
             const eventPointsGained =
               VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
             usr.eventPoints = clamp(
               usr.eventPoints + eventPointsGained,
               0,
-              MAX_EVENT_POINTS
+              VICTORY_ROAD_MAX_EVENT_POINTS
             )
             usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
-            if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
+            if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
               usr.eventFinishTime = new Date()
               usr.markModified("eventFinishTime")
 
@@ -990,8 +995,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       })
 
-      const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(player, usr)
-      if(hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
+      if (
+        getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
+        eligibleToXP &&
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY
+      ) {
+        const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
+          player,
+          usr
+        )
+        if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
+      }
 
       updatePlayerTitlesAfterGame(player, usr, rank)
 
@@ -1019,7 +1033,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       //usr.markModified('metadata');
       await usr.save()
       if (shouldRefetchEventLeaderboard) {
-        await fetchEventLeaderboard()        
+        await fetchEventLeaderboard()
         //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
       }
     }
