@@ -4,7 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { MinStageForGameToCount, RegionDetails } from "../../../config"
+import {
+  getCurrentGameEvent,
+  MinStageForGameToCount,
+  RegionDetails
+} from "../../../config"
 import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
 import { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
@@ -29,6 +33,7 @@ import { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
+import { GameEvent } from "../../../types/events"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
@@ -80,6 +85,7 @@ import {
   setErrorAlertMessage
 } from "../stores/NetworkStore"
 import GameDpsMeter from "./component/game/game-dps-meter"
+import GameExpeditions from "./component/game/game-expeditions"
 import GameFinalRank from "./component/game/game-final-rank"
 import GameItemsProposition from "./component/game/game-items-proposition"
 import GameLoadingScreen from "./component/game/game-loading-screen"
@@ -181,6 +187,8 @@ export default function Game() {
   const [finalRankVisibility, setFinalRankVisibility] =
     useState<FinalRankVisibility>(FinalRankVisibility.HIDDEN)
   const container = useRef<HTMLDivElement>(null)
+
+  const currentGameEvent = getCurrentGameEvent()
 
   const MAX_ATTEMPS_RECONNECT = 3
 
@@ -944,6 +952,7 @@ export default function Game() {
           <GamePokemonsProposition />
           <GameDpsMeter />
           <GameToasts />
+          {currentGameEvent === GameEvent.EXPEDITIONS && <GameExpeditions />}
         </>
       ) : (
         <GameLoadingScreen connectError={connectError} />
