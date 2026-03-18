@@ -990,7 +990,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       })
 
-      updatePlayerExpeditionsAfterGame(player, usr)
+      const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(player, usr)
+      if(hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
+
       updatePlayerTitlesAfterGame(player, usr, rank)
 
       if (usr.titles === undefined) {
@@ -1017,7 +1019,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       //usr.markModified('metadata');
       await usr.save()
       if (shouldRefetchEventLeaderboard) {
-        await fetchEventLeaderboard()
+        await fetchEventLeaderboard()        
+        //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
       }
     }
   }

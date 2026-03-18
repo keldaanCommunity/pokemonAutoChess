@@ -35,7 +35,7 @@ export function authenticateUser() {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) return reject(CloseCodes.USER_NOT_AUTHENTICATED)
       store.dispatch(logIn(user))
-      fetchProfile()
+      fetchProfile(true)
       resolve(user)
     })
   })

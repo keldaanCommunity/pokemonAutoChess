@@ -15,7 +15,7 @@ import "./expeditions.css"
 
 export function Expeditions() {
   const { t } = useTranslation()
-  const profile = useAppSelector((state) => state.network.profile)  
+  const profile = useAppSelector((state) => state.network.profile)
 
   const eventLeaderboard = useAppSelector(
     (state) => state.lobby.eventLeaderboard
@@ -81,7 +81,7 @@ export function Expeditions() {
       <div>
         <ul>
           {expeditions.map((expedition) => (
-            <li>
+            <li key={expedition.type + expedition.rank}>
               <ExpeditionBox expedition={expedition} />
             </li>
           ))}

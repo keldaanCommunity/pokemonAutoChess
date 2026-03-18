@@ -105,6 +105,10 @@ export function NotificationModal({
         return `/assets/ranks/${notification.message}.svg`
       case "victory_road_finished":
         return `/assets/notifications/victory-road.png`
+      case "expedition_completed": {
+        const [expeditionType, rank] = notification.message.split("|")
+        return `/assets/notifications/${expeditionType}_${rank}.jpg`
+      }
       case "level_up":
       default:
         return "/assets/ui/booster.png"

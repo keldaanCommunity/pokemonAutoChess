@@ -1,6 +1,5 @@
 import { BattleStat } from "../interfaces/BattleStats"
 import { DungeonPMDO } from "./Dungeon"
-import { Stat } from "./Game"
 import { Item } from "./Item"
 import { Pkm } from "./Pokemon"
 import { Synergy } from "./Synergy"

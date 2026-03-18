@@ -10,8 +10,7 @@ import {
   Item,
   ShinyItems,
   SynergyItemsNoSpecial,
-  SynergyStones,
-  TownItems
+  SynergyStones
 } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import {
@@ -56,15 +55,15 @@ export function getPlayerExpeditions(
 }
 
 export function getExpeditionTier(level: number): ExpeditionRank {
-  if (level < 5) {
+  if (level < 3) {
     return ExpeditionRank.E
-  } else if (level < 10) {
+  } else if (level < 6) {
     return ExpeditionRank.D
-  } else if (level < 15) {
+  } else if (level < 10) {
     return ExpeditionRank.C
-  } else if (level < 20) {
+  } else if (level < 15) {
     return ExpeditionRank.B
-  } else if (level < 30) {
+  } else if (level < 20) {
     return ExpeditionRank.A
   } else {
     return ExpeditionRank.S
@@ -74,12 +73,15 @@ export function getExpeditionTier(level: number): ExpeditionRank {
 export function updatePlayerExpeditionsAfterGame(
   player: IPlayer,
   usr: IUserMetadataMongo
-) {
-  getPlayerExpeditions(usr).forEach((expedition) => {
+): boolean {
+  const expeditions = getPlayerExpeditions(usr)
+  let hasCompletedExpeditions = false
+  expeditions.forEach((expedition) => {
     if (checkExpeditionCompletion(player, expedition)) {
       // mark expedition as completed in the database
       usr.eventPoints++
       usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+      hasCompletedExpeditions = true
       const points = ExpPerExpeditionRank[expedition.rank]
       notificationsService.addNotification(
         player.id,
@@ -89,6 +91,7 @@ export function updatePlayerExpeditionsAfterGame(
       giveUserExp(usr, points)
     }
   })
+  return hasCompletedExpeditions
 }
 
 export function checkExpeditionCompletion(
@@ -125,8 +128,19 @@ export function checkExpeditionCompletion(
       ) as DeliveryMissionData
       const items = [
         ...player.items,
-        ...values(player.board).flatMap((p) => p.items)
+        ...values(player.board).flatMap((p) => values(p.items))
       ]
+      console.log(
+        "Checking delivery expedition completion with items:",
+        "item to look for",
+        expeditionData.item,
+        "quantity",
+        expeditionData.quantity,
+        "counted",
+        items.filter((item) => item === expeditionData.item).length,
+        "available items",
+        items
+      )
       return (
         items.filter((item) => item === expeditionData.item).length >=
         expeditionData.quantity
@@ -287,9 +301,9 @@ export function getExpeditionData(
           maxVictoryStreak: 8
         },
         A: {
-          maxAttack: 200,
-          maxDefense: 200,
-          maxSpecialDefense: 200,
+          maxAttack: 150,
+          maxDefense: 150,
+          maxSpecialDefense: 150,
           maxSpeed: 270,
           maxHP: 1250,
           maxAP: 400,
@@ -301,12 +315,12 @@ export function getExpeditionData(
           maxVictoryStreak: 9
         },
         S: {
-          maxAttack: 300,
-          maxDefense: 300,
-          maxSpecialDefense: 300,
+          maxAttack: 200,
+          maxDefense: 200,
+          maxSpecialDefense: 200,
           maxSpeed: 300,
           maxHP: 1500,
-          maxAP: 500,
+          maxAP: 450,
           maxPhysicalDamage: 2000,
           maxSpecialDamage: 2000,
           maxTrueDamage: 1000,
@@ -327,7 +341,13 @@ export function getExpeditionData(
         [ExpeditionRank.E]: CraftableItemsNoScarves,
         [ExpeditionRank.D]: CraftableItemsNoScarves,
         [ExpeditionRank.C]: SynergyItemsNoSpecial,
-        [ExpeditionRank.B]: TownItems,
+        [ExpeditionRank.B]: [
+          Item.AMULET_COIN,
+          Item.GIMMIGHOUL_COIN,
+          Item.LEADERS_CREST,
+          Item.DRAGON_GEM,
+          Item.SUN_STONE
+        ],
         [ExpeditionRank.A]: SynergyStones,
         [ExpeditionRank.S]: ShinyItems
       }
