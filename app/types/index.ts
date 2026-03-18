@@ -33,6 +33,7 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
+import { BattleStats } from "./interfaces/BattleStats"
 
 export * from "./enum/Emotion"
 export * from "./enum/Item"
@@ -299,6 +300,9 @@ export interface IPlayer {
   cellBattery: number
   lightX: number
   lightY: number
+  titles: Set<Title>
+  regions: DungeonPMDO[]
+  battleStats: BattleStats
 }
 
 export interface IPokemon {

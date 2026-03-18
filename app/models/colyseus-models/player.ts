@@ -896,19 +896,12 @@ export default class Player extends Schema implements IPlayer {
       )
     }
 
-    let maxVictoryStreak = 0
-    for (let i = this.history.length - 1; i >= 0; i--) {
-      let streak = 0
-      while (this.history[i].result === BattleResult.WIN) {
-        streak++
-        i--
-      }
-      maxVictoryStreak = Math.max(maxVictoryStreak, streak)
+    if (this.history.at(-1)?.result === BattleResult.WIN) {
+      this.battleStats.maxVictoryStreak = Math.max(
+        this.battleStats.maxVictoryStreak,
+        this.streak
+      )
     }
-    this.battleStats.maxVictoryStreak = Math.max(
-      this.battleStats.maxVictoryStreak,
-      maxVictoryStreak
-    )
   }
 }
 

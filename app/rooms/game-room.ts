@@ -16,6 +16,7 @@ import {
   UniquePool,
   VictoryRoadPointsPerRank
 } from "../config"
+import { giveUserExp } from "../core/collection"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -105,7 +106,6 @@ import {
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
-import { giveUserExp } from "../core/collection"
 
 export default class GameRoom extends Room<{ state: GameState }> {
   dispatcher: Dispatcher<this>

@@ -6,6 +6,7 @@ import { giveUserExp } from "../core/collection"
 import { notificationsService } from "../services/notifications"
 import {
   CraftableItemsNoScarves,
+  IPlayer,
   Item,
   ShinyItems,
   SynergyItemsNoSpecial,
@@ -32,7 +33,6 @@ import {
 } from "../types/interfaces/UserMetadata"
 import { max } from "../utils/number"
 import { values } from "../utils/schemas"
-import Player from "./colyseus-models/player"
 
 export function getPlayerExpeditions(
   user: IUserMetadataClient | IUserMetadataMongo | IUserMetadataUnpacked
@@ -72,7 +72,7 @@ export function getExpeditionTier(level: number): ExpeditionRank {
 }
 
 export function updatePlayerExpeditionsAfterGame(
-  player: Player,
+  player: IPlayer,
   usr: IUserMetadataMongo
 ) {
   getPlayerExpeditions(usr).forEach((expedition) => {
@@ -92,7 +92,7 @@ export function updatePlayerExpeditionsAfterGame(
 }
 
 export function checkExpeditionCompletion(
-  player: Player,
+  player: IPlayer,
   expedition: Expedition
 ): boolean {
   switch (expedition.type) {

@@ -1,14 +1,16 @@
 import { getBaseAltForm, PkmAltFormsByPkm } from "../config"
 import GameState from "../rooms/states/game-state"
-import { Scarves, Title } from "../types"
+import { IPlayer, Scarves, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { NonPkm, Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { isIn } from "../utils/array"
 import { values } from "../utils/schemas"
-import Player from "./colyseus-models/player"
 
-export function updatePlayerTitlesAfterFight(player: Player, state: GameState) {
+export function updatePlayerTitlesAfterFight(
+  player: IPlayer,
+  state: GameState
+) {
   const simulation = state.simulations.get(player.simulationId)
   if (!simulation) return
 
@@ -152,7 +154,7 @@ export function updatePlayerTitlesAfterFight(player: Player, state: GameState) {
 }
 
 export function updatePlayerTitlesAfterGame(
-  player: Player,
+  player: IPlayer,
   usr: IUserMetadataMongo,
   rank: number
 ) {
