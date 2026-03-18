@@ -353,7 +353,7 @@ export class OnDragDropPokemonCommand extends Command<
         ) {
           // Meltan can merge with Melmetal
           const melmetal = player.getPokemonAt(x, y)!
-          melmetal.addMaxHP(50, player)
+          melmetal.addMaxHP(50)
           pokemon.items.forEach((item) => {
             player.items.push(item)
           })
@@ -1400,7 +1400,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.room.clock.setTimeout(() => {
               player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
               if (pokemon.passive === Passive.ORTHWORM) {
-                pokemon.addMaxHP(5, player)
+                pokemon.addMaxHP(5)
               }
               player.board.forEach((pokemon) => {
                 // Condition based evolutions on ground hole dig
@@ -1474,7 +1474,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (this.state.specialGameRule === SpecialGameRule.GO_BIG_OR_GO_HOME) {
       board.forEach((pokemon) => {
-        pokemon.addMaxHP(5, player)
+        pokemon.addMaxHP(5)
       })
     }
 

@@ -4594,7 +4594,7 @@
 		"RESCUE_DESCRIPTION": "Have a $t(pkm.{{pokemon}}) in your final team",
 		"EXPLORATION_DESCRIPTION": "Travel to $t(map.{{region}}) during the game and get synergy {{synergy}} level {{level}} or more active in your final team",
 		"BATTLE_DESCRIPTION": "Have a Pokémon reach {{amount}} {{battleStat}} or more in a fight",
-		"BATTLE_VICTORY_STREAK_DESCRIPTION": "Get a {{amount}} victory streak or more in a Ranked game",
+		"BATTLE_WIN_STREAK_DESCRIPTION": "Get a {{amount}} win streak or more in a Ranked game",
 		"DELIVERY_DESCRIPTION": "Get {{quantity}} {{item}} in your inventory or equipped on a Pokémon at the end of the game",
 		"reward": "Reward: {{points}} XP"
 	},

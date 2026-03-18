@@ -231,4 +231,8 @@ export function updatePlayerTitlesAfterGame(
   if (usr.elo >= 1400) {
     player.titles.add(Title.GYM_LEADER)
   }
+
+  if(player.battleStats.maxHP >= 1500) {
+    player.titles.add(Title.GIANT)
+  }
 }

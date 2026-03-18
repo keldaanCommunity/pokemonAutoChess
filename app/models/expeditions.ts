@@ -156,7 +156,7 @@ export function getExpeditionLabel(expedition: Expedition): string {
   if (expedition.type === ExpeditionType.BATTLE) {
     const data = getExpeditionData(expedition) as BattleMissionData
     if (data.stat === "maxVictoryStreak") {
-      return t(`expeditions.BATTLE_VICTORY_STREAK_DESCRIPTION`, data)
+      return t(`expeditions.BATTLE_WIN_STREAK_DESCRIPTION`, data)
     } else {
       const battleStatLabelMapping: Record<BattleStat, string> = {
         maxHP: t(`stat.HP`),

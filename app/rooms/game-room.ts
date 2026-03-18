@@ -1244,7 +1244,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
             evolution,
             player
           )
-          replacement.addMaxHP([50, 100, 150][rank] ?? 50, player)
+          replacement.addMaxHP([50, 100, 150][rank] ?? 50)
           replacement.addAttack([5, 10, 15][rank] ?? 5)
           replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
           return replacement

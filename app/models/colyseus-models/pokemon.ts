@@ -313,7 +313,7 @@ export class Pokemon extends Schema implements IPokemon {
     }
   }
 
-  applyStat(stat: Stat, value: number, player: Player | undefined) {
+  applyStat(stat: Stat, value: number) {
     switch (stat) {
       case Stat.ATK:
         this.addAttack(value)
@@ -343,7 +343,7 @@ export class Pokemon extends Schema implements IPokemon {
         this.addShield(value)
         break
       case Stat.HP:
-        this.addMaxHP(value, player)
+        this.addMaxHP(value)
         break
       case Stat.LUCK:
         this.addLuck(value)
@@ -402,12 +402,9 @@ export class Pokemon extends Schema implements IPokemon {
     this.speed = clamp(this.speed + value, 0, 300)
   }
 
-  addMaxHP(amount: number, player: Player | undefined) {
+  addMaxHP(amount: number) {
     this.hp = min(1)(this.hp + amount)
     this.maxHP = this.hp
-    if (this.hp >= 1500 && player) {
-      player.titles.add(Title.GIANT)
-    }
   }
 }
 
