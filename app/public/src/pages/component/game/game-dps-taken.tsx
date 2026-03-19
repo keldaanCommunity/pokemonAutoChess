@@ -29,7 +29,7 @@ export default function GameDpsTaken(props: {
             max={props.maxDamageTaken}
             now={props.dps.physicalDamageReduced}
             key="hp"
-            title={`${t("physical_damage_reduced")}: ${props.dps.physicalDamageReduced}`}
+            title={`${t("battle_stats.physical_damage_reduced")}: ${props.dps.physicalDamageReduced}`}
           />
           <ProgressBar
             className={
@@ -39,7 +39,7 @@ export default function GameDpsTaken(props: {
             max={props.maxDamageTaken}
             now={props.dps.specialDamageReduced}
             key="hp"
-            title={`${t("special_damage_reduced")}: ${props.dps.specialDamageReduced}`}
+            title={`${t("battle_stats.special_damage_reduced")}: ${props.dps.specialDamageReduced}`}
           />
           <ProgressBar
             className={colorblindMode ? "colorblind-pattern-dots" : ""}
@@ -47,7 +47,7 @@ export default function GameDpsTaken(props: {
             max={props.maxDamageTaken}
             now={props.dps.shieldDamageTaken}
             key="shield"
-            title={`${t("shield_damage_taken")}: ${props.dps.shieldDamageTaken}`}
+            title={`${t("battle_stats.shield_damage_taken")}: ${props.dps.shieldDamageTaken}`}
           />
         </ProgressBar>
       </div>

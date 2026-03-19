@@ -274,7 +274,8 @@ export default function Game() {
           synergies: new Array<{ name: Synergy; value: number }>(),
           moneyEarned: p.totalMoneyEarned,
           playerDamageDealt: p.totalPlayerDamageDealt,
-          rerollCount: p.rerollCount
+          rerollCount: p.rerollCount,
+          battleStats: p.battleStats
         }
 
         const allSynergies = new Array<{ name: Synergy; value: number }>()

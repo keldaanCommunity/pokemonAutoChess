@@ -155,7 +155,7 @@ export function checkExpeditionCompletion(
 export function getExpeditionLabel(expedition: Expedition): string {
   if (expedition.type === ExpeditionType.BATTLE) {
     const data = getExpeditionData(expedition) as BattleMissionData
-    if (data.stat === "maxVictoryStreak") {
+    if (data.stat === "maxWinStreak") {
       return t(`expeditions.BATTLE_WIN_STREAK_DESCRIPTION`, data)
     } else {
       const battleStatLabelMapping: Record<BattleStat, string> = {
@@ -165,12 +165,12 @@ export function getExpeditionLabel(expedition: Expedition): string {
         maxAP: t(`stat.AP`),
         maxSpecialDefense: t(`stat.SPE_DEF`),
         maxSpeed: t(`stat.SPEED`),
-        maxPhysicalDamage: t(`physical_damage_dealt`),
-        maxSpecialDamage: t(`special_damage_dealt`),
-        maxTrueDamage: t(`true_damage_dealt`),
-        maxShield: t(`shield_given`),
-        maxHeal: t(`hp_healed`),
-        maxVictoryStreak: t(`streak`)
+        maxPhysicalDamage: t(`battle_stats.physical_damage_dealt`),
+        maxSpecialDamage: t(`battle_stats.special_damage_dealt`),
+        maxTrueDamage: t(`battle_stats.true_damage_dealt`),
+        maxShield: t(`battle_stats.shield_given`),
+        maxHeal: t(`battle_stats.hp_healed`),
+        maxWinStreak: t(`streak`)
       }
       return t(`expeditions.BATTLE_DESCRIPTION`, {
         ...data,
@@ -256,7 +256,7 @@ export function getExpeditionData(
           maxTrueDamage: 250,
           maxShield: 250,
           maxHeal: 250,
-          maxVictoryStreak: 5
+          maxWinStreak: 5
         },
         D: {
           maxAttack: 60,
@@ -270,7 +270,7 @@ export function getExpeditionData(
           maxTrueDamage: 300,
           maxShield: 300,
           maxHeal: 300,
-          maxVictoryStreak: 6
+          maxWinStreak: 6
         },
         C: {
           maxAttack: 80,
@@ -284,7 +284,7 @@ export function getExpeditionData(
           maxTrueDamage: 400,
           maxShield: 400,
           maxHeal: 400,
-          maxVictoryStreak: 7
+          maxWinStreak: 7
         },
         B: {
           maxAttack: 100,
@@ -298,7 +298,7 @@ export function getExpeditionData(
           maxTrueDamage: 500,
           maxShield: 500,
           maxHeal: 500,
-          maxVictoryStreak: 8
+          maxWinStreak: 8
         },
         A: {
           maxAttack: 150,
@@ -312,7 +312,7 @@ export function getExpeditionData(
           maxTrueDamage: 750,
           maxShield: 750,
           maxHeal: 750,
-          maxVictoryStreak: 9
+          maxWinStreak: 9
         },
         S: {
           maxAttack: 200,
@@ -326,7 +326,7 @@ export function getExpeditionData(
           maxTrueDamage: 1000,
           maxShield: 1000,
           maxHeal: 1000,
-          maxVictoryStreak: 10
+          maxWinStreak: 10
         }
       }
       const amount = AMOUNTS_BY_RANK[expedition.rank][stat]

@@ -202,6 +202,7 @@ export interface IAfterGamePlayer extends ISimplePlayer {
   moneyEarned: number
   playerDamageDealt: number
   rerollCount: number
+  battleStats: BattleStats
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {

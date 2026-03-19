@@ -323,6 +323,7 @@ export class OnDragDropPokemonCommand extends Command<
           const pokemonToClone = player.getPokemonAt(x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
+            //player.battleStats.dittosUsed += 1
             let pkm = getPokemonBaseline(pokemonToClone.name)
             if (PkmsWithAltForms.includes(pkm)) {
               pkm = getAltFormForPlayer(pkm, player)

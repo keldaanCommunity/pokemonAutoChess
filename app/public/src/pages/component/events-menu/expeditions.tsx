@@ -152,7 +152,7 @@ export function ExpeditionBox(props: { expedition: Expedition }) {
         className="expedition-rank"
         style={{
           backgroundImage: `url(/assets/ranks/expedition-ranks.png)`,
-          backgroundPosition: `0px ${props.expedition.rank === "S" ? 25 : props.expedition.rank === "A" ? 20 : props.expedition.rank === "B" ? 15 : props.expedition.rank === "C" ? 10 : props.expedition.rank === "D" ? 5 : 0}px`,
+          backgroundPosition: `${props.expedition.rank === "S" ? -200 : props.expedition.rank === "A" ? -160 : props.expedition.rank === "B" ? -120 : props.expedition.rank === "C" ? -80 : props.expedition.rank === "D" ? -40 : 0}px 0`,
           backgroundSize: "240px 40px",
           color: "transparent",
           height: "40px",

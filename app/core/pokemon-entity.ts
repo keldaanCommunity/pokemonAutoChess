@@ -556,7 +556,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      boardPokemon.addMaxHP(value, this.player)
+      boardPokemon.addMaxHP(value)
     }
   }
 

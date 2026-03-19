@@ -1843,9 +1843,11 @@
 	"buy_booster": "Koop een nieuwe booster voor {{cost}}",
 	"close": "Dichtbij",
 	"additional_pokemon_hint": "Elke speler koos extra Pokemon om beschikbaar te zijn in de winkel van alle spelers voor dit spel.",
-	"damage_dealt": "Schade aangericht",
-	"damage_blocked": "Schade geblokkeerd",
-	"heal_shield": "Genezing en schild gegeven",
+	"battle_stats": {
+		"damage_dealt": "Schade aangericht",
+		"damage_blocked": "Schade geblokkeerd",
+		"heal_shield": "Genezing en schild gegeven"
+	},
 	"lvl": "niveau",
 	"lose_game_hint": "Je verliest het spel als je geen gezondheidspunten meer hebt",
 	"unlock": "Ontgrendelen",

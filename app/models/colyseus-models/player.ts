@@ -897,8 +897,8 @@ export default class Player extends Schema implements IPlayer {
     }
 
     if (this.history.at(-1)?.result === BattleResult.WIN) {
-      this.battleStats.maxVictoryStreak = Math.max(
-        this.battleStats.maxVictoryStreak,
+      this.battleStats.maxWinStreak = Math.max(
+        this.battleStats.maxWinStreak,
         this.streak
       )
     }

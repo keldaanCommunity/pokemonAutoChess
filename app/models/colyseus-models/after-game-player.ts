@@ -1,6 +1,8 @@
 import { ArraySchema, Schema, type } from "@colyseus/schema"
 import { IAfterGamePlayer, Role } from "../../types"
 import { Synergy } from "../../types/enum/Synergy"
+import { BattleStats } from "../../types/interfaces/BattleStats"
+import { BattleStatsSchema } from "./battle-stats"
 import { IPokemonRecord, PokemonRecord } from "./game-record"
 
 export class SampleSynergy extends Schema {
@@ -34,6 +36,7 @@ export default class AfterGamePlayer
   @type("uint16") moneyEarned: number
   @type("uint16") playerDamageDealt: number
   @type("uint16") rerollCount: number
+  @type(BattleStatsSchema) battleStats = new BattleStatsSchema()
 
   constructor(
     id: string,
@@ -50,7 +53,8 @@ export default class AfterGamePlayer
     games: number,
     moneyEarned: number,
     playerDamageDealt: number,
-    rerollCount: number
+    rerollCount: number,
+    battleStats: BattleStats
   ) {
     super()
     this.id = id
@@ -70,5 +74,6 @@ export default class AfterGamePlayer
     synergies.forEach((s) => {
       this.synergies.push(new SampleSynergy(s.name, s.value))
     })
+    this.battleStats = new BattleStatsSchema(battleStats)
   }
 }

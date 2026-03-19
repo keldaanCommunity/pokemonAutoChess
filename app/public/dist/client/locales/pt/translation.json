@@ -2341,9 +2341,11 @@
 	"buy_booster": "Compre um novo booster por {{cost}}",
 	"close": "Fechar",
 	"additional_pokemon_hint": "Cada jogador escolheu Pokémon adicionais para estarem disponíveis na loja de todos os jogadores para este jogo.",
-	"damage_dealt": "Dano Causado",
-	"damage_blocked": "Dano bloqueado",
-	"heal_shield": "Cura e escudo dados",
+	"battle_stats": {
+		"damage_dealt": "Dano Causado",
+		"damage_blocked": "Dano bloqueado",
+		"heal_shield": "Cura e escudo dados"
+	},
 	"lvl": "lvl",
 	"lose_game_hint": "Você perde o jogo quando não tem mais pontos de saúde",
 	"unlock": "desbloquear",

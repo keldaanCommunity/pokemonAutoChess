@@ -26,7 +26,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             max={props.maxDamage}
             now={props.dps.physicalDamage}
             key="physical"
-            title={`${t("physical_damage_dealt")}: ${props.dps.physicalDamage}`}
+            title={`${t("battle_stats.physical_damage_dealt")}: ${props.dps.physicalDamage}`}
           />
           <ProgressBar
             className={
@@ -36,7 +36,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             max={props.maxDamage}
             now={props.dps.specialDamage}
             key="special"
-            title={`${t("special_damage_dealt")}: ${props.dps.specialDamage}`}
+            title={`${t("battle_stats.special_damage_dealt")}: ${props.dps.specialDamage}`}
           />
           <ProgressBar
             className={colorblindMode ? "colorblind-pattern-dots" : ""}
@@ -44,7 +44,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             max={props.maxDamage}
             now={props.dps.trueDamage}
             key="true"
-            title={`${t("true_damage_dealt")}: ${props.dps.trueDamage}`}
+            title={`${t("battle_stats.true_damage_dealt")}: ${props.dps.trueDamage}`}
           />
         </ProgressBar>
       </div>

@@ -104,3 +104,34 @@
   width: 20px;
   height: 20px;
 }
+
+.player-stats-tooltip {
+  min-width: 240px;
+  text-align: left;
+}
+
+.player-stats-tooltip dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  margin: 0;
+}
+
+.player-stats-tooltip dt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+}
+
+.player-stats-tooltip dt img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.player-stats-tooltip dd {
+  margin: 0;
+  text-align: right;
+  font-weight: bold;
+}
