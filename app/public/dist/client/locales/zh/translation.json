@@ -562,7 +562,8 @@
 		"SHADOW_CLAW": "暗影爪",
 		"FEATHER_DANCE": "羽毛舞",
 		"GLACIAL_LANCE": "雪矛",
-		"ORDER_UP": "上菜"
+		"ORDER_UP": "上菜",
+		"ICE_SPINNER": "冰旋"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1731,7 +1732,9 @@
 		"DONDOZO": "吃吼霸",
 		"TATSUGIRI_CURLY": "米立龙（上弓姿势）",
 		"TATSUGIRI_DROOPY": "米立龙（下垂姿势）",
-		"TATSUGIRI_STRETCHY": "米立龙（平挺姿势）"
+		"TATSUGIRI_STRETCHY": "米立龙（平挺姿势）",
+		"CETODDLE": "走鲸",
+		"CETITAN": "浩大鲸"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2273,7 +2276,8 @@
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
 		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
 		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。",
-		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战席上将出现一只，其形态每轮均有不同。"
+		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战席上将出现一只，其形态每轮均有不同。",
+		"ICE_SPINNER": "脚上覆盖薄冰，旋转着撞击ADJACENT敌方宝可梦，对他们造成[15,30,60,SP]点SPECIAL并将它们击退。清除ADJACENT格子上的BOARD_EFFECT。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2794,6 +2798,7 @@
 		"MISSION_ORDER_GOLD": "公会任务——繁荣",
 		"MISSION_ORDER_PINK": "公会任务——进化",
 		"LEADERS_CREST": "头领凭证",
+		"LAPRAS_PASSPORT": "拉普拉斯旅行社船票",
 		"SILK_SCARF": "丝绸围巾",
 		"FRIEND_BOW": "朋友缎带",
 		"BLACK_BELT": "黑带",
@@ -3097,6 +3102,7 @@
 		"MISSION_ORDER_GREEN": "完成以下任务，获取30 GOLD:\n 同时激活9种不同共鸣",
 		"MISSION_ORDER_GOLD": "完成以下任务，获取30 GOLD:\n 在本场游戏中，总计获取200 GOLD",
 		"LEADERS_CREST": "另一个玩家在对战轮次中击败你之后，其额外获得4 GOLD并夺走LEADERS_CREST。",
+		"LAPRAS_PASSPORT": "拉普拉斯能将你带到一个不同的地区。对一只宝可梦使用此船票，可根据其共鸣影响目的地。",
 		"SILK_SCARF": "与其他道具组件合成，可以制作各种围巾，头带和腰带。这些合成道具会在NORMAL共鸣等级降级时被移除。",
 		"FRIEND_BOW": "携带者也被视作NORMAL宝可梦。",
 		"BLACK_BELT": "攻击造成暴击时获得SHIELD，数值相当于造成伤害的33%。",
@@ -3151,6 +3157,7 @@
 		"TORNADUS": "根据当前最高共鸣是FLYING还是ICE，将天气设置为WINDY或SNOW。",
 		"ENAMORUS": "根据当前最高共鸣是FAIRY还是FLYING，将天气设置为MISTY或WINDY。",
 		"DROUGHT_OR_SANDSTORM": "根据当前最高共鸣是FIRE还是GROUND，将天气设置为DROUGHT或SANDSTORM。",
+		"DROUGHT_OR_ZENITH": "根据当前最高共鸣是FIRE还是LIGHT，将天气设置为DROUGHT或ZENITH。",
 		"RAIN_OR_STORM": "根据当前最高共鸣是WATER还是ELECTRIC，将天气设置为RAIN或STORM。",
 		"AIRLOCK": "将天气设置为NEUTRAL。",
 		"SHARED_VISION": "共享视域：所有共享视域的宝可梦会尽可能攻击同一目标，除非其不在射程之内。",
@@ -4437,7 +4444,8 @@
 		"here_are_your_reward": "这是你的奖励：\n{{reward}}",
 		"magnemite": "你有看见逃犯吗？",
 		"magnezone": "听着，这种事我们警察干就好。放心，只要我获得更多情报，一定会先通知你们的。",
-		"xatu": "让我帮你打开这个宝箱……"
+		"xatu": "让我帮你打开这个宝箱……",
+		"lapras": "准备好了吗？那我们出发了！"
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "还 有 大 家",
@@ -4484,7 +4492,7 @@
 		"CHOSEN_ONES": "你选择的附加宝可梦会立即进化，且会获得额外的属性值。"
 	},
 	"town_encounter_description": {
-		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予石头。",
+		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予道具。",
 		"CHANSEY": "吉利蛋会以每枚{{cost}} GOLD的价格出售EGG_FOR_SELL。",
 		"ELECTIVIRE": "电击魔兽会以每件{{cost}} GOLD的价格出售工具类道具。",
 		"XATU": "$t(pkm.XATU)会为每名玩家提供一个TREASURE_BOX。里面有什么呢……？",
@@ -4503,7 +4511,8 @@
 		"WIGGLYTUFF": "完成胖可丁公会发布的任务可以获得奖励。",
 		"CINCCINO": "奇诺栗鼠提供优雅的SILK_SCARF。",
 		"MAGNEZONE": "自爆磁怪正在寻找一名通缉犯，并会为抓获者支付报酬。",
-		"KINGAMBIT": "仆刀将军将一枚LEADERS_CREST交给了第一名的玩家。在战斗中击败他就能获得额外的GOLD！"
+		"KINGAMBIT": "仆刀将军将一枚LEADERS_CREST交给了第一名的玩家。在战斗中击败他就能获得额外的GOLD！",
+		"LAPRAS": "拉普拉斯能将你带到一个不同的地区。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
