@@ -3525,7 +3525,12 @@
 		"AQUARIOPHILE": "Aquariophile",
 		"POFFIN_MASTER": "Poffin Master",
 		"TOP_GUN": "Top Gun",
-		"SCOUT": "Scout"
+		"SCOUT": "Scout",
+		"RESCUE_TEAM_MEMBER": "Rescue Team Member",
+		"EXPLORER": "Explorer",
+		"POSTMAN": "Postman",
+		"SURVEY_CORPS": "Survey Corps",
+		"GUILDMASTER": "Guildmaster"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3616,7 +3621,12 @@
 		"AQUARIOPHILE": "Have $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) and $t(pkm.BASCULIN_WHITE) in the same team",
 		"POFFIN_MASTER": "Cook a POFFIN with 3 different golden berries in it",
 		"TOP_GUN": "Get to Mach 10 with a MACH_RIBBON",
-		"SCOUT": "Equip your team with at least 5 SILK_SCARF made items"
+		"SCOUT": "Equip your team with at least 5 SILK_SCARF made items",
+		"RESCUE_TEAM_MEMBER": "Complete a Rescue mission expedition",
+		"EXPLORER": "Complete a Exploration mission expedition",
+		"POSTMAN": "Complete a Delivery mission expedition",
+		"SURVEY_CORPS": "Complete a Battle mission expedition",
+		"GUILDMASTER": "Complete a rank S expedition"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",

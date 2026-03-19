@@ -10,7 +10,8 @@ import {
   Item,
   ShinyItems,
   SynergyItemsNoSpecial,
-  SynergyStones
+  SynergyStones,
+  Title
 } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import {
@@ -89,6 +90,23 @@ export function updatePlayerExpeditionsAfterGame(
         `${expedition.type}|${expedition.rank}|${points}`
       )
       giveUserExp(usr, points)
+      switch (expedition.type) {
+        case ExpeditionType.RESCUE:
+          player.titles.add(Title.RESCUE_TEAM_MEMBER)
+          break
+        case ExpeditionType.EXPLORATION:
+          player.titles.add(Title.EXPLORER)
+          break
+        case ExpeditionType.BATTLE:
+          player.titles.add(Title.SURVEY_CORPS)
+          break
+        case ExpeditionType.DELIVERY:
+          player.titles.add(Title.POSTMAN)
+          break
+      }
+      if (expedition.rank === ExpeditionRank.S) {
+        player.titles.add(Title.GUILDMASTER)
+      }
     }
   })
   return hasCompletedExpeditions
