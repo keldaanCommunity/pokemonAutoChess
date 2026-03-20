@@ -57,7 +57,6 @@
     "@colyseus/tools": "^0.17.18",
     "@colyseus/ws-transport": "^0.17.9",
     "@reduxjs/toolkit": "^2.3.0",
-    "body-parser": "^2.0.0",
     "colyseus": "^0.17.8",
     "cors": "^2.8.5",
     "cron": "^4.3.1",
