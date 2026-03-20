@@ -18,4 +18,9 @@ export class GameStatsSchema extends Schema implements GameStats {
   @type("uint16") rerollCount: number = 0
   @type("uint16") totalMoneyEarned: number = 0
   @type("uint16") totalPlayerDamageDealt: number = 0
+
+  constructor(...args: any[]) {
+    super()
+    Object.assign(this, ...args)
+  }
 }

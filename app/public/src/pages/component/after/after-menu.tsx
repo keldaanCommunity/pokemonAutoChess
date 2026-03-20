@@ -83,17 +83,17 @@ export default function AfterMenu() {
             </tr>
           </thead>
           <tbody>
-            {players.map((v) => {
+            {players.map((player) => {
               return (
-                <tr key={v.id}>
-                  <td>{v.rank}</td>
+                <tr key={player.id}>
+                  <td>{player.rank}</td>
                   <td>
                     <Avatar
-                      avatar={v.avatar}
-                      name={v.name}
-                      elo={v.elo}
-                      title={v.title}
-                      role={v.role}
+                      avatar={player.avatar}
+                      name={player.name}
+                      elo={player.elo}
+                      title={player.title}
+                      role={player.role}
                     />
                   </td>
                   <td>
@@ -105,22 +105,22 @@ export default function AfterMenu() {
                         height: "28px",
                         cursor: "var(--cursor-hover)"
                       }}
-                      data-tooltip-id={`stats-tooltip-${v.id}`}
+                      data-tooltip-id={`stats-tooltip-${player.id}`}
                     />
                     <Tooltip
-                      id={`stats-tooltip-${v.id}`}
+                      id={`stats-tooltip-${player.id}`}
                       className="custom-theme-tooltip"
                       place="right"
                     >
-                      <PlayerStatsTooltip player={v} />
+                      <PlayerStatsTooltip player={player} />
                     </Tooltip>
                   </td>
                   <td>
-                    <Team team={v.pokemons} />
+                    <Team team={player.pokemons} />
                   </td>
                   <td>
                     <ul className="player-team-synergies">
-                      {v.synergies.filter(isNotIncomplete).map((s) => (
+                      {player.synergies.filter(isNotIncomplete).map((s) => (
                         <React.Fragment key={s.name}>
                           <SynergyIcon type={s.name} />
                           <span>{s.value}</span>

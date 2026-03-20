@@ -128,6 +128,7 @@
   width: 16px;
   height: 16px;
   object-fit: contain;
+  vertical-align: middle;
 }
 
 .player-stats-tooltip dd {
