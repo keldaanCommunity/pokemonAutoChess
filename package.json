@@ -54,7 +54,6 @@
     "@colyseus/redis-presence": "^0.17.6",
     "@colyseus/schema": "^4.0.11",
     "@colyseus/sdk": "^0.17.26",
-    "@colyseus/testing": "^0.17.11",
     "@colyseus/tools": "^0.17.18",
     "@colyseus/ws-transport": "^0.17.9",
     "@reduxjs/toolkit": "^2.3.0",
