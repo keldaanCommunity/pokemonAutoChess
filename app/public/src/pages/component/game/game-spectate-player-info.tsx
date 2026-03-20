@@ -60,7 +60,7 @@ export default function GameSpectatePlayerInfo() {
                 alt="$"
                 style={{ width: "24px", height: "24px" }}
               />{" "}
-              {spectatedPlayer.totalMoneyEarned}
+              {spectatedPlayer.gameStats.totalMoneyEarned}
             </span>
             <span title={t("total_player_damage_dealt")}>
               <img
@@ -68,7 +68,7 @@ export default function GameSpectatePlayerInfo() {
                 alt="✊"
                 style={{ width: "24px", height: "24px" }}
               />
-              {spectatedPlayer.totalPlayerDamageDealt}
+              {spectatedPlayer.gameStats.totalPlayerDamageDealt}
             </span>
             <span title={t("total_reroll_count")}>
               <img
@@ -76,7 +76,7 @@ export default function GameSpectatePlayerInfo() {
                 alt="↻"
                 style={{ width: "24px", height: "24px" }}
               />{" "}
-              {spectatedPlayer.rerollCount}
+              {spectatedPlayer.gameStats.rerollCount}
             </span>
           </div>
         </div>

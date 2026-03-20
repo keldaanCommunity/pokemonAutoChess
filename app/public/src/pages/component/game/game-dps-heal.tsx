@@ -25,7 +25,7 @@ export default function GameDpsHeal(props: {
             max={props.maxHeal}
             now={props.dpsMeter.heal}
             key="heal"
-            title={`${t("battle_stats.hp_healed")}: ${props.dpsMeter.heal}`}
+            title={`${t("game_stats.hp_healed")}: ${props.dpsMeter.heal}`}
           />
           <ProgressBar
             className={
@@ -35,7 +35,7 @@ export default function GameDpsHeal(props: {
             max={props.maxHeal}
             now={props.dpsMeter.shield}
             key="shield"
-            title={`${t("battle_stats.shield_given")}: ${props.dpsMeter.shield}`}
+            title={`${t("game_stats.shield_given")}: ${props.dpsMeter.shield}`}
           />
         </ProgressBar>
       </div>

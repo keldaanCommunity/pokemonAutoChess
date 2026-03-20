@@ -499,7 +499,7 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     if (pokemon.passive === Passive.GLUTTON) {
-      pokemon.addMaxHP(20, player)
+      pokemon.addMaxHP(20)
       entity?.addMaxHP(20, entity, 0, false)
       if (pokemon.maxHP > 750) {
         player.titles.add(Title.GLUTTON)
@@ -1593,10 +1593,10 @@ export default class Simulation extends Schema implements ISimulation {
           }
         }
         if (opponentPlayer && !isGhostOpponent) {
-          opponentPlayer.totalPlayerDamageDealt += playerDamage
+          opponentPlayer.gameStats.totalPlayerDamageDealt += playerDamage
           if (
             opponentPlayer.items.includes(Item.MISSION_ORDER_RED) &&
-            opponentPlayer.totalPlayerDamageDealt >= 100
+            opponentPlayer.gameStats.totalPlayerDamageDealt >= 100
           ) {
             opponentPlayer.completeMissionOrder(Item.MISSION_ORDER_RED)
           }

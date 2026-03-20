@@ -4589,7 +4589,7 @@
 		"BATTLE": "Battle Mission",
 		"RESCUE_DESCRIPTION": "Have a $t(pkm.{{pokemon}}) in your final team",
 		"EXPLORATION_DESCRIPTION": "Travel to $t(map.{{region}}) during the game and get synergy {{synergy}} level {{level}} or more active in your final team",
-		"BATTLE_DESCRIPTION": "Have a Pokémon reach {{amount}} {{battleStat}} or more in a fight",
+		"BATTLE_DESCRIPTION": "Have a Pokémon reach {{amount}} {{gameStat}} or more in a fight",
 		"BATTLE_WIN_STREAK_DESCRIPTION": "Get a {{amount}} win streak or more",
 		"DELIVERY_DESCRIPTION": "Get {{quantity}} {{item}} in your inventory or equipped on a Pokémon at the end of the game",
 		"reward": "Reward: {{points}} XP"
@@ -4632,7 +4632,7 @@
 	"rounds_since_last_fight": "Rounds since last fight: {{count}}",
 	"minimize": "Minimize",
 	"maximize": "Maximize",	
-	"battle_stats": {
+	"game_stats": {
 		"title": "Battle Stats",
 		"total_money_earned": "Total money earned during the game",
 		"total_player_damage_dealt": "Total damage dealt to other players",

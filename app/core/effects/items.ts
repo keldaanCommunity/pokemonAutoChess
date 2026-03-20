@@ -344,7 +344,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   }
 
   if (chef.passive === Passive.GLUTTON) {
-    chef.addMaxHP(30, player)
+    chef.addMaxHP(30)
     if (chef.maxHP > 750) {
       player.titles.add(Title.GLUTTON)
     }
@@ -650,7 +650,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.addShield(
         Math.floor(
-          ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
+          ((pokemon.player?.gameStats.rerollCount ?? 0) +
+            pokemon.simulation.stageLevel) /
             2
         ) * 2,
         pokemon,
@@ -659,7 +660,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       )
       pokemon.addSpeed(
         Math.floor(
-          ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
+          ((pokemon.player?.gameStats.rerollCount ?? 0) +
+            pokemon.simulation.stageLevel) /
             2
         ),
         pokemon,
@@ -670,7 +672,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAbilityPower(
         -Math.floor(
-          ((pokemon.player?.rerollCount ?? 0) + pokemon.simulation.stageLevel) /
+          ((pokemon.player?.gameStats.rerollCount ?? 0) +
+            pokemon.simulation.stageLevel) /
             2
         ),
         pokemon,
@@ -1213,7 +1216,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.AMAZE_MULCH]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (FlowerPotMons.includes(pokemon.name)) {
-        pokemon.addMaxHP(50, player)
+        pokemon.addMaxHP(50)
         pokemon.ap += 30
         removeInArray(player.items, item)
       }

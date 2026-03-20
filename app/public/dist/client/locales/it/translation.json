@@ -4548,7 +4548,7 @@
 	"rounds_since_last_fight": "Round dall'ultimo combattimento: {{count}}",
 	"minimize": "Minimizza",
 	"maximize": "Massimizza",
-	"battle_stats": {
+	"game_stats": {
 		"title":"Statistiche Battaglia",
 		"total_money_earned": "Totale dell'oro ottenuto durante la partita",
 		"total_player_damage_dealt": "Danni totali inflitti agli altri giocatori",

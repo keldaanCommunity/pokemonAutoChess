@@ -1452,7 +1452,7 @@
 	"shiny_hunter": "Thợ Săn Shiny",
 	"additional_pokemon_hint": "Mỗi người chơi chọn thêm Pokemon có thể xuất hiện ở cửa hàng của tất cả người chơi trong ván đấu này.",
 	"regional_pokemon_hint": "Sau khi chuyển đến vùng mới, bạn sẽ gặp những loài Pokemon mới tương ứng với từng khu vực.",
-	"battle_stats": {
+	"game_stats": {
 		"damage_dealt": "Sát thương gây ra",
 		"damage_blocked": "Giảm sát thương nhận vào",
 		"heal_shield": "Hồi phục và chắn",

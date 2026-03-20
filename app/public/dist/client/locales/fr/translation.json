@@ -4562,7 +4562,7 @@
 	"rounds_since_last_fight": "Manches depuis votre dernier combat : {{count}}",
 	"minimize": "Minimiser",
 	"maximize": "Maximiser",
-	"battle_stats": {
+	"game_stats": {
 		"title": "Statistiques de combat",
 		"total_money_earned": "Argent total gagné pendant la partie",
 		"total_player_damage_dealt": "Dégâts totaux infligés aux autres joueurs",

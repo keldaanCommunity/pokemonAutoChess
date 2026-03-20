@@ -146,88 +146,93 @@ function isNotIncomplete(s: { name: Synergy; value: number }) {
 
 function PlayerStatsTooltip({ player }: { player: IAfterGamePlayer }) {
   const { t } = useTranslation()
-  const battleStats = [
+  const gameStats = [
     {
       icon: "assets/icons/money_total.svg",
-      label: t("battle_stats.total_money_earned"),
-      value: player.moneyEarned
+      label: t("game_stats.total_money_earned"),
+      value: player.gameStats.totalMoneyEarned
     },
     {
       icon: "assets/icons/ATK.png",
-      label: t("battle_stats.total_player_damage_dealt"),
-      value: player.playerDamageDealt
+      label: t("game_stats.total_player_damage_dealt"),
+      value: player.gameStats.totalPlayerDamageDealt
     },
     {
       icon: "assets/ui/refresh.svg",
-      label: t("battle_stats.total_reroll_count"),
-      value: player.rerollCount
+      label: t("game_stats.total_reroll_count"),
+      value: player.gameStats.rerollCount
     },
     {
       icon: "assets/icons/HP.png",
-      label: t("battle_stats.maxHP"),
-      value: player.battleStats.maxHP
+      label: t("game_stats.maxHP"),
+      value: player.gameStats.maxHP
     },
     {
       icon: "assets/icons/ATK.png",
-      label: t("battle_stats.maxAttack"),
-      value: player.battleStats.maxAttack
+      label: t("game_stats.maxAttack"),
+      value: player.gameStats.maxAttack
     },
     {
       icon: "assets/icons/DEF.png",
-      label: t("battle_stats.maxDefense"),
-      value: player.battleStats.maxDefense
+      label: t("game_stats.maxDefense"),
+      value: player.gameStats.maxDefense
     },
     {
       icon: "assets/icons/SPE_DEF.png",
-      label: t("battle_stats.maxSpecialDefense"),
-      value: player.battleStats.maxSpecialDefense
+      label: t("game_stats.maxSpecialDefense"),
+      value: player.gameStats.maxSpecialDefense
     },
     {
       icon: "assets/icons/AP.png",
-      label: t("battle_stats.maxAP"),
-      value: player.battleStats.maxAP
+      label: t("game_stats.maxAP"),
+      value: player.gameStats.maxAP
     },
     {
       icon: "assets/icons/SPEED.png",
-      label: t("battle_stats.maxSpeed"),
-      value: player.battleStats.maxSpeed
+      label: t("game_stats.maxSpeed"),
+      value: player.gameStats.maxSpeed
     },
     {
       icon: "assets/icons/ATK.png",
-      label: t("battle_stats.maxPhysicalDamage"),
-      value: player.battleStats.maxPhysicalDamage
+      label: t("game_stats.maxPhysicalDamage"),
+      value: player.gameStats.maxPhysicalDamage
     },
     {
       icon: "assets/icons/AP.png",
-      label: t("battle_stats.maxSpecialDamage"),
-      value: player.battleStats.maxSpecialDamage
+      label: t("game_stats.maxSpecialDamage"),
+      value: player.gameStats.maxSpecialDamage
     },
     {
       icon: "assets/icons/CRIT_POWER.png",
-      label: t("battle_stats.maxTrueDamage"),
-      value: player.battleStats.maxTrueDamage
+      label: t("game_stats.maxTrueDamage"),
+      value: player.gameStats.maxTrueDamage
     },
     {
       icon: "assets/icons/SHIELD.png",
-      label: t("battle_stats.maxShield"),
-      value: player.battleStats.maxShield
+      label: t("game_stats.maxShield"),
+      value: player.gameStats.maxShield
     },
     {
       icon: "assets/icons/HP.png",
-      label: t("battle_stats.maxHeal"),
-      value: player.battleStats.maxHeal
+      label: t("game_stats.maxHeal"),
+      value: player.gameStats.maxHeal
     },
     {
       icon: "assets/ui/star.svg",
-      label: t("battle_stats.maxWinStreak"),
-      value: player.battleStats.maxWinStreak
+      label: t("game_stats.maxWinStreak"),
+      value: player.gameStats.maxWinStreak
+    },
+    {
+      icon: "assets/icons/DITTO.png",
+      label: t("game_stats.dittosUsed"),
+      value: player.gameStats.dittosUsed
     }
   ]
 
   return (
     <div className="player-stats-tooltip">
       <dl>
-        {battleStats.map(({ icon, label, value }) => (
+        {gameStats.map(({ icon, label, value }) => (
           <React.Fragment key={label}>
             <dt>
               <img src={icon} alt="" />

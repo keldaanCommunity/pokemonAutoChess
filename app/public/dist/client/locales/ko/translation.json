@@ -3645,7 +3645,7 @@
 	"rank": "랭킹",
 	"player": "플레이어",
 	"stats": "스탯",
-	"battle_stats": {
+	"game_stats": {
 		"total_money_earned": "휙득한 총 재화",
 		"total_player_damage_dealt": "다른 유저에 가한 총 데미지",
 		"total_reroll_count": "총 리롤 횟수",

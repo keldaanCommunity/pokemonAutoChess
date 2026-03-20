@@ -192,9 +192,9 @@ export function updatePlayerTitlesAfterGame(
     player.titles.add(Title.SURVIVOR)
   }
 
-  if (player.rerollCount > 60) {
+  if (player.gameStats.rerollCount > 60) {
     player.titles.add(Title.GAMBLER)
-  } else if (player.rerollCount < 20 && rank === 1) {
+  } else if (player.gameStats.rerollCount < 20 && rank === 1) {
     player.titles.add(Title.NATURAL)
   }
 
@@ -232,7 +232,7 @@ export function updatePlayerTitlesAfterGame(
     player.titles.add(Title.GYM_LEADER)
   }
 
-  if(player.battleStats.maxHP >= 1500) {
+  if(player.gameStats.maxHP >= 1500) {
     player.titles.add(Title.GIANT)
   }
 }

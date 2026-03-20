@@ -323,7 +323,7 @@ export class OnDragDropPokemonCommand extends Command<
           const pokemonToClone = player.getPokemonAt(x, y)
           if (pokemonToClone && pokemonToClone.canBeCloned) {
             dittoReplaced = true
-            //player.battleStats.dittosUsed += 1
+            player.gameStats.dittosUsed += 1
             let pkm = getPokemonBaseline(pokemonToClone.name)
             if (PkmsWithAltForms.includes(pkm)) {
               pkm = getAltFormForPlayer(pkm, player)
@@ -913,7 +913,7 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
     const canRoll = (player?.money ?? 0) >= rollCost
 
     if (canRoll) {
-      player.rerollCount++
+      player.gameStats.rerollCount++
       player.money -= rollCost
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--
@@ -1089,7 +1089,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   computeAchievements() {
     this.state.players.forEach((player) => {
       updatePlayerTitlesAfterFight(player, this.state)
-      player.updateBattleStats(this.state)
+      player.updateGameStats(this.state)
     })
   }
 

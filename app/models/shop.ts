@@ -582,7 +582,7 @@ export default class Shop {
       shopIndex === 5 &&
       !noSpecial &&
       ((player.effects.has(EffectEnum.LIGHT_SCREEN) &&
-        (player.rerollCount + state.stageLevel) %
+        (player.gameStats.rerollCount + state.stageLevel) %
           UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL ===
           0) ||
         (player.effects.has(EffectEnum.AMNESIA) && chance(UNOWN_RATE_AMNESIA)))
@@ -653,7 +653,7 @@ export default class Shop {
     const repeatBallHolders = values(player.board).filter((p) =>
       p.items.has(Item.REPEAT_BALL)
     )
-    const totalRerolls = player.rerollCount + state.stageLevel
+    const totalRerolls = player.gameStats.rerollCount + state.stageLevel
 
     if (
       repeatBallHolders.length > 0 &&

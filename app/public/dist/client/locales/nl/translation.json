@@ -1843,7 +1843,7 @@
 	"buy_booster": "Koop een nieuwe booster voor {{cost}}",
 	"close": "Dichtbij",
 	"additional_pokemon_hint": "Elke speler koos extra Pokemon om beschikbaar te zijn in de winkel van alle spelers voor dit spel.",
-	"battle_stats": {
+	"game_stats": {
 		"damage_dealt": "Schade aangericht",
 		"damage_blocked": "Schade geblokkeerd",
 		"heal_shield": "Genezing en schild gegeven"

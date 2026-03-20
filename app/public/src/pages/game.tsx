@@ -272,10 +272,7 @@ export default function Game() {
           role: p.role,
           pokemons: new Array<IPokemonRecord>(),
           synergies: new Array<{ name: Synergy; value: number }>(),
-          moneyEarned: p.totalMoneyEarned,
-          playerDamageDealt: p.totalPlayerDamageDealt,
-          rerollCount: p.rerollCount,
-          battleStats: p.battleStats
+          gameStats: p.gameStats
         }
 
         const allSynergies = new Array<{ name: Synergy; value: number }>()
@@ -849,9 +846,6 @@ export default function Game() {
           "regionalPokemons",
           "streak",
           "title",
-          "rerollCount",
-          "totalMoneyEarned",
-          "totalPlayerDamageDealt",
           "eggChance",
           "goldenEggChance",
           "cellBattery"
@@ -863,6 +857,16 @@ export default function Game() {
               changePlayer({ id: player.id, field: field, value: value })
             )
           })
+        })
+
+        $player.gameStats.onChange(() => {
+          dispatch(
+            changePlayer({
+              id: player.id,
+              field: "gameStats",
+              value: player.gameStats
+            })
+          )
         })
 
         $player.synergies.onChange(() => {

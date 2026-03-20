@@ -39,10 +39,7 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
           plyr.synergies,
           plyr.elo,
           plyr.games,
-          plyr.moneyEarned,
-          plyr.playerDamageDealt,
-          plyr.rerollCount,
-          plyr.battleStats
+          plyr.gameStats
         )
         this.state.players.set(player.id, player)
       })

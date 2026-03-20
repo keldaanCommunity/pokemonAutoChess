@@ -4594,7 +4594,7 @@
 	"rounds_since_last_fight": "上一次与此玩家对战发生于{{count}}轮之前",
 	"minimize": "最小化",
 	"maximize": "最大化",
-	"battle_stats": {
+	"game_stats": {
 		"title": "战斗数据",
 		"total_money_earned": "本局游戏中赚取的金币总额",
 		"total_player_damage_dealt": "本局游戏中对其他玩家造成的伤害总额",

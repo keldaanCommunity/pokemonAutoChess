@@ -79,6 +79,7 @@
 - Added a key shortcut to open the wiki and the team planner
 - New users have now a random generated name (ex: "Happy-Charmander-12345") to prevent eventual doxxing.
 - New titles: Rescue Team Member, Explorer, Postman, Survey Corps, Guildmaster
+- Added more statistics in the post-match screen
 
 # Bug Fixes
 

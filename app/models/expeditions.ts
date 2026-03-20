@@ -16,6 +16,8 @@ import {
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import {
   BattleMissionData,
+  BattleMissionStat,
+  BattleMissionStats,
   DeliveryMissionData,
   Expedition,
   ExpeditionData,
@@ -25,7 +27,6 @@ import {
   RescueMissionData
 } from "../types/enum/Expedition"
 import { Rarity } from "../types/enum/Game"
-import { BattleStat, BattleStatsList } from "../types/interfaces/BattleStats"
 import {
   IUserMetadataClient,
   IUserMetadataMongo,
@@ -136,7 +137,7 @@ export function checkExpeditionCompletion(
     case ExpeditionType.BATTLE: {
       const expeditionData = getExpeditionData(expedition) as BattleMissionData
       return (
-        (player.battleStats[expeditionData.stat] ?? 0) >= expeditionData.amount
+        (player.gameStats[expeditionData.stat] ?? 0) >= expeditionData.amount
       )
     }
 
@@ -176,23 +177,23 @@ export function getExpeditionLabel(expedition: Expedition): string {
     if (data.stat === "maxWinStreak") {
       return t(`expeditions.BATTLE_WIN_STREAK_DESCRIPTION`, data)
     } else {
-      const battleStatLabelMapping: Record<BattleStat, string> = {
-        maxHP: t(`stat.HP`),
-        maxAttack: t(`stat.ATK`),
-        maxDefense: t(`stat.DEF`),
-        maxAP: t(`stat.AP`),
-        maxSpecialDefense: t(`stat.SPE_DEF`),
-        maxSpeed: t(`stat.SPEED`),
-        maxPhysicalDamage: t(`battle_stats.physical_damage_dealt`),
-        maxSpecialDamage: t(`battle_stats.special_damage_dealt`),
-        maxTrueDamage: t(`battle_stats.true_damage_dealt`),
-        maxShield: t(`battle_stats.shield_given`),
-        maxHeal: t(`battle_stats.hp_healed`),
+      const gameStatLabelMapping: Record<BattleMissionStat, string> = {
+        maxHP: "HP",
+        maxAttack: "ATK",
+        maxDefense: "DEF",
+        maxAP: "AP",
+        maxSpecialDefense: "SPE_DEF",
+        maxSpeed: "SPEED",
+        maxPhysicalDamage: t(`game_stats.physical_damage_dealt`),
+        maxSpecialDamage: t(`game_stats.special_damage_dealt`),
+        maxTrueDamage: t(`game_stats.true_damage_dealt`),
+        maxShield: t(`game_stats.shield_given`),
+        maxHeal: t(`game_stats.hp_healed`),
         maxWinStreak: t(`streak`)
       }
       return t(`expeditions.BATTLE_DESCRIPTION`, {
         ...data,
-        battleStat: battleStatLabelMapping[data.stat] || data.stat
+        gameStat: gameStatLabelMapping[data.stat] || data.stat
       })
     }
   }
@@ -257,10 +258,11 @@ export function getExpeditionData(
     }
 
     case ExpeditionType.BATTLE: {
-      const stat = BattleStatsList[expedition.hash % BattleStatsList.length]
+      const stat =
+        BattleMissionStats[expedition.hash % BattleMissionStats.length]
       const AMOUNTS_BY_RANK: Record<
         ExpeditionRank,
-        Record<BattleStat, number>
+        Record<BattleMissionStat, number>
       > = {
         E: {
           maxAttack: 50,

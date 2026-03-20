@@ -46,7 +46,7 @@ export default function GameDpsMeter() {
 
   return (
     <DraggableWindow
-      title={t("battle_stats.title")}
+      title={t("game_stats.title")}
       className="my-container game-dps-meter"
       style={{ zIndex: DEPTH.DPS_METER }}
       defaultMinimized={!showDpsMeter}
@@ -70,40 +70,40 @@ export default function GameDpsMeter() {
           <Tab key="damage_dealt">
             <img
               src="assets/icons/ATK.png"
-              title={t("battle_stats.damage_dealt")}
-              alt={t("battle_stats.damage_dealt")}
+              title={t("game_stats.damage_dealt")}
+              alt={t("game_stats.damage_dealt")}
             ></img>
           </Tab>
           <Tab key="damage_blocked">
             <img
               src="assets/icons/SHIELD.png"
-              title={t("battle_stats.damage_blocked")}
-              alt={t("battle_stats.damage_blocked")}
+              title={t("game_stats.damage_blocked")}
+              alt={t("game_stats.damage_blocked")}
             ></img>
           </Tab>
           <Tab key="heal">
             <img
               src="assets/icons/HP.png"
-              title={t("battle_stats.heal_shield")}
-              alt={t("battle_stats.heal_shield")}
+              title={t("game_stats.heal_shield")}
+              alt={t("game_stats.heal_shield")}
             ></img>
           </Tab>
         </TabList>
 
         <TabPanel>
-          <p>{t("battle_stats.damage_dealt")}</p>
+          <p>{t("game_stats.damage_dealt")}</p>
           <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
           <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
         </TabPanel>
 
         <TabPanel>
-          <p>{t("battle_stats.damage_blocked")}</p>
+          <p>{t("game_stats.damage_blocked")}</p>
           <GamePlayerDpsTakenMeter dpsMeter={myDpsMeter} />
           <GamePlayerDpsTakenMeter dpsMeter={opponentDpsMeter} />
         </TabPanel>
 
         <TabPanel>
-          <p>{t("battle_stats.heal_shield")}</p>
+          <p>{t("game_stats.heal_shield")}</p>
           <GamePlayerHpsMeter dpsMeter={myDpsMeter} />
           <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
         </TabPanel>

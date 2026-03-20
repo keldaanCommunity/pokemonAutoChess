@@ -1,4 +1,4 @@
-import { BattleStat } from "../interfaces/BattleStats"
+import { GameStat } from "../interfaces/GameStats"
 import { DungeonPMDO } from "./Dungeon"
 import { Item } from "./Item"
 import { Pkm } from "./Pokemon"
@@ -62,7 +62,7 @@ export type ExplorationMissionData = {
 }
 
 export type BattleMissionData = {
-  stat: BattleStat
+  stat: BattleMissionStat
   amount: number
 }
 
@@ -70,3 +70,20 @@ export type DeliveryMissionData = {
   item: Item
   quantity: number
 }
+
+export const BattleMissionStats = [
+  "maxHP",
+  "maxAttack",
+  "maxDefense",
+  "maxAP",
+  "maxSpecialDefense",
+  "maxSpeed",
+  "maxPhysicalDamage",
+  "maxSpecialDamage",
+  "maxTrueDamage",
+  "maxShield",
+  "maxHeal",
+  "maxWinStreak"
+] satisfies GameStat[]
+
+export type BattleMissionStat = (typeof BattleMissionStats)[number]

@@ -1,6 +1,4 @@
-export type BattleStat = keyof BattleStats
-
-export interface BattleStats {
+export interface GameStats {
   maxHP: number
   maxAttack: number
   maxDefense: number
@@ -13,9 +11,15 @@ export interface BattleStats {
   maxShield: number
   maxHeal: number
   maxWinStreak: number
+  dittosUsed: number
+  rerollCount: number
+  totalMoneyEarned: number
+  totalPlayerDamageDealt: number
 }
 
-export const initialBattleStats: BattleStats = {
+export type GameStat = keyof GameStats
+
+export const initialGameStats: GameStats = {
   maxHP: 0,
   maxAttack: 0,
   maxDefense: 0,
@@ -27,7 +31,11 @@ export const initialBattleStats: BattleStats = {
   maxTrueDamage: 0,
   maxShield: 0,
   maxHeal: 0,
-  maxWinStreak: 0
+  maxWinStreak: 0,
+  dittosUsed: 0,
+  rerollCount: 0,
+  totalMoneyEarned: 0,
+  totalPlayerDamageDealt: 0
 }
 
-export const BattleStatsList = Object.keys(initialBattleStats) as BattleStat[]
+export const GameStatsList = Object.keys(initialGameStats) as GameStat[]

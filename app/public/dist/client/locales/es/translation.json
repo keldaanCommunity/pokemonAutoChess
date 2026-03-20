@@ -3457,7 +3457,7 @@
 	"rank": "Rango",
 	"player": "Jugador",
 	"stats": "Estadísticas",
-	"battle_stats": {
+	"game_stats": {
 		"total_money_earned": "Dinero total obtenido durante la partida",
 		"total_player_damage_dealt": "Daño total realizado a otros jugadores",
 		"total_reroll_count": "Cantidad total de rerolls de la tienda",
