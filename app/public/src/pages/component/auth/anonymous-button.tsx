@@ -1,19 +1,6 @@
-import {
-  adjectives,
-  animals,
-  Config,
-  colors,
-  uniqueNamesGenerator
-} from "@joaomoreno/unique-names-generator"
 import { getAuth, signInAnonymously, updateProfile } from "firebase/auth"
-import React from "react"
 import { useTranslation } from "react-i18next"
-
-const customConfig: Config = {
-  dictionaries: [adjectives, animals, colors],
-  separator: " ",
-  length: 2
-}
+import { generateRandomName } from "../../../../../utils/name-generation"
 
 export default function AnonymousButton() {
   const { t } = useTranslation()
@@ -22,7 +9,7 @@ export default function AnonymousButton() {
     try {
       await signInAnonymously(auth)
       if (auth.currentUser) {
-        const randomName = uniqueNamesGenerator(customConfig)
+        const randomName = generateRandomName()
         await updateProfile(auth.currentUser, { displayName: randomName })
         window.location.href = window.location.href + "lobby"
       }
