@@ -3431,7 +3431,7 @@ export class Seadra extends Pokemon {
   stars = 2
   evolution = Pkm.KINGDRA
   hp = 140
-  atk = 12
+  atk = 11
   speed = 52
   def = 2
   speDef = 2
@@ -3445,7 +3445,7 @@ export class Kingdra extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 3
   hp = 250
-  atk = 24
+  atk = 21
   speed = 52
   def = 4
   speDef = 4

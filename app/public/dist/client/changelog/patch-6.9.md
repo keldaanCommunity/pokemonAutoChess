@@ -60,8 +60,8 @@
 - Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 - Nerf Palkia: PP 110 → 120
 - Buff Mawile: Attack 16 → 18
-
 - Buff Alcremie line: PP 80 → 70
+- Revert Horsea buff from 6.3: Attack 6/12/24 → 6/11/21
 
 > We continue to reduce the amount of abilities that can hit the whole enemy team, in order to make positionning and movement more important in the game.
 
@@ -88,14 +88,9 @@
 
 ## Scarves
 
-> We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. The items that are very easy to play like Nullify Bandanna or Mach Ribbon are overperforming a bit, while the ones that are more niche and require more game knowledge like Black Belt or Explosive Band are underperforming globally, but are performing better at higher Elo. Base item stats adjustments are a good way to reduce the gap between low and high elo, while keeping the skill diff of these items intact.
+> We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. Individual items winrate also evolved a lot during the patch, with players finding out new strong interactions and counterplays. This instability makes balancing difficult, so for now we're focusing on the nerfing the most popular scarves to increase variety. Big Eater Belt change was very popular but also brought many quirks we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
 
-- Buff Black Belt: 20% → 25% crit chance
-- Nerf Nullify Bandanna: removed 30 base shield
 - Nerf Mach Ribbon: 20 → 15 speed every 3 seconds
-
-> Big Eater Belt change came with many quirks that we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
-
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
 
 ## Tools
