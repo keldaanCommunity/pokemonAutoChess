@@ -79,6 +79,7 @@ export enum Pkm {
   ARTICUNO = "ARTICUNO",
   AUDINO = "AUDINO",
   AURORUS = "AURORUS",
+  AVALUGG = "AVALUGG",
   AXEW = "AXEW",
   AZELF = "AZELF",
   AZUMARILL = "AZUMARILL",
@@ -104,6 +105,7 @@ export enum Pkm {
   BELLIBOLT = "BELLIBOLT",
   BELLOSSOM = "BELLOSSOM",
   BELLSPROUT = "BELLSPROUT",
+  BERGMITE = "BERGMITE",
   BIBAREL = "BIBAREL",
   BIDOOF = "BIDOOF",
   BINACLE = "BINACLE",
@@ -456,6 +458,7 @@ export enum Pkm {
   HIPPODOWN = "HIPPODOWN",
   HIPPOPOTAS = "HIPPOPOTAS",
   HISUI_ARCANINE = "HISUI_ARCANINE",
+  HISUI_AVALUGG = "HISUI_AVALUGG",
   HISUI_ELECTRODE = "HISUI_ELECTRODE",
   HISUI_GOODRA = "HISUI_GOODRA",
   HISUI_GROWLITHE = "HISUI_GROWLITHE",
@@ -2077,8 +2080,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TREVENANT]: "0709",
   [Pkm.PUMPKABOO]: "0710",
   [Pkm.GOURGEIST]: "0711",
-  //[Pkm.BERGMITE]: "0712",
-  //[Pkm.AVALUGG]: "0713",
+  [Pkm.BERGMITE]: "0712",
+  [Pkm.AVALUGG]: "0713",
+  [Pkm.HISUI_AVALUGG]: "0713-0001",
   [Pkm.NOIBAT]: "0714",
   [Pkm.NOIVERN]: "0715",
   [Pkm.XERNEAS]: "0716",
@@ -3622,7 +3626,10 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TATSUGIRI_DROOPY]: Pkm.TATSUGIRI_DROOPY,
   [Pkm.TATSUGIRI_STRETCHY]: Pkm.TATSUGIRI_STRETCHY,
   [Pkm.CETODDLE]: Pkm.CETODDLE,
-  [Pkm.CETITAN]: Pkm.CETODDLE
+  [Pkm.CETITAN]: Pkm.CETODDLE,
+  [Pkm.BERGMITE]: Pkm.BERGMITE,
+  [Pkm.AVALUGG]: Pkm.BERGMITE,
+  [Pkm.HISUI_AVALUGG]: Pkm.BERGMITE,
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

@@ -719,6 +719,20 @@ export class FalinksFormationEffect extends OnSpawnEffect {
   }
 }
 
+export class BergmiteOnBackEffect extends OnSpawnEffect {
+  stacks = 0
+
+  constructor() {
+    super((pkm) => {
+      if (!pkm.player) return
+      const bergmites = values(pkm.player.board).filter(
+        (p) => p.name === Pkm.BERGMITE && p.positionY === 0 && p.id !== pkm.id
+      )
+      this.stacks = bergmites.length
+    }, Passive.AVALUGG)
+  }
+}
+
 const ogerponMaskDropEffect = (
   mask: (typeof OgerponMasks)[number],
   from: Pkm,
@@ -1241,6 +1255,9 @@ export const PassiveEffects: Partial<
   ],
   [Passive.FALINKS]: [
     () => new FalinksFormationEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.AVALUGG]: [
+    () => new BergmiteOnBackEffect() // needs new instance of effect for each pokemon due to internal stack counter
   ],
   [Passive.OGERPON_CORNERSTONE]: [
     ogerponMaskDropEffect(

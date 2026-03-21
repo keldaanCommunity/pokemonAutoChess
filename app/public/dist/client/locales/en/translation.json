@@ -564,7 +564,8 @@
 		"GLACIAL_LANCE": "Glacial Lance",
 		"ORDER_UP": "Order Up",
 		"ICE_SPINNER": "Ice Spinner",
-		"CEASELESS_EDGE": "Ceaseless Edge"
+		"CEASELESS_EDGE": "Ceaseless Edge",
+		"MOUNTAIN_GALE": "Mountain Gale"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1736,7 +1737,10 @@
 		"TATSUGIRI_DROOPY": "Tatsugiri (Droopy)",
 		"TATSUGIRI_STRETCHY": "Tatsugiri (Stretchy)",
 		"CETODDLE": "Cetoddle",
-		"CETITAN": "Cetitan"
+		"CETITAN": "Cetitan",
+		"BERGMITE": "Bergmite",
+		"AVALUGG": "Avalugg",
+		"HISUI_AVALUGG": "Hisuian Avalugg"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2280,7 +2284,8 @@
 		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK.",
 		"ORDER_UP": "Deal [100,SP] SPECIAL to the target. If a Tatsugiri has been swallowed, gains the stats provided by it again. If no Tatsugiri is on board, one spawns on your bench, with a different form each round.",
 		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles.",
-		"CEASELESS_EDGE": "Hits the 3 enemies in front of the user for [20,40,80,SP] SPECIAL, also leaving spikes under them. Can crit by default. BOARD_EFFECT: spikes deal 10 TRUE per second and inflict ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it."
+		"CEASELESS_EDGE": "Hits the 3 enemies in front of the user for [20,40,80,SP] SPECIAL, also leaving spikes under them. Can crit by default. BOARD_EFFECT: spikes deal 10 TRUE per second and inflict ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it.",
+		"MOUNTAIN_GALE": "Hurls [1,3] giant chunks of ice randomly at target and ADJACENT enemies, inflicting FLINCH for 3 seconds then [40,SP] SPECIAL per projectile. If user has Bergmite on their back, they are thrown as well for the same damage."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3306,7 +3311,8 @@
 		"SPEWPA": "Hatched Pokémon evolve automatically after 5 stages. The evolution depends on your dominant synergy on board between SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "Drops embers on the ground when flying away. BOARD_EFFECT: embers deal 10 SPECIAL per second and BURN non FLYING or FIRE Pokémon that walk on it.",
 		"FINIZEN": "Transforms into Palafin Hero Form after 5 allies are KO'd (not counting spawns), or if this Pokémon is the last one standing. Regain all HP when that happens.",
-		"COMMANDER": "Tatsugiri cannot hold items. At the start of the fight, an ADJACENT Dondozo with a free item slot swallows Tatsugiri. Tatsugiri provides stats based on its form: \nCurly Form: +8 ATK\nDroopy Form: +8 DEF\nStretchy Form: +25 SPEED"		
+		"COMMANDER": "Tatsugiri cannot hold items. At the start of the fight, an ADJACENT Dondozo with a free item slot swallows Tatsugiri. Tatsugiri provides stats based on its form: \nCurly Form: +8 ATK\nDroopy Form: +8 DEF\nStretchy Form: +25 SPEED"		,
+		"AVALUGG": "Can hold up to 4 $t(pkm.BERGMITE) on their back, taken from the bench at the start of a fight."
 	},
 	"stat": {
 		"ATK": "Attack",

@@ -19,6 +19,8 @@
 - Cetoddle
 - Cetitan
 - Hisuian Samurott
+- Bergmite
+- Avalugg
 
 # Changes to Synergies
 

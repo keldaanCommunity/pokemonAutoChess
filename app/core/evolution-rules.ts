@@ -94,6 +94,17 @@ export class CountEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (!pokemon.hasEvolution) return false
+
+    // special case for Avalugg passive, didnt find a better way to do it
+    if (
+      pokemon.name === Pkm.BERGMITE &&
+      values(player.board).find(
+        (p) => p.name === Pkm.AVALUGG || p.name === Pkm.HISUI_AVALUGG
+      )
+    ) {
+      return false
+    }
+
     const copies = values(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )
@@ -102,6 +113,17 @@ export class CountEvolutionRule extends EvolutionRule {
 
   canEvolveIfGettingOne(pokemon: Pokemon, player: Player): boolean {
     if (!pokemon.hasEvolution) return false
+
+    // special case for Avalugg passive, didnt find a better way to do it
+    if (
+      pokemon.name === Pkm.BERGMITE &&
+      values(player.board).find(
+        (p) => p.name === Pkm.AVALUGG || p.name === Pkm.HISUI_AVALUGG
+      )
+    ) {
+      return false
+    }
+
     const copies = values(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )

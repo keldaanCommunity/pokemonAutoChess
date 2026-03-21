@@ -435,3 +435,14 @@ export function getAllAltForms(pkm: Pkm): Pkm[] {
     ? [base, ...(PkmAltFormsByPkm[base] as Pkm[])]
     : [pkm]
 }
+
+export type PkmWithTroopers =
+  | Pkm.FALINKS_BRASS
+  | Pkm.AVALUGG
+  | Pkm.HISUI_AVALUGG
+
+export const MaxTroopersPerPkm: { [key in PkmWithTroopers]: number } = {
+  [Pkm.FALINKS_BRASS]: 8,
+  [Pkm.AVALUGG]: 4,
+  [Pkm.HISUI_AVALUGG]: 4
+}
