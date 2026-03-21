@@ -563,7 +563,8 @@
 		"FEATHER_DANCE": "Feather Dance",
 		"GLACIAL_LANCE": "Glacial Lance",
 		"ORDER_UP": "Order Up",
-		"ICE_SPINNER": "Ice Spinner"
+		"ICE_SPINNER": "Ice Spinner",
+		"CEASELESS_EDGE": "Ceaseless Edge"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1081,6 +1082,7 @@
 		"OSHAWOTT": "Oshawott",
 		"DEWOTT": "Dewott",
 		"SAMUROTT": "Samurott",
+		"HISUI_SAMUROTT": "Hisuian Samurott",
 		"SNOM": "Snom",
 		"FROSMOTH": "Frosmoth",
 		"WAILMER": "Wailmer",
@@ -2277,8 +2279,8 @@
 		"GLACIAL_LANCE": "Rush to a safe spot in the backline and then throws a lance of ice to the farthest target. First enemy hit takes [300,SP]% of user's ATK as SPECIAL, and ADJACENT enemies take half of that damage.",
 		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK.",
 		"ORDER_UP": "Deal [100,SP] SPECIAL to the target. If a Tatsugiri has been swallowed, gains the stats provided by it again. If no Tatsugiri is on board, one spawns on your bench, with a different form each round.",
-		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles."
-
+		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles.",
+		"CEASELESS_EDGE": "Hits the 3 enemies in front of the user for [20,40,80,SP] SPECIAL, also leaving spikes under them. Can crit by default. BOARD_EFFECT: spikes deal 10 TRUE per second and inflict ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

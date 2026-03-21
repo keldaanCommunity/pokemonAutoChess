@@ -18,6 +18,7 @@
 - Tatsugiri (Stretchy)
 - Cetoddle
 - Cetitan
+- Hisuian Samurott
 
 # Changes to Synergies
 

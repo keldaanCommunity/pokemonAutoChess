@@ -892,6 +892,7 @@ export const AbilitiesAnimations: {
   [Ability.PSYSHOCK]: onTargetScale2,
   [Ability.SHEER_COLD]: onTargetScale2,
   [Ability.COTTON_SPORE]: onTargetScale2,
+  [Ability.CEASELESS_EDGE]: onTargetScale2,
   [Ability.RETALIATE]: onTargetScale2,
   [Ability.THUNDER_CAGE]: onTargetScale2,
   ["FIGHTING_KNOCKBACK"]: onTargetScale2,

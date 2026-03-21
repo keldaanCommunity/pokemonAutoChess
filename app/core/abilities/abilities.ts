@@ -7022,6 +7022,38 @@ export class SpikesStrategy extends AbilityStrategy {
   }
 }
 
+export class CeaselessEdgeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const cells = board.getCellsInFront(pokemon, target, 1)
+     cells.forEach((cell) => {
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        EffectEnum.SPIKES,
+        pokemon.simulation
+      )
+      pokemon.broadcastAbility({ positionX: cell.x, positionY: cell.y })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class StickyWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7449,6 +7481,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default with increased crit chance
     super.process(pokemon, board, target, crit, true)
     const nbHits = Math.round(
       4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
@@ -16890,7 +16923,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FEATHER_DANCE]: new FeatherDanceStrategy(),
   [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
   [Ability.ORDER_UP]: new OrderUpStrategy(),
-  [Ability.ICE_SPINNER]: new IceSpinnerStrategy()
+  [Ability.ICE_SPINNER]: new IceSpinnerStrategy(),
+  [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy()
 }
 
 export function castAbility(

@@ -3454,6 +3454,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.WATER_MELEE
   },
+  [Pkm.HISUI_SAMUROTT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.WATER_MELEE
+  },
   [Pkm.SNOM]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
