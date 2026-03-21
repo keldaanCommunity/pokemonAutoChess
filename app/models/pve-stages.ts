@@ -24,8 +24,8 @@ export type PVEStage = {
   emotion?: Emotion
   shinyChance?: number
   rewards?: Item[]
-  getRewards?: (player: Player) => Item[]
-  getRewardsPropositions?: (player: Player) => Item[]
+  getRewards?: (player: Player, shinyEncounter: boolean) => Item[]
+  getRewardsPropositions?: (player: Player, shinyEncounter: boolean) => Item[]
   board: [pkm: Pkm, x: number, y: number][]
   marowakItems?: Item[][]
   statBoosts?: { [stat in Stat]?: number }
@@ -91,11 +91,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     board: [[Pkm.GYARADOS, 4, 2]],
     marowakItems: [[Item.KINGS_ROCK]],
-    shinyChance: 1 / 100,
-    rewards: ItemComponentsNoFossilOrScarf,
-    getRewards(player: Player) {
-      const randomComponents = pickNRandomIn(ItemComponentsNoFossilOrScarf, 1)
-      return randomComponents
+    shinyChance: 1 / 50,
+    rewards: [...ItemComponentsNoFossilOrScarf, Item.RED_SCALE],
+    getRewards(_player: Player, shinyEncounter: boolean) {
+      if (shinyEncounter) return [Item.RED_SCALE]
+      else return pickNRandomIn(ItemComponentsNoFossilOrScarf, 1)
     }
   },
 
@@ -127,11 +127,18 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       }
       return rewards
     },
-    getRewardsPropositions(_player: Player) {
-      return pickNRandomIn(
-        [...ItemComponentsNoFossilOrScarf, Item.FOSSIL_STONE],
-        3
-      )
+    getRewardsPropositions(_player: Player, shinyEncounter: boolean) {
+      if (shinyEncounter) {
+        return pickNRandomIn(
+          ShinyItems.filter((o) => o !== Item.RED_SCALE),
+          3
+        )
+      } else {
+        return pickNRandomIn(
+          [...ItemComponentsNoFossilOrScarf, Item.FOSSIL_STONE],
+          3
+        )
+      }
     }
   },
 
@@ -328,9 +335,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.DYNAMAX_BAND],
       [Item.DYNAMAX_BAND]
     ],
-    rewards: ShinyItems,
-    getRewardsPropositions(player: Player) {
-      return pickNRandomIn(ShinyItems, 3)
+    rewards: [Item.RARE_CANDY, Item.SACRED_ASH, Item.GOLD_BOW],
+    getRewards(player: Player) {
+      return [Item.RARE_CANDY, Item.SACRED_ASH, Item.GOLD_BOW]
     }
   }
 }

@@ -94,7 +94,7 @@
 - Nerf Nullify Bandanna: removed 30 base shield
 - Nerf Mach Ribbon: 20 → 15 speed every 3 seconds
 
-> Big Eater Belt change brought many quirks we aim to remove. It should now only works with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
+> Big Eater Belt change came with many quirks that we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
 
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
 
@@ -120,6 +120,12 @@
 - Kecleon now sells all kinds of synergy items instead of just synergy stones. Also the item choice better matches the top synergies of each player.
 - Removed Kangaskhan encounter from stage 17
 
+## Shiny Items
+
+- New Shiny item: Red Scale, obtained exclusively from shiny encounter at stage 9.
+
+> Similarly to Golden Magikarps at stage 1, Red Scale will be a pure economic item given to all players. All the other shiny items are now obtained at stage 15 or from a golden egg, which makes their value more consistent for items with scalable effects or economic value. We continue to work on shiny items so that they add that extra spice and increase the pace of the game, but in a more even way between players.
+
 ## Misc
 
 - Added visual effects for support items on adjacent positions
@@ -127,7 +133,7 @@
 
 # Changes to Gameplay
 
-> Next change looks scary but should not be that much impactful in practice, since most of the time your units cast their abilities when at attack range. This should simply resolve a few combat situations that looked bad.
+> Next change looks scary but should not be that much impactful in practice, since most of the time your units cast their abilities when at attack range. This should resolve a few combat situations that looked bad before.
 
 - Abilities that do not require a target can now be casted even when the caster is not currently targeting an enemy. Here are the affected abilities: Agility, Anchor Shot, Aqua Ring, Astral Barrage, Attract, Aurora Veil, Axe Kick, Baneful Bunker, Beat Up, Bone Armor, Bounce, Bulk Up, Chain Crazed, Chatter, Column Crush, Cosmic Power (Moon), Cosmic Power (Sun), Curse, Dark Harvest, Decorate, Defense Curl, Dive, Echo, Electric Surge, Electrify, Eruption, Expanding Force, Fairy Wind, Fly, Flying Press, Forecast, Future Sight, Geomancy, Grassy Surge, Gravity, Growth, Happy Hour, Harden, Helping Hand, Hidden Power (all), Hypnosis, Icicle Missile, Lunar Blessing, Lunge, Magic Bounce, Magnet Pull, Meditate, Misty Surge, Mud Bubble, Nasty Plot, Natural Gift, Nightmare, Nutrients, Pastel Veil, Petal Dance, Pollen Puff, Psychic Surge, Purify, Quiver Dance, Recover, Relic Song, Roar of Time, Rock Artillery, Roost, Shadow Force, Shadow Punch, Shed Tail, Shields Down, Shields Up, Shore Up, Sing, Sky Attack, Slack Off, Smokescreen, Soft Boiled, Song of Desire, Spicy Extract, Splash, Stone Edge, Sunsteel Strike, Supercell Slam, Syrup Bomb, Tailwind, Take Heart, Teatime, Teeter Dance, Teleport, Terrain Pulse, Thousand Arrows, Thrash, Thunder, Time Travel, Torch Song, Torment, Triple Dive, Unbound, Victory Dance, Volt Surge, Waterfall, Wise Yawn, Wish, Yawn.
 - Stage 19 Pve Rewards changed to 2 components instead of a fully craftable item
