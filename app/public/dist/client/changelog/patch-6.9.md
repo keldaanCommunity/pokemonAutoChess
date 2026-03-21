@@ -61,6 +61,7 @@
 - Nerf Palkia: PP 110 → 120
 - Buff Mawile: Attack 16 → 18
 - Buff Alcremie line: PP 80 → 70
+- Revert Horsea buff from 6.3: Attack 6/12/24 → 6/11/21
 
 > We continue to reduce the amount of abilities that can hit the whole enemy team, in order to make positionning and movement more important in the game.
 
