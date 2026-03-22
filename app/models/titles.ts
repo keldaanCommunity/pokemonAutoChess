@@ -36,7 +36,7 @@ export function updatePlayerTitlesAfterFight(
         case EffectEnum.JUSTIFIED:
           player.titles.add(Title.BLACK_BELT)
           break
-        case EffectEnum.EERIE_SPELL:
+        case EffectEnum.TRANSCENDENCE:
           player.titles.add(Title.TELEKINESIST)
           break
         case EffectEnum.BEAT_UP:
@@ -232,7 +232,7 @@ export function updatePlayerTitlesAfterGame(
     player.titles.add(Title.GYM_LEADER)
   }
 
-  if(player.gameStats.maxHP >= 1500) {
+  if (player.gameStats.maxHP >= 1500) {
     player.titles.add(Title.GIANT)
   }
 }
