@@ -18,6 +18,8 @@
 - Tatsugiri (Stretchy)
 - Cetoddle
 - Cetitan
+- Karrablast
+- Escavalier
 
 # Changes to Synergies
 
