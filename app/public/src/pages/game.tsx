@@ -94,6 +94,7 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
+import { transformEntityCoordinates } from "./utils/utils"
 
 let gameContainer: GameContainer
 
@@ -560,6 +561,30 @@ export default function Game() {
       })
 
       room.onMessage(Transfer.GAME_END, leave)
+
+      room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
+        gameContainer.handleDragDropCancel(message)
+      )
+
+      room.onMessage(
+        Transfer.DISPLAY_TEXT,
+        (message: { text: string; id: string; x: number; y: number }) => {
+          const g = getGameScene()
+          if (g?.battle?.simulation?.id === message.id && message.text) {
+            const coordinates = transformEntityCoordinates(
+              message.x,
+              message.y,
+              g?.battle?.flip
+            )
+            gameContainer.gameScene?.board?.displayText(
+              coordinates[0],
+              coordinates[1],
+              t(message.text).toUpperCase(),
+              true
+            )
+          }
+        }
+      )
 
       room.onDrop((code) => {
         if (code >= 1001 && code <= 1015) {

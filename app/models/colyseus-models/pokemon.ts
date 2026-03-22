@@ -9756,7 +9756,7 @@ export class Seel extends Pokemon {
   speed = 47
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM
   additional = true
@@ -9771,7 +9771,7 @@ export class Dewgong extends Pokemon {
   speed = 47
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM
   additional = true
@@ -17360,11 +17360,7 @@ export class Incineroar extends Pokemon {
 }
 
 export class Skrelp extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.DRAGON,
-    Synergy.POISON,
-    Synergy.AQUATIC
-  ])
+  types = new SetSchema<Synergy>([Synergy.POISON, Synergy.WATER])
   rarity = Rarity.UNCOMMON
   stars = 1
   evolution = Pkm.DRAGALGE
@@ -17383,7 +17379,7 @@ export class Dragalge extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
     Synergy.POISON,
-    Synergy.AQUATIC
+    Synergy.WATER
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
@@ -20580,6 +20576,37 @@ export class HisuiAvalugg extends Pokemon {
   }
 }
 
+export class Karrablast extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.ESCAVALIER
+  hp = 70
+  atk = 15
+  speed = 42
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.TWINEEDLE
+  additional = true
+}
+
+export class Escavalier extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 180
+  atk = 30
+  speed = 21
+  def = 15
+  speDef = 25
+  maxPP = 100
+  range = 1
+  skill = Ability.TWINEEDLE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21760,7 +21787,9 @@ export const PokemonClasses: Record<
   [Pkm.CETITAN]: Cetitan,
   [Pkm.BERGMITE]: Bergmite,
   [Pkm.AVALUGG]: Avalugg,
-  [Pkm.HISUI_AVALUGG]: HisuiAvalugg
+  [Pkm.HISUI_AVALUGG]: HisuiAvalugg,
+  [Pkm.KARRABLAST]: Karrablast,
+  [Pkm.ESCAVALIER]: Escavalier
 }
 
 // declare all the classes in colyseus schema TypeRegistry

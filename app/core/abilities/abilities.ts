@@ -10,7 +10,7 @@ import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { IStatus } from "../../types"
+import { IStatus, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Rarity, Team } from "../../types/enum/Game"
@@ -4739,6 +4739,13 @@ export class MetronomeStrategy extends AbilityStrategy {
 
     pokemon.broadcastAbility({ skill })
     AbilityStrategies[skill].process(pokemon, board, target, crit)
+
+    pokemon.simulation.broadcastToSpectators(Transfer.DISPLAY_TEXT, {
+      id: pokemon.simulation.id,
+      text: `ability.${skill}`,
+      x: pokemon.positionX,
+      y: pokemon.positionY
+    })
   }
 }
 
@@ -12193,9 +12200,10 @@ export class SaltCureStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     // Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const cells = board.getAdjacentCells(
+    const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
+      2,
       false
     )
     cells.forEach((cell) => {
@@ -16432,6 +16440,40 @@ export class MountainGaleStrategy extends AbilityStrategy {
   }
 }
 
+export class TwineedleStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [50,LK]% chance to apply POISONNED for 4 seconds.
+    const damage = [25, 50, 80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      chance(pokemon.critChance / 100, pokemon)
+    )
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        if (chance(0.5, pokemon)) {
+          target.status.triggerPoison(4000, target, pokemon)
+        }
+      }, 500)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16978,7 +17020,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ORDER_UP]: new OrderUpStrategy(),
   [Ability.ICE_SPINNER]: new IceSpinnerStrategy(),
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
-  [Ability.MOUNTAIN_GALE]: new MountainGaleStrategy()
+  [Ability.MOUNTAIN_GALE]: new MountainGaleStrategy(),
+  [Ability.TWINEEDLE]: new TwineedleStrategy()
 }
 
 export function castAbility(

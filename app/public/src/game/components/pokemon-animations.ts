@@ -7978,5 +7978,18 @@ export const PokemonAnimations: {
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ROCK_MELEE
+  },
+  [Pkm.KARRABLAST]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.ESCAVALIER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Jab,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE
   }
 }

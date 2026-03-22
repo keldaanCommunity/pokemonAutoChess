@@ -565,7 +565,8 @@
 		"ORDER_UP": "Order Up",
 		"ICE_SPINNER": "Ice Spinner",
 		"CEASELESS_EDGE": "Ceaseless Edge",
-		"MOUNTAIN_GALE": "Mountain Gale"
+		"MOUNTAIN_GALE": "Mountain Gale",
+		"TWINEEDLE": "Twineedle"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1740,7 +1741,9 @@
 		"CETITAN": "Cetitan",
 		"BERGMITE": "Bergmite",
 		"AVALUGG": "Avalugg",
-		"HISUI_AVALUGG": "Hisuian Avalugg"
+		"HISUI_AVALUGG": "Hisuian Avalugg",
+		"KARRABLAST": "Karrablast",
+		"ESCAVALIER": "Escavalier"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2174,7 +2177,7 @@
 		"FREEZE_DRY": "Deals [70,SP] + 100% of the user's SPE_DEF as SPECIAL to the target. If target is KO, it explodes, and throws sharp ice at ADJACENT enemies dealing [30,SP] + 50% of the user's SPE_DEF as SPECIAL.",
 		"DRAGON_PULSE": "A shockwave from the user's gaping mouth deals [20,SP] SPECIAL to the target and ADJACENT enemies. The shockwave then reverberates through the enemies.",
 		"FROST_BREATH": "Blows a cold breath, dealing [35,70,140,SP] SPECIAL to enemies in a 2-tiles range CONE, with [50,LK]% chance to FREEZE for 2 seconds. Can crit by default.",
-		"SALT_CURE": "ADJACENT allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
+		"SALT_CURE": "In a 2-tiles radius, allies gain [10,20,40,SP] SHIELD and their status afflictions cured whiele WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
 		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and [12,SP] SPEED and have [30,LK]% chance to be CHARM for 1 second",
 		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack and consuming all stacks. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front and consuming all stacks.",
@@ -2285,7 +2288,8 @@
 		"ORDER_UP": "Deal [100,SP] SPECIAL to the target. If a Tatsugiri has been swallowed, gains the stats provided by it again. If no Tatsugiri is on board, one spawns on your bench, with a different form each round.",
 		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles.",
 		"CEASELESS_EDGE": "Hits the 3 enemies in front of the user for [20,40,80,SP] SPECIAL, also leaving spikes under them. Can crit by default. BOARD_EFFECT: spikes deal 10 TRUE per second and inflict ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it.",
-		"MOUNTAIN_GALE": "Hurls [1,3] giant chunks of ice randomly at target and ADJACENT enemies, inflicting FLINCH for 3 seconds then [40,SP] SPECIAL per projectile. If user has Bergmite on their back, they are thrown as well for the same damage."
+		"MOUNTAIN_GALE": "Hurls [1,3] giant chunks of ice randomly at target and ADJACENT enemies, inflicting FLINCH for 3 seconds then [40,SP] SPECIAL per projectile. If user has Bergmite on their back, they are thrown as well for the same damage.",
+		"TWINEEDLE": "Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [40,LK]% chance to apply POISONNED for 4 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2638,6 +2642,7 @@
 		"COMET_SHARD": "Comet Shard",
 		"REPEAT_BALL": "Repeat Ball",
 		"GOLD_BOW": "Gold Bow",
+		"RED_SCALE": "Red Scale",
 		"DAMP_ROCK": "Damp Rock",
 		"ICY_ROCK": "Icy Rock",
 		"SUN_STONE": "Sun Stone",
@@ -2941,6 +2946,7 @@
 		"COMET_SHARD": "Starts the round by diving like a comet on an enemy at the opposite side of the board, dealing 300% ATK as SPECIAL to target and 100% ATK as SPECIAL to ADJACENT enemies, while gaining PROTECT for 2 seconds.",
 		"REPEAT_BALL": "Each time you spend gold on a reroll, gain 1 free reroll. For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. After lots of rerolls, you may encounter powerful Pokémon in your shop.",
 		"GOLD_BOW": "The holder does not count for team size limit.",
+		"RED_SCALE": "Increase your passive income by 5 GOLD per round",
 		"DAMP_ROCK": "Counts for 3 towards RAIN. Under RAIN, your team gains +2 PP per second.",
 		"ICY_ROCK": "Counts for 3 towards SNOW. Under SNOW, your team recovers from FREEZE 20% faster and have [5,LK]% additional chance to FREEZE their opponents with their attacks.",
 		"SUN_STONE": "Counts for 3 towards ZENITH. Under ZENITH, your Pokémon heal for 5 HP every 2 seconds and have 5% additional chance to BURN with their attacks.",
@@ -3221,7 +3227,7 @@
 		"ALIEN_DNA": "$t(pkm.DEOXYS) reacts to METEORITE by changing shape",
 		"BERRY_EATER": "When the Pokémon attacks a target, it steals all its berries and eats them",
 		"TOXIC_BOOST": "The Pokémon takes 50% less poison damage and gains 10 ATK as long as it has POISONNED",
-		"GUZZLORD": "Guzzlord is too heavy to jump and too gluttonous to cook for others. When holding CHEF_HAT, gain 10 permanent max HP and 5 permanent AP for every KO.",
+		"GUZZLORD": "Guzzlord is too heavy to jump and too gluttonous to cook for others. When holding CHEF_HAT, gain 10 permanent max HP and 5 permanent AP for every KO, doubled at GOURMET 4 or more.",
 		"BURMY": "Burmy evolves into Wormadam if you get 3 Burmy with the same cloak, or into Mothim at stage 20 after moving to a region that doesn't have its cloak type",
 		"PSYDUCK": "Has [10,LK]% chance to get CONFUSION when taking a hit. Every time it gets CONFUSION, gain 100 AP",
 		"BLOODMOON": "Changes form during BLOODMOON",
@@ -4641,6 +4647,7 @@
 	"rewards": "Rewards",
 	"shiny_chance": "Shiny Chance",
 	"shiny_magikarp_description": "Shiny Magikarp give 10 GOLD each when defeated",
+	"shiny_gyarados_description": "Shiny Gyarados give a RED_SCALE when defeated",
 	"shiny_pve_description": "Shiny PvE rounds give you a choice between 3 random shiny items as a reward when defeated",
 	"carousel_description": "Item carousel rounds where you can pick items for your team. Items are randomly selected from the available item pool.",
 	"item_pool": "Items proposed",
