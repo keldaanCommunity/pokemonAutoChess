@@ -71,7 +71,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.EXPLORER_KIT]: { [Stat.DEF]: 5, [Stat.SPE_DEF]: 5, [Stat.ATK]: 3 },
   [Item.PROTECTOR]: { [Stat.SHIELD]: 75 },
   [Item.BERSERK_GENE]: { [Stat.ATK]: 10 },
-  [Item.SURFBOARD]: { [Stat.SPEED]: 30 },
+  [Item.ELECTIRIZER]: { [Stat.SPEED]: 10 },
   [Item.TERRAIN_EXTENDER]: { [Stat.SHIELD]: 50, [Stat.PP]: 20 },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.LUCK]: 30 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },
@@ -97,7 +97,8 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 },
   [Item.SILK_SCARF]: { [Stat.SHIELD]: 15 },
   [Item.FRIEND_BOW]: { [Stat.SHIELD]: 30 },
-  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 25 },
+  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 20 },
+  [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 },
   [Item.LUCKY_RIBBON]: { [Stat.DEF]: 10, [Stat.AP]: 50, [Stat.LUCK]: 30 },
   [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },
   [Item.TWIST_BAND]: { [Stat.SPE_DEF]: 20, [Stat.SHIELD]: 50 },
@@ -105,6 +106,9 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.MACH_RIBBON]: { [Stat.SHIELD]: 15, [Stat.SPEED]: 10 },
   [Item.COVER_BAND]: { [Stat.DEF]: 12, [Stat.SHIELD]: 50 },
   [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
+  [Item.TATSUGIRI_CURLY]: { [Stat.ATK]: 8 },
+  [Item.TATSUGIRI_DROOPY]: { [Stat.DEF]: 8 },
+  [Item.TATSUGIRI_STRETCHY]: { [Stat.SPEED]: 25 }
 }
 
 export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {

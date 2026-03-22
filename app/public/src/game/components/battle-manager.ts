@@ -1,11 +1,15 @@
 import { GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../config"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  MaxTroopersPerPkm
+} from "../../../../config"
 import { getAttackTimings } from "../../../../core/attacking-state"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
 import Simulation from "../../../../core/simulation"
 import Count from "../../../../models/colyseus-models/count"
 import Player from "../../../../models/colyseus-models/player"
-import { FalinksTrooper } from "../../../../models/colyseus-models/pokemon"
+import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 import Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { IBoardEvent, IPokemonEntity } from "../../../../types"
@@ -118,7 +122,10 @@ export default class BattleManager {
 
       this.group.add(pokemonUI)
       this.pokemonSprites.set(pokemon.id, pokemonUI)
-      if (pokemon.name === Pkm.FALINKS_BRASS) {
+      if (
+        pokemon.name === Pkm.FALINKS_BRASS ||
+        pokemon.passive === Passive.AVALUGG
+      ) {
         this.addTroopers(pokemon, pokemonUI, simulationId)
       }
       if (pokemon.action === PokemonActionState.BLOSSOM) {
@@ -514,7 +521,7 @@ export default class BattleManager {
         case "positionX":
         case "positionY":
           {
-            // logger.debug(pokemon.positionX, pokemon.positionY);            
+            // logger.debug(pokemon.positionX, pokemon.positionY);
             const coordinates = transformEntityCoordinates(
               pokemon.positionX,
               pokemon.positionY,
@@ -535,12 +542,18 @@ export default class BattleManager {
               pkmSprite.moveManager.setSpeed(walkingSpeed)
               pkmSprite.moveManager.moveTo(coordinates[0], coordinates[1])
               if (pkmSprite.troopers) {
-                const [dx, dy] = OrientationVector[pkmSprite.orientation]
                 pkmSprite.troopers.forEach((trooper, i) => {
                   trooper.moveManager.setSpeed(walkingSpeed)
+                  const { dx, dy } = TroopersDeltaPositions[trooper.name]?.(
+                    i,
+                    pkmSprite.orientation
+                  ) ?? {
+                    dx: 0,
+                    dy: 0
+                  }
                   trooper.moveManager.moveTo(
-                    coordinates[0] - dx * (i + 1) * 20,
-                    coordinates[1] - dy * (i + 1) * 20
+                    coordinates[0] + dx,
+                    coordinates[1] + dy
                   )
                 })
               }
@@ -559,18 +572,8 @@ export default class BattleManager {
               )
             }
             if (pkmSprite.troopers) {
-              const [dx, dy] = OrientationVector[pkmSprite.orientation]
-              const coordinates = transformEntityCoordinates(
-                pokemon.positionX,
-                pokemon.positionY,
-                this.flip
-              )
               pkmSprite.troopers.forEach((trooper, i) => {
-                trooper.moveManager.setSpeed(5)
-                trooper.moveManager.moveTo(
-                  coordinates[0] - dx * (i + 1) * 20,
-                  coordinates[1] - dy * (i + 1) * 20
-                )
+                trooper.orientation = pokemon.orientation
               })
             }
           }
@@ -1331,43 +1334,61 @@ export default class BattleManager {
   }
 
   addTroopers(
-    trooperBrass: IPokemonEntity,
-    trooperBrassSprite: PokemonSprite,
+    trooperChief: IPokemonEntity,
+    trooperChiefSprite: PokemonSprite,
     simulationId: string
   ) {
-    const troopersBenchSprites = [
-      ...this.scene.board!.pokemons.values()
-    ].filter((p) => p.name === Pkm.FALINKS_TROOPER && isOnBench(p))
+    const trooperName =
+      trooperChief.name === Pkm.FALINKS_BRASS
+        ? Pkm.FALINKS_TROOPER
+        : trooperChief.passive === Passive.AVALUGG
+          ? Pkm.BERGMITE
+          : null
+    if (trooperName === null) return
 
-    if (trooperBrassSprite.troopers) {
-      trooperBrassSprite.troopers?.forEach((s) => s.destroy())
+    const troopersBenchSprites = [...this.scene.board!.pokemons.values()]
+      .filter((p) => p.name === trooperName && isOnBench(p))
+      .slice(0, MaxTroopersPerPkm[trooperChief.name])
+
+    if (trooperChiefSprite.troopers) {
+      trooperChiefSprite.troopers?.forEach((s) => s.destroy())
     }
-    trooperBrassSprite.troopers = []
+    trooperChiefSprite.troopers = []
     troopersBenchSprites.forEach((sprite, i) => {
-      sprite.setAlpha(0.5)
+      sprite.sprite.setAlpha(0.5)
 
       const coordinates = transformEntityCoordinates(
-        trooperBrass.positionX,
-        trooperBrass.positionY,
+        trooperChief.positionX,
+        trooperChief.positionY,
         this.flip
       )
-      const trooperInBattle = new FalinksTrooper(
-        Pkm.FALINKS_TROOPER,
-        trooperBrass.shiny,
-        trooperBrass.emotion
+      const trooperInBattle = new PokemonClasses[trooperName](
+        trooperName,
+        trooperChief.shiny,
+        trooperChief.emotion
       )
       trooperInBattle.maxHP = trooperInBattle.hp
+
+      const { dx, dy } = TroopersDeltaPositions[trooperName]?.(
+        i,
+        trooperChief.orientation
+      ) ?? {
+        dx: 0,
+        dy: 0
+      }
       const trooperSprite = new PokemonSprite(
         this.scene,
-        coordinates[0] + (i + 1) * 20,
-        coordinates[1],
+        coordinates[0] + dx,
+        coordinates[1] + dy,
         trooperInBattle,
         simulationId,
         true,
         this.flip
       )
-      trooperSprite.setDepth(DEPTH.POKEMON_TROOPER)
-      trooperBrassSprite.troopers?.push(trooperSprite)
+      trooperSprite.setDepth(
+        TroopersDepth[trooperName] ?? DEPTH.POKEMON_TROOPER
+      )
+      trooperChiefSprite.troopers?.push(trooperSprite)
 
       this.scene.animationManager?.animatePokemon(
         trooperSprite,
@@ -1378,4 +1399,29 @@ export default class BattleManager {
       this.pokemonSprites.set(trooperInBattle.id, trooperSprite)
     })
   }
+}
+
+const TroopersDeltaPositions: {
+  [chief in Pkm]?: (
+    index: number,
+    orientation: Orientation
+  ) => { dx: number; dy: number }
+} = {
+  [Pkm.FALINKS_TROOPER]: (i, orientation) => {
+    const [orientationDx, orientationDy] = OrientationVector[orientation]
+    return {
+      dx: -orientationDx * 20 * (i + 1),
+      dy: orientationDy * 20 * (i + 1)
+    }
+  },
+  [Pkm.BERGMITE]: (i, orientation) => {
+    return { dx: -15 + Math.floor(i / 2) * 30, dy: -30 + (i % 2) * 15 }
+  }
+}
+
+const TroopersDepth: {
+  [chief in Pkm]?: number
+} = {
+  [Pkm.FALINKS_TROOPER]: DEPTH.POKEMON_TROOPER,
+  [Pkm.BERGMITE]: DEPTH.POKEMON_TROOPER_ON_TOP
 }

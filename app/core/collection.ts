@@ -2,6 +2,7 @@ import { HydratedDocument } from "mongoose"
 import {
   BoosterRarityProbability,
   EmotionCost,
+  ExpThreshold,
   getBaseAltForm,
   PkmAltForms,
   PkmAltFormsByPkm
@@ -10,6 +11,7 @@ import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { PokemonAnimations } from "../public/src/game/components/pokemon-animations"
+import { notificationsService } from "../services/notifications"
 import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
 import { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
@@ -23,6 +25,24 @@ import {
 } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import { chance, pickRandomIn, randomWeighted } from "../utils/random"
+
+export function giveUserExp(user: IUserMetadataMongo, exp: number) {
+  if (user.exp + exp >= ExpThreshold) {
+    user.level += 1
+    user.booster += 1
+    user.exp = user.exp + exp - ExpThreshold
+
+    // Add level up notification
+    notificationsService.addNotification(
+      user.uid,
+      "level_up",
+      user.level.toString()
+    )
+  } else {
+    user.exp = user.exp + exp
+  }
+  user.exp = !isNaN(user.exp) ? user.exp : 0
+}
 
 export function createBooster(user: IUserMetadataMongo): Booster {
   const NB_PER_BOOSTER = 10

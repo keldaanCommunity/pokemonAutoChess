@@ -156,6 +156,18 @@ export default class WanderersManager {
         chestGroup.destroy(true, true)
       }, 8000)
     }
+
+    if (wanderer.pkm === Pkm.LAPRAS) {
+      setTimeout(() => {
+        sprite.moveManager.setSpeed(350)
+        sprite.moveManager.moveTo(15 * 48, -100)
+        this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
+        setTimeout(() => {
+          this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
+          sprite.destroy()
+        }, 1200)
+      }, 9000)
+    }
   }
 
   addWandererPokemonSprite({
@@ -369,6 +381,11 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
   if (wanderer.pkm === Pkm.XATU) {
     return {
       dialog: t("npc_dialog.xatu")
+    }
+  }
+  if (wanderer.pkm === Pkm.LAPRAS) {
+    return {
+      dialog: t("npc_dialog.lapras")
     }
   }
   return {}

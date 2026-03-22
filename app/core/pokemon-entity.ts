@@ -219,7 +219,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.freeze &&
       !this.status.sleep &&
       !this.status.resurrecting &&
-      !this.status.locked
+      !this.status.locked &&
+      !this.status.tree
     )
   }
 
@@ -228,7 +229,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.freeze &&
       !this.status.sleep &&
       !this.status.resurrecting &&
-      !this.status.skydiving
+      !this.status.skydiving &&
+      !this.status.tree
     )
   }
 
@@ -254,7 +256,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetAllies = false
   ): boolean {
     return (
-      !this.status.resurrecting &&
+      !this.status.untargettable &&
       ((targetAllies && this.team === attacker.team) ||
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
@@ -555,7 +557,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      boardPokemon.addMaxHP(value, this.player)
+      boardPokemon.addMaxHP(value)
     }
   }
 

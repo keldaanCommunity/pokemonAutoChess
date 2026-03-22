@@ -1,3 +1,7 @@
+# New event: Expeditions
+
+We're introducing a new monthly event that will alternate on a monthly basis with the Victory road event. This event is called "Expeditions" and is meant to propose small quests for extra experience points, encouraging players to try new Pokémon, synergies and strategies. This is a first iteration, and we will likely add more quests and variety in the future based on your feedback.
+
 # New Pokémon
 
 - Finizen
@@ -9,6 +13,20 @@
 - Ducklett
 - Swanna
 - Glastrier
+- Galarian Darumaka
+- Galarian Darmanitan
+- Galarian Darmanitan (Zen)
+- Dondozo
+- Tatsugiri (Curly)
+- Tatsugiri (Droopy)
+- Tatsugiri (Stretchy)
+- Cetoddle
+- Cetitan
+- Hisuian Samurott
+- Bergmite
+- Avalugg
+- Karrablast
+- Escavalier
 
 # Changes to Synergies
 
@@ -27,10 +45,10 @@
 - WILD 6: +50 SPEED and +20% base ATK → +40 SPEED and +40% base ATK
 - New effect for WILD 9: Once below 30% HP, gain 30 Shield and double the Attack and Speed buffs for 3 seconds.
 
-- Fighting now only throw away melee enemies (1 range)
-- Nerf Ice: Freeze chance 25% → 20%
-- Changed Psychic 3: Unown now appears every 5 shops
-- Renamed Psychic synergy steps
+- FIGHTING now only throw away melee enemies (1 range)
+- Nerf ICE: FREEZE chance 25% → 20%
+- Changed PSYCHIC 3: Unown now appears every 5 shops
+- Renamed PSYCHIC synergy steps
 
 # Changes to Pokémon & Abilities
 
@@ -50,6 +68,10 @@
 - Rework Origin Giratina: Slash all enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [40,80,120,SP] SPECIAL.
 - Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
 - Nerf Palkia: PP 110 → 120
+- Buff Mawile: Attack 16 → 18
+- Buff Alcremie line: PP 80 → 70
+- Revert Horsea buff from 6.3: Attack 6/12/24 → 6/11/21
+- Nerf Seel line: PP 90 → 100
 
 > We continue to reduce the amount of abilities that can hit the whole enemy team, in order to make positionning and movement more important in the game.
 
@@ -61,33 +83,71 @@
 
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
 - Adjust Bounce Damage (Spoink, Mantyke): 10/20/30 → 15/20/25
-- Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast
+- Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast. Roaring Moon PP 140 → 130
+- Change passive of Solrock: now changes the weather to DROUGHT or ZENITH based on your dominant synergy between FIRE and LIGHT
+- Buff Salt Cure (Nacli): now affects allies and enemies in a 2-cell radius around the user instead of just adjacent
+- Guzzlord passive now gains double the stacks when Gourmet 4 or more is active
+- Change Skrelp synergies: now POISON/WATER instead of DRAGON/POISON/AQUATIC
+- Change Dragalge synergies: now DRAGON/POISON/WATER instead of DRAGON/POISON/AQUATIC
+- Metronome now displays the name of the copied ability
 
 # Changes to Items
 
-> Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
-- Buff Nutritious Egg: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+## Craftable Items
 
+> Statuses are not all equal in how much they frustrate players, so we provide additional hard counter itemization options for those that prevent movement or action.
 
-> We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. The items that are very easy to play like Nullify Bandanna or Mach Ribbon are overperforming a bit, while the ones that are more niche and require more game knowledge like Black Belt or Explosive Band are underperforming globally, but are performing better at higher Elo. Base item stats adjustments are a good way to reduce the gap between low and high elo, while keeping the skill diff of these items intact.
+- New effect for Flame Orb: holder is immune to FREEZE
+- New effect for Heavy-Duty Boots: holder is immune to LOCKED
+- New effect for X-Ray vision: holder is immune to SLEEP
 
-- Buff Black Belt: 20% → 25% crit chance
-- Nerf Nullify Bandanna: removed 30 base shield
+## Scarves
+
+> We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. Individual items winrate also evolved a lot during the patch, with players finding out new strong interactions and counterplays. This instability makes balancing difficult, so for now we're focusing on nerfing the most popular scarves to increase variety. Big Eater Belt change was very popular but also brought many quirks we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
+
 - Nerf Mach Ribbon: 20 → 15 speed every 3 seconds
-
-> Big Eater Belt change brought many quirks we aim to remove. It should now only works with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
-
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
+
+## Tools
+
+- Partial revert of ELECTIRIZER: base SPEED: 0 → 10
+- Removed 30 base SPEED from Surfboard
+
+## Dishes
+
+> Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
+
+- Buff NUTRITIOUS_EGG: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+
+## Town Items
+
+> I can't nerf the quality of community guides unfortunately, so I have to make this mission more difficult despite being already hard for beginners, in order to keep it balanced for high elo players.
+
+- Nerf MISSION_ORDER_GREEN: reach 8 → 9 different active synergies
+
+- Buff GIMMIGHOUL_COIN: +3 GOLD → +5 GOLD when obtained
+- Reduce the price of Chansey EGG_FOR_SELL: 10 → 7 GOLD
+- Kecleon now sells all kinds of synergy items instead of just synergy stones. Also the item choice better matches the top synergies of each player.
+- Removed Kangaskhan encounter from stage 17
+
+## Shiny Items
+
+- New Shiny item: Red Scale, obtained exclusively from shiny encounter at stage 9.
+
+> Similarly to Golden Magikarps at stage 1, Red Scale will be a pure economic item given to all players. All the other shiny items are now obtained at stage 15 or from a golden egg, which makes their value more consistent for items with scalable effects or economic value. We continue to work on shiny items so that they add that extra spice and increase the pace of the game, but in a more even way between players.
+
+## Misc
 
 - Added visual effects for support items on adjacent positions
 - Added visual effect for Loaded dice second hit
 
 # Changes to Gameplay
 
-> Next change looks scary but should not be that much impactful in practice, since most of the time your units cast their abilities when at attack range. This should simply resolve a few combat situations that looked bad.
+> Next change looks scary but should not be that much impactful in practice, since most of the time your units cast their abilities when at attack range. This should resolve a few combat situations that looked bad before.
 
 - Abilities that do not require a target can now be casted even when the caster is not currently targeting an enemy. Here are the affected abilities: Agility, Anchor Shot, Aqua Ring, Astral Barrage, Attract, Aurora Veil, Axe Kick, Baneful Bunker, Beat Up, Bone Armor, Bounce, Bulk Up, Chain Crazed, Chatter, Column Crush, Cosmic Power (Moon), Cosmic Power (Sun), Curse, Dark Harvest, Decorate, Defense Curl, Dive, Echo, Electric Surge, Electrify, Eruption, Expanding Force, Fairy Wind, Fly, Flying Press, Forecast, Future Sight, Geomancy, Grassy Surge, Gravity, Growth, Happy Hour, Harden, Helping Hand, Hidden Power (all), Hypnosis, Icicle Missile, Lunar Blessing, Lunge, Magic Bounce, Magnet Pull, Meditate, Misty Surge, Mud Bubble, Nasty Plot, Natural Gift, Nightmare, Nutrients, Pastel Veil, Petal Dance, Pollen Puff, Psychic Surge, Purify, Quiver Dance, Recover, Relic Song, Roar of Time, Rock Artillery, Roost, Shadow Force, Shadow Punch, Shed Tail, Shields Down, Shields Up, Shore Up, Sing, Sky Attack, Slack Off, Smokescreen, Soft Boiled, Song of Desire, Spicy Extract, Splash, Stone Edge, Sunsteel Strike, Supercell Slam, Syrup Bomb, Tailwind, Take Heart, Teatime, Teeter Dance, Teleport, Terrain Pulse, Thousand Arrows, Thrash, Thunder, Time Travel, Torch Song, Torment, Triple Dive, Unbound, Victory Dance, Volt Surge, Waterfall, Wise Yawn, Wish, Yawn.
 - Stage 19 Pve Rewards changed to 2 components instead of a fully craftable item
+- Hard CC cooldown raised from 1 to 1.5 seconds (FREEZE, SLEEP, LOCKED)
 
 # Misc
 
@@ -97,9 +157,13 @@
 - New Scribble: Unown Spell
 - New Scribble: The Chosen Ones
 - New Town Encounter: Kingambit
+- New Town Encounter: Lapras
 - Add 15-day history tracking to meta reports with multi-line trends visualization
 - Added a key shortcut to open the wiki and the team planner
 - New users have now a random generated name (ex: "Happy-Charmander-12345") to prevent eventual doxxing.
+- New titles: Rescue Team Member, Explorer, Postman, Survey Corps, Guildmaster
+- Added more game statistics in the post-match screen
+- Added an ingame translations management page: https://pokemon-auto-chess.com/translations
 
 # Bug Fixes
 

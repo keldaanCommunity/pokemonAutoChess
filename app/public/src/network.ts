@@ -35,7 +35,7 @@ export function authenticateUser() {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) return reject(CloseCodes.USER_NOT_AUTHENTICATED)
       store.dispatch(logIn(user))
-      fetchProfile()
+      fetchProfile(true)
       resolve(user)
     })
   })
@@ -296,7 +296,7 @@ export function ban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.BAN, params)
 }
 
-export function unban(params: { uid: string; name: string }) {
+export function unban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.UNBAN, params)
 }
 

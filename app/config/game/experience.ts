@@ -1,6 +1,8 @@
 // Player experience gains based on rank
 export const ExpPlace = [700, 400, 350, 300, 250, 200, 200, 200]
 
+export const ExpThreshold = 1000
+
 export const MAX_LEVEL = 9
 
 // Experience required to move from level n to level n+1

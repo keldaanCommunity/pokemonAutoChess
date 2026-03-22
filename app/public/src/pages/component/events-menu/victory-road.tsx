@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { EventPointsPerRank } from "../../../../../config"
+import { VictoryRoadPointsPerRank } from "../../../../../config"
 import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { clamp } from "../../../../../utils/number"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useAppSelector, useGameEventResetCountdown } from "../../../hooks"
 import { searchById } from "../../../network"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
 import { formatDate, formatDuration } from "../../utils/date"
@@ -15,7 +15,6 @@ import "./victory-road.css"
 
 export function VictoryRoad() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const profile = useAppSelector((state) => state.network.profile)
   const eventLeaderboard = useAppSelector(
     (state) => state.lobby.eventLeaderboard
@@ -74,24 +73,7 @@ export function VictoryRoad() {
     return { left: `${x}%`, top: `${y}px` }
   }
 
-  // midnight UTC on the first day of each month
-  const now = new Date()
-  const resetDate = new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 0, 0, 0, 0)
-  )
-  const [resetCountdown, setResetCountdown] = useState(
-    Math.round((resetDate.getTime() - now.getTime()) / 1000)
-  )
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date()
-      setResetCountdown(
-        Math.round((resetDate.getTime() - now.getTime()) / 1000)
-      )
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [resetDate])
+  const resetCountdown = useGameEventResetCountdown()
 
   return (
     <div
@@ -230,13 +212,13 @@ export function VictoryRoad() {
                   <dt>{getRankLabel(rank)}</dt>
                   <dd
                     className={cc({
-                      positive: EventPointsPerRank[rank - 1] > 0,
-                      negative: EventPointsPerRank[rank - 1] < 0
+                      positive: VictoryRoadPointsPerRank[rank - 1] > 0,
+                      negative: VictoryRoadPointsPerRank[rank - 1] < 0
                     })}
                   >
-                    {(EventPointsPerRank[rank - 1] > 0 ? "+" : "") +
+                    {(VictoryRoadPointsPerRank[rank - 1] > 0 ? "+" : "") +
                       t("victory_road.points", {
-                        points: EventPointsPerRank[rank - 1]
+                        points: VictoryRoadPointsPerRank[rank - 1]
                       })}
                   </dd>
                 </React.Fragment>
@@ -244,7 +226,7 @@ export function VictoryRoad() {
             </dl>
             <p>{t("victory_road.help2")}</p>
             <p style={{ fontStyle: "italic" }}>
-              {t("victory_road.reset_info", {
+              {t("events_reset_info", {
                 resetCountdown: formatDuration(resetCountdown)
               })}
             </p>

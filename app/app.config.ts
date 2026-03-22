@@ -155,6 +155,7 @@ export const server = defineServer({
               "https://*.doubleclick.net", // google ads, required for youtube embedded
               "https://*.githubusercontent.com",
               "http://raw.githubusercontent.com",
+              "https://api.github.com",
               "https://*.youtube.com",
               "https://pokemon.darkatek7.com",
               "https://eternara.site",
@@ -233,6 +234,10 @@ export const server = defineServer({
     })
 
     app.get("/gameboy", (req, res) => {
+      res.sendFile(viewsSrc)
+    })
+
+    app.get("/translations", (req, res) => {
       res.sendFile(viewsSrc)
     })
 

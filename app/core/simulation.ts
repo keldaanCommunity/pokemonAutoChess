@@ -104,6 +104,7 @@ export default class Simulation extends Schema implements ISimulation {
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
+  entities: IPokemonEntity[] = []
 
   constructor(
     id: string,
@@ -306,6 +307,7 @@ export default class Simulation extends Schema implements ISimulation {
       this.redTeam.set(pokemonEntity.id, pokemonEntity)
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
+    this.entities.push(pokemonEntity)
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this, isSpawn })
     pokemonEntity.getEffects(OnSpawnEffect).forEach((effect) => {
@@ -319,15 +321,21 @@ export default class Simulation extends Schema implements ISimulation {
     if (team === Team.BLUE_TEAM) {
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
-          if (this.board.getEntityOnCell(x, y) === undefined) {
+          if (
+            this.board.isOnBoard(x, y) &&
+            this.board.getEntityOnCell(x, y) === undefined
+          ) {
             return { x, y }
           }
         }
       }
     } else {
-      for (let y = 0; y < this.board.rows; y++) {
+      for (let y = this.board.rows - 1; y >= 0; y--) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
-          if (this.board.getEntityOnCell(x, y) === undefined) {
+          if (
+            this.board.isOnBoard(x, y) &&
+            this.board.getEntityOnCell(x, y) === undefined
+          ) {
             return { x, y }
           }
         }
@@ -383,10 +391,7 @@ export default class Simulation extends Schema implements ISimulation {
       const y = positionY + dy * (team === Team.BLUE_TEAM ? 1 : -1)
 
       if (
-        x >= 0 &&
-        x < this.board.columns &&
-        y >= 0 &&
-        y < this.board.rows &&
+        this.board.isOnBoard(x, y) &&
         this.board.getEntityOnCell(x, y) === undefined
       ) {
         return { x, y }
@@ -508,7 +513,7 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     if (pokemon.passive === Passive.GLUTTON) {
-      pokemon.addMaxHP(20, player)
+      pokemon.addMaxHP(20)
       entity?.addMaxHP(20, entity, 0, false)
       if (pokemon.maxHP > 750) {
         player.titles.add(Title.GLUTTON)
@@ -1602,10 +1607,10 @@ export default class Simulation extends Schema implements ISimulation {
           }
         }
         if (opponentPlayer && !isGhostOpponent) {
-          opponentPlayer.totalPlayerDamageDealt += playerDamage
+          opponentPlayer.gameStats.totalPlayerDamageDealt += playerDamage
           if (
             opponentPlayer.items.includes(Item.MISSION_ORDER_RED) &&
-            opponentPlayer.totalPlayerDamageDealt >= 100
+            opponentPlayer.gameStats.totalPlayerDamageDealt >= 100
           ) {
             opponentPlayer.completeMissionOrder(Item.MISSION_ORDER_RED)
           }
