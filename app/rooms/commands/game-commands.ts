@@ -328,6 +328,7 @@ export class OnDragDropPokemonCommand extends Command<
               pkm,
               player
             )
+            replaceDitto.onAcquired(player)
             pokemon.items.forEach((item) => {
               player.items.push(item)
             })

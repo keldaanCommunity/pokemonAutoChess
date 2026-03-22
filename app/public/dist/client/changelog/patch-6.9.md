@@ -18,6 +18,9 @@
 - Tatsugiri (Stretchy)
 - Cetoddle
 - Cetitan
+- Hisuian Samurott
+- Bergmite
+- Avalugg
 - Karrablast
 - Escavalier
 

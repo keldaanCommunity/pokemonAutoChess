@@ -3454,6 +3454,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.WATER_MELEE
   },
+  [Pkm.HISUI_SAMUROTT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.DARK_MELEE
+  },
   [Pkm.SNOM]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
@@ -7953,6 +7959,25 @@ export const PokemonAnimations: {
     ability: AnimationType.Swing,
     emote: AnimationType.Emit,
     attackSprite: AttackSprite.ICE_MELEE
+  },
+  [Pkm.BERGMITE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Rumble,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ICE_MELEE
+  },
+  [Pkm.AVALUGG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Emit,
+    attackSprite: AttackSprite.ICE_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.HISUI_AVALUGG]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ROCK_MELEE
   },
   [Pkm.KARRABLAST]: {
     attack: AnimationType.Attack,
