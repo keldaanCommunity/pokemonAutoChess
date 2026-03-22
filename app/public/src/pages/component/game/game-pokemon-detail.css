@@ -160,6 +160,7 @@
 
 .game-pokemon-detail-ult {
   grid-column: span 3;
+  text-align: left;
 }
 
 .game-pokemon-detail-ult .ability-name {

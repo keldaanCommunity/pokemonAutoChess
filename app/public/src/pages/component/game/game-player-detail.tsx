@@ -122,7 +122,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
             alt="$"
             style={{ width: "24px", height: "24px" }}
           />{" "}
-          {props.player.totalMoneyEarned}
+          {props.player.gameStats.totalMoneyEarned}
         </span>
         <span title={t("total_player_damage_dealt")}>
           <img
@@ -130,7 +130,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
             alt="✊"
             style={{ width: "24px", height: "24px" }}
           />
-          {props.player.totalPlayerDamageDealt}
+          {props.player.gameStats.totalPlayerDamageDealt}
         </span>
         <span title={t("total_reroll_count")}>
           <img
@@ -138,7 +138,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
             alt="↻"
             style={{ width: "24px", height: "24px" }}
           />{" "}
-          {props.player.rerollCount}
+          {props.player.gameStats.rerollCount}
         </span>
       </div>
     </div>

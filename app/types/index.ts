@@ -1,4 +1,4 @@
-import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
+import { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
 import type { Board } from "../core/board"
 import Dps from "../core/dps"
 import { Effect as EffectClass } from "../core/effects/effect"
@@ -33,6 +33,7 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
+import { GameStats } from "./interfaces/GameStats"
 
 export * from "./enum/Emotion"
 export * from "./enum/Item"
@@ -198,9 +199,7 @@ export interface ISimplePlayer {
 }
 
 export interface IAfterGamePlayer extends ISimplePlayer {
-  moneyEarned: number
-  playerDamageDealt: number
-  rerollCount: number
+  gameStats: GameStats
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {
@@ -291,14 +290,14 @@ export interface IPlayer {
   ultraRegionalPool: Pkm[]
   opponents: Map<string, number>
   ghost: boolean
-  rerollCount: number
-  totalMoneyEarned: number
-  totalPlayerDamageDealt: number
   eggChance: number
   goldenEggChance: number
   cellBattery: number
   lightX: number
   lightY: number
+  titles: Set<Title>
+  regions: DungeonPMDO[]
+  gameStats: GameStats
 }
 
 export interface IPokemon {
@@ -728,7 +727,12 @@ export enum Title {
   AQUARIOPHILE = "AQUARIOPHILE",
   POFFIN_MASTER = "POFFIN_MASTER",
   TOP_GUN = "TOP_GUN",
-  SCOUT = "SCOUT"
+  SCOUT = "SCOUT",
+  RESCUE_TEAM_MEMBER = "RESCUE_TEAM_MEMBER",
+  EXPLORER = "EXPLORER",
+  POSTMAN = "POSTMAN",
+  SURVEY_CORPS = "SURVEY_CORPS",
+  GUILDMASTER = "GUILDMASTER"
 }
 
 export interface IBoardEvent {

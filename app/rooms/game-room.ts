@@ -6,18 +6,18 @@ import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
-  EventPointsPerRank,
   ExpPlace,
-  getBaseAltForm,
+  getCurrentGameEvent,
   LegendaryPool,
-  MAX_EVENT_POINTS,
   MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
-  PkmAltFormsByPkm,
   PortalCarouselStages,
-  UniquePool
+  UniquePool,
+  VICTORY_ROAD_MAX_EVENT_POINTS,
+  VictoryRoadPointsPerRank
 } from "../config"
+import { giveUserExp } from "../core/collection"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -32,6 +32,7 @@ import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { Wanderer } from "../models/colyseus-models/wanderer"
+import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata from "../models/mongo-models/user-metadata"
@@ -42,6 +43,7 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getAdditionalsTier1, getSellPrice } from "../models/shop"
+import { updatePlayerTitlesAfterGame } from "../models/titles"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -64,7 +66,6 @@ import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
-  NonPkm,
   Pkm,
   PkmDuos,
   PkmIndex,
@@ -74,6 +75,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
+import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
@@ -866,26 +868,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const previousRank = getRank(previousElo)
 
       if (eligibleToXP) {
-        const expThreshold = 1000
-        if (usr.exp + exp >= expThreshold) {
-          usr.level += 1
-          usr.booster += 1
-          usr.exp = usr.exp + exp - expThreshold
-
-          // Add level up notification
-          notificationsService.addNotification(
-            player.id,
-            "level_up",
-            usr.level.toString()
-          )
-        } else {
-          usr.exp = usr.exp + exp
-        }
-        usr.exp = !isNaN(usr.exp) ? usr.exp : 0
+        giveUserExp(usr, exp)
       }
 
       usr.games += 1
-
       if (rank === 1) {
         usr.wins += 1
         if (this.state.gameMode === GameMode.RANKED) {
@@ -897,32 +883,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
             player.titles.add(Title.OUTSIDER)
           }
         }
-      }
-
-      if (usr.level >= 10) {
-        player.titles.add(Title.ROOKIE)
-      }
-      if (usr.level >= 20) {
-        player.titles.add(Title.AMATEUR)
-        player.titles.add(Title.BOT_BUILDER)
-      }
-      if (usr.level >= 30) {
-        player.titles.add(Title.VETERAN)
-      }
-      if (usr.level >= 50) {
-        player.titles.add(Title.PRO)
-      }
-      if (usr.level >= 100) {
-        player.titles.add(Title.EXPERT)
-      }
-      if (usr.level >= 150) {
-        player.titles.add(Title.ELITE)
-      }
-      if (usr.level >= 200) {
-        player.titles.add(Title.MASTER)
-      }
-      if (usr.level >= 300) {
-        player.titles.add(Title.GRAND_MASTER)
       }
 
       if (usr.elo != null && eligibleToELO) {
@@ -941,15 +901,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
           )
           elo = usr.elo
         }
-        if (elo >= 1100) {
-          player.titles.add(Title.GYM_TRAINER)
-        }
-        if (elo >= 1200) {
-          player.titles.add(Title.GYM_CHALLENGER)
-        }
-        if (elo >= 1400) {
-          player.titles.add(Title.GYM_LEADER)
-        }
+
         usr.elo = elo
         usr.maxElo = Math.max(usr.maxElo, elo)
 
@@ -982,16 +934,20 @@ export default class GameRoom extends Room<{ state: GameState }> {
           regions: player.regions
         })
 
-        if (usr.eventFinishTime == null) {
+        if (
+          usr.eventFinishTime == null &&
+          getCurrentGameEvent() === GameEvent.VICTORY_ROAD
+        ) {
           try {
-            const eventPointsGained = EventPointsPerRank[clamp(rank - 1, 0, 7)]
+            const eventPointsGained =
+              VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
             usr.eventPoints = clamp(
               usr.eventPoints + eventPointsGained,
               0,
-              MAX_EVENT_POINTS
+              VICTORY_ROAD_MAX_EVENT_POINTS
             )
             usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
-            if (usr.maxEventPoints >= MAX_EVENT_POINTS) {
+            if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
               usr.eventFinishTime = new Date()
               usr.markModified("eventFinishTime")
 
@@ -1023,19 +979,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
 
-      if (player.life >= 100 && rank === 1) {
-        player.titles.add(Title.TYRANT)
-      }
-      if (player.life === 1 && rank === 1) {
-        player.titles.add(Title.SURVIVOR)
-      }
-
-      if (player.rerollCount > 60) {
-        player.titles.add(Title.GAMBLER)
-      } else if (player.rerollCount < 20 && rank === 1) {
-        player.titles.add(Title.NATURAL)
-      }
-
       // update all pokemons played count
       player.pokemonsPlayed.forEach((pkm) => {
         const index = PkmIndex[pkm]
@@ -1057,25 +1000,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       })
 
       if (
-        player.titles.has(Title.COLLECTOR) === false &&
-        Object.values(Pkm)
-          .filter((p) => NonPkm.includes(p) === false)
-          .every((pkm) => {
-            const baseForm = getBaseAltForm(pkm)
-            const accepted: Pkm[] =
-              baseForm in PkmAltFormsByPkm
-                ? [baseForm, ...PkmAltFormsByPkm[baseForm]]
-                : [baseForm]
-            return accepted.some((form) => {
-              const pokemonCollectionItem = usr.pokemonCollection.get(
-                PkmIndex[form]
-              )
-              return pokemonCollectionItem && pokemonCollectionItem.played > 0
-            })
-          })
+        getCurrentGameEvent() === GameEvent.EXPEDITIONS /*&&
+        eligibleToXP &&
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY */
+        // TODO: remove this condition after testing, we want to allow expeditions points gain in custom lobby for testing purposes
       ) {
-        player.titles.add(Title.COLLECTOR)
+        const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
+          player,
+          usr
+        )
+        if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
       }
+
+      updatePlayerTitlesAfterGame(player, usr, rank)
 
       if (usr.titles === undefined) {
         usr.titles = []
@@ -1102,6 +1039,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       await usr.save()
       if (shouldRefetchEventLeaderboard) {
         await fetchEventLeaderboard()
+        //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
       }
     }
   }
@@ -1311,7 +1249,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
             evolution,
             player
           )
-          replacement.addMaxHP([50, 100, 150][rank] ?? 50, player)
+          replacement.addMaxHP([50, 100, 150][rank] ?? 50)
           replacement.addAttack([5, 10, 15][rank] ?? 5)
           replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
           return replacement
