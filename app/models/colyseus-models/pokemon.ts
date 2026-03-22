@@ -20482,6 +20482,37 @@ export class Cetitan extends Pokemon {
   regional = true
 }
 
+export class Karrablast extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.ESCAVALIER
+  hp = 70
+  atk = 15
+  speed = 42
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.TWINEEDLE
+  additional = true
+}
+
+export class Escavalier extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 180
+  atk = 30
+  speed = 21
+  def = 15
+  speDef = 25
+  maxPP = 100
+  range = 1
+  skill = Ability.TWINEEDLE
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21658,7 +21689,9 @@ export const PokemonClasses: Record<
   [Pkm.TATSUGIRI_DROOPY]: TatsugiriDroopy,
   [Pkm.TATSUGIRI_STRETCHY]: TatsugiriStretchy,
   [Pkm.CETODDLE]: Cetoddle,
-  [Pkm.CETITAN]: Cetitan
+  [Pkm.CETITAN]: Cetitan,
+  [Pkm.KARRABLAST]: Karrablast,
+  [Pkm.ESCAVALIER]: Escavalier
 }
 
 // declare all the classes in colyseus schema TypeRegistry

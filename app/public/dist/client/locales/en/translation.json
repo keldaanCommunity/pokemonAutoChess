@@ -563,7 +563,8 @@
 		"FEATHER_DANCE": "Feather Dance",
 		"GLACIAL_LANCE": "Glacial Lance",
 		"ORDER_UP": "Order Up",
-		"ICE_SPINNER": "Ice Spinner"
+		"ICE_SPINNER": "Ice Spinner",
+		"TWINEEDLE": "Twineedle"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1734,7 +1735,9 @@
 		"TATSUGIRI_DROOPY": "Tatsugiri (Droopy)",
 		"TATSUGIRI_STRETCHY": "Tatsugiri (Stretchy)",
 		"CETODDLE": "Cetoddle",
-		"CETITAN": "Cetitan"
+		"CETITAN": "Cetitan",
+		"KARRABLAST": "Karrablast",
+		"ESCAVALIER": "Escavalier"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2277,8 +2280,8 @@
 		"GLACIAL_LANCE": "Rush to a safe spot in the backline and then throws a lance of ice to the farthest target. First enemy hit takes [300,SP]% of user's ATK as SPECIAL, and ADJACENT enemies take half of that damage.",
 		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK.",
 		"ORDER_UP": "Deal [100,SP] SPECIAL to the target. If a Tatsugiri has been swallowed, gains the stats provided by it again. If no Tatsugiri is on board, one spawns on your bench, with a different form each round.",
-		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles."
-
+		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles.",
+		"TWINEEDLE": "Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [40,LK]% chance to apply POISONNED for 4 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

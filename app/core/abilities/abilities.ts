@@ -16354,6 +16354,40 @@ export class IceSpinnerStrategy extends AbilityStrategy {
   }
 }
 
+export class TwineedleStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [50,LK]% chance to apply POISONNED for 4 seconds.
+    const damage = [25, 50, 80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      chance(pokemon.critChance / 100, pokemon)
+    )
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        if (chance(0.5, pokemon)) {
+          target.status.triggerPoison(4000, target, pokemon)
+        }
+      }, 500)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -16898,7 +16932,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FEATHER_DANCE]: new FeatherDanceStrategy(),
   [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
   [Ability.ORDER_UP]: new OrderUpStrategy(),
-  [Ability.ICE_SPINNER]: new IceSpinnerStrategy()
+  [Ability.ICE_SPINNER]: new IceSpinnerStrategy(),
+  [Ability.TWINEEDLE]: new TwineedleStrategy()
 }
 
 export function castAbility(

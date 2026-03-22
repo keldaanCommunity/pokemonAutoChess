@@ -302,6 +302,7 @@ export enum Pkm {
   EMPOLEON = "EMPOLEON",
   ENAMORUS = "ENAMORUS",
   ENTEI = "ENTEI",
+  ESCAVALIER = "ESCAVALIER",
   ESPEON = "ESPEON",
   ESPURR = "ESPURR",
   ETERNATUS = "ETERNATUS",
@@ -511,6 +512,7 @@ export enum Pkm {
   KADABRA = "KADABRA",
   KAKUNA = "KAKUNA",
   KANGASKHAN = "KANGASKHAN",
+  KARRABLAST = "KARRABLAST",
   KARTANA = "KARTANA",
   KECLEON = "KECLEON",
   KELDEO = "KELDEO",
@@ -1914,8 +1916,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SAWSBUCK_AUTUMN]: "0586-0002",
   [Pkm.SAWSBUCK_WINTER]: "0586-0003",
   [Pkm.EMOLGA]: "0587",
-  //[Pkm.KARRABLAST]: "0588",
-  //[Pkm.ESCAVALIER]: "0589",
+  [Pkm.KARRABLAST]: "0588",
+  [Pkm.ESCAVALIER]: "0589",
   //[Pkm.FOONGUS]: "0590",
   //[Pkm.AMOONGUSS]: "0591",
   //[Pkm.FRILLISH]: "0592",
@@ -3619,7 +3621,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TATSUGIRI_DROOPY]: Pkm.TATSUGIRI_DROOPY,
   [Pkm.TATSUGIRI_STRETCHY]: Pkm.TATSUGIRI_STRETCHY,
   [Pkm.CETODDLE]: Pkm.CETODDLE,
-  [Pkm.CETITAN]: Pkm.CETODDLE
+  [Pkm.CETITAN]: Pkm.CETODDLE,
+  [Pkm.KARRABLAST]: Pkm.KARRABLAST,
+  [Pkm.ESCAVALIER]: Pkm.KARRABLAST
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
