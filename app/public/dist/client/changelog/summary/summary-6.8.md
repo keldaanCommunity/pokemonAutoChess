@@ -1,4 +1,4 @@
-> January 25, 2025
+> January 25, 2026
 
 # Patch 6.8: Outlaws
 
