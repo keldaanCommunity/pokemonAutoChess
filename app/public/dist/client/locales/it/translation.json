@@ -3153,7 +3153,7 @@
 		"ALIEN_DNA": "$t(pkm.DEOXYS) reagisce al METEORITE cambiando forma.",
 		"BERRY_EATER": "Quando il Pokèmon attacca, ruba tutte le bacche equipaggiate al bersaglio e le mangia",
 		"TOXIC_BOOST": "Il Pokèmon prende il 50% in meno di danni da veleno e guadagna 10 di ATK finchè è sotto POISONNED",
-		"GUZZLORD": "Guzzlord è troppo chiatto per saltare e troppo ingordo per cucinare per altri. Se gli è assegnato il CHEF_HAT, guadagna 10 HP massimi permanenti e 5 AP permanenti per ogni KO.",
+		"GUZZLORD": "Guzzlord è troppo chiatto per saltare e troppo ingordo per cucinare per altri. Se gli è assegnato il CHEF_HAT, guadagna 10 HP massimi permanenti e 5 AP permanenti per ogni KO, raddoppiati quando GOURMET 4 o più è attivo.",
 		"BURMY": "Burmy si evolve in Wormadam se hai 3 Burmy con lo stesso manto, o in Mothim dopo il livello 20 dopo lo spostamento in una regione che non prevede un burmy dallo stesso manto",
 		"PSYDUCK": "Ha il [10,LK]% di possibilità di subire CONFUSION quando viene colpito. Ogni volta che subisce CONFUSION, ottiene 100 AP.",
 		"BLOODMOON": "Cambia forma durante la BLOODMOON",

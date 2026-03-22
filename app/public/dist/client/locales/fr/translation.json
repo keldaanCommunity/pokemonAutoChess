@@ -3162,7 +3162,7 @@
 		"ALIEN_DNA": "$t(pkm.DEOXYS) réagit à la METEORITE en changeant de forme.",
 		"BERRY_EATER": "Quand le Pokémon attaque une cible, il lui vole toutes ses baies et les mange.",
 		"TOXIC_BOOST": "Ce Pokémon subit 50% de dégats en moins du poison et gagne 10 ATK tant qu'il est POISONNED.",
-		"GUZZLORD": "$t(pkm.GUZZLORD) est trop lourd pour sauter en rangée arrière et trop glouton pour cuisiner pour les autres. Quand il porte un CHEF_HAT, gagne 10 HP max et 5 AP permanents pour chaque KO infligé.",
+		"GUZZLORD": "$t(pkm.GUZZLORD) est trop lourd pour sauter en rangée arrière et trop glouton pour cuisiner pour les autres. Quand il porte un CHEF_HAT, gagne 10 HP max et 5 AP permanents pour chaque KO infligé, doublé lorsque GOURMET 4 ou plus est actif.",
 		"BURMY": "Cheniti évolue en Cheniselle si vous obtenez 3 Cheniti avec la même cape, ou en Papilord au tour 20 après avoir choisi une région qui n'a pas son type de cape",
 		"PSYDUCK": "A [10,LK]% de chance de devenir CONFUSION à chaque coup reçu. Chaque fois que ce Pokémon devient CONFUSION, il gagne 100 AP.",
 		"BLOODMOON": "Change de forme pendant la BLOODMOON.",
