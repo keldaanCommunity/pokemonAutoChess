@@ -2139,7 +2139,6 @@
 		"STURDY": "Blockiert 6 Schaden",
 		"DEFIANT": "Blockiert 9 Schaden",
 		"JUSTIFIED": "Blockiert 12 Schaden",
-		"LIGHT_SCREEN": "+100 AP. Alle 3 Geschäfte erscheint ein Icognito.",
 		"HONE_CLAWS": "+30% CRIT_CHANCE und +30% CRIT_POWER",
 		"ASSURANCE": "+40% CRIT_CHANCE und +50% CRIT_POWER",
 		"BEAT_UP": "+50% CRIT_CHANCE und +80% CRIT_POWER",
@@ -2224,7 +2223,8 @@
 		"ETHEREAL": "Verbündetes Team erhält 6 SPEED und 12 HP pro einzigartiger aktiver Synergie",
 		"APPETIZER": "Erhalte einen CHEF_HAT. Koche ein Signaturgericht nach jeder Runde und füttere einen benachbarten Verbündeten.",
 		"LUNCH_BREAK": "Der Koch kocht zwei Gerichte und füttert zwei benachbarte Verbündete nach jeder Runde.",
-		"BANQUET": "Erhalte einen zweiten CHEF_HAT."
+		"BANQUET": "Erhalte einen zweiten CHEF_HAT.",
+		"LIGHT_SCREEN": "+100 AP. Alle 3 Geschäfte erscheint ein Icognito."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossil",
