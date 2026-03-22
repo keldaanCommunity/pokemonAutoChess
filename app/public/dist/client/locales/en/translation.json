@@ -2168,7 +2168,7 @@
 		"FREEZE_DRY": "Deals [70,SP] + 100% of the user's SPE_DEF as SPECIAL to the target. If target is KO, it explodes, and throws sharp ice at ADJACENT enemies dealing [30,SP] + 50% of the user's SPE_DEF as SPECIAL.",
 		"DRAGON_PULSE": "A shockwave from the user's gaping mouth deals [20,SP] SPECIAL to the target and ADJACENT enemies. The shockwave then reverberates through the enemies.",
 		"FROST_BREATH": "Blows a cold breath, dealing [35,70,140,SP] SPECIAL to enemies in a 2-tiles range CONE, with [50,LK]% chance to FREEZE for 2 seconds. Can crit by default.",
-		"SALT_CURE": "ADJACENT allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
+		"SALT_CURE": "In a 2-tiles radius, allies gain [10,20,40,SP] SHIELD and their status afflictions cured whiele WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.",
 		"SPICY_EXTRACT": "Make the [1,2,3] closest allies RAGE for [2,SP] seconds",
 		"SWEET_SCENT": "Enemies in a 3-range radius can no longer dodge attacks, lose [6,SP] SPE_DEF and [12,SP] SPEED and have [30,LK]% chance to be CHARM for 1 second",
 		"SWALLOW": "Store power and boosts its DEF and SPE_DEF by 3 up to 3 times. If below 25% HP, swallow instead, restoring [20,SP]% of max HP per stack and consuming all stacks. If over 3 stacks, spit up, dealing [40,80,150,SP] SPECIAL to all enemies in front and consuming all stacks.",

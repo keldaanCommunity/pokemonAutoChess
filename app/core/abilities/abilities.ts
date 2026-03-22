@@ -12156,9 +12156,10 @@ export class SaltCureStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     // Adjacent allies gain [10,20,40,SP] SHIELD and their status afflictions cured. Adjacent WATER, STEEL or GHOST enemies suffer from BURN for 5 seconds.
     const shield = [10, 20, 40][pokemon.stars - 1] ?? 40
-    const cells = board.getAdjacentCells(
+    const cells = board.getCellsInRadius(
       pokemon.positionX,
       pokemon.positionY,
+      2,
       false
     )
     cells.forEach((cell) => {

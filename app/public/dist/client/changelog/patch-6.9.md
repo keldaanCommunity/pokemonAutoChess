@@ -75,6 +75,7 @@
 - Adjust Bounce Damage (Spoink, Mantyke): 10/20/30 → 15/20/25
 - Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast. Roaring Moon PP 140 → 130
 - Change passive of Solrock: now changes the weather to DROUGHT or ZENITH based on your dominant synergy between FIRE and LIGHT
+- Buff Salt Cure (Nacli): now affects allies and enemies in a 2-cell radius around the user instead of just adjacent
 
 # Changes to Items
 
