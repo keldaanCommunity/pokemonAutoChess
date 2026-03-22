@@ -120,7 +120,8 @@ export class Pokemon extends Schema implements IPokemon {
     return (
       !this.hasEvolution ||
       (this.evolutionRule instanceof CountEvolutionRule === false &&
-        this.passive !== Passive.CORSOLA)
+        this.passive !== Passive.CORSOLA &&
+        this.passive !== Passive.AVALUGG)
     )
   }
 
@@ -313,7 +314,7 @@ export class Pokemon extends Schema implements IPokemon {
     }
   }
 
-  applyStat(stat: Stat, value: number, player: Player | undefined) {
+  applyStat(stat: Stat, value: number) {
     switch (stat) {
       case Stat.ATK:
         this.addAttack(value)
@@ -343,7 +344,7 @@ export class Pokemon extends Schema implements IPokemon {
         this.addShield(value)
         break
       case Stat.HP:
-        this.addMaxHP(value, player)
+        this.addMaxHP(value)
         break
       case Stat.LUCK:
         this.addLuck(value)
@@ -402,12 +403,9 @@ export class Pokemon extends Schema implements IPokemon {
     this.speed = clamp(this.speed + value, 0, 300)
   }
 
-  addMaxHP(amount: number, player: Player | undefined) {
+  addMaxHP(amount: number) {
     this.hp = min(1)(this.hp + amount)
     this.maxHP = this.hp
-    if (this.hp >= 1500 && player) {
-      player.titles.add(Title.GIANT)
-    }
   }
 }
 
@@ -1676,7 +1674,15 @@ export class Dewott extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 2
-  evolution = Pkm.SAMUROTT
+  evolutions = [Pkm.SAMUROTT, Pkm.HISUI_SAMUROTT]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (pokemon: Pokemon, player: IPlayer) => {
+      if (player.regionalPokemons.includes(Pkm.HISUI_SAMUROTT))
+        return Pkm.HISUI_SAMUROTT
+      else return Pkm.SAMUROTT
+    }
+  )
   hp = 170
   atk = 15
   speed = 47
@@ -1705,6 +1711,24 @@ export class Samurott extends Pokemon {
   skill = Ability.AQUA_TAIL
 }
 
+export class HisuiSamurott extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD, Synergy.DARK])
+  rarity = Rarity.EPIC
+  stars = 3
+  hp = 280
+  atk = 36
+  speed = 47
+  def = 14
+  speDef = 14
+  maxPP = 100
+  range = 1
+  skill = Ability.CEASELESS_EDGE
+  regional = true
+  isInRegion(map: DungeonPMDO | "town", state?: GameState): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.DARK)
+  }
+}
 export class Larvitar extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.MONSTER, Synergy.ROCK])
   rarity = Rarity.RARE
@@ -20482,6 +20506,73 @@ export class Cetitan extends Pokemon {
   regional = true
 }
 
+export class Bergmite extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.MONSTER])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.AVALUGG
+  // evolutions = [Pkm.AVALUGG, Pkm.HISUI_AVALUGG]
+  evolutionRule = new CountEvolutionRule(
+    3,
+    (_pokemon: Pokemon, player: IPlayer) => {
+      /*if (player.regionalPokemons.includes(Pkm.HISUI_AVALUGG))
+        return Pkm.HISUI_AVALUGG
+      */
+      return Pkm.AVALUGG
+    }
+  )
+  hp = 90
+  atk = 5
+  speed = 28
+  def = 10
+  speDef = 3
+  maxPP = 100
+  range = 1
+  skill = Ability.MOUNTAIN_GALE
+  additional = true
+}
+
+export class Avalugg extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ICE,
+    Synergy.MONSTER,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 190
+  atk = 15
+  speed = 28
+  def = 20
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.MOUNTAIN_GALE
+  additional = true
+  passive = Passive.AVALUGG
+}
+
+export class HisuiAvalugg extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.MONSTER, Synergy.ROCK])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 190
+  atk = 15
+  speed = 38
+  def = 20
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.DEFAULT // sprites not ready yet
+  passive = Passive.AVALUGG
+  additional = true
+  regional: boolean = true
+  isInRegion(map: DungeonPMDO | "town", state?: GameState): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies.includes(Synergy.ROCK)
+  }
+}
+
 export class Karrablast extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.STEEL])
   rarity = Rarity.EPIC
@@ -21025,6 +21116,7 @@ export const PokemonClasses: Record<
   [Pkm.OSHAWOTT]: Oshawott,
   [Pkm.DEWOTT]: Dewott,
   [Pkm.SAMUROTT]: Samurott,
+  [Pkm.HISUI_SAMUROTT]: HisuiSamurott,
   [Pkm.SNOM]: Snom,
   [Pkm.FROSMOTH]: Frosmoth,
   [Pkm.WAILMER]: Wailmer,
@@ -21690,6 +21782,9 @@ export const PokemonClasses: Record<
   [Pkm.TATSUGIRI_STRETCHY]: TatsugiriStretchy,
   [Pkm.CETODDLE]: Cetoddle,
   [Pkm.CETITAN]: Cetitan,
+  [Pkm.BERGMITE]: Bergmite,
+  [Pkm.AVALUGG]: Avalugg,
+  [Pkm.HISUI_AVALUGG]: HisuiAvalugg,
   [Pkm.KARRABLAST]: Karrablast,
   [Pkm.ESCAVALIER]: Escavalier
 }

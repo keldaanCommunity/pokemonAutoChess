@@ -1,9 +1,9 @@
-import { t } from "i18next"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
   DEFAULT_SPEED,
-  getBaseAltForm
+  getBaseAltForm,
+  MaxTroopersPerPkm
 } from "../../config"
 import { giveRandomEgg } from "../../core/eggs"
 import { PokemonClasses } from "../../models/colyseus-models/pokemon"
@@ -47,7 +47,11 @@ import {
   OnDamageReceivedEffect,
   PeriodicEffect
 } from "../effects/effect"
-import { AccelerationEffect, FalinksFormationEffect } from "../effects/passives"
+import {
+  AccelerationEffect,
+  BergmiteOnBackEffect,
+  FalinksFormationEffect
+} from "../effects/passives"
 import { FlyingProtectionEffect } from "../effects/synergies"
 import {
   getMoveSpeed,
@@ -7029,6 +7033,38 @@ export class SpikesStrategy extends AbilityStrategy {
   }
 }
 
+export class CeaselessEdgeStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const cells = board.getCellsInFront(pokemon, target, 1)
+    cells.forEach((cell) => {
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        EffectEnum.SPIKES,
+        pokemon.simulation
+      )
+      pokemon.broadcastAbility({ positionX: cell.x, positionY: cell.y })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    })
+  }
+}
+
 export class StickyWebStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -7456,6 +7492,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default with increased crit chance
     super.process(pokemon, board, target, crit, true)
     const nbHits = Math.round(
       4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
@@ -16354,6 +16391,55 @@ export class IceSpinnerStrategy extends AbilityStrategy {
   }
 }
 
+export class MountainGaleStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    const targets: PokemonEntity[] = board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map((cell) => cell.value as PokemonEntity)
+    if (targets.length === 0 || !targets.some((t) => t.id === target.id)) {
+      targets.push(target)
+    }
+
+    const nbHits = [1, 3, 3][pokemon.stars - 1] ?? 3
+    const nbBergmites =
+      pokemon.count.ult === 0
+        ? max(MaxTroopersPerPkm[pokemon.name] ?? 0)(
+            [...pokemon.effectsSet.values()].find(
+              (e) => e instanceof BergmiteOnBackEffect
+            )?.stacks ?? 0
+          )
+        : 0
+    for (let i = 0; i < nbHits + nbBergmites; i++) {
+      const t = pickRandomIn(targets)
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          t.status.triggerFlinch(3000, pokemon)
+          t.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          pokemon.broadcastAbility({
+            targetX: t.positionX,
+            targetY: t.positionY,
+            delay: i >= nbHits ? i - nbHits : undefined
+          })
+        }, 200 * i)
+      )
+    }
+  }
+}
+
 export class TwineedleStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16933,6 +17019,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
   [Ability.ORDER_UP]: new OrderUpStrategy(),
   [Ability.ICE_SPINNER]: new IceSpinnerStrategy(),
+  [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
+  [Ability.MOUNTAIN_GALE]: new MountainGaleStrategy(),
   [Ability.TWINEEDLE]: new TwineedleStrategy()
 }
 

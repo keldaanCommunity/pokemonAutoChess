@@ -1,3 +1,7 @@
+# New event: Expeditions
+
+We're introducing a new monthly event that will alternate on a monthly basis with the Victory road event. This event is called "Expeditions" and is meant to propose small quests for extra experience points, encouraging players to try new Pokémon, synergies and strategies. This is a first iteration, and we will likely add more quests and variety in the future based on your feedback.
+
 # New Pokémon
 
 - Finizen
@@ -18,6 +22,9 @@
 - Tatsugiri (Stretchy)
 - Cetoddle
 - Cetitan
+- Hisuian Samurott
+- Bergmite
+- Avalugg
 - Karrablast
 - Escavalier
 
@@ -154,6 +161,8 @@
 - Add 15-day history tracking to meta reports with multi-line trends visualization
 - Added a key shortcut to open the wiki and the team planner
 - New users have now a random generated name (ex: "Happy-Charmander-12345") to prevent eventual doxxing.
+- New titles: Rescue Team Member, Explorer, Postman, Survey Corps, Guildmaster
+- Added more game statistics in the post-match screen
 - Added an ingame translations management page: https://pokemon-auto-chess.com/translations
 
 # Bug Fixes

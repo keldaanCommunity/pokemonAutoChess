@@ -1214,8 +1214,6 @@
 		"STURDY": "Blokkeert 6 schade",
 		"DEFIANT": "Blokkeert 9 schade",
 		"JUSTIFIED": "Blokkeert 12 schade",
-		"LIGHT_SCREEN": "+100 AP. Elke 3 winkels verschijnt er een Unown.",
-		"EERIE_SPELL": "+150 AP. Koop na een gevecht een Unown-winkel.",
 		"HONE_CLAWS": "Verdien +30% CRIT_CHANCE en +30% CRIT_POWER",
 		"ASSURANCE": "Verdien +40% CRIT_CHANCE en +50% CRIT_POWER",
 		"BEAT_UP": "Verdien +50% CRIT_CHANCE en +80% CRIT_POWER",
@@ -1279,7 +1277,9 @@
 		"GRASSY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen gras)",
 		"PSYCHIC_TERRAIN": "Verhoog de toegebrachte schade met 20% (alleen paranormaal begaafd)",
 		"ELECTRIC_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen elektrisch)",
-		"MISTY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen Fairy)"
+		"MISTY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen Fairy)",
+		"LIGHT_SCREEN": "+100 AP. Elke 3 winkels verschijnt er een Unown.",
+		"EERIE_SPELL": "+150 AP. Koop na een gevecht een Unown-winkel."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossiele steen",
@@ -1840,9 +1840,11 @@
 	"buy_booster": "Koop een nieuwe booster voor {{cost}}",
 	"close": "Dichtbij",
 	"additional_pokemon_hint": "Elke speler koos extra Pokemon om beschikbaar te zijn in de winkel van alle spelers voor dit spel.",
-	"damage_dealt": "Schade aangericht",
-	"damage_blocked": "Schade geblokkeerd",
-	"heal_shield": "Genezing en schild gegeven",
+	"game_stats": {
+		"damage_dealt": "Schade aangericht",
+		"damage_blocked": "Schade geblokkeerd",
+		"heal_shield": "Genezing en schild gegeven"
+	},
 	"lvl": "niveau",
 	"lose_game_hint": "Je verliest het spel als je geen gezondheidspunten meer hebt",
 	"unlock": "Ontgrendelen",

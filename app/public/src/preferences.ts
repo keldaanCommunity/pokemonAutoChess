@@ -24,6 +24,7 @@ export interface IPreferencesState {
   showDpsMeter: boolean
   dpsMeterPosition: { x: number; y: number }
   synergiesPosition: { x: number; y: number }
+  expeditionsPosition: { x: number; y: number }
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   showEvolutions: boolean
@@ -49,6 +50,7 @@ const defaultPreferences: IPreferencesState = {
   showDpsMeter: false,
   dpsMeterPosition: { x: 0, y: 0 },
   synergiesPosition: { x: 0, y: 0 },
+  expeditionsPosition: { x: 0, y: 0 },
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
