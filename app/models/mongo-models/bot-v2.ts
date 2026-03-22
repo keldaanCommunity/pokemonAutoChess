@@ -119,4 +119,5 @@ const bot = new Schema(
 )
 
 const BotV2 = model<IBot>("botV2", bot)
+
 export { BotV2 }

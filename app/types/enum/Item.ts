@@ -739,7 +739,7 @@ export const ToolsBuried: Tool[] = [
   Item.DRAGON_SCALE
 ]
 
-export const SynergyItemsNoSpecial =  [
+export const SynergyItemsNoSpecial = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
   Item.WATER_STONE,

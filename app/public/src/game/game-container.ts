@@ -340,7 +340,7 @@ class GameContainer {
     }
   }
 
-  initializeEvents() {    
+  initializeEvents() {
     const $state = this.$<GameState>(this.room.state)
     $state.avatars.onAdd((avatar) => {
       const $avatar = this.$<PokemonAvatarModel>(avatar)

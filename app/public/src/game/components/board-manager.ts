@@ -871,7 +871,7 @@ export default class BoardManager {
     let coordinates: number[]
     if (pokemonSprite) {
       switch (field) {
-        case "positionX":          
+        case "positionX":
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
