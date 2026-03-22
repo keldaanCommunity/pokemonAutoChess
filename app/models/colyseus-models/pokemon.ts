@@ -17336,7 +17336,7 @@ export class Skrelp extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
     Synergy.POISON,
-    Synergy.AQUATIC
+    Synergy.WATER
   ])
   rarity = Rarity.UNCOMMON
   stars = 1
@@ -17356,7 +17356,7 @@ export class Dragalge extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.DRAGON,
     Synergy.POISON,
-    Synergy.AQUATIC
+    Synergy.WATER
   ])
   rarity = Rarity.UNCOMMON
   stars = 2
