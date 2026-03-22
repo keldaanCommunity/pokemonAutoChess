@@ -10,7 +10,7 @@ import { PokemonClasses } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
-import { IStatus } from "../../types"
+import { IStatus, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Rarity, Team } from "../../types/enum/Game"
@@ -4735,6 +4735,13 @@ export class MetronomeStrategy extends AbilityStrategy {
 
     pokemon.broadcastAbility({ skill })
     AbilityStrategies[skill].process(pokemon, board, target, crit)
+
+    pokemon.simulation.broadcastToSpectators(Transfer.DISPLAY_TEXT, {
+      id: pokemon.simulation.id,
+      text: `ability.${skill}`,
+      x: pokemon.positionX,
+      y: pokemon.positionY
+    })
   }
 }
 

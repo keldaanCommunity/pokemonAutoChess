@@ -340,10 +340,7 @@ class GameContainer {
     }
   }
 
-  initializeEvents() {
-    this.room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
-      this.handleDragDropCancel(message)
-    )
+  initializeEvents() {    
     const $state = this.$<GameState>(this.room.state)
     $state.avatars.onAdd((avatar) => {
       const $avatar = this.$<PokemonAvatarModel>(avatar)

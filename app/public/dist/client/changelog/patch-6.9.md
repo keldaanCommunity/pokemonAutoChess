@@ -79,6 +79,7 @@
 - Guzzlord passive now gains double the stacks when Gourmet 4 or more is active
 - Change Skrelp synergies: now POISON/WATER instead of DRAGON/POISON/AQUATIC
 - Change Dragalge synergies: now DRAGON/POISON/WATER instead of DRAGON/POISON/AQUATIC
+- Metronome now displays the name of the copied ability
 
 # Changes to Items
 
