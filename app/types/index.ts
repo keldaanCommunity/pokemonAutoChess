@@ -65,7 +65,6 @@ export enum Transfer {
   NEW_MESSAGE = "NEW_MESSAGE",
   CHANGE_NAME = "CHANGE_NAME",
   CHANGE_AVATAR = "CHANGE_AVATAR",
-  REQUEST_BOT_MONITOR = "REQUEST_BOT_MONITOR",
   OPEN_BOOSTER = "OPEN_BOOSTER",
   BUY_BOOSTER = "BUY_BOOSTER",
   ADD_BOT = "ADD_BOT",
@@ -107,9 +106,10 @@ export enum Transfer {
   KICK = "KICK",
   DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
-  BANNED = "BANNED",
+  ALERT = "ALERT",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
+  DISPLAY_TEXT = "DISPLAY_TEXT",
   WANDERER = "WANDERER",
   WANDERER_CLICKED = "WANDERER_CLICKED",
   VECTOR = "VECTOR",
@@ -370,6 +370,7 @@ export interface ISimulation {
   redDpsMeter: MapSchema<Dps>
   bluePlayerId: string
   redPlayerId: string
+  broadcastToSpectators(transfer: Transfer, data: any): void
 }
 
 export interface ISimulationCommand {

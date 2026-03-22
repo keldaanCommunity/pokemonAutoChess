@@ -161,6 +161,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       name = `${formatMinMaxRanks(minRank, maxRank)} ${name}`
     }
 
+    if (gameMode === GameMode.RANKED || gameMode === GameMode.TOURNAMENT) {
+      this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
+    }
+
     this.setMetadata(<IGameMetadata>{
       name,
       ownerName,
@@ -1354,29 +1358,5 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (this.roomId === roomId) {
       this.disconnect(CloseCodes.ROOM_DELETED)
     }
-  }
-
-  spawnWanderingPokemon({
-    pkm,
-    type,
-    behavior,
-    player
-  }: {
-    pkm: Pkm
-    type: WandererType
-    behavior: WandererBehavior
-    player: Player
-  }) {
-    const client = this.clients.find((cli) => cli.auth.uid === player.id)
-    if (!client) return
-    const id = nanoid()
-    const wanderer = new Wanderer({
-      id,
-      pkm,
-      type,
-      behavior,
-      shiny: chance(0.01)
-    })
-    player.wanderers.set(id, wanderer)
   }
 }

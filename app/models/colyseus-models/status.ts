@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
@@ -83,6 +83,7 @@ export default class Status extends Schema implements IStatus {
   blindCooldown = 0
   enrageDelay = 35000
   ccCooldown = 0
+  untargettable = false
 
   constructor(simulation: ISimulation) {
     super()
@@ -704,7 +705,7 @@ export default class Status extends Schema implements IStatus {
   updateFreeze(dt: number) {
     if (this.freezeCooldown - dt <= 0) {
       this.freeze = false
-      this.ccCooldown = Math.max(this.ccCooldown, 1000)
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
     }
@@ -757,7 +758,7 @@ export default class Status extends Schema implements IStatus {
   updateSleep(dt: number, pkm: PokemonEntity) {
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
-      this.ccCooldown = Math.max(this.ccCooldown, 1000)
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
       if (pkm.passive === Passive.SLAKING) {
         this.triggerRage(3000, pkm)
       }
@@ -1013,12 +1014,14 @@ export default class Status extends Schema implements IStatus {
     this.resurrection = false
     this.resurrecting = true
     this.resurrectingCooldown = 2000
+    this.untargettable = true
     pokemon.status.clearNegativeStatus(pokemon)
   }
 
   updateResurrecting(dt: number, pokemon: PokemonEntity) {
     if (this.resurrectingCooldown - dt <= 0) {
       this.resurrecting = false
+      this.untargettable = false
       pokemon.resurrect()
       pokemon.toMovingState()
       pokemon.cooldown = 0
@@ -1108,6 +1111,7 @@ export default class Status extends Schema implements IStatus {
       !this.locked && // lock cannot be stacked
       !this.skydiving &&
       !this.runeProtect &&
+      !pkm.effects.has(EffectEnum.IMMUNITY_LOCKED) &&
       this.ccCooldown <= 0
     ) {
       if (pkm.status.enraged) {
@@ -1133,7 +1137,7 @@ export default class Status extends Schema implements IStatus {
         (pokemon.items.has(Item.WIDE_LENS)
           ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
           : 0)
-      this.ccCooldown = Math.max(this.ccCooldown, 1000)
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.lockedCooldown -= dt
     }

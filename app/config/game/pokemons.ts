@@ -268,6 +268,7 @@ export const PkmAltForms: readonly Pkm[] = [
   Pkm.BASCULEGION_FEMALE,
 
   Pkm.DARMANITAN_ZEN,
+  Pkm.GALARIAN_DARMANITAN_ZEN,
   Pkm.MAUSHOLD_FOUR,
   Pkm.HOOPA_UNBOUND,
   Pkm.AEGISLASH_BLADE,
@@ -279,7 +280,10 @@ export const PkmAltForms: readonly Pkm[] = [
   Pkm.DEOXYS_SPEED,
 
   Pkm.LYCANROC_NIGHT,
-  Pkm.LYCANROC_DUSK
+  Pkm.LYCANROC_DUSK,
+
+  Pkm.TATSUGIRI_DROOPY,
+  Pkm.TATSUGIRI_STRETCHY
 ]
 
 export type PkmAltForm = (typeof PkmAltForms)[number]
@@ -391,13 +395,15 @@ export const PkmAltFormsByPkm = {
   [Pkm.BASCULIN_WHITE]: [Pkm.BASCULIN_BLUE, Pkm.BASCULIN_RED],
   [Pkm.BASCULEGION_MALE]: [Pkm.BASCULEGION_FEMALE],
   [Pkm.DARMANITAN]: [Pkm.DARMANITAN_ZEN],
+  [Pkm.GALARIAN_DARMANITAN]: [Pkm.GALARIAN_DARMANITAN_ZEN],
   [Pkm.MAUSHOLD_FOUR]: [Pkm.MAUSHOLD_THREE],
   [Pkm.HOOPA]: [Pkm.HOOPA_UNBOUND],
   [Pkm.AEGISLASH]: [Pkm.AEGISLASH_BLADE],
   [Pkm.MIMIKYU]: [Pkm.MIMIKYU_BUSTED],
   [Pkm.MORPEKO]: [Pkm.MORPEKO_HANGRY],
   [Pkm.DEOXYS]: [Pkm.DEOXYS_ATTACK, Pkm.DEOXYS_DEFENSE, Pkm.DEOXYS_SPEED],
-  [Pkm.LYCANROC_DAY]: [Pkm.LYCANROC_NIGHT, Pkm.LYCANROC_DUSK]
+  [Pkm.LYCANROC_DAY]: [Pkm.LYCANROC_NIGHT, Pkm.LYCANROC_DUSK],
+  [Pkm.TATSUGIRI_CURLY]: [Pkm.TATSUGIRI_DROOPY, Pkm.TATSUGIRI_STRETCHY]
 } satisfies { [base in Pkm]?: PkmAltForm[] }
 
 export type PkmWithAltForm = keyof typeof PkmAltFormsByPkm

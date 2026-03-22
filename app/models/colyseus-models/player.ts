@@ -139,7 +139,9 @@ export default class Player extends Schema implements IPlayer {
     string,
     Wanderer
   >()
-  @type(GameStatsSchema) gameStats: GameStats = new GameStatsSchema({ ...initialGameStats })
+  @type(GameStatsSchema) gameStats: GameStats = new GameStatsSchema({
+    ...initialGameStats
+  })
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()
@@ -386,7 +388,7 @@ export default class Player extends Schema implements IPlayer {
 
     if (
       this.items.includes(Item.MISSION_ORDER_GREEN) &&
-      this.synergies.countActiveSynergies() >= 8
+      this.synergies.countActiveSynergies() >= 9
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_GREEN)
     }
@@ -812,18 +814,12 @@ export default class Player extends Schema implements IPlayer {
 
   completeMissionOrder(missionOrder: MissionOrder) {
     removeInArray<Item>(this.items, missionOrder)
-    const id = nanoid()
-    this.wanderers.set(
-      id,
-      new Wanderer({
-        id,
-        shiny: false,
-        pkm: Pkm.CHATOT,
-        type: WandererType.DIALOG,
-        behavior: WandererBehavior.SPECTATE
-      })
-    )
-
+    this.spawnWanderingPokemon({
+      shiny: false,
+      pkm: Pkm.CHATOT,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE
+    })
     setTimeout(() => {
       this.addMoney(30, true, null)
     }, 7000)
@@ -897,6 +893,36 @@ export default class Player extends Schema implements IPlayer {
         this.streak
       )
     }
+  }
+
+  spawnWanderingPokemon({
+    pkm,
+    type,
+    behavior,
+    data,
+    delay = 0,
+    shiny = chance(0.01)
+  }: {
+    pkm: Pkm
+    type: WandererType
+    behavior: WandererBehavior
+    data?: string
+    delay?: number
+    shiny?: boolean
+  }): Wanderer {
+    const id = nanoid()
+    const wanderer = new Wanderer({
+      id,
+      pkm,
+      type,
+      behavior,
+      data,
+      shiny
+    })
+    setTimeout(() => {
+      this.wanderers.set(id, wanderer)
+    }, delay)
+    return wanderer
   }
 }
 

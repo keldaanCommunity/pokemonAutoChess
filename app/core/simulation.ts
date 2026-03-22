@@ -198,6 +198,17 @@ export default class Simulation extends Schema implements ISimulation {
     this.applyPostEffects(bluePlayer.board, redBoard)
   }
 
+  broadcastToSpectators(transfer: Transfer, data: any) {
+    if (!this.room) return
+    const players = this.room.state.players
+    for (const client of this.room.clients) {
+      const spectatedPlayer = players.get(client.userData?.spectatedPlayerId)
+      if (spectatedPlayer?.simulationId === this.id) {
+        client.send(transfer, data)
+      }
+    }
+  }
+
   start() {
     this.started = true
     // post simulation start hooks
@@ -310,15 +321,21 @@ export default class Simulation extends Schema implements ISimulation {
     if (team === Team.BLUE_TEAM) {
       for (let y = 0; y < this.board.rows; y++) {
         for (let x = 0; x < this.board.columns; x++) {
-          if (this.board.getEntityOnCell(x, y) === undefined) {
+          if (
+            this.board.isOnBoard(x, y) &&
+            this.board.getEntityOnCell(x, y) === undefined
+          ) {
             return { x, y }
           }
         }
       }
     } else {
-      for (let y = 0; y < this.board.rows; y++) {
+      for (let y = this.board.rows - 1; y >= 0; y--) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
-          if (this.board.getEntityOnCell(x, y) === undefined) {
+          if (
+            this.board.isOnBoard(x, y) &&
+            this.board.getEntityOnCell(x, y) === undefined
+          ) {
             return { x, y }
           }
         }
@@ -374,10 +391,7 @@ export default class Simulation extends Schema implements ISimulation {
       const y = positionY + dy * (team === Team.BLUE_TEAM ? 1 : -1)
 
       if (
-        x >= 0 &&
-        x < this.board.columns &&
-        y >= 0 &&
-        y < this.board.rows &&
+        this.board.isOnBoard(x, y) &&
         this.board.getEntityOnCell(x, y) === undefined
       ) {
         return { x, y }
@@ -952,23 +966,23 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
-      case EffectEnum.AMNESIA:
+      case EffectEnum.PRECOGNITION:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.effects.add(EffectEnum.AMNESIA)
+          pokemon.effects.add(EffectEnum.PRECOGNITION)
           pokemon.addAbilityPower(50, pokemon, 0, false)
         }
         break
 
-      case EffectEnum.LIGHT_SCREEN:
+      case EffectEnum.AURA:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.effects.add(EffectEnum.LIGHT_SCREEN)
+          pokemon.effects.add(EffectEnum.AURA)
           pokemon.addAbilityPower(100, pokemon, 0, false)
         }
         break
 
-      case EffectEnum.EERIE_SPELL:
+      case EffectEnum.TRANSCENDENCE:
         if (types.has(Synergy.PSYCHIC)) {
-          pokemon.effects.add(EffectEnum.EERIE_SPELL)
+          pokemon.effects.add(EffectEnum.TRANSCENDENCE)
           pokemon.addAbilityPower(150, pokemon, 0, false)
         }
         break

@@ -46,7 +46,6 @@ import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
-import { Wanderer } from "../../models/colyseus-models/wanderer"
 import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
@@ -87,7 +86,6 @@ import {
   ItemsSoldAtTown,
   Mulches,
   Scarves,
-  ShinyItems,
   Sweets,
   SynergyGems,
   SynergyGivenByGem,
@@ -172,7 +170,7 @@ export class OnBuyPokemonCommand extends Command<
 
     if (
       pokemon.passive === Passive.UNOWN &&
-      (player.effects.has(EffectEnum.EERIE_SPELL) ||
+      (player.effects.has(EffectEnum.TRANSCENDENCE) ||
         player.shopsSinceLastUnownShop === 0) &&
       player.shopFreeRolls > 0 &&
       player.shop.every((p) => Unowns.includes(p) || p === Pkm.DEFAULT)
@@ -1159,6 +1157,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           values(player.board).filter((pokemon) =>
             pokemon.items.has(Item.AMULET_COIN)
           ).length
+        const nbRedScales = player.items.filter(
+          (item) => item === Item.RED_SCALE
+        ).length
         player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
           player.interest = max(player.maxInterest)(
@@ -1170,6 +1171,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           income += max(5)(player.streak)
         }
         income += 5
+        income += nbRedScales * 5
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
@@ -1337,16 +1339,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           break
       }
 
-      const id = nanoid()
-      const wanderer = new Wanderer({
-        id,
+      player.spawnWanderingPokemon({
         pkm: Pkm.XATU,
         shiny: false,
         type: WandererType.DIALOG,
         behavior: WandererBehavior.SPECTATE,
-        data: (rewardsIcons ?? rewards).join(";")
+        data: (rewardsIcons ?? rewards).join(";"),
+        delay: 3000
       })
-      setTimeout(() => player.wanderers.set(id, wanderer), 3000)
+
       setTimeout(() => {
         if (rewards[0] === Item.BIG_NUGGET) {
           const moneyGained = 10
@@ -1770,13 +1771,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           player.opponentTitle = "WILD"
           player.team = Team.BLUE_TEAM
 
-          const rewards = pveStage.getRewards?.(player) ?? ([] as Item[])
+          const rewards =
+            pveStage.getRewards?.(player, this.state.shinyEncounter) ??
+            ([] as Item[])
           resetArraySchema(player.pveRewards, rewards)
 
           const rewardsPropositions =
-            this.state.shinyEncounter && this.state.stageLevel > 1
-              ? pickNRandomIn(ShinyItems, 3)
-              : (pveStage.getRewardsPropositions?.(player) ?? ([] as Item[]))
+            pveStage.getRewardsPropositions?.(
+              player,
+              this.state.shinyEncounter
+            ) ?? ([] as Item[])
 
           resetArraySchema(player.pveRewardsPropositions, rewardsPropositions)
 
@@ -1866,17 +1870,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             (simulation.isGhostBattle && player === simulation.redPlayer)
           )
             return
-          const id = nanoid()
-          const wanderer = new Wanderer({
-            id,
+          const wanderer = player.spawnWanderingPokemon({
             pkm: unown,
             shiny: false,
             type: WandererType.UNOWN_SPELL,
             behavior: WandererBehavior.SPECTATE
           })
-          player.wanderers.set(id, wanderer)
           this.clock.setTimeout(() => {
-            player.wanderers.delete(id)
+            player.wanderers.delete(wanderer.id)
             if (simulation.finished) return
             const caster = new PokemonEntity(
               PokemonFactory.createPokemonFromName(unown),
@@ -1910,67 +1911,43 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (!client) return
 
         if (chance(UNOWN_ENCOUNTER_CHANCE)) {
-          const pkm = pickRandomIn(Unowns)
-          const shiny = chance(SHINY_UNOWN_ENCOUNTER_CHANCE)
-          const id = nanoid()
-          const wanderer = new Wanderer({
-            id,
-            pkm,
-            shiny,
+          player.spawnWanderingPokemon({
+            pkm: pickRandomIn(Unowns),
+            shiny: chance(SHINY_UNOWN_ENCOUNTER_CHANCE),
             type: WandererType.UNOWN,
-            behavior: WandererBehavior.RUN_THROUGH
+            behavior: WandererBehavior.RUN_THROUGH,
+            delay: Math.round((5 + 15 * Math.random()) * 1000)
           })
-
-          this.clock.setTimeout(
-            () => player.wanderers.set(id, wanderer),
-            Math.round((5 + 15 * Math.random()) * 1000)
-          )
         }
 
         if (this.state.outlawStage != null) {
           if (this.state.stageLevel === this.state.outlawStage) {
-            const id = nanoid()
-            const wanderer = new Wanderer({
-              id,
+            player.spawnWanderingPokemon({
               pkm: Pkm.DROWZEE,
               shiny: false,
               type: WandererType.OUTLAW,
-              behavior: WandererBehavior.RUN_THROUGH
+              behavior: WandererBehavior.RUN_THROUGH,
+              delay: Math.round((5 + 15 * Math.random()) * 1000)
             })
-
-            this.clock.setTimeout(
-              () => player.wanderers.set(id, wanderer),
-              Math.round((5 + 15 * Math.random()) * 1000)
-            )
           } else if (this.state.stageLevel < this.state.outlawStage) {
             const magnezoneChance = chance(this.state.stageLevel * 0.04)
             if (magnezoneChance) {
-              const id = nanoid()
-              const wanderer = new Wanderer({
-                id,
+              player.spawnWanderingPokemon({
                 pkm: Pkm.MAGNEZONE,
                 shiny: false,
                 type: WandererType.DIALOG,
-                behavior: WandererBehavior.RUN_THROUGH
+                behavior: WandererBehavior.RUN_THROUGH,
+                delay: Math.round((5 + 15 * Math.random()) * 1000)
               })
-              this.clock.setTimeout(
-                () => player.wanderers.set(id, wanderer),
-                Math.round((5 + 15 * Math.random()) * 1000)
-              )
             } else {
               for (let i = 0; i < randomBetween(1, 3); i++) {
-                const id = nanoid()
-                const wanderer = new Wanderer({
-                  id,
+                player.spawnWanderingPokemon({
                   pkm: Pkm.MAGNEMITE,
                   shiny: false,
                   type: WandererType.DIALOG,
-                  behavior: WandererBehavior.RUN_THROUGH
+                  behavior: WandererBehavior.RUN_THROUGH,
+                  delay: Math.round((5 + 15 * Math.random()) * 1000)
                 })
-                this.clock.setTimeout(
-                  () => player.wanderers.set(id, wanderer),
-                  Math.round((5 + 15 * Math.random()) * 1000)
-                )
               }
             }
           } else if (this.state.stageLevel > this.state.outlawStage) {
@@ -1984,25 +1961,18 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ) {
           const nbPokemonsToSpawn = Math.ceil(this.state.stageLevel / 2)
           for (let i = 0; i < nbPokemonsToSpawn; i++) {
-            const id = nanoid()
             const pkm = this.state.shop.pickPokemon(
               player,
               this.state,
               -1,
               true
             )
-            const wanderer = new Wanderer({
-              id,
+            player.spawnWanderingPokemon({
               pkm,
-              shiny: chance(0.01),
               type: WandererType.CATCHABLE,
-              behavior: WandererBehavior.RUN_THROUGH
+              behavior: WandererBehavior.RUN_THROUGH,
+              delay: 4000 + i * 400
             })
-
-            this.clock.setTimeout(
-              () => player.wanderers.set(id, wanderer),
-              4000 + i * 400
-            )
           }
         }
       }

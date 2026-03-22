@@ -114,6 +114,7 @@ export enum Item {
   SUPER_ROD = "SUPER_ROD",
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
+  RED_SCALE = "RED_SCALE",
   WHITE_FLUTE = "WHITE_FLUTE",
   GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
   ABSORB_BULB = "ABSORB_BULB",
@@ -208,6 +209,7 @@ export enum Item {
   TINY_MUSHROOM = "TINY_MUSHROOM",
   BIG_MUSHROOM = "BIG_MUSHROOM",
   BALM_MUSHROOM = "BALM_MUSHROOM",
+  RICE = "RICE",
   POFFIN = "POFFIN",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
@@ -288,6 +290,7 @@ export enum Item {
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
   MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
   LEADERS_CREST = "LEADERS_CREST",
+  LAPRAS_PASSPORT = "LAPRAS_PASSPORT",
   CELL_BATTERY = "CELL_BATTERY",
   SILK_SCARF = "SILK_SCARF",
   FRIEND_BOW = "FRIEND_BOW",
@@ -299,7 +302,10 @@ export enum Item {
   LUCKY_RIBBON = "LUCKY_RIBBON",
   COVER_BAND = "COVER_BAND",
   EFFICIENT_BANDANNA = "EFFICIENT_BANDANNA",
-  NULLIFY_BANDANNA = "NULLIFY_BANDANNA"
+  NULLIFY_BANDANNA = "NULLIFY_BANDANNA",
+  TATSUGIRI_CURLY = "TATSUGIRI_CURLY",
+  TATSUGIRI_DROOPY = "TATSUGIRI_DROOPY",
+  TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY"
 }
 
 export const MemoryDiscs = [
@@ -387,7 +393,8 @@ export const TownItems = [
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,
   Item.WANTED_NOTICE,
-  Item.LEADERS_CREST
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT
 ] satisfies Item[]
 
 // should be excluded from carousels
@@ -414,14 +421,13 @@ export const SpecialItems: Item[] = [
   Item.RAINBOW_SWIRL_FLAVOR,
   Item.RICH_MULCH,
   Item.AMAZE_MULCH,
-  Item.COMFEY,
-  Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
   Item.CORNERSTONE_MASK,
   Item.HEARTHFLAME_MASK,
   Item.ZYGARDE_CUBE,
+  Item.METEORITE,
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR,
   Item.MYSTERY_BOX,
@@ -429,7 +435,11 @@ export const SpecialItems: Item[] = [
   Item.SCROLL_OF_WATERS,
   Item.SCROLL_OF_DARKNESS,
   Item.MEMORY_DISCS,
-  ...MemoryDiscs
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -610,8 +620,11 @@ export const ShinyItems = [
   Item.SACRED_ASH,
   Item.COMET_SHARD,
   Item.REPEAT_BALL,
-  Item.GOLD_BOW
+  Item.GOLD_BOW,
+  Item.RED_SCALE
 ] satisfies Item[]
+
+export type ShinyItem = (typeof ShinyItems)[number]
 
 export const WeatherRocks = [
   Item.SUN_STONE,
@@ -948,7 +961,8 @@ export const Dishes = [
   Item.MUSHROOMS,
   Item.TINY_MUSHROOM,
   Item.BIG_MUSHROOM,
-  Item.BALM_MUSHROOM
+  Item.BALM_MUSHROOM,
+  Item.RICE
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
@@ -1067,7 +1081,10 @@ export const UnholdableItems = [
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET,
-  Item.WANTED_NOTICE
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT,
+  Item.RED_SCALE
 ] satisfies Item[]
 
 export const ConsumableItems = [

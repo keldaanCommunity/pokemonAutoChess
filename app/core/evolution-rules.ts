@@ -1,4 +1,4 @@
-import { EvolutionTime } from "../config"
+import { EvolutionTime, GoldenEggItems } from "../config"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -6,7 +6,7 @@ import { IPlayer } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
-import { Item, ItemComponents, ShinyItems } from "../types/enum/Item"
+import { Item, ItemComponents } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { sum } from "../utils/array"
@@ -327,7 +327,7 @@ export class HatchEvolutionRule extends EvolutionRule {
     )
 
     if (pokemonEvolved != null && pokemon.name === Pkm.EGG && pokemon.shiny) {
-      player.items.push(pickRandomIn(ShinyItems))
+      player.items.push(pickRandomIn(GoldenEggItems))
     }
 
     return pokemonEvolved

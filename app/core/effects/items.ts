@@ -1,9 +1,10 @@
-import { ARMOR_FACTOR } from "../../config"
+import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
@@ -27,6 +28,7 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
@@ -196,6 +198,13 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           specialDamage: secondHitSpecialDamage,
           trueDamage: secondHitTrueDamage
         })
+        pokemon.broadcastAbility({
+          skill: "LOADED_DICE",
+          positionX: target.positionX,
+          positionY: target.positionY,
+          targetX: secondHitTarget.positionX,
+          targetY: secondHitTarget.positionY
+        })
       }
     }
   }
@@ -219,7 +228,7 @@ export class MachRibbonEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(20, pokemon, 0, false)
+        pokemon.addSpeed(15, pokemon, 0, false)
         pokemon.count.machRibbonCount++
         if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
           pokemon.player.titles.add(Title.TOP_GUN)
@@ -575,9 +584,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.FLAME_ORB]: [
     new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_FREEZE)
       pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.triggerBurn(
-        60000,
+        300000,
         pokemon as PokemonEntity,
         pokemon as PokemonEntity
       )
@@ -585,6 +595,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.burnCooldown = 0
+    })
+  ],
+
+  [Item.HEAVY_DUTY_BOOTS]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_LOCKED)
+    })
+  ],
+
+  [Item.XRAY_VISION]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_SLEEP)
     })
   ],
 
@@ -730,7 +752,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof MachRibbonEffect) {
-          pokemon.addSpeed(-20 * effect.count, pokemon, 0, false)
+          pokemon.addSpeed(-15 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.machRibbonCount = 0
           break
@@ -1129,6 +1151,47 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
       }
 
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.LAPRAS_PASSPORT]: [
+    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
+      const previousMap = player.map
+      const chosenSynergies = values(pokemon.types)
+      const maps = Object.values(DungeonPMDO).filter(
+        (map) => map !== previousMap
+      )
+      let nbMaxInCommon = 0,
+        candidateMaps: DungeonPMDO[] = []
+      maps.forEach((map) => {
+        const synergies = RegionDetails[map].synergies
+        const inCommon = synergies.filter((s) => chosenSynergies.includes(s))
+
+        if (inCommon.length > nbMaxInCommon) {
+          nbMaxInCommon = inCommon.length
+          candidateMaps = [map]
+        } else if (inCommon.length === nbMaxInCommon) {
+          candidateMaps.push(map)
+        }
+      })
+
+      const newMap = pickRandomIn(candidateMaps)
+      room.broadcast(Transfer.PRELOAD_MAPS, [newMap])
+
+      player.spawnWanderingPokemon({
+        pkm: Pkm.LAPRAS,
+        type: WandererType.DIALOG,
+        behavior: WandererBehavior.SPECTATE,
+        data: newMap
+      })
+      setTimeout(() => {
+        player.map = newMap
+        player.regions.push(newMap)
+        player.updateRegionalPool(room.state, true, previousMap)
+      }, 10000)
+
+      removeInArray(player.items, item)
       return false // prevent item from being equipped
     })
   ],

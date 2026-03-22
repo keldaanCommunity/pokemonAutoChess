@@ -59,6 +59,13 @@ export function NotificationModal({
         return t("notification.victory_road_finished_title")
       case "expedition_completed":
         return t("notification.expedition_completed_title")
+      case "tournament_finished":
+        if (notification.message === "1") {
+          return t("notification.tournament_win_title")
+        } else if (+notification.message <= 8) {
+          return t("notification.tournament_finalist_title")
+        }
+        return t("notification.tournament_finished_title")
       case "level_up":
       default:
         return t("notification.level_up_title")
@@ -92,6 +99,17 @@ export function NotificationModal({
           points
         })
       }
+      case "tournament_finished":
+        if (notification.message === "1") {
+          return t("notification.tournament_win_message")
+        } else if (+notification.message <= 8) {
+          return t("notification.tournament_finalist_message", {
+            place: getRankLabel(Number(notification.message))
+          })
+        }
+        return t("notification.tournament_finished_message", {
+          place: getRankLabel(Number(notification.message))
+        })
       default:
         return notification.message
     }
@@ -109,6 +127,13 @@ export function NotificationModal({
         const [expeditionType, rank] = notification.message.split("|")
         return `/assets/notifications/${expeditionType}_${rank}.jpg`
       }
+      case "tournament_finished":
+        if (notification.message === "1") {
+          return `/assets/notifications/tournament_win.svg`
+        } else if (+notification.message <= 8) {
+          return `/assets/notifications/tournament_finalist.svg`
+        }
+        return `/assets/notifications/tournament_finish.svg`
       case "level_up":
       default:
         return "/assets/ui/booster.png"

@@ -340,10 +340,7 @@ class GameContainer {
     }
   }
 
-  initializeEvents() {
-    this.room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
-      this.handleDragDropCancel(message)
-    )
+  initializeEvents() {    
     const $state = this.$<GameState>(this.room.state)
     $state.avatars.onAdd((avatar) => {
       const $avatar = this.$<PokemonAvatarModel>(avatar)
@@ -495,6 +492,14 @@ class GameContainer {
             item,
             true
           )
+          if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              "hp",
+              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp
+            )
+          }
         }
       })
 

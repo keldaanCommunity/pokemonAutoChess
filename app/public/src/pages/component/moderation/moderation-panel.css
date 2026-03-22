@@ -1,0 +1,64 @@
+.moderation-panel {
+  width: min(80vw, 900px);
+  color: white;
+}
+
+.moderation-panel .react-tabs__tab-panel--selected {
+  padding: 1em 0.5em;
+}
+
+.moderation-search {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.moderation-search-bar {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.moderation-search-input {
+  flex: 1;
+}
+
+.moderation-results {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.moderation-result-count {
+  margin: 0 0 0.5em;
+  color: var(--color-fg-secondary);
+}
+
+.moderation-no-results {
+  color: var(--color-fg-secondary);
+  text-align: center;
+  margin: 1em 0;
+}
+
+.moderation-error {
+  color: var(--color-fg-red);
+}
+
+.moderation-warning {
+  color: var(--color-fg-gold);
+}
+
+.moderation-success {
+  color: var(--color-fg-green);
+}
+
+.moderation-uid {
+  color: var(--color-fg-secondary);
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.moderation-rename-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}

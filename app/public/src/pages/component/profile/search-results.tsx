@@ -1,13 +1,13 @@
 import React from "react"
 import { ISuggestionUser } from "../../../../../types"
-import { searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function SearchResults(props: {
   suggestions: ISuggestionUser[]
+  onSelect: (user: ISuggestionUser) => void
 }) {
-  const { suggestions } = props
+  const { suggestions, onSelect } = props
   return (
     <div>
       <ul className="search-suggestions">
@@ -17,7 +17,7 @@ export default function SearchResults(props: {
               banned: suggestion.banned === true
             })}
             key={suggestion.id}
-            onClick={() => searchById(suggestion.id)}
+            onClick={() => onSelect(suggestion)}
           >
             <PokemonPortrait avatar={suggestion.avatar} />
             <span>{suggestion.name}</span>

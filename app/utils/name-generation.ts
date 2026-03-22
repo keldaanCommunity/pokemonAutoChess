@@ -1,5 +1,5 @@
-import { Starters } from "../types/enum/Starters"
 import { Pkm } from "../types/enum/Pokemon"
+import { Starters } from "../types/enum/Starters"
 import { pickRandomIn } from "./random"
 
 const Adjectives: string[] = [

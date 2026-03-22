@@ -219,7 +219,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.freeze &&
       !this.status.sleep &&
       !this.status.resurrecting &&
-      !this.status.locked
+      !this.status.locked &&
+      !this.status.tree
     )
   }
 
@@ -228,7 +229,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       !this.status.freeze &&
       !this.status.sleep &&
       !this.status.resurrecting &&
-      !this.status.skydiving
+      !this.status.skydiving &&
+      !this.status.tree
     )
   }
 
@@ -254,7 +256,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetAllies = false
   ): boolean {
     return (
-      !this.status.resurrecting &&
+      !this.status.untargettable &&
       ((targetAllies && this.team === attacker.team) ||
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
@@ -485,7 +487,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
     )
 
-    value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
     if (
@@ -1686,29 +1687,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (!this.simulation || !this.simulation.room) {
       return
     }
-    const room = this.simulation.room
-    const players = room.state.players
-    for (const client of room.clients) {
-      if (client.userData?.spectatedPlayerId) {
-        const spectatedPlayer = players.get(client.userData.spectatedPlayerId)
-        if (
-          spectatedPlayer &&
-          spectatedPlayer.simulationId === this.simulation.id
-        ) {
-          client.send(Transfer.ABILITY, {
-            id: this.simulation.id,
-            skill,
-            ap,
-            positionX,
-            positionY,
-            orientation,
-            targetX,
-            targetY,
-            delay
-          })
-        }
-      }
-    }
+    this.simulation.broadcastToSpectators(Transfer.ABILITY, {
+      id: this.simulation.id,
+      skill,
+      ap,
+      positionX,
+      positionY,
+      orientation,
+      targetX,
+      targetY,
+      delay
+    })
   }
 
   changePassive(newPassive: Passive) {
@@ -1819,7 +1808,7 @@ function applyBigEaterBeltStatBuff(
   const isBuffOrBuffLost =
     value > 0 || (value < 0 && caster.team === pokemon.team)
   if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
-    value = roundToNDigits(value * 1.25, nbDigits)
+    value = roundToNDigits(value * 1.25, nbDigits, "down")
   }
   return value
 }

@@ -128,7 +128,7 @@ export function GamePokemonDetail(props: {
   if (!dish && pokemon.types.has(Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
       dish = Item.HEARTY_STEW
-    } else if (pokemon.name !== Pkm.GUZZLORD) {
+    } else if (dish !== null) {
       dish = Item.SANDWICH
     }
   }

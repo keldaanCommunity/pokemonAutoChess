@@ -396,10 +396,12 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   openDetail() {
-    const s = <GameScene>this.scene
-    s.closeTooltips()
-    if (s.lastPokemonDetail && s.lastPokemonDetail !== this) {
-      s.lastPokemonDetail = null
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+      "lastPokemonDetail" in scene
+    if (!isGameScene(this.scene)) return
+    this.scene.closeTooltips()
+    if (this.scene.lastPokemonDetail && this.scene.lastPokemonDetail !== this) {
+      this.scene.lastPokemonDetail = null
     }
 
     this.detail = new GamePokemonDetailDOMWrapper(
@@ -408,13 +410,13 @@ export default class PokemonSprite extends DraggableObject {
       0,
       this.pokemon,
       this.inBattle ? "battle" : "team",
-      this.playerId === s.uid
+      this.playerId === this.scene.uid
     )
     this.detail.setDepth(DEPTH.TOOLTIP).setOrigin(0, 0)
     this.updateTooltipPosition()
     this.detail.removeInteractive()
     this.add(this.detail)
-    s.lastPokemonDetail = this
+    this.scene.lastPokemonDetail = this
   }
 
   onPointerDown(
@@ -860,7 +862,7 @@ export default class PokemonSprite extends DraggableObject {
         scene,
         0,
         25,
-        pokemon.hp,
+        pokemon.maxHP,
         pokemon.hp,
         pokemon.shield,
         pokemon.team as Team,

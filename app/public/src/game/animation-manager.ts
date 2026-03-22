@@ -24,6 +24,16 @@ import {
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
 
+export const isAnimationOriented = (action: AnimationType, index: string) => {
+  const defaultsOverrides =
+    PokemonAnimations[PkmByIndex[index]]?.animationsOriented
+  if (AnimationOriented[action] === false) {
+    return defaultsOverrides?.[action] === true
+  } else {
+    return defaultsOverrides?.[action] !== false
+  }
+}
+
 export default class AnimationManager {
   game: Phaser.Scene
 
@@ -85,13 +95,9 @@ export default class AnimationManager {
         ? [SpriteType.ANIM]
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
-        const directionArray =
-          AnimationOriented[action] === false &&
-          PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(
-            action
-          ) !== true
-            ? [Orientation.DOWN]
-            : Object.values(Orientation)
+        const directionArray = isAnimationOriented(action, index)
+          ? Object.values(Orientation)
+          : [Orientation.DOWN]
         directionArray.forEach((direction) => {
           const durationArray: number[] =
             durations[`${index}/${shiny}/${action}/${mode}`]
@@ -169,13 +175,9 @@ export default class AnimationManager {
         ? [SpriteType.ANIM]
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
-        const directionArray =
-          AnimationOriented[action] === false &&
-          PokemonAnimations[PkmByIndex[index]]?.animationsOriented?.includes(
-            action
-          ) !== true
-            ? [Orientation.DOWN]
-            : Object.values(Orientation)
+        const directionArray = isAnimationOriented(action, index)
+          ? Object.values(Orientation)
+          : [Orientation.DOWN]
         directionArray.forEach((direction) => {
           this.game.anims.remove(
             `${index}/${shiny}/${action}/${mode}/${direction}`
@@ -358,6 +360,19 @@ export default class AnimationManager {
       pokemonSprite.orientation = Orientation.DOWN
     }
 
+    if (
+      action === PokemonActionState.EAT &&
+      this.game.anims.exists(
+        `${pokemonSprite.pokemon.index}/${pokemonSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL}/${animation}/${SpriteType.ANIM}/${Orientation.DOWN}`
+      ) === false
+    ) {
+      // fallback to sleep animation if eat animation doesn't exist
+      animation = this.convertPokemonActionStateToAnimationType(
+        PokemonActionState.SLEEP,
+        pokemonSprite
+      )
+    }
+
     try {
       this.play(pokemonSprite, animation, {
         flip,
@@ -397,12 +412,7 @@ export default class AnimationManager {
       ? OrientationFlip[pkmSprite.orientation]
       : pkmSprite.orientation
 
-    if (
-      AnimationOriented[animation] === false &&
-      PokemonAnimations[
-        PkmByIndex[pkmSprite.pokemon.index]
-      ]?.animationsOriented?.includes(animation) !== true
-    ) {
+    if (isAnimationOriented(animation, pkmSprite.pokemon.index) === false) {
       orientation = Orientation.DOWN
     }
 

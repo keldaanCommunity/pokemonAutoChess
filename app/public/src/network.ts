@@ -240,7 +240,8 @@ export function giveBooster(params: { uid: string; numberOfBoosters: number }) {
 }
 
 export function heapSnapshot() {
-  rooms.lobby?.send(Transfer.HEAP_SNAPSHOT)
+  alert(`This feature has been deactivated for security reasons.`)
+  //rooms.lobby?.send(Transfer.HEAP_SNAPSHOT)
 }
 
 export function deleteAccount() {
@@ -259,11 +260,43 @@ export function kick(playerId: string) {
   rooms.preparation?.send(Transfer.KICK, playerId)
 }
 
+export async function searchMessages(
+  query: string
+): Promise<import("../../types").IChatV2[]> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch(
+    `/moderation/chat-search?query=${encodeURIComponent(query)}`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  )
+  if (!res.ok) throw new Error(await res.text())
+  return res.json()
+}
+
+export async function renameAccount(
+  uid: string,
+  newName: string
+): Promise<{ displayName: string }> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/moderation/rename-account", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ uid, newName })
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+  return res.json()
+}
+
 export function ban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.BAN, params)
 }
 
-export function unban(params: { uid: string; name: string }) {
+export function unban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.UNBAN, params)
 }
 

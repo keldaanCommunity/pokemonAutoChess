@@ -230,7 +230,7 @@ export async function joinLobbyRoom(
             dispatch(removeTournament(tournament))
           })
 
-          room.onMessage(Transfer.BANNED, (message) => {
+          room.onMessage(Transfer.ALERT, (message) => {
             alert(message)
           })
 

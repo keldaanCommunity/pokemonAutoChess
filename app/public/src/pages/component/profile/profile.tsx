@@ -114,7 +114,10 @@ export default function Profile() {
         ) : error ? (
           <div className="error">{error}</div>
         ) : suggestions.length > 0 ? (
-          <SearchResults suggestions={suggestions} />
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => searchById(suggestion.id)}
+          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
@@ -205,7 +208,7 @@ function OtherProfileActions(props: {
         className="bubbly red"
         onClick={() => {
           const reason = prompt(`Reason for the ban:`)
-          ban({ uid: user.uid, reason: reason ? reason : "" })
+          ban({ uid: user.uid, reason: reason ?? "" })
         }}
       >
         {t("ban_user")}
@@ -217,8 +220,8 @@ function OtherProfileActions(props: {
       <button
         className="bubbly red"
         onClick={() => {
-          unban({ uid: user.uid, name: user.displayName })
-          alert(`${user.displayName} has been unbanned`)
+          const reason = prompt(`Reason for the unban:`)
+          unban({ uid: user.uid, reason: reason ?? "" })
         }}
       >
         {t("unban_user")}

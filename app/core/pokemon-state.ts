@@ -327,7 +327,7 @@ export default abstract class PokemonState {
 
       if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
-          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+          pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.HEAL,
             amount: Math.round(healReceived),
@@ -364,7 +364,7 @@ export default abstract class PokemonState {
       pokemon.shield = min(0)(pokemon.shield + shield)
       if (caster && shield > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
-          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+          pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.SHIELD,
             amount: Math.round(shield),
@@ -725,7 +725,7 @@ export default abstract class PokemonState {
             }
           }
 
-          pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
+          pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_DAMAGE, {
             index: attacker.index,
             type: attackType,
             amount: Math.round(takenDamage),

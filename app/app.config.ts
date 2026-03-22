@@ -16,7 +16,11 @@ import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
-import { MAX_CONCURRENT_PLAYERS_ON_SERVER, SynergyTriggers } from "./config"
+import {
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  SynergyTriggers,
+  USERNAME_REGEXP
+} from "./config"
 import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
@@ -151,6 +155,7 @@ export const server = defineServer({
               "https://*.doubleclick.net", // google ads, required for youtube embedded
               "https://*.githubusercontent.com",
               "http://raw.githubusercontent.com",
+              "https://api.github.com",
               "https://*.youtube.com",
               "https://pokemon.darkatek7.com",
               "https://eternara.site",
@@ -229,6 +234,10 @@ export const server = defineServer({
     })
 
     app.get("/gameboy", (req, res) => {
+      res.sendFile(viewsSrc)
+    })
+
+    app.get("/translations", (req, res) => {
       res.sendFile(viewsSrc)
     })
 
@@ -417,10 +426,7 @@ export const server = defineServer({
 
         const users = await UserMetadata.find(
           {
-            displayName: {
-              $gte: searchTerm,
-              $lt: searchTerm + "\uffff"
-            },
+            displayName: { $regex: searchTerm, $options: "i" },
             ...(showBanned ? {} : { banned: false })
           },
           [
@@ -433,8 +439,7 @@ export const server = defineServer({
           ],
           {
             limit: 100,
-            sort: { level: -1 },
-            collation: { locale: "en", strength: 2 }
+            sort: { level: -1 }
           }
         )
 
@@ -568,6 +573,70 @@ export const server = defineServer({
       } catch (error) {
         logger.error("Error approving bot", error)
         res.status(500).send("Error approving bot")
+      }
+    })
+
+    app.get("/moderation/chat-search", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const user = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (!user || (user.role !== Role.ADMIN && user.role !== Role.MODERATOR)) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+      const query = req.query.query?.toString().trim()
+      if (!query || query.length < 2) {
+        return res
+          .status(400)
+          .json({ error: "Query must be at least 2 characters" })
+      }
+      try {
+        const messages = await chatV2
+          .find({ payload: { $regex: query, $options: "i" } }, undefined, {
+            limit: 50,
+            sort: { time: -1 }
+          })
+          .lean()
+        res.status(200).json(messages)
+      } catch (error) {
+        logger.error("Error searching chat messages", error)
+        res.status(500).json({ error: "Error searching messages" })
+      }
+    })
+
+    app.post("/moderation/rename-account", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const caller = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (
+        !caller ||
+        (caller.role !== Role.ADMIN && caller.role !== Role.MODERATOR)
+      ) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+      const { uid, newName } = req.body
+      if (!uid || typeof uid !== "string") {
+        return res.status(400).json({ error: "uid is required" })
+      }
+      if (!newName || typeof newName !== "string") {
+        return res.status(400).json({ error: "newName is required" })
+      }
+      if (!USERNAME_REGEXP.test(newName)) {
+        return res.status(400).json({ error: "Invalid name format" })
+      }
+      try {
+        const target = await UserMetadata.findOne({ uid })
+        if (!target) return res.status(404).json({ error: "User not found" })
+        target.displayName = newName
+        await target.save()
+        logger.info(
+          `${userAuth.displayName} renamed account ${uid} to ${newName}`
+        )
+        res.status(200).json({ displayName: newName })
+      } catch (error) {
+        logger.error("Error renaming account", error)
+        res.status(500).json({ error: "Error renaming account" })
       }
     })
 

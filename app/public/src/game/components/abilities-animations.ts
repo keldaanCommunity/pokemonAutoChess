@@ -640,6 +640,8 @@ const projectile: AbilityAnimationMaker<
   TweenAnimationMakerOptions & {
     orientation?: Orientation | true
     distance?: number
+    easeX?: string | ((v: number) => number)
+    easeY?: string | ((v: number) => number)
   }
 > =
   (options = {}) =>
@@ -707,8 +709,14 @@ const projectile: AbilityAnimationMaker<
       startCoords,
       endCoords,
       tweenProps: {
-        x: endPosition[0],
-        y: endPosition[1],
+        x: {
+          value: endPosition[0],
+          ease: options.easeX ?? options.ease ?? "linear"
+        },
+        y: {
+          value: endPosition[1],
+          ease: options.easeY ?? options.ease ?? "linear"
+        },
         ...(options.tweenProps ?? {})
       }
     })(args)
@@ -1444,6 +1452,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.STONE_AXE]: onTargetScale2,
   [Ability.CRUSH_CLAW]: onTargetScale2,
+  [Ability.ICE_SPINNER]: onTarget({ scale: 1 }),
   [Ability.METAL_CLAW]: onTarget({ ability: Ability.CRUSH_CLAW, scale: 2 }),
   [Ability.DRAGON_CLAW]: onTargetScale1,
   [Ability.PRECIPICE_BLADES]: [onCasterScale3, shakeCamera({ duration: 350 })],
@@ -1744,6 +1753,14 @@ export const AbilitiesAnimations: {
   [Ability.FLYING_PRESS]: skyfall({
     hitAnim: onTarget({ ability: Ability.HEAVY_SLAM })
   }),
+  [Ability.ORDER_UP]: [
+    skyfall({
+      scale: 1,
+      ease: Phaser.Math.Easing.Bounce.Out,
+      duration: 1000
+    }),
+    onTarget({ ability: Ability.HEAVY_SLAM, scale: 1, delay: 300 })
+  ],
   [Ability.SUNSTEEL_STRIKE]: skyfall({ hitAnim: shakeCamera({}), scale: 1 }),
   ["COMET_CRASH"]: skyfall({
     ability: Ability.SUNSTEEL_STRIKE,
@@ -2898,7 +2915,20 @@ export const AbilitiesAnimations: {
   ["GENIUS_FEATHER"]: featherAnimation,
   ["CLEVER_FEATHER"]: featherAnimation,
   ["SWIFT_FEATHER"]: featherAnimation,
-  ["PRETTY_FEATHER"]: featherAnimation
+  ["PRETTY_FEATHER"]: featherAnimation,
+  ["LOADED_DICE"]: projectile({
+    tweenProps: {
+      angle: 480,
+      easeY: Phaser.Math.Easing.Back.In
+    },
+    hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 }),
+    scale: 0.25
+  }),
+  ["GALARIAN_DARMANITAN_ZEN_BURN"]: onCaster({
+    ability: "INFERNO",
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    scale: 2
+  })
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

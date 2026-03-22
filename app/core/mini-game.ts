@@ -23,7 +23,12 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import { getSynergyStep } from "../models/colyseus-models/synergies"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
-import { Transfer } from "../types"
+import {
+  MemoryDiscs,
+  SynergyGivenByItem,
+  SynergyItems,
+  Transfer
+} from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -328,7 +333,18 @@ export class MiniGame {
         encounter = null // prevent getting the same encounter twice in a gamme
       }
       state.townEncounter = encounter ?? null
-      if (encounter) state.townEncounters.add(encounter)
+      if (encounter) {
+        state.townEncounters.add(encounter)
+        // add a fixed blocked circle collision body around encounter
+        const body = Bodies.circle(this.centerX, this.centerY, 20, {
+          isStatic: true,
+          collisionFilter: {
+            mask: 1
+          }
+        })
+        Composite.add(this.engine.world, body)
+        this.bodies.set("encounter", body)
+      }
     } else {
       state.townEncounter = null
     }
@@ -396,6 +412,10 @@ export class MiniGame {
         prev.life > current.life ? prev : current
       )
       highestLifePlayer.items.push(Item.LEADERS_CREST)
+    } else if (state.townEncounter === TownEncounters.LAPRAS) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.LAPRAS_PASSPORT)
+      })
     }
   }
 
@@ -505,7 +525,13 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.KECLEON) {
-      itemsSet = SynergyStones
+      const topSynergies = values(state.players).flatMap((p) =>
+        p.synergies.getTopSynergies(3)
+      )
+      itemsSet = SynergyItems.filter(
+        (i) =>
+          !isIn(MemoryDiscs, i) && isIn(topSynergies, SynergyGivenByItem[i])
+      )
       maxCopiesPerItem = 2
     }
 
@@ -830,7 +856,7 @@ export class MiniGame {
             giveRandomEgg(player, false)
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
-            player.addMoney(3, true, null)
+            player.addMoney(5, true, null)
           } else if (isIn(SynergyGems, item.name)) {
             const type = SynergyGivenByGem[item.name]
             player.bonusSynergies.set(
