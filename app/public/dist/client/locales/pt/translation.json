@@ -1711,7 +1711,7 @@
 		"PSYCHIC_TERRAIN": "Aumente o dano causado em 20% (somente psíquico)",
 		"ELECTRIC_TERRAIN": "Aumente o dano causado em 20% (somente elétrico)",
 		"MISTY_TERRAIN": "Aumente o dano causado em 20% (somente Fada)",
-		"LIGHT_SCREEN": "+100% AP. Um Unown aparece a cada 3 lojas."
+		"AURA": "+100% AP. Um Unown aparece a cada 3 lojas."
 	},
 	"item": {
 		"FOSSIL_STONE": "Pedra Fóssil",

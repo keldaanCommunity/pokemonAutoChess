@@ -2224,7 +2224,7 @@
 		"APPETIZER": "Erhalte einen CHEF_HAT. Koche ein Signaturgericht nach jeder Runde und füttere einen benachbarten Verbündeten.",
 		"LUNCH_BREAK": "Der Koch kocht zwei Gerichte und füttert zwei benachbarte Verbündete nach jeder Runde.",
 		"BANQUET": "Erhalte einen zweiten CHEF_HAT.",
-		"LIGHT_SCREEN": "+100 AP. Alle 3 Geschäfte erscheint ein Icognito."
+		"AURA": "+100 AP. Alle 3 Geschäfte erscheint ein Icognito."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossil",

@@ -1278,8 +1278,8 @@
 		"PSYCHIC_TERRAIN": "Verhoog de toegebrachte schade met 20% (alleen paranormaal begaafd)",
 		"ELECTRIC_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen elektrisch)",
 		"MISTY_TERRAIN": "Verhoog toegebrachte schade met 20% (alleen Fairy)",
-		"LIGHT_SCREEN": "+100 AP. Elke 3 winkels verschijnt er een Unown.",
-		"EERIE_SPELL": "+150 AP. Koop na een gevecht een Unown-winkel."
+		"AURA": "+100 AP. Elke 3 winkels verschijnt er een Unown.",
+		"TRANSCENDENCE": "+150 AP. Koop na een gevecht een Unown-winkel."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossiele steen",

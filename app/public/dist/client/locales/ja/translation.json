@@ -1892,8 +1892,8 @@
 		"PSYCHIC_TERRAIN": "与ダメージ20%アップ(サイキックのみ)",
 		"ELECTRIC_TERRAIN": "与ダメージ20%アップ(電気のみ)",
 		"MISTY_TERRAIN": "与ダメージ20%アップ(妖精のみ)",
-		"LIGHT_SCREEN": "+100%AP。3店舗ごとにアンノーンが出現します。",
-		"EERIE_SPELL": "+150%AP。戦闘後、アンノーンショップを入手。"
+		"AURA": "+100%AP。3店舗ごとにアンノーンが出現します。",
+		"TRANSCENDENCE": "+150%AP。戦闘後、アンノーンショップを入手。"
 	},
 	"item": {
 		"FOSSIL_STONE": "化石石",
